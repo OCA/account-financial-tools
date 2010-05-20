@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_pxgo_move_partner_account_wizard_form" model="ir.ui.view">
+            <field name="name">pxgo_move_partner_account_wizard.form</field>
+            <field name="model">pxgo_move_partner_account_wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set partner account in moves">
+                    <label string="This wizard will set the receivable/payable account of the partners, in moves and invoices where a generic receivable/payable account was used instead." colspan="4"/>
+                    <label string=""/>
+                    <newline/>
+                    <group string="Parameters" colspan="4">
+                        <separator string="Accounts to replace with partner accounts" colspan="4"/>
+                        <field name="account_receivable_id"/>
+                        <field name="account_payable_id"/>
+                        <newline/>
+                        <separator string="Filter for the moves to update" colspan="4"/>
+                        <field name="period_ids" colspan="4"/>
+                    </group>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Set partner accounts" name="action_set_partner_accounts_in_moves" type="object" icon="gtk-ok"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pxgo_move_partner_account_wizard" model="ir.actions.act_window">
+            <field name="name">Set Partner Account in Moves</field>
+            <field name="res_model">pxgo_move_partner_account_wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_pxgo_move_partner_account_wizard"
+            parent="menu_action_pxgo_account_admin_tools"
+            action="action_pxgo_move_partner_account_wizard"
+            sequence="20"/>
+
+    </data>
+</openerp>

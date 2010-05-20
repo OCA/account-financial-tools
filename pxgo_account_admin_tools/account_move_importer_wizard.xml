@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_pxgo_account_move_importer_wizard_form" model="ir.ui.view">
+            <field name="name">pxgo_account_move_importer_wizard.form</field>
+            <field name="model">pxgo_account_move_importer_wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Account move importer">
+                    <label string="This wizard will import one account move from a CSV file." colspan="4"/>
+                    <label string="Note: It will fail if any of the accounts do not exist in OpenERP." colspan="4"/>
+                    <label string=""/>
+                    <newline/>
+                    <group string="Account move parameters" colspan="4">
+                        <label string="Select the parameters for the account move"/>
+                        <group colspan="4">
+                            <field name="ref"/>
+                            <field name="company_id"/>
+                            <newline/>
+                            <field name="journal_id"/>
+                            <field name="type"/>
+                            <newline/>
+                            <field name="period_id"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group string="Input file" colspan="4">
+                        <label string="Select the CSV file with the lines for the account move"/>
+                        <group colspan="4">
+                            <field name="input_file_name" string="File"/>
+                            <field name="input_file" filename="input_file_name" nolabel="1"/>
+                            <group colspan="2">
+                                <separator string="File format" colspan="4"/>
+                                <field name="csv_delimiter"/>
+                                <field name="csv_quotechar"/>
+                                <field name="csv_thousands_separator"/>
+                                <field name="csv_decimal_separator"/>
+                            </group>
+                            <group colspan="2">
+                                <separator string="Record format" colspan="4"/>
+                                <field name="csv_code_index"/>
+                                <field name="csv_code_regexp"/>
+                                <field name="csv_ref_index"/>
+                                <field name="csv_ref_regexp"/>
+                                <field name="csv_debit_index"/>
+                                <field name="csv_debit_regexp"/>
+                                <field name="csv_credit_index"/>
+                                <field name="csv_credit_regexp"/>
+                            </group>
+                        </group>
+                    </group>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Import" name="action_import" type="object" icon="gtk-ok"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pxgo_account_move_importer_wizard" model="ir.actions.act_window">
+            <field name="name">Import Account Move from CSV</field>
+            <field name="res_model">pxgo_account_move_importer_wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_pxgo_account_move_importer_wizard"
+            parent="menu_action_pxgo_account_admin_tools"
+            action="action_pxgo_account_move_importer_wizard"
+            sequence="20"/>
+
+    </data>
+</openerp>

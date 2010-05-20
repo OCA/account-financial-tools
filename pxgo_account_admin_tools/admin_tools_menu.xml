@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem id="menu_action_pxgo_account_admin_tools"
+            name="Admin Tools"
+            parent="account.menu_finance"
+            sequence="999"/>
+
+    </data>
+</openerp>
