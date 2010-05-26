@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_pxgo_revalidate_moves_form" model="ir.ui.view">
+            <field name="name">pxgo_revalidate_moves.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Revalidate account moves">
+                    <label string="This wizard will revalidate the account moves, so their analytic lines are regenerated." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <newline/>
+                    <group colspan="4" attrs="{'invisible': [('state','=','new')]}">
+                        <separator string="Moves to revalidate" colspan="4"/>
+                        <field name="move_ids" colspan="4" nolabel="1"/>
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('state','!=','new')]}">
+                        <separator string="Find moves with missing analytic lines" colspan="4"/>
+                        <label string="You may now search for moves with missing analytic lines on the given periods, or you may skip this step and select the moves by hand." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <field name="period_ids" colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <button string="Search for moves" name="action_find_moves_missing_analytic_lines" type="object" icon="gtk-ok" states="new" colspan="4"/>
+
+                    </group>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel" states="new,ready"/>
+                        <button string="Skip" name="action_skip_new" type="object" icon="gtk-go-forward" states="new"/>
+                        <button string="Revalidate selected moves" name="action_revalidate_moves" type="object" icon="gtk-apply" states="ready"/>
+                        <button string="Done" special="cancel" icon="gtk-ok" states="done"/>
+                    </group>
+                    <field name="state" invisible="1"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pxgo_revalidate_moves" model="ir.actions.act_window">
+            <field name="name">Revalidate Account Moves (Regenerate Analytic Lines)</field>
+            <field name="res_model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pxgo_revalidate_moves_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_pxgo_revalidate_moves"
+            parent="menu_action_pxgo_account_admin_tools_repair"
+            action="action_pxgo_revalidate_moves"
+            sequence="50"/>
+
+    </data>
+</openerp>
