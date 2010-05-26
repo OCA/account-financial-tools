@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_pxgo_move_partner_account_wizard_form" model="ir.ui.view">
-            <field name="name">pxgo_move_partner_account_wizard.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_move_partner_account_wizard</field>
+        <record id="view_pxgo_move_partner_account_form" model="ir.ui.view">
+            <field name="name">pxgo_move_partner_account.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_move_partner_account</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Partner Accounts in Moves">
@@ -26,9 +26,9 @@
             </field>
         </record>
 
-        <record id="view_pxgo_move_partner_account_wizard_done_form" model="ir.ui.view">
-            <field name="name">pxgo_move_partner_account_wizard.done.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_move_partner_account_wizard</field>
+        <record id="view_pxgo_move_partner_account_done_form" model="ir.ui.view">
+            <field name="name">pxgo_move_partner_account.done.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_move_partner_account</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Partner Accounts in Moves">
@@ -41,17 +41,17 @@
             </field>
         </record>
 
-        <record id="action_pxgo_move_partner_account_wizard" model="ir.actions.act_window">
+        <record id="action_pxgo_move_partner_account" model="ir.actions.act_window">
             <field name="name">Set Partner Accounts in Moves</field>
-            <field name="res_model">pxgo_account_admin_tools.pxgo_move_partner_account_wizard</field>
+            <field name="res_model">pxgo_account_admin_tools.pxgo_move_partner_account</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_pxgo_move_partner_account_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_action_pxgo_move_partner_account_wizard"
+        <menuitem id="menu_action_pxgo_move_partner_account"
             parent="menu_action_pxgo_account_admin_tools_repair"
-            action="action_pxgo_move_partner_account_wizard"
+            action="action_pxgo_move_partner_account"
             sequence="20"/>
 
     </data>

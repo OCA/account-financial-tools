@@ -2,9 +2,9 @@
 <openerp>
     <data>
 
-        <record id="view_pxgo_account_move_importer_wizard_form" model="ir.ui.view">
-            <field name="name">pxgo_account_move_importer_wizard.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_account_move_importer_wizard</field>
+        <record id="view_pxgo_account_move_importer_form" model="ir.ui.view">
+            <field name="name">pxgo_account_move_importer.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_account_move_importer</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Account move importer">
@@ -58,17 +58,17 @@
             </field>
         </record>
 
-        <record id="action_pxgo_account_move_importer_wizard" model="ir.actions.act_window">
+        <record id="action_pxgo_account_move_importer" model="ir.actions.act_window">
             <field name="name">Import Account Move from CSV</field>
-            <field name="res_model">pxgo_account_admin_tools.pxgo_account_move_importer_wizard</field>
+            <field name="res_model">pxgo_account_admin_tools.pxgo_account_move_importer</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_pxgo_account_move_importer_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_action_pxgo_account_move_importer_wizard"
+        <menuitem id="menu_action_pxgo_account_move_importer"
             parent="menu_action_pxgo_account_admin_tools_import"
-            action="action_pxgo_account_move_importer_wizard"
+            action="action_pxgo_account_move_importer"
             sequence="20"/>
 
     </data>
