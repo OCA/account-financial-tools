@@ -52,7 +52,7 @@
         <menuitem id="menu_action_pxgo_move_partner_account"
             parent="menu_action_pxgo_account_admin_tools_repair"
             action="action_pxgo_move_partner_account"
-            sequence="20"/>
+            sequence="110"/>
 
     </data>
 </openerp>

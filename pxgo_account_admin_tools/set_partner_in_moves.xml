@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_pxgo_set_partner_in_moves_form" model="ir.ui.view">
+            <field name="name">pxgo_set_partner_in_moves.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Partner Reference in Moves">
+                    <label string="This wizard will set the partner reference in moves where the receivable/payable account (of a single partner) is used." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <separator string="Find moves with missing partner reference" colspan="4"/>
+                        <label string="You may now search for move lines with missing partner reference on the given periods, or you may skip this step and select the move lines by hand." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <field name="period_ids" colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <button string="Search for moves" name="action_find_moves_missing_partner" type="object" icon="gtk-ok" colspan="4"/>
+                    </group>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Skip" name="action_skip_new" type="object" icon="gtk-go-forward"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pxgo_set_partner_in_moves_ready_form" model="ir.ui.view">
+            <field name="name">pxgo_set_partner_in_moves.ready.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Partner Reference in Moves">
+                    <label string="The partner reference will be set, for the selected account move lines, to the one associated with the receivable/payable account." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <separator string="Account move lines to update" colspan="4"/>
+                    <field name="move_line_ids" colspan="4" nolabel="1" domain="[('partner_id','=',False), ('account_id.type', 'in', ['receivable', 'payable'])]"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Set partner in moves" name="action_set_partner_in_moves" type="object" icon="gtk-apply"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_pxgo_set_partner_in_moves_done_form" model="ir.ui.view">
+            <field name="name">pxgo_set_partner_in_moves.done.form</field>
+            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Partner Reference in Moves">
+                    <label string="The partner references have been succesfully set on the account moves!" colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <separator string="Updated account move lines" colspan="4"/>
+                    <field name="move_line_ids" colspan="4" nolabel="1" domain="[('partner_id','=',False), ('account_id.type', 'in', ['receivable', 'payable'])]" readonly="1"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Done" special="cancel" icon="gtk-ok"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pxgo_set_partner_in_moves" model="ir.actions.act_window">
+            <field name="name">Set Partner Reference in Moves</field>
+            <field name="res_model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_pxgo_set_partner_in_moves_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_pxgo_set_partner_in_moves"
+            parent="menu_action_pxgo_account_admin_tools_repair"
+            action="action_pxgo_set_partner_in_moves"
+            sequence="120"/>
+
+    </data>
+</openerp>

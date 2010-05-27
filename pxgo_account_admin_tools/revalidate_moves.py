@@ -48,53 +48,115 @@ class pxgo_revalidate_moves(osv.osv_memory):
     }
 
     _defaults = {
-        'state': lambda *a: 'new',
+        'company_id': lambda self, cr, uid, context: self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id,
+        'move_ids': lambda self, cr, uid, context: context and context.get('move_ids', None),
+        'period_ids': lambda self, cr, uid, context: context and context.get('period_ids', None),
+        'state': lambda self, cr, uid, context: context and context.get('state', 'new'),
     }
+
+
+    def _next_view(self, cr, uid, ids, view_name, args=None, context=None):
+        """
+        Return the next view
+        """
+        if context is None:
+            context = {}
+        if args is None:
+            args = {}
+        ctx = context.copy()
+        ctx.update(args)
+
+        model_data_ids = self.pool.get('ir.model.data').search(cr, uid, [
+                    ('model', '=', 'ir.ui.view'),
+                    ('module', '=', 'pxgo_account_admin_tools'),
+                    ('name', '=', view_name)
+                ])
+        resource_id = self.pool.get('ir.model.data').read(cr, uid, model_data_ids, fields=['res_id'], context=context)[0]['res_id']
+        return {
+            'name': _("Revalidate Moves"),
+            'type': 'ir.actions.act_window',
+            'res_model': 'pxgo_account_admin_tools.pxgo_revalidate_moves',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'views': [(resource_id, 'form')],
+            'domain': "[('id', 'in', %s)]" % ids,
+            'context': ctx,
+            'target': 'new',
+        }
+
 
     def action_skip_new(self, cr, uid, ids, context=None):
         """
-        Skips to the ready state.
+        Action that just skips the to the ready state
         """
-        for wiz in self.browse(cr, uid, ids, context):
-            self.write(cr, uid, [wiz.id], { 'state': 'ready' })
-        return True
+        return self._next_view(cr, uid, ids, 'view_pxgo_revalidate_moves_ready_form', {'state': 'ready'}, context)
+
 
     def action_find_moves_missing_analytic_lines(self, cr, uid, ids, context=None):
         """
         Finds account moves with missing analytic lines and adds them
         to the move_ids many2many field.
         """
-        for wiz in self.browse(cr, uid, ids, context):
+        wiz = self.browse(cr, uid, ids[0], context)
+
+        # FIXME: The next block of code is a workaround to the lp:586252 bug of the 6.0 client.
+        #        (https://bugs.launchpad.net/openobject-client/+bug/586252)
+        if wiz.period_ids:
             period_ids = [period.id for period in wiz.period_ids]
-            query = """
-                    SELECT account_move_line.move_id FROM account_move_line
-                    LEFT JOIN account_analytic_line
-                    ON account_analytic_line.move_id = account_move_line.id
-                    WHERE account_move_line.analytic_account_id IS NOT NULL AND account_analytic_line.id IS NULL
-                    """
-            periods_str = ','.join(map(str, period_ids))
-            if period_ids:
-                query += """      AND period_id IN (%s)""" % periods_str
-                
+        else:
+            period_ids = context and context.get('period_ids')
+
+        query = """
+                SELECT account_move_line.move_id FROM account_move_line
+                LEFT JOIN account_analytic_line
+                ON account_analytic_line.move_id = account_move_line.id
+                WHERE account_move_line.analytic_account_id IS NOT NULL AND account_analytic_line.id IS NULL
+                """
+        if period_ids:
+            query += """      AND period_id IN %s"""
+            cr.execute(query, (tuple(period_ids),))
+        else:
             cr.execute(query)
-            move_ids = filter(None, map(lambda x:x[0], cr.fetchall()))
-            self.write(cr, uid, [wiz.id], { 
-                    'move_ids': [(6, 0, move_ids)],
-                    'state': 'ready'
-                })
-        return True
+
+        move_ids = filter(None, map(lambda x:x[0], cr.fetchall()))
+
+        #
+        # Return the next view: Show 'ready' view
+        #
+        args = {
+            'move_ids': move_ids,
+            'state': 'ready',
+        }
+        return self._next_view(cr, uid, ids, 'view_pxgo_revalidate_moves_ready_form', args, context)
+
 
     def action_revalidate_moves(self, cr, uid, ids, context=None):
         """
         Calls the validate method of the account moves for each move in the
         move_ids many2many.
         """
-        for wiz in self.browse(cr, uid, ids, context):
-            for move in wiz.move_ids:
-                # We validate the moves one by one to prevent problems
-                self.pool.get('account.move').validate(cr, uid, [move.id], context)
-            self.write(cr, uid, [wiz.id], { 'state': 'done' })
-        return True
+        wiz = self.browse(cr, uid, ids[0], context)
+
+        # FIXME: The next block of code is a workaround to the lp:586252 bug of the 6.0 client.
+        #        (https://bugs.launchpad.net/openobject-client/+bug/586252)
+        if wiz.move_ids:
+            move_ids = [line.id for line in wiz.move_ids]
+        else:
+            move_ids = context and context.get('move_ids')
+
+        for move in self.pool.get('account.move').browse(cr, uid, move_ids, context=context):
+            # We validate the moves one by one to prevent problems
+            self.pool.get('account.move').validate(cr, uid, [move.id], context)
+        
+        #
+        # Return the next view: Show 'done' view
+        #
+        args = {
+            'move_ids': move_ids,
+            'state': 'done',
+        }
+        return self._next_view(cr, uid, ids, 'view_pxgo_revalidate_moves_done_form', args, context)
+
 
 pxgo_revalidate_moves()
 

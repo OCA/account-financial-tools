@@ -119,13 +119,43 @@ class pxgo_account_move_importer(osv.osv_memory):
     }
 
 
+    def _get_accounts_map(self, cr, uid, context=None):
+        """
+        Find the receivable/payable accounts that are associated with
+        a single partner and return a (account.id, partner.id) map
+        """
+        partner_ids = self.pool.get('res.partner').search(cr, uid, [], context=context)
+        accounts_map = {}
+        for partner in self.pool.get('res.partner').browse(cr, uid, partner_ids, context=context):
+            #
+            # Add the receivable account to the map
+            #
+            if accounts_map.get(partner.property_account_receivable.id, None) is None:
+                accounts_map[partner.property_account_receivable.id] = partner.id
+            else:
+                # Two partners with the same receivable account: ignore
+                # this account!
+                accounts_map[partner.property_account_receivable.id] = 0
+            #
+            # Add the payable account to the map
+            #
+            if accounts_map.get(partner.property_account_payable.id, None) is None:
+                accounts_map[partner.property_account_payable.id] = partner.id
+            else:
+                # Two partners with the same receivable account: ignore
+                # this account!
+                accounts_map[partner.property_account_payable.id] = 0
+        return accounts_map
+
 
     def action_import(self, cr, uid, ids, context=None):
         """
         Imports a CSV file into a new account move using the options from
         the wizard.
         """
-        for wiz in self.browse(cr, uid, ids, context):
+        accounts_map = self._get_accounts_map(cr, uid, context=context)
+
+        for wiz in self.browse(cr, uid, ids, context=context):
             if not wiz.input_file:
                 raise osv.except_osv(_('UserError'), _("You need to select a file!"))
 
@@ -199,7 +229,7 @@ class pxgo_account_move_importer(osv.osv_memory):
                             'ref': False,
                             'currency_id': False,
                             'tax_amount': False,
-                            'partner_id': False,
+                            'partner_id': accounts_map.get(account_ids[0]) or False,
                             'tax_code_id': False,
                             'date_maturity': False,
                             'amount_currency': False,

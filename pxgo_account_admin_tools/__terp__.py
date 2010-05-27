@@ -46,13 +46,18 @@ Check and Repair tools:
   (the preordered tree [parent_left/parent_right] not matching the
   parent-child structure [parent_id]).
 
-- Set the receivable/payable account of the partners, in moves and invoices
-  where a generic receivable/payable account was used instead.
-
 - Revalidate confirmed account moves so their analytic lines are regenerated.
   This may be used to fix the data after bugs like
   https://bugs.launchpad.net/openobject-addons/+bug/582988
   The wizard also lets you find account moves missing their analytic lines.
+
+- Set the receivable/payable account of the partners, in moves and invoices
+  where a generic receivable/payable account was used instead.
+
+- Set the parent reference in account move lines where the receivable/payable
+  account associated with the partner was used, but a partner reference wasn't
+  set. This may fix cases where the receivable/payable amounts displayed in the
+  partner form does not match the balance of the receivable/payable accounts.
 
             """,
         "depends" : [
@@ -65,9 +70,10 @@ Check and Repair tools:
                         'admin_tools_menu.xml',
                         'account_importer.xml',
                         'account_move_importer.xml',
-                        'move_partner_account.xml',
-                        'revalidate_moves.xml',
                         'account_chart_checker.xml',
+                        'revalidate_moves.xml',
+                        'move_partner_account.xml',
+                        'set_partner_in_moves.xml',
             ],
         "installable": True,
         'active': False

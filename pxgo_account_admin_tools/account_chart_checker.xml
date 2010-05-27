@@ -48,7 +48,7 @@
         <menuitem id="menu_action_pxgo_account_chart_checker"
             parent="menu_action_pxgo_account_admin_tools_repair"
             action="action_pxgo_account_chart_checker"
-            sequence="101"/>
+            sequence="10"/>
 
     </data>
 </openerp>

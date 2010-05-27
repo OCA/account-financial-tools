@@ -58,6 +58,10 @@ class pxgo_move_partner_account(osv.osv_memory):
 
 
     def _get_payable_account_id(self, cr, uid, context=None):
+        """
+        Gets the default payable (supplier) account property value for the
+        current (user's) company.
+        """
         if context is None: context = {}
         company_id = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id
         res = None
@@ -80,6 +84,10 @@ class pxgo_move_partner_account(osv.osv_memory):
         return res
 
     def _get_receivable_account_id(self, cr, uid, context=None):
+        """
+        Gets the default receivable (customer) account property value for the
+        current (user's) company.
+        """
         company_id = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id
         res = None
         property_ids = self.pool.get('ir.property').search(cr, uid, [
@@ -109,6 +117,11 @@ class pxgo_move_partner_account(osv.osv_memory):
 
 
     def action_set_partner_accounts_in_moves(self, cr, uid, ids, context=None):
+        """
+        Action that searchs for the account moves that do not use the partner
+        account, but the generic payable/receivable one, and sets the partner
+        account instead.
+        """
         for wiz in self.browse(cr, uid, ids, context):
             period_ids = [period.id for period in wiz.period_ids]
             query_acc = """

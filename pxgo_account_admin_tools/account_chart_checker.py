@@ -167,7 +167,7 @@ class pxgo_account_chart_checker(osv.osv_memory):
                 'problem': 'not_children_of_parent',
                 'severity': 'high',
                 'account_id': account.id,
-                'description': _('The account %d (%s) is children of %d (%s), but is not listed as his children on the preordered tree') \
+                'description': _('The account %d (%s) is children of %d (%s), but is not listed as its children on the preordered tree') \
                                 % (account.id, account.code, account.parent_id.id, account.parent_id.code)
             })
         elif parent_ids and not account.parent_id:
