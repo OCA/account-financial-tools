@@ -59,6 +59,10 @@ Check and Repair tools:
   set. This may fix cases where the receivable/payable amounts displayed in the
   partner form does not match the balance of the receivable/payable accounts.
 
+- Set the reference in account moves, associated with invoices, that do not have
+  the right reference (the reference from the invoice if it was a supplier
+  invoice, or the number from the invoice if it was a customer invoice).
+  This is useful to fix the account moves after changing the invoice references.
             """,
         "depends" : [
                         'base',
@@ -74,6 +78,7 @@ Check and Repair tools:
                         'revalidate_moves.xml',
                         'move_partner_account.xml',
                         'set_partner_in_moves.xml',
+                        'set_invoice_ref_in_moves.xml',
             ],
         "installable": True,
         'active': False

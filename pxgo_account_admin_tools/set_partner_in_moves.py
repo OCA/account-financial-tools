@@ -40,7 +40,7 @@ class pxgo_set_partner_in_moves(osv.osv_memory):
     partner form does not match the balance of the receivable/payable accounts.
     """
     _name = "pxgo_account_admin_tools.pxgo_set_partner_in_moves"
-    _description = "Move Partner Account Wizard"
+    _description = "Set Partner in Moves Wizard"
 
     _columns = {
         'state': fields.selection([('new','New'), ('ready', 'Ready'), ('done','Done')], 'Status', readonly=True),

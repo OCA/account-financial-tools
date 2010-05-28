@@ -33,3 +33,4 @@ import account_chart_checker
 import revalidate_moves
 import move_partner_account
 import set_partner_in_moves
+import set_invoice_ref_in_moves
