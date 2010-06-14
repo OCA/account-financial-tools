@@ -138,7 +138,7 @@ class pxgo_account_chart_checker(osv.osv_memory):
                 AND COALESCE(parent_id,0) NOT IN (SELECT id FROM account_account WHERE parent_left > %s and parent_right < %s)
                 AND COALESCE(parent_id,0) != %s
                 """
-        cr.execute(query, (account.parent_left, account.parent_right, account.parent_left, account.parent_right, account.id))
+        cr.execute(query, (account.parent_left or 0, account.parent_right or 0, account.parent_left or 0, account.parent_right or 0, account.id))
         problematic_ids = filter(None, map(lambda x:x[0], cr.fetchall()))
 
         for child in self.pool.get('account.account').browse(cr, uid, problematic_ids, context=context):
@@ -159,7 +159,7 @@ class pxgo_account_chart_checker(osv.osv_memory):
         query = """
                 SELECT id FROM account_account WHERE parent_left < %s and parent_right > %s
                 """
-        cr.execute(query, (account.parent_left, account.parent_right))
+        cr.execute(query, (account.parent_left or 0, account.parent_right or 0))
         parent_ids = filter(None, map(lambda x:x[0], cr.fetchall()))
 
         if account.parent_id and (account.parent_id.id not in parent_ids):
