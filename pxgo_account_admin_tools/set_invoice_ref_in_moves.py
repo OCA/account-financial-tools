@@ -187,6 +187,14 @@ class pxgo_set_invoice_ref_in_moves(osv.osv_memory):
                 if invoice.move_id.ref != reference:
                     self.pool.get('account.move').write(cr, uid, [invoice.move_id.id], { 'ref': reference }, context=context)
 
+                    #
+                    # Update the move line references too
+                    # (if they where equal to the move reference)
+                    #
+                    for line in invoice.move_id.line_id:
+                        if line.ref == invoice.move_id.ref:
+                            self.pool.get('account.move.line').write(cr, uid, [line.id], { 'ref': reference }, context=context)
+
         #
         # Return the next view: Show 'done' view
         #
