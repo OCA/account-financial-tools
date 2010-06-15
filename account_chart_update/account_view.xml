@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--  Wizard for Multi Charts of Accounts -->
+
+        <record id="view_update_multi_chart" model="ir.ui.view">
+            <field name="name">Update Chart of Accounts from a Chart Template</field>
+            <field name="model">wizard.update.charts.accounts</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Update Chart of Accounts from a Chart Template">
+                    <group col="4" colspan="4" attrs="{'invisible':[('state','!=','init')]}">
+                        <label string="This wizard will update your accounts, taxes and fiscal positions according to the selected chart template." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <group colspan="4">
+                            <separator col="4" colspan="4" string="Chart of Accounts"/>
+                            <field name="company_id" on_change="onchange_company_id(company_id)"/>
+                            <field name="code_digits"/>
+                            <field name="chart_template_id"/>
+                            <field name="lang"/>
+                        </group>
+                        <label string=""/>
+                        <group colspan="4">
+                            <separator string="Update records?" colspan="4"/>
+                            <group colspan="2" col="2">
+                                <field name="update_tax_code"/>
+                                <field name="update_tax"/>
+                                <field name="update_account"/>
+                                <field name="update_fiscal_position"/>
+                            </group>
+                            <group colspan="2">
+                                <label string="If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)." colspan="4" align="0.0"/>
+                                <label string="Note: Not all the fields are tested for changes, just the main ones." colspan="4" align="0.0"/>
+                            </group>
+                        </group>
+                        <group colspan="4">
+                            <separator string="Other options" colspan="4"/>
+                            <field name="update_children_accounts_parent"/>
+                            <field name="continue_on_errors"/>
+                        </group>
+                    </group>
+
+                    <group col="4" colspan="4" attrs="{'invisible':[('state','!=','ready')]}">
+                        <separator colspan="4" string="Records to create/update"/>
+                        <notebook colspan="4">
+                            <page string="Tax codes">
+                                <field name="tax_code_ids" colspan="4" nolabel="1" mode="tree,form" height="330">
+                                    <tree string="Tax codes" colors="red:type=='updated'">
+                                        <field name="tax_code_id"/>
+                                        <field name="update_tax_code_id"/>
+                                        <field name="type" invisible="1"/>
+                                    </tree>
+                                    <form string="Tax code">
+                                        <field name="tax_code_id" colspan="4"/>
+                                        <field name="type"/>
+                                        <field name="update_tax_code_id"/>
+                                        <separator string="Notes" colspan="4"/>
+                                        <field name="notes" colspan="4" nolabel="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Taxes">
+                                <field name="tax_ids" colspan="4" nolabel="1" mode="tree,form" height="330">
+                                    <tree string="Taxes" colors="red:type=='updated'">
+                                        <field name="tax_id"/>
+                                        <field name="update_tax_id"/>
+                                        <field name="type" invisible="1"/>
+                                    </tree>
+                                    <form string="Tax">
+                                        <field name="tax_id" colspan="4"/>
+                                        <field name="type"/>
+                                        <field name="update_tax_id"/>
+                                        <separator string="Notes" colspan="4"/>
+                                        <field name="notes" colspan="4" nolabel="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Accounts">
+                                <field name="account_ids" colspan="4" nolabel="1" mode="tree,form" height="330">
+                                    <tree string="Accounts" colors="red:type=='updated'">
+                                        <field name="account_id"/>
+                                        <field name="update_account_id"/>
+                                        <field name="type" invisible="1"/>
+                                    </tree>
+                                    <form string="Account">
+                                        <field name="account_id" colspan="4"/>
+                                        <field name="type"/>
+                                        <field name="update_account_id"/>
+                                        <separator string="Notes" colspan="4"/>
+                                        <field name="notes" colspan="4" nolabel="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Fiscal positions">
+                                <field name="fiscal_position_ids" colspan="4" nolabel="1" mode="tree,form" height="330">
+                                    <tree string="Fiscal positions" colors="red:type=='updated'">
+                                        <field name="fiscal_position_id"/>
+                                        <field name="update_fiscal_position_id"/>
+                                        <field name="type" invisible="1"/>
+                                    </tree>
+                                    <form string="Fiscal position">
+                                        <field name="fiscal_position_id" colspan="4"/>
+                                        <field name="type"/>
+                                        <field name="update_fiscal_position_id"/>
+                                        <separator string="Notes" colspan="4"/>
+                                        <field name="notes" colspan="4" nolabel="1"/>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+
+                    <group col="4" colspan="4" attrs="{'invisible':[('state','!=','done'),]}">
+                        <separator colspan="4" string="Log"/>
+                        <field name="log" colspan="4" nolabel="1"/>
+                        <group colspan="4">
+                            <separator colspan="4" string="Summary of created objects"/>
+                            <field name="new_tax_codes"/>
+                            <field name="new_taxes"/>
+                            <field name="new_accounts"/>
+                            <field name="new_fps"/>
+                        </group>
+                        <group colspan="4">
+                            <separator colspan="4" string="Summary of updated objects"/>
+                            <field name="updated_tax_codes"/>
+                            <field name="updated_taxes"/>
+                            <field name="updated_accounts"/>
+                            <field name="updated_fps"/>
+                        </group>
+                    </group>
+
+                    <separator string="" colspan="4"/>
+                    <group col="8" colspan="4">
+                        <field name="state"/>
+                        <button icon="gtk-cancel" special="cancel" string="Cancel" states="init,ready"/>
+                        <button icon="gtk-go-forward" name="action_find_records" string="Next" type="object" states="init"/>
+                        <button icon="gtk-go-back" name="action_init" string="Previous" type="object" states="ready"/>
+                        <button icon="gtk-ok" name="action_update_records" string="Create/Update" type="object" states="ready"/>
+                        <button icon="gtk-ok" special="cancel" string="Ok" type="object" states="done"/>
+                    </group>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_update_chart" model="ir.actions.act_window">
+            <field name="name">Update Chart of Accounts from a Chart Template</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.update.charts.accounts</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem parent="account.account_template_folder" action="action_wizard_update_chart" id="menu_wizard"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,388 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* account_chart_update
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 5.0.7\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2010-03-26 12:06+0000\n"
+"PO-Revision-Date: 2010-06-09 20:49+0000\n"
+"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
+"<jesteve@zikzakmedia.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-06-10 03:44+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#. module: account_chart_update
+#: constraint:ir.model:0
+msgid ""
+"The Object name must start with x_ and not contain any special character !"
+msgstr ""
+"L'objecte ha de començar amb x_ i no pot tenir cap caràcter especial!"
+
+#. module: account_chart_update
+#: model:ir.module.module,description:account_chart_update.module_meta_information
+msgid ""
+"\n"
+"Adds a wizard to update a company account chart from a template:\n"
+"  * Generates the new accounts from the template and assigns them to the "
+"right company\n"
+"  * Generates the new taxes and tax codes, changing account assignations\n"
+"  * Generates the new fiscal positions, changing account and taxes "
+"assignations\n"
+"\n"
+"Before creating the new accounts, taxes, tax codes and fiscal positions, the "
+"user can select\n"
+"which ones must be created.\n"
+"\n"
+"The user can also choose to update the existing accounts, taxes, tax codes "
+"and fiscal positions\n"
+"from a template.\n"
+"\n"
+"The problems occurred during the creation/updating of the account chart are "
+"shown in the last step.\n"
+"\n"
+"It is useful when the account law has changed and you want to transfer the "
+"new accounts, taxes and\n"
+"fiscal positions included in the account chart template to an existing "
+"company account chart.\n"
+"\n"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_tax_code:0
+msgid "Update tax codes"
+msgstr "Actualitza codis d'impostos"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Create/Update"
+msgstr "Crea/Actualitza"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Next"
+msgstr "Següent"
+
+#. module: account_chart_update
+#: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
+#: model:ir.ui.menu,name:account_chart_update.menu_wizard
+#: view:wizard.update.charts.accounts:0
+msgid "Update Chart of Accounts from a Chart Template"
+msgstr "Actualitza pla comptable a partir d'una plantilla de pla comptable"
+
+#. module: account_chart_update
+#: constraint:ir.actions.act_window:0
+msgid "Invalid model name in the action definition."
+msgstr "Nom de model invàlid a la definició d'acció."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,chart_template_id:0
+msgid "Chart Template"
+msgstr "Plantilla pla comptable"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Update of account chart objects"
+msgstr "Actualització d'entitats del pla comptable"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+#: field:wizard.update.charts.accounts,tax_code_ids:0
+#: field:wizard.update.charts.accounts.tax.code,tax_code_id:0
+msgid "Tax codes"
+msgstr "Codis d'impostos"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,state:0
+msgid "Status"
+msgstr "Estat"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Existing records are updated? (by default only new ones are created)"
+msgstr ""
+"Els registres existents s'actualitzaran? (per defecte només els nous es "
+"crearan)"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Creation of account chart objects"
+msgstr "Creació d'entitats del pla comptable"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_tax_code:0
+msgid "Create - Tax codes"
+msgstr "Crea - Codis d'impostos"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Generate Chart of Accounts from a Chart Template"
+msgstr "Genera comptes comptables a partir d'una plantilla de pla comptable"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,company_id:0
+msgid "Company"
+msgstr "Companyia"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,code_digits:0
+msgid ""
+"No. of Digits to use for account code. Make sure it is the same number as "
+"existing accounts."
+msgstr ""
+"Número de dígits a utilitzar en el codi de compte. Assegureu-vos que sigui "
+"el mateix número de dígits que el dels comptes existents."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_fp:0
+msgid "Create - Fiscal positions"
+msgstr "Crea - Posicions fiscals"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Step 1"
+msgstr "Pas 1"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_account:0
+msgid "Existing accounts are updated. Accounts are searched by code."
+msgstr ""
+"Els comptes comptables existents seran actualitzats. Els comptes es cercaran "
+"per codi."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_account:0
+msgid "Update - Accounts"
+msgstr "Actualitza - Comptes"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_fiscal_position:0
+msgid ""
+"Existing fiscal positions are updated. Fiscal positions are searched by name."
+msgstr ""
+"Les posicions fiscals existents seran actualitzades. Les posicions fiscals "
+"es cercaran per nom."
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Step 2"
+msgstr "Pas 2"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_tax:0
+msgid "Update taxes"
+msgstr "Actualitza impostos"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_account:0
+msgid "Create - Accounts"
+msgstr "Crea - Comptes"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_tax:0
+msgid "Create - Taxes"
+msgstr "Crea - Impostos"
+
+#. module: account_chart_update
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML invàlid per a l'estructura de la vista!"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax:0
+msgid "Update - Taxes"
+msgstr "Actualitza - Impostos"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Ok"
+msgstr "D'acord"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
+msgid "wizard.update.charts.accounts.tax.code"
+msgstr "wizard.update.charts.accounts.tax.code"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.fiscal.position,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.tax,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.tax.code,update_chart_wizard_id:0
+msgid "Update chart wizard"
+msgstr "Assistent per a actualitzar el pla comptable"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_fp:0
+msgid "Update - Fiscal positions"
+msgstr "Actualitza - Posicions fiscals"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+#: field:wizard.update.charts.accounts,tax_ids:0
+#: field:wizard.update.charts.accounts.tax,tax_id:0
+msgid "Taxes"
+msgstr "Impostos"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,code_digits:0
+msgid "# of Digits"
+msgstr "Núm. de dígits"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Wizard Complete"
+msgstr "Assistent completat"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_account:0
+msgid "Update accounts"
+msgstr "Actualitza comptes"
+
+#. module: account_chart_update
+#: model:ir.module.module,shortdesc:account_chart_update.module_meta_information
+msgid "Update account chart from template"
+msgstr "Actualitza pla comptable a partir d'una plantilla"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid ""
+"This will automatically updates your chart of accounts, taxes and fiscal "
+"positions according to the selected template"
+msgstr ""
+"Actualitzarà automàticament els vostres comptes comptables, impostos i "
+"posicions fiscals des de la plantilla seleccionada."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_fiscal_position:0
+msgid "Update fiscal positions"
+msgstr "Actualitza posicions fiscals"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
+msgid "wizard.update.charts.accounts.fiscal.position"
+msgstr "wizard.update.charts.accounts.fiscal.position"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+#: field:wizard.update.charts.accounts,logs:0
+msgid "Logs"
+msgstr "Incidències"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax_code:0
+msgid "Update - Tax codes"
+msgstr "Actualitza - Codis d'impostos"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
+msgid "wizard.update.charts.accounts"
+msgstr "wizard.update.charts.accounts"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
+msgid "wizard.update.charts.accounts.tax"
+msgstr "wizard.update.charts.accounts.tax"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
+msgid "wizard.update.charts.accounts.account"
+msgstr "wizard.update.charts.accounts.account"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+#: field:wizard.update.charts.accounts,fiscal_position_ids:0
+#: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
+msgid "Fiscal positions"
+msgstr "Posicions fiscals"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+#: field:wizard.update.charts.accounts,account_ids:0
+#: field:wizard.update.charts.accounts.account,account_id:0
+msgid "Accounts"
+msgstr "Comptes"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_tax_code:0
+msgid "Existing tax codes are updated. Tax codes are searched by name."
+msgstr ""
+"Els codis d'impostos existents seran actualitzats. Els codis d'impostos es "
+"cercaran per nom."
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_tax:0
+msgid "Existing taxes are updated. Taxes are searched by name."
+msgstr ""
+"Els impostos existents seran actualitzats. Els impostos es cercaran per nom."
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Previous"
+msgstr "Anterior"
+
+#~ msgid ""
+#~ "\n"
+#~ "Adds a wizard to update a company account chart from a template:\n"
+#~ "  * Generates the new accounts from the template and assigns them to the "
+#~ "right company\n"
+#~ "  * Generates the new taxes and tax codes, changing account assignations\n"
+#~ "  * Generates the new fiscal positions, changing account and taxes "
+#~ "assignations\n"
+#~ "\n"
+#~ "Before creating the new accounts, taxes, tax codes and fiscal positions, the "
+#~ "user can select\n"
+#~ "which ones must be created.\n"
+#~ "\n"
+#~ "The user can also choose to update the existing accounts, taxes, tax codes "
+#~ "and fiscal positions\n"
+#~ "from a template.\n"
+#~ "\n"
+#~ "The problems occurred during the creation/updating of the account chart are "
+#~ "shown in the last step.\n"
+#~ "\n"
+#~ "It is useful when the account law has changed and you want to transfer the "
+#~ "new accounts, taxes and\n"
+#~ "fiscal positions included in the account chart template to an existing "
+#~ "company account chart.\n"
+#~ "\n"
+#~ "Note: Due to the memory limitation of the osv_memory OpenERP objects, only a "
+#~ "maximum number of \n"
+#~ "objects can be created each time. If a lot of new accounts, taxes, tax codes "
+#~ "or fiscal positions\n"
+#~ "must be created, the wizard should be run several times.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Afegeix un assistent per a actualitzar el pla comptable d'una companyia a "
+#~ "partir d'una plantilla:\n"
+#~ " * Genera nous comptes comptables des de la plantilla assignant-los la "
+#~ "companyia corresponent.\n"
+#~ " * Genera nous impostos i codis d'impostos, canviant les assignacions de "
+#~ "comptes comptables.\n"
+#~ " * Genera noves posicions fiscals, canviant les assignacions de comptes "
+#~ "comptables i impostos.\n"
+#~ "\n"
+#~ "Abans de crear els nous comptes, impostos i codis d'impostos, l'usuari pot "
+#~ "seleccionar\n"
+#~ "quins seran creats.\n"
+#~ "\n"
+#~ "L'usuari pot seleccionar l'actualització dels comptes, impostos, codis "
+#~ "d'impostos i\n"
+#~ "posicions fiscals existents a partir de la plantilla.\n"
+#~ "\n"
+#~ "Els problemes que apareguin durant la creació i actualització del pla "
+#~ "comptable es mostren en l'últim pas.\n"
+#~ "\n"
+#~ "Aquest mòdul és útil quan la llei fiscal ha canviat i voleu transferir els "
+#~ "nous comptes, impostos i\n"
+#~ "posicions fiscals incloses en la plantilla de pla comptable cap un pla "
+#~ "comptable existent d'una companyia.\n"
