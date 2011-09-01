@@ -2,7 +2,7 @@
 <openerp>
 	<data>
 		<record id="ir_model_access_currencyrateupdate0" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="0" name="perm_unlink"/>
@@ -12,7 +12,7 @@
 	</data>
 	<data>
 		<record id="ir_model_access_currencyrateupdate1" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="1" name="perm_unlink"/>
@@ -23,7 +23,7 @@
 	</data>
 	<data>
 		<record id="ir_model_access_currencyrateupdate2" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="1" name="perm_unlink"/>
@@ -34,7 +34,7 @@
 	</data>
 	<data>
 		<record id="ir_model_access_currencyrateupdate3" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update_service"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update_service"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="1" name="perm_unlink"/>
@@ -45,7 +45,7 @@
 	</data>
 	<data>
 		<record id="ir_model_access_currencyrateupdate4" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update_service"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update_service"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="0" name="perm_unlink"/>
@@ -55,7 +55,7 @@
 	</data>
 	<data>
 		<record id="ir_model_access_currencyrateupdate5" model="ir.model.access">
-			<field name="model_id" ref="c2c_currency_rate_update.model_currency_rate_update_service"/>
+			<field name="model_id" ref="currency_rate_update.model_currency_rate_update_service"/>
 			<field eval="1" name="perm_read"/>
 			<field eval="&quot;&quot;&quot;Currency Rate Update&quot;&quot;&quot;" name="name"/>
 			<field eval="1" name="perm_unlink"/>
