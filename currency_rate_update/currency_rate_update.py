@@ -189,7 +189,7 @@ class Currency_rate_update(osv.osv):
             if comp.multi_company_currency_enable :
                 search_filter = [('company_id','=',comp.id)]
             #we fetch the main currency. The main rate should be set at  1.00
-            main_curr = comp.currency_id.code
+            main_curr = comp.currency_id.name
             for service in comp.services_to_use :
                 print "comp.services_to_use =", comp.services_to_use
                 note = service.note or ''
@@ -198,22 +198,22 @@ class Currency_rate_update(osv.osv):
                     ## and return a dict of rate
                     getter = factory.register(service.service)
                     print "getter =", getter
-                    curr_to_fetch = map(lambda x : x.code, service.currency_to_update)
+                    curr_to_fetch = map(lambda x : x.name, service.currency_to_update)
                     res, log_info = getter.get_updated_currency(curr_to_fetch, main_curr, service.max_delta_days)
                     rate_name = time.strftime('%Y-%m-%d')
                     for curr in service.currency_to_update :
-                        if curr.code == main_curr :
+                        if curr.name == main_curr :
                             continue
                         do_create = True
                         for rate in curr.rate_ids :
                             if rate.name == rate_name :
-                                rate.write({'rate':res[curr.code]})
+                                rate.write({'rate':res[curr.name]})
                                 do_create = False
                                 break
                         if do_create :
                             vals = {
                                         'currency_id': curr.id,
-                                        'rate':res[curr.code],
+                                        'rate':res[curr.name],
                                         'name': rate_name
                                     }
                             rate_obj.create(    
