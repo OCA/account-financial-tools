@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--  Add the SIREN, NIC and SIRET numbers -->
+		<record model="ir.ui.view" id="view_partner_add">
+			<field name="name">res.partner.form.siret</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<field name="title" position="after">
+					<field name="siren" />
+					<field name="nic" />
+					<field name="siret" />
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>
