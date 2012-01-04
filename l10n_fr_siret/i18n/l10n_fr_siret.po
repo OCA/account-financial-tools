@@ -42,7 +42,7 @@ msgstr ""
 
 #. module: l10n_fr_siret
 #: help:res.partner,nic:0
-msgid "The NIC number is the official rank number of this office in the company in France. It is composed of the last 5 digits of the SIRET number."
+msgid "The NIC number is the official rank number of this office in the company in France. It makes the last 5 digits of the SIRET number."
 msgstr ""
 
 #. module: l10n_fr_siret

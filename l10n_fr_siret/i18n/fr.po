@@ -38,12 +38,12 @@ msgstr "Le numéro SIRET est l'identifiant officiel de l'établissement en Franc
 #. module: l10n_fr_siret
 #: help:res.partner,siren:0
 msgid "The SIREN number is the official identity number of the company in France. It makes the first 9 digits of the SIRET number."
-msgstr "Le numéro SIREN est l'identifiant officiel de la société en France. il compose les 9 premiers chiffres du numéro SIRET."
+msgstr "Le numéro SIREN est l'identifiant officiel de la société en France. Il compose les 9 premiers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: help:res.partner,nic:0
-msgid "The NIC number is the official rank number of this office in the company in France. It is composed of the last 5 digits of the SIRET number."
-msgstr "The NIC number is the official rank number of this office in the company in France. It is composed of the last 5 digits of the SIRET number."
+msgid "The NIC number is the official rank number of this office in the company in France. It makes the last 5 digits of the SIRET number."
+msgstr "Le numéro NIC est le numéro de rang officiel de cet établissement dans sa société en France. Il compose les 5 derniers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: field:res.partner,siret:0

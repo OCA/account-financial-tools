@@ -50,12 +50,13 @@ class Partner(osv.osv):
         """Check the SIREN's and NIC's keys (last digits)"""
         for partner in self.browse(cr, uid, ids, context=None):
             if partner.nic:
-                # Check the NIC type
-                if not partner.nic.isdecimal():
+                # Check the NIC type and length
+                if not partner.nic.isdecimal() or len(partner.nic)!=5:
                     return False
             if partner.siren:
-                # Check the SIREN type and key
+                # Check the SIREN type, length and key
                 if (not partner.siren.isdecimal()
+                    or len(partner.siren)!=9
                     or not _check_luhn(partner.siren) ):
                     return False
                 # Check the NIC key (you need both SIREN and NIC to check it)
@@ -71,8 +72,8 @@ class Partner(osv.osv):
         'nic': fields.char('NIC', size=5,
                            help="The NIC number is the official rank number "
                                 "of this office in the company in France. It "
-                                "is composed of the last 5 digits of the "
-                                "SIRET number."),
+                                "makes the last 5 digits of the SIRET "
+                                "number."),
         'siret': fields.function(_get_siret, type="char", string='SIRET',
             method=True, size=14,
             store = {
