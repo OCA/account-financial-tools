@@ -211,7 +211,6 @@ class pxgo_account_importer(osv.osv_memory):
                                         'company_id': wiz.company_id.id,
                                         'currency_id': brother_account.currency_id.id,
                                         'currency_mode': brother_account.currency_mode,
-                                        'check_history': brother_account.check_history,
                                         'active': 1,
                                         'tax_ids': [(6, 0, [tax.id for tax in brother_account.tax_ids])],
                                         'note': False,
