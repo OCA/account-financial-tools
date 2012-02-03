@@ -76,7 +76,8 @@ found in database.
 
 Contributor: Grzegorz Grzelak
 """,
-    "depends" : ["base"],
+    "depends" : ["base",
+                 "account"],
     "init_xml" : ["security/security.xml"],
     "update_xml" : [
                         "currency_rate_update.xml",
