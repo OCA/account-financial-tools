@@ -175,16 +175,16 @@ class wizard_update_charts_accounts(osv.osv_memory):
         if not company_id:
             user = self.pool.get('res.users').browse(cr, uid, uid, context)
             company_id = user.company_id.id
-        property_ids = property_obj.search(cr, uid, [('name', '=', 'property_account_receivable' ), ('company_id', '=', company_id), ('res_id', '=', False), ('value', '!=', False)])
+        property_ids = property_obj.search(cr, uid, [('name', '=', 'property_account_receivable' ), ('company_id', '=', company_id), ('res_id', '=', False), ('value_reference', '!=', False)])
         if not property_ids:
             # Try to get a generic (no-company) property
-            property_ids = property_obj.search(cr, uid, [('name', '=', 'property_account_receivable' ), ('res_id', '=', False), ('value', '!=', False)])
+            property_ids = property_obj.search(cr, uid, [('name', '=', 'property_account_receivable' ), ('res_id', '=', False), ('value_reference', '!=', False)])
         number_digits = 6
         if property_ids:
             prop = property_obj.browse(cr, uid, property_ids[0], context=context)
             try:
                 # OpenERP 5.0 and 5.2/6.0 revno <= 2236
-                account_id = int(prop.value.split(',')[1])
+                account_id = int(prop.value_reference.split(',')[1])
             except AttributeError:
                 # OpenERP 6.0 revno >= 2236
                 account_id = prop.value_reference.id
@@ -427,9 +427,9 @@ class wizard_update_charts_accounts(osv.osv_memory):
                 if tax.python_compute != tax_template.python_compute:
                     notes += _("The python compute field is different.\n")
                     modified = True
-                if tax.tax_group != tax_template.tax_group:
-                    notes += _("The tax group field is different.\n")
-                    modified = True
+                #if tax.tax_group != tax_template.tax_group:
+                    #notes += _("The tax group field is different.\n")
+                    #modified = True
                 if tax.base_sign != tax_template.base_sign:
                     notes += _("The base sign field is different.\n")
                     modified = True
@@ -797,7 +797,7 @@ class wizard_update_charts_accounts(osv.osv_memory):
                 'python_compute': tax_template.python_compute,
                 'python_compute_inv': tax_template.python_compute_inv,
                 'python_applicable': tax_template.python_applicable,
-                'tax_group': tax_template.tax_group,
+                #'tax_group': tax_template.tax_group,
                 'base_code_id': tax_template.base_code_id and tax_code_template_mapping.get(tax_template.base_code_id.id),
                 'tax_code_id': tax_template.tax_code_id and tax_code_template_mapping.get(tax_template.tax_code_id.id),
                 'base_sign': tax_template.base_sign,
