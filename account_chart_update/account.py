@@ -182,12 +182,7 @@ class wizard_update_charts_accounts(osv.osv_memory):
         number_digits = 6
         if property_ids:
             prop = property_obj.browse(cr, uid, property_ids[0], context=context)
-            try:
-                # OpenERP 5.0 and 5.2/6.0 revno <= 2236
-                account_id = int(prop.value_reference.split(',')[1])
-            except AttributeError:
-                # OpenERP 6.0 revno >= 2236
-                account_id = prop.value_reference.id
+            account_id = prop.value_reference.id
 
             if account_id:
                 code = account_obj.read(cr, uid, account_id, ['code'], context)['code']
