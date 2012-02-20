@@ -98,12 +98,11 @@ class Currency_rate_update_service(osv.osv):
                         ]
 
     def _check_max_delta_days(self, cr, uid, ids):
-        for company in self.read(cr, uid, ids, ['max_delta_days']):
-            if company['max_delta_days'] >= 0:
-                continue
-            else:
-                return False
-        return True
+        for i in ids:
+            value_to_check = self.read(cr, uid, i, ['max_delta_days'])['max_delta_days']
+            if value_to_check >= 0:
+                return True
+            else: return False
 
     _constraints = [
         (_check_max_delta_days, "'Max delta days' must be >= 0", ['max_delta_days']),

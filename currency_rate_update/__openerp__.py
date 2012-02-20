@@ -75,6 +75,8 @@ If in multi-company mode, the base currency will be the first company's currency
 found in database.
 
 Thanks to main contributors : Grzegorz Grzelak, Alexis de Lattre
+
+
 """,
     "depends" : ["base",
                  "account"], #Added to ensure account security groups are present
