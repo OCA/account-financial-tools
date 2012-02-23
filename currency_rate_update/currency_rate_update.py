@@ -44,8 +44,10 @@
 
 from osv import osv, fields
 import time
+from mx import DateTime
 from datetime import datetime, timedelta
 import netsvc
+import string
 from tools.translate import _
 
 class Currency_rate_update_service(osv.osv):
