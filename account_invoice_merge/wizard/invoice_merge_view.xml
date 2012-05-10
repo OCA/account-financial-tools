@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_invoice_merge" model="ir.ui.view">
+            <field name="name">Merger Partner Invoice</field>
+            <field name="model">invoice.merge</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+               <form string="Merge Partner Invoice">
+                    <separator string="Are you sure you want to merge these invoices ?" colspan="4"/>
+                       <newline/>
+                    <label string="
+Please note that: &#10; &#10;
+Invoices will only be merged if: &#10;
+* Invoices are in draft &#10;
+* Invoices belong to the same partner &#10;
+* Invoices are have same company, partner, address, currency, journal, salesman, account, type &#10; &#10;
+Lines will only be merged if: &#10;
+* Invoice lines are exactly the same except for the product,quantity and unit &#10;
+" colspan="4"/>                
+                    <newline/>                    
+                    <separator string="" colspan="4" />
+                    <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                    <button name="merge_invoices" string="Merge Invoices" type="object" icon="gtk-convert"/>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Merge Partner Invoice"            
+            res_model="invoice.merge"
+            src_model="account.invoice"
+            view_mode="form"
+            target="new"
+            multi="True"        
+            key2="client_action_multi"    
+            groups="base.group_extended"
+            id="action_view_invoice_merge"/>    
+                        
+    </data>
+</openerp>
+
