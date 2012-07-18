@@ -375,6 +375,7 @@ class wizard_update_charts_accounts(osv.osv_memory):
         tax_facade = self.pool.get('account.tax')
         wiz_tax_facade = self.pool.get('wizard.update.charts.accounts.tax')
         
+        delay_wiz_tax=[]
         # Remove previous taxes
         wiz_tax_facade.unlink(cr, uid, wiz_tax_facade.search(cr, uid, []))
     
@@ -388,11 +389,15 @@ class wizard_update_charts_accounts(osv.osv_memory):
             tax_id = tax_template_mapping.get(tax_template.id)
             if not tax_id:
                 new_taxes += 1
-                wiz_tax_facade.create(cr, uid, {
+                vals_wiz = {
                         'tax_id': tax_template.id,
                         'update_chart_wizard_id': wizard.id,
                         'type': 'new',
-                    }, context)
+                    }
+                if not tax_template.parent_id:
+                    wiz_tax_facade.create(cr, uid, vals_wiz, context)
+                else:
+                    delay_wiz_tax.append(vals_wiz)
             elif wizard.update_tax:
                 #
                 # Check the tax for changes.
@@ -451,7 +456,9 @@ class wizard_update_charts_accounts(osv.osv_memory):
                             'update_tax_id': tax_id,
                             'notes': notes,
                         }, context)
-
+                        
+        for delay_vals_wiz in delay_wiz_tax:
+            wiz_tax_facade.create(cr, uid, delay_vals_wiz, context)
         
         return { 'new': new_taxes, 'updated': updated_taxes, 'mapping': tax_template_mapping }
     
@@ -1225,7 +1232,7 @@ class wizard_update_charts_accounts_tax_code(osv.osv_memory):
     }
 
     _defaults = {
-        'update_tax_code_id': lambda *a: None,
+        #'update_tax_code_id': lambda *a: None,
     }
 
 wizard_update_charts_accounts_tax_code()
@@ -1249,7 +1256,7 @@ class wizard_update_charts_accounts_tax(osv.osv_memory):
     }
 
     _defaults = {
-        'update_tax_id': lambda *a: None,
+        #'update_tax_id': lambda *a: None,
     }
 
 wizard_update_charts_accounts_tax()
@@ -1278,7 +1285,7 @@ class wizard_update_charts_accounts_account(osv.osv_memory):
     }
 
     _defaults = {
-        'update_account_id': lambda *a: None,
+        #'update_account_id': lambda *a: None,
     }
 
 wizard_update_charts_accounts_account()
@@ -1302,7 +1309,7 @@ class wizard_update_charts_accounts_fiscal_position(osv.osv_memory):
     }
 
     _defaults = {
-        'update_fiscal_position_id': lambda *a: None,
+        #'update_fiscal_position_id': lambda *a: None,
     }
 
 
