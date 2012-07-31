@@ -33,8 +33,9 @@
     "author" : "Camptocamp",
     "website" : "http://camptocamp.com",
     "category" : "Financial Management/Configuration",
-    "description": """
-Import exchange rates from three different sources on the internet :
+    "description": """Import exchange rates from the Internet.
+
+The module is able to use 4 different sources:
 
 1. Admin.ch
    Updated daily, source in CHF.
@@ -50,31 +51,33 @@ Import exchange rates from three different sources on the internet :
 
 4. Polish National Bank (Narodowy Bank Polski) (contribution by Grzegorz Grzelak)
    Takes official rates from www.nbp.pl. Adds rate table symbol in log.
-   You should check when rates should apply to bookkeeping. If next day you should 
-   change the update hour in schedule settings because in OpenERP they apply from 
+   You should check when rates should apply to bookkeeping. If next day you should
+   change the update hour in schedule settings because in OpenERP they apply from
    date of update (date - no hours).
 
 In the roadmap : Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
    This is parsed from an HTML page, so it may be broken at anytime.
 
-The update can be set under de company form. 
+The update can be set under the company form.
 You can set for each services which currency you want to update.
-The log of the update are visible under the service note.
+The logs of the update are visible under the service note.
 You can active or deactivate the update.
 The module uses internal ir_cron feature from OpenERP, so the job is launched once
 the server starts if the 'first execute date' is before the current day.
-The module supports multi-company currency in two way :
-    the currencies are shared, you can set currency update only on one 
+The module supports multi-company currency in two ways:
+
+*    the currencies are shared, you can set currency update only on one 
     company
-    the currency are separated, you can set currency on every company
+*    the currency are separated, you can set currency on every company
     separately
-A function field let you know your currency configuration.
+
+A function field lets you know your currency configuration.
 
 If in multi-company mode, the base currency will be the first company's currency
 found in database.
 
-Thanks to main contributors : Grzegorz Grzelak, Alexis de Lattre
+Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
 """,
     "depends" : ["base",
                  "account"], #Added to ensure account security groups are present
