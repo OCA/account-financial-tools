@@ -15,7 +15,7 @@
 							<field name="siret" />
 						</group>
 						<group>
-							<field name="rcs" />
+							<field name="company_registry" />
 						</group>
 					</group>
 				</page>
