@@ -84,6 +84,9 @@ class Partner(osv.osv):
                  "company's office in France. It is composed of the 9 digits "
                  "of the SIREN number and the 5 digits of the NIC number, ie. "
                  "14 digits."),
+        'rcs': fields.char('RCS', size=64,
+                           help="The name of the city where the chamber of "
+                                "commerce that registered this company is."),
     }
     
     _constraints = [
