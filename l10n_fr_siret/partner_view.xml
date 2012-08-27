@@ -7,14 +7,18 @@
 			<field name="model">res.partner</field>
 			<field name="inherit_id" ref="account.view_partner_property_form" />
 			<field name="arch" type="xml">
-				<field name="property_account_position" position="after">
-					<group col="8" colspan="4">
-						<field name="siren" />
-						<field name="nic" />
-						<field name="siret" />
-						<field name="rcs" />
+				<page string="Accounting" position="inside">
+					<group>
+						<group>
+							<field name="siren" />
+							<field name="nic" />
+							<field name="siret" />
+						</group>
+						<group>
+							<field name="rcs" />
+						</group>
 					</group>
-				</field>
+				</page>
 			</field>
 		</record>
 	</data>
