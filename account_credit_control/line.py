@@ -116,78 +116,90 @@ class CreditControlLine(Model):
         context =  context or {}
         return []
 
-    def _create_from_mv_line(self, cursor, uid, ids, mv_line_br,
-                             level, controlling_date, context=None):
+    def _prepare_from_move_line(self, cursor, uid, move_line,
+                                level, controlling_date, context=None):
         """Create credit line"""
         acc_line_obj = self.pool.get('account.move.line')
-        context = context or {}
-        data_dict = {}
-        data_dict['date'] = controlling_date
-        data_dict['date_due'] = mv_line_br.date_maturity
-        data_dict['state'] = 'draft'
-        data_dict['canal'] = level.canal
-        data_dict['invoice_id'] = (mv_line_br.invoice_id and mv_line_br.invoice_id.id
-                                   or False)
-        data_dict['partner_id'] = mv_line_br.partner_id.id
-        data_dict['amount_due'] = (mv_line_br.amount_currency or mv_line_br.debit
-                                   or mv_line_br.credit)
-        data_dict['balance_due'] = acc_line_obj._amount_residual_from_date(cursor, uid, mv_line_br,
-                                                                      controlling_date, context=context)
-        data_dict['policy_level_id'] = level.id
-        data_dict['company_id'] = mv_line_br.company_id.id
-        data_dict['move_line_id'] = mv_line_br.id
-        return [self.create(cursor, uid, data_dict)]
-
+        if context is None:
+            context = {}
+        data = {}
+        data['date'] = controlling_date
+        data['date_due'] = move_line.date_maturity
+        data['state'] = 'draft'
+        data['canal'] = level.canal
+        data['invoice_id'] = move_line.invoice_id.id if move_line.invoice_id else False
+        data['partner_id'] = move_line.partner_id.id
+        data['amount_due'] = (move_line.amount_currency or move_line.debit or
+                              move_line.credit)
+        data['balance_due'] = acc_line_obj._amount_residual_from_date(
+                cursor, uid, move_line, controlling_date, context=context)
+        data['policy_level_id'] = level.id
+        data['company_id'] = move_line.company_id.id
+        data['move_line_id'] = move_line.id
+        return data
 
     def create_or_update_from_mv_lines(self, cursor, uid, ids, lines,
-                                       level_id, controlling_date, errors=None, context=None):
+                                       level_id, controlling_date, context=None):
         """Create or update line base on levels"""
-        context = context or {}
+        if context is None:
+            context = {}
         currency_obj = self.pool.get('res.currency')
         level_obj = self.pool.get('credit.control.policy.level')
         ml_obj = self.pool.get('account.move.line')
         level = level_obj.browse(cursor, uid, level_id, context)
         current_lvl = level.level
-        credit_line_ids = []
+        debit_line_ids = []
         user = self.pool.get('res.users').browse(cursor, uid, uid)
         tolerance_base = user.company_id.credit_control_tolerance
-        tolerance = {}
-        currency_ids = currency_obj.search(cursor, uid, [])
+        currency_ids = currency_obj.search(cursor, uid, [], context=context)
 
+        tolerance = {}
         acc_line_obj = self.pool.get('account.move.line')
         for c_id in currency_ids:
-            tmp = currency_obj.compute(cursor, uid, c_id,
-                                       user.company_id.currency_id.id, tolerance_base)
-            tolerance[c_id] = tmp
+            tolerance[c_id] = currency_obj.compute(
+                cursor, uid,
+                c_id,
+                user.company_id.currency_id.id,
+                tolerance_base,
+                context=context)
 
-        existings = self.search(cursor, uid, [('move_line_id', 'in', lines),
-                                              ('level', '=', current_lvl)])
-        db, pool = pooler.get_db_and_pool(cursor.dbname)
-        for line in ml_obj.browse(cursor, uid, lines, context):
-            # we want to create as many line as possible
-            local_cr = db.cursor()
-            try:
-                if line.id in existings:
-                    # does nothing just a hook
-                    credit_line_ids += self._update_from_mv_line(local_cr, uid, ids,
-                                                                 line, level, controlling_date,
-                                                                 context=context)
-                else:
-                    # as we use memoizer pattern this has almost no cost to get it
-                    # multiple time
-                    open_amount = acc_line_obj._amount_residual_from_date(cursor, uid, line,
-                                                                          controlling_date, context=context)
+        existings = self.search(
+            cursor, uid,
+            [('move_line_id', 'in', lines),
+             ('level', '=', current_lvl)],
+            context=context)
 
-                    if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
-                        credit_line_ids += self._create_from_mv_line(local_cr, uid, ids,
-                                                                     line, level, controlling_date,
-                                                                     context=context)
-            except Exception, exc:
-                logger.error(exc)
-                if errors:
-                    errors.append(unicode(exc)) #obj-c common pattern
-                local_cr.rollback()
-            finally:
-                local_cr.commit()
-                local_cr.close()
-        return credit_line_ids
+        errors = []
+        db, __ = pooler.get_db_and_pool(cursor.dbname)
+        local_cr = db.cursor()
+        try:
+            for line in ml_obj.browse(cursor, uid, lines, context):
+                # we want to create as many line as possible
+                try:
+                    if line.id in existings:
+                        # does nothing just a hook
+                        debit_line_ids += self._update_from_mv_line(
+                            local_cr, uid, ids, line, level,
+                            controlling_date, context=context)
+                    else:
+                        # as we use memoizer pattern this has almost no cost to get it
+                        # multiple time
+                        open_amount = acc_line_obj._amount_residual_from_date(
+                            cursor, uid, line, controlling_date, context=context)
+
+                        if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
+                            vals = self._prepare_from_move_line(
+                                local_cr, uid, line, level, controlling_date, context=context)
+                            debit_line_ids.append(self.create(local_cr, uid, vals, context=context))
+                # FIXME: which exception can happens here ? reduce the exception scope
+                except Exception, exc:
+                    logger.exception(exc)
+                    if errors:
+                        errors.append(unicode(exc))
+                    local_cr.rollback()
+                finally:
+                    local_cr.commit()
+        finally:
+            local_cr.close()
+        return debit_line_ids, errors
+
