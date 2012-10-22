@@ -1,0 +1,44 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_mailer_form" model="ir.ui.view">
+      <field name="name">credit.line.mailer.form</field>
+      <field name="model">credit.control.mailer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form> <!-- editable="bottom" -->
+          <separator string="Mail selected lines. Sucessfuly mailed lines will be in state done. Related email will be linked to the line" colspan="4"/>
+          <newline/>
+          <field name="mail_all" colspan="4"/>
+          <newline/>
+          <group colspan="4">
+            <button name="mail_lines" string="Mail lines" type="object" icon="gtk-execute"/>
+            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Mail lines"
+        res_model="credit.control.mailer"
+        src_model="credit.control.line"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="open_credit_line_mailer_wizard_menu_action"/>
+
+    <!-- for button -->
+    <record id="open_credit_line_mailer_wizard" model="ir.actions.act_window">
+      <field name="name">Mail lines</field>
+      <field name="res_model">credit.control.mailer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_line_mailer_form"/>
+      <field name="target">new</field>
+      <field name="help">Mail all marked lines</field>
+    </record>
+
+
+  </data>
+</openerp>
