@@ -123,7 +123,7 @@ class AccountMoveLine(Model):
 
     _columns = {'invoice_id': fields.many2one('account.invoice', 'Invoice')}
 
-    def _get_payment_and_credit_lines(self, moveline_array, lookup_date):
+    def _get_payment_and_credit_lines(self, moveline_array, controlling_date):
         credit_lines = []
         payment_lines = []
         for line in moveline_array:
@@ -172,9 +172,9 @@ class AccountMoveLine(Model):
                 applicable_payment.append(pay_line)
         return applicable_payment
 
-    def _compute_partial_reconcile_residual(self, move_lines, lookup_date, move_id, memoizer):
+    def _compute_partial_reconcile_residual(self, move_lines, controlling_date, move_id, memoizer):
         """ Compute open amount of multiple credit lines linked to multiple payment lines"""
-        credit_lines, payment_lines = self._get_payment_and_credit_lines(move_lines, lookup_date, memoizer)
+        credit_lines, payment_lines = self._get_payment_and_credit_lines(move_lines, controlling_date, memoizer)
         self._validate_line_currencies(credit_lines)
         self._validate_line_currencies(payment_lines)
         self._validate_partial(credit_lines)
@@ -194,17 +194,17 @@ class AccountMoveLine(Model):
                 rest = 0.0
         return memoizer
 
-    def _compute_fully_open_amount(self, move_lines, lookup_date, move_id, memoizer):
+    def _compute_fully_open_amount(self, move_lines, controlling_date, move_id, memoizer):
         for move_line in move_lines:
             memoizer[move_id][move_line.id] = self._get_value_amount(move_line)
         return memoizer
 
 
-    def _amount_residual_from_date(self, cursor, uid, mv_line_br, lookup_date, context=None):
+    def _amount_residual_from_date(self, cursor, uid, mv_line_br, controlling_date, context=None):
         """
         Code from function _amount_residual of account/account_move_line.py does not take
         in account mulitple line payment and reconciliation. We have to rewrite it
-        Code computes residual amount at lookup date for mv_line_br in entry
+        Code computes residual amount at controlling date for mv_line_br in entry
         """
         memoizer = run.memoizers['credit_line_residuals']
         move_id = mv_line_br.move_id.id
@@ -214,8 +214,8 @@ class AccountMoveLine(Model):
             memoizer[move_id] = {}
             move_lines = mv_line_br.move_id.line_id
             if mv_line_br.reconcile_partial_id:
-                self._compute_partial_reconcile_residual(move_lines, lookup_date, move_id, memoizer)
+                self._compute_partial_reconcile_residual(move_lines, controlling_date, move_id, memoizer)
             else:
-                self._compute_fully_open_amount(move_lines, lookup_date, move_id, memoizer)
+                self._compute_fully_open_amount(move_lines, controlling_date, move_id, memoizer)
         return memoizer[move_id][mv_line_br.id]
 

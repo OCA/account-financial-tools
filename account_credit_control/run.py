@@ -37,7 +37,7 @@ class CreditControlRun(Model):
     _name = "credit.control.run"
     _rec_name = 'date'
     _description = """Credit control line generator"""
-    _columns = {'date': fields.date('Lookup date', required=True),
+    _columns = {'date': fields.date('Controlling date', required=True),
                 'policy_ids': fields.many2many('credit.control.policy',
                                                 rel="credit_run_policy_rel",
                                                 string='Policies',
@@ -64,10 +64,10 @@ class CreditControlRun(Model):
 
     _defaults = {'state': 'draft'}
 
-    def check_run_date(self, cursor, uid, ids, lookup_date, context=None):
-        """Ensure that there is no credit line in the future using lookup_date"""
+    def check_run_date(self, cursor, uid, ids, controlling_date, context=None):
+        """Ensure that there is no credit line in the future using controlling_date"""
         line_obj =  self.pool.get('credit.control.line')
-        lines = line_obj.search(cursor, uid, [('date', '>', lookup_date)],
+        lines = line_obj.search(cursor, uid, [('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
             line = line_obj.browse(cursor, uid, lines[0])

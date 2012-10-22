@@ -40,7 +40,7 @@ class CreditControlPolicy(Model):
                 }
 
 
-    def _get_account_related_lines(self, cursor, uid, policy_id, lookup_date, lines, context=None):
+    def _get_account_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
         """ We get all the lines related to accounts with given credit policy.
             We try not to use direct SQL in order to respect security rules.
             As we define the first set it is important, The date is used to do a prefilter.
@@ -53,7 +53,7 @@ class CreditControlPolicy(Model):
         if not acc_ids:
             return lines
         move_ids =  move_l_obj.search(cursor, uid, [('account_id', 'in', acc_ids),
-                                                    ('date_maturity', '<=', lookup_date),
+                                                    ('date_maturity', '<=', controlling_date),
                                                     ('reconcile_id', '=', False),
                                                     ('partner_id', '!=', False)])
 
@@ -61,7 +61,7 @@ class CreditControlPolicy(Model):
         return lines
 
 
-    def _get_sum_reduce_range(self, cursor, uid, policy_id, lookup_date, lines, model,
+    def _get_sum_reduce_range(self, cursor, uid, policy_id, controlling_date, lines, model,
                               move_relation_field, context=None):
         """ We get all the lines related to the model with given credit policy.
             We also reduce from the global set (lines) the move line to be excluded.
@@ -79,7 +79,7 @@ class CreditControlPolicy(Model):
         add_obj_ids =  my_obj.search(cursor, uid, [('credit_policy_id', '=', policy_id)])
         if add_obj_ids:
             add_lines = move_l_obj.search(cursor, uid, [(move_relation_field, 'in', add_obj_ids),
-                                                        ('date_maturity', '<=', lookup_date),
+                                                        ('date_maturity', '<=', controlling_date),
                                                         ('partner_id', '!=', False),
                                                         ('reconcile_id', '=', False)])
             lines = list(set(lines + add_lines))
@@ -90,7 +90,7 @@ class CreditControlPolicy(Model):
         if neg_obj_ids:
             # should we add ('id', 'in', lines) in domain ? it may give a veeery long SQL...
             neg_lines = move_l_obj.search(cursor, uid, [(move_relation_field, 'in', neg_obj_ids),
-                                                        ('date_maturity', '<=', lookup_date),
+                                                        ('date_maturity', '<=', controlling_date),
                                                         ('partner_id', '!=', False),
                                                         ('reconcile_id', '=', False)])
             if neg_lines:
@@ -98,17 +98,17 @@ class CreditControlPolicy(Model):
         return lines
 
 
-    def _get_partner_related_lines(self, cursor, uid, policy_id, lookup_date, lines, context=None):
-        return self._get_sum_reduce_range(cursor, uid, policy_id, lookup_date, lines,
+    def _get_partner_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
+        return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
                                           'res.partner', 'partner_id', context=context)
 
 
-    def _get_invoice_related_lines(self, cursor, uid, policy_id, lookup_date, lines, context=None):
-        return self._get_sum_reduce_range(cursor, uid, policy_id, lookup_date, lines,
+    def _get_invoice_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
+        return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
                                           'account.invoice', 'invoice', context=context)
 
 
-    def _get_moves_line_to_process(self, cursor, uid, policy_id, lookup_date, context=None):
+    def _get_moves_line_to_process(self, cursor, uid, policy_id, controlling_date, context=None):
         """Retrive all the move line to be procces for current policy.
            This function is planned to be use only on one id.
            Priority of inclustion, exlusion is account, partner, invoice"""
@@ -118,11 +118,11 @@ class CreditControlPolicy(Model):
             policy_id = policy_id[0]
         # order of call MUST be respected priority is account, partner, invoice
         lines = self._get_account_related_lines(cursor, uid, policy_id,
-                                                lookup_date, lines, context=context)
+                                                controlling_date, lines, context=context)
         lines = self._get_partner_related_lines(cursor, uid, policy_id,
-                                                lookup_date, lines, context=context)
+                                                controlling_date, lines, context=context)
         lines = self._get_invoice_related_lines(cursor, uid, policy_id,
-                                                lookup_date, lines, context=context)
+                                                controlling_date, lines, context=context)
         return lines
 
     def _check_lines_policies(self, cursor, uid, policy_id, lines, context=None):
@@ -217,18 +217,18 @@ class CreditControlPolicyLevel(Model):
     # ----- time related functions ---------
 
     def _net_days_get_boundary(self):
-        return " (mv_line.date_maturity + %(delay)s)::date <= date(%(lookup_date)s)"
+        return " (mv_line.date_maturity + %(delay)s)::date <= date(%(controlling_date)s)"
 
     def _end_of_month_get_boundary(self):
         return ("(date_trunc('MONTH', (mv_line.date_maturity + %(delay)s))+INTERVAL '1 MONTH - 1 day')::date"
-                "<= date(%(lookup_date)s)")
+                "<= date(%(controlling_date)s)")
 
     def _previous_date_get_boundary(self):
-        return "(cr_line.date + %(delay)s)::date <= date(%(lookup_date)s)"
+        return "(cr_line.date + %(delay)s)::date <= date(%(controlling_date)s)"
 
-    def _get_sql_date_boundary_for_computation_mode(self, cursor, uid, level, lookup_date, context=None):
+    def _get_sql_date_boundary_for_computation_mode(self, cursor, uid, level, controlling_date, context=None):
         """Return a where clauses statement for the given
-           lookup date and computation mode of the level"""
+           controlling date and computation mode of the level"""
         fname = "_%s_get_boundary" % (level.computation_mode,)
         if hasattr(self, fname):
             fnc = getattr(self, fname)
@@ -239,7 +239,7 @@ class CreditControlPolicyLevel(Model):
 
     # -----------------------------------------
 
-    def _get_first_level_lines(self, cursor, uid, level, lookup_date, lines, context=None):
+    def _get_first_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
         if not lines:
             return []
         """Retrieve all the line that are linked to a frist level.
@@ -251,8 +251,8 @@ class CreditControlPolicyLevel(Model):
                " AND NOT EXISTS (SELECT cr_line.id from credit_control_line cr_line\n"
                "                  WHERE cr_line.move_line_id = mv_line.id)")
         sql += " AND" + self._get_sql_date_boundary_for_computation_mode(
-                cursor, uid, level, lookup_date, context)
-        data_dict = {'lookup_date': lookup_date, 'line_ids': tuple(lines),
+                cursor, uid, level, controlling_date, context)
+        data_dict = {'controlling_date': controlling_date, 'line_ids': tuple(lines),
                      'delay': level.delay_days}
 
         cursor.execute(sql, data_dict)
@@ -262,7 +262,7 @@ class CreditControlPolicyLevel(Model):
         return [x[0] for x in res]
 
 
-    def _get_other_level_lines(self, cursor, uid, level, lookup_date, lines, context=None):
+    def _get_other_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
         # We filter line that have a level smaller than current one
         # TODO if code fits need refactor _get_first_level_lines and _get_other_level_lines
         # Code is not DRY
@@ -278,12 +278,12 @@ class CreditControlPolicyLevel(Model):
                " AND cr_line.level = %(level)s\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND " + self._get_sql_date_boundary_for_computation_mode(
-                cursor, uid, level, lookup_date, context)
+                cursor, uid, level, controlling_date, context)
         previous_level_id = self._previous_level(
                 cursor, uid, level, context=context)
         previous_level = self.browse(
                 cursor, uid, previous_level_id, context=context)
-        data_dict =  {'lookup_date': lookup_date, 'line_ids': tuple(lines),
+        data_dict =  {'controlling_date': controlling_date, 'line_ids': tuple(lines),
                      'delay': level.delay_days, 'level': previous_level.level}
 
         cursor.execute(sql, data_dict)
@@ -292,7 +292,7 @@ class CreditControlPolicyLevel(Model):
             return []
         return [x[0] for x in res]
 
-    def get_level_lines(self, cursor, uid, level_id, lookup_date, lines, context=None):
+    def get_level_lines(self, cursor, uid, level_id, controlling_date, lines, context=None):
         """get all move lines in entry lines that match the current level"""
         assert not (isinstance(level_id, list) and len(level_id) > 1), "level_id: only one id expected"
         if isinstance(level_id, list):
@@ -301,10 +301,10 @@ class CreditControlPolicyLevel(Model):
         level = self.browse(cursor, uid, level_id, context=context)
         if self._previous_level(cursor, uid, level, context=context) is None:
             matching_lines += self._get_first_level_lines(
-                cursor, uid, level, lookup_date, lines, context=context)
+                cursor, uid, level, controlling_date, lines, context=context)
         else:
             matching_lines += self._get_other_level_lines(
-                cursor, uid, level, lookup_date, lines, context=context)
+                cursor, uid, level, controlling_date, lines, context=context)
 
         return matching_lines
 

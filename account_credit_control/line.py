@@ -107,18 +107,18 @@ class CreditControlLine (Model):
     _defaults = {'state': 'draft'}
 
     def _update_from_mv_line(self, cursor, uid, ids, mv_line_br, level,
-                             lookup_date, context=None):
+                             controlling_date, context=None):
         """hook function to update line if required"""
         context =  context or {}
         return []
 
     def _create_from_mv_line(self, cursor, uid, ids, mv_line_br,
-                             level, lookup_date, context=None):
+                             level, controlling_date, context=None):
         """Create credit line"""
         acc_line_obj = self.pool.get('account.move.line')
         context = context or {}
         data_dict = {}
-        data_dict['date'] = lookup_date
+        data_dict['date'] = controlling_date
         data_dict['date_due'] = mv_line_br.date_maturity
         data_dict['state'] = 'draft'
         data_dict['canal'] = level.canal
@@ -128,7 +128,7 @@ class CreditControlLine (Model):
         data_dict['amount_due'] = (mv_line_br.amount_currency or mv_line_br.debit
                                    or mv_line_br.credit)
         data_dict['balance_due'] = acc_line_obj._amount_residual_from_date(cursor, uid, mv_line_br,
-                                                                      lookup_date, context=context)
+                                                                      controlling_date, context=context)
         data_dict['policy_level_id'] = level.id
         data_dict['company_id'] = mv_line_br.company_id.id
         data_dict['move_line_id'] = mv_line_br.id
@@ -136,7 +136,7 @@ class CreditControlLine (Model):
 
 
     def create_or_update_from_mv_lines(self, cursor, uid, ids, lines,
-                                       level_id, lookup_date, errors=None, context=None):
+                                       level_id, controlling_date, errors=None, context=None):
         """Create or update line base on levels"""
         context = context or {}
         currency_obj = self.pool.get('res.currency')
@@ -166,17 +166,17 @@ class CreditControlLine (Model):
                 if line.id in existings:
                     # does nothing just a hook
                     credit_line_ids += self._update_from_mv_line(local_cr, uid, ids,
-                                                                 line, level, lookup_date,
+                                                                 line, level, controlling_date,
                                                                  context=context)
                 else:
                     # as we use memoizer pattern this has almost no cost to get it
                     # multiple time
                     open_amount = acc_line_obj._amount_residual_from_date(cursor, uid, line,
-                                                                          lookup_date, context=context)
+                                                                          controlling_date, context=context)
 
                     if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
                         credit_line_ids += self._create_from_mv_line(local_cr, uid, ids,
-                                                                     line, level, lookup_date,
+                                                                     line, level, controlling_date,
                                                                      context=context)
             except Exception, exc:
                 logger.error(exc)
