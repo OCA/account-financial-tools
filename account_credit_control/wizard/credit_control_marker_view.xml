@@ -1,0 +1,45 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_marker_form" model="ir.ui.view">
+      <field name="name">credit.line.marker.form</field>
+      <field name="model">credit.control.marker</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <separator string="Change the state of the selected lines." colspan="4"/>
+          <label string="Warning: you will maybe not be able to revert this operation." colspan="4"></label>
+          <newline/>
+          <field name="name" colspan="4"/>
+          <field name="line_ids" colspan="4" nolabel="1"/>
+          <newline/>
+          <group colspan="4">
+            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
+            <button name="mark_lines" string="Change Lines' State" type="object" icon="gtk-execute"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Change Lines' State"
+                res_model="credit.control.marker"
+                src_model="credit.control.line"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="open_credit_line_marker_wizard_menu_action"/>
+
+    <record id="open_credit_line_marker_wizard" model="ir.actions.act_window">
+      <field name="name">Change Lines' State</field>
+      <field name="res_model">credit.control.marker</field>
+      <field name="src_model">credit.control.line</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_line_marker_form"/>
+      <field name="target">new</field>
+      <field name="help">Change the state of the selected lines.</field>
+    </record>
+
+  </data>
+</openerp>

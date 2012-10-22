@@ -1,0 +1,49 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_printer_form" model="ir.ui.view">
+      <field name="name">credit.line.printer.form</field>
+      <field name="model">credit.control.printer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form>
+          <separator colspan="4" string="Print the selected lines"/>
+          <newline/>
+          <field name="mark_as_sent" colspan="4" attrs="{'invisible': [('state', '=', 'done')]}"/>
+          <newline/>
+          <field name="line_ids" colspan="4" nolabel="1"
+            attrs="{'invisible': [('state', '=', 'done')]}" />
+          <field name="report_file" colspan="4" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+          <field name="state" invisible="1" />
+          <newline/>
+          <group colspan="4">
+            <button special="cancel" string="Cancel" icon='gtk-cancel' attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button name="print_lines" string="Print" type="object" icon="gtk-execute" attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button special="cancel" string="Close" icon='gtk-close' attrs="{'invisible': [('state', '!=', 'done')]}"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Print Lines"
+                res_model="credit.control.printer"
+                src_model="credit.control.line"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="open_credit_line_printer_wizard_menu_action"/>
+
+    <record id="open_credit_line_printer_wizard" model="ir.actions.act_window">
+      <field name="name">Print Lines</field>
+      <field name="res_model">credit.control.printer</field>
+      <field name="src_model">credit.control.line</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_line_printer_form"/>
+      <field name="target">new</field>
+      <field name="help">Print selected lines</field>
+    </record>
+
+  </data>
+</openerp>
