@@ -18,59 +18,69 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from datetime import datetime
 import operator
+from datetime import datetime
+
 from openerp.osv.orm import Model, fields
 from openerp.tools.translate import _
 from openerp.addons.account_credit_control import run
 
-class AccountAccount(Model):
-    """Add a link to a credit control policy on account account"""
 
+class AccountAccount(Model):
+    """Add a link to a credit control policy on account.account"""
+
+    _inherit = "account.account"
 
     def _check_account_type_compatibility(self, cursor, uid, acc_ids, context=None):
         """We check that account is of type reconcile"""
-        if not isinstance(acc_ids, list):
+        if isinstance(acc_ids, (int, long)):
             acc_ids = [acc_ids]
         for acc in self.browse(cursor, uid, acc_ids, context):
             if acc.credit_policy_id and not acc.reconcile:
                 return False
         return True
 
-    _inherit = "account.account"
-    _description = """Add a link to a credit policy"""
-    _columns = {'credit_policy_id': fields.many2one('credit.control.policy',
-                                                     'Credit control policy',
-                                                     help=("Define global credit policy"
-                                                           "order is account partner invoice")),
+    _columns = {
+        'credit_policy_id': fields.many2one('credit.control.policy',
+                                            'Credit Control Policy',
+                                             help=("The Credit Control Policy "
+                                                   "used for this account. This "
+                                                   "setting can be forced on the "
+                                                   "partner or the invoice.")),
 
-                'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                              'account_id',
-                                                              string='Credit Lines',
-                                                              readonly=True)}
+        'credit_control_line_ids': fields.one2many('credit.control.line',
+                                                   'account_id',
+                                                   string='Credit Lines',
+                                                   readonly=True)
+    }
 
     _constraints = [(_check_account_type_compatibility,
-                     _('You can not set a credit policy on a non reconciliable account'),
-                     ['credit_policy_id'])]
+                     _('You can not set a credit control policy on a non reconcilable account'),
+                    ['credit_policy_id'])]
+
 
 class AccountInvoice(Model):
-    """Add a link to a credit control policy on account account"""
+    """Add a link to a credit control policy on account.account"""
 
     _inherit = "account.invoice"
-    _description = """Add a link to a credit policy"""
-    _columns = {'credit_policy_id': fields.many2one('credit.control.policy',
-                                                     'Credit control policy',
-                                                     help=("Define global credit policy"
-                                                           "order is account partner invoice")),
+    _columns = {
+        'credit_policy_id': fields.many2one('credit.control.policy',
+                                            'Credit Control Policy',
+                                             help=("The Credit Control Policy "
+                                                   "used for this invoice. "
+                                                   "If nothing is defined, "
+                                                   "it will use the account "
+                                                   "setting or the partner "
+                                                   "setting.")),
 
-                'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                              'account_id',
-                                                              string='Credit Lines',
-                                                              readonly=True)}
+        'credit_control_line_ids': fields.one2many('credit.control.line',
+                                                   'account_id',
+                                                   string='Credit Lines',
+                                                   readonly=True)
+    }
 
     def action_move_create(self, cursor, uid, ids, context=None):
-        """We ensure writing of invoice id in move line because
-           Trigger field may not work without account_voucher addon"""
+        """ Write the id of the invoice in the generated moves. """
         res = super(AccountInvoice, self).action_move_create(cursor, uid, ids, context=context)
         for inv in self.browse(cursor, uid, ids, context=context):
             if inv.move_id:
@@ -80,142 +90,139 @@ class AccountInvoice(Model):
 
 
 class AccountMoveLine(Model):
-    """Add a function that compute the residual amount using a follow up date
-       Add relation between move line and invoicex"""
+    """Add a method which computes the residual amount using a follow up date.
+       Add relation between move line and invoice."""
 
     _inherit = "account.move.line"
-    # Store fields has strange behavior with voucher module we had to overwrite invoice
-
-
-    # def _invoice_id(self, cursor, user, ids, name, arg, context=None):
-    #     #Code taken from OpenERP account addon
-    #     invoice_obj = self.pool.get('account.invoice')
-    #     res = {}
-    #     for line_id in ids:
-    #         res[line_id] = False
-    #     cursor.execute('SELECT l.id, i.id ' \
-    #                     'FROM account_move_line l, account_invoice i ' \
-    #                     'WHERE l.move_id = i.move_id ' \
-    #                     'AND l.id IN %s',
-    #                     (tuple(ids),))
-    #     invoice_ids = []
-    #     for line_id, invoice_id in cursor.fetchall():
-    #         res[line_id] = invoice_id
-    #         invoice_ids.append(invoice_id)
-    #     invoice_names = {False: ''}
-    #     for invoice_id, name in invoice_obj.name_get(cursor, user, invoice_ids, context=context):
-    #         invoice_names[invoice_id] = name
-    #     for line_id in res.keys():
-    #         invoice_id = res[line_id]
-    #         res[line_id] = (invoice_id, invoice_names[invoice_id])
-    #     return res
-
-    # def _get_invoice(self, cursor, uid, ids, context=None):
-    #     result = set()
-    #     for line in self.pool.get('account.invoice').browse(cursor, uid, ids, context=context):
-    #         if line.move_id:
-    #             ids = [x.id for x in line.move_id.line_id or []]
-    #     return list(result)
-
-    # _columns = {'invoice_id': fields.function(_invoice_id, string='Invoice',
-    #             type='many2one', relation='account.invoice',
-    #             store={'account.invoice': (_get_invoice, ['move_id'], 20)})}
 
     _columns = {'invoice_id': fields.many2one('account.invoice', 'Invoice')}
 
-    def _get_payment_and_credit_lines(self, moveline_array, controlling_date):
-        credit_lines = []
+    def _get_payment_and_debit_lines(self, move_lines):
+        """ Split the move lines of a move between debit and payment lines.
+        Lines partially reconciled are considered as payments.
+
+        Ignore the other move lines.
+
+        Returns them in a tuple, ordered by date
+
+        :param list move_lines: move lines to sort
+        :return: tuple where 1st item is a list of the debit lines ordered by date
+                 and 2nd item is a list of the payment lines order by date
+        """
+        debit_lines = []
         payment_lines = []
-        for line in moveline_array:
-            if self._should_exlude_line(line):
-                continue
+        for line in move_lines:
             if line.account_id.type == 'receivable' and line.debit:
-                credit_lines.append(line)
+                debit_lines.append(line)
             else:
                 if line.reconcile_partial_id:
                     payment_lines.append(line)
-        credit_lines.sort(key=operator.attrgetter('date'))
+        debit_lines.sort(key=operator.attrgetter('date'))
         payment_lines.sort(key=operator.attrgetter('date'))
-        return (credit_lines, payment_lines)
+        return (debit_lines, payment_lines)
 
-    def _validate_line_currencies(self, credit_lines):
-        """Raise an excpetion if there is lines with different currency"""
-        if len(credit_lines) == 0:
+    def _validate_line_currencies(self, move_lines):
+        """Raise an exception if there is lines with different currency"""
+        if len(move_lines) == 0:
             return True
-        currency = credit_lines[0].currency_id.id
-        if not all(obj.currency_id.id == currency for obj in credit_lines):
+        currency_id = move_lines[0].currency_id.id
+        if not all(obj.currency_id.id == currency_id for obj in move_lines):
+            # FIXME: Exception is too large
             raise Exception('Not all line of move line are in the same currency')
 
-    def _get_value_amount(self, mv_line_br):
-        if mv_line_br.currency_id:
-            return mv_line_br.amount_currency
+    def _get_value_amount(self, move_lines):
+        """ For a move line, returns the balance
+        Use the amount currency if there is a currency on the move line.
+        """
+        if move_lines.currency_id:
+            return move_lines.amount_currency
         else:
-            return mv_line_br.debit - mv_line_br.credit
+            return move_lines.debit - move_lines.credit
 
-    def _validate_partial(self, credit_lines):
-        if len(credit_lines) == 0:
+    def _validate_partial(self, move_lines):
+        """ Check if all the credit lines are partially reconciled """
+        if len(move_lines) == 0:
             return True
         else:
             line_with_partial = 0
-            for line in credit_lines:
+            for line in move_lines:
                 if not line.reconcile_partial_id:
                     line_with_partial += 1
-            if line_with_partial and line_with_partial != len(credit_lines):
-                    raise Exception('Can not compute credit line if multiple'
-                                    ' lines are not all linked to a partial')
+            if line_with_partial and line_with_partial != len(move_lines):
+                # FIXME: Exception is too large
+                raise Exception('Can not compute credit line if multiple'
+                                ' lines are not all linked to a partial')
 
-    def _get_applicable_payment_lines(self, credit_line, payment_lines):
+    def _get_applicable_payment_lines(self, debit_line, payment_lines):
+        """ 
+        """
         applicable_payment = []
         for pay_line in payment_lines:
             if datetime.strptime(pay_line.date, "%Y-%m-%d").date() \
-                <= datetime.strptime(credit_line.date, "%Y-%m-%d").date():
+                <= datetime.strptime(debit_line.date, "%Y-%m-%d").date():
                 applicable_payment.append(pay_line)
         return applicable_payment
 
-    def _compute_partial_reconcile_residual(self, move_lines, controlling_date, move_id, memoizer):
-        """ Compute open amount of multiple credit lines linked to multiple payment lines"""
-        credit_lines, payment_lines = self._get_payment_and_credit_lines(move_lines, controlling_date, memoizer)
-        self._validate_line_currencies(credit_lines)
+    def _compute_partial_reconcile_residual(self, move_lines):
+        """ Compute open amount of multiple debit lines
+        which have at least one payment.
+
+        :return: dict with each move line id and its residual
+        """
+        debit_lines, payment_lines = self._get_payment_and_debit_lines(move_lines)
+        self._validate_line_currencies(debit_lines)
         self._validate_line_currencies(payment_lines)
-        self._validate_partial(credit_lines)
-        # memoizer structure move_id : {move_line_id: open_amount}
-        # paymnent line and credit line are sorted by date
+        self._validate_partial(debit_lines)
+
+        # payment lines and credit lines are sorted by date
         rest = 0.0
-        for credit_line in credit_lines:
-            applicable_payment = self._get_applicable_payment_lines(credit_line, payment_lines)
+        residuals = {}
+        for debit_line in debit_lines:
+            applicable_payment = self._get_applicable_payment_lines(debit_line, payment_lines)
             paid_amount = 0.0
             for pay_line in applicable_payment:
                 paid_amount += self._get_value_amount(pay_line)
-            balance_amount = self._get_value_amount(credit_lines) - (paid_amount + rest)
-            memoizer[move_id][credit_line.id] = balance_amount
+            balance_amount = self._get_value_amount(debit_lines) - (paid_amount + rest)
+            residuals[debit_line.id] = balance_amount
             if balance_amount < 0.0:
                 rest = balance_amount
             else:
                 rest = 0.0
-        return memoizer
+        return residuals
 
-    def _compute_fully_open_amount(self, move_lines, controlling_date, move_id, memoizer):
-        for move_line in move_lines:
-            memoizer[move_id][move_line.id] = self._get_value_amount(move_line)
-        return memoizer
-
-
-    def _amount_residual_from_date(self, cursor, uid, mv_line_br, controlling_date, context=None):
+    def _compute_fully_open_amount(self, move_lines):
+        """ For each move line, returns the full open balance (does not consider
+        partial reconcilation)
+        :return: dict of move line ids and their open balance
         """
-        Code from function _amount_residual of account/account_move_line.py does not take
-        in account mulitple line payment and reconciliation. We have to rewrite it
-        Code computes residual amount at controlling date for mv_line_br in entry
+        res = {}
+        for move_line in move_lines:
+            res[move_line.id] = self._get_value_amount(move_line)
+        return res
+
+    def _amount_residual_from_date(self, cursor, uid, move_line, controlling_date, context=None):
+        """ Compute the residual amount for a move line.
+
+        Warning: this method uses a global memoizer in run.memoizers.
+        Race conditions are actually avoided with a lock in
+        ``run.CreditControlRun.generate_credit_lines``
+        So, please use this method with caution, do always use a lock.
+
+        :param browse_record move_line: browse records of move line
+        :param date controlling_date: date of the credit control
+        :return: open balance of the move move line
         """
         memoizer = run.memoizers['credit_line_residuals']
-        move_id = mv_line_br.move_id.id
-        if mv_line_br.move_id.id in memoizer:
-            pass # get back value
-        else:
+        move_id = move_line.move_id.id
+        if move_line.move_id.id not in memoizer:
             memoizer[move_id] = {}
-            move_lines = mv_line_br.move_id.line_id
-            if mv_line_br.reconcile_partial_id:
-                self._compute_partial_reconcile_residual(move_lines, controlling_date, move_id, memoizer)
+            move_lines = move_line.move_id.line_id  # thanks openerp for the name
+                                                    # but that's a many2one
+            if move_line.reconcile_partial_id:
+                memoizer[move_id].update(
+                    self._compute_partial_reconcile_residual(move_lines))
             else:
-                self._compute_fully_open_amount(move_lines, controlling_date, move_id, memoizer)
-        return memoizer[move_id][mv_line_br.id]
+                memoizer[move_id].update(
+                    self._compute_fully_open_amount(move_lines))
+        return memoizer[move_id][move_line.id]
 

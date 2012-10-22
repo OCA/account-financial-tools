@@ -20,9 +20,11 @@
 ##############################################################################
 from openerp.osv.orm import Model, fields
 
+
 class ResCompany(Model):
     _inherit = "res.company"
 
     _columns = {"credit_control_tolerance": fields.float('Credit Tolerance')}
 
     _defaults = {"credit_control_tolerance": 0.1}
+

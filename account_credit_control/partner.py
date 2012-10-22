@@ -29,12 +29,12 @@ class ResPartner(Model):
     _columns = {
         'credit_policy_id': fields.many2one('credit.control.policy',
                                             'Credit Control Policy',
-                                             help=("The Credit Control policy"
-                                                 "used for this user. This "
-                                                 "setting can be forced on the "
-                                                 "invoice. If nothing is defined, "
-                                                 "it will use the account "
-                                                 "setting.")),
+                                             help=("The Credit Control Policy"
+                                                   "used for this user. This "
+                                                   "setting can be forced on the "
+                                                   "invoice. If nothing is defined, "
+                                                   "it will use the account "
+                                                   "setting.")),
         'credit_control_line_ids': fields.one2many('credit.control.line',
                                                    'invoice_id',
                                                    string='Credit Lines',

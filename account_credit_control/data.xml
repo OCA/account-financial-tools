@@ -114,7 +114,7 @@
 
     <record model="credit.control.policy.level"
             id="3_time_3">
-      <field name="name">10 days sommation</field>
+      <field name="name">10 days last reminder</field>
       <field name="level" eval="3"/>
       <field name="computation_mode">previous_date</field>
       <field name="delay_days" eval="10"/>
@@ -144,7 +144,7 @@
 
     <record model="credit.control.policy.level"
             id="2_time_2">
-      <field name="name">60 days sommation</field>
+      <field name="name">60 days last reminder</field>
       <field name="level" eval="2"/>
       <field name="computation_mode">previous_date</field>
       <field name="delay_days" eval="60"/>
