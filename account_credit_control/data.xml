@@ -2,9 +2,9 @@
   <data noupdate="1">
     <!--Email template -->
     <record id="email_template_credit_control_base" model="email.template">
-      <field name="name">Credit Control demo mail</field>
+      <field name="name">Credit Control Mail</field>
       <field name="email_from">noreply@localhost</field>
-      <field name="subject">Credit Control Invoice (${object.current_policy_level.level or 'n/a' })</field>
+      <field name="subject">Credit Control: (${object.current_policy_level.level or 'n/a' })</field>
       <field name="email_to">${object.get_mail() or  ''}</field>
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
@@ -19,7 +19,7 @@
 
       <p>Dear ${object.partner_id.name  or ''},</p>
 
-      <pre class="custom_text">${object.current_policy_level.level.custom_text}</pre>
+      <pre class="custom_text">${object.current_policy_level.custom_text}</pre>
 
       <table style="border: 1px solid" width="100%">
       <caption><b>Summary</b></caption>
@@ -44,8 +44,7 @@
       <br/>
       <br/>
 
-     <p> If you have any question, do not hesitate to contact us.</p>
-
+      <p>If you have any question, do not hesitate to contact us.</p>
 
       <p>Thank you for choosing ${object.company_id.name}! </p>
 
