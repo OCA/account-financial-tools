@@ -56,7 +56,7 @@
     </record>
 
     <menuitem
-        name="Credit Control Configuration"
+        name="Credit Control"
         parent="account.menu_finance_configuration"
         id="base_credit_control_configuration_menu"/>
 
