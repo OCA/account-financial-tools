@@ -30,11 +30,15 @@ class CreditControlPrinter(TransientModel):
     _name = "credit.control.printer"
     _rec_name = 'id'
     _description = """Mass printer"""
-    _columns = {'mark_as_sent': fields.boolean('Mark lines as send',
-                                               help="Lines to emailed will be ignored"),
-                'print_all': fields.boolean('Print all ready lines'),
-                'report_file': fields.binary('Generated Report'),
+    _columns = {'mark_as_sent': fields.boolean('Mark lines as sent',
+                                               help="Only manual lines will be marked."),
+                'print_all': fields.boolean('Print all "To send" lines'),
+                'report_file': fields.binary('Generated Report', readonly=True),
                 'state': fields.char('state', size=32)}
+
+    _defaults = {
+        'mark_as_sent': True,
+    }
 
     def _get_lids(self, cursor, uid, print_all, active_ids, context=None):
         """get line to be marked filter done lines"""
@@ -52,14 +56,18 @@ class CreditControlPrinter(TransientModel):
 
     def print_lines(self, cursor, uid, wiz_id, context=None):
         comm_obj = self.pool.get('credit.control.communication')
-        context = context or {}
+        if context is None:
+            context = {}
+        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
+                "wiz_id: only one id expected"
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context)
         lines_ids = context.get('active_ids')
         if not lines_ids and not current.print_all:
-            raise except_osv(_('Not lines ids are selected'),
-                             _('You may check "Print all ready lines"'))
+            raise except_osv(_('Error'),
+                             _('No lines are selected. You may want to activate'
+                               ' "Print all "To send" lines."'))
         if current.print_all:
             filtered_ids = self._get_lids(cursor, uid, current.print_all, lines_ids, context)
         else:

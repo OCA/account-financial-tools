@@ -22,14 +22,15 @@ from openerp.osv.orm import  TransientModel, fields
 from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
+
 class CreditControlMailer(TransientModel):
-    """Change the state of lines in mass"""
+    """Send emails for each selected credit control lines."""
 
     _name = "credit.control.mailer"
     _description = """Mass credit line mailer"""
     _rec_name = 'id'
 
-    _columns = {'mail_all': fields.boolean('Mail all ready lines')}
+    _columns = {'mail_all': fields.boolean('Send an email for all "To Send" lines.')}
 
 
     def _get_lids(self, cursor, uid, mail_all, active_ids, context=None):
@@ -47,18 +48,26 @@ class CreditControlMailer(TransientModel):
 
 
     def mail_lines(self, cursor, uid, wiz_id, context=None):
+        assert not (isinstance(run_id, list) and len(run_id) > 1), \
+                "run_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
-        context = context or {}
+        if context is None:
+            context = {}
+        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
+                "wiz_id: only one id expected"
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context)
         lines_ids = context.get('active_ids')
 
         if not lines_ids and not current.mail_all:
-            raise except_osv(_('Not lines ids are selected'),
-                             _('You may check "Mail all ready lines"'))
+            raise except_osv(_('Error'),
+                             _('No lines are selected. You may want to activate '
+                               '"Send an email for all "To Send" lines."'))
+
         filtered_ids = self._get_lids(cursor, uid, current.mail_all, lines_ids, context)
         comms = comm_obj._generate_comm_from_credit_line_ids(cursor, uid, filtered_ids,
                                                              context=context)
         comm_obj._generate_mails(cursor, uid, comms, context=context)
         return {}
+

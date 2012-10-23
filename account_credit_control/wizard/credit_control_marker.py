@@ -27,11 +27,11 @@ class CreditControlMarker(TransientModel):
 
     _name = "credit.control.marker"
     _description = """Mass marker"""
-    _columns = {'name': fields.selection([('to_be_sent', 'To be sent'),
+    _columns = {'name': fields.selection([('to_be_sent', 'To send'),
                                           ('sent', 'Done')],
                                           'Mark as', required=True),
 
-                'mark_all': fields.boolean('Mark all draft lines')}
+                'mark_all': fields.boolean('Change status of all draft lines')}
 
     _defaults = {'name': 'to_be_sent'}
 
@@ -49,27 +49,29 @@ class CreditControlMarker(TransientModel):
         line_obj = self.pool.get('credit.control.line')
         if not state:
             raise ValueError(_('state can not be empty'))
-        line_obj.write(cursor, uid, filtered_ids, {'state': state})
+        line_obj.write(cursor, uid, filtered_ids, {'state': state}, context=context)
         return filtered_ids
-
-
 
     def mark_lines(self, cursor, uid, wiz_id, context=None):
         """Write state of selected credit lines to the one in entry
         done credit line will be ignored"""
-        context = context or {}
+        if context is None:
+            context = {}
+        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
+                "wiz_id: only one id expected"
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context)
         lines_ids = context.get('active_ids')
 
         if not lines_ids and not current.mark_all:
-            raise except_osv(_('Not lines ids are selected'),
-                             _('You may check "Mark all draft lines"'))
+            raise except_osv(_('Error'),
+                             _('No lines are selected. You may want to activate '
+                               '"Change status of all draft lines"'))
         filtered_ids = self._get_lids(cursor, uid, current.mark_all, lines_ids, context)
         if not filtered_ids:
-            raise except_osv(_('No lines will be changed'),
-                             _('All selected lines are allready done'))
+            raise except_osv(_('Information'),
+                             _('No lines will be changed. All the selected lines are already done'))
 
         # hook function a simple write should be enought
         self._mark_lines(cursor, uid, filtered_ids, current.name, context)
@@ -81,3 +83,4 @@ class CreditControlMarker(TransientModel):
                  'view_id': False,
                  'res_model': 'credit.control.line',
                  'type': 'ir.actions.act_window'}
+

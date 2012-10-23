@@ -7,13 +7,13 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form> <!-- editable="bottom" -->
-          <separator string="This wizard will mark selected  draft lines to the selected state. Done Lines will be ignored " colspan="4"/>
+          <separator string="This wizard will change the state of the selected draft lines. Done Lines will be ignored " colspan="4"/>
           <newline/>
           <field name="name"/>
           <field name="mark_all"/>
           <newline/>
           <group colspan="4">
-            <button name="mark_lines" string="Mark lines" type="object" icon="gtk-execute"/>
+            <button name="mark_lines" string="Mark Lines" type="object" icon="gtk-execute"/>
             <button special="cancel" string="Cancel" icon='gtk-cancel'/>
           </group>
         </form>
@@ -30,14 +30,14 @@
                 id="open_credit_line_marker_wizard_menu_action"/>
 
     <record id="open_credit_line_marker_wizard" model="ir.actions.act_window">
-      <field name="name">Mark lines</field>
+      <field name="name">Change Lines' State</field>
       <field name="res_model">credit.control.marker</field>
       <field name="src_model">credit.control.line</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
       <field name="view_id" ref="credit_line_marker_form"/>
       <field name="target">new</field>
-      <field name="help">Mark all lines. You can the send marked lines</field>
+      <field name="help">Change the state of the selected lines.</field>
     </record>
 
   </data>
