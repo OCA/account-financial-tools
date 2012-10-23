@@ -100,7 +100,7 @@ class CreditControlLine(Model):
 
         'level': fields.related('policy_level_id',
                                 'level',
-                                type='float',
+                                type='integer',
                                 relation='credit.control.policy',
                                 string='Level',
                                 store=True,

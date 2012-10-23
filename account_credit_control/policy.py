@@ -186,7 +186,7 @@ class CreditControlPolicyLevel(Model):
         'policy_id': fields.many2one('credit.control.policy',
                                      'Related Policy', required=True),
         'name': fields.char('Name', size=128, required=True),
-        'level': fields.float('Level', required=True),
+        'level': fields.integer('Level', required=True),
 
         'computation_mode': fields.selection([('net_days', 'Due Date'),
                                               ('end_of_month', 'Due Date, End Of Month'),
