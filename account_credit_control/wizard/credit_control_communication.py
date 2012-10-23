@@ -147,9 +147,11 @@ class CreditCommunication(TransientModel):
                 cl_ids = [cl.id for cl in comm.credit_lines]
 
                 # we do not use local cusros else we have a lock
+                # FIXME: so use a savepoint or find the cause of the lock
+                # we are not supposed to rollback or commit the main transaction
                 cr_line_obj.write(cursor, uid, cl_ids,
                                       {'mail_message_id': mail_id,
-                                       'state': 'sent'})
+                                       'state': 'sent'}, context=context)
                 mail_ids.append(mail_id)
             except Exception, exc:
                 logger.error(exc)
@@ -157,7 +159,7 @@ class CreditCommunication(TransientModel):
                 cl_ids = [cl.id for cl in comm.credit_lines]
                 # we do not use local cusros else we have a lock
                 cr_line_obj.write(cursor, uid, cl_ids,
-                                  {'state': 'mail_error'})
+                                  {'state': 'mail_error'}, context=context)
             finally:
                 cursor.commit()
         return mail_ids
