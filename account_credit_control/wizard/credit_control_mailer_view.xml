@@ -12,8 +12,8 @@
           <field name="mail_all" colspan="4"/>
           <newline/>
           <group colspan="4">
-            <button name="mail_lines" string="Mail lines" type="object" icon="gtk-execute"/>
             <button special="cancel" string="Cancel" icon='gtk-cancel'/>
+            <button name="mail_lines" string="Mail lines" type="object" icon="gtk-execute"/>
           </group>
         </form>
       </field>

@@ -13,15 +13,15 @@
           <field name="mark_all"/>
           <newline/>
           <group colspan="4">
-            <button name="mark_lines" string="Mark Lines" type="object" icon="gtk-execute"/>
             <button special="cancel" string="Cancel" icon='gtk-cancel'/>
+            <button name="mark_lines" string="Mark Lines" type="object" icon="gtk-execute"/>
           </group>
         </form>
       </field>
     </record>
 
     <!-- for menu -->
-    <act_window name="Mark lines"
+    <act_window name="Change Lines' State"
                 res_model="credit.control.marker"
                 src_model="credit.control.line"
                 view_mode="form"
