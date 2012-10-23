@@ -55,10 +55,10 @@ class CreditControlMarker(TransientModel):
     def mark_lines(self, cursor, uid, wiz_id, context=None):
         """Write state of selected credit lines to the one in entry
         done credit line will be ignored"""
-        if context is None:
-            context = {}
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
+        if context is None:
+            context = {}
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context)

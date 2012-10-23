@@ -55,11 +55,11 @@ class CreditControlPrinter(TransientModel):
 
 
     def print_lines(self, cursor, uid, wiz_id, context=None):
+        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
+                "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
         if context is None:
             context = {}
-        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-                "wiz_id: only one id expected"
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         current = self.browse(cursor, uid, wiz_id, context)
