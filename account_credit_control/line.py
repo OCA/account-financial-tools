@@ -27,7 +27,7 @@ logger = logging.getLogger('credit.line.control')
 
 
 class CreditControlLine(Model):
-    """ A credit control line decribes a line of amount due by a customer.
+    """A credit control line describes an amount due by a customer for a due date.
 
     A line is created once the due date of the payment is exceeded.
     It is created in "draft" and some actions are available (send by email,
