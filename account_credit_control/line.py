@@ -118,7 +118,7 @@ class CreditControlLine(Model):
 
     def _prepare_from_move_line(self, cursor, uid, move_line,
                                 level, controlling_date, context=None):
-        """Create credit line"""
+        """Create credit control line"""
         acc_line_obj = self.pool.get('account.move.line')
         if context is None:
             context = {}

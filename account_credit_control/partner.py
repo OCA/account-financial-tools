@@ -37,7 +37,7 @@ class ResPartner(Model):
                                                    "setting.")),
         'credit_control_line_ids': fields.one2many('credit.control.line',
                                                    'invoice_id',
-                                                   string='Credit Lines',
+                                                   string='Credit Control Lines',
                                                    readonly=True)
     }
 
