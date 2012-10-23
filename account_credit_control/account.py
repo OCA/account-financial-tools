@@ -217,7 +217,7 @@ class AccountMoveLine(Model):
         if move_line.move_id.id not in memoizer:
             memoizer[move_id] = {}
             move_lines = move_line.move_id.line_id  # thanks openerp for the name
-                                                    # but that's a many2one
+                                                    # but that's a one2many
             if move_line.reconcile_partial_id:
                 memoizer[move_id].update(
                     self._compute_partial_reconcile_residual(move_lines))
