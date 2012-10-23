@@ -38,9 +38,9 @@ class CreditCommunication(TransientModel):
                 'current_policy_level': fields.many2one('credit.control.policy.level',
                                                         'Level', required=True),
 
-                'credit_lines': fields.many2many('credit.control.line',
-                                                 rel='comm_credit_rel',
-                                                 string='Credit Lines'),
+                'credit_control_line_ids': fields.many2many('credit.control.line',
+                                                             rel='comm_credit_rel',
+                                                             string='Credit Lines'),
 
                 'company_id': fields.many2one('res.company', 'Company',
                                               required=True),
@@ -109,10 +109,11 @@ class CreditCommunication(TransientModel):
         res = cursor.dictfetchall()
         for level_assoc in res:
             data = {}
-            data['credit_lines'] = [(6, 0, self._get_credit_lines(cursor, uid, line_ids,
-                                                                  level_assoc['partner_id'],
-                                                                  level_assoc['policy_level_id'],
-                                                                  context=context))]
+            data['credit_control_line_ids'] = \
+                    [(6, 0, self._get_credit_lines(cursor, uid, line_ids,
+                                                   level_assoc['partner_id'],
+                                                   level_assoc['policy_level_id'],
+                                                   context=context))]
             data['partner_id'] = level_assoc['partner_id']
             data['current_policy_level'] = level_assoc['policy_level_id']
             comm_id = self.create(cursor, uid, data, context=context)
@@ -133,18 +134,25 @@ class CreditCommunication(TransientModel):
             try:
                 template = comm.current_policy_level.mail_template_id.id
 
+                # FIXME: usage of this TransientModel is a bit weird with
+                # the generation of the email, because the mail is linked
+                # with this model, which is transient (only the owner of the
+                # record can read it, and it is not persistent)
+                # the template should be linked with the credit control line.
                 mvalues = mail_temp_obj.generate_email(cursor, uid,
                                                        template,
                                                        comm.id,
                                                        context=context)
                 essential_values = ['subject', 'body_html',
                                     'email_from', 'email_to']
+                # FIXME: should we really raise an exception?
+                # the mail object should handle itself theses cases
                 for val in essential_values:
                     if not mvalues.get(val):
                         raise Exception('Mail generation error with %s', val)
                 mail_id = mail_message_obj.create(cursor, uid, mvalues, context=context)
 
-                cl_ids = [cl.id for cl in comm.credit_lines]
+                cl_ids = [cl.id for cl in comm.credit_control_line_ids]
 
                 # we do not use local cusros else we have a lock
                 # FIXME: so use a savepoint or find the cause of the lock
@@ -156,7 +164,7 @@ class CreditCommunication(TransientModel):
             except Exception, exc:
                 logger.error(exc)
                 cursor.rollback()
-                cl_ids = [cl.id for cl in comm.credit_lines]
+                cl_ids = [cl.id for cl in comm.credit_control_line_ids]
                 # we do not use local cusros else we have a lock
                 cr_line_obj.write(cursor, uid, cl_ids,
                                   {'state': 'mail_error'}, context=context)
@@ -174,7 +182,8 @@ class CreditCommunication(TransientModel):
     def _mark_credit_line_as_sent(self, cursor, uid, comms, context=None):
         line_ids = []
         for comm in comms:
-            line_ids += [x.id for x in comm.credit_lines]
+            line_ids += [x.id for x in comm.credit_control_line_ids]
         l_obj = self.pool.get('credit.control.line')
         l_obj.write(cursor, uid, line_ids, {'state': 'sent'}, context=context)
         return line_ids
+

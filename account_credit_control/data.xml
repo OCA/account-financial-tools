@@ -4,7 +4,7 @@
     <record id="email_template_credit_control_base" model="email.template">
       <field name="name">Credit Control Mail</field>
       <field name="email_from">noreply@localhost</field>
-      <field name="subject">Credit Control: (${object.current_policy_level.level or 'n/a' })</field>
+      <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a' })</field>
       <field name="email_to">${object.get_mail() or  ''}</field>
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
@@ -29,7 +29,7 @@
          <th>Amount balance</th>
          <th>Invoice number</th>
       </tr>
-%for line in object.credit_lines:
+%for line in object.credit_control_line_ids:
       <tr>
         <td>${line.date_due}</td>
         <td>${line.amount_due}</td>
