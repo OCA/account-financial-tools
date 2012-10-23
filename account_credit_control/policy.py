@@ -21,6 +21,7 @@
 from openerp.osv.orm import Model, fields
 from openerp.tools.translate import _
 
+
 class CreditControlPolicy(Model):
     """Define a policy of reminder"""
 
@@ -33,104 +34,135 @@ class CreditControlPolicy(Model):
                                                      'Policy Levels'),
 
                 'do_nothing' : fields.boolean('Do nothing',
-                                              help=('For policies who should not '
+                                              help=('For policies which should not '
                                                     'generate lines or are obsolete')),
 
                 'company_id' : fields.many2one('res.company', 'Company')
                 }
 
 
-    def _get_account_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
-        """ We get all the lines related to accounts with given credit policy.
-            We try not to use direct SQL in order to respect security rules.
-            As we define the first set it is important, The date is used to do a prefilter.
-            !!!We take the asumption that only receivable lines have a maturity date
-            and account must be reconcillable"""
-        context = context or {}
+    def _get_account_related_lines(self, cursor, uid, policy_id, controlling_date, context=None):
+        """ Get the move lines for a policy.
+
+        Do not use direct SQL in order to respect security rules.
+
+        Assume that only the receivable lines have a maturity date and that
+        accounts used in the policy are reconcilable.
+        """
+        if context is None:
+            context = {}
         move_l_obj = self.pool.get('account.move.line')
         account_obj = self.pool.get('account.account')
-        acc_ids =  account_obj.search(cursor, uid, [('credit_policy_id', '=', policy_id)])
+        acc_ids =  account_obj.search(
+            cursor, uid, [('credit_policy_id', '=', policy_id)], context=context)
         if not acc_ids:
-            return lines
-        move_ids =  move_l_obj.search(cursor, uid, [('account_id', 'in', acc_ids),
-                                                    ('date_maturity', '<=', controlling_date),
-                                                    ('reconcile_id', '=', False),
-                                                    ('partner_id', '!=', False)])
+            return []
+        lines = move_l_obj.search(cursor, uid,
+                                  [('account_id', 'in', acc_ids),
+                                   ('date_maturity', '<=', controlling_date),
+                                   ('reconcile_id', '=', False),
+                                   ('partner_id', '!=', False)],
+                                  context=context)
 
-        lines += move_ids
         return lines
 
+    def _get_sum_reduce_range(self, cursor, uid, policy_id, controlling_date, lines,
+                              model, move_relation_field, context=None):
+        """ Get the move lines related to one model for a policy.
 
-    def _get_sum_reduce_range(self, cursor, uid, policy_id, controlling_date, lines, model,
-                              move_relation_field, context=None):
-        """ We get all the lines related to the model with given credit policy.
-            We also reduce from the global set (lines) the move line to be excluded.
-            We try not to use direct SQL in order to respect security rules.
-            As we define the first set it is important.
+            Do not use direct SQL in order to respect security rules.
+
+            Assume that only the receivable lines have a maturity date and that
+            accounts used in the policy are reconcilable.
+
             The policy relation field MUST be named credit_policy_id
-            and the model must have a relation
-            with account move line.
-            !!! We take the asumption that only receivable lines have a maturity date
-            and account must be reconcillable"""
+
+            Warning: side effect on ``lines``
+
+            """
         # MARK possible place for a good optimisation
-        context = context or {}
+        if context is None:
+            context = {}
         my_obj = self.pool.get(model)
         move_l_obj = self.pool.get('account.move.line')
-        add_obj_ids =  my_obj.search(cursor, uid, [('credit_policy_id', '=', policy_id)])
+        add_lines = []
+        neg_lines = []
+        add_obj_ids = my_obj.search(
+            cursor, uid, [('credit_policy_id', '=', policy_id)], context=context)
         if add_obj_ids:
-            add_lines = move_l_obj.search(cursor, uid, [(move_relation_field, 'in', add_obj_ids),
-                                                        ('date_maturity', '<=', controlling_date),
-                                                        ('partner_id', '!=', False),
-                                                        ('reconcile_id', '=', False)])
+            add_lines = move_l_obj.search(
+                cursor, uid,
+                [(move_relation_field, 'in', add_obj_ids),
+                 ('date_maturity', '<=', controlling_date),
+                 ('partner_id', '!=', False),
+                 ('reconcile_id', '=', False)],
+                context=context)
             lines = list(set(lines + add_lines))
+
         # we get all the lines that must be excluded at partner_level
         # from the global set (even the one included at account level)
-        neg_obj_ids =  my_obj.search(cursor, uid, [('credit_policy_id', '!=', policy_id),
-                                                   ('credit_policy_id', '!=', False)])
+        neg_obj_ids = my_obj.search(
+            cursor, uid,
+            [('credit_policy_id', '!=', policy_id),
+             ('credit_policy_id', '!=', False)],
+            context=context)
         if neg_obj_ids:
             # should we add ('id', 'in', lines) in domain ? it may give a veeery long SQL...
-            neg_lines = move_l_obj.search(cursor, uid, [(move_relation_field, 'in', neg_obj_ids),
-                                                        ('date_maturity', '<=', controlling_date),
-                                                        ('partner_id', '!=', False),
-                                                        ('reconcile_id', '=', False)])
+            neg_lines = move_l_obj.search(
+                    cursor, uid,
+                    [(move_relation_field, 'in', neg_obj_ids),
+                     ('date_maturity', '<=', controlling_date),
+                     ('partner_id', '!=', False),
+                     ('reconcile_id', '=', False)],
+                    context=context)
             if neg_lines:
                 lines = list(set(lines) - set(neg_lines))
         return lines
 
-
     def _get_partner_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
+        """ Get the move lines for a policy related to a partner.
+            Warning: side effect on ``lines``
+        """
         return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
                                           'res.partner', 'partner_id', context=context)
 
-
     def _get_invoice_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
+        """ Get the move lines for a policy related to an invoice.
+            Warning: side effect on ``lines``
+        """
         return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
                                           'account.invoice', 'invoice', context=context)
-
 
     def _get_moves_line_to_process(self, cursor, uid, policy_id, controlling_date, context=None):
         """Retrive all the move line to be procces for current policy.
            This function is planned to be use only on one id.
            Priority of inclustion, exlusion is account, partner, invoice"""
-        context = context or {}
+        if context is None:
+            context = {}
         lines = []
+        assert not (isinstance(policy_id, list) and len(policy_id) > 1), \
+            "policy_id: only one id expected"
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
-        # order of call MUST be respected priority is account, partner, invoice
-        lines = self._get_account_related_lines(cursor, uid, policy_id,
-                                                controlling_date, lines, context=context)
-        lines = self._get_partner_related_lines(cursor, uid, policy_id,
-                                                controlling_date, lines, context=context)
-        lines = self._get_invoice_related_lines(cursor, uid, policy_id,
-                                                controlling_date, lines, context=context)
+        # there is a priority between the lines, depicted by the calls below
+        lines += self._get_account_related_lines(
+                cursor, uid, policy_id, controlling_date, context=context)
+        # warning, side effect method called on lines
+        lines = self._get_partner_related_lines(
+                cursor, uid, policy_id, controlling_date, lines, context=context)
+        lines = self._get_invoice_related_lines(
+                cursor, uid, policy_id, controlling_date, lines, context=context)
         return lines
 
     def _check_lines_policies(self, cursor, uid, policy_id, lines, context=None):
         """ Check if there is credit line related to same move line but
             related to an other policy"""
-        context = context or {}
+        if context is None:
+            context = {}
         if not lines:
             return []
+        assert not (isinstance(policy_id, list) and len(policy_id) > 1), \
+            "policy_id: only one id expected"
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
         cursor.execute("SELECT move_line_id FROM credit_control_line"
@@ -143,7 +175,6 @@ class CreditControlPolicy(Model):
             return []
 
 
-
 class CreditControlPolicyLevel(Model):
     """Define a policy level. A level allows to determine if
     a move line is due and the level of overdue of the line"""
@@ -151,48 +182,48 @@ class CreditControlPolicyLevel(Model):
     _name = "credit.control.policy.level"
     _order = 'level'
     _description = """A credit control policy level"""
-    _columns = {'policy_id': fields.many2one('credit.control.policy',
-                                              'Related Policy', required=True),
-                'name': fields.char('Name', size=128, required=True),
-                'level': fields.float('level', required=True),
+    _columns = {
+        'policy_id': fields.many2one('credit.control.policy',
+                                     'Related Policy', required=True),
+        'name': fields.char('Name', size=128, required=True),
+        'level': fields.float('Level', required=True),
 
-                'computation_mode': fields.selection([('net_days', 'Due date'),
-                                                      ('end_of_month', 'Due Date: end of Month'),
-                                                      ('previous_date', 'Previous reminder')],
-                                                     'Compute mode',
-                                                     required=True),
+        'computation_mode': fields.selection([('net_days', 'Due Date'),
+                                              ('end_of_month', 'Due Date, End Of Month'),
+                                              ('previous_date', 'Previous Reminder')],
+                                             'Compute Mode',
+                                             required=True),
 
-                'delay_days': fields.integer('Delay in day', required='True'),
-                'mail_template_id': fields.many2one('email.template', 'Mail template',
-                                                    required=True),
-                'canal': fields.selection([('manual', 'Manual'),
-                                           ('mail', 'Mail')],
-                                          'Canal', required=True),
-                'custom_text': fields.text('Custom message', required=True, translate=True),
-                }
-
+        'delay_days': fields.integer('Delay (in days)', required='True'),
+        'mail_template_id': fields.many2one('email.template', 'Mail Template',
+                                            required=True),
+        'canal': fields.selection([('manual', 'Manual'),
+                                   ('mail', 'Mail')],
+                                  'Canal', required=True),
+        'custom_text': fields.text('Custom Message', required=True, translate=True),
+    }
 
     def _check_level_mode(self, cursor, uid, rids, context=None):
-        """We check that the smallest level is not based
-            on a level using previous_date mode"""
-        if not isinstance(rids, list):
+        """ The smallest level of a policy cannot be computed on the
+        "previous_date". Return False if this happens.  """
+        if isinstance(rids, (int, long)):
             rids = [rids]
         for level in self.browse(cursor, uid, rids, context):
-            smallest_level_id = self.search(cursor, uid, [('policy_id', '=', level.policy_id.id)],
-                                           order='level asc', limit=1, context=context)
+            smallest_level_id = self.search(
+                cursor, uid,
+                [('policy_id', '=', level.policy_id.id)],
+                order='level asc', limit=1, context=context)
             smallest_level = self.browse(cursor, uid, smallest_level_id[0], context)
             if smallest_level.computation_mode == 'previous_date':
                 return False
         return True
-
-
 
     _sql_constraint = [('unique level',
                         'UNIQUE (policy_id, level)',
                         'Level must be unique per policy')]
 
     _constraints = [(_check_level_mode,
-                     'The smallest level can not be of type Previous reminder',
+                     'The smallest level can not be of type Previous Reminder',
                      ['level'])]
 
     def _previous_level(self, cursor, uid, policy_level, context=None):
@@ -214,7 +245,7 @@ class CreditControlPolicyLevel(Model):
             context=context)
         return previous_level_ids[0] if previous_level_ids else None
 
-    # ----- time related functions ---------
+    # ----- sql time related methods ---------
 
     def _net_days_get_boundary(self):
         return " (mv_line.date_maturity + %(delay)s)::date <= date(%(controlling_date)s)"
@@ -242,9 +273,9 @@ class CreditControlPolicyLevel(Model):
     def _get_first_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
         if not lines:
             return []
-        """Retrieve all the line that are linked to a frist level.
-           We use Raw SQL for perf. Security rule where applied in
-           policy object when line where retrieved"""
+        """Retrieve all the move lines that are linked to a first level.
+           We use Raw SQL for performance. Security rule where applied in
+           policy object when the first set of lines were retrieved"""
         sql = ("SELECT DISTINCT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " WHERE mv_line.id in %(line_ids)s\n"
@@ -261,11 +292,9 @@ class CreditControlPolicyLevel(Model):
             return []
         return [x[0] for x in res]
 
-
     def _get_other_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
-        # We filter line that have a level smaller than current one
-        # TODO if code fits need refactor _get_first_level_lines and _get_other_level_lines
-        # Code is not DRY
+        """ Retrieve the move lines for other levels than first level.
+        """
         if not lines:
             return []
         sql = ("SELECT mv_line.id\n"
