@@ -34,10 +34,10 @@
       <field name="arch" type="xml">
         <search string="Search credit lines Items">
           <group>
-            <filter icon="terp-document-new" string="New"
+            <filter icon="terp-document-new" string="Manual"
                     domain="[('state', '=', 'draft')]"
                     help="New lines"/>
-            <filter icon="terp-dolar_ok!" string="To be sent"
+            <filter icon="terp-dolar_ok!" string="To send"
                     domain="[('state', '=', 'to_be_sent')]"
                     help="New lines"/>
             <filter icon="terp-check" string="Sent"
@@ -50,17 +50,19 @@
             <separator orientation="vertical"/>
 
             <field name="date"/>
-            <field name="level"/>
-            <field name="partner_id"/>
-            <field name="account_id"/>
-            <newline/>
-            <field name="invoice_id"/>
+            <field name="canal" />
             <field name="policy_id"/>
-            <field name="policy_level_id"/>
-            <field name ="canal" />
           </group>
           <newline/>
+          <group expand="0" string="More...">
+            <field name="partner_id"/>
+            <field name="account_id"/>
+            <field name="invoice_id"/>
+            <field name="level"/>
+            <field name="policy_level_id"/>
+          </group>
 
+          <newline/>
           <group expand="0" string="Group By...">
             <separator orientation="vertical"/>
             <filter domain='[]' context="{'group_by': 'date'}"
