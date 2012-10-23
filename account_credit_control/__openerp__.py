@@ -36,6 +36,9 @@ Configure the policies and policy levels in ``Accounting  > Configuration >
 Credit Control > Credit Policies``.
 You can define as many policy levels as you need.
 
+Configure a tolerance for the Credit control in each company, under the
+Accounting tab.
+
 Usage
 -----
 
