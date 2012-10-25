@@ -31,32 +31,12 @@ class AccountAccount(Model):
 
     _inherit = "account.account"
 
-    def _check_account_type_compatibility(self, cursor, uid, acc_ids, context=None):
-        """We check that account is of type reconcile"""
-        if isinstance(acc_ids, (int, long)):
-            acc_ids = [acc_ids]
-        for acc in self.browse(cursor, uid, acc_ids, context):
-            if acc.credit_policy_id and not acc.reconcile:
-                return False
-        return True
-
     _columns = {
-        'credit_policy_id': fields.many2one('credit.control.policy',
-                                            'Credit Control Policy',
-                                             help=("The Credit Control Policy "
-                                                   "used for this account. This "
-                                                   "setting can be forced on the "
-                                                   "partner or the invoice.")),
-
         'credit_control_line_ids': fields.one2many('credit.control.line',
                                                    'account_id',
                                                    string='Credit Lines',
                                                    readonly=True)
     }
-
-    _constraints = [(_check_account_type_compatibility,
-                     _('You can not set a credit control policy on a non reconcilable account'),
-                    ['credit_policy_id'])]
 
 
 class AccountInvoice(Model):

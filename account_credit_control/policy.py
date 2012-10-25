@@ -29,42 +29,23 @@ class CreditControlPolicy(Model):
     _description = """Define a reminder policy"""
     _columns = {'name': fields.char('Name', required=True, size=128),
 
-                'level_ids' : fields.one2many('credit.control.policy.level',
+                'level_ids': fields.one2many('credit.control.policy.level',
                                                      'policy_id',
                                                      'Policy Levels'),
 
-                'do_nothing' : fields.boolean('Do nothing',
+                'do_nothing': fields.boolean('Do nothing',
                                               help=('For policies which should not '
                                                     'generate lines or are obsolete')),
 
-                'company_id' : fields.many2one('res.company', 'Company')
+                'company_id': fields.many2one('res.company', 'Company'),
+
+                'account_ids': fields.many2many(
+                    'account.account',
+                    string='Accounts',
+                    required=True,
+                    domain="[('reconcile', '=', True)]",
+                    help='This policy will be active only for the selected accounts'),
                 }
-
-
-    def _get_account_related_lines(self, cursor, uid, policy_id, controlling_date, context=None):
-        """ Get the move lines for a policy.
-
-        Do not use direct SQL in order to respect security rules.
-
-        Assume that only the receivable lines have a maturity date and that
-        accounts used in the policy are reconcilable.
-        """
-        if context is None:
-            context = {}
-        move_l_obj = self.pool.get('account.move.line')
-        account_obj = self.pool.get('account.account')
-        acc_ids =  account_obj.search(
-            cursor, uid, [('credit_policy_id', '=', policy_id)], context=context)
-        if not acc_ids:
-            return []
-        lines = move_l_obj.search(cursor, uid,
-                                  [('account_id', 'in', acc_ids),
-                                   ('date_maturity', '<=', controlling_date),
-                                   ('reconcile_id', '=', False),
-                                   ('partner_id', '!=', False)],
-                                  context=context)
-
-        return lines
 
     def _get_sum_reduce_range(self, cursor, uid, policy_id, controlling_date, lines,
                               model, move_relation_field, context=None):
@@ -83,6 +64,12 @@ class CreditControlPolicy(Model):
         # MARK possible place for a good optimisation
         if context is None:
             context = {}
+
+        policy = self.browse(cursor, uid, policy_id, context=context)
+        if not policy.account_ids:
+            return []
+        account_ids = [a.id for a in policy.account_ids]
+
         my_obj = self.pool.get(model)
         move_l_obj = self.pool.get('account.move.line')
         add_lines = []
@@ -95,7 +82,8 @@ class CreditControlPolicy(Model):
                 [(move_relation_field, 'in', add_obj_ids),
                  ('date_maturity', '<=', controlling_date),
                  ('partner_id', '!=', False),
-                 ('reconcile_id', '=', False)],
+                 ('reconcile_id', '=', False),
+                 ('account_id', 'in', account_ids)],
                 context=context)
             lines = list(set(lines + add_lines))
 
@@ -113,7 +101,8 @@ class CreditControlPolicy(Model):
                     [(move_relation_field, 'in', neg_obj_ids),
                      ('date_maturity', '<=', controlling_date),
                      ('partner_id', '!=', False),
-                     ('reconcile_id', '=', False)],
+                     ('reconcile_id', '=', False),
+                     ('account_id', 'in', account_ids)],
                     context=context)
             if neg_lines:
                 lines = list(set(lines) - set(neg_lines))
@@ -145,8 +134,6 @@ class CreditControlPolicy(Model):
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
         # there is a priority between the lines, depicted by the calls below
-        lines += self._get_account_related_lines(
-                cursor, uid, policy_id, controlling_date, context=context)
         # warning, side effect method called on lines
         lines = self._get_partner_related_lines(
                 cursor, uid, policy_id, controlling_date, lines, context=context)

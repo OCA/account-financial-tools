@@ -1,18 +1,6 @@
 <openerp>
   <data>
 
-    <record id="account_followup_form_view" model="ir.ui.view">
-      <field name="name">account.followup.form.view</field>
-      <field name="model">account.account</field>
-      <field name="inherit_id" ref="account.view_account_form" />
-      <field name="type">form</field>
-      <field name="arch" type="xml">
-        <field name="reconcile" position="after">
-            <field name="credit_policy_id"   groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
-        </field>
-      </field>
-    </record>
-
     <act_window
         id="act_account_credit_relation_relation"
         name="Credit Lines"

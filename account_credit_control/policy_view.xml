@@ -10,9 +10,9 @@
           <field name="name"/>
           <field name="do_nothing"/>
           <field name="company_id"/>
-          <notebook  colspan="4">
+          <notebook colspan="4">
             <page string="Policy Levels">
-              <field name="level_ids" colspan="4" >
+              <field name="level_ids" nolabel="1" colspan="4" >
                 <tree  editable="bottom">
                   <field name="name"/>
                   <field name="level"/>
@@ -38,6 +38,9 @@
                 </form>
               </field>
             </page>
+            <page string="Accounts">
+              <field name="account_ids" nolabel="1"/>
+            </page>
           </notebook>
         </form>
       </field>
@@ -61,7 +64,7 @@
         id="base_credit_control_configuration_menu"/>
 
     <record model="ir.actions.act_window" id="credit_policy_configuration_action">
-      <field name="name">Credit Policies</field>
+      <field name="name">Credit Control Policies</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">credit.control.policy</field>
       <field name="domain"></field>
@@ -71,7 +74,7 @@
     </record>
 
     <menuitem
-        name="Credit Policies"
+        name="Credit Control Policies"
         parent="base_credit_control_configuration_menu"
         action="credit_policy_configuration_action"
         id="credit_policy_configuration_action_menu"/>

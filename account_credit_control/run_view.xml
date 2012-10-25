@@ -18,7 +18,7 @@
       <field name="model">credit.control.run</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form> <!-- editable="bottom" -->
+        <form>
           <field name="date"/>
           <newline/>
           <notebook colspan="4">
@@ -28,15 +28,15 @@
             <page string="Report and Errors">
               <field name="report" colspan="4" nolabel="1"/>
               <separator string="Move lines To be treated manually"/>
-             <field name="manual_ids" colspan="4" nolabel="1"/>
+              <field name="manual_ids" colspan="4" nolabel="1"/>
             </page>
           </notebook>
           <group col="3" colspan="4">
             <button name="generate_credit_lines"
-                    string="Compute Credit Control Lines"
-                    colspan="1"
-                    type="object" icon="gtk-execute"
-                    attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+              string="Compute Credit Control Lines"
+              colspan="1"
+              type="object" icon="gtk-execute"
+              attrs="{'invisible': [('state', '!=', 'draft')]}"/>
           </group>
           <field name="state"/>
         </form>
