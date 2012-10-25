@@ -6,7 +6,7 @@
       <field name="inherit_id" ref="base.view_partner_form" />
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <field name="last_reconciliation_date" position="after">
+        <field name="credit_limit" position="after">
           <field name="credit_policy_id"
             groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_use"/>
         </field>
