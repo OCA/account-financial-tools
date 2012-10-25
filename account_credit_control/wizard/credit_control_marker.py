@@ -27,7 +27,7 @@ class CreditControlMarker(TransientModel):
 
     _name = "credit.control.marker"
     _description = """Mass marker"""
-    _columns = {'name': fields.selection([('to_be_sent', 'To send'),
+    _columns = {'name': fields.selection([('to_be_sent', 'Ready To Send'),
                                           ('sent', 'Done')],
                                           'Mark as', required=True),
 

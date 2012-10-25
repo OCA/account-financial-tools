@@ -30,7 +30,7 @@ class CreditControlMailer(TransientModel):
     _description = """Mass credit line mailer"""
     _rec_name = 'id'
 
-    _columns = {'mail_all': fields.boolean('Send an email for all "To Send" lines.')}
+    _columns = {'mail_all': fields.boolean('Send an email for all "Ready To Send" lines.')}
 
 
     def _get_lids(self, cursor, uid, mail_all, active_ids, context=None):
@@ -61,7 +61,7 @@ class CreditControlMailer(TransientModel):
         if not lines_ids and not current.mail_all:
             raise except_osv(_('Error'),
                              _('No lines are selected. You may want to activate '
-                               '"Send an email for all "To Send" lines."'))
+                               '"Send an email for all "Ready To Send" lines."'))
 
         filtered_ids = self._get_lids(cursor, uid, current.mail_all, lines_ids, context)
         comms = comm_obj._generate_comm_from_credit_line_ids(cursor, uid, filtered_ids,

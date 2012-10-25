@@ -37,7 +37,7 @@
             <filter icon="terp-document-new" string="Manual"
                     domain="[('state', '=', 'draft')]"
                     help="New lines"/>
-            <filter icon="terp-dolar_ok!" string="To send"
+            <filter icon="terp-dolar_ok!" string="Ready To Send"
                     domain="[('state', '=', 'to_be_sent')]"
                     help="New lines"/>
             <filter icon="terp-check" string="Sent"

@@ -52,7 +52,7 @@ class CreditControlLine(Model):
                                  states={'draft': [('readonly', False)]}),
 
         'state': fields.selection([('draft', 'Draft'),
-                                   ('to_be_sent', 'To send'),
+                                   ('to_be_sent', 'Ready To Send'),
                                    ('sent', 'Done'),
                                    ('error', 'Error'),
                                    ('mail_error', 'Mailing Error')],

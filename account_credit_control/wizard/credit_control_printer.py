@@ -32,7 +32,7 @@ class CreditControlPrinter(TransientModel):
     _description = """Mass printer"""
     _columns = {'mark_as_sent': fields.boolean('Mark lines as sent',
                                                help="Only manual lines will be marked."),
-                'print_all': fields.boolean('Print all "To send" lines'),
+                'print_all': fields.boolean('Print all "Ready To Send" lines'),
                 'report_file': fields.binary('Generated Report', readonly=True),
                 'state': fields.char('state', size=32)}
 
@@ -67,7 +67,7 @@ class CreditControlPrinter(TransientModel):
         if not lines_ids and not current.print_all:
             raise except_osv(_('Error'),
                              _('No lines are selected. You may want to activate'
-                               ' "Print all "To send" lines."'))
+                               ' "Print all "Ready To Send" lines."'))
         if current.print_all:
             filtered_ids = self._get_lids(cursor, uid, current.print_all, lines_ids, context)
         else:
