@@ -155,7 +155,8 @@ class CreditControlRun(Model):
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.
         """
-        context = context or {}
+        if context is None:
+            context = {}
         try:
             cursor.execute('SELECT id FROM credit_control_run'
                            ' LIMIT 1 FOR UPDATE NOWAIT' )

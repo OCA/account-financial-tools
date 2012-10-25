@@ -170,7 +170,7 @@ class CreditControlLine(Model):
             context=context)
 
         errors = []
-        db, __ = pooler.get_db_and_pool(cursor.dbname)
+        db = pooler.get_db(cursor.dbname)
         local_cr = db.cursor()
         try:
             for line in ml_obj.browse(cursor, uid, lines, context):

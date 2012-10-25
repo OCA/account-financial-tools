@@ -55,7 +55,8 @@ On each generated line, you have many choices:
  * Change the state (so you can ignore or reopen lines)
  """,
  'website': 'http://www.camptocamp.com',
- 'init_xml': ["data.xml"],
+ 'init_xml': ["data.xml",
+             ],
  'update_xml': ["line_view.xml",
                 "account_view.xml",
                 "partner_view.xml",
