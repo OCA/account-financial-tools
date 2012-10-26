@@ -18,7 +18,7 @@
         <notebook position="inside">
         <page string="Credit control"
                  groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,group_account_credit_control_info">
-            <field name="credit_policy_id"/>
+            <field name="credit_policy_id" widget="selection"/>
             <field name="credit_control_line_ids" colspan="4" nolabel="1"/>
           </page>
         </notebook>
