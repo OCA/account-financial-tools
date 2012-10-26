@@ -22,6 +22,7 @@ import logging
 import pooler
 
 from openerp.osv.orm import Model, fields
+from openerp.osv import osv
 
 logger = logging.getLogger('credit.line.control')
 
@@ -170,36 +171,26 @@ class CreditControlLine(Model):
             context=context)
 
         errors = []
-        db = pooler.get_db(cursor.dbname)
-        local_cr = db.cursor()
-        try:
-            for line in ml_obj.browse(cursor, uid, lines, context):
-                # we want to create as many line as possible
-                try:
-                    if line.id in existings:
-                        # does nothing just a hook
-                        debit_line_ids += self._update_from_mv_line(
-                            local_cr, uid, ids, line, level,
-                            controlling_date, context=context)
-                    else:
-                        # as we use memoizer pattern this has almost no cost to get it
-                        # multiple time
-                        open_amount = acc_line_obj._amount_residual_from_date(
-                            cursor, uid, line, controlling_date, context=context)
+        for line in ml_obj.browse(cursor, uid, lines, context):
+            # we want to create as many line as possible
+            try:
+                if line.id in existings:
+                    # does nothing just a hook
+                    debit_line_ids += self._update_from_mv_line(
+                        cursor, uid, ids, line, level,
+                        controlling_date, context=context)
+                else:
+                    # as we use memoizer pattern this has almost no cost to get it
+                    # multiple time
+                    open_amount = acc_line_obj._amount_residual_from_date(
+                        cursor, uid, line, controlling_date, context=context)
 
-                        if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
-                            vals = self._prepare_from_move_line(
-                                local_cr, uid, line, level, controlling_date, context=context)
-                            debit_line_ids.append(self.create(local_cr, uid, vals, context=context))
-                # FIXME: which exception can happens here ? reduce the exception scope
-                except Exception, exc:
-                    logger.exception(exc)
-                    if errors:
-                        errors.append(unicode(exc))
-                    local_cr.rollback()
-                finally:
-                    local_cr.commit()
-        finally:
-            local_cr.close()
+                    if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
+                        vals = self._prepare_from_move_line(
+                            cursor, uid, line, level, controlling_date, context=context)
+                        debit_line_ids.append(self.create(cursor, uid, vals, context=context))
+            except osv.except_osv, exc:
+                logger.exception(exc)
+                errors.append(exc.value)
         return debit_line_ids, errors
 
