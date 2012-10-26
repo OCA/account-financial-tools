@@ -168,5 +168,9 @@
         <field name="category_id" ref="base.module_category_accounting_and_finance"/>
     </record>
 
+    <record id="base.main_company" model="res.company">
+        <field name="credit_policy_id" ref="credit_control_3_time"/>
+    </record>
+
   </data>
 </openerp>

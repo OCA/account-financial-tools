@@ -47,98 +47,142 @@ class CreditControlPolicy(Model):
                     help='This policy will be active only for the selected accounts'),
                 }
 
-    def _get_sum_reduce_range(self, cursor, uid, policy_id, controlling_date, lines,
-                              model, move_relation_field, context=None):
+    def _move_lines_domain(self, cursor, uid, policy, controlling_date, context=None):
+        """Build the default domain for searching move lines"""
+        account_ids = [a.id for a in policy.account_ids]
+        return [('account_id', 'in', account_ids),
+                ('date_maturity', '<=', controlling_date),
+                ('reconcile_id', '=', False),
+                ('partner_id', '!=', False)]
+
+    def _due_move_lines(self, cursor, uid, policy, controlling_date, context=None):
+        """ Get the due move lines for the policy of the company.
+
+        The set of ids will be reduced and extended according to the specific policies
+        defined on partners and invoices.
+
+        Do not use direct SQL in order to respect security rules.
+
+        Assume that only the receivable lines have a maturity date and that
+        accounts used in the policy are reconcilable.
+        """
+        move_l_obj = self.pool.get('account.move.line')
+        user = self.pool.get('res.users').browse(cursor, uid, uid, context=context)
+        if user.company_id.credit_policy_id.id != policy.id:
+            return set()
+
+        res = set(move_l_obj.search(
+                cursor, uid,
+                self._move_lines_domain(cursor, uid, policy, controlling_date, context=context),
+                context=context))
+        return res
+
+    def _move_lines_subset(self, cursor, uid, policy, controlling_date,
+                          model, move_relation_field, context=None):
         """ Get the move lines related to one model for a policy.
 
-            Do not use direct SQL in order to respect security rules.
+        Do not use direct SQL in order to respect security rules.
 
-            Assume that only the receivable lines have a maturity date and that
-            accounts used in the policy are reconcilable.
+        Assume that only the receivable lines have a maturity date and that
+        accounts used in the policy are reconcilable.
 
-            The policy relation field MUST be named credit_policy_id
+        The policy relation field must be named credit_policy_id.
 
-            Warning: side effect on ``lines``
-
-            """
+        :param browse_record policy: policy
+        :param str controlling_date: date of credit control
+        :param str model: name of the model where is defined a credit_policy_id
+        :param str move_relation_field: name of the field in account.move.line
+            which is a many2one to `model`
+        :return: set of ids to add in the process, set of ids to remove from
+            the process
+        """
         # MARK possible place for a good optimisation
-        if context is None:
-            context = {}
-
-        policy = self.browse(cursor, uid, policy_id, context=context)
-        if not policy.account_ids:
-            return []
-        account_ids = [a.id for a in policy.account_ids]
-
         my_obj = self.pool.get(model)
         move_l_obj = self.pool.get('account.move.line')
-        add_lines = []
-        neg_lines = []
-        add_obj_ids = my_obj.search(
-            cursor, uid, [('credit_policy_id', '=', policy_id)], context=context)
-        if add_obj_ids:
-            add_lines = move_l_obj.search(
-                cursor, uid,
-                [(move_relation_field, 'in', add_obj_ids),
-                 ('date_maturity', '<=', controlling_date),
-                 ('partner_id', '!=', False),
-                 ('reconcile_id', '=', False),
-                 ('account_id', 'in', account_ids)],
-                context=context)
-            lines = list(set(lines + add_lines))
 
-        # we get all the lines that must be excluded at partner_level
-        # from the global set (even the one included at account level)
+        default_domain = self._move_lines_domain(cursor, uid, policy, controlling_date, context=context)
+        to_add_ids = set()
+        to_remove_ids = set()
+
+        # The lines which are linked to this policy have to be included in the
+        # run for this policy.
+        # If another object override the credit_policy_id (ie. invoice after
+        add_obj_ids = my_obj.search(
+            cursor, uid,
+            [('credit_policy_id', '=', policy.id)],
+            context=context)
+        if add_obj_ids:
+            domain = list(default_domain)
+            domain.append((move_relation_field, 'in', add_obj_ids))
+            to_add_ids = set(move_l_obj.search(cursor, uid, domain, context=context))
+
+        # The lines which are linked to another policy do not have to be
+        # included in the run for this policy.
         neg_obj_ids = my_obj.search(
             cursor, uid,
-            [('credit_policy_id', '!=', policy_id),
+            [('credit_policy_id', '!=', policy.id),
              ('credit_policy_id', '!=', False)],
             context=context)
         if neg_obj_ids:
-            # should we add ('id', 'in', lines) in domain ? it may give a veeery long SQL...
-            neg_lines = move_l_obj.search(
-                    cursor, uid,
-                    [(move_relation_field, 'in', neg_obj_ids),
-                     ('date_maturity', '<=', controlling_date),
-                     ('partner_id', '!=', False),
-                     ('reconcile_id', '=', False),
-                     ('account_id', 'in', account_ids)],
-                    context=context)
-            if neg_lines:
-                lines = list(set(lines) - set(neg_lines))
-        return lines
+            domain = list(default_domain)
+            domain.append((move_relation_field, 'in', neg_obj_ids))
+            to_remove_ids = set(move_l_obj.search(cursor, uid, domain, context=context))
+        return to_add_ids, to_remove_ids
 
-    def _get_partner_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
+    def _get_partner_related_lines(self, cursor, uid, policy, controlling_date, context=None):
         """ Get the move lines for a policy related to a partner.
-            Warning: side effect on ``lines``
-        """
-        return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
-                                          'res.partner', 'partner_id', context=context)
 
-    def _get_invoice_related_lines(self, cursor, uid, policy_id, controlling_date, lines, context=None):
-        """ Get the move lines for a policy related to an invoice.
-            Warning: side effect on ``lines``
+        :param browse_record policy: policy
+        :param str controlling_date: date of credit control
+        :param str model: name of the model where is defined a credit_policy_id
+        :param str move_relation_field: name of the field in account.move.line
+            which is a many2one to `model`
+        :return: set of ids to add in the process, set of ids to remove from
+            the process
         """
-        return self._get_sum_reduce_range(cursor, uid, policy_id, controlling_date, lines,
-                                          'account.invoice', 'invoice', context=context)
+        return self._move_lines_subset(
+                cursor, uid, policy, controlling_date,
+                'res.partner', 'partner_id', context=context)
+
+    def _get_invoice_related_lines(self, cursor, uid, policy, controlling_date, context=None):
+        """ Get the move lines for a policy related to an invoice.
+
+        :param browse_record policy: policy
+        :param str controlling_date: date of credit control
+        :param str model: name of the model where is defined a credit_policy_id
+        :param str move_relation_field: name of the field in account.move.line
+            which is a many2one to `model`
+        :return: set of ids to add in the process, set of ids to remove from
+            the process
+
+        """
+        return self._move_lines_subset(
+                cursor, uid, policy, controlling_date,
+                'account.invoice', 'invoice', context=context)
 
     def _get_moves_line_to_process(self, cursor, uid, policy_id, controlling_date, context=None):
-        """Retrive all the move line to be procces for current policy.
-           This function is planned to be use only on one id.
-           Priority of inclustion, exlusion is account, partner, invoice"""
-        if context is None:
-            context = {}
-        lines = []
+        """Build a list of move lines ids to include in a run for a policy at a given date.
+
+        :param int/long policy: id of the policy
+        :param str controlling_date: date of credit control
+        :return: list of ids to include in the run
+       """
         assert not (isinstance(policy_id, list) and len(policy_id) > 1), \
             "policy_id: only one id expected"
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
+
+        policy = self.browse(cursor, uid, policy_id, context=context)
         # there is a priority between the lines, depicted by the calls below
         # warning, side effect method called on lines
-        lines = self._get_partner_related_lines(
-                cursor, uid, policy_id, controlling_date, lines, context=context)
-        lines = self._get_invoice_related_lines(
-                cursor, uid, policy_id, controlling_date, lines, context=context)
+        lines = self._due_move_lines(
+                    cursor, uid, policy, controlling_date, context=context)
+        add_ids, remove_ids = self._get_partner_related_lines(
+                    cursor, uid, policy, controlling_date, context=context)
+        lines = lines.union(add_ids).difference(remove_ids)
+        add_ids, remove_ids = self._get_invoice_related_lines(
+                    cursor, uid, policy, controlling_date, context=context)
+        lines = lines.union(add_ids).difference(remove_ids)
         return lines
 
     def _check_lines_policies(self, cursor, uid, policy_id, lines, context=None):

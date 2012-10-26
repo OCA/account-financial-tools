@@ -22,9 +22,19 @@ from openerp.osv.orm import Model, fields
 
 
 class ResCompany(Model):
-    _inherit = "res.company"
 
-    _columns = {"credit_control_tolerance": fields.float('Credit Control Tolerance')}
+    _inherit = 'res.company'
+
+    _columns = {
+        'credit_control_tolerance': fields.float('Credit Control Tolerance'),
+        # This is not a property on the partner because we cannot search
+        # on fields.property (subclass fields.function).
+        'credit_policy_id': fields.many2one(
+            'credit.control.policy',
+            'Credit Control Policy',
+             help=("The Credit Control Policy used on partners by default. This "
+                   "setting can be overriden on partners or invoices.")),
+    }
 
     _defaults = {"credit_control_tolerance": 0.1}
 

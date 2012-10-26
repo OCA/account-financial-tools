@@ -7,6 +7,7 @@
       <field name="inherit_id" ref="base.view_company_form"/>
       <field name="arch" type="xml">
         <field name="currency_id" position="after">
+            <field name="credit_policy_id"/>
             <field name="credit_control_tolerance"/>
         </field>
       </field>
