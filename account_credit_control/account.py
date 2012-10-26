@@ -22,6 +22,7 @@ import operator
 from datetime import datetime
 
 from openerp.osv.orm import Model, fields
+from openerp.osv import osv
 from openerp.tools.translate import _
 from openerp.addons.account_credit_control import run
 
@@ -102,36 +103,31 @@ class AccountMoveLine(Model):
         return (debit_lines, payment_lines)
 
     def _validate_line_currencies(self, move_lines):
-        """Raise an exception if there is lines with different currency"""
-        if len(move_lines) == 0:
-            return True
-        currency_id = move_lines[0].currency_id.id
-        if not all(obj.currency_id.id == currency_id for obj in move_lines):
-            # FIXME: Exception is too large
-            raise Exception('Not all line of move line are in the same currency')
+        """Check if all the move lines have the same currency"""
+        valid = True
+        if move_lines:
+            currency_id = move_lines[0].currency_id.id
+            valid = all(obj.currency_id.id == currency_id for obj in move_lines)
+        return valid
 
-    def _get_value_amount(self, move_lines):
+    def _get_value_amount(self, move_line):
         """ For a move line, returns the balance
         Use the amount currency if there is a currency on the move line.
+
+        :param browse_record move_line: move line
+        :return: amount balance as float
         """
-        if move_lines.currency_id:
-            return move_lines.amount_currency
+        if move_line.currency_id:
+            return move_line.amount_currency
         else:
-            return move_lines.debit - move_lines.credit
+            return move_line.debit - move_line.credit
 
     def _validate_partial(self, move_lines):
-        """ Check if all the credit lines are partially reconciled """
-        if len(move_lines) == 0:
-            return True
-        else:
-            line_with_partial = 0
-            for line in move_lines:
-                if not line.reconcile_partial_id:
-                    line_with_partial += 1
-            if line_with_partial and line_with_partial != len(move_lines):
-                # FIXME: Exception is too large
-                raise Exception('Can not compute credit line if multiple'
-                                ' lines are not all linked to a partial')
+        """ Check if all the move lines are partially reconciled """
+        valid = True
+        if move_lines:
+            valid = all(line.reconcile_partial_id for line in move_lines)
+        return valid
 
     def _get_applicable_payment_lines(self, debit_line, payment_lines):
         """ 
@@ -150,19 +146,42 @@ class AccountMoveLine(Model):
         :return: dict with each move line id and its residual
         """
         debit_lines, payment_lines = self._get_payment_and_debit_lines(move_lines)
-        self._validate_line_currencies(debit_lines)
-        self._validate_line_currencies(payment_lines)
-        self._validate_partial(debit_lines)
+
+        if not self._validate_line_currencies(debit_lines):
+            raise osv.except_osv(
+                _('Error'),
+                _('Journal items: %s do not have the same currency.' %
+                    ', '.join([ml.name for ml in debit_lines])))
+        if not self._validate_line_currencies(payment_lines):
+            raise osv.except_osv(
+                _('Error'),
+                _('Journal items: %s do not have the same currency.' %
+                    ', '.join([ml.name for ml in payment_lines])))
+        if not self._validate_partial(debit_lines):
+            # what is the use case ?
+            # TODO: explain to the user how to resolve
+            raise osv.except_osv(
+                _('Error'),
+                _('Can not generate the credit control lines if only a part'
+                  ' of the move lines are partially reconciled.\n'
+                  'Check the journal items: %s' %
+                  ', '.join([ml.code for ml in payment_lines])))
 
         # payment lines and credit lines are sorted by date
         rest = 0.0
         residuals = {}
         for debit_line in debit_lines:
             applicable_payment = self._get_applicable_payment_lines(debit_line, payment_lines)
-            paid_amount = 0.0
-            for pay_line in applicable_payment:
-                paid_amount += self._get_value_amount(pay_line)
-            balance_amount = self._get_value_amount(debit_lines) - (paid_amount + rest)
+
+            paid_amount = reduce(
+                    lambda memo, line: memo + self._get_value_amount(line),
+                    applicable_payment, 0.0)
+
+            debit_amount = reduce(
+                    lambda memo, line: memo + self._get_value_amount(line),
+                    debit_lines, 0.0)
+
+            balance_amount = debit_amount - paid_amount + rest
             residuals[debit_line.id] = balance_amount
             if balance_amount < 0.0:
                 rest = balance_amount
@@ -185,7 +204,7 @@ class AccountMoveLine(Model):
 
         Warning: this method uses a global memoizer in run.memoizers.
         Race conditions are actually avoided with a lock in
-        ``run.CreditControlRun.generate_credit_lines``
+        `run.CreditControlRun.generate_credit_lines`
         So, please use this method with caution, do always use a lock.
 
         :param browse_record move_line: browse records of move line

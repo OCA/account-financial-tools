@@ -71,11 +71,10 @@ class CreditControlPolicy(Model):
         if user.company_id.credit_policy_id.id != policy.id:
             return set()
 
-        res = set(move_l_obj.search(
+        return set(move_l_obj.search(
                 cursor, uid,
                 self._move_lines_domain(cursor, uid, policy, controlling_date, context=context),
                 context=context))
-        return res
 
     def _move_lines_subset(self, cursor, uid, policy, controlling_date,
                           model, move_relation_field, context=None):
@@ -154,18 +153,17 @@ class CreditControlPolicy(Model):
             which is a many2one to `model`
         :return: set of ids to add in the process, set of ids to remove from
             the process
-
         """
         return self._move_lines_subset(
                 cursor, uid, policy, controlling_date,
                 'account.invoice', 'invoice', context=context)
 
-    def _get_moves_line_to_process(self, cursor, uid, policy_id, controlling_date, context=None):
+    def _get_move_lines_to_process(self, cursor, uid, policy_id, controlling_date, context=None):
         """Build a list of move lines ids to include in a run for a policy at a given date.
 
         :param int/long policy: id of the policy
         :param str controlling_date: date of credit control
-        :return: list of ids to include in the run
+        :return: set of ids to include in the run
        """
         assert not (isinstance(policy_id, list) and len(policy_id) > 1), \
             "policy_id: only one id expected"
@@ -185,13 +183,13 @@ class CreditControlPolicy(Model):
         lines = lines.union(add_ids).difference(remove_ids)
         return lines
 
-    def _check_lines_policies(self, cursor, uid, policy_id, lines, context=None):
-        """ Check if there is credit line related to same move line but
-            related to an other policy"""
-        if context is None:
-            context = {}
+    def _lines_different_policy(self, cursor, uid, policy_id, lines, context=None):
+        """ Return a set of move lines ids for which there is an existing credit line
+            but with a different policy.
+        """
+        different_lines = set()
         if not lines:
-            return []
+            return different_lines
         assert not (isinstance(policy_id, list) and len(policy_id) > 1), \
             "policy_id: only one id expected"
         if isinstance(policy_id, list):
@@ -201,9 +199,8 @@ class CreditControlPolicy(Model):
                        (policy_id, tuple(lines)))
         res = cursor.fetchall()
         if res:
-            return [x[0] for x in res]
-        else:
-            return []
+            different_lines.update([x[0] for x in res])
+        return different_lines
 
 
 class CreditControlPolicyLevel(Model):
@@ -302,11 +299,12 @@ class CreditControlPolicyLevel(Model):
     # -----------------------------------------
 
     def _get_first_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
-        if not lines:
-            return []
         """Retrieve all the move lines that are linked to a first level.
            We use Raw SQL for performance. Security rule where applied in
            policy object when the first set of lines were retrieved"""
+        level_lines = set()
+        if not lines:
+            return level_lines
         sql = ("SELECT DISTINCT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " WHERE mv_line.id in %(line_ids)s\n"
@@ -319,15 +317,16 @@ class CreditControlPolicyLevel(Model):
 
         cursor.execute(sql, data_dict)
         res = cursor.fetchall()
-        if not res:
-            return []
-        return [x[0] for x in res]
+        if res:
+            level_lines.update([x[0] for x in res])
+        return level_lines
 
     def _get_other_level_lines(self, cursor, uid, level, controlling_date, lines, context=None):
         """ Retrieve the move lines for other levels than first level.
         """
+        level_lines = set()
         if not lines:
-            return []
+            return level_lines
         sql = ("SELECT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " JOIN  credit_control_line cr_line\n"
@@ -348,23 +347,23 @@ class CreditControlPolicyLevel(Model):
 
         cursor.execute(sql, data_dict)
         res = cursor.fetchall()
-        if not res:
-            return []
-        return [x[0] for x in res]
+        if res:
+            level_lines.update([x[0] for x in res])
+        return level_lines
 
     def get_level_lines(self, cursor, uid, level_id, controlling_date, lines, context=None):
         """get all move lines in entry lines that match the current level"""
         assert not (isinstance(level_id, list) and len(level_id) > 1), "level_id: only one id expected"
         if isinstance(level_id, list):
             level_id = level_id[0]
-        matching_lines = []
+        matching_lines = set()
         level = self.browse(cursor, uid, level_id, context=context)
         if self._previous_level(cursor, uid, level, context=context) is None:
-            matching_lines += self._get_first_level_lines(
-                cursor, uid, level, controlling_date, lines, context=context)
+            matching_lines.update(self._get_first_level_lines(
+                cursor, uid, level, controlling_date, lines, context=context))
         else:
-            matching_lines += self._get_other_level_lines(
-                cursor, uid, level, controlling_date, lines, context=context)
+            matching_lines.update(self._get_other_level_lines(
+                cursor, uid, level, controlling_date, lines, context=context))
 
         return matching_lines
 

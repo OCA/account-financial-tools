@@ -94,7 +94,7 @@ class CreditControlRun(Model):
 
         run = self.browse(cursor, uid, run_id, context=context)
         errors = []
-        manually_managed_lines = []  # line who changed policy
+        manually_managed_lines = set()  # line who changed policy
         credit_line_ids = []  # generated lines
         run._check_run_date(run.date, context=context)
 
@@ -104,42 +104,25 @@ class CreditControlRun(Model):
                 _('Error'),
                 _('Please select a policy'))
 
-        lines = []
         for policy in policy_ids:
             if policy.do_nothing:
                 continue
-            try:
-                lines = policy._get_moves_line_to_process(run.date, context=context)
-                tmp_manual = policy._check_lines_policies(lines, context=context)
-                # FIXME why do not use only sets instead of converting them each
-                # time ?
-                lines = list(set(lines) - set(tmp_manual))
-                manually_managed_lines += tmp_manual
-                if not lines:
-                    continue
-                # policy levels are sorted by level so iteration is in the correct order
-                for level in policy.level_ids:
-                    level_lines = level.get_level_lines(run.date, lines, context=context)
-                    # only this write action own a separate cursor
-                    loc_ids, loc_errors = cr_line_obj.create_or_update_from_mv_lines(
-                        cursor, uid, [], level_lines, level.id, run.date, context=context)
-                    credit_line_ids += loc_ids
-                    errors += loc_errors
+            lines = policy._get_move_lines_to_process(run.date, context=context)
+            manual_lines = policy._lines_different_policy(lines, context=context)
+            lines.difference_update(manual_lines)
+            manually_managed_lines.update(manual_lines)
+            if not lines:
+                continue
+            # policy levels are sorted by level so iteration is in the correct order
+            for level in policy.level_ids:
+                level_lines = level.get_level_lines(run.date, lines, context=context)
+                # only this write action own a separate cursor
+                loc_ids, loc_errors = cr_line_obj.create_or_update_from_mv_lines(
+                    cursor, uid, [], list(level_lines), level.id, run.date, context=context)
+                credit_line_ids += loc_ids
+                errors += loc_errors
 
-                lines = list(set(lines) - set(level_lines))
-            except except_osv, exc:
-                # TODO: check if rollback on cursor is safe ?
-                cursor.rollback()
-                error_type, error_value, trbk = sys.exc_info()
-                st = "Error: %s\nDescription: %s\nTraceback:" % (error_type.__name__, error_value)
-                st += ''.join(traceback.format_tb(trbk, 30))
-                logger.error(st)
-                self.write(cursor, uid,
-                           [run.id],
-                           {'report':st,
-                            'state': 'error'},
-                           context=context)
-                return False
+            lines.difference_update(level_lines)
             vals = {'report': u"Number of generated lines : %s \n" % (len(credit_line_ids),),
                     'manual_ids': [(6, 0, manually_managed_lines)]}
 
