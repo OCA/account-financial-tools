@@ -111,6 +111,8 @@ class CreditControlRun(Model):
             try:
                 lines = policy._get_moves_line_to_process(run.date, context=context)
                 tmp_manual = policy._check_lines_policies(lines, context=context)
+                # FIXME why do not use only sets instead of converting them each
+                # time ?
                 lines = list(set(lines) - set(tmp_manual))
                 manually_managed_lines += tmp_manual
                 if not lines:
@@ -139,13 +141,14 @@ class CreditControlRun(Model):
                            context=context)
                 return False
             vals = {'report': u"Number of generated lines : %s \n" % (len(credit_line_ids),),
-                    'state': 'done',
                     'manual_ids': [(6, 0, manually_managed_lines)]}
+
             if errors:
                 vals['report'] += u"Following line generation errors appends:"
                 vals['report'] += u"----\n".join(errors)
-                vals['state'] = 'done'
+
             run.write(vals, context=context)
+        run.write({'state': 'done'}, context=context)
         # lines will correspond to line that where not treated
         return lines
 

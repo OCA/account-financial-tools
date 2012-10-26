@@ -15,7 +15,7 @@
 
     <act_window
       id="act_partner_credit_relation_relation"
-      name="Credit lines"
+      name="Credit Lines"
       groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
       domain="[('partner_id', '=',  active_id)]"
       res_model="credit.control.line"
