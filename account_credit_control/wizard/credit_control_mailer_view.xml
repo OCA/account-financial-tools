@@ -6,21 +6,23 @@
       <field name="model">credit.control.mailer</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form> <!-- editable="bottom" -->
-          <separator string="Mail selected lines. Sucessfuly mailed lines will be in state done. Related email will be linked to the line" colspan="4"/>
+        <form>
+          <separator string="Send e-mails for the selected lines" colspan="4"/>
           <newline/>
           <field name="mail_all" colspan="4"/>
+          <field name="line_ids" colspan="4" nolabel="1"
+            attrs="{'invisible': [('mail_all', '=', True)]}" />
           <newline/>
           <group colspan="4">
             <button special="cancel" string="Cancel" icon='gtk-cancel'/>
-            <button name="mail_lines" string="Mail lines" type="object" icon="gtk-execute"/>
+            <button name="mail_lines" string="Send the e-mails" type="object" icon="gtk-execute"/>
           </group>
         </form>
       </field>
     </record>
 
     <!-- for menu -->
-    <act_window name="Mail lines"
+    <act_window name="Send By E-mail"
         res_model="credit.control.mailer"
         src_model="credit.control.line"
         view_mode="form"
@@ -30,13 +32,13 @@
 
     <!-- for button -->
     <record id="open_credit_line_mailer_wizard" model="ir.actions.act_window">
-      <field name="name">Mail lines</field>
+      <field name="name">Send By E-mail</field>
       <field name="res_model">credit.control.mailer</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
       <field name="view_id" ref="credit_line_mailer_form"/>
       <field name="target">new</field>
-      <field name="help">Mail all marked lines</field>
+      <field name="help">Send an email for the selected lines.</field>
     </record>
 
 

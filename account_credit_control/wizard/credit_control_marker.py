@@ -22,20 +22,44 @@ from openerp.osv.orm import  TransientModel, fields
 from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
+
 class CreditControlMarker(TransientModel):
     """Change the state of lines in mass"""
 
-    _name = "credit.control.marker"
-    _description = """Mass marker"""
-    _columns = {'name': fields.selection([('to_be_sent', 'Ready To Send'),
-                                          ('sent', 'Done')],
-                                          'Mark as', required=True),
+    _name = 'credit.control.marker'
+    _description = 'Mass marker'
 
-                'mark_all': fields.boolean('Change status of all draft lines')}
+    def _get_line_ids(self, cursor, uid, context=None):
+        if context is None:
+            context = {}
+        res = False
+        if (context.get('active_model') == 'credit.control.line' and
+                context.get('active_ids')):
+            res = self._filter_line_ids(
+                    cursor, uid,
+                    False,
+                    context['active_ids'],
+                    context=context)
+        return res
 
-    _defaults = {'name': 'to_be_sent'}
+    _columns = {
+        'name': fields.selection([('draft', 'Draft'),
+                                  ('to_be_sent', 'Ready To Send'),
+                                  ('sent', 'Done')],
+                                  'Mark as', required=True),
+        'mark_all': fields.boolean('Change the status of all draft lines'),
+        'line_ids': fields.many2many(
+            'credit.control.line',
+            string='Credit Control Lines',
+            domain="[('state', '!=', 'sent')]"),
+    }
 
-    def _get_lids(self, cursor, uid, mark_all, active_ids, context=None):
+    _defaults = {
+        'name': 'to_be_sent',
+        'line_ids': _get_line_ids,
+    }
+
+    def _filter_line_ids(self, cursor, uid, mark_all, active_ids, context=None):
         """get line to be marked filter done lines"""
         line_obj = self.pool.get('credit.control.line')
         if mark_all:
@@ -57,27 +81,24 @@ class CreditControlMarker(TransientModel):
         done credit line will be ignored"""
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
-        if context is None:
-            context = {}
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        current = self.browse(cursor, uid, wiz_id, context)
-        lines_ids = context.get('active_ids')
+        form = self.browse(cursor, uid, wiz_id, context)
 
-        if not lines_ids and not current.mark_all:
-            raise except_osv(_('Error'),
-                             _('No lines are selected. You may want to activate '
-                               '"Change status of all draft lines"'))
-        filtered_ids = self._get_lids(cursor, uid, current.mark_all, lines_ids, context)
+        if not form.line_ids and not form.mark_all:
+            raise except_osv(_('Error'), _('No credit control lines selected.'))
+
+        line_ids = [l.id for l in form.line_ids]
+
+        filtered_ids = self._filter_line_ids(cursor, uid, form.mark_all, line_ids, context)
         if not filtered_ids:
             raise except_osv(_('Information'),
-                             _('No lines will be changed. All the selected lines are already done'))
+                             _('No lines will be changed. All the selected lines are already done.'))
 
-        # hook function a simple write should be enought
-        self._mark_lines(cursor, uid, filtered_ids, current.name, context)
+        self._mark_lines(cursor, uid, filtered_ids, form.name, context)
 
-        return  {'domain': "[('id','in',%s)]" % (filtered_ids,),
-                 'name': _('%s marked line') % (current.name,),
+        return  {'domain': unicode([('id', 'in', filtered_ids)]),
+                 'name': _('%s marked line') % (form.name,),
                  'view_type': 'form',
                  'view_mode': 'tree,form',
                  'view_id': False,

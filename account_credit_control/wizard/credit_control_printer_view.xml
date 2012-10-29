@@ -6,18 +6,21 @@
       <field name="model">credit.control.printer</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form> <!-- editable="bottom" -->
-          <separator colspan="4" string="This wizard will print the selected manual lines. Mark lines, lines will pass lines to state done. Lines with canal email will not be passed to state done"/>
+        <form>
+          <separator colspan="4" string="Print the selected lines"/>
           <newline/>
-          <field name="mark_as_sent"/>
-          <field name="print_all"/>
+          <field name="mark_as_sent" attrs="{'invisible': [('state', '=', 'done')]}"/>
+          <field name="print_all" attrs="{'invisible': [('state', '=', 'done')]}"/>
           <newline/>
-          <field name="report_file" attrs="{'readonly': [('state', '!=', 'done')]}"  colspan="4"/>
+          <field name="line_ids" colspan="4" nolabel="1"
+            attrs="{'invisible': ['|', ('print_all', '=', True), ('state', '=', 'done')]}" />
+          <field name="report_file" colspan="4" attrs="{'invisible': [('state', '!=', 'done')]}"/>
           <field name="state" invisible="1" />
           <newline/>
           <group colspan="4">
-            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
-            <button name="print_lines" string="Print Lines" type="object" icon="gtk-execute"/>
+            <button special="cancel" string="Cancel" icon='gtk-cancel' attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button name="print_lines" string="Print" type="object" icon="gtk-execute" attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button special="cancel" string="Close" icon='gtk-close' attrs="{'invisible': [('state', '!=', 'done')]}"/>
           </group>
         </form>
       </field>

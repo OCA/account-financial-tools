@@ -60,7 +60,7 @@ class CreditControlLine(Model):
                                   'State', required=True, readonly=True),
 
         'canal': fields.selection([('manual', 'Manual'),
-                                   ('mail', 'Mail')],
+                                   ('mail', 'E-Mail')],
                                   'Canal', required=True,
                                   readonly=True,
                                   states={'draft': [('readonly', False)]}),

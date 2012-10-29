@@ -18,6 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 from openerp.osv.orm import  TransientModel, fields
 from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
@@ -30,12 +31,33 @@ class CreditControlMailer(TransientModel):
     _description = """Mass credit line mailer"""
     _rec_name = 'id'
 
-    _columns = {'mail_all': fields.boolean('Send an email for all "Ready To Send" lines.')}
+    def _get_line_ids(self, cursor, uid, context=None):
+        if context is None:
+            context = {}
+        res = False
+        if (context.get('active_model') == 'credit.control.line' and
+                context.get('active_ids')):
+            res = self._filter_line_ids(
+                    cursor, uid,
+                    False,
+                    context['active_ids'],
+                    context=context)
+        return res
 
+    _columns = {
+        'mail_all': fields.boolean('Send an e-mail for all "Ready To Send" lines of the "E-Mail" channel'),
+        'line_ids': fields.many2many(
+            'credit.control.line',
+            string='Credit Control Lines',
+            domain="[('state', '=', 'to_be_sent'), ('canal', '=', 'mail')]"),
+    }
 
-    def _get_lids(self, cursor, uid, mail_all, active_ids, context=None):
-        """get line to be marked filter done lines"""
-        # TODO DRY with printer
+    _defaults = {
+        'line_ids': _get_line_ids,
+    }
+
+    def _filter_line_ids(self, cursor, uid, mail_all, active_ids, context=None):
+        """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
         if mail_all:
             domain = [('state', '=', 'to_be_sent'),
@@ -46,26 +68,22 @@ class CreditControlMailer(TransientModel):
                       ('canal', '=', 'mail')]
         return line_obj.search(cursor, uid, domain, context=context)
 
-
     def mail_lines(self, cursor, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
-        if context is None:
-            context = {}
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        current = self.browse(cursor, uid, wiz_id, context)
-        lines_ids = context.get('active_ids')
+        form = self.browse(cursor, uid, wiz_id, context)
 
-        if not lines_ids and not current.mail_all:
-            raise except_osv(_('Error'),
-                             _('No lines are selected. You may want to activate '
-                               '"Send an email for all "Ready To Send" lines."'))
+        if not form.line_ids and not form.mail_all:
+            raise except_osv(_('Error'), _('No credit control lines selected.'))
 
-        filtered_ids = self._get_lids(cursor, uid, current.mail_all, lines_ids, context)
-        comms = comm_obj._generate_comm_from_credit_line_ids(cursor, uid, filtered_ids,
-                                                             context=context)
+        line_ids = [l.id for l in form.line_ids]
+        filtered_ids = self._filter_line_ids(
+                cursor, uid, form.mail_all, line_ids, context)
+        comms = comm_obj._generate_comm_from_credit_line_ids(
+                cursor, uid, filtered_ids, context=context)
         comm_obj._generate_mails(cursor, uid, comms, context=context)
         return {}
 

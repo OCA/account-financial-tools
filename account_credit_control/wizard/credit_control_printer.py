@@ -25,24 +25,39 @@ from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
 class CreditControlPrinter(TransientModel):
-    """Change the state of lines in mass"""
+    """Print lines"""
 
     _name = "credit.control.printer"
     _rec_name = 'id'
-    _description = """Mass printer"""
-    _columns = {'mark_as_sent': fields.boolean('Mark lines as sent',
-                                               help="Only manual lines will be marked."),
-                'print_all': fields.boolean('Print all "Ready To Send" lines'),
-                'report_file': fields.binary('Generated Report', readonly=True),
-                'state': fields.char('state', size=32)}
+    _description = 'Mass printer'
+
+    def _get_line_ids(self, cursor, uid, context=None):
+        if context is None:
+            context = {}
+        res = False
+        if (context.get('active_model') == 'credit.control.line' and
+                context.get('active_ids')):
+            res = context['active_ids']
+        return res
+
+    _columns = {
+        'mark_as_sent': fields.boolean('Mark manual lines as sent',
+                                       help="Only manual lines will be marked."),
+        'print_all': fields.boolean('Print all "Ready To Send" lines of the "Manual" channel'),
+        'report_file': fields.binary('Generated Report', readonly=True),
+        'state': fields.char('state', size=32),
+        'line_ids': fields.many2many(
+            'credit.control.line',
+            string='Credit Control Lines'),
+    }
 
     _defaults = {
         'mark_as_sent': True,
+        'line_ids': _get_line_ids,
     }
 
-    def _get_lids(self, cursor, uid, print_all, active_ids, context=None):
-        """get line to be marked filter done lines"""
-        # TODO Dry with mailer maybe in comm
+    def _filter_line_ids(self, cursor, uid, print_all, active_ids, context=None):
+        """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
         if print_all:
             domain = [('state', '=', 'to_be_sent'),
@@ -53,30 +68,32 @@ class CreditControlPrinter(TransientModel):
                       ('canal', '=', 'manual')]
         return line_obj.search(cursor, uid, domain, context=context)
 
-
     def print_lines(self, cursor, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
-        if context is None:
-            context = {}
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        current = self.browse(cursor, uid, wiz_id, context)
-        lines_ids = context.get('active_ids')
-        if not lines_ids and not current.print_all:
-            raise except_osv(_('Error'),
-                             _('No lines are selected. You may want to activate'
-                               ' "Print all "Ready To Send" lines."'))
-        if current.print_all:
-            filtered_ids = self._get_lids(cursor, uid, current.print_all, lines_ids, context)
+        form = self.browse(cursor, uid, wiz_id, context)
+
+        if not form.line_ids and not form.print_all:
+            raise except_osv(_('Error'), _('No credit control lines selected.'))
+
+        line_ids = [l.id for l in form.line_ids]
+        if form.print_all:
+            filtered_ids = self._filter_line_ids(
+                cursor, uid, form.print_all, line_ids, context)
         else:
-            filtered_ids = lines_ids
-        comms = comm_obj._generate_comm_from_credit_line_ids(cursor, uid, filtered_ids,
-                                                             context=context)
+            filtered_ids = line_ids
+        comms = comm_obj._generate_comm_from_credit_line_ids(
+                cursor, uid, filtered_ids, context=context)
         report_file = comm_obj._generate_report(cursor, uid, comms, context=context)
-        current.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
-        if current.mark_as_sent:
-            filtered_ids = self._get_lids(cursor, uid, False, lines_ids, context)
+
+        form.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
+
+        if form.mark_as_sent:
+            filtered_ids = self._filter_line_ids(cursor, uid, False, line_ids, context)
             comm_obj._mark_credit_line_as_sent(cursor, uid, comms, context=context)
-        return False
+
+        return False  # do not close the window, we need it to download the report
+
