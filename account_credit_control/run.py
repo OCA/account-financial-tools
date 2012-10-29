@@ -80,7 +80,9 @@ class CreditControlRun(Model):
                                 order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cursor, uid, lines[0], context=context)
-            raise except_osv(_('A run has already been executed more recently than %s') % (line.date))
+            raise except_osv(
+                _('Error'),
+                _('A run has already been executed more recently than %s') % (line.date))
         return True
 
     def _generate_credit_lines(self, cursor, uid, run_id, context=None):
@@ -98,13 +100,13 @@ class CreditControlRun(Model):
         credit_line_ids = []  # generated lines
         run._check_run_date(run.date, context=context)
 
-        policy_ids = run.policy_ids
-        if not policy_ids:
+        policies = run.policy_ids
+        if not policies:
             raise except_osv(
                 _('Error'),
                 _('Please select a policy'))
 
-        for policy in policy_ids:
+        for policy in policies:
             if policy.do_nothing:
                 continue
             lines = policy._get_move_lines_to_process(run.date, context=context)
@@ -114,9 +116,8 @@ class CreditControlRun(Model):
             if not lines:
                 continue
             # policy levels are sorted by level so iteration is in the correct order
-            for level in policy.level_ids:
+            for level in reversed(policy.level_ids):
                 level_lines = level.get_level_lines(run.date, lines, context=context)
-                # only this write action own a separate cursor
                 loc_ids, loc_errors = cr_line_obj.create_or_update_from_mv_lines(
                     cursor, uid, [], list(level_lines), level.id, run.date, context=context)
                 credit_line_ids += loc_ids
@@ -147,10 +148,12 @@ class CreditControlRun(Model):
             cursor.execute('SELECT id FROM credit_control_run'
                            ' LIMIT 1 FOR UPDATE NOWAIT' )
         except Exception, exc:
-            cursor.rollback()
-            raise except_osv(_('A credit control run is already running'
-                               ' in background please try later'),
-                             str(exc))
-        # in case of exception openerp will do a rollback for us and free the lock
-        return self._generate_credit_lines(cursor, uid, run_id, context)
+            # in case of exception openerp will do a rollback for us and free the lock
+            raise except_osv(
+                    _('Error'),
+                    _('A credit control run is already running'
+                      ' in background, please try later.'), str(exc))
+
+        self._generate_credit_lines(cursor, uid, run_id, context)
+        return True
 
