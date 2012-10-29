@@ -120,11 +120,11 @@ class CreditControlRun(Model):
                         cursor, uid, [], list(level_lines), level.id, run.date, context=context)
 
             if policy_generated_ids:
-                report += _("Policy %s has generated %d Credit Control Lines.\n") % \
+                report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
                         (policy.name, len(policy_generated_ids))
                 credit_line_ids += policy_generated_ids
             else:
-                report += _("Policy %s has not generated any Credit Control Lines.\n" %
+                report += _("Policy \"%s\" has not generated any Credit Control Lines.\n" %
                         policy.name)
 
         vals = {'state': 'done',
