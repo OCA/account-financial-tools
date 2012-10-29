@@ -63,24 +63,23 @@ class CreditCommunication(TransientModel):
                                     adr_pref=['invoice', 'default'])
 
         add = adds.get('invoice', adds.get('default'))
-        if not add:
-            raise except_osv(_('No address for partner %s') % (form.partner_id.name),
-                             _('Please set one'))
         add_obj = self.pool.get('res.partner.address')
-        return add_obj.browse(cr, uid, add, context=context)
-
+        if add:
+            return add_obj.browse(cr, uid, add, context=context)
+        else:
+            return False
 
     def get_mail(self, cr, uid, com_id, context=None):
         """Return a valid email for customer"""
-        context = context  or {}
+        assert not (isinstance(com_id, list) and len(com_id) > 1), \
+                "com_id: only one id expected"
         if isinstance(com_id, list):
             com_id = com_id[0]
         form = self.browse(cr, uid, com_id, context=context)
-        email = form.get_address().email
-        if not email:
-             raise except_osv(_('No invoicing or default email for partner %s') %
-                              (form.partner_id.name),
-                              _('Please set one'))
+        address = form.get_address()
+        email = ''
+        if address and address.email:
+            email = address.email
         return email
 
     def _get_credit_lines(self, cr, uid, line_ids, partner_id, level_id, context=None):
@@ -128,48 +127,52 @@ class CreditCommunication(TransientModel):
         mail_temp_obj = self.pool.get('email.template')
         mail_message_obj = self.pool.get('mail.message')
         mail_ids = []
+
+        essential_fields = [
+                'subject',
+                'body_html',
+                'email_from',
+                'email_to'
+        ]
+
         for comm in comms:
             # we want to use a local cr in order to send the maximum
             # of email
+            template = comm.current_policy_level.mail_template_id.id
+            mail_values = {}
+            cl_ids = [cl.id for cl in comm.credit_control_line_ids]
             try:
-                template = comm.current_policy_level.mail_template_id.id
-
-                # FIXME: usage of this TransientModel is a bit weird with
-                # the generation of the email, because the mail is linked
-                # with this model, which is transient (only the owner of the
-                # record can read it, and it is not persistent)
-                # the template should be linked with the credit control line.
-                mvalues = mail_temp_obj.generate_email(cr, uid,
-                                                       template,
-                                                       comm.id,
-                                                       context=context)
-                essential_values = ['subject', 'body_html',
-                                    'email_from', 'email_to']
-                # FIXME: should we really raise an exception?
-                # the mail object should handle itself theses cases
-                for val in essential_values:
-                    if not mvalues.get(val):
-                        raise Exception('Mail generation error with %s', val)
-                mail_id = mail_message_obj.create(cr, uid, mvalues, context=context)
-
-                cl_ids = [cl.id for cl in comm.credit_control_line_ids]
-
-                # we do not use local cusros else we have a lock
-                # FIXME: so use a savepoint or find the cause of the lock
-                # we are not supposed to rollback or commit the main transaction
-                cr_line_obj.write(cr, uid, cl_ids,
-                                      {'mail_message_id': mail_id,
-                                       'state': 'sent'}, context=context)
-                mail_ids.append(mail_id)
+                mail_values = mail_temp_obj.generate_email(cr, uid,
+                                                           template,
+                                                           comm.id,
+                                                           context=context)
+            # can we restrict this too wide exception ?
+            # or even let it break the system ? It seems that this is a coding
+            # or template error if we have an exception, it should be handled
+            # by a developer
             except Exception, exc:
-                logger.error(exc)
-                cr.rollback()
-                cl_ids = [cl.id for cl in comm.credit_control_line_ids]
-                # we do not use local cusros else we have a lock
-                cr_line_obj.write(cr, uid, cl_ids,
-                                  {'state': 'mail_error'}, context=context)
-            finally:
-                cr.commit()
+                logger.warning("Failed to generate e-mail for credit control line with ids: %s",
+                        cl_ids, exc_info=True)
+                cr_line_obj.write(cr, uid, cl_ids, {'state': 'mail_error'}, context=context)
+                continue
+
+            mail_id = mail_message_obj.create(cr, uid, mail_values, context=context)
+
+            state = 'sent'
+            # The mail will not be send, however it will be in the pool, in an
+            # error state. So we create it, link it with the credit control line
+            # and put this latter in a `mail_error` state we not that we have a
+            # problem with the mail
+            if any(not mail_values.get(field) for field in essential_fields):
+                state = 'mail_error'
+
+            cr_line_obj.write(
+                    cr, uid, cl_ids,
+                    {'mail_message_id': mail_id,
+                     'state': state},
+                    context=context)
+
+            mail_ids.append(mail_id)
         return mail_ids
 
     def _generate_report(self, cr, uid, comms, context=None):
