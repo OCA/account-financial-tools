@@ -26,6 +26,7 @@ class ResPartner(Model):
     and links to the credit control lines."""
 
     _inherit = "res.partner"
+
     _columns = {
         'credit_policy_id': fields.many2one('credit.control.policy',
                                             'Credit Control Policy',

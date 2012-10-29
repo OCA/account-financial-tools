@@ -114,7 +114,6 @@ class CreditControlLine(Model):
     def _update_from_mv_line(self, cursor, uid, ids, mv_line_br, level,
                              controlling_date, context=None):
         """hook function to update line if required"""
-        context =  context or {}
         return []
 
     def _prepare_from_move_line(self, cursor, uid, move_line,
@@ -122,8 +121,6 @@ class CreditControlLine(Model):
                                 context=None):
         """Create credit control line"""
         acc_line_obj = self.pool.get('account.move.line')
-        if context is None:
-            context = {}
         data = {}
         data['date'] = controlling_date
         data['date_due'] = move_line.date_maturity
@@ -142,8 +139,6 @@ class CreditControlLine(Model):
     def create_or_update_from_mv_lines(self, cursor, uid, ids, lines,
                                        level_id, controlling_date, context=None):
         """Create or update line base on levels"""
-        if context is None:
-            context = {}
         currency_obj = self.pool.get('res.currency')
         level_obj = self.pool.get('credit.control.policy.level')
         ml_obj = self.pool.get('account.move.line')
@@ -170,7 +165,6 @@ class CreditControlLine(Model):
              ('level', '=', current_lvl)],
             context=context)
 
-        errors = []  # for now there is no errors on lines
         for line in ml_obj.browse(cursor, uid, lines, context):
 
             if line.id in existings:
@@ -185,5 +179,5 @@ class CreditControlLine(Model):
                     vals = self._prepare_from_move_line(
                         cursor, uid, line, level, controlling_date, open_amount, context=context)
                     debit_line_ids.append(self.create(cursor, uid, vals, context=context))
-        return debit_line_ids, errors
+        return debit_line_ids
 

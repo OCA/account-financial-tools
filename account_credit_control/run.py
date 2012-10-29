@@ -18,19 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import sys
-import traceback
 import logging
 
 from openerp.osv.orm import Model, fields
 from openerp.tools.translate import _
 from openerp.osv.osv import except_osv
 
-logger = logging.getLogger('Credit Control run')
-
-# beware, do always use the DB lock of `CreditControlRun.generate_credit_lines`
-# to use this variable, otherwise you will have race conditions
-memoizers = {}
+logger = logging.getLogger('credit.control.run')
 
 
 class CreditControlRun(Model):
@@ -51,17 +45,20 @@ class CreditControlRun(Model):
         'report': fields.text('Report', readonly=True),
 
         'state': fields.selection([('draft', 'Draft'),
-                                   ('running', 'Running'),
                                    ('done', 'Done'),
-                                   ('error', 'Error')],
+                                   ],
                                    string='State',
                                    required=True,
                                    readonly=True),
 
-        'manual_ids': fields.many2many('account.move.line',
-                                        rel="credit_runreject_rel",
-                                        string='Lines to handle manually',
-                                        readonly=True),
+        'manual_ids': fields.many2many(
+            'account.move.line',
+            rel="credit_runreject_rel",
+            string='Lines to handle manually',
+            help=('If a credit control line has been generated on a policy '
+                 'and the policy has been changed meantime, '
+                 'it has to be handled manually'),
+            readonly=True),
     }
 
     def _get_policies(self, cursor, uid, context=None):
@@ -87,7 +84,6 @@ class CreditControlRun(Model):
 
     def _generate_credit_lines(self, cursor, uid, run_id, context=None):
         """ Generate credit control lines. """
-        memoizers['credit_line_residuals'] = {}
         cr_line_obj = self.pool.get('credit.control.line')
         assert not (isinstance(run_id, list) and len(run_id) > 1), \
                 "run_id: only one id expected"
@@ -95,7 +91,6 @@ class CreditControlRun(Model):
             run_id = run_id[0]
 
         run = self.browse(cursor, uid, run_id, context=context)
-        errors = []
         manually_managed_lines = set()  # line who changed policy
         credit_line_ids = []  # generated lines
         run._check_run_date(run.date, context=context)
@@ -106,35 +101,36 @@ class CreditControlRun(Model):
                 _('Error'),
                 _('Please select a policy'))
 
+        report = ''
         for policy in policies:
             if policy.do_nothing:
                 continue
+
             lines = policy._get_move_lines_to_process(run.date, context=context)
             manual_lines = policy._lines_different_policy(lines, context=context)
             lines.difference_update(manual_lines)
             manually_managed_lines.update(manual_lines)
-            if not lines:
-                continue
-            # policy levels are sorted by level so iteration is in the correct order
-            for level in reversed(policy.level_ids):
-                level_lines = level.get_level_lines(run.date, lines, context=context)
-                loc_ids, loc_errors = cr_line_obj.create_or_update_from_mv_lines(
-                    cursor, uid, [], list(level_lines), level.id, run.date, context=context)
-                credit_line_ids += loc_ids
-                errors += loc_errors
 
-            lines.difference_update(level_lines)
-            vals = {'report': u"Number of generated lines : %s \n" % (len(credit_line_ids),),
-                    'manual_ids': [(6, 0, manually_managed_lines)]}
+            if lines:
+                policy_generated_ids = []
+                # policy levels are sorted by level so iteration is in the correct order
+                for level in reversed(policy.level_ids):
+                    level_lines = level.get_level_lines(run.date, lines, context=context)
+                    policy_generated_ids += cr_line_obj.create_or_update_from_mv_lines(
+                        cursor, uid, [], list(level_lines), level.id, run.date, context=context)
 
-            if errors:
-                vals['report'] += u"Following line generation errors appends:"
-                vals['report'] += u"----\n".join(errors)
+            if policy_generated_ids:
+                report += _("Policy %s has generated %d Credit Control Lines.\n") % \
+                        (policy.name, len(policy_generated_ids))
+                credit_line_ids += policy_generated_ids
+            else:
+                report += _("Policy %s has not generated any Credit Control Lines.\n" %
+                        policy.name)
 
-            run.write(vals, context=context)
-        run.write({'state': 'done'}, context=context)
-        # lines will correspond to line that where not treated
-        return lines
+        vals = {'state': 'done',
+                'report': report,
+                'manual_ids': [(6, 0, manually_managed_lines)]}
+        run.write(vals, context=context)
 
     def generate_credit_lines(self, cursor, uid, run_id, context=None):
         """Generate credit control lines
@@ -142,8 +138,6 @@ class CreditControlRun(Model):
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.
         """
-        if context is None:
-            context = {}
         try:
             cursor.execute('SELECT id FROM credit_control_run'
                            ' LIMIT 1 FOR UPDATE NOWAIT' )
