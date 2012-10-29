@@ -18,13 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import netsvc
+import logging
 from openerp.osv.orm import  TransientModel, fields
 from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
-import netsvc
-import logging
 
-logger = logging.getLogger('credit.control.line mailing')
+logger = logging.getLogger('credit.control.line.mailing')
 
 
 class CreditCommunication(TransientModel):
@@ -91,7 +91,6 @@ class CreditCommunication(TransientModel):
                                        ('partner_id', '=', partner_id),
                                        ('policy_level_id', '=', level_id)],
                                       context=context)
-        #return cr_line_obj.browse(cr, uid, cr_l_ids, context=context)
         return cr_l_ids
 
     def _generate_comm_from_credit_line_ids(self, cr, uid, line_ids, context=None):

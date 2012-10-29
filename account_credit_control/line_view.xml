@@ -5,7 +5,7 @@
       <field name="model">credit.control.line</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Control Credit Lines">
           <field name="date"/>
           <field name="date_due"/>
           <field name="date_sent"/>
@@ -14,7 +14,6 @@
           <field name="canal"/>
           <field name="invoice_id"/>
           <field name="partner_id"/>
-          <!-- <field name="address_id" domain="[('partner_id', '=', partner_id)]"/> -->
           <field name="amount_due"/>
           <field name="balance_due"/>
           <field name="currency_id"/>
@@ -32,7 +31,7 @@
       <field name="model">credit.control.lines</field>
       <field name="type">search</field>
       <field name="arch" type="xml">
-        <search string="Search credit lines Items">
+        <search string="Control Credit Lines">
           <group>
             <filter icon="terp-document-new" string="Manual"
                     domain="[('state', '=', 'draft')]"
@@ -89,7 +88,6 @@
             <filter domain='[]' context="{'group_by': 'canal'}"
                     icon="terp-document-new" string="Canal"/>
           </group>
-          <newline/>
         </search>
       </field>
     </record>
@@ -99,7 +97,7 @@
       <field name="model">credit.control.line</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree editable="bottom" colors="green:state == 'sent';red:state in ('error', 'mail_error');">
+        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'mail_error');">
           <field name="date"/>
           <field name="date_due"/>
           <field name="level"/>
