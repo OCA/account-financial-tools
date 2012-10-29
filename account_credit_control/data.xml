@@ -9,7 +9,7 @@
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
       <field name="body_html"><![CDATA[
-      <%page args="object, user=None, ctx=None, quote=None, format_exception=True, mode='pdf'" />
+      <%page args="object, user=None, ctx=None, quote=None, format_exception=True, mode='mail'" />
       %if mode != 'pdf':
       <!-- your css here -->
       <style type="text/css">
