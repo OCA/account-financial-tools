@@ -5,6 +5,7 @@
     </style>
 </head>
 <body>
+
     %for comm in objects :
     ${setLang(comm.partner_id.lang)}
        <%
@@ -13,7 +14,9 @@
                  context.lookup.put_string(current_uri, comm.current_policy_level.mail_template_id.body_html)
        %>
        <%include file="${current_uri}" args="object=comm,mode='pdf'"/>
-       </br>
+
+     <p style="page-break-after:always"></p>
      %endfor
+
 </body>
 </html>
