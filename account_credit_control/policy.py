@@ -345,6 +345,7 @@ class CreditControlPolicyLevel(Model):
         data_dict =  {'controlling_date': controlling_date, 'line_ids': tuple(lines),
                      'delay': level.delay_days, 'level': previous_level.level}
 
+        # print cursor.mogrify(sql, data_dict)
         cursor.execute(sql, data_dict)
         res = cursor.fetchall()
         if res:
@@ -353,17 +354,19 @@ class CreditControlPolicyLevel(Model):
 
     def get_level_lines(self, cursor, uid, level_id, controlling_date, lines, context=None):
         """get all move lines in entry lines that match the current level"""
-        assert not (isinstance(level_id, list) and len(level_id) > 1), "level_id: only one id expected"
+        assert not (isinstance(level_id, list) and len(level_id) > 1), \
+            "level_id: only one id expected"
         if isinstance(level_id, list):
             level_id = level_id[0]
         matching_lines = set()
         level = self.browse(cursor, uid, level_id, context=context)
         if self._previous_level(cursor, uid, level, context=context) is None:
-            matching_lines.update(self._get_first_level_lines(
-                cursor, uid, level, controlling_date, lines, context=context))
+            method = self._get_first_level_lines
         else:
-            matching_lines.update(self._get_other_level_lines(
-                cursor, uid, level, controlling_date, lines, context=context))
+            method = self._get_other_level_lines
+
+        matching_lines.update(
+                method(cursor, uid, level, controlling_date, lines, context=context))
 
         return matching_lines
 
