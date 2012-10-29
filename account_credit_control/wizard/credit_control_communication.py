@@ -53,18 +53,18 @@ class CreditCommunication(TransientModel):
 
     def get_address(self, cursor, uid, com_id, context=None):
         """Return a valid address for customer"""
-
-        context = context  or {}
+        assert not (isinstance(com_id, list) and len(com_id) > 1), \
+                "com_id: only one id expected"
         if isinstance(com_id, list):
             com_id = com_id[0]
-        current = self.browse(cursor, uid, com_id, context=context)
+        form = self.browse(cursor, uid, com_id, context=context)
         part_obj = self.pool.get('res.partner')
-        adds = part_obj.address_get(cursor, uid, [current.partner_id.id],
+        adds = part_obj.address_get(cursor, uid, [form.partner_id.id],
                                     adr_pref=['invoice', 'default'])
 
         add = adds.get('invoice', adds.get('default'))
         if not add:
-            raise except_osv(_('No address for partner %s') % (current.partner_id.name),
+            raise except_osv(_('No address for partner %s') % (form.partner_id.name),
                              _('Please set one'))
         add_obj = self.pool.get('res.partner.address')
         return add_obj.browse(cursor, uid, add, context=context)
@@ -75,11 +75,11 @@ class CreditCommunication(TransientModel):
         context = context  or {}
         if isinstance(com_id, list):
             com_id = com_id[0]
-        current = self.browse(cursor, uid, com_id, context=context)
-        email = current.get_address().email
+        form = self.browse(cursor, uid, com_id, context=context)
+        email = form.get_address().email
         if not email:
              raise except_osv(_('No invoicing or default email for partner %s') %
-                              (current.partner_id.name),
+                              (form.partner_id.name),
                               _('Please set one'))
         return email
 
