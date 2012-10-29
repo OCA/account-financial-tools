@@ -141,20 +141,10 @@ class CreditCommunication(TransientModel):
             template = comm.current_policy_level.mail_template_id.id
             mail_values = {}
             cl_ids = [cl.id for cl in comm.credit_control_line_ids]
-            try:
-                mail_values = mail_temp_obj.generate_email(cr, uid,
-                                                           template,
-                                                           comm.id,
-                                                           context=context)
-            # can we restrict this too wide exception ?
-            # or even let it break the system ? It seems that this is a coding
-            # or template error if we have an exception, it should be handled
-            # by a developer
-            except Exception, exc:
-                logger.warning("Failed to generate e-mail for credit control line with ids: %s",
-                        cl_ids, exc_info=True)
-                cr_line_obj.write(cr, uid, cl_ids, {'state': 'mail_error'}, context=context)
-                continue
+            mail_values = mail_temp_obj.generate_email(cr, uid,
+                                                       template,
+                                                       comm.id,
+                                                       context=context)
 
             mail_id = mail_message_obj.create(cr, uid, mail_values, context=context)
 
