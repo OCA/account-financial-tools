@@ -31,14 +31,14 @@ class CreditControlMailer(TransientModel):
     _description = """Mass credit line mailer"""
     _rec_name = 'id'
 
-    def _get_line_ids(self, cursor, uid, context=None):
+    def _get_line_ids(self, cr, uid, context=None):
         if context is None:
             context = {}
         res = False
         if (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
             res = self._filter_line_ids(
-                    cursor, uid,
+                    cr, uid,
                     False,
                     context['active_ids'],
                     context=context)
@@ -56,7 +56,7 @@ class CreditControlMailer(TransientModel):
         'line_ids': _get_line_ids,
     }
 
-    def _filter_line_ids(self, cursor, uid, mail_all, active_ids, context=None):
+    def _filter_line_ids(self, cr, uid, mail_all, active_ids, context=None):
         """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
         if mail_all:
@@ -66,24 +66,24 @@ class CreditControlMailer(TransientModel):
             domain = [('state', '=', 'to_be_sent'),
                       ('id', 'in', active_ids),
                       ('canal', '=', 'mail')]
-        return line_obj.search(cursor, uid, domain, context=context)
+        return line_obj.search(cr, uid, domain, context=context)
 
-    def mail_lines(self, cursor, uid, wiz_id, context=None):
+    def mail_lines(self, cr, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        form = self.browse(cursor, uid, wiz_id, context)
+        form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids and not form.mail_all:
             raise except_osv(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
         filtered_ids = self._filter_line_ids(
-                cursor, uid, form.mail_all, line_ids, context)
+                cr, uid, form.mail_all, line_ids, context)
         comms = comm_obj._generate_comm_from_credit_line_ids(
-                cursor, uid, filtered_ids, context=context)
-        comm_obj._generate_mails(cursor, uid, comms, context=context)
+                cr, uid, filtered_ids, context=context)
+        comm_obj._generate_mails(cr, uid, comms, context=context)
         return {}
 

@@ -111,12 +111,12 @@ class CreditControlLine(Model):
 
     _defaults = {'state': 'draft'}
 
-    def _update_from_mv_line(self, cursor, uid, ids, mv_line_br, level,
+    def _update_from_mv_line(self, cr, uid, ids, mv_line_br, level,
                              controlling_date, context=None):
         """hook function to update line if required"""
         return []
 
-    def _prepare_from_move_line(self, cursor, uid, move_line,
+    def _prepare_from_move_line(self, cr, uid, move_line,
                                 level, controlling_date, open_amount,
                                 context=None):
         """Create credit control line"""
@@ -136,48 +136,48 @@ class CreditControlLine(Model):
         data['move_line_id'] = move_line.id
         return data
 
-    def create_or_update_from_mv_lines(self, cursor, uid, ids, lines,
+    def create_or_update_from_mv_lines(self, cr, uid, ids, lines,
                                        level_id, controlling_date, context=None):
         """Create or update line base on levels"""
         currency_obj = self.pool.get('res.currency')
         level_obj = self.pool.get('credit.control.policy.level')
         ml_obj = self.pool.get('account.move.line')
-        level = level_obj.browse(cursor, uid, level_id, context)
+        level = level_obj.browse(cr, uid, level_id, context)
         current_lvl = level.level
         debit_line_ids = []
-        user = self.pool.get('res.users').browse(cursor, uid, uid)
+        user = self.pool.get('res.users').browse(cr, uid, uid)
         tolerance_base = user.company_id.credit_control_tolerance
-        currency_ids = currency_obj.search(cursor, uid, [], context=context)
+        currency_ids = currency_obj.search(cr, uid, [], context=context)
 
         tolerance = {}
         acc_line_obj = self.pool.get('account.move.line')
         for c_id in currency_ids:
             tolerance[c_id] = currency_obj.compute(
-                cursor, uid,
+                cr, uid,
                 c_id,
                 user.company_id.currency_id.id,
                 tolerance_base,
                 context=context)
 
         existings = self.search(
-            cursor, uid,
+            cr, uid,
             [('move_line_id', 'in', lines),
              ('level', '=', current_lvl)],
             context=context)
 
-        for line in ml_obj.browse(cursor, uid, lines, context):
+        for line in ml_obj.browse(cr, uid, lines, context):
 
             if line.id in existings:
                 # does nothing just a hook
                 debit_line_ids += self._update_from_mv_line(
-                    cursor, uid, ids, line, level,
+                    cr, uid, ids, line, level,
                     controlling_date, context=context)
             else:
                 open_amount = line.amount_residual_currency
 
                 if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
                     vals = self._prepare_from_move_line(
-                        cursor, uid, line, level, controlling_date, open_amount, context=context)
-                    debit_line_ids.append(self.create(cursor, uid, vals, context=context))
+                        cr, uid, line, level, controlling_date, open_amount, context=context)
+                    debit_line_ids.append(self.create(cr, uid, vals, context=context))
         return debit_line_ids
 

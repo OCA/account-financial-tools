@@ -61,28 +61,28 @@ class CreditControlRun(Model):
             readonly=True),
     }
 
-    def _get_policies(self, cursor, uid, context=None):
+    def _get_policies(self, cr, uid, context=None):
         return self.pool.get('credit.control.policy').\
-                search(cursor, uid, [], context=context)
+                search(cr, uid, [], context=context)
 
     _defaults = {
         'state': 'draft',
         'policy_ids': _get_policies,
     }
 
-    def _check_run_date(self, cursor, uid, ids, controlling_date, context=None):
+    def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
         """Ensure that there is no credit line in the future using controlling_date"""
         line_obj =  self.pool.get('credit.control.line')
-        lines = line_obj.search(cursor, uid, [('date', '>', controlling_date)],
+        lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
                                 order='date DESC', limit=1, context=context)
         if lines:
-            line = line_obj.browse(cursor, uid, lines[0], context=context)
+            line = line_obj.browse(cr, uid, lines[0], context=context)
             raise except_osv(
                 _('Error'),
                 _('A run has already been executed more recently than %s') % (line.date))
         return True
 
-    def _generate_credit_lines(self, cursor, uid, run_id, context=None):
+    def _generate_credit_lines(self, cr, uid, run_id, context=None):
         """ Generate credit control lines. """
         cr_line_obj = self.pool.get('credit.control.line')
         assert not (isinstance(run_id, list) and len(run_id) > 1), \
@@ -90,7 +90,7 @@ class CreditControlRun(Model):
         if isinstance(run_id, list):
             run_id = run_id[0]
 
-        run = self.browse(cursor, uid, run_id, context=context)
+        run = self.browse(cr, uid, run_id, context=context)
         manually_managed_lines = set()  # line who changed policy
         credit_line_ids = []  # generated lines
         run._check_run_date(run.date, context=context)
@@ -117,7 +117,7 @@ class CreditControlRun(Model):
                 for level in reversed(policy.level_ids):
                     level_lines = level.get_level_lines(run.date, lines, context=context)
                     policy_generated_ids += cr_line_obj.create_or_update_from_mv_lines(
-                        cursor, uid, [], list(level_lines), level.id, run.date, context=context)
+                        cr, uid, [], list(level_lines), level.id, run.date, context=context)
 
             if policy_generated_ids:
                 report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
@@ -132,14 +132,14 @@ class CreditControlRun(Model):
                 'manual_ids': [(6, 0, manually_managed_lines)]}
         run.write(vals, context=context)
 
-    def generate_credit_lines(self, cursor, uid, run_id, context=None):
+    def generate_credit_lines(self, cr, uid, run_id, context=None):
         """Generate credit control lines
 
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.
         """
         try:
-            cursor.execute('SELECT id FROM credit_control_run'
+            cr.execute('SELECT id FROM credit_control_run'
                            ' LIMIT 1 FOR UPDATE NOWAIT' )
         except Exception, exc:
             # in case of exception openerp will do a rollback for us and free the lock
@@ -148,6 +148,6 @@ class CreditControlRun(Model):
                     _('A credit control run is already running'
                       ' in background, please try later.'), str(exc))
 
-        self._generate_credit_lines(cursor, uid, run_id, context)
+        self._generate_credit_lines(cr, uid, run_id, context)
         return True
 

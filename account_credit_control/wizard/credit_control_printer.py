@@ -31,7 +31,7 @@ class CreditControlPrinter(TransientModel):
     _rec_name = 'id'
     _description = 'Mass printer'
 
-    def _get_line_ids(self, cursor, uid, context=None):
+    def _get_line_ids(self, cr, uid, context=None):
         if context is None:
             context = {}
         res = False
@@ -56,7 +56,7 @@ class CreditControlPrinter(TransientModel):
         'line_ids': _get_line_ids,
     }
 
-    def _filter_line_ids(self, cursor, uid, print_all, active_ids, context=None):
+    def _filter_line_ids(self, cr, uid, print_all, active_ids, context=None):
         """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
         if print_all:
@@ -66,15 +66,15 @@ class CreditControlPrinter(TransientModel):
             domain = [('state', '=', 'to_be_sent'),
                       ('id', 'in', active_ids),
                       ('canal', '=', 'manual')]
-        return line_obj.search(cursor, uid, domain, context=context)
+        return line_obj.search(cr, uid, domain, context=context)
 
-    def print_lines(self, cursor, uid, wiz_id, context=None):
+    def print_lines(self, cr, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
-        form = self.browse(cursor, uid, wiz_id, context)
+        form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids and not form.print_all:
             raise except_osv(_('Error'), _('No credit control lines selected.'))
@@ -82,18 +82,18 @@ class CreditControlPrinter(TransientModel):
         line_ids = [l.id for l in form.line_ids]
         if form.print_all:
             filtered_ids = self._filter_line_ids(
-                cursor, uid, form.print_all, line_ids, context)
+                cr, uid, form.print_all, line_ids, context)
         else:
             filtered_ids = line_ids
         comms = comm_obj._generate_comm_from_credit_line_ids(
-                cursor, uid, filtered_ids, context=context)
-        report_file = comm_obj._generate_report(cursor, uid, comms, context=context)
+                cr, uid, filtered_ids, context=context)
+        report_file = comm_obj._generate_report(cr, uid, comms, context=context)
 
         form.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
 
         if form.mark_as_sent:
-            filtered_ids = self._filter_line_ids(cursor, uid, False, line_ids, context)
-            comm_obj._mark_credit_line_as_sent(cursor, uid, comms, context=context)
+            filtered_ids = self._filter_line_ids(cr, uid, False, line_ids, context)
+            comm_obj._mark_credit_line_as_sent(cr, uid, comms, context=context)
 
         return False  # do not close the window, we need it to download the report
 

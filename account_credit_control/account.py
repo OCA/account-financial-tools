@@ -55,10 +55,10 @@ class AccountInvoice(Model):
                                                    readonly=True)
     }
 
-    def action_move_create(self, cursor, uid, ids, context=None):
+    def action_move_create(self, cr, uid, ids, context=None):
         """ Write the id of the invoice in the generated moves. """
-        res = super(AccountInvoice, self).action_move_create(cursor, uid, ids, context=context)
-        for inv in self.browse(cursor, uid, ids, context=context):
+        res = super(AccountInvoice, self).action_move_create(cr, uid, ids, context=context)
+        for inv in self.browse(cr, uid, ids, context=context):
             if inv.move_id:
                 for line in inv.move_id.line_id:
                     line.write({'invoice_id': inv.id})
