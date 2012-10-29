@@ -118,7 +118,8 @@ class CreditControlLine(Model):
         return []
 
     def _prepare_from_move_line(self, cursor, uid, move_line,
-                                level, controlling_date, context=None):
+                                level, controlling_date, open_amount,
+                                context=None):
         """Create credit control line"""
         acc_line_obj = self.pool.get('account.move.line')
         if context is None:
@@ -132,8 +133,7 @@ class CreditControlLine(Model):
         data['partner_id'] = move_line.partner_id.id
         data['amount_due'] = (move_line.amount_currency or move_line.debit or
                               move_line.credit)
-        data['balance_due'] = acc_line_obj._amount_residual_from_date(
-                cursor, uid, move_line, controlling_date, context=context)
+        data['balance_due'] = open_amount
         data['policy_level_id'] = level.id
         data['company_id'] = move_line.company_id.id
         data['move_line_id'] = move_line.id
@@ -170,27 +170,20 @@ class CreditControlLine(Model):
              ('level', '=', current_lvl)],
             context=context)
 
-        errors = []
+        errors = []  # for now there is no errors on lines
         for line in ml_obj.browse(cursor, uid, lines, context):
-            # we want to create as many line as possible
-            try:
-                if line.id in existings:
-                    # does nothing just a hook
-                    debit_line_ids += self._update_from_mv_line(
-                        cursor, uid, ids, line, level,
-                        controlling_date, context=context)
-                else:
-                    # as we use memoizer pattern this has almost no cost to get it
-                    # multiple time
-                    open_amount = acc_line_obj._amount_residual_from_date(
-                        cursor, uid, line, controlling_date, context=context)
 
-                    if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
-                        vals = self._prepare_from_move_line(
-                            cursor, uid, line, level, controlling_date, context=context)
-                        debit_line_ids.append(self.create(cursor, uid, vals, context=context))
-            except osv.except_osv, exc:
-                logger.exception(exc)
-                errors.append(exc.value)
+            if line.id in existings:
+                # does nothing just a hook
+                debit_line_ids += self._update_from_mv_line(
+                    cursor, uid, ids, line, level,
+                    controlling_date, context=context)
+            else:
+                open_amount = line.amount_residual_currency
+
+                if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
+                    vals = self._prepare_from_move_line(
+                        cursor, uid, line, level, controlling_date, open_amount, context=context)
+                    debit_line_ids.append(self.create(cursor, uid, vals, context=context))
         return debit_line_ids, errors
 
