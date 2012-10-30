@@ -65,7 +65,7 @@ On each generated line, you have many choices:
                 "policy_view.xml",
                 "run_view.xml",
                 "company_view.xml",
-                "wizard/credit_control_emailer_view.xml",
+                "wizard/credit_control_mailer_view.xml",
                 "wizard/credit_control_marker_view.xml",
                 "wizard/credit_control_printer_view.xml",
                 "report/report.xml",

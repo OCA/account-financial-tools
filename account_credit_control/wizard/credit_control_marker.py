@@ -37,15 +37,17 @@ class CreditControlMarker(TransientModel):
                 context.get('active_ids')):
             res = self._filter_line_ids(
                     cr, uid,
+                    False,
                     context['active_ids'],
                     context=context)
         return res
 
     _columns = {
-        'name': fields.selection([('ignored', 'Ignored'),
+        'name': fields.selection([('draft', 'Draft'),
                                   ('to_be_sent', 'Ready To Send'),
                                   ('sent', 'Done')],
                                   'Mark as', required=True),
+        'mark_all': fields.boolean('Change the status of all draft lines'),
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
@@ -57,10 +59,13 @@ class CreditControlMarker(TransientModel):
         'line_ids': _get_line_ids,
     }
 
-    def _filter_line_ids(self, cr, uid, active_ids, context=None):
+    def _filter_line_ids(self, cr, uid, mark_all, active_ids, context=None):
         """get line to be marked filter done lines"""
         line_obj = self.pool.get('credit.control.line')
-        domain = [('state', '!=', 'sent'), ('id', 'in', active_ids)]
+        if mark_all:
+            domain = [('state', '=', 'draft')]
+        else:
+            domain = [('state', '!=', 'sent'), ('id', 'in', active_ids)]
         return line_obj.search(cr, uid, domain, context=context)
 
     def _mark_lines(self, cr, uid, filtered_ids, state, context=None):
@@ -80,12 +85,12 @@ class CreditControlMarker(TransientModel):
             wiz_id = wiz_id[0]
         form = self.browse(cr, uid, wiz_id, context)
 
-        if not form.line_ids:
+        if not form.line_ids and not form.mark_all:
             raise except_osv(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
 
-        filtered_ids = self._filter_line_ids(cr, uid, line_ids, context)
+        filtered_ids = self._filter_line_ids(cr, uid, form.mark_all, line_ids, context)
         if not filtered_ids:
             raise except_osv(_('Information'),
                              _('No lines will be changed. All the selected lines are already done.'))
@@ -93,6 +98,7 @@ class CreditControlMarker(TransientModel):
         self._mark_lines(cr, uid, filtered_ids, form.name, context)
 
         return  {'domain': unicode([('id', 'in', filtered_ids)]),
+                 'name': _('%s marked line') % (form.name,),
                  'view_type': 'form',
                  'view_mode': 'tree,form',
                  'view_id': False,

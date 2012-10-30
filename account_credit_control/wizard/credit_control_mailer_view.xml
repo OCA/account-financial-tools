@@ -9,7 +9,9 @@
         <form>
           <separator string="Send e-mails for the selected lines" colspan="4"/>
           <newline/>
-          <field name="line_ids" colspan="4" nolabel="1" />
+          <field name="mail_all" colspan="4"/>
+          <field name="line_ids" colspan="4" nolabel="1"
+            attrs="{'invisible': [('mail_all', '=', True)]}" />
           <newline/>
           <group colspan="4">
             <button special="cancel" string="Cancel" icon='gtk-cancel'/>

@@ -11,7 +11,7 @@
           <field name="date_sent"/>
           <field name="level"/>
           <field name="state"/>
-          <field name="channel"/>
+          <field name="canal"/>
           <field name="invoice_id"/>
           <field name="partner_id"/>
           <field name="amount_due"/>
@@ -33,25 +33,23 @@
       <field name="arch" type="xml">
         <search string="Control Credit Lines">
           <group>
-            <filter name="filter_draft" icon="terp-mail-message-new"
-                    string="Draft" domain="[('state', '=', 'draft')]"
-                    help="Draft lines have to be triaged."/>
-            <filter name="filter_to_be_sent" icon="terp-mail-forward"
-                    string="Ready To Send" domain="[('state', '=', 'to_be_sent')]"
-                    help="These lines are ready to send by email or by letter using the Actions."/>
-            <filter name="filter_ignored" icon="terp-mail_delete"
-                    string="Ignored" domain="[('state', '=', 'ignored')]"
-                    help="Lines which have been ignored from previous runs."/>
-            <filter name="filter_sent" icon="terp-mail-replied"
-                    string="Sent" domain="[('state', '=', 'sent')]"
-                    help="Lines already sent."/>
-            <filter name="filter_error" icon="terp-gtk-stop" string="Error"
-                    domain="[('state', 'in', ('error', 'email_error'))]"
-                    help="An error has occured during the sending of the email."/>
+            <filter icon="terp-document-new" string="Manual"
+                    domain="[('state', '=', 'draft')]"
+                    help="New lines"/>
+            <filter icon="terp-dolar_ok!" string="Ready To Send"
+                    domain="[('state', '=', 'to_be_sent')]"
+                    help="New lines"/>
+            <filter icon="terp-check" string="Sent"
+                    domain="[('state', '=', 'sent')]"
+                    help="New lines"/>
+            <separator orientation="vertical"/>
+            <filter icon="terp-gtk-stop" string="Error"
+                    domain="[('state', 'in', ('error', 'mail_error'))]"
+                    help="New lines"/>
             <separator orientation="vertical"/>
 
             <field name="date"/>
-            <field name="channel" />
+            <field name="canal" />
             <field name="policy_id"/>
           </group>
           <newline/>
@@ -87,8 +85,8 @@
             <filter domain='[]' context="{'group_by': 'policy_level_id'}"
                     icon="terp-document-new" string="Credit policy level"/>
             <separator orientation="vertical"/>
-            <filter domain='[]' context="{'group_by': 'channel'}"
-                    icon="terp-document-new" string="Channel"/>
+            <filter domain='[]' context="{'group_by': 'canal'}"
+                    icon="terp-document-new" string="Canal"/>
           </group>
         </search>
       </field>
@@ -99,12 +97,12 @@
       <field name="model">credit.control.line</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'email_error');">
+        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'mail_error');">
           <field name="date"/>
           <field name="date_due"/>
           <field name="level"/>
           <field name="state"/>
-          <field name="channel"/>
+          <field name="canal"/>
           <field name="invoice_id"/>
           <field name="partner_id"/>
           <field name="amount_due"/>
@@ -132,7 +130,6 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="credit_control_line_tree"/>
-      <field name="context">{'search_default_filter_draft': 1, 'search_default_filter_to_be_sent': 1}</field>
       <field name="search_view_id" ref="credit_control_line_search"/>
     </record>
 
