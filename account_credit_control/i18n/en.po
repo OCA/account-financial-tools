@@ -1,24 +1,26 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_credit_control
+# 	* account_credit_control
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-07 09:48+0000\n"
-"PO-Revision-Date: 2012-11-07 11:33+0100\n"
-"Last-Translator: Alexandre Fayolle <alexandre.fayolle@camptocamp.com>\n"
+"POT-Creation-Date: 2012-11-07 13:20+0000\n"
+"PO-Revision-Date: 2012-11-07 14:24+0100\n"
+"Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
 "Language-Team: EN\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_1
-msgid "Dear Sir or Madam,\n"
+msgid ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we have not received the payment of the\n"
 "above mentioned invoice (copy attached for your convenience).  If it\n"
@@ -28,8 +30,8 @@ msgid "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
-msgstr "Dear Sir or Madam,\n"
+msgstr ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we have not received the payment of the\n"
 "above mentioned invoice (copy attached for your convenience).  If it\n"
@@ -39,7 +41,6 @@ msgstr "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_text:0
@@ -68,20 +69,15 @@ msgid "Credit Control Run"
 msgstr "Credit Control Run"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:102
-#, python-format
-msgid "Please select a policy"
-msgstr "Please select a policy"
-
-#. module: account_credit_control
 #: field:credit.control.policy.level,computation_mode:0
 msgid "Compute Mode"
 msgstr "Compute Mode"
 
 #. module: account_credit_control
-#: field:credit.control.printer,mark_as_sent:0
-msgid "Mark manual lines as sent"
-msgstr "Mark manual lines as sent"
+#: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
+#: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
+msgid "Send By Email"
+msgstr "Send By Email"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
@@ -89,20 +85,9 @@ msgid "A credit control line"
 msgstr "A credit control line"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:148
-#, python-format
-msgid "A credit control run is already running in background, please try later."
-msgstr "A credit control run is already running in background, please try later."
-
-#. module: account_credit_control
 #: field:credit.control.line,move_line_id:0
 msgid "Move line"
 msgstr "Move line"
-
-#. module: account_credit_control
-#: view:credit.control.marker:0
-msgid "Mark Lines"
-msgstr "Mark Lines"
 
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_info
@@ -110,14 +95,9 @@ msgid "Credit Control Info"
 msgstr "Credit Control Info"
 
 #. module: account_credit_control
-#: view:credit.control.mailer:0
-msgid "Send the e-mails"
-msgstr "Send the e-mails"
-
-#. module: account_credit_control
-#: field:credit.control.marker,mark_all:0
-msgid "Change the status of all draft lines"
-msgstr "Change the status of all draft lines"
+#: model:ir.model,name:account_credit_control.model_credit_control_emailer
+msgid "Mass credit line emailer"
+msgstr "Mass credit line emailer"
 
 #. module: account_credit_control
 #: field:credit.control.line,account_id:0
@@ -155,15 +135,14 @@ msgid "Wrong credit or debit value in accounting entry !"
 msgstr "Wrong credit or debit value in accounting entry!"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:75
-#, python-format
-msgid "state can not be empty"
-msgstr "state can not be empty"
-
-#. module: account_credit_control
 #: constraint:account.account:0
 msgid "Error ! You can not create recursive accounts."
 msgstr "Error! You can not create recursive accounts."
+
+#. module: account_credit_control
+#: view:credit.control.emailer:0
+msgid "Send emails for the selected lines"
+msgstr "Send emails for the selected lines"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_marker
@@ -212,19 +191,21 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: account_credit_control
+#: view:credit.control.emailer:0
+msgid "Send the emails"
+msgstr "Send the emails"
+
+#. module: account_credit_control
+#: view:credit.control.marker:0
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard_menu_action
 msgid "Change Lines' State"
 msgstr "Change Lines' State"
 
 #. module: account_credit_control
-#: help:credit.control.printer,mark_as_sent:0
-msgid "Only manual lines will be marked."
-msgstr "Only manual lines will be marked."
-
-#. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
-msgid "Dear Sir or Madam,\n"
+msgid ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we have not yet received the payment of the\n"
 "above mentioned invoice (copy attached for your convenience) despite\n"
@@ -234,8 +215,8 @@ msgid "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
-msgstr "Dear Sir or Madam,\n"
+msgstr ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we have not yet received the payment of the\n"
 "above mentioned invoice (copy attached for your convenience) despite\n"
@@ -245,7 +226,6 @@ msgstr "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,policy_id:0
@@ -274,14 +254,17 @@ msgid "Print"
 msgstr "Print"
 
 #. module: account_credit_control
-#: view:credit.control.lines:0
-msgid "Sent"
-msgstr "Sent"
+#: selection:credit.control.line,channel:0
+#: selection:credit.control.policy.level,channel:0
+msgid "Email"
+msgstr "Email"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-msgid "Mailing Error"
-msgstr "Mailing Error"
+#: field:credit.control.line,channel:0
+#: view:credit.control.lines:0
+#: field:credit.control.policy.level,channel:0
+msgid "Channel"
+msgstr "Channel"
 
 #. module: account_credit_control
 #: help:credit.control.run,manual_ids:0
@@ -304,20 +287,14 @@ msgid "Due Date, End Of Month"
 msgstr "Due Date, End Of Month"
 
 #. module: account_credit_control
-#: selection:credit.control.line,canal:0
-#: view:credit.control.lines:0
-#: selection:credit.control.policy.level,canal:0
-msgid "Manual"
-msgstr "Manual"
-
-#. module: account_credit_control
 #: field:credit.control.marker,name:0
 msgid "Mark as"
 msgstr "Mark as"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
-msgid "Dear Sir or Madam,\n"
+msgid ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we still have not received the payment of\n"
 "the above mentioned invoice (copy attached) despite our reminder.\n"
@@ -332,8 +309,8 @@ msgid "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
-msgstr "Dear Sir or Madam,\n"
+msgstr ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we still have not received the payment of\n"
 "the above mentioned invoice (copy attached) despite our reminder.\n"
@@ -348,21 +325,12 @@ msgstr "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
 
 #. module: account_credit_control
 #: view:credit.control.run:0
 #: field:credit.control.run,policy_ids:0
 msgid "Policies"
 msgstr "Policies"
-
-#. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_mailer.py:80
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:89
-#: code:addons/account_credit_control/wizard/credit_control_printer.py:80
-#, python-format
-msgid "No credit control lines selected."
-msgstr "No credit control lines selected."
 
 #. module: account_credit_control
 #: field:credit.control.line,date_due:0
@@ -381,9 +349,11 @@ msgstr "Currency"
 
 #. module: account_credit_control
 #: constraint:account.account:0
-msgid "Configuration Error! \n"
+msgid ""
+"Configuration Error! \n"
 "You can not define children to an account with internal type different of \"View\"! "
-msgstr "Configuration Error! \n"
+msgstr ""
+"Configuration Error! \n"
 "You can not define children to an account with internal type different of \"View\"! "
 
 #. module: account_credit_control
@@ -399,22 +369,10 @@ msgid "Company"
 msgstr "Company"
 
 #. module: account_credit_control
-#: field:credit.control.line,canal:0
-#: view:credit.control.lines:0
-#: field:credit.control.policy.level,canal:0
-msgid "Canal"
-msgstr "Canal"
-
-#. module: account_credit_control
 #: view:credit.control.marker:0
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
 msgid "Change the state of the selected lines."
 msgstr "Change the state of the selected lines."
-
-#. module: account_credit_control
-#: view:credit.control.lines:0
-msgid "Run date"
-msgstr "Run date"
 
 #. module: account_credit_control
 #: view:credit.control.printer:0
@@ -423,6 +381,7 @@ msgstr "Print the selected lines"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
+#: view:credit.control.lines:0
 #: selection:credit.control.marker,name:0
 #: selection:credit.control.run,state:0
 msgid "Draft"
@@ -432,11 +391,6 @@ msgstr "Draft"
 #: view:credit.control.lines:0
 msgid "Credit policy"
 msgstr "Credit policy"
-
-#. module: account_credit_control
-#: field:credit.control.line,mail_message_id:0
-msgid "Sent mail"
-msgstr "Sent mail"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0
@@ -460,14 +414,15 @@ msgid "Credit control line generator"
 msgstr "Credit control line generator"
 
 #. module: account_credit_control
-#: selection:credit.control.line,canal:0
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
 msgstr "User"
+
+#. module: account_credit_control
+#: selection:credit.control.line,channel:0
+#: selection:credit.control.policy.level,channel:0
+msgid "Letter"
+msgstr "Letter"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_move_line
@@ -485,7 +440,7 @@ msgid "You can not create journal items on an account of type view."
 msgstr "You can not create journal items on an account of type view."
 
 #. module: account_credit_control
-#: field:credit.control.mailer,line_ids:0
+#: field:credit.control.emailer,line_ids:0
 #: field:credit.control.marker,line_ids:0
 #: field:credit.control.printer,line_ids:0
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_line_action
@@ -496,7 +451,8 @@ msgstr "Credit Control Lines"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
-msgid "Dear Sir or Madam,\n"
+msgid ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we still have not received the payment of\n"
 "the above mentioned invoice (copy attached) despite our two reminders.\n"
@@ -511,8 +467,8 @@ msgid "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
-msgstr "Dear Sir or Madam,\n"
+msgstr ""
+"Dear Sir or Madam,\n"
 "\n"
 "Our records indicate that we still have not received the payment of\n"
 "the above mentioned invoice (copy attached) despite our two reminders.\n"
@@ -527,7 +483,6 @@ msgstr "Dear Sir or Madam,\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
-""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard
@@ -546,6 +501,11 @@ msgid "Define a reminder policy"
 msgstr "Define a reminder policy"
 
 #. module: account_credit_control
+#: field:credit.control.policy.level,email_template_id:0
+msgid "Email Template"
+msgstr "Email Template"
+
+#. module: account_credit_control
 #: selection:credit.control.line,state:0
 #: view:credit.control.lines:0
 #: selection:credit.control.marker,name:0
@@ -553,10 +513,14 @@ msgid "Ready To Send"
 msgstr "Ready To Send"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:101
-#, python-format
-msgid "%s marked line"
-msgstr "%s marked line"
+#: model:ir.model,name:account_credit_control.model_res_company
+msgid "Companies"
+msgstr "Companies"
+
+#. module: account_credit_control
+#: field:credit.control.printer,mark_as_sent:0
+msgid "Mark letter lines as sent"
+msgstr "Mark letter lines as sent"
 
 #. module: account_credit_control
 #: view:credit.control.run:0
@@ -569,25 +533,10 @@ msgid "Previous Reminder"
 msgstr "Previous Reminder"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:81
-#: code:addons/account_credit_control/run.py:101
-#: code:addons/account_credit_control/run.py:147
-#: code:addons/account_credit_control/wizard/credit_control_mailer.py:80
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:89
-#: code:addons/account_credit_control/wizard/credit_control_printer.py:80
 #: selection:credit.control.line,state:0
 #: view:credit.control.lines:0
-#, python-format
 msgid "Error"
 msgstr "Error"
-
-#. module: account_credit_control
-#: code:addons/account_credit_control/run.py:123
-#, python-format
-msgid "Policy \"%s\" has generated %d Credit Control Lines.\n"
-""
-msgstr "Policy \"%s\" has generated %d Credit Control Lines.\n"
-""
 
 #. module: account_credit_control
 #: sql_constraint:account.invoice:0
@@ -601,9 +550,11 @@ msgstr "Report and Errors"
 
 #. module: account_credit_control
 #: constraint:account.account:0
-msgid "Configuration Error! \n"
+msgid ""
+"Configuration Error! \n"
 "You can not select an account type with a deferral method different of \"Unreconciled\" for accounts with internal type \"Payable/Receivable\"! "
-msgstr "Configuration Error! \n"
+msgstr ""
+"Configuration Error! \n"
 "You can not select an account type with a deferral method different of \"Unreconciled\" for accounts with internal type \"Payable/Receivable\"! "
 
 #. module: account_credit_control
@@ -642,7 +593,7 @@ msgid "Invoice"
 msgstr "Invoice"
 
 #. module: account_credit_control
-#: view:credit.control.mailer:0
+#: view:credit.control.emailer:0
 #: view:credit.control.marker:0
 #: view:credit.control.printer:0
 msgid "Cancel"
@@ -654,15 +605,19 @@ msgid "Close"
 msgstr "Close"
 
 #. module: account_credit_control
+#: selection:credit.control.line,state:0
+msgid "Emailing Error"
+msgstr "Emailing Error"
+
+#. module: account_credit_control
 #: help:account.invoice,credit_policy_id:0
 msgid "The Credit Control Policy used for this invoice. If nothing is defined, it will use the account setting or the partner setting."
 msgstr "The Credit Control Policy used for this invoice. If nothing is defined, it will use the account setting or the partner setting."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:95
-#, python-format
-msgid "Information"
-msgstr "Information"
+#: view:credit.control.lines:0
+msgid "Run date"
+msgstr "Run date"
 
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_user
@@ -671,7 +626,8 @@ msgstr "Credit Control User"
 
 #. module: account_credit_control
 #: model:email.template,body_html:account_credit_control.email_template_credit_control_base
-msgid "\n"
+msgid ""
+"\n"
 "      <%page args=\"object, user=None, ctx=None, quote=None, format_exception=True, mode='mail'\" />\n"
 "      %if mode != 'pdf':\n"
 "      <!-- your css here -->\n"
@@ -735,7 +691,8 @@ msgid "\n"
 "      ${object.company_id.website or ''}<br/>\n"
 "      % endif\n"
 "      "
-msgstr "\n"
+msgstr ""
+"\n"
 "      <%page args=\"object, user=None, ctx=None, quote=None, format_exception=True, mode='mail'\" />\n"
 "      %if mode != 'pdf':\n"
 "      <!-- your css here -->\n"
@@ -799,12 +756,6 @@ msgstr "\n"
 "      ${object.company_id.website or ''}<br/>\n"
 "      % endif\n"
 "      "
-
-#. module: account_credit_control
-#: code:addons/account_credit_control/run.py:82
-#, python-format
-msgid "A run has already been executed more recently than %s"
-msgstr "A run has already been executed more recently than %s"
 
 #. module: account_credit_control
 #: constraint:account.move.line:0
@@ -823,12 +774,6 @@ msgid "Credit Control"
 msgstr "Credit Control"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:296
-#, python-format
-msgid "Can not get function for computation mode: %s is not implemented"
-msgstr "Can not get function for computation mode: %s is not implemented"
-
-#. module: account_credit_control
 #: view:credit.control.policy:0
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
@@ -845,11 +790,6 @@ msgid "Policy"
 msgstr "Policy"
 
 #. module: account_credit_control
-#: selection:credit.control.policy.level,canal:0
-msgid "Mail"
-msgstr "Mail"
-
-#. module: account_credit_control
 #: model:email.template,subject:account_credit_control.email_template_credit_control_base
 msgid "Credit Control: (${object.current_policy_level.name or 'n/a' })"
 msgstr "Credit Control: (${object.current_policy_level.name or 'n/a' })"
@@ -858,16 +798,6 @@ msgstr "Credit Control: (${object.current_policy_level.name or 'n/a' })"
 #: field:credit.control.printer,report_file:0
 msgid "Generated Report"
 msgstr "Generated Report"
-
-#. module: account_credit_control
-#: view:credit.control.mailer:0
-msgid "Send e-mails for the selected lines"
-msgstr "Send e-mails for the selected lines"
-
-#. module: account_credit_control
-#: field:credit.control.policy.level,mail_template_id:0
-msgid "Mail Template"
-msgstr "Mail Template"
 
 #. module: account_credit_control
 #: view:credit.control.run:0
@@ -881,15 +811,14 @@ msgid "Credit Control Policies"
 msgstr "Credit Control Policies"
 
 #. module: account_credit_control
-#: model:ir.actions.act_window,help:account_credit_control.open_credit_line_mailer_wizard
+#: model:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
 msgid "Send an email for the selected lines."
 msgstr "Send an email for the selected lines."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:96
-#, python-format
-msgid "No lines will be changed. All the selected lines are already done."
-msgstr "No lines will be changed. All the selected lines are already done."
+#: view:credit.control.lines:0
+msgid "Sent"
+msgstr "Sent"
 
 #. module: account_credit_control
 #: constraint:credit.control.policy.level:0
@@ -900,6 +829,11 @@ msgstr "The smallest level can not be of type Previous Reminder"
 #: help:credit.control.policy,account_ids:0
 msgid "This policy will be active only for the selected accounts"
 msgstr "This policy will be active only for the selected accounts"
+
+#. module: account_credit_control
+#: help:credit.control.printer,mark_as_sent:0
+msgid "Only letter lines will be marked."
+msgstr "Only letter lines will be marked."
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -924,20 +858,14 @@ msgid "Name"
 msgstr "Name"
 
 #. module: account_credit_control
-#: model:ir.model,name:account_credit_control.model_res_company
-msgid "Companies"
-msgstr "Companies"
-
-#. module: account_credit_control
 #: help:res.partner,credit_policy_id:0
 msgid "The Credit Control Policyused for this partner. This setting can be forced on the invoice. If nothing is defined, it will use the company setting."
 msgstr "The Credit Control Policy used for this partner. This setting can be forced on the invoice. If nothing is defined, it will use the company setting."
 
 #. module: account_credit_control
-#: model:ir.actions.act_window,name:account_credit_control.open_credit_line_mailer_wizard
-#: model:ir.actions.act_window,name:account_credit_control.open_credit_line_mailer_wizard_menu_action
-msgid "Send By E-mail"
-msgstr "Send By E-mail"
+#: field:credit.control.line,mail_message_id:0
+msgid "Sent Email"
+msgstr "Sent Email"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -948,11 +876,6 @@ msgstr "A credit control policy level"
 #: model:ir.actions.report.xml,name:account_credit_control.report_webkit_html
 msgid "Credit Summary"
 msgstr "Credit Summary"
-
-#. module: account_credit_control
-#: field:credit.control.mailer,mail_all:0
-msgid "Send an e-mail for all \"Ready To Send\" lines of the \"E-Mail\" channel"
-msgstr "Send an e-mail for all \"Ready To Send\" lines of the \"E-Mail\" channel"
 
 #. module: account_credit_control
 #: field:credit.control.line,date:0
@@ -975,11 +898,6 @@ msgid "Credit Control Tolerance"
 msgstr "Credit Control Tolerance"
 
 #. module: account_credit_control
-#: field:credit.control.printer,print_all:0
-msgid "Print all \"Ready To Send\" lines of the \"Manual\" channel"
-msgstr "Print all \"Ready To Send\" lines of the \"Manual\" channel"
-
-#. module: account_credit_control
 #: help:res.company,credit_policy_id:0
 msgid "The Credit Control Policy used on partners by default. This setting can be overriden on partners or invoices."
 msgstr "The Credit Control Policy used on partners by default. This setting can be overriden on partners or invoices."
@@ -988,4 +906,45 @@ msgstr "The Credit Control Policy used on partners by default. This setting can 
 #: field:credit.control.line,policy_level_id:0
 msgid "Overdue Level"
 msgstr "Overdue Level"
+
+#~ msgid "Please select a policy"
+#~ msgstr "Please select a policy"
+#~ msgid ""
+#~ "A credit control run is already running in background, please try later."
+#~ msgstr ""
+#~ "A credit control run is already running in background, please try later."
+#~ msgid "Mark Lines"
+#~ msgstr "Mark Lines"
+#~ msgid "Change the status of all draft lines"
+#~ msgstr "Change the status of all draft lines"
+#~ msgid "state can not be empty"
+#~ msgstr "state can not be empty"
+#~ msgid "Manual"
+#~ msgstr "Manual"
+#~ msgid "No credit control lines selected."
+#~ msgstr "No credit control lines selected."
+#~ msgid "Canal"
+#~ msgstr "Canal"
+#~ msgid "E-Mail"
+#~ msgstr "E-Mail"
+#~ msgid "%s marked line"
+#~ msgstr "%s marked line"
+#~ msgid "Policy \"%s\" has generated %d Credit Control Lines.\n"
+#~ msgstr "Policy \"%s\" has generated %d Credit Control Lines.\n"
+#~ msgid "Information"
+#~ msgstr "Information"
+#~ msgid "A run has already been executed more recently than %s"
+#~ msgstr "A run has already been executed more recently than %s"
+#~ msgid "Can not get function for computation mode: %s is not implemented"
+#~ msgstr "Can not get function for computation mode: %s is not implemented"
+#~ msgid "Mail"
+#~ msgstr "Mail"
+#~ msgid "No lines will be changed. All the selected lines are already done."
+#~ msgstr "No lines will be changed. All the selected lines are already done."
+#~ msgid ""
+#~ "Send an e-mail for all \"Ready To Send\" lines of the \"E-Mail\" channel"
+#~ msgstr ""
+#~ "Send an e-mail for all \"Ready To Send\" lines of the \"E-Mail\" channel"
+#~ msgid "Print all \"Ready To Send\" lines of the \"Manual\" channel"
+#~ msgstr "Print all \"Ready To Send\" lines of the \"Manual\" channel"
 
