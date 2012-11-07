@@ -59,9 +59,9 @@ class CreditControlLine(Model):
                                    ('mail_error', 'Mailing Error')],
                                   'State', required=True, readonly=True),
 
-        'canal': fields.selection([('manual', 'Manual'),
+        'channel': fields.selection([('letter', 'Letter'),
                                    ('mail', 'E-Mail')],
-                                  'Canal', required=True,
+                                  'Channel', required=True,
                                   readonly=True,
                                   states={'draft': [('readonly', False)]}),
 
@@ -125,7 +125,7 @@ class CreditControlLine(Model):
         data['date'] = controlling_date
         data['date_due'] = move_line.date_maturity
         data['state'] = 'draft'
-        data['canal'] = level.canal
+        data['channel'] = level.channel
         data['invoice_id'] = move_line.invoice_id.id if move_line.invoice_id else False
         data['partner_id'] = move_line.partner_id.id
         data['amount_due'] = (move_line.amount_currency or move_line.debit or

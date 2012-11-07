@@ -50,7 +50,7 @@ class AccountInvoice(Model):
                                                    "setting.")),
 
         'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                   'account_id',
+                                                   'invoice_id',
                                                    string='Credit Lines',
                                                    readonly=True)
     }

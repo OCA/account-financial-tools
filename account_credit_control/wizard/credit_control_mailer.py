@@ -39,33 +39,27 @@ class CreditControlMailer(TransientModel):
                 context.get('active_ids')):
             res = self._filter_line_ids(
                     cr, uid,
-                    False,
                     context['active_ids'],
                     context=context)
         return res
 
     _columns = {
-        'mail_all': fields.boolean('Send an e-mail for all "Ready To Send" lines of the "E-Mail" channel'),
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
-            domain="[('state', '=', 'to_be_sent'), ('canal', '=', 'mail')]"),
+            domain="[('state', '=', 'to_be_sent'), ('channel', '=', 'mail')]"),
     }
 
     _defaults = {
         'line_ids': _get_line_ids,
     }
 
-    def _filter_line_ids(self, cr, uid, mail_all, active_ids, context=None):
+    def _filter_line_ids(self, cr, uid, active_ids, context=None):
         """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
-        if mail_all:
-            domain = [('state', '=', 'to_be_sent'),
-                      ('canal', '=', 'mail')]
-        else:
-            domain = [('state', '=', 'to_be_sent'),
-                      ('id', 'in', active_ids),
-                      ('canal', '=', 'mail')]
+        domain = [('state', '=', 'to_be_sent'),
+                  ('id', 'in', active_ids),
+                  ('channel', '=', 'mail')]
         return line_obj.search(cr, uid, domain, context=context)
 
     def mail_lines(self, cr, uid, wiz_id, context=None):
@@ -81,7 +75,7 @@ class CreditControlMailer(TransientModel):
 
         line_ids = [l.id for l in form.line_ids]
         filtered_ids = self._filter_line_ids(
-                cr, uid, form.mail_all, line_ids, context)
+                cr, uid, line_ids, context)
         comms = comm_obj._generate_comm_from_credit_line_ids(
                 cr, uid, filtered_ids, context=context)
         comm_obj._generate_mails(cr, uid, comms, context=context)

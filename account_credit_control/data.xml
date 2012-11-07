@@ -194,7 +194,7 @@ Best regards,
       <field name="delay_days" eval="60"/>
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
-      <field name="canal">manual</field>
+      <field name="canal">letter</field>
       <field name="custom_text">Dear Sir or Madam,
 
 Our records indicate that we still have not received the payment of

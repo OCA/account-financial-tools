@@ -41,9 +41,8 @@ class CreditControlPrinter(TransientModel):
         return res
 
     _columns = {
-        'mark_as_sent': fields.boolean('Mark manual lines as sent',
-                                       help="Only manual lines will be marked."),
-        'print_all': fields.boolean('Print all "Ready To Send" lines of the "Manual" channel'),
+        'mark_as_sent': fields.boolean('Mark letter lines as sent',
+                                       help="Only letter lines will be marked."),
         'report_file': fields.binary('Generated Report', readonly=True),
         'state': fields.char('state', size=32),
         'line_ids': fields.many2many(
@@ -56,16 +55,12 @@ class CreditControlPrinter(TransientModel):
         'line_ids': _get_line_ids,
     }
 
-    def _filter_line_ids(self, cr, uid, print_all, active_ids, context=None):
+    def _filter_line_ids(self, cr, uid, active_ids, context=None):
         """filter lines to use in the wizard"""
         line_obj = self.pool.get('credit.control.line')
-        if print_all:
-            domain = [('state', '=', 'to_be_sent'),
-                      ('canal', '=', 'manual')]
-        else:
-            domain = [('state', '=', 'to_be_sent'),
-                      ('id', 'in', active_ids),
-                      ('canal', '=', 'manual')]
+        domain = [('state', '=', 'to_be_sent'),
+                  ('id', 'in', active_ids),
+                  ('channel', '=', 'letter')]
         return line_obj.search(cr, uid, domain, context=context)
 
     def print_lines(self, cr, uid, wiz_id, context=None):
@@ -80,19 +75,14 @@ class CreditControlPrinter(TransientModel):
             raise except_osv(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
-        if form.print_all:
-            filtered_ids = self._filter_line_ids(
-                cr, uid, form.print_all, line_ids, context)
-        else:
-            filtered_ids = line_ids
         comms = comm_obj._generate_comm_from_credit_line_ids(
-                cr, uid, filtered_ids, context=context)
+                cr, uid, line_ids, context=context)
         report_file = comm_obj._generate_report(cr, uid, comms, context=context)
 
         form.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
 
         if form.mark_as_sent:
-            filtered_ids = self._filter_line_ids(cr, uid, False, line_ids, context)
+            filtered_ids = self._filter_line_ids(cr, uid, line_ids, context)
             comm_obj._mark_credit_line_as_sent(cr, uid, comms, context=context)
 
         return False  # do not close the window, we need it to download the report
