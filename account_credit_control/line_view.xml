@@ -11,7 +11,7 @@
           <field name="date_sent"/>
           <field name="level"/>
           <field name="state"/>
-          <field name="canal"/>
+          <field name="channel"/>
           <field name="invoice_id"/>
           <field name="partner_id"/>
           <field name="amount_due"/>
@@ -49,7 +49,7 @@
             <separator orientation="vertical"/>
 
             <field name="date"/>
-            <field name="canal" />
+            <field name="channel" />
             <field name="policy_id"/>
           </group>
           <newline/>
@@ -85,8 +85,8 @@
             <filter domain='[]' context="{'group_by': 'policy_level_id'}"
                     icon="terp-document-new" string="Credit policy level"/>
             <separator orientation="vertical"/>
-            <filter domain='[]' context="{'group_by': 'canal'}"
-                    icon="terp-document-new" string="Canal"/>
+            <filter domain='[]' context="{'group_by': 'channel'}"
+                    icon="terp-document-new" string="Channel"/>
           </group>
         </search>
       </field>
@@ -102,7 +102,7 @@
           <field name="date_due"/>
           <field name="level"/>
           <field name="state"/>
-          <field name="canal"/>
+          <field name="channel"/>
           <field name="invoice_id"/>
           <field name="partner_id"/>
           <field name="amount_due"/>

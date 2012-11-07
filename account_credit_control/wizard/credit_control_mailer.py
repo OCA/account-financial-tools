@@ -49,7 +49,7 @@ class CreditControlMailer(TransientModel):
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
-            domain="[('state', '=', 'to_be_sent'), ('canal', '=', 'mail')]"),
+            domain="[('state', '=', 'to_be_sent'), ('channel', '=', 'mail')]"),
     }
 
     _defaults = {
@@ -61,11 +61,11 @@ class CreditControlMailer(TransientModel):
         line_obj = self.pool.get('credit.control.line')
         if mail_all:
             domain = [('state', '=', 'to_be_sent'),
-                      ('canal', '=', 'mail')]
+                      ('channel', '=', 'mail')]
         else:
             domain = [('state', '=', 'to_be_sent'),
                       ('id', 'in', active_ids),
-                      ('canal', '=', 'mail')]
+                      ('channel', '=', 'mail')]
         return line_obj.search(cr, uid, domain, context=context)
 
     def mail_lines(self, cr, uid, wiz_id, context=None):

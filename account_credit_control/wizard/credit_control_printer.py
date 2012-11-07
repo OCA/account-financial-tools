@@ -61,11 +61,11 @@ class CreditControlPrinter(TransientModel):
         line_obj = self.pool.get('credit.control.line')
         if print_all:
             domain = [('state', '=', 'to_be_sent'),
-                      ('canal', '=', 'manual')]
+                      ('channel', '=', 'manual')]
         else:
             domain = [('state', '=', 'to_be_sent'),
                       ('id', 'in', active_ids),
-                      ('canal', '=', 'manual')]
+                      ('channel', '=', 'manual')]
         return line_obj.search(cr, uid, domain, context=context)
 
     def print_lines(self, cr, uid, wiz_id, context=None):
