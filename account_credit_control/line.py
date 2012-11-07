@@ -59,7 +59,7 @@ class CreditControlLine(Model):
                                    ('mail_error', 'Mailing Error')],
                                   'State', required=True, readonly=True),
 
-        'channel': fields.selection([('manual', 'Manual'),
+        'channel': fields.selection([('letter', 'Letter'),
                                    ('mail', 'E-Mail')],
                                   'Channel', required=True,
                                   readonly=True,

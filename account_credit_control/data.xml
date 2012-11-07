@@ -119,7 +119,7 @@
       <field name="delay_days" eval="10"/>
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
-      <field name="channel">manual</field>
+      <field name="channel">letter</field>
       <field name="custom_text">Replace this text in level by your message</field>
     </record>
 
@@ -149,7 +149,7 @@
       <field name="delay_days" eval="60"/>
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
-      <field name="channel">manual</field>
+      <field name="channel">letter</field>
       <field name="custom_text">Replace this text in level by your message</field>
     </record>
 

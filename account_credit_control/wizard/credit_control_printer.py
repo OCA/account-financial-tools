@@ -41,9 +41,9 @@ class CreditControlPrinter(TransientModel):
         return res
 
     _columns = {
-        'mark_as_sent': fields.boolean('Mark manual lines as sent',
-                                       help="Only manual lines will be marked."),
-        'print_all': fields.boolean('Print all "Ready To Send" lines of the "Manual" channel'),
+        'mark_as_sent': fields.boolean('Mark letter lines as sent',
+                                       help="Only letter lines will be marked."),
+        'print_all': fields.boolean('Print all "Ready To Send" lines of the "Letter" channel'),
         'report_file': fields.binary('Generated Report', readonly=True),
         'state': fields.char('state', size=32),
         'line_ids': fields.many2many(
@@ -61,11 +61,11 @@ class CreditControlPrinter(TransientModel):
         line_obj = self.pool.get('credit.control.line')
         if print_all:
             domain = [('state', '=', 'to_be_sent'),
-                      ('channel', '=', 'manual')]
+                      ('channel', '=', 'letter')]
         else:
             domain = [('state', '=', 'to_be_sent'),
                       ('id', 'in', active_ids),
-                      ('channel', '=', 'manual')]
+                      ('channel', '=', 'letter')]
         return line_obj.search(cr, uid, domain, context=context)
 
     def print_lines(self, cr, uid, wiz_id, context=None):
