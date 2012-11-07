@@ -69,7 +69,7 @@ class CreditCommunication(TransientModel):
         else:
             return False
 
-    def get_mail(self, cr, uid, com_id, context=None):
+    def get_email(self, cr, uid, com_id, context=None):
         """Return a valid email for customer"""
         assert not (isinstance(com_id, list) and len(com_id) > 1), \
                 "com_id: only one id expected"
@@ -120,12 +120,12 @@ class CreditCommunication(TransientModel):
             comms.append(self.browse(cr, uid, comm_id, context=context))
         return comms
 
-    def _generate_mails(self, cr, uid, comms, context=None):
-        """Generate mail message using template related to level"""
+    def _generate_emails(self, cr, uid, comms, context=None):
+        """Generate email message using template related to level"""
         cr_line_obj = self.pool.get('credit.control.line')
-        mail_temp_obj = self.pool.get('email.template')
-        mail_message_obj = self.pool.get('mail.message')
-        mail_ids = []
+        email_temp_obj = self.pool.get('email.template')
+        email_message_obj = self.pool.get('mail.message')
+        email_ids = []
 
         essential_fields = [
                 'subject',
@@ -137,23 +137,23 @@ class CreditCommunication(TransientModel):
         for comm in comms:
             # we want to use a local cr in order to send the maximum
             # of email
-            template = comm.current_policy_level.mail_template_id.id
-            mail_values = {}
+            template = comm.current_policy_level.email_template_id.id
+            email_values = {}
             cl_ids = [cl.id for cl in comm.credit_control_line_ids]
-            mail_values = mail_temp_obj.generate_email(cr, uid,
+            email_values = email_temp_obj.generate_email(cr, uid,
                                                        template,
                                                        comm.id,
                                                        context=context)
 
-            mail_id = mail_message_obj.create(cr, uid, mail_values, context=context)
+            email_id = email_message_obj.create(cr, uid, email_values, context=context)
 
             state = 'sent'
             # The mail will not be send, however it will be in the pool, in an
             # error state. So we create it, link it with the credit control line
-            # and put this latter in a `mail_error` state we not that we have a
-            # problem with the mail
-            if any(not mail_values.get(field) for field in essential_fields):
-                state = 'mail_error'
+            # and put this latter in a `email_error` state we not that we have a
+            # problem with the email
+            if any(not email_values.get(field) for field in essential_fields):
+                state = 'email_error'
 
             cr_line_obj.write(
                     cr, uid, cl_ids,
@@ -161,8 +161,8 @@ class CreditCommunication(TransientModel):
                      'state': state},
                     context=context)
 
-            mail_ids.append(mail_id)
-        return mail_ids
+            email_ids.append(email_id)
+        return email_ids
 
     def _generate_report(self, cr, uid, comms, context=None):
         """Will generate a report by inserting mako template of related policy template"""

@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import credit_control_mailer
+from . import credit_control_emailer
 from . import credit_control_marker
 from . import credit_control_printer
 from . import credit_control_communication
