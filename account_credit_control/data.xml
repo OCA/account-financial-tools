@@ -96,7 +96,17 @@
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="canal">mail</field>
-      <field name="custom_text">Replace this text in level by your message</field>
+      <field name="custom_text">Dear Sir or Madam,
+
+Our records indicate that we have not received the payment of the
+above mentioned invoice (copy attached for your convenience).  If it
+has already been sent, please disregard this notice. If not, please
+proceed with payment within 10 days.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards,
+</field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -108,7 +118,17 @@
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="canal">mail</field>
-      <field name="custom_text">Replace this text in level by your message</field>
+      <field name="custom_text">Dear Sir or Madam,
+
+Our records indicate that we have not yet received the payment of the
+above mentioned invoice (copy attached for your convenience) despite
+our first reminder.  If it has already been sent, please disregard
+this notice. If not, please proceed with payment within 5 days.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards,
+</field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -120,7 +140,22 @@
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="canal">manual</field>
-      <field name="custom_text">Replace this text in level by your message</field>
+      <field name="custom_text">Dear Sir or Madam,
+
+Our records indicate that we still have not received the payment of
+the above mentioned invoice (copy attached) despite our two reminders.
+If payment have already been sent, please disregard this notice. If
+not, please proceed with payment. If your payment has not been
+received in the next 5 days, your file will be transfered to our debt
+collection agency.
+
+Should you need us to arrange a payment plan for you, please advise.
+A customer account statement is enclosed for you convenience.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards,
+</field>
     </record>
 
     <!-- policy 2 -->
@@ -138,7 +173,17 @@
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="canal">mail</field>
-      <field name="custom_text">Replace this text in level by your message</field>
+      <field name="custom_text">Dear Sir or Madam,
+
+Our records indicate that we have not received the payment of the
+above mentioned invoice (copy attached for your convenience).  If it
+has already been sent, please disregard this notice. If not, please
+proceed with payment within 10 days.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards,
+</field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -150,7 +195,22 @@
       <field name="mail_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="canal">manual</field>
-      <field name="custom_text">Replace this text in level by your message</field>
+      <field name="custom_text">Dear Sir or Madam,
+
+Our records indicate that we still have not received the payment of
+the above mentioned invoice (copy attached) despite our reminder.
+If payment have already been sent, please disregard this notice. If
+not, please proceed with payment. If your payment has not been
+received in the next 5 days, your file will be transfered to our debt
+collection agency.
+
+Should you need us to arrange a payment plan for you, please advise.
+A customer account statement is enclosed for you convenience.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards,
+</field>
     </record>
 
     <record id="group_account_credit_control_manager" model="res.groups">
