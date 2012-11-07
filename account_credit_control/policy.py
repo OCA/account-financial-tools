@@ -298,7 +298,7 @@ class CreditControlPolicyLevel(Model):
 
     # -----------------------------------------
 
-    def _get_first_level_lines(self, cr, uid, level, controlling_date, lines, context=None):
+    def _get_first_level_move_line_ids(self, cr, uid, level, controlling_date, lines, context=None):
         """Retrieve all the move lines that are linked to a first level.
            We use Raw SQL for performance. Security rule where applied in
            policy object when the first set of lines were retrieved"""
@@ -308,8 +308,12 @@ class CreditControlPolicyLevel(Model):
         sql = ("SELECT DISTINCT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " WHERE mv_line.id in %(line_ids)s\n"
-               " AND NOT EXISTS (SELECT cr_line.id from credit_control_line cr_line\n"
-               "                  WHERE cr_line.move_line_id = mv_line.id)")
+               " AND NOT EXISTS (SELECT id\n"
+               "                 FROM credit_control_line\n"
+               "                 WHERE move_line_id = mv_line.id\n"
+               # lines from a previous level with a draft or ignored state
+               # have to be generated again for the previous level
+               "                 AND state not in ('draft', 'ignored'))")
         sql += " AND" + self._get_sql_date_boundary_for_computation_mode(
                 cr, uid, level, controlling_date, context)
         data_dict = {'controlling_date': controlling_date, 'line_ids': tuple(lines),
@@ -321,7 +325,7 @@ class CreditControlPolicyLevel(Model):
             level_lines.update([x[0] for x in res])
         return level_lines
 
-    def _get_other_level_lines(self, cr, uid, level, controlling_date, lines, context=None):
+    def _get_other_level_move_line_ids(self, cr, uid, level, controlling_date, lines, context=None):
         """ Retrieve the move lines for other levels than first level.
         """
         level_lines = set()
@@ -329,12 +333,15 @@ class CreditControlPolicyLevel(Model):
             return level_lines
         sql = ("SELECT mv_line.id\n"
                " FROM account_move_line mv_line\n"
-               " JOIN  credit_control_line cr_line\n"
+               " JOIN credit_control_line cr_line\n"
                " ON (mv_line.id = cr_line.move_line_id)\n"
                " WHERE cr_line.id = (SELECT credit_control_line.id FROM credit_control_line\n"
                "                            WHERE credit_control_line.move_line_id = mv_line.id\n"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
-               " AND cr_line.level = %(level)s\n"
+               " AND cr_line.level = %(previous_level)s\n"
+               # lines from a previous level with a draft or ignored state
+               # have to be generated again for the previous level
+               " AND cr_line.state not in ('draft', 'ignored')\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND " + self._get_sql_date_boundary_for_computation_mode(
                 cr, uid, level, controlling_date, context)
@@ -343,7 +350,7 @@ class CreditControlPolicyLevel(Model):
         previous_level = self.browse(
                 cr, uid, previous_level_id, context=context)
         data_dict =  {'controlling_date': controlling_date, 'line_ids': tuple(lines),
-                     'delay': level.delay_days, 'level': previous_level.level}
+                     'delay': level.delay_days, 'previous_level': previous_level.level}
 
         # print cr.mogrify(sql, data_dict)
         cr.execute(sql, data_dict)
@@ -361,9 +368,9 @@ class CreditControlPolicyLevel(Model):
         matching_lines = set()
         level = self.browse(cr, uid, level_id, context=context)
         if self._previous_level(cr, uid, level, context=context) is None:
-            method = self._get_first_level_lines
+            method = self._get_first_level_move_line_ids
         else:
-            method = self._get_other_level_lines
+            method = self._get_other_level_move_line_ids
 
         matching_lines.update(
                 method(cr, uid, level, controlling_date, lines, context=context))

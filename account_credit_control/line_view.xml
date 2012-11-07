@@ -33,19 +33,21 @@
       <field name="arch" type="xml">
         <search string="Control Credit Lines">
           <group>
-            <filter icon="terp-document-new" string="Draft"
-                    domain="[('state', '=', 'draft')]"
-                    help="New lines"/>
-            <filter icon="terp-dolar_ok!" string="Ready To Send"
-                    domain="[('state', '=', 'to_be_sent')]"
-                    help="New lines"/>
-            <filter icon="terp-check" string="Sent"
-                    domain="[('state', '=', 'sent')]"
-                    help="New lines"/>
-            <separator orientation="vertical"/>
-            <filter icon="terp-gtk-stop" string="Error"
+            <filter name="filter_draft" icon="terp-mail-message-new"
+                    string="Draft" domain="[('state', '=', 'draft')]"
+                    help="Draft lines have to be triaged."/>
+            <filter name="filter_to_be_sent" icon="terp-mail-forward"
+                    string="Ready To Send" domain="[('state', '=', 'to_be_sent')]"
+                    help="These lines are ready to send by email or by letter using the Actions."/>
+            <filter name="filter_ignored" icon="terp-mail_delete"
+                    string="Ignored" domain="[('state', '=', 'ignored')]"
+                    help="Lines which have been ignored from previous runs."/>
+            <filter name="filter_sent" icon="terp-mail-replied"
+                    string="Sent" domain="[('state', '=', 'sent')]"
+                    help="Lines already sent."/>
+            <filter name="filter_error" icon="terp-gtk-stop" string="Error"
                     domain="[('state', 'in', ('error', 'email_error'))]"
-                    help="New lines"/>
+                    help="An error has occured during the sending of the email."/>
             <separator orientation="vertical"/>
 
             <field name="date"/>
@@ -130,6 +132,7 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="credit_control_line_tree"/>
+      <field name="context">{'search_default_filter_draft': 1, 'search_default_filter_to_be_sent': 1}</field>
       <field name="search_view_id" ref="credit_control_line_search"/>
     </record>
 

@@ -8,8 +8,9 @@
       <field name="arch" type="xml">
         <form>
           <separator string="Change the state of the selected lines." colspan="4"/>
+          <label string="Warning: you will maybe not be able to revert this operation." colspan="4"></label>
           <newline/>
-          <field name="name"/>
+          <field name="name" colspan="4"/>
           <field name="line_ids" colspan="4" nolabel="1"/>
           <newline/>
           <group colspan="4">

@@ -42,7 +42,7 @@ class CreditControlMarker(TransientModel):
         return res
 
     _columns = {
-        'name': fields.selection([('draft', 'Draft'),
+        'name': fields.selection([('ignored', 'Ignored'),
                                   ('to_be_sent', 'Ready To Send'),
                                   ('sent', 'Done')],
                                   'Mark as', required=True),

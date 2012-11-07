@@ -9,7 +9,7 @@
         <form>
           <separator colspan="4" string="Print the selected lines"/>
           <newline/>
-          <field name="mark_as_sent" attrs="{'invisible': [('state', '=', 'done')]}"/>
+          <field name="mark_as_sent" colspan="4" attrs="{'invisible': [('state', '=', 'done')]}"/>
           <newline/>
           <field name="line_ids" colspan="4" nolabel="1"
             attrs="{'invisible': [('state', '=', 'done')]}" />
