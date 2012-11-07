@@ -56,11 +56,11 @@ class CreditControlLine(Model):
                                    ('to_be_sent', 'Ready To Send'),
                                    ('sent', 'Done'),
                                    ('error', 'Error'),
-                                   ('mail_error', 'Mailing Error')],
+                                   ('email_error', 'Emailing Error')],
                                   'State', required=True, readonly=True),
 
         'channel': fields.selection([('letter', 'Letter'),
-                                   ('mail', 'E-Mail')],
+                                   ('email', 'Email')],
                                   'Channel', required=True,
                                   readonly=True,
                                   states={'draft': [('readonly', False)]}),
@@ -69,7 +69,7 @@ class CreditControlLine(Model):
         'partner_id': fields.many2one('res.partner', "Partner", required=True),
         'amount_due': fields.float('Due Amount Tax incl.', required=True, readonly=True),
         'balance_due': fields.float('Due balance', required=True, readonly=True),
-        'mail_message_id': fields.many2one('mail.message', 'Sent mail', readonly=True),
+        'mail_message_id': fields.many2one('mail.message', 'Sent Email', readonly=True),
 
         'move_line_id': fields.many2one('account.move.line', 'Move line',
                                         required=True, readonly=True),

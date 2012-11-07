@@ -24,11 +24,11 @@ from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
 
-class CreditControlMailer(TransientModel):
+class CreditControlEmailer(TransientModel):
     """Send emails for each selected credit control lines."""
 
-    _name = "credit.control.mailer"
-    _description = """Mass credit line mailer"""
+    _name = "credit.control.emailer"
+    _description = """Mass credit line emailer"""
     _rec_name = 'id'
 
     def _get_line_ids(self, cr, uid, context=None):
@@ -47,7 +47,7 @@ class CreditControlMailer(TransientModel):
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
-            domain="[('state', '=', 'to_be_sent'), ('channel', '=', 'mail')]"),
+            domain="[('state', '=', 'to_be_sent'), ('channel', '=', 'email')]"),
     }
 
     _defaults = {
@@ -59,10 +59,10 @@ class CreditControlMailer(TransientModel):
         line_obj = self.pool.get('credit.control.line')
         domain = [('state', '=', 'to_be_sent'),
                   ('id', 'in', active_ids),
-                  ('channel', '=', 'mail')]
+                  ('channel', '=', 'email')]
         return line_obj.search(cr, uid, domain, context=context)
 
-    def mail_lines(self, cr, uid, wiz_id, context=None):
+    def email_lines(self, cr, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
                 "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
@@ -70,7 +70,7 @@ class CreditControlMailer(TransientModel):
             wiz_id = wiz_id[0]
         form = self.browse(cr, uid, wiz_id, context)
 
-        if not form.line_ids and not form.mail_all:
+        if not form.line_ids:
             raise except_osv(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
@@ -78,6 +78,6 @@ class CreditControlMailer(TransientModel):
                 cr, uid, line_ids, context)
         comms = comm_obj._generate_comm_from_credit_line_ids(
                 cr, uid, filtered_ids, context=context)
-        comm_obj._generate_mails(cr, uid, comms, context=context)
+        comm_obj._generate_emails(cr, uid, comms, context=context)
         return {}
 

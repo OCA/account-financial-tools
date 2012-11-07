@@ -223,10 +223,10 @@ class CreditControlPolicyLevel(Model):
                                              required=True),
 
         'delay_days': fields.integer('Delay (in days)', required='True'),
-        'mail_template_id': fields.many2one('email.template', 'Mail Template',
+        'email_template_id': fields.many2one('email.template', 'Email Template',
                                             required=True),
         'channel': fields.selection([('letter', 'Letter'),
-                                   ('mail', 'Mail')],
+                                   ('email', 'Email')],
                                   'Channel', required=True),
         'custom_text': fields.text('Custom Message', required=True, translate=True),
     }
