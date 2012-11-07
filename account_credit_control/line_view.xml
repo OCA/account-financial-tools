@@ -44,7 +44,7 @@
                     help="New lines"/>
             <separator orientation="vertical"/>
             <filter icon="terp-gtk-stop" string="Error"
-                    domain="[('state', 'in', ('error', 'mail_error'))]"
+                    domain="[('state', 'in', ('error', 'email_error'))]"
                     help="New lines"/>
             <separator orientation="vertical"/>
 
@@ -97,7 +97,7 @@
       <field name="model">credit.control.line</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'mail_error');">
+        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'email_error');">
           <field name="date"/>
           <field name="date_due"/>
           <field name="level"/>

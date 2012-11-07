@@ -19,7 +19,7 @@
                   <field name="channel"/>
                   <field name="delay_days"/>
                   <field name="computation_mode"/>
-                  <field name="mail_template_id"/>
+                  <field name="email_template_id"/>
                 </tree>
                 <form>
                   <field name="name"/>
@@ -31,7 +31,7 @@
                       <field name="computation_mode"/>
                     </page>
                     <page string="Mail and reporting">
-                      <field name="mail_template_id"/>
+                      <field name="email_template_id"/>
                       <field name="custom_text"/>
                     </page>
                   </notebook>
@@ -94,7 +94,7 @@
               <field name="computation_mode"/>
             </page>
             <page string="Mail and reporting">
-              <field name="mail_template_id"/>
+              <field name="email_template_id"/>
               <field name="custom_text"/>
             </page>
           </notebook>
@@ -113,7 +113,7 @@
           <field name="channel"/>
           <field name="delay_days"/>
           <field name="computation_mode"/>
-          <field name="mail_template_id"/>
+          <field name="email_template_id"/>
         </tree>
       </field>
     </record>

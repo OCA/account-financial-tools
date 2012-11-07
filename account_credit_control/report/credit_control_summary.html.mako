@@ -11,7 +11,7 @@
         setLang(comm.partner_id.lang)
         current_uri = '%s_policy_template' % (comm.partner_id.lang)
         if not context.lookup.has_template(current_uri):
-          context.lookup.put_string(current_uri, comm.current_policy_level.mail_template_id.body_html)
+          context.lookup.put_string(current_uri, comm.current_policy_level.email_template_id.body_html)
       %>
       <!--
       move the inner part in the mail template once done and reactivate this

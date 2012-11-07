@@ -2,14 +2,14 @@
   <data noupdate="0">
     <!--Email template -->
     <record id="email_template_credit_control_base" model="email.template">
-      <field name="name">Credit Control Mail</field>
+      <field name="name">Credit Control Email</field>
       <field name="email_from">noreply@localhost</field>
       <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a' })</field>
-      <field name="email_to">${object.get_mail() or  ''}</field>
+      <field name="email_to">${object.get_email() or  ''}</field>
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
       <field name="body_html"><![CDATA[
-      <%page args="object, user=None, ctx=None, quote=None, format_exception=True, mode='mail'" />
+      <%page args="object, user=None, ctx=None, quote=None, format_exception=True, mode='email'" />
       %if mode != 'pdf':
       <!-- your css here -->
       <style type="text/css">
@@ -93,9 +93,9 @@
       <field name="level" eval="1"/>
       <field name="computation_mode">net_days</field>
       <field name="delay_days" eval="10"/>
-      <field name="mail_template_id" ref="email_template_credit_control_base"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
-      <field name="channel">mail</field>
+      <field name="channel">email</field>
       <field name="custom_text">Dear Sir or Madam,
 
 Our records indicate that we have not received the payment of the
@@ -115,9 +115,9 @@ Best regards,
       <field name="level" eval="2"/>
       <field name="computation_mode">end_of_month</field>
       <field name="delay_days" eval="30"/>
-      <field name="mail_template_id" ref="email_template_credit_control_base"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
-      <field name="channel">mail</field>
+      <field name="channel">email</field>
       <field name="custom_text">Dear Sir or Madam,
 
 Our records indicate that we have not yet received the payment of the
@@ -137,7 +137,7 @@ Best regards,
       <field name="level" eval="3"/>
       <field name="computation_mode">previous_date</field>
       <field name="delay_days" eval="10"/>
-      <field name="mail_template_id" ref="email_template_credit_control_base"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">letter</field>
       <field name="custom_text">Dear Sir or Madam,
@@ -170,9 +170,9 @@ Best regards,
       <field name="level" eval="1"/>
       <field name="computation_mode">end_of_month</field>
       <field name="delay_days" eval="30"/>
-      <field name="mail_template_id" ref="email_template_credit_control_base"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
-      <field name="channel">mail</field>
+      <field name="channel">email</field>
       <field name="custom_text">Dear Sir or Madam,
 
 Our records indicate that we have not received the payment of the
@@ -192,7 +192,7 @@ Best regards,
       <field name="level" eval="2"/>
       <field name="computation_mode">previous_date</field>
       <field name="delay_days" eval="60"/>
-      <field name="mail_template_id" ref="email_template_credit_control_base"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="channel">letter</field>
       <field name="custom_text">Dear Sir or Madam,
