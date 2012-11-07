@@ -33,7 +33,7 @@
       <field name="arch" type="xml">
         <search string="Control Credit Lines">
           <group>
-            <filter icon="terp-document-new" string="Manual"
+            <filter icon="terp-document-new" string="Draft"
                     domain="[('state', '=', 'draft')]"
                     help="New lines"/>
             <filter icon="terp-dolar_ok!" string="Ready To Send"
