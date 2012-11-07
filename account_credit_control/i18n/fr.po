@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-07 13:20+0000\n"
-"PO-Revision-Date: 2012-11-07 14:35+0100\n"
+"POT-Creation-Date: 2012-11-07 15:35+0000\n"
+"PO-Revision-Date: 2012-11-07 16:41+0100\n"
 "Last-Translator: Guewen Baconnier <guewen.baconnier@camptocamp.com>\n"
 "Language-Team: FR\n"
 "Language: \n"
@@ -48,11 +48,6 @@ msgstr ""
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
 msgstr "Message Personnalisé"
-
-#. module: account_credit_control
-#: model:ir.model,name:account_credit_control.model_credit_control_mailer
-msgid "Mass credit line mailer"
-msgstr "Envoi de mails en masse"
 
 #. module: account_credit_control
 #: view:credit.control.lines:0
@@ -99,7 +94,7 @@ msgstr "Informations de contrôle de crédit"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_emailer
 msgid "Mass credit line emailer"
-msgstr "Envoi de courriers élextroniques en masse"
+msgstr "Envoi de courriers électroniques en masse"
 
 #. module: account_credit_control
 #: field:credit.control.line,account_id:0
@@ -137,9 +132,21 @@ msgid "Wrong credit or debit value in accounting entry !"
 msgstr "Mauvaise entrée de crédit ou de débit dans la comptabilité !"
 
 #. module: account_credit_control
-#: constraint:account.account:0
-msgid "Error ! You can not create recursive accounts."
-msgstr "La création de comptes récursifs est interdite"
+#: view:credit.control.lines:0
+msgid "These lines are ready to send by email or by letter using the Actions."
+msgstr "These lines are ready to send by email or by letter using the Actions."
+
+#. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_credit_control_marker
+msgid "Mass marker"
+msgstr "Changer d'état en masse"
+
+#. module: account_credit_control
+#: selection:credit.control.line,state:0
+#: view:credit.control.lines:0
+#: selection:credit.control.marker,name:0
+msgid "Ignored"
+msgstr "Ignoré"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0
@@ -147,9 +154,9 @@ msgid "Send emails for the selected lines"
 msgstr "Envoyer des courriers électroniques pour les lignes sélectionnées"
 
 #. module: account_credit_control
-#: model:ir.model,name:account_credit_control.model_credit_control_marker
-msgid "Mass marker"
-msgstr "Changer d'état en masse"
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "La création de comptes récursifs est interdite"
 
 #. module: account_credit_control
 #: field:account.invoice,credit_policy_id:0
@@ -159,21 +166,11 @@ msgid "Credit Control Policy"
 msgstr "Politique de contrôle de crédit"
 
 #. module: account_credit_control
-#: view:account.invoice:0
-msgid "Credit control"
-msgstr "Contrôle de crédit"
-
-#. module: account_credit_control
 #: constraint:account.move.line:0
 msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
 msgstr ""
 "La date de l'entrée de journal n'est pas dans la période choisie. Il\n"
 "faut changer la date ou supprimer la contrainte du journal."
-
-#. module: account_credit_control
-#: view:credit.control.lines:0
-msgid "New lines"
-msgstr "Nouvelles lignes"
 
 #. module: account_credit_control
 #: field:credit.control.line,date_sent:0
@@ -288,6 +285,17 @@ msgid "Report"
 msgstr "Rapport"
 
 #. module: account_credit_control
+#: help:credit.control.line,state:0
+msgid ""
+"Draft lines need to be triaged.\n"
+"Ignored lines are lines for which we do not want to send something.\n"
+"Draft and ignored lines will be generated again on the next run."
+msgstr ""
+"Les lignes \"Brouillon\" nécessitent d'être triées.\n"
+"Les lignes \"Ignorées\" sont celles pour lesquelles rien ne doit être envoyé.\n"
+"Les lignes brouillon et ignorées seront régénérées lors du prochain lancement du contrôle de crédit."
+
+#. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date, End Of Month"
 msgstr "Date due, fin de mois"
@@ -331,6 +339,11 @@ msgstr ""
 "Thank you in advance for your anticipated cooperation in this matter.\n"
 "\n"
 "Best regards,\n"
+
+#. module: account_credit_control
+#: view:credit.control.lines:0
+msgid "An error has occured during the sending of the email."
+msgstr "Une erreur s'est produit durant l'envoi du mail."
 
 #. module: account_credit_control
 #: view:credit.control.run:0
@@ -381,6 +394,11 @@ msgid "Change the state of the selected lines."
 msgstr "Changer l'état des lignes sélectionnées."
 
 #. module: account_credit_control
+#: view:credit.control.lines:0
+msgid "Lines which have been ignored from previous runs."
+msgstr "Lignes qui ont été ignorées lors des précédents lancement."
+
+#. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Print the selected lines"
 msgstr "Imprimer les lignes sélectionnées"
@@ -388,10 +406,14 @@ msgstr "Imprimer les lignes sélectionnées"
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 #: view:credit.control.lines:0
-#: selection:credit.control.marker,name:0
 #: selection:credit.control.run,state:0
 msgid "Draft"
 msgstr "Brouillon"
+
+#. module: account_credit_control
+#: view:credit.control.marker:0
+msgid "Warning: you will maybe not be able to revert this operation."
+msgstr "Attention: vous ne pourrez peut-être pas annuler cette opération."
 
 #. module: account_credit_control
 #: view:credit.control.lines:0
@@ -422,7 +444,7 @@ msgstr "Générateur de ligne de contrôle de crédit"
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
-msgstr "User"
+msgstr "Utilisateur"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
@@ -505,6 +527,11 @@ msgstr "Date de contrôle"
 #: model:ir.model,name:account_credit_control.model_credit_control_policy
 msgid "Define a reminder policy"
 msgstr "Définir une politique de rappel"
+
+#. module: account_credit_control
+#: view:credit.control.lines:0
+msgid "Lines already sent."
+msgstr "Déjà envoyé."
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,email_template_id:0
@@ -779,6 +806,7 @@ msgid "Lines to handle manually"
 msgstr "Lignes à traiter manuellement"
 
 #. module: account_credit_control
+#: view:account.invoice:0
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 msgid "Credit Control"
@@ -902,6 +930,11 @@ msgid "You can not create journal items on closed account."
 msgstr "La création de comptes récursifs est interdite"
 
 #. module: account_credit_control
+#: view:credit.control.lines:0
+msgid "Draft lines have to be triaged."
+msgstr "Les lignes en brouillon doivent être triées."
+
+#. module: account_credit_control
 #: field:credit.control.line,amount_due:0
 msgid "Due Amount Tax incl."
 msgstr "Somme dûe TTC"
@@ -922,4 +955,11 @@ msgstr ""
 #: field:credit.control.line,policy_level_id:0
 msgid "Overdue Level"
 msgstr "Niveau de créance"
+
+#~ msgid "Mass credit line mailer"
+#~ msgstr "Envoi de mails en masse"
+#~ msgid "Credit control"
+#~ msgstr "Contrôle de crédit"
+#~ msgid "New lines"
+#~ msgstr "Nouvelles lignes"
 
