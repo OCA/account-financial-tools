@@ -157,7 +157,7 @@ class CreditCommunication(TransientModel):
 
             cr_line_obj.write(
                     cr, uid, cl_ids,
-                    {'mail_message_id': mail_id,
+                    {'mail_message_id': email_id,
                      'state': state},
                     context=context)
 

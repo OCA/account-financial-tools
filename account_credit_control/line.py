@@ -23,6 +23,7 @@ import pooler
 
 from openerp.osv.orm import Model, fields
 from openerp.osv import osv
+from openerp.tools.translate import _
 
 logger = logging.getLogger('credit.line.control')
 
@@ -53,11 +54,17 @@ class CreditControlLine(Model):
                                  states={'draft': [('readonly', False)]}),
 
         'state': fields.selection([('draft', 'Draft'),
+                                   ('ignored', 'Ignored'),
                                    ('to_be_sent', 'Ready To Send'),
                                    ('sent', 'Done'),
                                    ('error', 'Error'),
                                    ('email_error', 'Emailing Error')],
-                                  'State', required=True, readonly=True),
+                                  'State', required=True, readonly=True,
+                                  help=("Draft lines need to be triaged.\n"
+                                        "Ignored lines are lines for which we do "
+                                        "not want to send something.\n"
+                                        "Draft and ignored lines will be "
+                                        "generated again on the next run.")),
 
         'channel': fields.selection([('letter', 'Letter'),
                                    ('email', 'Email')],
@@ -111,16 +118,10 @@ class CreditControlLine(Model):
 
     _defaults = {'state': 'draft'}
 
-    def _update_from_mv_line(self, cr, uid, ids, mv_line_br, level,
-                             controlling_date, context=None):
-        """hook function to update line if required"""
-        return []
-
     def _prepare_from_move_line(self, cr, uid, move_line,
                                 level, controlling_date, open_amount,
                                 context=None):
         """Create credit control line"""
-        acc_line_obj = self.pool.get('account.move.line')
         data = {}
         data['date'] = controlling_date
         data['date_due'] = move_line.date_maturity
@@ -138,19 +139,15 @@ class CreditControlLine(Model):
 
     def create_or_update_from_mv_lines(self, cr, uid, ids, lines,
                                        level_id, controlling_date, context=None):
-        """Create or update line base on levels"""
+        """Create or update line based on levels"""
         currency_obj = self.pool.get('res.currency')
         level_obj = self.pool.get('credit.control.policy.level')
         ml_obj = self.pool.get('account.move.line')
-        level = level_obj.browse(cr, uid, level_id, context)
-        current_lvl = level.level
-        debit_line_ids = []
         user = self.pool.get('res.users').browse(cr, uid, uid)
-        tolerance_base = user.company_id.credit_control_tolerance
         currency_ids = currency_obj.search(cr, uid, [], context=context)
 
         tolerance = {}
-        acc_line_obj = self.pool.get('account.move.line')
+        tolerance_base = user.company_id.credit_control_tolerance
         for c_id in currency_ids:
             tolerance[c_id] = currency_obj.compute(
                 cr, uid,
@@ -159,25 +156,41 @@ class CreditControlLine(Model):
                 tolerance_base,
                 context=context)
 
-        existings = self.search(
-            cr, uid,
-            [('move_line_id', 'in', lines),
-             ('level', '=', current_lvl)],
-            context=context)
-
+        level = level_obj.browse(cr, uid, level_id, context)
+        line_ids = []
         for line in ml_obj.browse(cr, uid, lines, context):
 
-            if line.id in existings:
-                # does nothing just a hook
-                debit_line_ids += self._update_from_mv_line(
-                    cr, uid, ids, line, level,
-                    controlling_date, context=context)
-            else:
-                open_amount = line.amount_residual_currency
+            open_amount = line.amount_residual_currency
 
-                if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
-                    vals = self._prepare_from_move_line(
-                        cr, uid, line, level, controlling_date, open_amount, context=context)
-                    debit_line_ids.append(self.create(cr, uid, vals, context=context))
-        return debit_line_ids
+            if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
+                vals = self._prepare_from_move_line(
+                    cr, uid, line, level, controlling_date, open_amount, context=context)
+                line_id = self.create(cr, uid, vals, context=context)
+                line_ids.append(line_id)
+
+                # when we have lines generated earlier in draft,
+                # on the same level, it means that we have left
+                # them, so they are to be considered as ignored
+                previous_draft_ids = self.search(
+                    cr, uid,
+                    [('move_line_id', '=', line.id),
+                     ('level', '=', level.id),
+                     ('state', '=', 'draft'),
+                     ('id', '!=', line_id)],
+                    context=context)
+                if previous_draft_ids:
+                    self.write(cr, uid, previous_draft_ids,
+                               {'state': 'ignored'}, context=context)
+
+        return line_ids
+
+    def unlink(self, cr, uid, ids, context=None, check=True):
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.state != 'draft':
+                raise osv.except_osv(
+                    _('Error !'),
+                    _('You are not allowed to delete a credit control line that '
+                      'is not in draft state.'))
+
+        return super(CreditControlLine, self).unlink(cr, uid, ids, context=context)
 

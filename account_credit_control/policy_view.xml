@@ -6,20 +6,20 @@
       <field name="model">credit.control.policy</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form> <!-- editable="bottom" -->
+        <form>
           <field name="name"/>
           <field name="do_nothing"/>
           <field name="company_id"/>
           <notebook colspan="4">
             <page string="Policy Levels">
               <field name="level_ids" nolabel="1" colspan="4" >
-                <tree  editable="bottom">
+                <tree>
                   <field name="name"/>
                   <field name="level"/>
                   <field name="channel"/>
                   <field name="delay_days"/>
                   <field name="computation_mode"/>
-                  <field name="mail_template_id"/>
+                  <field name="email_template_id"/>
                 </tree>
                 <form>
                   <field name="name"/>
@@ -31,7 +31,7 @@
                       <field name="computation_mode"/>
                     </page>
                     <page string="Mail and reporting">
-                      <field name="mail_template_id"/>
+                      <field name="email_template_id"/>
                       <field name="custom_text"/>
                     </page>
                   </notebook>
@@ -51,7 +51,7 @@
       <field name="model">credit.control.policy</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree> <!-- editable="bottom" -->
+        <tree>
           <field name="name"/>
           <field name="do_nothing"/>
         </tree>
@@ -84,7 +84,7 @@
       <field name="model">credit.control.policy.level</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form> <!-- editable="bottom" -->
+        <form>
           <field name="name"/>
           <notebook colspan="4">
             <page string="Delay Setting">
@@ -94,7 +94,7 @@
               <field name="computation_mode"/>
             </page>
             <page string="Mail and reporting">
-              <field name="mail_template_id"/>
+              <field name="email_template_id"/>
               <field name="custom_text"/>
             </page>
           </notebook>
@@ -107,13 +107,13 @@
       <field name="model">credit.control.policy.level</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree  editable="bottom">
+        <tree>
           <field name="name"/>
           <field name="level"/>
           <field name="channel"/>
           <field name="delay_days"/>
           <field name="computation_mode"/>
-          <field name="mail_template_id"/>
+          <field name="email_template_id"/>
         </tree>
       </field>
     </record>
