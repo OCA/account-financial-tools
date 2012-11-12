@@ -1,5 +1,5 @@
 <openerp>
-  <data noupdate="0">
+  <data noupdate="1">
     <!--Email template -->
     <record id="email_template_credit_control_base" model="email.template">
       <field name="name">Credit Control Email</field>
