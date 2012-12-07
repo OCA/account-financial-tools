@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_pxgo_revalidate_moves_form" model="ir.ui.view">
-            <field name="name">pxgo_revalidate_moves.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+        <record id="view_revalidate_moves_form" model="ir.ui.view">
+            <field name="name">revalidate_moves.form</field>
+            <field name="model">account_admin_tools.revalidate_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Revalidate Account Moves">
@@ -28,9 +28,9 @@
             </field>
         </record>
         
-        <record id="view_pxgo_revalidate_moves_ready_form" model="ir.ui.view">
-            <field name="name">pxgo_revalidate_moves.ready.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+        <record id="view_revalidate_moves_ready_form" model="ir.ui.view">
+            <field name="name">revalidate_moves.ready.form</field>
+            <field name="model">account_admin_tools.revalidate_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Revalidate Account Moves">
@@ -47,9 +47,9 @@
             </field>
         </record>
 
-        <record id="view_pxgo_revalidate_moves_done_form" model="ir.ui.view">
-            <field name="name">pxgo_revalidate_moves.done.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+        <record id="view_revalidate_moves_done_form" model="ir.ui.view">
+            <field name="name">revalidate_moves.done.form</field>
+            <field name="model">account_admin_tools.revalidate_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Revalidate Account Moves">
@@ -65,17 +65,17 @@
             </field>
         </record>
 
-        <record id="action_pxgo_revalidate_moves" model="ir.actions.act_window">
+        <record id="action_revalidate_moves" model="ir.actions.act_window">
             <field name="name">Revalidate Account Moves (Regenerate Analytic Lines)</field>
-            <field name="res_model">pxgo_account_admin_tools.pxgo_revalidate_moves</field>
+            <field name="res_model">account_admin_tools.revalidate_moves</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_pxgo_revalidate_moves_form"/>
+            <field name="view_id" ref="view_revalidate_moves_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_action_pxgo_revalidate_moves"
-            parent="menu_action_pxgo_account_admin_tools_repair"
-            action="action_pxgo_revalidate_moves"
+        <menuitem id="menu_action_revalidate_moves"
+            parent="menu_action_account_admin_tools_repair"
+            action="action_revalidate_moves"
             sequence="20"/>
 
     </data>

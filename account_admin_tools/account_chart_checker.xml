@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_pxgo_account_chart_checker_form" model="ir.ui.view">
-            <field name="name">pxgo_account_chart_checker.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_account_chart_checker</field>
+        <record id="view_account_chart_checker_form" model="ir.ui.view">
+            <field name="name">account_chart_checker.form</field>
+            <field name="model">account_admin_tools.account_chart_checker</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Check the Chart of Accounts">
@@ -23,9 +23,9 @@
             </field>
         </record>
 
-        <record id="pxgo_account_chart_checker_problem_tree" model="ir.ui.view">
-            <field name="name">pxgo_account_chart_checker_problem.tree</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_account_chart_checker_problem</field>
+        <record id="account_chart_checker_problem_tree" model="ir.ui.view">
+            <field name="name">account_chart_checker_problem.tree</field>
+            <field name="model">account_admin_tools.account_chart_checker_problem</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Problems" colors="red:severity=='high';green:severity=='informative'">
@@ -37,17 +37,17 @@
             </field>
         </record>
 
-        <record id="action_pxgo_account_chart_checker" model="ir.actions.act_window">
+        <record id="action_account_chart_checker" model="ir.actions.act_window">
             <field name="name">Check the Chart of Accounts</field>
-            <field name="res_model">pxgo_account_admin_tools.pxgo_account_chart_checker</field>
+            <field name="res_model">account_admin_tools.account_chart_checker</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_pxgo_account_chart_checker_form"/>
+            <field name="view_id" ref="view_account_chart_checker_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_action_pxgo_account_chart_checker"
-            parent="menu_action_pxgo_account_admin_tools_repair"
-            action="action_pxgo_account_chart_checker"
+        <menuitem id="menu_action_account_chart_checker"
+            parent="menu_action_account_admin_tools_repair"
+            action="action_account_chart_checker"
             sequence="10"/>
 
     </data>

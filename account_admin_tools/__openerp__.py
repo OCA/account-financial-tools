@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -7,27 +6,27 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
-        "name" : "Pexego - Account Admin Tools",
-        "version" : "1.0",
-        "author" : "Pexego",
-        "website" : "http://www.pexego.es",
-        "category" : "Enterprise Specific Modules",
-        "description": """Account Tools for Administrators
+    "name": "Account Admin Tools",
+    "version": "6.1",
+    "author": "Pexego",
+    "website": "http://www.pexego.es",
+    "category": "Enterprise Specific Modules",
+    "description": """Account Tools for Administrators
 
 Import tools:
 
@@ -59,29 +58,29 @@ Check and Repair tools:
   set. This may fix cases where the receivable/payable amounts displayed in the
   partner form does not match the balance of the receivable/payable accounts.
 
-- Set the reference in account moves, associated with invoices, that do not have
-  the right reference (the reference from the invoice if it was a supplier
+- Set the reference in account moves, associated with invoices, that do not
+  have the right reference (the reference from the invoice if it was a supplier
   invoice, or the number from the invoice if it was a customer invoice).
-  This is useful to fix the account moves after changing the invoice references.
+  This is useful to fix the account moves after changing the invoice
+  references.
             """,
-        "depends" : [
-                        'base',
-                        'account',
-            ],
-        "init_xml" : [],
-        "demo_xml" : [],
-        "update_xml" : [
-                        'admin_tools_menu.xml',
-                        'account_importer.xml',
-                        'account_move_importer.xml',
-                        'account_chart_checker.xml',
-                        'revalidate_moves.xml',
-                        'move_partner_account.xml',
-                        'set_partner_in_moves.xml',
-                        'set_invoice_ref_in_moves.xml',
-            ],
-        "installable": True,
-        'active': False
+    "depends": [
+    'base',
+    'account',
+    ],
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+    'admin_tools_menu.xml',
+    'account_importer.xml',
+    'account_move_importer.xml',
+    'account_chart_checker.xml',
+    'revalidate_moves.xml',
+    'move_partner_account.xml',
+    'set_partner_in_moves.xml',
+    'set_invoice_ref_in_moves.xml',
+    ],
+    "installable": True,
+    'active': False
 
 }
- 

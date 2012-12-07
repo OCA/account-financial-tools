@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -7,16 +6,16 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -29,51 +28,48 @@ generic account.
 __author__ = "Borja López Soilán (Pexego)"
 
 import re
-from osv import fields,osv
+from osv import fields, osv
 from tools.translate import _
 
-class pxgo_move_partner_account(osv.osv_memory):
+
+class move_partner_account_wizard(osv.osv_memory):
     """
     Move Partner Account Wizard
 
     Checks that the account moves use the partner account instead of a
     generic account.
     """
-    _name = "pxgo_account_admin_tools.pxgo_move_partner_account"
+    _name = "move_partner_account_wizard"
     _description = "Move Partner Account Wizard"
 
     _columns = {
-        'state': fields.selection([('new','New'), ('done','Done')], 'Status', readonly=True),
-
         #
         # Account move parameters
         #
         'company_id': fields.many2one('res.company', 'Company', required=True, readonly=True),
 
-        'period_ids': fields.many2many('account.period', 'pxgo_move_partner_account_period_rel', 'wizard_id', 'period_id', "Periods"),
+        'period_ids': fields.many2many('account.period', 'move_partner_account_wizard_period_rel', 'wizard_id', 'period_id', "Periods"),
 
         'account_payable_id': fields.many2one('account.account', 'Account Payable', required=True),
         'account_receivable_id': fields.many2one('account.account', 'Account Receivable', required=True),
     }
 
-
     def _get_payable_account_id(self, cr, uid, context=None):
-        """
-        Gets the default payable (supplier) account property value for the
-        current (user's) company.
-        """
-        if context is None: context = {}
-        company_id = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id
+        if context is None:
+            context = {}
+        company_id = self.pool.get(
+            'res.users').browse(cr, uid, uid, context).company_id.id
         res = None
         property_ids = self.pool.get('ir.property').search(cr, uid, [
-                    '|',
-                    ('company_id', '=', company_id),
-                    ('company_id', '=', False),
-                    ('name', '=', 'property_account_payable'),
-                    ('res_id', '=', False)
-                ])
+            '|',
+            ('company_id', '=', company_id),
+            ('company_id', '=', False),
+            ('name', '=', 'property_account_payable'),
+            ('res_id', '=', False)
+        ])
         if property_ids:
-            property = self.pool.get('ir.property').browse(cr, uid, property_ids[0])
+            property = self.pool.get(
+                'ir.property').browse(cr, uid, property_ids[0])
             if property:
                 try:
                     # OpenERP 5.0 and 5.2/6.0 revno <= 2236
@@ -84,21 +80,19 @@ class pxgo_move_partner_account(osv.osv_memory):
         return res
 
     def _get_receivable_account_id(self, cr, uid, context=None):
-        """
-        Gets the default receivable (customer) account property value for the
-        current (user's) company.
-        """
-        company_id = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id
+        company_id = self.pool.get(
+            'res.users').browse(cr, uid, uid, context).company_id.id
         res = None
         property_ids = self.pool.get('ir.property').search(cr, uid, [
-                    '|',
-                    ('company_id', '=', company_id),
-                    ('company_id', '=', False),
-                    ('name', '=', 'property_account_receivable'),
-                    ('res_id', '=', False)
-                ])
+            '|',
+            ('company_id', '=', company_id),
+            ('company_id', '=', False),
+            ('name', '=', 'property_account_receivable'),
+            ('res_id', '=', False)
+        ])
         if property_ids:
-            property = self.pool.get('ir.property').browse(cr, uid, property_ids[0])
+            property = self.pool.get(
+                'ir.property').browse(cr, uid, property_ids[0])
             if property:
                 try:
                     # OpenERP 5.0 and 5.2/6.0 revno <= 2236
@@ -107,21 +101,14 @@ class pxgo_move_partner_account(osv.osv_memory):
                     # OpenERP 6.0 revno >= 2236
                     res = property.value_reference.id
         return res
-    
+
     _defaults = {
         'company_id': lambda self, cr, uid, context: self.pool.get('res.users').browse(cr, uid, uid, context).company_id.id,
         'account_payable_id': _get_payable_account_id,
         'account_receivable_id': _get_receivable_account_id,
     }
 
-
-
     def action_set_partner_accounts_in_moves(self, cr, uid, ids, context=None):
-        """
-        Action that searchs for the account moves that do not use the partner
-        account, but the generic payable/receivable one, and sets the partner
-        account instead.
-        """
         for wiz in self.browse(cr, uid, ids, context):
             period_ids = [period.id for period in wiz.period_ids]
             query_acc = """
@@ -140,7 +127,7 @@ class pxgo_move_partner_account(osv.osv_memory):
             if period_ids:
                 query_acc += """      AND period_id IN (%s)""" % periods_str
                 query_inv += """      AND period_id IN (%s)""" % periods_str
-            
+
             partner_ids = self.pool.get('res.partner').search(cr, uid, [])
             for partner in self.pool.get('res.partner').browse(cr, uid, partner_ids):
                 # Receivable account
@@ -152,33 +139,7 @@ class pxgo_move_partner_account(osv.osv_memory):
                     cr.execute(query_acc % (partner.property_account_payable.id, partner.id, wiz.account_payable_id.id))
                     cr.execute(query_inv % (partner.property_account_payable.id, partner.id, wiz.account_payable_id.id))
 
-            # Update the wizard status
-            self.write(cr, uid, [wiz.id], { 'state': 'done' })
-
-        #
-        # Return the next view: Show 'done' view
-        #
-        model_data_ids = self.pool.get('ir.model.data').search(cr, uid, [
-                    ('model','=','ir.ui.view'),
-                    ('module','=','pxgo_account_admin_tools'),
-                    ('name','=','view_pxgo_move_partner_account_done_form')
-                ])
-        resource_id = self.pool.get('ir.model.data').read(cr, uid, model_data_ids, fields=['res_id'], context=context)[0]['res_id']
-
-        return {
-            'name': _("Set Partner Accounts in Moves"),
-            'type': 'ir.actions.act_window',
-            'res_model': 'pxgo_account_admin_tools.pxgo_move_partner_account',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'views': [(resource_id, 'form')],
-            'domain': "[('id', 'in', %s)]" % ids,
-            'context': context,
-            'target': 'new',
-        }
+        return {}
 
 
-
-pxgo_move_partner_account()
-
-
+move_partner_account_wizard()

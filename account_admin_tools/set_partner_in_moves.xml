@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="view_pxgo_set_partner_in_moves_form" model="ir.ui.view">
-            <field name="name">pxgo_set_partner_in_moves.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+        <record id="view_set_partner_in_moves_form" model="ir.ui.view">
+            <field name="name">set_partner_in_moves.form</field>
+            <field name="model">account_admin_tools.set_partner_in_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Partner Reference in Moves">
@@ -28,9 +28,9 @@
             </field>
         </record>
 
-        <record id="view_pxgo_set_partner_in_moves_ready_form" model="ir.ui.view">
-            <field name="name">pxgo_set_partner_in_moves.ready.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+        <record id="view_set_partner_in_moves_ready_form" model="ir.ui.view">
+            <field name="name">set_partner_in_moves.ready.form</field>
+            <field name="model">account_admin_tools.set_partner_in_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Partner Reference in Moves">
@@ -47,9 +47,9 @@
             </field>
         </record>
 
-        <record id="view_pxgo_set_partner_in_moves_done_form" model="ir.ui.view">
-            <field name="name">pxgo_set_partner_in_moves.done.form</field>
-            <field name="model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+        <record id="view_set_partner_in_moves_done_form" model="ir.ui.view">
+            <field name="name">set_partner_in_moves.done.form</field>
+            <field name="model">account_admin_tools.set_partner_in_moves</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Partner Reference in Moves">
@@ -65,17 +65,17 @@
             </field>
         </record>
 
-        <record id="action_pxgo_set_partner_in_moves" model="ir.actions.act_window">
+        <record id="action_set_partner_in_moves" model="ir.actions.act_window">
             <field name="name">Set Partner Reference in Moves</field>
-            <field name="res_model">pxgo_account_admin_tools.pxgo_set_partner_in_moves</field>
+            <field name="res_model">account_admin_tools.set_partner_in_moves</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_pxgo_set_partner_in_moves_form"/>
+            <field name="view_id" ref="view_set_partner_in_moves_form"/>
             <field name="target">new</field>
         </record>
-        <menuitem id="menu_action_pxgo_set_partner_in_moves"
-            parent="menu_action_pxgo_account_admin_tools_repair"
-            action="action_pxgo_set_partner_in_moves"
+        <menuitem id="menu_action_set_partner_in_moves"
+            parent="menu_action_account_admin_tools_repair"
+            action="action_set_partner_in_moves"
             sequence="120"/>
 
     </data>

@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
@@ -6,28 +6,28 @@
 #    @authors: Jordi Esteve (Zikzakmedia), Borja López Soilán (Pexego)
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 {
-	"name" : "Detect changes and update the Account Chart from a template",
-	"version" : "1.0",
-	"author" : "Zikzakmedia SL",
-	"website" : "www.zikzakmedia.com",
-        "license" : "GPL-3",
-	"depends" : ["account"],
-	"category" : "Generic Modules/Accounting",
-	"description": """
+    "name": "Detect changes and update the Account Chart from a template",
+    "version": "6.1",
+    "author": "Zikzakmedia SL",
+    "website": "www.zikzakmedia.com",
+    "license": "GPL-3",
+    "depends": ["account"],
+    "category": "Generic Modules/Accounting",
+    "description": """
 Adds a wizard to update a company account chart from a chart template.
 
 This is a pretty useful tool to update OpenERP instalations after tax reforms
@@ -54,12 +54,11 @@ Authors:
     Jordi Esteve (Zikzakmedia) <jesteve@zikzakmedia.com>
     Borja López Soilán (Pexego) <borjals@pexego.es>
 """,
-	"init_xml" : [],
-	"demo_xml" : [],
-	"update_xml" : [
-		"account_view.xml",
-        "security/ir.model.access.csv",
-	],
-	"active": False,
-	"installable": True
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+                "account_view.xml",
+    ],
+    "active": False,
+    "installable": True
 }

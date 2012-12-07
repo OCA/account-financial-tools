@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP - Account renumber wizard
@@ -7,16 +6,16 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -24,24 +23,47 @@
 """
 Account renumber wizard
 """
-__author__ = "Borja López Soilán (Pexego)"
+__author__ = ["Borja López Soilán (Pexego)",
+                "Omar Castiñeira Saavedra (Pexego)"]
 
 
-import wizard
-import netsvc
-import pooler
+from osv import osv, fields
+import logging
 from tools.translate import _
 import time
 from datetime import datetime
 
-class wizard_renumber(wizard.interface):
+
+class wizard_renumber(osv.osv_memory):
     """
     Account renumber wizard.
     """
 
+    _name = "wizard.renumber"
+
+    _columns = {
+        'journal_ids': fields.many2many('account.journal',
+                                        'account_journal_wzd_renumber_rel', 'wizard_id',
+                                        'journal_id', required=True, help="Journals to renumber",
+                                        string="Journals"),
+        'period_ids': fields.many2many('account.period',
+                                       'account_period_wzd_renumber_rel', 'wizard_id',
+                                       'period_id', required=True,
+                                       help='Fiscal periods to renumber', string="Periods"),
+        'number_next': fields.integer('First Number', required=True,
+                                      help="Journal sequences will start counting on this number"),
+        'state': fields.selection([('init', 'Initial'), ('renumber', 'Renumbering')],
+                                  readonly=True)
+    }
+
+    _defaults = {
+        'number_next': 1,
+        'state': 'init'
+    }
+
     ############################################################################
     # Helper methods
-    ############################################################################
+    ##########################################################################
 
     def _process(self, s, date_to_use=None):
         """
@@ -71,7 +93,7 @@ class wizard_renumber(wizard.interface):
         and sufix processing. We will use the given date instead.
         """
         try:
-            cr.execute('SELECT id, number_next, prefix, suffix, padding FROM ir_sequence WHERE '+test+' AND active=%s FOR UPDATE', (sequence_id, True))
+            cr.execute('SELECT id, number_next, prefix, suffix, padding FROM ir_sequence WHERE ' + test + ' AND active=%s FOR UPDATE', (sequence_id, True))
             res = cr.dictfetchone()
             if res:
                 cr.execute('UPDATE ir_sequence SET number_next=number_next+number_increment WHERE id=%s AND active=%s', (res['id'], True))
@@ -83,94 +105,53 @@ class wizard_renumber(wizard.interface):
             cr.commit()
         return False
 
-
     def get_sequence_id_for_fiscalyear_id(self, cr, uid, sequence_id, fiscalyear_id, context=None):
         """
         Based on ir_sequence.get_id from the account module.
         Allows us to get the real sequence for the given fiscal year.
         """
-        cr.execute('SELECT id FROM ir_sequence WHERE id=%s AND active=%s', (sequence_id, True,))
+        cr.execute('SELECT id FROM ir_sequence WHERE id=%s AND active=%s',
+                   (sequence_id, True,))
         res = cr.dictfetchone()
         if res:
-            seq_facade = pooler.get_pool(cr.dbname).get('ir.sequence')
+            seq_facade = self.pool.get('ir.sequence')
             for line in seq_facade.browse(cr, uid, res['id'], context=context).fiscal_ids:
-                if line.fiscalyear_id.id==fiscalyear_id:
+                if line.fiscalyear_id.id == fiscalyear_id:
                     return line.sequence_id.id
         return sequence_id
 
-
-    ############################################################################
-    # Init form
-    ############################################################################
-
-    _init_fields = {
-      'journal_ids': {'string': 'Journals', 'type': 'many2many', 'relation': 'account.journal', 'required': True, 'help': "Journals to renumber"},
-      'period_ids': {'string': 'Periods', 'type': 'many2many', 'relation': 'account.period', 'required': True, 'help': 'Fiscal periods to renumber'},
-      'number_next': {'string': 'First Number', 'type': 'integer', 'required': True, 'default': 1, 'help': "Journal sequences will start counting on this number" },
-    }
-
-    _init_form = """<?xml version="1.0" encoding="utf-8"?>
-    <form string="Renumber Account Moves">
-        <label string="This wizard will help you renumber one or more journals." colspan="4"/>
-        <label string="Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence." colspan="4"/>
-        <label string="" colspan="4"/>
-        <newline/>
-        <group string="Journals and periods to consider" colspan="4">
-            <field name="journal_ids" colspan="4"/>
-            <field name="period_ids" colspan="4"/>
-        </group>
-        <group string="Sequence options" colspan="4">
-            <field name="number_next"/>
-        </group>
-    </form>"""
-
     ############################################################################
     # Renumber form/action
-    ############################################################################
+    ##########################################################################
 
-    _renumber_fields = {
-      'journal_ids': {'string': 'Journals', 'type': 'many2many', 'relation': 'account.journal', 'help': "Renumbered journals"},
-      'period_ids': {'string': 'Periods', 'type': 'many2many', 'relation': 'account.period', 'help': 'Renumbered fiscal periods'},
-    }
-
-    _renumber_form = """<?xml version="1.0" encoding="utf-8"?>
-    <form string="Renumber Account Moves - Done" colspan="4">
-        <group string="" colspan="4">
-            <label string="The moves of the selected journals and periods have been renumbered." colspan="4"/>
-            <label string="" colspan="4"/>
-            <label string="You may now review them using the show results button." colspan="4"/>
-        </group>
-    </form>"""
-
-    def _renumber_action(self, cr, uid, data, context):
+    def renumber(self, cr, uid, ids, context):
         """
         Action that renumbers all the posted moves on the given
         journal and periods, and returns their ids.
         """
-        logger = netsvc.Logger()
+        logger = logging.getLogger("account_renumber")
+        obj = self.browse(cr, uid, ids[0])
 
-        period_ids = data['form'].get('period_ids')
-        journal_ids = data['form'].get('journal_ids')
-        number_next = data['form'].get('number_next', 1)
+        period_ids = [x.id for x in obj.period_ids]
+        journal_ids = [x.id for x in obj.journal_ids]
+        number_next = obj.number_next or 1
 
         if not (period_ids and journal_ids):
-            raise wizard.except_wizard(_('No Data Available'), _('No records found for your selection!'))
-        
-        period_ids = period_ids[0][2]
-        journal_ids = journal_ids[0][2]
+            raise osv.except_osv(_('No Data Available'), _(
+                'No records found for your selection!'))
 
+        logger.debug("Searching for account moves to renumber.")
 
-        logger.notifyChannel("account_renumber", netsvc.LOG_DEBUG, "Searching for account moves to renumber.")
-
-        move_facade = pooler.get_pool(cr.dbname).get('account.move')
-        move_ids = move_facade.search(cr, uid, [('journal_id','in',journal_ids),('period_id','in',period_ids),('state','=','posted')], limit=0, order='date,id', context=context)
+        move_facade = self.pool.get('account.move')
+        move_ids = move_facade.search(cr, uid, [('journal_id', 'in', journal_ids), ('period_id', 'in', period_ids), ('state', '=', 'posted')], limit=0, order='date,id', context=context)
 
         if len(move_ids) == 0:
-            raise wizard.except_wizard(_('No Data Available'), _('No records found for your selection!'))
+            raise osv.except_osv(_('No Data Available'), _(
+                'No records found for your selection!'))
 
         sequences_seen = []
 
-        logger.notifyChannel("account_renumber", netsvc.LOG_DEBUG, "Renumbering %d account moves." % len(move_ids))
+        logger.debug("Renumbering %d account moves." % len(move_ids))
 
         for move in move_facade.browse(cr, uid, move_ids):
             #
@@ -179,52 +160,50 @@ class wizard_renumber(wizard.interface):
             #       children (if it has children sequences per fiscalyear)
             #
             sequence_id = self.get_sequence_id_for_fiscalyear_id(cr, uid,
-                                sequence_id=move.journal_id.sequence_id.id,
-                                fiscalyear_id=move.period_id.fiscalyear_id.id)
+                                                                 sequence_id=move.journal_id.sequence_id.id,
+                                                                 fiscalyear_id=move.period_id.fiscalyear_id.id)
             if not sequence_id in sequences_seen:
                 # First time we see this sequence, reset it
-                pooler.get_pool(cr.dbname).get('ir.sequence').write(cr, uid, [sequence_id], {'number_next': number_next})
+                self.pool.get('ir.sequence').write(
+                    cr, uid, [sequence_id], {'number_next': number_next})
                 sequences_seen.append(sequence_id)
-                
+
             #
             # Generate (using our own get_id) and write the new move number.
             #
             date_to_use = datetime.strptime(move.date, '%Y-%m-%d')
-            new_name = self.get_id(cr, uid, sequence_id, context=context, date_to_use=date_to_use)
-            # Note: We can't just do a 
+            new_name = self.get_id(cr, uid, sequence_id,
+                                   context=context, date_to_use=date_to_use)
+            # Note: We can't just do a
             # "move_facade.write(cr, uid, [move.id], {'name': new_name})"
             # cause it might raise a "You can't do this modification on a confirmed entry"
             # exception.
-            cr.execute('UPDATE account_move SET name=%s WHERE id=%s', (new_name, move.id))
+            cr.execute('UPDATE account_move SET name=%s WHERE id=%s',
+                       (new_name, move.id))
 
-        logger.notifyChannel("account_renumber", netsvc.LOG_DEBUG, "%d account moves renumbered." % len(move_ids))
+        logger.debug("%d account moves renumbered." % len(move_ids))
 
-        vals = {
-            'journal_ids': journal_ids,
-            'period_ids': period_ids,
-        }
-        return vals
+        obj.write({'state': 'renumber'})
 
+        return True
 
     ############################################################################
     # Show results action
-    ############################################################################
-
-    def _show_results_action(self, cr, uid, data, context):
+    ##########################################################################
+    def show_results(self, cr, uid, ids, context):
         """
         Action that shows the list of (non-draft) account moves from
         the selected journals and periods, so the user can review
         the renumbered account moves.
         """
-        period_ids = data['form'].get('period_ids')
-        journal_ids = data['form'].get('journal_ids')
+        obj = self.browse(cr, uid, ids[0])
+        period_ids = [x.id for x in obj.period_ids]
+        journal_ids = [x.id for x in obj.journal_ids]
 
         assert (period_ids and journal_ids)
 
-        period_ids = period_ids[0][2]
-        journal_ids = journal_ids[0][2]
-
-        cr.execute('select id,name from ir_ui_view where model=%s and type=%s', ('account.move', 'tree'))
+        cr.execute('select id,name from ir_ui_view where model=%s and type=%s',
+                   ('account.move', 'tree'))
         view_res = cr.fetchone()
         res = {
             'domain': "[('journal_id','in',%s), ('period_id','in',%s), ('state','=','posted')]" % (repr(journal_ids), repr(period_ids)),
@@ -238,25 +217,4 @@ class wizard_renumber(wizard.interface):
         }
         return res
 
-
-    ############################################################################
-    # States
-    ############################################################################
-
-    states = {
-        'init': {
-            'actions': [],
-            'result': {'type':'form', 'arch': _init_form, 'fields': _init_fields, 'state':[('end', 'Cancel', 'gtk-cancel', True),('renumber', 'Renumber', 'gtk-ok', True)]}
-        },
-        'renumber': {
-            'actions': [_renumber_action],
-            'result': {'type':'form', 'arch': _renumber_form, 'fields': _renumber_fields, 'state':[('end', 'Close', 'gtk-close', True), ('show_results', 'Show results', 'gtk-ok', True)]}
-        },
-        'show_results': {
-            'actions': [],
-            'result': {'type': 'action', 'action': _show_results_action, 'state':'end'}
-        }
-    }
-
-wizard_renumber('account_renumber.renumber_wizard')
-
+wizard_renumber()
