@@ -17,15 +17,40 @@
             <field name="arch" type="xml">
                 <form string="Check Deposit" version="7.0">
                     <header>
-                        <button name="get_check_payments" string="Select check payments" type="object" class="oe_highlight"/>
-                        <button name="validate_deposit" string="Validate Deposit" type="object" class="oe_highlight"/>
+                        <button name="validate_deposit" states="draft" string="Validate Deposit"
+                                type="object" class="oe_highlight"/>
+                        <button name="cancel" states="done" string="Cancel" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,done"
+                               statusbar_colors='{"draft":"blue"}'/>
                     </header>
                     <sheet>
-                        <field name="name"/>
-                        <field name="deposit_date"/>
-                        <field name="journal_id" />
+                        <h1>
+                            <label string="Deposit " />
+                            <field name="name" class="oe_inline" />
+                        </h1>
+                        <group name="deposit_fields">
+                            <field name="deposit_date" />
+                            <field name="journal_id" />
+                            <field name="move_id" />
+                        </group>
                         <separator string="Check Payments"/>
-                        <field name="check_payment_ids" nolabel="1" colspan="4"/>
+                        <field name="check_payment_ids" nolabel="1" colspan="4" widget="many2many"
+                               domain="[('reconcile_id','=',False),
+                                        ('account_id.user_type.code','=','recieved_check')]">
+                            <tree string="Check Payments">
+                                <field name="journal_id" />
+                                <field name="period_id" />
+                                <field name="date"/>
+                                <field name="name"/>
+                                <field name="ref"/>
+                                <field name="partner_id" />
+                                <field name="account_id" />
+                                <field name="move_id" />
+                                <field name="debit" sum="Total Debit"/>
+                                <field name="credit" sum="Total Credit"/>
+                                <field name="reconcile"/>
+                            </tree>
+                        </field>
                     </sheet>
                 </form>
             </field>
@@ -39,6 +64,8 @@
                 <tree string="Check Deposit">
                     <field name="name"/>
                     <field name="deposit_date"/>
+                    <field name="state"/>
+                    <field name="move_id"/>
                 </tree>
             </field>
         </record>
@@ -50,6 +77,8 @@
                 <search string="Search Check deposits">
                     <field name="name" string="Check Deposit"/>
                     <field name="deposit_date" string="Date"/>
+                    <field name="state"/>
+                    <field name="move_id"/>
                     <group expand="0" string="Group By...">
                     </group>
                 </search>

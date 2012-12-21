@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ###############################################################################
 #                                                                             #
 #   account_check_deposit for OpenERP                                         #
@@ -23,7 +23,7 @@
 
 {
     'name': 'account_check_deposit',
-    'version': '7.1',
+    'version': '7.0',
     'category': 'Generic Modules/Others',
     'license': 'AGPL-3',
     'description': """This module allows you to use check deposits.
@@ -32,7 +32,7 @@
         You may have to create an account for recieved checks and a journal for payment by checks.""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['account'], 
+    'depends': ['account_accountant'], 
     'init_xml': [],
     'update_xml': [ 
            'account_deposit_view.xml',
