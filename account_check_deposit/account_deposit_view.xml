@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  account_check_deposit for OpenERP
+  Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data>
+    
+        <!-- INHERITED VIEW FOR THE OBJECT : account_check_deposit -->
+
+        <record id="account_check_deposit_view_form" model="ir.ui.view">
+            <field name="name">account_check_deposit.account_check_deposit.view_form</field>
+            <field name="model">account.check.deposit</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Check Deposit" version="7.0">
+                    <header>
+                        <button name="get_check_payments" string="Select check payments" type="object" class="oe_highlight"/>
+                        <button name="validate_deposit" string="Validate Deposit" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <field name="name"/>
+                        <field name="deposit_date"/>
+                        <field name="journal_id" />
+                        <separator string="Check Payments"/>
+                        <field name="check_payment_ids" nolabel="1" colspan="4"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="account_check_deposit_view_tree" model="ir.ui.view">
+            <field name="name">account_check_deposit.account_check_deposit.view_tree</field>
+            <field name="model">account.check.deposit</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Check Deposit">
+                    <field name="name"/>
+                    <field name="deposit_date"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_check_deposit_search" model="ir.ui.view">
+            <field name="name">account.check.deposit.search</field>
+            <field name="model">account.check.deposit</field>
+            <field name="arch" type="xml">
+                <search string="Search Check deposits">
+                    <field name="name" string="Check Deposit"/>
+                    <field name="deposit_date" string="Date"/>
+                    <group expand="0" string="Group By...">
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_check_deposit_tree" model="ir.actions.act_window">
+            <field name="name">Check Deposits</field>
+            <field name="res_model">account.check.deposit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="view_check_deposit_search"/>
+            <field name="help" type="html"></field>
+        </record>
+
+        <menuitem string="Check Deposit" action="action_check_deposit_tree" id="menu_check_deposit_tree" parent="account.menu_finance_bank_and_cash" sequence="20"/>
+
+    </data>
+</openerp>
