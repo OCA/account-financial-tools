@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  account_check_deposit for OpenERP
+  Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+    <data noupdate="1">
+
+        <!-- New account.account.type -->
+        
+        <record model="account.account.type" id="data_account_type_received_check">
+          <field name="name">Recieved Checks</field>
+          <field name="code">recieved_check</field>
+          <field name="close_method">none</field>
+        </record>
+        
+    </data>
+</openerp>
