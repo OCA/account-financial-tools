@@ -20,9 +20,9 @@
 #
 ##############################################################################
 
-from osv import fields,osv
+from openerp.osv import fields,osv
 import time
-from tools.translate import _
+from openerp.tools.translate import _
 
 class wizard_select_template(osv.osv_memory):
 
@@ -132,7 +132,9 @@ class wizard_select_template(osv.osv_memory):
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise osv.except_osv(_('No Analytic Journal !'),_("You have to define an analytic journal on the '%s' journal!") % (line.journal_id.name,))
+                raise osv.except_osv(_('No Analytic Journal !'),
+                    _("You have to define an analytic journal on the '%s' journal!")
+                    % (line.journal_id.name,))
             analytic_account_id = line.analytic_account_id.id
         val = {
             'name': line.name,
@@ -160,7 +162,9 @@ class wizard_select_template(osv.osv_memory):
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise osv.except_osv(_('No Analytic Journal !'),_("You have to define an analytic journal on the '%s' journal!") % (wizard.template_id.journal_id.name,))
+                raise osv.except_osv(_('No Analytic Journal !'),
+                    _("You have to define an analytic journal on the '%s' journal!")
+                    % (wizard.template_id.journal_id.name,))
             analytic_account_id = line.analytic_account_id.id
         val = {
             'name': 'transitory',
