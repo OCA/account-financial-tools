@@ -125,8 +125,6 @@ class account_check_deposit(Model):
         for deposit in self.browse(cr, uid, ids, context=context):
             context['journal_id'] = deposit.journal_id.id
             move_vals = self._prepare_account_move_vals(cr, uid, deposit, context=context)
-            print "move_vals ====>", move_vals
-            import pdb; pdb.set_trace()
             move_id = move_obj.create(cr, uid, move_vals, context=context)
             move_obj.post(cr, uid, [move_id], context=context)
             self._reconcile_checks(cr, uid, deposit, move_id, context=context)
