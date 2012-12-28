@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, osv
+from openerp.tools.translate import _
 
 class account_move_template(osv.osv):
 
@@ -55,7 +55,10 @@ class account_move_template(osv.osv):
         else:
             return len(journal_ids)==1
 
-    _constraints = [(_check_different_journal,'If the template is "cross-journals", the Journals must be different, if the template does not "cross-journals" the Journals must be the same!',['journal_id'])]
+    _constraints = [(_check_different_journal,
+        'If the template is "cross-journals", the Journals must be different,' \
+        'if the template does not "cross-journals" the Journals must be the same!',
+        ['journal_id'])]
         
 account_move_template()
 
