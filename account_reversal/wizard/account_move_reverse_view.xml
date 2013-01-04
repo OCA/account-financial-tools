@@ -5,7 +5,6 @@
         <record id="view_account_move_reverse" model="ir.ui.view">
             <field name="name">account.move.reverse.form</field>
             <field name="model">account.move.reverse</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Create reversal journal entries">
                     <field name="date"/>
