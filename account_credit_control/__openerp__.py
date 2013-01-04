@@ -73,7 +73,7 @@ On each generated line, you have many choices:
                 ],
  'demo_xml': ["credit_control_demo.xml"],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'license': 'AGPL-3',
  'application': True
 }
