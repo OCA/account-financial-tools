@@ -13,7 +13,6 @@
         <field name="name">account.move.reversal.tree</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_tree" />
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <field name="to_check" position="after">
                 <field name="to_be_reversed"/>
@@ -25,7 +24,6 @@
         <field name="name">account.move.reversal.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="/form/group/field[@name='company_id']" position="after">
                 <field name="to_be_reversed"/>
