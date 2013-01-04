@@ -41,7 +41,7 @@ Module developped by Alexis de Lattre <alexis.delattre@akretion.com> during the 
     'update_xml': ['account_view.xml',
                    'wizard/account_move_reverse_view.xml'],
     'demo_xml': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 
