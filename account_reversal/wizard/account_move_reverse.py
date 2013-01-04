@@ -23,68 +23,88 @@
 #
 ##############################################################################
 
-from osv import osv, fields
-from tools.translate import _
+from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 
-class account_move_reversal(osv.osv_memory):
+class account_move_reversal(orm.TransientModel):
     _name = "account.move.reverse"
     _description = "Create reversal of account moves"
 
     _columns = {
-        'date': fields.date('Reversal Date', required=True, help="Enter the date of the reversal account entries. By default, OpenERP proposes the first day of the next period."),
-        'period_id': fields.many2one('account.period', 'Reversal Period', help="If empty, take the period of the date."),
-        'journal_id': fields.many2one('account.journal', 'Reversal Journal', help='If empty, uses the journal of the journal entry to be reversed.'),
-        'move_prefix': fields.char('Entries Ref. Prefix', size=32, help="Prefix that will be added to the 'Ref' of the journal entry to be reversed to create the 'Ref' of the reversal journal entry (no space added after the prefix)."),
-        'move_line_prefix': fields.char('Items Name Prefix', size=32, help="Prefix that will be added to the name of the journal item to be reversed to create the name of the reversal journal item (a space is added after the prefix)."),
+        'date': fields.date(
+            'Reversal Date',
+            required=True,
+            help="Enter the date of the reversal account entries. "
+                 "By default, OpenERP proposes the first day of "
+                 "the next period."),
+        'period_id': fields.many2one(
+            'account.period',
+            'Reversal Period',
+            help="If empty, take the period of the date."),
+        'journal_id': fields.many2one(
+            'account.journal',
+            'Reversal Journal',
+            help='If empty, uses the journal of the journal entry '
+                 'to be reversed.'),
+        'move_prefix': fields.char(
+            'Entries Ref. Prefix',
+            size=32,
+            help="Prefix that will be added to the 'Ref' of the journal "
+                 "entry to be reversed to create the 'Ref' of the "
+                 "reversal journal entry (no space added after the prefix)."),
+        'move_line_prefix': fields.char(
+            'Items Name Prefix',
+            size=32,
+            help="Prefix that will be added to the name of the journal "
+                 "item to be reversed to create the name of the reversal "
+                 "journal item (a space is added after the prefix)."),
         }
 
     def _next_period_first_date(self, cr, uid, context=None):
-        if context is None:
-            context = {}
         period_obj = self.pool.get('account.period')
         current_period_id = period_obj.find(cr, uid, context=context)[0]
-        current_period = period_obj.browse(cr, uid, current_period_id, context=context)
-        next_period_id = period_obj.next(cr, uid, current_period, 1, context=context)
-        next_period = period_obj.browse(cr, uid, next_period_id, context=context)
+        current_period = period_obj.browse(
+                cr, uid, current_period_id, context=context)
+        next_period_id = period_obj.next(
+                cr, uid, current_period, 1, context=context)
+        next_period = period_obj.browse(
+                cr, uid, next_period_id, context=context)
         return next_period.date_start
 
     _defaults = {
         'date': _next_period_first_date,
-        'move_line_prefix': lambda *a: 'REV -',
+        'move_line_prefix': 'REV -',
         }
 
     def action_reverse(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
+        assert 'active_ids' in context, "active_ids missing in context"
+
         form = self.read(cr, uid, ids, context=context)[0]
 
-        action = {'type': 'ir.actions.act_window_close'}
+        mod_obj = self.pool.get('ir.model.data')
+        act_obj = self.pool.get('ir.actions.act_window')
+        move_obj = self.pool.get('account.move')
+        move_ids = context['active_ids']
 
-        if context.get('active_ids', False):
-            mod_obj = self.pool.get('ir.model.data')
-            act_obj = self.pool.get('ir.actions.act_window')
-            move_obj = self.pool.get('account.move')
-            move_ids = context['active_ids']
+        period_id = form['period_id'][0] if form.get('period_id') else False
+        journal_id = form['journal_id'][0] if form.get('journal_id') else False
+        reversed_move_ids = move_obj.create_reversals(
+            cr, uid,
+            move_ids,
+            form['date'],
+            reversal_period_id=period_id,
+            reversal_journal_id=journal_id,
+            move_prefix=form['move_prefix'],
+            move_line_prefix=form['move_line_prefix'],
+            context=context)
 
-            period_id = form.get('period_id', False) and form['period_id'][0] or False
-            journal_id = form.get('journal_id', False) and form['journal_id'][0] or False
-            reversed_move_ids = move_obj.create_reversals(
-                cr, uid,
-                move_ids,
-                form['date'],
-                reversal_period_id=period_id,
-                reversal_journal_id=journal_id,
-                move_prefix=form['move_prefix'],
-                move_line_prefix=form['move_line_prefix'],
-                context=context)
-
-            action_ref = mod_obj.get_object_reference(cr, uid, 'account', 'action_move_journal_line')
-            action_id = action_ref and action_ref[1] or False
-            action = act_obj.read(cr, uid, [action_id], context=context)[0]
-            action['domain'] = str([('id', 'in', reversed_move_ids)])
-            action['name'] = _('Reversal Entries')
-            action['context'] = unicode({'search_default_to_be_reversed': 0})
+        __, action_id = mod_obj.get_object_reference(
+                cr, uid, 'account', 'action_move_journal_line')
+        action = act_obj.read(cr, uid, [action_id], context=context)[0]
+        action['domain'] = unicode([('id', 'in', reversed_move_ids)])
+        action['name'] = _('Reversal Entries')
+        action['context'] = unicode({'search_default_to_be_reversed': 0})
         return action
-
-account_move_reversal()
