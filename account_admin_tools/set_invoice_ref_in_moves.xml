@@ -7,11 +7,11 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Invoice Reference in Moves">
-                    <label string="This wizard will set the reference in account moves associated with invoices, that don't match the invoice reference/number." colspan="4"/>
+                    <label string="This wizard will set the reference in account moves associated with invoices, that don't match the invoice reference." colspan="4"/>
                     <label string="" colspan="4"/>
                     <group colspan="4">
                         <separator string="Find moves not matching the invoice reference/number" colspan="4"/>
-                        <label string="You may now search for account moves, on the given periods, whose reference does not match the invoice reference or number; or you may skip this step and select the moves by hand." colspan="4"/>
+                        <label string="You may now search for account moves, on the given periods, whose reference does not match the invoice reference; or you may skip this step and select the moves by hand." colspan="4"/>
                         <label string="" colspan="4"/>
                         <newline/>
                         <field name="period_ids" colspan="4"/>
@@ -34,7 +34,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Set Invoice Reference in Moves">
-                    <label string="The reference will be set, for the selected account moves, to the reference/number of the (supplier/customer) invoice." colspan="4"/>
+                    <label string="The reference will be set, for the selected account moves, to the reference of the supplier invoice." colspan="4"/>
                     <label string="" colspan="4"/>
                     <separator string="Account moves to update" colspan="4"/>
                     <field name="move_ids" colspan="4" nolabel="1"/>

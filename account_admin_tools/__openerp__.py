@@ -39,17 +39,6 @@ Import tools:
 
 Check and Repair tools:
 
-- Check the Chart of Accounts for problems in its structure. This will allow
-  you to detect incoherences like the ones caused by bugs like
-  https://bugs.launchpad.net/openobject-server/+bug/581137
-  (the preordered tree [parent_left/parent_right] not matching the
-  parent-child structure [parent_id]).
-
-- Revalidate confirmed account moves so their analytic lines are regenerated.
-  This may be used to fix the data after bugs like
-  https://bugs.launchpad.net/openobject-addons/+bug/582988
-  The wizard also lets you find account moves missing their analytic lines.
-
 - Set the receivable/payable account of the partners, in moves and invoices
   where a generic receivable/payable account was used instead.
 
@@ -59,8 +48,7 @@ Check and Repair tools:
   partner form does not match the balance of the receivable/payable accounts.
 
 - Set the reference in account moves, associated with invoices, that do not
-  have the right reference (the reference from the invoice if it was a supplier
-  invoice, or the number from the invoice if it was a customer invoice).
+  have the right reference for supplier invoices.
   This is useful to fix the account moves after changing the invoice
   references.
             """,
@@ -74,8 +62,6 @@ Check and Repair tools:
     'admin_tools_menu.xml',
     'account_importer.xml',
     'account_move_importer.xml',
-    'account_chart_checker.xml',
-    'revalidate_moves.xml',
     'move_partner_account.xml',
     'set_partner_in_moves.xml',
     'set_invoice_ref_in_moves.xml',

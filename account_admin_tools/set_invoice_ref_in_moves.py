@@ -89,16 +89,12 @@ class set_invoice_ref_in_moves(osv.osv_memory):
         """
         if invoice.type in ('in_invoice', 'in_refund'):
             return invoice.reference
-        else:
-            return self.pool.get('account.invoice')._convert_ref(cr, uid, invoice.number)
 
     def _is_valid_reference(self, cr, uid, reference, invoice, context=None):
         """
         Checks that the given reference matches the invoice reference or number.
         """
         if reference == invoice.reference:
-            return True
-        elif reference == self.pool.get('account.invoice')._convert_ref(cr, uid, invoice.number):
             return True
         else:
             return False
@@ -141,7 +137,7 @@ class set_invoice_ref_in_moves(osv.osv_memory):
                 if not self._is_valid_reference(cr, uid, invoice.move_id.ref, invoice, context=context):
                     reference = self._get_reference(
                         cr, uid, invoice, context=context)
-                    if reference and len(reference):
+                    if reference:
                         move_ids.append(invoice.move_id.id)
 
         #
@@ -181,7 +177,7 @@ class set_invoice_ref_in_moves(osv.osv_memory):
             if invoice.move_id:
                 reference = self._get_reference(
                     cr, uid, invoice, context=context)
-                if invoice.move_id.ref != reference:
+                if reference and invoice.move_id.ref != reference:
                     self.pool.get('account.move').write(cr, uid, [invoice.move_id.id], {'ref': reference}, context=context)
 
                     #
