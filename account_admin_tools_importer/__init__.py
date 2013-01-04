@@ -21,11 +21,10 @@
 ##############################################################################
 
 """
-Account Admin Tools
+Account Importarion Admin Tools
 """
 
 __author__ = "Borja López Soilán (Pexego)"
 
-import move_partner_account
-import set_partner_in_moves
-import set_invoice_ref_in_moves
+import account_importer
+import account_move_importer

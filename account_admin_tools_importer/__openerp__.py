@@ -21,38 +21,32 @@
 ##############################################################################
 
 {
-    "name": "Account Admin Tools",
+    "name": "Account Admin Importation Tools",
     "version": "6.1",
     "author": "Pexego",
     "website": "http://www.pexego.es",
     "category": "Enterprise Specific Modules",
-    "description": """Account Tools for Administrators
-Check and Repair tools:
+    "description": """Account Importarion Tools for Administrators
 
-- Set the receivable/payable account of the partners, in moves and invoices
-  where a generic receivable/payable account was used instead.
+Import tools:
 
-- Set the parent reference in account move lines where the receivable/payable
-  account associated with the partner was used, but a partner reference wasn't
-  set. This may fix cases where the receivable/payable amounts displayed in the
-  partner form does not match the balance of the receivable/payable accounts.
+- Import accounts from CSV files. This may be useful to import the initial
+  accounts into OpenERP.
 
-- Set the reference in account moves, associated with invoices, that do not
-  have the right reference for supplier invoices.
-  This is useful to fix the account moves after changing the invoice
-  references.
+- Import account moves from CSV files. This may be useful to import the initial
+  balance into OpenERP.
             """,
     "depends": [
     'base',
     'account',
+    'account_admin_tools'
     ],
     "init_xml": [],
     "demo_xml": [],
     "update_xml": [
     'admin_tools_menu.xml',
-    'move_partner_account.xml',
-    'set_partner_in_moves.xml',
-    'set_invoice_ref_in_moves.xml',
+    'account_importer.xml',
+    'account_move_importer.xml',
     ],
     "installable": True,
     'active': False
