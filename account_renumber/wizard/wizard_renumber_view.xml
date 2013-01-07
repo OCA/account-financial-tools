@@ -46,7 +46,7 @@
         <menuitem id="menu_account_renumber"
             parent="account.menu_account_end_year_treatments"
             action="action_account_renumber"
-            groups="account.group_account_manager"
+            groups="base.group_system"
             sequence="-1"/>
 
     </data>

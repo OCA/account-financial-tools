@@ -27,7 +27,7 @@
     "website": "http://www.pexego.es",
     "category": "Enterprise Specific Modules",
     "description": """
-This module adds a wizard to renumber account moves by date.
+This module adds a wizard to renumber account moves by date only for admin users.
 
 The wizard, that will be added to the "End of Year Treatments",
 let's you select one or more journals and fiscal periods,

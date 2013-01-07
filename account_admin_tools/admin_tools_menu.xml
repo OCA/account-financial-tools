@@ -5,7 +5,8 @@
         <menuitem id="menu_action_account_admin_tools"
             name="Admin Tools"
             parent="account.menu_finance"
-            sequence="999"/>
+            sequence="999"
+            groups="base.group_system"/>
             
         <menuitem id="menu_action_account_admin_tools_repair"
             name="Check and Repair"
