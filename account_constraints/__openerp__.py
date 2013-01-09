@@ -26,6 +26,7 @@
                  'account_payment', 
                  ],
     'author' : 'Camptocamp',
+    'category': 'Generic Modules/Accounting',
     'description': """
     Add contraints in the accounting module of OpenERP to avoid bad usage by users that lead
     to corrupted datas. This is based on our experiences and legal state of the art in other
