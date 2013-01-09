@@ -59,9 +59,7 @@
     """,
     'website': 'http://www.camptocamp.com',
     'init_xml': [],
-    'update_xml': [
-                'account_constraints_view.xml',
-                  ],
+    'update_xml': [],
     'demo_xml': [],
     'installable': True,
     'active': False,
