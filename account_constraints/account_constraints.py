@@ -154,7 +154,7 @@ class AccountBankSatement(osv.osv):
 AccountBankSatement()
 
 
-class account_move_line(osv.osv):
+class AccountMoveLine(osv.osv):
     _inherit='account.move.line'
     
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
@@ -196,7 +196,6 @@ class account_move_line(osv.osv):
             ),
         ]
         
-account_move_line()
 
 class Invoice(osv.osv):
     _inherit = 'account.invoice'
