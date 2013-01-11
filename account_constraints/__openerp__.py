@@ -4,29 +4,30 @@
 #    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 {
-    'name' : 'Account Contraints',
+    'name' : 'Account Constraints',
     'version' : '1',
     'depends' : [
                  'account',
                  ],
     'author' : 'Camptocamp',
+    'license': 'AGPL-3',
     'category': 'Generic Modules/Accounting',
     'description': """
-    Add contraints in the accounting module of OpenERP to avoid bad usage by users that lead
+    Add constraints in the accounting module of OpenERP to avoid bad usage by users that lead
     to corrupted datas. This is based on our experiences and legal state of the art in other
     software.
     
