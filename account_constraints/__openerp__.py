@@ -44,10 +44,6 @@
     
     * Forbid the user to delete any move linked to an invoice. Cancelling invoice still work obviously 
     
-    * For manual entries when multicurrency (Not in 7.0) : 
-      a - Validation on the use of the 'Currency' and 'Currency Amount' fields as it is possible to enter one without the other
-      b - Validation to prevent a Credit amount with a positive 'Currency Amount', or a Debit with a negative 'Currency Amount'
-    
     * Add a check on entries that user cannot provide a secondary currency if the same than the company one. (Not in 7.0)
     
     * Forbid to change the journal of a bank statement if you already have a line in it. This is done in the voucher, cause this is the case that break : when voucher is created and you change the journal, it'll result in having entries generated on various journal which is not consistent.

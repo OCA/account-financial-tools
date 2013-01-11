@@ -67,6 +67,30 @@ class AccountAccount(osv.osv):
         return res
 
 
+class AccountMoveLine(osv.osv):
+    _inherit = "account.move.line"
+    
+    def _remove_move_reconcile(self, cr, uid, move_ids=None, opening_reconciliation=False, context=None):
+        """Redefine the whole method to add the kwarg opening_reconciliation."""
+        # Function remove move rencocile ids related with moves
+        obj_move_line = self.pool.get('account.move.line')
+        obj_move_rec = self.pool.get('account.move.reconcile')
+        unlink_ids = []
+        if not move_ids:
+            return True
+        recs = obj_move_line.read(cr, uid, move_ids, ['reconcile_id', 'reconcile_partial_id'])
+        full_recs = filter(lambda x: x['reconcile_id'], recs)
+        rec_ids = [rec['reconcile_id'][0] for rec in full_recs]
+        part_recs = filter(lambda x: x['reconcile_partial_id'], recs)
+        part_rec_ids = [rec['reconcile_partial_id'][0] for rec in part_recs]
+        unlink_ids += rec_ids
+        unlink_ids += part_rec_ids
+        if unlink_ids:
+            if opening_reconciliation:
+                obj_move_rec.write(cr, uid, unlink_ids, {'opening_reconciliation': False})
+            obj_move_rec.unlink(cr, uid, unlink_ids)
+        return True
+
 class AccountMove(osv.osv):
     _inherit = "account.move"
 
@@ -151,18 +175,9 @@ class AccountBankSatement(osv.osv):
                     )
         return super(AccountBankSatement, self).write(cr, uid, ids, vals, context=context)
 
-AccountBankSatement()
-
-
 class AccountMoveLine(osv.osv):
     _inherit='account.move.line'
     
-    def _check_currency_and_amount(self, cr, uid, ids, context=None):
-        for l in self.browse(cr, uid, ids, context=context):
-            if (l.currency_id and not l.amount_currency) or (not l.currency_id and l.amount_currency):
-                return False
-        return True
-
     def _check_currency_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
             if l.amount_currency:
@@ -170,33 +185,16 @@ class AccountMoveLine(osv.osv):
                     return False
         return True
 
-    def _check_currency_company(self, cr, uid, ids, context=None):
-        for l in self.browse(cr, uid, ids, context=context):
-            if l.currency_id.id == l.company_id.currency_id.id:
-                return False
-        return True
-
     _constraints = [
-            (
-                _check_currency_and_amount, 
-                "You cannot create journal items with a secondary currency without recording \
-                    both 'currency' and 'amount currency' field.",
-                ['currency_id','amount_currency']
-            ),
             (
                 _check_currency_amount, 
                 'The amount expressed in the secondary currency must be positif when journal item\
                  are debit and negatif when journal item are credit.', 
                  ['amount_currency']
             ),
-            (
-                _check_currency_company, 
-                "You can't provide a secondary currency if the same than the company one." , 
-                ['currency_id']
-            ),
         ]
-        
 
+    
 class Invoice(osv.osv):
     _inherit = 'account.invoice'
 
