@@ -20,9 +20,10 @@
 
 import time
 from openerp.osv import fields, osv
+from openerp.osv.orm import Model
 from openerp.tools.translate import _
 
-class AccountMove(osv.osv):
+class AccountMove(Model):
     _inherit = "account.move"
 
     def _check_fiscal_year(self, cursor, user, ids):
@@ -40,7 +41,7 @@ class AccountMove(osv.osv):
     ]
 
 
-class AccountMoveLine(osv.osv):
+class AccountMoveLine(Model):
     _inherit='account.move.line'
     
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
