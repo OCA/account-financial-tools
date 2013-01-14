@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="view_account_renumber_form" model="ir.ui.view">
+            <field name="name">account_renumber.form</field>
+            <field name="model">wizard.renumber</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Renumber Account Moves">
+                    <group colspan="4" attrs="{'invisible': [('state', '!=', 'init')]}">
+                        <label string="This wizard will help you renumber one or more journals." colspan="4"/>
+                        <label string="Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <group string="Journals and periods to consider" colspan="4">
+                            <field name="journal_ids" colspan="4"/>
+                            <field name="period_ids" colspan="4"/>
+                        </group>
+                        <group string="Sequence options" colspan="4">
+                            <field name="number_next"/>
+                        </group>
+                    </group>
+                    <group string="" colspan="4" attrs="{'invisible': [('state', '=', 'init')]}">
+                        <label string="The moves of the selected journals and periods have been renumbered." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <label string="You may now review them using the show results button." colspan="4"/>
+                    </group>
+                    <field name="state" invisible="1"/>
+                    <button special="cancel" icon="gtk-cancel" string="Cancel"/>
+                    <button name="renumber" icon="gtk-ok" string="Renumber" states="init" type="object"/>
+                    <button name="show_results" icon="gtk-ok" string="Show Results" states="renumber" type="object"/>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_account_renumber" model="ir.actions.act_window">
+            <field name="name">Renumber Account Movess</field>
+            <field name="res_model">wizard.renumber</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_renumber_form"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="menu_account_renumber"
+            parent="account.menu_account_end_year_treatments"
+            action="action_account_renumber"
+            groups="base.group_system"
+            sequence="-1"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <menuitem id="menu_action_account_admin_tools_import"
+            name="Import"
+            parent="account_admin_tools.menu_action_account_admin_tools"
+            sequence="10"/>
+            
+    </data>
+</openerp>
