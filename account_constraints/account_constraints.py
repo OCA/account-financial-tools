@@ -18,12 +18,10 @@
 #
 ##############################################################################
 
-import time
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
-from openerp.osv.orm import Model
 
-class AccountAccount(Model):
+class AccountAccount(orm.Model):
     _inherit = 'account.account'
 
     # Forbid to change type of account for 'consolidation' and 'view' if there is entries on it or his children.
@@ -71,7 +69,7 @@ class AccountAccount(Model):
         return res
 
 
-class AccountMoveLine(Model):
+class AccountMoveLine(orm.Model):
     _inherit = "account.move.line"
 
     def _remove_move_reconcile(self, cr, uid, move_ids=None, opening_reconciliation=False, context=None):
@@ -95,7 +93,7 @@ class AccountMoveLine(Model):
             obj_move_rec.unlink(cr, uid, unlink_ids)
         return True
 
-class AccountMove(Model):
+class AccountMove(orm.Model):
     _inherit = "account.move"
 
     def _check_fiscal_year(self, cursor, user, ids):
@@ -123,7 +121,7 @@ class AccountMove(Model):
         return result
 
 
-class AccountMoveReconcile(Model):
+class AccountMoveReconcile(orm.Model):
     _inherit = "account.move.reconcile"
 
 
@@ -167,7 +165,7 @@ class AccountMoveReconcile(Model):
         return super(AccountMoveReconcile, self).unlink(cr, uid, ids, context=context)
 
 
-class AccountBankSatement(Model):
+class AccountBankSatement(orm.Model):
     _inherit = "account.bank.statement"
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -182,7 +180,7 @@ class AccountBankSatement(Model):
                     )
         return super(AccountBankSatement, self).write(cr, uid, ids, vals, context=context)
 
-class AccountMoveLine(Model):
+class AccountMoveLine(orm.Model):
     _inherit='account.move.line'
 
     def _check_currency_amount(self, cr, uid, ids, context=None):
@@ -202,7 +200,7 @@ class AccountMoveLine(Model):
         ]
 
 
-class Invoice(Model):
+class Invoice(orm.Model):
     _inherit = 'account.invoice'
 
     # Forbid to cancel an invoice if the related move lines have already been
