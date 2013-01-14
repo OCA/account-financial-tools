@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_move_partner_account_form" model="ir.ui.view">
+            <field name="name">move_partner_account.form</field>
+            <field name="model">account_admin_tools.move_partner_account</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Partner Accounts in Moves">
+                    <label string="This wizard will set the receivable/payable account of the partners, in moves and invoices where a generic receivable/payable account was used instead." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <newline/>
+                    <group string="Parameters" colspan="4">
+                        <separator string="Accounts to replace with partner accounts" colspan="4"/>
+                        <field name="account_receivable_id"/>
+                        <field name="account_payable_id"/>
+                        <newline/>
+                        <separator string="Filter for the moves to update" colspan="4"/>
+                        <field name="period_ids" colspan="4"/>
+                    </group>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Set partner accounts" name="action_set_partner_accounts_in_moves" type="object" icon="gtk-apply"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_move_partner_account_done_form" model="ir.ui.view">
+            <field name="name">move_partner_account.done.form</field>
+            <field name="model">account_admin_tools.move_partner_account</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Partner Accounts in Moves">
+                    <label string="The partner's receivable/payable accounts have been set succesfuly on the account moves!" colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Done" special="cancel" icon="gtk-ok"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_move_partner_account" model="ir.actions.act_window">
+            <field name="name">Set Partner Accounts in Moves</field>
+            <field name="res_model">account_admin_tools.move_partner_account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_move_partner_account_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_move_partner_account"
+            parent="menu_action_account_admin_tools_repair"
+            action="action_move_partner_account"
+            sequence="110"/>
+
+    </data>
+</openerp>

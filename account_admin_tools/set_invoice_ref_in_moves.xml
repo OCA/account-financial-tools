@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_set_invoice_ref_in_moves_form" model="ir.ui.view">
+            <field name="name">set_invoice_ref_in_moves.form</field>
+            <field name="model">account_admin_tools.set_invoice_ref_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Invoice Reference in Moves">
+                    <label string="This wizard will set the reference in account moves associated with invoices, that don't match the invoice reference." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <separator string="Find moves not matching the invoice reference/number" colspan="4"/>
+                        <label string="You may now search for account moves, on the given periods, whose reference does not match the invoice reference; or you may skip this step and select the moves by hand." colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <field name="period_ids" colspan="4"/>
+                        <label string="" colspan="4"/>
+                        <newline/>
+                        <button string="Search for moves" name="action_find_moves_with_wrong_invoice_ref" type="object" icon="gtk-ok" colspan="4"/>
+                    </group>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Skip" name="action_skip_new" type="object" icon="gtk-go-forward"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_set_invoice_ref_in_moves_ready_form" model="ir.ui.view">
+            <field name="name">set_invoice_ref_in_moves.ready.form</field>
+            <field name="model">account_admin_tools.set_invoice_ref_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Invoice Reference in Moves">
+                    <label string="The reference will be set, for the selected account moves, to the reference of the supplier invoice." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <separator string="Account moves to update" colspan="4"/>
+                    <field name="move_ids" colspan="4" nolabel="1"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Cancel" special="cancel" icon="gtk-cancel"/>
+                        <button string="Set invoice reference in moves" name="action_set_invoice_ref_in_moves" type="object" icon="gtk-apply"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_set_invoice_ref_in_moves_done_form" model="ir.ui.view">
+            <field name="name">set_invoice_ref_in_moves.done.form</field>
+            <field name="model">account_admin_tools.set_invoice_ref_in_moves</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Set Invoice Reference in Moves">
+                    <label string="The invoice references have been succesfully set on the account moves!" colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <separator string="Updated account moves" colspan="4"/>
+                    <field name="move_ids" colspan="4" nolabel="1" readonly="1"/>
+                    <label string="" colspan="4"/>
+                    <group colspan="4">
+                        <button string="Done" special="cancel" icon="gtk-ok"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_set_invoice_ref_in_moves" model="ir.actions.act_window">
+            <field name="name">Set Invoice Reference in Moves</field>
+            <field name="res_model">account_admin_tools.set_invoice_ref_in_moves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_set_invoice_ref_in_moves_form"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_action_set_invoice_ref_in_moves"
+            parent="menu_action_account_admin_tools_repair"
+            action="action_set_invoice_ref_in_moves"
+            sequence="130"/>
+
+    </data>
+</openerp>
