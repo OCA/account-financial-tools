@@ -18,14 +18,14 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import osv, orm
 from openerp.tools.translate import _
-from openerp.osv.orm import TransientModel
 
-class AccountFiscalYearClose(TransientModel):
+
+class AccountFiscalYearClose(orm.TransientModel):
     """
-    Override a large portion to manage the reconciliation of the opening entries -> we
-    don't want them to be deleted. Backported from v7.0.
+    Override a large portion to manage the reconciliation of the opening
+    entries -> we don't want them to be deleted. Backported from v7.0.
     """
     _inherit = "account.fiscalyear.close"
 
