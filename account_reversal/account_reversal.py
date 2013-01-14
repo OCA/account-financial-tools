@@ -39,7 +39,7 @@ class account_move(orm.Model):
             'Reversal Entry',
             ondelete='set null',
             readonly=True),
-    }
+        }
 
     def _move_reversal(self, cr, uid, move, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
