@@ -35,24 +35,27 @@ class AccountMove(Model):
 
     _constraints = [
         (_check_fiscal_year,
-            'You cannot create entries with date not in the fiscal year of the chosen period',
+            'You cannot create entries with date not in the '
+            'fiscal year of the chosen period',
             ['line_id']),
     ]
 
 
 class AccountMoveLine(Model):
-    _inherit='account.move.line'
+    _inherit = 'account.move.line'
 
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
-            if (l.currency_id and not l.amount_currency) or (not l.currency_id and l.amount_currency):
+            if ((l.currency_id and not l.amount_currency) or
+                    (not l.currency_id and l.amount_currency)):
                 return False
         return True
 
     def _check_currency_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
             if l.amount_currency:
-                if (l.amount_currency > 0.0 and l.credit > 0.0) or (l.amount_currency < 0.0 and l.debit > 0.0):
+                if ((l.amount_currency > 0.0 and l.credit > 0.0) or
+                        (l.amount_currency < 0.0 and l.debit > 0.0)):
                     return False
         return True
 
@@ -63,21 +66,20 @@ class AccountMoveLine(Model):
         return True
 
     _constraints = [
-            (
-                 _check_currency_and_amount,
-                 "You cannot create journal items with a secondary currency without "
-                 "recording both 'currency' and 'amount currency' field.",
-                 ['currency_id','amountount_currency']
+            (_check_currency_and_amount,
+             "You cannot create journal items with a secondary currency "
+             "without recording both 'currency' and 'amount currency' field.",
+             ['currency_id','amountount_currency']
             ),
-            (
-                _check_currency_amount,
-                "The amount expressed in the secondary currency must be positif when journal item "
-                "are debit and negatif when journal item are credit.",
-                 ['amount_currency']
+            (_check_currency_amount,
+             "The amount expressed in the secondary currency must be positive "
+             "when journal item are debit and negatif when journal item are "
+             "credit.",
+              ['amount_currency']
             ),
-            (
-                _check_currency_company,
-                "You can't provide a secondary currency if the same than the company one." ,
-                ['currency_id']
+            (_check_currency_company,
+             "You can't provide a secondary currency if "
+             "the same than the company one.",
+             ['currency_id']
             ),
         ]
