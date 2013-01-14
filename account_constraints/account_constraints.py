@@ -18,10 +18,9 @@
 #
 ##############################################################################
 
-import time
-from openerp.osv import fields, osv
+from openerp.osv import fields
 from openerp.osv.orm import Model
-from openerp.tools.translate import _
+
 
 class AccountMove(Model):
     _inherit = "account.move"
