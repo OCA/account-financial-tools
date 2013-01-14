@@ -68,7 +68,7 @@ class AccountMoveLine(orm.Model):
             (_check_currency_and_amount,
              "You cannot create journal items with a secondary currency "
              "without recording both 'currency' and 'amount currency' field.",
-             ['currency_id','amountount_currency']
+             ['currency_id','amount_currency']
             ),
             (_check_currency_amount,
              "The amount expressed in the secondary currency must be positive "
