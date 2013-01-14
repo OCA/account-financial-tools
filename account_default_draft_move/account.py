@@ -32,7 +32,7 @@ class account_move(TransientModel):
         return_value = super(account_move,self).post(cr, uid, ids, context)
         if return_value:
             invoice = context.get('invoice', False)
-            ## We test if the move is related to an invoice_id in order to post it with draft status
+            ## We test if the move is related to an invoice in order to post it with draft status
             if invoice:
                 valid_moves = self.validate(cr, uid, ids, context)
                 if not valid_moves:
