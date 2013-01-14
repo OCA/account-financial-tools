@@ -18,11 +18,10 @@
 #
 ##############################################################################
 
-from openerp.osv import fields
-from openerp.osv.orm import Model
+from openerp.osv import fields, orm
 
 
-class AccountMove(Model):
+class AccountMove(orm.Model):
     _inherit = "account.move"
 
     def _check_fiscal_year(self, cr, uid, ids):
@@ -41,7 +40,7 @@ class AccountMove(Model):
     ]
 
 
-class AccountMoveLine(Model):
+class AccountMoveLine(orm.Model):
     _inherit = 'account.move.line'
 
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
