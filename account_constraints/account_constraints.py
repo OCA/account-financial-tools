@@ -42,7 +42,7 @@ class AccountMove(Model):
 
 class AccountMoveLine(Model):
     _inherit='account.move.line'
-    
+
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
             if (l.currency_id and not l.amount_currency) or (not l.currency_id and l.amount_currency):
@@ -70,16 +70,14 @@ class AccountMoveLine(Model):
                  ['currency_id','amountount_currency']
             ),
             (
-                _check_currency_amount, 
+                _check_currency_amount,
                 "The amount expressed in the secondary currency must be positif when journal item "
-                "are debit and negatif when journal item are credit.", 
+                "are debit and negatif when journal item are credit.",
                  ['amount_currency']
             ),
             (
-                _check_currency_company, 
-                "You can't provide a secondary currency if the same than the company one." , 
+                _check_currency_company,
+                "You can't provide a secondary currency if the same than the company one." ,
                 ['currency_id']
             ),
         ]
-        
-
