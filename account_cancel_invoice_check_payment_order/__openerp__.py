@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,12 +17,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 {
     "name" : "Cancel invoice, check on payment order",
     "version" : "1.0",
     "depends" : ["base", "account","account_payment","account_cancel"],
-    "author" : "CamptoCamp",
+    "author" : "Camptocamp",
     "description": """Constraint to not be able to cancel on invoice if already import in payment order
     """,
     'website': 'http://www.camptocamp.com',

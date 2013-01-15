@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,30 +18,33 @@
 #
 ##############################################################################
 
-from tools.translate import _
-from osv import osv
-from openerp.osv.orm import TransientModel, fields
+from openerp.tools.translate import _
+from openerp.osv import osv, orm
+from openerp.osv.orm import TransientModel
 
-class account_invoice(TransientModel):
+
+class account_invoice(orm.TransientModel):
     _inherit = "account.invoice"
     
     def action_cancel(self, cr, uid, ids, *args):
-        ### 
         invoices = self.read(cr, uid, ids, ['move_id', 'payment_ids'])
         for invoice in invoices:
             if invoice['move_id']:
-                ## This invoice have a move line, we search move_line converned by this move
-                cr.execute("""select (select reference from payment_order where id = order_id) as payment_name,
-                                (select date_done from payment_order where id = order_id) as payment_date,
-                                name from payment_line
-                                where move_line_id in (select id from account_move_line where move_id = %s)""",
+                ## This invoice have a move line, we search move_line concerned by this move
+                cr.execute("""SELECT po.reference as payment_name,
+                                     po.date_done as payment_date,
+                                     pl.name
+                               FROM payment_line as pl
+                               INNER JOIN payment_order AS po 
+                               ON pl.id = order_id
+                               WHERE move_line_id IN (SELECT id FROM account_move_line WHERE move_id = %s)""",
                                 (invoice['move_id'][0],))
                 payment_orders = cr.dictfetchall()
                 if payment_orders:
-                    raise osv.except_osv(_('Error !'), _('''Invoice already import in payment \
-                                            order (%s) at %s on line %s''' % 
+                    raise osv.except_osv(_('Error !'),
+                                         _("Invoice already import in payment" 
+                                            "order (%s) at %s on line %s" % 
                                             (payment_orders[0]['payment_name'],
                                              payment_orders[0]['payment_date'],
                                              payment_orders[0]['name'],)))
         return super(account_invoice,self).action_cancel(cr, uid, ids, *args)
-    
