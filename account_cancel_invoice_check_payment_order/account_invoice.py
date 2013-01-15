@@ -37,14 +37,14 @@ class account_invoice(orm.TransientModel):
                                FROM payment_line as pl
                                INNER JOIN payment_order AS po 
                                ON pl.id = order_id
-                               WHERE move_line_id IN (SELECT id FROM account_move_line WHERE move_id = %s)""",
+                               WHERE move_line_id IN (SELECT id FROM account_move_line WHERE move_id = %s) LIMIT 1""",
                                 (invoice['move_id'][0],))
-                payment_orders = cr.dictfetchall()
+                payment_orders = cr.dictfetchone()
                 if payment_orders:
                     raise osv.except_osv(_('Error !'),
                                          _("Invoice already import in payment" 
                                             "order (%s) at %s on line %s" % 
-                                            (payment_orders[0]['payment_name'],
-                                             payment_orders[0]['payment_date'],
-                                             payment_orders[0]['name'],)))
+                                            (payment_orders['payment_name'],
+                                             payment_orders['payment_date'],
+                                             payment_orders['name'],)))
         return super(account_invoice,self).action_cancel(cr, uid, ids, *args)

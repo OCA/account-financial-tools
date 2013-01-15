@@ -25,10 +25,7 @@
     "description": """Constraint to not be able to cancel on invoice if already import in payment order
     """,
     'website': 'http://www.camptocamp.com',
-    'init_xml': [],
-    'update_xml': [
-    ],
-    'demo_xml': [],
+    'data' : [],
     'installable': True,
     'active': False,
 }
