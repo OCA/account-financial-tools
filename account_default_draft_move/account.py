@@ -23,6 +23,7 @@
 
 
 from openerp.osv.orm import  TransientModel, fields
+from osv import osv
 from tools.translate import _
 
 class account_move(TransientModel):
