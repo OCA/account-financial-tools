@@ -103,10 +103,12 @@ class AccountMoveLine(orm.Model):
         recs = obj_move_line.read(cr, uid, move_ids,
                                   ['reconcile_id', 'reconcile_partial_id'],
                                   context=context)
-        full_recs = filter(lambda x: x['reconcile_id'], recs)
-        rec_ids = [rec['reconcile_id'][0] for rec in full_recs]
-        part_recs = filter(lambda x: x['reconcile_partial_id'], recs)
-        part_rec_ids = [rec['reconcile_partial_id'][0] for rec in part_recs]
+        rec_ids = [rec['reconcile_id'][0]
+                   for rec in recs
+                   if rec['reconcile_id']]
+        part_rec_ids = [rec['reconcile_partial_id'][0]
+                        for rec in recs
+                        if rec['reconcile_partial_id']]
         unlink_ids += rec_ids
         unlink_ids += part_rec_ids
         if unlink_ids:
