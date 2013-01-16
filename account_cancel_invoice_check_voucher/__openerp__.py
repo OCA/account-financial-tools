@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,14 +21,11 @@
     "name" : "Cancel invoice, check on bank statement",
     "version" : "1.0",
     "depends" : ["base", "account","account_voucher","account_cancel"],
-    "author" : "CamptoCamp",
+    "author" : "Camptocamp",
     "description": """Contraint to not be able to cancel an invoice already import in bank statement with a voucher
     """,
     'website': 'http://www.camptocamp.com',
-    'init_xml': [],
-    'update_xml': [
-    ],
-    'demo_xml': [],
+    'date' : [],
     'installable': True,
     'active': False,
 }

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,6 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_invoice
+
+from . import account_invoice
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

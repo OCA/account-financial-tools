@@ -21,32 +21,32 @@
 #
 ##############################################################################
 
-from tools.translate import _
-from osv import osv
-from openerp.osv.orm import TransientModel
+from openerp.tools.translate import _
+from openerp.osv import osv, orm
 
-class account_invoice(TransientModel):
+class account_invoice(orm.TransientModel):
     _inherit = "account.invoice"
     
     def action_cancel(self, cr, uid, ids, *args):
-        ### 
         invoices = self.read(cr, uid, ids, ['move_id', 'payment_ids'])
         for i in invoices:
             if i['move_id']:
-                ## This invoice have a move line, we search move_line converned by this move
-                cr.execute("""select (select name from account_bank_statement where id = statement_id) as statement_name, 
-                    ((select date from account_bank_statement where id = statement_id)) as statement_date, 
-                    name from account_bank_statement_line where voucher_id in 
-                    ( select voucher_id from account_voucher_line where move_line_id in (
-                    select id from account_move_line where move_id = %s ))""", (i['move_id'][0],))
-                statement_lines = cr.dictfetchall()
+                ## This invoice have a move line, we search move_line concerned by this move
+                cr.execute("""SELECT abs.name as statement_name,
+                                     abs.date as statement_date,
+                                     absl.name
+                              FROM account_bank_statement_line as absl
+                              INNER JOIN account_bank_statement as abs
+                              ON absl.statement_id = abs.id
+                              WHERE voucher_id in 
+                                        ( SELECT voucher_id FROM account_voucher_line WHERE move_line_id in 
+                                            (SELECT id FROM account_move_line WHERE move_id = %s )) limit 1""", (i['move_id'][0],))
+                statement_lines = cr.dictfetchone()
                 if statement_lines:
                     raise osv.except_osv(_('Error !'), 
                                          _('Invoice already import in bank statment (%s) at %s on line %s'
-                                            % (statement_lines[0]['statement_name'],
-                                               statement_lines[0]['statement_date'],
-                                               statement_lines[0]['name'],)))
+                                            % (statement_lines['statement_name'],
+                                               statement_lines['statement_date'],
+                                               statement_lines['name'],)))
 
-        
-        
         return super(account_invoice,self).action_cancel(cr, uid, ids, *args)
