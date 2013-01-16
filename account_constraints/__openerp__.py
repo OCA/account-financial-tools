@@ -40,31 +40,32 @@ Summary of constraints are:
   simply 'configurable' since it can lead to a lack of confidence in
   OpenERP and this is what we want to change.
 
-* Forbid to change type of account for 'consolidation' and 'view' if
-  there is entries on it or his children.
+* Forbid to change the type of account for 'consolidation' and 'view' if
+  there are entries on it or its children.
 
-* Add a constraints on reconcile object to forbid the reconciliation
-  between different partner
+* Add a constraint on reconcile object to forbid the reconciliation
+  between different partners.
 
-* Add a constraint on account move: you cannot pickup a date that is not
-  in the fiscal year of the concerned period (Not in 7.0)
+* Add a constraint on account move: you cannot pickup a date that is
+  not in the fiscal year of the concerned period (this constraint is
+  not in OpenERP 7.0).
 
 * Forbid the user to delete any move linked to an invoice. Cancelling
-  invoice still work obviously
+  invoice still works, of course.
 
-* Add a check on entries that user cannot provide a secondary currency
-  if the same than the company one. (Not in 7.0)
+* Forbid the user to provide a secondary currency which is the same as
+  the company currency (this constraint is not in OpenERP 7.0).
 
 * Forbid to change the journal of a bank statement if you already have a
-  line in it. This is done in the voucher, cause this is the case that
-  break : when voucher is created and you change the journal, it'll result
+  line in it. This is done in the voucher, because this is the case that
+  breaks: when a voucher is created and you change the journal, it results
   in having entries generated on various journal which is not consistent.
 
-* Add contraint for Payment Order : If a invoice is imported in a
-  payment order, forbid to reset invoice to cancel or draft
+* Add contraint for Payment Order: if an invoice is imported in a
+  payment order, forbid to reset the invoice to Cancel or Draft
 
-* Forbid to remove the reconcile on opening entries, we introduce a new
-  boolean field to identify the reconciliation made by the closing process
+* Forbid to remove the reconcile on opening entries. We introduce a new
+  boolean field to distinguish the reconciliations made by the closing process
   from others.
     """,
     'website': 'http://www.camptocamp.com',
