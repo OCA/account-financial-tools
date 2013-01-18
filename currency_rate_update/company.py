@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #  company.py
 #  c2c_currency_update
 # @author Nicolas Bessi 

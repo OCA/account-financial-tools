@@ -13,7 +13,6 @@
         <field name="name">account.move.reversal.tree</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_tree" />
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <field name="to_check" position="after">
                 <field name="to_be_reversed"/>
@@ -25,11 +24,10 @@
         <field name="name">account.move.reversal.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
-        <field name="type">form</field>
         <field name="arch" type="xml">
-            <xpath expr="/form/group/field[@name='company_id']" position="after">
+            <xpath expr="//field[@name='company_id']" position="after">
                 <field name="to_be_reversed"/>
-                <field name="reversal_id" attrs="{'invisible': [('to_be_reversed','=',False)]}"/>
+                <field name="reversal_id" attrs="{'invisible': [('to_be_reversed', '=', False)]}"/>
             </xpath>
         </field>
     </record>
@@ -38,10 +36,12 @@
         <field name="name">account.move.reversal.select</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_account_move_filter" />
-        <field name="type">search</field>
         <field name="arch" type="xml">
             <xpath expr="/search/group[1]/filter[3]" position="after">
-                <filter icon="terp-gtk-jump-to-rtl" name="to_be_reversed" string="To Be Reversed" domain="[('to_be_reversed','=',True),('reversal_id','=',False)]" help="Journal Entries to be Reversed"/>
+                <filter name="to_be_reversed"
+                    string="To Be Reversed"
+                    domain="[('to_be_reversed', '=', True), ('reversal_id', '=', False)]"
+                    help="Journal Entries to be Reversed"/>
             </xpath>
         </field>
     </record>
