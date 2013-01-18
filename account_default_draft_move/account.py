@@ -33,9 +33,9 @@ class account_move(orm.Model):
             if invoice:
                 valid_moves = self.validate(cr, uid, ids, context)
                 if not valid_moves:
-                    raise osv.except_osv(_('Integrity Error !'), _('''You can not validate a non-balanced entry!\n \
-                    Make sure you have configured payment terms properly!\n \
-                    The latest payment term line should be of the type "Balance" !'''))
+                    raise osv.except_osv(_('Integrity Error'), _('''You can not validate a non-balanced entry.\n \
+                    Make sure you have configured payment terms properly.\n \
+                    The latest payment term line should be of the type "Balance".'''))
                 move_obj = self.pool.get('account.move')
                 move_obj.write(cr, uid, valid_moves, {'state': 'draft'}, context=context)
 
@@ -51,7 +51,7 @@ class account_move(orm.Model):
                 raise osv.except_osv(_('Error'), _('You can not modify a posted entry of closed periods'))
             ## Change the test of line state instead of journal type
             elif line.state == 'posted':
-                raise osv.except_osv(_('Error'), _('''You can not modify a posted entry of this journal!\n \
+                raise osv.except_osv(_('Error'), _('''You can not modify a posted entry of this journal.\n \
                 You should set the journal to allow cancelling entries if you want to do that.'''))
         if ids:
             move_obj = self.pool.get('account.move')
