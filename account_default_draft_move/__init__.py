@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,8 +18,6 @@
 #
 ##############################################################################
 
-
-import account
-import account_bank_statement
+from . import account
+from . import account_bank_statement
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,19 +17,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 {
     "name" : "Move in draft state by default",
     "version" : "1.0",
     "depends" : ["base", "account"],
-    "author" : "CamptoCamp",
+    "author" : "Camptocamp",
     "description": """Let move in draft on invoice and bank statement
     """,
-    'website': 'http://www.openerp.com',
-    'init_xml': [],
-    'update_xml': [
-    ],
-    'demo_xml': [],
+    'website': 'http://www.camptocamp.com',
+    'data' : [], 
     'installable': True,
     'active': False,
 }

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
-# All Right Reserved
-#
-# Author : Vincent Renaville (Camptocamp)
+#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,12 +18,11 @@
 #
 ##############################################################################
 
-
-from openerp.osv.orm import  TransientModel, fields
-from osv import osv
+from openerp.osv import fields, orm, osv
 from tools.translate import _
 
-class account_move(TransientModel):
+
+class account_move(orm.Model):
     _inherit = "account.move"
     
     def post(self, cr, uid, ids, context=None):
@@ -61,6 +57,4 @@ class account_move(TransientModel):
             move_obj = self.pool.get('account.move')
             move_obj.write(cr, uid, ids, {'state': 'draft'}, context=context)
         return True
-
-    
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
