@@ -21,7 +21,6 @@
 
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
-import account
 
 class account_invoice_template(osv.osv):
 
@@ -40,9 +39,6 @@ class account_invoice_template(osv.osv):
             ],'Type', required=True ),
         }
 
-
-
-account_invoice_template()
 
 class account_invoice_template_line(osv.osv):
 
@@ -100,4 +96,3 @@ class account_invoice_template_line(osv.osv):
 
         return {'value': result}
 
-account_invoice_template_line()

@@ -19,9 +19,9 @@
 #
 ##############################################################################
 
-from osv import fields,osv
+from openerp.osv import fields,osv
 import time
-from tools.translate import _
+from openerp.tools.translate import _
 
 class wizard_select_template(osv.osv_memory):
 
@@ -118,7 +118,6 @@ class wizard_select_template(osv.osv_memory):
             'res_id': inv_id or False,
         }
 
-wizard_select_template()
 
 class wizard_select_template_line(osv.osv_memory):
     _description = 'Template Lines'
@@ -132,4 +131,3 @@ class wizard_select_template_line(osv.osv_memory):
         'product_id': fields.many2one('product.product', 'Product'),
     }
 
-wizard_select_template_line()
