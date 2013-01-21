@@ -67,6 +67,14 @@ Summary of constraints are:
 * Forbid to remove the reconcile on opening entries. We introduce a new
   boolean field to distinguish the reconciliations made by the closing process
   from others.
+  
+* Remove the possibility to modify or delete a move line related to an
+  invoice or a bank statement, no matter what the status of the move
+  (draft, validated or posted). This is usefule in standard context but
+  moreover if you're using : account_default_draft_move. This way you ensure
+  user cannot make mistake even in draft, he must pass through the 
+  parent object to make his modification.
+
     """,
     'website': 'http://www.camptocamp.com',
     'init_xml': [],
