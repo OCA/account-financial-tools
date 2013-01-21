@@ -143,6 +143,14 @@ class AccountInvoice(orm.Model):
         context['from_parent_object'] = True
         return super(AccountInvoice, self).action_cancel(cr, uid, ids, context=context)
 
+    def action_move_create(self, cr, uid, ids, context=None):
+        """Override the method to add the key 'from_parent_object' in
+        the context."""
+        if context is None:
+            context = {}
+        context['from_parent_object'] = True
+        return super(AccountInvoice,self).action_move_create(cr, uid, ids, context=context)
+
 
 class AccountBankStatement(orm.Model):
     _inherit = "account.bank.statement"
