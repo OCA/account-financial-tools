@@ -29,6 +29,8 @@ class AccountBankStatement(orm.Model):
         move_ids = super(AccountBankStatement,self).create_move_from_st_line(cr, uid, st_line_id,
                                                                           company_currency_id,
                                                                           st_line_number, context)
+        if not isinstance(move_ids, (tuple, list)):
+            move_ids = [move_ids]
         ## We receive the move created for the bank statement, we set it to draft
         if move_ids:
             move_obj = self.pool.get('account.move')
