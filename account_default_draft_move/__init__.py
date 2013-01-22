@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
+#    Authors:
+#     * Vincent Renaville
+#     * Joël Grand-Guillaume
+#    Copyright 2012-2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as

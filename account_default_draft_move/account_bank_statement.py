@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2012 Camptocamp SA
+#    Authors:
+#     * Vincent Renaville
+#     * Joël Grand-Guillaume
+#    Copyright 2012-2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,17 +21,18 @@
 ##############################################################################
 
 from openerp.osv import fields, orm
-from tools.translate import _
+from openerp.tools.translate import _
 
 
 class AccountBankStatement(orm.Model):
     _inherit = "account.bank.statement"
 
-    def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id, 
-            st_line_number, context=None):
-        move_ids = super(AccountBankStatement,self).create_move_from_st_line(cr, uid, st_line_id,
-                                                                          company_currency_id,
-                                                                          st_line_number, context)
+    def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id,
+                                 st_line_number, context=None):
+        sup = super(AccountBankStatement,self)
+        move_ids = sup.create_move_from_st_line(cr, uid, st_line_id,
+                                                company_currency_id,
+                                                st_line_number, context)
         if not isinstance(move_ids, (tuple, list)):
             move_ids = [move_ids]
         ## We receive the move created for the bank statement, we set it to draft

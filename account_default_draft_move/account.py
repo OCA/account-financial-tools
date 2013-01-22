@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville/Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
+#    Authors:
+#     * Vincent Renaville
+#     * Joël Grand-Guillaume
+#    Copyright 2012-2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,12 +21,12 @@
 ##############################################################################
 
 from openerp.osv import fields, orm, osv
-from tools.translate import _
+from openerp.tools.translate import _
 
 
 class AccountInvoice(orm.Model):
     _inherit = 'account.invoice'
-    
+
     def action_move_create(self, cr, uid, ids, context=None):
         """Set move line in draft state after creating them."""
         res = super(AccountInvoice,self).action_move_create(cr, uid, ids, context=context)
