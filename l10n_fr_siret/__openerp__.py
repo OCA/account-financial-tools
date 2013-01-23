@@ -35,7 +35,7 @@ The last digits of the SIREN and NIC are control keys: OpenERP will check their 
 validity when partners are recorded.
 ''',
     'author' : u'Numérigraphe SARL',
-    'depends': ['base'],
+    'depends': ['l10n_fr'],
     'init_xml': [],
     'update_xml': ['partner_view.xml', ],
     'installable': True,
