@@ -20,9 +20,14 @@
 {
     "name" : "Cancel invoice, check on payment order",
     "version" : "1.0",
-    "depends" : ["base", "account","account_payment","account_cancel"],
+    "depends" : ["account",
+                 "account_payment",
+                 "account_cancel"
+                ],
     "author" : "Camptocamp",
-    "description": """Constraint to not be able to cancel on invoice if already import in payment order
+    "description": """
+Prevents to cancel an invoice which has already been imported in a
+payment order.
     """,
     'website': 'http://www.camptocamp.com',
     'data' : [],
