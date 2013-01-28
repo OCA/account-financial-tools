@@ -33,4 +33,22 @@ class AccountInvoice(orm.Model):
                 move_obj.write(cr, uid, [inv.move_id.id], {'state': 'draft'}, context=context)
         return res
 
+class AccountMove(orm.Model):
+    _inherit = 'account.move'
+    
+    def button_cancel(self, cr, uid, ids, context=None):
+        """ We rewrite function button_cancel, to allow invoice or bank statement with linked draft moved
+        to be canceled """
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.state == 'draft':
+                continue 
+            else:
+                if not line.journal_id.update_posted:
+                    raise osv.except_osv(_('Error!'), _('You cannot modify a posted entry of this journal.\nFirst you should set the journal to allow cancelling entries.'))
+        if ids:
+            cr.execute('UPDATE account_move '\
+                       'SET state=%s '\
+                       'WHERE id IN %s', ('draft', tuple(ids),))
+        return True
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
