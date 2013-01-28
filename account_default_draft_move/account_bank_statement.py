@@ -17,24 +17,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 
-from openerp.osv import fields, orm
-from tools.translate import _
+from openerp.osv import orm
+from openerp.tools.translate import _
 
 
 class AccountBankStatement(orm.Model):
     _inherit = "account.bank.statement"
 
-    def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id, 
-            st_line_number, context=None):
-        move_ids = super(AccountBankStatement,self).create_move_from_st_line(cr, uid, st_line_id,
-                                                                          company_currency_id,
-                                                                          st_line_number, context)
+    def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id,
+                                 st_line_number, context=None):
+        move_ids = super(AccountBankStatement,self).create_move_from_st_line(
+                cr, uid, st_line_id, company_currency_id,
+                st_line_number, context)
         if not isinstance(move_ids, (tuple, list)):
             move_ids = [move_ids]
-        ## We receive the move created for the bank statement, we set it to draft
+        # We receive the move created for the bank statement, we set it
+        # to draft
         if move_ids:
             move_obj = self.pool.get('account.move')
-            move_obj.write(cr, uid, move_ids, {'state': 'draft'}, context=context)
+            move_obj.write(cr, uid, move_ids,
+                           {'state': 'draft'}, context=context)
         return move_ids
-
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
