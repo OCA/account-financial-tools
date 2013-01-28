@@ -29,7 +29,7 @@
     'category': 'Generic Modules/Accounting',
     'description': """
 Add contraints in the accounting module of OpenERP to avoid bad usage by
-users that lead to corrupted datas. This is based on our experiences and
+users that lead to corrupted datas. This is based on our experience and
 legal state of the art in other software.
 
 Summary of constraints are:
@@ -67,6 +67,14 @@ Summary of constraints are:
 * Forbid to remove the reconcile on opening entries. We introduce a new
   boolean field to distinguish the reconciliations made by the closing process
   from others.
+  
+* Remove the possibility to modify or delete a move line related to an
+  invoice or a bank statement, no matter what the status of the move
+  (draft, validated or posted). This is useful in a standard context but
+  even more if you're using the account_default_draft_move module. This way you ensure
+  that the user cannot make mistakes: even in draft State, he must pass through the 
+  parent object to make his modification.
+
     """,
     'website': 'http://www.camptocamp.com',
     'init_xml': [],
