@@ -142,6 +142,8 @@ class AccountInvoice(orm.Model):
         through the cancel button."""
         if context is None:
             context = {}
+        else:
+            context = context.copy()
         context['from_parent_object'] = True
         return super(AccountInvoice, self).action_cancel(cr, uid, ids, context=context)
 
@@ -150,6 +152,8 @@ class AccountInvoice(orm.Model):
         the context."""
         if context is None:
             context = {}
+        else:
+            context = context.copy()
         context['from_parent_object'] = True
         return super(AccountInvoice,self).action_move_create(cr, uid, ids, context=context)
 
@@ -163,6 +167,8 @@ class AccountBankStatement(orm.Model):
         through the cancel button."""
         if context is None:
             context = {}
+        else:
+            context = context.copy()
         context['from_parent_object'] = True
         return super(AccountBankStatement, self).button_cancel(cr, uid, ids, context=context)
 
@@ -170,6 +176,8 @@ class AccountBankStatement(orm.Model):
         """Add the from_parent_object key in context in order to be able to post the move."""
         if context is None:
             context = {}
+        else:
+            context = context.copy()
         context['from_parent_object'] = True
         return super(AccountBankStatement, self).create_move_from_st_line(cr, uid, 
             st_line_id, company_currency_id, st_line_number, context=context)
