@@ -48,6 +48,13 @@ Summary of constraints are:
 
 * Add a check on entries that user cannot provide a secondary currency
   if the same than the company one.
+  
+* Remove the possibility to modify or delete a move line related to an
+  invoice or a bank statement, no matter what the status of the move
+  (draft, validated or posted). This is useful in a standard context but
+  even more if you're using `account_default_draft_move`. This way you ensure
+  that the user cannot make mistakes even in draft state, he must pass through the 
+  parent object to make his modification.
 
     """,
     'website': 'http://www.camptocamp.com',
