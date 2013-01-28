@@ -72,6 +72,8 @@ class AccountMoveLine(orm.Model):
             This is mandatory if you use the module setting all moves in draft 
             (module: account_default_draft_move)
             """
+        if context is None:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids, context=context)
             self._check_statement_related_move(cr, uid, ids, context=context)
@@ -86,6 +88,8 @@ class AccountMoveLine(orm.Model):
             This is mandatory if you use the module setting all moves in draft 
             (module: account_default_draft_move)
             """
+        if context is None:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids, context=context)
             self._check_statement_related_move(cr, uid, ids, context=context)
