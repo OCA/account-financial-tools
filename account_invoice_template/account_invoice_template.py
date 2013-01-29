@@ -71,28 +71,32 @@ class account_invoice_template_line(osv.osv):
         result.update({'name': product.name})
 
         # account
+        account_id = False
         if type in ('out_invoice','out_refund'):
-            a = product.product_tmpl_id.property_account_income.id
-            if not a:
-                a = product.categ_id.property_account_income_categ.id
+            account_id = product.product_tmpl_id.property_account_income.id
+            if not account_id:
+                account_id = product.categ_id.property_account_income_categ.id
         else:
-            a = product.product_tmpl_id.property_account_expense.id
-            if not a:
-                a = product.categ_id.property_account_expense_categ.id
+            account_id = product.product_tmpl_id.property_account_expense.id
+            if not account_id:
+                account_id = product.categ_id.property_account_expense_categ.id
 
-        if a:
-            result['account_id'] = a
+        if account_id:
+            result['account_id'] = account_id
 
         # taxes
-        if type in ('out_invoice', 'out_refund'):
-            tax_id = product.taxes_id and product.taxes_id or (a and self.pool.get('account.account').browse(cr, uid, a, context=context).tax_ids or False)
-        else:
-            tax_id = product.supplier_taxes_id and product.supplier_taxes_id or (a and self.pool.get('account.account').browse(cr, uid, a, context=context).tax_ids or False)
-        taxes = tax_id and map(lambda x: x.id, tax_id) or False
+        account_obj = self.pool.get('account.account')
+        taxes = account_id and account_obj.browse(
+            cr, uid, account_id, context=context).tax_ids or False
+        if type in ('out_invoice', 'out_refund') and product.taxes_id:
+            taxes = product.taxes_id
+        elif product.supplier_taxes_id:
+            taxes = product.supplier_taxes_id
+        tax_ids = taxes and [tax.id for tax in taxes] or False
         if type in ('in_invoice', 'in_refund'):
-            result.update({'invoice_line_tax_id': taxes})
+            result.update({'invoice_line_tax_id': tax_ids})
         else:
-            result.update({'invoice_line_tax_id': taxes})
+            result.update({'invoice_line_tax_id': tax_ids})
 
         return {'value': result}
 
