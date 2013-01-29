@@ -93,10 +93,7 @@ class account_invoice_template_line(osv.osv):
         elif product.supplier_taxes_id:
             taxes = product.supplier_taxes_id
         tax_ids = taxes and [tax.id for tax in taxes] or False
-        if type in ('in_invoice', 'in_refund'):
-            result.update({'invoice_line_tax_id': tax_ids})
-        else:
-            result.update({'invoice_line_tax_id': tax_ids})
+        result.update({'invoice_line_tax_id': tax_ids})
 
         return {'value': result}
 
