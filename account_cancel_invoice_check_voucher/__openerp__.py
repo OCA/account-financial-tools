@@ -20,9 +20,13 @@
 {
     "name" : "Cancel invoice, check on bank statement",
     "version" : "1.0",
-    "depends" : ["base", "account","account_voucher","account_cancel"],
+    "depends" : ["base",
+                 "account",
+                 "account_voucher",
+                 "account_cancel",
+                 ],
     "author" : "Camptocamp",
-    "description": """Contraint to not be able to cancel an invoice already import in bank statement with a voucher
+    "description": """Constraint forbidding to cancel an invoice already imported in bank statement with a voucher.
     """,
     'website': 'http://www.camptocamp.com',
     'date' : [],

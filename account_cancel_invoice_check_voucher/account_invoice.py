@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com) 
+# Copyright (c) 2012 Camptocamp (http://www.camptocamp.com)
 # All Right Reserved
 #
 # Author : Vincent Renaville (Camptocamp)
@@ -26,27 +26,28 @@ from openerp.osv import osv, orm
 
 class account_invoice(orm.TransientModel):
     _inherit = "account.invoice"
-    
-    def action_cancel(self, cr, uid, ids, *args):
+
+    def action_cancel(self, cr, uid, ids, context=None):
         invoices = self.read(cr, uid, ids, ['move_id', 'payment_ids'])
-        for i in invoices:
-            if i['move_id']:
+        for invoice in invoices:
+            if invoice['move_id']:
                 ## This invoice have a move line, we search move_line concerned by this move
-                cr.execute("""SELECT abs.name as statement_name,
-                                     abs.date as statement_date,
+                cr.execute("""SELECT abs.name AS statement_name,
+                                     abs.date AS statement_date,
                                      absl.name
-                              FROM account_bank_statement_line as absl
-                              INNER JOIN account_bank_statement as abs
+                              FROM account_bank_statement_line AS absl
+                              INNER JOIN account_bank_statement AS abs
                               ON absl.statement_id = abs.id
-                              WHERE voucher_id in 
-                                        ( SELECT voucher_id FROM account_voucher_line WHERE move_line_id in 
-                                            (SELECT id FROM account_move_line WHERE move_id = %s )) limit 1""", (i['move_id'][0],))
+                              WHERE voucher_id IN
+                                        ( SELECT voucher_id FROM account_voucher_line WHERE move_line_id IN
+                                            (SELECT id FROM account_move_line WHERE move_id = %s )) LIMIT 1""",
+                               (invoice['move_id'][0],))
                 statement_lines = cr.dictfetchone()
                 if statement_lines:
-                    raise osv.except_osv(_('Error !'), 
-                                         _('Invoice already import in bank statment (%s) at %s on line %s'
+                    raise osv.except_osv(_('Error!'),
+                                         _('Invoice already imported in bank statment (%s) at %s on line %s'
                                             % (statement_lines['statement_name'],
                                                statement_lines['statement_date'],
                                                statement_lines['name'],)))
 
-        return super(account_invoice,self).action_cancel(cr, uid, ids, *args)
+        return super(account_invoice,self).action_cancel(cr, uid, ids, context=context)
