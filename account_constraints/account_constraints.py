@@ -20,7 +20,7 @@
 
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
-from openerp.addons.account_invoice import account_invoice as original_invoice_model
+from openerp.addons.account.account_invoice import account_invoice as original_invoice_model
 
 def action_cancel(self, cr, uid, ids, *args):
     """
