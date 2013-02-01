@@ -19,25 +19,27 @@
 #
 ##############################################################################
 {
-    'name': 'Account Purchase Default',
-    'version': '6.1.r103',
+    'name': 'Account Invoice Line Default Account',
+    'version': '6.1.r004',
     'depends': [
         'base',
         'account'
     ],
-    'author': 'Ronald Portier, Therp B.V.',
+    'author': 'Therp B.V.',
     'category': 'Accounting',
     'description': '''When entering purchase invoices directly, the user has
 to select an account which will be used as a counterpart in the generated
 move lines. However, each supplier will mostly be linked to one account. For
-instance when ordering paper from a supplier that deals in paper, the counter-
-part account will mostly be something like 'office expenses'. 
+instance when ordering paper from a supplier that deals in paper, the
+counterpart account will mostly be something like 'office expenses'. 
 This module will add a default counterpart account to a partner (supplier
 only), comparable to the similiar field in product. When a supplier invoice
 is entered, withouth a product, the field from partner will be used as default.
+Also when an expense account is entered on an invoice line (not automatically
+selectd for a product), the expense account will be automatically linked to
+the partner - unless explicitly disabled in the partner record.
 ''',
-    'init_xml': [],
-    'update_xml': [
+    'data': [
         'view/res_partner_view.xml'
     ],
     'demo_xml': [],

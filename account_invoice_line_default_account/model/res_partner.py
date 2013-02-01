@@ -7,11 +7,11 @@ Created on 30 jan. 2013
 rportier@therp.nl
 http://www.therp.nl
 '''
-from openerp.osv import osv
+from openerp.osv import orm
 from openerp.osv import fields
 
 
-class res_partner(osv.osv):
+class res_partner(orm.Model):
     _inherit = 'res.partner'
     
     _columns = {

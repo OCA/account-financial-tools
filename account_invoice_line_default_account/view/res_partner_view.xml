@@ -14,7 +14,6 @@
             <field
                 name="arch"
                 type="xml">
-                <data>
                     <field
                         name="property_account_payable"
                         position="after">
@@ -29,7 +28,6 @@
                                 groups="account.group_account_invoice" />
                         </group>
                     </field>
-                </data>
             </field>
         </record>
     </data>

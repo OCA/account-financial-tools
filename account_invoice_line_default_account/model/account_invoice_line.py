@@ -7,18 +7,19 @@ Created on 30 jan. 2013
 rportier@therp.nl
 http://www.therp.nl
 '''
-from openerp.osv import osv
+from openerp.osv import orm
 
 
-class account_invoice_line(osv.osv):
+class account_invoice_line(orm.Model):
     _inherit = 'account.invoice.line'
     
     def _account_id_default(self, cr, uid, context=None):
         if context is None:
             context = {}
-        if ('partner_id' in context and context['partner_id']
-        and 'type' in context and context['type']
-        and context['type'] in ['in_invoice', 'in_refurd']):
+        partner_id = context.get('partner_id', 0)
+        invoice_type = context.get('type')
+        if (partner_id and invoice_type
+        and invoice_type in ['in_invoice', 'in_refund']):
             partner_model = self.pool.get('res.partner')
             partner_obj = partner_model.browse(
                 cr, uid, context['partner_id'], context=context)
@@ -34,7 +35,7 @@ class account_invoice_line(osv.osv):
             self, cr, uid, ids, product_id, partner_id, inv_type,
             fposition_id, account_id):
         if (account_id and partner_id and (not product_id)
-        and inv_type in ['in_invoice', 'in_refurd']):
+        and inv_type in ['in_invoice', 'in_refund']):
             # We have an account_id, and is not from a product, so
             # store it in partner automagically:
             partner_model = self.pool.get('res.partner')
