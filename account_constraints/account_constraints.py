@@ -54,7 +54,6 @@ class AccountMoveLine(orm.Model):
             return True
         return False
 
-
     def _check_invoice_related_move(self, cr, uid, ids, vals=None, context=None):
         for line in self.browse(cr, uid, ids, context=context):
             if line.invoice:
