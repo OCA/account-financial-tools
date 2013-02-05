@@ -22,22 +22,22 @@
 {
     'name': 'French company identity numbers SIRET/SIREN/NIC',
     'version': '1.0',
-    "category": 'Hidden',
-    'description': '''
-This module lets users keep track of the companies' unique identification \
-numbers from the official SIRENE registry in France: SIRET, SIREN and NIC.
-These numbers identify each company and their subsidiaries, and are \
-often required for administrative tasks.
+    "category": 'Accounting',
+    'description': """
+This module lets users keep track of the companies' unique
+identification numbers from the official SIRENE registry in France:
+SIRET, SIREN and NIC.  These numbers identify each company and their
+subsidiaries, and are often required for administrative tasks.
 
-At the top of the Partner form, users will be able to enter the SIREN \
-and NIC numbers, and the SIRET number will be calculated automatically.
-The last digits of the SIREN and NIC are control keys: OpenERP will check their \
-validity when partners are recorded.
-''',
+At the top of the Partner form, users will be able to enter the SIREN
+and NIC numbers, and the SIRET number will be calculated
+automatically.  The last digits of the SIREN and NIC are control keys:
+OpenERP will check their validity when partners are recorded.
+""",
     'author' : u'Numérigraphe SARL',
-    'depends': ['l10n_fr'],
-    'init_xml': [],
-    'update_xml': ['partner_view.xml', ],
+    'depends': [],
+    'data': ['partner_view.xml',
+             ],
     'installable': True,
     'active': False,
 }

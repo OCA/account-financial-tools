@@ -19,23 +19,23 @@
 #
 ##############################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, orm
 
-    
-# XXX: this is used for checking various codes such as credit card numbers: should it be moved to tools.py?
+
+# XXX: this is used for checking various codes such as credit card
+# numbers: should it be moved to tools.py?
 def _check_luhn(string):
     """Luhn test to check control keys
-    
+
     Credits: http://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers#Python
     """
     r = [int(ch) for ch in string][::-1]
     return (sum(r[0::2]) + sum(sum(divmod(d*2,10)) for d in r[1::2])) % 10 == 0
 
-class Partner(osv.osv):
+class Partner(orm.Model):
     """Add the French official company identity numbers SIREN, NIC and SIRET"""
     _inherit = 'res.partner'
-    
+
     def _get_siret(self, cr, uid, ids, field_name, arg, context=None):
         """Concatenate the SIREN and NIC to form the SIRET"""
         sirets = {}
@@ -45,7 +45,7 @@ class Partner(osv.osv):
             else:
                 sirets[partner.id] = ''
         return sirets
-    
+
     def _check_siret(self, cr, uid, ids):
         """Check the SIREN's and NIC's keys (last digits)"""
         for partner in self.browse(cr, uid, ids, context=None):
@@ -63,7 +63,7 @@ class Partner(osv.osv):
                 if partner.nic and not _check_luhn(partner.siren + partner.nic):
                     return False
         return True
-     
+
     _columns = {
         'siren': fields.char('SIREN', size=9,
                              help="The SIREN number is the official identity "
@@ -88,12 +88,12 @@ class Partner(osv.osv):
                            help="The name of official registry where this "
                                 "company was declared."),
     }
-    
+
     _constraints = [
                     (_check_siret,
                      "The SIREN or NIC number is incorrect.",
                      ["siren", "nic"]),
     ]
-Partner()
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
