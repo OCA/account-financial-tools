@@ -8,6 +8,7 @@ rportier@therp.nl
 http://www.therp.nl
 '''
 from openerp.osv import orm
+from openerp.tools.translate import _
 
 
 class account_invoice_line(orm.Model):
@@ -22,7 +23,9 @@ class account_invoice_line(orm.Model):
             partner_model = self.pool.get('res.partner')
             partner_obj = partner_model.browse(
                 cr, uid, partner_id, context=context)
-            if  partner_obj and partner_obj.property_account_expense:
+            assert partner_obj, (
+                _('No object created for partner %d') % partner_id)
+            if  partner_obj.property_account_expense:
                 return partner_obj.property_account_expense.id
         return False
 
@@ -35,11 +38,14 @@ class account_invoice_line(orm.Model):
             fposition_id, account_id):
         if (account_id and partner_id and (not product_id)
         and inv_type in ['in_invoice', 'in_refund']):
-            # We have an account_id, and is not from a product, so
-            # store it in partner automagically:
+            # We have a manually entered account_id (no product_id, so the 
+            # account_id is not the result of a product selection).
+            # Store this account_id as future default in res_partner.
             partner_model = self.pool.get('res.partner')
             partner_obj = partner_model.browse(cr, uid, partner_id)
-            if  partner_obj and partner_obj.auto_update_account_expense:
+            assert partner_obj, (
+                _('No object created for partner %d') % partner_id)
+            if  partner_obj.auto_update_account_expense:
                 old_account_id = (
                     partner_obj.property_account_expense
                     and partner_obj.property_account_expense.id)
