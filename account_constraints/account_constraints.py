@@ -52,10 +52,8 @@ class AccountMoveLine(orm.Model):
         if not vals:
             return False
         rec_keys = set(["reconcile_id", "reconcile_partial_id"])
-        write_keys = set(vals.keys())
-        if (rec_keys >= write_keys):
-            return True
-        return False
+        write_keys = set(vals)
+        return rec_keys.issuperset(write_keys)
 
     def _check_invoice_related_move(self, cr, uid, ids, vals=None, context=None):
         for line in self.browse(cr, uid, ids, context=context):
