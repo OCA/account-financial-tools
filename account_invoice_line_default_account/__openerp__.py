@@ -20,12 +20,12 @@
 ##############################################################################
 {
     'name': 'Account Invoice Line Default Account',
-    'version': '6.1.r004',
+    'version': '6.1.r005',
     'depends': [
         'base',
         'account'
     ],
-    'author': 'Therp B.V.',
+    'author': 'Therp BV',
     'category': 'Accounting',
     'description': '''When entering purchase invoices directly, the user has
 to select an account which will be used as a counterpart in the generated
