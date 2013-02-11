@@ -38,9 +38,11 @@ class account_invoice(orm.TransientModel):
                               FROM account_bank_statement_line AS absl
                               INNER JOIN account_bank_statement AS abs
                               ON absl.statement_id = abs.id
-                              WHERE voucher_id IN
-                                        ( SELECT voucher_id FROM account_voucher_line WHERE move_line_id IN
-                                            (SELECT id FROM account_move_line WHERE move_id = %s )) LIMIT 1""",
+                             WHERE EXISTS (SELECT 1
+                           FROM account_voucher_line JOIN account_move_line ON
+                            (account_voucher_line.move_line_id = account_move_line.id)
+                            WHERE voucher_id=absl.voucher_id 
+                            AND account_move_line.move_id = %s )""",
                                (invoice['move_id'][0],))
                 statement_lines = cr.dictfetchone()
                 if statement_lines:
