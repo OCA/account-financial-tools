@@ -4,7 +4,6 @@
         <record model="ir.ui.view" id="currency_rate_update_tree">
             <field name="name">Update Rates service</field>
             <field name="model">currency.rate.update.service</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Rates">
                     <field name="service"/>
@@ -18,7 +17,6 @@
         <record model="ir.ui.view" id="currency_rate_update_form">
             <field name="name">Update Rates</field>
             <field name="model">currency.rate.update.service</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Rate">
                     <field name="service"/>
