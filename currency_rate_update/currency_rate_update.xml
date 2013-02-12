@@ -8,7 +8,6 @@
                 <tree string="Rates">
                     <field name="service"/>
                     <field name="currency_to_update"/>
-                    <field name="company_id"/>
 
                 </tree>
             </field>
@@ -20,7 +19,6 @@
             <field name="arch" type="xml">
                 <form string="Rate">
                     <field name="service"/>
-                    <field name="company_id"/>
                     <field name="max_delta_days"/>
                     <separator string="Currencies to update with this service" colspan="4"/>
                     <field name="currency_to_update" colspan="4" nolabel="1"/>
