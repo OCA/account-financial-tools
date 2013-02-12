@@ -42,11 +42,11 @@
 # a webservice to the list of currencies supported by the Webservice
 # TODO : implement max_delta_days for Yahoo webservice
 
-from osv import osv, fields
+from openerp.osv import fields, osv
 import time
 from datetime import datetime, timedelta
 import logging
-from tools.translate import _
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -109,7 +109,6 @@ class Currency_rate_update_service(osv.osv):
         (_check_max_delta_days, "'Max delta days' must be >= 0", ['max_delta_days']),
     ]
 
-Currency_rate_update_service()
 
 class Currency_rate_update(osv.osv):
     """Class that handle an ir cron call who will 
@@ -228,8 +227,7 @@ class Currency_rate_update(osv.osv):
                     _logger.info(str(e))
                     service.write({'note':error_msg})
                 
-                
-Currency_rate_update()
+
 
 ### Error Definition as specified in python 2.6 PEP
 class AbstractClassError(Exception): 
