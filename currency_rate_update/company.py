@@ -29,7 +29,8 @@
 ##############################################################################
 
 import netsvc
-from osv import fields, osv
+from openerp.osv import fields, osv
+
 class res_company(osv.osv):
     """override company to add currency update"""
     
@@ -161,4 +162,5 @@ class res_company(osv.osv):
                                             ' not set currency is active on two company'
                                         ),
     }    
-res_company()
+
+
