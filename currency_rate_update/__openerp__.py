@@ -88,5 +88,5 @@ Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
                     ],
     "demo_xml" : [],
     "active": False,
-    'installable': False
+    'installable': True
 }
