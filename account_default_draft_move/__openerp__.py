@@ -48,7 +48,7 @@ need to make a refund).
 
     """,
     'website': 'http://www.camptocamp.com',
-    'data' : [],
+    'data' : ['invoice_view.xml'],
     'installable': True,
     'active': False,
 }
