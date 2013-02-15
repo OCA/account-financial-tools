@@ -3,7 +3,7 @@
 # Copyright (c) 2008 Camtocamp SA
 # @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
 # European Central Bank and Polish National Bank invented by Grzegorz Grzelak
-# $Id: $
+# Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
