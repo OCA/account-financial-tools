@@ -14,6 +14,7 @@
 #  For more details, see Launchpad bug #645263
 #  - mecanism to check if rates given by the webservice are "fresh" enough to be
 #    written in OpenERP ('max_delta_days' parameter for each currency update service)
+# Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 #
 # WARNING: This program as such is intended to be used by professional
 # programmers who take the whole responsability of assessing all potential
