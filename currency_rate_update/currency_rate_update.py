@@ -50,7 +50,7 @@ from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
-class Currency_rate_update_service(osv.osv):
+class Currency_rate_update_service(osv.Model):
     """Class thats tell for wich services wich currencies 
     have to be updated"""
     _name = "currency.rate.update.service"
@@ -110,7 +110,7 @@ class Currency_rate_update_service(osv.osv):
     ]
 
 
-class Currency_rate_update(osv.osv):
+class Currency_rate_update(osv.Model):
     """Class that handle an ir cron call who will 
     update currencies based on a web url"""
     _name = "currency.rate.update"
