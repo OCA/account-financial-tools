@@ -88,7 +88,7 @@ Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
         "company_view.xml",
         "security/security.xml",
         ],
-    "demo_xml" : [],
+    "demo" : [],
     "active": False,
     'installable': True
 }
