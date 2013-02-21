@@ -33,9 +33,9 @@
         You may have to create an account for recieved checks and a journal for payment by checks.""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['account_accountant','report_webkit'], 
+    'depends': ['account_accountant','report_webkit','sale_quick_payment'],
     'init_xml': [],
-    'update_xml': [ 
+    'update_xml': [
            'account_deposit_view.xml',
            'account_deposit_sequence.xml',
            'account_type_data.xml',
@@ -44,4 +44,3 @@
     'installable': True,
     'active': False,
 }
-
