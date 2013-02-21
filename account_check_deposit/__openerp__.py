@@ -3,6 +3,7 @@
 #                                                                             #
 #   account_check_deposit for OpenERP                                         #
 #   Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>  #
+#   Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>  #
 #                                                                             #
 #   This program is free software: you can redistribute it and/or modify      #
 #   it under the terms of the GNU Affero General Public License as            #
@@ -32,9 +33,9 @@
         You may have to create an account for recieved checks and a journal for payment by checks.""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['account_accountant'], 
+    'depends': ['account_accountant','report_webkit','sale_quick_payment'],
     'init_xml': [],
-    'update_xml': [ 
+    'update_xml': [
            'account_deposit_view.xml',
            'account_deposit_sequence.xml',
            'account_type_data.xml',
@@ -43,4 +44,3 @@
     'installable': True,
     'active': False,
 }
-
