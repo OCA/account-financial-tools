@@ -351,7 +351,7 @@ class Curreny_getter_interface(object) :
         rate_date_str = datetime.strftime(rate_date, '%Y-%m-%d')
         if rate_date_str != datetime.strftime(datetime.today(), '%Y-%m-%d'):
             self.log_info = "WARNING : the rate date from ECB (%s) is not today's date" % rate_date_str
-            _logger.warning("the rate date from ECB (%s) is not today's date" % rate_date_str)
+            _logger.warning("the rate date from ECB (%s) is not today's date", rate_date_str)
 
 
 #Yahoo ###################################################################################     
