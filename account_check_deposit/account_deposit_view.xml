@@ -2,12 +2,21 @@
 <!--
   account_check_deposit for OpenERP
   Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>
+  Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>
   The licence is in the file __openerp__.py
 -->
 
 <openerp>
     <data>
-    
+        <report
+            auto="False"
+            file="account_check_deposit/report/check_deposit.mako"
+            id="check_deposit_webkit"
+            model="account.check.deposit"
+            name="check.deposit.webkit"
+            report_type="webkit"
+            string="WebKit Check Deposit"/>
+        
         <!-- INHERITED VIEW FOR THE OBJECT : account_check_deposit -->
 
         <record id="account_check_deposit_view_form" model="ir.ui.view">
