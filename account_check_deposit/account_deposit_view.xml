@@ -2,12 +2,21 @@
 <!--
   account_check_deposit for OpenERP
   Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>
+  Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>
   The licence is in the file __openerp__.py
 -->
 
 <openerp>
     <data>
-    
+        <report
+            auto="False"
+            file="account_check_deposit/report/check_deposit.mako"
+            id="check_deposit_webkit"
+            model="account.check.deposit"
+            name="check.deposit.webkit"
+            report_type="webkit"
+            string="WebKit Checks Deposit"/>
+
         <!-- INHERITED VIEW FOR THE OBJECT : account_check_deposit -->
 
         <record id="account_check_deposit_view_form" model="ir.ui.view">
@@ -15,7 +24,7 @@
             <field name="model">account.check.deposit</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Check Deposit" version="7.0">
+                <form string="Checks Deposit" version="7.0">
                     <header>
                         <button name="validate_deposit" states="draft" string="Validate Deposit"
                                 type="object" class="oe_highlight"/>
@@ -25,19 +34,22 @@
                     </header>
                     <sheet>
                         <h1>
-                            <label string="Deposit " />
+                            <label string="Deposit N°" />
                             <field name="name" class="oe_inline" />
                         </h1>
                         <group name="deposit_fields">
                             <field name="deposit_date" />
                             <field name="journal_id" />
                             <field name="move_id" />
+                            <field name="company_id" on_change="onchange_company_id(company_id, context)"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="bank_id"/>
                         </group>
                         <separator string="Check Payments"/>
                         <field name="check_payment_ids" nolabel="1" colspan="4" widget="many2many"
                                domain="[('reconcile_id','=',False),
                                         ('account_id.user_type.code','=','recieved_check')]">
-                            <tree string="Check Payments">
+                            <tree string="Check Payment">
                                 <field name="journal_id" />
                                 <field name="period_id" />
                                 <field name="date"/>
@@ -61,7 +73,7 @@
             <field name="model">account.check.deposit</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Check Deposit">
+                <tree string="Checks Deposit">
                     <field name="name"/>
                     <field name="deposit_date"/>
                     <field name="state"/>
@@ -69,13 +81,13 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="view_check_deposit_search" model="ir.ui.view">
             <field name="name">account.check.deposit.search</field>
             <field name="model">account.check.deposit</field>
             <field name="arch" type="xml">
-                <search string="Search Check deposits">
-                    <field name="name" string="Check Deposit"/>
+                <search string="Checks Deposit Search">
+                    <field name="name" string="Checks Deposit"/>
                     <field name="deposit_date" string="Date"/>
                     <field name="state"/>
                     <field name="move_id"/>
@@ -84,9 +96,9 @@
                 </search>
             </field>
         </record>
-        
+
         <record id="action_check_deposit_tree" model="ir.actions.act_window">
-            <field name="name">Check Deposits</field>
+            <field name="name">Checks Deposit</field>
             <field name="res_model">account.check.deposit</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,graph</field>
@@ -96,7 +108,7 @@
             <field name="help" type="html"></field>
         </record>
 
-        <menuitem string="Check Deposit" action="action_check_deposit_tree" id="menu_check_deposit_tree" parent="account.menu_finance_bank_and_cash" sequence="20"/>
+        <menuitem string="Checks Deposit" action="action_check_deposit_tree" id="menu_check_deposit_tree" parent="account.menu_finance_bank_and_cash" sequence="20"/>
 
     </data>
 </openerp>
