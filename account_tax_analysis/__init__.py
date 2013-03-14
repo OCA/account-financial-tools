@@ -17,5 +17,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_tax_analysis
+from . import account_tax_analysis
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

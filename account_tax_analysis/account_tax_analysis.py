@@ -17,35 +17,40 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from osv import orm, osv, fields
 from tools.translate import _
+
 
 class account_tax_declaration_analysis(orm.TransientModel):
     _name = 'account.vat.declaration.analysis'
     _description = 'Account Vat Declaration'
     _columns = {
-        'fiscalyear_id': fields.many2one('account.fiscalyear', 'Fiscalyear', help='Fiscalyear', required=True),
+        'fiscalyear_id': fields.many2one('account.fiscalyear', 'Fiscalyear',
+                                         help='Fiscalyear to look on', required=True),
+
         'period_list': fields.many2many('account.period', 'account_tax_period_rel',
-        'tax_analysis', 'period_id', 'Period _list',required=True),
+                                        'tax_analysis', 'period_id',
+                                        'Period _list', required=True),
 
     }
 
     def create_vat(self, cr, uid, ids, context=None):
-        mod_obj =self.pool.get('ir.model.data')
+        mod_obj = self.pool.get('ir.model.data')
         action_obj = self.pool.get('ir.actions.act_window')
         domain = []
         data = self.read(cr, uid, ids, [])[0]
         period_list = data['period_list']
-        if period_list :
-            domain = [('period_id','in',period_list)]
+        if period_list:
+            domain = [('period_id', 'in', period_list)]
         else:
-            raise osv.except_osv(_('No period defined'),_("You must selected period "))
+            raise osv.except_osv(_('No period defined'), _("You must selected period "))
         ##
-        actions = mod_obj.get_object_reference(cr, uid, 'account_tax_analysis', 'action_view_tax_analysis')
+        actions = mod_obj.get_object_reference(cr, uid,
+                                               'account_tax_analysis', 'action_view_tax_analysis')
         id_action = actions and actions[1] or False
-        action_mod = action_obj.read(cr,uid,id_action)
+        action_mod = action_obj.read(cr, uid, id_action)
         action_mod['domain'] = domain
-        
+
         return action_mod
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
