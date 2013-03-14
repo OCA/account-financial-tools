@@ -31,7 +31,6 @@ class account_tax_declaration_analysis(orm.TransientModel):
         'period_list': fields.many2many('account.period', 'account_tax_period_rel',
                                         'tax_analysis', 'period_id',
                                         'Period _list', required=True),
-
     }
 
     def create_vat(self, cr, uid, ids, context=None):
