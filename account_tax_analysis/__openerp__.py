@@ -17,21 +17,28 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    "name" : "Tax analysis",
-    "version" : "1.0",
-    "depends" : ["base", "account"],
-    "author" : "CamptoCamp SA",
-    "category": 'Accounting & Finance',
-    "description": """Provide with details of your tax form (Allows you to group by move lines by tax account)
-    """,
-    'website': 'http://www.openerp.com',
-    'init_xml': [],
-    'update_xml': [
-        'account_tax_analysis_view.xml',
-    ],
-    'demo_xml': [],
-    'installable': True,
-    'active': False,
-}
+{"name": "Tax analysis",
+ "version": "1.0",
+ "depends": ["base", "account"],
+ "author": "CamptoCamp SA",
+ "category": 'Accounting & Finance',
+ "description": """
+ Tax analysis view
+=================
+
+This add-on is a must if you want to be able to validate your VAT form.
+
+Thanks to a new menu 'Accounting / Tax / Tax analysis'
+you are able to group accounting entries by Taxes (VAT codes)
+and/or financial accounts.
+
+This way you will find easily differences you may see between
+the OpenERP tax report and what you see in your books.""",
+ "website": "http://www.camptocamp.com",
+ "init_xml": [],
+ "update_xml": ["account_tax_analysis_view.xml"],
+ "demo_xml": [],
+ "installable": True,
+ "active": False,
+ }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
