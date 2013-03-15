@@ -18,10 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 
 
-class ResPartner(Model):
+class ResPartner(orm.Model):
     """Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines."""
 
@@ -30,15 +30,14 @@ class ResPartner(Model):
     _columns = {
         'credit_policy_id': fields.many2one('credit.control.policy',
                                             'Credit Control Policy',
-                                             help=("The Credit Control Policy"
-                                                   "used for this partner. This "
-                                                   "setting can be forced on the "
-                                                   "invoice. If nothing is defined, "
-                                                   "it will use the company "
-                                                   "setting.")),
+                                            help=("The Credit Control Policy"
+                                                  "used for this partner. This "
+                                                  "setting can be forced on the "
+                                                  "invoice. If nothing is defined, "
+                                                  "it will use the company "
+                                                  "setting.")),
         'credit_control_line_ids': fields.one2many('credit.control.line',
                                                    'invoice_id',
                                                    string='Credit Control Lines',
                                                    readonly=True)
     }
-

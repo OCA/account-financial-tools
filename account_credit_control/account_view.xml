@@ -17,7 +17,7 @@
       <field name="arch" type="xml">
         <notebook position="inside">
         <page string="Credit Control"
-                 groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,group_account_credit_control_info">
+                 groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info">
             <field name="credit_policy_id" widget="selection"/>
             <newline/>
             <field name="credit_control_line_ids" colspan="4" nolabel="1"/>

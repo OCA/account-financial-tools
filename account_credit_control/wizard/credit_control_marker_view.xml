@@ -6,7 +6,7 @@
       <field name="model">credit.control.marker</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Lines marker">
           <separator string="Change the state of the selected lines." colspan="4"/>
           <label string="Warning: you will maybe not be able to revert this operation." colspan="4"></label>
           <newline/>
