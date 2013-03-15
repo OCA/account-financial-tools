@@ -6,7 +6,7 @@
       <field name="model">credit.control.printer</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Lines report">
           <separator colspan="4" string="Print the selected lines"/>
           <newline/>
           <field name="mark_as_sent" colspan="4" attrs="{'invisible': [('state', '=', 'done')]}"/>

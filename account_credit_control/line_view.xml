@@ -28,7 +28,7 @@
 
     <record id="credit_control_line_search" model="ir.ui.view">
       <field name="name">Credit Control Lines</field>
-      <field name="model">credit.control.lines</field>
+      <field name="model">credit.control.line</field>
       <field name="type">search</field>
       <field name="arch" type="xml">
         <search string="Control Credit Lines">

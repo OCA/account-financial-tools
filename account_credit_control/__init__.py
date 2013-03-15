@@ -24,5 +24,5 @@ from . import account
 from . import partner
 from . import policy
 from . import company
-import wizard
-import report
+from . import wizard
+from . import report

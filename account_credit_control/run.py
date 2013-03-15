@@ -20,14 +20,14 @@
 ##############################################################################
 import logging
 
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 from openerp.osv.osv import except_osv
 
 logger = logging.getLogger('credit.control.run')
 
 
-class CreditControlRun(Model):
+class CreditControlRun(orm.Model):
     """Credit Control run generate all credit control lines and reject"""
 
     _name = "credit.control.run"
@@ -36,39 +36,34 @@ class CreditControlRun(Model):
     _columns = {
         'date': fields.date('Controlling Date', required=True),
         'policy_ids': fields.many2many('credit.control.policy',
-                                        rel="credit_run_policy_rel",
-                                        id1='run_id', id2='policy_id',
-                                        string='Policies',
-                                        readonly=True,
-                                        states={'draft': [('readonly', False)]}),
+                                       rel="credit_run_policy_rel",
+                                       id1='run_id', id2='policy_id',
+                                       string='Policies',
+                                       readonly=True,
+                                       states={'draft': [('readonly', False)]}),
 
         'report': fields.text('Report', readonly=True),
 
         'state': fields.selection([('draft', 'Draft'),
-                                   ('done', 'Done'),
-                                   ],
-                                   string='State',
-                                   required=True,
-                                   readonly=True),
+                                   ('done', 'Done')],
+                                  string='State',
+                                  required=True,
+                                  readonly=True),
 
-        'manual_ids': fields.many2many(
-            'account.move.line',
-            rel="credit_runreject_rel",
-            string='Lines to handle manually',
-            help=('If a credit control line has been generated on a policy '
-                 'and the policy has been changed meantime, '
-                 'it has to be handled manually'),
-            readonly=True),
+        'manual_ids': fields.many2many('account.move.line',
+                                       rel="credit_runreject_rel",
+                                       string='Lines to handle manually',
+                                       help=('If a credit control line has been generated on a policy'
+                                             ' and the policy has been changed meantime,'
+                                             ' it has to be handled manually'),
+                                       readonly=True),
     }
 
     def _get_policies(self, cr, uid, context=None):
-        return self.pool.get('credit.control.policy').\
-                search(cr, uid, [], context=context)
+        return self.pool['credit.control.policy'].search(cr, uid, [], context=context)
 
-    _defaults = {
-        'state': 'draft',
-        'policy_ids': _get_policies,
-    }
+    _defaults = {'state': 'draft',
+                 'policy_ids': _get_policies}
 
     def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
         """Ensure that there is no credit line in the future using controlling_date"""
@@ -86,7 +81,7 @@ class CreditControlRun(Model):
         """ Generate credit control lines. """
         cr_line_obj = self.pool.get('credit.control.line')
         assert not (isinstance(run_id, list) and len(run_id) > 1), \
-                "run_id: only one id expected"
+            "run_id: only one id expected"
         if isinstance(run_id, list):
             run_id = run_id[0]
 
@@ -140,14 +135,12 @@ class CreditControlRun(Model):
         """
         try:
             cr.execute('SELECT id FROM credit_control_run'
-                           ' LIMIT 1 FOR UPDATE NOWAIT' )
-        except Exception, exc:
+                           ' LIMIT 1 FOR UPDATE NOWAIT')
+        except Exception as exc:
             # in case of exception openerp will do a rollback for us and free the lock
-            raise except_osv(
-                    _('Error'),
-                    _('A credit control run is already running'
-                      ' in background, please try later.'), str(exc))
+            raise except_osv(_('Error'),
+                             _('A credit control run is already running'
+                               ' in background, please try later.'), repr(exc))
 
         self._generate_credit_lines(cr, uid, run_id, context)
         return True
-
