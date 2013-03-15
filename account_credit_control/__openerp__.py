@@ -18,13 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name' : 'Account Credit Control',
- 'version' : '0.1',
- 'author' : 'Camptocamp',
+{'name': 'Account Credit Control',
+ 'version': '0.1',
+ 'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'category': 'Finance',
  'complexity': "normal",
- 'depends' : ['base', 'account', 'email_template', 'report_webkit'],
+ 'depends': ['base', 'account',
+             'email_template', 'report_webkit'],
  'description': """
 Credit Control
 ==============
@@ -57,8 +58,7 @@ On each generated line, you have many choices:
  * Change the state (so you can ignore or reopen lines)
  """,
  'website': 'http://www.camptocamp.com',
- 'init_xml': ["data.xml",
-             ],
+ 'init_xml': ["data.xml"],
  'update_xml': ["line_view.xml",
                 "account_view.xml",
                 "partner_view.xml",
@@ -69,12 +69,10 @@ On each generated line, you have many choices:
                 "wizard/credit_control_marker_view.xml",
                 "wizard/credit_control_printer_view.xml",
                 "report/report.xml",
-                "security/ir.model.access.csv",
-                ],
+                "security/ir.model.access.csv",],
  'demo_xml': ["credit_control_demo.xml"],
  'tests': [],
- 'installable': False,
+ 'installable': True,
  'license': 'AGPL-3',
  'application': True
 }
-

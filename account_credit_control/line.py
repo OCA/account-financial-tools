@@ -19,16 +19,15 @@
 #
 ##############################################################################
 import logging
-import pooler
 
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 from openerp.osv import osv
 from openerp.tools.translate import _
 
 logger = logging.getLogger('credit.line.control')
 
 
-class CreditControlLine(Model):
+class CreditControlLine(orm.Model):
     """A credit control line describes an amount due by a customer for a due date.
 
     A line is created once the due date of the payment is exceeded.
@@ -67,10 +66,10 @@ class CreditControlLine(Model):
                                         "generated again on the next run.")),
 
         'channel': fields.selection([('letter', 'Letter'),
-                                   ('email', 'Email')],
-                                  'Channel', required=True,
-                                  readonly=True,
-                                  states={'draft': [('readonly', False)]}),
+                                    ('email', 'Email')],
+                                    'Channel', required=True,
+                                    readonly=True,
+                                    states={'draft': [('readonly', False)]}),
 
         'invoice_id': fields.many2one('account.invoice', 'Invoice', readonly=True),
         'partner_id': fields.many2one('res.partner', "Partner", required=True),
@@ -193,4 +192,3 @@ class CreditControlLine(Model):
                       'is not in draft state.'))
 
         return super(CreditControlLine, self).unlink(cr, uid, ids, context=context)
-
