@@ -6,7 +6,7 @@
       <field name="model">credit.control.run</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree> <!-- editable="bottom" -->
+        <tree string="Credit control run"> <!-- editable="bottom" -->
           <field name="date"/>
           <field name="state"/>
         </tree>
@@ -18,7 +18,7 @@
       <field name="model">credit.control.run</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Credit control run">
           <field name="date"/>
           <newline/>
           <notebook colspan="4">

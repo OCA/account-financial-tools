@@ -6,14 +6,14 @@
       <field name="model">credit.control.policy</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Credit control policy">
           <field name="name"/>
           <field name="do_nothing"/>
           <field name="company_id"/>
           <notebook colspan="4">
-            <page string="Policy Levels">
+            <page string="Policy levels">
               <field name="level_ids" nolabel="1" colspan="4" >
-                <tree>
+                <tree string="Credit control policy Level">
                   <field name="name"/>
                   <field name="level"/>
                   <field name="channel"/>
@@ -21,7 +21,7 @@
                   <field name="computation_mode"/>
                   <field name="email_template_id"/>
                 </tree>
-                <form>
+                <form string="Policy level">
                   <field name="name"/>
                   <notebook colspan="4">
                     <page string="Delay Setting">
@@ -51,7 +51,7 @@
       <field name="model">credit.control.policy</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree string="Credit control policy">
           <field name="name"/>
           <field name="do_nothing"/>
         </tree>
@@ -84,7 +84,7 @@
       <field name="model">credit.control.policy.level</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form>
+        <form string="Policy level">
           <field name="name"/>
           <notebook colspan="4">
             <page string="Delay Setting">
@@ -107,7 +107,7 @@
       <field name="model">credit.control.policy.level</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree string="Credit control policy level">
           <field name="name"/>
           <field name="level"/>
           <field name="channel"/>
