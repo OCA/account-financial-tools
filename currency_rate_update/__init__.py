@@ -30,4 +30,3 @@
 
 import currency_rate_update
 import company
-import wizard
