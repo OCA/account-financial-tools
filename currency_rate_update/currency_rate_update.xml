@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<openerp>   
-	<data>
+<openerp>
+    <data>
         <record model="ir.ui.view" id="currency_rate_update_tree">
             <field name="name">Update Rates service</field>
             <field name="model">currency.rate.update.service</field>
@@ -12,7 +12,7 @@
                 </tree>
             </field>
         </record>
-    
+
         <record model="ir.ui.view" id="currency_rate_update_form">
             <field name="name">Update Rates</field>
             <field name="model">currency.rate.update.service</field>
@@ -23,10 +23,10 @@
                     <separator string="Currencies to update with this service" colspan="4"/>
                     <field name="currency_to_update" colspan="4" nolabel="1"/>
                     <separator string="Logs" colspan="4"/>
-                    <field name="note" colspan="4" nolabel="1"/>    
+                    <field name="note" colspan="4" nolabel="1"/>
                 </form>
             </field>
         </record>
-        
+
     </data>
 </openerp>

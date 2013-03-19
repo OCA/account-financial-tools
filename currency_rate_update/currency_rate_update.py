@@ -2,8 +2,8 @@
 ##############################################################################
 #
 # Copyright (c) 2009 Camptocamp SA
-# @author Nicolas Bessi 
-# @source JBA and AWST inpiration 
+# @author Nicolas Bessi
+# @source JBA and AWST inpiration
 # @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
 # Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
 #  - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
@@ -52,17 +52,17 @@ from openerp.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 class Currency_rate_update_service(osv.Model):
-    """Class thats tell for wich services wich currencies 
+    """Class thats tell for wich services wich currencies
     have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
     _columns = {
-                    ##list of webservicies the value sould be a class name 
-                    'service' : fields.selection( 
+                    ##list of webservicies the value sould be a class name
+                    'service' : fields.selection(
                                                     [
                                                     ('Admin_ch_getter','Admin.ch'),
                                                     ('ECB_getter','European Central Bank'),
-                                                    #('NYFB_getter','Federal Reserve Bank of NY'),                                                    
+                                                    #('NYFB_getter','Federal Reserve Bank of NY'),
                                                     #('Google_getter','Google Finance'),
                                                     ('Yahoo_getter','Yahoo Finance '),
                                                     ('PL_NBP_getter','Narodowy Bank Polski'),  # Added for polish rates
@@ -70,7 +70,7 @@ class Currency_rate_update_service(osv.Model):
                                                     "Webservice to use",
                                                     required = True
                                                 ),
-                     ##list of currency to update                           
+                     ##list of currency to update
                     'currency_to_update' : fields.many2many(
                                                             'res.currency',
                                                             'res_curreny_auto_udate_rel',
@@ -78,7 +78,7 @@ class Currency_rate_update_service(osv.Model):
                                                             'currency_id',
                                                             'currency to update with this service',
                                                             ),
-                    #back ref 
+                    #back ref
                     'company_id' : fields.many2one(
                                                     'res.company',
                                                     'linked company',
@@ -92,8 +92,8 @@ class Currency_rate_update_service(osv.Model):
     }
     _sql_constraints = [
                             (
-                                'curr_service_unique', 
-                                'unique (service, company_id)', 
+                                'curr_service_unique',
+                                'unique (service, company_id)',
                                 _('You can use a service one time per company !')
                             )
                         ]
@@ -112,7 +112,7 @@ class Currency_rate_update_service(osv.Model):
 
 
 class Currency_rate_update(osv.Model):
-    """Class that handle an ir cron call who will 
+    """Class that handle an ir cron call who will
     update currencies based on a web url"""
     _name = "currency.rate.update"
     _description = "Currency Rate Update"
@@ -127,47 +127,47 @@ class Currency_rate_update(osv.Model):
             'doall'           : True,
             'model'           : 'currency.rate.update',
             'function'        : 'run_currency_update',
-            'args'            : '()',    
+            'args'            : '()',
     }
-        
+
     LOG_NAME = 'cron-rates'
     MOD_NAME = 'c2c_currency_rate_update: '
     def get_cron_id(self, cr, uid, context):
         """return the updater cron's id. Create one if the cron does not exists """
-        
+
         cron_id = 0
         cron_obj = self.pool.get('ir.cron')
-        try: 
+        try:
             #find the cron that send messages
             cron_id = cron_obj.search(
-                                        cr, 
-                                        uid,  
+                                        cr,
+                                        uid,
                                         [
-                                            ('function', 'ilike', self.cron['function']), 
+                                            ('function', 'ilike', self.cron['function']),
                                             ('model', 'ilike', self.cron['model'])
-                                        ], 
+                                        ],
                                         context={
                                                     'active_test': False
-                                                } 
+                                                }
                                     )
             cron_id = int(cron_id[0])
         except Exception,e :
             _logger.info('warning cron not found one will be created')
             pass # ignore if the cron is missing cause we are going to create it in db
-        
+
         #the cron does not exists
         if not cron_id :
             #translate
             self.cron['name'] = _('Currency Rate Update')
             cron_id = cron_obj.create(cr, uid, self.cron, context)
-        
+
         return cron_id
-        
+
     def save_cron(self, cr, uid, datas, context={}):
         """save the cron config data should be a dict"""
         #modify the cron
-        cron_id = self.get_cron_id(cr, uid, context)        
-        result = self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)    
+        cron_id = self.get_cron_id(cr, uid, context)
+        result = self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
 
     def run_currency_update(self, cr, uid):
         "update currency at the given frequence"
@@ -176,7 +176,7 @@ class Currency_rate_update(osv.Model):
         rate_obj = self.pool.get('res.currency.rate')
         companies = self.pool.get('res.company').search(cr, uid, [])
         for comp in self.pool.get('res.company').browse(cr, uid, companies):
-            ##the multi company currency can beset or no so we handle 
+            ##the multi company currency can beset or no so we handle
             ##the two case
             if not comp.auto_currency_up :
                 continue
@@ -212,12 +212,12 @@ class Currency_rate_update(osv.Model):
                                         'rate':res[curr.name],
                                         'name': rate_name
                                     }
-                            rate_obj.create(    
+                            rate_obj.create(
                                             cr,
                                             uid,
                                             vals,
                                         )
-                     
+
                     note = note + "\n%s currency updated. "\
                        %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'))
                     note = note + (log_info or '')
@@ -227,11 +227,11 @@ class Currency_rate_update(osv.Model):
                         %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'), str(e))
                     _logger.info(str(e))
                     service.write({'note':error_msg})
-                
+
 
 
 ### Error Definition as specified in python 2.6 PEP
-class AbstractClassError(Exception): 
+class AbstractClassError(Exception):
     def __str__(self):
         return 'Abstract Class'
     def __repr__(self):
@@ -243,25 +243,25 @@ class AbstractMethodError(Exception):
     def __repr__(self):
         return 'Abstract Method'
 
-class UnknowClassError(Exception): 
+class UnknowClassError(Exception):
     def __str__(self):
         return 'Unknown Class'
     def __repr__(self):
         return 'Unknown Class'
-class UnsuportedCurrencyError(Exception): 
+class UnsuportedCurrencyError(Exception):
     def __init__(self, value):
            self.curr = value
     def __str__(self):
         return 'Unsupported currency '+self.curr
     def __repr__(self):
         return 'Unsupported currency '+self.curr
-        
-### end of error definition        
+
+### end of error definition
 class Currency_getter_factory():
-    """Factory pattern class that will return 
+    """Factory pattern class that will return
     a currency getter class base on the name passed
     to the register method"""
-    def register(self, class_name): 
+    def register(self, class_name):
         allowed = [
                           'Admin_ch_getter',
                           'PL_NBP_getter',
@@ -275,60 +275,60 @@ class Currency_getter_factory():
             return class_def()
         else :
             raise UnknowClassError
-        
+
 
 class Curreny_getter_interface(object) :
     "Abstract class of currency getter"
-    
+
     #remove in order to have a dryer code
     # def __init__(self):
-    #    raise AbstractClassError  
-    
+    #    raise AbstractClassError
+
     log_info = " "
-    
+
     supported_currency_array = \
 ['AFN', 'ALL', 'DZD', 'USD', 'USD', 'USD', 'EUR', 'AOA', 'XCD', 'XCD', 'ARS',
-'AMD', 'AWG', 'AUD', 'EUR', 'AZN', 'EUR', 'BSD', 'BHD', 'EUR', 'BDT', 'BBD', 
-'XCD', 'BYR', 'EUR', 'BZD', 'XOF', 'BMD', 'BTN', 'INR', 'BOB', 'ANG', 'BAM', 
-'BWP', 'NOK', 'BRL', 'GBP', 'USD', 'USD', 'BND', 'BGN', 'XOF', 'MMK', 'BIF', 
-'XOF', 'USD', 'KHR', 'XAF', 'CAD', 'EUR', 'CVE', 'KYD', 'XAF', 'XAF', 'CLP', 
-'CNY', 'AUD', 'AUD', 'COP', 'XAF', 'KMF', 'XPF', 'XAF', 'CDF', 'NZD', 'CRC', 
-'HRK', 'CUP', 'ANG', 'EUR', 'CYP', 'CZK', 'DKK', 'DJF', 'XCD', 'DOP', 'EUR', 
-'XCD', 'IDR', 'USD', 'EGP', 'EUR', 'SVC', 'USD', 'GBP', 'XAF', 'ETB', 'ERN', 
-'EEK', 'ETB', 'EUR', 'FKP', 'DKK', 'FJD', 'EUR', 'EUR', 'EUR', 'XPF', 'XPF', 
-'EUR', 'XPF', 'XAF', 'GMD', 'GEL', 'EUR', 'GHS', 'GIP', 'XAU', 'GBP', 'EUR', 
-'DKK', 'XCD', 'XCD', 'EUR', 'USD', 'GTQ', 'GGP', 'GNF', 'XOF', 'GYD', 'HTG', 
-'USD', 'AUD', 'BAM', 'EUR', 'EUR', 'HNL', 'HKD', 'HUF', 'ISK', 'INR', 'IDR', 
-'XDR', 'IRR', 'IQD', 'EUR', 'IMP', 'ILS', 'EUR', 'JMD', 'NOK', 'JPY', 'JEP', 
-'JOD', 'KZT', 'AUD', 'KES', 'AUD', 'KPW', 'KRW', 'KWD', 'KGS', 'LAK', 'LVL', 
-'LBP', 'LSL', 'ZAR', 'LRD', 'LYD', 'CHF', 'LTL', 'EUR', 'MOP', 'MKD', 'MGA', 
-'EUR', 'MWK', 'MYR', 'MVR', 'XOF', 'EUR', 'MTL', 'FKP', 'USD', 'USD', 'EUR', 
-'MRO', 'MUR', 'EUR', 'AUD', 'MXN', 'USD', 'USD', 'EUR', 'MDL', 'EUR', 'MNT', 
-'EUR', 'XCD', 'MAD', 'MZN', 'MMK', 'NAD', 'ZAR', 'AUD', 'NPR', 'ANG', 'EUR', 
-'XCD', 'XPF', 'NZD', 'NIO', 'XOF', 'NGN', 'NZD', 'AUD', 'USD', 'NOK', 'OMR', 
-'PKR', 'USD', 'XPD', 'PAB', 'USD', 'PGK', 'PYG', 'PEN', 'PHP', 'NZD', 'XPT', 
-'PLN', 'EUR', 'STD', 'USD', 'QAR', 'EUR', 'RON', 'RUB', 'RWF', 'STD', 'ANG', 
-'MAD', 'XCD', 'SHP', 'XCD', 'XCD', 'EUR', 'XCD', 'EUR', 'USD', 'WST', 'EUR', 
-'SAR', 'SPL', 'XOF', 'RSD', 'SCR', 'SLL', 'XAG', 'SGD', 'ANG', 'ANG', 'EUR', 
-'EUR', 'SBD', 'SOS', 'ZAR', 'GBP', 'GBP', 'EUR', 'XDR', 'LKR', 'SDG', 'SRD', 
-'NOK', 'SZL', 'SEK', 'CHF', 'SYP', 'TWD', 'RUB', 'TJS', 'TZS', 'THB', 'IDR', 
-'TTD', 'XOF', 'NZD', 'TOP', 'TTD', 'TND', 'TRY', 'TMM', 'USD', 'TVD', 'UGX', 
-'UAH', 'AED', 'GBP', 'USD', 'USD', 'UYU', 'USD', 'UZS', 'VUV', 'EUR', 'VEB', 
+'AMD', 'AWG', 'AUD', 'EUR', 'AZN', 'EUR', 'BSD', 'BHD', 'EUR', 'BDT', 'BBD',
+'XCD', 'BYR', 'EUR', 'BZD', 'XOF', 'BMD', 'BTN', 'INR', 'BOB', 'ANG', 'BAM',
+'BWP', 'NOK', 'BRL', 'GBP', 'USD', 'USD', 'BND', 'BGN', 'XOF', 'MMK', 'BIF',
+'XOF', 'USD', 'KHR', 'XAF', 'CAD', 'EUR', 'CVE', 'KYD', 'XAF', 'XAF', 'CLP',
+'CNY', 'AUD', 'AUD', 'COP', 'XAF', 'KMF', 'XPF', 'XAF', 'CDF', 'NZD', 'CRC',
+'HRK', 'CUP', 'ANG', 'EUR', 'CYP', 'CZK', 'DKK', 'DJF', 'XCD', 'DOP', 'EUR',
+'XCD', 'IDR', 'USD', 'EGP', 'EUR', 'SVC', 'USD', 'GBP', 'XAF', 'ETB', 'ERN',
+'EEK', 'ETB', 'EUR', 'FKP', 'DKK', 'FJD', 'EUR', 'EUR', 'EUR', 'XPF', 'XPF',
+'EUR', 'XPF', 'XAF', 'GMD', 'GEL', 'EUR', 'GHS', 'GIP', 'XAU', 'GBP', 'EUR',
+'DKK', 'XCD', 'XCD', 'EUR', 'USD', 'GTQ', 'GGP', 'GNF', 'XOF', 'GYD', 'HTG',
+'USD', 'AUD', 'BAM', 'EUR', 'EUR', 'HNL', 'HKD', 'HUF', 'ISK', 'INR', 'IDR',
+'XDR', 'IRR', 'IQD', 'EUR', 'IMP', 'ILS', 'EUR', 'JMD', 'NOK', 'JPY', 'JEP',
+'JOD', 'KZT', 'AUD', 'KES', 'AUD', 'KPW', 'KRW', 'KWD', 'KGS', 'LAK', 'LVL',
+'LBP', 'LSL', 'ZAR', 'LRD', 'LYD', 'CHF', 'LTL', 'EUR', 'MOP', 'MKD', 'MGA',
+'EUR', 'MWK', 'MYR', 'MVR', 'XOF', 'EUR', 'MTL', 'FKP', 'USD', 'USD', 'EUR',
+'MRO', 'MUR', 'EUR', 'AUD', 'MXN', 'USD', 'USD', 'EUR', 'MDL', 'EUR', 'MNT',
+'EUR', 'XCD', 'MAD', 'MZN', 'MMK', 'NAD', 'ZAR', 'AUD', 'NPR', 'ANG', 'EUR',
+'XCD', 'XPF', 'NZD', 'NIO', 'XOF', 'NGN', 'NZD', 'AUD', 'USD', 'NOK', 'OMR',
+'PKR', 'USD', 'XPD', 'PAB', 'USD', 'PGK', 'PYG', 'PEN', 'PHP', 'NZD', 'XPT',
+'PLN', 'EUR', 'STD', 'USD', 'QAR', 'EUR', 'RON', 'RUB', 'RWF', 'STD', 'ANG',
+'MAD', 'XCD', 'SHP', 'XCD', 'XCD', 'EUR', 'XCD', 'EUR', 'USD', 'WST', 'EUR',
+'SAR', 'SPL', 'XOF', 'RSD', 'SCR', 'SLL', 'XAG', 'SGD', 'ANG', 'ANG', 'EUR',
+'EUR', 'SBD', 'SOS', 'ZAR', 'GBP', 'GBP', 'EUR', 'XDR', 'LKR', 'SDG', 'SRD',
+'NOK', 'SZL', 'SEK', 'CHF', 'SYP', 'TWD', 'RUB', 'TJS', 'TZS', 'THB', 'IDR',
+'TTD', 'XOF', 'NZD', 'TOP', 'TTD', 'TND', 'TRY', 'TMM', 'USD', 'TVD', 'UGX',
+'UAH', 'AED', 'GBP', 'USD', 'USD', 'UYU', 'USD', 'UZS', 'VUV', 'EUR', 'VEB',
 'VEF', 'VND', 'USD', 'USD', 'USD', 'XPF', 'MAD', 'YER', 'ZMK', 'ZWD']
 
     ##updated currency this arry will contain the final result
     updated_currency = {}
-    
+
     def get_updated_currency(self, currency_array, main_currency, max_delta_days) :
         """Interface method that will retrieve the currency
            This function has to be reinplemented in child"""
         raise AbstractMethodError
-    
+
     def validate_cur(self, currency) :
         """Validate if the currency to update is supported"""
         if currency not in self.supported_currency_array :
-            raise UnsuportedCurrencyError(currency)        
-        
+            raise UnsuportedCurrencyError(currency)
+
     def get_url(self, url):
         """Return a string of a get url query"""
         try:
@@ -354,11 +354,11 @@ class Curreny_getter_interface(object) :
             _logger.warning("the rate date from ECB (%s) is not today's date", rate_date_str)
 
 
-#Yahoo ###################################################################################     
+#Yahoo ###################################################################################
 class Yahoo_getter(Curreny_getter_interface) :
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service"""
-        
+
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
         self.validate_cur(main_currency)
@@ -373,7 +373,7 @@ class Yahoo_getter(Curreny_getter_interface) :
                 self.updated_currency[curr] = val
             else :
                 raise Exception('Could not update the %s'%(curr))
-        
+
         return self.updated_currency, self.log_info  # empty string added by polish changes
 ##Admin CH ############################################################################
 class Admin_ch_getter(Curreny_getter_interface) :
