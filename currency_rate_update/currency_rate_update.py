@@ -1,41 +1,33 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2009 Camptocamp SA
-# @author Nicolas Bessi
-# @source JBA and AWST inpiration
-# @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
-# Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
-#  - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
-#  - rates given by ECB webservice is now correct even when main_cur <> EUR
-#  - rates given by PL_NBP webservice is now correct even when main_cur <> PLN
-#  - if company_currency <> CHF, you can now update CHF via Admin.ch webservice
-#    (same for EUR with ECB webservice and PLN with NBP webservice)
-#  For more details, see Launchpad bug #645263
-#  - mecanism to check if rates given by the webservice are "fresh" enough to be
-#    written in OpenERP ('max_delta_days' parameter for each currency update service)
-# Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#    Copyright (c) 2009 Camptocamp SA
+#    @author Nicolas Bessi
+#    @source JBA and AWST inpiration
+#    @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
+#    Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
+#     - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
+#     - rates given by ECB webservice is now correct even when main_cur <> EUR
+#     - rates given by PL_NBP webservice is now correct even when main_cur <> PLN
+#     - if company_currency <> CHF, you can now update CHF via Admin.ch webservice
+#       (same for EUR with ECB webservice and PLN with NBP webservice)
+#     For more details, see Launchpad bug #645263
+#     - mecanism to check if rates given by the webservice are "fresh" enough to be
+#       written in OpenERP ('max_delta_days' parameter for each currency update service)
+#        Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
