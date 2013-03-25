@@ -1,38 +1,30 @@
 # -*- coding: utf-8 -*-
-#  company.py
-#  c2c_currency_update
-# @author Nicolas Bessi 
-#  Copyright (c) 2009 CamptoCamp. All rights reserved.
 ##############################################################################
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    Copyright (c) 2009 CamptoCamp. All rights reserved.
+#    @author Nicolas Bessi
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 import netsvc
-from osv import fields, osv
-class res_company(osv.osv):
+from openerp.osv import fields, osv
+
+class res_company(osv.Model):
     """override company to add currency update"""
-    
+
     def _multi_curr_enable(self, cr, uid, ids, field_name, arg, context={}):
         "check if multi company currency is enabled"
         result = {}
@@ -43,8 +35,8 @@ class res_company(osv.osv):
         for id in ids:
             result[id] = enable
         return result
-        
-        
+
+
     def button_refresh_currency(self, cr, uid, ids, context=None):
         """Refrech  the currency !!for all the company
         now"""
@@ -54,18 +46,18 @@ class res_company(osv.osv):
         except Exception, e:
             return False
         return True
-        
-        
+
+
     def on_change_auto_currency_up(self, cr, uid, id, value):
         """handle the activation of the currecny update on compagnies.
-        There are two ways of implementing multi_company currency, 
+        There are two ways of implementing multi_company currency,
         the currency is shared or not. The module take care of the two
-        ways. If the currency are shared, you will only be able to set 
-        auto update on one company, this will avoid to have unusefull cron 
-        object running. 
+        ways. If the currency are shared, you will only be able to set
+        auto update on one company, this will avoid to have unusefull cron
+        object running.
         If yours currency are not share you will be able to activate the
         auto update on each separated company"""
-        
+
         if len(id) :
             id = id[0]
         else :
@@ -77,12 +69,12 @@ class res_company(osv.osv):
             # this statement is here beacaus we do no want to save in case of error
             self.write(cr, uid, id,{'auto_currency_up':value})
             for comp in compagnies :
-                if self.browse(cr, uid, comp).auto_currency_up: 
+                if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
                     break
             self.pool.get('currency.rate.update').save_cron(
-                                                            cr, 
-                                                            uid, 
+                                                            cr,
+                                                            uid,
                                                             {'active':activate_cron}
                                                         )
             return {}
@@ -93,10 +85,10 @@ class res_company(osv.osv):
                         #we ensure taht we did not have write a true value
                         self.write(cr, uid, id,{'auto_currency_up':False})
                         return {
-                                'value':{ 
+                                'value':{
                                             'auto_currency_up':False
                                         },
-                                        
+
                                 'warning':{
                                             'title':"Warning",
                                             'message': 'Yon can not activate auto currency '+\
@@ -106,44 +98,44 @@ class res_company(osv.osv):
                                 }
             self.write(cr, uid, id,{'auto_currency_up':value})
             for comp in compagnies :
-                if self.browse(cr, uid, comp).auto_currency_up: 
+                if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
                 self.pool.get('currency.rate.update').save_cron(
-                                                            cr, 
-                                                            uid, 
+                                                            cr,
+                                                            uid,
                                                             {'active':activate_cron}
                                                         )
                 break
             return {}
-                    
-            
+
+
     def on_change_intervall(self, cr, uid, id, interval) :
         ###Function that will update the cron
         ###freqeuence
         self.pool.get('currency.rate.update').save_cron(
-                                                            cr, 
-                                                            uid, 
+                                                            cr,
+                                                            uid,
                                                             {'interval_type':interval}
                                                         )
         compagnies =  self.search(cr, uid, [])
         for comp in compagnies :
             self.write(cr, uid, comp,{'interval_type':interval})
         return {}
-        
+
     _inherit = "res.company"
     _columns = {
         ### activate the currency update
         'auto_currency_up': fields.boolean('Automatical update of the currency this company'),
         'services_to_use' : fields.one2many(
-                                            'currency.rate.update.service', 
+                                            'currency.rate.update.service',
                                             'company_id',
-                                            'Currency update services' 
+                                            'Currency update services'
                                             ),
         ###predifine cron frequence
         'interval_type': fields.selection(
                                                 [
-                                                    ('days','Day(s)'), 
-                                                    ('weeks', 'Week(s)'), 
+                                                    ('days','Day(s)'),
+                                                    ('weeks', 'Week(s)'),
                                                     ('months', 'Month(s)')
                                                 ],
                                                 'Currency update frequence',
@@ -151,14 +143,15 @@ class res_company(osv.osv):
                                                  also affect other compagnies"""
                                             ),
         ###function field that allows to know the
-        ###mutli company currency implementation                                    
+        ###mutli company currency implementation
         'multi_company_currency_enable' : fields.function(
-                                            _multi_curr_enable, 
-                                            method=True, 
-                                            type='boolean', 
+                                            _multi_curr_enable,
+                                            method=True,
+                                            type='boolean',
                                             string="Multi company currency",
                                             help='if this case is not check you can'+\
                                             ' not set currency is active on two company'
                                         ),
-    }    
-res_company()
+    }
+
+

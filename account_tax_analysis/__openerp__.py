@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2008 Camtocamp SA
-#    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
-#    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
+#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +17,26 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+{"name": "Tax analysis",
+ "version": "1.0",
+ "depends": ["base", "account"],
+ "author": "CamptoCamp SA",
+ "category": 'Accounting & Finance',
+ "description": """
+Tax analysis view
+=================
 
-import currency_rate_update
-import company
+This add-on is a must if you want to be able to validate your VAT form.
+
+Thanks to a new menu 'Accounting / Tax / Tax analysis'
+you are able to group accounting entries by Taxes (VAT codes)
+and/or financial accounts.
+
+This way you will find easily differences you may see between
+the OpenERP tax report and what you see in your books.""",
+ "website": "http://www.camptocamp.com",
+ "data": ["account_tax_analysis_view.xml"],
+ "installable": True,
+ "active": False,
+ }
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

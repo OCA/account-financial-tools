@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2008 Camtocamp SA
-#    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
-#    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
+#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +17,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-import currency_rate_update
-import company
+from . import account_tax_analysis
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
