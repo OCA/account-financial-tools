@@ -34,7 +34,7 @@ class CreditControlPolicy(Model):
                                              'Policy Levels'),
 
                 'do_nothing': fields.boolean('Do nothing',
-                                             help=('For policies which should not '
+                                             help=('For policies which should not',
                                                    'generate lines or are obsolete')),
 
                 'company_id': fields.many2one('res.company', 'Company'),
