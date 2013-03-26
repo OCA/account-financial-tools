@@ -14,14 +14,15 @@
     </record>
 
 
+    <!-- restore cancel button for sale and open state -->
     <record id="invoice_form_supplier_group_invoice" model="ir.ui.view">
       <field name="name">Show Cancel invoice button</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="account.invoice_supplier_form" />
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <xpath expr="//button[@name='invoice_cancel' and @states='sale,open']"  position="attributes">
-          <attribute name="groups" eval="account.group_account_invoice"/>
+        <xpath expr="//button[@name='invoice_cancel']" position="after">
+          <button name="invoice_cancel" states="sale,open" string="Cancel Invoice" groups="account.group_account_invoice"/>
         </xpath>
       </field>
     </record>
