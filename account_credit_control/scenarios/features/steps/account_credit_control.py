@@ -11,8 +11,8 @@ def impl(ctx, policy_oid):
     for row in ctx.table:
         acc = acc_obj.get(['code = %s' % row['account code']])
         assert acc,  "Account with code %s not found" % row['account code']
-        accounts.append(accounts)
-    policy.write({'account_ids': accounts})
+        accounts.append(acc)
+    policy.write({'account_ids': [x.id for x in accounts]})
 
 
 @when(u'I launch the credit run')
@@ -44,16 +44,22 @@ def impl(ctx):
     for row in rows:
         account = model('account.account').get(['name = %s' % row['account']])
         assert account, "no account named %s found" % row['account']
-        import pdb; pdb.set_trace()
 
         policy = model('credit.control.policy').get(['name = %s' % row['policy']])
         assert policy, "No policy %s found" % row['policy']
+
         partner = model('res.partner').get(['name = %s' % row['partner']])
         assert partner, "No partner %s found" % row['partner']
-        move_line = model('account.move.line').get(['name = %s' % row['move line']])
+
+        maturity_date = _parse_date(row['date due'])
+        move_line = model('account.move.line').get(['name = %s' % row['move line'],
+                                                    'date_maturity = %s' % maturity_date])
         assert move_line, "No move line %s found" % row['move line']
-        level = model('credit.control.policy.level').get(['name = %s' % row['policy level'], 'policy_id = %s' % policy.id])
+
+        level = model('credit.control.policy.level').get(['name = %s' % row['policy level'],
+                                                          'policy_id = %s' % policy.id])
         assert level, "No level % found" % row['policy level']
+
         domain = [['account_id', '=', account.id],
                   ['policy_id', '=', policy.id],
                   ['partner_id', '=', partner.id],
@@ -65,8 +71,9 @@ def impl(ctx):
                   ['balance_due', '=', row.get('balance', 0.0)],
                   ['date_due', '=',  _parse_date(row['date due'])],
                   ['date', '=', _parse_date(row['date'])],
+                  ['move_line_id', '=', move_line.id],
                   ]
-        if row.get('currrency'):
+        if row.get('currency'):
             curreny = model('res.currency').get(['name = %s' % row['currency']])
             assert curreny, "No currency %s found" % row['currency']
             domain.append(('currency_id', '=', curreny.id))
@@ -74,8 +81,9 @@ def impl(ctx):
         lines = model('credit.control.line').search(domain)
         assert lines, "no line found for %s" % repr(row)
         assert len(lines) == 1, "Too many lines found for %s" % repr(row)
-    date_lines = model('credit.control.lines').search([('date', '=', ctx.found_item.date)])
-    assert len(date_lines) == len(ctx.table), "Too many lines generated"
+    date_lines = model('credit.control.line').search([('date', '=', ctx.found_item.date)])
+    assert len(date_lines) == len(ctx.table.rows), "Too many lines generated"
+
 
 def open_invoice(ctx):
     assert ctx.found_item
@@ -90,3 +98,23 @@ def impl(ctx):
 @given(u'I open the credit invoice')
 def impl(ctx):
     open_invoice(ctx)
+
+@given(u'there is "{state}" credit lines')
+def impl(ctx, state):
+    assert model('credit.control.line').search(['state = %s' % state])
+
+@given(u'I mark all draft email to state "{state}"')
+def impl(ctx, state):
+    wiz = model('credit.control.marker').create({'name': state})
+    lines = model('credit.control.line').search([('state', '=', 'draft')])
+    assert lines
+    ctx.lines = lines
+    wiz.write({'line_ids': lines})
+    wiz.mark_lines()
+
+@then(u'the draft line should be in state "{state}"')
+def impl(ctx, state):
+    assert ctx.lines
+    lines = model('credit.control.line').search([('state', '!=', state),
+                                                 ('id', 'in', ctx.lines)])
+    assert not lines

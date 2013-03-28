@@ -20,9 +20,7 @@
 ##############################################################################
 import netsvc
 import logging
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
-from openerp.tools.translate import _
+from openerp.osv.orm import TransientModel, fields
 
 logger = logging.getLogger('credit.control.line.mailing')
 
@@ -51,24 +49,6 @@ class CreditCommunication(TransientModel):
                                       cr, uid, 'credit.control.policy', context=c),
                  'user_id': lambda s, cr, uid, c: uid}
 
-    def get_address(self, cr, uid, com_id, context=None):
-        """Return a valid address for customer"""
-        assert not (isinstance(com_id, list) and len(com_id) > 1), \
-                "com_id: only one id expected"
-        if isinstance(com_id, list):
-            com_id = com_id[0]
-        form = self.browse(cr, uid, com_id, context=context)
-        part_obj = self.pool.get('res.partner')
-        adds = part_obj.address_get(cr, uid, [form.partner_id.id],
-                                    adr_pref=['invoice', 'default'])
-
-        add = adds.get('invoice', adds.get('default'))
-        add_obj = self.pool.get('res.partner.address')
-        if add:
-            return add_obj.browse(cr, uid, add, context=context)
-        else:
-            return False
-
     def get_email(self, cr, uid, com_id, context=None):
         """Return a valid email for customer"""
         assert not (isinstance(com_id, list) and len(com_id) > 1), \
@@ -76,10 +56,7 @@ class CreditCommunication(TransientModel):
         if isinstance(com_id, list):
             com_id = com_id[0]
         form = self.browse(cr, uid, com_id, context=context)
-        address = form.get_address()
-        email = ''
-        if address and address.email:
-            email = address.email
+        email = form.partner_id.email or False
         return email
 
     def _get_credit_lines(self, cr, uid, line_ids, partner_id, level_id, context=None):
@@ -124,15 +101,12 @@ class CreditCommunication(TransientModel):
         """Generate email message using template related to level"""
         cr_line_obj = self.pool.get('credit.control.line')
         email_temp_obj = self.pool.get('email.template')
-        email_message_obj = self.pool.get('mail.message')
+        email_message_obj = self.pool.get('mail.mail')
         email_ids = []
-
-        essential_fields = [
-                'subject',
-                'body_html',
-                'email_from',
-                'email_to'
-        ]
+        essential_fields = ['subject',
+                            'body_html',
+                            'email_from',
+                            'email_to']
 
         for comm in comms:
             # we want to use a local cr in order to send the maximum
@@ -141,9 +115,11 @@ class CreditCommunication(TransientModel):
             email_values = {}
             cl_ids = [cl.id for cl in comm.credit_control_line_ids]
             email_values = email_temp_obj.generate_email(cr, uid,
-                                                       template,
-                                                       comm.id,
-                                                       context=context)
+                                                         template,
+                                                         comm.id,
+                                                         context=context)
+            email_values['body_html'] = email_values['body']
+            email_values['type'] = 'email'
 
             email_id = email_message_obj.create(cr, uid, email_values, context=context)
 
@@ -178,4 +154,3 @@ class CreditCommunication(TransientModel):
         l_obj = self.pool.get('credit.control.line')
         l_obj.write(cr, uid, line_ids, {'state': 'sent'}, context=context)
         return line_ids
-
