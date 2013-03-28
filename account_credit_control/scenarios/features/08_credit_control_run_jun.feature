@@ -8,7 +8,7 @@
 # Features Generic tags (none for all)
 ##############################################################################
 
-@account_credit_control_run  @account_credit_control_run_jun
+@account_credit_control @account_credit_control_run  @account_credit_control_run_jun
 
 Feature: Ensure that email credit line generation first pass is correct
 
