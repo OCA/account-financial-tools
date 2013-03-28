@@ -9,10 +9,18 @@
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
       <field name="body_html"><![CDATA[
-      <%page args="object, user=None, ctx=None, quote=None, format_exception=True, mode='email'" />
-      %if mode != 'pdf':
+      %if mode and  mode != 'pdf':
       <!-- your css here -->
       <style type="text/css">
+      body {
+            font-family: helvetica;
+            font-size: 11px;
+            }
+
+     .custom_text {
+                  font-family: helvetica;
+                  font-size: 11px;
+                  }
       </style>
       %endif
       <div>
@@ -24,7 +32,7 @@
       <table style="border: 1px solid" width="100%">
       <caption><b>Summary</b></caption>
       <tr>
-        <th>date due</th>
+        <th>Date due</th>
          <th>Amount due</th>
          <th>Amount balance</th>
          <th>Invoice number</th>
