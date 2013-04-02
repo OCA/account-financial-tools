@@ -20,9 +20,7 @@
 ##############################################################################
 import netsvc
 import logging
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
-from openerp.tools.translate import _
+from openerp.osv.orm import TransientModel, fields
 
 logger = logging.getLogger('credit.control.line.mailing')
 
@@ -178,4 +176,3 @@ class CreditCommunication(TransientModel):
         l_obj = self.pool.get('credit.control.line')
         l_obj.write(cr, uid, line_ids, {'state': 'sent'}, context=context)
         return line_ids
-
