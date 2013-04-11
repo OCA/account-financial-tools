@@ -42,6 +42,7 @@
            'account_deposit_view.xml',
            'account_deposit_sequence.xml',
            'account_type_data.xml',
+           'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'installable': True,
