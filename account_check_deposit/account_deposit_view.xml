@@ -26,10 +26,13 @@
             <field name="arch" type="xml">
                 <form string="Checks Deposit" version="7.0">
                     <header>
-                        <button name="validate_deposit" states="draft" string="Validate Deposit"
+                        <button name="validate_deposit" states="draft"
+                                string="Validate Deposit"
                                 type="object" class="oe_highlight"/>
-                        <button name="cancel" states="done" string="Cancel" type="object" />
-                        <field name="state" widget="statusbar" statusbar_visible="draft,done"
+                        <button name="cancel" states="done"
+                                string="Cancel" type="object" />
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,done"
                                statusbar_colors='{"draft":"blue"}'/>
                     </header>
                     <sheet>
@@ -41,12 +44,14 @@
                             <field name="deposit_date" />
                             <field name="journal_id" />
                             <field name="move_id" />
-                            <field name="company_id" on_change="onchange_company_id(company_id, context)"/>
+                            <field name="company_id"
+                                   on_change="onchange_company_id(company_id, context)"/>
                             <field name="partner_id" invisible="1"/>
                             <field name="bank_id"/>
                         </group>
                         <separator string="Check Payments"/>
-                        <field name="check_payment_ids" nolabel="1" colspan="4" widget="many2many"
+                        <field name="check_payment_ids" nolabel="1"
+                               colspan="4" widget="many2many"
                                domain="[('reconcile_id','=',False),
                                         ('account_id.user_type.code','=','recieved_check')]">
                             <tree string="Check Payment">
@@ -108,7 +113,11 @@
             <field name="help" type="html"></field>
         </record>
 
-        <menuitem string="Checks Deposit" action="action_check_deposit_tree" id="menu_check_deposit_tree" parent="account.menu_finance_bank_and_cash" sequence="20"/>
+        <menuitem string="Checks Deposit"
+                  action="action_check_deposit_tree"
+                  id="menu_check_deposit_tree"
+                  parent="account.menu_finance_bank_and_cash"
+                  sequence="20"/>
 
     </data>
 </openerp>
