@@ -20,11 +20,11 @@
 #                                                                             #
 ###############################################################################
 
-from openerp.osv import fields, osv
-from openerp.osv.orm import Model
+from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
-class account_check_deposit(Model):
+
+class account_check_deposit(orm.Model):
     _name = "account.check.deposit"
     _description = "Account Check Deposit"
 
@@ -39,25 +39,38 @@ class account_check_deposit(Model):
 
 
     _columns = {
-        'name': fields.char('Name', size=64, required=True, readonly=True, states={'draft':[('readonly',False)]}),
-        'check_payment_ids': fields.many2many('account.move.line', 'account_move_line_deposit_rel',
-                                              'check_deposit_id', 'move_line_id', 'Check Payments',
-                                              readonly=True, states={'draft':[('readonly',False)]}),
-        'deposit_date': fields.date('Deposit Date', readonly=True, states={'draft':[('readonly',False)]}),
-        'journal_id': fields.many2one('account.journal', 'Journal', required=True, readonly=True,
+        'name': fields.char('Name', size=64, required=True, readonly=True,
+                            tates={'draft':[('readonly',False)]}),
+        'check_payment_ids': fields.many2many('account.move.line',
+                                              'account_move_line_deposit_rel',
+                                              'check_deposit_id',
+                                              'move_line_id',
+                                              'Check Payments',
+                                              readonly=True,
+                                              states={'draft':[('readonly',False)]}),
+        'deposit_date': fields.date('Deposit Date', readonly=True,
+                                    states={'draft':[('readonly',False)]}),
+        'journal_id': fields.many2one('account.journal', 'Journal',
+                                      required=True, readonly=True,
                                       states={'draft':[('readonly',False)]}),
         'state': fields.selection([
             ('draft','Draft'),
             ('done','Done'),
             ('cancel','Cancelled')
         ],'Status', readonly=True),
-        'move_id': fields.many2one('account.move', 'Journal Entry', readonly=True,
+        'move_id': fields.many2one('account.move', 'Journal Entry',
+                                   readonly=True,
                                    states={'draft':[('readonly',False)]}),
-        'bank_id': fields.many2one('res.partner.bank', 'Bank', required=True, readonly=True,
-                                     domain="[('partner_id', '=', partner_id)]",
+        'bank_id': fields.many2one('res.partner.bank', 'Bank', required=True,
+                                   readonly=True,
+                                   domain="[('partner_id', '=', partner_id)]",
+                                   states={'draft':[('readonly',False)]}),
+        'partner_id':fields.related('company_id', 'partner_id', type="many2one",
+                                    relation="res.partner", string="Partner",
+                                    readonly=True),
+        'company_id': fields.many2one('res.company', 'Company', required=True,
+                                      change_default=True, readonly=True,
                                       states={'draft':[('readonly',False)]}),
-        'partner_id':fields.related('company_id', 'partner_id', type="many2one", relation="res.partner", string="Partner", readonly=True),
-        'company_id': fields.many2one('res.company', 'Company', required=True, change_default=True, readonly=True, states={'draft':[('readonly',False)]}),
         'total_amount': fields.function(sum_amount, string ="total amount"),
     }
 
@@ -87,9 +100,13 @@ class account_check_deposit(Model):
 
     def _prepare_account_move_vals(self, cr, uid, deposit, context=None):
         move_vals = {}
-        move_lines = [[0, 0, self._prepare_sum_move_line_vals(cr, uid, deposit, move_vals, context=context)]]
+        move_lines = [[0, 0, self._prepare_sum_move_line_vals(cr, uid,
+                                                              deposit, move_vals,
+                                                              context=context)]]
         for line in deposit.check_payment_ids:
-            move_lines.append([0, 0, self._prepare_move_line_vals(cr, uid, line, move_vals, context=context)])
+            move_lines.append([0, 0, self._prepare_move_line_vals(cr, uid, line,
+                                                                  move_vals,
+                                                                  context=context)])
         move_vals.update({
             'journal_id': deposit.journal_id.id,
             'line_id': move_lines,
@@ -97,11 +114,12 @@ class account_check_deposit(Model):
         return move_vals
 
     def _prepare_move_line_vals(self, cr, uid, line, move_vals, context=None):
-        move_line_vals = self.pool.get('account.move.line').default_get(cr, uid,
-                                                        ['centralisation', 'date','date_created',
-                                                         'currency_id', 'journal_id', 'amount_currency',
-                                                         'account_id', 'period_id', 'company_id'],
-                                                        context=context)
+        move_line_vals = self.pool.get('account.move.line').default_get(
+            cr, uid,
+            ['centralisation', 'date','date_created', 'currency_id',
+             'journal_id', 'amount_currency', 'account_id', 'period_id',
+             'company_id'],
+            context=context)
         move_line_vals.update({
             'name': line.name,
             'credit': line.debit,
@@ -112,11 +130,12 @@ class account_check_deposit(Model):
         return move_line_vals
 
     def _prepare_sum_move_line_vals(self, cr, uid, deposit, move_vals, context=None):
-        move_line_vals = self.pool.get('account.move.line').default_get(cr, uid,
-                                                            ['centralisation', 'date','date_created',
-                                                             'currency_id', 'journal_id', 'amount_currency',
-                                                             'account_id', 'period_id', 'company_id', 'state'],
-                                                            context=context)
+        move_line_vals = self.pool.get('account.move.line').default_get(
+            cr, uid,
+            ['centralisation', 'date','date_created', 'currency_id',
+             'journal_id', 'amount_currency', 'account_id', 'period_id',
+             'company_id', 'state'],
+            context=context)
 
         debit = 0.0
         for line in deposit.check_payment_ids:
@@ -132,11 +151,15 @@ class account_check_deposit(Model):
     def _reconcile_checks(self, cr, uid, deposit, move_id, context=None):
         move_line_obj = self.pool.get('account.move.line')
         for line in deposit.check_payment_ids:
-            move_line_ids = move_line_obj.search(cr, uid, [('move_id', '=', move_id),
-                                                            ('credit', '=', line.debit),
-                                                            ('name', '=', line.ref)], context=context)
+            move_line_ids = move_line_obj.search(cr, uid,
+                                                 [('move_id', '=', move_id),
+                                                  ('credit', '=', line.debit),
+                                                  ('name', '=', line.ref)],
+                                                 context=context)
             if move_line_ids:
-                move_line_obj.reconcile(cr, uid, [line.id, move_line_ids[0]], context=context)
+                move_line_obj.reconcile(cr, uid,
+                                        [line.id, move_line_ids[0]],
+                                        context=context)
         return True
 
 
@@ -157,7 +180,6 @@ class account_check_deposit(Model):
         for deposit in self.browse(cr, uid, ids, context=context):
             context['journal_id'] = deposit.journal_id.id
             move_vals = self._prepare_account_move_vals(cr, uid, deposit, context=context)
-            print "move_vals ====>", move_vals
             move_id = move_obj.create(cr, uid, move_vals, context=context)
             move_obj.post(cr, uid, [move_id], context=context)
             self._reconcile_checks(cr, uid, deposit, move_id, context=context)
@@ -165,10 +187,13 @@ class account_check_deposit(Model):
         return True
 
 
-class account_move_line(Model):
+class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     _columns = {
-        'check_deposit_id': fields.many2many('account.check.deposit', 'account_move_line_deposit_rel',
-                                             'check_deposit_id', 'move_line_id', 'Check Deposit'),
+        'check_deposit_id': fields.many2many('account.check.deposit',
+                                             'account_move_line_deposit_rel',
+                                             'check_deposit_id',
+                                             'move_line_id',
+                                             'Check Deposit'),
     }
