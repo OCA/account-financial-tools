@@ -34,8 +34,8 @@ msgstr "Regrouper par..."
 
 #. module: account_check_deposit
 #: model:ir.actions.report.xml,name:account_check_deposit.check_deposit_webkit
-msgid "WebKit Checks Deposit"
-msgstr "WebKit pour Remise de Chèques"
+msgid "Print Checks Deposit"
+msgstr "Imprimer Remise de Chèques"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:79
