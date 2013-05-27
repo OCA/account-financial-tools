@@ -29,7 +29,8 @@ class account_move_line(orm.TransientModel):
     _inherit = "account.move.line"
 
     def create(self, cr, uid, vals, context=None, check=True):
-        result = super(account_move_line,self).create(cr, uid, vals, context=context, check=check)
+        result = super(account_move_line,self).create(cr, uid, vals,
+                                                      context=context, check=check)
         if result:
             move_line = self.read(cr,uid,result,['credit','debit','tax_code_id'])
             if move_line['tax_code_id']:
@@ -38,7 +39,10 @@ class account_move_line(orm.TransientModel):
         return result
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
-        result = super(account_move_line,self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
+        result = super(account_move_line,self).write(cr, uid, ids, vals,
+                                                     context=context,
+                                                     check=check,
+                                                     update_check=update_check)
         if result:
             if ('debit' in vals) or ('credit' in vals):
                 move_lines = self.read(cr,uid,ids,['credit','debit','tax_code_id'])
@@ -46,13 +50,17 @@ class account_move_line(orm.TransientModel):
                     if move_line['tax_code_id']:
                         tax_amount = move_line['credit'] - move_line['debit']
                         self.write(cr,uid,[move_line['id']],{'tax_amount':tax_amount})
-                 
+
         return result
-    
+
     # We set the tax_amount invisible, because we recompute it in every case.
     _columns = {
-        'tax_amount': fields.float('Tax/Base Amount', digits_compute=dp.get_precision('Account'),invisible=True, select=True, help="If the Tax account is a tax code account, this field will contain the taxed amount.If the tax account is base tax code, "\
-                    "this field will contain the basic amount(without tax)."),
+        'tax_amount': fields.float('Tax/Base Amount', digits_compute=dp.get_precision('Account'),
+                                   invisible=True,
+                                   select=True,
+                                   help=("If the Tax account is a tax code account, "
+                                         "this field will contain the taxed amount. "
+                                         "If the tax account is base tax code, "
+                                         "this field will contain the basic amount (without tax)."),
     }
 
-        
