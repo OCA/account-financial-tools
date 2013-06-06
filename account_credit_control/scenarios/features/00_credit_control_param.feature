@@ -10,6 +10,12 @@
 
 Feature: General parameters in order to test the credit control module
 
+  @deactivate_journal_control
+  Scenario: Journal setup to vaoid unfixed voucher bug
+    Given I execute the SQL commands
+    """
+    UPDATE account_journal SET allow_date = false;
+    """
   @account_credit_control_setup_install_modules
   Scenario: MODULES INSTALLATION
 

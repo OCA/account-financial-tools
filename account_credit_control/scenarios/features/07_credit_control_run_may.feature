@@ -82,16 +82,15 @@ Feature: Ensure that email credit line generation first pass is correct
     And the generated credit lines should have the following values:
      | balance | date due | account     | policy        | date     | partner        | channel | level | move line | policy level          | state | amount due | currency |
      |    1500 | %Y-04-30 | Debtors     | 2 time policy | %Y-05-31 | customer_2     | email   |     1 | SI_6      | 30 days end of month  | draft |       1500 | USD      |
-     |    1500 | %Y-04-14 | Debtors     | 2 time policy | %Y-05-31 | customer_3     | email   |     1 | SI_8      | 30 days end of month  | draft |       1500 | USD      |
-     |    1050 | %Y-04-30 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | email   |     1 | SI_11     | 10 days net           | draft |       1050 | USD      |
-     |    1000 | %Y-02-29 | Debtors     | 2 time policy | %Y-05-31 | customer_2     | letter  |     2 | SI_4      | 60 days last reminder | draft |       1000 |          |
+     |    1000 | %Y-02-28 | Debtors     | 2 time policy | %Y-05-31 | customer_2     | letter  |     2 | SI_4      | 60 days last reminder | draft |       1000 |          |
      |    1000 | %Y-02-17 | Debtors     | 2 time policy | %Y-05-31 | customer_3     | letter  |     2 | SI_7      | 60 days last reminder | draft |       1000 |          |
+     |    1500 | %Y-04-14 | Debtors     | 2 time policy | %Y-05-31 | customer_3     | email   |     1 | SI_9      | 30 days end of month  | draft |       1500 |          |
      |     840 | %Y-03-31 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | email   |     2 | SI_11     | 30 days end of month  | draft |        840 | USD      |
      |    1500 | %Y-04-14 | Debtors USD | 3 time policy | %Y-05-31 | customer_5_usd | email   |     2 | SI_15     | 30 days end of month  | draft |       1500 | USD      |
-     |     700 | %Y-02-29 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | letter  |     3 | SI_10     | 10 days last reminder | draft |        700 |          |
+     |     700 | %Y-02-28 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | letter  |     3 | SI_10     | 10 days last reminder | draft |        700 |          |
      |     450 | %Y-03-15 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | letter  |     3 | SI_12     | 10 days last reminder | draft |        450 | USD      |
-     |     360 | %Y-04-30 | Debtors     | 3 time policy | %Y-04-30 | customer_4     | letter  |     3 | SI_12     | 10 days last reminder | draft |        360 | USD      |
-     |    1200 | %Y-03-16 | Debtors USD | 3 time policy | %Y-05-31 | customer_5_usd | letter  |     3 | SI_14     | 10 days last reminder | draft |       1200 | USD      |
+     |    1050 | %Y-04-30 | Debtors     | 3 time policy | %Y-05-31 | customer_4     | email   |     1 | SI_12     | 10 days net           | draft |       1050 | USD      |
+     |    1200 | %Y-03-17 | Debtors USD | 3 time policy | %Y-05-31 | customer_5_usd | letter  |     3 | SI_14     | 10 days last reminder | draft |       1200 | USD      |
      |     500 | %Y-04-14 | Debtors     | 3 time policy | %Y-05-31 | Scrooge McDuck | email   |     2 | SI_17     | 30 days end of month  | draft |       1500 |          |
      |    1050 | %Y-04-30 | Debtors     | 3 time policy | %Y-05-31 | Donald Duck    | email   |     1 | SI_18     | 10 days net           | draft |       1050 |          |
      |     150 | %Y-03-15 | Debtors     | 3 time policy | %Y-05-31 | Gus Goose      | letter  |     3 | SI_19     | 10 days last reminder | draft |        450 |          |
