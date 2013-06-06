@@ -56,7 +56,7 @@ class CreditCommunication(TransientModel):
         if isinstance(com_id, list):
             com_id = com_id[0]
         form = self.browse(cr, uid, com_id, context=context)
-        email = form.partner_id.id or False
+        email = form.partner_id.email or False
         return email
 
     def _get_credit_lines(self, cr, uid, line_ids, partner_id, level_id, context=None):
@@ -101,7 +101,7 @@ class CreditCommunication(TransientModel):
         """Generate email message using template related to level"""
         cr_line_obj = self.pool.get('credit.control.line')
         email_temp_obj = self.pool.get('email.template')
-        email_message_obj = self.pool.get('mail.message')
+        email_message_obj = self.pool.get('mail.mail')
         email_ids = []
         essential_fields = ['subject',
                             'body_html',
@@ -118,6 +118,8 @@ class CreditCommunication(TransientModel):
                                                          template,
                                                          comm.id,
                                                          context=context)
+            email_values['body_html'] = email_values['body']
+            email_values['type'] = 'email'
 
             email_id = email_message_obj.create(cr, uid, email_values, context=context)
 

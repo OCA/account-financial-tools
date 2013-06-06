@@ -75,7 +75,7 @@ class CreditControlLine(orm.Model):
         'partner_id': fields.many2one('res.partner', "Partner", required=True),
         'amount_due': fields.float('Due Amount Tax incl.', required=True, readonly=True),
         'balance_due': fields.float('Due balance', required=True, readonly=True),
-        'mail_message_id': fields.many2one('mail.message', 'Sent Email', readonly=True),
+        'mail_message_id': fields.many2one('mail.mail', 'Sent Email', readonly=True),
 
         'move_line_id': fields.many2one('account.move.line', 'Move line',
                                         required=True, readonly=True),
