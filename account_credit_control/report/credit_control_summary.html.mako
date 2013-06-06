@@ -7,6 +7,11 @@ body {
     font-size: 11px;
 }
 
+.custom_text {
+    font-family: helvetica;
+    font-size: 11px;
+}
+
 table {
     font-family: helvetica;
     font-size: 11px;
@@ -121,6 +126,22 @@ tr.line {
   <body>
 
     %for comm in objects :
+     <div class="address">
+        <table class="recipient">
+            <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
+            %for part in comm.partner_id.contact_address.split("\n")[1:]:
+                %if part:
+                <tr><td>${part}</td></tr>
+                %endif
+            %endfor
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+    </div>
+    <div>
       <%
         setLang(comm.partner_id.lang)
         current_uri = '%s_policy_template' % (comm.partner_id.lang)
