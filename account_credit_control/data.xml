@@ -12,6 +12,15 @@
       %if mode and  mode != 'pdf':
       <!-- your css here -->
       <style type="text/css">
+      body {
+            font-family: helvetica;
+            font-size: 11px;
+            }
+
+     .custom_text {
+                  font-family: helvetica;
+                  font-size: 11px;
+                  }
       </style>
       %endif
       <div>
