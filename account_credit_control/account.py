@@ -54,11 +54,17 @@ class AccountInvoice(orm.Model):
 
     def action_move_create(self, cr, uid, ids, context=None):
         """ Write the id of the invoice in the generated moves. """
-        res = super(AccountInvoice, self).action_move_create(cr, uid, ids, context=context)
-        for inv in self.browse(cr, uid, ids, context=context):
+        if context is None:
+            context = {}
+        # add from_parent_object to the conxtext to let the line.write
+        # call pass through account_constraints
+        ctxt = context.copy()
+        ctxt['from_parent_object'] = True
+        res = super(AccountInvoice, self).action_move_create(cr, uid, ids, context=ctxt)
+        for inv in self.browse(cr, uid, ids, context=ctxt):
             if inv.move_id:
                 for line in inv.move_id.line_id:
-                    line.write({'invoice_id': inv.id})
+                    line.write({'invoice_id': inv.id}, context=ctxt)
         return res
 
 
