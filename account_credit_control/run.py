@@ -59,7 +59,7 @@ class CreditControlRun(orm.Model):
                                    'in the meantime, it has to be handled '
                                    'manually'),
                              readonly=True),
-        xs}
+        }
 
     def _get_policies(self, cr, uid, context=None):
         return self.pool['credit.control.policy'].search(cr, uid, [], context=context)
