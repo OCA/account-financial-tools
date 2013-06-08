@@ -186,7 +186,7 @@ class CreditControlLine(orm.Model):
     def unlink(self, cr, uid, ids, context=None, check=True):
         for line in self.browse(cr, uid, ids, context=context):
             if line.state != 'draft':
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error !'),
                     _('You are not allowed to delete a credit control line that '
                       'is not in draft state.'))
