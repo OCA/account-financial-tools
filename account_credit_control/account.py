@@ -20,9 +20,6 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
-o2m = fields.one2many
-m2o = fields.many2one
-
 class AccountAccount(orm.Model):
     """Add a link to a credit control policy on account.account"""
 
