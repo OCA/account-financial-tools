@@ -20,37 +20,42 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+o2m = fields.one2many
+m2o = fields.many2one
 
 class AccountAccount(orm.Model):
     """Add a link to a credit control policy on account.account"""
 
     _inherit = "account.account"
 
-    _columns = {'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                           'account_id',
-                                                           string='Credit Lines',
-                                                           readonly=True)
-                }
+    _columns = {
+        'credit_control_line_ids':
+            fields.one2many('credit.control.line',
+                            'account_id',
+                            string='Credit Lines',
+                            readonly=True),
+        }
 
 
 class AccountInvoice(orm.Model):
     """Add a link to a credit control policy on account.account"""
 
     _inherit = "account.invoice"
-    _columns = {'credit_policy_id': fields.many2one('credit.control.policy',
-                                                    'Credit Control Policy',
-                                                    help=("The Credit Control Policy "
-                                                          "used for this invoice. "
-                                                          "If nothing is defined, "
-                                                          "it will use the account "
-                                                          "setting or the partner "
-                                                          "setting.")),
-
-                'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                           'invoice_id',
-                                                           string='Credit Lines',
-                                                           readonly=True)
-                }
+    _columns = {
+        'credit_policy_id':
+            fields.many2one('credit.control.policy',
+                            'Credit Control Policy',
+                            help=("The Credit Control Policy used for this "
+                                  "invoice. If nothing is defined, it will "
+                                  "use the account setting or the partner "
+                                  "setting.")
+                            ),
+        'credit_control_line_ids':
+            fields.one2many('credit.control.line',
+                            'invoice_id',
+                            string='Credit Lines',
+                            readonly=True),
+        }
 
     def action_move_create(self, cr, uid, ids, context=None):
         """ Write the id of the invoice in the generated moves. """

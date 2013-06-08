@@ -34,12 +34,13 @@ class CreditControlRun(orm.Model):
     _description = """Credit control line generator"""
     _columns = {
         'date': fields.date('Controlling Date', required=True),
-        'policy_ids': fields.many2many('credit.control.policy',
-                                       rel="credit_run_policy_rel",
-                                       id1='run_id', id2='policy_id',
-                                       string='Policies',
-                                       readonly=True,
-                                       states={'draft': [('readonly', False)]}),
+        'policy_ids':
+            fields.many2many('credit.control.policy',
+                             rel="credit_run_policy_rel",
+                             id1='run_id', id2='policy_id',
+                             string='Policies',
+                             readonly=True,
+                             states={'draft': [('readonly', False)]}),
 
         'report': fields.text('Report', readonly=True),
 
@@ -49,14 +50,16 @@ class CreditControlRun(orm.Model):
                                   required=True,
                                   readonly=True),
 
-        'manual_ids': fields.many2many('account.move.line',
-                                       rel="credit_runreject_rel",
-                                       string='Lines to handle manually',
-                                       help=('If a credit control line has been generated on a policy'
-                                             ' and the policy has been changed meantime,'
-                                             ' it has to be handled manually'),
-                                       readonly=True),
-    }
+        'manual_ids':
+            fields.many2many('account.move.line',
+                             rel="credit_runreject_rel",
+                             string='Lines to handle manually',
+                             help=('If a credit control line has been generated'
+                                   'on a policy and the policy has been changed '
+                                   'in the meantime, it has to be handled '
+                                   'manually'),
+                             readonly=True),
+        xs}
 
     def _get_policies(self, cr, uid, context=None):
         return self.pool['credit.control.policy'].search(cr, uid, [], context=context)

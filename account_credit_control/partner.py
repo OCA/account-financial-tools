@@ -28,16 +28,16 @@ class ResPartner(orm.Model):
     _inherit = "res.partner"
 
     _columns = {
-        'credit_policy_id': fields.many2one('credit.control.policy',
-                                            'Credit Control Policy',
-                                            help=("The Credit Control Policy"
-                                                  "used for this partner. This "
-                                                  "setting can be forced on the "
-                                                  "invoice. If nothing is defined, "
-                                                  "it will use the company "
-                                                  "setting.")),
-        'credit_control_line_ids': fields.one2many('credit.control.line',
-                                                   'invoice_id',
-                                                   string='Credit Control Lines',
-                                                   readonly=True)
+        'credit_policy_id':
+            fields.many2one('credit.control.policy',
+                            'Credit Control Policy',
+                            help=("The Credit Control Policy used for this "
+                                  "partner. This setting can be forced on the "
+                                  "invoice. If nothing is defined, it will use "
+                                  "the company setting.")),
+        'credit_control_line_ids':
+            fields.one2many('credit.control.line',
+                            'invoice_id',
+                            string='Credit Control Lines',
+                            readonly=True)
     }
