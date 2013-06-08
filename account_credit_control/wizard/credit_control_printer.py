@@ -20,11 +20,10 @@
 ##############################################################################
 import base64
 
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
-class CreditControlPrinter(TransientModel):
+class CreditControlPrinter(orm.TransientModel):
     """Print lines"""
 
     _name = "credit.control.printer"
@@ -72,7 +71,7 @@ class CreditControlPrinter(TransientModel):
         form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids and not form.print_all:
-            raise except_osv(_('Error'), _('No credit control lines selected.'))
+            raise orm.except_orm(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
         comms = comm_obj._generate_comm_from_credit_line_ids(cr, uid, line_ids,

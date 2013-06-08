@@ -22,7 +22,6 @@ import logging
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
-from openerp.osv.osv import except_osv
 
 logger = logging.getLogger('credit.control.run')
 
@@ -72,9 +71,9 @@ class CreditControlRun(orm.Model):
                                 order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cr, uid, lines[0], context=context)
-            raise except_osv(
-                _('Error'),
-                _('A run has already been executed more recently than %s') % (line.date))
+            raise orm.except_orm(_('Error'),
+                                 _('A run has already been executed more '
+                                   'recently than %s') % (line.date))
         return True
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
@@ -92,9 +91,8 @@ class CreditControlRun(orm.Model):
 
         policies = run.policy_ids
         if not policies:
-            raise except_osv(
-                _('Error'),
-                _('Please select a policy'))
+            raise orm.except_orm(_('Error'),
+                                 _('Please select a policy'))
 
         report = ''
         for policy in policies:
@@ -137,9 +135,9 @@ class CreditControlRun(orm.Model):
                            ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception as exc:
             # in case of exception openerp will do a rollback for us and free the lock
-            raise except_osv(_('Error'),
-                             _('A credit control run is already running'
-                               ' in background, please try later.'), repr(exc))
+            raise orm.except_orm(_('Error'),
+                                 _('A credit control run is already running'
+                                   ' in background, please try later.'))
 
         self._generate_credit_lines(cr, uid, run_id, context)
         return True

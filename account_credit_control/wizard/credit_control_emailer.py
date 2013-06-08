@@ -19,12 +19,11 @@
 #
 ##############################################################################
 
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class CreditControlEmailer(TransientModel):
+class CreditControlEmailer(orm.TransientModel):
     """Send emails for each selected credit control lines."""
 
     _name = "credit.control.emailer"
@@ -71,7 +70,7 @@ class CreditControlEmailer(TransientModel):
         form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids:
-            raise except_osv(_('Error'), _('No credit control lines selected.'))
+            raise orm.except_orm(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
         filtered_ids = self._filter_line_ids(
