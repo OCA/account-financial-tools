@@ -22,7 +22,6 @@ import logging
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
-from openerp.osv.osv import except_osv
 
 logger = logging.getLogger('credit.control.run')
 
@@ -35,12 +34,13 @@ class CreditControlRun(orm.Model):
     _description = """Credit control line generator"""
     _columns = {
         'date': fields.date('Controlling Date', required=True),
-        'policy_ids': fields.many2many('credit.control.policy',
-                                       rel="credit_run_policy_rel",
-                                       id1='run_id', id2='policy_id',
-                                       string='Policies',
-                                       readonly=True,
-                                       states={'draft': [('readonly', False)]}),
+        'policy_ids':
+            fields.many2many('credit.control.policy',
+                             rel="credit_run_policy_rel",
+                             id1='run_id', id2='policy_id',
+                             string='Policies',
+                             readonly=True,
+                             states={'draft': [('readonly', False)]}),
 
         'report': fields.text('Report', readonly=True),
 
@@ -50,14 +50,16 @@ class CreditControlRun(orm.Model):
                                   required=True,
                                   readonly=True),
 
-        'manual_ids': fields.many2many('account.move.line',
-                                       rel="credit_runreject_rel",
-                                       string='Lines to handle manually',
-                                       help=('If a credit control line has been generated on a policy'
-                                             ' and the policy has been changed meantime,'
-                                             ' it has to be handled manually'),
-                                       readonly=True),
-    }
+        'manual_ids':
+            fields.many2many('account.move.line',
+                             rel="credit_runreject_rel",
+                             string='Lines to handle manually',
+                             help=('If a credit control line has been generated'
+                                   'on a policy and the policy has been changed '
+                                   'in the meantime, it has to be handled '
+                                   'manually'),
+                             readonly=True),
+        }
 
     def _get_policies(self, cr, uid, context=None):
         return self.pool['credit.control.policy'].search(cr, uid, [], context=context)
@@ -72,9 +74,9 @@ class CreditControlRun(orm.Model):
                                 order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cr, uid, lines[0], context=context)
-            raise except_osv(
-                _('Error'),
-                _('A run has already been executed more recently than %s') % (line.date))
+            raise orm.except_orm(_('Error'),
+                                 _('A run has already been executed more '
+                                   'recently than %s') % (line.date))
         return True
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
@@ -92,9 +94,8 @@ class CreditControlRun(orm.Model):
 
         policies = run.policy_ids
         if not policies:
-            raise except_osv(
-                _('Error'),
-                _('Please select a policy'))
+            raise orm.except_orm(_('Error'),
+                                 _('Please select a policy'))
 
         report = ''
         for policy in policies:
@@ -137,9 +138,9 @@ class CreditControlRun(orm.Model):
                            ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception as exc:
             # in case of exception openerp will do a rollback for us and free the lock
-            raise except_osv(_('Error'),
-                             _('A credit control run is already running'
-                               ' in background, please try later.'), repr(exc))
+            raise orm.except_orm(_('Error'),
+                                 _('A credit control run is already running'
+                                   ' in background, please try later.'))
 
         self._generate_credit_lines(cr, uid, run_id, context)
         return True

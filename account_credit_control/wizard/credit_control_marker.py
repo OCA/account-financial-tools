@@ -18,12 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class CreditControlMarker(TransientModel):
+class CreditControlMarker(orm.TransientModel):
     """Change the state of lines in mass"""
 
     _name = 'credit.control.marker'
@@ -81,7 +80,7 @@ class CreditControlMarker(TransientModel):
         form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids:
-            raise except_osv(_('Error'), _('No credit control lines selected.'))
+            raise orm.except_orm(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
 
