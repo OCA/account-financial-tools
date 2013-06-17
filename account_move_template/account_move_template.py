@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
-class account_move_template(osv.osv):
+class account_move_template(orm.Model):
 
     _inherit = 'account.document.template'
     _name = 'account.move.template'
@@ -58,10 +58,8 @@ class account_move_template(osv.osv):
         'If the template is "cross-journals", the Journals must be different,' \
         'if the template does not "cross-journals" the Journals must be the same!',
         ['journal_id'])]
-        
-account_move_template()
 
-class account_move_template_line(osv.osv):
+class account_move_template_line(orm.Model):
 
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
@@ -81,5 +79,3 @@ class account_move_template_line(osv.osv):
     _sql_constraints = [
         ('sequence_template_uniq', 'unique (template_id,sequence)', 'The sequence of the line must be unique per template !')
     ]
-
-account_move_template_line()

@@ -5,7 +5,6 @@
         <record id="view_move_template_line_tree" model="ir.ui.view">
             <field name="name">account.move.template.line.tree</field>
             <field name="model">account.move.template.line</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Journal Entry Template Line">
                     <field name="sequence"/>
@@ -25,7 +24,6 @@
         <record id="view_move_template_line_form" model="ir.ui.view">
             <field name="name">account.move.template.line.form</field>
             <field name="model">account.move.template.line</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Journal Entry Template Line">
                     <field colspan="4" name="name" select="1"/>
@@ -46,7 +44,6 @@
         <record id="view_move_template_form" model="ir.ui.view">
             <field name="name">account.move.template.form</field>
             <field name="model">account.move.template</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Journal Entry Template">
                     <field name="name"/>
@@ -61,7 +58,6 @@
         <record id="view_move_template_tree" model="ir.ui.view">
             <field name="name">account.move.template.tree</field>
             <field name="model">account.move.template</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Journal Entry Template">
                     <field name="name"/>
@@ -73,7 +69,6 @@
         <record id="view_move_template_search" model="ir.ui.view">
             <field name="name">account.move.template.search</field>
             <field name="model">account.move.template</field>
-            <field name="type">search</field>
             <field name="arch" type="xml">
                 <search string="Journal Entry Template">
                   <group>
@@ -94,6 +89,6 @@
         </record>
         <menuitem
             action="action_move_template_form" id="menu_action_move_template_form" sequence="5"
-            parent="account.menu_configuration_misc" groups="base.group_extended"/>
+            parent="account.menu_configuration_misc" groups="account.group_account_manager"/>
     </data>
 </openerp>

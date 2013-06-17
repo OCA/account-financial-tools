@@ -32,17 +32,15 @@ The journal entry form allows lo load, through a wizard, the template to use and
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends" : ['account_accountant', 'analytic'],
-    "init_xml" : [],
-    "update_xml" : [
+    'depends' : ['account_accountant', 'analytic'],
+    'data' : [
         'move_template.xml',
         'wizard/select_template.xml',
         'security/ir.model.access.csv',
         ],
-    "demo_xml" : [],
     'test': [
         'test/generate_move.yml',
         ],
-    "active": False,
-    "installable": True
+    'active': False,
+    'installable': True,
 }
