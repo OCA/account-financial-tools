@@ -19,11 +19,11 @@
 #
 ##############################################################################
 
-from openerp.osv import fields,osv
+from openerp.osv import fields,orm
 import time
 from openerp.tools.translate import _
 
-class wizard_select_template(osv.osv_memory):
+class wizard_select_template(orm.TransientModel):
 
     _name = "wizard.select.move.template"
     _columns = {
@@ -55,6 +55,8 @@ class wizard_select_template(osv.osv_memory):
         wizard =  self.browse(cr, uid, ids, context=context)[0]
         template_pool = self.pool.get('account.move.template')
         wizard_line_pool = self.pool.get('wizard.select.move.template.line')
+        model_data_obj = self.pool.get('ir.model.data')
+
         template = template_pool.browse(cr, uid, wizard.template_id.id)
         for line in template.template_line_ids:
             if line.type == 'input':
@@ -69,7 +71,20 @@ class wizard_select_template(osv.osv_memory):
         if not wizard.line_ids:
             return self.load_template(cr, uid, ids)
         wizard.write({'state': 'template_selected'})
-        return True
+
+        view_rec = model_data_obj.get_object_reference(cr, uid, 'account_move_template', 'wizard_select_template')
+        view_id = view_rec and view_rec[1] or False
+
+        return {
+           'view_type': 'form',
+           'view_id' : [view_id],
+           'view_mode': 'form',
+           'res_model': 'wizard.select.move.template',
+           'res_id': wizard.id,
+           'type': 'ir.actions.act_window',
+           'target': 'new',
+           'context': context,
+        }
         
     def load_template(self, cr, uid, ids, context=None):
         template_obj = self.pool.get('account.move.template')
@@ -80,7 +95,7 @@ class wizard_select_template(osv.osv_memory):
         mod_obj = self.pool.get('ir.model.data')
         wizard =  self.browse(cr, uid, ids, context=context)[0]
         if not template_obj.check_zero_lines(cr, uid, wizard):
-            raise osv.except_osv(_('Error !'), _('At least one amount has to be non-zero!'))
+            raise orm.except_orm(_('Error !'), _('At least one amount has to be non-zero!'))
         input_lines = {}
 
         for template_line in wizard.line_ids:
@@ -88,7 +103,7 @@ class wizard_select_template(osv.osv_memory):
 
         period_id = account_period_obj.find(cr, uid, context=context)
         if not period_id:
-            raise osv.except_osv(_('No period found !'), _('Unable to find a valid period !'))
+            raise orm.except_orm(_('No period found !'), _('Unable to find a valid period !'))
         period_id = period_id[0]
 
         computed_lines = template_obj.compute_lines(cr, uid, wizard.template_id.id, input_lines)
@@ -131,7 +146,7 @@ class wizard_select_template(osv.osv_memory):
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise osv.except_osv(_('No Analytic Journal !'),
+                raise orm.except_orm(_('No Analytic Journal !'),
                     _("You have to define an analytic journal on the '%s' journal!")
                     % (line.journal_id.name,))
             analytic_account_id = line.analytic_account_id.id
@@ -161,7 +176,7 @@ class wizard_select_template(osv.osv_memory):
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise osv.except_osv(_('No Analytic Journal !'),
+                raise orm.except_orm(_('No Analytic Journal !'),
                     _("You have to define an analytic journal on the '%s' journal!")
                     % (wizard.template_id.journal_id.name,))
             analytic_account_id = line.analytic_account_id.id
@@ -181,10 +196,8 @@ class wizard_select_template(osv.osv_memory):
             val['debit'] = computed_lines[line.sequence]
         id_line = account_move_line_obj.create(cr, uid, val)
         return id_line
-        
-wizard_select_template()
 
-class wizard_select_template_line(osv.osv_memory):
+class wizard_select_template_line(orm.TransientModel):
     _description = 'Template Lines'
     _name = "wizard.select.move.template.line"
     _columns = {
@@ -198,5 +211,3 @@ class wizard_select_template_line(osv.osv_memory):
             ], 'Move Line Type', required=True,readonly=True),
         'amount': fields.float('Amount', required=True),
     }
-
-wizard_select_template_line()
