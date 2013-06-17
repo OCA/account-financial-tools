@@ -5,7 +5,6 @@
         <record id="wizard_select_template" model="ir.ui.view">
             <field name="name">Select Move Template</field>
             <field name="model">wizard.select.move.template</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Move Template" >
                     <group col="2" width="600" height="500">
@@ -29,7 +28,6 @@
         <record id="wizard_select_template_line" model="ir.ui.view">
             <field name="name">Select Move Template Line</field>
             <field name="model">wizard.select.move.template.line</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Move Template Line">
                     <group col="2">
@@ -46,7 +44,6 @@
         <record id="wizard_select_template_line_tree" model="ir.ui.view">
             <field name="name">Select Move Template Line</field>
             <field name="model">wizard.select.move.template.line</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Move Template Line" editable="bottom">
                     <field name="sequence" invisible="1"/>
