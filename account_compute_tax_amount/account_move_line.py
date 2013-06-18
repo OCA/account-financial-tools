@@ -30,12 +30,17 @@ class account_move_line(orm.TransientModel):
 
     def create(self, cr, uid, vals, context=None, check=True):
         result = super(account_move_line, self).create(cr, uid, vals,
-                                                      context=context, check=check)
+                                                       context=context,
+                                                       check=check)
         if result:
-            move_line = self.read(cr, uid, result, ['credit', 'debit', 'tax_code_id'])
+            move_line = self.read(cr, uid, result,
+                                  ['credit', 'debit', 'tax_code_id'],
+                                  context=context)
             if move_line['tax_code_id']:
                 tax_amount = move_line['credit'] - move_line['debit']
-                self.write(cr, uid, [result], {'tax_amount': tax_amount})
+                self.write(cr, uid, [result],
+                           {'tax_amount': tax_amount},
+                           context=context)
         return result
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
@@ -45,11 +50,16 @@ class account_move_line(orm.TransientModel):
                                                      update_check=update_check)
         if result:
             if ('debit' in vals) or ('credit' in vals):
-                move_lines = self.read(cr, uid, ids, ['credit', 'debit', 'tax_code_id'])
+                move_lines = self.read(cr, uid, ids,
+                                       ['credit', 'debit', 'tax_code_id'],
+                                       context=context)
                 for move_line in move_lines:
                     if move_line['tax_code_id']:
                         tax_amount = move_line['credit'] - move_line['debit']
-                        self.write(cr, uid, [move_line['id']], {'tax_amount': tax_amount})
+                        self.write(cr, uid,
+                                   [move_line['id']],
+                                   {'tax_amount': tax_amount},
+                                   context=context)
 
         return result
 
@@ -63,4 +73,3 @@ class account_move_line(orm.TransientModel):
                                          "If the tax account is base tax code, "
                                          "this field will contain the basic amount (without tax)."),
     }
-
