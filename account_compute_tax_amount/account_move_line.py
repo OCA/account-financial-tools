@@ -25,6 +25,7 @@ from openerp.tools.translate import _
 from openerp.osv import osv, orm, fields
 import openerp.addons.decimal_precision as dp
 
+
 class account_move_line(orm.TransientModel):
     _inherit = "account.move.line"
 
@@ -65,11 +66,12 @@ class account_move_line(orm.TransientModel):
 
     # We set the tax_amount invisible, because we recompute it in every case.
     _columns = {
-        'tax_amount': fields.float('Tax/Base Amount', digits_compute=dp.get_precision('Account'),
+        'tax_amount': fields.float('Tax/Base Amount',
+                                   digits_compute=dp.get_precision('Account'),
                                    invisible=True,
                                    select=True,
-                                   help=("If the Tax account is a tax code account, "
-                                         "this field will contain the taxed amount. "
-                                         "If the tax account is base tax code, "
-                                         "this field will contain the basic amount (without tax)."),
+                                   help="If the Tax account is a tax code account, "
+                                        "this field will contain the taxed amount. "
+                                        "If the tax account is base tax code, "
+                                        "this field will contain the basic amount (without tax)."),
     }
