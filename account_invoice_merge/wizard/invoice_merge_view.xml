@@ -17,8 +17,8 @@ Invoices will only be merged if: &#10;
 * Invoices are have same company, partner, address, currency, journal, salesman, account, type &#10; &#10;
 Lines will only be merged if: &#10;
 * Invoice lines are exactly the same except for the product,quantity and unit &#10;
-" colspan="4"/>                
-                    <newline/>                    
+" colspan="4"/>
+                    <newline/>
                     <separator string="" colspan="4" />
                     <button special="cancel" string="Cancel" icon="gtk-cancel"/>
                     <button name="merge_invoices" string="Merge Invoices" type="object" icon="gtk-convert"/>
@@ -26,16 +26,16 @@ Lines will only be merged if: &#10;
             </field>
         </record>
 
-        <act_window name="Merge Partner Invoice"            
+        <act_window name="Merge Partner Invoice"
             res_model="invoice.merge"
             src_model="account.invoice"
             view_mode="form"
             target="new"
-            multi="True"        
-            key2="client_action_multi"    
-            groups="base.group_extended"
-            id="action_view_invoice_merge"/>    
-                        
+            multi="True"
+            key2="client_action_multi"
+            groups="account.group_account_invoice"
+            id="action_view_invoice_merge"/>
+
     </data>
 </openerp>
 

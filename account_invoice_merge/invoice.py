@@ -19,13 +19,42 @@
 #
 ##############################################################################
 
-from osv import fields, osv
-import netsvc
-from tools.translate import _
+from openerp.osv import orm
+from openerp import netsvc
 from osv.orm import browse_record, browse_null
 
-class account_invoice(osv.osv):
+class account_invoice(orm.Model):
     _inherit = "account.invoice"
+
+    def _get_first_invoice_fields(self, cr, uid, invoice):
+        return {'origin': '%s' % (invoice.origin or '',),
+                'partner_id': invoice.partner_id.id,
+                'commercial_partner_id': invoice.commercial_partner_id.id,
+                'journal_id': invoice.journal_id.id,
+                'user_id': invoice.user_id.id,
+                'currency_id': invoice.currency_id.id,
+                'company_id': invoice.company_id.id,
+                'type': invoice.type,
+                'account_id': invoice.account_id.id,
+                'state': 'draft',
+                'reference': '%s' % (invoice.reference or '',),
+                'name': '%s' % (invoice.name or '',),
+                'fiscal_position': invoice.fiscal_position and invoice.fiscal_position.id or False,
+                'period_id': invoice.period_id and invoice.period_id.id or False,
+                'invoice_line': [],
+                }
+
+    def _get_invoice_key_cols(self, cr, uid, invoice):
+        return ('partner_id', 'commercial_partner_id',
+                'user_id', 'type',
+                'account_id', 'currency_id',
+                'journal_id', 'company_id')
+
+    def _get_invoice_line_key_cols(self, cr, uid, invoice_line):
+        return ('name', 'origin', 'discount',
+                'invoice_line_tax_id', 'price_unit',
+                'product_id', 'account_id', 'quantity',
+                'account_analytic_id')
 
     def do_merge(self, cr, uid, ids, context=None):
         """
@@ -33,7 +62,7 @@ class account_invoice(osv.osv):
         Invoices will only be merged if:
         * Account invoices are in draft
         * Account invoices belong to the same partner
-        * Account invoices are have same company, partner, address, currency, journal, currency, salesman, account, type
+        * Account invoices are have same company, partner, currency, journal, currency, salesman, account, type
         Lines will only be merged if:
         * Invoice lines are exactly the same except for the quantity and unit
 
@@ -59,88 +88,67 @@ class account_invoice(osv.osv):
                 elif isinstance(field_val, browse_null):
                     field_val = False
                 elif isinstance(field_val, list):
-                    field_val = ((6, 0, tuple([v.id for v in field_val])),)
+                    field_val = (6, 0, tuple([v.id for v in field_val]))
                 list_key.append((field, field_val))
             list_key.sort()
             return tuple(list_key)
 
-    # compute what the new orders should contain
-
-        new_orders = {}
-
-        for porder in [order for order in self.browse(cr, uid, ids, context=context) if order.state == 'draft']:
-            order_key = make_key(porder, ('partner_id', 'user_id', 'type', 'account_id', 'currency_id', 'journal_id', 'company_id'))
-            new_order = new_orders.setdefault(order_key, ({}, []))
-            new_order[1].append(porder.id)
-            order_infos = new_order[0]
-            if not order_infos:
-                order_infos.update({
-                    'origin': '%s' % (porder.origin or '',),
-                    'partner_id': porder.partner_id.id,
-                    'address_contact_id': porder.address_contact_id.id,
-                    'address_invoice_id': porder.address_invoice_id.id,
-                    'journal_id': porder.journal_id.id,
-                    'user_id': porder.user_id.id,
-                    'currency_id': porder.currency_id.id,
-                    'company_id': porder.company_id.id,
-                    'type': porder.type,
-                    'account_id': porder.account_id.id,
-                    'state': 'draft',
-                    'invoice_line': {},
-                    'reference': '%s' % (porder.reference or '',),
-                    'name': '%s' % (porder.name or '',),
-                    'fiscal_position': porder.fiscal_position and porder.fiscal_position.id or False,
-                    'period_id': porder.period_id and porder.period_id.id or False,
-                })
+        # compute what the new invoices should contain
+        new_invoices = {}
+        draft_invoices = [invoice
+                          for invoice in self.browse(cr, uid, ids, context=context)
+                          if invoice.state == 'draft']
+        seen_origins = {}
+        seen_client_refs = {}
+        for invoice in draft_invoices:
+            invoice_key = make_key(invoice, self._get_invoice_key_cols(cr, uid, invoice))
+            print "invoice key", invoice_key
+            new_invoice = new_invoices.setdefault(invoice_key, ({}, []))
+            origins = seen_origins.setdefault(invoice_key, set())
+            client_refs = seen_client_refs.setdefault(invoice_key, set())
+            new_invoice[1].append(invoice.id)
+            invoice_infos = new_invoice[0]
+            if not invoice_infos:
+                invoice_infos.update(self._get_first_invoice_fields(cr, uid, invoice))
+                origins.add(invoice.origin)
+                client_refs.add(invoice.reference)
             else:
-                if porder.name:
-                    order_infos['name'] = (order_infos['name'] or '') + (' %s' % (porder.name,))
-                if porder.origin:
-                    order_infos['origin'] = (order_infos['origin'] or '') + ' ' + porder.origin
-                if porder.reference:
-                    order_infos['reference'] = (order_infos['reference'] or '') + (' %s' % (porder.reference,))
+                if invoice.name:
+                    invoice_infos['name'] = (invoice_infos['name'] or '') + (' %s' % (invoice.name,))
+                if invoice.origin and invoice.origin not in origins:
+                    invoice_infos['origin'] = (invoice_infos['origin'] or '') + ' ' + invoice.origin
+                    origins.add(invoice.origin)
+                if invoice.reference and invoice.reference not in client_refs:
+                    invoice_infos['reference'] = (invoice_infos['reference'] or '') + (' %s' % (invoice.reference,))
+                    client_refs.add(invoice.reference)
+            for inv_line in invoice.invoice_line:
+                line_key = make_key(inv_line, self._get_invoice_line_key_cols(cr, uid, inv_line))
+                print "line key", line_key
+                line_key = list(line_key)
+                if inv_line.uos_id:
+                    line_key.append(('uos_id', inv_line.uos_id.id))
+                invoice_infos['invoice_line'].append((0, 0, dict(line_key)))
 
-            for order_line in porder.invoice_line:
-                line_key = make_key(order_line, ('name', 'origin', 'discount', 'invoice_line_tax_id', 'price_unit', 'quantity', 'product_id', 'account_id', 'account_analytic_id'))
-                o_line = order_infos['invoice_line'].setdefault(line_key, {})
-                if o_line:
-                    # merge the line with an existing line
-                    o_line['quantity'] += order_line.quantity
-                else:
-                    # append a new "standalone" line
-                    for field in ('quantity', 'uos_id'):
-                        field_val = getattr(order_line, field)
-                        if isinstance(field_val, browse_record):
-                            field_val = field_val.id
-                        o_line[field] = field_val
-
-        allorders = []
-        orders_info = {}
-        for order_key, (order_data, old_ids) in new_orders.iteritems():
-            # skip merges with only one order
+        allinvoices = []
+        invoices_info = {}
+        for invoice_key, (invoice_data, old_ids) in new_invoices.iteritems():
+            # skip merges with only one invoice
             if len(old_ids) < 2:
-                allorders += (old_ids or [])
+                allinvoices += (old_ids or [])
                 continue
 
-            # cleanup order line data
-            for key, value in order_data['invoice_line'].iteritems():
-                #del value['uom_factor']
-                value.update(dict(key))
-            order_data['invoice_line'] = [(0, 0, value) for value in order_data['invoice_line'].itervalues()]
+            # create the new invoice
+            newinvoice_id = self.create(cr, uid, invoice_data)
+            invoices_info.update({newinvoice_id: old_ids})
+            allinvoices.append(newinvoice_id)
 
-            # create the new order
-            neworder_id = self.create(cr, uid, order_data)
-            orders_info.update({neworder_id: old_ids})
-            allorders.append(neworder_id)
-
-            # make triggers pointing to the old orders point to the new order
+            # make triggers pointing to the old invoices point to the new invoice
             for old_id in old_ids:
-                wf_service.trg_redirect(uid, 'account.invoice', old_id, neworder_id, cr)
+                wf_service.trg_redirect(uid, 'account.invoice', old_id, newinvoice_id, cr)
                 wf_service.trg_validate(uid, 'account.invoice', old_id, 'invoice_cancel', cr)
-        #print orders_info
-        return orders_info
 
-account_invoice()
+        return invoices_info
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
