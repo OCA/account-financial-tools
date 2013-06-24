@@ -60,8 +60,9 @@ class invoice_merge(orm.TransientModel):
         """
         invoice_obj = self.pool.get('account.invoice')
         mod_obj =self.pool.get('ir.model.data')
-        so_obj = self.pool.get('sale.order')
-        po_obj = self.pool.get('purchase.order')
+        so_obj = self.pool.get('sale.order') # None if sale is not installed
+        po_obj = self.pool.get('purchase.order') # None if purchase is not installed
+        
 
         if context is None:
             context = {}
@@ -72,13 +73,15 @@ class invoice_merge(orm.TransientModel):
         allinvoices = invoice_obj.do_merge(cr, uid, context.get('active_ids',[]), context)
 
         for new_invoice in allinvoices:
-            todo_ids = so_obj.search(cr, uid, [('invoice_ids', 'in', allinvoices[new_invoice])], context=context)
-            for org_invoice in so_obj.browse(cr, uid, todo_ids, context=context):
-                so_obj.write(cr, uid, [org_invoice.id], {'invoice_ids': [(4, new_invoice)]}, context)
-            todo_ids = po_obj.search(cr, uid, [('invoice_ids', 'in', allinvoices[new_invoice])], context=context)
-            for org_invoice in po_obj.browse(cr, uid, todo_ids, context=context):
-                po_obj.write(cr, uid, [org_invoice.id], {'invoice_ids': [(4, new_invoice)]}, context)
-        print allinvoices
+            if so_obj is not None:
+                todo_ids = so_obj.search(cr, uid, [('invoice_ids', 'in', allinvoices[new_invoice])], context=context)
+                for org_invoice in so_obj.browse(cr, uid, todo_ids, context=context):
+                    so_obj.write(cr, uid, [org_invoice.id], {'invoice_ids': [(4, new_invoice)]}, context)
+            if po_obj is not None:
+                todo_ids = po_obj.search(cr, uid, [('invoice_ids', 'in', allinvoices[new_invoice])], context=context)
+                for org_invoice in po_obj.browse(cr, uid, todo_ids, context=context):
+                    po_obj.write(cr, uid, [org_invoice.id], {'invoice_ids': [(4, new_invoice)]}, context)
+
         return {
             'domain': "[('id', 'in', [%s])]" % ','.join(str(inv_id) for inv_id in allinvoices),
             'name': _('Partner Invoice'),
