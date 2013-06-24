@@ -34,7 +34,7 @@ No merge is done at invoice line level.
     """,
     'author': 'Elico Corp',
     'website': 'http://www.openerp.net.cn',
-    'depends': ['base', 'account', 'account_report_company'],
+    'depends': ['base', 'account'],
     'data': [
         'wizard/invoice_merge_view.xml',
     ],

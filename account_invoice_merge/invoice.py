@@ -29,7 +29,7 @@ class account_invoice(orm.Model):
     def _get_first_invoice_fields(self, cr, uid, invoice):
         return {'origin': '%s' % (invoice.origin or '',),
                 'partner_id': invoice.partner_id.id,
-                'commercial_partner_id': invoice.commercial_partner_id.id,
+                'address_invoice_id': invoice.address_invoice_id.id,
                 'journal_id': invoice.journal_id.id,
                 'user_id': invoice.user_id.id,
                 'currency_id': invoice.currency_id.id,
@@ -46,7 +46,7 @@ class account_invoice(orm.Model):
                 }
 
     def _get_invoice_key_cols(self, cr, uid, invoice):
-        return ('partner_id', 'commercial_partner_id',
+        return ('partner_id', 'address_invoice_id',
                 'user_id', 'type',
                 'account_id', 'currency_id',
                 'journal_id', 'company_id')
