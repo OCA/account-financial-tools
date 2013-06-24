@@ -40,6 +40,7 @@ class account_invoice(orm.Model):
                 'reference': '%s' % (invoice.reference or '',),
                 'name': '%s' % (invoice.name or '',),
                 'fiscal_position': invoice.fiscal_position and invoice.fiscal_position.id or False,
+                'payment_term': invoice.payment_term and invoice.payment_term.id or False,
                 'period_id': invoice.period_id and invoice.period_id.id or False,
                 'invoice_line': [],
                 }
@@ -88,7 +89,7 @@ class account_invoice(orm.Model):
                 elif isinstance(field_val, browse_null):
                     field_val = False
                 elif isinstance(field_val, list):
-                    field_val = (6, 0, tuple([v.id for v in field_val]))
+                    field_val = ((6, 0, tuple([v.id for v in field_val])),)
                 list_key.append((field, field_val))
             list_key.sort()
             return tuple(list_key)
@@ -102,7 +103,6 @@ class account_invoice(orm.Model):
         seen_client_refs = {}
         for invoice in draft_invoices:
             invoice_key = make_key(invoice, self._get_invoice_key_cols(cr, uid, invoice))
-            print "invoice key", invoice_key
             new_invoice = new_invoices.setdefault(invoice_key, ({}, []))
             origins = seen_origins.setdefault(invoice_key, set())
             client_refs = seen_client_refs.setdefault(invoice_key, set())
@@ -123,7 +123,6 @@ class account_invoice(orm.Model):
                     client_refs.add(invoice.reference)
             for inv_line in invoice.invoice_line:
                 line_key = make_key(inv_line, self._get_invoice_line_key_cols(cr, uid, inv_line))
-                print "line key", line_key
                 line_key = list(line_key)
                 if inv_line.uos_id:
                     line_key.append(('uos_id', inv_line.uos_id.id))
