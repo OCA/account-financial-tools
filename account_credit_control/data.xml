@@ -57,7 +57,7 @@
       <p>Thank you for choosing ${object.company_id.name}! </p>
 
       -- more info here --
-      <p>${object.user_id.name} ${object.user_id.user_email and '<%s>'%(object.user_id.user_email) or ''}<br/>
+      <p>${object.user_id.name} ${object.user_id.email and '<%s>'%(object.user_id.email) or ''}<br/>
       ${object.company_id.name}<br/>
       % if object.company_id.street:
       ${object.company_id.street or ''}<br/>
