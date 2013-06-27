@@ -13,35 +13,75 @@
       <!-- your css here -->
       <style type="text/css">
       body {
-            font-family: helvetica;
-            font-size: 11px;
-            }
+          font-family: helvetica;
+          font-size: 11px;
+      }
+      .custom_text {
+          font-family: helvetica;
+          font-size: 11px;
+          text-align: justify;
+      }
 
-     .custom_text {
-                  font-family: helvetica;
-                  font-size: 11px;
-                  }
+      .basic_table {
+          width: 100%;
+          text-align: center;
+          border: 1px solid lightGrey;
+          border-collapse: collapse;
+      }
+
+      .basic_table th {
+          border: 1px solid lightGrey;
+          font-size: 12px;
+      }
+
+      .basic_table td {
+          border: 1px solid lightGrey;
+          font-size: 12px;
+      }
+
+      td.amount, th.amount {
+          text-align: right;
+          white-space: nowrap;
+      }
+
+      th.date {
+      }
+      td.date {
+          white-space: nowrap;
+      }
       </style>
       %endif
       <div>
 
+      <%
+      def carriage_returns(text):
+          return text.replace('\n', '<br />')
+      %>
+
+      <h1 style="clear: both; padding-top: 20px;">
+          Credit Control: ${object.current_policy_level.name or 'n/a' }
+      </h1>
+
       <p>Dear ${object.partner_id.name  or ''},</p>
 
-      <pre class="custom_text">${object.current_policy_level.custom_text}</pre>
+      <p class="custom_text">${object.current_policy_level.custom_text | carriage_returns }</p>
 
-      <table style="border: 1px solid" width="100%">
+      <br/>
+      <br/>
+
+      <table class="basic_table" style="width: 100%;">
       <caption><b>Summary</b></caption>
       <tr>
-        <th>Date due</th>
-         <th>Amount due</th>
-         <th>Amount balance</th>
-         <th>Invoice number</th>
+        <th class="date">Date due</th>
+        <th class="amount">Amount due</th>
+        <th class="amount">Amount balance</th>
+        <th>Invoice number</th>
       </tr>
 %for line in object.credit_control_line_ids:
       <tr>
-        <td>${line.date_due}</td>
-        <td>${line.amount_due}</td>
-        <td>${line.balance_due}</td>
+        <td class="date">${line.date_due}</td>
+        <td class="amount">${line.amount_due}</td>
+        <td class="amount">${line.balance_due}</td>
       %if line.invoice_id:
           <td>${line.invoice_id.number}</td>
       %else:
@@ -56,7 +96,6 @@
 
       <p>Thank you for choosing ${object.company_id.name}! </p>
 
-      -- more info here --
       <p>${object.user_id.name} ${object.user_id.email and '<%s>'%(object.user_id.email) or ''}<br/>
       ${object.company_id.name}<br/>
       % if object.company_id.street:
@@ -106,10 +145,8 @@
       <field name="channel">email</field>
       <field name="custom_text">Dear Sir or Madam,
 
-Our records indicate that we have not received the payment of the
-above mentioned invoice (copy attached for your convenience).  If it
-has already been sent, please disregard this notice. If not, please
-proceed with payment within 10 days.
+Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
@@ -128,10 +165,8 @@ Best regards,
       <field name="channel">email</field>
       <field name="custom_text">Dear Sir or Madam,
 
-Our records indicate that we have not yet received the payment of the
-above mentioned invoice (copy attached for your convenience) despite
-our first reminder.  If it has already been sent, please disregard
-this notice. If not, please proceed with payment within 5 days.
+Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder. 
+If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
@@ -150,12 +185,9 @@ Best regards,
       <field name="channel">letter</field>
       <field name="custom_text">Dear Sir or Madam,
 
-Our records indicate that we still have not received the payment of
-the above mentioned invoice (copy attached) despite our two reminders.
-If payment have already been sent, please disregard this notice. If
-not, please proceed with payment. If your payment has not been
-received in the next 5 days, your file will be transfered to our debt
-collection agency.
+Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our two reminders.
+If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
 
 Should you need us to arrange a payment plan for you, please advise.
 A customer account statement is enclosed for you convenience.
