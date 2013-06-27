@@ -126,10 +126,18 @@ tr.line {
   <body>
 
     %for comm in objects :
-     <div class="address">
+    <% setLang(comm.partner_id.lang) %>
+    <div class="address">
         <table class="recipient">
+            %if comm.partner_id.parent_id:
+            <tr><td class="name">${comm.partner_id.parent_id.name or ''}</td></tr>
+            <tr><td>${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
+            <% address_lines = comm.partner_id.contact_address.split("\n")[1:] %>
+            %else:
             <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
-            %for part in comm.partner_id.contact_address.split("\n")[1:]:
+            <% address_lines = comm.partner_id.contact_address.split("\n") %>
+            %endif
+            %for part in address_lines:
                 %if part:
                 <tr><td>${part}</td></tr>
                 %endif
