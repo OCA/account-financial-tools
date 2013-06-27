@@ -57,8 +57,10 @@
       def carriage_returns(text):
           return text.replace('\n', '<br />')
       %>
-      <br/>
-      <br/>
+
+      <h1 style="clear: both; padding-top: 20px;">
+          Credit Control: ${object.current_policy_level.name or 'n/a' }
+      </h1>
 
       <p>Dear ${object.partner_id.name  or ''},</p>
 
