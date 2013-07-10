@@ -126,6 +126,8 @@ class account_invoice(orm.Model):
                 line_key = list(line_key)
                 if inv_line.uos_id:
                     line_key.append(('uos_id', inv_line.uos_id.id))
+                if invoice.origin:
+                    line_key.append(('origin',invoice.origin))
                 invoice_infos['invoice_line'].append((0, 0, dict(line_key)))
 
         allinvoices = []
