@@ -123,9 +123,9 @@ class AccountMoveLine(orm.Model):
     def _check_currency_and_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
             # we check zero amount line
-            if not bool(l.debit) + bool(l.credit):
+            if not (l.debit and l.credit):
                 continue
-            if (bool(l.currency_id) != bool(l.amount_currency)):
+            if bool(l.currency_id) != bool(l.amount_currency):
                 return False
         return True
 
