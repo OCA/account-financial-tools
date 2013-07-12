@@ -211,7 +211,8 @@ class CreditControlPolicyLevel(Model):
     _columns = {
         'policy_id': fields.many2one('credit.control.policy',
                                      'Related Policy', required=True),
-        'name': fields.char('Name', size=128, required=True),
+        'name': fields.char('Name', size=128, required=True,
+                            translate=True),
         'level': fields.integer('Level', required=True),
 
         'computation_mode': fields.selection([('net_days', 'Due Date'),
