@@ -48,6 +48,10 @@ class CreditControlLine(orm.Model):
                                 readonly=True,
                                 states={'draft': [('readonly', False)]}),
 
+        'date_entry': fields.related('move_line_id', 'date', type='date',
+                                     string='Entry date',
+                                     store=True, readonly=True),
+
         'date_sent': fields.date('Sent date',
                                  readonly=True,
                                  states={'draft': [('readonly', False)]}),
