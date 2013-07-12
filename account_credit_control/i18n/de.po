@@ -59,7 +59,7 @@ msgstr "Mass credit line emailer"
 #: view:credit.control.line:0 field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr "Account"
+msgstr "Konto"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -566,7 +566,7 @@ msgstr "Letter"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_move_line
 msgid "Journal Items"
-msgstr "Journal Items"
+msgstr "Buchungen"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
@@ -618,7 +618,7 @@ msgstr "Ready To Send"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr "Companies"
+msgstr "Unternehmen"
 
 #. module: account_credit_control
 #: field:credit.control.printer,mark_as_sent:0
@@ -730,7 +730,7 @@ msgstr "Done"
 #: field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr "Invoice"
+msgstr "Rechnung"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0 view:credit.control.marker:0
@@ -930,7 +930,7 @@ msgstr "Sent Email"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr "Outgoing Mails"
+msgstr "Postausgang"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level

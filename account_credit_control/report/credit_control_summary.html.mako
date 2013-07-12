@@ -131,7 +131,7 @@ tr.line {
   <body>
 
     %for comm in objects :
-    <% setLang(comm.partner_id.lang) %>
+    <% setLang(comm.get_contact_address().lang) %>
     <div class="address">
         <table class="recipient">
           <%
@@ -179,8 +179,8 @@ tr.line {
         <th width="200">${_('Invoice number')}</th>
         <th>${_('Invoice date')}</th>
         <th>${_('Date due')}</th>
-        <th>${_('Invoiced Amount')}</th>
-        <th>${_('Open Amount')}</th>
+        <th>${_('Invoiced amount')}</th>
+        <th>${_('Open amount')}</th>
         <th>${_('Currency')}</th>
 
       </tr>
