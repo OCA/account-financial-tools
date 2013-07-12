@@ -4,7 +4,7 @@
     <record id="email_template_credit_control_base" model="email.template">
       <field name="name">Credit Control Email</field>
       <field name="email_from">noreply@localhost</field>
-      <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a' })</field>
+      <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a'})</field>
       <field name="email_to">${object.get_email() or  ''}</field>
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
@@ -31,7 +31,8 @@
 
       .basic_table th {
           border: 1px solid lightGrey;
-          font-size: 12px;
+          font-size: 11px;
+          font-weight: bold;
       }
 
       .basic_table td {
@@ -41,6 +42,7 @@
 
       td.amount, th.amount {
           text-align: right;
+          padding-right: 2px;
           white-space: nowrap;
       }
 
@@ -52,19 +54,12 @@
       </style>
       %endif
       <div>
-
-      <%
-      def carriage_returns(text):
-          return text.replace('\n', '<br />')
-      %>
-
-      <h1 style="clear: both; padding-top: 20px;">
+      <h3 style="clear: both; padding-top: 20px;">
           Credit Control: ${object.current_policy_level.name or 'n/a' }
-      </h1>
+      </h3>
 
-      <p>Dear ${object.partner_id.name  or ''},</p>
-
-      <p class="custom_text">${object.current_policy_level.custom_text | carriage_returns }</p>
+      <p>Dear ${object.get_contact_address().name  or ''},</p>
+      <p class="custom_text" width="95%">${object.current_policy_level.custom_text.replace('\n', '<br />')}</p>
 
       <br/>
       <br/>
@@ -72,21 +67,32 @@
       <table class="basic_table" style="width: 100%;">
       <caption><b>Summary</b></caption>
       <tr>
-        <th class="date">Date due</th>
-        <th class="amount">Amount due</th>
-        <th class="amount">Amount balance</th>
-        <th>Invoice number</th>
+        <th width="200">Invoice number</th>
+        <th>Invoice date</th>
+        <th>Date due</th>
+        <th>Invoiced Amount</th>
+        <th>Open Amount</th>
+        <th>Currency</th>
+
       </tr>
 %for line in object.credit_control_line_ids:
       <tr>
+      %if line.invoice_id:
+          <td width="200">${line.invoice_id.number}
+              %if line.invoice_id.name:
+              <br/>
+              ${line.invoice_id.name}
+              %endif
+          </td>
+      %else:
+          <td width="200">${line.move_line_id.name}</td>
+      %endif
+        <td class="date">${line.date_entry}</td>
         <td class="date">${line.date_due}</td>
         <td class="amount">${line.amount_due}</td>
         <td class="amount">${line.balance_due}</td>
-      %if line.invoice_id:
-          <td>${line.invoice_id.number}</td>
-      %else:
-          <td>n/a</td>
-      %endif
+        <td class="amount">${line.currency_id.name or object.company_id.currency_id.name}</td>
+      </tr>
 %endfor
       </table>
       <br/>
@@ -143,8 +149,7 @@
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
-
+      <field name="custom_text">
 Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
 If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
@@ -163,9 +168,8 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
-
-Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder. 
+      <field name="custom_text">
+Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder.
 If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
@@ -183,8 +187,7 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">letter</field>
-      <field name="custom_text">Dear Sir or Madam,
-
+      <field name="custom_text">
 Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our two reminders.
 If payment have already been sent, please disregard this notice. If not, please proceed with payment.
 If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
@@ -213,12 +216,9 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
-
-Our records indicate that we have not received the payment of the
-above mentioned invoice (copy attached for your convenience).  If it
-has already been sent, please disregard this notice. If not, please
-proceed with payment within 10 days.
+      <field name="custom_text">
+Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
@@ -235,13 +235,11 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="channel">letter</field>
-      <field name="custom_text">Dear Sir or Madam,
+      <field name="custom_text">
+Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our reminder.
 
-Our records indicate that we still have not received the payment of
-the above mentioned invoice (copy attached) despite our reminder.
-If payment have already been sent, please disregard this notice. If
-not, please proceed with payment. If your payment has not been
-received in the next 5 days, your file will be transfered to our debt
+If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+If your payment has not been received in the next 5 days, your file will be transfered to our debt
 collection agency.
 
 Should you need us to arrange a payment plan for you, please advise.

@@ -26,7 +26,7 @@ logger = logging.getLogger('credit.control.line.mailing')
 
 
 class CreditCommunication(TransientModel):
-    """Shell calss used to provide a base model to email template and reporting.
+    """Shell class used to provide a base model to email template and reporting.
        Il use this approche in version 7 a browse record will exist even if not saved"""
     _name = "credit.control.communication"
     _description = "credit control communication"
@@ -51,13 +51,22 @@ class CreditCommunication(TransientModel):
 
     def get_email(self, cr, uid, com_id, context=None):
         """Return a valid email for customer"""
-        assert not (isinstance(com_id, list) and len(com_id) > 1), \
-                "com_id: only one id expected"
+        if isinstance(com_id, list):
+            assert len(com_id) == 1, "get_email only support one id as parameter"
+            com_id = com_id[0]
+        form = self.browse(cr, uid, com_id, context=context)
+        contact = self.get_contact_address(form.partner_id.id, context=context)
+        return contact.email
+
+    def get_contact_address(self, cr, uid, com_id, context=None):
+        pmod = self.pool['res.partner']
         if isinstance(com_id, list):
             com_id = com_id[0]
         form = self.browse(cr, uid, com_id, context=context)
-        email = form.partner_id.email or False
-        return email
+        part = form.partner_id
+        add_ids = part.address_get(adr_pref=['invoice']) or {}
+        add_id = add_ids.get('invoice', add_ids.get('default', False))
+        return pmod.browse(cr, uid, add_id, context)
 
     def _get_credit_lines(self, cr, uid, line_ids, partner_id, level_id, context=None):
         """Return credit lines related to a partner and a policy level"""

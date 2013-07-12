@@ -65,7 +65,7 @@ table {
 .list_table th {
     border-bottom: 2px solid black;
     text-align: left;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     padding-right: 3px
     padding-left: 3px
@@ -105,6 +105,7 @@ table .address_title {
 
 td.amount, th.amount {
     text-align: right;
+    padding-right:2px;
 }
 
 h1 {
@@ -129,13 +130,17 @@ tr.line {
     <% setLang(comm.partner_id.lang) %>
     <div class="address">
         <table class="recipient">
-            %if comm.partner_id.parent_id:
-            <tr><td class="name">${comm.partner_id.parent_id.name or ''}</td></tr>
-            <tr><td>${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
-            <% address_lines = comm.partner_id.contact_address.split("\n")[1:] %>
+          <%
+             add = comm.get_contact_address()
+          %>
+            %if comm.partner_id.id == add.id:
+              <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
+              <% address_lines = comm.partner_id.contact_address.split("\n") %>
+
             %else:
-            <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
-            <% address_lines = comm.partner_id.contact_address.split("\n") %>
+              <tr><td class="name">${comm.partner_id.name or ''}</td></tr>
+              <tr><td>${add.title and add.title.name or ''} ${add.name}</td></tr>
+              <% address_lines = add.contact_address.split("\n")[1:] %>
             %endif
             %for part in address_lines:
                 %if part:
