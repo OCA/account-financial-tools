@@ -16,3 +16,6 @@
 "account_credit_control.ir_model_access_287",1,1,"group_account_credit_control_manager","credit_control_manager_level","account_credit_control.model_credit_control_policy_level",1,1
 "account_credit_control.ir_model_access_288",0,0,"group_account_credit_control_user","credit_control_user_level","account_credit_control.model_credit_control_policy_level",1,0
 "account_credit_control.ir_model_access_289",0,0,"group_account_credit_control_info","credit_control_info_level","account_credit_control.model_credit_control_policy_level",1,0
+"account_credit_control.ir_model_access_290",0,0,"account.group_account_user","credit_control_fin_user_line","account_credit_control.model_credit_control_line",1,0
+"account_credit_control.ir_model_access_291",0,0,"account.group_account_invoice","credit_control_fin_invoice_line","account_credit_control.model_credit_control_line",1,0
+"account_credit_control.ir_model_access_292",1,1,"account.group_account_manager","credit_control_fin_manager_line","account_credit_control.model_credit_control_line",1,1
