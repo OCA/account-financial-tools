@@ -227,6 +227,9 @@ class CreditControlPolicyLevel(Model):
                                      ('email', 'Email')],
                                     'Channel', required=True),
         'custom_text': fields.text('Custom Message', required=True, translate=True),
+        'custom_mail_text': fields.text('Custom Mail Message',
+                                        required=True, translate=True),
+
     }
 
     def _check_level_mode(self, cr, uid, rids, context=None):

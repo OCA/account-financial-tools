@@ -32,7 +32,10 @@
                     </page>
                     <page string="Mail and reporting">
                       <field name="email_template_id"/>
-                      <field name="custom_text"/>
+                      <newline/>
+                      <field name="custom_text" colspan="4"/>
+                      <newline/>
+                      <field name="custom_mail_text" colspan="4"/>
                     </page>
                   </notebook>
                 </form>
