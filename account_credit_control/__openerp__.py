@@ -58,7 +58,8 @@ On each generated line, you have many choices:
  * Change the state (so you can ignore or reopen lines)
  """,
  'website': 'http://www.camptocamp.com',
- 'data': ["data.xml",
+ 'data': ["report/report.xml",
+          "data.xml",
           "line_view.xml",
           "account_view.xml",
           "partner_view.xml",
@@ -68,7 +69,6 @@ On each generated line, you have many choices:
           "wizard/credit_control_emailer_view.xml",
           "wizard/credit_control_marker_view.xml",
           "wizard/credit_control_printer_view.xml",
-          "report/report.xml",
           "security/ir.model.access.csv"],
  'demo_xml': ["credit_control_demo.xml"],
  'tests': [],
