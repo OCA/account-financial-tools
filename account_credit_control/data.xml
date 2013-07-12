@@ -4,120 +4,17 @@
     <record id="email_template_credit_control_base" model="email.template">
       <field name="name">Credit Control Email</field>
       <field name="email_from">noreply@localhost</field>
-      <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a' })</field>
+      <field name="subject">Credit Control: (${object.current_policy_level.name or 'n/a'})</field>
       <field name="email_to">${object.get_email() or  ''}</field>
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
+      <field name="lang">${object.get_contact_address().lang or 'en_US'}</field>
+      <field name="report_template" ref="report_webkit_html"/>
       <field name="body_html"><![CDATA[
-      %if mode and  mode != 'pdf':
-      <!-- your css here -->
-      <style type="text/css">
-      body {
-          font-family: helvetica;
-          font-size: 11px;
-      }
-      .custom_text {
-          font-family: helvetica;
-          font-size: 11px;
-          text-align: justify;
-      }
-
-      .basic_table {
-          width: 100%;
-          text-align: center;
-          border: 1px solid lightGrey;
-          border-collapse: collapse;
-      }
-
-      .basic_table th {
-          border: 1px solid lightGrey;
-          font-size: 12px;
-      }
-
-      .basic_table td {
-          border: 1px solid lightGrey;
-          font-size: 12px;
-      }
-
-      td.amount, th.amount {
-          text-align: right;
-          white-space: nowrap;
-      }
-
-      th.date {
-      }
-      td.date {
-          white-space: nowrap;
-      }
-      </style>
-      %endif
-      <div>
-
-      <%
-      def carriage_returns(text):
-          return text.replace('\n', '<br />')
-      %>
-
-      <h1 style="clear: both; padding-top: 20px;">
-          Credit Control: ${object.current_policy_level.name or 'n/a' }
-      </h1>
-
-      <p>Dear ${object.partner_id.name  or ''},</p>
-
-      <p class="custom_text">${object.current_policy_level.custom_text | carriage_returns }</p>
-
+      Dear ${object.get_contact_address().name  or ''}
       <br/>
       <br/>
-
-      <table class="basic_table" style="width: 100%;">
-      <caption><b>Summary</b></caption>
-      <tr>
-        <th class="date">Date due</th>
-        <th class="amount">Amount due</th>
-        <th class="amount">Amount balance</th>
-        <th>Invoice number</th>
-      </tr>
-%for line in object.credit_control_line_ids:
-      <tr>
-        <td class="date">${line.date_due}</td>
-        <td class="amount">${line.amount_due}</td>
-        <td class="amount">${line.balance_due}</td>
-      %if line.invoice_id:
-          <td>${line.invoice_id.number}</td>
-      %else:
-          <td>n/a</td>
-      %endif
-%endfor
-      </table>
-      <br/>
-      <br/>
-
-      <p>If you have any question, do not hesitate to contact us.</p>
-
-      <p>Thank you for choosing ${object.company_id.name}! </p>
-
-      <p>${object.user_id.name} ${object.user_id.email and '<%s>'%(object.user_id.email) or ''}<br/>
-      ${object.company_id.name}<br/>
-      % if object.company_id.street:
-      ${object.company_id.street or ''}<br/>
-
-      % endif
-
-      % if object.company_id.street2:
-      ${object.company_id.street2}<br/>
-      % endif
-      % if object.company_id.city or object.company_id.zip:
-      ${object.company_id.zip or ''} ${object.company_id.city or ''}<br/>
-      % endif
-      % if object.company_id.country_id:
-      ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
-      % endif
-      % if object.company_id.phone:
-      Phone: ${object.company_id.phone}<br/>
-      % endif
-      % if object.company_id.website:
-      ${object.company_id.website or ''}<br/>
-      % endif
+      ${object.current_policy_level.custom_mail_text}
       ]]></field>
     </record>
 
@@ -143,15 +40,22 @@
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
-
-Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+      <field name="custom_text">Our records indicate that we have not received the payment of the above mentioned invoice.
 If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
-Best regards,
-</field>
+Best regards
+      </field>
+
+      <field name="custom_mail_text">Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+
+If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards
+      </field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -163,15 +67,20 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
-
-Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder. 
-If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
+      <field name="custom_text">Our records indicate that we have not yet received the payment of the above mentioned invoice despite our first reminder.
+        If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
-Best regards,
-</field>
+Best regards
+      </field>
+      <field name="custom_mail_text">Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder.
+        If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
+
+Thank you in advance for your anticipated cooperation in this matter.
+
+Best regards
+      </field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -183,19 +92,30 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_3_time"/>
       <field name="channel">letter</field>
-      <field name="custom_text">Dear Sir or Madam,
+      <field name="custom_text">
+        Our records indicate that we still have not received the payment of the above mentioned invoice despite our two reminders.
+        If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+        If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
 
-Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our two reminders.
-If payment have already been sent, please disregard this notice. If not, please proceed with payment.
-If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
+        Should you need us to arrange a payment plan for you, please advise.
+        A customer account statement is enclosed for you convenience.
 
-Should you need us to arrange a payment plan for you, please advise.
-A customer account statement is enclosed for you convenience.
+        Thank you in advance for your anticipated cooperation in this matter.
 
-Thank you in advance for your anticipated cooperation in this matter.
+        Best regards
+      </field>
 
-Best regards,
-</field>
+<field name="custom_mail_text">Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our two reminders.
+        If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+        If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
+
+        Should you need us to arrange a payment plan for you, please advise.
+        A customer account statement is enclosed for you convenience.
+
+        Thank you in advance for your anticipated cooperation in this matter.
+
+        Best regards
+      </field>
     </record>
 
     <!-- policy 2 -->
@@ -213,17 +133,20 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="channel">email</field>
-      <field name="custom_text">Dear Sir or Madam,
+      <field name="custom_text">Our records indicate that we have not received the payment of the above mentioned invoice.
+        If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
-Our records indicate that we have not received the payment of the
-above mentioned invoice (copy attached for your convenience).  If it
-has already been sent, please disregard this notice. If not, please
-proceed with payment within 10 days.
+        Thank you in advance for your anticipated cooperation in this matter.
+
+        Best regards
+      </field>
+ <field name="custom_mail_text">Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
 
-Best regards,
-</field>
+Best regards
+      </field>
     </record>
 
     <record model="credit.control.policy.level"
@@ -235,41 +158,51 @@ Best regards,
       <field name="email_template_id" ref="email_template_credit_control_base"/>
       <field name="policy_id" ref="credit_control_2_time"/>
       <field name="channel">letter</field>
-      <field name="custom_text">Dear Sir or Madam,
+      <field name="custom_text">Our records indicate that we still have not received the payment of the above mentioned invoice despite our reminder.
 
-Our records indicate that we still have not received the payment of
-the above mentioned invoice (copy attached) despite our reminder.
-If payment have already been sent, please disregard this notice. If
-not, please proceed with payment. If your payment has not been
-received in the next 5 days, your file will be transfered to our debt
-collection agency.
+        If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+        If your payment has not been received in the next 5 days, your file will be transfered to our debt
+        collection agency.
 
-Should you need us to arrange a payment plan for you, please advise.
-A customer account statement is enclosed for you convenience.
+        Should you need us to arrange a payment plan for you, please advise.
+        A customer account statement is enclosed for you convenience.
 
-Thank you in advance for your anticipated cooperation in this matter.
+        Thank you in advance for your anticipated cooperation in this matter.
 
-Best regards,
-</field>
+        Best regards
+      </field>
+      <field name="custom_mail_text">Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our reminder.
+
+If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+If your payment has not been received in the next 5 days, your file will be transfered to our debt
+        collection agency.
+
+        Should you need us to arrange a payment plan for you, please advise.
+        A customer account statement is enclosed for you convenience.
+
+        Thank you in advance for your anticipated cooperation in this matter.
+
+        Best regards
+      </field>
     </record>
 
     <record id="group_account_credit_control_manager" model="res.groups">
-        <field name="name">Credit Control Manager</field>
-        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+      <field name="name">Credit Control Manager</field>
+      <field name="category_id" ref="base.module_category_accounting_and_finance"/>
     </record>
 
     <record id="group_account_credit_control_user" model="res.groups" context="{'noadmin':True}">
-        <field name="name">Credit Control User</field>
-        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+      <field name="name">Credit Control User</field>
+      <field name="category_id" ref="base.module_category_accounting_and_finance"/>
     </record>
 
     <record id="group_account_credit_control_info" model="res.groups" context="{'noadmin':True}">
-        <field name="name">Credit Control Info</field>
-        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+      <field name="name">Credit Control Info</field>
+      <field name="category_id" ref="base.module_category_accounting_and_finance"/>
     </record>
 
     <record id="base.main_company" model="res.company">
-        <field name="credit_policy_id" ref="credit_control_3_time"/>
+      <field name="credit_policy_id" ref="credit_control_3_time"/>
     </record>
 
   </data>
