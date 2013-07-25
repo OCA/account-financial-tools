@@ -95,9 +95,12 @@ table {
 }
 
 .address .recipient {
+    font-size: 13px;
     margin-right: 120px;
+    margin-left: 350px;
     float: right;
 }
+
 
 table .address_title {
     font-weight: bold;
@@ -167,14 +170,13 @@ tr.line {
           ${_('Reminder')}: ${comm.current_policy_level.name or '' }
       </h3>
 
-      <p>${_('Dear')} ${comm.get_contact_address().name  or ''},</p>
+      <p>${_('Dear')},</p>
       <p class="custom_text" width="95%">${comm.current_policy_level.custom_text.replace('\n', '<br />')}</p>
 
       <br/>
       <br/>
-
+      <p><b>${_('Summary')}<br/></b></p>
       <table class="basic_table" style="width: 100%;">
-      <caption><b>${_('Summary')}<br/></b></caption>
       <tr>
         <th width="200">${_('Invoice number')}</th>
         <th>${_('Invoice date')}</th>
