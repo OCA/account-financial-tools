@@ -767,6 +767,13 @@ msgstr ""
 msgid "Credit Control"
 msgstr "Relances Clients"
 
+
+#. module: account_credit_control
+#: view:account.invoice:0
+msgid "Force credit control policy:"
+msgstr "Forcer politique de relance:"
+
+
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
 msgid ""

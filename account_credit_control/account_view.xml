@@ -18,6 +18,7 @@
         <notebook position="inside">
         <page string="Credit Control"
                  groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info">
+           <label string="Force credit control policy:" />
             <field name="credit_policy_id" widget="selection"
                    groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info"/>
             <newline/>
