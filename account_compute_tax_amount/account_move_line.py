@@ -26,7 +26,7 @@ from openerp.osv import osv, orm, fields
 import openerp.addons.decimal_precision as dp
 
 
-class account_move_line(orm.TransientModel):
+class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     # We set the tax_amount invisible, because we recompute it in every case.
