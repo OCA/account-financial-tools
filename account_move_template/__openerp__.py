@@ -22,6 +22,7 @@
     'name': "Account Move Template",
     'version': '0.1',
     'category': 'Generic Modules/Accounting',
+    'summary': "Templates for recurring Journal Entries",
     'description': """
 Templates for Journal Entries
 
