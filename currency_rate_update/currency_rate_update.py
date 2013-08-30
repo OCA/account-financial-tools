@@ -1,40 +1,39 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2009 Camptocamp SA
-# @author Nicolas Bessi 
-# @source JBA and AWST inpiration 
-# @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
-# Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
-#  - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
-#  - rates given by ECB webservice is now correct even when main_cur <> EUR
-#  - rates given by PL_NBP webservice is now correct even when main_cur <> PLN
-#  - if company_currency <> CHF, you can now update CHF via Admin.ch webservice
-#    (same for EUR with ECB webservice and PLN with NBP webservice)
-#  For more details, see Launchpad bug #645263
-#  - mecanism to check if rates given by the webservice are "fresh" enough to be
-#    written in OpenERP ('max_delta_days' parameter for each currency update service)
+#    Copyright (c) 2009 Camptocamp SA
+#    @author Nicolas Bessi 
+#    @source JBA and AWST inpiration 
+#    @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
+#    Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
+#     - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
+#     - rates given by ECB webservice is now correct even when main_cur <> EUR
+#     - rates given by PL_NBP webservice is now correct even when main_cur <> PLN
+#     - if company_currency <> CHF, you can now update CHF via Admin.ch webservice
+#       (same for EUR with ECB webservice and PLN with NBP webservice)
+#     For more details, see Launchpad bug #645263
+#     - mecanism to check if rates given by the webservice are "fresh" enough to be
+#       written in OpenERP ('max_delta_days' parameter for each currency update service)
+#    
+#    WARNING: This program as such is intended to be used by professional
+#    programmers who take the whole responsability of assessing all potential
+#    consequences resulting from its eventual inadequacies and bugs
+#    End users who are looking for a ready-to-use solution with commercial
+#    garantees and support are strongly adviced to contract a Free Software
+#    Service Company
 #
-# WARNING: This program as such is intended to be used by professional
-# programmers who take the whole responsability of assessing all potential
-# consequences resulting from its eventual inadequacies and bugs
-# End users who are looking for a ready-to-use solution with commercial
-# garantees and support are strongly adviced to contract a Free Software
-# Service Company
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
-# This program is Free Software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -44,8 +43,10 @@
 
 from osv import osv, fields
 import time
+from mx import DateTime
 from datetime import datetime, timedelta
 import netsvc
+import string
 from tools.translate import _
 
 class Currency_rate_update_service(osv.osv):
@@ -59,10 +60,9 @@ class Currency_rate_update_service(osv.osv):
                                                     [
                                                     ('Admin_ch_getter','Admin.ch'),
                                                     ('ECB_getter','European Central Bank'),
-                                                    #('NYFB_getter','Federal Reserve Bank of NY'),                                                    
-                                                    #('Google_getter','Google Finance'),
                                                     ('Yahoo_getter','Yahoo Finance '),
                                                     ('PL_NBP_getter','Narodowy Bank Polski'),  # Added for polish rates
+                                                    ('Banxico_getter','Banco de México'),  # Added for mexican rates
                                                     ],
                                                     "Webservice to use",
                                                     required = True
@@ -96,12 +96,11 @@ class Currency_rate_update_service(osv.osv):
                         ]
 
     def _check_max_delta_days(self, cr, uid, ids):
-        for company in self.read(cr, uid, ids, ['max_delta_days']):
-            if company['max_delta_days'] >= 0:
-                continue
-            else:
-                return False
-        return True
+        for i in ids:
+            value_to_check = self.read(cr, uid, i, ['max_delta_days'])['max_delta_days']
+            if value_to_check >= 0:
+                return True
+            else: return False
 
     _constraints = [
         (_check_max_delta_days, "'Max delta days' must be >= 0", ['max_delta_days']),
@@ -130,7 +129,7 @@ class Currency_rate_update(osv.osv):
         
     logger = netsvc.Logger()
     LOG_NAME = 'cron-rates'
-    MOD_NAME = 'c2c_currency_rate_update: '
+    MOD_NAME = 'currency_rate_update: '
     def get_cron_id(self, cr, uid, context):
         """return the updater cron's id. Create one if the cron does not exists """
         
@@ -190,13 +189,13 @@ class Currency_rate_update(osv.osv):
             #we fetch the main currency. The main rate should be set at  1.00
             main_curr = comp.currency_id.name
             for service in comp.services_to_use :
-                print "comp.services_to_use =", comp.services_to_use
+                netsvc.Logger().notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "comp.services_to_use = %s"%(comp.services_to_use))
                 note = service.note or ''
                 try :
                     ## we initalize the class that will handle the request
                     ## and return a dict of rate
                     getter = factory.register(service.service)
-                    print "getter =", getter
+                    netsvc.Logger().notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "getter = %s"%(type(getter)))
                     curr_to_fetch = map(lambda x : x.name, service.currency_to_update)
                     res, log_info = getter.get_updated_currency(curr_to_fetch, main_curr, service.max_delta_days)
                     rate_name = time.strftime('%Y-%m-%d')
@@ -273,6 +272,7 @@ class Currency_getter_factory():
                           'NYFB_getter',
                           'Google_getter',
                           'Yahoo_getter',
+                          'Banxico_getter'
                     ]
         if class_name in allowed:
             class_def = eval(class_name)
@@ -350,12 +350,12 @@ class Curreny_getter_interface(object) :
         """Check date constrains. WARN : rate_date must be of datetime type"""
         days_delta = (datetime.today() - rate_date).days
         if days_delta > max_delta_days:
-            raise Exception('The rate date from ECB (%s) is %d days away from today, which is over the limit (%d days). Rate not updated in OpenERP.'%(rate_date, days_delta, max_delta_days))
+            raise Exception('The rate date from (%s) is %d days away from today, which is over the limit (%d days). Rate not updated in OpenERP.'%(rate_date, days_delta, max_delta_days))
         # We always have a warning when rate_date <> today
         rate_date_str = datetime.strftime(rate_date, '%Y-%m-%d')
         if rate_date_str != datetime.strftime(datetime.today(), '%Y-%m-%d'):
             self.log_info = "WARNING : the rate date from ECB (%s) is not today's date" % rate_date_str
-            netsvc.Logger().notifyChannel("rate_update", netsvc.LOG_WARNING, "the rate date from ECB (%s) is not today's date" % rate_date_str)
+            netsvc.Logger().notifyChannel("currency_rate_update", netsvc.LOG_WARNING, "the rate date from ECB (%s) is not today's date" % rate_date_str)
 
 
 #Yahoo ###################################################################################     
@@ -403,10 +403,10 @@ class Admin_ch_getter(Curreny_getter_interface) :
         # Move to new XML lib cf Launchpad bug #645263
         from lxml import etree
         logger = netsvc.Logger()
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Admin.ch currency rate service : connecting...")
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Admin.ch currency rate service : connecting...")
         rawfile = self.get_url(url)
         dom = etree.fromstring(rawfile)
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Admin.ch sent a valid XML file")
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Admin.ch sent a valid XML file")
         adminch_ns = {'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'}
         rate_date = dom.xpath('/def:wechselkurse/def:datum/text()', namespaces=adminch_ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
@@ -416,7 +416,7 @@ class Admin_ch_getter(Curreny_getter_interface) :
         self.supported_currency_array = [x.upper() for x in self.supported_currency_array]
         self.supported_currency_array.append('CHF')
 
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
         self.validate_cur(main_currency)
         if main_currency != 'CHF':
             main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
@@ -434,7 +434,7 @@ class Admin_ch_getter(Curreny_getter_interface) :
                 else :
                     rate = main_rate * curr_data['rate_ref'] / curr_data['rate_currency']
             self.updated_currency[curr] = rate
-            logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
+            logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
         return self.updated_currency, self.log_info
 
 ## ECB getter ############################################################################
@@ -465,10 +465,10 @@ class ECB_getter(Curreny_getter_interface) :
         # Move to new XML lib cf Launchpad bug #645263
         from lxml import etree
         logger = netsvc.Logger()
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "ECB currency rate service : connecting...")
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "ECB currency rate service : connecting...")
         rawfile = self.get_url(url)
         dom = etree.fromstring(rawfile)
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "ECB sent a valid XML file")
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "ECB sent a valid XML file")
         ecb_ns = {'gesmes': 'http://www.gesmes.org/xml/2002-08-01', 'def': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
         rate_date = dom.xpath('/gesmes:Envelope/def:Cube/def:Cube/@time', namespaces=ecb_ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
@@ -476,7 +476,7 @@ class ECB_getter(Curreny_getter_interface) :
         #we dynamically update supported currencies
         self.supported_currency_array = dom.xpath("/gesmes:Envelope/def:Cube/def:Cube/def:Cube/@currency", namespaces=ecb_ns)
         self.supported_currency_array.append('EUR')
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
         self.validate_cur(main_currency)
         if main_currency != 'EUR':
             main_curr_data = self.rate_retrieve(dom, ecb_ns, main_currency)
@@ -491,7 +491,7 @@ class ECB_getter(Curreny_getter_interface) :
                 else:
                     rate = curr_data['rate_currency'] / main_curr_data['rate_currency']
             self.updated_currency[curr] = rate
-            logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
+            logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
         return self.updated_currency, self.log_info
 
 ##PL NBP ############################################################################
@@ -518,24 +518,18 @@ class PL_NBP_getter(Curreny_getter_interface) :   # class added according to pol
         # Move to new XML lib cf Launchpad bug #645263
         from lxml import etree
         logger = netsvc.Logger()
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "NBP.pl currency rate service : connecting...")
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "NBP.pl currency rate service : connecting...")
         rawfile = self.get_url(url)
         dom = etree.fromstring(rawfile) # If rawfile is not XML, it crashes here
         ns = {} # Cool, there are no namespaces !
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "NBP.pl sent a valid XML file")
-        #node = xpath.Evaluate("/tabela_kursow", dom) # BEGIN Polish - rates table name
-        #if isinstance(node, list) :
-        #    node = node[0]
-        #self.log_info = node.getElementsByTagName('numer_tabeli')[0].childNodes[0].data
-        #self.log_info = self.log_info + " " + node.getElementsByTagName('data_publikacji')[0].childNodes[0].data    # END Polish - rates table name
-
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "NBP.pl sent a valid XML file")
         rate_date = dom.xpath('/tabela_kursow/data_publikacji/text()', namespaces=ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
         self.check_rate_date(rate_date_datetime, max_delta_days)
         #we dynamically update supported currencies
         self.supported_currency_array = dom.xpath('/tabela_kursow/pozycja/kod_waluty/text()', namespaces=ns)
         self.supported_currency_array.append('PLN')
-        logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
         self.validate_cur(main_currency)
         if main_currency != 'PLN':
             main_curr_data = self.rate_retrieve(dom, ns, main_currency)
@@ -553,5 +547,59 @@ class PL_NBP_getter(Curreny_getter_interface) :   # class added according to pol
                 else:
                     rate = main_rate * curr_data['rate_ref'] / curr_data['rate_currency']
             self.updated_currency[curr] = rate
-            logger.notifyChannel("rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
+            logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
+        return self.updated_currency, self.log_info
+
+##Banco de México ############################################################################
+class Banxico_getter(Curreny_getter_interface) :   # class added for Mexico rates
+    """Implementation of Currency_getter_factory interface
+    for Banco de México service"""
+    
+    def rate_retrieve(self):
+        """ Get currency exchange from Banxico.xml and proccess it
+        TODO: Get correct data from xml instead of process string
+        """
+        url='http://www.banxico.org.mx/rsscb/rss?BMXC_canal=pagos&BMXC_idioma=es'
+        
+        from xml.dom.minidom import parse
+        from StringIO import StringIO
+        
+        logger = netsvc.Logger()
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Banxico currency rate service : connecting...")
+        rawfile = self.get_url(url)
+        
+        dom = parse(StringIO(rawfile))
+        logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Banxico sent a valid XML file")
+        
+        value = dom.getElementsByTagName('cb:value')[0]
+        rate = value.firstChild.nodeValue
+        
+        return float(rate)
+        
+        
+    def get_updated_currency(self, currency_array, main_currency, max_delta_days = 1):
+        """implementation of abstract method of Curreny_getter_interface"""
+        logger = netsvc.Logger()
+        #we do not want to update the main currency
+        if main_currency in currency_array :
+            currency_array.remove(main_currency)
+        
+        # Suported currencies
+        suported = ['MXN', 'USD']
+        for curr in currency_array :
+            if curr in suported:
+                # Get currency data
+                main_rate = self.rate_retrieve()
+                if main_currency == 'MXN':
+                    rate = 1 / main_rate
+                else:
+                    rate = main_rate
+            else:
+                """ No other currency supported
+                """
+                continue
+                    
+            self.updated_currency[curr] = rate
+            logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Rate retrieved : " + main_currency + ' = ' + str(rate) + ' ' + curr)
+        
         return self.updated_currency, self.log_info
