@@ -41,3 +41,12 @@ class ResPartner(orm.Model):
                             string='Credit Control Lines',
                             readonly=True)
     }
+
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        else:
+            default = default.copy()
+        default['credit_control_line_ids'] = False
+        return super(ResPartner, self).copy_data(
+            cr, uid, id, default=default, context=context)

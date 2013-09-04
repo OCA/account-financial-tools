@@ -20,6 +20,7 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+
 class AccountAccount(orm.Model):
     """Add a link to a credit control policy on account.account"""
 
@@ -32,6 +33,15 @@ class AccountAccount(orm.Model):
                             string='Credit Lines',
                             readonly=True),
         }
+
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        else:
+            default = default.copy()
+        default['credit_control_line_ids'] = False
+        return super(AccountAccount, self).copy_data(
+            cr, uid, id, default=default, context=context)
 
 
 class AccountInvoice(orm.Model):
@@ -68,6 +78,16 @@ class AccountInvoice(orm.Model):
                 for line in inv.move_id.line_id:
                     line.write({'invoice_id': inv.id}, context=ctxt)
         return res
+
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        else:
+            default = default.copy()
+        default = default.copy()
+        default['credit_control_line_ids'] = False
+        return super(AccountInvoice, self).copy_data(
+            cr, uid, id, default=default, context=context)
 
 
 class AccountMoveLine(orm.Model):
