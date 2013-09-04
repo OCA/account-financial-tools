@@ -64,21 +64,6 @@ class AccountInvoice(orm.Model):
                             readonly=True),
         }
 
-    def action_move_create(self, cr, uid, ids, context=None):
-        """ Write the id of the invoice in the generated moves. """
-        if context is None:
-            context = {}
-        # add from_parent_object to the conxtext to let the line.write
-        # call pass through account_constraints
-        ctxt = context.copy()
-        ctxt['from_parent_object'] = True
-        res = super(AccountInvoice, self).action_move_create(cr, uid, ids, context=ctxt)
-        for inv in self.browse(cr, uid, ids, context=ctxt):
-            if inv.move_id:
-                for line in inv.move_id.line_id:
-                    line.write({'invoice_id': inv.id}, context=ctxt)
-        return res
-
     def copy_data(self, cr, uid, id, default=None, context=None):
         if default is None:
             default = {}
@@ -88,10 +73,3 @@ class AccountInvoice(orm.Model):
         default['credit_control_line_ids'] = False
         return super(AccountInvoice, self).copy_data(
             cr, uid, id, default=default, context=context)
-
-
-class AccountMoveLine(orm.Model):
-
-    _inherit = "account.move.line"
-
-    _columns = {'invoice_id': fields.many2one('account.invoice', 'Invoice')}
