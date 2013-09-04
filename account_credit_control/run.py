@@ -61,6 +61,18 @@ class CreditControlRun(orm.Model):
                              readonly=True),
         }
 
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        if default is None:
+            default = {}
+        else:
+            default = default.copy()
+        default.update({
+            'report': False,
+            'manual_ids': False,
+        })
+        return super(CreditControlRun, self).copy_data(
+            cr, uid, id, default=default, context=context)
+
     def _get_policies(self, cr, uid, context=None):
         return self.pool['credit.control.policy'].search(cr, uid, [], context=context)
 
