@@ -363,6 +363,14 @@ msgstr ""
 msgid "Lines marker"
 msgstr "Lines marker"
 
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/invoice.py:35
+#, python-format
+msgid "You cannot cancel this invoice ! A payment reminder has already been sent to the customer.You must create a credit note and raise a new invoice."
+msgstr "You cannot cancel this invoice ! A payment reminder has already been sent to the customer.You must create a credit note and raise a new invoice."
+
+
 #. module: account_credit_control
 #: field:credit.control.printer,state:0
 msgid "state"

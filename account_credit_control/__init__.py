@@ -27,3 +27,4 @@ from . import policy
 from . import company
 from . import wizard
 from . import report
+from . import invoice
