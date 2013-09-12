@@ -346,6 +346,13 @@ msgid "Lines marker"
 msgstr "Traiter les lignes"
 
 #. module: account_credit_control
+#: code:addons/account_credit_control/invoice.py:35
+#, python-format
+msgid "You cannot cancel this invoice ! A payment reminder has already been sent to the customer.You must create a credit note and raise a new invoice."
+msgstr "Vous ne pouvez pas annuler cette facture ! Une lettre de relance a été envoyé au client. Vous devez créer un avoir et établir une nouvelle facture."
+
+
+#. module: account_credit_control
 #: field:credit.control.printer,state:0
 msgid "state"
 msgstr "Statut"
