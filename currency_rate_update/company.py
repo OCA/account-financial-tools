@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #  company.py
 #  c2c_currency_update
-# @author Nicolas Bessi 
+# @author Nicolas Bessi
 #  Copyright (c) 2009 CamptoCamp. All rights reserved.
 #
 #    WARNING: This program as such is intended to be used by professional
@@ -28,21 +28,21 @@
 
 import netsvc
 from osv import fields, osv
-class ResCompany(osv.osv):
+class res_company(osv.osv):
     """Override company to add currency update"""
-    
+
     def _multi_curr_enable(self, cr, uid, ids, field_name, arg, context={}):
         "check if multi company currency is enabled"
         result = {}
-        if self.pool.get('ir.model.fields').search(cr, uid, [('name', '=', 'company_id'), ('model', '=', 'res.currency')])==[]:
+        if self.pool.get('ir.model.fields').search(cr, uid, [('name', '=', 'company_id'), ('model', '=', 'res.currency')]) == []:
             enable = 0
         else:
             enable = 1
         for id in ids:
             result[id] = enable
         return result
-        
-        
+
+
     def button_refresh_currency(self, cr, uid, ids, context=None):
         """Refrech  the currency !!for all the company
         now"""
@@ -52,8 +52,8 @@ class ResCompany(osv.osv):
         except Exception, e:
             return False
         return True
-        
-        
+
+
     def on_change_auto_currency_up(self, cr, uid, id, value):
         """handle the activation of the currecny update on compagnies.
         There are two ways of implementing multi_company currency, 
@@ -63,19 +63,19 @@ class ResCompany(osv.osv):
         object running. 
         If yours currency are not share you will be able to activate the
         auto update on each separated company"""
-        
+
         if len(id) :
             id = id[0]
         else :
             return {}
         enable = self.browse(cr, uid, id).multi_company_currency_enable
-        compagnies =  self.search(cr, uid, [])
+        compagnies = self.search(cr, uid, [])
         activate_cron = 'f'
         if not value :
             # this statement is here beacaus we do no want to save in case of error
-            self.write(cr, uid, id,{'auto_currency_up':value})
+            self.write(cr, uid, id, {'auto_currency_up':value})
             for comp in compagnies :
-                if self.browse(cr, uid, comp).auto_currency_up: 
+                if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
                     break
             self.pool.get('currency.rate.update').save_cron(
@@ -88,21 +88,21 @@ class ResCompany(osv.osv):
             for comp in compagnies :
                 if comp != id and not enable:
                     if self.browse(cr, uid, comp).multi_company_currency_enable:
-                        #we ensure taht we did not have write a true value
-                        self.write(cr, uid, id,{'auto_currency_up':False})
+                        # we ensure taht we did not have write a true value
+                        self.write(cr, uid, id, {'auto_currency_up':False})
                         return {
                                 'value':{
                                             'auto_currency_up':False
                                         },
-                                        
+
                                 'warning':{
                                             'title':"Warning",
-                                            'message': 'Yon can not activate auto currency '+\
-                                            'update on more thant one company with this '+
+                                            'message': 'Yon can not activate auto currency ' + \
+                                            'update on more thant one company with this ' +
                                             'multi company configuration'
                                             }
                                 }
-            self.write(cr, uid, id,{'auto_currency_up':value})
+            self.write(cr, uid, id, {'auto_currency_up':value})
             for comp in compagnies :
                 if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
@@ -113,50 +113,50 @@ class ResCompany(osv.osv):
                                                         )
                 break
             return {}
-                    
-            
+
+
     def on_change_intervall(self, cr, uid, id, interval) :
-        ###Function that will update the cron
-        ###freqeuence
+        # ##Function that will update the cron
+        # ##freqeuence
         self.pool.get('currency.rate.update').save_cron(
-                                                            cr, 
-                                                            uid, 
+                                                            cr,
+                                                            uid,
                                                             {'interval_type':interval}
                                                         )
-        compagnies =  self.search(cr, uid, [])
+        compagnies = self.search(cr, uid, [])
         for comp in compagnies :
-            self.write(cr, uid, comp,{'interval_type':interval})
+            self.write(cr, uid, comp, {'interval_type':interval})
         return {}
-        
+
     _inherit = "res.company"
     _columns = {
-        ### activate the currency update
+        # ## activate the currency update
         'auto_currency_up': fields.boolean('Automatical update of the currency this company'),
         'services_to_use' : fields.one2many(
-                                            'currency.rate.update.service', 
+                                            'currency.rate.update.service',
                                             'company_id',
-                                            'Currency update services' 
+                                            'Currency update services'
                                             ),
-        ###predifine cron frequence
+        # ##predifine cron frequence
         'interval_type': fields.selection(
                                                 [
-                                                    ('days','Day(s)'), 
-                                                    ('weeks', 'Week(s)'), 
+                                                    ('days', 'Day(s)'),
+                                                    ('weeks', 'Week(s)'),
                                                     ('months', 'Month(s)')
                                                 ],
                                                 'Currency update frequence',
                                                 help="""changing this value will
                                                  also affect other compagnies"""
                                             ),
-        ###function field that allows to know the
-        ###mutli company currency implementation
+        # ##function field that allows to know the
+        # ##mutli company currency implementation
         'multi_company_currency_enable' : fields.function(
                                             _multi_curr_enable,
                                             method=True,
                                             type='boolean',
                                             string="Multi company currency",
-                                            help='if this case is not check you can'+\
+                                            help='if this case is not check you can' + \
                                             ' not set currency is active on two company'
                                         ),
     }
-ResCompany()
+res_company()
