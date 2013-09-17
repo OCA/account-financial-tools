@@ -70,7 +70,7 @@ class move_line_importer(orm.Model):
     def _parse_csv(self, cr, uid, imp_id):
         with tempfile.TemporaryFile() as src:
             imp = self.read(cr, uid, imp_id, ['file', 'delimiter'])
-            content = imp['file'],
+            content = imp['file']
             delimiter = imp['delimiter']
             src.write(content)
             with tempfile.TemporaryFile() as decoded:
@@ -79,7 +79,7 @@ class move_line_importer(orm.Model):
                 decoded.seek(0)
                 return self._prepare_csv_data(decoded, delimiter)
 
-    def _prepare_data(self, csv_file, delimiter=","):
+    def _prepare_csv_data(self, csv_file, delimiter=","):
         data = csv.reader(csv_file, delimiter=str(delimiter))
         head = data.next()
         # generator does not work in load
@@ -89,5 +89,4 @@ class move_line_importer(orm.Model):
     def import_file(self, cr, uid, imp_id, context=None):
         if isinstance(imp_id, list):
             imp_id = imp_id[0]
-        import pdb; pdb.set_trace()
         head, data = self._parse_csv(cr, uid, imp_id)
