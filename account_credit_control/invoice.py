@@ -28,28 +28,28 @@ class AccountInvoice(orm.Model):
 
     def action_cancel(self, cr, uid, ids, context=None):
         # We will search if this invoice is linked with credit
-        credit_control_line_obj = self.pool.get('credit.control.line')
+        cc_line_obj = self.pool.get('credit.control.line')
         for invoice_id in ids:
-            credit_control_line_ids_nondraft = credit_control_line_obj.search(cr,
-                                                                              uid,
-                                                                              [('invoice_id', '=', invoice_id),
-                                                                               ('state', '<>', 'draft')],context=context)
-            if credit_control_line_ids_nondraft:
+            cc_nondraft_line_ids = cc_line_obj.search(
+                cr, uid,
+                [('invoice_id', '=', invoice_id),
+                 ('state', '<>', 'draft')],
+                context=context)
+            if cc_nondraft_line_ids:
                 raise orm.except_orm(_('Error!'),
-                                     _('You cannot cancel this invoice ! '
+                                     _('You cannot cancel this invoice.\n'
                                        'A payment reminder has already been '
-                                       'sent to the customer.'
-                                       'You must create a credit note and raise a new invoice.'))
-            credit_control_line_ids_draft = credit_control_line_obj.search(cr,
-                                                                           uid,
-                                                                           [('invoice_id', '=', invoice_id),
-                                                                            ('state', '=', 'draft')],context=context)
-            if credit_control_line_ids_draft:
-                credit_control_line_obj.unlink(cr,
-                                               uid,
-                                               credit_control_line_ids_draft,
-                                               context=context)
-        return super(AccountInvoice, self).action_cancel(cr,
-                                                         uid,
-                                                         ids,
+                                       'sent to the customer.\n'
+                                       'You must create a credit note and '
+                                       'raise a new invoice.'))
+            cc_draft_line_ids = cc_line_obj.search(
+                cr, uid,
+                [('invoice_id', '=', invoice_id),
+                 ('state', '=', 'draft')],
+                context=context)
+            if cc_draft_line_ids:
+                cc_line_obj.unlink(cr, uid,
+                                   cc_draft_line_ids,
+                                   context=context)
+        return super(AccountInvoice, self).action_cancel(cr, uid, ids,
                                                          context=context)
