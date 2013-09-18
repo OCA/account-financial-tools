@@ -41,7 +41,7 @@ class AccountInvoice(orm.Model):
                                        'A payment reminder has already been '
                                        'sent to the customer.\n'
                                        'You must create a credit note and '
-                                       'raise a new invoice.'))
+                                       'issue a new invoice.'))
             cc_draft_line_ids = cc_line_obj.search(
                 cr, uid,
                 [('invoice_id', '=', invoice_id),
