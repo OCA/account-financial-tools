@@ -47,9 +47,8 @@ class AccountInvoice(orm.Model):
                 [('invoice_id', '=', invoice_id),
                  ('state', '=', 'draft')],
                 context=context)
-            if cc_draft_line_ids:
-                cc_line_obj.unlink(cr, uid,
-                                   cc_draft_line_ids,
-                                   context=context)
+            cc_line_obj.unlink(cr, uid,
+                               cc_draft_line_ids,
+                               context=context)
         return super(AccountInvoice, self).action_cancel(cr, uid, ids,
                                                          context=context)
