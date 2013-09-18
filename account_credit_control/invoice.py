@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi, Guewen Baconnier, Vincent Renaville
-#    Copyright 2012 Camptocamp SA
+#    Author: Vincent Renaville
+#    Copyright 2013 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, osv, fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
@@ -30,12 +30,26 @@ class AccountInvoice(orm.Model):
         # We will search if this invoice is linked with credit
         credit_control_line_obj = self.pool.get('credit.control.line')
         for invoice_id in ids:
-            credit_control_line_ids_nondraft = credit_control_line_obj.search(cr, uid, [('invoice_id','=',invoice_id),('state','<>','draft')])
+            credit_control_line_ids_nondraft = credit_control_line_obj.search(cr,
+                                                                              uid,
+                                                                              [('invoice_id', '=', invoice_id),
+                                                                               ('state', '<>', 'draft')])
             if credit_control_line_ids_nondraft:
-                raise osv.except_osv(_('Error!'), _('You cannot cancel this invoice ! '
-                                                    'A payment reminder has already been sent to the customer.'
-                                                    'You must create a credit note and raise a new invoice.'))
-            credit_control_line_ids_draft = credit_control_line_obj.search(cr, uid, [('invoice_id','=',invoice_id),('state','=','draft')])
+                raise orm.except_orm(_('Error!'),
+                                     _('You cannot cancel this invoice ! '
+                                       'A payment reminder has already been '
+                                       'sent to the customer.'
+                                       'You must create a credit note and raise a new invoice.'))
+            credit_control_line_ids_draft = credit_control_line_obj.search(cr,
+                                                                           uid,
+                                                                           [('invoice_id', '=', invoice_id),
+                                                                            ('state', '=', 'draft')])
             if credit_control_line_ids_draft:
-                credit_control_line_obj.unlink(cr,uid,credit_control_line_ids_draft,context=context)
-        return super(AccountInvoice,self).action_cancel(cr, uid, ids, context=context)
+                credit_control_line_obj.unlink(cr,
+                                               uid,
+                                               credit_control_line_ids_draft,
+                                               context=context)
+        return super(AccountInvoice, self).action_cancel(cr,
+                                                         uid,
+                                                         ids,
+                                                         context=context)
