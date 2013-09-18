@@ -27,7 +27,7 @@ import openerp.pooler as pooler
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
-USE_THREAD = False
+USE_THREAD = True
 
 
 class move_line_importer(orm.Model):
