@@ -33,7 +33,7 @@ class AccountInvoice(orm.Model):
             credit_control_line_ids_nondraft = credit_control_line_obj.search(cr,
                                                                               uid,
                                                                               [('invoice_id', '=', invoice_id),
-                                                                               ('state', '<>', 'draft')])
+                                                                               ('state', '<>', 'draft')],context=context)
             if credit_control_line_ids_nondraft:
                 raise orm.except_orm(_('Error!'),
                                      _('You cannot cancel this invoice ! '
@@ -43,7 +43,7 @@ class AccountInvoice(orm.Model):
             credit_control_line_ids_draft = credit_control_line_obj.search(cr,
                                                                            uid,
                                                                            [('invoice_id', '=', invoice_id),
-                                                                            ('state', '=', 'draft')])
+                                                                            ('state', '=', 'draft')],context=context)
             if credit_control_line_ids_draft:
                 credit_control_line_obj.unlink(cr,
                                                uid,
