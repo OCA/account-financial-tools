@@ -21,14 +21,53 @@
 from openerp.osv import orm
 
 
+def _format_inserts_values(vals):
+    cols = vals.keys()
+    if 'line_id' in cols:
+        cols.remove('line_id')
+    return (', '.join(cols), ', '.join(['%%(%s)s' % i for i in cols]))
+
+
 class account_move(orm.Model):
     """redefine account move create to bypass orm
     if async_bypass_create is True in context"""
 
     _inherit = "account.move"
 
+    def _prepare_line(self, cr, uid, move_id, line, vals, context=None):
+        if isinstance(line, tuple):
+            line = line[2]
+        line['journal_id'] = vals.get('journal_id')
+        line['date'] = vals.get('date')
+        line['period_id'] = vals.get('period_id')
+        line['company_id'] = vals.get('company_id')
+        line['state'] = vals['state']
+        line['move_id'] = move_id
+        if line['debit'] and line['credit']:
+            raise ValueError('debit and credit set on same line')
+        if not line.get('analytic_account_id'):
+            line['analytic_account_id'] = None
+        for key in line:
+            if line[key] is False:
+                line[key] = None
+        return line
+
     def _bypass_create(self, cr, uid, vals, context=None):
-        pass
+        mvl_obj = self.pool['account.move.line']
+        vals['company_id'] = context.get('company_id', False)
+        vals['state'] = 'draft'
+        if not vals.get('name'):
+            vals['name'] = "/"
+        sql = u"Insert INTO account_move (%s) VALUES (%s) RETURNING id"
+        sql = sql % _format_inserts_values(vals)
+        cr.execute(sql, vals)
+        created_id = cr.fetchone()[0]
+        if vals.get('line_id'):
+            for line in vals['line_id']:
+                l_vals = self._prepare_line(cr, uid, created_id,
+                                            line, vals, context=context)
+                mvl_obj.create(cr, uid, l_vals, context=context)
+        return created_id
 
     def create(self, cr, uid, vals, context=None):
         if context is None:
@@ -52,4 +91,7 @@ class account_move_line(orm.Model):
         return super(account_move_line, self).create(cr, uid, vals, context=context)
 
     def _bypass_create(self, cr, uid, vals, context=None):
-        pass
+        sql = u"Insert INTO account_move_line (%s) VALUES (%s) RETURNING id"
+        sql = sql % _format_inserts_values(vals)
+        cr.execute(sql, vals)
+        return cr.fetchone()[0]
