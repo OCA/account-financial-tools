@@ -175,6 +175,15 @@ class move_line_importer(orm.Model):
                 raise orm.except_orm(_('An import of this file is already running'),
                                      _('Please try latter'))
 
+    def _check_permissions(self, cr, uid, context=None):
+        """Ensure that user is allowed to create move / move line"""
+        move_obj = self.pool['account.move']
+        move_line_obj = self.pool['account.move.line']
+        move_obj.check_access_rule(cr, uid, [], 'create')
+        move_obj.check_access_rights(cr, uid, 'create', raise_exception=True)
+        move_line_obj.check_access_rule(cr, uid, [], 'create')
+        move_line_obj.check_access_rights(cr, uid, 'create', raise_exception=True)
+
     def import_file(self, cr, uid, imp_id, context=None):
         if isinstance(imp_id, list):
             imp_id = imp_id[0]
@@ -186,6 +195,9 @@ class move_line_importer(orm.Model):
         bypass_orm = current['bypass_orm']
         if bypass_orm:
             # Tells create funtion to bypass orm
+            # As we bypass orm we ensure that
+            # user is allowed to creat move / move line
+            self._check_permissions(cr, uid, context=context)
             context['async_bypass_create'] = True
         head, data = self._parse_csv(cr, uid, imp_id)
         self.write(cr, uid, [imp_id], {'state': 'running'})
