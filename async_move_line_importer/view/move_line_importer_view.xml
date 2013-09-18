@@ -8,6 +8,7 @@
         <form version="7.0" string="Imported file">
           <header>
             <button name="import_file"
+                    type="object"
                     states="draft,error"
                     string="Import File"
                     class="oe_highlight"/>
@@ -32,6 +33,9 @@
             </div>
           </group>
           <group>
+            <field name="bypass_orm"/>
+          </group>
+          <group>
             <field name="company_id" groups="base.group_multi_company"/>
           </group>
           <notebook>
@@ -41,6 +45,10 @@
                      colspan="4"/>
             </page>
           </notebook>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
         </form>
       </field>
     </record>
