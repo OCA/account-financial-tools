@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="mvl_imported" model="mail.message.subtype">
+            <field name="name">Import successfully finished</field>
+            <field name="res_model">move.line.importer</field>
+            <field name="default" eval="True"/>
+            <field name="description">Import successfully finished</field>
+        </record>
+        <record id="mvl_error" model="mail.message.subtype">
+            <field name="name">Import failed</field>
+            <field name="res_model">move.line.importer</field>
+            <field name="default" eval="True"/>
+            <field name="description">Import failed</field>
+        </record>
+  </data>
+</openerp>
