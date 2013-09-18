@@ -30,21 +30,21 @@ class CreditControlPolicy(Model):
     _columns = {'name': fields.char('Name', required=True, size=128),
 
                 'level_ids': fields.one2many('credit.control.policy.level',
-                                                     'policy_id',
-                                                     'Policy Levels'),
+                                             'policy_id',
+                                             'Policy Levels'),
 
                 'do_nothing': fields.boolean('Do nothing',
-                                              help=('For policies which should not '
-                                                    'generate lines or are obsolete')),
+                                             help='For policies which should not '
+                                                  'generate lines or are obsolete'),
 
                 'company_id': fields.many2one('res.company', 'Company'),
 
-                'account_ids': fields.many2many(
-                    'account.account',
-                    string='Accounts',
-                    required=True,
-                    domain="[('reconcile', '=', True)]",
-                    help='This policy will be active only for the selected accounts'),
+                'account_ids': fields.many2many('account.account',
+                                                string='Accounts',
+                                                required=True,
+                                                domain="[('reconcile', '=', True)]",
+                                                help="This policy will be active only"
+                                                     " for the selected accounts"),
                 }
 
     def _move_lines_domain(self, cr, uid, policy, controlling_date, context=None):
@@ -71,13 +71,12 @@ class CreditControlPolicy(Model):
         if user.company_id.credit_policy_id.id != policy.id:
             return set()
 
-        return set(move_l_obj.search(
-                cr, uid,
-                self._move_lines_domain(cr, uid, policy, controlling_date, context=context),
-                context=context))
+        domain_line = self._move_lines_domain(cr, uid, policy,
+                                              controlling_date, context=context)
+        return set(move_l_obj.search(cr, uid, domain_line, context=context))
 
     def _move_lines_subset(self, cr, uid, policy, controlling_date,
-                          model, move_relation_field, context=None):
+                           model, move_relation_field, context=None):
         """ Get the move lines related to one model for a policy.
 
         Do not use direct SQL in order to respect security rules.
@@ -139,9 +138,8 @@ class CreditControlPolicy(Model):
         :return: set of ids to add in the process, set of ids to remove from
             the process
         """
-        return self._move_lines_subset(
-                cr, uid, policy, controlling_date,
-                'res.partner', 'partner_id', context=context)
+        return self._move_lines_subset(cr, uid, policy, controlling_date,
+                                       'res.partner', 'partner_id', context=context)
 
     def _get_invoice_related_lines(self, cr, uid, policy, controlling_date, context=None):
         """ Get the move lines for a policy related to an invoice.
@@ -154,9 +152,8 @@ class CreditControlPolicy(Model):
         :return: set of ids to add in the process, set of ids to remove from
             the process
         """
-        return self._move_lines_subset(
-                cr, uid, policy, controlling_date,
-                'account.invoice', 'invoice', context=context)
+        return self._move_lines_subset(cr, uid, policy, controlling_date,
+                                       'account.invoice', 'invoice', context=context)
 
     def _get_move_lines_to_process(self, cr, uid, policy_id, controlling_date, context=None):
         """Build a list of move lines ids to include in a run for a policy at a given date.
@@ -173,13 +170,14 @@ class CreditControlPolicy(Model):
         policy = self.browse(cr, uid, policy_id, context=context)
         # there is a priority between the lines, depicted by the calls below
         # warning, side effect method called on lines
-        lines = self._due_move_lines(
-                    cr, uid, policy, controlling_date, context=context)
-        add_ids, remove_ids = self._get_partner_related_lines(
-                    cr, uid, policy, controlling_date, context=context)
+        lines = self._due_move_lines(cr, uid, policy, controlling_date, context=context)
+        add_ids, remove_ids = self._get_partner_related_lines(cr, uid, policy,
+                                                              controlling_date,
+                                                              context=context)
         lines = lines.union(add_ids).difference(remove_ids)
-        add_ids, remove_ids = self._get_invoice_related_lines(
-                    cr, uid, policy, controlling_date, context=context)
+        add_ids, remove_ids = self._get_invoice_related_lines(cr, uid, policy,
+                                                              controlling_date,
+                                                              context=context)
         lines = lines.union(add_ids).difference(remove_ids)
         return lines
 
@@ -195,8 +193,8 @@ class CreditControlPolicy(Model):
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
         cr.execute("SELECT move_line_id FROM credit_control_line"
-                       " WHERE policy_id != %s and move_line_id in %s",
-                       (policy_id, tuple(lines)))
+                   "    WHERE policy_id != %s and move_line_id in %s",
+                   (policy_id, tuple(lines)))
         res = cr.fetchall()
         if res:
             different_lines.update([x[0] for x in res])
@@ -213,7 +211,8 @@ class CreditControlPolicyLevel(Model):
     _columns = {
         'policy_id': fields.many2one('credit.control.policy',
                                      'Related Policy', required=True),
-        'name': fields.char('Name', size=128, required=True),
+        'name': fields.char('Name', size=128, required=True,
+                            translate=True),
         'level': fields.integer('Level', required=True),
 
         'computation_mode': fields.selection([('net_days', 'Due Date'),
@@ -224,11 +223,14 @@ class CreditControlPolicyLevel(Model):
 
         'delay_days': fields.integer('Delay (in days)', required='True'),
         'email_template_id': fields.many2one('email.template', 'Email Template',
-                                            required=True),
+                                             required=True),
         'channel': fields.selection([('letter', 'Letter'),
-                                   ('email', 'Email')],
-                                  'Channel', required=True),
+                                     ('email', 'Email')],
+                                    'Channel', required=True),
         'custom_text': fields.text('Custom Message', required=True, translate=True),
+        'custom_mail_text': fields.text('Custom Mail Message',
+                                        required=True, translate=True),
+
     }
 
     def _check_level_mode(self, cr, uid, rids, context=None):
@@ -314,9 +316,11 @@ class CreditControlPolicyLevel(Model):
                # lines from a previous level with a draft or ignored state
                # have to be generated again for the previous level
                "                 AND state not in ('draft', 'ignored'))")
-        sql += " AND" + self._get_sql_date_boundary_for_computation_mode(
-                cr, uid, level, controlling_date, context)
-        data_dict = {'controlling_date': controlling_date, 'line_ids': tuple(lines),
+        sql += " AND"
+        sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
+                                                                controlling_date, context)
+        data_dict = {'controlling_date': controlling_date,
+                     'line_ids': tuple(lines),
                      'delay': level.delay_days}
 
         cr.execute(sql, data_dict)
@@ -343,14 +347,15 @@ class CreditControlPolicyLevel(Model):
                # have to be generated again for the previous level
                " AND cr_line.state not in ('draft', 'ignored')\n"
                " AND mv_line.id in %(line_ids)s\n")
-        sql += " AND " + self._get_sql_date_boundary_for_computation_mode(
-                cr, uid, level, controlling_date, context)
-        previous_level_id = self._previous_level(
-                cr, uid, level, context=context)
-        previous_level = self.browse(
-                cr, uid, previous_level_id, context=context)
-        data_dict =  {'controlling_date': controlling_date, 'line_ids': tuple(lines),
-                     'delay': level.delay_days, 'previous_level': previous_level.level}
+        sql += " AND "
+        sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
+                                                                controlling_date, context)
+        previous_level_id = self._previous_level(cr, uid, level, context=context)
+        previous_level = self.browse(cr, uid, previous_level_id, context=context)
+        data_dict = {'controlling_date': controlling_date,
+                     'line_ids': tuple(lines),
+                     'delay': level.delay_days,
+                     'previous_level': previous_level.level}
 
         # print cr.mogrify(sql, data_dict)
         cr.execute(sql, data_dict)
@@ -371,9 +376,7 @@ class CreditControlPolicyLevel(Model):
             method = self._get_first_level_move_line_ids
         else:
             method = self._get_other_level_move_line_ids
-
-        matching_lines.update(
-                method(cr, uid, level, controlling_date, lines, context=context))
-
+        matching_lines.update(method(cr, uid, level,
+                                     controlling_date, lines,
+                                     context=context))
         return matching_lines
-

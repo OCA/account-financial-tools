@@ -18,13 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import mail
-from . import run
-from . import line
-from . import account
-from . import partner
-from . import policy
-from . import company
-from . import wizard
-from . import report
-from . import invoice
+from openerp.osv import orm, fields
+
+class Mail(orm.Model):
+    _inherit = 'mail.mail'
+
+    # use HTML fields instead of text
+    _columns = {'body_html': fields.html('Rich-text Contents',
+                                         help="Rich-text/HTML message"),}

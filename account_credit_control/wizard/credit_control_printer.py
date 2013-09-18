@@ -20,11 +20,10 @@
 ##############################################################################
 import base64
 
-from openerp.osv.orm import  TransientModel, fields
-from openerp.osv.osv import except_osv
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
-class CreditControlPrinter(TransientModel):
+class CreditControlPrinter(orm.TransientModel):
     """Print lines"""
 
     _name = "credit.control.printer"
@@ -65,25 +64,30 @@ class CreditControlPrinter(TransientModel):
 
     def print_lines(self, cr, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-                "wiz_id: only one id expected"
+            "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids and not form.print_all:
-            raise except_osv(_('Error'), _('No credit control lines selected.'))
+            raise orm.except_orm(_('Error'), _('No credit control lines selected.'))
 
         line_ids = [l.id for l in form.line_ids]
-        comms = comm_obj._generate_comm_from_credit_line_ids(
-                cr, uid, line_ids, context=context)
+        comms = comm_obj._generate_comm_from_credit_line_ids(cr, uid, line_ids,
+                                                             context=context)
         report_file = comm_obj._generate_report(cr, uid, comms, context=context)
 
         form.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
 
         if form.mark_as_sent:
-            filtered_ids = self._filter_line_ids(cr, uid, line_ids, context)
             comm_obj._mark_credit_line_as_sent(cr, uid, comms, context=context)
 
-        return False  # do not close the window, we need it to download the report
-
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'credit.control.printer',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'res_id': form.id,
+                'views': [(False, 'form')],
+                'target': 'new',
+                }

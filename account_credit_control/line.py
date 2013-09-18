@@ -19,16 +19,15 @@
 #
 ##############################################################################
 import logging
-import pooler
 
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 from openerp.osv import osv
 from openerp.tools.translate import _
 
 logger = logging.getLogger('credit.line.control')
 
 
-class CreditControlLine(Model):
+class CreditControlLine(orm.Model):
     """A credit control line describes an amount due by a customer for a due date.
 
     A line is created once the due date of the payment is exceeded.
@@ -49,6 +48,10 @@ class CreditControlLine(Model):
                                 readonly=True,
                                 states={'draft': [('readonly', False)]}),
 
+        'date_entry': fields.related('move_line_id', 'date', type='date',
+                                     string='Entry date',
+                                     store=True, readonly=True),
+
         'date_sent': fields.date('Sent date',
                                  readonly=True,
                                  states={'draft': [('readonly', False)]}),
@@ -67,16 +70,16 @@ class CreditControlLine(Model):
                                         "generated again on the next run.")),
 
         'channel': fields.selection([('letter', 'Letter'),
-                                   ('email', 'Email')],
-                                  'Channel', required=True,
-                                  readonly=True,
-                                  states={'draft': [('readonly', False)]}),
+                                    ('email', 'Email')],
+                                    'Channel', required=True,
+                                    readonly=True,
+                                    states={'draft': [('readonly', False)]}),
 
         'invoice_id': fields.many2one('account.invoice', 'Invoice', readonly=True),
         'partner_id': fields.many2one('res.partner', "Partner", required=True),
         'amount_due': fields.float('Due Amount Tax incl.', required=True, readonly=True),
         'balance_due': fields.float('Due balance', required=True, readonly=True),
-        'mail_message_id': fields.many2one('mail.message', 'Sent Email', readonly=True),
+        'mail_message_id': fields.many2one('mail.mail', 'Sent Email', readonly=True),
 
         'move_line_id': fields.many2one('account.move.line', 'Move line',
                                         required=True, readonly=True),
@@ -127,7 +130,7 @@ class CreditControlLine(Model):
         data['date_due'] = move_line.date_maturity
         data['state'] = 'draft'
         data['channel'] = level.channel
-        data['invoice_id'] = move_line.invoice_id.id if move_line.invoice_id else False
+        data['invoice_id'] = move_line.invoice.id if move_line.invoice else False
         data['partner_id'] = move_line.partner_id.id
         data['amount_due'] = (move_line.amount_currency or move_line.debit or
                               move_line.credit)
@@ -187,10 +190,9 @@ class CreditControlLine(Model):
     def unlink(self, cr, uid, ids, context=None, check=True):
         for line in self.browse(cr, uid, ids, context=context):
             if line.state != 'draft':
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error !'),
                     _('You are not allowed to delete a credit control line that '
                       'is not in draft state.'))
 
         return super(CreditControlLine, self).unlink(cr, uid, ids, context=context)
-
