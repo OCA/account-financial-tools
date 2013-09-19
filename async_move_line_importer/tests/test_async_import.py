@@ -23,7 +23,6 @@ import tempfile
 
 import openerp.tests.common as test_common
 from openerp import addons
-from ..model import move_line_importer
 
 
 class TestMoveLineImporter(test_common.SingleTransactionCase):
