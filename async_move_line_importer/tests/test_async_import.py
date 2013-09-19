@@ -21,17 +21,17 @@
 import base64
 import tempfile
 
-from . import odbc_test_common
+import openerp.tests.common as test_common
 from openerp import addons
-from ..model import async_move_line_importer
+from ..model import move_line_importer
 
 
-class TestMoveLineImporter(odbc_test_common.ODBCBaseTestClass):
+class TestMoveLineImporter(test_common.SingleTransactionCase):
 
     def get_file(self, filename):
         """Retrive file from test data"""
         path = addons.get_module_resource('async_move_line_importer',
-                                          'test', 'data', filename)
+                                          'tests', 'data', filename)
         with open(path) as test_data:
             with tempfile.TemporaryFile() as out:
                 base64.encode(test_data, out)
@@ -42,22 +42,22 @@ class TestMoveLineImporter(odbc_test_common.ODBCBaseTestClass):
         super(TestMoveLineImporter, self).setUp()
         self.importer_model = self.registry('move.line.importer')
         self.move_model = self.registry('account.move')
-        async_move_line_importer.USE_THREAD = False
 
     def tearDown(self):
         super(TestMoveLineImporter, self).tearDown()
-        async_move_line_importer.USE_THREAD = True
 
-    def test_01_one_line_direct_import_without_by_pass(self):
+    def test_01_one_line_without_orm_bypass(self):
         """Test one line import without bypassing orm"""
         cr, uid = self.cr, self.uid
         importer_id = self.importer_model.create(cr, uid,
-                                                 {'file': self.get_file('one_move.csv')})
+                                                 {'file': self.get_file('one_move.csv'),
+                                                  'delimiter': ';'})
         importer = self.importer_model.browse(cr, uid, importer_id)
-        self.asertTrue(importer.company_id, 'Not default company set')
-        self.assertFalse(importer.bypass_orm, 'By pass orm must not be active')
+        self.assertTrue(importer.company_id, 'Not default company set')
+        self.assertFalse(importer.bypass_orm, 'Bypass orm must not be active')
         self.assertEqual(importer.state, 'draft')
-        importer.import_file()
+        head, data = self.importer_model._parse_csv(cr, uid, importer.id)
+        self.importer_model._load_data(cr, uid, importer.id, head, data, _do_commit=False, context={})
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertEquals(importer.state, 'done',
                           'Exception %s during import' % importer.report)
@@ -65,10 +65,59 @@ class TestMoveLineImporter(odbc_test_common.ODBCBaseTestClass):
         self.assertTrue(created_move_ids, 'No move imported')
         created_move = self.move_model.browse(cr, uid, created_move_ids[0])
         self.assertTrue(len(created_move.line_id) == 3, 'Wrong number of move line imported')
-        debit, credit = 0.0
+        debit = credit = 0.0
         for line in created_move.line_id:
             debit += line.debit if line.debit else 0.0
             credit += line.credit if line.credit else 0.0
         self.assertEqual(debit, 1200.00)
         self.assertEqual(credit, 1200.00)
         self.assertEqual(created_move.state, 'draft', 'Wrong move state')
+
+    def test_02_one_line_using_orm_bypass(self):
+        """Test one line import using orm bypass"""
+        cr, uid = self.cr, self.uid
+        importer_id = self.importer_model.create(cr, uid,
+                                                 {'file': self.get_file('one_move2.csv'),
+                                                  'delimiter': ';',
+                                                  'bypass_orm': True})
+        importer = self.importer_model.browse(cr, uid, importer_id)
+        self.assertTrue(importer.company_id, 'Not default company set')
+        self.assertTrue(importer.bypass_orm, 'Bypass orm must be active')
+        self.assertEqual(importer.state, 'draft')
+        head, data = self.importer_model._parse_csv(cr, uid, importer.id)
+        context = {'async_bypass_create': True,
+                   'company_id': 1}
+        self.importer_model._load_data(cr, uid, importer.id, head, data,
+                                       _do_commit=False, context=context)
+        importer = self.importer_model.browse(cr, uid, importer_id)
+        self.assertEquals(importer.state, 'done',
+                          'Exception %s during import' % importer.report)
+        created_move_ids = self.move_model.search(cr, uid, [('ref', '=', 'test_2')])
+        self.assertTrue(created_move_ids, 'No move imported')
+        created_move = self.move_model.browse(cr, uid, created_move_ids[0])
+        self.assertTrue(len(created_move.line_id) == 3, 'Wrong number of move line imported')
+        debit = credit = 0.0
+        for line in created_move.line_id:
+            debit += line.debit if line.debit else 0.0
+            credit += line.credit if line.credit else 0.0
+        self.assertEqual(debit, 1200.00)
+        self.assertEqual(credit, 1200.00)
+        self.assertEqual(created_move.state, 'draft', 'Wrong move state')
+
+    def test_03_one_line_failing(self):
+        """Test one line import with faulty CSV file"""
+        cr, uid = self.cr, self.uid
+        importer_id = self.importer_model.create(cr, uid,
+                                                 {'file': self.get_file('faulty_moves.csv'),
+                                                  'delimiter': ';'})
+        importer = self.importer_model.browse(cr, uid, importer_id)
+        self.assertTrue(importer.company_id, 'Not default company set')
+        self.assertFalse(importer.bypass_orm, 'Bypass orm must not be active')
+        self.assertEqual(importer.state, 'draft')
+        head, data = self.importer_model._parse_csv(cr, uid, importer.id)
+        self.importer_model._load_data(cr, uid, importer.id, head, data, _do_commit=False, context={})
+        importer = self.importer_model.browse(cr, uid, importer_id)
+        self.assertEquals(importer.state, 'error',
+                          'No exception %s during import' % importer.report)
+        created_move_ids = self.move_model.search(cr, uid, [('ref', '=', 'test_3')])
+        self.assertFalse(created_move_ids, 'Move was imported but it should not be the case')
