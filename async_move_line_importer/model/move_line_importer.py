@@ -18,6 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import sys
+import traceback
+import logging
 import base64
 import threading
 import csv
@@ -28,6 +31,8 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 USE_THREAD = True
+
+_logger = logging.getLogger(__name__)
 
 
 class move_line_importer(orm.Model):
@@ -135,6 +140,14 @@ class move_line_importer(orm.Model):
 
     def _manage_load_results(self, cr, uid, imp_id, result, context=None):
         if not result['messages']:
+            import cProfile
+            profiler = cProfile.Profile()
+            obj = self.pool['account.move']
+            try:
+                profiler.runcall(obj.post, *(cr, uid, result['ids']), **{'context': context})
+            finally:
+                profiler.dump_stats('/srv/openerp/instances/openerp_test_sensee/myprofile_post.profile')
+            #self.pool['account.move'].post(cr, uid, result['ids'], context=context)
             msg = _("%s lines imported" % len(result['ids'] or []))
             self.write(cr, uid, [imp_id], {'state': 'done',
                                            'report': msg})
@@ -159,7 +172,11 @@ class move_line_importer(orm.Model):
             self.write(cr, uid, [imp_id], {'state': 'error'})
             if mode != "threaded":
                 raise
-            msg = _("Unexpected exception not related to CSV file.\n %s" % repr(exc))
+            ex_type, sys_exc, tb = sys.exc_info()
+            tb_msg = ''.join(traceback.format_tb(tb, 30))
+            _logger.error(tb_msg)
+            _logger.error(repr(exc))
+            msg = _("Unexpected exception.\n %s \n %s" % (repr(exc), tb_msg))
             self.write(cr, uid, [imp_id], {'report': msg})
 
         finally:
