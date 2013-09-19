@@ -138,40 +138,35 @@ class move_line_importer(orm.Model):
                                                                  rows.get('to', 'N/A')))
         return "\n \n".join(res)
 
-    def _manage_load_results(self, cr, uid, imp_id, result, context=None):
+    def _manage_load_results(self, cr, uid, imp_id, result, _do_commit=True, context=None):
+        """Manage the load function out put and store report and exception"""
         if not result['messages']:
-            import cProfile
-            profiler = cProfile.Profile()
-            obj = self.pool['account.move']
-            try:
-                profiler.runcall(obj.post, *(cr, uid, result['ids']), **{'context': context})
-            finally:
-                profiler.dump_stats('/srv/openerp/instances/openerp_test_sensee/myprofile_post.profile')
-            #self.pool['account.move'].post(cr, uid, result['ids'], context=context)
             msg = _("%s lines imported" % len(result['ids'] or []))
             self.write(cr, uid, [imp_id], {'state': 'done',
                                            'report': msg})
         else:
-            cr.rollback()
+            if _do_commit:
+                cr.rollback()
             msg = self.format_messages(result['messages'])
             self.write(cr, uid, [imp_id], {'state': 'error',
                                            'report': msg})
-            cr.commit()
+            if _do_commit:
+                cr.commit()
         return imp_id
 
-    def _load_data(self, cr, uid, imp_id, head, data, mode, context=None):
-        """Function that does the load management, exception and load report"""
-        valid_modes = ('threaded', 'direct')
-        if mode not in valid_modes:
-            raise ValueError('%s is not in valid mode %s ' % (mode, valid_modes))
+    def _load_data(self, cr, uid, imp_id, head, data, _do_commit=True, context=None):
+        """Function that does the load management, exception and load report.
+           _do_commit is only used for testing purpose in order not to commit
+           imported line during tests
+        """
         try:
             res = self.pool['account.move'].load(cr, uid, head, data, context=context)
-            self._manage_load_results(cr, uid, imp_id, res, context=context)
+            self._manage_load_results(cr, uid, imp_id, res,
+                                      _do_commit=_do_commit, context=context)
         except Exception as exc:
-            cr.rollback()
+            if _do_commit:
+                cr.rollback()
             self.write(cr, uid, [imp_id], {'state': 'error'})
-            if mode != "threaded":
-                raise
             ex_type, sys_exc, tb = sys.exc_info()
             tb_msg = ''.join(traceback.format_tb(tb, 30))
             _logger.error(tb_msg)
@@ -180,7 +175,7 @@ class move_line_importer(orm.Model):
             self.write(cr, uid, [imp_id], {'report': msg})
 
         finally:
-            if mode == 'threaded':
+            if _do_commit:
                 cr.commit()
                 cr.close()
         return imp_id
@@ -218,16 +213,13 @@ class move_line_importer(orm.Model):
             context['async_bypass_create'] = True
         head, data = self._parse_csv(cr, uid, imp_id)
         self.write(cr, uid, [imp_id], {'state': 'running'})
-        if USE_THREAD:
-            self._allows_thread(imp_id)
-            db_name = cr.dbname
-            local_cr = pooler.get_db(db_name).cursor()
-            thread = threading.Thread(target=self._load_data,
-                                      name='async_move_line_import_%s' % imp_id,
-                                      args=(local_cr, uid, imp_id, head, data,
-                                            'threaded', context.copy()))
-            thread.start()
-        else:
-            self._load_data(cr, uid, imp_id, head, data, 'direct',
-                            context=context)
+        self._allows_thread(imp_id)
+        db_name = cr.dbname
+        local_cr = pooler.get_db(db_name).cursor()
+        thread = threading.Thread(target=self._load_data,
+                                  name='async_move_line_import_%s' % imp_id,
+                                  args=(local_cr, uid, imp_id, head, data),
+                                  kwargs={'context': context.copy()})
+        thread.start()
+
         return {}
