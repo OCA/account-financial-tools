@@ -30,11 +30,18 @@ def _format_inserts_values(vals):
 
 class account_move(orm.Model):
     """redefine account move create to bypass orm
-    if async_bypass_create is True in context"""
+    if async_bypass_create is set to True in context"""
 
     _inherit = "account.move"
 
     def _prepare_line(self, cr, uid, move_id, line, vals, context=None):
+        """Take incomming move line vals and complete line dict with
+        missing data
+        :param move_id: parent move id
+        :param line: dict of vals of move line
+        :param vals: dict of vals of move
+        :returns: dict of val of move line completed
+        """
         if isinstance(line, tuple):
             line = line[2]
         line['journal_id'] = vals.get('journal_id')
@@ -53,6 +60,8 @@ class account_move(orm.Model):
         return line
 
     def _bypass_create(self, cr, uid, vals, context=None):
+        """Create entries using cursor directly
+        :returns: created id"""
         mvl_obj = self.pool['account.move.line']
         vals['company_id'] = context.get('company_id', False)
         vals['state'] = 'draft'
@@ -70,6 +79,7 @@ class account_move(orm.Model):
         return created_id
 
     def create(self, cr, uid, vals, context=None):
+        """Please refer to orm.BaseModel.create documentation"""
         if context is None:
             context = {}
         if context.get('async_bypass_create'):
@@ -79,11 +89,12 @@ class account_move(orm.Model):
 
 class account_move_line(orm.Model):
     """redefine account move line create to bypass orm
-    if async_bypass_create is True in context"""
+    if async_bypass_create is set to True in context"""
 
     _inherit = "account.move.line"
 
     def create(self, cr, uid, vals, context=None):
+        """Please refer to orm.BaseModel.create documentation"""
         if context is None:
             context = {}
         if context.get('async_bypass_create'):
@@ -91,6 +102,8 @@ class account_move_line(orm.Model):
         return super(account_move_line, self).create(cr, uid, vals, context=context)
 
     def _bypass_create(self, cr, uid, vals, context=None):
+        """Create entries using cursor directly
+        :returns: created id"""
         sql = u"Insert INTO account_move_line (%s) VALUES (%s) RETURNING id"
         sql = sql % _format_inserts_values(vals)
         cr.execute(sql, vals)
