@@ -18,8 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import psycopg2
+import logging
 from openerp.osv import orm
 
+_logger = logging.getLogger(__name__)
 
 def _format_inserts_values(vals):
     cols = vals.keys()
@@ -69,7 +72,11 @@ class account_move(orm.Model):
             vals['name'] = "/"
         sql = u"Insert INTO account_move (%s) VALUES (%s) RETURNING id"
         sql = sql % _format_inserts_values(vals)
-        cr.execute(sql, vals)
+        try:
+            cr.execute(sql, vals)
+        except psycopg2.Error as sql_exc:
+            _logger.error('ORM by pass error for move: %s' % sql_exc.pgerror)
+            raise
         created_id = cr.fetchone()[0]
         if vals.get('line_id'):
             for line in vals['line_id']:
@@ -106,5 +113,9 @@ class account_move_line(orm.Model):
         :returns: created id"""
         sql = u"Insert INTO account_move_line (%s) VALUES (%s) RETURNING id"
         sql = sql % _format_inserts_values(vals)
-        cr.execute(sql, vals)
+        try:
+            cr.execute(sql, vals)
+        except psycopg2.Error as sql_exc:
+            _logger.error('ORM by pass error for move line: %s' % sql_exc.pgerror)
+            raise
         return cr.fetchone()[0]
