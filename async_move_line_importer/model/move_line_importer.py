@@ -26,6 +26,8 @@ import threading
 import csv
 import tempfile
 
+import psycopg2
+
 import openerp.pooler as pooler
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
@@ -102,7 +104,7 @@ class move_line_importer(orm.Model):
 
     _defaults = {'state': 'draft',
                  'name': fields.datetime.now(),
-                 'company_id': _get_current_company
+                 'company_id': _get_current_company,
                  'delimiter': ',',
                  'bypass_orm': False}
 
@@ -163,18 +165,56 @@ class move_line_importer(orm.Model):
         :returns: current importer id
         """
         # Import sucessful
+        state = msg = None
         if not result['messages']:
             msg = _("%s lines imported" % len(result['ids'] or []))
-            self.write(cr, uid, [imp_id], {'state': 'done',
-                                           'report': msg})
+            state = 'done'
         else:
             if _do_commit:
                 cr.rollback()
             msg = self.format_messages(result['messages'])
-            self.write(cr, uid, [imp_id], {'state': 'error',
-                                           'report': msg})
-            if _do_commit:
-                cr.commit()
+            state = 'error'
+        return (imp_id, state, msg)
+
+    def _write_report(self, cr, uid, imp_id, state, msg, _do_commit=True,
+                      max_tries=5, context=None):
+        """Commit report in a separated transaction in order to avoid
+        concurrent update error due to mail.message.
+        If transaction trouble happen we try 5 times to rewrite report
+        :param imp_id: current importer id
+        :param state: import state
+        :param msg: report summary
+        :returns: current importer id
+        """
+        if _do_commit:
+            db_name = cr.dbname
+            local_cr = pooler.get_db(db_name).cursor()
+            try:
+                self.write(local_cr, uid, [imp_id],
+                           {'state': state, 'report': msg},
+                           context=context)
+                local_cr.commit()
+            # We handle concurrent error troubles
+            except psycopg2.OperationalError as pg_exc:
+                _logger.error('Can not write report. System will retry %s time(s)' % max_tries)
+                if pg_exc.pg_code in orm.PG_CONCURRENCY_ERRORS_TO_RETRY and max_tries >= 0:
+                    local_cr.rollback()
+                    local_cr.close()
+                    remaining_try = max_tries - 1
+                    self._write_report(cr, uid, imp_id, cr, _do_commit=_do_commit,
+                                       max_tries=remaining_try, context=context)
+                else:
+                    _logger.error('Can not log report - concurrent update error: %s' % repr(pg_exc))
+                    raise
+            except Exception as exc:
+                _logger.error('Can not log report %s' % repr(exc))
+                local_cr.rollback()
+                raise
+            finally:
+                if not local_cr.closed:
+                    local_cr.close()
+        else:
+            self.write(cr, uid, [imp_id], {'state': state, 'report': msg}, context=context)
         return imp_id
 
     def _load_data(self, cr, uid, imp_id, head, data, _do_commit=True, context=None):
@@ -186,24 +226,29 @@ class move_line_importer(orm.Model):
         :params _do_commit: toggle commit management only used for testing purpose only
         :returns: current importer id
         """
+        state = msg = None
         try:
             res = self.pool['account.move'].load(cr, uid, head, data, context=context)
-            self._manage_load_results(cr, uid, imp_id, res,
-                                      _do_commit=_do_commit, context=context)
+            r_id, state, msg = self._manage_load_results(cr, uid, imp_id, res,
+                                                         _do_commit=_do_commit,
+                                                         context=context)
         except Exception as exc:
             if _do_commit:
                 cr.rollback()
-            self.write(cr, uid, [imp_id], {'state': 'error'})
             ex_type, sys_exc, tb = sys.exc_info()
             tb_msg = ''.join(traceback.format_tb(tb, 30))
             _logger.error(tb_msg)
             _logger.error(repr(exc))
             msg = _("Unexpected exception.\n %s \n %s" % (repr(exc), tb_msg))
-            self.write(cr, uid, [imp_id], {'report': msg})
-
+            state = 'error'
         finally:
+            self._write_report(cr, uid, imp_id, state, msg,
+                               _do_commit=_do_commit, context=context)
             if _do_commit:
-                cr.commit()
+                try:
+                    cr.commit()
+                except psycopg2.Error as commit_error:
+                    _logger.error('Can not do final commit: %s' % commit_error.pgerror)
                 cr.close()
         return imp_id
 
@@ -250,7 +295,8 @@ class move_line_importer(orm.Model):
             self._check_permissions(cr, uid, context=context)
             context['async_bypass_create'] = True
         head, data = self._parse_csv(cr, uid, imp_id)
-        self.write(cr, uid, [imp_id], {'state': 'running'})
+        self.write(cr, uid, [imp_id], {'state': 'running',
+                                       'report': _('Import is running')})
         self._allows_thread(imp_id)
         db_name = cr.dbname
         local_cr = pooler.get_db(db_name).cursor()
