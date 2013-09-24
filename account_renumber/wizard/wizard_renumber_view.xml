@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_account_renumber_form" model="ir.ui.view">
+			<field name="name">account_renumber.form</field>
+			<field name="model">wizard.renumber</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Renumber Account Moves" version="7.0">
+					<header>
+						<button special="cancel" string="Cancel"
+							attrs="{'invisible': [('state', '!=', 'init')]}" />
+						<button name="renumber" string="Renumber" states="init"
+							type="object" class="oe_highlight" />
+						<button name="show_results" string="Show Results" states="renumber"
+							type="object" />
+					</header>
+					<sheet>
+						<group string="General Data" attrs="{'invisible': [('state', '!=', 'init')]}">
+							<field name="number_next" attrs="{'invisible': [('state', '!=', 'init')]}" />
+						</group>
+						<group attrs="{'invisible': [('state', '!=', 'init')]}">
+							<label string="This wizard will help you renumber one or more journals."
+								colspan="4" />
+							<label
+								string="Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence."
+								colspan="4" />
+							<newline />
+							<group string="Journals and periods to consider">
+								<notebook colspan="4">
+									<page string="Journals">
+										<field name="journal_ids" editable="top"
+											attrs="{'invisible': [('state', '!=', 'init')]}" />
+									</page>
+									<page string="Periods">
+										<field name="period_ids" editable="top"
+											attrs="{'invisible': [('state', '!=', 'init')]}" />
+									</page>
+								</notebook>
+							</group>
+
+						</group>
+						<group string="" colspan="4"
+							attrs="{'invisible': [('state', '=', 'init')]}">
+							<h1>
+								<label
+									string="The moves of the selected journals and periods have been renumbered."
+									colspan="4" />
+							</h1>
+							<label string="" colspan="4" />
+							<h2>
+								<label string="You may now review them using the show results button."
+									colspan="4" />
+							</h2>
+						</group>
+						<field name="state" invisible="1" />
+					</sheet>
+
+				</form>
+			</field>
+		</record>
+
+		<record id="action_account_renumber" model="ir.actions.act_window">
+			<field name="name">Renumber Account Moves</field>
+			<field name="res_model">wizard.renumber</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_account_renumber_form" />
+			<!-- <field name="target">new</field> -->
+		</record>
+
+		<menuitem id="menu_account_renumber" parent="account.menu_account_end_year_treatments"
+			action="action_account_renumber" groups="base.group_system" sequence="-1" />
+
+	</data>
+</openerp>
