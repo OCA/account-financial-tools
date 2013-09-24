@@ -5,7 +5,7 @@
       <field name="name">move line importer form</field>
       <field name="model">move.line.importer</field>
       <field name="arch" type="xml">
-        <form version="7.0" string="Imported file">
+        <form version="7.0" string="Move / Move lines importer">
           <header>
             <button name="import_file"
                     type="object"

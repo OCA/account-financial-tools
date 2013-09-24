@@ -26,9 +26,9 @@
  'complexity': 'normal',
  'depends': ['base', 'account'],
  'description': """
-This module allows you to import move/moveline via CSV asynchronously.
+This module allows you to import moves / move lines via CSV asynchronously.
 
-You can access model in the journal entries menu-> Move line importer.
+You can access model in the journal entries menu -> Moves/ Move lines importer.
 User must be an account manger.
 
 To import a CSV simply save an UTF8 CSV file in the "file" field.

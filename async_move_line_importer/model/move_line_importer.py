@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 
 
 class move_line_importer(orm.Model):
-    """Asynchrone move /move line importer.
+    """Asynchrone move / move line importer.
     It will parse the saved CSV file using orm.BaseModel.load
     in a thread. If you set bypass_orm to True then the load function
     will use a totally overriden create function that is a lot faster
@@ -96,16 +96,15 @@ class move_line_importer(orm.Model):
                                                   " and in conjonction with provided canvas."),
                 }
 
-    _defaults = {'delimiter': ',',
-                 'bypass_orm': False}
-
     def _get_current_company(self, cr, uid, context=None, model="move.line.importer"):
         return self.pool.get('res.company')._company_default_get(cr, uid, model,
                                                                  context=context)
 
     _defaults = {'state': 'draft',
                  'name': fields.datetime.now(),
-                 'company_id': _get_current_company}
+                 'company_id': _get_current_company
+                 'delimiter': ',',
+                 'bypass_orm': False}
 
     def _parse_csv(self, cr, uid, imp_id):
         """Parse stored CSV file in order to be usable by BaseModel.load method.
