@@ -75,7 +75,7 @@ class account_move(orm.Model):
         try:
             cr.execute(sql, vals)
         except psycopg2.Error as sql_exc:
-            _logger.error('ORM by pass error for move: %s' % sql_exc.pgerror)
+            _logger.exception('ORM by pass error for move')
             raise
         created_id = cr.fetchone()[0]
         if vals.get('line_id'):
@@ -116,6 +116,6 @@ class account_move_line(orm.Model):
         try:
             cr.execute(sql, vals)
         except psycopg2.Error as sql_exc:
-            _logger.error('ORM by pass error for move line: %s' % sql_exc.pgerror)
+            _logger.exception('ORM by pass error for move line')
             raise
         return cr.fetchone()[0]

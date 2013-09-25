@@ -204,10 +204,10 @@ class move_line_importer(orm.Model):
                     self._write_report(cr, uid, imp_id, cr, _do_commit=_do_commit,
                                        max_tries=remaining_try, context=context)
                 else:
-                    _logger.error('Can not log report - concurrent update error: %s' % repr(pg_exc))
+                    _logger.exception('Can not log report - concurrent update error')
                     raise
             except Exception as exc:
-                _logger.error('Can not log report %s' % repr(exc))
+                _logger.exception('Can not log report')
                 local_cr.rollback()
                 raise
             finally:
