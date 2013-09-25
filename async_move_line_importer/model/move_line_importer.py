@@ -204,7 +204,7 @@ class move_line_importer(orm.Model):
                     self._write_report(cr, uid, imp_id, cr, _do_commit=_do_commit,
                                        max_tries=remaining_try, context=context)
                 else:
-                    _logger.exception('Can not log report - concurrent update error')
+                    _logger.exception('Can not log report - Operational update error')
                     raise
             except Exception as exc:
                 _logger.exception('Can not log report')
@@ -248,7 +248,7 @@ class move_line_importer(orm.Model):
                 try:
                     cr.commit()
                 except psycopg2.Error as commit_error:
-                    _logger.error('Can not do final commit: %s' % commit_error.pgerror)
+                    _logger.exception('Can not do final commit')
                 cr.close()
         return imp_id
 
