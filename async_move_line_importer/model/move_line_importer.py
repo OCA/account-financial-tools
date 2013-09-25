@@ -206,7 +206,7 @@ class move_line_importer(orm.Model):
                 else:
                     _logger.exception('Can not log report - Operational update error')
                     raise
-            except Exception as exc:
+            except Exception:
                 _logger.exception('Can not log report')
                 local_cr.rollback()
                 raise
@@ -247,7 +247,7 @@ class move_line_importer(orm.Model):
             if _do_commit:
                 try:
                     cr.commit()
-                except psycopg2.Error as commit_error:
+                except psycopg2.Error:
                     _logger.exception('Can not do final commit')
                 cr.close()
         return imp_id

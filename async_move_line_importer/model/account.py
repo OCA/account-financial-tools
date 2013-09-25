@@ -24,6 +24,7 @@ from openerp.osv import orm
 
 _logger = logging.getLogger(__name__)
 
+
 def _format_inserts_values(vals):
     cols = vals.keys()
     if 'line_id' in cols:
@@ -74,7 +75,7 @@ class account_move(orm.Model):
         sql = sql % _format_inserts_values(vals)
         try:
             cr.execute(sql, vals)
-        except psycopg2.Error as sql_exc:
+        except psycopg2.Error:
             _logger.exception('ORM by pass error for move')
             raise
         created_id = cr.fetchone()[0]
@@ -115,7 +116,7 @@ class account_move_line(orm.Model):
         sql = sql % _format_inserts_values(vals)
         try:
             cr.execute(sql, vals)
-        except psycopg2.Error as sql_exc:
+        except psycopg2.Error:
             _logger.exception('ORM by pass error for move line')
             raise
         return cr.fetchone()[0]
