@@ -23,7 +23,7 @@
 """
 Account renumber wizard
 """
-__author__ = "Borja López Soilán (Pexego) - borjals@pexego.es"
+
 
 
 import wizard_renumber

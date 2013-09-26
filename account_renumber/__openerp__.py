@@ -45,12 +45,9 @@ It will recreate the sequence number of each account move using their journal se
             """,
     "license" : "AGPL-3",
     "depends" : [
-                'base',
                 'account',
     ],
-    "init_xml" : [
-    ],
-    "demo_xml" : [],
+    "demo" : [],
     "data": [
         'wizard/wizard_renumber_view.xml',
     ],
