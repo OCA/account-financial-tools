@@ -27,7 +27,6 @@ Account renumber wizard
 from openerp.osv import fields
 from openerp.osv import orm
 from openerp.tools.translate import _
-from datetime import datetime
 import logging
 
 
@@ -66,11 +65,15 @@ class wizard_renumber(orm.TransientModel):
         Based on ir_sequence.get_id from the account module.
         Allows us to get the real sequence for the given fiscal year.
         """
-        seq_facade = self.pool.get('ir.sequence').browse(cr, uid, sequence_id, context=context)
-        for line in seq_facade.fiscal_ids:
+        sequences = self.pool.get('ir.sequence').browse(
+                                                        cr,
+                                                        uid,
+                                                        sequence_id,
+                                                        context=context)
+        for line in sequences.fiscal_ids:
             if line.fiscalyear_id.id == fiscalyear_id:
                 return line.sequence_id.id
-            return sequence_id
+        return sequence_id
 
     ##########################################################################
     # Renumber form/action
