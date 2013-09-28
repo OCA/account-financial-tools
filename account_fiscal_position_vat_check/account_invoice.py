@@ -20,11 +20,11 @@
 #
 ##############################################################################
 
-from openerp.osv import osv, orm, fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class account_fiscal_position(osv.Model):
+class account_fiscal_position(orm.Model):
     _inherit = 'account.fiscal.position'
 
     _columns = {
@@ -33,7 +33,7 @@ class account_fiscal_position(osv.Model):
     }
 
 
-class account_invoice(osv.Model):
+class account_invoice(orm.Model):
     _inherit = 'account.invoice'
 
     def action_move_create(self, cr, uid, ids, context=None):
