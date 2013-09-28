@@ -26,8 +26,8 @@
 					</group>
 					<footer>
 						<div states="init">
-							<button special="cancel" string="Cancel" class="oe_link"/> o
-							<button name="renumber" string="Renumber" type="object" class="oe_highlight"/>
+							<button name="renumber" string="Renumber" type="object" class="oe_highlight"/>o
+							<button special="cancel" string="Cancel" class="oe_link"/>
 						</div>
 					</footer>
 				</form>

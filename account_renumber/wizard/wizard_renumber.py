@@ -29,7 +29,7 @@ from openerp.osv import orm
 from openerp.tools.translate import _
 from datetime import datetime
 import logging
-import time
+
 
 class wizard_renumber(orm.TransientModel):
     _name = "wizard.renumber"
@@ -44,7 +44,7 @@ class wizard_renumber(orm.TransientModel):
                                         required=True,
                                         help='Fiscal periods to renumber',
                                         string="Periods", ondelete='null'),
-                'number_next': fields.integer('First Number', required=True, 
+                'number_next': fields.integer('First Number', required=True,
                                         help="Journal sequences will start counting on this number"),
                 'state': fields.selection([
                                            ('init', 'Initial'),
@@ -61,68 +61,16 @@ class wizard_renumber(orm.TransientModel):
     # Helper methods
     ###############################
 
-    def _process(self, s, date_to_use=None):
-        """
-        Based on ir_sequence._process. We need to have our own method
-        as ir_sequence one will always use the current date.
-        We will use the given date instead.
-        """
-        date_to_use = date_to_use or time
-        return (s or '') % {
-            'year': date_to_use.strftime('%Y'),
-            'month': date_to_use.strftime('%m'),
-            'day': date_to_use.strftime('%d'),
-            'y': date_to_use.strftime('%y'),
-            'doy': date_to_use.strftime('%j'),
-            'woy': date_to_use.strftime('%W'),
-            'weekday': date_to_use.strftime('%w'),
-            'h24': time.strftime('%H'),
-            'h12': time.strftime('%I'),
-            'min': time.strftime('%M'),
-            'sec': time.strftime('%S'),
-        }
-
-    def get_id(self, cr, uid, sequence_id, test='id=%s', context=None, date_to_use=None):
-        """
-        Based on ir_sequence.get_id. We need to have our own method
-        as ir_sequence one will always use the current date for the prefix
-        and sufix processing. We will use the given date instead.
-        """
-        try:
-            cr.execute(
-                       'SELECT id, number_next, prefix, suffix, padding \
-                       FROM ir_sequence \
-                       WHERE ' + test + ' AND active=%s FOR UPDATE',
-                       (sequence_id, True))
-            res = cr.dictfetchone()
-            if res:
-                cr.execute(
-                           'UPDATE ir_sequence SET number_next=number_next+number_increment \
-                           WHERE id=%s AND active=%s',
-                           (res['id'], True))
-                if res['number_next']:
-                    return self._process(res['prefix'], date_to_use=date_to_use) + '%%0%sd' % res['padding'] % res['number_next'] + self._process(res['suffix'], date_to_use=date_to_use)
-                else:
-                    return self._process(res['prefix'], date_to_use=date_to_use) + self._process(res['suffix'], date_to_use=date_to_use)
-        finally:
-            cr.commit()
-        return False
-
     def get_sequence_id_for_fiscalyear_id(self, cr, uid, sequence_id, fiscalyear_id, context=None):
         """
         Based on ir_sequence.get_id from the account module.
         Allows us to get the real sequence for the given fiscal year.
         """
-        cr.execute('SELECT id FROM ir_sequence WHERE id=%s AND active=%s',
-                   (sequence_id, True,))
-        res = cr.dictfetchone()
-        if res:
-            seq_facade = self.pool.get('ir.sequence')
-            for line in seq_facade.browse(cr, uid, res['id'],
-                                          context=context).fiscal_ids:
-                if line.fiscalyear_id.id == fiscalyear_id:
-                    return line.sequence_id.id
-        return sequence_id
+        seq_facade = self.pool.get('ir.sequence').browse(cr, uid, sequence_id, context=context)
+        for line in seq_facade.fiscal_ids:
+            if line.fiscalyear_id.id == fiscalyear_id:
+                return line.sequence_id.id
+            return sequence_id
 
     ##########################################################################
     # Renumber form/action
@@ -147,6 +95,7 @@ class wizard_renumber(orm.TransientModel):
 
         logger.debug("Searching for account moves to renumber.")
         move_facade = self.pool.get('account.move')
+        obj_sequence = self.pool.get('ir.sequence')
         sequences_seen = []
         for period in period_ids:
             move_ids = move_facade.search(
@@ -162,6 +111,7 @@ class wizard_renumber(orm.TransientModel):
                 continue
 
             for move in move_facade.browse(cr, uid, move_ids):
+
                 sequence_id = self.get_sequence_id_for_fiscalyear_id(
                                 cr,
                                 uid,
@@ -177,9 +127,12 @@ class wizard_renumber(orm.TransientModel):
                 #
                 # Generate (using our own get_id) and write the new move number
                 #
-                date_to_use = datetime.strptime(move.date, '%Y-%m-%d')
-                new_name = self.get_id(cr, uid, sequence_id,
-                                context=context, date_to_use=date_to_use)
+                c = {'fiscalyear_id': move.period_id.fiscalyear_id.id}
+                new_name = obj_sequence.next_by_id(
+                                            cr,
+                                            uid,
+                                            move.journal_id.sequence_id.id,
+                                            c)
                 # Note: We can't just do a
                 # "move_facade.write(cr, uid, [move.id], {'name': new_name})"
                 # cause it might raise a
