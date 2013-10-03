@@ -147,6 +147,7 @@ class account_check_deposit(orm.Model):
                 'name': deposit.name,
                 'debit': debit,
                 'ref': deposit.name,
+                'check_line_id': line.id,
             })
 
         return move_line_vals
@@ -154,14 +155,9 @@ class account_check_deposit(orm.Model):
     def _reconcile_checks(self, cr, uid, deposit, move_id, context=None):
         move_line_obj = self.pool.get('account.move.line')
         for line in deposit.check_payment_ids:
-            move_line_ids = move_line_obj.search(cr, uid,
-                                                 [('move_id', '=', move_id),
-                                                  ('credit', '=', line.debit),
-                                                  ('name', '=', line.ref)],
-                                                 context=context)
-            if move_line_ids:
+            if line.check_line_id:
                 move_line_obj.reconcile(cr, uid,
-                                        [line.id, move_line_ids[0]],
+                                        [line.id, line.check_line_id.id],
                                         context=context)
         return True
 
@@ -196,4 +192,6 @@ class account_move_line(orm.Model):
     _columns = {
         'check_deposit_id': fields.many2one('account.check.deposit',
                                              'Check Deposit'),
+        'check_line_id': fields.many2one('account.move.line',
+                                             'Check Receive Move line'),
     }
