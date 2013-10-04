@@ -34,14 +34,15 @@ User must be an account manger.
 To import a CSV simply save an UTF8 CSV file in the "file" field.
 Then you can choose a CSV separator.
 
-If volumetry is important you can tick Fast import check box.
+If volumetry is important you can tick "Fast import" check box.
 When enabled import will be faster but it will not use orm and may
 not support all CSV canvas.
 
-    Entry posted option of journal will be skipped.
-    AA lines will only be created when moves are posted.
-    Tax lines computation will be skipped until the move are posted
-    This option should be used with caution and in conjunction with provided canvas in tests/data
+- Entry posted option of journal will be skipped.
+- AA lines will only be created when moves are posted.
+- Tax lines computation will be skipped until the move are posted.
+
+This option should be used with caution and preferably in conjunction with provided canvas in tests/data
 
 Then simply press import file button. The process will be run in background
 and you will be able to continue your work.

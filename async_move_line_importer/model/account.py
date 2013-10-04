@@ -39,7 +39,7 @@ class account_move(orm.Model):
     _inherit = "account.move"
 
     def _prepare_line(self, cr, uid, move_id, line, vals, context=None):
-        """Take incomming move line vals and complete line dict with
+        """Take incomming move vals and complete move line dict with
         missing data
         :param move_id: parent move id
         :param line: dict of vals of move line
