@@ -28,6 +28,22 @@ from openerp.tools.translate import _
 import logging
 
 
+def _reopen(self, res_id, model):
+    return {
+        'type': 'ir.actions.act_window',
+        'view_mode': 'form',
+        'view_type': 'form',
+        'res_id': res_id,
+        'res_model': self._name,
+        'target': 'new',
+        # save original model in context, because selecting the list of available
+        # templates requires a model in context
+        'context': {
+            'default_model': model,
+        },
+    }
+
+
 class WizardLog:
     """
     *******************************************************************
@@ -698,21 +714,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'updated_accounts': accounts_res.get('updated', 0),
             'updated_fps': fps_res.get('updated', 0),
         }, context)
-        view_wizard = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_chart_update', 'view_update_multi_chart')
-        view_wizard_id = view_wizard and view_wizard[1] or False,
-        res = {
-            'type': 'ir.actions.act_window',
-            'name': _("Update Chart of Accounts from a Chart Template "),
-            'res_model': 'wizard.update.charts.accounts',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_id': wizard.id,
-            'view_id': view_wizard_id,
-            'context': context,
-            'target': 'new',
-            }
-        return res
 
+        return _reopen(self, wizard.id, 'wizard.update.chart.accounts')
     """
     Search for, and load, tax code templates to create/update.
     """
@@ -1242,23 +1245,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'log': log(),
         }, context)
 
-        view_ref = self.pool.get('ir.model.data').get_object_reference(
-                                                cr,
-                                                uid,
-                                                'account',
-                                                'view_account_list')
-        view_id = view_ref and view_ref[1] or False,
-        res = {
-            'type': 'ir.actions.act_window',
-            'name': _("Update Accounts"),
-            'res_model': 'account.account',
-            'view_type': 'form',
-            'view_mode': 'tree',
-            'view_id': view_id,
-            'context': context,
-            'target': 'current',
-            }
-        return res
+        return _reopen(self, wizard.id, 'wizard.update.chart.accounts')
 
 wizard_update_charts_accounts()
 
