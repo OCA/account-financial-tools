@@ -28,8 +28,10 @@ class account_fiscal_position(orm.Model):
     _inherit = 'account.fiscal.position'
 
     _columns = {
-        'customer_must_have_vat': fields.boolean('Customer Must Have VAT number',
-            help="If enabled, OpenERP will check that the customer has a VAT number when the user validates a customer invoice/refund."),
+        'customer_must_have_vat': fields.boolean(
+            'Customer Must Have VAT number',
+            help="If enabled, OpenERP will check that the customer has\
+            a VAT number when the user validates a customer invoice/refund."),
     }
 
 
@@ -37,12 +39,25 @@ class account_invoice(orm.Model):
     _inherit = 'account.invoice'
 
     def action_move_create(self, cr, uid, ids, context=None):
-        '''Check that the customer has VAT set if the fiscal position require it'''
+        '''Check that the customer has VAT set
+        if required by the fiscal position'''
         for invoice in self.browse(cr, uid, ids, context=context):
-            if invoice.type in ('out_invoice', 'out_refund') and invoice.fiscal_position and invoice.fiscal_position.customer_must_have_vat and not invoice.partner_id.vat:
+            if invoice.type in ('out_invoice', 'out_refund') \
+                    and invoice.fiscal_position \
+                    and invoice.fiscal_position.customer_must_have_vat \
+                    and not invoice.partner_id.vat:
                 if invoice.type == 'out_invoice':
                     type_label = _('a Customer Invoice')
                 else:
                     type_label = _('a Customer Refund')
-                raise orm.except_orm(_('Missing VAT number:'), _("You are trying to validate %s with the fiscal position '%s' that require the customer to have a VAT number. But the Customer '%s' doesn't have a VAT number in OpenERP. Please add the VAT number of this Customer in OpenERP and try to validate again.") %(type_label, invoice.fiscal_position.name, invoice.partner_id.name))
-        return super(account_invoice, self).action_move_create(cr, uid, ids, context=context)
+                raise orm.except_orm(
+                    _('Missing VAT number:'),
+                    _("You are trying to validate %s with the fiscal position\
+                    '%s' that require the customer to have a VAT number. But\
+                    the Customer '%s' doesn't have a VAT number in OpenERP.\
+                    Please add the VAT number of this Customer in OpenERP\
+                    and try to validate again.")
+                    % (type_label, invoice.fiscal_position.name,
+                    invoice.partner_id.name))
+        return super(account_invoice, self).action_move_create(
+            cr, uid, ids, context=context)
