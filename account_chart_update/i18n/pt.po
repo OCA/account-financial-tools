@@ -208,7 +208,7 @@ msgstr "Imposto %s: A conta paga não pode ser definida.\n"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
-msgid "Wizard Complete"
+msgid "Wizard completed"
 msgstr "Assistente Completo"
 
 #. module: account_chart_update

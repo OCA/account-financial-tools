@@ -140,7 +140,7 @@ msgstr "Le champ info est différent.\n"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
-msgid "Wizard Complete"
+msgid "Wizard completed"
 msgstr "Assistant terminé"
 
 #. module: account_chart_update

@@ -233,7 +233,7 @@ msgstr "Núm. de dígits"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
-msgid "Wizard Complete"
+msgid "Wizard completed"
 msgstr "Assistent completat"
 
 #. module: account_chart_update

@@ -31,28 +31,30 @@
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
     'category': "Generic Modules/Accounting",
-    'contributors': ['Joaquin Gutierrez', 'Pedro M. Baeza'],
+    'contributors': ['Joaquín Gutierrez', 'Pedro M. Baeza', 'invitu'],
     'description': """
 Adds a wizard to update a company account chart from a chart template.
 ======================================================================
 
-This is a pretty useful tool to update OpenERP instalations after tax reforms
-on the oficial charts of accounts, or to apply fixes performed on the chart
+This is a pretty useful tool to update OpenERP installations after tax reforms
+on the official charts of accounts, or to apply fixes performed on the chart
 template.
 
 The wizard:
+
 - Allows the user to compare a chart and a template showing differences
-    on accounts, taxes, tax codes and fiscal positions.
+  on accounts, taxes, tax codes and fiscal positions.
 - It may create the new account, taxes, tax codes and fiscal positions detected
-    on the template.
+  on the template.
 - It can also update (overwrite) the accounts, taxes, tax codes and fiscal
-    positions that got modified on the template.
+  positions that got modified on the template.
 
 The wizard lets the user select what kind of objects must be checked/updated,
-and whether old records must be checked for changes and updated.
+and whether old records must be checked for changes and updates.
 It will display all the accounts to be created / updated with some information
 about the detected differences, and allow the user to exclude records
 individually.
+
 Any problem found while updating will be shown on the last step.
 """,
     'license': "AGPL-3",

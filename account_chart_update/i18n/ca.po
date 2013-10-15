@@ -208,7 +208,7 @@ msgstr "Impost %s: No s'ha pogut establir el compte a pagar.\n"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
-msgid "Wizard Complete"
+msgid "Wizard completep"
 msgstr "Assistent completat"
 
 #. module: account_chart_update
