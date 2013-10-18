@@ -23,6 +23,7 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import logging
 
+
 def _reopen(self, res_id, model):
     return {
         'type': 'ir.actions.act_window',
@@ -91,9 +92,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
 
     _columns = {
         'state': fields.selection([
-        ('init', 'Step 1'),
-        ('ready', 'Step 2'),
-        ('done', 'Wizard completed')
+            ('init', 'Step 1'),
+            ('ready', 'Step 2'),
+            ('done', 'Wizard completed')
         ], 'Status', readonly=True),
         'company_id': fields.many2one('res.company', 'Company', required=True, ondelete='set null'),
         'chart_template_id': fields.many2one('account.chart.template', 'Chart Template', required=True, ondelete='set null'),
@@ -120,6 +121,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
         'updated_fps': fields.integer('Updated fiscal positions', readonly=True),
         'log': fields.text('Messages and Errors', readonly=True)
     }
+
     def name_search(self, cr, user, name,
                     args=None, operator='ilike', context=None, limit=80):
         """
@@ -178,29 +180,24 @@ class wizard_update_charts_accounts(orm.TransientModel):
         if not company_id:
             user = self.pool.get('res.users').browse(cr, uid, uid, context)
             company_id = user.company_id.id
-        property_ids = property_obj.search(
-                                cr,
-                                uid,
-                                [('name', '=', 'property_account_receivable'),
-                                ('company_id', '=', company_id),
-                                ('res_id', '=', False),
-                                ('value_reference', '!=', False)
-                                ])
+        property_ids = property_obj.search(cr, uid, [
+            ('name', '=', 'property_account_receivable'),
+            ('company_id', '=', company_id),
+            ('res_id', '=', False),
+            ('value_reference', '!=', False)
+        ])
         if not property_ids:
             # Try to get a generic (no-company) property
-            property_ids = property_obj.search(
-                                    cr,
-                                    uid,
-                                    [('name', '=', 'property_account_receivable'),
-                                    ('res_id', '=', False),
-                                    ('value_reference', '!=', False)
-                                    ])
-        number_digits = 6
+            property_ids = property_obj.search(cr, uid, [
+                ('name', '=', 'property_account_receivable'),
+                ('res_id', '=', False),
+                ('value_reference', '!=', False)
+            ])
+            number_digits = 6
         if property_ids:
             prop = property_obj.browse(
                 cr, uid, property_ids[0], context=context)
             account_id = prop.value_reference.id
-
             if account_id:
                 code = account_obj.read(
                     cr, uid, account_id, ['code'], context)['code']
@@ -226,13 +223,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         res = {
             'value': {
-                'code_digits': self._get_code_digits(
-                                            cr,
-                                            uid,
-                                            context=context,
-                                            company_id=company_id),
-                      }
-               }
+                'code_digits': self._get_code_digits(cr, uid, context=context, company_id=company_id),
+            }
+        }
         return res
 
     def action_init(self, cr, uid, ids, context=None):
@@ -243,22 +236,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             context = {}
         wizard = self.browse(cr, uid, ids[0], context=context)
         self.write(cr, uid, ids, {'state': 'init'}, context)
-        view_wizard = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_chart_update', 'view_update_multi_chart')
-        view_wizard_id = view_wizard and view_wizard[1] or False,
-        res = {
-            'type': 'ir.actions.act_window',
-            'name': _("Update Chart of Accounts from a Chart Template "),
-            'res_model': 'wizard.update.charts.accounts',
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_id': wizard.id,
-            'view_id': view_wizard_id,
-            'context': context,
-            'target': 'new',
-            }
-        return res
-
-        return True
+        return _reopen(self, wizard.id, 'wizard.update.chart.accounts')
 
     ##########################################################################
     # Helper methods
@@ -388,10 +366,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     }, context)
 
         return {
-                'new': new_tax_codes,
-                'updated': updated_tax_codes,
-                'mapping': tax_code_template_mapping
-                }
+            'new': new_tax_codes,
+            'updated': updated_tax_codes,
+            'mapping': tax_code_template_mapping
+        }
 
     def _find_taxes(self, cr, uid, wizard, context=None):
         """
@@ -868,8 +846,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
 
         if children_ids:
             try:
-                account_account.write(cr, uid, children_ids, {'parent_id':
-                                     parent_account.id}, context=context)
+                account_account.write(cr, uid, children_ids, {'parent_id': parent_account.id}, context=context)
             except orm.except_orm, ex:
                 log.add(_("Exception setting the parent of account %s children: %s - %s.\n") % (parent_account.code, ex.name, ex.value), True)
 
@@ -1034,7 +1011,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 vals_fp = {
                     'company_id': wizard.company_id.id,
                     'name': fp_template.name,
-                    }
+                }
                 fp_id = fiscalpositions.create(cr, uid, vals_fp)
                 new_fps += 1
                 modified = True
@@ -1155,8 +1132,8 @@ class wizard_update_charts_accounts_tax_code(orm.TransientModel):
         'tax_code_id': fields.many2one('account.tax.code.template', 'Tax code template', required=True, ondelete='set null'),
         'update_chart_wizard_id': fields.many2one('wizard.update.charts.accounts', 'Update chart wizard', required=True, ondelete='cascade'),
         'type': fields.selection([
-        ('new', 'New template'),
-        ('updated', 'Updated template'),
+            ('new', 'New template'),
+            ('updated', 'Updated template'),
         ], 'Type'),
         'update_tax_code_id': fields.many2one('account.tax.code', 'Tax code to update', required=False, ondelete='set null'),
         'notes': fields.text('Notes'),
@@ -1176,8 +1153,8 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
         'tax_id': fields.many2one('account.tax.template', 'Tax template', required=True, ondelete='set null'),
         'update_chart_wizard_id': fields.many2one('wizard.update.charts.accounts', 'Update chart wizard', required=True, ondelete='cascade'),
         'type': fields.selection([
-        ('new', 'New template'),
-        ('updated', 'Updated template'),
+            ('new', 'New template'),
+            ('updated', 'Updated template'),
         ], 'Type'),
         'update_tax_id': fields.many2one('account.tax', 'Tax to update', required=False, ondelete='set null'),
         'notes': fields.text('Notes'),
@@ -1201,8 +1178,8 @@ class wizard_update_charts_accounts_account(orm.TransientModel):
         'account_id': fields.many2one('account.account.template', 'Account template', required=True, ondelete='set null'),
         'update_chart_wizard_id': fields.many2one('wizard.update.charts.accounts', 'Update chart wizard', required=True, ondelete='cascade'),
         'type': fields.selection([
-        ('new', 'New template'),
-        ('updated', 'Updated template'),
+            ('new', 'New template'),
+            ('updated', 'Updated template'),
         ], 'Type'),
         'update_account_id': fields.many2one('account.account', 'Account to update', required=False, ondelete='set null'),
         'notes': fields.text('Notes'),
@@ -1223,9 +1200,9 @@ class wizard_update_charts_accounts_fiscal_position(orm.TransientModel):
         'fiscal_position_id': fields.many2one('account.fiscal.position.template', 'Fiscal position template', required=True, ondelete='set null'),
         'update_chart_wizard_id': fields.many2one('wizard.update.charts.accounts', 'Update chart wizard', required=True, ondelete='cascade'),
         'type': fields.selection([
-                    ('new', 'New template'),
-                    ('updated', 'Updated template'),
-                ], 'Type'),
+            ('new', 'New template'),
+            ('updated', 'Updated template'),
+        ], 'Type'),
         'update_fiscal_position_id': fields.many2one('account.fiscal.position', 'Fiscal position to update', required=False, ondelete='set null'),
         'notes': fields.text('Notes'),
     }
