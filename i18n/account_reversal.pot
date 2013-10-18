@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-31 12:37+0000\n"
-"PO-Revision-Date: 2012-01-31 12:37+0000\n"
+"POT-Creation-Date: 2013-10-18 17:51+0000\n"
+"PO-Revision-Date: 2013-10-18 17:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,6 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,move_line_prefix:0
 msgid "Items Name Prefix"
-msgstr ""
-
-#. module: account_reversal
-#: constraint:account.move:0
-msgid "You can not create more than one move per period on centralized journal"
 msgstr ""
 
 #. module: account_reversal
@@ -47,6 +42,11 @@ msgid "If empty, take the period of the date."
 msgstr ""
 
 #. module: account_reversal
+#: help:account.move,to_be_reversed:0
+msgid "Check this box if your entry has to bereversed at the end of period."
+msgstr ""
+
+#. module: account_reversal
 #: field:account.move.reverse,journal_id:0
 msgid "Reversal Journal"
 msgstr ""
@@ -63,17 +63,17 @@ msgid "If empty, uses the journal of the journal entry to be reversed."
 msgstr ""
 
 #. module: account_reversal
+#: view:account.move.reverse:0
+msgid "This will create reversal for all selected entries whether checked 'to be reversed' or not."
+msgstr ""
+
+#. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.actions.act_window,help:account_reversal.act_account_move_reverse
-msgid "This will create reversal for all selected entries whether checked \"to be reversed\" or not."
-msgstr ""
-
-#. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:95
+#: code:addons/account_reversal/wizard/account_move_reverse.py:108
 #, python-format
 msgid "Reversal Entries"
 msgstr ""
@@ -86,11 +86,6 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move,reversal_id:0
 msgid "Reversal Entry"
-msgstr ""
-
-#. module: account_reversal
-#: help:account.move,to_be_reversed:0
-msgid "Check this box if your entry has to be reversed at the end of period."
 msgstr ""
 
 #. module: account_reversal
@@ -109,6 +104,13 @@ msgid "Account Entry"
 msgstr ""
 
 #. module: account_reversal
+#: view:account.move:0
+#: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
+#: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
+msgid "Journal Entries to be Reversed"
+msgstr ""
+
+#. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
 msgstr ""
@@ -124,9 +126,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_reversal
-#: view:account.move:0
-#: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
-#: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
-msgid "Journal Entries to be Reversed"
+#: view:account.move.reverse:0
+msgid "or"
 msgstr ""
 
