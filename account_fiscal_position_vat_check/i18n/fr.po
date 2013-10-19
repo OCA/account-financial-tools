@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-13 15:45+0000\n"
-"PO-Revision-Date: 2013-09-13 15:45+0000\n"
+"POT-Creation-Date: 2013-10-19 19:47+0000\n"
+"PO-Revision-Date: 2013-10-19 19:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:47
+#: view:res.partner:0
+msgid "fiscal_position_change(property_account_position, vat)"
+msgstr "fiscal_position_change(property_account_position, vat)"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:54
 #, python-format
 msgid "You are trying to validate %s with the fiscal position '%s' that require the customer to have a VAT number. But the Customer '%s' doesn't have a VAT number in OpenERP. Please add the VAT number of this Customer in OpenERP and try to validate again."
 msgstr "Vous essayez de valider %s avec la position fiscale '%s' qui oblige à connaître le numéro de TVA du client. Mais le client '%s' n'a pas de numéro de TVA dans OpenERP. Veuillez ajouter le numéro de TVA de ce client dans OpenERP et essayer de valider à nouveau."
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:46
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:51
 #, python-format
 msgid "a Customer Refund"
 msgstr "un avoir client"
@@ -48,14 +53,26 @@ msgid "Invoice"
 msgstr "Facture"
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:44
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:49
 #, python-format
 msgid "a Customer Invoice"
 msgstr "une facture client"
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:47
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:53
+#: code:addons/account_fiscal_position_vat_check/partner.py:38
 #, python-format
 msgid "Missing VAT number:"
 msgstr "Numéro de TVA manquant :"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/partner.py:39
+#, python-format
+msgid "You have set the fiscal position '%s' that require the customer to have a VAT number. You should add the VAT number of this customer in OpenERP."
+msgstr "Vous avez sélectionné la position fiscale '%s' qui exige que le client ait un numéro de TVA. Vous devez ajouter le numéro de TVA de ce client dans OpenERP."
 

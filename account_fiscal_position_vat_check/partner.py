@@ -20,5 +20,21 @@
 #
 ##############################################################################
 
-from . import account_invoice
-from . import partner
+from openerp.osv import orm
+from openerp.tools.translate import _
+
+
+class res_partner(orm.Model):
+    _inherit = 'res.partner'
+
+    def fiscal_position_change(self, cr, uid, ids, account_position, vat):
+        '''Warning is the fiscal position requires a vat number and the partner
+        doesn't have one yet'''
+        if account_position and not vat:
+            fp = self.pool['account.fiscal.position'].read(
+                cr, uid, account_position, ['customer_must_have_vat', 'name'])
+            if fp['customer_must_have_vat']:
+                return {'warning': {
+                    'title': _('Missing VAT number:'),
+                    'message': _("You have set the fiscal position '%s' that require the customer to have a VAT number. You should add the VAT number of this customer in OpenERP.") % fp['name']}}
+        return True
