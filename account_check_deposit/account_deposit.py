@@ -134,6 +134,7 @@ class account_check_deposit(orm.Model):
             'credit': line.debit,
             'account_id': line.account_id.id,
             'partner_id': line.partner_id.id,
+            'check_line_id': line.id,
         })
         return move_line_vals
 
@@ -152,14 +153,15 @@ class account_check_deposit(orm.Model):
                 'name': deposit.name,
                 'debit': debit,
                 'ref': deposit.name,
-                'check_line_id': line.id,
             })
 
         return move_line_vals
 
-    def _reconcile_checks(self, cr, uid, deposit, move_id, context=None):
-        move_line_obj = self.pool.get('account.move.line')
-        for line in deposit.check_payment_ids:
+    def _reconcile_checks(self, cr, uid, move_id, context=None):
+        move_line_obj = self.pool['account.move.line']
+        move_obj = self.pool['account.move']
+        move = move_obj.browse(cr, uid, move_id, context=context)
+        for line in move.line_id:
             if line.check_line_id:
                 move_line_obj.reconcile(cr, uid,
                                         [line.id, line.check_line_id.id],
@@ -186,7 +188,7 @@ class account_check_deposit(orm.Model):
             move_vals = self._prepare_account_move_vals(cr, uid, deposit, context=context)
             move_id = move_obj.create(cr, uid, move_vals, context=context)
             move_obj.post(cr, uid, [move_id], context=context)
-            self._reconcile_checks(cr, uid, deposit, move_id, context=context)
+            self._reconcile_checks(cr, uid, move_id, context=context)
             deposit.write({'state':'done', 'move_id': move_id})
         return True
 
