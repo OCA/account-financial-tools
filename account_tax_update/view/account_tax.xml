@@ -6,7 +6,7 @@
             <field name="model">account.tax</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree string="Taxes">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="amount"/>

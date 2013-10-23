@@ -75,6 +75,8 @@ class UpdateTaxConfig(orm.Model):
         'purchase_set_inactive': fields.boolean(
             'Purchase taxes have been set to inactive',
             readonly=True),
+        'duplicate_tax_code': fields.boolean(
+            'Duplicate Tax code linked'),
         }
 
     _defaults = {
@@ -135,6 +137,7 @@ class UpdateTaxConfig(orm.Model):
         """
         config = self.browse(cr, uid, ids[0], context=None)
         tax_pool = self.pool.get('account.tax')
+        tax_code_pool = self.pool.get('account.tax.code')
         line_pool = self.pool.get('account.update.tax.config.line')
         tax_map = {}
         log = (config.log or '') + (
@@ -149,7 +152,7 @@ class UpdateTaxConfig(orm.Model):
             tax_old_name = line.source_tax_id.name
             tax_pool.write(
                 cr, uid, line.source_tax_id.id,
-                {'name': '[legacy, %s] %s' % (config.name, tax_old_name)},
+                {'name': '[%s] %s' % (config.name, tax_old_name)},
                 context=context)
             if line.source_tax_id.amount in [1.0, -1.0, 0]:
                 amount_new = line.source_tax_id.amount
@@ -158,6 +161,35 @@ class UpdateTaxConfig(orm.Model):
             # 6.0 messes up the name change with copy + write, while
             # 6.1 throws name uniqueness constraint violation
             # So jumping some hoops with rewriting the new name
+            ## We will check if we need to dupliace
+            cp_base_code_id = False
+            cp_ref_base_code_id = False
+            cp_tax_code_id = False
+            cp_ref_tax_code_id = False
+            if config.duplicate_tax_code:
+                if line.source_tax_id.base_code_id:
+                    cp_base_code_id = tax_code_pool.copy(cr,uid,line.source_tax_id.base_code_id.id)
+                    rename_old = '[%s] %s'%(config.name,line.source_tax_id.base_code_id.name)
+                    tax_code_pool.write(cr, uid, line.source_tax_id.base_code_id.id, {'name':rename_old})
+                if line.source_tax_id.tax_code_id:
+                    cp_tax_code_id = tax_code_pool.copy(cr,uid,line.source_tax_id.tax_code_id.id)
+                    rename_old = '[%s] %s'%(config.name,line.source_tax_id.tax_code_id.name)
+                    tax_code_pool.write(cr, uid, line.source_tax_id.tax_code_id.id, {'name':rename_old})
+                if line.source_tax_id.ref_base_code_id:
+                    cp_ref_base_code_id = tax_code_pool.copy(cr,uid,line.source_tax_id.ref_base_code_id.id)
+                    rename_old = '[%s] %s'%(config.name,line.source_tax_id.ref_base_code_id.name)
+                    tax_code_pool.write(cr, uid, line.source_tax_id.ref_base_code_id.id, {'name':rename_old})
+                if line.source_tax_id.ref_tax_code_id:
+                    cp_ref_tax_code_id = tax_code_pool.copy(cr,uid,line.source_tax_id.ref_tax_code_id.id)
+                    rename_old = '[%s] %s'%(config.name,line.source_tax_id.ref_tax_code_id.name)
+                    tax_code_pool.write(cr, uid, line.source_tax_id.ref_tax_code_id.id, {'name':rename_old})
+            else:
+                cp_base_code_id = line.source_tax_id.base_code_id and line.source_tax_id.base_code_id.id or False
+                cp_ref_base_code_id = line.source_tax_id.ref_base_code_id and line.source_tax_id.ref_base_code_id.id or False
+                cp_tax_code_id = line.source_tax_id.tax_code_id and line.source_tax_id.tax_code_id.id or False
+                cp_ref_tax_code_id = line.source_tax_id.ref_tax_code_id and line.source_tax_id.ref_tax_code_id.id or False
+                        
+                
             target_tax_id = tax_pool.copy(
                 cr, uid, line.source_tax_id.id,
                 { 'name': '[update, %s] %s' % (config.name, tax_old_name),
@@ -166,7 +198,13 @@ class UpdateTaxConfig(orm.Model):
                   'child_ids': [(6, 0, [])],
                   }, context=context)
             tax_pool.write( 
-                cr, uid, target_tax_id, {'name': tax_old_name}, context=context)
+                cr, uid, target_tax_id, {'name': tax_old_name,
+                                         'base_code_id':   cp_base_code_id ,
+                                          'ref_base_code_id' :  cp_ref_base_code_id ,
+                                          'tax_code_id':  cp_tax_code_id ,
+                                          'ref_tax_code_id':  cp_ref_tax_code_id 
+
+                                         }, context=context)
             tax_map[line.source_tax_id.id] = target_tax_id
             line_pool.write(
                 cr, uid, line.id,
@@ -395,21 +433,13 @@ class UpdateTaxConfigLine(orm.Model):
             'Configuration'),
         'source_tax_id': fields.many2one(
             'account.tax', 'Source tax',
-            required=True, readonly=True),
-        'source_tax_name': fields.related(
-            'source_tax_id', 'name',
-            type='char', size=64,
-            string="Old tax name"),
+            required=True),
         'source_tax_description': fields.related(
             'source_tax_id', 'description',
             type='char', size=32,
             string="Old tax code"),
         'target_tax_id': fields.many2one(
-            'account.tax', 'Target tax', readonly=True),
-        'target_tax_name': fields.related(
-            'target_tax_id', 'name',
-            type='char', size=64,
-            string="New tax name"),
+            'account.tax', 'Target tax'),
         'target_tax_description': fields.related(
             'target_tax_id', 'description',
             type='char', size=32,

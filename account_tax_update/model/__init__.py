@@ -1,3 +1,3 @@
-import update_tax_config
-import select_taxes
-import account_tax
+from . import update_tax_config
+from . import select_taxes
+from . import account_tax

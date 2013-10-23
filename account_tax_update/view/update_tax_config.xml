@@ -6,8 +6,11 @@
             <field name="model">account.update.tax.config</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form>
+                <form string="Taxes">
                     <field name="name"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"
+                           />
+                    <field name="duplicate_tax_code"
                            attrs="{'readonly': [('state', '!=', 'draft')]}"
                            />
                     <field name="state"/>
@@ -86,11 +89,12 @@
             <field name="model">account.update.tax.config.line</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree editable="bottom">
-                    <field name="source_tax_name"/>
+                <tree string="Taxes" editable="bottom">
+                    <field name="source_tax_id"/>
                     <field name="source_tax_description"/>
                     <field name="amount_old"/>
-                    <field name="target_tax_name"/>
+                    <field name="target_tax_id" attrs="{'readonly': [('state', '!=', 'confirm')]}" />
+                    <field name="state" invisible='1'/>
                     <field name="target_tax_description"/>
                     <field name="amount_new"/>
                 </tree>
