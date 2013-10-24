@@ -16,7 +16,7 @@
     <field name="inherit_id" ref="account.view_partner_property_form" />
     <field name="arch" type="xml">
         <field name="property_account_position" position="attributes">
-            <attribute name="on_change">fiscal_position_change(property_account_position, vat)</attribute>
+            <attribute name="on_change">fiscal_position_change(property_account_position, vat, customer)</attribute>
         </field>
     </field>
 </record>

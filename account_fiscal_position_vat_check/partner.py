@@ -27,10 +27,10 @@ from openerp.tools.translate import _
 class res_partner(orm.Model):
     _inherit = 'res.partner'
 
-    def fiscal_position_change(self, cr, uid, ids, account_position, vat):
+    def fiscal_position_change(self, cr, uid, ids, account_position, vat, customer):
         '''Warning is the fiscal position requires a vat number and the partner
         doesn't have one yet'''
-        if account_position and not vat:
+        if account_position and customer and not vat:
             fp = self.pool['account.fiscal.position'].read(
                 cr, uid, account_position, ['customer_must_have_vat', 'name'])
             if fp['customer_must_have_vat']:
