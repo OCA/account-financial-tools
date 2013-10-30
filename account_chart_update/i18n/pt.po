@@ -7,102 +7,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2010-06-10 15:41+0000\n"
-"PO-Revision-Date: 2010-11-29 16:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-10-15 14:01+0000\n"
+"PO-Revision-Date: 2013-10-29 14:14+0000\n"
+"Last-Translator: Joaquin Gutierrez <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-28 04:55+0000\n"
-"X-Generator: Launchpad (build 16309)\n"
+"X-Launchpad-Export-Date: 2013-10-30 05:53+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,lang:0
-msgid "Language"
-msgstr "Linguagem"
+#: view:wizard.update.charts.accounts:0
+msgid "Update chart of accounts from a template"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: field:wizard.update.charts.accounts.account,update_account_id:0
+msgid "Account to update"
+msgstr "Contas para actualizar"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:368
 #, python-format
-msgid "Created or updated fiscal position %s.\n"
-msgstr "Posição fiscal criada ou actualizada %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Exception creating account %s: %s - %s.\n"
-msgstr "Excepção da criação da conta %s :%s - %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Exception writing account %s: %s - %s.\n"
-msgstr "Excepção ao escrever a conta %s: %s - %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Exception setting the parent of account %s children: %s - %s.\n"
-msgstr "Excepção na definição ascendente da conta descendente %s: %s - %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Updated account %s.\n"
-msgstr "Conta %s actualizada.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Created account %s.\n"
-msgstr "Conta criada %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Created tax %s.\n"
-msgstr "Imposto criado %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Updated tax %s.\n"
-msgstr "Imposto actualizado %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Created tax code %s.\n"
-msgstr "Código de imposto %s criado.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Updated tax code %s.\n"
-msgstr "Código de imposto actualizado %s.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The template has accounts the fiscal position instance does not.\n"
-msgstr "O modelo tem contas que a instância da posição fiscal não tem.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The base sign field is different.\n"
-msgstr "O campo sinal base é diferente.\n"
+msgid "The code field is different.\n"
+msgstr "O campo código é diferente.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Fiscal position"
 msgstr "Posição fiscal"
-
-#. module: account_chart_update
-#: constraint:ir.actions.act_window:0
-msgid "Invalid model name in the action definition."
-msgstr "Nome do modelo inválido na definição da acção."
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_children_accounts_parent:0
@@ -115,21 +49,21 @@ msgid "Fiscal position to update"
 msgstr "Posição fiscal para actualizar"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,updated_taxes:0
-msgid "Updated taxes"
-msgstr "Actualizar Impostos"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:716
 #, python-format
-msgid "The child depend field is different.\n"
-msgstr "O campo descendente dependente é diferente.\n"
+msgid "Created tax code %s.\n"
+msgstr "Código de imposto %s criado.\n"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid "Note: Not all the fields are tested for changes, just the main ones."
-msgstr ""
-"Nota: Nem todos os campos foram testados para mudanças, apenas os principais."
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
+#, python-format
+msgid "Tax %s: The collected account can not be set.\n"
+msgstr "Imposto %s: A conta colectada não pode ser definida.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_accounts:0
+msgid "New accounts"
+msgstr "Novas contas"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -145,13 +79,36 @@ msgid "Company"
 msgstr "Empresa"
 
 #. module: account_chart_update
-#: help:wizard.update.charts.accounts,code_digits:0
-msgid ""
-"No. of Digits to use for account code. Make sure it is the same number as "
-"existing accounts."
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1076
+#, python-format
+msgid "Fiscal position %s: The destination tax %s can not be set.\n"
+msgstr "Posição fiscal %s: O destino do imposto %s não pode ser definido.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:839
+#, python-format
+msgid "Tax %s: The tax code for the tax refund %s can not be set.\n"
 msgstr ""
-"Nº de Dígitos para usar para o código da conta. Certifique-se que é o mesmo "
-"número contas existentes."
+"Imposto %s: O código imposto para o reembolso do imposto %s não pode ser "
+"definido.\n"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid ""
+"If you leave these options set, the wizard will not just create new records, "
+"but also update records with changes (i.e. different tax amount)"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax_codes:0
+msgid "Updated tax codes"
+msgstr "Códigos de imposto actualizado"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:617
+#, python-format
+msgid "The template has taxes the fiscal position instance does not.\n"
+msgstr "O modelo tem impostos que a instância da posição fiscal não tem.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_account:0
@@ -159,34 +116,11 @@ msgid "Update accounts"
 msgstr "Contas Actualizadas"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,updated_fps:0
-msgid "Updated fiscal positions"
-msgstr "Posições fiscais actualizada"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid ""
-"One or more errors detected!\n"
-"\n"
-"%s"
-msgstr ""
-"Um ou mais erros detectado!\n"
-"\n"
-"%s"
-
-#. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Account"
 msgstr "Conta"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid "Ok"
-msgstr "OK"
-
-#. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
 #: field:wizard.update.charts.accounts.account,notes:0
 #: field:wizard.update.charts.accounts.fiscal.position,notes:0
 #: field:wizard.update.charts.accounts.tax,notes:0
@@ -201,27 +135,21 @@ msgid "Taxes"
 msgstr "Impostos"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:371
 #, python-format
-msgid "Tax %s: The paid account can not be set.\n"
-msgstr "Imposto %s: A conta paga não pode ser definida.\n"
-
-#. module: account_chart_update
-#: selection:wizard.update.charts.accounts,state:0
-msgid "Wizard completed"
-msgstr "Assistente Completo"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax %s: The tax code for the tax %s can not be set.\n"
-msgstr ""
-"Imposto %s: O código de imposto para o imposto %s não pode ser definido.\n"
+msgid "The info field is different.\n"
+msgstr "O campo informação é diferente.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_taxes:0
 msgid "New taxes"
 msgstr "Novos impostos"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:723
+#, python-format
+msgid "Updated tax code %s.\n"
+msgstr "Código de imposto actualizado %s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_tax_codes:0
@@ -234,31 +162,27 @@ msgid "Tax to update"
 msgstr "Imposto para actualizar"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:806
 #, python-format
-msgid "The python compute field is different.\n"
-msgstr "O campo processamento python é diferente.\n"
+msgid "Created tax %s.\n"
+msgstr "Imposto criado %s.\n"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid "Tax"
-msgstr "Imposto"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:459
+#, python-format
+msgid "The base sign field is different.\n"
+msgstr "O campo sinal base é diferente.\n"
 
 #. module: account_chart_update
-#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
-msgid "wizard.update.charts.accounts.tax"
-msgstr "wizard.update.charts.accounts.tax"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:441
+#, python-format
+msgid "The type field is different.\n"
+msgstr "O campo tipo é diferente.\n"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "wizard.update.charts.accounts.account"
 msgstr "wizard.update.charts.accounts.account"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Fiscal position %s: The source tax %s can not be set.\n"
-msgstr "Posição fiscal %s: O imposto raíz %s não pode ser definido.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -267,16 +191,19 @@ msgid "Accounts"
 msgstr "Contas"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:835
 #, python-format
-msgid "The tax group field is different.\n"
-msgstr "O campo de grupo de imposto é diferente.\n"
+msgid "Tax %s: The tax code for the tax %s can not be set.\n"
+msgstr ""
+"Imposto %s: O código de imposto para o imposto %s não pode ser definido.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:612
 #, python-format
-msgid "The name is different.\n"
-msgstr "O nome é diferente.\n"
+msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
+msgstr ""
+"Mapeamento de imposto não encontrado na instância da posição fiscal: %s -> "
+"%s.\n"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax_code:0
@@ -286,25 +213,19 @@ msgstr ""
 "são pesquisados pelo nome."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The code field is different.\n"
-msgstr "O campo código é diferente.\n"
+#: view:wizard.update.charts.accounts:0
+msgid "Previous"
+msgstr "Anterior"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax %s: The tax code for the base %s can not be set.\n"
-msgstr ""
-"Imposto %s: O código de imposto para a base %s não pode ser definido.\n"
+#: view:wizard.update.charts.accounts:0
+msgid "Tax"
+msgstr "Imposto"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax %s: The tax code for the tax refund %s can not be set.\n"
-msgstr ""
-"Imposto %s: O código imposto para o reembolso do imposto %s não pode ser "
-"definido.\n"
+#: view:wizard.update.charts.accounts:0
+msgid "Next"
+msgstr "Próximo"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -315,9 +236,36 @@ msgid "New template"
 msgstr "Novo modelo"
 
 #. module: account_chart_update
+#: help:wizard.update.charts.accounts,code_digits:0
+msgid ""
+"No. of digits to use for account code. Make sure it is the same number as "
+"existing accounts."
+msgstr ""
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:435
+#, python-format
+msgid "The sequence field is different.\n"
+msgstr "O campo sequência é diferente.\n"
+
+#. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_accounts:0
 msgid "Updated accounts"
 msgstr "Contas actualizadas"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:630
+#, python-format
+msgid ""
+"Account mapping not found on the fiscal position instance: %s -> %s.\n"
+msgstr ""
+"Mapeamento da conta não encontrada na instância da posição fiscal: %s -> "
+"%s.\n"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
+msgid "wizard.update.charts.accounts.tax"
+msgstr "wizard.update.charts.accounts.tax"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,type:0
@@ -328,15 +276,26 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_taxes:0
+msgid "Updated taxes"
+msgstr "Actualizar Impostos"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:465
+#, python-format
+msgid "The include base amount field is different.\n"
+msgstr "O campo montante inclui base é diferente.\n"
+
+#. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Chart of Accounts"
 msgstr "Lista de Contas"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:633
 #, python-format
-msgid "The sequence field is different.\n"
-msgstr "O campo sequência é diferente.\n"
+msgid "The template has accounts the fiscal position instance does not.\n"
+msgstr "O modelo tem contas que a instância da posição fiscal não tem.\n"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
@@ -349,10 +308,22 @@ msgid "Step 2"
 msgstr "Passo 2"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1014
 #, python-format
-msgid "Fiscal position %s: The source account %s can not be set.\n"
-msgstr "Posição fiscal %s: A conta raíz %s não pode ser definida.\n"
+msgid "Tax %s: The paid account can not be set.\n"
+msgstr "Imposto %s: A conta paga não pode ser definida.\n"
+
+#. module: account_chart_update
+#: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
+#: model:ir.ui.menu,name:account_chart_update.menu_wizard
+msgid "Update chart of accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:941
+#, python-format
+msgid "Exception creating account %s: %s - %s.\n"
+msgstr "Excepção da criação da conta %s :%s - %s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
@@ -360,9 +331,10 @@ msgid "Continue on errors"
 msgstr "Continuar nos erros"
 
 #. module: account_chart_update
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "XML Inválido para Arquitectura de Vista!"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:453
+#, python-format
+msgid "The python compute field is different.\n"
+msgstr "O campo processamento python é diferente.\n"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
@@ -370,9 +342,28 @@ msgid "wizard.update.charts.accounts.tax.code"
 msgstr "wizard.update.charts.accounts.tax.code"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,code_digits:0
-msgid "# of Digits"
-msgstr "# de Dígitos"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1092
+#, python-format
+msgid "Fiscal position %s: The source account %s can not be set.\n"
+msgstr "Posição fiscal %s: A conta raíz %s não pode ser definida.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:833
+#, python-format
+msgid "Tax %s: The tax code for the base %s can not be set.\n"
+msgstr ""
+"Imposto %s: O código de imposto para a base %s não pode ser definido.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:952
+#, python-format
+msgid "Exception writing account %s: %s - %s.\n"
+msgstr "Excepção ao escrever a conta %s: %s - %s.\n"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Note: Not all the fields are tested for changes, just the main ones"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_fiscal_position:0
@@ -380,35 +371,21 @@ msgid "Update fiscal positions"
 msgstr "Actualizar posições fiscais"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax %s: The tax code for the base refund %s can not be set.\n"
-msgstr ""
-"Imposto %s: O código de imposto para o reembolso base %s não pode ser "
-"definido.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax %s: The collected account can not be set.\n"
-msgstr "Imposto %s: A conta colectada não pode ser definida.\n"
-
-#. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
-msgid "Previous"
-msgstr "Anterior"
+msgid "or"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:250
 #, python-format
-msgid "Tax %s: The parent tax %s can not be set.\n"
-msgstr "Imposto %s: O imposto ascendente %s não pode ser definido.\n"
+msgid "Update Chart of Accounts from a Chart Template "
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:531
 #, python-format
-msgid "The domain field is different.\n"
-msgstr "O campo domíno é diferente.\n"
+msgid "The name is different.\n"
+msgstr "O nome é diferente.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -416,15 +393,30 @@ msgid "Log"
 msgstr "Registo"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:736
 #, python-format
-msgid "The tax sign field is different.\n"
-msgstr "O campo sinal de imposto é diferente.\n"
+msgid "Tax code %s: The parent tax code %s can not be set.\n"
+msgstr ""
+"Código de imposto %s: O código de imposto ascendente %s não pode ser "
+"definido.\n"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,updated_tax_codes:0
-msgid "Updated tax codes"
-msgstr "Códigos de imposto actualizado"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:438
+#, python-format
+msgid "The amount field is different.\n"
+msgstr "O campo montante é diferente.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:450
+#, python-format
+msgid "The child depend field is different.\n"
+msgstr "O campo descendente dependente é diferente.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:948
+#, python-format
+msgid "Updated account %s.\n"
+msgstr "Conta %s actualizada.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.tax.code,update_tax_code_id:0
@@ -437,20 +429,27 @@ msgid "Messages and Errors"
 msgstr "Mensagens e Erros"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:468
 #, python-format
-msgid "The user type is different.\n"
-msgstr "O tipo de utilizador é diferente.\n"
+msgid "The type tax use field is different.\n"
+msgstr "O campo tipo de imposto utilizado é diferente.\n"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid ""
-"If you leave these options set, the wizard will not just create new records, "
-"but also update records with changes (i.e. different tax amount)."
-msgstr ""
-"Se deixar estas opções definidas o assistente não vai somente criar novas "
-"gravações, mas também actualizar as gravações com alterações (exemplo:  "
-"montante do imposto diferente)."
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Wizard completed"
+msgstr "Assistente Completo"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:963
+#, python-format
+msgid "Account %s: The parent account %s can not be set.\n"
+msgstr "Conta %s: A conta ascendente %s não pode ser difenida.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:831
+#, python-format
+msgid "Tax %s: The parent tax %s can not be set.\n"
+msgstr "Imposto %s: O imposto ascendente %s não pode ser definido.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -464,14 +463,6 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
-msgstr ""
-"Mapeamento de imposto não encontrado na instância da posição fiscal: %s -> "
-"%s.\n"
-
-#. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
 msgid "Fiscal position template"
 msgstr "Modelo de posição fiscal"
@@ -482,10 +473,22 @@ msgid "Summary of updated objects"
 msgstr "Resumo de objectos actualizados"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:374
 #, python-format
-msgid "Account %s: The parent account %s can not be set.\n"
-msgstr "Conta %s: A conta ascendente %s não pode ser difenida.\n"
+msgid "The sign field is different.\n"
+msgstr "O campo sinal é diferente.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:813
+#, python-format
+msgid "Updated tax %s.\n"
+msgstr "Imposto actualizado %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:874
+#, python-format
+msgid "Exception setting the parent of account %s children: %s - %s.\n"
+msgstr "Excepção na definição ascendente da conta descendente %s: %s - %s.\n"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_account:0
@@ -495,96 +498,9 @@ msgstr ""
 "código."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax code %s: The parent tax code %s can not be set.\n"
+#: field:wizard.update.charts.accounts,code_digits:0
+msgid "# of digits"
 msgstr ""
-"Código de imposto %s: O código de imposto ascendente %s não pode ser "
-"definido.\n"
-
-#. module: account_chart_update
-#: model:ir.module.module,description:account_chart_update.module_meta_information
-msgid ""
-"\n"
-"Adds a wizard to update a company account chart from a chart template.\n"
-"\n"
-"This is a pretty useful tool to update OpenERP instalations after tax "
-"reforms\n"
-"on the oficial charts of accounts, or to apply fixes performed on the chart\n"
-"template.\n"
-"\n"
-"The wizard:\n"
-"\n"
-"- Allows the user to compare a chart and a template showing differences\n"
-"    on accounts, taxes, tax codes and fiscal positions.\n"
-"- It may create the new account, taxes, tax codes and fiscal positions "
-"detected\n"
-"    on the template.\n"
-"- It can also update (overwrite) the accounts, taxes, tax codes and fiscal\n"
-"    positions that got modified on the template.\n"
-"\n"
-"The wizard lets the user select what kind of objects must be "
-"checked/updated,\n"
-"and whether old records must be checked for changes and updated.\n"
-"It will display all the accounts to be created / updated with some "
-"information\n"
-"about the detected differences, and allow the user to exclude records\n"
-"individually.\n"
-"Any problem found while updating will be shown on the last step.\n"
-"\n"
-"Authors:\n"
-"    Jordi Esteve (Zikzakmedia) <jesteve@zikzakmedia.com>\n"
-"    Borja López Soilán (Pexego) <borjals@pexego.es>\n"
-msgstr ""
-"\n"
-"Adiciona um assistente para actualizar a conta da empresa a partir de um "
-"modelo de gráfico.\n"
-"\n"
-"Esta é uma ferramenta bastante útil para instalações actualizada de OpenERP "
-"após as reformas fiscais \n"
-"Nas contas oficiais , ou para aplicar correcções realizadas no modelo de  "
-"gráfico\n"
-"modelo.\n"
-"\n"
-"A assistente:\n"
-"\n"
-"- Permite ao utilizador comparar um gráfico e um modelo que mostra as "
-"diferenças \n"
-"    de contas, impostos, códigos fiscais e as posições fiscais.\n"
-"- Permite  criar a nova conta, os impostos, códigos fiscais e as situações  "
-"detectadas \n"
-"    no modelo.\n"
-"- Também pode actualizar (substituir) as contas, impostos, códigos fiscais "
-"e\n"
-"    posições que tem modificado no modelo.\n"
-"\n"
-"O assistente permite ao utilizador seleccionar o tipo de objectos que devem "
-"ser verificados/actualizados\n"
-"e se os registos mais antigos devem ser verificados para mudanças e "
-"actualizado.\n"
-"Irá exibir todas as contas a ser criado/actualizado com algumas informações "
-"\n"
-"sobre as diferenças detectadas, e permite ao utilizador excluir registros \n"
-"individualmente.\n"
-"Qualquer problema encontrado ao actualizar será mostrado o último passo.\n"
-"\n"
-"Authores:\n"
-"    Jordi Esteve (Zikzakmedia) <jesteve@zikzakmedia.com>\n"
-"    Borja López Soilán (Pexego) <borjals@pexego.es>\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The reconcile is different.\n"
-msgstr "A conciliação é diferente.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Tax mapping not found on the fiscal position instance: %s -> None.\n"
-msgstr ""
-"Mapeamento do imposto não encontrado na intância da posição fiscal: %s -> "
-"Nenhum.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_tax_code:0
@@ -592,9 +508,9 @@ msgid "Update tax codes"
 msgstr "Actualizar códigos de imposto"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts.account,update_account_id:0
-msgid "Account to update"
-msgstr "Contas para actualizar"
+#: field:wizard.update.charts.accounts,lang:0
+msgid "Language"
+msgstr "Linguagem"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,account_id:0
@@ -602,38 +518,21 @@ msgid "Account template"
 msgstr "Modelo conta"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1127
 #, python-format
 msgid "Error"
 msgstr "Erro"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
-msgid "Next"
-msgstr "Próximo"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The template has taxes the fiscal position instance does not.\n"
-msgstr "O modelo tem impostos que a instância da posição fiscal não tem.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Fiscal position %s: The destination account %s can not be set.\n"
-msgstr "Posição fiscal %s: A conta destino %s não pode ser definida.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The type field is different.\n"
-msgstr "O campo tipo é diferente.\n"
-
-#. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
 msgid "Summary of created objects"
 msgstr "Resuno de objectos criados"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:534
+#, python-format
+msgid "The type is different.\n"
+msgstr "O tipo é diferente.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -652,18 +551,6 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: account_chart_update
-#: model:ir.module.module,shortdesc:account_chart_update.module_meta_information
-msgid "Detect changes and update the Account Chart from a template"
-msgstr ""
-"Detectar mudanças e actualizar a Lista de Contas a partir de um modelo"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The info field is different.\n"
-msgstr "O campo informação é diferente.\n"
-
-#. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0
 msgid "Existing taxes are updated. Taxes are searched by name."
 msgstr ""
@@ -671,42 +558,22 @@ msgstr ""
 "nome."
 
 #. module: account_chart_update
-#: constraint:ir.model:0
-msgid ""
-"The Object name must start with x_ and not contain any special character !"
-msgstr ""
-"O nome do Objecto precisa começar com x_ e não pode conter nenhum caracter "
-"especial !"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The applicable type field is different.\n"
-msgstr "O campo tipo aplicável é diferente.\n"
-
-#. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Create/Update"
 msgstr "Criar/Actualizar"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:837
 #, python-format
-msgid "The amount field is different.\n"
-msgstr "O campo montante é diferente.\n"
+msgid "Tax %s: The tax code for the base refund %s can not be set.\n"
+msgstr ""
+"Imposto %s: O código de imposto para o reembolso base %s não pode ser "
+"definido.\n"
 
 #. module: account_chart_update
-#: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
-#: model:ir.ui.menu,name:account_chart_update.menu_wizard
-#: view:wizard.update.charts.accounts:0
-msgid "Update Chart of Accounts from a Chart Template"
-msgstr "Actualizar a Lista de Contas a partir da Lista de Modelo"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The include base amount field is different.\n"
-msgstr "O campo montante inclui base é diferente.\n"
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
+msgid "wizard.update.charts.accounts"
+msgstr "wizard.update.charts.accounts"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
@@ -714,9 +581,28 @@ msgid "Chart Template"
 msgstr "Lista de Modelo"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid "Other options"
-msgstr "Outras opções"
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:462
+#, python-format
+msgid "The tax sign field is different.\n"
+msgstr "O campo sinal de imposto é diferente.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1127
+#, python-format
+msgid ""
+"One or more errors detected!\n"
+"\n"
+"%s"
+msgstr ""
+"Um ou mais erros detectado!\n"
+"\n"
+"%s"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1094
+#, python-format
+msgid "Fiscal position %s: The destination account %s can not be set.\n"
+msgstr "Posição fiscal %s: A conta destino %s não pode ser definida.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_fps:0
@@ -724,23 +610,28 @@ msgid "New fiscal positions"
 msgstr "Nova posição fiscal"
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid ""
-"This wizard will update your accounts, taxes and fiscal positions according "
-"to the selected chart template."
-msgstr ""
-"Este assistente vai actualizar todas as contas impostos e posições fiscais "
-"de acordo com a lista de modelo seleccionada."
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:444
+#, python-format
+msgid "The applicable type field is different.\n"
+msgstr "O campo tipo aplicável é diferente.\n"
 
 #. module: account_chart_update
-#: field:wizard.update.charts.accounts,new_accounts:0
-msgid "New accounts"
-msgstr "Novas contas"
+#: view:wizard.update.charts.accounts:0
+msgid "Tax code"
+msgstr "Código de imposto"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.tax,tax_id:0
 msgid "Tax template"
 msgstr "Imposto modelo"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:614
+#, python-format
+msgid "Tax mapping not found on the fiscal position instance: %s -> None.\n"
+msgstr ""
+"Mapeamento do imposto não encontrado na intância da posição fiscal: %s -> "
+"Nenhum.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -756,6 +647,12 @@ msgstr ""
 "pesquisadas pelo nome."
 
 #. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:537
+#, python-format
+msgid "The user type is different.\n"
+msgstr "O tipo de utilizador é diferente.\n"
+
+#. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,update_chart_wizard_id:0
 #: field:wizard.update.charts.accounts.fiscal.position,update_chart_wizard_id:0
 #: field:wizard.update.charts.accounts.tax,update_chart_wizard_id:0
@@ -764,21 +661,33 @@ msgid "Update chart wizard"
 msgstr "Actualizar lista de assistente"
 
 #. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid ""
+"This wizard will update your accounts, taxes and fiscal positions according "
+"to the selected chart template"
+msgstr ""
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:540
+#, python-format
+msgid "The reconcile is different.\n"
+msgstr "A conciliação é diferente.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:447
+#, python-format
+msgid "The domain field is different.\n"
+msgstr "O campo domíno é diferente.\n"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:0
+msgid "Other options"
+msgstr "Outras opções"
+
+#. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid "wizard.update.charts.accounts.fiscal.position"
 msgstr "wizard.update.charts.accounts.fiscal.position"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The type is different.\n"
-msgstr "O tipo é diferente.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "Fiscal position %s: The destination tax %s can not be set.\n"
-msgstr "Posição fiscal %s: O destino do imposto %s não pode ser definido.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -786,23 +695,34 @@ msgid "Records to create/update"
 msgstr "Gravações para criar/actualizar"
 
 #. module: account_chart_update
-#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
-msgid "wizard.update.charts.accounts"
-msgstr "wizard.update.charts.accounts"
-
-#. module: account_chart_update
-#: field:wizard.update.charts.accounts.tax.code,tax_code_id:0
-msgid "Tax code template"
-msgstr "Modelo do código de imposto"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1096
 #, python-format
+msgid "Created or updated fiscal position %s.\n"
+msgstr "Posição fiscal criada ou actualizada %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1074
+#, python-format
+msgid "Fiscal position %s: The source tax %s can not be set.\n"
+msgstr "Posição fiscal %s: O imposto raíz %s não pode ser definido.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_fps:0
+msgid "Updated fiscal positions"
+msgstr "Posições fiscais actualizada"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,lang:0
 msgid ""
-"Account mapping not found on the fiscal position instance: %s -> %s.\n"
+"For records searched by name (taxes, tax codes, fiscal positions), the "
+"template name will be matched against the record name on this language."
 msgstr ""
-"Mapeamento da conta não encontrada na instância da posição fiscal: %s -> "
-"%s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:937
+#, python-format
+msgid "Created account %s.\n"
+msgstr "Conta criada %s.\n"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_children_accounts_parent:0
@@ -817,18 +737,6 @@ msgstr ""
 "definidos para 4300."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The sign field is different.\n"
-msgstr "O campo sinal é diferente.\n"
-
-#. module: account_chart_update
-#: code:addons/account_chart_update/account.py:0
-#, python-format
-msgid "The type tax use field is different.\n"
-msgstr "O campo tipo de imposto utilizado é diferente.\n"
-
-#. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
 msgid ""
 "If set, the wizard will continue to the next step even if there are minor "
@@ -839,6 +747,6 @@ msgstr ""
 "ser definida)."
 
 #. module: account_chart_update
-#: view:wizard.update.charts.accounts:0
-msgid "Tax code"
-msgstr "Código de imposto"
+#: field:wizard.update.charts.accounts.tax.code,tax_code_id:0
+msgid "Tax code template"
+msgstr "Modelo do código de imposto"
