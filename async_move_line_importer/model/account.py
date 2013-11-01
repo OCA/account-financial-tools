@@ -21,7 +21,7 @@
 import psycopg2
 import logging
 from openerp.osv import orm
-
+from openerp.tools.float_utils import float_compare
 _logger = logging.getLogger(__name__)
 
 
@@ -67,6 +67,14 @@ class account_move(orm.Model):
                 line[key] = None
         return line
 
+    def _check_balance(self, vals):
+        """Check if move is balanced"""
+        line_dicts = [y[2] for y in vals['line_id']]
+        debit = sum(x.get('debit') or 0.0 for x in line_dicts)
+        credit = sum(x.get('credit') or 0.0 for x in line_dicts)
+        if float_compare(debit, credit, precision_digits=2):
+            raise ValueError('Move is not balanced %s %s' % (debit, credits))
+
     def _bypass_create(self, cr, uid, vals, context=None):
         """Create entries using cursor directly
 
@@ -87,6 +95,7 @@ class account_move(orm.Model):
             raise
         created_id = cr.fetchone()[0]
         if vals.get('line_id'):
+            self._check_balance(vals)
             for line in vals['line_id']:
                 l_vals = self._prepare_line(cr, uid, created_id,
                                             line, vals, context=context)
