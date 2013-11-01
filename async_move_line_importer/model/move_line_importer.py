@@ -140,7 +140,12 @@ class move_line_importer(orm.Model):
         :returns: (head [list of first row], data [list of list])
 
         """
-        data = csv.reader(csv_file, delimiter=str(delimiter))
+        try:
+            data = csv.reader(csv_file, delimiter=str(delimiter))
+        except csv.Error as error:
+            raise orm.except_orm(_('CSV file is malformed'),
+                                 _("Maybe you have not choose correct separator \n"
+                                   "the error detail is : \n %s") % repr(error))
         head = data.next()
         head = [x.replace(' ', '') for x in head]
         # Generator does not work with orm.BaseModel.load
