@@ -33,18 +33,22 @@ def _format_inserts_values(vals):
 
 
 class account_move(orm.Model):
-    """redefine account move create to bypass orm
-    if async_bypass_create is set to True in context"""
+    """redefine account move create to bypass orm.
+
+    Async_bypass_create must be set to True in context.
+
+    """
 
     _inherit = "account.move"
 
     def _prepare_line(self, cr, uid, move_id, line, vals, context=None):
-        """Take incomming move vals and complete move line dict with
-        missing data
+        """Take incomming move vals and complete move line dict with missing data
+
         :param move_id: parent move id
         :param line: dict of vals of move line
         :param vals: dict of vals of move
         :returns: dict of val of move line completed
+
         """
         if isinstance(line, tuple):
             line = line[2]
@@ -65,7 +69,10 @@ class account_move(orm.Model):
 
     def _bypass_create(self, cr, uid, vals, context=None):
         """Create entries using cursor directly
-        :returns: created id"""
+
+        :returns: created id
+
+        """
         mvl_obj = self.pool['account.move.line']
         vals['company_id'] = context.get('company_id', False)
         vals['state'] = 'draft'
@@ -96,8 +103,11 @@ class account_move(orm.Model):
 
 
 class account_move_line(orm.Model):
-    """redefine account move line create to bypass orm
-    if async_bypass_create is set to True in context"""
+    """Redefine account move line create to bypass orm.
+
+    Async_bypass_create must be set to True in context
+
+    """
 
     _inherit = "account.move.line"
 
@@ -111,7 +121,10 @@ class account_move_line(orm.Model):
 
     def _bypass_create(self, cr, uid, vals, context=None):
         """Create entries using cursor directly
-        :returns: created id"""
+
+        :returns: created id
+
+        """
         sql = u"Insert INTO account_move_line (%s) VALUES (%s) RETURNING id"
         sql = sql % _format_inserts_values(vals)
         try:
