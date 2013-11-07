@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_config","Read access to the tax update configuration","model_account_update_tax_config","account.group_account_user",1,0,0,0
+"access_config_manager","Write access to the tax update configuration","model_account_update_tax_config","account.group_account_manager",1,1,1,1
+"access_config_line","Read access to the tax update configuration lines","model_account_update_tax_config_line","account.group_account_user",1,0,0,0
+"access_config__line_manager","Write access to the tax update configuration lines","model_account_update_tax_config_line","account.group_account_manager",1,1,1,1

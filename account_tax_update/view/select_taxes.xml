@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="update_tax_config_add_lines_form" model="ir.ui.view">
+            <field name="name">Update tax select taxes form"</field>
+            <field name="model">account.update.tax.select_taxes</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Taxes">
+                    <label colspan="4" string="Add the taxes that need to be replaced here. Any parent or child taxes will be added automatically when you close this window."/>
+                    <field name="tax_ids" colspan="4" nolabel="1"
+                           domain="['|',('type_tax_use','=','all'),('type_tax_use','=',type_tax_use),('id', 'not in', covered_tax_ids[0][2])]"
+                           context="{'tree_view_ref': 'account_tax_update.tax_tree_view'}"
+                                    />
+                    <newline/>
+                    <button icon="gtk-close"
+                            special="cancel"
+                            string="Cancel"
+                            />
+                    <button icon="gtk-ok"
+                            name="save_taxes"
+                            string="Save"
+                            type="object"
+                            />
+                    <newline/>
+                    <group>
+                        <field name="covered_tax_ids" invisible="1"/>
+                        <field name="type_tax_use" invisible="1"/>
+                        <field name="config_id" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

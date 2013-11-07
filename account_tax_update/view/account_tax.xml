@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="tax_tree_view" model="ir.ui.view">
+            <field name="name">Tax tree view for the add lines wizard</field>
+            <field name="model">account.tax</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Taxes">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
