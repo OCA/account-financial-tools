@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1beta\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-08 14:03+0000\n"
-"PO-Revision-Date: 2011-12-08 14:03+0000\n"
+"POT-Creation-Date: 2013-10-18 17:53+0000\n"
+"PO-Revision-Date: 2013-10-18 17:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,18 @@ msgid "SIREN"
 msgstr ""
 
 #. module: l10n_fr_siret
+#: help:res.partner,nic:0
+msgid "The NIC number is the official rank number of this office in the company in France. It makes the last 5 digits of the SIRET number."
+msgstr ""
+
+#. module: l10n_fr_siret
 #: field:res.partner,nic:0
 msgid "NIC"
+msgstr ""
+
+#. module: l10n_fr_siret
+#: field:res.partner,company_registry:0
+msgid "Company Registry"
 msgstr ""
 
 #. module: l10n_fr_siret
@@ -36,13 +46,18 @@ msgid "The SIRET number is the official identity number of this company's office
 msgstr ""
 
 #. module: l10n_fr_siret
+#: help:res.partner,company_registry:0
+msgid "The name of official registry where this company was declared."
+msgstr ""
+
+#. module: l10n_fr_siret
 #: help:res.partner,siren:0
 msgid "The SIREN number is the official identity number of the company in France. It makes the first 9 digits of the SIRET number."
 msgstr ""
 
 #. module: l10n_fr_siret
-#: help:res.partner,nic:0
-msgid "The NIC number is the official rank number of this office in the company in France. It makes the last 5 digits of the SIRET number."
+#: model:ir.model,name:l10n_fr_siret.model_res_partner
+msgid "Partner"
 msgstr ""
 
 #. module: l10n_fr_siret
@@ -51,7 +66,7 @@ msgid "SIRET"
 msgstr ""
 
 #. module: l10n_fr_siret
-#: model:ir.model,name:l10n_fr_siret.model_res_partner
-msgid "Partner"
+#: view:res.partner:0
+msgid "Accounting"
 msgstr ""
 

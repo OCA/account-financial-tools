@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.3\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-10-31 08:58+0000\n"
-"PO-Revision-Date: 2011-10-31 08:58+0000\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-18 17:49+0000\n"
+"PO-Revision-Date: 2013-10-18 17:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_move_template
+#: code:addons/account_move_template/account_document_template.py:68
+#, python-format
+msgid "Code \"%s\" refers to non existing line"
+msgstr ""
+
+#. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
 #: field:wizard.select.move.template.line,move_line_type:0
 msgid "Move Line Type"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.model,name:account_move_template.model_account_move_template_line
-msgid "account.move.template.line"
+#: selection:wizard.select.move.template,state:0
+msgid "Template selected"
 msgstr ""
 
 #. module: account_move_template
@@ -43,17 +49,18 @@ msgid "wizard.select.move.template"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.module.module,shortdesc:account_move_template.module_meta_information
-msgid "Account Move Template"
+#: view:wizard.select.move.template:0
+msgid "Next"
 msgstr ""
 
 #. module: account_move_template
-#: view:account.move.template:0
-msgid "Group By..."
+#: field:wizard.select.move.template,state:0
+msgid "State"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:87
+#: code:addons/account_move_template/wizard/select_template.py:150
+#: code:addons/account_move_template/wizard/select_template.py:180
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
 msgstr ""
@@ -71,7 +78,7 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:76
+#: code:addons/account_move_template/wizard/select_template.py:106
 #, python-format
 msgid "No period found !"
 msgstr ""
@@ -89,13 +96,13 @@ msgid "Create Move from Template"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:67
+#: code:addons/account_move_template/wizard/select_template.py:98
 #, python-format
 msgid "Error !"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:76
+#: code:addons/account_move_template/wizard/select_template.py:106
 #, python-format
 msgid "Unable to find a valid period !"
 msgstr ""
@@ -112,14 +119,8 @@ msgid "Company"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.module.module,description:account_move_template.module_meta_information
-msgid "\n"
-"=============================\n"
-"Templates for Journal Entries\n"
-"=============================\n"
-"User can configure journal entries templates. The amount of each template line can be computed (through python code) or kept as user input. If user input, when using the template, user has to fill the amount of every input lines.\n"
-"The journal entry form allows lo load, through a wizard, the template to use and the amounts to fill.\n"
-""
+#: view:wizard.select.move.template.line:0
+msgid "Move Template Line"
 msgstr ""
 
 #. module: account_move_template
@@ -128,19 +129,19 @@ msgid "account.move.template"
 msgstr ""
 
 #. module: account_move_template
-#: model:ir.model,name:account_move_template.model_account_document_template_line
-msgid "account.document.template.line"
+#: field:account.move.template,transitory_acc_id:0
+msgid "Transitory account"
+msgstr ""
+
+#. module: account_move_template
+#: constraint:account.move.template:0
+msgid "If the template is \"cross-journals\", the Journals must be different,if the template does not \"cross-journals\" the Journals must be the same!"
 msgstr ""
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr ""
-
-#. module: account_move_template
-#: view:account.move.template:0
-msgid "Purchase"
 msgstr ""
 
 #. module: account_move_template
@@ -159,13 +160,13 @@ msgid "Name"
 msgstr ""
 
 #. module: account_move_template
-#: field:wizard.select.move.template,line_ids:0
-msgid "Lines"
+#: field:account.move.template,cross_journals:0
+msgid "Cross-Journals"
 msgstr ""
 
 #. module: account_move_template
-#: view:account.move.template:0
-msgid "Sale"
+#: field:wizard.select.move.template,line_ids:0
+msgid "Lines"
 msgstr ""
 
 #. module: account_move_template
@@ -174,7 +175,12 @@ msgid "Journal Entry Template Line"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:67
+#: model:ir.model,name:account_move_template.model_account_move_template_line
+msgid "account.move.template.line"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/select_template.py:98
 #, python-format
 msgid "At least one amount has to be non-zero!"
 msgstr ""
@@ -196,7 +202,9 @@ msgid "Journal Entry Template"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:69
+#: code:addons/account_move_template/account_document_template.py:62
+#: code:addons/account_move_template/account_document_template.py:67
+#: code:addons/account_move_template/account_document_template.py:76
 #, python-format
 msgid "Error"
 msgstr ""
@@ -223,9 +231,15 @@ msgid "Computed"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:87
+#: code:addons/account_move_template/wizard/select_template.py:149
+#: code:addons/account_move_template/wizard/select_template.py:179
 #, python-format
 msgid "No Analytic Journal !"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_document_template_line
+msgid "account.document.template.line"
 msgstr ""
 
 #. module: account_move_template
@@ -236,19 +250,17 @@ msgid "Python Code"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:70
+#: code:addons/account_move_template/account_document_template.py:77
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
 msgstr ""
 
 #. module: account_move_template
-#: view:wizard.select.move.template.line:0
-msgid "Move Template Line"
+#: field:account.move.template.line,account_tax_id:0
+msgid "Tax"
 msgstr ""
 
 #. module: account_move_template
-#: field:account.document.template.line,sequence:0
-#: field:account.move.template.line,sequence:0
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
 msgstr ""
@@ -259,8 +271,9 @@ msgid "Analytic Account"
 msgstr ""
 
 #. module: account_move_template
-#: view:wizard.select.move.template:0
-msgid "Cancel"
+#: field:account.document.template.line,sequence:0
+#: field:account.move.template.line,sequence:0
+msgid "Sequence"
 msgstr ""
 
 #. module: account_move_template
@@ -270,13 +283,28 @@ msgid "Template Lines"
 msgstr ""
 
 #. module: account_move_template
+#: view:wizard.select.move.template:0
+msgid "Cancel"
+msgstr ""
+
+#. module: account_move_template
+#: field:wizard.select.move.template,partner_id:0
+msgid "Partner"
+msgstr ""
+
+#. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template
 msgid "account.document.template"
 msgstr ""
 
 #. module: account_move_template
-#: view:account.move.template:0
-#: field:account.move.template,journal_id:0
+#: field:account.move.template.line,journal_id:0
 msgid "Journal"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/account_document_template.py:63
+#, python-format
+msgid "Line %s can't refer to itself"
 msgstr ""
 
