@@ -41,12 +41,12 @@ default values on accounts and products on demand. Defaults for purchase
 and sales taxes can be set at independent times. During the transition,
 the old taxes can still be selected manually on invoice lines etc.
 
+You can select to also duplicate linked tax code 
+
 After the transition, the old taxes can be made inactive.
 
-This module is compatible with OpenERP 6.0 and 6.1
+This module is compatible with OpenERP 7.0
 
-For Dutch users there is a video on how to use this module: 
-http://www.youtube.com/watch?v=Hs-NP8rRuIk
     """,
     'images': ['images/update_tax.png'],
     'depends': ['account'],
