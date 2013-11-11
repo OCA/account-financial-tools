@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-import netsvc
-from openerp.osv import fields, osv
+from openerp import netsvc
+from openerp.osv import fields, orm
 
-class res_company(osv.Model):
+class res_company(orm.Model):
     """override company to add currency update"""
 
     def _multi_curr_enable(self, cr, uid, ids, field_name, arg, context={}):
