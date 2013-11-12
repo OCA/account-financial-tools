@@ -7,9 +7,8 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.1beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-18 17:53+0000\n"
-"PO-Revision-Date: 2013-11-11 16:06+0000\n"
-"Last-Translator: Alexandre Fayolle - camptocamp "
-"<alexandre.fayolle@camptocamp.com>\n"
+"PO-Revision-Date: 2013-11-11 16:24+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +19,7 @@ msgstr ""
 #. module: l10n_fr_siret
 #: field:res.partner,siren:0
 msgid "SIREN"
-msgstr "SIREN"
+msgstr ""
 
 #. module: l10n_fr_siret
 #: help:res.partner,nic:0
@@ -28,13 +27,11 @@ msgid ""
 "The NIC number is the official rank number of this office in the company in "
 "France. It makes the last 5 digits of the SIRET number."
 msgstr ""
-"Le numéro NIC est le numéro de rang officiel de cet établissement dans sa "
-"société en France. Il compose les 5 derniers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: field:res.partner,nic:0
 msgid "NIC"
-msgstr "NIC"
+msgstr ""
 
 #. module: l10n_fr_siret
 #: field:res.partner,company_registry:0
@@ -44,7 +41,7 @@ msgstr ""
 #. module: l10n_fr_siret
 #: constraint:res.partner:0
 msgid "The SIREN or NIC number is incorrect."
-msgstr "Le numéro SIREN ou NIC est incorrect."
+msgstr ""
 
 #. module: l10n_fr_siret
 #: help:res.partner,siret:0
@@ -53,9 +50,6 @@ msgid ""
 "France. It is composed of the 9 digits of the SIREN number and the 5 digits "
 "of the NIC number, ie. 14 digits."
 msgstr ""
-"Le numéro SIRET est l'identifiant officiel de l'établissement en France. Il "
-"est composé des 9 chiffres du numéro SIREN et des 5 chiffres du numéro NIC, "
-"soit 14 chiffres."
 
 #. module: l10n_fr_siret
 #: help:res.partner,company_registry:0
@@ -68,18 +62,16 @@ msgid ""
 "The SIREN number is the official identity number of the company in France. "
 "It makes the first 9 digits of the SIRET number."
 msgstr ""
-"Le numéro SIREN est l'identifiant officiel de la société en France. Il "
-"compose les 9 premiers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: model:ir.model,name:l10n_fr_siret.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: l10n_fr_siret
 #: field:res.partner,siret:0
 msgid "SIRET"
-msgstr "SIRET"
+msgstr ""
 
 #. module: l10n_fr_siret
 #: view:res.partner:0
