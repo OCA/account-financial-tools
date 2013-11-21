@@ -1,3 +1,4 @@
+## -*- coding: utf-8 -*-
 <html>
   <head>
     <style type="text/css">
