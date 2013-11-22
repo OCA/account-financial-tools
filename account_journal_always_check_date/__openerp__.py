@@ -26,18 +26,18 @@
     'version': '0.1',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
-    'summary': 'Option Check Date always active on journals',
+    'summary': 'Option Check Date in Period always active on journals',
     'description': """
-Check Date Always active on Account Journals
-============================================
+Check Date in Period always active on Account Journals
+======================================================
 
 This module:
 
-* activates the 'Check Date' option on all existing account journals,
+* activates the 'Check Date in Period' option on all existing account journals,
 
-* enable the 'Check Date' option on new account journals,
+* enable the 'Check Date in Period' option on new account journals,
 
-* prevent users from deactivating the 'Check Date' option.
+* prevent users from deactivating the 'Check Date in Period' option.
 
 So this module is an additionnal security for countries where, on an account move, the date must be inside the period.
 
