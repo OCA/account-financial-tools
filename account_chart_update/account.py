@@ -1193,7 +1193,7 @@ class wizard_update_charts_accounts(osv.osv_memory):
         taxes_res = self._update_taxes(
             cr, uid, wizard, log, tax_codes_res['mapping'], context=context)
         accounts_res = self._update_accounts(
-            cr, uid, wizard, log, taxes_res['pending'], context=context)
+            cr, uid, wizard, log, taxes_res['mapping'], context=context)
         self._update_taxes_pending_for_accounts(cr, uid, wizard, log, taxes_res['pending'], accounts_res['mapping'], context=context)
         fps_res = self._update_fiscal_positions(cr, uid, wizard, log, taxes_res['mapping'], accounts_res['mapping'], context=context)
 
