@@ -27,11 +27,12 @@ from openerp.tools.translate import _
 class account_journal(orm.Model):
     _inherit = 'account.journal'
 
-    def __init__(self, pool, cr):
+    def init(self, cr):
         '''Activate 'Check Date in Period' on all existing journals'''
-        init_res = super(account_journal, self).__init__(pool, cr)
-        cr.execute("UPDATE account_journal SET allow_date=True")
-        return init_res
+        cr.execute(
+            "UPDATE account_journal SET allow_date=true "
+            "WHERE allow_date <> true")
+        return True
 
     _defaults = {
         'allow_date': True,
