@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="update_tax_config_form" model="ir.ui.view">
+            <field name="name">Update tax config form"</field>
+            <field name="model">account.update.tax.config</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Taxes">
+                    <field name="name"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"
+                           />
+                    <field name="duplicate_tax_code"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"
+                           />
+                    <field name="state"/>
+                    <field name="default_amount"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"
+                           />
+                    <notebook colspan="4">
+                        <page string="Taxes">
+                            <group string="Sales taxes" col="4" colspan="4">
+                                <field name="sale_line_ids" height="200" 
+                                       nolabel="1" colspan="4"
+                                       context="{'tax_real_name': 1}"
+                                       />
+                                <button name="add_lines"
+                                        type="object"
+                                        string="Add sale taxes"
+                                        context="{'type_tax_use': 'sale'}"
+                                        states="draft"/>
+                                <button name="set_defaults"
+                                        string="Replace sales tax defaults"
+                                        type="object"
+                                        context="{'type_tax_use': 'sale'}"
+                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_defaults', '!=', False)]}"
+                                        />
+                                <button name="set_inactive"
+                                        string="Set legacy sales taxes inactive"
+                                        type="object"
+                                        context="{'type_tax_use': 'sale'}"
+                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_inactive', '!=', False)]}"
+                                        />
+                            </group>
+                            <group string="Purchase taxes" col="4" colspan="4">
+                                <field name="purchase_line_ids"
+                                       nolabel="1" colspan="4" height="200"
+                                       context="{'tax_real_name': 1}"
+                                       />
+                                <button name="add_lines"
+                                        type="object"
+                                        string="Add purchase taxes"
+                                        context="{'type_tax_use': 'purchase'}"
+                                        states="draft"/>
+                                <button name="set_defaults"
+                                        string="Replace purchase tax defaults"
+                                        type="object"
+                                        context="{'type_tax_use': 'purchase'}"
+                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_defaults', '!=', False)]}"
+                                        />
+                                
+                                <button name="set_inactive"
+                                        string="Set legacy purchase taxes inactive"
+                                        type="object"
+                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_inactive', '!=', False)]}"
+                                        context="{'type_tax_use': 'purchase'}"
+                                        />
+                            </group>
+                            <field name="purchase_set_inactive" invisible="1"/>
+                            <field name="sale_set_inactive" invisible="1"/>
+                            <field name="purchase_set_defaults" invisible="1"/>
+                            <field name="sale_set_defaults" invisible="1"/>
+                        </page>
+                        <page string="Log">
+                            <field name="log" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                    <button name="confirm"
+                            string="Create tax mappings"
+                            states="draft"
+                            type="object"
+                            help="When you are done configuring the new tax amounts, click here to create the new taxes and a mapping between the new and old taxes"
+                            />
+                </form>  
+            </field>
+        </record>
+        <record id="update_tax_config_line_tree" model="ir.ui.view">
+            <field name="name">Update tax config line tree"</field>
+            <field name="model">account.update.tax.config.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Taxes" editable="bottom">
+                    <field name="source_tax_id"/>
+                    <field name="source_tax_description"/>
+                    <field name="amount_old"/>
+                    <field name="target_tax_id" attrs="{'readonly': [('state', '!=', 'confirm')]}" />
+                    <field name="state" invisible='1'/>
+                    <field name="target_tax_description"/>
+                    <field name="amount_new"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_update_tax_config"
+                model="ir.actions.act_window">
+            <field name="name">Update tax wizard</field>
+            <field name="res_model">account.update.tax.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">For every tax increase, you can create a new configuration. Select sales and purchase taxes to adapt. The selected taxes will be duplicated. The old tax names will be prefixed with a 'legacy' tag. Change the new tax names and codes in the window below to reflect the amount change. The new taxes then become available to select manually on sale or purchase order lines. You may also want to change the names of the associated tax codes, or reassign them between the taxes. At specific times during the transition, you can replace the default sales and purchase taxes in the system. Eventually you can hide the obsolete taxes by making them inactive. Until then, you can still select the old taxes manually</field>
+        </record>
+
+        <menuitem id="menu_update_tax_config"
+                  parent="account.next_id_27" name="Update tax wizard"
+                  action="action_update_tax_config"
+                  sequence="45"/>
+
+    </data>
+</openerp>
