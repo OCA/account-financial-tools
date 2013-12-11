@@ -10,6 +10,7 @@
           <field name="name"/>
           <field name="do_nothing"/>
           <field name="company_id"/>
+          <field name="active"/>
           <notebook colspan="4">
             <page string="Policy levels">
               <field name="level_ids" nolabel="1" colspan="4" >

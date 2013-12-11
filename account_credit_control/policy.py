@@ -45,7 +45,12 @@ class CreditControlPolicy(Model):
                                                 domain="[('reconcile', '=', True)]",
                                                 help="This policy will be active only"
                                                      " for the selected accounts"),
+                'active': fields.boolean('Active'),
                 }
+    
+    _defaults = {
+        'active': True,
+    }
 
     def _move_lines_domain(self, cr, uid, policy, controlling_date, context=None):
         """Build the default domain for searching move lines"""
