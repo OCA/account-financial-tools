@@ -5,6 +5,7 @@
 #    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
 #    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
 #    Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#    Banxico implemented by Agustin Cruz openpyme.mx
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -47,6 +48,9 @@ The module is able to use 4 different sources:
    You should check when rates should apply to bookkeeping. If next day you should
    change the update hour in schedule settings because in OpenERP they apply from
    date of update (date - no hours).
+   
+5. Banxico for USD & MXN (created by Agustín Cruz)
+   Updated daily
 
 In the roadmap : Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
