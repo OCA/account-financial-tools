@@ -65,6 +65,7 @@ class account_move(orm.Model):
         period_obj = self.pool.get('account.period')
         period_ctx = context.copy()
         period_ctx['company_id'] = move.company_id.id
+        period_ctx['account_period_prefer_normal'] = True
 
         if not reversal_period_id:
             reversal_period_id = period_obj.find(
