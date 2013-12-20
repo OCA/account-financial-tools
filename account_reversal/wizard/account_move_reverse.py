@@ -62,15 +62,23 @@ class account_move_reversal(orm.TransientModel):
         }
 
     def _next_period_first_date(self, cr, uid, context=None):
+        if context is None:
+            context = {}
+        res = False
+        period_ctx = context.copy()
+        period_ctx['account_period_prefer_normal'] = True
         period_obj = self.pool.get('account.period')
-        current_period_id = period_obj.find(cr, uid, context=context)[0]
-        current_period = period_obj.browse(
-                cr, uid, current_period_id, context=context)
-        next_period_id = period_obj.next(
-                cr, uid, current_period, 1, context=context)
-        next_period = period_obj.browse(
-                cr, uid, next_period_id, context=context)
-        return next_period.date_start
+        today_period_id = period_obj.find(cr, uid, context=period_ctx)
+        if today_period_id:
+            today_period = period_obj.browse(
+                cr, uid, today_period_id[0], context=context)
+            next_period_id = period_obj.next(
+                cr, uid, today_period, 1, context=context)
+            if next_period_id:
+                next_period = period_obj.browse(
+                    cr, uid, next_period_id, context=context)
+                res = next_period.date_start
+        return res
 
     _defaults = {
         'date': _next_period_first_date,
