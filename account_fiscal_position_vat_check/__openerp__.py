@@ -47,8 +47,8 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
         'partner_view.xml',
         ],
     'images': [
-        'fiscal_position_form.jpg',
-        'vat_check_invoice_validation.jpg',
+        'images/fiscal_position_form.jpg',
+        'images/vat_check_invoice_validation.jpg',
         ],
     'installable': True,
     'active': False,
