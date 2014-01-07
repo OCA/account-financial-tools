@@ -26,7 +26,7 @@
 
 {
     'name': "Detect changes and update the Account Chart from a template",
-    'version': "1.0",
+    'version': "1.0.1",
     'author': "Zikzakmedia SL",
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
@@ -62,7 +62,7 @@ Any problem found while updating will be shown on the last step.
         "account",
         "base",
     ],
-    "demo" : [],
+    "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
     ],
