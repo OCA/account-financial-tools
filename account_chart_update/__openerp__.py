@@ -31,7 +31,12 @@
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
     'category': "Generic Modules/Accounting",
-    'contributors': ['Joaquín Gutierrez', 'Pedro M. Baeza', 'invitu'],
+    'contributors': [
+        'Joaquín Gutierrez',
+        'Pedro M. Baeza',
+        'invitu',
+        'Stéphane Bidoul',
+    ],
     'description': """
 Adds a wizard to update a company account chart from a chart template.
 ======================================================================
