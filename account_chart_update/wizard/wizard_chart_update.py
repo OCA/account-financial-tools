@@ -267,6 +267,15 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 ('name', '=', tax_code_name),
                 ('company_id', '=', wizard.company_id.id)
             ])
+            if not tax_code_ids:
+                # if we could not match no tax code template name,
+                # try to match on tax code template code, if any
+                tax_code_code = tax_code_template.code
+                if tax_code_code:
+                    tax_code_ids = tax_codes.search(cr, uid, [
+                        ('code', '=', tax_code_code),
+                        ('company_id', '=', wizard.company_id.id)
+                    ])
             if tax_code_ids:
                 tax_code_template_mapping[
                     tax_code_template.id] = tax_code_ids[0]
