@@ -22,6 +22,9 @@
 
 from openerp.osv import fields, orm
 
+from openerp.addons.connector.queue.job import job
+from openerp.addons.connector.session import ConnectorSessionHandler
+
 
 class account_move(orm.Model):
 
@@ -36,3 +39,27 @@ class account_move(orm.Model):
             help='Check this box to mark the move for batch posting'
         ),
     }
+
+    def mark_for_posting(self, cr, uid, ids, context=None):
+        """."""
+        session_hdl = ConnectorSessionHandler(cr.dbname, uid)
+        with session_hdl.session() as session:
+            for move_id in ids:
+                validate_one_move.delay(session, self._name, move_id)
+                print('===== PUT IN QUEUE!!!!! %s' % move_id)
+                # work with session
+
+
+@job
+def validate_one_move(session, model_name, move_id):
+    """Press the button to validate a move. Return True.
+
+    This trivial function is there just to be called as a job with the delay
+    method.
+
+    """
+    return session.pool['account.move'].button_validate(
+        session.cr,
+        session.uid,
+        [move_id]
+    )
