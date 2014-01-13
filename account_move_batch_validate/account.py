@@ -23,12 +23,12 @@
 from openerp.osv import fields, orm
 
 from openerp.addons.connector.queue.job import job
-from openerp.addons.connector.session import Session
+from openerp.addons.connector.session import ConnectorSession
 
 
 class account_move(orm.Model):
 
-    """We add a field to mark a move for delayed posting."""
+    """We modify the account move to allow delayed posting."""
 
     _name = 'account.move'
     _inherit = 'account.move'
@@ -38,24 +38,47 @@ class account_move(orm.Model):
             'To Post',
             help='Check this box to mark the move for batch posting'
         ),
+        'post_job_uuid': fields.char(
+            'UUID of the Job to approve this move'
+        ),
     }
 
-    def mark_for_posting(self, cr, uid, ids, context=None):
-        """."""
-        session = Session(cr, uid, context=context)
-        for move_id in ids:
-            validate_one_move.delay(session, self._name, move_id)
+    def _delay_post_marked(self, cr, uid, context=None):
+        """Create a job for every move marked for posting.
+
+        If some moves already have a job, they are skipped.
+
+        """
+
+        if context is None:
+            context = {}
+
+        session = ConnectorSession(cr, uid, context=context)
+
+        move_ids = self.search(cr, uid, [
+            ('to_post', '=', True),
+            ('post_job_uuid', '=', False),
+            ('state', '=', 'draft'),
+        ], context=context)
+
+        for move_id in move_ids:
+            job_uuid = validate_one_move.delay(session, self._name, move_id)
+            self.write(cr, uid, [move_id], {
+                'post_job_uuid': job_uuid
+            })
+
+    def mark_for_posting(self, cr, uid, move_ids, context=None):
+        """Mark a list of moves for delayed posting, and enqueue the jobs."""
+        if context is None:
+            context = {}
+        self.write(cr, uid, move_ids, {'to_post': True}, context=context)
+        self._delay_post_marked(cr, uid, context=context)
 
 
 @job
 def validate_one_move(session, model_name, move_id):
-    """Press the button to validate a move. Return True.
-
-    This trivial function is there just to be called as a job with the delay
-    method.
-
-    """
-    return session.pool['account.move'].button_validate(
+    """Validate a move, and leave the job reference in place."""
+    session.pool['account.move'].button_validate(
         session.cr,
         session.uid,
         [move_id]
