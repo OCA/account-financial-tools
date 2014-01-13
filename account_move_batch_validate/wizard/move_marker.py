@@ -51,7 +51,21 @@ class AccountMoveMarker(orm.TransientModel):
             move_obj = self.pool['account.move']
 
             if wiz.action == 'mark':
-                import pdb;pdb.set_trace()
+                domain = []
+                if wiz.journal_ids:
+                    domain.append((
+                        'journal_id',
+                        'in',
+                        [journal.id for journal in wiz.journal_ids]
+                    ))
+
+                move_ids = move_obj.search(cr, uid, domain, context=context)
+
+                move_obj.write(cr, uid, move_ids, {'to_post': True})
+                move_obj.mark_for_posting(cr, uid, move_ids, context=context)
+
+                return {'type': 'ir.actions.act_window_close'}
+
             elif wiz.action == 'unmark':
                 # TODO
                 raise NotImplementedError(
@@ -62,16 +76,3 @@ class AccountMoveMarker(orm.TransientModel):
                 raise NotImplementedError(
                     'Date and period filter are not implemented yet'
                 )
-
-            domain = []
-            if wiz.journal_ids:
-                domain.append((
-                    'journal_id',
-                    'in',
-                    [journal.id for journal in wiz.journal_ids]
-                ))
-
-            move_ids = move_obj.search(cr, uid, domain, context=context)
-            move_obj.write 
-            for move in move_ids:
-                import pdb;pdb.set_trace()
