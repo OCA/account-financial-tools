@@ -44,7 +44,9 @@
         'wizard/move_marker_view.xml',
     ],
     'demo_xml': [],
-    'test': [],
+    'test': [
+        'test/batch_validate.yml'
+    ],
     'installable': True,
     'images': [],
     'license': 'AGPL-3',
