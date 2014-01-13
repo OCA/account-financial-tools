@@ -23,7 +23,7 @@
 from openerp.osv import fields, orm
 
 from openerp.addons.connector.queue.job import job
-from openerp.addons.connector.session import ConnectorSessionHandler
+from openerp.addons.connector.session import Session
 
 
 class account_move(orm.Model):
@@ -42,12 +42,9 @@ class account_move(orm.Model):
 
     def mark_for_posting(self, cr, uid, ids, context=None):
         """."""
-        session_hdl = ConnectorSessionHandler(cr.dbname, uid)
-        with session_hdl.session() as session:
-            for move_id in ids:
-                validate_one_move.delay(session, self._name, move_id)
-                print('===== PUT IN QUEUE!!!!! %s' % move_id)
-                # work with session
+        session = Session(cr, uid, context=context)
+        for move_id in ids:
+            validate_one_move.delay(session, self._name, move_id)
 
 
 @job
