@@ -61,7 +61,6 @@ class AccountMoveMarker(orm.TransientModel):
 
                 move_ids = move_obj.search(cr, uid, domain, context=context)
 
-                move_obj.write(cr, uid, move_ids, {'to_post': True})
                 move_obj.mark_for_posting(cr, uid, move_ids, context=context)
 
                 return {'type': 'ir.actions.act_window_close'}
