@@ -52,11 +52,23 @@ class AccountMoveMarker(orm.TransientModel):
 
             domain = [('state', '=', 'draft')]
 
-            if wiz.filter != 'filter_no':
-                # TODO
-                raise NotImplementedError(
-                    'Date and period filters are not implemented yet'
-                )
+            if wiz.filter == 'filter_period':
+                period_pool = self.pool['account.period']
+                period_ids = period_pool.search(cr, uid, [
+                    ('date_start', '>=', wiz.period_from.date_start),
+                    ('date_stop', '<=', wiz.period_to.date_stop),
+                ], context=context)
+
+                domain.append((
+                    'period_id',
+                    'in',
+                    period_ids
+                ))
+            elif wiz.filter == 'filter_date':
+                domain += [
+                    ('date', '>=', wiz.date_from),
+                    ('date', '<=', wiz.date_to),
+                ]
 
             if wiz.journal_ids:
                 domain.append((
