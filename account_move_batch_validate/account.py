@@ -21,9 +21,11 @@
 """Accounting customisation for delayed posting."""
 
 from openerp.osv import fields, orm
+from openerp.tools.translate import _
 
 from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.queue.job import OpenERPJobStorage
 
 
 class account_move(orm.Model):
@@ -43,7 +45,7 @@ class account_move(orm.Model):
         ),
     }
 
-    def _delay_post_marked(self, cr, uid, context=None):
+    def _delay_post_marked(self, cr, uid, eta=None, context=None):
         """Create a job for every move marked for posting.
 
         If some moves already have a job, they are skipped.
@@ -62,10 +64,37 @@ class account_move(orm.Model):
         ], context=context)
 
         for move_id in move_ids:
-            job_uuid = validate_one_move.delay(session, self._name, move_id)
+            job_uuid = validate_one_move.delay(session, self._name, move_id,
+                                               eta=eta)
             self.write(cr, uid, [move_id], {
                 'post_job_uuid': job_uuid
             })
+
+    def _cancel_jobs(self, cr, uid, context=None):
+        """Find moves where the mark has been removed and cancel the jobs.
+
+        For the moves that are posted already it's too late: we skip them.
+
+        """
+
+        if context is None:
+            context = {}
+
+        session = ConnectorSession(cr, uid, context=context)
+        storage = OpenERPJobStorage(session)
+
+        move_ids = self.search(cr, uid, [
+            ('to_post', '=', False),
+            ('post_job_uuid', '!=', False),
+            ('state', '=', 'draft'),
+        ], context=context)
+
+        for move in self.browse(cr, uid, move_ids, context=context):
+            job = storage.load(move.post_job_uuid)
+            if job.state in (u'pending', u'enqueued'):
+                job.set_done(result=_(
+                    u'Task set to Done because the user unmarked the move'
+                ))
 
     def mark_for_posting(self, cr, uid, move_ids, context=None):
         """Mark a list of moves for delayed posting, and enqueue the jobs."""
@@ -73,6 +102,13 @@ class account_move(orm.Model):
             context = {}
         self.write(cr, uid, move_ids, {'to_post': True}, context=context)
         self._delay_post_marked(cr, uid, context=context)
+
+    def unmark_for_posting(self, cr, uid, move_ids, context=None):
+        """Unmark moves for delayed posting, and cancel the jobs."""
+        if context is None:
+            context = {}
+        self.write(cr, uid, move_ids, {'to_post': False}, context=context)
+        self._cancel_jobs(cr, uid, context=context)
 
 
 @job
