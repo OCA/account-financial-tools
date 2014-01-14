@@ -50,28 +50,27 @@ class AccountMoveMarker(orm.TransientModel):
 
             move_obj = self.pool['account.move']
 
-            if wiz.action == 'mark':
-                domain = []
-                if wiz.journal_ids:
-                    domain.append((
-                        'journal_id',
-                        'in',
-                        [journal.id for journal in wiz.journal_ids]
-                    ))
+            domain = [('state', '=', 'draft')]
 
-                move_ids = move_obj.search(cr, uid, domain, context=context)
-
-                move_obj.mark_for_posting(cr, uid, move_ids, context=context)
-
-                return {'type': 'ir.actions.act_window_close'}
-
-            elif wiz.action == 'unmark':
-                # TODO
-                raise NotImplementedError(
-                    'The Unmark action is not implemented yet'
-                )
             if wiz.filter != 'filter_no':
                 # TODO
                 raise NotImplementedError(
-                    'Date and period filter are not implemented yet'
+                    'Date and period filters are not implemented yet'
                 )
+
+            if wiz.journal_ids:
+                domain.append((
+                    'journal_id',
+                    'in',
+                    [journal.id for journal in wiz.journal_ids]
+                ))
+
+            move_ids = move_obj.search(cr, uid, domain, context=context)
+
+            if wiz.action == 'mark':
+                move_obj.mark_for_posting(cr, uid, move_ids, context=context)
+
+            elif wiz.action == 'unmark':
+                move_obj.unmark_for_posting(cr, uid, move_ids, context=context)
+
+            return {'type': 'ir.actions.act_window_close'}
