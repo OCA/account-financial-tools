@@ -45,7 +45,8 @@
     ],
     'demo_xml': [],
     'test': [
-        'test/batch_validate.yml'
+        'test/batch_validate.yml',
+        'test/batch_validate_then_unmark.yml',
     ],
     'installable': True,
     'images': [],
