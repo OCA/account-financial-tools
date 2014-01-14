@@ -96,12 +96,12 @@ class account_move(orm.Model):
                     u'Task set to Done because the user unmarked the move'
                 ))
 
-    def mark_for_posting(self, cr, uid, move_ids, context=None):
+    def mark_for_posting(self, cr, uid, move_ids, eta=None, context=None):
         """Mark a list of moves for delayed posting, and enqueue the jobs."""
         if context is None:
             context = {}
         self.write(cr, uid, move_ids, {'to_post': True}, context=context)
-        self._delay_post_marked(cr, uid, context=context)
+        self._delay_post_marked(cr, uid, eta=eta, context=context)
 
     def unmark_for_posting(self, cr, uid, move_ids, context=None):
         """Unmark moves for delayed posting, and cancel the jobs."""

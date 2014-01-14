@@ -36,7 +36,7 @@ class AccountMoveMarker(orm.TransientModel):
             ('mark', 'Mark for posting'),
             ('unmark', 'Unmark for posting'),
         ], "Action", required=True),
-
+        'eta': fields.integer('Seconds to wait before starting the jobs')
     }
 
     _defaults = {
@@ -68,7 +68,8 @@ class AccountMoveMarker(orm.TransientModel):
             move_ids = move_obj.search(cr, uid, domain, context=context)
 
             if wiz.action == 'mark':
-                move_obj.mark_for_posting(cr, uid, move_ids, context=context)
+                move_obj.mark_for_posting(cr, uid, move_ids, eta=wiz.eta,
+                                          context=context)
 
             elif wiz.action == 'unmark':
                 move_obj.unmark_for_posting(cr, uid, move_ids, context=context)
