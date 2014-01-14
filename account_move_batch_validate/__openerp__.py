@@ -34,7 +34,7 @@
         Account Move Batch Validate
 
         This module provides a wizard to post many Journal Entries in batch. it
-        uses the queue system introduces by the OpenERP Connector to handle a
+        uses the queue system introduced by the OpenERP Connector to handle a
         big quantity of moves in batch.
     """,
     'website': 'http://www.camptocamp.com',
