@@ -20,5 +20,5 @@
 ###############################################################################
 """Account Move Batch Validate."""
 
-import account  # noqa
-import wizard  # noqa
+from . import account  # noqa
+from . import wizard  # noqa
