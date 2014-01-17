@@ -19,4 +19,4 @@
 #                                                                             #
 ###############################################################################
 """Wizard to mark account moves for batch posting."""
-import move_marker  # noqa
+from . import move_marker  # noqa
