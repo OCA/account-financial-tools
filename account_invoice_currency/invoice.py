@@ -144,6 +144,5 @@ class account_invoice(orm.Model):
                 },
             multi='cc_all'),
     }
-account_invoice()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
