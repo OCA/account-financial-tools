@@ -164,7 +164,7 @@ class Currency_rate_update(osv.Model):
     def run_currency_update(self, cr, uid):
         "update currency at the given frequence"
         factory = Currency_getter_factory()
-        curr_obj = self.pool.get('res_currency')
+        curr_obj = self.pool.get('res.currency')
         rate_obj = self.pool.get('res.currency.rate')
         companies = self.pool.get('res.company').search(cr, uid, [])
         for comp in self.pool.get('res.company').browse(cr, uid, companies):
@@ -176,8 +176,18 @@ class Currency_rate_update(osv.Model):
             search_filter = []
             if comp.multi_company_currency_enable :
                 search_filter = [('company_id','=',comp.id)]
-            #we fetch the main currency. The main rate should be set at  1.00
-            main_curr = comp.currency_id.name
+            #we fetch the main currency looking for currency with base = true. The main rate should be set at  1.00
+            main_curr_ids = curr_obj.search(cr, uid, [('base','=',True),('company_id','=',comp.id)])
+            if not main_curr_ids:
+                # If we can not find a base currency for this company we look for one with no company set
+                main_curr_ids = curr_obj.search(cr, uid, [('base','=',True),('company_id','=', False)])
+            if main_curr_ids:
+                main_curr_rec = curr_obj.browse(cr, uid, main_curr_ids[0])
+            else:
+                print ('Error !', 'There is no base currency set!')
+            if main_curr_rec.rate != 1:
+                print ('Error !', 'Base currency rate should be 1.00!')
+            main_curr = main_curr_rec.name
             for service in comp.services_to_use :
                 print "comp.services_to_use =", comp.services_to_use
                 note = service.note or ''
