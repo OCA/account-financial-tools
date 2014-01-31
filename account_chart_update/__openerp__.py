@@ -26,12 +26,17 @@
 
 {
     'name': "Detect changes and update the Account Chart from a template",
-    'version': "1.0",
+    'version': "1.1",
     'author': "Zikzakmedia SL",
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
     'category': "Generic Modules/Accounting",
-    'contributors': ['Joaquín Gutierrez', 'Pedro M. Baeza', 'invitu'],
+    'contributors': [
+        'Joaquín Gutierrez',
+        'Pedro M. Baeza',
+        'invitu',
+        'Stéphane Bidoul',
+    ],
     'description': """
 Adds a wizard to update a company account chart from a chart template.
 ======================================================================
@@ -62,7 +67,7 @@ Any problem found while updating will be shown on the last step.
         "account",
         "base",
     ],
-    "demo" : [],
+    "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
     ],
