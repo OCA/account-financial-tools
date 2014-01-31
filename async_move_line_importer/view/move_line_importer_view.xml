@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="move_line_importer_form" model="ir.ui.view">
+      <field name="name">move line importer form</field>
+      <field name="model">move.line.importer</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Move / Move lines importer">
+          <header>
+            <button name="import_file"
+                    type="object"
+                    states="draft,error"
+                    string="Import File"
+                    class="oe_highlight"/>
+            <field name="state"
+                   widget="statusbar"
+                   nolabel="1"
+                   statusbar_visible="draft,running,done"
+                   statusbar_colors='{"draft": "blue", "running": "blue", "done": "blue", "error": "red"}'/>
+          </header>
+          <group>
+            <field name="name" />
+          </group>
+          <group>
+            <div>
+              <field name="file"
+                     attrs="{'readonly': [('state', '=', 'done')]}"
+                     class="oe_inline"/>
+              <label string="Delimiter" class="oe_inline"/>
+              <field name="delimiter"
+                     attrs="{'readonly': [('state', '=', 'done')]}"
+                     class="oe_inline"/>
+            </div>
+          </group>
+          <group>
+            <field name="bypass_orm"/>
+          </group>
+          <group>
+            <field name="company_id" groups="base.group_multi_company"/>
+          </group>
+          <notebook>
+            <page string="Report">
+              <field name="report"
+                     nolabel="1"
+                     colspan="4"/>
+            </page>
+          </notebook>
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers"/>
+            <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+    <record id="move_line_importer_tree" model="ir.ui.view">
+      <field name="name">move line importer tree</field>
+      <field name="model">move.line.importer</field>
+      <field name="arch" type="xml">
+        <tree version="7.0" string="Imported files">
+          <field name="name" />
+          <field name="state"/>
+          <field name="company_id" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="move_line_importer_action">
+      <field name="name">Import Move lines</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">move.line.importer</field>
+      <field name="domain"></field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="move_line_importer_tree"/>
+    </record>
+
+    <menuitem
+        name="Import Move lines"
+        parent="account.menu_finance_entries"
+        action="move_line_importer_action"
+        id="move_line_importer_action_menu"/>
+  </data>
+</openerp>
