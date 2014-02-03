@@ -49,25 +49,31 @@
                             <field name="partner_id" invisible="1"/>
                             <field name="bank_id"/>
                         </group>
-                        <separator string="Check Payments"/>
-                        <field name="check_payment_ids" nolabel="1"
-                               colspan="4" widget="many2many"
-                               domain="[('reconcile_id','=',False),
-                                        ('account_id.user_type.code','=','recieved_check')]">
-                            <tree string="Check Payment">
-                                <field name="journal_id" />
-                                <field name="period_id" />
-                                <field name="date"/>
-                                <field name="name"/>
-                                <field name="ref"/>
-                                <field name="partner_id" />
-                                <field name="account_id" />
-                                <field name="move_id" />
-                                <field name="debit" sum="Total Debit"/>
-                                <field name="credit" sum="Total Credit"/>
-                                <field name="reconcile"/>
-                            </tree>
-                        </field>
+                        <notebook colspan="4">
+                            <page string="Check Payments"> 
+                                <field name="check_payment_ids" nolabel="1"
+                                       colspan="4" widget="many2many"
+                                       domain="[('reconcile_id','=',False),
+                                                ('account_id.user_type.code','=','recieved_check')]">
+                                    <tree string="Check Payment">
+                                        <field name="journal_id" />
+                                        <field name="period_id" />
+                                        <field name="date"/>
+                                        <field name="name"/>
+                                        <field name="ref"/>
+                                        <field name="partner_id" />
+                                        <field name="account_id" />
+                                        <field name="move_id" />
+                                        <field name="debit" sum="Total Debit"/>
+                                        <field name="credit" sum="Total Credit"/>
+                                        <field name="reconcile"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Move Line">
+                                <field name="line_ids" nolabel="1"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
