@@ -11,8 +11,8 @@
         <!-- New account.account.type -->
         
         <record model="account.account.type" id="data_account_type_received_check">
-          <field name="name">Recieved Checks</field>
-          <field name="code">recieved_check</field>
+          <field name="name">Received Checks</field>
+          <field name="code">received_check</field>
           <field name="close_method">none</field>
         </record>
         
