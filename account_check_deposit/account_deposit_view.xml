@@ -89,6 +89,8 @@
                     <field name="deposit_date"/>
                     <field name="state"/>
                     <field name="move_id"/>
+                    <field name="total_amount"/>
+                    <field name="is_reconcile"/>
                 </tree>
             </field>
         </record>

@@ -30,13 +30,22 @@ class account_check_deposit(orm.Model):
 
     def sum_amount(self, cr, uid, ids, name, args, context=None):
         res = {}
-        total = 0
         for deposit in self.browse(cr, uid, ids, context=context):
+            total = 0
             for line in deposit.check_payment_ids:
                 total += line.debit
             res[deposit.id]= total
         return  res
 
+    def _is_reconcile(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        for deposit in self.browse(cr, uid, ids, context=context):
+            res[deposit.id] = False
+            if deposit.move_id:
+                for line in deposit.move_id.line_id:
+                    if line.debit > 0 and line.reconcile_id:
+                        res[deposit.id] = True
+        return res 
 
     _columns = {
         'name': fields.char('Name', size=64, required=True, readonly=True,
@@ -73,7 +82,8 @@ class account_check_deposit(orm.Model):
         'company_id': fields.many2one('res.company', 'Company', required=True,
                                       change_default=True, readonly=True,
                                       states={'draft':[('readonly',False)]}),
-        'total_amount': fields.function(sum_amount, string ="total amount"),
+        'total_amount': fields.function(sum_amount, string ="total amount", type="float"),
+        'is_reconcile': fields.function(_is_reconcile, string ="Reconcile", type="boolean"),
     }
 
     _defaults = {
