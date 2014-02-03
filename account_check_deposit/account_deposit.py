@@ -40,11 +40,8 @@ class account_check_deposit(orm.Model):
 
     _columns = {
         'name': fields.char('Name', size=64, required=True, readonly=True,
-                            tates={'draft':[('readonly',False)]}),
-        'check_payment_ids': fields.many2many('account.move.line',
-                                              'account_move_line_deposit_rel',
+        'check_payment_ids': fields.one2many('account.move.line',
                                               'check_deposit_id',
-                                              'move_line_id',
                                               'Check Payments',
                                               readonly=True,
                                               states={'draft':[('readonly',False)]}),
@@ -88,9 +85,11 @@ class account_check_deposit(orm.Model):
             if not deposit.journal_id.update_posted:
                 raise osv.except_osv(_('Error!'), _('You cannot modify a posted entry of this journal.\nFirst you should set the journal to allow cancelling entries.'))
             for line in deposit.check_payment_ids:
-                line.reconcile_id.unlink()
+                if line.reconcile_id:
+                    line.reconcile_id.unlink()
             deposit.move_id.button_cancel()
             deposit.move_id.unlink()
+            deposit.write({'cancel': 'draft'})
         return True
 
     def create(self, cr, uid, vals, context=None):
@@ -191,9 +190,6 @@ class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     _columns = {
-        'check_deposit_id': fields.many2many('account.check.deposit',
-                                             'account_move_line_deposit_rel',
-                                             'check_deposit_id',
-                                             'move_line_id',
+        'check_deposit_id': fields.many2one('account.check.deposit',
                                              'Check Deposit'),
     }
