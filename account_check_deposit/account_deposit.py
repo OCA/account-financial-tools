@@ -53,7 +53,6 @@ class account_check_deposit(orm.Model):
         'state': fields.selection([
             ('draft','Draft'),
             ('done','Done'),
-            ('cancel','Cancelled')
         ],'Status', readonly=True),
         'move_id': fields.many2one('account.move', 'Journal Entry',
                                    readonly=True,
@@ -78,7 +77,12 @@ class account_check_deposit(orm.Model):
         'company_id': lambda self,cr,uid,c: self.pool.get('res.company')._company_default_get(cr, uid, 'account.check.deposit', context=c),
     }
 
-
+    def unlink(self, cr, uid, ids, context=None):
+        for deposit in self.browse(cr, uid, ids, context=context):
+            if deposit.state == 'done':
+                raise osv.except_osv(_('User Error!'),
+                    _('You cannot delete a validad deposit, cancel it before'))
+        return super(account_check_deposit, self).unlink(cr, uid, ids, context=context)
 
     def cancel(self, cr, uid, ids, context=None):
         for deposit in self.browse(cr, uid, ids, context=context):
@@ -87,9 +91,10 @@ class account_check_deposit(orm.Model):
             for line in deposit.check_payment_ids:
                 if line.reconcile_id:
                     line.reconcile_id.unlink()
-            deposit.move_id.button_cancel()
-            deposit.move_id.unlink()
-            deposit.write({'cancel': 'draft'})
+            if deposit.move_id:
+                deposit.move_id.button_cancel()
+                deposit.move_id.unlink()
+            deposit.write({'state': 'draft'})
         return True
 
     def create(self, cr, uid, vals, context=None):
@@ -120,11 +125,10 @@ class account_check_deposit(orm.Model):
              'company_id'],
             context=context)
         move_line_vals.update({
-            'name': line.name,
+            'name': line.ref,
             'credit': line.debit,
             'account_id': line.account_id.id,
             'partner_id': line.partner_id.id,
-            'ref': line.ref,
         })
         return move_line_vals
 
