@@ -49,6 +49,7 @@ class account_check_deposit(orm.Model):
 
     _columns = {
         'name': fields.char('Name', size=64, required=True, readonly=True,
+                            states={'draft':[('readonly',False)]}),
         'check_payment_ids': fields.one2many('account.move.line',
                                               'check_deposit_id',
                                               'Check Payments',
