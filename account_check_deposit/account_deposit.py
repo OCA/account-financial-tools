@@ -103,18 +103,23 @@ class account_check_deposit(orm.Model):
         return super(account_check_deposit, self).create(cr, uid, vals, context=context)
 
     def _prepare_account_move_vals(self, cr, uid, deposit, context=None):
-        move_vals = {}
-        move_lines = [[0, 0, self._prepare_sum_move_line_vals(cr, uid,
-                                                              deposit, move_vals,
+        move_vals = {
+            'journal_id': deposit.journal_id.id,
+            'date': deposit.deposit_date,
+            }
+        period_obj = self.pool['account.period']
+        period_ids =  period_obj.find(cr, uid, dt=deposit.deposit_date, context=context)
+        if period_ids:
+            move_vals['period_id'] = period_ids[0]
+
+        move_lines = [[0, 0, self._prepare_sum_move_line_vals(cr, uid, deposit,
+                                                              move_vals,
                                                               context=context)]]
         for line in deposit.check_payment_ids:
             move_lines.append([0, 0, self._prepare_move_line_vals(cr, uid, line,
                                                                   move_vals,
                                                                   context=context)])
-        move_vals.update({
-            'journal_id': deposit.journal_id.id,
-            'line_id': move_lines,
-        })
+        move_vals.update({'line_id': move_lines})
         return move_vals
 
     def _prepare_move_line_vals(self, cr, uid, line, move_vals, context=None):
