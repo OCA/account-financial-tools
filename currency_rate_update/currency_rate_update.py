@@ -35,7 +35,7 @@
 # a webservice to the list of currencies supported by the Webservice
 # TODO : implement max_delta_days for Yahoo webservice
 
-from openerp.osv import fields, osv
+from openerp.osv import fields, osv, orm
 import time
 from datetime import datetime, timedelta
 import logging
@@ -184,9 +184,9 @@ class Currency_rate_update(osv.Model):
             if main_curr_ids:
                 main_curr_rec = curr_obj.browse(cr, uid, main_curr_ids[0])
             else:
-                print ('Error !', 'There is no base currency set!')
+                raise orm.except_orm(_('Error!'),('There is no base currency set!'))
             if main_curr_rec.rate != 1:
-                print ('Error !', 'Base currency rate should be 1.00!')
+                raise orm.except_orm(_('Error!'),('Base currency rate should be 1.00!'))
             main_curr = main_curr_rec.name
             for service in comp.services_to_use :
                 print "comp.services_to_use =", comp.services_to_use
