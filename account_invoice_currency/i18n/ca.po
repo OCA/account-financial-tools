@@ -6,21 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.9\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-04-25 20:36+0000\n"
-"PO-Revision-Date: 2011-03-08 07:53+0000\n"
+"POT-Creation-Date: 2013-11-18 11:53+0000\n"
+"PO-Revision-Date: 2014-02-04 16:50+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-28 05:57+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2014-02-06 06:22+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #. module: account_invoice_currency
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "XML invàlid per a la definició de la vista!"
+#: help:account.invoice,cc_amount_total:0
+msgid ""
+"Invoice total amount in the company currency (useful when invoice currency "
+"is different from company currency)."
+msgstr ""
+"Total de la factura en la moneda de la companyia (útil quan les monedes de "
+"la factura i de la companyia són diferents)."
 
 #. module: account_invoice_currency
 #: field:account.invoice,cc_amount_total:0
@@ -33,29 +37,6 @@ msgid "Company Cur. Tax"
 msgstr "Impostos moneda companyia"
 
 #. module: account_invoice_currency
-#: help:account.invoice,cc_amount_untaxed:0
-msgid ""
-"Invoice untaxed amount in the company currency (useful when invoice currency "
-"is different from company currency)."
-msgstr ""
-"Base de la factura en la moneda de la companyia (útil quan les monedes de la "
-"factura i de la companyia són diferents)."
-
-#. module: account_invoice_currency
-#: model:ir.module.module,shortdesc:account_invoice_currency.module_meta_information
-msgid "Company currency in invoices"
-msgstr "Moneda de la companyia en factures"
-
-#. module: account_invoice_currency
-#: help:account.invoice,cc_amount_total:0
-msgid ""
-"Invoice total amount in the company currency (useful when invoice currency "
-"is different from company currency)."
-msgstr ""
-"Total de la factura en la moneda de la companyia (útil quan les monedes de "
-"la factura i de la companyia són diferents)."
-
-#. module: account_invoice_currency
 #: help:account.invoice,cc_amount_tax:0
 msgid ""
 "Invoice tax amount in the company currency (useful when invoice currency is "
@@ -65,17 +46,21 @@ msgstr ""
 "de la factura i de la companyia són diferents)."
 
 #. module: account_invoice_currency
-#: model:ir.module.module,description:account_invoice_currency.module_meta_information
+#: help:account.invoice,cc_amount_untaxed:0
 msgid ""
-"\n"
-"Adds functional fields to show Amount Untaxed, Amount Tax and Amount Total "
-"invoice fields in the company currency. These fields are shown in \"Other "
-"information\" tab in invoice form. \n"
+"Invoice untaxed amount in the company currency(useful when invoice currency "
+"is different from company currency)."
 msgstr ""
-"\n"
-"Afegeix camps funcionals per a mostrar els camps Base, Impostos i Total en "
-"la moneda de la companyia. Aquests camps es mostren a la pestanya \"Altra "
-"informació\" del formulari factura. \n"
+
+#. module: account_invoice_currency
+#: view:account.invoice:0
+msgid "Amounts in company currency"
+msgstr ""
+
+#. module: account_invoice_currency
+#: model:ir.model,name:account_invoice_currency.model_account_invoice
+msgid "Invoice"
+msgstr ""
 
 #. module: account_invoice_currency
 #: field:account.invoice,cc_amount_untaxed:0
