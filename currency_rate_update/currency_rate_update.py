@@ -46,6 +46,7 @@ from osv import osv, fields
 import time
 from datetime import datetime, timedelta
 import netsvc
+import logging
 from tools.translate import _
 
 class Currency_rate_update_service(osv.osv):
@@ -189,13 +190,13 @@ class Currency_rate_update(osv.osv):
             # we fetch the main currency. The main rate should be set at  1.00
             main_curr = comp.currency_id.name
             for service in comp.services_to_use :
-                logger.debug("comp.services_to_use = %s" % (comp.services_to_use))
+                self.logger.debug("comp.services_to_use = %s" % (comp.services_to_use))
                 note = service.note or ''
                 try :
                     # # we initalize the class that will handle the request
                     # # and return a dict of rate
                     getter = factory.register(service.service)
-                    logger.debug("getter = %s" % (type(getter)))
+                    self.logger.debug("getter = %s" % (type(getter)))
                     curr_to_fetch = map(lambda x : x.name, service.currency_to_update)
                     res, log_info = getter.get_updated_currency(curr_to_fetch, main_curr, service.max_delta_days)
                     rate_name = time.strftime('%Y-%m-%d')
