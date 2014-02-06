@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--Account Moves-->
+        <record id="account.validate_account_move_view" model="ir.ui.view">
+            <field name="name">Post Journal Entries</field>
+            <field name="model">validate.account.move</field>
+            <field name="arch" type="xml">
+                <form string="Post Journal Entries" version="7.0">
+                    <group>
+                        <field name="journal_ids"/>
+                        <field name="period_ids"/>
+                    </group>
+                    <footer>
+                        <button string="Approve" name="validate_move" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
