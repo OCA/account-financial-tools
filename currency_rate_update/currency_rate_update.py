@@ -45,7 +45,6 @@
 from osv import osv, fields
 import time
 from datetime import datetime, timedelta
-import netsvc
 import logging
 from tools.translate import _
 
@@ -129,7 +128,6 @@ class Currency_rate_update(osv.osv):
     }
 
     logger = logging.getLogger(__name__)
-    LOG_NAME = 'cron-rates'
     MOD_NAME = 'currency_rate_update: '
     def get_cron_id(self, cr, uid, context):
         """return the updater cron's id. Create one if the cron does not exists """
@@ -151,11 +149,7 @@ class Currency_rate_update(osv.osv):
                                     )
             cron_id = int(cron_id[0])
         except Exception, e :
-            self.logger.notifyChannel(
-                                        self.LOG_NAME,
-                                        netsvc.LOG_INFO,
-                                        'warning cron not found one will be created'
-                                     )
+            self.logger.info('warning cron not found one will be created')
             pass  # ignore if the cron is missing cause we are going to create it in db
 
         # the cron does not exists
@@ -228,7 +222,7 @@ class Currency_rate_update(osv.osv):
                 except Exception, e:
                     error_msg = note + "\n%s ERROR : %s"\
                         % (datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'), str(e))
-                    self.logger.notifyChannel(self.LOG_NAME, netsvc.LOG_INFO, str(e))
+                    self.logger.info(str(e))
                     service.write({'note':error_msg})
 
 
