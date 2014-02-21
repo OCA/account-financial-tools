@@ -51,7 +51,7 @@
         </record>
 
         <menuitem
-            name="Mark Jornal Items for Batch Posting"
+            name="Mark Journal Items for Batch Posting"
             parent="account.periodical_processing_journal_entries_validation"
             action="action_account_move_marker"
             id="menu_account_move_marker"
