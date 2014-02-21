@@ -9,7 +9,6 @@
             <field name="arch" type="xml">
                 <field name="to_check" position="after">
                     <field name="to_post"/>
-                    <field name="post_job_uuid"/>
                 </field>
             </field>
         </record>
@@ -21,7 +20,6 @@
             <field name="arch" type="xml">
                 <field name="to_check" position="after">
                     <field name="to_post"/>
-                    <field name="post_job_uuid"/>
                 </field>
             </field>
         </record>
