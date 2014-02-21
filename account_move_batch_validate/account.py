@@ -27,6 +27,9 @@ from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
 from openerp.addons.connector.queue.job import OpenERPJobStorage
 
+# do a massive write on account moves BLOCK_SIZE at a time
+BLOCK_SIZE = 1000
+
 
 class account_move(orm.Model):
 
@@ -101,7 +104,15 @@ class account_move(orm.Model):
         """Mark a list of moves for delayed posting, and enqueue the jobs."""
         if context is None:
             context = {}
-        self.write(cr, uid, move_ids, {'to_post': True}, context=context)
+        # For massive amounts of moves, this becomes necessary to avoid
+        # MemoryError's
+        for start in xrange(0, len(move_ids), BLOCK_SIZE):
+            self.write(
+                cr,
+                uid,
+                move_ids[start:start + BLOCK_SIZE],
+                {'to_post': True},
+                context=context)
         self._delay_post_marked(cr, uid, eta=eta, context=context)
 
     def unmark_for_posting(self, cr, uid, move_ids, context=None):
