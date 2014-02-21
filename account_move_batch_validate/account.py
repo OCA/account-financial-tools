@@ -40,7 +40,8 @@ class account_move(orm.Model):
 
     _columns = {
         'to_post': fields.boolean(
-            'To Post',
+            'Posting Requested',
+            readonly=True,
             help='Check this box to mark the move for batch posting'
         ),
         'post_job_uuid': fields.char(
