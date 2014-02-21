@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 14:17+0000\n"
-"PO-Revision-Date: 2014-01-17 14:17+0000\n"
+"POT-Creation-Date: 2014-02-19 10:51+0000\n"
+"PO-Revision-Date: 2014-02-19 10:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,33 +18,27 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move,post_job_uuid:0
 msgid "UUID of the Job to approve this move"
-msgstr ""
+msgstr "UUID du Job pour approuver cette move"
 
 #. module: account_move_batch_validate
 #: help:account.move,to_post:0
 msgid "Check this box to mark the move for batch posting"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/account.py:95
-#, python-format
-msgid "Task set to Done because the user unmarked the move"
-msgstr ""
+msgstr "Check this box to mark the move for batch posting"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "Mark"
-msgstr ""
+msgstr "Mark"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,action:0
 msgid "Unmark for posting"
-msgstr ""
+msgstr "Unmark for posting"
 
 #. module: account_move_batch_validate
 #: field:account.move,to_post:0
 msgid "To Post"
-msgstr ""
+msgstr "Validation demandée"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,company_id:0
@@ -54,138 +48,138 @@ msgstr "Société"
 #. module: account_move_batch_validate
 #: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
 #: model:ir.ui.menu,name:account_move_batch_validate.menu_account_move_marker
-msgid "Mark Journal Items for Batch Posting"
-msgstr ""
+msgid "Mark Jornal Items for Batch Posting"
+msgstr "Sélectionner Ecritures comptables à Valider en batch"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,filter:0
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,chart_account_id:0
 msgid "Chart of Account"
-msgstr ""
+msgstr "Plan Comptable"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 #: field:account.move.marker,journal_ids:0
 msgid "Journals"
-msgstr ""
+msgstr "Journaux"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,target_move:0
 msgid "Target Moves"
-msgstr ""
+msgstr "Target Moves"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "Report Options"
-msgstr ""
+msgstr "Report Options"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 #: selection:account.move.marker,filter:0
 msgid "Periods"
-msgstr ""
+msgstr "Periods"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_to:0
 msgid "End Date"
-msgstr ""
+msgstr "End Date"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "Dates"
-msgstr ""
+msgstr "Dates"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,period_from:0
 msgid "Start Period"
-msgstr ""
+msgstr "Période de debut"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,eta:0
 msgid "Seconds to wait before starting the jobs"
-msgstr ""
+msgstr "Seconds to wait before starting the jobs"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,target_move:0
 msgid "All Posted Entries"
-msgstr ""
+msgstr "Toutes les écritures passées"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,fiscalyear_id:0
 msgid "Keep empty for all open fiscal year"
-msgstr ""
+msgstr "Keep empty for all open fiscal year"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,period_to:0
 msgid "End Period"
-msgstr ""
+msgstr "Période de fin"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,fiscalyear_id:0
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Exercice"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,filter:0
 msgid "No Filters"
-msgstr ""
+msgstr "Aucun filtre"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,action:0
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Pièce comptable"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,action:0
 msgid "Mark for posting"
-msgstr ""
+msgstr "Sélectionner pour validation"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move_marker
 msgid "Mark Journal Items for batch posting"
-msgstr ""
+msgstr "Sélectionner Ecritures comptables à Valider en batch"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "Filters"
-msgstr ""
+msgstr "Filtres"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_from:0
 msgid "Start Date"
-msgstr ""
+msgstr "Date de début"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,chart_account_id:0
 msgid "Select Charts of Accounts"
-msgstr ""
+msgstr "Sélectionner Plan Comptable"
 
 #. module: account_move_batch_validate
 #: field:account.move.marker,filter:0
 msgid "Filter by"
-msgstr ""
+msgstr "Filtrer par"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,target_move:0
 msgid "All Entries"
-msgstr ""
+msgstr "Toutes les écritures"
 
