@@ -29,6 +29,7 @@
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
+        'account_accountant',
     ],
     "data": [
         'account_move_view.xml',

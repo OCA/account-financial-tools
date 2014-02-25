@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/sheet/notebook/page[@string='Journal Items']/field[@name='line_id']/tree/field[@name='name']" position="after">
-                    <field name="move_line_to_reconcile_id"/>
+                    <field name="move_line_to_reconcile_id" domain="[('reconcile_id', '=', False)]"/>
                 </xpath>
             </field>
         </record>
