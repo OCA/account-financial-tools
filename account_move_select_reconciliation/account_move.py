@@ -45,5 +45,26 @@ class account_move_line(orm.Model):
         'move_line_to_reconcile_id': fields.many2one(
             'account.move.line',
             'Move Line To Reconcile',
+            domain="[('reconcile_id', '=', False)]",
         ),
     }
+
+    def onchange_move_line_to_reconcile_id(
+        self, cr, uid, ids, move_line_to_reconcile_id, context=None
+    ):
+        res = {}
+        if move_line_to_reconcile_id:
+            account_move_line_obj = self.pool.get('account.move.line')
+            line = account_move_line_obj.browse(
+                cr, uid, move_line_to_reconcile_id, context=context)
+            res['value'] = {
+                'partner_id': line.partner_id.id,
+                'account_id': line.account_id.id,
+                'debit': line.credit,
+                'credit': line.debit,
+                'amount_currency': -line.amount_currency,
+                'currency_id': line.currency_id.id,
+                'tax_code_id':  line.tax_code_id.id,
+                'tax_amount': -line.tax_amount,
+            }
+        return res
