@@ -50,16 +50,10 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem
-            name="Mark Journal Items for Batch Posting"
-            parent="account.periodical_processing_journal_entries_validation"
-            action="action_account_move_marker"
-            id="menu_account_move_marker"
-            icon="STOCK_PRINT"/>
-
-        <!-- hide the existing menuitem -->
+        <!-- replace existing menuitem -->
         <record id="account.menu_validate_account_moves" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+            <field name="name">Mark Journal Items for Batch Posting</field>
+            <field name="action" ref="action_account_move_marker" />
         </record>
 
     </data>
