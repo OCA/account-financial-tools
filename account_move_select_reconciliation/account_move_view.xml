@@ -11,8 +11,12 @@
                     <field
                         name="move_line_to_reconcile_id"
                         on_change="onchange_move_line_to_reconcile_id(move_line_to_reconcile_id)"/>
-                    <button icon="gtk-yes" name="reconcile_move_line" string="Reconcile Line" type="object"/>
-                    <button icon="gtk-no" name="unreconcile_move_line" string="Unreconcile Line" type="object"/>
+                    <button 
+                        icon="gtk-yes" name="reconcile_move_line" string="Reconcile Line"
+                        type="object" attrs="{'invisible':[('move_line_to_reconcile_id','=',False)]}"/>
+                    <button
+                        icon="gtk-no" name="unreconcile_move_line" string="Unreconcile Line"
+                        type="object" attrs="{'invisible':[('move_line_to_reconcile_id','=',False)]}"/>
                 </xpath>
             </field>
         </record>
