@@ -127,8 +127,12 @@ class account_move(orm.Model):
 @job
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
-    session.pool['account.move'].button_validate(
-        session.cr,
-        session.uid,
-        [move_id]
-    )
+    move_pool = session.pool['account.move']
+    if move_pool.exists(session.cr, session.uid, [move_id]):
+        move_pool.button_validate(
+            session.cr,
+            session.uid,
+            [move_id]
+        )
+    else:
+        return _(u'Nothing to do because the record has been deleted')
