@@ -22,22 +22,6 @@
 from openerp.osv import fields, orm
 
 
-class account_move(orm.Model):
-    _inherit = 'account.move'
-
-    def post(self, cr, uid, ids, context=None):
-        for move in self.browse(cr, uid, ids, context=context):
-            for line in move.line_id:
-                if line.move_line_to_reconcile_id:
-                    account_move_line_obj = self.pool.get('account.move.line')
-                    account_move_line_obj.reconcile_partial(
-                        cr, uid,
-                        [line.id, line.move_line_to_reconcile_id.id],
-                        context=context
-                    )
-        return super(account_move, self).post(cr, uid, ids, context=context)
-
-
 class account_move_line(orm.Model):
     _inherit = 'account.move.line'
 
@@ -48,6 +32,28 @@ class account_move_line(orm.Model):
             domain="[('reconcile_id', '=', False)]",
         ),
     }
+
+    def reconcile_move_line(self, cr, uid, ids, context=None):
+        account_move_line_obj = self.pool.get('account.move.line')
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.move_line_to_reconcile_id:
+                account_move_line_obj.reconcile_partial(
+                    cr, uid,
+                    [line.id, line.move_line_to_reconcile_id.id],
+                    context=context
+                )
+        return True
+
+    def unreconcile_move_line(self, cr, uid, ids, context=None):
+        account_move_line_obj = self.pool.get('account.move.line')
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.move_line_to_reconcile_id:
+                account_move_line_obj._remove_move_reconcile(
+                    cr, uid,
+                    [line.id, line.move_line_to_reconcile_id.id],
+                    context=context
+                )
+        return True
 
     def onchange_move_line_to_reconcile_id(
         self, cr, uid, ids, move_line_to_reconcile_id, context=None
