@@ -29,7 +29,8 @@ class account_move_line(orm.Model):
         'move_line_to_reconcile_id': fields.many2one(
             'account.move.line',
             'Move Line To Reconcile',
-            domain="[('reconcile_id', '=', False)]",
+            domain="[('reconcile_id', '=', False), \
+                ('account_id.reconcile', '=', True)]",
         ),
     }
 
