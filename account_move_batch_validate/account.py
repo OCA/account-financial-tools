@@ -20,12 +20,16 @@
 ###############################################################################
 """Accounting customisation for delayed posting."""
 
+import logging
+
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
 from openerp.addons.connector.queue.job import OpenERPJobStorage
+
+_logger = logging.getLogger(__name__)
 
 # do a massive write on account moves BLOCK_SIZE at a time
 BLOCK_SIZE = 1000
@@ -67,6 +71,12 @@ class account_move(orm.Model):
             ('state', '=', 'draft'),
         ], context=context)
 
+        _logger.info(
+            u'I will now create {0} jobs for posting moves.'.format(
+                len(move_ids)
+            )
+        )
+
         for move_id in move_ids:
             job_uuid = validate_one_move.delay(session, self._name, move_id,
                                                eta=eta)
@@ -107,6 +117,11 @@ class account_move(orm.Model):
             context = {}
         # For massive amounts of moves, this becomes necessary to avoid
         # MemoryError's
+
+        _logger.info(
+            u'I will now mark {0} moves for posting.'.format(len(move_ids))
+        )
+
         for start in xrange(0, len(move_ids), BLOCK_SIZE):
             self.write(
                 cr,
