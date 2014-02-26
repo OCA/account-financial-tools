@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 15:13+0000\n"
-"PO-Revision-Date: 2014-02-24 16:55+0100\n"
+"POT-Creation-Date: 2014-02-26 16:10+0000\n"
+"PO-Revision-Date: 2014-02-26 17:13+0100\n"
 "Last-Translator: Alex Comba <alex.comba@agilebg.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. module: account_move_select_reconciliation
 #: model:ir.model,name:account_move_select_reconciliation.model_account_move_line
 msgid "Journal Items"
-msgstr "Voci Sezionale"
+msgstr "Voci sezionale"
 
 #. module: account_move_select_reconciliation
 #: field:account.move.line,move_line_to_reconcile_id:0
@@ -27,6 +27,11 @@ msgid "Move Line To Reconcile"
 msgstr "Voce Sezionale da Riconciliare"
 
 #. module: account_move_select_reconciliation
-#: model:ir.model,name:account_move_select_reconciliation.model_account_move
-msgid "Account Entry"
-msgstr "Registrazione Sezionale"
+#: view:account.move:0
+msgid "Reconcile Line"
+msgstr "Riconcilia Voce Sezionale"
+
+#. module: account_move_select_reconciliation
+#: view:account.move:0
+msgid "Unreconcile Line"
+msgstr "Annulla Riconciliazione su Voce Sezionale"
