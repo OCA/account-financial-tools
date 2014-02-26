@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 15:13+0000\n"
-"PO-Revision-Date: 2014-02-24 15:13+0000\n"
+"POT-Creation-Date: 2014-02-26 16:06+0000\n"
+"PO-Revision-Date: 2014-02-26 16:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,12 @@ msgid "Move Line To Reconcile"
 msgstr ""
 
 #. module: account_move_select_reconciliation
-#: model:ir.model,name:account_move_select_reconciliation.model_account_move
-msgid "Account Entry"
+#: view:account.move:0
+msgid "Reconcile Line"
+msgstr ""
+
+#. module: account_move_select_reconciliation
+#: view:account.move:0
+msgid "Unreconcile Line"
 msgstr ""
 
