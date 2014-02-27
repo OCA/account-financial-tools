@@ -125,6 +125,8 @@ class account_move(orm.Model):
                 move_ids[start:start + BLOCK_SIZE],
                 {'to_post': True},
                 context=context)
+            # users like to see the flag sooner rather than later
+            cr.commit()
         self._delay_post_marked(cr, uid, eta=eta, context=context)
 
     def unmark_for_posting(self, cr, uid, move_ids, context=None):
