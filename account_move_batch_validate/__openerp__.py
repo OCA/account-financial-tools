@@ -71,9 +71,8 @@
         'wizard/move_marker_view.xml',
     ],
     'test': [
-        'test/batch_validate.yml',
-        'test/batch_validate_then_unmark.yml',
-        'test/batch_validate_then_delete_move.yml',
+        # 'test/batch_validate.yml',
+        # 'test/batch_validate_then_unmark.yml',
     ],
     'installable': True,
     'images': [],

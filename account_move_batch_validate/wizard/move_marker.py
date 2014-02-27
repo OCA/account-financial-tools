@@ -21,6 +21,8 @@
 """Wizards for batch posting."""
 
 from openerp.osv import fields, orm
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.queue.job import job
 
 
 class AccountMoveMarker(orm.TransientModel):
@@ -44,8 +46,23 @@ class AccountMoveMarker(orm.TransientModel):
     }
 
     def button_mark(self, cr, uid, ids, context=None):
-        """Mark/unmark lines and update the queue. Return action."""
+        """Create a single job that will create one job per move.
 
+        Return action.
+
+        """
+        session = ConnectorSession(cr, uid, context=context)
+        for wizard_id in ids:
+            # to find out what _classic_write does, read the documentation.
+            wizard_data = self.read(cr, uid, wizard_id, context=context,
+                                    load='_classic_write')
+            wizard_data.pop('id')
+            process_wizard.delay(session, self._name, wizard_data)
+
+        return {'type': 'ir.actions.act_window_close'}
+
+    def process_wizard(self, cr, uid, ids, context=None):
+        """Choose the correct list of moves to mark and then validate."""
         for wiz in self.browse(cr, uid, ids, context=context):
 
             move_obj = self.pool['account.move']
@@ -86,4 +103,22 @@ class AccountMoveMarker(orm.TransientModel):
             elif wiz.action == 'unmark':
                 move_obj.unmark_for_posting(cr, uid, move_ids, context=context)
 
-            return {'type': 'ir.actions.act_window_close'}
+
+@job
+def process_wizard(session, model_name, wizard_data):
+    """Create a new wizard and execute it in background."""
+
+    wiz_obj = session.pool[model_name]
+    new_wiz_id = wiz_obj.create(
+        session.cr,
+        session.uid,
+        wizard_data,
+        session.context
+    )
+
+    wiz_obj.process_wizard(
+        session.cr,
+        session.uid,
+        ids=[new_wiz_id],
+        context=session.context,
+    )
