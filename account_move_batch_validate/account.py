@@ -72,7 +72,7 @@ class account_move(orm.Model):
         ], context=context)
 
         _logger.info(
-            u'I will now create {0} jobs for posting moves.'.format(
+            u'{0} jobs for posting moves have been created.'.format(
                 len(move_ids)
             )
         )
@@ -119,7 +119,7 @@ class account_move(orm.Model):
         # MemoryError's
 
         _logger.info(
-            u'I will now mark {0} moves for posting.'.format(len(move_ids))
+            u'{0} moves marked for posting.'.format(len(move_ids))
         )
 
         for start in xrange(0, len(move_ids), BLOCK_SIZE):
