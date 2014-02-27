@@ -106,7 +106,7 @@ class AccountMoveMarker(orm.TransientModel):
 
 @job
 def process_wizard(session, model_name, wizard_data):
-    """Create a new wizard and execute it in background."""
+    """Create jobs to validate Journal Entries."""
 
     wiz_obj = session.pool[model_name]
     new_wiz_id = wiz_obj.create(
