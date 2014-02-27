@@ -70,19 +70,15 @@ class account_move(orm.Model):
             ('post_job_uuid', '=', False),
             ('state', '=', 'draft'),
         ], context=context)
+        name = self._name
 
-        _logger.info(
-            u'{0} jobs for posting moves have been created.'.format(
-                len(move_ids)
-            )
-        )
-
+        # maybe not creating too many dictionaries will make us a bit faster
+        values = {'post_job_uuid': None}
         for move_id in move_ids:
-            job_uuid = validate_one_move.delay(session, self._name, move_id,
+            job_uuid = validate_one_move.delay(session, name, move_id,
                                                eta=eta)
-            self.write(cr, uid, [move_id], {
-                'post_job_uuid': job_uuid
-            })
+            values['post_job_uuid'] = job_uuid
+            self.write(cr, uid, [move_id], values)
 
     def _cancel_jobs(self, cr, uid, context=None):
         """Find moves where the mark has been removed and cancel the jobs.
@@ -142,12 +138,9 @@ class account_move(orm.Model):
 @job
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
-    move_pool = session.pool['account.move']
-    if move_pool.exists(session.cr, session.uid, [move_id]):
-        move_pool.button_validate(
-            session.cr,
-            session.uid,
-            [move_id]
-        )
-    else:
-        return _(u'Nothing to do because the record has been deleted')
+
+    session.pool['account.move'].button_validate(
+        session.cr,
+        session.uid,
+        [move_id]
+    )
