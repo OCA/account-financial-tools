@@ -20,12 +20,16 @@
 ###############################################################################
 """Accounting customisation for delayed posting."""
 
+import logging
+
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
 from openerp.addons.connector.queue.job import OpenERPJobStorage
+
+_logger = logging.getLogger(__name__)
 
 # do a massive write on account moves BLOCK_SIZE at a time
 BLOCK_SIZE = 1000
@@ -70,6 +74,12 @@ class account_move(orm.Model):
 
         # maybe not creating too many dictionaries will make us a bit faster
         values = {'post_job_uuid': None}
+        _logger.info(
+            u'{0} jobs for posting moves have been created.'.format(
+                len(move_ids)
+            )
+        )
+
         for move_id in move_ids:
             job_uuid = validate_one_move.delay(session, name, move_id,
                                                eta=eta)
@@ -109,6 +119,11 @@ class account_move(orm.Model):
             context = {}
         # For massive amounts of moves, this becomes necessary to avoid
         # MemoryError's
+
+        _logger.info(
+            u'{0} moves marked for posting.'.format(len(move_ids))
+        )
+
         for start in xrange(0, len(move_ids), BLOCK_SIZE):
             self.write(
                 cr,
@@ -131,9 +146,12 @@ class account_move(orm.Model):
 @job
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
-
-    session.pool['account.move'].button_validate(
-        session.cr,
-        session.uid,
-        [move_id]
-    )
+    move_pool = session.pool['account.move']
+    if move_pool.exists(session.cr, session.uid, [move_id]):
+        move_pool.button_validate(
+            session.cr,
+            session.uid,
+            [move_id]
+        )
+    else:
+        return _(u'Nothing to do because the record has been deleted')

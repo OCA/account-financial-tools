@@ -59,6 +59,9 @@ class Currency_rate_update_service(osv.Model):
                                                     ('Yahoo_getter','Yahoo Finance '),
                                                     ('PL_NBP_getter','Narodowy Bank Polski'),  # Added for polish rates
                                                     ('Banxico_getter', 'Banco de México'),  # Added for mexican rates
+                                                    # Bank of Canada is using RSS-CB http://www.cbwiki.net/wiki/index.php/Specification_1.1 :
+                                                    # This RSS format is used by other national banks (Thailand, Malaysia, Mexico...)
+                                                    ('CA_BOC_getter','Bank of Canada - noon rates'),  # Added for canadian rates
                                                     ],
                                                     "Webservice to use",
                                                     required = True
@@ -211,13 +214,16 @@ class Currency_rate_update(osv.Model):
                                             vals,
                                         )
 
-                    note = note + "\n%s currency updated. "\
-                       %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'))
-                    note = note + (log_info or '')
+                    # show the most recent note at the top
+                    note = "\n%s currency updated. "\
+                       %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'))\
+                       + note
+                    note = (log_info or '') + note
                     service.write({'note':note})
                 except Exception, e:
-                    error_msg = note + "\n%s ERROR : %s"\
-                        %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'), str(e))
+                    error_msg = "\n%s ERROR : %s"\
+                        %(datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'), str(e))\
+                        + note
                     _logger.info(str(e))
                     service.write({'note':error_msg})
 
@@ -263,6 +269,7 @@ class Currency_getter_factory():
                           'Google_getter',
                           'Yahoo_getter',
                           'Banxico_getter',
+                          'CA_BOC_getter',
                     ]
         if class_name in allowed:
             class_def = eval(class_name)
@@ -340,12 +347,12 @@ class Curreny_getter_interface(object) :
         """Check date constrains. WARN : rate_date must be of datetime type"""
         days_delta = (datetime.today() - rate_date).days
         if days_delta > max_delta_days:
-            raise Exception('The rate date from ECB (%s) is %d days away from today, which is over the limit (%d days). Rate not updated in OpenERP.'%(rate_date, days_delta, max_delta_days))
+            raise Exception('The rate timestamp (%s) is %d days away from today, which is over the limit (%d days). Rate not updated in OpenERP.'%(rate_date, days_delta, max_delta_days))
         # We always have a warning when rate_date <> today
         rate_date_str = datetime.strftime(rate_date, '%Y-%m-%d')
         if rate_date_str != datetime.strftime(datetime.today(), '%Y-%m-%d'):
-            self.log_info = "WARNING : the rate date from ECB (%s) is not today's date" % rate_date_str
-            _logger.warning("the rate date from ECB (%s) is not today's date", rate_date_str)
+            self.log_info = "WARNING : the rate timestamp (%s) is not today's date" % rate_date_str
+            _logger.warning("the rate timestamp (%s) is not today's date", rate_date_str)
 
 
 #Yahoo ###################################################################################
@@ -595,3 +602,64 @@ class Banxico_getter(Curreny_getter_interface) :  # class added for Mexico rates
 
             self.updated_currency[curr] = rate
             logger.debug("Rate retrieved : " + main_currency + ' = ' + str(rate) + ' ' + curr)
+
+
+##CA BOC #####   Bank of Canada   ############################################################
+class CA_BOC_getter(Curreny_getter_interface) :
+    """Implementation of Curreny_getter_factory interface for Bank of Canada RSS service"""
+
+    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+        """implementation of abstract method of Curreny_getter_interface"""
+
+        # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
+        url = 'http://www.bankofcanada.ca/stats/assets/rates_rss/noon/en_%s.xml'
+        # closing rates are available as well (please note there are only 12
+        # currencies reported):
+        # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+
+        #we do not want to update the main currency
+        if main_currency in currency_array:
+            currency_array.remove(main_currency)
+
+        import feedparser
+        import pytz
+        from dateutil import parser
+
+        for curr in currency_array:
+
+            _logger.debug("BOC currency rate service : connecting...")
+            dom = feedparser.parse(url % curr)
+
+            self.validate_cur(curr)
+
+            # check if BOC service is running
+            if dom.bozo and dom.status <> 404:
+                _logger.error("Bank of Canada - service is down - try again\
+                    later...")
+
+            # check if BOC sent a valid response for this currency
+            if dom.status != 200:
+                _logger.error("Exchange data for %s is not reported by Bank\
+                    of Canada." % curr)
+                raise osv.except_osv('Error !', 'Exchange data for %s is not\
+                    reported by Bank of Canada.' % str(curr))
+
+            _logger.debug("BOC sent a valid RSS file for: " + curr)
+
+            # check for valid exchange data
+            if (dom.entries[0].cb_basecurrency == main_currency) and \
+                    (dom.entries[0].cb_targetcurrency == curr):
+                rate = dom.entries[0].cb_exchangerate.split('\n', 1)[0]
+                rate_date_datetime = parser.parse(dom.entries[0].updated)\
+                    .astimezone(pytz.utc).replace(tzinfo=None)
+                self.check_rate_date(rate_date_datetime, max_delta_days)
+                self.updated_currency[curr] = rate
+                _logger.debug("BOC Rate retrieved : 1 " + main_currency +
+                    ' = ' + str(rate) + ' ' + curr)
+            else:
+                _logger.error("Exchange data format error for Bank of Canada -\
+                    %s. Please check provider data format and/or source code." % curr)
+                raise osv.except_osv('Error !', 'Exchange data format error for\
+                    Bank of Canada - %s !' % str(curr))
+
+        return self.updated_currency, self.log_info
