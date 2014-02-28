@@ -57,7 +57,11 @@ class AccountMoveMarker(orm.TransientModel):
             wizard_data = self.read(cr, uid, wizard_id, context=context,
                                     load='_classic_write')
             wizard_data.pop('id')
-            process_wizard.delay(session, self._name, wizard_data)
+
+            if context.get('automated_test_execute_now'):
+                process_wizard(session, self._name, wizard_data)
+            else:
+                process_wizard.delay(session, self._name, wizard_data)
 
         return {'type': 'ir.actions.act_window_close'}
 
