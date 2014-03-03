@@ -982,10 +982,10 @@ msgstr "60 days last reminder"
 #: help:res.company,credit_policy_id:0
 msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
-"overriden on partners or invoices."
+"overridden on partners or invoices."
 msgstr ""
 "The Credit Control Policy used on partners by default. This setting can be "
-"overriden on partners or invoices."
+"overridden on partners or invoices."
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0

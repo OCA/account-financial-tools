@@ -19,7 +19,8 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control run">
-          <field name="date"/>
+          <field name="date"
+                 attrs="{'readonly': [('state', '!=', 'draft')]}"/>
           <newline/>
           <notebook colspan="4">
             <page string="Policies">
