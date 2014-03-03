@@ -8,7 +8,7 @@
   in the javascript search extension on move lines in
   openobject-addons/account/static/src/js/account_move_line_quickadd.js
 */     
-openerp.move_line_no_default_search_period_journal = function (instance) {
+openerp.account_move_line_no_default_search = function (instance) {
     instance.web.account.QuickAddListView.include({
         start: function() {
             /*
