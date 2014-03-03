@@ -965,7 +965,7 @@ msgstr "Dernier rappel à 60 jours"
 #: help:res.company,credit_policy_id:0
 msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
-"overriden on partners or invoices."
+"overridden on partners or invoices."
 msgstr ""
 "Politique de relance par défaut du client. (Ce paramétrage peut être "
 "défini plus spécifiquement au niveau de la facture)."

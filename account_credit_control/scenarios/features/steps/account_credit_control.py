@@ -118,3 +118,28 @@ def impl(ctx, state):
     lines = model('credit.control.line').search([('state', '!=', state),
                                                  ('id', 'in', ctx.lines)])
     assert not lines
+
+@given(u'I ignore the "{partner}" credit line at level "{level:d}" for move line "{move_line_name}" with amount "{amount:f}"')
+def impl(ctx, partner, level, move_line_name, amount):
+    print ctx, partner, level, move_line_name, amount
+    to_ignore = model('credit.control.line').search([('partner_id.name', '=', partner),
+                                                     ('level', '=', level),
+                                                     ('amount_due', '=', amount),
+                                                     ('move_line_id.name', '=', move_line_name)])
+    assert to_ignore
+    wiz = model('credit.control.marker').create({'name': 'ignored'})
+    ctx.lines = to_ignore
+    wiz.write({'line_ids': to_ignore})
+    wiz.mark_lines()
+    assert model('credit.control.line').get(to_ignore[0]).state == 'ignored'
+
+@given(u'I have for "{partner}" "{number:d}" credit lines at level "{level:d}" for move line "{move_line_name}" with amount "{amount:f}" respectively in state "draft" and "ignored"')
+def impl(ctx, partner, number, level, move_line_name, amount):
+    to_check = model('credit.control.line').search([('partner_id.name', '=', partner),
+                                                    ('level', '=', level),
+                                                    ('amount_due', '=', amount),
+                                                    ('move_line_id.name', '=', move_line_name),
+                                                    ('state', 'in', ('draft', 'ignored'))])
+    assert_equal(len(to_check), int(number), msg="More than %s found" % number)
+    lines = model('credit.control.line').browse(to_check)
+    assert set(['ignored', 'draft']) == set(lines.state)

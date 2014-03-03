@@ -31,7 +31,7 @@ class ResCompany(orm.Model):
                 'credit_policy_id': fields.many2one('credit.control.policy',
                                                     'Credit Control Policy',
                                                     help=("The Credit Control Policy used on partners"
-                                                          " by default. This setting can be overriden"
+                                                          " by default. This setting can be overridden"
                                                           " on partners or invoices.")),
                 }
 

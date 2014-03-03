@@ -80,14 +80,18 @@ class CreditCommunication(TransientModel):
         return cr_l_ids
 
     def _generate_comm_from_credit_line_ids(self, cr, uid, line_ids, context=None):
+        """Aggregate credit control line by partner, level, and currency
+        It also generate a communication object per aggregation.
+        """
         if not line_ids:
             return []
         comms = []
-        sql = ("SELECT distinct partner_id, policy_level_id, credit_control_policy_level.level"
+        sql = ("SELECT distinct partner_id, policy_level_id, "
+               " credit_control_line.currency_id, credit_control_policy_level.level"
                " FROM credit_control_line JOIN credit_control_policy_level "
                "   ON (credit_control_line.policy_level_id = credit_control_policy_level.id)"
                " WHERE credit_control_line.id in %s"
-               " ORDER by credit_control_policy_level.level")
+               " ORDER by credit_control_policy_level.level, credit_control_line.currency_id")
 
         cr.execute(sql, (tuple(line_ids),))
         res = cr.dictfetchall()
@@ -101,8 +105,6 @@ class CreditCommunication(TransientModel):
             data['partner_id'] = level_assoc['partner_id']
             data['current_policy_level'] = level_assoc['policy_level_id']
             comm_id = self.create(cr, uid, data, context=context)
-
-
             comms.append(self.browse(cr, uid, comm_id, context=context))
         return comms
 
