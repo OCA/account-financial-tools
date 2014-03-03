@@ -81,14 +81,24 @@ class CreditControlRun(orm.Model):
 
     def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
         """Ensure that there is no credit line in the future using controlling_date"""
-        line_obj =  self.pool.get('credit.control.line')
+        run_obj = self.pool['credit.control.run']
+        runs = run_obj.search(cr, uid, [('date', '>', controlling_date)],
+                              order='date DESC', limit=1, context=context)
+        if runs:
+            run = run_obj.browse(cr, uid, runs[0], context=context)
+            raise orm.except_orm(_('Error'),
+                                 _('A run has already been executed more '
+                                   'recently than %s') % (run.date))
+
+        line_obj = self.pool['credit.control.line']
         lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
                                 order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cr, uid, lines[0], context=context)
             raise orm.except_orm(_('Error'),
-                                 _('A run has already been executed more '
-                                   'recently than %s') % (line.date))
+                                 _('A credit control line more '
+                                   'recent than %s exists at %s') %
+                                 (controlling_date, line.date))
         return True
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
@@ -110,10 +120,10 @@ class CreditControlRun(orm.Model):
                                  _('Please select a policy'))
 
         report = ''
+        generated_ids = []
         for policy in policies:
             if policy.do_nothing:
                 continue
-
             lines = policy._get_move_lines_to_process(run.date, context=context)
             manual_lines = policy._lines_different_policy(lines, context=context)
             lines.difference_update(manual_lines)
@@ -125,7 +135,7 @@ class CreditControlRun(orm.Model):
                     level_lines = level.get_level_lines(run.date, lines, context=context)
                     policy_generated_ids += cr_line_obj.create_or_update_from_mv_lines(
                         cr, uid, [], list(level_lines), level.id, run.date, context=context)
-
+            generated_ids.extend(policy_generated_ids)
             if policy_generated_ids:
                 report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
                         (policy.name, len(policy_generated_ids))
@@ -138,6 +148,7 @@ class CreditControlRun(orm.Model):
                 'report': report,
                 'manual_ids': [(6, 0, manually_managed_lines)]}
         run.write(vals, context=context)
+        return generated_ids
 
     def generate_credit_lines(self, cr, uid, run_id, context=None):
         """Generate credit control lines
@@ -147,7 +158,7 @@ class CreditControlRun(orm.Model):
         """
         try:
             cr.execute('SELECT id FROM credit_control_run'
-                           ' LIMIT 1 FOR UPDATE NOWAIT')
+                       ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception as exc:
             # in case of exception openerp will do a rollback for us and free the lock
             raise orm.except_orm(_('Error'),

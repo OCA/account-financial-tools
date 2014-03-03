@@ -19,7 +19,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_1                          |
-      | date_invoice | %Y-01-15                      |
+      | date_invoice | 2013-01-15                      |
       | partner_id   | by oid: scen.partner_1        |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -55,7 +55,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_2                          |
-      | date_invoice | %Y-02-15                      |
+      | date_invoice | 2013-02-15                      |
       | partner_id   | by oid: scen.partner_1        |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -82,7 +82,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_3                          |
-      | date_invoice | %Y-03-15                      |
+      | date_invoice | 2013-03-15                      |
       | partner_id   | by oid: scen.partner_1        |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -111,7 +111,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_4                          |
-      | date_invoice | %Y-01-18                      |
+      | date_invoice | 2013-01-18                      |
       | partner_id   | by oid: scen.customer_2       |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -139,7 +139,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_5                          |
-      | date_invoice | %Y-02-15                      |
+      | date_invoice | 2013-02-15                      |
       | partner_id   | by oid: scen.customer_2       |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -166,7 +166,7 @@ Feature: Invoices creation
     And having:
       | name         | value                         |
       | name         | SI_6                          |
-      | date_invoice | %Y-03-15                      |
+      | date_invoice | 2013-03-15                      |
       | partner_id   | by oid: scen.customer_2       |
       | account_id   | by name: Debtors              |
       | journal_id   | by name: Sales                |
@@ -195,7 +195,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_7                    |
-      | date_invoice | %Y-01-18                |
+      | date_invoice | 2013-01-18                |
       | partner_id   | by oid: scen.customer_3 |
       | account_id   | by name: Debtors        |
       | journal_id   | by name: Sales          |
@@ -223,7 +223,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_8                    |
-      | date_invoice | %Y-02-15                |
+      | date_invoice | 2013-02-15                |
       | partner_id   | by oid: scen.customer_3 |
       | account_id   | by name: Debtors        |
       | journal_id   | by name: Sales          |
@@ -250,7 +250,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_9                    |
-      | date_invoice | %Y-03-15                |
+      | date_invoice | 2013-03-15                |
       | partner_id   | by oid: scen.customer_3 |
       | account_id   | by name: Debtors        |
       | journal_id   | by name: Sales          |
@@ -279,7 +279,7 @@ Feature: Invoices creation
     And having:
       | name         | value                            |
       | name         | SI_10                            |
-      | date_invoice | %Y-01-18                         |
+      | date_invoice | 2013-01-18                         |
       | partner_id   | by oid: scen.customer_4          |
       | account_id   | by name: Debtors                 |
       | journal_id   | by name: Sales                   |
@@ -307,7 +307,7 @@ Feature: Invoices creation
     And having:
       | name         | value                            |
       | name         | SI_11                            |
-      | date_invoice | %Y-02-15                         |
+      | date_invoice | 2013-02-15                         |
       | partner_id   | by oid: scen.customer_4          |
       | account_id   | by name: Debtors                 |
       | journal_id   | by name: Sales                   |
@@ -334,7 +334,7 @@ Feature: Invoices creation
     And having:
       | name         | value                            |
       | name         | SI_12                            |
-      | date_invoice | %Y-03-15                         |
+      | date_invoice | 2013-03-15                         |
       | partner_id   | by oid: scen.customer_4          |
       | account_id   | by name: Debtors                 |
       | journal_id   | by name: Sales                   |
@@ -363,7 +363,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_13                   |
-      | date_invoice | %Y-01-18                |
+      | date_invoice | 2013-01-18                |
       | partner_id   | by oid: scen.customer_5 |
       | account_id   | by name: Debtors USD    |
       | journal_id   | by name: Sales          |
@@ -391,7 +391,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_14                   |
-      | date_invoice | %Y-02-15                |
+      | date_invoice | 2013-02-15                |
       | partner_id   | by oid: scen.customer_5 |
       | account_id   | by name: Debtors USD    |
       | journal_id   | by name: Sales          |
@@ -418,7 +418,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_15                   |
-      | date_invoice | %Y-03-15                |
+      | date_invoice | 2013-03-15                |
       | partner_id   | by oid: scen.customer_5 |
       | account_id   | by name: Debtors USD    |
       | journal_id   | by name: Sales          |
@@ -444,7 +444,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_16                   |
-      | date_invoice | %Y-03-15                |
+      | date_invoice | 2013-03-15                |
       | partner_id   | by oid: scen.customer_4 |
       | account_id   | by name: Debtors        |
       | journal_id   | by name: Sales          |
@@ -469,7 +469,7 @@ Feature: Invoices creation
     And having:
       | name         | value                             |
       | name         | SI_17                             |
-      | date_invoice | %Y-03-15                          |
+      | date_invoice | 2013-03-15                          |
       | partner_id   | by oid: scen.customer_partial_pay |
       | account_id   | by name: Debtors                  |
       | journal_id   | by name: Sales                    |
@@ -494,7 +494,7 @@ Feature: Invoices creation
     And having:
       | name         | value                                  |
       | name         | SI_18                                  |
-      | date_invoice | %Y-03-15                               |
+      | date_invoice | 2013-03-15                               |
       | partner_id   | by oid: scen.customer_multiple_payterm |
       | account_id   | by name: Debtors                       |
       | journal_id   | by name: Sales                         |
@@ -519,7 +519,7 @@ Feature: Invoices creation
     And having:
       | name         | value                                   |
       | name         | SI_19                                   |
-      | date_invoice | %Y-03-15                                |
+      | date_invoice | 2013-03-15                                |
       | partner_id   | by oid: scen.customer_multiple_payterm2 |
       | account_id   | by name: Debtors                        |
       | journal_id   | by name: Sales                          |
@@ -543,7 +543,7 @@ Feature: Invoices creation
     And having:
       | name         | value                   |
       | name         | SI_20_test_tolerance    |
-      | date_invoice | %Y-03-23                |
+      | date_invoice | 2013-03-23                |
       | partner_id   | by oid: scen.customer_6 |
       | account_id   | by name: Debtors        |
       | journal_id   | by name: Sales          |
@@ -568,7 +568,7 @@ Feature: Invoices creation
     And having:
       | name         | value                                  |
       | name         | SI_21_test_receivable_account_excluded |
-      | date_invoice | %Y-03-25                               |
+      | date_invoice | 2013-03-25                               |
       | partner_id   | by oid: scen.customer_6                |
       | account_id   | by name: Debtors GBP                   |
       | journal_id   | by name: Sales                         |
