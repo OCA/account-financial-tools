@@ -47,7 +47,7 @@ class CreditControlPolicy(Model):
                                                      " for the selected accounts"),
                 'active': fields.boolean('Active'),
                 }
-    
+
     _defaults = {
         'active': True,
     }
@@ -327,7 +327,6 @@ class CreditControlPolicyLevel(Model):
         data_dict = {'controlling_date': controlling_date,
                      'line_ids': tuple(lines),
                      'delay': level.delay_days}
-
         cr.execute(sql, data_dict)
         res = cr.fetchall()
         if res:
@@ -346,6 +345,7 @@ class CreditControlPolicyLevel(Model):
                " ON (mv_line.id = cr_line.move_line_id)\n"
                " WHERE cr_line.id = (SELECT credit_control_line.id FROM credit_control_line\n"
                "                            WHERE credit_control_line.move_line_id = mv_line.id\n"
+               "                            AND state != 'ignored'"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
                " AND cr_line.level = %(previous_level)s\n"
                # lines from a previous level with a draft or ignored state
