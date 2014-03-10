@@ -35,7 +35,6 @@
     'website': 'http://www.akretion.com/',
     'depends': ['account_accountant',
                 'report_webkit',
-                'sale_quick_payment'
                 ],
     'init_xml': [],
     'update_xml': [
