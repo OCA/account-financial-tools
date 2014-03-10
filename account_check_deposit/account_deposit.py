@@ -180,59 +180,23 @@ class account_check_deposit(orm.Model):
         return move_vals
 
     def _prepare_move_line_vals(self, cr, uid, line, move_vals, context=None):
-        fields_key = [
-            'centralisation',
-            'date',
-            'date_created',
-            'currency_id',
-            'journal_id',
-            'amount_currency',
-            'account_id',
-            'period_id',
-            'company_id',
-        ]
-
-        move_line_vals = self.pool.get('account.move.line').default_get(
-            cr, uid, fields_key, context=context)
-
-        move_line_vals.update({
+        return {
             'name': line.ref,
             'credit': line.debit,
             'account_id': line.account_id.id,
             'partner_id': line.partner_id.id,
             'check_line_id': line.id,
-        })
-        return move_line_vals
+        }
 
     def _prepare_sum_move_line_vals(self, cr, uid, deposit, move_vals, context=None):
-        #TODO did it's necessary to call default here?
-        #If yes it will be better to avoid code duplication with
-        #the prepare vals
-        fields_key = [
-            'centralisation',
-            'date',
-            'date_created',
-            'currency_id',
-            'journal_id',
-            'amount_currency',
-            'account_id',
-            'period_id',
-            'company_id',
-            'state',
-        ]
-
-        move_line_vals = self.pool.get('account.move.line').default_get(
-            cr, uid, fields_key, context=context)
-
         debit = 0.0
         for line in deposit.check_payment_ids:
             debit += line.debit
-        move_line_vals.update({
+        return {
             'name': deposit.name,
             'debit': debit,
             'ref': deposit.name,
-        })
-        return move_line_vals
+        }
 
     def _reconcile_checks(self, cr, uid, move_id, context=None):
         move_line_obj = self.pool['account.move.line']
