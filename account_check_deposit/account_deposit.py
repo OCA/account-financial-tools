@@ -34,8 +34,8 @@ class account_check_deposit(orm.Model):
             total = 0
             for line in deposit.check_payment_ids:
                 total += line.debit
-            res[deposit.id]= total
-        return  res
+            res[deposit.id] = total
+        return res
 
     def _is_reconcile(self, cr, uid, ids, name, args, context=None):
         res = {}
@@ -45,53 +45,85 @@ class account_check_deposit(orm.Model):
                 for line in deposit.move_id.line_id:
                     if line.debit > 0 and line.reconcile_id:
                         res[deposit.id] = True
-        return res 
+        return res
 
     _columns = {
-        'name': fields.char('Name', size=64, required=True, readonly=True,
-                            states={'draft':[('readonly',False)]}),
-        'check_payment_ids': fields.one2many('account.move.line',
-                                              'check_deposit_id',
-                                              'Check Payments',
-                                              readonly=True,
-                                              states={'draft':[('readonly',False)]}),
-        'deposit_date': fields.date('Deposit Date', readonly=True,
-                                    states={'draft':[('readonly',False)]}),
-        'journal_id': fields.many2one('account.journal', 'Journal',
-                                      required=True, readonly=True,
-                                      states={'draft':[('readonly',False)]}),
+        'name': fields.char(
+            'Name',
+            size=64,
+            required=True,
+            readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
+        'check_payment_ids': fields.one2many(
+            'account.move.line',
+            'check_deposit_id',
+            'Check Payments',
+            readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
+        'deposit_date': fields.date(
+            'Deposit Date',
+            readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
+        'journal_id': fields.many2one(
+            'account.journal',
+            'Journal',
+            required=True,
+            readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
         'state': fields.selection([
-            ('draft','Draft'),
-            ('done','Done'),
-        ],'Status', readonly=True),
-        'move_id': fields.many2one('account.move', 'Journal Entry',
-                                   readonly=True,
-                                   states={'draft':[('readonly',False)]}),
-        'bank_id': fields.many2one('res.partner.bank', 'Bank', required=True,
-                                   readonly=True,
-                                   domain="[('partner_id', '=', partner_id)]",
-                                   states={'draft':[('readonly',False)]}),
-        'line_ids': fields.related('move_id', 'line_id', 
+            ('draft', 'Draft'),
+            ('done', 'Done'),
+            ], 'Status',
+            readonly=True),
+        'move_id': fields.many2one(
+            'account.move',
+            'Journal Entry',
+            readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
+        'bank_id': fields.many2one(
+            'res.partner.bank',
+            'Bank',
+            required=True,
+            readonly=True,
+            domain="[('partner_id', '=', partner_id)]",
+            states={'draft': [('readonly', '=', False)]}),
+        'line_ids': fields.related(
+            'move_id',
+            'line_id',
             relation='account.move.line',
             type='one2many',
             string='Lines',
+            readonly=True),
+        'partner_id': fields.related(
+            'company_id',
+            'partner_id',
+            type="many2one",
+            relation="res.partner",
+            string="Partner",
+            readonly=True),
+        'company_id': fields.many2one(
+            'res.company',
+            'Company',
+            required=True,
+            change_default=True,
             readonly=True,
-            ),
-        'partner_id':fields.related('company_id', 'partner_id', type="many2one",
-                                    relation="res.partner", string="Partner",
-                                    readonly=True),
-        'company_id': fields.many2one('res.company', 'Company', required=True,
-                                      change_default=True, readonly=True,
-                                      states={'draft':[('readonly',False)]}),
-        'total_amount': fields.function(sum_amount, string ="total amount", type="float"),
-        'is_reconcile': fields.function(_is_reconcile, string ="Reconcile", type="boolean"),
+            states={'draft': [('readonly', '=', False)]}),
+        'total_amount': fields.function(
+            sum_amount,
+            string="total amount",
+            type="float"),
+        'is_reconcile': fields.function(
+            _is_reconcile,
+            string="Reconcile",
+            type="boolean"),
     }
 
     _defaults = {
         'name': lambda self, cr, uid, context: '/',
         'deposit_date': fields.date.context_today,
-        'state':'draft',
-        'company_id': lambda self,cr,uid,c: self.pool.get('res.company')._company_default_get(cr, uid, 'account.check.deposit', context=c),
+        'state': 'draft',
+        'company_id': lambda self, cr, uid, c: self.pool.get('res.company').\
+            _company_default_get(cr, uid, 'account.check.deposit', context=c),
     }
 
     def unlink(self, cr, uid, ids, context=None):
@@ -104,7 +136,11 @@ class account_check_deposit(orm.Model):
     def cancel(self, cr, uid, ids, context=None):
         for deposit in self.browse(cr, uid, ids, context=context):
             if not deposit.journal_id.update_posted:
-                raise osv.except_osv(_('Error!'), _('You cannot modify a posted entry of this journal.\nFirst you should set the journal to allow cancelling entries.'))
+                raise osv.except_osv(
+                    _('Error!'),
+                    _('You cannot modify a posted entry of this journal.\n'
+                      'First you should set the journal to allow cancelling '
+                      'entries.'))
             for line in deposit.check_payment_ids:
                 if line.reconcile_id:
                     line.reconcile_id.unlink()
@@ -115,37 +151,50 @@ class account_check_deposit(orm.Model):
         return True
 
     def create(self, cr, uid, vals, context=None):
-        if vals.get('name','/')=='/':
-            vals['name'] = self.pool.get('ir.sequence').get(cr, uid, 'account.check.deposit') or '/'
-        return super(account_check_deposit, self).create(cr, uid, vals, context=context)
+        if vals.get('name', '/') == '/':
+            vals['name'] = self.pool.get('ir.sequence').\
+                get(cr, uid, 'account.check.deposit')
+        return super(account_check_deposit, self).\
+            create(cr, uid, vals, context=context)
 
     def _prepare_account_move_vals(self, cr, uid, deposit, context=None):
+        date = deposit.deposit_date
         move_vals = {
             'journal_id': deposit.journal_id.id,
-            'date': deposit.deposit_date,
+            'date': date,
             }
         period_obj = self.pool['account.period']
-        period_ids =  period_obj.find(cr, uid, dt=deposit.deposit_date, context=context)
+        period_ids = period_obj.find(cr, uid, dt=date, context=context)
         if period_ids:
             move_vals['period_id'] = period_ids[0]
+        sum_move_line = self._prepare_sum_move_line_vals(
+            cr, uid, deposit, move_vals, context=context)
+        move_lines = [[0, 0, sum_move_line]]
 
-        move_lines = [[0, 0, self._prepare_sum_move_line_vals(cr, uid, deposit,
-                                                              move_vals,
-                                                              context=context)]]
         for line in deposit.check_payment_ids:
-            move_lines.append([0, 0, self._prepare_move_line_vals(cr, uid, line,
-                                                                  move_vals,
-                                                                  context=context)])
+            move_line = self._prepare_move_line_vals(
+                cr, uid, line, move_vals, context=context)
+            move_lines.append([0, 0, move_line])
+
         move_vals.update({'line_id': move_lines})
         return move_vals
 
     def _prepare_move_line_vals(self, cr, uid, line, move_vals, context=None):
+        fields_key = [
+            'centralisation',
+            'date',
+            'date_created',
+            'currency_id',
+            'journal_id',
+            'amount_currency',
+            'account_id',
+            'period_id',
+            'company_id',
+        ]
+
         move_line_vals = self.pool.get('account.move.line').default_get(
-            cr, uid,
-            ['centralisation', 'date','date_created', 'currency_id',
-             'journal_id', 'amount_currency', 'account_id', 'period_id',
-             'company_id'],
-            context=context)
+            cr, uid, fields_key, context=context)
+
         move_line_vals.update({
             'name': line.ref,
             'credit': line.debit,
@@ -156,22 +205,33 @@ class account_check_deposit(orm.Model):
         return move_line_vals
 
     def _prepare_sum_move_line_vals(self, cr, uid, deposit, move_vals, context=None):
+        #TODO did it's necessary to call default here?
+        #If yes it will be better to avoid code duplication with
+        #the prepare vals
+        fields_key = [
+            'centralisation',
+            'date',
+            'date_created',
+            'currency_id',
+            'journal_id',
+            'amount_currency',
+            'account_id',
+            'period_id',
+            'company_id',
+            'state',
+        ]
+
         move_line_vals = self.pool.get('account.move.line').default_get(
-            cr, uid,
-            ['centralisation', 'date','date_created', 'currency_id',
-             'journal_id', 'amount_currency', 'account_id', 'period_id',
-             'company_id', 'state'],
-            context=context)
+            cr, uid, fields_key, context=context)
 
         debit = 0.0
         for line in deposit.check_payment_ids:
             debit += line.debit
         move_line_vals.update({
-                'name': deposit.name,
-                'debit': debit,
-                'ref': deposit.name,
-            })
-
+            'name': deposit.name,
+            'debit': debit,
+            'ref': deposit.name,
+        })
         return move_line_vals
 
     def _reconcile_checks(self, cr, uid, move_id, context=None):
@@ -180,21 +240,19 @@ class account_check_deposit(orm.Model):
         move = move_obj.browse(cr, uid, move_id, context=context)
         for line in move.line_id:
             if line.check_line_id:
-                move_line_obj.reconcile(cr, uid,
-                                        [line.id, line.check_line_id.id],
-                                        context=context)
+                move_line_obj.reconcile(cr, uid, [
+                    line.id,
+                    line.check_line_id.id,
+                    ], context=context)
         return True
 
-
-
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
-        vals={}
+        vals = {}
         if company_id:
-            company=self.pool.get('res.company').browse(cr, uid, company_id, context=context)
-        vals['partner_id']=company.partner_id.id
-        return {'value':vals}
-
-
+            company = self.pool.get('res.company').\
+                browse(cr, uid, company_id, context=context)
+        vals['partner_id'] = company.partner_id.id
+        return {'value': vals}
 
     def validate_deposit(self, cr, uid, ids, context=None):
         move_obj = self.pool.get('account.move')
@@ -206,7 +264,7 @@ class account_check_deposit(orm.Model):
             move_id = move_obj.create(cr, uid, move_vals, context=context)
             move_obj.post(cr, uid, [move_id], context=context)
             self._reconcile_checks(cr, uid, move_id, context=context)
-            deposit.write({'state':'done', 'move_id': move_id})
+            deposit.write({'state': 'done', 'move_id': move_id})
         return True
 
 
@@ -214,8 +272,10 @@ class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     _columns = {
-        'check_deposit_id': fields.many2one('account.check.deposit',
-                                             'Check Deposit'),
-        'check_line_id': fields.many2one('account.move.line',
-                                             'Check Receive Move line'),
+        'check_deposit_id': fields.many2one(
+            'account.check.deposit',
+            'Check Deposit'),
+        'check_line_id': fields.many2one(
+            'account.move.line',
+            'Check Receive Move line'),
     }
