@@ -54,7 +54,7 @@
                                 <field name="check_payment_ids" nolabel="1"
                                        colspan="4" widget="many2many"
                                        domain="[('reconcile_id','=',False),
-                                                ('account_id.user_type.code','=','recieved_check')]">
+                                                ('account_id.user_type.code','=','received_check')]">
                                     <tree string="Check Payment">
                                         <field name="journal_id" />
                                         <field name="period_id" />

@@ -30,7 +30,7 @@
     'description': """This module allows you to use check deposits.
         With a new model : account_check_deposit you can select all
         the checks payments and create a global deposit for the selected checks.
-        You may have to create an account for recieved checks and a journal for payment by checks.""",
+        You may have to create an account for received checks and a journal for payment by checks.""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': ['account_accountant',
