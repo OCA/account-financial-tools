@@ -20,8 +20,6 @@
 #                                                                             #
 ###############################################################################
 
-
-
 {
     'name': 'account_check_deposit',
     'version': '0.1',
@@ -30,20 +28,21 @@
     'description': """This module allows you to use check deposits.
         With a new model : account_check_deposit you can select all
         the checks payments and create a global deposit for the selected checks.
-        You may have to create an account for received checks and a journal for payment by checks.""",
+        You may have to create an account for "received checks" and a
+        journal for payment by checks.""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
-    'depends': ['account_accountant',
-                'report_webkit',
-                ],
-    'init_xml': [],
-    'update_xml': [
-           'account_deposit_view.xml',
-           'account_deposit_sequence.xml',
-           'account_type_data.xml',
-           'security/ir.model.access.csv',
+    'depends': [
+        'account_accountant',
+        'report_webkit',
     ],
-    'demo_xml': [],
+    'data': [
+       'account_deposit_view.xml',
+       'account_deposit_sequence.xml',
+       'account_type_data.xml',
+       'security/ir.model.access.csv',
+    ],
     'installable': True,
+    'application': True,
     'active': False,
 }
