@@ -20,7 +20,7 @@
 ###############################################################################
 {
     'name': "Account Move Batch Validate",
-    'version': '0.1',
+    'version': '0.2',
     'author': 'Camptocamp',
     'maintainer': 'Camptocamp',
     'category': 'Finance',

@@ -70,7 +70,10 @@ class account_move(orm.Model):
             ('post_job_uuid', '=', False),
             ('state', '=', 'draft'),
         ], context=context)
+        name = self._name
 
+        # maybe not creating too many dictionaries will make us a bit faster
+        values = {'post_job_uuid': None}
         _logger.info(
             u'{0} jobs for posting moves have been created.'.format(
                 len(move_ids)
@@ -78,11 +81,10 @@ class account_move(orm.Model):
         )
 
         for move_id in move_ids:
-            job_uuid = validate_one_move.delay(session, self._name, move_id,
+            job_uuid = validate_one_move.delay(session, name, move_id,
                                                eta=eta)
-            self.write(cr, uid, [move_id], {
-                'post_job_uuid': job_uuid
-            })
+            values['post_job_uuid'] = job_uuid
+            self.write(cr, uid, [move_id], values)
 
     def _cancel_jobs(self, cr, uid, context=None):
         """Find moves where the mark has been removed and cancel the jobs.
@@ -129,6 +131,8 @@ class account_move(orm.Model):
                 move_ids[start:start + BLOCK_SIZE],
                 {'to_post': True},
                 context=context)
+            # users like to see the flag sooner rather than later
+            cr.commit()
         self._delay_post_marked(cr, uid, eta=eta, context=context)
 
     def unmark_for_posting(self, cr, uid, move_ids, context=None):

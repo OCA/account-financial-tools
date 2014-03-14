@@ -25,6 +25,7 @@
   I run the wizard
 -
   !python {model: account.move.marker}: |
+    context['automated_test_execute_now'] = True
     self.button_mark(
       cr, uid, [ref('wiz_marker4')], context=context
     )
