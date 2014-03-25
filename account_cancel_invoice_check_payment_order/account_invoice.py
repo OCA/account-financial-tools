@@ -22,7 +22,7 @@ from openerp.tools.translate import _
 from openerp.osv import osv, orm
 
 
-class account_invoice(orm.TransientModel):
+class account_invoice(orm.Model):
     _inherit = "account.invoice"
 
     def action_cancel(self, cr, uid, ids, *args):
