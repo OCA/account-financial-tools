@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -27,10 +27,13 @@ from openerp.osv import fields, orm
 def _check_luhn(string):
     """Luhn test to check control keys
 
-    Credits: http://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers#Python
+    Credits:
+        http://rosettacode.org/wiki/Luhn_test_of_credit_card_numbers#Python
     """
     r = [int(ch) for ch in string][::-1]
-    return (sum(r[0::2]) + sum(sum(divmod(d*2,10)) for d in r[1::2])) % 10 == 0
+    return (sum(r[0::2]) + sum(sum(divmod(d * 2, 10))
+                               for d in r[1::2])) % 10 == 0
+
 
 class Partner(orm.Model):
     """Add the French official company identity numbers SIREN, NIC and SIRET"""
@@ -51,16 +54,17 @@ class Partner(orm.Model):
         for partner in self.browse(cr, uid, ids, context=None):
             if partner.nic:
                 # Check the NIC type and length
-                if not partner.nic.isdecimal() or len(partner.nic)!=5:
+                if not partner.nic.isdecimal() or len(partner.nic) != 5:
                     return False
             if partner.siren:
                 # Check the SIREN type, length and key
                 if (not partner.siren.isdecimal()
-                    or len(partner.siren)!=9
-                    or not _check_luhn(partner.siren) ):
+                        or len(partner.siren) != 9
+                        or not _check_luhn(partner.siren)):
                     return False
                 # Check the NIC key (you need both SIREN and NIC to check it)
-                if partner.nic and not _check_luhn(partner.siren + partner.nic):
+                if partner.nic and not _check_luhn(partner.siren
+                                                   + partner.nic):
                     return False
         return True
 
@@ -74,26 +78,24 @@ class Partner(orm.Model):
                                 "of this office in the company in France. It "
                                 "makes the last 5 digits of the SIRET "
                                 "number."),
-        'siret': fields.function(_get_siret, type="char", string='SIRET',
+        'siret': fields.function(
+            _get_siret, type="char", string='SIRET',
             method=True, size=14,
-            store = {
+            store={
                 'res.partner': [lambda self, cr, uid, ids, context=None: ids,
-                ['siren', 'nic'],
-                10]},
+                                ['siren', 'nic'], 10]},
             help="The SIRET number is the official identity number of this "
                  "company's office in France. It is composed of the 9 digits "
                  "of the SIREN number and the 5 digits of the NIC number, ie. "
                  "14 digits."),
-        'company_registry': fields.char('Company Registry', size=64,
-                           help="The name of official registry where this "
-                                "company was declared."),
+        'company_registry': fields.char(
+            'Company Registry', size=64,
+            help="The name of official registry where this "
+                 "company was declared."),
     }
 
     _constraints = [
-                    (_check_siret,
-                     "The SIREN or NIC number is incorrect.",
-                     ["siren", "nic"]),
+        (_check_siret,
+         "The SIREN or NIC number is incorrect.",
+         ["siren", "nic"]),
     ]
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
