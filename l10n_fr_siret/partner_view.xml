@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-	<data>
-		<!-- Add the SIREN, NIC and SIRET numbers -->
-		<record model="ir.ui.view" id="view_partner_add">
-			<field name="name">res.partner.form.siret</field>
-			<field name="model">res.partner</field>
-			<field name="inherit_id" ref="account.view_partner_property_form" />
-			<field name="arch" type="xml">
-				<page string="Accounting" position="inside">
-					<group>
-						<group>
-							<field name="siren" />
-							<field name="nic" />
-							<field name="siret" />
-						</group>
-						<group>
-							<field name="company_registry" />
-						</group>
-					</group>
-				</page>
-			</field>
-		</record>
-	</data>
+    <data>
+        <!-- Add the SIREN and RC -->
+        <record model="ir.ui.view" id="view_partner_add">
+            <field name="name">res.partner.form.siret</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form" />
+            <field name="arch" type="xml">
+                <page string="Accounting" position="inside">
+                    <group>
+                        <group col="4">
+                            <field name="siret" colspan="4"/>
+                            <field name="siren" class="oe_edit_only oe_inline" string="SIREN/NIC" colspan="3"/>
+                            <field name="nic" class="oe_edit_only" nolabel="1"/>
+                        </group>
+                        <group>
+                            <field name="company_registry" />
+                        </group>
+                    </group>
+                </page>
+            </field>
+        </record>
+    </data>
 </openerp>
