@@ -10,8 +10,10 @@
                 <page string="Accounting" position="inside">
                     <group>
                         <group col="4">
-                            <field name="siret" colspan="4"/>
-                            <field name="siren" class="oe_edit_only oe_inline" string="SIREN/NIC" colspan="3"/>
+                            <!-- oe_view_only hides the field in edit mode if this patch applied:
+                                    lp:~numerigraphe-team/openerp-web/7.0-hide-oe_view_only -->
+                            <field name="siret" colspan="4" class="oe_view_only" />
+                            <field name="siren" class="oe_edit_only" string="SIREN/NIC" colspan="3"/>
                             <field name="nic" class="oe_edit_only" nolabel="1"/>
                         </group>
                         <group>
