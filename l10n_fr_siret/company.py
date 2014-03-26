@@ -19,5 +19,14 @@
 #
 ##############################################################################
 
-import partner
-import company
+from openerp.osv import fields, orm
+
+
+class res_company(orm.Model):
+    """Replace the company's fields for SIRET/RC with the ones on the partner"""
+    _inherit = 'res.company'
+
+    _columns = {
+        'siret': fields.related('partner_id', 'siret', type='char'),
+        'company_registry': fields.related('partner_id', 'company_registry', type='char'),
+    }
