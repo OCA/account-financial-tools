@@ -41,13 +41,9 @@ class Partner(orm.Model):
 
     def _get_siret(self, cr, uid, ids, field_name, arg, context=None):
         """Concatenate the SIREN and NIC to form the SIRET"""
-        sirets = {}
-        for partner in self.browse(cr, uid, ids, context=context):
-            if partner.siren and partner.nic:
-                sirets[partner.id] = '%s%s' % (partner.siren, partner.nic)
-            else:
-                sirets[partner.id] = ''
-        return sirets
+        return {partner.id: '%s%s' % (partner.siren, partner.nic or '*****')
+                            if partner.siren else ''
+                for partner in self.browse(cr, uid, ids, context=context)}
 
     def _check_siret(self, cr, uid, ids):
         """Check the SIREN's and NIC's keys (last digits)"""

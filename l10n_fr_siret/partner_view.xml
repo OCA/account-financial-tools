@@ -10,9 +10,12 @@
                 <page string="Accounting" position="inside">
                     <group>
                         <group col="4">
-                            <!-- oe_view_only hides the field in edit mode if this patch applied:
-                                    lp:~numerigraphe-team/openerp-web/7.0-hide-oe_view_only -->
-                            <field name="siret" colspan="4" class="oe_view_only" />
+                            <!-- oe_read_only hides the field in read mode
+                                in v8+. v7.0 shows the field - no big deal.
+                                Those who care can patch the web client:
+                                lp:~numerigraphe-team/ocb-web/7.0-hide-oe_read_only
+                            -->
+                            <field name="siret" colspan="4" class="oe_read_only" />
                             <field name="siren" class="oe_edit_only" string="SIREN/NIC" colspan="3"/>
                             <field name="nic" class="oe_edit_only" nolabel="1"/>
                         </group>
