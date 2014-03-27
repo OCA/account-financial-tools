@@ -23,19 +23,22 @@ from openerp.osv import fields, orm
 
 
 class res_company(orm.Model):
-    """Replace the company's fields for SIRET/RC with the ones on the partner"""
+    """Replace the company's fields for SIRET/RC with the partner's"""
     _inherit = 'res.company'
-    
+
     def _get_partner_change(self, cr, uid, ids, context=None):
-        return self.pool.get('res.partner').search(cr, uid, [('partner_id', 'in', ids)], context=context)
+        return self.pool.get('res.partner').search(
+            cr, uid, [('partner_id', 'in', ids)], context=context)
 
     _columns = {
         'siret': fields.related(
             'partner_id', 'siret', type='char', store={
-                'product.product': (_get_partner_change, ['siren', 'nic'], 20),
-                'res.company': (lambda self, cr, uid, ids, c={}: ids, ['partner_id'], 20), }),
+                'res.partner': (_get_partner_change, ['siren', 'nic'], 20),
+                'res.company': (lambda self, cr, uid, ids, c={}:
+                                ids, ['partner_id'], 20), }),
         'company_registry': fields.related(
             'partner_id', 'company_registry', type='char', store={
-                'product.product': (_get_partner_change, ['company_registry'], 20),
-                'res.company': (lambda self, cr, uid, ids, c={}: ids, ['partner_id'], 20), })
+                'res.partner': (_get_partner_change, ['company_registry'], 20),
+                'res.company': (lambda self, cr, uid, ids, c={}:
+                                ids, ['partner_id'], 20), })
     }
