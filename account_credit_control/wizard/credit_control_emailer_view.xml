@@ -6,15 +6,26 @@
       <field name="model">credit.control.emailer</field>
       <field name="type">form</field>
       <field name="arch" type="xml">
-        <form string="Mailer">
+        <form string="Mailer" version="7.0">
           <separator string="Send emails for the selected lines" colspan="4"/>
           <newline/>
-          <field name="line_ids" colspan="4" nolabel="1" />
+          <notebook>
+            <page string="Lines">
+              <field name="line_ids" colspan="4" nolabel="1" />
+            </page>
+          </notebook>
           <newline/>
-          <group colspan="4">
-            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
-            <button name="email_lines" string="Send the emails" type="object" icon="gtk-execute"/>
-          </group>
+          <footer>
+            <button class="oe_highlight"
+                    name="email_lines"
+                    string="Send the emails"
+                    type="object"/>
+            or
+            <button
+                class="oe_link"
+                special="cancel"
+                string="Cancel"/>
+          </footer>
         </form>
       </field>
     </record>
