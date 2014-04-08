@@ -42,6 +42,13 @@ class credit_control_policy_changer(orm.TransientModel):
     }
 
     def _get_default_lines(self, cr, uid, context=None):
+        """Get default lines for fields move_line_ids
+        of wizard. Only take lines that are on the same account
+        and move of the invoice and not reconciled
+
+        :return: list of compliant move line ids
+
+        """
         if context is None:
             context = {}
         active_ids = context.get('active_ids')
@@ -65,6 +72,14 @@ class credit_control_policy_changer(orm.TransientModel):
     _defaults = {'move_line_ids': _get_default_lines}
 
     def _mark_as_overriden(self, cr, uid, move_lines, context=None):
+        """Mark `move_lines` related credit control line as overriden
+        This is done by setting manually_overriden fields to True
+
+        :param move_lines: move line to mark as overriden
+
+        :retun: list of credit line ids that where marked as overriden
+
+        """
         credit_model = self.pool['credit.control.line']
         domain = [('id', 'in', [x.id for x in move_lines])]
         credits_ids = credit_model.search(cr, uid, domain, context=context)
@@ -75,6 +90,15 @@ class credit_control_policy_changer(orm.TransientModel):
         return credits_ids
 
     def set_new_policy(self, cr, uid, wizard_id, context=None):
+        """Set new policy on an invoice.
+
+        This is done by creating a new credit control line
+        related to the move line and the policy setted in
+        the wizard form
+
+        :return: ir.actions.act_windows dict
+
+        """
         assert len(wizard_id) == 1, "Only one id expected"
         wizard_id = wizard_id[0]
 
