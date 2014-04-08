@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from itertools import chain
+from openerp.tools.translate import _
 from openerp.osv import orm, fields
 
 
@@ -52,6 +52,9 @@ class credit_control_policy_changer(orm.TransientModel):
             return False
             # raise ValueError('No active_ids passed in context')
         for invoice in inv_model.browse(cr, uid, active_ids, context=context):
+            if invoice.type in ('in_invoice', 'in_refund'):
+                raise orm.except_orm(_('User error'),
+                                     _('Please use wizard on cutomer invoices'))
             domain = [('account_id', '=', invoice.account_id.id),
                       ('move_id', '=', invoice.move_id.id),
                       ('reconcile_id', '=', False)]
