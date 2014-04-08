@@ -116,6 +116,7 @@ class CreditControlLine(orm.Model):
                                 string='Level',
                                 store=True,
                                 readonly=True),
+        'manually_overriden': fields.boolean('Manually overriden')
     }
 
 
@@ -141,8 +142,27 @@ class CreditControlLine(orm.Model):
         return data
 
     def create_or_update_from_mv_lines(self, cr, uid, ids, lines,
-                                       level_id, controlling_date, context=None):
-        """Create or update line based on levels"""
+                                       level_id, controlling_date,
+                                       check_tolerance=True,  context=None):
+        """Create or update line based on levels
+
+        if check_tolerance is true credit line will not be
+        created if open amount is too small.
+        eg. we do not want to send a letter for 10 cents
+        of open amount.
+
+        :param lines: move.line id list
+        :param level_id: credit.control.policy.level id
+        :param controlling_date: date string of the credit controlling date.
+                                 Generally it should be the same
+                                 as create date
+        :param check_tolerance: boolean if True credit line
+                                will not be generated if open amount
+                                is smaller than company defined
+                                tolerance
+
+        :returns: list of created credit line ids
+        """
         currency_obj = self.pool.get('res.currency')
         level_obj = self.pool.get('credit.control.policy.level')
         ml_obj = self.pool.get('account.move.line')
@@ -164,26 +184,31 @@ class CreditControlLine(orm.Model):
         for line in ml_obj.browse(cr, uid, lines, context):
 
             open_amount = line.amount_residual_currency
+            cur_tolerance = tolerance.get(line.currency_id.id, tolerance_base)
+            if check_tolerance and open_amount < cur_tolerance:
+                continue
+            vals = self._prepare_from_move_line(cr, uid,
+                                                line,
+                                                level,
+                                                controlling_date,
+                                                open_amount,
+                                                context=context)
+            line_id = self.create(cr, uid, vals, context=context)
+            line_ids.append(line_id)
 
-            if open_amount > tolerance.get(line.currency_id.id, tolerance_base):
-                vals = self._prepare_from_move_line(
-                    cr, uid, line, level, controlling_date, open_amount, context=context)
-                line_id = self.create(cr, uid, vals, context=context)
-                line_ids.append(line_id)
-
-                # when we have lines generated earlier in draft,
-                # on the same level, it means that we have left
-                # them, so they are to be considered as ignored
-                previous_draft_ids = self.search(
-                    cr, uid,
-                    [('move_line_id', '=', line.id),
-                     ('level', '=', level.id),
-                     ('state', '=', 'draft'),
-                     ('id', '!=', line_id)],
-                    context=context)
-                if previous_draft_ids:
-                    self.write(cr, uid, previous_draft_ids,
-                               {'state': 'ignored'}, context=context)
+            # when we have lines generated earlier in draft,
+            # on the same level, it means that we have left
+            # them, so they are to be considered as ignored
+            previous_draft_ids = self.search(
+                cr, uid,
+                [('move_line_id', '=', line.id),
+                 ('level', '=', level.id),
+                 ('state', '=', 'draft'),
+                 ('id', '!=', line_id)],
+                context=context)
+            if previous_draft_ids:
+                self.write(cr, uid, previous_draft_ids,
+                           {'state': 'ignored'}, context=context)
 
         return line_ids
 

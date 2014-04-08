@@ -69,6 +69,7 @@ On each generated line, you have many choices:
           "wizard/credit_control_emailer_view.xml",
           "wizard/credit_control_marker_view.xml",
           "wizard/credit_control_printer_view.xml",
+          "wizard/credit_control_policy_changer_view.xml",
           "security/ir.model.access.csv"],
  'demo_xml': ["credit_control_demo.xml"],
  'tests': [],

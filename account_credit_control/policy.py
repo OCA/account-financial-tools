@@ -319,8 +319,10 @@ class CreditControlPolicyLevel(Model):
                "                 FROM credit_control_line\n"
                "                 WHERE move_line_id = mv_line.id\n"
                # lines from a previous level with a draft or ignored state
+               # or manually overriden
                # have to be generated again for the previous level
-               "                 AND state not in ('draft', 'ignored'))")
+               "                 AND NOT manually_overriden\n"
+               "                 AND state NOT IN ('draft', 'ignored'))")
         sql += " AND"
         sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
                                                                 controlling_date, context)
@@ -346,11 +348,14 @@ class CreditControlPolicyLevel(Model):
                " WHERE cr_line.id = (SELECT credit_control_line.id FROM credit_control_line\n"
                "                            WHERE credit_control_line.move_line_id = mv_line.id\n"
                "                            AND state != 'ignored'"
+               "                            AND NOT manually_overriden"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
                " AND cr_line.level = %(previous_level)s\n"
                # lines from a previous level with a draft or ignored state
+               # or manually overriden
                # have to be generated again for the previous level
-               " AND cr_line.state not in ('draft', 'ignored')\n"
+               " AND NOT manually_overriden\n"
+               " AND cr_line.state NOT IN ('draft', 'ignored')\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND "
         sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
