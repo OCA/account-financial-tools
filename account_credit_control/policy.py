@@ -198,7 +198,8 @@ class CreditControlPolicy(Model):
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
         cr.execute("SELECT move_line_id FROM credit_control_line"
-                   "    WHERE policy_id != %s and move_line_id in %s",
+                   "    WHERE policy_id != %s and move_line_id in %s"
+                   "    AND manually_overriden IS false",
                    (policy_id, tuple(lines)))
         res = cr.fetchall()
         if res:

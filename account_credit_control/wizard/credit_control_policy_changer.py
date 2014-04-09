@@ -18,9 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import logging
 from openerp.tools.translate import _
 from openerp.osv import orm, fields
-
+logger = logging.getLogger(__name__)
 
 class credit_control_policy_changer(orm.TransientModel):
     """Wizard that is run from invoices and allows to set manually a policy
@@ -62,6 +63,7 @@ class credit_control_policy_changer(orm.TransientModel):
             if invoice.type in ('in_invoice', 'in_refund'):
                 raise orm.except_orm(_('User error'),
                                      _('Please use wizard on cutomer invoices'))
+
             domain = [('account_id', '=', invoice.account_id.id),
                       ('move_id', '=', invoice.move_id.id),
                       ('reconcile_id', '=', False)]
@@ -81,13 +83,22 @@ class credit_control_policy_changer(orm.TransientModel):
 
         """
         credit_model = self.pool['credit.control.line']
-        domain = [('id', 'in', [x.id for x in move_lines])]
+        domain = [('move_line_id', 'in', [x.id for x in move_lines])]
         credits_ids = credit_model.search(cr, uid, domain, context=context)
         credit_model.write(cr, uid,
                            credits_ids,
                            {'manually_overriden': True},
                            context)
         return credits_ids
+
+    def _set_invoice_policy(self, cr, uid, move_line_ids, policy_level,
+                            context=None):
+        """Force policy on invoice"""
+        invoice_model = self.pool['account.invoice']
+        invoice_ids = set([x.invoice.id for x in move_line_ids if x.invoice])
+        invoice_model.write(cr, uid, list(invoice_ids),
+                            {'credit_policy_id': policy_level.policy_id.id},
+                            context=context)
 
     def set_new_policy(self, cr, uid, wizard_id, context=None):
         """Set new policy on an invoice.
@@ -124,6 +135,10 @@ class credit_control_policy_changer(orm.TransientModel):
             check_tolerance=False,
             context=None
         )
+        self._set_invoice_policy(cr, uid,
+                                 wizard.move_line_ids,
+                                 wizard.new_policy_level_id,
+                                 context=context)
         view_id = ir_model.get_object_reference(cr, uid,
                                                 "account_credit_control",
                                                 "credit_control_line_action")
