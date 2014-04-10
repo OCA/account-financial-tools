@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 @given(u'I change level for invoice "{invoice_name}" to "{level_name}" of policy "{policy_name}"')
 def impl(ctx, invoice_name, level_name, policy_name):
    invoice = model('account.invoice').get([('number', '=', invoice_name)])
@@ -46,6 +47,30 @@ def impl(ctx, level_name, invoice_name):
 
    assert len(created_id) == 1
    created = model('credit.control.line').get(created_id[0])
+   ctx.created = created
    assert_equal(created.policy_level_id.id, level.id)
    assert_equal(created.invoice_id.id, invoice.id)
    assert_equal(created.invoice_id.credit_policy_id.id, level.policy_id.id)
+
+@then(u'I force date of generated credit line to "{date}"')
+def impl(ctx, date):
+    assert_true(ctx.created)
+    ctx.created.write({'date': date})
+
+@given(u'the invoice "{invoice_name}" with manual changes')
+def impl(ctx, invoice_name):
+   invoice = model('account.invoice').get([('number', '=', invoice_name)])
+   assert_true(invoice, msg='No invoices found')
+   man_lines = (x for x in invoice.credit_control_line_ids if x.manually_overriden)
+   assert_true(next(man_lines, None), 'No manual change on the invoice')
+   ctx.invoice = invoice
+
+@given(u'the invoice has "{line_number:d}" line of level "{level:d}" for policy "{policy_name}"')
+def impl(ctx, line_number, level, policy_name):
+    assert_true(ctx.invoice)
+    policy = model('credit.control.policy').get([('name', '=', policy_name)])
+    assert_true(policy)
+    lines = model('credit.control.line').search([('invoice_id', '=', ctx.invoice.id),
+                                                 ('level', '=', level),
+                                                 ('policy_id', '=', policy.id)])
+    assert_equal(len(lines), line_number)
