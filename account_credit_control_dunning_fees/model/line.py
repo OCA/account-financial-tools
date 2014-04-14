@@ -22,7 +22,7 @@ from openerp.osv import orm, fields
 
 
 class credit_control_line(orm.Model):
-    """Add fees computations"""
+    """Add dunning_fees_amount_fees field"""
 
     _inherit = "credit.control.line"
 

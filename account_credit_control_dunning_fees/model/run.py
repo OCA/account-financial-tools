@@ -27,7 +27,7 @@ class credit_control_run(orm.Model):
     _inherit = "credit.control.run"
 
     def  _generate_credit_lines(self, cr, uid, run_id, context=None):
-
+        """Override method to add fees computation"""
         credit_line_ids = super(credit_control_run, self)._generate_credit_lines(
             cr,
             uid,

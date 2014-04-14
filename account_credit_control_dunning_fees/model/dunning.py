@@ -23,17 +23,47 @@ from openerp.tools.translate import _
 
 
 class FeesComputer(orm.TransientModel):
+    """Model that compute dunnig fees.
+
+    This class does not need any database storage as
+    it contains pure logic.
+
+    It inherits form `TransientModel` to benefit of orm facility
+
+    I could have created a new Class that inherit form BaseModel
+    but it did not look pertinent on this context
+
+    """
+
     _name = 'credit.control.dunning.fees.computer'
     _auto = False
     _log_access = True
 
     def _get_compute_fun(self, level_fees_type):
+        """Retrieve function of class that should compute the fees based on type
+
+        :param level_fee_type: type exisiting in model `credit.control.policy.level`
+                               for field dunning_fees_type
+
+        :returns: a function of class :class:`FeesComputer` with following signature
+                 self, cr, uid, credit_line (record), context
+
+        """
         if level_fees_type == 'fixed':
             return self.compute_fixed_fees
         else:
             raise NotImplementedError('fees type %s is not supported' % level_fees_type)
 
     def _compute_fees(self, cr, uid, credit_line_ids, context=None):
+        """Compute fees for `credit_line_ids` parameter
+
+        Fees amount is writen on credit line in fields dunning_fees_amount
+
+        :param credit_line_ids: list of `credit.control.line` ids
+
+        :returns: `credit_line_ids` list of `credit.control.line` ids
+
+        """
         if context is None:
             context = {}
         if not credit_line_ids:
@@ -47,15 +77,35 @@ class FeesComputer(orm.TransientModel):
         return credit_line_ids
 
     def _compute(self, cr, uid, credit_line, context=None):
-        """Compute fees for a given credit line"""
+        """Compute fees for a given credit line
+
+        Fees amount is writen on credit line in fields dunning_fees_amount
+
+        :param credit_line: credit line record
+
+        :returns: `credit_line` record
+        """
         fees_type = credit_line.policy_level_id.dunning_fees_type
         compute = self._get_compute_fun(fees_type)
         fees = compute(cr, uid, credit_line, context=context)
         if fees:
             credit_line.write({'dunning_fees_amount': fees},
                               context=context)
+        return credit_line
 
     def compute_fixed_fees(self, cr, uid, credit_line, context=None):
+        """Compute fees amount for fixed fees.
+        Correspond to the fixed dunning fees type
+
+        if currency of the fees is not the same as the currency
+        of the credit line, fees amount is converted to
+        currency of credit line.
+
+        :param credit_line: credit line record
+
+        :return: fees amount float (in credit line currency)
+
+        """
         currency_model = self.pool['res.currency']
         credit_currency = credit_line.currency_id
         level = credit_line.policy_level_id
