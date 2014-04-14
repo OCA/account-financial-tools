@@ -110,6 +110,7 @@ class CreditControlRun(orm.Model):
                                  _('Please select a policy'))
 
         report = ''
+        generated_ids = []
         for policy in policies:
             if policy.do_nothing:
                 continue
@@ -125,7 +126,7 @@ class CreditControlRun(orm.Model):
                     level_lines = level.get_level_lines(run.date, lines, context=context)
                     policy_generated_ids += cr_line_obj.create_or_update_from_mv_lines(
                         cr, uid, [], list(level_lines), level.id, run.date, context=context)
-
+            generated_ids.extend(policy_generated_ids)
             if policy_generated_ids:
                 report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
                         (policy.name, len(policy_generated_ids))
@@ -138,6 +139,7 @@ class CreditControlRun(orm.Model):
                 'report': report,
                 'manual_ids': [(6, 0, manually_managed_lines)]}
         run.write(vals, context=context)
+        return generated_ids
 
     def generate_credit_lines(self, cr, uid, run_id, context=None):
         """Generate credit control lines
