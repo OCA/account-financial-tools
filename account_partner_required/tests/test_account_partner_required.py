@@ -37,7 +37,9 @@ class test_account_partner_required(common.TransactionCase):
 
     def _create_move(self, with_partner, amount=100):
         date = datetime.now()
-        period_id = self.registry('account.period').find(self.cr, self.uid, date, context={'account_period_prefer_normal': True})[0]
+        period_id = self.registry('account.period').find(
+            self.cr, self.uid, date,
+            context={'account_period_prefer_normal': True})[0]
         move_vals = {
             'journal_id': self.ref('account.sales_journal'),
             'period_id': period_id,
@@ -45,27 +47,26 @@ class test_account_partner_required(common.TransactionCase):
         }
         move_id = self.move_obj.create(self.cr, self.uid, move_vals)
         self.move_line_obj.create(self.cr, self.uid,
-                 {'move_id': move_id,
-                  'name': '/',
-                  'debit': 0,
-                  'credit': amount,
-                  'account_id': self.ref('account.a_sale'),
-                 })
-        move_line_id = self.move_line_obj.create(self.cr, self.uid,
-                {'move_id': move_id,
-                 'name': '/',
-                 'debit': amount,
-                 'credit': 0,
-                 'account_id': self.ref('account.a_recv'),
-                 'partner_id': self.ref('base.res_partner_1') if with_partner else False,
-                })
+                                  {'move_id': move_id,
+                                   'name': '/',
+                                   'debit': 0,
+                                   'credit': amount,
+                                   'account_id': self.ref('account.a_sale')})
+        move_line_id = self.move_line_obj.create(
+            self.cr, self.uid,
+            {'move_id': move_id,
+             'name': '/',
+             'debit': amount,
+             'credit': 0,
+             'account_id': self.ref('account.a_recv'),
+             'partner_id': self.ref('base.res_partner_1') if with_partner else False})
         return move_line_id
 
     def _set_partner_policy(self, policy, aref='account.a_recv'):
         account_type = self.account_obj.browse(self.cr, self.uid,
-                                          self.ref(aref)).user_type
+                                               self.ref(aref)).user_type
         self.account_type_obj.write(self.cr, self.uid, account_type.id,
-                               {'partner_policy': policy})
+                                    {'partner_policy': policy})
 
     def test_optional(self):
         self._create_move(with_partner=False)
