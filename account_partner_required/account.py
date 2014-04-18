@@ -29,9 +29,9 @@ class account_account_type(orm.Model):
 
     _columns = {
         'partner_policy': fields.selection([
-                ('optional', 'Optional'),
-                ('always', 'Always'),
-                ('never', 'Never')
+            ('optional', 'Optional'),
+            ('always', 'Always'),
+            ('never', 'Never')
             ], 'Policy for partner field',
             help="Set the policy for the partner field : if you select "
                  "'Optional', the accountant is free to put a partner "
@@ -81,16 +81,16 @@ class account_move_line(orm.Model):
 
     def create(self, cr, uid, vals, context=None, check=True):
         line_id = super(account_move_line, self).create(cr, uid, vals,
-                                                     context=context,
-                                                     check=check)
+                                                        context=context,
+                                                        check=check)
         self.check_partner_required(cr, uid, line_id, vals, context=context)
         return line_id
 
     def write(self, cr, uid, ids, vals, context=None, check=True,
               update_check=True):
         res = super(account_move_line, self).write(cr, uid, ids, vals,
-                                                    context=context,
-                                                    check=check,
-                                                    update_check=update_check)
+                                                   context=context,
+                                                   check=check,
+                                                   update_check=update_check)
         self.check_partner_required(cr, uid, ids, vals, context=context)
         return res
