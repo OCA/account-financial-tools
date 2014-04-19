@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Account partner required module for OpenERP
-#    Copyright (C) 2014 Acsone (http://acsone.eu). All Rights Reserved
+#    Copyright (C) 2014 Acsone (http://acsone.eu).
 #    @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,4 +20,4 @@
 #
 ##############################################################################
 
-import account
+from . import account
