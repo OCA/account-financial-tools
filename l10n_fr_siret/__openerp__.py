@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -21,25 +21,32 @@
 
 {
     'name': 'French company identity numbers SIRET/SIREN/NIC',
-    'version': '1.0',
+    'version': '1.1',
     "category": 'Accounting',
-    'description': """
-This module lets users keep track of the companies' unique
-identification numbers from the official SIRENE registry in France:
-SIRET, SIREN and NIC.  These numbers identify each company and their
-subsidiaries, and are often required for administrative tasks.
+    'description': '''
+This module add the French company identity numbers.
+====================================================
 
-At the top of the Partner form, users will be able to enter the SIREN
+This can help any company doing business with French companies
+by letting users track the partners' unique identification
+numbers from the official SIRENE registry in France: SIRET, SIREN and NIC.
+These numbers identify each company and their subsidiaries, and are
+often required for administrative tasks.
+
+On the Partner form, users will be able to enter the SIREN
 and NIC numbers, and the SIRET number will be calculated
 automatically.  The last digits of the SIREN and NIC are control keys:
 OpenERP will check their validity when partners are recorded.
-""",
-    'author' : u'Numérigraphe SARL',
-    'depends': ['account'],
-    'data': ['partner_view.xml',
-             ],
+
+ATTENTION! this module replaces the fields on the Company form with the new
+ones on the Partner form, but it will NOT copy the corresponding data: you
+will have to enter them again.
+''',
+    'author': u'Numérigraphe SARL',
+    'depends': ['account', 'l10n_fr'],
+    'data': [
+        'partner_view.xml',
+    ],
     'installable': True,
     'active': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
