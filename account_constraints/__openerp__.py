@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name' : 'Account Constraints',
-    'version' : '1.0',
+    'version' : '1.1',
     'depends' : [
                  'account',
                  ],
@@ -37,7 +37,7 @@ and legal state of the art in other software.
 Summary of constraints are:
 
 * Add a constraint on account move: you cannot pickup a date that is not
-  in the fiscal year of the concerned period
+  in the fiscal year of the concerned period (configurable per journal)
 
 * For manual entries when multicurrency:
 
@@ -56,8 +56,13 @@ Summary of constraints are:
   that the user cannot make mistakes even in draft state, he must pass through the 
   parent object to make his modification.
 
+  Contributors
+  * Stéphane Bidoul <stephane.bidoul@acsone.eu>
+
     """,
     'website': 'http://www.camptocamp.com',
-    'data': [],
+    'data': [
+        'view/account_journal.xml',
+    ],
     'installable': True,
 }
