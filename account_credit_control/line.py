@@ -143,7 +143,7 @@ class CreditControlLine(orm.Model):
 
     def create_or_update_from_mv_lines(self, cr, uid, ids, lines,
                                        level_id, controlling_date,
-                                       check_tolerance=True,  context=None):
+                                       check_tolerance=True, context=None):
         """Create or update line based on levels
 
         if check_tolerance is true credit line will not be
