@@ -82,17 +82,22 @@ class CreditControlRun(orm.Model):
     def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
         """Ensure that there is no credit line in the future using controlling_date"""
         run_obj = self.pool['credit.control.run']
-        lines = run_obj.search(cr, uid, [('date', '>', controlling_date)],
-                               order='date DESC', limit=1, context=context)
-        if not lines:
-            line_obj =  self.pool['credit.control.line']
-            lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
-                                    order='date DESC', limit=1, context=context)
+        runs = run_obj.search(cr, uid, [('date', '>', controlling_date)],
+                              order='date DESC', limit=1, context=context)
+        if runs:
+            run = run_obj.browse(cr, uid, runs[0], context=context)
+            raise orm.except_orm(_('Error'),
+                                 _('A run has already been executed more '
+                                   'recently than %s') % (run.date))
+
+        line_obj = self.pool['credit.control.line']
+        lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
+                                order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cr, uid, lines[0], context=context)
             raise orm.except_orm(_('Error'),
-                                 _('A run has already been executed more '
-                                   'recently than %s') % (line.date))
+                                 _('A credit control line more '
+                                   'recent than %s exists') % (line.date))
         return True
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
@@ -153,7 +158,7 @@ class CreditControlRun(orm.Model):
         """
         try:
             cr.execute('SELECT id FROM credit_control_run'
-                           ' LIMIT 1 FOR UPDATE NOWAIT')
+                       ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception as exc:
             # in case of exception openerp will do a rollback for us and free the lock
             raise orm.except_orm(_('Error'),
