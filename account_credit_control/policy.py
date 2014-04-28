@@ -42,7 +42,7 @@ class CreditControlPolicy(Model):
                 'account_ids': fields.many2many('account.account',
                                                 string='Accounts',
                                                 required=True,
-                                                domain="[('reconcile', '=', True)]",
+                                                domain="[('type', '=', 'receivable')]",
                                                 help="This policy will be active only"
                                                      " for the selected accounts"),
                 'active': fields.boolean('Active'),
@@ -323,7 +323,8 @@ class CreditControlPolicyLevel(Model):
                # or manually overriden
                # have to be generated again for the previous level
                "                 AND NOT manually_overriden\n"
-               "                 AND state NOT IN ('draft', 'ignored'))")
+               "                 AND state NOT IN ('draft', 'ignored'))"
+               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n")
         sql += " AND"
         sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
                                                                 controlling_date, context)
@@ -352,6 +353,7 @@ class CreditControlPolicyLevel(Model):
                "                            AND NOT manually_overriden"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
                " AND cr_line.level = %(previous_level)s\n"
+               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
                # lines from a previous level with a draft or ignored state
                # or manually overriden
                # have to be generated again for the previous level
