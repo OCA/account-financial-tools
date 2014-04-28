@@ -81,9 +81,13 @@ class CreditControlRun(orm.Model):
 
     def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
         """Ensure that there is no credit line in the future using controlling_date"""
-        line_obj =  self.pool.get('credit.control.line')
-        lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
-                                order='date DESC', limit=1, context=context)
+        run_obj = self.pool['credit.control.run']
+        lines = run_obj.search(cr, uid, [('date', '>', controlling_date)],
+                               order='date DESC', limit=1, context=context)
+        if not lines:
+            line_obj =  self.pool['credit.control.line']
+            lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
+                                    order='date DESC', limit=1, context=context)
         if lines:
             line = line_obj.browse(cr, uid, lines[0], context=context)
             raise orm.except_orm(_('Error'),
