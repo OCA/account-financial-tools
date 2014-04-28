@@ -53,14 +53,15 @@ on the generated credit lines.
 
 Fees can be manually edited as long credit line is draft
 
-To Come
+Credit control Summary report includes a new fee columns.
 -------
 Support of fees price list
 
 """,
  'website': 'http://www.camptocamp.com',
  'data': ['view/policy_view.xml',
-          'view/line_view.xml'],
+          'view/line_view.xml',
+          'report/report.xml'],
  'demo': [],
  'test': [],
  'installable': True,
