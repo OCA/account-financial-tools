@@ -22,22 +22,22 @@ from openerp.osv import orm
 from openerp.tools.translate import _
 
 
-class FeesComputer(orm.TransientModel):
+class FeesComputer(orm.BaseModel):
     """Model that compute dunnig fees.
 
     This class does not need any database storage as
     it contains pure logic.
 
-    It inherits form `TransientModel` to benefit of orm facility
+    It inherits form ``orm.BaseModel`` to benefit of orm facility
 
-    I could have created a new Class that inherit form BaseModel
-    but it did not look pertinent on this context
-
+    Similar to AbstractModel but log access and actions
     """
 
     _name = 'credit.control.dunning.fees.computer'
     _auto = False
     _log_access = True
+    _register = False
+    _transient = False
 
     def _get_compute_fun(self, level_fees_type):
         """Retrieve function of class that should compute the fees based on type
