@@ -97,7 +97,8 @@ class CreditControlRun(orm.Model):
             line = line_obj.browse(cr, uid, lines[0], context=context)
             raise orm.except_orm(_('Error'),
                                  _('A credit control line more '
-                                   'recent than %s exists') % (line.date))
+                                   'recent than %s exists at %s') %
+                                 (controlling_date, line.date))
         return True
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
@@ -123,7 +124,6 @@ class CreditControlRun(orm.Model):
         for policy in policies:
             if policy.do_nothing:
                 continue
-
             lines = policy._get_move_lines_to_process(run.date, context=context)
             manual_lines = policy._lines_different_policy(lines, context=context)
             lines.difference_update(manual_lines)
