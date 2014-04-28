@@ -9,7 +9,11 @@
         <form string="Lines report" version="7.0">
           <separator string="Print the selected lines" colspan="4"/>
           <newline/>
-          <field name="mark_as_sent" colspan="4" attrs="{'invisible': [('state', '=', 'done')]}"/>
+          <group>
+            <field name="mark_as_sent"
+                   colspan="4"
+                   attrs="{'invisible': [('state', '=', 'done')]}"/>
+          </group>
           <newline/>
           <notebook>
             <page string="Lines" attrs="{'invisible': [('state', '=', 'done')]}">
