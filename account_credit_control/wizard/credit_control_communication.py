@@ -80,6 +80,9 @@ class CreditCommunication(TransientModel):
         return cr_l_ids
 
     def _generate_comm_from_credit_line_ids(self, cr, uid, line_ids, context=None):
+        """Aggregate credit control line by partner, level, and currency
+        It also generate a communication object for aggregation.
+        """
         if not line_ids:
             return []
         comms = []
