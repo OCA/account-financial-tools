@@ -202,7 +202,7 @@ class CreditControlLine(orm.Model):
             previous_draft_ids = self.search(
                 cr, uid,
                 [('move_line_id', '=', line.id),
-                 ('level', '=', level.id),
+                 ('policy_level_id', '=', level.id),
                  ('state', '=', 'draft'),
                  ('id', '!=', line_id)],
                 context=context)
