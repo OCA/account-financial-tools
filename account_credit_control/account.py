@@ -27,11 +27,11 @@ class AccountAccount(orm.Model):
     _inherit = "account.account"
 
     _columns = {
-        'credit_control_line_ids':
-            fields.one2many('credit.control.line',
-                            'account_id',
-                            string='Credit Lines',
-                            readonly=True),
+        'credit_control_line_ids': fields.one2many(
+            'credit.control.line',
+            'account_id',
+            string='Credit Lines',
+            readonly=True),
         }
 
     def copy_data(self, cr, uid, id, default=None, context=None):
