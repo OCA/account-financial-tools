@@ -55,7 +55,8 @@ class AccountInvoice(orm.Model):
                             help=("The Credit Control Policy used for this "
                                   "invoice. If nothing is defined, it will "
                                   "use the account setting or the partner "
-                                  "setting.")
+                                  "setting."),
+                            readonly=True,
                             ),
         'credit_control_line_ids':
             fields.one2many('credit.control.line',
