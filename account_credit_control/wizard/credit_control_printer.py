@@ -80,7 +80,7 @@ class CreditControlPrinter(orm.TransientModel):
         report_file = comm_obj._generate_report(cr, uid, comms, context=context)
 
         form.write({'report_file': base64.b64encode(report_file),
-                    'report_name': 'credit_control_letters_%s.pdf' % form.id,
+                    'report_name': 'credit_control_esr_bvr_%s.pdf' % fields.datetime.now(),
                     'state': 'done'})
 
         if form.mark_as_sent:
