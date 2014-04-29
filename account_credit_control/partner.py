@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp.osv import orm, fields
+from openerp.tools.translate import _
 
 
 class ResPartner(orm.Model):
@@ -28,21 +29,44 @@ class ResPartner(orm.Model):
     _inherit = "res.partner"
 
     _columns = {
-        'credit_policy_id':
-            fields.many2one('credit.control.policy',
-                            'Credit Control Policy',
-                            help=("The Credit Control Policy used for this "
-                                  "partner. This setting can be forced on the "
-                                  "invoice. If nothing is defined, it will use "
-                                  "the company setting.")),
-        'credit_control_line_ids':
-            fields.one2many('credit.control.line',
-                            'invoice_id',
-                            string='Credit Control Lines',
-                            readonly=True)
+        'credit_policy_id': fields.many2one(
+            'credit.control.policy',
+            'Credit Control Policy',
+            domain="[('account_ids', 'in', property_account_receivable)]",
+            help=("The Credit Control Policy used for this "
+                  "partner. This setting can be forced on the "
+                  "invoice. If nothing is defined, it will use "
+                  "the company setting.")
+        ),
+        'credit_control_line_ids': fields.one2many(
+            'credit.control.line',
+            'invoice_id',
+            string='Credit Control Lines',
+            readonly=True
+        )
     }
 
+    def _check_credit_policy(self, cr, uid, part_ids, context=None):
+        """Ensure that policy on partner are limited to the account policy"""
+        if isinstance(part_ids, (int, long)):
+            part_ids = [part_ids]
+        policy_obj = self.pool['credit.control.policy']
+        for partner in self.browse(cr, uid, part_ids, context):
+            account = partner.property_account_receivable
+            policy_obj.check_policy_against_account(
+                cr, uid,
+                account.id,
+                partner.credit_policy_id.id,
+                context=context
+            )
+        return True
+
+    _constraints = [(_check_credit_policy,
+                     'The policy must be related to the receivable account',
+                     ['credit_policy_id'])]
+
     def copy_data(self, cr, uid, id, default=None, context=None):
+        """Remove credit lines when copying partner"""
         if default is None:
             default = {}
         else:

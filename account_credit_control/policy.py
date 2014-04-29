@@ -18,11 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class CreditControlPolicy(Model):
+class CreditControlPolicy(orm.Model):
     """Define a policy of reminder"""
 
     _name = "credit.control.policy"
@@ -103,7 +103,10 @@ class CreditControlPolicy(Model):
         my_obj = self.pool.get(model)
         move_l_obj = self.pool.get('account.move.line')
 
-        default_domain = self._move_lines_domain(cr, uid, policy, controlling_date, context=context)
+        default_domain = self._move_lines_domain(cr, uid,
+                                                 policy,
+                                                 controlling_date,
+                                                 context=context)
         to_add_ids = set()
         to_remove_ids = set()
 
@@ -206,8 +209,26 @@ class CreditControlPolicy(Model):
             different_lines.update([x[0] for x in res])
         return different_lines
 
+    def check_policy_against_account(self, cr, uid, account_id, policy_id,
+                                     context=None):
+        """Ensure that policy correspond to account relation"""
+        policy = self.browse(cr, uid, policy_id, context=context)
+        account = self.pool['account.account'].browse(cr, uid, account_id,
+                                                      context=context)
+        policies_id = self.search(cr, uid, [],
+                                  context=context)
+        policies = self.browse(cr, uid, policies_id, context=context)
+        allowed = [x for x in policies if
+                   account in x.account_ids or x.do_nothing]
+        if policy not in allowed:
+            allowed_names = u"\n".join(x.name for x in allowed)
+            raise orm.except_orm(
+                _('You can only use a policy set on  account %s') % account.name,
+                _("Please choose one of the following policies:\n %s") % allowed_names)
+        return True
 
-class CreditControlPolicyLevel(Model):
+
+class CreditControlPolicyLevel(orm.Model):
     """Define a policy level. A level allows to determine if
     a move line is due and the level of overdue of the line"""
 
