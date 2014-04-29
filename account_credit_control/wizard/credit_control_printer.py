@@ -43,6 +43,7 @@ class CreditControlPrinter(orm.TransientModel):
         'mark_as_sent': fields.boolean('Mark letter lines as sent',
                                        help="Only letter lines will be marked."),
         'report_file': fields.binary('Generated Report', readonly=True),
+        'report_name': fields.char('Report name'),
         'state': fields.char('state', size=32),
         'line_ids': fields.many2many(
             'credit.control.line',
@@ -78,7 +79,9 @@ class CreditControlPrinter(orm.TransientModel):
                                                              context=context)
         report_file = comm_obj._generate_report(cr, uid, comms, context=context)
 
-        form.write({'report_file': base64.b64encode(report_file), 'state': 'done'})
+        form.write({'report_file': base64.b64encode(report_file),
+                    'report_name': 'credit_control_letters_%s.pdf' % form.id,
+                    'state': 'done'})
 
         if form.mark_as_sent:
             comm_obj._mark_credit_line_as_sent(cr, uid, comms, context=context)
