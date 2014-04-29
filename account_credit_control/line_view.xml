@@ -33,7 +33,7 @@
       <field name="type">search</field>
       <field name="arch" type="xml">
         <search string="Control Credit Lines">
-          <group>
+          <group string="Filters">
             <filter name="filter_draft" icon="terp-mail-message-new"
                     string="Draft" domain="[('state', '=', 'draft')]"
                     help="Draft lines have to be triaged."/>
