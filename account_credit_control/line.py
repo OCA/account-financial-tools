@@ -38,9 +38,11 @@ class CreditControlLine(orm.Model):
     _name = "credit.control.line"
     _description = "A credit control line"
     _rec_name = "id"
-
+    _order = "date DESC"
     _columns = {
-        'date': fields.date('Controlling date', required=True),
+        'date': fields.date('Controlling date',
+                            required=True,
+                            select=True),
         # maturity date of related move line we do not use a related field in order to
         # allow manual changes
         'date_due': fields.date('Due date',
