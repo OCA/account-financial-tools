@@ -44,13 +44,14 @@ class AccountInvoice(orm.Model):
         }
 
     def copy_data(self, cr, uid, id, default=None, context=None):
-        """Ensure that credit lines are not duplicated when copy"""
+        """Ensure that credit lines and policcy are not copied"""
         if default is None:
             default = {}
         else:
             default = default.copy()
         default = default.copy()
         default['credit_control_line_ids'] = False
+        default['credit_policy_id'] = False
         return super(AccountInvoice, self).copy_data(
             cr, uid, id, default=default, context=context)
 
