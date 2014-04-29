@@ -36,7 +36,7 @@ class FeesComputer(orm.BaseModel):
     _name = 'credit.control.dunning.fees.computer'
     _auto = False
     _log_access = True
-    _register = False
+    _register = True
     _transient = False
 
     def _get_compute_fun(self, level_fees_type):
