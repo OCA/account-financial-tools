@@ -26,7 +26,36 @@ class AccountInvoice(orm.Model):
     """Check on cancelling of an invoice"""
     _inherit = 'account.invoice'
 
+    _columns = {
+        'credit_policy_id':
+            fields.many2one('credit.control.policy',
+                            'Credit Control Policy',
+                            help=("The Credit Control Policy used for this "
+                                  "invoice. If nothing is defined, it will "
+                                  "use the account setting or the partner "
+                                  "setting."),
+                            readonly=True,
+                            ),
+        'credit_control_line_ids':
+            fields.one2many('credit.control.line',
+                            'invoice_id',
+                            string='Credit Lines',
+                            readonly=True),
+        }
+
+    def copy_data(self, cr, uid, id, default=None, context=None):
+        """Ensure that credit lines are not duplicated when copy"""
+        if default is None:
+            default = {}
+        else:
+            default = default.copy()
+        default = default.copy()
+        default['credit_control_line_ids'] = False
+        return super(AccountInvoice, self).copy_data(
+            cr, uid, id, default=default, context=context)
+
     def action_cancel(self, cr, uid, ids, context=None):
+        """Prevent to cancel invoice related to credit line"""
         # We will search if this invoice is linked with credit
         cc_line_obj = self.pool.get('credit.control.line')
         for invoice_id in ids:

@@ -42,35 +42,3 @@ class AccountAccount(orm.Model):
         default['credit_control_line_ids'] = False
         return super(AccountAccount, self).copy_data(
             cr, uid, id, default=default, context=context)
-
-
-class AccountInvoice(orm.Model):
-    """Add a link to a credit control policy on account.account"""
-
-    _inherit = "account.invoice"
-    _columns = {
-        'credit_policy_id':
-            fields.many2one('credit.control.policy',
-                            'Credit Control Policy',
-                            help=("The Credit Control Policy used for this "
-                                  "invoice. If nothing is defined, it will "
-                                  "use the account setting or the partner "
-                                  "setting."),
-                            readonly=True,
-                            ),
-        'credit_control_line_ids':
-            fields.one2many('credit.control.line',
-                            'invoice_id',
-                            string='Credit Lines',
-                            readonly=True),
-        }
-
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        else:
-            default = default.copy()
-        default = default.copy()
-        default['credit_control_line_ids'] = False
-        return super(AccountInvoice, self).copy_data(
-            cr, uid, id, default=default, context=context)
