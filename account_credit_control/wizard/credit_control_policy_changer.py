@@ -100,6 +100,17 @@ class credit_control_policy_changer(orm.TransientModel):
                             {'credit_policy_id': policy_level.policy_id.id},
                             context=context)
 
+    def _check_accounts_policies(self, cr, uid, lines, policy, context=None):
+        policy_obj = self.pool['credit.control.policy']
+        for line in lines:
+            policy_obj.check_policy_against_account(
+                cr, uid,
+                line.account_id.id,
+                policy.id,
+                context=context
+            )
+        return True
+
     def set_new_policy(self, cr, uid, wizard_id, context=None):
         """Set new policy on an invoice.
 
@@ -118,6 +129,11 @@ class credit_control_policy_changer(orm.TransientModel):
         ui_act_model = self.pool['ir.actions.act_window']
         wizard = self.browse(cr, uid, wizard_id, context=context)
         controlling_date = fields.date.today()
+        self._check_accounts_policies(
+            cr,
+            uid,
+            wizard.move_line_ids,
+            wizard.new_policy_level_id.policy_id)
         self._mark_as_overriden(cr,
                                 uid,
                                 wizard.move_line_ids,
