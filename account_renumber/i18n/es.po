@@ -7,6 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2013-09-26 16:17+0000\n"
 "PO-Revision-Date: 2014-04-08 19:42+0000\n"
 "Last-Translator: Juan A. Pérez Ruiz (Otherway) <juanalfonso@otherway.es>\n"
@@ -15,13 +16,30 @@ msgstr ""
 "PO-Revision-Date: 2014-04-14 14:17+0100\n"
 "Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
 >>>>>>> [IMP] account_renumber: PEP8
+=======
+"POT-Creation-Date: 2014-04-14 12:33+0000\n"
+"PO-Revision-Date: 2014-06-26 05:27+0000\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
+>>>>>>> Launchpad automatic translations update.
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 "X-Launchpad-Export-Date: 2014-04-09 07:04+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
+=======
+"X-Launchpad-Export-Date: 2014-05-03 06:44+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
+>>>>>>> Launchpad automatic translations update.
+=======
+"X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
+"X-Generator: Launchpad (build 17041)\n"
+>>>>>>> Launchpad automatic translations update.
 "Language: \n"
 
 #. module: account_renumber
@@ -41,6 +59,14 @@ msgid "Renumber journal entries"
 msgstr "Renumerar asientos"
 =======
 "Plural-Forms: \n"
+=======
+"X-Launchpad-Export-Date: 2014-06-26 07:07+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
+>>>>>>> Launchpad automatic translations update.
+=======
+"X-Launchpad-Export-Date: 2014-06-27 07:08+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
+>>>>>>> Launchpad automatic translations update.
 
 #. module: account_renumber
 #: code:_description:0
@@ -52,7 +78,10 @@ msgstr "Asistente de renumeración contable"
 #: view:wizard.renumber:0
 msgid "Cancel"
 msgstr "Cancelar"
+<<<<<<< HEAD
 >>>>>>> [IMP] account_renumber: PEP8
+=======
+>>>>>>> Launchpad automatic translations update.
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -83,7 +112,11 @@ msgstr "Inicial"
 #. module: account_renumber
 #: help:wizard.renumber,number_next:0
 msgid "Journal sequences will start counting on this number"
+<<<<<<< HEAD
 msgstr "Las secuencias de diario comenzarán a contar en este número"
+=======
+msgstr "Las secuencias de los diarios empezarán a contar en este número"
+>>>>>>> Launchpad automatic translations update.
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -110,18 +143,19 @@ msgid "Journals to renumber"
 msgstr "Diarios a renumerar"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:96
+#: code:addons/account_renumber/wizard/wizard_renumber.py:86
 #, python-format
 msgid "No Data Available"
 msgstr "Sin datos disponibles"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:97
+#: code:addons/account_renumber/wizard/wizard_renumber.py:87
 #, python-format
 msgid "No records found for your selection!"
 msgstr "No se han encontrado registros para la selección"
 
 #. module: account_renumber
+<<<<<<< HEAD
 <<<<<<< HEAD
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "wizard.renumber"
@@ -133,6 +167,8 @@ msgstr "wizard.renumber"
 msgid "No Data Available"
 msgstr "No hay datos disponibles"
 =======
+=======
+>>>>>>> Launchpad automatic translations update.
 #: view:wizard.renumber:0
 #: field:wizard.renumber,period_ids:0
 msgid "Periods"
@@ -172,7 +208,7 @@ msgstr "Renumerar asientos contables"
 >>>>>>> [IMP] account_renumber: PEP8
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:159
+#: code:addons/account_renumber/wizard/wizard_renumber.py:130
 #, python-format
 <<<<<<< HEAD
 msgid "No records found for your selection!"
@@ -198,7 +234,8 @@ msgstr "Renumerados"
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr "Este asistente le permite renumerar los asientos de uno o más diarios."
+msgstr ""
+"Este asistente le permite renumerar los asientos de uno o más diarios."
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -211,9 +248,10 @@ msgid "unknown"
 msgstr "desconocido"
 
 #. module: account_renumber
-#: code:_description:0
 #: model:ir.model,name:account_renumber.model_wizard_renumber
-#, python-format
 msgid "wizard.renumber"
 msgstr "Asistente de renumeración de asientos"
+<<<<<<< HEAD
 
+=======
+>>>>>>> Launchpad automatic translations update.
