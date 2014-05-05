@@ -62,7 +62,7 @@ class wizard_renumber(orm.TransientModel):
         Allows us to get the real sequence for the given fiscal year.
         """
         sequence = self.pool['ir.sequence'].browse(cr, uid, sequence_id,
-                                                    context=context)
+                                                   context=context)
         for line in sequence.fiscal_ids:
             if line.fiscalyear_id.id == fiscalyear_id:
                 return line.sequence_id.id
@@ -91,11 +91,11 @@ class wizard_renumber(orm.TransientModel):
         sequences_seen = []
         for period in period_ids:
             move_ids = move_obj.search(cr, uid,
-                                          [('journal_id', 'in', journal_ids),
-                                           ('period_id', '=', period),
-                                           ('state', '=', 'posted')],
-                                          limit=0, order='date,id',
-                                          context=context)
+                                       [('journal_id', 'in', journal_ids),
+                                        ('period_id', '=', period),
+                                        ('state', '=', 'posted')],
+                                        limit=0, order='date,id',
+                                        context=context)
             if not move_ids:
                 continue
             logger.debug("Renumbering %d account moves." % len(move_ids))
@@ -122,8 +122,9 @@ class wizard_renumber(orm.TransientModel):
             logger.debug("%d account moves renumbered." % len(move_ids))
         sequences_seen = []
         form.write({'state': 'renumber'})
-        view_ref = self.pool['ir.model.data'].get_object_reference(cr,
-                                        uid, 'account', 'view_move_tree')
+        data_obj = self.pool['ir.model.data']
+        view_ref = data_obj.get_object_reference(cr, uid, 'account',
+                                                 'view_move_tree')
         view_id = view_ref and view_ref[1] or False,
         res = {
             'type': 'ir.actions.act_window',
