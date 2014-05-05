@@ -1,0 +1,18 @@
+<openerp>
+  <data>
+
+    <record id="view_account_journal_allow_date_fy" model="ir.ui.view">
+      <field name="name">account.journal.allow_date_fy</field>
+      <field name="model">account.journal</field>
+      <field name="inherit_id" ref="account.view_account_journal_form"/>
+      <field name="arch" type="xml">
+        <data>
+          <field name="allow_date" position="after">
+            <field name="allow_date_fy"/>
+          </field>
+        </data>
+      </field>
+    </record>
+
+  </data>
+</openerp>
