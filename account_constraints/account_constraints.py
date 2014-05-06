@@ -22,15 +22,32 @@ from openerp.osv import fields, orm, osv
 from openerp.tools.translate import _
 
 
+class AccountJournal(orm.Model):
+    _inherit = 'account.journal'
+
+    _columns = {
+        'allow_date_fy': fields.boolean('Check Date in Fiscal Year',
+                                        help='If set to True then do not '
+                                             'accept the entry if '
+                                             'the entry date is not into '
+                                             'the fiscal year dates'),
+    }
+
+    _defaults = {
+        'allow_date_fy': True,
+    }
+
+
 class AccountMove(orm.Model):
     _inherit = "account.move"
 
     def _check_fiscal_year(self, cr, uid, ids):
         for move in self.browse(cr, uid, ids):
-            date_start = move.period_id.fiscalyear_id.date_start
-            date_stop = move.period_id.fiscalyear_id.date_stop
-            if not date_start <= move.date <= date_stop:
-                return False
+            if move.journal_id.allow_date_fy:
+                date_start = move.period_id.fiscalyear_id.date_start
+                date_stop = move.period_id.fiscalyear_id.date_stop
+                if not date_start <= move.date <= date_stop:
+                    return False
         return True
 
     _constraints = [
