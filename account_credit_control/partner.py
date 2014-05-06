@@ -52,6 +52,9 @@ class ResPartner(orm.Model):
             part_ids = [part_ids]
         policy_obj = self.pool['credit.control.policy']
         for partner in self.browse(cr, uid, part_ids, context):
+            if not partner.property_account_receivable or \
+               not partner.credit_policy_id:
+                return True
             account = partner.property_account_receivable
             policy_obj.check_policy_against_account(
                 cr, uid,
