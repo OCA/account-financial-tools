@@ -19,7 +19,6 @@
 #
 ##############################################################################
 from openerp.osv import orm
-from openerp.tools.translate import _
 
 
 class FeesComputer(orm.BaseModel):
