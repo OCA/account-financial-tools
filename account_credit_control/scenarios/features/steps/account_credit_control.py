@@ -142,4 +142,4 @@ def impl(ctx, partner, number, level, move_line_name, amount):
                                                     ('state', 'in', ('draft', 'ignored'))])
     assert_equal(len(to_check), int(number), msg="More than %s found" % number)
     lines = model('credit.control.line').browse(to_check)
-    assert ['ignored', 'draft'] == lines.state
+    assert set(['ignored', 'draft']) == set(lines.state)
