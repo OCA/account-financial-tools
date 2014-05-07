@@ -25,7 +25,7 @@ import openerp.tests.common as test_common
 class FixedFeesTester(test_common.TransactionCase):
 
     def setUp(self):
-        """Initialaize level mock to test fees computations"""
+        """Initialaize credit control level mock to test fees computations"""
         super(FixedFeesTester, self).setUp()
         self.currency_model = self.registry('res.currency')
         self.euro = self.currency_model.search(self.cr, self.uid,
@@ -39,8 +39,8 @@ class FixedFeesTester(test_common.TransactionCase):
                                               [('name', '=', 'USD')])
         self.assertTrue(self.usd)
         self.usd = self.registry('res.currency').browse(self.cr,
-                                                         self.uid,
-                                                         self.usd[0])
+                                                        self.uid,
+                                                        self.usd[0])
 
         self.euro_level = MagicMock(name='Euro policy level')
         self.euro_level.dunning_fixed_amount = 5.0
