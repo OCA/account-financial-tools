@@ -36,7 +36,7 @@ Configuration
 -------------
 For release 0.1 only fixed fees are supported.
 
-You can specifiy a fees fixed a product and a currency
+You can specifiy a fixed fees amount, a product and a currency
 on the credit control level form.
 
 The amount will be used as fees values the currency will determine
@@ -53,7 +53,7 @@ on the generated credit lines.
 
 Fees can be manually edited as long credit line is draft
 
-Credit control Summary report includes a new fee columns.
+Credit control Summary report includes a new fees column.
 -------
 Support of fees price list
 
