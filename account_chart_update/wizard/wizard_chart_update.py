@@ -284,7 +284,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
         tax_code_ids = tax_code_obj.search(cr, uid, [
             ('name', '=', tax_code_name),
             ('company_id', '=', wizard.company_id.id)
-        ])
+        ], context=context)
         if not tax_code_ids:
             # if we could not match no tax code template name,
             # try to match on tax code template code, if any
@@ -293,7 +293,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 tax_code_ids = tax_code_obj.search(cr, uid, [
                     ('code', '=', tax_code_code),
                     ('company_id', '=', wizard.company_id.id)
-                ])
+                ], context=context)
         tax_code_templ_mapping[tax_code_template.id] = (tax_code_ids and
                                                         tax_code_ids[0] or
                                                         False)
@@ -357,8 +357,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
         # Search for new / updated tax codes
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
         children_tax_code_template = tax_code_templ_obj.search(cr, uid, [(
-            'parent_id', 'child_of', [root_tax_code_id])], order='id')
-        for tax_code_template in tax_code_templ_obj.browse(cr, uid, children_tax_code_template):
+            'parent_id', 'child_of', [root_tax_code_id])], order='id',
+            context=context)
+        for tax_code_template in tax_code_templ_obj.browse(cr, uid,
+                                children_tax_code_template, context=context):
             # Ensure the tax code template is on the map (search for the mapped
             # tax code id).
             tax_code_id = self._map_tax_code_template(cr, uid, wizard,
@@ -419,7 +421,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         wiz_taxes_obj = self.pool['wizard.update.charts.accounts.tax']
         delay_wiz_tax = []
         # Remove previous taxes
-        wiz_taxes_obj.unlink(cr, uid, wiz_taxes_obj.search(cr, uid, []))
+        wiz_taxes_ids = wiz_taxes_obj.search(cr, uid, [], context=context)
+        wiz_taxes_obj.unlink(cr, uid, wiz_taxes_ids, context=context)
         # Search for new / updated taxes
         tax_templ_ids = tax_templ_obj.search(cr, uid,
                                             [('chart_template_id',
@@ -512,8 +515,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         acc_templ_obj = self.pool['account.account.template']
         wiz_accounts = self.pool['wizard.update.charts.accounts.account']
         # Remove previous accounts
-        wiz_accounts.unlink(
-            cr, uid, wiz_accounts.search(cr, uid, []))
+        wiz_accounts_ids = wiz_accounts.search(cr, uid, [], context=context)
+        wiz_accounts.unlink(cr, uid, wiz_accounts_ids, context=context)
         # Search for new / updated accounts
         root_account_id = wizard.chart_template_id.account_root_id.id
         acc_templ_criteria = [('chart_template_id',
@@ -815,7 +818,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             for tax_code_template in [tmpl for tmpl in tax_code_templates_to_find if tmpl]:
                 self._map_tax_code_template(cr, uid, wizard,
                                             tax_code_template_mapping,
-                                            tax_code_template)
+                                            tax_code_template, context=context)
             # Values
             vals_tax = {
                 'name': tax_template.name,
