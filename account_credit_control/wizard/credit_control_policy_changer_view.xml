@@ -16,8 +16,7 @@
              <field name="do_nothing"
                     invisible="1"/>
              <field name="new_policy_level_id"
-                    domain="[('policy_id', '=', new_policy_id)]"
-                    attrs="{'required': [('do_nothing', '=', False)]}"/>
+                    domain="[('policy_id', '=', new_policy_id)]"/>
            </group>
            <group></group>
          </group>

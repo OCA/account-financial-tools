@@ -36,7 +36,8 @@ class credit_control_policy_changer(orm.TransientModel):
                                          'New Policy to Apply',
                                          required=True),
         'new_policy_level_id': fields.many2one('credit.control.policy.level',
-                                               'New level to apply'),
+                                               'New level to apply',
+                                               required=True),
         # Only used to provide dynamic filtering on form
         'do_nothing': fields.boolean('No follow  policy'),
         'move_line_ids': fields.many2many('account.move.line',
@@ -154,15 +155,14 @@ class credit_control_policy_changer(orm.TransientModel):
         # As it is a manual action
         # We also ignore rounding tolerance
         generated_ids = None
-        if not wizard.new_policy_id.do_nothing:
-            generated_ids = credit_line_model.create_or_update_from_mv_lines(
-                cr, uid, [],
-                [x.id for x in wizard.move_line_ids],
-                wizard.new_policy_level_id.id,
-                controlling_date,
-                check_tolerance=False,
-                context=None
-            )
+        generated_ids = credit_line_model.create_or_update_from_mv_lines(
+            cr, uid, [],
+            [x.id for x in wizard.move_line_ids],
+            wizard.new_policy_level_id.id,
+            controlling_date,
+            check_tolerance=False,
+            context=None
+        )
         self._set_invoice_policy(cr, uid,
                                  wizard.move_line_ids,
                                  wizard.new_policy_id,

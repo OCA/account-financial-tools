@@ -25,6 +25,21 @@
       <field name="do_nothing" eval="1"/>
     </record>
 
+    <!-- no follow policy -->
+    <record model="credit.control.policy.level"
+            id="no_follow_1">
+      <field name="name">No follow</field>
+      <field name="level" eval="1"/>
+      <field name="computation_mode">net_days</field>
+      <field name="delay_days" eval="0"/>
+      <field name="email_template_id" ref="email_template_credit_control_base"/>
+      <field name="policy_id" ref="credit_control_no_follow"/>
+      <field name="channel">email</field>
+      <field name="custom_text">Manual no follow</field>
+
+      <field name="custom_mail_text">Manual no follow</field>
+    </record>
+
     <!-- policy 1 -->
     <record model="credit.control.policy"
             id="credit_control_3_time">
