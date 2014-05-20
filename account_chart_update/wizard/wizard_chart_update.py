@@ -97,9 +97,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
             ('done', 'Wizard completed')
         ], 'Status', readonly=True),
         'company_id': fields.many2one('res.company', 'Company', required=True, ondelete='set null'),
-        'chart_template_id': fields.many2one('account.chart.template',
-                                             'Chart Template',
-                                             ondelete='set null'),
+        'chart_template_id': fields.many2one(
+            'account.chart.template', 'Chart Template', ondelete='cascade',
+            required=True),
         'code_digits': fields.integer('# of digits', required=True, help="No. of digits to use for account code. Make sure it is the same number as existing accounts."),
         'lang': fields.selection(_get_lang_selection_options, 'Language', size=5, help="For records searched by name (taxes, tax codes, fiscal positions), the template name will be matched against the record name on this language."),
         'update_tax_code': fields.boolean('Update tax codes', help="Existing tax codes are updated. Tax codes are searched by name."),
@@ -274,6 +274,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         if not tax_code_template:
             return False
+        if not wizard.chart_template_id:
+            return False
         if tax_code_templ_mapping.get(tax_code_template.id):
             return tax_code_templ_mapping[tax_code_template.id]
         # In other case
@@ -299,7 +301,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                                                         False)
         return tax_code_templ_mapping[tax_code_template.id]
 
-    def _map_account_template(self, cr, uid, wizard,acc_templ_mapping,
+    def _map_account_template(self, cr, uid, wizard, acc_templ_mapping,
                               acc_templ, context=None):
         """
         Adds an account template -> account id to the mapping
@@ -346,6 +348,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         @param chart_template_ids: IDs of the chart templates to look on,
             calculated once in the calling method.
         """
+        if not wizard.chart_template_id:
+            return {}
         new_tax_codes = 0
         updated_tax_codes = 0
         tax_code_template_mapping = {}
@@ -424,11 +428,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
         wiz_taxes_ids = wiz_taxes_obj.search(cr, uid, [], context=context)
         wiz_taxes_obj.unlink(cr, uid, wiz_taxes_ids, context=context)
         # Search for new / updated taxes
-        tax_templ_ids = tax_templ_obj.search(cr, uid,
-                                            [('chart_template_id',
-                                              'in',
-                                              chart_template_ids)],
-                                            context=context)
+        tax_templ_ids = tax_templ_obj.search(
+            cr, uid, [('chart_template_id', 'in', chart_template_ids)],
+            context=context)
         for tax_templ in tax_templ_obj.browse(cr, uid, tax_templ_ids,
                                               context=context):
             # Ensure tax template is on the map (search for the mapped tax id)
@@ -508,6 +510,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         Search for, and load, account templates to create/update.
         """
+        if not wizard.chart_template_id:
+            return {}
         new_accounts = 0
         updated_accounts = 0
         acc_templ_mapping = {}
@@ -657,24 +661,26 @@ class wizard_update_charts_accounts(orm.TransientModel):
             if fp_templ.account_ids and fp.account_ids:
                 for fp_acc_templ in fp_templ.account_ids:
                     found = False
-                    acc_src_id = self._map_account_template(cr, uid, wizard,
-                                                            acc_templ_mapping,
-                                                            fp_acc_templ.account_src_id,
-                                                            context=context)
-                    acc_dest_id = self._map_account_template(cr, uid, wizard,
-                                                             acc_templ_mapping,
-                                                             fp_acc_templ.account_dest_id,
-                                                             context=context)
+                    acc_src_id = self._map_account_template(
+                        cr, uid, wizard, acc_templ_mapping,
+                        fp_acc_templ.account_src_id, context=context)
+                    acc_dest_id = self._map_account_template(
+                        cr, uid, wizard, acc_templ_mapping,
+                        fp_acc_templ.account_dest_id, context=context)
                     for fp_acc in fp.account_ids:
                         if (fp_acc.account_src_id.id == acc_src_id and
                                 fp_acc.account_dest_id.id == acc_dest_id):
                             found = True
                             break
                     if not found:
-                        notes += _("Account mapping not found on the fiscal position instance: %s -> %s.\n") % (fp_acc_templ.account_src_id.name, fp_acc_templ.account_dest_id.name)
+                        notes += _("Account mapping not found on the fiscal "
+                                   "position instance: %s -> %s.\n") % \
+                                   (fp_acc_templ.account_src_id.name,
+                                    fp_acc_templ.account_dest_id.name)
                         modified = True
             elif fp_templ.account_ids and not fp.account_ids:
-                notes += _("The template has accounts the fiscal position instance does not.\n")
+                notes += _("The template has accounts the fiscal position "
+                           "instance does not.\n")
                 modified = True
             if modified:
                 # Fiscal position template to update
@@ -706,8 +712,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         fps_res = {}
         # Get all chart templates involved
         wiz_obj = self.pool['wizard.multi.charts.accounts']
-        chart_template_ids = wiz_obj._get_chart_parent_ids(cr, uid,
-                                    wizard.chart_template_id, context=context)
+        chart_template_ids = wiz_obj._get_chart_parent_ids(
+            cr, uid, wizard.chart_template_id, context=context)
         # Search for, and load, the records to create/update.
         if wizard.update_tax_code:
             tax_codes_res = self._find_tax_codes(cr, uid, wizard,
@@ -1008,7 +1014,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'mapping': account_template_mapping
         }
 
-    def _update_taxes_pending_for_accounts(self, cr, uid, wizard, log, taxes_pending_for_accounts, acc_templ_mapping, context=None):
+    def _update_taxes_pending_for_accounts(self, cr, uid, wizard, log,
+                                           taxes_pending_for_accounts,
+                                           acc_templ_mapping, context=None):
         """
         Updates the taxes (created or updated on previous steps) to set
         the references to the accounts (the taxes where created/updated first,
