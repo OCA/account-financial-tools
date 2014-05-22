@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="claim_scheme_list_view" model="ir.ui.view">
+      <field name="name">claime scheme list view</field>
+      <field name="model">legal.claim.fees.scheme</field>
+      <field name="arch" type="xml">
+        <tree version="7.0" string="Claim fees"> <!-- editable="bottom" -->
+          <field name="name" />
+          <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+          <field name="product_id"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record id="claim_scheme_form_view" model="ir.ui.view">
+      <field name="name">Claim Scheme form</field>
+      <field name="model">legal.claim.fees.scheme</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Claim Scheme">
+          <header>
+          </header>
+          <sheet>
+            <group>
+              <group>
+              <field name="name"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                <field name="product_id"/>
+                <field name="currency_id"/>
+              </group>
+            </group>
+
+            <notebook>
+              <page string="Scheme values" colspan="4">
+                <field name="claim_scheme_line_ids"
+                       required="1">
+                  <tree type="7.0" string="Line" editable="top">
+                    <field name="open_amount"/>
+                    <field name="fees"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="claim_scheme_menu_action">
+      <field name="name">Claim office</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">legal.claim.fees.scheme</field>
+      <field name="domain"></field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="claim_scheme_list_view"/>
+    </record>
+
+
+
+    <menuitem
+        name="Claim scheme"
+        parent="root_legal_claim_menu"
+        action="claim_scheme_menu_action"
+        id="claim_scheme_menu_action_menu"/>
+
+  </data>
+</openerp>

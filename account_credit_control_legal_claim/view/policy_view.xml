@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="add_claim_on_policy_level" model="ir.ui.view">
+      <field name="name">add claim on policy level</field>
+      <field name="model">credit.control.policy</field>
+      <field name="inherit_id"
+             ref="account_credit_control.credit_control_policy_form"/>
+      <field name="arch" type="xml">
+        <page string="Mail and reporting" position="after">
+          <page string="Legal Claim">
+            <group>
+              <group>
+                <field name="is_legal_claim"/>
+              </group>
+            </group>
+          </page>
+        </page>
+
+      </field>
+    </record>
+
+  </data>
+</openerp>

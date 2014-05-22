@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="claim_office_list_view" model="ir.ui.view">
+      <field name="name">claim office list view</field>
+      <field name="model">legal.claim.office</field>
+      <field name="arch" type="xml">
+        <tree version="7.0" string="Claim office">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="claim_office_form_view" model="ir.ui.view">
+      <field name="name">claim office form view</field>
+      <field name="model">legal.claim.office</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Claim office">
+          <header>
+            <button
+                type="action"
+                name="%(base_location.action_zip_tree)d"
+                string="Related Locations"/>
+          </header>
+          <group>
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="fees_scheme_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="claim_office_action">
+      <field name="name">Claim Office</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">legal.claim.office</field>
+      <field name="domain"></field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="claim_office_list_view"/>
+    </record>
+
+    <menuitem
+        name="Credit control Legal Claim"
+        parent="account.menu_finance_configuration"
+        id="root_legal_claim_menu"/>
+
+    <menuitem
+        name="Claim Office"
+        parent="root_legal_claim_menu"
+        action="claim_office_action"
+        id="claim_office_action_menu"/>
+
+    <record id="add_office_to_location" model="ir.ui.view">
+      <field name="name">add office to location</field>
+      <field name="model">res.better.zip</field>
+      <field name="inherit_id" ref="base_location.better_zip_form" />
+      <field name="arch" type="xml">
+        <field name="country_id" position="after">
+          <field name="claim_office_id"/>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>

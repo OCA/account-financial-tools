@@ -1,0 +1,65 @@
+<openerp>
+  <data>
+
+    <record id="credit_control_claim_printer_view" model="ir.ui.view">
+      <field name="name">credit control claim printer view</field>
+      <field name="model">credit.control.legal.claim.printer</field>
+      <field name="arch" type="xml">
+        <form version="7.0"
+              string="Claim Printer">
+          <separator string="Print claim requisition letter for invoices" colspan="4"/>
+          <newline/>
+          <group>
+            <field name="mark_as_claimed"
+                   colspan="4"
+                   attrs="{'invisible': [('state', '=', 'done')]}"/>
+          </group>
+          <newline/>
+          <notebook>
+            <page string="Invoices" attrs="{'invisible': [('state', '=', 'done')]}">
+              <field name="invoice_ids" colspan="4" nolabel="1"
+                     attrs="{'invisible': [('state', '=', 'done')]}" />
+            </page>
+          </notebook>
+          <field name="report_name"
+                 invisible="1"/>
+          <field name="report_file"
+                 colspan="4"
+                 filename="report_name"
+                 attrs="{'invisible': [('state', '!=', 'done')]}"/>
+          <field name="state" invisible="1" />
+          <newline/>
+          <footer>
+            <button class="oe_highlight" name="print_claims" string="Print" type="object"  attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button special="cancel" string="Cancel" icon='gtk-cancel' attrs="{'invisible': [('state', '==', 'done')]}"/>
+            <button special="cancel" string="Close" icon='gtk-close' attrs="{'invisible': [('state', '!=', 'done')]}"/>
+          </footer>
+
+
+        </form>
+      </field>
+    </record>
+
+    <!-- for button -->
+    <record id="legal_claim_printer_action" model="ir.actions.act_window">
+      <field name="name">Print Claim Requisition</field>
+      <field name="res_model">credit.control.legal.claim.printer</field>
+      <field name="src_model">account.invoice</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_control_claim_printer_view"/>
+      <field name="target">new</field>
+      <field name="help"></field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Print Claim Requisition"
+                res_model="credit.control.legal.claim.printer"
+                src_model="account.invoice"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="legal_claim_printer_action_menu_action"/>
+
+  </data>
+</openerp>
