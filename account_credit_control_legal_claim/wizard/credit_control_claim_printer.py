@@ -24,9 +24,21 @@ from openerp.osv import orm, fields
 
 
 class credit_control_legal_printer(orm.TransientModel):
-    """docstring"""
+    """Print claim requisition letter
+
+    And manage related credit lines
+
+    """
 
     def _filter_claim_invoices(self, cr, uid, invoices, context=None):
+        """ Return invoices that are related to a claim
+        concretly that means the invoice must be related
+        to active credit line related to a claim policy level
+
+        :param invoices: list on invoices record to be filtered
+
+        """
+
         filtered = []
         for inv in invoices:
             if any(x for x in inv.credit_control_line_ids
@@ -35,6 +47,10 @@ class credit_control_legal_printer(orm.TransientModel):
         return filtered
 
     def _get_invoice_ids(self, cr, uid, context=None):
+        """Return invoices ids to be treated form context
+        A candidate invoice is related to a claim
+
+        """
         inv_model = self.pool['account.invoice']
         if context is None:
             context = {}
@@ -64,15 +80,29 @@ class credit_control_legal_printer(orm.TransientModel):
 
     _defaults = {
         'invoice_ids': _get_invoice_ids,
+        'mark_as_claimed': True,
     }
 
     def _generate_report(self, cr, uid, invoice_ids, context=None):
-        """Will generate claim requisition report and manage credit lines"""
+        """Generate claim requisition report.
+
+        :param invoice_ids: list of invoice ids to print
+
+        :returns: report file
+
+        """
         service = netsvc.LocalService('report.credit_control_legal_claim_requisition')
         result, format = service.create(cr, uid, invoice_ids, {}, {})
         return result
 
     def _mark_invoice_as_claimed(self, cr, uid, invoice, context=None):
+        """Mark related credit line of an invoice as overriden.
+
+        Only non claim credit line will be marked
+
+        :param invoice: invoice recorrd to treat
+
+        """
         line_ids = [x.invoice_id.id for x in invoice.credit_control_line_ids
                     if not x.policy_level_id.is_legal_claim]
         credit_line_model = self.pool['credit.control.line']
@@ -80,7 +110,15 @@ class credit_control_legal_printer(orm.TransientModel):
         credit_line_model.write(cr, uid, line_ids, data, context=context)
 
     def print_claims(self, cr, uid, wiz_id, context=None):
-        """Print claims from invoice"""
+        """Generate claim requisition report and manage credit lines.
+
+        Non claim credit lines will be overriden
+
+        :param invoice_ids: list of invoice ids to print
+
+        :returns: an ir.action  to himself
+
+        """
         if isinstance(wiz_id, list):
             assert len(wiz_id) == 1
             wiz_id = wiz_id[0]

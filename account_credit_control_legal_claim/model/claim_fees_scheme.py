@@ -24,8 +24,11 @@ from openerp.osv import orm, fields
 
 class claim_fees_scheme(orm.Model):
     """Claim fees
-    State take fees based on open amount
-    whan a legal action is taken to be paid.
+
+    Claim offices  take fees based on open amount
+    whan a legal action is taken.
+
+    The model represent the scheme open amount/fees
 
     """
 
@@ -48,15 +51,30 @@ class claim_fees_scheme(orm.Model):
     }
 
     def _company_get(self, cr, uid, context=None):
+        """Return related company"""
         return self.pool['res.company']._company_default_get(cr, uid,
                                                              'claim.fees.scheme',
                                                              context=context)
     _defaults = {'company_id': _company_get}
 
     def _due_from_invoices(self, invoices_records, context=None):
+        """Compute due amount form a list of invoice
+
+        :param invoices_record: list of invoice records
+
+        :returns: due amount (float)
+
+        """
         return sum(x.residual for x in invoices_records)
 
     def _get_fees_from_amount(self, cr, uid, ids, due_amount, context=None):
+        """Get the fees from open amount
+
+        :param due_amount: float of the open (due) amount
+
+        :returns: fees amount (float)
+
+        """
         assert len(ids) == 1, 'Only on id expected'
         current = self.browse(cr, uid, ids[0], context=context)
         lines = current.claim_scheme_line_ids
@@ -67,6 +85,13 @@ class claim_fees_scheme(orm.Model):
         return lines[-1].fees
 
     def get_fees_from_invoices(self, cr, uid, ids, invoice_ids, context=None):
+        """Get the fees form a list of invoice
+
+        :param invoice_ids: list of invoice_ids
+
+        :returns: fees amount (float)
+
+        """
         assert len(ids) == 1, 'Only on id expected'
         invoices = self.pool['account.invoice'].browse(cr, uid, invoice_ids,
                                                        context=context)
