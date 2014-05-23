@@ -26,7 +26,7 @@
 
 {
     'name': "Detect changes and update the Account Chart from a template",
-    'version': "1.1",
+    'version': "1.2",
     'author': "Zikzakmedia SL",
     'website': "www.zikzakmedia.com",
     'depends': ["account"],

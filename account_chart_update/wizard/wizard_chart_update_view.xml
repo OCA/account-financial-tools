@@ -23,7 +23,9 @@
                         <field name="company_id" on_change="onchange_company_id(company_id)"
                             attrs="{'invisible':[('state','!=','init')]}" />
                         <field name="code_digits" attrs="{'invisible':[('state','!=','init')]}" />
-                        <field name="chart_template_id" attrs="{'invisible':[('state','!=','init')]}" />
+                        <field name="chart_template_id"
+                                domain="[('visible', '=', True)]"
+                                attrs="{'invisible': [('state','!=','init')], 'required': True}"/>
                         <field name="lang" attrs="{'invisible':[('state','!=','init')]}" />
                     </group>
                     <group attrs="{'invisible':[('state','!=','init')]}">
@@ -48,73 +50,45 @@
                     <group attrs="{'invisible':[('state','!=','ready'),]}"
                         string="Records to create/update">
                         <notebook colspan="4">
-                            <page string="Tax codes">
+                            <page string="Tax codes" attrs="{'invisible': [('update_tax_code', '=', False)]}">
                                 <field name="tax_code_ids">
                                     <tree string="Tax codes" colors="red:type=='updated'">
                                         <field name="tax_code_id" />
                                         <field name="update_tax_code_id" />
+                                        <field name="notes" readonly="1" />
                                         <field name="type" invisible="1" />
                                     </tree>
-                                    <form string="Tax code" version="7.0">
-                                        <group>
-                                            <field name="tax_code_id" />
-                                            <field name="type" />
-                                            <field name="update_tax_code_id" />
-                                            <field name="notes" readonly="1" class="oe_inline" />
-                                        </group>
-                                    </form>
                                 </field>
                             </page>
 
-                            <page string="Taxes">
+                            <page string="Taxes" attrs="{'invisible': [('update_tax', '=', False)]}">
                                 <field name="tax_ids" nolabel="1">
                                     <tree string="Taxes" colors="red:type=='updated'">
                                         <field name="tax_id" />
                                         <field name="update_tax_id" />
+                                        <field name="notes" readonly="1"/>
                                         <field name="type" invisible="1" />
                                     </tree>
-                                    <form string="Tax" version="7.0">
-                                        <group>
-                                            <field name="tax_id" />
-                                            <field name="type" />
-                                            <field name="update_tax_id" />
-                                            <field name="notes" readonly="1" class="oe_inline" />
-                                        </group>
-                                    </form>
                                 </field>
                             </page>
-                            <page string="Accounts">
+                            <page string="Accounts" attrs="{'invisible': [('update_account', '=', False)]}">
                                 <field name="account_ids" nolabel="1">
                                     <tree string="Accounts" colors="red:type=='updated'">
                                         <field name="account_id" />
                                         <field name="update_account_id" />
+                                        <field name="notes" readonly="1"/>
                                         <field name="type" invisible="1" />
                                     </tree>
-                                    <form string="Account" version="7.0">
-                                        <group>
-                                            <field name="account_id" />
-                                            <field name="type" />
-                                            <field name="update_account_id" />
-                                            <field name="notes" readonly="1" class="oe_inline" />
-                                        </group>
-                                    </form>
                                 </field>
                             </page>
-                            <page string="Fiscal positions">
+                            <page string="Fiscal positions" attrs="{'invisible': [('update_fiscal_position', '=', False)]}">
                                 <field name="fiscal_position_ids" nolabel="1">
                                     <tree string="Fiscal positions" colors="red:type=='updated'">
                                         <field name="fiscal_position_id" />
                                         <field name="update_fiscal_position_id" />
+                                        <field name="notes" readonly="1" />
                                         <field name="type" invisible="1" />
                                     </tree>
-                                    <form string="Fiscal position" version="7.0">
-                                        <group>
-                                            <field name="fiscal_position_id" />
-                                            <field name="type" />
-                                            <field name="update_fiscal_position_id" />
-                                            <field name="notes" readonly="1" class="oe_inline" />
-                                        </group>
-                                    </form>
                                 </field>
                             </page>
 
@@ -152,6 +126,9 @@
                             <button name="action_update_records" string="Create/Update" type="object" class="oe_highlight" />
                             or
                             <button special="cancel" string="Cancel" class="oe_link" />
+                        </div>
+                        <div states="done">
+                            <button special="cancel" string="Close" class="oe_link" />
                         </div>
                     </footer>
                 </form>
