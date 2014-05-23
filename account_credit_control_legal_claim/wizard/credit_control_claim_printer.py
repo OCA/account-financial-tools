@@ -102,12 +102,17 @@ class credit_control_legal_printer(orm.TransientModel):
 
         :param invoice: invoice recorrd to treat
 
+        :returns: marked credit lines
         """
-        line_ids = [x.invoice_id.id for x in invoice.credit_control_line_ids
+        lines  = [x for x in invoice.credit_control_line_ids
                     if not x.policy_level_id.is_legal_claim]
         credit_line_model = self.pool['credit.control.line']
         data = {'manually_overriden': True}
-        credit_line_model.write(cr, uid, line_ids, data, context=context)
+        credit_line_model.write(cr, uid,
+                                [x.id for x in lines],
+                                data,
+                                context=context)
+        return lines
 
     def print_claims(self, cr, uid, wiz_id, context=None):
         """Generate claim requisition report and manage credit lines.

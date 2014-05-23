@@ -67,7 +67,7 @@ class claim_fees_scheme(orm.Model):
         """
         return sum(x.residual for x in invoices_records)
 
-    def _get_fees_from_amount(self, cr, uid, ids, due_amount, context=None):
+    def get_fees_from_amount(self, cr, uid, ids, due_amount, context=None):
         """Get the fees from open amount
 
         :param due_amount: float of the open (due) amount
@@ -85,7 +85,7 @@ class claim_fees_scheme(orm.Model):
         return lines[-1].fees
 
     def get_fees_from_invoices(self, cr, uid, ids, invoice_ids, context=None):
-        """Get the fees form a list of invoice
+        """Get the fees form a list of invoice ids
 
         :param invoice_ids: list of invoice_ids
 
@@ -95,9 +95,21 @@ class claim_fees_scheme(orm.Model):
         assert len(ids) == 1, 'Only on id expected'
         invoices = self.pool['account.invoice'].browse(cr, uid, invoice_ids,
                                                        context=context)
+        return self._get_fees_from_invoices(cr, uid, ids, invoices,
+                                            context=context)
+
+    def _get_fees_from_invoices(self, cr, uid, ids, invoices, context=None):
+        """Get the fees form a list of invoice record
+
+        :param invoice_ids: list of invoice record
+
+        :returns: fees amount (float)
+
+        """
+        assert len(ids) == 1, 'Only on id expected'
         current = self.browse(cr, uid, ids[0], context=context)
         due = self._due_from_invoices(invoices, context=context)
-        return current._get_fees_from_amount(due)
+        return current.get_fees_from_amount(due)
 
 
 class claim_fees_scheme_line(orm.Model):
