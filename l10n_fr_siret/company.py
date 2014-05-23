@@ -27,8 +27,8 @@ class res_company(orm.Model):
     _inherit = 'res.company'
 
     def _get_partner_change(self, cr, uid, ids, context=None):
-        return self.pool.get('res.partner').search(
-            cr, uid, [('id', 'in', ids)], context=context)
+        return self.pool['res.company'].search(
+            cr, uid, [('partner_id', 'in', ids)], context=context)
 
     _columns = {
         'siret': fields.related(
