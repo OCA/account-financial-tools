@@ -21,7 +21,7 @@
 
 {
     'name': 'French company identity numbers SIRET/SIREN/NIC',
-    'version': '1.1',
+    'version': '1.1.1',
     "category": 'Accounting',
     'description': '''
 This module add the French company identity numbers.
