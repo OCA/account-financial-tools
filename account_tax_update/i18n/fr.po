@@ -6,19 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-11 15:41+0000\n"
-"PO-Revision-Date: 2013-11-11 15:41+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2013-11-11 15:47+0000\n"
+"PO-Revision-Date: 2014-05-23 14:57+0000\n"
+"Last-Translator: Vincent Renaville@camptocamp "
+"<vincent.renaville@camptocamp.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-05-24 06:45+0000\n"
+"X-Generator: Launchpad (build 17017)\n"
 
 #. module: account_tax_update
 #: view:account.update.tax.select_taxes:0
-msgid "Add the taxes that need to be replaced here. Any parent or child taxes will be added automatically when you close this window."
-msgstr "Ajouter ici les taxes qui doivent être remplacées. Les taxes parentes ou les taxes enfants seront automatiquement ajouter à la fermeture de la fenêtre"
+msgid ""
+"Add the taxes that need to be replaced here. Any parent or child taxes will "
+"be added automatically when you close this window."
+msgstr ""
+"Ajouter ici les taxes qui doivent être remplacées. Les taxes parentes ou les "
+"taxes enfants seront automatiquement ajouter à la fermeture de la fenêtre"
 
 #. module: account_tax_update
 #: field:account.update.tax.config.line,target_tax_description:0
@@ -38,8 +44,13 @@ msgstr "Confirmer"
 
 #. module: account_tax_update
 #: view:account.update.tax.config:0
-msgid "When you are done configuring the new tax amounts, click here to create the new taxes and a mapping between the new and old taxes"
-msgstr "Après avoir indiqué le taux (ou montant) de la nouvelle taxe, cliquez ici pour les créer et faire la correspondance entre les nouvelles et les anciennes taxes"
+msgid ""
+"When you are done configuring the new tax amounts, click here to create the "
+"new taxes and a mapping between the new and old taxes"
+msgstr ""
+"Après avoir indiqué le taux (ou montant) de la nouvelle taxe, cliquez ici "
+"pour les créer et faire la correspondance entre les nouvelles et les "
+"anciennes taxes"
 
 #. module: account_tax_update
 #: view:account.update.tax.config:0
@@ -116,8 +127,24 @@ msgstr "Désactiver les anciennes taxes d'achat"
 
 #. module: account_tax_update
 #: model:ir.actions.act_window,help:account_tax_update.action_update_tax_config
-msgid "For every tax increase, you can create a new configuration. Select sales and purchase taxes to adapt. The selected taxes will be duplicated. The old tax names will be prefixed with a 'legacy' tag. Change the new tax names and codes in the window below to reflect the amount change. The new taxes then become available to select manually on sale or purchase order lines. You may also want to change the names of the associated tax codes, or reassign them between the taxes. At specific times during the transition, you can replace the default sales and purchase taxes in the system. Eventually you can hide the obsolete taxes by making them inactive. Until then, you can still select the old taxes manually"
-msgstr "Pour chaque changement de taxe, vous pouvez créer une configuration. Sélectionnez les taxes d'achat et de ventes à adapter. Les taxes sélectionnées vont être dupliquées. Les anciennes taxes vont être préfixées. Vous pourrez ensuite changez les noms des taxes et les codes. Vous pourrez par après spécifier les nouvelles taxes comme étant par défaut. Vous pouvez éventuellement basculer les anciens code en inactif."
+msgid ""
+"For every tax increase, you can create a new configuration. Select sales and "
+"purchase taxes to adapt. The selected taxes will be duplicated. The old tax "
+"names will be prefixed with a 'legacy' tag. Change the new tax names and "
+"codes in the window below to reflect the amount change. The new taxes then "
+"become available to select manually on sale or purchase order lines. You may "
+"also want to change the names of the associated tax codes, or reassign them "
+"between the taxes. At specific times during the transition, you can replace "
+"the default sales and purchase taxes in the system. Eventually you can hide "
+"the obsolete taxes by making them inactive. Until then, you can still select "
+"the old taxes manually"
+msgstr ""
+"Pour chaque changement de taxe, vous pouvez créer une configuration. "
+"Sélectionnez les taxes d'achat et de ventes à adapter. Les taxes "
+"sélectionnées vont être dupliquées. Les anciennes taxes vont être préfixées. "
+"Vous pourrez ensuite changez les noms des taxes et les codes. Vous pourrez "
+"par après spécifier les nouvelles taxes comme étant par défaut. Vous pouvez "
+"éventuellement basculer les anciens code en inactif."
 
 #. module: account_tax_update
 #: field:account.update.tax.config.line,amount_old:0
@@ -214,7 +241,7 @@ msgstr "Taxe source"
 #. module: account_tax_update
 #: view:account.update.tax.config:0
 msgid "Add purchase taxes"
-msgstr "Ajouter taxes d'achat "
+msgstr "Ajouter taxes d'achat"
 
 #. module: account_tax_update
 #: field:account.update.tax.config.line,amount_new:0
@@ -269,6 +296,9 @@ msgstr "Les taxes de ventes ont été déactivées"
 
 #. module: account_tax_update
 #: help:account.update.tax.config,default_amount:0
-msgid "Although it is possible to specify a distinct new amount per tax, you can set the default value here."
-msgstr "Il est possible de spécifier un montant distinct par taxe, vous pouvez spécifier une valeur par défaut ici."
-
+msgid ""
+"Although it is possible to specify a distinct new amount per tax, you can "
+"set the default value here."
+msgstr ""
+"Il est possible de spécifier un montant distinct par taxe, vous pouvez "
+"spécifier une valeur par défaut ici."
