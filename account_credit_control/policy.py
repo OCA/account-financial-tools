@@ -218,8 +218,8 @@ class CreditControlPolicy(orm.Model):
         policies_id = self.search(cr, uid, [],
                                   context=context)
         policies = self.browse(cr, uid, policies_id, context=context)
-        allowed = [x for x in policies if
-                   account in x.account_ids or x.do_nothing]
+        allowed = [x for x in policies
+                   if account in x.account_ids or x.do_nothing]
         if policy not in allowed:
             allowed_names = u"\n".join(x.name for x in allowed)
             raise orm.except_orm(
