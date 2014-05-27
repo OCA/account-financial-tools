@@ -150,7 +150,7 @@ class credit_control_policy_changer(orm.TransientModel):
                                 wizard.move_line_ids,
                                 context=context)
         # As disscused with business expert
-        # draft line should be passed to ignored
+        # draft lines should be passed to ignored
         # if same level as the new one
         # As it is a manual action
         # We also ignore rounding tolerance
