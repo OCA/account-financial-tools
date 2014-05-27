@@ -42,7 +42,7 @@ class CreditClaimRequisition(report_sxw.rml_parse):
 
     def _active_line(self, cr, uid, line, context=None):
         return (line.state not in ('draft', 'ignored') and
-                not line.manually_overriden)
+                not line.manually_overridden)
 
     def compute_dunning_fees(self, invoices):
         lines = chain.from_iterable([x.credit_control_line_ids for x in invoices])

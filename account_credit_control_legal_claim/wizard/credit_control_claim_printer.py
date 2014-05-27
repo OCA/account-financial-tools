@@ -96,7 +96,7 @@ class credit_control_legal_printer(orm.TransientModel):
         return result
 
     def _mark_invoice_as_claimed(self, cr, uid, invoice, context=None):
-        """Mark related credit line of an invoice as overriden.
+        """Mark related credit line of an invoice as overridden.
 
         Only non claim credit line will be marked
 
@@ -107,7 +107,7 @@ class credit_control_legal_printer(orm.TransientModel):
         lines  = [x for x in invoice.credit_control_line_ids
                     if not x.policy_level_id.is_legal_claim]
         credit_line_model = self.pool['credit.control.line']
-        data = {'manually_overriden': True}
+        data = {'manually_overridden': True}
         credit_line_model.write(cr, uid,
                                 [x.id for x in lines],
                                 data,
@@ -117,7 +117,7 @@ class credit_control_legal_printer(orm.TransientModel):
     def print_claims(self, cr, uid, wiz_id, context=None):
         """Generate claim requisition report and manage credit lines.
 
-        Non claim credit lines will be overriden
+        Non claim credit lines will be overridden
 
         :param invoice_ids: list of invoice ids to print
 
