@@ -211,7 +211,7 @@ class CreditControlPolicy(orm.Model):
 
     def check_policy_against_account(self, cr, uid, account_id, policy_id,
                                      context=None):
-        """Ensure that policy correspond to account relation"""
+        """Ensure that the policy corresponds to account relation"""
         policy = self.browse(cr, uid, policy_id, context=context)
         account = self.pool['account.account'].browse(cr, uid, account_id,
                                                       context=context)
