@@ -118,7 +118,7 @@ class CreditControlLine(orm.Model):
                                 string='Level',
                                 store=True,
                                 readonly=True),
-        'manually_overriden': fields.boolean('Manually overriden')
+        'manually_overridden': fields.boolean('Manually overridden')
     }
 
 

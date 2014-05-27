@@ -202,7 +202,7 @@ class CreditControlPolicy(orm.Model):
             policy_id = policy_id[0]
         cr.execute("SELECT move_line_id FROM credit_control_line"
                    "    WHERE policy_id != %s and move_line_id in %s"
-                   "    AND manually_overriden IS false",
+                   "    AND manually_overridden IS false",
                    (policy_id, tuple(lines)))
         res = cr.fetchall()
         if res:
@@ -343,7 +343,7 @@ class CreditControlPolicyLevel(orm.Model):
                # lines from a previous level with a draft or ignored state
                # or manually overriden
                # have to be generated again for the previous level
-               "                 AND NOT manually_overriden\n"
+               "                 AND NOT manually_overridden\n"
                "                 AND state NOT IN ('draft', 'ignored'))"
                " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n")
         sql += " AND"
@@ -371,14 +371,14 @@ class CreditControlPolicyLevel(orm.Model):
                " WHERE cr_line.id = (SELECT credit_control_line.id FROM credit_control_line\n"
                "                            WHERE credit_control_line.move_line_id = mv_line.id\n"
                "                            AND state != 'ignored'"
-               "                            AND NOT manually_overriden"
+               "                            AND NOT manually_overridden"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
                " AND cr_line.level = %(previous_level)s\n"
                " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
                # lines from a previous level with a draft or ignored state
                # or manually overriden
                # have to be generated again for the previous level
-               " AND NOT manually_overriden\n"
+               " AND NOT manually_overridden\n"
                " AND cr_line.state NOT IN ('draft', 'ignored')\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND "

@@ -86,7 +86,7 @@ class credit_control_policy_changer(orm.TransientModel):
 
     def _mark_as_overriden(self, cr, uid, move_lines, context=None):
         """Mark `move_lines` related credit control line as overriden
-        This is done by setting manually_overriden fields to True
+        This is done by setting manually_overridden fields to True
 
         :param move_lines: move line to mark as overriden
 
@@ -98,7 +98,7 @@ class credit_control_policy_changer(orm.TransientModel):
         credits_ids = credit_model.search(cr, uid, domain, context=context)
         credit_model.write(cr, uid,
                            credits_ids,
-                           {'manually_overriden': True},
+                           {'manually_overridden': True},
                            context)
         return credits_ids
 

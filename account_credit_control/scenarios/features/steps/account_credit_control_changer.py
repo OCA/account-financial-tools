@@ -31,7 +31,7 @@ def impl(ctx, line_number):
     assert_true(ctx.wizard)
     move_ids = [x.id for x in ctx.wizard.move_line_ids]
     overriden = model('credit.control.line').search([('move_line_id', 'in', move_ids),
-                                                     ('manually_overriden', '=', True)])
+                                                     ('manually_overridden', '=', True)])
 #    assert len(overriden) == line_number
 
 @when(u'one new credit control line of level "{level_name}" related to invoice "{invoice_name}"')
@@ -43,7 +43,7 @@ def impl(ctx, level_name, invoice_name):
    assert_true(ctx.wizard)
    move_ids = [x.id for x in ctx.wizard.move_line_ids]
    created_id = model('credit.control.line').search([('move_line_id', 'in', move_ids),
-                                                     ('manually_overriden', '=', False)])
+                                                     ('manually_overridden', '=', False)])
 
    assert len(created_id) == 1
    created = model('credit.control.line').get(created_id[0])
@@ -61,7 +61,7 @@ def impl(ctx, date):
 def impl(ctx, invoice_name):
    invoice = model('account.invoice').get([('number', '=', invoice_name)])
    assert_true(invoice, msg='No invoices found')
-   man_lines = (x for x in invoice.credit_control_line_ids if x.manually_overriden)
+   man_lines = (x for x in invoice.credit_control_line_ids if x.manually_overridden)
    assert_true(next(man_lines, None), 'No manual change on the invoice')
    ctx.invoice = invoice
 

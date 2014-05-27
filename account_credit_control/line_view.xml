@@ -10,7 +10,7 @@
           <field name="date_due"/>
           <field name="date_sent"/>
           <field name="level"/>
-          <field name="manually_overriden"/>
+          <field name="manually_overridden"/>
           <field name="state"/>
           <field name="channel"/>
           <field name="invoice_id"/>
@@ -50,7 +50,7 @@
                     domain="[('state', 'in', ('error', 'email_error'))]"
                     help="An error has occured during the sending of the email."/>
             <filter name="filter_manual" icon="terp-gtk-stop" string="Manual change"
-                    domain="[('manually_overriden', '=', True)]"
+                    domain="[('manually_overridden', '=', True)]"
                     help="The line was deprecated by a manual change of policy on invoice."/>
             <separator orientation="vertical"/>
 
@@ -93,7 +93,7 @@
             <separator orientation="vertical"/>
             <filter domain='[]' context="{'group_by': 'channel'}"
                     icon="terp-document-new" string="Channel"/>
-            <filter domain='[]' context="{'group_by': 'manually_overriden'}"
+            <filter domain='[]' context="{'group_by': 'manually_overridden'}"
                     icon="terp-document-new" string="Manual change"/>
           </group>
         </search>
@@ -109,7 +109,7 @@
           <field name="date"/>
           <field name="date_due"/>
           <field name="level"/>
-          <field name="manually_overriden"/>
+          <field name="manually_overridden"/>
           <field name="state"/>
           <field name="channel"/>
           <field name="invoice_id"/>
