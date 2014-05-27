@@ -19,7 +19,7 @@ Feature: Ensure that manually changing  an invoice level feature works as expect
       | name  |
       | SI_4  |
     When I confirm the level change
-    And I should have "3" credit control lines overriden
+    And I should have "3" credit control lines overridden
     And one new credit control line of level "10 days net" related to invoice "SAJ/2014/0004"
     Then I force date of generated credit line to "2013-09-15"
 

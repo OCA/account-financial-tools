@@ -84,13 +84,13 @@ class credit_control_policy_changer(orm.TransientModel):
                                                            context=context)
         return {'value': {'do_nothing': policy.do_nothing}}
 
-    def _mark_as_overriden(self, cr, uid, move_lines, context=None):
-        """Mark `move_lines` related credit control line as overriden
+    def _mark_as_overridden(self, cr, uid, move_lines, context=None):
+        """Mark `move_lines` related credit control line as overridden
         This is done by setting manually_overridden fields to True
 
-        :param move_lines: move line to mark as overriden
+        :param move_lines: move line to mark as overridden
 
-        :retun: list of credit line ids that where marked as overriden
+        :retun: list of credit line ids that where marked as overridden
 
         """
         credit_model = self.pool['credit.control.line']
@@ -145,7 +145,7 @@ class credit_control_policy_changer(orm.TransientModel):
             uid,
             wizard.move_line_ids,
             wizard.new_policy_id)
-        self._mark_as_overriden(cr,
+        self._mark_as_overridden(cr,
                                 uid,
                                 wizard.move_line_ids,
                                 context=context)

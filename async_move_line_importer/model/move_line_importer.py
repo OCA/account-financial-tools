@@ -41,7 +41,7 @@ class move_line_importer(orm.Model):
 
     It will parse the saved CSV file using orm.BaseModel.load
     in a thread. If you set bypass_orm to True then the load function
-    will use a totally overriden create function that is a lot faster
+    will use a totally overridden create function that is a lot faster
     but that totally bypass the ORM
 
     """
@@ -303,7 +303,7 @@ class move_line_importer(orm.Model):
         Will generate an success/failure report and generate some
         maile threads. It uses BaseModel.load to lookup CSV.
         If you set bypass_orm to True then the load function
-        will use a totally overriden create function that is a lot faster
+        will use a totally overridden create function that is a lot faster
         but that totally bypass the ORM
 
         """

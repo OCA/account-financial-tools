@@ -26,13 +26,13 @@ def impl(ctx):
     assert_true(ctx.wizard)
     ctx.wizard.set_new_policy()
 
-@when(u'I should have "{line_number:d}" credit control lines overriden')
+@when(u'I should have "{line_number:d}" credit control lines overridden')
 def impl(ctx, line_number):
     assert_true(ctx.wizard)
     move_ids = [x.id for x in ctx.wizard.move_line_ids]
-    overriden = model('credit.control.line').search([('move_line_id', 'in', move_ids),
+    overridden = model('credit.control.line').search([('move_line_id', 'in', move_ids),
                                                      ('manually_overridden', '=', True)])
-#    assert len(overriden) == line_number
+#    assert len(overridden) == line_number
 
 @when(u'one new credit control line of level "{level_name}" related to invoice "{invoice_name}"')
 def impl(ctx, level_name, invoice_name):

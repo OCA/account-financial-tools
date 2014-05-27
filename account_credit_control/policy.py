@@ -341,7 +341,7 @@ class CreditControlPolicyLevel(orm.Model):
                "                 FROM credit_control_line\n"
                "                 WHERE move_line_id = mv_line.id\n"
                # lines from a previous level with a draft or ignored state
-               # or manually overriden
+               # or manually overridden
                # have to be generated again for the previous level
                "                 AND NOT manually_overridden\n"
                "                 AND state NOT IN ('draft', 'ignored'))"
@@ -376,7 +376,7 @@ class CreditControlPolicyLevel(orm.Model):
                " AND cr_line.level = %(previous_level)s\n"
                " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
                # lines from a previous level with a draft or ignored state
-               # or manually overriden
+               # or manually overridden
                # have to be generated again for the previous level
                " AND NOT manually_overridden\n"
                " AND cr_line.state NOT IN ('draft', 'ignored')\n"
