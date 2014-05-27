@@ -49,7 +49,6 @@ class AccountInvoice(orm.Model):
             default = {}
         else:
             default = default.copy()
-        default = default.copy()
         default['credit_control_line_ids'] = False
         default['credit_policy_id'] = False
         return super(AccountInvoice, self).copy_data(
