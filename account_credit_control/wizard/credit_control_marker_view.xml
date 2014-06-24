@@ -4,7 +4,6 @@
     <record id="credit_line_marker_form" model="ir.ui.view">
       <field name="name">credit.line.marker.form</field>
       <field name="model">credit.control.marker</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Lines marker" version="7.0">
           <separator string="Change the state of the selected lines" colspan="4"/>

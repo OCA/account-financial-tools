@@ -4,7 +4,6 @@
     <record id="credit_line_emailer_form" model="ir.ui.view">
       <field name="name">credit.line.emailer.form</field>
       <field name="model">credit.control.emailer</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Mailer" version="7.0">
           <separator string="Send emails for the selected lines" colspan="4"/>
