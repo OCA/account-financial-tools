@@ -56,7 +56,7 @@ class FeesComputer(orm.BaseModel):
     def _compute_fees(self, cr, uid, credit_line_ids, context=None):
         """Compute fees for `credit_line_ids` parameter
 
-        Fees amount is writen on credit line in fields dunning_fees_amount
+        Fees amount is written on credit line in field dunning_fees_amount
 
         :param credit_line_ids: list of `credit.control.line` ids
 
@@ -78,7 +78,7 @@ class FeesComputer(orm.BaseModel):
     def _compute(self, cr, uid, credit_line, context=None):
         """Compute fees for a given credit line
 
-        Fees amount is writen on credit line in fields dunning_fees_amount
+        Fees amount is written on credit line in field dunning_fees_amount
 
         :param credit_line: credit line record
 

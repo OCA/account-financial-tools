@@ -10,7 +10,7 @@
 
 @account_credit_control  @account_credit_control_run  @account_credit_control_run_change_level
 
-Feature: Ensure that manually changing  an invoice level feature works as expected
+Feature: Ensure that manually changing an invoice level feature works as expected
 
   @account_credit_control_change_level
   Scenario: Change level
@@ -36,7 +36,7 @@ Feature: Ensure that manually changing  an invoice level feature works as expect
     Then my credit run should be in state "done"
 
   @account_credit_control_manual_next_step
-  Scenario: Check manually  managed line on run
+  Scenario: Check manually managed line on run
     Given the invoice "SAJ/2014/0004" with manual changes
     And the invoice has "1" line of level "1" for policy "3 time policy"
     And the invoice has "1" line of level "2" for policy "3 time policy"

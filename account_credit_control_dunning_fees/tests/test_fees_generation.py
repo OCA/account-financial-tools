@@ -25,7 +25,7 @@ import openerp.tests.common as test_common
 class FixedFeesTester(test_common.TransactionCase):
 
     def setUp(self):
-        """Initialaize credit control level mock to test fees computations"""
+        """Initialize credit control level mock to test fees computations"""
         super(FixedFeesTester, self).setUp()
         self.currency_model = self.registry('res.currency')
         self.euro = self.currency_model.search(self.cr, self.uid,
