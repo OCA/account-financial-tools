@@ -47,7 +47,7 @@ class FixedFeesTester(test_common.TransactionCase):
         self.euro_level.dunning_currency_id = self.euro
         self.euro_level.dunning_type = 'fixed'
 
-        self.usd_level = MagicMock(name='Euro policy level')
+        self.usd_level = MagicMock(name='USD policy level')
         self.usd_level.dunning_fixed_amount = 5.0
         self.usd_level.dunning_currency_id = self.usd
         self.usd_level.dunning_type = 'fixed'
