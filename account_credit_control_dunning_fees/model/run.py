@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012 Camptocamp SA
+#    Author: Nicolas Bessi
+#    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,24 +21,19 @@
 from openerp.osv import orm, fields
 
 
-class AccountAccount(orm.Model):
-    """Add a link to a credit control policy on account.account"""
+class credit_control_run(orm.Model):
+    """Add computation of fees"""
 
-    _inherit = "account.account"
+    _inherit = "credit.control.run"
 
-    _columns = {
-        'credit_control_line_ids': fields.one2many(
-            'credit.control.line',
-            'account_id',
-            string='Credit Lines',
-            readonly=True),
-        }
-
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        else:
-            default = default.copy()
-        default['credit_control_line_ids'] = False
-        return super(AccountAccount, self).copy_data(
-            cr, uid, id, default=default, context=context)
+    def  _generate_credit_lines(self, cr, uid, run_id, context=None):
+        """Override method to add fees computation"""
+        credit_line_ids = super(credit_control_run, self)._generate_credit_lines(
+            cr,
+            uid,
+            run_id,
+            context=context
+        )
+        fees_model = self.pool['credit.control.dunning.fees.computer']
+        fees_model._compute_fees(cr, uid, credit_line_ids, context=context)
+        return credit_line_ids

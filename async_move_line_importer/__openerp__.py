@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Asynchronous move/move line CSV importer',
- 'version': '0.1.1',
+ 'version': '0.1.2',
  'author': 'Camptocamp',
  'maintainer': 'Camptocamp',
  'category': 'Accounting',

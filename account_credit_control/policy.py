@@ -18,11 +18,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv.orm import Model, fields
+from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class CreditControlPolicy(Model):
+class CreditControlPolicy(orm.Model):
     """Define a policy of reminder"""
 
     _name = "credit.control.policy"
@@ -42,7 +42,7 @@ class CreditControlPolicy(Model):
                 'account_ids': fields.many2many('account.account',
                                                 string='Accounts',
                                                 required=True,
-                                                domain="[('reconcile', '=', True)]",
+                                                domain="[('type', '=', 'receivable')]",
                                                 help="This policy will be active only"
                                                      " for the selected accounts"),
                 'active': fields.boolean('Active'),
@@ -103,7 +103,10 @@ class CreditControlPolicy(Model):
         my_obj = self.pool.get(model)
         move_l_obj = self.pool.get('account.move.line')
 
-        default_domain = self._move_lines_domain(cr, uid, policy, controlling_date, context=context)
+        default_domain = self._move_lines_domain(cr, uid,
+                                                 policy,
+                                                 controlling_date,
+                                                 context=context)
         to_add_ids = set()
         to_remove_ids = set()
 
@@ -198,15 +201,34 @@ class CreditControlPolicy(Model):
         if isinstance(policy_id, list):
             policy_id = policy_id[0]
         cr.execute("SELECT move_line_id FROM credit_control_line"
-                   "    WHERE policy_id != %s and move_line_id in %s",
+                   "    WHERE policy_id != %s and move_line_id in %s"
+                   "    AND manually_overridden IS false",
                    (policy_id, tuple(lines)))
         res = cr.fetchall()
         if res:
             different_lines.update([x[0] for x in res])
         return different_lines
 
+    def check_policy_against_account(self, cr, uid, account_id, policy_id,
+                                     context=None):
+        """Ensure that the policy corresponds to account relation"""
+        policy = self.browse(cr, uid, policy_id, context=context)
+        account = self.pool['account.account'].browse(cr, uid, account_id,
+                                                      context=context)
+        policies_id = self.search(cr, uid, [],
+                                  context=context)
+        policies = self.browse(cr, uid, policies_id, context=context)
+        allowed = [x for x in policies
+                   if account in x.account_ids or x.do_nothing]
+        if policy not in allowed:
+            allowed_names = u"\n".join(x.name for x in allowed)
+            raise orm.except_orm(
+                _('You can only use a policy set on  account %s') % account.name,
+                _("Please choose one of the following policies:\n %s") % allowed_names)
+        return True
 
-class CreditControlPolicyLevel(Model):
+
+class CreditControlPolicyLevel(orm.Model):
     """Define a policy level. A level allows to determine if
     a move line is due and the level of overdue of the line"""
 
@@ -319,8 +341,11 @@ class CreditControlPolicyLevel(Model):
                "                 FROM credit_control_line\n"
                "                 WHERE move_line_id = mv_line.id\n"
                # lines from a previous level with a draft or ignored state
+               # or manually overridden
                # have to be generated again for the previous level
-               "                 AND state not in ('draft', 'ignored'))")
+               "                 AND NOT manually_overridden\n"
+               "                 AND state NOT IN ('draft', 'ignored'))"
+               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n")
         sql += " AND"
         sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,
                                                                 controlling_date, context)
@@ -346,11 +371,15 @@ class CreditControlPolicyLevel(Model):
                " WHERE cr_line.id = (SELECT credit_control_line.id FROM credit_control_line\n"
                "                            WHERE credit_control_line.move_line_id = mv_line.id\n"
                "                            AND state != 'ignored'"
+               "                            AND NOT manually_overridden"
                "                              ORDER BY credit_control_line.level desc limit 1)\n"
                " AND cr_line.level = %(previous_level)s\n"
+               " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n"
                # lines from a previous level with a draft or ignored state
+               # or manually overridden
                # have to be generated again for the previous level
-               " AND cr_line.state not in ('draft', 'ignored')\n"
+               " AND NOT manually_overridden\n"
+               " AND cr_line.state NOT IN ('draft', 'ignored')\n"
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND "
         sql += self._get_sql_date_boundary_for_computation_mode(cr, uid, level,

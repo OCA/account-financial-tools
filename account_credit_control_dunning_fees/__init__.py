@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012 Camptocamp SA
+#    Author: Nicolas Bessi
+#    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,27 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-
-
-class AccountAccount(orm.Model):
-    """Add a link to a credit control policy on account.account"""
-
-    _inherit = "account.account"
-
-    _columns = {
-        'credit_control_line_ids': fields.one2many(
-            'credit.control.line',
-            'account_id',
-            string='Credit Lines',
-            readonly=True),
-        }
-
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        else:
-            default = default.copy()
-        default['credit_control_line_ids'] = False
-        return super(AccountAccount, self).copy_data(
-            cr, uid, id, default=default, context=context)
+from . import model
