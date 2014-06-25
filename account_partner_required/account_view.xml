@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Account partner required module for OpenERP
+  Copyright (C) 2014 Acsone (http://acsone.eu).
+  @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<record id="account_partner_required_account_type_form" model="ir.ui.view">
+    <field name="name">account_partner_required.account_type_form</field>
+    <field name="model">account.account.type</field>
+    <field name="inherit_id" ref="account.view_account_type_form" />
+    <field name="arch"  type="xml">
+        <field name="code" position="after">
+                <field name="partner_policy" />
+        </field>
+    </field>
+</record>
+
+<record id="view_account_type_tree" model="ir.ui.view">
+    <field name="name">account_partner_required.account_type_tree</field>
+    <field name="model">account.account.type</field>
+    <field name="inherit_id" ref="account.view_account_type_tree" />
+    <field name="arch"  type="xml">
+        <field name="code" position="after">
+            <field name="partner_policy" />
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>
