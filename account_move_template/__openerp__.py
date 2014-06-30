@@ -43,5 +43,5 @@ The journal entry form allows lo load, through a wizard, the template to use and
         'test/generate_move.yml',
         ],
     'active': False,
-    'installable': True,
+    'installable': False,
 }
