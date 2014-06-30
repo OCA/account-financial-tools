@@ -52,5 +52,5 @@ It will recreate the sequence number of each account move using their journal se
         'wizard/wizard_renumber_view.xml',
     ],
     "active": False,
-    "installable": True
+    'installable': False
 }
