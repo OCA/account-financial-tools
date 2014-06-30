@@ -48,6 +48,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
     'depends': ['account'],
     'data': [],
     'images': ['images/always_check_date_constraint.jpg'],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

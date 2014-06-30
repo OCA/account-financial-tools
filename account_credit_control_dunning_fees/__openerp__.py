@@ -64,7 +64,7 @@ Support of fees price list
           'report/report.xml'],
  'demo': [],
  'test': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False,

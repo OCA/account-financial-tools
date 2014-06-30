@@ -43,6 +43,6 @@ Please contact Alexis de Lattre from Akretion <alexis.delattre@akretion.com> for
         'images/date_check_error_popup.jpg',
         'images/date_check_company_config.jpg',
         ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

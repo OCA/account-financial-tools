@@ -40,7 +40,7 @@ These fields are shown in "Other information" tab in invoice form.
     'data': [
         "account_invoice_view.xml"
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 

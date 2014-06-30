@@ -36,7 +36,7 @@ This way you will find easily differences you may see between
 the OpenERP tax report and what you see in your books.""",
  "website": "http://www.camptocamp.com",
  "data": ["account_tax_analysis_view.xml"],
- "installable": True,
+ 'installable': False,
  "active": False,
  }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

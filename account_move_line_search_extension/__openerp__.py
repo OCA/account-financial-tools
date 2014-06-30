@@ -49,6 +49,6 @@ These fields can be used in combination with the Search window.
     'css':[
         'static/src/css/account_move_line_search_extension.css',
     ],
-    'installable': True,
+    'installable': False,
     'auto_install': False,
 }

@@ -57,7 +57,7 @@ import report will be available on the record
           'security/multi_company.xml'],
  'demo': [],
  'test': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False,

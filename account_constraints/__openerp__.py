@@ -64,5 +64,5 @@ Summary of constraints are:
     'data': [
         'view/account_journal.xml',
     ],
-    'installable': True,
+    'installable': False,
 }

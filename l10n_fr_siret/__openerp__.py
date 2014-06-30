@@ -47,6 +47,6 @@ will have to enter them again.
     'data': [
         'partner_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

@@ -29,7 +29,7 @@ base one defined in addons/account/wizard.
     """,
     'website': 'http://www.camptocamp.com',
     'data' : ['wizard/account_validate_move_view.xml'],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
