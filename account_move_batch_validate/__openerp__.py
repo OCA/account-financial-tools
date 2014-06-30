@@ -74,7 +74,7 @@
         'test/batch_validate.yml',
         'test/batch_validate_then_unmark.yml',
     ],
-    'installable': True,
+    'installable': False,
     'images': [],
     'license': 'AGPL-3',
 }
