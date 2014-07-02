@@ -7,6 +7,7 @@ virtualenv:
 
 before_install:
  - git clone https://github.com/gurneyalex/maintainer-quality-tools.git $HOME/maintainer-quality-tools
+ - git clone https://github.com/OCA/connector $HOME/connector -b 7.0
 
 env:
  - PATH=$HOME/maintainer-quality-tools/travis:$PATH
@@ -20,7 +21,7 @@ install:
 
 script:
     - travis_run_flake8
-    - travis_run_tests 7.0 openerp_test
+    - travis_run_tests 7.0 openerp_test  $HOME/connector
 
 after_success:
   coveralls
