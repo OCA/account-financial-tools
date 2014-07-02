@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="wizard_select_template" model="ir.ui.view">
+            <field name="name">Select Move Template</field>
+            <field name="model">wizard.select.move.template</field>
+            <field name="arch" type="xml">
+                <form string="Move Template" >
+                    <group col="2" width="600" height="500">
+                        <group>
+                            <field name="template_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
+                            <field name="partner_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
+                            <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
+                            <field name="state" invisible="1"/>
+                        </group>
+                        <newline/>
+                        <group col="3">
+                            <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="1"/>
+                            <button icon="gtk-ok" name="load_template" string="Load" type="object" colspan="1" attrs="{'invisible':[('state','!=','template_selected')]}" />
+                            <button name="load_lines" string="Next" icon="terp-gtk-go-back-rtl" type="object" colspan="1" attrs="{'invisible':[('state','=','template_selected')]}" />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_select_template_line" model="ir.ui.view">
+            <field name="name">Select Move Template Line</field>
+            <field name="model">wizard.select.move.template.line</field>
+            <field name="arch" type="xml">
+                <form string="Move Template Line">
+                    <group col="2">
+                        <field name="sequence" invisible="1"/>
+                        <field name="name" />
+                        <field name="account_id" />
+                        <field name="move_line_type" />
+                        <field name="amount" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_select_template_line_tree" model="ir.ui.view">
+            <field name="name">Select Move Template Line</field>
+            <field name="model">wizard.select.move.template.line</field>
+            <field name="arch" type="xml">
+                <tree string="Move Template Line" editable="bottom">
+                    <field name="sequence" invisible="1"/>
+                    <field name="name" />
+                    <field name="account_id" />
+                    <field name="move_line_type" />
+                    <field name="amount" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_wizard_select_template" model="ir.actions.act_window">
+            <field name="name">Select Move Template</field>
+            <field name="res_model">wizard.select.move.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+               <field name="view_id" ref="wizard_select_template"/>
+               <field name="target">new</field>
+        </record>
+
+       <act_window name="Create Move from Template"
+            res_model="wizard.select.move.template"
+            src_model="account.move"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_wizard_select_template_by_move"
+            view_id="wizard_select_template"/>
+
+        <menuitem name="Create Move from Template" action="action_wizard_select_template" id="menu_action_wizard_select_template" sequence="10" parent="account.menu_finance_entries"/>
+    </data>
+</openerp>

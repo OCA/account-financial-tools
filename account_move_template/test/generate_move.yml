@@ -1,0 +1,52 @@
+-
+  I first create a move template for received bank payment. Two lines, bank and credit
+-
+  !record {model: account.move.template, id: move_template_1}:
+    company_id: base.main_company
+    name: "First template"
+    template_line_ids:
+      - name: "Bank"
+        sequence: 1
+        journal_id: account.bank_journal
+        account_id: account.bnk
+        type: 'input'
+        move_line_type: 'dr'
+      - name: "Credit"
+        sequence: 2
+        journal_id: account.bank_journal
+        account_id: account.a_recv
+        type: 'computed'
+        move_line_type: 'cr'
+        python_code: 'L(1)'
+
+-
+  I use "Select Move Template" wizard to generate move
+-
+  !record {model: wizard.select.move.template, id: wizard_select_move_template_1}:
+    template_id: move_template_1
+
+-
+  I click on Next Button
+-
+  !python {model: wizard.select.move.template}: |
+    self.load_lines(cr, uid, [ref("wizard_select_move_template_1")])
+
+-
+  I verify that wizard lines are created and write the amount line
+-
+  !python {model: wizard.select.move.template}: |
+    wizard = self.browse(cr, uid, ref('wizard_select_move_template_1'))
+    assert(len(wizard.line_ids) == 1), ('Wrong number of wizard lines')
+    wizard.line_ids[0].write({'amount': 100.0})
+
+-
+  I click on Load Button and check the created move
+-
+  !python {model: wizard.select.move.template}: |
+    action = self.load_template(cr, uid, [ref("wizard_select_move_template_1")])
+    move_obj = self.pool.get('account.move')
+    domain_list = eval(action['domain'])
+    for move_id in domain_list[0][2]:
+        move = move_obj.browse(cr, uid, move_id)
+        for line in move.line_id:
+            assert(line.state == 'valid'), ('Move lines must be valid')
