@@ -1,0 +1,192 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* c2c_currency_rate_update
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 5.0.0\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-06-17 08:25:57+0000\n"
+"PO-Revision-Date: 2009-11-12 11:39+0100\n"
+"Last-Translator: Grzegorz Grzelak (Cirrus) <grzegorz.grzelak@cirrus.pl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: c2c_currency_rate_update
+#: view:res.company:0
+msgid "Currency auto update configuration"
+msgstr "Aktualizacja kursów walut"
+
+#. module: c2c_currency_rate_update
+#: view:res.company:0
+msgid "Currency updates services"
+msgstr "Serwisy aktualizacji kursów"
+
+#. module: c2c_currency_rate_update
+#: field:currency.rate.update.service,company_id:0
+msgid "linked company"
+msgstr "dla firmy"
+
+#. module: c2c_currency_rate_update
+#: view:currency.rate.update.service:0
+msgid "Rates"
+msgstr "Kursy"
+
+#. module: c2c_currency_rate_update
+#: constraint:ir.model:0
+msgid "The Object name must start with x_ and not contain any special character !"
+msgstr "Nazwa obiektu musi zaczynać się od x_ oraz nie może zawierać znaków specjalnych !"
+
+#. module: c2c_currency_rate_update
+#: field:res.company,multi_company_currency_enable:0
+msgid "Multi company currency"
+msgstr "Waluta dla wielu firm"
+
+#. module: c2c_currency_rate_update
+#: field:res.company,interval_type:0
+msgid "Currency update frequence"
+msgstr "Częstotliwość aktualizacji kursów"
+
+#. module: c2c_currency_rate_update
+#: selection:res.company,interval_type:0
+msgid "Day(s)"
+msgstr "Codziennie"
+
+#. module: c2c_currency_rate_update
+#: field:currency.rate.update.service,currency_to_update:0
+msgid "currency to update with this service"
+msgstr "Waluty aktualizowane tym serwisem"
+
+#. module: c2c_currency_rate_update
+#: field:currency.rate.update.service,note:0
+msgid "update notice"
+msgstr "Notatka aktualizacji"
+
+#. module: c2c_currency_rate_update
+#: field:currency.rate.update.service,service:0
+msgid "Webservice to use"
+msgstr "Strona web do zastosowania"
+
+#. module: c2c_currency_rate_update
+#: selection:res.company,interval_type:0
+msgid "Month(s)"
+msgstr "Co miesiąc"
+
+#. module: c2c_currency_rate_update
+#: view:currency.rate.update.service:0
+msgid "note"
+msgstr "Notatka"
+
+#. module: c2c_currency_rate_update
+#: field:res.company,services_to_use:0
+msgid "Currency update services"
+msgstr "Serwisy aktualizacji kursów"
+
+#. module: c2c_currency_rate_update
+#: view:currency.rate.update.service:0
+msgid "Currencies to update with this services"
+msgstr "Waluty aktualizowane tymi serwisami"
+
+#. module: c2c_currency_rate_update
+#: code:addons/c2c_currency_rate_update/currency_rate_update.py:0
+#, python-format
+msgid "You can use a service one time per company !"
+msgstr "Możesz stosować jeden serwis na firmę !"
+
+#. module: c2c_currency_rate_update
+#: selection:currency.rate.update.service,service:0
+msgid "Yahoo Finance "
+msgstr ""
+
+#. module: c2c_currency_rate_update
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML niewłaściwy dla tej architektury wyświetlania!"
+
+#. module: c2c_currency_rate_update
+#: selection:currency.rate.update.service,service:0
+msgid "Admin.ch"
+msgstr ""
+
+#. module: c2c_currency_rate_update
+#: selection:res.company,interval_type:0
+msgid "Week(s)"
+msgstr "Co tydzień"
+
+#. module: c2c_currency_rate_update
+#: help:res.company,multi_company_currency_enable:0
+msgid "if this case is not check you can not set currency is active on two company"
+msgstr "Jeśli nie zaznaczysz, to nie będziesz mógł ustawić waluty jako aktywnej dla dwóch firm"
+
+#. module: c2c_currency_rate_update
+#: code:addons/c2c_currency_rate_update/currency_rate_update.py:0
+#: model:ir.model,name:c2c_currency_rate_update.model_currency_rate_update
+#: model:ir.model,name:c2c_currency_rate_update.model_currency_rate_update_service
+#: model:ir.module.module,shortdesc:c2c_currency_rate_update.module_name_translation
+#, python-format
+msgid "Currency Rate Update"
+msgstr "Aktualizacja kursów walut"
+
+#. module: c2c_currency_rate_update
+#: model:ir.module.module,description:c2c_currency_rate_update.module_name_translation
+msgid ""
+"\n"
+"Import exchange rates from three different sources on the internet :\n"
+"\n"
+"1. Admin.ch\n"
+"   Updated daily, source in CHF. Source type is XML based.\n"
+"\n"
+"2. Federal Reserve Bank of New York\n"
+"   Daily 12 noon buying rates in New York are certified by the\n"
+"   New York Federal Reserve Bank for customs purposes.\n"
+"   Source in USD.\n"
+"   http://www.newyorkfed.org/markets/pilotfx.html\n"
+"\n"
+"3. European Central Bank\n"
+"   The reference rates are based on the regular daily concertation procedure between\n"
+"   central banks within and outside the European System of Central Banks,\n"
+"   which normally takes place at 2.15 p.m. (14:15) ECB time. Source in EUR.\n"
+"   http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html\n"
+"\n"
+"4. Google Finance\n"
+"   Updated daily from Citibank N.A., source in EUR. Information may be delayed.\n"
+"   This is parsed from an HTML page, so it may be broken at anytime.\n"
+"\n"
+"5. Bank of Canada\n"
+"   Updated daily at 12:30 am, source in CAD, nominal rate. Source type is CSV based.\n"
+"\n"
+"You can set time cycle for getting updates, 'first execute date' define when to start\n"
+"the import and you can add a comment that describe why you use that particular service.\n"
+"\n"
+"The module uses internal ir_cron feature from OpenERP, so the job is launched once\n"
+"the server starts if the 'first execute date' is before the current day.\n"
+"\n"
+"If in multi-company mode, the base currency will be the first company's currency\n"
+"found in database.\n"
+msgstr ""
+
+#. module: c2c_currency_rate_update
+#: field:res.company,auto_currency_up:0
+msgid "Automatical update of the currency this company"
+msgstr "Automatyczna aktualizacja kursów walut dla tej firmy"
+
+#. module: c2c_currency_rate_update
+#: view:currency.rate.update.service:0
+msgid "Rate"
+msgstr "Kurs"
+
+#. module: c2c_currency_rate_update
+#: help:res.company,interval_type:0
+msgid ""
+"changing this value will\n"
+"                                                 also affect other compagnies"
+msgstr "Zmiana tej wartości wpłynie również na inne firmy"
+
+#. module: c2c_currency_rate_update
+#: view:res.company:0
+msgid "Refresh currencies"
+msgstr "Aktualizuj kursy"
+
