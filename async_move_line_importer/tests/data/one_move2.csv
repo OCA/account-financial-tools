@@ -1,4 +1,4 @@
 ref;date;period_id;journal_id;line_id / account_id;line_id / partner_id;line_id / name;line_id / debit;line_id / credit;line_id/tax_code_id
-test_2;2014-01-01;X 01/2014;Sales Journal - (test);X2001;Camptocamp;TEST C2C;;1000;Tax Received
-;;;;X11003;Camptocamp;TEST C2C;;200;Tax Paid
+test_2;2014-01-01;X 01/2014;Sales Journal - (test);X2001;Camptocamp;TEST C2C;;1000;
+;;;;X11003;Camptocamp;TEST C2C;;200;;
 ;;;;X11002;Camptocamp;TEST C2C;1200;;
