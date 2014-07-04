@@ -23,5 +23,6 @@ script:
     - travis_run_flake8
     - travis_run_tests_encapsulated.sh 7.0 openerp_test account $HOME/connector
 
+# Coverall must bi validated with encapsulated script
 after_success:
   coveralls
