@@ -52,11 +52,9 @@ class SelectTaxes(orm.TransientModel):
                     result += add_tree(child)
             return result
 
-        covered = [
-            x.source_tax_id.id for x in
-            (wiz.config_id.sale_line_ids +
-             wiz.config_id.purchase_line_ids)
-            ]
+        covered = [x.source_tax_id.id for x in
+                   (wiz.config_id.sale_line_ids +
+                    wiz.config_id.purchase_line_ids)]
         taxes = []
         for tax in list(set(map(get_root_node, wiz.tax_ids))):
             taxes += add_tree(tax)
@@ -83,4 +81,4 @@ class SelectTaxes(orm.TransientModel):
             'account.tax', 'update_tax_select_covered_taxes_rel',
             'tax_select_id', 'tax_id',
             string='Covered taxes'),
-        }
+    }
