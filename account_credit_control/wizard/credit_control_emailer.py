@@ -37,9 +37,10 @@ class CreditControlEmailer(orm.TransientModel):
         if (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
             res = self._filter_line_ids(
-                    cr, uid,
-                    context['active_ids'],
-                    context=context)
+                cr, uid,
+                context['active_ids'],
+                context=context
+            )
         return res
 
     _columns = {
@@ -63,7 +64,7 @@ class CreditControlEmailer(orm.TransientModel):
 
     def email_lines(self, cr, uid, wiz_id, context=None):
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-                "wiz_id: only one id expected"
+            "wiz_id: only one id expected"
         comm_obj = self.pool.get('credit.control.communication')
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
@@ -74,9 +75,10 @@ class CreditControlEmailer(orm.TransientModel):
 
         line_ids = [l.id for l in form.line_ids]
         filtered_ids = self._filter_line_ids(
-                cr, uid, line_ids, context)
+            cr, uid, line_ids, context
+        )
         comms = comm_obj._generate_comm_from_credit_line_ids(
-                cr, uid, filtered_ids, context=context)
+            cr, uid, filtered_ids, context=context
+        )
         comm_obj._generate_emails(cr, uid, comms, context=context)
         return {}
-

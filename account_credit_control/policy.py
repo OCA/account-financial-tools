@@ -27,26 +27,37 @@ class CreditControlPolicy(orm.Model):
 
     _name = "credit.control.policy"
     _description = """Define a reminder policy"""
-    _columns = {'name': fields.char('Name', required=True, size=128),
+    _columns = {
+        'name': fields.char(
+            'Name',
+            required=True,
+            size=128
+        ),
 
-                'level_ids': fields.one2many('credit.control.policy.level',
-                                             'policy_id',
-                                             'Policy Levels'),
+        'level_ids': fields.one2many(
+            'credit.control.policy.level',
+            'policy_id',
+            'Policy Levels'
+        ),
 
-                'do_nothing': fields.boolean('Do nothing',
-                                             help='For policies which should not '
-                                                  'generate lines or are obsolete'),
+        'do_nothing': fields.boolean(
+            'Do nothing',
+            help='For policies which should not '
+                 'generate lines or are obsolete'
+        ),
 
-                'company_id': fields.many2one('res.company', 'Company'),
+        'company_id': fields.many2one('res.company', 'Company'),
 
-                'account_ids': fields.many2many('account.account',
-                                                string='Accounts',
-                                                required=True,
-                                                domain="[('type', '=', 'receivable')]",
-                                                help="This policy will be active only"
-                                                     " for the selected accounts"),
-                'active': fields.boolean('Active'),
-                }
+        'account_ids': fields.many2many(
+            'account.account',
+            string='Accounts',
+            required=True,
+            domain="[('type', '=', 'receivable')]",
+            help="This policy will be active only"
+                 " for the selected accounts"
+        ),
+        'active': fields.boolean('Active'),
+    }
 
     _defaults = {
         'active': True,

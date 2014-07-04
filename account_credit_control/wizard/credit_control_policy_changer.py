@@ -145,10 +145,12 @@ class credit_control_policy_changer(orm.TransientModel):
             uid,
             wizard.move_line_ids,
             wizard.new_policy_id)
-        self._mark_as_overridden(cr,
-                                uid,
-                                wizard.move_line_ids,
-                                context=context)
+        self._mark_as_overridden(
+            cr,
+            uid,
+            wizard.move_line_ids,
+            context=context
+        )
         # As disscused with business expert
         # draft lines should be passed to ignored
         # if same level as the new one
@@ -173,6 +175,6 @@ class credit_control_policy_changer(orm.TransientModel):
                                                 "account_credit_control",
                                                 "credit_control_line_action")
         assert view_id, 'No view found'
-        action =  ui_act_model.read(cr, uid, view_id[1], context=context)
+        action = ui_act_model.read(cr, uid, view_id[1], context=context)
         action['domain'] = [('id', 'in', generated_ids)]
         return action
