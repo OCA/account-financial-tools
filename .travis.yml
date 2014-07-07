@@ -21,7 +21,7 @@ install:
 
 script:
     #- travis_run_flake8 # will be done in a separated commit
-    - travis_run_tests_encapsulated.sh 7.0 openerp_test account $HOME/connector
+    - travis_run_tests_encapsulated 7.0 openerp_test account $HOME/connector
 
 after_success:
   coveralls
