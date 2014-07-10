@@ -28,11 +28,11 @@ class account_account_type(orm.Model):
     _inherit = "account.account.type"
 
     _columns = {
-        'partner_policy': fields.selection([
-            ('optional', 'Optional'),
-            ('always', 'Always'),
-            ('never', 'Never')
-            ], 'Policy for partner field',
+        'partner_policy': fields.selection(
+            [('optional', 'Optional'),
+             ('always', 'Always'),
+             ('never', 'Never')],
+            'Policy for partner field',
             help="Set the policy for the partner field : if you select "
                  "'Optional', the accountant is free to put a partner "
                  "on an account move line with this type of account ; "
