@@ -24,6 +24,7 @@
 from openerp.tools.translate import _
 from openerp.osv import osv, orm
 
+
 class account_invoice(orm.Model):
     _inherit = "account.invoice"
 
@@ -37,19 +38,20 @@ class account_invoice(orm.Model):
                                      absl.name
                               FROM account_bank_statement_line AS absl
                               INNER JOIN account_bank_statement AS abs
-                              ON absl.statement_id = abs.id
-                             WHERE EXISTS (SELECT 1
-                           FROM account_voucher_line JOIN account_move_line ON
-                            (account_voucher_line.move_line_id = account_move_line.id)
-                            WHERE voucher_id=absl.voucher_id 
-                            AND account_move_line.move_id = %s )""",
-                               (invoice['move_id'][0],))
+                                ON absl.statement_id = abs.id
+                              WHERE EXISTS (SELECT 1
+                              FROM account_voucher_line JOIN account_move_line ON
+                                (account_voucher_line.move_line_id = account_move_line.id)
+                              WHERE voucher_id=absl.voucher_id
+                                AND account_move_line.move_id = %s )""",
+                           (invoice['move_id'][0],))
                 statement_lines = cr.dictfetchone()
                 if statement_lines:
-                    raise osv.except_osv(_('Error!'),
-                                         _('Invoice already imported in bank statment (%s) at %s on line %s'
-                                            % (statement_lines['statement_name'],
-                                               statement_lines['statement_date'],
-                                               statement_lines['name'],)))
+                    raise osv.except_osv(
+                        _('Error!'),
+                        _('Invoice already imported in bank statment (%s) at %s on line %s'
+                          % (statement_lines['statement_name'],
+                             statement_lines['statement_date'],
+                             statement_lines['name'],)))
 
-        return super(account_invoice,self).action_cancel(cr, uid, ids, context=context)
+        return super(account_invoice, self).action_cancel(cr, uid, ids, context=context)
