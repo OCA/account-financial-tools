@@ -18,19 +18,18 @@
 #
 ##############################################################################
 {
-    "name" : "Cancel invoice, check on payment order",
-    "version" : "1.0",
-    "depends" : ["account",
-                 "account_payment",
-                 "account_cancel"
-                ],
-    "author" : "Camptocamp",
+    "name": "Cancel invoice, check on payment order",
+    "version": "1.0",
+    "depends": ["account",
+                "account_payment",
+                "account_cancel"],
+    "author": "Camptocamp",
     "description": """
 Prevents to cancel an invoice which has already been imported in a
 payment order.
     """,
     'website': 'http://www.camptocamp.com',
-    'data' : [],
+    'data': [],
     'installable': True,
     'active': False,
 }
