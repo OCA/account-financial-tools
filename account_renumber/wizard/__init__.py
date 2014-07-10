@@ -19,11 +19,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 """
 Account renumber wizard
 """
-
-
 
 import wizard_renumber

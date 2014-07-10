@@ -24,6 +24,7 @@ from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 import logging
 
+
 class wizard_renumber(orm.TransientModel):
     _name = "wizard.renumber"
     _description = "Account renumber wizard"
@@ -41,7 +42,7 @@ class wizard_renumber(orm.TransientModel):
                                        help='Fiscal periods to renumber',
                                        string="Periods", ondelete='null'),
         'number_next': fields.integer('First Number', required=True,
-                help="Journal sequences will start counting on this number"),
+                                      help="Journal sequences will start counting on this number"),
         'state': fields.selection([('init', 'Initial'),
                                    ('renumber', 'Renumbering')], readonly=True)
     }
@@ -94,24 +95,26 @@ class wizard_renumber(orm.TransientModel):
                                        [('journal_id', 'in', journal_ids),
                                         ('period_id', '=', period),
                                         ('state', '=', 'posted')],
-                                        limit=0, order='date,id',
-                                        context=context)
+                                       limit=0, order='date,id',
+                                       context=context)
             if not move_ids:
                 continue
             logger.debug("Renumbering %d account moves." % len(move_ids))
             for move in move_obj.browse(cr, uid, move_ids, context=context):
                 sequence_id = self.get_sequence_id_for_fiscalyear_id(
-                                cr, uid,
-                                sequence_id=move.journal_id.sequence_id.id,
-                                fiscalyear_id=move.period_id.fiscalyear_id.id)
+                    cr, uid,
+                    sequence_id=move.journal_id.sequence_id.id,
+                    fiscalyear_id=move.period_id.fiscalyear_id.id
+                )
                 if not sequence_id in sequences_seen:
                     sequence_obj.write(cr, SUPERUSER_ID, [sequence_id],
                                        {'number_next': number_next})
                     sequences_seen.append(sequence_id)
                 # Generate (using our own get_id) and write the new move number
                 c = {'fiscalyear_id': move.period_id.fiscalyear_id.id}
-                new_name = sequence_obj.next_by_id(cr,uid,
-                               move.journal_id.sequence_id.id, context=c)
+                new_name = sequence_obj.next_by_id(cr, uid,
+                                                   move.journal_id.sequence_id.id,
+                                                   context=c)
                 # Note: We can't just do a
                 # "move_obj.write(cr, uid, [move.id], {'name': new_name})"
                 # cause it might raise a
