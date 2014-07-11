@@ -63,21 +63,21 @@ class account_invoice(orm.Model):
                     'cc_amount_total': 0.0,
                 }
 
-                ## It could be computed only in open or paid invoices with a generated account move
+                # It could be computed only in open or paid invoices with a generated account move
                 if invoice.move_id:
-                    ## Accounts to compute amount_untaxed
+                    # Accounts to compute amount_untaxed
                     line_account = []
                     for line in invoice.invoice_line:
                         if line.account_id.id not in line_account:
                             line_account.append(line.account_id.id)
 
-                    ## Accounts to compute amount_tax
+                    # Accounts to compute amount_tax
                     tax_account = []
                     for line in invoice.tax_line:
                         if line.account_id.id not in tax_account and line.amount != 0:
                             tax_account.append(line.account_id.id)
 
-                    ## The company currency amounts are the debit-credit amounts in the account moves
+                    # The company currency amounts are the debit-credit amounts in the account moves
                     for line in invoice.move_id.line_id:
                         if line.account_id.id in line_account:
                             res[invoice.id]['cc_amount_untaxed'] += line.debit - line.credit
