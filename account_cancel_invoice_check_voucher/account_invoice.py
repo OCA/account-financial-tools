@@ -32,7 +32,7 @@ class account_invoice(orm.Model):
         invoices = self.read(cr, uid, ids, ['move_id', 'payment_ids'])
         for invoice in invoices:
             if invoice['move_id']:
-                ## This invoice have a move line, we search move_line concerned by this move
+                # This invoice have a move line, we search move_line concerned by this move
                 cr.execute("""SELECT abs.name AS statement_name,
                                      abs.date AS statement_date,
                                      absl.name
