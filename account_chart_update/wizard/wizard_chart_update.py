@@ -904,7 +904,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 'python_compute': tax_template.python_compute,
                 'python_compute_inv': tax_template.python_compute_inv,
                 'python_applicable': tax_template.python_applicable,
-                #'tax_group': tax_template.tax_group,
                 'base_code_id': (tax_template.base_code_id and
                                  tax_code_template_mapping.get(tax_template.base_code_id.id)),
                 'tax_code_id': (tax_template.tax_code_id and
@@ -1055,7 +1054,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
             # Values
             vals = {
                 'name': (root_account_id == account_template.id) and wizard.company_id.name or account_template.name,
-                #'sign': account_template.sign,
                 'currency_id': account_template.currency_id and account_template.currency_id.id or False,
                 'code': code,
                 'type': account_template.type,
