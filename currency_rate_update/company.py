@@ -85,7 +85,7 @@ class res_company(orm.Model):
             for comp in compagnies:
                 if comp != id and not enable:
                     if self.browse(cr, uid, comp).multi_company_currency_enable:
-                        #we ensure taht we did not have write a true value
+                        # We ensure taht we did not have write a true value
                         self.write(cr, uid, id, {'auto_currency_up': False})
                         return {
                             'value': {'auto_currency_up': False},

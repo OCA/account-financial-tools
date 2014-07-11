@@ -55,8 +55,6 @@ class Currency_rate_update_service(osv.Model):
             [
                 ('Admin_ch_getter', 'Admin.ch'),
                 ('ECB_getter', 'European Central Bank'),
-                #('NYFB_getter','Federal Reserve Bank of NY'),
-                #('Google_getter','Google Finance'),
                 ('Yahoo_getter', 'Yahoo Finance '),
                 ('PL_NBP_getter', 'Narodowy Bank Polski'),  # Added for polish rates
                 ('Banxico_getter', 'Banco de México'),  # Added for mexican rates
@@ -146,7 +144,7 @@ class Currency_rate_update(osv.Model):
         cron_id = 0
         cron_obj = self.pool.get('ir.cron')
         try:
-            #Finds the cron that send messages
+            # Finds the cron that send messages
             cron_id = cron_obj.search(
                 cr,
                 uid,
@@ -162,8 +160,6 @@ class Currency_rate_update(osv.Model):
         except Exception:
             _logger.info('warning cron not found one will be created')
             pass  # Ignore if the cron is missing cause we are going to create it in db
-
-        #The cron does not exists
         if not cron_id:
             self.cron['name'] = _('Currency Rate Update')
             cron_id = cron_obj.create(cr, uid, self.cron, context)
@@ -181,12 +177,12 @@ class Currency_rate_update(osv.Model):
         rate_obj = self.pool.get('res.currency.rate')
         companies = self.pool.get('res.company').search(cr, uid, [])
         for comp in self.pool.get('res.company').browse(cr, uid, companies):
-            #The multi company currency can beset or no so we handle
-            #The two case
+            # The multi company currency can beset or no so we handle
+            # The two case
             if not comp.auto_currency_up:
                 continue
-            #We fetch the main currency looking for currency with base = true.
-            #The main rate should be set at  1.00
+            # We fetch the main currency looking for currency with base = true.
+            # The main rate should be set at  1.00
             main_curr_ids = curr_obj.search(
                 cr, uid,
                 [('base', '=', True), ('company_id', '=', comp.id)]
@@ -214,8 +210,8 @@ class Currency_rate_update(osv.Model):
             for service in comp.services_to_use:
                 note = service.note or ''
                 try:
-                    #We initalize the class that will handle the request
-                    #and return a dict of rate
+                    # We initalize the class that will handle the request
+                    # and return a dict of rate
                     getter = factory.register(service.service)
                     curr_to_fetch = map(lambda x: x.name, service.currency_to_update)
                     res, log_info = getter.get_updated_currency(
@@ -322,10 +318,6 @@ class Currency_getter_factory():
 class Curreny_getter_interface(object):
     "Abstract class of currency getter"
 
-    #remove in order to have a dryer code
-    # def __init__(self):
-    #    raise AbstractClassError
-
     log_info = " "
 
     supported_currency_array = [
@@ -359,7 +351,7 @@ class Curreny_getter_interface(object):
         'VEF', 'VND', 'USD', 'USD', 'USD', 'XPF', 'MAD', 'YER', 'ZMK', 'ZWD'
     ]
 
-    #Updated currency this arry will contain the final result
+    # Updated currency this arry will contain the final result
     updated_currency = {}
 
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
@@ -404,7 +396,7 @@ class Curreny_getter_interface(object):
                                                   max_delta_days)
             )
 
-        #We always have a warning when rate_date != today
+        # We always have a warning when rate_date != today
         rate_date_str = datetime.strftime(rate_date, '%Y-%m-%d')
         if rate_date_str != datetime.strftime(datetime.today(), '%Y-%m-%d'):
             msg = "The rate timestamp (%s) is not today's date"
@@ -412,7 +404,7 @@ class Curreny_getter_interface(object):
             _logger.warning(msg, rate_date_str)
 
 
-#Yahoo ########################################################################
+# Yahoo ########################################################################
 class Yahoo_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
@@ -436,7 +428,7 @@ class Yahoo_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-#Admin CH #####################################################################
+# Admin CH ####################################################################
 class Admin_ch_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service
@@ -455,10 +447,10 @@ class Admin_ch_getter(Curreny_getter_interface):
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
         """Implementation of abstract method of Curreny_getter_interface"""
         url = 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse/wechselkurse.php'
-        #We do not want to update the main currency
+        # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
-        #Move to new XML lib cf Launchpad bug #645263
+        # Move to new XML lib cf Launchpad bug #645263
         from lxml import etree
         _logger.debug("Admin.ch currency rate service : connecting...")
         rawfile = self.get_url(url)
@@ -468,7 +460,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         rate_date = dom.xpath('/def:wechselkurse/def:datum/text()', namespaces=adminch_ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
         self.check_rate_date(rate_date_datetime, max_delta_days)
-        #we dynamically update supported currencies
+        # we dynamically update supported currencies
         self.supported_currency_array = dom.xpath("/def:wechselkurse/def:devise/@code", namespaces=adminch_ns)
         self.supported_currency_array = [x.upper() for x in self.supported_currency_array]
         self.supported_currency_array.append('CHF')
@@ -497,7 +489,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-## ECB getter #################################################################
+# ECB getter #################################################################
 class ECB_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for ECB service
@@ -521,10 +513,10 @@ class ECB_getter(Curreny_getter_interface):
         # the currency rates are the ones of trading day N-1
         # see http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
 
-        #We do not want to update the main currency
+        # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
-        #Move to new XML lib cf Launchpad bug #645263
+        # Move to new XML lib cf Launchpad bug #645263
         from lxml import etree
         _logger.debug("ECB currency rate service : connecting...")
         rawfile = self.get_url(url)
@@ -538,7 +530,7 @@ class ECB_getter(Curreny_getter_interface):
                               namespaces=ecb_ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
         self.check_rate_date(rate_date_datetime, max_delta_days)
-        #we dynamically update supported currencies
+        # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath("/gesmes:Envelope/def:Cube/def:Cube/def:Cube/@currency",
                                                   namespaces=ecb_ns)
         self.supported_currency_array.append('EUR')
@@ -561,7 +553,7 @@ class ECB_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-#PL NBP #######################################################################
+# PL NBP ######################################################################
 class PL_NBP_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
@@ -580,8 +572,9 @@ class PL_NBP_getter(Curreny_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
-        url = 'http://www.nbp.pl/kursy/xml/LastA.xml'    # LastA.xml is always the most recent one
-        #we do not want to update the main currency
+        # LastA.xml is always the most recent one
+        url = 'http://www.nbp.pl/kursy/xml/LastA.xml'
+        # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         # Move to new XML lib cf Launchpad bug #645263
@@ -594,7 +587,7 @@ class PL_NBP_getter(Curreny_getter_interface):
         rate_date = dom.xpath('/tabela_kursow/data_publikacji/text()', namespaces=ns)[0]
         rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
         self.check_rate_date(rate_date_datetime, max_delta_days)
-        #we dynamically update supported currencies
+        # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath('/tabela_kursow/pozycja/kod_waluty/text()', namespaces=ns)
         self.supported_currency_array.append('PLN')
         _logger.debug("Supported currencies = %s" % self.supported_currency_array)
@@ -619,7 +612,7 @@ class PL_NBP_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-##Banco de México #############################################################
+# Banco de México #############################################################
 class Banxico_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Banco de México service
@@ -672,7 +665,7 @@ class Banxico_getter(Curreny_getter_interface):
             logger.debug("Rate retrieved : %s = %s %s" % (main_currency, rate, curr))
 
 
-##CA BOC #####   Bank of Canada   #############################################
+# CA BOC #####   Bank of Canada   #############################################
 class CA_BOC_getter(Curreny_getter_interface):
     """Implementation of Curreny_getter_factory interface
     for Bank of Canada RSS service
@@ -688,7 +681,7 @@ class CA_BOC_getter(Curreny_getter_interface):
         # currencies reported):
         # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
 
-        #we do not want to update the main currency
+        # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
 
