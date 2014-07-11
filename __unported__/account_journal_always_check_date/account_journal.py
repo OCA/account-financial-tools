@@ -36,7 +36,7 @@ class account_journal(orm.Model):
 
     _defaults = {
         'allow_date': True,
-        }
+    }
 
     def _allow_date_always_active(self, cr, uid, ids):
         for journal in self.browse(cr, uid, ids):
@@ -44,8 +44,9 @@ class account_journal(orm.Model):
                 raise orm.except_orm(
                     _('Error:'),
                     _("The option 'Check Date in Period' must be active "
-                    "on journal '%s'.")
-                    % journal.name)
+                      "on journal '%s'.")
+                    % journal.name
+                )
         return True
 
     _constraints = [

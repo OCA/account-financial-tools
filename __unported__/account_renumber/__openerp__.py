@@ -29,7 +29,7 @@
     'author': "Pexego",
     'website': "http://www.pexego.es",
     'category': "Enterprise Specific Modules",
-    'contributors' : ['Pedro M. Baeza', 'Joaquín Gutierrez'],
+    'contributors': ['Pedro M. Baeza', 'Joaquín Gutierrez'],
     'description': """
 This module adds a wizard to renumber account moves by date only for admin users.
 =================================================================================
@@ -43,11 +43,11 @@ It will recreate the sequence number of each account move using their journal se
     - Sequences per journal are supported.
     - Sequences with prefixes and sufixes based on the move date are also supported.
             """,
-    "license" : "AGPL-3",
-    "depends" : [
+    "license": "AGPL-3",
+    "depends": [
                 'account',
     ],
-    "demo" : [],
+    "demo": [],
     "data": [
         'wizard/wizard_renumber_view.xml',
     ],

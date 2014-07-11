@@ -34,7 +34,14 @@ class res_partner(orm.Model):
             fp = self.pool['account.fiscal.position'].read(
                 cr, uid, account_position, ['customer_must_have_vat', 'name'])
             if fp['customer_must_have_vat']:
-                return {'warning': {
-                    'title': _('Missing VAT number:'),
-                    'message': _("You have set the fiscal position '%s' that require the customer to have a VAT number. You should add the VAT number of this customer in OpenERP.") % fp['name']}}
+                return {
+                    'warning': {
+                        'title': _('Missing VAT number:'),
+                        'message': _(
+                            "You have set the fiscal position '%s' "
+                            "that require the customer to have a VAT number. "
+                            "You should add the VAT number of this customer in OpenERP."
+                        ) % fp['name']
+                    }
+                }
         return True

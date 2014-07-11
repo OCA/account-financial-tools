@@ -39,7 +39,7 @@ class account_move(orm.Model):
             'Reversal Entry',
             ondelete='set null',
             readonly=True),
-        }
+    }
 
     def _move_reversal(self, cr, uid, move, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
@@ -69,7 +69,7 @@ class account_move(orm.Model):
 
         if not reversal_period_id:
             reversal_period_id = period_obj.find(
-                    cr, uid, reversal_date, context=period_ctx)[0]
+                cr, uid, reversal_date, context=period_ctx)[0]
         if not reversal_journal_id:
             reversal_journal_id = move.journal_id.id
 
@@ -93,9 +93,10 @@ class account_move(orm.Model):
         reversal_move = self.browse(cr, uid, reversal_move_id, context=context)
         for reversal_move_line in reversal_move.line_id:
             reversal_ml_name = ' '.join(
-                    [x for x
-                        in [move_line_prefix, reversal_move_line.name]
-                        if x])
+                [x for x
+                 in [move_line_prefix, reversal_move_line.name]
+                 if x]
+            )
             move_line_obj.write(
                 cr,
                 uid,
@@ -137,14 +138,15 @@ class account_move(orm.Model):
                 continue  # skip the reversal creation if already done
 
             reversal_move_id = self._move_reversal(
-                    cr, uid,
-                    src_move,
-                    reversal_date,
-                    reversal_period_id=reversal_period_id,
-                    reversal_journal_id=reversal_journal_id,
-                    move_prefix=move_prefix,
-                    move_line_prefix=move_line_prefix,
-                    context=context)
+                cr, uid,
+                src_move,
+                reversal_date,
+                reversal_period_id=reversal_period_id,
+                reversal_journal_id=reversal_journal_id,
+                move_prefix=move_prefix,
+                move_line_prefix=move_line_prefix,
+                context=context
+            )
 
             if reversal_move_id:
                 reversed_move_ids.append(reversal_move_id)

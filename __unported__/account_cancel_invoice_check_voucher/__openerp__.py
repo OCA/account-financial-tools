@@ -18,19 +18,19 @@
 #
 ##############################################################################
 {
-    "name" : "Cancel invoice, check on bank statement",
-    "version" : "1.0",
-    "depends" : ["base",
-                 "account",
-                 "account_voucher",
-                 "account_cancel",
-                 ],
-    "author" : "Camptocamp",
-    "description": """Constraint forbidding to cancel an invoice already imported in bank statement with a voucher.
+    "name": "Cancel invoice, check on bank statement",
+    "version": "1.0",
+    "depends": ["base",
+                "account",
+                "account_voucher",
+                "account_cancel"],
+    "author": "Camptocamp",
+    "description": """
+Constraint forbidding to cancel an invoice already
+imported in bank statement with a voucher.
     """,
     'website': 'http://www.camptocamp.com',
     'date' : [],
     'installable': False,
     'active': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
