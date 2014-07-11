@@ -164,7 +164,7 @@ class UpdateTaxConfig(orm.Model):
             # 6.0 messes up the name change with copy + write, while
             # 6.1 throws name uniqueness constraint violation
             # So jumping some hoops with rewriting the new name
-            ## We will check if we need to dupliace
+            # We will check if we need to dupliace
             cp_base_code_id = False
             cp_ref_base_code_id = False
             cp_tax_code_id = False
@@ -187,7 +187,7 @@ class UpdateTaxConfig(orm.Model):
                                         line.source_tax_id.tax_code_id.id,
                                         {'name': rename_old})
                 if line.source_tax_id.ref_base_code_id:
-                    ## Check if with have the same tax code for base_code_id
+                    # Check if with have the same tax code for base_code_id
                     if line.source_tax_id.ref_base_code_id.id == line.source_tax_id.base_code_id.id:
                         cp_ref_base_code_id = cp_base_code_id
                     else:
