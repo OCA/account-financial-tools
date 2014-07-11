@@ -106,7 +106,7 @@ class wizard_renumber(orm.TransientModel):
                     sequence_id=move.journal_id.sequence_id.id,
                     fiscalyear_id=move.period_id.fiscalyear_id.id
                 )
-                if not sequence_id in sequences_seen:
+                if sequence_id not in sequences_seen:
                     sequence_obj.write(cr, SUPERUSER_ID, [sequence_id],
                                        {'number_next': number_next})
                     sequences_seen.append(sequence_id)
@@ -118,7 +118,7 @@ class wizard_renumber(orm.TransientModel):
                 # Note: We can't just do a
                 # "move_obj.write(cr, uid, [move.id], {'name': new_name})"
                 # cause it might raise a
-                #"You can't do this modification on a confirmed entry"
+                # ``You can't do this modification on a confirmed entry``
                 # exception.
                 cr.execute('UPDATE account_move SET name=%s WHERE id=%s',
                            (new_name, move.id))
