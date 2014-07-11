@@ -18,16 +18,14 @@
 #
 ##############################################################################
 {
-    "name" : "Recompute tax_amount",
-    "version" : "1.0",
-    "depends" : ["base",
-                 "account",
-                 ],
-    "author" : "Camptocamp",
+    "name": "Recompute tax_amount",
+    "version": "1.0",
+    "depends": ["base",
+                "account"],
+    "author": "Camptocamp",
     "description": """Recompute tax_amount to avoid sign problem""",
     'website': 'http://www.camptocamp.com',
-    'data' : [],
+    'data': [],
     'installable': True,
     'active': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

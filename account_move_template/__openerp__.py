@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2011 Agile Business Group sagl (<http://www.agilebg.com>)
 #    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
 #
@@ -27,21 +27,23 @@
 Templates for Journal Entries
 
 User can configure journal entries templates, useful for recurring entries.
-The amount of each template line can be computed (through python code) or kept as user input. If user input, when using the template, user has to fill the amount of every input lines.
+The amount of each template line can be computed (through python code) or kept as user input.
+If user input, when using the template, user has to fill the amount of every input lines.
 The journal entry form allows lo load, through a wizard, the template to use and the amounts to fill.
+
 """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    'depends' : ['account_accountant', 'analytic'],
-    'data' : [
+    'depends': ['account_accountant', 'analytic'],
+    'data': [
         'move_template.xml',
         'wizard/select_template.xml',
         'security/ir.model.access.csv',
-        ],
+    ],
     'test': [
         'test/generate_move.yml',
-        ],
+    ],
     'active': False,
     'installable': True,
 }

@@ -34,13 +34,14 @@ class CreditControlRun(orm.Model):
     _description = """Credit control line generator"""
     _columns = {
         'date': fields.date('Controlling Date', required=True),
-        'policy_ids':
-            fields.many2many('credit.control.policy',
-                             rel="credit_run_policy_rel",
-                             id1='run_id', id2='policy_id',
-                             string='Policies',
-                             readonly=True,
-                             states={'draft': [('readonly', False)]}),
+        'policy_ids': fields.many2many(
+            'credit.control.policy',
+            rel="credit_run_policy_rel",
+            id1='run_id', id2='policy_id',
+            string='Policies',
+            readonly=True,
+            states={'draft': [('readonly', False)]}
+        ),
 
         'report': fields.text('Report', readonly=True),
 
@@ -50,16 +51,17 @@ class CreditControlRun(orm.Model):
                                   required=True,
                                   readonly=True),
 
-        'manual_ids':
-            fields.many2many('account.move.line',
-                             rel="credit_runreject_rel",
-                             string='Lines to handle manually',
-                             help=('If a credit control line has been generated'
-                                   'on a policy and the policy has been changed '
-                                   'in the meantime, it has to be handled '
-                                   'manually'),
-                             readonly=True),
-        }
+        'manual_ids': fields.many2many(
+            'account.move.line',
+            rel="credit_runreject_rel",
+            string='Lines to handle manually',
+            help=('If a credit control line has been generated'
+                  'on a policy and the policy has been changed '
+                  'in the meantime, it has to be handled '
+                  'manually'),
+            readonly=True
+        ),
+    }
 
     def copy_data(self, cr, uid, id, default=None, context=None):
         if default is None:
@@ -138,11 +140,11 @@ class CreditControlRun(orm.Model):
             generated_ids.extend(policy_generated_ids)
             if policy_generated_ids:
                 report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
-                        (policy.name, len(policy_generated_ids))
+                           (policy.name, len(policy_generated_ids))
                 credit_line_ids += policy_generated_ids
             else:
                 report += _("Policy \"%s\" has not generated any Credit Control Lines.\n" %
-                        policy.name)
+                            policy.name)
 
         vals = {'state': 'done',
                 'report': report,
@@ -159,8 +161,8 @@ class CreditControlRun(orm.Model):
         try:
             cr.execute('SELECT id FROM credit_control_run'
                        ' LIMIT 1 FOR UPDATE NOWAIT')
-        except Exception as exc:
-            # in case of exception openerp will do a rollback for us and free the lock
+        except Exception:
+            # In case of exception openerp will do a rollback for us and free the lock
             raise orm.except_orm(_('Error'),
                                  _('A credit control run is already running'
                                    ' in background, please try later.'))

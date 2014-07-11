@@ -25,7 +25,7 @@
     'version': '0.1',
     'license': 'AGPL-3',
     'author': 'Noviat',
-    'category' : 'Generic Modules',
+    'category': 'Generic Modules',
     'description': """
 Journal Items Search Extension
 ==============================
@@ -37,16 +37,16 @@ These fields can be used in combination with the Search window.
 
     """,
     'depends': ['account'],
-    'data' : [
+    'data': [
         'account_view.xml',
     ],
     'js': [
         'static/src/js/account_move_line_search_extension.js',
     ],
-    'qweb' : [
+    'qweb': [
         'static/src/xml/account_move_line_search_extension.xml',
     ],
-    'css':[
+    'css': [
         'static/src/css/account_move_line_search_extension.css',
     ],
     'installable': True,

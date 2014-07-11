@@ -18,7 +18,6 @@
 ##############################################################################
 
 from openerp.osv import orm
-from openerp.tools.translate import _
 
 
 class AccountBankStatement(orm.Model):
@@ -26,9 +25,10 @@ class AccountBankStatement(orm.Model):
 
     def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id,
                                  st_line_number, context=None):
-        move_ids = super(AccountBankStatement,self).create_move_from_st_line(
-                cr, uid, st_line_id, company_currency_id,
-                st_line_number, context)
+        move_ids = super(AccountBankStatement, self).create_move_from_st_line(
+            cr, uid, st_line_id, company_currency_id,
+            st_line_number, context
+        )
         # If a bank statement line is already linked to a voucher
         # we received boolean instead of voucher move ids in move_ids
         bank_st_line_obj = self.pool.get('account.bank.statement.line')

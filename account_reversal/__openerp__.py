@@ -48,7 +48,7 @@ during the Akretion-Camptocamp code sprint of June 2011.
     'data': [
         'account_view.xml',
         'wizard/account_move_reverse_view.xml'
-        ],
+    ],
     'installable': True,
     'active': False,
 }
