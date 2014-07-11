@@ -27,9 +27,7 @@ that can be used later for testing the renumber wizard.
 __author__ = "Borja López Soilán (Pexego)"
 
 import sys
-import re
 import xmlrpclib
-import socket
 import logging
 logger = logging.getLogger("create_lots_of_account_moves")
 
