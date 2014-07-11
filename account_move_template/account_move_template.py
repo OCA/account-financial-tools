@@ -41,7 +41,7 @@ class account_move_template(orm.Model):
     }
 
     def _check_different_journal(self, cr, uid, ids, context=None):
-        #Check that the journal on these lines are different/same in the case of cross journals/single journal
+        # Check that the journal on these lines are different/same in the case of cross journals/single journal
         journal_ids = []
         all_journal_ids = []
         move_template = self.pool.get('account.move.template').browse(cr, uid, ids)[0]
