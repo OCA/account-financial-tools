@@ -36,7 +36,9 @@
 
 import logging
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.osv import fields, osv, orm
 from openerp.tools.translate import _
 
@@ -119,8 +121,8 @@ class Currency_rate_update(osv.Model):
     _name = "currency.rate.update"
     _description = "Currency Rate Update"
     # Dict that represent a cron object
-    nextcall_time = (datetime.today() + timedelta(days=1)).timetuple()
-    nextcall = time.strftime("%Y-%m-%d %H:%M:%S", nextcall_time)
+    nextcall_time = datetime.today() + timedelta(days=1)
+    nextcall = nextcall_time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
     cron = {
         'active': False,
         'priority': 1,
@@ -220,7 +222,7 @@ class Currency_rate_update(osv.Model):
                         main_curr,
                         service.max_delta_days
                     )
-                    rate_name = time.strftime('%Y-%m-%d')
+                    rate_name = time.strftime(DEFAULT_SERVER_DATE_FORMAT)
                     for curr in service.currency_to_update:
                         if curr.name == main_curr:
                             continue
@@ -245,12 +247,12 @@ class Currency_rate_update(osv.Model):
                     # Show the most recent note at the top
                     msg = "%s \n%s currency updated. %s" % \
                           (log_info or '',
-                           datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'),
+                           datetime.strftime(datetime.today(), DEFAULT_SERVER_DATETIME_FORMAT),
                            note)
                     service.write({'note': msg})
                 except Exception as exc:
                     error_msg = "\n%s ERROR : %s %s" %\
-                                (datetime.strftime(datetime.today(), '%Y-%m-%d %H:%M:%S'),
+                                (datetime.strftime(datetime.today(), DEFAULT_SERVER_DATETIME_FORMAT),
                                  repr(exc),
                                  note)
                     _logger.info(repr(exc))
@@ -398,8 +400,8 @@ class Curreny_getter_interface(object):
             )
 
         # We always have a warning when rate_date != today
-        rate_date_str = datetime.strftime(rate_date, '%Y-%m-%d')
-        if rate_date_str != datetime.strftime(datetime.today(), '%Y-%m-%d'):
+        rate_date_str = datetime.strftime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
+        if rate_date_str != datetime.strftime(datetime.today(), DEFAULT_SERVER_DATE_FORMAT):
             msg = "The rate timestamp (%s) is not today's date"
             self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
             _logger.warning(msg, rate_date_str)
@@ -459,7 +461,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         _logger.debug("Admin.ch sent a valid XML file")
         adminch_ns = {'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'}
         rate_date = dom.xpath('/def:wechselkurse/def:datum/text()', namespaces=adminch_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
+        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # we dynamically update supported currencies
         self.supported_currency_array = dom.xpath("/def:wechselkurse/def:devise/@code", namespaces=adminch_ns)
@@ -529,7 +531,7 @@ class ECB_getter(Curreny_getter_interface):
         }
         rate_date = dom.xpath('/gesmes:Envelope/def:Cube/def:Cube/@time',
                               namespaces=ecb_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
+        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath("/gesmes:Envelope/def:Cube/def:Cube/def:Cube/@currency",
@@ -586,7 +588,7 @@ class PL_NBP_getter(Curreny_getter_interface):
         ns = {}  # Cool, there are no namespaces !
         _logger.debug("NBP.pl sent a valid XML file")
         rate_date = dom.xpath('/tabela_kursow/data_publikacji/text()', namespaces=ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
+        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath('/tabela_kursow/pozycja/kod_waluty/text()', namespaces=ns)
