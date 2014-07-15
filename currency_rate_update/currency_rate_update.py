@@ -36,7 +36,7 @@
 
 import logging
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.osv import fields, osv, orm
