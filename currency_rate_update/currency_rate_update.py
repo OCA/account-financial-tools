@@ -119,13 +119,14 @@ class Currency_rate_update(osv.Model):
     _name = "currency.rate.update"
     _description = "Currency Rate Update"
     # Dict that represent a cron object
+    nextcall_time = (datetime.today() + timedelta(days=1)).timetuple()
+    nextcall = time.strftime("%Y-%m-%d %H:%M:%S", nextcall_time)
     cron = {
         'active': False,
         'priority': 1,
         'interval_number': 1,
         'interval_type': 'weeks',
-        'nextcall': time.strftime("%Y-%m-%d %H:%M:%S",
-                                  datetime.today() + timedelta(days=1)).timetuple(),
+        'nextcall': nextcall,
         'numbercall': -1,
         'doall': True,
         'model': 'currency.rate.update',
