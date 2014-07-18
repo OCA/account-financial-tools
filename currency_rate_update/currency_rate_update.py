@@ -247,12 +247,12 @@ class Currency_rate_update(osv.Model):
                     # Show the most recent note at the top
                     msg = "%s \n%s currency updated. %s" % \
                           (log_info or '',
-                           datetime.strftime(datetime.today(), DEFAULT_SERVER_DATETIME_FORMAT),
+                           datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
                            note)
                     service.write({'note': msg})
                 except Exception as exc:
                     error_msg = "\n%s ERROR : %s %s" %\
-                                (datetime.strftime(datetime.today(), DEFAULT_SERVER_DATETIME_FORMAT),
+                                (datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
                                  repr(exc),
                                  note)
                     _logger.info(repr(exc))
@@ -401,7 +401,7 @@ class Curreny_getter_interface(object):
 
         # We always have a warning when rate_date != today
         rate_date_str = datetime.strftime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
-        if rate_date_str != datetime.strftime(datetime.today(), DEFAULT_SERVER_DATE_FORMAT):
+        if rate_date.date() != datetime.today().date():
             msg = "The rate timestamp (%s) is not today's date"
             self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
             _logger.warning(msg, rate_date_str)
