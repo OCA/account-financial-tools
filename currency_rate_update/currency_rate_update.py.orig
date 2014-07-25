@@ -61,16 +61,24 @@ class Currency_rate_update_service(osv.Model):
                 ('Admin_ch_getter', 'Admin.ch'),
                 ('ECB_getter', 'European Central Bank'),
                 ('Yahoo_getter', 'Yahoo Finance '),
+<<<<<<< HEAD
                 # Added for polish rates
                 ('PL_NBP_getter', 'Narodowy Bank Polski'),
                 # Added for mexican rates
                 ('Banxico_getter', 'Banco de México'),
                 # Bank of Canada is using RSS-CB
-                ('TCMB_getter','Turkish Central Bank'),
                 # http://www.cbwiki.net/wiki/index.php/Specification_1.1
                 # This RSS format is used by other national banks
                 #  (Thailand, Malaysia, Mexico...)
                 ('CA_BOC_getter', 'Bank of Canada - noon rates'),
+=======
+                ('PL_NBP_getter', 'Narodowy Bank Polski'),  # Added for polish rates
+                ('Banxico_getter', 'Banco de México'),  # Added for mexican rates
+                # Bank of Canada is using RSS-CB http://www.cbwiki.net/wiki/index.php/Specification_1.1 :
+                # This RSS format is used by other national banks (Thailand, Malaysia, Mexico...)
+                ('CA_BOC_getter', 'Bank of Canada - noon rates'),  # Added for canadian rates
+                ('TCMB_getter','Turkish Central Bank'),
+>>>>>>> Currency Rate update function of ECB_getter used to work with Turkish Central Bank XML service
             ],
             "Webservice to use",
             required=True
