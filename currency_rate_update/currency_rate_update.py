@@ -66,7 +66,7 @@ class Currency_rate_update_service(osv.Model):
                 # Added for mexican rates
                 ('Banxico_getter', 'Banco de México'),
                 # Bank of Canada is using RSS-CB
-                ('TCMB_getter','Turkish Central Bank'),
+                ('TCMB_getter', 'Turkish Central Bank'),
                 # http://www.cbwiki.net/wiki/index.php/Specification_1.1
                 # This RSS format is used by other national banks
                 #  (Thailand, Malaysia, Mexico...)
@@ -813,14 +813,14 @@ class TCMB_getter(Curreny_getter_interface):
 
         """
         res = {}
-        xpath_curr_rate = '/Tarih_Date/Currency[@Kod="%s"]/ForexBuying/text()'%(curr.upper())
+        xpath_curr_rate = '/Tarih_Date/Currency[@Kod="%s"]/ForexBuying/text()' % (curr.upper())
         res['rate_currency'] = float(dom.xpath(xpath_curr_rate, namespaces=ns)[0])
         return res
 
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
-        url='http://www.tcmb.gov.tr/kurlar/today.xml'
-       # Important : as explained on the TCMB web site, the currencies are
+        url = 'http://www.tcmb.gov.tr/kurlar/today.xml'
+        # Important : as explained on the TCMB web site, the currencies are
         # at the beginning of the afternoon ; so, until 3:30 p.m. ISTANBUL time
         # the currency rates are the ones of trading day N-1
         # Turkish tax offices use yesterdays rates for calculations
@@ -858,5 +858,3 @@ class TCMB_getter(Curreny_getter_interface):
             self.updated_currency[curr] = rate
             _logger.debug("TCMB Rate retrieved : 1 %s = %s %s" % (main_currency, rate, curr))
         return self.updated_currency, self.log_info
-
-
