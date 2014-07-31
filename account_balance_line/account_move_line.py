@@ -18,10 +18,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import osv, fields
+from openerp.osv import orm, fields
 
 
-class account_move_line(osv.Model):
+class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
     def _line_balance(self, cr, uid, ids, field, arg, context=None):
