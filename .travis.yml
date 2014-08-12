@@ -11,9 +11,6 @@ env:
   - VERSION="7.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints"
   - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_constraints"
 
-services:
-  - postgresql
-
 virtualenv:
   system_site_packages: true
 
