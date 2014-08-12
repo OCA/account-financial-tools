@@ -1,27 +1,29 @@
+# Config file .travis.yml
+
 language: python
+
 python:
   - "2.7"
 
-virtualenv:
-  system_site_packages: true
-
-before_install:
- - git clone https://github.com/nbessi/maintainer-quality-tools.git $HOME/maintainer-quality-tools -b consolidated
- - git clone https://github.com/OCA/connector $HOME/connector -b 7.0
-
 env:
- - PATH=$HOME/maintainer-quality-tools/travis:$PATH
+  - VERSION="7.0" ODOO_REPO="odoo/odoo" EXCLUDE="account_constraints"
+  - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="account_constraints"
+  - VERSION="7.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints"
+  - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_constraints"
 
 services:
   - postgresql
 
+virtualenv:
+  system_site_packages: true
+
 install:
-    - $HOME/maintainer-quality-tools/travis/travis_install_nightly 7.0
-    - pip install coveralls flake8
+ - git clone https://github.com/dreispt/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools -b add-include-env
+ - git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
 
 script:
-    - travis_run_flake8 steps
-    - travis_run_tests_encapsulated 7.0 account $HOME/connector
+  # - travis_run_flake8
+  - travis_run_tests
 
 after_success:
   coveralls
