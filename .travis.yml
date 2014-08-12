@@ -18,7 +18,7 @@ install:
  - git clone https://github.com/dreispt/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools -b add-include-env
  - git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-
+ - travis_install_nightly ${VERSION}
 script:
   # - travis_run_flake8
   - travis_run_tests
