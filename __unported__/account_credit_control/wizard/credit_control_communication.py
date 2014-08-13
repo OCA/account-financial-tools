@@ -37,17 +37,19 @@ class CreditCommunication(TransientModel):
                                                         'Level', required=True),
 
                 'credit_control_line_ids': fields.many2many('credit.control.line',
-                                                             rel='comm_credit_rel',
-                                                             string='Credit Lines'),
+                                                            rel='comm_credit_rel',
+                                                            string='Credit Lines'),
 
                 'company_id': fields.many2one('res.company', 'Company',
                                               required=True),
 
                 'user_id': fields.many2one('res.users', 'User')}
 
-    _defaults = {'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(
-                                      cr, uid, 'credit.control.policy', context=c),
-                 'user_id': lambda s, cr, uid, c: uid}
+    _defaults = {
+        'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(
+            cr, uid, 'credit.control.policy', context=c),
+        'user_id': lambda s, cr, uid, c: uid
+    }
 
     def get_email(self, cr, uid, com_id, context=None):
         """Return a valid email for customer"""
@@ -97,11 +99,16 @@ class CreditCommunication(TransientModel):
         res = cr.dictfetchall()
         for level_assoc in res:
             data = {}
-            data['credit_control_line_ids'] = \
-                    [(6, 0, self._get_credit_lines(cr, uid, line_ids,
-                                                   level_assoc['partner_id'],
-                                                   level_assoc['policy_level_id'],
-                                                   context=context))]
+            data['credit_control_line_ids'] = [
+                (
+                    6, 0, self._get_credit_lines(
+                        cr, uid, line_ids,
+                        level_assoc['partner_id'],
+                        level_assoc['policy_level_id'],
+                        context=context
+                    )
+                )
+            ]
             data['partner_id'] = level_assoc['partner_id']
             data['current_policy_level'] = level_assoc['policy_level_id']
             comm_id = self.create(cr, uid, data, context=context)
@@ -144,10 +151,11 @@ class CreditCommunication(TransientModel):
                 state = 'email_error'
 
             cr_line_obj.write(
-                    cr, uid, cl_ids,
-                    {'mail_message_id': email_id,
-                     'state': state},
-                    context=context)
+                cr, uid, cl_ids,
+                {'mail_message_id': email_id,
+                 'state': state},
+                context=context
+            )
             att_ids = []
             for att in email_values.get('attachments', []):
                 attach_fname = att[0]

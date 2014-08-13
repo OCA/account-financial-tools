@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2011 Agile Business Group sagl (<http://www.agilebg.com>)
 #    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
 #
@@ -23,6 +23,7 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import re
 
+
 class account_document_template(orm.Model):
 
     _computed_lines = {}
@@ -33,7 +34,7 @@ class account_document_template(orm.Model):
 
     _columns = {
         'name': fields.char('Name', size=64, required=True),
-        }
+    }
 
     def _input_lines(self, cr, uid, template):
         count = 0
@@ -58,13 +59,16 @@ class account_document_template(orm.Model):
         if self._computed_lines[line_number] is not None:
             return self._computed_lines[line_number]
         line = self._get_template_line(self._cr, self._uid, self._current_template_id, line_number)
-        if re.match('L\( *'+str(line_number)+' *\)',line.python_code):
-            raise orm.except_orm(_('Error'),
-                _('Line %s can\'t refer to itself') % str(line_number))
+        if re.match('L\( *' + str(line_number) + ' *\)', line.python_code):
+            raise orm.except_orm(
+                _('Error'),
+                _('Line %s can\'t refer to itself') % str(line_number)
+            )
         try:
             self._computed_lines[line_number] = eval(line.python_code.replace('L', 'self.lines'))
         except KeyError:
-            raise orm.except_orm(_('Error'),
+            raise orm.except_orm(
+                _('Error'),
                 _('Code "%s" refers to non existing line') % line.python_code)
         return self._computed_lines[line_number]
 
@@ -73,8 +77,10 @@ class account_document_template(orm.Model):
         # returns all the lines (included input lines) in the form {line_number: line_amount}
         template = self.browse(cr, uid, template_id)
         if len(input_lines) != self._input_lines(cr, uid, template):
-            raise orm.except_orm(_('Error'),
-                _('Inconsistency between input lines and filled lines for template %s') % template.name)
+            raise orm.except_orm(
+                _('Error'),
+                _('Inconsistency between input lines and filled lines for template %s') % template.name
+            )
         self._current_template_id = template.id
         self._cr = cr
         self._uid = uid
@@ -92,6 +98,7 @@ class account_document_template(orm.Model):
                 return True
         return False
 
+
 class account_document_template_line(orm.Model):
 
     _name = 'account.document.template.line'
@@ -99,6 +106,6 @@ class account_document_template_line(orm.Model):
     _columns = {
         'name': fields.char('Name', size=64, required=True),
         'sequence': fields.integer('Sequence', required=True),
-        'type': fields.selection([('computed', 'Computed'),('input', 'User input')], 'Type', required=True),
-        'python_code':fields.text('Python Code'),
-        }
+        'type': fields.selection([('computed', 'Computed'), ('input', 'User input')], 'Type', required=True),
+        'python_code': fields.text('Python Code'),
+    }

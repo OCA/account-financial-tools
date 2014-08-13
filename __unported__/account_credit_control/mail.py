@@ -20,9 +20,12 @@
 ##############################################################################
 from openerp.osv import orm, fields
 
+
 class Mail(orm.Model):
     _inherit = 'mail.mail'
 
     # use HTML fields instead of text
-    _columns = {'body_html': fields.html('Rich-text Contents',
-                                         help="Rich-text/HTML message"),}
+    _columns = {
+        'body_html': fields.html('Rich-text Contents',
+                                 help="Rich-text/HTML message"),
+    }

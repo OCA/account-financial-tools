@@ -56,10 +56,10 @@ class account_move_line(orm.Model):
         return result
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
-        result = super(account_move_line,self).write(cr, uid, ids, vals,
-                                                     context=context,
-                                                     check=check,
-                                                     update_check=update_check)
+        result = super(account_move_line, self).write(cr, uid, ids, vals,
+                                                      context=context,
+                                                      check=check,
+                                                      update_check=update_check)
         if result:
             if ('debit' in vals) or ('credit' in vals):
                 move_lines = self.read(cr, uid, ids,

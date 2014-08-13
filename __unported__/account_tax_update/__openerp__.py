@@ -41,7 +41,7 @@ default values on accounts and products on demand. Defaults for purchase
 and sales taxes can be set at independent times. During the transition,
 the old taxes can still be selected manually on invoice lines etc.
 
-You can select to also duplicate linked tax code 
+You can select to also duplicate linked tax code
 
 After the transition, the old taxes can be made inactive.
 
