@@ -19,9 +19,9 @@
 #
 ##############################################################################
 {
-    "name" : "Move line search view - disable defaults for period and journal",
-    "version" : "0.1",
-    "author" : "Therp BV",
+    "name": "Move line search view - disable defaults for period and journal",
+    "version": "0.1",
+    "author": "Therp BV",
     "category": 'Accounting & Finance',
     'description': """
 OpenERP 7.0 implements a custom javascript search view for move lines. This
@@ -36,13 +36,7 @@ have to disable these before entering your own search queries.
 
     """,
     'website': 'http://therp.nl',
-    'depends' : [
-        'account',
-        ],
-    'js': [
-        'static/src/js/move_line_search_view.js',
-        ],
-    'images': [
-        'static/src/img/move_line_search_view.png',
-        ],
+    'depends': ['account'],
+    'js': ['static/src/js/move_line_search_view.js'],
+    'images': ['static/src/img/move_line_search_view.png'],
 }

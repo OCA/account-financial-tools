@@ -22,16 +22,19 @@ import time
 
 from openerp.report import report_sxw
 
+
 class CreditSummaryReport(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(CreditSummaryReport, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'time': time,
-            'cr':cr,
+            'cr': cr,
             'uid': uid,
         })
 
-report_sxw.report_sxw('report.credit_control_summary',
-                      'credit.control.communication',
-                      'addons/account_credit_control/report/credit_control_summary.html.mako',
-                      parser=CreditSummaryReport)
+report_sxw.report_sxw(
+    'report.credit_control_summary',
+    'credit.control.communication',
+    'addons/account_credit_control/report/credit_control_summary.html.mako',
+    parser=CreditSummaryReport
+)

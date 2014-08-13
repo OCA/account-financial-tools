@@ -35,16 +35,18 @@ class CreditControlMarker(orm.TransientModel):
         if (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
             res = self._filter_line_ids(
-                    cr, uid,
-                    context['active_ids'],
-                    context=context)
+                cr, uid,
+                context['active_ids'],
+                context=context
+            )
         return res
 
     _columns = {
         'name': fields.selection([('ignored', 'Ignored'),
                                   ('to_be_sent', 'Ready To Send'),
                                   ('sent', 'Done')],
-                                  'Mark as', required=True),
+                                 'Mark as',
+                                 required=True),
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
@@ -74,7 +76,7 @@ class CreditControlMarker(orm.TransientModel):
         """Write state of selected credit lines to the one in entry
         done credit line will be ignored"""
         assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-                "wiz_id: only one id expected"
+            "wiz_id: only one id expected"
         if isinstance(wiz_id, list):
             wiz_id = wiz_id[0]
         form = self.browse(cr, uid, wiz_id, context)
@@ -86,15 +88,16 @@ class CreditControlMarker(orm.TransientModel):
 
         filtered_ids = self._filter_line_ids(cr, uid, line_ids, context)
         if not filtered_ids:
-            raise except_osv(_('Information'),
-                             _('No lines will be changed. All the selected lines are already done.'))
+            raise orm.except_orm(
+                _('Information'),
+                _('No lines will be changed. All the selected lines are already done.')
+            )
 
         self._mark_lines(cr, uid, filtered_ids, form.name, context)
 
-        return  {'domain': unicode([('id', 'in', filtered_ids)]),
-                 'view_type': 'form',
-                 'view_mode': 'tree,form',
-                 'view_id': False,
-                 'res_model': 'credit.control.line',
-                 'type': 'ir.actions.act_window'}
-
+        return {'domain': unicode([('id', 'in', filtered_ids)]),
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'view_id': False,
+                'res_model': 'credit.control.line',
+                'type': 'ir.actions.act_window'}

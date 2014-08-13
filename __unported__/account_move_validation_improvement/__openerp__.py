@@ -17,10 +17,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 {
-    "name" : "Wizard to validate multiple moves",
-    "version" : "1.0",
-    "depends" : ["base", "account", "account_constraints"],
-    "author" : "Camptocamp",
+    "name": "Wizard to validate multiple moves",
+    "version": "1.0",
+    "depends": ["base", "account", "account_constraints"],
+    "author": "Camptocamp",
     'license': 'AGPL-3',
     "description": """
 Re-defining a base wizard (validate all moves in a period for a journal),
@@ -32,4 +32,3 @@ base one defined in addons/account/wizard.
     'installable': False,
     'active': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
