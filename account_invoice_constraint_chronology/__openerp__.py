@@ -35,13 +35,12 @@
     "website": "http://www.acsone.eu",
     "images": [],
     "category": "Accounting",
-    "depends": [
-                "account"],
+    "depends": ["account"],
     "description": """
 Account Invoice Constraint Chronology
 =====================================
 
-This module help ensuring the chronology of invoice numbers.
+This module helps ensuring the chronology of invoice numbers.
 
 It prevents the validation of invoices when:
 * there are draft invoices with an anterior date
