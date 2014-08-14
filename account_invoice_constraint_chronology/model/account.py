@@ -27,19 +27,16 @@
 #
 #
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class account_jounrnal(orm.Model):
-    _inherit = "account.journal"
-    _columns = {
-        'check_chronology': fields.boolean('Check Chronology'),
-    }
-    _defaults = {
-        'check_chronology': False,
-    }
+class account_jounrnal(models.Model):
+    _inherit = ['account.journal']
 
-    def on_change_type(self, cr, uid, ids, type_journal, context=None):
+    check_chronology = fields.Boolean(string='Check Chronology', default=False)
+
+    @api.multi
+    def on_change_type(self, type_journal, context=None):
         value = {}
         if type_journal not in ['sale', 'purchase', 'sale_refund',
                                 'purchase_refund']:
