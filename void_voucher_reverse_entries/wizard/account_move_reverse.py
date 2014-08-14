@@ -21,6 +21,7 @@
 ##############################################################################
 
 from openerp.osv import orm
+from openerp.tools.safe_eval import safe_eval
 
 
 class AccountMoveReverse(orm.TransientModel):
@@ -28,13 +29,34 @@ class AccountMoveReverse(orm.TransientModel):
     _inherit = 'account.move.reverse'
 
     def action_reverse(self, cr, uid, ids, context=None):
+        account_move_obj = self.pool['account.move']
         if context is None:
             context = {}
 
         void_voucher_ids = context.pop("void_voucher_ids", [])
         res = super(AccountMoveReverse, self).action_reverse(cr, uid, ids,
                                                              context=context)
+        domain = safe_eval(res["domain"])
+        move_ids = domain[0][2]
+        if move_ids:
+            # Make sure we POST those lines
+            account_move_obj.write(cr, uid, move_ids, {'state':'posted'})
+
         if void_voucher_ids:
+            reconcile_ids = set()
+            voucher_obj = self.pool["account.voucher"]
+            for voucher in voucher_obj.browse(cr, uid, void_voucher_ids,
+                                              context=context):
+                if voucher.move_ids:
+                    for move in voucher.move_ids:
+                        if move.reconcile_id:
+                            reconcile_ids.add(move.reconcile_id.id)
+
+
+                if reconcile_ids:
+                    self.pool["account.move.reconcile"].unlink(
+                        cr, uid, list(reconcile_ids), context=context)
+
             self.pool.get("account.voucher").write(cr, uid, void_voucher_ids,
                                                    {'state': 'void'},
                                                    context=context)
