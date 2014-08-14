@@ -4,7 +4,7 @@
     <record model="ir.ui.view" id="view_voucher_form">
       <field name="name">account.voucher.form</field>
       <field name="model">account.voucher</field>
-      <field name="inherit_id" ref="account_voucher.view_voucher_form" />
+      <field name="inherit_id" ref="account_voucher.view_vendor_payment_form" />
       <field name="arch" type="xml">
         <xpath expr="//header/field[@name='state']" position="before">
           <button name="action_void_reverse" string="Void check" states="posted" type="object" />

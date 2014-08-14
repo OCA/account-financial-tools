@@ -54,6 +54,7 @@ Contributors
 * Marc Cassuto (marc.cassuto@savoirfairelinux.com)
 """,
     'depends': [
+        'account_check_writing',
         'account_reversal',
         'account_voucher',
     ],
