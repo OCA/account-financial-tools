@@ -36,13 +36,3 @@ msgstr "Könyvelési tételsorok"
 #: view:account.move.line:account_balance_line.account_move_line_balance_custom
 msgid "Total Balance"
 msgstr ""
-
-#. module: account_balance_line
-#: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
-msgid "{'group_by': 'account_id', 'invisible_balance': False}"
-msgstr ""
-
-#. module: account_balance_line
-#: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
-msgid "{'invisible_balance': False}"
-msgstr ""
