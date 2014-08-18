@@ -41,7 +41,8 @@ class account_invoice(models.Model):
             if inv.journal_id.check_chronology:
                 invoices = \
                     self.search([('state', 'not in',
-                                  ['open', 'paid', 'cancel', 'proforma']),
+                                  ['open', 'paid', 'cancel', 'proforma',
+                                   'proforma2']),
                                  ('date_invoice', '!=', False),
                                  ('date_invoice', '<', inv.date_invoice),
                                  ('journal_id', '=', inv.journal_id.id)])
