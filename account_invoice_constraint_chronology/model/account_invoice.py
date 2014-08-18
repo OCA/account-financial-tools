@@ -27,8 +27,11 @@
 #
 #
 
-from openerp import models, api
+from openerp import models, api, fields
 from openerp.tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from datetime import datetime
+from openerp import exceptions
 
 
 class account_invoice(models.Model):
@@ -41,29 +44,40 @@ class account_invoice(models.Model):
             if inv.journal_id.check_chronology:
                 invoices = \
                     self.search([('state', 'not in',
-                                  ['open', 'paid', 'cancel', 'proforma']),
+                                  ['open', 'paid', 'cancel', 'proforma',
+                                   'proforma2']),
                                  ('date_invoice', '!=', False),
                                  ('date_invoice', '<', inv.date_invoice),
-                                 ('journal_id', '=', inv.journal_id.id)])
+                                 ('journal_id', '=', inv.journal_id.id)],
+                                limit=1)
                 if len(invoices) > 0:
-                    raise models.except_orm(_('Error !'),
-                                            _("Chronology Error!"
-                                              " Please confirm older draft"
-                                              " invoices before %s and"
-                                              " try again.") %
-                                            inv.date_invoice)
+                    date_invoice_format = datetime\
+                        .strptime(inv.date_invoice,
+                                  DEFAULT_SERVER_DATE_FORMAT)
+                    date_invoice_tz = fields\
+                        .Date.context_today(self, date_invoice_format)
+                    raise exceptions.Warning(_("Chronology Error."
+                                               " Please confirm older draft"
+                                               " invoices before %s and"
+                                               " try again.") %
+                                             date_invoice_tz)
 
                 if inv.internal_number is False:
                     invoices = self.search([('state', 'in', ['open', 'paid']),
                                             ('date_invoice', '>',
                                              inv.date_invoice),
                                             ('journal_id', '=',
-                                             inv.journal_id.id)])
+                                             inv.journal_id.id)],
+                                           limit=1)
                     if len(invoices) > 0:
-                        raise models.except_orm(_('Error !'),
-                                                _("Chronology Error! There"
-                                                  " exist at least one invoice"
-                                                  " with a date posterior"
-                                                  " to %s.") %
-                                                inv.date_invoice)
+                        date_invoice_format = datetime\
+                            .strptime(inv.date_invoice,
+                                      DEFAULT_SERVER_DATE_FORMAT)
+                        date_invoice_tz = fields\
+                            .Date.context_today(self, date_invoice_format)
+                        raise exceptions.Warning(_("Chronology Error. There"
+                                                   " exist at least one"
+                                                   " invoice with a date"
+                                                   " posterior to %s.") %
+                                                 date_invoice_tz)
         return res
