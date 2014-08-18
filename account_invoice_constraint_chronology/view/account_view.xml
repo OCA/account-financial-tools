@@ -9,9 +9,6 @@
                 <field name="entry_posted" position="after">
                     <field name="check_chronology" attrs="{'readonly': [('type', 'not in', ['sale', 'purchase', 'sale_refund', 'purchase_refund'])]}"/>
                 </field>
-                <xpath expr="//field[@name='type']" position="attributes">
-                    <attribute name="on_change">on_change_type(type)</attribute>
-                </xpath>
              </field>
         </record>
     </data>
