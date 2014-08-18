@@ -30,15 +30,15 @@
 from openerp import models, fields, api
 
 
-class account_jounrnal(models.Model):
+class account_journal(models.Model):
     _inherit = ['account.journal']
 
     check_chronology = fields.Boolean(string='Check Chronology', default=False)
 
-    @api.multi
-    def on_change_type(self, type_journal, context=None):
-        value = {}
-        if type_journal not in ['sale', 'purchase', 'sale_refund',
-                                'purchase_refund']:
-            value.update({'check_chronology': False})
-        return {'value': value}
+    @api.one
+    @api.onchange('type')
+    def on_change_type(self):
+        if self.type not in ['sale', 'purchase', 'sale_refund',
+                                     'purchase_refund']:
+            self.check_chronology = False
+        return True
