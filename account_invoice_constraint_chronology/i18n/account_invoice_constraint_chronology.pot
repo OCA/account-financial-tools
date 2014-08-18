@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_constraint_chronology
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-20 14:51+0000\n"
+"PO-Revision-Date: 2014-08-20 14:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_constraint_chronology
+#: field:account.journal,check_chronology:0
+msgid "Check Chronology"
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
+#, python-format
+msgid "Chronology Error. Please confirm older draft invoices before %s and try again."
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:76
+#, python-format
+msgid "Chronology Error. There exist at least one invoice with a date posterior to %s."
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
+msgid "Journal"
+msgstr ""
+
