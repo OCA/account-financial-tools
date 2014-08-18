@@ -31,6 +31,7 @@ import openerp.tests.common as common
 from openerp import workflow
 from openerp.osv import orm
 from datetime import datetime, timedelta
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 DB = common.DB
 ADMIN_USER_ID = common.ADMIN_USER_ID
@@ -99,9 +100,9 @@ class TestAccountConstraintChronology(common.TransactionCase):
         journal_id = get_journal_check(self, True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
-        date = yesterday.strftime('%Y-%m-%d')
+        date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         create_simple_invoice(self, journal_id, date)
-        date = today.strftime('%Y-%m-%d')
+        date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal_id, date)
         self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
@@ -111,11 +112,11 @@ class TestAccountConstraintChronology(common.TransactionCase):
         journal_id = get_journal_check(self, True)
         today = datetime.now()
         tomorrow = today + timedelta(days=1)
-        date = tomorrow.strftime('%Y-%m-%d')
+        date = tomorrow.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice = create_simple_invoice(self, journal_id, date)
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
-        date = today.strftime('%Y-%m-%d')
+        date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal_id, date)
         self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
@@ -125,7 +126,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         journal_id = get_journal_check(self, True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
-        date = yesterday.strftime('%Y-%m-%d')
+        date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         create_simple_invoice(self, journal_id, date)
         invoice_2 = create_simple_invoice(self, journal_id, False)
         self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
