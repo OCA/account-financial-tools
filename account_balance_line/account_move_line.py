@@ -18,25 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+
+from openerp import models, fields, api
+import openerp.addons.decimal_precision as dp
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    def _line_balance(self, cr, uid, ids, field, arg, context=None):
-        res = {}
-        move_lines = self.read(cr, uid, ids,
-                               ['debit', 'credit'],
-                               context=context)
+    @api.multi
+    @api.depends('credit', 'debit')
+    def _line_balance(self):
+        for line in self:
+            line.line_balance = line.debit - line.credit
 
-        for line in move_lines:
-            res[line['id']] = line['debit'] - line['credit']
-        return res
-
-    _columns = {
-        'line_balance': fields.function(
-            _line_balance, method=True,
-            string='Balance',
-            store=True),
-    }
+    line_balance = fields.Float(
+        compute='_line_balance', string='Balance', store=True,
+        digits=dp.get_precision('Account'))
