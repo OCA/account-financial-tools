@@ -42,7 +42,7 @@ def get_simple_product_id(self):
                                                    self.uid,
                                                    {'name': 'product_test_01',
                                                     'lst_price': 2000.00,
-                                                    }, context={})
+                                                    }, context=self.context)
 
 
 def get_journal_check(self, value):
@@ -50,13 +50,13 @@ def get_journal_check(self, value):
     journal_id = self.registry('account.journal').copy(self.cr,
                                                        self.uid,
                                                        sale_journal_id,
-                                                       {},
-                                                       context={})
+                                                       self.context,
+                                                       context=self.context)
     self.registry('account.journal').write(self.cr,
                                            self.uid,
                                            [journal_id],
                                            {'check_chronology': value},
-                                           context={})
+                                           context=self.context)
     return journal_id
 
 
@@ -95,6 +95,8 @@ class TestAccountConstraintChronology(common.TransactionCase):
 
     def setUp(self):
         super(TestAccountConstraintChronology, self).setUp()
+        self.context = self.registry("res.users").context_get(self.cr,
+                                                              self.uid)
 
     def test_invoice_draft(self):
         journal_id = get_journal_check(self, True)
