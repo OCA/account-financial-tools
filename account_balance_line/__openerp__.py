@@ -18,33 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {'name': 'Balance on lines',
  'summary': 'Display balance totals in move line view',
- 'version': '8.0.1.1.0',
+ 'version': '8.0.1.1.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainter': 'Camptocamp',
  'category': 'Accounting',
  'depends': ['account'],
- 'description': """
-Balance for a line
-==================
-
-Add a balance total for grouped lines in move line view.
-
-Balance field will only be shown when move lines are grouped by account
-or filtered by account.
-
-Contributors
-------------
-
-* Vincent revaville <vincent.renaville@camptocamp.com>
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-""",
  'website': 'http://www.camptocamp.com',
  'data': ['account_move_line_view.xml'],
  'tests': [],
  'installable': True,
- 'auto_install': False,
  'license': 'AGPL-3',
- 'application': False,
  }
