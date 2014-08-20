@@ -31,6 +31,7 @@ from openerp import models, api, fields
 from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from datetime import datetime
+from openerp import exceptions
 
 
 class account_invoice(models.Model):
@@ -54,12 +55,11 @@ class account_invoice(models.Model):
                                   DEFAULT_SERVER_DATE_FORMAT)
                     date_invoice_tz = fields\
                         .Date.context_today(self, date_invoice_format)
-                    raise models.except_orm(_('Error !'),
-                                            _("Chronology Error!"
-                                              " Please confirm older draft"
-                                              " invoices before %s and"
-                                              " try again.") %
-                                            date_invoice_tz)
+                    raise exceptions.Warning(_("Chronology Error!"
+                                               " Please confirm older draft"
+                                               " invoices before %s and"
+                                               " try again.") %
+                                             date_invoice_tz)
 
                 if inv.internal_number is False:
                     invoices = self.search([('state', 'in', ['open', 'paid']),
@@ -73,10 +73,9 @@ class account_invoice(models.Model):
                                       DEFAULT_SERVER_DATE_FORMAT)
                         date_invoice_tz = fields\
                             .Date.context_today(self, date_invoice_format)
-                        raise models.except_orm(_('Error !'),
-                                                _("Chronology Error! There"
-                                                  " exist at least one invoice"
-                                                  " with a date posterior"
-                                                  " to %s.") %
-                                                date_invoice_tz)
+                        raise exceptions.Warning(_("Chronology Error! There"
+                                                   " exist at least one"
+                                                   " invoice with a date"
+                                                   " posterior to %s.") %
+                                                 date_invoice_tz)
         return res
