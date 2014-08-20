@@ -55,7 +55,7 @@ class account_invoice(models.Model):
                                   DEFAULT_SERVER_DATE_FORMAT)
                     date_invoice_tz = fields\
                         .Date.context_today(self, date_invoice_format)
-                    raise exceptions.Warning(_("Chronology Error!"
+                    raise exceptions.Warning(_("Chronology Error."
                                                " Please confirm older draft"
                                                " invoices before %s and"
                                                " try again.") %
@@ -73,7 +73,7 @@ class account_invoice(models.Model):
                                       DEFAULT_SERVER_DATE_FORMAT)
                         date_invoice_tz = fields\
                             .Date.context_today(self, date_invoice_format)
-                        raise exceptions.Warning(_("Chronology Error! There"
+                        raise exceptions.Warning(_("Chronology Error. There"
                                                    " exist at least one"
                                                    " invoice with a date"
                                                    " posterior to %s.") %
