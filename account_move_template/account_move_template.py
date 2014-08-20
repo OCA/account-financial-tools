@@ -28,23 +28,40 @@ class account_move_template(orm.Model):
     _name = 'account.move.template'
 
     _columns = {
-        'company_id': fields.many2one('res.company', 'Company', required=True, change_default=True),
-        'template_line_ids': fields.one2many('account.move.template.line', 'template_id', 'Template Lines'),
+        'company_id': fields.many2one(
+            'res.company',
+            'Company',
+            required=True,
+            change_default=True
+        ),
+        'template_line_ids': fields.one2many(
+            'account.move.template.line',
+            'template_id',
+            'Template Lines'
+        ),
         'cross_journals': fields.boolean('Cross-Journals'),
-        'transitory_acc_id': fields.many2one('account.account', 'Transitory account', required=False),
-    }
-
-    _defaults = {
-        'company_id': lambda self, cr, uid, c: self.pool.get('res.company')._company_default_get(
-            cr, uid, 'account.move.template', context=c
+        'transitory_acc_id': fields.many2one(
+            'account.account',
+            'Transitory account',
+            required=False
         ),
     }
 
+    def _get_default(self, cr, uid, context=None):
+        self.pool.get('res.company')._company_default_get(
+            cr, uid, 'account.move.template', context=context
+        )
+    _defaults = {
+        'company_id': _get_default
+    }
+
     def _check_different_journal(self, cr, uid, ids, context=None):
-        # Check that the journal on these lines are different/same in the case of cross journals/single journal
+        # Check that the journal on these lines are different/same in the case
+        # of cross journals/single journal
         journal_ids = []
         all_journal_ids = []
-        move_template = self.pool.get('account.move.template').browse(cr, uid, ids)[0]
+        move_template = self.pool.get('account.move.template').browse(
+            cr, uid, ids)[0]
         if not move_template.template_line_ids:
             return True
         for template_line in move_template.template_line_ids:
@@ -59,7 +76,8 @@ class account_move_template(orm.Model):
     _constraints = [
         (_check_different_journal,
          'If the template is "cross-journals", the Journals must be different,'
-         'if the template does not "cross-journals" the Journals must be the same!',
+         'if the template does not "cross-journals" '
+         'the Journals must be the same!',
          ['journal_id'])
     ]
 
@@ -69,16 +87,28 @@ class account_move_template_line(orm.Model):
     _inherit = 'account.document.template.line'
 
     _columns = {
-        'journal_id': fields.many2one('account.journal', 'Journal', required=True),
-        'account_id': fields.many2one('account.account', 'Account',
-                                      required=True, ondelete="cascade"),
+        'journal_id': fields.many2one(
+            'account.journal',
+            'Journal',
+            required=True
+        ),
+        'account_id': fields.many2one(
+            'account.account',
+            'Account',
+            required=True,
+            ondelete="cascade"
+        ),
         'move_line_type': fields.selection(
             [('cr', 'Credit'),
              ('dr', 'Debit')],
             'Move Line Type',
             required=True
         ),
-        'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account', ondelete="cascade"),
+        'analytic_account_id': fields.many2one(
+            'account.analytic.account',
+            'Analytic Account',
+            ondelete="cascade"
+        ),
         'template_id': fields.many2one('account.move.template', 'Template'),
         'account_tax_id': fields.many2one('account.tax', 'Tax'),
     }
