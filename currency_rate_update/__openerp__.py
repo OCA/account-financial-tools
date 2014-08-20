@@ -3,8 +3,9 @@
 #
 #    Copyright (c) 2008 Camtocamp SA
 #    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
-#    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
-#    Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#    European Central Bank and Polish National Bank by Grzegorz Grzelak
+#    Ported to OpenERP 7.0 by Lorenzo Battistini
+#                                     <lorenzo.battistini@agilebg.com>
 #    Banxico implemented by Agustin Cruz openpyme.mx
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -35,7 +36,8 @@ The module is able to use 4 different sources:
    Updated daily, source in CHF.
 
 2. European Central Bank (ported by Grzegorz Grzelak)
-   The reference rates are based on the regular daily concertation procedure between
+   The reference rates are based on the regular
+   daily concertation procedure between
    central banks within and outside the European System of Central Banks,
    which normally takes place at 2.15 p.m. (14:15) ECB time. Source in EUR.
    http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
@@ -43,10 +45,12 @@ The module is able to use 4 different sources:
 3. Yahoo Finance
    Updated daily
 
-4. Polish National Bank (Narodowy Bank Polski) (contribution by Grzegorz Grzelak)
+4. Polish National Bank (Narodowy Bank Polski)
+   (contribution by Grzegorz Grzelak)
    Takes official rates from www.nbp.pl. Adds rate table symbol in log.
-   You should check when rates should apply to bookkeeping. If next day you should
-   change the update hour in schedule settings because in OpenERP they apply from
+   You should check when rates should apply to bookkeeping.
+   If next day you should change the update hour in schedule settings
+   because in OpenERP they apply from
    date of update (date - no hours).
 
 5. Banxico for USD & MXN (created by Agustín Cruz)
@@ -60,7 +64,8 @@ The update can be set under the company form.
 You can set for each services which currency you want to update.
 The logs of the update are visible under the service note.
 You can active or deactivate the update.
-The module uses internal ir_cron feature from OpenERP, so the job is launched once
+The module uses internal ir_cron feature from OpenERP,
+so the job is launched once
 the server starts if the 'first execute date' is before the current day.
 The module supports multi-company currency in two ways:
 
@@ -71,7 +76,8 @@ The module supports multi-company currency in two ways:
 
 A function field lets you know your currency configuration.
 
-If in multi-company mode, the base currency will be the first company's currency
+If in multi-company mode, the base currency will
+be the first company's currency
 found in database.
 
 Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
