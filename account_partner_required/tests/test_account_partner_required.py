@@ -54,12 +54,16 @@ class test_account_partner_required(common.TransactionCase):
                                    'account_id': self.ref('account.a_sale')})
         move_line_id = self.move_line_obj.create(
             self.cr, self.uid,
-            {'move_id': move_id,
-             'name': '/',
-             'debit': amount,
-             'credit': 0,
-             'account_id': self.ref('account.a_recv'),
-             'partner_id': self.ref('base.res_partner_1') if with_partner else False})
+            {
+                'move_id': move_id,
+                'name': '/',
+                'debit': amount,
+                'credit': 0,
+                'account_id': self.ref('account.a_recv'),
+                'partner_id': self.ref('base.res_partner_1') if
+                with_partner else False
+            }
+        )
         return move_line_id
 
     def _set_partner_policy(self, policy, aref='account.a_recv'):
@@ -116,6 +120,12 @@ class test_account_partner_required(common.TransactionCase):
             self.move_line_obj.write(self.cr, self.uid, line_id,
                                      {'account_id': self.ref('account.a_pay')})
         # change account to a_pay with policy always with partner -> ok
-        self.move_line_obj.write(self.cr, self.uid, line_id,
-                                 {'account_id': self.ref('account.a_pay'),
-                                  'partner_id': self.ref('base.res_partner_1')})
+        self.move_line_obj.write(
+            self.cr,
+            self.uid,
+            line_id,
+            {
+                'account_id': self.ref('account.a_pay'),
+                'partner_id': self.ref('base.res_partner_1')
+            }
+        )
