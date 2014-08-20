@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
-#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L. (http://www.pexego.es)
+#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #    Copyright (c) 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
 #                       Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>
 #    $Id$

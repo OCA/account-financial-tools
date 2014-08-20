@@ -42,7 +42,8 @@ class wizard_renumber(orm.TransientModel):
                                        help='Fiscal periods to renumber',
                                        string="Periods", ondelete='null'),
         'number_next': fields.integer('First Number', required=True,
-                                      help="Journal sequences will start counting on this number"),
+                                      help="Journal sequences will start "
+                                           "counting on this number"),
         'state': fields.selection([('init', 'Initial'),
                                    ('renumber', 'Renumbering')], readonly=True)
     }
@@ -112,9 +113,11 @@ class wizard_renumber(orm.TransientModel):
                     sequences_seen.append(sequence_id)
                 # Generate (using our own get_id) and write the new move number
                 c = {'fiscalyear_id': move.period_id.fiscalyear_id.id}
-                new_name = sequence_obj.next_by_id(cr, uid,
-                                                   move.journal_id.sequence_id.id,
-                                                   context=c)
+                new_name = sequence_obj.next_by_id(
+                    cr, uid,
+                    move.journal_id.sequence_id.id,
+                    context=c
+                )
                 # Note: We can't just do a
                 # "move_obj.write(cr, uid, [move.id], {'name': new_name})"
                 # cause it might raise a

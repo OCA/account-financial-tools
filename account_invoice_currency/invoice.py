@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2004-2011
-#        Pexego Sistemas Informáticos. (http://pexego.es) All Rights Reserved
-#        Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+# Copyright (C) 2004-2011
+#     Pexego Sistemas Informáticos. (http://pexego.es) All Rights Reserved
+#     Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
@@ -63,7 +63,8 @@ class account_invoice(orm.Model):
                     'cc_amount_total': 0.0,
                 }
 
-                # It could be computed only in open or paid invoices with a generated account move
+                # It could be computed only in open or paid invoices with a
+                # generated account move
                 if invoice.move_id:
                     # Accounts to compute amount_untaxed
                     line_account = []
@@ -74,20 +75,28 @@ class account_invoice(orm.Model):
                     # Accounts to compute amount_tax
                     tax_account = []
                     for line in invoice.tax_line:
-                        if line.account_id.id not in tax_account and line.amount != 0:
+                        if (line.account_id.id not in tax_account and
+                                line.amount != 0):
                             tax_account.append(line.account_id.id)
 
-                    # The company currency amounts are the debit-credit amounts in the account moves
+                    # The company currency amounts are the debit-credit
+                    # amounts in the account moves
                     for line in invoice.move_id.line_id:
                         if line.account_id.id in line_account:
-                            res[invoice.id]['cc_amount_untaxed'] += line.debit - line.credit
+                            amt = line.debit - line.credit
+                            res[invoice.id]['cc_amount_untaxed'] += amt
                         if line.account_id.id in tax_account:
-                            res[invoice.id]['cc_amount_tax'] += line.debit - line.credit
+                            amt = line.debit - line.credit
+                            res[invoice.id]['cc_amount_tax'] += amt
                     if invoice.type in ('out_invoice', 'in_refund'):
-                        res[invoice.id]['cc_amount_untaxed'] = -res[invoice.id]['cc_amount_untaxed']
-                        res[invoice.id]['cc_amount_tax'] = -res[invoice.id]['cc_amount_tax']
-                    res[invoice.id]['cc_amount_total'] = (res[invoice.id]['cc_amount_tax'] +
-                                                          res[invoice.id]['cc_amount_untaxed'])
+                        res[invoice.id]['cc_amount_untaxed'] = \
+                            -res[invoice.id]['cc_amount_untaxed']
+                        res[invoice.id]['cc_amount_tax'] = \
+                            -res[invoice.id]['cc_amount_tax']
+                    res[invoice.id]['cc_amount_total'] = (
+                        res[invoice.id]['cc_amount_tax'] +
+                        res[invoice.id]['cc_amount_untaxed']
+                    )
         return res
 
     _columns = {
@@ -97,15 +106,20 @@ class account_invoice(orm.Model):
             digits_compute=dp.get_precision('Account'),
             string='Company Cur. Untaxed',
             help="Invoice untaxed amount in the company currency"
-                 "(useful when invoice currency is different from company currency).",
+                 "(useful when invoice currency is different "
+                 "from company currency).",
             store={
-                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line',
-                                                                           'currency_id',
-                                                                           'move_id'], 20),
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids,
+                                    ['invoice_line',
+                                     'currency_id',
+                                     'move_id'],
+                                    20),
                 'account.invoice.tax': (_get_invoice_tax2, None, 20),
-                'account.invoice.line': (_get_invoice_line2, ['price_unit',
-                                                              'invoice_line_tax_id',
-                                                              'quantity', 'discount'], 20),
+                'account.invoice.line': (_get_invoice_line2,
+                                         ['price_unit',
+                                          'invoice_line_tax_id',
+                                          'quantity', 'discount'],
+                                         20),
             },
             multi='cc_all'
         ),
@@ -116,15 +130,20 @@ class account_invoice(orm.Model):
             digits_compute=dp.get_precision('Account'),
             string='Company Cur. Tax',
             help="Invoice tax amount in the company currency "
-                 "(useful when invoice currency is different from company currency).",
+                 "(useful when invoice currency is different "
+                 "from company currency).",
             store={
-                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line',
-                                                                           'currency_id',
-                                                                           'move_id'], 20),
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids,
+                                    ['invoice_line',
+                                     'currency_id',
+                                     'move_id'],
+                                    20),
                 'account.invoice.tax': (_get_invoice_tax2, None, 20),
-                'account.invoice.line': (_get_invoice_line2, ['price_unit',
-                                                              'invoice_line_tax_id',
-                                                              'quantity', 'discount'], 20),
+                'account.invoice.line': (_get_invoice_line2,
+                                         ['price_unit',
+                                          'invoice_line_tax_id',
+                                          'quantity', 'discount'],
+                                         20),
             },
             multi='cc_all'
         ),
@@ -135,15 +154,20 @@ class account_invoice(orm.Model):
             digits_compute=dp.get_precision('Account'),
             string='Company Cur. Total',
             help="Invoice total amount in the company currency "
-            "(useful when invoice currency is different from company currency).",
+                 "(useful when invoice currency is different from "
+                 "company currency).",
             store={
-                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line',
-                                                                           'currency_id',
-                                                                           'move_id'], 20),
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids,
+                                    ['invoice_line',
+                                     'currency_id',
+                                     'move_id'],
+                                    20),
                 'account.invoice.tax': (_get_invoice_tax2, None, 20),
-                'account.invoice.line': (_get_invoice_line2, ['price_unit',
-                                                              'invoice_line_tax_id',
-                                                              'quantity', 'discount'], 20),
+                'account.invoice.line': (_get_invoice_line2,
+                                         ['price_unit',
+                                          'invoice_line_tax_id',
+                                          'quantity', 'discount'],
+                                         20),
             },
             multi='cc_all'),
     }

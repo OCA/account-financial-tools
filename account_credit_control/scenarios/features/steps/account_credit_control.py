@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# flake8: noqa
 import time
 from behave import given, when
 from support import model

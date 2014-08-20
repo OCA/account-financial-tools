@@ -18,13 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name' : 'Balance on lines',
+{'name': 'Balance on lines',
  'summary': 'Display balance totals in move line view',
- 'version' : '1.1',
- 'author' : 'Camptocamp',
- 'maintainter' : 'Camptocamp',
+ 'version': '1.1',
+ 'author': 'Camptocamp',
+ 'maintainter': 'Camptocamp',
  'category': 'Accounting',
- 'depends' : ['account'],
+ 'depends': ['account'],
  'description': """
 Balance for a line
 ==================
@@ -41,12 +41,10 @@ Contributors
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 """,
  'website': 'http://www.camptocamp.com',
- 'data': [
-      'account_move_line_view.xml',
- ],
+ 'data': ['account_move_line_view.xml'],
  'tests': [],
  'installable': True,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False,
-}
+ }

@@ -3,17 +3,20 @@
 #
 #    Copyright (c) 2009 Camptocamp SA
 #    @source JBA and AWST inpiration
-#    @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com), Joel Grand-Guillaume
+#    @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com),
+#                 Joel Grand-Guillaume
 #    Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
 #     - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
 #     - rates given by ECB webservice is now correct even when main_cur <> EUR
-#     - rates given by PL_NBP webservice is now correct even when main_cur <> PLN
-#     - if company_currency <> CHF, you can now update CHF via Admin.ch webservice
+#     - rates given by PL_NBP webs. is now correct even when main_cur <> PLN
+#     - if company_currency <> CHF, you can now update CHF via Admin.ch
 #       (same for EUR with ECB webservice and PLN with NBP webservice)
 #     For more details, see Launchpad bug #645263
-#     - mecanism to check if rates given by the webservice are "fresh" enough to be
-#       written in OpenERP ('max_delta_days' parameter for each currency update service)
-#        Ported to OpenERP 7.0 by Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#     - mecanism to check if rates given by the webservice are "fresh"
+#       enough to be written in OpenERP
+#       ('max_delta_days' parameter for each currency update service)
+#    Ported to OpenERP 7.0 by Lorenzo Battistini
+#                             <lorenzo.battistini@agilebg.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -58,11 +61,15 @@ class Currency_rate_update_service(osv.Model):
                 ('Admin_ch_getter', 'Admin.ch'),
                 ('ECB_getter', 'European Central Bank'),
                 ('Yahoo_getter', 'Yahoo Finance '),
-                ('PL_NBP_getter', 'Narodowy Bank Polski'),  # Added for polish rates
-                ('Banxico_getter', 'Banco de México'),  # Added for mexican rates
-                # Bank of Canada is using RSS-CB http://www.cbwiki.net/wiki/index.php/Specification_1.1 :
-                # This RSS format is used by other national banks (Thailand, Malaysia, Mexico...)
-                ('CA_BOC_getter', 'Bank of Canada - noon rates'),  # Added for canadian rates
+                # Added for polish rates
+                ('PL_NBP_getter', 'Narodowy Bank Polski'),
+                # Added for mexican rates
+                ('Banxico_getter', 'Banco de México'),
+                # Bank of Canada is using RSS-CB
+                # http://www.cbwiki.net/wiki/index.php/Specification_1.1
+                # This RSS format is used by other national banks
+                #  (Thailand, Malaysia, Mexico...)
+                ('CA_BOC_getter', 'Bank of Canada - noon rates'),
             ],
             "Webservice to use",
             required=True
@@ -162,7 +169,9 @@ class Currency_rate_update(osv.Model):
             cron_id = int(cron_id[0])
         except Exception:
             _logger.info('warning cron not found one will be created')
-            pass  # Ignore if the cron is missing cause we are going to create it in db
+            # Ignore if the cron is missing cause we are
+            # going to create it in db
+            pass
         if not cron_id:
             self.cron['name'] = _('Currency Rate Update')
             cron_id = cron_obj.create(cr, uid, self.cron, context)
@@ -216,7 +225,8 @@ class Currency_rate_update(osv.Model):
                     # We initalize the class that will handle the request
                     # and return a dict of rate
                     getter = factory.register(service.service)
-                    curr_to_fetch = map(lambda x: x.name, service.currency_to_update)
+                    curr_to_fetch = map(lambda x: x.name,
+                                        service.currency_to_update)
                     res, log_info = getter.get_updated_currency(
                         curr_to_fetch,
                         main_curr,
@@ -245,16 +255,22 @@ class Currency_rate_update(osv.Model):
                             )
 
                     # Show the most recent note at the top
-                    msg = "%s \n%s currency updated. %s" % \
-                          (log_info or '',
-                           datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
-                           note)
+                    msg = "%s \n%s currency updated. %s" % (
+                        log_info or '',
+                        datetime.today().strftime(
+                            DEFAULT_SERVER_DATETIME_FORMAT
+                        ),
+                        note
+                    )
                     service.write({'note': msg})
                 except Exception as exc:
-                    error_msg = "\n%s ERROR : %s %s" %\
-                                (datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
-                                 repr(exc),
-                                 note)
+                    error_msg = "\n%s ERROR : %s %s" % (
+                        datetime.today().strftime(
+                            DEFAULT_SERVER_DATETIME_FORMAT
+                        ),
+                        repr(exc),
+                        note
+                    )
                     _logger.info(repr(exc))
                     service.write({'note': error_msg})
 
@@ -324,40 +340,31 @@ class Curreny_getter_interface(object):
     log_info = " "
 
     supported_currency_array = [
-        'AFN', 'ALL', 'DZD', 'USD', 'USD', 'USD', 'EUR', 'AOA', 'XCD', 'XCD', 'ARS',
-        'AMD', 'AWG', 'AUD', 'EUR', 'AZN', 'EUR', 'BSD', 'BHD', 'EUR', 'BDT', 'BBD',
-        'XCD', 'BYR', 'EUR', 'BZD', 'XOF', 'BMD', 'BTN', 'INR', 'BOB', 'ANG', 'BAM',
-        'BWP', 'NOK', 'BRL', 'GBP', 'USD', 'USD', 'BND', 'BGN', 'XOF', 'MMK', 'BIF',
-        'XOF', 'USD', 'KHR', 'XAF', 'CAD', 'EUR', 'CVE', 'KYD', 'XAF', 'XAF', 'CLP',
-        'CNY', 'AUD', 'AUD', 'COP', 'XAF', 'KMF', 'XPF', 'XAF', 'CDF', 'NZD', 'CRC',
-        'HRK', 'CUP', 'ANG', 'EUR', 'CYP', 'CZK', 'DKK', 'DJF', 'XCD', 'DOP', 'EUR',
-        'XCD', 'IDR', 'USD', 'EGP', 'EUR', 'SVC', 'USD', 'GBP', 'XAF', 'ETB', 'ERN',
-        'EEK', 'ETB', 'EUR', 'FKP', 'DKK', 'FJD', 'EUR', 'EUR', 'EUR', 'XPF', 'XPF',
-        'EUR', 'XPF', 'XAF', 'GMD', 'GEL', 'EUR', 'GHS', 'GIP', 'XAU', 'GBP', 'EUR',
-        'DKK', 'XCD', 'XCD', 'EUR', 'USD', 'GTQ', 'GGP', 'GNF', 'XOF', 'GYD', 'HTG',
-        'USD', 'AUD', 'BAM', 'EUR', 'EUR', 'HNL', 'HKD', 'HUF', 'ISK', 'INR', 'IDR',
-        'XDR', 'IRR', 'IQD', 'EUR', 'IMP', 'ILS', 'EUR', 'JMD', 'NOK', 'JPY', 'JEP',
-        'JOD', 'KZT', 'AUD', 'KES', 'AUD', 'KPW', 'KRW', 'KWD', 'KGS', 'LAK', 'LVL',
-        'LBP', 'LSL', 'ZAR', 'LRD', 'LYD', 'CHF', 'LTL', 'EUR', 'MOP', 'MKD', 'MGA',
-        'EUR', 'MWK', 'MYR', 'MVR', 'XOF', 'EUR', 'MTL', 'FKP', 'USD', 'USD', 'EUR',
-        'MRO', 'MUR', 'EUR', 'AUD', 'MXN', 'USD', 'USD', 'EUR', 'MDL', 'EUR', 'MNT',
-        'EUR', 'XCD', 'MAD', 'MZN', 'MMK', 'NAD', 'ZAR', 'AUD', 'NPR', 'ANG', 'EUR',
-        'XCD', 'XPF', 'NZD', 'NIO', 'XOF', 'NGN', 'NZD', 'AUD', 'USD', 'NOK', 'OMR',
-        'PKR', 'USD', 'XPD', 'PAB', 'USD', 'PGK', 'PYG', 'PEN', 'PHP', 'NZD', 'XPT',
-        'PLN', 'EUR', 'STD', 'USD', 'QAR', 'EUR', 'RON', 'RUB', 'RWF', 'STD', 'ANG',
-        'MAD', 'XCD', 'SHP', 'XCD', 'XCD', 'EUR', 'XCD', 'EUR', 'USD', 'WST', 'EUR',
-        'SAR', 'SPL', 'XOF', 'RSD', 'SCR', 'SLL', 'XAG', 'SGD', 'ANG', 'ANG', 'EUR',
-        'EUR', 'SBD', 'SOS', 'ZAR', 'GBP', 'GBP', 'EUR', 'XDR', 'LKR', 'SDG', 'SRD',
-        'NOK', 'SZL', 'SEK', 'CHF', 'SYP', 'TWD', 'RUB', 'TJS', 'TZS', 'THB', 'IDR',
-        'TTD', 'XOF', 'NZD', 'TOP', 'TTD', 'TND', 'TRY', 'TMM', 'USD', 'TVD', 'UGX',
-        'UAH', 'AED', 'GBP', 'USD', 'USD', 'UYU', 'USD', 'UZS', 'VUV', 'EUR', 'VEB',
-        'VEF', 'VND', 'USD', 'USD', 'USD', 'XPF', 'MAD', 'YER', 'ZMK', 'ZWD'
+        'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN',
+        'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL',
+        'BSD', 'BTN', 'BWP', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLP', 'CNY',
+        'COP', 'CRC', 'CUP', 'CVE', 'CYP', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD',
+        'EEK', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP',
+        'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG',
+        'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD',
+        'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD',
+        'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD',
+        'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MTL', 'MUR', 'MVR',
+        'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD',
+        'OMR', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON',
+        'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SDG', 'SEK', 'SGD', 'SHP',
+        'SLL', 'SOS', 'SPL', 'SRD', 'STD', 'SVC', 'SYP', 'SZL', 'THB', 'TJS',
+        'TMM', 'TND', 'TOP', 'TRY', 'TTD', 'TVD', 'TWD', 'TZS', 'UAH', 'UGX',
+        'USD', 'UYU', 'UZS', 'VEB', 'VEF', 'VND', 'VUV', 'WST', 'XAF', 'XAG',
+        'XAU', 'XCD', 'XDR', 'XOF', 'XPD', 'XPF', 'XPT', 'YER', 'ZAR', 'ZMK',
+        'ZWD'
     ]
 
     # Updated currency this arry will contain the final result
     updated_currency = {}
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """Interface method that will retrieve the currency
            This function has to be reinplemented in child
         """
@@ -400,23 +407,26 @@ class Curreny_getter_interface(object):
             )
 
         # We always have a warning when rate_date != today
-        rate_date_str = datetime.strftime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
+        rate_date_str = datetime.strftime(rate_date,
+                                          DEFAULT_SERVER_DATE_FORMAT)
         if rate_date.date() != datetime.today().date():
             msg = "The rate timestamp (%s) is not today's date"
             self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
             _logger.warning(msg, rate_date_str)
 
 
-# Yahoo ########################################################################
+# Yahoo #######################################################################
 class Yahoo_getter(Curreny_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
     """
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of curreny_getter_interface"""
         self.validate_cur(main_currency)
-        url = 'http://download.finance.yahoo.com/d/quotes.txt?s="%s"=X&f=sl1c1abg'
+        url = ('http://download.finance.yahoo.com/d/'
+               'quotes.txt?s="%s"=X&f=sl1c1abg')
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         for curr in currency_array:
@@ -441,15 +451,23 @@ class Admin_ch_getter(Curreny_getter_interface):
     def rate_retrieve(self, dom, ns, curr):
         """Parse a dom node to retrieve currencies data"""
         res = {}
-        xpath_rate_currency = "/def:wechselkurse/def:devise[@code='%s']/def:kurs/text()" % (curr.lower())
-        xpath_rate_ref = "/def:wechselkurse/def:devise[@code='%s']/def:waehrung/text()" % (curr.lower())
-        res['rate_currency'] = float(dom.xpath(xpath_rate_currency, namespaces=ns)[0])
-        res['rate_ref'] = float((dom.xpath(xpath_rate_ref, namespaces=ns)[0]).split(' ')[0])
+        xpath_rate_currency = ("/def:wechselkurse/def:devise[@code='%s']/"
+                               "def:kurs/text()") % (curr.lower())
+        xpath_rate_ref = ("/def:wechselkurse/def:devise[@code='%s']/"
+                          "def:waehrung/text()") % (curr.lower())
+        res['rate_currency'] = float(
+            dom.xpath(xpath_rate_currency, namespaces=ns)[0]
+        )
+        res['rate_ref'] = float(
+            (dom.xpath(xpath_rate_ref, namespaces=ns)[0]).split(' ')[0]
+        )
         return res
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """Implementation of abstract method of Curreny_getter_interface"""
-        url = 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse/wechselkurse.php'
+        url = ('http://www.afd.admin.ch/publicdb/newdb/'
+               'mwst_kurse/wechselkurse.php')
         # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
@@ -459,21 +477,36 @@ class Admin_ch_getter(Curreny_getter_interface):
         rawfile = self.get_url(url)
         dom = etree.fromstring(rawfile)
         _logger.debug("Admin.ch sent a valid XML file")
-        adminch_ns = {'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'}
-        rate_date = dom.xpath('/def:wechselkurse/def:datum/text()', namespaces=adminch_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
+        adminch_ns = {
+            'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'
+        }
+        rate_date = dom.xpath(
+            '/def:wechselkurse/def:datum/text()',
+            namespaces=adminch_ns
+        )
+        rate_date = rate_date[0]
+        rate_date_datetime = datetime.strptime(rate_date,
+                                               DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # we dynamically update supported currencies
-        self.supported_currency_array = dom.xpath("/def:wechselkurse/def:devise/@code", namespaces=adminch_ns)
-        self.supported_currency_array = [x.upper() for x in self.supported_currency_array]
+        self.supported_currency_array = dom.xpath(
+            "/def:wechselkurse/def:devise/@code",
+            namespaces=adminch_ns
+        )
+        self.supported_currency_array = [x.upper() for x
+                                         in self.supported_currency_array]
         self.supported_currency_array.append('CHF')
 
-        _logger.debug("Supported currencies = " + str(self.supported_currency_array))
+        _logger.debug(
+            "Supported currencies = " + str(self.supported_currency_array)
+        )
         self.validate_cur(main_currency)
         if main_currency != 'CHF':
             main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate CHF
-            main_rate = main_curr_data['rate_currency'] / main_curr_data['rate_ref']
+            rate_curr = main_curr_data['rate_currency']
+            rate_ref = main_curr_data['rate_ref']
+            main_rate = rate_curr / rate_ref
         for curr in currency_array:
             self.validate_cur(curr)
             if curr == 'CHF':
@@ -484,7 +517,8 @@ class Admin_ch_getter(Curreny_getter_interface):
                 if main_currency == 'CHF':
                     rate = curr_data['rate_ref'] / curr_data['rate_currency']
                 else:
-                    rate = main_rate * curr_data['rate_ref'] / curr_data['rate_currency']
+                    rate = (main_rate * curr_data['rate_ref'] /
+                            curr_data['rate_currency'])
             self.updated_currency[curr] = rate
             _logger.debug(
                 "Rate retrieved : 1 %s = %s %s" % (main_currency, rate, curr)
@@ -504,17 +538,21 @@ class ECB_getter(Curreny_getter_interface):
 
         """
         res = {}
-        xpath_curr_rate = "/gesmes:Envelope/def:Cube/def:Cube/def:Cube[@currency='%s']/@rate" % (curr.upper())
-        res['rate_currency'] = float(dom.xpath(xpath_curr_rate, namespaces=ns)[0])
+        xpath_curr_rate = ("/gesmes:Envelope/def:Cube/def:Cube/"
+                           "def:Cube[@currency='%s']/@rate") % (curr.upper())
+        res['rate_currency'] = float(
+            dom.xpath(xpath_curr_rate, namespaces=ns)[0]
+        )
         return res
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
         url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml'
         # Important : as explained on the ECB web site, the currencies are
         # at the beginning of the afternoon ; so, until 3 p.m. Paris time
         # the currency rates are the ones of trading day N-1
-        # see http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
+        # http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
 
         # We do not want to update the main currency
         if main_currency in currency_array:
@@ -531,13 +569,17 @@ class ECB_getter(Curreny_getter_interface):
         }
         rate_date = dom.xpath('/gesmes:Envelope/def:Cube/def:Cube/@time',
                               namespaces=ecb_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
+        rate_date_datetime = datetime.strptime(rate_date,
+                                               DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # We dynamically update supported currencies
-        self.supported_currency_array = dom.xpath("/gesmes:Envelope/def:Cube/def:Cube/def:Cube/@currency",
-                                                  namespaces=ecb_ns)
+        self.supported_currency_array = dom.xpath(
+            "/gesmes:Envelope/def:Cube/def:Cube/def:Cube/@currency",
+            namespaces=ecb_ns
+        )
         self.supported_currency_array.append('EUR')
-        _logger.debug("Supported currencies = %s " % self.supported_currency_array)
+        _logger.debug("Supported currencies = %s " %
+                      self.supported_currency_array)
         self.validate_cur(main_currency)
         if main_currency != 'EUR':
             main_curr_data = self.rate_retrieve(dom, ecb_ns, main_currency)
@@ -550,9 +592,12 @@ class ECB_getter(Curreny_getter_interface):
                 if main_currency == 'EUR':
                     rate = curr_data['rate_currency']
                 else:
-                    rate = curr_data['rate_currency'] / main_curr_data['rate_currency']
+                    rate = (curr_data['rate_currency'] /
+                            main_curr_data['rate_currency'])
             self.updated_currency[curr] = rate
-            _logger.debug("Rate retrieved : 1 %s = %s %s" % (main_currency, rate, curr))
+            _logger.debug(
+                "Rate retrieved : 1 %s = %s %s" % (main_currency, rate, curr)
+            )
         return self.updated_currency, self.log_info
 
 
@@ -567,13 +612,18 @@ class PL_NBP_getter(Curreny_getter_interface):
         """ Parse a dom node to retrieve
         currencies data"""
         res = {}
-        xpath_rate_currency = "/tabela_kursow/pozycja[kod_waluty='%s']/kurs_sredni/text()" % (curr.upper())
-        xpath_rate_ref = "/tabela_kursow/pozycja[kod_waluty='%s']/przelicznik/text()" % (curr.upper())
-        res['rate_currency'] = float(dom.xpath(xpath_rate_currency, namespaces=ns)[0].replace(',', '.'))
+        xpath_rate_currency = ("/tabela_kursow/pozycja[kod_waluty='%s']/"
+                               "kurs_sredni/text()") % (curr.upper())
+        xpath_rate_ref = ("/tabela_kursow/pozycja[kod_waluty='%s']/"
+                          "przelicznik/text()") % (curr.upper())
+        res['rate_currency'] = float(
+            dom.xpath(xpath_rate_currency, namespaces=ns)[0].replace(',', '.')
+        )
         res['rate_ref'] = float(dom.xpath(xpath_rate_ref, namespaces=ns)[0])
         return res
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
         # LastA.xml is always the most recent one
         url = 'http://www.nbp.pl/kursy/xml/LastA.xml'
@@ -587,18 +637,25 @@ class PL_NBP_getter(Curreny_getter_interface):
         dom = etree.fromstring(rawfile)
         ns = {}  # Cool, there are no namespaces !
         _logger.debug("NBP.pl sent a valid XML file")
-        rate_date = dom.xpath('/tabela_kursow/data_publikacji/text()', namespaces=ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT)
+        rate_date = dom.xpath('/tabela_kursow/data_publikacji/text()',
+                              namespaces=ns)[0]
+        rate_date_datetime = datetime.strptime(rate_date,
+                                               DEFAULT_SERVER_DATE_FORMAT)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # We dynamically update supported currencies
-        self.supported_currency_array = dom.xpath('/tabela_kursow/pozycja/kod_waluty/text()', namespaces=ns)
+        self.supported_currency_array = dom.xpath(
+            '/tabela_kursow/pozycja/kod_waluty/text()',
+            namespaces=ns
+        )
         self.supported_currency_array.append('PLN')
-        _logger.debug("Supported currencies = %s" % self.supported_currency_array)
+        _logger.debug("Supported currencies = %s" %
+                      self.supported_currency_array)
         self.validate_cur(main_currency)
         if main_currency != 'PLN':
             main_curr_data = self.rate_retrieve(dom, ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate PLN
-            main_rate = main_curr_data['rate_currency'] / main_curr_data['rate_ref']
+            main_rate = (main_curr_data['rate_currency'] /
+                         main_curr_data['rate_ref'])
         for curr in currency_array:
             self.validate_cur(curr)
             if curr == 'PLN':
@@ -609,9 +666,11 @@ class PL_NBP_getter(Curreny_getter_interface):
                 if main_currency == 'PLN':
                     rate = curr_data['rate_ref'] / curr_data['rate_currency']
                 else:
-                    rate = main_rate * curr_data['rate_ref'] / curr_data['rate_currency']
+                    rate = (main_rate * curr_data['rate_ref'] /
+                            curr_data['rate_currency'])
             self.updated_currency[curr] = rate
-            _logger.debug("Rate retrieved : %s = %s %s" % (main_currency, rate, curr))
+            _logger.debug("Rate retrieved : %s = %s %s" %
+                          (main_currency, rate, curr))
         return self.updated_currency, self.log_info
 
 
@@ -626,7 +685,8 @@ class Banxico_getter(Curreny_getter_interface):
         """ Get currency exchange from Banxico.xml and proccess it
         TODO: Get correct data from xml instead of process string
         """
-        url = 'http://www.banxico.org.mx/rsscb/rss?BMXC_canal=pagos&BMXC_idioma=es'
+        url = ('http://www.banxico.org.mx/rsscb/rss?'
+               'BMXC_canal=pagos&BMXC_idioma=es')
 
         from xml.dom.minidom import parse
         from StringIO import StringIO
@@ -643,7 +703,8 @@ class Banxico_getter(Curreny_getter_interface):
 
         return float(rate)
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days=1):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days=1):
         """implementation of abstract method of Curreny_getter_interface"""
         logger = logging.getLogger(__name__)
         # we do not want to update the main currency
@@ -665,7 +726,8 @@ class Banxico_getter(Curreny_getter_interface):
                 continue
 
             self.updated_currency[curr] = rate
-            logger.debug("Rate retrieved : %s = %s %s" % (main_currency, rate, curr))
+            logger.debug("Rate retrieved : %s = %s %s" %
+                         (main_currency, rate, curr))
 
 
 # CA BOC #####   Bank of Canada   #############################################
@@ -675,11 +737,13 @@ class CA_BOC_getter(Curreny_getter_interface):
 
     """
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
 
         # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
-        url = 'http://www.bankofcanada.ca/stats/assets/rates_rss/noon/en_%s.xml'
+        url = ('http://www.bankofcanada.ca/stats/assets/'
+               'rates_rss/noon/en_%s.xml')
         # closing rates are available as well (please note there are only 12
         # currencies reported):
         # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
@@ -721,11 +785,15 @@ class CA_BOC_getter(Curreny_getter_interface):
                     .astimezone(pytz.utc).replace(tzinfo=None)
                 self.check_rate_date(rate_date_datetime, max_delta_days)
                 self.updated_currency[curr] = rate
-                _logger.debug("BOC Rate retrieved : %s = %s %s" % (main_currency, rate, curr))
+                _logger.debug("BOC Rate retrieved : %s = %s %s" %
+                              (main_currency, rate, curr))
             else:
-                _logger.error("Exchange data format error for Bank of Canada -\
-                    %s. Please check provider data format and/or source code." % curr)
-                raise osv.except_osv('Error !', 'Exchange data format error for\
-                    Bank of Canada - %s !' % str(curr))
+                _logger.error(
+                    "Exchange data format error for Bank of Canada -"
+                    "%s. Please check provider data format "
+                    "and/or source code." % curr)
+                raise osv.except_osv('Error !',
+                                     'Exchange data format error for\
+                                     Bank of Canada - %s !' % str(curr))
 
         return self.updated_currency, self.log_info

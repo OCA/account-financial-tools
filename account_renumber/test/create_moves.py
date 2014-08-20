@@ -89,7 +89,9 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
                                                  'name': 'Test_l2'})
                                             ],
                                             'period_id': 1,
-                                            'date': '2009-01-%s' % ((i % 31) or 1),
+                                            'date': '2009-01-%s' % (
+                                                (i % 31) or 1
+                                            ),
                                             'partner_id': False,
                                             'to_check': 0
                                         },
@@ -97,7 +99,8 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
 
         # Validate the move
         object_facade.execute(dbname, user_id, passwd,
-                              u'account.move', 'button_validate', [move_id], {})
+                              u'account.move', 'button_validate',
+                              [move_id], {})
 
 # ------------------------------------------------------------------------
 # ------------------------------------------------------------------------
@@ -105,7 +108,8 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:
-        logger.info(u"Usage: %s <dbname> <user> <password> <howmany>" % sys.argv[0])
+        logger.info(u"Usage: %s <dbname> <user> <password> <howmany>" %
+                    sys.argv[0])
     else:
         create_lots_of_account_moves(
             sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]))
