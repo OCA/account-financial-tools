@@ -86,7 +86,8 @@ class wizard_select_template(orm.TransientModel):
             return self.load_template(cr, uid, ids)
         wizard.write({'state': 'template_selected'})
 
-        view_rec = model_data_obj.get_object_reference(cr, uid, 'account_move_template', 'wizard_select_template')
+        view_rec = model_data_obj.get_object_reference(
+            cr, uid, 'account_move_template', 'wizard_select_template')
         view_id = view_rec and view_rec[1] or False
 
         return {
@@ -106,7 +107,10 @@ class wizard_select_template(orm.TransientModel):
 
         wizard = self.browse(cr, uid, ids, context=context)[0]
         if not template_obj.check_zero_lines(cr, uid, wizard):
-            raise orm.except_orm(_('Error !'), _('At least one amount has to be non-zero!'))
+            raise orm.except_orm(
+                _('Error !'),
+                _('At least one amount has to be non-zero!')
+            )
         input_lines = {}
 
         for template_line in wizard.line_ids:
@@ -114,10 +118,14 @@ class wizard_select_template(orm.TransientModel):
 
         period_id = account_period_obj.find(cr, uid, context=context)
         if not period_id:
-            raise orm.except_orm(_('No period found !'), _('Unable to find a valid period !'))
+            raise orm.except_orm(
+                _('No period found !'),
+                _('Unable to find a valid period !')
+            )
         period_id = period_id[0]
 
-        computed_lines = template_obj.compute_lines(cr, uid, wizard.template_id.id, input_lines)
+        computed_lines = template_obj.compute_lines(
+            cr, uid, wizard.template_id.id, input_lines)
 
         moves = {}
         for line in wizard.template_id.template_line_ids:
@@ -171,14 +179,16 @@ class wizard_select_template(orm.TransientModel):
         })
         return move_id
 
-    def _make_move_line(self, cr, uid, line, computed_lines, move_id, period_id, partner_id):
+    def _make_move_line(self, cr, uid, line, computed_lines,
+                        move_id, period_id, partner_id):
         account_move_line_obj = self.pool.get('account.move.line')
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
                 raise orm.except_orm(
                     _('No Analytic Journal !'),
-                    _("You have to dfine an analytic journal on the '%s' journal!")
+                    _("You have to define an analytic "
+                      "journal on the '%s' journal!")
                     % (line.journal_id.name,)
                 )
 
@@ -212,7 +222,8 @@ class wizard_select_template(orm.TransientModel):
             if not line.journal_id.analytic_journal_id:
                 raise orm.except_orm(
                     _('No Analytic Journal !'),
-                    _("You have to define an analytic journal on the '%s' journal!")
+                    _("You have to define an analytic journal "
+                      "on the '%s' journal!")
                     % (line.template_id.journal_id.name,)
                 )
             analytic_account_id = line.analytic_account_id.id
@@ -238,10 +249,16 @@ class wizard_select_template_line(orm.TransientModel):
     _description = 'Template Lines'
     _name = "wizard.select.move.template.line"
     _columns = {
-        'template_id': fields.many2one('wizard.select.move.template', 'Template'),
+        'template_id': fields.many2one('wizard.select.move.template',
+                                       'Template'),
         'sequence': fields.integer('Number', required=True),
         'name': fields.char('Name', size=64, required=True, readonly=True),
-        'account_id': fields.many2one('account.account', 'Account', required=True, readonly=True),
+        'account_id': fields.many2one(
+            'account.account',
+            'Account',
+            required=True,
+            readonly=True
+        ),
         'move_line_type': fields.selection(
             [('cr', 'Credit'),
              ('dr', 'Debit')],
