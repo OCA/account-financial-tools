@@ -18,9 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 {
-    "name": "Move in draft state by default 8.0",
+    "name": "Move in draft state by default",
     "version": "1.0",
-    "depends": ["base", "account", "account_constraints_80"],
+    "depends": ["base", "account", "account_constraints"],
     "author": "Camptocamp",
     'license': 'AGPL-3',
     "description": """

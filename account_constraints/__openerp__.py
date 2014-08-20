@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {
-    'name': 'Account Constraints 8.0',
+    'name': 'Account Constraints',
     'version': '1.1',
     'depends': ['account'],
     'author': 'Camptocamp',
