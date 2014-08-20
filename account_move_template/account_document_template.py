@@ -51,21 +51,27 @@ class account_document_template(orm.Model):
 
     def _generate_empty_lines(self, cr, uid, template_id):
         lines = {}
-        for template_line in self.browse(cr, uid, template_id).template_line_ids:
+        t_lines = self.browse(cr, uid, template_id).template_line_ids
+        for template_line in t_lines:
             lines[template_line.sequence] = None
         return lines
 
     def lines(self, line_number):
         if self._computed_lines[line_number] is not None:
             return self._computed_lines[line_number]
-        line = self._get_template_line(self._cr, self._uid, self._current_template_id, line_number)
+        line = self._get_template_line(self._cr,
+                                       self._uid,
+                                       self._current_template_id,
+                                       line_number)
         if re.match('L\( *' + str(line_number) + ' *\)', line.python_code):
             raise orm.except_orm(
                 _('Error'),
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
         try:
-            self._computed_lines[line_number] = eval(line.python_code.replace('L', 'self.lines'))
+            self._computed_lines[line_number] = eval(
+                line.python_code.replace('L', 'self.lines')
+            )
         except KeyError:
             raise orm.except_orm(
                 _('Error'),
@@ -74,12 +80,14 @@ class account_document_template(orm.Model):
 
     def compute_lines(self, cr, uid, template_id, input_lines):
         # input_lines: dictionary in the form {line_number: line_amount}
-        # returns all the lines (included input lines) in the form {line_number: line_amount}
+        # returns all the lines (included input lines)
+        # in the form {line_number: line_amount}
         template = self.browse(cr, uid, template_id)
         if len(input_lines) != self._input_lines(cr, uid, template):
             raise orm.except_orm(
                 _('Error'),
-                _('Inconsistency between input lines and filled lines for template %s') % template.name
+                _('Inconsistency between input lines and '
+                  'filled lines for template %s') % template.name
             )
         self._current_template_id = template.id
         self._cr = cr
@@ -106,6 +114,10 @@ class account_document_template_line(orm.Model):
     _columns = {
         'name': fields.char('Name', size=64, required=True),
         'sequence': fields.integer('Sequence', required=True),
-        'type': fields.selection([('computed', 'Computed'), ('input', 'User input')], 'Type', required=True),
+        'type': fields.selection(
+            [('computed', 'Computed'), ('input', 'User input')],
+            'Type',
+            required=True
+        ),
         'python_code': fields.text('Python Code'),
     }
