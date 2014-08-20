@@ -29,7 +29,7 @@
 
 import openerp.tests.common as common
 from openerp import workflow
-from openerp.osv import orm
+from openerp import exceptions
 from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
@@ -106,7 +106,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         create_simple_invoice(self, journal_id, date)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal_id, date)
-        self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
+        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
 
@@ -120,7 +120,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
                               'invoice_open', self.cr)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal_id, date)
-        self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
+        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
 
@@ -131,6 +131,6 @@ class TestAccountConstraintChronology(common.TransactionCase):
         date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         create_simple_invoice(self, journal_id, date)
         invoice_2 = create_simple_invoice(self, journal_id, False)
-        self.assertRaises(orm.except_orm, workflow.trg_validate, self.uid,
+        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
