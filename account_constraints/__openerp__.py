@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {
-    'name': 'Account Constraints',
+    'name': 'Account Constraints 8.0',
     'version': '1.1',
     'depends': ['account'],
     'author': 'Camptocamp',
@@ -51,8 +51,8 @@ Summary of constraints are:
   invoice or a bank statement, no matter what the status of the move
   (draft, validated or posted). This is useful in a standard context but
   even more if you're using `account_default_draft_move`. This way you ensure
-  that the user cannot make mistakes even in draft state, he must pass
-  through the parent object to make his modification.
+  that the user cannot make mistakes even in draft state, he must pass through
+  the parent object to make his modification.
 
   Contributors
   * Stéphane Bidoul <stephane.bidoul@acsone.eu>
@@ -62,5 +62,5 @@ Summary of constraints are:
     'data': [
         'view/account_journal.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

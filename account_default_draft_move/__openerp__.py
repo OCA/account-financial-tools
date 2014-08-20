@@ -18,9 +18,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 {
-    "name": "Move in draft state by default",
+    "name": "Move in draft state by default 8.0",
     "version": "1.0",
-    "depends": ["base", "account", "account_constraints"],
+    "depends": ["base", "account", "account_constraints_80"],
     "author": "Camptocamp",
     'license': 'AGPL-3',
     "description": """
@@ -51,7 +51,7 @@ need to make a refund).
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',
               'invoice_view.xml'],
-    'installable': False,
-    'active': False,
+    'installable': True,
+    'active': True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
