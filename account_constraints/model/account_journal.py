@@ -16,5 +16,15 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
-from . import model
+##
+from openerp import models, fields
+
+
+class AccountJournal(models.Model):
+    _inherit = 'account.journal'
+    allow_date_fy = fields.Boolean(string='Check Date in Fiscal Year',
+                                   help='If set to True then do not '
+                                        'accept the entry if '
+                                        'the entry date is not into '
+                                        'the fiscal year dates',
+                                   default=True)
