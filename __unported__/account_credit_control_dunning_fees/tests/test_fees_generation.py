@@ -51,7 +51,9 @@ class FixedFeesTester(test_common.TransactionCase):
         self.usd_level.dunning_fixed_amount = 5.0
         self.usd_level.dunning_currency_id = self.usd
         self.usd_level.dunning_type = 'fixed'
-        self.dunning_model = self.registry('credit.control.dunning.fees.computer')
+        self.dunning_model = self.registry(
+            'credit.control.dunning.fees.computer'
+        )
 
     def test_type_getter(self):
         """Test that correct compute function is returned for "fixed" type"""

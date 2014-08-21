@@ -67,5 +67,4 @@ Support of fees price list
  'installable': False,
  'auto_install': False,
  'license': 'AGPL-3',
- 'application': False,
-}
+ 'application': False}

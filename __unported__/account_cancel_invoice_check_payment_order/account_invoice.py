@@ -45,10 +45,11 @@ class account_invoice(orm.Model):
                 payment_orders = cr.dictfetchone()
                 if payment_orders:
                     raise osv.except_osv(
-                            _('Error !'),
-                            _("Invoice already imported in the payment "
-                              "order (%s) at %s on line %s" %
-                              (payment_orders['payment_name'],
-                               payment_orders['payment_date'],
-                               payment_orders['name'])))
-        return super(account_invoice,self).action_cancel(cr, uid, ids, *args)
+                        _('Error !'),
+                        _("Invoice already imported in the payment "
+                          "order (%s) at %s on line %s" %
+                          (payment_orders['payment_name'],
+                           payment_orders['payment_date'],
+                           payment_orders['name']))
+                    )
+        return super(account_invoice, self).action_cancel(cr, uid, ids, *args)

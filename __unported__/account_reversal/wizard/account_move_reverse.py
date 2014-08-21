@@ -59,7 +59,7 @@ class account_move_reversal(orm.TransientModel):
             help="Prefix that will be added to the name of the journal "
                  "item to be reversed to create the name of the reversal "
                  "journal item (a space is added after the prefix)."),
-        }
+    }
 
     def _next_period_first_date(self, cr, uid, context=None):
         if context is None:
@@ -83,7 +83,7 @@ class account_move_reversal(orm.TransientModel):
     _defaults = {
         'date': _next_period_first_date,
         'move_line_prefix': 'REV -',
-        }
+    }
 
     def action_reverse(self, cr, uid, ids, context=None):
         if context is None:
@@ -110,7 +110,7 @@ class account_move_reversal(orm.TransientModel):
             context=context)
 
         __, action_id = mod_obj.get_object_reference(
-                cr, uid, 'account', 'action_move_journal_line')
+            cr, uid, 'account', 'action_move_journal_line')
         action = act_obj.read(cr, uid, [action_id], context=context)[0]
         action['domain'] = unicode([('id', 'in', reversed_move_ids)])
         action['name'] = _('Reversal Entries')

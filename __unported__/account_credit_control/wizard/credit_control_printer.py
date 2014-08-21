@@ -41,8 +41,10 @@ class CreditControlPrinter(orm.TransientModel):
         return res
 
     _columns = {
-        'mark_as_sent': fields.boolean('Mark letter lines as sent',
-                                       help="Only letter lines will be marked."),
+        'mark_as_sent': fields.boolean(
+            'Mark letter lines as sent',
+            help="Only letter lines will be marked."
+        ),
         'report_file': fields.binary('Generated Report', readonly=True),
         'report_name': fields.char('Report name'),
         'state': fields.char('state', size=32),
@@ -90,10 +92,12 @@ class CreditControlPrinter(orm.TransientModel):
 
         comms = comm_obj._generate_comm_from_credit_line_ids(cr, uid, line_ids,
                                                              context=context)
-        report_file = comm_obj._generate_report(cr, uid, comms, context=context)
+        report_file = comm_obj._generate_report(cr, uid, comms,
+                                                context=context)
 
         form.write({'report_file': base64.b64encode(report_file),
-                    'report_name': 'credit_control_esr_bvr_%s.pdf' % fields.datetime.now(),
+                    'report_name': ('credit_control_esr_bvr_%s.pdf' %
+                                    fields.datetime.now()),
                     'state': 'done'})
 
         if form.mark_as_sent:

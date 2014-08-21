@@ -41,17 +41,20 @@ class FeesComputer(orm.BaseModel):
     def _get_compute_fun(self, level_fees_type):
         """Retrieve function of class that should compute the fees based on type
 
-        :param level_fee_type: type exisiting in model `credit.control.policy.level`
+        :param level_fee_type: type exisiting in model
+                               `credit.control.policy.level`
                                for field dunning_fees_type
 
-        :returns: a function of class :class:`FeesComputer` with following signature
+        :returns: a function of class :class:`FeesComputer`
+                 with following signature
                  self, cr, uid, credit_line (record), context
 
         """
         if level_fees_type == 'fixed':
             return self.compute_fixed_fees
         else:
-            raise NotImplementedError('fees type %s is not supported' % level_fees_type)
+            raise NotImplementedError('fees type %s is not supported' %
+                                      level_fees_type)
 
     def _compute_fees(self, cr, uid, credit_line_ids, context=None):
         """Compute fees for `credit_line_ids` parameter
@@ -68,7 +71,8 @@ class FeesComputer(orm.BaseModel):
         if not credit_line_ids:
             return credit_line_ids
         c_model = self.pool['credit.control.line']
-        credit_lines = c_model.browse(cr, uid, credit_line_ids, context=context)
+        credit_lines = c_model.browse(cr, uid, credit_line_ids,
+                                      context=context)
         for credit in credit_lines:
             # if there is no dependence between generated credit lines
             # this could be threaded

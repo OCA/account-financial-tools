@@ -126,7 +126,8 @@ class account_move_line(orm.Model):
             context = {}
         if context.get('async_bypass_create'):
                 return self._bypass_create(cr, uid, vals, context=context)
-        return super(account_move_line, self).create(cr, uid, vals, context=context)
+        return super(account_move_line, self).create(cr, uid, vals,
+                                                     context=context)
 
     def _bypass_create(self, cr, uid, vals, context=None):
         """Create entries using cursor directly

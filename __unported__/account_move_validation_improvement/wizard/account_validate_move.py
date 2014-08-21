@@ -49,12 +49,12 @@ class ValidateAccountMove(orm.TransientModel):
         ids_move = obj_move.search(cr, uid, [('state', '=', 'draft'),
                                              ('journal_id', 'in', journal_ids),
                                              ('period_id', '=', period_ids)],
-                                            context=context)
+                                   context=context)
         if not ids_move:
-            raise osv.except_osv(_('Warning!'),
-                                 ('Specified journal does not have any account move entries in draft state for this period.'))
+            raise osv.except_osv(
+                _('Warning!'),
+                _('Specified journal does not have any account move entries '
+                  'in draft state for this period.')
+            )
         obj_move.button_validate(cr, uid, ids_move, context=context)
         return {'type': 'ir.actions.act_window_close'}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

@@ -22,13 +22,18 @@
 
 from openerp.osv import orm, fields
 
+
 class res_company(orm.Model):
     _inherit = 'res.company'
 
     _columns = {
         'currency_rate_max_delta': fields.integer(
             'Max Time Delta in Days for Currency Rates',
-            help="This is the maximum interval in days between the date associated with the amount to convert and the date of the nearest currency rate available in OpenERP."),
+            help="This is the maximum interval in days between "
+                 "the date associated "
+                 "with the amount to convert and the date "
+                 "of the nearest currency "
+                 "rate available in OpenERP."),
     }
 
     _defaults = {
@@ -38,5 +43,6 @@ class res_company(orm.Model):
     _sql_constraints = [
         ('currency_rate_max_delta_positive',
          'CHECK (currency_rate_max_delta >= 0)',
-         "The value of the field 'Max Time Delta in Days for Currency Rates' must be positive or 0."),
-        ]
+         "The value of the field 'Max Time Delta in Days for Currency Rates' "
+         "must be positive or 0."),
+    ]

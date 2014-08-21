@@ -32,7 +32,7 @@ class AccountAccount(orm.Model):
             'account_id',
             string='Credit Lines',
             readonly=True),
-        }
+    }
 
     def copy_data(self, cr, uid, id, default=None, context=None):
         if default is None:

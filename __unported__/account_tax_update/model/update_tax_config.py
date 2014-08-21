@@ -79,15 +79,15 @@ class UpdateTaxConfig(orm.Model):
             readonly=True),
         'duplicate_tax_code': fields.boolean(
             'Duplicate Tax code linked'),
-        }
+    }
 
     _defaults = {
         'state': 'draft',
-        }
+    }
 
     _sql_constraints = [
         ('name_uniq', 'unique(name)', 'Name must be unique.'),
-        ]
+    ]
 
     def add_lines(self, cr, uid, ids, context=None):
         """
@@ -106,14 +106,15 @@ class UpdateTaxConfig(orm.Model):
         covered_tax_ids = [
             x.source_tax_id.id
             for x in config['purchase_line_ids'] + config['sale_line_ids']
-            ]
+        ]
 
         res_id = wizard_obj.create(
             cr, uid, {
                 'config_id': ids[0],
                 'type_tax_use': context['type_tax_use'],
                 'covered_tax_ids': [(6, 0, covered_tax_ids)],
-                }, context=context)
+            },
+            context=context)
         local_context = context.copy()
         local_context['active_id'] = res_id
 
@@ -128,7 +129,7 @@ class UpdateTaxConfig(orm.Model):
             'target': 'new',
             'res_id': res_id,
             'nodestroy': True,
-            }
+        }
 
     def confirm(self, cr, uid, ids, context=None):
         """
@@ -149,7 +150,7 @@ class UpdateTaxConfig(orm.Model):
             log += " - %s (%s)\n" % (
                 line.source_tax_id.name,
                 line.source_tax_id.description
-                )
+            )
             # Switch names around, not violating the uniqueness constraint
             tax_old_name = line.source_tax_id.name
             tax_pool.write(
@@ -163,72 +164,108 @@ class UpdateTaxConfig(orm.Model):
             # 6.0 messes up the name change with copy + write, while
             # 6.1 throws name uniqueness constraint violation
             # So jumping some hoops with rewriting the new name
-            ## We will check if we need to dupliace
+            # We will check if we need to dupliace
             cp_base_code_id = False
             cp_ref_base_code_id = False
             cp_tax_code_id = False
             cp_ref_tax_code_id = False
             if config.duplicate_tax_code:
                 if line.source_tax_id.base_code_id:
-                    cp_base_code_id = tax_code_pool.copy(cr, uid,
-                                                         line.source_tax_id.base_code_id.id)
-                    rename_old = '[%s] %s' % (config.name,
-                                              line.source_tax_id.base_code_id.name)
+                    cp_base_code_id = tax_code_pool.copy(
+                        cr, uid,
+                        line.source_tax_id.base_code_id.id
+                    )
+                    rename_old = '[%s] %s' % (
+                        config.name,
+                        line.source_tax_id.base_code_id.name
+                    )
                     tax_code_pool.write(cr, uid,
                                         line.source_tax_id.base_code_id.id,
                                         {'name': rename_old})
                 if line.source_tax_id.tax_code_id:
-                    cp_tax_code_id = tax_code_pool.copy(cr, uid,
-                                                        line.source_tax_id.tax_code_id.id)
-                    rename_old = '[%s] %s' % (config.name,
-                                              line.source_tax_id.tax_code_id.name)
+                    cp_tax_code_id = tax_code_pool.copy(
+                        cr, uid,
+                        line.source_tax_id.tax_code_id.id
+                    )
+                    rename_old = '[%s] %s' % (
+                        config.name,
+                        line.source_tax_id.tax_code_id.name
+                    )
                     tax_code_pool.write(cr, uid,
                                         line.source_tax_id.tax_code_id.id,
                                         {'name': rename_old})
                 if line.source_tax_id.ref_base_code_id:
-                    ## Check if with have the same tax code for base_code_id
-                    if line.source_tax_id.ref_base_code_id.id == line.source_tax_id.base_code_id.id:
+                    # Check if with have the same tax code for base_code_id
+                    if (line.source_tax_id.ref_base_code_id.id ==
+                            line.source_tax_id.base_code_id.id):
                         cp_ref_base_code_id = cp_base_code_id
-                    else:    
-                        cp_ref_base_code_id = tax_code_pool.copy(cr, uid,
-                                                                 line.source_tax_id.ref_base_code_id.id)
-                        rename_old = '[%s] %s' % (config.name,
-                                                  line.source_tax_id.ref_base_code_id.name)
-                        tax_code_pool.write(cr, uid,
-                                            line.source_tax_id.ref_base_code_id.id,
-                                            {'name': rename_old})
+                    else:
+                        cp_ref_base_code_id = tax_code_pool.copy(
+                            cr, uid,
+                            line.source_tax_id.ref_base_code_id.id
+                        )
+                        rename_old = '[%s] %s' % (
+                            config.name,
+                            line.source_tax_id.ref_base_code_id.name
+                        )
+                        tax_code_pool.write(
+                            cr, uid,
+                            line.source_tax_id.ref_base_code_id.id,
+                            {'name': rename_old}
+                        )
                 if line.source_tax_id.ref_tax_code_id:
-                    if line.source_tax_id.ref_tax_code_id.id == line.source_tax_id.tax_code_id.id:
+                    if (line.source_tax_id.ref_tax_code_id.id ==
+                            line.source_tax_id.tax_code_id.id):
                         cp_ref_tax_code_id = cp_tax_code_id
                     else:
-                        cp_ref_tax_code_id = tax_code_pool.copy(cr, uid,
-                                                                line.source_tax_id.ref_tax_code_id.id)
-                        rename_old = '[%s] %s' % (config.name,
-                                                  line.source_tax_id.ref_tax_code_id.name)
-                        tax_code_pool.write(cr, uid,
-                                            line.source_tax_id.ref_tax_code_id.id,
-                                            {'name': rename_old})
+                        cp_ref_tax_code_id = tax_code_pool.copy(
+                            cr, uid,
+                            line.source_tax_id.ref_tax_code_id.id
+                        )
+                        rename_old = '[%s] %s' % (
+                            config.name,
+                            line.source_tax_id.ref_tax_code_id.name
+                        )
+                        tax_code_pool.write(
+                            cr, uid,
+                            line.source_tax_id.ref_tax_code_id.id,
+                            {'name': rename_old}
+                        )
             else:
-                cp_base_code_id = line.source_tax_id.base_code_id and line.source_tax_id.base_code_id.id or False
-                cp_ref_base_code_id = line.source_tax_id.ref_base_code_id and line.source_tax_id.ref_base_code_id.id or False
-                cp_tax_code_id = line.source_tax_id.tax_code_id and line.source_tax_id.tax_code_id.id or False
-                cp_ref_tax_code_id = line.source_tax_id.ref_tax_code_id and line.source_tax_id.ref_tax_code_id.id or False
+                cp_base_code_id = (line.source_tax_id.base_code_id and
+                                   line.source_tax_id.base_code_id.id or
+                                   False)
+                cp_ref_base_code_id = (
+                    line.source_tax_id.ref_base_code_id and
+                    line.source_tax_id.ref_base_code_id.id or
+                    False
+                )
+                cp_tax_code_id = (line.source_tax_id.tax_code_id and
+                                  line.source_tax_id.tax_code_id.id or
+                                  False)
+                cp_ref_tax_code_id = (line.source_tax_id.ref_tax_code_id and
+                                      line.source_tax_id.ref_tax_code_id.id or
+                                      False)
 
             target_tax_id = tax_pool.copy(
                 cr, uid, line.source_tax_id.id,
-                {'name': '[update, %s] %s' % (config.name, tax_old_name),
-                 'amount': amount_new,
-                 'parent_id': False,
-                 'child_ids': [(6, 0, [])],
-                }, context=context)
+                {
+                    'name': '[update, %s] %s' % (config.name, tax_old_name),
+                    'amount': amount_new,
+                    'parent_id': False,
+                    'child_ids': [(6, 0, [])],
+                },
+                context=context
+            )
             tax_pool.write(
-                cr, uid, target_tax_id, {'name': tax_old_name,
-                                         'base_code_id': cp_base_code_id,
-                                         'ref_base_code_id': cp_ref_base_code_id,
-                                         'tax_code_id': cp_tax_code_id,
-                                         'ref_tax_code_id': cp_ref_tax_code_id 
-                                         }, context=context
-                           )
+                cr, uid, target_tax_id,
+                {'name': tax_old_name,
+                 'base_code_id': cp_base_code_id,
+                 'ref_base_code_id': cp_ref_base_code_id,
+                 'tax_code_id': cp_tax_code_id,
+                 'ref_tax_code_id': cp_ref_tax_code_id},
+                context=context
+            )
             tax_map[line.source_tax_id.id] = target_tax_id
             line_pool.write(
                 cr, uid, line.id,
@@ -253,18 +290,18 @@ class UpdateTaxConfig(orm.Model):
                 cr, uid, fp_tax.id,
                 {'tax_src_id': tax_map[fp_tax.tax_src_id.id],
                  'tax_dest_id': tax_map.get(
-                        fp_tax.tax_dest_id.id, fp_tax.tax_dest_id.id)},
+                     fp_tax.tax_dest_id.id, fp_tax.tax_dest_id.id)},
                 context=context)
             new_fp_tax = fp_tax_pool.browse(
                 cr, uid, new_fp_tax_id, context=context)
             log += ("\nCreate new tax mapping on position %s:\n"
                     "%s (%s)\n"
                     "=> %s (%s)\n" % (
-                    new_fp_tax.position_id.name,
-                    new_fp_tax.tax_src_id.name,
-                    new_fp_tax.tax_src_id.description,
-                    new_fp_tax.tax_dest_id.name,
-                    new_fp_tax.tax_dest_id.description,
+                        new_fp_tax.position_id.name,
+                        new_fp_tax.tax_src_id.name,
+                        new_fp_tax.tax_src_id.description,
+                        new_fp_tax.tax_dest_id.name,
+                        new_fp_tax.tax_dest_id.description,
                     ))
         self.write(
             cr, uid, ids[0],
@@ -279,7 +316,7 @@ class UpdateTaxConfig(orm.Model):
             'type': 'ir.actions.act_window',
             'res_id': ids[0],
             'nodestroy': True,
-            }
+        }
 
     def set_defaults(self, cr, uid, ids, context=None):
         if not context or not context.get('type_tax_use'):
@@ -308,7 +345,7 @@ class UpdateTaxConfig(orm.Model):
                      ('name', '=', field_name)],
                     context=local_context)
                 for value in ir_values_pool.browse(
-                    cr, uid, values_ids, context=context):
+                        cr, uid, values_ids, context=context):
                     val = False
                     write = False
                     try:
@@ -337,15 +374,16 @@ class UpdateTaxConfig(orm.Model):
         model_pool = self.pool.get('ir.model')
         model_ids = model_pool.search(cr, uid, [], context=context)
         models = model_pool.read(
-                    cr, uid, model_ids, ['model'], context=context)
+            cr, uid, model_ids, ['model'], context=context)
         pool_models_items = [(x['model'], self.pool.get(
-                                                x['model'])) for x in models]
+            x['model'])) for x in models]
         # 6.1: self.pool.models.items():
         for model_name, model in pool_models_items:
             if model:
                 for field_name, column in model._columns.items():
                     log += update_defaults(model_name, field_name, column)
-                for field_name, field_tuple in model._inherit_fields.iteritems():
+                for field_name, field_tuple in \
+                        model._inherit_fields.iteritems():
                     if len(field_tuple) >= 3:
                         column = field_tuple[2]
                         log += update_defaults(model_name, field_name, column)
@@ -354,17 +392,17 @@ class UpdateTaxConfig(orm.Model):
             context['type_tax_use'])
         for (model, field) in [
             # make this a configurable list of ir_model_fields one day?
-            ('account.account', 'tax_ids'),
-            ('product.product', 'supplier_taxes_id'),
-            ('product.product', 'taxes_id'),
-            ('product.template', 'supplier_taxes_id'),
-            ('product.template', 'taxes_id')]:
+                ('account.account', 'tax_ids'),
+                ('product.product', 'supplier_taxes_id'),
+                ('product.product', 'taxes_id'),
+                ('product.template', 'supplier_taxes_id'),
+                ('product.template', 'taxes_id')]:
             pool = self.pool.get(model)
             obj_ids = pool.search(
                 cr, uid, [(field, 'in', tax_map.keys())],
                 context=local_context)
             for obj in pool.read(
-                cr, uid, obj_ids, [field], context=context):
+                    cr, uid, obj_ids, [field], context=context):
                 new_val = []
                 write = False
                 for i in obj[field]:
@@ -393,7 +431,7 @@ class UpdateTaxConfig(orm.Model):
             'type': 'ir.actions.act_window',
             'res_id': ids[0],
             'nodestroy': True,
-            }
+        }
 
     def set_inactive(self, cr, uid, ids, context=None):
         if not context or not context.get('type_tax_use'):
@@ -430,7 +468,7 @@ class UpdateTaxConfig(orm.Model):
             'type': 'ir.actions.act_window',
             'res_id': ids[0],
             'nodestroy': True,
-            }
+        }
 
 
 class UpdateTaxConfigLine(orm.Model):
@@ -439,7 +477,7 @@ class UpdateTaxConfigLine(orm.Model):
     _rec_name = 'source_tax_id'  # Wha'evuh
 
     def _get_config_field(
-        self, cr, uid, ids, field, args, context=None):
+            self, cr, uid, ids, field, args, context=None):
         # Retrieve values of the associated config_id
         # either sale or purchase
         result = dict([(x, False) for x in ids or []])
@@ -480,4 +518,4 @@ class UpdateTaxConfigLine(orm.Model):
         'state': fields.function(
             _get_config_field, 'state', method=True,
             type='char', size=16, string='State'),
-        }
+    }
