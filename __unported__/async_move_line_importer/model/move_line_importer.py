@@ -53,7 +53,8 @@ class move_line_importer(orm.Model):
         if default is None:
             default = {}
         default.update(state='draft', report=False)
-        return super(move_line_importer, self).copy(cr, uid, id, default=default,
+        return super(move_line_importer, self).copy(cr, uid, id,
+                                                    default=default,
                                                     context=context)
 
     def track_success(sef, cr, uid, obj, context=None):
@@ -71,39 +72,58 @@ class move_line_importer(orm.Model):
         },
     }
 
-    _columns = {'name': fields.datetime('Name',
-                                        required=True,
-                                        readonly=True),
-                'state': fields.selection([('draft', 'New'),
-                                           ('running', 'Running'),
-                                           ('done', 'Success'),
-                                           ('error', 'Error')],
-                                          readonly=True,
-                                          string='Status'),
-                'report': fields.text('Report',
-                                      readonly=True),
-                'file': fields.binary('File',
-                                      required=True),
-                'delimiter': fields.selection([(',', ','), (';', ';'), ('|', '|')],
-                                              string="CSV delimiter",
-                                              required=True),
-                'company_id': fields.many2one('res.company',
-                                              'Company'),
-                'bypass_orm': fields.boolean('Fast import (use with caution)',
-                                             help="When enabled import will be faster but"
-                                                  " it will not use orm and may"
-                                                  " not support all CSV canvas. \n"
-                                                  "Entry posted option will be skipped. \n"
-                                                  "AA lines will only be created when"
-                                                  " moves are posted. \n"
-                                                  "Tax lines computation will be skipped. \n"
-                                                  "This option should be used with caution"
-                                                  " and in conjonction with provided canvas."),
-                }
+    _columns = {
+        'name': fields.datetime(
+            'Name',
+            required=True,
+            readonly=True
+        ),
+        'state': fields.selection(
+            [('draft', 'New'),
+             ('running', 'Running'),
+             ('done', 'Success'),
+             ('error', 'Error')],
+            readonly=True,
+            string='Status'
+        ),
+        'report': fields.text(
+            'Report',
+            readonly=True
+        ),
+        'file': fields.binary(
+            'File',
+            required=True
+        ),
+        'delimiter': fields.selection(
+            [(',', ','), (';', ';'), ('|', '|')],
+            string="CSV delimiter",
+            required=True
+        ),
+        'company_id': fields.many2one(
+            'res.company',
+            'Company'
+        ),
+        'bypass_orm': fields.boolean(
+            'Fast import (use with caution)',
+            help="When enabled import will be faster but"
+                 " it will not use orm and may"
+                 " not support all CSV canvas. \n"
+                 "Entry posted option will be skipped. \n"
+                 "AA lines will only be created when"
+                 " moves are posted. \n"
+                 "Tax lines computation will be skipped. \n"
+                 "This option should be used with caution"
+                 " and in conjonction with provided canvas."
+        ),
+    }
 
-    def _get_current_company(self, cr, uid, context=None, model="move.line.importer"):
-        return self.pool.get('res.company')._company_default_get(cr, uid, model,
-                                                                 context=context)
+    def _get_current_company(self, cr, uid, context=None,
+                             model="move.line.importer"):
+        return self.pool.get('res.company')._company_default_get(
+            cr, uid,
+            model,
+            context=context
+        )
 
     _defaults = {'state': 'draft',
                  'name': fields.datetime.now(),
@@ -143,9 +163,11 @@ class move_line_importer(orm.Model):
         try:
             data = csv.reader(csv_file, delimiter=str(delimiter))
         except csv.Error as error:
-            raise orm.except_orm(_('CSV file is malformed'),
-                                 _("Maybe you have not choose correct separator \n"
-                                   "the error detail is : \n %s") % repr(error))
+            raise orm.except_orm(
+                _('CSV file is malformed'),
+                _("Maybe you have not choose correct separator \n"
+                  "the error detail is : \n %s") % repr(error)
+            )
         head = data.next()
         head = [x.replace(' ', '') for x in head]
         # Generator does not work with orm.BaseModel.load
@@ -162,13 +184,16 @@ class move_line_importer(orm.Model):
         res = []
         for msg in messages:
             rows = msg.get('rows', {})
-            res.append(_("%s. -- Field: %s -- rows %s to %s") % (msg.get('message', 'N/A'),
-                                                                 msg.get('field', 'N/A'),
-                                                                 rows.get('from', 'N/A'),
-                                                                 rows.get('to', 'N/A')))
+            res.append(_("%s. -- Field: %s -- rows %s to %s") % (
+                msg.get('message', 'N/A'),
+                msg.get('field', 'N/A'),
+                rows.get('from', 'N/A'),
+                rows.get('to', 'N/A'))
+            )
         return "\n \n".join(res)
 
-    def _manage_load_results(self, cr, uid, imp_id, result, _do_commit=True, context=None):
+    def _manage_load_results(self, cr, uid, imp_id, result, _do_commit=True,
+                             context=None):
         """Manage the BaseModel.load function output and store exception.
 
         Will generate success/failure report and store it into report field.
@@ -176,8 +201,10 @@ class move_line_importer(orm.Model):
         Savepoints.
 
         :param imp_id: current importer id
-        :param result: BaseModel.laod return {ids: list(int)|False, messages: [Message]}
-        :param _do_commit: toggle commit management only used for testing purpose only
+        :param result: BaseModel.load returns
+                       {ids: list(int)|False, messages: [Message]}
+        :param _do_commit: toggle commit management only used
+                           for testing purpose only
         :returns: current importer id
 
         """
@@ -216,15 +243,23 @@ class move_line_importer(orm.Model):
                 local_cr.commit()
             # We handle concurrent error troubles
             except psycopg2.OperationalError as pg_exc:
-                _logger.error('Can not write report. System will retry %s time(s)' % max_tries)
-                if pg_exc.pg_code in orm.PG_CONCURRENCY_ERRORS_TO_RETRY and max_tries >= 0:
+                _logger.error(
+                    "Can not write report. "
+                    "System will retry %s time(s)" % max_tries
+                )
+                if (pg_exc.pg_code in orm.PG_CONCURRENCY_ERRORS_TO_RETRY and
+                        max_tries >= 0):
                     local_cr.rollback()
                     local_cr.close()
                     remaining_try = max_tries - 1
-                    self._write_report(cr, uid, imp_id, cr, _do_commit=_do_commit,
-                                       max_tries=remaining_try, context=context)
+                    self._write_report(cr, uid, imp_id, cr,
+                                       _do_commit=_do_commit,
+                                       max_tries=remaining_try,
+                                       context=context)
                 else:
-                    _logger.exception('Can not log report - Operational update error')
+                    _logger.exception(
+                        'Can not log report - Operational update error'
+                    )
                     raise
             except Exception:
                 _logger.exception('Can not log report')
@@ -234,10 +269,13 @@ class move_line_importer(orm.Model):
                 if not local_cr.closed:
                     local_cr.close()
         else:
-            self.write(cr, uid, [imp_id], {'state': state, 'report': msg}, context=context)
+            self.write(cr, uid, [imp_id],
+                       {'state': state, 'report': msg},
+                       context=context)
         return imp_id
 
-    def _load_data(self, cr, uid, imp_id, head, data, _do_commit=True, context=None):
+    def _load_data(self, cr, uid, imp_id, head, data, _do_commit=True,
+                   context=None):
         """Function that does the load of parsed CSV file.
 
         If will log exception and susccess into the report fields.
@@ -245,13 +283,15 @@ class move_line_importer(orm.Model):
         :param imp_id: current importer id
         :param head: CSV file head (list of header)
         :param data: CSV file content (list of data list)
-        :param _do_commit: toggle commit management only used for testing purpose only
+        :param _do_commit: toggle commit management
+                           only used for testing purpose only
         :returns: current importer id
 
         """
         state = msg = None
         try:
-            res = self.pool['account.move'].load(cr, uid, head, data, context=context)
+            res = self.pool['account.move'].load(cr, uid, head, data,
+                                                 context=context)
             r_id, state, msg = self._manage_load_results(cr, uid, imp_id, res,
                                                          _do_commit=_do_commit,
                                                          context=context)
@@ -285,8 +325,10 @@ class move_line_importer(orm.Model):
         """
         for th in threading.enumerate():
             if th.getName() == 'async_move_line_import_%s' % imp_id:
-                raise orm.except_orm(_('An import of this file is already running'),
-                                     _('Please try latter'))
+                raise orm.except_orm(
+                    _('An import of this file is already running'),
+                    _('Please try latter')
+                )
 
     def _check_permissions(self, cr, uid, context=None):
         """Ensure that user is allowed to create move / move line"""
@@ -295,7 +337,8 @@ class move_line_importer(orm.Model):
         move_obj.check_access_rule(cr, uid, [], 'create')
         move_obj.check_access_rights(cr, uid, 'create', raise_exception=True)
         move_line_obj.check_access_rule(cr, uid, [], 'create')
-        move_line_obj.check_access_rights(cr, uid, 'create', raise_exception=True)
+        move_line_obj.check_access_rights(cr, uid, 'create',
+                                          raise_exception=True)
 
     def import_file(self, cr, uid, imp_id, context=None):
         """ Will do an asynchronous load of a CSV file.

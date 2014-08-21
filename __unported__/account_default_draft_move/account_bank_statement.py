@@ -23,7 +23,8 @@ from openerp.osv import orm
 class AccountBankStatement(orm.Model):
     _inherit = "account.bank.statement"
 
-    def create_move_from_st_line(self, cr, uid, st_line_id, company_currency_id,
+    def create_move_from_st_line(self, cr, uid,
+                                 st_line_id, company_currency_id,
                                  st_line_number, context=None):
         move_ids = super(AccountBankStatement, self).create_move_from_st_line(
             cr, uid, st_line_id, company_currency_id,
@@ -35,7 +36,8 @@ class AccountBankStatement(orm.Model):
         voucher_obj = self.pool.get('account.voucher')
         st_line = bank_st_line_obj.browse(cr, uid, st_line_id, context=context)
         if st_line.voucher_id:
-            v = voucher_obj.browse(cr, uid, st_line.voucher_id.id, context=context)
+            v = voucher_obj.browse(cr, uid, st_line.voucher_id.id,
+                                   context=context)
             move_ids = v.move_id.id
 
         if not isinstance(move_ids, (tuple, list)):

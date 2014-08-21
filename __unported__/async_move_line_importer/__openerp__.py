@@ -42,7 +42,8 @@ not support all CSV canvas.
 - AA lines will only be created when moves are posted.
 - Tax lines computation will be skipped until the move are posted.
 
-This option should be used with caution and preferably in conjunction with provided canvas in tests/data
+This option should be used with caution and preferably in conjunction with
+provided canvas in tests/data
 
 Then simply press import file button. The process will be run in background
 and you will be able to continue your work.

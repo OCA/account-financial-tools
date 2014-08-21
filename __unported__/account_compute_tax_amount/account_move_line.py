@@ -30,14 +30,16 @@ class account_move_line(orm.Model):
 
     # We set the tax_amount invisible, because we recompute it in every case.
     _columns = {
-        'tax_amount': fields.float('Tax/Base Amount',
-                                   digits_compute=dp.get_precision('Account'),
-                                   invisible=True,
-                                   select=True,
-                                   help="If the Tax account is a tax code account, "
-                                        "this field will contain the taxed amount. "
-                                        "If the tax account is base tax code, "
-                                        "this field will contain the basic amount (without tax)."),
+        'tax_amount': fields.float(
+            'Tax/Base Amount',
+            digits_compute=dp.get_precision('Account'),
+            invisible=True,
+            select=True,
+            help="If the Tax account is a tax code account, "
+                 "this field will contain the taxed amount. "
+                 "If the tax account is base tax code, "
+                 "this field will contain the basic amount (without tax)."
+        ),
     }
 
     def create(self, cr, uid, vals, context=None, check=True):
@@ -55,11 +57,14 @@ class account_move_line(orm.Model):
                            context=context)
         return result
 
-    def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
-        result = super(account_move_line, self).write(cr, uid, ids, vals,
-                                                      context=context,
-                                                      check=check,
-                                                      update_check=update_check)
+    def write(self, cr, uid, ids, vals, context=None, check=True,
+              update_check=True):
+        result = super(account_move_line, self).write(
+            cr, uid, ids, vals,
+            context=context,
+            check=check,
+            update_check=update_check
+        )
         if result:
             if ('debit' in vals) or ('credit' in vals):
                 move_lines = self.read(cr, uid, ids,

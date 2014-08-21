@@ -47,7 +47,9 @@ class CreditControlEmailer(orm.TransientModel):
         'line_ids': fields.many2many(
             'credit.control.line',
             string='Credit Control Lines',
-            domain="[('state', '=', 'to_be_sent'), ('channel', '=', 'email')]"),
+            domain=[('state', '=', 'to_be_sent'),
+                    ('channel', '=', 'email')]
+        ),
     }
 
     _defaults = {
@@ -71,7 +73,10 @@ class CreditControlEmailer(orm.TransientModel):
         form = self.browse(cr, uid, wiz_id, context)
 
         if not form.line_ids:
-            raise orm.except_orm(_('Error'), _('No credit control lines selected.'))
+            raise orm.except_orm(
+                _('Error'),
+                _('No credit control lines selected.')
+            )
 
         line_ids = [l.id for l in form.line_ids]
         filtered_ids = self._filter_line_ids(

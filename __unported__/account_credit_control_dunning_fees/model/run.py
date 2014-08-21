@@ -28,12 +28,12 @@ class credit_control_run(orm.Model):
 
     def _generate_credit_lines(self, cr, uid, run_id, context=None):
         """Override method to add fees computation"""
-        credit_line_ids = super(credit_control_run, self)._generate_credit_lines(
-            cr,
-            uid,
-            run_id,
-            context=context
-        )
+        credit_line_ids = super(credit_control_run,
+                                self)._generate_credit_lines(
+                                    cr,
+                                    uid,
+                                    run_id,
+                                    context=context)
         fees_model = self.pool['credit.control.dunning.fees.computer']
         fees_model._compute_fees(cr, uid, credit_line_ids, context=context)
         return credit_line_ids

@@ -28,7 +28,7 @@ but extending it to multiple periods and multiple journals. It replaces the
 base one defined in addons/account/wizard.
     """,
     'website': 'http://www.camptocamp.com',
-    'data' : ['wizard/account_validate_move_view.xml'],
+    'data': ['wizard/account_validate_move_view.xml'],
     'installable': False,
     'active': False,
 }

@@ -171,51 +171,81 @@ class UpdateTaxConfig(orm.Model):
             cp_ref_tax_code_id = False
             if config.duplicate_tax_code:
                 if line.source_tax_id.base_code_id:
-                    cp_base_code_id = tax_code_pool.copy(cr, uid,
-                                                         line.source_tax_id.base_code_id.id)
-                    rename_old = '[%s] %s' % (config.name,
-                                              line.source_tax_id.base_code_id.name)
+                    cp_base_code_id = tax_code_pool.copy(
+                        cr, uid,
+                        line.source_tax_id.base_code_id.id
+                    )
+                    rename_old = '[%s] %s' % (
+                        config.name,
+                        line.source_tax_id.base_code_id.name
+                    )
                     tax_code_pool.write(cr, uid,
                                         line.source_tax_id.base_code_id.id,
                                         {'name': rename_old})
                 if line.source_tax_id.tax_code_id:
-                    cp_tax_code_id = tax_code_pool.copy(cr, uid,
-                                                        line.source_tax_id.tax_code_id.id)
-                    rename_old = '[%s] %s' % (config.name,
-                                              line.source_tax_id.tax_code_id.name)
+                    cp_tax_code_id = tax_code_pool.copy(
+                        cr, uid,
+                        line.source_tax_id.tax_code_id.id
+                    )
+                    rename_old = '[%s] %s' % (
+                        config.name,
+                        line.source_tax_id.tax_code_id.name
+                    )
                     tax_code_pool.write(cr, uid,
                                         line.source_tax_id.tax_code_id.id,
                                         {'name': rename_old})
                 if line.source_tax_id.ref_base_code_id:
                     # Check if with have the same tax code for base_code_id
-                    if line.source_tax_id.ref_base_code_id.id == line.source_tax_id.base_code_id.id:
+                    if (line.source_tax_id.ref_base_code_id.id ==
+                            line.source_tax_id.base_code_id.id):
                         cp_ref_base_code_id = cp_base_code_id
                     else:
-                        cp_ref_base_code_id = tax_code_pool.copy(cr, uid,
-                                                                 line.source_tax_id.ref_base_code_id.id)
-                        rename_old = '[%s] %s' % (config.name,
-                                                  line.source_tax_id.ref_base_code_id.name)
-                        tax_code_pool.write(cr, uid,
-                                            line.source_tax_id.ref_base_code_id.id,
-                                            {'name': rename_old})
+                        cp_ref_base_code_id = tax_code_pool.copy(
+                            cr, uid,
+                            line.source_tax_id.ref_base_code_id.id
+                        )
+                        rename_old = '[%s] %s' % (
+                            config.name,
+                            line.source_tax_id.ref_base_code_id.name
+                        )
+                        tax_code_pool.write(
+                            cr, uid,
+                            line.source_tax_id.ref_base_code_id.id,
+                            {'name': rename_old}
+                        )
                 if line.source_tax_id.ref_tax_code_id:
-                    if line.source_tax_id.ref_tax_code_id.id == line.source_tax_id.tax_code_id.id:
+                    if (line.source_tax_id.ref_tax_code_id.id ==
+                            line.source_tax_id.tax_code_id.id):
                         cp_ref_tax_code_id = cp_tax_code_id
                     else:
-                        cp_ref_tax_code_id = tax_code_pool.copy(cr, uid,
-                                                                line.source_tax_id.ref_tax_code_id.id)
-                        rename_old = '[%s] %s' % (config.name,
-                                                  line.source_tax_id.ref_tax_code_id.name)
-                        tax_code_pool.write(cr, uid,
-                                            line.source_tax_id.ref_tax_code_id.id,
-                                            {'name': rename_old})
+                        cp_ref_tax_code_id = tax_code_pool.copy(
+                            cr, uid,
+                            line.source_tax_id.ref_tax_code_id.id
+                        )
+                        rename_old = '[%s] %s' % (
+                            config.name,
+                            line.source_tax_id.ref_tax_code_id.name
+                        )
+                        tax_code_pool.write(
+                            cr, uid,
+                            line.source_tax_id.ref_tax_code_id.id,
+                            {'name': rename_old}
+                        )
             else:
-                cp_base_code_id = line.source_tax_id.base_code_id and line.source_tax_id.base_code_id.id or False
-                cp_ref_base_code_id = (line.source_tax_id.ref_base_code_id and
-                                       line.source_tax_id.ref_base_code_id.id or False)
-                cp_tax_code_id = line.source_tax_id.tax_code_id and line.source_tax_id.tax_code_id.id or False
+                cp_base_code_id = (line.source_tax_id.base_code_id and
+                                   line.source_tax_id.base_code_id.id or
+                                   False)
+                cp_ref_base_code_id = (
+                    line.source_tax_id.ref_base_code_id and
+                    line.source_tax_id.ref_base_code_id.id or
+                    False
+                )
+                cp_tax_code_id = (line.source_tax_id.tax_code_id and
+                                  line.source_tax_id.tax_code_id.id or
+                                  False)
                 cp_ref_tax_code_id = (line.source_tax_id.ref_tax_code_id and
-                                      line.source_tax_id.ref_tax_code_id.id or False)
+                                      line.source_tax_id.ref_tax_code_id.id or
+                                      False)
 
             target_tax_id = tax_pool.copy(
                 cr, uid, line.source_tax_id.id,
@@ -352,7 +382,8 @@ class UpdateTaxConfig(orm.Model):
             if model:
                 for field_name, column in model._columns.items():
                     log += update_defaults(model_name, field_name, column)
-                for field_name, field_tuple in model._inherit_fields.iteritems():
+                for field_name, field_tuple in \
+                        model._inherit_fields.iteritems():
                     if len(field_tuple) >= 3:
                         column = field_tuple[2]
                         log += update_defaults(model_name, field_name, column)

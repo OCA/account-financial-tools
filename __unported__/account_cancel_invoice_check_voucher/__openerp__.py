@@ -30,7 +30,7 @@ Constraint forbidding to cancel an invoice already
 imported in bank statement with a voucher.
     """,
     'website': 'http://www.camptocamp.com',
-    'date' : [],
+    'date': [],
     'installable': False,
     'active': False,
 }

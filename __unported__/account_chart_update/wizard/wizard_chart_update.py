@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
-#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L. (http://www.pexego.es)
+#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #    @authors: Jordi Esteve (Zikzakmedia), Borja López Soilán (Pexego)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -32,7 +32,8 @@ def _reopen(self, res_id, model):
         'res_id': res_id,
         'res_model': self._name,
         'target': 'new',
-        # save original model in context, because selecting the list of available
+        # save original model in context,
+        # because selecting the list of available
         # templates requires a model in context
         'context': {
             'default_model': model,
@@ -118,8 +119,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
             _get_lang_selection_options,
             'Language',
             size=5,
-            help="For records searched by name (taxes, tax codes, fiscal positions), "
-                 "the template name will be matched against the record name on this language."
+            help="For records searched by name "
+                 "(taxes, tax codes, fiscal positions), "
+                 "the template name will be matched against the record "
+                 "name on this language."
         ),
         'update_tax_code': fields.boolean(
             'Update tax codes',
@@ -132,11 +135,13 @@ class wizard_update_charts_accounts(orm.TransientModel):
         ),
         'update_account': fields.boolean(
             'Update accounts',
-            help="Existing accounts are updated. Accounts are searched by code."
+            help="Existing accounts are updated. "
+                 "Accounts are searched by code."
         ),
         'update_fiscal_position': fields.boolean(
             'Update fiscal positions',
-            help="Existing fiscal positions are updated. Fiscal positions are searched by name."
+            help="Existing fiscal positions are updated. "
+                 "Fiscal positions are searched by name."
         ),
         'update_children_accounts_parent': fields.boolean(
             "Update children accounts parent",
@@ -163,18 +168,32 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'Taxes',
             ondelete='cascade'
         ),
-        'account_ids': fields.one2many('wizard.update.charts.accounts.account',
-                                       'update_chart_wizard_id', 'Accounts', ondelete='cascade'),
-        'fiscal_position_ids': fields.one2many('wizard.update.charts.accounts.fiscal.position',
-                                               'update_chart_wizard_id', 'Fiscal positions', ondelete='cascade'),
+        'account_ids': fields.one2many(
+            'wizard.update.charts.accounts.account',
+            'update_chart_wizard_id',
+            'Accounts',
+            ondelete='cascade'
+        ),
+        'fiscal_position_ids': fields.one2many(
+            'wizard.update.charts.accounts.fiscal.position',
+            'update_chart_wizard_id',
+            'Fiscal positions',
+            ondelete='cascade'
+        ),
         'new_tax_codes': fields.integer('New tax codes', readonly=True),
         'new_taxes': fields.integer('New taxes', readonly=True),
         'new_accounts': fields.integer('New accounts', readonly=True),
         'new_fps': fields.integer('New fiscal positions', readonly=True),
-        'updated_tax_codes': fields.integer('Updated tax codes', readonly=True),
+        'updated_tax_codes': fields.integer(
+            'Updated tax codes',
+            readonly=True
+        ),
         'updated_taxes': fields.integer('Updated taxes', readonly=True),
         'updated_accounts': fields.integer('Updated accounts', readonly=True),
-        'updated_fps': fields.integer('Updated fiscal positions', readonly=True),
+        'updated_fps': fields.integer(
+            'Updated fiscal positions',
+            readonly=True
+        ),
         'log': fields.text('Messages and Errors', readonly=True)
     }
 
@@ -262,8 +281,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
 
     _defaults = {
         'state': 'init',
-        'company_id': lambda self, cr, uid, context: self.pool.get('res.users').browse(
-            cr, uid, [uid], context)[0].company_id.id,
+        'company_id': lambda self, cr, uid, context:
+            self.pool.get('res.users').browse(
+                cr, uid, [uid], context)[0].company_id.id,
         'chart_template_id': _get_chart,
         'update_tax_code': True,
         'update_tax': True,
@@ -271,7 +291,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         'update_fiscal_position': True,
         'update_children_accounts_parent': True,
         'continue_on_errors': False,
-        'lang': lambda self, cr, uid, context: context and context.get('lang') or None,
+        'lang': lambda self, cr, uid, context:
+            context and context.get('lang') or None,
     }
 
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
@@ -280,7 +301,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         res = {
             'value': {
-                'code_digits': self._get_code_digits(cr, uid, context=context, company_id=company_id),
+                'code_digits': self._get_code_digits(
+                    cr, uid, context=context, company_id=company_id),
             }
         }
         return res
@@ -378,7 +400,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         acc_templ_mapping[acc_templ.id] = acc_ids and acc_ids[0] or False
         return acc_templ_mapping[acc_templ.id]
 
-    def _map_fp_template(self, cr, uid, wizard, fp_templ_mapping, fp_template, context=None):
+    def _map_fp_template(self, cr, uid, wizard, fp_templ_mapping,
+                         fp_template, context=None):
         """
         Adds a fiscal position template -> fiscal position id to the mapping.
         """
@@ -562,7 +585,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
         for delay_vals_wiz in delay_wiz_tax:
             wiz_taxes_obj.create(cr, uid, delay_vals_wiz, context)
 
-        return {'new': new_taxes, 'updated': updated_taxes, 'mapping': tax_templ_mapping}
+        return {'new': new_taxes,
+                'updated': updated_taxes,
+                'mapping': tax_templ_mapping}
 
     def _find_accounts(self, cr, uid, wizard, context=None):
         """
@@ -614,7 +639,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 modified = False
                 notes = ""
                 account = acc_obj.browse(cr, uid, account_id, context=context)
-                if account.name != acc_templ.name and account.name != wizard.company_id.name:
+                if (account.name != acc_templ.name and
+                        account.name != wizard.company_id.name):
                     notes += _("The name is different.\n")
                     modified = True
                 if account.type != acc_templ.type:
@@ -689,14 +715,18 @@ class wizard_update_charts_accounts(orm.TransientModel):
             if fp_templ.tax_ids and fp.tax_ids:
                 for fp_tax_templ in fp_templ.tax_ids:
                     found = False
-                    tax_src_id = self._map_tax_template(cr, uid, wizard,
-                                                        tax_templ_mapping,
-                                                        fp_tax_templ.tax_src_id,
-                                                        context=None)
-                    tax_dest_id = self._map_tax_template(cr, uid, wizard,
-                                                         tax_templ_mapping,
-                                                         fp_tax_templ.tax_dest_id,
-                                                         context=None)
+                    tax_src_id = self._map_tax_template(
+                        cr, uid, wizard,
+                        tax_templ_mapping,
+                        fp_tax_templ.tax_src_id,
+                        context=None
+                    )
+                    tax_dest_id = self._map_tax_template(
+                        cr, uid, wizard,
+                        tax_templ_mapping,
+                        fp_tax_templ.tax_dest_id,
+                        context=None
+                    )
                     for fp_tax in fp.tax_ids:
                         if fp_tax.tax_src_id.id == tax_src_id:
                             if not fp_tax.tax_dest_id:
@@ -708,12 +738,18 @@ class wizard_update_charts_accounts(orm.TransientModel):
                                     found = True
                                     break
                     if not found:
-                        notes += _("Tax mapping not found on the fiscal position instance: %s -> %s.\n") % (
+                        msg = (fp_tax_templ.tax_dest_id and
+                               fp_tax_templ.tax_dest_id.name or
+                               _('None'))
+                        notes += _("Tax mapping not found on the fiscal "
+                                   "position instance: %s -> %s.\n") % (
                             fp_tax_templ.tax_src_id.name,
-                            fp_tax_templ.tax_dest_id and fp_tax_templ.tax_dest_id.name or _('None'))
+                            msg
+                        )
                         modified = True
             elif fp_templ.tax_ids and not fp.tax_ids:
-                notes += _("The template has taxes the fiscal position instance does not.\n")
+                notes += _("The template has taxes the fiscal "
+                           "position instance does not.\n")
                 modified = True
             # Check fiscal position accounts for changes
             if fp_templ.account_ids and fp.account_ids:
@@ -751,7 +787,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     'update_fiscal_position_id': fp_id,
                     'notes': notes,
                 }, context=context)
-        return {'new': new_fps, 'updated': updated_fps, 'mapping': fp_templ_mapping}
+        return {'new': new_fps,
+                'updated': updated_fps,
+                'mapping': fp_templ_mapping}
 
     def action_find_records(self, cr, uid, ids, context=None):
         """
@@ -822,12 +860,13 @@ class wizard_update_charts_accounts(orm.TransientModel):
                                         tax_code_template.parent_id,
                                         context=context)
             # Values
+            p_id = tax_code_template.parent_id.id
             vals = {
                 'name': tax_code_name,
                 'code': tax_code_template.code,
                 'info': tax_code_template.info,
                 'parent_id': (tax_code_template.parent_id and
-                              tax_code_template_mapping.get(tax_code_template.parent_id.id)),
+                              tax_code_template_mapping.get(p_id)),
                 'company_id': wizard.company_id.id,
                 'sign': tax_code_template.sign,
             }
@@ -847,16 +886,19 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 updated_tax_codes += 1
                 modified = True
             else:
-                tax_code_id = wiz_tax_code.update_tax_code_id and wiz_tax_code.update_tax_code_id.id
+                tax_code_id = (wiz_tax_code.update_tax_code_id and
+                               wiz_tax_code.update_tax_code_id.id)
                 modified = False
             # Store the tax codes on the map
             tax_code_template_mapping[tax_code_template.id] = tax_code_id
             if modified:
                 # Detect errors
+                p_id = tax_code_template.parent_id.id
                 if (tax_code_template.parent_id and
-                        not tax_code_template_mapping.get(tax_code_template.parent_id.id)):
+                        not tax_code_template_mapping.get(p_id)):
                     log.add(
-                        _("Tax code %s: The parent tax code %s can not be set.\n") % (
+                        _("Tax code %s: The parent tax code %s "
+                          "can not be set.\n") % (
                             tax_code_name, tax_code_template.parent_id.name),
                         True
                     )
@@ -866,7 +908,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'mapping': tax_code_template_mapping
         }
 
-    def _update_taxes(self, cr, uid, wizard, log, tax_code_template_mapping, context=None):
+    def _update_taxes(self, cr, uid, wizard, log, tax_code_template_mapping,
+                      context=None):
         """
         Search for, and load, tax templates to create/update.
         """
@@ -887,7 +930,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 tax_template.ref_base_code_id,
                 tax_template.ref_tax_code_id
             ]
-            for tax_code_template in [tmpl for tmpl in tax_code_templates_to_find if tmpl]:
+            for tax_code_template in \
+                    [tmpl for tmpl in tax_code_templates_to_find if tmpl]:
                 self._map_tax_code_template(cr, uid, wizard,
                                             tax_code_template_mapping,
                                             tax_code_template, context=context)
@@ -899,21 +943,35 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 'type': tax_template.type,
                 'applicable_type': tax_template.applicable_type,
                 'domain': tax_template.domain,
-                'parent_id': tax_template.parent_id and tax_template_mapping.get(tax_template.parent_id.id),
+                'parent_id': (
+                    tax_template.parent_id and
+                    tax_template_mapping.get(tax_template.parent_id.id)
+                ),
                 'child_depend': tax_template.child_depend,
                 'python_compute': tax_template.python_compute,
                 'python_compute_inv': tax_template.python_compute_inv,
                 'python_applicable': tax_template.python_applicable,
-                'base_code_id': (tax_template.base_code_id and
-                                 tax_code_template_mapping.get(tax_template.base_code_id.id)),
-                'tax_code_id': (tax_template.tax_code_id and
-                                tax_code_template_mapping.get(tax_template.tax_code_id.id)),
+                'base_code_id': (
+                    tax_template.base_code_id and
+                    tax_code_template_mapping.get(tax_template.base_code_id.id)
+                ),
+                'tax_code_id': (
+                    tax_template.tax_code_id and
+                    tax_code_template_mapping.get(tax_template.tax_code_id.id)
+                ),
                 'base_sign': tax_template.base_sign,
                 'tax_sign': tax_template.tax_sign,
-                'ref_base_code_id': (tax_template.ref_base_code_id and
-                                     tax_code_template_mapping.get(tax_template.ref_base_code_id.id)),
-                'ref_tax_code_id': (tax_template.ref_tax_code_id and
-                                    tax_code_template_mapping.get(tax_template.ref_tax_code_id.id)),
+                'ref_base_code_id': (
+                    tax_template.ref_base_code_id and
+                    tax_code_template_mapping.get(
+                        tax_template.ref_base_code_id.id
+                    )
+                ),
+                'ref_tax_code_id': (
+                    tax_template.ref_tax_code_id and
+                    tax_code_template_mapping.get(
+                        tax_template.ref_tax_code_id.id)
+                ),
                 'ref_base_sign': tax_template.ref_base_sign,
                 'ref_tax_sign': tax_template.ref_tax_sign,
                 'include_base_amount': tax_template.include_base_amount,
@@ -943,41 +1001,63 @@ class wizard_update_charts_accounts(orm.TransientModel):
             if modified:
                 # Add to the dict of taxes waiting for accounts.
                 taxes_pending_for_accounts[tax_id] = {
-                    'account_collected_id': (tax_template.account_collected_id and
-                                             tax_template.account_collected_id.id or False),
-                    'account_paid_id': (tax_template.account_paid_id and
-                                        tax_template.account_paid_id.id or False),
+                    'account_collected_id': (
+                        tax_template.account_collected_id and
+                        tax_template.account_collected_id.id or False
+                    ),
+                    'account_paid_id': (
+                        tax_template.account_paid_id and
+                        tax_template.account_paid_id.id or False
+                    ),
                 }
                 # Detect errors
-                if tax_template.parent_id and not tax_template_mapping.get(tax_template.parent_id.id):
+                if (tax_template.parent_id and not
+                        tax_template_mapping.get(tax_template.parent_id.id)):
                     log.add(
                         _("Tax %s: The parent tax %s can not be set.\n") % (
                             tax_template.name, tax_template.parent_id.name),
                         True
                     )
-                if tax_template.base_code_id and not tax_code_template_mapping.get(tax_template.base_code_id.id):
+                if (tax_template.base_code_id and not
+                        tax_code_template_mapping.get(
+                            tax_template.base_code_id.id
+                        )):
                     log.add(
-                        _("Tax %s: The tax code for the base %s can not be set.\n") % (
+                        _("Tax %s: The tax code for the base %s "
+                          "can not be set.\n") % (
                             tax_template.name, tax_template.base_code_id.name),
                         True
                     )
-                if tax_template.tax_code_id and not tax_code_template_mapping.get(tax_template.tax_code_id.id):
+                if (tax_template.tax_code_id and not
+                    tax_code_template_mapping.get(
+                        tax_template.tax_code_id.id)):
                     log.add(
-                        _("Tax %s: The tax code for the tax %s can not be set.\n") % (
-                            tax_template.name, tax_template.tax_code_id.name),
+                        _("Tax %s: The tax code for the tax %s "
+                          "can not be set.\n") % (
+                            tax_template.name, tax_template.tax_code_id.name
+                        ),
                         True
                     )
                 if (tax_template.ref_base_code_id and
-                        not tax_code_template_mapping.get(tax_template.ref_base_code_id.id)):
+                        not tax_code_template_mapping.get(
+                            tax_template.ref_base_code_id.id)):
                     log.add(
-                        _("Tax %s: The tax code for the base refund %s can not be set.\n") % (
-                            tax_template.name, tax_template.ref_base_code_id.name),
+                        _("Tax %s: The tax code for the base refund %s "
+                          "can not be set.\n") % (
+                            tax_template.name,
+                              tax_template.ref_base_code_id.name
+                        ),
                         True
                     )
-                if tax_template.ref_tax_code_id and not tax_code_template_mapping.get(tax_template.ref_tax_code_id.id):
+                if (tax_template.ref_tax_code_id and not
+                    tax_code_template_mapping.get(
+                        tax_template.ref_tax_code_id.id)):
                     log.add(
-                        _("Tax %s: The tax code for the tax refund %s can not be set.\n") % (
-                            tax_template.name, tax_template.ref_tax_code_id.name),
+                        _("Tax %s: The tax code for the tax refund %s"
+                          " can not be set.\n") % (
+                              tax_template.name,
+                              tax_template.ref_tax_code_id.name
+                        ),
                         True
                     )
         return {
@@ -987,7 +1067,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'pending': taxes_pending_for_accounts
         }
 
-    def _update_children_accounts_parent(self, cr, uid, wizard, log, parent_account_id, context=None):
+    def _update_children_accounts_parent(self, cr, uid, wizard,
+                                         log, parent_account_id, context=None):
         """
         Updates the parent_id of accounts that seem to be children of the
         given account (accounts that start with the same code and are brothers
@@ -1010,24 +1091,30 @@ class wizard_update_charts_accounts(orm.TransientModel):
 
         if children_ids:
             try:
-                account_account.write(cr, uid, children_ids, {'parent_id': parent_account.id}, context=context)
+                account_account.write(cr, uid, children_ids,
+                                      {'parent_id': parent_account.id},
+                                      context=context)
             except orm.except_orm, ex:
                 log.add(
-                    _("Exception setting the parent of account %s children: %s - %s.\n") % (
-                        parent_account.code, ex.name, ex.value),
+                    _("Exception setting the parent of "
+                      "account %s children: %s - %s.\n") % (
+                        parent_account.code, ex.name, ex.value
+                    ),
                     True
                 )
 
         return True
 
-    def _update_accounts(self, cr, uid, wizard, log, tax_template_mapping, context=None):
+    def _update_accounts(self, cr, uid, wizard, log, tax_template_mapping,
+                         context=None):
         """
         Search for, and load, account templates to create/update.
         """
         accounts = self.pool.get('account.account')
         root_account_id = wizard.chart_template_id.account_root_id.id
-        # Disable the parent_store computing on account_account during the batch
-        # processing, we will force _parent_store_compute afterwards.
+        # Disable the parent_store computing on account_account
+        # during the batch processing,
+        # we will force _parent_store_compute afterwards.
         self.pool._init = True
         new_accounts = 0
         updated_accounts = 0
@@ -1035,7 +1122,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
         for wiz_account in wizard.account_ids:
             account_template = wiz_account.account_id
             # Ensure the parent account template is on the map.
-            self._map_account_template(cr, uid, wizard, account_template_mapping, account_template.parent_id, context)
+            self._map_account_template(cr, uid, wizard,
+                                       account_template_mapping,
+                                       account_template.parent_id,
+                                       context)
             # Ensure the related tax templates are on the map.
             for tax_template in account_template.tax_ids:
                 self._map_tax_template(cr, uid, wizard, tax_template_mapping,
@@ -1052,17 +1142,27 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     code = '%s%s' % (
                         code, '0' * (wizard.code_digits - len(code)))
             # Values
+            p_id = account_template.parent_id.id
             vals = {
-                'name': (root_account_id == account_template.id) and wizard.company_id.name or account_template.name,
-                'currency_id': account_template.currency_id and account_template.currency_id.id or False,
+                'name': ((root_account_id == account_template.id) and
+                         wizard.company_id.name or
+                         account_template.name),
+                'currency_id': (account_template.currency_id and
+                                account_template.currency_id.id or
+                                False),
                 'code': code,
                 'type': account_template.type,
-                'user_type': account_template.user_type and account_template.user_type.id or False,
+                'user_type': (account_template.user_type and
+                              account_template.user_type.id or
+                              False),
                 'reconcile': account_template.reconcile,
                 'shortcut': account_template.shortcut,
                 'note': account_template.note,
-                'parent_id': (account_template.parent_id
-                              and account_template_mapping.get(account_template.parent_id.id) or False),
+                'parent_id': (
+                    account_template.parent_id
+                    and account_template_mapping.get(p_id) or
+                    False
+                ),
                 'tax_ids': [(6, 0, tax_ids)],
                 'company_id': wizard.company_id.id,
             }
@@ -1090,15 +1190,20 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     log.add(_("Exception writing account %s: %s - %s.\n")
                             % (code, ex.name, ex.value), True)
             else:
-                account_id = wiz_account.update_account_id and wiz_account.update_account_id.id
+                account_id = (wiz_account.update_account_id and
+                              wiz_account.update_account_id.id)
             # Store the account on the map
             account_template_mapping[account_template.id] = account_id
             if modified:
                 # Detect errors
-                if account_template.parent_id and not account_template_mapping.get(account_template.parent_id.id):
+                if (account_template.parent_id and not
+                    account_template_mapping.get(
+                        account_template.parent_id.id)):
                     log.add(
-                        _("Account %s: The parent account %s can not be set.\n") % (
-                            code, account_template.parent_id.code),
+                        _("Account %s: The parent account %s "
+                          "can not be set.\n") % (
+                            code, account_template.parent_id.code
+                        ),
                         True
                     )
                 # Set this account as the parent of the accounts that seem to
@@ -1142,25 +1247,40 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 if (acc_templ_mapping.get(value['account_collected_id']) and
                         acc_templ_mapping.get(value['account_paid_id'])):
                     vals = {
-                        'account_collected_id': acc_templ_mapping[value['account_collected_id']],
-                        'account_paid_id': acc_templ_mapping[value['account_paid_id']],
+                        'account_collected_id': acc_templ_mapping[
+                            value['account_collected_id']
+                        ],
+                        'account_paid_id': acc_templ_mapping[
+                            value['account_paid_id']
+                        ],
                     }
                     taxes.write(cr, uid, [key], vals)
                 else:
                     tax = taxes.browse(cr, uid, key)
-                    if not acc_templ_mapping.get(value['account_collected_id']):
-                        log.add(_("Tax %s: The collected account can not be set.\n") % (tax.name), True)
+                    val = value['account_collected_id']
+                    if not acc_templ_mapping.get(val):
+                        log.add(
+                            _("Tax %s: The collected account "
+                              "can not be set.\n") % (
+                                tax.name
+                            ),
+                            True
+                        )
                     if not acc_templ_mapping.get(value['account_paid_id']):
                         log.add(_("Tax %s: The paid account can not be set.\n")
                                 % (tax.name), True)
 
-    def _update_fiscal_positions(self, cr, uid, wizard, log, tax_template_mapping, acc_templ_mapping, context=None):
+    def _update_fiscal_positions(self, cr, uid, wizard, log,
+                                 tax_template_mapping,
+                                 acc_templ_mapping, context=None):
         """
         Search for, and load, fiscal position templates to create/update.
         """
         fiscalpositions = self.pool.get('account.fiscal.position')
         fiscalpositions_taxes = self.pool.get('account.fiscal.position.tax')
-        fiscalpositions_account = self.pool.get('account.fiscal.position.account')
+        fiscalpositions_account = self.pool.get(
+            'account.fiscal.position.account'
+        )
 
         new_fps = 0
         updated_fps = 0
@@ -1178,7 +1298,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 fp_id = fiscalpositions.create(cr, uid, vals_fp)
                 new_fps += 1
                 modified = True
-            elif wizard.update_fiscal_position and wiz_fp.update_fiscal_position_id:
+            elif (wizard.update_fiscal_position and
+                  wiz_fp.update_fiscal_position_id):
                 # Update the given fiscal position (remove the tax and account
                 # mappings, that will be regenerated later)
                 fp_id = wiz_fp.update_fiscal_position_id.id
@@ -1193,33 +1314,47 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     cr, uid, [('position_id', '=', fp_id)])
                 fiscalpositions_account.unlink(cr, uid, fp_account_ids)
             else:
-                fp_id = wiz_fp.update_fiscal_position_id and wiz_fp.update_fiscal_position_id.id
+                fp_id = (wiz_fp.update_fiscal_position_id and
+                         wiz_fp.update_fiscal_position_id.id)
 
             if modified:
                 # (Re)create the tax mappings
                 for fp_tax in fp_template.tax_ids:
                     # Ensure the related tax templates are on the map.
-                    self._map_tax_template(cr, uid, wizard, tax_template_mapping, fp_tax.tax_src_id, context)
+                    self._map_tax_template(cr, uid, wizard,
+                                           tax_template_mapping,
+                                           fp_tax.tax_src_id, context)
                     if fp_tax.tax_dest_id:
-                        self._map_tax_template(cr, uid, wizard, tax_template_mapping, fp_tax.tax_dest_id, context)
+                        self._map_tax_template(cr, uid, wizard,
+                                               tax_template_mapping,
+                                               fp_tax.tax_dest_id, context)
                     # Create the fp tax mapping
                     vals_tax = {
-                        'tax_src_id': tax_template_mapping.get(fp_tax.tax_src_id.id),
-                        'tax_dest_id': fp_tax.tax_dest_id and tax_template_mapping.get(fp_tax.tax_dest_id.id),
+                        'tax_src_id': tax_template_mapping.get(
+                            fp_tax.tax_src_id.id
+                        ),
+                        'tax_dest_id': (fp_tax.tax_dest_id and
+                                        tax_template_mapping.get(
+                                            fp_tax.tax_dest_id.id)),
                         'position_id': fp_id,
                     }
                     fiscalpositions_taxes.create(cr, uid, vals_tax)
                     # Check for errors
                     if not tax_template_mapping.get(fp_tax.tax_src_id.id):
                         log.add(
-                            _("Fiscal position %s: The source tax %s can not be set.\n") % (
-                                fp_template.name, fp_tax.tax_src_id.code),
+                            _("Fiscal position %s: The source tax %s "
+                              "can not be set.\n") % (
+                                fp_template.name, fp_tax.tax_src_id.code
+                            ),
                             True
                         )
-                    if fp_tax.tax_dest_id and not tax_template_mapping.get(fp_tax.tax_dest_id.id):
+                    if fp_tax.tax_dest_id and not tax_template_mapping.get(
+                            fp_tax.tax_dest_id.id):
                         log.add(
-                            _("Fiscal position %s: The destination tax %s can not be set.\n") % (
-                                fp_template.name, fp_tax.tax_dest_id.name),
+                            _("Fiscal position %s: The destination"
+                              "tax %s can not be set.\n") % (
+                                fp_template.name, fp_tax.tax_dest_id.name
+                            ),
                             True
                         )
                 # (Re)create the account mappings
@@ -1236,23 +1371,37 @@ class wizard_update_charts_accounts(orm.TransientModel):
                                                    context=context)
                     # Create the fp account mapping
                     vals_account = {
-                        'account_src_id': acc_templ_mapping.get(fp_account.account_src_id.id),
-                        'account_dest_id': (fp_account.account_dest_id and
-                                            acc_templ_mapping.get(fp_account.account_dest_id.id)),
+                        'account_src_id': acc_templ_mapping.get(
+                            fp_account.account_src_id.id
+                        ),
+                        'account_dest_id': (
+                            fp_account.account_dest_id and
+                            acc_templ_mapping.get(
+                                fp_account.account_dest_id.id
+                            )
+                        ),
                         'position_id': fp_id,
                     }
                     fiscalpositions_account.create(cr, uid, vals_account)
                     # Check for errors
                     if not acc_templ_mapping.get(fp_account.account_src_id.id):
                         log.add(
-                            _("Fiscal position %s: The source account %s can not be set.\n") % (
-                                fp_template.name, fp_account.account_src_id.code),
+                            _("Fiscal position %s: The source account %s "
+                              "can not be set.\n") % (
+                                fp_template.name,
+                                fp_account.account_src_id.code
+                            ),
                             True
                         )
-                    if fp_account.account_dest_id and not acc_templ_mapping.get(fp_account.account_dest_id.id):
+                    if (fp_account.account_dest_id and not
+                        acc_templ_mapping.get(
+                            fp_account.account_dest_id.id)):
                         log.add(
-                            _("Fiscal position %s: The destination account %s can not be set.\n") % (
-                                fp_template.name, fp_account.account_dest_id.code),
+                            _("Fiscal position %s: The destination account %s "
+                              "can not be set.\n") % (
+                                fp_template.name,
+                                fp_account.account_dest_id.code
+                            ),
                             True
                         )
 
@@ -1363,15 +1512,28 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
     """
     _name = 'wizard.update.charts.accounts.tax'
     _columns = {
-        'tax_id': fields.many2one('account.tax.template', 'Tax template', required=True, ondelete='set null'),
+        'tax_id': fields.many2one(
+            'account.tax.template',
+            'Tax template',
+            required=True,
+            ondelete='set null'
+        ),
         'update_chart_wizard_id': fields.many2one(
-            'wizard.update.charts.accounts', 'Update chart wizard', required=True, ondelete='cascade'),
+            'wizard.update.charts.accounts',
+            'Update chart wizard',
+            required=True,
+            ondelete='cascade'
+        ),
         'type': fields.selection([
             ('new', 'New template'),
             ('updated', 'Updated template'),
         ], 'Type'),
         'update_tax_id': fields.many2one(
-            'account.tax', 'Tax to update', required=False, ondelete='set null'),
+            'account.tax',
+            'Tax to update',
+            required=False,
+            ondelete='set null'
+        ),
         'notes': fields.text('Notes'),
     }
 

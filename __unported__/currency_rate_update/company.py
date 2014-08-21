@@ -69,7 +69,8 @@ class res_company(orm.Model):
         compagnies = self.search(cr, uid, [])
         activate_cron = 'f'
         if not value:
-            # this statement is here beacaus we do no want to save in case of error
+            # this statement is here beacaus we do no want to save #
+            # in case of error
             self.write(cr, uid, id, {'auto_currency_up': value})
             for comp in compagnies:
                 if self.browse(cr, uid, comp).auto_currency_up:
@@ -84,17 +85,19 @@ class res_company(orm.Model):
         else:
             for comp in compagnies:
                 if comp != id and not enable:
-                    if self.browse(cr, uid, comp).multi_company_currency_enable:
+                    current = self.browse(cr, uid, comp)
+                    if current.multi_company_currency_enable:
                         # We ensure taht we did not have write a true value
                         self.write(cr, uid, id, {'auto_currency_up': False})
+                        msg = ('You can not activate auto currency'
+                               'update on more thant one company with this '
+                               'multi company configuration')
                         return {
                             'value': {'auto_currency_up': False},
 
                             'warning': {
                                 'title': "Warning",
-                                'message': 'You can not activate auto currency '
-                                           'update on more thant one company with this '
-                                           'multi company configuration'
+                                'message': msg,
                             }
                         }
             self.write(cr, uid, id, {'auto_currency_up': value})

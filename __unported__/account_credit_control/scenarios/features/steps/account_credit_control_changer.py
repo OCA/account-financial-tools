@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# flake8: noqa
 @given(u'I change level for invoice "{invoice_name}" to "{level_name}" of policy "{policy_name}"')
 def impl(ctx, invoice_name, level_name, policy_name):
    invoice = model('account.invoice').get([('number', '=', invoice_name)])

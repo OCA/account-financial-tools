@@ -44,7 +44,8 @@ class CreditControlLine(orm.Model):
             required=True,
             select=True
         ),
-        # maturity date of related move line we do not use a related field in order to
+        # maturity date of related move line we do not use
+        # a related field in order to
         # allow manual changes
         'date_due': fields.date(
             'Due date',
@@ -196,7 +197,8 @@ class CreditControlLine(orm.Model):
         data['date_due'] = move_line.date_maturity
         data['state'] = 'draft'
         data['channel'] = level.channel
-        data['invoice_id'] = move_line.invoice.id if move_line.invoice else False
+        data['invoice_id'] = (move_line.invoice.id if
+                              move_line.invoice else False)
         data['partner_id'] = move_line.partner_id.id
         data['amount_due'] = (move_line.amount_currency or move_line.debit or
                               move_line.credit)
@@ -282,7 +284,9 @@ class CreditControlLine(orm.Model):
             if line.state != 'draft':
                 raise orm.except_orm(
                     _('Error !'),
-                    _('You are not allowed to delete a credit control line that '
-                      'is not in draft state.'))
+                    _('You are not allowed to delete a credit control '
+                      'line that is not in draft state.')
+                )
 
-        return super(CreditControlLine, self).unlink(cr, uid, ids, context=context)
+        return super(CreditControlLine, self).unlink(cr, uid, ids,
+                                                     context=context)

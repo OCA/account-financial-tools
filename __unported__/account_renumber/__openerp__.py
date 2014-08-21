@@ -3,7 +3,8 @@
 #
 #    OpenERP - Account renumber wizard
 #    Copyright (C) 2009 Pexego Sistemas Informáticos. All Rights Reserved
-#    Copyright (c) 2013 Servicios Tecnológicos Avanzados (http://www.serviciosbaeza.com)
+#    Copyright (c) 2013 Servicios Tecnológicos Avanzados
+#                       (http://www.serviciosbaeza.com)
 #                       Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>
 #    Copyright (c) 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
 #    $Id$
@@ -31,17 +32,19 @@
     'category': "Enterprise Specific Modules",
     'contributors': ['Pedro M. Baeza', 'Joaquín Gutierrez'],
     'description': """
-This module adds a wizard to renumber account moves by date only for admin users.
-=================================================================================
+This module adds a wizard to renumber account moves by date only for admin.
+===========================================================================
 
 The wizard, that will be added to the "End of Year Treatments",
 let's you select one or more journals and fiscal periods,
 set a starting number; and then renumber all the posted moves
 from those journals and periods sorted by date.
 
-It will recreate the sequence number of each account move using their journal sequence so:
+It will recreate the sequence number of each account move
+using their journal sequence so:
     - Sequences per journal are supported.
-    - Sequences with prefixes and sufixes based on the move date are also supported.
+    - Sequences with prefixes and sufixes based on the move
+      date are also supported.
             """,
     "license": "AGPL-3",
     "depends": [

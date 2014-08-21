@@ -48,22 +48,29 @@ class TestMoveLineImporter(test_common.SingleTransactionCase):
     def test_01_one_line_without_orm_bypass(self):
         """Test one line import without bypassing orm"""
         cr, uid = self.cr, self.uid
-        importer_id = self.importer_model.create(cr, uid,
-                                                 {'file': self.get_file('one_move.csv'),
-                                                  'delimiter': ';'})
+        importer_id = self.importer_model.create(
+            cr, uid,
+            {'file': self.get_file('one_move.csv'),
+             'delimiter': ';'}
+        )
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertTrue(importer.company_id, 'Not default company set')
         self.assertFalse(importer.bypass_orm, 'Bypass orm must not be active')
         self.assertEqual(importer.state, 'draft')
         head, data = self.importer_model._parse_csv(cr, uid, importer.id)
-        self.importer_model._load_data(cr, uid, importer.id, head, data, _do_commit=False, context={})
+        self.importer_model._load_data(
+            cr, uid, importer.id, head, data, _do_commit=False, context={})
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertEquals(importer.state, 'done',
                           'Exception %s during import' % importer.report)
-        created_move_ids = self.move_model.search(cr, uid, [('ref', '=', 'éöüàè_test_1')])
+        created_move_ids = self.move_model.search(
+            cr, uid,
+            [('ref', '=', 'éöüàè_test_1')]
+        )
         self.assertTrue(created_move_ids, 'No move imported')
         created_move = self.move_model.browse(cr, uid, created_move_ids[0])
-        self.assertTrue(len(created_move.line_id) == 3, 'Wrong number of move line imported')
+        self.assertTrue(len(created_move.line_id) == 3,
+                        'Wrong number of move line imported')
         debit = credit = 0.0
         for line in created_move.line_id:
             debit += line.debit if line.debit else 0.0
@@ -75,10 +82,12 @@ class TestMoveLineImporter(test_common.SingleTransactionCase):
     def test_02_one_line_using_orm_bypass(self):
         """Test one line import using orm bypass"""
         cr, uid = self.cr, self.uid
-        importer_id = self.importer_model.create(cr, uid,
-                                                 {'file': self.get_file('one_move2.csv'),
-                                                  'delimiter': ';',
-                                                  'bypass_orm': True})
+        importer_id = self.importer_model.create(
+            cr, uid,
+            {'file': self.get_file('one_move2.csv'),
+             'delimiter': ';',
+             'bypass_orm': True}
+        )
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertTrue(importer.company_id, 'Not default company set')
         self.assertTrue(importer.bypass_orm, 'Bypass orm must be active')
@@ -91,10 +100,12 @@ class TestMoveLineImporter(test_common.SingleTransactionCase):
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertEquals(importer.state, 'done',
                           'Exception %s during import' % importer.report)
-        created_move_ids = self.move_model.search(cr, uid, [('ref', '=', 'test_2')])
+        created_move_ids = self.move_model.search(cr, uid,
+                                                  [('ref', '=', 'test_2')])
         self.assertTrue(created_move_ids, 'No move imported')
         created_move = self.move_model.browse(cr, uid, created_move_ids[0])
-        self.assertTrue(len(created_move.line_id) == 3, 'Wrong number of move line imported')
+        self.assertTrue(len(created_move.line_id) == 3,
+                        'Wrong number of move line imported')
         debit = credit = 0.0
         for line in created_move.line_id:
             debit += line.debit if line.debit else 0.0
@@ -106,17 +117,22 @@ class TestMoveLineImporter(test_common.SingleTransactionCase):
     def test_03_one_line_failing(self):
         """Test one line import with faulty CSV file"""
         cr, uid = self.cr, self.uid
-        importer_id = self.importer_model.create(cr, uid,
-                                                 {'file': self.get_file('faulty_moves.csv'),
-                                                  'delimiter': ';'})
+        importer_id = self.importer_model.create(
+            cr, uid,
+            {'file': self.get_file('faulty_moves.csv'),
+             'delimiter': ';'}
+        )
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertTrue(importer.company_id, 'Not default company set')
         self.assertFalse(importer.bypass_orm, 'Bypass orm must not be active')
         self.assertEqual(importer.state, 'draft')
         head, data = self.importer_model._parse_csv(cr, uid, importer.id)
-        self.importer_model._load_data(cr, uid, importer.id, head, data, _do_commit=False, context={})
+        self.importer_model._load_data(cr, uid, importer.id, head, data,
+                                       _do_commit=False, context={})
         importer = self.importer_model.browse(cr, uid, importer_id)
         self.assertEquals(importer.state, 'error',
                           'No exception %s during import' % importer.report)
-        created_move_ids = self.move_model.search(cr, uid, [('ref', '=', 'test_3')])
-        self.assertFalse(created_move_ids, 'Move was imported but it should not be the case')
+        created_move_ids = self.move_model.search(cr, uid,
+                                                  [('ref', '=', 'test_3')])
+        self.assertFalse(created_move_ids,
+                         'Move was imported but it should not be the case')

@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/OCA/account-financial-tools.svg?branch=8.0)](https://travis-ci.org/OCA/account-financial-tools)
+[![Coverage Status](https://coveralls.io/repos/OCA/account-financial-tools/badge.png?branch=8.0)](https://coveralls.io/r/OCA/account-financial-tools?branch=8.0)
+
 Account financial Tools for Odoo/OpenERP
 ========================================
 

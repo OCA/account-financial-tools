@@ -25,7 +25,7 @@
     "author": "Camptocamp",
     "description": """Recompute tax_amount to avoid sign problem""",
     'website': 'http://www.camptocamp.com',
-    'data' : [],
+    'data': [],
     'installable': False,
     'active': False,
 }

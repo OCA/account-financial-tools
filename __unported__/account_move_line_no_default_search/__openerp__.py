@@ -32,8 +32,7 @@ This module leaves the search view extension for move lines intact, but
 disables the default search values for the dropdowns so that you do not
 have to disable these before entering your own search queries.
 
-.. image:: /account_move_line_no_default_search/static/src/img/move_line_search_view.png
-
+..image:: /account_move_line_no_default_search/static/src/img/sample.png
     """,
     'website': 'http://therp.nl',
     'depends': ['account'],
