@@ -31,14 +31,6 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class account_period(orm.Model):
-    _inherit = 'account.period'
-    _columns = {
-        'journal_period_ids': fields.one2many('account.journal.period',
-                                              'period_id', 'Journal states'),
-    }
-
-
 class account_journal_period(orm.Model):
     _inherit = 'account.journal.period'
     _order = "type,name"
