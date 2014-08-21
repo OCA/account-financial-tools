@@ -31,15 +31,7 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class account_period(orm.Model):
-    _inherit = 'account.period'
-    _columns = {
-        'journal_period_ids': fields.one2many('account.journal.period',
-                                              'period_id', 'Journal states'),
-    }
-
-
-class account_journal_period(orm.Model):
+class AccountJournalPeriod(orm.Model):
     _inherit = 'account.journal.period'
     _order = "type,name"
     _columns = {
@@ -80,7 +72,7 @@ class account_journal_period(orm.Model):
                     .browse(cr, uid, values['period_id'], context=context)
                 values.update({'name': (journal.code or journal.name)+':' +
                                (period.name or '')}),
-        return super(account_journal_period, self).create(cr,
-                                                          uid,
-                                                          values,
-                                                          context=context)
+        return super(AccountJournalPeriod, self).create(cr,
+                                                        uid,
+                                                        values,
+                                                        context=context)

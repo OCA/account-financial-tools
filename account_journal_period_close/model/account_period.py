@@ -26,5 +26,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-from . import account_journal_period
-from . import account_period
+
+from openerp.osv import orm, fields
+
+
+class AccountPeriod(orm.Model):
+    _inherit = 'account.period'
+    _columns = {
+        'journal_period_ids': fields.one2many('account.journal.period',
+                                              'period_id', 'Journal states'),
+    }
