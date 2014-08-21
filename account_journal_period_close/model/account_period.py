@@ -30,7 +30,7 @@
 from openerp.osv import orm, fields
 
 
-class account_period(orm.Model):
+class AccountPeriod(orm.Model):
     _inherit = 'account.period'
     _columns = {
         'journal_period_ids': fields.one2many('account.journal.period',
