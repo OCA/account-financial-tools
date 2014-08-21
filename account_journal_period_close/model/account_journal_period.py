@@ -72,6 +72,18 @@ class AccountJournalPeriod(orm.Model):
                     .browse(cr, uid, values['period_id'], context=context)
                 values.update({'name': (journal.code or journal.name)+':' +
                                (period.name or '')}),
+        if values.get('period_id') and values.get('journal_id'):
+            journal_period_duplicate_ids = self\
+                .search(cr, uid, [('period_id', '=',
+                                   values.get('period_id')),
+                                  ('journal_id', '=',
+                                   values.get('journal_id'))],
+                        context=context)
+            if (journal_period_duplicate_ids):
+                raise orm.except_orm(_('error'),
+                                     _('You can not add 2 times'
+                                       ' the same journal in'
+                                       ' same period.'))
         return super(AccountJournalPeriod, self).create(cr,
                                                         uid,
                                                         values,
