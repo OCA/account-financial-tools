@@ -43,7 +43,7 @@ class AccountJournalPeriod(orm.Model):
 
     _sql_constraints = [
         ('journal_period_uniq', 'unique(period_id, journal_id)',
-         'You can not add both same journal in a period.'),
+         'You can not add same journal in the same period twice.'),
     ]
 
     def _check(self, cr, uid, ids, context=None):
