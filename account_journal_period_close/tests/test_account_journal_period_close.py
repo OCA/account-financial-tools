@@ -30,6 +30,7 @@
 import openerp.tests.common as common
 from openerp.osv import orm
 from datetime import datetime
+from psycopg2 import IntegrityError
 
 DB = common.DB
 ADMIN_USER_ID = common.ADMIN_USER_ID
@@ -202,6 +203,6 @@ class TestAccountConstraintChronology(common.TransactionCase):
         create_journal_period(self, period_id, journal_id, context)
         # I check if the exception is correctly raised at adding both same
         # journal on a period
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(IntegrityError,
                           create_journal_period,
                           self, period_id, journal_id, context)
