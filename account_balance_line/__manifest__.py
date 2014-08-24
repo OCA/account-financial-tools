@@ -5,7 +5,7 @@
 {
     'name': 'Balance on journal items',
     'summary': 'Display balance totals in move line view',
-    'version': '9.0.1.1.0',
+    'version': '10.0.1.0.0',
     'category': 'Accounting',
     'website': 'http://www.tecnativa.com,',
     'author': "Camptocamp,"
