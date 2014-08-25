@@ -48,9 +48,12 @@ Usage
 Menu entries are located in ``Accounting > Periodical Processing > Credit
 Control``.
 
-Create a new "run" in the ``Credit Control Run`` menu with the controlling date.
-Then, use the ``Compute credit lines`` button. All the credit control lines will
-be generated. You can find them in the ``Credit Control Lines`` menu.
+Create a new "run" in the ``Credit Control Run`` menu
+with the controlling date.
+
+Then, use the ``Compute credit lines`` button.
+All the credit control lines will be generated.
+You can find them in the ``Credit Control Lines`` menu.
 
 On each generated line, you have many choices:
  * Send a email
