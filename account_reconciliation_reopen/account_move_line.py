@@ -20,5 +20,16 @@
 #
 ##############################################################################
 
-from . import wizard
-from . import account_move_line
+from openerp.osv import orm, fields
+
+
+class AccountMoveLine(orm.Model):
+
+    _inherit = "account.move.line"
+
+    _columns = {
+        'reopening_line_id': fields.many2one(
+            'account.move.line', 'Reopening item',
+            help="Journal item used to reopen the reconciliation",
+            readonly=True),
+        }

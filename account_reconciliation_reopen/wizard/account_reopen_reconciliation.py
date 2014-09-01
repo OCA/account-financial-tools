@@ -92,18 +92,18 @@ class AccountReopenReconciliation(orm.TransientModel):
                 'partner_id': move_line.partner_id.id,
                 }
             if move_line.debit:
-                partner_line_vals['credit'] = move_line.debit
+                partner_line_vals['debit'] = move_line.debit
             elif move_line.credit:
-                partner_line_vals['debit'] = move_line.credit
+                partner_line_vals['credit'] = move_line.credit
             counterpart_line_vals = {
                 'name': _("Counterpart - Reopening %s") % move_line.name,
                 'account_id': wizard.counterpart_account_id.id,
                 'move_id': move_id,
                 }
             if move_line.debit:
-                counterpart_line_vals['debit'] = move_line.debit
+                counterpart_line_vals['credit'] = move_line.debit
             elif move_line.credit:
-                counterpart_line_vals['credit'] = move_line.credit
+                counterpart_line_vals['debit'] = move_line.credit
             partner_line_id = move_line_obj.create(
                 cr, uid, partner_line_vals, context=context)
             move_line_obj.create(
@@ -112,6 +112,7 @@ class AccountReopenReconciliation(orm.TransientModel):
                 cr, uid, [
                     partner_line_id, other_partner_line_id
                     ], context=context)
+            move_line.write({'reopening_line_id': partner_line_id}, context=context)
             move_ids.append(move_id)
 
         __, action_id = mod_obj.get_object_reference(

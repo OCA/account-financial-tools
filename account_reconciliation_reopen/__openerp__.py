@@ -75,6 +75,8 @@ The module cancels the *A1* reconciliation and create a new one between
 """,
     'website': 'http://www.agilebg.com',
     'data': [
+        'account_move_view.xml',
+        'account_move_line_view.xml',
         ],
     'demo': [
         ],
