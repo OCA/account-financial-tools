@@ -3,7 +3,8 @@
 #
 #    Copyright (c) 2008 Camtocamp SA
 #    @author JB Aubort, Nicolas Bessi, Joel Grand-Guillaume
-#    European Central Bank and Polish National Bank invented by Grzegorz Grzelak
+#    European Central Bank and Polish National Bank
+#    invented by Grzegorz Grzelak
 #    Banxico implemented by Agustin Cruz openpyme.mx
 #
 #    This program is free software: you can redistribute it and/or modify
