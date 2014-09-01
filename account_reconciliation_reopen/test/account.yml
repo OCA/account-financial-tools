@@ -14,11 +14,13 @@
   I pay the Invoice
 -
   !python {model: account.invoice}: |
+    from datetime import datetime
+    context['date_p'] = "%s-10-01" % datetime.now().year
     pay = self.pay_and_reconcile(cr, uid, [ref('account_invoice_customer0')],
         9000.0, ref('account.cash'), ref('account.period_10'),
         ref('account.bank_journal'), ref('account.cash'),
         ref('account.period_10'), ref('account.bank_journal'),
-        name='Payment for test customer invoice')
+        name='Payment for test customer invoice', context=context)
     assert (pay == True), "Incorrect Payment"
 -
   I create the reopen wizard
@@ -65,11 +67,13 @@
   I partially pay the Invoice
 -
   !python {model: account.invoice}: |
+    from datetime import datetime
+    context['date_p'] = "%s-10-01" % datetime.now().year
     pay = self.pay_and_reconcile(cr, uid, [ref('account_invoice_customer_1')],
         1000.0, ref('account.cash'), ref('account.period_10'),
         ref('account.bank_journal'), False,
         False, False,
-        name='Payment for test customer invoice')
+        name='Payment for test customer invoice', context=context)
     assert (pay == True), "Incorrect Payment"
 -
   I create the reopen wizard
