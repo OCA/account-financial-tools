@@ -69,7 +69,6 @@ class AccountReopenReconciliation(orm.TransientModel):
                 for line in move_line.reconcile_id.line_id:
                     if line.id != move_line.id:
                         other_partner_line = line
-                move_line.reconcile_id.unlink(context=context)
             elif move_line.reconcile_partial_id:
                 if len(move_line.reconcile_partial_id.line_partial_ids) > 2:
                     raise orm.except_orm(
@@ -79,7 +78,7 @@ class AccountReopenReconciliation(orm.TransientModel):
                 for line in move_line.reconcile_partial_id.line_partial_ids:
                     if line.id != move_line.id:
                         other_partner_line = line
-                move_line.reconcile_partial_id.unlink(context=context)
+            move_line._remove_move_reconcile(context=context)
             wizard = self.browse(cr, uid, ids[0], context=context)
             move_id = move_obj.create(cr, uid, {
                 'date': wizard.date,

@@ -77,6 +77,7 @@ The module cancels the *A1* reconciliation and create a new one between
     'data': [
         'account_move_view.xml',
         'account_move_line_view.xml',
+        'wizard/account_reopen_reconciliation_view.xml',
         ],
     'demo': [
         ],

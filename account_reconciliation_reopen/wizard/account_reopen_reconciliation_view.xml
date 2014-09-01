@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="account_reopen_reconciliation_view" model="ir.ui.view">
+            <field name="name">account_reopen_reconciliation_view</field>
+            <field name="model">account.reopen.reconciliation</field>
+            <field name="arch" type="xml">
+            <form string="Reopen reconciliation" version="7.0">
+                <group>
+                    <field name="counterpart_account_id"></field>
+                    <field name="journal_id"></field>
+                    <field name="date"></field>
+                </group>
+                <footer>
+                    <button string="Reopen" name="reopen" type="object" class="oe_highlight"/>
+                    or                    
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_account_reopen_reconciliation_view" model="ir.actions.act_window">
+            <field name="name">Reopen reconciliation</field>
+            <field name="res_model">account.reopen.reconciliation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+           <field name="view_id" ref="account_reopen_reconciliation_view"/>
+           <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="action_account_reopen_reconciliation_view_values">
+            <field name="model_id" ref="account.model_account_move_line" />
+            <field name="name">Reopen reconciliation</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_account_reopen_reconciliation_view'))" />
+            <field name="key">action</field>
+            <field name="model">account.move.line</field>
+        </record>
+    </data>
+</openerp>
