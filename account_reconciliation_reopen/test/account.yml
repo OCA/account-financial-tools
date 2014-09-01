@@ -1,0 +1,37 @@
+-
+  I create a customer invoice
+-
+  !record {model: account.invoice, id: account_invoice_customer0, view: account.invoice_form}:
+    partner_id: base.res_partner_3
+    invoice_line:
+      - product_id: product.product_product_5
+        quantity: 10.0
+-
+  I confirm the invoice
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer0}
+-
+  I pay the Invoice
+-
+  !python {model: account.invoice}: |
+    pay = self.pay_and_reconcile(cr, uid, [ref('account_invoice_customer0')],
+        9000.0, ref('account.cash'), ref('account.period_10'),
+        ref('account.bank_journal'), ref('account.cash'),
+        ref('account.period_10'), ref('account.bank_journal'),
+        name='Payment for test customer invoice')
+    assert (pay == True), "Incorrect Payment"
+-
+  I create the reopen wizard
+-
+  !record {model: account.reopen.reconciliation, id: reopen_0}:
+    counterpart_account_id: account.cash
+    journal_id: account.cash_journal
+-
+  I run the wizard
+-
+  !python {model: account.reopen.reconciliation}: |
+    invoice = self.pool['account.invoice'].browse(cr, uid, ref('account_invoice_customer0'))
+    assert len(invoice.payment_ids) == 1, "Invoice payment lines must be 1, %s found" % len(invoice.payment_ids)
+    context['active_ids'] = [invoice.payment_ids[0].id]
+    self.reopen(cr, uid, [ref('reopen_0')], context=context)
+    
