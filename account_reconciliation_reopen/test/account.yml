@@ -46,8 +46,8 @@
     assert invoice.state == 'open', "Invoice must be open, %s found" % invoice.state
     assert len(invoice.payment_ids) == 0, "Invoice payment lines must be 0, %s found" % len(invoice.payment_ids)
     assert not credit_line.reconcile_id, "Invoice credit must be unreconciled"
-    assert credit_line.reopening_line_id, "There must be a reopening item"
-    assert credit_line.reopening_line_id.reconcile_id, "Reopening item must be reconciled"
+    assert credit_line.reopening_line_ids, "There must be a reopening item"
+    assert credit_line.reopening_line_ids[0].reconcile_id, "Reopening item must be reconciled"
     assert payment_line.reconcile_id, "Payment line must be reconciled"
 -
   I create a customer invoice
@@ -97,6 +97,6 @@
     assert invoice.state == 'open', "Invoice must be open, %s found" % invoice.state
     assert len(invoice.payment_ids) == 0, "Invoice payment lines must be 0, %s found" % len(invoice.payment_ids)
     assert not credit_line.reconcile_partial_id, "Invoice credit must be unreconciled"
-    assert credit_line.reopening_line_id, "There must be a reopening item"
-    assert credit_line.reopening_line_id.reconcile_id, "Reopening item must be reconciled"
+    assert credit_line.reopening_line_ids, "There must be a reopening item"
+    assert credit_line.reopening_line_ids[0].reconcile_id, "Reopening item must be reconciled"
     assert payment_line.reconcile_id, "Payment line must be reconciled"

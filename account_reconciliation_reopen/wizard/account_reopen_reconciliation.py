@@ -111,7 +111,9 @@ class AccountReopenReconciliation(orm.TransientModel):
                 cr, uid, [
                     partner_line_id, other_partner_line.id
                     ], context=context)
-            move_line.write({'reopening_line_id': partner_line_id}, context=context)
+            move_line.write({
+                'reopening_line_ids': [(4, partner_line_id)],
+                }, context=context)
             move_ids.append(move_id)
 
         __, action_id = mod_obj.get_object_reference(

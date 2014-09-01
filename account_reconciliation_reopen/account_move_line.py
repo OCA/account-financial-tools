@@ -28,8 +28,10 @@ class AccountMoveLine(orm.Model):
     _inherit = "account.move.line"
 
     _columns = {
-        'reopening_line_id': fields.many2one(
-            'account.move.line', 'Reopening item',
-            help="Journal item used to reopen the reconciliation",
+        'reopening_line_ids': fields.many2many(
+            'account.move.line',
+            'reopening_line_rel', 'credit_line_id', 'reopening_line_id',
+            'Reopening items',
+            help="Journal items used to reopen the reconciliations",
             readonly=True),
         }

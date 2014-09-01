@@ -6,9 +6,11 @@
             <field name="model">account.move.line</field>
             <field name="inherit_id" ref="account.view_move_line_form"></field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="reopening_line_id"></field>
-                </xpath>
+                <notebook position="inside">
+                    <page string="Reopening lines">
+                        <field name="reopening_line_ids" colspan="4" nolabel="1"></field>
+                    </page>
+                </notebook>
             </field>
         </record>
     </data>
