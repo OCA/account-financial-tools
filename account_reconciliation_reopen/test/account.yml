@@ -32,17 +32,71 @@
   !python {model: account.reopen.reconciliation}: |
     invoice = self.pool['account.invoice'].browse(cr, uid, ref('account_invoice_customer0'))
     assert len(invoice.payment_ids) == 1, "Invoice payment lines must be 1, %s found" % len(invoice.payment_ids)
+    payment_line = invoice.payment_ids[0]
     credit_line = False
     for move_line in invoice.move_id.line_id:
       if move_line.account_id.id == invoice.account_id.id:
         credit_line = move_line
+    assert credit_line.reconcile_id, "Credit line must be reconciled"
     context['active_ids'] = [credit_line.id]
     self.reopen(cr, uid, [ref('reopen_0')], context=context)
     invoice.refresh()
     credit_line.refresh()
+    payment_line.refresh()
     assert invoice.state == 'open', "Invoice must be open, %s found" % invoice.state
     assert len(invoice.payment_ids) == 0, "Invoice payment lines must be 0, %s found" % len(invoice.payment_ids)
     assert not credit_line.reconcile_id, "Invoice credit must be unreconciled"
     assert credit_line.reopening_line_id, "There must be a reopening item"
     assert credit_line.reopening_line_id.reconcile_id, "Reopening item must be reconciled"
-    
+    assert payment_line.reconcile_id, "Payment line must be reconciled"
+-
+  I create a customer invoice
+-
+  !record {model: account.invoice, id: account_invoice_customer_1, view: account.invoice_form}:
+    partner_id: base.res_partner_3
+    invoice_line:
+      - product_id: product.product_product_5
+        quantity: 10.0
+-
+  I confirm the invoice
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1}
+-
+  I partially pay the Invoice
+-
+  !python {model: account.invoice}: |
+    pay = self.pay_and_reconcile(cr, uid, [ref('account_invoice_customer_1')],
+        1000.0, ref('account.cash'), ref('account.period_10'),
+        ref('account.bank_journal'), False,
+        False, False,
+        name='Payment for test customer invoice')
+    assert (pay == True), "Incorrect Payment"
+-
+  I create the reopen wizard
+-
+  !record {model: account.reopen.reconciliation, id: reopen_1}:
+    counterpart_account_id: account.cash
+    journal_id: account.cash_journal
+-
+  I run the wizard
+-
+  !python {model: account.reopen.reconciliation}: |
+    invoice = self.pool['account.invoice'].browse(cr, uid, ref('account_invoice_customer_1'))
+    assert len(invoice.payment_ids) == 1, "Invoice payment lines must be 1, %s found" % len(invoice.payment_ids)
+    payment_line = invoice.payment_ids[0]
+    credit_line = False
+    for move_line in invoice.move_id.line_id:
+      if move_line.account_id.id == invoice.account_id.id:
+        credit_line = move_line
+    assert credit_line.reconcile_partial_id, "Credit line must be partially reconciled"
+    context['active_ids'] = [credit_line.id]
+    self.reopen(cr, uid, [ref('reopen_0')], context=context)
+    invoice.refresh()
+    credit_line.refresh()
+    payment_line.refresh()
+    assert invoice.state == 'open', "Invoice must be open, %s found" % invoice.state
+    assert len(invoice.payment_ids) == 0, "Invoice payment lines must be 0, %s found" % len(invoice.payment_ids)
+    assert not credit_line.reconcile_partial_id, "Invoice credit must be unreconciled"
+    assert credit_line.reopening_line_id, "There must be a reopening item"
+    assert credit_line.reopening_line_id.reconcile_id, "Reopening item must be reconciled"
+    assert payment_line.reconcile_id, "Payment line must be reconciled"

@@ -59,7 +59,7 @@ class AccountReopenReconciliation(orm.TransientModel):
             ):
                 raise orm.except_orm(
                     _("Error"), _("The item is not reconciled"))
-            other_partner_line_id = False
+            other_partner_line = False
             if move_line.reconcile_id:
                 if len(move_line.reconcile_id.line_id) > 2:
                     raise orm.except_orm(
@@ -68,17 +68,17 @@ class AccountReopenReconciliation(orm.TransientModel):
                           "2 items"))
                 for line in move_line.reconcile_id.line_id:
                     if line.id != move_line.id:
-                        other_partner_line_id = line.id
+                        other_partner_line = line
                 move_line.reconcile_id.unlink(context=context)
             elif move_line.reconcile_partial_id:
-                if len(move_line.reconcile_partial_id.line_id) > 2:
+                if len(move_line.reconcile_partial_id.line_partial_ids) > 2:
                     raise orm.except_orm(
                         _('Error'),
                         _("Can't reopen reconciliations with more than "
                           "2 items"))
-                for line in move_line.reconcile_partial_id.line_id:
+                for line in move_line.reconcile_partial_id.line_partial_ids:
                     if line.id != move_line.id:
-                        other_partner_line_id = line.id
+                        other_partner_line = line
                 move_line.reconcile_partial_id.unlink(context=context)
             wizard = self.browse(cr, uid, ids[0], context=context)
             move_id = move_obj.create(cr, uid, {
@@ -91,26 +91,26 @@ class AccountReopenReconciliation(orm.TransientModel):
                 'move_id': move_id,
                 'partner_id': move_line.partner_id.id,
                 }
-            if move_line.debit:
-                partner_line_vals['debit'] = move_line.debit
-            elif move_line.credit:
-                partner_line_vals['credit'] = move_line.credit
+            if other_partner_line.debit:
+                partner_line_vals['credit'] = other_partner_line.debit
+            elif other_partner_line.credit:
+                partner_line_vals['debit'] = other_partner_line.credit
             counterpart_line_vals = {
                 'name': _("Counterpart - Reopening %s") % move_line.name,
                 'account_id': wizard.counterpart_account_id.id,
                 'move_id': move_id,
                 }
-            if move_line.debit:
-                counterpart_line_vals['credit'] = move_line.debit
-            elif move_line.credit:
-                counterpart_line_vals['debit'] = move_line.credit
+            if other_partner_line.debit:
+                counterpart_line_vals['debit'] = other_partner_line.debit
+            elif other_partner_line.credit:
+                counterpart_line_vals['credit'] = other_partner_line.credit
             partner_line_id = move_line_obj.create(
                 cr, uid, partner_line_vals, context=context)
             move_line_obj.create(
                 cr, uid, counterpart_line_vals, context=context)
             move_line_obj.reconcile_partial(
                 cr, uid, [
-                    partner_line_id, other_partner_line_id
+                    partner_line_id, other_partner_line.id
                     ], context=context)
             move_line.write({'reopening_line_id': partner_line_id}, context=context)
             move_ids.append(move_id)
