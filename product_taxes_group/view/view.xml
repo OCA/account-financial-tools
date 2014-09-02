@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!--    Product - Taxes Group module for Odoo                               -->
+<!--    Copyright (C) 2014 -Today GRAP (http://www.grap.coop)               -->
+<!--    @author Sylvain LE GAL (https://twitter.com/legalsylvain)           -->
+
+<!--This program is free software: you can redistribute it and/or modify    -->
+<!--it under the terms of the GNU Affero General Public License as          -->
+<!--published by the Free Software Foundation, either version 3 of the      -->
+<!--License, or (at your option) any later version.                         -->
+
+<!--This program is distributed in the hope that it will be useful,         -->
+<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!--GNU Affero General Public License for more details.                     -->
+
+<!--You should have received a copy of the GNU Affero General Public License-->
+<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
+<!-- ********************************************************************** -->
+<openerp>
+    <data>
+
+<!-- Overload: product.product -->
+        <record id="view_product_product_form" model="ir.ui.view">
+            <field name="name">view.product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="account.product_normal_form_view"/>
+            <field name="priority">50</field>
+            <field name="arch" type="xml">
+                <field name="taxes_id" position="before">
+                    <field name="tax_group_id" colspan="2" quick_create="false"/>
+                </field>
+                <field name="taxes_id" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </field>
+                <field name="supplier_taxes_id" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                </field>
+            </field>
+        </record>
+
+<!-- Define: tax.group -->
+        <record id="view_tax_group_tree" model="ir.ui.view">
+            <field name="name">view.tax.group.tree</field>
+            <field name="model">tax.group</field>
+            <field name="arch" type="xml">
+                <tree string="Taxes Group" colors="gray:active == False;">
+                    <field name="name"/>
+                    <field name="supplier_tax_ids"/>
+                    <field name="customer_tax_ids"/>
+                    <field name="product_qty"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="active" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tax_group_form" model="ir.ui.view">
+            <field name="name">view.tax.group</field>
+            <field name="model">tax.group</field>
+            <field name="arch" type="xml">
+                <form string="Taxes Group" version="7.0">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="active"/>
+                    <separator string="Taxes"/>
+                    </group>
+                    <group col="4">
+                        <field name="supplier_tax_ids" quick_create="false" widget="many2many_tags"/>
+                        <field name="customer_tax_ids" quick_create="false" widget="many2many_tags"/>
+                    </group>
+                    <separator string="Products"/>
+                    <group col="3">
+                        <field name="product_qty"/>
+                        <button name="%(action_change_tax_group)d"
+                            string="Move to other Tax Group"
+                            type="action" class="oe_link"
+                            groups="account.group_account_manager"
+                            attrs="{'invisible':[('product_qty','=',0)]}"/>
+                        <field name="product_ids" nolabel="1" colspan="3" readonly="1">
+                            <tree string="Products" colors="gray:active == False;">
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="list_price"/>
+                                <field name="active" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </tree>
+                        </field>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+<!-- Define: wizard.tax.group -->
+        <record id="view_change_tax_group" model="ir.ui.view">
+            <field name="name">Change Tax Group</field>
+            <field name="model">wizard.change.tax.group</field>
+            <field name="arch" type="xml">
+                <form string="Change Tax Group" version="7.0">
+                    <group>
+                        <field name="old_tax_group_id"/>
+                        <field name="new_tax_group_id"/>
+                    </group>
+                    <footer>
+                        <button name="change_tax_group" string="_Apply" type="object" class="oe_highlight"/>
+                        <label string="or"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+
+</openerp>
