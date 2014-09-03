@@ -35,8 +35,8 @@
     customer_tax_ids:
         - product_taxes_group.account_tax_sale_2
 
-- !record {model: tax.group, id: tax_group_2}:
-    name: Demo Tax Group 2
+- !record {model: tax.group, id: tax_group_3}:
+    name: Demo Tax Group 3
     company_id: base.main_company
     supplier_tax_ids:
         - product_taxes_group.account_tax_purchase_1
