@@ -52,6 +52,6 @@ need to make a refund).
     'data': ['account_view.xml',
               'invoice_view.xml'],
     'installable': True,
-    'active': True,
+    'auto_install': False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
