@@ -41,6 +41,11 @@ class AccountJournalPeriod(orm.Model):
                                store=True, readonly=True)
     }
 
+    _sql_constraints = [
+        ('journal_period_uniq', 'unique(period_id, journal_id)',
+         'You can not add same journal in the same period twice.'),
+    ]
+
     def _check(self, cr, uid, ids, context=None):
         return True
 
@@ -71,7 +76,7 @@ class AccountJournalPeriod(orm.Model):
                 period = self.pool.get('account.period')\
                     .browse(cr, uid, values['period_id'], context=context)
                 values.update({'name': (journal.code or journal.name)+':' +
-                               (period.name or '')}),
+                               (period.name or '')})
         return super(AccountJournalPeriod, self).create(cr,
                                                         uid,
                                                         values,
