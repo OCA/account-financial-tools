@@ -38,26 +38,17 @@ ADMIN_USER_ID = common.ADMIN_USER_ID
 
 
 def get_simple_product_id(self):
-    return self.registry('product.product').create(self.cr,
-                                                   self.uid,
-                                                   {'name': 'product_test_01',
-                                                    'lst_price': 2000.00,
-                                                    }, context=self.context)
+    return self.env['product.product'].create({'name': 'product_test_01',
+                                               'lst_price': 2000.00,
+                                               })
 
 
 def get_journal_check(self, value):
     sale_journal_id = self.ref('account.sales_journal')
-    journal_id = self.registry('account.journal').copy(self.cr,
-                                                       self.uid,
-                                                       sale_journal_id,
-                                                       self.context,
-                                                       context=self.context)
-    self.registry('account.journal').write(self.cr,
-                                           self.uid,
-                                           [journal_id],
-                                           {'check_chronology': value},
-                                           context=self.context)
-    return journal_id
+    sale_journal = self.env['account.journal'].browse([sale_journal_id])
+    journal = sale_journal.copy()
+    journal.check_chronology = value
+    return journal
 
 
 def get_simple_account_invoice_line_values(self, product_id):
@@ -71,7 +62,7 @@ def get_simple_account_invoice_line_values(self, product_id):
 
 def create_simple_invoice(self, journal_id, date):
     partner_id = self.ref('base.res_partner_2')
-    product_id = get_simple_product_id(self)
+    product = get_simple_product_id(self)
     return self.env['account.invoice']\
         .create({'partner_id': partner_id,
                  'account_id':
@@ -84,7 +75,7 @@ def create_simple_invoice(self, journal_id, date):
                                           self.ref('account.a_sale'),
                                           'price_unit': 2000.00,
                                           'quantity': 1,
-                                          'product_id': product_id,
+                                          'product_id': product.id,
                                           }
                                    )
                                   ],
@@ -99,38 +90,38 @@ class TestAccountConstraintChronology(common.TransactionCase):
                                                               self.uid)
 
     def test_invoice_draft(self):
-        journal_id = get_journal_check(self, True)
+        journal = get_journal_check(self, True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
         date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        create_simple_invoice(self, journal_id, date)
+        create_simple_invoice(self, journal.id, date)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice_2 = create_simple_invoice(self, journal_id, date)
+        invoice_2 = create_simple_invoice(self, journal.id, date)
         self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
 
     def test_invoice_validate(self):
-        journal_id = get_journal_check(self, True)
+        journal = get_journal_check(self, True)
         today = datetime.now()
         tomorrow = today + timedelta(days=1)
         date = tomorrow.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice = create_simple_invoice(self, journal_id, date)
+        invoice = create_simple_invoice(self, journal.id, date)
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice_2 = create_simple_invoice(self, journal_id, date)
+        invoice_2 = create_simple_invoice(self, journal.id, date)
         self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
 
     def test_invoice_without_date(self):
-        journal_id = get_journal_check(self, True)
+        journal = get_journal_check(self, True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
         date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        create_simple_invoice(self, journal_id, date)
-        invoice_2 = create_simple_invoice(self, journal_id, False)
+        create_simple_invoice(self, journal.id, date)
+        invoice_2 = create_simple_invoice(self, journal.id, False)
         self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
                           'account.invoice', invoice_2.id, 'invoice_open',
                           self.cr)
