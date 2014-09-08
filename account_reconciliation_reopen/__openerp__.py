@@ -72,6 +72,15 @@ The module generates the following entry
 The module cancels the *A1* reconciliation and create a new one between
 *2B* and *3A*
 
+
+Warning
+-------
+
+You should use this module only when you want to force the unreconciling of
+invoices.
+Usually, this procedure is not advisable: you should instead open a new credit
+and reconcile it the future payment(s), keeping the invoice closed.
+
 """,
     'website': 'http://www.agilebg.com',
     'data': [
