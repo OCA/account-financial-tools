@@ -92,6 +92,6 @@ Thanks to main contributors: Grzegorz Grzelak, Alexis de Lattre
         "security/security.xml",
     ],
     "demo": [],
-    "active": False,
-    'installable': False
+    "auto_install": False,
+    'installable': True
 }
