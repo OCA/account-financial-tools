@@ -18,6 +18,7 @@
 ##############################################################################
 
 from openerp import models, api
+from openerp import exceptions
 from openerp.tools.translate import _
 
 
@@ -47,7 +48,7 @@ class AccountMove(models.Model):
                 continue
             else:
                 if not line.journal_id.update_posted:
-                    raise models.except_orm(
+                    raise exceptions.except_orm(
                         _('Error!'),
                         _('You cannot modify a posted entry of this journal.'
                           'First you should set the journal to allow'
