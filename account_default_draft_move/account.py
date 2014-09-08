@@ -30,7 +30,7 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).action_move_create()
         for inv in self:
             if inv.move_id:
-                inv.move_id.write({'state': 'draft'})
+                inv.move_id.state = 'draft'
         return res
 
 

@@ -28,5 +28,5 @@ class AccountBankStatement(models.Model):
         res = super(AccountBankStatement, self).button_confirm_bank()
         for st in self:
             for st_line in st.line_ids:
-                st_line.journal_entry_id.write({'state': 'draft'})
+                st_line.journal_entry_id.state = 'draft'
         return res
