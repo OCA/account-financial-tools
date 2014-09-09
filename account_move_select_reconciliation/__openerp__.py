@@ -25,7 +25,15 @@
     'version': '0.1',
     'category': 'Finance',
     'description': """
+This module allows to manually select the journal item to be reconciled while
+registering a journal entry.
 
+**Example** (also see the included test case)
+
+You have an open credit and you need to close it by a manual journal entry.
+With this module you can manually create the payment journal entry, select the
+open credit and click 'Reconcile Line'. The system will close the credit
+generating the respective reconciliation.
     """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
