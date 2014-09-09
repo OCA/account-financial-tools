@@ -1,0 +1,51 @@
+-
+  I create a customer invoice
+-
+  !record {model: account.invoice, id: account_invoice_customer_1, view: account.invoice_form}:
+    partner_id: base.res_partner_3
+    account_id: account.a_recv
+    invoice_line:
+      - name: 'service'
+        quantity: 1
+        price_unit: 100
+-
+  I confirm the invoice
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1}
+-
+  I create the payment move
+-
+  !record {model: account.move, id: move_1, view: view_move_form}:
+    journal_id: account.bank_journal
+    line_id:
+      - name: 'bank'
+        account_id: account.bnk
+        debit: 100
+        credit: 0
+      - name: 'customer'
+        account_id: account.a_recv
+        debit: 0
+        credit: 100
+-
+  I set the journal item to be reconciled and perform reconciliation
+-
+  !python {model: account.move}: |
+    move = self.browse(cr, uid, ref("move_1"))
+    inv = self.pool.get('account.invoice').browse(cr, uid, ref("account_invoice_customer_1"))
+    for move_line in move.line_id:
+      for line in inv.move_id.line_id:
+        if line.account_id.id == move_line.account_id.id:
+          res = move_line.onchange_move_line_to_reconcile_id(line.id)
+          res['value']['move_line_to_reconcile_id'] = line.id
+          move_line.write(res['value'])
+          move_line.reconcile_move_line()
+          move_line.refresh()
+          inv.refresh()
+          assert move_line.reconcile_id, "move_line %s is not reconciled" % move_line.name
+          assert inv.state == 'paid', "Invoice is not paid but %s" % inv.state
+          move_line.unreconcile_move_line()
+          move_line.refresh()
+          inv.refresh()
+          assert not move_line.reconcile_id, "move_line %s is reconciled" % move_line.name
+          assert inv.state == 'open', "Invoice is not open but %s" % inv.state
+    

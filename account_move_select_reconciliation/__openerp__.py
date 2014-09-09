@@ -3,7 +3,8 @@
 #
 #    Copyright (C) 2014 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
-#    @author Alex Comba <alex.comba@agilebg.com>
+#    @authors Alex Comba <alex.comba@agilebg.com>
+#             Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -24,6 +25,7 @@
     'version': '0.1',
     'category': 'Finance',
     'description': """
+
     """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
@@ -34,6 +36,9 @@
     "data": [
         'account_move_view.xml',
     ],
+    "test": [
+        'test/account.yml',
+        ],
     "active": False,
     "installable": True
 }
