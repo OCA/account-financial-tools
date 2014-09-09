@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
-##############################################################################
 #
-#    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
+#
+#    Authors: Adrien Peiffer
+#    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
+#    All Rights Reserved
+#
+#    WARNING: This program as such is intended to be used by professional
+#    programmers who take the whole responsibility of assessing all potential
+#    consequences resulting from its eventual inadequacies and bugs.
+#    End users who are looking for a ready-to-use solution with commercial
+#    guarantees and support are strongly advised to contact a Free Software
+#    Service Company.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -16,6 +25,16 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
-from . import model
-from . import tests
+#
+
+from . import test_account_constraints
+
+fast_suite = [
+    test_account_constraints,
+]
+
+checks = [
+    test_account_constraints,
+]
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
