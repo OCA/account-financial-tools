@@ -2,7 +2,8 @@
 ##############################################################################
 #
 #    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
-#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L. (http://www.pexego.es)
+#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.
+#    (http://www.pexego.es)
 #    @authors: Jordi Esteve (Zikzakmedia), Borja López Soilán (Pexego)
 #
 #    This program is free software: you can redistribute it and/or modify
