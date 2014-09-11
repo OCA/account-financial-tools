@@ -14,7 +14,7 @@ env:
   - VERSION="8.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints, account_partner_required,async_move_line_importer"
   - VERSION="8.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_constraints"
   - VERSION="8.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_partner_required"
-  - VERSION="8.0" ODOO_REPO="odoo/odoo" INCLUDE="async_move_line_importer"
+  - VERSION="8.0" ODOO_REPO="OCA/OCB" INCLUDE="async_move_line_importer"
 
 virtualenv:
   system_site_packages: true
