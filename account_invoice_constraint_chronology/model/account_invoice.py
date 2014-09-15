@@ -48,7 +48,8 @@ class account_invoice(models.Model):
                                    'proforma2']),
                                  ('date_invoice', '!=', False),
                                  ('date_invoice', '<', inv.date_invoice),
-                                 ('journal_id', '=', inv.journal_id.id)])
+                                 ('journal_id', '=', inv.journal_id.id)],
+                                limit=1)
                 if len(invoices) > 0:
                     date_invoice_format = datetime\
                         .strptime(inv.date_invoice,
@@ -66,7 +67,8 @@ class account_invoice(models.Model):
                                             ('date_invoice', '>',
                                              inv.date_invoice),
                                             ('journal_id', '=',
-                                             inv.journal_id.id)])
+                                             inv.journal_id.id)],
+                                           limit=1)
                     if len(invoices) > 0:
                         date_invoice_format = datetime\
                             .strptime(inv.date_invoice,
