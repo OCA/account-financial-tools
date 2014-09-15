@@ -38,4 +38,5 @@ have to disable these before entering your own search queries.
     'depends': ['account'],
     'js': ['static/src/js/move_line_search_view.js'],
     'images': ['static/src/img/move_line_search_view.png'],
+    'data': ['views/move_line_search_view.xml']
 }
