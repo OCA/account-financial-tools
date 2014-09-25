@@ -27,12 +27,21 @@ from openerp.tools.translate import _
 class account_account_type(orm.Model):
     _inherit = "account.account.type"
 
+    def _get_policies(self, cr, uid, context=None):
+        """This is the method to be inherited for adding policies"""
+        return [('optional', 'Optional'),
+                ('always', 'Always'),
+                ('never', 'Never')]
+
+    def __get_policies(self, cr, uid, context=None):
+        """ Call method which can be inherited """
+        return self._get_policies(cr, uid, context=context)
+
     _columns = {
         'partner_policy': fields.selection(
-            [('optional', 'Optional'),
-             ('always', 'Always'),
-             ('never', 'Never')],
+            __get_policies,
             'Policy for partner field',
+            required=True,
             help="Set the policy for the partner field : if you select "
                  "'Optional', the accountant is free to put a partner "
                  "on an account move line with this type of account ; "
@@ -50,47 +59,41 @@ class account_account_type(orm.Model):
 class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
-    def check_partner_required(self, cr, uid, ids, vals, context=None):
-        if 'account_id' in vals or 'partner_id' in vals or \
-                'debit' in vals or 'credit' in vals:
-            if isinstance(ids, (int, long)):
-                ids = [ids]
-            for move_line in self.browse(cr, uid, ids, context):
-                if move_line.debit == 0 and move_line.credit == 0:
-                    continue
-                policy = move_line.account_id.user_type.partner_policy
-                if policy == 'always' and not move_line.partner_id:
-                    raise orm.except_orm(_('Error :'),
-                                         _("Partner policy is set to 'Always' "
-                                           "with account %s '%s' but the "
-                                           "partner is missing in the account "
-                                           "move line with label '%s'." %
-                                           (move_line.account_id.code,
-                                            move_line.account_id.name,
-                                            move_line.name)))
-                elif policy == 'never' and move_line.partner_id:
-                    raise orm.except_orm(_('Error :'),
-                                         _("Partner policy is set to 'Never' "
-                                           "with account %s '%s' but the "
-                                           "account move line with label '%s' "
-                                           "has a partner '%s'." %
-                                           (move_line.account_id.code,
-                                            move_line.account_id.name,
-                                            move_line.name,
-                                            move_line.partner_id.name)))
+    def _get_partner_policy(self, cr, uid, account, context=None):
+        """ Extension point to obtain analytic policy for an account """
+        return account.user_type.partner_policy
 
-    def create(self, cr, uid, vals, context=None, check=True):
-        line_id = super(account_move_line, self).create(cr, uid, vals,
-                                                        context=context,
-                                                        check=check)
-        self.check_partner_required(cr, uid, line_id, vals, context=context)
-        return line_id
+    def _check_partner_required_msg(self, cr, uid, ids, context=None):
+        for move_line in self.browse(cr, uid, ids, context):
+            if move_line.debit == 0 and move_line.credit == 0:
+                continue
+            policy = self._get_partner_policy(cr, uid,
+                                              move_line.account_id,
+                                              context=context)
+            if policy == 'always' and not move_line.partner_id:
+                return _("Partner policy is set to 'Always' "
+                         "with account %s '%s' but the "
+                         "partner is missing in the account "
+                         "move line with label '%s'." %
+                    (move_line.account_id.code,
+                     move_line.account_id.name,
+                     move_line.name))
+            elif policy == 'never' and move_line.partner_id:
+                return _("Partner policy is set to 'Never' "
+                         "with account %s '%s' but the "
+                         "account move line with label '%s' "
+                         "has a partner '%s'." %
+                    (move_line.account_id.code,
+                     move_line.account_id.name,
+                     move_line.name,
+                     move_line.partner_id.name))
 
-    def write(self, cr, uid, ids, vals, context=None, check=True,
-              update_check=True):
-        res = super(account_move_line, self).write(cr, uid, ids, vals,
-                                                   context=context,
-                                                   check=check,
-                                                   update_check=update_check)
-        self.check_partner_required(cr, uid, ids, vals, context=context)
-        return res
+    def _check_partner_required(self, cr, uid, ids, context=None):
+        return not self._check_partner_required_msg(cr, uid, ids,
+                                                    context=context)
+
+    _constraints = [
+        (_check_partner_required,
+         _check_partner_required_msg,
+         ['partner_id']),
+    ]
