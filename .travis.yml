@@ -6,14 +6,12 @@ python:
   - "2.7"
 
 env:
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" EXCLUDE="account_constraints,account_partner_required,async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
+  - VERSION="7.0" ODOO_REPO="odoo/odoo" EXCLUDE="account_constraints,async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
   - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="account_constraints,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="account_partner_required"
   - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="async_move_line_importer"
 
-  - VERSION="7.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints, account_partner_required,async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
+  - VERSION="7.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints, async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
   - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_constraints,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_partner_required"
   - VERSION="7.0" ODOO_REPO="OCA/OCB" INCLUDE="async_move_line_importer"
 
 virtualenv:
