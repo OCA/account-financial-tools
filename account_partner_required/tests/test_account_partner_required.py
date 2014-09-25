@@ -109,7 +109,7 @@ class test_account_partner_required(common.TransactionCase):
         self._set_partner_policy('always')
         line_id = self._create_move(with_partner=True)
         with self.assertRaises(orm.except_orm):
-            self.move_line_obj.write(self.cr, self.uid, line_id,
+            self.move_line_obj.write(self.cr, self.uid, [line_id],
                                      {'partner_id': False})
 
     def test_change_account(self):
@@ -117,13 +117,13 @@ class test_account_partner_required(common.TransactionCase):
         line_id = self._create_move(with_partner=False)
         # change account to a_pay with policy always but missing partner
         with self.assertRaises(orm.except_orm):
-            self.move_line_obj.write(self.cr, self.uid, line_id,
+            self.move_line_obj.write(self.cr, self.uid, [line_id],
                                      {'account_id': self.ref('account.a_pay')})
         # change account to a_pay with policy always with partner -> ok
         self.move_line_obj.write(
             self.cr,
             self.uid,
-            line_id,
+            [line_id],
             {
                 'account_id': self.ref('account.a_pay'),
                 'partner_id': self.ref('base.res_partner_1')
