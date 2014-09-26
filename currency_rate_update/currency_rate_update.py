@@ -813,11 +813,14 @@ class TCMB_getter(Curreny_getter_interface):
 
         """
         res = {}
-        xpath_curr_rate = '/Tarih_Date/Currency[@Kod="%s"]/ForexBuying/text()' % (curr.upper())
-        res['rate_currency'] = float(dom.xpath(xpath_curr_rate, namespaces=ns)[0])
+        xpath_curr_rate = ('/Tarih_Date/Currency'
+                           '[@Kod="%s"]/ForexBuying/text()' % (curr.upper()))
+        res['rate_currency'] = float(dom.xpath(xpath_curr_rate,
+                                               namespaces=ns)[0])
         return res
 
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
         url = 'http://www.tcmb.gov.tr/kurlar/today.xml'
         # Important : as explained on the TCMB web site, the currencies are
@@ -841,7 +844,8 @@ class TCMB_getter(Curreny_getter_interface):
         # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath('/Tarih_Date/Currency/@Kod')
         self.supported_currency_array.append('TRY')
-        _logger.debug("Supported currencies = %s " % self.supported_currency_array)
+        _logger.debug("Supported currencies = %s " %
+                      self.supported_currency_array)
         self.validate_cur(main_currency)
         if main_currency != 'TRY':
             main_curr_data = self.rate_retrieve(dom, ecb_ns, main_currency)
@@ -854,7 +858,9 @@ class TCMB_getter(Curreny_getter_interface):
                 if main_currency == 'TRY':
                     rate = 1 / curr_data['rate_currency']
                 else:
-                    rate = curr_data['rate_currency'] / main_curr_data['rate_currency']
+                    rate = (curr_data['rate_currency'] /
+                            main_curr_data['rate_currency'])
             self.updated_currency[curr] = rate
-            _logger.debug("TCMB Rate retrieved : 1 %s = %s %s" % (main_currency, rate, curr))
+            _logger.debug("TCMB Rate retrieved : 1 %s = %s %s" %
+                          (main_currency, rate, curr))
         return self.updated_currency, self.log_info
