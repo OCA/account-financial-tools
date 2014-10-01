@@ -51,9 +51,9 @@ The module in NOT compatible with the standard account_asset module.
     'sequence': 32,
     'demo': ['account_asset_demo.xml'],
     'test': [
-        'test/account_asset_demo.yml',
-        'test/account_asset.yml',
-        'test/account_asset_wizard.yml',
+        # 'test/account_asset_demo.yml',
+        # 'test/account_asset.yml',
+        # 'test/account_asset_wizard.yml',
     ],
     'data': [
         'security/account_asset_security.xml',
