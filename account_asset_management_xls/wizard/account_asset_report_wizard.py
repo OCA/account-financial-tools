@@ -21,7 +21,7 @@
 ##############################################################################
 
 from openerp.osv import orm, fields
-from openerp.tools.translate import translate, _
+from openerp.tools.translate import _
 
 
 class wiz_account_asset_report(orm.TransientModel):

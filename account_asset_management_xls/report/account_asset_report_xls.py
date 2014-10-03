@@ -21,7 +21,6 @@
 ##############################################################################
 
 import xlwt
-import time
 from datetime import datetime
 from openerp.osv import orm
 from openerp.report import report_sxw
@@ -485,9 +484,7 @@ class asset_report_xls(report_xls):
         ws.set_horz_split_pos(row_pos)
 
         row_pos_start = row_pos
-        if 'account' in wl_acq:
-            account_pos = wl_acq.index('account')
-        else:
+        if 'account' not in wl_acq:
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_acquisition_fields' list !"))
@@ -522,11 +519,11 @@ class asset_report_xls(report_xls):
                 asset_value_cells = [
                     rowcol_to_cell(row_pos_start + x, asset_value_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)
+                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
                     for x in entry['child_pos']]
-                salvage_formula = '+'.join(salvage_value_cells)
+                salvage_formula = '+'.join(salvage_value_cells)  # noqa: disable F841, report_xls namespace trick
                 c_specs = map(
                     lambda x: self.render(
                         x, template, 'asset_view'),
@@ -545,8 +542,8 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)
-        salvage_total_formula = rowcol_to_cell(row_pos_start,
+        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        salvage_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
 
         c_specs = map(
@@ -608,7 +605,7 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' in wl_act:
-            account_pos = wl_act.index('account')
+            account_pos = wl_act.index('account')  # noqa: disable F841, report_xls namespace trick
         else:
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
@@ -697,22 +694,22 @@ class asset_report_xls(report_xls):
                 asset_value_cells = [
                     rowcol_to_cell(row_pos_start + x, asset_value_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)
+                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
 
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
                     for x in entry['child_pos']]
-                salvage_formula = '+'.join(salvage_value_cells)
+                salvage_formula = '+'.join(salvage_value_cells)  # noqa: disable F841, report_xls namespace trick
 
                 fy_start_value_cells = [
                     rowcol_to_cell(row_pos_start + x, fy_start_value_pos)
                     for x in entry['child_pos']]
-                fy_start_formula = '+'.join(fy_start_value_cells)
+                fy_start_formula = '+'.join(fy_start_value_cells)  # noqa: disable F841, report_xls namespace trick
 
                 fy_end_value_cells = [
                     rowcol_to_cell(row_pos_start + x, fy_end_value_pos)
                     for x in entry['child_pos']]
-                fy_end_formula = '+'.join(fy_end_value_cells)
+                fy_end_formula = '+'.join(fy_end_value_cells)  # noqa: disable F841, report_xls namespace trick
 
                 c_specs = map(
                     lambda x: self.render(
@@ -733,18 +730,18 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)
-        salvage_total_formula = rowcol_to_cell(row_pos_start,
+        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        salvage_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
-        fy_start_total_formula = rowcol_to_cell(row_pos_start,
+        fy_start_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
                                                 fy_start_value_pos)
-        fy_end_total_formula = rowcol_to_cell(row_pos_start, fy_end_value_pos)
+        fy_end_total_formula = rowcol_to_cell(row_pos_start, fy_end_value_pos)  # noqa: disable F841, report_xls namespace trick
 
         fy_start_value_cell = rowcol_to_cell(row_pos, fy_start_value_pos)
         fy_end_value_cell = rowcol_to_cell(row_pos, fy_end_value_pos)
         asset_value_cell = rowcol_to_cell(row_pos, asset_value_pos)
-        fy_diff_formula = fy_start_value_cell + '-' + fy_end_value_cell
-        total_depr_formula = asset_value_cell + '-' + fy_end_value_cell
+        fy_diff_formula = fy_start_value_cell + '-' + fy_end_value_cell  # noqa: disable F841, report_xls namespace trick
+        total_depr_formula = asset_value_cell + '-' + fy_end_value_cell  # noqa: disable F841, report_xls namespace trick
 
         c_specs = map(
             lambda x: self.render(
@@ -802,7 +799,7 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' in wl_dsp:
-            account_pos = wl_dsp.index('account')
+            account_pos = wl_dsp.index('account')  # noqa: disable F841, report_xls namespace trick
         else:
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
@@ -838,11 +835,11 @@ class asset_report_xls(report_xls):
                 asset_value_cells = [
                     rowcol_to_cell(row_pos_start + x, asset_value_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)
+                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
                     for x in entry['child_pos']]
-                salvage_formula = '+'.join(salvage_value_cells)
+                salvage_formula = '+'.join(salvage_value_cells)  # noqa: disable F841, report_xls namespace trick
                 c_specs = map(
                     lambda x: self.render(
                         x, template, 'asset_view'),
@@ -861,8 +858,8 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)
-        salvage_total_formula = rowcol_to_cell(row_pos_start,
+        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        salvage_total_formula = rowcol_to_cell(row_pos_start,   # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
 
         c_specs = map(
@@ -876,12 +873,11 @@ class asset_report_xls(report_xls):
 
     def generate_xls_report(self, _p, _xs, data, objects, wb):
 
-        wl_act = _p.wanted_list_active
-        wl_rem = _p.wanted_list_removal
+        wl_act = _p.wanted_list_active  # noqa: disable F841, report_xls namespace trick
+        wl_rem = _p.wanted_list_removal  # noqa: disable F841, report_xls namespace trick
         self.acquisition_template.update(_p.template_update_acquisition)
         self.active_template.update(_p.template_update_active)
         self.removal_template.update(_p.template_update_removal)
-        _ = _p._
         fy = self.pool.get('account.fiscalyear').browse(
             self.cr, self.uid, data['fiscalyear_id'], context=self.context)
         self.fiscalyear = fy
