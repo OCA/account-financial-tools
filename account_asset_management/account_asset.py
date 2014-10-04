@@ -896,6 +896,12 @@ class account_asset_asset(orm.Model):
         salvage_value = salvage_value or 0.0
         if purchase_value or salvage_value:
             val['asset_value'] = purchase_value - salvage_value
+        if ids:
+            aadl_obj = self.pool.get('account.asset.depreciation.line')
+            dl_create_ids = aadl_obj.search(
+                cr, uid, [('type', '=', 'create'), ('asset_id', 'in', ids)])
+            aadl_obj.write(
+                cr, uid, dl_create_ids, {'amount': val['asset_value']})
         return {'value': val}
 
     def _get_assets(self, cr, uid, ids, context=None):
