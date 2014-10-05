@@ -15,7 +15,7 @@
     self.compute_depreciation_board(cr, uid, [ref("account_asset_asset_vehicle0")])
     asset = self.browse(cr, uid, ref("account_asset_asset_vehicle0"))
     # remark: check infra only valid for prorata == False and method_period == 'year'
-    assert asset.method_number == len(asset.depreciation_line_ids), 'Depreciation lines not created correctly'
+    assert asset.method_number == (len(asset.depreciation_line_ids) - 1), 'Depreciation lines not created correctly'
 -
   I create an account move for the first depreciation line.
 -
