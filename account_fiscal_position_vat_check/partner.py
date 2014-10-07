@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Account Fiscal Position VAT Check module for OpenERP
-#    Copyright (C) 2013 Akretion (http://www.akretion.com)
+#    Copyright (C) 2013-2014 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,21 +20,21 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
-from openerp.tools.translate import _
+from openerp import models, api, _
 
 
-class res_partner(orm.Model):
+class res_partner(models.Model):
     _inherit = 'res.partner'
 
-    def fiscal_position_change(self, cr, uid, ids, account_position,
-                               vat, customer):
-        '''Warning is the fiscal position requires a vat number and the partner
-        doesn't have one yet'''
-        if account_position and customer and not vat:
-            fp = self.pool['account.fiscal.position'].read(
-                cr, uid, account_position, ['customer_must_have_vat', 'name'])
-            if fp['customer_must_have_vat']:
+    @api.multi
+    def fiscal_position_change(
+            self, account_position_id, vat, customer):
+        '''Warning if the fiscal position requires a VAT number and the
+        partner doesn't have one yet'''
+        if account_position_id and customer and not vat:
+            fp = self.env['account.fiscal.position'].browse(
+                account_position_id)
+            if fp.customer_must_have_vat:
                 return {
                     'warning': {
                         'title': _('Missing VAT number:'),
@@ -42,8 +42,7 @@ class res_partner(orm.Model):
                             "You have set the fiscal position '%s' "
                             "that require the customer to have a VAT number. "
                             "You should add the VAT number of this customer"
-                            " in OpenERP."
-                        ) % fp['name']
+                            " in OpenERP.") % fp.name
                     }
                 }
         return True
