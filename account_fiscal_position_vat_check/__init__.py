@@ -20,29 +20,5 @@
 #
 ##############################################################################
 
-from openerp import models, api, _
-
-
-class res_partner(models.Model):
-    _inherit = 'res.partner'
-
-    @api.multi
-    def fiscal_position_change(
-            self, account_position_id, vat, customer):
-        '''Warning if the fiscal position requires a VAT number and the
-        partner doesn't have one yet'''
-        if account_position_id and customer and not vat:
-            fp = self.env['account.fiscal.position'].browse(
-                account_position_id)
-            if fp.customer_must_have_vat:
-                return {
-                    'warning': {
-                        'title': _('Missing VAT number:'),
-                        'message': _(
-                            "You have set the fiscal position '%s' "
-                            "that require the customer to have a VAT number. "
-                            "You should add the VAT number of this customer"
-                            " in OpenERP.") % fp.name
-                    }
-                }
-        return True
+from . import account_invoice
+from . import partner
