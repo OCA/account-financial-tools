@@ -29,7 +29,7 @@ class account_fiscal_position(models.Model):
 
     customer_must_have_vat = fields.Boolean(
         string='Customer Must Have VAT number',
-        help="If enabled, OpenERP will check that the customer has a VAT "
+        help="If enabled, Odoo will check that the customer has a VAT "
         "number when the user validates a customer invoice/refund.")
 
 
@@ -57,7 +57,7 @@ class account_invoice(models.Model):
                       "that require the customer to have a VAT number. "
                       "But the Customer '%s' doesn't "
                       "have a VAT number in OpenERP."
-                      "Please add the VAT number of this Customer in OpenERP "
+                      "Please add the VAT number of this Customer in Odoo "
                       " and try to validate again.")
                     % (type_label, invoice.fiscal_position.name,
                         invoice.partner_id.name))
