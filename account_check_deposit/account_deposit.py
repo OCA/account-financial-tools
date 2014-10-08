@@ -61,34 +61,23 @@ class account_check_deposit(orm.Model):
 
     _columns = {
         'name': fields.char(
-            'Name',
-            size=64,
-            readonly=True),
+            'Name', size=64, readonly=True),
         'check_payment_ids': fields.one2many(
-            'account.move.line',
-            'check_deposit_id',
-            'Check Payments',
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            'account.move.line', 'check_deposit_id', 'Check Payments',
+            states={'done': [('readonly', '=', True)]}),
         'deposit_date': fields.date(
-            'Deposit Date',
-            required=True,
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            'Deposit Date', required=True,
+            states={'done': [('readonly', '=', True)]}),
         'journal_id': fields.many2one(
-            'account.journal',
-            'Journal',
-            domain=[('type', '=', 'bank')],
-            required=True,
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            'account.journal', 'Journal', domain=[('type', '=', 'bank')],
+            required=True, states={'done': [('readonly', '=', True)]}),
         'journal_default_account_id': fields.related(
             'journal_id', 'default_debit_account_id', type='many2one',
             relation='account.account',
             string='Default Debit Account of the Journal'),
         'currency_id': fields.many2one(
-            'res.currency', 'Currency', required=True, readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            'res.currency', 'Currency', required=True,
+            states={'done': [('readonly', '=', True)]}),
         'currency_none_same_company_id': fields.function(
             _compute_check_deposit, type='many2one',
             relation='res.currency', multi='deposit',
@@ -96,46 +85,30 @@ class account_check_deposit(orm.Model):
         'state': fields.selection([
             ('draft', 'Draft'),
             ('done', 'Done'),
-            ], 'Status',
-            readonly=True),
+            ], 'Status', readonly=True),
         'move_id': fields.many2one(
-            'account.move',
-            'Journal Entry',
-            readonly=True),
+            'account.move', 'Journal Entry', readonly=True),
         'partner_bank_id': fields.many2one(
-            'res.partner.bank',
-            'Bank Account',
-            required=True,
-            readonly=True,
+            'res.partner.bank', 'Bank Account', required=True,
             domain="[('company_id', '=', company_id)]",
-            states={'draft': [('readonly', '=', False)]}),
+            states={'done': [('readonly', '=', True)]}),
         'line_ids': fields.related(
-            'move_id',
-            'line_id',
-            relation='account.move.line',
-            type='one2many',
-            string='Lines',
-            readonly=True),
+            'move_id', 'line_id', relation='account.move.line',
+            type='one2many', string='Lines', readonly=True),
         'company_id': fields.many2one(
-            'res.company',
-            'Company',
-            required=True,
+            'res.company', 'Company', required=True,
             change_default=True,
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            states={'done': [('readonly', '=', True)]}),
         'total_amount': fields.function(
-            _compute_check_deposit,
-            multi='deposit',
-            string="Total Amount",
+            _compute_check_deposit, multi='deposit',
+            string="Total Amount", readonly=True,
             type="float", digits_compute=dp.get_precision('Account')),
         'check_count': fields.function(
-            _compute_check_deposit, multi='deposit',
+            _compute_check_deposit, multi='deposit', readonly=True,
             string="Number of Checks", type="integer"),
         'is_reconcile': fields.function(
-            _compute_check_deposit,
-            multi='deposit',
-            string="Reconcile",
-            type="boolean"),
+            _compute_check_deposit, multi='deposit', readonly=True,
+            string="Reconcile", type="boolean"),
     }
 
     _defaults = {
