@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Account Fiscal Position VAT Check module for OpenERP
+#    Account Fiscal Position VAT Check module for Odoo
 #    Copyright (C) 2013-2014 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
@@ -40,9 +40,8 @@ class res_partner(models.Model):
                         'title': _('Missing VAT number:'),
                         'message': _(
                             "You have set the fiscal position '%s' "
-                            "that require the customer to have a VAT number. "
-                            "You should add the VAT number of this customer"
-                            " in OpenERP.") % fp.name
+                            "that require the customer to have a VAT number, "
+                            "but the VAT number is missing.") % fp.name
                     }
                 }
         return True
