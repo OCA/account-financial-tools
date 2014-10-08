@@ -1,59 +1,69 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
-#                                                                             #
-#   account_check_deposit for OpenERP                                         #
-#   Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>  #
-#   Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>  #
-#                                                                             #
-#   This program is free software: you can redistribute it and/or modify      #
-#   it under the terms of the GNU Affero General Public License as            #
-#   published by the Free Software Foundation, either version 3 of the        #
-#   License, or (at your option) any later version.                           #
-#                                                                             #
-#   This program is distributed in the hope that it will be useful,           #
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
-#   GNU Affero General Public License for more details.                       #
-#                                                                             #
-#   You should have received a copy of the GNU Affero General Public License  #
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.     #
-#                                                                             #
+#
+#   account_check_deposit for Odoo/OpenERP
+#   Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
+#   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
+#   @author: Chafique DELLI <chafique.delli@akretion.com>
+#   @author: Alexis de Lattre <alexis.delattre@akretion.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as
+#   published by the Free Software Foundation, either version 3 of the
+#   License, or (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Affero General Public License for more details.
+#
+#   You should have received a copy of the GNU Affero General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 ###############################################################################
 
-from openerp.osv import fields, osv, orm
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
+import openerp.addons.decimal_precision as dp
 
 
 class account_check_deposit(orm.Model):
     _name = "account.check.deposit"
     _description = "Account Check Deposit"
+    _order = 'deposit_date desc'
 
-    def sum_amount(self, cr, uid, ids, name, args, context=None):
+    def _compute_check_deposit(self, cr, uid, ids, name, args, context=None):
         res = {}
         for deposit in self.browse(cr, uid, ids, context=context):
-            total = 0
+            total = 0.0
+            count = 0
+            reconcile = False
+            currency_none_same_company_id = False
+            if deposit.company_id.currency_id != deposit.currency_id:
+                currency_none_same_company_id = deposit.currency_id.id
             for line in deposit.check_payment_ids:
-                total += line.debit
-            res[deposit.id] = total
-        return res
-
-    def _is_reconcile(self, cr, uid, ids, name, args, context=None):
-        res = {}
-        for deposit in self.browse(cr, uid, ids, context=context):
-            res[deposit.id] = False
+                count += 1
+                if currency_none_same_company_id:
+                    total += line.amount_currency
+                else:
+                    total += line.debit
             if deposit.move_id:
                 for line in deposit.move_id.line_id:
                     if line.debit > 0 and line.reconcile_id:
-                        res[deposit.id] = True
+                        reconcile = True
+            res[deposit.id] = {
+                'total_amount': total,
+                'is_reconcile': reconcile,
+                'currency_none_same_company_id': currency_none_same_company_id,
+                'check_count': count,
+                }
         return res
 
     _columns = {
         'name': fields.char(
             'Name',
             size=64,
-            required=True,
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
+            readonly=True),
         'check_payment_ids': fields.one2many(
             'account.move.line',
             'check_deposit_id',
@@ -62,14 +72,27 @@ class account_check_deposit(orm.Model):
             states={'draft': [('readonly', '=', False)]}),
         'deposit_date': fields.date(
             'Deposit Date',
+            required=True,
             readonly=True,
             states={'draft': [('readonly', '=', False)]}),
         'journal_id': fields.many2one(
             'account.journal',
             'Journal',
+            domain=[('type', '=', 'bank')],
             required=True,
             readonly=True,
             states={'draft': [('readonly', '=', False)]}),
+        'journal_default_account_id': fields.related(
+            'journal_id', 'default_debit_account_id', type='many2one',
+            relation='account.account',
+            string='Default Debit Account of the Journal'),
+        'currency_id': fields.many2one(
+            'res.currency', 'Currency', required=True, readonly=True,
+            states={'draft': [('readonly', '=', False)]}),
+        'currency_none_same_company_id': fields.function(
+            _compute_check_deposit, type='many2one',
+            relation='res.currency', multi='deposit',
+            string='Currency (False if same as company)'),
         'state': fields.selection([
             ('draft', 'Draft'),
             ('done', 'Done'),
@@ -78,14 +101,13 @@ class account_check_deposit(orm.Model):
         'move_id': fields.many2one(
             'account.move',
             'Journal Entry',
-            readonly=True,
-            states={'draft': [('readonly', '=', False)]}),
-        'bank_id': fields.many2one(
+            readonly=True),
+        'partner_bank_id': fields.many2one(
             'res.partner.bank',
-            'Bank',
+            'Bank Account',
             required=True,
             readonly=True,
-            domain="[('partner_id', '=', partner_id)]",
+            domain="[('company_id', '=', company_id)]",
             states={'draft': [('readonly', '=', False)]}),
         'line_ids': fields.related(
             'move_id',
@@ -93,13 +115,6 @@ class account_check_deposit(orm.Model):
             relation='account.move.line',
             type='one2many',
             string='Lines',
-            readonly=True),
-        'partner_id': fields.related(
-            'company_id',
-            'partner_id',
-            type="many2one",
-            relation="res.partner",
-            string="Partner",
             readonly=True),
         'company_id': fields.many2one(
             'res.company',
@@ -109,127 +124,224 @@ class account_check_deposit(orm.Model):
             readonly=True,
             states={'draft': [('readonly', '=', False)]}),
         'total_amount': fields.function(
-            sum_amount,
-            string="total amount",
-            type="float"),
+            _compute_check_deposit,
+            multi='deposit',
+            string="Total Amount",
+            type="float", digits_compute=dp.get_precision('Account')),
+        'check_count': fields.function(
+            _compute_check_deposit, multi='deposit',
+            string="Number of Checks", type="integer"),
         'is_reconcile': fields.function(
-            _is_reconcile,
+            _compute_check_deposit,
+            multi='deposit',
             string="Reconcile",
             type="boolean"),
     }
 
     _defaults = {
-        'name': lambda self, cr, uid, context: '/',
+        'name': '/',
         'deposit_date': fields.date.context_today,
         'state': 'draft',
-        'company_id': lambda self, cr, uid, c: self.pool.get('res.company').\
-            _company_default_get(cr, uid, 'account.check.deposit', context=c),
+        'company_id': lambda self, cr, uid, c: self.pool['res.company'].
+        _company_default_get(cr, uid, 'account.check.deposit', context=c),
     }
+
+    def _check_deposit(self, cr, uid, ids):
+        for deposit in self.browse(cr, uid, ids):
+            deposit_currency = deposit.currency_id
+            if deposit_currency == deposit.company_id.currency_id:
+                for line in deposit.check_payment_ids:
+                    if line.currency_id:
+                        raise orm.except_orm(
+                            _('Error:'),
+                            _("The check with amount %s and reference '%s' "
+                                "is in currency %s but the deposit is in "
+                                "currency %s.") % (
+                                line.debit, line.ref or '',
+                                line.currency_id.name,
+                                deposit_currency.name))
+            else:
+                for line in deposit.check_payment_ids:
+                    if line.currency_id != deposit_currency:
+                        raise orm.except_orm(
+                            _('Error:'),
+                            _("The check with amount %s and reference '%s' "
+                                "is in currency %s but the deposit is in "
+                                "currency %s.") % (
+                                line.debit, line.ref or '',
+                                line.currency_id.name,
+                                deposit_currency.name))
+        return True
+
+    _constraints = [(
+        _check_deposit,
+        "All the checks of the deposit must be in the currency of the deposit",
+        ['currency_id', 'check_payment_ids', 'company_id']
+        )]
 
     def unlink(self, cr, uid, ids, context=None):
         for deposit in self.browse(cr, uid, ids, context=context):
             if deposit.state == 'done':
-                raise osv.except_osv(_('User Error!'),
-                    _('You cannot delete a validad deposit, cancel it before'))
-        return super(account_check_deposit, self).unlink(cr, uid, ids, context=context)
-
-    def cancel(self, cr, uid, ids, context=None):
-        for deposit in self.browse(cr, uid, ids, context=context):
-            if not deposit.journal_id.update_posted:
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error!'),
-                    _('You cannot modify a posted entry of this journal.\n'
-                      'First you should set the journal to allow cancelling '
-                      'entries.'))
-            for line in deposit.check_payment_ids:
-                if line.reconcile_id:
-                    line.reconcile_id.unlink()
+                    _("The deposit '%s' is in valid state, so you must "
+                        "cancel it before deleting it.")
+                    % deposit.name)
+        return super(account_check_deposit, self).unlink(
+            cr, uid, ids, context=context)
+
+    def backtodraft(self, cr, uid, ids, context=None):
+        for deposit in self.browse(cr, uid, ids, context=context):
             if deposit.move_id:
+                # It will raise here if journal_id.update_posted = False
                 deposit.move_id.button_cancel()
+                for line in deposit.check_payment_ids:
+                    if line.reconcile_id:
+                        line.reconcile_id.unlink()
                 deposit.move_id.unlink()
             deposit.write({'state': 'draft'})
         return True
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('name', '/') == '/':
-            vals['name'] = self.pool.get('ir.sequence').\
-                get(cr, uid, 'account.check.deposit')
+            vals['name'] = self.pool['ir.sequence'].\
+                next_by_code(cr, uid, 'account.check.deposit')
         return super(account_check_deposit, self).\
             create(cr, uid, vals, context=context)
 
     def _prepare_account_move_vals(self, cr, uid, deposit, context=None):
         date = deposit.deposit_date
+        period_obj = self.pool['account.period']
+        period_ids = period_obj.find(cr, uid, dt=date, context=context)
+        # period_ids will always have a value, cf the code of find()
         move_vals = {
             'journal_id': deposit.journal_id.id,
             'date': date,
+            'period_id': period_ids[0],
+            'name': _('Check Deposit %s') % deposit.name,
+            'ref': deposit.name,
             }
-        period_obj = self.pool['account.period']
-        period_ids = period_obj.find(cr, uid, dt=date, context=context)
-        if period_ids:
-            move_vals['period_id'] = period_ids[0]
-        sum_move_line = self._prepare_sum_move_line_vals(
-            cr, uid, deposit, move_vals, context=context)
-        move_lines = [[0, 0, sum_move_line]]
-
-        for line in deposit.check_payment_ids:
-            move_line = self._prepare_move_line_vals(
-                cr, uid, line, move_vals, context=context)
-            move_lines.append([0, 0, move_line])
-
-        move_vals.update({'line_id': move_lines})
         return move_vals
 
-    def _prepare_move_line_vals(self, cr, uid, line, move_vals, context=None):
+    def _prepare_move_line_vals(
+            self, cr, uid, line, context=None):
+        assert (line.debit > 0), 'Debit must have a value'
         return {
-            'name': line.ref,
+            'name': _('Check Deposit - Ref. Check %s') % line.ref,
             'credit': line.debit,
+            'debit': 0.0,
             'account_id': line.account_id.id,
             'partner_id': line.partner_id.id,
-            'check_line_id': line.id,
-        }
+            'currency_id': line.currency_id.id or False,
+            'amount_currency': line.amount_currency * -1,
+            }
 
-    def _prepare_sum_move_line_vals(self, cr, uid, deposit, move_vals, context=None):
-        debit = 0.0
-        for line in deposit.check_payment_ids:
-            debit += line.debit
+    def _prepare_counterpart_move_lines_vals(
+            self, cr, uid, deposit, total_debit, total_amount_currency,
+            context=None):
         return {
-            'name': deposit.name,
-            'debit': debit,
-            'ref': deposit.name,
-        }
-
-    def _reconcile_checks(self, cr, uid, move_id, context=None):
-        move_line_obj = self.pool['account.move.line']
-        move_obj = self.pool['account.move']
-        move = move_obj.browse(cr, uid, move_id, context=context)
-        for line in move.line_id:
-            if line.check_line_id:
-                move_line_obj.reconcile(cr, uid, [
-                    line.id,
-                    line.check_line_id.id,
-                    ], context=context)
-        return True
-
-    def onchange_company_id(self, cr, uid, ids, company_id, context=None):
-        vals = {}
-        if company_id:
-            company = self.pool.get('res.company').\
-                browse(cr, uid, company_id, context=context)
-        vals['partner_id'] = company.partner_id.id
-        return {'value': vals}
+            'name': _('Check Deposit %s') % deposit.name,
+            'debit': total_debit,
+            'credit': 0.0,
+            'account_id': deposit.company_id.check_deposit_account_id.id,
+            'partner_id': False,
+            'currency_id': deposit.currency_none_same_company_id.id or False,
+            'amount_currency': total_amount_currency,
+            }
 
     def validate_deposit(self, cr, uid, ids, context=None):
-        move_obj = self.pool.get('account.move')
+        am_obj = self.pool['account.move']
+        aml_obj = self.pool['account.move.line']
         if context is None:
             context = {}
         for deposit in self.browse(cr, uid, ids, context=context):
-            context['journal_id'] = deposit.journal_id.id
-            move_vals = self._prepare_account_move_vals(cr, uid, deposit, context=context)
-            move_id = move_obj.create(cr, uid, move_vals, context=context)
-            move_obj.post(cr, uid, [move_id], context=context)
-            self._reconcile_checks(cr, uid, move_id, context=context)
+            move_vals = self._prepare_account_move_vals(
+                cr, uid, deposit, context=context)
+            context['journal_id'] = move_vals['journal_id']
+            context['period_id'] = move_vals['period_id']
+            move_id = am_obj.create(cr, uid, move_vals, context=context)
+            total_debit = 0.0
+            total_amount_currency = 0.0
+            to_reconcile_line_ids = []
+            for line in deposit.check_payment_ids:
+                total_debit += line.debit
+                total_amount_currency += line.amount_currency
+                line_vals = self._prepare_move_line_vals(
+                    cr, uid, line, context=context)
+                line_vals['move_id'] = move_id
+                move_line_id = aml_obj.create(
+                    cr, uid, line_vals, context=context)
+                to_reconcile_line_ids.append([line.id, move_line_id])
+
+            # Create counter-part
+            if not deposit.company_id.check_deposit_account_id:
+                raise orm.except_orm(
+                    _('Configuration Error:'),
+                    _("Missing Account for Check Deposits on the "
+                        "company '%s'.") % deposit.company_id.name)
+
+            counter_vals = self._prepare_counterpart_move_lines_vals(
+                cr, uid, deposit, total_debit, total_amount_currency,
+                context=context)
+            counter_vals['move_id'] = move_id
+            aml_obj.create(cr, uid, counter_vals, context=context)
+
+            am_obj.post(cr, uid, [move_id], context=context)
             deposit.write({'state': 'done', 'move_id': move_id})
+            # We have to reconcile after post()
+            for reconcile_line_ids in to_reconcile_line_ids:
+                aml_obj.reconcile(
+                    cr, uid, reconcile_line_ids, context=context)
         return True
+
+    def onchange_company_id(
+            self, cr, uid, ids, company_id, currency_id, context=None):
+        vals = {}
+        if company_id:
+            company = self.pool['res.company'].browse(
+                cr, uid, company_id, context=context)
+            if currency_id:
+                if company.currency_id.id == currency_id:
+                    vals['currency_none_same_company_id'] = False
+                else:
+                    vals['currency_none_same_company_id'] = currency_id
+            partner_bank_ids = self.pool['res.partner.bank'].search(
+                cr, uid, [('company_id', '=', company_id)], context=context)
+            if len(partner_bank_ids) == 1:
+                vals['partner_bank_id'] = partner_bank_ids[0]
+        else:
+            vals['currency_none_same_company_id'] = False
+            vals['partner_bank_id'] = False
+        return {'value': vals}
+
+    def onchange_journal_id(self, cr, uid, ids, journal_id, context=None):
+        vals = {}
+        if journal_id:
+            journal = self.pool['account.journal'].browse(
+                cr, uid, journal_id, context=context)
+            vals['journal_default_account_id'] = \
+                journal.default_debit_account_id.id
+            if journal.currency:
+                vals['currency_id'] = journal.currency.id
+            else:
+                vals['currency_id'] = journal.company_id.currency_id.id
+        else:
+            vals['journal_default_account_id'] = False
+        return {'value': vals}
+
+    def onchange_currency_id(
+            self, cr, uid, ids, currency_id, company_id, context=None):
+        vals = {}
+        if currency_id and company_id:
+            company = self.pool['res.company'].browse(
+                cr, uid, company_id, context=context)
+            if company.currency_id.id == currency_id:
+                vals['currency_none_same_company_id'] = False
+            else:
+                vals['currency_none_same_company_id'] = currency_id
+        else:
+            vals['currency_none_same_company_id'] = False
+        return {'value': vals}
 
 
 class account_move_line(orm.Model):
@@ -239,7 +351,17 @@ class account_move_line(orm.Model):
         'check_deposit_id': fields.many2one(
             'account.check.deposit',
             'Check Deposit'),
-        'check_line_id': fields.many2one(
-            'account.move.line',
-            'Check Receive Move line'),
     }
+
+
+class res_company(orm.Model):
+    _inherit = 'res.company'
+
+    _columns = {
+        'check_deposit_account_id': fields.many2one(
+            'account.account', 'Account for Check Deposits',
+            domain=[
+                ('type', '<>', 'view'),
+                ('type', '<>', 'closed'),
+                ('reconcile', '=', True)]),
+        }

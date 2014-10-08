@@ -1,35 +1,45 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
-#                                                                             #
-#   account_check_deposit for OpenERP                                         #
-#   Copyright (C) 2012 Akretion Benoît GUILLOT <benoit.guillot@akretion.com>  #
-#   Copyright (C) 2013 Akretion Chafique DELLI <chafique.delli@akretion.com>  #
-#                                                                             #
-#   This program is free software: you can redistribute it and/or modify      #
-#   it under the terms of the GNU Affero General Public License as            #
-#   published by the Free Software Foundation, either version 3 of the        #
-#   License, or (at your option) any later version.                           #
-#                                                                             #
-#   This program is distributed in the hope that it will be useful,           #
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
-#   GNU Affero General Public License for more details.                       #
-#                                                                             #
-#   You should have received a copy of the GNU Affero General Public License  #
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.     #
-#                                                                             #
+#
+#   account_check_deposit for Odoo/OpenERP
+#   Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
+#   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
+#   @author: Chafique DELLI <chafique.delli@akretion.com>
+#   @author: Alexis de Lattre <alexis.delattre@akretion.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Affero General Public License as
+#   published by the Free Software Foundation, either version 3 of the
+#   License, or (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU Affero General Public License for more details.
+#
+#   You should have received a copy of the GNU Affero General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 ###############################################################################
 
 {
-    'name': 'account_check_deposit',
+    'name': 'Account Check Deposit',
     'version': '0.1',
-    'category': 'Generic Modules/Others',
+    'category': 'Accounting & Finance',
     'license': 'AGPL-3',
-    'description': """This module allows you to use check deposits.
-        With a new model : account_check_deposit you can select all
-        the checks payments and create a global deposit for the selected checks.
-        You may have to create an account for "received checks" and a
-        journal for payment by checks.""",
+    'summary': 'Manage deposit of checks to the bank',
+    'description': """
+Account Check Deposit
+=====================
+This module allows you to easily manage check deposits : you can select all
+the checks you received as payments and create a global deposit for the
+selected checks.
+
+A journal for received checks is automatically created.
+You must configure on this journal the default debit account and the default
+credit account. You must also configure on the company the account for
+check deposits.
+""",
     'author': 'Akretion',
     'website': 'http://www.akretion.com/',
     'depends': [
@@ -39,10 +49,11 @@
     'data': [
        'account_deposit_view.xml',
        'account_deposit_sequence.xml',
-       'account_type_data.xml',
+       'company_view.xml',
        'security/ir.model.access.csv',
+       'security/check_deposit_security.xml',
+       'account_data.xml',
     ],
     'installable': True,
     'application': True,
-    'active': False,
 }
