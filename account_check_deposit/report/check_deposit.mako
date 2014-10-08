@@ -37,76 +37,54 @@
 </head>
 <body>
 %for deposit in objects :
-<% setLang(deposit.partner_id.lang) %>
-<b><span class="titre">${_("Deposit Slip of Checks(Euros)")}</span></b>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-        <h2>
-<b>${_("Deposit N°")} ${deposit.name}</b>
-        </h2>
+<% setLang(deposit.company_id.partner_id.lang) %>
+<b><span class="titre">${_("Deposit Slip of Checks in ")} ${deposit.currency_id.name}</span></b>
 
-        <h1>
-<b>${_("Deposit Date")}</b><span class="vtrait1">${_("|")}</span>
-<span class="valign_up1"> ${deposit.deposit_date}</span>
-<b><span class="halign">${_("Bank Code")}</span></b>
-<span class="vtrait2">${_("|")}</span><span class="valign_up2"> ${deposit.bank_id.bank_code}</span>
-<br>
-<b>${_("Beneficiary")}</b><span class="vtrait1">${_("|")}</span>
-<span class="valign_up1"> ${company.partner_id.name}</span>
-<b><span class="halign">${_("Office Code")}</span></b>
-<span class="vtrait2">${_("|")}</span><span class="valign_up2"> ${deposit.bank_id.office}</span>
-<br>
-<b>${_("Account to crediting")}</b><span class="vtrait1">${_("|")}</span>
-<span class="valign_up1"> ${deposit.bank_id.rib_acc_number}</span>
-<b><span class="halign">${_("BIS Key")}</span></b><span class="vtrait2">${_("|")}</span>
-<span class="valign_up2"> ${deposit.bank_id.key}</span>
-        </h1>
-<br>
-        <h3>
-<b>${_("Check Payments")}</b>
-        </h3>
+<table class="basic_table" width="100%">
+    <tr>
+        <th class="date">${_("Deposit Date")}</th>
+        <th class="text-align:center;">${_("Deposit Ref")}</th>
+        <th class="text-align:center;">${_("Beneficiary")}</th>
+        <th class="text-align:center;">${_("Bank Account Number")}</th>
+    </tr>
+    <tr>
+        <td class="date">${formatLang(deposit.deposit_date, date=True)}</td>
+        <td class="text-align:center;">${deposit.name}</td>
+        <td class="text-align:center;">${deposit.company_id.partner_id.name}</td>
+        <td class="text-align:center;">${deposit.partner_bank_id.acc_number}</td>
+    </tr>
+</table>
+
+<h3>${_("Check Payments")}</h3>
 
     <table style="width:100%">
         <thead>
           <tr>
 <th class="entete_tab">${_("Payment Date")}</th>
 <th class="entete_tab">${_("Reference")}</th>
-<th class="entete_tab">${_("Description")}</th>
-<th class="entete_tab">${_("Designation")}</th>
+<th class="entete_tab">${_("Debtor")}</th>
 <th class="entete_tab">${_("Amount")}</th>
         </thead>
           </tr>
 
-<br>
      %for move_line in deposit.check_payment_ids :
     <tbody>
         <tr>
         <td class="cellule_tab">${move_line.date or ''}</td>
         <td class="cellule_tab">${move_line.ref or ''}</td>
-        <td class="cellule_tab">${move_line.name or ''}</td>
         <td class="cellule_tab">${move_line.partner_id.name or ''}</td>
-        <td class="amount">${move_line.debit or '0'}</td>
+        <td class="amount">${deposit.currency_id == deposit.company_id.currency_id and move_line.debit or move_line.amount_currency} ${deposit.currency_id.name}</td>
         </tr>
     </tbody>
     %endfor
     %endfor
     <tfoot>
             <tr>
-                <td colspan=4 class="amount total"><b>${_("Total:")}</b></td>
-                <td colspan=5 class="amount total"><b>${deposit.total_amount or '0'}</b></td>
+                <td colspan="3" class="amount total"><b>${_("Total:")}</b></td>
+                <td class="amount total"><b>${deposit.total_amount or '0'} ${deposit.currency_id.name}</b></td>
             </tr>
         </tfoot>
      </table>
-
-
-
-
-
-
 
 </body>
 </html>
