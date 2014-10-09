@@ -10,14 +10,6 @@
 
 <openerp>
     <data>
-        <report
-            auto="False"
-            file="account_check_deposit/report/check_deposit.mako"
-            id="check_deposit_webkit"
-            model="account.check.deposit"
-            name="check.deposit.webkit"
-            report_type="webkit"
-            string="Checks Deposit"/>
 
         <record id="account_check_deposit_view_form" model="ir.ui.view">
             <field name="name">account.check.deposit.form</field>
