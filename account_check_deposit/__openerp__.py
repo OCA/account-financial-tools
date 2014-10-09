@@ -2,7 +2,7 @@
 ###############################################################################
 #
 #   account_check_deposit for Odoo/OpenERP
-#   Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
+#   Copyright (C) 2012-2015 Akretion (http://www.akretion.com/)
 #   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 #   @author: Chafique DELLI <chafique.delli@akretion.com>
 #   @author: Alexis de Lattre <alexis.delattre@akretion.com>
@@ -24,7 +24,7 @@
 
 {
     'name': 'Account Check Deposit',
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Manage deposit of checks to the bank',
@@ -40,7 +40,7 @@ You must configure on this journal the default debit account and the default
 credit account. You must also configure on the company the account for
 check deposits.
 """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': [
         'account_accountant',
@@ -48,11 +48,14 @@ check deposits.
     ],
     'data': [
         'account_deposit_view.xml',
+        'account_move_line_view.xml',
         'account_deposit_sequence.xml',
         'company_view.xml',
         'security/ir.model.access.csv',
         'security/check_deposit_security.xml',
         'account_data.xml',
+        'report.xml',
+        'report/report_checkdeposit.xml',
     ],
     'installable': True,
     'application': True,
