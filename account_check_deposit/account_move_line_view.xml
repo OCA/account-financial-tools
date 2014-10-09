@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2015 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+
+<record id="view_move_line_form" model="ir.ui.view">
+    <field name="name">account_check_deposit.view_move_line_form</field>
+    <field name="model">account.move.line</field>
+    <field name="inherit_id" ref="account.view_move_line_form" />
+    <field name="arch" type="xml">
+        <field name="statement_id" position="after">
+            <field name="check_deposit_id" />
+        </field>
+    </field>
+</record>
+
+<record id="view_move_line_form2" model="ir.ui.view">
+    <field name="name">account_check_deposit.view_move_line_form2</field>
+    <field name="model">account.move.line</field>
+    <field name="inherit_id" ref="account.view_move_line_form2" />
+    <field name="arch" type="xml">
+        <field name="blocked" position="after">
+            <field name="check_deposit_id" />
+        </field>
+    </field>
+</record>
+
+
+</data>
+</openerp>
