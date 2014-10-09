@@ -2,7 +2,7 @@
 ###############################################################################
 #
 #   account_check_deposit for Odoo/OpenERP
-#   Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
+#   Copyright (C) 2012-2015 Akretion (http://www.akretion.com/)
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
