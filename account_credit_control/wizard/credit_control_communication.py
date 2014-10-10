@@ -63,7 +63,7 @@ class CreditCommunication(TransientModel):
     }
 
     def _get_comp(self, cr, uid, context=None):
-        self.pool.get('res.company')._company_default_get(
+        return self.pool.get('res.company')._company_default_get(
             cr, uid,
             'credit.control.policy',
             context=context
