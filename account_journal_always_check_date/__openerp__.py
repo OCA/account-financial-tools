@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Account Journal Always Check Date module for OpenERP
-#    Copyright (C) 2013 Akretion (http://www.akretion.com)
+#    Copyright (C) 2013-2014 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -49,7 +49,6 @@ for any help or question about this module.
     'website': 'http://www.akretion.com',
     'depends': ['account'],
     'data': [],
-    'images': ['images/always_check_date_constraint.jpg'],
-    'installable': False,
+    'installable': True,
     'active': False,
 }

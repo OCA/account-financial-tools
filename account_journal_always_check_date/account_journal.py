@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Account Journal Always Check Date module for OpenERP
-#    Copyright (C) 2013 Akretion (http://www.akretion.com)
+#    Copyright (C) 2013-2014 Akretion (http://www.akretion.com)
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,4 +20,26 @@
 #
 ##############################################################################
 
-from . import account_journal
+from openerp import models, fields, api, _
+
+
+class account_journal(models.Model):
+    _inherit = 'account.journal'
+
+    @api.v7
+    def init(self, cr):
+        '''Activate 'Check Date in Period' on all existing journals'''
+        cr.execute(
+            "UPDATE account_journal SET allow_date=true "
+            "WHERE allow_date <> true")
+        return True
+
+    allow_date = fields.Boolean(default=True)
+
+    @api.one
+    @api.constrains('allow_date')
+    def _allow_date_always_active(self):
+        if not self.allow_date:
+            raise Warning(
+                _("The option 'Check Date in Period' must be active "
+                    "on journal '%s'.") % self.name)

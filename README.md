@@ -14,4 +14,4 @@ It provides addons to:
  - Force draft accounting by default
  - Enforce partners on account moves
 
-And munch more.
+And much more.
