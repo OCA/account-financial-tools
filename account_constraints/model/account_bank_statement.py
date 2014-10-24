@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from openerp import models, api
+from openerp import models, api, fields
 
 
 class AccountBankStatement(models.Model):
@@ -44,6 +44,14 @@ class AccountBankStatement(models.Model):
 
 class AccountBankStatementLine(models.Model):
     _inherit = "account.bank.statement.line"
+
+    state = fields.Selection(string='Statement state',
+                             related='statement_id.state')
+
+    @api.multi
+    def cancel(self):
+        self = self.with_context(from_parent_object=True)
+        return super(AccountBankStatementLine, self).cancel()
 
     @api.multi
     def process_reconciliation(self, mv_line_dicts):

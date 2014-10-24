@@ -61,6 +61,7 @@ Summary of constraints are:
     'website': 'http://www.camptocamp.com',
     'data': [
         'view/account_journal.xml',
+        'view/account_bank_statement.xml',
     ],
     'installable': True,
 }
