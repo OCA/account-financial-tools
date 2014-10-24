@@ -222,6 +222,10 @@ class account_asset_asset(orm.Model):
 
     def unlink(self, cr, uid, ids, context=None):
         for asset in self.browse(cr, uid, ids, context=context):
+            if asset.state != 'draft':
+                raise orm.except_orm(
+                    _('Invalid action!'),
+                    _("You can only delete assets in draft state."))
             if asset.account_move_line_ids:
                 raise orm.except_orm(
                     _('Error!'),
