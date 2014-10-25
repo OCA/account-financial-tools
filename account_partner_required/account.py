@@ -75,18 +75,18 @@ class account_move_line(orm.Model):
                          "with account %s '%s' but the "
                          "partner is missing in the account "
                          "move line with label '%s'." %
-                    (move_line.account_id.code,
-                     move_line.account_id.name,
-                     move_line.name))
+                         (move_line.account_id.code,
+                          move_line.account_id.name,
+                          move_line.name))
             elif policy == 'never' and move_line.partner_id:
                 return _("Partner policy is set to 'Never' "
                          "with account %s '%s' but the "
                          "account move line with label '%s' "
                          "has a partner '%s'." %
-                    (move_line.account_id.code,
-                     move_line.account_id.name,
-                     move_line.name,
-                     move_line.partner_id.name))
+                         (move_line.account_id.code,
+                          move_line.account_id.name,
+                          move_line.name,
+                          move_line.partner_id.name))
 
     def _check_partner_required(self, cr, uid, ids, context=None):
         return not self._check_partner_required_msg(cr, uid, ids,
