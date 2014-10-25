@@ -95,5 +95,5 @@ class account_move_line(orm.Model):
     _constraints = [
         (_check_partner_required,
          _check_partner_required_msg,
-         ['partner_id', 'account_id']),
+         ['partner_id', 'account_id', 'debit', 'credit']),
     ]
