@@ -987,7 +987,8 @@ class account_asset_asset(orm.Model):
                         'parent_id', 'depreciation_line_ids'
                     ], 20),
                 'account.asset.depreciation.line': (
-                    _get_assets_from_dl, ['amount', 'init', 'move_id'], 20),
+                    _get_assets_from_dl,
+                    ['amount', 'init_entry', 'move_id'], 20),
             }),
         'value_depreciated': fields.function(
             _depreciated, method=True,
@@ -1000,7 +1001,8 @@ class account_asset_asset(orm.Model):
                         'parent_id', 'depreciation_line_ids'
                     ], 30),
                 'account.asset.depreciation.line': (
-                    _get_assets_from_dl, ['amount', 'init', 'move_id'], 30),
+                    _get_assets_from_dl,
+                    ['amount', 'init_entry', 'move_id'], 30),
             }),
         'salvage_value': fields.float(
             'Salvage Value', digits_compute=dp.get_precision('Account'),
