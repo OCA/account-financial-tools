@@ -76,7 +76,7 @@ On each generated line, you have many choices:
           "security/ir.model.access.csv"],
  'demo_xml': ["credit_control_demo.xml"],
  'tests': [],
- 'installable': False,
+ 'installable': True,
  'license': 'AGPL-3',
  'application': True
  }
