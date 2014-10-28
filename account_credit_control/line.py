@@ -154,7 +154,7 @@ class CreditControlLine(models.Model):
         return data
 
     @api.model
-    def create_or_update_from_mv_lines(self, lines, level_id, controlling_date,
+    def create_or_update_from_mv_lines(self, lines, level, controlling_date,
                                        check_tolerance=True):
         """ Create or update line based on levels
 
@@ -164,7 +164,7 @@ class CreditControlLine(models.Model):
         of open amount.
 
         :param lines: move.line id recordset
-        :param level_id: credit.control.policy.level id
+        :param level: credit.control.policy.level record
         :param controlling_date: date string of the credit controlling date.
                                  Generally it should be the same
                                  as create date
@@ -187,7 +187,6 @@ class CreditControlLine(models.Model):
             tolerance[currency.id] = currency.compute(tolerance_base,
                                                       user_currency)
 
-        level = level_obj.browse(level_id)
         new_lines = self.browse()
         for move_line in lines:
             open_amount = move_line.amount_residual_currency

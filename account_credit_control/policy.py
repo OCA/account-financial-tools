@@ -194,9 +194,8 @@ class CreditControlPolicy(models.Model):
         return different_lines
 
     @api.multi
-    def check_policy_against_account(self, account_id):
+    def check_policy_against_account(self, account):
         """ Ensure that the policy corresponds to account relation """
-        account = self.env['account.account'].browse(account_id)
         policies = self.search([])
         allowed = [x for x in policies
                    if account in x.account_ids or x.do_nothing]

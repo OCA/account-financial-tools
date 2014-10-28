@@ -52,7 +52,7 @@ class ResPartner(models.Model):
             account = partner.property_account_receivable
             policy = partner.credit_policy_id
             try:
-                policy.check_policy_against_account(account.id)
+                policy.check_policy_against_account(account)
             except api.Warning as err:
                 # constrains should raise ValidationError exceptions
                 raise api.ValidationError(err)

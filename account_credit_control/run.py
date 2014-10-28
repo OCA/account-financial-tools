@@ -114,14 +114,12 @@ class CreditControlRun(models.Model):
             if lines:
                 # policy levels are sorted by level
                 # so iteration is in the correct order
+                create = cr_line_obj.create_or_update_from_mv_lines
                 for level in reversed(policy.level_ids):
                     level_lines = level.get_level_lines(self.date, lines)
-                    policy_lines_generated += \
-                        cr_line_obj.create_or_update_from_mv_lines(
-                            level_lines,
-                            level.id,
-                            self.date,
-                        )
+                    policy_lines_generated += create(level_lines,
+                                                     level,
+                                                     self.date)
             generated += policy_lines_generated
             if policy_lines_generated:
                 report += (_("Policy \"%s\" has generated %d Credit "
