@@ -18,14 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class Mail(orm.Model):
+class Mail(models.Model):
     _inherit = 'mail.mail'
 
     # use HTML fields instead of text
-    _columns = {
-        'body_html': fields.html('Rich-text Contents',
-                                 help="Rich-text/HTML message"),
-    }
+    body_html = fields.Html('Rich-text Contents',
+                            help="Rich-text/HTML message")

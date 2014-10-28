@@ -20,14 +20,14 @@
 ##############################################################################
 import logging
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 from openerp.tools.translate import _
 
 logger = logging.getLogger('credit.line.control')
 
 
-class CreditControlLine(orm.Model):
-    """A credit control line describes an amount due by a customer for a due date.
+class CreditControlLine(models.Model):
+    """ A credit control line describes an amount due by a customer for a due date.
 
     A line is created once the due date of the payment is exceeded.
     It is created in "draft" and some actions are available (send by email,
@@ -38,160 +38,105 @@ class CreditControlLine(orm.Model):
     _description = "A credit control line"
     _rec_name = "id"
     _order = "date DESC"
-    _columns = {
-        'date': fields.date(
-            'Controlling date',
-            required=True,
-            select=True
-        ),
-        # maturity date of related move line we do not use
-        # a related field in order to
-        # allow manual changes
-        'date_due': fields.date(
-            'Due date',
-            required=True,
-            readonly=True,
-            states={'draft': [('readonly', False)]}
-        ),
 
-        'date_entry': fields.related(
-            'move_line_id', 'date',
-            type='date',
-            string='Entry date',
-            store=True, readonly=True
-        ),
+    date = fields.Date(string='Controlling date',
+                       required=True,
+                       select=True)
+    # maturity date of related move line we do not use
+    # a related field in order to
+    # allow manual changes
+    date_due = fields.Date(string='Due date',
+                           required=True,
+                           readonly=True,
+                           states={'draft': [('readonly', False)]})
 
-        'date_sent': fields.date(
-            'Sent date',
-            readonly=True,
-            states={'draft': [('readonly', False)]}
-        ),
+    date_entry = fields.Date(string='Entry date',
+                             related='move_line_id.date',
+                             store=True,
+                             readonly=True)
 
-        'state': fields.selection(
-            [('draft', 'Draft'),
-             ('ignored', 'Ignored'),
-             ('to_be_sent', 'Ready To Send'),
-             ('sent', 'Done'),
-             ('error', 'Error'),
-             ('email_error', 'Emailing Error')],
-            'State', required=True, readonly=True,
-            help=("Draft lines need to be triaged.\n"
-                  "Ignored lines are lines for which we do "
-                  "not want to send something.\n"
-                  "Draft and ignored lines will be "
-                  "generated again on the next run.")
-        ),
+    date_sent = fields.Date(string='Sent date',
+                            readonly=True,
+                            states={'draft': [('readonly', False)]})
 
-        'channel': fields.selection(
-            [('letter', 'Letter'),
-             ('email', 'Email')],
-            'Channel', required=True,
-            readonly=True,
-            states={'draft': [('readonly', False)]}
-        ),
+    state = fields.Selection([('draft', 'Draft'),
+                              ('ignored', 'Ignored'),
+                              ('to_be_sent', 'Ready To Send'),
+                              ('sent', 'Done'),
+                              ('error', 'Error'),
+                              ('email_error', 'Emailing Error')],
+                             'State',
+                             required=True,
+                             readonly=True,
+                             default='draft',
+                             help="Draft lines need to be triaged.\n"
+                                  "Ignored lines are lines for which we do "
+                                  "not want to send something.\n"
+                                  "Draft and ignored lines will be "
+                                  "generated again on the next run.")
 
-        'invoice_id': fields.many2one(
-            'account.invoice',
-            'Invoice',
-            readonly=True
-        ),
+    channel = fields.Selection([('letter', 'Letter'),
+                                ('email', 'Email')],
+                               string='Channel',
+                               required=True,
+                               readonly=True,
+                               states={'draft': [('readonly', False)]})
 
-        'partner_id': fields.many2one(
-            'res.partner',
-            "Partner",
-            required=True
-        ),
+    invoice_id = fields.Many2one('account.invoice',
+                                 string='Invoice',
+                                 readonly=True)
 
-        'amount_due': fields.float(
-            'Due Amount Tax incl.',
-            required=True,
-            readonly=True
-        ),
+    partner_id = fields.Many2one('res.partner',
+                                 string='Partner',
+                                 required=True)
 
-        'balance_due': fields.float(
-            'Due balance', required=True,
-            readonly=True
-        ),
+    amount_due = fields.Float(string='Due Amount Tax incl.',
+                              required=True, readonly=True)
 
-        'mail_message_id': fields.many2one(
-            'mail.mail',
-            'Sent Email',
-            readonly=True
-        ),
+    balance_due = fields.Float(string='Due balance', required=True,
+                               readonly=True)
 
-        'move_line_id': fields.many2one(
-            'account.move.line',
-            'Move line',
-            required=True,
-            readonly=True
-        ),
+    mail_message_id = fields.Many2one('mail.mail', string='Sent Email',
+                                      readonly=True)
 
-        'account_id': fields.related(
-            'move_line_id',
-            'account_id',
-            type='many2one',
-            relation='account.account',
-            string='Account',
-            store=True,
-            readonly=True
-        ),
+    move_line_id = fields.Many2one('account.move.line',
+                                   string='Move line',
+                                   required=True,
+                                   readonly=True)
 
-        'currency_id': fields.related(
-            'move_line_id',
-            'currency_id',
-            type='many2one',
-            relation='res.currency',
-            string='Currency',
-            store=True,
-            readonly=True
-        ),
+    account_id = fields.Many2one(related='move_line_id.account_id',
+                                 store=True,
+                                 readonly=True)
 
-        'company_id': fields.related(
-            'move_line_id', 'company_id',
-            type='many2one',
-            relation='res.company',
-            string='Company',
-            store=True, readonly=True
-        ),
+    currency_id = fields.Many2one(related='move_line_id.currency_id',
+                                  store=True,
+                                  readonly=True)
 
-        # we can allow a manual change of policy in draft state
-        'policy_level_id': fields.many2one(
-            'credit.control.policy.level',
-            'Overdue Level',
-            required=True,
-            readonly=True,
-            states={'draft': [('readonly', False)]}
-        ),
+    company_id = fields.Many2one(related='move_line_id.company_id',
+                                 store=True,
+                                 readonly=True)
 
-        'policy_id': fields.related(
-            'policy_level_id',
-            'policy_id',
-            type='many2one',
-            relation='credit.control.policy',
-            string='Policy',
-            store=True,
-            readonly=True
-        ),
+    # we can allow a manual change of policy in draft state
+    policy_level_id = fields.Many2one('credit.control.policy.level',
+                                      string='Overdue Level',
+                                      required=True,
+                                      readonly=True,
+                                      states={'draft': [('readonly', False)]})
 
-        'level': fields.related(
-            'policy_level_id',
-            'level',
-            type='integer',
-            relation='credit.control.policy',
-            string='Level',
-            store=True,
-            readonly=True
-        ),
+    policy_id = fields.Many2one(related='policy_level_id.policy_id',
+                                store=True,
+                                readonly=True)
 
-        'manually_overridden': fields.boolean('Manually overridden')
-    }
+    level = fields.Integer(related='policy_level_id.level',
+                           store=True,
+                           readonly=True)
 
-    _defaults = {'state': 'draft'}
+    manually_overridden = fields.Boolean(string='Manually overridden')
 
-    def _prepare_from_move_line(self, cr, uid, move_line,
-                                level, controlling_date, open_amount,
-                                context=None):
-        """Create credit control line"""
+    @api.model
+    def _prepare_from_move_line(self, move_line, level, controlling_date,
+                                open_amount):
+        """ Create credit control line """
         data = {}
         data['date'] = controlling_date
         data['date_due'] = move_line.date_maturity
@@ -208,17 +153,17 @@ class CreditControlLine(orm.Model):
         data['move_line_id'] = move_line.id
         return data
 
-    def create_or_update_from_mv_lines(self, cr, uid, ids, lines,
-                                       level_id, controlling_date,
-                                       check_tolerance=True, context=None):
-        """Create or update line based on levels
+    @api.model
+    def create_or_update_from_mv_lines(self, lines, level_id, controlling_date,
+                                       check_tolerance=True):
+        """ Create or update line based on levels
 
         if check_tolerance is true credit line will not be
         created if open amount is too small.
         eg. we do not want to send a letter for 10 cents
         of open amount.
 
-        :param lines: move.line id list
+        :param lines: move.line id recordset
         :param level_id: credit.control.policy.level id
         :param controlling_date: date string of the credit controlling date.
                                  Generally it should be the same
@@ -228,65 +173,54 @@ class CreditControlLine(orm.Model):
                                 is smaller than company defined
                                 tolerance
 
-        :returns: list of created credit line ids
+        :returns: recordset of created credit lines
         """
-        currency_obj = self.pool.get('res.currency')
-        level_obj = self.pool.get('credit.control.policy.level')
-        ml_obj = self.pool.get('account.move.line')
-        user = self.pool.get('res.users').browse(cr, uid, uid)
-        currency_ids = currency_obj.search(cr, uid, [], context=context)
+        currency_obj = self.env['res.currency']
+        level_obj = self.env['credit.control.policy.level']
+        user = self.env.user
+        currencies = currency_obj.search([])
 
         tolerance = {}
         tolerance_base = user.company_id.credit_control_tolerance
-        for c_id in currency_ids:
-            tolerance[c_id] = currency_obj.compute(
-                cr, uid,
-                c_id,
-                user.company_id.currency_id.id,
-                tolerance_base,
-                context=context)
+        user_currency = user.company_id.currency_id
+        for currency in currencies:
+            tolerance[currency.id] = currency.compute(tolerance_base,
+                                                      user_currency)
 
-        level = level_obj.browse(cr, uid, level_id, context)
-        line_ids = []
-        for line in ml_obj.browse(cr, uid, lines, context):
-
-            open_amount = line.amount_residual_currency
-            cur_tolerance = tolerance.get(line.currency_id.id, tolerance_base)
+        level = level_obj.browse(level_id)
+        new_lines = self.browse()
+        for move_line in lines:
+            open_amount = move_line.amount_residual_currency
+            cur_tolerance = tolerance.get(move_line.currency_id.id,
+                                          tolerance_base)
             if check_tolerance and open_amount < cur_tolerance:
                 continue
-            vals = self._prepare_from_move_line(cr, uid,
-                                                line,
+            vals = self._prepare_from_move_line(move_line,
                                                 level,
                                                 controlling_date,
-                                                open_amount,
-                                                context=context)
-            line_id = self.create(cr, uid, vals, context=context)
-            line_ids.append(line_id)
+                                                open_amount)
+            line = self.create(vals)
+            new_lines += line
 
             # when we have lines generated earlier in draft,
             # on the same level, it means that we have left
             # them, so they are to be considered as ignored
-            previous_draft_ids = self.search(
-                cr, uid,
-                [('move_line_id', '=', line.id),
-                 ('policy_level_id', '=', level.id),
-                 ('state', '=', 'draft'),
-                 ('id', '!=', line_id)],
-                context=context)
-            if previous_draft_ids:
-                self.write(cr, uid, previous_draft_ids,
-                           {'state': 'ignored'}, context=context)
+            previous_drafts = self.search([('move_line_id', '=', move_line.id),
+                                           ('policy_level_id', '=', level.id),
+                                           ('state', '=', 'draft'),
+                                           ('id', '!=', line.id)])
+            if previous_drafts:
+                previous_drafts.write({'state': 'ignored'})
 
-        return line_ids
+        return new_lines
 
-    def unlink(self, cr, uid, ids, context=None, check=True):
-        for line in self.browse(cr, uid, ids, context=context):
+    @api.multi
+    def unlink(self):
+        for line in self:
             if line.state != 'draft':
-                raise orm.except_orm(
-                    _('Error !'),
+                raise api.Warning(
                     _('You are not allowed to delete a credit control '
                       'line that is not in draft state.')
                 )
 
-        return super(CreditControlLine, self).unlink(cr, uid, ids,
-                                                     context=context)
+        return super(CreditControlLine, self).unlink()

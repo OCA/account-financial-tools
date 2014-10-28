@@ -18,27 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class AccountAccount(orm.Model):
-    """Add a link to a credit control policy on account.account"""
+class AccountAccount(models.Model):
+    """ Add a link to a credit control policy on account.account """
 
     _inherit = "account.account"
 
-    _columns = {
-        'credit_control_line_ids': fields.one2many(
-            'credit.control.line',
-            'account_id',
-            string='Credit Lines',
-            readonly=True),
-    }
-
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        else:
-            default = default.copy()
-        default['credit_control_line_ids'] = False
-        return super(AccountAccount, self).copy_data(
-            cr, uid, id, default=default, context=context)
+    credit_control_line_ids = fields.One2many('credit.control.line',
+                                              'account_id',
+                                              string='Credit Lines',
+                                              readonly=True)

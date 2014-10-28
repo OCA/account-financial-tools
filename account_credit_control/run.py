@@ -20,143 +20,113 @@
 ##############################################################################
 import logging
 
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 from openerp.tools.translate import _
 
 logger = logging.getLogger('credit.control.run')
 
 
-class CreditControlRun(orm.Model):
-    """Credit Control run generate all credit control lines and reject"""
+class CreditControlRun(models.Model):
+    """ Credit Control run generate all credit control lines and reject """
 
     _name = "credit.control.run"
     _rec_name = 'date'
-    _description = """Credit control line generator"""
-    _columns = {
-        'date': fields.date('Controlling Date', required=True),
-        'policy_ids': fields.many2many(
-            'credit.control.policy',
-            rel="credit_run_policy_rel",
-            id1='run_id', id2='policy_id',
-            string='Policies',
-            readonly=True,
-            states={'draft': [('readonly', False)]}
-        ),
+    _description = "Credit control line generator"
 
-        'report': fields.text('Report', readonly=True),
+    date = fields.Date(string='Controlling Date', required=True)
 
-        'state': fields.selection([('draft', 'Draft'),
-                                   ('done', 'Done')],
-                                  string='State',
-                                  required=True,
-                                  readonly=True),
+    @api.model
+    def _get_policies(self):
+        return self.env['credit.control.policy'].search([])
 
-        'manual_ids': fields.many2many(
-            'account.move.line',
-            rel="credit_runreject_rel",
-            string='Lines to handle manually',
-            help=('If a credit control line has been generated'
-                  'on a policy and the policy has been changed '
-                  'in the meantime, it has to be handled '
-                  'manually'),
-            readonly=True
-        ),
-    }
+    policy_ids = fields.Many2many(
+        'credit.control.policy',
+        rel="credit_run_policy_rel",
+        id1='run_id', id2='policy_id',
+        string='Policies',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        default=_get_policies,
+    )
+    report = fields.Text(string='Report', readonly=True, copy=False)
+    state = fields.Selection([('draft', 'Draft'),
+                              ('done', 'Done')],
+                             string='State',
+                             required=True,
+                             readonly=True,
+                             default='draft')
+    manual_ids = fields.Many2many(
+        'account.move.line',
+        rel="credit_runreject_rel",
+        string='Lines to handle manually',
+        help='If a credit control line has been generated'
+             'on a policy and the policy has been changed '
+             'in the meantime, it has to be handled '
+             'manually',
+        readonly=True,
+        copy=False,
+    )
 
-    def copy_data(self, cr, uid, id, default=None, context=None):
-        if default is None:
-            default = {}
-        else:
-            default = default.copy()
-        default.update({
-            'report': False,
-            'manual_ids': False,
-        })
-        return super(CreditControlRun, self).copy_data(
-            cr, uid, id, default=default, context=context)
-
-    def _get_policies(self, cr, uid, context=None):
-        return self.pool['credit.control.policy'].search(cr, uid, [],
-                                                         context=context)
-
-    _defaults = {'state': 'draft',
-                 'policy_ids': _get_policies}
-
-    def _check_run_date(self, cr, uid, ids, controlling_date, context=None):
-        """Ensure that there is no credit line in the future
+    @api.multi
+    def _check_run_date(self, controlling_date):
+        """ Ensure that there is no credit line in the future
         using controlling_date
 
         """
-        run_obj = self.pool['credit.control.run']
-        runs = run_obj.search(cr, uid, [('date', '>', controlling_date)],
-                              order='date DESC', limit=1, context=context)
+        runs = self.search([('date', '>', controlling_date)],
+                           order='date DESC', limit=1)
         if runs:
-            run = run_obj.browse(cr, uid, runs[0], context=context)
-            raise orm.except_orm(_('Error'),
-                                 _('A run has already been executed more '
-                                   'recently than %s') % (run.date))
+            raise api.Warning(_('A run has already been executed more '
+                                'recently than %s') % (runs.date))
 
-        line_obj = self.pool['credit.control.line']
-        lines = line_obj.search(cr, uid, [('date', '>', controlling_date)],
-                                order='date DESC', limit=1, context=context)
+        line_obj = self.env['credit.control.line']
+        lines = line_obj.search([('date', '>', controlling_date)],
+                                order='date DESC', limit=1)
         if lines:
-            line = line_obj.browse(cr, uid, lines[0], context=context)
-            raise orm.except_orm(_('Error'),
-                                 _('A credit control line more '
-                                   'recent than %s exists at %s') %
-                                 (controlling_date, line.date))
-        return True
+            raise api.Warning(_('A credit control line more '
+                                'recent than %s exists at %s') %
+                              (controlling_date, lines.date))
 
-    def _generate_credit_lines(self, cr, uid, run_id, context=None):
+    @api.multi
+    @api.returns('credit.control.line')
+    def _generate_credit_lines(self):
         """ Generate credit control lines. """
-        cr_line_obj = self.pool.get('credit.control.line')
-        assert not (isinstance(run_id, list) and len(run_id) > 1), \
-            "run_id: only one id expected"
-        if isinstance(run_id, list):
-            run_id = run_id[0]
+        self.ensure_one()
+        cr_line_obj = self.env['credit.control.line']
+        move_line_obj = self.env['account.move.line']
+        manually_managed_lines = move_line_obj.browse()
+        self._check_run_date(self.date)
 
-        run = self.browse(cr, uid, run_id, context=context)
-        manually_managed_lines = set()  # line who changed policy
-        credit_line_ids = []  # generated lines
-        run._check_run_date(run.date, context=context)
-
-        policies = run.policy_ids
+        policies = self.policy_ids
         if not policies:
-            raise orm.except_orm(_('Error'),
-                                 _('Please select a policy'))
+            raise api.Warning(_('Please select a policy'))
 
         report = ''
-        generated_ids = []
+        generated = []
         for policy in policies:
             if policy.do_nothing:
                 continue
-            lines = policy._get_move_lines_to_process(run.date,
-                                                      context=context)
-            manual_lines = policy._lines_different_policy(lines,
-                                                          context=context)
-            lines.difference_update(manual_lines)
-            manually_managed_lines.update(manual_lines)
-            policy_generated_ids = []
+            lines = policy._get_move_lines_to_process(self.date)
+            manual_lines = policy._lines_different_policy(lines)
+            lines -= manual_lines
+            manually_managed_lines += manual_lines
+            policy_lines_generated = cr_line_obj.browse()
             if lines:
                 # policy levels are sorted by level
                 # so iteration is in the correct order
                 for level in reversed(policy.level_ids):
-                    level_lines = level.get_level_lines(run.date, lines,
-                                                        context=context)
-                    policy_generated_ids += \
+                    level_lines = level.get_level_lines(self.date, lines)
+                    policy_lines_generated += \
                         cr_line_obj.create_or_update_from_mv_lines(
-                            cr, uid,
-                            [],
-                            list(level_lines),
+                            level_lines,
                             level.id,
-                            run.date,
-                            context=context
+                            self.date,
                         )
-            generated_ids.extend(policy_generated_ids)
-            if policy_generated_ids:
-                report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
-                           (policy.name, len(policy_generated_ids))
-                credit_line_ids += policy_generated_ids
+            generated += policy_lines_generated
+            if policy_lines_generated:
+                report += (_("Policy \"%s\" has generated %d Credit "
+                             "Control Lines.\n") %
+                            (policy.name, len(policy_lines_generated)))
             else:
                 report += _(
                     "Policy \"%s\" has not generated any "
@@ -166,24 +136,24 @@ class CreditControlRun(orm.Model):
         vals = {'state': 'done',
                 'report': report,
                 'manual_ids': [(6, 0, manually_managed_lines)]}
-        run.write(vals, context=context)
-        return generated_ids
+        self.write(vals)
+        return generated
 
-    def generate_credit_lines(self, cr, uid, run_id, context=None):
-        """Generate credit control lines
+    @api.multi
+    def generate_credit_lines(self):
+        """ Generate credit control lines
 
         Lock the ``credit_control_run`` Postgres table to avoid concurrent
         calls of this method.
         """
         try:
-            cr.execute('SELECT id FROM credit_control_run'
-                       ' LIMIT 1 FOR UPDATE NOWAIT')
+            self._cr.execute('SELECT id FROM credit_control_run'
+                             ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception:
             # In case of exception openerp will do a rollback
             # for us and free the lock
-            raise orm.except_orm(_('Error'),
-                                 _('A credit control run is already running'
-                                   ' in background, please try later.'))
+            raise api.Warning(_('A credit control run is already running'
+                                ' in background, please try later.'))
 
-        self._generate_credit_lines(cr, uid, run_id, context)
+        self._generate_credit_lines()
         return True

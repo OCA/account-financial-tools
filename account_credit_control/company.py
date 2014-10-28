@@ -18,24 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class ResCompany(orm.Model):
-    """Add credit control parameters"""
+class ResCompany(models.Model):
+    """ Add credit control parameters """
     _inherit = 'res.company'
 
-    _columns = {
-        'credit_control_tolerance': fields.float('Credit Control Tolerance'),
-        # This is not a property on the partner because we cannot search
-        # on fields.property (subclass fields.function).
-        'credit_policy_id': fields.many2one(
-            'credit.control.policy',
-            'Credit Control Policy',
-            help=("The Credit Control Policy used on partners"
-                  " by default. This setting can be overridden"
-                  " on partners or invoices.")
-        ),
-    }
-
-    _defaults = {"credit_control_tolerance": 0.1}
+    credit_control_tolerance = fields.Float(string='Credit Control Tolerance',
+                                            default=0.1)
+    # This is not a property on the partner because we cannot search
+    # on fields.property (subclass fields.function).
+    credit_policy_id = fields.Many2one('credit.control.policy',
+                                       string='Credit Control Policy',
+                                       help="The Credit Control Policy used "
+                                            "on partners by default. "
+                                            "This setting can be overridden"
+                                            " on partners or invoices.")
