@@ -18,14 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import netsvc
 import logging
-from openerp.osv.orm import TransientModel, fields
+from openerp import netsvc
+from openerp.osv import orm, fields
 
 logger = logging.getLogger('credit.control.line.mailing')
 
 
-class CreditCommunication(TransientModel):
+class CreditCommunication(orm.TransientModel):
     """Shell class used to provide a base model to email template and reporting.
     Il use this approche in version 7 a browse record
     will exist even if not saved
