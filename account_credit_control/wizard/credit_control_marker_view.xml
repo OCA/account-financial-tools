@@ -1,0 +1,60 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_marker_form" model="ir.ui.view">
+      <field name="name">credit.line.marker.form</field>
+      <field name="model">credit.control.marker</field>
+      <field name="arch" type="xml">
+        <form string="Lines marker" version="7.0">
+          <separator string="Change the state of the selected lines" colspan="4"/>
+          <newline/>
+          <label string="Warning: you will maybe not be able to revert this operation." colspan="4"></label>
+          <newline/>
+          <group>
+            <group><field name="name"/></group>
+            <group></group>
+          </group>
+          <notebook>
+            <page string="Lines">
+              <field name="line_ids" colspan="4" nolabel="1"/>
+            </page>
+          </notebook>
+          <newline/>
+          <footer>
+            <button
+                class="oe_highlight"
+                name="mark_lines"
+                string="Change Lines' State"
+                type="object"/>
+            or
+            <button
+                class="oe_link"
+                special="cancel"
+                string="Cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Change Lines' State"
+                res_model="credit.control.marker"
+                src_model="credit.control.line"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="open_credit_line_marker_wizard_menu_action"/>
+
+    <record id="open_credit_line_marker_wizard" model="ir.actions.act_window">
+      <field name="name">Change Lines' State</field>
+      <field name="res_model">credit.control.marker</field>
+      <field name="src_model">credit.control.line</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_line_marker_form"/>
+      <field name="target">new</field>
+      <field name="help">Change the state of the selected lines.</field>
+    </record>
+
+  </data>
+</openerp>
