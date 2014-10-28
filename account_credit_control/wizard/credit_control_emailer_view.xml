@@ -1,0 +1,54 @@
+<openerp>
+  <data>
+
+    <record id="credit_line_emailer_form" model="ir.ui.view">
+      <field name="name">credit.line.emailer.form</field>
+      <field name="model">credit.control.emailer</field>
+      <field name="arch" type="xml">
+        <form string="Mailer" version="7.0">
+          <separator string="Send emails for the selected lines" colspan="4"/>
+          <newline/>
+          <notebook>
+            <page string="Lines">
+              <field name="line_ids" colspan="4" nolabel="1" />
+            </page>
+          </notebook>
+          <newline/>
+          <footer>
+            <button class="oe_highlight"
+                    name="email_lines"
+                    string="Send the emails"
+                    type="object"/>
+            or
+            <button
+                class="oe_link"
+                special="cancel"
+                string="Cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Send By Email"
+        res_model="credit.control.emailer"
+        src_model="credit.control.line"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="open_credit_line_emailer_wizard_menu_action"/>
+
+    <!-- for button -->
+    <record id="open_credit_line_emailer_wizard" model="ir.actions.act_window">
+      <field name="name">Send By Email</field>
+      <field name="res_model">credit.control.emailer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_line_emailer_form"/>
+      <field name="target">new</field>
+      <field name="help">Send an email for the selected lines.</field>
+    </record>
+
+
+  </data>
+</openerp>

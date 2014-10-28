@@ -1,0 +1,171 @@
+<openerp>
+  <data>
+    <record id="credit_control_line_form" model="ir.ui.view">
+      <field name="name">credit.control.line.form</field>
+      <field name="model">credit.control.line</field>
+      <field name="arch" type="xml">
+        <form string="Control Credit Lines">
+          <header>
+            <field name="state" widget="statusbar"
+              statusbar_visible="draft,to_be_sent,sent"
+              statusbar_colors='{"error":"red","email_error":"red"}'/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="partner_id"/>
+                <field name="policy_level_id"/>
+                <field name="policy_id"/>
+                <field name="level"/>
+                <field name="manually_overridden"/>
+              </group>
+              <group>
+                <field name="date"/>
+                <field name="date_due"/>
+                <field name="channel"/>
+                <field name="date_sent"/>
+                <field name="mail_message_id"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="invoice_id"/>
+                <field name="move_line_id"/>
+                <field name="account_id"/>
+              </group>
+              <group>
+                <field name="amount_due"/>
+                <field name="balance_due"/>
+                <field name="currency_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="credit_control_line_search" model="ir.ui.view">
+      <field name="name">Credit Control Lines</field>
+      <field name="model">credit.control.line</field>
+      <field name="arch" type="xml">
+        <search string="Control Credit Lines">
+          <group string="Filters">
+            <filter name="filter_draft" icon="terp-mail-message-new"
+                    string="Draft" domain="[('state', '=', 'draft')]"
+                    help="Draft lines have to be triaged."/>
+            <filter name="filter_to_be_sent" icon="terp-mail-forward"
+                    string="Ready To Send" domain="[('state', '=', 'to_be_sent')]"
+                    help="These lines are ready to send by email or by letter using the Actions."/>
+            <filter name="filter_ignored" icon="terp-mail_delete"
+                    string="Ignored" domain="[('state', '=', 'ignored')]"
+                    help="Lines which have been ignored from previous runs."/>
+            <filter name="filter_sent" icon="terp-mail-replied"
+                    string="Sent" domain="[('state', '=', 'sent')]"
+                    help="Lines already sent."/>
+            <filter name="filter_error" icon="terp-gtk-stop" string="Error"
+                    domain="[('state', 'in', ('error', 'email_error'))]"
+                    help="An error has occured during the sending of the email."/>
+            <filter name="filter_manual" icon="terp-gtk-stop" string="Manual change"
+                    domain="[('manually_overridden', '=', True)]"
+                    help="The line was deprecated by a manual change of policy on invoice."/>
+            <separator orientation="vertical"/>
+
+            <field name="date"/>
+            <field name="channel" />
+            <field name="policy_id"/>
+          </group>
+          <newline/>
+          <group expand="0" string="More...">
+            <field name="partner_id"/>
+            <field name="account_id"/>
+            <field name="invoice_id"/>
+            <field name="level"/>
+            <field name="policy_level_id"/>
+          </group>
+
+          <newline/>
+          <group expand="0" string="Group By...">
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'date'}"
+                    icon="terp-go-month" string="Run date"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'level'}"
+                    icon="terp-gtk-jump-to-rtl"  string="Level"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'partner_id'}"
+                    icon="terp-partner" string="Partner"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'account_id'}"
+                    icon="terp-folder-green" string="Account"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'invoice_id'}"
+                    icon="terp-document-new" string="Invoice"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'policy_id'}"
+                    icon="terp-document-new" string="Credit policy"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'policy_level_id'}"
+                    icon="terp-document-new" string="Credit policy level"/>
+            <separator orientation="vertical"/>
+            <filter domain='[]' context="{'group_by': 'channel'}"
+                    icon="terp-document-new" string="Channel"/>
+            <filter domain='[]' context="{'group_by': 'manually_overridden'}"
+                    icon="terp-document-new" string="Manual change"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record id="credit_control_line_tree" model="ir.ui.view">
+      <field name="name">credit.control.line.tree</field>
+      <field name="model">credit.control.line</field>
+      <field name="arch" type="xml">
+        <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'email_error');">
+          <field name="date"/>
+          <field name="date_due"/>
+          <field name="level"/>
+          <field name="manually_overridden"/>
+          <field name="state"/>
+          <field name="channel"/>
+          <field name="invoice_id"/>
+          <field name="partner_id"/>
+          <field name="amount_due"/>
+          <field name="balance_due"/>
+          <field name="currency_id"/>
+          <field name="move_line_id"/>
+          <field name="account_id"/>
+          <field name="policy_level_id"/>
+          <field name="policy_id"/>
+          <field name="mail_message_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <menuitem
+        name="Credit Control"
+        parent="account.menu_finance_periodical_processing"
+        id="base_credit_control_menu"/>
+
+    <record model="ir.actions.act_window" id="credit_control_line_action">
+      <field name="name">Credit Control Lines</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">credit.control.line</field>
+      <field name="domain"></field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="credit_control_line_tree"/>
+      <field name="context">{'search_default_filter_draft': 1, 'search_default_filter_to_be_sent': 1}</field>
+      <field name="search_view_id" ref="credit_control_line_search"/>
+    </record>
+
+
+    <menuitem
+        name="Credit Control Lines"
+        parent="base_credit_control_menu"
+        action="credit_control_line_action"
+        sequence="20"
+        id="credit_control_line_action_menu"/>
+
+
+  </data>
+</openerp>
