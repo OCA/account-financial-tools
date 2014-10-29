@@ -177,7 +177,7 @@ class Currency_rate_update(osv.Model):
             cron_id = cron_obj.create(cr, uid, self.cron, context)
         return cron_id
 
-    def save_cron(self, cr, uid, datas, context={}):
+    def save_cron(self, cr, uid, datas, context=None):
         """save the cron config data should be a dict"""
         cron_id = self.get_cron_id(cr, uid, context)
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
