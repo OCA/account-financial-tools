@@ -63,7 +63,7 @@ Thank you in advance for your anticipated cooperation in this matter.
 Best regards
       </field>
 
-      <field name="custom_mail_text">Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+      <field name="custom_mail_text">Our records indicate that we have not received the payment of the invoices mentioned in the attached document.
 
 If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
@@ -89,7 +89,7 @@ Thank you in advance for your anticipated cooperation in this matter.
 
 Best regards
       </field>
-      <field name="custom_mail_text">Our records indicate that we have not yet received the payment of the above mentioned invoice (copy attached for your convenience) despite our first reminder.
+      <field name="custom_mail_text">Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.
         If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
@@ -120,7 +120,7 @@ Best regards
         Best regards
       </field>
 
-<field name="custom_mail_text">Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our two reminders.
+<field name="custom_mail_text">Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.
         If payment have already been sent, please disregard this notice. If not, please proceed with payment.
         If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
 
@@ -155,7 +155,7 @@ Best regards
 
         Best regards
       </field>
- <field name="custom_mail_text">Our records indicate that we have not received the payment of the above mentioned invoice (copy attached for your convenience).
+ <field name="custom_mail_text">Our records indicate that we have not received the payment of the invoices mentioned in the attached document.
 If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
 Thank you in advance for your anticipated cooperation in this matter.
@@ -186,7 +186,7 @@ Best regards
 
         Best regards
       </field>
-      <field name="custom_mail_text">Our records indicate that we still have not received the payment of the above mentioned invoice (copy attached) despite our reminder.
+      <field name="custom_mail_text">Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.
 
 If payment have already been sent, please disregard this notice. If not, please proceed with payment.
 If your payment has not been received in the next 5 days, your file will be transfered to our debt
