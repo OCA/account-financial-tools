@@ -1,16 +1,15 @@
 <openerp>
   <data>
-    <report auto="False"
-            id="report_webkit_html"
-            model="credit.control.communication"
-            name="credit_control_summary"
-            file="account_credit_control/report/credit_control_summary.html.mako"
-            string="Credit Summary"
-            report_type="webkit"
-            webkit_header="report_webkit.ir_header_webkit_basesample0"/>
 
-    <record model="ir.actions.report.xml" id="report_webkit_html">
-      <field name="precise_mode" eval="True"/>
-    </record>
+    <report
+      id="credit_control_summary"
+      model="credit.control.communication"
+      string="Credit Control Summary"
+      report_type="qweb-pdf"
+      name="account_credit_control.report_credit_control_summary"
+      file="account_credit_control.report_credit_control_summary"
+      auto="False"
+      />
+
   </data>
 </openerp>

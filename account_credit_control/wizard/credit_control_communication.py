@@ -20,7 +20,6 @@
 ##############################################################################
 import logging
 from openerp import models, fields, api
-from openerp import netsvc
 
 logger = logging.getLogger('credit.control.line.mailing')
 
@@ -40,9 +39,14 @@ class CreditCommunication(models.TransientModel):
     current_policy_level = fields.Many2one('credit.control.policy.level',
                                            'Level',
                                            required=True)
+
     credit_control_line_ids = fields.Many2many('credit.control.line',
                                                rel='comm_credit_rel',
                                                string='Credit Lines')
+
+    contact_address = fields.Many2one('res.partner',
+                                      string='Contact Address',
+                                      readonly=True)
 
     @api.model
     def _get_company(self):
@@ -57,21 +61,37 @@ class CreditCommunication(models.TransientModel):
                               default=lambda self: self.env.user,
                               string='User')
 
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        if vals.get('partner_id'):
+            # the computed field does not work in TransientModel,
+            # just set a value on creation
+            partner_id = vals['partner_id']
+            vals['contact_address'] = self._get_contact_address(partner_id).id
+        return super(CreditCommunication, self).create(vals)
+
     @api.multi
     def get_email(self):
         """ Return a valid email for customer """
         self.ensure_one()
-        contact = self.get_contact_address()
+        contact = self.contact_address
         return contact.email
 
     @api.multi
     @api.returns('res.partner')
     def get_contact_address(self):
+        """ Compatibility method, please use the contact_address field """
         self.ensure_one()
+        return self.contact_address
+
+    @api.model
+    @api.returns('res.partner')
+    def _get_contact_address(self, partner_id):
         partner_obj = self.env['res.partner']
-        partner = self.partner_id
+        partner = partner_obj.browse(partner_id)
         add_ids = partner.address_get(adr_pref=['invoice']) or {}
-        add_id = add_ids.get('invoice', add_ids.get('default', False))
+        add_id = add_ids['invoice']
         return partner_obj.browse(add_id)
 
     @api.model
@@ -89,9 +109,9 @@ class CreditCommunication(models.TransientModel):
         """ Aggregate credit control line by partner, level, and currency
         It also generate a communication object per aggregation.
         """
-        if not lines:
-            return []
         comms = self.browse()
+        if not lines:
+            return comms
         sql = (
             "SELECT distinct partner_id, policy_level_id, "
             " credit_control_line.currency_id, "
@@ -103,7 +123,7 @@ class CreditCommunication(models.TransientModel):
             " ORDER by credit_control_policy_level.level, "
             "          credit_control_line.currency_id"
         )
-        cr = self._cr
+        cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids), ))
         res = cr.dictfetchall()
         for level_assoc in res:
@@ -139,7 +159,6 @@ class CreditCommunication(models.TransientModel):
                                                              template.id,
                                                              comm.id,
                                                              context=context)
-            email_values['body_html'] = email_values['body']
             email_values['type'] = 'email'
 
             email = email_message_obj.create(email_values)
@@ -179,13 +198,8 @@ class CreditCommunication(models.TransientModel):
         of related policy template
 
         """
-        return ''
-        service = netsvc.LocalService('report.credit_control_summary')
-        cr, uid = self.env.cr, self.env.uid
-        result, format = service.create(cr, uid, self.ids, {}, {})
-        return result
-        # TODO
-        # return self.env['report'].get_pdf(self, 'credit_control_summary')
+        report_name = 'account_credit_control.report_credit_control_summary'
+        return self.env['report'].get_pdf(self, report_name)
 
     @api.multi
     @api.returns('credit.control.line')

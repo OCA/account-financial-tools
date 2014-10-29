@@ -181,7 +181,7 @@ class CreditControlPolicy(models.Model):
         different_lines = move_line_obj.browse()
         if not lines:
             return different_lines
-        cr = self._cr
+        cr = self.env.cr
         cr.execute("SELECT move_line_id FROM credit_control_line"
                    "    WHERE policy_id != %s and move_line_id in %s"
                    "    AND manually_overridden IS false",
@@ -322,7 +322,7 @@ class CreditControlPolicyLevel(models.Model):
         move_line_obj = self.env['account.move.line']
         if not lines:
             return move_line_obj.browse()
-        cr = self._cr
+        cr = self.env.cr
         sql = ("SELECT DISTINCT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " WHERE mv_line.id in %(line_ids)s\n"
@@ -356,7 +356,7 @@ class CreditControlPolicyLevel(models.Model):
         move_line_obj = self.env['account.move.line']
         if not lines:
             return move_line_obj.browse()
-        cr = self._cr
+        cr = self.env.cr
         sql = ("SELECT mv_line.id\n"
                " FROM account_move_line mv_line\n"
                " JOIN credit_control_line cr_line\n"

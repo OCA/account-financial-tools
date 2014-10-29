@@ -144,8 +144,8 @@ class CreditControlRun(models.Model):
         calls of this method.
         """
         try:
-            self._cr.execute('SELECT id FROM credit_control_run'
-                             ' LIMIT 1 FOR UPDATE NOWAIT')
+            self.env.cr.execute('SELECT id FROM credit_control_run'
+                                ' LIMIT 1 FOR UPDATE NOWAIT')
         except Exception:
             # In case of exception openerp will do a rollback
             # for us and free the lock

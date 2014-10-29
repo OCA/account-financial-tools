@@ -9,9 +9,9 @@
       <field name="model_id" ref="model_credit_control_communication"/>
       <field name="auto_delete" eval="True"/>
       <field name="lang">${object.get_contact_address().lang or 'en_US'}</field>
-      <field name="report_template" ref="report_webkit_html"/>
+      <field name="report_template" ref="credit_control_summary"/>
       <field name="body_html"><![CDATA[
-      Dear ${object.get_contact_address().name  or ''}
+      Dear ${object.contact_address.name or ''}
       <br/>
       <br/>
       ${object.current_policy_level.custom_mail_text}

@@ -18,7 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import base64
 
 from openerp import models, fields, api, _
 
@@ -40,9 +39,6 @@ class CreditControlPrinter(models.TransientModel):
     mark_as_sent = fields.Boolean(string='Mark letter lines as sent',
                                   default=True,
                                   help="Only letter lines will be marked.")
-    report_file = fields.Binary(string='Generated Report', readonly=True)
-    report_name = fields.Char(string='Report name')
-    state = fields.Char(string='state')
     line_ids = fields.Many2many('credit.control.line',
                                 string='Credit Control Lines',
                                 default=_get_line_ids)
@@ -67,15 +63,9 @@ class CreditControlPrinter(models.TransientModel):
 
         comms = comm_obj._generate_comm_from_credit_lines(lines)
 
-        report_content = comms._generate_report()
-
-        self.write({'report_file': base64.b64encode(report_content),
-                    'report_name': ('credit_control_esr_bvr_%s.pdf' %
-                                    fields.datetime.now()),
-                    'state': 'done'})
-
         if self.mark_as_sent:
             comms._mark_credit_line_as_sent()
-        action = self.get_formview_action()[0]
-        action['target'] = 'new'
-        return action
+
+        report_name = 'account_credit_control.report_credit_control_summary'
+        report_obj = self.env['report'].with_context(active_ids=comms.ids)
+        return report_obj.get_action(comms, report_name)
