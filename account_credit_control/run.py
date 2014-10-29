@@ -108,7 +108,7 @@ class CreditControlRun(models.Model):
             lines = policy._get_move_lines_to_process(self.date)
             manual_lines = policy._lines_different_policy(lines)
             lines -= manual_lines
-            manually_managed_lines += manual_lines
+            manually_managed_lines |= manual_lines
             policy_lines_generated = cr_line_obj.browse()
             if lines:
                 # policy levels are sorted by level
@@ -119,7 +119,7 @@ class CreditControlRun(models.Model):
                     policy_lines_generated += create(level_lines,
                                                      level,
                                                      self.date)
-            generated += policy_lines_generated
+            generated |= policy_lines_generated
             if policy_lines_generated:
                 report += (_("Policy \"%s\" has generated %d Credit "
                              "Control Lines.\n") %

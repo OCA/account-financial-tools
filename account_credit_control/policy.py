@@ -402,5 +402,5 @@ class CreditControlPolicyLevel(models.Model):
             method = self._get_first_level_move_lines
         else:
             method = self._get_other_level_move_lines
-        matching_lines += method(controlling_date, lines)
+        matching_lines |= method(controlling_date, lines)
         return matching_lines

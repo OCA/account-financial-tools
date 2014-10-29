@@ -64,7 +64,7 @@ class credit_control_policy_changer(models.TransientModel):
                       ('move_id', '=', invoice.move_id.id),
                       ('reconcile_id', '=', False)]
             move_lines = move_line_obj.search(domain)
-            selected_lines += move_lines
+            selected_lines |= move_lines
         return selected_lines
 
     move_line_ids = fields.Many2many('account.move.line',

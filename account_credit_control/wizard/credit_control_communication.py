@@ -207,7 +207,7 @@ class CreditCommunication(models.TransientModel):
         line_obj = self.env['credit.control.line']
         lines = line_obj.browse()
         for comm in self:
-            lines += comm.credit_control_line_ids
+            lines |= comm.credit_control_line_ids
 
         lines.write({'state': 'sent'})
         return lines
