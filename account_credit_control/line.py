@@ -20,8 +20,7 @@
 ##############################################################################
 import logging
 
-from openerp import models, fields, api
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 logger = logging.getLogger('credit.line.control')
 
@@ -104,15 +103,18 @@ class CreditControlLine(models.Model):
                                    required=True,
                                    readonly=True)
 
-    account_id = fields.Many2one(related='move_line_id.account_id',
+    account_id = fields.Many2one('account.account',
+                                 related='move_line_id.account_id',
                                  store=True,
                                  readonly=True)
 
-    currency_id = fields.Many2one(related='move_line_id.currency_id',
+    currency_id = fields.Many2one('res.currency',
+                                  related='move_line_id.currency_id',
                                   store=True,
                                   readonly=True)
 
-    company_id = fields.Many2one(related='move_line_id.company_id',
+    company_id = fields.Many2one('res.company',
+                                 related='move_line_id.company_id',
                                  store=True,
                                  readonly=True)
 
@@ -123,11 +125,13 @@ class CreditControlLine(models.Model):
                                       readonly=True,
                                       states={'draft': [('readonly', False)]})
 
-    policy_id = fields.Many2one(related='policy_level_id.policy_id',
+    policy_id = fields.Many2one('credit.control.policy',
+                                related='policy_level_id.policy_id',
                                 store=True,
                                 readonly=True)
 
-    level = fields.Integer(related='policy_level_id.level',
+    level = fields.Integer('credit.control.policy.level',
+                           related='policy_level_id.level',
                            store=True,
                            readonly=True)
 
@@ -176,7 +180,6 @@ class CreditControlLine(models.Model):
         :returns: recordset of created credit lines
         """
         currency_obj = self.env['res.currency']
-        level_obj = self.env['credit.control.policy.level']
         user = self.env.user
         currencies = currency_obj.search([])
 

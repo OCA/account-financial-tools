@@ -11,8 +11,7 @@
           <newline/>
          <group>
            <group>
-             <field name="new_policy_id"
-                    on_change="onchange_policy_id(new_policy_id)"/>
+             <field name="new_policy_id"/>
              <field name="do_nothing"
                     invisible="1"/>
              <field name="new_policy_level_id"

@@ -20,94 +20,62 @@
 ##############################################################################
 import base64
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
-class CreditControlPrinter(orm.TransientModel):
-    """Print lines"""
+class CreditControlPrinter(models.TransientModel):
+    """ Print lines """
 
     _name = "credit.control.printer"
     _rec_name = 'id'
     _description = 'Mass printer'
 
-    def _get_line_ids(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        res = False
+    @api.model
+    def _get_line_ids(self):
+        context = self.env.context
         if context.get('active_model') != 'credit.control.line':
-            return res
-        res = context.get('active_ids', False)
-        return res
+            return False
+        return context.get('active_ids', False)
 
-    _columns = {
-        'mark_as_sent': fields.boolean(
-            'Mark letter lines as sent',
-            help="Only letter lines will be marked."
-        ),
-        'report_file': fields.binary('Generated Report', readonly=True),
-        'report_name': fields.char('Report name'),
-        'state': fields.char('state', size=32),
-        'line_ids': fields.many2many(
-            'credit.control.line',
-            string='Credit Control Lines'),
-    }
+    mark_as_sent = fields.Boolean(string='Mark letter lines as sent',
+                                  default=True,
+                                  help="Only letter lines will be marked.")
+    report_file = fields.Binary(string='Generated Report', readonly=True)
+    report_name = fields.Char(string='Report name')
+    state = fields.Char(string='state')
+    line_ids = fields.Many2many('credit.control.line',
+                                string='Credit Control Lines',
+                                default=_get_line_ids)
 
-    _defaults = {
-        'mark_as_sent': True,
-        'line_ids': _get_line_ids,
-    }
-
-    def _filter_line_ids(self, cr, uid, active_ids, context=None):
-        """filter lines to use in the wizard"""
-        line_obj = self.pool.get('credit.control.line')
-        domain = [('state', '=', 'to_be_sent'),
-                  ('id', 'in', active_ids),
-                  ('channel', '=', 'letter')]
-        return line_obj.search(cr, uid, domain, context=context)
-
-    def _credit_line_predicate(self, cr, uid, line_record, context=None):
+    @api.model
+    def _credit_line_predicate(self, line):
         return True
 
-    def _get_line_ids(self, cr, uid, lines, predicate, context=None):
-        return [l.id for l in lines if predicate(cr, uid, l, context)]
+    @api.model
+    @api.returns('credit.control.line')
+    def _get_lines(self, lines, predicate):
+        return lines.filtered(predicate)
 
-    def print_lines(self, cr, uid, wiz_id, context=None):
-        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-            "wiz_id: only one id expected"
-        comm_obj = self.pool.get('credit.control.communication')
-        if isinstance(wiz_id, list):
-            wiz_id = wiz_id[0]
-        form = self.browse(cr, uid, wiz_id, context)
+    @api.multi
+    def print_lines(self):
+        self.ensure_one()
+        comm_obj = self.env['credit.control.communication']
+        if not self.line_ids and not self.print_all:
+            raise api.Warning(_('No credit control lines selected.'))
 
-        if not form.line_ids and not form.print_all:
-            raise orm.except_orm(_('Error'),
-                                 _('No credit control lines selected.'))
+        lines = self._get_lines(self.line_ids, self._credit_line_predicate)
 
-        line_ids = self._get_line_ids(cr,
-                                      uid,
-                                      form.line_ids,
-                                      self._credit_line_predicate,
-                                      context=context)
+        comms = comm_obj._generate_comm_from_credit_lines(lines)
 
-        comms = comm_obj._generate_comm_from_credit_line_ids(cr, uid, line_ids,
-                                                             context=context)
-        report_file = comm_obj._generate_report(cr, uid, comms,
-                                                context=context)
+        report_content = comms._generate_report()
 
-        form.write({'report_file': base64.b64encode(report_file),
+        self.write({'report_file': base64.b64encode(report_content),
                     'report_name': ('credit_control_esr_bvr_%s.pdf' %
                                     fields.datetime.now()),
                     'state': 'done'})
 
-        if form.mark_as_sent:
-            comm_obj._mark_credit_line_as_sent(cr, uid, comms, context=context)
-
-        return {'type': 'ir.actions.act_window',
-                'res_model': 'credit.control.printer',
-                'view_mode': 'form',
-                'view_type': 'form',
-                'res_id': form.id,
-                'views': [(False, 'form')],
-                'target': 'new',
-                }
+        if self.mark_as_sent:
+            comms._mark_credit_line_as_sent()
+        action = self.get_formview_action()[0]
+        action['target'] = 'new'
+        return action

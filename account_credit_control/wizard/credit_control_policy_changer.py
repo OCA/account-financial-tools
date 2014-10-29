@@ -19,113 +19,99 @@
 #
 ##############################################################################
 import logging
-from openerp.tools.translate import _
-from openerp.osv import orm, fields
+from openerp import models, fields, api, _
 logger = logging.getLogger(__name__)
 
 
-class credit_control_policy_changer(orm.TransientModel):
-    """Wizard that is run from invoices and allows to set manually a policy
+class credit_control_policy_changer(models.TransientModel):
+    """ Wizard that is run from invoices and allows to set manually a policy
     Policy are actually apply to related move lines availabe
     in selection widget
 
     """
     _name = "credit.control.policy.changer"
-    _columns = {
-        'new_policy_id': fields.many2one('credit.control.policy',
-                                         'New Policy to Apply',
-                                         required=True),
-        'new_policy_level_id': fields.many2one('credit.control.policy.level',
-                                               'New level to apply',
-                                               required=True),
-        # Only used to provide dynamic filtering on form
-        'do_nothing': fields.boolean('No follow  policy'),
-        'move_line_ids': fields.many2many('account.move.line',
-                                          rel='credit_changer_ml_rel',
-                                          string='Move line to change'),
-    }
 
-    def _get_default_lines(self, cr, uid, context=None):
-        """Get default lines for fields move_line_ids
+    new_policy_id = fields.Many2one('credit.control.policy',
+                                    string='New Policy to Apply',
+                                    required=True)
+    new_policy_level_id = fields.Many2one('credit.control.policy.level',
+                                          string='New level to apply',
+                                          required=True)
+    # Only used to provide dynamic filtering on form
+    do_nothing = fields.Boolean(string='No follow  policy')
+
+    @api.model
+    def _get_default_lines(self):
+        """ Get default lines for fields move_line_ids
         of wizard. Only take lines that are on the same account
         and move of the invoice and not reconciled
 
-        :return: list of compliant move line ids
+        :return: list of compliant move lines
 
         """
-        if context is None:
-            context = {}
+        context = self.env.context
         active_ids = context.get('active_ids')
-        selected_line_ids = []
-        inv_model = self.pool['account.invoice']
-        move_line_model = self.pool['account.move.line']
+        invoice_obj = self.env['account.invoice']
+        move_line_obj = self.env['account.move.line']
         if not active_ids:
             return False
-            # raise ValueError('No active_ids passed in context')
-        for invoice in inv_model.browse(cr, uid, active_ids, context=context):
+        selected_lines = move_line_obj.browse()
+        for invoice in invoice_obj.browse(active_ids):
             if invoice.type in ('in_invoice', 'in_refund', 'out_refund'):
-                raise orm.except_orm(
-                    _('User error'),
-                    _('Please use wizard on cutomer invoices')
-                )
+                raise api.Warning(_('Please use wizard on customer invoices'))
 
             domain = [('account_id', '=', invoice.account_id.id),
                       ('move_id', '=', invoice.move_id.id),
                       ('reconcile_id', '=', False)]
-            move_ids = move_line_model.search(cr, uid, domain, context=context)
-            selected_line_ids.extend(move_ids)
-        return selected_line_ids
+            move_lines = move_line_obj.search(domain)
+            selected_lines += move_lines
+        return selected_lines
 
-    _defaults = {'move_line_ids': _get_default_lines}
+    move_line_ids = fields.Many2many('account.move.line',
+                                     rel='credit_changer_ml_rel',
+                                     string='Move line to change',
+                                     default=_get_default_lines)
 
-    def onchange_policy_id(self, cr, uid, ids, new_policy_id, context=None):
-        if not new_policy_id:
-            return {}
-        policy = self.pool['credit.control.policy'].browse(cr, uid,
-                                                           new_policy_id,
-                                                           context=context)
-        return {'value': {'do_nothing': policy.do_nothing}}
+    @api.onchange('new_policy_level_id')
+    def onchange_policy_id(self):
+        if not self.new_policy_id:
+            return
+        self.do_nothing = self.new_policy_id.do_nothing
 
-    def _mark_as_overridden(self, cr, uid, move_lines, context=None):
-        """Mark `move_lines` related credit control line as overridden
+    @api.model
+    @api.returns('credit.control.line')
+    def _mark_as_overridden(self, move_lines):
+        """ Mark `move_lines` related credit control line as overridden
         This is done by setting manually_overridden fields to True
 
         :param move_lines: move line to mark as overridden
-
-        :retun: list of credit line ids that where marked as overridden
-
+        :return: list of credit lines that where marked as overridden
         """
-        credit_model = self.pool['credit.control.line']
-        domain = [('move_line_id', 'in', [x.id for x in move_lines])]
-        credits_ids = credit_model.search(cr, uid, domain, context=context)
-        credit_model.write(cr, uid,
-                           credits_ids,
-                           {'manually_overridden': True},
-                           context)
-        return credits_ids
+        credit_obj = self.env['credit.control.line']
+        domain = [('move_line_id', 'in', move_lines.ids)]
+        credit_lines = credit_obj.search(domain)
+        credit_lines.write({'manually_overridden': True})
+        return credit_lines
 
-    def _set_invoice_policy(self, cr, uid, move_line_ids, policy,
-                            context=None):
-        """Force policy on invoice"""
-        invoice_model = self.pool['account.invoice']
-        invoice_ids = set([x.invoice.id for x in move_line_ids if x.invoice])
-        invoice_model.write(cr, uid, list(invoice_ids),
-                            {'credit_policy_id': policy.id},
-                            context=context)
+    @api.model
+    def _set_invoice_policy(self, move_lines, policy):
+        """ Force policy on invoice """
+        invoice_obj = self.env['account.invoice']
+        invoice_ids = set(line.invoice.id for line in move_lines
+                          if line.invoice)
+        invoices = invoice_obj.browse(invoice_ids)
+        invoices.write({'credit_policy_id': policy.id})
 
-    def _check_accounts_policies(self, cr, uid, lines, policy, context=None):
-        policy_obj = self.pool['credit.control.policy']
-        for line in lines:
-            policy_obj.check_policy_against_account(
-                cr, uid,
-                line.account_id.id,
-                policy.id,
-                context=context
-            )
+    @api.model
+    def _check_accounts_policies(self, lines, policy):
+        accounts = set(line.account_id for line in lines)
+        for account in accounts:
+            policy.check_policy_against_account(account)
         return True
 
-    def set_new_policy(self, cr, uid, wizard_id, context=None):
-        """Set new policy on an invoice.
+    @api.multi
+    def set_new_policy(self):
+        """ Set new policy on an invoice.
 
         This is done by creating a new credit control line
         related to the move line and the policy setted in
@@ -134,49 +120,29 @@ class credit_control_policy_changer(orm.TransientModel):
         :return: ir.actions.act_windows dict
 
         """
-        assert len(wizard_id) == 1, "Only one id expected"
-        wizard_id = wizard_id[0]
+        self.ensure_one()
+        credit_line_obj = self.env['credit.control.line']
 
-        credit_line_model = self.pool['credit.control.line']
-        ir_model = self.pool['ir.model.data']
-        ui_act_model = self.pool['ir.actions.act_window']
-        wizard = self.browse(cr, uid, wizard_id, context=context)
         controlling_date = fields.date.today()
-        self._check_accounts_policies(
-            cr,
-            uid,
-            wizard.move_line_ids,
-            wizard.new_policy_id)
-        self._mark_as_overridden(
-            cr,
-            uid,
-            wizard.move_line_ids,
-            context=context
-        )
+        self._check_accounts_policies(self.move_line_ids, self.new_policy_id)
+        self._mark_as_overridden(self.move_line_ids)
         # As disscused with business expert
         # draft lines should be passed to ignored
         # if same level as the new one
         # As it is a manual action
         # We also ignore rounding tolerance
-        generated_ids = None
-        generated_ids = credit_line_model.create_or_update_from_mv_lines(
-            cr, uid, [],
-            [x.id for x in wizard.move_line_ids],
-            wizard.new_policy_level_id.id,
-            controlling_date,
-            check_tolerance=False,
-            context=None
-        )
-        self._set_invoice_policy(cr, uid,
-                                 wizard.move_line_ids,
-                                 wizard.new_policy_id,
-                                 context=context)
-        if not generated_ids:
-            return {}
-        view_id = ir_model.get_object_reference(cr, uid,
-                                                "account_credit_control",
-                                                "credit_control_line_action")
-        assert view_id, 'No view found'
-        action = ui_act_model.read(cr, uid, view_id[1], context=context)
-        action['domain'] = [('id', 'in', generated_ids)]
+        create = credit_line_obj.create_or_update_from_mv_lines
+        generated_lines = create(self.move_line_ids,
+                                 self.new_policy_level_id,
+                                 controlling_date,
+                                 check_tolerance=False)
+        self._set_invoice_policy(self.move_line_ids, self.new_policy_id)
+
+        if not generated_lines:
+            return {'type': 'ir.actions.act_window_close'}
+
+        action_ref = 'account_credit_control.credit_control_line_action'
+        action = self.env.ref(action_ref)
+        action = action.read()[0]
+        action['domain'] = [('id', 'in', generated_lines.ids)]
         return action

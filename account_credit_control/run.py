@@ -20,8 +20,7 @@
 ##############################################################################
 import logging
 
-from openerp import models, fields, api
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 logger = logging.getLogger('credit.control.run')
 
@@ -102,7 +101,7 @@ class CreditControlRun(models.Model):
             raise api.Warning(_('Please select a policy'))
 
         report = ''
-        generated = []
+        generated = cr_line_obj.browse()
         for policy in policies:
             if policy.do_nothing:
                 continue

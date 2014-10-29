@@ -19,71 +19,51 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
-class CreditControlEmailer(orm.TransientModel):
-    """Send emails for each selected credit control lines."""
+class CreditControlEmailer(models.TransientModel):
+    """ Send emails for each selected credit control lines. """
 
     _name = "credit.control.emailer"
     _description = """Mass credit line emailer"""
     _rec_name = 'id'
 
-    def _get_line_ids(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        res = False
-        if (context.get('active_model') == 'credit.control.line' and
+    @api.model
+    def _get_line_ids(self):
+        context = self.env.context
+        if not (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
-            res = self._filter_line_ids(
-                cr, uid,
-                context['active_ids'],
-                context=context
-            )
-        return res
+            return False
+        line_obj = self.env['credit.control.line']
+        lines = line_obj.browse(context['active_id'])
+        return self._filter_lines(lines)
 
-    _columns = {
-        'line_ids': fields.many2many(
-            'credit.control.line',
-            string='Credit Control Lines',
-            domain=[('state', '=', 'to_be_sent'),
-                    ('channel', '=', 'email')]
-        ),
-    }
+    line_ids = fields.Many2many('credit.control.line',
+                                string='Credit Control Lines',
+                                default=_get_line_ids,
+                                domain=[('state', '=', 'to_be_sent'),
+                                        ('channel', '=', 'email')])
 
-    _defaults = {
-        'line_ids': _get_line_ids,
-    }
-
-    def _filter_line_ids(self, cr, uid, active_ids, context=None):
-        """filter lines to use in the wizard"""
-        line_obj = self.pool.get('credit.control.line')
+    @api.model
+    @api.returns('credit.control.line')
+    def _filter_lines(self, lines):
+        """ filter lines to use in the wizard """
+        line_obj = self.env['credit.control.line']
         domain = [('state', '=', 'to_be_sent'),
-                  ('id', 'in', active_ids),
+                  ('id', 'in', lines.ids),
                   ('channel', '=', 'email')]
-        return line_obj.search(cr, uid, domain, context=context)
+        return line_obj.search(domain)
 
-    def email_lines(self, cr, uid, wiz_id, context=None):
-        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-            "wiz_id: only one id expected"
-        comm_obj = self.pool.get('credit.control.communication')
-        if isinstance(wiz_id, list):
-            wiz_id = wiz_id[0]
-        form = self.browse(cr, uid, wiz_id, context)
+    @api.multi
+    def email_lines(self):
+        self.ensure_one()
+        if not self.line_ids:
+            raise api.Warning(_('No credit control lines selected.'))
 
-        if not form.line_ids:
-            raise orm.except_orm(
-                _('Error'),
-                _('No credit control lines selected.')
-            )
+        comm_obj = self.env['credit.control.communication']
 
-        line_ids = [l.id for l in form.line_ids]
-        filtered_ids = self._filter_line_ids(
-            cr, uid, line_ids, context
-        )
-        comms = comm_obj._generate_comm_from_credit_line_ids(
-            cr, uid, filtered_ids, context=context
-        )
-        comm_obj._generate_emails(cr, uid, comms, context=context)
-        return {}
+        filtered_lines = self._filter_lines(self.line_ids)
+        comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
+        comms._generate_emails()
+        return {'type': 'ir.actions.act_window_close'}

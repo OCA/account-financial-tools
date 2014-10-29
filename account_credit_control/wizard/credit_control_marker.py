@@ -18,90 +18,69 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
-class CreditControlMarker(orm.TransientModel):
-    """Change the state of lines in mass"""
+class CreditControlMarker(models.TransientModel):
+    """ Change the state of lines in mass """
 
     _name = 'credit.control.marker'
     _description = 'Mass marker'
 
-    def _get_line_ids(self, cr, uid, context=None):
-        if context is None:
-            context = {}
-        res = False
-        if (context.get('active_model') == 'credit.control.line' and
+    @api.model
+    def _get_line_ids(self):
+        context = self.env.context
+        if not (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
-            res = self._filter_line_ids(
-                cr, uid,
-                context['active_ids'],
-                context=context
-            )
-        return res
+            return False
+        line_obj = self.env['credit.control.line']
+        lines = line_obj.browse(context['active_id'])
+        return self._filter_lines(lines)
 
-    _columns = {
-        'name': fields.selection([('ignored', 'Ignored'),
-                                  ('to_be_sent', 'Ready To Send'),
-                                  ('sent', 'Done')],
-                                 'Mark as',
-                                 required=True),
-        'line_ids': fields.many2many(
-            'credit.control.line',
-            string='Credit Control Lines',
-            domain="[('state', '!=', 'sent')]"),
-    }
+    name = fields.Selection([('ignored', 'Ignored'),
+                             ('to_be_sent', 'Ready To Send'),
+                             ('sent', 'Done')],
+                            string='Mark as',
+                            default='to_be_sent',
+                            required=True)
+    line_ids = fields.Many2many('credit.control.line',
+                                string='Credit Control Lines',
+                                default=_get_line_ids,
+                                domain="[('state', '!=', 'sent')]")
 
-    _defaults = {
-        'name': 'to_be_sent',
-        'line_ids': _get_line_ids,
-    }
+    @api.model
+    @api.returns('credit.control.line')
+    def _filter_lines(self, lines):
+        """ get line to be marked filter done lines """
+        line_obj = self.env['credit.control.line']
+        domain = [('state', '!=', 'sent'), ('id', 'in', lines.ids)]
+        return line_obj.search(domain)
 
-    def _filter_line_ids(self, cr, uid, active_ids, context=None):
-        """get line to be marked filter done lines"""
-        line_obj = self.pool.get('credit.control.line')
-        domain = [('state', '!=', 'sent'), ('id', 'in', active_ids)]
-        return line_obj.search(cr, uid, domain, context=context)
+    @api.model
+    @api.returns('credit.control.line')
+    def _mark_lines(self, filtered_lines, state):
+        """ write hook """
+        assert state
+        filtered_lines.write({'state': state})
+        return filtered_lines
 
-    def _mark_lines(self, cr, uid, filtered_ids, state, context=None):
-        """write hook"""
-        line_obj = self.pool.get('credit.control.line')
-        if not state:
-            raise ValueError(_('state can not be empty'))
-        line_obj.write(cr, uid, filtered_ids,
-                       {'state': state},
-                       context=context)
-        return filtered_ids
+    @api.multi
+    def mark_lines(self):
+        """ Write state of selected credit lines to the one in entry
+        done credit line will be ignored """
+        self.ensure_one()
 
-    def mark_lines(self, cr, uid, wiz_id, context=None):
-        """Write state of selected credit lines to the one in entry
-        done credit line will be ignored"""
-        assert not (isinstance(wiz_id, list) and len(wiz_id) > 1), \
-            "wiz_id: only one id expected"
-        if isinstance(wiz_id, list):
-            wiz_id = wiz_id[0]
-        form = self.browse(cr, uid, wiz_id, context)
+        if not self.line_ids:
+            raise api.Warning(_('No credit control lines selected.'))
 
-        if not form.line_ids:
-            raise orm.except_orm(
-                _('Error'),
-                _('No credit control lines selected.')
-            )
+        filtered_lines = self._filter_lines(self.line_ids)
+        if not filtered_lines:
+            raise api.Warning(_('No lines will be changed. '
+                                'All the selected lines are already done.'))
 
-        line_ids = [l.id for l in form.line_ids]
+        self._mark_lines(filtered_lines, self.name)
 
-        filtered_ids = self._filter_line_ids(cr, uid, line_ids, context)
-        if not filtered_ids:
-            raise orm.except_orm(
-                _('Information'),
-                _('No lines will be changed. '
-                  'All the selected lines are already done.')
-            )
-
-        self._mark_lines(cr, uid, filtered_ids, form.name, context)
-
-        return {'domain': unicode([('id', 'in', filtered_ids)]),
+        return {'domain': unicode([('id', 'in', filtered_lines.ids)]),
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'view_id': False,

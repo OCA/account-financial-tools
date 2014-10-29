@@ -18,8 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
 
 
 class CreditControlPolicy(models.Model):
@@ -50,8 +49,7 @@ class CreditControlPolicy(models.Model):
     def _move_lines_domain(self, controlling_date):
         """ Build the default domain for searching move lines """
         self.ensure_one()
-        account_ids = [a.id for a in self.account_ids]
-        return [('account_id', 'in', account_ids),
+        return [('account_id', 'in', self.account_ids.ids),
                 ('date_maturity', '<=', controlling_date),
                 ('reconcile_id', '=', False),
                 ('partner_id', '!=', False)]
@@ -187,7 +185,7 @@ class CreditControlPolicy(models.Model):
         cr.execute("SELECT move_line_id FROM credit_control_line"
                    "    WHERE policy_id != %s and move_line_id in %s"
                    "    AND manually_overridden IS false",
-                   (self.id, tuple(line.id for line in lines)))
+                   (self.id, tuple(lines.ids)))
         res = cr.fetchall()
         if res:
             return move_line_obj.browse([row[0] for row in res])
@@ -341,9 +339,8 @@ class CreditControlPolicyLevel(models.Model):
         _get_sql_date_part = self._get_sql_date_boundary_for_computation_mode
         sql += _get_sql_date_part(controlling_date)
         data_dict = {'controlling_date': controlling_date,
-                     'line_ids': tuple(line.id for line in lines),
+                     'line_ids': tuple(lines.ids),
                      'delay': self.delay_days}
-        print cr.mogrify(sql, data_dict)
         cr.execute(sql, data_dict)
         res = cr.fetchall()
         if res:
@@ -383,7 +380,7 @@ class CreditControlPolicyLevel(models.Model):
         sql += _get_sql_date_part(controlling_date)
         previous_level = self._previous_level()
         data_dict = {'controlling_date': controlling_date,
-                     'line_ids': tuple(line.id for line in lines),
+                     'line_ids': tuple(lines.ids),
                      'delay': self.delay_days,
                      'previous_level': previous_level.level}
 
