@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi
+#    Author: Nicolas Bessi, Guewen Baconnier
 #    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify

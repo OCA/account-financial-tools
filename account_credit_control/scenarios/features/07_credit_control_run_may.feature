@@ -1,7 +1,7 @@
 ###############################################################################
 #
 #    OERPScenario, OpenERP Functional Tests
-#    Copyright 2012 Camptocamp SA
+#    Copyright 2012-2014 Camptocamp SA
 #    Author Nicolas Bessi
 ##############################################################################
 
