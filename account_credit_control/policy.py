@@ -109,7 +109,7 @@ class CreditControlPolicy(models.Model):
         add_objs = my_obj.search([('credit_policy_id', '=', self.id)])
         if add_objs:
             domain = list(default_domain)
-            domain.append((move_relation_field, 'in', add_objs))
+            domain.append((move_relation_field, 'in', add_objs.ids))
             to_add = move_l_obj.search(domain)
 
         # The lines which are linked to another policy do not have to be
@@ -118,7 +118,7 @@ class CreditControlPolicy(models.Model):
                                   ('credit_policy_id', '!=', False)])
         if neg_objs:
             domain = list(default_domain)
-            domain.append((move_relation_field, 'in', neg_objs))
+            domain.append((move_relation_field, 'in', neg_objs.ids))
             to_remove = move_l_obj.search(domain)
         return to_add, to_remove
 
