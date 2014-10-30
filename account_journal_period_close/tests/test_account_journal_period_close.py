@@ -203,6 +203,7 @@ class TestAccountJournalPeriodClose(common.TransactionCase):
         create_journal_period(self, period_id, journal_id, context)
         # I check if the exception is correctly raised at adding both same
         # journal on a period
+        self.cr._default_log_exceptions = False
         self.assertRaises(IntegrityError,
                           create_journal_period,
                           self, period_id, journal_id, context)
