@@ -99,10 +99,10 @@ def journal_period_draft(self, journal_period_id, context):
                               context=context)
 
 
-class TestAccountConstraintChronology(common.TransactionCase):
+class TestAccountJournalPeriodClose(common.TransactionCase):
 
     def setUp(self):
-        super(TestAccountConstraintChronology, self).setUp()
+        super(TestAccountJournalPeriodClose, self).setUp()
 
     def test_close_period_open_journal(self):
         context = {}
