@@ -6,7 +6,7 @@
       <field name="model">credit.control.run</field>
       <field name="type">tree</field>
       <field name="arch" type="xml">
-        <tree string="Credit control run"> <!-- editable="bottom" -->
+        <tree string="Credit control run">
           <field name="date"/>
           <field name="state"/>
         </tree>
@@ -19,27 +19,33 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control run">
-          <field name="date"
-                 attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-          <newline/>
-          <notebook colspan="4">
-            <page string="Policies">
-              <field name="policy_ids" colspan="4" nolabel="1"/>
-            </page>
-            <page string="Report and Errors">
-              <field name="report" colspan="4" nolabel="1"/>
-              <separator string="Move lines To be treated manually"/>
-              <field name="manual_ids" colspan="4" nolabel="1"/>
-            </page>
-          </notebook>
-          <group col="3" colspan="4">
-            <button name="generate_credit_lines"
-              string="Compute Credit Control Lines"
-              colspan="1"
-              type="object" icon="gtk-execute"
-              attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-          </group>
-          <field name="state"/>
+          <header>
+            <field name="state" widget="statusbar"
+              statusbar_visible="draft,done"
+              statusbar_colors='{}'/>
+          </header>
+          <sheet>
+            <group>
+              <field name="date"/>
+            </group>
+            <notebook>
+              <page string="Policies">
+                <field name="policy_ids" colspan="4" nolabel="1"/>
+              </page>
+              <page string="Report and Errors">
+                <field name="report" colspan="4" nolabel="1"/>
+                <separator string="Move lines To be treated manually"/>
+                <field name="manual_ids" colspan="4" nolabel="1"/>
+              </page>
+            </notebook>
+            <group col="3" colspan="4">
+              <button name="generate_credit_lines"
+                string="Compute Credit Control Lines"
+                colspan="1"
+                type="object" icon="gtk-execute"
+                attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+            </group>
+          </sheet>
         </form>
       </field>
     </record>

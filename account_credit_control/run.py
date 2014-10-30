@@ -32,7 +32,9 @@ class CreditControlRun(models.Model):
     _rec_name = 'date'
     _description = "Credit control line generator"
 
-    date = fields.Date(string='Controlling Date', required=True)
+    date = fields.Date(string='Controlling Date', required=True,
+                       readonly=True,
+                       states={'draft': [('readonly', False)]})
 
     @api.model
     def _get_policies(self):
