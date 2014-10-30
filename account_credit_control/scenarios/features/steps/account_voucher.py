@@ -82,6 +82,10 @@ def impl(ctx, amount, inv_name):
         VoucherLine.create(line)
 
     voucher.button_proforma_voucher()
+    # Workaround to force recomputation of the residual.
+    # Must be removed once this bug is fixed:
+    # https://github.com/odoo/odoo/issues/3395
+    invoice.write({'currency_id': invoice.currency_id.id})
 
 @step('I import invoice "{inv_name}" using import invoice button')
 def impl(ctx, inv_name):
