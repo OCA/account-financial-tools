@@ -3,6 +3,16 @@
 from support import *
 import datetime
 
+
+@step('I pay the full amount on the invoice "{inv_name}"')
+def impl(ctx, inv_name):
+    Invoice = model('account.invoice')
+    invoice = Invoice.get([('name', '=', inv_name)])
+    assert invoice
+    ctx.execute_steps("""
+       When I pay %f on the invoice "%s"
+    """ % (invoice.residual, inv_name))
+
 @step('I pay {amount:f} on the invoice "{inv_name}"')
 def impl(ctx, amount, inv_name):
     Partner = model('res.partner')
