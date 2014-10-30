@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # flake8: noqa
-from support import *
+from support import model, assert_equal, assert_almost_equal
 import datetime
 
 

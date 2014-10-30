@@ -2,7 +2,7 @@
 # flake8: noqa
 import time
 from behave import given, when
-from support import model
+from support import model, assert_equal
 
 @given(u'I configure the following accounts on the credit control policy with oid: "{policy_oid}"')
 def impl(ctx, policy_oid):

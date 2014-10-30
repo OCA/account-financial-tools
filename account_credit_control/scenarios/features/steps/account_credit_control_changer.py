@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from support import model, assert_equal, assert_in, assert_true
+
 # flake8: noqa
 @given(u'I change level for invoice "{invoice_name}" to "{level_name}" of policy "{policy_name}"')
 def impl(ctx, invoice_name, level_name, policy_name):
