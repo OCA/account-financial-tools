@@ -20,61 +20,17 @@ Feature: Ensure that email credit line generation first pass is correct
 
  @pay_invoice_si_16
   Scenario: I pay entirely the invoice SI 16, so it should no longer appear in the credit control lines
-    Given I need a "account.bank.statement" with oid: scen.voucher_statement_si_16
-    And having:
-     | name       | value                    |
-     | name       | Bk.St.si_16              |
-     | date       | 2013-05-30               |
-     | journal_id | by oid: scen.eur_journal |
-     | period_id  | by name: 05/2013         |
-
-    And I import invoice "SI_16" using import invoice button
-    And I set bank statement end-balance
-    When I confirm bank statement
+    Given I pay the full amount on the invoice "SI_16"
     Then My invoice "SI_16" is in state "paid" reconciled with a residual amount of "0.0"
 
   @pay_invoice_si_17
   Scenario: I pay entirely the invoice SI 17, so it should no longer appear in the credit control lines
-    Given I need a "account.bank.statement" with oid: scen.voucher_statement_si_17
-    And having:
-     | name       | value                    |
-     | name       | Bk.St.si_17              |
-     | date       | 2013-05-30               |
-     | journal_id | by oid: scen.eur_journal |
-     | period_id  | by name: 05/2013         |
-
-    And I import invoice "SI_17" using import invoice button
-    And I should have a "account.bank.statement.line" with name: "SI_17" and amount: "1500"
-    And I set the voucher paid amount to "1000"
-    And I save the voucher
-    And I modify the line amount to "1000"
-    And I need a "account.bank.statement" with oid: scen.voucher_statement_si_17
-    And I set bank statement end-balance
-    When I confirm bank statement
+    Given I pay 1000.0 on the invoice "SI_17"
     Then My invoice "SI_17" is in state "open" reconciled with a residual amount of "500.0"
 
   @pay_invoice_si_18_part1
   Scenario: I pay the first part of the invoice SI 18, so it should no longer appear in the credit control lines however, the second move lines should still appears
-    Given I need a "account.bank.statement" with oid: scen.voucher_statement_si_18
-    And having:
-     | name       | value                    |
-     | name       | Bk.St.si_18_part1        |
-     | date       | 2013-05-30               |
-     | journal_id | by oid: scen.eur_journal |
-     | period_id  | by name: 05/2013         |
-
-    And I import invoice "SI_18" using import invoice button
-    And I should have a "account.bank.statement.line" with name: "SI_18" and amount: "450"
-    And I set the voucher paid amount to "450"
-    And I save the voucher
-    And I modify the line amount to "450"
-    And I should have a "account.bank.statement.line" with name: "SI_18" and amount: "1050"
-    And I set the voucher paid amount to "0"
-    And I save the voucher
-    Then I modify the line amount to "0"
-    And I need a "account.bank.statement" with oid: scen.voucher_statement_si_18
-    And I set bank statement end-balance
-    When I confirm bank statement
+    Given I pay 450.0 on the invoice "SI_18"
     Then My invoice "SI_18" is in state "open" reconciled with a residual amount of "1050.0"
 
   @account_credit_control_run_month
