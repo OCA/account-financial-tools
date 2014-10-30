@@ -7,10 +7,12 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control policy">
-          <field name="name"/>
-          <field name="do_nothing"/>
-          <field name="company_id"/>
-          <field name="active"/>
+          <group>
+            <field name="name"/>
+            <field name="do_nothing"/>
+            <field name="company_id"/>
+            <field name="active"/>
+          </group>
           <notebook colspan="4">
             <page string="Policy levels">
               <field name="level_ids" nolabel="1" colspan="4" >
