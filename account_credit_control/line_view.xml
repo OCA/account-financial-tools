@@ -6,23 +6,41 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Control Credit Lines">
-          <field name="date"/>
-          <field name="date_due"/>
-          <field name="date_sent"/>
-          <field name="level"/>
-          <field name="manually_overridden"/>
-          <field name="state"/>
-          <field name="channel"/>
-          <field name="invoice_id"/>
-          <field name="partner_id"/>
-          <field name="amount_due"/>
-          <field name="balance_due"/>
-          <field name="currency_id"/>
-          <field name="move_line_id"/>
-          <field name="account_id"/>
-          <field name="policy_level_id"/>
-          <field name="policy_id"/>
-          <field name="mail_message_id"/>
+          <header>
+            <field name="state" widget="statusbar"
+              statusbar_visible="draft,to_be_sent,sent"
+              statusbar_colors='{"error":"red","email_error":"red"}'/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="partner_id"/>
+                <field name="policy_level_id"/>
+                <field name="policy_id"/>
+                <field name="level"/>
+                <field name="manually_overridden"/>
+              </group>
+              <group>
+                <field name="date"/>
+                <field name="date_due"/>
+                <field name="channel"/>
+                <field name="date_sent"/>
+                <field name="mail_message_id"/>
+              </group>
+            </group>
+            <group>
+              <group>
+                <field name="invoice_id"/>
+                <field name="move_line_id"/>
+                <field name="account_id"/>
+              </group>
+              <group>
+                <field name="amount_due"/>
+                <field name="balance_due"/>
+                <field name="currency_id"/>
+              </group>
+            </group>
+          </sheet>
         </form>
       </field>
     </record>
