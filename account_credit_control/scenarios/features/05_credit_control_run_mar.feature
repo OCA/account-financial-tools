@@ -20,25 +20,7 @@ Feature: Ensure that email credit line generation first pass is correct
 
   @pay_invoice_si_19_part1
   Scenario: I pay a part of the first part of the invoice SI 19,
-    Given I need a "account.bank.statement" with oid: scen.state_control_eur_1
-    And having:
-     | name       | value                    |
-     | name       | Bk.St.si_19_part1        |
-     | date       | 2013-03-31               |
-     | journal_id | by oid: scen.eur_journal |
-     | period_id  | by name: 03/2013         |
-
-    And I import invoice "SI_19" using import invoice button
-    And I should have a "account.bank.statement.line" with name: "SI_19" and amount: "450"
-    And I set the voucher paid amount to "300"
-    And I save the voucher
-    And I should have a "account.bank.statement.line" with name: "SI_19" and amount: "1050"
-    And I set the voucher paid amount to "0"
-    And I save the voucher
-    Then I modify the line amount to "0"
-    Given I need a "account.bank.statement" with oid: scen.state_control_eur_1
-    And I set bank statement end-balance
-    When I confirm bank statement
+    Given I pay 300.0 on the invoice "SI_19"
     Then My invoice "SI_19" is in state "open" reconciled with a residual amount of "1200.0"
 
   @account_credit_control_run_month_mar
