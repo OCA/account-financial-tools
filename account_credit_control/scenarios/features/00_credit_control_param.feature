@@ -3,6 +3,12 @@
 #    OERPScenario, OpenERP Functional Tests
 #    Copyright 2009 Camptocamp SA
 #
+#
+#    The base scenario for the finance data must be executed before this
+#    one. The finance scenario is included in the oerpscenario base and
+#    the tag to run it is: @base_finance
+#
+#
 ##############################################################################
 ##############################################################################
 # Branch      # Module       # Processes     # System
@@ -30,11 +36,11 @@ Feature: General parameters in order to test the credit control module
     """
 
   @email_params_mailtrap
-  Scenario: E-MAIL PARAMS WITH EMAIL EATER (http://mailtrap.railsware.com/)
+  Scenario: E-MAIL PARAMS WITH EMAIL EATER (http://mailtrap.io)
     Given I need a "ir.mail_server" with name: mailstrap_testings
     And having:
     | name              | value                     |
-    | smtp_host         | mailtrap.railsware.com    |
+    | smtp_host         | mailtrap.io               |
     | sequence          | 1                         |
     | smtp_port         | 2525                      |
     | smtp_user         | camptocamp1               |
