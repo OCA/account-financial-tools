@@ -65,7 +65,7 @@ Support of fees price list
           'security/ir.model.access.csv'],
  'demo': [],
  'test': [],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False}
