@@ -18,22 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp import models, api
 
 
-class credit_control_run(orm.Model):
+class CreditControlRun(models.Model):
     """Add computation of fees"""
 
     _inherit = "credit.control.run"
 
-    def _generate_credit_lines(self, cr, uid, run_id, context=None):
+    @api.multi
+    @api.returns('credit.control.line')
+    def _generate_credit_lines(self):
         """Override method to add fees computation"""
-        credit_line_ids = super(credit_control_run,
-                                self)._generate_credit_lines(
-                                    cr,
-                                    uid,
-                                    run_id,
-                                    context=context)
-        fees_model = self.pool['credit.control.dunning.fees.computer']
-        fees_model._compute_fees(cr, uid, credit_line_ids, context=context)
-        return credit_line_ids
+        credit_lines = super(CreditControlRun, self)._generate_credit_lines()
+        fees_model = self.env['credit.control.dunning.fees.computer']
+        fees_model._compute_fees(credit_lines)
+        return credit_lines

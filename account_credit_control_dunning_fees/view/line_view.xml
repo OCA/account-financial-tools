@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="add_fees_on_credit_control_line" model="ir.ui.view">
+      <field name="name">add fees on credit control line</field>
+      <field name="model">credit.control.line</field>
+      <field name="inherit_id" ref="account_credit_control.credit_control_line_tree" />
+      <field name="arch" type="xml">
+        <field name="balance_due" position="after">
+          <field name="dunning_fees_amount"
+                 attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="add_fees_on_credit_control_line_from" model="ir.ui.view">
+      <field name="name">add fees on credit control line form</field>
+      <field name="model">credit.control.line</field>
+      <field name="inherit_id" ref="account_credit_control.credit_control_line_form"/>
+      <field name="arch" type="xml">
+        <field name="balance_due" position="after">
+          <field name="dunning_fees_amount"
+                 attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>

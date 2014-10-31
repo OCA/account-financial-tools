@@ -18,22 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{'name': 'Credit control dunning fees',
- 'version': '0.1.0',
- 'author': 'Camptocamp',
- 'maintainer': 'Camptocamp',
- 'category': 'Accounting',
- 'complexity': 'normal',
- 'depends': ['account_credit_control'],
- 'website': 'http://www.camptocamp.com',
- 'data': ['view/policy_view.xml',
-          'view/line_view.xml',
-          'report/report_credit_control_summary.xml',
-          'security/ir.model.access.csv',
-          ],
- 'demo': [],
- 'test': [],
- 'installable': True,
- 'auto_install': False,
- 'license': 'AGPL-3',
- 'application': False}
+from openerp import models, fields
+
+
+class CreditControlPolicy(models.Model):
+    """ADD dunning fees fields"""
+
+    _inherit = "credit.control.policy.level"
+
+    dunning_product_id = fields.Many2one('product.product',
+                                         string='Fees Product')
+
+    dunning_fixed_amount = fields.Float(string='Fees Fixed Amount')
+
+    dunning_currency_id = fields.Many2one(
+        'res.currency',
+        string='Fees currency',
+        help="Currency of the dunning fees. If empty, it takes the "
+             "company's currency."
+    )
+
+    # planned type are fixed, percent, compound
+    dunning_fees_type = fields.Selection([('fixed', 'Fixed')],
+                                         string='Type',
+                                         default='fixed')

@@ -18,16 +18,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp import models, api
 
 
-class FeesComputer(orm.BaseModel):
+class FeesComputer(models.BaseModel):
     """Model that compute dunnig fees.
 
     This class does not need any database storage as
     it contains pure logic.
 
-    It inherits form ``orm.BaseModel`` to benefit of orm facility
+    It inherits form ``models.BaseModel`` to benefit of orm facility
 
     Similar to AbstractModel but log access and actions
     """
@@ -38,16 +38,18 @@ class FeesComputer(orm.BaseModel):
     _register = True
     _transient = False
 
+    @api.model
     def _get_compute_fun(self, level_fees_type):
-        """Retrieve function of class that should compute the fees based on type
+        """Retrieve function of class that should compute the fees based
+        on type
 
-        :param level_fee_type: type exisiting in model
+        :param level_fee_type: type existing in model
                                `credit.control.policy.level`
                                for field dunning_fees_type
 
         :returns: a function of class :class:`FeesComputer`
                  with following signature
-                 self, cr, uid, credit_line (record), context
+                 self, credit_line (record)
 
         """
         if level_fees_type == 'fixed':
@@ -56,33 +58,30 @@ class FeesComputer(orm.BaseModel):
             raise NotImplementedError('fees type %s is not supported' %
                                       level_fees_type)
 
-    def _compute_fees(self, cr, uid, credit_line_ids, context=None):
-        """Compute fees for `credit_line_ids` parameter
+    @api.model
+    def _compute_fees(self, credit_lines):
+        """Compute fees for `credit_lines` parameter
 
-        Fees amount is written on credit line in field dunning_fees_amount
+        Fees amount is written on credit lines in the field dunning_fees_amount
 
-        :param credit_line_ids: list of `credit.control.line` ids
+        :param credit_lines: recordset of `credit.control.line`
 
-        :returns: `credit_line_ids` list of `credit.control.line` ids
+        :returns: recordset of `credit.control.line`
 
         """
-        if context is None:
-            context = {}
-        if not credit_line_ids:
-            return credit_line_ids
-        c_model = self.pool['credit.control.line']
-        credit_lines = c_model.browse(cr, uid, credit_line_ids,
-                                      context=context)
+        if not credit_lines:
+            return credit_lines
         for credit in credit_lines:
             # if there is no dependence between generated credit lines
             # this could be threaded
-            self._compute(cr, uid, credit, context=context),
-        return credit_line_ids
+            self._compute(credit)
+        return credit_lines
 
-    def _compute(self, cr, uid, credit_line, context=None):
+    @api.model
+    def _compute(self, credit_line):
         """Compute fees for a given credit line
 
-        Fees amount is written on credit line in field dunning_fees_amount
+        Fees amount is written on credit line in then field dunning_fees_amount
 
         :param credit_line: credit line record
 
@@ -90,13 +89,13 @@ class FeesComputer(orm.BaseModel):
         """
         fees_type = credit_line.policy_level_id.dunning_fees_type
         compute = self._get_compute_fun(fees_type)
-        fees = compute(cr, uid, credit_line, context=context)
+        fees = compute(credit_line)
         if fees:
-            credit_line.write({'dunning_fees_amount': fees},
-                              context=context)
+            credit_line.write({'dunning_fees_amount': fees})
         return credit_line
 
-    def compute_fixed_fees(self, cr, uid, credit_line, context=None):
+    @api.model
+    def compute_fixed_fees(self, credit_line):
         """Compute fees amount for fixed fees.
         Correspond to the fixed dunning fees type
 
@@ -109,16 +108,15 @@ class FeesComputer(orm.BaseModel):
         :return: fees amount float (in credit line currency)
 
         """
-        currency_model = self.pool['res.currency']
-        credit_currency = credit_line.currency_id
+        credit_currency = (credit_line.currency_id or
+                           credit_line.company_id.currency_id)
         level = credit_line.policy_level_id
         fees_amount = level.dunning_fixed_amount
         if not fees_amount:
             return 0.0
-        fees_currency = level.dunning_currency_id
+        fees_currency = (level.dunning_currency_id or
+                         level.policy_id.company_id.currency_id)
         if fees_currency == credit_currency:
             return fees_amount
         else:
-            return currency_model.compute(cr, uid, fees_currency.id,
-                                          credit_currency.id, fees_amount,
-                                          context=context)
+            return fees_currency.compute(fees_amount, credit_currency)
