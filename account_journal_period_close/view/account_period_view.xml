@@ -9,7 +9,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//sheet/group" position="after">
                     <notebook>
-                        <page string="Journals">
+                        <page string="Journals" attrs="{'invisible': [('state', '=', 'done')]}">
+                            <button name="add_all_journals" string="Add all journals" type="object" states="draft"/>
                             <field name="journal_period_ids">
                                 <tree editable="bottom">
                                     <field name="journal_id" attrs="{'readonly': [('type', '!=', False)]}"/>

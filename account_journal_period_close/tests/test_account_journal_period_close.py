@@ -28,7 +28,7 @@
 #
 
 import openerp.tests.common as common
-from openerp.osv import orm
+from openerp.osv import orm, osv
 from datetime import datetime
 from psycopg2 import IntegrityError
 
@@ -99,10 +99,10 @@ def journal_period_draft(self, journal_period_id, context):
                               context=context)
 
 
-class TestAccountConstraintChronology(common.TransactionCase):
+class TestAccountJournalPeriodClose(common.TransactionCase):
 
     def setUp(self):
-        super(TestAccountConstraintChronology, self).setUp()
+        super(TestAccountJournalPeriodClose, self).setUp()
 
     def test_close_period_open_journal(self):
         context = {}
@@ -138,7 +138,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
                                                      journal_id)
         # I check if the exception is correctly raised at create of an account
         # move which is linked with a closed journal
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(osv.except_osv,
                           self.registry('account.move').create,
                           self.cr, self.uid, move_values, context=context)
 
@@ -203,6 +203,10 @@ class TestAccountConstraintChronology(common.TransactionCase):
         create_journal_period(self, period_id, journal_id, context)
         # I check if the exception is correctly raised at adding both same
         # journal on a period
-        self.assertRaises(IntegrityError,
-                          create_journal_period,
-                          self, period_id, journal_id, context)
+        self.cr._default_log_exceptions = False
+        try:
+            self.assertRaises(IntegrityError,
+                              create_journal_period,
+                              self, period_id, journal_id, context)
+        finally:
+            self.cr._default_log_exceptions = True
