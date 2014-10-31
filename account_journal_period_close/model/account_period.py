@@ -36,3 +36,23 @@ class AccountPeriod(orm.Model):
         'journal_period_ids': fields.one2many('account.journal.period',
                                               'period_id', 'Journal states'),
     }
+
+    def add_all_journals(self, cr, uid, ids, context=None):
+        this = self.browse(cr, uid, ids, context=context)[0]
+        journal_period_obj = self.pool.get('account.journal.period')
+        journal_period_ids = journal_period_obj\
+            .search(cr, uid, [('period_id', '=', this.id)], context=context)
+        journal_list = []
+        for journal_period in journal_period_obj.browse(cr,
+                                                        uid,
+                                                        journal_period_ids,
+                                                        context=context):
+            journal_list.append(journal_period.journal_id.id)
+        journal_ids = self.pool.get('account.journal')\
+            .search(cr, uid, [('id', 'not in', journal_list)], context=context)
+        for journal_id in journal_ids:
+            journal_period_obj.create(cr,
+                                      uid,
+                                      {'period_id': this.id,
+                                       'journal_id': journal_id,
+                                       'state': this.state})
