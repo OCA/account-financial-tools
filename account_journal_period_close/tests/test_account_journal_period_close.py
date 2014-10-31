@@ -28,7 +28,7 @@
 #
 
 import openerp.tests.common as common
-from openerp.osv import orm, osv
+from openerp.exceptions import except_orm
 from datetime import datetime
 from psycopg2 import IntegrityError
 
@@ -138,7 +138,7 @@ class TestAccountJournalPeriodClose(common.TransactionCase):
                                                      journal_id)
         # I check if the exception is correctly raised at create of an account
         # move which is linked with a closed journal
-        self.assertRaises(osv.except_osv,
+        self.assertRaises(except_orm,
                           self.registry('account.move').create,
                           self.cr, self.uid, move_values, context=context)
 
@@ -164,7 +164,7 @@ class TestAccountJournalPeriodClose(common.TransactionCase):
         # issue on Odoo github : #1633
 
         # I check if the exception is correctly raised
-        """self.assertRaises(orm.except_orm,
+        """self.assertRaises(except_orm,
                           self.registry('account.move').write,
                           self.cr, self.uid, [move_id],
                           {'journal_id': journal_id}, context=context)"""
@@ -191,7 +191,7 @@ class TestAccountJournalPeriodClose(common.TransactionCase):
                                 context=context)
         # I check if the exception is correctly raised at closing journal that
         # contains some draft account move
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(except_orm,
                           jour_per_obj.action_done,
                           self.cr, self.uid, journal_period_ids,
                           context=context)
