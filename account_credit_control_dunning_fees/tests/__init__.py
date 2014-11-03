@@ -19,5 +19,3 @@
 #
 ##############################################################################
 from . import test_fees_generation
-
-checks = [test_fees_generation]
