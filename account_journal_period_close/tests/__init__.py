@@ -28,3 +28,8 @@
 #
 
 from . import test_account_journal_period_close
+
+
+checks = [
+    test_account_journal_period_close,
+]

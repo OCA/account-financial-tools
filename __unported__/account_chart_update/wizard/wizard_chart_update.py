@@ -82,7 +82,7 @@ class WizardLog:
 class wizard_update_charts_accounts(orm.TransientModel):
     _name = 'wizard.update.charts.accounts'
 
-    def _get_lang_selection_options(self, cr, uid, context={}):
+    def _get_lang_selection_options(self, cr, uid, context=None):
         """
         Gets the available languages for the selection.
         """

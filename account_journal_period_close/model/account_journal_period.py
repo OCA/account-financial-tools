@@ -31,15 +31,7 @@ from openerp.osv import orm, fields
 from openerp.tools.translate import _
 
 
-class account_period(orm.Model):
-    _inherit = 'account.period'
-    _columns = {
-        'journal_period_ids': fields.one2many('account.journal.period',
-                                              'period_id', 'Journal states'),
-    }
-
-
-class account_journal_period(orm.Model):
+class AccountJournalPeriod(orm.Model):
     _inherit = 'account.journal.period'
     _order = "type,name"
     _columns = {
@@ -48,6 +40,11 @@ class account_journal_period(orm.Model):
                                string='Journal Type',
                                store=True, readonly=True)
     }
+
+    _sql_constraints = [
+        ('journal_period_uniq', 'unique(period_id, journal_id)',
+         'You can not add same journal in the same period twice.'),
+    ]
 
     def _check(self, cr, uid, ids, context=None):
         return True
@@ -79,8 +76,8 @@ class account_journal_period(orm.Model):
                 period = self.pool.get('account.period')\
                     .browse(cr, uid, values['period_id'], context=context)
                 values.update({'name': (journal.code or journal.name)+':' +
-                               (period.name or '')}),
-        return super(account_journal_period, self).create(cr,
-                                                          uid,
-                                                          values,
-                                                          context=context)
+                               (period.name or '')})
+        return super(AccountJournalPeriod, self).create(cr,
+                                                        uid,
+                                                        values,
+                                                        context=context)

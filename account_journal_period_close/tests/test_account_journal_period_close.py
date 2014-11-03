@@ -28,8 +28,9 @@
 #
 
 import openerp.tests.common as common
-from openerp.osv import orm
+from openerp.exceptions import except_orm
 from datetime import datetime
+from psycopg2 import IntegrityError
 
 DB = common.DB
 ADMIN_USER_ID = common.ADMIN_USER_ID
@@ -98,10 +99,10 @@ def journal_period_draft(self, journal_period_id, context):
                               context=context)
 
 
-class TestAccountConstraintChronology(common.TransactionCase):
+class TestAccountJournalPeriodClose(common.TransactionCase):
 
     def setUp(self):
-        super(TestAccountConstraintChronology, self).setUp()
+        super(TestAccountJournalPeriodClose, self).setUp()
 
     def test_close_period_open_journal(self):
         context = {}
@@ -137,7 +138,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
                                                      journal_id)
         # I check if the exception is correctly raised at create of an account
         # move which is linked with a closed journal
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(except_orm,
                           self.registry('account.move').create,
                           self.cr, self.uid, move_values, context=context)
 
@@ -163,7 +164,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         # issue on Odoo github : #1633
 
         # I check if the exception is correctly raised
-        """self.assertRaises(orm.except_orm,
+        """self.assertRaises(except_orm,
                           self.registry('account.move').write,
                           self.cr, self.uid, [move_id],
                           {'journal_id': journal_id}, context=context)"""
@@ -190,7 +191,22 @@ class TestAccountConstraintChronology(common.TransactionCase):
                                 context=context)
         # I check if the exception is correctly raised at closing journal that
         # contains some draft account move
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(except_orm,
                           jour_per_obj.action_done,
                           self.cr, self.uid, journal_period_ids,
                           context=context)
+
+    def test_duplicate_journal_period(self):
+        context = {}
+        journal_id = self.ref('account.sales_journal')
+        period_id = self.ref('account.period_1')
+        create_journal_period(self, period_id, journal_id, context)
+        # I check if the exception is correctly raised at adding both same
+        # journal on a period
+        self.cr._default_log_exceptions = False
+        try:
+            self.assertRaises(IntegrityError,
+                              create_journal_period,
+                              self, period_id, journal_id, context)
+        finally:
+            self.cr._default_log_exceptions = True
