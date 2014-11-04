@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_renumber_form" model="ir.ui.view">
+            <field name="name">account_renumber.form</field>
+            <field name="model">wizard.renumber</field>
+            <field name="arch" type="xml">
+                <form string="Renumber Account Moves">
+                    <field name="state" invisible="1" />
+                    <p>This wizard will help you renumber entries in one or more journals.</p>
+                    <p>Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence.</p>
+                    <group string="General Data">
+                        <field name="number_next"/>
+                    </group>
+                    <group string="Journals and periods to consider">
+                        <notebook colspan="4">
+                            <page string="Journals">
+                                <field name="journal_ids" editable="top"/>
+                            </page>
+                            <page string="Periods">
+                                <field name="period_ids" editable="top"/>
+                            </page>
+                        </notebook>
+                    </group>
+                    <footer>
+                        <div states="init">
+                            <button name="renumber" string="Renumber" type="object" class="oe_highlight"/>
+                            or
+                            <button special="cancel" string="Cancel" class="oe_link"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_account_renumber" model="ir.actions.act_window">
+            <field name="name">Renumber journal entries</field>
+            <field name="res_model">wizard.renumber</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_renumber_form" />
+            <field name="target">new</field>
+        </record>
+        <menuitem id="menu_account_renumber"
+                parent="account.menu_account_end_year_treatments"
+                action="action_account_renumber"
+                sequence="-1"
+                groups="account.group_account_manager"/>
+
+    </data>
+</openerp>
