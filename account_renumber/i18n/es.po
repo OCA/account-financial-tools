@@ -1,6 +1,18 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
+<<<<<<< HEAD
 #	* account_renumber
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+#	* account_renumber
+=======
+#       * account_renumber
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+#       * account_renumber
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #
 msgid ""
 msgstr ""
@@ -8,6 +20,11 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 "POT-Creation-Date: 2013-09-26 16:17+0000\n"
 "PO-Revision-Date: 2014-04-08 19:42+0000\n"
 "Last-Translator: Juan A. Pérez Ruiz (Otherway) <juanalfonso@otherway.es>\n"
@@ -21,6 +38,14 @@ msgstr ""
 "PO-Revision-Date: 2014-06-26 05:27+0000\n"
 "Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
 >>>>>>> Launchpad automatic translations update.
+"POT-Creation-Date: 2014-04-14 12:33+0000\n"
+"PO-Revision-Date: 2014-06-26 05:27+0000\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
+"POT-Creation-Date: 2014-04-14 12:33+0000\n"
+"PO-Revision-Date: 2014-06-26 05:27+0000\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@gmail.com>\n"
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,6 +55,11 @@ msgstr ""
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 "X-Launchpad-Export-Date: 2014-04-09 07:04+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 =======
@@ -57,16 +87,6 @@ msgstr "Periodos fiscales a renumerar"
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
 msgid "Renumber journal entries"
 msgstr "Renumerar asientos"
-=======
-"Plural-Forms: \n"
-=======
-"X-Launchpad-Export-Date: 2014-06-26 07:07+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
->>>>>>> Launchpad automatic translations update.
-=======
-"X-Launchpad-Export-Date: 2014-06-27 07:08+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
->>>>>>> Launchpad automatic translations update.
 
 #. module: account_renumber
 #: code:_description:0
@@ -78,10 +98,6 @@ msgstr "Asistente de renumeración contable"
 #: view:wizard.renumber:0
 msgid "Cancel"
 msgstr "Cancelar"
-<<<<<<< HEAD
->>>>>>> [IMP] account_renumber: PEP8
-=======
->>>>>>> Launchpad automatic translations update.
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -90,6 +106,11 @@ msgstr "Primer número"
 
 #. module: account_renumber
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #: field:wizard.renumber,state:0
 msgid "unknown"
 msgstr "desconocido"
@@ -98,6 +119,19 @@ msgstr "desconocido"
 msgid "Fiscal periods to renumber"
 msgstr "Periodos a renumerar"
 >>>>>>> [IMP] account_renumber: PEP8
+<<<<<<< HEAD
+=======
+=======
+#: help:wizard.renumber,period_ids:0
+msgid "Fiscal periods to renumber"
+msgstr "Periodos a renumerar"
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+#: help:wizard.renumber,period_ids:0
+msgid "Fiscal periods to renumber"
+msgstr "Periodos a renumerar"
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -113,10 +147,24 @@ msgstr "Inicial"
 #: help:wizard.renumber,number_next:0
 msgid "Journal sequences will start counting on this number"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgstr "Las secuencias de diario comenzarán a contar en este número"
 =======
 msgstr "Las secuencias de los diarios empezarán a contar en este número"
 >>>>>>> Launchpad automatic translations update.
+<<<<<<< HEAD
+=======
+=======
+msgstr "Las secuencias de los diarios empezarán a contar en este número"
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+msgstr "Las secuencias de los diarios empezarán a contar en este número"
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -131,6 +179,11 @@ msgstr "Diarios y periodos a considerar"
 
 #. module: account_renumber
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #: selection:wizard.renumber,state:0
 msgid "Initial"
 msgstr "Inicial"
@@ -138,6 +191,13 @@ msgstr "Inicial"
 #. module: account_renumber
 =======
 >>>>>>> [IMP] account_renumber: PEP8
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
 msgstr "Diarios a renumerar"
@@ -146,7 +206,19 @@ msgstr "Diarios a renumerar"
 #: code:addons/account_renumber/wizard/wizard_renumber.py:86
 #, python-format
 msgid "No Data Available"
+<<<<<<< HEAD
 msgstr "Sin datos disponibles"
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+msgstr "Sin datos disponibles"
+=======
+msgstr "No hay datos disponibles"
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+msgstr "No hay datos disponibles"
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:87
@@ -157,6 +229,11 @@ msgstr "No se han encontrado registros para la selección"
 #. module: account_renumber
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "wizard.renumber"
 msgstr "wizard.renumber"
@@ -169,6 +246,13 @@ msgstr "No hay datos disponibles"
 =======
 =======
 >>>>>>> Launchpad automatic translations update.
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 #: view:wizard.renumber:0
 #: field:wizard.renumber,period_ids:0
 msgid "Periods"
@@ -176,9 +260,30 @@ msgstr "Periodos"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
+<<<<<<< HEAD
 msgid "Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence."
 msgstr "Los asientos asentados de estos diarios se ordenarán por fecha y entonces se les asignará un número de secuencia usando su secuencia de diario."
 >>>>>>> [IMP] account_renumber: PEP8
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+msgid "Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence."
+msgstr "Los asientos asentados de estos diarios se ordenarán por fecha y entonces se les asignará un número de secuencia usando su secuencia de diario."
+>>>>>>> [IMP] account_renumber: PEP8
+=======
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+msgid ""
+"Posted moves from those journals will be sorted by date and then assigned "
+"sequential numbers using their journal sequence."
+msgstr ""
+"Los asientos asentados de estos diarios se ordenarán por fecha y entonces se "
+"les asignará un número de secuencia usando su secuencia de diario."
+<<<<<<< HEAD
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -188,6 +293,11 @@ msgstr "Renumerar"
 #. module: account_renumber
 #: view:wizard.renumber:0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgid "This wizard will help you renumber entries in one or more journals."
 msgstr ""
 "Este asistente le ayudará a renumerar los asientos en uno o más diarios."
@@ -197,6 +307,13 @@ msgstr ""
 msgid "sequential numbers using their journal sequence."
 msgstr "números secuenciales usando su secuencia de diario."
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgid "Renumber Account Moves"
 msgstr "Renumerar asientos contables"
 
@@ -205,12 +322,27 @@ msgstr "Renumerar asientos contables"
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
 msgid "Renumber journal entries"
 msgstr "Renumerar asientos contables"
+<<<<<<< HEAD
 >>>>>>> [IMP] account_renumber: PEP8
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> [IMP] account_renumber: PEP8
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:130
 #, python-format
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgid "No records found for your selection!"
 msgstr "No se han encontrado registros en su selección"
 
@@ -222,14 +354,34 @@ msgstr ""
 "Los elementos asentados de esos diarios serán ordenados por fecha y "
 "asignados a"
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgid "Renumbered account moves"
 msgstr "Asientos contables renumerados"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
 msgid "Renumbering"
+<<<<<<< HEAD
 msgstr "Renumerados"
 >>>>>>> [IMP] account_renumber: PEP8
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+msgstr "Renumerados"
+>>>>>>> [IMP] account_renumber: PEP8
+=======
+msgstr "Renumerando"
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+msgstr "Renumerando"
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -252,6 +404,18 @@ msgstr "desconocido"
 msgid "wizard.renumber"
 msgstr "Asistente de renumeración de asientos"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Launchpad automatic translations update.
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> Launchpad automatic translations update.
+=======
+>>>>>>> Revert "Rename all addons to xxx_unported to be travis compliant"
+=======
+>>>>>>> [MIG] Migration of account_renumber to 8.0.
+>>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.

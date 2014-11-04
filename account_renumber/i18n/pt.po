@@ -1,44 +1,43 @@
-# Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-#	* account_renumber
+# Portuguese translation for openobject-addons
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the openobject-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-14 12:33+0000\n"
-"PO-Revision-Date: 2014-04-14 12:33+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2013-10-18 17:36+0000\n"
+"Last-Translator: Alexandre Fayolle - camptocamp "
+"<alexandre.fayolle@camptocamp.com>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
-"Language: \n"
+"X-Launchpad-Export-Date: 2014-06-26 07:07+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
 
 #. module: account_renumber
 #: code:_description:0
 #, python-format
 msgid "Account renumber wizard"
-msgstr ""
+msgstr "Assistente renumear Conta"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
 msgid "First Number"
-msgstr ""
+msgstr "Primeiro NṔrimeiro Número"
 
 #. module: account_renumber
 #: help:wizard.renumber,period_ids:0
 msgid "Fiscal periods to renumber"
-msgstr ""
+msgstr "Periodo Fiscal para renumear"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -53,23 +52,23 @@ msgstr ""
 #. module: account_renumber
 #: help:wizard.renumber,number_next:0
 msgid "Journal sequences will start counting on this number"
-msgstr ""
+msgstr "A sequência do diário vai começar a contar neste número"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 #: field:wizard.renumber,journal_ids:0
 msgid "Journals"
-msgstr ""
+msgstr "Diários"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Journals and periods to consider"
-msgstr ""
+msgstr "Diários e periodos para considerar"
 
 #. module: account_renumber
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
-msgstr ""
+msgstr "Diários para renumear"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:86
@@ -87,22 +86,27 @@ msgstr ""
 #: view:wizard.renumber:0
 #: field:wizard.renumber,period_ids:0
 msgid "Periods"
-msgstr ""
+msgstr "Periodos"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
-msgid "Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence."
+msgid ""
+"Posted moves from those journals will be sorted by date and then assigned "
+"sequential numbers using their journal sequence."
 msgstr ""
+"Movimentos publicados a partir daqueles diários, serão classificados por "
+"data e então assinados por números sequênciais utilizando a sequência dos "
+"seus diários."
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Renumber"
-msgstr ""
+msgstr "Renumear"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Renumber Account Moves"
-msgstr ""
+msgstr "Renumear Movimentos de Conta"
 
 #. module: account_renumber
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
@@ -114,7 +118,7 @@ msgstr ""
 #: code:addons/account_renumber/wizard/wizard_renumber.py:130
 #, python-format
 msgid "Renumbered account moves"
-msgstr ""
+msgstr "Movimentos de Conta renumerados"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -140,4 +144,3 @@ msgstr ""
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "wizard.renumber"
 msgstr ""
-
