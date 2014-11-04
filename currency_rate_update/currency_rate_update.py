@@ -60,6 +60,15 @@ class Currency_rate_update_service(models.Model):
         if self and self.max_delta_days < 0:
             raise Warning(_('Max delta days must be >= 0'))
             
+    @api.one
+    @api.constrains('interval_number')
+    def _check_interval_number(self):
+        if self and self.interval_number < 0:
+            raise Warning(_('Interval number must be > 0'))
+        if self and self.interval_number == 0:
+            raise Warning(_('Interval number is zero, currencies will not be updated'))
+            
+    
     @api.onchange('service')
     def _onchange_service(self):
         currency_list = ''
@@ -118,8 +127,15 @@ class Currency_rate_update_service(models.Model):
     max_delta_days = fields.Integer('Max delta days', default = lambda *a: 4, required=True, 
                                     help="If the time delta between the rate date given by the webservice and \n "
                                     "the current date exeeds this value, then the currency rate is not updated in OpenERP.")
-                                    
-                                    
+    interval_type = fields.Selection([
+        ('days', 'Day(s)'),
+        ('weeks', 'Week(s)'),
+        ('months', 'Month(s)')],
+        string = 'Currency update frecvency',
+        default = 'days')         
+    interval_number = fields.Integer('Frecvency', default = 0)                                
+    last_run = fields.Date('Last run on', readonly=True)                                
+    
     _sql_constraints = [
         ('curr_service_unique','unique (service, company_id)',
         _('You can use a service only one time per company !')
