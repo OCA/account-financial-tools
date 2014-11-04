@@ -21,7 +21,8 @@
                     <field name="service"/>
                     <field name="max_delta_days"/>
                     <separator string="Currencies to update with this service" colspan="4"/>
-                    <field name="currency_to_update" colspan="4" nolabel="1"/>
+                    <field name="currency_list" invisible="1"/>
+                    <field name="currency_to_update" colspan="4" nolabel="1" domain="[('id','in', currency_list[0][2])]"/>
                     <separator string="Logs" colspan="4"/>
                     <field name="note" colspan="4" nolabel="1"/>
                 </form>

@@ -42,22 +42,46 @@ import time
 from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from openerp.osv import fields, osv, orm
-from openerp.tools.translate import _
+from openerp import models, fields, api, _
+from openerp.exceptions import Warning
+#from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
-
-class Currency_rate_update_service(osv.Model):
-    """Class that tells for wich services wich currencies have to be updated
-
-    """
+class Currency_rate_update_service(models.Model):
+    """Class thats tell for wich services wich currencies 
+    have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
-    _columns = {
-        # List of webservicies the value sould be a class name
-        'service': fields.selection(
-            [
+    
+    @api.one
+    @api.constrains('max_delta_days')
+    def _check_max_delta_days(self):
+        if self and self.max_delta_days < 0:
+            raise Warning(_('Max delta days must be >= 0'))
+            
+    @api.onchange('service')
+    def _onchange_service(self):
+        currency_list = ''
+        if self.service:
+            currencies = []
+            company_id = False
+            if self.company_id.multi_company_currency_enable:
+                company_id = self.company_id.id
+            if self.service == 'BNR_getter':
+                currency_list = ["AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", \
+                    "DKK", "EGP", "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", \
+                    "NOK", "NZD", "PLN", "RSD", "RUB", "SEK", "TRY", "UAH", "USD", "XAU", \
+                    "XDR", "ZAR"]
+            if company_id:
+                currencies = self.env['res.currency'].search([('name','in', currency_list),'|',('company_id','=',company_id),('company_id','=',False)])
+            else:
+                currencies = self.env['res.currency'].search([('name','in', currency_list),('company_id','=',False)])
+            self.currency_list = [(6, 0, [curr.id for curr in currencies])]
+            
+    
+    ##list of webservicies the value sould be a class name 
+    service = fields.Selection([
                 ('Admin_ch_getter', 'Admin.ch'),
                 ('ECB_getter', 'European Central Bank'),
                 ('Yahoo_getter', 'Yahoo Finance '),
@@ -70,211 +94,39 @@ class Currency_rate_update_service(osv.Model):
                 # This RSS format is used by other national banks
                 #  (Thailand, Malaysia, Mexico...)
                 ('CA_BOC_getter', 'Bank of Canada - noon rates'),
-            ],
-            "Webservice to use",
-            required=True
-        ),
-        # List of currency to update
-        'currency_to_update': fields.many2many(
-            'res.currency',
-            'res_curreny_auto_udate_rel',
-            'service_id',
-            'currency_id',
-            'currency to update with this service',
-        ),
-        # Back ref
-        'company_id': fields.many2one(
-            'res.company',
-            'linked company',
-        ),
-        # Note fileds that will be used as a logger
-        'note': fields.text('update notice'),
-        'max_delta_days': fields.integer(
-            'Max delta days',
-            required=True,
-            help="If the time delta between the "
-            "rate date given by the webservice and "
-            "the current date exeeds this value, "
-            "then the currency rate is not updated in OpenERP."
-        ),
-    }
-    _defaults = {'max_delta_days': lambda *a: 4}
+                # Added for romanian rates
+                ('BNR_getter','National Bank of Romania')
+                                ],
+                                "Webservice to use",
+                                required = True)
+    ## List of currencies available on webservice
+    currency_list = fields.Many2many('res.currency',
+                                     'res_currency_update_avail_rel',
+                                     'service_id',
+                                     'currency_id',                                                            
+                                     'Currencies available')
+    ##list of currency to update                           
+    currency_to_update = fields.Many2many('res.currency',
+                                          'res_currency_auto_update_rel',
+                                          'service_id',
+                                          'currency_id',                                                            
+                                          'Currencies to update with this service')
+    #back ref 
+    company_id = fields.Many2one('res.company', 'Linked Company')
+    ##note fileds that will be used as a logger
+    note = fields.Text('Update notice')
+    max_delta_days = fields.Integer('Max delta days', default = lambda *a: 4, required=True, 
+                                    help="If the time delta between the rate date given by the webservice and \n "
+                                    "the current date exeeds this value, then the currency rate is not updated in OpenERP.")
+                                    
+                                    
     _sql_constraints = [
-        (
-            'curr_service_unique',
-            'unique (service, company_id)',
-            _('You can use a service one time per company !')
+        ('curr_service_unique','unique (service, company_id)',
+        _('You can use a service only one time per company !')
         )
     ]
-
-    def _check_max_delta_days(self, cr, uid, ids):
-        for company in self.read(cr, uid, ids, ['max_delta_days']):
-            if company['max_delta_days'] >= 0:
-                continue
-            else:
-                return False
-        return True
-
-    _constraints = [
-        (_check_max_delta_days,
-         "'Max delta days' must be >= 0",
-         ['max_delta_days']),
-    ]
-
-
-class Currency_rate_update(osv.Model):
-    """Class that handle an ir cron call who will
-    update currencies based on a web url"""
-    _name = "currency.rate.update"
-    _description = "Currency Rate Update"
-    # Dict that represent a cron object
-    nextcall_time = datetime.today() + timedelta(days=1)
-    nextcall = nextcall_time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-    cron = {
-        'active': False,
-        'priority': 1,
-        'interval_number': 1,
-        'interval_type': 'weeks',
-        'nextcall': nextcall,
-        'numbercall': -1,
-        'doall': True,
-        'model': 'currency.rate.update',
-        'function': 'run_currency_update',
-        'args': '()',
-    }
-
-    LOG_NAME = 'cron-rates'
-    MOD_NAME = 'currency_rate_update: '
-
-    def get_cron_id(self, cr, uid, context):
-        """Returns the updater cron's id.
-        Create one if the cron does not exists
-        """
-
-        cron_id = 0
-        cron_obj = self.pool.get('ir.cron')
-        try:
-            # Finds the cron that send messages
-            cron_id = cron_obj.search(
-                cr,
-                uid,
-                [
-                    ('function', 'ilike', self.cron['function']),
-                    ('model', 'ilike', self.cron['model'])
-                ],
-                context={
-                    'active_test': False
-                }
-            )
-            cron_id = int(cron_id[0])
-        except Exception:
-            _logger.info('warning cron not found one will be created')
-            # Ignore if the cron is missing cause we are
-            # going to create it in db
-            pass
-        if not cron_id:
-            self.cron['name'] = _('Currency Rate Update')
-            cron_id = cron_obj.create(cr, uid, self.cron, context)
-        return cron_id
-
-    def save_cron(self, cr, uid, datas, context={}):
-        """save the cron config data should be a dict"""
-        cron_id = self.get_cron_id(cr, uid, context)
-        return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
-
-    def run_currency_update(self, cr, uid):
-        "update currency at the given frequence"
-        factory = Currency_getter_factory()
-        curr_obj = self.pool.get('res.currency')
-        rate_obj = self.pool.get('res.currency.rate')
-        companies = self.pool.get('res.company').search(cr, uid, [])
-        for comp in self.pool.get('res.company').browse(cr, uid, companies):
-            # The multi company currency can beset or no so we handle
-            # The two case
-            if not comp.auto_currency_up:
-                continue
-            # We fetch the main currency looking for currency with base = true.
-            # The main rate should be set at  1.00
-            main_curr_ids = curr_obj.search(
-                cr, uid,
-                [('base', '=', True), ('company_id', '=', comp.id)]
-            )
-            if not main_curr_ids:
-                # If we can not find a base currency for this company
-                # we look for one with no company set
-                main_curr_ids = curr_obj.search(
-                    cr, uid,
-                    [('base', '=', True), ('company_id', '=', False)]
-                )
-            if main_curr_ids:
-                main_curr_rec = curr_obj.browse(cr, uid, main_curr_ids[0])
-            else:
-                raise orm.except_orm(
-                    _('Error!'),
-                    ('There is no base currency set!')
-                )
-            if main_curr_rec.rate != 1:
-                raise orm.except_orm(
-                    _('Error!'),
-                    ('Base currency rate should be 1.00!')
-                )
-            main_curr = main_curr_rec.name
-            for service in comp.services_to_use:
-                note = service.note or ''
-                try:
-                    # We initalize the class that will handle the request
-                    # and return a dict of rate
-                    getter = factory.register(service.service)
-                    curr_to_fetch = map(lambda x: x.name,
-                                        service.currency_to_update)
-                    res, log_info = getter.get_updated_currency(
-                        curr_to_fetch,
-                        main_curr,
-                        service.max_delta_days
-                    )
-                    rate_name = time.strftime(DEFAULT_SERVER_DATE_FORMAT)
-                    for curr in service.currency_to_update:
-                        if curr.name == main_curr:
-                            continue
-                        do_create = True
-                        for rate in curr.rate_ids:
-                            if rate.name == rate_name:
-                                rate.write({'rate': res[curr.name]})
-                                do_create = False
-                                break
-                        if do_create:
-                            vals = {
-                                'currency_id': curr.id,
-                                'rate': res[curr.name],
-                                'name': rate_name
-                            }
-                            rate_obj.create(
-                                cr,
-                                uid,
-                                vals,
-                            )
-
-                    # Show the most recent note at the top
-                    msg = "%s \n%s currency updated. %s" % (
-                        log_info or '',
-                        datetime.today().strftime(
-                            DEFAULT_SERVER_DATETIME_FORMAT
-                        ),
-                        note
-                    )
-                    service.write({'note': msg})
-                except Exception as exc:
-                    error_msg = "\n%s ERROR : %s %s" % (
-                        datetime.today().strftime(
-                            DEFAULT_SERVER_DATETIME_FORMAT
-                        ),
-                        repr(exc),
-                        note
-                    )
-                    _logger.info(repr(exc))
-                    service.write({'note': error_msg})
-
-
+    
+    
 class AbstractClassError(Exception):
     def __str__(self):
         return 'Abstract Class'
@@ -326,6 +178,7 @@ class Currency_getter_factory():
             'Yahoo_getter',
             'Banxico_getter',
             'CA_BOC_getter',
+            'BNR_getter',
         ]
         if class_name in allowed:
             class_def = eval(class_name)
@@ -796,4 +649,66 @@ class CA_BOC_getter(Curreny_getter_interface):
                                      'Exchange data format error for\
                                      Bank of Canada - %s !' % str(curr))
 
+        return self.updated_currency, self.log_info
+        
+##BNR  ############################################################################
+class BNR_getter(Curreny_getter_interface) :
+    """Implementation of Currency_getter_factory interface
+    for BNR service"""
+
+    def rate_retrieve(self, dom, ns, curr) :
+        """ Parse a dom node to retrieve-
+        currencies data"""
+        res = {}
+        xpath_rate_currency = "/def:DataSet/def:Body/def:Cube/def:Rate[@currency='%s']/text()"%(curr.upper())
+        xpath_rate_ref = "/def:DataSet/def:Body/def:Cube/def:Rate[@currency='%s']/@multiplier"%(curr.upper())
+        res['rate_currency'] = float( dom.xpath(xpath_rate_currency, namespaces=ns)[0])
+        try:
+            res['rate_ref'] = float(dom.xpath(xpath_rate_ref, namespaces=ns)[0])
+        except:     
+          res['rate_ref'] = 1
+        return res
+
+    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+        """implementation of abstract method of Curreny_getter_interface"""
+        url=' http://www.bnr.ro/nbrfxrates.xml'
+        #we do not want to update the main currency
+        if main_currency in currency_array :
+            currency_array.remove(main_currency)
+        # Move to new XML lib cf Launchpad bug #645263
+        from lxml import etree
+        #logger = netsvc.Logger()
+        #logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "BNR currency rate service : connecting...")
+        rawfile = self.get_url(url)
+        dom = etree.fromstring(rawfile)
+        #logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "BNR sent a valid XML file")
+         
+        adminch_ns = {'def': 'http://www.bnr.ro/xsd'}
+        rate_date = dom.xpath('/def:DataSet/def:Body/def:Cube/@date', namespaces=adminch_ns)[0]
+        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d') + timedelta(days=1)
+        self.check_rate_date(rate_date_datetime, max_delta_days)
+        #we dynamically update supported currencies
+        self.supported_currency_array = dom.xpath("/def:DataSet/def:Body/def:Cube/def:Rate/@currency", namespaces=adminch_ns)
+        self.supported_currency_array = [x.upper() for x in self.supported_currency_array]
+        self.supported_currency_array.append('RON')
+
+        #logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Supported currencies = " + str(self.supported_currency_array))
+        self.validate_cur(main_currency)
+        if main_currency != 'RON':
+            main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
+            # 1 MAIN_CURRENCY = main_rate RON
+            main_rate = main_curr_data['rate_currency'] / main_curr_data['rate_ref']
+        for curr in currency_array :
+            self.validate_cur(curr)
+            if curr == 'RON':
+                rate = main_rate
+            else:
+                curr_data = self.rate_retrieve(dom, adminch_ns, curr)
+                # 1 MAIN_CURRENCY = rate CURR
+                if main_currency == 'RON' :
+                    rate = curr_data['rate_ref'] / curr_data['rate_currency']
+                else :
+                    rate = main_rate * curr_data['rate_ref'] / curr_data['rate_currency']
+            self.updated_currency[curr] = rate
+            #logger.notifyChannel("currency_rate_update", netsvc.LOG_DEBUG, "Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
         return self.updated_currency, self.log_info
