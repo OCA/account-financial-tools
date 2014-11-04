@@ -24,6 +24,8 @@ from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 import logging
 
+_logger = logging.getLogger(__name__)
+
 
 class wizard_renumber(orm.TransientModel):
     _name = "wizard.renumber"
@@ -79,7 +81,6 @@ class wizard_renumber(orm.TransientModel):
         Action that renumbers all the posted moves on the given
         journal and periods, and returns their ids.
         """
-        logger = logging.getLogger("account_renumber")
         form = self.browse(cr, uid, ids[0], context=context)
         period_ids = [x.id for x in form.period_ids]
         journal_ids = [x.id for x in form.journal_ids]
@@ -87,7 +88,7 @@ class wizard_renumber(orm.TransientModel):
         if not (period_ids and journal_ids):
             raise orm.except_orm(_('No Data Available'),
                                  _('No records found for your selection!'))
-        logger.debug("Searching for account moves to renumber.")
+        _logger.debug("Searching for account moves to renumber.")
         move_obj = self.pool['account.move']
         sequence_obj = self.pool['ir.sequence']
         sequences_seen = []
@@ -100,7 +101,7 @@ class wizard_renumber(orm.TransientModel):
                                        context=context)
             if not move_ids:
                 continue
-            logger.debug("Renumbering %d account moves." % len(move_ids))
+            _logger.debug("Renumbering %d account moves." % len(move_ids))
             for move in move_obj.browse(cr, uid, move_ids, context=context):
                 sequence_id = self.get_sequence_id_for_fiscalyear_id(
                     cr, uid,
@@ -125,7 +126,7 @@ class wizard_renumber(orm.TransientModel):
                 # exception.
                 cr.execute('UPDATE account_move SET name=%s WHERE id=%s',
                            (new_name, move.id))
-            logger.debug("%d account moves renumbered." % len(move_ids))
+            _logger.debug("%d account moves renumbered." % len(move_ids))
         sequences_seen = []
         form.write({'state': 'renumber'})
         data_obj = self.pool['ir.model.data']
