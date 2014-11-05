@@ -1,0 +1,3 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* account_auto_fy_sequence
