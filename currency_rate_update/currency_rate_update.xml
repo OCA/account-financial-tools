@@ -10,7 +10,7 @@
                     <field name="currency_to_update"/>
                     <field name="interval_type"/>
                     <field name="interval_number"/>
-                    <field name="last_run"/>
+                    <field name="next_run"/>
                 </tree>
             </field>
         </record>
@@ -28,7 +28,7 @@
                         <group>                            
                             <field name="interval_type"/>
                             <field name="interval_number"/>
-                            <field name="last_run"/>
+                            <field name="next_run"/>
                         </group>
                     </group>
                     <separator string="Currencies to update with this service" colspan="4"/>
