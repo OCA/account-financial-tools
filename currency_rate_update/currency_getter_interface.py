@@ -19,10 +19,14 @@
 #
 ##############################################################################
 
-import time
-from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+import logging
+
+from datetime import datetime
+
+from openerp.osv import osv
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
+_logger = logging.getLogger(__name__)
 
 class AbstractClassError(Exception):
     def __str__(self):

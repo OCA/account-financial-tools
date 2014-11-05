@@ -19,16 +19,8 @@
 #
 ##############################################################################
 
-import logging
-
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
-from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
-from currency_rate_update import Currency_getter_factory
-
-_logger = logging.getLogger(__name__)
 
 class res_company(models.Model):
     """override company to add currency update"""
@@ -46,22 +38,25 @@ class res_company(models.Model):
     def button_refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
         self.ensure_one()
-        self.services_to_use.refresh_currency()        
-    
+        self.services_to_use.refresh_currency()
+
     _inherit = "res.company"
-    
+    _name = "res.company"
+
     # Activate the currency update
     auto_currency_up = fields.Boolean(
-        'Automatical update of the currency this company')
+        string="Atumatic Update",
+        help="Automatical update of the currency this company")
     # Function field that allows to know the
     # multi company currency implementation
-    multi_company_currency_enable = fields.Boolean(string="Multi company currency",
-            compute = _compute_multi_curr_enable,
-            help="If this case is not check you can"
-                 " not set currency is active on two company"
+    multi_company_currency_enable = fields.Boolean(
+        string="Multi company currency",
+        compute=_compute_multi_curr_enable,
+        help="If this case is not check you can"
+        " not set currency is active on two company"
         )
     # List of services to fetch rates
     services_to_use = fields.One2many(
         'currency.rate.update.service',
         'company_id',
-        'Currency update services')    
+        'Currency update services')

@@ -18,13 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 from ..currency_getter_interface import Currency_getter_interface
 
-import time
-from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from openerp.osv import osv
+
+import logging
+_logger = logging.getLogger(__name__)
+
 # CA BOC #####   Bank of Canada   #############################################
+
+
 class CA_BOC_getter(Currency_getter_interface):
     """Implementation of Curreny_getter_factory interface
     for Bank of Canada RSS service

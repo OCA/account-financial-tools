@@ -39,8 +39,7 @@
 
 import logging
 
-import time
-from datetime import date, datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -58,47 +57,49 @@ _intervalTypes = {
 _logger = logging.getLogger(__name__)
 
 supported_currency_array = [
-        "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", \
-        "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL", \
-        "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", \
-        "COP", "CRC", "CUP", "CVE", "CYP", "CZK", "DJF", "DKK", "DOP", "DZD", \
-        "EEK", "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GGP", \
-        "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", \
-        "HUF", "IDR", "ILS", "IMP", "INR", "IQD", "IRR", "ISK", "JEP", "JMD", \
-        "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", \
-        "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LTL", "LVL", "LYD", "MAD", \
-        "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRO", "MTL", "MUR", "MVR", \
-        "MWK", "MXN", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", \
-        "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", \
-        "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", \
-        "SLL", "SOS", "SPL", "SRD", "STD", "SVC", "SYP", "SZL", "THB", "TJS", \
-        "TMM", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS", "UAH", "UGX", \
-        "USD", "UYU", "UZS", "VEB", "VEF", "VND", "VUV", "WST", "XAF", "XAG", \
-        "XAU", "XCD", "XDR", "XOF", "XPD", "XPF", "XPT", "YER", "ZAR", "ZMK", \
-        "ZWD"
-    ]
-    
+    "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
+    "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
+    "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHF", "CLP", "CNY",
+    "COP", "CRC", "CUP", "CVE", "CYP", "CZK", "DJF", "DKK", "DOP", "DZD",
+    "EEK", "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GGP",
+    "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG",
+    "HUF", "IDR", "ILS", "IMP", "INR", "IQD", "IRR", "ISK", "JEP", "JMD",
+    "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD",
+    "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LTL", "LVL", "LYD", "MAD",
+    "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRO", "MTL", "MUR", "MVR",
+    "MWK", "MXN", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD",
+    "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON",
+    "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP",
+    "SLL", "SOS", "SPL", "SRD", "STD", "SVC", "SYP", "SZL", "THB", "TJS",
+    "TMM", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS", "UAH", "UGX",
+    "USD", "UYU", "UZS", "VEB", "VEF", "VND", "VUV", "WST", "XAF", "XAG",
+    "XAU", "XCD", "XDR", "XOF", "XPD", "XPF", "XPT", "YER", "ZAR", "ZMK",
+    "ZWD"
+]
+
+
 class Currency_rate_update_service(models.Model):
-    """Class thats tell for wich services wich currencies 
+    """Class thats tell for wich services wich currencies
     have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
-    
+
     @api.one
     @api.constrains('max_delta_days')
     def _check_max_delta_days(self):
         if self and self.max_delta_days < 0:
             raise Warning(_('Max delta days must be >= 0'))
-            
+
     @api.one
     @api.constrains('interval_number')
     def _check_interval_number(self):
         if self and self.interval_number < 0:
             raise Warning(_('Interval number must be > 0'))
         if self and self.interval_number == 0:
-            raise Warning(_('Interval number is zero, currencies will not be updated'))
-            
-    
+            raise Warning(
+                _('Interval number is zero, currencies will not be updated')
+                )
+
     @api.onchange('service')
     def _onchange_service(self):
         currency_list = ''
@@ -109,18 +110,24 @@ class Currency_rate_update_service(models.Model):
             if self.company_id.multi_company_currency_enable:
                 company_id = self.company_id.id
             if self.service == 'RO_BNR_getter':
-                currency_list = ["AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", \
-                    "DKK", "EGP", "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", \
-                    "NOK", "NZD", "PLN", "RSD", "RUB", "SEK", "TRY", "UAH", "USD", "XAU", \
-                    "XDR", "ZAR"]
+                currency_list = [
+                    "AED", "AUD", "BGN", "BRL", "CAD", "CHF",
+                    "CNY", "CZK", "DKK", "EGP", "EUR", "GBP", "HUF", "INR",
+                    "JPY", "KRW", "MDL", "MXN", "NOK", "NZD", "PLN", "RSD",
+                    "RUB", "SEK", "TRY", "UAH", "USD", "XAU", "XDR", "ZAR"
+                ]
             if company_id:
-                currencies = self.env['res.currency'].search([('name','in', currency_list),'|',('company_id','=',company_id),('company_id','=',False)])
+                currencies = self.env['res.currency'].search(
+                    [('name', 'in', currency_list),
+                    '|', ('company_id', '=', company_id),
+                    ('company_id', '=', False)])
             else:
-                currencies = self.env['res.currency'].search([('name','in', currency_list),('company_id','=',False)])
+                currencies = self.env['res.currency'].search(
+                    [('name', 'in', currency_list),
+                    ('company_id', '=', False)])
             self.currency_list = [(6, 0, [curr.id for curr in currencies])]
-            
-    
-    ##list of webservicies the value sould be a class name 
+
+    # List of webservicies the value sould be a class name
     service = fields.Selection([
                 ('CH_ADMIN_getter', 'Admin.ch'),
                 ('ECB_getter', 'European Central Bank'),
@@ -135,44 +142,44 @@ class Currency_rate_update_service(models.Model):
                 #  (Thailand, Malaysia, Mexico...)
                 ('CA_BOC_getter', 'Bank of Canada - noon rates'),
                 # Added for romanian rates
-                ('RO_BNR_getter','National Bank of Romania')
+                ('RO_BNR_getter', 'National Bank of Romania')
                                 ],
                                 "Webservice to use",
-                                required = True)
-    ## List of currencies available on webservice
+                                required=True)
+    # List of currencies available on webservice
     currency_list = fields.Many2many('res.currency',
                                      'res_currency_update_avail_rel',
                                      'service_id',
-                                     'currency_id',                                                            
+                                     'currency_id',
                                      'Currencies available')
-    ##list of currency to update                           
-    currency_to_update = fields.Many2many('res.currency',
-                                          'res_currency_auto_update_rel',
-                                          'service_id',
-                                          'currency_id',                                                            
-                                          'Currencies to update with this service')
-    #back ref 
+    # List of currency to update
+    currency_to_update = fields.Many2many(
+                                     'res.currency',
+                                     'res_currency_auto_update_rel',
+                                     'service_id',
+                                     'currency_id',
+                                     'Currencies to update with this service')
+    # Link with company
     company_id = fields.Many2one('res.company', 'Linked Company')
-    ##note fileds that will be used as a logger
+    # Note fileds that will be used as a logger
     note = fields.Text('Update notice')
-    max_delta_days = fields.Integer('Max delta days', default = lambda *a: 4, required=True, 
-                                    help="If the time delta between the rate date given by the webservice and \n "
-                                    "the current date exeeds this value, then the currency rate is not updated in OpenERP.")
+    max_delta_days = fields.Integer('Max delta days',
+        default=lambda *a: 4, required=True,
+        help="If the time delta between the rate date given by the webservice "
+        "and the current date exeeds this value, then the currency rate is not"
+        " updated in OpenERP.")
     interval_type = fields.Selection([
         ('days', 'Day(s)'),
         ('weeks', 'Week(s)'),
         ('months', 'Month(s)')],
-        string = 'Currency update frecvency',
-        default = 'days')         
-    interval_number = fields.Integer('Frecvency', default = 0)                                
-    next_run = fields.Date('Next run on', default = fields.Date.today())                                
-    
-    _sql_constraints = [
-        ('curr_service_unique','unique (service, company_id)',
-        _('You can use a service only one time per company !')
-        )
-    ]
-        
+        string='Currency update frecvency',
+        default='days')
+    interval_number = fields.Integer('Frecvency', default=0)
+    next_run = fields.Date('Next run on', default=fields.Date.today())
+
+    _sql_constraints = [('curr_service_unique', 'unique (service, company_id)',
+                       _('You can use a service only one time per company !'))]
+
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
@@ -183,14 +190,14 @@ class Currency_rate_update_service(models.Model):
         company = self.company_id
         # The multi company currency can be set or no so we handle
         # The two case
-        #if not company.auto_currency_up:
+        # if not company.auto_currency_up:
         #    continue
-        main_curr_ids = curr_obj.search( \
+        main_curr_ids = curr_obj.search(
             [('base', '=', True), ('company_id', '=', company.id)])
         if not main_curr_ids:
             # If we can not find a base currency for this company
             # we look for one with no company set
-            main_curr_ids = curr_obj.search( \
+            main_curr_ids = curr_obj.search(
                 [('base', '=', True), ('company_id', '=', False)])
         if main_curr_ids:
             main_curr_rec = main_curr_ids[0]
@@ -211,8 +218,9 @@ class Currency_rate_update_service(models.Model):
                 main_curr,
                 self.max_delta_days
                 )
-            rate_name = datetime.strftime( \
-                datetime.utcnow().replace(hour=0, minute=0,second=0, microsecond=0), \
+            rate_name = datetime.strftime(
+                datetime.utcnow().replace(
+                    hour=0, minute=0, second=0, microsecond=0),
                 DEFAULT_SERVER_DATETIME_FORMAT)
             for curr in self.currency_to_update:
                 if curr.name == main_curr:
@@ -235,15 +243,18 @@ class Currency_rate_update_service(models.Model):
             msg = "%s \n%s currency updated. %s" % (
                 log_info or '',
                 datetime.today().strftime(
-                DEFAULT_SERVER_DATETIME_FORMAT
+                    DEFAULT_SERVER_DATETIME_FORMAT
                 ),
                 note
             )
             self.write({'note': msg})
             if self._context.get('cron', False):
-                next_run = (datetime.combine(datetime.strptime(self.next_run, DEFAULT_SERVER_DATE_FORMAT), datetime.min.time()) + \
-                     _intervalTypes[str(self.interval_type)](self.interval_number)).date()
-                self.write({'next_run': next_run})            
+                next_run = (datetime.combine(datetime.strptime(
+                                self.next_run, DEFAULT_SERVER_DATE_FORMAT),
+                                datetime.min.time()) +
+                                _intervalTypes[str(self.interval_type)]
+                                (self.interval_number)).date()
+                self.write({'next_run': next_run})
         except Exception as exc:
             error_msg = "\n%s ERROR : %s %s" % (
                 datetime.today().strftime(
@@ -254,16 +265,16 @@ class Currency_rate_update_service(models.Model):
             )
             _logger.info(repr(exc))
             self.write({'note': error_msg})
-            
+
     @api.multi
     def run_currency_update(self):
         "Update currency at the given frequence"
-        ctx = dict(self._context)        
+        ctx = dict(self._context)
         current_date = datetime.utcnow().date()
-        services = self.search([('next_run','=',current_date)])
+        services = self.search([('next_run', '=', current_date)])
         ctx['cron'] = True
         for service in services:
-            service.with_context(ctx).refresh_currency()            
+            service.with_context(ctx).refresh_currency()
 
     @api.model
     def _run_currency_update(self):

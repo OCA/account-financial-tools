@@ -20,11 +20,15 @@
 ##############################################################################
 from ..currency_getter_interface import Currency_getter_interface
 
-import time
-from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
+import logging
+_logger = logging.getLogger(__name__)
+
 # PL NBP ######################################################################
+
+
 class PL_NBP_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service

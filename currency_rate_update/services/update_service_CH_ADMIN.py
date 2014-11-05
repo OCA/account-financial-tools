@@ -20,11 +20,15 @@
 ##############################################################################
 from ..currency_getter_interface import Currency_getter_interface
 
-import time
-from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+import logging
+_logger = logging.getLogger(__name__)
+
+from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
 # CH_ADMIN ####################################################################
+
+
 class CH_ADMIN_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service

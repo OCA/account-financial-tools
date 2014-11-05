@@ -21,11 +21,9 @@
 
 from ..currency_getter_interface import Currency_getter_interface
 
-import time
-from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 # Yahoo #######################################################################
+
+
 class YAHOO_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
