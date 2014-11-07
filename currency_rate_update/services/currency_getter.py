@@ -19,14 +19,14 @@
 #
 ##############################################################################
 
-from services.update_service_ECB import ECB_getter
-from services.update_service_YAHOO import YAHOO_getter
+from update_service_ECB import ECB_getter
+from update_service_YAHOO import YAHOO_getter
 
-from services.update_service_CA_BOC import CA_BOC_getter
-from services.update_service_CH_ADMIN import CH_ADMIN_getter
-from services.update_service_MX_BdM import MX_BdM_getter
-from services.update_service_PL_NBP import PL_NBP_getter
-from services.update_service_RO_BNR import RO_BNR_getter
+from update_service_CA_BOC import CA_BOC_getter
+from update_service_CH_ADMIN import CH_ADMIN_getter
+from update_service_MX_BdM import MX_BdM_getter
+from update_service_PL_NBP import PL_NBP_getter
+from update_service_RO_BNR import RO_BNR_getter
 
 class AbstractClassError(Exception):
     def __str__(self):

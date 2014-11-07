@@ -4,6 +4,8 @@
 #    Copyright (c) 2009 CamptoCamp. All rights reserved.
 #    @author Nicolas Bessi
 #
+#    Abstract class to fetch rates from National Bank of Poland
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
 #    published by the Free Software Foundation, either version 3 of the
@@ -25,8 +27,6 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
 import logging
 _logger = logging.getLogger(__name__)
-
-# PL NBP ######################################################################
 
 
 class PL_NBP_getter(Currency_getter_interface):

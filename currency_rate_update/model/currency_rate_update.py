@@ -1,22 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2009 Camptocamp SA
-#    @source JBA and AWST inpiration
-#    @contributor Grzegorz Grzelak (grzegorz.grzelak@birdglobe.com),
-#                 Joel Grand-Guillaume
-#    Copyright (c) 2010 Alexis de Lattre (alexis@via.ecp.fr)
-#     - ported XML-based webservices (Admin.ch, ECB, PL NBP) to new XML lib
-#     - rates given by ECB webservice is now correct even when main_cur <> EUR
-#     - rates given by PL_NBP webs. is now correct even when main_cur <> PLN
-#     - if company_currency <> CHF, you can now update CHF via Admin.ch
-#       (same for EUR with ECB webservice and PLN with NBP webservice)
-#     For more details, see Launchpad bug #645263
-#     - mecanism to check if rates given by the webservice are "fresh"
-#       enough to be written in OpenERP
-#       ('max_delta_days' parameter for each currency update service)
-#    Ported to OpenERP 7.0 by Lorenzo Battistini
-#                             <lorenzo.battistini@agilebg.com>
+#    Copyright (c) 2009 CamptoCamp. All rights reserved.
+#    @author Nicolas Bessi
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -33,10 +19,6 @@
 #
 ##############################################################################
 
-# TODO "nice to have" : restrain the list of currencies that can be added for
-# a webservice to the list of currencies supported by the Webservice
-# TODO : implement max_delta_days for Yahoo webservice
-
 import logging
 
 from datetime import datetime
@@ -47,7 +29,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 
-from currency_getter import Currency_getter_factory
+from services.currency_getter import Currency_getter_factory
 
 _intervalTypes = {
     'days': lambda interval: relativedelta(days=interval),
@@ -294,14 +276,7 @@ class Currency_rate_update_service(models.Model):
                 ),
                 note
             )
-            self.write({'note': msg})
-            if self._context.get('cron', False):
-                next_run = (datetime.combine(datetime.strptime(
-                                self.next_run, DEFAULT_SERVER_DATE_FORMAT),
-                                datetime.min.time()) +
-                                _intervalTypes[str(self.interval_type)]
-                                (self.interval_number)).date()
-                self.write({'next_run': next_run})
+            self.write({'note': msg})            
         except Exception as exc:
             error_msg = "\n%s ERROR : %s %s" % (
                 datetime.today().strftime(
@@ -312,6 +287,13 @@ class Currency_rate_update_service(models.Model):
             )
             _logger.info(repr(exc))
             self.write({'note': error_msg})
+        if self._context.get('cron', False):
+            next_run = (datetime.combine(datetime.strptime(
+                            self.next_run, DEFAULT_SERVER_DATE_FORMAT),
+                            datetime.min.time()) +
+                            _intervalTypes[str(self.interval_type)]
+                            (self.interval_number)).date()
+            self.write({'next_run': next_run})
 
     @api.multi
     def run_currency_update(self):
