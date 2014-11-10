@@ -63,16 +63,15 @@ class RO_BNR_getter(Currency_getter_interface):
         adminch_ns = {'def': 'http://www.bnr.ro/xsd'}
         rate_date = dom.xpath('/def:DataSet/def:Body/def:Cube/@date',
                               namespaces=adminch_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date,
-                                               '%Y-%m-%d') + \
-                                               timedelta(days=1)
+        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d') + \
+            timedelta(days=1)
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # we dynamically update supported currencies
-        self.supported_currency_array = dom.xpath("/def:DataSet/def:Body/" + \
-                                            "def:Cube/def:Rate/@currency",
-                                            namespaces=adminch_ns)
-        self.supported_currency_array = [x.upper() for x in \
-                                        self.supported_currency_array]
+        self.supported_currency_array = dom.xpath(
+            "/def:DataSet/def:Body/" + "def:Cube/def:Rate/@currency",
+            namespaces=adminch_ns)
+        self.supported_currency_array = [
+            x.upper() for x in self.supported_currency_array]
         self.supported_currency_array.append('RON')
 
         self.validate_cur(main_currency)
@@ -80,7 +79,7 @@ class RO_BNR_getter(Currency_getter_interface):
             main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate RON
             main_rate = main_curr_data['rate_currency'] / \
-                            main_curr_data['rate_ref']
+                main_curr_data['rate_ref']
         for curr in currency_array:
             self.validate_cur(curr)
             if curr == 'RON':
@@ -92,8 +91,8 @@ class RO_BNR_getter(Currency_getter_interface):
                     rate = curr_data['rate_ref'] / curr_data['rate_currency']
                 else:
                     rate = main_rate * curr_data['rate_ref'] / \
-                            curr_data['rate_currency']
+                        curr_data['rate_currency']
             self.updated_currency[curr] = rate
-            _logger.debug("BNR Rate retrieved : 1 " + main_currency +
-                                   ' = ' + str(rate) + ' ' + curr)
+            _logger.debug("BNR Rate retrieved : 1 " + main_currency + ' = ' +
+                          str(rate) + ' ' + curr)
         return self.updated_currency, self.log_info
