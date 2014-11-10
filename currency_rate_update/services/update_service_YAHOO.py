@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from ..currency_getter_interface import Currency_getter_interface
+from currency_getter_interface import Currency_getter_interface
 
 
 class YAHOO_getter(Currency_getter_interface):

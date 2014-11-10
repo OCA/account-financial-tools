@@ -24,19 +24,18 @@ import logging
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp.exceptions import except_orm, Warning
 
-from services.currency_getter import Currency_getter_factory
+from ..services.currency_getter import Currency_getter_factory
+
+_logger = logging.getLogger(__name__)
 
 _intervalTypes = {
     'days': lambda interval: relativedelta(days=interval),
     'weeks': lambda interval: relativedelta(days=7*interval),
     'months': lambda interval: relativedelta(months=interval),
 }
-_logger = logging.getLogger(__name__)
 
 supported_currency_array = [
     "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
@@ -103,7 +102,7 @@ PL_NBP_supported_currency_array = ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CLP',
 
 
 class Currency_rate_update_service(models.Model):
-    """Class thats tell for wich services wich currencies
+    """Class keep services and currencies that
     have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
@@ -111,18 +110,20 @@ class Currency_rate_update_service(models.Model):
     @api.one
     @api.constrains('max_delta_days')
     def _check_max_delta_days(self):
-        if self and self.max_delta_days < 0:
+        if self.max_delta_days < 0:
             raise Warning(_('Max delta days must be >= 0'))
 
     @api.one
     @api.constrains('interval_number')
     def _check_interval_number(self):
-        if self and self.interval_number < 0:
-            raise Warning(_('Interval number must be > 0'))
-        if self and self.interval_number == 0:
-            raise Warning(
-                _('Interval number is zero, currencies will not be updated')
-                )
+        if self.interval_number < 0:
+            raise Warning(_('Interval number must be >= 0'))
+    
+    @api.onchange('interval_number')
+    def _onchange_interval_number(self):
+        if self.interval_number == 0:
+            self.note = "%s Service deactivated. Currencies will no longer be updated. \n%s" % (
+                  fields.Datetime.now(), self.note and self.note or '')
 
     @api.onchange('service')
     def _onchange_service(self):
@@ -193,17 +194,17 @@ class Currency_rate_update_service(models.Model):
     # Note fileds that will be used as a logger
     note = fields.Text('Update notice')
     max_delta_days = fields.Integer('Max delta days',
-        default=lambda *a: 4, required=True,
+        default=4, required=True,
         help="If the time delta between the rate date given by the webservice "
-        "and the current date exeeds this value, then the currency rate is not"
+        "and the current date exceeds this value, then the currency rate is not"
         " updated in OpenERP.")
     interval_type = fields.Selection([
         ('days', 'Day(s)'),
         ('weeks', 'Week(s)'),
         ('months', 'Month(s)')],
-        string='Currency update frecvency',
+        string='Currency update frequency',
         default='days')
-    interval_number = fields.Integer('Frecvency', default=0)
+    interval_number = fields.Integer('Frequency', default=1)
     next_run = fields.Date('Next run on', default=fields.Date.today())
 
     _sql_constraints = [('curr_service_unique', 'unique (service, company_id)',
@@ -219,87 +220,79 @@ class Currency_rate_update_service(models.Model):
         company = self.company_id
         # The multi company currency can be set or no so we handle
         # The two case
-        # if not company.auto_currency_up:
-        #    continue
-        main_curr_ids = curr_obj.search(
-            [('base', '=', True), ('company_id', '=', company.id)])
-        if not main_curr_ids:
-            # If we can not find a base currency for this company
-            # we look for one with no company set
-            main_curr_ids = curr_obj.search(
-                [('base', '=', True), ('company_id', '=', False)])
-        if main_curr_ids:
-            main_curr_rec = main_curr_ids[0]
-        else:
-            raise Warning(_('There is no base currency set!'))
-        if main_curr_rec.rate != 1:
-            raise Warning(_('Base currency rate should be 1.00!'))
-        main_curr = main_curr_rec.name
-        note = self.note or ''
-        try:
-            # We initalize the class that will handle the request
-            # and return a dict of rate
-            getter = factory.register(self.service)
-            curr_to_fetch = map(lambda x: x.name,
-                self.currency_to_update)
-            res, log_info = getter.get_updated_currency(
-                curr_to_fetch,
-                main_curr,
-                self.max_delta_days
-                )
-            rate_name = datetime.strftime(
-                datetime.utcnow().replace(
-                    hour=0, minute=0, second=0, microsecond=0),
-                DEFAULT_SERVER_DATETIME_FORMAT)
-            for curr in self.currency_to_update:
-                if curr.name == main_curr:
-                    continue
-                do_create = True
-                for rate in curr.rate_ids:
-                    if rate.name == rate_name:
-                        rate.write({'rate': res[curr.name]})
-                        do_create = False
-                        break
-                if do_create:
-                    vals = {
-                        'currency_id': curr.id,
-                        'rate': res[curr.name],
-                        'name': rate_name
-                    }
-                    rate_obj.create(vals)
+        if company.auto_currency_up:
+            main_currencies = curr_obj.search(
+                [('base', '=', True), ('company_id', '=', company.id)])
+            if not main_currencies:
+                # If we can not find a base currency for this company
+                # we look for one with no company set
+                main_currencies = curr_obj.search(
+                    [('base', '=', True), ('company_id', '=', False)])
+            if main_currencies:
+                main_curr = main_currencies[0]
+            else:
+                raise Warning(_('There is no base currency set!'))
+            if main_curr.rate != 1:
+                raise Warning(_('Base currency rate should be 1.00!'))
+            note = self.note or ''
+            try:
+                # We initalize the class that will handle the request
+                # and return a dict of rate
+                getter = factory.register(self.service)
+                curr_to_fetch = map(lambda x: x.name,
+                    self.currency_to_update)
+                res, log_info = getter.get_updated_currency(
+                    curr_to_fetch,
+                    main_curr.name,
+                    self.max_delta_days
+                    )
+                rate_name = fields.Datetime.to_string(datetime.utcnow().replace(
+                        hour=0, minute=0, second=0, microsecond=0))
+                for curr in self.currency_to_update:
+                    if curr.id == main_curr.id:
+                        continue
+                    do_create = True
+                    for rate in curr.rate_ids:
+                        if rate.name == rate_name:
+                            rate.rate= res[curr.name]
+                            do_create = False
+                            break
+                    if do_create:
+                        vals = {
+                            'currency_id': curr.id,
+                            'rate': res[curr.name],
+                            'name': rate_name
+                        }
+                        rate_obj.create(vals)
 
-            # Show the most recent note at the top
-            msg = "%s \n%s currency updated. %s" % (
-                log_info or '',
-                datetime.today().strftime(
-                    DEFAULT_SERVER_DATETIME_FORMAT
-                ),
-                note
-            )
-            self.write({'note': msg})            
-        except Exception as exc:
-            error_msg = "\n%s ERROR : %s %s" % (
-                datetime.today().strftime(
-                DEFAULT_SERVER_DATETIME_FORMAT
-                ),
-                repr(exc),
-                note
-            )
-            _logger.info(repr(exc))
-            self.write({'note': error_msg})
-        if self._context.get('cron', False):
-            next_run = (datetime.combine(datetime.strptime(
-                            self.next_run, DEFAULT_SERVER_DATE_FORMAT),
-                            datetime.min.time()) +
+                # Show the most recent note at the top
+                msg = "%s \n%s currency updated. %s" % (
+                    log_info or '',
+                    fields.Datetime.to_string(datetime.today()),
+                    note
+                )
+                self.write({'note': msg})            
+            except Exception as exc:
+                error_msg = "\n%s ERROR : %s %s" % (
+                    fields.Datetime.to_string(datetime.today()),
+                    repr(exc),
+                    note
+                )
+                _logger.info(repr(exc))
+                self.write({'note': error_msg})
+            if self._context.get('cron', False):
+                next_run = (datetime.combine(
+                            fields.Date.from_string(self.next_run),
+                            datetime.time.min) +
                             _intervalTypes[str(self.interval_type)]
                             (self.interval_number)).date()
-            self.write({'next_run': next_run})
+                self.next_run = next_run
 
     @api.multi
     def run_currency_update(self):
         "Update currency at the given frequence"
         ctx = dict(self._context)
-        current_date = datetime.utcnow().date()
+        current_date = fields.Date.today()
         services = self.search([('next_run', '=', current_date)])
         ctx['cron'] = True
         for service in services:

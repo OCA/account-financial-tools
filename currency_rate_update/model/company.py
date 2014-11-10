@@ -29,7 +29,7 @@ class res_company(models.Model):
     def _compute_multi_curr_enable(self):
         "check if multi company currency is enabled"
         result = {}
-        fields = self.env['res.currency'].search([('company_id', '<>', False)])
+        fields = self.env['res.currency'].search([('company_id', '!=', False)])
         for company in self:
             company.multi_company_currency_enable = \
                 1 if fields else 0
@@ -37,7 +37,6 @@ class res_company(models.Model):
     @api.one
     def button_refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        self.ensure_one()
         self.services_to_use.refresh_currency()
 
     _inherit = "res.company"
@@ -45,15 +44,15 @@ class res_company(models.Model):
 
     # Activate the currency update
     auto_currency_up = fields.Boolean(
-        string="Atumatic Update",
-        help="Automatical update of the currency this company")
+        string="Automatic Update",
+        help="Automatical update of the currencies for this company")
     # Function field that allows to know the
     # multi company currency implementation
     multi_company_currency_enable = fields.Boolean(
         string="Multi company currency",
-        compute=_compute_multi_curr_enable,
-        help="If this case is not check you can"
-        " not set currency is active on two company"
+        compute="_compute_multi_curr_enable",
+        help="When this option is unchecked it will allow users "
+            "to set a distinct currency updates on each company."
         )
     # List of services to fetch rates
     services_to_use = fields.One2many(

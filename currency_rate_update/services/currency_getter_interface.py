@@ -22,9 +22,8 @@
 import logging
 
 from datetime import datetime
-
-from openerp.osv import osv
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from openerp import fields
+from openerp.exceptions import except_orm
 
 _logger = logging.getLogger(__name__)
 
@@ -112,12 +111,12 @@ class Currency_getter_interface(object):
             objfile.close()
             return rawfile
         except ImportError:
-            raise osv.except_osv(
+            raise except_orm(
                 'Error !',
                 self.MOD_NAME + 'Unable to import urllib !'
             )
         except IOError:
-            raise osv.except_osv(
+            raise except_orm(
                 'Error !',
                 self.MOD_NAME + 'Web Service does not exist !'
             )
@@ -127,7 +126,7 @@ class Currency_getter_interface(object):
         days_delta = (datetime.today() - rate_date).days
         if days_delta > max_delta_days:
             raise Exception(
-                'The rate timestamp (%s) is %d days away from today, '
+                'The rate timestamp %s is %d days away from today, '
                 'which is over the limit (%d days). '
                 'Rate not updated in OpenERP.' % (rate_date,
                                                   days_delta,
@@ -135,9 +134,9 @@ class Currency_getter_interface(object):
             )
 
         # We always have a warning when rate_date != today
-        rate_date_str = datetime.strftime(rate_date,
-                                          DEFAULT_SERVER_DATE_FORMAT)
         if rate_date.date() != datetime.today().date():
-            msg = "The rate timestamp (%s) is not today's date"
-            self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
-            _logger.warning(msg, rate_date_str)
+            rate_date_str = fields.Date.to_string(rate_date)        
+            msg = "The rate timestamp %s is not today's date %s" % (
+                    rate_date_str, fields.Date.today())
+            self.log_info = ("\n WARNING : %s") % msg
+            _logger.warning(msg)

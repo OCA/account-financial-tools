@@ -20,7 +20,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from ..currency_getter_interface import Currency_getter_interface
+from currency_getter_interface import Currency_getter_interface
 
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
