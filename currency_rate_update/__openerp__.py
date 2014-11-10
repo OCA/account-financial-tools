@@ -32,7 +32,7 @@
         "view/service_cron_data.xml",
         "view/currency_rate_update.xml",
         "view/company_view.xml",
-        "security/security.xml",
+        "security/ir.model.access.csv",
     ],
     "demo": [],
     "active": False,
