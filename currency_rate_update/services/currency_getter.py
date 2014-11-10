@@ -74,7 +74,7 @@ class Currency_getter_factory():
         ]
         if class_name in allowed:
             exec "from update_service_%s import %s" % \
-                 (class_name.replace('_getter', ''), class_name)            
+                 (class_name.replace('_getter', ''), class_name)
             class_def = eval(class_name)
             return class_def()
         else:
