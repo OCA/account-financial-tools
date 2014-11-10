@@ -52,9 +52,11 @@ If in multi-company mode, the base currency will be the first company's
 currency found in database.
 
 Thanks to main contributors: 
+*    Joel Grand-Guillaume
+*    JB Aubort
 *    Grzegorz Grzelak - grzegorz.grzelak@birdglobe.com (ECB, NBP)
 *    Alexis de Lattre - alexis@via.ecp.fr
-*    Joel Grand-Guillaume
 *    Lorenzo Battistini - lorenzo.battistini@agilebg.com (Port to V7)
 *    Agustin Cruz - openpyme.mx (BdM)
 *    Dorin Hongu - dhongu@gmail.com (BNR)
+*    Fekete Mihai - feketemihai@gmail.com (Port to V8)
