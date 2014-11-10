@@ -25,7 +25,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from openerp import models, fields, api, _
-from openerp.exceptions import except_orm, Warning
+from openerp.exceptions import Warning
 
 from ..services.currency_getter import Currency_getter_factory
 
@@ -58,47 +58,50 @@ supported_currency_array = [
     "ZWD"
 ]
 
-RO_BNR_supported_currency_array = ["AED", "AUD", "BGN", "BRL", "CAD", "CHF",
-    "CNY", "CZK", "DKK", "EGP", "EUR", "GBP", "HUF", "INR", "JPY", "KRW",
-    "MDL", "MXN", "NOK", "NZD", "PLN", "RON", "RSD", "RUB", "SEK", "TRY",
-    "UAH", "USD", "XAU", "XDR", "ZAR"]
-
-CA_BOC_supported_currency_array = ["AED", "ANG", "ARS", "AUD", "BOC", "BRL",
-    "BSD", "CHF", "CLP", "CNY", "COP", "CZK", "DKK", "EUR", "FJD", "GBP",
-    "GHS", "GTQ", "HKD", "HNL", "HRK", "HUF", "IDR", "ILS", "INR", "ISK",
-    "JMD", "JPY", "KRW", "LKR", "MAD", "MMK", "MXN", "MYR", "NOK", "NZD",
-    "PAB", "PEN", "PHP", "PKR", "PLN", "RON", "RSD", "RUB", "SEK", "SGD",
-    "THB", "TND", "TRY", "TTD", "TWD", "USD", "VEF", "VND", "XAF", "XCD",
-    "XPF", "ZAR"]
-
-CH_ADMIN_supported_currency_array = ['AED', 'ALL', 'ARS', 'AUD', 'AZN', 'BAM',
-    'BDT', 'BGN', 'BHD', 'BRL', 'CAD', 'CHF', 'CLP', 'CNY', 'COP', 'CRC',
-    'CZK', 'DKK', 'DOP', 'EGP', 'ETB', 'EUR', 'GBP', 'GTQ', 'HKD', 'HNL',
-    'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KES', 'KHR', 'KRW',
-    'KWD', 'KYD', 'KZT', 'LBP', 'LKR', 'LTL', 'LVL', 'LYD', 'MAD', 'MUR',
-    'MXN', 'MYR', 'NGN', 'NOK', 'NZD', 'OMR', 'PAB', 'PEN', 'PHP', 'PKR',
-    'PLN', 'QAR', 'RON', 'RSD', 'RUB', 'SAR', 'SEK', 'SGD', 'THB', 'TND',
-    'TRY', 'TWD', 'TZS', 'UAH', 'USD', 'UYU', 'VEF', 'VND', 'ZAR']
-
-ECB_supported_currency_array = ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY',
-    'CZK', 'DKK', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS', 'INR', 'JPY',
-    'KRW', 'LTL', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'RUB',
-    'SEK', 'SGD', 'THB', 'TRY', 'USD', 'ZAR']
-
-MX_BdM_supported_currency_array = ["ARS", "AUD", "BBD", "BMD", "BOB", "BRL",
-    "BSD", "BZD", "CAD", "CHF", "CLP", "CNH", "CNY", "COP", "CRC", "CUP",
-    "CZK", "DKK", "DOP", "DZD", "EGP", "ESD", "EUR", "FJD", "GBP", "GTQ",
-    "GYD", "HKD", "HNL", "HUF", "IDR", "ILS", "INR", "IQD", "JMD", "JPY",
-    "KES", "KRW", "KWD", "MAD", "MYR", "NGN", "NIC", "NOK", "NZD", "PAB",
-    "PEN", "PHP", "PLN", "PYG", "RON", "RUB", "SAR", "SEK", "SGD", "SVC",
-    "THB", "TRY", "TTD", "TWD", "UAH", "USD", "USD", "UYP", "VEF", "VND",
+RO_BNR_supported_currency_array = [
+    "AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EGP",
+    "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", "NOK", "NZD",
+    "PLN", "RON", "RSD", "RUB", "SEK", "TRY", "UAH", "USD", "XAU", "XDR",
     "ZAR"]
 
-PL_NBP_supported_currency_array = ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CLP',
-    'CNY', 'CZK', 'DKK', 'EUR', 'GBP', 'HKD', 'HRK', 'HUF', 'IDR', 'ILS',
-    'INR', 'ISK', 'JPY', 'KRW', 'LTL', 'MXN', 'MYR', 'NOK', 'NZD', 'PHP',
-    'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'THB', 'TRY', 'UAH', 'USD', 'XDR',
-    'ZAR']
+CA_BOC_supported_currency_array = [
+    "AED", "ANG", "ARS", "AUD", "BOC", "BRL", "BSD", "CHF", "CLP", "CNY",
+    "COP", "CZK", "DKK", "EUR", "FJD", "GBP", "GHS", "GTQ", "HKD", "HNL",
+    "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JMD", "JPY", "KRW", "LKR",
+    "MAD", "MMK", "MXN", "MYR", "NOK", "NZD", "PAB", "PEN", "PHP", "PKR",
+    "PLN", "RON", "RSD", "RUB", "SEK", "SGD", "THB", "TND", "TRY", "TTD",
+    "TWD", "USD", "VEF", "VND", "XAF", "XCD", "XPF", "ZAR"]
+
+CH_ADMIN_supported_currency_array = [
+    "AED", "ALL", "ARS", "AUD", "AZN", "BAM", "BDT", "BGN", "BHD", "BRL",
+    "CAD", "CHF", "CLP", "CNY", "COP", "CRC", "CZK", "DKK", "DOP", "EGP",
+    "ETB", "EUR", "GBP", "GTQ", "HKD", "HNL", "HRK", "HUF", "IDR", "ILS",
+    "INR", "ISK", "JPY", "KES", "KHR", "KRW", "KWD", "KYD", "KZT", "LBP",
+    "LKR", "LTL", "LVL", "LYD", "MAD", "MUR", "MXN", "MYR", "NGN", "NOK",
+    "NZD", "OMR", "PAB", "PEN", "PHP", "PKR", "PLN", "QAR", "RON", "RSD",
+    "RUB", "SAR", "SEK", "SGD", "THB", "TND", "TRY", "TWD", "TZS", "UAH",
+    "USD", "UYU", "VEF", "VND", "ZAR"]
+
+ECB_supported_currency_array = [
+    "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "GBP", "HKD",
+    "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "LTL", "MXN", "MYR",
+    "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY",
+    "USD", "ZAR"]
+
+MX_BdM_supported_currency_array = [
+    "ARS", "AUD", "BBD", "BMD", "BOB", "BRL", "BSD", "BZD", "CAD", "CHF",
+    "CLP", "CNH", "CNY", "COP", "CRC", "CUP", "CZK", "DKK", "DOP", "DZD",
+    "EGP", "ESD", "EUR", "FJD", "GBP", "GTQ", "GYD", "HKD", "HNL", "HUF",
+    "IDR", "ILS", "INR", "IQD", "JMD", "JPY", "KES", "KRW", "KWD", "MAD",
+    "MYR", "NGN", "NIC", "NOK", "NZD", "PAB", "PEN", "PHP", "PLN", "PYG",
+    "RON", "RUB", "SAR", "SEK", "SGD", "SVC", "THB", "TRY", "TTD", "TWD",
+    "UAH", "USD", "USD", "UYP", "VEF", "VND", "ZAR"]
+
+PL_NBP_supported_currency_array = [
+    "AUD", "BGN", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR",
+    "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW",
+    "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
+    "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
 
 class Currency_rate_update_service(models.Model):
@@ -118,12 +121,13 @@ class Currency_rate_update_service(models.Model):
     def _check_interval_number(self):
         if self.interval_number < 0:
             raise Warning(_('Interval number must be >= 0'))
-    
+
     @api.onchange('interval_number')
     def _onchange_interval_number(self):
         if self.interval_number == 0:
-            self.note = "%s Service deactivated. Currencies will no longer be updated. \n%s" % (
-                  fields.Datetime.now(), self.note and self.note or '')
+            self.note = "%s Service deactivated. Currencies will no longer "
+                        "be updated. \n%s" % (fields.Datetime.now(),
+                        self.note and self.note or '')
 
     @api.onchange('service')
     def _onchange_service(self):
@@ -245,8 +249,9 @@ class Currency_rate_update_service(models.Model):
                     main_curr.name,
                     self.max_delta_days
                     )
-                rate_name = fields.Datetime.to_string(datetime.utcnow().replace(
-                        hour=0, minute=0, second=0, microsecond=0))
+                rate_name = fields.Datetime.to_string(
+                            datetime.utcnow().replace(hour=0, minute=0,
+                            second=0, microsecond=0))
                 for curr in self.currency_to_update:
                     if curr.id == main_curr.id:
                         continue

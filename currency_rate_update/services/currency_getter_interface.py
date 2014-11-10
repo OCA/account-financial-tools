@@ -27,6 +27,7 @@ from openerp.exceptions import except_orm
 
 _logger = logging.getLogger(__name__)
 
+
 class AbstractClassError(Exception):
     def __str__(self):
         return 'Abstract Class'
@@ -60,7 +61,8 @@ class UnsuportedCurrencyError(Exception):
 
     def __repr__(self):
         return 'Unsupported currency %s' % self.curr
-        
+
+
 class Currency_getter_interface(object):
     "Abstract class of currency getter"
 
@@ -135,8 +137,8 @@ class Currency_getter_interface(object):
 
         # We always have a warning when rate_date != today
         if rate_date.date() != datetime.today().date():
-            rate_date_str = fields.Date.to_string(rate_date)        
-            msg = "The rate timestamp %s is not today's date %s" % (
-                    rate_date_str, fields.Date.today())
+            rate_date_str = fields.Date.to_string(rate_date)
+            msg = "The rate timestamp %s is not today's date %s" % 
+                  (rate_date_str, fields.Date.today())
             self.log_info = ("\n WARNING : %s") % msg
             _logger.warning(msg)
