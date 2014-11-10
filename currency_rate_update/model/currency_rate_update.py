@@ -213,7 +213,6 @@ class Currency_rate_update_service(models.Model):
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        self.ensure_one()
         factory = Currency_getter_factory()
         curr_obj = self.env['res.currency']
         rate_obj = self.env['res.currency.rate']
