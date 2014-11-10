@@ -728,7 +728,6 @@ class Banxico_getter(Curreny_getter_interface):
             self.updated_currency[curr] = rate
             logger.debug("Rate retrieved : %s = %s %s" %
                          (main_currency, rate, curr))
-        return self.updated_currency, self.log_info
 
 
 # CA BOC #####   Bank of Canada   #############################################
