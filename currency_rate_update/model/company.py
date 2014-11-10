@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api
 
 
 class res_company(models.Model):
@@ -52,7 +52,7 @@ class res_company(models.Model):
         string="Multi company currency",
         compute="_compute_multi_curr_enable",
         help="When this option is unchecked it will allow users "
-            "to set a distinct currency updates on each company."
+             "to set a distinct currency updates on each company."
         )
     # List of services to fetch rates
     services_to_use = fields.One2many(
