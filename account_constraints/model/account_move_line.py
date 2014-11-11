@@ -67,7 +67,7 @@ class AccountMoveLine(orm.Model):
                 raise orm.except_orm(
                     _('Error'),
                     _('You cannot do this on an entry generated '
-                      'by a bank statement. You must change the related'
+                      'by a bank statement. You must change the related '
                       'bank statement directly.\n%s.') % err_msg
                 )
         return True
