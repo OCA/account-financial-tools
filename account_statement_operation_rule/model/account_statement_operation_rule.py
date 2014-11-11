@@ -66,7 +66,9 @@ class AccountStatementOperationRule(models.Model):
         if statement_line.currency_id != statement_line.company_id.currency_id:
             amount_currency = statement_line.amount_currency
             for move_line in move_lines:
-                # TODO different currencies possible?
+                if move_line.currency_id != statement_line.currency_id:
+                    # use case not supported, no rule found
+                    return self.browse()
                 amount_currency -= move_line.amount_currency
 
             # amount in currency is the same, so the balance is
