@@ -18,3 +18,4 @@
 #
 ##############################################################################
 from . import account_constraints
+from . import model
