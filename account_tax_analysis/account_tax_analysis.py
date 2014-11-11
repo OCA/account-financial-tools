@@ -42,7 +42,6 @@ class AccountTaxDeclarationAnalysis(models.TransientModel):
 
     @api.multi
     def show_vat(self):
-        action_obj = self.env['ir.actions.act_window']
         if not self.period_list:
             raise exceptions.Warning(_("You must select periods"))
         domain = [('period_id', 'in', self.period_list.ids)]
