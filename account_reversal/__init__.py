@@ -20,5 +20,5 @@
 #
 ##############################################################################
 
-import account_reversal
-import wizard
+from . import account_reversal
+from . import wizard
