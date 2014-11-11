@@ -49,13 +49,11 @@ class account_move_reversal(orm.TransientModel):
                  'to be reversed.'),
         'move_prefix': fields.char(
             'Entries Ref. Prefix',
-            size=32,
             help="Prefix that will be added to the 'Ref' of the journal "
                  "entry to be reversed to create the 'Ref' of the "
                  "reversal journal entry (no space added after the prefix)."),
         'move_line_prefix': fields.char(
             'Items Name Prefix',
-            size=32,
             help="Prefix that will be added to the name of the journal "
                  "item to be reversed to create the name of the reversal "
                  "journal item (a space is added after the prefix)."),
