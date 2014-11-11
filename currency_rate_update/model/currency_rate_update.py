@@ -289,7 +289,7 @@ class Currency_rate_update_service(models.Model):
             if self._context.get('cron', False):
                 next_run = (datetime.combine(
                             fields.Date.from_string(self.next_run),
-                            datetime.time.min) +
+                            datetime.min.time()) +
                             _intervalTypes[str(self.interval_type)]
                             (self.interval_number)).date()
                 self.next_run = next_run
