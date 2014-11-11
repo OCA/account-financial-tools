@@ -9,3 +9,8 @@ and/or financial accounts.
 
 This way you will find easily differences you may see between
 the OpenERP tax report and what you see in your books.
+
+Contributors
+============
+
+ * Vincent Renaville (Camptocamp SA)
