@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
+#    Author Joel Grand-Guillaume.
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,8 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm, osv
-from openerp.tools.translate import _
+from openerp.osv import orm, fields
 
 
 class AccountJournal(orm.Model):
@@ -36,5 +36,3 @@ class AccountJournal(orm.Model):
     _defaults = {
         'allow_date_fy': True,
     }
-
-
