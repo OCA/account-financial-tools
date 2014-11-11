@@ -38,9 +38,9 @@ class AccountBankStatement(orm.Model):
         return super(AccountBankStatement, self).button_cancel(cr, uid, ids,
                                                                context=context)
 
-    def create_move_from_st_line(self, cr, uid, st_line_id,
-                                 company_currency_id,
-                                 st_line_number, context=None):
+    def process_reconciliation(self, cr, uid, st_line_id,
+                               company_currency_id,
+                               st_line_number, context=None):
         """Add the from_parent_object key in context in order to be able
         to post the move.
         """
@@ -49,7 +49,7 @@ class AccountBankStatement(orm.Model):
         else:
             context = context.copy()
         context['from_parent_object'] = True
-        return super(AccountBankStatement, self).create_move_from_st_line(
+        return super(AccountBankStatement, self).process_reconciliation(
             cr, uid, st_line_id, company_currency_id,
             st_line_number, context=context
         )
