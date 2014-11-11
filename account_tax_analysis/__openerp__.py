@@ -20,7 +20,7 @@
 {"name": "Tax analysis",
  "version": "1.0",
  "depends": ["base", "account"],
- "author": "CamptoCamp SA",
+ "author": "Camptocamp SA",
  "category": 'Accounting & Finance',
  "website": "http://www.camptocamp.com",
  "data": ["account_tax_analysis_view.xml"],
