@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
+#    Author Joel Grand-Guillaume.
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,44 +19,8 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm, osv
+from openerp.osv import orm
 from openerp.tools.translate import _
-
-
-class AccountJournal(orm.Model):
-    _inherit = 'account.journal'
-
-    _columns = {
-        'allow_date_fy': fields.boolean('Check Date in Fiscal Year',
-                                        help='If set to True then do not '
-                                             'accept the entry if '
-                                             'the entry date is not into '
-                                             'the fiscal year dates'),
-    }
-
-    _defaults = {
-        'allow_date_fy': True,
-    }
-
-
-class AccountMove(orm.Model):
-    _inherit = "account.move"
-
-    def _check_fiscal_year(self, cr, uid, ids):
-        for move in self.browse(cr, uid, ids):
-            if move.journal_id.allow_date_fy:
-                date_start = move.period_id.fiscalyear_id.date_start
-                date_stop = move.period_id.fiscalyear_id.date_stop
-                if not date_start <= move.date <= date_stop:
-                    return False
-        return True
-
-    _constraints = [
-        (_check_fiscal_year,
-            'You cannot create entries with date not in the '
-            'fiscal year of the chosen period',
-            ['line_id']),
-    ]
 
 
 class AccountMoveLine(orm.Model):
@@ -83,7 +48,7 @@ class AccountMoveLine(orm.Model):
                     return True
                 err_msg = (_('Invoice name (id): %s (%s)') %
                             (line.invoice.name, line.invoice.id))
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error'),
                     _('You cannot do this on an entry generated '
                       'by an invoice. You must change the related '
@@ -99,10 +64,10 @@ class AccountMoveLine(orm.Model):
                     return True
                 err_msg = (_('Bank statement name (id): %s (%s)') %
                             (line.statement_id.name, line.statement_id.id))
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error'),
                     _('You cannot do this on an entry generated '
-                      'by a bank statement. You must change the related'
+                      'by a bank statement. You must change the related '
                       'bank statement directly.\n%s.') % err_msg
                 )
         return True
@@ -195,64 +160,3 @@ class AccountMoveLine(orm.Model):
          "the same than the company one.",
          ['currency_id']),
     ]
-
-
-class AccountInvoice(orm.Model):
-    _inherit = "account.invoice"
-
-    def action_cancel(self, cr, uid, ids, context=None):
-        """Override the method to add the key 'from_parent_object' in
-        the context. This is to allow to delete move line related to
-        invoice through the cancel button.
-        """
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountInvoice, self).action_cancel(cr, uid, ids,
-                                                         context=context)
-
-    def action_move_create(self, cr, uid, ids, context=None):
-        """Override the method to add the key 'from_parent_object' in
-        the context."""
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountInvoice, self).action_move_create(cr, uid, ids,
-                                                              context=context)
-
-
-class AccountBankStatement(orm.Model):
-    _inherit = "account.bank.statement"
-
-    def button_cancel(self, cr, uid, ids, context=None):
-        """Override the method to add the key 'from_parent_object' in
-        the context. This is to allow to delete move line related to
-        bank statement through the cancel button.
-        """
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountBankStatement, self).button_cancel(cr, uid, ids,
-                                                               context=context)
-
-    def create_move_from_st_line(self, cr, uid, st_line_id,
-                                 company_currency_id,
-                                 st_line_number, context=None):
-        """Add the from_parent_object key in context in order to be able
-        to post the move.
-        """
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountBankStatement, self).create_move_from_st_line(
-            cr, uid, st_line_id, company_currency_id,
-            st_line_number, context=context
-        )

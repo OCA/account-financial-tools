@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
+#    Author Joel Grand-Guillaume.
+#    Copyright 2012-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,4 +18,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_constraints
+
+from openerp.osv import orm
+
+
+class AccountMove(orm.Model):
+    _inherit = "account.move"
+
+    def _check_fiscal_year(self, cr, uid, ids):
+        for move in self.browse(cr, uid, ids):
+            if move.journal_id.allow_date_fy:
+                date_start = move.period_id.fiscalyear_id.date_start
+                date_stop = move.period_id.fiscalyear_id.date_stop
+                if not date_start <= move.date <= date_stop:
+                    return False
+        return True
+
+    _constraints = [
+        (_check_fiscal_year,
+            'You cannot create entries with date not in the '
+            'fiscal year of the chosen period',
+            ['line_id']),
+    ]
