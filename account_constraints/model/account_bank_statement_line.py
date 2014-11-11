@@ -22,18 +22,18 @@
 from openerp.osv import orm
 
 
-class AccountBankStatement(orm.Model):
-    _inherit = "account.bank.statement"
+class AccountBankStatementLine(orm.Model):
+    _inherit = "account.bank.statement.line"
 
-    def button_cancel(self, cr, uid, ids, context=None):
-        """Override the method to add the key 'from_parent_object' in
-        the context. This is to allow to delete move line related to
-        bank statement through the cancel button.
+    def process_reconciliation(self, cr, uid, id, mv_line_dicts, context=None):
+        """Add the from_parent_object key in context in order to be able
+        to post the move.
         """
         if context is None:
             context = {}
         else:
             context = context.copy()
         context['from_parent_object'] = True
-        return super(AccountBankStatement, self).button_cancel(cr, uid, ids,
-                                                               context=context)
+        _super = super(AccountBankStatementLine, self)
+        return _super.process_reconciliation(cr, uid, id, mv_line_dicts,
+                                             context=context)
