@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, osv
+from openerp.osv import orm
 from openerp.tools.translate import _
 
 
@@ -48,7 +48,7 @@ class AccountMoveLine(orm.Model):
                     return True
                 err_msg = (_('Invoice name (id): %s (%s)') %
                             (line.invoice.name, line.invoice.id))
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error'),
                     _('You cannot do this on an entry generated '
                       'by an invoice. You must change the related '
@@ -64,7 +64,7 @@ class AccountMoveLine(orm.Model):
                     return True
                 err_msg = (_('Bank statement name (id): %s (%s)') %
                             (line.statement_id.name, line.statement_id.id))
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error'),
                     _('You cannot do this on an entry generated '
                       'by a bank statement. You must change the related'
