@@ -1,1 +1,2 @@
-import account_move_reverse
+# -*- coding: utf-8 -*-
+from . import account_move_reverse
