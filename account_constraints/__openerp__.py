@@ -28,5 +28,5 @@
     'data': [
         'view/account_journal.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
