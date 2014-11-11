@@ -28,20 +28,6 @@
     'version': '1.0',
     'category': 'Generic Modules/Accounting',
     'license': 'AGPL-3',
-    'description': """
-Account Reversal
-================
-
-This module adds an action "Reversal" on account moves,
-to allow the accountant to create reversal account moves in 2 clicks.
-Also add on account entries:
- - a checkbox and filter "to be reversed"
- - a link between an entry and its reversal entry
-
-Module originally developped by Alexis de Lattre <alexis.delattre@akretion.com>
-during the Akretion-Camptocamp code sprint of June 2011.
-
-""",
     'author': 'Akretion,Camptocamp',
     'website': 'http://www.akretion.com/',
     'depends': ['account'],
@@ -49,6 +35,6 @@ during the Akretion-Camptocamp code sprint of June 2011.
         'account_view.xml',
         'wizard/account_move_reverse_view.xml'
         ],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
