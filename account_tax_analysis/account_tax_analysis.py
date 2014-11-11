@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
+#    Author Vincent Renaville. Copyright 2013-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,41 +17,36 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from osv import orm, osv, fields
-from tools.translate import _
+from openerp import models, fields, api, exceptions, _
 
 
-class account_tax_declaration_analysis(orm.TransientModel):
+class AccountTaxDeclarationAnalysis(models.TransientModel):
     _name = 'account.vat.declaration.analysis'
     _description = 'Account Vat Declaration'
-    _columns = {
-        'fiscalyear_id': fields.many2one('account.fiscalyear', 'Fiscalyear',
-                                         help='Fiscalyear to look on',
-                                         required=True),
 
-        'period_list': fields.many2many('account.period',
-                                        'account_tax_period_rel',
-                                        'tax_analysis', 'period_id',
-                                        'Period _list', required=True),
-    }
+    fiscalyear_id = fields.Many2one(
+        comodel_name='account.fiscalyear',
+        string='Fiscalyear',
+        help='Fiscalyear to look on',
+        required=True,
+    )
 
-    def create_vat(self, cr, uid, ids, context=None):
-        mod_obj = self.pool.get('ir.model.data')
-        action_obj = self.pool.get('ir.actions.act_window')
-        domain = []
-        data = self.read(cr, uid, ids, [], context=context)[0]
-        period_list = data['period_list']
-        if period_list:
-            domain = [('period_id', 'in', period_list)]
-        else:
-            raise osv.except_osv(_('No period defined'),
-                                 _("You must selected period "))
-        actions = mod_obj.get_object_reference(cr, uid,
-                                               'account_tax_analysis',
-                                               'action_view_tax_analysis')
-        id_action = actions[1] if actions else False
-        action_mod = action_obj.read(cr, uid, id_action)
-        action_mod['domain'] = domain
-        return action_mod
+    period_list = fields.Many2many(
+        comodel_name='account.period',
+        relation='account_tax_period_rel',
+        column1='tax_analysis',
+        column2='period_id',
+        string='Periods',
+        required=True,
+    )
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    @api.multi
+    def show_vat(self):
+        action_obj = self.env['ir.actions.act_window']
+        if not self.period_list:
+            raise exceptions.Warning(_("You must select periods"))
+        domain = [('period_id', 'in', self.period_list.ids)]
+        action = self.env.ref('account_tax_analysis.action_view_tax_analysis')
+        action_fields = action.read()[0]
+        action_fields['domain'] = domain
+        return action_fields
