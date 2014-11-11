@@ -48,28 +48,50 @@ class AccountStatementOperationRule(models.Model):
         help="If several rules match, the first one is used.")
 
     @api.model
-    @api.returns('account.statement.operation.template')
-    def operations_for_reconciliation(self, statement_line,
-                                      selected_lines,
-                                      balance):
-        line_obj = self.env['account.bank.statement.line']
-        line = line_obj.browse(statement_line['id'])
+    def _find_rules(self, statement_line, move_lines):
+        """ Find the rules that apply to a statement line and
+        a selection of move lines.
+
+        :param statement_line: the line to reconcile
+        :param move_lines: the selected move lines for reconciliation
+        :param balance: optional balance (if not passed, it will be computed,
+                        only to avoid to compute it twice if it has been
+                        already computed)
+        """
+        balance = statement_line.amount
+        for move_line in move_lines:
+            balance += move_line.credit - move_line.debit
 
         multicurrency = False
-        if line.currency_id != line.company_id.currency_id:
+        if statement_line.currency_id != statement_line.company_id.currency_id:
             amount_currency = statement_line.amount_currency
-            select_line_ids = (l['id'] for l in selected_lines)
-            for select_line in line_obj.browse(select_line_ids):
+            for move_line in move_lines:
                 # TODO different currencies possible?
-                amount_currency -= select_line.amount_currency
+                amount_currency -= move_line.amount_currency
 
             # amount in currency is the same, so the balance is
             # a difference due to currency rates
-            if line.currency_id.is_zero():
+            if statement_line.currency_id.is_zero(amount_currency):
                 multicurrency = True
 
         rules = self.search([('amount_min', '<=', balance),
                              ('amount_max', '>=', balance),
                              ('multicurrency', '=', multicurrency)],
                             limit=1)
+        return rules
+
+    @api.model
+    @api.returns('account.statement.operation.template')
+    def operations_for_reconciliation(self, statement_line_id, move_line_ids):
+        """ Find the rule for the current reconciliation and returns the
+        ``account.statement.operation.template`` of the found rule.
+
+        Called from the javascript reconciliation view.
+
+        """
+        line_obj = self.env['account.bank.statement.line']
+        move_line_obj = self.env['account.move.line']
+        statement_line = line_obj.browse(statement_line_id)
+        move_lines = move_line_obj.browse(move_line_ids)
+        rules = self._find_rules(statement_line, move_lines)
         return rules.operations

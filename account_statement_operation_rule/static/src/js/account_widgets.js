@@ -11,9 +11,8 @@ openerp.account_statement_operation_rule = function (instance) {
             var self = this;
             var model_operation_rule = new instance.web.Model("account.statement.operation.rule");
             model_operation_rule.call("operations_for_reconciliation",
-                                      [self.st_line,
-                                       self.get("mv_lines_selected"),
-                                       self.get('balance')])
+                                      [self.st_line.id,
+                                       _.pluck(self.get("mv_lines_selected"), 'id')])
                 .then(function (operations) {
                     _.each(operations, function(operation_id) {
                         preset_btn = self.$("button.preset[data-presetid='" + operation_id + "']");
@@ -25,9 +24,11 @@ openerp.account_statement_operation_rule = function (instance) {
             //     self.persistAndDestroy();
             // }
         },
-        start: function() {
+        render: function() {
             deferred = this._super();
-            deferred.done(this.operation_rules());
+            if (deferred) {
+                deferred.done(this.operation_rules());
+            }
             return deferred;
         },
         restart: function() {
