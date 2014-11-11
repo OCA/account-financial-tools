@@ -19,32 +19,24 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api
 
 
-class AccountInvoice(orm.Model):
+class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    def action_cancel(self, cr, uid, ids, context=None):
+    @api.multi
+    def action_cancel(self):
         """Override the method to add the key 'from_parent_object' in
         the context. This is to allow to delete move line related to
         invoice through the cancel button.
         """
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountInvoice, self).action_cancel(cr, uid, ids,
-                                                         context=context)
+        invoices = self.with_context(from_parent_object=True)
+        return super(AccountInvoice, invoices).action_cancel()
 
-    def action_move_create(self, cr, uid, ids, context=None):
+    @api.multi
+    def action_move_create(self):
         """Override the method to add the key 'from_parent_object' in
         the context."""
-        if context is None:
-            context = {}
-        else:
-            context = context.copy()
-        context['from_parent_object'] = True
-        return super(AccountInvoice, self).action_move_create(cr, uid, ids,
-                                                              context=context)
+        invoices = self.with_context(from_parent_object=True)
+        return super(AccountInvoice, invoices).action_move_create()
