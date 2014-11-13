@@ -21,7 +21,7 @@
 
 import logging
 
-from datetime import datetime
+from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 from openerp import models, fields, api, _
@@ -287,9 +287,10 @@ class Currency_rate_update_service(models.Model):
                 _logger.info(repr(exc))
                 self.write({'note': error_msg})
             if self._context.get('cron', False):
+                midnight = time(0, 0)
                 next_run = (datetime.combine(
                             fields.Date.from_string(self.next_run),
-                            datetime.min.time()) +
+                            midnight) +
                             _intervalTypes[str(self.interval_type)]
                             (self.interval_number)).date()
                 self.next_run = next_run
