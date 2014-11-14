@@ -22,6 +22,7 @@ from openerp.osv import orm, fields
 
 
 class credit_control_policy(orm.Model):
+
     """ADD dunning fees fields"""
 
     _inherit = "credit.control.policy.level"

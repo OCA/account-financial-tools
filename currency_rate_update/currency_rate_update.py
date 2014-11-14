@@ -11,7 +11,7 @@
 #     - rates given by PL_NBP webs. is now correct even when main_cur <> PLN
 #     - if company_currency <> CHF, you can now update CHF via Admin.ch
 #       (same for EUR with ECB webservice and PLN with NBP webservice)
-#     For more details, see Launchpad bug #645263
+# For more details, see Launchpad bug #645263
 #     - mecanism to check if rates given by the webservice are "fresh"
 #       enough to be written in OpenERP
 #       ('max_delta_days' parameter for each currency update service)
@@ -49,6 +49,7 @@ _logger = logging.getLogger(__name__)
 
 
 class Currency_rate_update_service(osv.Model):
+
     """Class that tells for wich services wich currencies have to be updated
 
     """
@@ -123,6 +124,7 @@ class Currency_rate_update_service(osv.Model):
 
 
 class Currency_rate_update(osv.Model):
+
     """Class that handle an ir cron call who will
     update currencies based on a web url"""
     _name = "currency.rate.update"
@@ -171,7 +173,6 @@ class Currency_rate_update(osv.Model):
             _logger.info('warning cron not found one will be created')
             # Ignore if the cron is missing cause we are
             # going to create it in db
-            pass
         if not cron_id:
             self.cron['name'] = _('Currency Rate Update')
             cron_id = cron_obj.create(cr, uid, self.cron, context)
@@ -276,6 +277,7 @@ class Currency_rate_update(osv.Model):
 
 
 class AbstractClassError(Exception):
+
     def __str__(self):
         return 'Abstract Class'
 
@@ -284,6 +286,7 @@ class AbstractClassError(Exception):
 
 
 class AbstractMethodError(Exception):
+
     def __str__(self):
         return 'Abstract Method'
 
@@ -292,6 +295,7 @@ class AbstractMethodError(Exception):
 
 
 class UnknowClassError(Exception):
+
     def __str__(self):
         return 'Unknown Class'
 
@@ -300,6 +304,7 @@ class UnknowClassError(Exception):
 
 
 class UnsuportedCurrencyError(Exception):
+
     def __init__(self, value):
         self.curr = value
 
@@ -311,11 +316,13 @@ class UnsuportedCurrencyError(Exception):
 
 
 class Currency_getter_factory():
+
     """Factory pattern class that will return
     a currency getter class base on the name passed
     to the register method
 
     """
+
     def register(self, class_name):
         allowed = [
             'Admin_ch_getter',
@@ -335,6 +342,7 @@ class Currency_getter_factory():
 
 
 class Curreny_getter_interface(object):
+
     "Abstract class of currency getter"
 
     log_info = " "
@@ -417,6 +425,7 @@ class Curreny_getter_interface(object):
 
 # Yahoo #######################################################################
 class Yahoo_getter(Curreny_getter_interface):
+
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
     """
@@ -443,6 +452,7 @@ class Yahoo_getter(Curreny_getter_interface):
 
 # Admin CH ####################################################################
 class Admin_ch_getter(Curreny_getter_interface):
+
     """Implementation of Currency_getter_factory interface
     for Admin.ch service
 
@@ -528,6 +538,7 @@ class Admin_ch_getter(Curreny_getter_interface):
 
 # ECB getter #################################################################
 class ECB_getter(Curreny_getter_interface):
+
     """Implementation of Currency_getter_factory interface
     for ECB service
     """
@@ -603,6 +614,7 @@ class ECB_getter(Curreny_getter_interface):
 
 # PL NBP ######################################################################
 class PL_NBP_getter(Curreny_getter_interface):
+
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
@@ -676,6 +688,7 @@ class PL_NBP_getter(Curreny_getter_interface):
 
 # Banco de México #############################################################
 class Banxico_getter(Curreny_getter_interface):
+
     """Implementation of Currency_getter_factory interface
     for Banco de México service
 
@@ -732,6 +745,7 @@ class Banxico_getter(Curreny_getter_interface):
 
 # CA BOC #####   Bank of Canada   #############################################
 class CA_BOC_getter(Curreny_getter_interface):
+
     """Implementation of Curreny_getter_factory interface
     for Bank of Canada RSS service
 

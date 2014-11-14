@@ -23,6 +23,7 @@ from openerp.osv import fields, orm
 
 
 class res_company(orm.Model):
+
     """Replace the company's fields for SIRET/RC with the partner's"""
     _inherit = 'res.company'
 

@@ -23,4 +23,4 @@
 """
 Account Chart Update Wizard
 """
-import wizard_chart_update
+from . import wizard_chart_update

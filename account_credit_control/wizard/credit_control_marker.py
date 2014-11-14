@@ -23,6 +23,7 @@ from openerp.tools.translate import _
 
 
 class CreditControlMarker(orm.TransientModel):
+
     """Change the state of lines in mass"""
 
     _name = 'credit.control.marker'

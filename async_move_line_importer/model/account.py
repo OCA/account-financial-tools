@@ -33,6 +33,7 @@ def _format_inserts_values(vals):
 
 
 class account_move(orm.Model):
+
     """redefine account move create to bypass orm.
 
     Async_bypass_create must be set to True in context.
@@ -112,6 +113,7 @@ class account_move(orm.Model):
 
 
 class account_move_line(orm.Model):
+
     """Redefine account move line create to bypass orm.
 
     Async_bypass_create must be set to True in context
@@ -125,7 +127,7 @@ class account_move_line(orm.Model):
         if context is None:
             context = {}
         if context.get('async_bypass_create'):
-                return self._bypass_create(cr, uid, vals, context=context)
+            return self._bypass_create(cr, uid, vals, context=context)
         return super(account_move_line, self).create(cr, uid, vals,
                                                      context=context)
 

@@ -22,6 +22,7 @@ from openerp.osv import orm, fields
 
 
 class ResCompany(orm.Model):
+
     """Add credit control parameters"""
     _inherit = 'res.company'
 

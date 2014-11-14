@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-import partner
-import company
+from . import partner
+from . import company
