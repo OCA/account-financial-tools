@@ -23,6 +23,7 @@ from openerp.tools.translate import _
 
 
 class CreditControlPolicy(orm.Model):
+
     """Define a policy of reminder"""
 
     _name = "credit.control.policy"
@@ -254,6 +255,7 @@ class CreditControlPolicy(orm.Model):
 
 
 class CreditControlPolicyLevel(orm.Model):
+
     """Define a policy level. A level allows to determine if
     a move line is due and the level of overdue of the line"""
 

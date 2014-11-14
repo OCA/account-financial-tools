@@ -27,6 +27,7 @@ import openerp.addons.decimal_precision as dp
 
 
 class account_invoice(orm.Model):
+
     """
     Inheritance of account invoice to add company currency amounts
     """

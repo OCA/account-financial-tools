@@ -75,7 +75,7 @@ class AccountJournalPeriod(orm.Model):
                     .browse(cr, uid, values['journal_id'], context=context)
                 period = self.pool.get('account.period')\
                     .browse(cr, uid, values['period_id'], context=context)
-                values.update({'name': (journal.code or journal.name)+':' +
+                values.update({'name': (journal.code or journal.name) + ':' +
                                (period.name or '')})
         return super(AccountJournalPeriod, self).create(cr,
                                                         uid,

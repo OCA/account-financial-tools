@@ -22,6 +22,7 @@ from openerp.osv import orm
 
 
 class credit_control_run(orm.Model):
+
     """Add computation of fees"""
 
     _inherit = "credit.control.run"

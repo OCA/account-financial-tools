@@ -22,6 +22,7 @@ from openerp.osv import orm
 
 
 class FeesComputer(orm.BaseModel):
+
     """Model that compute dunnig fees.
 
     This class does not need any database storage as

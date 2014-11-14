@@ -24,6 +24,7 @@ from openerp.tools.translate import _
 
 
 class CreditControlEmailer(orm.TransientModel):
+
     """Send emails for each selected credit control lines."""
 
     _name = "credit.control.emailer"

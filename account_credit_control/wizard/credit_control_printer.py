@@ -25,6 +25,7 @@ from openerp.tools.translate import _
 
 
 class CreditControlPrinter(orm.TransientModel):
+
     """Print lines"""
 
     _name = "credit.control.printer"

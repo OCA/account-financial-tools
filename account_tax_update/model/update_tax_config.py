@@ -27,6 +27,7 @@ from openerp.tools.translate import _
 
 
 class UpdateTaxConfig(orm.Model):
+
     """
     A configuration model to collect taxes to be replaced with
     duplicates, but with a different amount. Once the taxes are

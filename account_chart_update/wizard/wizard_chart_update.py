@@ -42,11 +42,13 @@ def _reopen(self, res_id, model):
 
 
 class WizardLog:
+
     """
     *******************************************************************
     Small helper class to store the messages and errors on the wizard.
     *******************************************************************
     """
+
     def __init__(self):
         self.messages = []
         self.errors = []
@@ -226,7 +228,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
         res = []
         for record in records:
             res.append((record.id, record.company_id.name +
-                       ' - ' + record.chart_template_id.name))
+                        ' - ' + record.chart_template_id.name))
         return res
 
     def _get_chart(self, cr, uid, context=None):
@@ -1469,6 +1471,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
 
 
 class wizard_update_charts_accounts_tax_code(orm.TransientModel):
+
     """
     ******************************************************************
     Tax code that needs to be updated (new or updated in the template).
@@ -1505,6 +1508,7 @@ class wizard_update_charts_accounts_tax_code(orm.TransientModel):
 
 
 class wizard_update_charts_accounts_tax(orm.TransientModel):
+
     """
     **************************************************************
     Tax that needs to be updated (new or updated in the template).
@@ -1542,6 +1546,7 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
 
 
 class wizard_update_charts_accounts_account(orm.TransientModel):
+
     """
     ******************************************************************
     Account that needs to be updated (new or updated in the template).
@@ -1582,6 +1587,7 @@ class wizard_update_charts_accounts_account(orm.TransientModel):
 
 
 class wizard_update_charts_accounts_fiscal_position(orm.TransientModel):
+
     """
     **************************************************************************
     Fiscal position that needs to be updated (new or updated in the template).

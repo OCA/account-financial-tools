@@ -27,6 +27,7 @@ logger = logging.getLogger('credit.control.run')
 
 
 class CreditControlRun(orm.Model):
+
     """Credit Control run generate all credit control lines and reject"""
 
     _name = "credit.control.run"

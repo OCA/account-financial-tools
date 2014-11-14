@@ -36,6 +36,7 @@ def _check_luhn(string):
 
 
 class Partner(orm.Model):
+
     """Add the French official company identity numbers SIREN, NIC and SIRET"""
     _inherit = 'res.partner'
 

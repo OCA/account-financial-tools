@@ -37,6 +37,7 @@ _logger = logging.getLogger(__name__)
 
 
 class move_line_importer(orm.Model):
+
     """Asynchrone move / move line importer.
 
     It will parse the saved CSV file using orm.BaseModel.load

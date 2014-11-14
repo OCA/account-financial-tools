@@ -22,6 +22,7 @@ from openerp.osv import orm, fields
 
 
 class ResPartner(orm.Model):
+
     """Add a settings on the credit control policy to use on the partners,
     and links to the credit control lines."""
 

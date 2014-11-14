@@ -23,6 +23,7 @@ from openerp.tools.translate import _
 
 
 class AccountInvoice(orm.Model):
+
     """Check on cancelling of an invoice"""
     _inherit = 'account.invoice'
 
