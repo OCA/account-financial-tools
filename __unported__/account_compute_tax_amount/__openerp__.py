@@ -23,7 +23,6 @@
     "depends": ["base",
                 "account"],
     "author": "Camptocamp",
-    "description": """Recompute tax_amount to avoid sign problem""",
     'website': 'http://www.camptocamp.com',
     'data': [],
     'installable': False,
