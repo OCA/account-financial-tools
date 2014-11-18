@@ -27,8 +27,8 @@ from openerp import models, fields, api
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    # We set the tax_amount invisible, because we recompute it in every case.
-    tax_amount = fields.Float(invisible=True)
+    # We set the tax_amount readonly, because we recompute it in every case.
+    tax_amount = fields.Float(readonly=True)
 
     @api.one
     def force_compute_tax_amount(self):
