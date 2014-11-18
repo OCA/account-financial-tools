@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-# Copyright (c) 2013 Camptocamp (http://www.camptocamp.com)
-# All Right Reserved
+# Copyright (c) 2013-2014 Camptocamp (http://www.camptocamp.com)
 #
 # Author : Vincent Renaville (Camptocamp)
 #
