@@ -226,18 +226,18 @@ class Currency_rate_update_service(models.Model):
         # The multi company currency can be set or no so we handle
         # The two case
         if company.auto_currency_up:
-            main_currencies = curr_obj.search(
-                [('base', '=', True), ('company_id', '=', company.id)])
-            if not main_currencies:
+            main_currency = curr_obj.search(
+                [('base', '=', True), ('company_id', '=', company.id)],
+                limit=1)
+            if not main_currency:
                 # If we can not find a base currency for this company
                 # we look for one with no company set
-                main_currencies = curr_obj.search(
-                    [('base', '=', True), ('company_id', '=', False)])
-            if main_currencies:
-                main_curr = main_currencies[0]
-            else:
+                main_currency = curr_obj.search(
+                    [('base', '=', True), ('company_id', '=', False)],
+                    limit=1)
+            if not main_currency:
                 raise exceptions.Warning(_('There is no base currency set!'))
-            if main_curr.rate != 1:
+            if main_currency.rate != 1:
                 raise exceptions.Warning(_('Base currency rate should '
                                            'be 1.00!'))
             note = self.note or ''
@@ -249,14 +249,14 @@ class Currency_rate_update_service(models.Model):
                                     self.currency_to_update)
                 res, log_info = getter.get_updated_currency(
                     curr_to_fetch,
-                    main_curr.name,
+                    main_currency.name,
                     self.max_delta_days
                     )
                 rate_name = \
                     fields.Datetime.to_string(datetime.utcnow().replace(
                         hour=0, minute=0, second=0, microsecond=0))
                 for curr in self.currency_to_update:
-                    if curr.id == main_curr.id:
+                    if curr.id == main_currency.id:
                         continue
                     do_create = True
                     for rate in curr.rate_ids:
@@ -299,12 +299,8 @@ class Currency_rate_update_service(models.Model):
     @api.multi
     def run_currency_update(self):
         "Update currency at the given frequence"
-        ctx = dict(self._context)
-        current_date = fields.Date.today()
-        services = self.search([('next_run', '=', current_date)])
-        ctx['cron'] = True
-        for service in services:
-            service.with_context(ctx).refresh_currency()
+        services = self.search([('next_run', '=', fields.Date.today())])
+        services.with_context(cron=True).refresh_currency()
 
     @api.model
     def _run_currency_update(self):
