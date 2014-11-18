@@ -238,7 +238,8 @@ class Currency_rate_update_service(models.Model):
             else:
                 raise exceptions.Warning(_('There is no base currency set!'))
             if main_curr.rate != 1:
-                raise exceptions.Warning(_('Base currency rate should be 1.00!'))
+                raise exceptions.Warning(_('Base currency rate should '
+                                           'be 1.00!'))
             note = self.note or ''
             try:
                 # We initalize the class that will handle the request
