@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import Currency_getter_interface
 
 import logging
 _logger = logging.getLogger(__name__)
