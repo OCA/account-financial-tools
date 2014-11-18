@@ -21,61 +21,30 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-import openerp.addons.decimal_precision as dp
+from openerp import models, fields, api
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     # We set the tax_amount invisible, because we recompute it in every case.
-    _columns = {
-        'tax_amount': fields.float(
-            'Tax/Base Amount',
-            digits_compute=dp.get_precision('Account'),
-            invisible=True,
-            select=True,
-            help="If the Tax account is a tax code account, "
-                 "this field will contain the taxed amount. "
-                 "If the tax account is base tax code, "
-                 "this field will contain the basic amount (without tax)."
-        ),
-    }
+    tax_amount = fields.Float(invisible=True)
 
-    def create(self, cr, uid, vals, context=None, check=True):
-        result = super(account_move_line, self).create(cr, uid, vals,
-                                                       context=context,
-                                                       check=check)
-        if result:
-            move_line = self.read(cr, uid, result,
-                                  ['credit', 'debit', 'tax_code_id'],
-                                  context=context)
-            if move_line['tax_code_id']:
-                tax_amount = move_line['credit'] - move_line['debit']
-                self.write(cr, uid, [result],
-                           {'tax_amount': tax_amount},
-                           context=context)
-        return result
+    @api.one
+    def force_compute_tax_amount(self):
+        if self.tax_code_id:
+            self.tax_amount = self.credit - self.debit
 
-    def write(self, cr, uid, ids, vals, context=None, check=True,
-              update_check=True):
-        result = super(account_move_line, self).write(
-            cr, uid, ids, vals,
-            context=context,
-            check=check,
-            update_check=update_check
-        )
-        if result:
-            if ('debit' in vals) or ('credit' in vals):
-                move_lines = self.read(cr, uid, ids,
-                                       ['credit', 'debit', 'tax_code_id'],
-                                       context=context)
-                for move_line in move_lines:
-                    if move_line['tax_code_id']:
-                        tax_amount = move_line['credit'] - move_line['debit']
-                        self.write(cr, uid,
-                                   [move_line['id']],
-                                   {'tax_amount': tax_amount},
-                                   context=context)
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        record = super(AccountMoveLine, self).create(vals)
+        record.force_compute_tax_amount()
+        return record
 
+    @api.multi
+    def write(self, vals):
+        result = super(AccountMoveLine, self).write(vals)
+        if ('debit' in vals) or ('credit' in vals):
+            self.force_compute_tax_amount()
         return result
