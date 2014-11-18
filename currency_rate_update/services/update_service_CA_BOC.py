@@ -71,8 +71,8 @@ class CA_BOC_getter(Currency_getter_interface):
                 _logger.error("Exchange data for %s is not reported by Bank\
                     of Canada." % curr)
                 raise except_orm(_('Error !'), _('Exchange data for %s is not '
-                                                 'reported by Bank of Canada.' %
-                                                 str(curr)))
+                                                 'reported by Bank of Canada.'
+                                                 % str(curr)))
 
             _logger.debug("BOC sent a valid RSS file for: " + curr)
 
