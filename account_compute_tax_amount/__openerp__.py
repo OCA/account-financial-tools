@@ -25,6 +25,6 @@
     "author": "Camptocamp",
     'website': 'http://www.camptocamp.com',
     'data': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
