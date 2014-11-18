@@ -145,6 +145,9 @@ class CreditCommunication(models.TransientModel):
     def _generate_emails(self):
         """ Generate email message using template related to level """
         email_message_obj = self.env['mail.mail']
+        # Warning: still using the old-api on 'email.template' because
+        # the method generate_email() does not follow the cr, uid, ids
+        # convention and the new api wrapper can't translate the call
         email_template_obj = self.pool['email.template']
         att_obj = self.env['ir.attachment']
         emails = email_message_obj.browse()
