@@ -70,8 +70,9 @@ class CA_BOC_getter(Currency_getter_interface):
             if dom.status != 200:
                 _logger.error("Exchange data for %s is not reported by Bank\
                     of Canada." % curr)
-                raise except_orm(_('Error !'), _('Exchange data for %s is not\
-                    reported by Bank of Canada.' % str(curr)))
+                raise except_orm(_('Error !'), _('Exchange data for %s is not '
+                                                 'reported by Bank of Canada.' %
+                                                 str(curr)))
 
             _logger.debug("BOC sent a valid RSS file for: " + curr)
 
@@ -91,7 +92,7 @@ class CA_BOC_getter(Currency_getter_interface):
                     "%s. Please check provider data format "
                     "and/or source code." % curr)
                 raise except_orm(_('Error !'),
-                                 _('Exchange data format error for\
-                                 Bank of Canada - %s !' % str(curr)))
+                                 _('Exchange data format error for '
+                                   'Bank of Canada - %s !' % str(curr)))
 
         return self.updated_currency, self.log_info
