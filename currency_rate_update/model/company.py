@@ -58,4 +58,4 @@ class res_company(models.Model):
     services_to_use = fields.One2many(
         'currency.rate.update.service',
         'company_id',
-        'Currency update services')
+        string='Currency update services')

@@ -25,7 +25,7 @@ from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import exceptions
 
 from ..services.currency_getter import Currency_getter_factory
 
@@ -114,13 +114,13 @@ class Currency_rate_update_service(models.Model):
     @api.constrains('max_delta_days')
     def _check_max_delta_days(self):
         if self.max_delta_days < 0:
-            raise Warning(_('Max delta days must be >= 0'))
+            raise exceptions.Warning(_('Max delta days must be >= 0'))
 
     @api.one
     @api.constrains('interval_number')
     def _check_interval_number(self):
         if self.interval_number < 0:
-            raise Warning(_('Interval number must be >= 0'))
+            raise exceptions.Warning(_('Interval number must be >= 0'))
 
     @api.onchange('interval_number')
     def _onchange_interval_number(self):
@@ -236,9 +236,9 @@ class Currency_rate_update_service(models.Model):
             if main_currencies:
                 main_curr = main_currencies[0]
             else:
-                raise Warning(_('There is no base currency set!'))
+                raise exceptions.Warning(_('There is no base currency set!'))
             if main_curr.rate != 1:
-                raise Warning(_('Base currency rate should be 1.00!'))
+                raise exceptions.Warning(_('Base currency rate should be 1.00!'))
             note = self.note or ''
             try:
                 # We initalize the class that will handle the request
