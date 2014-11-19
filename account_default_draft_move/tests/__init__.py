@@ -28,11 +28,3 @@
 #
 
 from . import test_account_default_draft_move
-
-fast_suite = [
-    test_account_default_draft_move,
-]
-
-checks = [
-    test_account_default_draft_move,
-]

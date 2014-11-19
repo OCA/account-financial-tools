@@ -28,13 +28,3 @@
 #
 
 from . import test_account_constraints
-
-fast_suite = [
-    test_account_constraints,
-]
-
-checks = [
-    test_account_constraints,
-]
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
