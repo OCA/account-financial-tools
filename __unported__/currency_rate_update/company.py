@@ -27,12 +27,12 @@ class res_company(orm.Model):
     def _multi_curr_enable(self, cr, uid, ids, field_name, arg, context=None):
         "check if multi company currency is enabled"
         result = {}
-        fields = self.pool.get('ir.model.fields').search(
+        field_ids = self.pool.get('ir.model.fields').search(
             cr, uid,
             [('name', '=', 'company_id'),
              ('model', '=', 'res.currency')]
         )
-        if not fields:
+        if not field_ids:
             enable = 0
         else:
             enable = 1

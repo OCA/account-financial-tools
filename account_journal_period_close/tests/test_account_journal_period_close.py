@@ -164,10 +164,10 @@ class TestAccountJournalPeriodClose(common.TransactionCase):
         # issue on Odoo github : #1633
 
         # I check if the exception is correctly raised
-        """self.assertRaises(except_orm,
-                          self.registry('account.move').write,
-                          self.cr, self.uid, [move_id],
-                          {'journal_id': journal_id}, context=context)"""
+        # self.assertRaises(except_orm,
+        #                   self.registry('account.move').write,
+        #                   self.cr, self.uid, [move_id],
+        #                   {'journal_id': journal_id}, context=context)
 
     def test_draft_move_close_journal(self):
         context = {}
