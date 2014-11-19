@@ -110,46 +110,36 @@ class AccountMoveLine(models.Model):
                                                   check=check,
                                                   update_check=update_check)
 
-    @api.multi
+    @api.constrains('currency_id', 'amount_currency')
     def _check_currency_and_amount(self):
         for l in self:
             # we check zero amount line
             if not (l.debit and l.credit):
                 continue
             if bool(l.currency_id) != bool(l.amount_currency):
-                return False
+                raise exceptions.Warning(
+                    _("You cannot create journal items with a secondary "
+                      "currency without recording both 'currency' and "
+                      "'amount currency' field."))
         return True
 
-    @api.multi
+    @api.constrains('amount_currency')
     def _check_currency_amount(self):
         for l in self:
             if l.amount_currency:
                 if ((l.amount_currency > 0.0 and l.credit > 0.0) or
                         (l.amount_currency < 0.0 and l.debit > 0.0)):
-                    return False
+                    raise exceptions.Warning(
+                        _("The amount expressed in the secondary currency "
+                          "must be positive when journal item are debit and "
+                          "negatif when journal item are credit."))
         return True
 
-    @api.multi
+    @api.constrains('currency_id')
     def _check_currency_company(self):
         for l in self:
             if l.currency_id.id == l.company_id.currency_id.id:
-                return False
+                raise exceptions.Warning(
+                    _("You can't provide a secondary currency if the same "
+                      "than the company one."))
         return True
-
-    _constraints = [
-        (_check_currency_and_amount,
-         "You cannot create journal items with a secondary currency "
-         "without recording both 'currency' and 'amount currency' field.",
-         ['currency_id', 'amount_currency']),
-
-        (_check_currency_amount,
-         "The amount expressed in the secondary currency must be positive "
-         "when journal item are debit and negatif when journal item are "
-         "credit.",
-         ['amount_currency']),
-
-        (_check_currency_company,
-         "You can't provide a secondary currency if "
-         "the same than the company one.",
-         ['currency_id']),
-    ]
