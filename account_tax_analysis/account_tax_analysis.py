@@ -37,14 +37,16 @@ class AccountTaxDeclarationAnalysis(models.TransientModel):
         column1='tax_analysis',
         column2='period_id',
         string='Periods',
-        required=True,
+        help="If no period is selected, all the periods of the "
+             "fiscal year will be used",
     )
 
     @api.multi
     def show_vat(self):
-        if not self.period_list:
-            raise exceptions.Warning(_("You must select periods"))
-        domain = [('period_id', 'in', self.period_list.ids)]
+        periods = self.period_list
+        if not periods:
+            periods = self.fiscalyear_id.period_ids
+        domain = [('period_id', 'in', periods.ids)]
         action = self.env.ref('account_tax_analysis.action_view_tax_analysis')
         action_fields = action.read()[0]
         action_fields['domain'] = domain
