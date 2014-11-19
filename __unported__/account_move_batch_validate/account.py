@@ -106,12 +106,12 @@ class account_move(orm.Model):
         ], context=context)
 
         for move in self.browse(cr, uid, move_ids, context=context):
-            job = storage.load(move.post_job_uuid)
-            if job.state in (u'pending', u'enqueued'):
-                job.set_done(result=_(
+            job_rec = storage.load(move.post_job_uuid)
+            if job_rec.state in (u'pending', u'enqueued'):
+                job_rec.set_done(result=_(
                     u'Task set to Done because the user unmarked the move'
                 ))
-                storage.store(job)
+                storage.store(job_rec)
 
     def mark_for_posting(self, cr, uid, move_ids, eta=None, context=None):
         """Mark a list of moves for delayed posting, and enqueue the jobs."""
