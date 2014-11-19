@@ -49,7 +49,7 @@ class res_company(models.Model):
     # Function field that allows to know the
     # multi company currency implementation
     multi_company_currency_enable = fields.Boolean(
-        string='Multi company currency', translate=True, 
+        string='Multi company currency', translate=True,
         compute="_compute_multi_curr_enable",
         help="When this option is unchecked it will allow users "
              "to set a distinct currency updates on each company."
