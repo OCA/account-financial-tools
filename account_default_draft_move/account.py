@@ -46,16 +46,14 @@ class AccountMove(models.Model):
                 continue
             else:
                 if not line.journal_id.update_posted:
-                    raise exceptions.except_orm(
-                        _('Error!'),
+                    raise exceptions.Warning(
                         _('You cannot modify a posted entry of this journal.'
                           'First you should set the journal to allow'
-                          ' cancelling entries.')
-                    )
+                          ' cancelling entries.'))
         if self:
             self._cr.execute('UPDATE account_move '
                              'SET state=%s '
-                             'WHERE id IN %s', ('draft', self._ids,))
+                             'WHERE id IN %s', ('draft', self.ids,))
         return True
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -28,10 +28,9 @@
 #
 
 import openerp.tests.common as common
-from openerp.osv import orm
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from openerp import workflow
+from openerp import workflow, exceptions
 
 DB = common.DB
 ADMIN_USER_ID = common.ADMIN_USER_ID
@@ -75,7 +74,8 @@ class TestAccountConstraints(common.TransactionCase):
         move_lines = move.line_id
         move.with_context({'from_parent_object': True})\
             .write({'state': 'draft'})
-        self.assertRaises(orm.except_orm, move_lines.write, {'credit': 0.0})
+        self.assertRaises(exceptions.Warning, move_lines.write,
+                          {'credit': 0.0})
 
     def test_post_move_invoice_ref(self):
         invoice = create_simple_invoice(self)
@@ -93,4 +93,5 @@ class TestAccountConstraints(common.TransactionCase):
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
         move_lines = invoice.move_id.line_id
-        self.assertRaises(orm.except_orm, move_lines.write, {'ref': 'test'})
+        self.assertRaises(exceptions.Warning, move_lines.write,
+                          {'ref': 'test'})
