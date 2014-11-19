@@ -17,9 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 
-from openerp import models, api
-from openerp import exceptions
-from openerp.tools.translate import _
+from openerp import models, api, exceptions, _
 
 
 class AccountInvoice(models.Model):

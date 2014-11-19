@@ -18,9 +18,7 @@
 #
 ##############################################################################
 
-from openerp import models, api
-from openerp import exceptions
-from openerp.tools.translate import _
+from openerp import models, api, exceptions, _
 
 
 class AccountMoveLine(models.Model):
