@@ -5,7 +5,7 @@
             <field name="name">Update Rates service</field>
             <field name="model">currency.rate.update.service</field>
             <field name="arch" type="xml">
-                <tree string="Rates">
+                <tree string="Currency update services">
                     <field name="service"/>
                     <field name="currency_to_update"/>
                     <field name="interval_type"/>
@@ -19,7 +19,7 @@
             <field name="name">Update Rates</field>
             <field name="model">currency.rate.update.service</field>
             <field name="arch" type="xml">
-                <form string="Rate">
+                <form string="Currency update services">
                     <group>
 						<group>
                             <field name="service"/>
