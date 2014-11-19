@@ -26,7 +26,6 @@ class AccountBankStatement(models.Model):
     @api.multi
     def button_confirm_bank(self):
         res = super(AccountBankStatement, self).button_confirm_bank()
-        for st in self:
-            for st_line in st.line_ids:
-                st_line.journal_entry_id.state = 'draft'
+        entries = self.mapped('line_ids.journal_entry_id')
+        entries.write({'state': 'draft'})
         return res
