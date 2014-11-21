@@ -24,7 +24,7 @@ from openerp.tools.translate import _
 import re
 
 
-class account_document_template(orm.Model):
+class AccountDocumentTemplate(orm.Model):
 
     _computed_lines = {}
     _current_template_id = 0
@@ -107,7 +107,7 @@ class account_document_template(orm.Model):
         return False
 
 
-class account_document_template_line(orm.Model):
+class AccountDocumentTemplateLine(orm.Model):
 
     _name = 'account.document.template.line'
 
