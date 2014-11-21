@@ -28,7 +28,8 @@ The module is able to use 4 different sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
-In the roadmap : Google Finance.
+In the roadmap : 
+   Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
    This is parsed from an HTML page, so it may be broken at anytime.
 
@@ -42,9 +43,9 @@ the current day.
 The module supports multi-company currency in two ways:
 
 *    the currencies are shared, you can set currency update only on one
-    company
+     company
 *    the currency are separated, you can set currency on every company
-    separately
+     separately
 
 A function field lets you know your currency configuration.
 
