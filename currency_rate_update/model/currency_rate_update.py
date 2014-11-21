@@ -76,7 +76,7 @@ YAHOO_supported_currency_array = [
     "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VEF",
     "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XCD", "XCP", "XDR", "XOF",
     "XPD", "XPF", "XPT", "YER", "ZAR", "ZMW", "ZWL"]
-    
+
 RO_BNR_supported_currency_array = [
     "AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EGP",
     "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", "NOK", "NZD",
@@ -131,7 +131,8 @@ supported_currecies = {
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
     }
-    
+
+
 class Currency_rate_update_service(models.Model):
     """Class keep services and currencies that
     have to be updated"""
