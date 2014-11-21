@@ -40,7 +40,6 @@ class res_company(models.Model):
         self.services_to_use.refresh_currency()
 
     _inherit = "res.company"
-    _name = "res.company"
 
     # Activate the currency update
     auto_currency_up = fields.Boolean(
