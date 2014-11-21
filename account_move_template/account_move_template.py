@@ -22,7 +22,7 @@
 from openerp.osv import fields, orm
 
 
-class account_move_template(orm.Model):
+class AccountMoveTemplate(orm.Model):
 
     _inherit = 'account.document.template'
     _name = 'account.move.template'
@@ -82,7 +82,7 @@ class account_move_template(orm.Model):
     ]
 
 
-class account_move_template_line(orm.Model):
+class AccountMoveTemplateLine(orm.Model):
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
 
