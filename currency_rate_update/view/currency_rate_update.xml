@@ -5,10 +5,12 @@
             <field name="name">Update Rates service</field>
             <field name="model">currency.rate.update.service</field>
             <field name="arch" type="xml">
-                <tree string="Rates">
+                <tree string="Currency update services">
                     <field name="service"/>
                     <field name="currency_to_update"/>
-
+                    <field name="interval_type"/>
+                    <field name="interval_number"/>
+                    <field name="next_run"/>
                 </tree>
             </field>
         </record>
@@ -17,11 +19,21 @@
             <field name="name">Update Rates</field>
             <field name="model">currency.rate.update.service</field>
             <field name="arch" type="xml">
-                <form string="Rate">
-                    <field name="service"/>
-                    <field name="max_delta_days"/>
+                <form string="Currency update services">
+                    <group>
+						<group>
+                            <field name="service"/>
+                            <field name="max_delta_days"/>
+                        </group>
+                        <group>                            
+                            <field name="interval_type"/>
+                            <field name="interval_number"/>
+                            <field name="next_run"/>
+                        </group>
+                    </group>
                     <separator string="Currencies to update with this service" colspan="4"/>
-                    <field name="currency_to_update" colspan="4" nolabel="1"/>
+                    <field name="currency_list" invisible="1"/>
+                    <field name="currency_to_update" colspan="4" nolabel="1" domain="[('id','in', currency_list[0][2])]"/>
                     <separator string="Logs" colspan="4"/>
                     <field name="note" colspan="4" nolabel="1"/>
                 </form>
