@@ -24,7 +24,7 @@ import time
 from openerp.tools.translate import _
 
 
-class wizard_select_template(orm.TransientModel):
+class WizardSelectMoveTemplate(orm.TransientModel):
 
     _name = "wizard.select.move.template"
     _columns = {
@@ -245,7 +245,7 @@ class wizard_select_template(orm.TransientModel):
         return id_line
 
 
-class wizard_select_template_line(orm.TransientModel):
+class WizardSelectMoveTemplateLine(orm.TransientModel):
     _description = 'Template Lines'
     _name = "wizard.select.move.template.line"
     _columns = {
