@@ -44,7 +44,7 @@
     'author': 'ACSONE SA/NV',
     'website': 'http://acsone.eu',
     'depends': ['account'],
-    'data': [
+    'data': ['views/ir_sequence_view.xml',
     ],
     'installable': True,
     'application': False,
