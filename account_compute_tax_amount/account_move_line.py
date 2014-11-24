@@ -42,7 +42,6 @@ class AccountMoveLine(models.Model):
         self.force_compute_tax_amount(cr, uid, [record_id], context=context)
         return record_id
 
-
     @api.cr_uid_ids_context
     def write(self, cr, uid, ids, vals, context=None, check=True,
               update_check=True):
