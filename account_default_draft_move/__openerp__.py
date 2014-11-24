@@ -51,7 +51,7 @@ need to make a refund).
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',
               'invoice_view.xml'],
-    'installable': False,
-    'active': False,
+    'installable': True,
+    'auto_install': False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
