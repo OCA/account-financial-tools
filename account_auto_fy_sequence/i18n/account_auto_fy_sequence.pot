@@ -19,13 +19,13 @@ msgstr ""
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:44
 #, python-format
 msgid "Error!"
-msgstr "Erreur!"
+msgstr ""
 
 #. module: account_auto_fy_sequence
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:45
 #, python-format
 msgid "The system tried to access a fiscal year sequence without specifying the actual fiscal year."
-msgstr "Le système tente d'accéder à une séquence pour exercice fiscal sans préciser d'exercice."
+msgstr ""
 
 #. module: account_auto_fy_sequence
 #: model:ir.model,name:account_auto_fy_sequence.model_ir_sequence
