@@ -40,7 +40,6 @@
       <field name="name">account.move.asset.form</field>
       <field name="model">account.move</field>
       <field name="inherit_id" ref="account.view_move_form"/>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <xpath expr="//notebook/page[@string='Journal Items']/field[@name='line_id']/form/notebook/page[@string='Information']//field[@name='account_id']"  position="attributes">
           <attribute name="on_change">onchange_account_id(account_id)</attribute>
