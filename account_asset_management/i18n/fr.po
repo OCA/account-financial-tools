@@ -752,15 +752,19 @@ msgid "Date"
 msgstr "Date"
 
 #. module: account_asset
-#: field:account.asset.asset,method_number:0
 #: selection:account.asset.asset,method_time:0
-#: field:account.asset.category,method_number:0
 #: selection:account.asset.category,method_time:0
-#: field:account.asset.history,method_number:0
 #: selection:account.asset.history,method_time:0
+msgid "Time Method"
+msgstr "Time Method"
+
+#. module: account_asset
+#: field:account.asset.asset,method_number:0
+#: field:account.asset.category,method_number:0
+#: field:account.asset.history,method_number:0
 #: field:asset.modify,method_number:0
-msgid "Number of Depreciations"
-msgstr "Nombre d'amortissements"
+msgid "Number of Years"
+msgstr "Nombre d'années"
 
 #. module: account_asset
 #: view:account.asset.asset:0
