@@ -69,22 +69,22 @@ class asset_modify(orm.TransientModel):
             result['arch'] = etree.tostring(doc)
         return result
 
-    def default_get(self, cr, uid, field_list, context=None):
+    def default_get(self, cr, uid, fields, context=None):
         if not context:
             context = {}
         asset_obj = self.pool.get('account.asset.asset')
         res = super(asset_modify, self).default_get(
-            cr, uid, field_list, context=context)
+            cr, uid, fields, context=context)
         asset_id = context.get('active_id', False)
         asset = asset_obj.browse(cr, uid, asset_id, context=context)
-        if 'name' in field_list:
+        if 'name' in fields:
             res.update({'name': asset.name})
-        if 'method_number' in field_list and \
+        if 'method_number' in fields and \
                 asset.method_time in ['number', 'year']:
             res.update({'method_number': asset.method_number})
-        if 'method_period' in field_list:
+        if 'method_period' in fields:
             res.update({'method_period': asset.method_period})
-        if 'method_end' in field_list and asset.method_time == 'end':
+        if 'method_end' in fields and asset.method_time == 'end':
             res.update({'method_end': asset.method_end})
         return res
 

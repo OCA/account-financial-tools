@@ -651,6 +651,8 @@ class asset_report_xls(report_xls):
                     value_depreciated = res[0]
                 elif asset.state in ['close', 'removed']:
                     value_depreciated = asset.value_depreciated
+                elif not asset.method_number:
+                    value_depreciated = 0.0
                 else:
                     error_name = asset.name
                     if asset.code:
@@ -672,6 +674,8 @@ class asset_report_xls(report_xls):
                 res = cr.fetchone()
                 if res:
                     value_depreciated = res[0]
+                elif not asset.method_number:
+                    value_depreciated = 0.0
                 else:
                     value_depreciated = asset.asset_value
                 asset.fy_end_value = asset.asset_value - value_depreciated

@@ -409,12 +409,19 @@ class account_asset_asset(orm.Model):
     def _compute_depreciation_table(self, cr, uid, asset, context=None):
         if not context:
             context = {}
+
+        table = []
+        if not asset.method_number:
+            return table
+
         context['company_id'] = asset.company_id.id
         fy_obj = self.pool.get('account.fiscalyear')
         init_flag = False
         try:
             fy_id = fy_obj.find(cr, uid, asset.date_start, context=context)
             fy = fy_obj.browse(cr, uid, fy_id)
+            if fy.state == 'done':
+                init_flag = True
             fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
             fy_date_stop = datetime.strptime(fy.date_stop, '%Y-%m-%d')
         except:
@@ -457,7 +464,6 @@ class account_asset_asset(orm.Model):
         depreciation_stop_date = self._get_depreciation_stop_date(
             cr, uid, asset, depreciation_start_date, context=context)
 
-        table = []
         while fy_date_start <= depreciation_stop_date:
             table.append({
                 'fy_id': fy_id,
@@ -472,6 +478,8 @@ class account_asset_asset(orm.Model):
                 fy_id = False
             if fy_id:
                 fy = fy_obj.browse(cr, uid, fy_id)
+                if fy.state == 'done':
+                    init_flag = True
                 fy_date_stop = datetime.strptime(fy.date_stop, '%Y-%m-%d')
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
@@ -617,6 +625,8 @@ class account_asset_asset(orm.Model):
 
             table = self._compute_depreciation_table(
                 cr, uid, asset, context=context)
+            if not table:
+                continue
 
             # group lines prior to depreciation start period
             depreciation_start_date = datetime.strptime(
@@ -734,8 +744,7 @@ class account_asset_asset(orm.Model):
                         residual_amount -= line['amount']
                         line['remaining_value'] = residual_amount
                     lines[-1]['depreciated_value'] = depreciated_value
-                    lines[-1]['amount'] = entry['fy_amount'] - \
-                        fy_amount_check - amount_diff
+                    lines[-1]['amount'] = entry['fy_amount'] - fy_amount_check
 
             else:
                 table_i_start = 0
@@ -743,14 +752,28 @@ class account_asset_asset(orm.Model):
 
             seq = len(posted_depreciation_line_ids)
             depr_line_id = last_depreciation_line and last_depreciation_line.id
+            last_date = table[-1]['lines'][-1]['date']
             for entry in table[table_i_start:]:
                 for line in entry['lines'][line_i_start:]:
                     seq += 1
                     name = self._get_depreciation_entry_name(
                         cr, uid, asset, seq, context=context)
+                    if line['date'] == last_date:
+                        # ensure that the last entry of the table always
+                        # depreciates the remaining value
+                        cr.execute(
+                            "SELECT COALESCE(SUM(amount), 0.0) "
+                            "FROM account_asset_depreciation_line "
+                            "WHERE type = 'depreciate' AND line_date < %s "
+                            "AND asset_id = %s ",
+                            (last_date, asset.id))
+                        res = cr.fetchone()
+                        amount = asset.asset_value - res[0]
+                    else:
+                        amount = line['amount']
                     vals = {
                         'previous_id': depr_line_id,
-                        'amount': line['amount'],
+                        'amount': amount,
                         'asset_id': asset.id,
                         'name': name,
                         'line_date': line['date'].strftime('%Y-%m-%d'),
@@ -905,7 +928,8 @@ class account_asset_asset(orm.Model):
             dl_create_ids = aadl_obj.search(
                 cr, uid, [('type', '=', 'create'), ('asset_id', 'in', ids)])
             aadl_obj.write(
-                cr, uid, dl_create_ids, {'amount': val['asset_value']})
+                cr, uid, dl_create_ids,
+                {'amount': val['asset_value'], 'line_date': date_start})
         return {'value': val}
 
     def _get_assets(self, cr, uid, ids, context=None):

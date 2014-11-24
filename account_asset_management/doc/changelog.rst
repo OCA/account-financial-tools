@@ -94,3 +94,10 @@ Enhancements/changes made by Noviat (www.noviat.com)
 - Selection lists for fields 'method' and 'method_time' have been moved to object methods so that they can be modified in an inherited module.
 
 - Migration code has been added to upgrade asset database tables via the standard module upgrade process.
+
+`V2.1`
+------
+
+Enhancements/changes made by Noviat (www.noviat.com)
+
+- Support assets without depreciation table (e.g. properties that keep their value). Specify 'method_number' = 0 for such assets.
