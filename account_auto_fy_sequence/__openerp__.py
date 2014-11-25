@@ -29,7 +29,7 @@
     'description': """
     Automatic creation of fiscal year sequences.
 
-    This modules adds the possibility to use the %(fy)s placeholder
+    This module adds the possibility to use the %(fy)s placeholder
     in sequences. %(fy)s is replaced by the fiscal year code when
     using the sequence.
 
