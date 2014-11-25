@@ -34,7 +34,7 @@ class Sequence(orm.Model):
 
     def _create_fy_sequence(self, cr, uid, seq, fiscalyear, context=None):
         """ Create a FY sequence by cloning a sequence
-        which has %(fy)s in prefix or suffix """
+            which has %(fy)s in prefix or suffix """
         fy_seq_id = self.create(cr, uid, {
             'name': seq.name + ' - ' + fiscalyear.code,
             'code': seq.code,
@@ -59,27 +59,39 @@ class Sequence(orm.Model):
     def _next(self, cr, uid, seq_ids, context=None):
         if context is None:
             context = {}
-        assert len(seq_ids) == 1
-        seq = self.browse(cr, uid, seq_ids[0], context)
-        if (seq.prefix and FY_SLOT in seq.prefix) or \
-                (seq.suffix and FY_SLOT in seq.suffix):
-            fiscalyear_id = context.get('fiscalyear_id')
-            if not fiscalyear_id:
-                raise orm.except_orm(_('Error!'),
-                                     _('The system tried to access '
-                                       'a fiscal year sequence '
-                                       'without specifying the actual '
-                                       'fiscal year.'))
-            # search for existing fiscal year sequence
-            for line in seq.fiscal_ids:
-                if line.fiscalyear_id.id == fiscalyear_id:
-                    return super(Sequence, self)\
-                        ._next(cr, uid, [line.sequence_id.id], context)
-            # no fiscal year sequence found, auto create it
-            fiscalyear = self.pool['account.fiscalyear']\
-                .browse(cr, uid, fiscalyear_id, context=context)
-            fy_seq_id = self._create_fy_sequence(cr, uid, seq,
-                                                 fiscalyear, context)
-            return super(Sequence, self)\
-                ._next(cr, uid, [fy_seq_id], context)
+        for seq in self.browse(cr, uid, seq_ids, context):
+            if (seq.prefix and FY_SLOT in seq.prefix) or \
+                    (seq.suffix and FY_SLOT in seq.suffix):
+                fiscalyear_id = context.get('fiscalyear_id')
+                if not fiscalyear_id:
+                    raise orm.except_orm(_('Error!'),
+                                         _('The system tried to access '
+                                           'a fiscal year sequence '
+                                           'without specifying the actual '
+                                           'fiscal year.'))
+                # search for existing fiscal year sequence
+                # here we behave exactly like addons/account/ir_sequence.py
+                for line in seq.fiscal_ids:
+                    if line.fiscalyear_id.id == fiscalyear_id:
+                        return super(Sequence, self)\
+                            ._next(cr, uid, [line.sequence_id.id], context)
+                # no fiscal year sequence found, auto create it
+                if len(seq_ids) != 1:
+                    # Where fiscal year sequences are used, we
+                    # should always have one and only one sequence
+                    # (which is the one associated to the journal).
+                    # If this is not the case we'll need to investigate
+                    # why, but we prefer to abort here instead of
+                    # doing something potentially harmful.
+                    raise orm.except_orm(_('Error!'),
+                                         _('The system tried to access '
+                                           'a fiscal year sequence '
+                                           'but there is more than one '
+                                           'sequence to choose from.'))
+                fiscalyear = self.pool['account.fiscalyear']\
+                    .browse(cr, uid, fiscalyear_id, context=context)
+                fy_seq_id = self\
+                    ._create_fy_sequence(cr, uid, seq, fiscalyear, context)
+                return super(Sequence, self)\
+                    ._next(cr, uid, [fy_seq_id], context)
         return super(Sequence, self)._next(cr, uid, seq_ids, context)
