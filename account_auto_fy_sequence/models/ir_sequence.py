@@ -32,6 +32,30 @@ FY_SLOT = '%(fy)s'
 class Sequence(orm.Model):
     _inherit = 'ir.sequence'
 
+    def _create_fy_sequence(self, cr, uid, seq, fiscalyear, context=None):
+        """ Create a FY sequence by cloning a sequence
+        which has %(fy)s in prefix or suffix """
+        fy_seq_id = self.create(cr, uid, {
+            'name': seq.name + ' - ' + fiscalyear.code,
+            'code': seq.code,
+            'implementation': seq.implementation,
+            'prefix': (seq.prefix and
+                       seq.prefix.replace(FY_SLOT, fiscalyear.code)),
+            'suffix': (seq.suffix and
+                       seq.suffix.replace(FY_SLOT, fiscalyear.code)),
+            'number_next': 1,
+            'number_increment': seq.number_increment,
+            'padding': seq.padding,
+            'company_id': seq.company_id.id,
+        }, context=context)
+        self.pool['account.sequence.fiscalyear']\
+            .create(cr, uid, {
+                'sequence_id': fy_seq_id,
+                'sequence_main_id': seq.id,
+                'fiscalyear_id': fiscalyear.id,
+            }, context=context)
+        return fy_seq_id
+
     def _next(self, cr, uid, seq_ids, context=None):
         if context is None:
             context = {}
@@ -46,6 +70,7 @@ class Sequence(orm.Model):
                                        'a fiscal year sequence '
                                        'without specifying the actual '
                                        'fiscal year.'))
+            # search for existing fiscal year sequence
             for line in seq.fiscal_ids:
                 if line.fiscalyear_id.id == fiscalyear_id:
                     return super(Sequence, self)\
@@ -53,25 +78,8 @@ class Sequence(orm.Model):
             # no fiscal year sequence found, auto create it
             fiscalyear = self.pool['account.fiscalyear']\
                 .browse(cr, uid, fiscalyear_id, context=context)
-            fy_seq_id = self.create(cr, uid, {
-                'name': seq.name + ' - ' + fiscalyear.code,
-                'code': seq.code,
-                'implementation': seq.implementation,
-                'prefix': (seq.prefix and
-                           seq.prefix.replace(FY_SLOT, fiscalyear.code)),
-                'suffix': (seq.suffix and
-                           seq.suffix.replace(FY_SLOT, fiscalyear.code)),
-                'number_next': 1,
-                'number_increment': seq.number_increment,
-                'padding': seq.padding,
-                'company_id': seq.company_id.id,
-            }, context=context)
-            self.pool['account.sequence.fiscalyear']\
-                .create(cr, uid, {
-                    'sequence_id': fy_seq_id,
-                    'sequence_main_id': seq.id,
-                    'fiscalyear_id': fiscalyear_id,
-                }, context=context)
+            fy_seq_id = self._create_fy_sequence(cr, uid, seq,
+                                                 fiscalyear, context)
             return super(Sequence, self)\
                 ._next(cr, uid, [fy_seq_id], context)
         return super(Sequence, self)._next(cr, uid, seq_ids, context)
