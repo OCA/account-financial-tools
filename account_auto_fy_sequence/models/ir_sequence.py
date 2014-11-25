@@ -27,6 +27,7 @@ from openerp.osv import orm
 from openerp.tools.translate import _
 
 FY_SLOT = '%(fy)s'
+YEAR_SLOT = '%(year)s'
 
 
 class Sequence(orm.Model):
@@ -95,3 +96,31 @@ class Sequence(orm.Model):
                 return super(Sequence, self)\
                     ._next(cr, uid, [fy_seq_id], context)
         return super(Sequence, self)._next(cr, uid, seq_ids, context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        new_prefix = vals.get('prefix')
+        new_suffix = vals.get('suffix')
+        if (new_prefix and FY_SLOT in new_prefix) or \
+                (new_suffix and FY_SLOT in new_suffix):
+            for seq in self.browse(cr, uid, ids, context=context):
+                if (seq.prefix and
+                    YEAR_SLOT in seq.prefix and
+                    new_prefix and
+                    FY_SLOT in new_prefix) or \
+                        (seq.suffix and
+                         YEAR_SLOT in seq.suffix and
+                         new_suffix and
+                         FY_SLOT in new_suffix):
+                    if seq.number_next > 1 or vals.get('number_next', 1) > 1:
+                        # we are converting from %(year)s to %(fy)s
+                        # and the next number is > 1; this means the
+                        # sequence has already been used.
+                        raise orm.except_orm(_('Error!'),
+                                             _('You cannot change from '
+                                               '%s to %s '
+                                               'for a sequence with '
+                                               'next number > 1' %
+                                               (YEAR_SLOT, FY_SLOT)))
+        return super(Sequence, self).write(cr, uid, ids, vals, context=context)

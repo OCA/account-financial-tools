@@ -40,6 +40,8 @@
     already been used for the current fiscal year, make sure to manually
     create the fiscal year sequence for the current fiscal year and
     initialize it's next number to the correct value.
+    For this reason, the module will forbid the user to change
+    a sequence from %(year)s to %(fy)s if it's next number is > 1.
     """,
     'author': 'ACSONE SA/NV',
     'website': 'http://acsone.eu',
