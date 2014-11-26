@@ -55,5 +55,3 @@ class AccountMove(models.Model):
                              'SET state=%s '
                              'WHERE id IN %s', ('draft', tuple(self.ids)))
         return True
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
