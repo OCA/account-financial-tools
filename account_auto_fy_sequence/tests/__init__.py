@@ -24,7 +24,3 @@
 ##############################################################################
 
 from . import test_auto_fy_sequence
-
-checks = [
-    test_auto_fy_sequence,
-]
