@@ -19,10 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-"""
-Account Chart Update Wizard
-"""
-
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import logging
@@ -255,7 +251,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
         if context is None:
             context = {}
         property_obj = self.pool.get('ir.property')
-        account_obj = self.pool.get('account.account')
         if not company_id:
             user = self.pool.get('res.users').browse(cr, uid, uid, context)
             company_id = user.company_id.id
@@ -265,6 +260,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             ('res_id', '=', False),
             ('value_reference', '!=', False)
         ])
+        number_digits = 6
         if not property_ids:
             # Try to get a generic (no-company) property
             property_ids = property_obj.search(cr, uid, [
@@ -272,15 +268,13 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 ('res_id', '=', False),
                 ('value_reference', '!=', False)
             ])
-            number_digits = 6
         if property_ids:
             prop = property_obj.browse(
                 cr, uid, property_ids[0], context=context)
-            account_id = prop.value_reference.id
-            if account_id:
-                code = account_obj.read(
-                    cr, uid, account_id, ['code'], context)['code']
-                number_digits = len(code)
+            account = property_obj.get_by_record(cr, uid, prop,
+                                                 context=context)
+            if account:
+                number_digits = len(account.code)
         return number_digits
 
     _defaults = {
@@ -464,6 +458,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     'notes': _('Name or code not found.'),
                 }, context)
             elif wizard.update_tax_code:
+                # Check the tax code for changes.
                 modified = False
                 notes = ""
                 tax_code = tax_code_obj.browse(
@@ -479,6 +474,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     modified = True
                 # TODO: We could check other account fields for changes...
                 if modified:
+                    # Tax code to update.
                     updated_tax_codes += 1
                     wiz_tax_code_obj.create(cr, uid, {
                         'tax_code_id': tax_code_template.id,
@@ -533,6 +529,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 else:
                     delay_wiz_tax.append(vals_wiz)
             elif wizard.update_tax:
+                # Check the tax for changes.
                 modified = False
                 notes = ""
                 tax = tax_obj.browse(cr, uid, tax_id, context=context)
