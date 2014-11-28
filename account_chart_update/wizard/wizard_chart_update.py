@@ -280,12 +280,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
         if property_ids:
             prop = property_obj.browse(
                 cr, uid, property_ids[0], context=context)
-            account_id = len(prop.value_reference.split(',')) == 2 and\
-                int(prop.value_reference.split(',')[1]) or False
-            if account_id:
-                code = account_obj.read(
-                    cr, uid, account_id, ['code'], context)['code']
-                number_digits = len(code)
+            account = property_obj.get_by_record(cr, uid, prop,
+                                                 context=context)
+            if account:
+                number_digits = len(account.code)
         return number_digits
 
     _defaults = {
