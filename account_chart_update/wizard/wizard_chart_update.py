@@ -269,6 +269,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             ('res_id', '=', False),
             ('value_reference', '!=', False)
         ])
+        number_digits = 6
         if not property_ids:
             # Try to get a generic (no-company) property
             property_ids = property_obj.search(cr, uid, [
@@ -276,7 +277,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 ('res_id', '=', False),
                 ('value_reference', '!=', False)
             ])
-            number_digits = 6
         if property_ids:
             prop = property_obj.browse(
                 cr, uid, property_ids[0], context=context)
