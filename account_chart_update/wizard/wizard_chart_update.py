@@ -251,7 +251,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
         if context is None:
             context = {}
         property_obj = self.pool.get('ir.property')
-        account_obj = self.pool.get('account.account')
         if not company_id:
             user = self.pool.get('res.users').browse(cr, uid, uid, context)
             company_id = user.company_id.id
