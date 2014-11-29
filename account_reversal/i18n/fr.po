@@ -88,7 +88,7 @@ msgstr "Créer des pièces comptables d'extourne"
 #: code:addons/account_reversal/wizard/account_move_reverse.py:108
 #, python-format
 msgid "Reversal Entries"
-msgstr "Extournes de pièces comptables"
+msgstr "Pièces comptables d'extourne"
 
 #. module: account_reversal
 #: view:account.move.reverse:0
@@ -98,7 +98,7 @@ msgstr "Créer des pièces comptables d'extourne"
 #. module: account_reversal
 #: field:account.move,reversal_id:0
 msgid "Reversal Entry"
-msgstr "Extourne de pièce comptable"
+msgstr "Pièce comptable d'extourne"
 
 #. module: account_reversal
 #: help:account.move.reverse,date:0
