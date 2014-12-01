@@ -17,3 +17,4 @@ Contributors
  * Alexis de Lattre (Akretion)
  * Guewen Baconnier (Camptocamp)
  * Nicolas Bessi (Camptocamp)
+ * Torvald Bringsvor (Bringsvor Consulting)
