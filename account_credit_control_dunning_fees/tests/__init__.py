@@ -18,19 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-
-
-class credit_control_policy(orm.Model):
-    """ADD dunning fees fields"""
-
-    _inherit = "credit.control.policy.level"
-    _columns = {'dunning_product_id': fields.many2one('product.product',
-                                                      'Fees Product'),
-                'dunning_fixed_amount': fields.float('Fees Fixed Amount'),
-                'dunning_currency_id': fields.many2one('res.currency',
-                                                       'Fees currency'),
-                # planned type are fixed, percent, compound
-                'dunning_fees_type': fields.selection([('fixed', 'Fixed')])}
-
-    _defaults = {'dunning_fees_type': 'fixed'}
+from . import test_fees_generation

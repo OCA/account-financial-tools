@@ -18,12 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields
 
 
-class credit_control_line(orm.Model):
+class CreditControlLine(models.Model):
     """Add dunning_fees_amount_fees field"""
 
     _inherit = "credit.control.line"
 
-    _columns = {'dunning_fees_amount': fields.float('Fees')}
+    dunning_fees_amount = fields.Float(string='Fees')

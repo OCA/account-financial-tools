@@ -18,22 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+from openerp import models, fields
 
 
-class credit_control_run(orm.Model):
-    """Add computation of fees"""
+class CreditControlPolicy(models.Model):
+    """ADD dunning fees fields"""
 
-    _inherit = "credit.control.run"
+    _inherit = "credit.control.policy.level"
 
-    def _generate_credit_lines(self, cr, uid, run_id, context=None):
-        """Override method to add fees computation"""
-        credit_line_ids = super(credit_control_run,
-                                self)._generate_credit_lines(
-                                    cr,
-                                    uid,
-                                    run_id,
-                                    context=context)
-        fees_model = self.pool['credit.control.dunning.fees.computer']
-        fees_model._compute_fees(cr, uid, credit_line_ids, context=context)
-        return credit_line_ids
+    dunning_product_id = fields.Many2one('product.product',
+                                         string='Fees Product')
+
+    dunning_fixed_amount = fields.Float(string='Fees Fixed Amount')
+
+    dunning_currency_id = fields.Many2one('res.currency',
+                                          string='Fees currency')
+
+    # planned type are fixed, percent, compound
+    dunning_fees_type = fields.Selection([('fixed', 'Fixed')],
+                                         string='Type',
+                                         default='fixed')

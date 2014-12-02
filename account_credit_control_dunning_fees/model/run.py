@@ -18,6 +18,19 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import test_fees_generation
+from openerp import models, api
 
-checks = [test_fees_generation]
+
+class CreditControlRun(models.Model):
+    """Add computation of fees"""
+
+    _inherit = "credit.control.run"
+
+    @api.multi
+    @api.returns('credit.control.line')
+    def _generate_credit_lines(self):
+        """Override method to add fees computation"""
+        credit_lines = super(CreditControlRun, self)._generate_credit_lines()
+        fees_model = self.env['credit.control.dunning.fees.computer']
+        fees_model._compute_fees(credit_lines)
+        return credit_lines
