@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="credit_control_policy_changer_form" model="ir.ui.view">
+      <field name="name">credit control policy form</field>
+      <field name="model">credit.control.policy.changer</field>
+      <field name="arch" type="xml">
+        <form version="7.0" string="Set current credit level">
+          <separator string="Change the overdue level of current invoice" colspan="4"/>
+          <label string="This wizard will let you set the overdue policy and level for selected invoices"/>
+          <newline/>
+         <group>
+           <group>
+             <field name="new_policy_id"/>
+             <field name="do_nothing"
+                    invisible="1"/>
+             <field name="new_policy_level_id"
+                    domain="[('policy_id', '=', new_policy_id)]"/>
+           </group>
+           <group></group>
+         </group>
+          <notebook colspan="4">
+            <page string="Move lines to affect">
+              <field name="move_line_ids"/>
+            </page>
+          </notebook>
+        <footer>
+            <button class="oe_highlight"
+                    name="set_new_policy"
+                    string="Set new policy"
+                    type="object"/>
+            or
+            <button class="oe_link"
+                    special="cancel"
+                    string="Cancel"/>
+        </footer>
+        </form>
+
+      </field>
+    </record>
+
+    <!-- for button -->
+    <record id="action_wizard_credit_policy_changer" model="ir.actions.act_window">
+      <field name="name">Change current credit policy</field>
+      <field name="res_model">credit.control.policy.changer</field>
+      <field name="src_model">account.invoice</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_control_policy_changer_form"/>
+      <field name="target">new</field>
+      <field name="help">Allows to manually change credit level</field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Change current credit policy"
+                res_model="credit.control.policy.changer"
+                src_model="account.invoice"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="action_wizard_credit_policy_changer_menu_action"/>
+
+  </data>
+</openerp>
