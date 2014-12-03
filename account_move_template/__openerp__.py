@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': "Account Move Template",
-    'version': '0.1',
+    'version': '1.0',
     'category': 'Generic Modules/Accounting',
     'summary': "Templates for recurring Journal Entries",
     'author': 'Agile Business Group',
