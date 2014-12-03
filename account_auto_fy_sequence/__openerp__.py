@@ -42,6 +42,9 @@
     initialize it's next number to the correct value.
     For this reason, the module will forbid the user to change
     a sequence from %(year)s to %(fy)s if it's next number is > 1.
+
+    The module also replaces %(year)s by %(fy)s in the default prefix
+    for new journals, assuming it is a safer default.
     """,
     'author': 'ACSONE SA/NV',
     'website': 'http://acsone.eu',
