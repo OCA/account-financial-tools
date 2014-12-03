@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2011 Agile Business Group sagl (<http://www.agilebg.com>)
+#    Copyright (C) 2011 - 2014 Agile Business Group sagl
+#    (<http://www.agilebg.com>)
 #    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
