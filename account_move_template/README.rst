@@ -1,10 +1,7 @@
-Account Move Template
-=====================
+Account Move Template - Templates for Journal Entries
+=====================================================
 
-Templates for Journal Entries
-
-User can configure journal entries templates, useful for recurring entries.
-
+The user can configure journal entries templates, useful for recurring entries.
 The amount of each template line can be computed (through python code)
 or kept as user input.
 
@@ -14,3 +11,18 @@ the amount of every input lines.
 The journal entry form allows lo load, through a wizard,
 the template to use and the amounts to fill.
 
+Credits
+-------
+
+Authors:
+~~~~~~~
+
+* Davide Corio <davide.corio@agilebg.com>
+* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+* Paolo Chiara <p.chiara@isa.it>
+* Franco Tampieri <franco.tampieri@agilebg.com>
+
+Contributors:
+~~~~~~~~~~~~~
+
+* Alex Comba <alex.comba@agilebg.com> (Port to V8)
