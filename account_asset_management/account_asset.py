@@ -222,6 +222,10 @@ class account_asset_asset(orm.Model):
 
     def unlink(self, cr, uid, ids, context=None):
         for asset in self.browse(cr, uid, ids, context=context):
+            if asset.state != 'draft':
+                raise orm.except_orm(
+                    _('Invalid action!'),
+                    _("You can only delete assets in draft state."))
             if asset.account_move_line_ids:
                 raise orm.except_orm(
                     _('Error!'),
@@ -405,12 +409,19 @@ class account_asset_asset(orm.Model):
     def _compute_depreciation_table(self, cr, uid, asset, context=None):
         if not context:
             context = {}
+
+        table = []
+        if not asset.method_number:
+            return table
+
         context['company_id'] = asset.company_id.id
         fy_obj = self.pool.get('account.fiscalyear')
         init_flag = False
         try:
             fy_id = fy_obj.find(cr, uid, asset.date_start, context=context)
             fy = fy_obj.browse(cr, uid, fy_id)
+            if fy.state == 'done':
+                init_flag = True
             fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
             fy_date_stop = datetime.strptime(fy.date_stop, '%Y-%m-%d')
         except:
@@ -453,7 +464,6 @@ class account_asset_asset(orm.Model):
         depreciation_stop_date = self._get_depreciation_stop_date(
             cr, uid, asset, depreciation_start_date, context=context)
 
-        table = []
         while fy_date_start <= depreciation_stop_date:
             table.append({
                 'fy_id': fy_id,
@@ -468,6 +478,8 @@ class account_asset_asset(orm.Model):
                 fy_id = False
             if fy_id:
                 fy = fy_obj.browse(cr, uid, fy_id)
+                if fy.state == 'done':
+                    init_flag = True
                 fy_date_stop = datetime.strptime(fy.date_stop, '%Y-%m-%d')
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
@@ -613,6 +625,8 @@ class account_asset_asset(orm.Model):
 
             table = self._compute_depreciation_table(
                 cr, uid, asset, context=context)
+            if not table:
+                continue
 
             # group lines prior to depreciation start period
             depreciation_start_date = datetime.strptime(
@@ -730,8 +744,7 @@ class account_asset_asset(orm.Model):
                         residual_amount -= line['amount']
                         line['remaining_value'] = residual_amount
                     lines[-1]['depreciated_value'] = depreciated_value
-                    lines[-1]['amount'] = entry['fy_amount'] - \
-                        fy_amount_check - amount_diff
+                    lines[-1]['amount'] = entry['fy_amount'] - fy_amount_check
 
             else:
                 table_i_start = 0
@@ -739,14 +752,28 @@ class account_asset_asset(orm.Model):
 
             seq = len(posted_depreciation_line_ids)
             depr_line_id = last_depreciation_line and last_depreciation_line.id
+            last_date = table[-1]['lines'][-1]['date']
             for entry in table[table_i_start:]:
                 for line in entry['lines'][line_i_start:]:
                     seq += 1
                     name = self._get_depreciation_entry_name(
                         cr, uid, asset, seq, context=context)
+                    if line['date'] == last_date:
+                        # ensure that the last entry of the table always
+                        # depreciates the remaining value
+                        cr.execute(
+                            "SELECT COALESCE(SUM(amount), 0.0) "
+                            "FROM account_asset_depreciation_line "
+                            "WHERE type = 'depreciate' AND line_date < %s "
+                            "AND asset_id = %s ",
+                            (last_date, asset.id))
+                        res = cr.fetchone()
+                        amount = asset.asset_value - res[0]
+                    else:
+                        amount = line['amount']
                     vals = {
                         'previous_id': depr_line_id,
-                        'amount': line['amount'],
+                        'amount': amount,
                         'asset_id': asset.id,
                         'name': name,
                         'line_date': line['date'].strftime('%Y-%m-%d'),
@@ -896,6 +923,13 @@ class account_asset_asset(orm.Model):
         salvage_value = salvage_value or 0.0
         if purchase_value or salvage_value:
             val['asset_value'] = purchase_value - salvage_value
+        if ids:
+            aadl_obj = self.pool.get('account.asset.depreciation.line')
+            dl_create_ids = aadl_obj.search(
+                cr, uid, [('type', '=', 'create'), ('asset_id', 'in', ids)])
+            aadl_obj.write(
+                cr, uid, dl_create_ids,
+                {'amount': val['asset_value'], 'line_date': date_start})
         return {'value': val}
 
     def _get_assets(self, cr, uid, ids, context=None):
@@ -977,7 +1011,8 @@ class account_asset_asset(orm.Model):
                         'parent_id', 'depreciation_line_ids'
                     ], 20),
                 'account.asset.depreciation.line': (
-                    _get_assets_from_dl, ['amount', 'init', 'move_id'], 20),
+                    _get_assets_from_dl,
+                    ['amount', 'init_entry', 'move_id'], 20),
             }),
         'value_depreciated': fields.function(
             _depreciated, method=True,
@@ -990,7 +1025,8 @@ class account_asset_asset(orm.Model):
                         'parent_id', 'depreciation_line_ids'
                     ], 30),
                 'account.asset.depreciation.line': (
-                    _get_assets_from_dl, ['amount', 'init', 'move_id'], 30),
+                    _get_assets_from_dl,
+                    ['amount', 'init_entry', 'move_id'], 30),
             }),
         'salvage_value': fields.float(
             'Salvage Value', digits_compute=dp.get_precision('Account'),
@@ -1546,6 +1582,46 @@ class account_asset_depreciation_line(orm.Model):
         return super(account_asset_depreciation_line, self).write(
             cr, uid, ids, vals, context)
 
+    def _setup_move_data(self, depreciation_line, depreciation_date,
+                         period_ids, context):
+        asset = depreciation_line.asset_id
+        move_data = {
+            'name': asset.name,
+            'date': depreciation_date,
+            'ref': depreciation_line.name,
+            'period_id': period_ids,
+            'journal_id': asset.category_id.journal_id.id,
+        }
+        return move_data
+
+    def _setup_move_line_data(self, depreciation_line, depreciation_date,
+                              period_ids, account_id, type, move_id, context):
+        asset = depreciation_line.asset_id
+        amount = depreciation_line.amount
+        analytic_id = False
+        if type == 'depreciation':
+            debit = amount < 0 and -amount or 0.0
+            credit = amount > 0 and amount or 0.0
+        elif type == 'expense':
+            debit = amount > 0 and amount or 0.0
+            credit = amount < 0 and -amount or 0.0
+            analytic_id = asset.category_id.account_analytic_id.id
+        move_line_data = {
+            'name': asset.name,
+            'ref': depreciation_line.name,
+            'move_id': move_id,
+            'account_id': account_id,
+            'credit': credit,
+            'debit': debit,
+            'period_id': period_ids,
+            'journal_id': asset.category_id.journal_id.id,
+            'partner_id': asset.partner_id.id,
+            'analytic_account_id': analytic_id,
+            'date': depreciation_date,
+            'asset_id': asset.id,
+        }
+        return move_line_data
+
     def create_move(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
@@ -1567,48 +1643,19 @@ class account_asset_depreciation_line(orm.Model):
             ctx = dict(context, account_period_prefer_normal=True)
             period_ids = period_obj.find(
                 cr, uid, depreciation_date, context=ctx)
-            asset_name = asset.name
-            reference = line.name
-            journal_id = asset.category_id.journal_id.id
-            move_vals = {
-                'name': asset_name,
-                'date': depreciation_date,
-                'ref': reference,
-                'period_id': period_ids and period_ids[0] or False,
-                'journal_id': journal_id,
-                }
-            move_id = move_obj.create(cr, uid, move_vals, context=context)
-            partner_id = asset.partner_id.id
+            period_id = period_ids and period_ids[0] or False
+            move_id = move_obj.create(cr, uid, self._setup_move_data(
+                line, depreciation_date, period_id, context),
+                context=context)
             depr_acc_id = asset.category_id.account_depreciation_id.id
             exp_acc_id = asset.category_id.account_expense_depreciation_id.id
-            move_line_obj.create(cr, uid, {
-                'name': asset_name,
-                'ref': reference,
-                'move_id': move_id,
-                'account_id': depr_acc_id,
-                'debit': line.amount < 0 and -line.amount or 0.0,
-                'credit': line.amount > 0 and line.amount or 0.0,
-                'period_id': period_ids and period_ids[0] or False,
-                'journal_id': journal_id,
-                'partner_id': partner_id,
-                'date': depreciation_date,
-                'asset_id': asset.id
-                }, context={'allow_asset': True})
-            move_line_obj.create(cr, uid, {
-                'name': asset_name,
-                'ref': reference,
-                'move_id': move_id,
-                'account_id': exp_acc_id,
-                'credit': line.amount < 0 and -line.amount or 0.0,
-                'debit': line.amount > 0 and line.amount or 0.0,
-                'period_id': period_ids and period_ids[0] or False,
-                'journal_id': journal_id,
-                'partner_id': partner_id,
-                'analytic_account_id':
-                    asset.category_id.account_analytic_id.id,
-                'date': depreciation_date,
-                'asset_id': asset.id
-                }, context={'allow_asset': True})
+            ctx = dict(context, allow_asset=True)
+            move_line_obj.create(cr, uid, self._setup_move_line_data(
+                line, depreciation_date, period_id, depr_acc_id,
+                'depreciation', move_id, context), ctx)
+            move_line_obj.create(cr, uid, self._setup_move_line_data(
+                line, depreciation_date, period_id, exp_acc_id, 'expense',
+                move_id, context), ctx)
             self.write(
                 cr, uid, line.id, {'move_id': move_id},
                 context={'allow_asset_line_update': True})
@@ -1620,6 +1667,8 @@ class account_asset_depreciation_line(orm.Model):
             if currency_obj.is_zero(cr, uid, asset.company_id.currency_id,
                                     asset.value_residual):
                 asset.write({'state': 'close'})
+            if len(ids) == 1 and context.get('create_move_from_button'):
+                return self.reload_page(cr, uid, asset.id, context)
         return created_move_ids
 
     def open_move(self, cr, uid, ids, context=None):

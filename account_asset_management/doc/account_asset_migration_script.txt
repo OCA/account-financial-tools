@@ -153,14 +153,16 @@ Start openerp
 
 Uninstall module account_asset
 
+Stop openerp
+
 ALTER TABLE account_asset_asset_save RENAME TO account_asset_asset;
 ALTER TABLE account_asset_category_save RENAME TO account_asset_category;
 ALTER TABLE account_asset_depreciation_line_save RENAME TO account_asset_depreciation_line;
 ALTER TABLE account_asset_history_save RENAME TO account_asset_history;
 
-Install account_asset_management
-
 Start openerp
+
+Install account_asset_management
 
 7) add init entries
 -------------------
@@ -294,7 +296,6 @@ UPDATE account_asset_asset SET parent_id = 1026 WHERE type='normal' AND parent_i
 
 12) update account_move_line
 ----------------------------
-
 /*
 plpgsql script to set asset_id on depreciation account move lines
 Author : noviat (www.noviat.com)
@@ -310,10 +311,43 @@ BEGIN
     FOR _aadl IN (SELECT * FROM account_asset_depreciation_line WHERE asset_id = _asset.id AND type='depreciate' ORDER BY line_date) LOOP
       IF _aadl.move_id IS NOT NULL THEN
           FOR _aml IN (SELECT * FROM account_move_line WHERE move_id = _aadl.move_id AND asset_id IS NULL) LOOP
-            RAISE INFO 'Updating aml_id = %s', _aml.id;
+            RAISE INFO 'Updating aml_id = %', _aml.id;
             UPDATE account_move_line SET asset_id = _asset.id WHERE id = _aml.id;
           END LOOP;         
       END IF;
     END LOOP;
   END LOOP;
 END $$
+
+13) rename depreciation line names
+----------------------------------
+
+The default naming policy for depreciation line entries and associated account_move entries has changes from "asset.id/x" to "asset.code/x".
+As an optional step, you may choose to rename these entries.
+
+/*
+plpgsql script to rename init entries
+Author : noviat (www.noviat.com)
+*/
+DO $$
+DECLARE
+  _asset account_asset_asset%ROWTYPE;
+  _aadl account_asset_depreciation_line%ROWTYPE;
+BEGIN
+  FOR _asset IN (SELECT * FROM account_asset_asset ORDER BY id ASC) LOOP
+    IF _asset.type = 'normal' THEN
+      RAISE INFO 'processing depreciation init entry for asset_id = % (%)', _asset.id, _asset.code;
+      FOR _aadl IN (SELECT * FROM account_asset_depreciation_line WHERE asset_id = _asset.id AND type='create') LOOP
+        IF (_asset.code is NOT NULL) THEN
+          RAISE INFO 'Updating aadl %', _aadl.name;
+          UPDATE account_asset_depreciation_line SET name = _asset.code || '/0' WHERE id = _aadl.id;
+        END IF;
+      END LOOP;
+    END IF;
+  END LOOP;
+END $$;
+
+14) recompute & verify entries
+------------------------------
+Navigate through the asset table, recompute the table (required to recompute the stored functional fields) and check the results.
+Use and ORM script for large tables.

@@ -29,8 +29,8 @@ _logger = logging.getLogger(__name__)
 class account_invoice(orm.Model):
     _inherit = 'account.invoice'
 
-    def action_number(self, cr, uid, ids, *args):
-        super(account_invoice, self).action_number(cr, uid, ids, *args)
+    def action_number(self, cr, uid, ids, context=None):
+        super(account_invoice, self).action_number(cr, uid, ids, context)
         asset_obj = self.pool.get('account.asset.asset')
         asset_line_obj = self.pool.get('account.asset.depreciation.line')
         for inv in self.browse(cr, uid, ids):
