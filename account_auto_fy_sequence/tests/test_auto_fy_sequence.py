@@ -67,3 +67,13 @@ class TestAutoFYSequence(common.TransactionCase):
         self.assertEqual(n, "SEQ/%s/1" % fiscalyear.code)
         n = self.seq_obj._next(self.cr, self.uid, [seq_id], context)
         self.assertEqual(n, "SEQ/%s/2" % fiscalyear.code)
+
+    def test_3(self):
+        """ Create journal and check the sequence attached to the journal """
+        aj_obj = self.registry('account.journal')
+        aj_id = aj_obj.create(self.cr, self.uid, {'name': 'sequence (test)',
+                                                  'code': 'SQT',
+                                                  'type': 'bank',
+                                                  })
+        aj = aj_obj.browse(self.cr, self.uid, aj_id)
+        self.assertEqual(aj.sequence_id.prefix, 'SQT/%(fy)s/')
