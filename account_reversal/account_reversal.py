@@ -65,8 +65,17 @@ class account_move(models.Model):
         if not reversal_journal_id:
             reversal_journal_id = self.journal_id.id
 
+        if self.env['account.journal'].browse([
+                reversal_journal_id]).company_id != self.company_id:
+            raise Warning('Wrong company Journal is %s but we have %s' % (
+                reversal_journal_id.company_id.name, self.company_id.name))
+        if reversal_period_id.company_id != self.company_id:
+            raise Warning('Wrong company Period is %s but we have %s' % (
+                reversal_journal_id.company_id.name, self.company_id.name))
+
         reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
         reversal_move = self.copy(default={
+            'company_id': self.company_id.id,
             'date': reversal_date,
             'period_id': reversal_period_id.id,
             'ref': reversal_ref,
