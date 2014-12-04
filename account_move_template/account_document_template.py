@@ -20,52 +20,48 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp import models, fields, api
 from openerp.tools.translate import _
+from openerp import exceptions
 import re
 
 
-class AccountDocumentTemplate(orm.Model):
-
-    _computed_lines = {}
-    _current_template_id = 0
-    _cr = None
-    _uid = None
+class AccountDocumentTemplate(models.Model):
     _name = 'account.document.template'
 
-    _columns = {
-        'name': fields.char('Name', size=64, required=True),
-    }
+    name = fields.Char(required=True)
 
-    def _input_lines(self, cr, uid, template):
+    @api.model
+    def _input_lines(self, template):
         count = 0
         for line in template.template_line_ids:
             if line.type == 'input':
                 count += 1
         return count
 
-    def _get_template_line(self, cr, uid, template_id, line_number):
-        for line in self.browse(cr, uid, template_id).template_line_ids:
+    @api.model
+    def _get_template_line(self, template_id, line_number):
+        template = self.browse(template_id)
+        for line in template.template_line_ids:
             if line.sequence == line_number:
                 return line
         return False
 
-    def _generate_empty_lines(self, cr, uid, template_id):
+    @api.model
+    def _generate_empty_lines(self, template_id):
         lines = {}
-        t_lines = self.browse(cr, uid, template_id).template_line_ids
-        for template_line in t_lines:
-            lines[template_line.sequence] = None
+        template = self.browse(template_id)
+        for line in template.template_line_ids:
+            lines[line.sequence] = None
         return lines
 
+    @api.model
     def lines(self, line_number):
         if self._computed_lines[line_number] is not None:
             return self._computed_lines[line_number]
-        line = self._get_template_line(self._cr,
-                                       self._uid,
-                                       self._current_template_id,
-                                       line_number)
+        line = self._get_template_line(self._current_template_id, line_number)
         if re.match(r'L\( *' + str(line_number) + r' *\)', line.python_code):
-            raise orm.except_orm(
+            raise exceptions.Warning(
                 _('Error'),
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
@@ -74,32 +70,32 @@ class AccountDocumentTemplate(orm.Model):
                 line.python_code.replace('L', 'self.lines')
             )
         except KeyError:
-            raise orm.except_orm(
+            raise exceptions.Warning(
                 _('Error'),
                 _('Code "%s" refers to non existing line') % line.python_code)
         return self._computed_lines[line_number]
 
-    def compute_lines(self, cr, uid, template_id, input_lines):
+    @api.model
+    def compute_lines(self, template_id, input_lines):
         # input_lines: dictionary in the form {line_number: line_amount}
         # returns all the lines (included input lines)
         # in the form {line_number: line_amount}
-        template = self.browse(cr, uid, template_id)
-        if len(input_lines) != self._input_lines(cr, uid, template):
-            raise orm.except_orm(
+        template = self.browse(template_id)
+        if len(input_lines) != self._input_lines(template):
+            raise exceptions.Warning(
                 _('Error'),
                 _('Inconsistency between input lines and '
                   'filled lines for template %s') % template.name
             )
         self._current_template_id = template.id
-        self._cr = cr
-        self._uid = uid
-        self._computed_lines = self._generate_empty_lines(cr, uid, template_id)
+        self._computed_lines = self._generate_empty_lines(template_id)
         self._computed_lines.update(input_lines)
         for line_number in self._computed_lines:
             self.lines(line_number)
         return self._computed_lines
 
-    def check_zero_lines(self, cr, uid, wizard):
+    @api.model
+    def check_zero_lines(self, wizard):
         if not wizard.line_ids:
             return True
         for template_line in wizard.line_ids:
@@ -108,17 +104,14 @@ class AccountDocumentTemplate(orm.Model):
         return False
 
 
-class AccountDocumentTemplateLine(orm.Model):
-
+class AccountDocumentTemplateLine(models.Model):
     _name = 'account.document.template.line'
 
-    _columns = {
-        'name': fields.char('Name', size=64, required=True),
-        'sequence': fields.integer('Sequence', required=True),
-        'type': fields.selection(
-            [('computed', 'Computed'), ('input', 'User input')],
-            'Type',
-            required=True
-        ),
-        'python_code': fields.text('Python Code'),
-    }
+    name = fields.Char(required=True)
+    sequence = fields.Integer(string='Sequence', required=True)
+    type = fields.Selection(
+        [('computed', 'Computed'), ('input', 'User input')],
+        string='Type',
+        required=True
+    )
+    python_code = fields.Text(string='Python Code')
