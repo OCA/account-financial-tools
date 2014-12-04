@@ -20,99 +20,96 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp.osv import fields, orm, api
+from openerp.exceptions import ValidationError
 
 
 class AccountMoveTemplate(orm.Model):
-
-    _inherit = 'account.document.template'
     _name = 'account.move.template'
+    _inherit = 'account.document.template'
 
-    _columns = {
-        'company_id': fields.many2one(
-            'res.company',
-            'Company',
-            required=True,
-            change_default=True
-        ),
-        'template_line_ids': fields.one2many(
-            'account.move.template.line',
-            'template_id',
-            'Template Lines'
-        ),
-        'cross_journals': fields.boolean('Cross-Journals'),
-        'transitory_acc_id': fields.many2one(
-            'account.account',
-            'Transitory account',
-            required=False
-        ),
-    }
-
-    def _get_default(self, cr, uid, context=None):
-        self.pool.get('res.company')._company_default_get(
-            cr, uid, 'account.move.template', context=context
+    @api.model
+    def _company_get(self):
+        return self.env['res.company']._company_default_get(
+            object='account.move.template'
         )
-    _defaults = {
-        'company_id': _get_default
-    }
 
-    def _check_different_journal(self, cr, uid, ids, context=None):
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+        required=True,
+        change_default=True,
+        default=_company_get,
+    )
+    template_line_ids = fields.One2many(
+        comodel_name='account.move.template.line',
+        inverse_name='template_id',
+        string='Template Lines'
+    )
+    cross_journals = fields.Boolean(string='Cross-Journals')
+    transitory_acc_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Transitory account',
+        required=False
+    )
+
+    @api.constrains('journal_id')
+    def _check_different_journal(self):
         # Check that the journal on these lines are different/same in the case
         # of cross journals/single journal
         journal_ids = []
         all_journal_ids = []
-        move_template = self.pool.get('account.move.template').browse(
-            cr, uid, ids)[0]
-        if not move_template.template_line_ids:
-            return True
-        for template_line in move_template.template_line_ids:
-            all_journal_ids.append(template_line.journal_id.id)
-            if template_line.journal_id.id not in journal_ids:
-                journal_ids.append(template_line.journal_id.id)
-        if move_template.cross_journals:
-            return len(all_journal_ids) == len(journal_ids)
-        else:
-            return len(journal_ids) == 1
-
-    _constraints = [
-        (_check_different_journal,
-         'If the template is "cross-journals", the Journals must be different,'
-         'if the template does not "cross-journals" '
-         'the Journals must be the same!',
-         ['journal_id'])
-    ]
+        error_message = (
+            u'If the template is "cross-journals", the Journals must be '
+            u'different, if the template does not "cross-journals" the '
+            u'Journals must be the same!',
+        )
+        for move_template in self:
+            if move_template.template_line_ids:
+                for template_line in move_template.template_line_ids:
+                    all_journal_ids.append(template_line.journal_id.id)
+                    if template_line.journal_id.id not in journal_ids:
+                        journal_ids.append(template_line.journal_id.id)
+                if move_template.cross_journals:
+                    if len(all_journal_ids) != len(journal_ids):
+                        raise ValidationError(error_message)
+                elif len(journal_ids) != 1:
+                    raise ValidationError(error_message)
 
 
 class AccountMoveTemplateLine(orm.Model):
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
 
-    _columns = {
-        'journal_id': fields.many2one(
-            'account.journal',
-            'Journal',
-            required=True
-        ),
-        'account_id': fields.many2one(
-            'account.account',
-            'Account',
-            required=True,
-            ondelete="cascade"
-        ),
-        'move_line_type': fields.selection(
-            [('cr', 'Credit'),
-             ('dr', 'Debit')],
-            'Move Line Type',
-            required=True
-        ),
-        'analytic_account_id': fields.many2one(
-            'account.analytic.account',
-            'Analytic Account',
-            ondelete="cascade"
-        ),
-        'template_id': fields.many2one('account.move.template', 'Template'),
-        'account_tax_id': fields.many2one('account.tax', 'Tax'),
-    }
+    journal_id = fields.Many2one(
+        comodel_name='account.journal',
+        string='Journal',
+        required=True
+    )
+    account_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Account',
+        required=True,
+        ondelete="cascade"
+    ),
+    move_line_type = fields.Selection(
+        [('cr', 'Credit'), ('dr', 'Debit')],
+        string='Move Line Type',
+        required=True
+    )
+    analytic_account_id = fields.Many2one(
+        comodel_name='account.analytic.account',
+        string='Analytic Account',
+        ondelete="cascade"
+    )
+    template_id = fields.Many2one(
+        comodel_name='account.move.template',
+        string='Template'
+    )
+    account_tax_id = fields.Many2one(
+        comodel_name='account.tax',
+        string='Tax'
+    )
 
     _sql_constraints = [
         ('sequence_template_uniq', 'unique (template_id,sequence)',
