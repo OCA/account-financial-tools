@@ -46,22 +46,6 @@ class WizardSelectMoveTemplate(models.TransientModel):
         string='State'
     )
 
-    def on_change_template_id(self, cr, uid, ids, template_id):
-        res = {}
-        if template_id:
-            res['value'] = {'line_ids': []}
-            template_pool = self.pool.get('account.move.template')
-            template = template_pool.browse(cr, uid, template_id)
-            for line in template.template_line_ids:
-                if line.type == 'input':
-                    res['value']['line_ids'].append({
-                        'sequence': line.sequence,
-                        'name': line.name,
-                        'account_id': line.account_id.id,
-                        'move_line_type': line.move_line_type,
-                    })
-        return res
-
     @api.multi
     def load_lines(self):
         for wizard in self:
@@ -243,7 +227,7 @@ class WizardSelectMoveTemplateLine(models.TransientModel):
         string='Template'
     )
     sequence = fields.Integer(string='Number', required=True)
-    name = fields.Char(required=True, readonly=True),
+    name = fields.Char(required=True, readonly=True)
     account_id = fields.Many2one(
         comodel_name='account.account',
         string='Account',
