@@ -20,11 +20,11 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm, api
+from openerp import models, fields, api
 from openerp.exceptions import ValidationError
 
 
-class AccountMoveTemplate(orm.Model):
+class AccountMoveTemplate(models.Model):
     _name = 'account.move.template'
     _inherit = 'account.document.template'
 
@@ -77,7 +77,7 @@ class AccountMoveTemplate(orm.Model):
                     raise ValidationError(error_message)
 
 
-class AccountMoveTemplateLine(orm.Model):
+class AccountMoveTemplateLine(models.Model):
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
 
@@ -91,7 +91,7 @@ class AccountMoveTemplateLine(orm.Model):
         string='Account',
         required=True,
         ondelete="cascade"
-    ),
+    )
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')],
         string='Move Line Type',
