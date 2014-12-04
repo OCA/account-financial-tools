@@ -19,35 +19,32 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp import models, fields, api, _
+from openerp import exceptions
 import time
-from openerp.tools.translate import _
 
 
-class WizardSelectMoveTemplate(orm.TransientModel):
-
+class WizardSelectMoveTemplate(models.TransientModel):
     _name = "wizard.select.move.template"
-    _columns = {
-        'template_id': fields.many2one(
-            'account.move.template',
-            'Move Template',
-            required=True
-        ),
-        'partner_id': fields.many2one('res.partner', 'Partner'),
 
-        'line_ids': fields.one2many(
-            'wizard.select.move.template.line',
-            'template_id',
-            'Lines'
-        ),
-
-        'state': fields.selection(
-            [
-                ('template_selected', 'Template selected'),
-            ],
-            'State'
-        ),
-    }
+    template_id = fields.Many2one(
+        comodel_name='account.move.template',
+        string='Move Template',
+        required=True
+    )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner'
+    )
+    line_ids = fields.One2many(
+        comodel_name='wizard.select.move.template.line',
+        inverse_name='template_id',
+        string='Lines'
+    )
+    state = fields.Selection(
+        [('template_selected', 'Template selected')],
+        string='State'
+    )
 
     def on_change_template_id(self, cr, uid, ids, template_id):
         res = {}
@@ -65,127 +62,119 @@ class WizardSelectMoveTemplate(orm.TransientModel):
                     })
         return res
 
-    def load_lines(self, cr, uid, ids, context=None):
-        wizard = self.browse(cr, uid, ids, context=context)[0]
-        template_pool = self.pool.get('account.move.template')
-        wizard_line_pool = self.pool.get('wizard.select.move.template.line')
-        model_data_obj = self.pool.get('ir.model.data')
+    @api.multi
+    def load_lines(self):
+        for wizard in self:
+            template = self.env['account.move.template'].browse(
+                wizard.template_id.id)
+            for line in template.template_line_ids:
+                if line.type == 'input':
+                    self.env['wizard.select.move.template.line'].create({
+                        'template_id': wizard.id,
+                        'sequence': line.sequence,
+                        'name': line.name,
+                        'amount': 0.0,
+                        'account_id': line.account_id.id,
+                        'move_line_type': line.move_line_type,
+                    })
+            if not wizard.line_ids:
+                return self.load_template()
+            wizard.write({'state': 'template_selected'})
 
-        template = template_pool.browse(cr, uid, wizard.template_id.id)
-        for line in template.template_line_ids:
-            if line.type == 'input':
-                wizard_line_pool.create(cr, uid, {
-                    'template_id': wizard.id,
-                    'sequence': line.sequence,
-                    'name': line.name,
-                    'amount': 0.0,
-                    'account_id': line.account_id.id,
-                    'move_line_type': line.move_line_type,
-                })
-        if not wizard.line_ids:
-            return self.load_template(cr, uid, ids)
-        wizard.write({'state': 'template_selected'})
+            view_rec = self.env['ir.model.data'].get_object_reference(
+                'account_move_template', 'wizard_select_template')
+            view_id = view_rec and view_rec[1] or False
 
-        view_rec = model_data_obj.get_object_reference(
-            cr, uid, 'account_move_template', 'wizard_select_template')
-        view_id = view_rec and view_rec[1] or False
+            return {
+                'view_type': 'form',
+                'view_id': [view_id],
+                'view_mode': 'form',
+                'res_model': 'wizard.select.move.template',
+                'res_id': wizard.id,
+                'type': 'ir.actions.act_window',
+                'target': 'new',
+                'context': self.env.context,
+            }
 
-        return {
-            'view_type': 'form',
-            'view_id': [view_id],
-            'view_mode': 'form',
-            'res_model': 'wizard.select.move.template',
-            'res_id': wizard.id,
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': context,
-        }
-
-    def load_template(self, cr, uid, ids, context=None):
-        template_obj = self.pool.get('account.move.template')
-        account_period_obj = self.pool.get('account.period')
-
-        wizard = self.browse(cr, uid, ids, context=context)[0]
-        if not template_obj.check_zero_lines(cr, uid, wizard):
-            raise orm.except_orm(
-                _('Error !'),
-                _('At least one amount has to be non-zero!')
-            )
-        input_lines = {}
-
-        for template_line in wizard.line_ids:
-            input_lines[template_line.sequence] = template_line.amount
-
-        period_id = account_period_obj.find(cr, uid, context=context)
-        if not period_id:
-            raise orm.except_orm(
-                _('No period found !'),
-                _('Unable to find a valid period !')
-            )
-        period_id = period_id[0]
-
-        computed_lines = template_obj.compute_lines(
-            cr, uid, wizard.template_id.id, input_lines)
-
-        moves = {}
-        for line in wizard.template_id.template_line_ids:
-            if line.journal_id.id not in moves:
-                moves[line.journal_id.id] = self._make_move(
-                    cr, uid,
-                    wizard.template_id.name,
-                    period_id,
-                    line.journal_id.id,
-                    wizard.partner_id.id
+    @api.multi
+    def load_template(self):
+        for wizard in self:
+            template_model = self.env['account.move.template']
+            account_period_model = self.env['account.period']
+            if not template_model.check_zero_lines(wizard):
+                raise exceptions.Warning(
+                    _('Error !'),
+                    _('At least one amount has to be non-zero!')
                 )
+            input_lines = {}
+            for template_line in wizard.line_ids:
+                input_lines[template_line.sequence] = template_line.amount
 
-            self._make_move_line(
-                cr, uid,
-                line,
-                computed_lines,
-                moves[line.journal_id.id],
-                period_id,
-                wizard.partner_id.id
-            )
-            if wizard.template_id.cross_journals:
-                trans_account_id = wizard.template_id.transitory_acc_id.id
-                self._make_transitory_move_line(
-                    cr,
-                    uid,
+            period_id = account_period_model.find()
+            if not period_id:
+                raise exceptions.Warning(
+                    _('No period found !'),
+                    _('Unable to find a valid period !')
+                )
+            period_id = period_id[0]
+
+            computed_lines = template_model.compute_lines(
+                wizard.template_id.id, input_lines)
+
+            moves = {}
+            for line in wizard.template_id.template_line_ids:
+                if line.journal_id.id not in moves:
+                    moves[line.journal_id.id] = self._make_move(
+                        wizard.template_id.name,
+                        period_id,
+                        line.journal_id.id,
+                        wizard.partner_id.id
+                    )
+
+                self._make_move_line(
                     line,
                     computed_lines,
                     moves[line.journal_id.id],
                     period_id,
-                    trans_account_id,
                     wizard.partner_id.id
                 )
+                if wizard.template_id.cross_journals:
+                    trans_account_id = wizard.template_id.transitory_acc_id.id
+                    self._make_transitory_move_line(
+                        line,
+                        computed_lines,
+                        moves[line.journal_id.id],
+                        period_id,
+                        trans_account_id,
+                        wizard.partner_id.id
+                    )
 
-        return {
-            'domain': "[('id','in', " + str(moves.values()) + ")]",
-            'name': 'Entries',
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }
+            return {
+                'domain': "[('id','in', " + str(moves.values()) + ")]",
+                'name': 'Entries',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'account.move',
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+            }
 
-    def _make_move(self, cr, uid, ref, period_id, journal_id, partner_id):
-        account_move_obj = self.pool.get('account.move')
-        move_id = account_move_obj.create(cr, uid, {
+    @api.model
+    def _make_move(self, ref, period_id, journal_id, partner_id):
+        return self.env['account.move'].create({
             'ref': ref,
             'period_id': period_id,
             'journal_id': journal_id,
             'partner_id': partner_id,
         })
-        return move_id
 
-    def _make_move_line(self, cr, uid, line, computed_lines,
+    def _make_move_line(self, line, computed_lines,
                         move_id, period_id, partner_id):
-        account_move_line_obj = self.pool.get('account.move.line')
+        account_move_line_model = self.env['account.move.line']
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise orm.except_orm(
+                raise exceptions.Warning(
                     _('No Analytic Journal !'),
                     _("You have to define an analytic "
                       "journal on the '%s' journal!")
@@ -193,7 +182,7 @@ class WizardSelectMoveTemplate(orm.TransientModel):
                 )
 
             analytic_account_id = line.analytic_account_id.id
-        val = {
+        vals = {
             'name': line.name,
             'move_id': move_id,
             'journal_id': line.journal_id.id,
@@ -207,27 +196,27 @@ class WizardSelectMoveTemplate(orm.TransientModel):
             'partner_id': partner_id,
         }
         if line.move_line_type == 'cr':
-            val['credit'] = computed_lines[line.sequence]
+            vals['credit'] = computed_lines[line.sequence]
         if line.move_line_type == 'dr':
-            val['debit'] = computed_lines[line.sequence]
-        id_line = account_move_line_obj.create(cr, uid, val)
+            vals['debit'] = computed_lines[line.sequence]
+        id_line = account_move_line_model.create(vals)
         return id_line
 
-    def _make_transitory_move_line(self, cr, uid, line,
+    def _make_transitory_move_line(self, line,
                                    computed_lines, move_id, period_id,
                                    trans_account_id, partner_id):
-        account_move_line_obj = self.pool.get('account.move.line')
+        account_move_line_model = self.env['account.move.line']
         analytic_account_id = False
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
-                raise orm.except_orm(
+                raise exceptions.Warning(
                     _('No Analytic Journal !'),
                     _("You have to define an analytic journal "
                       "on the '%s' journal!")
                     % (line.template_id.journal_id.name,)
                 )
             analytic_account_id = line.analytic_account_id.id
-        val = {
+        vals = {
             'name': 'transitory',
             'move_id': move_id,
             'journal_id': line.journal_id.id,
@@ -238,33 +227,33 @@ class WizardSelectMoveTemplate(orm.TransientModel):
             'partner_id': partner_id,
         }
         if line.move_line_type != 'cr':
-            val['credit'] = computed_lines[line.sequence]
+            vals['credit'] = computed_lines[line.sequence]
         if line.move_line_type != 'dr':
-            val['debit'] = computed_lines[line.sequence]
-        id_line = account_move_line_obj.create(cr, uid, val)
+            vals['debit'] = computed_lines[line.sequence]
+        id_line = account_move_line_model.create(vals)
         return id_line
 
 
-class WizardSelectMoveTemplateLine(orm.TransientModel):
+class WizardSelectMoveTemplateLine(models.TransientModel):
     _description = 'Template Lines'
     _name = "wizard.select.move.template.line"
-    _columns = {
-        'template_id': fields.many2one('wizard.select.move.template',
-                                       'Template'),
-        'sequence': fields.integer('Number', required=True),
-        'name': fields.char('Name', size=64, required=True, readonly=True),
-        'account_id': fields.many2one(
-            'account.account',
-            'Account',
-            required=True,
-            readonly=True
-        ),
-        'move_line_type': fields.selection(
-            [('cr', 'Credit'),
-             ('dr', 'Debit')],
-            'Move Line Type',
-            required=True,
-            readonly=True
-        ),
-        'amount': fields.float('Amount', required=True),
-    }
+
+    template_id = fields.Many2one(
+        comodel_name='wizard.select.move.template',
+        string='Template'
+    )
+    sequence = fields.Integer(string='Number', required=True)
+    name = fields.Char(required=True, readonly=True),
+    account_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Account',
+        required=True,
+        readonly=True
+    )
+    move_line_type = fields.Selection(
+        [('cr', 'Credit'), ('dr', 'Debit')],
+        string='Move Line Type',
+        required=True,
+        readonly=True
+    )
+    amount = fields.Float(required=True)
