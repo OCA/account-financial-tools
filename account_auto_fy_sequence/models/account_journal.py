@@ -3,7 +3,7 @@
 #
 #    account_auto_fy_sequence module for Odoo
 #    Copyright (C) 2014 ACSONE SA/NV (<http://acsone.eu>)
-#    @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
+#    @author Laetitia Gangloff <laetitia.gangloff@acsone.eu>
 #
 #    account_auto_fy_sequence is free software:
 #    you can redistribute it and/or modify
@@ -23,5 +23,21 @@
 #
 ##############################################################################
 
-from . import ir_sequence
-from . import account_journal
+from openerp.osv import orm
+
+
+class account_journal(orm.Model):
+    _inherit = "account.journal"
+
+    def create_sequence(self, cr, uid, vals, context=None):
+        """ Create new no_gap entry sequence for every new Joural
+            with fiscal year prefix
+        """
+        seq_id = super(account_journal, self).create_sequence(cr, uid, vals,
+                                                              context=context)
+
+        seq_obj = self.pool['ir.sequence']
+        seq = seq_obj.browse(cr, uid, seq_id, context=context)
+        prefix = seq.prefix.replace('%(year)s', '%(fy)s')
+        seq_obj.write(cr, uid, seq_id, {'prefix': prefix}, context=context)
+        return seq_id

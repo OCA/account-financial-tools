@@ -8,6 +8,9 @@ using the sequence.
 The first time the sequence is used for a given fiscal year,
 a specific fiscal year sequence starting at 1 is created automatically.
 
+The module also replaces %(year)s by %(fy)s in the default prefix
+for new journals, assuming it is a safer default.
+
 Caveat
 ------
 
