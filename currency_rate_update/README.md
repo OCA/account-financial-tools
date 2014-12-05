@@ -28,6 +28,8 @@ The module is able to use 4 different sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. Russian National Bank
+
 In the roadmap : 
    Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
