@@ -20,23 +20,10 @@
 {"name": "Tax analysis",
  "version": "1.0",
  "depends": ["base", "account"],
- "author": "CamptoCamp SA",
+ "author": "Camptocamp SA",
  "category": 'Accounting & Finance',
- "description": """
-Tax analysis view
-=================
-
-This add-on is a must if you want to be able to validate your VAT form.
-
-Thanks to a new menu 'Accounting / Tax / Tax analysis'
-you are able to group accounting entries by Taxes (VAT codes)
-and/or financial accounts.
-
-This way you will find easily differences you may see between
-the OpenERP tax report and what you see in your books.""",
  "website": "http://www.camptocamp.com",
  "data": ["account_tax_analysis_view.xml"],
- 'installable': False,
+ 'installable': True,
  "active": False,
  }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -3,11 +3,10 @@
     <record id="view_account_move_line_filter_vat_analysis" model="ir.ui.view">
       <field name="name">Journal Items Tax</field>
       <field name="model">account.move.line</field>
-      <field name="type">search</field>
       <field eval="32" name="priority"/>
       <field name="arch" type="xml">
         <search string="Search Journal Items">
-          <group>
+          <group string="Filters">
             <separator orientation="vertical"/>
             <filter icon="terp-document-new"
                     string="Unposted"
@@ -50,7 +49,6 @@
     <record id="view_move_line_tree_tax_analysis" model="ir.ui.view">
       <field name="name">account.move.line.tree</field>
       <field name="model">account.move.line</field>
-      <field name="type">tree</field>
       <field eval="16" name="priority"/>
       <field name="arch" type="xml">
         <tree  string="Journal Items" editable="top" on_write="on_create_write">
@@ -73,7 +71,7 @@
 
 
     <record id="action_view_tax_analysis" model="ir.actions.act_window">
-      <field name="name">Recurring Models</field>
+      <field name="name">Taxes Analysis</field>
       <field name="res_model">account.move.line</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree</field>
@@ -84,18 +82,17 @@
     <record id="view_account_vat_declaration_analysis" model="ir.ui.view">
       <field name="name">Account Vat Declaration</field>
       <field name="model">account.vat.declaration.analysis</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Taxes Report">
           <separator string="Taxes Report" colspan="4"/>
-          <newline/>
           <field name="fiscalyear_id"/>
           <separator string="Periods"  colspan="4"/>
           <field name="period_list"  domain="[('fiscalyear_id', '=', fiscalyear_id)]"/>
-          <group col="2" colspan="4">
-            <button icon='gtk-cancel' special="cancel"  string="Cancel" />
-            <button name="create_vat" string="Show tax lines" colspan="1" type="object" icon="gtk-ok"/>
-          </group>
+          <footer>
+              <button name="show_vat" string="Show tax lines" type="object" class="oe_highlight"/>
+                or
+              <button special="cancel" string="Cancel" class="oe_link"/>
+          </footer>
         </form>
       </field>
     </record>
