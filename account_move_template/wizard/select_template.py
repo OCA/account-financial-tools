@@ -94,13 +94,12 @@ class WizardSelectMoveTemplate(models.TransientModel):
             for template_line in wizard.line_ids:
                 input_lines[template_line.sequence] = template_line.amount
 
-            period_id = account_period_model.find()
-            if not period_id:
+            period = account_period_model.find()
+            if not period:
                 raise exceptions.Warning(
                     _('No period found !'),
                     _('Unable to find a valid period !')
                 )
-            period_id = period_id[0]
 
             computed_lines = template_model.compute_lines(
                 wizard.template_id.id, input_lines)
@@ -110,7 +109,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 if line.journal_id.id not in moves:
                     moves[line.journal_id.id] = self._make_move(
                         wizard.template_id.name,
-                        period_id,
+                        period.id,
                         line.journal_id.id,
                         wizard.partner_id.id
                     )
@@ -119,7 +118,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     line,
                     computed_lines,
                     moves[line.journal_id.id],
-                    period_id,
+                    period.id,
                     wizard.partner_id.id
                 )
                 if wizard.template_id.cross_journals:
@@ -128,7 +127,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                         line,
                         computed_lines,
                         moves[line.journal_id.id],
-                        period_id,
+                        period.id,
                         trans_account_id,
                         wizard.partner_id.id
                     )
@@ -145,13 +144,15 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
     @api.model
     def _make_move(self, ref, period_id, journal_id, partner_id):
-        return self.env['account.move'].create({
+        move = self.env['account.move'].create({
             'ref': ref,
             'period_id': period_id,
             'journal_id': journal_id,
             'partner_id': partner_id,
         })
+        return move.id
 
+    @api.model
     def _make_move_line(self, line, computed_lines,
                         move_id, period_id, partner_id):
         account_move_line_model = self.env['account.move.line']
@@ -186,6 +187,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
         id_line = account_move_line_model.create(vals)
         return id_line
 
+    @api.model
     def _make_transitory_move_line(self, line,
                                    computed_lines, move_id, period_id,
                                    trans_account_id, partner_id):
