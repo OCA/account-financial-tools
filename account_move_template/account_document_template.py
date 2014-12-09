@@ -29,27 +29,25 @@ class AccountDocumentTemplate(models.Model):
 
     name = fields.Char(required=True)
 
-    @api.model
-    def _input_lines(self, template):
+    @api.multi
+    def _input_lines(self):
         count = 0
-        for line in template.template_line_ids:
+        for line in self.template_line_ids:
             if line.type == 'input':
                 count += 1
         return count
 
     @api.multi
-    def _get_template_line(self, template_id, line_number):
-        template = self.browse(template_id)
-        for line in template.template_line_ids:
+    def _get_template_line(self, line_number):
+        for line in self.template_line_ids:
             if line.sequence == line_number:
                 return line
         return False
 
     @api.multi
-    def _generate_empty_lines(self, template_id):
+    def _generate_empty_lines(self):
         lines = {}
-        template = self.browse(template_id)
-        for line in template.template_line_ids:
+        for line in self.template_line_ids:
             lines[line.sequence] = None
         return lines
 
@@ -57,7 +55,7 @@ class AccountDocumentTemplate(models.Model):
     def lines(self, line_number):
         if self._computed_lines[line_number] is not None:
             return self._computed_lines[line_number]
-        line = self._get_template_line(self._current_template_id, line_number)
+        line = self._get_template_line(line_number)
         if re.match(r'L\( *' + str(line_number) + r' *\)', line.python_code):
             raise exceptions.Warning(
                 _('Line %s can\'t refer to itself') % str(line_number)
@@ -68,37 +66,24 @@ class AccountDocumentTemplate(models.Model):
             )
         except KeyError:
             raise exceptions.Warning(
-                _('Error'),
                 _('Code "%s" refers to non existing line') % line.python_code)
         return self._computed_lines[line_number]
 
-    @api.model
-    def compute_lines(self, template_id, input_lines):
+    @api.multi
+    def compute_lines(self, input_lines):
         # input_lines: dictionary in the form {line_number: line_amount}
         # returns all the lines (included input lines)
         # in the form {line_number: line_amount}
-        template = self.browse(template_id)
-        if len(input_lines) != self._input_lines(template):
+        if len(input_lines) != self._input_lines():
             raise exceptions.Warning(
-                _('Error'),
                 _('Inconsistency between input lines and '
-                  'filled lines for template %s') % template.name
+                  'filled lines for template %s') % self.name
             )
-        self._current_template_id = template.id
-        self._computed_lines = self._generate_empty_lines(template_id)
+        self._computed_lines = self._generate_empty_lines()
         self._computed_lines.update(input_lines)
         for line_number in self._computed_lines:
             self.lines(line_number)
         return self._computed_lines
-
-    @api.model
-    def check_zero_lines(self, wizard):
-        if not wizard.line_ids:
-            return True
-        for template_line in wizard.line_ids:
-            if template_line.amount:
-                return True
-        return False
 
 
 class AccountDocumentTemplateLine(models.Model):
