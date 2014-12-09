@@ -19,8 +19,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
-from openerp import exceptions
+from openerp import models, fields, api, exceptions, _
 import time
 
 
