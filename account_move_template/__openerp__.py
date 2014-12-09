@@ -29,9 +29,9 @@
     'license': 'AGPL-3',
     'depends': ['account_accountant', 'analytic'],
     'data': [
-        'move_template.xml',
-        'wizard/select_template.xml',
         'security/ir.model.access.csv',
+        'views/move_template.xml',
+        'wizard/select_template.xml',
     ],
     'test': [
         'test/generate_move.yml',
