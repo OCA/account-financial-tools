@@ -62,7 +62,7 @@ class AccountMoveTemplate(models.Model):
         error_message = (
             u'If the template is "cross-journals", the Journals must be '
             u'different, if the template does not "cross-journals" the '
-            u'Journals must be the same!',
+            u'Journals must be the same!'
         )
         for move_template in self:
             if move_template.template_line_ids:
