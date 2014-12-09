@@ -47,99 +47,99 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
     @api.multi
     def load_lines(self):
-        for wizard in self:
-            template = self.env['account.move.template'].browse(
-                wizard.template_id.id)
-            for line in template.template_line_ids:
-                if line.type == 'input':
-                    self.env['wizard.select.move.template.line'].create({
-                        'template_id': wizard.id,
-                        'sequence': line.sequence,
-                        'name': line.name,
-                        'amount': 0.0,
-                        'account_id': line.account_id.id,
-                        'move_line_type': line.move_line_type,
-                    })
-            if not wizard.line_ids:
-                return self.load_template()
-            wizard.write({'state': 'template_selected'})
+        self.ensure_one()
+        template = self.env['account.move.template'].browse(
+            self.template_id.id)
+        for line in template.template_line_ids:
+            if line.type == 'input':
+                self.env['wizard.select.move.template.line'].create({
+                    'template_id': self.id,
+                    'sequence': line.sequence,
+                    'name': line.name,
+                    'amount': 0.0,
+                    'account_id': line.account_id.id,
+                    'move_line_type': line.move_line_type,
+                })
+        if not self.line_ids:
+            return self.load_template()
+        self.write({'state': 'template_selected'})
 
-            view_rec = self.env['ir.model.data'].get_object_reference(
-                'account_move_template', 'wizard_select_template')
-            view_id = view_rec and view_rec[1] or False
+        view_rec = self.env['ir.model.data'].get_object_reference(
+            'account_move_template', 'wizard_select_template')
+        view_id = view_rec and view_rec[1] or False
 
-            return {
-                'view_type': 'form',
-                'view_id': [view_id],
-                'view_mode': 'form',
-                'res_model': 'wizard.select.move.template',
-                'res_id': wizard.id,
-                'type': 'ir.actions.act_window',
-                'target': 'new',
-                'context': self.env.context,
-            }
+        return {
+            'view_type': 'form',
+            'view_id': [view_id],
+            'view_mode': 'form',
+            'res_model': 'wizard.select.move.template',
+            'res_id': self.id,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': self.env.context,
+        }
 
     @api.multi
     def load_template(self):
-        for wizard in self:
-            template_model = self.env['account.move.template']
-            account_period_model = self.env['account.period']
-            if not template_model.check_zero_lines(wizard):
-                raise exceptions.Warning(
-                    _('Error !'),
-                    _('At least one amount has to be non-zero!')
+        self.ensure_one()
+        template_model = self.env['account.move.template']
+        account_period_model = self.env['account.period']
+        if not template_model.check_zero_lines(self):
+            raise exceptions.Warning(
+                _('Error !'),
+                _('At least one amount has to be non-zero!')
+            )
+        input_lines = {}
+        for template_line in self.line_ids:
+            input_lines[template_line.sequence] = template_line.amount
+
+        period = account_period_model.find()
+        if not period:
+            raise exceptions.Warning(
+                _('No period found !'),
+                _('Unable to find a valid period !')
+            )
+
+        computed_lines = template_model.compute_lines(
+            self.template_id.id, input_lines)
+
+        moves = {}
+        for line in self.template_id.template_line_ids:
+            if line.journal_id.id not in moves:
+                moves[line.journal_id.id] = self._make_move(
+                    self.template_id.name,
+                    period.id,
+                    line.journal_id.id,
+                    self.partner_id.id
                 )
-            input_lines = {}
-            for template_line in wizard.line_ids:
-                input_lines[template_line.sequence] = template_line.amount
 
-            period = account_period_model.find()
-            if not period:
-                raise exceptions.Warning(
-                    _('No period found !'),
-                    _('Unable to find a valid period !')
-                )
-
-            computed_lines = template_model.compute_lines(
-                wizard.template_id.id, input_lines)
-
-            moves = {}
-            for line in wizard.template_id.template_line_ids:
-                if line.journal_id.id not in moves:
-                    moves[line.journal_id.id] = self._make_move(
-                        wizard.template_id.name,
-                        period.id,
-                        line.journal_id.id,
-                        wizard.partner_id.id
-                    )
-
-                self._make_move_line(
+            self._make_move_line(
+                line,
+                computed_lines,
+                moves[line.journal_id.id],
+                period.id,
+                self.partner_id.id
+            )
+            if self.template_id.cross_journals:
+                trans_account_id = self.template_id.transitory_acc_id.id
+                self._make_transitory_move_line(
                     line,
                     computed_lines,
                     moves[line.journal_id.id],
                     period.id,
-                    wizard.partner_id.id
+                    trans_account_id,
+                    self.partner_id.id
                 )
-                if wizard.template_id.cross_journals:
-                    trans_account_id = wizard.template_id.transitory_acc_id.id
-                    self._make_transitory_move_line(
-                        line,
-                        computed_lines,
-                        moves[line.journal_id.id],
-                        period.id,
-                        trans_account_id,
-                        wizard.partner_id.id
-                    )
 
-            return {
-                'domain': "[('id','in', " + str(moves.values()) + ")]",
-                'name': 'Entries',
-                'view_type': 'form',
-                'view_mode': 'tree,form',
-                'res_model': 'account.move',
-                'type': 'ir.actions.act_window',
-                'target': 'current',
-            }
+        return {
+            'domain': "[('id','in', " + str(moves.values()) + ")]",
+            'name': 'Entries',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }
 
     @api.model
     def _make_move(self, ref, period_id, journal_id, partner_id):
