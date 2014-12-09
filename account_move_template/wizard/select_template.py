@@ -46,10 +46,18 @@ class WizardSelectMoveTemplate(models.TransientModel):
     )
 
     @api.multi
+    def check_zero_lines(self):
+        if not self.line_ids:
+            return True
+        for template_line in self.line_ids:
+            if template_line.amount:
+                return True
+        return False
+
+    @api.multi
     def load_lines(self):
         self.ensure_one()
-        template = self.env['account.move.template'].browse(
-            self.template_id.id)
+        template = self.template_id
         for line in template.template_line_ids:
             if line.type == 'input':
                 self.env['wizard.select.move.template.line'].create({
@@ -62,7 +70,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 })
         if not self.line_ids:
             return self.load_template()
-        self.write({'state': 'template_selected'})
+        self.state = 'template_selected'
 
         view_rec = self.env['ir.model.data'].get_object_reference(
             'account_move_template', 'wizard_select_template')
@@ -82,11 +90,9 @@ class WizardSelectMoveTemplate(models.TransientModel):
     @api.multi
     def load_template(self):
         self.ensure_one()
-        template_model = self.env['account.move.template']
         account_period_model = self.env['account.period']
-        if not template_model.check_zero_lines(self):
+        if not self.check_zero_lines():
             raise exceptions.Warning(
-                _('Error !'),
                 _('At least one amount has to be non-zero!')
             )
         input_lines = {}
@@ -95,13 +101,9 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
         period = account_period_model.find()
         if not period:
-            raise exceptions.Warning(
-                _('No period found !'),
-                _('Unable to find a valid period !')
-            )
+            raise exceptions.Warning(_('Unable to find a valid period !'))
 
-        computed_lines = template_model.compute_lines(
-            self.template_id.id, input_lines)
+        computed_lines = self.template_id.compute_lines(input_lines)
 
         moves = {}
         for line in self.template_id.template_line_ids:
@@ -159,7 +161,6 @@ class WizardSelectMoveTemplate(models.TransientModel):
         if line.analytic_account_id:
             if not line.journal_id.analytic_journal_id:
                 raise exceptions.Warning(
-                    _('No Analytic Journal !'),
                     _("You have to define an analytic "
                       "journal on the '%s' journal!")
                     % (line.journal_id.name,)
