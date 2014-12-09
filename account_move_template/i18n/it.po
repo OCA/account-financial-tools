@@ -21,7 +21,7 @@ msgstr ""
 #: code:addons/account_move_template/account_document_template.py:68
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
-msgstr ""
+msgstr "Il codice \"%s\" fa riferimento ad una riga inesistente"
 
 #. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
@@ -141,6 +141,8 @@ msgid ""
 "If the template is \"cross-journals\", the Journals must be different,if the "
 "template does not \"cross-journals\" the Journals must be the same!"
 msgstr ""
+"Se il template è \"multi-sezionale\", i sezionali devono essere diversi, se "
+"il template non è \"multi-sezionale\" i sezionali devono essere gli stessi!" 
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
@@ -166,7 +168,7 @@ msgstr "Nome"
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
 msgid "Cross-Journals"
-msgstr "Cross-Journals"
+msgstr "Multi-sezionale"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
@@ -317,4 +319,4 @@ msgstr "Sezionale"
 #: code:addons/account_move_template/account_document_template.py:63
 #, python-format
 msgid "Line %s can't refer to itself"
-msgstr ""
+msgstr "La riga %s non può fare riferimento a se stessa"
