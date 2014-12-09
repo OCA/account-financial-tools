@@ -37,7 +37,7 @@ class AccountDocumentTemplate(models.Model):
                 count += 1
         return count
 
-    @api.model
+    @api.multi
     def _get_template_line(self, template_id, line_number):
         template = self.browse(template_id)
         for line in template.template_line_ids:
@@ -45,7 +45,7 @@ class AccountDocumentTemplate(models.Model):
                 return line
         return False
 
-    @api.model
+    @api.multi
     def _generate_empty_lines(self, template_id):
         lines = {}
         template = self.browse(template_id)
@@ -60,7 +60,6 @@ class AccountDocumentTemplate(models.Model):
         line = self._get_template_line(self._current_template_id, line_number)
         if re.match(r'L\( *' + str(line_number) + r' *\)', line.python_code):
             raise exceptions.Warning(
-                _('Error'),
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
         try:
