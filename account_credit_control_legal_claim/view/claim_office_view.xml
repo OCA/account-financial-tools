@@ -44,13 +44,8 @@
     </record>
 
     <menuitem
-        name="Credit control Legal Claim"
-        parent="account.menu_finance_configuration"
-        id="root_legal_claim_menu"/>
-
-    <menuitem
-        name="Claim Office"
-        parent="root_legal_claim_menu"
+        name="Claim Offices"
+        parent="account_credit_control.base_credit_control_configuration_menu"
         action="claim_office_action"
         id="claim_office_action_menu"/>
 

@@ -61,11 +61,9 @@
       <field name="view_id" ref="claim_scheme_list_view"/>
     </record>
 
-
-
     <menuitem
         name="Claim scheme"
-        parent="root_legal_claim_menu"
+        parent="account_credit_control.base_credit_control_configuration_menu"
         action="claim_scheme_menu_action"
         id="claim_scheme_menu_action_menu"/>
 
