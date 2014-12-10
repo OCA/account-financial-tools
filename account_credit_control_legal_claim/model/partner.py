@@ -18,38 +18,25 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class res_partner(orm.Model):
+class res_partner(models.Model):
     """Add related claim office"""
-    def _get_claim_office(self, cr, uid, ids, field, args, context=None):
-        res = {}
-        location_model = self.pool['res.better.zip']
-        for partner in self.browse(cr, uid, ids, context=context):
-            res[partner.id] = False
+
+    _inherit = "res.partner"
+
+    claim_office_id = fields.Many2one(comodel_name='legal.claim.office',
+                                      compute='_get_claim_office',
+                                      string='Claim office')
+
+    @api.depends('zip', 'city')
+    def _get_claim_office(self):
+        location_model = self.env['res.better.zip']
+        for partner in self:
             domain = [('name', '=', partner.zip),
                       ('city', '=', partner.city),
                       ('claim_office_id', '!=', False)]
-            location_id = location_model.search(cr, uid, domain,
-                                                order='priority',
-                                                limit=1,
-                                                context=context)
-            if not location_id:
-                continue
-            loc = location_model.read(cr,
-                                      uid,
-                                      location_id,
-                                      ['claim_office_id'],
-                                      load='_classic_write',
-                                      context=context)
-            res[partner.id] = loc[0]['claim_office_id']
-        return res
-
-    _inherit = "res.partner"
-    _columns = {
-        'claim_office_id': fields.function(_get_claim_office,
-                                           type='many2one',
-                                           relation='legal.claim.office',
-                                           string='Claim office')
-    }
+            location = location_model.search(domain, order='priority', limit=1)
+            if location:
+                self.claim_office_id = location.claim_office_id

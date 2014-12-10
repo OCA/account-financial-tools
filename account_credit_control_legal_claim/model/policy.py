@@ -18,29 +18,24 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
-from openerp.tools.translate import _
+from openerp import models, fields, api, exceptions, _
 
-class credit_control_policy_level(orm.Model):
+
+class CreditControlPolicyLevel(models.Model):
     """Add claim type to policy level"""
 
     _inherit = "credit.control.policy.level"
-    _columns = {
-        'is_legal_claim': fields.boolean('Legal Claim Action')
-    }
 
-    def _check_legal_claim_level(self, cr, uid, ids, context=None):
-        for current_level in self.browse(cr, uid, ids, context=context):
+    is_legal_claim = fields.Boolean(string='Implies a legal claim')
+
+    @api.constrains('is_legal_claim')
+    def _check_legal_claim_level(self):
+        for current_level in self:
             levels = current_level.policy_id.level_ids
-            highest = max(levels, key= lambda x: x.level)
-            for lvl in levels:
-                if lvl.is_legal_claim and lvl != highest:
-                    raise orm.except_orm(
-                        _('Only highest level can be tickes as legal claim'),
-                        _('The current highest level is %s') % highest.name
+            highest = max(levels, key=lambda x: x.level)
+            for level in levels:
+                if level.is_legal_claim and level != highest:
+                    raise exceptions.Warning(
+                        _('Only the highest level can be selected for legal '
+                          'claims. The highest level is %s') % highest.name
                     )
-        return True
-
-    _constraints = [(_check_legal_claim_level,
-                     'Only highest level can be legal claim',
-                     ['is_legal_claim'])]

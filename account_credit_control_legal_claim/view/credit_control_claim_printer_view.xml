@@ -11,31 +11,20 @@
           <newline/>
           <group>
             <field name="mark_as_claimed"
-                   colspan="4"
-                   attrs="{'invisible': [('state', '=', 'done')]}"/>
+                   colspan="4"/>
           </group>
           <newline/>
           <notebook>
-            <page string="Invoices" attrs="{'invisible': [('state', '=', 'done')]}">
-              <field name="invoice_ids" colspan="4" nolabel="1"
-                     attrs="{'invisible': [('state', '=', 'done')]}" />
+            <page string="Invoices">
+              <field name="invoice_ids" colspan="4" nolabel="1" />
             </page>
           </notebook>
-          <field name="report_name"
-                 invisible="1"/>
-          <field name="report_file"
-                 colspan="4"
-                 filename="report_name"
-                 attrs="{'invisible': [('state', '!=', 'done')]}"/>
-          <field name="state" invisible="1" />
           <newline/>
           <footer>
-            <button class="oe_highlight" name="print_claims" string="Print" type="object"  attrs="{'invisible': [('state', '==', 'done')]}"/>
-            <button special="cancel" string="Cancel" icon='gtk-cancel' attrs="{'invisible': [('state', '==', 'done')]}"/>
-            <button special="cancel" string="Close" icon='gtk-close' attrs="{'invisible': [('state', '!=', 'done')]}"/>
+            <button class="oe_highlight" name="print_claims" string="Print" type="object" />
+            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
+            <button special="cancel" string="Close" icon='gtk-close'/>
           </footer>
-
-
         </form>
       </field>
     </record>

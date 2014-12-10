@@ -19,14 +19,14 @@
 #
 ##############################################################################
 from operator import attrgetter
-from openerp.osv import orm, fields
+from openerp import models, fields, api
 
 
-class claim_fees_scheme(orm.Model):
+class ClaimFeesScheme(models.Model):
     """Claim fees
 
-    Claim offices  take fees based on open amount
-    whan a legal action is taken.
+    Claim offices take fees based on the open amount
+    when a legal action is taken.
 
     The model represent the scheme open amount/fees
 
@@ -34,40 +34,40 @@ class claim_fees_scheme(orm.Model):
 
     _name = 'legal.claim.fees.scheme'
 
-    _columns = {
-        'name': fields.char('Name',
-                            required=True),
-        'product_id': fields.many2one('product.product',
-                                      'Product',
-                                      required=True),
-        'claim_scheme_line_ids': fields.one2many('legal.claim.fees.scheme.line',
-                                                 'claim_scheme_id',
-                                                 'Price lists'),
-        'company_id': fields.many2one('res.company',
-                                      'Company'),
-        'currency_id': fields.many2one('res.currency',
-                                       'Currency',
-                                       required=True),
-    }
-
-    def _company_get(self, cr, uid, context=None):
+    @api.model
+    def _company_get(self):
         """Return related company"""
-        return self.pool['res.company']._company_default_get(cr, uid,
-                                                             'claim.fees.scheme',
-                                                             context=context)
-    _defaults = {'company_id': _company_get}
+        company_obj = self.env['res.company']
+        return company_obj._company_default_get('claim.fees.scheme')
 
-    def _due_from_invoices(self, invoices_records, context=None):
+    name = fields.Char(required=True)
+    product_id = fields.Many2one(comodel_name='product.product',
+                                 string='Product',
+                                 required=True)
+    claim_scheme_line_ids = fields.One2many(
+        comodel_name='legal.claim.fees.scheme.line',
+        inverse_name='claim_scheme_id',
+        string='Price lists')
+    company_id = fields.Many2one(comodel_name='res.company',
+                                 string='Company',
+                                 default=_company_get)
+    currency_id = fields.Many2one(comodel_name='res.currency',
+                                  string='Currency',
+                                  required=True)
+
+    @api.model
+    def _due_from_invoices(self, invoices):
         """Compute due amount form a list of invoice
 
-        :param invoices_record: list of invoice records
+        :param invoices: recordset of invoices
 
         :returns: due amount (float)
 
         """
-        return sum(x.residual for x in invoices_records)
+        return sum(x.residual for x in invoices)
 
-    def get_fees_from_amount(self, cr, uid, ids, due_amount, context=None):
+    @api.multi
+    def get_fees_from_amount(self, due_amount):
         """Get the fees from open amount
 
         :param due_amount: float of the open (due) amount
@@ -75,57 +75,50 @@ class claim_fees_scheme(orm.Model):
         :returns: fees amount (float)
 
         """
-        assert len(ids) == 1, 'Only on id expected'
-        current = self.browse(cr, uid, ids[0], context=context)
-        lines = current.claim_scheme_line_ids
-        lines.sort(key=attrgetter('open_amount'), reverse=True)
+        self.ensure_one()
+        lines = self.claim_scheme_line_ids
+        lines = lines.sorted(key=attrgetter('open_amount'), reverse=True)
         for line in lines:
             if due_amount >= line.open_amount:
                 return line.fees
         return lines[-1].fees
 
-    def get_fees_from_invoices(self, cr, uid, ids, invoice_ids, context=None):
-        """Get the fees form a list of invoice ids
+    @api.multi
+    def get_fees_from_invoices(self, invoice_ids):
+        """Get the fees form a list of invoices
 
-        :param invoice_ids: list of invoice_ids
-
-        :returns: fees amount (float)
-
-        """
-        assert len(ids) == 1, 'Only on id expected'
-        invoices = self.pool['account.invoice'].browse(cr, uid, invoice_ids,
-                                                       context=context)
-        return self._get_fees_from_invoices(cr, uid, ids, invoices,
-                                            context=context)
-
-    def _get_fees_from_invoices(self, cr, uid, ids, invoices, context=None):
-        """Get the fees form a list of invoice record
-
-        :param invoice_ids: list of invoice record
+        :param invoice_ids: list of invoice ids
 
         :returns: fees amount (float)
 
         """
-        assert len(ids) == 1, 'Only on id expected'
-        current = self.browse(cr, uid, ids[0], context=context)
-        due = self._due_from_invoices(invoices, context=context)
-        return current.get_fees_from_amount(due)
+        self.ensure_one()
+        invoices = self.env['account.invoice'].browse(invoice_ids)
+        return self._get_fees_from_invoices(invoices)
+
+    @api.multi
+    def _get_fees_from_invoices(self, invoices):
+        """Get the fees form a recordset of invoices
+
+        :param invoice_ids: recordset of invoices
+
+        :returns: fees amount (float)
+
+        """
+        self.ensure_one()
+        due = self._due_from_invoices(invoices)
+        return self.get_fees_from_amount(due)
 
 
-class claim_fees_scheme_line(orm.Model):
-    """Price list line of scheme
-    that contains price and qty"""
+class ClaimFeesSchemeLine(models.Model):
+    """Price list line of scheme that contains price and qty"""
 
     _name = 'legal.claim.fees.scheme.line'
     _rec_name = "open_amount"
     _order = "open_amount"
 
-    _columns = {
-        'claim_scheme_id': fields.many2one('legal.claim.fees.scheme',
-                                           'Price list',
-                                           required=True),
-        'open_amount': fields.integer('Open Amount',
-                                      required=True),
-        'fees': fields.float('Fees',
-                             required=True),
-    }
+    claim_scheme_id = fields.Many2one(comodel_name='legal.claim.fees.scheme',
+                                      string='Price list',
+                                      required=True)
+    open_amount = fields.Integer(string='Open Amount', required=True)
+    fees = fields.Float(string='Fees', required=True)
