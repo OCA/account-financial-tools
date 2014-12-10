@@ -4,7 +4,6 @@
     <record id="credit_control_policy_form" model="ir.ui.view">
       <field name="name">credit.control.policy.form</field>
       <field name="model">credit.control.policy</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control policy">
           <group>
@@ -55,7 +54,6 @@
     <record id="credit_control_policy_tree" model="ir.ui.view">
       <field name="name">credit.control.policy.tree</field>
       <field name="model">credit.control.policy</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="Credit control policy">
           <field name="name"/>
@@ -88,7 +86,6 @@
     <record id="credit_mangement_policy_level_form" model="ir.ui.view">
       <field name="name">credit.mangement.policy.level.form</field>
       <field name="model">credit.control.policy.level</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Policy level">
           <field name="name"/>
@@ -111,7 +108,6 @@
     <record id="credit_control_policy_level_tree" model="ir.ui.view">
       <field name="name">credit.control.policy.level.tree</field>
       <field name="model">credit.control.policy.level</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="Credit control policy level">
           <field name="name"/>
