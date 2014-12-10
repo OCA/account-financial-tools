@@ -26,24 +26,8 @@
  'complexity': 'normal',
  'depends': ['base_location',
              'base_headers_webkit',
-             'account_credit_control'],
- 'description': """
-Credit Control Legal Claim
---------------------------
-
-This addons allows to manage legal claim requisition
-from credit controling.
-
-This is done by setting a boolean "Legal claim"
-on credit control policy level.
-
-
-From then you can print claim requisition letter from invoice
-user the: ::
-
-    more -> Print Legal Claim Letter
-
-""",
+             'account_credit_control',
+             ],
  'website': 'http://www.camptocamp.com',
  'data': ['view/claim_office_view.xml',
           'view/claim_scheme_view.xml',
