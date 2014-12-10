@@ -17,12 +17,6 @@
       <field name="model">legal.claim.office</field>
       <field name="arch" type="xml">
         <form version="7.0" string="Claim office">
-          <header>
-            <button
-                type="action"
-                name="%(base_location.action_zip_tree)d"
-                string="Related Locations"/>
-          </header>
           <group>
             <field name="name"/>
             <field name="partner_id"/>
