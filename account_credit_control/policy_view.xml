@@ -27,17 +27,21 @@
                   <field name="name"/>
                   <notebook colspan="4">
                     <page string="Delay Setting">
-                      <field name="level"/>
-                      <field name="channel"/>
-                      <field name="delay_days"/>
-                      <field name="computation_mode"/>
+                      <group>
+                        <field name="level"/>
+                        <field name="channel"/>
+                        <field name="delay_days"/>
+                        <field name="computation_mode"/>
+                      </group>
                     </page>
                     <page string="Mail and reporting">
-                      <field name="email_template_id"/>
-                      <newline/>
-                      <field name="custom_text" colspan="4"/>
-                      <newline/>
-                      <field name="custom_mail_text" colspan="4"/>
+                      <group>
+                        <field name="email_template_id"/>
+                        <newline/>
+                        <field name="custom_text" colspan="4"/>
+                        <newline/>
+                        <field name="custom_mail_text" colspan="4"/>
+                      </group>
                     </page>
                   </notebook>
                 </form>
@@ -91,14 +95,18 @@
           <field name="name"/>
           <notebook colspan="4">
             <page string="Delay Setting">
-              <field name="level"/>
-              <field name="channel"/>
-              <field name="delay_days"/>
-              <field name="computation_mode"/>
+              <group>
+                <field name="level"/>
+                <field name="channel"/>
+                <field name="delay_days"/>
+                <field name="computation_mode"/>
+              </group>
             </page>
             <page string="Mail and reporting">
-              <field name="email_template_id"/>
-              <field name="custom_text"/>
+              <group>
+                <field name="email_template_id"/>
+                <field name="custom_text"/>
+              </group>
             </page>
           </notebook>
         </form>
