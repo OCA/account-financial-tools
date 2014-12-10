@@ -15,7 +15,7 @@ Credits
 -------
 
 Authors:
-~~~~~~~
+~~~~~~~~
 
 * Davide Corio <davide.corio@agilebg.com>
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
