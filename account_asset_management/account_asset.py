@@ -873,10 +873,9 @@ class account_asset_asset(orm.Model):
             return 0.0
         cr.execute(
             "SELECT COALESCE(SUM(amount),0.0) AS amount "
-            "FROM account_asset_depreciation_line dl "
-            "INNER JOIN account_asset_asset a ON dl.asset_id = a.id "
-            "WHERE a.id = %s AND dl.type='depreciate' "
-            "AND (dl.init_entry=TRUE OR dl.move_check=TRUE)",
+            "FROM account_asset_depreciation_line "
+            "WHERE asset_id = %s AND type='depreciate' "
+            "AND (init_entry=TRUE OR move_check=TRUE)",
             (asset.id,))
         amount = cr.fetchone()[0]
         return asset.asset_value - amount
@@ -945,7 +944,8 @@ class account_asset_asset(orm.Model):
     def _get_assets_from_dl(self, cr, uid, ids, context=None):
         asset_ids = []
         for dl in filter(
-                lambda x: x.type == 'depreciate',
+                lambda x: x.type == 'depreciate' and
+                        (x.init_entry or x.move_id),
                 self.pool.get('account.asset.depreciation.line').browse(
                     cr, uid, ids, context=context)):
             res = []
