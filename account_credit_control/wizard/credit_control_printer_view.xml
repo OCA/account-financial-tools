@@ -4,7 +4,6 @@
     <record id="credit_line_printer_form" model="ir.ui.view">
       <field name="name">credit.line.printer.form</field>
       <field name="model">credit.control.printer</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Lines report" version="7.0">
           <separator string="Print the selected lines" colspan="4"/>

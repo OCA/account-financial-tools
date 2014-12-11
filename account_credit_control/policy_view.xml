@@ -4,7 +4,6 @@
     <record id="credit_control_policy_form" model="ir.ui.view">
       <field name="name">credit.control.policy.form</field>
       <field name="model">credit.control.policy</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control policy">
           <group>
@@ -28,17 +27,21 @@
                   <field name="name"/>
                   <notebook colspan="4">
                     <page string="Delay Setting">
-                      <field name="level"/>
-                      <field name="channel"/>
-                      <field name="delay_days"/>
-                      <field name="computation_mode"/>
+                      <group>
+                        <field name="level"/>
+                        <field name="channel"/>
+                        <field name="delay_days"/>
+                        <field name="computation_mode"/>
+                      </group>
                     </page>
                     <page string="Mail and reporting">
-                      <field name="email_template_id"/>
-                      <newline/>
-                      <field name="custom_text" colspan="4"/>
-                      <newline/>
-                      <field name="custom_mail_text" colspan="4"/>
+                      <group>
+                        <field name="email_template_id"/>
+                        <newline/>
+                        <field name="custom_text" colspan="4"/>
+                        <newline/>
+                        <field name="custom_mail_text" colspan="4"/>
+                      </group>
                     </page>
                   </notebook>
                 </form>
@@ -55,7 +58,6 @@
     <record id="credit_control_policy_tree" model="ir.ui.view">
       <field name="name">credit.control.policy.tree</field>
       <field name="model">credit.control.policy</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="Credit control policy">
           <field name="name"/>
@@ -88,20 +90,23 @@
     <record id="credit_mangement_policy_level_form" model="ir.ui.view">
       <field name="name">credit.mangement.policy.level.form</field>
       <field name="model">credit.control.policy.level</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Policy level">
           <field name="name"/>
           <notebook colspan="4">
             <page string="Delay Setting">
-              <field name="level"/>
-              <field name="channel"/>
-              <field name="delay_days"/>
-              <field name="computation_mode"/>
+              <group>
+                <field name="level"/>
+                <field name="channel"/>
+                <field name="delay_days"/>
+                <field name="computation_mode"/>
+              </group>
             </page>
             <page string="Mail and reporting">
-              <field name="email_template_id"/>
-              <field name="custom_text"/>
+              <group>
+                <field name="email_template_id"/>
+                <field name="custom_text"/>
+              </group>
             </page>
           </notebook>
         </form>
@@ -111,7 +116,6 @@
     <record id="credit_control_policy_level_tree" model="ir.ui.view">
       <field name="name">credit.control.policy.level.tree</field>
       <field name="model">credit.control.policy.level</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="Credit control policy level">
           <field name="name"/>

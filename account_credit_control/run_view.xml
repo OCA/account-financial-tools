@@ -4,7 +4,6 @@
     <record id="credit_control_run_tree" model="ir.ui.view">
       <field name="name">credit.control.run.tree</field>
       <field name="model">credit.control.run</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree string="Credit control run">
           <field name="date"/>
@@ -16,7 +15,6 @@
     <record id="credit_control_run_form" model="ir.ui.view">
       <field name="name">credit.control.run.form</field>
       <field name="model">credit.control.run</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Credit control run">
           <header>
