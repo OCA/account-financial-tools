@@ -46,7 +46,7 @@ class CreditControlLegalPrinter(models.TransientModel):
         :param invoices: recordset of invoices to filter
 
         """
-        return invoices.filtered(key=key)
+        return invoices.filtered(key)
 
     @api.model
     def _get_invoices(self):
