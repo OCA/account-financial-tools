@@ -26,9 +26,14 @@ class res_partner(models.Model):
 
     _inherit = "res.partner"
 
-    claim_office_id = fields.Many2one(comodel_name='legal.claim.office',
-                                      compute='_get_claim_office',
-                                      string='Claim office')
+    claim_office_id = fields.Many2one(
+        comodel_name='legal.claim.office',
+        compute='_get_claim_office',
+        string='Claim Office',
+        help="The claim office assigned to the partner. "
+             "The office selected for a customer is the one "
+             "in the same city.",
+        )
 
     @api.depends('zip', 'city')
     def _get_claim_office(self):

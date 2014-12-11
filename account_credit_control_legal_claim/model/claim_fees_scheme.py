@@ -120,5 +120,9 @@ class ClaimFeesSchemeLine(models.Model):
     claim_scheme_id = fields.Many2one(comodel_name='legal.claim.fees.scheme',
                                       string='Price list',
                                       required=True)
-    open_amount = fields.Integer(string='Open Amount', required=True)
-    fees = fields.Float(string='Fees', required=True)
+    open_amount = fields.Integer(string='Open Amount',
+                                 required=True,
+                                 help="The amount unpaid by the customer. ")
+    fees = fields.Float(string='Fees', required=True,
+                        help="The amount of fees when the open amount "
+                             "is reached.")
