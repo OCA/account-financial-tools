@@ -44,4 +44,4 @@ class res_partner(models.Model):
                       ('claim_office_id', '!=', False)]
             location = location_model.search(domain, order='priority', limit=1)
             if location:
-                self.claim_office_id = location.claim_office_id
+                partner.claim_office_id = location.claim_office_id
