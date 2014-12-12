@@ -21,9 +21,9 @@
           </notebook>
           <newline/>
           <footer>
-            <button class="oe_highlight" name="print_claims" string="Print" type="object" />
-            <button special="cancel" string="Cancel" icon='gtk-cancel'/>
-            <button special="cancel" string="Close" icon='gtk-close'/>
+            <button string="Print" name="print_claims" type="object" class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
           </footer>
         </form>
       </field>
