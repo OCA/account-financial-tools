@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+    <record id="partner_followup_form_view" model="ir.ui.view">
+      <field name="name">partner.credit_control.form.view</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="account_credit_control.partner_followup_form_view" />
+      <field name="arch" type="xml">
+        <field name="credit_policy_id" position="after">
+          <field name="claim_office_id"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+        </field>
+      </field>
+    </record>
+    </data>
+</openerp>

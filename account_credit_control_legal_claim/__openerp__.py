@@ -33,6 +33,7 @@
           'view/credit_control_claim_printer_view.xml',
           # 'report/report.xml',
           'view/policy_view.xml',
+          'view/partner_view.xml',
           'security/ir.model.access.csv',
           ],
  'demo': [],
