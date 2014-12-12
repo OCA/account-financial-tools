@@ -22,32 +22,31 @@ from operator import attrgetter
 from openerp import models, fields, api
 
 
-class ClaimFeesScheme(models.Model):
-    """Claim fees
+class LawsuitFeesSchedule(models.Model):
+    """Lawsuit fees
 
-    Claim offices take fees based on the open amount
-    when a legal action is taken.
+    Lawsuit offices take fees based on the open amount
+    when a lawsuit procedure is issued.
 
-    The model represent the scheme open amount/fees
+    The model represent the schedule open amount/fees
 
     """
 
-    _name = 'legal.claim.fees.scheme'
+    _name = 'lawsuit.fees.schedule'
 
     @api.model
     def _company_get(self):
         """Return related company"""
         company_obj = self.env['res.company']
-        return company_obj._company_default_get('claim.fees.scheme')
+        return company_obj._company_default_get('lawsuit.fees.schedule')
 
     name = fields.Char(required=True)
     product_id = fields.Many2one(comodel_name='product.product',
                                  string='Product',
                                  required=True)
-    claim_scheme_line_ids = fields.One2many(
-        comodel_name='legal.claim.fees.scheme.line',
-        inverse_name='claim_scheme_id',
-        string='Price lists')
+    line_ids = fields.One2many(comodel_name='lawsuit.fees.schedule.line',
+                               inverse_name='schedule_id',
+                               string='Price lists')
     company_id = fields.Many2one(comodel_name='res.company',
                                  string='Company',
                                  default=_company_get)
@@ -76,7 +75,7 @@ class ClaimFeesScheme(models.Model):
 
         """
         self.ensure_one()
-        lines = self.claim_scheme_line_ids
+        lines = self.line_ids
         lines = lines.sorted(key=attrgetter('open_amount'), reverse=True)
         for line in lines:
             if due_amount >= line.open_amount:
@@ -110,16 +109,16 @@ class ClaimFeesScheme(models.Model):
         return self.get_fees_from_amount(due)
 
 
-class ClaimFeesSchemeLine(models.Model):
-    """Price list line of scheme that contains price and qty"""
+class LawsuitFeesScheduleLine(models.Model):
+    """Price list line of schedule that contains price and qty"""
 
-    _name = 'legal.claim.fees.scheme.line'
+    _name = 'lawsuit.fees.schedule.line'
     _rec_name = "open_amount"
     _order = "open_amount"
 
-    claim_scheme_id = fields.Many2one(comodel_name='legal.claim.fees.scheme',
-                                      string='Price list',
-                                      required=True)
+    schedule_id = fields.Many2one(comodel_name='lawsuit.fees.schedule',
+                                  string='Price list',
+                                  required=True)
     open_amount = fields.Integer(string='Open Amount',
                                  required=True,
                                  help="The amount unpaid by the customer. ")

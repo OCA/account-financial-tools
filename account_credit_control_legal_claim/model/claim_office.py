@@ -21,28 +21,28 @@
 from openerp import models, fields
 
 
-class ClaimOffice(models.Model):
-    """Claim office"""
+class LawsuitOffice(models.Model):
+    """Lawsuit office"""
 
-    _name = "legal.claim.office"
+    _name = "lawsuit.office"
 
     name = fields.Char(required=True)
     locations_ids = fields.One2many(comodel_name='res.better.zip',
-                                    inverse_name='claim_office_id',
-                                    string='Related zip')
-    fees_scheme_id = fields.Many2one(comodel_name='legal.claim.fees.scheme',
-                                     string='Fees Scheme',
-                                     select=True,
-                                     required=True)
+                                    inverse_name='lawsuit_office_id',
+                                    string='Applicable in ZIPs')
+    fees_schedule_id = fields.Many2one(comodel_name='lawsuit.fees.schedule',
+                                       string='Fees Schedule',
+                                       select=True,
+                                       required=True)
     partner_id = fields.Many2one(comodel_name='res.partner',
                                  string='Office Address',
                                  required=True)
 
 
 class BetterZip(models.Model):
-    """Add relation to claim office"""
+    """Add relation to lawsuit office"""
 
     _inherit = "res.better.zip"
-    claim_office_id = fields.Many2one(comodel_name='legal.claim.office',
-                                      string='Claim office',
-                                      select=True)
+    lawsuit_office_id = fields.Many2one(comodel_name='lawsuit.office',
+                                        string='Lawsuit office',
+                                        select=True)

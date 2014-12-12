@@ -6,7 +6,7 @@ requisitions when all levels were reached.
 
 Overview:
 
-* Adds **Lawsuit offices** (where the lawsuit can be issued).
+* Adds **Lawsuit offices** (where the lawsuit can be filed).
 * The Lawsuit offices have a **Fees Schedule**, with progressive fees
   depending on the due amount.
 * Lawsuit offices are linked to one or many zip codes.

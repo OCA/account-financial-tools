@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <record id="claim_scheme_list_view" model="ir.ui.view">
-      <field name="name">claime scheme list view</field>
-      <field name="model">legal.claim.fees.scheme</field>
+    <record id="lawsuit_schedule_list_view" model="ir.ui.view">
+      <field name="name">lawsuit schedule list view</field>
+      <field name="model">lawsuit.fees.schedule</field>
       <field name="arch" type="xml">
-        <tree version="7.0" string="Claim fees"> <!-- editable="bottom" -->
+        <tree version="7.0" string="Lawsuit fees"> <!-- editable="bottom" -->
           <field name="name" />
           <field name="company_id" groups="base.group_multi_company" widget="selection"/>
           <field name="product_id"/>
@@ -14,11 +14,11 @@
     </record>
 
 
-    <record id="claim_scheme_form_view" model="ir.ui.view">
-      <field name="name">Claim Scheme form</field>
-      <field name="model">legal.claim.fees.scheme</field>
+    <record id="lawsuit_schedule_form_view" model="ir.ui.view">
+      <field name="name">Lawsuit Schedule form</field>
+      <field name="model">lawsuit.fees.schedule</field>
       <field name="arch" type="xml">
-        <form version="7.0" string="Claim Scheme">
+        <form version="7.0" string="Lawsuit Schedule">
           <header>
           </header>
           <sheet>
@@ -36,8 +36,8 @@
             </group>
 
             <notebook>
-              <page string="Scheme values" colspan="4">
-                <field name="claim_scheme_line_ids"
+              <page string="Schedule values" colspan="4">
+                <field name="line_ids"
                        required="1">
                   <tree type="7.0" string="Line" editable="top">
                     <field name="open_amount"/>
@@ -51,21 +51,21 @@
       </field>
     </record>
 
-    <record model="ir.actions.act_window" id="claim_scheme_menu_action">
-      <field name="name">Claim office</field>
+    <record model="ir.actions.act_window" id="lawsuit_schedule_menu_action">
+      <field name="name">Lawsuit Office</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="res_model">legal.claim.fees.scheme</field>
+      <field name="res_model">lawsuit.fees.schedule</field>
       <field name="domain"></field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
-      <field name="view_id" ref="claim_scheme_list_view"/>
+      <field name="view_id" ref="lawsuit_schedule_list_view"/>
     </record>
 
     <menuitem
-        name="Claim scheme"
+        name="Lawsuit Schedules"
         parent="account_credit_control.base_credit_control_configuration_menu"
-        action="claim_scheme_menu_action"
-        id="claim_scheme_menu_action_menu"/>
+        action="lawsuit_schedule_menu_action"
+        id="lawsuit_schedule_menu_action_menu"/>
 
   </data>
 </openerp>

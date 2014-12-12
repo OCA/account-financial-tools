@@ -1,16 +1,16 @@
 <openerp>
   <data>
 
-    <record id="credit_control_claim_printer_view" model="ir.ui.view">
-      <field name="name">credit control claim printer view</field>
-      <field name="model">credit.control.legal.claim.printer</field>
+    <record id="credit_control_lawsuit_printer_view" model="ir.ui.view">
+      <field name="name">credit control lawsuit printer view</field>
+      <field name="model">credit.control.lawsuit.printer</field>
       <field name="arch" type="xml">
         <form version="7.0"
-              string="Claim Printer">
-          <separator string="Print claim requisition letter for invoices" colspan="4"/>
+              string="Lawsuit Printer">
+          <separator string="Print lawsuit requisition letter for invoices" colspan="4"/>
           <newline/>
           <group>
-            <field name="mark_as_claimed"
+            <field name="mark_as_filed"
                    colspan="4"/>
           </group>
           <newline/>
@@ -21,7 +21,7 @@
           </notebook>
           <newline/>
           <footer>
-            <button string="Print" name="print_claims" type="object" class="oe_highlight"/>
+            <button string="Print" name="print_lawsuit" type="object" class="oe_highlight"/>
             or
             <button string="Cancel" class="oe_link" special="cancel"/>
           </footer>
@@ -30,25 +30,25 @@
     </record>
 
     <!-- for button -->
-    <record id="legal_claim_printer_action" model="ir.actions.act_window">
-      <field name="name">Print Claim Requisition</field>
-      <field name="res_model">credit.control.legal.claim.printer</field>
+    <record id="lawsuit_printer_action" model="ir.actions.act_window">
+      <field name="name">Print Lawsuit Requisition</field>
+      <field name="res_model">credit.control.lawsuit.printer</field>
       <field name="src_model">account.invoice</field>
       <field name="view_type">form</field>
       <field name="view_mode">form</field>
-      <field name="view_id" ref="credit_control_claim_printer_view"/>
+      <field name="view_id" ref="credit_control_lawsuit_printer_view"/>
       <field name="target">new</field>
       <field name="help"></field>
     </record>
 
     <!-- for menu -->
-    <act_window name="Print Claim Requisition"
-                res_model="credit.control.legal.claim.printer"
+    <act_window name="Print Lawsuit Requisition"
+                res_model="credit.control.lawsuit.printer"
                 src_model="account.invoice"
                 view_mode="form"
                 target="new"
                 key2="client_action_multi"
-                id="legal_claim_printer_action_menu_action"/>
+                id="lawsuit_printer_action_menu_action"/>
 
   </data>
 </openerp>

@@ -22,18 +22,18 @@
 from itertools import groupby
 from openerp import models, api, fields
 
-report_name = 'account_credit_control_legal_claim.report_claim_requisition'
+report_name = 'account_credit_control_legal_claim.report_lawsuit_requisition'
 
 
-class ClaimRequisitionPartner(models.TransientModel):
-    _name = 'claim.requisition.partner'
+class LawsuitRequisitionPartner(models.TransientModel):
+    _name = 'lawsuit.requisition.partner'
 
     partner = fields.Many2one(comodel_name='res.partner')
     invoices = fields.Many2many(comodel_name='account.invoice')
     currency = fields.Many2one(comodel_name='res.currency')
     dunning_fees = fields.Float(compute='compute_dunning_fees')
     due_amount = fields.Float(compute='compute_due_amount')
-    claim_fees = fields.Float(compute='compute_claim_fees')
+    lawsuit_fees = fields.Float(compute='compute_lawsuit_fees')
     paid_amount = fields.Float(compute='compute_paid_amount')
 
     def _active_line(self, line):
@@ -47,9 +47,9 @@ class ClaimRequisitionPartner(models.TransientModel):
                                 if self._active_line(line))
 
     @api.depends('invoices', 'partner')
-    def compute_claim_fees(self):
-        scheme = self.partner.claim_office_id.fees_scheme_id
-        self.claim_fees = scheme._get_fees_from_invoices(self.invoices)
+    def compute_lawsuit_fees(self):
+        schedule = self.partner.lawsuit_office_id.fees_schedule_id
+        self.lawsuit_fees = schedule._get_fees_from_invoices(self.invoices)
 
     @api.depends('invoices')
     def compute_due_amount(self):
@@ -61,7 +61,7 @@ class ClaimRequisitionPartner(models.TransientModel):
                                for inv in self.invoices)
 
 
-class ClaimRequisitionReport(models.AbstractModel):
+class LawsuitRequisitionReport(models.AbstractModel):
     _name = 'report.%s' % report_name
 
     @api.model  # 'ids' are ids of invoices, hence the 'model' decorator
@@ -69,7 +69,7 @@ class ClaimRequisitionReport(models.AbstractModel):
         invoice_obj = self.env['account.invoice']
         invoices = invoice_obj.browse(ids)
 
-        report_partner_obj = self.env['claim.requisition.partner']
+        report_partner_obj = self.env['lawsuit.requisition.partner']
         report_partners = report_partner_obj.browse()
         grouped = groupby(invoices, lambda inv: (inv.partner_id,
                                                  inv.currency_id))
@@ -83,7 +83,7 @@ class ClaimRequisitionReport(models.AbstractModel):
 
         docargs = {
             'doc_ids': report_partners.ids,
-            'doc_model': 'claim.requisition.partner',
+            'doc_model': 'lawsuit.requisition.partner',
             'docs': report_partners,
         }
         # Use the old API because the render() has an 'ids' argument

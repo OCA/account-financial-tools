@@ -21,27 +21,27 @@
 from openerp import models, fields, api, exceptions, _
 
 
-class CreditControlLegalPrinter(models.TransientModel):
-    """Print claim requisition letter
+class CreditControlLawsuitPrinter(models.TransientModel):
+    """Print Lawsuit requisition letter
 
     And manage related credit lines
 
     """
 
-    _name = "credit.control.legal.claim.printer"
+    _name = "credit.control.lawsuit.printer"
     _rec_name = 'id'
 
     @staticmethod
     def invoice_filter_key(invoice):
         return any(line for line in invoice.credit_control_line_ids
-                   if line.policy_level_id.is_legal_claim)
+                   if line.policy_level_id.need_lawsuit)
 
     @api.model
-    def _filter_claim_invoices(self, invoices, key):
-        """ Return invoices that are related to a claim
+    def _filter_lawsuit_invoices(self, invoices, key):
+        """ Return invoices for which a lawsuit must be filed
 
         It means that the invoice must be related to an active credit line
-        related to a claim policy level
+        related to a lawsuit policy level
 
         :param invoices: recordset of invoices to filter
 
@@ -52,7 +52,8 @@ class CreditControlLegalPrinter(models.TransientModel):
     def _get_invoices(self):
         """Return invoices ids to be treated from context
 
-        A candidate invoice is related to a claim
+        A candidate invoice is related to a credit control line
+        with a lawsuit level
 
         """
         invoice_model = self.env['account.invoice']
@@ -62,19 +63,19 @@ class CreditControlLegalPrinter(models.TransientModel):
         if not invoice_ids:
             return
         invoices = invoice_model.browse(invoice_ids)
-        invoices = self._filter_claim_invoices(invoices,
-                                               self.invoice_filter_key)
+        invoices = self._filter_lawsuit_invoices(invoices,
+                                                 self.invoice_filter_key)
         return invoices
 
-    mark_as_claimed = fields.Boolean(string='Mark as Claimed',
-                                     default=True)
+    mark_as_filed = fields.Boolean(string='Mark as Filed',
+                                   default=True)
     invoice_ids = fields.Many2many(comodel_name='account.invoice',
                                    string='Invoices',
                                    default=_get_invoices)
 
     @api.model
     def _generate_report(self, invoices):
-        """Generate claim requisition report.
+        """Generate lawsuit requisition report.
 
         :param invoices: recordset of invoices to print
 
@@ -82,38 +83,38 @@ class CreditControlLegalPrinter(models.TransientModel):
 
         """
         report_name = ('account_credit_control_legal_claim.'
-                       'report_claim_requisition')
+                       'report_lawsuit_requisition')
         return self.env['report'].get_action(invoices, report_name)
 
     @api.model
-    def _mark_invoices_as_claimed(self, invoices):
+    def _mark_invoices_as_filed(self, invoices):
         """Mark related credit line of an invoice as overridden.
 
-        Only non claim credit line will be marked
+        Only non lawsuit credit line will be marked
 
         :param invoice: invoice record to treat
 
         :returns: marked credit lines
         """
         lines = invoices.mapped('credit_control_line_ids')
-        lines = lines.filtered(lambda l: not l.policy_level_id.is_legal_claim)
+        lines = lines.filtered(lambda l: not l.policy_level_id.need_lawsuit)
         lines.write({'manually_overridden': True})
         return lines
 
     @api.multi
-    def print_claims(self):
-        """Generate claim requisition report and manage credit lines.
+    def print_lawsuit(self):
+        """Generate lawsuit requisition report and manage credit lines.
 
-        Non claim credit lines will be overridden
+        Non lawsuit credit lines will be overridden
 
         :returns: an ir.action to print the report
 
         """
         self.ensure_one()
-        invoices = self._filter_claim_invoices(self.invoice_ids,
-                                               self.invoice_filter_key)
+        invoices = self._filter_lawsuit_invoices(self.invoice_ids,
+                                                 self.invoice_filter_key)
         if not invoices:
             raise exceptions.Warning(_('No invoice to print'))
-        if self.mark_as_claimed:
-            self._mark_invoices_as_claimed(invoices)
+        if self.mark_as_filed:
+            self._mark_invoices_as_filed(invoices)
         return self._generate_report(invoices)

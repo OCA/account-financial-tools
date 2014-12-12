@@ -22,20 +22,20 @@ from openerp import models, fields, api, exceptions, _
 
 
 class CreditControlPolicyLevel(models.Model):
-    """Add claim type to policy level"""
+    """Add lawsuits to policy level"""
 
     _inherit = "credit.control.policy.level"
 
-    is_legal_claim = fields.Boolean(string='Implies a legal claim')
+    need_lawsuit = fields.Boolean(string='File Lawsuit')
 
-    @api.constrains('is_legal_claim')
-    def _check_legal_claim_level(self):
+    @api.constrains('need_lawsuit')
+    def _check_lawsuit_level(self):
         for current_level in self:
             levels = current_level.policy_id.level_ids
             highest = max(levels, key=lambda x: x.level)
             for level in levels:
-                if level.is_legal_claim and level != highest:
+                if level.need_lawsuit and level != highest:
                     raise exceptions.Warning(
-                        _('Only the highest level can be selected for legal '
-                          'claims. The highest level is %s') % highest.name
+                        _('Only the highest level can be selected for '
+                          'lawsuits. The highest level is %s') % highest.name
                     )

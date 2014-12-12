@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
   <data>
-    <template id="report_claim_requisition_document">
+    <template id="report_lawsuit_requisition_document">
       <t t-call="report.external_layout">
         <div class="page">
 
-          <h2>Legal Claim Requisition</h2>
+          <h2>Legal Lawsuit Requisition</h2>
 
           <div class="row mt16" id="office_address">
             <div class="col-xs-6">
-              <address t-field="o.partner.claim_office_id.partner_id"
+              <address t-field="o.partner.lawsuit_office_id.partner_id"
                 t-field-options='{"widget": "contact",
                 "fields": ["address", "name"],
                 "no_marker": true}' />
@@ -34,7 +34,7 @@
             </div>
           </div>
 
-          <h3>Claim Reasons</h3>
+          <h3>Lawsuit Reasons</h3>
 
           <table class="table table-condensed mb32" id="invoices">
             <thead>
@@ -92,9 +92,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Legal Claim Fees</td>
+                  <td>Legal Lawsuit Fees</td>
                   <td class="text-right">
-                    <span t-field="o.claim_fees"
+                    <span t-field="o.lawsuit_fees"
                       t-field-options='{"widget": "monetary",
                       "display_currency": "o.currency"}'/>
                   </td>
@@ -120,10 +120,10 @@
       </t>
     </template>
 
-    <template id="report_claim_requisition">
+    <template id="report_lawsuit_requisition">
       <t t-call="report.html_container">
         <t t-foreach="doc_ids" t-as="doc_id">
-          <t t-raw="translate_doc(doc_id, doc_model, 'partner.lang', 'account_credit_control_legal_claim.report_claim_requisition_document')"/>
+          <t t-raw="translate_doc(doc_id, doc_model, 'partner.lang', 'account_credit_control_legal_claim.report_lawsuit_requisition_document')"/>
         </t>
       </t>
     </template>

@@ -21,27 +21,27 @@
 from openerp import models, fields, api
 
 
-class res_partner(models.Model):
-    """Add related claim office"""
+class ResPartner(models.Model):
+    """Add related lawsuit office"""
 
     _inherit = "res.partner"
 
-    claim_office_id = fields.Many2one(
-        comodel_name='legal.claim.office',
-        compute='_get_claim_office',
-        string='Claim Office',
-        help="The claim office assigned to the partner. "
+    lawsuit_office_id = fields.Many2one(
+        comodel_name='lawsuit.office',
+        compute='_get_lawsuit_office',
+        string='Lawsuit Office',
+        help="The lawsuit office assigned to the partner. "
              "The office selected for a customer is the one "
              "in the same city.",
         )
 
     @api.depends('zip', 'city')
-    def _get_claim_office(self):
+    def _get_lawsuit_office(self):
         location_model = self.env['res.better.zip']
         for partner in self:
             domain = [('name', '=', partner.zip),
                       ('city', '=', partner.city),
-                      ('claim_office_id', '!=', False)]
+                      ('lawsuit_office_id', '!=', False)]
             location = location_model.search(domain, order='priority', limit=1)
             if location:
-                partner.claim_office_id = location.claim_office_id
+                partner.lawsuit_office_id = location.lawsuit_office_id

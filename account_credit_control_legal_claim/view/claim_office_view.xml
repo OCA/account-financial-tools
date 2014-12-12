@@ -2,25 +2,25 @@
 <openerp>
   <data>
 
-    <record id="claim_office_list_view" model="ir.ui.view">
-      <field name="name">claim office list view</field>
-      <field name="model">legal.claim.office</field>
+    <record id="lawsuit_office_list_view" model="ir.ui.view">
+      <field name="name">lawsuit office list view</field>
+      <field name="model">lawsuit.office</field>
       <field name="arch" type="xml">
-        <tree version="7.0" string="Claim office">
+        <tree version="7.0" string="Lawsuit Office">
           <field name="name"/>
         </tree>
       </field>
     </record>
 
-    <record id="claim_office_form_view" model="ir.ui.view">
-      <field name="name">claim office form view</field>
-      <field name="model">legal.claim.office</field>
+    <record id="lawsuit_office_form_view" model="ir.ui.view">
+      <field name="name">lawsuit office form view</field>
+      <field name="model">lawsuit.office</field>
       <field name="arch" type="xml">
-        <form version="7.0" string="Claim office">
+        <form version="7.0" string="Lawsuit Office">
           <group>
             <field name="name"/>
             <field name="partner_id"/>
-            <field name="fees_scheme_id"/>
+            <field name="fees_schedule_id"/>
             <field name="locations_ids" widget="many2many_tags"/>
           </group>
         </form>
@@ -28,21 +28,21 @@
     </record>
 
 
-    <record model="ir.actions.act_window" id="claim_office_action">
-      <field name="name">Claim Office</field>
+    <record model="ir.actions.act_window" id="lawsuit_office_action">
+      <field name="name">Lawsuit Office</field>
       <field name="type">ir.actions.act_window</field>
-      <field name="res_model">legal.claim.office</field>
+      <field name="res_model">lawsuit.office</field>
       <field name="domain"></field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
-      <field name="view_id" ref="claim_office_list_view"/>
+      <field name="view_id" ref="lawsuit_office_list_view"/>
     </record>
 
     <menuitem
-        name="Claim Offices"
+        name="Lawsuit Offices"
         parent="account_credit_control.base_credit_control_configuration_menu"
-        action="claim_office_action"
-        id="claim_office_action_menu"/>
+        action="lawsuit_office_action"
+        id="lawsuit_office_action_menu"/>
 
     <record id="add_office_to_location" model="ir.ui.view">
       <field name="name">add office to location</field>
@@ -50,7 +50,7 @@
       <field name="inherit_id" ref="base_location.better_zip_form" />
       <field name="arch" type="xml">
         <field name="country_id" position="after">
-          <field name="claim_office_id"/>
+          <field name="lawsuit_office_id"/>
         </field>
       </field>
     </record>
