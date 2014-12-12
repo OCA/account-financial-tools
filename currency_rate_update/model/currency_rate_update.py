@@ -122,6 +122,12 @@ PL_NBP_supported_currency_array = [
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
+RU_CBRF_supported_currency_array = [
+    "AUD", "AZN", "GBP", "AMD", "BYR", "BGN", "BRL", "HUF", "DKK", "USD",
+    "EUR", "INR", "KZT", "CAD", "KGS", "CNY", "LTL", "MDL", "NOK", "PLN",
+    "RON", "XDR", "SGD", "TJS", "TRY", "TMT", "UZS", "UAH", "CZK", "SEK",
+    "CHF", "ZAR", "KRW", "JPY"]
+
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
     'ECB_getter': ECB_supported_currency_array,
@@ -130,7 +136,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
-    'CBRF_getter': supported_currency_array,
+    'RU_CBRF_getter': RU_CBRF_supported_currency_array,
     }
 
 
@@ -197,7 +203,7 @@ class Currency_rate_update_service(models.Model):
          # Added for romanian rates
          ('RO_BNR_getter', 'National Bank of Romania'),
          # Added for Russian Central Bank
-         ('CBRF_getter','The Central Bank of the Russia Federation')
+         ('RU_CBRF_getter','The Central Bank of the Russia Federation')
          ],
         string="Webservice to use",
         required=True)
