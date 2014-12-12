@@ -22,15 +22,16 @@
 ##############################################################################
 
 from .currency_getter_interface import Currency_getter_interface
+from xmltodict import parse
+import requests
 
-class CBRF_getter(Currency_getter_interface) :
+class RU_CBRF_getter(Currency_getter_interface) :
     """Implementation of Currency_getter_factory interface
     for The Central Bank of the Russian Federation service"""
         
     def get_updated_currency(self, currency_array, main_currency, max_delta_days):
         """implementation of abstract method of Currency_getter_interface"""
-        from xmltodict import parse
-        import requests
+
         response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
         response.encoding = 'cp1251'
         rates = {}
