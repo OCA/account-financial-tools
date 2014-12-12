@@ -85,7 +85,7 @@ class CreditControlLegalPrinter(models.TransientModel):
         return self.env['report'].get_action(self, report_name)
 
     @api.model
-    def _mark_invoice_as_claimed(self, invoice):
+    def _mark_invoices_as_claimed(self, invoices):
         """Mark related credit line of an invoice as overridden.
 
         Only non claim credit line will be marked
@@ -94,7 +94,7 @@ class CreditControlLegalPrinter(models.TransientModel):
 
         :returns: marked credit lines
         """
-        lines = invoice.credit_control_line_ids
+        lines = invoices.mapped('credit_control_line_ids')
         lines = lines.filtered(lambda l: not l.policy_level_id.is_legal_claim)
         lines.write({'manually_overridden': True})
         return lines
@@ -114,5 +114,5 @@ class CreditControlLegalPrinter(models.TransientModel):
         if not invoices:
             raise exceptions.Warning(_('No invoice to print'))
         if self.mark_as_claimed:
-            invoices._mark_invoice_as_claimed()
+            self._mark_invoices_as_claimed(invoices)
         return self._generate_report(invoices)
