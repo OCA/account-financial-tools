@@ -1,0 +1,344 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_credit_control_legal_claim
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-12 13:01+0000\n"
+"PO-Revision-Date: 2014-12-12 13:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_credit_control_legal_claim
+#: model:ir.model,name:account_credit_control_legal_claim.model_res_better_zip
+msgid " City/locations completion object"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.model,name:account_credit_control_legal_claim.model_credit_control_policy_level
+msgid "A credit control policy level"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Amount due"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+msgid "Cancel"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.actions.act_window,name:account_credit_control_legal_claim.claim_office_action
+msgid "Claim Office"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.ui.menu,name:account_credit_control_legal_claim.claim_office_action_menu
+msgid "Claim Offices"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+msgid "Claim Printer"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Claim Reasons"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:legal.claim.fees.scheme:account_credit_control_legal_claim.claim_scheme_form_view
+msgid "Claim Scheme"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:legal.claim.fees.scheme:account_credit_control_legal_claim.claim_scheme_list_view
+msgid "Claim fees"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.actions.act_window,name:account_credit_control_legal_claim.claim_scheme_menu_action
+#: view:legal.claim.office:account_credit_control_legal_claim.claim_office_form_view
+#: view:legal.claim.office:account_credit_control_legal_claim.claim_office_list_view
+#: field:res.better.zip,claim_office_id:0
+msgid "Claim office"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.ui.menu,name:account_credit_control_legal_claim.claim_scheme_menu_action_menu
+msgid "Claim scheme"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,create_uid:0
+#: field:credit.control.legal.claim.printer,create_uid:0
+#: field:legal.claim.fees.scheme,create_uid:0
+#: field:legal.claim.fees.scheme.line,create_uid:0
+#: field:legal.claim.office,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,create_date:0
+#: field:credit.control.legal.claim.printer,create_date:0
+#: field:legal.claim.fees.scheme,create_date:0
+#: field:legal.claim.fees.scheme.line,create_date:0
+#: field:legal.claim.office,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.actions.report.xml,name:account_credit_control_legal_claim.action_report_legal_claim
+msgid "Credit Claim Requisition"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Creditor"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,currency:0
+#: field:legal.claim.fees.scheme,currency_id:0
+msgid "Currency"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Customer Reference"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Date and place"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Date due"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Debtor"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Debtor already paid amount"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Dunning Fees"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme.line,fees:0
+msgid "Fees"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.office,fees_scheme_id:0
+msgid "Fees Scheme"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,id:0
+#: field:credit.control.legal.claim.printer,id:0
+#: field:legal.claim.fees.scheme,id:0
+#: field:legal.claim.fees.scheme.line,id:0
+#: field:legal.claim.office,id:0
+#: field:report.account_credit_control_legal_claim.report_claim_requisition,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:credit.control.policy.level,is_legal_claim:0
+msgid "Implies a legal claim"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Invoice date"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Invoice number"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Invoiced amount"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,invoices:0
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+#: field:credit.control.legal.claim.printer,invoice_ids:0
+msgid "Invoices"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,write_uid:0
+#: field:credit.control.legal.claim.printer,write_uid:0
+#: field:legal.claim.fees.scheme,write_uid:0
+#: field:legal.claim.fees.scheme.line,write_uid:0
+#: field:legal.claim.office,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,write_date:0
+#: field:credit.control.legal.claim.printer,write_date:0
+#: field:legal.claim.fees.scheme,write_date:0
+#: field:legal.claim.fees.scheme.line,write_date:0
+#: field:legal.claim.office,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.policy:account_credit_control_legal_claim.add_claim_on_policy_level
+msgid "Legal Claim"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Legal Claim Fees"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Legal Claim Requisition"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:legal.claim.fees.scheme:account_credit_control_legal_claim.claim_scheme_form_view
+msgid "Line"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.policy:account_credit_control_legal_claim.add_claim_on_policy_level
+msgid "Mail and reporting"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:credit.control.legal.claim.printer,mark_as_claimed:0
+msgid "Mark as Claimed"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme,name:0
+#: field:legal.claim.office,name:0
+msgid "Name"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: code:addons/account_credit_control_legal_claim/wizard/credit_control_claim_printer.py:116
+#, python-format
+msgid "No invoice to print"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.office,partner_id:0
+msgid "Office Address"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: code:addons/account_credit_control_legal_claim/model/policy.py:39
+#, python-format
+msgid "Only the highest level can be selected for legal claims. The highest level is %s"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme.line,open_amount:0
+msgid "Open Amount"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Open amount"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:claim.requisition.partner,partner:0
+#: model:ir.model,name:account_credit_control_legal_claim.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme.line,claim_scheme_id:0
+msgid "Price list"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme,claim_scheme_line_ids:0
+msgid "Price lists"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+msgid "Print"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: model:ir.actions.act_window,name:account_credit_control_legal_claim.legal_claim_printer_action
+#: model:ir.actions.act_window,name:account_credit_control_legal_claim.legal_claim_printer_action_menu_action
+msgid "Print Claim Requisition"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+msgid "Print claim requisition letter for invoices"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.fees.scheme,product_id:0
+msgid "Product"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: field:legal.claim.office,locations_ids:0
+msgid "Related zip"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:legal.claim.fees.scheme:account_credit_control_legal_claim.claim_scheme_form_view
+msgid "Scheme values"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:website:account_credit_control_legal_claim.report_claim_requisition_document
+msgid "Signature"
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: help:legal.claim.fees.scheme.line,fees:0
+msgid "The amount of fees when the open amount is reached."
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: help:legal.claim.fees.scheme.line,open_amount:0
+msgid "The amount unpaid by the customer. "
+msgstr ""
+
+#. module: account_credit_control_legal_claim
+#: view:credit.control.legal.claim.printer:account_credit_control_legal_claim.credit_control_claim_printer_view
+msgid "or"
+msgstr ""
+
