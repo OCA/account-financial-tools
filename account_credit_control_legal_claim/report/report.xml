@@ -1,18 +1,13 @@
 <openerp>
   <data>
-    <report auto="False"
-            id="legal_claim_report_webkit"
-            model="account.invoice"
-            name="credit_control_legal_claim_requisition"
-            file="account_credit_control_legal_claim/report/credit_control_legal_claim.html.mako"
-            string="Credit Summary Claim"
-            report_type="webkit"
-            webkit_header="base_headers_webkit.base_minimum_reports_portrait_header"/>
-
-    <record model="ir.actions.report.xml" id="legal_claim_report_webkit">
-      <field name="precise_mode" eval="True"/>
-      <field name="header" eval="False"/>
-    </record>
+    <report
+      id="action_report_legal_claim"
+      model="account.invoice"
+      string="Credit Claim Requisition"
+      report_type="qweb-pdf"
+      name="account_credit_control_legal_claim.report_claim_requisition"
+      file="account_credit_control_legal_claim.report_claim_requisition"
+      />
 
   </data>
 </openerp>

@@ -81,8 +81,9 @@ class CreditControlLegalPrinter(models.TransientModel):
         :returns: a action to print the report
 
         """
-        report_name = 'report.credit_control_legal_claim_requisition'
-        return self.env['report'].get_action(self, report_name)
+        report_name = ('account_credit_control_legal_claim.'
+                       'report_claim_requisition')
+        return self.env['report'].get_action(invoices, report_name)
 
     @api.model
     def _mark_invoices_as_claimed(self, invoices):
