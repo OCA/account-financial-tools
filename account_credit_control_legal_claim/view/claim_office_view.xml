@@ -21,6 +21,7 @@
             <field name="name"/>
             <field name="partner_id"/>
             <field name="fees_scheme_id"/>
+            <field name="locations_ids" widget="many2many_tags"/>
           </group>
         </form>
       </field>
