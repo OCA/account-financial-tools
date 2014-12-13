@@ -25,11 +25,13 @@ from .currency_getter_interface import Currency_getter_interface
 from xmltodict import parse
 import requests
 
-class RU_CBRF_getter(Currency_getter_interface) :
+
+class RU_CBRF_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for The Central Bank of the Russian Federation service"""
-        
-    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
+
+    def get_updated_currency(self, currency_array, main_currency,
+                             max_delta_days):
         """implementation of abstract method of Currency_getter_interface"""
 
         response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
@@ -41,7 +43,7 @@ class RU_CBRF_getter(Currency_getter_interface) :
             valute['Value'] = float(valute['Value'].replace(',', '.'))
             rates[valute['CharCode']] = valute['Value']
 
-        if main_currency in currency_array :
+        if main_currency in currency_array:
             currency_array.remove(main_currency)
         main_currency_data = 1
         if main_currency != 'RUB':
@@ -51,5 +53,5 @@ class RU_CBRF_getter(Currency_getter_interface) :
         for curr in currency_array:
             self.validate_cur(curr)
             self.updated_currency[curr] = main_currency_data / rates[curr]
-        
+
         return self.updated_currency, self.log_info

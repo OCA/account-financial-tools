@@ -203,7 +203,7 @@ class Currency_rate_update_service(models.Model):
          # Added for romanian rates
          ('RO_BNR_getter', 'National Bank of Romania'),
          # Added for Russian Central Bank
-         ('RU_CBRF_getter','The Central Bank of the Russia Federation')
+         ('RU_CBRF_getter', 'The Central Bank of the Russia Federation')
          ],
         string="Webservice to use",
         required=True)
