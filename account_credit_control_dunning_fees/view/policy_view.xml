@@ -11,10 +11,8 @@
             <group>
               <group>
                 <field name="dunning_fixed_amount"/>
-                <field name="dunning_product_id"
-                       attrs="{'required': [('dunning_fixed_amount', '!=', False)]}"/>
-                <field name="dunning_currency_id"
-                       attrs="{'required': [('dunning_fixed_amount', '!=', False)]}"/>
+                <field name="dunning_product_id"/>
+                <field name="dunning_currency_id"/>
               </group>
             </group>
           </page>

@@ -108,12 +108,14 @@ class FeesComputer(models.BaseModel):
         :return: fees amount float (in credit line currency)
 
         """
-        credit_currency = credit_line.currency_id
+        credit_currency = (credit_line.currency_id or
+                           credit_line.company_id.currency_id)
         level = credit_line.policy_level_id
         fees_amount = level.dunning_fixed_amount
         if not fees_amount:
             return 0.0
-        fees_currency = level.dunning_currency_id
+        fees_currency = (level.dunning_currency_id or
+                         level.policy_id.company_id.currency_id)
         if fees_currency == credit_currency:
             return fees_amount
         else:

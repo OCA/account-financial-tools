@@ -84,6 +84,38 @@ class FixedFeesTester(common.TransactionCase):
         fees = self.dunning_model.compute_fixed_fees(credit_line)
         self.assertNotEqual(fees, self.euro_level.dunning_fixed_amount)
 
+    def test_computation_credit_currency_empty(self):
+        """Test that fees are correctly computed with empty credit currency"""
+        credit_line = self.line_model.new({
+            'policy_level_id': self.euro_level,
+            'currency_id': False,
+            'company_id': self.company,
+        })
+        fees = self.dunning_model.compute_fixed_fees(credit_line)
+        self.assertEqual(fees, self.euro_level.dunning_fixed_amount)
+
+    def test_computation_level_currency_empty(self):
+        """Test that fees are correctly computed with empty level currency"""
+        credit_line = self.line_model.new({
+            'policy_level_id': self.euro_level,
+            'currency_id': self.euro,
+            'company_id': self.company,
+        })
+        self.euro_level.currency_id = False
+        fees = self.dunning_model.compute_fixed_fees(credit_line)
+        self.assertEqual(fees, self.euro_level.dunning_fixed_amount)
+
+    def test_computation_all_currency_empty(self):
+        """Test that fees are correctly computed with empty currencies"""
+        credit_line = self.line_model.new({
+            'policy_level_id': self.euro_level,
+            'currency_id': False,
+            'company_id': self.company,
+        })
+        self.euro_level.currency_id = False
+        fees = self.dunning_model.compute_fixed_fees(credit_line)
+        self.assertEqual(fees, self.euro_level.dunning_fixed_amount)
+
     def test_no_fees(self):
         """Test that fees are not generated if no amount defined on level"""
         credit_line = self.line_model.new({
