@@ -23,6 +23,10 @@
               class="oe_highlight"
               type="object" icon="gtk-execute"
               attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+            <button name="open_credit_lines"
+              string="Open Credit Control Lines"
+              type="object"
+              attrs="{'invisible': [('state', '=', 'draft')]}"/>
             <field name="state" widget="statusbar"
               statusbar_visible="draft,done"
               statusbar_colors='{}'/>
