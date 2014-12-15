@@ -103,13 +103,13 @@ class LawsuitRequisitionTester(common.TransactionCase):
         })
 
         self.env['lawsuit.fees.schedule.line'].create({
-            'lawsuit_schedule_id': schedule.id,
+            'schedule_id': schedule.id,
             'open_amount': 0,
             'fees': 30
         })
 
         self.env['lawsuit.fees.schedule.line'].create({
-            'lawsuit_schedule_id': schedule.id,
+            'schedule_id': schedule.id,
             'open_amount': 500,
             'fees': 70,
         })
@@ -140,7 +140,7 @@ class LawsuitRequisitionTester(common.TransactionCase):
         invoice = self.lawsuit_invoice_1
         invoice.credit_control_line_ids += self.no_lawsuit_credit_line
         wiz_model = self.env['credit.control.lawsuit.printer']
-        res = wiz_model._mark_invoice_as_filed(self.lawsuit_invoice_1)
+        res = wiz_model._mark_invoices_as_filed(self.lawsuit_invoice_1)
         self.assertEqual(res, self.no_lawsuit_credit_line)
 
     def test_get_fees(self):
