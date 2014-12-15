@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-15 09:41+0000\n"
-"PO-Revision-Date: 2014-12-15 09:41+0000\n"
+"POT-Creation-Date: 2014-12-15 12:18+0000\n"
+"PO-Revision-Date: 2014-12-15 12:18+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -130,6 +130,11 @@ msgid "ID"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: model:ir.model,name:account_credit_control_lawsuit.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
 msgid "Invoice date"
 msgstr ""
@@ -170,8 +175,24 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_office_action
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_list_view
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Lawsuit Fees"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
+msgid "Lawsuit Fees Schedule"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_schedule_menu_action
+#: model:ir.ui.menu,name:account_credit_control_lawsuit.lawsuit_schedule_menu_action_menu
+msgid "Lawsuit Fees Schedules"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_office_action
 #: view:lawsuit.office:account_credit_control_lawsuit.lawsuit_office_form_view
 #: view:lawsuit.office:account_credit_control_lawsuit.lawsuit_office_list_view
 msgid "Lawsuit Office"
@@ -193,18 +214,8 @@ msgid "Lawsuit Reasons"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
-msgid "Lawsuit Fees Schedule"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
-#: model:ir.ui.menu,name:account_credit_control_lawsuit.lawsuit_schedule_menu_action_menu
-msgid "Lawsuit Fees Schedules"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
-#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_list_view
-msgid "Lawsuit fees"
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Lawsuit Requisition"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
@@ -213,23 +224,8 @@ msgid "Lawsuit office"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
-msgid "Lawsuit Fees"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
-#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
-msgid "Lawsuit Requisition"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
 #: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
 msgid "Line"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
-#: view:credit.control.policy:account_credit_control_lawsuit.add_lawsuit_on_policy_level
-msgid "Mail and reporting"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
@@ -244,12 +240,22 @@ msgid "Name"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: view:account.invoice:account_credit_control_lawsuit.view_account_invoice_filter
+msgid "Needs a Lawsuit Procedure"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: field:credit.control.policy.level,need_lawsuit:0
 msgid "Needs a Lawsuit procedure"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: code:addons/account_credit_control_lawsuit/wizard/credit_control_lawsuit_printer.py:117
+#: field:account.invoice,need_lawsuit:0
+msgid "Needs a lawsuit procedure"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: code:addons/account_credit_control_lawsuit/wizard/credit_control_lawsuit_printer.py:110
 #, python-format
 msgid "No invoice to print"
 msgstr ""
