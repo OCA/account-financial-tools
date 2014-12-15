@@ -131,8 +131,7 @@ class LawsuitRequisitionTester(common.TransactionCase):
         wiz_model = self.env['credit.control.lawsuit.printer']
         res = wiz_model._filter_lawsuit_invoices(
             self.lawsuit_invoice_1 + self.lawsuit_invoice_2 +
-            self.non_lawsuit_invoice_1,
-            wiz_model.invoice_filter_key
+            self.non_lawsuit_invoice_1
         )
         self.assertEqual(res, self.lawsuit_invoice_1 + self.lawsuit_invoice_2)
 

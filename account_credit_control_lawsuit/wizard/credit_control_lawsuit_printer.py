@@ -31,13 +31,8 @@ class CreditControlLawsuitPrinter(models.TransientModel):
     _name = "credit.control.lawsuit.printer"
     _rec_name = 'id'
 
-    @staticmethod
-    def invoice_filter_key(invoice):
-        return any(line for line in invoice.credit_control_line_ids
-                   if line.policy_level_id.need_lawsuit)
-
     @api.model
-    def _filter_lawsuit_invoices(self, invoices, key):
+    def _filter_lawsuit_invoices(self, invoices):
         """ Return invoices for which a lawsuit must be filed
 
         It means that the invoice must be related to an active credit line
@@ -46,7 +41,7 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         :param invoices: recordset of invoices to filter
 
         """
-        return invoices.filtered(key)
+        return invoices.filtered(lambda invoice: invoice.need_lawsuit)
 
     @api.model
     def _get_invoices(self):
@@ -63,8 +58,7 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         if not invoice_ids:
             return
         invoices = invoice_model.browse(invoice_ids)
-        invoices = self._filter_lawsuit_invoices(invoices,
-                                                 self.invoice_filter_key)
+        invoices = self._filter_lawsuit_invoices(invoices)
         return invoices
 
     mark_as_filed = fields.Boolean(string='Mark as Filed',
@@ -111,8 +105,7 @@ class CreditControlLawsuitPrinter(models.TransientModel):
 
         """
         self.ensure_one()
-        invoices = self._filter_lawsuit_invoices(self.invoice_ids,
-                                                 self.invoice_filter_key)
+        invoices = self._filter_lawsuit_invoices(self.invoice_ids)
         if not invoices:
             raise exceptions.Warning(_('No invoice to print'))
         if self.mark_as_filed:

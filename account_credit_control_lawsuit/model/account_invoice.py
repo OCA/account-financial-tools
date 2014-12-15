@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi
+#    Author: Guewen Baconnier
 #    Copyright 2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,8 +18,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import lawsuit_office
-from . import lawsuit_fees_schedule
-from . import policy
-from . import partner
-from . import account_invoice
+
+from openerp import models, fields, api
+
+
+class AccountInvoice(models.Model):
+    _inherit = 'account.invoice'
+
+    need_lawsuit = fields.Boolean(string='Needs a lawsuit procedure',
+                                  compute='_get_need_lawsuit')
+
+    @api.depends('credit_policy_id', 'credit_control_line_ids')
+    def _get_need_lawsuit(self):
+        lines = self.credit_control_line_ids
+        if self.credit_policy_id:
+            policy = self.credit_policy_id
+            lines = lines.filtered(
+                lambda line: line.policy_level_id.policy_id == policy
+            )
+        self.need_lawsuit = any(line.policy_level_id.need_lawsuit
+                                for line in lines)
