@@ -58,6 +58,9 @@ class account_fiscalyear(orm.Model):
     _inherit = 'account.fiscalyear'
 
     def create(self, cr, uid, vals, context=None):
+        # To DO :
+        # change logic to avoid table recompute overhead
+        # when a regular (duration = 1 year) new FY is created
         recompute_obj = self.pool.get('account.asset.recompute.trigger')
         user_obj = self.pool.get('res.users')
         recompute_vals = {
@@ -93,5 +96,3 @@ class account_fiscalyear(orm.Model):
                     cr, SUPERUSER_ID, recompute_vals, context=context)
         return super(account_fiscalyear, self).write(
             cr, uid, ids, vals, context=context)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

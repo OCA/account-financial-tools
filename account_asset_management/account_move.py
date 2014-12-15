@@ -37,7 +37,8 @@ class account_move(orm.Model):
         for move_id in ids:
             depr_ids = depr_obj.search(
                 cr, uid,
-                [('move_id', '=', move_id), ('type', '=', 'depreciate')])
+                [('move_id', '=', move_id),
+                 ('type', 'in', ['depreciate', 'remove'])])
             if depr_ids and not context.get('unlink_from_asset'):
                 raise orm.except_orm(
                     _('Error!'),

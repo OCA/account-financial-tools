@@ -70,11 +70,23 @@ class account_asset_category(orm.Model):
         'account_analytic_id': fields.many2one(
             'account.analytic.account', 'Analytic account'),
         'account_asset_id': fields.many2one(
-            'account.account', 'Asset Account', required=True),
+            'account.account', 'Asset Account', required=True,
+            domain=[('type', '=', 'other')]),
         'account_depreciation_id': fields.many2one(
-            'account.account', 'Depreciation Account', required=True),
+            'account.account', 'Depreciation Account', required=True,
+            domain=[('type', '=', 'other')]),
         'account_expense_depreciation_id': fields.many2one(
-            'account.account', 'Depr. Expense Account', required=True),
+            'account.account', 'Depr. Expense Account', required=True,
+            domain=[('type', '=', 'other')]),
+        'account_plus_value_id': fields.many2one(
+            'account.account', 'Plus-Value Account', required=True,
+            domain=[('type', '=', 'other')]),
+        'account_min_value_id': fields.many2one(
+            'account.account', 'Min-Value Account', required=True,
+            domain=[('type', '=', 'other')]),
+        'account_residual_value_id': fields.many2one(
+            'account.account', 'Residual Value Account',
+            domain=[('type', '=', 'other')]),
         'journal_id': fields.many2one(
             'account.journal', 'Journal', required=True),
         'company_id': fields.many2one(
@@ -219,6 +231,7 @@ class account_asset_asset(orm.Model):
     _name = 'account.asset.asset'
     _description = 'Asset'
     _order = 'date_start desc, name'
+    _parent_store = True
 
     def unlink(self, cr, uid, ids, context=None):
         for asset in self.browse(cr, uid, ids, context=context):
@@ -798,36 +811,11 @@ class account_asset_asset(orm.Model):
                 asset.write({'state': 'open'}, context=context)
         return True
 
-    def set_to_close(self, cr, uid, ids, context=None):
-        # TO DO:
-        # The 'set_to_close' button is currently removed from the UI
-        # since the state goes automatically to close upon posting of
-        # the last depreciation line.
-        # We could put this button back and launch a wizard to generate
-        # the last depreciation entry and
-        # adapt the depreciation board accordingly.
-        # At this moment, the end user has to manually adjust the
-        # deprecation table and generate the last depreciation entry manually
-        # via the 'create_move' button in the table.
-        for asset in self.browse(cr, uid, ids, context):
-            if asset.value_residual:
-                raise orm.except_orm(
-                    _('Operation not allowed!'),
-                    _("You cannot close an asset which has not been "
-                      "fully depreciated."
-                      "\nPlease create the remaining depreciation entry "
-                      "via the Depreciation Board."))
-        return self.write(cr, uid, ids, {'state': 'close'}, context=context)
-
     def remove(self, cr, uid, ids, context=None):
         for asset in self.browse(cr, uid, ids, context):
+            ctx = dict(context, active_ids=ids, active_id=ids[0])
             if asset.value_residual:
-                raise orm.except_orm(
-                    _('Operation not allowed!'),
-                    _("You cannot remove an asset which has not been "
-                      "fully depreciated."
-                      "\nPlease create the remaining depreciation entry "
-                      "via the Depreciation Board."))
+                ctx.update({'early_removal': True})
         return {
             'name': _("Generate Asset Removal entries"),
             'view_type': 'form',
@@ -835,7 +823,7 @@ class account_asset_asset(orm.Model):
             'res_model': 'account.asset.remove',
             'target': 'new',
             'type': 'ir.actions.act_window',
-            'context': dict(context, active_ids=ids, active_id=ids[0]),
+            'context': ctx,
             'nodestroy': True,
         }
 
@@ -868,39 +856,28 @@ class account_asset_asset(orm.Model):
                 res[asset.id] = _value_get(asset)
         return res
 
-    def _residual_compute(self, cr, uid, asset, context=None):
-        if asset.type == 'view':
-            return 0.0
-        cr.execute(
-            "SELECT COALESCE(SUM(amount),0.0) AS amount "
-            "FROM account_asset_depreciation_line "
-            "WHERE asset_id = %s AND type='depreciate' "
-            "AND (init_entry=TRUE OR move_check=TRUE)",
-            (asset.id,))
-        amount = cr.fetchone()[0]
-        return asset.asset_value - amount
-
-    def _residual(self, cr, uid, ids, name, args, context=None):
+    def _compute_depreciation(self, cr, uid, ids, name, args, context=None):
         res = {}
-        for asset in self.browse(cr, uid, ids, context):
-            if asset.type == 'normal':
-                res[asset.id] = self._residual_compute(cr, uid, asset, context)
+        for asset in self.browse(cr, uid, ids, context=context):
+            res[asset.id] = {}
+            child_ids = self.search(cr, uid,
+                                    [('parent_id', 'child_of', [asset.id]),
+                                     ('type', '=', 'normal')],
+                                    context=context)
+            if child_ids:
+                cr.execute(
+                    "SELECT COALESCE(SUM(amount),0.0) AS amount "
+                    "FROM account_asset_depreciation_line "
+                    "WHERE asset_id in %s AND type='depreciate' "
+                    "AND (init_entry=TRUE OR move_check=TRUE)",
+                    (tuple(child_ids),))
+                value_depreciated = cr.fetchone()[0]
             else:
-                def _residual_get(record):
-                    residual = self._residual_compute(cr, uid, asset, context)
-                    for rec in record.child_ids:
-                        residual += \
-                            rec.type == 'normal' and \
-                            self._residual_compute(cr, uid, rec, context) or \
-                            _residual_get(rec)
-                    return residual
-                res[asset.id] = _residual_get(asset)
-        return res
-
-    def _depreciated(self, cr, uid, ids, name, args, context=None):
-        res = {}
-        for asset in self.browse(cr, uid, ids, context):
-            res[asset.id] = asset.asset_value - asset.value_residual
+                value_depreciated = 0.0
+            res[asset.id]['value_residual'] = \
+                asset.asset_value - value_depreciated
+            res[asset.id]['value_depreciated'] = \
+                value_depreciated
         return res
 
     def _move_line_check(self, cr, uid, ids, name, args, context=None):
@@ -1001,7 +978,7 @@ class account_asset_asset(orm.Model):
             },
             help="This amount represent the initial value of the asset."),
         'value_residual': fields.function(
-            _residual, method=True,
+            _compute_depreciation, method=True, multi='cd',
             digits_compute=dp.get_precision('Account'),
             string='Residual Value',
             store={
@@ -1015,7 +992,7 @@ class account_asset_asset(orm.Model):
                     ['amount', 'init_entry', 'move_id'], 20),
             }),
         'value_depreciated': fields.function(
-            _depreciated, method=True,
+            _compute_depreciation, method=True, multi='cd',
             digits_compute=dp.get_precision('Account'),
             string='Depreciated Value',
             store={
@@ -1043,7 +1020,10 @@ class account_asset_asset(orm.Model):
         'parent_id': fields.many2one(
             'account.asset.asset', 'Parent Asset', readonly=True,
             states={'draft': [('readonly', False)]},
-            domain=[('type', '=', 'view')]),
+            domain=[('type', '=', 'view')],
+            ondelete='restrict'),
+        'parent_left': fields.integer('Parent Left', select=1),
+        'parent_right': fields.integer('Parent Right', select=1),
         'child_ids': fields.one2many(
             'account.asset.asset', 'parent_id', 'Child Assets'),
         'date_start': fields.date(
@@ -1233,7 +1213,8 @@ class account_asset_asset(orm.Model):
         default.update({
             'depreciation_line_ids': [],
             'account_move_line_ids': [],
-            'state': 'draft'})
+            'state': 'draft',
+            'history_ids': []})
         return super(account_asset_asset, self).copy(
             cr, uid, id, default, context=context)
 
@@ -1573,19 +1554,19 @@ class account_asset_depreciation_line(orm.Model):
         }
 
     def _setup_move_data(self, depreciation_line, depreciation_date,
-                         period_ids, context):
+                         period_id, context):
         asset = depreciation_line.asset_id
         move_data = {
             'name': asset.name,
             'date': depreciation_date,
             'ref': depreciation_line.name,
-            'period_id': period_ids,
+            'period_id': period_id,
             'journal_id': asset.category_id.journal_id.id,
         }
         return move_data
 
     def _setup_move_line_data(self, depreciation_line, depreciation_date,
-                              period_ids, account_id, type, move_id, context):
+                              period_id, account_id, type, move_id, context):
         asset = depreciation_line.asset_id
         amount = depreciation_line.amount
         analytic_id = False
@@ -1603,7 +1584,7 @@ class account_asset_depreciation_line(orm.Model):
             'account_id': account_id,
             'credit': credit,
             'debit': debit,
-            'period_id': period_ids,
+            'period_id': period_id,
             'journal_id': asset.category_id.journal_id.id,
             'partner_id': asset.partner_id.id,
             'analytic_account_id': analytic_id,
@@ -1739,5 +1720,3 @@ class account_asset_history(orm.Model):
         'date': lambda *args: time.strftime('%Y-%m-%d'),
         'user_id': lambda self, cr, uid, ctx: uid
     }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

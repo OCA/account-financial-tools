@@ -22,8 +22,9 @@
 ##############################################################################
 {
     'name': 'Assets Management',
-    'version': '2.1',
+    'version': '2.2',
     'depends': ['account'],
+    'conflicts': ['account_asset'],
     'author': 'OpenERP & Noviat',
     'description': """
 Financial asset management.
@@ -45,6 +46,14 @@ The module contains a large number of functional enhancements compared to
 the standard account_asset module from OpenERP/Odoo.
 
 The module in NOT compatible with the standard account_asset module.
+
+Contributors
+------------
+- OpenERP SA
+- Luc De Meyer (Noviat)
+- Frédéric Clementi (camptocamp)
+- Florian Dacosta (Akretion)
+- Stéphane Bidoul (Acsone)
     """,
     'website': 'http://www.noviat.com',
     'category': 'Accounting & Finance',
