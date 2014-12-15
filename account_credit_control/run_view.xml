@@ -68,6 +68,7 @@
         name="Credit Control Run"
         parent="base_credit_control_menu"
         action="credit_control_run"
+        sequence="10"
         id="credit_control_run_menu"/>
 
   </data>
