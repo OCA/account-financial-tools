@@ -7,16 +7,9 @@
       <field name="inherit_id"
              ref="account_credit_control.credit_control_policy_form"/>
       <field name="arch" type="xml">
-        <page string="Mail and reporting" position="after">
-          <page string="Lawsuit Procedure">
-            <group>
-              <group>
-                <field name="need_lawsuit"/>
-              </group>
-            </group>
-          </page>
-        </page>
-
+        <field name="computation_mode" position="after">
+          <field name="need_lawsuit"/>
+        </field>
       </field>
     </record>
 

@@ -188,11 +188,6 @@ msgid "Lawsuit Printer"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: view:credit.control.policy:account_credit_control_lawsuit.add_lawsuit_on_policy_level
-msgid "Lawsuit Procedure"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
 #: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
 msgid "Lawsuit Reasons"
 msgstr ""
