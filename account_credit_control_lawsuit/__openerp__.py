@@ -34,6 +34,7 @@
           'report/report.xml',
           'view/policy_view.xml',
           'view/partner_view.xml',
+          'view/account_invoice_view.xml',
           'report/report_credit_control_lawsuit.xml',
           'security/ir.model.access.csv',
           ],

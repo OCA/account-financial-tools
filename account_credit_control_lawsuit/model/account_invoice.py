@@ -26,9 +26,16 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     need_lawsuit = fields.Boolean(string='Needs a lawsuit procedure',
-                                  compute='_get_need_lawsuit')
+                                  compute='_get_need_lawsuit',
+                                  store=True)
 
-    @api.depends('credit_policy_id', 'credit_control_line_ids')
+    @api.one
+    @api.depends('credit_policy_id',
+                 'credit_control_line_ids',
+                 'credit_control_line_ids.manually_overridden',
+                 'credit_control_line_ids.policy_level_id.policy_id',
+                 'credit_control_line_ids.policy_level_id.need_lawsuit',
+                 )
     def _get_need_lawsuit(self):
         lines = self.credit_control_line_ids
         if self.credit_policy_id:
