@@ -325,7 +325,7 @@ class account_asset_remove(orm.TransientModel):
 
         # create asset line
         asset_line_vals = {
-            'amount': asset.asset_value,
+            'amount': residual_value,
             'asset_id': asset_id,
             'name': line_name,
             'line_date': wiz_data.date_remove,

@@ -79,10 +79,10 @@ class account_asset_category(orm.Model):
             'account.account', 'Depr. Expense Account', required=True,
             domain=[('type', '=', 'other')]),
         'account_plus_value_id': fields.many2one(
-            'account.account', 'Plus-Value Account', required=True,
+            'account.account', 'Plus-Value Account',
             domain=[('type', '=', 'other')]),
         'account_min_value_id': fields.many2one(
-            'account.account', 'Min-Value Account', required=True,
+            'account.account', 'Min-Value Account',
             domain=[('type', '=', 'other')]),
         'account_residual_value_id': fields.many2one(
             'account.account', 'Residual Value Account',
@@ -868,7 +868,8 @@ class account_asset_asset(orm.Model):
                 cr.execute(
                     "SELECT COALESCE(SUM(amount),0.0) AS amount "
                     "FROM account_asset_depreciation_line "
-                    "WHERE asset_id in %s AND type='depreciate' "
+                    "WHERE asset_id in %s "
+                    "AND type in ('depreciate','remove') "
                     "AND (init_entry=TRUE OR move_check=TRUE)",
                     (tuple(child_ids),))
                 value_depreciated = cr.fetchone()[0]
@@ -921,7 +922,7 @@ class account_asset_asset(orm.Model):
     def _get_assets_from_dl(self, cr, uid, ids, context=None):
         asset_ids = []
         for dl in filter(
-                lambda x: x.type == 'depreciate' and
+                lambda x: x.type in ['depreciate', 'remove'] and
                         (x.init_entry or x.move_id),
                 self.pool.get('account.asset.depreciation.line').browse(
                     cr, uid, ids, context=context)):
