@@ -121,7 +121,7 @@ class LawsuitFeesScheduleLine(models.Model):
                                   required=True)
     open_amount = fields.Integer(string='Open Amount',
                                  required=True,
-                                 help="The amount unpaid by the customer. ")
+                                 help="The amount unpaid by the debtor. ")
     fees = fields.Float(string='Fees', required=True,
                         help="The amount of fees when the open amount "
                              "is reached.")

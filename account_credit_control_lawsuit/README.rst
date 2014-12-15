@@ -1,5 +1,5 @@
-Credit Control Legal Claim
-==========================
+Credit Control Lawsuit
+======================
 
 Extends the credit control with the possibility to generate lawsuit
 requisitions when all levels were reached.

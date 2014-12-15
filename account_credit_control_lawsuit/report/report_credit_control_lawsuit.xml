@@ -5,7 +5,7 @@
       <t t-call="report.external_layout">
         <div class="page">
 
-          <h2>Legal Lawsuit Requisition</h2>
+          <h2>Lawsuit Requisition</h2>
 
           <div class="row mt16" id="office_address">
             <div class="col-xs-6">
@@ -92,7 +92,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Legal Lawsuit Fees</td>
+                  <td>Lawsuit Fees</td>
                   <td class="text-right">
                     <span t-field="o.lawsuit_fees"
                       t-field-options='{"widget": "monetary",
