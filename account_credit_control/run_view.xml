@@ -29,10 +29,12 @@
             <notebook>
               <page string="Policies">
                 <field name="policy_ids" colspan="4" nolabel="1"/>
+                <separator string="Report"
+                  attrs="{'invisible': [('report', '=', False)]}"/>
+                <field name="report" colspan="4" nolabel="1"
+                  attrs="{'invisible': [('report', '=', False)]}"/>
               </page>
-              <page string="Report and Errors">
-                <field name="report" colspan="4" nolabel="1"/>
-                <separator string="Move lines To be treated manually"/>
+              <page string="Manual Lines" groups="base.group_no_one">
                 <field name="manual_ids" colspan="4" nolabel="1"/>
               </page>
             </notebook>

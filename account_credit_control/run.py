@@ -49,7 +49,7 @@ class CreditControlRun(models.Model):
         states={'draft': [('readonly', False)]},
         default=_get_policies,
     )
-    report = fields.Text(string='Report', readonly=True, copy=False)
+    report = fields.Html(string='Report', readonly=True, copy=False)
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done')],
                              string='State',
@@ -123,13 +123,13 @@ class CreditControlRun(models.Model):
                                                      self.date)
             generated |= policy_lines_generated
             if policy_lines_generated:
-                report += (_("Policy \"%s\" has generated %d Credit "
-                             "Control Lines.\n") %
+                report += (_("Policy \"<b>%s</b>\" has generated <b>%d Credit "
+                             "Control Lines.</b><br/>") %
                             (policy.name, len(policy_lines_generated)))
             else:
                 report += _(
-                    "Policy \"%s\" has not generated any "
-                    "Credit Control Lines.\n" % policy.name
+                    "Policy \"<b>%s</b>\" has not generated any "
+                    "Credit Control Lines.<br/>" % policy.name
                 )
 
         vals = {'state': 'done',
