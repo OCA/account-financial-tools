@@ -47,6 +47,8 @@ class CreditCommunication(models.TransientModel):
     contact_address = fields.Many2one('res.partner',
                                       string='Contact Address',
                                       readonly=True)
+    report_date = fields.Date(string='Report Date',
+                              default=fields.Date.context_today)
 
     @api.model
     def _get_company(self):

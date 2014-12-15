@@ -11,6 +11,9 @@
                 "fields": ["address", "name"],
                 "no_marker": true}' />
             </div>
+            <div class="col-xs-5 col-xs-offset-7">
+              <span t-field="o.report_date"/>
+            </div>
           </div>
 
           <h2 id="policy_level">
