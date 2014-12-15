@@ -26,7 +26,7 @@ class CreditControlPolicyLevel(models.Model):
 
     _inherit = "credit.control.policy.level"
 
-    need_lawsuit = fields.Boolean(string='File Lawsuit')
+    need_lawsuit = fields.Boolean(string='Needs a Lawsuit procedure')
 
     @api.constrains('need_lawsuit')
     def _check_lawsuit_level(self):

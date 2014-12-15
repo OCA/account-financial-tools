@@ -29,7 +29,7 @@ Schedule** and one or several zip where the office is active.
 
 Add a new level in the **Credit Control policy** in ``Invoicing >
 Configuration > Credit Control > Credit Control Policies``. This level
-must have the check box **Implies a Lawsuit procedure** activated.
+must have the check box **Needs a Lawsuit procedure** activated.
 
 Usage
 -----
