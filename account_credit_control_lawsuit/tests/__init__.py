@@ -18,4 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import report_claim_requisition
+from . import test_lawsuit_print

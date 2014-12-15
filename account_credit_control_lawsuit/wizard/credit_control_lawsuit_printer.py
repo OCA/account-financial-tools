@@ -82,7 +82,7 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         :returns: a action to print the report
 
         """
-        report_name = ('account_credit_control_legal_claim.'
+        report_name = ('account_credit_control_lawsuit.'
                        'report_lawsuit_requisition')
         return self.env['report'].get_action(invoices, report_name)
 

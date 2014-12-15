@@ -5,8 +5,8 @@
       model="account.invoice"
       string="Credit Lawsuit Requisition"
       report_type="qweb-pdf"
-      name="account_credit_control_legal_claim.report_lawsuit_requisition"
-      file="account_credit_control_legal_claim.report_lawsuit_requisition"
+      name="account_credit_control_lawsuit.report_lawsuit_requisition"
+      file="account_credit_control_lawsuit.report_lawsuit_requisition"
       />
 
   </data>

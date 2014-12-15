@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import claim_office
-from . import claim_fees_scheme
+from . import lawsuit_office
+from . import lawsuit_fees_schedule
 from . import policy
 from . import partner

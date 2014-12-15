@@ -123,7 +123,7 @@
     <template id="report_lawsuit_requisition">
       <t t-call="report.html_container">
         <t t-foreach="doc_ids" t-as="doc_id">
-          <t t-raw="translate_doc(doc_id, doc_model, 'partner.lang', 'account_credit_control_legal_claim.report_lawsuit_requisition_document')"/>
+          <t t-raw="translate_doc(doc_id, doc_model, 'partner.lang', 'account_credit_control_lawsuit.report_lawsuit_requisition_document')"/>
         </t>
       </t>
     </template>

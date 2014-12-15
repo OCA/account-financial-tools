@@ -18,4 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import credit_control_claim_printer
+{'name': 'Credit Control Lawsuit',
+ 'version': '0.1',
+ 'author': 'Camptocamp',
+ 'maintainer': 'Camptocamp',
+ 'category': 'Accounting',
+ 'complexity': 'normal',
+ 'depends': ['base_location',
+             'account_credit_control',
+             ],
+ 'website': 'http://www.camptocamp.com',
+ 'data': ['view/lawsuit_office_view.xml',
+          'view/lawsuit_schedule_view.xml',
+          'view/credit_control_lawsuit_printer_view.xml',
+          'report/report.xml',
+          'view/policy_view.xml',
+          'view/partner_view.xml',
+          'report/report_credit_control_lawsuit.xml',
+          'security/ir.model.access.csv',
+          ],
+ 'demo': [],
+ 'test': [],
+ 'installable': True,
+ 'license': 'AGPL-3',
+ }

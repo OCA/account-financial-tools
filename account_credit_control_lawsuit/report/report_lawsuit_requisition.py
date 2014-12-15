@@ -22,7 +22,7 @@
 from itertools import groupby
 from openerp import models, api, fields
 
-report_name = 'account_credit_control_legal_claim.report_lawsuit_requisition'
+report_name = 'account_credit_control_lawsuit.report_lawsuit_requisition'
 
 
 class LawsuitRequisitionPartner(models.TransientModel):

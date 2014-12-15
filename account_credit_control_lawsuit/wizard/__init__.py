@@ -18,4 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import test_claim_requisition_print
+from . import credit_control_lawsuit_printer
