@@ -23,12 +23,15 @@
 
 import openerp.tests.common as common
 
+import time
+
 
 class TestAssetManagement(common.TransactionCase):
 
     def setUp(self):
         super(TestAssetManagement, self).setUp()
         self.asset_model = self.registry('account.asset.asset')
+        self.dl_model = self.registry('account.asset.depreciation.line')
 
     def test_1(self):
         """ Compute depreciation boards and post assets for first year,
@@ -116,3 +119,90 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(vehicle.value_residual, 9000)
         self.assertEquals(fa.value_depreciated, 2500)
         self.assertEquals(fa.value_residual, 9000)
+
+    def test_2(self):
+        """ prorata temporis depreciation """
+        asset_id = self.asset_model.create(self.cr, self.uid, {
+            'name': 'test asset',
+            'category_id': self.ref('account_asset_management.'
+                                    'account_asset_category_car_5Y'),
+            'purchase_value': 3333,
+            'salvage_value': 0,
+            'date_start': time.strftime('%Y-07-07'),
+            'method_number': 5,
+            'method_period': 'month',
+            'prorata': True,
+        })
+        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
+        self.asset_model.compute_depreciation_board(
+            self.cr, self.uid, [asset.id])
+        asset.refresh()
+        self.assertEquals(asset.depreciation_line_ids[1].amount, 47.33)
+        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[4].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[5].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[6].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+
+    def test_3(self):
+        """ prorata temporis depreciation with initial value in
+            previous year """
+        asset_id = self.asset_model.create(self.cr, self.uid, {
+            'name': 'test asset',
+            'category_id': self.ref('account_asset_management.'
+                                    'account_asset_category_car_5Y'),
+            'purchase_value': 3333,
+            'salvage_value': 0,
+            'date_start': time.strftime('2013-07-07'),
+            'method_number': 5,
+            'method_period': 'month',
+            'prorata': True,
+        })
+        self.dl_model.create(self.cr, self.uid, {
+            'asset_id': asset_id,
+            'amount': 325.08,
+            'line_date': time.strftime('2013-12-31'),
+            'type': 'depreciate',
+            'init_entry': True,
+        })
+        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
+        self.assertEquals(len(asset.depreciation_line_ids), 2)
+        self.asset_model.compute_depreciation_board(
+            self.cr, self.uid, [asset.id])
+        asset.refresh()
+        self.assertEquals(asset.value_depreciated, 325.08)
+        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+
+    def test_4(self):
+        """ prorata temporis depreciation with initial value in
+            curent year """
+        asset_id = self.asset_model.create(self.cr, self.uid, {
+            'name': 'test asset',
+            'category_id': self.ref('account_asset_management.'
+                                    'account_asset_category_car_5Y'),
+            'purchase_value': 3333,
+            'salvage_value': 0,
+            'date_start': time.strftime('%Y-07-07'),
+            'method_number': 5,
+            'method_period': 'month',
+            'prorata': True,
+        })
+        self.dl_model.create(self.cr, self.uid, {
+            'asset_id': asset_id,
+            'amount': 279.44,
+            'line_date': time.strftime('%Y-11-30'),
+            'type': 'depreciate',
+            'init_entry': True,
+        })
+        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
+        self.assertEquals(len(asset.depreciation_line_ids), 2)
+        self.asset_model.compute_depreciation_board(
+            self.cr, self.uid, [asset.id])
+        asset.refresh()
+        self.assertEquals(asset.value_depreciated, 279.44)
+        self.assertEquals(asset.depreciation_line_ids[2].amount, 45.64)
+        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
+        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
