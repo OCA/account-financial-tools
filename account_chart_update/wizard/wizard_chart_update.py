@@ -251,7 +251,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
         if context is None:
             context = {}
         property_obj = self.pool.get('ir.property')
-        account_obj = self.pool.get('account.account')
         if not company_id:
             user = self.pool.get('res.users').browse(cr, uid, uid, context)
             company_id = user.company_id.id
@@ -261,6 +260,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             ('res_id', '=', False),
             ('value_reference', '!=', False)
         ])
+        number_digits = 6
         if not property_ids:
             # Try to get a generic (no-company) property
             property_ids = property_obj.search(cr, uid, [
@@ -268,15 +268,13 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 ('res_id', '=', False),
                 ('value_reference', '!=', False)
             ])
-            number_digits = 6
         if property_ids:
             prop = property_obj.browse(
                 cr, uid, property_ids[0], context=context)
-            account_id = prop.value_reference.id
-            if account_id:
-                code = account_obj.read(
-                    cr, uid, account_id, ['code'], context)['code']
-                number_digits = len(code)
+            account = property_obj.get_by_record(cr, uid, prop,
+                                                 context=context)
+            if account:
+                number_digits = len(account.code)
         return number_digits
 
     _defaults = {
