@@ -715,7 +715,7 @@ class account_asset_asset(orm.Model):
       CASE
         WHEN (aadl.type = 'depreciate' AND aadl.init_entry = TRUE)
             THEN aadl.amount
-        WHEN aml.account_id=%s
+        WHEN aml.account_id=%s AND aml.asset_id=%s
           THEN (COALESCE(aml.debit,0.0) - COALESCE(aml.credit,0.0))
         ELSE 0.0
       END AS amount
@@ -725,7 +725,8 @@ class account_asset_asset(orm.Model):
       ON aml.move_id=am.id
     WHERE aadl.id IN %s) sq
                     """,
-                    (exp_acc_id, tuple(posted_depreciation_line_ids)))
+                    (exp_acc_id, asset.id,
+                     tuple(posted_depreciation_line_ids)))
                 res = cr.fetchone()
                 depreciated_value = res[0]
                 residual_amount = asset.asset_value - depreciated_value
@@ -741,10 +742,13 @@ class account_asset_asset(orm.Model):
     INNER JOIN account_move am ON aadl.move_id=am.id
     INNER JOIN account_move_line aml ON aml.move_id=am.id
     INNER JOIN account_period ap ON am.period_id=ap.id
-    WHERE aadl.id in %s AND aml.account_id=%s AND ap.fiscalyear_id=%s
+    WHERE aadl.id in %s
+          AND aml.account_id=%s AND aml.asset_id=%s
+          AND ap.fiscalyear_id=%s
                             """,
                             (tuple(posted_depreciation_line_ids),
-                             exp_acc_id, entry['fy_id']))
+                             exp_acc_id, asset.id,
+                             entry['fy_id']))
                         res = cr.fetchone()
                         fy_amount_check = res[0]
                     else:
