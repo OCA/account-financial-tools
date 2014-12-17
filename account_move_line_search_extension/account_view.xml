@@ -12,11 +12,11 @@
     <menuitem
         action="action_account_move_line_search_extension"
         icon="STOCK_JUSTIFY_FILL"
-        id="account.menu_action_account_moves_all"
+        id="menu_account_move_line_search_extension"
         parent="account.menu_finance_entries"
         sequence="1"
         groups="account.group_account_user"
         />
-
+    
   </data>
 </openerp>
