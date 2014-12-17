@@ -27,9 +27,9 @@ class LawsuitOffice(models.Model):
     _name = "lawsuit.office"
 
     name = fields.Char(required=True)
-    locations_ids = fields.One2many(comodel_name='res.better.zip',
-                                    inverse_name='lawsuit_office_id',
-                                    string='Applicable in ZIPs')
+    location_ids = fields.One2many(comodel_name='res.better.zip',
+                                   inverse_name='lawsuit_office_id',
+                                   string='Applicable in ZIPs')
     fees_schedule_id = fields.Many2one(comodel_name='lawsuit.fees.schedule',
                                        string='Fees Schedule',
                                        select=True,
