@@ -21,6 +21,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
+from functools import partial
 import re
 
 
@@ -51,23 +52,26 @@ class AccountDocumentTemplate(models.Model):
             lines[line.sequence] = None
         return lines
 
-    @api.model
-    def lines(self, line_number):
-        if self._computed_lines[line_number] is not None:
-            return self._computed_lines[line_number]
+    @api.multi
+    def lines(self, line_number, computed_lines=None):
+        if computed_lines is None:
+            computed_lines = {}
+        if computed_lines[line_number] is not None:
+            return computed_lines[line_number]
         line = self._get_template_line(line_number)
         if re.match(r'L\( *' + str(line_number) + r' *\)', line.python_code):
             raise exceptions.Warning(
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
         try:
-            self._computed_lines[line_number] = eval(
-                line.python_code.replace('L', 'self.lines')
+            recurse_lines = partial(self.lines, computed_lines=computed_lines)
+            computed_lines[line_number] = eval(
+                line.python_code.replace('L', 'recurse_lines')
             )
         except KeyError:
             raise exceptions.Warning(
                 _('Code "%s" refers to non existing line') % line.python_code)
-        return self._computed_lines[line_number]
+        return computed_lines[line_number]
 
     @api.multi
     def compute_lines(self, input_lines):
@@ -79,11 +83,12 @@ class AccountDocumentTemplate(models.Model):
                 _('Inconsistency between input lines and '
                   'filled lines for template %s') % self.name
             )
-        self._computed_lines = self._generate_empty_lines()
-        self._computed_lines.update(input_lines)
-        for line_number in self._computed_lines:
-            self.lines(line_number)
-        return self._computed_lines
+        computed_lines = self._generate_empty_lines()
+        computed_lines.update(input_lines)
+        for line_number in computed_lines:
+            computed_lines[line_number] = self.lines(
+                line_number, computed_lines)
+        return computed_lines
 
 
 class AccountDocumentTemplateLine(models.Model):
