@@ -119,9 +119,9 @@ class LawsuitFeesScheduleLine(models.Model):
     schedule_id = fields.Many2one(comodel_name='lawsuit.fees.schedule',
                                   string='Price list',
                                   required=True)
-    open_amount = fields.Integer(string='Open Amount',
-                                 required=True,
-                                 help="The amount unpaid by the debtor. ")
+    open_amount = fields.Float(string='Open Amount',
+                               required=True,
+                               help="The amount unpaid by the debtor. ")
     fees = fields.Float(string='Fees', required=True,
                         help="The amount of fees when the open amount "
                              "is reached.")
