@@ -101,7 +101,7 @@ class wizard_renumber(orm.TransientModel):
                                        context=context)
             if not move_ids:
                 continue
-            _logger.debug("Renumbering %d account moves." % len(move_ids))
+            _logger.debug("Renumbering %d account moves.", len(move_ids))
             for move in move_obj.browse(cr, uid, move_ids, context=context):
                 sequence_id = self.get_sequence_id_for_fiscalyear_id(
                     cr, uid,
@@ -126,7 +126,7 @@ class wizard_renumber(orm.TransientModel):
                 # exception.
                 cr.execute('UPDATE account_move SET name=%s WHERE id=%s',
                            (new_name, move.id))
-            _logger.debug("%d account moves renumbered." % len(move_ids))
+            _logger.debug("%d account moves renumbered.", len(move_ids))
         sequences_seen = []
         form.write({'state': 'renumber'})
         data_obj = self.pool['ir.model.data']
