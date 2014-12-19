@@ -160,7 +160,7 @@ msgstr "Last Updated on"
 #: code:addons/account_move_template/account_document_template.py:65
 #, python-format
 msgid "Line %s can't refer to itself"
-msgstr "Line %s can't refer to itself"
+msgstr "La riga %s non può fare riferimento a se stessa"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
