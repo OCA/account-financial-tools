@@ -30,7 +30,7 @@
     'depends': ['account_accountant', 'analytic'],
     'data': [
         'security/ir.model.access.csv',
-        'views/move_template.xml',
+        'view/move_template.xml',
         'wizard/select_template.xml',
     ],
     'test': [
