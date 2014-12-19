@@ -288,7 +288,7 @@ class account_asset_remove(orm.TransientModel):
             residual_value = self._prepare_early_removal(
                 cr, uid, asset, wiz_data.date_remove, context=context)
         else:
-            residual_value = asset.residual_value
+            residual_value = asset.value_residual
 
         ctx = dict(context, company_id=asset.company_id.id)
         period_id = wiz_data.period_id and wiz_data.period_id.id or False
