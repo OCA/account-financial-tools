@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2013-14 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,4 +20,24 @@
 #
 ##############################################################################
 
-from . import account
+from openerp.osv import orm
+from lxml import etree
+
+
+class account_move_line(orm.Model):
+    _inherit = 'account.move.line'
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(account_move_line, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type,
+            context=context, toolbar=toolbar, submenu=False)
+        if context and 'account_move_line_search_extension' in context \
+                and view_type == 'tree':
+            doc = etree.XML(res['arch'])
+            nodes = doc.xpath("/tree")
+            for node in nodes:
+                if 'editable' in node.attrib:
+                    del node.attrib['editable']
+            res['arch'] = etree.tostring(doc)
+        return res
