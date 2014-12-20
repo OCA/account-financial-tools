@@ -38,7 +38,7 @@ These fields can be used in combination with the Search window.
 The purpose of this view is to offer a fast drill down capability
 when searching through large number of accounting entries.
 
-The drill down is facilitated further by opening the Forrm View when clicking on
+The drill down is facilitated further by opening the Form View when clicking on
 the sought-after entry.
 This allows an intuitive clickthrough to the related accounting documents
 such as the originating Bank Statement, Invoice, Asset, ...
