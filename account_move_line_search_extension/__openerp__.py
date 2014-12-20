@@ -40,7 +40,7 @@ when searching through large number of accounting entries.
 
 The drill down is facilitated further by opening the Form View when clicking on
 the sought-after entry.
-This allows an intuitive clickthrough to the related accounting documents
+This allows an intuitive click-through to the related accounting documents
 such as the originating Bank Statement, Invoice, Asset, ...
 
     """,
