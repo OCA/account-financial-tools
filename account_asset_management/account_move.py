@@ -37,7 +37,8 @@ class account_move(orm.Model):
         for move_id in ids:
             depr_ids = depr_obj.search(
                 cr, uid,
-                [('move_id', '=', move_id), ('type', '=', 'depreciate')])
+                [('move_id', '=', move_id),
+                 ('type', 'in', ['depreciate', 'remove'])])
             if depr_ids and not context.get('unlink_from_asset'):
                 raise orm.except_orm(
                     _('Error!'),
@@ -163,5 +164,3 @@ class account_move_line(orm.Model):
 
         return super(account_move_line, self).write(
             cr, uid, ids, vals, context, check, update_check)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

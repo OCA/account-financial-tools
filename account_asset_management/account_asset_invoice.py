@@ -85,6 +85,14 @@ class account_invoice_line(orm.Model):
     _columns = {
         'asset_category_id': fields.many2one(
             'account.asset.category', 'Asset Category'),
+        'asset_id': fields.many2one(
+            'account.asset.asset', 'Asset',
+            domain=[('type', '=', 'normal'),
+                    ('state', 'in', ['open', 'close'])],
+            help="Complete this field when selling an asset "
+                 "in order to facilitate the creation of the "
+                 "asset removal accounting entries via the "
+                 "asset 'Removal' button"),
     }
 
     def onchange_account_id(self, cr, uid, ids, product_id,
@@ -109,5 +117,3 @@ class account_invoice_line(orm.Model):
         if line.asset_category_id:
             res['asset_category_id'] = line.asset_category_id.id
         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -18,6 +18,10 @@
           <field name="account_asset_id"/>
           <field name="account_depreciation_id"/>
           <field name="account_expense_depreciation_id"/>
+          <field name="account_plus_value_id"/>
+          <field name="account_min_value_id"/>
+          <field name="account_residual_value_id"/>
+          <newline/>
           <group colspan="2" col="2">
             <separator string="Depreciation Dates" colspan="2"/>
             <field name="method_time" on_change="onchange_method_time(method_time)"/>
@@ -131,9 +135,9 @@
                 <group colspan="2" col="4">
                   <button name="validate" states="draft" string="Confirm Asset" type="object" icon="terp-camera_test"/>
                   <button name="set_to_draft" states="open,close" string="Set to Draft" type="object" icon="gtk-convert" groups="account.group_account_manager"/>
-                  <button name="remove" string="Set to Removed" type="object" icon="gtk-close" groups="account.group_account_manager"
-                          attrs="{'invisible':['|',('method_time','!=','year'),('state','!=','close')]}"
-                          help="Generate the removal entries for a fully depreciated asset."/>
+                  <button name="remove" string="Remove" type="object" icon="gtk-close" groups="account.group_account_manager"
+                          attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
+                          help="Asset removal."/>
                   <button name="open_entries" string="Journal Entries" type="object" icon="terp-gtk-jump-to-ltr"/>
                 </group>
               </page>

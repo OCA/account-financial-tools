@@ -9,8 +9,9 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <field name="account_id" position="after">
-          <field name="asset_category_id"/>
-        </field>
+          <field name="asset_category_id" invisible="context.get('type', False) != 'in_invoice'"/>
+          <field name="asset_id" invisible="context.get('type', False) != 'out_invoice'" groups="account.group_account_manager"/>
+      </field>
       </field>
     </record>
 
@@ -20,7 +21,7 @@
       <field name="inherit_id" ref="account.invoice_supplier_form"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='invoice_line']/tree/field[@name='quantity']" position="before">
-          <field name="asset_category_id"/>
+          <field name="asset_category_id" invisible="context.get('type', False) != 'in_invoice'"/>
         </xpath>
       </field>
     </record>
