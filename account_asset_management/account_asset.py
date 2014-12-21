@@ -735,6 +735,7 @@ class account_asset_asset(orm.Model):
                 if amount_diff:
                     entry = table[table_i_start]
                     if entry['fy_id']:
+                        # check account moves
                         cr.execute(
                             """
     SELECT COALESCE(SUM(aml.debit) -SUM(aml.credit), 0.0) AS depreciated_value
@@ -751,6 +752,21 @@ class account_asset_asset(orm.Model):
                              entry['fy_id']))
                         res = cr.fetchone()
                         fy_amount_check = res[0]
+                        # check init entries with no corresponding account move
+                        cr.execute(
+                            """
+    SELECT COALESCE(SUM(amount), 0.0) AS depreciated_value
+    FROM account_asset_depreciation_line
+    WHERE id in %s
+          AND init_entry
+          AND move_id is null
+          AND line_date >= %s and line_date <= %s
+                            """,
+                            (tuple(posted_depreciation_line_ids),
+                             entry['date_start'],
+                             entry['date_stop']))
+                        res = cr.fetchone()
+                        fy_amount_check += res[0]
                     else:
                         fy_amount_check = 0.0
                     lines = entry['lines']
