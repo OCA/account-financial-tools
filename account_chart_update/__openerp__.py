@@ -27,7 +27,7 @@
 {
     'name': "Detect changes and update the Account Chart from a template",
     'version': "1.2",
-    'author': "Zikzakmedia SL",
+    'author': "Zikzakmedia SL,Odoo Community Association (OCA)",
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
     'category': "Generic Modules/Accounting",

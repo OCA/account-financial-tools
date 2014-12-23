@@ -194,6 +194,14 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'Updated fiscal positions',
             readonly=True
         ),
+        'deleted_tax_codes': fields.integer(
+            'Deactivated tax codes',
+            readonly=True
+        ),
+        'deleted_taxes': fields.integer(
+            'Deactivated taxes',
+            readonly=True
+        ),
         'log': fields.text('Messages and Errors', readonly=True)
     }
 
@@ -324,6 +332,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         Adds a tax template -> tax id to the mapping.
         """
+        if context is None:
+            context = {}
         if not tax_templ:
             return False
         if tax_templ_mapping.get(tax_templ.id):
@@ -337,7 +347,11 @@ class wizard_update_charts_accounts(orm.TransientModel):
             criteria = (['|', '|'] + criteria +
                         [('description', '=', tax_templ.description),
                          ('name', '=', tax_templ.description)])
-        tax_ids = tax_obj.search(cr, uid, criteria, context=context)
+        criteria += [('company_id', '=', wizard.company_id.id)]
+        # search inactive taxes too, to avoid re-creating
+        # taxes that have been deactivated before
+        search_context = dict(context, active_test=False)
+        tax_ids = tax_obj.search(cr, uid, criteria, context=search_context)
         tax_templ_mapping[tax_templ.id] = tax_ids and tax_ids[0] or False
         return tax_templ_mapping[tax_templ.id]
 
@@ -353,24 +367,25 @@ class wizard_update_charts_accounts(orm.TransientModel):
             return False
         if tax_code_templ_mapping.get(tax_code_template.id):
             return tax_code_templ_mapping[tax_code_template.id]
-        # In other case
+        # prepare a search context in order to
+        # search inactive tax codes too, to avoid re-creating
+        # tax codes that have been deactivated before
+        search_context = dict(context, active_test=False)
         tax_code_obj = self.pool['account.tax.code']
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
-        tax_code_name = ((tax_code_template.id == root_tax_code_id) and
-                         wizard.company_id.name or tax_code_template.name)
-        tax_code_ids = tax_code_obj.search(cr, uid, [
-            ('name', '=', tax_code_name),
-            ('company_id', '=', wizard.company_id.id)
-        ], context=context)
-        if not tax_code_ids:
-            # if we could not match no tax code template name,
-            # try to match on tax code template code, if any
-            tax_code_code = tax_code_template.code
-            if tax_code_code:
-                tax_code_ids = tax_code_obj.search(cr, uid, [
-                    ('code', '=', tax_code_code),
-                    ('company_id', '=', wizard.company_id.id)
-                ], context=context)
+        tax_code_code = tax_code_template.code
+        if tax_code_code:
+            tax_code_ids = tax_code_obj.search(cr, uid, [
+                ('code', '=', tax_code_code),
+                ('company_id', '=', wizard.company_id.id)
+            ], context=search_context)
+        if not tax_code_code or not tax_code_ids:
+            tax_code_name = ((tax_code_template.id == root_tax_code_id) and
+                             wizard.company_id.name or tax_code_template.name)
+            tax_code_ids = tax_code_obj.search(cr, uid, [
+                ('name', '=', tax_code_name),
+                ('company_id', '=', wizard.company_id.id)
+            ], context=search_context)
         tax_code_templ_mapping[tax_code_template.id] = (tax_code_ids and
                                                         tax_code_ids[0] or
                                                         False)
@@ -416,6 +431,21 @@ class wizard_update_charts_accounts(orm.TransientModel):
         fp_templ_mapping[fp_template.id] = fp_ids and fp_ids[0] or False
         return fp_templ_mapping[fp_template.id]
 
+    def _get_depth_first_tax_code_template_ids(self, cr, uid, root_tax_code_id,
+                                               context=None):
+        tax_code_templ_obj = self.pool['account.tax.code.template']
+
+        def get_children(tct):
+            for child in tct.child_ids:
+                res.append(child.id)
+                get_children(child)
+
+        tct = tax_code_templ_obj.browse(cr, uid, root_tax_code_id,
+                                        context=context)
+        res = [tct.id]
+        get_children(tct)
+        return res
+
     def _find_tax_codes(self, cr, uid, wizard, chart_template_ids,
                         context=None):
         """
@@ -436,9 +466,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
         wiz_tax_code_obj.unlink(cr, uid, wiz_tax_code_obj.search(cr, uid, []))
         # Search for new / updated tax codes
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
-        children_tax_code_template = tax_code_templ_obj.search(cr, uid, [(
-            'parent_id', 'child_of', [root_tax_code_id])], order='id',
-            context=context)
+        children_tax_code_template = \
+            self._get_depth_first_tax_code_template_ids(
+                cr, uid, root_tax_code_id, context=context)
         for tax_code_template in tax_code_templ_obj.browse(
                 cr, uid,
                 children_tax_code_template, context=context):
@@ -463,6 +493,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 notes = ""
                 tax_code = tax_code_obj.browse(
                     cr, uid, tax_code_id, context=context)
+                if tax_code.name != tax_code_template.name:
+                    notes += _("The name field is different.\n")
+                    modified = True
                 if tax_code.code != tax_code_template.code:
                     notes += _("The code field is different.\n")
                     modified = True
@@ -472,7 +505,18 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 if tax_code.sign != tax_code_template.sign:
                     notes += _("The sign field is different.\n")
                     modified = True
-                # TODO: We could check other account fields for changes...
+                if tax_code.notprintable != tax_code_template.notprintable:
+                    notes += _("The notprintable field is different.\n")
+                    modified = True
+                if tax_code.sequence != tax_code_template.sequence:
+                    notes += _("The sequence field is different.\n")
+                    modified = True
+                if tax_code.parent_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_code_template.parent_id, context=context):
+                    notes += _("The parent field is different.\n")
+                    modified = True
                 if modified:
                     # Tax code to update.
                     updated_tax_codes += 1
@@ -483,6 +527,24 @@ class wizard_update_charts_accounts(orm.TransientModel):
                         'update_tax_code_id': tax_code_id,
                         'notes': notes,
                     }, context)
+        # search for tax codes not in the template
+        # and propose them for deletion
+        tax_code_ids = tax_code_obj.\
+            search(cr, uid, [('company_id', '=', wizard.company_id.id)],
+                   context=context)
+        tax_code_ids = set(tax_code_ids)
+        template_tax_code_ids = set(tax_code_template_mapping.values())
+        tax_code_ids_to_delete = tax_code_ids - template_tax_code_ids
+        for tax_code_id in tax_code_ids_to_delete:
+            updated_tax_codes += 1
+            wiz_tax_code_obj.create(cr, uid, {
+                'tax_code_id': False,
+                'update_chart_wizard_id': wizard.id,
+                'type': 'deleted',
+                'update_tax_code_id': tax_code_id,
+                'notes': "To deactivate: not in the template",
+            }, context)
+
         return {
             'new': new_tax_codes,
             'updated': updated_tax_codes,
@@ -499,6 +561,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         new_taxes = 0
         updated_taxes = 0
         tax_templ_mapping = {}
+        tax_code_template_mapping = {}
+        acc_templ_mapping = {}
         tax_obj = self.pool['account.tax']
         tax_templ_obj = self.pool['account.tax.template']
         wiz_taxes_obj = self.pool['wizard.update.charts.accounts.tax']
@@ -569,6 +633,46 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 if tax.type_tax_use != tax_templ.type_tax_use:
                     notes += _("The type tax use field is different.\n")
                     modified = True
+                # compare tax code fields
+                if tax.base_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.base_code_id, context=context):
+                    notes += _("The base_code_id field is different.\n")
+                    modified = True
+                if tax.tax_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.tax_code_id, context=context):
+                    notes += _("The tax_code_id field is different.\n")
+                    modified = True
+                if tax.ref_base_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.ref_base_code_id, context=context):
+                    notes += _("The ref_base_code_id field is different.\n")
+                    modified = True
+                if tax.ref_tax_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.ref_tax_code_id, context=context):
+                    notes += _("The ref_tax_code_id field is different.\n")
+                    modified = True
+                # compare tax account fields
+                if tax.account_paid_id.id != self._map_account_template(
+                        cr, uid, wizard,
+                        acc_templ_mapping,
+                        tax_templ.account_paid_id,
+                        context=context):
+                    notes += _("The account_paid field is different.\n")
+                    modified = True
+                if tax.account_collected_id.id != self._map_account_template(
+                        cr, uid, wizard,
+                        acc_templ_mapping,
+                        tax_templ.account_collected_id,
+                        context=context):
+                    notes += _("The account_collected field is different.\n")
+                    modified = True
                 # TODO: We could check other tax fields for changes...
                 if modified:
                     # Tax code to update.
@@ -582,6 +686,23 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     }, context)
         for delay_vals_wiz in delay_wiz_tax:
             wiz_taxes_obj.create(cr, uid, delay_vals_wiz, context)
+        # search for taxes not in the template
+        # and propose them for deletion
+        tax_ids = tax_obj.\
+            search(cr, uid, [('company_id', '=', wizard.company_id.id)],
+                   context=context)
+        tax_ids = set(tax_ids)
+        template_tax_ids = set(tax_templ_mapping.values())
+        tax_ids_to_delete = tax_ids - template_tax_ids
+        for tax_id in tax_ids_to_delete:
+            updated_taxes += 1
+            wiz_taxes_obj.create(cr, uid, {
+                'tax_id': False,
+                'update_chart_wizard_id': wizard.id,
+                'type': 'deleted',
+                'update_tax_id': tax_id,
+                'notes': "To deactivate: not in the template",
+            }, context)
 
         return {'new': new_taxes,
                 'updated': updated_taxes,
@@ -848,7 +969,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
         new_tax_codes = 0
         updated_tax_codes = 0
         tax_code_template_mapping = {}
+        # process new/updated
         for wiz_tax_code in wizard.tax_code_ids:
+            if wiz_tax_code.type == 'deleted':
+                continue
             tax_code_template = wiz_tax_code.tax_code_id
             tax_code_name = ((root_tax_code_id == tax_code_template.id) and
                              wizard.company_id.name or tax_code_template.name)
@@ -867,6 +991,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
                               tax_code_template_mapping.get(p_id)),
                 'company_id': wizard.company_id.id,
                 'sign': tax_code_template.sign,
+                'notprintable': tax_code_template.notprintable,
+                'sequence': tax_code_template.sequence,
             }
             tax_code_id = None
             modified = False
@@ -900,9 +1026,19 @@ class wizard_update_charts_accounts(orm.TransientModel):
                             tax_code_name, tax_code_template.parent_id.name),
                         True
                     )
+        # process deleted
+        tax_code_ids_to_delete = [wtc.update_tax_code_id.id
+                                  for wtc in wizard.tax_code_ids
+                                  if wtc.type == 'deleted']
+        taxcodes.write(cr, uid, tax_code_ids_to_delete,
+                       {'active': False},
+                       context=context)
+        log.add(_("Deactivated %d tax codes\n" % len(tax_code_ids_to_delete)))
+        deleted_tax_codes = len(tax_code_ids_to_delete)
         return {
             'new': new_tax_codes,
             'updated': updated_tax_codes,
+            'deleted': deleted_tax_codes,
             'mapping': tax_code_template_mapping
         }
 
@@ -917,6 +1053,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         tax_template_mapping = {}
         taxes_pending_for_accounts = {}
         for wiz_tax in wizard.tax_ids:
+            if wiz_tax.type == 'deleted':
+                continue
             tax_template = wiz_tax.tax_id
             # Ensure the parent tax template is on the map.
             self._map_tax_template(cr, uid, wizard, tax_template_mapping,
@@ -1058,9 +1196,19 @@ class wizard_update_charts_accounts(orm.TransientModel):
                         ),
                         True
                     )
+        # process deleted
+        tax_ids_to_delete = [wtc.update_tax_id.id
+                             for wtc in wizard.tax_ids
+                             if wtc.type == 'deleted']
+        taxes.write(cr, uid, tax_ids_to_delete,
+                    {'active': False},
+                    context=context)
+        log.add(_("Deactivated %d taxes\n" % len(tax_ids_to_delete)))
+        deleted_taxes = len(tax_ids_to_delete)
         return {
             'new': new_taxes,
             'updated': updated_taxes,
+            'deleted': deleted_taxes,
             'mapping': tax_template_mapping,
             'pending': taxes_pending_for_accounts
         }
@@ -1157,9 +1305,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 'shortcut': account_template.shortcut,
                 'note': account_template.note,
                 'parent_id': (
-                    account_template.parent_id
-                    and account_template_mapping.get(p_id) or
-                    False
+                    account_template_mapping.get(p_id)
+                    if account_template.parent_id
+                    else False
                 ),
                 'tax_ids': [(6, 0, tax_ids)],
                 'company_id': wizard.company_id.id,
@@ -1436,7 +1584,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             accounts_res = self._update_accounts(cr, uid, wizard, log,
                                                  taxes_res['mapping'],
                                                  context=context)
-        if wizard.update_tax and wizard.update_account:
+        if wizard.update_tax:
             self._update_taxes_pending_for_accounts(cr, uid, wizard, log,
                                                     taxes_res['pending'],
                                                     accounts_res['mapping'],
@@ -1461,6 +1609,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'updated_taxes': taxes_res.get('updated', 0),
             'updated_accounts': accounts_res.get('updated', 0),
             'updated_fps': fps_res.get('updated', 0),
+            'deleted_tax_codes': tax_codes_res.get('deleted', 0),
+            'deleted_taxes': taxes_res.get('deleted', 0),
             'log': log(),
         }, context=context)
         return _reopen(self, wizard.id, 'wizard.update.chart.accounts')
@@ -1477,7 +1627,6 @@ class wizard_update_charts_accounts_tax_code(orm.TransientModel):
         'tax_code_id': fields.many2one(
             'account.tax.code.template',
             'Tax code template',
-            required=True,
             ondelete='set null'
         ),
         'update_chart_wizard_id': fields.many2one(
@@ -1487,8 +1636,9 @@ class wizard_update_charts_accounts_tax_code(orm.TransientModel):
             ondelete='cascade'
         ),
         'type': fields.selection([
-            ('new', 'New template'),
-            ('updated', 'Updated template'),
+            ('new', 'New tax code'),
+            ('updated', 'Updated tax code'),
+            ('deleted', 'Tax code to deactivate'),
         ], 'Type'),
         'update_tax_code_id': fields.many2one(
             'account.tax.code',
@@ -1513,7 +1663,6 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
         'tax_id': fields.many2one(
             'account.tax.template',
             'Tax template',
-            required=True,
             ondelete='set null'
         ),
         'update_chart_wizard_id': fields.many2one(
@@ -1525,6 +1674,7 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
         'type': fields.selection([
             ('new', 'New template'),
             ('updated', 'Updated template'),
+            ('deleted', 'Tax to deactivate'),
         ], 'Type'),
         'update_tax_id': fields.many2one(
             'account.tax',
