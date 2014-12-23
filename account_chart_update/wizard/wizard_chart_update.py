@@ -461,6 +461,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 notes = ""
                 tax_code = tax_code_obj.browse(
                     cr, uid, tax_code_id, context=context)
+                if tax_code.name != tax_code_template.name:
+                    notes += _("The name field is different.\n")
+                    modified = True
                 if tax_code.code != tax_code_template.code:
                     notes += _("The code field is different.\n")
                     modified = True
@@ -470,7 +473,18 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 if tax_code.sign != tax_code_template.sign:
                     notes += _("The sign field is different.\n")
                     modified = True
-                # TODO: We could check other account fields for changes...
+                if tax_code.notprintable != tax_code_template.notprintable:
+                    notes += _("The notprintable field is different.\n")
+                    modified = True
+                if tax_code.sequence != tax_code_template.sequence:
+                    notes += _("The sequence field is different.\n")
+                    modified = True
+                if tax_code.parent_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_code_template.parent_id, context=context):
+                    notes += _("The parent field is different.\n")
+                    modified = True
                 if modified:
                     # Tax code to update.
                     updated_tax_codes += 1
@@ -865,6 +879,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
                               tax_code_template_mapping.get(p_id)),
                 'company_id': wizard.company_id.id,
                 'sign': tax_code_template.sign,
+                'notprintable': tax_code_template.notprintable,
+                'sequence': tax_code_template.sequence,
             }
             tax_code_id = None
             modified = False
