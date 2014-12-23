@@ -627,6 +627,7 @@ class account_asset_asset(orm.Model):
                 last_depreciation_line = False
             domain = [
                 ('asset_id', '=', asset.id),
+                ('type', '=', 'depreciate'),
                 ('move_id', '=', False),
                 ('init_entry', '=', False)]
             old_depreciation_line_ids = depreciation_lin_obj.search(
@@ -1520,6 +1521,34 @@ class account_asset_depreciation_line(orm.Model):
                     _('Error!'),
                     _("You cannot change a depreciation line "
                       "with an associated accounting entry."))
+            elif vals.get('init_entry'):
+                cr.execute(
+                    "SELECT id "
+                    "FROM account_asset_depreciation_line "
+                    "WHERE asset_id = %s AND move_check = TRUE "
+                    "AND type = 'depreciate' AND line_date <= %s LIMIT 1",
+                    (dl.asset_id.id, dl.line_date))
+                res = cr.fetchone()
+                if res:
+                    raise orm.except_orm(
+                        _('Error!'),
+                        _("You cannot set the 'Initial Balance Entry' flag "
+                          "on a depreciation line "
+                          "with prior posted entries."))
+            elif vals.get('line_date'):
+                cr.execute(
+                    "SELECT id "
+                    "FROM account_asset_depreciation_line "
+                    "WHERE asset_id = %s "
+                    "AND (init_entry=TRUE OR move_check=TRUE)"
+                    "AND line_date >= %s LIMIT 1",
+                    (dl.asset_id.id, vals['line_date']))
+                res = cr.fetchone()
+                if res:
+                    raise orm.except_orm(
+                        _('Error!'),
+                        _("You cannot set the date on a depreciation line "
+                          "prior to already posted entries."))
         return super(account_asset_depreciation_line, self).write(
             cr, uid, ids, vals, context)
 

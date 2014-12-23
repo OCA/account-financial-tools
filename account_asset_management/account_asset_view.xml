@@ -180,7 +180,7 @@
                         <field name="name"/>
                         <field name="amount" attrs="{'readonly':[('move_check','=',True)]}"
                                on_change="onchange_amount(type, asset_value, amount, depreciated_value)"/>
-                        <field name="init_entry" attrs="{'readonly':[('move_check','=',True)]}"/>
+                        <field name="init_entry" attrs="{'readonly':['|', ('move_check', '=', True), ('type', '=', 'create')]}"/>
                         <field name="move_id"/>
                         <field name="move_check"/>
                       </group>
