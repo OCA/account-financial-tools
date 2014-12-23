@@ -23,4 +23,6 @@
 """
 Account Chart Update Wizard
 """
+
+from . import model
 from . import wizard
