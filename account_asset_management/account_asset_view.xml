@@ -172,7 +172,7 @@
                       <field name="move_check"/>
                     </group>
                     <group colspan="2" col="2">
-                      <field name="init_entry" attrs="{'readonly':[('move_check','=',True)]}"/>
+                      <field name="init_entry" attrs="{'readonly':['|', ('move_check', '=', True), ('type', '=', 'create')]}"/>
                       <field name="line_date" attrs="{'readonly':[('move_check','=',True)]}"/>
                       <field name="depreciated_value" readonly="1"/>
                       <field name="remaining_value" readonly="1"/>
