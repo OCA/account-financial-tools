@@ -697,35 +697,13 @@ class account_asset_asset(orm.Model):
                 table_i_start = table_i
                 line_i_start = line_i
 
-                # check via initial_balance and accounting entries
-                # if residual value corresponds with table
+                # check if residual value corresponds with table
                 # and adjust table when needed
-                # we base the calculation on accounting entries
-                # in stead of depreciation lines since this is
-                # the most reliable source of information
-                # (in previous versions of the account_asset module
-                # there was no constraint to prevent inconsistencies
-                # between depreciation lines and accounting entries).
-                exp_acc_id = \
-                    asset.category_id.account_expense_depreciation_id.id
                 cr.execute(
-                    """
-    SELECT SUM(sq.amount) AS depreciated_value FROM
-    (SELECT
-      CASE
-        WHEN (aadl.type = 'depreciate' AND aadl.init_entry = TRUE)
-            THEN aadl.amount
-        WHEN aml.account_id=%s
-          THEN (COALESCE(aml.debit,0.0) - COALESCE(aml.credit,0.0))
-        ELSE 0.0
-      END AS amount
-    FROM account_asset_depreciation_line aadl
-    LEFT OUTER JOIN account_move am ON aadl.move_id=am.id
-    LEFT OUTER JOIN account_move_line aml
-      ON aml.move_id=am.id
-    WHERE aadl.id IN %s) sq
-                    """,
-                    (exp_acc_id, tuple(posted_depreciation_line_ids)))
+                    "SELECT COALESCE(SUM(amount), 0.0) "
+                    "FROM account_asset_depreciation_line "
+                    "WHERE id IN %s",
+                    (tuple(posted_depreciation_line_ids),))
                 res = cr.fetchone()
                 depreciated_value = res[0]
                 residual_amount = asset.asset_value - depreciated_value
@@ -735,16 +713,13 @@ class account_asset_asset(orm.Model):
                     entry = table[table_i_start]
                     if entry['fy_id']:
                         cr.execute(
-                            """
-    SELECT COALESCE(SUM(aml.debit) -SUM(aml.credit), 0.0) AS depreciated_value
-    FROM account_asset_depreciation_line aadl
-    INNER JOIN account_move am ON aadl.move_id=am.id
-    INNER JOIN account_move_line aml ON aml.move_id=am.id
-    INNER JOIN account_period ap ON am.period_id=ap.id
-    WHERE aadl.id in %s AND aml.account_id=%s AND ap.fiscalyear_id=%s
-                            """,
+                            "SELECT COALESCE(SUM(amount), 0.0) "
+                            "FROM account_asset_depreciation_line "
+                            "WHERE id in %s "
+                            "      AND line_date >= %s and line_date <= %s",
                             (tuple(posted_depreciation_line_ids),
-                             exp_acc_id, entry['fy_id']))
+                             entry['date_start'],
+                             entry['date_stop']))
                         res = cr.fetchone()
                         fy_amount_check = res[0]
                     else:
