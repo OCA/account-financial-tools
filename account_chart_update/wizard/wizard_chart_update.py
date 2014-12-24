@@ -420,6 +420,21 @@ class wizard_update_charts_accounts(orm.TransientModel):
         fp_templ_mapping[fp_template.id] = fp_ids and fp_ids[0] or False
         return fp_templ_mapping[fp_template.id]
 
+    def _get_depth_first_tax_code_template_ids(self, cr, uid, root_tax_code_id,
+                                               context=None):
+        tax_code_templ_obj = self.pool['account.tax.code.template']
+
+        def get_children(tct):
+            for child in tct.child_ids:
+                res.append(child.id)
+                get_children(child)
+
+        tct = tax_code_templ_obj.browse(cr, uid, root_tax_code_id,
+                                        context=context)
+        res = [tct.id]
+        get_children(tct)
+        return res
+
     def _find_tax_codes(self, cr, uid, wizard, chart_template_ids,
                         context=None):
         """
@@ -440,9 +455,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
         wiz_tax_code_obj.unlink(cr, uid, wiz_tax_code_obj.search(cr, uid, []))
         # Search for new / updated tax codes
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
-        children_tax_code_template = tax_code_templ_obj.search(cr, uid, [(
-            'parent_id', 'child_of', [root_tax_code_id])], order='id',
-            context=context)
+        children_tax_code_template = \
+            self._get_depth_first_tax_code_template_ids(
+                cr, uid, root_tax_code_id, context=context)
         for tax_code_template in tax_code_templ_obj.browse(
                 cr, uid,
                 children_tax_code_template, context=context):
