@@ -1514,7 +1514,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             accounts_res = self._update_accounts(cr, uid, wizard, log,
                                                  taxes_res['mapping'],
                                                  context=context)
-        if wizard.update_tax and wizard.update_account:
+        if wizard.update_tax:
             self._update_taxes_pending_for_accounts(cr, uid, wizard, log,
                                                     taxes_res['pending'],
                                                     accounts_res['mapping'],
