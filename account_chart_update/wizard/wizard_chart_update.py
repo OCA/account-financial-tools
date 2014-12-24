@@ -578,6 +578,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         new_taxes = 0
         updated_taxes = 0
         tax_templ_mapping = {}
+        tax_code_template_mapping = {}
+        acc_templ_mapping = {}
         tax_obj = self.pool['account.tax']
         tax_templ_obj = self.pool['account.tax.template']
         wiz_taxes_obj = self.pool['wizard.update.charts.accounts.tax']
@@ -647,6 +649,46 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     modified = True
                 if tax.type_tax_use != tax_templ.type_tax_use:
                     notes += _("The type tax use field is different.\n")
+                    modified = True
+                # compare tax code fields
+                if tax.base_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.base_code_id, context=context):
+                    notes += _("The base_code_id field is different.\n")
+                    modified = True
+                if tax.tax_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.tax_code_id, context=context):
+                    notes += _("The tax_code_id field is different.\n")
+                    modified = True
+                if tax.ref_base_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.ref_base_code_id, context=context):
+                    notes += _("The ref_base_code_id field is different.\n")
+                    modified = True
+                if tax.ref_tax_code_id.id != self._map_tax_code_template(
+                        cr, uid, wizard,
+                        tax_code_template_mapping,
+                        tax_templ.ref_tax_code_id, context=context):
+                    notes += _("The ref_tax_code_id field is different.\n")
+                    modified = True
+                # compare tax account fields
+                if tax.account_paid_id.id != self._map_account_template(
+                        cr, uid, wizard,
+                        acc_templ_mapping,
+                        tax_templ.account_paid_id,
+                        context=context):
+                    notes += _("The account_paid field is different.\n")
+                    modified = True
+                if tax.account_collected_id.id != self._map_account_template(
+                        cr, uid, wizard,
+                        acc_templ_mapping,
+                        tax_templ.account_collected_id,
+                        context=context):
+                    notes += _("The account_collected field is different.\n")
                     modified = True
                 # TODO: We could check other tax fields for changes...
                 if modified:
