@@ -195,7 +195,11 @@ class wizard_update_charts_accounts(orm.TransientModel):
             readonly=True
         ),
         'deleted_tax_codes': fields.integer(
-            'Deleted tax codes',
+            'Deactivated tax codes',
+            readonly=True
+        ),
+        'deleted_taxes': fields.integer(
+            'Deactivated taxes',
             readonly=True
         ),
         'log': fields.text('Messages and Errors', readonly=True)
@@ -675,6 +679,23 @@ class wizard_update_charts_accounts(orm.TransientModel):
                     }, context)
         for delay_vals_wiz in delay_wiz_tax:
             wiz_taxes_obj.create(cr, uid, delay_vals_wiz, context)
+        # search for taxes not in the template
+        # and propose them for deletion
+        tax_ids = tax_obj.\
+            search(cr, uid, [('company_id', '=', wizard.company_id.id)],
+                   context=context)
+        tax_ids = set(tax_ids)
+        template_tax_ids = set(tax_templ_mapping.values())
+        tax_ids_to_delete = tax_ids - template_tax_ids
+        for tax_id in tax_ids_to_delete:
+            updated_taxes += 1
+            wiz_taxes_obj.create(cr, uid, {
+                'tax_id': False,
+                'update_chart_wizard_id': wizard.id,
+                'type': 'deleted',
+                'update_tax_id': tax_id,
+                'notes': "To deactivate: not in the template",
+            }, context)
 
         return {'new': new_taxes,
                 'updated': updated_taxes,
@@ -940,7 +961,6 @@ class wizard_update_charts_accounts(orm.TransientModel):
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
         new_tax_codes = 0
         updated_tax_codes = 0
-        deleted_tax_codes = 0
         tax_code_template_mapping = {}
         # process new/updated
         for wiz_tax_code in wizard.tax_code_ids:
@@ -1026,6 +1046,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         tax_template_mapping = {}
         taxes_pending_for_accounts = {}
         for wiz_tax in wizard.tax_ids:
+            if wiz_tax.type == 'deleted':
+                continue
             tax_template = wiz_tax.tax_id
             # Ensure the parent tax template is on the map.
             self._map_tax_template(cr, uid, wizard, tax_template_mapping,
@@ -1167,9 +1189,19 @@ class wizard_update_charts_accounts(orm.TransientModel):
                         ),
                         True
                     )
+        # process deleted
+        tax_ids_to_delete = [wtc.update_tax_id.id
+                             for wtc in wizard.tax_ids
+                             if wtc.type == 'deleted']
+        taxes.write(cr, uid, tax_ids_to_delete,
+                    {'active': False},
+                    context=context)
+        log.add(_("Deactivated %d taxes\n" % len(tax_ids_to_delete)))
+        deleted_taxes = len(tax_ids_to_delete)
         return {
             'new': new_taxes,
             'updated': updated_taxes,
+            'deleted': deleted_taxes,
             'mapping': tax_template_mapping,
             'pending': taxes_pending_for_accounts
         }
@@ -1571,6 +1603,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             'updated_accounts': accounts_res.get('updated', 0),
             'updated_fps': fps_res.get('updated', 0),
             'deleted_tax_codes': tax_codes_res.get('deleted', 0),
+            'deleted_taxes': taxes_res.get('deleted', 0),
             'log': log(),
         }, context=context)
         return _reopen(self, wizard.id, 'wizard.update.chart.accounts')
@@ -1598,7 +1631,7 @@ class wizard_update_charts_accounts_tax_code(orm.TransientModel):
         'type': fields.selection([
             ('new', 'New tax code'),
             ('updated', 'Updated tax code'),
-            ('deleted', 'Tax code to delete'),
+            ('deleted', 'Tax code to deactivate'),
         ], 'Type'),
         'update_tax_code_id': fields.many2one(
             'account.tax.code',
@@ -1623,7 +1656,6 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
         'tax_id': fields.many2one(
             'account.tax.template',
             'Tax template',
-            required=True,
             ondelete='set null'
         ),
         'update_chart_wizard_id': fields.many2one(
@@ -1635,6 +1667,7 @@ class wizard_update_charts_accounts_tax(orm.TransientModel):
         'type': fields.selection([
             ('new', 'New template'),
             ('updated', 'Updated template'),
+            ('deleted', 'Tax to deactivate'),
         ], 'Type'),
         'update_tax_id': fields.many2one(
             'account.tax',
