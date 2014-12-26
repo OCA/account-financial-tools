@@ -520,47 +520,17 @@ class wizard_update_charts_accounts(orm.TransientModel):
             search(cr, uid, [('company_id', '=', wizard.company_id.id)],
                    context=context)
         tax_code_ids = set(tax_code_ids)
-        template_tax_code_ids = tax_code_template_mapping.values()
-        template_tax_code_ids = set(template_tax_code_ids)
+        template_tax_code_ids = set(tax_code_template_mapping.values())
         tax_code_ids_to_delete = tax_code_ids - template_tax_code_ids
-        if tax_code_ids_to_delete:
-            cr.execute("SELECT DISTINCT(tax_code_id) "
-                       "FROM account_move_line "
-                       "WHERE tax_code_id in %(tctd)s "
-                       "UNION "
-                       "SELECT DISTINCT(base_code_id) "
-                       "FROM account_tax "
-                       "WHERE base_code_id in %(tctd)s "
-                       "UNION "
-                       "SELECT DISTINCT(tax_code_id) "
-                       "FROM account_tax "
-                       "WHERE tax_code_id in %(tctd)s "
-                       "UNION "
-                       "SELECT DISTINCT(ref_base_code_id) "
-                       "FROM account_tax "
-                       "WHERE ref_base_code_id in %(tctd)s "
-                       "UNION "
-                       "SELECT DISTINCT(ref_tax_code_id) "
-                       "FROM account_tax "
-                       "WHERE ref_tax_code_id in %(tctd)s ",
-                       {'tctd': tuple(tax_code_ids_to_delete)})
-            # do not delete tax codes which are in use, and their parents
-            tax_code_ids_to_keep = set([row[0] for row in cr.fetchall()])
-            for tax_code in tax_code_obj.\
-                    browse(cr, uid, list(tax_code_ids_to_keep),
-                           context=context):
-                while tax_code.parent_id:
-                    tax_code_ids_to_keep.add(tax_code.parent_id.id)
-                    tax_code = tax_code.parent_id
-            for tax_code_id in tax_code_ids_to_delete - tax_code_ids_to_keep:
-                updated_tax_codes += 1
-                wiz_tax_code_obj.create(cr, uid, {
-                    'tax_code_id': False,
-                    'update_chart_wizard_id': wizard.id,
-                    'type': 'deleted',
-                    'update_tax_code_id': tax_code_id,
-                    'notes': "To delete: not in the template and unused",
-                }, context)
+        for tax_code_id in tax_code_ids_to_delete:
+            updated_tax_codes += 1
+            wiz_tax_code_obj.create(cr, uid, {
+                'tax_code_id': False,
+                'update_chart_wizard_id': wizard.id,
+                'type': 'deleted',
+                'update_tax_code_id': tax_code_id,
+                'notes': "To deactivate: not in the template",
+            }, context)
 
         return {
             'new': new_tax_codes,
@@ -1031,8 +1001,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
         tax_code_ids_to_delete = [wtc.update_tax_code_id.id
                                   for wtc in wizard.tax_code_ids
                                   if wtc.type == 'deleted']
-        taxcodes.unlink(cr, uid, tax_code_ids_to_delete, context=context)
-        log.add(_("Deleted %d tax codes\n" % len(tax_code_ids_to_delete)))
+        taxcodes.write(cr, uid, tax_code_ids_to_delete,
+                       {'active': False},
+                       context=context)
+        log.add(_("Deactivated %d tax codes\n" % len(tax_code_ids_to_delete)))
         deleted_tax_codes = len(tax_code_ids_to_delete)
         return {
             'new': new_tax_codes,
