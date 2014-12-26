@@ -29,31 +29,31 @@
     'version': "1.0",
     'author': "Pexego",
     'website': "http://www.pexego.es",
-    'category': "Enterprise Specific Modules",
-    'contributors': ['Pedro M. Baeza', 'Joaquín Gutierrez'],
+    'category': "Accounting & Finance",
+    'contributors': ['Pedro M. Baeza', 'Jordi Llinares', 'Joaquín Gutierrez'],
     'description': """
 This module adds a wizard to renumber account moves by date only for admin.
 ===========================================================================
 
-The wizard, that will be added to the "End of Year Treatments",
-let's you select one or more journals and fiscal periods,
-set a starting number; and then renumber all the posted moves
-from those journals and periods sorted by date.
+The wizard, which is accesible from the "End of Period" menuitem,
+lets you select journals, periods, and a starting number. When
+launched, it renumbers all posted moves that match selected criteria
+(after ordering them by date).
 
-It will recreate the sequence number of each account move
-using their journal sequence so:
+It will recreate the sequence number for each account move
+using its journal sequence, which means that:
     - Sequences per journal are supported.
-    - Sequences with prefixes and sufixes based on the move
+    - Sequences with prefixes and suffixes based on the move
       date are also supported.
             """,
     "license": "AGPL-3",
     "depends": [
-                'account',
+        'account',
     ],
     "demo": [],
     "data": [
         'wizard/wizard_renumber_view.xml',
     ],
-    "active": False,
-    'installable': False
+    'installable': True,
+    'auto_install': False,
 }
