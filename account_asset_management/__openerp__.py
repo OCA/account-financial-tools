@@ -73,6 +73,7 @@ Contributors
         'account_view.xml',
         'account_asset_invoice_view.xml',
         'report/account_asset_report_view.xml',
+        'res_config_view.xml',
     ],
     'auto_install': False,
     'installable': True,
