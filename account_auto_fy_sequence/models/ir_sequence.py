@@ -38,7 +38,6 @@ class Sequence(orm.Model):
             which has %(fy)s in prefix or suffix """
         fy_seq_id = self.create(cr, uid, {
             'name': seq.name + ' - ' + fiscalyear.code,
-            'code': seq.code,
             'implementation': seq.implementation,
             'prefix': (seq.prefix and
                        seq.prefix.replace(FY_SLOT, fiscalyear.code)),
