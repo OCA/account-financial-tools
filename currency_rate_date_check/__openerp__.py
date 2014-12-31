@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Currency rate date check module for OpenERP
-#    Copyright (C) 2012-2013 Akretion (http://www.akretion.com).
+#    Currency rate date check module for Odoo
+#    Copyright (C) 2012-2014 Akretion (http://www.akretion.com).
 #    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -31,10 +31,9 @@
 Currency Rate Date Check
 ========================
 
-This module adds a check on dates when doing currency conversion in OpenERP.
+This module adds a check on dates when doing currency conversion in Odoo.
 It checks that the currency rate used to make the conversion
-is not more than N days away
-from the date of the amount to convert.
+is not more than N days away from the date of the amount to convert.
 
 The maximum number of days of the interval can be
 configured on the company form.
@@ -50,6 +49,5 @@ for any help or question about this module.
         'images/date_check_error_popup.jpg',
         'images/date_check_company_config.jpg',
         ],
-    'installable': False,
-    'active': False,
+    'installable': True,
 }
