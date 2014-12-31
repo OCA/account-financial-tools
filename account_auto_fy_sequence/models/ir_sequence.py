@@ -39,7 +39,6 @@ class Sequence(orm.Model):
             which has %(fy)s in prefix or suffix """
         fy_seq_id = self.create(cr, SUPERUSER_ID, {
             'name': seq.name + ' - ' + fiscalyear.code,
-            'code': seq.code,
             'implementation': seq.implementation,
             'prefix': (seq.prefix and
                        seq.prefix.replace(FY_SLOT, fiscalyear.code)),
@@ -49,6 +48,11 @@ class Sequence(orm.Model):
             'number_increment': seq.number_increment,
             'padding': seq.padding,
             'company_id': seq.company_id.id,
+            'code': False,
+            # the Sequence Type is set to False, because the
+            # the fiscal-year-specific sequence must not be catched
+            # by next_by_code(), see
+            # https://github.com/OCA/account-financial-tools/issues/115
         }, context=context)
         self.pool['account.sequence.fiscalyear']\
             .create(cr, SUPERUSER_ID, {
