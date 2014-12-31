@@ -24,6 +24,7 @@
 ##############################################################################
 
 from openerp.osv import orm
+from openerp import SUPERUSER_ID
 from openerp.tools.translate import _
 
 FY_SLOT = '%(fy)s'
@@ -36,7 +37,7 @@ class Sequence(orm.Model):
     def _create_fy_sequence(self, cr, uid, seq, fiscalyear, context=None):
         """ Create a FY sequence by cloning a sequence
             which has %(fy)s in prefix or suffix """
-        fy_seq_id = self.create(cr, uid, {
+        fy_seq_id = self.create(cr, SUPERUSER_ID, {
             'name': seq.name + ' - ' + fiscalyear.code,
             'code': seq.code,
             'implementation': seq.implementation,
@@ -50,7 +51,7 @@ class Sequence(orm.Model):
             'company_id': seq.company_id.id,
         }, context=context)
         self.pool['account.sequence.fiscalyear']\
-            .create(cr, uid, {
+            .create(cr, SUPERUSER_ID, {
                 'sequence_id': fy_seq_id,
                 'sequence_main_id': seq.id,
                 'fiscalyear_id': fiscalyear.id,
