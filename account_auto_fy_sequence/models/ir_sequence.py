@@ -26,6 +26,8 @@
 from openerp.osv import orm
 from openerp import SUPERUSER_ID
 from openerp.tools.translate import _
+from openerp import api
+
 
 FY_SLOT = '%(fy)s'
 YEAR_SLOT = '%(year)s'
@@ -62,6 +64,12 @@ class Sequence(orm.Model):
             }, context=context)
         return fy_seq_id
 
+    # We NEED to have @api.cr_uid_ids_context even if this file still uses
+    # the old API, to avoid breaking the POS, see this bug:
+    # https://github.com/OCA/account-financial-tools/issues/119
+    # Don't ask me why it fixes the bug, I have no idea  -- Alexis de Lattre
+    # I "copied" this solution from odoo-80/addons/account/ir_sequence.py
+    @api.cr_uid_ids_context
     def _next(self, cr, uid, seq_ids, context=None):
         if context is None:
             context = {}
