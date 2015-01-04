@@ -54,6 +54,6 @@ check deposits.
         'security/check_deposit_security.xml',
         'account_data.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': True,
 }
