@@ -18,8 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import base64
-import tempfile
+import time
 
 import openerp.tests.common as test_common
 from openerp import addons
@@ -28,14 +27,15 @@ from openerp import addons
 class TestMoveLineImporter(test_common.SingleTransactionCase):
 
     def get_file(self, filename):
-        """Retrive file from test data"""
+        """Retrieve file from test data,
+           encode it as base64
+           and adjust it for current year
+        """
         path = addons.get_module_resource('async_move_line_importer',
                                           'tests', 'data', filename)
-        with open(path) as test_data:
-            with tempfile.TemporaryFile() as out:
-                base64.encode(test_data, out)
-                out.seek(0)
-                return out.read()
+        test_data = open(path).read()
+        test_data = test_data.replace('2014', time.strftime('%Y'))
+        return test_data.encode("base64")
 
     def setUp(self):
         super(TestMoveLineImporter, self).setUp()
