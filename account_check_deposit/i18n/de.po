@@ -23,7 +23,7 @@ msgid ""
 "You cannot modify a posted entry of this journal.\n"
 "First you should set the journal to allow cancelling entries."
 msgstr ""
-"Sie dürfen einen gebuchten Journaleintrag nicht verändern.\n"
+"Sie dürfen einen gebuchten Posten dieses Journals nicht verändern.\n"
 "Zunächst müssen Sie im Journal Stornierungen erlauben."
 
 #. module: account_check_deposit
@@ -39,7 +39,7 @@ msgstr "Gruppiere nach..."
 #. module: account_check_deposit
 #: model:ir.actions.report.xml,name:account_check_deposit.check_deposit_webkit
 msgid "WebKit Checks Deposit"
-msgstr "WebKit Checkeinreicher"
+msgstr "WebKit Checkdepot"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:79
@@ -59,7 +59,7 @@ msgstr "Beschreibung"
 #. module: account_check_deposit
 #: field:account.move.line,check_deposit_id:0
 msgid "Check Deposit"
-msgstr "Scheckeinreicher"
+msgstr "Scheckeinreichung"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
@@ -110,7 +110,7 @@ msgstr "Name"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Checks Deposit Search"
-msgstr "Scheckeinreichersuche"
+msgstr "Scheckdepotsuche"
 
 #. module: account_check_deposit
 #: model:account.account.type,name:account_check_deposit.data_account_type_received_check
@@ -144,7 +144,7 @@ msgstr "Betrag"
 #: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
 #: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
 msgid "Checks Deposit"
-msgstr "Scheckeinreichung"
+msgstr "Scheckdepot"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
@@ -164,7 +164,7 @@ msgstr "Storniert"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Validate Deposit"
-msgstr "Einreichung prüfen"
+msgstr "Depot prüfen"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -226,7 +226,7 @@ msgstr "Gesamt:"
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr "Journaleintrag"
+msgstr "Journalbuchung"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,journal_id:0
@@ -236,4 +236,4 @@ msgstr "Journal"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Items"
-msgstr "Journaleinträge"
+msgstr "Journalposten"
