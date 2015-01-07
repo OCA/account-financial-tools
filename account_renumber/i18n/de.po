@@ -123,9 +123,7 @@ msgstr "Nummeriere neu"
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr ""
-"Dieser Assistent hilft Ihnen Einträge in ein oder mehreren Journalen neu zu "
-"nummerieren"
+msgstr "Dieser Assistent hilft Ihnen Einträge in ein oder mehreren Journalen neu zu nummerieren"
 
 #. module: account_renumber
 #: view:wizard.renumber:0
