@@ -51,8 +51,7 @@ msgstr "Wenn leer, wird die Periode des Datums verwendet."
 #. module: account_reversal
 #: help:account.move,to_be_reversed:0
 msgid "Check this box if your entry has to bereversed at the end of period."
-msgstr ""
-"Wähle diese Box an, wenn Ihr Journal am Periodenende umgekehrt werden muss."
+msgstr "Wähle diese Box an, wenn Ihr Journal am Periodenende umgekehrt werden muss."
 
 #. module: account_reversal
 #: field:account.move.reverse,journal_id:0
