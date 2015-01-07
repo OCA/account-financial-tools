@@ -21,8 +21,6 @@
 from openerp.tests import common
 
 
-@common.at_install(True)
-@common.post_install(True)
 class FixedFeesTester(common.TransactionCase):
 
     def setUp(self):
