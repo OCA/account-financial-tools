@@ -30,8 +30,7 @@ msgstr "Aktivieren Sie die Box, um diesen Eintrag im Stapel zu buchen"
 #: code:addons/account_move_batch_validate/account.py:95
 #, python-format
 msgid "Task set to Done because the user unmarked the move"
-msgstr ""
-"Aufgabe auf erledigt gesetzt, da der Anwender den Eintrag abgewählt hat"
+msgstr "Aufgabe auf erledigt gesetzt, da der Anwender den Eintrag abgewählt hat"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
