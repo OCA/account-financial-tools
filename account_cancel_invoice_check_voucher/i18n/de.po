@@ -26,9 +26,7 @@ msgstr "Fehler!"
 #: code:addons/account_cancel_invoice_check_voucher/account_invoice.py:51
 #, python-format
 msgid "Invoice already imported in bank statment (%s) at %s on line %s"
-msgstr ""
-"Diese Rechnung wurde bereits im Kontoauszug (%s) zum %s an Position %s "
-"importiert"
+msgstr "Diese Rechnung wurde bereits im Kontoauszug (%s) zum %s an Position %s importiert"
 
 #. module: account_cancel_invoice_check_voucher
 #: model:ir.model,name:account_cancel_invoice_check_voucher.model_account_invoice
