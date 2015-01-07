@@ -31,8 +31,7 @@ msgstr "Fehler:"
 #: code:addons/account_journal_always_check_date/account_check_date.py:45
 #, python-format
 msgid "The option 'Check Date in Period' must be active on journal '%s'."
-msgstr ""
-"Die Einstellung 'Prüfe Datum in Periode' muss im Journal '%s' aktiviert sein."
+msgstr "Die Einstellung 'Prüfe Datum in Periode' muss im Journal '%s' aktiviert sein."
 
 #. module: account_journal_always_check_date
 #: model:ir.model,name:account_journal_always_check_date.model_account_journal
