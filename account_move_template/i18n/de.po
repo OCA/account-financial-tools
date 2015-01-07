@@ -176,7 +176,7 @@ msgstr "Zeilen"
 #. module: account_move_template
 #: view:account.move.template.line:0
 msgid "Journal Entry Template Line"
-msgstr "Journal-Buchungszeilenvorlage"
+msgstr "Journal-Buchungsvorlage"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
@@ -263,8 +263,7 @@ msgstr "Python-Programmcode"
 #: code:addons/account_move_template/account_document_template.py:77
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
-msgstr ""
-"Inkonsistenz zwischen Eingabezeile und ausgefüllter Zeile der Vorlage %s"
+msgstr "Inkonsistenz zwischen Eingabezeile und ausgefüllter Zeile der Vorlage %s"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
