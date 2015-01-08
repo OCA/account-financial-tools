@@ -20,11 +20,8 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
-from datetime import datetime
-from openerp.tools.translate import _
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, \
-    DEFAULT_SERVER_DATETIME_FORMAT
+from openerp import models, fields, _
+from openerp.exceptions import Warning
 
 # Here are some explainations about the design of this module.
 # In odoo/openerp/addons/base/res/res_currency.py :
@@ -42,7 +39,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, \
 # => that's the solution I implement in the code below
 
 
-class ResCurrency(orm.Model):
+class ResCurrency(models.Model):
     _inherit = 'res.currency'
 
     def _get_current_rate(
@@ -76,20 +73,16 @@ class ResCurrency(orm.Model):
                         (currency_id, date))
                     if cr.rowcount:
                         rate_date = cr.fetchone()[1]
-                        rate_date_dt = datetime.strptime(
-                            rate_date, DEFAULT_SERVER_DATETIME_FORMAT)
+                        rate_date_dt = fields.Date.from_string(rate_date)
                         if len(date) <= 10:
-                            date_dt = datetime.strptime(
-                                date, DEFAULT_SERVER_DATE_FORMAT)
+                            date_dt = fields.Date.from_string(date)
                         else:
-                            date_dt = datetime.strptime(
-                                date, DEFAULT_SERVER_DATETIME_FORMAT)
+                            date_dt = fields.Datetime.from_string(date)
                         max_delta = user.company_id.currency_rate_max_delta
                         if (date_dt - rate_date_dt).days > max_delta:
                             currency = self.browse(
                                 cr, uid, currency_id, context=context)
-                            raise orm.except_orm(
-                                _('Error'),
+                            raise Warning(
                                 _('You are requesting a rate conversion on %s '
                                   'for currency %s but the nearest '
                                   'rate before that date is '
