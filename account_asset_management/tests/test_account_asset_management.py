@@ -21,6 +21,8 @@
 #
 ##############################################################################
 
+from datetime import datetime
+
 import openerp.tests.common as common
 
 import time
@@ -154,7 +156,7 @@ class TestAssetManagement(common.TransactionCase):
                                     'account_asset_category_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
-            'date_start': time.strftime('2013-07-07'),
+            'date_start': '%d-07-07' % (datetime.now().year - 1,),
             'method_number': 5,
             'method_period': 'month',
             'prorata': True,
@@ -162,7 +164,7 @@ class TestAssetManagement(common.TransactionCase):
         self.dl_model.create(self.cr, self.uid, {
             'asset_id': asset_id,
             'amount': 325.08,
-            'line_date': time.strftime('2013-12-31'),
+            'line_date': '%d-12-31' % (datetime.now().year - 1,),
             'type': 'depreciate',
             'init_entry': True,
         })
