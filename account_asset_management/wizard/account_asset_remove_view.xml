@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+      <record model="ir.ui.view" id="account_asset_remove_form">
+        <field name="name">account.asset.remove.form</field>
+        <field name="model">account.asset.remove</field>
+        <field name="arch" type="xml">
+          <form string="Remove Asset" version="7.0">
+            <group colspan="4" col="2">
+              <separator string="Specify the asset removal date" colspan="2"/>
+              <field name="date_remove"/>
+              <field name="period_id"/>
+              <separator string="Notes" colspan="2"/>
+              <field name="note" nolabel="1" colspan="2"/>
+            </group>
+            <newline/>
+            <separator colspan="4"/>
+            <footer>
+              <button string="Generate Removal entries" name="remove" type="object" class="oe_highlight"/>
+              or
+              <button string="Cancel" class="oe_link" special="cancel"/>
+            </footer>
+          </form>
+        </field>
+      </record>
+
+    </data>
+</openerp>
