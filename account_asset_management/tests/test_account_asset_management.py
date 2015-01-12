@@ -21,6 +21,8 @@
 #
 ##############################################################################
 
+from datetime import datetime
+
 import openerp.tests.common as common
 
 import time
@@ -33,9 +35,8 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model = self.registry('account.asset.asset')
         self.dl_model = self.registry('account.asset.depreciation.line')
 
-    def test_1(self):
-        """ Compute depreciation boards and post assets for first year,
-            verify the depreciation values and values in parent assets. """
+    def test_1_hierarchy(self):
+        """Test computations across the asset hierarchy."""
         #
         # first load demo assets and do some sanity checks
         #
@@ -70,7 +71,7 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(fa.asset_value, 11500)
 
         #
-        # compute depreciation boards
+        # I compute the depreciation boards
         #
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [ict0.id, vehicle0.id])
@@ -82,7 +83,7 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(vehicle0.depreciation_line_ids[1].amount, 2000)
 
         #
-        # post first depreciation line
+        # I post the first depreciation line
         #
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
@@ -107,7 +108,7 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(fa.value_residual, 9000)
 
         #
-        # change parent and check values
+        # I change the parent and check values
         #
         ict0.write({'parent_id': vehicle.id})
         ict.refresh()
@@ -120,8 +121,8 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(fa.value_depreciated, 2500)
         self.assertEquals(fa.value_residual, 9000)
 
-    def test_2(self):
-        """ prorata temporis depreciation """
+    def test_2_prorata_basic(self):
+        """Prorata temporis depreciation basic test."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
@@ -145,24 +146,25 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(asset.depreciation_line_ids[6].amount, 55.55)
         self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
 
-    def test_3(self):
-        """ prorata temporis depreciation with initial value in
-            previous year """
+    def test_3_proprata_init_prev_year(self):
+        """Prorata temporis depreciation with init value in prev year."""
+        # I create an asset in current year
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
                                     'account_asset_category_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
-            'date_start': time.strftime('2013-07-07'),
+            'date_start': '%d-07-07' % (datetime.now().year - 1,),
             'method_number': 5,
             'method_period': 'month',
             'prorata': True,
         })
+        # I create a initial depreciation line in previous year
         self.dl_model.create(self.cr, self.uid, {
             'asset_id': asset_id,
             'amount': 325.08,
-            'line_date': time.strftime('2013-12-31'),
+            'line_date': '%d-12-31' % (datetime.now().year - 1,),
             'type': 'depreciate',
             'init_entry': True,
         })
@@ -171,14 +173,15 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [asset.id])
         asset.refresh()
+        # I check the depreciated value is the initial value
         self.assertEquals(asset.value_depreciated, 325.08)
+        # I check computed values in the depreciation board
         self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
         self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
         self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
 
-    def test_4(self):
-        """ prorata temporis depreciation with initial value in
-            curent year """
+    def test_4_prorata_init_cur_year(self):
+        """Prorata temporis depreciation with init value in curent year."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
@@ -202,7 +205,9 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [asset.id])
         asset.refresh()
+        # I check the depreciated value is the initial value
         self.assertEquals(asset.value_depreciated, 279.44)
+        # I check computed values in the depreciation board
         self.assertEquals(asset.depreciation_line_ids[2].amount, 45.64)
         self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
         self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
