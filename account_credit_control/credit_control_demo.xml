@@ -6,7 +6,6 @@
       <field ref="account.cas" name="parent_id"/>
       <field name="type">receivable</field>
       <field eval="True" name="reconcile"/>
-      <field name="credit_policy_id" ref="credit_control_no_follow"/>
       <field name="user_type" ref="account.data_account_type_receivable"/>
     </record>
 
@@ -16,7 +15,6 @@
       <field ref="account.cas" name="parent_id"/>
       <field name="type">receivable</field>
       <field eval="True" name="reconcile"/>
-      <field name="credit_policy_id" ref="credit_control_2_time"/>
       <field name="user_type" ref="account.data_account_type_receivable"/>
     </record>
 
@@ -26,7 +24,6 @@
       <field ref="account.cas" name="parent_id"/>
       <field name="type">receivable</field>
       <field eval="True" name="reconcile"/>
-      <field name="credit_policy_id" ref="credit_control_3_time"/>
       <field name="user_type" ref="account.data_account_type_receivable"/>
     </record>
   </data>
