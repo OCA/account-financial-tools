@@ -34,7 +34,7 @@ class CreditControlMarker(models.TransientModel):
                 context.get('active_ids')):
             return False
         line_obj = self.env['credit.control.line']
-        lines = line_obj.browse(context['active_id'])
+        lines = line_obj.browse(context['active_ids'])
         return self._filter_lines(lines)
 
     name = fields.Selection([('ignored', 'Ignored'),
