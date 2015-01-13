@@ -98,12 +98,13 @@ class CreditCommunication(models.TransientModel):
 
     @api.model
     @api.returns('credit.control.line')
-    def _get_credit_lines(self, line_ids, partner_id, level_id):
+    def _get_credit_lines(self, line_ids, partner_id, level_id, currency_id):
         """ Return credit lines related to a partner and a policy level """
         cr_line_obj = self.env['credit.control.line']
         cr_lines = cr_line_obj.search([('id', 'in', line_ids),
                                        ('partner_id', '=', partner_id),
-                                       ('policy_level_id', '=', level_id)])
+                                       ('policy_level_id', '=', level_id),
+                                       ('currency_id', '=', currency_id)])
         return cr_lines
 
     @api.model
@@ -128,16 +129,17 @@ class CreditCommunication(models.TransientModel):
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids), ))
         res = cr.dictfetchall()
-        for level_assoc in res:
+        for group in res:
             data = {}
             level_lines = self._get_credit_lines(lines.ids,
-                                                 level_assoc['partner_id'],
-                                                 level_assoc['policy_level_id']
+                                                 group['partner_id'],
+                                                 group['policy_level_id'],
+                                                 group['currency_id']
                                                  )
 
             data['credit_control_line_ids'] = [(6, 0, level_lines.ids)]
-            data['partner_id'] = level_assoc['partner_id']
-            data['current_policy_level'] = level_assoc['policy_level_id']
+            data['partner_id'] = group['partner_id']
+            data['current_policy_level'] = group['policy_level_id']
             comm = self.create(data)
             comms += comm
         return comms
