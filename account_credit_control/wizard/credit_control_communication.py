@@ -40,6 +40,8 @@ class CreditCommunication(models.TransientModel):
                                            'Level',
                                            required=True)
 
+    currency_id = fields.Many2one('res.currency', 'Currency', required=True)
+
     credit_control_line_ids = fields.Many2many('credit.control.line',
                                                rel='comm_credit_rel',
                                                string='Credit Lines')
@@ -62,6 +64,21 @@ class CreditCommunication(models.TransientModel):
     user_id = fields.Many2one('res.users',
                               default=lambda self: self.env.user,
                               string='User')
+
+    total_invoiced = fields.Float(string='Total Invoiced',
+                                  compute='_compute_total')
+
+    total_due = fields.Float(string='Total Invoiced',
+                             compute='_compute_total')
+
+    @api.depends('credit_control_line_ids',
+                 'credit_control_line_ids.amount_due',
+                 'credit_control_line_ids.balance_due')
+    def _compute_total(self):
+        amount_field = 'credit_control_line_ids.amount_due'
+        balance_field = 'credit_control_line_ids.balance_due'
+        self.total_invoiced = sum(self.mapped(amount_field))
+        self.total_due = sum(self.mapped(balance_field))
 
     @api.model
     @api.returns('self', lambda value: value.id)
@@ -129,6 +146,7 @@ class CreditCommunication(models.TransientModel):
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids), ))
         res = cr.dictfetchall()
+        company_currency = self.env.user.company_id.currency_id
         for group in res:
             data = {}
             level_lines = self._get_credit_lines(lines.ids,
@@ -140,6 +158,7 @@ class CreditCommunication(models.TransientModel):
             data['credit_control_line_ids'] = [(6, 0, level_lines.ids)]
             data['partner_id'] = group['partner_id']
             data['current_policy_level'] = group['policy_level_id']
+            data['currency_id'] = group['currency_id'] or company_currency.id
             comm = self.create(data)
             comms += comm
         return comms
