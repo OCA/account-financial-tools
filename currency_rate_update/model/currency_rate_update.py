@@ -121,6 +121,10 @@ PL_NBP_supported_currency_array = [
     "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW",
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
+    
+ TCMB_supported_currency_array = [
+    "USD", "AUD", "DKK", "EUR", "GBP", "CHF", "SEK", "CAD", "KWD", "NOK",
+    "SAR", "JPY", "BGN", "RON", "RUB", "IRR", "CNY", "PKR", "TRY"]   
 
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
@@ -130,6 +134,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
+    'TCMB_getter': TCMB_supported_currency_array,
     }
 
 
@@ -194,7 +199,9 @@ class Currency_rate_update_service(models.Model):
          #  (Thailand, Malaysia, Mexico...)
          ('CA_BOC_getter', 'Bank of Canada - noon rates'),
          # Added for romanian rates
-         ('RO_BNR_getter', 'National Bank of Romania')
+         ('RO_BNR_getter', 'National Bank of Romania'),
+         # TCMB (CBRT)rate service added
+         ('TCMB_getter', 'Central Bank Of The Turkey')
          ],
         string="Webservice to use",
         required=True)
