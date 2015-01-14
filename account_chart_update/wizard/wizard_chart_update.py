@@ -345,6 +345,7 @@ class wizard_update_charts_accounts(orm.TransientModel):
             criteria = (['|', '|'] + criteria +
                         [('description', '=', tax_templ.description),
                          ('name', '=', tax_templ.description)])
+        criteria += [('company_id', '=', wizard.company_id.id)]
         tax_ids = tax_obj.search(cr, uid, criteria, context=context)
         tax_templ_mapping[tax_templ.id] = tax_ids and tax_ids[0] or False
         return tax_templ_mapping[tax_templ.id]
