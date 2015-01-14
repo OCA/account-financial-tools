@@ -40,21 +40,25 @@ class LawsuitRequisitionPartner(models.TransientModel):
         return (line.state not in ('draft', 'ignored') and
                 not line.manually_overridden)
 
+    @api.one
     @api.depends('invoices')
     def compute_dunning_fees(self):
         lines = self.invoices.mapped('credit_control_line_ids')
         self.dunning_fees = sum(line.dunning_fees_amount for line in lines
                                 if self._active_line(line))
 
+    @api.one
     @api.depends('invoices', 'partner')
     def compute_lawsuit_fees(self):
         schedule = self.partner.lawsuit_office_id.fees_schedule_id
         self.lawsuit_fees = schedule._get_fees_from_invoices(self.invoices)
 
+    @api.one
     @api.depends('invoices')
     def compute_due_amount(self):
         self.due_amount = sum(invoice.residual for invoice in self.invoices)
 
+    @api.one
     @api.depends('invoices')
     def compute_paid_amount(self):
         self.paid_amount = sum(inv.amount_total - inv.residual
