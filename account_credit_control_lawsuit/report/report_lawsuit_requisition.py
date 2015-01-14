@@ -51,7 +51,8 @@ class LawsuitRequisitionPartner(models.TransientModel):
     @api.depends('invoices', 'partner')
     def compute_lawsuit_fees(self):
         schedule = self.partner.lawsuit_office_id.fees_schedule_id
-        self.lawsuit_fees = schedule._get_fees_from_invoices(self.invoices)
+        if schedule:
+            self.lawsuit_fees = schedule._get_fees_from_invoices(self.invoices)
 
     @api.one
     @api.depends('invoices')
