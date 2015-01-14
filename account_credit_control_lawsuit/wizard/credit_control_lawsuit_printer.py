@@ -104,5 +104,10 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         if not invoices:
             raise exceptions.Warning(_('No invoice to print'))
         if self.lawsuit_step_id:
-            invoices.write({'lawsuit_step_id': self.lawsuit_step_id.id})
+            # only write if an office is found because otherwise  we will
+            # have to print it again
+            office_invoices = invoices.filtered(
+                lambda invoice: invoice.partner_id.lawsuit_office_id
+            )
+            office_invoices.write({'lawsuit_step_id': self.lawsuit_step_id.id})
         return self._generate_report(invoices)
