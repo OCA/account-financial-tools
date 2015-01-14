@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author Vincent Renaville. Copyright 2013 Camptocamp SA
+#    Author Vincent Renaville. Copyright 2013-2014 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,9 +23,8 @@
     "depends": ["base",
                 "account"],
     "author": "Camptocamp",
-    "description": """Recompute tax_amount to avoid sign problem""",
     'website': 'http://www.camptocamp.com',
     'data': [],
-    'installable': False,
+    'installable': True,
     'active': False,
 }
