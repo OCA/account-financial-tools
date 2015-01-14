@@ -348,7 +348,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
                         [('description', '=', tax_templ.description),
                          ('name', '=', tax_templ.description)])
         criteria += [('company_id', '=', wizard.company_id.id)]
-        tax_ids = tax_obj.search(cr, uid, criteria, context=context)
+        # search inactive taxes too, to avoid re-creating
+        # taxes that have been deactivated before
+        search_context = dict(context, active_test=False)
+        tax_ids = tax_obj.search(cr, uid, criteria, context=search_context)
         tax_templ_mapping[tax_templ.id] = tax_ids and tax_ids[0] or False
         return tax_templ_mapping[tax_templ.id]
 
@@ -364,7 +367,10 @@ class wizard_update_charts_accounts(orm.TransientModel):
             return False
         if tax_code_templ_mapping.get(tax_code_template.id):
             return tax_code_templ_mapping[tax_code_template.id]
-        # In other case
+        # prepare a search context in order to
+        # search inactive tax codes too, to avoid re-creating
+        # tax codes that have been deactivated before
+        search_context = dict(context, active_test=False)
         tax_code_obj = self.pool['account.tax.code']
         root_tax_code_id = wizard.chart_template_id.tax_code_root_id.id
         tax_code_code = tax_code_template.code
@@ -372,14 +378,14 @@ class wizard_update_charts_accounts(orm.TransientModel):
             tax_code_ids = tax_code_obj.search(cr, uid, [
                 ('code', '=', tax_code_code),
                 ('company_id', '=', wizard.company_id.id)
-            ], context=context)
+            ], context=search_context)
         if not tax_code_code or not tax_code_ids:
             tax_code_name = ((tax_code_template.id == root_tax_code_id) and
                              wizard.company_id.name or tax_code_template.name)
             tax_code_ids = tax_code_obj.search(cr, uid, [
                 ('name', '=', tax_code_name),
                 ('company_id', '=', wizard.company_id.id)
-            ], context=context)
+            ], context=search_context)
         tax_code_templ_mapping[tax_code_template.id] = (tax_code_ids and
                                                         tax_code_ids[0] or
                                                         False)
