@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
+#    Author: Guewen Baconnier
+#    Copyright 2015 Camptocamp SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,9 +18,14 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import lawsuit_office
-from . import lawsuit_fees_schedule
-from . import policy
-from . import partner
-from . import account_invoice
-from . import invoice_lawsuit_step
+
+from openerp import models, fields
+
+
+class AccountInvoiceLawsuitStep(models.Model):
+    _name = 'account.invoice.lawsuit.step'
+    _order = 'sequence ASC'
+
+    name = fields.Char(required=True, translate=True)
+    set_when_requisition_printed = fields.Boolean()
+    sequence = fields.Integer()

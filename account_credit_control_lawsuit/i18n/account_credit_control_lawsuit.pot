@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-15 12:18+0000\n"
-"PO-Revision-Date: 2014-12-15 12:18+0000\n"
+"POT-Creation-Date: 2015-01-14 10:14+0000\n"
+"PO-Revision-Date: 2015-01-14 10:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,11 +41,17 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Change the lawsuit step of the invoice"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: field:lawsuit.fees.schedule,company_id:0
 msgid "Company"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,create_uid:0
 #: field:credit.control.lawsuit.printer,create_uid:0
 #: field:lawsuit.fees.schedule,create_uid:0
 #: field:lawsuit.fees.schedule.line,create_uid:0
@@ -55,6 +61,7 @@ msgid "Created by"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,create_date:0
 #: field:credit.control.lawsuit.printer,create_date:0
 #: field:lawsuit.fees.schedule,create_date:0
 #: field:lawsuit.fees.schedule.line,create_date:0
@@ -120,6 +127,7 @@ msgid "Fees Schedule"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,id:0
 #: field:credit.control.lawsuit.printer,id:0
 #: field:lawsuit.fees.schedule,id:0
 #: field:lawsuit.fees.schedule.line,id:0
@@ -132,6 +140,19 @@ msgstr ""
 #. module: account_credit_control_lawsuit
 #: model:ir.model,name:account_credit_control_lawsuit.model_account_invoice
 msgid "Invoice"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_form
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_search
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_tree
+msgid "Invoice Lawsuit Step"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.action_account_invoice_lawsuit_step_view
+#: model:ir.ui.menu,name:account_credit_control_lawsuit.menu_account_invoice_lawsuit_step
+msgid "Invoice Lawsuit Steps"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
@@ -157,6 +178,7 @@ msgid "Invoices"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,write_uid:0
 #: field:credit.control.lawsuit.printer,write_uid:0
 #: field:lawsuit.fees.schedule,write_uid:0
 #: field:lawsuit.fees.schedule.line,write_uid:0
@@ -166,6 +188,7 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,write_date:0
 #: field:credit.control.lawsuit.printer,write_date:0
 #: field:lawsuit.fees.schedule,write_date:0
 #: field:lawsuit.fees.schedule.line,write_date:0
@@ -219,6 +242,13 @@ msgid "Lawsuit Requisition"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: view:account.invoice:account_credit_control_lawsuit.view_account_invoice_filter
+#: field:account.invoice,lawsuit_step_id:0
+#: field:credit.control.lawsuit.printer,lawsuit_step_id:0
+msgid "Lawsuit Step"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: field:res.better.zip,lawsuit_office_id:0
 msgid "Lawsuit office"
 msgstr ""
@@ -229,11 +259,7 @@ msgid "Line"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: field:credit.control.lawsuit.printer,mark_as_filed:0
-msgid "Mark as Filed"
-msgstr ""
-
-#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,name:0
 #: field:lawsuit.fees.schedule,name:0
 #: field:lawsuit.office,name:0
 msgid "Name"
@@ -255,7 +281,7 @@ msgid "Needs a lawsuit procedure"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
-#: code:addons/account_credit_control_lawsuit/wizard/credit_control_lawsuit_printer.py:110
+#: code:addons/account_credit_control_lawsuit/wizard/credit_control_lawsuit_printer.py:105
 #, python-format
 msgid "No invoice to print"
 msgstr ""
@@ -314,6 +340,11 @@ msgid "Print lawsuit requisition letter for invoices"
 msgstr ""
 
 #. module: account_credit_control_lawsuit
+#: model:account.invoice.lawsuit.step,name:account_credit_control_lawsuit.invoice_lawsuit_step_printed
+msgid "Printed"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
 #: field:lawsuit.fees.schedule,product_id:0
 msgid "Product"
 msgstr ""
@@ -321,6 +352,16 @@ msgstr ""
 #. module: account_credit_control_lawsuit
 #: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
 msgid "Schedule values"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,set_when_requisition_printed:0
+msgid "Set when requisition printed"
 msgstr ""
 
 #. module: account_credit_control_lawsuit

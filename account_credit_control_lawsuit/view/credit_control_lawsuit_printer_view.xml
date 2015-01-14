@@ -10,13 +10,16 @@
           <separator string="Print lawsuit requisition letter for invoices" colspan="4"/>
           <newline/>
           <group>
-            <field name="mark_as_filed"
-                   colspan="4"/>
+            <group cols="4" col="4">
+              <field name="lawsuit_step_id"
+                string="Change the lawsuit step of the invoice"
+                colspan="1"/>
+            </group>
           </group>
           <newline/>
           <notebook>
             <page string="Invoices">
-              <field name="invoice_ids" colspan="4" nolabel="1" />
+              <field name="invoice_ids" colspan="4" nolabel="1"/>
             </page>
           </notebook>
           <newline/>

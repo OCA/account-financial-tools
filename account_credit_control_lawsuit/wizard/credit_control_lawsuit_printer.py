@@ -61,10 +61,20 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         invoices = self._filter_lawsuit_invoices(invoices)
         return invoices
 
-    mark_as_filed = fields.Boolean(string='Mark as Filed',
-                                   default=True)
+    @api.model
+    def _get_lawsuit_step_id(self):
+        step_obj = self.env['account.invoice.lawsuit.step']
+        return step_obj.search([('set_when_requisition_printed', '=', True)],
+                               limit=1)
+
+    lawsuit_step_id = fields.Many2one(
+        comodel_name='account.invoice.lawsuit.step',
+        string='Lawsuit Step',
+        default=_get_lawsuit_step_id,
+    )
     invoice_ids = fields.Many2many(comodel_name='account.invoice',
                                    string='Invoices',
+                                   domain=[('need_lawsuit', '=', True)],
                                    default=_get_invoices)
 
     @api.model
@@ -80,21 +90,6 @@ class CreditControlLawsuitPrinter(models.TransientModel):
                        'report_lawsuit_requisition')
         return self.env['report'].get_action(invoices, report_name)
 
-    @api.model
-    def _mark_invoices_as_filed(self, invoices):
-        """Mark related credit line of an invoice as overridden.
-
-        Only non lawsuit credit line will be marked
-
-        :param invoice: invoice record to treat
-
-        :returns: marked credit lines
-        """
-        lines = invoices.mapped('credit_control_line_ids')
-        lines = lines.filtered(lambda l: not l.policy_level_id.need_lawsuit)
-        lines.write({'manually_overridden': True})
-        return lines
-
     @api.multi
     def print_lawsuit(self):
         """Generate lawsuit requisition report and manage credit lines.
@@ -108,6 +103,6 @@ class CreditControlLawsuitPrinter(models.TransientModel):
         invoices = self._filter_lawsuit_invoices(self.invoice_ids)
         if not invoices:
             raise exceptions.Warning(_('No invoice to print'))
-        if self.mark_as_filed:
-            self._mark_invoices_as_filed(invoices)
+        if self.lawsuit_step_id:
+            invoices.write({'lawsuit_step_id': self.lawsuit_step_id.id})
         return self._generate_report(invoices)

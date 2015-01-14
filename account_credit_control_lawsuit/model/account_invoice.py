@@ -28,6 +28,10 @@ class AccountInvoice(models.Model):
     need_lawsuit = fields.Boolean(string='Needs a lawsuit procedure',
                                   compute='_get_need_lawsuit',
                                   store=True)
+    lawsuit_step_id = fields.Many2one(
+        comodel_name='account.invoice.lawsuit.step',
+        string='Lawsuit Step',
+    )
 
     @api.one
     @api.depends('credit_policy_id',
