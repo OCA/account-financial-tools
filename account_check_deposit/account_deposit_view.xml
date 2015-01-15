@@ -78,6 +78,8 @@
                 <tree string="Checks Deposits" colors="blue:state=='draft';">
                     <field name="name"/>
                     <field name="deposit_date"/>
+                    <field name="journal_id"/>
+                    <field name="partner_bank_id"/>
                     <field name="check_count"/>
                     <field name="total_amount"/>
                     <field name="currency_id" groups="base.group_multi_currency"/>
