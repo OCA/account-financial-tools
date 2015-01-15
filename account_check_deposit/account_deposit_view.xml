@@ -15,7 +15,7 @@
             <field name="name">account.check.deposit.form</field>
             <field name="model">account.check.deposit</field>
             <field name="arch" type="xml">
-                <form string="Checks Deposit" version="7.0">
+                <form string="Checks Deposit">
                     <header>
                         <button name="validate_deposit" states="draft"
                                 string="Validate"
