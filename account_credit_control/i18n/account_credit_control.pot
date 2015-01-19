@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-30 14:59+0000\n"
-"PO-Revision-Date: 2014-10-30 14:59+0000\n"
+"POT-Creation-Date: 2015-01-13 13:11+0000\n"
+"PO-Revision-Date: 2015-01-13 13:11+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:87
+#: code:addons/account_credit_control/run.py:93
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr ""
@@ -79,13 +79,13 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:154
+#: code:addons/account_credit_control/run.py:161
 #, python-format
 msgid "A credit control run is already running in background, please try later."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:80
+#: code:addons/account_credit_control/run.py:86
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr ""
@@ -250,6 +250,7 @@ msgid "Credit Control Info"
 msgstr ""
 
 #. module: account_credit_control
+#: view:account.invoice:account_credit_control.invoice_followup_form_view
 #: field:credit.control.emailer,line_ids:0
 #: field:credit.control.marker,line_ids:0
 #: field:credit.control.printer,line_ids:0
@@ -350,6 +351,7 @@ msgid "Credit policy level"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,currency_id:0
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
 msgstr ""
@@ -484,8 +486,8 @@ msgid "For policies which should not generate lines or are obsolete"
 msgstr ""
 
 #. module: account_credit_control
-#: view:account.invoice:account_credit_control.invoice_followup_form_view
-msgid "Force credit control policy:"
+#: field:credit.control.run,line_ids:0
+msgid "Generated lines"
 msgstr ""
 
 #. module: account_credit_control
@@ -538,6 +540,11 @@ msgstr ""
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Invoiced amount"
+msgstr ""
+
+#. module: account_credit_control
+#: view:account.invoice:account_credit_control.invoice_followup_form_view
+msgid "Issued Lines"
 msgstr ""
 
 #. module: account_credit_control
@@ -623,6 +630,16 @@ msgid "Mailer"
 msgstr ""
 
 #. module: account_credit_control
+#: view:account.invoice:account_credit_control.invoice_followup_form_view
+msgid "Manual Credit Control Policy"
+msgstr ""
+
+#. module: account_credit_control
+#: view:credit.control.run:account_credit_control.credit_control_run_form
+msgid "Manual Lines"
+msgstr ""
+
+#. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Manual change"
 msgstr ""
@@ -679,11 +696,6 @@ msgid "Move line to change"
 msgstr ""
 
 #. module: account_credit_control
-#: view:credit.control.run:account_credit_control.credit_control_run_form
-msgid "Move lines To be treated manually"
-msgstr ""
-
-#. module: account_credit_control
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 msgid "Move lines to affect"
 msgstr ""
@@ -731,6 +743,11 @@ msgstr ""
 #. module: account_credit_control
 #: help:credit.control.printer,mark_as_sent:0
 msgid "Only letter lines will be marked."
+msgstr ""
+
+#. module: account_credit_control
+#: view:credit.control.run:account_credit_control.credit_control_run_form
+msgid "Open Credit Control Lines"
 msgstr ""
 
 #. module: account_credit_control
@@ -873,7 +890,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:103
+#: code:addons/account_credit_control/run.py:109
 #, python-format
 msgid "Please select a policy"
 msgstr ""
@@ -891,17 +908,15 @@ msgid "Policies"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:126
+#: code:addons/account_credit_control/run.py:132
 #, python-format
-msgid "Policy \"%s\" has generated %d Credit Control Lines.\n"
-""
+msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:130
+#: code:addons/account_credit_control/run.py:136
 #, python-format
-msgid "Policy \"%s\" has not generated any Credit Control Lines.\n"
-""
+msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
 
 #. module: account_credit_control
@@ -965,13 +980,14 @@ msgid "Reminder"
 msgstr ""
 
 #. module: account_credit_control
+#: view:credit.control.run:account_credit_control.credit_control_run_form
 #: field:credit.control.run,report:0
 msgid "Report"
 msgstr ""
 
 #. module: account_credit_control
-#: view:credit.control.run:account_credit_control.credit_control_run_form
-msgid "Report and Errors"
+#: field:credit.control.communication,report_date:0
+msgid "Report Date"
 msgstr ""
 
 #. module: account_credit_control
@@ -1023,6 +1039,11 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
+msgstr ""
+
+#. module: account_credit_control
+#: field:credit.control.line,run_id:0
+msgid "Source"
 msgstr ""
 
 #. module: account_credit_control
@@ -1083,6 +1104,16 @@ msgid "This wizard will let you set the overdue policy and level for selected in
 msgstr ""
 
 #. module: account_credit_control
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Total Due"
+msgstr ""
+
+#. module: account_credit_control
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
 msgstr ""
@@ -1093,7 +1124,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/line.py:224
+#: code:addons/account_credit_control/line.py:226
 #, python-format
 msgid "You are not allowed to delete a credit control line that is not in draft state."
 msgstr ""
@@ -1122,5 +1153,13 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,level:0
 msgid "credit.control.policy.level"
+msgstr ""
+
+#. module: account_credit_control
+#: view:credit.control.emailer:account_credit_control.credit_line_emailer_form
+#: view:credit.control.marker:account_credit_control.credit_line_marker_form
+#: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
+#: view:credit.control.printer:account_credit_control.credit_line_printer_form
+msgid "or"
 msgstr ""
 

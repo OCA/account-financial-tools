@@ -49,13 +49,19 @@ class CreditControlRun(models.Model):
         states={'draft': [('readonly', False)]},
         default=_get_policies,
     )
-    report = fields.Text(string='Report', readonly=True, copy=False)
+    report = fields.Html(string='Report', readonly=True, copy=False)
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done')],
                              string='State',
                              required=True,
                              readonly=True,
                              default='draft')
+
+    line_ids = fields.One2many(
+        comodel_name='credit.control.line',
+        inverse_name='run_id',
+        string='Generated lines')
+
     manual_ids = fields.Many2many(
         'account.move.line',
         rel="credit_runreject_rel",
@@ -123,18 +129,19 @@ class CreditControlRun(models.Model):
                                                      self.date)
             generated |= policy_lines_generated
             if policy_lines_generated:
-                report += (_("Policy \"%s\" has generated %d Credit "
-                             "Control Lines.\n") %
+                report += (_("Policy \"<b>%s</b>\" has generated <b>%d Credit "
+                             "Control Lines.</b><br/>") %
                             (policy.name, len(policy_lines_generated)))
             else:
                 report += _(
-                    "Policy \"%s\" has not generated any "
-                    "Credit Control Lines.\n" % policy.name
+                    "Policy \"<b>%s</b>\" has not generated any "
+                    "Credit Control Lines.<br/>" % policy.name
                 )
 
         vals = {'state': 'done',
                 'report': report,
-                'manual_ids': [(6, 0, manually_managed_lines)]}
+                'manual_ids': [(6, 0, manually_managed_lines.ids)],
+                'line_ids': [(6, 0, generated.ids)]}
         self.write(vals)
         return generated
 
@@ -156,3 +163,13 @@ class CreditControlRun(models.Model):
 
         self._generate_credit_lines()
         return True
+
+    @api.multi
+    def open_credit_lines(self):
+        """ Open the generated lines """
+        self.ensure_one()
+        action_name = 'account_credit_control.credit_control_line_action'
+        action = self.env.ref(action_name)
+        action = action.read()[0]
+        action['domain'] = [('id', 'in', self.line_ids.ids)]
+        return action

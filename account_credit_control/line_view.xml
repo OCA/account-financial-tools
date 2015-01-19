@@ -163,6 +163,7 @@
         name="Credit Control Lines"
         parent="base_credit_control_menu"
         action="credit_control_line_action"
+        sequence="20"
         id="credit_control_line_action_menu"/>
 
 

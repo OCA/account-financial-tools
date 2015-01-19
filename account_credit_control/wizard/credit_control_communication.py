@@ -40,6 +40,8 @@ class CreditCommunication(models.TransientModel):
                                            'Level',
                                            required=True)
 
+    currency_id = fields.Many2one('res.currency', 'Currency', required=True)
+
     credit_control_line_ids = fields.Many2many('credit.control.line',
                                                rel='comm_credit_rel',
                                                string='Credit Lines')
@@ -47,6 +49,8 @@ class CreditCommunication(models.TransientModel):
     contact_address = fields.Many2one('res.partner',
                                       string='Contact Address',
                                       readonly=True)
+    report_date = fields.Date(string='Report Date',
+                              default=fields.Date.context_today)
 
     @api.model
     def _get_company(self):
@@ -60,6 +64,21 @@ class CreditCommunication(models.TransientModel):
     user_id = fields.Many2one('res.users',
                               default=lambda self: self.env.user,
                               string='User')
+
+    total_invoiced = fields.Float(string='Total Invoiced',
+                                  compute='_compute_total')
+
+    total_due = fields.Float(string='Total Invoiced',
+                             compute='_compute_total')
+
+    @api.depends('credit_control_line_ids',
+                 'credit_control_line_ids.amount_due',
+                 'credit_control_line_ids.balance_due')
+    def _compute_total(self):
+        amount_field = 'credit_control_line_ids.amount_due'
+        balance_field = 'credit_control_line_ids.balance_due'
+        self.total_invoiced = sum(self.mapped(amount_field))
+        self.total_due = sum(self.mapped(balance_field))
 
     @api.model
     @api.returns('self', lambda value: value.id)
@@ -96,12 +115,13 @@ class CreditCommunication(models.TransientModel):
 
     @api.model
     @api.returns('credit.control.line')
-    def _get_credit_lines(self, line_ids, partner_id, level_id):
+    def _get_credit_lines(self, line_ids, partner_id, level_id, currency_id):
         """ Return credit lines related to a partner and a policy level """
         cr_line_obj = self.env['credit.control.line']
         cr_lines = cr_line_obj.search([('id', 'in', line_ids),
                                        ('partner_id', '=', partner_id),
-                                       ('policy_level_id', '=', level_id)])
+                                       ('policy_level_id', '=', level_id),
+                                       ('currency_id', '=', currency_id)])
         return cr_lines
 
     @api.model
@@ -126,16 +146,19 @@ class CreditCommunication(models.TransientModel):
         cr = self.env.cr
         cr.execute(sql, (tuple(lines.ids), ))
         res = cr.dictfetchall()
-        for level_assoc in res:
+        company_currency = self.env.user.company_id.currency_id
+        for group in res:
             data = {}
             level_lines = self._get_credit_lines(lines.ids,
-                                                 level_assoc['partner_id'],
-                                                 level_assoc['policy_level_id']
+                                                 group['partner_id'],
+                                                 group['policy_level_id'],
+                                                 group['currency_id']
                                                  )
 
             data['credit_control_line_ids'] = [(6, 0, level_lines.ids)]
-            data['partner_id'] = level_assoc['partner_id']
-            data['current_policy_level'] = level_assoc['policy_level_id']
+            data['partner_id'] = group['partner_id']
+            data['current_policy_level'] = group['policy_level_id']
+            data['currency_id'] = group['currency_id'] or company_currency.id
             comm = self.create(data)
             comms += comm
         return comms
