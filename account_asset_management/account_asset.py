@@ -1557,7 +1557,7 @@ class account_asset_depreciation_line(orm.Model):
                     "FROM account_asset_depreciation_line "
                     "WHERE asset_id = %s "
                     "AND (init_entry=TRUE OR move_check=TRUE)"
-                    "AND line_date >= %s LIMIT 1",
+                    "AND line_date > %s LIMIT 1",
                     (dl.asset_id.id, vals['line_date']))
                 res = cr.fetchone()
                 if res:

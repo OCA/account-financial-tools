@@ -657,10 +657,29 @@ class asset_report_xls(report_xls):
                     error_name = asset.name
                     if asset.code:
                         error_name += ' (' + asset.code + ')' or ''
-                    raise orm.except_orm(
-                        _('Data Error'),
-                        _("Depreciation Table error for asset %s !")
-                        % error_name)
+                    if asset.state in ['open']:
+                        cr.execute(
+                            "SELECT line_date "
+                            "FROM account_asset_depreciation_line "
+                            "WHERE asset_id = %s AND type = 'depreciate' "
+                            "AND init_entry=FALSE AND move_check=FALSe "
+                            "AND line_date < %s"
+                            "ORDER BY line_date ASC LIMIT 1",
+                            (data[0], fy.date_start))
+                        res = cr.fetchone()
+                        if res:
+                            raise orm.except_orm(
+                                _('Data Error'),
+                                _("You can not report on a Fiscal Year "
+                                  "with unposted entries in prior years. "
+                                  "Please post depreciation table entry "
+                                  "dd. '%s'  of asset '%s' !")
+                                % (res[0], error_name))
+                    else:
+                        raise orm.except_orm(
+                            _('Data Error'),
+                            _("Depreciation Table error for asset %s !")
+                            % error_name)
                 asset.fy_start_value = asset.asset_value - value_depreciated
 
                 # fy_end_value
