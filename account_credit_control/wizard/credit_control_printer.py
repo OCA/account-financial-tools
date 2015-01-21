@@ -56,7 +56,7 @@ class CreditControlPrinter(models.TransientModel):
     def print_lines(self):
         self.ensure_one()
         comm_obj = self.env['credit.control.communication']
-        if not self.line_ids and not self.print_all:
+        if not self.line_ids:
             raise api.Warning(_('No credit control lines selected.'))
 
         lines = self._get_lines(self.line_ids, self._credit_line_predicate)
