@@ -675,6 +675,11 @@ class asset_report_xls(report_xls):
                                   "Please post depreciation table entry "
                                   "dd. '%s'  of asset '%s' !")
                                 % (res[0], error_name))
+                        else:
+                            raise orm.except_orm(
+                                _('Data Error'),
+                                _("Depreciation Table error for asset %s !")
+                                % error_name)
                     else:
                         raise orm.except_orm(
                             _('Data Error'),
