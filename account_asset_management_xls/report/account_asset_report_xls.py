@@ -662,7 +662,7 @@ class asset_report_xls(report_xls):
                             "SELECT line_date "
                             "FROM account_asset_depreciation_line "
                             "WHERE asset_id = %s AND type = 'depreciate' "
-                            "AND init_entry=FALSE AND move_check=FALSe "
+                            "AND init_entry=FALSE AND move_check=FALSE "
                             "AND line_date < %s"
                             "ORDER BY line_date ASC LIMIT 1",
                             (data[0], fy.date_start))
