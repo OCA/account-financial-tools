@@ -142,11 +142,17 @@ tr.line {
              add = comm.get_contact_address()
           %>
             %if comm.partner_id.id == add.id:
-              <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
+              <tr>
+                <td style="width: 50%" class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td>
+                <td style="width: 50%; text-align: right">${formatLang(str(date.today()), date=True)}</td>
+              </tr>
               <% address_lines = comm.partner_id.contact_address.split("\n") %>
 
             %else:
-              <tr><td class="name">${comm.partner_id.name or ''}</td></tr>
+              <tr>
+                <td style="width: 50%" class="name">${comm.partner_id.name or ''}</td>
+                <td style="width: 50%; text-align: right">${formatLang(str(date.today()), date=True)}</td>
+              </tr>
               <tr><td>${add.title and add.title.name or ''} ${add.name}</td></tr>
               <% address_lines = add.contact_address.split("\n")[1:] %>
             %endif
@@ -177,6 +183,9 @@ tr.line {
       <br/>
       <br/>
       <p><b>${_('Summary')}<br/></b></p>
+      <%
+        balance_due_per_currency = {}
+      %>
       <table class="basic_table" style="width: 100%;">
       <tr>
         <th width="200">${_('Invoice number')}</th>
@@ -204,6 +213,23 @@ tr.line {
         <td class="amount">${line.amount_due}</td>
         <td class="amount">${line.balance_due}</td>
         <td class="amount">${line.currency_id.name or comm.company_id.currency_id.name}</td>
+      </tr>
+      <%
+        currency = line.currency_id.name or comm.company_id.currency_id.name
+        if currency in balance_due_per_currency:
+            balance_due_per_currency[currency] += line.balance_due
+        else:
+            balance_due_per_currency[currency] = line.balance_due
+      %>
+%endfor
+      </table>
+      <br/>
+      <table class="list_table" style="width: 100%;">
+%for currency in balance_due_per_currency.keys():
+      <tr>
+      <td style="width: 78%; text-align: right"><b>${_('Sub-total')}</b></td>
+      <td style="width: 13%; text-align: right"><b>${balance_due_per_currency[currency]}</b></td>
+      <td style="width: 9%; text-align: right"><b>${currency}</b></td>
       </tr>
 %endfor
       </table>
