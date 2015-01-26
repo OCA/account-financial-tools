@@ -77,5 +77,6 @@ msgstr "credit.control.dunning.fees.computer"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_fees_type:0
-msgid "unknown"
-msgstr "unbekannt"
+msgid "Type"
+msgstr ""
+
