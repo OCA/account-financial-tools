@@ -225,10 +225,10 @@ tr.line {
       </table>
       <br/>
       <table class="list_table" style="width: 100%;">
-%for currency in balance_due_per_currency.keys():
+%for currency, balance_due in balance_due_per_currency.iteritems():
       <tr>
       <td style="width: 78%; text-align: right"><b>${_('Sub-total')}</b></td>
-      <td style="width: 13%; text-align: right"><b>${balance_due_per_currency[currency]}</b></td>
+      <td style="width: 13%; text-align: right"><b>${balance_due}</b></td>
       <td style="width: 9%; text-align: right"><b>${currency}</b></td>
       </tr>
 %endfor
