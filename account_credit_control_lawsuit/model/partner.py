@@ -42,6 +42,6 @@ class ResPartner(models.Model):
             domain = [('name', '=', partner.zip),
                       ('city', '=', partner.city),
                       ('lawsuit_office_id', '!=', False)]
-            location = location_model.search(domain, order='priority', limit=1)
+            location = location_model.search(domain, limit=1)
             if location:
                 partner.lawsuit_office_id = location.lawsuit_office_id
