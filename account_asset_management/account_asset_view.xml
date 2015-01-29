@@ -31,7 +31,7 @@
             </group>
             <group string="Depreciation Method">
               <field name="method"/>
-              <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
+              <field name="method_progress_factor" digits="(14, 4)" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
               <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
               <field name="open_asset"/>
             </group>
@@ -144,7 +144,7 @@
                   <group>
                     <separator string="Depreciation Method" colspan="2"/>
                     <field name="method"/>
-                    <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
+                    <field name="method_progress_factor" digits="(14, 4)" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
                     <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
                   </group>
                 </group>

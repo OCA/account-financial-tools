@@ -22,7 +22,7 @@
 ##############################################################################
 {
     'name': 'Assets Management',
-    'version': '2.3',
+    'version': '2.4',
     'depends': ['account'],
     'conflicts': ['account_asset'],
     'author': 'OpenERP & Noviat',
