@@ -20,12 +20,12 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 {
     'name': 'Assets Management',
-    'version': '2.1',
+    'version': '2.4',
     'depends': ['account'],
-    'author': 'Odoo & Noviat',
+    'conflicts': ['account_asset'],
+    'author': 'OpenERP & Noviat',
     'description': """
 Financial asset management.
 ===========================
@@ -46,6 +46,14 @@ The module contains a large number of functional enhancements compared to
 the standard account_asset module from OpenERP/Odoo.
 
 The module in NOT compatible with the standard account_asset module.
+
+Contributors
+------------
+- OpenERP SA
+- Luc De Meyer (Noviat)
+- Frédéric Clementi (camptocamp)
+- Florian Dacosta (Akretion)
+- Stéphane Bidoul (Acsone)
     """,
     'website': 'http://www.noviat.com',
     'category': 'Accounting & Finance',
@@ -65,9 +73,10 @@ The module in NOT compatible with the standard account_asset module.
         'account_view.xml',
         'account_asset_invoice_view.xml',
         'report/account_asset_report_view.xml',
+        'res_config_view.xml',
     ],
     'auto_install': False,
     'installable': True,
-    'application': False,
+    'application': True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

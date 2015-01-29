@@ -1,22 +1,22 @@
 # German translation for openobject-addons
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the openobject-addons package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-12-21 17:04+0000\n"
-"PO-Revision-Date: 2012-12-17 22:26+0000\n"
+"POT-Creation-Date: 2013-06-07 19:36+0000\n"
+"PO-Revision-Date: 2013-03-20 23:21+0000\n"
 "Last-Translator: Thorsten Vocks (OpenBig.org) <thorsten.vocks@big-"
 "consulting.net>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-28 06:38+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2013-07-11 05:47+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -28,12 +28,12 @@ msgstr "Anlagengüter - Entwurf und Offen"
 #: field:account.asset.history,method_end:0
 #: field:asset.modify,method_end:0
 msgid "Ending date"
-msgstr "Enddatum"
+msgstr "Ende Datum"
 
 #. module: account_asset
 #: field:account.asset.asset,value_residual:0
 msgid "Residual Value"
-msgstr "Restbuchwert"
+msgstr "Rest Buchwert"
 
 #. module: account_asset
 #: field:account.asset.category,account_expense_depreciation_id:0
@@ -48,7 +48,7 @@ msgstr "Gruppierung..."
 #. module: account_asset
 #: field:asset.asset.report,gross_value:0
 msgid "Gross Amount"
-msgstr "Bruttobetrag"
+msgstr "Brutto Betrag"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -100,7 +100,7 @@ msgstr "In Betrieb"
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Set to Draft"
-msgstr "Auf 'Entwurf' setzen"
+msgstr "Setze auf Entwurf"
 
 #. module: account_asset
 #: view:asset.asset.report:0
@@ -108,7 +108,7 @@ msgstr "Auf 'Entwurf' setzen"
 #: model:ir.model,name:account_asset.model_asset_asset_report
 #: model:ir.ui.menu,name:account_asset.menu_action_asset_asset_report
 msgid "Assets Analysis"
-msgstr "Anlagenanalyse"
+msgstr "Anlagen Analyse"
 
 #. module: account_asset
 #: field:asset.modify,name:0
@@ -125,7 +125,7 @@ msgstr "Degressiver Faktor"
 #: model:ir.actions.act_window,name:account_asset.action_account_asset_asset_list_normal
 #: model:ir.ui.menu,name:account_asset.menu_action_account_asset_asset_list_normal
 msgid "Asset Categories"
-msgstr "Anlagenkategorien"
+msgstr "Anlagen Kategorien"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -139,7 +139,7 @@ msgstr "Buchungen"
 #: view:account.asset.asset:0
 #: field:account.asset.asset,depreciation_line_ids:0
 msgid "Depreciation Lines"
-msgstr "Abschreibungsbuchungen"
+msgstr "Abschreibungs Buchungen"
 
 #. module: account_asset
 #: help:account.asset.asset,salvage_value:0
@@ -158,7 +158,7 @@ msgstr ""
 #: view:asset.asset.report:0
 #: field:asset.asset.report,depreciation_date:0
 msgid "Depreciation Date"
-msgstr "Abschreibungsdatum"
+msgstr "Abschreibungs Datum"
 
 #. module: account_asset
 #: constraint:account.asset.asset:0
@@ -183,7 +183,7 @@ msgstr "Anlagegüter"
 #. module: account_asset
 #: field:account.asset.category,account_depreciation_id:0
 msgid "Depreciation Account"
-msgstr "Kum. Wertberichtigungskonto"
+msgstr "kum. Wertberichtigungskonto"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -198,6 +198,12 @@ msgstr "Bemerkungen"
 #: field:account.asset.depreciation.line,move_id:0
 msgid "Depreciation Entry"
 msgstr "Abschreibungsbuchung"
+
+#. module: account_asset
+#: code:addons/account_asset/account_asset.py:82
+#, python-format
+msgid "Error!"
+msgstr "Fehler!"
 
 #. module: account_asset
 #: view:asset.asset.report:0
@@ -231,20 +237,20 @@ msgstr "Referenz"
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Account Asset"
-msgstr "Anlagekonto"
+msgstr "Anlage Konto"
 
 #. module: account_asset
 #: model:ir.actions.act_window,name:account_asset.action_asset_depreciation_confirmation_wizard
 #: model:ir.ui.menu,name:account_asset.menu_asset_depreciation_confirmation_wizard
 msgid "Compute Assets"
-msgstr "Anlagen berechnen"
+msgstr "Berechne Anlagen"
 
 #. module: account_asset
 #: field:account.asset.category,method_period:0
 #: field:account.asset.history,method_period:0
 #: field:asset.modify,method_period:0
 msgid "Period Length"
-msgstr "Periodenlänge"
+msgstr "Perioden Länge"
 
 #. module: account_asset
 #: selection:account.asset.asset,state:0
@@ -261,7 +267,7 @@ msgstr "Kaufdatum der Anlage"
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Change Duration"
-msgstr "Lebensdauer verändern"
+msgstr "Verändere Lebensdauer"
 
 #. module: account_asset
 #: help:account.asset.asset,method_number:0
@@ -294,7 +300,7 @@ msgid ""
 "Prorata temporis can be applied only for time method \"number of "
 "depreciations\"."
 msgstr ""
-"'Pro rata temporis'-Abschreibung kann nur für die Methode \"Anzahl der "
+"Pro Rata Temporis Abschreibung kann nur für die Methode \"Anzahl der "
 "Abschreibung\" verwendet werden"
 
 #. module: account_asset
@@ -312,7 +318,7 @@ msgstr "Zeit in Monaten zwischen 2 Abschreibungen"
 #: model:ir.actions.act_window,name:account_asset.action_asset_modify
 #: model:ir.model,name:account_asset.model_asset_modify
 msgid "Modify Asset"
-msgstr "Anlage ändern"
+msgstr "Anlage Ändern"
 
 #. module: account_asset
 #: field:account.asset.asset,salvage_value:0
@@ -330,7 +336,7 @@ msgstr "Anlagenkategorie"
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Assets in closed state"
-msgstr "Abgeschlossene Anlagen"
+msgstr "abgeschlossene Anlagen"
 
 #. module: account_asset
 #: field:account.asset.asset,parent_id:0
@@ -346,7 +352,7 @@ msgstr "Anlagenhistorie"
 #. module: account_asset
 #: view:account.asset.category:0
 msgid "Search Asset Category"
-msgstr "Anlagenkategorie suchen"
+msgstr "Suche Anlagen Kategorie"
 
 #. module: account_asset
 #: view:asset.modify:0
@@ -373,7 +379,7 @@ msgstr "Nicht verbuchter Betrag"
 #: field:account.asset.category,method_time:0
 #: field:account.asset.history,method_time:0
 msgid "Time Method"
-msgstr "Zeitmethode"
+msgstr "Zeit Methode"
 
 #. module: account_asset
 #: view:asset.depreciation.confirmation.wizard:0
@@ -397,12 +403,12 @@ msgid ""
 "Ending Date: Choose the time between 2 depreciations and the date the "
 "depreciations won't go beyond."
 msgstr ""
-"Die Methode, die verwendet wird, um das Datum und die Anzahl der "
-"Abschreibungsbuchungen zu berechnen.\n"
+"Die Methode, die verwendet wird, um das Datum und Anzahl der "
+"Abschreibungesbuchungen zu berechnen.\n"
 "Anzahl der Abschreibungen: Anzahl der Abschreibungsbuchungen und Zeit "
-"zwischen zwei Abschreibungen.\n"
-"Enddatum: Wählen Sie die Zeit zwischen zwei Abschreibungen und das Datum "
-"nach dem keine Abschreibungen mehr berechnet werden."
+"zwischen 2 Abschreibungen.\n"
+"Ende Datum: Wählen Sie die Zeit zwischen 2 Abschreibungen und das Datum nach "
+"dem keine Abschreibungen mehr berechnet werden."
 
 #. module: account_asset
 #: help:account.asset.asset,method_time:0
@@ -417,14 +423,14 @@ msgid ""
 msgstr ""
 "Wählen Sie die Methode für Datum und Anzahl der Abschreibungen.\n"
 "  * Anzahl der Abschreibungen: Definieren Sie die Anzahl der Abschreibungen "
-"und die Perioden zwischen zwei Abschreibungen.\n"
-"  * Enddatum: Wählen Sie die Zeit zwischen zwei Abschreibungen und das "
-"Enddatum."
+"und die Perioden zwischen 2 Abschreibungen.\n"
+"  * End Datum: Wählen Sie die Zeit zwischen 2 Abschreibungen und das End "
+"Datum."
 
 #. module: account_asset
 #: view:asset.asset.report:0
 msgid "Assets in running state"
-msgstr "Anlage 'aktiv'"
+msgstr "Anlage Aktiv"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -441,7 +447,7 @@ msgid ""
 "line of depreciation is posted, the asset automatically goes in that status."
 msgstr ""
 "Wenn eine Anlage angelegt wird, ist der Status \"Entwurf\". Nach Bestätigung "
-"der Anlage wird diese 'aktiv' und Abschreibungen können verbucht werden. Sie "
+"der Anlage wird diese aktiv und Abschreibungen können verbucht werden. Sie "
 "können die Anlage automatisch schließen, wenn die Abschreibungen vorbei "
 "sind. Nach Verbuchung der letzen Abschreibung wird die Anlage automatisch "
 "geschlossen."
@@ -466,7 +472,7 @@ msgstr "Verbuchte Abschreibungen"
 #. module: account_asset
 #: field:account.asset.asset,child_ids:0
 msgid "Children Assets"
-msgstr "Untergeordnete Anlagen"
+msgstr "untergeordnete Anlagen"
 
 #. module: account_asset
 #: view:asset.asset.report:0
@@ -481,7 +487,7 @@ msgstr "Benutzer"
 #. module: account_asset
 #: field:account.asset.category,account_asset_id:0
 msgid "Asset Account"
-msgstr "Anlagenkonto"
+msgstr "Anlagen Konto"
 
 #. module: account_asset
 #: view:asset.asset.report:0
@@ -517,7 +523,7 @@ msgstr "Status der Anlage"
 #. module: account_asset
 #: field:account.asset.depreciation.line,name:0
 msgid "Depreciation Name"
-msgstr "Abschreibungsbezeichnung"
+msgstr "Abschreibung Bezeichnung"
 
 #. module: account_asset
 #: view:account.asset.asset:0
@@ -528,7 +534,7 @@ msgstr "Verlauf"
 #. module: account_asset
 #: view:asset.depreciation.confirmation.wizard:0
 msgid "Compute Asset"
-msgstr "Anlagen berechnen"
+msgstr "Berechne Anlagen"
 
 #. module: account_asset
 #: field:asset.depreciation.confirmation.wizard,period_id:0
@@ -544,7 +550,7 @@ msgstr "Allgemein"
 #: field:account.asset.asset,prorata:0
 #: field:account.asset.category,prorata:0
 msgid "Prorata Temporis"
-msgstr "Pro rata temporis"
+msgstr "Prorata Temporis"
 
 #. module: account_asset
 #: model:ir.model,name:account_asset.model_account_invoice
@@ -576,7 +582,7 @@ msgstr "Journaleinträge"
 #. module: account_asset
 #: view:asset.modify:0
 msgid "Asset Durations to Modify"
-msgstr "Lebensdauer der Anlage verändern"
+msgstr "Anlage Lebensdauer verändern"
 
 #. module: account_asset
 #: field:account.asset.asset,purchase_date:0
@@ -606,6 +612,14 @@ msgid "Current"
 msgstr "Aktuell"
 
 #. module: account_asset
+#: code:addons/account_asset/account_asset.py:82
+#, python-format
+msgid "You cannot delete an asset that contains posted depreciation lines."
+msgstr ""
+"Sie können kein Anlagegut löschen, welches über Abschreibungspositionen "
+"verfügt"
+
+#. module: account_asset
 #: view:account.asset.category:0
 msgid "Depreciation Method"
 msgstr "Abschreibungsmethode"
@@ -623,12 +637,12 @@ msgstr "Anlagegut Bezeichnung"
 #. module: account_asset
 #: field:account.asset.category,open_asset:0
 msgid "Skip Draft State"
-msgstr "Überspringe Entwurfsstatus"
+msgstr "Überspringe Entwurf Status"
 
 #. module: account_asset
 #: view:account.asset.category:0
 msgid "Depreciation Dates"
-msgstr "Abschreibungsdatum"
+msgstr "Abschreibung Datum"
 
 #. module: account_asset
 #: field:account.asset.asset,currency_id:0
@@ -643,7 +657,7 @@ msgstr "Journal"
 #. module: account_asset
 #: field:account.asset.history,name:0
 msgid "History name"
-msgstr "Verlauf-Bezeichnung"
+msgstr "Verlauf Bezeichnung"
 
 #. module: account_asset
 #: field:account.asset.depreciation.line,depreciated_value:0
@@ -683,8 +697,8 @@ msgid ""
 "          </p>\n"
 "        "
 msgstr ""
-"In diesem Report erhalten Sie einen Überblick über alle Abschreibungen. Die "
-"Suche kann auch zur \n"
+"Über diesen Report erhalten Sie einen Überblick über alle Abschreibungen. "
+"Die Suche kann auch zur \n"
 "individuellen und persönlichen Auswertung über das Anlagevermögen benutzt "
 "werden.\n"
 "        "
@@ -692,7 +706,7 @@ msgstr ""
 #. module: account_asset
 #: field:account.asset.asset,purchase_value:0
 msgid "Gross Value"
-msgstr "Bruttoerlös"
+msgstr "Brutto Erlös"
 
 #. module: account_asset
 #: field:account.asset.category,name:0
@@ -716,14 +730,14 @@ msgstr "Jahr"
 #. module: account_asset
 #: model:ir.model,name:account_asset.model_account_asset_depreciation_line
 msgid "Asset depreciation line"
-msgstr "Anlage Abschreibungszeile"
+msgstr "Anlage Abschreibungeszeile"
 
 #. module: account_asset
 #: view:account.asset.category:0
 #: field:asset.asset.report,asset_category_id:0
 #: model:ir.model,name:account_asset.model_account_asset_category
 msgid "Asset category"
-msgstr "Anlagenkategorie"
+msgstr "Analgenkategorie"
 
 #. module: account_asset
 #: view:asset.asset.report:0
@@ -738,6 +752,11 @@ msgid "Created Asset Moves"
 msgstr "Erzeugte Anlagenbuchungen"
 
 #. module: account_asset
+#: view:account.asset.asset:0
+msgid "Add an internal note here..."
+msgstr "Schreiben Sie hier Ihre Mitteilung"
+
+#. module: account_asset
 #: field:account.asset.depreciation.line,sequence:0
 msgid "Sequence"
 msgstr "Sequenz"
@@ -745,7 +764,7 @@ msgstr "Sequenz"
 #. module: account_asset
 #: help:account.asset.category,method_period:0
 msgid "State here the time between 2 depreciations, in months"
-msgstr "Definieren Sie hier die Monate zwischen zwei Abschreibungen"
+msgstr "Definieren Sie hier die Monate zwischen 2 Abschreibungen"
 
 #. module: account_asset
 #: field:account.asset.history,date:0
@@ -766,340 +785,15 @@ msgstr "Anzahl der Abschreibungen"
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Create Move"
-msgstr "Buchung erzeugen"
+msgstr "Erzeuge Buchung"
 
 #. module: account_asset
 #: view:account.asset.asset:0
 msgid "Confirm Asset"
-msgstr "Anlage bestätigen"
+msgstr "Bestätige Anlage"
 
 #. module: account_asset
 #: model:ir.actions.act_window,name:account_asset.action_account_asset_asset_tree
 #: model:ir.ui.menu,name:account_asset.menu_action_account_asset_asset_tree
 msgid "Asset Hierarchy"
-msgstr "Anlagenhierarchie"
-
-#~ msgid "Child assets"
-#~ msgstr "untergeordnete Anlagengüter"
-
-#~ msgid "Change duration"
-#~ msgstr "Verändere Lebensdauer"
-
-#~ msgid "Asset Value"
-#~ msgstr "Anlagenwert"
-
-#~ msgid "Depreciation board"
-#~ msgstr "Abschreibungs-Tableau"
-
-#~ msgid "Open Assets"
-#~ msgstr "Anlage (Entwurf)"
-
-#~ msgid "Invalid model name in the action definition."
-#~ msgstr "Ungültiger Modellname in der Aktionsdefinition."
-
-#~ msgid "Change history"
-#~ msgstr "Bearbeitungshistorie"
-
-#~ msgid "Progressive"
-#~ msgstr "Progressiv"
-
-#~ msgid "Draft Assets"
-#~ msgstr "Anlagegüter (Entwurf)"
-
-#~ msgid "Generated entries"
-#~ msgstr "erzeugte Buchungen"
-
-#~ msgid "Number of interval"
-#~ msgstr "Anzahl der Intervalle"
-
-#~ msgid "Open entries"
-#~ msgstr "offene Buchungen"
-
-#~ msgid "Depreciation entries"
-#~ msgstr "Abschreibungsbuchungen"
-
-#~ msgid "Asset properties to modify"
-#~ msgstr "zu verändernde Anlagenmerkmale"
-
-#~ msgid "Methods"
-#~ msgstr "Methoden"
-
-#~ msgid "Period per interval"
-#~ msgstr "Perioden pro Intervall"
-
-#~ msgid "Depreciation duration"
-#~ msgstr "Abschreibungsdauer"
-
-#~ msgid "State"
-#~ msgstr "Status"
-
-#~ msgid "Other information"
-#~ msgstr "Andere Informationen"
-
-#~ msgid "Depreciation methods"
-#~ msgstr "Abschreibungsmethode"
-
-#~ msgid "Cumul. value"
-#~ msgstr "kummulierter Betrag"
-
-#~ msgid "Asset property"
-#~ msgstr "Anlagenmerkmale"
-
-#~ msgid "Gross value"
-#~ msgstr "Anschaffungswert"
-
-#~ msgid "Confirm asset"
-#~ msgstr "Anlagegut bestätigen"
-
-#~ msgid "Assets methods"
-#~ msgstr "Anlagen Methoden"
-
-#~ msgid "Date created"
-#~ msgstr "Erstellungsdatum"
-
-#~ msgid "Invalid XML for View Architecture!"
-#~ msgstr "Fehlerhafter XML-Code für diese Ansicht!"
-
-#~ msgid "Modify asset"
-#~ msgstr "Verändere Anlagegut"
-
-#~ msgid "Compute assets"
-#~ msgstr "Berechne Anlagen"
-
-#~ msgid "Ending period"
-#~ msgstr "Periodenende"
-
-#~ msgid "Asset name"
-#~ msgstr "Anlagenname"
-
-#~ msgid "Accounts information"
-#~ msgstr "Konto Information"
-
-#~ msgid "Method"
-#~ msgstr "Methode"
-
-#~ msgid "Asset account"
-#~ msgstr "Anlagenkonto"
-
-#~ msgid "Depr. method type"
-#~ msgstr "Abschreibungsmethode"
-
-#~ msgid "Progressif factor"
-#~ msgstr "Progressionsfaktor"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Net value"
-#~ msgstr "Netto Wert"
-
-#~ msgid "Asset method name"
-#~ msgstr "Anlagenmethoden Bezeichnung"
-
-#~ msgid "Close asset"
-#~ msgstr "Anlagegut schliessen"
-
-#~ msgid "Time method"
-#~ msgstr "Zeitmethode"
-
-#~ msgid "Computation method"
-#~ msgstr "Berechnungsmethode"
-
-#~ msgid "Localisation"
-#~ msgstr "Lokalisation"
-
-#~ msgid "Depreciation account"
-#~ msgstr "AfA-Konto"
-
-#~ msgid "Global state"
-#~ msgstr "Globaler Status"
-
-#~ msgid ""
-#~ "The Object name must start with x_ and not contain any special character !"
-#~ msgstr ""
-#~ "Der Objektname muss mit \"x_\" beginnen und darf keine Sonderzeichen "
-#~ "beinhalten!"
-
-#~ msgid "Open"
-#~ msgstr "Öffnen"
-
-#~ msgid "Asset board"
-#~ msgstr "Anlagenspiegel"
-
-#~ msgid "Asset management"
-#~ msgstr "Anlagenbuchhaltung"
-
-#~ msgid "Delay"
-#~ msgstr "Verzögerung"
-
-#~ msgid "Close method"
-#~ msgstr "Abschlussmethode"
-
-#~ msgid "Depreciation"
-#~ msgstr "Abschreibung"
-
-#~ msgid "Analytic journal"
-#~ msgstr "analytisches Journal"
-
-#~ msgid "Asset Entries"
-#~ msgstr "Anlagen"
-
-#~ msgid "Method name"
-#~ msgstr "Methodenname"
-
-#~ msgid "General information"
-#~ msgstr "Allgemeine Informationen"
-
-#~ msgid "End of asset"
-#~ msgstr "Ende des Anlagegutes"
-
-#~ msgid "General info"
-#~ msgstr "Allgemeine Informationen"
-
-#~ msgid "Asset code"
-#~ msgstr "Kurzbezeichnung"
-
-#~ msgid "Total value"
-#~ msgstr "Gesamt Wert"
-
-#~ msgid "View"
-#~ msgstr "Ansicht"
-
-#~ msgid "Parent asset"
-#~ msgstr "übergeordnetes Anlagegut"
-
-#~ msgid "Direct"
-#~ msgstr "Direkt"
-
-#~ msgid "Residual value"
-#~ msgstr "Buchwert"
-
-#~ msgid "Indirect"
-#~ msgstr "Indirekt"
-
-#~ msgid "Depreciation Amount"
-#~ msgstr "Abschreibung Betrag"
-
-#~ msgid ""
-#~ "This wizard will post the depreciation lines of running assets that belong "
-#~ "to the selected period."
-#~ msgstr ""
-#~ "Dieser Assistent erzeugt Abschreibungsbuchungen  bestehender Anlagen für die "
-#~ "gewählte Periode"
-
-#~ msgid "Invalid BBA Structured Communication !"
-#~ msgstr "ungültige BBA Kommunikations Stuktur"
-
-#~ msgid "Wrong credit or debit value in accounting entry !"
-#~ msgstr "Falscher Debit oder Kreditwert im Buchungseintrag!"
-
-#~ msgid "Sequence of the depreciation"
-#~ msgstr "Sequenz der Abschreibung"
-
-#~ msgid "Calculates Depreciation within specified interval"
-#~ msgstr "Berechnet die Abschreibungen in einem definierten Intervall"
-
-#~ msgid "State here the time during 2 depreciations, in months"
-#~ msgstr "Definieren Sie die Zeit in Monaten zwischen 2 Abschreibungen"
-
-#~ msgid "Other Information"
-#~ msgstr "Weitere Informationen"
-
-#~ msgid "Gross value "
-#~ msgstr "Brutto Wert "
-
-#~ msgid "Error ! You can not create recursive assets."
-#~ msgstr "Fehler! Sie können keine rekursiven Anlagen erzeugen"
-
-#~ msgid "Month"
-#~ msgstr "Monat"
-
-#~ msgid "Assets purchased in current year"
-#~ msgstr "Anlagen Anschaffungen im laufenden Jahr"
-
-#~ msgid "Analytic information"
-#~ msgstr "Analytische Information"
-
-#~ msgid "Asset durations to modify"
-#~ msgstr "Anlage Lebensdauer verändern"
-
-#~ msgid "Assets purchased in current month"
-#~ msgstr "Anlagenkäufe des aktuellen Monats"
-
-#~ msgid "Invoice Number must be unique per Company!"
-#~ msgstr "Die Rechnungsnummer muss je Firma eindeutig sein"
-
-#~ msgid "Amount to Depreciate"
-#~ msgstr "Abzuschreibender Betrag"
-
-#~ msgid "Accounting information"
-#~ msgstr "Buchhaltung Information"
-
-#~ msgid "Review Asset Categories"
-#~ msgstr "Überarbeite Anlagen Kategorien"
-
-#~ msgid "Month-1"
-#~ msgstr "Monat-1"
-
-#~ msgid ""
-#~ "When an asset is created, the state is 'Draft'.\n"
-#~ "If the asset is confirmed, the state goes in 'Running' and the depreciation "
-#~ "lines can be posted in the accounting.\n"
-#~ "You can manually close an asset when the depreciation is over. If the last "
-#~ "line of depreciation is posted, the asset automatically goes in that state."
-#~ msgstr ""
-#~ "Wenn eine Anlage angelegt wird, ist der Status \"Entwurf\".\n"
-#~ "Nach Bestätigung der Anlage wird dies aktiv und Abschreibungen können "
-#~ "verbucht werden.\n"
-#~ "Sie können die Anlage automatisch schließen, wenn die Abschreibungen vorbei "
-#~ "sind. \n"
-#~ "Nach Verbuchung der letzen Abschreibung wird die Anlage automatisch "
-#~ "geschlossen."
-
-#~ msgid "Post Depreciation Lines"
-#~ msgstr "Verbuche Abschreibungen"
-
-#~ msgid ""
-#~ "From this report, you can have an overview on all depreciation. The tool "
-#~ "search can also be used to personalise your Assets reports and so, match "
-#~ "this analysis to your needs;"
-#~ msgstr ""
-#~ "Dieser Report gibt einen Überblick über alle Abschreibungen. Mit dem "
-#~ "Suchwerkzeug können Sie den Report an Ihre Bedürfnisse anpassen."
-
-#~ msgid "Assets purchased in last month"
-#~ msgstr "Anlagen im letzen Monat gekauft"
-
-#~ msgid ""
-#~ "Choose the method to use to compute the amount of depreciation lines.\n"
-#~ "  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-#~ "  * Degressive: Calculated on basis of: Remaining Value * Degressive Factor"
-#~ msgstr ""
-#~ "Wählen Sie die Methode der Berechnung der Abschreibungsbeträge.\n"
-#~ "  * Linear: Berechnung: Brutto Wert / Anzahl der Abschreibungen\n"
-#~ "  * Degressive: Berechnung : Restbuchwert * Degressiven Faktor"
-
-#~ msgid "You can not create journal items on an account of type view."
-#~ msgstr "You can not create journal items on an account of type view."
-
-#~ msgid "You can not create journal items on closed account."
-#~ msgstr "You can not create journal items on closed account."
-
-#~ msgid ""
-#~ "The date of your Journal Entry is not in the defined period! You should "
-#~ "change the date or remove this constraint from the journal."
-#~ msgstr ""
-#~ "The date of your Journal Entry is not in the defined period! You should "
-#~ "change the date or remove this constraint from the journal."
-
-#~ msgid "Company must be the same for its related account and period."
-#~ msgstr "Company must be the same for its related account and period."
-
-#~ msgid ""
-#~ "The selected account of your Journal Entry forces to provide a secondary "
-#~ "currency. You should remove the secondary currency on the account or select "
-#~ "a multi-currency view on the journal."
-#~ msgstr ""
-#~ "The selected account of your Journal Entry forces to provide a secondary "
-#~ "currency. You should remove the secondary currency on the account or select "
-#~ "a multi-currency view on the journal."
+msgstr "Anlangenhierarchie"

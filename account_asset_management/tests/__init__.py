@@ -2,10 +2,9 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
+#    account_asset_management tests
 #
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,12 +21,8 @@
 #
 ##############################################################################
 
-from . import account_asset
-from . import account_asset_invoice
-from . import account
-from . import account_move
-from . import wizard
-from . import report
-from . import res_config
+from . import test_account_asset_management
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+checks = [
+    test_account_asset_management,
+]

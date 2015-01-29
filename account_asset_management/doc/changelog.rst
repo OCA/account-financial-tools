@@ -101,3 +101,11 @@ Enhancements/changes made by Noviat (www.noviat.com)
 Enhancements/changes made by Noviat (www.noviat.com)
 
 - Support assets without depreciation table (e.g. properties that keep their value). Specify 'method_number' = 0 for such assets.
+
+`V2.2`
+------
+
+Enhancements/changes
+
+- Generation of accounting entries in case of early removal.
+

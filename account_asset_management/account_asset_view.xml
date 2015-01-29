@@ -20,6 +20,9 @@
               <field name="account_asset_id"/>
               <field name="account_depreciation_id"/>
               <field name="account_expense_depreciation_id"/>
+              <field name="account_plus_value_id"/>
+              <field name="account_min_value_id"/>
+              <field name="account_residual_value_id"/>
             </group>
             <group string="Depreciation Dates">
               <field name="method_time" on_change="onchange_method_time(method_time)"/>
@@ -28,7 +31,7 @@
             </group>
             <group string="Depreciation Method">
               <field name="method"/>
-              <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
+              <field name="method_progress_factor" digits="(14, 4)" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
               <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
               <field name="open_asset"/>
             </group>
@@ -76,10 +79,9 @@
           <header>
             <button name="validate" states="draft" string="Confirm Asset" type="object" class="oe_highlight"/>
             <button name="set_to_draft" states="open,close" string="Set to Draft" type="object" groups="account.group_account_manager"/>
-            <!-- <button name="set_to_close" states="open" string="Set to Close" type="object" class="oe_highlight"/> -->
-            <button name="remove" string="Set to Removed" type="object" groups="account.group_account_manager"
-                    attrs="{'invisible':['|',('method_time','!=','year'),('state','!=','close')]}"
-                    help="Generate the removal entries for a fully depreciated asset."/>
+            <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
+                    attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
+                    help="Asset removal."/>
             <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"/>
           </header>
           <sheet>
@@ -142,7 +144,7 @@
                   <group>
                     <separator string="Depreciation Method" colspan="2"/>
                     <field name="method"/>
-                    <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
+                    <field name="method_progress_factor" digits="(14, 4)" attrs="{'invisible':[('method','=','linear')], 'required':[('method','in',['degressive','degr-linear'])]}"/>
                     <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
                   </group>
                 </group>
@@ -178,7 +180,7 @@
                         <field name="name"/>
                         <field name="amount" attrs="{'readonly':[('move_check','=',True)]}"
                                on_change="onchange_amount(type, asset_value, amount, depreciated_value)"/>
-                        <field name="init_entry" attrs="{'readonly':[('move_check','=',True)]}"/>
+                        <field name="init_entry" attrs="{'readonly':['|', ('move_check', '=', True), ('type', '=', 'create')]}"/>
                         <field name="move_id"/>
                         <field name="move_check"/>
                       </group>
@@ -194,6 +196,7 @@
               <page string="History">
                 <field name="account_move_line_ids" readonly="1">
                   <tree colors="red:state == 'draft';black:state == 'valid'" string="Journal Items">
+                    <field name="move_id"/>
                     <field name="journal_id"/>
                     <field name="period_id"/>
                     <field name="date"/>
@@ -209,7 +212,7 @@
                     <field name="move_id" options='{"no_open":True}'/>
                     <newline/>
                     <field name="name"/>
-                    <field name="ref"/>                   
+                    <field name="ref"/>
                     <newline/>
                     <field name="date"/>
                     <field name="period_id" options='{"no_open":True}'/>
