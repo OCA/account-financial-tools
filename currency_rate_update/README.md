@@ -54,11 +54,12 @@ A function field lets you know your currency configuration.
 If in multi-company mode, the base currency will be the first company's
 currency found in database.
 
-## 8. National Bank of Hungary (Magyar Nemzeti Bank - MNB)
+#### 8. National Bank of Hungary (Magyar Nemzeti Bank - MNB)
 
 The data is loaded from the [MNB Webpage](http://www.mnb.hu/arfolyamok), it loads 34 currencies. The currencies are updated once a day on the webpage.
 
-Thanks to main contributors: 
+
+### Thanks to main contributors: 
 *    Joel Grand-Guillaume
 *    JB Aubort
 *    Grzegorz Grzelak - grzegorz.grzelak@birdglobe.com (ECB, NBP)
