@@ -122,6 +122,11 @@ PL_NBP_supported_currency_array = [
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
+HU_MNB_supported_currency_array = ["AUD", "KRW", "BGN", "MXN", "BRL", "MYR", 
+    "CAD", "NOK", "CHF", "NZD", "CNY", "PHP", "CZK", "PLN", "DKK", "RON", 
+    "EUR", "RSD", "GBP", "RUB", "HKD", "SEK", "HRK", "SGD", "IDR", "THB", 
+    "ILS", "TRY", "INR", "UAH", "ISK", "USD", "JPY", "ZAR"]
+
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
     'ECB_getter': ECB_supported_currency_array,
@@ -130,6 +135,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
+    'HU_MNB_getter': HU_MNB_supported_currency_array,
     }
 
 
@@ -194,7 +200,9 @@ class Currency_rate_update_service(models.Model):
          #  (Thailand, Malaysia, Mexico...)
          ('CA_BOC_getter', 'Bank of Canada - noon rates'),
          # Added for romanian rates
-         ('RO_BNR_getter', 'National Bank of Romania')
+         ('RO_BNR_getter', 'National Bank of Romania'),
+         # Added the Hunagrian National Bank
+         ('HU_MNB_getter', 'Magyar Nemzeti Bank')
          ],
         string="Webservice to use",
         required=True)
@@ -211,8 +219,10 @@ class Currency_rate_update_service(models.Model):
                                           'currency_id',
                                           string='Currencies to update with '
                                           'this service')
+
     # Link with company
     company_id = fields.Many2one('res.company', 'Linked Company')
+
     # Note fileds that will be used as a logger
     note = fields.Text('Update logs')
     max_delta_days = fields.Integer(
@@ -237,19 +247,23 @@ class Currency_rate_update_service(models.Model):
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
+        _logger.info("===>CURR: Refreshing currency")
         factory = Currency_getter_factory()
         curr_obj = self.env['res.currency']
         rate_obj = self.env['res.currency.rate']
-        company = self.company_id
+        company = self.company_id #self.env['res.company'].browse([self.company_id]) #self.company_id 
+        _logger.info("Loaded Company:" + str(company))
         # The multi company currency can be set or no so we handle
         # The two case
         if company.auto_currency_up:
+            _logger.info("Autoupdate of currencies is Switched ON")
             main_currency = curr_obj.search(
                 [('base', '=', True), ('company_id', '=', company.id)],
                 limit=1)
             if not main_currency:
                 # If we can not find a base currency for this company
                 # we look for one with no company set
+                _logger.warning("===>There is no main currency set for the Company")
                 main_currency = curr_obj.search(
                     [('base', '=', True), ('company_id', '=', False)],
                     limit=1)
@@ -259,17 +273,21 @@ class Currency_rate_update_service(models.Model):
                 raise exceptions.Warning(_('Base currency rate should '
                                            'be 1.00!'))
             note = self.note or ''
-            try:
+            
+            try:               
                 # We initalize the class that will handle the request
                 # and return a dict of rate
+                _logger.info("Invoking factory for service:" + str(self.service))
                 getter = factory.register(self.service)
                 curr_to_fetch = map(lambda x: x.name,
                                     self.currency_to_update)
+                _logger.info("Invoking get_update_currency on service:" + str(getter))
                 res, log_info = getter.get_updated_currency(
                     curr_to_fetch,
                     main_currency.name,
                     self.max_delta_days
                     )
+                _logger.info("Currencies loaded from service:" + str(res))                
                 rate_name = \
                     fields.Datetime.to_string(datetime.utcnow().replace(
                         hour=0, minute=0, second=0, microsecond=0))
@@ -313,6 +331,9 @@ class Currency_rate_update_service(models.Model):
                             _intervalTypes[str(self.interval_type)]
                             (self.interval_number)).date()
                 self.next_run = next_run
+        else:
+            raise exceptions.Warning(_('If "Auto update" is not set, currency refresh will not work.'))
+        
 
     @api.multi
     def run_currency_update(self):

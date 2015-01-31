@@ -37,6 +37,7 @@ class res_company(models.Model):
     @api.one
     def button_refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
+        print self.services_to_use
         self.services_to_use.refresh_currency()
 
     _inherit = "res.company"
@@ -56,5 +57,5 @@ class res_company(models.Model):
     # List of services to fetch rates
     services_to_use = fields.One2many(
         'currency.rate.update.service',
-        'company_id',
+        'company_id', #company_id
         string='Currency update services')
