@@ -5,6 +5,7 @@
 #  Copyright (C) 2004-2011 Zikzakmedia S.L. (http://zikzakmedia.com)
 #                         Jordi Esteve <jesteve@zikzakmedia.com>
 #  Copyright (c) 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
+#  Copyright (c) 2014-2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published by
@@ -24,23 +25,17 @@
 {
     'name': "Company currency in invoices",
     'version': "1.0",
-    'author': "Zikzakmedia SL",
-    'website': "http://www.zikzakmedia.com",
+    'author': "Zikzakmedia SL, "
+              "Joaquín Gutierrez, "
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+    'website': "http://www.zikzakmedia.com, "
+               "http://www.gutierrezweb.es, "
+               "http://www.serviciosbaeza.com",
     'category': "Localisation / Accounting",
-    'contributors': ['Joaquín Gutierrez'],
-    "description": """
-This Module adds functional fields to show invoice in the company currency
-==========================================================================
-
-Amount Untaxed, Amount Tax and Amount Total invoice
-fields in the company currency.
-These fields are shown in "Other information" tab in invoice form.
-    """,
     'license': "AGPL-3",
     'depends': ["account"],
     'data': [
-        "account_invoice_view.xml"
+        "views/account_invoice_view.xml"
     ],
-    'installable': False,
-    'active': False,
+    'installable': True,
 }
