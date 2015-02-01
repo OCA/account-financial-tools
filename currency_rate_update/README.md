@@ -1,6 +1,6 @@
 Import exchange rates from the Internet.
 
-The module is able to use 4 different sources:
+The module is able to use 8 different sources:
 
 1. Admin.ch
    Updated daily, source in CHF.
@@ -28,6 +28,8 @@ The module is able to use 4 different sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. National Bank of Hungary (Magyar Nemzeti Bank - MNB)
+
 In the roadmap : 
    Google Finance.
    Updated daily from Citibank N.A., source in EUR. Information may be delayed.
@@ -52,7 +54,12 @@ A function field lets you know your currency configuration.
 If in multi-company mode, the base currency will be the first company's
 currency found in database.
 
-Thanks to main contributors: 
+#### 8. National Bank of Hungary (Magyar Nemzeti Bank - MNB)
+
+The data is loaded from the [MNB Webpage](http://www.mnb.hu/arfolyamok), it loads 34 currencies. The currencies are updated once a day on the webpage.
+
+
+### Thanks to main contributors: 
 *    Joel Grand-Guillaume
 *    JB Aubort
 *    Grzegorz Grzelak - grzegorz.grzelak@birdglobe.com (ECB, NBP)
@@ -61,3 +68,4 @@ Thanks to main contributors:
 *    Agustin Cruz - openpyme.mx (BdM)
 *    Dorin Hongu - dhongu@gmail.com (BNR)
 *    Fekete Mihai - feketemihai@gmail.com (Port to V8)
+*    Gergo Bogdan - greg@grelution.com (MNB)
