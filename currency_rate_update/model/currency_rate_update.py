@@ -247,11 +247,10 @@ class Currency_rate_update_service(models.Model):
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        _logger.info("===>CURR: Refreshing currency")
         factory = Currency_getter_factory()
         curr_obj = self.env['res.currency']
         rate_obj = self.env['res.currency.rate']
-        company = self.company_id #self.env['res.company'].browse([self.company_id]) #self.company_id 
+        company = self.company_id
         _logger.info("Loaded Company:" + str(company))
         # The multi company currency can be set or no so we handle
         # The two case
