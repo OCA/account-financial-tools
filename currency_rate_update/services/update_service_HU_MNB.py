@@ -23,6 +23,7 @@
 
 from .currency_getter_interface import Currency_getter_interface
 from lxml import html
+from datetime import datetime
 import requests
 
 import logging
@@ -33,6 +34,46 @@ class HU_MNB_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for the Hungarian National Bank (http://www.mnb.hu)
     """
+
+    months_to_numbers_mapping = {
+        u'január' : 1,
+        u'február' : 2,
+        u'március' : 3,
+        u'április' : 4,
+        u'május' : 5,
+        u'június' : 6,
+        u'július' : 7,
+        u'augusztus' : 8,
+        u'szeptember' : 9,
+        u'október' : 10,
+        u'november' : 11,
+        u'december' : 12
+    }
+
+    def get_date_for_currency(self, site_tree):
+        #define a date which surely will throw an error 
+        #in the later business logic
+        currency_date = datetime(year=1900, month=1, day=1)
+
+        if(site_tree is not None):
+            date_path = '//div[@class="MNBDailyRatesUI_ExchangeRates"]/table/thead/tr[1]/td/span'
+            date_hun_format = unicode(site_tree.xpath(date_path)[0].text)
+            if(date_hun_format is not None):
+                date_hun_format = date_hun_format.replace(' ','|')
+                date_hun_format = date_hun_format.replace('.','')
+                splitted_date = date_hun_format.split('|')
+            if(splitted_date is not None and len(splitted_date) == 3):
+                currency_date = datetime(year=int(splitted_date[0]), 
+                    month=self.months_to_numbers_mapping[splitted_date[1]], 
+                    day=int(splitted_date[2]) )
+                _logger.info("Date for the MNB curreny is:" + str(currency_date))
+            else:
+                _logger.warning('Date could not be paresed properly from MNB Webpage, please check xpath mapping or website response.')            
+        else:
+            _logger.warning('No site_tree was passed to the method, will not return a valid date!')
+
+        return currency_date
+
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
@@ -46,6 +87,12 @@ class HU_MNB_getter(Currency_getter_interface):
         if main_currency in currency_array:
             _logger.info("HU_MNB: Removing main currency from currency array." + main_currency)
             currency_array.remove(main_currency)
+
+        loaded_currency_date = self.get_date_for_currency(site_tree)
+
+        #this will throw an error if the difference between the 
+        #loaded currency date and today is bigger then max_delta_days
+        self.check_rate_date(loaded_currency_date, max_delta_days)
 
         currencies_and_values = {}
 
