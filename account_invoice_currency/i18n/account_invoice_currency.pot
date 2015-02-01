@@ -1,0 +1,57 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_currency
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20130927-231103\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-18 11:53+0000\n"
+"PO-Revision-Date: 2013-11-18 11:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_total:0
+msgid "Invoice total amount in the company currency (useful when invoice currency is different from company currency)."
+msgstr "Invoice total amount in the company currency (useful when invoice currency is different from company currency)."
+
+#. module: account_invoice_currency
+#: field:account.invoice,cc_amount_total:0
+msgid "Company Cur. Total"
+msgstr "Company Cur. Total"
+
+#. module: account_invoice_currency
+#: field:account.invoice,cc_amount_tax:0
+msgid "Company Cur. Tax"
+msgstr "Company Cur. Tax"
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_tax:0
+msgid "Invoice tax amount in the company currency (useful when invoice currency is different from company currency)."
+msgstr "Invoice tax amount in the company currency (useful when invoice currency is different from company currency)."
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_untaxed:0
+msgid "Invoice untaxed amount in the company currency(useful when invoice currency is different from company currency)."
+msgstr "Invoice untaxed amount in the company currency(useful when invoice currency is different from company currency)."
+
+#. module: account_invoice_currency
+#: view:account.invoice:0
+msgid "Amounts in company currency"
+msgstr "Amounts in company currency"
+
+#. module: account_invoice_currency
+#: model:ir.model,name:account_invoice_currency.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: account_invoice_currency
+#: field:account.invoice,cc_amount_untaxed:0
+msgid "Company Cur. Untaxed"
+msgstr "Company Cur. Untaxed"
+
