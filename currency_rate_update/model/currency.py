@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2009 CamptoCamp. All rights reserved.
-#    @author Nicolas Bessi
+#    Copyright (C) 2009-TODAY CLEARCORP S.A. (<http://clearcorp.co.cr>).
+#    @author Glen Sojo
+#
+#    Abstract class to fetch rates from Central Bank of Costa Rica
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,6 +21,12 @@
 #
 ##############################################################################
 
-from . import currency
-from . import currency_rate_update
-from . import company
+from openerp import models, fields, api
+
+class ResCurrency(models.Model):
+
+    _inherit = 'res.currency'
+
+    indicator = fields.Integer('Indicator', help='Central Bank of Costa Rica '
+        'indicator identifier for sale and purchase rates. Valid indicators '
+        'are shown in the webservice documentation at http://www.bccr.fi.cr/')
