@@ -2,7 +2,6 @@
 ##############################################################################
 #
 # Copyright (C) 2004-2011 Zikzakmedia S.L. (http://zikzakmedia.com)
-#                         All Rights Reserved.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,4 +17,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import invoice
+from . import account_invoice

@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_invoice_currency
 #: view:account.invoice:0
 msgid "Amounts in company currency"
-msgstr "Importes moneda empresa"
+msgstr "Importes moneda compañía"
 
 #. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
