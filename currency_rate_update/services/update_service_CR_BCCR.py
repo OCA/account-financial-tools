@@ -24,14 +24,16 @@
 from datetime import datetime
 from xml.dom.minidom import parseString
 from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import UnsuportedCurrencyError
 
 # TODO: Extend valid indicators
 VALID_INDICATORS = {
-    'CRC': [317,318],
+    'CRC': [317, 318],
     'EUR': [333],
 }
 WEBSERVICE_NAME = 'Odoo currency_rate_update'
 SUBLEVELS = 'N'
+
 
 class UnsuportedIndicatorError(Exception):
     def __init__(self, value):
@@ -42,6 +44,7 @@ class UnsuportedIndicatorError(Exception):
 
     def __repr__(self):
         return 'Unsupported indicator %s' % self.indicator
+
 
 class CR_BCCR_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
@@ -68,14 +71,15 @@ class CR_BCCR_getter(Currency_getter_interface):
         self.validate_cur(main_currency)
         self.validate_indicator(currency_array)
         today = datetime.utcnow()
-        
+
         # Webservice parameters
         date = today.strftime('%d/%m/%Y')
-        
-        url = ('http://indicadoreseconomicos.bccr.fi.cr//indicadoreseconomicos/WebServices/'
-               'wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicos?tcIndicador=%s'
-               '&tcFechaInicio=%s&tcFechaFinal=%s&tcNombre=%s&tnSubNiveles=%s')
-        
+
+        url = ('http://indicadoreseconomicos.bccr.fi.cr//indicadoreseconomicos'
+        '/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadores'
+        'Economicos?tcIndicador=%s&tcFechaInicio=%s&tcFechaFinal=%s'
+        '&tcNombre=%s&tnSubNiveles=%s')
+
         # Remove the main currency if it is in the currency_array
         count = 0
         for currency, indicator in currency_array:
@@ -83,7 +87,8 @@ class CR_BCCR_getter(Currency_getter_interface):
                 currency_array.pop(count)
             count += 1
         for curr, indicator in currency_array:
-            res = self.get_url(url % (indicator, date, date, WEBSERVICE_NAME, SUBLEVELS))
+            res = self.get_url(url % (indicator, date, date,
+            WEBSERVICE_NAME, SUBLEVELS))
             dom = parseString(res)
             tag = dom.getElementsByTagName('NUM_VALOR')
             val = tag and tag[0].firstChild.data or False

@@ -124,7 +124,7 @@ PL_NBP_supported_currency_array = [
 
 # TODO: Extend supported currencies
 CR_BCCR_supported_currency_array = [
-    "CRC", "EUR",]
+    "CRC", "EUR"]
 
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
@@ -201,7 +201,7 @@ class Currency_rate_update_service(models.Model):
          # Added for romanian rates
          ('RO_BNR_getter', 'National Bank of Romania'),
          # Added for costarrican rates
-         ('CR_BCCR_getter','Central Bank of Costa Rica')
+         ('CR_BCCR_getter', 'Central Bank of Costa Rica')
          ],
         string="Webservice to use",
         required=True)
