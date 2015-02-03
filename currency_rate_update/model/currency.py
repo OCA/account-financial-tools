@@ -29,5 +29,7 @@ class ResCurrency(models.Model):
     _inherit = 'res.currency'
 
     indicator = fields.Integer('Indicator', help='Central Bank of Costa Rica '
-                               'indicator identifier for sale and purchase rates. Valid indicators '
-                               'are shown in the webservice documentation at http://www.bccr.fi.cr/')
+                               'indicator identifier for sale and purchase '
+                               'rates. Valid indicators are shown in the '
+                               'webservice documentation at '
+                               'http://www.bccr.fi.cr/')
