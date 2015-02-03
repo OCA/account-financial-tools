@@ -76,9 +76,9 @@ class CR_BCCR_getter(Currency_getter_interface):
         date = today.strftime('%d/%m/%Y')
 
         url = ('http://indicadoreseconomicos.bccr.fi.cr//indicadoreseconomicos'
-        '/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadores'
-        'Economicos?tcIndicador=%s&tcFechaInicio=%s&tcFechaFinal=%s'
-        '&tcNombre=%s&tnSubNiveles=%s')
+               '/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadores'
+               'Economicos?tcIndicador=%s&tcFechaInicio=%s&tcFechaFinal=%s'
+               '&tcNombre=%s&tnSubNiveles=%s')
 
         # Remove the main currency if it is in the currency_array
         count = 0
@@ -88,7 +88,7 @@ class CR_BCCR_getter(Currency_getter_interface):
             count += 1
         for curr, indicator in currency_array:
             res = self.get_url(url % (indicator, date, date,
-            WEBSERVICE_NAME, SUBLEVELS))
+                                      WEBSERVICE_NAME, SUBLEVELS))
             dom = parseString(res)
             tag = dom.getElementsByTagName('NUM_VALOR')
             val = tag and tag[0].firstChild.data or False
