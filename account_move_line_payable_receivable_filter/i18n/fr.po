@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_filter_payable_receivable
+#	* account_move_line_payable_receivable_filter
 #
 msgid ""
 msgstr ""
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: account_filter_payable_receivable
-#: view:account.move.line:account_filter_payable_receivable.view_account_move_line_filter_inherit
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
 msgid "Payable Account"
 msgstr "Compte fournisseur"
 
-#. module: account_filter_payable_receivable
-#: view:account.move.line:account_filter_payable_receivable.view_account_move_line_filter_inherit
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
 msgid "Receivable Account"
 msgstr "Compte client"
 

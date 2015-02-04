@@ -2,7 +2,7 @@
 <openerp>
     <data>
 	   <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
-            <field name="name">Journal Items (account_filter_payable_receivable)</field>
+            <field name="name">Journal Items (account_move_line_payable_receivable_filter)</field>
             <field name="model">account.move.line</field>
             <field name="inherit_id" ref="account.view_account_move_line_filter"/>
             <field name="arch" type="xml">

@@ -1,5 +1,5 @@
-Account Filter Payable Receivable
-=================================
+Account Move Line Payable Receivable Filter
+===========================================
 
 This module was written to extend the functionality of search on journal items
 to allow you to filter by payable and receivable account
