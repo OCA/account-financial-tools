@@ -1,4 +1,4 @@
-account_filter_payable_receivable
+Account Filter Payable Receivable
 =================================
 
 This module was written to extend the functionality of search on journal items
