@@ -27,11 +27,13 @@ Credits
 =======
 
 Contributors:
+-------------
 
 * Stéphane Bidoul (ACSONE) <stephane.bidoul@acsone.eu>
 * Adrien Peiffer (ACSONE) <adrien.peiffer@acsone.eu>
 
 Maintainer:
+-----------
 
 .. image:: http://odoo-community.org/logo.png
    :alt: Odoo Community Association
