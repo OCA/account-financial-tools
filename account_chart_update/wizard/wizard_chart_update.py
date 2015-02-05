@@ -334,6 +334,8 @@ class wizard_update_charts_accounts(orm.TransientModel):
         """
         Adds a tax template -> tax id to the mapping.
         """
+        if context is None:
+            context = {}
         if not tax_templ:
             return False
         if tax_templ_mapping.get(tax_templ.id):
