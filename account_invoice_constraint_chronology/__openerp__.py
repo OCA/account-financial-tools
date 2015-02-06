@@ -33,6 +33,7 @@
     "author": "ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
+    "license": "AGPL-3",
     "images": [],
     "category": "Accounting",
     "depends": ["account"],
