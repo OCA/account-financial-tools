@@ -24,6 +24,7 @@
                 "account"],
     "author": "Camptocamp",
     'website': 'http://www.camptocamp.com',
+    'license': 'AGPL-3',
     'data': [],
     'installable': True,
     'active': False,

@@ -29,6 +29,7 @@ Prevents to cancel an invoice which has already been imported in a
 payment order.
     """,
     'website': 'http://www.camptocamp.com',
+    'license': 'AGPL-3',
     'data': [],
     'installable': False,
     'active': False,
