@@ -23,6 +23,7 @@
     "version": "0.7",
     "author": "Camptocamp",
     "website": "http://camptocamp.com",
+    "license": "AGPL-3",
     "category": "Financial Management/Configuration",
     "depends": [
         "base",
