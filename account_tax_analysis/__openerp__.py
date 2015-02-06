@@ -23,6 +23,7 @@
  "author": "Camptocamp SA",
  "category": 'Accounting & Finance',
  "website": "http://www.camptocamp.com",
+ "license": "AGPL-3",
  "data": ["account_tax_analysis_view.xml"],
  'installable': True,
  "active": False,
