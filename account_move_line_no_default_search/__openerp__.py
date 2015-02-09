@@ -33,6 +33,7 @@ disables the default search values for the dropdowns so that you do not
 have to disable these before entering your own search queries.
     """,
     'website': 'http://therp.nl',
+    'license': 'AGPL-3',
     'depends': ['account'],
     'js': ['static/src/js/move_line_search_view.js'],
     'data': ['views/move_line_search_view.xml']
