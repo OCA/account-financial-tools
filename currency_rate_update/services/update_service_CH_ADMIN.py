@@ -21,18 +21,16 @@
 #
 ##############################################################################
 from .currency_getter_interface import Currency_getter_interface
-
 import logging
-_logger = logging.getLogger(__name__)
-
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
+_logger = logging.getLogger(__name__)
 
 
 class CH_ADMIN_getter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
-    for Admin.ch service
-
+    for Admin.ch service.
     """
 
     def rate_retrieve(self, dom, ns, curr):
