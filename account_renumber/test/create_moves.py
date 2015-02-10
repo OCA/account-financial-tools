@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    OpenERP - Account renumber wizard
-#    Copyright (C) 2009 Pexego Sistemas Informáticos. All Rights Reserved
-#    $Id$
+#    Copyright (C) 2009 Pexego Sistemas Informáticos.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,30 +18,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-"""
-Script that creates large amounts of account moves on different days,
-that can be used later for testing the renumber wizard.
-"""
-__author__ = "Borja López Soilán (Pexego)"
-
 import sys
 import xmlrpclib
 import logging
+
 logger = logging.getLogger("create_lots_of_account_moves")
 
 
 def create_lots_of_account_moves(dbname, user, passwd, howmany):
-    """
-    Small OpenERP function that will create lots of account moves
-    on the selected database, that can later be used for
-    testing the renumber wizard.
+    """Small Odoo function that will create lots of account moves on the
+    selected database, that can later be used for testing the renumber wizard.
     Note: The database must have demo data, and a fiscal year 2009 created.
     """
     url_template = "http://%s:%s/xmlrpc/%s"
     server = "localhost"
     port = 8069
-    user_id = 0
 
     login_facade = xmlrpclib.ServerProxy(
         url_template % (server, port, 'common'))
@@ -51,9 +41,7 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
         url_template % (server, port, 'object'))
 
     for i in range(1, howmany):
-        #
         # Create one account move
-        #
         move_id = object_facade.execute(dbname, user_id, passwd,
                                         'account.move', 'create', {
                                             'ref': 'Test%s' % i,
