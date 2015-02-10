@@ -138,13 +138,20 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [asset.id])
         asset.refresh()
-        self.assertEquals(asset.depreciation_line_ids[1].amount, 47.33)
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[4].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[5].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[6].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 47.33,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[6].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
+                               places=2)
 
     def test_3_proprata_init_prev_year(self):
         """Prorata temporis depreciation with init value in prev year."""
@@ -174,11 +181,15 @@ class TestAssetManagement(common.TransactionCase):
             self.cr, self.uid, [asset.id])
         asset.refresh()
         # I check the depreciated value is the initial value
-        self.assertEquals(asset.value_depreciated, 325.08)
+        self.assertAlmostEqual(asset.value_depreciated, 325.08,
+                               places=2)
         # I check computed values in the depreciation board
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
+                               places=2)
 
     def test_4_prorata_init_cur_year(self):
         """Prorata temporis depreciation with init value in curent year."""
@@ -206,8 +217,12 @@ class TestAssetManagement(common.TransactionCase):
             self.cr, self.uid, [asset.id])
         asset.refresh()
         # I check the depreciated value is the initial value
-        self.assertEquals(asset.value_depreciated, 279.44)
+        self.assertAlmostEqual(asset.value_depreciated, 279.44,
+                               places=2)
         # I check computed values in the depreciation board
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 45.64)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 45.64,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
+                               places=2)
