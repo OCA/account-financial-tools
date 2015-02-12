@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_account_config_settings">
+            <field name="name">account.config.settings.inherit</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="model">account.config.settings</field>
+            <field name="arch" type="xml">
+                <field name="module_account_asset" position="replace">
+                    <field name="module_account_asset_management" class="oe_inline"/>
+                </field>
+                <xpath expr="//label[@for='module_account_asset']" position="replace">
+                    <label for="module_account_asset_management"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
