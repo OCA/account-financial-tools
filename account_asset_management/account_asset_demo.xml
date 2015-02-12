@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<openerp>
+  <data noupdate="1">
+
+    <!-- 
+            Type View Assets
+        -->
+
+    <record id="account_asset_view_fa" model="account.asset.asset">
+      <field name="type">view</field>
+      <field name="state">open</field>
+      <field name="name">Financial Assets</field>
+      <field name="purchase_value" eval="0.0"/>
+    </record>
+
+    <record id="account_asset_view_ict" model="account.asset.asset">
+      <field name="type">view</field>
+      <field name="state">open</field>
+      <field name="name">ICT</field>
+      <field name="parent_id" ref="account_asset_view_fa"/>
+      <field name="purchase_value" eval="0.0"/>
+    </record>
+
+    <record id="account_asset_view_vehicle" model="account.asset.asset">
+      <field name="type">view</field>
+      <field name="state">open</field>
+      <field name="name">Vehicles</field>
+      <field name="parent_id" ref="account_asset_view_fa"/>
+      <field name="purchase_value" eval="0.0"/>
+    </record>
+
+    <!-- 
+            Asset Category Demo
+        -->
+
+    <record id="account_asset_category_ict_3Y" model="account.asset.category">
+      <field name="parent_id" ref="account_asset_view_ict"/>
+      <field name="account_expense_depreciation_id" ref="account.a_expense"/>
+      <field name="account_asset_id" ref="account.xfa"/>
+      <field name="account_depreciation_id" ref="account.xfa"/>
+      <field name="journal_id" ref="account.expenses_journal"/>
+      <field name="name">Hardware - 3 Years</field>
+      <field name="method_time">year</field>
+      <field name="method_number" eval="3"/>
+      <field name="method_period">year</field>
+    </record>
+
+    <record id="account_asset_category_car_5Y" model="account.asset.category">
+      <field name="parent_id" ref="account_asset_view_vehicle"/>
+      <field name="account_expense_depreciation_id" ref="account.a_expense"/>
+      <field name="account_asset_id" ref="account.xfa"/>
+      <field name="account_depreciation_id" ref="account.xfa"/>
+      <field name="journal_id" ref="account.expenses_journal"/>
+      <field name="name">Cars - 5 Years</field>
+      <field name="method_time">year</field>
+      <field name="method_number" eval="5"/>
+      <field name="method_period">year</field>
+    </record>
+
+    <!-- 
+           To DO: 
+           move deferred revenue/income to a separate
+           account_deferral module
+
+    <record id="account_asset_category_sale" model="account.asset.category">
+      <field name="account_expense_depreciation_id" ref="account.a_sale"/>
+      <field name="account_asset_id" ref="account.xfa"/>
+      <field name="account_depreciation_id" ref="account.xfa"/>
+      <field name="journal_id" ref="account.expenses_journal"/>
+      <field name="name">Revenue Recognition Maintenance Contract - 3 Years</field>
+      <field name="method_number">3</field>
+    </record>
+    -->
+
+    <!-- 
+            Assets Demo
+        -->
+
+    <record id="account_asset_asset_ict0" model="account.asset.asset">
+      <field name="parent_id" ref="account_asset_view_ict"/>
+      <field name="state">draft</field>
+      <field name="method_time">year</field>
+      <field name="method_number" eval="3"/>
+      <field name="method_period">year</field>
+      <field name="date_start" eval="time.strftime('%Y-01-01')"/>
+      <field name="name">Laptop</field>
+      <field name="code">PI00101</field>
+      <field name="purchase_value" eval="1500.0"/>
+      <field name="category_id" ref="account_asset_category_ict_3Y"/>
+    </record>
+
+    <record id="account_asset_asset_vehicle0" model="account.asset.asset">
+      <field name="parent_id" ref="account_asset_view_vehicle"/>
+      <field name="state">draft</field>
+      <field name="method_time">year</field>
+      <field name="method_number" eval="5"/>
+      <field name="method_period">year</field>
+      <field name="name">CEO's Car</field>
+      <field name="purchase_value" eval="12000.0"/>
+      <field name="salvage_value" eval="2000.0"/>
+      <field name="category_id" ref="account_asset_category_car_5Y"/>
+    </record>
+
+  </data>
+</openerp>
