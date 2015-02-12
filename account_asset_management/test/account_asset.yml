@@ -1,0 +1,25 @@
+-
+  In order to test the Account Asset Management process, I perform an action to confirm the Asset.
+-
+  !python {model: account.asset.asset}: |
+    self.validate(cr, uid, [ref("account_asset_asset_vehicle0")])
+-
+  I check if the Asset is now in the 'Open' state.
+-
+  !assert {model: account.asset.asset, id: account_asset_asset_vehicle0, severity: error, string: Asset should be in Open state}:
+    - state == 'open'
+-
+  I compute the depreciation lines for the Asset.
+-
+  !python {model: account.asset.asset}: |
+    self.compute_depreciation_board(cr, uid, [ref("account_asset_asset_vehicle0")])
+    asset = self.browse(cr, uid, ref("account_asset_asset_vehicle0"))
+    # remark: check infra only valid for prorata == False and method_period == 'year'
+    assert asset.method_number == (len(asset.depreciation_line_ids) - 1), 'Depreciation lines not created correctly'
+-
+  I create an account move for the first depreciation line.
+-
+  !python {model: account.asset.depreciation.line}: |
+    ids = self.search(cr, uid, [('asset_id', '=', ref('account_asset_asset_vehicle0')), ('type', '=', 'depreciate')], limit=1)
+    self.create_move(cr, uid, ids)
+
