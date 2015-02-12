@@ -76,7 +76,7 @@ Contributors
         'res_config_view.xml',
     ],
     'auto_install': False,
-    'installable': False,
+    'installable': True,
     'application': True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
