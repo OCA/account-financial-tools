@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <record model="ir.ui.view" id="view_account_asset_form">
+      <field name="name">account.asset.form</field>
+      <field name="model">account.account</field>
+      <field name="inherit_id" ref="account.view_account_form"/>
+      <field name="arch" type="xml">
+        <field name="active" position="before">
+          <field name="asset_category_id"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="view_account_move_line_form_inherit" model="ir.ui.view">
+      <field name="name">Journal Items (form)</field>
+      <field name="model">account.move.line</field>
+      <field name="inherit_id" ref="account.view_move_line_form"/>
+      <field name="arch" type="xml">
+        <field name="statement_id" position="after">
+          <field name="asset_category_id"/>
+          <field name="asset_id"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+      <field name="name">Journal Items (Search)</field>
+      <field name="model">account.move.line</field>
+      <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+      <field name="arch" type="xml">
+        <field name="account_id" position="after">
+          <field name="asset_id"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_move_asset_form">
+      <field name="name">account.move.asset.form</field>
+      <field name="model">account.move</field>
+      <field name="inherit_id" ref="account.view_move_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@string='Journal Items']/field[@name='line_id']/form/notebook/page[@string='Information']//field[@name='account_id']"  position="attributes">
+          <attribute name="on_change">onchange_account_id(account_id)</attribute>
+        </xpath>
+        <xpath expr="//notebook/page[@string='Journal Items']/field[@name='line_id']/form/notebook/page[@string='Information']/separator[@string='Internal Note']"  position="before">
+          <group col="2" colspan="2">
+            <separator colspan="2" string="Asset"/>
+            <field name="asset_category_id"/>
+            <field name="asset_id"/>
+          </group>
+        </xpath>
+        <xpath expr="//notebook/page[@string='Journal Items']/field[@name='line_id']/tree/field[@name='account_id']"  position="attributes">
+          <attribute name="on_change">onchange_account_id(account_id)</attribute>
+        </xpath>
+        <xpath expr="//notebook/page[@string='Journal Items']/field[@name='line_id']/tree/field[@name='state']"  position="before">
+          <field name="asset_category_id"/>
+          <field name="asset_id"/>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
+</openerp>
