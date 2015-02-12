@@ -182,7 +182,14 @@ class account_asset_remove(orm.TransientModel):
                 _("You can't make an early removal if all the depreciation "
                   "lines for previous periods are not posted."))
 
-        last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        if first_to_depreciate_dl.previous_id:
+            last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        else:
+            create_dl_id = asset_line_obj.search(
+                cr, uid,
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
+            create_dl = asset_line_obj.browse(cr, uid, create_dl_id)
+            last_depr_date = create_dl.line_date
         period_number_days = (
             datetime.strptime(first_date, '%Y-%m-%d') -
             datetime.strptime(last_depr_date, '%Y-%m-%d')).days
@@ -302,7 +309,13 @@ class account_asset_remove(orm.TransientModel):
             cr, uid,
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate')],
             order='line_date desc')
-        last_date = asset_line_obj.browse(cr, uid, dl_ids[0]).line_date
+        if dl_ids:
+            last_date = asset_line_obj.browse(cr, uid, dl_ids[0]).line_date
+        else:
+            create_dl_id = asset_line_obj.search(
+                cr, uid,
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
+            last_date = asset_line_obj.browse(cr, uid, create_dl_id).line_date
         if wiz_data.date_remove < last_date:
             raise orm.except_orm(
                 _('Error!'),
