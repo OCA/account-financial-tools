@@ -222,15 +222,16 @@ class account_asset_remove(orm.TransientModel):
 
         # asset and asset depreciation account reversal
         depr_amount = asset.asset_value - residual_value
-        move_line_vals = {
-            'name': asset.name,
-            'account_id': categ.account_depreciation_id.id,
-            'debit': depr_amount > 0 and depr_amount or 0.0,
-            'credit': depr_amount < 0 and -depr_amount or 0.0,
-            'partner_id': partner_id,
-            'asset_id': asset.id
-        }
-        move_lines.append((0, 0, move_line_vals))
+        if depr_amount:
+            move_line_vals = {
+                'name': asset.name,
+                'account_id': categ.account_depreciation_id.id,
+                'debit': depr_amount > 0 and depr_amount or 0.0,
+                'credit': depr_amount < 0 and -depr_amount or 0.0,
+                'partner_id': partner_id,
+                'asset_id': asset.id
+            }
+            move_lines.append((0, 0, move_line_vals))
         move_line_vals = {
             'name': asset.name,
             'account_id': categ.account_asset_id.id,
