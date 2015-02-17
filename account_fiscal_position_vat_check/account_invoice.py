@@ -42,10 +42,10 @@ class account_invoice(models.Model):
         if required by the fiscal position'''
         for invoice in self:
             if (
-                    invoice.type in ('out_invoice', 'out_refund')
-                    and invoice.fiscal_position
-                    and invoice.fiscal_position.customer_must_have_vat
-                    and not invoice.partner_id.vat):
+                    invoice.type in ('out_invoice', 'out_refund') and
+                    invoice.fiscal_position and
+                    invoice.fiscal_position.customer_must_have_vat and
+                    not invoice.partner_id.vat):
                 if invoice.type == 'out_invoice':
                     type_label = _('a Customer Invoice')
                 else:
