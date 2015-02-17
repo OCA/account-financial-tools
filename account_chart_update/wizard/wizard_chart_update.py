@@ -1305,9 +1305,9 @@ class wizard_update_charts_accounts(orm.TransientModel):
                 'shortcut': account_template.shortcut,
                 'note': account_template.note,
                 'parent_id': (
-                    account_template.parent_id
-                    and account_template_mapping.get(p_id) or
-                    False
+                    account_template_mapping.get(p_id)
+                    if account_template.parent_id
+                    else False
                 ),
                 'tax_ids': [(6, 0, tax_ids)],
                 'company_id': wizard.company_id.id,
