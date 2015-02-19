@@ -66,3 +66,17 @@ class AccountMove(orm.Model):
                        'SET state=%s '
                        'WHERE id IN %s', ('draft', tuple(ids),))
         return True
+
+
+class AccountJournal(orm.Model):
+    _inherit = 'account.journal'
+
+    def __init__(self, pool, cr):
+        super(AccountJournal, self).__init__(pool, cr)
+        # update help of entry_posted flag
+        self._columns['entry_posted'].string = 'Skip \'Draft\' State'
+        self._columns['entry_posted'].help = \
+            """Check this box if you don't want new journal entries
+to pass through the 'draft' state and instead goes directly
+to the 'posted state' without any manual validation."""
+        return
