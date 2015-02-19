@@ -30,8 +30,12 @@ class AccountInvoice(orm.Model):
         res = super(AccountInvoice, self).action_move_create(cr, uid, ids,
                                                              context=context)
         move_obj = self.pool.get('account.move')
+        use_journal_setting = bool(self.pool['ir.config_parameter'].get_param(
+            cr, uid, 'use_journal_setting', False))
         for inv in self.browse(cr, uid, ids, context=context):
             if inv.move_id:
+                if use_journal_setting and inv.move_id.journal_id.entry_posted:
+                    continue
                 move_obj.write(cr, uid, [inv.move_id.id], {'state': 'draft'},
                                context=context)
         return res
