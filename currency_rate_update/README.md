@@ -5,7 +5,7 @@ The module is able to use 4 different sources:
 1. Admin.ch
    Updated daily, source in CHF.
 
-2. European Central Bank (ported by Grzegorz Grzelak)
+2. European Central Bank (ported by Grzegorz Grzelak - OpenGLOBE.pl)
    The reference rates are based on the regular daily concertation
    procedure between central banks within and outside the European
    System of Central Banks, which normally takes place at 2.15 p.m.
@@ -15,7 +15,7 @@ The module is able to use 4 different sources:
 3. Yahoo Finance
    Updated daily
 
-4. Polish National Bank (Narodowy Bank Polski)
+4. Polish National Bank (Narodowy Bank Polski) (by Grzegorz Grzelak - OpenGLOBE.pl)
    Takes official rates from www.nbp.pl. Adds rate table symbol in log.
    You should check when rates should apply to bookkeeping.
    If next day you should change the update hour in schedule settings
@@ -55,7 +55,7 @@ currency found in database.
 Thanks to main contributors: 
 *    Joel Grand-Guillaume
 *    JB Aubort
-*    Grzegorz Grzelak - grzegorz.grzelak@birdglobe.com (ECB, NBP)
+*    Grzegorz Grzelak - grzegorz.grzelak@openglobe.pl (ECB, NBP)
 *    Alexis de Lattre - alexis@via.ecp.fr
 *    Lorenzo Battistini - lorenzo.battistini@agilebg.com (Port to V7)
 *    Agustin Cruz - openpyme.mx (BdM)
