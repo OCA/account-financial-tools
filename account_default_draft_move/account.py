@@ -30,8 +30,12 @@ class AccountInvoice(orm.Model):
         res = super(AccountInvoice, self).action_move_create(cr, uid, ids,
                                                              context=context)
         move_obj = self.pool.get('account.move')
+        use_journal_setting = bool(self.pool['ir.config_parameter'].get_param(
+            cr, uid, 'use_journal_setting', False))
         for inv in self.browse(cr, uid, ids, context=context):
             if inv.move_id:
+                if use_journal_setting and inv.move_id.journal_id.entry_posted:
+                    continue
                 move_obj.write(cr, uid, [inv.move_id.id], {'state': 'draft'},
                                context=context)
         return res
@@ -62,3 +66,17 @@ class AccountMove(orm.Model):
                        'SET state=%s '
                        'WHERE id IN %s', ('draft', tuple(ids),))
         return True
+
+
+class AccountJournal(orm.Model):
+    _inherit = 'account.journal'
+
+    def __init__(self, pool, cr):
+        super(AccountJournal, self).__init__(pool, cr)
+        # update help of entry_posted flag
+        self._columns['entry_posted'].string = 'Skip \'Draft\' State'
+        self._columns['entry_posted'].help = \
+            """Check this box if you don't want new journal entries
+to pass through the 'draft' state and instead goes directly
+to the 'posted state' without any manual validation."""
+        return
