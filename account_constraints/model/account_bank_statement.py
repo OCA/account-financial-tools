@@ -46,7 +46,8 @@ class AccountBankStatementLine(models.Model):
     _inherit = "account.bank.statement.line"
 
     state = fields.Selection(string='Statement state',
-                             related='statement_id.state')
+                             related='statement_id.state',
+                             default='draft')
 
     @api.multi
     def cancel(self):
