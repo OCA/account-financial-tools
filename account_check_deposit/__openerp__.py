@@ -2,7 +2,7 @@
 ###############################################################################
 #
 #   account_check_deposit for Odoo/OpenERP
-#   Copyright (C) 2012-2014 Akretion (http://www.akretion.com/)
+#   Copyright (C) 2012-2015 Akretion (http://www.akretion.com/)
 #   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 #   @author: Chafique DELLI <chafique.delli@akretion.com>
 #   @author: Alexis de Lattre <alexis.delattre@akretion.com>
@@ -48,12 +48,15 @@ check deposits.
     ],
     'data': [
         'account_deposit_view.xml',
+        'account_move_line_view.xml',
         'account_deposit_sequence.xml',
         'company_view.xml',
         'security/ir.model.access.csv',
         'security/check_deposit_security.xml',
         'account_data.xml',
+        'report.xml',
+        'report/report_checkdeposit.xml',
     ],
-    'installable': False,
+    'installable': True,
     'application': True,
 }
