@@ -96,10 +96,9 @@ table {
 }
 
 .address .recipient {
-    font-size: 13px;
-    margin-right: 120px;
-    margin-left: 350px;
-    float: right;
+    font-size: 12px;
+    margin-top: 60px;
+    float: left;
 }
 
 
@@ -136,8 +135,9 @@ tr.line {
 
     %for comm in objects :
     <% setLang(comm.get_contact_address().lang) %>
+    <%from datetime import date %>
     <div class="address">
-        <table class="recipient">
+        <table class="recipient" width="100%">
           <%
              add = comm.get_contact_address()
           %>
