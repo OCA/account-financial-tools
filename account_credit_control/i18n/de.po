@@ -915,16 +915,6 @@ msgid "Overdue Level"
 msgstr "Fälligkeitsstufe"
 
 #. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:167
-msgid "Reminder"
-msgstr "Erinnerung"
-
-#. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:170
-msgid "Dear"
-msgstr "Geehrter"
-
-#. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:177
 msgid "Summary"
 msgstr "Zusammenfassung"
