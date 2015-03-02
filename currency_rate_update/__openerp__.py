@@ -21,7 +21,7 @@
 {
     "name": "Currency Rate Update",
     "version": "0.7",
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "website": "http://camptocamp.com",
     "license": "AGPL-3",
     "category": "Financial Management/Configuration",
