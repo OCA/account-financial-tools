@@ -25,7 +25,7 @@
     'version': '2.4',
     'depends': ['account'],
     'conflicts': ['account_asset'],
-    'author': 'OpenERP & Noviat',
+    'author': "OpenERP & Noviat,Odoo Community Association (OCA)",
     'description': """
 Financial asset management.
 ===========================
