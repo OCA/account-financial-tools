@@ -30,7 +30,7 @@
 {
     "name": "Account Invoice Constraint Chronology",
     "version": "1.0",
-    "author": "ACSONE SA/NV",
+    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainer": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
     "license": "AGPL-3",
