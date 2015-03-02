@@ -976,19 +976,9 @@ msgid "Overdue Level"
 msgstr "Niveau de relance"
 
 #. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:167
-msgid "Reminder"
-msgstr "Rappel"
-
-#. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:170
-msgid "Dear"
-msgstr "Madame, Monsieur"
-
-#. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:177
 msgid "Summary"
-msgstr "Listes des factures en attente de règlement"
+msgstr "Facture(s) en attente de règlement"
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:179

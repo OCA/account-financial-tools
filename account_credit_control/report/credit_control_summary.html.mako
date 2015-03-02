@@ -10,6 +10,7 @@ body {
 
 .custom_text {
     font-family: helvetica;
+    text-align: justify;
     font-size: 12px;
 }
 
@@ -97,8 +98,22 @@ table {
 
 .address .recipient {
     font-size: 12px;
-    margin-top: 60px;
-    float: left;
+    position: absolute;
+    border-collapse: collapse;
+    top: 0mm;
+    left: 115mm;
+    width: 80mm;
+    text-wrap: normal;
+}
+
+.address .date_city {
+    font-size: 12px;
+    position: absolute;
+    border-collapse: collapse;
+    top: 30mm;
+    left: 115mm;
+    width: 80mm;
+    text-wrap: normal;
 }
 
 
@@ -143,15 +158,13 @@ tr.line {
           %>
             %if comm.partner_id.id == add.id:
               <tr>
-                <td style="width: 50%" class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td>
-                <td style="width: 50%; text-align: right">${formatLang(str(date.today()), date=True)}</td>
+                <td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td>
               </tr>
               <% address_lines = comm.partner_id.contact_address.split("\n") %>
 
             %else:
               <tr>
-                <td style="width: 50%" class="name">${comm.partner_id.name or ''}</td>
-                <td style="width: 50%; text-align: right">${formatLang(str(date.today()), date=True)}</td>
+                <td class="name">${comm.partner_id.name or ''}</td>
               </tr>
               <tr><td>${add.title and add.title.name or ''} ${add.name}</td></tr>
               <% address_lines = add.contact_address.split("\n")[1:] %>
@@ -161,6 +174,12 @@ tr.line {
                 <tr><td>${part}</td></tr>
                 %endif
             %endfor
+           </table>
+        <br/>
+        <table class="date_city" width="100%">
+            <tr>
+                <td>${company.city}, ${formatLang(str(date.today()), date=True)}</td>
+            </tr>
         </table>
         <br/>
         <br/>
@@ -174,10 +193,10 @@ tr.line {
     <div>
 
       <h3 style="clear: both; padding-top: 20px;">
-          ${_('Reminder')}: ${comm.current_policy_level.name or '' }
+          ${comm.current_policy_level.name or '' }
       </h3>
 
-      <p>${_('Dear')},</p>
+      
       <p class="custom_text" width="95%">${comm.current_policy_level.custom_text.replace('\n', '<br />')}</p>
 
       <br/>

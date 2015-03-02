@@ -993,16 +993,6 @@ msgid "Overdue Level"
 msgstr "Overdue Level"
 
 #. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:167
-msgid "Reminder"
-msgstr "Reminder"
-
-#. module: account_credit_control
-#: report:addons/account_credit_control/report/credit_control_summary.html.mako:170
-msgid "Dear"
-msgstr "Dear"
-
-#. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:177
 msgid "Summary"
 msgstr "Summary"
