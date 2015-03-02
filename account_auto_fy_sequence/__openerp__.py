@@ -26,7 +26,7 @@
     'name': 'Automatic Fiscal Year Sequences',
     'version': '0.1',
     'category': 'Accounting',
-    'author': 'ACSONE SA/NV',
+    'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': 'http://acsone.eu',
     'depends': ['account'],
     'data': [

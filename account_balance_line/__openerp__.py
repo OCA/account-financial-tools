@@ -21,7 +21,7 @@
 {'name': 'Balance on lines',
  'summary': 'Display balance totals in move line view',
  'version': '1.1',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainter': 'Camptocamp',
  'category': 'Accounting',
  'depends': ['account'],

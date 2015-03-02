@@ -24,7 +24,7 @@
     'name': 'Assets Management Excel reporting',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'Noviat',
+    'author': "Noviat,Odoo Community Association (OCA)",
     'category': 'Accounting & Finance',
     'description': """
 Assets Management Excel reporting

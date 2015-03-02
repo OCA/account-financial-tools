@@ -21,7 +21,7 @@
     'name': 'Account Constraints',
     'version': '1.1',
     'depends': ['account'],
-    'author': 'Camptocamp',
+    'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'category': 'Generic Modules/Accounting',
     'description': """

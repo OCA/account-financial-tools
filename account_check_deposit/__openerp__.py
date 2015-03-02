@@ -40,7 +40,7 @@ You must configure on this journal the default debit account and the default
 credit account. You must also configure on the company the account for
 check deposits.
 """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': [
         'account_accountant',

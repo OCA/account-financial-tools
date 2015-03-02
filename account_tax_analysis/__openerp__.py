@@ -20,7 +20,7 @@
 {"name": "Tax analysis",
  "version": "1.0",
  "depends": ["base", "account"],
- "author": "Camptocamp SA",
+ "author": "Camptocamp SA,Odoo Community Association (OCA)",
  "category": 'Accounting & Finance',
  "website": "http://www.camptocamp.com",
  "license": "AGPL-3",
