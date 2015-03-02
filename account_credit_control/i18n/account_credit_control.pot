@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-13 13:11+0000\n"
-"PO-Revision-Date: 2015-01-13 13:11+0000\n"
+"POT-Creation-Date: 2015-01-26 10:32+0000\n"
+"PO-Revision-Date: 2015-01-26 10:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:93
+#: code:addons/account_credit_control/run.py:87
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr ""
@@ -79,13 +79,13 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:161
+#: code:addons/account_credit_control/run.py:154
 #, python-format
 msgid "A credit control run is already running in background, please try later."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:86
+#: code:addons/account_credit_control/run.py:80
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr ""
@@ -369,11 +369,6 @@ msgstr ""
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
-msgstr ""
-
-#. module: account_credit_control
-#: view:website:account_credit_control.report_credit_control_summary_document
-msgid "Dear,"
 msgstr ""
 
 #. module: account_credit_control
@@ -890,7 +885,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:109
+#: code:addons/account_credit_control/run.py:103
 #, python-format
 msgid "Please select a policy"
 msgstr ""
@@ -1124,7 +1119,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/line.py:226
+#: code:addons/account_credit_control/line.py:223
 #, python-format
 msgid "You are not allowed to delete a credit control line that is not in draft state."
 msgstr ""

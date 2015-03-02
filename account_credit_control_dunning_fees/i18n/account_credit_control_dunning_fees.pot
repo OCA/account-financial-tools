@@ -1,13 +1,13 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* account_credit_control_dunning_fees
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 11:44+0000\n"
-"PO-Revision-Date: 2014-05-07 11:44+0000\n"
+"POT-Creation-Date: 2014-12-22 11:00+0000\n"
+"PO-Revision-Date: 2014-12-22 11:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,34 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
-#, python-format
 msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
-#, python-format
 msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
+#: field:credit.control.dunning.fees.computer,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
-#, python-format
 msgid "Credit control line generator"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.line,dunning_fees_amount:0
-#: view:credit.control.policy:0
+#: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
+#: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Fees"
 msgstr ""
 
@@ -63,19 +68,27 @@ msgid "Fixed"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: view:credit.control.policy:0
+#: field:credit.control.dunning.fees.computer,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
 msgid "Mail and reporting"
 msgstr ""
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
-#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
-#, python-format
-msgid "credit.control.dunning.fees.computer"
-msgstr ""
-
-#. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_fees_type:0
-msgid "unknown"
+msgid "Type"
 msgstr ""
 
