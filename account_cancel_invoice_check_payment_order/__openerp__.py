@@ -23,7 +23,7 @@
     "depends": ["account",
                 "account_payment",
                 "account_cancel"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "description": """
 Prevents to cancel an invoice which has already been imported in a
 payment order.

@@ -21,7 +21,7 @@
     "name": "Move in draft state by default",
     "version": "1.0",
     "depends": ["base", "account", "account_constraints"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     "description": """
 Let the generated move in draft on invoice and bank statement

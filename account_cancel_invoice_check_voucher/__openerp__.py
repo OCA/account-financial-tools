@@ -24,7 +24,7 @@
                 "account",
                 "account_voucher",
                 "account_cancel"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "description": """
 Constraint forbidding to cancel an invoice already
 imported in bank statement with a voucher.

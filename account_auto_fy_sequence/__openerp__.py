@@ -46,7 +46,7 @@
     The module also replaces %(year)s by %(fy)s in the default prefix
     for new journals, assuming it is a safer default.
     """,
-    'author': 'ACSONE SA/NV',
+    'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': 'http://acsone.eu',
     'depends': ['account'],
     'data': [
