@@ -38,7 +38,7 @@ Module developed by Stéphane Bidoul <stephane.bidoul@acsone.eu>,
 inspired by Alexis de Lattre <alexis.delattre@akretion.com>'s
 account_analytic_required module.
 """,
-    'author': 'ACSONE SA/NV',
+    'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': 'http://acsone.eu/',
     'depends': ['account'],
     'data': ['account_view.xml'],
