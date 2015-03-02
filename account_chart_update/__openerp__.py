@@ -22,7 +22,7 @@
 {
     "name": "Detect changes and update the Account Chart from a template",
     "version": "6.1",
-    "author": "Zikzakmedia SL",
+    "author": "Zikzakmedia SL,Odoo Community Association (OCA)",
     "website": "www.zikzakmedia.com",
     "license": "GPL-3",
     "depends": ["account"],

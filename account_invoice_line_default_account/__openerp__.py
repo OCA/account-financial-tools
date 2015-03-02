@@ -25,7 +25,7 @@
         'base',
         'account'
     ],
-    'author': 'Therp BV',
+    'author': "Therp BV,Odoo Community Association (OCA)",
     'category': 'Accounting',
     'description': '''When entering purchase invoices directly, the user has
 to select an account which will be used as a counterpart in the generated

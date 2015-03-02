@@ -34,7 +34,7 @@ Also add on account entries :
 Module developped by Alexis de Lattre <alexis.delattre@akretion.com> during the Akretion-Camptocamp code sprint of June 2011.
 
 """,
-    'author': 'Akretion',
+    'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': ['account'],
     'init_xml': [],

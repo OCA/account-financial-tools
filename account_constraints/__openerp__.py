@@ -25,7 +25,7 @@
                  'account_voucher',
                  'account_payment',
                  ],
-    'author' : 'Camptocamp',
+    'author' : "Camptocamp,Odoo Community Association (OCA)",
     'category': 'Generic Modules/Accounting',
     'description': """
 Add contraints in the accounting module of OpenERP to avoid bad usage by
