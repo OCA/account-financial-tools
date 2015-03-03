@@ -154,7 +154,8 @@ class CreditControlRun(orm.Model):
                         )
             generated_ids.extend(policy_generated_ids)
             if policy_generated_ids:
-                report += _("Policy \"%s\" has generated %d Credit Control Lines.\n") % \
+                report += _('Policy "%s" has generated '
+                            '%d Credit Control Lines.\n') % \
                            (policy.name, len(policy_generated_ids))
                 credit_line_ids += policy_generated_ids
             else:
