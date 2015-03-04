@@ -258,8 +258,9 @@ class account_asset_remove(orm.TransientModel):
                     }
                     move_lines.append((0, 0, move_line_vals))
                 balance = wiz_data.sale_value - residual_value
-                account_id = balance > 0 and wiz_data.account_plus_value_id.id \
-                    or wiz_data.account_min_value_id.id
+                account_id = (wiz_data.account_plus_value_id.id
+                              if balance > 0
+                              else wiz_data.account_min_value_id.id)
                 move_line_vals = {
                     'name': asset.name,
                     'account_id': account_id,

@@ -824,10 +824,14 @@ class account_asset_asset(orm.Model):
                     asset_value = self._asset_value_compute(
                         cr, uid, asset, context)
                     for rec in record.child_ids:
-                        asset_value += \
-                            rec.type == 'normal' and \
-                            self._asset_value_compute(cr, uid, rec, context) or \
-                            _value_get(rec)
+                        if rec.type == 'normal':
+                            value = self._asset_value_compute(cr,
+                                                              uid,
+                                                              rec,
+                                                              context)
+                        else:
+                            value = _value_get(rec)
+                        asset_value += value
                     return asset_value
                 res[asset.id] = _value_get(asset)
         return res
