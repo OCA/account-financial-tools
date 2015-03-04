@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+# #############################################################################
 #
 #    Account reversal module for OpenERP
 #    Copyright (C) 2011 Akretion (http://www.akretion.com). All Rights Reserved
@@ -23,19 +23,21 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class account_move(models.Model):
     _inherit = "account.move"
 
-    to_be_reversed = fields.Boolean('To Be Reversed', help='Check this box if your entry has to be'
-                 'reversed at the end of period.')
-    reversal_id =  fields.Many2one(
-            'account.move',
-            'Reversal Entry',
-            ondelete='set null',
-            readonly=True)
+    to_be_reversed = fields.Boolean(
+        'To Be Reversed',
+        help='Check this box if your entry has to be'
+        'reversed at the end of period.')
+    reversal_id = fields.Many2one(
+        'account.move',
+        'Reversal Entry',
+        ondelete='set null',
+        readonly=True)
 
     def _move_reversal(self, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
@@ -57,32 +59,34 @@ class account_move(models.Model):
         period_obj = self.env['account.period']
 
         if not reversal_period_id:
-            reversal_period_id = period_obj.with_context(company_id=self.company_id.id,\
+            reversal_period_id = period_obj.with_context(
+                company_id=self.company_id.id,
                 account_period_prefer_normal=True).find(reversal_date)[0]
         if not reversal_journal_id:
             reversal_journal_id = self.journal_id.id
 
-        if self.env['account.journal'].browse([reversal_journal_id]).company_id != self.company_id:
-            raise Warning('Wrong company Journal is %s but we have %s' % (reversal_journal_id.company_id.name, self.company_id.name))
+        if self.env['account.journal'].browse([
+                reversal_journal_id]).company_id != self.company_id:
+            raise Warning('Wrong company Journal is %s but we have %s' % (
+                reversal_journal_id.company_id.name, self.company_id.name))
         if reversal_period_id.company_id != self.company_id:
-            raise Warning('Wrong company Period is %s but we have %s' % (reversal_journal_id.company_id.name, self.company_id.name))
-        #if self.env['account.account'].browse([self.account_id]).company_id != self.company_id:
-        #    raise Warning('Wrong company Account is %s but we have %s' % (reversal_journal_id.company_id.name, self.company_id.name))
+            raise Warning('Wrong company Period is %s but we have %s' % (
+                reversal_journal_id.company_id.name, self.company_id.name))
 
         reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
         reversal_move = self.copy(default={
-                                        'company_id' : self.company_id.id, # TODO SERIOUS ODOO BUG I'D SAY
-                                         'date': reversal_date,
-                                         'period_id': reversal_period_id.id,
-                                         'ref': reversal_ref,
-                                         'journal_id': reversal_journal_id,
-                                         'to_be_reversed': False,
-                                     })
+            'company_id': self.company_id.id,  # TODO SERIOUS ODOO BUG I'D SAY
+            'date': reversal_date,
+            'period_id': reversal_period_id.id,
+            'ref': reversal_ref,
+            'journal_id': reversal_journal_id,
+            'to_be_reversed': False,
+        })
 
         self.write(
-                   {'reversal_id': reversal_move.id,
-                    # ensure to_be_reversed is true if ever it was not
-                    'to_be_reversed': True})
+            {'reversal_id': reversal_move.id,
+             # ensure to_be_reversed is true if ever it was not
+             'to_be_reversed': True})
 
         for reversal_move_line in reversal_move.line_id:
             reversal_ml_name = ' '.join(
@@ -101,8 +105,9 @@ class account_move(models.Model):
         reversal_move.validate()
         return reversal_move
 
-    def create_reversals(self, reversal_date, reversal_period_id=False, reversal_journal_id=False,
-                        move_prefix=False, move_line_prefix=False):
+    def create_reversals(self, reversal_date, reversal_period_id=False,
+                         reversal_journal_id=False,
+                         move_prefix=False, move_line_prefix=False):
         """
         Create the reversal of one or multiple moves
 
