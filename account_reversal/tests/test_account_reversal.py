@@ -20,12 +20,10 @@
 #
 ##############################################################################
 
-__author__ = 'tbri'
-
-from datetime import datetime
-
 from openerp.tests import common
 from openerp import fields
+from datetime import datetime
+
 
 
 class test_account_reversal(common.TransactionCase):
