@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # #############################################################################
 #
-#    Account partner required module for OpenERP
+# Account partner required module for OpenERP
 #    Copyright (C) 2014 Acsone (http://acsone.eu).
 #    @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
 #
@@ -23,7 +23,6 @@
 from openerp.tests import common
 from openerp import fields
 from datetime import datetime
-
 
 
 class test_account_reversal(common.TransactionCase):
@@ -74,8 +73,8 @@ class test_account_reversal(common.TransactionCase):
                 'credit': 0,
                 'account_id': account2.id,
                 'company_id': company_id,
-                'partner_id': self.ref('base.res_partner_1') if
-                with_partner else False
+                'partner_id': self.ref('base.res_partner_1')
+                if with_partner else False
             }
         )
         return move_line_id
@@ -83,15 +82,18 @@ class test_account_reversal(common.TransactionCase):
     def test_reverse(self):
         move_line = self._create_move(with_partner=False)
         move = move_line.move_id
+        company_id = self.env.ref('base.main_company').id
+        account1 = self.env['account.account'].search(
+            [('company_id', '=', company_id), ('type', '=', 'other')])[0]
         movestr = ''.join(['%.2f%.2f%s' % (x.debit, x.credit,
-                                           x.account_id.code)
+                                           x.account_id == account1 and 'aaaa' or 'bbbb')
                            for x in move.line_id])
-        self.assertEqual(movestr, '100.000.0012300.00100.001200')
+        self.assertEqual(movestr, '100.000.00bbbb0.00100.00aaaa')
         yesterday_date = datetime(year=2015, month=3, day=3)
         yesterday = fields.Date.to_string(yesterday_date)
         reversed_move = move.create_reversals(yesterday)
         movestr_reversed = ''.join(
             ['%.2f%.2f%s' % (x.debit, x.credit,
-                             x.account_id.code)
+                             x.account_id == account1 and 'aaaa' or 'bbbb')
              for x in reversed_move.line_id])
-        self.assertEqual(movestr_reversed, '0.00100.001230100.000.001200')
+        self.assertEqual(movestr_reversed, '0.00100.00bbbb100.000.00aaaa')
