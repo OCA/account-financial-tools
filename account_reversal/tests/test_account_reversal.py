@@ -86,7 +86,8 @@ class test_account_reversal(common.TransactionCase):
         account1 = self.env['account.account'].search(
             [('company_id', '=', company_id), ('type', '=', 'other')])[0]
         movestr = ''.join(['%.2f%.2f%s' % (x.debit, x.credit,
-                                           x.account_id == account1 and 'aaaa' or 'bbbb')
+                                           x.account_id == account1 and
+                                           'aaaa' or 'bbbb')
                            for x in move.line_id])
         self.assertEqual(movestr, '100.000.00bbbb0.00100.00aaaa')
         yesterday_date = datetime(year=2015, month=3, day=3)
