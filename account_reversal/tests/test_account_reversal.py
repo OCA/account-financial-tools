@@ -24,8 +24,8 @@ from openerp.tests import common
 from openerp import fields
 from datetime import datetime
 
-
 class test_account_reversal(common.TransactionCase):
+
     def setUp(self):
         super(test_account_reversal, self).setUp()
         self.move_obj = self.env['account.move']
