@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #
 #    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2014-now Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -31,8 +31,8 @@ class account_invoice(orm.Model):
 
     def action_number(self, cr, uid, ids, context=None):
         super(account_invoice, self).action_number(cr, uid, ids, context)
-        asset_obj = self.pool.get('account.asset.asset')
-        asset_line_obj = self.pool.get('account.asset.depreciation.line')
+        asset_obj = self.pool['account.asset.asset']
+        asset_line_obj = self.pool['account.asset.depreciation.line']
         for inv in self.browse(cr, uid, ids):
             move = inv.move_id
             assets = [aml.asset_id for aml in
@@ -73,9 +73,9 @@ class account_invoice(orm.Model):
                 res['asset_category_id'] = x['asset_category_id']
         return res
 
-    def inv_line_characteristic_hashcode(self, invoice, invoice_line):
+    def inv_line_characteristic_hashcode(self, invoice_line):
         res = super(account_invoice, self).inv_line_characteristic_hashcode(
-            invoice, invoice_line)
+            invoice_line)
         res += '-%s' % invoice_line.get('asset_category_id', 'False')
         return res
 
@@ -102,7 +102,7 @@ class account_invoice_line(orm.Model):
             cr, uid, ids, product_id,
             partner_id, inv_type, fposition_id, account_id)
         if account_id:
-            asset_category = self.pool.get('account.account').browse(
+            asset_category = self.pool['account.account'].browse(
                 cr, uid, account_id).asset_category_id
             if asset_category:
                 vals = {'asset_category_id': asset_category.id}
@@ -118,5 +118,3 @@ class account_invoice_line(orm.Model):
         if line.asset_category_id:
             res['asset_category_id'] = line.asset_category_id.id
         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
