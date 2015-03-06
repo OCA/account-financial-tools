@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Database Integrity module for OpenERP
-#    Copyright (C) 2014 GRAP (http://www.grap.coop)
+#    Product - Taxes Group module for Odoo
+#    Copyright (C) 2014 -Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -51,7 +51,8 @@ class TestProductTaxesGroup(TransactionCase):
 
     # Test Section
     def test_01_change_group(self):
-        """Test if the behaviour when when we change tax group for products."""
+        """Test the change of tax group of product when we use the wizard
+        to change all products from a tax group to another."""
         cr, uid = self.cr, self.uid
         wctg_id = self.wctg_obj.create(cr, uid, {
             'old_tax_group_id': self.tg1_id, 'new_tax_group_id': self.tg2_id})
@@ -62,7 +63,7 @@ class TestProductTaxesGroup(TransactionCase):
             "Tax Group change has failed for product.")
 
     def test_02_check_coherent_vals_tax_group_exist(self):
-        """Test if the behaviour of the function product.template
+        """Test the behaviour of the function product.template
         check_coherent_vals() when the combination exist."""
         cr, uid = self.cr, self.uid
         vals = {
@@ -87,7 +88,7 @@ class TestProductTaxesGroup(TransactionCase):
             "Recovery of Correct Tax Group failed during update.")
 
     def test_03_check_coherent_vals_tax_group_doesnt_exist(self):
-        """Test if the behaviour of the function product.template
+        """Test the behaviour of the function product.template
         check_coherent_vals() when the combination doesn't exist."""
         cr, uid = self.cr, self.uid
         vals = {
@@ -104,7 +105,8 @@ class TestProductTaxesGroup(TransactionCase):
             "New combination must create new Tax Group.")
 
     def test_04_update_tax_group(self):
-        """Test if changing a Tax Group change the product."""
+        """Test if changing a Tax Group of a product correctly changes
+        the product taxes."""
         cr, uid = self.cr, self.uid
         self.tg_obj.write(cr, uid, [self.tg1_id], {
             'customer_tax_ids': [[6, 0, [self.at_sale_1_id]]]})

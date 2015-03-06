@@ -36,7 +36,7 @@ class product_template(Model):
             " This field is required. If you dont find the correct Tax"
             " Group, Please create a new one or ask to your account"
             " manager if you don't have the access right."),
-        }
+    }
 
     def check_coherent_vals(self, cr, uid, ids, vals, context=None):
         tg_obj = self.pool['tax.group']

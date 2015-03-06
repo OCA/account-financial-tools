@@ -23,35 +23,36 @@
 {
     'name': 'Product - Taxes Group',
     'summary': 'Simplify taxes management for products with Taxes Group',
-    'version': '0.1',
+    'version': '0.2',
     'category': 'product',
     'description': """
-Simplify taxes management for products
-======================================
+Simplify taxes management for products with Taxes Group
+=======================================================
 
 Functionality:
 --------------
-    * Add a new light concept 'tax_group' to associate possible supplier"""
-    """ and sale taxes;
-    * Make more usable taxes selection in product view. The user has now the"""
-    """ possibility to select a tax group, instead of select manually all"""
-    """ the taxes;
-    * Prevent users to select incompatible purchase and supplier taxes."""
-    """ French Exemple: A product can not be configured with:
+    * Add a new light concept 'tax_group' to associate possible supplier
+      and sale taxes;
+    * Make more usable taxes selection in product view. The user has now the
+      possibility to select a tax group, instead of select manually all
+      the taxes;
+    * Prevent users to select incompatible purchase and supplier taxes.
+      French Exemple: A product can not be configured with:
         * Supplier Taxes: 5.5 %;
         * Sale Taxes: 20%;
-    * Provides the possibility to the account manager to change incorrect"""
-    """ parameters massively;
+    * Provides the possibility to the account manager to change incorrect
+      parameters massively;
 
 Technical Information:
 ----------------------
-    * Install this module will create 'tax_group' for each existing"""
-    """ combination. Make sure that the user who install the module is"""
-    """ SUPERUSER_ID or is member of account.group_account_manager;
-    * In the same way, import products will create tax_group if combination"""
-    """ doesn't exist and will fail if right access is not sufficient."""
-    """ A solution is to provide tax_group_id during the import, instead of"""
-    """ Providing taxes_id and purchase_taxes_id fields;
+    * Install this module will create 'tax_group' for each existing
+      combination.
+    * In the same way, import products will create tax_group if combination
+      doesn't exist and will fail if right access is not sufficient. Make sure
+      that the user who realize the import is SUPERUSER_ID or is member of
+      account.group_account_manager;
+      An alternative solution is to provide tax_group_id during the import,
+      instead of providing taxes_id and purchase_taxes_id fields;
 
 Copyright, Authors and Licence:
 -------------------------------
