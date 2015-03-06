@@ -1,0 +1,25 @@
+#
+# This list is used by git-shortlog to fix a few botched name translations
+# in the git archive, either because the author's full name was messed up
+# and/or not always written the same way, making contributions from the
+# same person appearing not to be so.
+#
+
+Alexandre Fayolle <alexandre.fayolle@camptocamp.com>
+Alexis Delattre <alexis.delattre@akretion.com>
+Guewen Baconnier <guewen.baconnier@camptocamp.com>
+Joaquin Gutierrez <joaquing.pedrosa@gmail.com>
+Leonardo Pistone <leonardo.pistone@camptocamp.com>
+Leonardo Pistone <leonardo.pistone@camptocamp.com> <leonardo.pistoner@camptocamp.com>
+Lionel Sausin <ls@numerigraphe.com>
+Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+Luc Demeyer <luc.demeyer@noviat.be>
+Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
+Nicolas Bessi <nicolas.bessi@camptocamp.com>
+Pedro Baeza <pedro.baeza@serviciosbaeza.com>
+Pedro Baeza <pedro.baeza@serviciosbaeza.com> <pedro.baeza@gmail.com>
+Romain Deheele <romain.deheele@camptocamp.com>
+Stéphane Bidoul <stephane.bidoul@acsone.eu>
+Vincent Renaville <vincent.renaville@camptocamp.com>
+Yannick Vaucher <yannick.vaucher@camptocamp.com>
+Yann Papouin <yann.papouin@gmail.com>

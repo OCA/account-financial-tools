@@ -10,6 +10,7 @@ body {
 
 .custom_text {
     font-family: helvetica;
+    text-align: justify;
     font-size: 12px;
 }
 
@@ -96,10 +97,23 @@ table {
 }
 
 .address .recipient {
-    font-size: 13px;
-    margin-right: 120px;
-    margin-left: 350px;
-    float: right;
+    font-size: 12px;
+    position: absolute;
+    border-collapse: collapse;
+    top: 0mm;
+    left: 115mm;
+    width: 80mm;
+    text-wrap: normal;
+}
+
+.address .date_city {
+    font-size: 12px;
+    position: absolute;
+    border-collapse: collapse;
+    top: 30mm;
+    left: 115mm;
+    width: 80mm;
+    text-wrap: normal;
 }
 
 
@@ -136,17 +150,22 @@ tr.line {
 
     %for comm in objects :
     <% setLang(comm.get_contact_address().lang) %>
+    <%from datetime import date %>
     <div class="address">
-        <table class="recipient">
+        <table class="recipient" width="100%">
           <%
              add = comm.get_contact_address()
           %>
             %if comm.partner_id.id == add.id:
-              <tr><td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td></tr>
+              <tr>
+                <td class="name">${comm.partner_id.title and comm.partner_id.title.name or ''} ${comm.partner_id.name }</td>
+              </tr>
               <% address_lines = comm.partner_id.contact_address.split("\n") %>
 
             %else:
-              <tr><td class="name">${comm.partner_id.name or ''}</td></tr>
+              <tr>
+                <td class="name">${comm.partner_id.name or ''}</td>
+              </tr>
               <tr><td>${add.title and add.title.name or ''} ${add.name}</td></tr>
               <% address_lines = add.contact_address.split("\n")[1:] %>
             %endif
@@ -155,6 +174,12 @@ tr.line {
                 <tr><td>${part}</td></tr>
                 %endif
             %endfor
+           </table>
+        <br/>
+        <table class="date_city" width="100%">
+            <tr>
+                <td>${company.city}, ${formatLang(str(date.today()), date=True)}</td>
+            </tr>
         </table>
         <br/>
         <br/>
@@ -168,15 +193,18 @@ tr.line {
     <div>
 
       <h3 style="clear: both; padding-top: 20px;">
-          ${_('Reminder')}: ${comm.current_policy_level.name or '' }
+          ${comm.current_policy_level.name or '' }
       </h3>
 
-      <p>${_('Dear')},</p>
+      
       <p class="custom_text" width="95%">${comm.current_policy_level.custom_text.replace('\n', '<br />')}</p>
 
       <br/>
       <br/>
       <p><b>${_('Summary')}<br/></b></p>
+      <%
+        balance_due_per_currency = {}
+      %>
       <table class="basic_table" style="width: 100%;">
       <tr>
         <th width="200">${_('Invoice number')}</th>
@@ -204,6 +232,23 @@ tr.line {
         <td class="amount">${line.amount_due}</td>
         <td class="amount">${line.balance_due}</td>
         <td class="amount">${line.currency_id.name or comm.company_id.currency_id.name}</td>
+      </tr>
+      <%
+        currency = line.currency_id.name or comm.company_id.currency_id.name
+        if currency in balance_due_per_currency:
+            balance_due_per_currency[currency] += line.balance_due
+        else:
+            balance_due_per_currency[currency] = line.balance_due
+      %>
+%endfor
+      </table>
+      <br/>
+      <table class="list_table" style="width: 100%;">
+%for currency, balance_due in balance_due_per_currency.iteritems():
+      <tr>
+      <td style="width: 78%; text-align: right"><b>${_('Sub-total')}</b></td>
+      <td style="width: 13%; text-align: right"><b>${balance_due}</b></td>
+      <td style="width: 9%; text-align: right"><b>${currency}</b></td>
       </tr>
 %endfor
       </table>

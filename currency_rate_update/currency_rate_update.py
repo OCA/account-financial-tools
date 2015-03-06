@@ -177,7 +177,7 @@ class Currency_rate_update(osv.Model):
             cron_id = cron_obj.create(cr, uid, self.cron, context)
         return cron_id
 
-    def save_cron(self, cr, uid, datas, context={}):
+    def save_cron(self, cr, uid, datas, context=None):
         """save the cron config data should be a dict"""
         cron_id = self.get_cron_id(cr, uid, context)
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
@@ -728,6 +728,7 @@ class Banxico_getter(Curreny_getter_interface):
             self.updated_currency[curr] = rate
             logger.debug("Rate retrieved : %s = %s %s" %
                          (main_currency, rate, curr))
+        return self.updated_currency, self.log_info
 
 
 # CA BOC #####   Bank of Canada   #############################################

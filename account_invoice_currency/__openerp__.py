@@ -24,7 +24,7 @@
 {
     'name': "Company currency in invoices",
     'version': "1.0",
-    'author': "Zikzakmedia SL",
+    'author': "Zikzakmedia SL,Odoo Community Association (OCA)",
     'website': "http://www.zikzakmedia.com",
     'category': "Localisation / Accounting",
     'contributors': ['Joaquín Gutierrez'],

@@ -20,7 +20,7 @@
 ##############################################################################
 {'name': 'Credit control dunning fees',
  'version': '0.1.0',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Accounting',
  'complexity': 'normal',
@@ -61,7 +61,8 @@ Support of fees price list
  'website': 'http://www.camptocamp.com',
  'data': ['view/policy_view.xml',
           'view/line_view.xml',
-          'report/report.xml'],
+          'report/report.xml',
+          'security/ir.model.access.csv'],
  'demo': [],
  'test': [],
  'installable': True,

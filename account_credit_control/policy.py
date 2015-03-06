@@ -336,8 +336,8 @@ class CreditControlPolicyLevel(orm.Model):
     # ----- sql time related methods ---------
 
     def _net_days_get_boundary(self):
-        return " (mv_line.date_maturity + %(delay)s)::date <= "
-        "date(%(controlling_date)s)"
+        return (" (mv_line.date_maturity + %(delay)s)::date <= "
+                "date(%(controlling_date)s)")
 
     def _end_of_month_get_boundary(self):
         return ("(date_trunc('MONTH', (mv_line.date_maturity + %(delay)s))+"

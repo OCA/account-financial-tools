@@ -1,0 +1,236 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_check_deposit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-21 10:01+0000\n"
+"PO-Revision-Date: 2013-02-21 10:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/account_deposit.py:76
+#, python-format
+msgid "You cannot modify a posted entry of this journal.\n"
+"First you should set the journal to allow cancelling entries."
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:58
+msgid "Beneficiary"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Group By..."
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.actions.report.xml,name:account_check_deposit.check_deposit_webkit
+msgid "WebKit Checks Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:79
+msgid "Designation"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,state:0
+msgid "Status"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:78
+msgid "Description"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.move.line,check_deposit_id:0
+msgid "Check Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:65
+msgid "RIB Key"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,deposit_date:0
+#: report:addons/account_check_deposit/report/check_deposit.mako:53
+msgid "Deposit Date"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:63
+msgid "Account to crediting"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:76
+msgid "Payment Date"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Date"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Total Credit"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,bank_id:0
+msgid "Bank"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,name:0
+msgid "Name"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Checks Deposit Search"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:account.account.type,name:account_check_deposit.data_account_type_received_check
+msgid "Recieved Checks"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+#: report:addons/account_check_deposit/report/check_deposit.mako:49
+msgid "Deposit N°"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Total Debit"
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/account_deposit.py:76
+#, python-format
+msgid "Error!"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:80
+msgid "Amount"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+#: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
+#: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
+msgid "Checks Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,total_amount:0
+msgid "total amount"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,partner_id:0
+msgid "Partner"
+msgstr ""
+
+#. module: account_check_deposit
+#: selection:account.check.deposit,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Validate Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+#: field:account.check.deposit,check_payment_ids:0
+#: report:addons/account_check_deposit/report/check_deposit.mako:70
+msgid "Check Payments"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:41
+msgid "Deposit Slip of Checks(\\u20acuros)"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:55
+msgid "Bank Code"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:77
+msgid "Reference"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_check_deposit
+msgid "Account Check Deposit"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:60
+msgid "Office Code"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Check Payment"
+msgstr ""
+
+#. module: account_check_deposit
+#: selection:account.check.deposit,state:0
+msgid "Done"
+msgstr ""
+
+#. module: account_check_deposit
+#: view:account.check.deposit:0
+msgid "Cancel"
+msgstr ""
+
+#. module: account_check_deposit
+#: selection:account.check.deposit,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: account_check_deposit
+#: report:addons/account_check_deposit/report/check_deposit.mako:99
+msgid "Total:"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,move_id:0
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,journal_id:0
+msgid "Journal"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+

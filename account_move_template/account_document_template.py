@@ -63,7 +63,7 @@ class account_document_template(orm.Model):
                                        self._uid,
                                        self._current_template_id,
                                        line_number)
-        if re.match('L\( *' + str(line_number) + ' *\)', line.python_code):
+        if re.match(r'L\( *' + str(line_number) + r' *\)', line.python_code):
             raise orm.except_orm(
                 _('Error'),
                 _('Line %s can\'t refer to itself') % str(line_number)
