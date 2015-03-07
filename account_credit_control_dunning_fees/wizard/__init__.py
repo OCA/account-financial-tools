@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+#
 ##############################################################################
 #
-#    Author: Nicolas Bessi
-#    Copyright 2014 Camptocamp SA
+#     Authors: Adrien Peiffer
+#    Copyright (c) 2015 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,5 +19,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import model
-from . import wizard
+
+from . import credit_control_communication
