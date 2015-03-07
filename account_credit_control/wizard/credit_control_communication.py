@@ -68,17 +68,25 @@ class CreditCommunication(models.TransientModel):
     total_invoiced = fields.Float(string='Total Invoiced',
                                   compute='_compute_total')
 
-    total_due = fields.Float(string='Total Invoiced',
+    total_due = fields.Float(string='Total Due',
                              compute='_compute_total')
+
+    @api.model
+    def _get_total(self):
+        amount_field = 'credit_control_line_ids.amount_due'
+        return sum(self.mapped(amount_field))
+
+    @api.model
+    def _get_total_due(self):
+        balance_field = 'credit_control_line_ids.balance_due'
+        return sum(self.mapped(balance_field))
 
     @api.depends('credit_control_line_ids',
                  'credit_control_line_ids.amount_due',
                  'credit_control_line_ids.balance_due')
     def _compute_total(self):
-        amount_field = 'credit_control_line_ids.amount_due'
-        balance_field = 'credit_control_line_ids.balance_due'
-        self.total_invoiced = sum(self.mapped(amount_field))
-        self.total_due = sum(self.mapped(balance_field))
+        self.total_invoiced = self._get_total()
+        self.total_due = self._get_total_due()
 
     @api.model
     @api.returns('self', lambda value: value.id)
