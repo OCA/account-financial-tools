@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2013-2015 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,6 +22,8 @@
 
 from openerp.osv import orm
 from lxml import etree
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class account_move_line(orm.Model):
@@ -41,3 +43,22 @@ class account_move_line(orm.Model):
                     del node.attrib['editable']
             res['arch'] = etree.tostring(doc)
         return res
+
+    def search(self, cr, uid, args, offset=0, limit=None, order=None,
+               context=None, count=False):
+        if context and 'account_move_line_search_extension' in context:
+            ana_obj = self.pool['account.analytic.account']
+            for arg in args:
+                if arg[0] == 'analytic_account_id':
+                    ana_dom = ['|',
+                               ('name', 'ilike', arg[2]),
+                               ('code', 'ilike', arg[2])]
+                    ana_ids = ana_obj.search(
+                        cr, uid, ana_dom, context=context)
+                    ana_ids = ana_obj.search(
+                        cr, uid, [('id', 'child_of', ana_ids)])
+                    arg[2] = ana_ids
+                    break
+        return super(account_move_line, self).search(
+            cr, uid, args, offset=offset, limit=limit, order=order,
+            context=context, count=count)

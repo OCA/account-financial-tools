@@ -18,5 +18,16 @@
         groups="account.group_account_user"
         />
 
+    <record id="amlse_view_move_line_tree" model="ir.ui.view">
+      <field name="name">amlse.view.move.line.tree</field>
+      <field name="model">account.move.line</field>
+      <field name="inherit_id" ref="account.view_move_line_tree"/>
+      <field name="arch" type="xml">
+        <field name="analytic_account_id" position="attributes">
+          <attribute name="invisible">False</attribute>
+        </field>
+      </field>
+    </record>
+
   </data>
 </openerp>

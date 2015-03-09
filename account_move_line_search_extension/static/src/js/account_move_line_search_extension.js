@@ -1,6 +1,4 @@
 openerp.account_move_line_search_extension = function (instance) {
-    var _t = instance.web._t,
-        _lt = instance.web._lt;
     var QWeb = instance.web.qweb;
 
     instance.account_move_line_search_extension = {};
@@ -9,22 +7,29 @@ openerp.account_move_line_search_extension = function (instance) {
     instance.account_move_line_search_extension.ListSearchView = instance.web.ListView.extend({
 
         init: function() {
+            var self = this;
             this._super.apply(this, arguments);
             this.journals = [];
             this.current_account = null;
+            this.current_analytic_account = null;
             this.current_partner = null;
             this.current_journal = null;
             this.current_period = null;
             this.options.addable = false;
+            this.set_user_groups();
         },
 
-        start:function(){
+        start: function(){
             var tmp = this._super.apply(this, arguments);
             var self = this;
-            this.$el.parent().prepend(QWeb.render('AccountMoveLineSearchExtension', {widget: this}));
+            this.$el.parent().prepend(QWeb.render('AccountMoveLineSearchExtension', self.groups_dict));
 
             this.$el.parent().find('.oe_account_select_account').change(function() {
                     self.current_account = this.value === '' ? null : this.value;
+                    self.do_search(self.last_domain, self.last_context, self.last_group_by);
+                });
+             this.$el.parent().find('.oe_account_select_analytic_account').change(function() {
+                    self.current_analytic_account = this.value === '' ? null : this.value;
                     self.do_search(self.last_domain, self.last_context, self.last_group_by);
                 });
             this.$el.parent().find('.oe_account_select_partner').change(function() {
@@ -42,17 +47,35 @@ openerp.account_move_line_search_extension = function (instance) {
                 });
             this.on('edit:after', this, function () {
                 self.$el.parent().find('.oe_account_select_account').attr('disabled', 'disabled');
+                self.$el.parent().find('.oe_account_select_analytic_account').attr('disabled', 'disabled');
                 self.$el.parent().find('.oe_account_select_partner').attr('disabled', 'disabled');
                 self.$el.parent().find('.oe_account_select_journal').attr('disabled', 'disabled');
                 self.$el.parent().find('.oe_account_select_period').attr('disabled', 'disabled');
             });
             this.on('save:after cancel:after', this, function () {
                 self.$el.parent().find('.oe_account_select_account').removeAttr('disabled');
+                self.$el.parent().find('.oe_account_select_analytic_account').removeAttr('disabled');
                 self.$el.parent().find('.oe_account_select_partner').removeAttr('disabled');
                 self.$el.parent().find('.oe_account_select_journal').removeAttr('disabled');
                 self.$el.parent().find('.oe_account_select_period').removeAttr('disabled');
             });
             return tmp;
+        },
+
+        set_user_groups: function() {
+            var self = this;
+            var result = {};
+            var action_context = this.dataset.get_context().__contexts[1];
+            _.each(action_context, function(v,k) {
+                //console.log('init, k=', k, 'v=', v);
+                if (k[v] && (k.slice(0, 6) === "group_")) {
+                    result[k] = true;
+                }
+                else {
+                    result[k] = false;
+                };
+            });
+            self.groups_dict = result;
         },
 
         do_search: function(domain, context, group_by) {
@@ -83,6 +106,7 @@ openerp.account_move_line_search_extension = function (instance) {
             var self = this;
             var domain = [];
             if (self.current_account) domain.push(['account_id.code', 'ilike', self.current_account]);
+            if (self.current_analytic_account) domain.push(['analytic_account_id', 'in', self.current_analytic_account]); //cf. def search
             if (self.current_partner) domain.push(['partner_id.name', 'ilike', self.current_partner],'|',['partner_id.parent_id','=',false],['partner_id.is_company','=',true]);
             if (self.current_journal) domain.push(['journal_id', '=', self.current_journal]);
             if (self.current_period) domain.push('|',['period_id.code', 'ilike', self.current_period],['period_id.name', 'ilike', self.current_period]);
