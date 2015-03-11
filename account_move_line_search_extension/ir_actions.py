@@ -37,7 +37,7 @@ class ir_actions_act_window(models.Model):
             "AND module = %s AND name = %s ",
             (module, xml_id))
         res = cr.fetchone()
-        self._amlse_act_id = res[0]
+        self._amlse_act_id = res and res[0]
         super(ir_actions_act_window, self).__init__(pool, cr)
 
     def _amlse_add_groups(self, cr, uid, context):
