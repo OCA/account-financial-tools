@@ -5,7 +5,7 @@ This module provides a wizard to post many Journal Entries in batch. it
 uses the queue system introduced by the OpenERP Connector to handle a
 big quantity of moves in batch.
 
-The module account_default_draft_move introdoces a workflow where the
+The module account_default_draft_move introduces a workflow where the
 Journal Entries are always entered in OpenERP in draft state, and the
 posting happens later, for example at the end of the period. The core
 account module provides a wizard to post all the moves in the period,
