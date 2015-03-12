@@ -16,7 +16,7 @@ virtualenv:
 install:
   - git clone https://github.com/OCA/reporting-engine ${HOME}/reporting-engine -b ${VERSION}
   - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  #- git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
+  - git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly ${VERSION}
 
