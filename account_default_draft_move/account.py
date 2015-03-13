@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 
-from openerp.osv import orm, osv, fields
+from openerp.osv import orm, osv
 from tools.translate import _
 
 
@@ -43,12 +43,6 @@ class AccountInvoice(orm.Model):
 
 class AccountMove(orm.Model):
     _inherit = 'account.move'
-
-    _columns = {
-        'update_posted': fields.related(
-            'journal_id', 'update_posted', type='boolean',
-            string='Allow Cancelling Entries', readonly=True),
-    }
 
     def button_cancel(self, cr, uid, ids, context=None):
         """ We rewrite function button_cancel, to allow invoice or bank
