@@ -8,12 +8,7 @@
       <field name="arch" type="xml">
         <data>
           <button name="button_validate" position="replace"/>
-          <button name="button_cancel" position="after">
-            <field name="update_posted" invisible="1"/>
-          </button>
-          <button name="button_cancel" position="attributes">
-            <attribute name="attrs">{'invisible': ['|', ('update_posted', '=', False)]}</attribute>
-          </button>
+          <button name="button_cancel" position="replace"/>
         </data>
       </field>
     </record>
