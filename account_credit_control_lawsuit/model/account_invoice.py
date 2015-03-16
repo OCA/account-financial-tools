@@ -31,6 +31,7 @@ class AccountInvoice(models.Model):
     lawsuit_step_id = fields.Many2one(
         comodel_name='account.invoice.lawsuit.step',
         string='Lawsuit Step',
+        copy=False,
     )
 
     @api.one
