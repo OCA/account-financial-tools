@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-20 14:11+0000\n"
-"PO-Revision-Date: 2015-01-05 20:04+0100\n"
+"PO-Revision-Date: 2015-02-07 08:45+0100\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,13 +24,13 @@ msgstr "Konto"
 #. module: account_balance_line
 #: model:ir.model,name:account_balance_line.model_account_move_line
 msgid "Entry lines"
-msgstr "Buchungszeilen"
+msgstr "Buchungspositionen"
 
 #. module: account_balance_line
 #: code:_description:0
 #, python-format
 msgid "Journal Items"
-msgstr "Journaleinträge"
+msgstr "Journalposten"
 
 #. module: account_balance_line
 #: field:account.move.line,line_balance:0
@@ -41,13 +41,3 @@ msgstr "Saldo"
 #: view:account.move.line:0
 msgid "Total Balance"
 msgstr "Gesamt-Saldo"
-
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "{'group_by': 'account_id', 'invisible_balance': False}"
-msgstr "{'group_by': 'account_id', 'invisible_balance': False}"
-
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "{'invisible_balance': False}"
-msgstr "{'invisible_balance': False}"
