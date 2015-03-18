@@ -62,8 +62,19 @@ class CreditControlEmailer(models.TransientModel):
             raise api.Warning(_('No credit control lines selected.'))
 
         comm_obj = self.env['credit.control.communication']
+        comm_line_obj = self.env['credit.control.line']
 
+        partner_dict = {}
         filtered_lines = self._filter_lines(self.line_ids)
-        comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
-        comms._generate_emails()
+        for line in filtered_lines:
+            partner_dict.setdefault(line.partner_id, {})
+            partner_dict[line.partner_id].setdefault(line.level, [])
+            partner_dict[line.partner_id][line.level].append(line)
+        for partner, levels in partner_dict.iteritems():
+            for level, lines in levels.iteritems():
+                control_line_recordset = comm_line_obj.browse()
+                for line in lines:
+                    control_line_recordset += line
+                comms = comm_obj._generate_comm_from_credit_lines(control_line_recordset)
+                comms.with_context(active_model='credit.control.communication',active_ids=comms.ids)._generate_emails()
         return {'type': 'ir.actions.act_window_close'}
