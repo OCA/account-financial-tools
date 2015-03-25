@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_move_line_tree_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.tree (account_move_reconcile_helper)</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="reconcile_id" invisible="1" />
+                    <field name="reconcile_partial_id" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+        <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+            <field name="name">Journal Items Search (account_move_reconcile_helper)</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Group By']" position="inside">
+                    <filter string="Reconcile Ref" context="{'group_by':'reconcile_ref'}" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
