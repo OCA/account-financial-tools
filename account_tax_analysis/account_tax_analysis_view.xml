@@ -36,6 +36,9 @@
                     icon="terp-go-month"
                     domain="[]"
                     context="{'group_by': 'period_id'}"/>
+            <filter string="Journal"
+                    domain="[]"
+                    context="{'group_by': 'journal_id'}"/>
             <filter string="Tax account"
                     icon="terp-go-month"
                     domain="[]"
