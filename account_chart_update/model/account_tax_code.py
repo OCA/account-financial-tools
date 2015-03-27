@@ -18,10 +18,16 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp.osv import orm, fields
 
 
-class AccountTaxCode(models.Model):
+class AccountTaxCode(orm.Model):
     _inherit = 'account.tax.code'
 
-    active = fields.Boolean('Active', default=True)
+    _columns = {
+        'active': fields.boolean('Active'),
+    }
+
+    _defaults = {
+        'active': True,
+    }
