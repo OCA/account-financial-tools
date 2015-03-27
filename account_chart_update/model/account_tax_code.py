@@ -31,3 +31,13 @@ class AccountTaxCode(orm.Model):
     _defaults = {
         'active': True,
     }
+
+    def _sum(self, cr, uid, ids, name, args, context, where='',
+             where_params=()):
+        try:
+            return super(AccountTaxCode, self)._sum(
+                cr, uid, ids, name, args, context, where=where,
+                where_params=where_params)
+        except:
+            cr.rollback()
+            return dict.fromkeys(ids, 0.0)
