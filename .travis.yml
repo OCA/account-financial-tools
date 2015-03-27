@@ -1,5 +1,6 @@
 # Config file .travis.yml
 
+sudo: required
 language: python
 
 python:
