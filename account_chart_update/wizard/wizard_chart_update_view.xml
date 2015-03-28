@@ -20,12 +20,14 @@
                         </h3>
                     </group>
                     <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
-                        <field name="company_id" on_change="onchange_company_id(company_id)"
-                            attrs="{'invisible':[('state','!=','init')]}" />
+                        <field name="company_id"
+                               attrs="{'invisible':[('state','!=','init')]}"
+                                />
                         <field name="code_digits" attrs="{'invisible':[('state','!=','init')]}" />
                         <field name="chart_template_id"
-                                domain="[('visible', '=', True)]"
-                                attrs="{'invisible': [('state','!=','init')], 'required': True}"/>
+                               domain="[('visible', '=', True)]"
+                               attrs="{'invisible': [('state','!=','init')], 'required': True}"
+                                />
                         <field name="lang" attrs="{'invisible':[('state','!=','init')]}" />
                     </group>
                     <group attrs="{'invisible':[('state','!=','init')]}">
