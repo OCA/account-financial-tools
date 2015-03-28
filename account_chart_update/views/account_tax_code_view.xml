@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tax_code_form_active" model="ir.ui.view">
+            <field name="name">account.tax.code.form.active</field>
+            <field name="model">account.tax.code</field>
+            <field name="inherit_id" ref="account.view_tax_code_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="active"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
