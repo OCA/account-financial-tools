@@ -70,6 +70,7 @@ Any problem found while updating will be shown on the last step.
     "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
+        'views/account_tax_code_view.xml',
     ],
     "active": False,
     'installable': True
