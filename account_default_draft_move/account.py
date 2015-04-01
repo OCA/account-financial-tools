@@ -27,8 +27,12 @@ class AccountInvoice(models.Model):
     def action_move_create(self):
         """Set move line in draft state after creating them."""
         res = super(AccountInvoice, self).action_move_create()
+        use_journal_setting = bool(self.env['ir.config_parameter'].get_param(
+            'use_journal_setting', default=False))
         for inv in self:
             if inv.move_id:
+                if use_journal_setting and inv.move_id.journal_id.entry_posted:
+                    continue
                 inv.move_id.state = 'draft'
         return res
 
