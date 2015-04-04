@@ -39,7 +39,7 @@ class account_journal(orm.Model):
             'Refund journal',
             help="Journal for refunds/returns from this journal. "
                  "Leave empty to use same journal for normal and "
-                 "refund/return postings.",),}
+                 "refund/return postings.")}
     _defaults = {'posting_policy': 'storno'}
 
 

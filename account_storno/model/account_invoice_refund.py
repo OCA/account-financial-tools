@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
+from openerp.osv import orm
 
 
 class account_invoice(orm.Model):
