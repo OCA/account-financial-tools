@@ -1,12 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Module: account_storno
-#    Author: Goran Kliska
-#    mail:   gkliskaATgmail.com
 #    Copyright (C) 2011- Slobodni programi d.o.o., Zagreb
-#    Contributions: 
+#    Author: Goran Kliska
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -23,8 +19,8 @@
 #
 ##############################################################################
 
-from . import account 
-from . import invoice 
+from . import account
+from . import invoice
 from . import account_invoice_refund
 from . import account_voucher
 

@@ -20,38 +20,38 @@
 ##############################################################################
 
 {
-    "name" : "Account storno",
-    "description" : """
- Enables Storno Accounting, a business practice commonly used in Eastern European countries.
+    "name": "Account storno",
+    "description": """
+ Enables Storno Accounting, a business practice commonly used in Eastern
+ European countries.
  Adds new field "Posting policy" with values Storno/Contra on the Journal.
- For Storno Journals refund invoices are (usually) done in the same journal with negative *(-1) quantities.
+ For Storno Journals refund invoices are (usually) done in the same journal
+ with negative *(-1) quantities.
 
 Countries where Storno accounting is mandatory or considered as best practice:
-     Czech Republic, Poland, Romania, Russia, China, Slovakia, Slovenia, Ukraine, Croatia, Bosnia and Herzegovina, Serbia, Romania, ...
+     Czech Republic, Poland, Romania, Russia, China, Slovakia, Slovenia,
+     Ukraine, Croatia, Bosnia and Herzegovina, Serbia, ...
 
 WARNING:
- This module is managing accounting, invoices, and refund wizard. 
+ This module is managing accounting, invoices, and refund wizard.
  Other modules are required for stock, voucher, etc. storno posting.
 
 Author: Goran Kliska @ Slobodni programi d.o.o.
         http://www.slobodni-programi.hr
 Contributions:
   Ivan Vađić @ Slobodni programi d.o.o.
-  Tomislav Bošnjaković @ Storm Computers d.o.o.: Bugs report  
-
-Description:
- 
+  Tomislav Bošnjaković @ Storm Computers d.o.o.: Bugs report
 
 """,
-    "version" : "13.1",
-    "author" : "Slobodni programi d.o.o.",
-    "category" : "Localisation/Croatia",
+    "version": "13.1",
+    "author": "Slobodni programi d.o.o.",
+    "category": "Localisation/Croatia",
     "website": "http://www.slobodni-programi.hr",
-    'depends': ['account','account_voucher'],
+    'depends': ['account', 'account_voucher'],
     'init_xml': [],
-    'update_xml': ['view/account_view.xml',],
-    "demo_xml" : [],
-    'test' : [],
+    'update_xml': ['view/account_view.xml'],
+    "demo_xml": [],
+    'test': [],
     "active": False,
     "installable": True,
 }
