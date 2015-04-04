@@ -31,17 +31,17 @@ class account_journal(orm.Model):
              ('storno', 'Storno (-)'),
             ],
             'Storno or Contra', required=True,
-            help="Storno allows minus postings, Refunds are posted on the \
-                  same journal/account * (-1).\n"
-                 "Contra doesn't allow negative posting. \
-                  Refunds are posted by swaping credit and debit side."
+            help="Storno allows minus postings, Refunds are posted on the "
+                 "same journal/account * (-1).\n"
+                 "Contra doesn't allow negative posting. "
+                 "Refunds are posted by swaping credit and debit side."
                                         ),
         'refund_journal_id': fields.many2one(
             'account.journal',
             'Refund journal',
-            help="Journal for refunds/returns from this journal. \
-                  Leave empty to use same journal for normal and \
-                  refund/return postings.",
+            help="Journal for refunds/returns from this journal. "
+                  "Leave empty to use same journal for normal and "
+                  "refund/return postings.",
                                             ),
                 }
     _defaults = {
@@ -83,8 +83,8 @@ class account_move_line(orm.Model):
 
 
     _constraints = [
-        (_check_contra_minus, _('Negative credit or debit amount is not \
-                                 allowed for "contra" journal policy.'),
+        (_check_contra_minus, _("Negative credit or debit amount is not "
+                                "allowed for 'contra' journal policy."),
                                  ['journal_id']
                                ),
     ]
@@ -114,15 +114,15 @@ class account_move_line(orm.Model):
             _amount_residual,
             string='Residual Amount in Currency',
             multi="residual",
-            help="The residual amount on a receivable or payable of a journal \
-                 entry expressed in its currency (maybe different of the \
-                 company currency)."),
+            help="The residual amount on a receivable or payable of a journal "
+                 "entry expressed in its currency (maybe different of the "
+                 "company currency)."),
         'amount_residual': fields.function(
             _amount_residual,
             string='Residual Amount',
             multi="residual",
-            help="The residual amount on a receivable or payable of a journal \
-                  entry expressed in the company currency."),
+            help="The residual amount on a receivable or payable of a journal "
+                 "entry expressed in the company currency."),
     }
 
 

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1beta\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-04 12:30+0000\n"
-"PO-Revision-Date: 2012-01-04 12:30+0000\n"
+"POT-Creation-Date: 2015-04-04 12:13+0000\n"
+"PO-Revision-Date: 2015-04-04 12:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,197 +16,81 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_storno
-#: code:addons/account_storno/account_invoice_refund.py:212
-#, python-format
-msgid "Can not %s draft/proforma/cancel invoice."
-msgstr "Can not %s draft/proforma/cancel invoice."
-
-#. module: account_storno
-#: constraint:account.move.line:0
-msgid "Company must be the same for its related account and period."
-msgstr "Company must be the same for its related account and period."
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:45
-#, python-format
-msgid "No Invoice Lines !"
-msgstr "No Invoice Lines !"
-
-#. module: account_storno
-#: sql_constraint:account.journal:0
-msgid "The name of the journal must be unique per company !"
-msgstr "The name of the journal must be unique per company !"
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:62
-#, python-format
-msgid "Bad total !"
-msgstr "Bad total !"
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:73
-#, python-format
-msgid "Can not create the invoice !\n"
-"The related payment term is probably misconfigured as it gives a computed amount greater than the total invoiced amount."
-msgstr "Can not create the invoice !\n"
-"The related payment term is probably misconfigured as it gives a computed amount greater than the total invoiced amount."
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:45
-#, python-format
-msgid "Please create some invoice lines."
-msgstr "Please create some invoice lines."
-
-#. module: account_storno
-#: sql_constraint:account.model.line:0
-msgid "Wrong credit or debit value in model, they must be positive!"
-msgstr "Wrong credit or debit value in model, they must be positive!"
-
-#. module: account_storno
-#: code:addons/account_storno/account_invoice_refund.py:212
-#: code:addons/account_storno/account_invoice_refund.py:214
-#: code:addons/account_storno/invoice.py:43
-#: code:addons/account_storno/invoice.py:73
-#, python-format
-msgid "Error !"
-msgstr "Error !"
-
-#. module: account_storno
-#: model:ir.model,name:account_storno.model_account_journal
-msgid "Journal"
-msgstr "Journal"
+#: model:ir.model,name:account_storno.model_account_invoice_refund
+msgid "Invoice Refund"
+msgstr ""
 
 #. module: account_storno
 #: selection:account.journal,posting_policy:0
 msgid "Contra (debit<->credit)"
-msgstr "Contra (debit<->credit)"
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:43
-#, python-format
-msgid "Please define sequence on invoice journal"
-msgstr "Please define sequence on invoice journal"
-
-#. module: account_storno
-#: field:account.journal,refund_journal_id:0
-msgid "Invoice refund journal"
-msgstr "Invoice refund journal"
-
-#. module: account_storno
-#: selection:account.journal,posting_policy:0
-msgid "Storno (-)"
-msgstr "Storno (-)"
-
-#. module: account_storno
-#: model:ir.model,name:account_storno.model_account_move_line
-msgid "Journal Items"
-msgstr "Journal Items"
+msgstr ""
 
 #. module: account_storno
 #: constraint:account.move.line:0
-msgid "You can not create journal items on an account of type view."
-msgstr "You can not create journal items on an account of type view."
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:161
+#: code:addons/account_storno/model/account.py:86
 #, python-format
-msgid "You cannot create an invoice on a centralised journal. Uncheck the centralised counterpart box in the related journal from the configuration menu."
-msgstr "You cannot create an invoice on a centralised journal. Uncheck the centralised counterpart box in the related journal from the configuration menu."
+msgid "Negative credit or debit amount is not allowed for 'contra' journal policy."
+msgstr ""
 
 #. module: account_storno
-#: code:addons/account_storno/account_invoice_refund.py:250
-#, python-format
-msgid "No Period found on Invoice!"
-msgstr "No Period found on Invoice!"
+#: model:ir.model,name:account_storno.model_account_journal
+msgid "Journal"
+msgstr ""
 
 #. module: account_storno
-#: sql_constraint:account.model.line:0
-msgid "Wrong credit or debit value in model (Credit + Debit Must Be greater \"0\")!"
-msgstr "Wrong credit or debit value in model (Credit + Debit Must Be greater \"0\")!"
-
-#. module: account_storno
-#: model:ir.model,name:account_storno.model_account_model_line
-msgid "Account Model Entries"
-msgstr "Account Model Entries"
-
-#. module: account_storno
-#: constraint:account.move.line:0
-msgid "You can not create journal items on closed account."
-msgstr "You can not create journal items on closed account."
-
-#. module: account_storno
-#: constraint:account.journal:0
-msgid "Configuration error! The currency chosen should be shared by the default accounts too."
-msgstr "Configuration error! The currency chosen should be shared by the default accounts too."
-
-#. module: account_storno
-#: sql_constraint:account.move.line:0
-msgid "Wrong credit or debit value in accounting entry !"
-msgstr "Wrong credit or debit value in accounting entry !"
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:160
-#, python-format
-msgid "UserError"
-msgstr "UserError"
-
-#. module: account_storno
-#: sql_constraint:account.invoice:0
-msgid "Invoice Number must be unique per Company!"
-msgstr "Invoice Number must be unique per Company!"
-
-#. module: account_storno
-#: code:addons/account_storno/invoice.py:62
-#, python-format
-msgid "Please verify the price of the invoice !\n"
-"The real total does not match the computed total."
-msgstr "Please verify the price of the invoice !\n"
-"The real total does not match the computed total."
-
-#. module: account_storno
-#: model:ir.model,name:account_storno.model_account_invoice_refund
-msgid "Invoice Refund"
-msgstr "Invoice Refund"
-
-#. module: account_storno
-#: code:addons/account_storno/account_invoice_refund.py:249
-#, python-format
-msgid "Data Insufficient !"
-msgstr "Data Insufficient !"
+#: model:ir.model,name:account_storno.model_account_voucher
+msgid "Accounting Voucher"
+msgstr ""
 
 #. module: account_storno
 #: field:account.journal,posting_policy:0
 msgid "Storno or Contra"
-msgstr "Storno or Contra"
+msgstr ""
 
 #. module: account_storno
-#: constraint:account.move.line:0
-msgid "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
-msgstr "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
+#: model:ir.model,name:account_storno.model_account_voucher_line
+msgid "Voucher Lines"
+msgstr ""
 
 #. module: account_storno
-#: constraint:account.move.line:0
-msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
-msgstr "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
+#: help:account.journal,refund_journal_id:0
+msgid "Journal for refunds/returns from this journal. Leave empty to use same journal for normal and refund/return postings."
+msgstr ""
 
 #. module: account_storno
-#: code:addons/account_storno/account_invoice_refund.py:214
-#, python-format
-msgid "Can not %s invoice which is already reconciled, invoice should be unreconciled first. You can only Refund this invoice"
-msgstr "Can not %s invoice which is already reconciled, invoice should be unreconciled first. You can only Refund this invoice"
+#: selection:account.journal,posting_policy:0
+msgid "Storno (-)"
+msgstr ""
 
 #. module: account_storno
-#: sql_constraint:account.journal:0
-msgid "The code of the journal must be unique per company !"
-msgstr "The code of the journal must be unique per company !"
+#: sql_constraint:account.model.line:0
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr ""
+
+#. module: account_storno
+#: field:account.journal,refund_journal_id:0
+msgid "Refund journal"
+msgstr ""
 
 #. module: account_storno
 #: model:ir.model,name:account_storno.model_account_invoice
 msgid "Invoice"
-msgstr "Invoice"
+msgstr ""
+
+#. module: account_storno
+#: model:ir.model,name:account_storno.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+
+#. module: account_storno
+#: model:ir.model,name:account_storno.model_account_model_line
+msgid "Account Model Entries"
+msgstr ""
 
 #. module: account_storno
 #: help:account.journal,posting_policy:0
-msgid "Contra doesn't allow negative posting by swaping credit and debit side. Storno allows minus postings."
-msgstr "Contra doesn't allow negative posting by swaping credit and debit side. Storno allows minus postings."
+msgid "Storno allows minus postings, Refunds are posted on the same journal/account * (-1).\n"
+"Contra doesn't allow negative posting. Refunds are posted by swaping credit and debit side."
+msgstr ""
 
