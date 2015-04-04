@@ -28,31 +28,24 @@ class account_journal(orm.Model):
     _columns = {
         'posting_policy': fields.selection(
             [('contra', 'Contra (debit<->credit)'),
-             ('storno', 'Storno (-)'),
-            ],
+             ('storno', 'Storno (-)')],
             'Storno or Contra', required=True,
             help="Storno allows minus postings, Refunds are posted on the "
                  "same journal/account * (-1).\n"
                  "Contra doesn't allow negative posting. "
-                 "Refunds are posted by swaping credit and debit side."
-                                        ),
+                 "Refunds are posted by swaping credit and debit side."),
         'refund_journal_id': fields.many2one(
             'account.journal',
             'Refund journal',
             help="Journal for refunds/returns from this journal. "
-                  "Leave empty to use same journal for normal and "
-                  "refund/return postings.",
-                                            ),
-                }
-    _defaults = {
-        'posting_policy': 'storno',
-                }
+                 "Leave empty to use same journal for normal and "
+                 "refund/return postings.",),}
+    _defaults = {'posting_policy': 'storno'}
 
 
 class account_move_line(orm.Model):
     _inherit = "account.move.line"
 
-    
     def _auto_init(self, cr, context=None):
         result = super(account_move_line, self)._auto_init(cr, context=context)
         # Drop original constraint to fit storno posting with minus.
@@ -60,8 +53,8 @@ class account_move_line(orm.Model):
             DROP INDEX IF EXISTS account_move_line_credit_debit2;
         """)
         return result
-    
-    #Original constraints
+
+    # Original constraints
     # 'credit_debit2' - 'CHECK (credit+debit>=0)' is replaced with dummy
     # constraint that is always true.
 
@@ -81,14 +74,12 @@ class account_move_line(orm.Model):
                     return False
         return True
 
-
     _constraints = [
-        (_check_contra_minus, _("Negative credit or debit amount is not "
-                                "allowed for 'contra' journal policy."),
-                                 ['journal_id']
-                               ),
+        (_check_contra_minus,
+         _("Negative credit or debit amount is not allowed for 'contra' "
+           "journal policy."), ['journal_id']),
     ]
-    
+
     # Inherit residual function to allow amount residual according to storno
     # journals.
     def _amount_residual(self, cr, uid, ids, field_names, args, context=None):
@@ -128,17 +119,17 @@ class account_move_line(orm.Model):
 
 class account_model_line(orm.Model):
     _inherit = "account.model.line"
-    
-    
+
     def _auto_init(self, cr, context=None):
-        result = super(account_model_line, self)._auto_init(cr, context=context)
+        result = super(account_model_line, self)._auto_init(cr,
+                                                            context=context)
         # Drop original constraint to fit storno posting with minus.
         cr.execute("""
             DROP INDEX IF EXISTS account_model_line_credit_debit2;
         """)
         return result
-    
-    #Original constraints
+
+    # Original constraints
     # 'credit_debit2' - 'CHECK (credit+debit>=0)' is replaced with dummy
     # constraint that is always true.
 
