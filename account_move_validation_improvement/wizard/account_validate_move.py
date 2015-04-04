@@ -49,6 +49,7 @@ class ValidateAccountMove(orm.TransientModel):
         ids_move = obj_move.search(cr, uid, [('state', '=', 'draft'),
                                              ('journal_id', 'in', journal_ids),
                                              ('period_id', '=', period_ids)],
+                                   order='date',
                                    context=context)
         if not ids_move:
             raise osv.except_osv(

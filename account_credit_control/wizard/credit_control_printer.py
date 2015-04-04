@@ -54,7 +54,6 @@ class CreditControlPrinter(orm.TransientModel):
     }
 
     _defaults = {
-        'mark_as_sent': True,
         'line_ids': _get_line_ids,
     }
 

@@ -23,8 +23,9 @@
 """
 Script that creates large amounts of account moves on different days,
 that can be used later for testing the renumber wizard.
+
+author: Borja López Soilán (Pexego)
 """
-__author__ = "Borja López Soilán (Pexego)"
 
 import sys
 import xmlrpclib

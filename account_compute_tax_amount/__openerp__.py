@@ -22,7 +22,7 @@
     "version": "1.0",
     "depends": ["base",
                 "account"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "description": """Recompute tax_amount to avoid sign problem""",
     'website': 'http://www.camptocamp.com',
     'data': [],

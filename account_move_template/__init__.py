@@ -18,6 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_document_template
-import account_move_template
-import wizard
+from . import account_document_template
+from . import account_move_template
+from . import wizard

@@ -20,7 +20,7 @@
 ##############################################################################
 {'name': 'Credit control dunning fees',
  'version': '0.1.0',
- 'author': 'Camptocamp',
+ 'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Accounting',
  'complexity': 'normal',

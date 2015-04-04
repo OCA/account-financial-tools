@@ -24,7 +24,7 @@
     'name': 'Journal Items Search Extension',
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'Noviat',
+    'author': "Noviat,Odoo Community Association (OCA)",
     'category': 'Generic Modules',
     'description': """
 Journal Items Search Extension

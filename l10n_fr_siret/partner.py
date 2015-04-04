@@ -54,13 +54,13 @@ class Partner(orm.Model):
                     return False
             if partner.siren:
                 # Check the SIREN type, length and key
-                if (not partner.siren.isdecimal()
-                        or len(partner.siren) != 9
-                        or not _check_luhn(partner.siren)):
+                if (not partner.siren.isdecimal() or
+                        len(partner.siren) != 9 or
+                        not _check_luhn(partner.siren)):
                     return False
                 # Check the NIC key (you need both SIREN and NIC to check it)
-                if partner.nic and not _check_luhn(partner.siren
-                                                   + partner.nic):
+                if (partner.nic and
+                        not _check_luhn(partner.siren + partner.nic)):
                     return False
         return True
 
