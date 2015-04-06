@@ -107,7 +107,7 @@ class Currency_rate_update_service(osv.Model):
         )
     ]
 
-    def _check_max_delta_days(self, cr, uid, ids):
+    def _check_max_delta_days(self, cr, uid, ids, context=None):
         for company in self.read(cr, uid, ids, ['max_delta_days']):
             if company['max_delta_days'] >= 0:
                 continue
