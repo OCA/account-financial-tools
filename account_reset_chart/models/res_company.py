@@ -60,7 +60,8 @@ class Company(models.Model):
                 [('company_id', '=', self.id),
                  ('state', 'in', ('proforma', 'posted'))])
             vouchers.cancel_voucher()
-            vouchers.unlink()
+            voucher_obj.search(
+                [('company_id', '=', self.id)]).unlink()
         except KeyError:
             pass
 
