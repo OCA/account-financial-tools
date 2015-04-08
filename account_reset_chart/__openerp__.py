@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Odoo, an open source suite of business apps
-#    This module copyright (C) 2014 Therp BV (<http://therp.nl>).
+#    This module copyright (C) 2014-2015 Therp BV (<http://therp.nl>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,39 +20,13 @@
 ##############################################################################
 {
     "name": "Reset a chart of accounts",
+    "summary": ("Delete the accounting setup from an otherwise reusable "
+                "database"),
     "version": "1.0",
-    "author": "Therp BV",
-    "category": 'Partner',
-    "description": """
-Removes the current chart of accounts, including moves and journals. By
-necessity, this process also removes the company's bank accounts as they
-are linked to the company's journals and the company's payment orders
-and payment modes if the payment module is installed.
-
-No interface is provided. Please run through xmlrpc, for instance using
-erppeek:
-
-
-import erppeek
-
-host = 'localhost'
-port = '8069'
-user_pw = 'admin'
-dbname = 'openerp'
-
-client = erppeek.Client('http://%s:%s' % (host, port))
-client.login('admin', user_pw, dbname)
-wiz_id = client.create('account.reset.chart', {'company_id': 1})
-client.AccountResetChart.reset_chart([wiz_id])
-
-
-Use with caution, obviously.
-
-Compatibility
-=============
-This module is compatible with Odoo 7.0.
-""",
+    "author": "Therp BV,Odoo Community Association (OCA)",
+    "category": 'Accounting & Finance',
     "depends": [
         'account',
     ],
+    'license': 'AGPL-3'
 }
