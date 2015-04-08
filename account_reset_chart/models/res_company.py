@@ -28,6 +28,10 @@ class Company(models.Model):
 
     @api.one
     def reset_chart(self):
+        """
+        This method removes the chart of account on the company record,
+        including all the related financial transactions.
+        """
         logger = logging.getLogger('openerp.addons.account_reset_chart')
 
         def unlink_from_company(model):
