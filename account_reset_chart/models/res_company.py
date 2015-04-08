@@ -54,6 +54,17 @@ class Company(models.Model):
         statements.unlink()
 
         try:
+            voucher_obj = self.env['account.voucher']
+            logger.info('Deleting vouchers.')
+            vouchers = voucher_obj.search(
+                [('company_id', '=', self.id),
+                 ('state', 'in', ('proforma', 'posted'))])
+            vouchers.cancel_voucher()
+            vouchers.unlink()
+        except KeyError:
+            pass
+
+        try:
             self.env['payment.order']
             logger.info('Deleting payment orders.')
             self._cr.execute(
@@ -88,7 +99,7 @@ class Company(models.Model):
                 UPDATE wkf_instance
                 SET state = 'active'
                 WHERE res_type = 'account_invoice'
-                AND res_id IN %s""" % (tuple(paid_invoices.ids),))
+                AND res_id IN %s""", (tuple(paid_invoices.ids),))
             self._cr.execute(
                 """
                 UPDATE wkf_workitem
@@ -100,7 +111,7 @@ class Company(models.Model):
                     SELECT id FROM wkf_instance
                     WHERE res_type = 'account_invoice'
                     AND res_id IN %s)
-                """ % (tuple(paid_invoices.ids),))
+                """, (tuple(paid_invoices.ids),))
             paid_invoices.signal_workflow('invoice_cancel')
 
         logger.info('Dismantling invoices')
