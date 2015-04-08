@@ -122,6 +122,10 @@ PL_NBP_supported_currency_array = [
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
+# TODO: Extend supported currencies
+CR_BCCR_supported_currency_array = [
+    "CRC", "EUR"]
+
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
     'ECB_getter': ECB_supported_currency_array,
@@ -130,6 +134,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
+    'CR_BCCR_getter': CR_BCCR_supported_currency_array,
     }
 
 
@@ -194,7 +199,9 @@ class Currency_rate_update_service(models.Model):
          #  (Thailand, Malaysia, Mexico...)
          ('CA_BOC_getter', 'Bank of Canada - noon rates'),
          # Added for romanian rates
-         ('RO_BNR_getter', 'National Bank of Romania')
+         ('RO_BNR_getter', 'National Bank of Romania'),
+         # Added for costarrican rates
+         ('CR_BCCR_getter', 'Central Bank of Costa Rica')
          ],
         string="Webservice to use",
         required=True)
@@ -263,8 +270,12 @@ class Currency_rate_update_service(models.Model):
                 # We initalize the class that will handle the request
                 # and return a dict of rate
                 getter = factory.register(self.service)
-                curr_to_fetch = map(lambda x: x.name,
-                                    self.currency_to_update)
+                if self.service == 'CR_BCCR_getter':
+                    curr_to_fetch = map(lambda x: (x.name, x.indicator),
+                                        self.currency_to_update)
+                else:
+                    curr_to_fetch = map(lambda x: x.name,
+                                        self.currency_to_update)
                 res, log_info = getter.get_updated_currency(
                     curr_to_fetch,
                     main_currency.name,

@@ -39,6 +39,17 @@
                 </form>
             </field>
         </record>
-
+        <record model="ir.ui.view" id="view_currency_form">
+            <field name="name">Currency Indicator</field>
+            <field name="model">res.currency</field>
+            <field name="priority" eval="16"/>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group/group/field[@name='active']" position="after">
+                    <field name="indicator"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </openerp>
