@@ -55,7 +55,7 @@ class Company(models.Model):
 
         try:
             voucher_obj = self.env['account.voucher']
-            logger.info('Deleting vouchers.')
+            logger.info('Unlinking vouchers.')
             vouchers = voucher_obj.search(
                 [('company_id', '=', self.id),
                  ('state', 'in', ('proforma', 'posted'))])
@@ -66,7 +66,7 @@ class Company(models.Model):
 
         try:
             self.env['payment.order']
-            logger.info('Deleting payment orders.')
+            logger.info('Unlinking payment orders.')
             self._cr.execute(
                 """
                 DELETE FROM payment_line
@@ -85,7 +85,7 @@ class Company(models.Model):
         unlink_from_company('account.banking.account.settings')
         unlink_from_company('res.partner.bank')
 
-        logger.info('Undoing reconciliations')
+        logger.info('Unlinking reconciliations')
         rec_obj = self.env['account.move.reconcile']
         rec_obj.search(
             [('line_id.company_id', '=', self.id)]).unlink()
@@ -114,15 +114,14 @@ class Company(models.Model):
                 """, (tuple(paid_invoices.ids),))
             paid_invoices.signal_workflow('invoice_cancel')
 
-        logger.info('Dismantling invoices')
         inv_ids = self.env['account.invoice'].search(
             [('company_id', '=', self.id)]).ids
         if inv_ids:
+            logger.info('Unlinking invoices')
             self.env['account.invoice.line'].search(
                 [('invoice_id', 'in', inv_ids)]).unlink()
             self.env['account.invoice.tax'].search(
                 [('invoice_id', 'in', inv_ids)]).unlink()
-            logger.info('Unlinking invoices')
             self._cr.execute(
                 """
                 DELETE FROM account_invoice
