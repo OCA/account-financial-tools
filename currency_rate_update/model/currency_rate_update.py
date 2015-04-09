@@ -102,10 +102,10 @@ CH_ADMIN_supported_currency_array = [
     "USD", "UYU", "VEF", "VND", "ZAR"]
 
 ECB_supported_currency_array = [
-    "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "GBP", "HKD",
-    "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "LTL", "MXN", "MYR",
-    "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY",
-    "USD", "ZAR"]
+    "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP",
+    "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "LTL", "MXN",
+    "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB",
+    "TRY", "USD", "ZAR"]
 
 MX_BdM_supported_currency_array = [
     "ARS", "AUD", "BBD", "BMD", "BOB", "BRL", "BSD", "BZD", "CAD", "CHF",
