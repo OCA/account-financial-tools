@@ -438,6 +438,17 @@ class asset_report_xls(report_xls):
                 self._view_add(parent, assets)
         assets.append(acq)
 
+    def get_acquisition_asset_ids(self, fy):
+        cr = self.cr
+        cr.execute(
+            "SELECT id FROM account_asset_asset "
+            "WHERE date_start >= %s AND date_start <= %s"
+            "AND id IN %s AND type = 'normal' "
+            "ORDER BY date_start ASC",
+            (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
+        acq_ids = [x[0] for x in cr.fetchall()]
+        return acq_ids
+
     def _acquisition_report(self, _p, _xs, data, objects, wb):
         cr = self.cr
         uid = self.uid
@@ -460,13 +471,7 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
-            "SELECT id FROM account_asset_asset "
-            "WHERE date_start >= %s AND date_start <= %s"
-            "AND id IN %s AND type = 'normal' "
-            "ORDER BY date_start ASC",
-            (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
-        acq_ids = [x[0] for x in cr.fetchall()]
+        acq_ids = self.get_acquisition_asset_ids(fy)
 
         if not acq_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'acquisition')
@@ -555,6 +560,20 @@ class asset_report_xls(report_xls):
         row_pos = self.xls_write_row(
             ws, row_pos, row_data, row_style=self.rt_cell_style_right)
 
+    def get_active_asset_ids(self, fy):
+        cr = self.cr
+        cr.execute(
+            "SELECT id FROM account_asset_asset "
+            "WHERE date_start <= %s"
+            "AND ((date_remove IS NULL) OR "
+            "(date_remove >= %s AND date_remove <= %s)) "
+            "AND id IN %s AND type = 'normal' "
+            "ORDER BY date_start ASC",
+            (fy.date_stop, fy.date_start, fy.date_stop, tuple(self.asset_ids))
+            )
+        act_ids = [x[0] for x in cr.fetchall()]
+        return act_ids
+
     def _active_report(self, _p, _xs, data, objects, wb):
         cr = self.cr
         uid = self.uid
@@ -577,16 +596,7 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
-            "SELECT id FROM account_asset_asset "
-            "WHERE date_start <= %s"
-            "AND ((date_remove IS NULL) OR "
-            "(date_remove >= %s AND date_remove <= %s)) "
-            "AND id IN %s AND type = 'normal' "
-            "ORDER BY date_start ASC",
-            (fy.date_stop, fy.date_start, fy.date_stop, tuple(self.asset_ids))
-            )
-        act_ids = [x[0] for x in cr.fetchall()]
+        act_ids = self.get_active_asset_ids(fy)
 
         if not act_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'active')
@@ -778,6 +788,17 @@ class asset_report_xls(report_xls):
         row_pos = self.xls_write_row(
             ws, row_pos, row_data, row_style=self.rt_cell_style_right)
 
+    def get_removal_asset_ids(self, fy):
+        cr = self.cr
+        cr.execute(
+            "SELECT id FROM account_asset_asset "
+            "WHERE date_remove >= %s AND date_remove <= %s"
+            "AND id IN %s AND type = 'normal' "
+            "ORDER BY date_remove ASC",
+            (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
+        dsp_ids = [x[0] for x in cr.fetchall()]
+        return dsp_ids
+
     def _removal_report(self, _p, _xs, data, objects, wb):
         cr = self.cr
         uid = self.uid
@@ -800,13 +821,7 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
-            "SELECT id FROM account_asset_asset "
-            "WHERE date_remove >= %s AND date_remove <= %s"
-            "AND id IN %s AND type = 'normal' "
-            "ORDER BY date_remove ASC",
-            (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
-        dsp_ids = [x[0] for x in cr.fetchall()]
+        dsp_ids = self.get_removal_asset_ids(fy)
 
         if not dsp_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'removal')
