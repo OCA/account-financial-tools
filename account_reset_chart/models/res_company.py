@@ -66,20 +66,20 @@ class Company(models.Model):
             pass
 
         try:
-            self.env['payment.order']
-            logger.info('Unlinking payment orders.')
-            self._cr.execute(
-                """
-                DELETE FROM payment_line
-                WHERE order_id IN (
-                    SELECT id FROM payment_order
-                    WHERE company_id = %s);
-                """, (self.id,))
-            self._cr.execute(
-                "DELETE FROM payment_order WHERE company_id = %s;",
-                (self.id,))
+            if self.env['payment.order']:
+                logger.info('Unlinking payment orders.')
+                self._cr.execute(
+                    """
+                    DELETE FROM payment_line
+                    WHERE order_id IN (
+                        SELECT id FROM payment_order
+                        WHERE company_id = %s);
+                    """, (self.id,))
+                self._cr.execute(
+                    "DELETE FROM payment_order WHERE company_id = %s;",
+                    (self.id,))
 
-            unlink_from_company('payment.mode')
+                unlink_from_company('payment.mode')
         except KeyError:
             pass
 
