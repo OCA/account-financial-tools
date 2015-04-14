@@ -20,6 +20,7 @@
 ##############################################################################
 
 
+
 from openerp.tests import common
 from openerp import fields, _
 from datetime import datetime
