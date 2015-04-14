@@ -75,7 +75,7 @@ class account_move(models.Model):
 
         reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
         reversal_move = self.copy(default={
-            'company_id': self.company_id.id,  # TODO SERIOUS ODOO BUG I'D SAY
+            'company_id': self.company_id.id,
             'date': reversal_date,
             'period_id': reversal_period_id.id,
             'ref': reversal_ref,
