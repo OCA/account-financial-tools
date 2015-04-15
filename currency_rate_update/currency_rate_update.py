@@ -728,13 +728,13 @@ class BankOfCanadaConnection(object):
 
         # check if BOC service is running
         if self.dom.bozo and self.dom.status != 404:
-            _logger.error(
+            _logger.warn(
                 "Bank of Canada - service is down - try again later..."
             )
 
         # check if BOC sent a valid response for this currency
         if self.dom.status != 200:
-            _logger.error(
+            _logger.warn(
                 "Exchange data for %s is not reported by Bank of Canada."
                 % self.currency
             )
@@ -813,7 +813,7 @@ class BankOfCanadaGetter(CurrencyGetterInterface):
                             (main_currency, conn.exchange_rate, currency)
                         )
                     else:
-                        _logger.error(
+                        _logger.warn(
                             "Exchange data format error for Bank of Canada -"
                             "%s. Please check provider data format "
                             "and/or source code." % currency)
