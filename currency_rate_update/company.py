@@ -41,7 +41,7 @@ class res_company(orm.Model):
         return result
 
     def button_refresh_currency(self, cr, uid, ids, context=None):
-        """Refrech  the currency for all the company now"""
+        """Refresh  the currency for all the company now"""
         currency_updater_obj = self.pool.get('currency.rate.update')
         try:
             currency_updater_obj.run_currency_update(cr, uid)
@@ -50,11 +50,11 @@ class res_company(orm.Model):
         return True
 
     def on_change_auto_currency_up(self, cr, uid, id, value):
-        """handle the activation of the currecny update on compagnies.
+        """handle the activation of the currency update on companies.
         There are two ways of implementing multi_company currency,
         the currency is shared or not. The module take care of the two
         ways. If the currency are shared, you will only be able to set
-        auto update on one company, this will avoid to have unusefull cron
+        auto update on one company, this will avoid to have non-useful cron
         object running.
         If yours currency are not share you will be able to activate the
         auto update on each separated company
@@ -66,13 +66,13 @@ class res_company(orm.Model):
         else:
             return {}
         enable = self.browse(cr, uid, id).multi_company_currency_enable
-        compagnies = self.search(cr, uid, [])
+        companies = self.search(cr, uid, [])
         activate_cron = 'f'
         if not value:
-            # this statement is here beacaus we do no want to save #
+            # this statement is here because we do no want to save
             # in case of error
             self.write(cr, uid, id, {'auto_currency_up': value})
-            for comp in compagnies:
+            for comp in companies:
                 if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
                     break
@@ -83,11 +83,11 @@ class res_company(orm.Model):
             )
             return {}
         else:
-            for comp in compagnies:
+            for comp in companies:
                 if comp != id and not enable:
                     current = self.browse(cr, uid, comp)
                     if current.multi_company_currency_enable:
-                        # We ensure taht we did not have write a true value
+                        # We ensure that we did not have write a true value
                         self.write(cr, uid, id, {'auto_currency_up': False})
                         msg = ('You can not activate auto currency'
                                'update on more thant one company with this '
@@ -101,7 +101,7 @@ class res_company(orm.Model):
                             }
                         }
             self.write(cr, uid, id, {'auto_currency_up': value})
-            for comp in compagnies:
+            for comp in companies:
                 if self.browse(cr, uid, comp).auto_currency_up:
                     activate_cron = 't'
                 self.pool.get('currency.rate.update').save_cron(
@@ -112,7 +112,7 @@ class res_company(orm.Model):
                 break
             return {}
 
-    def on_change_intervall(self, cr, uid, id, interval):
+    def on_change_interval(self, cr, uid, id, interval):
         # Function that will update the cron freqeuence
         self.pool.get('currency.rate.update').save_cron(
             cr,
@@ -128,26 +128,26 @@ class res_company(orm.Model):
     _columns = {
         # Activate the currency update
         'auto_currency_up': fields.boolean(
-            'Automatical update of the currency this company'
+            'Automatic update of the currency this company'
         ),
         'services_to_use': fields.one2many(
             'currency.rate.update.service',
             'company_id',
             'Currency update services'
         ),
-        # Predifine cron frequence
+        # Predefine cron frequency
         'interval_type': fields.selection(
             [
                 ('days', 'Day(s)'),
                 ('weeks', 'Week(s)'),
                 ('months', 'Month(s)')
             ],
-            'Currency update frequence',
+            'Currency update frequency',
             help="Changing this value will "
-                 "also affect other compagnies"
+                 "also affect other companies"
         ),
         # Function field that allows to know the
-        # mutli company currency implementation
+        # multi company currency implementation
         'multi_company_currency_enable': fields.function(
             _multi_curr_enable,
             method=True,

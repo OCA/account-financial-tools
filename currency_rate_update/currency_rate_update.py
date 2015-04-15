@@ -12,7 +12,7 @@
 #     - if company_currency <> CHF, you can now update CHF via Admin.ch
 #       (same for EUR with ECB webservice and PLN with NBP webservice)
 #     For more details, see Launchpad bug #645263
-#     - mecanism to check if rates given by the webservice are "fresh"
+#     - mechanism to check if rates given by the webservice are "fresh"
 #       enough to be written in OpenERP
 #       ('max_delta_days' parameter for each currency update service)
 #    Ported to OpenERP 7.0 by Lorenzo Battistini
@@ -49,7 +49,7 @@ _logger = logging.getLogger(__name__)
 
 
 class Currency_rate_update_service(osv.Model):
-    """Class that tells for wich services wich currencies have to be updated
+    """Class that tells for which services which currencies have to be updated
 
     """
     _name = "currency.rate.update.service"
@@ -87,14 +87,14 @@ class Currency_rate_update_service(osv.Model):
             'res.company',
             'linked company',
         ),
-        # Note fileds that will be used as a logger
+        # Note fields that will be used as a logger
         'note': fields.text('update notice'),
         'max_delta_days': fields.integer(
             'Max delta days',
             required=True,
             help="If the time delta between the "
             "rate date given by the webservice and "
-            "the current date exeeds this value, "
+            "the current date exceeds this value, "
             "then the currency rate is not updated in OpenERP."
         ),
     }
@@ -183,8 +183,8 @@ class Currency_rate_update(osv.Model):
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
 
     def run_currency_update(self, cr, uid):
-        "update currency at the given frequence"
         factory = Currency_getter_factory()
+        """Update currency at the given frequency"""
         curr_obj = self.pool.get('res.currency')
         rate_obj = self.pool.get('res.currency.rate')
         companies = self.pool.get('res.company').search(cr, uid, [])
@@ -222,7 +222,7 @@ class Currency_rate_update(osv.Model):
             for service in comp.services_to_use:
                 note = service.note or ''
                 try:
-                    # We initalize the class that will handle the request
+                    # We initialize the class that will handle the request
                     # and return a dict of rate
                     getter = factory.register(service.service)
                     curr_to_fetch = map(lambda x: x.name,
@@ -291,7 +291,7 @@ class AbstractMethodError(Exception):
         return 'Abstract Method'
 
 
-class UnknowClassError(Exception):
+class UnknownClassError(Exception):
     def __str__(self):
         return 'Unknown Class'
 
@@ -299,7 +299,7 @@ class UnknowClassError(Exception):
         return 'Unknown Class'
 
 
-class UnsuportedCurrencyError(Exception):
+class UnsupportedCurrencyError(Exception):
     def __init__(self, value):
         self.curr = value
 
@@ -331,11 +331,11 @@ class Currency_getter_factory():
             class_def = eval(class_name)
             return class_def()
         else:
-            raise UnknowClassError
+            raise UnknownClassError
 
 
 class Curreny_getter_interface(object):
-    "Abstract class of currency getter"
+    """Abstract class of currency getter"""
 
     log_info = " "
 
@@ -360,20 +360,20 @@ class Curreny_getter_interface(object):
         'ZWD'
     ]
 
-    # Updated currency this arry will contain the final result
+    # Updated currency this array will contain the final result
     updated_currency = {}
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """Interface method that will retrieve the currency
-           This function has to be reinplemented in child
+           This function has to be reimplemented in child
         """
         raise AbstractMethodError
 
     def validate_cur(self, currency):
         """Validate if the currency to update is supported"""
         if currency not in self.supported_currency_array:
-            raise UnsuportedCurrencyError(currency)
+            raise UnsupportedCurrencyError(currency)
 
     def get_url(self, url):
         """Return a string of a get url query"""
