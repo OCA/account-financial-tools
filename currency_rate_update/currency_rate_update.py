@@ -370,7 +370,7 @@ class Curreny_getter_interface(object):
         """
         raise AbstractMethodError
 
-    def validate_cur(self, currency):
+    def validate_currency(self, currency):
         """Validate if the currency to update is supported"""
         if currency not in self.supported_currency_array:
             raise UnsupportedCurrencyError(currency)
@@ -424,13 +424,13 @@ class Yahoo_getter(Curreny_getter_interface):
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """implementation of abstract method of curreny_getter_interface"""
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         url = ('http://download.finance.yahoo.com/d/'
                'quotes.txt?s="%s"=X&f=sl1c1abg')
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             res = self.get_url(url % (main_currency + curr))
             val = res.split(',')[1]
             if val:
@@ -500,7 +500,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         _logger.debug(
             "Supported currencies = " + str(self.supported_currency_array)
         )
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'CHF':
             main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate CHF
@@ -508,7 +508,7 @@ class Admin_ch_getter(Curreny_getter_interface):
             rate_ref = main_curr_data['rate_ref']
             main_rate = rate_curr / rate_ref
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'CHF':
                 rate = main_rate
             else:
@@ -580,11 +580,11 @@ class ECB_getter(Curreny_getter_interface):
         self.supported_currency_array.append('EUR')
         _logger.debug("Supported currencies = %s " %
                       self.supported_currency_array)
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'EUR':
             main_curr_data = self.rate_retrieve(dom, ecb_ns, main_currency)
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'EUR':
                 rate = 1 / main_curr_data['rate_currency']
             else:
@@ -650,14 +650,14 @@ class PL_NBP_getter(Curreny_getter_interface):
         self.supported_currency_array.append('PLN')
         _logger.debug("Supported currencies = %s" %
                       self.supported_currency_array)
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'PLN':
             main_curr_data = self.rate_retrieve(dom, ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate PLN
             main_rate = (main_curr_data['rate_currency'] /
                          main_curr_data['rate_ref'])
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'PLN':
                 rate = main_rate
             else:
