@@ -187,7 +187,6 @@ class CurrencyRateUpdate(orm.Model):
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
 
     def run_currency_update(self, cr, uid, context=None):
-        factory = Currency_getter_factory()
         """Update currency at the given frequency"""
         curr_obj = self.pool.get('res.currency')
         rate_obj = self.pool.get('res.currency.rate')
@@ -233,7 +232,7 @@ class CurrencyRateUpdate(orm.Model):
                 try:
                     # We initialize the class that will handle the request
                     # and return a dict of rate
-                    getter = factory.register(service.service)
+                    getter = register(service.service)
                     curr_to_fetch = map(lambda x: x.name,
                                         service.currency_to_update)
                     res, log_info = getter.get_updated_currency(
@@ -321,28 +320,22 @@ class UnsupportedCurrencyError(Exception):
         return 'Unsupported currency %s' % self.curr
 
 
-class Currency_getter_factory():
-    """Factory pattern class that will return
-    a currency getter class base on the name passed
-    to the register method
-
-    """
-    def register(self, class_name):
-        allowed = [
-            'Admin_ch_getter',
-            'PL_NBP_getter',
-            'ECB_getter',
-            'NYFB_getter',
-            'Google_getter',
-            'Yahoo_getter',
-            'Banxico_getter',
-            'BankOfCanadaGetter',
-        ]
-        if class_name in allowed:
-            class_def = eval(class_name)
-            return class_def()
-        else:
-            raise UnknownClassError
+def register(class_name):
+    allowed = [
+        'Admin_ch_getter',
+        'PL_NBP_getter',
+        'ECB_getter',
+        'NYFB_getter',
+        'Google_getter',
+        'Yahoo_getter',
+        'Banxico_getter',
+        'BankOfCanadaGetter',
+    ]
+    if class_name in allowed:
+        class_def = eval(class_name)
+        return class_def()
+    else:
+        raise UnknownClassError
 
 
 class CurrencyGetterInterface(object):
