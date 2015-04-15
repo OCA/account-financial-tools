@@ -39,6 +39,9 @@
 
 import logging
 import time
+import pytz
+import dateutil
+import feedparser
 from datetime import datetime, timedelta
 
 from openerp.tools import (
@@ -700,69 +703,116 @@ class Banxico_getter(CurrencyGetterInterface):
         return self.updated_currency, self.log_info
 
 
+class BankOfCanadaConnection(object):
+    """Connection object for bankofcanada.ca"""
+    url = 'http://www.bankofcanada.ca/stats/assets/rates_rss/noon/en_%s.xml'
+
+    def __init__(self, currency):
+        self.currency = currency
+
+    def __enter__(self):
+        """As of Jan 2014 BOC is publishing noon rates for about 60 currencies
+        Closing rates are available as well (please note there are only 12
+        currencies reported):
+        http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+        """
+        _logger.debug("BOC currency rate service: connecting...")
+        self.dom = feedparser.parse(self.url % self.currency)
+
+        # check if BOC service is running
+        if self.dom.bozo and self.dom.status != 404:
+            _logger.error(
+                "Bank of Canada - service is down - try again later..."
+            )
+
+        # check if BOC sent a valid response for this currency
+        if self.dom.status != 200:
+            _logger.error(
+                "Exchange data for %s is not reported by Bank of Canada."
+                % self.currency
+            )
+            raise orm.except_orm(
+                _('Error'),
+                _('Exchange data for %s is not reported by Bank of '
+                  'Canada.') % ustr(self.currency)
+            )
+
+        _logger.debug("BOC sent a valid RSS file for: " + self.currency)
+
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+    @property
+    def base_currency(self):
+        return self.dom.entries[0].cb_basecurrency
+
+    @property
+    def target_currency(self):
+        return self.dom.entries[0].cb_targetcurrency
+
+    @property
+    def exchange_rate(self):
+        return self.dom.entries[0].cb_exchangerate.split("\n", 1)[0]
+
+    @property
+    def updated(self):
+        return self.dom.entries[0].updated
+
+    @property
+    def date_time(self):
+        parsed_datetime = dateutil.parser.parse(self.updated)
+        return parsed_datetime.astimezone(pytz.utc).replace(tzinfo=None)
+
+
 class BankOfCanadaGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Bank of Canada RSS service
 
     """
 
-    def get_updated_currency(self, currency_array, main_currency,
-                             max_delta_days):
-        """Implementation of abstract method of CurrencyGetterInterface"""
+    def get_updated_currency(self, currencies, main_currency, max_delta_days):
+        """Implementation of abstract method of Currency_getter_interface
 
-        # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
-        url = ('http://www.bankofcanada.ca/stats/assets/'
-               'rates_rss/noon/en_%s.xml')
-        # closing rates are available as well (please note there are only 12
-        # currencies reported):
-        # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+        :param currencies: List of currency name
+        :type currencies: list of unicode
+        :param main_currency: Name of Company's currency
+        :type main_currency: unicode
+        :param max_delta_days: Maximum allowable days of unsync
+        :type max_delta_days: int
+        :return: Updated list of currencies and their rates and log
+        :rtype: dict, str
+        :raises: orm.except_orm when there is a format error
+        """
 
-        # We do not want to update the main currency
-        if main_currency in currency_array:
-            currency_array.remove(main_currency)
+        for currency in currencies:
+            # We do not want to update the main currency
+            if currency == main_currency:
+                continue
 
-        import feedparser
-        import pytz
-        from dateutil import parser
+            self.validate_currency(currency)
 
-        for curr in currency_array:
+            with BankOfCanadaConnection(currency) as boc_conn:
 
-            _logger.debug("BOC currency rate service : connecting...")
-            dom = feedparser.parse(url % curr)
-
-            self.validate_cur(curr)
-
-            # check if BOC service is running
-            if dom.bozo and dom.status != 404:
-                _logger.error("Bank of Canada - service is down - try again\
-                    later...")
-
-            # check if BOC sent a valid response for this currency
-            if dom.status != 200:
-                _logger.error("Exchange data for %s is not reported by Bank\
-                    of Canada." % curr)
-                raise orm.except_orm('Error !', 'Exchange data for %s is not\
-                    reported by Bank of Canada.' % ustr(curr))
-
-            _logger.debug("BOC sent a valid RSS file for: " + curr)
-
-            # check for valid exchange data
-            if (dom.entries[0].cb_basecurrency == main_currency) and \
-                    (dom.entries[0].cb_targetcurrency == curr):
-                rate = dom.entries[0].cb_exchangerate.split('\n', 1)[0]
-                rate_date_datetime = parser.parse(dom.entries[0].updated)\
-                    .astimezone(pytz.utc).replace(tzinfo=None)
-                self.check_rate_date(rate_date_datetime, max_delta_days)
-                self.updated_currency[curr] = rate
-                _logger.debug("BOC Rate retrieved : %s = %s %s" %
-                              (main_currency, rate, curr))
-            else:
-                _logger.error(
-                    "Exchange data format error for Bank of Canada -"
-                    "%s. Please check provider data format "
-                    "and/or source code." % curr)
-                raise orm.except_orm('Error !',
-                                     'Exchange data format error for\
-                                     Bank of Canada - %s !' % ustr(curr))
+                # check for valid exchange data
+                if (boc_conn.base_currency == main_currency and
+                        boc_conn.target_currency == currency):
+                    self.check_rate_date(boc_conn.date_time, max_delta_days)
+                    self.updated_currency[currency] = boc_conn.exchange_rate
+                    _logger.debug(
+                        "BOC Rate retrieved : %s = %s %s" %
+                        (main_currency, boc_conn.exchange_rate, currency)
+                    )
+                else:
+                    _logger.error(
+                        "Exchange data format error for Bank of Canada -"
+                        "%s. Please check provider data format "
+                        "and/or source code." % currency)
+                    raise orm.except_orm(
+                        'Error',
+                        'Exchange data format error for Bank of Canada - %s'
+                        % ustr(currency)
+                    )
 
         return self.updated_currency, self.log_info
