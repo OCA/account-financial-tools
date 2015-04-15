@@ -797,7 +797,7 @@ class BankOfCanadaGetter(CurrencyGetterInterface):
 
                 # check for valid exchange data
                 if (boc_conn.base_currency == main_currency and
-                        boc_conn.target_currency == currency):
+                        boc_conn.target_currency.startswith(currency)):
                     self.check_rate_date(boc_conn.date_time, max_delta_days)
                     self.updated_currency[currency] = boc_conn.exchange_rate
                     _logger.debug(
