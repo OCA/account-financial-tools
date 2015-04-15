@@ -43,10 +43,7 @@ class res_company(orm.Model):
     def button_refresh_currency(self, cr, uid, ids, context=None):
         """Refresh  the currency for all the company now"""
         currency_updater_obj = self.pool.get('currency.rate.update')
-        try:
-            currency_updater_obj.run_currency_update(cr, uid, context=context)
-        except Exception:
-            return False
+        currency_updater_obj.run_currency_update(cr, uid, context=context)
         return True
 
     def on_change_auto_currency_up(self, cr, uid, id, value):
