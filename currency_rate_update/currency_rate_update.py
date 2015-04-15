@@ -50,6 +50,7 @@ from openerp.tools import (
     ustr,
 )
 from openerp.osv import fields, orm
+from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
@@ -195,6 +196,7 @@ class CurrencyRateUpdate(orm.Model):
         rate_obj = self.pool.get('res.currency.rate')
         company_obj = self.pool.get('res.company')
         companies = company_obj.search(cr, uid, [], context=context)
+        errors = []
         for comp in company_obj.browse(cr, uid, companies, context=context):
             # The multi company currency can beset or no so we handle
             # The two case
@@ -276,16 +278,21 @@ class CurrencyRateUpdate(orm.Model):
                     )
                     service.write({'note': msg})
                 except Exception as exc:
+                    if isinstance(exc, (orm.except_orm, except_osv)):
+                        exc_repr = exc.value
+                    else:
+                        exc_repr = repr(exc)
                     error_msg = "\n%s ERROR : %s %s" % (
                         datetime.today().strftime(
                             DEFAULT_SERVER_DATETIME_FORMAT
                         ),
-                        repr(exc),
+                        exc_repr,
                         note
                     )
-                    _logger.info(repr(exc))
+                    _logger.info(exc_repr)
                     service.write({'note': error_msg})
-                    raise
+                    errors.append(error_msg)
+        return errors
 
 
 def register(class_name):
@@ -786,33 +793,44 @@ class BankOfCanadaGetter(CurrencyGetterInterface):
         :raises: orm.except_orm when there is a format error
         """
 
+        errors = []
+
         for currency in currencies:
             # We do not want to update the main currency
             if currency == main_currency:
                 continue
+            try:
+                self.validate_currency(currency)
+                with BankOfCanadaConnection(currency) as conn:
 
-            self.validate_currency(currency)
+                    # check for valid exchange data
+                    if (conn.base_currency == main_currency and
+                            conn.target_currency.startswith(currency)):
+                        self.check_rate_date(conn.date_time, max_delta_days)
+                        self.updated_currency[currency] = conn.exchange_rate
+                        _logger.debug(
+                            "BOC Rate retrieved : %s = %s %s" %
+                            (main_currency, conn.exchange_rate, currency)
+                        )
+                    else:
+                        _logger.error(
+                            "Exchange data format error for Bank of Canada -"
+                            "%s. Please check provider data format "
+                            "and/or source code." % currency)
+                        raise orm.except_orm(
+                            _('Error'),
+                            _('Exchange data format error for Bank of Canada'
+                              ' - %s') % ustr(currency)
+                        )
+            except (orm.except_orm, except_osv) as e:
+                errors.append(ustr(e.value))
+            except Exception as e:
+                errors.append(ustr(e))
 
-            with BankOfCanadaConnection(currency) as boc_conn:
-
-                # check for valid exchange data
-                if (boc_conn.base_currency == main_currency and
-                        boc_conn.target_currency.startswith(currency)):
-                    self.check_rate_date(boc_conn.date_time, max_delta_days)
-                    self.updated_currency[currency] = boc_conn.exchange_rate
-                    _logger.debug(
-                        "BOC Rate retrieved : %s = %s %s" %
-                        (main_currency, boc_conn.exchange_rate, currency)
-                    )
-                else:
-                    _logger.error(
-                        "Exchange data format error for Bank of Canada -"
-                        "%s. Please check provider data format "
-                        "and/or source code." % currency)
-                    raise orm.except_orm(
-                        'Error',
-                        'Exchange data format error for Bank of Canada - %s'
-                        % ustr(currency)
-                    )
+        if errors:
+            raise orm.except_orm(
+                _("Errors occurred during update"),
+                "\n".join(errors)
+            )
 
         return self.updated_currency, self.log_info
