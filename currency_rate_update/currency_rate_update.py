@@ -40,15 +40,19 @@
 import logging
 import time
 from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from openerp.osv import fields, osv, orm
+
+from openerp.tools import (
+    DEFAULT_SERVER_DATETIME_FORMAT,
+    DEFAULT_SERVER_DATE_FORMAT,
+    ustr,
+)
+from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
 
-class Currency_rate_update_service(osv.Model):
+class CurrencyRateUpdateService(orm.Model):
     """Class that tells for which services which currencies have to be updated
 
     """
@@ -69,7 +73,7 @@ class Currency_rate_update_service(osv.Model):
                 # http://www.cbwiki.net/wiki/index.php/Specification_1.1
                 # This RSS format is used by other national banks
                 #  (Thailand, Malaysia, Mexico...)
-                ('CA_BOC_getter', 'Bank of Canada - noon rates'),
+                ('BankOfCanadaGetter', 'Bank of Canada - noon rates'),
             ],
             "Webservice to use",
             required=True
@@ -98,7 +102,7 @@ class Currency_rate_update_service(osv.Model):
             "then the currency rate is not updated in OpenERP."
         ),
     }
-    _defaults = {'max_delta_days': lambda *a: 4}
+    _defaults = {'max_delta_days': 4}
     _sql_constraints = [
         (
             'curr_service_unique',
@@ -122,7 +126,7 @@ class Currency_rate_update_service(osv.Model):
     ]
 
 
-class Currency_rate_update(osv.Model):
+class CurrencyRateUpdate(orm.Model):
     """Class that handle an ir cron call who will
     update currencies based on a web url"""
     _name = "currency.rate.update"
@@ -182,13 +186,14 @@ class Currency_rate_update(osv.Model):
         cron_id = self.get_cron_id(cr, uid, context)
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
 
-    def run_currency_update(self, cr, uid):
+    def run_currency_update(self, cr, uid, context=None):
         factory = Currency_getter_factory()
         """Update currency at the given frequency"""
         curr_obj = self.pool.get('res.currency')
         rate_obj = self.pool.get('res.currency.rate')
-        companies = self.pool.get('res.company').search(cr, uid, [])
-        for comp in self.pool.get('res.company').browse(cr, uid, companies):
+        company_obj = self.pool.get('res.company')
+        companies = company_obj.search(cr, uid, [], context=context)
+        for comp in company_obj.browse(cr, uid, companies, context=context):
             # The multi company currency can beset or no so we handle
             # The two case
             if not comp.auto_currency_up:
@@ -197,26 +202,30 @@ class Currency_rate_update(osv.Model):
             # The main rate should be set at  1.00
             main_curr_ids = curr_obj.search(
                 cr, uid,
-                [('base', '=', True), ('company_id', '=', comp.id)]
+                [('base', '=', True), ('company_id', '=', comp.id)],
+                context=context
             )
             if not main_curr_ids:
                 # If we can not find a base currency for this company
                 # we look for one with no company set
                 main_curr_ids = curr_obj.search(
                     cr, uid,
-                    [('base', '=', True), ('company_id', '=', False)]
+                    [('base', '=', True), ('company_id', '=', False)],
+                    context=context
                 )
             if main_curr_ids:
                 main_curr_rec = curr_obj.browse(cr, uid, main_curr_ids[0])
             else:
                 raise orm.except_orm(
                     _('Error!'),
-                    ('There is no base currency set!')
+                    _('There is no base currency set!')
                 )
             if main_curr_rec.rate != 1:
                 raise orm.except_orm(
-                    _('Error!'),
-                    ('Base currency rate should be 1.00!')
+                    _('Error'),
+                    _('Base currency rate should be 1.00.\n'
+                      'Currency %s has rate of %f')
+                    % (main_curr_rec.name, main_curr_rec.rate)
                 )
             main_curr = main_curr_rec.name
             for service in comp.services_to_use:
@@ -252,6 +261,7 @@ class Currency_rate_update(osv.Model):
                                 cr,
                                 uid,
                                 vals,
+                                context=context
                             )
 
                     # Show the most recent note at the top
@@ -273,6 +283,7 @@ class Currency_rate_update(osv.Model):
                     )
                     _logger.info(repr(exc))
                     service.write({'note': error_msg})
+                    raise
 
 
 class AbstractClassError(Exception):
@@ -325,7 +336,7 @@ class Currency_getter_factory():
             'Google_getter',
             'Yahoo_getter',
             'Banxico_getter',
-            'CA_BOC_getter',
+            'BankOfCanadaGetter',
         ]
         if class_name in allowed:
             class_def = eval(class_name)
@@ -334,7 +345,7 @@ class Currency_getter_factory():
             raise UnknownClassError
 
 
-class Curreny_getter_interface(object):
+class CurrencyGetterInterface(object):
     """Abstract class of currency getter"""
 
     log_info = " "
@@ -384,12 +395,12 @@ class Curreny_getter_interface(object):
             objfile.close()
             return rawfile
         except ImportError:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 'Error !',
                 self.MOD_NAME + 'Unable to import urllib !'
             )
         except IOError:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 'Error !',
                 self.MOD_NAME + 'Web Service does not exist !'
             )
@@ -411,12 +422,11 @@ class Curreny_getter_interface(object):
                                           DEFAULT_SERVER_DATE_FORMAT)
         if rate_date.date() != datetime.today().date():
             msg = "The rate timestamp (%s) is not today's date"
-            self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
+            self.log_info = "WARNING : %s %s" % (msg, rate_date_str)
             _logger.warning(msg, rate_date_str)
 
 
-# Yahoo #######################################################################
-class Yahoo_getter(Curreny_getter_interface):
+class YahooGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
     """
@@ -441,8 +451,7 @@ class Yahoo_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# Admin CH ####################################################################
-class Admin_ch_getter(Curreny_getter_interface):
+class Admin_ch_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service
 
@@ -498,7 +507,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         self.supported_currency_array.append('CHF')
 
         _logger.debug(
-            "Supported currencies = " + str(self.supported_currency_array)
+            "Supported currencies = " + ustr(self.supported_currency_array)
         )
         self.validate_currency(main_currency)
         if main_currency != 'CHF':
@@ -526,8 +535,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# ECB getter #################################################################
-class ECB_getter(Curreny_getter_interface):
+class ECB_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for ECB service
     """
@@ -601,8 +609,7 @@ class ECB_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# PL NBP ######################################################################
-class PL_NBP_getter(Curreny_getter_interface):
+class PL_NBP_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
@@ -674,8 +681,7 @@ class PL_NBP_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# Banco de México #############################################################
-class Banxico_getter(Curreny_getter_interface):
+class Banxico_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Banco de México service
 
@@ -731,16 +737,15 @@ class Banxico_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# CA BOC #####   Bank of Canada   #############################################
-class CA_BOC_getter(Curreny_getter_interface):
-    """Implementation of Curreny_getter_factory interface
+class BankOfCanadaGetter(CurrencyGetterInterface):
+    """Implementation of Currency_getter_factory interface
     for Bank of Canada RSS service
 
     """
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """Implementation of abstract method of CurrencyGetterInterface"""
 
         # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
         url = ('http://www.bankofcanada.ca/stats/assets/'
@@ -773,8 +778,8 @@ class CA_BOC_getter(Curreny_getter_interface):
             if dom.status != 200:
                 _logger.error("Exchange data for %s is not reported by Bank\
                     of Canada." % curr)
-                raise osv.except_osv('Error !', 'Exchange data for %s is not\
-                    reported by Bank of Canada.' % str(curr))
+                raise orm.except_orm('Error !', 'Exchange data for %s is not\
+                    reported by Bank of Canada.' % ustr(curr))
 
             _logger.debug("BOC sent a valid RSS file for: " + curr)
 
@@ -793,8 +798,8 @@ class CA_BOC_getter(Curreny_getter_interface):
                     "Exchange data format error for Bank of Canada -"
                     "%s. Please check provider data format "
                     "and/or source code." % curr)
-                raise osv.except_osv('Error !',
+                raise orm.except_orm('Error !',
                                      'Exchange data format error for\
-                                     Bank of Canada - %s !' % str(curr))
+                                     Bank of Canada - %s !' % ustr(curr))
 
         return self.updated_currency, self.log_info

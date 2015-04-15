@@ -44,7 +44,7 @@ class res_company(orm.Model):
         """Refresh  the currency for all the company now"""
         currency_updater_obj = self.pool.get('currency.rate.update')
         try:
-            currency_updater_obj.run_currency_update(cr, uid)
+            currency_updater_obj.run_currency_update(cr, uid, context=context)
         except Exception:
             return False
         return True
