@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_account_forced_tax" model="ir.ui.view">
+            <field name="name">account.account.form.inerhit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form" />
+            <field name="arch" type="xml">
+                <field name="tax_ids" position="after">
+                    <field name="force_tax_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
