@@ -285,41 +285,6 @@ class CurrencyRateUpdate(orm.Model):
                     raise
 
 
-class AbstractClassError(Exception):
-    def __str__(self):
-        return 'Abstract Class'
-
-    def __repr__(self):
-        return 'Abstract Class'
-
-
-class AbstractMethodError(Exception):
-    def __str__(self):
-        return 'Abstract Method'
-
-    def __repr__(self):
-        return 'Abstract Method'
-
-
-class UnknownClassError(Exception):
-    def __str__(self):
-        return 'Unknown Class'
-
-    def __repr__(self):
-        return 'Unknown Class'
-
-
-class UnsupportedCurrencyError(Exception):
-    def __init__(self, value):
-        self.curr = value
-
-    def __str__(self):
-        return 'Unsupported currency %s' % self.curr
-
-    def __repr__(self):
-        return 'Unsupported currency %s' % self.curr
-
-
 def register(class_name):
     allowed = [
         'Admin_ch_getter',
@@ -335,7 +300,7 @@ def register(class_name):
         class_def = eval(class_name)
         return class_def()
     else:
-        raise UnknownClassError
+        raise AttributeError("Class %s not defined in module." % class_name)
 
 
 class CurrencyGetterInterface(object):
@@ -372,12 +337,17 @@ class CurrencyGetterInterface(object):
         """Interface method that will retrieve the currency
            This function has to be reimplemented in child
         """
-        raise AbstractMethodError
+        raise NotImplementedError(
+            "Function get_updated_currency not implemented in class %s"
+            % self.__class__
+        )
 
     def validate_currency(self, currency):
         """Validate if the currency to update is supported"""
         if currency not in self.supported_currency_array:
-            raise UnsupportedCurrencyError(currency)
+            raise AttributeError(
+                'Unsupported currency %s' % currency
+            )
 
     def get_url(self, url):
         """Return a string of a get url query"""
