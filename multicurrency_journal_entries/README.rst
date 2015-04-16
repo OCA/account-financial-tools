@@ -25,6 +25,9 @@ Configuration
 The currency rate need to be set. You can use the module "Currency Rate Update"
 for that. It is also an OCA module accessible here:
 https://github.com/OCA/account-financial-tools
+In the module Settings/ Configuration/ Invoicing, you need to tick the box
+"Allow multi currencies" to be able to select a currency on the account move
+lines (Journal Entries).
 
 Usage
 =====
