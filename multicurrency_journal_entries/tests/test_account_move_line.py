@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import date, datetime
 from decimal import getcontext, Decimal
 
 from openerp.tests.common import TransactionCase
@@ -11,12 +11,12 @@ class TestAccountMoveLine(TransactionCase):
         super(TestAccountMoveLine, self).setUp()
         self.move_obj = self.env['account.move']
         self.move_line_obj = self.env['account.move.line']
-        self.curr_obj = self.registry('res.currency')
+        self.curr_obj = self.env['res.currency']
         self.currency_rate = 0.721700
         self._set_currency_rate('GBP', self.currency_rate)
 
     def _create_move(self):
-        date = datetime.datetime.today()
+        date = datetime.today()
         period = self.env['account.period'].with_context(
             {'account_period_prefer_normal': True}
         ).find(date)[0]
@@ -48,21 +48,16 @@ class TestAccountMoveLine(TransactionCase):
         return self.move_line_obj.create(vals)
 
     def _set_currency_rate(self, currency_name, rate):
-        company_currency_id = self.registry('res.users').browse(
-            self.cr, self.uid, self.uid,
-        ).company_id.currency_id.id
+        company_currency_id = self.env.user.company_id.currency_id.id
         eur_currency_id = self.ref('base.EUR')
         self.assertEqual(company_currency_id, eur_currency_id)
-        currency_id = self.curr_obj.search(
-            self.cr, self.uid, [('name', '=', currency_name)]
+        currency = self.curr_obj.search(
+            [('name', '=', currency_name)]
         )[0]
-        self.registry('res.currency.rate').create(
-            self.cr, self.uid,
+        self.env['res.currency.rate'].create(
             {
-                'name': datetime.date.fromordinal(
-                datetime.date.today().toordinal()-1
-                ),
-                'currency_id': currency_id,
+                'name': date.fromordinal(date.today().toordinal() - 1),
+                'currency_id': currency.id,
                 'rate': rate,
             }
         )
@@ -74,11 +69,15 @@ class TestAccountMoveLine(TransactionCase):
         debit = move_line_debit.debit
         credit = move_line_credit.credit
         self.assertEqual(
-            (Decimal(debit) / Decimal(1 / self.currency_rate * amount_currency)),
+            (Decimal(debit) / Decimal(
+                1 / self.currency_rate * amount_currency
+            )),
             Decimal(1.0)
         )
         self.assertEqual(
-            (Decimal(credit) / Decimal(1 / self.currency_rate * amount_currency)),
+            (Decimal(credit) / Decimal(
+                1 / self.currency_rate * amount_currency)
+             ),
             Decimal(1.0)
         )
 
@@ -101,7 +100,6 @@ class TestAccountMoveLine(TransactionCase):
         move_line_credit.write(
             {'amount_currency': -new_amount_currency}
         )
-
 
     def test_account_move_line_create(self):
         amount_currency = 1775
