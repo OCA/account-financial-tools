@@ -5,7 +5,7 @@ Multicurrency Journal Entries
 =============================
 
 This module was written to extend the functionality of the e-invoicing module
-(account) in order to be able to create journal entries in a currncy different
+(account) in order to be able to create journal entries in a currency different
 than the currency of the company
 
 Installation
@@ -13,7 +13,7 @@ Installation
 
 To install this module, you need to:
 
-* clone the branch 8.0 of the repository https://github.com/OCA/account-closing
+* clone the branch 8.0 of the repository https://github.com/OCA/account-financial-tools
 * add the path to this repository in your configuration (addons-path)
 * update the module list
 * search for "Multicurrency Journal Entries" in your addons
