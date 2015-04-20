@@ -38,10 +38,23 @@ class Company(models.Model):
             logger.info('Unlinking all records of model %s for company %s',
                         model, self.name)
             try:
-                obj = self.env[model]
+                obj = self.env[model].with_context(active_test=False)
             except KeyError:
                 logger.info('Model %s not found', model)
                 return
+            self._cr.execute(
+                """
+                DELETE FROM ir_property ip
+                USING {table} tbl
+                WHERE value_reference = '{model},' || tbl.id
+                    AND tbl.company_id = %s;
+                """.format(model=model, table=obj._table),
+                (self.id,))
+            if self._cr.rowcount:
+                logger.info(
+                    "Unlinked %s properties that refer to records of type %s "
+                    "that are linked to company %s",
+                    self._cr.rowcount, model, self.name)
             records = obj.search([('company_id', '=', self.id)])
             if records:  # account_account.unlink() breaks on empty id list
                 records.unlink()
@@ -136,16 +149,18 @@ class Company(models.Model):
                    WHERE id IN %s""", (tuple(moves.ids),))
         moves.unlink()
 
+        self.env['account.fiscal.position.tax'].search(
+            ['|', ('tax_src_id.company_id', '=', self.id),
+             ('tax_dest_id.company_id', '=', self.id)]
+        ).unlink()
+        self.env['account.fiscal.position.account'].search(
+            ['|', ('account_src_id.company_id', '=', self.id),
+             ('account_dest_id.company_id', '=', self.id)]
+        ).unlink()
         unlink_from_company('account.fiscal.position')
+        unlink_from_company('account.analytic.line')
         unlink_from_company('account.tax')
         unlink_from_company('account.tax.code')
         unlink_from_company('account.journal')
-
-        logger.info('Unlink properties with account as values')
-        self._cr.execute(
-            """
-            DELETE FROM ir_property
-            WHERE value_reference LIKE 'account.account,%%'
-            AND company_id = %s""", (self.id,))
         unlink_from_company('account.account')
         return True
