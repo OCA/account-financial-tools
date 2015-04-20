@@ -23,7 +23,7 @@
 from openerp.osv import orm, fields
 
 
-class Config(orm.Model):
+class Config(orm.TransientModel):
     _inherit = 'account.config.settings'
 
     _columns = {
