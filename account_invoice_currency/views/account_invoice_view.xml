@@ -12,13 +12,13 @@
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="arch" type="xml">
-                <field name="period_id" position="after">
+                <xpath expr="//field[@name='period_id']/.." position="after">
                     <group string="Amounts in company currency">
                         <field name="cc_amount_untaxed"/>
                         <field name="cc_amount_tax"/>
                         <field name="cc_amount_total"/>
                     </group>
-                </field>
+                </xpath>
             </field>
         </record>
 
@@ -28,13 +28,13 @@
             <field name="model">account.invoice</field>
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
-                <field name="move_id" position="after">
+                <xpath expr="//field[@name='move_id']/.." position="after">
                     <group string="Amounts in company currency">
                         <field name="cc_amount_untaxed"/>
                         <field name="cc_amount_tax"/>
                         <field name="cc_amount_total"/>
                     </group>
-                </field>
+                </xpath>
             </field>
         </record>
 
