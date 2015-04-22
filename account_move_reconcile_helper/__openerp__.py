@@ -31,13 +31,10 @@
     'license': 'AGPL-3',
     'depends': [
         'web',
+        'web_widget_auto_color',
         'account',
     ],
     'data': [
-        'views/account_move_reconcile_helper.xml',
         'views/account_move_line_view.xml',
-    ],
-    'qweb': [
-        'static/src/xml/templates.xml',
     ],
 }

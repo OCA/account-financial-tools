@@ -6,9 +6,8 @@
             <field name="model">account.move.line</field>
             <field name="inherit_id" ref="account.view_move_line_tree"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree" position="inside">
-                    <field name="reconcile_id" invisible="1" />
-                    <field name="reconcile_partial_id" invisible="1" />
+                <xpath expr="//field[@name='reconcile_ref']" position="attributes">
+                    <attribute name="widget">autocolor</attribute>
                 </xpath>
             </field>
         </record>
