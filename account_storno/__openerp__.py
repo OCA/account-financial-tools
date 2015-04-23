@@ -36,15 +36,16 @@ WARNING:
  This module is managing accounting, invoices, and refund wizard.
  Other modules are required for stock, voucher, etc. storno posting.
 
-Author: Goran Kliska @ Slobodni programi d.o.o.
-        http://www.slobodni-programi.hr
-Contributions:
-  Ivan Vađić @ Slobodni programi d.o.o.
-  Tomislav Bošnjaković @ Storm Computers d.o.o.: Bugs report
-
+Contributors
+------------
+- Ivan Vađić (Slobodni programi d.o.o.)
+- Tomislav Bošnjaković (Storm Computers d.o.o.)
+- Fekete Mihai (Forest and Biomass Services Romania)
 """,
     "version": "13.1",
-    "author": "Slobodni programi d.o.o.",
+    "author": "Slobodni programi d.o.o., "
+              "Fekete Mihai (Forest and Biomass Services Romania), "
+              "Odoo Community Association (OCA)",
     "category": "Localisation/Croatia",
     "website": "http://www.slobodni-programi.hr",
     'depends': ['account', 'account_voucher'],
