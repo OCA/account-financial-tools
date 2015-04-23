@@ -1552,12 +1552,6 @@ class account_asset_depreciation_line(orm.Model):
         return super(account_asset_depreciation_line, self).write(
             cr, uid, ids, vals, context)
 
-    def reload_page(self, cr, uid, asset_id, context=None):
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
     def _setup_move_data(self, depreciation_line, depreciation_date,
                          period_id, context):
         asset = depreciation_line.asset_id
@@ -1643,8 +1637,6 @@ class account_asset_depreciation_line(orm.Model):
             if currency_obj.is_zero(cr, uid, asset.company_id.currency_id,
                                     asset.value_residual):
                 asset.write({'state': 'close'})
-            if len(ids) == 1 and context.get('create_move_from_button'):
-                return self.reload_page(cr, uid, asset.id, context)
         return created_move_ids
 
     def open_move(self, cr, uid, ids, context=None):
@@ -1675,14 +1667,9 @@ class account_asset_depreciation_line(orm.Model):
             self.write(cr, uid, [line.id], {'move_id': False}, context=ctx)
             if line.parent_state == 'close':
                 line.asset_id.write({'state': 'open'})
-                if len(ids) == 1:
-                    return self.reload_page(
-                        cr, uid, line.asset_id.id, context)
             elif line.parent_state == 'removed' and line.type == 'remove':
                 line.asset_id.write({'state': 'close'})
                 self.unlink(cr, uid, [line.id])
-            if len(ids) == 1:
-                return self.reload_page(cr, uid, line.asset_id.id, context)
         return True
 
 
