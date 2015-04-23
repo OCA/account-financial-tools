@@ -22,7 +22,8 @@ from unittest2 import TestCase
 from openerp.osv.orm import except_orm
 
 from openerp.tests.common import TransactionCase
-from ..currency_rate_update import BankOfCanadaGetter
+from openerp.addons.currency_rate_update import currency_rate_update
+BankOfCanadaGetter = currency_rate_update.BankOfCanadaGetter
 
 
 class TestBankOfCanada(TransactionCase):
