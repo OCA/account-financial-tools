@@ -16,7 +16,7 @@
                     </header>
                     <group attrs="{'invisible':[('state','!=','init')]}">
                         <h3>
-                            <p><center>This wizard will update your accounts, taxes and fiscal positions according to the selected chart template</center></p>
+                            <p><center>This wizard will update your accounts, taxes, fiscal positions and financial reports according to the selected chart template</center></p>
                         </h3>
                     </group>
                     <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
