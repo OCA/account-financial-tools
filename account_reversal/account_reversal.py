@@ -86,8 +86,7 @@ class account_move(orm.Model):
 
         self.write(cr, uid, [move.id],
                    {'reversal_id': reversal_move_id,
-                    # ensure to_be_reversed is true if ever it was not
-                    'to_be_reversed': True},
+                    'to_be_reversed': False},
                    context=context)
 
         reversal_move = self.browse(cr, uid, reversal_move_id, context=context)
