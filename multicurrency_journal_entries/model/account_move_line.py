@@ -11,9 +11,10 @@ class AccountMoveLine(models.Model):
         if currency:
             amount_currency = self.amount_currency
             company_currency = self.env.user.company_id.currency_id
+            # False is for not rounding the result of the conversion
             converted_amount = abs(currency.with_context(
                 date=self.move_id.date
-            ).compute(amount_currency, company_currency))
+            ).compute(amount_currency, company_currency, False))
             self.debit = converted_amount if amount_currency > 0 else 0.0
             self.credit = converted_amount if amount_currency < 0 else 0.0
 
