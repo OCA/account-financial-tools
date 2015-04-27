@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="account_checkbook" model="workflow">
+            <field name="name">Account Checkbook</field>
+            <field name="osv">account.checkbook</field>
+            <field name="on_create">True</field>
+        </record>
+
+    <!-- Activities -->
+    
+        <record id="act_draft" model="workflow.activity">
+            <field name="wkf_id" ref="account_checkbook"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+        
+       <record id="act_active" model="workflow.activity">
+            <field name="wkf_id" ref="account_checkbook"/>
+            <field name="name">active</field>
+            <field name="kind">function</field>
+            <field name="action">wkf_active()</field>
+        </record>
+        
+        <record id="act_used" model="workflow.activity">
+            <field name="wkf_id" ref="account_checkbook"/>
+            <field name="name">used</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+            <field name="action">wkf_used()</field>
+        </record>
+  
+    <!-- Transition -->
+    
+        <record id="trans_draft_active" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_active"/>
+            <field name="signal">wkf_active</field>
+        </record>
+        
+        <record id="trans_active_used" model="workflow.transition">
+            <field name="act_from" ref="act_active"/>
+            <field name="act_to" ref="act_used"/>
+            <field name="signal">wkf_used</field>
+        </record>        
+
+        <record id="trans_used_draft" model="workflow.transition">
+            <field name="act_from" ref="act_used"/>
+            <field name="act_to" ref="act_draft"/>
+            <field name="signal">wkf_draft</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account.check_action_form_view">
+            <field name="name">account.check.action.wizard.form</field>
+            <field name="model">account.check.action</field>
+            <field name="arch" type="xml">
+                <form string="Check Action" version="7.0">
+                    <field name="action_type" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <group >
+                        <field name="date"/>
+                        <field name="account_id" domain="[('company_id','=',company_id),('type', 'in', ['other', 'liquidity'])]" attrs="{'invisible':[('action_type','!=','deposit')],'required':[('action_type','=','deposit')]}"/>
+                    </group>
+                    <footer>
+                        <button string="Confirm" name="action_confirm" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>     
+                </form>
+            </field>
+        </record>
+
+        <act_window
+            name="Check Deposit"
+            res_model="account.check.action"
+            src_model="account.check"
+            view_mode="form"
+            target="new"
+            context="{'default_action_type':'deposit'}"
+            key2="client_action_multi"
+            id="action_check_deposit"/>
+
+        <act_window
+            name="Check Debit"
+            res_model="account.check.action"
+            src_model="account.check"
+            view_mode="form"
+            target="new"
+            context="{'default_action_type':'debit'}"
+            key2="client_action_multi"
+            id="action_check_debit"/>
+        
+    </data>
+</openerp>
