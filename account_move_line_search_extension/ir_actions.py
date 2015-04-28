@@ -21,8 +21,6 @@
 ##############################################################################
 
 from openerp import models
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class ir_actions_act_window(models.Model):

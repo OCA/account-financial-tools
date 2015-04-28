@@ -23,7 +23,12 @@ openerp.account_move_line_search_extension = function (instance) {
             var tmp = this._super.apply(this, arguments);
             var self = this;
             this.$el.parent().prepend(QWeb.render('AccountMoveLineSearchExtension', self.groups_dict));
+            self.set_change_events();
+            return tmp;
+        },
 
+        set_change_events: function() {
+            var self = this;
             this.$el.parent().find('.oe_account_select_account').change(function() {
                     self.current_account = this.value === '' ? null : this.value;
                     self.do_search(self.last_domain, self.last_context, self.last_group_by);
@@ -38,28 +43,12 @@ openerp.account_move_line_search_extension = function (instance) {
                 });
             this.$el.parent().find('.oe_account_select_journal').change(function() {
                     self.current_journal = this.value === '' ? null : parseInt(this.value);
-                    //console.log('start, oasj, self.current_journal=', self.current_journal, 'self.last_domain=', self.last_domain, 'self.last_context=', self.last_context, 'self.last_group_by=', self.last_group_by);
                     self.do_search(self.last_domain, self.last_context, self.last_group_by);
                 });
             this.$el.parent().find('.oe_account_select_period').change(function() {
                     self.current_period = this.value === '' ? null : this.value;
                     self.do_search(self.last_domain, self.last_context, self.last_group_by);
                 });
-            this.on('edit:after', this, function () {
-                self.$el.parent().find('.oe_account_select_account').attr('disabled', 'disabled');
-                self.$el.parent().find('.oe_account_select_analytic_account').attr('disabled', 'disabled');
-                self.$el.parent().find('.oe_account_select_partner').attr('disabled', 'disabled');
-                self.$el.parent().find('.oe_account_select_journal').attr('disabled', 'disabled');
-                self.$el.parent().find('.oe_account_select_period').attr('disabled', 'disabled');
-            });
-            this.on('save:after cancel:after', this, function () {
-                self.$el.parent().find('.oe_account_select_account').removeAttr('disabled');
-                self.$el.parent().find('.oe_account_select_analytic_account').removeAttr('disabled');
-                self.$el.parent().find('.oe_account_select_partner').removeAttr('disabled');
-                self.$el.parent().find('.oe_account_select_journal').removeAttr('disabled');
-                self.$el.parent().find('.oe_account_select_period').removeAttr('disabled');
-            });
-            return tmp;
         },
 
         set_user_groups: function() {
@@ -67,7 +56,6 @@ openerp.account_move_line_search_extension = function (instance) {
             var result = {};
             var action_context = this.dataset.get_context().__contexts[1];
             _.each(action_context, function(v,k) {
-                //console.log('init, k=', k, 'v=', v);
                 if (k[v] && (k.slice(0, 6) === "group_")) {
                     result[k] = true;
                 }
@@ -102,15 +90,21 @@ openerp.account_move_line_search_extension = function (instance) {
             });
         },
 
-        search_by_selection: function() {
+        aml_search_domain: function() {
             var self = this;
             var domain = [];
             if (self.current_account) domain.push(['account_id.code', 'ilike', self.current_account]);
             if (self.current_analytic_account) domain.push(['analytic_account_id', 'in', self.current_analytic_account]); //cf. def search
-            if (self.current_partner) domain.push(['partner_id.name', 'ilike', self.current_partner],'|',['partner_id.parent_id','=',false],['partner_id.is_company','=',true]);
+            if (self.current_partner) domain.push(['partner_id.name', 'ilike', self.current_partner]);
             if (self.current_journal) domain.push(['journal_id', '=', self.current_journal]);
             if (self.current_period) domain.push('|',['period_id.code', 'ilike', self.current_period],['period_id.name', 'ilike', self.current_period]);
-            //_.each(domain, function(x) {console.log('search_by_journal_period, domain_part = ', x)});
+            //_.each(domain, function(x) {console.log('amlse, aml_search_domain, domain_part = ', x)});
+            return domain;
+        },
+
+        search_by_selection: function() {
+            var self = this;
+            var domain = self.aml_search_domain();
             return self.old_search(new instance.web.CompoundDomain(self.last_domain, domain), self.last_context, self.last_group_by);
         },
 

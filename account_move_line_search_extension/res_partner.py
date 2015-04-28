@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2013-2015 Noviat nv/sa (www.noviat.com).
+#    Copyright (c) 2015 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -16,22 +16,26 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
-{
-    'name': 'Journal Items Search Extension',
-    'version': '0.5',
-    'license': 'AGPL-3',
-    'author': 'Noviat',
-    'category': 'Accounting & Finance',
-    'depends': ['account'],
-    'data': [
-        'account_view.xml',
-        'views/account.xml',
-    ],
-    'qweb': [
-        'static/src/xml/account_move_line_search_extension.xml',
-    ],
-}
+from openerp import models
+
+
+class res_partner(models.Model):
+    _inherit = 'res.partner'
+
+    def search(self, cr, uid, args,
+               offset=0, limit=None, order=None, context=None, count=False):
+        if context and 'account_move_line_search_extension' in context:
+            args.extend(
+                ['|',
+                 ('parent_id', '=', False),
+                 ('is_company', '=', True),
+                 '|',
+                 ('active', '=', False),
+                 ('active', '=', True)])
+        return super(res_partner, self).search(
+            cr, uid, args, offset=offset, limit=limit, order=order,
+            context=context, count=count)

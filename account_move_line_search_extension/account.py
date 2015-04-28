@@ -20,13 +20,11 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models
 from lxml import etree
-import logging
-_logger = logging.getLogger(__name__)
 
 
-class account_move_line(orm.Model):
+class account_move_line(models.Model):
     _inherit = 'account.move.line'
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
