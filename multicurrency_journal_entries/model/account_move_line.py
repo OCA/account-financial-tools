@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from decimal import Decimal, ROUND_UP, getcontext
 from openerp import models, api
 
 
@@ -15,6 +16,11 @@ class AccountMoveLine(models.Model):
             converted_amount = abs(currency.with_context(
                 date=self.move_id.date
             ).compute(amount_currency, company_currency, False))
+            getcontext().prec = 12
+            converted_amount = "{0:.2f}".format(
+                Decimal(converted_amount).quantize(Decimal('.01'),
+                                                   rounding=ROUND_UP)
+            )
             self.debit = converted_amount if amount_currency > 0 else 0.0
             self.credit = converted_amount if amount_currency < 0 else 0.0
 
@@ -23,7 +29,10 @@ class AccountMoveLine(models.Model):
         record_id = super(AccountMoveLine, self).create(
             cr, uid, vals, context=context, check=check
         )
-        self.update_debit_credit(cr, uid, [record_id], context=context)
+        if vals.get('amount_currency'):
+            # if it has not been converted yet
+            if not (vals.get('credit') or vals.get('debit')):
+                self.update_debit_credit(cr, uid, [record_id], context=context)
         return record_id
 
     @api.cr_uid_ids_context
@@ -34,7 +43,9 @@ class AccountMoveLine(models.Model):
             check=check, update_check=update_check
         )
         if ('currency_id' in vals) or ('amount_currency' in vals):
-            self.update_debit_credit(cr, uid, ids, context=context)
+            # if it has not been converted yet
+            if not (vals.get('credit') or vals.get('debit')):
+                self.update_debit_credit(cr, uid, ids, context=context)
         return result
 
     @api.onchange('currency_id', 'amount_currency')
