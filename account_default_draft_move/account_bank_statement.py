@@ -27,5 +27,13 @@ class AccountBankStatement(models.Model):
     def button_confirm_bank(self):
         res = super(AccountBankStatement, self).button_confirm_bank()
         entries = self.mapped('line_ids.journal_entry_id')
+        use_journal_setting = bool(self.env['ir.config_parameter'].get_param(
+            'use_journal_setting', default=False))
+        if use_journal_setting:
+            new_entries = self.env['account.move']
+            for e in entries:
+                if not e.journal_id.entry_posted:
+                    new_entries += e
+            entries = new_entries
         entries.write({'state': 'draft'})
         return res
