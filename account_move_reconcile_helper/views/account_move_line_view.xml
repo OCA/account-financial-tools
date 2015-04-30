@@ -9,6 +9,9 @@
                 <xpath expr="//field[@name='reconcile_ref']" position="attributes">
                     <attribute name="widget">autocolor</attribute>
                 </xpath>
+                <xpath expr="//field[@name='credit']" position="after">
+                    <field name="credit_debit_balance" sum="Total Balance"/>
+                </xpath>
             </field>
         </record>
         <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
