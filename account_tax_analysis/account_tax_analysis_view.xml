@@ -25,17 +25,17 @@
           <newline/>
           <group expand="1" string="Group By...">
             <filter string="Partner" icon="terp-partner"
-            		name="group_by_partner"
+                    name="group_by_partner"
                     domain="[]"
                     context="{'group_by': 'partner_id'}"/>
             <separator orientation="vertical"/>
             <filter string="Account"
-            		name="group_by_account"
+                    name="group_by_account"
                     icon="terp-folder-green"
                     context="{'group_by': 'account_id'}"/>
             <separator orientation="vertical"/>
             <filter string="Period"
-            	    name="group_by_period"
+                    name="group_by_period"
                     icon="terp-go-month"
                     domain="[]"
                     context="{'group_by': 'period_id'}"/>
@@ -43,13 +43,13 @@
                     name="group_by_journal"
                     domain="[]"
                     context="{'group_by': 'journal_id'}"/>
-			<filter string="Account / Tax"
-            	    name="group_by_account_tax"
-				    icon="terp-folder-green"
-				    domain="[]"
-				    context="{'group_by': ['tax_code_id', 'account_id'] }"/>
+            <filter string="Account / Tax"
+                    name="group_by_account_tax"
+                    icon="terp-folder-green"
+                    domain="[]"
+                    context="{'group_by': ['tax_code_id', 'account_id'] }"/>
             <filter string="Tax account"
-            	    name="group_by_tax"
+                    name="group_by_tax"
                     icon="terp-go-month"
                     domain="[]"
                     context="{'group_by': 'tax_code_id'}"/>
