@@ -6,7 +6,7 @@ Currency Rate Update
 
 Import exchange rates from the Internet.
 
-The module is able to use 4 different sources:
+The module is able to use the following sources:
 
 1. Admin.ch
    Updated daily, source in CHF.
