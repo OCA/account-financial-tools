@@ -18,109 +18,109 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Account / Tax"
-msgstr ""
+msgstr "Compte / Taxe"
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
 #: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
 msgid "Account Vat Declaration"
-msgstr ""
+msgstr "Déclaration de TVA"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Créer par"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Créer le"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Filters"
-msgstr ""
+msgstr "Filtres"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,fiscalyear_id:0
 msgid "Fiscalyear"
-msgstr ""
+msgstr "Année fiscale"
 
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,fiscalyear_id:0
 msgid "Fiscalyear to look on"
-msgstr ""
+msgstr "Année fiscale a analyser"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Group By..."
-msgstr ""
+msgstr "Grouper par"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,period_list:0
 msgid "If no period is selected, all the periods of the fiscal year will be used"
-msgstr ""
+msgstr "Si aucune période n'est sélectionnée toutes les périodes seront prises en compte"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Journal Items"
-msgstr ""
+msgstr "Lignes comptables"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Mis à jour par"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mis à jour le"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Period"
-msgstr ""
+msgstr "Période"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 #: field:account.vat.declaration.analysis,period_list:0
 msgid "Periods"
-msgstr ""
+msgstr "Périodes"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted"
-msgstr ""
+msgstr "Postée"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted Journal Items"
-msgstr ""
+msgstr "Ecritures postées"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -130,56 +130,56 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Show tax lines"
-msgstr ""
+msgstr "Afficher les lignes de taxes"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Tax account"
-msgstr ""
+msgstr "Compte de tax"
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
 #: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
 msgid "Taxes Analysis"
-msgstr ""
+msgstr "Analyses des taxes"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Taxes Report"
-msgstr ""
+msgstr "Rapport de taxe"
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
 msgid "This menu print a VAT declaration based on invoices or payments. You can select one or several periods of the fiscal year. Information required for a tax declaration is automatically generated by OpenERP from invoices (or payments, in some countries). This data is updated in real time. That’s very useful because it enables you to preview at any time the tax that you owe at the start and end of the month or quarter."
-msgstr ""
+msgstr "Ce menu affiche une déclaration d'impôts basée sur des factures ou des paiements. Sélectionnez une ou plusieurs périodes de l'exercice fiscal. Les informations requises pour une déclaration de taxes sont générées automatiquement par Odoo à partir des factures (ou des paiements, dans certains pays). Ces données sont mises à jour en temps réel. Ceci est très utile car il vous permet de prévisualiser à tout moment l'impôt que vous devez au début et à la fin du mois ou du trimestre."
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total Taxe"
-msgstr ""
+msgstr "Total Taxe"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total credit"
-msgstr ""
+msgstr "Total credit"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total debit"
-msgstr ""
+msgstr "Total debit"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted"
-msgstr ""
+msgstr "Non posté"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted Journal Items"
-msgstr ""
+msgstr "Lignes comptables non postées"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "or"
-msgstr ""
+msgstr "ou"
 
