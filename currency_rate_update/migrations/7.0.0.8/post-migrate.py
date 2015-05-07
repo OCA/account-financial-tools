@@ -21,10 +21,11 @@ def rename_states(cr, pool, state_renames):
     """
     for model_name, field_renames in state_renames.iteritems():
         model_pool = pool[model_name]
-        for field_name, state_rename_spec in field_renames.iteritems():
-            src, dest = state_rename_spec
-            ids = model_pool.search(cr, SUPERUSER_ID, [(field_name, '=', src)])
-            model_pool.write(cr, SUPERUSER_ID, ids, {field_name: dest})
+        for field_name, old_new_values in field_renames.iteritems():
+            for old_new_value in old_new_values:
+                src, dest = old_new_value
+                ids = model_pool.search(cr, SUPERUSER_ID, [(field_name, '=', src)])
+                model_pool.write(cr, SUPERUSER_ID, ids, {field_name: dest})
 
 
 def migrate(cr, version):
