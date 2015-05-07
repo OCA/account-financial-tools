@@ -31,7 +31,7 @@
     'license': 'AGPL-3',
     'depends': [
         'web',
-        'web_widget_auto_color',
+        'web_option_auto_color',
         'account',
     ],
     'data': [
