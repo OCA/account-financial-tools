@@ -73,11 +73,8 @@ class ResCurrency(models.Model):
                         (currency_id, date))
                     if cr.rowcount:
                         rate_date = cr.fetchone()[1]
-                        rate_date_dt = fields.Date.from_string(rate_date)
-                        if len(date) <= 10:
-                            date_dt = fields.Date.from_string(date)
-                        else:
-                            date_dt = fields.Datetime.from_string(date)
+                        rate_date_dt = fields.Datetime.from_string(rate_date)
+                        date_dt = fields.Datetime.from_string(date)
                         max_delta = user.company_id.currency_rate_max_delta
                         if (date_dt - rate_date_dt).days > max_delta:
                             currency = self.browse(
