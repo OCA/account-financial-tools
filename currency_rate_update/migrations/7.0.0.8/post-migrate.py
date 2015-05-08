@@ -24,7 +24,7 @@ def rename_states(cr, pool, state_renames):
         for field_name, old_new_values in field_renames.iteritems():
             for old_new_value in old_new_values:
                 src, dest = old_new_value
-                ids = model_pool.search(cr, SUPERUSER_ID, 
+                ids = model_pool.search(cr, SUPERUSER_ID,
                                         [(field_name, '=', src)])
                 model_pool.write(cr, SUPERUSER_ID, ids, {field_name: dest})
 
