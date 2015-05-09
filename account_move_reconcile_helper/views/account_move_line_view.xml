@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.view_move_line_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='reconcile_ref']" position="attributes">
-                    <attribute name="widget">autocolor</attribute>
+                    <attribute name="autocolor">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='credit']" position="after">
                     <field name="credit_debit_balance" sum="Total Balance"/>
