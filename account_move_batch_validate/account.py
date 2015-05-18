@@ -85,6 +85,7 @@ class account_move(orm.Model):
                                                eta=eta)
             values['post_job_uuid'] = job_uuid
             self.write(cr, uid, [move_id], values)
+            cr.commit()
 
     def _cancel_jobs(self, cr, uid, context=None):
         """Find moves where the mark has been removed and cancel the jobs.
