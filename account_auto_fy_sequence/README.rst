@@ -21,6 +21,16 @@ initialize it's next number to the correct value.
 For this reason, the module will forbid the user to change
 a sequence from %(year)s to %(fy)s if it's next number is > 1.
 
+
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
+`here <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_auto_fy_sequence%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+
+
 Credits
 -------
 
