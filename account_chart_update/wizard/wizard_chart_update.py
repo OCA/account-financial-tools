@@ -348,7 +348,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 chart_template_ids, mapping_taxes, mapping_accounts,
                 mapping_fps)
         if self.update_financial_reports:
-            self._find_financial_reports()
+            self._find_financial_reports(mapping_accounts)
         # Write the results, and go to the next step.
         self.write({'state': 'ready'})
         return _reopen(self)
@@ -376,7 +376,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         if self_lang.update_fiscal_position:
             self_lang._update_fiscal_positions(
                 log, mapping_taxes, mapping_accounts)
-        if lang_self.update_financial_reports:
+        if self_lang.update_financial_reports:
             self._update_financial_reports(log)
         # Check if errors where detected and wether we should stop.
         if log.has_errors() and not self_lang.continue_on_errors:
@@ -836,7 +836,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 })
 
     @api.one
-    def _find_financial_reports(self):
+    def _find_financial_reports(self, mapping_accounts):
         wiz_fr = self.env['wizard.update.charts.accounts.financial.report']
         # Remove previous financial reports
         self.financial_report_ids.unlink()
@@ -854,9 +854,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         for account_template in account_templates:
             template_fr_ids = set([fr.id for fr in
                                    account_template.financial_report_ids])
-            # Ensure the account template is on the map (search for the mapped
-            # account id).
-            account = self.map_account_template(account_template)
+            account = self.map_account_template(
+                account_template, mapping_accounts)
             if account:
                 fr_ids = set([fr.id for fr in
                               account.financial_report_ids])
