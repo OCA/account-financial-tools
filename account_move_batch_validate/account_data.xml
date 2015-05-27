@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!-- Connector channel: To avoid concurrent update when validating the account_move
+        on ir_sequence, jobs must be processed one by one. By default channels are created
+        with a capacity of 1. Be careful to not increase the capacity of the channel. -->
+        <record model="queue.job.channel" id="channel_account_move_batch_validate">
+            <field name="name">account_move_batch_validate</field>
+            <field name="parent_id" ref="connector.channel_root"/>
+        </record>
+
+        <record model="queue.job.function" id="function_account_validate_one_move">
+            <field name="name">openerp.addons.account_move_batch_validate.account.validate_one_move</field>
+            <field name="channel_id" ref="channel_account_move_batch_validate"/>
+        </record>
+
+    </data>
+</openerp>
