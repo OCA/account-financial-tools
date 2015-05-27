@@ -28,6 +28,10 @@ from openerp.tools.translate import _
 from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
 from openerp.addons.connector.queue.job import OpenERPJobStorage
+from openerp.addons.connector.connector import install_in_connector
+
+# install the module in connector to register the job function
+install_in_connector()
 
 _logger = logging.getLogger(__name__)
 
