@@ -37,8 +37,8 @@ class AccountJournal(orm.Model):
     _columns = {
         'entry_posted_async': fields.boolean(
             'Asynchronously Post for Manual Entries',
-            help='Check this box if you don\'t want new journal entries to '
-                 'be posted asynchronously  without any manual validation. \n'
+            help='Check this box if you want new journal entries to '
+                 'be posted asynchronously without any manual validation. \n'
                  'Note that journal entries are posted sequentially to avoid '
                  'concurrent update on ir_sequence'),
     }
