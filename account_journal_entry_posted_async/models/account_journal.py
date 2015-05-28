@@ -27,8 +27,8 @@ from openerp.tools.translate import _
 from openerp import exceptions
 from openerp.osv import orm, fields
 
-SYNC_OR_ASYNC_ERR_MSG = _('You must choose between sync or async post '
-                          'for manual entries')
+SYNC_OR_ASYNC_ERR_MSG = ('You must choose between sync or async post '
+                         'for manual entries')
 
 
 class AccountJournal(orm.Model):
@@ -46,7 +46,7 @@ class AccountJournal(orm.Model):
     def create(self, cr, user, vals, context=None):
         if (vals.get('entry_posted') and
                 vals.get('entry_posted_async')):
-            raise exceptions.Warning(SYNC_OR_ASYNC_ERR_MSG)
+            raise exceptions.Warning(_(SYNC_OR_ASYNC_ERR_MSG))
         return orm.Model.create(self, cr, user, vals, context=context)
 
     def write(self, cr, user, ids, vals, context=None):
@@ -58,7 +58,7 @@ class AccountJournal(orm.Model):
                 context=context):
             if (info.get('entry_posted') and
                     info.get('entry_posted_async')):
-                raise exceptions.Warning(SYNC_OR_ASYNC_ERR_MSG)
+                raise exceptions.Warning(_(SYNC_OR_ASYNC_ERR_MSG))
         return res
 
     def on_change_entry_posted(self, cr, uid, ids, boolval):
