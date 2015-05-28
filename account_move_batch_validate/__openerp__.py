@@ -32,7 +32,6 @@
     'website': 'http://www.camptocamp.com',
     'data': [
         'account_view.xml',
-        'account_data.xml',
         'wizard/move_marker_view.xml',
     ],
     'test': [
