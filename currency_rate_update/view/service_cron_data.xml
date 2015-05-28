@@ -9,7 +9,7 @@
             <field name="doall" eval="False"/>
             <field name="model" eval="'currency.rate.update.service'"/>
             <field name="function" eval="'_run_currency_update'"/>
-            <field name="args">(None,)</field>
+            <field name="args">()</field>
         </record>
 
     </data>
