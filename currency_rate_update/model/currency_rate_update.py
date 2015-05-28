@@ -212,7 +212,7 @@ class Currency_rate_update_service(models.Model):
                                           string='Currencies to update with '
                                           'this service')
     # Link with company
-    company_id = fields.Many2one('res.company', 'Linked Company')
+    company_id = fields.Many2one('res.company', 'Company')
     # Note fileds that will be used as a logger
     note = fields.Text('Update logs')
     max_delta_days = fields.Integer(
