@@ -147,7 +147,7 @@ class account_move(orm.Model):
         self._cancel_jobs(cr, uid, context=context)
 
 
-@job
+@job(default_channel='root.account_move_batch_validate')
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
     move_pool = session.pool['account.move']
