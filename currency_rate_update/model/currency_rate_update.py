@@ -237,6 +237,9 @@ class Currency_rate_update_service(models.Model):
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
+        _logger.info(
+            'Starting to refresh currencies with service %s (company: %s)',
+            self.service, self.company_id.name)
         factory = Currency_getter_factory()
         curr_obj = self.env['res.currency']
         rate_obj = self.env['res.currency.rate']
@@ -289,6 +292,9 @@ class Currency_rate_update_service(models.Model):
                             'name': rate_name
                         }
                         rate_obj.create(vals)
+                        _logger.info(
+                            'Updated currency %s via service %s',
+                            curr.name, self.service.name)
 
                 # Show the most recent note at the top
                 msg = '%s \n%s currency updated. %s' % (
@@ -303,7 +309,7 @@ class Currency_rate_update_service(models.Model):
                     repr(exc),
                     note
                 )
-                _logger.info(repr(exc))
+                _logger.error(repr(exc))
                 self.write({'note': error_msg})
             if self._context.get('cron', False):
                 midnight = time(0, 0)
@@ -322,4 +328,6 @@ class Currency_rate_update_service(models.Model):
 
     @api.model
     def _run_currency_update(self):
+        _logger.info('Starting the currency rate update cron')
         self.run_currency_update()
+        _logger.info('End of the currency rate update cron')
