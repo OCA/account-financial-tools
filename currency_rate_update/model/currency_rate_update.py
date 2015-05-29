@@ -294,7 +294,7 @@ class Currency_rate_update_service(models.Model):
                         rate_obj.create(vals)
                         _logger.info(
                             'Updated currency %s via service %s',
-                            curr.name, self.service.name)
+                            curr.name, self.service)
 
                 # Show the most recent note at the top
                 msg = '%s \n%s currency updated. %s' % (
