@@ -20,35 +20,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'Journal Items Search Extension',
-    'version': '0.1',
-    'license': 'AGPL-3',
-    'author': "Noviat,Odoo Community Association (OCA)",
-    'category': 'Generic Modules',
-    'description': """
-Journal Items Search Extension
-==============================
-
-This module adds the 'Journal Items Search All' menu entry.
-
-This menu entry adds a number of search fields on top of the List View rows.
-These fields can be used in combination with the Search window.
-
-    """,
-    'depends': ['account'],
-    'data': [
-        'account_view.xml',
-    ],
-    'js': [
-        'static/src/js/account_move_line_search_extension.js',
-    ],
-    'qweb': [
-        'static/src/xml/account_move_line_search_extension.xml',
-    ],
-    'css': [
-        'static/src/css/account_move_line_search_extension.css',
-    ],
-    'installable': False,
-    'auto_install': False,
-}
+from . import models
