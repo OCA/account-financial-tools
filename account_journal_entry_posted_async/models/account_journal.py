@@ -23,12 +23,7 @@
 #
 ##############################################################################
 
-from openerp.tools.translate import _
-from openerp import exceptions
 from openerp.osv import orm, fields
-
-SYNC_OR_ASYNC_ERR_MSG = ('You must choose between sync or async post '
-                         'for manual entries')
 
 
 class AccountJournal(orm.Model):
@@ -43,28 +38,23 @@ class AccountJournal(orm.Model):
                  'concurrent update on ir_sequence'),
     }
 
+    def _fix_entry_posted(self, vals):
+        if vals.get('entry_posted_async'):
+            vals['entry_posted'] = True
+        return vals
+
     def create(self, cr, user, vals, context=None):
-        if (vals.get('entry_posted') and
-                vals.get('entry_posted_async')):
-            raise exceptions.Warning(_(SYNC_OR_ASYNC_ERR_MSG))
+        vals = self._fix_entry_posted(vals)
         return orm.Model.create(self, cr, user, vals, context=context)
 
     def write(self, cr, user, ids, vals, context=None):
-        res = orm.Model.write(self, cr, user, ids, vals, context=context)
-        if not hasattr(ids, '__iter__'):
-            ids = [ids]
-        for info in self.read(
-                cr, user, ids, ['entry_posted', 'entry_posted_async'],
-                context=context):
-            if (info.get('entry_posted') and
-                    info.get('entry_posted_async')):
-                raise exceptions.Warning(_(SYNC_OR_ASYNC_ERR_MSG))
-        return res
+        vals = self._fix_entry_posted(vals)
+        return orm.Model.write(self, cr, user, ids, vals, context=context)
 
     def on_change_entry_posted(self, cr, uid, ids, boolval):
         value = {}
         res = {'value': value}
-        if boolval:
+        if not boolval:
             value['entry_posted_async'] = False
         return res
 
@@ -72,5 +62,5 @@ class AccountJournal(orm.Model):
         value = {}
         res = {'value': value}
         if boolval:
-            value['entry_posted'] = False
+            value['entry_posted'] = True
         return res

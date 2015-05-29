@@ -40,10 +40,10 @@ Installation
 ============
 
 Connector jobs are created in a channel named
-*root.account_move_batch_validate*. The channel must be configured with a
+*root.account_move_validate*. The channel must be configured with a
 capacity of 1::
 
-     ODOO_CONNECTOR_CHANNELS=root:X,root.account_move_batch_validate:1
+     ODOO_CONNECTOR_CHANNELS=root:X,root.account_move_validate:1
 
 See the `connector documentation
 <http://odoo-connector.com/guides/jobrunner.html>`_ to see how to configure
@@ -59,7 +59,8 @@ the capacity of channels .
     'license': 'AGPL-3',
 
     'depends': [
-        'account_move_batch_validate',
+        "connector",
+        "account",
     ],
     'data': [
         'views/account_view.xml',

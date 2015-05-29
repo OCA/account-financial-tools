@@ -23,11 +23,8 @@
 #
 ##############################################################################
 import mock
-from openerp import exceptions
 from openerp.osv import fields
-from openerp.tools.translate import _
 import openerp.tests.common as common
-from ..models import account_journal
 
 
 class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
@@ -35,22 +32,22 @@ class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
     def setUp(self):
         super(AccountJournalEntryPostedAsyncTest, self).setUp()
         cr, uid = self.cr, self.uid
-        AccountJournal = self.registry('account.journal')
+        journal_model = self.registry('account.journal')
         self.journal_id = self.ref('account.bank_journal')
         self.account_id = self.ref('account.cash')
         self.partner_id = self.ref('base.res_partner_12')
         self.period_id = self.ref('account.period_6')
-        AccountJournal.write(
+        journal_model.write(
             cr, uid, self.journal_id, {'entry_posted_async': True})
 
     def __get_account_line_info(self, name, debit, credit):
         cr, uid = self.cr, self.uid
-        AccountMoveLine = self.registry('account.move.line')
-        partner = AccountMoveLine.onchange_partner_id(
+        acc_move_line_model = self.registry('account.move.line')
+        partner = acc_move_line_model.onchange_partner_id(
             cr, uid, [], None, self.partner_id,
             self.account_id,
             journal=self.journal_id)
-        account = AccountMoveLine.onchange_account_id(
+        account = acc_move_line_model.onchange_account_id(
             cr, uid, [], account_id=self.account_id,
             partner_id=self.partner_id)
 
@@ -70,37 +67,29 @@ class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
         return line_info
 
     def test_journal_config(self):
-        AccountJournal = self.registry('account.journal')
+        journal_model = self.registry('account.journal')
         cr, uid = self.cr, self.uid
         journal_id = self.ref('account.bank_journal')
-        with self.assertRaises(exceptions.Warning) as ex:
-            AccountJournal.write(
-                cr, uid, journal_id, {'entry_posted': True,
-                                      'entry_posted_async': True})
-        self.assertEqual(
-            str(ex.exception),
-            _(account_journal.SYNC_OR_ASYNC_ERR_MSG))
+        journal_model.write(
+            cr, uid, journal_id, {'entry_posted': False,
+                                  'entry_posted_async': True})
 
-        with self.assertRaises(exceptions.Warning) as ex:
-            AccountJournal.create(
-                cr, uid, {'entry_posted': True,
-                          'entry_posted_async': True})
-        self.assertEqual(
-            str(ex.exception),
-            _(account_journal.SYNC_OR_ASYNC_ERR_MSG))
+        journal = journal_model.browse(cr, uid, journal_id)
+        self.assertTrue(journal.entry_posted)
 
     def test_account_validate_async_1(self):
         """ Here we test that the validation is delayed when an
         account.move.line validating the balance of the move is created
         """
-        AccountMove = self.registry('account.move')
-        AccountMoveLine = self.registry('account.move.line')
+        acc_move_model = self.registry('account.move')
+        acc_move_line_model = self.registry('account.move.line')
         cr, uid = self.cr, self.uid
-        with mock.patch('openerp.addons.account_move_batch_validate.'
-                        'account.validate_one_move.delay') as delay:
+        with mock.patch('openerp.addons.account_journal_entry_posted_async.'
+                        'models.account_move.validate_one_move.delay'
+                        ) as delay:
 
             # create on move
-            move_id = AccountMove.create(
+            move_id = acc_move_model.create(
                 cr, uid,
                 {'date': fields.date.today(),
                  'period_id': self.period_id,
@@ -111,7 +100,7 @@ class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
             # create a first line for the credit
             line_info = self.__get_account_line_info('Line1', 0.0, 1.0)
             line_info['move_id'] = move_id
-            AccountMoveLine.create(cr, uid, line_info)
+            acc_move_line_model.create(cr, uid, line_info)
             # at this stage the delay is not called since the move is not
             # well balanced
             self.assertEqual(0, delay.call_count)
@@ -119,7 +108,7 @@ class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
             # create a second line for the debit
             line_info = self.__get_account_line_info('Line2', 1.0, 0.0)
             line_info['move_id'] = move_id
-            AccountMoveLine.create(cr, uid, line_info)
+            acc_move_line_model.create(cr, uid, line_info)
 
             # the delay must be called since the move is well balanced
             self.assertEqual(1, delay.call_count)
@@ -128,15 +117,16 @@ class AccountJournalEntryPostedAsyncTest(common.TransactionCase):
         """ Here we test that the validation is delayed when a balanced
         account.move is created
         """
-        AccountMove = self.registry('account.move')
+        acc_move_model = self.registry('account.move')
         cr, uid = self.cr, self.uid
-        with mock.patch('openerp.addons.account_move_batch_validate.'
-                        'account.validate_one_move.delay') as delay:
+        with mock.patch('openerp.addons.account_journal_entry_posted_async.'
+                        'models.account_move.validate_one_move.delay'
+                        ) as delay:
             line_info_1 = self.__get_account_line_info('Line1', 0.0, 1.0)
             line_info_2 = self.__get_account_line_info('Line1', 1.0, 0.0)
 
             # create on move
-            AccountMove.create(
+            acc_move_model.create(
                 cr, uid,
                 {'date': fields.date.today(),
                  'period_id': self.period_id,

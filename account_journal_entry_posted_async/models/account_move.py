@@ -23,29 +23,47 @@
 #
 ##############################################################################
 from openerp.osv import orm
-from openerp.addons.connector.session import ConnectorSession
 
-from openerp.addons.account_move_batch_validate.account import \
-    validate_one_move
+from openerp.tools.translate import _
+from openerp.addons.connector.queue.job import job
+from openerp.addons.connector.session import ConnectorSession
+from openerp.addons.connector.connector import install_in_connector
+
+# install the module in connector to register the job function
+install_in_connector()
 
 
 class AccountMove(orm.Model):
     _inherit = 'account.move'
 
-    def delay_validate_if_required(self, cr, uid, _id, context=None):
+    def button_validate(self, cr, uid, ids, context=None):
+        if not hasattr(ids, '__iter__'):
+            ids = [ids]
+        context = context or {}
         session = ConnectorSession(cr, uid, context=context)
-        record = self.browse(cr, uid, _id, context=context)
-        journal = self.pool['account.journal'].browse(
-            cr, uid, record.journal_id.id, context)
-        if journal.entry_posted_async:
-            if not self.validate(cr, uid, [_id], context):
-                return
-            job_uuid = validate_one_move.delay(session, record.name, _id)
-            values = {'post_job_uuid': job_uuid}
-            self.write(cr, uid, [_id], values)
+        for move in self.browse(cr, uid, ids, context=context):
+            if not move.journal_id.entry_posted_async:
+                self.do_button_validate(cr, uid, ids, context)
+            else:
+                description = _('Validate account move %s') % move.name
+                validate_one_move.delay(
+                    session, move._name, move.id, description=description)
+        return True
 
-    def create(self, cr, uid, vals, context=None):
-        move_id = orm.Model.create(self, cr, uid, vals, context=context)
-        if vals.get('line_id', False):
-            self.delay_validate_if_required(cr, uid, move_id, context)
-        return move_id
+    def do_button_validate(self, cr, uid, ids, context=None):
+        return super(AccountMove, self).button_validate(
+            cr, uid, ids, context=context)
+
+
+@job(default_channel='root.account_move_validate')
+def validate_one_move(session, model_name, move_id):
+    """Validate a move"""
+    move_pool = session.pool['account.move']
+    if move_pool.exists(session.cr, session.uid, [move_id]):
+        return move_pool.do_button_validate(
+            session.cr,
+            session.uid,
+            [move_id]
+        )
+    else:
+        return _(u'Nothing to do because the record has been deleted')
