@@ -26,6 +26,10 @@ from openerp.tools.translate import _
 import logging
 _logger = logging.getLogger(__name__)
 
+# List of move's fields that can't be modified if move is linked
+# with a depreciation line
+FIELDS_AFFETCS_ASSET_MOVE = ['period_id', 'journal_id', 'date']
+
 
 class account_move(orm.Model):
     _inherit = 'account.move'
@@ -51,7 +55,7 @@ class account_move(orm.Model):
             cr, uid, ids, context=context, check=check)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if vals:
+        if set(vals).intersection(set(FIELDS_AFFETCS_ASSET_MOVE)):
             if isinstance(ids, (int, long)):
                 ids = [ids]
             depr_obj = self.pool.get('account.asset.depreciation.line')
