@@ -22,7 +22,7 @@
 
 {
     'name': 'Journal Items Search Extension',
-    'version': '0.5',
+    'version': '0.6',
     'license': 'AGPL-3',
     'author': 'Noviat',
     'category': 'Accounting & Finance',
