@@ -26,7 +26,7 @@ from openerp.osv import orm
 class ir_actions_act_window(orm.Model):
     _inherit = 'ir.actions.act_window'
 
-    def __init__(self, pool, cr):
+    def _get_amlse_act_id(self, cr):
         module = 'account_move_line_search_extension'
         xml_id = 'action_account_move_line_search_extension'
         cr.execute(
@@ -35,7 +35,10 @@ class ir_actions_act_window(orm.Model):
             "AND module = %s AND name = %s ",
             (module, xml_id))
         res = cr.fetchone()
-        self._amlse_act_id = res and res[0]
+        return res and res[0]
+
+    def __init__(self, pool, cr):
+        self._amlse_act_id = self._get_amlse_act_id(cr)
         super(ir_actions_act_window, self).__init__(pool, cr)
 
     def _amlse_add_groups(self, cr, uid, context):
@@ -51,6 +54,8 @@ class ir_actions_act_window(orm.Model):
             context = {}
         res = super(ir_actions_act_window, self).read(
             cr, uid, ids, fields=fields, context=context, load=load)
+        if not self._amlse_act_id:
+            self._amlse_act_id = self._get_amlse_act_id(cr)
         if ids == [self._amlse_act_id]:
             amlse_act = res[0]
             if amlse_act.get('context'):
