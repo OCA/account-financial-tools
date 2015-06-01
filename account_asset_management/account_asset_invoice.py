@@ -73,9 +73,9 @@ class account_invoice(orm.Model):
                 res['asset_category_id'] = x['asset_category_id']
         return res
 
-    def inv_line_characteristic_hashcode(self, invoice, invoice_line):
+    def inv_line_characteristic_hashcode(self, invoice_line):
         res = super(account_invoice, self).inv_line_characteristic_hashcode(
-            invoice, invoice_line)
+            invoice_line)
         res += '-%s' % invoice_line.get('asset_category_id', 'False')
         return res
 
