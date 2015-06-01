@@ -7,6 +7,8 @@
             <field name="arch" type="xml">
                 <tree string="Currency update services">
                     <field name="service"/>
+                    <field name="company_id" groups="base.group_multi_company"
+                        invisible="not context.get('currency_rate_update_main_view')"/>
                     <field name="currency_to_update"/>
                     <field name="interval_type"/>
                     <field name="interval_number"/>
@@ -20,25 +22,40 @@
             <field name="model">currency.rate.update.service</field>
             <field name="arch" type="xml">
                 <form string="Currency update services">
-                    <group>
-						<group>
+                    <group name="main">
+                        <group name="left">
                             <field name="service"/>
+                            <field name="company_id" groups="base.group_multi_company"
+                                invisible="not context.get('currency_rate_update_main_view')"
+                                required="context.get('currency_rate_update_main_view')"/>
                             <field name="max_delta_days"/>
                         </group>
-                        <group>                            
+                        <group name="right">
                             <field name="interval_type"/>
                             <field name="interval_number"/>
                             <field name="next_run"/>
                         </group>
                     </group>
-                    <separator string="Currencies to update with this service" colspan="4"/>
-                    <field name="currency_list" invisible="1"/>
-                    <field name="currency_to_update" colspan="4" nolabel="1" domain="[('id','in', currency_list[0][2])]"/>
-                    <separator string="Logs" colspan="4"/>
-                    <field name="note" colspan="4" nolabel="1"/>
+                    <group string="Currencies to update with this service">
+                        <field name="currency_list" invisible="1"/>
+                        <field name="currency_to_update" nolabel="1" domain="[('id','in', currency_list[0][2])]"/>
+                    </group>
+                    <group string="Logs" name="logs">
+                        <field name="note" nolabel="1"/>
+                    </group>
                 </form>
             </field>
         </record>
+
+        <record id="currency_rate_update_action" model="ir.actions.act_window">
+            <field name="name">Currency Rate Update</field>
+            <field name="res_model">currency.rate.update.service</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'currency_rate_update_main_view': True}</field>
+        </record>
+
+        <menuitem id="currency_rate_update_menu" action="currency_rate_update_action"
+            parent="account.menu_configuration_misc" sequence="21"/>
 
     </data>
 </openerp>

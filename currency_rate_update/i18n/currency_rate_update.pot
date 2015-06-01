@@ -27,7 +27,7 @@ msgstr ""
 
 #. module: currency_rate_update
 #: help:res.company,auto_currency_up:0
-msgid "Automatical update of the currencies for this company"
+msgid "Automatic update of the currencies for this company"
 msgstr ""
 
 #. module: currency_rate_update
@@ -157,7 +157,7 @@ msgstr ""
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
-msgid "Linked Company"
+msgid "Company"
 msgstr ""
 
 #. module: currency_rate_update
