@@ -19,7 +19,7 @@
                                         invisible="1" />
                                     <button name="action_done"
                                         type="object" icon="gtk-cancel"
-                                        states="draft" help="Close journal for this period"/>
+                                        states="draft,printed" help="Close journal for this period"/>
                                     <button name="action_draft"
                                         type="object" icon="gtk-redo"
                                         states="done" help="Reopen journal for this period"/>
