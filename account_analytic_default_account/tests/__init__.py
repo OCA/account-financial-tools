@@ -20,4 +20,4 @@
 ##############################################################################
 
 from . import test_onchange_counterpart_account
-# from . import test_bank_reconciliation
+from . import test_bank_reconciliation
