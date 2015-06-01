@@ -25,4 +25,5 @@ class AccountTaxCode(models.Model):
                               move_state))[self.id]
         else:
             self.sum_period = super(AccountTaxCode,
-                                    self)._sum_period('sum_period', [])[self.id]
+                                    self)._sum_period('sum_period',
+                                                      [])[self.id]

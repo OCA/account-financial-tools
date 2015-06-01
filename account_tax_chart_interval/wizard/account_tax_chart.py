@@ -43,6 +43,6 @@ class AccountTaxChart(models.TransientModel):
             name = res['name']
             if name.find(':'):
                 name = name[:name.find(':')]
-            name += ":%s-%s" %(self.period_from.code, self.period_to.code)
+            name += ":%s-%s" % (self.period_from.code, self.period_to.code)
             res['name'] = name
         return res
