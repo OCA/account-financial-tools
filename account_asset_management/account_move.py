@@ -26,6 +26,15 @@ from openerp.tools.translate import _
 import logging
 _logger = logging.getLogger(__name__)
 
+# List of move's fields that can't be modified if move is linked
+# with a depreciation line
+FIELDS_AFFECTS_ASSET_MOVE = set(['period_id', 'journal_id', 'date'])
+# List of move line's fields that can't be modified if move is linked
+# with a depreciation line
+FIELDS_AFFECTS_ASSET_MOVE_LINE = \
+    set(['credit', 'debit', 'account_id', 'journal_id', 'date',
+         'asset_category_id', 'asset_id', 'tax_code_id', 'tax_amount'])
+
 
 class account_move(orm.Model):
     _inherit = 'account.move'
@@ -51,7 +60,7 @@ class account_move(orm.Model):
             cr, uid, ids, context=context, check=check)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if vals:
+        if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE):
             if isinstance(ids, (int, long)):
                 ids = [ids]
             depr_obj = self.pool.get('account.asset.depreciation.line')
@@ -124,6 +133,13 @@ class account_move_line(orm.Model):
 
     def write(self, cr, uid, ids, vals,
               context=None, check=True, update_check=True):
+        for move_line in self.browse(cr, uid, ids, context=context):
+            if move_line.asset_id.id:
+                if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE):
+                    raise orm.except_orm(
+                        _('Error!'),
+                        _("You cannot change an accounting item "
+                          "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise orm.except_orm(
                 _('Error!'),
