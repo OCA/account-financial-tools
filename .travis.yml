@@ -1,32 +1,38 @@
-# Config file .travis.yml
+language: python
+
+python:
+  - "2.7"
 
 addons:
   apt:
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
-
-language: python
-
-python:
-  - "2.7"
+      - python-simplejson
+      - python-serial
 
 env:
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" UNIT_TEST=1
-  - VERSION="7.0" ODOO_REPO="OCA/OCB" UNIT_TEST=1
+  global:
+  - VERSION="7.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0" UNIT_TEST="1"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: "a8dbMaEToKHKJxj/9vKMmPeItLwa3NPo1nBexgn698+mQtzEJ74OIljqB/+IZup7AXtLSK8UN9Z3cCx/RD26p5yZhYD8IRKhLel2KC1Q12WbPYZMXvv7ymzpG0N72312KikieO75OHuJ3i+aBYk3p4mGg6dUh1rzQdkOc83PBNA="
+
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="OCA/OCB
 
 virtualenv:
   system_site_packages: true
 
 install:
-  - git clone https://github.com/OCA/reporting-engine ${HOME}/reporting-engine -b ${VERSION}
   - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-  - travis_install_nightly ${VERSION}
+  - travis_install_nightly
 
 script:
   - travis_run_tests
 
 after_success:
-  coveralls
+  - travis_after_tests_success

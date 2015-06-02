@@ -15,4 +15,10 @@ It provides addons to:
  - Force draft accounting by default
  - Enforce partners on account moves
 
-And munch more.
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-account-financial-tools-7-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-account-financial-tools-7-0)
+
+And much more.
+=======
+And much more.
