@@ -1176,7 +1176,7 @@ class account_asset_asset(orm.Model):
                 'method_period': category_obj.method_period,
                 'method_progress_factor': category_obj.method_progress_factor,
                 'prorata': category_obj.prorata,
-                'account_analytic_id': category_obj.account_analytic_id,
+                'account_analytic_id': category_obj.account_analytic_id.id,
             }
         return res
 
