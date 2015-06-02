@@ -32,7 +32,8 @@ FIELDS_AFFECTS_ASSET_MOVE = set(['period_id', 'journal_id', 'date'])
 # List of move line's fields that can't be modified if move is linked
 # with a depreciation line
 FIELDS_AFFECTS_ASSET_MOVE_LINE = \
-    set(['credit', 'debit', 'account_id', 'journal_id', 'date'])
+    set(['credit', 'debit', 'account_id', 'journal_id', 'date',
+         'asset_category_id', 'asset_id', 'tax_code_id', 'tax_amount'])
 
 
 class account_move(orm.Model):
