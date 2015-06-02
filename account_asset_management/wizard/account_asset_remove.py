@@ -239,6 +239,7 @@ class account_asset_remove(orm.TransientModel):
                 move_line_vals = {
                     'name': asset.name,
                     'account_id': wiz_data.account_residual_value_id.id,
+                    'analytic_account_id': asset.account_analytic_id.id,
                     'debit': residual_value,
                     'credit': 0.0,
                     'partner_id': partner_id,
@@ -251,6 +252,7 @@ class account_asset_remove(orm.TransientModel):
                     move_line_vals = {
                         'name': asset.name,
                         'account_id': wiz_data.account_sale_id.id,
+                        'analytic_account_id': asset.account_analytic_id.id,
                         'debit': sale_value,
                         'credit': 0.0,
                         'partner_id': partner_id,
@@ -258,12 +260,13 @@ class account_asset_remove(orm.TransientModel):
                     }
                     move_lines.append((0, 0, move_line_vals))
                 balance = wiz_data.sale_value - residual_value
-                account_id = balance > 0 \
-                    and wiz_data.account_plus_value_id.id \
-                    or wiz_data.account_min_value_id.id
+                account_id = (wiz_data.account_plus_value_id.id
+                              if balance > 0
+                              else wiz_data.account_min_value_id.id)
                 move_line_vals = {
                     'name': asset.name,
                     'account_id': account_id,
+                    'analytic_account_id': asset.account_analytic_id.id,
                     'debit': balance < 0 and -balance or 0.0,
                     'credit': balance > 0 and balance or 0.0,
                     'partner_id': partner_id,
