@@ -29,6 +29,10 @@ _logger = logging.getLogger(__name__)
 # List of move's fields that can't be modified if move is linked
 # with a depreciation line
 FIELDS_AFFECTS_ASSET_MOVE = set(['period_id', 'journal_id', 'date'])
+# List of move line's fields that can't be modified if move is linked
+# with a depreciation line
+FIELDS_AFFECTS_ASSET_MOVE_LINE = \
+    set(['credit', 'debit', 'account_id', 'journal_id', 'date'])
 
 
 class account_move(orm.Model):
@@ -128,6 +132,13 @@ class account_move_line(orm.Model):
 
     def write(self, cr, uid, ids, vals,
               context=None, check=True, update_check=True):
+        for move_line in self.browse(cr, uid, ids, context=context):
+            if move_line.asset_id.id:
+                if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE):
+                    raise orm.except_orm(
+                        _('Error!'),
+                        _("You cannot change an accounting item "
+                          "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise orm.except_orm(
                 _('Error!'),
