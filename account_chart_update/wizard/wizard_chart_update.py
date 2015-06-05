@@ -560,12 +560,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 'notes': _("To deactivate: not in the template"),
             })
 
-    def _is_different_tax(self, tax, tax_template, mapping_tax_codes,
-                          mapping_accounts):
+    def _is_different_tax(self, tax, tax_template, mapping_taxes,
+                          mapping_tax_codes, mapping_accounts):
         """Check the tax for changes.
         :return: An string that will be empty if no change detected.
         """
         notes = ""
+        _logger.info('tax = ' + pformat(tax.description))
+        if tax.active == False:
+            notes += _("Tax is disabled.\n")
         if tax.name != tax_template.name:
             notes += _("The name field is different.\n")
         if tax.description != tax_template.description:
@@ -582,6 +585,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The domain field is different.\n")
         if tax.child_depend != tax_template.child_depend:
             notes += _("The child depend field is different.\n")
+        if tax.parent_id != self.map_tax_template(tax_template.parent_id,
+                                                  mapping_taxes):
+            notes += _("The parent_id field is different.\n")
         if tax.python_compute != tax_template.python_compute:
             notes += _("The python compute field is different.\n")
         # if tax.tax_group != tax_template.tax_group:
@@ -648,7 +654,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             else:
                 # Check the tax for changes.
                 notes = self._is_different_tax(
-                    tax, tax_template, mapping_tax_codes, mapping_accounts)
+                    tax, tax_template, mapping_taxes, mapping_tax_codes,
+                    mapping_accounts)
                 if notes:
                     # Tax code to update.
                     wiz_taxes_obj.create({
@@ -754,9 +761,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                 break
                 if not found:
                     msg = fp_tax_templ.tax_dest_id.name or _('None')
-                    notes += _("Tax mapping not found on the fiscal position "
-                               "instance: %s -> %s.\n") % (
-                        fp_tax_templ.tax_src_id.name, msg)
+                    notes += _(
+                        "Tax mapping not found on the fiscal position "
+                        "instance: %s -> %s.\n") % (
+                            fp_tax_templ.tax_src_id.name, msg)
         elif fp_template.tax_ids and not fp.tax_ids:
             notes += _("The template has taxes the fiscal position instance "
                        "does not.\n")
@@ -777,8 +785,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     notes += _(
                         "Account mapping not found on the fiscal "
                         "position instance: %s -> %s.\n") % (
-                        fp_acc_templ.account_src_id.name,
-                        fp_acc_templ.account_dest_id.name)
+                            fp_acc_templ.account_src_id.name,
+                            fp_acc_templ.account_dest_id.name)
         elif fp_template.account_ids and not fp.account_ids:
             notes += _("The template has accounts the fiscal position "
                        "instance does not.\n")
@@ -872,6 +880,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _prepare_tax_vals(self, tax_template, mapping_tax_codes,
                           mapping_taxes):
         return {
+            'active': True,
             'name': tax_template.name,
             'sequence': tax_template.sequence,
             'amount': tax_template.amount,
