@@ -21,6 +21,7 @@
 
 from openerp.tests import common
 
+
 class testOnChange(common.TransactionCase):
 
     def setUp(self):
@@ -28,15 +29,33 @@ class testOnChange(common.TransactionCase):
         self.ana_acc_def_obj = self.registry('account.analytic.default')
         self.acc_voucher_obj = self.registry('account.voucher')
         # analytic defaults account creation
-        self.account_1 = self.ana_acc_def_obj.create(self.cr, self.uid,
-            {'analytic_id':self.ref('account.analytic_agrolait'), 'account_id':self.ref('account.income_fx_expense')})
-        self.account_2 = self.ana_acc_def_obj.create(self.cr, self.uid,
-            {'analytic_id':self.ref('account.analytic_agrolait'), 'account_id':self.ref('account.income_fx_income')})
+        agrolait = self.ref('account.analytic_agrolait')
+        expense = self.ref('account.income_fx_expense')
+        self.account_1 = (
+            self.ana_acc_def_obj.create(self.cr,
+                                        self.uid,
+                                        {
+                                            'analytic_id': agrolait,
+                                            'account_id': expense
+                                        }
+                                        )
+        )
+        self.account_2 = (
+            self.ana_acc_def_obj.create(self.cr,
+                                        self.uid,
+                                        {
+                                            'analytic_id': agrolait,
+                                            'account_id': expense
+                                        })
+        )
 
     def test_retrieve_analytic_account(self):
-        res1 = self.acc_voucher_obj.onchange_writeoff_acc_id(self.cr, self.uid, [], self.ref('account.income_fx_expense'))
-        res2 = self.acc_voucher_obj.onchange_writeoff_acc_id(self.cr, self.uid, [], self.ref('account.income_fx_income'))
+        res1 = self.acc_voucher_obj.onchange_writeoff_acc_id(
+            self.cr, self.uid, [], self.ref('account.income_fx_expense'))
+        res2 = self.acc_voucher_obj.onchange_writeoff_acc_id(
+            self.cr, self.uid, [], self.ref('account.income_fx_income'))
 
-        self.assertEqual(self.ref('account.analytic_agrolait'), res1.get('value', {}).get('analytic_id', False))
-        self.assertEqual(self.ref('account.analytic_agrolait'), res2.get('value', {}).get('analytic_id', False))
-
+        self.assertEqual(self.ref('account.analytic_agrolait'), res1.get(
+            'value', {}).get('analytic_id', False))
+        self.assertEqual(self.ref('account.analytic_agrolait'), res2.get(
+            'value', {}).get('analytic_id', False))
