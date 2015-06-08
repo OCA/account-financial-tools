@@ -566,7 +566,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         :return: An string that will be empty if no change detected.
         """
         notes = ""
-        if tax.active == False:
+        if not tax.active:
             notes += _("Tax is disabled.\n")
         if tax.name != tax_template.name:
             notes += _("The name field is different.\n")
