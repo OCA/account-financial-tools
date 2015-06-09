@@ -45,11 +45,13 @@ class AccountJournal(orm.Model):
 
     def create(self, cr, user, vals, context=None):
         vals = self._fix_entry_posted(vals)
-        return orm.Model.create(self, cr, user, vals, context=context)
+        return super(AccountJournal, self).create(
+            cr, user, vals, context=context)
 
     def write(self, cr, user, ids, vals, context=None):
         vals = self._fix_entry_posted(vals)
-        return orm.Model.write(self, cr, user, ids, vals, context=context)
+        return super(AccountJournal, self).write(
+            cr, user, ids, vals, context=context)
 
     def on_change_entry_posted(self, cr, uid, ids, boolval):
         value = {}
