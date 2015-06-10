@@ -26,5 +26,14 @@
       <field eval="True" name="reconcile"/>
       <field name="user_type" ref="account.data_account_type_receivable"/>
     </record>
+
+    <record id="base.user_root" model="res.users">
+      <field name="groups_id" eval="[(4, ref('group_account_credit_control_manager')), (4, ref('group_account_credit_control_user'))]"/>
+    </record>
+
+    <record id="base.user_demo" model="res.users">
+      <field name="groups_id" eval="[(4, ref('group_account_credit_control_user'))]"/>
+    </record>
+
   </data>
 </openerp>
