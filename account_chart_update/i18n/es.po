@@ -196,7 +196,7 @@ msgstr ""
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
 msgstr ""
-"Mapeo de cuenta no encontrado en la instancia de la posición fiscal: %s -> "
+"Mapeo de impuesto no encontrado en la instancia de la posición fiscal: %s -> "
 "%s.\n"
 
 #. module: account_chart_update
@@ -777,5 +777,5 @@ msgstr "Plantilla de código de impuesto"
 #, python-format
 #~ msgid "Tax mapping not found on the fiscal position instance: %s -> None.\n"
 #~ msgstr ""
-#~ "Mapeo de cuentas no encontrado en la instancia de posición fiscal: %s -> "
+#~ "Mapeo de impuesto no encontrado en la instancia de posición fiscal: %s -> "
 #~ "Ninguno.\n"

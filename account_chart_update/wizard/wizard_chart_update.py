@@ -1423,11 +1423,12 @@ class WizardUpdateChartsAccounts(orm.TransientModel):
         account_mapping = []
         for fp_account in fp_template.account_ids:
             account_mapping.append({
-                'account_src_id': acc_templ_mapping.get(
-                    fp_account.account_src_id.id),
-                'account_dest_id': (
-                    fp_account.account_dest_id and
-                    acc_templ_mapping.get(fp_account.account_dest_id.id)),
+                'account_src_id': self._map_account_template(
+                    cr, uid, wizard, acc_templ_mapping,
+                    fp_account.account_src_id, context=None),
+                'account_dest_id': self._map_account_template(
+                    cr, uid, wizard, acc_templ_mapping,
+                    fp_account.account_dest_id, context=None),
             })
         return {
             'company_id': wizard.company_id.id,
