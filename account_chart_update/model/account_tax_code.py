@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
-#    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.
-#    (http://www.pexego.es)
-#    @authors: Jordi Esteve (Zikzakmedia), Borja López Soilán (Pexego)
-#
+#    OpenERP, Open Source Management Solution
+#    Copyright (c) 2014 ACSONE SA/NV (http://acsone.eu)
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -20,9 +17,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-"""
-Account Chart Update Wizard
-"""
 
-from . import model
-from . import wizard
+from openerp.osv import orm, fields
+
+
+class AccountTaxCode(orm.Model):
+    _inherit = 'account.tax.code'
+
+    _columns = {
+        'active': fields.boolean('Active'),
+    }
+
+    _defaults = {
+        'active': True,
+    }
+
+    def _sum(self, cr, uid, ids, name, args, context, where='',
+             where_params=()):
+        try:
+            return super(AccountTaxCode, self)._sum(
+                cr, uid, ids, name, args, context, where=where,
+                where_params=where_params)
+        except:
+            cr.rollback()
+            return dict.fromkeys(ids, 0.0)

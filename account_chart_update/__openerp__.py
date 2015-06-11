@@ -6,7 +6,7 @@
 #    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #    Copyright (c) 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
 #                       Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>
-#    $Id$
+#
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
 #    by the Free Software Foundation, either version 3 of the License, or
@@ -20,14 +20,17 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    2013/09/08 - Joaquín Gutierrez: Adaptación a la versión
-#
 ##############################################################################
 
 {
     'name': "Detect changes and update the Account Chart from a template",
     'version': "1.2",
-    'author': "Zikzakmedia SL,Odoo Community Association (OCA)",
+    'author': "Zikzakmedia SL,"
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza,"
+              "Joaquín Gutierrez,"
+              "invitu,"
+              "ACSONE SA/NV,"
+              "Odoo Community Association (OCA)",
     'website': "www.zikzakmedia.com",
     'depends': ["account"],
     'category': "Generic Modules/Accounting",
@@ -70,6 +73,7 @@ Any problem found while updating will be shown on the last step.
     "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
+        'views/account_tax_code_view.xml',
     ],
     "active": False,
     "installable": True
