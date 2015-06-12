@@ -33,9 +33,6 @@ from openerp import exceptions
 from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 
-DB = common.DB
-ADMIN_USER_ID = common.ADMIN_USER_ID
-
 
 def get_simple_product_id(self):
     return self.env['product.product'].create({'name': 'product_test_01',
