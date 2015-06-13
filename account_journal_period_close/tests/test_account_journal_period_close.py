@@ -32,9 +32,6 @@ from openerp.exceptions import except_orm
 from datetime import datetime
 from psycopg2 import IntegrityError
 
-DB = common.DB
-ADMIN_USER_ID = common.ADMIN_USER_ID
-
 
 def get_simple_account_move_values(self, period_id, journal_id):
     sale_product_account_id = self.ref('account.a_sale')
