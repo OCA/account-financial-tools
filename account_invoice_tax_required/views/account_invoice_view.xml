@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- ###############################################
+                        INVOICE INHERITANCE
+             ############################################### -->
+        
+        <!-- ## Suppliers ## -->
+        <record id="invoice_supplier_company_currency_form" model="ir.ui.view">
+            <field name="name">Account invoice supplier (form) - add company currency</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='period_id']/.." position="after">
+                    <group string="Amounts in company currency">
+                        <field name="cc_amount_untaxed"/>
+                        <field name="cc_amount_tax"/>
+                        <field name="cc_amount_total"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ## Customers ## -->
+        <record id="invoice_company_currency_form" model="ir.ui.view">
+            <field name="name">Account invoice (form) - add company currency</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_id']/.." position="after">
+                    <group string="Amounts in company currency">
+                        <field name="cc_amount_untaxed"/>
+                        <field name="cc_amount_tax"/>
+                        <field name="cc_amount_total"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
