@@ -17,8 +17,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, api, _
-from openerp.exceptions import except_orm
+from openerp import models, api, exceptions, _
+
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
@@ -27,16 +27,15 @@ class AccountInvoice(models.Model):
     def test_invoice_line_tax(self):
         errors = []
         error_template = _("Invoice have a line with product %s with no taxes")
-        # check whether all corresponding account move lines are reconciled
         for invoice in self:
             for invoice_line in invoice.invoice_line:
-                #
                 if not invoice_line.invoice_line_tax_id:
                     error_string = error_template % (invoice_line.name)
                     errors.append(error_string)
         if errors:
             errors_full_string = ','.join(x for x in errors)
-            raise except_orm(_('No Taxes Defined!'), errors_full_string)
+            raise exceptions.Warning(_('No Taxes Defined!'),
+                                     errors_full_string)
         else:
             return True
 

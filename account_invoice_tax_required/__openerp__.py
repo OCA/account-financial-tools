@@ -20,7 +20,7 @@
 {
     'name': "Tax required in invoice",
     'version': "1.0",
-    'author': "Vincent Renaville",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     'website': "http://www.camptocamp.com",
     'category': "Localisation / Accounting",
     'license': "AGPL-3",
