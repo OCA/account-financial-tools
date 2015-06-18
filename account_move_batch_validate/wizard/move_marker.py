@@ -38,7 +38,11 @@ class AccountMoveMarker(orm.TransientModel):
             ('mark', 'Mark for posting'),
             ('unmark', 'Unmark for posting'),
         ], "Action", required=True),
-        'eta': fields.integer('Seconds to wait before starting the jobs')
+        'eta': fields.integer('Seconds to wait before starting the jobs'),
+        'journal_ids': fields.many2many('account.journal',
+                                        'account_post_journal_rel',
+                                        'wiz_id', 'journal_id', 'Journals',
+                                        required=True),
     }
 
     _defaults = {
@@ -57,6 +61,10 @@ class AccountMoveMarker(orm.TransientModel):
             wizard_data = self.read(cr, uid, wizard_id, context=context,
                                     load='_classic_write')
             wizard_data.pop('id')
+            if wizard_data.get('journal_ids'):
+                journals_ids_vals = [(6, False,
+                                      wizard_data.get('journal_ids'))]
+                wizard_data['journal_ids'] = journals_ids_vals
 
             if context.get('automated_test_execute_now'):
                 process_wizard(session, self._name, wizard_data)
