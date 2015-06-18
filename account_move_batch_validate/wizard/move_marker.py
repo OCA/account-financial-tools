@@ -47,6 +47,7 @@ class AccountMoveMarker(orm.TransientModel):
 
     _defaults = {
         'action': 'mark',
+        'journal_ids': [],
     }
 
     def button_mark(self, cr, uid, ids, context=None):
