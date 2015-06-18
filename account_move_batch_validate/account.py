@@ -28,6 +28,10 @@ from openerp.tools.translate import _
 from openerp.addons.connector.queue.job import job
 from openerp.addons.connector.session import ConnectorSession
 from openerp.addons.connector.queue.job import OpenERPJobStorage
+from openerp.addons.connector.connector import install_in_connector
+
+# install the module in connector to register the job function
+install_in_connector()
 
 _logger = logging.getLogger(__name__)
 
@@ -143,7 +147,7 @@ class account_move(orm.Model):
         self._cancel_jobs(cr, uid, context=context)
 
 
-@job
+@job(default_channel='root.account_move_batch_validate')
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
     move_pool = session.pool['account.move']
