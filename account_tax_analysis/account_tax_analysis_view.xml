@@ -1,0 +1,133 @@
+<openerp>
+  <data>
+    <record id="view_account_move_line_filter_vat_analysis" model="ir.ui.view">
+      <field name="name">Journal Items Tax</field>
+      <field name="model">account.move.line</field>
+      <field eval="32" name="priority"/>
+      <field name="arch" type="xml">
+        <search string="Search Journal Items">
+          <group string="Filters">
+            <separator orientation="vertical"/>
+            <filter icon="terp-document-new"
+                    string="Unposted"
+                    domain="[('move_id.state','=','draft')]"
+                    help="Unposted Journal Items"/>
+            <filter name="posted"
+                    icon="terp-camera_test"
+                    string="Posted"
+                    domain="[('move_id.state','=','posted')]"
+                    help="Posted Journal Items"/>
+            <separator orientation="vertical"/>
+            <field name="date"/>
+            <field name="account_id"/>
+          </group>
+          <newline/>
+          <newline/>
+          <group expand="1" string="Group By...">
+            <filter string="Partner" icon="terp-partner"
+                    name="group_by_partner"
+                    domain="[]"
+                    context="{'group_by': 'partner_id'}"/>
+            <separator orientation="vertical"/>
+            <filter string="Account"
+                    name="group_by_account"
+                    icon="terp-folder-green"
+                    context="{'group_by': 'account_id'}"/>
+            <separator orientation="vertical"/>
+            <filter string="Period"
+                    name="group_by_period"
+                    icon="terp-go-month"
+                    domain="[]"
+                    context="{'group_by': 'period_id'}"/>
+            <filter string="Journal"
+                    name="group_by_journal"
+                    domain="[]"
+                    context="{'group_by': 'journal_id'}"/>
+            <filter string="Account / Tax"
+                    name="group_by_account_tax"
+                    icon="terp-folder-green"
+                    domain="[]"
+                    context="{'group_by': ['tax_code_id', 'account_id'] }"/>
+            <filter string="Tax account"
+                    name="group_by_tax"
+                    icon="terp-go-month"
+                    domain="[]"
+                    context="{'group_by': 'tax_code_id'}"/>
+          </group>
+          <newline/>
+        </search>
+      </field>
+    </record>
+
+    <record id="view_move_line_tree_tax_analysis" model="ir.ui.view">
+      <field name="name">account.move.line.tree</field>
+      <field name="model">account.move.line</field>
+      <field eval="16" name="priority"/>
+      <field name="arch" type="xml">
+        <tree  string="Journal Items" editable="top" on_write="on_create_write">
+          <field name="tax_code_id" />
+          <field name="name"/>
+          <field name="ref"/>
+          <field name="period_id"/>
+          <field name="date"/>
+          <field name="partner_id" />
+          <field name="account_id" domain="[('journal_id','=',journal_id), ('company_id', '=', company_id)]"/>
+          <field name="debit" sum="Total debit"/>
+          <field name="credit" sum="Total credit"/>
+          <field name="tax_amount" sum="Total Taxe"/>
+          <field name="invoice"/>
+          <field name="amount_currency"  />
+          <field name="currency_id"  />
+
+        </tree>
+      </field>
+    </record>
+
+
+    <record id="action_view_tax_analysis" model="ir.actions.act_window">
+      <field name="name">Taxes Analysis</field>
+      <field name="res_model">account.move.line</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_group_by_account_tax': 1}</field>
+      <field name="search_view_id" ref="view_account_move_line_filter_vat_analysis"/>
+      <field name="view_id" ref="view_move_line_tree_tax_analysis"/>
+    </record>
+
+    <record id="view_account_vat_declaration_analysis" model="ir.ui.view">
+      <field name="name">Account Vat Declaration</field>
+      <field name="model">account.vat.declaration.analysis</field>
+      <field name="arch" type="xml">
+        <form string="Taxes Report">
+          <separator string="Taxes Report" colspan="4"/>
+          <field name="fiscalyear_id"/>
+          <separator string="Periods"  colspan="4"/>
+          <field name="period_list"  domain="[('fiscalyear_id', '=', fiscalyear_id)]"/>
+          <footer>
+              <button name="show_vat" string="Show tax lines" type="object" class="oe_highlight"/>
+                or
+              <button special="cancel" string="Cancel" class="oe_link"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_account_vat_declaration_analysis" model="ir.actions.act_window">
+      <field name="name">Account Vat Declaration</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">account.vat.declaration.analysis</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>
+      <field name="help">This menu print a VAT declaration based on invoices or payments. You can select one or several periods of the fiscal year. Information required for a tax declaration is automatically generated by OpenERP from invoices (or payments, in some countries). This data is updated in real time. That’s very useful because it enables you to preview at any time the tax that you owe at the start and end of the month or quarter.</field>
+    </record>
+
+    <menuitem
+        name="Taxes Analysis"
+        parent="account.menu_tax_report"
+        action="action_account_vat_declaration_analysis"
+        id="menu_account_vat_declaration_analysis"
+        icon="STOCK_PRINT"/>
+
+  </data>
+</openerp>

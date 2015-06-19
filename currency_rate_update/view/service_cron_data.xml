@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record model="ir.cron" id="ir_cron_currency_update_every_day">
+            <field name="name">Currency Rate Update</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field><!-- it s every day -->
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'currency.rate.update.service'"/>
+            <field name="function" eval="'_run_currency_update'"/>
+            <field name="args">()</field>
+        </record>
+
+    </data>
+</openerp>

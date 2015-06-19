@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="add_dunning_fees_on_policy" model="ir.ui.view">
+      <field name="name">add dunning fees on policy</field>
+      <field name="model">credit.control.policy</field>
+      <field name="inherit_id" ref="account_credit_control.credit_control_policy_form" />
+      <field name="arch" type="xml">
+        <page string="Mail and reporting" position="after">
+          <page string="Fees">
+            <group>
+              <group>
+                <field name="dunning_fixed_amount"/>
+                <field name="dunning_product_id"/>
+                <field name="dunning_currency_id"/>
+              </group>
+            </group>
+          </page>
+        </page>
+      </field>
+    </record>
+
+  </data>
+</openerp>

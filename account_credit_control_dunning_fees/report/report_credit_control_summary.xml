@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <template id="report_credit_control_summary_document_fees"
+      inherit_id="account_credit_control.report_credit_control_summary_document">
+      <xpath expr="//table[@id='summary_table']/thead/tr/th[last()]" position="before">
+        <th class="text-right">Fees</th>
+      </xpath>
+      <xpath expr="//table[@id='summary_table']/tbody/tr/td[last()]" position="before">
+        <td class="text-right">
+          <span t-field="l.dunning_fees_amount"/>
+        </td>
+      </xpath>
+      <xpath expr="//span[@t-field='l.balance_due']" position="replace">
+        <span t-field="l.balance_due_total"
+          t-field-options='{"widget": "monetary",
+          "display_currency": "l.currency_id or l.company_id.currency_id"}'/>
+      </xpath>
+    </template>
+
+  </data>
+</openerp>

@@ -1,0 +1,82 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* account_credit_control_dunning_fees
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-07 11:44+0000\n"
+"PO-Revision-Date: 2015-01-06 16:19+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: account_credit_control_dunning_fees
+#: code:_description:0
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
+#, python-format
+msgid "A credit control line"
+msgstr "Ein Mahnposten"
+
+#. module: account_credit_control_dunning_fees
+#: code:_description:0
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
+#, python-format
+msgid "A credit control policy level"
+msgstr "Eine Mahnregelstufe"
+
+#. module: account_credit_control_dunning_fees
+#: code:_description:0
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
+#, python-format
+msgid "Credit control line generator"
+msgstr "Mahnpostenerzeuger"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.line,dunning_fees_amount:0
+#: view:credit.control.policy:0
+msgid "Fees"
+msgstr "Gebühren"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fixed_amount:0
+msgid "Fees Fixed Amount"
+msgstr "Mahn-Festbetrag"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_product_id:0
+msgid "Fees Product"
+msgstr "Gebührprodukt"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_currency_id:0
+msgid "Fees currency"
+msgstr "Gebührwährung"
+
+#. module: account_credit_control_dunning_fees
+#: selection:credit.control.policy.level,dunning_fees_type:0
+msgid "Fixed"
+msgstr "Fest"
+
+#. module: account_credit_control_dunning_fees
+#: view:credit.control.policy:0
+msgid "Mail and reporting"
+msgstr "Post und Berichte"
+
+#. module: account_credit_control_dunning_fees
+#: code:_description:0
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
+#, python-format
+msgid "credit.control.dunning.fees.computer"
+msgstr "credit.control.dunning.fees.computer"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fees_type:0
+msgid "Type"
+msgstr ""
+

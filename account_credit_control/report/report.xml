@@ -1,0 +1,15 @@
+<openerp>
+  <data>
+
+    <report
+      id="credit_control_summary"
+      model="credit.control.communication"
+      string="Credit Control Summary"
+      report_type="qweb-pdf"
+      name="account_credit_control.report_credit_control_summary"
+      file="account_credit_control.report_credit_control_summary"
+      auto="False"
+      />
+
+  </data>
+</openerp>

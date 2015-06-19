@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <template id="assets_backend" name="account assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/account_move_line_search_extension/static/src/css/account_move_line_search_extension.css"/>
+        <script type="text/javascript" src="/account_move_line_search_extension/static/src/js/account_move_line_search_extension.js"></script>
+      </xpath>
+    </template>
+
+  </data>
+</openerp>

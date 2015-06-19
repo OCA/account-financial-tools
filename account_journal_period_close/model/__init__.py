@@ -26,4 +26,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-from . import account
+from . import account_journal_period
+from . import account_period

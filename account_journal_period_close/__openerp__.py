@@ -30,9 +30,10 @@
 {
     "name": "Account Journal Period Close",
     "version": "1.0",
-    "author": "ACSONE SA/NV",
+    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainer": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
+    "license": "AGPL-3",
     "images": [],
     "category": "Accounting",
     "depends": [
@@ -52,7 +53,7 @@ a given period, while leaving the miscellaneous journal open.
 From a technical standpoint, the module leverages the
 account.journal.period model that is present in Odoo core.
 """,
-    "data": ['view/account_view.xml'],
+    "data": ['view/account_period_view.xml'],
     "demo": [],
     "test": [],
     "licence": "AGPL-3",

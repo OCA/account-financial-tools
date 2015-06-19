@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_template_line_tree" model="ir.ui.view">
+            <field name="name">account.move.template.line.tree</field>
+            <field name="model">account.move.template.line</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Entry Template Line">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="account_id" />
+                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                    <field name="type"/>
+                    <field name="python_code" />
+                    <field name="move_line_type"/>
+                    <field name="account_tax_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_move_template_line_form" model="ir.ui.view">
+            <field name="name">account.move.template.line.form</field>
+            <field name="model">account.move.template.line</field>
+            <field name="arch" type="xml">
+                <form string="Journal Entry Template Line">
+                    <group>
+                        <group>
+                            <field name="name" select="1"/>
+                            <field name="sequence"/>
+                            <field name="journal_id"/>
+                            <field name="account_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                            <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="move_line_type"/>
+                            <field name="account_tax_id"/>
+                        </group>
+                        <separator string="Python Code" colspan="4"/>
+                        <field name="python_code" colspan="4" attrs="{'readonly': [('type', '!=', 'computed')]}" nolabel="1"/>
+                        <label string="You can refer to other lines using their sequence number (e.g. 'L(1)' for first line). Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + L(3)'; '1250'" colspan="4"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_move_template_form" model="ir.ui.view">
+            <field name="name">account.move.template.form</field>
+            <field name="model">account.move.template</field>
+            <field name="arch" type="xml">
+                <form string="Journal Entry Template">
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id" widget='selection' groups="base.group_multi_company"/>
+                        <field name="cross_journals" />
+                        <field name="transitory_acc_id" attrs="{'invisible':[('cross_journals','!=',True)],'required':[('cross_journals','==',True)]}"/>
+                        <field colspan="4" nolabel="1" name="template_line_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_move_template_tree" model="ir.ui.view">
+            <field name="name">account.move.template.tree</field>
+            <field name="model">account.move.template</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Entry Template">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_move_template_search" model="ir.ui.view">
+            <field name="name">account.move.template.search</field>
+            <field name="model">account.move.template</field>
+            <field name="arch" type="xml">
+                <search string="Journal Entry Template">
+                  <group>
+                    <separator orientation="vertical"/>
+                      <field name="name"/>
+                      <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_move_template_form" model="ir.actions.act_window">
+            <field name="name">Move Templates</field>
+            <field name="res_model">account.move.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_move_template_search"/>
+        </record>
+
+        <menuitem
+            action="action_move_template_form" id="menu_action_move_template_form" sequence="5"
+            parent="account.menu_configuration_misc" groups="account.group_account_manager"/>
+
+    </data>
+</openerp>
