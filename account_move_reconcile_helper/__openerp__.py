@@ -24,7 +24,7 @@
 ##############################################################################
 {
     'name': "Account Move Reconcile Helper",
-    'author': "ACSONE SA/NV",
+    'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': "http://acsone.eu",
     'category': 'Accounting & Finance',
     'version': '0.1',
