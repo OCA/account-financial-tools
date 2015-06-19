@@ -976,7 +976,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                               mapping_accounts):
         root_account_id = self.chart_template_id.account_root_id.id
         # Get the taxes
-        taxes = [self._tax_mapping[tax_template]
+        taxes = [self.map_tax_template(tax_template, mapping_taxes)
                  for tax_template in account_template.tax_ids
                  if self.map_tax_template(tax_template, mapping_taxes)]
         # Calculate the account code (we need to add zeros to non-view
