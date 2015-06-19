@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="action_account_move_line_search_extension" model="ir.actions.act_window">
+      <field name="context">{'account_move_line_search_extension': 1, 'analytic_journal_id': 1}</field>
+      <field name="name">Journal Items Search All</field>
+      <field name="res_model">account.move.line</field>
+      <field name="view_id" ref="account.view_move_line_tree"/>
+      <field name="view_mode">account_move_line_search_extension,form</field>
+    </record>
+    <menuitem
+        action="action_account_move_line_search_extension"
+        icon="STOCK_JUSTIFY_FILL"
+        id="menu_account_move_line_search_extension"
+        parent="account.menu_finance_entries"
+        sequence="1"
+        groups="account.group_account_user"
+        />
+
+  </data>
+</openerp>
