@@ -48,7 +48,7 @@ class account_move_template(orm.Model):
     }
 
     def _get_default(self, cr, uid, context=None):
-        self.pool.get('res.company')._company_default_get(
+        return self.pool.get('res.company')._company_default_get(
             cr, uid, 'account.move.template', context=context
         )
     _defaults = {
