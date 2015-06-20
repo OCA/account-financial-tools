@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright (C) 2014-2015 Akretion (http://www.akretion.com/)
+    @author Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+<record id="view_company_form" model="ir.ui.view">
+    <field name="name">check.deposit.company.form</field>
+    <field name="model">res.company</field>
+    <field name="inherit_id" ref="base.view_company_form" />
+    <field name="arch" type="xml">
+        <group name="account_grp" position="inside">
+            <field name="check_deposit_account_id" />
+        </group>
+    </field>
+</record>
+
+
+</data>
+</openerp>

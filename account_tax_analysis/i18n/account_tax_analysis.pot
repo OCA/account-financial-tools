@@ -21,6 +21,11 @@ msgid "Account"
 msgstr ""
 
 #. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account / Tax"
+msgstr ""
+
+#. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
 #: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
 msgid "Account Vat Declaration"
@@ -69,6 +74,11 @@ msgstr ""
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,period_list:0
 msgid "If no period is selected, all the periods of the fiscal year will be used"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Journal"
 msgstr ""
 
 #. module: account_tax_analysis
@@ -166,5 +176,10 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted Journal Items"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "or"
 msgstr ""
 

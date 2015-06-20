@@ -749,3 +749,8 @@ msgstr ""
 msgid "Tax code template"
 msgstr ""
 
+#. module: account_chart_update
+#: field:account.tax.code,active:0
+msgid "Active"
+msgstr ""
+

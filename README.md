@@ -15,3 +15,7 @@ It provides addons to:
  - Enforce partners on account moves
 
 And much more.
+
+Translation Status
+------------------
+[![Transifex Status](https://www.transifex.com/projects/p/OCA-account-financial-tools-8-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-account-financial-tools-8-0)

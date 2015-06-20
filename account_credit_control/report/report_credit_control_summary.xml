@@ -17,11 +17,10 @@
           </div>
 
           <h2 id="policy_level">
-            <span>Reminder</span> <span t-field="o.current_policy_level.name"/>
+            <span t-field="o.current_policy_level.name"/>
           </h2>
 
-          <p>Dear,</p>
-          <p t-field="o.current_policy_level.custom_text"/>
+          <p class="mt32 mb32" t-field="o.current_policy_level.custom_text"/>
 
           <h3>Summary</h3>
 

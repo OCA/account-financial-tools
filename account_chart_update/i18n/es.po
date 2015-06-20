@@ -762,20 +762,8 @@ msgstr ""
 msgid "Tax code template"
 msgstr "Plantilla de código de impuesto"
 
-#~ msgid "Fiscal position"
-#~ msgstr "Posición fiscal"
+#. module: account_chart_update
+#: field:account.tax.code,active:0
+msgid "Active"
+msgstr "Activo"
 
-#~ msgid "Account"
-#~ msgstr "Cuenta"
-
-#~ msgid "Tax"
-#~ msgstr "Impuesto"
-
-#~ msgid "Tax code"
-#~ msgstr "Código de impuesto"
-
-#, python-format
-#~ msgid "Tax mapping not found on the fiscal position instance: %s -> None.\n"
-#~ msgstr ""
-#~ "Mapeo de cuentas no encontrado en la instancia de posición fiscal: %s -> "
-#~ "Ninguno.\n"

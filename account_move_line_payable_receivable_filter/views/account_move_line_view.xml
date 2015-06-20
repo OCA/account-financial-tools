@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	   <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+            <field name="name">Journal Items (account_move_line_payable_receivable_filter)</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='posted']" position="after">
+                    <filter name="payable" string="Payable Account" domain="[('account_id.type','=','payable')]"/>
+                    <filter name="receivable" string="Receivable Account" domain="[('account_id.type','=','receivable')]"/>
+                </xpath>
+             </field>
+        </record>
+    </data>
+</openerp>

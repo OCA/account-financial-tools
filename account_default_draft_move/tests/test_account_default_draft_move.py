@@ -32,9 +32,6 @@ from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp import workflow
 
-DB = common.DB
-ADMIN_USER_ID = common.ADMIN_USER_ID
-
 
 def create_simple_invoice(self):
     partner_id = self.ref('base.res_partner_2')

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+  <t t-name="AccountMoveLineSearchExtension">
+    <div class="ui-toolbar" style="margin-bottom:0px;">
+      <div class="oe_form_char_section">
+        <h4>Account :</h4>
+        <input type="text" class="oe_account_select_account"/>
+      </div>
+      <t t-if="group_analytic">
+        <div class="oe_form_char_section">
+          <h4>Analytic Account :</h4>
+          <input type="text" class="oe_account_select_analytic_account"/>
+        </div>
+      </t>
+      <div class="oe_form_char_section">
+        <h4>Partner :</h4>
+        <input type="text" class="oe_account_select_partner"/>
+      </div>
+      <div class="oe_form_dropdown_section">
+        <h4>Journal :</h4>
+        <select class="oe_account_select_journal"/>
+      </div>
+      <div class="oe_form_char_section">
+        <h4>Period :</h4>
+        <input type="text" class="oe_account_select_period"/>
+      </div>
+    </div>
+  </t>
+
+</templates>

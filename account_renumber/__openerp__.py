@@ -27,7 +27,7 @@
 {
     'name': "Account renumber wizard",
     'version': "1.0",
-    'author': "Pexego",
+    'author': "Pexego,Odoo Community Association (OCA)",
     'website': "http://www.pexego.es",
     'category': "Accounting & Finance",
     'contributors': ['Pedro M. Baeza', 'Jordi Llinares', 'Joaquín Gutierrez'],
