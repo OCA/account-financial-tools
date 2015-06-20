@@ -1,0 +1,81 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* currency_rate_date_check
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-18 17:52+0000\n"
+"PO-Revision-Date: 2015-01-06 20:29+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: currency_rate_date_check
+#: help:res.company,currency_rate_max_delta:0
+msgid ""
+"This is the maximum interval in days between the date associated with the "
+"amount to convert and the date of the nearest currency rate available in "
+"OpenERP."
+msgstr ""
+"Dies ist der Höchstzeit in Tagen zwischen dem Bezugsdatum des umzurechnenden "
+"Betrags und dem nächstgelegenen, in OpenERP verfügbaren, Währungs-"
+"Umrechnungskurs."
+
+#. module: currency_rate_date_check
+#: sql_constraint:res.company:0
+msgid ""
+"The value of the field 'Max Time Delta in Days for Currency Rates' must be "
+"positive or 0."
+msgstr ""
+"Der Wert des Feldes 'Höchsttagesabstand in Tagen für Währungsumrechnung'"
+
+#. module: currency_rate_date_check
+#: model:ir.model,name:currency_rate_date_check.model_res_currency
+msgid "Currency"
+msgstr "Währung"
+
+#. module: currency_rate_date_check
+#: field:res.currency,rate_silent:0
+msgid "Current Rate"
+msgstr "Umrechnungskurs"
+
+#. module: currency_rate_date_check
+#: model:ir.model,name:currency_rate_date_check.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: currency_rate_date_check
+#: field:res.company,currency_rate_max_delta:0
+msgid "Max Time Delta in Days for Currency Rates"
+msgstr "Höchsttagesabstand in Tagen für Währungsumrechnung"
+
+#. module: currency_rate_date_check
+#: code:addons/currency_rate_date_check/currency_rate_date_check.py:79
+#, python-format
+msgid ""
+"You are requesting a rate conversion on %s for currency %s but the nearest "
+"rate before that date is dated %s and the maximum currency rate time delta "
+"for your company is %s days"
+msgstr ""
+"Sie fordern eine Umrechnung für %s in Währung %s an, aber der nächstgelegene "
+"Kurs vor diesem Datum liegt am %s und der Höchsttagesabstand für Kurse in "
+"Ihrem Unternehmen ist auf %s festgelegt"
+
+#. module: currency_rate_date_check
+#: code:addons/currency_rate_date_check/currency_rate_date_check.py:79
+#, python-format
+msgid "Error"
+msgstr "Fehler"
+
+#. module: currency_rate_date_check
+#: help:res.currency,rate_silent:0
+msgid ""
+"The rate of the currency to the currency of rate 1 (0 if no rate defined)."
+msgstr ""
+"Der Kurs der Währung zur Währung mit Kurs 1 (0 wenn kein Wert festgelegt)."

@@ -21,8 +21,9 @@
 {
     "name": "Currency Rate Update",
     "version": "0.7",
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "website": "http://camptocamp.com",
+    "license": "AGPL-3",
     "category": "Financial Management/Configuration",
     "depends": [
         "base",
@@ -32,6 +33,7 @@
         "view/service_cron_data.xml",
         "view/currency_rate_update.xml",
         "view/company_view.xml",
+        "security/rule.xml",
         "security/ir.model.access.csv",
     ],
     "demo": [],

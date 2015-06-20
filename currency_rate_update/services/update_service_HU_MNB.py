@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (c) 2009 CamptoCamp. All rights reserved.
-#    @author Nicolas Bessi
+#    Copyright (c) 2015 Educomm. All rights reserved.
+#    @author Greg Bognar, Viktor Nagy
 #
 #    Abstract class to fetch rates from Yahoo Financial
 #

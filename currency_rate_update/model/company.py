@@ -44,7 +44,7 @@ class res_company(models.Model):
     # Activate the currency update
     auto_currency_up = fields.Boolean(
         string='Automatic Update',
-        help="Automatical update of the currencies for this company")
+        help="Automatic update of the currencies for this company")
     # Function field that allows to know the
     # multi company currency implementation
     multi_company_currency_enable = fields.Boolean(
