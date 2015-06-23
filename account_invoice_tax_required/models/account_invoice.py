@@ -26,7 +26,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def test_invoice_line_tax(self):
         errors = []
-        error_template = _("Invoice have a line with product %s with no taxes")
+        error_template = _("Invoice has a line with product %s with no taxes")
         for invoice in self:
             for invoice_line in invoice.invoice_line:
                 if not invoice_line.invoice_line_tax_id:
