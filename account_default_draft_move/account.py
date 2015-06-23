@@ -18,6 +18,7 @@
 ##############################################################################
 
 from openerp import models, api, exceptions, _
+from openerp.osv import fields, osv
 
 
 class AccountInvoice(models.Model):
@@ -55,3 +56,29 @@ class AccountMove(models.Model):
                              'SET state=%s '
                              'WHERE id IN %s', ('draft', tuple(self.ids)))
         return True
+
+
+class AccountTaxCode(osv.osv):
+    _inherit = 'account.tax.code'
+
+    def _sum_period(self, cr, uid, ids, name, args, context=None):
+        if context is None:
+            context = {}
+        ctx = context.copy()
+        ctx.update({'state': 'all'})
+        return super(AccountTaxCode, self)._sum_period(cr, uid,
+                                                       ids, name,
+                                                       args, context=ctx)
+
+    def _sum_year(self, cr, uid, ids, name, args, context=None):
+        if context is None:
+            context = {}
+        ctx = context.copy()
+        ctx.update({'state': 'all'})
+        return super(AccountTaxCode, self)._sum_year(cr, uid, ids,
+                                                     name, args, context=ctx)
+
+    _columns = {
+        'sum': fields.function(_sum_year, string="Year Sum"),
+        'sum_period': fields.function(_sum_period, string="Period Sum"),
+    }
