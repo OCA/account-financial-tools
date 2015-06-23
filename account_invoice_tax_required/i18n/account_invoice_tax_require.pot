@@ -23,7 +23,7 @@ msgstr ""
 #. module: account_invoice_tax_required
 #: code:addons/account_invoice_tax_required/models/account_invoice.py:29
 #, python-format
-msgid "Invoice have a line with product %s with no taxes"
+msgid "Invoice has a line with product %s with no taxes"
 msgstr ""
 
 #. module: account_invoice_tax_required
