@@ -29,8 +29,17 @@ from openerp import models, api, fields
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
+    @api.one
+    @api.depends('reconcile_id', 'reconcile_partial_id')
+    def _get_reconcile_ref(self):
+        if self.reconcile_id.id:
+            self.reconcile_ref = str(self.reconcile_id.name)
+        elif self.reconcile_partial_id.id:
+            self.reconcile_ref = "P/" + str(self.reconcile_partial_id.name)
+
     credit_debit_balance = fields.Float(compute='compute_debit_credit_balance',
                                         string='Balance')
+    reconcile_ref = fields.Char(compute='_get_reconcile_ref', store=True)
 
     @api.one
     def compute_debit_credit_balance(self):

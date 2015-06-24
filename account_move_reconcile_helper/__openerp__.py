@@ -27,7 +27,7 @@
     'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': "http://acsone.eu",
     'category': 'Accounting & Finance',
-    'version': '0.1',
+    'version': '0.2',
     'license': 'AGPL-3',
     'depends': [
         'web',
@@ -37,4 +37,5 @@
     'data': [
         'views/account_move_line_view.xml',
     ],
+    'post_init_hook': 'set_reconcile_ref',
 }
