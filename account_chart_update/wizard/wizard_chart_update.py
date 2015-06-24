@@ -4,6 +4,8 @@
 #    Copyright (c) 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
 #    Copyright (c) 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #    @authors: Jordi Esteve (Zikzakmedia), Borja López Soilán (Pexego)
+#    Copyright (c) 2015 Antiun Ingeniería S.L. (http://www.antiun.com)
+#                       Antonio Espinosa <antonioea@antiun.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published

@@ -38,6 +38,7 @@ Contributors
 * Joaquín Gutierrez <joaquingpedrosa@gmail.com>
 * invitu
 * Stéphane Bidoul <stephane.bidoul@acsone.eu>
+* Antonio Espinosa <antonioea@antiun.com>
 
 Maintainer
 ----------
