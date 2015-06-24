@@ -34,6 +34,8 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. National Bank of the Republic of Macedonia
+
 Configuration
 =============
 
@@ -92,6 +94,7 @@ Contributors
 * Agustin Cruz <openpyme.mx> (BdM)
 * Dorin Hongu <dhongu@gmail.com> (BNR)
 * Fekete Mihai <feketemihai@gmail.com> (Port to V8)
+* Darko Nikolovski <darko@hbee.eu> (NBRM)
 
 Maintainer
 ----------
