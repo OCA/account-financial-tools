@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--Account Moves-->
+        <record id="lock_account_move_view" model="ir.ui.view">
+            <field name="name">lock Journal Entries</field>
+            <field name="model">lock.account.move</field>
+            <field name="arch" type="xml">
+                <form string="Lock Journal Entries">
+                    <group>
+                        <field name="journal_ids"/>
+                        <field name="period_ids"/>
+                    </group>
+                    <footer>
+                        <button string="Approve" name="lock_move" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_lock_account_move" model="ir.actions.act_window">
+            <field name="name">Lock Journal Entries</field>
+            <field name="res_model">lock.account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lock_account_move_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            name="Lock Journal Entries"
+            parent="account.periodical_processing_journal_entries_validation"
+            action="action_lock_account_move"
+            id="menu_lock_account_moves"
+           />
+
+    </data>
+</openerp>
