@@ -8,7 +8,7 @@
 			<field name='arch' type='xml'>
 				<form string='Regularization'>
 					<header>
-						<button name="%(action_regularize)d" string="Create Regularization Move"  type="action" class="oe_highlight" groups="base.group_user"/>
+						<button name="%(account_regularization.action_regularize)d" string="Create Regularization Move"  type="action" class="oe_highlight" groups="base.group_user"/>
 					</header>
 					 <sheet>
 						<notebook>

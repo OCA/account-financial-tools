@@ -46,8 +46,8 @@
     "depends": ["account"],
     "demo_xml": [],
     "data": [
-        "views/account_regularization_view.xml",
         "views/wizard_regularization_view.xml",
+        "views/account_regularization_view.xml",
         "security/ir.model.access.csv"
     ],
     "active": False,
