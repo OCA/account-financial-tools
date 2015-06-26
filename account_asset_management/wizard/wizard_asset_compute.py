@@ -31,6 +31,7 @@ class asset_depreciation_confirmation_wizard(orm.TransientModel):
     _columns = {
         'period_id': fields.many2one(
             'account.period', 'Period',
+            domain="[('special', '=', False), ('state', '=', 'draft')]",
             required=True,
             help="Choose the period for which you want to automatically "
                  "post the depreciation lines of running assets"),
