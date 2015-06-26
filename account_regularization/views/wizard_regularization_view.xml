@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id='view_wizard_regularization_form' model='ir.ui.view'>
+			<field name='name'>wizard.regularization.form</field>
+			<field name='model'>wizard.regularize</field>
+			<field name='type'>form</field>
+			<field name='arch' type='xml'>
+				<form string='Regularization'>
+					<group>
+						<field name='fiscalyear' />
+						<field name='balance_calc'/>
+						<field name="journal_id"/>
+						<field name='period_id' />
+						<field name='date_move'/>
+						<field name='periods' attrs="{'invisible':[('balance_calc','=','date')],'required':[('balance_calc','=','period')]}"/>
+						<field name='date_to' attrs="{'invisible':[('balance_calc','=','period')],'required':[('balance_calc','=','date')]}"/>
+					</group>
+
+					<footer><button class="oe_highlight" name="regularize" string="Regularize" type="object"  />
+                      	or
+                      	<button string="Cancel" class="oe_link" special="cancel"/>
+                  </footer>
+				</form>
+			</field>
+		</record>
+
+		<act_window name="Create Regularization Move"
+            res_model="wizard.regularize"
+            src_model="account.regularization"
+            multi="False"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_regularize"/>
+    </data>
+</openerp>
