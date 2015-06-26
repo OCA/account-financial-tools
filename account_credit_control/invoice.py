@@ -34,6 +34,9 @@ class AccountInvoice(models.Model):
              "setting.",
         readonly=True,
         copy=False,
+        groups="account_credit_control.group_account_credit_control_manager,"
+               "account_credit_control.group_account_credit_control_user,"
+               "account_credit_control.group_account_credit_control_info",
     )
 
     credit_control_line_ids = fields.One2many(
