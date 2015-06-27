@@ -41,7 +41,7 @@
 """,
     "depends": ["account"],
     "data": [
-        "views/wizard_regularization_view.xml",
+        "wizard/wizard_regularization_view.xml",
         "views/account_regularization_view.xml",
         "security/ir.model.access.csv"
     ],

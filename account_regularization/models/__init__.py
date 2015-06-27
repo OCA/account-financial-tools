@@ -18,5 +18,4 @@
 #
 ##############################################################################
 
-from . import wizard_regularize
 from . import account_regularization

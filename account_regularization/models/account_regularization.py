@@ -107,8 +107,8 @@ class AccountRegularization(models.Model):
                 browse(tot_account_ids).balance_calculation(periods=period_ids)
         if balance_results.keys().__len__() ==\
                 balance_results.values().count(0.0):
-            raise openerp.exceptions.Warning('Nothing to regularize',
-                            'Nothing to regularize')
+            raise openerp.exceptions.Warning(
+                'Nothing to regularize', 'Nothing to regularize')
         move = self.env['account.move'].create(
             {'journal_id': journal.id,
              'period_id': period.id,
