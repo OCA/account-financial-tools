@@ -2,42 +2,41 @@
 <openerp>
 	<data>
 		<record id='view_account_regularization_form' model='ir.ui.view'>
-			<field name='name'>account.regularization.form</field>
-			<field name='model'>account.regularization</field>
-			<field name='type'>form</field>
-			<field name='arch' type='xml'>
-				<form string='Regularization'>
-					<header>
-						<button name="%(account_regularization.action_regularize)d" string="Create Regularization Move"  type="action" class="oe_highlight" groups="base.group_user"/>
-					</header>
-					 <sheet>
-						<notebook>
-							<page string="Main">
-								<group>
-									<field name='name'  />
-									<field name="balance_calc" />
-								</group>
-								<group>
-									<field name='debit_account_id' colspan="2"/>
-									<field name='credit_account_id' colspan="2"/>
-									<field  name='account_ids'  colspan="4"/>
-								</group>
-							</page>
-							<page string="Moves">
-								<field name="move_ids" />
-							</page>
-						</notebook>
-					</sheet>
-				</form>
-			</field>
-		</record>
-		<record id='action_account_regularization_form' model='ir.actions.act_window'>
-			<field name='name'>Regularizations</field>
-			<field name='res_model'>account.regularization</field>
-			<field name='view_type'>form</field>
-			<field name='view_mode'>tree,form</field>
-		</record>
-		<menuitem name='Regularizations' action='action_account_regularization_form' id='menu_action_account_regularization_form'  parent="account.menu_finance_periodical_processing"/>
-
-	</data>
+            <field name='name'>account.regularization.form</field>
+            <field name='model'>account.regularization</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string='Regularization'>
+                    <header>
+                        <button name="%(account_regularization.action_regularize)d" string="Create Regularization Move"  type="action" class="oe_highlight" groups="base.group_user"/>
+                    </header>
+                    <sheet>
+                        <notebook>
+                            <page string="Main">
+                                <group>
+                                    <field name='name'  />
+                                    <field name="balance_calc" />
+                                </group>
+                                <group>
+                                    <field name='debit_account_id' colspan="2"/>
+                                    <field name='credit_account_id' colspan="2"/>
+                                    <field  name='account_ids'  colspan="4"/>
+                                </group>
+                            </page>
+                            <page string="Moves">
+                                <field name="move_ids" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id='action_account_regularization_form' model='ir.actions.act_window'>
+            <field name='name'>Regularizations</field>
+            <field name='res_model'>account.regularization</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+        <menuitem name='Regularizations' action='action_account_regularization_form' id='menu_action_account_regularization_form'  parent="account.menu_finance_periodical_processing"/>
+    </data>
 </openerp>

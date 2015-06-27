@@ -2,11 +2,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
-#    All Rights Reserved.
-#                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    Copyright (c) 2008 Acysos SL. All Rights Reserved.
-#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -28,7 +23,6 @@ import time
 
 
 class AccountAccount(models.Model):
-    _name = 'account.account'
     _inherit = 'account.account'
 
     @api.multi
@@ -75,28 +69,20 @@ class AccountRegularization(models.Model):
     _description = 'Account Regularization Model'
 
     name = fields.Char('Name', size=32, required=True)
-    account_ids = fields.Many2many('account.account',
-                                   'account_regularization_rel',
-                                   'regularization_id',
-                                   'account_id', 'Accounts to balance',
-                                   required=True,
-                                   domain=[('type', '=', 'view')])
-    debit_account_id = fields.Many2one('account.account',
-                                       'Result account,'
-                                       ' debit',
-                                       required=True)
-    credit_account_id = fields.Many2one('account.account',
-                                        'Result account,'
-                                        ' credit',
-                                        required=True)
-    balance_calc = fields.Selection([('date', 'Date'),
-                                     ('period', 'Periods')],
-                                    'Regularization time calculation',
-                                    required=True, default='period')
+    account_ids = fields.Many2many(
+        'account.account', 'account_regularization_rel', 'regularization_id',
+        'account_id', 'Accounts to balance', required=True,
+        domain=[('type', '=', 'view')])
+    debit_account_id = fields.Many2one(
+        'account.account', 'Result account debit', required=True)
+    credit_account_id = fields.Many2one(
+        'account.account', 'Result account credit', required=True)
+    balance_calc = fields.Selection(
+        [('date', 'Date'), ('period', 'Periods')],
+        'Regularization time calculation', required=True, default='period')
 
-    move_ids = fields.One2many('account.move',
-                               'regularization_id',
-                               'Regularization Moves')
+    move_ids = fields.One2many(
+        'account.move', 'regularization_id', 'Regularization Moves')
 
     @api.one
     def regularize(self, date=time.strftime('%Y-%m-%d'),
@@ -121,7 +107,7 @@ class AccountRegularization(models.Model):
                 browse(tot_account_ids).balance_calculation(periods=period_ids)
         if balance_results.keys().__len__() ==\
                 balance_results.values().count(0.0):
-            raise Exception('Nothing to regularize',
+            raise openerp.exceptions.Warning('Nothing to regularize',
                             'Nothing to regularize')
         move = self.env['account.move'].create(
             {'journal_id': journal.id,
@@ -157,11 +143,9 @@ class AccountRegularization(models.Model):
             'period_id': period.id,
         }
         self.env['account.move.line'].create(diff_line)
-        return
 
 
 class AccountMove(models.Model):
-    _name = 'account.move'
     _inherit = 'account.move'
 
     regularization_id = fields.Many2one('account.regularization',

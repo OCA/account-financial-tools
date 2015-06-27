@@ -51,7 +51,7 @@ msgstr "Crear asiento de regularización"
 #: field:wizard.regularize,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
-s
+
 #. module: account_regularization
 #: field:account.regularization,create_date:0
 #: field:wizard.regularize,create_date:0
@@ -78,12 +78,12 @@ msgstr "Fecha del asiento"
 #. module: account_regularization
 #: help:wizard.regularize,fiscalyear:0
 msgid "Fiscal Year for the write move"
-msgstr "Año fiscal del asiento"
+msgstr "Ejercicio fiscal del asiento"
 
 #. module: account_regularization
 #: field:wizard.regularize,fiscalyear:0
 msgid "Fiscal year"
-msgstr "Año fiscal"
+msgstr "Ejercicio fiscal"
 
 #. module: account_regularization
 #: field:account.regularization,id:0
@@ -110,7 +110,7 @@ msgstr "Diario para el asiento"
 #: field:account.regularization,write_uid:0
 #: field:wizard.regularize,write_uid:0
 msgid "Last Updated by"
-msgstr "ültima actualización por"
+msgstr "Última actualización por"
 
 #. module: account_regularization
 #: field:account.regularization,write_date:0

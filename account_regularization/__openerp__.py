@@ -2,11 +2,6 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
-#   All Rights Reserved.
-#                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    Copyright (c) 2008 Acysos SL. All Rights Reserved.
-#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -24,11 +19,12 @@
 ##############################################################################
 
 {
-    "name": "Account Regularizations",
+    "name": "Account Regularization",
     "version": "1.0",
-    "author": "ACYSOS S.L.",
+    "author": "ACYSOS S.L.,"
+              "ZikzakMedia,"
+              "Odoo Community Association (OCA)",
     "contributors": [
-        "Jordi Esteve <juanjoajesteve@zikzakmedia.com>",
         "Santi Argüeso <santi.argueso@gmail.com>",
         ],
     "license": "GPL-3",
@@ -44,12 +40,10 @@
     the 'Profit and Loss' regularization
 """,
     "depends": ["account"],
-    "demo_xml": [],
     "data": [
         "views/wizard_regularization_view.xml",
         "views/account_regularization_view.xml",
         "security/ir.model.access.csv"
     ],
-    "active": False,
     "installable": True,
 }
