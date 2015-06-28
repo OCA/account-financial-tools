@@ -606,6 +606,20 @@ class account_asset_asset(orm.Model):
         return (asset.code or str(asset.id)) + '/' + str(seq)
 
     def compute_depreciation_board(self, cr, uid, ids, context=None):
+        """
+        Computes and stores depreciation lines for the given asset ids.
+
+        CAUTION: make sure the last depreciation line with init_entry=True
+        contains only depreciated amount for its respective fiscal year or this
+        method may compute wrong depreciation lines.
+
+        :param cr: database cursor
+        :param uid: current user id
+        :param ids: ids of account.asset
+        :param context: context arguments, like lang, time zone
+        :type context: dictionary
+        :return: Returns True
+        """
         if not context:
             context = {}
         depreciation_lin_obj = self.pool.get(
