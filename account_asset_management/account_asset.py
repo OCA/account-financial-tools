@@ -724,6 +724,18 @@ class account_asset_asset(orm.Model):
                              entry['date_stop']))
                         res = cr.fetchone()
                         fy_amount_check = res[0]
+
+                        # ensure fy_amount_check contains depreciation for the
+                        # current entry period
+                        def diff_month(d1, d2):
+                            return (d1.year - d2.year) * 12 + \
+                                   d1.month - d2.month
+                        nb_months = diff_month(
+                            entry['date_start'],
+                            datetime.strptime(asset.date_start, "%Y-%m-%d"))
+                        if nb_months > 0:
+                            fy_amount_check -= nb_months * entry['period_amount']
+
                     else:
                         fy_amount_check = 0.0
                     lines = entry['lines']
