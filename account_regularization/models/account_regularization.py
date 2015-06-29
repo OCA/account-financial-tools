@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, fields
+from openerp import models, api, fields, exceptions, _
 import time
 
 
@@ -88,13 +88,12 @@ class AccountRegularization(models.Model):
     def regularize(self, date=time.strftime('%Y-%m-%d'),
                    period=None, journal=None, date_to=None,
                    period_ids=[]):
-        """ This method will calculate all the balances from all
-        the child accounts of the regularization
-        and create the corresponding move."""
-        #assert len(id) == 1, "One regularization at a time"
+        # This method will calculate all the balances from all
+        # the child accounts of the regularization
+        # and create the corresponding move.
         if not period or not journal:
             raise Exception('No period or journal defined')
-        #regularization = self.browse(cr, uid, id)[0]
+
         # Find all children accounts
         account_ids = [x.id for x in self.account_ids]
         tot_account_ids = self.env['account.account'].\
@@ -107,12 +106,13 @@ class AccountRegularization(models.Model):
                 browse(tot_account_ids).balance_calculation(periods=period_ids)
         if balance_results.keys().__len__() ==\
                 balance_results.values().count(0.0):
-            raise openerp.exceptions.Warning(
-                'Nothing to regularize', 'Nothing to regularize')
+            raise exceptions.Warning(
+                _('Nothing to regularize'))
         move = self.env['account.move'].create(
             {'journal_id': journal.id,
              'period_id': period.id,
-             'regularization_id': self.id})
+             'regularization_id': self.id,
+             'date': date,})
         sum = 0.0
         for item in balance_results.keys():
             if balance_results[item] != 0.0:

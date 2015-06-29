@@ -133,6 +133,8 @@ msgstr "Asientos"
 msgid "Name"
 msgstr "Nombre"
 
+
+
 #. module: account_regularization
 #: field:wizard.regularize,period_id:0
 msgid "Period"
