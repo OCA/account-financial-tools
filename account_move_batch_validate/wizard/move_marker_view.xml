@@ -7,11 +7,9 @@
             <field name="model">validate.account.move</field>
             <field name="inherit_id" ref="account.validate_account_move_view" />
             <field name="arch" type="xml">
-                <xpath expr="//group" position="before">
-                    <group>
-                        <field name="asynchronous" />
-                        <field name="action" attrs="{'invisible': [('asynchronous', '=', False)]}"/>
-                    </group>
+                <xpath expr="//field[@name='journal_ids']" position="before">
+                    <field name="asynchronous" />
+                    <field name="action" attrs="{'invisible': [('asynchronous', '=', False)]}"/>
                 </xpath>
             </field>
         </record>
