@@ -18,15 +18,27 @@
 -
   I create a wizard with a long ETA
 -
-  !record {model: account.move.marker, id: wiz_marker4}:
+  !record {model: validate.account.move, id: wiz_marker4}:
     action: mark
     eta: 10000
 -
+  I set the period and the journal on the wizard
+-
+  !python {model: validate.account.move}: |
+    move = self.pool['account.move'].browse(cr, uid, ref('move3'),
+                                            context=context)
+    journal_ids = [(6, 0, [move.journal_id.id])]
+    period_ids = [(6, 0, [move.period_id.id])]
+    vals = {'journal_ids': journal_ids,
+            'period_ids': period_ids,
+            }
+    self.write(cr, uid, ref('wiz_marker4'), vals, context=context)
+-
   I run the wizard
 -
-  !python {model: account.move.marker}: |
+  !python {model: validate.account.move}: |
     context['automated_test_execute_now'] = True
-    self.button_mark(
+    self.validate_move(
       cr, uid, [ref('wiz_marker4')], context=context
     )
 -
