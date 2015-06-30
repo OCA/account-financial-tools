@@ -23,7 +23,7 @@
 #
 ##############################################################################
 
-from openerp import fields, models
+from openerp import fields, models, _
 
 
 class account_move(models.Model):
@@ -67,10 +67,10 @@ class account_move(models.Model):
 
         if self.env['account.journal'].browse([
                 reversal_journal_id]).company_id != self.company_id:
-            raise Warning('Wrong company Journal is %s but we have %s' % (
+            raise Warning(_('Wrong company Journal is %s but we have %s') % (
                 reversal_journal_id.company_id.name, self.company_id.name))
         if reversal_period_id.company_id != self.company_id:
-            raise Warning('Wrong company Period is %s but we have %s' % (
+            raise Warning(_('Wrong company Period is %s but we have %s') % (
                 reversal_journal_id.company_id.name, self.company_id.name))
 
         reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
