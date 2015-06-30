@@ -18,14 +18,26 @@
 -
   I create a wizard
 -
-  !record {model: account.move.marker, id: wiz_marker1}:
+  !record {model: validate.account.move, id: wiz_marker1}:
     action: mark
+-
+  I set the period and the journal on the wizard
+-
+  !python {model: validate.account.move}: |
+    move = self.pool['account.move'].browse(cr, uid, ref('move1'),
+                                            context=context)
+    journal_ids = [(6, 0, [move.journal_id.id])]
+    period_ids = [(6, 0, [move.period_id.id])]
+    vals = {'journal_ids': journal_ids,
+            'period_ids': period_ids,
+            }
+    self.write(cr, uid, ref('wiz_marker1'), vals, context=context)
 -
   I run the wizard
 -
-  !python {model: account.move.marker}: |
+  !python {model: validate.account.move}: |
     context['automated_test_execute_now'] = True
-    self.button_mark(
+    self.validate_move(
       cr, uid, [ref('wiz_marker1')], context=context
     )
 -
