@@ -21,7 +21,7 @@
 
 import time
 from openerp.tests import common
-
+import pdb
 
 class testCounterpart(common.TransactionCase):
 
@@ -31,8 +31,11 @@ class testCounterpart(common.TransactionCase):
         self.expense = self.ref('account.income_fx_expense')
 
         self.account_invoice_model = self.registry('account.invoice')
+        self.account_journal_model = self.registry('account.journal')
         self.account_invoice_line_model = self.registry('account.invoice.line')
         self.acc_bank_stmt_model = self.registry('account.bank.statement')
+
+
         self.acc_bank_stmt_line_model = self.registry(
             'account.bank.statement.line')
         self.res_currency_model = self.registry('res.currency')
@@ -46,6 +49,7 @@ class testCounterpart(common.TransactionCase):
             self.cr, self.uid, "base", "USD")[1]
         self.account_rcv_id = model_data_obj.get_object_reference(
             self.cr, self.uid, "account", "a_recv")[1]
+
         self.account_fx_income_id = model_data_obj.get_object_reference(
             self.cr, self.uid, "account", "income_fx_income")[1]
         self.account_fx_expense_id = model_data_obj.get_object_reference(
@@ -56,6 +60,31 @@ class testCounterpart(common.TransactionCase):
 
         self.bank_journal_usd_id = model_data_obj.get_object_reference(
             self.cr, self.uid, "account", "bank_journal_usd")[1]
+
+        # pdb.set_trace()
+
+        acs_model = self.registry('account.config.settings')
+
+        acs_ids = acs_model.search(self.cr, self.uid,
+                                   [('company_id', '=',
+                                     self.ref("base.main_company"))])
+
+        values = {'group_multi_currency': True,
+                  'income_currency_exchange_account_id':
+                  self.account_fx_income_id,
+                  'expense_currency_exchange_account_id':
+                  self.account_fx_expense_id}
+        if acs_ids:
+            acs_model.write(self.cr, self.uid, acs_ids, values)
+        else:
+            values['company_id'] = self.ref("base.main_company")
+            acs_model.create(self.cr, self.uid, values)
+        self.aajournal = self.ref('account.analytic_journal_sale')
+        self.account_journal_model.write(self.cr, self.uid,
+                                         [self.bank_journal_usd_id],
+                                         {'analytic_journal_id':
+                                          self.aajournal})
+
         self.account_usd_id = model_data_obj.get_object_reference(
             self.cr, self.uid, "account", "usd_bnk")[1]
 
@@ -149,9 +178,9 @@ class testCounterpart(common.TransactionCase):
         # Besides, the total debit and total credit should be 60.61 EUR (2.00
         # USD)
         self.assertEquals(
-            sum([res['debit'] for res in result.values()]), 79.31)
+            sum([res['debit'] for res in result.values()]), 60.61)
         self.assertEquals(
-            sum([res['credit'] for res in result.values()]), 79.31)
+            sum([res['credit'] for res in result.values()]), 60.61)
 
     def test_reconcile_2(self):
         # exchange gain 0.01
@@ -239,9 +268,9 @@ class testCounterpart(common.TransactionCase):
         # Besides, the total debit and total credit should be 60.61 EUR (2.00
         # USD)
         self.assertEquals(
-            sum([res['debit'] for res in result.values()]), 79.31)
+            sum([res['debit'] for res in result.values()]), 60.61)
         self.assertEquals(
-            sum([res['credit'] for res in result.values()]), 79.31)
+            sum([res['credit'] for res in result.values()]), 60.61)
 
     def test_reconcile_3(self):
         # exchange loss 0.01
@@ -327,23 +356,23 @@ class testCounterpart(common.TransactionCase):
             res_account['count'] += 1
         # The journal items of the reconciliation should have
         # their debit and credit total equal
-        # Besides, the total debit and total credit should be 79.31 EUR (2.00
+        # Besides, the total debit and total credit should be 60.61 EUR (2.00
         # USD)
         self.assertEquals(
-            sum([res['debit'] for res in result.values()]), 79.31)
+            sum([res['debit'] for res in result.values()]), 60.61)
         self.assertEquals(
-            sum([res['credit'] for res in result.values()]), 79.31)
+            sum([res['credit'] for res in result.values()]), 60.61)
 
     def test_reconcile_4(self):
         # no currency conversion rate defined
         cr, uid = self.cr, self.uid
         # We update the currency rate of the currency USD in order to force
         # the gain/loss exchanges in next steps
-#         self.res_currency_rate_model.create(cr, uid, {
-#             'name': time.strftime('%Y-%m-%d') + ' 00:00:00',
-#             'currency_id': self.currency_usd_id,
-#             'rate': 0.033,
-#         })
+        self.res_currency_rate_model.create(cr, uid, {
+            'name': time.strftime('%Y-%m-%d') + ' 00:00:00',
+            'currency_id': self.currency_usd_id,
+            'rate': 0.033,
+            })
         # We create a customer invoice of 2.00 USD
         invoice_id = self.account_invoice_model.create(cr, uid, {
             'partner_id': self.partner_agrolait_id,
@@ -418,9 +447,9 @@ class testCounterpart(common.TransactionCase):
             res_account['count'] += 1
         # The journal items of the reconciliation should have
         # their debit and credit total equal
-        # Besides, the total debit and total credit should be 7.93 EUR (2.00
+        # Besides, the total debit and total credit should be 60.61 EUR (2.00
         # USD)
         self.assertEquals(
-            round(sum([res['debit'] for res in result.values()]), 2), 7.93)
+            round(sum([res['debit'] for res in result.values()]), 2), 60.61)
         self.assertEquals(
-            round(sum([res['credit'] for res in result.values()]), 2), 7.93)
+            round(sum([res['credit'] for res in result.values()]), 2), 60.61)

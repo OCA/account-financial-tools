@@ -31,6 +31,7 @@ class testOnChange(common.TransactionCase):
         # analytic defaults account creation
         agrolait = self.ref('account.analytic_agrolait')
         expense = self.ref('account.income_fx_expense')
+        income = self.ref('account.income_fx_income')
         self.account_1 = (
             self.ana_acc_def_obj.create(self.cr,
                                         self.uid,
@@ -45,7 +46,7 @@ class testOnChange(common.TransactionCase):
                                         self.uid,
                                         {
                                             'analytic_id': agrolait,
-                                            'account_id': expense
+                                            'account_id': income
                                         })
         )
 
