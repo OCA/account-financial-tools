@@ -21,7 +21,7 @@
 
 import time
 from openerp.tests import common
-import pdb
+
 
 class testCounterpart(common.TransactionCase):
 
@@ -34,8 +34,6 @@ class testCounterpart(common.TransactionCase):
         self.account_journal_model = self.registry('account.journal')
         self.account_invoice_line_model = self.registry('account.invoice.line')
         self.acc_bank_stmt_model = self.registry('account.bank.statement')
-
-
         self.acc_bank_stmt_line_model = self.registry(
             'account.bank.statement.line')
         self.res_currency_model = self.registry('res.currency')
@@ -61,24 +59,29 @@ class testCounterpart(common.TransactionCase):
         self.bank_journal_usd_id = model_data_obj.get_object_reference(
             self.cr, self.uid, "account", "bank_journal_usd")[1]
 
-        # pdb.set_trace()
+        self.acs_model = self.registry('account.config.settings')
 
-        acs_model = self.registry('account.config.settings')
-
-        acs_ids = acs_model.search(self.cr, self.uid,
-                                   [('company_id', '=',
-                                     self.ref("base.main_company"))])
+        acs_ids = self.acs_model.search(
+            self.cr, self.uid,
+            [('company_id', '=', self.ref("base.main_company"))]
+            )
 
         values = {'group_multi_currency': True,
                   'income_currency_exchange_account_id':
                   self.account_fx_income_id,
                   'expense_currency_exchange_account_id':
                   self.account_fx_expense_id}
+
         if acs_ids:
-            acs_model.write(self.cr, self.uid, acs_ids, values)
+            self.acs_model.write(self.cr, self.uid, acs_ids, values)
         else:
-            values['company_id'] = self.ref("base.main_company")
-            acs_model.create(self.cr, self.uid, values)
+            default_vals = self.acs_model.default_get(self.cr, self.uid, [])
+            default_vals.update(values)
+            default_vals['date_stop'] = time.strftime('%Y-12-31')
+            default_vals['date_start'] = time.strftime('%Y-%m-%d')
+            default_vals['period'] = 'month'
+            self.acs_model.create(self.cr, self.uid, default_vals)
+
         self.aajournal = self.ref('account.analytic_journal_sale')
         self.account_journal_model.write(self.cr, self.uid,
                                          [self.bank_journal_usd_id],
