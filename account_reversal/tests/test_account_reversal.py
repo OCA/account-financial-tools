@@ -20,9 +20,11 @@
 #
 ##############################################################################
 
+import time
+from datetime import datetime
+
 from openerp.tests import common
 from openerp import fields
-from datetime import datetime
 
 
 class test_account_reversal(common.TransactionCase):
@@ -78,11 +80,10 @@ class test_account_reversal(common.TransactionCase):
                 if with_partner else False
             }
         )
-        return move_line_id
+        return move_line_id.move_id
 
     def test_reverse(self):
-        move_line = self._create_move(with_partner=False)
-        move = move_line.move_id
+        move = self._create_move(with_partner=False)
         company_id = self.env.ref('base.main_company').id
         account1 = self.env['account.account'].search(
             [('company_id', '=', company_id), ('type', '=', 'other')])[0]
@@ -91,7 +92,9 @@ class test_account_reversal(common.TransactionCase):
                                            'aaaa' or 'bbbb')
                            for x in move.line_id])
         self.assertEqual(movestr, '100.000.00bbbb0.00100.00aaaa')
-        yesterday_date = datetime(year=2015, month=3, day=3)
+        yesterday_date = datetime(
+            year=time.localtime().tm_year, month=3, day=3
+        )
         yesterday = fields.Date.to_string(yesterday_date)
         reversed_move = move.create_reversals(yesterday)
         movestr_reversed = ''.join(
