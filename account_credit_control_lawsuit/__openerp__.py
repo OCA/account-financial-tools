@@ -21,7 +21,7 @@
 {'name': 'Credit Control Lawsuit',
  'version': '0.1',
  'author': 'Camptocamp',
- 'maintainer': 'Camptocamp',
+ 'maintainer': 'Camptocamp,Odoo Community Association (OCA)',
  'category': 'Accounting',
  'complexity': 'normal',
  'depends': ['base_location',
