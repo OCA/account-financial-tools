@@ -27,7 +27,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="to_be_reversed"/>
-                <field name="reversal_id" attrs="{'invisible': [('to_be_reversed', '=', False)]}"/>
+                <field name="reversal_id" attrs="{'invisible': [('to_be_reversed', '=', False), ('reversal_id', '=', False)]}"/>
             </xpath>
         </field>
     </record>
