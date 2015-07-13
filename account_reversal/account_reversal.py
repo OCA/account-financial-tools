@@ -23,7 +23,7 @@
 #
 ##############################################################################
 
-from openerp import fields, models, _
+from openerp import fields, models, api, _
 
 
 class account_move(models.Model):
@@ -39,6 +39,7 @@ class account_move(models.Model):
         ondelete='set null',
         readonly=True)
 
+    @api.multi
     def _move_reversal(self, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
                        move_prefix=False, move_line_prefix=False):
@@ -56,6 +57,7 @@ class account_move(models.Model):
 
         :return: Returns the id of the created reversal move
         """
+        self.ensure_one()
         period_obj = self.env['account.period']
 
         if not reversal_period_id:
@@ -103,8 +105,9 @@ class account_move(models.Model):
                 update_check=True)
 
         reversal_move.validate()
-        return reversal_move
+        return reversal_move.id
 
+    @api.multi
     def create_reversals(self, reversal_date, reversal_period_id=False,
                          reversal_journal_id=False,
                          move_prefix=False, move_line_prefix=False):
@@ -121,16 +124,14 @@ class account_move(models.Model):
 
         :return: Returns a list of ids of the created reversal moves
         """
-
-        if self.reversal_id:
-            return
-
-        reversal_move_id = self._move_reversal(
-            reversal_date,
-            reversal_period_id=reversal_period_id,
-            reversal_journal_id=reversal_journal_id,
-            move_prefix=move_prefix,
-            move_line_prefix=move_line_prefix
-        )
-
-        return reversal_move_id
+        return [
+            move._move_reversal(
+                reversal_date,
+                reversal_period_id=reversal_period_id,
+                reversal_journal_id=reversal_journal_id,
+                move_prefix=move_prefix,
+                move_line_prefix=move_line_prefix
+            )
+            for move in self
+            if not move.reversal_id
+        ]
