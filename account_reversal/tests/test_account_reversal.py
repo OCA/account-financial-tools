@@ -96,9 +96,10 @@ class test_account_reversal(common.TransactionCase):
             year=time.localtime().tm_year, month=3, day=3
         )
         yesterday = fields.Date.to_string(yesterday_date)
-        reversed_move = move.create_reversals(yesterday)
+        reversed_move_ids = move.create_reversals(yesterday)
+        reversed_moves = self.env['account.move'].browse(reversed_move_ids)
         movestr_reversed = ''.join(
             ['%.2f%.2f%s' % (x.debit, x.credit,
                              x.account_id == account1 and 'aaaa' or 'bbbb')
-             for x in reversed_move.line_id])
+             for x in reversed_moves.line_id])
         self.assertEqual(movestr_reversed, '0.00100.00bbbb100.000.00aaaa')
