@@ -62,3 +62,14 @@ class AccountBankStatementLine(models.Model):
         self = self.with_context(from_parent_object=True)
         return super(AccountBankStatementLine, self)\
             .process_reconciliation(mv_line_dicts)
+
+    @api.multi
+    def _is_account_cancel_installed(self):
+        ir_module = self.env['ir.module.module']
+        account_cancel = ir_module.search([('name', '=', 'account_cancel'),
+                                           ('state', '=', 'installed')])
+        return bool(account_cancel)
+
+    account_cancel_installed = fields.Boolean(
+        compute='_is_account_cancel_installed',
+        string='Allow Cancelling Entries')

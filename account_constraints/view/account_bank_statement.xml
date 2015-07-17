@@ -13,7 +13,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='bank_account_id']" position="after">
                     <field name="state" invisible="1"/>
-                    <button name="cancel" attrs="{'invisible': ['|', ('journal_entry_id', '=', False), ('state', '=', 'confirm')]}" string="Cancel" type="object" icon="gtk-undo"/>
+                    <field name='account_cancel_installed' invisible="1"/>
+                    <button name="cancel" attrs="{'invisible': ['|', ('journal_entry_id', '=', False),('account_cancel_installed','=',True) ,('state', '=', 'confirm')]}" string="Cancel" type="object" icon="gtk-undo"/>
                 </xpath>
             </field>
         </record>
