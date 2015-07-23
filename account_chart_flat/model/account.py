@@ -29,6 +29,8 @@ class flat_account(osv.Model):
     _name = 'account.account'
     _inherit = 'account.account'
 
+    _parent_store = False
+
     def create(self, cr, uid, values, context=None):
         """override the create method of account.account to make sure we
         send the magic context in order to avoid recalculation the COA structure
