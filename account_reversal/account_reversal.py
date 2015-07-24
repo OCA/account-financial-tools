@@ -45,7 +45,7 @@ class account_move(models.Model):
         #       https://github.com/odoo/odoo/pull/7735 is merged
         if self.env.context.get('novalidate'):
             return
-        super(account_move, self).validate()
+        return super(account_move, self).validate()
 
     @api.multi
     def _move_reversal(self, reversal_date,
