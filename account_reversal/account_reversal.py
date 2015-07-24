@@ -40,6 +40,14 @@ class account_move(models.Model):
         readonly=True)
 
     @api.multi
+    def validate(self):
+        # TODO: remove this method if and when
+        #       https://github.com/odoo/odoo/pull/7735 is merged
+        if self.env.context.get('novalidate'):
+            return
+        super(account_move, self).validate()
+
+    @api.multi
     def _move_reversal(self, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
                        move_prefix=False, move_line_prefix=False):
@@ -85,7 +93,7 @@ class account_move(models.Model):
             'to_be_reversed': False,
         })
 
-        self.write({
+        self.with_context(novalidate=True).write({
             'reversal_id': reversal_move.id,
             'to_be_reversed': False,
         })

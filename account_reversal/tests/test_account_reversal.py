@@ -34,12 +34,10 @@ class test_account_reversal(common.TransactionCase):
         self.move_obj = self.env['account.move']
         self.move_line_obj = self.env['account.move.line']
 
-    def _create_move(self, with_partner, amount=100):
+    def _create_move(self, with_partner, amount=100, period=None):
         date = datetime.now()
         company_id = self.env.ref('base.main_company').id
-        period_id = self.env['account.period'].with_context(
-            account_period_prefer_normal=True,
-            company_id=self.env.ref('base.main_company').id).find(date)[0]
+        period = period or self.env.ref('account.period_0')
 
         journal = self.env['account.journal'].create({
             'name': 'Test journal',
@@ -50,7 +48,7 @@ class test_account_reversal(common.TransactionCase):
 
         move_vals = {
             'journal_id': journal.id,
-            'period_id': period_id.id,
+            'period_id': period.id,
             'date': date,
             'company_id': company_id,
         }
@@ -82,6 +80,15 @@ class test_account_reversal(common.TransactionCase):
         )
         return move_line_id.move_id
 
+    def _close_period(self, period_id):
+        self.env.cr.execute('update account_journal_period '
+                            'set state=%s where period_id=%s',
+                            ('done', period_id))
+        self.env.cr.execute('update account_period '
+                            'set state=%s where id=%s',
+                            ('done', period_id))
+        self.env.invalidate_all()
+
     def test_reverse(self):
         move = self._create_move(with_partner=False)
         company_id = self.env.ref('base.main_company').id
@@ -103,3 +110,11 @@ class test_account_reversal(common.TransactionCase):
                              x.account_id == account1 and 'aaaa' or 'bbbb')
              for x in reversed_moves.line_id])
         self.assertEqual(movestr_reversed, '0.00100.00bbbb100.000.00aaaa')
+
+    def test_reverse_closed_period(self):
+        move_period = self.env.ref('account.period_0')
+        move = self._create_move(with_partner=False, period=move_period)
+        self._close_period(move_period.id)
+        reversal_period = self.env.ref('account.period_1')
+        move.create_reversals(reversal_date=reversal_period.date_start,
+                              reversal_period_id=reversal_period)
