@@ -68,7 +68,9 @@ class account_move(models.Model):
         self.ensure_one()
         period_obj = self.env['account.period']
 
-        if not reversal_period_id:
+        if reversal_period_id:
+            reversal_period_id = period_obj.browse([reversal_period_id])[0]
+        else:
             reversal_period_id = period_obj.with_context(
                 company_id=self.company_id.id,
                 account_period_prefer_normal=True).find(reversal_date)[0]
