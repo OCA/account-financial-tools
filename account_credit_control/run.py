@@ -111,8 +111,8 @@ class CreditControlRun(Model):
             lines.difference_update(manual_lines)
             manually_managed_lines.update(manual_lines)
 
+            policy_generated_ids = []
             if lines:
-                policy_generated_ids = []
                 # policy levels are sorted by level so iteration is in the correct order
                 for level in reversed(policy.level_ids):
                     level_lines = level.get_level_lines(run.date, lines, context=context)
