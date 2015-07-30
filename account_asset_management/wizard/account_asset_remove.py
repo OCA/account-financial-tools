@@ -173,8 +173,9 @@ class account_asset_remove(orm.TransientModel):
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate'),
              ('init_entry', '=', False), ('move_check', '=', False)],
             order='line_date asc')
+        if not dl_ids:
+            return asset.value_residual
         first_to_depreciate_dl = asset_line_obj.browse(cr, uid, dl_ids[0])
-
         first_date = first_to_depreciate_dl.line_date
         if date_remove > first_date:
             raise orm.except_orm(
@@ -301,19 +302,18 @@ class account_asset_remove(orm.TransientModel):
             period_ids = period_obj.find(
                 cr, uid, wiz_data.date_remove, context=ctx)
             period_id = period_ids[0]
-        dl_ids = asset_line_obj.search(
-            cr, uid,
-            [('asset_id', '=', asset.id), ('type', '=', 'depreciate')],
-            order='line_date desc')
-        last_date = asset_line_obj.browse(cr, uid, dl_ids[0]).line_date
-        if wiz_data.date_remove < last_date:
-            raise orm.except_orm(
-                _('Error!'),
-                _("The removal date must be after "
-                  "the last depreciation date."))
+        line_ids = asset_line_obj.search(
+            cr, uid, [('asset_id', '=', asset.id)], order='line_date desc')
+        if line_ids:
+            last_date = asset_line_obj.browse(cr, uid, line_ids[0]).line_date
+            if wiz_data.date_remove < last_date:
+                raise orm.except_orm(
+                    _('Error!'),
+                    _("The removal date must be after "
+                      "the last depreciation date."))
 
         line_name = asset_obj._get_depreciation_entry_name(
-            cr, uid, asset, len(dl_ids) + 1, context=context)
+            cr, uid, asset, len(line_ids), context=context)
         journal_id = asset.category_id.journal_id.id
 
         # create move
