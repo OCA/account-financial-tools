@@ -22,6 +22,17 @@
     "version": "1.0",
     "depends": ["base", "account"],
     "author": "Camptocamp,Odoo Community Association (OCA)",
+    "description": """
+    This module add the ability to lock move for modification
+
+    Usage
+    =====
+    In order to lock the move you need to follow this process:
+        * You need to post your move, with the standard wizard Post Journal Entries
+        (Invoicing -> Periodic Processing -> Draft Entries -> Post Journal Entries)
+        * After that you can use the wizard Lock Journal Entries
+        (Invoicing -> Periodic Processing -> Draft Entries -> Lock Journal Entries)
+    """
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',

@@ -49,7 +49,7 @@ msgstr "Verrouiller mouvement comptable"
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: view:lock.account.move:0
 msgid "Lock Journal Entries"
-msgstr "Verrouiller les écritues comptables"
+msgstr "Verrouiller les écritures comptables"
 
 #. module: account_move_locking
 #: field:account.move,locked:0
@@ -79,7 +79,7 @@ msgstr "Période"
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:59
 #, python-format
 msgid "Unposted move in period/jounal                    selected, please post it before                    locking them"
-msgstr "Ecritures non postées dans la sélection journal/période, Il faut poster les écritures avant de les verrouiller"
+msgstr "Ecritures non postées dans la sélection journal/période, il faut poster les écritures avant de les verrouiller"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:58

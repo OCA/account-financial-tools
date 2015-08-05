@@ -1,8 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Module name
-===========
+Account move locking
+====================
 
 This module add the ability to lock move for modification 
 
@@ -13,10 +13,10 @@ Configuration
 
 Usage
 =====
-In order the locked the move you need to follow this process
+In order to lock the move you need to follow this process:
     * You need to post your move, with the standard wizard Post Journal Entries
       (Invoicing -> Periodic Processing -> Draft Entries -> Post Journal Entries) 
-    * After the you can use the wizard Lock Journal Entries 
+    * After that you can use the wizard Lock Journal Entries 
       (Invoicing -> Periodic Processing -> Draft Entries -> Lock Journal Entries) 
 
 Bug Tracker
@@ -34,7 +34,7 @@ Credits
 Contributors
 ------------
 
-* Vincent renaville <vincen.renaville@camptocamp.com>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
 
 Maintainer
 ----------

@@ -28,7 +28,6 @@ class lock_account_move(orm.TransientModel):
 
     _columns = {
         'journal_ids': fields.many2many('account.journal',
-
                                         rel='wizard_lock_account_move_journal',
                                         string='Journal',
                                         required=True),
@@ -60,13 +59,14 @@ class lock_account_move(orm.TransientModel):
                    selected, please post it before \
                    locking them'))
 
-        move_ids = obj_move.search(cr, uid,
-                                   [('state', '=', 'posted'),
-                                    ('locked', '=', False),
-                                    ('journal_id', 'in', journal_ids),
-                                    ('period_id', 'in', period_ids)],
-                                   order='date',
-                                   context=context)
+        move_ids = obj_move.search(
+            cr, uid,
+            [('state', '=', 'posted'),
+             ('locked', '=', False),
+             ('journal_id', 'in', journal_ids),
+             ('period_id', 'in', period_ids)],
+            order='date',
+            context=context)
         if not move_ids:
             raise orm.except_orm(
                 _(u'Warning'),
