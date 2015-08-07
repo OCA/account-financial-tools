@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+# 
+# Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Bruno JOLIVEAU, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Gustavo Lepri <gustavolepri@gmail.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Thomas A. Jaeger, 2015
+# Thomas A. Jaeger, 2015
+# yterrettaz, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:56
+#, python-format
+msgid "AR/AP netting"
+msgstr "AR/AP Verrechnung"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:30
+#, python-format
+msgid "All entries must have a receivable or payable account"
+msgstr "Alle Einträge müssen eine Verbindlichkeit oder eine Forderung sein"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:33
+#, python-format
+msgid "All entries mustn't been reconciled"
+msgstr "Kein Eintrag darf ausgeglichen sein"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:39
+#, python-format
+msgid ""
+"All entries should have a partner and the partner must be the same for all."
+msgstr "Alle Einträge müssen den gleichen Partner haben"
+
+#. module: account_netting
+#: field:account.move.make.netting,balance:0
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: account_netting
+#: field:account.move.make.netting,balance_type:0
+msgid "Balance type"
+msgstr "Saldotyp"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+msgid "Compensate"
+msgstr "ausgleichen"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Compensate entries"
+msgstr "Einträge ausgleichen"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_uid:0
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_date:0
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: account_netting
+#: field:account.move.make.netting,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: account_netting
+#: field:account.move.make.netting,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_netting
+#: field:account.move.make.netting,journal:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_netting
+#: field:account.move.make.netting,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_uid:0
+msgid "Last Updated by"
+msgstr "Zuletzt geändert von"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_date:0
+msgid "Last Updated on"
+msgstr "Zuletzt geändert am"
+
+#. module: account_netting
+#: field:account.move.make.netting,move_lines:0
+msgid "Move lines"
+msgstr "Buchungszeilen"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Select the journal where storing the journal entries"
+msgstr "Wählen Sie das Journal, wo die Einträge gespeichert werden"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate account entries that are counterpart of the "
+"receivable/payable accounts selected, and reconcile each other, letting this"
+" balance in the partner:"
+msgstr "Dies generiert Gegenbuchungen zu den selektierten Forderungen oder Verbindlichkeiten um diese dann auf dem Partner auszugleichen:"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To pay"
+msgstr "zu zahlen"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To receive"
+msgstr "zu erhalten"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:24
+#, python-format
+msgid "You should compensate at least 2 journal entries."
+msgstr "Sie sollten mindestens 2 Journaleinträge ausgleichen"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "or"
+msgstr "oder"
