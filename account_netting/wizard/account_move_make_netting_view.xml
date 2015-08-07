@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <act_window name="Compensate"
+                     res_model="account.move.make.netting"
+                     src_model="account.move.line"
+                     view_mode="form"
+                     target="new"
+                     key2="client_action_multi"
+                     multi="True"
+                     id="act_account_move_make_netting"/>
+
+        <record id="view_account_move_make_netting_form" model="ir.ui.view">
+            <field name="name">Compensate entries</field>
+            <field name="model">account.move.make.netting</field>
+            <field name="arch" type="xml">
+                <form string="Compensate entries">
+                    <label string="This operation will generate account entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner:"/>
+                    <group>
+                        <field name="balance"/>
+                        <field name="balance_type"/>
+                    </group>
+                    <group string="Select the journal where storing the journal entries">
+                        <field name="journal"/>
+                    </group>
+                    <footer>
+                        <button name="button_compensate" string="Compensate" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
