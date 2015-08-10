@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+        <record model="ir.rule" id="multi_company_account_transfer">
+            <field name="name">Account Transfer Multi Company</field>
+            <field name="model_id" ref="model_account_transfer"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+</data>
+</openerp>

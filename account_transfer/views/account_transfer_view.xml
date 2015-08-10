@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<openerp>
+    <data>
+        <record model='ir.ui.view' id='account_transfer_search'>
+            <field name='name'>Account Transfer Search</field> 
+            <field name="model">account.transfer</field>
+            <field name='arch' type='xml'>
+                <search string="Tax Settlement">
+                    <field name="name"/>
+                    <field name="amount"/>
+                    <field name="date"/>
+                    <field name="period_id"/>
+                    <field name="source_journal_id"/>
+                    <field name="target_journal_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Source Journal" domain="[]" context="{'group_by' : 'source_journal_id'}"/>
+                        <filter string="Target Journal" domain="[]" context="{'group_by' : 'target_journal_id'}"/>
+                        <filter string="Company" domain="[]" context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
+                        <filter string="State" domain="[]" context="{'group_by' : 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='account_transfer_tree'>
+            <field name='name'>Account Transfer</field> 
+            <field name="model">account.transfer</field>
+            <field name='arch' type='xml'>
+                <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Tax Settlement">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="source_journal_id"/>
+                    <field name="target_journal_id"/>
+                    <field name="amount"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model='ir.ui.view' id='account_transfer_form'>
+            <field name='name'>Account Transfer</field> 
+            <field name="model">account.transfer</field>
+            <field name='arch' type='xml'>
+                <form string="Tax Settlement">
+                    <header>
+                        <button name="action_confirm" string="Confirm" states="draft" type="object" class="oe_highlight"/>
+                        <button name="action_cancel" string="Cancel" states="draft,confirmed,done" type="object"/>
+                        <button name="action_to_draft" string="To Draft" states="cancel" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_right oe_button_box" name="buttons">
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="source_journal_id"/>
+                                <field name="target_journal_id"/>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="period_id"/>
+                                <field name="source_move_id"/>
+                                <field name="target_move_id"/>
+                            </group>
+                        </group>
+                        <field name="note"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_transfer" model="ir.actions.act_window">
+            <field name="name">Account Transfers</field>
+            <field name="res_model">account.transfer</field>
+        </record>
+
+        <menuitem id="account_transfer_menu"
+                  parent="account.menu_finance_bank_and_cash"
+                  action="action_account_transfer"
+                  sequence="40"/>
+                        
+    </data>
+</openerp>

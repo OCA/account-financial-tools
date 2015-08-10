@@ -38,6 +38,10 @@ Make transfers between journals
     'external_dependencies': {
     },
     'data': [
+        'views/res_company.xml',
+        'views/account_transfer_view.xml',
+        'security/ir.model.access.csv',
+        'security/security.xml',
     ],
     'demo': [
     ],
