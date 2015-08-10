@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!--
+        -->         
+        <record id="sequence_customer_receipt_1_ri" model="ir.sequence">
+            <field name="name">Recibos 0001</field>
+            <field eval="8" name="padding"/>
+            <field name="prefix">0001-</field>
+            <field name="company_id" ref="l10n_ar_invoice.company_ri"/>
+        </record>            
+    </data>
+</openerp>
