@@ -43,15 +43,12 @@ class lock_account_move(orm.TransientModel):
         data = self.browse(cr, uid, ids, context=context)[0]
         journal_ids = [journal.id for journal in data.journal_ids]
         period_ids = [period.id for period in data.period_ids]
-        draft_move_ids = obj_move.search(cr, uid,
-                                         [('state', '=', 'draft'),
-                                          ('journal_id',
-                                           'in',
-                                           journal_ids),
-                                          ('period_id', 'in',
-                                           period_ids)],
-                                         order='date',
-                                         context=context)
+        draft_move_ids = obj_move.search(
+            cr, uid, [('state', '=', 'draft'),
+                      ('journal_id', 'in', journal_ids),
+                      ('period_id', 'in', period_ids)],
+            order='date',
+            context=context)
         if draft_move_ids:
             raise orm.except_orm(
                 _(u'Warning'),
