@@ -87,7 +87,7 @@
         <menuitem id="account_transfer_menu"
                   parent="account.menu_finance_bank_and_cash"
                   action="action_account_transfer"
-                  sequence="40"/>
+                  sequence="13"/>
                         
     </data>
 </openerp>
