@@ -40,6 +40,7 @@ Make transfers between journals
     'data': [
         'views/res_company.xml',
         'views/account_transfer_view.xml',
+        'views/account_journal_view.xml',
         'security/ir.model.access.csv',
         'security/security.xml',
     ],

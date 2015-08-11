@@ -50,6 +50,7 @@ class account_transfer(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
         domain="[('type', 'in', ['bank', 'cash']), "
+        "('allow_account_transfer', '=', True), "
         "('company_id', '=', company_id)]",
         )
     target_journal_id = fields.Many2one(
@@ -60,6 +61,7 @@ class account_transfer(models.Model):
         readonly=True,
         states={'draft': [('readonly', False)]},
         domain="[('type', 'in', ['bank', 'cash']), "
+        "('allow_account_transfer', '=', True), "
         "('company_id', '=', company_id), ('id', '!=', source_journal_id)]",
 
         )
@@ -147,12 +149,12 @@ class account_transfer(models.Model):
                 self.source_journal_id.company_id.name))
 
         if move_type == 'source':
-            ref = _('%s (Source)' % self.name)
+            ref = _('%s (Source)' % self.ref)
             journal = self.source_journal_id
             first_account = journal.default_debit_account_id
             second_account = transfer_account
         if move_type == 'target':
-            ref = _('%s (Target)' % self.name)
+            ref = _('%s (Target)' % self.ref)
             journal = self.target_journal_id
             first_account = transfer_account
             second_account = journal.default_credit_account_id
