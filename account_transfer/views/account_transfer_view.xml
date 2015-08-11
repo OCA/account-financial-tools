@@ -6,7 +6,7 @@
             <field name="model">account.transfer</field>
             <field name='arch' type='xml'>
                 <search string="Tax Settlement">
-                    <field name="name"/>
+                    <field name="ref"/>
                     <field name="amount"/>
                     <field name="date"/>
                     <field name="period_id"/>
@@ -29,7 +29,7 @@
             <field name="model">account.transfer</field>
             <field name='arch' type='xml'>
                 <tree colors="blue:state == 'draft';gray:state == 'cancel'" string="Tax Settlement">
-                    <field name="name"/>
+                    <field name="ref"/>
                     <field name="date"/>
                     <field name="source_journal_id"/>
                     <field name="target_journal_id"/>
@@ -56,7 +56,7 @@
                         </div>
                         <group>
                             <group>
-                                <field name="name"/>
+                                <field name="ref" placeholder='For eg. Cash deposit by Juan'/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="source_journal_id"/>
                                 <field name="target_journal_id"/>

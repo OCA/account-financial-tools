@@ -13,10 +13,10 @@ class account_transfer(models.Model):
     _name = "account.transfer"
     _description = "account.transfer"
     _inherit = ['mail.thread']
+    _rec_name = 'ref'
 
-    name = fields.Char(
-        'Name',
-        # default=_('Journal Transfer'),
+    ref = fields.Char(
+        'Reference',
         required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
