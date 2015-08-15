@@ -68,10 +68,8 @@ class account_move(models.Model):
         self.ensure_one()
         period_obj = self.env['account.period']
 
-        if reversal_period_id:
-            reversal_period = period_obj.browse([reversal_period_id])[0]
-        else:
-            reversal_period = period_obj.with_context(
+        if not reversal_period_id:
+            reversal_period_id = period_obj.with_context(
                 company_id=self.company_id.id,
                 account_period_prefer_normal=True).find(reversal_date)[0]
         if not reversal_journal_id:
@@ -81,7 +79,7 @@ class account_move(models.Model):
                 reversal_journal_id]).company_id != self.company_id:
             raise Warning(_('Wrong company Journal is %s but we have %s') % (
                 reversal_journal_id.company_id.name, self.company_id.name))
-        if reversal_period.company_id != self.company_id:
+        if reversal_period_id.company_id != self.company_id:
             raise Warning(_('Wrong company Period is %s but we have %s') % (
                 reversal_journal_id.company_id.name, self.company_id.name))
 
@@ -89,7 +87,7 @@ class account_move(models.Model):
         reversal_move = self.copy(default={
             'company_id': self.company_id.id,
             'date': reversal_date,
-            'period_id': reversal_period.id,
+            'period_id': reversal_period_id.id,
             'ref': reversal_ref,
             'journal_id': reversal_journal_id,
             'to_be_reversed': False,
