@@ -117,4 +117,4 @@ class test_account_reversal(common.TransactionCase):
         self._close_period(move_period.id)
         reversal_period = self.env.ref('account.period_1')
         move.create_reversals(reversal_date=reversal_period.date_start,
-                              reversal_period_id=reversal_period)
+                              reversal_period_id=reversal_period.id)
