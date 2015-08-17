@@ -34,7 +34,7 @@ class YAHOO_getter(Currency_getter_interface):
         """implementation of abstract method of curreny_getter_interface"""
         self.validate_cur(main_currency)
         url = ('http://download.finance.yahoo.com/d/'
-               'quotes.txt?s="%s"=X&f=sl1c1abg')
+               'quotes.csv?s=%s=X&f=sl1c1abg')
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         for curr in currency_array:
