@@ -14,7 +14,7 @@
       Dear ${object.contact_address.name or ''}
       <br/>
       <br/>
-      ${object.current_policy_level.custom_mail_text.replace('\n', '<br>') | safe}
+      ${object.current_policy_level.custom_mail_text | safe}
       ]]></field>
     </record>
 
