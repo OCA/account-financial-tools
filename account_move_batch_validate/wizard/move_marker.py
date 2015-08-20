@@ -20,9 +20,21 @@
 ###############################################################################
 """Wizards for batch posting."""
 
+import logging
+
 from openerp.osv import fields, orm
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.connector.queue.job import job
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from openerp.addons.connector.session import ConnectorSession
+    from openerp.addons.connector.queue.job import job
+except ImportError:
+    _logger.debug('Can not `import connector`.')
+
+    def empty_decorator(func):
+        return func
+    job = empty_decorator
 
 
 class ValidateAccountMove(orm.TransientModel):
