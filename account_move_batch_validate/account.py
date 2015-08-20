@@ -25,11 +25,19 @@ import logging
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
-from openerp.addons.connector.queue.job import job
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.connector.queue.job import OpenERPJobStorage
-
 _logger = logging.getLogger(__name__)
+
+try:
+    from openerp.addons.connector.queue.job import job
+    from openerp.addons.connector.session import ConnectorSession
+    from openerp.addons.connector.queue.job import OpenERPJobStorage
+except ImportError:
+    _logger.debug('Can not `import connector`.')
+    import functools
+
+    def empty_decorator_factory(*argv, **kwargs):
+        return functools.partial
+    job = empty_decorator_factory
 
 # do a massive write on account moves BLOCK_SIZE at a time
 BLOCK_SIZE = 1000
