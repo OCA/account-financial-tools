@@ -222,7 +222,7 @@ class AccountMoveLineImport(models.TransientModel):
         if not aml_vals.get(orm_field):
             val = str2int(
                 line[field], self.decimal_separator)
-            if val == False:
+            if val is False:
                 msg = _(
                     "Incorrect value '%s' "
                     "for field '%s' of type Integer !"
@@ -240,7 +240,7 @@ class AccountMoveLineImport(models.TransientModel):
 
             val = str2float(
                 line[field], self.decimal_separator)
-            if val == False:
+            if val is False:
                 msg = _(
                     "Incorrect value '%s' "
                     "for field '%s' of type Numeric !"
@@ -249,14 +249,13 @@ class AccountMoveLineImport(models.TransientModel):
             else:
                 aml_vals[orm_field] = val
 
-
     def _handle_orm_many2one(self, field, line, move, aml_vals,
                              orm_field=False):
         orm_field = orm_field or field
         if not aml_vals.get(orm_field):
             val = str2int(
                 line[field], self.decimal_separator)
-            if val == False:
+            if val is False:
                 msg = _(
                     "Incorrect value '%s' "
                     "for field '%s' of type Many2One !"
@@ -436,6 +435,7 @@ class AccountMoveLineImport(models.TransientModel):
                 "Error in CSV file, Total Debit (%s) is "
                 "different from Total Credit (%s) !"
                 ) % (self._sum_debit, self._sum_credit) + '\n'
+        return vals
 
     @api.multi
     def aml_import(self):
@@ -485,6 +485,9 @@ class AccountMoveLineImport(models.TransientModel):
                 self._process_line_vals(line, move, aml_vals)
                 inv_lines.append(aml_vals)
 
+        vals = [(0, 0, l) for l in inv_lines]
+        vals = self._process_vals(move, vals)
+
         if self._err_log:
             self.note = self._err_log
             result_view = self.env.ref(
@@ -500,8 +503,6 @@ class AccountMoveLineImport(models.TransientModel):
                 'type': 'ir.actions.act_window',
             }
         else:
-            vals = [(0, 0, l) for l in inv_lines]
-            self._process_vals(move, vals)
             move.write({'line_id': vals})
             return {'type': 'ir.actions.act_window_close'}
 
