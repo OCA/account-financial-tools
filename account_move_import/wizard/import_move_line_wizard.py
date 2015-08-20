@@ -127,6 +127,7 @@ class AccountMoveLineImport(models.TransientModel):
     def _process_header(self, header_fields):
 
         self._field_methods = self._input_fields()
+        self._skip_fields = []
 
         # header fields after blank column are considered as comments
         column_cnt = 0
@@ -162,7 +163,7 @@ class AccountMoveLineImport(models.TransientModel):
                     _("%s, undefined field '%s' found "
                       "while importing move lines"),
                     self._name, hf)
-                header_fields.pop(i)
+                self._skip_fields.append(hf)
                 continue
 
             field_def = self._orm_fields.get(hf)
@@ -219,8 +220,16 @@ class AccountMoveLineImport(models.TransientModel):
                             orm_field=False):
         orm_field = orm_field or field
         if not aml_vals.get(orm_field):
-            aml_vals[orm_field] = str2int(
+            val = str2int(
                 line[field], self.decimal_separator)
+            if val == False:
+                msg = _(
+                    "Incorrect value '%s' "
+                    "for field '%s' of type Integer !"
+                    ) % (line[field], field)
+                self._log_line_error(line, msg)
+            else:
+                aml_vals[orm_field] = val
 
     def _handle_orm_float(self, field, line, move, aml_vals,
                           orm_field=False):
@@ -229,12 +238,35 @@ class AccountMoveLineImport(models.TransientModel):
             aml_vals[orm_field] = str2float(
                 line[field], self.decimal_separator)
 
+            val = str2float(
+                line[field], self.decimal_separator)
+            if val == False:
+                msg = _(
+                    "Incorrect value '%s' "
+                    "for field '%s' of type Numeric !"
+                    ) % (line[field], field)
+                self._log_line_error(line, msg)
+            else:
+                aml_vals[orm_field] = val
+
+
     def _handle_orm_many2one(self, field, line, move, aml_vals,
                              orm_field=False):
         orm_field = orm_field or field
         if not aml_vals.get(orm_field):
-            aml_vals[orm_field] = str2int(
+            val = str2int(
                 line[field], self.decimal_separator)
+            if val == False:
+                msg = _(
+                    "Incorrect value '%s' "
+                    "for field '%s' of type Many2One !"
+                    "\nYou should specify the database key "
+                    "or contact your IT department "
+                    "to add support for this field."
+                    ) % (line[field], field)
+                self._log_line_error(line, msg)
+            else:
+                aml_vals[orm_field] = val
 
     def _handle_account(self, field, line, move, aml_vals):
         if not aml_vals.get('account_id'):
@@ -435,17 +467,19 @@ class AccountMoveLineImport(models.TransientModel):
                 if i == 0 and line[hf] and line[hf][0] == '#':
                     # lines starting with # are considered as comment lines
                     break
+                if hf in self._skip_fields:
+                    continue
                 if line[hf] == '':
                     continue
+
+                line[hf] = line[hf].strip()
+                if self._field_methods[hf].get('orm_field'):
+                    self._field_methods[hf]['method'](
+                        hf, line, move, aml_vals,
+                        orm_field=self._field_methods[hf]['orm_field'])
                 else:
-                    line[hf] = line[hf].strip()
-                    if self._field_methods[hf].get('orm_field'):
-                        self._field_methods[hf]['method'](
-                            hf, line, move, aml_vals,
-                            orm_field=self._field_methods[hf]['orm_field'])
-                    else:
-                        self._field_methods[hf]['method'](
-                            hf, line, move, aml_vals)
+                    self._field_methods[hf]['method'](
+                        hf, line, move, aml_vals)
 
             if aml_vals:
                 self._process_line_vals(line, move, aml_vals)
@@ -475,18 +509,22 @@ class AccountMoveLineImport(models.TransientModel):
 def str2float(amount, decimal_separator):
     if not amount:
         return 0.0
-    else:
+    try:
         if decimal_separator == '.':
             return float(amount.replace(',', ''))
         else:
             return float(amount.replace('.', '').replace(',', '.'))
+    except:
+        return False
 
 
 def str2int(amount, decimal_separator):
     if not amount:
         return 0
-    else:
+    try:
         if decimal_separator == '.':
             return int(amount.replace(',', ''))
         else:
             return int(amount.replace('.', '').replace(',', '.'))
+    except:
+        return False
