@@ -81,6 +81,7 @@ class CreditCommunication(models.TransientModel):
         balance_field = 'credit_control_line_ids.balance_due'
         return sum(self.mapped(balance_field))
 
+    @api.one
     @api.depends('credit_control_line_ids',
                  'credit_control_line_ids.amount_due',
                  'credit_control_line_ids.balance_due')
