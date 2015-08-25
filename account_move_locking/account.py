@@ -29,28 +29,25 @@ class AccountMove(orm.Model):
         'locked': fields.boolean('Locked', readonly=True),
     }
 
-    def write(self, cr, uid, ids, vals, context=None):
+    def check_locked(self, cr, uid, ids, context=None):
         for move in self.browse(cr, uid, ids, context=context):
             if move.locked:
                 raise orm.except_orm(
                     _(u'Move Locked!'), move.name)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        self.check_locked(cr=cr, uid=uid, ids=ids, context=context)
         return super(AccountMove, self).write(cr, uid,
                                               ids, vals, context=context)
 
     def unlink(self, cr, uid, ids, context=None):
-        for move in self.browse(cr, uid, ids, context=context):
-            if move.locked:
-                raise orm.except_orm(
-                    _(u'Move Locked!'), move.name)
+        self.check_locked(cr=cr, uid=uid, ids=ids, context=context)
         return super(AccountMove, self).unlink(cr, uid,
                                                ids, context=context)
 
     def button_cancel(self, cr, uid, ids, context=None):
         # Cancel a move was done directly in SQL
         # so we need to test manualy if the move is locked
-        for move in self.browse(cr, uid, ids, context=context):
-            if move.locked:
-                raise orm.except_orm(
-                    _(u'Move Locked!'), move.name)
+        self.check_locked(cr=cr, uid=uid, ids=ids, context=context)
         return super(AccountMove, self).button_cancel(cr, uid,
                                                       ids, context=context)

@@ -48,6 +48,7 @@ class lock_account_move(orm.TransientModel):
                       ('journal_id', 'in', journal_ids),
                       ('period_id', 'in', period_ids)],
             order='date',
+            limit=1,
             context=context)
         if draft_move_ids:
             raise orm.except_orm(
