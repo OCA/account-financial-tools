@@ -4,7 +4,6 @@
         <record id="update_tax_config_add_lines_form" model="ir.ui.view">
             <field name="name">Update tax select taxes form"</field>
             <field name="model">account.update.tax.select_taxes</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Taxes">
                     <label colspan="4" string="Add the taxes that need to be replaced here. Any parent or child taxes will be added automatically when you close this window."/>

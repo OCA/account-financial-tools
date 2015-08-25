@@ -13,7 +13,6 @@
       <field name="name">invoice.followup.form.view</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="account.invoice_form" />
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <notebook position="inside">
         <page string="Credit Control"

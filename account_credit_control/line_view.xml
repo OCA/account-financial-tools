@@ -3,7 +3,6 @@
     <record id="credit_control_line_form" model="ir.ui.view">
       <field name="name">credit.control.line.form</field>
       <field name="model">credit.control.line</field>
-      <field name="type">form</field>
       <field name="arch" type="xml">
         <form string="Control Credit Lines">
           <field name="date"/>
@@ -30,7 +29,6 @@
     <record id="credit_control_line_search" model="ir.ui.view">
       <field name="name">Credit Control Lines</field>
       <field name="model">credit.control.line</field>
-      <field name="type">search</field>
       <field name="arch" type="xml">
         <search string="Control Credit Lines">
           <group string="Filters">
@@ -103,7 +101,6 @@
     <record id="credit_control_line_tree" model="ir.ui.view">
       <field name="name">credit.control.line.tree</field>
       <field name="model">credit.control.line</field>
-      <field name="type">tree</field>
       <field name="arch" type="xml">
         <tree editable="bottom" string="Control Credit Lines" colors="green:state == 'sent';red:state in ('error', 'email_error');">
           <field name="date"/>
