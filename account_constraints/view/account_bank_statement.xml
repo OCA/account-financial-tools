@@ -11,12 +11,35 @@
             <field name="model">account.bank.statement</field>
             <field name="inherit_id" ref="account.view_bank_statement_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='bank_account_id']" position="after">
+                <xpath expr="//field[@name='line_ids']/tree/field[last()]" position="after">
                     <field name="state" invisible="1"/>
                     <field name='account_cancel_installed' invisible="1"/>
                     <button name="cancel" attrs="{'invisible': ['|', ('journal_entry_id', '=', False),('account_cancel_installed','=', True)]}" string="Cancel" type="object" icon="gtk-undo"/>
                 </xpath>
+                <!-- Reload the parent record to show the reconcile button -->
+                <xpath expr="//field[@name='line_ids']" position="attributes">
+                    <attribute name="options">{'reload_on_button': true}</attribute>
+                </xpath>
             </field>
         </record>
+        <record id="bank_statement_cash_cancel_form_inherit" model="ir.ui.view">
+            <field name="name">bank.statement.cash.cancel.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree/field[last()]" position="after">
+                    <field name="state" invisible="1"/>
+                    <field name="journal_entry_id" invisible="1"/>
+                    <field name='account_cancel_installed' invisible="1"/>
+                    <button name="cancel" string="Cancel" type="object" icon="gtk-undo" 
+                            attrs="{'invisible': ['|', ('journal_entry_id', '=', False),('account_cancel_installed','=', True)]}" />
+                </xpath>
+                <!-- Reload the parent record to show the reconcile button -->
+                <xpath expr="//field[@name='line_ids']" position="attributes">
+                    <attribute name="options">{'reload_on_button': true}</attribute>
+                </xpath>
+             </field>
+        </record>
+
     </data>
 </openerp>
