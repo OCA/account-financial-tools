@@ -202,7 +202,7 @@ class AccountMoveLineImport(models.TransientModel):
                     _("%s, the import of ORM fields of type '%s' "
                       "is not supported"),
                     self._name, hf, field_type)
-                header_fields.pop(i)
+                self._skip_fields.append(hf)
 
         return header_fields
 
