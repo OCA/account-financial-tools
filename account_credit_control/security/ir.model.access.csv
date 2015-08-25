@@ -3,7 +3,6 @@
 "account_credit_control.ir_model_access_271",1,1,"group_account_credit_control_user","credit_control_user_line","account_credit_control.model_credit_control_line",1,1
 "account_credit_control.ir_model_access_272",0,0,"group_account_credit_control_info","credit_control_info_line","account_credit_control.model_credit_control_line",1,0
 "account_credit_control.ir_model_access_273",1,1,"group_account_credit_control_manager","credit_control_manager_mail_template","email_template.model_email_template",1,1
-"account_credit_control.ir_model_access_274",1,1,"group_account_credit_control_manager","credit_control_manager_mail_template_preview","email_template.model_email_template_preview",1,1
 "account_credit_control.ir_model_access_275",1,1,"group_account_credit_control_manager","credit_control_manager_mail_message","mail.model_mail_message",1,1
 "account_credit_control.ir_model_access_276",1,0,"group_account_credit_control_user","credit_control_user_mail_message","mail.model_mail_message",1,1
 "account_credit_control.ir_model_access_277",0,0,"group_account_credit_control_info","credit_control_info_mail_message","mail.model_mail_message",1,0
