@@ -28,11 +28,3 @@
 #
 
 from . import test_account_constraint_chronology
-
-fast_suite = [
-    test_account_constraint_chronology,
-]
-
-checks = [
-    test_account_constraint_chronology,
-]
