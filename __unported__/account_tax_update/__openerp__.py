@@ -57,5 +57,6 @@ This module is compatible with OpenERP 7.0
         'security/ir.model.access.csv',
     ],
     "license": 'AGPL-3',
+    "installable": False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
