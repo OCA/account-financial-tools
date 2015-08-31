@@ -20,13 +20,10 @@
 #
 ##############################################################################
 
+from . import account_asset
+from . import wizard
+
 try:
-    from . import account_asset
-    from . import wizard
     from . import report
 except ImportError:
-    import logging
-    logging.getLogger(__name__).warn(
-        "report_xls not available in addons path")
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    pass  # this module is not installed, and tries to import report_xls
