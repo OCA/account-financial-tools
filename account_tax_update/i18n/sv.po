@@ -1,0 +1,289 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * account_tax_update
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-06-03 16:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Swedish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sv/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_tax_update
+#: view:account.update.tax.select_taxes:0
+msgid ""
+"Add the taxes that need to be replaced here. Any parent or child taxes will "
+"be added automatically when you close this window."
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,target_tax_description:0
+msgid "New tax code"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0 field:account.update.tax.config,log:0
+msgid "Log"
+msgstr ""
+
+#. module: account_tax_update
+#: selection:account.update.tax.config,state:0
+msgid "Confirm"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid ""
+"When you are done configuring the new tax amounts, click here to create the "
+"new taxes and a mapping between the new and old taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Set legacy purchase taxes inactive"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Add sale taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: model:ir.actions.act_window,name:account_tax_update.action_update_tax_config
+#: model:ir.ui.menu,name:account_tax_update.menu_update_tax_config
+msgid "Update tax wizard"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,state:0
+#: field:account.update.tax.config.line,state:0
+msgid "State"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,source_tax_description:0
+msgid "Old tax code"
+msgstr ""
+
+#. module: account_tax_update
+#: selection:account.update.tax.config,state:0
+msgid "Draft"
+msgstr "Preliminär"
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,target_tax_id:0
+msgid "Target tax"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,sale_set_defaults:0
+msgid "Sales tax defaults have been set"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Replace sales tax defaults"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.select_taxes:0
+msgid "Save"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,default_amount:0
+msgid "Default new amount"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+#: field:account.update.tax.config,purchase_line_ids:0
+msgid "Purchase taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Set legacy sales taxes inactive"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,purchase_set_inactive:0
+msgid "Purchase taxes have been set to inactive"
+msgstr ""
+
+#. module: account_tax_update
+#: model:ir.actions.act_window,help:account_tax_update.action_update_tax_config
+msgid ""
+"For every tax increase, you can create a new configuration. Select sales and"
+" purchase taxes to adapt. The selected taxes will be duplicated. The old tax"
+" names will be prefixed with a 'legacy' tag. Change the new tax names and "
+"codes in the window below to reflect the amount change. The new taxes then "
+"become available to select manually on sale or purchase order lines. You may"
+" also want to change the names of the associated tax codes, or reassign them"
+" between the taxes. At specific times during the transition, you can replace"
+" the default sales and purchase taxes in the system. Eventually you can hide"
+" the obsolete taxes by making them inactive. Until then, you can still "
+"select the old taxes manually"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,amount_old:0
+msgid "Old amount"
+msgstr ""
+
+#. module: account_tax_update
+#: model:ir.model,name:account_tax_update.model_account_update_tax_config_line
+msgid "Tax update configuration lines"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Replace purchase tax defaults"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,purchase_config_id:0
+#: field:account.update.tax.config.line,sale_config_id:0
+#: field:account.update.tax.select_taxes,config_id:0
+msgid "Configuration"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,name:0
+msgid "Legacy taxes prefix"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Create tax mappings"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,duplicate_tax_code:0
+msgid "Duplicate Tax code linked"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,purchase_set_defaults:0
+msgid "Purchase tax defaults have been set"
+msgstr ""
+
+#. module: account_tax_update
+#: code:addons/account_tax_update/model/update_tax_config.py:105
+#: code:addons/account_tax_update/model/update_tax_config.py:325
+#: code:addons/account_tax_update/model/update_tax_config.py:440
+#, python-format
+msgid "Can not detect tax use type"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.tax:0 view:account.update.tax.config:0
+#: view:account.update.tax.config.line:0
+#: view:account.update.tax.select_taxes:0
+#: field:account.update.tax.select_taxes,tax_ids:0
+msgid "Taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.select_taxes,covered_tax_ids:0
+msgid "Covered taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: help:account.update.tax.config,name:0
+msgid "The processed taxes will be marked with this name"
+msgstr ""
+
+#. module: account_tax_update
+#: code:addons/account_tax_update/model/update_tax_config.py:104
+#: code:addons/account_tax_update/model/update_tax_config.py:324
+#: code:addons/account_tax_update/model/update_tax_config.py:439
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: account_tax_update
+#: selection:account.update.tax.config,state:0
+msgid "Purchase updated"
+msgstr ""
+
+#. module: account_tax_update
+#: selection:account.update.tax.config,state:0
+msgid "Sales updated"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,source_tax_id:0
+msgid "Source tax"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+msgid "Add purchase taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config.line,amount_new:0
+msgid "New amount"
+msgstr ""
+
+#. module: account_tax_update
+#: model:ir.model,name:account_tax_update.model_account_update_tax_config
+msgid "Update taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: model:ir.model,name:account_tax_update.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: account_tax_update
+#: sql_constraint:account.update.tax.config:0
+msgid "Name must be unique."
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.config:0
+#: field:account.update.tax.config,sale_line_ids:0
+msgid "Sales taxes"
+msgstr ""
+
+#. module: account_tax_update
+#: selection:account.update.tax.config,state:0
+msgid "Done"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.select_taxes,type_tax_use:0
+msgid "Type tax use"
+msgstr ""
+
+#. module: account_tax_update
+#: view:account.update.tax.select_taxes:0
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. module: account_tax_update
+#: model:ir.model,name:account_tax_update.model_account_update_tax_select_taxes
+msgid "Select the taxes to be updated"
+msgstr ""
+
+#. module: account_tax_update
+#: field:account.update.tax.config,sale_set_inactive:0
+msgid "Sales taxes have been set to inactive"
+msgstr ""
+
+#. module: account_tax_update
+#: help:account.update.tax.config,default_amount:0
+msgid ""
+"Although it is possible to specify a distinct new amount per tax, you can "
+"set the default value here."
+msgstr ""

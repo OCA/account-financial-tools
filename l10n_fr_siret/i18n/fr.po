@@ -1,21 +1,22 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* l10n_fr_siret
-#
+# * l10n_fr_siret
+# 
+# Translators:
+# Christophe kryskool <christophe.chauvet@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1beta\n"
+"Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 17:53+0000\n"
-"PO-Revision-Date: 2013-11-11 16:06+0000\n"
-"Last-Translator: Alexandre Fayolle - camptocamp "
-"<alexandre.fayolle@camptocamp.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-07-09 10:06+0000\n"
+"Last-Translator: Christophe kryskool <christophe.chauvet@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: l10n_fr_siret
 #: field:res.partner,siren:0
@@ -27,9 +28,7 @@ msgstr "SIREN"
 msgid ""
 "The NIC number is the official rank number of this office in the company in "
 "France. It makes the last 5 digits of the SIRET number."
-msgstr ""
-"Le numéro NIC est le numéro de rang officiel de cet établissement dans sa "
-"société en France. Il compose les 5 derniers chiffres du numéro SIRET."
+msgstr "Le numéro NIC est le numéro de rang officiel de cet établissement dans sa société en France. Il compose les 5 derniers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: field:res.partner,nic:0
@@ -39,7 +38,12 @@ msgstr "NIC"
 #. module: l10n_fr_siret
 #: field:res.partner,company_registry:0
 msgid "Company Registry"
-msgstr ""
+msgstr "Registre des sociétés"
+
+#. module: l10n_fr_siret
+#: model:ir.model,name:l10n_fr_siret.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
 
 #. module: l10n_fr_siret
 #: constraint:res.partner:0
@@ -49,27 +53,27 @@ msgstr "Le numéro SIREN ou NIC est incorrect."
 #. module: l10n_fr_siret
 #: help:res.partner,siret:0
 msgid ""
-"The SIRET number is the official identity number of this company's office in "
-"France. It is composed of the 9 digits of the SIREN number and the 5 digits "
-"of the NIC number, ie. 14 digits."
-msgstr ""
-"Le numéro SIRET est l'identifiant officiel de l'établissement en France. Il "
-"est composé des 9 chiffres du numéro SIREN et des 5 chiffres du numéro NIC, "
-"soit 14 chiffres."
+"The SIRET number is the official identity number of this company's office in"
+" France. It is composed of the 9 digits of the SIREN number and the 5 digits"
+" of the NIC number, ie. 14 digits."
+msgstr "Le numéro SIRET est l'identifiant officiel de l'établissement en France. Il est composé des 9 chiffres du numéro SIREN et des 5 chiffres du numéro NIC, soit 14 chiffres."
 
 #. module: l10n_fr_siret
 #: help:res.partner,company_registry:0
 msgid "The name of official registry where this company was declared."
-msgstr ""
+msgstr "Le nom du registre officiel des sociétés ou la société est enregistrée."
+
+#. module: l10n_fr_siret
+#: view:res.partner:0
+msgid "SIREN/NIC"
+msgstr "SIREN/NIC"
 
 #. module: l10n_fr_siret
 #: help:res.partner,siren:0
 msgid ""
 "The SIREN number is the official identity number of the company in France. "
 "It makes the first 9 digits of the SIRET number."
-msgstr ""
-"Le numéro SIREN est l'identifiant officiel de la société en France. Il "
-"compose les 9 premiers chiffres du numéro SIRET."
+msgstr "Le numéro SIREN est l'identifiant officiel de la société en France. Il compose les 9 premiers chiffres du numéro SIRET."
 
 #. module: l10n_fr_siret
 #: model:ir.model,name:l10n_fr_siret.model_res_partner
@@ -84,4 +88,4 @@ msgstr "SIRET"
 #. module: l10n_fr_siret
 #: view:res.partner:0
 msgid "Accounting"
-msgstr ""
+msgstr "Comptabilité"

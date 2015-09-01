@@ -1,0 +1,120 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * account_credit_control_dunning_fees
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-06-03 16:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fees_type:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_currency_id:0
+msgid "Fees currency"
+msgstr "Fees currency"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:185
+msgid "Invoiced amount"
+msgstr "Invoiced amount"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:186
+msgid "Open amount"
+msgstr "Open amount"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
+msgid "A credit control policy level"
+msgstr "A credit control policy level"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
+msgid "A credit control line"
+msgstr "A credit control line"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:183
+msgid "Invoice date"
+msgstr "Invoice date"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:182
+msgid "Invoice number"
+msgstr "Invoice number"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:179
+msgid "Summary"
+msgstr "Summary"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:188
+msgid "Currency"
+msgstr "Currency"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fixed_amount:0
+msgid "Fees Fixed Amount"
+msgstr "Fees Fixed Amount"
+
+#. module: account_credit_control_dunning_fees
+#: view:credit.control.policy:0
+msgid "Mail and reporting"
+msgstr "Mail and reporting"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:187
+#: field:credit.control.line,dunning_fees_amount:0
+#: view:credit.control.policy:0
+msgid "Fees"
+msgstr "Fees"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:174
+msgid "Dear"
+msgstr "Dear"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
+msgid "credit.control.dunning.fees.computer"
+msgstr "credit.control.dunning.fees.computer"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:184
+msgid "Date due"
+msgstr "Date due"
+
+#. module: account_credit_control_dunning_fees
+#: selection:credit.control.policy.level,dunning_fees_type:0
+msgid "Fixed"
+msgstr "Fixed"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
+msgid "Credit control line generator"
+msgstr "Credit control line generator"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_product_id:0
+msgid "Fees Product"
+msgstr "Fees Product"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:171
+msgid "Reminder"
+msgstr "Reminder"

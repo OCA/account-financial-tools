@@ -1,21 +1,22 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_move_batch_validate
-#
+# * account_move_batch_validate
+# 
+# Translators:
+# Christophe kryskool <christophe.chauvet@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 14:17+0000\n"
-"PO-Revision-Date: 2014-02-24 05:21+0000\n"
-"Last-Translator: Leonardo Pistone - camptocamp "
-"<leonardo.pistone@camptocamp.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-07-09 10:15+0000\n"
+"Last-Translator: Christophe kryskool <christophe.chauvet@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_move_batch_validate
 #: field:account.move,post_job_uuid:0
@@ -28,10 +29,10 @@ msgid "Check this box to mark the move for batch posting"
 msgstr "Check this box to mark the move for batch posting"
 
 #. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/account.py:95
+#: code:addons/account_move_batch_validate/account.py:115
 #, python-format
 msgid "Task set to Done because the user unmarked the move"
-msgstr ""
+msgstr "Tâche mise en terminée parce que l'utilisateur a décoché l'écriture"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
@@ -44,20 +45,14 @@ msgid "Unmark for posting"
 msgstr "Unmark for posting"
 
 #. module: account_move_batch_validate
-#: field:account.move,to_post:0
-msgid "To Post"
-msgstr "Validation demandée"
-
-#. module: account_move_batch_validate
 #: field:account.move.marker,company_id:0
 msgid "Company"
 msgstr "Société"
 
 #. module: account_move_batch_validate
 #: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
-#: model:ir.ui.menu,name:account_move_batch_validate.menu_account_move_marker
-msgid "Mark Journal Items for Batch Posting"
-msgstr ""
+msgid "Mark Jornal Items for Batch Posting"
+msgstr "Marquer le journal pour la validation en masse"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,filter:0
@@ -70,15 +65,20 @@ msgid "Chart of Account"
 msgstr "Plan Comptable"
 
 #. module: account_move_batch_validate
-#: view:account.move.marker:0
-#: field:account.move.marker,journal_ids:0
+#: field:account.move,to_post:0
+msgid "Posting Requested"
+msgstr "Validation demandée"
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:0 field:account.move.marker,journal_ids:0
 msgid "Journals"
 msgstr "Journaux"
 
 #. module: account_move_batch_validate
-#: field:account.move.marker,target_move:0
-msgid "Target Moves"
-msgstr "Target Moves"
+#: code:addons/account_move_batch_validate/account.py:161
+#, python-format
+msgid "Nothing to do because the record has been deleted"
+msgstr "Rien à faire car l'enregistrement a été supprimé"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
@@ -86,8 +86,7 @@ msgid "Report Options"
 msgstr "Report Options"
 
 #. module: account_move_batch_validate
-#: view:account.move.marker:0
-#: selection:account.move.marker,filter:0
+#: view:account.move.marker:0 selection:account.move.marker,filter:0
 msgid "Periods"
 msgstr "Periods"
 
@@ -142,6 +141,11 @@ msgid "Action"
 msgstr "Action"
 
 #. module: account_move_batch_validate
+#: model:ir.model,name:account_move_batch_validate.model_account_move_batch_validate_installed
+msgid "account_move_batch_validate.installed"
+msgstr "account_move_batch_validate.installed"
+
+#. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
 msgid "Account Entry"
 msgstr "Pièce comptable"
@@ -150,6 +154,11 @@ msgstr "Pièce comptable"
 #: selection:account.move.marker,action:0
 msgid "Mark for posting"
 msgstr "Sélectionner pour validation"
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,target_move:0
+msgid "Target Moves"
+msgstr "Target Moves"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move_marker

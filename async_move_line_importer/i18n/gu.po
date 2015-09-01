@@ -1,0 +1,232 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * async_move_line_importer
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Gujarati (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/gu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: gu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:168
+#, python-format
+msgid ""
+"Maybe you have not choose correct separator \n"
+"the error detail is : \n"
+" %s"
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:167
+#, python-format
+msgid "CSV file is malformed"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: async_move_line_importer
+#: selection:move.line.importer,state:0
+msgid "New"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,delimiter:0
+msgid "CSV delimiter"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,state:0
+msgid "Status"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,bypass_orm:0
+msgid "Fast import (use with caution)"
+msgstr ""
+
+#. module: async_move_line_importer
+#: view:move.line.importer:0
+msgid "Import File"
+msgstr ""
+
+#. module: async_move_line_importer
+#: help:move.line.importer,bypass_orm:0
+msgid ""
+"When enabled import will be faster but it will not use orm and may not support all CSV canvas. \n"
+"Entry posted option will be skipped. \n"
+"AA lines will only be created when moves are posted. \n"
+"Tax lines computation will be skipped. \n"
+"This option should be used with caution and in conjonction with provided canvas."
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,company_id:0
+msgid "Company"
+msgstr "કંપની"
+
+#. module: async_move_line_importer
+#: help:move.line.importer,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:mail.message.subtype,description:async_move_line_importer.mvl_imported
+#: model:mail.message.subtype,name:async_move_line_importer.mvl_imported
+msgid "Import successfully finished"
+msgstr ""
+
+#. module: async_move_line_importer
+#: selection:move.line.importer,state:0
+msgid "Running"
+msgstr "ચાલી રહ્યું છે"
+
+#. module: async_move_line_importer
+#: field:move.line.importer,message_is_follower:0
+msgid "Is a Follower"
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:214
+#, python-format
+msgid "%s lines imported"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:ir.model,name:async_move_line_importer.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:187
+#, python-format
+msgid "%s. -- Field: %s -- rows %s to %s"
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:305
+#, python-format
+msgid ""
+"Unexpected exception.\n"
+" %s \n"
+" %s"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,name:0
+msgid "Name"
+msgstr ""
+
+#. module: async_move_line_importer
+#: selection:move.line.importer,state:0
+msgid "Success"
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:370
+#, python-format
+msgid "Import is running"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:ir.actions.act_window,name:async_move_line_importer.move_line_importer_action
+#: model:ir.ui.menu,name:async_move_line_importer.move_line_importer_action_menu
+msgid "Import Move lines"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:mail.message.subtype,description:async_move_line_importer.mvl_error
+#: model:mail.message.subtype,name:async_move_line_importer.mvl_error
+msgid "Import failed"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,message_summary:0
+msgid "Summary"
+msgstr ""
+
+#. module: async_move_line_importer
+#: view:move.line.importer:0 field:move.line.importer,report:0
+msgid "Report"
+msgstr ""
+
+#. module: async_move_line_importer
+#: view:move.line.importer:0
+msgid "Delimiter"
+msgstr ""
+
+#. module: async_move_line_importer
+#: selection:move.line.importer,state:0
+msgid "Error"
+msgstr ""
+
+#. module: async_move_line_importer
+#: help:move.line.importer,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:330
+#, python-format
+msgid "Please try latter"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:ir.model,name:async_move_line_importer.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: async_move_line_importer
+#: view:move.line.importer:0
+msgid "Imported files"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,message_unread:0
+msgid "Unread Messages"
+msgstr ""
+
+#. module: async_move_line_importer
+#: help:move.line.importer,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: async_move_line_importer
+#: code:addons/async_move_line_importer/model/move_line_importer.py:329
+#, python-format
+msgid "An import of this file is already running"
+msgstr ""
+
+#. module: async_move_line_importer
+#: model:ir.model,name:async_move_line_importer.model_move_line_importer
+msgid "Email Thread"
+msgstr ""
+
+#. module: async_move_line_importer
+#: field:move.line.importer,file:0
+msgid "File"
+msgstr ""
+
+#. module: async_move_line_importer
+#: view:move.line.importer:0
+msgid "Move / Move lines importer"
+msgstr ""

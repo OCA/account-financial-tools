@@ -1,56 +1,26 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
 # * account_credit_control_dunning_fees
-#
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-16 07:11+0000\n"
-"PO-Revision-Date: 2014-04-16 07:11+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
-#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
-#, python-format
-msgid "A credit control line"
-msgstr "Ligne de relance"
-
-#. module: account_credit_control_dunning_fees
-#: code:_description:0
-#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
-#, python-format
-msgid "A credit control policy level"
-msgstr "Une politique de relance"
-
-#. module: account_credit_control_dunning_fees
-#: code:_description:0
-#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
-#, python-format
-msgid "Credit control line generator"
-msgstr "Générateur de relance"
-
-#. module: account_credit_control_dunning_fees
-#: field:credit.control.line,dunning_fees_amount:0
-#: view:credit.control.policy:0
-msgid "Fees"
-msgstr "Frais de relance"
-
-#. module: account_credit_control_dunning_fees
-#: field:credit.control.policy.level,dunning_fixed_amount:0
-msgid "Fees Fixed Amount"
-msgstr "Montant des frais"
-
-#. module: account_credit_control_dunning_fees
-#: field:credit.control.policy.level,dunning_product_id:0
-msgid "Fees Product"
-msgstr "Article lié"
+#: field:credit.control.policy.level,dunning_fees_type:0
+msgid "unknown"
+msgstr "inconnu"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_currency_id:0
@@ -58,9 +28,49 @@ msgid "Fees currency"
 msgstr "Devises"
 
 #. module: account_credit_control_dunning_fees
-#: selection:credit.control.policy.level,dunning_fees_type:0
-msgid "Fixed"
-msgstr "Fixe"
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:185
+msgid "Invoiced amount"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:186
+msgid "Open amount"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
+msgid "A credit control policy level"
+msgstr "Une politique de relance"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
+msgid "A credit control line"
+msgstr "Ligne de relance"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:183
+msgid "Invoice date"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:182
+msgid "Invoice number"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:179
+msgid "Summary"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:188
+msgid "Currency"
+msgstr "Devise"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fixed_amount:0
+msgid "Fees Fixed Amount"
+msgstr "Montant des frais"
 
 #. module: account_credit_control_dunning_fees
 #: view:credit.control.policy:0
@@ -68,13 +78,43 @@ msgid "Mail and reporting"
 msgstr "Lettres et e-mails"
 
 #. module: account_credit_control_dunning_fees
-#: code:_description:0
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:187
+#: field:credit.control.line,dunning_fees_amount:0
+#: view:credit.control.policy:0
+msgid "Fees"
+msgstr "Frais de relance"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:174
+msgid "Dear"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
-#, python-format
 msgid "credit.control.dunning.fees.computer"
 msgstr "credit.control.dunning.fees.computer"
 
 #. module: account_credit_control_dunning_fees
-#: field:credit.control.policy.level,dunning_fees_type:0
-msgid "unknown"
-msgstr "inconnu"
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:184
+msgid "Date due"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: selection:credit.control.policy.level,dunning_fees_type:0
+msgid "Fixed"
+msgstr "Fixe"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
+msgid "Credit control line generator"
+msgstr "Générateur de relance"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_product_id:0
+msgid "Fees Product"
+msgstr "Article lié"
+
+#. module: account_credit_control_dunning_fees
+#: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:171
+msgid "Reminder"
+msgstr ""
