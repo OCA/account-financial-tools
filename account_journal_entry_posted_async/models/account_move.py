@@ -43,7 +43,7 @@ class AccountMove(orm.Model):
         session = ConnectorSession(cr, uid, context=context)
         for move in self.browse(cr, uid, ids, context=context):
             if not move.journal_id.entry_posted_async:
-                self.do_button_validate(cr, uid, ids, context)
+                self.do_button_validate(cr, uid, ids, context=context)
             else:
                 description = _('Validate account move %s') % move.name
                 validate_one_move.delay(
