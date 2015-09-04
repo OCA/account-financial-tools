@@ -62,6 +62,22 @@ For further information, please visit:
 
 * https://www.odoo.com/forum/help-1
 
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/92/8.0
+
+For further information, please visit:
+
+* https://www.odoo.com/forum/help-1
+
+Known issues / Roadmap
+======================
+
+* the visibility of the Post button on account moves should be made configurable
+  (this module currently hides it unconditionally)
+* in 9.0, the parameter should be removed and always honoring the "Skip draft state"
+  flag should become the default
+
 Bug Tracker
 ===========
 

@@ -21,7 +21,9 @@
     "name": "Move in draft state by default",
     "version": "1.0",
     "depends": ["base", "account", "account_constraints"],
-    "author": "Camptocamp,Odoo Community Association (OCA)",
+    "author": "Camptocamp,"
+              "ACSONE SA/NV,"
+              "Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',
