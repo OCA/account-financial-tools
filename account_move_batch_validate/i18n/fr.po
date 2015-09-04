@@ -1,145 +1,19 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* account_move_batch_validate
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 14:17+0000\n"
-"PO-Revision-Date: 2014-02-24 05:21+0000\n"
-"Last-Translator: Leonardo Pistone - camptocamp "
-"<leonardo.pistone@camptocamp.com>\n"
+"POT-Creation-Date: 2015-08-18 07:22+0000\n"
+"PO-Revision-Date: 2015-08-18 07:22+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
-
-#. module: account_move_batch_validate
-#: field:account.move,post_job_uuid:0
-msgid "UUID of the Job to approve this move"
-msgstr "UUID du Job pour approuver cette move"
-
-#. module: account_move_batch_validate
-#: help:account.move,to_post:0
-msgid "Check this box to mark the move for batch posting"
-msgstr "Check this box to mark the move for batch posting"
-
-#. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/account.py:95
-#, python-format
-msgid "Task set to Done because the user unmarked the move"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "Mark"
-msgstr "Mark"
-
-#. module: account_move_batch_validate
-#: selection:account.move.marker,action:0
-msgid "Unmark for posting"
-msgstr "Unmark for posting"
-
-#. module: account_move_batch_validate
-#: field:account.move,to_post:0
-msgid "To Post"
-msgstr "Validation demandée"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,company_id:0
-msgid "Company"
-msgstr "Société"
-
-#. module: account_move_batch_validate
-#: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
-#: model:ir.ui.menu,name:account_move_batch_validate.menu_account_move_marker
-msgid "Mark Journal Items for Batch Posting"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: selection:account.move.marker,filter:0
-msgid "Date"
-msgstr "Date"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,chart_account_id:0
-msgid "Chart of Account"
-msgstr "Plan Comptable"
-
-#. module: account_move_batch_validate
-#: view:account.move.marker:0
-#: field:account.move.marker,journal_ids:0
-msgid "Journals"
-msgstr "Journaux"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,target_move:0
-msgid "Target Moves"
-msgstr "Target Moves"
-
-#. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "Report Options"
-msgstr "Report Options"
-
-#. module: account_move_batch_validate
-#: view:account.move.marker:0
-#: selection:account.move.marker,filter:0
-msgid "Periods"
-msgstr "Periods"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,date_to:0
-msgid "End Date"
-msgstr "End Date"
-
-#. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "Dates"
-msgstr "Dates"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,period_from:0
-msgid "Start Period"
-msgstr "Période de debut"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,eta:0
-msgid "Seconds to wait before starting the jobs"
-msgstr "Seconds to wait before starting the jobs"
-
-#. module: account_move_batch_validate
-#: selection:account.move.marker,target_move:0
-msgid "All Posted Entries"
-msgstr "Toutes les écritures passées"
-
-#. module: account_move_batch_validate
-#: help:account.move.marker,fiscalyear_id:0
-msgid "Keep empty for all open fiscal year"
-msgstr "Keep empty for all open fiscal year"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,period_to:0
-msgid "End Period"
-msgstr "Période de fin"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,fiscalyear_id:0
-msgid "Fiscal Year"
-msgstr "Exercice"
-
-#. module: account_move_batch_validate
-#: selection:account.move.marker,filter:0
-msgid "No Filters"
-msgstr "Aucun filtre"
-
-#. module: account_move_batch_validate
-#: field:account.move.marker,action:0
-msgid "Action"
-msgstr "Action"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
@@ -147,46 +21,59 @@ msgid "Account Entry"
 msgstr "Pièce comptable"
 
 #. module: account_move_batch_validate
-#: selection:account.move.marker,action:0
+#: field:validate.account.move,action:0
+msgid "Action"
+msgstr "Action"
+
+#. module: account_move_batch_validate
+#: help:account.move,to_post:0
+msgid "Check this box to mark the move for batch posting"
+msgstr "Cocher cette case pour marquer les écritures pour une validation asynchrone"
+
+#. module: account_move_batch_validate
+#: selection:validate.account.move,action:0
 msgid "Mark for posting"
-msgstr "Sélectionner pour validation"
+msgstr "Marquer pour validation"
 
 #. module: account_move_batch_validate
-#: model:ir.model,name:account_move_batch_validate.model_account_move_marker
-msgid "Mark Journal Items for batch posting"
-msgstr "Sélectionner Ecritures comptables à Valider en batch"
+#: code:addons/account_move_batch_validate/account.py:158
+#, python-format
+msgid "Nothing to do because the record has been deleted"
+msgstr "Rien à faire car la ligne a été supprimée"
 
 #. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "Filters"
-msgstr "Filtres"
+#: field:account.move,to_post:0
+msgid "Posting Requested"
+msgstr "Validation demandée"
 
 #. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "Cancel"
-msgstr "Annuler"
+#: field:validate.account.move,eta:0
+msgid "Seconds to wait before starting the jobs"
+msgstr "Nombre de secondes à attendre avant de démarrer les jobs"
 
 #. module: account_move_batch_validate
-#: field:account.move.marker,date_from:0
-msgid "Start Date"
-msgstr "Date de début"
+#: code:addons/account_move_batch_validate/account.py:112
+#, python-format
+msgid "Task set to Done because the user unmarked the move"
+msgstr "Tâche mise à terminé car l'utilisateur a décoché la pièce"
 
 #. module: account_move_batch_validate
-#: help:account.move.marker,chart_account_id:0
-msgid "Select Charts of Accounts"
-msgstr "Sélectionner Plan Comptable"
+#: field:account.move,post_job_uuid:0
+msgid "UUID of the Job to approve this move"
+msgstr "UUID du Job pour approuver cette pièce"
 
 #. module: account_move_batch_validate
-#: field:account.move.marker,filter:0
-msgid "Filter by"
-msgstr "Filtrer par"
+#: selection:validate.account.move,action:0
+msgid "Unmark for posting"
+msgstr "Décocher pour la validation"
 
 #. module: account_move_batch_validate
-#: view:account.move.marker:0
-msgid "or"
-msgstr "ou"
+#: field:validate.account.move,asynchronous:0
+msgid "Use asynchronous validation"
+msgstr "Utilisation de la validation asynchrone"
 
 #. module: account_move_batch_validate
-#: selection:account.move.marker,target_move:0
-msgid "All Entries"
-msgstr "Toutes les écritures"
+#: model:ir.model,name:account_move_batch_validate.model_validate_account_move
+msgid "Validate Account Move"
+msgstr "Valider les pièces comptables"
+
