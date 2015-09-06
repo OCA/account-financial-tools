@@ -23,7 +23,7 @@
 from openerp import models, fields
 
 
-class ir_sequence_fiscalyear(models.Model):
+class IrSequenceFiscalyear(models.Model):
     _inherit = 'account.sequence.fiscalyear'
 
     period_id = fields.Many2one(
@@ -36,11 +36,26 @@ class ir_sequence_fiscalyear(models.Model):
         ]
 
 
-class ir_sequence(models.Model):
+class IrSequence(models.Model):
     _inherit = 'ir.sequence'
 
+    def _interpolation_dict_context(self, context=None):
+        res = super(
+            IrSequence, self)._interpolation_dict_context(context=context)
+        if self._sequence_context.get('period'):
+            p = self._sequence_context['period'].date_start[5:7]
+        else:
+            p = res['month']
+        res.update({'p': p})
+        return res
+
     def _interpolation_dict(self):
-        res = super(ir_sequence, self)._interpolation_dict()
+        """
+        This method has been replaced by _interpolation_dict_context
+        on 2015-08-25, cf. commit
+        github.com/odoo/odoo/commit/3e82c94d695327d5fa85cf6c9eca5039d7bc1bb6
+        """
+        res = super(IrSequence, self)._interpolation_dict()
         if self._sequence_context.get('period'):
             p = self._sequence_context['period'].date_start[5:7]
         else:
@@ -62,6 +77,6 @@ class ir_sequence(models.Model):
                 (ids[0], period.id))
             res = cr.fetchone()
             if res:
-                return super(ir_sequence, self)._next(
+                return super(IrSequence, self)._next(
                     cr, uid, [res[0]], context)
-        return super(ir_sequence, self)._next(cr, uid, ids, context)
+        return super(IrSequence, self)._next(cr, uid, ids, context)

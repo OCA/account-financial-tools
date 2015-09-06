@@ -20,4 +20,27 @@
 #
 ##############################################################################
 
-from . import models
+from openerp import models
+
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    def post(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+        invoice = context.get('invoice', False)
+        if invoice:
+            if not invoice.internal_number:
+                journal = invoice.journal_id
+                if journal.sequence_id:
+                    move = invoice.move_id
+                    ctx = {
+                        'fiscalyear_id': move.period_id.fiscalyear_id.id,
+                        'period': move.period_id
+                        }
+                    number = self.pool['ir.sequence'].next_by_id(
+                        cr, uid, journal.sequence_id.id, ctx)
+                    invoice.internal_number = number
+
+        return super(AccountMove, self).post(cr, uid, ids, context=context)
