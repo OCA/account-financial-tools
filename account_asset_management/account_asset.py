@@ -714,19 +714,16 @@ class account_asset_asset(orm.Model):
                     residual_amount_table - residual_amount, digits)
                 if amount_diff:
                     entry = table[table_i_start]
-                    if entry['fy_id']:
-                        cr.execute(
-                            "SELECT COALESCE(SUM(amount), 0.0) "
-                            "FROM account_asset_depreciation_line "
-                            "WHERE id in %s "
-                            "      AND line_date >= %s and line_date <= %s",
-                            (tuple(posted_depreciation_line_ids),
-                             entry['date_start'],
-                             entry['date_stop']))
-                        res = cr.fetchone()
-                        fy_amount_check = res[0]
-                    else:
-                        fy_amount_check = 0.0
+                    cr.execute(
+                        "SELECT COALESCE(SUM(amount), 0.0) "
+                        "FROM account_asset_depreciation_line "
+                        "WHERE id in %s "
+                        "      AND line_date >= %s and line_date <= %s",
+                        (tuple(posted_depreciation_line_ids),
+                         entry['date_start'],
+                         entry['date_stop']))
+                    res = cr.fetchone()
+                    fy_amount_check = res[0]
                     lines = entry['lines']
                     for line in lines[line_i_start:-1]:
                         line['depreciated_value'] = depreciated_value
