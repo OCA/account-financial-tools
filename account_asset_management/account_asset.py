@@ -1512,6 +1512,7 @@ class account_asset_depreciation_line(orm.Model):
         if isinstance(ids, (int, long)):
             ids = [ids]
         for dl in self.browse(cr, uid, ids, context):
+            dl_type = dl.type or vals.get('type')
             if vals.keys() == ['move_id'] and not vals['move_id']:
                 # allow to remove an accounting entry via the
                 # 'Delete Move' button on the depreciation lines.
@@ -1543,19 +1544,35 @@ class account_asset_depreciation_line(orm.Model):
                           "on a depreciation line "
                           "with prior posted entries."))
             elif vals.get('line_date'):
-                cr.execute(
-                    "SELECT id "
-                    "FROM account_asset_depreciation_line "
-                    "WHERE asset_id = %s "
-                    "AND (init_entry=TRUE OR move_check=TRUE)"
-                    "AND line_date > %s LIMIT 1",
-                    (dl.asset_id.id, vals['line_date']))
-                res = cr.fetchone()
-                if res:
-                    raise orm.except_orm(
-                        _('Error!'),
-                        _("You cannot set the date on a depreciation line "
-                          "prior to already posted entries."))
+                if dl_type == 'create':
+                    cr.execute(
+                        "SELECT id "
+                        "FROM account_asset_depreciation_line "
+                        "WHERE asset_id = %s "
+                        "AND type != 'create' "
+                        "AND (init_entry=TRUE OR move_check=TRUE) "
+                        "AND line_date < %s LIMIT 1",
+                        (dl.asset_id.id, vals['line_date']))
+                    res = cr.fetchone()
+                    if res:
+                        raise orm.except_orm(
+                            _('Error!'),
+                            _("You cannot set the Asset Start Date "
+                              "after already posted entries."))
+                else:
+                    cr.execute(
+                        "SELECT id "
+                        "FROM account_asset_depreciation_line "
+                        "WHERE asset_id = %s "
+                        "AND (init_entry=TRUE OR move_check=TRUE)"
+                        "AND line_date > %s LIMIT 1",
+                        (dl.asset_id.id, vals['line_date']))
+                    res = cr.fetchone()
+                    if res:
+                        raise orm.except_orm(
+                            _('Error!'),
+                            _("You cannot set the date on a depreciation line "
+                              "prior to already posted entries."))
         return super(account_asset_depreciation_line, self).write(
             cr, uid, ids, vals, context)
 
