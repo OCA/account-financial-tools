@@ -1512,7 +1512,7 @@ class account_asset_depreciation_line(orm.Model):
         if isinstance(ids, (int, long)):
             ids = [ids]
         for dl in self.browse(cr, uid, ids, context):
-            dl_type = dl.type or vals.get('type')
+            dl_type = vals.get('type') or dl.type
             if vals.keys() == ['move_id'] and not vals['move_id']:
                 # allow to remove an accounting entry via the
                 # 'Delete Move' button on the depreciation lines.
