@@ -28,3 +28,4 @@
 #
 
 from . import test_account_constraints
+from . import test_enforce_tax

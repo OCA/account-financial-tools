@@ -157,8 +157,9 @@ class AccountMoveLine(models.Model):
                             (l.account_id.code, l.tax_code_id.name)))
                 else:
                     raise exceptions.Warning(
-                        _('Account %s does not permit postings without VAT code.') %
-                          (l.account_id.code)
+                        _('Account %s does not permit '
+                          'postings without VAT code.') %
+                        (l.account_id.code)
                     )
 
         return True

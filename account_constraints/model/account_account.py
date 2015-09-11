@@ -1,4 +1,4 @@
-from openerp import fields, models, api, _
+from openerp import fields, models, _
 
 __author__ = 'tbri'
 

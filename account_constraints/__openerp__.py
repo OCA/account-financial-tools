@@ -66,7 +66,7 @@ Summary of constraints are:
     'data': [
         'view/account_journal.xml',
         'view/account_bank_statement.xml',
-	'view/account_account.xml',
+        'view/account_account.xml',
     ],
     'installable': True,
 }
