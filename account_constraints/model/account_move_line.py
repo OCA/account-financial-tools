@@ -146,3 +146,23 @@ class AccountMoveLine(models.Model):
                     _("You can't provide a secondary currency if the same "
                       "than the company one."))
         return True
+
+    @api.constrains('tax_code_id', 'account_id')
+    def _check_tax_code(self):
+        for l in self:
+            if not l.account_id.force_tax_id:
+                continue
+
+            if l.tax_code_id != l.account_id.force_tax_id:
+                if l.tax_code_id:
+                    raise exceptions.Warning(
+                        _('Account %s does not permit tax code "%s"' %
+                            (l.account_id.code, l.tax_code_id.name)))
+                else:
+                    raise exceptions.Warning(
+                        _('Account %s does not permit '
+                          'postings without VAT code.') %
+                        (l.account_id.code)
+                    )
+
+        return True

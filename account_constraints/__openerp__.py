@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Account Constraints',
-    'version': '1.1',
+    'version': '1.2',
     'depends': ['account'],
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
@@ -54,14 +54,19 @@ Summary of constraints are:
   that the user cannot make mistakes even in draft state, he must pass through
   the parent object to make his modification.
 
+* Add new property on an account 'Forced tax' to only permit posting to that
+  account if you have the correct tax code.
+
   Contributors
   * Stéphane Bidoul <stephane.bidoul@acsone.eu>
+  * Torvald Bringsvor <bringsvor@bringsvor.com>
 
     """,
     'website': 'http://www.camptocamp.com',
     'data': [
         'view/account_journal.xml',
         'view/account_bank_statement.xml',
+        'view/account_account.xml',
     ],
     'installable': True,
 }
