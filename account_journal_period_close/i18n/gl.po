@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_period_close
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-06-03 15:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/gl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: gl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_journal_period_close
+#: model:ir.model,name:account_journal_period_close.model_account_period
+msgid "Account period"
+msgstr ""
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Add all journals"
+msgstr ""
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Close journal for this period"
+msgstr ""
+
+#. module: account_journal_period_close
+#: code:addons/account_journal_period_close/model/account_journal_period.py:66
+#, python-format
+msgid ""
+"In order to close a journal, you must first post related journal entries."
+msgstr ""
+
+#. module: account_journal_period_close
+#: code:addons/account_journal_period_close/model/account_journal_period.py:65
+#, python-format
+msgid "Invalid Action!"
+msgstr ""
+
+#. module: account_journal_period_close
+#: model:ir.model,name:account_journal_period_close.model_account_journal_period
+msgid "Journal Period"
+msgstr ""
+
+#. module: account_journal_period_close
+#: field:account.journal.period,type:0
+msgid "Journal Type"
+msgstr ""
+
+#. module: account_journal_period_close
+#: field:account.period,journal_period_ids:0
+msgid "Journal states"
+msgstr ""
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Journals"
+msgstr "Xornais"
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Reopen journal for this period"
+msgstr ""
+
+#. module: account_journal_period_close
+#: sql_constraint:account.journal.period:0
+msgid "You can not add same journal in the same period twice."
+msgstr ""

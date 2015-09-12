@@ -1,19 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_locking
-#
+# * account_move_locking
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-25 06:47+0000\n"
-"PO-Revision-Date: 2015-06-25 06:47+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-07-06 09:59+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
@@ -86,7 +88,7 @@ msgid "Move Locked!"
 msgstr "Ecriture verrouillée"
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:49
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:60
 #, python-format
 msgid "No move to locked found"
 msgstr "Pas d'écriture à verrouiller"
@@ -97,14 +99,17 @@ msgid "Period"
 msgstr "Période"
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:46
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
 #, python-format
-msgid "Unposted move in period/jounal selected, please post it before locking them"
-msgstr "Ecritures non postées dans la sélection journal/période, Il faut poster les écritures avant de les verrouiller"
+msgid ""
+"Unposted move in period/jounal                                        "
+"selected, please post it before                                        "
+"locking them"
+msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:46
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:49
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:59
 #, python-format
 msgid "Warning!"
 msgstr "Attention!"
@@ -113,4 +118,3 @@ msgstr "Attention!"
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "or"
 msgstr "ou"
-
