@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-06-03 15:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Ecuador) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_EC/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: es_EC\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
 msgid "Account Check Deposit"
-msgstr "Scheck-Konto"
+msgstr ""
 
 #. module: account_check_deposit
 #: field:res.company,check_deposit_account_id:0
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Amount"
-msgstr "Betrag"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -73,7 +73,7 @@ msgstr ""
 #: field:account.move.line,check_deposit_id:0
 #: model:ir.actions.report.xml,name:account_check_deposit.report_account_check_deposit
 msgid "Check Deposit"
-msgstr "Scheckeinreichung"
+msgstr ""
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:194
@@ -97,18 +97,18 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 #: field:account.check.deposit,check_payment_ids:0
 msgid "Check Payments"
-msgstr "Scheckzahlungen"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit"
-msgstr "Scheckdepot"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Checks Deposit Search"
-msgstr "Scheckdepotsuche"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_tree
@@ -120,12 +120,12 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company
 msgid "Companies"
-msgstr "Unternehmen"
+msgstr ""
 
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
 msgid "Company"
-msgstr "Unternehmen"
+msgstr "Compañia"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:252
@@ -147,7 +147,7 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,currency_id:0
 msgid "Currency"
-msgstr "Währung"
+msgstr ""
 
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
@@ -157,7 +157,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Date"
-msgstr "Datum"
+msgstr "Fecha"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -173,25 +173,25 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,deposit_date:0
 msgid "Deposit Date"
-msgstr "Einreicherdatum"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Done"
-msgstr "Erledigt"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr "Entwurf"
+msgstr "Borrador"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:159
 #, python-format
 msgid "Error!"
-msgstr "Fehler!"
+msgstr ""
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:129
@@ -214,17 +214,17 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,journal_id:0
 msgid "Journal"
-msgstr "Journal"
+msgstr "Diario"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr "Journalbuchung"
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Items"
-msgstr "Journalposten"
+msgstr "Asientos Contables"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
@@ -239,7 +239,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
 msgid "Lines"
-msgstr "Zeilen"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -255,7 +255,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
 msgid "Name"
-msgstr "Name"
+msgstr "Nombre"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
@@ -275,12 +275,12 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Reference"
-msgstr "Referenz"
+msgstr "Ref."
 
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:130
@@ -307,7 +307,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Total:"
-msgstr "Gesamt:"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
