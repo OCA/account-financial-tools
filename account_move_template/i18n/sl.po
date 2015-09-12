@@ -3,19 +3,20 @@
 # * account_move_template
 # 
 # Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-07-01 12:22+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_id:0
@@ -26,46 +27,46 @@ msgstr "Konto"
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr "Betrag"
+msgstr "Znesek"
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
 msgid "Analytic Account"
-msgstr "Analytisches Konto"
+msgstr "Analitični konto"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:96
 #, python-format
 msgid "At least one amount has to be non-zero!"
-msgstr "Mindestens ein Betrag muss ungleich Null sein!"
+msgstr "Vsaj en znesek mora biti različen od nič!"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Preklic"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:75
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
-msgstr "Schlüssel \"%s\" bezieht sich auf eine nicht existierende Zeile"
+msgstr "Koda \"%s\" se sklicuje na neobstoječo postavko"
 
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr "Unternehmen"
+msgstr "Družba"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "Computed"
-msgstr "Berechnet"
+msgstr "Izračunano"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
 #: model:ir.ui.menu,name:account_move_template.menu_action_wizard_select_template
 msgid "Create Move from Template"
-msgstr "Buchung aus Vorlage anlegen"
+msgstr "Ustvari premik iz predloge"
 
 #. module: account_move_template
 #: field:account.document.template,create_uid:0
@@ -75,7 +76,7 @@ msgstr "Buchung aus Vorlage anlegen"
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -85,24 +86,24 @@ msgstr ""
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Credit"
-msgstr "Haben"
+msgstr "Terjatve"
 
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
 msgid "Cross-Journals"
-msgstr "Journal-Übergreifend"
+msgstr "Med-dnevniki"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr "Soll"
+msgstr "Obveznosti"
 
 #. module: account_move_template
 #: field:account.document.template,id:0
@@ -111,31 +112,31 @@ msgstr "Soll"
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
-msgstr "Inkonsistenz zwischen Eingabezeile und ausgefüllter Zeile der Vorlage %s"
+msgstr "Neskladje med vnosnimi postavkami in izpolnjenimi postavkami v predlogi %s"
 
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
 msgid "Journal"
-msgstr "Journal"
+msgstr "Dnevnik"
 
 #. module: account_move_template
 #: view:account.move.template:account_move_template.view_move_template_form
 #: view:account.move.template:account_move_template.view_move_template_search
 #: view:account.move.template:account_move_template.view_move_template_tree
 msgid "Journal Entry Template"
-msgstr "Journaleintragsvorlage"
+msgstr "Predloga dnevniškega vnosa"
 
 #. module: account_move_template
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: view:account.move.template.line:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
-msgstr "Journal-Buchungsvorlage"
+msgstr "Postavka predloge dnevniškega vnosa"
 
 #. module: account_move_template
 #: field:account.document.template,write_uid:0
@@ -145,7 +146,7 @@ msgstr "Journal-Buchungsvorlage"
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnjič posodobil"
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -155,47 +156,47 @@ msgstr ""
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65
 #, python-format
 msgid "Line %s can't refer to itself"
-msgstr "Zeile %s darf nicht auf sich selbst verweisen"
+msgstr "Postavka %s se ne sme sklicevati sama nase"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
 msgid "Lines"
-msgstr "Zeilen"
+msgstr "Postavke"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Load"
-msgstr "Laden"
+msgstr "Nalaganje"
 
 #. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
 #: field:wizard.select.move.template.line,move_line_type:0
 msgid "Move Line Type"
-msgstr "Buchungszeilenart"
+msgstr "Tip postavke premika"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 #: field:wizard.select.move.template,template_id:0
 msgid "Move Template"
-msgstr "Buchungsvorlage"
+msgstr "Predloga premika"
 
 #. module: account_move_template
 #: view:wizard.select.move.template.line:account_move_template.wizard_select_template_line
 #: view:wizard.select.move.template.line:account_move_template.wizard_select_template_line_tree
 msgid "Move Template Line"
-msgstr "Buchungszeilenvorlage"
+msgstr "Postavka predloge premika"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_move_template_form
 #: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
 msgid "Move Templates"
-msgstr "Buchungsvorlagen"
+msgstr "Predloge premikov"
 
 #. module: account_move_template
 #: field:account.document.template,name:0
@@ -203,23 +204,23 @@ msgstr "Buchungsvorlagen"
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr "Name"
+msgstr "Naziv"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Next"
-msgstr "Nächster"
+msgstr "Naslednja"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:199
 #, python-format
 msgid "No Analytic Journal !"
-msgstr "Kein analytisches Journal!"
+msgstr "Ni analitičnega dnevnika!"
 
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
-msgstr "Nummer"
+msgstr "Število"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
@@ -231,73 +232,73 @@ msgstr "Partner"
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: field:account.move.template.line,python_code:0
 msgid "Python Code"
-msgstr "Python-Programmcode"
+msgstr "Python koda"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
 msgid "Select Move Template"
-msgstr "Buchungsvorlage auswählen"
+msgstr "Izbira predloge premika"
 
 #. module: account_move_template
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr "Folge"
+msgstr "Zaporedje"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr "Status"
+msgstr "Stanje"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
 msgid "Tax"
-msgstr "Steuer"
+msgstr "Davek"
 
 #. module: account_move_template
 #: field:account.move.template.line,template_id:0
 #: field:wizard.select.move.template.line,template_id:0
 msgid "Template"
-msgstr "Vorlage"
+msgstr "Predloga"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
 msgid "Template Lines"
-msgstr "Vorlagenzeile"
+msgstr "Postavke predloge"
 
 #. module: account_move_template
 #: selection:wizard.select.move.template,state:0
 msgid "Template selected"
-msgstr "Vorlage ausgewählt"
+msgstr "Izbrana predloga"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
 msgid "The sequence of the line must be unique per template !"
-msgstr "Die Folgenposition muss innerhalb der Vorlage eindeutig sein!"
+msgstr "Zaporedje postavke mora biti unikatno za vsako predlogo!"
 
 #. module: account_move_template
 #: field:account.move.template,transitory_acc_id:0
 msgid "Transitory account"
-msgstr "Überleitungskonto"
+msgstr "Začasni konto"
 
 #. module: account_move_template
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr "Art"
+msgstr "Tip"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:104
 #, python-format
 msgid "Unable to find a valid period !"
-msgstr "Kann keine gültige Periode finden!"
+msgstr "Ni najdeno veljavno obdobje!"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr "Anwendereingabe"
+msgstr "Uporabniški vnos"
 
 #. module: account_move_template
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
@@ -305,11 +306,11 @@ msgid ""
 "You can refer to other lines using their sequence number (e.g. 'L(1)' for "
 "first line). Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + "
 "L(3)'; '1250'"
-msgstr "Sie können sich auf andere Zeilen über die Folgenpositionen beziehen (z. B.'L(1)' für die erste Zeile). Beispiele: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + L(3)'; '1250'"
+msgstr "Na druge postavke se lahko sklicujete z uporabo njihove zaporedne številke (npr. 'L(1)' za prvo postavko). Primeri kode: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + L(3)'; '1250'"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:164
 #: code:addons/account_move_template/wizard/select_template.py:200
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
-msgstr "Sie müssen ein analytisches Journal im '%s' Journal festlegen!"
+msgstr "Določiti morate analitični dnevnik na dnevniku '%s'!"
