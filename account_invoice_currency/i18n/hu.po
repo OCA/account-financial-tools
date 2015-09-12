@@ -3,7 +3,6 @@
 # * account_invoice_currency
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
@@ -11,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
 "PO-Revision-Date: 2015-06-03 15:57+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
+"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_invoice_currency
@@ -27,4 +26,4 @@ msgstr ""
 #. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
 msgid "Invoice"
-msgstr "Fatura"
+msgstr "Számla"
