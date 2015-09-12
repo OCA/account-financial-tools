@@ -1,33 +1,42 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_renumber
-#
+# * account_renumber
+# 
+# Translators:
+# Carles Antolí <carlesantoli@hotmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.6\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2014-04-14 12:33+0000\n"
-"PO-Revision-Date: 2013-11-11 16:34+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-20 18:44+0000\n"
+"PO-Revision-Date: 2015-10-19 14:33+0000\n"
+"Last-Translator: Carles Antolí <carlesantoli@hotmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-26 07:07+0000\n"
-"X-Generator: Launchpad (build 17065)\n"
-"X-Poedit-Language: Catalan\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_renumber
-#: code:_description:0
-#, python-format
+#: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "Account renumber wizard"
 msgstr "Assistent de renumeració d'assentaments"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Cancel"
 msgstr "Cancel·la"
+
+#. module: account_renumber
+#: field:wizard.renumber,create_uid:0
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_renumber
+#: field:wizard.renumber,create_date:0
+msgid "Created on"
+msgstr "Creat el"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -40,14 +49,19 @@ msgid "Fiscal periods to renumber"
 msgstr "Períodes fiscals a renumerar"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "General Data"
-msgstr ""
+msgstr "Dades Generals"
+
+#. module: account_renumber
+#: field:wizard.renumber,id:0
+msgid "ID"
+msgstr "ID"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
 msgid "Initial"
-msgstr ""
+msgstr "Inicial"
 
 #. module: account_renumber
 #: help:wizard.renumber,number_next:0
@@ -55,13 +69,13 @@ msgid "Journal sequences will start counting on this number"
 msgstr "Les seqüències dels diaris començaran a comptar en aquest número"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 #: field:wizard.renumber,journal_ids:0
 msgid "Journals"
 msgstr "Diaris"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Journals and periods to consider"
 msgstr "Diaris i períodes a considerar"
 
@@ -71,40 +85,47 @@ msgid "Journals to renumber"
 msgstr "Diaris a renumerar"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:86
+#: field:wizard.renumber,write_uid:0
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: account_renumber
+#: field:wizard.renumber,write_date:0
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:89
 #, python-format
 msgid "No Data Available"
-msgstr ""
+msgstr "No hi ha dades disponibles"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:87
+#: code:addons/account_renumber/wizard/wizard_renumber.py:90
 #, python-format
 msgid "No records found for your selection!"
-msgstr ""
+msgstr "No hi ha registres per la seva selecció!"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 #: field:wizard.renumber,period_ids:0
 msgid "Periods"
 msgstr "Períodes"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
-msgstr ""
-"Els assentaments fixats d'aquests diaris seran ordenats per data i després "
-"els seran assignats números seqüencials utilitzant la seqüència del seu "
-"diari."
+msgstr "Els assentaments fixats d'aquests diaris seran ordenats per data i després els seran assignats números seqüencials utilitzant la seqüència del seu diari."
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Renumber"
 msgstr "Renumera"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Renumber Account Moves"
 msgstr "Renumera assentaments comptables"
 
@@ -112,10 +133,10 @@ msgstr "Renumera assentaments comptables"
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
 msgid "Renumber journal entries"
-msgstr ""
+msgstr "Tornar a numerar els assentaments del diari"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:130
+#: code:addons/account_renumber/wizard/wizard_renumber.py:138
 #, python-format
 msgid "Renumbered account moves"
 msgstr "Assentaments comptables renumerats"
@@ -123,24 +144,19 @@ msgstr "Assentaments comptables renumerats"
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
 msgid "Renumbering"
-msgstr ""
+msgstr "Nova Numeració"
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr ""
+msgstr "Aquest assistent us ajudarà a tornar a numerar els assentaments en un o més diaris."
 
 #. module: account_renumber
-#: view:wizard.renumber:0
+#: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #. module: account_renumber
 #: field:wizard.renumber,state:0
 msgid "unknown"
-msgstr ""
-
-#. module: account_renumber
-#: model:ir.model,name:account_renumber.model_wizard_renumber
-msgid "wizard.renumber"
-msgstr ""
+msgstr "desconegut"
