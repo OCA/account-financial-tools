@@ -4,24 +4,25 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"POT-Creation-Date: 2017-05-01 13:16+0000\n"
+"PO-Revision-Date: 2017-05-01 13:16+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.view_account_config_settings
 msgid "Auto-download Rates"
-msgstr ""
+msgstr "Automatsko preuzimanje tečaja"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_account_config_settings_auto_currency_up
@@ -38,67 +39,67 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr "Unternehmen"
+msgstr "Poduzeća"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_company_id
 msgid "Company"
-msgstr "Unternehmen"
+msgstr "Organizacija"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_uid
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr "Kreirao"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_date
 msgid "Created on"
-msgstr "Erstellt am:"
+msgstr "Kreirano"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list_readonly
 msgid "Currencies available"
-msgstr ""
+msgstr "Raspoložive valute"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_to_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 msgid "Currencies to update with this service"
-msgstr "Währungen, die mit diesem Dienst aktualisiert werden sollen"
+msgstr "Valute za ažuriranje putem ovog servisa"
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 msgid "Currency Rate Update"
-msgstr "Währungskursaktualisierung"
+msgstr "Ažuriranje tečajne liste"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_interval_type
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Frekvencija ažuriranja tečajna"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_tree
 msgid "Currency update services"
-msgstr "Währungsaktualisierungsdienst"
+msgstr "Servisi za ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Day(s)"
-msgstr "Tag(e)"
+msgstr "Dan(a)"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_display_name
 msgid "Display Name"
-msgstr "Anzeigename"
+msgstr "Naziv "
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:92
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Greška !"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
@@ -115,7 +116,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_interval_number
 msgid "Frequency"
-msgstr ""
+msgstr "Frekvencija"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_id
@@ -142,32 +143,32 @@ msgstr ""
 #: code:addons/currency_rate_update/models/currency_rate_update.py:48
 #, python-format
 msgid "Interval number must be >= 0"
-msgstr ""
+msgstr "Interval mora biti >= 0."
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
 msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
+msgstr "Zadnje modificirano"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid
 msgid "Last Updated by"
-msgstr "Zuletzt geändert von"
+msgstr "Zadnji ažurirao"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_date
 msgid "Last Updated on"
-msgstr "Zuletzt aktualisiert am"
+msgstr "Zadnje ažuriranje"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 msgid "Logs"
-msgstr "Logs"
+msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_max_delta_days
 msgid "Max delta days"
-msgstr "Höchsttagesabweichung"
+msgstr ""
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/models/currency_rate_update.py:40
@@ -178,7 +179,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Month(s)"
-msgstr "Monat(e)"
+msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_next_run
@@ -200,12 +201,12 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_note
 msgid "Update logs"
-msgstr ""
+msgstr "Povijest ažuriranja"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 msgid "Update now"
-msgstr ""
+msgstr "Ažuriraj sada"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/currency_getter_interface.py:150
@@ -216,21 +217,21 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_service
 msgid "Webservice to use"
-msgstr "Zu nutzender Webdienst"
+msgstr ""
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Week(s)"
-msgstr "Woche(n)"
+msgstr "Tjedan(a)"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/models/currency_rate_update.py:124
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
-msgstr ""
+msgstr "Servis možete koristiti samo jednom po organizaciji!"
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_account_config_settings
 msgid "account.config.settings"
-msgstr ""
+msgstr "account.config.settings"
