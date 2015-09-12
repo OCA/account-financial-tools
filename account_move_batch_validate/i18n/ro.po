@@ -1,0 +1,222 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_batch_validate
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-06-03 15:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#. module: account_move_batch_validate
+#: model:ir.model,name:account_move_batch_validate.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,action:0
+msgid "Action"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,target_move:0
+msgid "All Entries"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,target_move:0
+msgid "All Posted Entries"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "Cancel"
+msgstr "Anuleaza"
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,chart_account_id:0
+msgid "Chart of Account"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: help:account.move,to_post:0
+msgid "Check this box to mark the move for batch posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,company_id:0
+msgid "Company"
+msgstr "Companie"
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,filter:0
+msgid "Date"
+msgstr "Data"
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "Dates"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,date_to:0
+msgid "End Date"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,period_to:0
+msgid "End Period"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,filter:0
+msgid "Filter by"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "Filters"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,fiscalyear_id:0
+msgid "Fiscal Year"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+#: field:account.move.marker,journal_ids:0
+msgid "Journals"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: help:account.move.marker,fiscalyear_id:0
+msgid "Keep empty for all open fiscal year"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "Mark"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
+msgid "Mark Jornal Items for Batch Posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: model:ir.model,name:account_move_batch_validate.model_account_move_marker
+msgid "Mark Journal Items for batch posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,action:0
+msgid "Mark for posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,filter:0
+msgid "No Filters"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: code:addons/account_move_batch_validate/account.py:158
+#, python-format
+msgid "Nothing to do because the record has been deleted"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+#: selection:account.move.marker,filter:0
+msgid "Periods"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move,to_post:0
+msgid "Posting Requested"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "Report Options"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,eta:0
+msgid "Seconds to wait before starting the jobs"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: help:account.move.marker,chart_account_id:0
+msgid "Select Charts of Accounts"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,date_from:0
+msgid "Start Date"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,period_from:0
+msgid "Start Period"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move.marker,target_move:0
+msgid "Target Moves"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: code:addons/account_move_batch_validate/account.py:112
+#, python-format
+msgid "Task set to Done because the user unmarked the move"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: field:account.move,post_job_uuid:0
+msgid "UUID of the Job to approve this move"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: selection:account.move.marker,action:0
+msgid "Unmark for posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: view:account.move.marker:account_move_batch_validate.view_account_move_marker
+msgid "or"
+msgstr "sau"
