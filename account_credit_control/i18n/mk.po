@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2015-06-03 15:57+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Macedonian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/mk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: mk\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -69,7 +69,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
 msgid "A credit control line"
-msgstr "Ein Mahnposten"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:93
@@ -80,7 +80,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
 msgid "A credit control policy level"
-msgstr "Eine Mahnregelstufe"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:161
@@ -100,18 +100,18 @@ msgstr ""
 #: field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr "Konto"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:account_credit_control.credit_control_policy_form
 #: field:credit.control.policy,account_ids:0
 msgid "Accounts"
-msgstr "Konten"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
 msgid "Active"
-msgstr "Aktiv"
+msgstr "Активно"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -135,7 +135,7 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Откажи"
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -175,14 +175,14 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr "Unternehmen"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,company_id:0
 #: field:credit.control.line,company_id:0
 #: field:credit.control.policy,company_id:0
 msgid "Company"
-msgstr "Unternehmen"
+msgstr "Компанија"
 
 #. module: account_credit_control
 #: view:credit.control.run:account_credit_control.credit_control_run_form
@@ -320,7 +320,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
 msgid "Credit control line generator"
-msgstr "Mahnpostenerzeuger"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:account_credit_control.credit_control_policy_form
@@ -358,7 +358,7 @@ msgstr ""
 #: field:credit.control.communication,currency_id:0
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
-msgstr "Währung"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_mail_text:0
@@ -373,7 +373,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
-msgstr "Rechnungdatum"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy
@@ -400,13 +400,13 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr "Erledigt"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 #: selection:credit.control.line,state:0 selection:credit.control.run,state:0
 msgid "Draft"
-msgstr "Entwurf"
+msgstr "Нацрт"
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
@@ -491,7 +491,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Group By..."
-msgstr "Gruppiere nach..."
+msgstr "Групирај по..."
 
 #. module: account_credit_control
 #: field:credit.control.communication,id:0 field:credit.control.emailer,id:0
@@ -521,22 +521,22 @@ msgstr ""
 #: field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr "Rechnung"
+msgstr "Фактура"
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Invoice date"
-msgstr "Rechnungdatum"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Invoice number"
-msgstr "Rechnungsnummer"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Invoiced amount"
-msgstr "Betrag"
+msgstr ""
 
 #. module: account_credit_control
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
@@ -587,7 +587,7 @@ msgstr ""
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "Lines"
-msgstr "Zeilen"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
@@ -618,7 +618,7 @@ msgstr ""
 #: view:credit.control.policy:account_credit_control.credit_control_policy_form
 #: view:credit.control.policy.level:account_credit_control.credit_mangement_policy_level_form
 msgid "Mail and reporting"
-msgstr "Post und Berichte"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form
@@ -699,7 +699,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr "Name"
+msgstr "Име"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
@@ -748,7 +748,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
-msgstr "Offener Betrag"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
@@ -891,7 +891,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr "Партнер"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:109
@@ -1048,12 +1048,12 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr "Status"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
-msgstr "Extrakt"
+msgstr ""
 
 #. module: account_credit_control
 #: help:account.invoice,credit_policy_id:0
@@ -1112,17 +1112,17 @@ msgstr ""
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
-msgstr "Fälliger Restbetrag"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
-msgstr "Endbetrag"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
-msgstr "Benutzer"
+msgstr "Корисник"
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -1171,4 +1171,4 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "or"
-msgstr "oder"
+msgstr "или"
