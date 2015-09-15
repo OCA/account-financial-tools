@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Account Chart Flat",
-    "version": '0.1',
+    "version": '1.0',
     "author": "XCG Consulting",
     "category": 'Accounting',
     "description": """Enhancements to the account chart structure
