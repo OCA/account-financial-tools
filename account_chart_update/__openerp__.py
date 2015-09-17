@@ -41,10 +41,6 @@
         'Stéphane Bidoul',
     ],
     'license': "AGPL-3",
-    "depends": [
-        "account",
-        "base",
-    ],
     "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
