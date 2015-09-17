@@ -25,7 +25,7 @@
 
 {
     'name': "Detect changes and update the Account Chart from a template",
-    'version': "1.2",
+    'version': "8.0.1.2.0",
     'author': "Zikzakmedia SL, "
               "Pexego, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
@@ -41,10 +41,6 @@
         'Stéphane Bidoul',
     ],
     'license': "AGPL-3",
-    "depends": [
-        "account",
-        "base",
-    ],
     "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
