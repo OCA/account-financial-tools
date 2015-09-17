@@ -29,13 +29,7 @@ class res_partner(models.Model):
     def search(self, cr, uid, args,
                offset=0, limit=None, order=None, context=None, count=False):
         if context and 'account_move_line_search_extension' in context:
-            args.extend(
-                ['|',
-                 ('parent_id', '=', False),
-                 ('is_company', '=', True),
-                 '|',
-                 ('active', '=', False),
-                 ('active', '=', True)])
+            args.extend(['|', ('active', '=', False), ('active', '=', True)])
         return super(res_partner, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
             context=context, count=count)
