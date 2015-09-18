@@ -1480,6 +1480,21 @@ class account_asset_depreciation_line(orm.Model):
                 'remaining_value': asset_value - depreciated_value - amount}
         return res
 
+    def create(self, cr, uid, vals, context=None):
+        if not context:
+            context = {}
+        if not vals.get('previous_id') and vals.get('asset_id'):
+            # check if there is a previous line and set the previous line
+            cr.execute(
+                "SELECT id FROM account_asset_depreciation_line "
+                "WHERE asset_id = %s "
+                "ORDER BY type, line_date" % vals.get('asset_id'))
+            previous = cr.fetchone()
+            if previous:
+                vals['previous_id'] = previous
+        return super(account_asset_depreciation_line, self).create(
+            cr, uid, vals, context=context)
+
     def unlink(self, cr, uid, ids, context=None):
         for dl in self.browse(cr, uid, ids, context):
             if dl.type == 'create':
