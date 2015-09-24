@@ -7,12 +7,17 @@
       <field name="model">account.move</field>
       <field name="inherit_id" ref="account.view_move_form"/>
       <field name="arch" type="xml">
-        <field name="company_id" position="after">
-          <label string=""/>
-          <button name="import_lines" states="draft"
-                  string="Import Entry Lines" icon="gtk-execute"
-                  type="object" groups="account.group_account_manager"/>
-        </field>
+        <xpath expr="//h1" position="after">
+          <div class=" oe_right oe_button_box">
+            <p/>
+            <button class="oe_inline oe_stat_button oe_right"
+                    name="import_lines" type="object" string="Import Lines"
+                    help="Import Entry Lines from csv File"
+                    attrs="{'invisible':[('state', '!=', 'draft')]}"
+                    groups="account.group_account_manager"
+                    icon="fa-plus" widget="statinfo"/>
+          </div>
+        </xpath>
       </field>
     </record>
 

@@ -24,11 +24,15 @@ try:
     import cStringIO as StringIO
 except ImportError:
     import StringIO
-import csv
 import base64
+import csv
 from datetime import datetime
+from sys import exc_info
+from traceback import format_exception
+
 from openerp import models, fields, api, _
 from openerp.exceptions import Warning
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -43,13 +47,23 @@ class AccountMoveLineImport(models.TransientModel):
         compute='_compute_lines', string='Input Lines', required=True)
     dialect = fields.Binary(
         compute='_compute_dialect', string='Dialect', required=True)
-    csv_separator = fields.Char(
-        string='CSV Separator', size=1, required=True)
+    csv_separator = fields.Selection(
+        [(',', ' . (comma)'), (';', ', (semicolon)')],
+        string='CSV Separator', required=True)
     decimal_separator = fields.Selection(
-        [('.', '.'), (',', ',')],
+        [('.', ' . (dot)'), (',', ', (comma)')],
         string='Decimal Separator',
         default='.', required=True)
+    codepage = fields.Char(
+        string='Code Page',
+        default=lambda self: self._default_codepage(),
+        help="Code Page of the system that has generated the csv file."
+             "\nE.g. Windows-1252, utf-8")
     note = fields.Text('Log')
+
+    @api.model
+    def _default_codepage(self):
+        return 'Windows-1252'
 
     @api.one
     @api.depends('aml_data')
@@ -61,7 +75,20 @@ class AccountMoveLineImport(models.TransientModel):
     @api.depends('lines', 'csv_separator')
     def _compute_dialect(self):
         if self.lines:
-            self.dialect = csv.Sniffer().sniff(self.lines[:1024])
+            try:
+                self.dialect = csv.Sniffer().sniff(
+                    self.lines[:128], delimiters=';,')
+            except:
+                """
+                csv.Sniffer is not always reliable
+                in the detection of the delimiter
+                """
+                self.dialect = csv.Sniffer().sniff(
+                    '"header 1";"header 2";\r\n')
+                if ',' in self.lines[128]:
+                    self.dialect.delimiter = ','
+                elif ';' in self.lines[128]:
+                    self.dialect.delimiter = ';'
         if self.csv_separator:
             self.dialect.delimiter = str(self.csv_separator)
 
@@ -207,8 +234,10 @@ class AccountMoveLineImport(models.TransientModel):
         return header_fields
 
     def _log_line_error(self, line, msg):
+        data = self.csv_separator.join(
+            [line[hf] for hf in self._header_fields])
         self._err_log += _(
-            "Error when processing line '%s'") % line + ':\n' + msg + '\n\n'
+            "Error when processing line '%s'") % data + ':\n' + msg + '\n\n'
 
     def _handle_orm_char(self, field, line, move, aml_vals,
                          orm_field=False):
@@ -421,7 +450,8 @@ class AccountMoveLineImport(models.TransientModel):
                            if all_fields[x].get('required')]
         for rf in required_fields:
             if rf not in aml_vals:
-                msg = _("The '%s' field has not been defined.") % rf
+                msg = _("The '%s' field is a required field "
+                        "that must be correctly set.") % rf
                 self._log_line_error(line, msg)
 
     def _process_vals(self, move, vals):
@@ -453,9 +483,9 @@ class AccountMoveLineImport(models.TransientModel):
         lines, header = self._remove_leading_lines(self.lines)
         header_fields = csv.reader(
             StringIO.StringIO(header), dialect=self.dialect).next()
-        header_fields = self._process_header(header_fields)
+        self._header_fields = self._process_header(header_fields)
         reader = csv.DictReader(
-            StringIO.StringIO(lines), fieldnames=header_fields,
+            StringIO.StringIO(lines), fieldnames=self._header_fields,
             dialect=self.dialect)
 
         inv_lines = []
@@ -463,7 +493,7 @@ class AccountMoveLineImport(models.TransientModel):
 
             aml_vals = {}
 
-            for i, hf in enumerate(header_fields):
+            for i, hf in enumerate(self._header_fields):
                 if i == 0 and line[hf] and line[hf][0] == '#':
                     # lines starting with # are considered as comment lines
                     break
@@ -472,7 +502,15 @@ class AccountMoveLineImport(models.TransientModel):
                 if line[hf] == '':
                     continue
 
-                line[hf] = line[hf].strip()
+                try:
+                    line[hf] = line[hf].decode(self.codepage).strip()
+                except:
+                    tb = ''.join(format_exception(*exc_info()))
+                    raise Warning(
+                        _("Wrong Code Page"),
+                        _("Error while processing line '%s' :\n%s")
+                        % (line, tb))
+
                 if self._field_methods[hf].get('orm_field'):
                     self._field_methods[hf]['method'](
                         hf, line, move, aml_vals,

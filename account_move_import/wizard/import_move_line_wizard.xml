@@ -15,6 +15,7 @@
             <newline/>
             <field name="csv_separator"/>
             <field name="decimal_separator"/>
+            <field name="codepage"/>
           </group>
           <footer>
             <button name="aml_import" string="_Import" type="object" class="oe_highlight"/>

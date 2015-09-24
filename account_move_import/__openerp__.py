@@ -22,7 +22,7 @@
 
 {
     'name': 'Account Move Import',
-    'version': '0.3',
+    'version': '0.4',
     'license': 'AGPL-3',
     'author': 'Noviat, Odoo Community Association (OCA)',
     'website': 'http://www.noviat.com',
