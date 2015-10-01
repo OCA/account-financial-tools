@@ -1,0 +1,286 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-01 14:15+0000\n"
+"PO-Revision-Date: 2015-10-01 11:23-0300\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:152
+#, python-format
+msgid "%s (Source)"
+msgstr "%s (Origen)"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:157
+#, python-format
+msgid "%s (Target)"
+msgstr "%s (Destino)"
+
+#. module: account_transfer
+#: model:ir.actions.act_window,name:account_transfer.action_account_transfer
+#: model:ir.ui.menu,name:account_transfer.account_transfer_menu
+msgid "Account Transfers"
+msgstr "Tranferencias entre Cuentas"
+
+#. module: account_transfer
+#: help:res.company,transfer_account_id:0
+msgid "Account used on transfers between Bank and Cash Journals"
+msgstr "Cuenta utilizada en transferencias entre Diarios de Caja y Bancos"
+
+#. module: account_transfer
+#: view:res.company:account_transfer.view_company_form
+msgid "Accounting"
+msgstr "Contabilidad"
+
+#. module: account_transfer
+#: field:account.journal,allow_account_transfer:0
+msgid "Allow Account Transfer?"
+msgstr "Permitir Transferencia entre Cuentas?"
+
+#. module: account_transfer
+#: field:account.transfer,amount:0
+msgid "Amount"
+msgstr "Importe"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:113
+#, python-format
+msgid "Amount must be greater than 0!"
+msgstr "El importe debe ser mayor a 0!"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:104
+#, python-format
+msgid "Both Journals must belong to the same company!"
+msgstr "Ambos Diarios deben pertenecer a la misma compañía!"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_form
+#: selection:account.transfer,state:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_transfer
+#: model:ir.model,name:account_transfer.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_search
+#: field:account.transfer,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: account_transfer
+#: selection:account.transfer,state:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: account_transfer
+#: field:account.transfer,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_transfer
+#: field:account.transfer,create_date:0
+msgid "Created on"
+msgstr "Creadon en"
+
+#. module: account_transfer
+#: field:account.transfer,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: account_transfer
+#: help:account.transfer,message_last_post:0
+msgid "Date of the last message posted on the record."
+msgstr "Fecha del último mensaje publicado en el registro."
+
+#. module: account_transfer
+#: selection:account.transfer,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: account_transfer
+#: field:account.transfer,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_form
+msgid "For eg. Cash deposit by Juan"
+msgstr "Por ej. Depósito en efectivo por Juan"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: account_transfer
+#: help:account.transfer,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+
+#. module: account_transfer
+#: field:account.transfer,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_transfer
+#: help:account.transfer,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: account_transfer
+#: help:account.transfer,period_id:0
+msgid "If not period defined, a period for this date will be used"
+msgstr ""
+"Si no hay período definido, un período para esta fecha va a ser utilizado"
+
+#. module: account_transfer
+#: field:account.transfer,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Es un seguidor"
+
+#. module: account_transfer
+#: model:ir.model,name:account_transfer.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_transfer
+#: field:account.transfer,message_last_post:0
+msgid "Last Message Date"
+msgstr ""
+
+#. module: account_transfer
+#: field:account.transfer,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_transfer
+#: field:account.transfer,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_transfer
+#: field:account.transfer,message_ids:0
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: account_transfer
+#: help:account.transfer,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:147
+#, python-format
+msgid "No transfer account configured con company %s!"
+msgstr "No hay cuenta de transferencia configurada en la compañía %s!"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:126
+#, python-format
+msgid "Not period found for current date"
+msgstr "No hay período definido para la fecha actual"
+
+#. module: account_transfer
+#: field:account.transfer,note:0
+msgid "Notes"
+msgstr "Notas"
+
+#. module: account_transfer
+#: field:account.transfer,period_id:0
+msgid "Period"
+msgstr "Período"
+
+#. module: account_transfer
+#: field:account.transfer,ref:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: account_transfer
+#: help:account.journal,allow_account_transfer:0
+msgid "Set if this journals can be used on account transfers"
+msgstr ""
+"Marque si el diario puede ser utilizado en transferencias entre cuentas"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_search
+#: field:account.transfer,source_journal_id:0
+msgid "Source Journal"
+msgstr "Diario Origen"
+
+#. module: account_transfer
+#: field:account.transfer,source_move_id:0
+msgid "Source Move"
+msgstr "Asiento Origen"
+
+#. module: account_transfer
+#: code:addons/account_transfer/models/account_transfer.py:106
+#, python-format
+msgid "Source and Target Journal must be different!"
+msgstr "El Diario de Origen y Destino deben ser distintos! "
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_search
+#: field:account.transfer,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: account_transfer
+#: field:account.transfer,message_summary:0
+msgid "Summary"
+msgstr "Resúmen"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_search
+#: field:account.transfer,target_journal_id:0
+msgid "Target Journal"
+msgstr "Diario Destino"
+
+#. module: account_transfer
+#: field:account.transfer,target_move_id:0
+msgid "Target Move"
+msgstr "Asiento Destino"
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_form
+#: view:account.transfer:account_transfer.account_transfer_search
+#: view:account.transfer:account_transfer.account_transfer_tree
+msgid "Tax Settlement"
+msgstr ""
+
+#. module: account_transfer
+#: view:account.transfer:account_transfer.account_transfer_form
+msgid "To Draft"
+msgstr "A Borrador"
+
+#. module: account_transfer
+#: field:res.company,transfer_account_id:0
+msgid "Transfer Account"
+msgstr "Cuenta de Transferencia"
+
+#. module: account_transfer
+#: field:account.transfer,message_unread:0
+msgid "Unread Messages"
+msgstr ""
