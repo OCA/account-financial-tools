@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2009-2015 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,9 +22,9 @@
 
 {
     'name': 'Multilingual General Accounts',
-    'version': '0.1',
+    'version': '0.2',
     'license': 'AGPL-3',
-    'author': 'Noviat',
+    'author': 'Noviat, Odoo Community Association (OCA)',
     'website': 'http://www.noviat.com',
     'category': 'Localization/Account Charts',
     'summary': 'Multilingual General Accounts',

@@ -20,4 +20,10 @@
 #
 ##############################################################################
 
-from . import models
+from openerp import models, fields
+
+
+class AccountAccount(models.Model):
+    _inherit = 'account.account'
+
+    name = fields.Char(translate=True)
