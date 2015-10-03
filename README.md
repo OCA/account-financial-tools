@@ -30,7 +30,7 @@ addon | version | summary
 [account_check_deposit](account_check_deposit/) | 0.1 | Manage deposit of checks to the bank
 [account_compute_tax_amount](account_compute_tax_amount/) | 1.0 | Recompute tax_amount
 [account_constraints](account_constraints/) | 1.1 | Account Constraints
-[account_credit_control](account_credit_control/) | 0.2.0 | Account Credit Control
+[account_credit_control](account_credit_control/) | 0.3.0 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 0.1.0 | Credit control dunning fees
 [account_default_draft_move](account_default_draft_move/) | 1.0 | Move in draft state by default
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 0.1 | Check VAT on invoice validation
