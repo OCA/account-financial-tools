@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:55+0000\n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
+"PO-Revision-Date: 2015-09-29 09:02+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -161,6 +161,18 @@ msgstr "This will create reversal for all selected entries whether checked 'to b
 #: field:account.move,to_be_reversed:0
 msgid "To Be Reversed"
 msgstr "To Be Reversed"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:82
+#, python-format
+msgid "Wrong company Journal is %s but we have %s"
+msgstr "Wrong company Journal is %s but we have %s"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:85
+#, python-format
+msgid "Wrong company Period is %s but we have %s"
+msgstr "Wrong company Period is %s but we have %s"
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse

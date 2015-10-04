@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-04 11:49+0000\n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
+"PO-Revision-Date: 2015-09-30 11:29+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,19 @@ msgid "Invoice"
 msgstr "Račun"
 
 #. module: account_default_draft_move
-#: code:addons/account_default_draft_move/account.py:50
+#: model:ir.model,name:account_default_draft_move.model_account_journal
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_default_draft_move
+#: field:account.config.settings,use_journal_setting:0
+msgid ""
+"Use journal setting to post journal entries on invoice and bank statement "
+"validation"
+msgstr "Uporabi nastavitve dnevnika za knjiženje dnevniških vnosov pri overjanju računov in bančnih izpiskov"
+
+#. module: account_default_draft_move
+#: code:addons/account_default_draft_move/account.py:56
 #, python-format
 msgid ""
 "You cannot modify a posted entry of this journal.First you should set the "
@@ -50,3 +62,8 @@ msgstr "Na tem dnevniku ne morete spreminjati knjiženih vnosov. Najprej bi mora
 #: view:account.invoice:account_default_draft_move.invoice_form_customer_group_invoice
 msgid "account.group_account_invoice"
 msgstr "account.group_account_invoice"
+
+#. module: account_default_draft_move
+#: view:account.move:account_default_draft_move.view_move_form_remove_button
+msgid "{'invisible': ['|', ('update_posted', '=', False)]}"
+msgstr "{'invisible': ['|', ('update_posted', '=', False)]}"

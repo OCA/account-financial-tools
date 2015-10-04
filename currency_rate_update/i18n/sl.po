@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
 "PO-Revision-Date: 2015-06-13 06:14+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
@@ -44,7 +44,7 @@ msgid "Bank of Mexico"
 msgstr "Banka Mehike"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:262
+#: code:addons/currency_rate_update/model/currency_rate_update.py:265
 #, python-format
 msgid "Base currency rate should be 1.00!"
 msgstr "Osnovni valutni tečaj mora biti 1.00!"
@@ -210,7 +210,7 @@ msgid "Refresh currencies"
 msgstr "Osvežitev valut"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:260
+#: code:addons/currency_rate_update/model/currency_rate_update.py:263
 #, python-format
 msgid "There is no base currency set!"
 msgstr "Osnovna valuta ni nastavljena!"
@@ -236,7 +236,7 @@ msgid "Yahoo Finance"
 msgstr "Yahoo Finance"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:234
+#: code:addons/currency_rate_update/model/currency_rate_update.py:237
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"

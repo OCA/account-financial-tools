@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
 "PO-Revision-Date: 2015-07-10 07:00+0000\n"
 "Last-Translator: Christophe kryskool <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
@@ -44,7 +44,7 @@ msgid "Bank of Mexico"
 msgstr "Banque du Mexique"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:262
+#: code:addons/currency_rate_update/model/currency_rate_update.py:265
 #, python-format
 msgid "Base currency rate should be 1.00!"
 msgstr "Le taux de la devise de base doit être 1.00!"
@@ -210,7 +210,7 @@ msgid "Refresh currencies"
 msgstr "Mettre à jour les devises"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:260
+#: code:addons/currency_rate_update/model/currency_rate_update.py:263
 #, python-format
 msgid "There is no base currency set!"
 msgstr "Il n'y a pas de devise de référence!"
@@ -236,7 +236,7 @@ msgid "Yahoo Finance"
 msgstr "Yahoo Finance"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:234
+#: code:addons/currency_rate_update/model/currency_rate_update.py:237
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
