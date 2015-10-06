@@ -54,20 +54,20 @@ class asset_modify(orm.TransientModel):
             toolbar=toolbar, submenu=submenu)
         asset_id = context.get('active_id', False)
         active_model = context.get('active_model', '')
-        if active_model == 'account.asset.asset' and asset_id:
-            if view_type == 'form':
-                asset = asset_obj.browse(cr, uid, asset_id, context=context)
-                doc = etree.XML(result['arch'])
-                if asset.method_time == 'number':
-                    node_me = doc.xpath("//field[@name='method_end']")[0]
-                    node_me.set('invisible', '1')
-                elif asset.method_time == 'end':
-                    node_mn = doc.xpath("//field[@name='method_number']")[0]
-                    node_mn.set('invisible', '1')
-                elif asset.method_time == 'year':
-                    node_me = doc.xpath("//field[@name='method_end']")[0]
-                    node_me.set('invisible', '1')
-                result['arch'] = etree.tostring(doc)
+        if active_model == 'account.asset.asset' and asset_id \
+                and view_type == 'form':
+            asset = asset_obj.browse(cr, uid, asset_id, context=context)
+            doc = etree.XML(result['arch'])
+            if asset.method_time == 'number':
+                node_me = doc.xpath("//field[@name='method_end']")[0]
+                node_me.set('invisible', '1')
+            elif asset.method_time == 'end':
+                node_mn = doc.xpath("//field[@name='method_number']")[0]
+                node_mn.set('invisible', '1')
+            elif asset.method_time == 'year':
+                node_me = doc.xpath("//field[@name='method_end']")[0]
+                node_me.set('invisible', '1')
+            result['arch'] = etree.tostring(doc)
         return result
 
     def default_get(self, cr, uid, fields, context=None):
