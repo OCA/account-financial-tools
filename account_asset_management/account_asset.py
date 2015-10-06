@@ -236,16 +236,24 @@ class account_asset_asset(orm.Model):
     _parent_store = True
 
     def unlink(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
         for asset in self.browse(cr, uid, ids, context=context):
             if asset.state != 'draft':
                 raise orm.except_orm(
                     _('Invalid action!'),
                     _("You can only delete assets in draft state."))
-            if asset.account_move_line_ids:
+            if filter(lambda dl: dl.type == 'depreciate',
+                      asset.depreciation_line_ids):
                 raise orm.except_orm(
                     _('Error!'),
                     _("You cannot delete an asset that contains "
                       "posted depreciation lines."))
+            else:
+                self.pool['account.move.line'].write(
+                    cr, uid, [x.id for x in asset.account_move_line_ids],
+                    {'asset_id': False},
+                    context=dict(context, allow_asset_removal=True))
             parent = asset.parent_id
             super(account_asset_asset, self).unlink(
                 cr, uid, [asset.id], context=context)

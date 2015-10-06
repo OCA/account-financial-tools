@@ -136,10 +136,12 @@ class account_move_line(orm.Model):
         for move_line in self.browse(cr, uid, ids, context=context):
             if move_line.asset_id.id:
                 if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE):
-                    raise orm.except_orm(
-                        _('Error!'),
-                        _("You cannot change an accounting item "
-                          "linked to an asset depreciation line."))
+                    if not (context.get('allow_asset_removal')
+                            and vals.keys() == ['asset_id']):
+                        raise orm.except_orm(
+                            _('Error!'),
+                            _("You cannot change an accounting item "
+                              "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise orm.except_orm(
                 _('Error!'),
