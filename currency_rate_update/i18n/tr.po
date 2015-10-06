@@ -25,7 +25,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:res.company,auto_currency_up:0
 msgid "Automatic Update"
-msgstr ""
+msgstr "Otomatik Güncelle"
 
 #. module: currency_rate_update
 #: help:res.company,auto_currency_up:0
@@ -46,12 +46,12 @@ msgstr ""
 #: code:addons/currency_rate_update/model/currency_rate_update.py:262
 #, python-format
 msgid "Base currency rate should be 1.00!"
-msgstr ""
+msgstr "Temel Döviz değeri 1.00 olmalı!"
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Şirketler"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
@@ -61,40 +61,40 @@ msgstr "Şirket"
 #. module: currency_rate_update
 #: field:currency.rate.update.service,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturuldu"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,currency_list:0
 msgid "Currencies available"
-msgstr ""
+msgstr "Mevcut döviz kurları"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
 #: field:currency.rate.update.service,currency_to_update:0
 msgid "Currencies to update with this service"
-msgstr ""
+msgstr "Bu servisle güncellenecek döviz kurları"
 
 #. module: currency_rate_update
 #: model:ir.actions.act_window,name:currency_rate_update.currency_rate_update_action
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 #: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
 msgid "Currency Rate Update"
-msgstr ""
+msgstr "Döviz kurlarını güncelle"
 
 #. module: currency_rate_update
 #: view:res.company:currency_rate_update.currency_auto_comp
 msgid "Currency update configuration"
-msgstr ""
+msgstr "Döviz kuru güncelleme ayarları"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,interval_type:0
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Döviz kuru güncelleme sıklığı"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
@@ -102,24 +102,24 @@ msgstr ""
 #: view:res.company:currency_rate_update.currency_auto_comp
 #: field:res.company,services_to_use:0
 msgid "Currency update services"
-msgstr ""
+msgstr "Döviz kuru servisleri"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Day(s)"
-msgstr ""
+msgstr "Gün"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:94
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Hata !"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "European Central Bank"
-msgstr ""
+msgstr "Avrupa Merkez Bankası"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
@@ -136,12 +136,12 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,interval_number:0
 msgid "Frequency"
-msgstr ""
+msgstr "Sıklık"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: currency_rate_update
 #: help:currency.rate.update.service,max_delta_days:0
@@ -150,93 +150,95 @@ msgid ""
 "current date exceeds this value, then the currency rate is not updated in "
 "OpenERP."
 msgstr ""
+"Eğer servisteki tarih bugün arasında bu değerden daha fazla gün geçmiş ise"
+"Döviz kuru güncellenmez."
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:152
 #, python-format
 msgid "Interval number must be >= 0"
-msgstr ""
+msgstr "Aralık değeri sıfır ya da daha büyük olmalı"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Son güncelleyen"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Son güncelleme"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
 msgid "Logs"
-msgstr ""
+msgstr "geçmiş"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,max_delta_days:0
 msgid "Max delta days"
-msgstr ""
+msgstr "Maks gün farkı"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:146
 #, python-format
 msgid "Max delta days must be >= 0"
-msgstr ""
+msgstr "Maks gün farkı >= 0 olmalı"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Month(s)"
-msgstr ""
+msgstr "Ay"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "National Bank of Poland"
-msgstr ""
+msgstr "Polonya Merkez Bankası"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "National Bank of Romania"
-msgstr ""
+msgstr "Romanya Merkez Bankası"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,next_run:0
 msgid "Next run on"
-msgstr ""
+msgstr "Bir sonraki güncelleme"
 
 #. module: currency_rate_update
 #: view:res.company:currency_rate_update.currency_auto_comp
 msgid "Refresh currencies"
-msgstr ""
+msgstr "Şimdi Güncelle"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:260
 #, python-format
 msgid "There is no base currency set!"
-msgstr ""
+msgstr "Temel Döviz seçilmemiş!"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,note:0
 msgid "Update logs"
-msgstr ""
+msgstr "Logları güncelle"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,service:0
 msgid "Webservice to use"
-msgstr ""
+msgstr "Kullanılacak web servisi"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Week(s)"
-msgstr ""
+msgstr "Hafta"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "Yahoo Finance"
-msgstr ""
+msgstr "Yahoo Finans"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:234
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
-msgstr ""
+msgstr "Her şirket için bir servisi sadece bir kere kullanabilirsiniz."

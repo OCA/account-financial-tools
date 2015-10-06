@@ -34,6 +34,8 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. Turkish National Bank
+
 Configuration
 =============
 
