@@ -50,10 +50,10 @@ class TCMB_getter(Currency_getter_interface):
                              max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
         url = 'http://www.tcmb.gov.tr/kurlar/today.xml'
-        # Important : as explained on the ECB web site, the currencies are
-        # at the beginning of the afternoon ; so, until 3 p.m. Paris time
+        # Important : as explained on the TCMB web site, the currencies are
+        # updated at 15:30 Istanbul time ; so, until 3:30 p.m. Istanbul time
         # the currency rates are the ones of trading day N-1
-        # http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
+        # https://www.turkiye.gov.tr/doviz-kurlari
 
         # We do not want to update the main currency
         if main_currency in currency_array:
