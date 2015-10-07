@@ -23,7 +23,7 @@
 
 {
     'name': 'Account Fiscal Position VAT Check',
-    'version': '0.1',
+    'version': '8.0.0.1.1',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Check VAT on invoice validation',
@@ -53,7 +53,7 @@ for any help or question about this module.
     """,
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com',
-    'depends': ['account'],
+    'depends': ['account', 'base_vat'],
     'data': [
         'account_fiscal_position_view.xml',
         'partner_view.xml',
