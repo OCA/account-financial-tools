@@ -40,7 +40,8 @@ class TCMB_getter(Currency_getter_interface):
 
         """
         res = {}
-        xpath_curr_rate = '/Tarih_Date/Currency[@Kod="%s"]/ForexBuying/text()' % (curr.upper())
+        xpath_curr_rate = ('/Tarih_Date/Currency[@Kod="%s"]/'
+                           'ForexBuying/text()' % curr.upper())
         res['rate_currency'] = float(
             dom.xpath(xpath_curr_rate, namespaces=ns)[0]
         )
