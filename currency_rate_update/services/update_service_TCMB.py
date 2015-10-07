@@ -3,7 +3,7 @@
 #
 #    Copyright (c) 2009 CamptoCamp. All rights reserved.
 #    @author Nicolas Bessi
-#    @author Ahmet Altinisik <functions for Turkish National Bank> 
+#    @author Ahmet Altinisik <functions for Turkish National Bank>
 #    Abstract class to fetch rates from European Central Bank
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -46,7 +46,7 @@ class TCMB_getter(Currency_getter_interface):
             dom.xpath(xpath_curr_rate, namespaces=ns)[0]
         )
         return res
-    
+
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
