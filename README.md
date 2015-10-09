@@ -22,37 +22,37 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[account_asset_management](account_asset_management/) | 2.6 | Assets Management
-[account_asset_management_xls](account_asset_management_xls/) | 0.1 | Assets Management Excel reporting
-[account_auto_fy_sequence](account_auto_fy_sequence/) | 0.1 | Automatic Fiscal Year Sequences
-[account_balance_line](account_balance_line/) | 1.1 | Display balance totals in move line view
-[account_chart_update](account_chart_update/) | 1.2 | Detect changes and update the Account Chart from a template
-[account_check_deposit](account_check_deposit/) | 0.1 | Manage deposit of checks to the bank
-[account_compute_tax_amount](account_compute_tax_amount/) | 1.0 | Recompute tax_amount
-[account_constraints](account_constraints/) | 1.1 | Account Constraints
-[account_credit_control](account_credit_control/) | 0.3.0 | Account Credit Control
-[account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 0.1.0 | Credit control dunning fees
-[account_default_draft_move](account_default_draft_move/) | 1.0 | Move in draft state by default
+[account_asset_management](account_asset_management/) | 8.0.2.6.0 | Assets Management
+[account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 | Assets Management Excel reporting
+[account_auto_fy_sequence](account_auto_fy_sequence/) | 8.0.0.1.0 | Automatic Fiscal Year Sequences
+[account_balance_line](account_balance_line/) | 8.0.1.1.0 | Display balance totals in move line view
+[account_chart_update](account_chart_update/) | 8.0.1.2.0 | Detect changes and update the Account Chart from a template
+[account_check_deposit](account_check_deposit/) | 8.0.0.1.0 | Manage deposit of checks to the bank
+[account_compute_tax_amount](account_compute_tax_amount/) | 8.0.1.0.0 | Recompute tax_amount
+[account_constraints](account_constraints/) | 8.0.1.1.0 | Account Constraints
+[account_credit_control](account_credit_control/) | 8.0.0.3.0 | Account Credit Control
+[account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 | Credit control dunning fees
+[account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 | Move in draft state by default
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.1 | Check VAT on invoice validation
-[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 1.0 | Account Invoice Constraint Chronology
-[account_invoice_currency](account_invoice_currency/) | 1.0 | Company currency in invoices
-[account_invoice_tax_required](account_invoice_tax_required/) | 1.0 | Tax required in invoice
-[account_journal_always_check_date](account_journal_always_check_date/) | 0.1 | Option Check Date in Period always active on journals
-[account_journal_period_close](account_journal_period_close/) | 1.0 | Account Journal Period Close
-[account_move_batch_validate](account_move_batch_validate/) | 0.2 | Account Move Batch Validate
-[account_move_line_no_default_search](account_move_line_no_default_search/) | 0.1 | Move line search view - disable defaults for period and journal
-[account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 1.0 | Filter your Journal Items per payable and receivable account
-[account_move_line_search_extension](account_move_line_search_extension/) | 0.6 | Journal Items Search Extension
-[account_move_locking](account_move_locking/) | 1.0 | Move locked to prevent modification
-[account_move_template](account_move_template/) | 1.0 | Templates for recurring Journal Entries
-[account_partner_required](account_partner_required/) | 0.1 | Account partner required
-[account_renumber](account_renumber/) | 1.0 | Account renumber wizard
-[account_reset_chart](account_reset_chart/) | 1.0 | Delete the accounting setup from an otherwise reusable database
-[account_reversal](account_reversal/) | 1.0 | Account Reversal
-[account_tax_analysis](account_tax_analysis/) | 1.0 | Tax analysis
-[account_tax_chart_interval](account_tax_chart_interval/) | 1.0 | Tax chart for a period interval
-[currency_rate_date_check](currency_rate_date_check/) | 1.0 | Make sure currency rates used are always up-to-update
-[currency_rate_update](currency_rate_update/) | 0.7 | Currency Rate Update
+[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 8.0.1.0.0 | Account Invoice Constraint Chronology
+[account_invoice_currency](account_invoice_currency/) | 8.0.1.0.0 | Company currency in invoices
+[account_invoice_tax_required](account_invoice_tax_required/) | 8.0.1.0.0 | Tax required in invoice
+[account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 | Option Check Date in Period always active on journals
+[account_journal_period_close](account_journal_period_close/) | 8.0.1.0.0 | Account Journal Period Close
+[account_move_batch_validate](account_move_batch_validate/) | 8.0.0.2.0 | Account Move Batch Validate
+[account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 | Move line search view - disable defaults for period and journal
+[account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 | Filter your Journal Items per payable and receivable account
+[account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 | Journal Items Search Extension
+[account_move_locking](account_move_locking/) | 8.0.1.0.0 | Move locked to prevent modification
+[account_move_template](account_move_template/) | 8.0.1.0.0 | Templates for recurring Journal Entries
+[account_partner_required](account_partner_required/) | 8.0.0.1.0 | Account partner required
+[account_renumber](account_renumber/) | 8.0.1.0.0 | Account renumber wizard
+[account_reset_chart](account_reset_chart/) | 8.0.1.0.0 | Delete the accounting setup from an otherwise reusable database
+[account_reversal](account_reversal/) | 8.0.1.0.0 | Account Reversal
+[account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 | Tax analysis
+[account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 | Tax chart for a period interval
+[currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 | Make sure currency rates used are always up-to-update
+[currency_rate_update](currency_rate_update/) | 8.0.0.7.0 | Currency Rate Update
 
 Unported addons
 ---------------

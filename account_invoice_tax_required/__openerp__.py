@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': "Tax required in invoice",
-    'version': "1.0",
+    'version': "8.0.1.0.0",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     'website': "http://www.camptocamp.com",
     'category': "Localisation / Accounting",

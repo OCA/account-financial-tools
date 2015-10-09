@@ -22,7 +22,7 @@
     "name": "Reset a chart of accounts",
     "summary": ("Delete the accounting setup from an otherwise reusable "
                 "database"),
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "author": "Therp BV,Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     "depends": [
