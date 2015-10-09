@@ -23,7 +23,7 @@
 
 {
     'name': 'Currency Rate Date Check',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'category': 'Financial Management/Configuration',
     'license': 'AGPL-3',
     'summary': "Make sure currency rates used are always up-to-update",
