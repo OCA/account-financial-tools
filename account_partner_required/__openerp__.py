@@ -22,7 +22,7 @@
 
 {
     'name': 'Account partner required',
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'category': 'Generic Modules/Accounting',
     'license': 'AGPL-3',
     'description': """This module adds an option "partner policy"
