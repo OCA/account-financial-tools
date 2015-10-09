@@ -20,7 +20,7 @@
 ###############################################################################
 {
     'name': "Account Move Batch Validate",
-    'version': '0.2',
+    'version': '8.0.0.2.0',
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'category': 'Finance',
     'complexity': 'normal',
