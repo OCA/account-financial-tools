@@ -49,5 +49,5 @@ for any help or question about this module.
         'images/date_check_error_popup.jpg',
         'images/date_check_company_config.jpg',
         ],
-    'installable': True,
+    'installable': False,
 }
