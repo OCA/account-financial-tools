@@ -39,7 +39,7 @@
         'test/batch_validate_then_unmark.yml',
         'test/batch_validate_then_delete_move.yml',
     ],
-    'installable': True,
+    'installable': False,
     'images': [],
     'license': 'AGPL-3',
 }
