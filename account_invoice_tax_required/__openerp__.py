@@ -27,5 +27,5 @@
     'depends': ["account"],
     'data': [
     ],
-    'installable': True,
+    'installable': False,
 }
