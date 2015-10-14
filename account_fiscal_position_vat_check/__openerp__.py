@@ -58,5 +58,5 @@ for any help or question about this module.
         'account_fiscal_position_view.xml',
         'partner_view.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
