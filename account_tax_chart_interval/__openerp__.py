@@ -36,5 +36,5 @@
     "data": [
         'wizard/account_tax_chart_view.xml',
     ],
-    "installable": True,
+    'installable': False,
 }

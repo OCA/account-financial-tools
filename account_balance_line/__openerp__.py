@@ -43,7 +43,7 @@ Contributors
  'website': 'http://www.camptocamp.com',
  'data': ['account_move_line_view.xml'],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False,

@@ -49,6 +49,6 @@ for any help or question about this module.
     'website': 'http://www.akretion.com',
     'depends': ['account'],
     'data': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

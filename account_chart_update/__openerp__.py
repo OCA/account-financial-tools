@@ -47,5 +47,5 @@
         'views/account_tax_code_view.xml',
     ],
     "active": False,
-    'installable': True
+    'installable': False
 }

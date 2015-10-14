@@ -34,4 +34,5 @@
     'qweb': [
         'static/src/xml/account_move_line_search_extension.xml',
     ],
+    'installable': False,
 }

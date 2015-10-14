@@ -37,5 +37,5 @@
         'test/generate_move.yml',
     ],
     'active': False,
-    'installable': True,
+    'installable': False,
 }

@@ -26,6 +26,6 @@
     'website': 'http://www.camptocamp.com',
     'license': 'AGPL-3',
     'data': [],
-    'installable': True,
+    'installable': False,
     'active': False,
 }

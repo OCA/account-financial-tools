@@ -45,7 +45,7 @@
           "security/ir.model.access.csv"],
  'demo': ["credit_control_demo.xml"],
  'tests': [],
- 'installable': True,
+ 'installable': False,
  'license': 'AGPL-3',
  'application': True
  }

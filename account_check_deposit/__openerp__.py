@@ -57,6 +57,6 @@ check deposits.
         'report.xml',
         'report/report_checkdeposit.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': True,
 }

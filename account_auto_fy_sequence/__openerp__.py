@@ -32,7 +32,7 @@
     'data': [
         'views/ir_sequence_view.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': False,
     'auto_install': False,
     'license': 'AGPL-3',

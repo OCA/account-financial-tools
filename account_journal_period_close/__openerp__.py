@@ -57,7 +57,7 @@ account.journal.period model that is present in Odoo core.
     "demo": [],
     "test": [],
     "licence": "AGPL-3",
-    "installable": True,
+    'installable': False,
     "auto_install": False,
     "application": True,
 }
