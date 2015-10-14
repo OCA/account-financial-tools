@@ -54,7 +54,7 @@ The check can be activated on a per-journal basis
     "demo": [],
     "test": [],
     "licence": "AGPL-3",
-    "installable": True,
+    'installable': False,
     "auto_install": False,
     "application": True,
 }
