@@ -36,6 +36,6 @@ have to disable these before entering your own search queries.
     'license': 'AGPL-3',
     'depends': ['account'],
     'js': ['static/src/js/move_line_search_view.js'],
-    'data': ['views/move_line_search_view.xml']
+    'data': ['views/move_line_search_view.xml'],
     'installable': False,
 }
