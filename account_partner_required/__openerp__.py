@@ -42,5 +42,5 @@ account_analytic_required module.
     'website': 'http://acsone.eu/',
     'depends': ['account'],
     'data': ['account_view.xml'],
-    'installable': True,
+    'installable': False,
 }
