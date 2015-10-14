@@ -35,6 +35,6 @@
         'account_view.xml',
         'wizard/account_move_reverse_view.xml'
         ],
-    'installable': True,
+    'installable': False,
     'active': False,
 }
