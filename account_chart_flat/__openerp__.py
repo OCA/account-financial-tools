@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Account Chart Flat, for OpenERP 7.0 / Odoo 8
-#    Copyright (C) 2013 XCG Consulting (http://odoo.consulting)
+#    Copyright (C) 2013 XCG Consulting <http://odoo.consulting>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,25 +18,21 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
-    "name": "Account Chart Flat",
-    "version": '1.0',
-    "author": "XCG Consulting",
-    "category": 'Accounting',
-    "description": """Enhancements to the account chart structure
-    """,
-    'website': 'http://odoo.consulting/',
-    'init_xml': [],
-    "depends": [
+    'name': 'Account Chart Flat',
+    'version': '1.0',
+    'author': 'XCG Consulting, Odoo Community Association (OCA)',
+    'maintainer': 'XCG Consulting',
+    'website': 'http://odoo.consulting',
+    'license': 'AGPL-3',
+    'depends': [
         'base',
         'account_accountant',
     ],
-    "data": [
-        # 'account_view.xml',
+    'data': [
     ],
-    # 'demo_xml': [],
     'test': [],
     'installable': True,
     'active': False,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
