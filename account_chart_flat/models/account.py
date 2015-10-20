@@ -81,19 +81,19 @@ class FlatAccount(osv.Model):
         # Because child_of makes use of the parent_left and parent_right
         # which is missing and will provoke: IndexError: pop from empty list
         # down the road...
-        """
-        search_args = [
-            '&',
-            ('id', 'in', ids),
-            ('type', 'not in', ['consolidation', 'view'])
-        ]
-        real_ids = self.search(cr, uid, search_args, context=context)
-        real_results = account_account._account_account__compute(
-            self, cr, uid, real_ids, field_names, arg=arg, context=context,
-            query=query, query_params=query_params
-        )
-        intermediate_result.update(real_results)
-        """
+
+        # search_args = [
+        #     '&',
+        #     ('id', 'in', ids),
+        #     ('type', 'not in', ['consolidation', 'view'])
+        # ]
+        # real_ids = self.search(cr, uid, search_args, context=context)
+        # real_results = account_account._account_account__compute(
+        #     self, cr, uid, real_ids, field_names, arg=arg, context=context,
+        #     query=query, query_params=query_params
+        # )
+        # intermediate_result.update(real_results)
+
         return intermediate_result
 
     _columns = {
