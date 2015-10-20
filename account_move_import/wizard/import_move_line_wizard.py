@@ -493,15 +493,8 @@ class AccountMoveLineImport(models.TransientModel):
 
             aml_vals = {}
 
+            # step 1: handle codepage
             for i, hf in enumerate(self._header_fields):
-                if i == 0 and line[hf] and line[hf][0] == '#':
-                    # lines starting with # are considered as comment lines
-                    break
-                if hf in self._skip_fields:
-                    continue
-                if line[hf] == '':
-                    continue
-
                 try:
                     line[hf] = line[hf].decode(self.codepage).strip()
                 except:
@@ -510,6 +503,16 @@ class AccountMoveLineImport(models.TransientModel):
                         _("Wrong Code Page"),
                         _("Error while processing line '%s' :\n%s")
                         % (line, tb))
+
+            # step 2: process input fields
+            for i, hf in enumerate(self._header_fields):
+                if i == 0 and line[hf] and line[hf][0] == '#':
+                    # lines starting with # are considered as comment lines
+                    break
+                if hf in self._skip_fields:
+                    continue
+                if line[hf] == '':
+                    continue
 
                 if self._field_methods[hf].get('orm_field'):
                     self._field_methods[hf]['method'](
