@@ -25,7 +25,7 @@ addon | version | summary
 [account_asset_management](account_asset_management/) | 8.0.2.6.0 | Assets Management
 [account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 | Assets Management Excel reporting
 [account_auto_fy_sequence](account_auto_fy_sequence/) | 8.0.0.1.0 | Automatic Fiscal Year Sequences
-[account_balance_line](account_balance_line/) | 8.0.1.1.0 | Display balance totals in move line view
+[account_balance_line](account_balance_line/) | 8.0.1.1.1 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 8.0.1.2.0 | Detect changes and update the Account Chart from a template
 [account_check_deposit](account_check_deposit/) | 8.0.0.1.0 | Manage deposit of checks to the bank
 [account_compute_tax_amount](account_compute_tax_amount/) | 8.0.1.0.0 | Recompute tax_amount
