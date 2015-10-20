@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013-2014 XCG Consulting (www.xcg-consulting.fr)
+#    Account Chart Flat, for OpenERP 7.0 / Odoo 8
+#    Copyright (C) 2013 XCG Consulting <http://odoo.consulting>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -25,7 +25,7 @@ import openerp.addons.decimal_precision as dp
 from openerp.addons.account.account import account_account
 
 
-class flat_account(osv.Model):
+class FlatAccount(osv.Model):
     _name = 'account.account'
     _inherit = 'account.account'
 
@@ -33,9 +33,10 @@ class flat_account(osv.Model):
 
     def create(self, cr, uid, values, context=None):
         """override the create method of account.account to make sure we
-        send the magic context in order to avoid recalculation the COA structure
-        on every account creation
+        send the magic context in order to avoid recalculation the COA
+        structure on every account creation
         """
+
         if not context:
             context = {}
 
@@ -44,15 +45,16 @@ class flat_account(osv.Model):
                 'defer_parent_store_computation': True
             }
         )
-        return super(
-            flat_account, self
-        ).create(cr, uid, values, context=context)
+        return super(FlatAccount, self).create(
+            cr, uid, values, context=context
+        )
 
     def write(self, cr, uid, ids, values, context=None):
         """override the create method of account.account to make sure we
-        send the magic context in order to avoid recalculation the COA structure
-        on every account modification
+        send the magic context in order to avoid recalculation the COA
+        structure on every account modification
         """
+
         if not context:
             context = {}
 
@@ -61,7 +63,7 @@ class flat_account(osv.Model):
                 'defer_parent_store_computation': True
             }
         )
-        return super(flat_account, self).write(
+        return super(FlatAccount, self).write(
             cr, uid, ids, values, context=context
         )
 
