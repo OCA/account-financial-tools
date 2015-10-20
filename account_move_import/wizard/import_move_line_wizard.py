@@ -79,10 +79,8 @@ class AccountMoveLineImport(models.TransientModel):
                 self.dialect = csv.Sniffer().sniff(
                     self.lines[:128], delimiters=';,')
             except:
-                """
-                csv.Sniffer is not always reliable
-                in the detection of the delimiter
-                """
+                # csv.Sniffer is not always reliable
+                # in the detection of the delimiter
                 self.dialect = csv.Sniffer().sniff(
                     '"header 1";"header 2";\r\n')
                 if ',' in self.lines[128]:
