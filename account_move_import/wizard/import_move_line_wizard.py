@@ -486,7 +486,7 @@ class AccountMoveLineImport(models.TransientModel):
             StringIO.StringIO(lines), fieldnames=self._header_fields,
             dialect=self.dialect)
 
-        inv_lines = []
+        move_lines = []
         for line in reader:
 
             aml_vals = {}
@@ -522,9 +522,9 @@ class AccountMoveLineImport(models.TransientModel):
 
             if aml_vals:
                 self._process_line_vals(line, move, aml_vals)
-                inv_lines.append(aml_vals)
+                move_lines.append(aml_vals)
 
-        vals = [(0, 0, l) for l in inv_lines]
+        vals = [(0, 0, l) for l in move_lines]
         vals = self._process_vals(move, vals)
 
         if self._err_log:

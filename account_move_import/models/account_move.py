@@ -29,7 +29,8 @@ class AccountMove(models.Model):
     @api.multi
     def import_lines(self):
         self.ensure_one()
-        view = self.env.ref('account_move_import.aml_import_view_form')
+        module = __name__.split('addons.')[1].split('.')[0]
+        view = self.env.ref('%s.aml_import_view_form' % module)
         return {
             'name': _('Import File'),
             'view_type': 'form',
