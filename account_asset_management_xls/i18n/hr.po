@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2015-10-20 18:44+0000\n"
 "PO-Revision-Date: 2015-06-03 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
@@ -102,7 +102,7 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0
