@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2015-10-20 18:44+0000\n"
 "PO-Revision-Date: 2015-06-03 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Amount"
-msgstr ""
+msgstr "Importe"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -179,7 +179,7 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Done"
-msgstr ""
+msgstr "Completado"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -219,7 +219,7 @@ msgstr "Diario"
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr ""
+msgstr "Asiento contable"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
