@@ -3,13 +3,14 @@
 # * account_chart_update
 # 
 # Translators:
+# Davor Bojkić <bole@dajmi5.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-24 14:29+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-10-20 18:44+0000\n"
+"PO-Revision-Date: 2015-10-19 10:27+0000\n"
+"Last-Translator: Davor Bojkić <bole@dajmi5.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,13 +42,13 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,update_account_id:0
 msgid "Account to update"
-msgstr ""
+msgstr "Konta za ažuriranje"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,account_ids:0
 msgid "Accounts"
-msgstr ""
+msgstr "Konta"
 
 #. module: account_chart_update
 #: field:account.tax.code,active:0
@@ -62,12 +63,12 @@ msgstr "Odustani"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
 msgid "Chart Template"
-msgstr ""
+msgstr "Predložak kontnog plana"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Kontni plan"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -78,7 +79,7 @@ msgstr "Zatvori"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:727
 #, python-format
 msgid "Code not found."
-msgstr ""
+msgstr "Šifra nije pronađena"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,company_id:0
@@ -88,7 +89,7 @@ msgstr "Organizacija"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
 msgid "Continue on errors"
-msgstr ""
+msgstr "Nastavi nakon grešaka"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -129,13 +130,13 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:934
 #, python-format
 msgid "Created tax %s.\n"
-msgstr ""
+msgstr "Kreiran porez %s.\n"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:870
 #, python-format
 msgid "Created tax code %s.\n"
-msgstr ""
+msgstr "Kreiran porezni kod %s.\n"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
@@ -147,7 +148,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:949
 #, python-format
 msgid "Deactivated %d taxes\n"
-msgstr ""
+msgstr "Deaktivirano %d poreza\n"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1024
@@ -192,7 +193,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
 msgid "Fiscal position template"
-msgstr ""
+msgstr "Predložak fiskalne pozicije"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
@@ -209,7 +210,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,fiscal_position_ids:0
 msgid "Fiscal positions"
-msgstr ""
+msgstr "Fiskalne pozicije"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,lang:0
@@ -225,7 +226,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
@@ -244,7 +245,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,lang:0
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -278,7 +279,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:820
 #, python-format
 msgid "Name not found."
-msgstr ""
+msgstr "Naziv nije pronađen."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:532
@@ -302,12 +303,12 @@ msgstr ""
 #: selection:wizard.update.charts.accounts.fiscal.position,type:0
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "New template"
-msgstr ""
+msgstr "Novi predložak"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr ""
+msgstr "Sljedeći"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,code_digits:0
@@ -347,12 +348,12 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Other options"
-msgstr ""
+msgstr "Ostale opcije"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Previous"
-msgstr ""
+msgstr "Prethodni"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -367,12 +368,12 @@ msgstr "Status"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Step 1"
-msgstr ""
+msgstr "Korak 1"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Step 2"
-msgstr ""
+msgstr "Korak 2"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -404,12 +405,12 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_account_tax_code
 msgid "Tax Code"
-msgstr ""
+msgstr "Porezni kod"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.tax.code,tax_code_id:0
 msgid "Tax code template"
-msgstr ""
+msgstr "Predložak poreznog koda"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
@@ -430,7 +431,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,tax_code_ids:0
 msgid "Tax codes"
-msgstr ""
+msgstr "Porezni kodovi"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:572
@@ -468,7 +469,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,tax_ids:0
 msgid "Taxes"
-msgstr ""
+msgstr "Porezi"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:623
