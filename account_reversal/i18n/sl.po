@@ -3,13 +3,20 @@
 # * account_reversal
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Accounts-Payable - Alkemics, 2015
+# Antonio Trueba, 2016
+# Chen-Do LU <clu@alkemics.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# François Breysse <fb@alkemics.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-30 11:27+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:13+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +61,11 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_reversal
+#: field:account.move.reverse,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
 "Enter the date of the reversal account entries. By default, OpenERP proposes"
@@ -91,6 +103,11 @@ msgstr "Predpona naziva postavk"
 #: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
 msgid "Journal Entries to be Reversed"
 msgstr "Dnevniški vnosi, ki bodo preobrnjeni"
+
+#. module: account_reversal
+#: field:account.move.reverse,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_reversal
 #: field:account.move.reverse,write_uid:0
