@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Account Constraints',
-    'version': '8.0.1.1.0',
+    'version': '9.0.1.1.0',
     'depends': ['account'],
     'author': "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
@@ -34,9 +34,6 @@ and legal state of the art in other software.
 
 Summary of constraints are:
 
-* Add a constraint on account move: you cannot pickup a date that is not
-  in the fiscal year of the concerned period (configurable per journal)
-
 * For manual entries when multicurrency:
 
   a. Validation on the use of the 'Currency' and 'Currency Amount'
@@ -48,10 +45,9 @@ Summary of constraints are:
   if the same than the company one.
 
 * Remove the possibility to modify or delete a move line related to an
-  invoice or a bank statement, no matter what the status of the move
-  (draft, validated or posted). This is useful in a standard context but
-  even more if you're using `account_default_draft_move`. This way you ensure
-  that the user cannot make mistakes even in draft state, he must pass through
+  invoice or a bank statement or a payment order, no matter what the status of the move
+  (draft, validated or posted).
+  This way you ensure that the user cannot make mistakes even in draft state, he must pass through
   the parent object to make his modification.
 
   Contributors
@@ -60,8 +56,6 @@ Summary of constraints are:
     """,
     'website': 'http://www.camptocamp.com',
     'data': [
-        'view/account_journal.xml',
-        'view/account_bank_statement.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

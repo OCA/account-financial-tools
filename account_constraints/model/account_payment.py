@@ -18,20 +18,24 @@
 #
 ##############################################################################
 
-from openerp import models, api, exceptions, _
+from openerp import models, api, fields
 
 
-class AccountMove(models.Model):
-    _inherit = "account.move"
+class AccountPayment(models.Model):
+    _inherit = "account.payment"
 
-    @api.constrains('journal_id', 'period_id', 'date')
-    def _check_fiscal_year(self):
-        for move in self:
-            if move.journal_id.allow_date_fy:
-                date_start = move.period_id.fiscalyear_id.date_start
-                date_stop = move.period_id.fiscalyear_id.date_stop
-                if not date_start <= move.date <= date_stop:
-                    raise exceptions.Warning(
-                        _('You cannot create entries with date not in the '
-                          'fiscal year of the chosen period'))
-        return True
+    def _create_payment_entry(self, amount):
+        """Override the method to add the key 'from_parent_object' in
+        the context. This is to allow to delete move line related to
+        bank statement through the cancel button.
+        """
+        self = self.with_context(from_parent_object=True)
+        return super(AccountPayment, self)._create_payment_entry(amount)
+
+    def _create_transfer_entry(self, amount):
+        """Override the method to add the key 'from_parent_object' in
+        the context. This is to allow to delete move line related to
+        bank statement through the cancel button.
+        """
+        self = self.with_context(from_parent_object=True)
+        return super(AccountPayment, self)._create_transfert_entry(amount)
