@@ -29,11 +29,10 @@ class lock_account_move(models.TransientModel):
                                    rel='wizard_lock_account_move_journal',
                                    string='Journal',
                                    required=True)
-    period_ids = fields.Many2many('account.period',
-                                  rel='wizard_lock_account_move_period',
-                                  string='Period',
-                                  required=True,
-                                  domain=[('state', '<>', 'done')])
+    date_start = fields.Datetime(string='Date start',
+                                 required=True)
+    date_end = fields.Datetime(string='Date end',
+                               required=True)
 
     @api.multi
     def lock_move(self, data):
@@ -42,8 +41,10 @@ class lock_account_move(models.TransientModel):
                                       ('journal_id',
                                        'in',
                                        self.journal_ids.ids),
-                                      ('period_id', 'in',
-                                       self.period_ids.ids)],
+                                      ('date', '>=',
+                                       self.date_start),
+                                      ('date', '<=',
+                                       self.date_end)],
                                      order='date')
         if draft_move:
             raise exceptions.Warning(_('Warning!'),
@@ -53,7 +54,8 @@ class lock_account_move(models.TransientModel):
         move = obj_move.search([('state', '=', 'posted'),
                                 ('locked', '=', False),
                                 ('journal_id', 'in', self.journal_ids.ids),
-                                ('period_id', 'in', self.period_ids.ids)],
+                                ('date', '>=', self.date_start),
+                                ('date', '<=', self.date_end)],
                                order='date')
         if not move:
             raise exceptions.Warning(_('Warning!'),
