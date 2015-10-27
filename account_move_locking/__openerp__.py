@@ -19,13 +19,13 @@
 ##############################################################################
 {
     "name": "Move locked to prevent modification",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "depends": ["base", "account"],
     "author": "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',
              'wizard/account_lock_move_view.xml'],
-    'installable': False,
+    'installable': True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -10,7 +10,8 @@
                 <form string="Lock Journal Entries">
                     <group>
                         <field name="journal_ids"/>
-                        <field name="period_ids"/>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
                     </group>
                     <footer>
                         <button string="Approve" name="lock_move" type="object" class="oe_highlight"/>
@@ -32,7 +33,7 @@
 
         <menuitem
             name="Lock Journal Entries"
-            parent="account.periodical_processing_journal_entries_validation"
+            parent="account.menu_finance_entries"
             action="action_lock_account_move"
             id="menu_lock_account_moves"
            />
