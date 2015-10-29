@@ -30,16 +30,14 @@ class AccountMove(models.Model):
     def write(self, vals):
         for move in self:
             if move.locked:
-                raise exceptions.Warning(_('Move Locked!'),
-                                         move.name)
+                raise exceptions.UserError(_('Move Locked! %s') % (move.name))
         return super(AccountMove, self).write(vals)
 
     @api.multi
     def unlink(self):
         for move in self:
             if move.locked:
-                raise exceptions.Warning(_('Move Locked!'),
-                                         move.name)
+                raise exceptions.UserError(_('Move Locked! %s') % (move.name))
         return super(AccountMove, self).unlink()
 
     @api.multi
@@ -48,6 +46,5 @@ class AccountMove(models.Model):
         # so we need to test manualy if the move is locked
         for move in self:
             if move.locked:
-                raise exceptions.Warning(_('Move Locked!'),
-                                         move.name)
+                raise exceptions.UserError(_('Move Locked! %s') % (move.name))
         return super(AccountMove, self).button_cancel()
