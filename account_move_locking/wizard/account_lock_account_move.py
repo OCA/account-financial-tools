@@ -36,6 +36,9 @@ class lock_account_move(models.TransientModel):
 
     @api.multi
     def lock_move(self, data):
+        if self.date_start > self.date_end:
+            raise exceptions.UserError(_('Date start need to be \
+                                          before Date end'))
         obj_move = self.env['account.move']
         draft_move = obj_move.search([('state', '=', 'draft'),
                                       ('journal_id',
@@ -47,10 +50,9 @@ class lock_account_move(models.TransientModel):
                                        self.date_end)],
                                      order='date')
         if draft_move:
-            raise exceptions.Warning(_('Warning!'),
-                                     _('Unposted move in period/jounal \
-                                       selected, please post it before \
-                                       locking them'))
+            raise exceptions.UserError(_('Unposted move in period/jounal \
+                                          selected, please post it before \
+                                          locking them'))
         move = obj_move.search([('state', '=', 'posted'),
                                 ('locked', '=', False),
                                 ('journal_id', 'in', self.journal_ids.ids),
@@ -58,7 +60,6 @@ class lock_account_move(models.TransientModel):
                                 ('date', '<=', self.date_end)],
                                order='date')
         if not move:
-            raise exceptions.Warning(_('Warning!'),
-                                     _('No move to locked found'))
+            raise exceptions.UserError(_('No move to locked found'))
         move.write({'locked': True})
         return {'type': 'ir.actions.act_window_close'}
