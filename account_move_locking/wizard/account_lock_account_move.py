@@ -34,11 +34,15 @@ class lock_account_move(models.TransientModel):
     date_end = fields.Datetime(string='Date end',
                                required=True)
 
-    @api.multi
-    def lock_move(self, data):
+    @api.one
+    @api.constrains('date_start', 'date_end')
+    def _check_date_stop_start(self):
         if self.date_start > self.date_end:
             raise exceptions.UserError(_('Date start need to be \
                                           before Date end'))
+
+    @api.multi
+    def lock_move(self, data):
         obj_move = self.env['account.move']
         draft_move = obj_move.search([('state', '=', 'draft'),
                                       ('journal_id',
