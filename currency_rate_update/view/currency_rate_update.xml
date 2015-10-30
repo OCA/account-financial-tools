@@ -55,7 +55,7 @@
         </record>
 
         <menuitem id="currency_rate_update_menu" action="currency_rate_update_action"
-            parent="account.menu_configuration_misc" sequence="21"/>
+            parent="account.menu_finance_configuration" sequence="21"/>
 
     </data>
 </openerp>
