@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
 #
-#   account_check_deposit for Odoo/OpenERP
+#   account_check_deposit for Odoo
 #   Copyright (C) 2012-2015 Akretion (http://www.akretion.com/)
 #   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 #   @author: Chafique DELLI <chafique.delli@akretion.com>
@@ -28,18 +28,6 @@
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Manage deposit of checks to the bank',
-    'description': """
-Account Check Deposit
-=====================
-This module allows you to easily manage check deposits : you can select all
-the checks you received as payments and create a global deposit for the
-selected checks.
-
-A journal for received checks is automatically created.
-You must configure on this journal the default debit account and the default
-credit account. You must also configure on the company the account for
-check deposits.
-""",
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com/',
     'depends': [
@@ -47,14 +35,14 @@ check deposits.
         'report_webkit',
     ],
     'data': [
-        'account_deposit_view.xml',
-        'account_move_line_view.xml',
-        'account_deposit_sequence.xml',
-        'company_view.xml',
+        'views/account_deposit_view.xml',
+        'views/account_move_line_view.xml',
+        'data/account_deposit_sequence.xml',
+        'views/company_view.xml',
         'security/ir.model.access.csv',
         'security/check_deposit_security.xml',
-        'account_data.xml',
-        'report.xml',
+        'data/account_data.xml',
+        'report/report.xml',
         'report/report_checkdeposit.xml',
     ],
     'installable': True,

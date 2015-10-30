@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:10+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,11 +25,6 @@ msgstr ""
 #. module: account_check_deposit
 #: field:res.company,check_deposit_account_id:0
 msgid "Account for Check Deposits"
-msgstr ""
-
-#. module: account_check_deposit
-#: constraint:account.check.deposit:0
-msgid "All the checks of the deposit must be in the currency of the deposit"
 msgstr ""
 
 #. module: account_check_deposit
@@ -76,14 +71,14 @@ msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:194
-#: code:addons/account_check_deposit/account_deposit.py:216
+#: code:addons/account_check_deposit/models/account_deposit.py:180
+#: code:addons/account_check_deposit/models/account_deposit.py:202
 #, python-format
 msgid "Check Deposit %s"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:203
+#: code:addons/account_check_deposit/models/account_deposit.py:189
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -128,12 +123,6 @@ msgid "Company"
 msgstr "Company"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:252
-#, python-format
-msgid "Configuration Error:"
-msgstr ""
-
-#. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
 msgstr ""
@@ -152,7 +141,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
 msgid "Currency (False if same as company)"
-msgstr ""
+msgstr "Currency (False if same as company)"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -167,13 +156,18 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,journal_default_account_id:0
 msgid "Default Debit Account of the Journal"
-msgstr ""
+msgstr "Default Debit Account of the Journal"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,deposit_date:0
 msgid "Deposit Date"
 msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -188,19 +182,6 @@ msgid "Draft"
 msgstr "Draft"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:159
-#, python-format
-msgid "Error!"
-msgstr "Error!"
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:129
-#: code:addons/account_check_deposit/account_deposit.py:140
-#, python-format
-msgid "Error:"
-msgstr ""
-
-#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
 msgstr ""
@@ -209,6 +190,11 @@ msgstr ""
 #: field:account.check.deposit,id:0
 msgid "ID"
 msgstr ""
+
+#. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr "It acts as a default account for debit amount"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -227,6 +213,11 @@ msgid "Journal Items"
 msgstr "Journal Items"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
 msgstr ""
@@ -239,7 +230,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
 msgid "Lines"
-msgstr ""
+msgstr "Lines"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -247,7 +238,7 @@ msgid "List of checks:"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:253
+#: code:addons/account_check_deposit/models/account_deposit.py:232
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
 msgstr ""
@@ -260,7 +251,7 @@ msgstr "Name"
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
 msgid "Number of Checks"
-msgstr ""
+msgstr "Number of Checks"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -270,7 +261,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,is_reconcile:0
 msgid "Reconcile"
-msgstr ""
+msgstr "Reconcile"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -283,8 +274,8 @@ msgid "Status"
 msgstr "Status"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:130
-#: code:addons/account_check_deposit/account_deposit.py:141
+#: code:addons/account_check_deposit/models/account_deposit.py:123
+#: code:addons/account_check_deposit/models/account_deposit.py:133
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -292,7 +283,7 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:160
+#: code:addons/account_check_deposit/models/account_deposit.py:145
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
@@ -302,7 +293,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
 msgid "Total Amount"
-msgstr ""
+msgstr "Total Amount"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
