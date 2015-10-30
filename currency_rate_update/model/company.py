@@ -25,15 +25,6 @@ from openerp import models, fields, api
 class res_company(models.Model):
     """override company to add currency update"""
 
-    @api.multi
-    def _compute_multi_curr_enable(self):
-        "check if multi company currency is enabled"
-        company_currency = self.env['res.currency'].search([('company_id',
-                                                             '!=', False)])
-        for company in self:
-            company.multi_company_currency_enable = \
-                1 if company_currency else 0
-
     @api.one
     def button_refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
@@ -45,14 +36,6 @@ class res_company(models.Model):
     auto_currency_up = fields.Boolean(
         string='Automatic Update',
         help="Automatic update of the currencies for this company")
-    # Function field that allows to know the
-    # multi company currency implementation
-    multi_company_currency_enable = fields.Boolean(
-        string='Multi company currency', translate=True,
-        compute="_compute_multi_curr_enable",
-        help="When this option is unchecked it will allow users "
-             "to set a distinct currency updates on each company."
-        )
     # List of services to fetch rates
     services_to_use = fields.One2many(
         'currency.rate.update.service',

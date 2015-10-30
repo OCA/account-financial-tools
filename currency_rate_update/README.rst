@@ -92,6 +92,7 @@ Contributors
 * Agustin Cruz <openpyme.mx> (BdM)
 * Dorin Hongu <dhongu@gmail.com> (BNR)
 * Fekete Mihai <feketemihai@gmail.com> (Port to V8)
+* Vincent Renaville <vincent.renaville@camptocamp.com> (Port to V9)
 
 Maintainer
 ----------
