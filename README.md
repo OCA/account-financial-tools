@@ -30,7 +30,6 @@ addon | version | summary
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
 [account_chart_update](account_chart_update/) | 8.0.1.2.0 (unported) | Detect changes and update the Account Chart from a template
 [account_check_deposit](account_check_deposit/) | 8.0.0.1.0 (unported) | Manage deposit of checks to the bank
-[account_compute_tax_amount](account_compute_tax_amount/) | 8.0.1.0.0 (unported) | Recompute tax_amount
 [account_constraints](account_constraints/) | 8.0.1.1.0 (unported) | Account Constraints
 [account_credit_control](account_credit_control/) | 8.0.0.3.0 (unported) | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 (unported) | Credit control dunning fees
