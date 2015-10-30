@@ -3,14 +3,26 @@
 # * account_check_deposit
 # 
 # Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013-2014
 # Florian Hatat, 2015
+# Florian Hatat, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# John Toro <johntoro@gmail.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Miku Laitinen <miku.laitinen@gmail.com>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-07-06 10:05+0000\n"
-"Last-Translator: Florian Hatat\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:10+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,11 +39,6 @@ msgstr "Compte Remise de Chèque"
 #: field:res.company,check_deposit_account_id:0
 msgid "Account for Check Deposits"
 msgstr "Compte pour les remises de chèques"
-
-#. module: account_check_deposit
-#: constraint:account.check.deposit:0
-msgid "All the checks of the deposit must be in the currency of the deposit"
-msgstr "Tous les chèques doivent être émis dans la même devise que la remise."
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -77,14 +84,14 @@ msgid "Check Deposit"
 msgstr "Remise de chèque"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:194
-#: code:addons/account_check_deposit/account_deposit.py:216
+#: code:addons/account_check_deposit/models/account_deposit.py:180
+#: code:addons/account_check_deposit/models/account_deposit.py:202
 #, python-format
 msgid "Check Deposit %s"
 msgstr "Remise de chèque %s"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:203
+#: code:addons/account_check_deposit/models/account_deposit.py:189
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -129,12 +136,6 @@ msgid "Company"
 msgstr "Société"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:252
-#, python-format
-msgid "Configuration Error:"
-msgstr "Erreur de configuration :"
-
-#. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
 msgstr "Créé par"
@@ -177,6 +178,11 @@ msgid "Deposit Date"
 msgstr "Date du Versement"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Done"
@@ -189,19 +195,6 @@ msgid "Draft"
 msgstr "Brouillon"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:159
-#, python-format
-msgid "Error!"
-msgstr "Erreur!"
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:129
-#: code:addons/account_check_deposit/account_deposit.py:140
-#, python-format
-msgid "Error:"
-msgstr "Erreur :"
-
-#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
 msgstr "Grouper par"
@@ -210,6 +203,11 @@ msgstr "Grouper par"
 #: field:account.check.deposit,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -226,6 +224,11 @@ msgstr "Pièce comptable"
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Items"
 msgstr "Écritures comptables"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr ""
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
@@ -248,7 +251,7 @@ msgid "List of checks:"
 msgstr "Liste des chèques :"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:253
+#: code:addons/account_check_deposit/models/account_deposit.py:232
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
 msgstr "Compte manquant pour les remises de chèques de la société \"%s\"."
@@ -284,8 +287,8 @@ msgid "Status"
 msgstr "État"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:130
-#: code:addons/account_check_deposit/account_deposit.py:141
+#: code:addons/account_check_deposit/models/account_deposit.py:123
+#: code:addons/account_check_deposit/models/account_deposit.py:133
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -293,7 +296,7 @@ msgid ""
 msgstr "Le chèque d'un montant de %s portant la référence \"%s\" est émis dans la devise %s mais la remise est dans la devise %s."
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:160
+#: code:addons/account_check_deposit/models/account_deposit.py:145
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
