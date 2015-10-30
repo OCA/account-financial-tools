@@ -34,18 +34,15 @@
                             <group name="left">
                                 <field name="deposit_date" />
                                 <field name="journal_id"
-                                    widget="selection"
-                                    on_change="onchange_journal_id(journal_id, context)"/>
+                                    widget="selection"/>
                                 <field name="journal_default_account_id"
                                     invisible="1"/>
                                 <field name="currency_id"
-                                    groups="base.group_multi_currency"
-                                    on_change="onchange_currency_id(currency_id, company_id, context)"/>
+                                    groups="base.group_multi_currency"/>
                                 <field name="partner_bank_id"/>
                             </group>
                             <group name="right">
                                 <field name="company_id"
-                                       on_change="onchange_company_id(company_id, currency_id, context)"
                                        groups="base.group_multi_company"/>
                                 <field name="currency_none_same_company_id"
                                     invisible="1"/>
