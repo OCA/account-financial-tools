@@ -75,7 +75,7 @@ class AccountCheckDeposit(models.Model):
         required=True, states={'done': [('readonly', '=', True)]})
     journal_default_account_id = fields.Many2one(
         'account.account', related='journal_id.default_debit_account_id',
-        string='Default Debit Account of the Journal')
+        string='Default Debit Account of the Journal', readonly=True)
     currency_id = fields.Many2one(
         'res.currency', string='Currency', required=True,
         states={'done': [('readonly', '=', True)]})
