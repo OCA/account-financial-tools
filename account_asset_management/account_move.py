@@ -38,27 +38,7 @@ class account_move(orm.Model):
         res = ['period_id', 'journal_id', 'date']
         return res
     
-    def unlink(self, cr, uid, ids, context=None, check=True):
-        if not context:
-            context = {}
-        depr_obj = self.pool.get('account.asset.depreciation.line')
-        for move_id in ids:
-            depr_ids = depr_obj.search(
-                cr, uid,
-                [('move_id', '=', move_id),
-                 ('type', 'in', ['depreciate', 'remove'])])
-            if depr_ids and not context.get('unlink_from_asset'):
-                raise orm.except_orm(
-                    _('Error!'),
-                    _("You are not allowed to remove an accounting entry "
-                      "linked to an asset."
-                      "\nYou should remove such entries from the asset."))
-            # trigger store function
-            depr_obj.write(cr, uid, depr_ids, {'move_id': False}, context)
-        return super(account_move, self).unlink(
-            cr, uid, ids, context=context, check=check)
-
-    def write(self, cr, uid, ids, vals, context=None):
+    def _asset_control_on_write(self, cr, uid, ids, vals, context=None):
         fields_affects = self._get_fields_affects_asset_move()
         if set(vals).intersection(fields_affects):
             if isinstance(ids, (int, long)):
@@ -73,6 +53,35 @@ class account_move(orm.Model):
                         _('Error!'),
                         _("You cannot change an accounting entry "
                           "linked to an asset depreciation line."))
+        return True
+                    
+    def _asset_control_on_unlink(self, cr, uid, ids, context=None, check=True):
+        depr_obj = self.pool.get('account.asset.depreciation.line')
+        for move_id in ids:
+            depr_ids = depr_obj.search(
+                cr, uid,
+                [('move_id', '=', move_id),
+                 ('type', 'in', ['depreciate', 'remove'])])
+            if depr_ids and not context.get('unlink_from_asset'):
+                raise orm.except_orm(
+                    _('Error!'),
+                    _("You are not allowed to remove an accounting entry "
+                      "linked to an asset."
+                      "\nYou should remove such entries from the asset."))
+            # trigger store function
+            depr_obj.write(cr, uid, depr_ids, {'move_id': False}, context)
+        return True
+    
+    def unlink(self, cr, uid, ids, context=None, check=True):
+        if not context:
+            context = {}
+        self._asset_control_on_unlink(cr, uid, ids, context, check)
+        return super(account_move, self).unlink(
+            cr, uid, ids, context=context, check=check)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        self._asset_control_on_write(cr, uid, ids, vals, context)
+        
         return super(account_move, self).write(cr, uid, ids, vals, context)
 
 
@@ -92,6 +101,33 @@ class account_move_line(orm.Model):
         res = ['credit', 'debit', 'account_id', 'journal_id', 'date',
          'asset_category_id', 'asset_id', 'tax_code_id', 'tax_amount']
         return res
+    
+    def _asset_control_on_create(self, cr, uid, vals, context=None, check=True):
+        if vals.get('asset_id') and not context.get('allow_asset'):
+            raise orm.except_orm(_(
+                'Error!'),
+                _("You are not allowed to link "
+                  "an accounting entry to an asset."
+                  "\nYou should generate such entries from the asset."))
+        return True
+    
+    def _asset_control_on_write(self, cr, uid, ids, vals, 
+                                context=None, check=True, update_check=True):
+        fields_affects = self._get_fields_affects_asset_move_line()
+        for move_line in self.browse(cr, uid, ids, context=context):
+            if move_line.asset_id.id:
+                if set(vals).intersection(fields_affects):
+                    raise orm.except_orm(
+                        _('Error!'),
+                        _("You cannot change an accounting item "
+                          "linked to an asset depreciation line."))
+        if vals.get('asset_id'):
+            raise orm.except_orm(
+                _('Error!'),
+                _("You are not allowed to link "
+                  "an accounting entry to an asset."
+                  "\nYou should generate such entries from the asset."))
+        return True
 
     def onchange_account_id(self, cr, uid, ids,
                             account_id=False, partner_id=False, context=None):
@@ -108,12 +144,8 @@ class account_move_line(orm.Model):
     def create(self, cr, uid, vals, context=None, check=True):
         if not context:
             context = {}
-        if vals.get('asset_id') and not context.get('allow_asset'):
-            raise orm.except_orm(_(
-                'Error!'),
-                _("You are not allowed to link "
-                  "an accounting entry to an asset."
-                  "\nYou should generate such entries from the asset."))
+        
+        self._asset_control_on_create(cr, uid, vals, context, check)
         if vals.get('asset_category_id'):
             asset_obj = self.pool.get('account.asset.asset')
             # create asset
@@ -142,20 +174,9 @@ class account_move_line(orm.Model):
 
     def write(self, cr, uid, ids, vals,
               context=None, check=True, update_check=True):
-        fields_affects = self._get_fields_affects_asset_move_line()
-        for move_line in self.browse(cr, uid, ids, context=context):
-            if move_line.asset_id.id:
-                if set(vals).intersection(fields_affects):
-                    raise orm.except_orm(
-                        _('Error!'),
-                        _("You cannot change an accounting item "
-                          "linked to an asset depreciation line."))
-        if vals.get('asset_id'):
-            raise orm.except_orm(
-                _('Error!'),
-                _("You are not allowed to link "
-                  "an accounting entry to an asset."
-                  "\nYou should generate such entries from the asset."))
+        
+        self._asset_control_on_write(cr, uid, ids, vals, context, check, 
+                                     update_check)
         if vals.get('asset_category_id'):
             assert len(ids) == 1, \
                 'This option should only be used for a single id at a time.'
