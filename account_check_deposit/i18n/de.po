@@ -3,13 +3,14 @@
 # * account_check_deposit
 # 
 # Translators:
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-10-26 14:50+0000\n"
+"PO-Revision-Date: 2015-11-06 17:54+0000\n"
+"Last-Translator: Thomas A. Jaeger\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +26,12 @@ msgstr "Scheck-Konto"
 #. module: account_check_deposit
 #: field:res.company,check_deposit_account_id:0
 msgid "Account for Check Deposits"
-msgstr ""
+msgstr "Scheck-Konto"
 
 #. module: account_check_deposit
 #: constraint:account.check.deposit:0
 msgid "All the checks of the deposit must be in the currency of the deposit"
-msgstr ""
+msgstr "Alle Schecks müssen in Kontowährung sein"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -40,33 +41,33 @@ msgstr "Betrag"
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Zurück auf Entwurf"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Bankkonto"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Bank Account Number to Credit:"
-msgstr ""
+msgstr "Gutschrifts-Bankkontennummer"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Bank:"
-msgstr ""
+msgstr "Bank:"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Beneficiary:"
-msgstr ""
+msgstr "Berechtigter:"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Check Currency:"
-msgstr ""
+msgstr "Scheck-Währung:"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -80,7 +81,7 @@ msgstr "Scheckeinreichung"
 #: code:addons/account_check_deposit/account_deposit.py:216
 #, python-format
 msgid "Check Deposit %s"
-msgstr ""
+msgstr "Scheck-Konto %s"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:203
@@ -91,7 +92,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Check Deposit n°"
-msgstr ""
+msgstr "Scheck-Konto Nr."
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -115,7 +116,7 @@ msgstr "Scheckdepotsuche"
 #: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
 #: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
 msgid "Checks Deposits"
-msgstr ""
+msgstr "Scheck-Konten"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company
@@ -131,17 +132,17 @@ msgstr "Unternehmen"
 #: code:addons/account_check_deposit/account_deposit.py:252
 #, python-format
 msgid "Configuration Error:"
-msgstr ""
+msgstr "Konfigurations-Fehler:"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -152,7 +153,7 @@ msgstr "Währung"
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
 msgid "Currency (False if same as company)"
-msgstr ""
+msgstr "Währung (Falsch wenn gleich wie Unternehmenswährung)"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -162,12 +163,12 @@ msgstr "Datum"
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Debtor"
-msgstr ""
+msgstr "Debitor"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,journal_default_account_id:0
 msgid "Default Debit Account of the Journal"
-msgstr ""
+msgstr "Standard Aufwandskonto des Journals"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -198,17 +199,17 @@ msgstr "Fehler!"
 #: code:addons/account_check_deposit/account_deposit.py:140
 #, python-format
 msgid "Error:"
-msgstr ""
+msgstr "Fehler:"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
-msgstr ""
+msgstr "Gruppiert nach"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -229,12 +230,12 @@ msgstr "Journalposten"
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert von"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
@@ -244,13 +245,13 @@ msgstr "Zeilen"
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "List of checks:"
-msgstr ""
+msgstr "Scheckliste:"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:253
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
-msgstr ""
+msgstr "Fehlendes Scheck-Konto im Unternehmen '%s'"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
@@ -260,17 +261,17 @@ msgstr "Name"
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
 msgid "Number of Checks"
-msgstr ""
+msgstr "Anzahl Schecks"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Number of checks:"
-msgstr ""
+msgstr "Anzahl Schecks:"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,is_reconcile:0
 msgid "Reconcile"
-msgstr ""
+msgstr "Ausgleichen"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -289,7 +290,7 @@ msgstr "Status"
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
 "deposit is in currency %s."
-msgstr ""
+msgstr "Beim Scheck mit Betrag %s und Referenz '%s' stimmt die Währung %s nicht mit der Währung des Kontos %s überein.  "
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:160
@@ -297,12 +298,12 @@ msgstr ""
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
 "it."
-msgstr ""
+msgstr "Die Einzahlung '%s' ist bereits bewilligt. Sie müssen sie zuerst absagen bevor Sie sie löschen können."
 
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
 msgid "Total Amount"
-msgstr ""
+msgstr "Gesamtbetrag"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -312,9 +313,9 @@ msgstr "Gesamt:"
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Transfer Date:"
-msgstr ""
+msgstr "Übertragungsdatum:"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 msgid "Validate"
-msgstr ""
+msgstr "Prüfen"
