@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_auto_fy_sequence
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"PO-Revision-Date: 2015-06-03 15:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: account_auto_fy_sequence
+#: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form
+msgid "Day: %(day)s"
+msgstr ""
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:81
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:100
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:133
+#, python-format
+msgid "Error!"
+msgstr "Hata!"
+
+#. module: account_auto_fy_sequence
+#: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form
+msgid "Fiscal Year: %(fy)s"
+msgstr ""
+
+#. module: account_auto_fy_sequence
+#: model:ir.model,name:account_auto_fy_sequence.model_account_journal
+msgid "Journal"
+msgstr "Günlük"
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:101
+#, python-format
+msgid ""
+"The system tried to access a fiscal year sequence but there is more than one"
+" sequence to choose from."
+msgstr ""
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:82
+#, python-format
+msgid ""
+"The system tried to access a fiscal year sequence without specifying the "
+"actual fiscal year."
+msgstr ""
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:138
+#, python-format
+msgid "You cannot change from %s to %s for a sequence with next number > 1"
+msgstr ""

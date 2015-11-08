@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_config_settings" model="ir.ui.view">
+            <field name="name">account.config.settings.inherit</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="model">account.config.settings</field>
+            <field name="arch" type="xml">
+                <div name="account_config" position="inside">
+                    <div>
+                        <field name="use_journal_setting" class="oe_inline"/>
+                        <label for="use_journal_setting"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>

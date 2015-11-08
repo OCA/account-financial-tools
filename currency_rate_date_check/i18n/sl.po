@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * currency_rate_date_check
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-06-13 05:23+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: currency_rate_date_check
+#: model:ir.model,name:currency_rate_date_check.model_res_company
+msgid "Companies"
+msgstr "Družbe"
+
+#. module: currency_rate_date_check
+#: model:ir.model,name:currency_rate_date_check.model_res_currency
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: currency_rate_date_check
+#: field:res.company,currency_rate_max_delta:0
+msgid "Max Time Delta in Days for Currency Rates"
+msgstr "Maksimalna časovna razlika v dnevih za valutne tečaje"
+
+#. module: currency_rate_date_check
+#: sql_constraint:res.company:0
+msgid ""
+"The value of the field 'Max Time Delta in Days for Currency Rates' must be "
+"positive or 0."
+msgstr "Vrednost polja 'Maksimalna časovna razlika v dnevih za valutne tečaje' mora biti pozitivna ali 0."
+
+#. module: currency_rate_date_check
+#: help:res.company,currency_rate_max_delta:0
+msgid ""
+"This is the maximum interval in days between the date associated with the "
+"amount to convert and the date of the nearest currency rate available in "
+"Odoo."
+msgstr "Maksimalni interval v dnevih med datumom povezanim z zneskom, ki se pretvarja in datumom zadnjega valutnega tečaja v Odoo."
+
+#. module: currency_rate_date_check
+#: code:addons/currency_rate_date_check/currency_rate_date_check.py:83
+#, python-format
+msgid ""
+"You are requesting a rate conversion on %s for currency %s but the nearest "
+"rate before that date is dated %s and the maximum currency rate time delta "
+"for your company is %s days"
+msgstr "Zahtevate menjalni tečaj %s za valuto %s, a zadnji tečaj pred tem datumom ima datum %s, 'maksimalna časovna razlika za valutne tečaje' pa je za vašo družbo %s dni"

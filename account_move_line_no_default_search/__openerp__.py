@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Move line search view - disable defaults for period and journal",
-    "version": "0.1",
+    "version": "8.0.0.1.0",
     "author": "Therp BV,Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     'description': """

@@ -20,48 +20,70 @@
 ###############################################################################
 """Wizards for batch posting."""
 
+import logging
+
 from openerp.osv import fields, orm
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.connector.queue.job import job
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from openerp.addons.connector.session import ConnectorSession
+    from openerp.addons.connector.queue.job import job
+except ImportError:
+    _logger.debug('Can not `import connector`.')
+
+    def empty_decorator(func):
+        return func
+    job = empty_decorator
 
 
-class AccountMoveMarker(orm.TransientModel):
+class ValidateAccountMove(orm.TransientModel):
 
     """Wizard to mark account moves for batch posting."""
 
-    _name = "account.move.marker"
-    _inherit = "account.common.report"
-    _description = "Mark Journal Items for batch posting"
+    _inherit = "validate.account.move"
 
     _columns = {
-        'action': fields.selection([
-            ('mark', 'Mark for posting'),
-            ('unmark', 'Unmark for posting'),
-        ], "Action", required=True),
-        'eta': fields.integer('Seconds to wait before starting the jobs')
+        'action': fields.selection([('mark', 'Mark for posting'),
+                                    ('unmark', 'Unmark for posting')],
+                                   "Action", required=True),
+        'eta': fields.integer('Seconds to wait before starting the jobs'),
+        'asynchronous': fields.boolean('Use asynchronous validation'),
     }
 
     _defaults = {
         'action': 'mark',
+        'asynchronous': True,
     }
 
-    def button_mark(self, cr, uid, ids, context=None):
+    def validate_move(self, cr, uid, ids, context=None):
         """Create a single job that will create one job per move.
 
         Return action.
 
         """
         session = ConnectorSession(cr, uid, context=context)
-        for wizard_id in ids:
-            # to find out what _classic_write does, read the documentation.
-            wizard_data = self.read(cr, uid, wizard_id, context=context,
-                                    load='_classic_write')
-            wizard_data.pop('id')
+        wizard_id = ids[0]
+        # to find out what _classic_write does, read the documentation.
+        wizard_data = self.read(cr, uid, wizard_id, context=context,
+                                load='_classic_write')
+        if not wizard_data.get('asynchronous'):
+            return super(ValidateAccountMove, self)\
+                .validate_move(cr, uid, ids, context=context)
+        wizard_data.pop('id')
+        if wizard_data.get('journal_ids'):
+            journals_ids_vals = [(6, False,
+                                  wizard_data.get('journal_ids'))]
+            wizard_data['journal_ids'] = journals_ids_vals
+        if wizard_data.get('period_ids'):
+            periods_ids_vals = [(6, False,
+                                wizard_data.get('period_ids'))]
+            wizard_data['period_ids'] = periods_ids_vals
 
-            if context.get('automated_test_execute_now'):
-                process_wizard(session, self._name, wizard_data)
-            else:
-                process_wizard.delay(session, self._name, wizard_data)
+        if context.get('automated_test_execute_now'):
+            process_wizard(session, self._name, wizard_data)
+        else:
+            process_wizard.delay(session, self._name, wizard_data)
 
         return {'type': 'ir.actions.act_window_close'}
 
@@ -71,34 +93,11 @@ class AccountMoveMarker(orm.TransientModel):
 
             move_obj = self.pool['account.move']
 
-            domain = [('state', '=', 'draft')]
-
-            if wiz.filter == 'filter_period':
-                period_pool = self.pool['account.period']
-                period_ids = period_pool.search(cr, uid, [
-                    ('date_start', '>=', wiz.period_from.date_start),
-                    ('date_stop', '<=', wiz.period_to.date_stop),
-                ], context=context)
-
-                domain.append((
-                    'period_id',
-                    'in',
-                    period_ids
-                ))
-            elif wiz.filter == 'filter_date':
-                domain += [
-                    ('date', '>=', wiz.date_from),
-                    ('date', '<=', wiz.date_to),
-                ]
-
-            if wiz.journal_ids:
-                domain.append((
-                    'journal_id',
-                    'in',
-                    [journal.id for journal in wiz.journal_ids]
-                ))
-
-            move_ids = move_obj.search(cr, uid, domain, context=context)
+            domain = [('state', '=', 'draft'),
+                      ('journal_id', 'in', wiz.journal_ids.ids),
+                      ('period_id', 'in', wiz.period_ids.ids)]
+            move_ids = move_obj.search(cr, uid, domain, order='date',
+                                       context=context)
 
             if wiz.action == 'mark':
                 move_obj.mark_for_posting(cr, uid, move_ids, eta=wiz.eta,

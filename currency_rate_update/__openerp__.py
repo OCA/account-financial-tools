@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Currency Rate Update",
-    "version": "0.7",
+    "version": "8.0.0.7.1",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "website": "http://camptocamp.com",
     "license": "AGPL-3",

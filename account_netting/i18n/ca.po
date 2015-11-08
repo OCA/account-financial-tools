@@ -1,0 +1,139 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+# 
+# Translators:
+# Carles Antolí <carlesantoli@hotmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-20 18:44+0000\n"
+"PO-Revision-Date: 2015-10-19 14:30+0000\n"
+"Last-Translator: Carles Antolí <carlesantoli@hotmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:56
+#, python-format
+msgid "AR/AP netting"
+msgstr "AR / AP xarxa"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:30
+#, python-format
+msgid "All entries must have a receivable or payable account"
+msgstr "Tots els assentaments han de tenir un compte per cobrar o per pagar"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:33
+#, python-format
+msgid "All entries mustn't been reconciled"
+msgstr "Totes les entrades no s'han reconciliat"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:39
+#, python-format
+msgid ""
+"All entries should have a partner and the partner must be the same for all."
+msgstr "Totes les entrades han de tenir una empresa i l'empresa ha de ser la mateixa per a tothom."
+
+#. module: account_netting
+#: field:account.move.make.netting,balance:0
+msgid "Balance"
+msgstr "Balanç"
+
+#. module: account_netting
+#: field:account.move.make.netting,balance_type:0
+msgid "Balance type"
+msgstr "Tipus de Balanç"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+msgid "Compensate"
+msgstr "Compensar"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Compensate entries"
+msgstr "Compensar Assentaments"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_uid:0
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_date:0
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: account_netting
+#: field:account.move.make.netting,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_netting
+#: field:account.move.make.netting,journal:0
+msgid "Journal"
+msgstr "Diari"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_uid:0
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_date:0
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: account_netting
+#: field:account.move.make.netting,move_lines:0
+msgid "Move lines"
+msgstr "Moviment Línies"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Select the journal where storing the journal entries"
+msgstr "Seleccioneu el diari on emmagatzemar els assentaments del diari"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate account entries that are counterpart of the "
+"receivable/payable accounts selected, and reconcile each other, letting this"
+" balance in the partner:"
+msgstr "Aquesta operació generarà anotacions en compte que són la contrapartida dels comptes de cobrament / pagament seleccionats, i reconciliar entre si, deixant aquest balanç en la empresa:"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To pay"
+msgstr "Pagar"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To receive"
+msgstr "Rebre"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:24
+#, python-format
+msgid "You should compensate at least 2 journal entries."
+msgstr "Ha de compensar almenys 2 assentaments del diari."
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "or"
+msgstr "o"

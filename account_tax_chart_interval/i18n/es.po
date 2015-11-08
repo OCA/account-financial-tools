@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_tax_chart_interval
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
+"PO-Revision-Date: 2015-09-29 09:08+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_tax_chart_interval
+#: model:ir.model,name:account_tax_chart_interval.model_account_tax_chart
+msgid "Account tax chart"
+msgstr ""
+
+#. module: account_tax_chart_interval
+#: field:account.tax.chart,period_to:0
+msgid "End period"
+msgstr "Periodo final"
+
+#. module: account_tax_chart_interval
+#: field:account.tax.chart,fiscalyear_id:0
+msgid "Fiscal year"
+msgstr "Ejercicio fiscal"
+
+#. module: account_tax_chart_interval
+#: field:account.tax.chart,period_from:0
+msgid "Start period"
+msgstr "Periodo inicial"
+
+#. module: account_tax_chart_interval
+#: model:ir.model,name:account_tax_chart_interval.model_account_tax_code
+msgid "Tax Code"
+msgstr "Código de impuesto"

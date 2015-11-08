@@ -1,0 +1,181 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_reversal
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
+"PO-Revision-Date: 2015-09-30 11:27+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_reversal
+#: model:ir.model,name:account_reversal.model_account_move
+msgid "Account Entry"
+msgstr "Knjigovodski vnos"
+
+#. module: account_reversal
+#: view:account.move.reverse:account_reversal.view_account_move_reverse
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: account_reversal
+#: help:account.move,to_be_reversed:0
+msgid "Check this box if your entry has to bereversed at the end of period."
+msgstr "Označite, če se vnos ob koncu obdobja preobrne."
+
+#. module: account_reversal
+#: view:account.move.reverse:account_reversal.view_account_move_reverse
+msgid "Create reversal journal entries"
+msgstr "Ustvari preobrnjene dnevniške vnose"
+
+#. module: account_reversal
+#: model:ir.model,name:account_reversal.model_account_move_reverse
+msgid "Create reversal of account moves"
+msgstr "Ustvari preobrnjene kontne premike"
+
+#. module: account_reversal
+#: field:account.move.reverse,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_reversal
+#: field:account.move.reverse,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_reversal
+#: help:account.move.reverse,date:0
+msgid ""
+"Enter the date of the reversal account entries. By default, OpenERP proposes"
+" the first day of the next period."
+msgstr "Vnos datuma za preobrnjene kontne vnose. Privzeto OpenERP predlaga prvi dan naslednjega obdobja."
+
+#. module: account_reversal
+#: field:account.move.reverse,move_prefix:0
+msgid "Entries Ref. Prefix"
+msgstr "Predpona sklica vnosov"
+
+#. module: account_reversal
+#: field:account.move.reverse,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_reversal
+#: help:account.move.reverse,period_id:0
+msgid "If empty, take the period of the date."
+msgstr "Če je prazno, upošteva obdobje datuma."
+
+#. module: account_reversal
+#: help:account.move.reverse,journal_id:0
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr "Če je prazno, upošteva dnevnik dnevniškega vnosa, ki bo preobrnjen."
+
+#. module: account_reversal
+#: field:account.move.reverse,move_line_prefix:0
+msgid "Items Name Prefix"
+msgstr "Predpona naziva postavk"
+
+#. module: account_reversal
+#: view:account.move:account_reversal.view_account_move_reversal_filter
+#: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
+#: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
+msgid "Journal Entries to be Reversed"
+msgstr "Dnevniški vnosi, ki bodo preobrnjeni"
+
+#. module: account_reversal
+#: field:account.move.reverse,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: account_reversal
+#: field:account.move.reverse,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_reversal
+#: help:account.move.reverse,move_prefix:0
+msgid ""
+"Prefix that will be added to the 'Ref' of the journal entry to be reversed "
+"to create the 'Ref' of the reversal journal entry (no space added after the "
+"prefix)."
+msgstr "Predpona, ki bo dodana sklicu dnevniškega vnosa, ki bo preobrnjen, za ustvarjanje sklica preobrnjenih dnevniških vnosov (brez prostora po predponi)."
+
+#. module: account_reversal
+#: help:account.move.reverse,move_line_prefix:0
+msgid ""
+"Prefix that will be added to the name of the journal item to be reversed to "
+"create the name of the reversal journal item (a space is added after the "
+"prefix)."
+msgstr "Predpona, ki bo dodana sklicu dnevniške postavke, ki bo preobrnjena, za ustvarjanje sklica preobrnjenih dnevniških postavk (s prostorom po predponi)."
+
+#. module: account_reversal
+#: field:account.move.reverse,date:0
+msgid "Reversal Date"
+msgstr "Datum preobrnitve"
+
+#. module: account_reversal
+#: code:addons/account_reversal/wizard/account_move_reverse.py:114
+#, python-format
+msgid "Reversal Entries"
+msgstr "Preobrnjeni vnosi"
+
+#. module: account_reversal
+#: field:account.move,reversal_id:0
+msgid "Reversal Entry"
+msgstr "Preobrnjeni vnos"
+
+#. module: account_reversal
+#: field:account.move.reverse,journal_id:0
+msgid "Reversal Journal"
+msgstr "Preobrnjeni dnevnik"
+
+#. module: account_reversal
+#: field:account.move.reverse,period_id:0
+msgid "Reversal Period"
+msgstr "Preobrnjeno obdobje"
+
+#. module: account_reversal
+#: view:account.move.reverse:account_reversal.view_account_move_reverse
+#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
+msgid "Reverse Entries"
+msgstr "Preobrnjeni vnosi"
+
+#. module: account_reversal
+#: view:account.move.reverse:account_reversal.view_account_move_reverse
+msgid ""
+"This will create reversal for all selected entries whether checked 'to be "
+"reversed' or not."
+msgstr "Preobrne vse izbrane vnose, ne glede, če imajo označbo 'za preobrnitev' ali ne."
+
+#. module: account_reversal
+#: view:account.move:account_reversal.view_account_move_reversal_filter
+#: field:account.move,to_be_reversed:0
+msgid "To Be Reversed"
+msgstr "Za preobrnitev"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:82
+#, python-format
+msgid "Wrong company Journal is %s but we have %s"
+msgstr "Napačen dnevnik družbe je %s,  a mi imamo %s"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:85
+#, python-format
+msgid "Wrong company Period is %s but we have %s"
+msgstr "Napačno obdobje družbe je %s, a mi imamo %s"
+
+#. module: account_reversal
+#: view:account.move.reverse:account_reversal.view_account_move_reverse
+msgid "or"
+msgstr "ali"

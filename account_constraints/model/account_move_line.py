@@ -24,6 +24,12 @@ from openerp import models, api, exceptions, _
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
+    @api.model
+    def _get_write_authorized_fields(self):
+        """ This method can be overrride to add some field that can be written
+        directly on account move line """
+        return ["reconcile_id", "reconcile_partial_id"]
+
     @api.multi
     def _authorized_reconcile(self, vals):
         """ Check if only reconcile_id and/or reconcile_partial_id are altered.
@@ -33,7 +39,7 @@ class AccountMoveLine(models.Model):
         """
         if not vals:
             return False
-        rec_keys = set(["reconcile_id", "reconcile_partial_id"])
+        rec_keys = set(self._get_write_authorized_fields())
         write_keys = set(vals)
         return rec_keys.issuperset(write_keys)
 
@@ -126,6 +132,9 @@ class AccountMoveLine(models.Model):
     @api.constrains('amount_currency')
     def _check_currency_amount(self):
         for l in self:
+            # If account have a second currency, don't apply constraint
+            if l.account_id.currency_id:
+                continue
             if l.amount_currency:
                 if ((l.amount_currency > 0.0 and l.credit > 0.0) or
                         (l.amount_currency < 0.0 and l.debit > 0.0)):
