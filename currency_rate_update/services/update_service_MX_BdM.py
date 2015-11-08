@@ -69,10 +69,10 @@ class MX_BdM_getter(Currency_getter_interface):
         if main_currency in currency_array:
             currency_array.remove(main_currency)
 
-        # Suported currencies
-        suported = ['MXN', 'USD', 'EUR']
+        # Supported currencies
+        supported = ['MXN', 'USD', 'EUR']
         for curr in currency_array:
-            if curr in suported:
+            if curr in supported:
                 # Get currency data
                 main_rate = self.rate_retrieve(curr)
                 if main_currency == 'MXN':
