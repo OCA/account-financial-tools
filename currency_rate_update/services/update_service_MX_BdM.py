@@ -40,11 +40,11 @@ class MX_BdM_getter(Currency_getter_interface):
         url = ''
 
         if curr == 'USD':
-            url = ('http://www.banxico.org.mx/rsscb/rss?')
-                        ('BMXC_canal=pagos&BMXC_idioma=es')
+            url = ('http://www.banxico.org.mx/rsscb/rss?'
+                   'BMXC_canal=pagos&BMXC_idioma=es')
         elif curr == 'EUR':
-            url = ('http://www.banxico.org.mx/rsscb/rss?')
-                        ('BMXC_canal=euro&BMXC_idioma=es')
+            url = ('http://www.banxico.org.mx/rsscb/rss?'
+                   'BMXC_canal=euro&BMXC_idioma=es')
 
         from xml.dom.minidom import parse
         from StringIO import StringIO
