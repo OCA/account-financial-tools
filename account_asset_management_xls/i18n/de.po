@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2015-10-26 14:50+0000\n"
 "PO-Revision-Date: 2015-06-03 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
@@ -49,12 +49,12 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
@@ -102,17 +102,17 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert von"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:371

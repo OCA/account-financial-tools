@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2015-10-26 14:50+0000\n"
+"PO-Revision-Date: 2015-11-05 16:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -45,12 +45,12 @@ msgstr "Erzeuge Konto-Umkehrbuchungen"
 #. module: account_reversal
 #: field:account.move.reverse,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: account_reversal
 #: field:account.move.reverse,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: account_reversal
 #: help:account.move.reverse,date:0
@@ -67,7 +67,7 @@ msgstr "Ref.-Präfix des Eintrags"
 #. module: account_reversal
 #: field:account.move.reverse,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_reversal
 #: help:account.move.reverse,period_id:0
@@ -94,12 +94,12 @@ msgstr "Umzukehrende Journalbuchungen"
 #. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert von"
 
 #. module: account_reversal
 #: field:account.move.reverse,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_reversal
 #: help:account.move.reverse,move_prefix:0
@@ -161,6 +161,18 @@ msgstr "Dies wird für alle ausgewählten Buchungen eine Umkehr anlegen, ob 'Umz
 #: field:account.move,to_be_reversed:0
 msgid "To Be Reversed"
 msgstr "Umzukehren"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:82
+#, python-format
+msgid "Wrong company Journal is %s but we have %s"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:85
+#, python-format
+msgid "Wrong company Period is %s but we have %s"
+msgstr ""
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse

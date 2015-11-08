@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2015-10-26 14:50+0000\n"
+"PO-Revision-Date: 2015-11-05 16:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr "Eine Mahnregelstufe"
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
@@ -78,17 +78,17 @@ msgstr "Fest"
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert von"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_credit_control_dunning_fees
 #: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
