@@ -27,11 +27,6 @@
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
     'summary': '',
-    'description': """
-Account Journal Transfer
-========================
-Make transfers between journals
-    """,
     'depends': [
         'account',
     ],
