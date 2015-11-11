@@ -4,7 +4,6 @@
         <record id="update_tax_config_form" model="ir.ui.view">
             <field name="name">Update tax config form"</field>
             <field name="model">account.update.tax.config</field>
-            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Taxes">
                     <field name="name"
@@ -87,7 +86,6 @@
         <record id="update_tax_config_line_tree" model="ir.ui.view">
             <field name="name">Update tax config line tree"</field>
             <field name="model">account.update.tax.config.line</field>
-            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Taxes" editable="bottom">
                     <field name="source_tax_id"/>

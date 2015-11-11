@@ -21,7 +21,7 @@
     "name": "Wizard to validate multiple moves",
     "version": "1.0",
     "depends": ["base", "account", "account_constraints"],
-    "author": "Camptocamp",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     "description": """
 Re-defining a base wizard (validate all moves in a period for a journal),

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="view_account_asset_report_wizard" model="ir.ui.view">
+      <field name="name">Financial Assets report</field>
+      <field name="model">wiz.account.asset.report</field>
+      <field name="arch" type="xml">
+        <form string="Financial Assets report" version="7.0">
+          <group col="2" colspan="4">
+            <field name="fiscalyear_id"/>
+            <field name="parent_asset_id"/>
+          </group>
+          <footer>
+            <button name="xls_export" icon="gtk-execute" string="Generate Report" type="object" context="{'xls_export':1}" default_focus="1" class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_account_asset_report_wizard" model="ir.actions.act_window">
+      <field name="name">Financial Assets report</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">wiz.account.asset.report</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_account_asset_report_wizard"/>
+      <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Financial Assets report"
+        parent="account.final_accounting_reports"
+        action="action_account_asset_report_wizard"
+        id="menu_account_asset_report_wizard"
+        sequence="50"
+        icon="STOCK_JUSTIFY_FILL"/>
+
+  </data>
+</openerp>

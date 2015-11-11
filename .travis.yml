@@ -1,32 +1,41 @@
-# Config file .travis.yml
-
 language: python
 
 python:
   - "2.7"
 
-env:
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" EXCLUDE="account_constraints,account_partner_required,async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="account_constraints,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="account_partner_required"
-  - VERSION="7.0" ODOO_REPO="odoo/odoo" INCLUDE="async_move_line_importer"
+sudo: false
+cache: pip
 
-  - VERSION="7.0" ODOO_REPO="OCA/OCB"   EXCLUDE="account_constraints, account_partner_required,async_move_line_importer,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_constraints,account_move_validation_improvement,account_default_draft_move,account_move_batch_validate"
-  - VERSION="7.0" ODOO_REPO="OCA/OCB"   INCLUDE="account_partner_required"
-  - VERSION="7.0" ODOO_REPO="OCA/OCB" INCLUDE="async_move_line_importer"
+addons:
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+      - python-lxml # because pip installation is slow
+      - python-simplejson
+      - python-serial
+
+env:
+  global:
+  - VERSION="7.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0" UNIT_TEST="1"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: "XzZzWhiVWXHI+tmcdYH0rPjietxvr1nUXuCRiqnDY3fM0lq6RmtwOlpDDwYEiX+9fHAE8mDttlJ7H4J/YZ+0ugwZxeM10yuT7FwkJY9kPvBe6T59P9aD9R6mSC/da4JGVd+Th5QXDBuBGRBVdY/qBT2lagHuSzBZdKwvMMsaBtA="
+
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="OCA/OCB
 
 virtualenv:
   system_site_packages: true
 
 install:
   - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - git clone https://github.com/OCA/connector $HOME/connector -b ${VERSION}
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
-  - travis_install_nightly ${VERSION}
+  - travis_install_nightly
 
 script:
   - travis_run_tests
 
 after_success:
-  coveralls
+  - travis_after_tests_success

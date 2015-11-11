@@ -1,0 +1,48 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * account_balance_line
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"PO-Revision-Date: 2015-06-03 16:27+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_balance_line
+#: view:account.move.line:0
+msgid "Account"
+msgstr ""
+
+#. module: account_balance_line
+#: view:account.move.line:0
+msgid "{'invisible_balance': False}"
+msgstr ""
+
+#. module: account_balance_line
+#: view:account.move.line:0
+msgid "{'group_by': 'account_id', 'invisible_balance': False}"
+msgstr ""
+
+#. module: account_balance_line
+#: view:account.move.line:0
+msgid "Total Balance"
+msgstr ""
+
+#. module: account_balance_line
+#: model:ir.model,name:account_balance_line.model_account_move_line
+msgid "Journal Items"
+msgstr "Items Diários"
+
+#. module: account_balance_line
+#: field:account.move.line,line_balance:0
+msgid "Balance"
+msgstr ""

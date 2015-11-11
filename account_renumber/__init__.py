@@ -23,4 +23,4 @@
 Account renumber wizard
 """
 
-import wizard
+from . import wizard

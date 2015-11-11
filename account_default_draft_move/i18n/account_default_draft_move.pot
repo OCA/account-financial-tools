@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 17:48+0000\n"
-"PO-Revision-Date: 2013-10-18 17:48+0000\n"
+"POT-Creation-Date: 2015-02-19 10:15+0000\n"
+"PO-Revision-Date: 2015-02-19 10:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgid "Bank Statement"
 msgstr ""
 
 #. module: account_default_draft_move
-#: code:addons/account_default_draft_move/account.py:47
+#: code:addons/account_default_draft_move/account.py:59
 #, python-format
 msgid "Error!"
 msgstr ""
@@ -42,9 +42,19 @@ msgid "Invoice"
 msgstr ""
 
 #. module: account_default_draft_move
-#: code:addons/account_default_draft_move/account.py:47
+#: code:addons/account_default_draft_move/account.py:60
 #, python-format
 msgid "You cannot modify a posted entry of this journal.\n"
 "First you should set the journal to allow cancelling entries."
 msgstr ""
 
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_config_settings
+msgid "account.config.settings"
+msgstr ""
+
+#. module: account_default_draft_move
+#: field:account.config.settings,use_journal_setting:0
+#: model:ir.model.fields,field_description:account_default_draft_move.field_account_config_settings_use_journal_setting
+msgid "Use journal setting to post journal entries on invoice and bank statement validation"
+msgstr ""

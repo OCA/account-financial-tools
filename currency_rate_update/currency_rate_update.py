@@ -12,7 +12,7 @@
 #     - if company_currency <> CHF, you can now update CHF via Admin.ch
 #       (same for EUR with ECB webservice and PLN with NBP webservice)
 #     For more details, see Launchpad bug #645263
-#     - mecanism to check if rates given by the webservice are "fresh"
+#     - mechanism to check if rates given by the webservice are "fresh"
 #       enough to be written in OpenERP
 #       ('max_delta_days' parameter for each currency update service)
 #    Ported to OpenERP 7.0 by Lorenzo Battistini
@@ -39,17 +39,25 @@
 
 import logging
 import time
+import pytz
+import dateutil
+import feedparser
 from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
-from openerp.osv import fields, osv, orm
+
+from openerp.tools import (
+    DEFAULT_SERVER_DATETIME_FORMAT,
+    DEFAULT_SERVER_DATE_FORMAT,
+    ustr,
+)
+from openerp.osv import fields, orm
+from openerp.osv.osv import except_osv
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
 
-class Currency_rate_update_service(osv.Model):
-    """Class that tells for wich services wich currencies have to be updated
+class CurrencyRateUpdateService(orm.Model):
+    """Class that tells for which services which currencies have to be updated
 
     """
     _name = "currency.rate.update.service"
@@ -69,7 +77,7 @@ class Currency_rate_update_service(osv.Model):
                 # http://www.cbwiki.net/wiki/index.php/Specification_1.1
                 # This RSS format is used by other national banks
                 #  (Thailand, Malaysia, Mexico...)
-                ('CA_BOC_getter', 'Bank of Canada - noon rates'),
+                ('BankOfCanadaGetter', 'Bank of Canada - noon rates'),
             ],
             "Webservice to use",
             required=True
@@ -87,18 +95,18 @@ class Currency_rate_update_service(osv.Model):
             'res.company',
             'linked company',
         ),
-        # Note fileds that will be used as a logger
+        # Note fields that will be used as a logger
         'note': fields.text('update notice'),
         'max_delta_days': fields.integer(
             'Max delta days',
             required=True,
             help="If the time delta between the "
             "rate date given by the webservice and "
-            "the current date exeeds this value, "
+            "the current date exceeds this value, "
             "then the currency rate is not updated in OpenERP."
         ),
     }
-    _defaults = {'max_delta_days': lambda *a: 4}
+    _defaults = {'max_delta_days': 4}
     _sql_constraints = [
         (
             'curr_service_unique',
@@ -122,7 +130,7 @@ class Currency_rate_update_service(osv.Model):
     ]
 
 
-class Currency_rate_update(osv.Model):
+class CurrencyRateUpdate(orm.Model):
     """Class that handle an ir cron call who will
     update currencies based on a web url"""
     _name = "currency.rate.update"
@@ -182,13 +190,14 @@ class Currency_rate_update(osv.Model):
         cron_id = self.get_cron_id(cr, uid, context)
         return self.pool.get('ir.cron').write(cr, uid, [cron_id], datas)
 
-    def run_currency_update(self, cr, uid):
-        "update currency at the given frequence"
-        factory = Currency_getter_factory()
+    def run_currency_update(self, cr, uid, context=None):
+        """Update currency at the given frequency"""
         curr_obj = self.pool.get('res.currency')
         rate_obj = self.pool.get('res.currency.rate')
-        companies = self.pool.get('res.company').search(cr, uid, [])
-        for comp in self.pool.get('res.company').browse(cr, uid, companies):
+        company_obj = self.pool.get('res.company')
+        companies = company_obj.search(cr, uid, [], context=context)
+        errors = []
+        for comp in company_obj.browse(cr, uid, companies, context=context):
             # The multi company currency can beset or no so we handle
             # The two case
             if not comp.auto_currency_up:
@@ -197,34 +206,38 @@ class Currency_rate_update(osv.Model):
             # The main rate should be set at  1.00
             main_curr_ids = curr_obj.search(
                 cr, uid,
-                [('base', '=', True), ('company_id', '=', comp.id)]
+                [('base', '=', True), ('company_id', '=', comp.id)],
+                context=context
             )
             if not main_curr_ids:
                 # If we can not find a base currency for this company
                 # we look for one with no company set
                 main_curr_ids = curr_obj.search(
                     cr, uid,
-                    [('base', '=', True), ('company_id', '=', False)]
+                    [('base', '=', True), ('company_id', '=', False)],
+                    context=context
                 )
             if main_curr_ids:
                 main_curr_rec = curr_obj.browse(cr, uid, main_curr_ids[0])
             else:
                 raise orm.except_orm(
                     _('Error!'),
-                    ('There is no base currency set!')
+                    _('There is no base currency set!')
                 )
             if main_curr_rec.rate != 1:
                 raise orm.except_orm(
-                    _('Error!'),
-                    ('Base currency rate should be 1.00!')
+                    _('Error'),
+                    _('Base currency rate should be 1.00.\n'
+                      'Currency %s has rate of %f')
+                    % (main_curr_rec.name, main_curr_rec.rate)
                 )
             main_curr = main_curr_rec.name
             for service in comp.services_to_use:
                 note = service.note or ''
                 try:
-                    # We initalize the class that will handle the request
+                    # We initialize the class that will handle the request
                     # and return a dict of rate
-                    getter = factory.register(service.service)
+                    getter = register(service.service)
                     curr_to_fetch = map(lambda x: x.name,
                                         service.currency_to_update)
                     res, log_info = getter.get_updated_currency(
@@ -252,6 +265,7 @@ class Currency_rate_update(osv.Model):
                                 cr,
                                 uid,
                                 vals,
+                                context=context
                             )
 
                     # Show the most recent note at the top
@@ -264,78 +278,43 @@ class Currency_rate_update(osv.Model):
                     )
                     service.write({'note': msg})
                 except Exception as exc:
+                    if isinstance(exc, (orm.except_orm, except_osv)):
+                        exc_repr = exc.value
+                    else:
+                        exc_repr = repr(exc)
                     error_msg = "\n%s ERROR : %s %s" % (
                         datetime.today().strftime(
                             DEFAULT_SERVER_DATETIME_FORMAT
                         ),
-                        repr(exc),
+                        exc_repr,
                         note
                     )
-                    _logger.info(repr(exc))
+                    _logger.info(exc_repr)
                     service.write({'note': error_msg})
+                    errors.append(error_msg)
+        return errors
 
 
-class AbstractClassError(Exception):
-    def __str__(self):
-        return 'Abstract Class'
-
-    def __repr__(self):
-        return 'Abstract Class'
-
-
-class AbstractMethodError(Exception):
-    def __str__(self):
-        return 'Abstract Method'
-
-    def __repr__(self):
-        return 'Abstract Method'
-
-
-class UnknowClassError(Exception):
-    def __str__(self):
-        return 'Unknown Class'
-
-    def __repr__(self):
-        return 'Unknown Class'
+def register(class_name):
+    allowed = [
+        'Admin_ch_getter',
+        'PL_NBP_getter',
+        'ECB_getter',
+        'NYFB_getter',
+        'Google_getter',
+        'Yahoo_getter',
+        'Banxico_getter',
+        'BankOfCanadaGetter',
+    ]
+    if class_name in allowed:
+        class_def = eval(class_name)
+        return class_def()
+    else:
+        raise AttributeError("Class %s not defined in module." % class_name)
 
 
-class UnsuportedCurrencyError(Exception):
-    def __init__(self, value):
-        self.curr = value
-
-    def __str__(self):
-        return 'Unsupported currency %s' % self.curr
-
-    def __repr__(self):
-        return 'Unsupported currency %s' % self.curr
-
-
-class Currency_getter_factory():
-    """Factory pattern class that will return
-    a currency getter class base on the name passed
-    to the register method
-
-    """
-    def register(self, class_name):
-        allowed = [
-            'Admin_ch_getter',
-            'PL_NBP_getter',
-            'ECB_getter',
-            'NYFB_getter',
-            'Google_getter',
-            'Yahoo_getter',
-            'Banxico_getter',
-            'CA_BOC_getter',
-        ]
-        if class_name in allowed:
-            class_def = eval(class_name)
-            return class_def()
-        else:
-            raise UnknowClassError
-
-
-class Curreny_getter_interface(object):
-    "Abstract class of currency getter"
+class CurrencyGetterInterface(object):
+    """Abstract class of currency getter"""
 
     log_info = " "
 
@@ -360,20 +339,25 @@ class Curreny_getter_interface(object):
         'ZWD'
     ]
 
-    # Updated currency this arry will contain the final result
+    # Updated currency this array will contain the final result
     updated_currency = {}
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """Interface method that will retrieve the currency
-           This function has to be reinplemented in child
+           This function has to be reimplemented in child
         """
-        raise AbstractMethodError
+        raise NotImplementedError(
+            "Function get_updated_currency not implemented in class %s"
+            % self.__class__
+        )
 
-    def validate_cur(self, currency):
+    def validate_currency(self, currency):
         """Validate if the currency to update is supported"""
         if currency not in self.supported_currency_array:
-            raise UnsuportedCurrencyError(currency)
+            raise AttributeError(
+                'Unsupported currency %s' % currency
+            )
 
     def get_url(self, url):
         """Return a string of a get url query"""
@@ -384,12 +368,12 @@ class Curreny_getter_interface(object):
             objfile.close()
             return rawfile
         except ImportError:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 'Error !',
                 self.MOD_NAME + 'Unable to import urllib !'
             )
         except IOError:
-            raise osv.except_osv(
+            raise orm.except_orm(
                 'Error !',
                 self.MOD_NAME + 'Web Service does not exist !'
             )
@@ -411,12 +395,11 @@ class Curreny_getter_interface(object):
                                           DEFAULT_SERVER_DATE_FORMAT)
         if rate_date.date() != datetime.today().date():
             msg = "The rate timestamp (%s) is not today's date"
-            self.log_info = ("WARNING : %s %s") % (msg, rate_date_str)
+            self.log_info = "WARNING : %s %s" % (msg, rate_date_str)
             _logger.warning(msg, rate_date_str)
 
 
-# Yahoo #######################################################################
-class Yahoo_getter(Curreny_getter_interface):
+class YahooGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Yahoo finance service
     """
@@ -424,13 +407,13 @@ class Yahoo_getter(Curreny_getter_interface):
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """implementation of abstract method of curreny_getter_interface"""
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         url = ('http://download.finance.yahoo.com/d/'
                'quotes.txt?s="%s"=X&f=sl1c1abg')
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             res = self.get_url(url % (main_currency + curr))
             val = res.split(',')[1]
             if val:
@@ -441,8 +424,7 @@ class Yahoo_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# Admin CH ####################################################################
-class Admin_ch_getter(Curreny_getter_interface):
+class Admin_ch_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service
 
@@ -498,9 +480,9 @@ class Admin_ch_getter(Curreny_getter_interface):
         self.supported_currency_array.append('CHF')
 
         _logger.debug(
-            "Supported currencies = " + str(self.supported_currency_array)
+            "Supported currencies = " + ustr(self.supported_currency_array)
         )
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'CHF':
             main_curr_data = self.rate_retrieve(dom, adminch_ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate CHF
@@ -508,7 +490,7 @@ class Admin_ch_getter(Curreny_getter_interface):
             rate_ref = main_curr_data['rate_ref']
             main_rate = rate_curr / rate_ref
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'CHF':
                 rate = main_rate
             else:
@@ -526,8 +508,7 @@ class Admin_ch_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# ECB getter #################################################################
-class ECB_getter(Curreny_getter_interface):
+class ECB_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for ECB service
     """
@@ -580,11 +561,11 @@ class ECB_getter(Curreny_getter_interface):
         self.supported_currency_array.append('EUR')
         _logger.debug("Supported currencies = %s " %
                       self.supported_currency_array)
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'EUR':
             main_curr_data = self.rate_retrieve(dom, ecb_ns, main_currency)
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'EUR':
                 rate = 1 / main_curr_data['rate_currency']
             else:
@@ -601,8 +582,7 @@ class ECB_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# PL NBP ######################################################################
-class PL_NBP_getter(Curreny_getter_interface):
+class PL_NBP_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
@@ -650,14 +630,14 @@ class PL_NBP_getter(Curreny_getter_interface):
         self.supported_currency_array.append('PLN')
         _logger.debug("Supported currencies = %s" %
                       self.supported_currency_array)
-        self.validate_cur(main_currency)
+        self.validate_currency(main_currency)
         if main_currency != 'PLN':
             main_curr_data = self.rate_retrieve(dom, ns, main_currency)
             # 1 MAIN_CURRENCY = main_rate PLN
             main_rate = (main_curr_data['rate_currency'] /
                          main_curr_data['rate_ref'])
         for curr in currency_array:
-            self.validate_cur(curr)
+            self.validate_currency(curr)
             if curr == 'PLN':
                 rate = main_rate
             else:
@@ -674,8 +654,7 @@ class PL_NBP_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# Banco de México #############################################################
-class Banxico_getter(Curreny_getter_interface):
+class Banxico_getter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Banco de México service
 
@@ -731,70 +710,127 @@ class Banxico_getter(Curreny_getter_interface):
         return self.updated_currency, self.log_info
 
 
-# CA BOC #####   Bank of Canada   #############################################
-class CA_BOC_getter(Curreny_getter_interface):
-    """Implementation of Curreny_getter_factory interface
+class BankOfCanadaConnection(object):
+    """Connection object for bankofcanada.ca"""
+    url = 'http://www.bankofcanada.ca/stats/assets/rates_rss/noon/en_%s.xml'
+
+    def __init__(self, currency):
+        self.currency = currency
+
+    def __enter__(self):
+        """As of Jan 2014 BOC is publishing noon rates for about 60 currencies
+        Closing rates are available as well (please note there are only 12
+        currencies reported):
+        http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+        """
+        _logger.debug("BOC currency rate service: connecting...")
+        self.dom = feedparser.parse(self.url % self.currency)
+
+        # check if BOC service is running
+        if self.dom.bozo and self.dom.status != 404:
+            _logger.warn(
+                "Bank of Canada - service is down - try again later..."
+            )
+
+        # check if BOC sent a valid response for this currency
+        if self.dom.status != 200:
+            _logger.warn(
+                "Exchange data for %s is not reported by Bank of Canada."
+                % self.currency
+            )
+            raise orm.except_orm(
+                _('Error'),
+                _('Exchange data for %s is not reported by Bank of '
+                  'Canada.') % ustr(self.currency)
+            )
+
+        _logger.debug("BOC sent a valid RSS file for: " + self.currency)
+
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+    @property
+    def base_currency(self):
+        return self.dom.entries[0].cb_basecurrency
+
+    @property
+    def target_currency(self):
+        return self.dom.entries[0].cb_targetcurrency
+
+    @property
+    def exchange_rate(self):
+        return self.dom.entries[0].cb_exchangerate.split("\n", 1)[0]
+
+    @property
+    def updated(self):
+        return self.dom.entries[0].updated
+
+    @property
+    def date_time(self):
+        parsed_datetime = dateutil.parser.parse(self.updated)
+        return parsed_datetime.astimezone(pytz.utc).replace(tzinfo=None)
+
+
+class BankOfCanadaGetter(CurrencyGetterInterface):
+    """Implementation of Currency_getter_factory interface
     for Bank of Canada RSS service
 
     """
 
-    def get_updated_currency(self, currency_array, main_currency,
-                             max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+    def get_updated_currency(self, currencies, main_currency, max_delta_days):
+        """Implementation of abstract method of Currency_getter_interface
 
-        # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
-        url = ('http://www.bankofcanada.ca/stats/assets/'
-               'rates_rss/noon/en_%s.xml')
-        # closing rates are available as well (please note there are only 12
-        # currencies reported):
-        # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+        :param currencies: List of currency name
+        :type currencies: list of unicode
+        :param main_currency: Name of Company's currency
+        :type main_currency: unicode
+        :param max_delta_days: Maximum allowable days of unsync
+        :type max_delta_days: int
+        :return: Updated list of currencies and their rates and log
+        :rtype: dict, str
+        :raises: orm.except_orm when there is a format error
+        """
 
-        # We do not want to update the main currency
-        if main_currency in currency_array:
-            currency_array.remove(main_currency)
+        errors = []
 
-        import feedparser
-        import pytz
-        from dateutil import parser
+        for currency in currencies:
+            # We do not want to update the main currency
+            if currency == main_currency:
+                continue
+            try:
+                self.validate_currency(currency)
+                with BankOfCanadaConnection(currency) as conn:
 
-        for curr in currency_array:
+                    # check for valid exchange data
+                    if (conn.base_currency == main_currency and
+                            conn.target_currency.startswith(currency)):
+                        self.check_rate_date(conn.date_time, max_delta_days)
+                        self.updated_currency[currency] = conn.exchange_rate
+                        _logger.debug(
+                            "BOC Rate retrieved : %s = %s %s" %
+                            (main_currency, conn.exchange_rate, currency)
+                        )
+                    else:
+                        _logger.warn(
+                            "Exchange data format error for Bank of Canada -"
+                            "%s. Please check provider data format "
+                            "and/or source code." % currency)
+                        raise orm.except_orm(
+                            _('Error'),
+                            _('Exchange data format error for Bank of Canada'
+                              ' - %s') % ustr(currency)
+                        )
+            except (orm.except_orm, except_osv) as e:
+                errors.append(ustr(e.value))
+            except Exception as e:
+                errors.append(ustr(e))
 
-            _logger.debug("BOC currency rate service : connecting...")
-            dom = feedparser.parse(url % curr)
-
-            self.validate_cur(curr)
-
-            # check if BOC service is running
-            if dom.bozo and dom.status != 404:
-                _logger.error("Bank of Canada - service is down - try again\
-                    later...")
-
-            # check if BOC sent a valid response for this currency
-            if dom.status != 200:
-                _logger.error("Exchange data for %s is not reported by Bank\
-                    of Canada." % curr)
-                raise osv.except_osv('Error !', 'Exchange data for %s is not\
-                    reported by Bank of Canada.' % str(curr))
-
-            _logger.debug("BOC sent a valid RSS file for: " + curr)
-
-            # check for valid exchange data
-            if (dom.entries[0].cb_basecurrency == main_currency) and \
-                    (dom.entries[0].cb_targetcurrency == curr):
-                rate = dom.entries[0].cb_exchangerate.split('\n', 1)[0]
-                rate_date_datetime = parser.parse(dom.entries[0].updated)\
-                    .astimezone(pytz.utc).replace(tzinfo=None)
-                self.check_rate_date(rate_date_datetime, max_delta_days)
-                self.updated_currency[curr] = rate
-                _logger.debug("BOC Rate retrieved : %s = %s %s" %
-                              (main_currency, rate, curr))
-            else:
-                _logger.error(
-                    "Exchange data format error for Bank of Canada -"
-                    "%s. Please check provider data format "
-                    "and/or source code." % curr)
-                raise osv.except_osv('Error !',
-                                     'Exchange data format error for\
-                                     Bank of Canada - %s !' % str(curr))
+        if errors:
+            raise orm.except_orm(
+                _("Errors occurred during update"),
+                "\n".join(errors)
+            )
 
         return self.updated_currency, self.log_info

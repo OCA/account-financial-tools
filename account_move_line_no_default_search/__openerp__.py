@@ -21,7 +21,7 @@
 {
     "name": "Move line search view - disable defaults for period and journal",
     "version": "0.1",
-    "author": "Therp BV",
+    "author": "Therp BV,Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     'description': """
 OpenERP 7.0 implements a custom javascript search view for move lines. This

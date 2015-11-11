@@ -24,8 +24,8 @@
 ##############################################################################
 {
     "name": "Currency Rate Update",
-    "version": "0.7",
-    "author": "Camptocamp",
+    "version": "0.8",
+    "author": "Camptocamp,Odoo Community Association (OCA)",
     "website": "http://camptocamp.com",
     "category": "Financial Management/Configuration",
     "description": """Import exchange rates from the Internet.

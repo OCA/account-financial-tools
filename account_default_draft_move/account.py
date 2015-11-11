@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 
-from openerp.osv import orm, osv
+from openerp.osv import orm, osv, fields
 from tools.translate import _
 
 
@@ -30,8 +30,12 @@ class AccountInvoice(orm.Model):
         res = super(AccountInvoice, self).action_move_create(cr, uid, ids,
                                                              context=context)
         move_obj = self.pool.get('account.move')
+        use_journal_setting = bool(self.pool['ir.config_parameter'].get_param(
+            cr, uid, 'use_journal_setting', False))
         for inv in self.browse(cr, uid, ids, context=context):
             if inv.move_id:
+                if use_journal_setting and inv.move_id.journal_id.entry_posted:
+                    continue
                 move_obj.write(cr, uid, [inv.move_id.id], {'state': 'draft'},
                                context=context)
         return res
@@ -39,6 +43,21 @@ class AccountInvoice(orm.Model):
 
 class AccountMove(orm.Model):
     _inherit = 'account.move'
+
+    def _is_update_posted(self, cr, uid, ids, name, args, context=None):
+        res = dict.fromkeys(ids, False)
+        ir_module = self.pool['ir.module.module']
+        if ir_module.search(cr, uid, [('name', '=', 'account_cancel'),
+                                      ('state', '=', 'installed')]):
+            for move in self.browse(cr, uid, ids, context=context):
+                res[move.id] = move.journal_id.update_posted
+        return res
+
+    _columns = {
+        'update_posted': fields.function(
+            _is_update_posted, method=True, type='boolean',
+            string='Allow Cancelling Entries'),
+    }
 
     def button_cancel(self, cr, uid, ids, context=None):
         """ We rewrite function button_cancel, to allow invoice or bank
@@ -62,3 +81,17 @@ class AccountMove(orm.Model):
                        'SET state=%s '
                        'WHERE id IN %s', ('draft', tuple(ids),))
         return True
+
+
+class AccountJournal(orm.Model):
+    _inherit = 'account.journal'
+
+    def __init__(self, pool, cr):
+        super(AccountJournal, self).__init__(pool, cr)
+        # update help of entry_posted flag
+        self._columns['entry_posted'].string = 'Skip \'Draft\' State'
+        self._columns['entry_posted'].help = \
+            """Check this box if you don't want new journal entries
+to pass through the 'draft' state and instead goes directly
+to the 'posted state' without any manual validation."""
+        return

@@ -44,9 +44,15 @@ class AccountBankStatement(orm.Model):
             move_ids = [move_ids]
         # We receive the move created for the bank statement, we set it
         # to draft
+        use_journal_setting = bool(self.pool['ir.config_parameter'].get_param(
+            cr, uid, 'use_journal_setting', False))
         if move_ids:
             move_obj = self.pool.get('account.move')
-            move_obj.write(cr, uid, move_ids,
-                           {'state': 'draft'}, context=context)
+            moves = move_obj.browse(cr, uid, move_ids, context=context)
+            for move in moves:
+                if use_journal_setting and move.journal_id.entry_posted:
+                    continue
+                move_obj.write(cr, uid, [move.id],
+                               {'state': 'draft'}, context=context)
         return move_ids
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

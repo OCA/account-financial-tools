@@ -1,31 +1,42 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* c2c_currency_rate_update
+# 	* c2c_currency_rate_update
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-18 17:52+0000\n"
-"PO-Revision-Date: 2013-11-11 16:24+0000\n"
-"Last-Translator: Alexandre Fayolle - camptocamp "
-"<alexandre.fayolle@camptocamp.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-04-15 20:27+0000\n"
+"PO-Revision-Date: 2015-04-15 16:34-0500\n"
+"Last-Translator: Sandy Carter <sandy.carter@savoirfairelinux.com>\n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-06-12 06:31+0000\n"
-"X-Generator: Launchpad (build 17041)\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #. module: currency_rate_update
-#: view:res.company:0
-msgid "Currency auto update configuration"
-msgstr "Configuration de la mise à jour automatique des taux de change"
+#: code:addons/currency_rate_update/currency_rate_update.py:225
+#, python-format
+msgid "There is no base currency set!"
+msgstr "Il n'y a pas de taux de change de base définie !"
+
+#. module: currency_rate_update
+#: field:res.company,interval_type:0
+msgid "Currency update frequency"
+msgstr "Fréquence de mise à jour"
 
 #. module: currency_rate_update
 #: view:res.company:0
 msgid "Currency updates services"
 msgstr "Services de mise à jour des taux de change"
+
+#. module: currency_rate_update
+#: selection:currency.rate.update.service,service:0
+msgid "Bank of Canada - noon rates"
+msgstr "Banque du Canada - taux du midi"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
@@ -34,13 +45,19 @@ msgstr "Société liée"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:0
-msgid "Rate"
+msgid "Rates"
 msgstr "Taux de change"
 
 #. module: currency_rate_update
-#: view:currency.rate.update.service:0
-msgid "Rates"
-msgstr "Taux de change"
+#: code:addons/currency_rate_update/currency_rate_update.py:832
+#, python-format
+msgid "Errors occurred during update"
+msgstr "Des erreur on eu lieu lors de la mise à jour"
+
+#. module: currency_rate_update
+#: view:res.company:0
+msgid "Refresh Currencies"
+msgstr "Mettre à jour les taux de change"
 
 #. module: currency_rate_update
 #: field:res.company,multi_company_currency_enable:0
@@ -48,14 +65,15 @@ msgid "Multi company currency"
 msgstr "Devies mutli société"
 
 #. module: currency_rate_update
-#: field:res.company,interval_type:0
-msgid "Currency update frequence"
-msgstr "Fréquence de mise à jour"
-
-#. module: currency_rate_update
 #: selection:res.company,interval_type:0
 msgid "Day(s)"
 msgstr "Quotidien"
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/company.py:53
+#, python-format
+msgid "Errors occurred during update:\n"
+msgstr "Des erreur on eu lieu lors de la mise à jour :\n"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,currency_to_update:0
@@ -78,39 +96,60 @@ msgid "Webservice to use"
 msgstr "Service web à utliser"
 
 #. module: currency_rate_update
-#: help:currency.rate.update.service,max_delta_days:0
+#: view:currency.rate.update.service:0
+msgid "Rate"
+msgstr "Taux de change"
+
+#. module: currency_rate_update
+#: field:res.company,auto_currency_up:0
+msgid "Automatic update of the currency this company"
+msgstr "Mise à jour automatique des taux de change"
+
+#. module: currency_rate_update
+#: selection:currency.rate.update.service,service:0
+msgid "European Central Bank"
+msgstr "Banque centrale européenne"
+
+#. module: currency_rate_update
+#: help:res.company,multi_company_currency_enable:0
 msgid ""
-"If the time delta between the rate date given by the webservice and the "
-"current date exeeds this value, then the currency rate is not updated in "
-"OpenERP."
+"If this case is not check you can not set currency is active on two company"
 msgstr ""
+"Si cette case n'est pas cochée vous ne pouvez pas utiliser la mise à jour "
+"sur plusieurs sociétés"
 
 #. module: currency_rate_update
-#: field:res.company,services_to_use:0
-msgid "Currency update services"
-msgstr "Service de mise à jour des taux de change"
+#: help:res.company,interval_type:0
+msgid "Changing this value will also affect other companies"
+msgstr "Modifier cette devise va aussi affecter les autre sociétés"
 
 #. module: currency_rate_update
-#: constraint:currency.rate.update.service:0
-msgid "'Max delta days' must be >= 0"
-msgstr ""
-
-#. module: currency_rate_update
-#: code:addons/currency_rate_update/currency_rate_update.py:89
+#: code:addons/currency_rate_update/currency_rate_update.py:114
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service one time per company !"
 msgstr "Vous ne pouvez utiliser un service qu'une fois par société"
 
 #. module: currency_rate_update
+#: help:currency.rate.update.service,max_delta_days:0
+msgid ""
+"If the time delta between the rate date given by the webservice and the "
+"current date exceeds this value, then the currency rate is not updated in "
+"OpenERP."
+msgstr ""
+"Si le delta de temps entre le taux donné par le service et la date "
+"courante excèdent cette valeur, ce taux de change ne sera pas mis à jour "
+"dans OpenERP."
+
+#. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "Yahoo Finance "
-msgstr ""
+msgstr "Yahoo Finance "
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,max_delta_days:0
 msgid "Max delta days"
-msgstr ""
+msgstr "Delta de jours maximum"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
@@ -118,14 +157,26 @@ msgid "Admin.ch"
 msgstr ""
 
 #. module: currency_rate_update
+#: code:addons/currency_rate_update/currency_rate_update.py:822
+#, python-format
+msgid "Exchange data format error for Bank of Canada - %s"
+msgstr "Erreur de format de donnés pour Banque du Canada - %s"
+
+#. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:0
-msgid "Currencies to update with this service"
-msgstr ""
+msgid "Currencies to Update with this Service"
+msgstr "Taux de change à mettre à jour avec ce service"
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/currency_rate_update.py:224
+#, python-format
+msgid "Error!"
+msgstr "Erreur !"
 
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
@@ -133,15 +184,29 @@ msgid "Week(s)"
 msgstr "Hebdomadaire"
 
 #. module: currency_rate_update
-#: help:res.company,multi_company_currency_enable:0
-msgid ""
-"if this case is not check you can not set currency is active on two company"
-msgstr ""
-"Si cette case n'est pas cochée vous ne pouvez pas utiliser la mise à jour "
-"sur plusieurs sociétés"
+#: code:addons/currency_rate_update/company.py:52
+#: code:addons/currency_rate_update/currency_rate_update.py:229
+#: code:addons/currency_rate_update/currency_rate_update.py:742
+#: code:addons/currency_rate_update/currency_rate_update.py:821
+#, python-format
+msgid "Error"
+msgstr "Erreur"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/currency_rate_update.py:153
+#: field:res.company,services_to_use:0
+msgid "Currency update services"
+msgstr "Service de mise à jour des taux de change"
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/currency_rate_update.py:743
+#, python-format
+msgid "Exchange data for %s is not reported by Bank of Canada."
+msgstr ""
+"Les donnés de taux de change %s ne sont pas reportés par la Banque du "
+"Canada."
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/currency_rate_update.py:184
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 #, python-format
@@ -151,12 +216,27 @@ msgstr "Mise à jour des taux de change"
 #. module: currency_rate_update
 #: view:currency.rate.update.service:0
 msgid "Logs"
+msgstr "Logs"
+
+#. module: currency_rate_update
+#: selection:currency.rate.update.service,service:0
+msgid "Banco de México"
 msgstr ""
 
 #. module: currency_rate_update
-#: field:res.company,auto_currency_up:0
-msgid "Automatical update of the currency this company"
-msgstr "Mise à jour automatique des taux de change"
+#: view:res.company:0
+msgid "Currency Auto Update Configuration"
+msgstr "Configuration de la mise à jour automatique des taux de change"
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/currency_rate_update.py:230
+#, python-format
+msgid ""
+"Base currency rate should be 1.00.\n"
+"Currency %s has rate of %f"
+msgstr ""
+"La devise de base devrait être 1.00.\n"
+"Cette devise %s a un taux de %f"
 
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
@@ -164,18 +244,6 @@ msgid "Month(s)"
 msgstr "Mensuelle"
 
 #. module: currency_rate_update
-#: selection:currency.rate.update.service,service:0
-msgid "European Central Bank"
-msgstr ""
-
-#. module: currency_rate_update
-#: help:res.company,interval_type:0
-msgid ""
-"changing this value will\n"
-"                                                 also affect other compagnies"
-msgstr "Modifier cette devise va aussi affecter les autre sociétés"
-
-#. module: currency_rate_update
-#: view:res.company:0
-msgid "Refresh currencies"
-msgstr "Mettre à jour les taux de change"
+#: constraint:currency.rate.update.service:0
+msgid "'Max delta days' must be >= 0"
+msgstr "'Le maximum du delta des jours doit être >= 0"

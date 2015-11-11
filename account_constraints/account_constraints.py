@@ -166,6 +166,9 @@ class AccountMoveLine(orm.Model):
 
     def _check_currency_amount(self, cr, uid, ids, context=None):
         for l in self.browse(cr, uid, ids, context=context):
+            # If account have a second currency, don't apply constraint
+            if l.account_id.currency_id:
+                continue
             if l.amount_currency:
                 if ((l.amount_currency > 0.0 and l.credit > 0.0) or
                         (l.amount_currency < 0.0 and l.debit > 0.0)):

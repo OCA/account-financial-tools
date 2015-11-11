@@ -28,7 +28,7 @@
 #
 
 import openerp.tests.common as common
-from openerp.osv import orm
+from openerp.osv import orm, osv
 from datetime import datetime
 from psycopg2 import IntegrityError
 
@@ -99,61 +99,80 @@ def journal_period_draft(self, journal_period_id, context):
                               context=context)
 
 
-class TestAccountConstraintChronology(common.TransactionCase):
+def get_journal_copy_id(self, journal_id, context=None):
+    return self.registry('account.journal').copy(self.cr, self.uid,
+                                                 journal_id, {}, context)
+
+
+def create_fiscalyear(self, year, company_id):
+    fiscalyear_obj = self.registry('account.fiscalyear')
+    fiscalyear_id = fiscalyear_obj.create(self.cr, self.uid, {
+        'name': year,
+        'code': year,
+        'date_start': year + '-01-01',
+        'date_stop': year + '-12-31',
+        'company_id': company_id
+    })
+    fiscalyear_obj.create_period(self.cr, self.uid, [fiscalyear_id])
+    return fiscalyear_id
+
+
+class TestAccountJournalPeriodClose(common.TransactionCase):
 
     def setUp(self):
-        super(TestAccountConstraintChronology, self).setUp()
+        super(TestAccountJournalPeriodClose, self).setUp()
+        company_id = self.ref('base.main_company')
+        fiscalyear_id = create_fiscalyear(self, '2013', company_id)
+        journal_id = self.ref('account.sales_journal')
+        self.period_id = self.registry('account.period')\
+            .search(self.cr, self.uid, [('fiscalyear_id', '=', fiscalyear_id)],
+                    limit=1)[0]
+        self.journal_id = get_journal_copy_id(self, journal_id)
 
     def test_close_period_open_journal(self):
         context = {}
-        journal_id = self.ref('account.sales_journal')
-        period_id = self.ref('account.period_1')
-        close_period(self, period_id, context)
+        close_period(self, self.period_id, context)
         journal_period_id = create_journal_period(self,
-                                                  period_id,
-                                                  journal_id,
+                                                  self.period_id,
+                                                  self.journal_id,
                                                   context)
         journal_period_draft(self, journal_period_id, context)
         self.registry('account.move')\
             .create(self.cr,
                     self.uid,
                     get_simple_account_move_values(self,
-                                                   period_id,
-                                                   journal_id),
+                                                   self.period_id,
+                                                   self.journal_id),
                     context=context)
         # Here, no exception should be raised because the journal's state is
         # draft although the period is closed
 
     def test_open_period_close_journal(self):
         context = {}
-        journal_id = self.ref('account.sales_journal')
-        period_id = self.ref('account.period_1')
         journal_period_id = create_journal_period(self,
-                                                  period_id,
-                                                  journal_id,
+                                                  self.period_id,
+                                                  self.journal_id,
                                                   context)
         journal_period_done(self, journal_period_id, context)
         move_values = get_simple_account_move_values(self,
-                                                     period_id,
-                                                     journal_id)
+                                                     self.period_id,
+                                                     self.journal_id)
         # I check if the exception is correctly raised at create of an account
         # move which is linked with a closed journal
-        self.assertRaises(orm.except_orm,
+        self.assertRaises(osv.except_osv,
                           self.registry('account.move').create,
                           self.cr, self.uid, move_values, context=context)
 
     def test_change_journal_on_move(self):
         context = {}
-        journal_id = self.ref('account.sales_journal')
         journal_cash_id = self.ref('account.cash_journal')
-        period_id = self.ref('account.period_1')
         journal_period_id = create_journal_period(self,
-                                                  period_id,
-                                                  journal_id,
+                                                  self.period_id,
+                                                  self.journal_id,
                                                   context)
         journal_period_done(self, journal_period_id, context)
         move_values = get_simple_account_move_values(self,
-                                                     period_id,
+                                                     self.period_id,
                                                      journal_cash_id)
         self.registry('account.move').create(self.cr,
                                              self.uid,
@@ -164,20 +183,18 @@ class TestAccountConstraintChronology(common.TransactionCase):
         # issue on Odoo github : #1633
 
         # I check if the exception is correctly raised
-        """self.assertRaises(orm.except_orm,
-                          self.registry('account.move').write,
-                          self.cr, self.uid, [move_id],
-                          {'journal_id': journal_id}, context=context)"""
+        # self.assertRaises(orm.except_orm,
+        #                   self.registry('account.move').write,
+        #                   self.cr, self.uid, [move_id],
+        #                   {'journal_id': journal_id}, context=context)
 
     def test_draft_move_close_journal(self):
         context = {}
 
         jour_per_obj = self.registry('account.journal.period')
-        journal_id = self.ref('account.sales_journal')
-        period_id = self.ref('account.period_1')
         move_values = get_simple_account_move_values(self,
-                                                     period_id,
-                                                     journal_id)
+                                                     self.period_id,
+                                                     self.journal_id)
         self.registry('account.move').create(self.cr,
                                              self.uid,
                                              move_values,
@@ -185,8 +202,8 @@ class TestAccountConstraintChronology(common.TransactionCase):
         journal_period_ids =\
             jour_per_obj.search(self.cr,
                                 self.uid,
-                                [('period_id', '=', period_id),
-                                 ('journal_id', '=', journal_id),
+                                [('period_id', '=', self.period_id),
+                                 ('journal_id', '=', self.journal_id),
                                  ],
                                 context=context)
         # I check if the exception is correctly raised at closing journal that
@@ -198,11 +215,13 @@ class TestAccountConstraintChronology(common.TransactionCase):
 
     def test_duplicate_journal_period(self):
         context = {}
-        journal_id = self.ref('account.sales_journal')
-        period_id = self.ref('account.period_1')
-        create_journal_period(self, period_id, journal_id, context)
+        create_journal_period(self, self.period_id, self.journal_id, context)
         # I check if the exception is correctly raised at adding both same
         # journal on a period
-        self.assertRaises(IntegrityError,
-                          create_journal_period,
-                          self, period_id, journal_id, context)
+        self.cr._default_log_exceptions = False
+        try:
+            self.assertRaises(IntegrityError,
+                              create_journal_period,
+                              self, self.period_id, self.journal_id, context)
+        finally:
+            self.cr._default_log_exceptions = True

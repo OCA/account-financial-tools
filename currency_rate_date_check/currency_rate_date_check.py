@@ -60,8 +60,10 @@ class res_currency(orm.Model):
             context = {}
         # We only do the check if there is an explicit date in the context and
         # there is no specific currency_rate_type_id
-        if context.get('date') and not context.get('currency_rate_type_id') and\
-           not context.get('disable_rate_date_check'):
+        if (context.get('date') and
+                not context.get('currency_rate_type_id') and
+                not context.get('disable_rate_date_check')):
+
             for currency_id in ids:
                 # We could get the company from the currency, but it's not a
                 # 'required' field, so we should probably continue to get it
