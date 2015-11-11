@@ -52,6 +52,7 @@ need to make a refund).
     'data': ['account_view.xml',
              'invoice_view.xml',
              'res_config_view.xml',
+             'security/security_groups.xml',
              ],
     'installable': True,
     'active': False,

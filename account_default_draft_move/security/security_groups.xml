@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data noupdate="0">
+        <record id="group_validate_draft_move" model="res.groups">
+            <field name="name">Validate draft moves</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+    </data>
+</openerp>

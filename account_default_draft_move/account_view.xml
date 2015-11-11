@@ -7,7 +7,9 @@
       <field name="inherit_id" ref="account.view_move_form"/>
       <field name="arch" type="xml">
         <data>
-          <button name="button_validate" position="replace"/>
+          <button name="button_validate" position="replace">
+            <button name="button_validate" states="draft" string="Post" type="object" class="oe_highlight" groups="account_default_draft_move.group_validate_draft_move"/>
+          </button>
           <button name="button_cancel" position="after">
             <field name="update_posted" invisible="1"/>
           </button>
