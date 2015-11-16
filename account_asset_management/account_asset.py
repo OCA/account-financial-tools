@@ -243,7 +243,7 @@ class account_asset_asset(orm.Model):
                 raise orm.except_orm(
                     _('Invalid action!'),
                     _("You can only delete assets in draft state."))
-            if filter(lambda dl: dl.type == 'depreciate',
+            if filter(lambda dl: dl.type == 'depreciate' and dl.move_check,
                       asset.depreciation_line_ids):
                 raise orm.except_orm(
                     _('Error!'),
@@ -253,7 +253,8 @@ class account_asset_asset(orm.Model):
                 self.pool['account.move.line'].write(
                     cr, uid, [x.id for x in asset.account_move_line_ids],
                     {'asset_id': False},
-                    context=dict(context, allow_asset_removal=True))
+                    context=dict(context, allow_asset_removal=True,
+                                 from_parent_object=True))
             parent = asset.parent_id
             super(account_asset_asset, self).unlink(
                 cr, uid, [asset.id], context=context)
