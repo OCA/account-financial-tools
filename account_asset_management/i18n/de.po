@@ -4,13 +4,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:41+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-10-12 19:50+0000\n"
+"PO-Revision-Date: 2015-11-20 15:03+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +60,7 @@ msgid ""
 "\n"
 "The Asset Value is calculated as follows:\n"
 "Purchase Value - Salvage Value."
-msgstr ""
+msgstr "\nDer Anlagenwert wird wie folgt ermittelt:\nEinstandswert - Beschaffungskosten."
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -72,13 +73,13 @@ msgid ""
 "Choose the method to use to compute the amount of depreciation lines.\n"
 "  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
 "  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  * Degressive-Linear (only for Time Method = Year): Degressive becomes linear when the annual linear depreciation exceeds the annual degressive depreciation"
-msgstr ""
+msgstr "Wählen Sie Methode, die Abschreibungen zu ermitteln.\n* Linear: Berechnet aus: Gesamtwert / Anzahl Abschreibungen\n* Degressiv: Berechnet aus: Restbuchwert * Degressionsfaktor * Degressiv-Linear (nur für Zeitwert = Jahr). Degressiv geht in Linear über, wenn die lineare Abschreibung größer wird als die degressive Abschreibung."
 
 #. module: account_asset_management
 #: view:account.asset.remove:0
 #: model:ir.model,name:account_asset_management.model_account_asset_remove
 msgid "Remove Asset"
-msgstr ""
+msgstr "Anlage auflösen"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 field:account.asset.depreciation.line,asset_id:0
@@ -93,24 +94,24 @@ msgstr "Anlagegüter"
 #. module: account_asset_management
 #: field:account.config.settings,module_account_asset_management:0
 msgid "Assets management (OCA)"
-msgstr ""
+msgstr "Anlagenverwaltung (OCA)"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
 msgid "View"
-msgstr ""
+msgstr "Sicht"
 
 #. module: account_asset_management
 #: help:account.asset.asset,salvage_value:0
 msgid ""
 "The estimated value that an asset will realize upon its sale at the end of its useful life.\n"
 "This value is used to determine the depreciation amounts."
-msgstr ""
+msgstr "Der geschätzte Erlös, den eine Anlage nach Ablauf der Lebenserwartung erbringen kann.\nDieser Wert wird zur Ermittelung der Abschreibungsbeträge herangezogen."
 
 #. module: account_asset_management
 #: help:account.account,asset_category_id:0
 msgid "Default Asset Category when creating invoice lines with this account."
-msgstr ""
+msgstr "Vorschlags-Anlagenklasse, bei Anlage von Rechnungspositionen mit diesem Konto."
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
@@ -121,7 +122,7 @@ msgstr "In Betrieb"
 #. module: account_asset_management
 #: field:account.asset.remove,account_sale_id:0
 msgid "Asset Sale Account"
-msgstr ""
+msgstr "Konto für Anlagen-Verkaufserlöse"
 
 #. module: account_asset_management
 #: view:account.asset.history:0
@@ -141,7 +142,7 @@ msgstr "Unternehmen"
 #: code:addons/account_asset_management/account_asset.py:1488
 #, python-format
 msgid "You cannot remove an asset line of type 'Asset Value'."
-msgstr ""
+msgstr "Sie dürfen eine Anlagenposition vom Typ 'Anlagenwert' nicht löschen."
 
 #. module: account_asset_management
 #: view:asset.modify:0
@@ -162,7 +163,7 @@ msgstr "Setze auf Entwurf"
 #: field:account.asset.category,account_min_value_id:0
 #: field:account.asset.remove,account_min_value_id:0
 msgid "Min-Value Account"
-msgstr ""
+msgstr "Wertberichtigung Abwertung"
 
 #. module: account_asset_management
 #: view:asset.asset.report:0
@@ -205,7 +206,7 @@ msgid ""
 "Removal Entry Policy \n"
 "  * Residual Value: The non-depreciated value will be posted on the 'Residual Value Account' \n"
 "  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value Account' or 'Min-Value Account' "
-msgstr ""
+msgstr "Regel zur Auflösungsbuchung:\n* Restbuchwert: Der nicht abgeschriebene Wert wird auf das Konto 'Restbuchwertkonto' gebucht.\n* Gewinn/Verlust bei Verkauf: Der Gewinn oder Verlust wird auf das 'Wertberichtigung Zuwachs' bzw. 'Wertberichtigung Abwertung' gebucht"
 
 #. module: account_asset_management
 #: view:asset.asset.report:0 field:asset.asset.report,depreciation_date:0
@@ -215,7 +216,7 @@ msgstr "Abschreibungs Datum"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Total Credit"
-msgstr ""
+msgstr "Verbindlichkeiten"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -225,7 +226,7 @@ msgstr "Konto"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Asset Line"
-msgstr ""
+msgstr "Anlagenposten"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -244,7 +245,7 @@ msgstr "kum. Wertberichtigungskonto"
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
 msgid "Draft Assets"
-msgstr ""
+msgstr "Anlagenentwurf"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:account.asset.category:0
@@ -257,7 +258,7 @@ msgstr "Bemerkungen"
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
 msgid "Purchase Value"
-msgstr ""
+msgstr "Anschaffungswert"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
@@ -267,12 +268,12 @@ msgstr "Abschreibungsbuchung"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Journal Item"
-msgstr ""
+msgstr "Journalposten"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Total Debit"
-msgstr ""
+msgstr "Forderungssumme"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:244
@@ -302,7 +303,7 @@ msgstr "Fehler!"
 msgid ""
 "Choose the method to use to compute the dates and number of depreciation lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
-msgstr ""
+msgstr "Wählen Sie das Verfahren die Daten und Anzahl der Abschreibungsbuchungen zu bestimmen:\n* Anzahl der Jahre: Geben Sie die Anzahl der Jahre für die Abschreibungsdauer an.\n"
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
@@ -312,7 +313,7 @@ msgstr "Status"
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
 msgid "Assets which have been removed"
-msgstr ""
+msgstr "Aufgelöste/Entfernte Anlagen"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,method_period:0
@@ -320,13 +321,13 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Quarter"
-msgstr ""
+msgstr "Quartal"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:53
 #, python-format
 msgid "Degressive-Linear"
-msgstr ""
+msgstr "Degressiv-Linear"
 
 #. module: account_asset_management
 #: view:asset.asset.report:0 field:asset.asset.report,nbr:0
@@ -351,7 +352,7 @@ msgstr "Anlage Konto"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Asset Lines"
-msgstr ""
+msgstr "Anlagenposten"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_asset_depreciation_confirmation_wizard
@@ -378,7 +379,7 @@ msgstr "Partner"
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
-msgstr ""
+msgstr "Sie dürfen eine gebuchte Abschreibungsposition nicht löschen."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1657
@@ -390,7 +391,7 @@ msgstr "Journalbuchung"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:364
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
-msgstr ""
+msgstr "Anlage '%s' Auflösungs-Journalbuchung"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -400,13 +401,13 @@ msgstr "Verändere Lebensdauer"
 #. module: account_asset_management
 #: field:account.asset.remove,period_id:0
 msgid "Force Period"
-msgstr ""
+msgstr "Erzwinge Periode"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:241
 #, python-format
 msgid "You can only delete assets in draft state."
-msgstr ""
+msgstr "Sie dürfen Anlagen nur im Status Entwurf löschen."
 
 #. module: account_asset_management
 #: field:account.asset.category,account_analytic_id:0
@@ -416,7 +417,7 @@ msgstr "Kostenstelle"
 #. module: account_asset_management
 #: view:account.asset.remove:0
 msgid "Generate Removal entries"
-msgstr ""
+msgstr "Erzeuge Auflösungsbuchungen"
 
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
@@ -426,7 +427,7 @@ msgstr "Berechnungsmethode"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Assets in Running State"
-msgstr ""
+msgstr "In Betrieb befindliche Anlagen"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:245
@@ -440,7 +441,7 @@ msgid ""
 "Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal "
 "year."
-msgstr ""
+msgstr "Bedeutet, dass die erste Abschreibungsbuchung am Anfangsdatum erfolgt, anstelle des ersten Tages im Geschäftsjahr."
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
@@ -454,14 +455,14 @@ msgstr "Art"
 msgid ""
 "Asset '%s' contains unposted lines prior to the selected period.\n"
 "Please post these entries first !"
-msgstr ""
+msgstr "Anlage '%s' hat hat ungebuchte Posten vor der ausgewählten Periode. Buchen Sie diese bitte zuerst."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:65
 #, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
-msgstr ""
+msgstr "Sie dürfen eine Buchung nicht löschen, die mit einer Abschreibungsposition verknüpft ist."
 
 #. module: account_asset_management
 #: field:account.asset.asset,prorata:0 field:account.asset.category,prorata:0
