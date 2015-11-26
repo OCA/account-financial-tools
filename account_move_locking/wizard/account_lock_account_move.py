@@ -21,6 +21,8 @@
 from openerp.osv import fields, orm
 from tools.translate import _
 
+CHUNK_SIZE = 2000
+
 
 class lock_account_move(orm.TransientModel):
     _name = "lock.account.move"
@@ -37,6 +39,10 @@ class lock_account_move(orm.TransientModel):
                                        required=True,
                                        domain=[('state', '<>', 'done')])
     }
+
+    def chunks_split_ids(self, l, n):
+        for i in xrange(0, len(l), n):
+            yield l[i:i + n]
 
     def lock_move(self, cr, uid, ids, context=None):
         obj_move = self.pool['account.move']
@@ -69,5 +75,9 @@ class lock_account_move(orm.TransientModel):
             raise orm.except_orm(
                 _(u'Warning'),
                 _('No move to locked found'))
-        obj_move.write(cr, uid, move_ids, {'locked': True}, context=context)
+        for ids_chunks in self.chunks_split_ids(move_ids, CHUNK_SIZE):
+            map_ids = ','.join(str(i) for i in ids_chunks)
+            query = 'UPDATE account_move SET locked=\'t\' WHERE id in (%s)' % (
+                map_ids)
+            cr.execute(query)
         return {'type': 'ir.actions.act_window_close'}
