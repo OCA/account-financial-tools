@@ -443,6 +443,11 @@ class AccountMoveLineImport(models.TransientModel):
         if 'credit' not in aml_vals:
             aml_vals['credit'] = 0.0
 
+        if 'partner_id' not in aml_vals:
+            # required since otherwise the partner_id
+            # of the previous entry is added
+            aml_vals['partner_id'] = False
+
         all_fields = self._field_methods
         required_fields = [x for x in all_fields
                            if all_fields[x].get('required')]
@@ -529,8 +534,9 @@ class AccountMoveLineImport(models.TransientModel):
 
         if self._err_log:
             self.note = self._err_log
+            module = __name__.split('addons.')[1].split('.')[0]
             result_view = self.env.ref(
-                'account_move_import.aml_import_view_form_result')
+                '%s.aml_import_view_form_result' % module)
             return {
                 'name': _("Import File result"),
                 'res_id': self.id,
