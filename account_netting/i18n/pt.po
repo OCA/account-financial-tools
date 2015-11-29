@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 18:49+0000\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
 "PO-Revision-Date: 2015-10-14 18:45+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
@@ -71,17 +71,17 @@ msgstr ""
 #. module: account_netting
 #: field:account.move.make.netting,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_netting
 #: field:account.move.make.netting,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_netting
 #: field:account.move.make.netting,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_netting
 #: field:account.move.make.netting,journal:0
@@ -91,12 +91,12 @@ msgstr "Diário"
 #. module: account_netting
 #: field:account.move.make.netting,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Atualizado pela última vez por"
 
 #. module: account_netting
 #: field:account.move.make.netting,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Atualizado pela última vez em"
 
 #. module: account_netting
 #: field:account.move.make.netting,move_lines:0

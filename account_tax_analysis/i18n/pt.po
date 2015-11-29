@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
 "PO-Revision-Date: 2015-06-03 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -41,12 +41,12 @@ msgstr "Cancelar"
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -71,7 +71,7 @@ msgstr "Grupo por..."
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,period_list:0
@@ -92,12 +92,12 @@ msgstr "Items Diários"
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Atualizado pela última vez por"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Atualizado pela última vez em"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis

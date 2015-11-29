@@ -3,13 +3,14 @@
 # * account_asset_management_xls
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 14:50+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
+"PO-Revision-Date: 2015-11-24 13:32+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:402
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "Anlagenbestand"
 
 #. module: account_asset_management_xls
 #: model:ir.model,name:account_asset_management_xls.model_account_asset_asset
@@ -32,7 +33,7 @@ msgstr "Anlagegüter"
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,parent_asset_id:0
 msgid "Asset Filter"
-msgstr ""
+msgstr "Anlagenfilter"
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
@@ -44,7 +45,7 @@ msgstr "Abbrechen"
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:63
 #, python-format
 msgid "Configuration Error"
-msgstr ""
+msgstr "Konfigurations-Fehler:"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_uid:0
@@ -62,7 +63,7 @@ msgstr "Erstellt am"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:828
 #, python-format
 msgid "Customization Error"
-msgstr ""
+msgstr "Einstellungs-Fehler"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:672
@@ -70,14 +71,14 @@ msgstr ""
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:685
 #, python-format
 msgid "Data Error"
-msgstr ""
+msgstr "Datenfehler"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:681
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:686
 #, python-format
 msgid "Depreciation Table error for asset %s !"
-msgstr ""
+msgstr "Fehler in den Abschreibungstabllen der Anlage %s."
 
 #. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
@@ -85,19 +86,19 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
 msgid "Financial Assets report"
-msgstr ""
+msgstr "Finanzanlagenbericht"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:368
 #: field:wiz.account.asset.report,fiscalyear_id:0
 #, python-format
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Geschäftsjahr"
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
 msgid "Generate Report"
-msgstr ""
+msgstr "Erzeuge Bericht"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,id:0
@@ -119,13 +120,13 @@ msgstr "Zuletzt geändert am"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:400
 #, python-format
 msgid "New Acquisitions"
-msgstr ""
+msgstr "Neue Anschaffungen"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:405
 #, python-format
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:70
@@ -137,7 +138,7 @@ msgstr "Keine verfügbaren Daten"
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:64
 #, python-format
 msgid "No parent asset defined for asset '%s'!"
-msgstr ""
+msgstr "Keine übergeordnete Anlage zu Anlage '%s' festgelegt."
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:71
@@ -149,14 +150,14 @@ msgstr "Keine Datensätze für Ihre Auswahl getroffen!"
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:50
 #, python-format
 msgid "No top level asset of type 'view' defined!"
-msgstr ""
+msgstr "Keine Hauptanlage vom Typ 'Sicht' definiert."
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:381
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:404
 #, python-format
 msgid "Removed Assets"
-msgstr ""
+msgstr "Gelöschte Anlagen"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
@@ -164,21 +165,21 @@ msgstr ""
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_acquisition_fields' "
 "list !"
-msgstr ""
+msgstr "Das 'Konto'-Feld ist eine Pflichteingabe der Liste '_xls_acquisition_fields'"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:608
 #, python-format
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_active_fields' list !"
-msgstr ""
+msgstr "Das 'Konto'-Feld ist eine Pflichteingabe der Liste '_xls_active_fields'"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:828
 #, python-format
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_removal_fields' list !"
-msgstr ""
+msgstr "Das 'Konto'-Feld ist eine Pflichteingabe der Liste '_xls_removal_fields'"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:673
@@ -186,7 +187,7 @@ msgstr ""
 msgid ""
 "You can not report on a Fiscal Year with unposted entries in prior years. "
 "Please post depreciation table entry dd. '%s'  of asset '%s' !"
-msgstr ""
+msgstr "Sie dürfen nicht über ein Geschäftsjahr Berichten, in dem noch ungebuchte Posten vorliegen. Buchen Sie bitte die Position der Abschreibungstabelle '%s' der Anlage '%s'. "
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
