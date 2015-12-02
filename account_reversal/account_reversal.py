@@ -47,6 +47,24 @@ class account_move(models.Model):
             return
         return super(account_move, self).validate()
 
+    def _move_reversal_hook(self, data):
+        """
+        Hook to manipulate move data
+
+        :param data: data to be passed to reversal copy method
+        :type data: dict
+        """
+        return data
+
+    def _move_reversal_line_hook(self, data):
+        """
+        Hook to manipulate single move line data
+
+        :param data: move line
+        :type data: dict
+        """
+        return data
+
     @api.multi
     def _move_reversal(self, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
@@ -86,14 +104,17 @@ class account_move(models.Model):
                 reversal_journal_id.company_id.name, self.company_id.name))
 
         reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
-        reversal_move = self.copy(default={
+
+        default_data = {
             'company_id': self.company_id.id,
             'date': reversal_date,
             'period_id': reversal_period.id,
             'ref': reversal_ref,
             'journal_id': reversal_journal_id,
             'to_be_reversed': False,
-        })
+        }
+        default_data = self._move_reversal_hook(default_data)
+        reversal_move = self.copy(default=default_data)
 
         self.with_context(novalidate=True).write({
             'reversal_id': reversal_move.id,
@@ -106,11 +127,16 @@ class account_move(models.Model):
                  in [move_line_prefix, reversal_move_line.name]
                  if x]
             )
+            line_data = {
+                'debit': reversal_move_line.credit,
+                'credit': reversal_move_line.debit,
+                'amount_currency': reversal_move_line.amount_currency * -1,
+                'name': reversal_ml_name
+            }
+            line_data = self._move_reversal_line_hook(line_data)
+
             reversal_move_line.write(
-                {'debit': reversal_move_line.credit,
-                 'credit': reversal_move_line.debit,
-                 'amount_currency': reversal_move_line.amount_currency * -1,
-                 'name': reversal_ml_name},
+                line_data,
                 check=True,
                 update_check=True)
 
