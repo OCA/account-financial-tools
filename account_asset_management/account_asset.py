@@ -447,7 +447,11 @@ class account_asset_asset(orm.Model):
             # with a duration equals to calendar year
             cr.execute(
                 "SELECT id, date_start, date_stop "
-                "FROM account_fiscalyear ORDER BY date_stop ASC LIMIT 1")
+                "FROM account_fiscalyear "
+                "WHERE company_id = %s "
+                "ORDER BY date_stop ASC LIMIT 1"
+                % asset.company_id.id
+            )
             first_fy = cr.dictfetchone()
             first_fy_date_start = datetime.strptime(
                 first_fy['date_start'], '%Y-%m-%d')
