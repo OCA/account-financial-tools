@@ -3,54 +3,55 @@
 # * account_move_locking
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 08:56+0000\n"
-"PO-Revision-Date: 2016-04-14 08:56+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/zh_TW/)\n"
+"POT-Creation-Date: 2016-04-16 01:02+0000\n"
+"PO-Revision-Date: 2016-04-21 06:38+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: zh_TW\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Buchungsposten"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Freigeben"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Cancel"
-msgstr "刪除"
+msgstr "Abbrechen"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Angelegt durch"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Angelegt am"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_end
 msgid "Date end"
-msgstr ""
+msgstr "Enddatum"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Anfangsdatum"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
@@ -58,54 +59,54 @@ msgstr ""
 msgid ""
 "Date start need to be                                           before Date "
 "end"
-msgstr ""
+msgstr "Anfangsdatum muss vor Enddatum liegen"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigebezeichnung"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_journal_ids
 msgid "Journal"
-msgstr "帳簿"
+msgstr "Journal"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt verändert am"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt aktualisiert durch"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr ""
+msgstr "Posten sperren"
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
-msgstr ""
+msgstr "Journalposten sperren"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_account_move_locked
 msgid "Locked"
-msgstr ""
+msgstr "Gesperrt"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/account.py:33
@@ -113,13 +114,13 @@ msgstr ""
 #: code:addons/account_move_locking/account.py:49
 #, python-format
 msgid "Move Locked! %s"
-msgstr ""
+msgstr "Posten gesperrt! %s"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:67
 #, python-format
 msgid "No move to locked found"
-msgstr ""
+msgstr "Keinen zu sperrenden Posten gefunden"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:57
@@ -128,9 +129,9 @@ msgid ""
 "Unposted move in period/jounal                                           "
 "selected, please post it before                                           "
 "locking them"
-msgstr ""
+msgstr "Ungebuchter Posten in Periode/Journal gewählt, vor Sperrung diesen bitte buchen"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "oder"
