@@ -1,6 +1,7 @@
+![Licence](https://img.shields.io/badge/licence-AGPL--3-blue.svg)
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/92/9.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-account-financial-tools-92)
 [![Build Status](https://travis-ci.org/OCA/account-financial-tools.svg?branch=9.0)](https://travis-ci.org/OCA/account-financial-tools)
-[![Coverage Status](https://coveralls.io/repos/OCA/account-financial-tools/badge.png?branch=9.0)](https://coveralls.io/r/OCA/account-financial-tools?branch=9.0)
+[![Coverage Status](https://coveralls.io/repos/OCA/account-financial-tools/badge.svg?branch=9.0)](https://coveralls.io/r/OCA/account-financial-tools?branch=9.0)
 
 Account financial Tools for Odoo/OpenERP
 ========================================
@@ -18,6 +19,12 @@ It provides addons to:
 And much more.
 
 [//]: # (addons)
+Available addons
+---------------
+addon | version | summary
+--- | --- | ---
+[account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
+
 Unported addons
 ---------------
 addon | version | summary
@@ -44,7 +51,6 @@ addon | version | summary
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 (unported) | Move line search view - disable defaults for period and journal
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 (unported) | Filter your Journal Items per payable and receivable account
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 (unported) | Journal Items Search Extension
-[account_move_locking](account_move_locking/) | 8.0.1.0.0 (unported) | Move locked to prevent modification
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
 [account_partner_required](account_partner_required/) | 8.0.0.1.0 (unported) | Account partner required
 [account_renumber](account_renumber/) | 8.0.1.0.0 (unported) | Account renumber wizard
