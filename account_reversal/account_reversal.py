@@ -47,23 +47,39 @@ class account_move(models.Model):
             return
         return super(account_move, self).validate()
 
-    def _move_reversal_hook(self, data):
+    @api.model
+    def _prepare_reversal_move(self, move, reversal_date, reversal_period,
+                               reversal_journal_id, move_prefix=None):
         """
-        Hook to manipulate move data
+        Prepare the default data for the reversal move
+        """
+        reversal_ref = ''.join([x for x in [move_prefix, move.ref] if x])
 
-        :param data: data to be passed to reversal copy method
-        :type data: dict
-        """
-        return data
+        move_data = {
+            'company_id': move.company_id.id,
+            'date': reversal_date,
+            'period_id': reversal_period.id,
+            'ref': reversal_ref,
+            'journal_id': reversal_journal_id,
+            'to_be_reversed': False,
+        }
+        return move_data
 
-    def _move_reversal_line_hook(self, data):
+    @api.model
+    def _prepare_reversal_move_line(self, move_line, move_line_prefix):
         """
-        Hook to manipulate single move line data
-
-        :param data: move line
-        :type data: dict
+        Prepare the data for a reversal move line
         """
-        return data
+        reversal_ml_name = ' '.join(
+            [x for x in [move_line_prefix, move_line.name] if x]
+        )
+        line_data = {
+            'debit': move_line.credit,
+            'credit': move_line.debit,
+            'amount_currency': move_line.amount_currency * -1,
+            'name': reversal_ml_name
+        }
+        return line_data
 
     @api.multi
     def _move_reversal(self, reversal_date,
@@ -103,18 +119,12 @@ class account_move(models.Model):
             raise Warning(_('Wrong company Period is %s but we have %s') % (
                 reversal_journal_id.company_id.name, self.company_id.name))
 
-        reversal_ref = ''.join([x for x in [move_prefix, self.ref] if x])
+        move_data = self._prepare_reversal_move(self, reversal_date,
+                                                reversal_period,
+                                                reversal_journal_id,
+                                                move_prefix)
 
-        default_data = {
-            'company_id': self.company_id.id,
-            'date': reversal_date,
-            'period_id': reversal_period.id,
-            'ref': reversal_ref,
-            'journal_id': reversal_journal_id,
-            'to_be_reversed': False,
-        }
-        default_data = self._move_reversal_hook(default_data)
-        reversal_move = self.copy(default=default_data)
+        reversal_move = self.copy(default=move_data)
 
         self.with_context(novalidate=True).write({
             'reversal_id': reversal_move.id,
@@ -122,21 +132,12 @@ class account_move(models.Model):
         })
 
         for reversal_move_line in reversal_move.line_id:
-            reversal_ml_name = ' '.join(
-                [x for x
-                 in [move_line_prefix, reversal_move_line.name]
-                 if x]
-            )
-            line_data = {
-                'debit': reversal_move_line.credit,
-                'credit': reversal_move_line.debit,
-                'amount_currency': reversal_move_line.amount_currency * -1,
-                'name': reversal_ml_name
-            }
-            line_data = self._move_reversal_line_hook(line_data)
+
+            move_line_data = self._prepare_reversal_move_line(
+                reversal_move_line, move_line_prefix)
 
             reversal_move_line.write(
-                line_data,
+                move_line_data,
                 check=True,
                 update_check=True)
 
