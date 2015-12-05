@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 08:56+0000\n"
+"POT-Creation-Date: 2015-12-03 09:18+0000\n"
+"PO-Revision-Date: 2015-12-02 14:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgid "An error has occured during the sending of the email."
 msgstr "Erreur lors de la génération des mails."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:308
+#: code:addons/account_credit_control/policy.py:310
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Impossible de trouver une fonction pour le mode de calcul: %s n'est pas implémentée"
@@ -433,6 +433,11 @@ msgstr "Email personnalisé"
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
 msgstr "Message personnalisable"
+
+#. module: account_credit_control
+#: field:credit.control.policy.level,custom_text_after_details:0
+msgid "Custom Message after details"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
@@ -1079,7 +1084,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr "Les autres devises optionnelles en cas de multi-devises."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:258
+#: code:addons/account_credit_control/policy.py:260
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Le premier niveau ne peut pas être basé sur un précédent rappel"
