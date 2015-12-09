@@ -188,7 +188,7 @@ class account_check_deposit(orm.Model):
         period_ids = period_obj.find(cr, uid, dt=date, context=context)
         # period_ids will always have a value, cf the code of find()
         move_vals = {
-            'journal_id': deposit.journal_id.id,
+            'journal_id': deposit.partner_bank_id.journal_id.id,
             'date': date,
             'period_id': period_ids[0],
             'name': _('Check Deposit %s') % deposit.name,
