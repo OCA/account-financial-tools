@@ -6,6 +6,8 @@
 Currency Exchange Rate Inverted
 ===============================
 
+This module applies the inverse method in the conversion between two currencies.
+
 The inverse method is a calculation method that uses the inverse (reciprocal)
 exchange rate for the multiplier and divisor when converting amounts from one
 currency to another.
