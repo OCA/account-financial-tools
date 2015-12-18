@@ -8,7 +8,8 @@
     'name': 'Currency Exchange Rate Inverted',
     'version': '8.0.0.1.0',
     'category': 'Accounting & Finance',
-    'summary': 'Correct the cost of move lines in purchase flows',
+    'summary': 'Allows to maintain an exchange rate using the inversion '
+               'method',
     'author': 'Eficent',
     'website': 'http://www.eficent.com',
     'license': 'AGPL-3',
