@@ -122,6 +122,12 @@ PL_NBP_supported_currency_array = [
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
+MK_NBRM_supported_currency_array = [
+    "EUR", "USD", "GBP", "CHF", "SEK", "NOK", "JPY", "DKK", "CAD", "AUD",
+    "BGN", "CZK", "HUF", "PLN", "RON", "HRK", "TRY", "RUB", "BRL", "CNY",
+    "HKD", "IDR", "ILS", "INR", "KRW", "MXN", "MYR", "NZD", "PHP", "SGD",
+    "THB", "ZAR"]
+
 supported_currecies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
     'ECB_getter': ECB_supported_currency_array,
@@ -130,6 +136,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
+    'MK_NBRM_getter': MK_NBRM_supported_currency_array,
     }
 
 
@@ -194,7 +201,9 @@ class Currency_rate_update_service(models.Model):
          #  (Thailand, Malaysia, Mexico...)
          ('CA_BOC_getter', 'Bank of Canada - noon rates'),
          # Added for romanian rates
-         ('RO_BNR_getter', 'National Bank of Romania')
+         ('RO_BNR_getter', 'National Bank of Romania'),
+        # Added for macedonian rates
+        ('MK_NBRM_getter', 'National Bank of the Republic of Macedonia')
          ],
         string="Webservice to use",
         required=True)
