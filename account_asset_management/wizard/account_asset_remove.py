@@ -287,7 +287,6 @@ class account_asset_remove(orm.TransientModel):
         asset_ref = asset.code and '%s (ref: %s)' \
             % (asset.name, asset.code) or asset.name
         wiz_data = self.browse(cr, uid, ids[0], context=context)
-
         if context.get('early_removal'):
             residual_value = self._prepare_early_removal(
                 cr, uid, asset, wiz_data.date_remove, context=context)
