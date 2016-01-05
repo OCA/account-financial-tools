@@ -49,7 +49,7 @@ class ResPartner(models.Model):
         @summary: Split Partner vat into country_code and number
         @result: (vat_country, vat_number)
         """
-        vat_country = False
+        vat_country = 'XX'
         vat_number = vat
         if vat and re.match(r'[A-Za-z]{2}', vat):
             vat_country = vat[:2].upper()
@@ -68,10 +68,10 @@ class ResPartner(models.Model):
             # quick and partial off-line checksum validation
             check_func = self.simple_vat_optional_check
         vat_country, vat_number = self._split_vat(self.vat)
-        if not vat_country:
+        if vat_number and vat_country == 'XX':
             _logger.info("VAT country not found!")
             raise ValidationError(self._construct_constraint_msg())
-        if not check_func(vat_country, vat_number):
+        if vat_number and not check_func(vat_country, vat_number):
             _logger.info("VAT Number [%s] is not valid !" % vat_number)
             return False
         return True
