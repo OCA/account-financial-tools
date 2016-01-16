@@ -3,13 +3,14 @@
 # * account_move_locking
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 14:50+0000\n"
-"PO-Revision-Date: 2015-07-01 10:59+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-01-09 01:25+0000\n"
+"PO-Revision-Date: 2016-01-14 10:28+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,17 +21,17 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Eintrag"
 
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Freigeben"
 
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Cancel"
-msgstr ""
+msgstr "Stornieren"
 
 #. module: account_move_locking
 #: field:lock.account.move,create_uid:0
@@ -50,7 +51,7 @@ msgstr "ID"
 #. module: account_move_locking
 #: field:lock.account.move,journal_ids:0
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_move_locking
 #: field:lock.account.move,write_uid:0
@@ -65,19 +66,19 @@ msgstr "Zuletzt geändert am"
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr ""
+msgstr "Buchung sperren"
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
-msgstr ""
+msgstr "Journalbuchungen sperren"
 
 #. module: account_move_locking
 #: field:account.move,locked:0
 msgid "Locked"
-msgstr ""
+msgstr "Gesperrt"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/account.py:33
@@ -85,18 +86,18 @@ msgstr ""
 #: code:addons/account_move_locking/account.py:51
 #, python-format
 msgid "Move Locked!"
-msgstr ""
+msgstr "Buchung gesperrt!"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:60
 #, python-format
 msgid "No move to locked found"
-msgstr ""
+msgstr "Keine Buchung zum sperren gefunden"
 
 #. module: account_move_locking
 #: field:lock.account.move,period_ids:0
 msgid "Period"
-msgstr ""
+msgstr "Periode"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
@@ -105,16 +106,16 @@ msgid ""
 "Unposted move in period/jounal                                        "
 "selected, please post it before                                        "
 "locking them"
-msgstr ""
+msgstr "Ungebuchter Eintrag in Periode/Journal ausgewählt, bitte vor dem Sperren durchbuchen"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:49
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:59
 #, python-format
 msgid "Warning!"
-msgstr ""
+msgstr "Warnung!"
 
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "oder"
