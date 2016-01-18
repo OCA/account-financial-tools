@@ -253,7 +253,7 @@ class account_asset_asset(orm.Model):
                 # Trigger store function
                 parent.write({'salvage_value': parent.salvage_value})
         return True
-
+    
     def _get_period(self, cr, uid, context=None):
         ctx = dict(context or {}, account_period_prefer_normal=True)
         periods = self.pool.get('account.period').find(cr, uid, context=ctx)
