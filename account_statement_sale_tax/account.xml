@@ -1,0 +1,9 @@
+<openerp>
+    <data>
+        <template id="assets_backend" name="specific assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/account_statement_sale_tax/static/src/js/account_widgets.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
