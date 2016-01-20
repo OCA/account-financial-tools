@@ -25,9 +25,14 @@ from openerp import models, fields, api
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    need_lawsuit = fields.Boolean(string='Needs a lawsuit procedure',
-                                  compute='_get_need_lawsuit',
-                                  store=True)
+    need_lawsuit = fields.Boolean(
+        string='Needs a lawsuit procedure',
+        compute='_get_need_lawsuit',
+        store=True,
+        groups="account_credit_control.group_account_credit_control_manager,"
+               "account_credit_control.group_account_credit_control_user,"
+               "account_credit_control.group_account_credit_control_info",
+    )
     lawsuit_step_id = fields.Many2one(
         comodel_name='account.invoice.lawsuit.step',
         string='Lawsuit Step',
