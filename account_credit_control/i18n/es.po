@@ -3,13 +3,14 @@
 # * account_credit_control
 # 
 # Translators:
+# Eduardo Rodríguez Crespo <erocre@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 01:25+0000\n"
-"PO-Revision-Date: 2015-12-06 18:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-01-16 01:25+0000\n"
+"PO-Revision-Date: 2016-01-19 08:57+0000\n"
+"Last-Translator: Eduardo Rodríguez Crespo <erocre@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,7 +164,7 @@ msgstr ""
 #: field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr "Cuent"
+msgstr "Cuenta"
 
 #. module: account_credit_control
 #: view:credit.control.policy:account_credit_control.credit_control_policy_form
@@ -559,7 +560,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Group By..."
-msgstr "Agrupado por ..."
+msgstr "Agrupar por..."
 
 #. module: account_credit_control
 #: field:credit.control.communication,id:0 field:credit.control.emailer,id:0

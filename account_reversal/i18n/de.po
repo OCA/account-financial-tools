@@ -3,13 +3,14 @@
 # * account_reversal
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 14:50+0000\n"
-"PO-Revision-Date: 2015-11-05 16:59+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-01-16 01:25+0000\n"
+"PO-Revision-Date: 2016-01-18 22:23+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,13 +167,13 @@ msgstr "Umzukehren"
 #: code:addons/account_reversal/account_reversal.py:82
 #, python-format
 msgid "Wrong company Journal is %s but we have %s"
-msgstr ""
+msgstr "Falsches Unternehmen, Journal ist %s, aber wir haben %s"
 
 #. module: account_reversal
 #: code:addons/account_reversal/account_reversal.py:85
 #, python-format
 msgid "Wrong company Period is %s but we have %s"
-msgstr ""
+msgstr "Falsches Unternehmen, Periode ist %s, aber wir haben %s"
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse

@@ -5,13 +5,14 @@
 # Translators:
 # Christophe kryskool <christophe.chauvet@gmail.com>, 2015
 # Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
+# LS Development <ls.development.nc@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 10:24+0000\n"
-"PO-Revision-Date: 2015-12-15 15:32+0000\n"
-"Last-Translator: Isabelle RICHARD <isabellerichard89@gmail.com>\n"
+"POT-Creation-Date: 2016-01-16 01:25+0000\n"
+"PO-Revision-Date: 2016-01-21 21:32+0000\n"
+"Last-Translator: LS Development <ls.development.nc@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,7 +152,7 @@ msgid ""
 "If the time delta between the rate date given by the webservice and the "
 "current date exceeds this value, then the currency rate is not updated in "
 "OpenERP."
-msgstr "Si la différence de temps entre le taux à la date donnée par le service web et la date actuelle dépasse cette valeur, alors la devise ne sera pas mise à jour dans OpenERP."
+msgstr "Si la différence de temps entre le taux à la date donnée par le service web et la date actuelle dépasse cette valeur, alors la devise ne sera pas mise à jour dans Odoo."
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:152
