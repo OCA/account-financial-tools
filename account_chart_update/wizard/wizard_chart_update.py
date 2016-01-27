@@ -1026,12 +1026,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             else:
                 # Update the account
                 account = wiz_account.update_account_id
+                # Don't write again the same code - it may give an error
+                code = vals.pop('code')
                 try:
                     account.write(vals)
-                    log.add(_("Updated account %s.\n") % vals['code'])
+                    log.add(_("Updated account %s.\n") % code)
                 except (exceptions.Warning, except_orm, except_osv) as ex:
                     log.add(_("Exception writing account %s: %s - %s.\n") %
-                            (vals['code'], ex.name, ex.value), True)
+                            (code, ex.name, ex.value), True)
             # Set this account as the parent of the accounts that seem to
             # be its children (brothers starting with the same code).
             if self.update_children_accounts_parent:
