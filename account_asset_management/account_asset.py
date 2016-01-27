@@ -56,8 +56,8 @@ class account_asset_category(orm.Model):
     def _get_method_time(self, cr, uid, context=None):
         return [
             ('year', _('Number of Years')),
-            # ('number', _('Number of Depreciations')),
-            # ('end', _('Ending Date'))
+            ('number', _('Number of Depreciations')),
+            ('end', _('Ending Date'))
         ]
 
     def _get_company(self, cr, uid, context=None):
