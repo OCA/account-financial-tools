@@ -130,7 +130,7 @@ class CreditControlLine(models.Model):
                                 store=True,
                                 readonly=True)
 
-    level = fields.Integer('credit.control.policy.level',
+    level = fields.Integer(string='Policy Level',
                            related='policy_level_id.level',
                            store=True,
                            readonly=True)
