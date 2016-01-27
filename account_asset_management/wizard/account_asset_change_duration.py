@@ -58,14 +58,17 @@ class asset_modify(orm.TransientModel):
             asset = asset_obj.browse(cr, uid, asset_id, context=context)
             doc = etree.XML(result['arch'])
             if asset.method_time == 'number':
-                node_me = doc.xpath("//field[@name='method_end']")[0]
-                node_me.set('invisible', '1')
+                if doc.xpath("//field[@name='method_end']"):
+                    node_me = doc.xpath("//field[@name='method_end']")[0]
+                    node_me.set('invisible', '1')
             elif asset.method_time == 'end':
-                node_mn = doc.xpath("//field[@name='method_number']")[0]
-                node_mn.set('invisible', '1')
+                if doc.xpath("//field[@name='method_number']"):
+                    node_mn = doc.xpath("//field[@name='method_number']")[0]
+                    node_mn.set('invisible', '1')
             elif asset.method_time == 'year':
-                node_me = doc.xpath("//field[@name='method_end']")[0]
-                node_me.set('invisible', '1')
+                if doc.xpath("//field[@name='method_end']"):
+                    node_me = doc.xpath("//field[@name='method_end']")[0]
+                    node_me.set('invisible', '1')
             result['arch'] = etree.tostring(doc)
         return result
 
