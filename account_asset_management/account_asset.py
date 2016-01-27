@@ -56,8 +56,8 @@ class account_asset_category(orm.Model):
     def _get_method_time(self, cr, uid, context=None):
         return [
             ('year', _('Number of Years')),
+            ('end', _('Ending Date')),
             # ('number', _('Number of Depreciations')),
-            # ('end', _('Ending Date'))
         ]
 
     def _get_company(self, cr, uid, context=None):
@@ -126,10 +126,10 @@ class account_asset_category(orm.Model):
                  "number of depreciation lines.\n"
                  "  * Number of Years: Specify the number of years "
                  "for the depreciation.\n"
+                 "  * Ending Date: Choose the time between 2 depreciations "
+                 "and the date the depreciations won't go beyond."
                  # "  * Number of Depreciations: Fix the number of "
                  # "depreciation lines and the time between 2 depreciations.\n"
-                 # "  * Ending Date: Choose the time between 2 depreciations "
-                 # "and the date the depreciations won't go beyond."
         ),
         'prorata': fields.boolean(
             'Prorata Temporis',
@@ -1699,8 +1699,8 @@ class account_asset_history(orm.Model):
             'account.asset.asset', 'Asset', required=True, ondelete='cascade'),
         'method_time': fields.selection([
             ('year', 'Number of Years'),
+            ('end', 'Ending Date'),
             # ('number','Number of Depreciations'),
-            # ('end','Ending Date'),
             ], 'Time Method', required=True),
         'method_number': fields.integer(
             'Number of Years',
