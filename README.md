@@ -53,7 +53,7 @@ addon | version | summary
 [account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 | Tax analysis
 [account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 | Tax chart for a period interval
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 | Make sure currency rates used are always up-to-update
-[currency_rate_update](currency_rate_update/) | 8.0.0.7.1 | Currency Rate Update
+[currency_rate_update](currency_rate_update/) | 8.0.0.8.0 | Currency Rate Update
 
 Unported addons
 ---------------
