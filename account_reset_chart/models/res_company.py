@@ -63,8 +63,10 @@ class Company(models.Model):
             [('company_id', '=', self.id)]).write({'update_posted': True})
         statements = self.env['account.bank.statement'].search(
             [('company_id', '=', self.id)])
-        statements.button_cancel()
-        statements.unlink()
+        
+        if statements :
+            statements.button_cancel()
+            statements.unlink()
 
         try:
             voucher_obj = self.env['account.voucher']
@@ -100,9 +102,9 @@ class Company(models.Model):
         unlink_from_company('res.partner.bank')
 
         logger.info('Unlinking reconciliations')
-        rec_obj = self.env['account.move.reconcile']
+        rec_obj = self.env['account.move.line.reconcile']
         rec_obj.search(
-            [('line_id.company_id', '=', self.id)]).unlink()
+            [('company_id', '=', self.id)]).unlink()
 
         logger.info('Reset paid invoices\'s workflows')
         paid_invoices = self.env['account.invoice'].search(
@@ -163,4 +165,10 @@ class Company(models.Model):
         unlink_from_company('account.tax.code')
         unlink_from_company('account.journal')
         unlink_from_company('account.account')
+        
+        self.write({
+            'expects_chart_of_accounts': False,
+            'chart_template_id' : False
+            })
+        
         return True

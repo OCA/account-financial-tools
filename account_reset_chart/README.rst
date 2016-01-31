@@ -56,6 +56,7 @@ Contributors
 ------------
 
 * Stefan Rijnhart <stefan@therp.nl>
+* Florent THOMAS <florent.thomas@mind-and-go.com>
 
 Icon courtesy of Alan Klim (CC-BY-20) -
 https://www.flickr.com/photos/igraph/6469812927/
