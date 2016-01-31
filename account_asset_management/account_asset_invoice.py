@@ -54,6 +54,13 @@ class account_invoice(orm.Model):
         assets = []
         for inv in self.browse(cr, uid, ids):
             move = inv.move_id
+            # It will unlink asset only if the invoice is chained to 
+            # create depreciation line
+            asset_line_obj = self.pool['account.asset.depreciation.line']
+            domain = [('move_id', '=', move.id),('type', '=', 'create')]
+            dp_line_ids = asset_line_obj.search(cr, uid, domain)
+            if not dp_line_ids:
+                continue
             assets = move and \
                 [aml.asset_id for aml in
                  filter(lambda x: x.asset_id, move.line_id)]
