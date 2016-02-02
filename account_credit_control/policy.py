@@ -219,7 +219,8 @@ class CreditControlPolicyLevel(models.Model):
     name = fields.Char(string='Name', required=True, translate=True)
     policy_id = fields.Many2one('credit.control.policy',
                                 string='Related Policy',
-                                required=True)
+                                required=True,
+                                ondelete='cascade')
     level = fields.Integer(string='Level', required=True)
     computation_mode = fields.Selection(
         [('net_days', 'Due Date'),
