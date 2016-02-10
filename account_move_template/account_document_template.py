@@ -21,7 +21,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
-from openerp.tools.safe_eval import safe_eval as eval
+from openerp.tools.safe_eval import safe_eval
 from functools import partial
 import re
 
@@ -66,7 +66,7 @@ class AccountDocumentTemplate(models.Model):
             )
         try:
             recurse_lines = partial(self.lines, computed_lines=computed_lines)
-            computed_lines[line_number] = eval(
+            computed_lines[line_number] = safe_eval(
                 line.python_code.replace('L', 'recurse_lines'),
                 locals_dict={'recurse_lines': recurse_lines}
             )
