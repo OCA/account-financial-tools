@@ -21,7 +21,7 @@
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
-from openerp.tools.translate.safe_eval import safe_eval
+from openerp.tools.safe_eval import safe_eval
 import re
 
 
