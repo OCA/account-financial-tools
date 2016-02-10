@@ -21,6 +21,7 @@
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
+from openerp.tools.translate.safe_eval import safe_eval
 import re
 
 
@@ -69,7 +70,7 @@ class account_document_template(orm.Model):
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
         try:
-            self._computed_lines[line_number] = eval(
+            self._computed_lines[line_number] = safe_eval(
                 line.python_code.replace('L', 'self.lines')
             )
         except KeyError:
