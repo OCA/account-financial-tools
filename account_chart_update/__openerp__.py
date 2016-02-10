@@ -32,7 +32,6 @@
               "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
     'website': "www.zikzakmedia.com",
-    'depends': ["account"],
     'category': "Generic Modules/Accounting",
     'contributors': [
         'Joaquín Gutierrez',
@@ -70,7 +69,6 @@ Any problem found while updating will be shown on the last step.
         "account",
         "base",
     ],
-    "demo": [],
     "data": [
         'wizard/wizard_chart_update_view.xml',
         'views/account_tax_code_view.xml',

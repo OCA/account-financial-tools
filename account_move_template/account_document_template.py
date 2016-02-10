@@ -21,7 +21,7 @@
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
-from openerp.tools.translate.safe_eval import safe_eval
+from openerp.tools.safe_eval import safe_eval
 import re
 
 
@@ -71,7 +71,8 @@ class account_document_template(orm.Model):
             )
         try:
             self._computed_lines[line_number] = safe_eval(
-                line.python_code.replace('L', 'self.lines')
+                line.python_code,
+                locals_dict={'L': self.lines}
             )
         except KeyError:
             raise orm.except_orm(
