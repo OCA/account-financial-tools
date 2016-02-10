@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_invoice_filter" model="ir.ui.view">
+            <field name="name">l10n_ar.invoice.search</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <field name="number" position="attributes">
+                    <attribute name="filter_domain">['|','|','|','|', ('document_number','ilike',self), ('number','ilike',self), ('origin','ilike',self), ('reference', 'ilike', self), ('partner_id', 'child_of', self)]</attribute>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="document_type_id"/>
+                </field>
+                <group string="Group By">
+                    <filter string="Document Type" domain="[]" context="{'group_by':'document_type_id'}"/>
+                </group>
+            </field>
+        </record>
+
+        <record id="invoice_tree" model="ir.ui.view">
+            <field name="name">account.document.invoice.tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <field name="number" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="number" position="after">
+                    <field name="display_name"/>
+                </field>
+            </field>
+        </record>
+            
+        <!-- add document number on paymentrs tree view. We make it in a separete view because portal users cant see this tag -->
+<!--         <record id="view_invoice_payment_doc_number_form" model="ir.ui.view">
+            <field name="name">account.document.invoice.payment_doc_number.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Payments']//field[@name='move_id']" position="after">
+                    <field name="document_number"/>
+                </xpath>
+            </field>
+        </record>        -->
+
+        <record id="view_invoice_form" model="ir.ui.view">
+            <field name="name">account.document invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="available_journal_document_type_ids" invisible="1"/>
+                    <field name="use_documents" invisible="1"/>
+                    <field name="document_sequence_id" invisible="1"/>
+                    <field name="localization" invisible="1"/>
+                </form>
+
+                <field name="journal_id" position="after">
+                    <field name="vat_discriminated"/>
+                    <field name="vat_responsability_id" states="open,paid"/>
+                </field>
+
+                <field name="date_invoice" position="before">
+                    <field name="journal_document_type_id" attrs="{'invisible': [('use_documents', '=', False)], 'required': [('use_documents', '=', True)], 'readonly': ['|', ('state', '!=', 'draft'), ('move_name', '!=', False)]}" domain="[('id', 'in', available_journal_document_type_ids[0][2])]"/>
+                    <field name="document_number" attrs="{'invisible': ['|', ('document_sequence_id', '!=', False), ('use_documents', '=', False)], 'required': [('document_sequence_id', '=', False), ('use_documents', '=', True)], 'readonly': ['|', ('state', '!=', 'draft'), ('move_name', '!=', False)]}"/>
+                </field>
+
+                <field name="number" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="number" position="before">
+                    <field name="display_name" attrs="{'invisible': [('display_name', '=', False)]}" class="oe_inline"/>
+                    <label string="- Next Number: " attrs="{'invisible': [('next_number', 'in', (0, False))]}" class="oe_inline"/>
+                    <field name="next_number" attrs="{'invisible': [('next_number', 'in', (0, False))]}" class="oe_inline"/>
+                </field>
+           
+            </field>
+        </record>
+
+        <!-- add document number on paymentrs tree view. We make it in a separete view because portal users cant see this tag -->
+<!--         <record id="view_invoice_supplier_payment_doc_number_form" model="ir.ui.view">
+            <field name="name">l10n_ar.invoice.payment_doc_number.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Payments']//field[@name='move_id']" position="after">
+                    <field name="document_number"/>
+                </xpath>
+            </field>
+        </record>       -->
+
+        <record id="view_supplier_invoice_form" model="ir.ui.view">
+            <field name="name">account.document supplier.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="available_journal_document_type_ids" invisible="1"/>
+                    <field name="use_documents" invisible="1"/>
+                    <field name="document_sequence_id" invisible="1"/>
+                    <field name="localization" invisible="1"/>
+                </form>
+
+                <field name="journal_id" position="after">
+                    <field name="vat_discriminated"/>
+                    <field name="vat_responsability_id" states="open,paid"/>
+                </field>
+
+                <field name="date_invoice" position="before">
+                    <field name="journal_document_type_id" attrs="{'invisible': [('use_documents', '=', False)], 'required': [('use_documents', '=', True)], 'readonly': ['|', ('state', '!=', 'draft'), ('move_name', '!=', False)]}" domain="[('id', 'in', available_journal_document_type_ids[0][2])]"/>
+                    <field name="document_number" attrs="{'invisible': ['|', ('document_sequence_id', '!=', False), ('use_documents', '=', False)], 'required': [('document_sequence_id', '=', False), ('use_documents', '=', True)], 'readonly': ['|', ('state', '!=', 'draft'), ('move_name', '!=', False)]}"/>
+                </field>
+
+                <field name="number" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+                <h1 class="mt0" position="before">
+                    <label string="- Next Number: " attrs="{'invisible': [('next_number', 'in', (0, False))]}" class="oe_inline"/>
+                    <field name="next_number" attrs="{'invisible': [('next_number', 'in', (0, False))]}" class="oe_inline"/>
+                </h1>
+                <field name="number" position="before">
+                    <field name="display_name" attrs="{'invisible': [('display_name', '=', False)]}" class="oe_inline"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

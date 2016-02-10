@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_document_type_form" model="ir.ui.view">
+            <field name="name">account.document.type.form</field>
+            <field name="model">account.document.type</field>
+            <field name="arch" type="xml">
+                <form string="Document Type">
+                    <group>
+                        <field name="name"/>
+                        <field name='code'/>
+                        <field name='doc_code_prefix'/>
+                        <field name='document_letter_id'/>
+                        <field name='report_name'/>
+                        <field name='internal_type'/>
+                        <field name='localization'/>
+                        <field name='active'/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_document_type_tree" model="ir.ui.view">
+            <field name="name">account.document.type.tree</field>
+            <field name="model">account.document.type</field>
+            <field name="arch" type="xml">
+                <tree string="Document Type">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="doc_code_prefix"/>
+                    <field name="document_letter_id"/>
+                    <field name='report_name'/>
+                    <field name='internal_type'/>
+                    <field name='localization'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_document_type_filter" model="ir.ui.view">
+            <field name="name">account.document.type.filter</field>
+            <field name="model">account.document.type</field>
+            <field name="arch" type="xml">
+                <search string="Document Type">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="document_letter_id"/>
+                    <field name='internal_type'/>
+                    <field name='localization'/>
+                    <group expand="1" string="Group By...">
+                        <filter string="Document Letter" name="document_letter_id" context="{'group_by':'document_letter_id'}"/>
+                        <filter string="Internal Type" name="internal_type" context="{'group_by':'internal_type'}"/>
+                        <filter string="Localization" name="localization" context="{'group_by':'localization'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_document_type">
+            <field name="name">Document Types</field>
+            <field name="res_model">account.document.type</field>
+        </record>
+
+        <menuitem action="action_document_type" id="menu_document_type" sequence="20" parent="account.account_account_menu"/>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

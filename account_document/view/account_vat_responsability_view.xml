@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_vat_responsability_form" model="ir.ui.view">
+            <field name="name">account.vat.responsability.form</field>
+            <field name="model">account.vat.responsability</field>
+            <field name="arch" type="xml">
+                <form string="VAT Responsability">
+                    <group>
+                        <field name="name"/>
+                        <field name='code'/>
+                        <field name='issued_letter_ids'/>
+                        <field name='received_letter_ids'/>
+                        <field name='vat_tax_required_on_sales_invoices'/>
+                        <field name='active'/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_vat_responsability_tree" model="ir.ui.view">
+            <field name="name">account.vat.responsability.tree</field>
+            <field name="model">account.vat.responsability</field>
+            <field name="arch" type="xml">
+                <tree string="VAT Responsability">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_vat_responsability">
+            <field name="name">VAT Responsability</field>
+            <field name="res_model">account.vat.responsability</field>
+        </record>
+
+        <menuitem name="Responsabilities" action="action_vat_responsability" id="menu_vat_responsability" sequence="40" parent="account.account_account_menu"/>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

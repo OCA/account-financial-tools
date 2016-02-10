@@ -9,8 +9,16 @@
         "account",
     ],
     "data": [
+        'view/account_journal_view.xml',
+        'view/account_move_line_view.xml',
+        'view/account_move_view.xml',
+        'view/account_document_type_view.xml',
+        'view/account_document_letter_view.xml',
+        'view/account_vat_responsability_view.xml',
+        'view/account_invoice_view.xml',
+        'view/res_company_view.xml',
+        'view/res_partner_view.xml',
     ],
     "demo": [],
-    "active": False,
-    'installable': False
+    'installable': True,
 }
