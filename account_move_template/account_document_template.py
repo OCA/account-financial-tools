@@ -71,7 +71,8 @@ class account_document_template(orm.Model):
             )
         try:
             self._computed_lines[line_number] = safe_eval(
-                line.python_code.replace('L', 'self.lines')
+                line.python_code,
+                locals_dict={'L': self.lines}
             )
         except KeyError:
             raise orm.except_orm(
