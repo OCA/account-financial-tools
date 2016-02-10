@@ -21,6 +21,7 @@
 ##############################################################################
 
 from openerp import models
+from openerp.tools.safe_eval import safe_eval
 
 
 class ir_actions_act_window(models.Model):
@@ -59,7 +60,7 @@ class ir_actions_act_window(models.Model):
         if ids == [self._amlse_act_id]:
             amlse_act = res[0]
             if amlse_act.get('context'):
-                act_ctx = eval(amlse_act['context'])
+                act_ctx = safe_eval(amlse_act['context'])
                 act_ctx.update(self._amlse_add_groups(cr, uid, context))
                 amlse_act['context'] = str(act_ctx)
         return res
