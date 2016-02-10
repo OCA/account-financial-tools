@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Journal Items']/field[@name='line_id']/tree/field[@name='name']" position="after">
+                    <field
+                        name="move_line_to_reconcile_id"
+                        on_change="onchange_move_line_to_reconcile_id(move_line_to_reconcile_id)"/>
+                    <button 
+                        icon="gtk-yes" name="reconcile_move_line" string="Reconcile Line"
+                        type="object" attrs="{'invisible':[('move_line_to_reconcile_id','=',False)]}"/>
+                    <button
+                        icon="gtk-no" name="unreconcile_move_line" string="Unreconcile Line"
+                        type="object" attrs="{'invisible':[('move_line_to_reconcile_id','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
