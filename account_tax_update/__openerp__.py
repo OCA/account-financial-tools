@@ -21,7 +21,7 @@
 ##############################################################################
 {
     "name": "Update tax wizard",
-    "version": "1.0.44",
+    "version": "7.0.1.0.45",
     "author": "Therp BV, Camptocamp SA,Odoo Community Association (OCA)",
     "category": 'Base',
     'complexity': "normal",
