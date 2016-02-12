@@ -12,7 +12,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     report_amount_tax = fields.Monetary(
@@ -30,7 +30,7 @@ class account_invoice(models.Model):
         )
     available_journal_document_type_ids = fields.Many2many(
         'account.journal.document.type',
-        compute='_get_available_journal_document_type_ids',
+        compute='get_available_journal_document_types',
         string='Available Journal Document Types',
         )
     journal_document_type_id = fields.Many2one(
@@ -47,9 +47,6 @@ class account_invoice(models.Model):
         readonly=True,
         store=True,
         )
-    document_letter_id = fields.Many2one(
-        related='document_type_id.document_letter_id',
-        )
     document_sequence_id = fields.Many2one(
         related='journal_document_type_id.sequence_id',
         )
@@ -58,12 +55,6 @@ class account_invoice(models.Model):
         copy=False,
         readonly=True,
         states={'draft': [('readonly', False)]}
-        )
-    vat_responsability_id = fields.Many2one(
-        'account.vat.responsability',
-        string='VAT Responsability',
-        readonly=True,
-        copy=False,
         )
     display_name = fields.Char(
         compute='_get_display_name',
@@ -97,19 +88,20 @@ class account_invoice(models.Model):
             l[0].name, formatLang(self.env, l[1], currency_obj=currency)), res)
         return res
 
-    @api.multi
-    @api.depends('amount_untaxed', 'amount_tax', 'tax_line_ids')
+    @api.depends(
+        'amount_untaxed', 'amount_tax', 'tax_line_ids', 'document_type_id')
     def _compute_report_amount_and_taxes(self):
         for invoice in self:
-            included_tax_group_ids = (
-                invoice.document_letter_id.included_tax_group_ids)
-            if not included_tax_group_ids:
+            taxes_included = (
+                invoice.document_type_id and
+                invoice.document_type_id.get_taxes_included() or False)
+            if not taxes_included:
                 report_amount_tax = invoice.amount_tax
                 report_amount_untaxed = invoice.amount_untaxed
                 not_included_taxes = invoice.tax_line_ids
             else:
                 included_taxes = invoice.tax_line_ids.filtered(
-                    lambda x: x.tax_id.tax_group_id in included_tax_group_ids)
+                    lambda x: x.tax_id in taxes_included)
                 not_included_taxes = (
                     invoice.tax_line_ids - included_taxes)
                 report_amount_tax = sum(not_included_taxes.mapped('amount'))
@@ -184,81 +176,13 @@ class account_invoice(models.Model):
         return recs.name_get()
 
     @api.one
-    @api.depends('journal_id', 'partner_id')
-    def _get_available_journal_document_type_ids(self):
-        """
-        This function search for available document types regarding:
-        * Journal
-        * Partner
-        * Company
-        * Documents configuration
-        If needed, we can make this funcion inheritable and customizable per
-        localization
-        """
-        invoice_type = self.type
-
-        journal_document_types = journal_document_type = self.env[
-            'account.journal.document.type']
-
-        if invoice_type in [
-                'out_invoice', 'in_invoice', 'out_refund', 'in_refund']:
-
-            if self.use_documents:
-
-                letters = self.journal_id.get_journal_letter(
-                    counterpart_partner=self.commercial_partner_id)
-
-                domain = [
-                    ('journal_id', '=', self.journal_id.id),
-                    '|',
-                    ('document_type_id.document_letter_id', 'in', letters.ids),
-                    ('document_type_id.document_letter_id', '=', False),
-                    ]
-
-                # If internal_type in context we try to serch specific document
-                # for eg used on debit notes
-                internal_type = self._context.get('internal_type', False)
-                if internal_type:
-                    journal_document_type = journal_document_type.search(
-                        domain + [
-                            ('document_type_id.internal_type',
-                                '=', internal_type)], limit=1)
-
-                # For domain, we search all documents
-                journal_document_types = journal_document_types.search(domain)
-
-                # If not specific document type found, we choose another one
-                if not journal_document_type and journal_document_types:
-                    journal_document_type = journal_document_types[0]
-
-        if invoice_type == 'in_invoice':
-            other_document_types = (
-                self.commercial_partner_id.other_document_type_ids)
-
-            domain = [
-                ('journal_id', '=', self.journal_id.id),
-                ('document_type_id',
-                    'in', other_document_types.ids),
-                ]
-            other_journal_document_types = self.env[
-                'account.journal.document.type'].search(domain)
-
-            journal_document_types += other_journal_document_types
-            # if we have some document sepecific for the partner, we choose it
-            if other_journal_document_types:
-                journal_document_type = other_journal_document_types[0]
-
-        self.available_journal_document_type_ids = journal_document_types
-        self.journal_document_type_id = journal_document_type
-
-    @api.one
     @api.constrains(
         'journal_id',
         'partner_id',
         'journal_document_type_id',
         )
     def _get_document_type(self):
-        """ Como los campos responsability y journal document type no los
+        """ Como los campos responsible y journal document type no los
         queremos hacer funcion porque no queremos que sus valores cambien nunca
         y como con la funcion anterior solo se almacenan solo si se crea desde
         interfaz, hacemos este hack de constraint para computarlos si no estan
@@ -312,7 +236,16 @@ class account_invoice(models.Model):
         invoice later on action_number
         """
         self.check_use_documents()
-        return super(account_invoice, self).action_move_create()
+        return super(AccountInvoice, self).action_move_create()
+
+    @api.multi
+    def get_localization_invoice_vals(self):
+        """
+        Function to be inherited by different localizations and add custom
+        data to invoice on invoice validation
+        """
+        self.ensure_one()
+        return {}
 
     @api.multi
     def invoice_validate(self):
@@ -329,12 +262,8 @@ class account_invoice(models.Model):
         for invoice in self:
             _logger.info(
                 'Setting document data on account.invoice and account.move')
-            commercial_partner = self.partner_id.commercial_partner_id
             journal_document_type = invoice.journal_document_type_id
-            inv_vals = {
-                'vat_responsability_id': (
-                    commercial_partner.vat_responsability_id.id),
-                }
+            inv_vals = self.get_localization_invoice_vals()
             if invoice.use_documents:
                 if not invoice.document_number:
                     if not invoice.journal_document_type_id.sequence_id:
@@ -356,5 +285,46 @@ class account_invoice(models.Model):
                     'document_number': document_number,
                     })
             invoice.write(inv_vals)
-        res = super(account_invoice, self).invoice_validate()
+        res = super(AccountInvoice, self).invoice_validate()
         return res
+
+    @api.multi
+    @api.depends('journal_id', 'partner_id', 'company_id')
+    def get_available_journal_document_types(self):
+        """
+        This function should only be inherited if you need to add another
+        "depends", for eg, if you need to add a depend on "new_field" you
+        should add:
+
+        @api.depends('new_field')
+        def _get_available_journal_document_types(self):
+            return super(
+                AccountInvoice, self)._get_available_journal_document_types()
+        """
+        for invoice in self:
+            res = self._get_available_journal_document_types()
+            invoice.available_journal_document_type_ids = res[
+                'available_journal_document_types']
+            invoice.journal_document_type_id = res[
+                'journal_document_type']
+
+    @api.multi
+    def _get_available_journal_document_types(self):
+        """
+        This function is to be inherited by differents localizations and MUST
+        return a dictionary with two keys:
+        * 'available_journal_document_types': available document types on
+        this invoice
+        * 'journal_document_type': suggested document type on this invoice
+        """
+        self.ensure_one()
+        # As default we return every journal document type, and if one exists
+        # then we return the first one as suggested
+        journal_document_types = self.journal_id.journal_document_type_ids
+        journal_document_type = (
+            journal_document_types and journal_document_types[0] or
+            journal_document_types)
+        return {
+            'available_journal_document_types': journal_document_types,
+            'journal_document_type': journal_document_type,
+            }

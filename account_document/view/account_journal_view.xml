@@ -30,7 +30,7 @@
                         <group>
                             <field name='document_sequence_type' attrs="{'required': [('use_documents', '=', True),('type', 'in', ['purchase','sale'])]}"/>
                         </group>
-                        <button name="check_document_classes" type="object" string="Update Documents"/>
+                        <button name="update_journal_document_types" type="object" string="Update Documents"/>
                         <field name='journal_document_type_ids' context="{'default_journal_id': id}"/>
                     </page>
                 </notebook>

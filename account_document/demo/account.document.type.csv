@@ -1,3 +1,0 @@
-id,code,name,document_letter_id/id,report_name,internal_type,doc_code_prefix,localization
-doc_type_tax_inc,1,TAXES INC,letter_eg,,invoice,TAX-I ,
-doc_type_tax_no_inc,1,TAXES NO INC,,,invoice,TAX-NI ,

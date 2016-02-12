@@ -9,9 +9,6 @@
                 <field name="partner_id" position="before">
                     <field name="localization" widget="selection"/>
                 </field>
-                <field name="vat" position="after">
-                    <field name="vat_responsability_id" attrs="{'required': [('localization', '!=', False)]}" widget="selection"/>
-                </field>
             </field>
         </record>
 

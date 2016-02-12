@@ -3,9 +3,6 @@
 <data>
 <template id="report_invoice_document" inherit_id="account.report_invoice_document">
 
-    <xpath expr="//span[@t-if='o.partner_id.vat']" position="after">
-        <span t-if="o.vat_responsability_id">VAT Responsability: <span t-field="o.vat_responsability_id.name"/></span>
-    </xpath>
     <xpath expr="//h2" position="attributes">
         <attribute name="t-if">not o.use_documents</attribute>
     </xpath>
@@ -13,7 +10,6 @@
     <xpath expr="//h2" position="after">
         <h2 t-if="o.use_documents">
             <span t-field="o.document_type_id.report_name"/>
-            <span t-field="o.document_letter_id.name"/>
             <span t-field="o.document_number"/>
         </h2>
     </xpath>

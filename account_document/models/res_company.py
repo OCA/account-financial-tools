@@ -17,9 +17,6 @@ class ResCompany(models.Model):
             lambda self, *args, **kwargs: self._get_localizations(
                 *args, **kwargs))
 
-    vat_responsability_id = fields.Many2one(
-        related='partner_id.vat_responsability_id',
-        )
     localization = fields.Selection(
         _localization_selection,
         'Localization',

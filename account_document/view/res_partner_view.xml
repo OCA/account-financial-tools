@@ -7,29 +7,11 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="arch" type="xml">
-                <field name="website" position="after">
-                    <field name="vat_responsability_id" options="{'no_open': True, 'no_create': True}"/>
-                </field>
-
                 <!-- add other documents -->
                 <xpath expr="//page[@name='accounting']/group" position="after">
                     <label for="other_document_type_ids"/>
                     <field name="other_document_type_ids"/>
                 </xpath>
-            </field>
-        </record>
-
-        <record id="view_res_partner_filter" model="ir.ui.view">
-            <field name="name">view.res.partner.filter.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_res_partner_filter"/>
-            <field name="arch" type="xml">
-                <field name="category_id" position="after">
-                    <field name="vat_responsability_id"/>
-                </field>
-                <filter name="salesperson" position="before">
-                    <filter string="VAT Responsability" context="{'group_by': 'vat_responsability_id'}"/>
-                </filter>
             </field>
         </record>
 

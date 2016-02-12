@@ -11,7 +11,6 @@
                         <field name="name"/>
                         <field name='code'/>
                         <field name='doc_code_prefix'/>
-                        <field name='document_letter_id'/>
                         <field name='report_name'/>
                         <field name='internal_type'/>
                         <field name='localization'/>
@@ -29,7 +28,6 @@
                     <field name="name"/>
                     <field name="code"/>
                     <field name="doc_code_prefix"/>
-                    <field name="document_letter_id"/>
                     <field name='report_name'/>
                     <field name='internal_type'/>
                     <field name='localization'/>
@@ -44,11 +42,9 @@
                 <search string="Document Type">
                     <field name="name"/>
                     <field name="code"/>
-                    <field name="document_letter_id"/>
                     <field name='internal_type'/>
                     <field name='localization'/>
                     <group expand="1" string="Group By...">
-                        <filter string="Document Letter" name="document_letter_id" context="{'group_by':'document_letter_id'}"/>
                         <filter string="Internal Type" name="internal_type" context="{'group_by':'internal_type'}"/>
                         <filter string="Localization" name="localization" context="{'group_by':'localization'}"/>
                     </group>

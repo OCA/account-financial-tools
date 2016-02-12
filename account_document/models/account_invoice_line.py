@@ -27,25 +27,25 @@ class account_invoice_line(models.Model):
         )
 
     @api.multi
-    @api.depends('price_unit', 'price_subtotal')
+    @api.depends('price_unit', 'price_subtotal', 'invoice_id.document_type_id')
     def _compute_report_prices_and_taxes(self):
         for line in self:
-            included_tax_group_ids = (
-                line.invoice_id.document_letter_id.included_tax_group_ids)
-            if not included_tax_group_ids:
+            invoice = line.invoice_id
+            taxes_included = (
+                invoice.document_type_id and
+                invoice.document_type_id.get_taxes_included() or False)
+            if not taxes_included:
                 report_price_unit = line.price_unit
                 report_price_subtotal = line.price_subtotal
                 not_included_taxes = line.invoice_line_tax_ids
             else:
-                currency = (
-                    line.invoice_id and line.invoice_id.currency_id or None)
                 included_taxes = line.invoice_line_tax_ids.filtered(
-                    lambda x: x.tax_group_id in included_tax_group_ids)
+                    lambda x: x in taxes_included)
                 not_included_taxes = (
                     line.invoice_line_tax_ids - included_taxes)
                 report_price_unit = included_taxes.compute_all(
-                    line.price_unit, currency, 1.0, line.product_id,
-                    line.invoice_id.partner_id)['total_included']
+                    line.price_unit, invoice.currency_id, 1.0, line.product_id,
+                    invoice.partner_id)['total_included']
                 report_price_subtotal = report_price_unit * line.quantity
             line.report_price_subtotal = report_price_subtotal
             line.report_price_unit = report_price_unit

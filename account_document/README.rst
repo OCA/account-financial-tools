@@ -17,7 +17,7 @@ We add many functionalities as:
         2. We don't have any constraint to what we need (for eg. we can have two journal entries with same document numbers)
         3. For eg, in argentina, the document number for a Invoice is '0001-00000001' and you can have many invoices with same document number (for eg. for purchases and for eg. for different document types)
 
-* New model "account.vat.responsability". Required for fallowing items and also used to decided if vat taxes are required or not on sale invoices.
+* New model "afip.responsible.type". Required for fallowing items and also used to decided if vat taxes are required or not on sale invoices.
 * New model "account.document.letter". Used mainly to map between vat reponsabilities between receptor and issuer of a document. It is used also to show or not taxes on reports
 * Modification on reports to show or not taxes regardin document letter
 
