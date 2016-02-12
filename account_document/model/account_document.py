@@ -99,14 +99,14 @@ class AccountDocumentLetter(models.Model):
         )
     issuer_ids = fields.Many2many(
         'account.vat.responsability',
-        'account_document_letter_letter_issuer_rel',
+        'account_document_letter_responsability_issuer_rel',
         'document_letter_id',
         'responsability_id',
         'Issuers',
         )
     receptor_ids = fields.Many2many(
         'account.vat.responsability',
-        'account_document_letter_letter_receptor_rel',
+        'account_document_letter_responsability_receptor_rel',
         'document_letter_id',
         'responsability_id',
         'Receptors',
@@ -115,38 +115,16 @@ class AccountDocumentLetter(models.Model):
         'Active',
         default=True
         )
-    vat_discriminated = fields.Boolean(
-        'Vat Discriminated on Invoices?',
-        help="If True, the vat will be discriminated on invoice report.")
+    included_tax_group_ids = fields.Many2many(
+        'account.tax.group',
+        'account_document_letter_tax_group_rel',
+        'document_letter_id', 'tax_group_id',
+        'Included Tax Groups',
+        help='For documents of this letter, include this taxes of this group '
+        'on invoices amounts'
+        )
+    # taxes_discriminated = fields.Boolean(
+    #     'Taxes Discriminated on Invoices?',
+    #     help="If True, the taxes will be discriminated on invoice report.")
 
     _sql_constraints = [('name', 'unique(name)', 'Name must be unique!'), ]
-
-    @api.model
-    def get_valid_document_letters(
-            self, partner, operation_type='sale', company=False):
-
-        if not partner or not operation_type not in ['sale', 'purchase']:
-            return []
-
-        partner = partner.commercial_partner_id
-
-        if not company:
-            company = self.env.user.company_id
-
-        if not company.partner_id.responsability_id.id:
-            raise Warning(_(
-                'Your company has not setted any responsability!\n'
-                'Please, set your company responsability in the company '
-                'partner before continue.'))
-
-        if operation_type == 'sale':
-            issuer_responsability = company.partner_id.responsability_id
-            receptor_responsability = partner.responsability_id
-        elif operation_type == 'purchase':
-            issuer_responsability = partner.responsability_id
-            receptor_responsability = company.partner_id.responsability_id
-
-        document_letter_ids = self.search([
-            ('issuer_ids', '=', issuer_responsability.id),
-            ('receptor_ids', '=', receptor_responsability.id)])
-        return document_letter_ids

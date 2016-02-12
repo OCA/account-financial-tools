@@ -39,6 +39,9 @@ class AccountJournalDocumentType(models.Model):
 class AccountJournal(models.Model):
     _inherit = "account.journal"
 
+    localization = fields.Selection(
+        related='company_id.localization'
+        )
     journal_document_type_ids = fields.One2many(
         'account.journal.document.type',
         'journal_id',
@@ -64,14 +67,31 @@ class AccountJournal(models.Model):
             self.use_documents = False
 
     @api.multi
-    def get_journal_letter(self):
+    def get_journal_letter(self, counterpart_partner=False):
         """Function to be inherited by others"""
         self.ensure_one()
         responsability = self.company_id.vat_responsability_id
-        if self.type in ['sale', 'sale_refund']:
-            letters = responsability.issued_letter_ids
-        elif self.type in ['purchase', 'purchase_refund']:
-            letters = responsability.received_letter_ids
+        if self.type == 'sale':
+            resp_field = 'issuer_ids'
+        elif self.type == 'purchase':
+            resp_field = 'receptor_ids'
+        else:
+            raise Warning('Letters not implemented for journal type %s' % (
+                self.type))
+        letters = self.env['account.document.letter'].search([
+            '|', (resp_field, 'in', responsability.id),
+            (resp_field, '=', False)])
+
+        if counterpart_partner:
+            counterpart_resp = counterpart_partner.vat_responsability_id
+            if self.type == 'sale':
+                letters = letters.filtered(
+                    lambda x: not x.receptor_ids or
+                    counterpart_resp in x.receptor_ids)
+            else:
+                letters = letters.filtered(
+                    lambda x: not x.issuer_ids or
+                    counterpart_resp in x.issuer_ids)
         return letters
 
     @api.one

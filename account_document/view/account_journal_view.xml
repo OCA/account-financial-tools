@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <form>
                     <field name="id" invisible="1"/>
+                    <field name="localization" invisible="1"/>
                 </form>
 
                 <!-- This was just in case we want to replace  -->

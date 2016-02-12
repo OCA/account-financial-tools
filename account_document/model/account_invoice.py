@@ -7,6 +7,7 @@ from openerp import models, fields, api, _
 from openerp.exceptions import Warning
 # import openerp.addons.decimal_precision as dp
 # import re
+from openerp.tools.misc import formatLang
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -14,26 +15,18 @@ _logger = logging.getLogger(__name__)
 class account_invoice(models.Model):
     _inherit = "account.invoice"
 
-    # TODO chequear si los necesitamos
-    # printed_amount_tax = fields.Float(
-    #     compute="_get_taxes_and_prices",
-    #     digits=dp.get_precision('Account'),
-    #     string=_('Tax')
-    #     )
-    # printed_amount_untaxed = fields.Float(
-    #     compute="_get_taxes_and_prices",
-    #     digits=dp.get_precision('Account'),
-    #     string=_('Subtotal')
-    #     )
-    # printed_tax_ids = fields.One2many(
-    #     compute="_get_taxes_and_prices",
-    #     comodel_name='account.invoice.tax',
-    #     string=_('Tax')
-    #     )
-    vat_discriminated = fields.Boolean(
-        'Discriminate VAT?',
-        compute="get_vat_discriminated",
-        help="Discriminate VAT on Invoices?",
+    report_amount_tax = fields.Monetary(
+        string='Tax',
+        compute='_compute_report_amount_and_taxes'
+        )
+    report_amount_untaxed = fields.Monetary(
+        string='Untaxed Amount',
+        compute='_compute_report_amount_and_taxes'
+        )
+    report_tax_line_ids = fields.One2many(
+        compute="_compute_report_amount_and_taxes",
+        comodel_name='account.invoice.tax',
+        string='Taxes'
         )
     available_journal_document_type_ids = fields.Many2many(
         'account.journal.document.type',
@@ -49,11 +42,13 @@ class account_invoice(models.Model):
         )
     # we add this fields so we can search, group and analyze by this one
     document_type_id = fields.Many2one(
-        'account.document.type',
         related='journal_document_type_id.document_type_id',
         copy=False,
         readonly=True,
         store=True,
+        )
+    document_letter_id = fields.Many2one(
+        related='document_type_id.document_letter_id',
         )
     document_sequence_id = fields.Many2one(
         related='journal_document_type_id.sequence_id',
@@ -85,6 +80,44 @@ class account_invoice(models.Model):
     localization = fields.Selection(
         related='company_id.localization',
         )
+
+    @api.multi
+    def _get_tax_amount_by_group(self):
+        """
+        we can not inherit because of function design, we overwrite
+        """
+        self.ensure_one()
+        res = {}
+        currency = self.currency_id or self.company_id.currency_id
+        for line in self.report_tax_line_ids:
+            res.setdefault(line.tax_id.tax_group_id, 0.0)
+            res[line.tax_id.tax_group_id] += line.amount
+        res = sorted(res.items(), key=lambda l: l[0].sequence)
+        res = map(lambda l: (
+            l[0].name, formatLang(self.env, l[1], currency_obj=currency)), res)
+        return res
+
+    @api.multi
+    @api.depends('amount_untaxed', 'amount_tax', 'tax_line_ids')
+    def _compute_report_amount_and_taxes(self):
+        for invoice in self:
+            included_tax_group_ids = (
+                invoice.document_letter_id.included_tax_group_ids)
+            if not included_tax_group_ids:
+                report_amount_tax = invoice.amount_tax
+                report_amount_untaxed = invoice.amount_untaxed
+                not_included_taxes = invoice.tax_line_ids
+            else:
+                included_taxes = invoice.tax_line_ids.filtered(
+                    lambda x: x.tax_id.tax_group_id in included_tax_group_ids)
+                not_included_taxes = (
+                    invoice.tax_line_ids - included_taxes)
+                report_amount_tax = sum(not_included_taxes.mapped('amount'))
+                report_amount_untaxed = invoice.amount_untaxed + sum(
+                    included_taxes.mapped('amount'))
+            invoice.report_amount_tax = report_amount_tax
+            invoice.report_amount_untaxed = report_amount_untaxed
+            invoice.report_tax_line_ids = not_included_taxes
 
     @api.multi
     @api.depends(
@@ -151,33 +184,6 @@ class account_invoice(models.Model):
         return recs.name_get()
 
     @api.one
-    @api.depends(
-        'journal_document_type_id',
-        'company_id',
-        )
-    def get_vat_discriminated(self):
-        vat_discriminated = False
-        document_letter = self.document_type_id.document_letter_id
-        invoice_vat_discrimination_default = (
-            self.company_id.invoice_vat_discrimination_default)
-        if (
-                document_letter.vat_discriminated or
-                invoice_vat_discrimination_default == 'discriminate_default'
-                ):
-            vat_discriminated = True
-        self.vat_discriminated = vat_discriminated
-
-    @api.model
-    def get_operation_type(self, invoice_type):
-        if invoice_type in ['in_invoice', 'in_refund']:
-            operation_type = 'purchase'
-        elif invoice_type in ['out_invoice', 'out_refund']:
-            operation_type = 'sale'
-        else:
-            operation_type = False
-        return operation_type
-
-    @api.one
     @api.depends('journal_id', 'partner_id')
     def _get_available_journal_document_type_ids(self):
         """
@@ -193,21 +199,19 @@ class account_invoice(models.Model):
 
         journal_document_types = journal_document_type = self.env[
             'account.journal.document.type']
+
         if invoice_type in [
                 'out_invoice', 'in_invoice', 'out_refund', 'in_refund']:
-            operation_type = self.get_operation_type(invoice_type)
 
             if self.use_documents:
-                # to ensure we have access rights (we must see companies,
-                # letters, etc)
-                letters = self.sudo().env[
-                    'account.document.letter'].get_valid_document_letters(
-                    self.partner_id, operation_type, self.company_id)
+
+                letters = self.journal_id.get_journal_letter(
+                    counterpart_partner=self.commercial_partner_id)
 
                 domain = [
                     ('journal_id', '=', self.journal_id.id),
                     '|',
-                    ('document_type_id.document_letter_id', 'in', letters),
+                    ('document_type_id.document_letter_id', 'in', letters.ids),
                     ('document_type_id.document_letter_id', '=', False),
                     ]
 

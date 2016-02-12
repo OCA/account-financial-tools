@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+    <xpath expr="//span[@t-if='o.partner_id.vat']" position="after">
+        <span t-if="o.vat_responsability_id">VAT Responsability: <span t-field="o.vat_responsability_id.name"/></span>
+    </xpath>
+    <xpath expr="//h2" position="attributes">
+        <attribute name="t-if">not o.use_documents</attribute>
+    </xpath>
+
+    <xpath expr="//h2" position="after">
+        <h2 t-if="o.use_documents">
+            <span t-field="o.document_type_id.report_name"/>
+            <span t-field="o.document_letter_id.name"/>
+            <span t-field="o.document_number"/>
+        </h2>
+    </xpath>
+
+    <xpath expr="//span[@t-field='l.price_unit']" position="attributes">
+        <attribute name="t-field">l.report_price_unit</attribute>
+    </xpath>
+
+<!-- TODO aca podriamos imprimir los report_tax_ids -->
+<!--     <xpath expr="//thead/tr/th[5]" position="attributes">
+        <attribute name="t-if">l.report_invoice_line_tax_ids</attribute>
+    </xpath>
+
+    <xpath expr="//tr[@t-foreach='o.invoice_line_ids']/td[5]" position="attributes">
+        <attribute name="t-if">l.report_invoice_line_tax_ids</attribute>
+    </xpath> -->
+
+    <xpath expr="//span[@t-field='l.price_subtotal']" position="attributes">
+        <attribute name="t-field">l.report_price_subtotal</attribute>
+    </xpath>
+
+    <xpath expr="//span[@t-field='o.amount_untaxed']" position="attributes">
+        <attribute name="t-field">o.report_amount_untaxed</attribute>
+    </xpath>
+
+    <xpath expr="//div[@t-if='o.tax_line_ids']" position="attributes">
+        <attribute name="t-if">o.report_tax_line_ids</attribute>
+    </xpath>
+
+    <xpath expr="//tr[@t-foreach='o.tax_line_ids']" position="attributes">
+        <attribute name="t-foreach">o.report_tax_line_ids</attribute>
+    </xpath>
+</template>
+
+</data>
+</openerp>

@@ -12,7 +12,7 @@
                         <field name="active"/>                    
                         <field name="issuer_ids"/>
                         <field name="receptor_ids"/>
-                        <field name="vat_discriminated"/>
+                        <field name="included_tax_group_ids" widget="many2many_tags"/>
                         <field name="document_type_ids" colspan="4"/>
                     </group>
                 </form>
@@ -25,7 +25,7 @@
             <field name="arch" type="xml">
                 <tree string="Document Letter">
                     <field name="name"/>
-                    <field name="vat_discriminated"/>
+                    <field name="included_tax_group_ids"/>
                 </tree>
             </field>
         </record>

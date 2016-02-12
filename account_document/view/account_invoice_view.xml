@@ -59,7 +59,6 @@
                 </form>
 
                 <field name="journal_id" position="after">
-                    <field name="vat_discriminated"/>
                     <field name="vat_responsability_id" states="open,paid"/>
                 </field>
 
@@ -107,7 +106,6 @@
                 </form>
 
                 <field name="journal_id" position="after">
-                    <field name="vat_discriminated"/>
                     <field name="vat_responsability_id" states="open,paid"/>
                 </field>
 

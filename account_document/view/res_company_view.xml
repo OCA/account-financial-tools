@@ -12,9 +12,6 @@
                 <field name="vat" position="after">
                     <field name="vat_responsability_id" attrs="{'required': [('localization', '!=', False)]}" widget="selection"/>
                 </field>
-                <group name="account_grp">
-                    <field name="invoice_vat_discrimination_default"/>
-                </group>
             </field>
         </record>
 

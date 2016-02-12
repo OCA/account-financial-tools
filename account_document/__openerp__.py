@@ -18,7 +18,11 @@
         'view/account_invoice_view.xml',
         'view/res_company_view.xml',
         'view/res_partner_view.xml',
+        'view/report_invoice.xml',
     ],
-    "demo": [],
+    "demo": [
+        'demo/account_document_letter_demo.xml',
+        'demo/account.document.type.csv',
+    ],
     'installable': True,
 }

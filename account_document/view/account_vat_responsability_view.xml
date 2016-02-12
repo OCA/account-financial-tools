@@ -12,7 +12,8 @@
                         <field name='code'/>
                         <field name='issued_letter_ids'/>
                         <field name='received_letter_ids'/>
-                        <field name='vat_tax_required_on_sales_invoices'/>
+                        <!-- TODO analizar -->
+                        <!-- <field name='subjected_tax_group_ids'/> -->
                         <field name='active'/>
                     </group>
                 </form>
