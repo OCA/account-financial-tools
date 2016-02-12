@@ -61,7 +61,7 @@ addon | version | summary
 --- | --- | ---
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
-[account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
+[account_tax_update](account_tax_update/) | 8.0.1.0.45 (unported) | Update tax wizard
 [async_move_line_importer](async_move_line_importer/) | 0.1.2 (unported) | Asynchronous move/move line CSV importer
 
 [//]: # (end addons)
