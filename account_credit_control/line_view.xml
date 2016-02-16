@@ -85,8 +85,10 @@
 
           <newline/>
           <group string="Group By...">
-            <filter domain='[]' context="{'group_by': 'date'}"
+            <filter domain='[]' context="{'group_by': 'date:day'}"
                     string="Run date"/>
+            <filter domain='[]' context="{'group_by': 'state'}"
+                    string="State"/>
             <filter domain='[]' context="{'group_by': 'level'}"
                     string="Level"/>
             <filter domain='[]' context="{'group_by': 'partner_id'}"
