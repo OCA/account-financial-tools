@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2015-11-22 20:34+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -116,7 +116,7 @@ msgstr ""
 #. module: account_renumber
 #: view:wizard.renumber:0 field:wizard.renumber,period_ids:0
 msgid "Periods"
-msgstr ""
+msgstr "Periodi"
 
 #. module: account_renumber
 #: view:wizard.renumber:0

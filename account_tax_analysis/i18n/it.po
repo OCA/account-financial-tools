@@ -3,13 +3,14 @@
 # * account_tax_analysis
 # 
 # Translators:
+# Stefano <stefano.sforzi@agilebg.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:25+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2015-11-22 20:34+0000\n"
+"PO-Revision-Date: 2016-02-15 20:49+0000\n"
+"Last-Translator: Stefano <stefano.sforzi@agilebg.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,17 +23,17 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
 #: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
 msgid "Account Vat Declaration"
-msgstr ""
+msgstr "Dichiarazione Iva"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,period_list:0
 msgid "Period _list"
-msgstr ""
+msgstr "Elenco dei periodi"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Unposted"
-msgstr ""
+msgstr "Non validate"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
@@ -42,12 +43,12 @@ msgstr "Raggruppa per..."
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,fiscalyear_id:0
 msgid "Fiscalyear to look on"
-msgstr ""
+msgstr "Anno fiscale da analizzare"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,fiscalyear_id:0
 msgid "Fiscalyear"
-msgstr ""
+msgstr "Anno fiscale"
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
@@ -63,17 +64,17 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Account / Tax"
-msgstr ""
+msgstr "Conto contabile / tassa"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:0
 msgid "Taxes Report"
-msgstr ""
+msgstr "Report Tasse"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Unposted Journal Items"
-msgstr ""
+msgstr "Registrazioni contabili non validate"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
@@ -83,12 +84,12 @@ msgstr "Voci Sezionale"
 #. module: account_tax_analysis
 #: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
 msgid "Taxes Analysis"
-msgstr ""
+msgstr "Analisi tasse"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Tax account"
-msgstr ""
+msgstr "Conto tassa"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
@@ -104,22 +105,22 @@ msgstr "Conto"
 #: code:addons/account_tax_analysis/account_tax_analysis.py:47
 #, python-format
 msgid "No period defined"
-msgstr ""
+msgstr "Periodo non definito"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Search Journal Items"
-msgstr ""
+msgstr "Ricerca registrazioni sezionali"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Total credit"
-msgstr ""
+msgstr "Totale credito"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:0
 msgid "Show tax lines"
-msgstr ""
+msgstr "Mostra righe tassazione"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
@@ -129,17 +130,17 @@ msgstr "Periodo"
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Total debit"
-msgstr ""
+msgstr "Totale debito"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Total Taxe"
-msgstr ""
+msgstr "Totale tasse"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:0
 msgid "Periods"
-msgstr ""
+msgstr "Periodi"
 
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:0
@@ -154,10 +155,10 @@ msgstr "Partner"
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Posted Journal Items"
-msgstr ""
+msgstr "Registrazioni sezionali validate"
 
 #. module: account_tax_analysis
 #: code:addons/account_tax_analysis/account_tax_analysis.py:48
 #, python-format
 msgid "You must selected period "
-msgstr ""
+msgstr "Devi selezionare un periodo"
