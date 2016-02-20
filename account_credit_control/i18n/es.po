@@ -3,14 +3,15 @@
 # * account_credit_control
 # 
 # Translators:
+# Antonio Trueba, 2016
 # Eduardo Rodríguez Crespo <erocre@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-16 01:25+0000\n"
-"PO-Revision-Date: 2016-01-19 08:57+0000\n"
-"Last-Translator: Eduardo Rodríguez Crespo <erocre@gmail.com>\n"
+"PO-Revision-Date: 2016-02-16 15:37+0000\n"
+"Last-Translator: Antonio Trueba\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,7 +55,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_1
 msgid "10 days net"
-msgstr ""
+msgstr "10 días neto"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
@@ -239,7 +240,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_credit_control
 #: field:credit.control.communication,company_id:0
@@ -422,7 +423,7 @@ msgstr ""
 #: field:credit.control.communication,currency_id:0
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "Divisa"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_mail_text:0
@@ -545,7 +546,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #. module: account_credit_control
 #: help:credit.control.policy,do_nothing:0

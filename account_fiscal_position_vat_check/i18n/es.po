@@ -3,13 +3,14 @@
 # * account_fiscal_position_vat_check
 # 
 # Translators:
+# Antonio Trueba, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-01-16 01:25+0000\n"
+"PO-Revision-Date: 2016-02-16 15:35+0000\n"
+"Last-Translator: Antonio Trueba\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,12 +21,12 @@ msgstr ""
 #. module: account_fiscal_position_vat_check
 #: field:account.fiscal.position,customer_must_have_vat:0
 msgid "Customer Must Have VAT number"
-msgstr ""
+msgstr "El cliente debe tener un NIF"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_fiscal_position
 msgid "Fiscal Position"
-msgstr ""
+msgstr "Posición fiscal"
 
 #. module: account_fiscal_position_vat_check
 #: help:account.fiscal.position,customer_must_have_vat:0
