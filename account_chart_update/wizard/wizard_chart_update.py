@@ -697,14 +697,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The reconcile is different.\n")
         return notes
 
-    @api.one
-    def _find_accounts(self, mapping_accounts):
-        """Search for, and load, account templates to create/update."""
-        wiz_accounts = self.env['wizard.update.charts.accounts.account']
-        # Remove previous accounts
-        self.account_ids.unlink()
-        # Search for new / updated accounts
-        root_account_id = self.chart_template_id.account_root_id.id
+    def _acc_tmpl_to_search_criteria(self, chart_template):
+        root_account_id = chart_template.account_root_id.id
         acc_templ_criteria = [
             ('chart_template_id', '=', self.chart_template_id.id)]
         if root_account_id:
@@ -712,6 +706,21 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             acc_templ_criteria += [
                 '&', ('parent_id', 'child_of', [root_account_id]),
                 ('chart_template_id', '=', False)]
+        if chart_template.parent_id:
+            acc_templ_criteria = ['|'] + acc_templ_criteria
+            acc_templ_criteria += self._acc_tmpl_to_search_criteria(
+                chart_template.parent_id)
+        return acc_templ_criteria
+
+    @api.one
+    def _find_accounts(self, mapping_accounts):
+        """Search for, and load, account templates to create/update."""
+        wiz_accounts = self.env['wizard.update.charts.accounts.account']
+        # Remove previous accounts
+        self.account_ids.unlink()
+        # Search for new / updated accounts
+        acc_templ_criteria = self._acc_tmpl_to_search_criteria(
+            self.chart_template_id)
         account_templates = self.env['account.account.template'].search(
             acc_templ_criteria)
         for account_template in account_templates:
