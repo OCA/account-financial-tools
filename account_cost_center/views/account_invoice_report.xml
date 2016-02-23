@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
      <data>
+
         <record id="view_account_invoice_report_search" model="ir.ui.view">
 			<field name="name">account.invoice.report.search</field>
 			<field name="model">account.invoice.report</field>
@@ -12,5 +13,6 @@
 				</filter>
             </field>
         </record>
+
      </data>
 </openerp>

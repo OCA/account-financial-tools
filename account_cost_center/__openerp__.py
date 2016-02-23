@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2015 ONESTEiN BV (<http://www.onestein.nl>).
+#    Copyright (C) 2015 ONESTEiN BV (<http://www.onestein.eu>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,26 +22,20 @@
     'name': 'Costcenter',
     'images': ['static/description/main_screenshot.png'],
     'summary': """Costcenter information for invoice lines""",
-    'description': """
-Costcenter
-================================================================
-This module allows the user to link every invoice line to a cost center
-providing an extra dimension for the analysis.
-    """,
     'depends': [
         'account',
-        'account_accountant'
     ],
     'author': "ONESTEiN BV",
     'website': 'http://www.onestein.eu',
     'category': 'Accounting',
-    'version': '1.1',
+    'version': '1.2',
     'data': [
         'security/ir.model.access.csv',
-        'costcenter_view.xml',
-        'account_view.xml',
-        'account_invoice_view.xml',
-        'account_invoice_report_view.xml'
+        'views/account_cost_center.xml',
+        'views/account_move.xml',
+        'views/account_move_line.xml',
+        'views/account_invoice.xml',
+        'views/account_invoice_report.xml',
     ],
     'demo': [],
     'installable': True,
