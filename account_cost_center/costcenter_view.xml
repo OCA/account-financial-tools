@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <!-- Cost Center views -->
+    <record model="ir.ui.view" id="account_cost_center_tree">
+      <field name="name">account.cost.center.tree</field>
+      <field name="model">account.cost.center</field>
+      <field name="arch" type="xml">
+        <tree string="Cost Centers">
+          <field name="code"/>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_cost_center_form">
+      <field name="name">account.cost.center.form</field>
+      <field name="model">account.cost.center</field>
+      <field name="arch" type="xml">
+        <form string="Cost Center" version="7.0">
+          <sheet>
+            <group>
+              <div class="oe_title">
+                <div class="oe_edit_only">
+                  <label for="name" string="Title"/>
+                </div>
+                <h1>
+                  <field name="name" required="1"/>
+                </h1>
+              </div>
+            </group>
+            <group>
+              <group>
+                <field name="code"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_cost_center_filter">
+      <field name="name">account.cost.center.filter</field>
+      <field name="model">account.cost.center</field>
+      <field name="arch" type="xml">
+        <search string="Cost Centers">
+          <field name="name" string="Name/Code" filter_domain="['|', '|', ('code','ilike', self), ('name','ilike',self)]"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_cost_center_action">
+      <field name="name">Cost Centers</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">account.cost.center</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="context">{'search_default_actual' : 1}</field>
+      <field name="search_view_id" ref="account_cost_center_filter"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Click to add a new event.
+        </p>
+        <p>
+          Cost centers provide an extra analytic dimension
+        </p>
+      </field>
+    </record>
+
+    <!-- Cost Center menu-->
+    <menuitem name="Cost Centers" id="cost_center_menu" parent="account.menu_analytic_accounting" action="account_cost_center_action" sequence="40"/>
+
+  </data>
+</openerp>
