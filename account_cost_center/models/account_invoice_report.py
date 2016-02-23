@@ -18,25 +18,32 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, osv
-from openerp import tools
+from openerp import fields, models
 
 
-class account_invoice_report(osv.osv):
+class AccountInvoiceReport(models.Model):
     _inherit = "account.invoice.report"
-    _columns = {
-        'cost_center_id': fields.many2one('account.cost.center', string="Cost Center", readonly=True),
-        'account_analytic_id': fields.many2one('account.analytic.account', string="Analytic Account", readonly=True)
-    }
+
+    cost_center_id = fields.Many2one(
+        'account.cost.center',
+        string="Cost Center",
+        readonly=True)
+    account_analytic_id = fields.Many2one(
+        'account.analytic.account',
+        string="Analytic Account",
+        readonly=True)
 
     def _select(self):
-        return super(account_invoice_report, self)._select() + \
-            ", sub.cost_center_id as cost_center_id, sub.account_analytic_id as account_analytic_id"
+        return super(AccountInvoiceReport, self)._select() + \
+            ", sub.cost_center_id as cost_center_id, " + \
+            "sub.account_analytic_id as account_analytic_id"
 
     def _sub_select(self):
-        return super(account_invoice_report, self)._sub_select() + \
-            ", ail.cost_center_id as cost_center_id, ail.account_analytic_id as account_analytic_id"
+        return super(AccountInvoiceReport, self)._sub_select() + \
+            ", ail.cost_center_id as cost_center_id, " + \
+            "ail.account_analytic_id as account_analytic_id"
 
     def _group_by(self):
-        return super(account_invoice_report, self)._group_by() + \
-            ", ail.cost_center_id, ail.account_analytic_id"
+        return super(AccountInvoiceReport, self)._group_by() + \
+            ", ail.cost_center_id, " + \
+            "ail.account_analytic_id"

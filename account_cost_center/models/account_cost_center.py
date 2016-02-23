@@ -21,7 +21,7 @@
 from openerp import models, fields
 
 
-class account_cost_center(models.Model):
+class AccountCostCenter(models.Model):
     _name = 'account.cost.center'
     _description = 'Account Cost Center'
 

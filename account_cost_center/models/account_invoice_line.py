@@ -21,7 +21,7 @@
 from openerp import models, fields, api
 
 
-class account_invoice_line(models.Model):
+class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
     @api.model
@@ -35,7 +35,7 @@ class account_invoice_line(models.Model):
 
     @api.model
     def move_line_get_item(self, line):
-        res = super(account_invoice_line, self).move_line_get_item(line)
+        res = super(AccountInvoiceLine, self).move_line_get_item(line)
         if line.cost_center_id:
             res['cost_center_id'] = line.cost_center_id.id
         return res

@@ -22,7 +22,7 @@ from openerp import models, fields, api
 from lxml import etree
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     cost_center_id = fields.Many2one(
@@ -31,14 +31,14 @@ class account_invoice(models.Model):
 
     @api.model
     def line_get_convert(self, line, part, date):
-        res = super(account_invoice, self).line_get_convert(line, part, date)
+        res = super(AccountInvoice, self).line_get_convert(line, part, date)
         if line.get('cost_center_id'):
             res['cost_center_id'] = line['cost_center_id']
         return res
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
                         context=None, toolbar=False, submenu=False):
-        res = super(account_invoice, self).fields_view_get(
+        res = super(AccountInvoice, self).fields_view_get(
             cr, uid, view_id=view_id, view_type=view_type,
             context=context, toolbar=toolbar, submenu=False)
         if not context:

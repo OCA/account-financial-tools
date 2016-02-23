@@ -21,7 +21,9 @@
 from openerp import models, fields
 
 
-class account_move_line(models.Model):
+class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    cost_center_id = fields.Many2one('account.cost.center', string='Cost Center')
+    cost_center_id = fields.Many2one(
+        'account.cost.center',
+        string='Cost Center')

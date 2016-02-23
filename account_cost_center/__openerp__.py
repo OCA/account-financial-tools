@@ -25,7 +25,8 @@
     'depends': [
         'account',
     ],
-    'author': "ONESTEiN BV",
+    'author': "ONESTEiN BV,Odoo Community Association (OCA)",
+    'license': 'AGPL-3',
     'website': 'http://www.onestein.eu',
     'category': 'Accounting',
     'version': '1.2',
