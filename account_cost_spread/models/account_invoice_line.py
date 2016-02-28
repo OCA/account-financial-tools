@@ -71,7 +71,7 @@ class AccountInvoiceLine(models.Model):
 
     @api.model
     def move_line_get_item(self, line):
-        res = super(account_invoice_line, self).move_line_get_item(line)
+        res = super(AccountInvoiceLine, self).move_line_get_item(line)
         if line.spread_account_id:
             res.update({'account_id': line.spread_account_id.id})
         return res
