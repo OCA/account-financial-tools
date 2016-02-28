@@ -9,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 import openerp.addons.decimal_precision as dp
 
 
-class dummy_fy(object):
+class DummyFy(object):
     def __init__(self, *args, **argv):
         for key, arg in argv.items():
             setattr(self, key, arg)
@@ -247,7 +247,7 @@ class AccountInvoiceLine(models.Model):
                 fy_date_start = fy_date_start - relativedelta(years=1)
             fy_date_stop = fy_date_start + relativedelta(years=1, days=-1)
             fy_id = False
-            fy = dummy_fy(
+            fy = DummyFy(
                 date_start=fy_date_start.strftime('%Y-%m-%d'),
                 date_stop=fy_date_stop.strftime('%Y-%m-%d'),
                 id=False,
@@ -415,7 +415,7 @@ class AccountInvoiceLine(models.Model):
             old_spreads = spread_obj.search(domain)
             if old_spreads:
                 for spread in old_spreads:
-                    spread.unlink
+                    spread.unlink()
 
             table = self._compute_spread_table(invline)
             if not table:
