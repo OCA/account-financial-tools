@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_invoice_currency
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
+"PO-Revision-Date: 2016-03-02 17:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,42 @@ msgid "Amounts in company currency"
 msgstr "Importes moneda compañía"
 
 #. module: account_invoice_currency
+#: field:account.invoice,cc_amount_tax:0
+msgid "Company Cur. Tax"
+msgstr "Impuestos moneda compañía"
+
+#. module: account_invoice_currency
+#: field:account.invoice,cc_amount_total:0
+msgid "Company Cur. Total"
+msgstr "Total moneda compañía"
+
+#. module: account_invoice_currency
+#: field:account.invoice,cc_amount_untaxed:0
+msgid "Company Cur. Untaxed"
+msgstr "Base imponible moneda compañía"
+
+#. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
 msgid "Invoice"
 msgstr "Factura"
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_tax:0
+msgid ""
+"Invoice tax amount in the company currency (useful when invoice currency is "
+"different from company currency)."
+msgstr "Impuestos en la moneda de la compañía (útil cuando la moneda de la factura es diferente a la de la compañía)."
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_total:0
+msgid ""
+"Invoice total amount in the company currency (useful when invoice currency "
+"is different from company currency)."
+msgstr "Total factura en la moneda de la compañía (útil cuando la moneda de la factura es diferente a la de la compañía)."
+
+#. module: account_invoice_currency
+#: help:account.invoice,cc_amount_untaxed:0
+msgid ""
+"Invoice untaxed amount in the company currency (useful when invoice currency"
+" is different from company currency)."
+msgstr "Base imponible en la moneda de la compañía (útil cuando la moneda de la factura es diferente a la de la compañía)."
