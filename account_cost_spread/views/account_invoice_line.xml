@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_invoice_line_spread" model="ir.ui.view">
+            <field name="name">account.invoice.line.spread</field>
+            <field name="model">account.invoice.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="account_id" readonly="1"/>
+                                <field name="name" readonly="1"/>
+                                <field name="price_subtotal" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="company_id" invisible="1"/>
+                                <field name="spread_account_id" required="1" domain="[('company_id', '=', company_id), ('type', '&lt;&gt;', 'view')]"/>
+                                <field name="period_number" required="1"/>
+                                <field name="period_type" required="1"/>
+                                <field name="spread_date"/>
+                            </group>
+                        </group>
+                        <field name="spread_line_ids" readonly="1">
+                            <tree>
+                                <field name="name" readonly="1"/>
+                                <field name="amount" readonly="1"/>
+                                <field name="line_date" readonly="1"/>
+                                <field name="move_id" readonly="1"/>
+                                <field name="init_entry" invisible="1"/>
+                                <field name="move_check" invisible="1"/>
+                                <button name="create_move" icon="gtk-execute" string="Create Move" type="object"
+                                        attrs="{'invisible':['|','|',('init_entry','=',True),('move_check','!=',False)]}"/>
+                                <button name="open_move" icon="terp-gtk-jump-to-ltr" string="View Move" type="object"
+                                        attrs="{'invisible':[('move_check','!=',True)]}"/>
+                                <button name="unlink_move" icon="gtk-cancel" string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"
+                                        attrs="{'invisible':[('move_check','!=',True)]}"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,253 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_cost_spread
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-22 15:00+0000\n"
+"PO-Revision-Date: 2015-06-22 15:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_cost_spread
+#: model:ir.model,name:account_cost_spread.model_account_invoice_spread_line
+msgid "Account Invoice Spread Lines"
+msgstr "Account Invoice Spread Lines"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,spread_date:0
+msgid "Alternative Start Date"
+msgstr "Alternative Start Date"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,amount:0
+msgid "Amount"
+msgstr "Amount"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,spreaded_value:0
+msgid "Amount Already Spread"
+msgstr "Amount Already Spread"
+
+#. module: account_cost_spread
+#: view:account.invoice.line:account_cost_spread.view_invoice_line_spread
+msgid "Are you sure ?"
+msgstr "Are you sure ?"
+
+#. module: account_cost_spread
+#: selection:account.invoice.spread.line,type:0
+msgid "Asset Removal"
+msgstr "Asset Removal"
+
+#. module: account_cost_spread
+#: field:account.config.settings,module_account_cost_spread:0
+msgid "Cost spreading on Invoices"
+msgstr "Cost spreading on Invoices"
+
+#. module: account_cost_spread
+#: view:account.invoice.line:account_cost_spread.view_invoice_line_spread
+msgid "Create Move"
+msgstr "Create Move"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,line_date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: account_cost_spread
+#: view:account.invoice.line:account_cost_spread.view_invoice_line_spread
+msgid "Delete Move"
+msgstr "Delete Move"
+
+#. module: account_cost_spread
+#: selection:account.invoice.spread.line,type:0
+msgid "Depreciation"
+msgstr "Depreciation"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:475
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:396
+#, python-format
+msgid "Illegal value %s in invline.period_type."
+msgstr "Illegal value %s in invline.period_type."
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,init_entry:0
+msgid "Initial Balance Entry"
+msgstr "Initial Balance Entry"
+
+#. module: account_cost_spread
+#: model:ir.model,name:account_cost_spread.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,invoice_line_id:0
+#: model:ir.model,name:account_cost_spread.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Invoice Line"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:715
+#, python-format
+msgid "Journal Entry"
+msgstr "Journal Entry"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: account_cost_spread
+#: selection:account.invoice.line,period_type:0
+msgid "Month"
+msgstr "Month"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,remaining_value:0
+msgid "Next Period Spread"
+msgstr "Next Period Spread"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,period_number:0
+#: help:account.invoice.line,period_number:0
+msgid "Number of Periods"
+msgstr "Number of Periods"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,period_type:0
+msgid "Period Type"
+msgstr "Period Type"
+
+#. module: account_cost_spread
+#: help:account.invoice.line,period_type:0
+msgid "Period length for the entries"
+msgstr "Period length for the entries"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,previous_id:0
+msgid "Previous Spread Line"
+msgstr "Previous Spread Line"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:395
+#, python-format
+msgid "Programming Error!"
+msgstr "Programming Error!"
+
+#. module: account_cost_spread
+#: selection:account.invoice.line,period_type:0
+msgid "Quarter"
+msgstr "Quarter"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,remaining_amount:0
+msgid "Residual Amount"
+msgstr "Residual Amount"
+
+#. module: account_cost_spread
+#: help:account.invoice.spread.line,init_entry:0
+msgid "Set this flag for entries of previous fiscal years for which OpenERP has not generated accounting entries."
+msgstr "Set this flag for entries of previous fiscal years for which OpenERP has not generated accounting entries."
+
+#. module: account_cost_spread
+#: view:account.invoice:account_cost_spread.view_customer_invoice_spread
+#: view:account.invoice:account_cost_spread.view_supplier_invoice_spread
+msgid "Spread"
+msgstr "Spread"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,spread_account_id:0
+msgid "Spread Account"
+msgstr "Spread Account"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:89
+#, python-format
+msgid "Spread Details"
+msgstr "Spread Details"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,move_id:0
+msgid "Spread Entry"
+msgstr "Spread Entry"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,spread_line_ids:0
+msgid "Spread Lines"
+msgstr "Spread Lines"
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,name:0
+msgid "Spread Name"
+msgstr "Spread Name"
+
+#. module: account_cost_spread
+#: field:account.invoice.line,spreaded_amount:0
+msgid "Spreaded Amount"
+msgstr "Spreaded Amount"
+
+#. module: account_cost_spread
+#: code:addons/account_cost_spread/invoice.py:476
+#, python-format
+msgid "The duration of the spread conflicts with the posted spread table entry dates."
+msgstr "The duration of the spread conflicts with the posted spread table entry dates."
+
+#. module: account_cost_spread
+#: help:account.config.settings,module_account_cost_spread:0
+msgid "This will allow you to spread the cost of an invoice.\n"
+"                    The module account_cost spread will be installed."
+msgstr "This will allow you to spread the cost of an invoice.\n"
+"                    The module account_cost spread will be installed."
+
+#. module: account_cost_spread
+#: field:account.invoice.spread.line,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: account_cost_spread
+#: selection:account.invoice.spread.line,type:0
+msgid "Value"
+msgstr "Value"
+
+#. module: account_cost_spread
+#: view:account.invoice.line:account_cost_spread.view_invoice_line_spread
+msgid "View Move"
+msgstr "View Move"
+
+#. module: account_cost_spread
+#: selection:account.invoice.line,period_type:0
+msgid "Year"
+msgstr "Year"
+
