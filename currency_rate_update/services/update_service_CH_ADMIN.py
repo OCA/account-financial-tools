@@ -2,7 +2,7 @@
 # © 2008 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 import logging
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
@@ -10,10 +10,23 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 _logger = logging.getLogger(__name__)
 
 
-class CH_ADMIN_getter(Currency_getter_interface):
+class CH_ADMINGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service.
     """
+
+    code = 'CH_ADMIN'
+    name = 'Admin.ch'
+
+    supported_currency_array = [
+        "AED", "ALL", "ARS", "AUD", "AZN", "BAM", "BDT", "BGN", "BHD", "BRL",
+        "CAD", "CHF", "CLP", "CNY", "COP", "CRC", "CZK", "DKK", "DOP", "EGP",
+        "ETB", "EUR", "GBP", "GTQ", "HKD", "HNL", "HRK", "HUF", "IDR", "ILS",
+        "INR", "ISK", "JPY", "KES", "KHR", "KRW", "KWD", "KYD", "KZT", "LBP",
+        "LKR", "LTL", "LVL", "LYD", "MAD", "MUR", "MXN", "MYR", "NGN", "NOK",
+        "NZD", "OMR", "PAB", "PEN", "PHP", "PKR", "PLN", "QAR", "RON", "RSD",
+        "RUB", "SAR", "SEK", "SGD", "THB", "TND", "TRY", "TWD", "TZS", "UAH",
+        "USD", "UYU", "VEF", "VND", "ZAR"]
 
     def rate_retrieve(self, dom, ns, curr):
         """Parse a dom node to retrieve currencies data"""
