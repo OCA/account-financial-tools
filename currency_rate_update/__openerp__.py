@@ -36,7 +36,7 @@
         "security/rule.xml",
         "security/ir.model.access.csv",
     ],
+    "images": [],
     "demo": [],
-    "active": False,
     'installable': True
 }

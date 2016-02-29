@@ -20,7 +20,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 
 from datetime import datetime, timedelta
 
@@ -28,8 +28,16 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class RO_BNR_getter(Currency_getter_interface):
+class RO_BNRGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface for BNR service"""
+
+    code = 'RO_BNR'
+    name = 'National Bank of Romania'
+    supported_currency_array = [
+        "AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EGP",
+        "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", "NOK", "NZD",
+        "PLN", "RON", "RSD", "RUB", "SEK", "TRY", "UAH", "USD", "XAU", "XDR",
+        "ZAR"]
 
     def rate_retrieve(self, dom, ns, curr):
         """ Parse a dom node to retrieve-

@@ -63,8 +63,55 @@ class UnsuportedCurrencyError(Exception):
         return 'Unsupported currency %s' % self.curr
 
 
-class Currency_getter_interface(object):
-    "Abstract class of currency getter"
+class CurrencyGetterType(type):
+    """ Meta class for currency getters.
+        Automaticaly registers new curency getter on class definition
+    """
+    getters = {}
+
+    def __new__(mcs, name, bases, attrs):
+        cls = super(CurrencyGetterType, mcs).__new__(mcs, name, bases, attrs)
+        if getattr(cls, 'code', None):
+            mcs.getters[cls.code] = cls
+        return cls
+
+    @classmethod
+    def get(mcs, code, *args, **kwargs):
+        """ Get getter by code
+        """
+        return mcs.getters[code](*args, **kwargs)
+
+
+class CurrencyGetterInterface(object):
+    """ Abstract class of currency getter
+
+        To create new getter, just subclass this class
+        and define class variables 'code' and 'name'
+        and implement *get_updated_currency* method
+
+        For example::
+
+            from openerp.addons.currency_rate_update \
+                import CurrencyGetterInterface
+
+            class MySuperCurrencyGetter(CurrencyGetterInterface):
+                code = "MSCG"
+                name = "My Currency Rates"
+                supported_currency_array = ['USD', 'EUR']
+
+                def get_updated_currency(self, currency_array, main_currency,
+                                         max_delta_days):
+                    # your code that fills self.updated_currency
+
+                    # and return result
+                    return self.updated_currency, self.log_info
+
+    """
+    __metaclass__ = CurrencyGetterType
+
+    # attributes required for currency getters
+    code = None  # code for service selection
+    name = None  # displayed name
 
     log_info = " "
 

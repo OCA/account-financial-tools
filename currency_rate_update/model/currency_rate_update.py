@@ -27,7 +27,8 @@ from dateutil.relativedelta import relativedelta
 from openerp import models, fields, api, _
 from openerp import exceptions
 
-from ..services.currency_getter import Currency_getter_factory
+from ..services.currency_getter_interface import CurrencyGetterType
+
 
 _logger = logging.getLogger(__name__)
 
@@ -37,103 +38,8 @@ _intervalTypes = {
     'months': lambda interval: relativedelta(months=interval),
 }
 
-supported_currency_array = [
-    "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
-    "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
-    "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHF", "CLP", "CNY",
-    "COP", "CRC", "CUP", "CVE", "CYP", "CZK", "DJF", "DKK", "DOP", "DZD",
-    "EEK", "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GGP",
-    "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG",
-    "HUF", "IDR", "ILS", "IMP", "INR", "IQD", "IRR", "ISK", "JEP", "JMD",
-    "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD",
-    "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LTL", "LVL", "LYD", "MAD",
-    "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRO", "MTL", "MUR", "MVR",
-    "MWK", "MXN", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD",
-    "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON",
-    "RSD", "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP",
-    "SLL", "SOS", "SPL", "SRD", "STD", "SVC", "SYP", "SZL", "THB", "TJS",
-    "TMM", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS", "UAH", "UGX",
-    "USD", "UYU", "UZS", "VEB", "VEF", "VND", "VUV", "WST", "XAF", "XAG",
-    "XAU", "XCD", "XDR", "XOF", "XPD", "XPF", "XPT", "YER", "ZAR", "ZMK",
-    "ZWD"
-]
 
-YAHOO_supported_currency_array = [
-    "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
-    "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
-    "BSD", "BTN", "BWP", "BYR", "BZD", "CAD", "CDF", "CHF", "CLF", "CLP",
-    "CNH", "CNY", "COP", "CRC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP",
-    "DZD", "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GHS",
-    "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF",
-    "IDR", "IEP", "ILS", "INR", "IQD", "IRR", "ISK", "JMD", "JOD", "JPY",
-    "KES", "KGS", "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK",
-    "LBP", "LKR", "LRD", "LSL", "LTL", "LVL", "LYD", "MAD", "MDL", "MGA",
-    "MKD", "MMK", "MNT", "MOP", "MRO", "MUR", "MVR", "MWK", "MXN", "MXV",
-    "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB",
-    "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB",
-    "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLL", "SOS",
-    "SRD", "STD", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP",
-    "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VEF",
-    "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XCD", "XCP", "XDR", "XOF",
-    "XPD", "XPF", "XPT", "YER", "ZAR", "ZMW", "ZWL"]
-
-RO_BNR_supported_currency_array = [
-    "AED", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EGP",
-    "EUR", "GBP", "HUF", "INR", "JPY", "KRW", "MDL", "MXN", "NOK", "NZD",
-    "PLN", "RON", "RSD", "RUB", "SEK", "TRY", "UAH", "USD", "XAU", "XDR",
-    "ZAR"]
-
-CA_BOC_supported_currency_array = [
-    "AED", "ANG", "ARS", "AUD", "BOC", "BRL", "BSD", "CHF", "CLP", "CNY",
-    "COP", "CZK", "DKK", "EUR", "FJD", "GBP", "GHS", "GTQ", "HKD", "HNL",
-    "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JMD", "JPY", "KRW", "LKR",
-    "MAD", "MMK", "MXN", "MYR", "NOK", "NZD", "PAB", "PEN", "PHP", "PKR",
-    "PLN", "RON", "RSD", "RUB", "SEK", "SGD", "THB", "TND", "TRY", "TTD",
-    "TWD", "USD", "VEF", "VND", "XAF", "XCD", "XPF", "ZAR"]
-
-CH_ADMIN_supported_currency_array = [
-    "AED", "ALL", "ARS", "AUD", "AZN", "BAM", "BDT", "BGN", "BHD", "BRL",
-    "CAD", "CHF", "CLP", "CNY", "COP", "CRC", "CZK", "DKK", "DOP", "EGP",
-    "ETB", "EUR", "GBP", "GTQ", "HKD", "HNL", "HRK", "HUF", "IDR", "ILS",
-    "INR", "ISK", "JPY", "KES", "KHR", "KRW", "KWD", "KYD", "KZT", "LBP",
-    "LKR", "LTL", "LVL", "LYD", "MAD", "MUR", "MXN", "MYR", "NGN", "NOK",
-    "NZD", "OMR", "PAB", "PEN", "PHP", "PKR", "PLN", "QAR", "RON", "RSD",
-    "RUB", "SAR", "SEK", "SGD", "THB", "TND", "TRY", "TWD", "TZS", "UAH",
-    "USD", "UYU", "VEF", "VND", "ZAR"]
-
-ECB_supported_currency_array = [
-    "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP",
-    "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "LTL", "MXN",
-    "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB",
-    "TRY", "USD", "ZAR"]
-
-MX_BdM_supported_currency_array = [
-    "ARS", "AUD", "BBD", "BMD", "BOB", "BRL", "BSD", "BZD", "CAD", "CHF",
-    "CLP", "CNH", "CNY", "COP", "CRC", "CUP", "CZK", "DKK", "DOP", "DZD",
-    "EGP", "ESD", "EUR", "FJD", "GBP", "GTQ", "GYD", "HKD", "HNL", "HUF",
-    "IDR", "ILS", "INR", "IQD", "JMD", "JPY", "KES", "KRW", "KWD", "MAD",
-    "MYR", "NGN", "NIC", "NOK", "NZD", "PAB", "PEN", "PHP", "PLN", "PYG",
-    "RON", "RUB", "SAR", "SEK", "SGD", "SVC", "THB", "TRY", "TTD", "TWD",
-    "UAH", "USD", "USD", "UYP", "VEF", "VND", "ZAR"]
-
-PL_NBP_supported_currency_array = [
-    "AUD", "BGN", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR",
-    "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW",
-    "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
-    "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
-
-supported_currecies = {
-    'YAHOO_getter': YAHOO_supported_currency_array,
-    'ECB_getter': ECB_supported_currency_array,
-    'RO_BNR_getter': RO_BNR_supported_currency_array,
-    'CA_BOC_getter': CA_BOC_supported_currency_array,
-    'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
-    'MX_BdM_getter': MX_BdM_supported_currency_array,
-    'PL_NBP_getter': PL_NBP_supported_currency_array,
-    }
-
-
-class Currency_rate_update_service(models.Model):
+class CurrencyRateUpdateService(models.Model):
     """Class keep services and currencies that
     have to be updated"""
     _name = "currency.rate.update.service"
@@ -163,29 +69,19 @@ class Currency_rate_update_service(models.Model):
         currency_list = ''
         if self.service:
             currencies = []
-            currency_list = supported_currency_array
-            currency_list = supported_currecies[self.service]
+            getter = CurrencyGetterType.get(self.service)
+            currency_list = getter.supported_currency_array
             currencies = self.env['res.currency'].search(
                 [('name', 'in', currency_list)])
             self.currency_list = [(6, 0, [curr.id for curr in currencies])]
 
+    def _selection_service(self, *a, **k):
+        res = [(x.code, x.name) for x in CurrencyGetterType.getters.values()]
+        return res
+
     # List of webservicies the value sould be a class name
     service = fields.Selection(
-        [('CH_ADMIN_getter', 'Admin.ch'),
-         ('ECB_getter', 'European Central Bank'),
-         ('YAHOO_getter', 'Yahoo Finance'),
-         # Added for polish rates
-         ('PL_NBP_getter', 'National Bank of Poland'),
-         # Added for mexican rates
-         ('MX_BdM_getter', 'Bank of Mexico'),
-         # Bank of Canada is using RSS-CB
-         # http://www.cbwiki.net/wiki/index.php/Specification_1.1
-         # This RSS format is used by other national banks
-         #  (Thailand, Malaysia, Mexico...)
-         ('CA_BOC_getter', 'Bank of Canada - noon rates'),
-         # Added for romanian rates
-         ('RO_BNR_getter', 'National Bank of Romania')
-         ],
+        _selection_service,
         string="Webservice to use",
         required=True)
     # List of currencies available on webservice
@@ -233,7 +129,6 @@ class Currency_rate_update_service(models.Model):
         _logger.info(
             'Starting to refresh currencies with service %s (company: %s)',
             self.service, self.company_id.name)
-        factory = Currency_getter_factory()
         rate_obj = self.env['res.currency.rate']
         company = self.company_id
         # The multi company currency can be set or no so we handle
@@ -250,9 +145,8 @@ class Currency_rate_update_service(models.Model):
             try:
                 # We initalize the class that will handle the request
                 # and return a dict of rate
-                getter = factory.register(self.service)
-                curr_to_fetch = map(lambda x: x.name,
-                                    self.currency_to_update)
+                getter = CurrencyGetterType.get(self.service)
+                curr_to_fetch = [x.name for x in self.currency_to_update]
                 res, log_info = getter.get_updated_currency(
                     curr_to_fetch,
                     main_currency.name,
@@ -304,6 +198,7 @@ class Currency_rate_update_service(models.Model):
                             _intervalTypes[str(self.interval_type)]
                             (self.interval_number)).date()
                 self.next_run = next_run
+        return True
 
     @api.multi
     def run_currency_update(self):
