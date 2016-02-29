@@ -3,7 +3,7 @@
 # © 2009 Grzegorz Grzelak
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
@@ -12,10 +12,17 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class ECB_getter(Currency_getter_interface):
+class ECBGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for ECB service
     """
+    code = 'ECB'
+    name = 'European Central Bank'
+    supported_currency_array = [
+        "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP",
+        "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "LTL", "MXN",
+        "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB",
+        "TRY", "USD", "ZAR"]
 
     def rate_retrieve(self, dom, ns, curr):
         """Parse a dom node to retrieve-

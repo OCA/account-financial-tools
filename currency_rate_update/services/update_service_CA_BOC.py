@@ -3,7 +3,7 @@
 # © 2014 Daniel Dico
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 
 from openerp import _
 from openerp.exceptions import except_orm
@@ -12,11 +12,26 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class CA_BOC_getter(Currency_getter_interface):
+class CA_BOCGetter(CurrencyGetterInterface):
     """Implementation of Curreny_getter_factory interface
     for Bank of Canada RSS service
 
     """
+    # Bank of Canada is using RSS-CB
+    # http://www.cbwiki.net/wiki/index.php/Specification_1.1
+    # This RSS format is used by other national banks
+    #  (Thailand, Malaysia, Mexico...)
+
+    code = 'CA_BOC'
+    name = 'Bank of Canada - noon rates'
+
+    supported_currency_array = [
+        "AED", "ANG", "ARS", "AUD", "BOC", "BRL", "BSD", "CHF", "CLP", "CNY",
+        "COP", "CZK", "DKK", "EUR", "FJD", "GBP", "GHS", "GTQ", "HKD", "HNL",
+        "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JMD", "JPY", "KRW", "LKR",
+        "MAD", "MMK", "MXN", "MYR", "NOK", "NZD", "PAB", "PEN", "PHP", "PKR",
+        "PLN", "RON", "RSD", "RUB", "SEK", "SGD", "THB", "TND", "TRY", "TTD",
+        "TWD", "USD", "VEF", "VND", "XAF", "XCD", "XPF", "ZAR"]
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):

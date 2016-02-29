@@ -29,6 +29,8 @@
                                 invisible="not context.get('currency_rate_update_main_view')"
                                 required="context.get('currency_rate_update_main_view')"/>
                             <field name="max_delta_days"/>
+                            <button name="refresh_currency" type="object"
+                                    string="Update now!"/>
                         </group>
                         <group name="right">
                             <field name="interval_type"/>

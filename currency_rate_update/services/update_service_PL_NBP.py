@@ -3,7 +3,7 @@
 # © 2009 Grzegorz Grzelak
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
@@ -12,11 +12,19 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PL_NBP_getter(Currency_getter_interface):
+class PL_NBPGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
     """
+    code = 'PL_NBP'
+    name = 'National Bank of Poland'
+
+    supported_currency_array = [
+        "AUD", "BGN", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR",
+        "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW",
+        "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
+        "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
     def rate_retrieve(self, dom, ns, curr):
         """ Parse a dom node to retrieve
