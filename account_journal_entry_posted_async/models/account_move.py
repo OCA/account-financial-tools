@@ -25,12 +25,29 @@
 from openerp.osv import orm
 
 from openerp.tools.translate import _
-from openerp.addons.connector.queue.job import job
-from openerp.addons.connector.session import ConnectorSession
-from openerp.addons.connector.connector import install_in_connector
+try:
+    from openerp.addons.connector.queue.job import job
+    from openerp.addons.connector.session import ConnectorSession
+    from openerp.addons.connector.connector import install_in_connector
+except ImportError:
+    job = False
 
-# install the module in connector to register the job function
-install_in_connector()
+if job:
+    # install the module in connector to register the job function
+    install_in_connector()
+
+    @job(default_channel='root.account_move_validate')
+    def validate_one_move(session, model_name, move_id):
+        """Validate a move"""
+        move_pool = session.pool['account.move']
+        if move_pool.exists(session.cr, session.uid, [move_id]):
+            return move_pool.do_button_validate(
+                session.cr,
+                session.uid,
+                [move_id]
+            )
+        else:
+            return _(u'Nothing to do because the record has been deleted')
 
 
 class AccountMove(orm.Model):
@@ -53,17 +70,3 @@ class AccountMove(orm.Model):
     def do_button_validate(self, cr, uid, ids, context=None):
         return super(AccountMove, self).button_validate(
             cr, uid, ids, context=context)
-
-
-@job(default_channel='root.account_move_validate')
-def validate_one_move(session, model_name, move_id):
-    """Validate a move"""
-    move_pool = session.pool['account.move']
-    if move_pool.exists(session.cr, session.uid, [move_id]):
-        return move_pool.do_button_validate(
-            session.cr,
-            session.uid,
-            [move_id]
-        )
-    else:
-        return _(u'Nothing to do because the record has been deleted')
