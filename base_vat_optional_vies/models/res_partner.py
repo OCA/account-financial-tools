@@ -4,6 +4,9 @@
 
 import logging
 import re
+from openerp import models, fields, api
+from openerp.exceptions import ValidationError
+
 _logger = logging.getLogger(__name__)
 
 try:
@@ -15,9 +18,6 @@ except ImportError:
         "for example with `easy_install vatnumber` or "
         "`pip install vatnumber`.")
     vatnumber = None
-
-from openerp import models, fields, api
-from openerp.exceptions import ValidationError
 
 
 class ResPartner(models.Model):

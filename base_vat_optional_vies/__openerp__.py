@@ -19,7 +19,6 @@
               'Odoo Community Association (OCA)',
     'website': 'http://www.antiun.com',
     'license': 'AGPL-3',
-    'demo': [],
-    'test': [],
+    'images': [],
     'installable': True,
 }
