@@ -49,17 +49,17 @@ class AccountInvoice(models.Model):
                                                invoice.cc_amount_untaxed)
 
     cc_amount_untaxed = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Untaxed', store=True, readonly=True,
         help="Invoice untaxed amount in the company currency (useful when "
              "invoice currency is different from company currency).")
     cc_amount_tax = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Tax', store=True, readonly=True,
         help="Invoice tax amount in the company currency (useful when invoice "
              "currency is different from company currency).")
     cc_amount_total = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Total', store=True, readonly=True,
         help="Invoice total amount in the company currency (useful when "
              "invoice currency is different from company currency).")
