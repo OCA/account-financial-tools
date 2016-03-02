@@ -18,8 +18,8 @@ class TestResPartner(TransactionCase):
         cases = (
             # vat, country, => vat_country, vat_number
             ('ESB12345678', False, 'ES', 'B12345678'),
-            ('B12345678', False, False, 'B12345678'),
-            ('1EB12345678', False, False, '1EB12345678'),
+            ('B12345678', False, 'XX', 'B12345678'),
+            ('1EB12345678', False, 'XX', '1EB12345678'),
             ('ESB12345678', 'DE', 'ES', 'B12345678'),
             ('B12345678', 'ES', 'ES', 'B12345678'),
         )
