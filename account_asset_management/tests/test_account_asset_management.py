@@ -192,7 +192,7 @@ class TestAssetManagement(common.TransactionCase):
                                places=2)
 
     def test_4_prorata_init_cur_year(self):
-        """Prorata temporis depreciation with init value in curent year."""
+        """Prorata temporis depreciation with init value in current year."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
@@ -225,4 +225,47 @@ class TestAssetManagement(common.TransactionCase):
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
                                places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
+                               places=2)
+
+    def test_5_prorata_init_prev_year(self):
+        """Prorata temporis depreciation with init value in
+            both previous and current year."""
+        asset_id = self.asset_model.create(self.cr, self.uid, {
+            'name': 'test asset',
+            'category_id': self.ref('account_asset_management.'
+                                    'account_asset_category_car_5Y'),
+            'purchase_value': 1392,
+            'salvage_value': 0,
+            'date_start': '2014-10-01',
+            'method_number': 4,
+            'method_period': 'month',
+            'prorata': True,
+        })
+        self.dl_model.create(self.cr, self.uid, {
+            'asset_id': asset_id,
+            'amount': 87.0,
+            'line_date': '2014-12-31',
+            'type': 'depreciate',
+            'init_entry': True,
+        })
+        self.dl_model.create(self.cr, self.uid, {
+            'asset_id': asset_id,
+            'amount': 144.70,
+            'line_date': '2015-05-31',
+            'type': 'depreciate',
+            'init_entry': True,
+        })
+        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
+        self.assertEquals(len(asset.depreciation_line_ids), 3)
+        self.asset_model.compute_depreciation_board(
+            self.cr, self.uid, [asset.id])
+        asset.refresh()
+
+        # I check the depreciated value is always greater than 0
+        for asset_dl in asset.depreciation_line_ids:
+            self.assertGreater(asset_dl.amount, 0)
+
+        self.assertAlmostEqual(asset.depreciation_line_ids[9].amount, 29.30,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 29.00,
                                places=2)
