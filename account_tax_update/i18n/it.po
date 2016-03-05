@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2016-02-27 00:19+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -177,9 +177,9 @@ msgid "Purchase tax defaults have been set"
 msgstr ""
 
 #. module: account_tax_update
-#: code:addons/account_tax_update/model/update_tax_config.py:105
-#: code:addons/account_tax_update/model/update_tax_config.py:325
-#: code:addons/account_tax_update/model/update_tax_config.py:440
+#: code:addons/account_tax_update/model/update_tax_config.py:106
+#: code:addons/account_tax_update/model/update_tax_config.py:326
+#: code:addons/account_tax_update/model/update_tax_config.py:441
 #, python-format
 msgid "Can not detect tax use type"
 msgstr ""
@@ -203,9 +203,9 @@ msgid "The processed taxes will be marked with this name"
 msgstr ""
 
 #. module: account_tax_update
-#: code:addons/account_tax_update/model/update_tax_config.py:104
-#: code:addons/account_tax_update/model/update_tax_config.py:324
-#: code:addons/account_tax_update/model/update_tax_config.py:439
+#: code:addons/account_tax_update/model/update_tax_config.py:105
+#: code:addons/account_tax_update/model/update_tax_config.py:325
+#: code:addons/account_tax_update/model/update_tax_config.py:440
 #, python-format
 msgid "Error"
 msgstr "Errore"
