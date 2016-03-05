@@ -3,13 +3,13 @@
 # * account_credit_control
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 09:18+0000\n"
-"PO-Revision-Date: 2015-12-03 05:23+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
+"PO-Revision-Date: 2016-03-03 05:25+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,7 @@ msgid "An error has occured during the sending of the email."
 msgstr "Med razpošiljanjem e-pošte je prišlo do napake."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:310
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Funkcija za izvedbeni način ni dobljena: %s ni implementiran"
@@ -921,6 +921,11 @@ msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr "Pravilo \"<b>%s</b>\" ni ustvarilo nobenih postavk kreditnega nadzora.<br/>"
 
 #. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
+msgstr "Nivo pravila"
+
+#. module: account_credit_control
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
 msgstr "Nivoji pravil"
@@ -1084,7 +1089,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr "Opcijska druga valuta pri več-valutnih vnosih."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:260
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Najnižji nivo ne more biti tipa \"prejšnji opomin\""
@@ -1156,11 +1161,6 @@ msgstr "Tega računa ne morete preklicati.\nOpomin o zapadlosti je že bil odpos
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "komunikacija kreditnega nadzora"
-
-#. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
-msgstr "credit.control.policy.level"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form

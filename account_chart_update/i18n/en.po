@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
 "PO-Revision-Date: 2015-06-24 14:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
@@ -120,7 +120,7 @@ msgid "Created on"
 msgstr "Created on"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1113
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1115
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr "Created or updated fiscal position %s.\n"
@@ -162,7 +162,7 @@ msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr "Exception setting the parent of account %s children: %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1035
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr "Exception writing account %s: %s - %s.\n"
@@ -390,13 +390,13 @@ msgid "Summary of updated objects"
 msgstr "Summary of updated objects"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1058
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1060
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr "Tax %s: The collected account can not be set.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1061
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1063
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr "Tax %s: The paid account can not be set.\n"
@@ -738,7 +738,7 @@ msgid ""
 msgstr "Update the parent of accounts that seem (based on the code) to be children of the newly created ones. If you had an account 430 with a child 4300000, and a 4300 account is created, the 4300000 parent will be set to 4300."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Updated account %s.\n"
 msgstr "Updated account %s.\n"

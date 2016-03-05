@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
 "PO-Revision-Date: 2015-07-01 12:24+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
@@ -121,7 +121,7 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1113
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1115
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr "Ustvarjen ali posodobljen fiskalni položaj %s.\n"
@@ -163,7 +163,7 @@ msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr "Izjema pri nastavljanju nadrejenega kontu %s podrejenega: %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1035
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr "Izjema pri zapisu konta %s: %s - %s.\n"
@@ -391,13 +391,13 @@ msgid "Summary of updated objects"
 msgstr "Povzetek posodobljenih objektov"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1058
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1060
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr "Davek %s: konta prejetih plačil ni možno nastaviti.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1061
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1063
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr "Davek %s: konta izdanih plačil ni možno nastaviti.\n"
@@ -739,7 +739,7 @@ msgid ""
 msgstr "Posodobitev nadrejenih kontov, ki so (glede na kodo) podrejeni novo ustvarjenim kontom. Če ste imeli konto 430 s podrejenim kontom 4300000, in se ustvari konto 4300, bo 4300 nastavljen kot nadrejeni kontu 4300000."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Updated account %s.\n"
 msgstr "Konto %s posodobljen.\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
 "PO-Revision-Date: 2015-06-24 14:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
@@ -120,7 +120,7 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1113
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1115
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr "Creada o actualizada posición fiscal %s.\n"
@@ -162,7 +162,7 @@ msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr "Excepción estableciendo el padre de los hijos de la cuenta %s: %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1035
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr "Excepción escribiendo cuenta %s: %s - %s.\n"
@@ -390,13 +390,13 @@ msgid "Summary of updated objects"
 msgstr "Resumen de objetos actualizados"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1058
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1060
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr "Impuesto %s: No se pudo establecer la cuenta a recibir.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1061
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1063
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr "Impuesto %s: No se pudo establecer la cuenta a pagar.\n"
@@ -738,7 +738,7 @@ msgid ""
 msgstr "Actualizar el padre de las cuentas que parecen (basándose en el código) ser hijas de las cuentas recién creadas. Si tiene una cuenta 430 con una hija 4300000, y se crea una cuenta 4300, se establecerá la cuenta 4300 como padre de la cuenta 4300000."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Updated account %s.\n"
 msgstr "Actualizada cuenta %s.\n"

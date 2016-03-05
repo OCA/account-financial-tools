@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 09:18+0000\n"
-"PO-Revision-Date: 2015-12-02 14:28+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
+"PO-Revision-Date: 2016-03-02 17:08+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -187,7 +187,7 @@ msgid "An error has occured during the sending of the email."
 msgstr "An error has occured during the sending of the email."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:310
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Can not get function for computation mode: %s is not implemented"
@@ -920,6 +920,11 @@ msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 
 #. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
+msgstr "Policy Level"
+
+#. module: account_credit_control
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
 msgstr "Policy Levels"
@@ -1083,7 +1088,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr "The optional other currency if it is a multi-currency entry."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:260
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "The smallest level can not be of type Previous Reminder"
@@ -1155,11 +1160,6 @@ msgstr "You cannot cancel this invoice.\nA payment reminder has already been sen
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "credit control communication"
-
-#. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
-msgstr "credit.control.policy.level"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form

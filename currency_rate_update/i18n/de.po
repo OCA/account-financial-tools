@@ -4,11 +4,12 @@
 # 
 # Translators:
 # Thomas A. Jaeger, 2015
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 14:50+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
 "PO-Revision-Date: 2015-11-06 17:35+0000\n"
 "Last-Translator: Thomas A. Jaeger\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
@@ -111,8 +112,8 @@ msgid "Day(s)"
 msgstr "Tag(e)"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:94
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
 #, python-format
 msgid "Error !"
 msgstr "Fehler !"
@@ -123,13 +124,13 @@ msgid "European Central Bank"
 msgstr "Europäische Zentralbank"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:77
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
 msgstr "Aktualisierung der Daten %s unterstützt die Bank von Canada nicht"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:98
 #, python-format
 msgid "Exchange data format error for Bank of Canada - %s !"
 msgstr "Fehler im Datenformat beim Austausch mit der Bank von Canada - %s!"

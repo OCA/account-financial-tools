@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-08 01:04+0000\n"
-"PO-Revision-Date: 2015-11-24 14:53+0000\n"
+"POT-Creation-Date: 2016-03-03 01:39+0000\n"
+"PO-Revision-Date: 2016-01-14 10:28+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -121,7 +121,7 @@ msgid "Created on"
 msgstr "Erstellt am"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1113
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1115
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr "Angelegt oder aktualisierte Bilanzposition %s.\n"
@@ -163,7 +163,7 @@ msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr "Ausnahme beim Setzen des Übergeordneten von Konto %s, Untergeordnete %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1035
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr "Ausnahme beim Schreiben des Kontos %s: %s - %s.\n"
@@ -391,13 +391,13 @@ msgid "Summary of updated objects"
 msgstr "Zusammenfassung aktualisierter Objekte"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1058
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1060
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr "Steuer %s: Das gefundene Konto kann nicht gesetzt werden.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1061
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1063
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr "Steuer %s: Das Konto Bezahlt kann nicht gesetzt werden.\n"
@@ -739,7 +739,7 @@ msgid ""
 msgstr "Aktualisiere die übergeordneten Konten, die (basierend auf dem Schlüssel) als untergeordnete der neu angelegten erscheinen. Wenn Sie ein Konto 430 mit einem untergeordneten 4300000 hätten und Konto 4300 wird angelegt, dann wird das Übergeordnete zu 4300000 auf 4300 gesetzt."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Updated account %s.\n"
 msgstr "Aktualisiertes Konto %s.\n"
