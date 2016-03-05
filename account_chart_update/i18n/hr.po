@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-20 18:44+0000\n"
+"POT-Creation-Date: 2016-03-07 17:46+0000\n"
 "PO-Revision-Date: 2015-10-19 10:27+0000\n"
 "Last-Translator: Davor Bojkić <bole@dajmi5.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
@@ -24,7 +24,7 @@ msgid "# of digits"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:786
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:795
 #, python-format
 msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
 msgstr ""
@@ -76,7 +76,7 @@ msgid "Close"
 msgstr "Zatvori"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:727
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:736
 #, python-format
 msgid "Code not found."
 msgstr "Šifra nije pronađena"
@@ -97,7 +97,7 @@ msgid "Create/Update"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1022
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
 #, python-format
 msgid "Created account %s.\n"
 msgstr ""
@@ -121,49 +121,49 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1113
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1124
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:934
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:943
 #, python-format
 msgid "Created tax %s.\n"
 msgstr "Kreiran porez %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:870
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
 #, python-format
 msgid "Created tax code %s.\n"
 msgstr "Kreiran porezni kod %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:888
 #, python-format
 msgid "Deactivated %d tax codes\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:949
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:958
 #, python-format
 msgid "Deactivated %d taxes\n"
 msgstr "Deaktivirano %d poreza\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1024
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Exception creating account %s: %s - %s.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:970
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:979
 #, python-format
 msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1044
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr ""
@@ -276,7 +276,7 @@ msgid "Messages and Errors"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:820
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:829
 #, python-format
 msgid "Name not found."
 msgstr "Naziv nije pronađen."
@@ -318,7 +318,7 @@ msgid ""
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:764
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:773
 #, python-format
 msgid "None"
 msgstr ""
@@ -391,13 +391,13 @@ msgid "Summary of updated objects"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1058
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1069
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1061
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1072
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr ""
@@ -440,7 +440,7 @@ msgid "Tax is disabled.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:765
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:774
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
 msgstr ""
@@ -624,13 +624,13 @@ msgid "The tax_code_id field is different.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:792
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:801
 #, python-format
 msgid "The template has accounts the fiscal position instance does not.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:770
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:779
 #, python-format
 msgid "The template has taxes the fiscal position instance does not.\n"
 msgstr ""
@@ -739,13 +739,13 @@ msgid ""
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1042
 #, python-format
 msgid "Updated account %s.\n"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:939
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:948
 #, python-format
 msgid "Updated tax %s.\n"
 msgstr ""
@@ -756,7 +756,7 @@ msgid "Updated tax code"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:874
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:883
 #, python-format
 msgid "Updated tax code %s.\n"
 msgstr ""
