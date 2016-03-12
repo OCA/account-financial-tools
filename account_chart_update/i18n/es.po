@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 01:39+0000\n"
+"POT-Creation-Date: 2016-03-07 17:46+0000\n"
 "PO-Revision-Date: 2016-02-16 15:37+0000\n"
 "Last-Translator: Alejandro Santana <alejandrosantana@anubia.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
@@ -24,7 +24,7 @@ msgid "# of digits"
 msgstr "Nº de dígitos"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:786
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:795
 #, python-format
 msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
 msgstr "Mapeo de cuenta no encontrado en la instancia de posición fiscal: %s -> %s.\n"
@@ -76,7 +76,7 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:727
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:736
 #, python-format
 msgid "Code not found."
 msgstr "Código no encontrado."
@@ -97,7 +97,7 @@ msgid "Create/Update"
 msgstr "Crear/Actualizar"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1022
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1031
 #, python-format
 msgid "Created account %s.\n"
 msgstr "Creada cuenta %s.\n"
@@ -121,49 +121,49 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1115
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1124
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
 msgstr "Creada o actualizada posición fiscal %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:934
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:943
 #, python-format
 msgid "Created tax %s.\n"
 msgstr "Creado impuesto %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:870
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
 #, python-format
 msgid "Created tax code %s.\n"
 msgstr "Creado código de impuesto %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:888
 #, python-format
 msgid "Deactivated %d tax codes\n"
 msgstr "Desactivados %d códigos de impuestos\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:949
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:958
 #, python-format
 msgid "Deactivated %d taxes\n"
 msgstr "Desactivados %d impuestos\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1024
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
 #, python-format
 msgid "Exception creating account %s: %s - %s.\n"
 msgstr "Excepción creando cuenta %s: %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:970
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:979
 #, python-format
 msgid "Exception setting the parent of account %s children: %s - %s.\n"
 msgstr "Excepción estableciendo el padre de los hijos de la cuenta %s: %s - %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1035
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1044
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
 msgstr "Excepción escribiendo cuenta %s: %s - %s.\n"
@@ -276,7 +276,7 @@ msgid "Messages and Errors"
 msgstr "Mensajes y errores"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:820
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:829
 #, python-format
 msgid "Name not found."
 msgstr "Nombre no encontrado."
@@ -318,7 +318,7 @@ msgid ""
 msgstr "Nº de dígitos a usar para el código de cuenta. Asegúrese que este número es el mismo que el de las cuentas existentes."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:764
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:773
 #, python-format
 msgid "None"
 msgstr "Ninguno"
@@ -391,13 +391,13 @@ msgid "Summary of updated objects"
 msgstr "Resumen de objetos actualizados"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1060
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1069
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
 msgstr "Impuesto %s: No se pudo establecer la cuenta a recibir.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1063
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1072
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
 msgstr "Impuesto %s: No se pudo establecer la cuenta a pagar.\n"
@@ -440,7 +440,7 @@ msgid "Tax is disabled.\n"
 msgstr "Impuesto está desactivado.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:765
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:774
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
 msgstr "Mapeo de cuenta no encontrado en la instancia de la posición fiscal: %s -> %s.\n"
@@ -624,13 +624,13 @@ msgid "The tax_code_id field is different.\n"
 msgstr "El campo tax_code_id es diferente.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:792
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:801
 #, python-format
 msgid "The template has accounts the fiscal position instance does not.\n"
 msgstr "La plantilla tiene cuentas que la instancia de posición fiscal no.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:770
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:779
 #, python-format
 msgid "The template has taxes the fiscal position instance does not.\n"
 msgstr "La plantilla tiene impuestos que la instancia de posición fiscal no.\n"
@@ -739,13 +739,13 @@ msgid ""
 msgstr "Actualizar el padre de las cuentas que parecen (basándose en el código) ser hijas de las cuentas recién creadas. Si tiene una cuenta 430 con una hija 4300000, y se crea una cuenta 4300, se establecerá la cuenta 4300 como padre de la cuenta 4300000."
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1033
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1042
 #, python-format
 msgid "Updated account %s.\n"
 msgstr "Actualizada cuenta %s.\n"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:939
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:948
 #, python-format
 msgid "Updated tax %s.\n"
 msgstr "Actualizado impuesto %s.\n"
@@ -756,7 +756,7 @@ msgid "Updated tax code"
 msgstr "Códigos de impuesto actualizados"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:874
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:883
 #, python-format
 msgid "Updated tax code %s.\n"
 msgstr "Actualizado código de impuesto %s.\n"
