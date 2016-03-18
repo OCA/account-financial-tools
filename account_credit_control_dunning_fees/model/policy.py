@@ -31,6 +31,9 @@ class CreditControlPolicy(models.Model):
 
     dunning_fixed_amount = fields.Float(string='Fees Fixed Amount')
 
+    dunning_percentage = fields.Float(
+        string='Fees percentage')
+
     dunning_currency_id = fields.Many2one(
         'res.currency',
         string='Fees currency',
@@ -38,7 +41,11 @@ class CreditControlPolicy(models.Model):
              "company's currency."
     )
 
-    # planned type are fixed, percent, compound
-    dunning_fees_type = fields.Selection([('fixed', 'Fixed')],
-                                         string='Type',
-                                         default='fixed')
+    dunning_fees_type = fields.Selection(
+        [
+            ('fixed', 'Fixed'),
+            ('percentage', 'Percentage'),
+            ('compound', 'Compound'),
+        ],
+        string='Type',
+        default='fixed')

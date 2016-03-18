@@ -54,6 +54,10 @@ class FeesComputer(models.BaseModel):
         """
         if level_fees_type == 'fixed':
             return self.compute_fixed_fees
+        elif level_fees_type == 'percentage':
+            return self.compute_percentage_fees
+        elif level_fees_type == 'compound':
+            return self.compute_compound_fees
         else:
             raise NotImplementedError('fees type %s is not supported' %
                                       level_fees_type)
@@ -120,3 +124,38 @@ class FeesComputer(models.BaseModel):
             return fees_amount
         else:
             return fees_currency.compute(fees_amount, credit_currency)
+
+    @api.model
+    def compute_percentage_fees(self, credit_line):
+        """Compute fees amount for percentage fees.
+        Correspond to the percentage dunning fees type
+
+        if currency of the fees is not the same as the currency
+        of the credit line, fees amount is converted to
+        currency of credit line.
+
+        :param credit_line: credit line record
+
+        :return: fees amount float (in credit line currency)
+
+        """
+        credit_currency = (credit_line.currency_id or
+                           credit_line.company_id.currency_id)
+        level = credit_line.policy_level_id
+        amount_due = credit_line.amount_due
+        fees_percentage = level.dunning_percentage
+        if not fees_percentage:
+            return 0.0
+        fees_currency = (level.dunning_currency_id or
+                         level.policy_id.company_id.currency_id)
+
+        fees_amount = amount_due / 100 * fees_percentage
+
+        if fees_currency == credit_currency:
+            return fees_amount
+        else:
+            return fees_currency.compute(fees_amount, credit_currency)
+
+    @api.model
+    def compute_compound_fees(self, credit_lines):
+        return self.compute_fixed_fees(credit_lines) + self.compute_percentage_fees(credit_lines)

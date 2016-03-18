@@ -10,7 +10,11 @@
           <page string="Fees">
             <group>
               <group>
-                <field name="dunning_fixed_amount"/>
+                <field name="dunning_fees_type"/>
+                <field name="dunning_fixed_amount"
+                  attrs="{'invisible':[('dunning_fees_type', 'not in', ('fixed', 'compound'))]}"/>
+                <field name="dunning_percentage"
+                  attrs="{'invisible':[('dunning_fees_type', 'not in', ('percentage', 'compound'))]}"/>
                 <field name="dunning_product_id"/>
                 <field name="dunning_currency_id"/>
               </group>
