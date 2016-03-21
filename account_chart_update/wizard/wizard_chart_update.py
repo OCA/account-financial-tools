@@ -922,7 +922,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             'include_base_amount': tax_template.include_base_amount,
             'description': tax_template.description,
             'company_id': self.company_id.id,
-            'type_tax_use': tax_template.type_tax_use
+            'type_tax_use': tax_template.type_tax_use,
+            'price_include': tax_template.price_include,
         }
 
     @api.multi
