@@ -612,6 +612,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The include base amount field is different.\n")
         if tax.type_tax_use != tax_template.type_tax_use:
             notes += _("The type tax use field is different.\n")
+        if tax.price_include != tax_template.price_include:
+            notes += _("The Tax Included in Price field is different.\n")
         # compare tax code fields
         if tax.base_code_id != self.map_tax_code_template(
                 tax_template.base_code_id, mapping_tax_codes):
