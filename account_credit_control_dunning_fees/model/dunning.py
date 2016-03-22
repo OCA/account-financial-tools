@@ -158,4 +158,5 @@ class FeesComputer(models.BaseModel):
 
     @api.model
     def compute_compound_fees(self, credit_lines):
-        return self.compute_fixed_fees(credit_lines) + self.compute_percentage_fees(credit_lines)
+        return self.compute_fixed_fees(credit_lines) \
+            + self.compute_percentage_fees(credit_lines)
