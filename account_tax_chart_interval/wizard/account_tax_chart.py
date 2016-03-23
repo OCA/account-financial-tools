@@ -11,7 +11,8 @@ class AccountTaxChart(models.TransientModel):
     _inherit = 'account.tax.chart'
 
     def default_fiscalyear(self):
-        return self.env['account.fiscalyear'].find()
+        fy_obj = self.env['account.fiscalyear']
+        return fy_obj.browse(fy_obj.find())
 
     fiscalyear_id = fields.Many2one(
         comodel_name='account.fiscalyear', string='Fiscal year',
