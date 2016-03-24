@@ -355,6 +355,7 @@ class move_line_importer(orm.Model):
             imp_id = imp_id[0]
         if context is None:
             context = {}
+        context = context.copy()
         current = self.read(cr, uid, imp_id, ['bypass_orm', 'company_id'],
                             load='_classic_write')
         context['company_id'] = current['company_id']
