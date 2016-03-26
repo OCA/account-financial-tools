@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 00:19+0000\n"
+"POT-Creation-Date: 2016-03-21 15:23+0000\n"
 "PO-Revision-Date: 2016-02-27 00:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/en/)\n"
@@ -23,7 +23,7 @@ msgid "Account Entry"
 msgstr "Account Entry"
 
 #. module: account_journal_entry_posted_async
-#: code:addons/account_journal_entry_posted_async/models/account_move.py:48
+#: code:addons/account_journal_entry_posted_async/models/account_move.py:65
 #, python-format
 msgid "Validate account move %s"
 msgstr "Validate account move %s"
@@ -51,7 +51,7 @@ msgid "on_change_entry_posted(entry_posted)"
 msgstr "on_change_entry_posted(entry_posted)"
 
 #. module: account_journal_entry_posted_async
-#: code:addons/account_journal_entry_posted_async/models/account_move.py:69
+#: code:addons/account_journal_entry_posted_async/models/account_move.py:50
 #, python-format
 msgid "Nothing to do because the record has been deleted"
 msgstr "Nothing to do because the record has been deleted"
