@@ -62,4 +62,3 @@ class AccountBankStatementLine(models.Model):
         self = self.with_context(from_parent_object=True)
         return super(AccountBankStatementLine, self)\
             .process_reconciliation(mv_line_dicts)
-

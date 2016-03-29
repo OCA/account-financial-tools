@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, fields
+from openerp import models
 
 
 class AccountPayment(models.Model):
