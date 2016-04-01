@@ -95,7 +95,7 @@
               </h1>
             </div>
             <group colspan="4" col="4">
-              <field name="code"/>
+              <field name="code" required="1"/>
               <field name="parent_id" attrs="{'required':[('type','=','normal')]}"/>
               <field name="type" on_change="onchange_type(type)"/>
               <field name="company_id" widget="selection" groups="base.group_multi_company"/>
