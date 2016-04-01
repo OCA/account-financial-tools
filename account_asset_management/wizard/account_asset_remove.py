@@ -123,7 +123,7 @@ class account_asset_remove(orm.TransientModel):
             help="Keep empty to use the period of the removal ate."),
         'sale_value': fields.float('Sale Value'),
         'account_sale_id': fields.many2one(
-            'account.account', 'Asset Sale Account',
+            'account.account', 'Payment Method',
             domain=[('type', '<>', 'view')]),
         'account_plus_value_id': fields.many2one(
             'account.account', 'Plus-Value Account',
