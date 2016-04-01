@@ -124,16 +124,16 @@ class account_asset_remove(orm.TransientModel):
         'sale_value': fields.float('Sale Value'),
         'account_sale_id': fields.many2one(
             'account.account', 'Asset Sale Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_plus_value_id': fields.many2one(
             'account.account', 'Plus-Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_min_value_id': fields.many2one(
             'account.account', 'Min-Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_residual_value_id': fields.many2one(
             'account.account', 'Residual Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'posting_regime': fields.selection(
             _posting_regime, 'Removal Entry Policy',
             required=True,
