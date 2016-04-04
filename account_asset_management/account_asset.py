@@ -68,25 +68,26 @@ class account_asset_category(orm.Model):
         'name': fields.char('Name', size=64, required=True, select=1),
         'note': fields.text('Note'),
         'account_analytic_id': fields.many2one(
-            'account.analytic.account', 'Analytic account'),
+            'account.analytic.account', 'Analytic account',
+            domain=[('type', '<>', 'view')]),
         'account_asset_id': fields.many2one(
             'account.account', 'Asset Account', required=True,
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_depreciation_id': fields.many2one(
             'account.account', 'Depreciation Account', required=True,
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_expense_depreciation_id': fields.many2one(
             'account.account', 'Depr. Expense Account', required=True,
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_plus_value_id': fields.many2one(
             'account.account', 'Plus-Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_min_value_id': fields.many2one(
             'account.account', 'Min-Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'account_residual_value_id': fields.many2one(
             'account.account', 'Residual Value Account',
-            domain=[('type', '=', 'other')]),
+            domain=[('type', '<>', 'view')]),
         'journal_id': fields.many2one(
             'account.journal', 'Journal', required=True),
         'company_id': fields.many2one(
@@ -1105,7 +1106,8 @@ class account_asset_asset(orm.Model):
             relation='res.currency',
             store=True, readonly=True,),
         'account_analytic_id': fields.many2one(
-            'account.analytic.account', 'Analytic account'),
+            'account.analytic.account', 'Analytic account',
+            domain=[('type', '<>', 'view')]),
     }
 
     _defaults = {
