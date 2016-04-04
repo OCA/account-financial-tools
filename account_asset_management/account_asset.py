@@ -324,25 +324,36 @@ class account_asset_asset(orm.Model):
                 depreciation_date_start = datetime.strptime(
                     asset.date_start, '%Y-%m-%d')
                 fy_date_stop = entry['date_stop']
-                first_fy_asset_days = \
-                    (fy_date_stop - depreciation_date_start).days + 1
-                if fy_id:
-                    first_fy_duration = self._get_fy_duration(
-                        cr, uid, fy_id, option='days')
-                    first_fy_year_factor = self._get_fy_duration(
-                        cr, uid, fy_id, option='years')
-                    duration_factor = \
-                        float(first_fy_asset_days) / first_fy_duration \
-                        * first_fy_year_factor
-                else:
-                    first_fy_duration = \
-                        calendar.isleap(entry['date_start'].year) \
-                        and 366 or 365
-                    duration_factor = \
-                        float(first_fy_asset_days) / first_fy_duration
+                fy_duration = self._get_fy_duration(cr, uid, fy_id, option='months')
+                delta = relativedelta(fy_date_stop, depreciation_date_start)
+                months_remaining = delta.months + 1
+                duration_factor = float(months_remaining) / fy_duration
+                
+                _logger.debug('==> fy_duration      : %s', fy_duration)
+                _logger.debug('==> delta            : %s', delta)
+                _logger.debug('==> months_remaining : %s', months_remaining)
+                _logger.debug('==> duration_factor  : %s', duration_factor)
+                
+                
+#                 first_fy_asset_days = \
+#                     (fy_date_stop - depreciation_date_start).days + 1
+#                 if fy_id:
+#                     first_fy_duration = self._get_fy_duration(
+#                         cr, uid, fy_id, option='days')
+#                     first_fy_year_factor = self._get_fy_duration(
+#                         cr, uid, fy_id, option='years')
+#                     duration_factor = \
+#                         float(first_fy_asset_days) / first_fy_duration * first_fy_year_factor
+#                 else:
+#                     first_fy_duration = \
+#                         calendar.isleap(entry['date_start'].year) \
+#                         and 366 or 365
+#                     duration_factor = \
+#                         float(first_fy_asset_days) / first_fy_duration
             elif fy_id:
-                duration_factor = self._get_fy_duration(
-                    cr, uid, fy_id, option='years')
+#                 duration_factor = self._get_fy_duration(
+#                     cr, uid, fy_id, option='years')
+                duration_factor = 1.0
         elif fy_id:
             fy_months = self._get_fy_duration(
                 cr, uid, fy_id, option='months')
