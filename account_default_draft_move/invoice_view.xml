@@ -22,7 +22,9 @@
       <field name="type">form</field>
       <field name="arch" type="xml">
         <xpath expr="//button[@name='invoice_cancel']" position="after">
-          <button name="invoice_cancel" states="open" string="Cancel Invoice" groups="account.group_account_invoice"/>
+          <field name="update_posted" invisible="1"/>
+          <button name="invoice_cancel" states="open" string="Cancel Invoice" groups="account.group_account_invoice"
+                  attrs="{'invisible': ['|', ('update_posted', '=', False)]}"/>
         </xpath>
       </field>
     </record>

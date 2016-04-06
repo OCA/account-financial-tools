@@ -38,6 +38,16 @@ class AccountInvoice(models.Model):
                 inv.move_id.state = 'draft'
         return res
 
+    @api.multi
+    def _is_update_posted(self):
+        ir_module = self.env['ir.module.module']
+        can_cancel = ir_module.search([('name', '=', 'account_cancel'),
+                                       ('state', '=', 'installed')])
+        self.write({'update_posted': can_cancel})
+
+    update_posted = fields.Boolean(compute='_is_update_posted',
+                                   string='Allow Cancelling Entries')
+
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
