@@ -143,9 +143,17 @@ class TestAssetManagement(common.TransactionCase):
         if calendar.isleap(date.today().year):
             self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                    46.44, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].depreciated_value,
+                46.44, places=2)
         else:
             self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                    47.33, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].depreciated_value,
+                47.33, places=2)
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[1].depreciated_value, 0, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
                                55.55, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount,
@@ -270,3 +278,7 @@ class TestAssetManagement(common.TransactionCase):
         self.assertEquals(len(asset.depreciation_line_ids), 3)
         self.assertEquals(asset.depreciation_line_ids[1].amount, 1253.03)
         self.assertEquals(asset.depreciation_line_ids[2].amount, 388.03)
+        self.assertEquals(
+            asset.depreciation_line_ids[1].depreciated_value, 0)
+        self.assertEquals(
+            asset.depreciation_line_ids[2].depreciated_value, 1253.03)
