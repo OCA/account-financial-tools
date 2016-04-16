@@ -5,12 +5,12 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-01 10:59+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/zh_TW/)\n"
+"POT-Creation-Date: 2016-04-14 08:56+0000\n"
+"PO-Revision-Date: 2016-04-14 08:56+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,42 +23,70 @@ msgid "Account Entry"
 msgstr ""
 
 #. module: account_move_locking
-#: view:lock.account.move:account_move_locking.lock_account_move_view
+#: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
 msgstr ""
 
 #. module: account_move_locking
-#: view:lock.account.move:account_move_locking.lock_account_move_view
+#: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Cancel"
 msgstr "刪除"
 
 #. module: account_move_locking
-#: field:lock.account.move,create_uid:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: account_move_locking
-#: field:lock.account.move,create_date:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_date
 msgid "Created on"
 msgstr ""
 
 #. module: account_move_locking
-#: field:lock.account.move,id:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_end
+msgid "Date end"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
+msgid "Date start"
+msgstr ""
+
+#. module: account_move_locking
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
+#, python-format
+msgid ""
+"Date start need to be                                           before Date "
+"end"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_id
 msgid "ID"
 msgstr ""
 
 #. module: account_move_locking
-#: field:lock.account.move,journal_ids:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_journal_ids
 msgid "Journal"
 msgstr "帳簿"
 
 #. module: account_move_locking
-#: field:lock.account.move,write_uid:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_move_locking
-#: field:lock.account.move,write_date:0
+#: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -70,51 +98,39 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
-#: view:lock.account.move:account_move_locking.lock_account_move_view
+#: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
 msgstr ""
 
 #. module: account_move_locking
-#: field:account.move,locked:0
+#: model:ir.model.fields,field_description:account_move_locking.field_account_move_locked
 msgid "Locked"
 msgstr ""
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/account.py:33
-#: code:addons/account_move_locking/account.py:41
-#: code:addons/account_move_locking/account.py:51
+#: code:addons/account_move_locking/account.py:40
+#: code:addons/account_move_locking/account.py:49
 #, python-format
-msgid "Move Locked!"
+msgid "Move Locked! %s"
 msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:60
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:67
 #, python-format
 msgid "No move to locked found"
 msgstr ""
 
 #. module: account_move_locking
-#: field:lock.account.move,period_ids:0
-msgid "Period"
-msgstr "期間"
-
-#. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:57
 #, python-format
 msgid ""
-"Unposted move in period/jounal                                        "
-"selected, please post it before                                        "
+"Unposted move in period/jounal                                           "
+"selected, please post it before                                           "
 "locking them"
 msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:49
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:59
-#, python-format
-msgid "Warning!"
-msgstr ""
-
-#. module: account_move_locking
-#: view:lock.account.move:account_move_locking.lock_account_move_view
+#: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
 msgstr ""
