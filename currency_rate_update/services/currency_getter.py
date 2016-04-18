@@ -71,6 +71,7 @@ class Currency_getter_factory():
             'MX_BdM_getter',
             'CA_BOC_getter',
             'RO_BNR_getter',
+            'UK_BOE_getter',
         ]
         if class_name in allowed:
             exec "from .update_service_%s import %s" % \
