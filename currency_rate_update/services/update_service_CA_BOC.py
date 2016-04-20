@@ -30,14 +30,14 @@ _logger = logging.getLogger(__name__)
 
 
 class CA_BOC_getter(Currency_getter_interface):
-    """Implementation of Curreny_getter_factory interface
+    """Implementation of Currency_getter_factory interface
     for Bank of Canada RSS service
 
     """
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
 
         # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
         url = ('http://www.bankofcanada.ca/stats/assets/'

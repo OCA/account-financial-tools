@@ -89,7 +89,7 @@ class Currency_getter_interface(object):
         'ZWD'
     ]
 
-    # Updated currency this arry will contain the final result
+    # this dictionary will contain the final result
     updated_currency = {}
 
     def get_updated_currency(self, currency_array, main_currency,

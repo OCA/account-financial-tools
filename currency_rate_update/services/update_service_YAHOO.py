@@ -31,7 +31,7 @@ class YAHOO_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
         self.validate_cur(main_currency)
         url = ('http://download.finance.yahoo.com/d/'
                'quotes.csv?s=%s=X&f=sl1c1abg')

@@ -114,8 +114,11 @@ class UK_BOE_getter(Currency_getter_interface):
                              max_delta_days):
         """implementation of abstract method of Currency_getter_interface"""
 
-        """From BoE website: "The data represent indicative middle market (mean of spot buying and selling)
-        rates as observed by the Bank's Foreign Exchange Desk in the London interbank market around 4pm."""
+        """
+From BoE website: "The data represent indicative middle market 
+(mean of spot buying and selling) rates as observed by the 
+Bank's Foreign Exchange Desk in the London interbank market around 4pm.
+        """
 
         currency_string = ",".join([currency_key[curr][0] for curr in currency_array])
 
