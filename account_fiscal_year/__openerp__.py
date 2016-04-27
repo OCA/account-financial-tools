@@ -6,7 +6,7 @@
     'name': 'Account Fiscal Year',
     'version': '9.0.0.1.0',
     'category': 'Accounting',
-    'summary': """
+    'description': """
     Extend date.range.type to add fiscal_year flag.
 
     Override official res_company.compute_fiscal_year_dates to get the
