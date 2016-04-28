@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -29,5 +29,3 @@ from . import account_move
 from . import wizard
 from . import report
 from . import res_config
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
