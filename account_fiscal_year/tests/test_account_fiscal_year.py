@@ -2,53 +2,45 @@
 # Author: Damien Crier
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import datetime
+from dateutil.relativedelta import relativedelta
 
-import openerp.tests.common as common
 from openerp import fields
-from openerp.tools import (DEFAULT_SERVER_DATE_FORMAT,
-                           DEFAULT_SERVER_DATETIME_FORMAT)
-
-
-def to_odoo_datetime(date):
-    return date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-
-
-def to_odoo_date(date):
-    return date.strftime(DEFAULT_SERVER_DATE_FORMAT)
+import openerp.tests.common as common
 
 
 class TestAccountFiscalYear(common.TransactionCase):
 
     def setUp(self):
         super(TestAccountFiscalYear, self).setUp()
-        self.today_date = fields.Date.from_string(fields.Date.today())
+        self.today_date = datetime.date.today() + relativedelta(years=100)
         self.company = self.env.ref('base.main_company')
 
-    def test_example(self):
+    def test_compute_fiscalyear(self):
+        """Check that a call to that Odoo's method returns the dates from
+        a fiscal year date range if one exists for the given date
+        """
+        # check that the result  by default from 1/1 31/12
+        result = self.company.compute_fiscalyear_dates(self.today_date)
+        self.assertEquals(
+            result['date_from'],
+            datetime.date(self.today_date.year, 1, 1))
+        self.assertEquals(
+            result['date_to'],
+            datetime.date(self.today_date.year, 12, 31))
+        # create a fiscal year with different limits
         demo_date_range = self.env['date.range'].create(
             {'name': 'FY%s' % (self.today_date.year),
-             'date_start': '%s-01-01' % self.today_date.year,
-             'date_end': '%s-12-31' % self.today_date.year,
+             'date_start': '%s-04-01' % self.today_date.year,
+             'date_end': '%s-11-30' % self.today_date.year,
              'type_id': self.env.ref('account_fiscal_year.fiscalyear').id,
              'company_id': self.company.id,
              'active': True})
-        result = self.company.compute_fiscalyear_dates(self.today_date)
-        self.assertEqual(to_odoo_datetime(result['date_from']),
-                         demo_date_range.date_start)
-        self.assertEqual(to_odoo_datetime(result['date_to']),
-                         demo_date_range.date_end)
-
-    def test_example2(self):
-        demo_date_range = self.env['date.range'].create(
-            {'name': 'FY%s' % (self.today_date.year),
-             'date_start': '%s-03-01' % self.today_date.year,
-             'date_end': '%s-12-31' % self.today_date.year,
-             'type_id': self.env.ref('account_fiscal_year.fiscalyear').id,
-             'company_id': self.company.id,
-             'active': True})
-        result = self.company.compute_fiscalyear_dates(self.today_date)
-        if to_odoo_date(self.today_date) >= demo_date_range.date_start:
-            self.assertEqual(to_odoo_datetime(result['date_from']),
-                             demo_date_range.date_start)
-            self.assertEqual(to_odoo_datetime(result['date_to']),
-                             demo_date_range.date_end)
+        result = self.company.compute_fiscalyear_dates(
+            datetime.date(self.today_date.year, 5, 4))
+        self.assertEqual(
+            result['date_from'],
+            fields.Date.from_string(demo_date_range.date_start))
+        self.assertEqual(
+            result['date_to'],
+            fields.Date.from_string(demo_date_range.date_end))
