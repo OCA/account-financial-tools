@@ -21,17 +21,27 @@
 #
 ##############################################################################
 
-from .currency_getter_interface import Currency_getter_interface
+from .currency_getter_interface import CurrencyGetterInterface
 
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class MX_BdM_getter(Currency_getter_interface):
+class MX_BdMGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Banco de México service
 
     """
+    code = 'MX_BdM'
+    name = 'Bank of Mexico'
+    supported_currency_array = [
+        "ARS", "AUD", "BBD", "BMD", "BOB", "BRL", "BSD", "BZD", "CAD", "CHF",
+        "CLP", "CNH", "CNY", "COP", "CRC", "CUP", "CZK", "DKK", "DOP", "DZD",
+        "EGP", "ESD", "EUR", "FJD", "GBP", "GTQ", "GYD", "HKD", "HNL", "HUF",
+        "IDR", "ILS", "INR", "IQD", "JMD", "JPY", "KES", "KRW", "KWD", "MAD",
+        "MYR", "NGN", "NIC", "NOK", "NZD", "PAB", "PEN", "PHP", "PLN", "PYG",
+        "RON", "RUB", "SAR", "SEK", "SGD", "SVC", "THB", "TRY", "TTD", "TWD",
+        "UAH", "USD", "USD", "UYP", "VEF", "VND", "ZAR"]
 
     def rate_retrieve(self):
         """ Get currency exchange from Banxico.xml and proccess it
