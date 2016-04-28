@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,11 +26,11 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_invoice(orm.Model):
+class AccountInvoice(orm.Model):
     _inherit = 'account.invoice'
 
     def action_number(self, cr, uid, ids, context=None):
-        super(account_invoice, self).action_number(cr, uid, ids, context)
+        super(AccountInvoice, self).action_number(cr, uid, ids, context)
         asset_obj = self.pool['account.asset.asset']
         asset_line_obj = self.pool['account.asset.depreciation.line']
         for inv in self.browse(cr, uid, ids):
@@ -54,17 +54,17 @@ class account_invoice(orm.Model):
         assets = []
         for inv in self.browse(cr, uid, ids):
             move = inv.move_id
-            # It will unlink asset only if the invoice is chained to 
+            # It will unlink asset only if the invoice is chained to
             # create depreciation line
             asset_line_obj = self.pool['account.asset.depreciation.line']
-            domain = [('move_id', '=', move.id),('type', '=', 'create')]
+            domain = [('move_id', '=', move.id), ('type', '=', 'create')]
             dp_line_ids = asset_line_obj.search(cr, uid, domain)
             if not dp_line_ids:
                 continue
             assets = move and \
                 [aml.asset_id for aml in
                  filter(lambda x: x.asset_id, move.line_id)]
-        super(account_invoice, self).action_cancel(
+        super(AccountInvoice, self).action_cancel(
             cr, uid, ids, context=context)
         if assets:
             asset_obj = self.pool.get('account.asset.asset')
@@ -72,7 +72,7 @@ class account_invoice(orm.Model):
         return True
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
-        res = super(account_invoice, self).line_get_convert(
+        res = super(AccountInvoice, self).line_get_convert(
             cr, uid, x, part, date, context=context)
         if x.get('asset_category_id'):
             # skip empty debit/credit
@@ -81,13 +81,13 @@ class account_invoice(orm.Model):
         return res
 
     def inv_line_characteristic_hashcode(self, invoice_line):
-        res = super(account_invoice, self).inv_line_characteristic_hashcode(
+        res = super(AccountInvoice, self).inv_line_characteristic_hashcode(
             invoice_line)
         res += '-%s' % invoice_line.get('asset_category_id', 'False')
         return res
 
 
-class account_invoice_line(orm.Model):
+class AccountInvoiceLine(orm.Model):
     _inherit = 'account.invoice.line'
 
     _columns = {
@@ -105,7 +105,7 @@ class account_invoice_line(orm.Model):
 
     def onchange_account_id(self, cr, uid, ids, product_id,
                             partner_id, inv_type, fposition_id, account_id):
-        res = super(account_invoice_line, self).onchange_account_id(
+        res = super(AccountInvoiceLine, self).onchange_account_id(
             cr, uid, ids, product_id,
             partner_id, inv_type, fposition_id, account_id)
         if account_id:
@@ -120,7 +120,7 @@ class account_invoice_line(orm.Model):
         return res
 
     def move_line_get_item(self, cr, uid, line, context=None):
-        res = super(account_invoice_line, self).move_line_get_item(
+        res = super(AccountInvoiceLine, self).move_line_get_item(
             cr, uid, line, context)
         if line.asset_category_id:
             res['asset_category_id'] = line.asset_category_id.id

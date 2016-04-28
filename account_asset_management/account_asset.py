@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -41,7 +41,7 @@ class dummy_fy(object):
             setattr(self, key, arg)
 
 
-class account_asset_category(orm.Model):
+class AccountAssetCategory(orm.Model):
     _name = 'account.asset.category'
     _description = 'Asset category'
     _order = 'name'
@@ -175,7 +175,7 @@ class account_asset_category(orm.Model):
     def create(self, cr, uid, vals, context=None):
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        categ_id = super(account_asset_category, self).create(
+        categ_id = super(AccountAssetCategory, self).create(
             cr, uid, vals, context=context)
         acc_obj = self.pool.get('account.account')
         acc_id = vals.get('account_asset_id')
@@ -192,7 +192,7 @@ class account_asset_category(orm.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        super(account_asset_category, self).write(cr, uid, ids, vals, context)
+        super(AccountAssetCategory, self).write(cr, uid, ids, vals, context)
         acc_obj = self.pool.get('account.account')
         for categ in self.browse(cr, uid, ids, context):
             acc_id = vals.get('account_asset_id')
@@ -229,7 +229,7 @@ class account_asset_recompute_trigger(orm.Model):
     }
 
 
-class account_asset_asset(orm.Model):
+class AccountAssetAsset(orm.Model):
     _name = 'account.asset.asset'
     _description = 'Asset'
     _order = 'date_start desc, name'
@@ -247,13 +247,13 @@ class account_asset_asset(orm.Model):
                     _("You cannot delete an asset that contains "
                       "posted depreciation lines."))
             parent = asset.parent_id
-            super(account_asset_asset, self).unlink(
+            super(AccountAssetAsset, self).unlink(
                 cr, uid, [asset.id], context=context)
             if parent:
                 # Trigger store function
                 parent.write({'salvage_value': parent.salvage_value})
         return True
-    
+
     def _get_period(self, cr, uid, context=None):
         ctx = dict(context or {}, account_period_prefer_normal=True)
         periods = self.pool.get('account.period').find(cr, uid, context=ctx)
@@ -1123,7 +1123,7 @@ class account_asset_asset(orm.Model):
 
     def _check_recursion(self, cr, uid, ids,
                          context=None, parent=None):
-        return super(account_asset_asset, self)._check_recursion(
+        return super(AccountAssetAsset, self)._check_recursion(
             cr, uid, ids, context=context, parent=parent)
 
     def _check_method(self, cr, uid, ids, context=None):
@@ -1199,7 +1199,7 @@ class account_asset_asset(orm.Model):
             'account_move_line_ids': [],
             'state': 'draft',
             'history_ids': []})
-        return super(account_asset_asset, self).copy(
+        return super(AccountAssetAsset, self).copy(
             cr, uid, id, default, context=context)
 
     def _compute_entries(self, cr, uid, ids, period_id,
@@ -1280,7 +1280,7 @@ class account_asset_asset(orm.Model):
             context = {}
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        asset_id = super(account_asset_asset, self).create(
+        asset_id = super(AccountAssetAsset, self).create(
             cr, uid, vals, context=context)
         if context.get('create_asset_from_move_line'):
             # Trigger compute of asset_value
@@ -1314,7 +1314,7 @@ class account_asset_asset(orm.Model):
                 vals['prorata'] = True
         for asset in self.browse(cr, uid, ids, context):
             asset_type = vals.get('type') or asset.type
-            super(account_asset_asset, self).write(
+            super(AccountAssetAsset, self).write(
                 cr, uid, [asset.id], vals, context)
             if asset_type == 'view' or \
                     context.get('asset_validate_from_write'):
@@ -1369,7 +1369,7 @@ class account_asset_asset(orm.Model):
         }
 
 
-class account_asset_depreciation_line(orm.Model):
+class AccountAssetDepreciationLine(orm.Model):
     _name = 'account.asset.depreciation.line'
     _description = 'Asset depreciation line'
 
@@ -1503,7 +1503,7 @@ class account_asset_depreciation_line(orm.Model):
             if next:
                 next_id = next[0]
                 self.write(cr, uid, [next_id], {'previous_id': previous_id})
-        return super(account_asset_depreciation_line, self).unlink(
+        return super(AccountAssetDepreciationLine, self).unlink(
             cr, uid, ids, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -1556,7 +1556,7 @@ class account_asset_depreciation_line(orm.Model):
                         _('Error!'),
                         _("You cannot set the date on a depreciation line "
                           "prior to already posted entries."))
-        return super(account_asset_depreciation_line, self).write(
+        return super(AccountAssetDepreciationLine, self).write(
             cr, uid, ids, vals, context)
 
     def _setup_move_data(self, depreciation_line, depreciation_date,
@@ -1680,7 +1680,7 @@ class account_asset_depreciation_line(orm.Model):
         return True
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(orm.Model):
     _inherit = 'account.move.line'
     _columns = {
         'asset_id': fields.many2one(
@@ -1688,7 +1688,7 @@ class account_move_line(orm.Model):
     }
 
 
-class account_asset_history(orm.Model):
+class AccountAssetHistory(orm.Model):
     _name = 'account.asset.history'
     _description = 'Asset history'
     _columns = {

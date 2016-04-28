@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -26,7 +26,7 @@ from lxml import etree
 from openerp.osv import fields, orm
 
 
-class asset_modify(orm.TransientModel):
+class AssetModify(orm.TransientModel):
     _name = 'asset.modify'
     _description = 'Modify Asset'
 
@@ -49,7 +49,7 @@ class asset_modify(orm.TransientModel):
         if not context:
             context = {}
         asset_obj = self.pool.get('account.asset.asset')
-        result = super(asset_modify, self).fields_view_get(
+        result = super(AssetModify, self).fields_view_get(
             cr, uid, view_id, view_type, context=context,
             toolbar=toolbar, submenu=submenu)
         asset_id = context.get('active_id', False)
@@ -76,7 +76,7 @@ class asset_modify(orm.TransientModel):
         if not context:
             context = {}
         asset_obj = self.pool.get('account.asset.asset')
-        res = super(asset_modify, self).default_get(
+        res = super(AssetModify, self).default_get(
             cr, uid, fields, context=context)
         asset_id = context.get('active_id', False)
         asset = asset_obj.browse(cr, uid, asset_id, context=context)
@@ -124,5 +124,3 @@ class asset_modify(orm.TransientModel):
         asset_obj.compute_depreciation_board(
             cr, uid, [asset_id], context=context)
         return {'type': 'ir.actions.act_window_close'}
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

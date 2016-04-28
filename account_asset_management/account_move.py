@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -27,9 +27,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_move(orm.Model):
+class AccountMove(orm.Model):
     _inherit = 'account.move'
-    
+
     def _get_fields_affects_asset_move(self):
         '''
         List of move's fields that can't be modified if move is linked
@@ -37,7 +37,7 @@ class account_move(orm.Model):
         '''
         res = ['period_id', 'journal_id', 'date']
         return res
-    
+
     def _asset_control_on_write(self, cr, uid, ids, vals, context=None):
         fields_affects = self._get_fields_affects_asset_move()
         if set(vals).intersection(fields_affects):
@@ -54,7 +54,7 @@ class account_move(orm.Model):
                         _("You cannot change an accounting entry "
                           "linked to an asset depreciation line."))
         return True
-    
+
     def _asset_control_on_unlink(self, cr, uid, ids, context=None, check=True):
         depr_obj = self.pool.get('account.asset.depreciation.line')
         for move_id in ids:
@@ -71,20 +71,20 @@ class account_move(orm.Model):
             # trigger store function
             depr_obj.write(cr, uid, depr_ids, {'move_id': False}, context)
         return True
-    
+
     def unlink(self, cr, uid, ids, context=None, check=True):
         if not context:
             context = {}
         self._asset_control_on_unlink(cr, uid, ids, context, check)
-        return super(account_move, self).unlink(
+        return super(AccountMove, self).unlink(
             cr, uid, ids, context=context, check=check)
 
     def write(self, cr, uid, ids, vals, context=None):
         self._asset_control_on_write(cr, uid, ids, vals, context)
-        return super(account_move, self).write(cr, uid, ids, vals, context)
+        return super(AccountMove, self).write(cr, uid, ids, vals, context)
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(orm.Model):
     _inherit = 'account.move.line'
     _columns = {
         'asset_category_id': fields.many2one(
@@ -96,11 +96,11 @@ class account_move_line(orm.Model):
         List of move line's fields that can't be modified if move is linked
         with a depreciation line
         '''
-        res = ['credit', 'debit', 'account_id', 'journal_id', 'date', 
+        res = ['credit', 'debit', 'account_id', 'journal_id', 'date',
                'asset_category_id', 'asset_id', 'tax_code_id', 'tax_amount']
         return res
 
-    def _asset_control_on_create(self, cr, uid, vals, context=None, 
+    def _asset_control_on_create(self, cr, uid, vals, context=None,
                                  check=True):
         if vals.get('asset_id') and not context.get('allow_asset'):
             raise orm.except_orm(_(
@@ -110,7 +110,7 @@ class account_move_line(orm.Model):
                   "\nYou should generate such entries from the asset."))
         return True
 
-    def _asset_control_on_write(self, cr, uid, ids, vals, 
+    def _asset_control_on_write(self, cr, uid, ids, vals,
                                 context=None, check=True, update_check=True):
         fields_affects = self._get_fields_affects_asset_move_line()
         for move_line in self.browse(cr, uid, ids, context=context):
@@ -130,7 +130,7 @@ class account_move_line(orm.Model):
 
     def onchange_account_id(self, cr, uid, ids,
                             account_id=False, partner_id=False, context=None):
-        res = super(account_move_line, self).onchange_account_id(
+        res = super(AccountMoveLine, self).onchange_account_id(
             cr, uid, ids, account_id, partner_id, context)
         account_obj = self.pool.get('account.account')
         if account_id:
@@ -168,13 +168,12 @@ class account_move_line(orm.Model):
             asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
             vals['asset_id'] = asset_id
 
-        return super(account_move_line, self).create(
+        return super(AccountMoveLine, self).create(
             cr, uid, vals, context, check)
 
-    def write(self, cr, uid, ids, vals, 
+    def write(self, cr, uid, ids, vals,
               context=None, check=True, update_check=True):
-        
-        self._asset_control_on_write(cr, uid, ids, vals, context, check, 
+        self._asset_control_on_write(cr, uid, ids, vals, context, check,
                                      update_check)
         if vals.get('asset_category_id'):
             assert len(ids) == 1, \
@@ -208,7 +207,5 @@ class account_move_line(orm.Model):
                 asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
                 vals['asset_id'] = asset_id
 
-        return super(account_move_line, self).write(
+        return super(AccountMoveLine, self).write(
             cr, uid, ids, vals, context, check, update_check)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
