@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Account Fiscal Year',
-    'version': '9.0.0.1.0',
+    'version': '9.0.1.0.0',
     'category': 'Accounting',
     'author': 'Camptocamp SA,'
               'Odoo Community Association (OCA)',
@@ -16,12 +16,6 @@
     'data': [
         'data/date_range_type.xml',
         'views/date_range_type.xml',
-    ],
-    'test': [
-    ],
-    'demo': [
-    ],
-    'qweb': [
     ],
     'installable': True,
     'application': True,
