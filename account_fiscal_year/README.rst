@@ -6,9 +6,9 @@
 Account Fiscal Year
 ===================
 
-This module extends date.range.type to add fiscal_year flag.
+This module extends `date.range.type` to add `fiscal_year` flag.
 
-Override official res_company.compute_fiscal_year_dates to get the
+Override official `res_company.compute_fiscal_year_dates` to get the
 fiscal year date start / date end for any given date.
 That methods first looks for a date range of type fiscal year that
 encloses the give date.
@@ -30,15 +30,8 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
+   :target: https://runbot.odoo-community.org/runbot/92/9.0
 
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "8.0" for example
-
-Known issues / Roadmap
-======================
-
-* ...
 
 Bug Tracker
 ===========
@@ -60,7 +53,8 @@ Contributors
 ------------
 
 * Damien Crier <damien.crier@camptocamp.com>
-* ...
+* Laurent Mignon <laurent.mignon@acsone.eu>
+* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 
 Maintainer
 ----------
