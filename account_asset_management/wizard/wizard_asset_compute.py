@@ -25,7 +25,7 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 
-class asset_depreciation_confirmation_wizard(orm.TransientModel):
+class AssetDepreciationConfirmationWizard(orm.TransientModel):
     _name = "asset.depreciation.confirmation.wizard"
     _description = "asset.depreciation.confirmation.wizard"
     _columns = {
@@ -70,5 +70,3 @@ class asset_depreciation_confirmation_wizard(orm.TransientModel):
             'domain': domain,
             'type': 'ir.actions.act_window',
         }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

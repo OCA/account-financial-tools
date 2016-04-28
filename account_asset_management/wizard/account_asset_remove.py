@@ -29,7 +29,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_asset_remove(orm.TransientModel):
+class AccountAssetRemove(orm.TransientModel):
     _name = 'account.asset.remove'
     _description = 'Remove Asset'
 

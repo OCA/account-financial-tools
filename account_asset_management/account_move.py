@@ -27,7 +27,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class account_move(orm.Model):
+class AccountMove(orm.Model):
     _inherit = 'account.move'
 
     def _get_fields_affects_asset_move(self):
@@ -76,15 +76,15 @@ class account_move(orm.Model):
         if not context:
             context = {}
         self._asset_control_on_unlink(cr, uid, ids, context, check)
-        return super(account_move, self).unlink(
+        return super(AccountMove, self).unlink(
             cr, uid, ids, context=context, check=check)
 
     def write(self, cr, uid, ids, vals, context=None):
         self._asset_control_on_write(cr, uid, ids, vals, context)
-        return super(account_move, self).write(cr, uid, ids, vals, context)
+        return super(AccountMove, self).write(cr, uid, ids, vals, context)
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(orm.Model):
     _inherit = 'account.move.line'
     _columns = {
         'asset_category_id': fields.many2one(
@@ -130,7 +130,7 @@ class account_move_line(orm.Model):
 
     def onchange_account_id(self, cr, uid, ids,
                             account_id=False, partner_id=False, context=None):
-        res = super(account_move_line, self).onchange_account_id(
+        res = super(AccountMoveLine, self).onchange_account_id(
             cr, uid, ids, account_id, partner_id, context)
         account_obj = self.pool.get('account.account')
         if account_id:
@@ -168,7 +168,7 @@ class account_move_line(orm.Model):
             asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
             vals['asset_id'] = asset_id
 
-        return super(account_move_line, self).create(
+        return super(AccountMoveLine, self).create(
             cr, uid, vals, context, check)
 
     def write(self, cr, uid, ids, vals,
@@ -207,7 +207,5 @@ class account_move_line(orm.Model):
                 asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
                 vals['asset_id'] = asset_id
 
-        return super(account_move_line, self).write(
+        return super(AccountMoveLine, self).write(
             cr, uid, ids, vals, context, check, update_check)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
