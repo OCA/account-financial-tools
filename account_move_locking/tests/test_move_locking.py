@@ -36,12 +36,10 @@ class TestMoveLocking(common.TransactionCase):
                 'account_id': self.account_id,
                 'credit': 1000.0,
                 'name': 'Credit line',
-                'move_id': self.move.id,
             }), (0, 0, {
                 'account_id': self.account_id2,
                 'debit': 1000.0,
                 'name': 'Debit line',
-                'move_id': self.move.id,
             })]
         })
 
