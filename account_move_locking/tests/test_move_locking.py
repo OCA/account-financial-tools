@@ -58,13 +58,13 @@ class TestMoveLocking(common.TransactionCase):
             'journal_ids': [(6, 0, [self.journal_id])],
             'date_start': fields.Datetime.to_string(
                 fields.Datetime.from_string(
-                    fields.Datetime.now())
-                + datetime.timedelta(days=-1)
+                    fields.Datetime.now()) +
+                datetime.timedelta(days=-1)
             ),
             'date_end': fields.Datetime.to_string(
                 fields.Datetime.from_string(
-                    fields.Datetime.now())
-                + datetime.timedelta(days=1)
+                    fields.Datetime.now()) +
+                datetime.timedelta(days=1)
             ),
         })
         self.wizard.lock_move()
