@@ -30,24 +30,19 @@ class TestMoveLocking(common.TransactionCase):
 
         # Create entry for today
         self.move = self.account_move_obj.create({
-            "date": fields.Date.today(),
-            "journal_id": self.journal_id
-        })
-
-        self.account_move_line_obj.with_context(
-            check_move_validity=False
-        ).create({
-            'account_id': self.account_id,
-            'credit': 1000.0,
-            'name': 'Credit line',
-            'move_id': self.move.id,
-        })
-
-        self.account_move_line_obj.create({
-            'account_id': self.account_id2,
-            'debit': 1000.0,
-            'name': 'Debit line',
-            'move_id': self.move.id,
+            'date': fields.Date.today(),
+            'journal_id': self.journal_id,
+            'line_ids': [(0, 0, {
+                'account_id': self.account_id,
+                'credit': 1000.0,
+                'name': 'Credit line',
+                'move_id': self.move.id,
+            }), (0, 0, {
+                'account_id': self.account_id2,
+                'debit': 1000.0,
+                'name': 'Debit line',
+                'move_id': self.move.id,
+            })]
         })
 
         # Post the entry
