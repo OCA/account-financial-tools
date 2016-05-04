@@ -120,8 +120,8 @@ class CurrencyRateUpdateService(models.Model):
         if company.auto_currency_up:
             main_currency = self.company_id.currency_id
             if not main_currency:
-                raise exceptions.Warning(_('There is no main \
-                                           currency defined!'))
+                raise exceptions.Warning(_('There is no main '
+                                           'currency defined!'))
             if main_currency.rate != 1:
                 raise exceptions.Warning(_('Base currency rate should '
                                            'be 1.00!'))
