@@ -31,6 +31,7 @@ The module is able to use the following sources:
    Updated daily
 
 6. Bank of Canada
+   (WARNING: Currently not working)
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
@@ -62,6 +63,9 @@ currency found in database.
 
 Know issues / Roadmap
 =====================
+
+To fix:
+* Bank of Canada
 
 Roadmap:
 * Google Finance.
