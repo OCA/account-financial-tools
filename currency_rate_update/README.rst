@@ -83,15 +83,26 @@ Credits
 Contributors
 ------------
 
+* Nicolas Bessi <nicolas.bessi@camptocamp.com>
+* Jean-Baptiste Aubort <jean-baptiste.aubort@camptocamp.com>
 * Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
-* JB Aubort
 * Grzegorz Grzelak <grzegorz.grzelak@openglobe.pl> (ECB, NBP)
-* Alexis de Lattre <alexis@via.ecp.fr>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com> (Port to V7)
 * Agustin Cruz <openpyme.mx> (BdM)
-* Dorin Hongu <dhongu@gmail.com> (BNR)
+* Jacque-Etienne Baudoux <je@bcim.be>
+* Juan Jose Scarafia <jjscarafia@paintballrosario.com.ar>
+* Mathieu Benoi <mathben963@gmail.com>
 * Fekete Mihai <feketemihai@gmail.com> (Port to V8)
-* Vincent Renaville <vincent.renaville@camptocamp.com> (Port to V9)
+* Dorin Hongu <dhongu@gmail.com> (BNR)
+* Paul McDermott
+* Alexis de Lattre <alexis@via.ecp.fr>
+* Miku Laitinen
+* Assem Bayahi
+* Daniel Dico <ddico@oerp.ca> (BOC)
+
 
 Maintainer
 ----------
