@@ -17,12 +17,6 @@
         'data/date_range_type.xml',
         'views/date_range_type.xml',
     ],
-    'test': [
-    ],
-    'demo': [
-    ],
-    'qweb': [
-    ],
     'installable': True,
     'application': True,
     'auto_install': False,
