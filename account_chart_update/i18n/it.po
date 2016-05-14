@@ -3,12 +3,13 @@
 # * account_chart_update
 # 
 # Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 15:38+0000\n"
-"PO-Revision-Date: 2016-03-21 16:00+0000\n"
+"POT-Creation-Date: 2016-04-23 00:52+0000\n"
+"PO-Revision-Date: 2016-05-12 08:07+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +53,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,account_ids:0
 msgid "Accounts"
-msgstr ""
+msgstr "Conti"
 
 #. module: account_chart_update
 #: field:account.tax.code,active:0

@@ -3,11 +3,17 @@
 # * currency_rate_update
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Bruno JOLIVEAU, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Thomas A. Jaeger, 2015
+# Yael Terrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"POT-Creation-Date: 2016-04-23 00:52+0000\n"
 "PO-Revision-Date: 2015-06-03 15:55+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
@@ -43,7 +49,7 @@ msgid "Bank of Mexico"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:262
+#: code:addons/currency_rate_update/model/currency_rate_update.py:265
 #, python-format
 msgid "Base currency rate should be 1.00!"
 msgstr ""
@@ -51,7 +57,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Azienda"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
@@ -110,8 +116,8 @@ msgid "Day(s)"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:94
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
 #, python-format
 msgid "Error !"
 msgstr ""
@@ -122,13 +128,13 @@ msgid "European Central Bank"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:77
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:98
 #, python-format
 msgid "Exchange data format error for Bank of Canada - %s !"
 msgstr ""
@@ -209,7 +215,7 @@ msgid "Refresh currencies"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:260
+#: code:addons/currency_rate_update/model/currency_rate_update.py:263
 #, python-format
 msgid "There is no base currency set!"
 msgstr ""
@@ -235,7 +241,7 @@ msgid "Yahoo Finance"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:234
+#: code:addons/currency_rate_update/model/currency_rate_update.py:237
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
