@@ -1,149 +1,108 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP - Account renumber wizard
-#    Copyright (C) 2009 Pexego Sistemas Informáticos. All Rights Reserved
-#    $Id$
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
-from openerp import SUPERUSER_ID
+# © 2009 Pexego Sistemas Informáticos. All Rights Reserved
+# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 import logging
+from datetime import date
+from openerp import _, api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)
 
 
-class wizard_renumber(orm.TransientModel):
+class WizardRenumber(models.TransientModel):
     _name = "wizard.renumber"
     _description = "Account renumber wizard"
-    _columns = {
-        'journal_ids': fields.many2many('account.journal',
-                                        'account_journal_wzd_renumber_rel',
-                                        'wizard_id', 'journal_id',
-                                        required=True,
-                                        help="Journals to renumber",
-                                        string="Journals"),
-        'period_ids': fields.many2many('account.period',
-                                       'account_period_wzd_renumber_rel',
-                                       'wizard_id', 'period_id',
-                                       required=True,
-                                       help='Fiscal periods to renumber',
-                                       string="Periods", ondelete='null'),
-        'number_next': fields.integer('First Number', required=True,
-                                      help="Journal sequences will start "
-                                           "counting on this number"),
-        'state': fields.selection([('init', 'Initial'),
-                                   ('renumber', 'Renumbering')], readonly=True)
-    }
 
-    _defaults = {
-        'number_next': 1,
-        'state': 'init'
-    }
+    date_from = fields.Date(
+        string="Starting date",
+        required=True,
+        default=lambda self: self._default_date_from(),
+        help="Start renumbering in this date, inclusive.",
+    )
+    date_to = fields.Date(
+        string="Finish date",
+        required=True,
+        default=lambda self: self._default_date_to(),
+        help="Finish renumbering in this date, inclusive.",
+    )
+    journal_ids = fields.Many2many(
+        comodel_name='account.journal',
+        relation='account_journal_wzd_renumber_rel',
+        column1='wizard_id',
+        column2='journal_id',
+        string="Journals",
+        required=True,
+        help="Journals to renumber",
+    )
+    number_next = fields.Integer(
+        string='First Number',
+        default=1,
+        required=True,
+        help="Journal sequences will start counting on this number",
+    )
 
-    ###############################
-    # Helper methods
-    ###############################
+    @api.model
+    def _default_date_from(self):
+        """Day 1 of current year by default."""
+        return date(self._default_date_to().year, 1, 1)
 
-    def get_sequence_id_for_fiscalyear_id(self, cr, uid, sequence_id,
-                                          fiscalyear_id, context=None):
+    @api.model
+    def _default_date_to(self):
+        """Today by default."""
+        return fields.Date.from_string(fields.Date.context_today(self))
+
+    @api.multi
+    def renumber(self):
+        """Renumber all the posted moves on the given journal and periods.
+
+        :return dict:
+            Window action to open the renumbered moves, to review them.
         """
-        Based on ir_sequence.get_id from the account module.
-        Allows us to get the real sequence for the given fiscal year.
-        """
-        sequence = self.pool['ir.sequence'].browse(cr, uid, sequence_id,
-                                                   context=context)
-        for line in sequence.fiscal_ids:
-            if line.fiscalyear_id.id == fiscalyear_id:
-                return line.sequence_id.id
-        return sequence_id
+        reset_sequences = self.env["ir.sequence"]
+        reset_ranges = self.env["ir.sequence.date_range"]
 
-    ##########################################################################
-    # Renumber form/action
-    ##########################################################################
-
-    def renumber(self, cr, uid, ids, context=None):
-        """
-        Action that renumbers all the posted moves on the given
-        journal and periods, and returns their ids.
-        """
-        form = self.browse(cr, uid, ids[0], context=context)
-        period_ids = [x.id for x in form.period_ids]
-        journal_ids = [x.id for x in form.journal_ids]
-        number_next = form.number_next or 1
-        if not (period_ids and journal_ids):
-            raise orm.except_orm(_('No Data Available'),
-                                 _('No records found for your selection!'))
         _logger.debug("Searching for account moves to renumber.")
-        move_obj = self.pool['account.move']
-        sequence_obj = self.pool['ir.sequence']
-        sequences_seen = []
-        for period in period_ids:
-            move_ids = move_obj.search(cr, uid,
-                                       [('journal_id', 'in', journal_ids),
-                                        ('period_id', '=', period),
-                                        ('state', '=', 'posted')],
-                                       limit=0, order='date,id',
-                                       context=context)
-            if not move_ids:
-                continue
-            _logger.debug("Renumbering %d account moves.", len(move_ids))
-            for move in move_obj.browse(cr, uid, move_ids, context=context):
-                sequence_id = self.get_sequence_id_for_fiscalyear_id(
-                    cr, uid,
-                    sequence_id=move.journal_id.sequence_id.id,
-                    fiscalyear_id=move.period_id.fiscalyear_id.id
-                )
-                if sequence_id not in sequences_seen:
-                    sequence_obj.write(cr, SUPERUSER_ID, [sequence_id],
-                                       {'number_next': number_next})
-                    sequences_seen.append(sequence_id)
-                # Generate (using our own get_id) and write the new move number
-                c = {'fiscalyear_id': move.period_id.fiscalyear_id.id}
-                new_name = sequence_obj.next_by_id(
-                    cr, uid,
-                    move.journal_id.sequence_id.id,
-                    context=c
-                )
-                # Note: We can't just do a
-                # "move_obj.write(cr, uid, [move.id], {'name': new_name})"
-                # cause it might raise a
-                # ``You can't do this modification on a confirmed entry``
-                # exception.
-                cr.execute('UPDATE account_move SET name=%s WHERE id=%s',
-                           (new_name, move.id))
-            _logger.debug("%d account moves renumbered.", len(move_ids))
-        sequences_seen = []
-        form.write({'state': 'renumber'})
-        data_obj = self.pool['ir.model.data']
-        view_ref = data_obj.get_object_reference(cr, uid, 'account',
-                                                 'view_move_tree')
-        view_id = view_ref and view_ref[1] or False,
-        res = {
+        move_ids = self.env['account.move'].search(
+            [('journal_id', 'in', self.journal_ids.ids),
+             ('date', '>=', self.date_from),
+             ('date', '<=', self.date_to),
+             ('state', '=', 'posted')],
+            order='date, id')
+        if not move_ids:
+            raise exceptions.MissingError(
+                _('No records found for your selection!'))
+
+        _logger.debug("Renumbering %d account moves.", len(move_ids))
+        for move in move_ids:
+            sequence = move.journal_id.sequence_id
+            if sequence not in reset_sequences:
+                if sequence.use_date_range:
+                    date_range = self.env["ir.sequence.date_range"].search(
+                        [("sequence_id", "=", sequence.id),
+                         ("date_from", "<=", move.date),
+                         ("date_to", ">=", move.date)]
+                    )
+                    if date_range not in reset_ranges:
+                        date_range.number_next = self.number_next
+                        reset_ranges |= date_range
+                else:
+                    sequence.number_next = self.number_next
+                    reset_sequences |= sequence
+
+            # Generate (using our own get_id) and write the new move number
+            move.name = (sequence.with_context(ir_sequence_date=move.date)
+                         .next_by_id())
+
+        _logger.debug("%d account moves renumbered.", len(move_ids))
+
+        return {
             'type': 'ir.actions.act_window',
             'name': _("Renumbered account moves"),
             'res_model': 'account.move',
-            'domain': ("[('journal_id','in',%s), ('period_id','in',%s), "
-                       "('state','=','posted')]"
-                       % (journal_ids, period_ids)),
+            'domain': [("id", "in", move_ids.ids)],
             'view_type': 'form',
             'view_mode': 'tree',
-            'view_id': view_id,
-            'context': context,
+            'context': self.env.context,
             'target': 'current',
         }
-        return res
