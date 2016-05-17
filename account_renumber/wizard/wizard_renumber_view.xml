@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-<openerp>
+<odoo>
 
     <record id="view_account_renumber_form" model="ir.ui.view">
         <field name="name">account_renumber.form</field>
@@ -27,7 +27,6 @@
                             string="Renumber"
                             type="object"
                             class="oe_highlight"/>
-                    or
                     <button special="cancel"
                             string="Cancel"
                             class="oe_link"/>
@@ -50,4 +49,4 @@
               action="action_account_renumber"
               groups="account.group_account_manager"/>
 
-</openerp>
+</odoo>

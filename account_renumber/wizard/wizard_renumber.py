@@ -83,7 +83,7 @@ class WizardRenumber(models.TransientModel):
                          ("date_from", "<=", move.date),
                          ("date_to", ">=", move.date)]
                     )
-                    if date_range not in reset_ranges:
+                    if date_range and date_range not in reset_ranges:
                         date_range.number_next = self.number_next
                         reset_ranges |= date_range
                 else:
