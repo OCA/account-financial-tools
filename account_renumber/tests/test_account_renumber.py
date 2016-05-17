@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import date
-from openerp import fields
+from openerp import exceptions, fields
 from openerp.tests.common import TransactionCase
 
 
@@ -115,3 +115,15 @@ class AccountRenumberCase(TransactionCase):
             self.assertEqual(
                 fields.Date.from_string(move.date).month,
                 expected_month[n])
+
+    def test_renumber_all_no_date_ranges_in_sequence(self):
+        """Works fine using a sequence without date ranges."""
+        self.sequence.use_date_range = False
+        self.test_renumber_all()
+
+    def test_failure_when_no_results(self):
+        """Ensure an exception is raised when no results are found."""
+        new_journal = self.journal.copy()
+        self.moves.write({"journal_id": new_journal.id})
+        with self.assertRaises(exceptions.MissingError):
+            self.test_renumber_all()
