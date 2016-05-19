@@ -53,7 +53,10 @@ class DateRange(models.Model):
     @api.multi
     def write(self, vals):
         for range in self:
-            if range.lock_state == 'locked':
+            # Allow to modify locked_journal_ids (otherwise, the
+            # range cannot be unlocked)
+            if (range.lock_state == 'locked' and
+                    'locked_journal_ids' not in vals):
                 raise exceptions.UserError(
                     _("Cannot modify locked date range %s!")
                     % (range.name))
