@@ -6,17 +6,23 @@
 Lock journal entries
 ====================
 
-This module adds the ability to lock journal entries for modification.
+This module adds the ability to lock journal entries for modification,
+based on date ranges.
 
 Usage
 =====
 
-In order to lock the journal entry, you need to follow this process:
+In order to lock the journal entries, you need to follow this process:
 
 * You need to post your entry, with the standard wizard Post Journal Entries
-  (Invoicing -> Periodic Processing -> Draft Entries -> Post Journal Entries) 
-* Then, you can use the wizard Lock Journal Entries 
-  (Invoicing -> Periodic Processing -> Draft Entries -> Lock Journal Entries) 
+  (Invoicing -> Periodic Processing -> Draft Entries -> Post Journal Entries)
+* Then, you can use the wizard Lock Date Range
+  (Invoicing -> Configuration -> Date ranges -> Lock Date Range)
+
+You can unlock date ranges which are not of the "fiscal year" type, and also
+only lock specific journals on each date range.
+Locking the date will block every deletion, creation and modification of a
+journal entry or journal item (except for reconciliation).
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -35,7 +41,8 @@ Credits
 Contributors
 ------------
 
-* Vincent Renaville <vincen.renaville@camptocamp.com>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
 
 Maintainer
 ----------
