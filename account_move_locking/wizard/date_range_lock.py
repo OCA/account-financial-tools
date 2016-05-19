@@ -39,33 +39,26 @@ class DateRangeLock(models.TransientModel):
             range = wizard.date_range_id
             all_journals = journal_obj.search(
                 [('company_id', '=', range.company_id.id)])
+
             if range.type_id.fiscal_year or not wizard.journal_ids:
                 # FY or no journals : full lock
-                draft_move = move_obj.search(
-                    [('state', '=', 'draft'),
-                     ('journal_id', 'in', all_journals.ids),
-                     ('date', '>=', range.date_start),
-                     ('date', '<=', range.date_end)],
-                    order='date')
-                if draft_move:
-                    raise exceptions.UserError(
-                        _('Unposted move in selected date range, \
-                        please post it before locking them'))
-                range.locked_journal_ids = all_journals
+                locked_journals = all_journals
             else:
                 # Partial lock
-                draft_move = move_obj.search(
-                    [('state', '=', 'draft'),
-                     ('journal_id', 'in', wizard.journal_ids.ids),
-                     ('date', '>=', range.date_start),
-                     ('date', '<=', range.date_end)],
-                    order='date')
-                if draft_move:
-                    raise exceptions.UserError(
-                        _('Unposted move in selected date range, \
-                        please post it before locking them'))
-                range.locked_journal_ids |= wizard.journal_ids
-                # Check if all journals were added
+                locked_journals = range.locked_journal_ids | wizard.journal_ids
+
+            draft_move = move_obj.search(
+                [('state', '=', 'draft'),
+                 ('journal_id', 'in', locked_journals.ids),
+                 ('date', '>=', range.date_start),
+                 ('date', '<=', range.date_end)],
+                order='date')
+            if draft_move:
+                raise exceptions.UserError(
+                    _('Unposted move in selected date range, \
+                    please post it before locking them'))
+
+            range.locked_journal_ids = locked_journals
 
             if range.type_id.fiscal_year and range.lock_state == 'locked':
                 # Lock all date ranges below this one
