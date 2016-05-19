@@ -7,9 +7,11 @@ from openerp import _, api, exceptions, fields, models
 class DateRangeLock(models.TransientModel):
     _name = 'date.range.lock'
 
-    date_range_id = fields.Many2one('date.range',
-                                    string='Date Range',
-                                    required=True)
+    date_range_id = fields.Many2one(
+        'date.range',
+        string='Date Range',
+        required=True,
+        domain=[('type_id.accounting', '=', True)])
     fy_range = fields.Boolean(related='date_range_id.type_id.fiscal_year',
                               readonly=True)
     journal_ids = fields.Many2many(
@@ -56,17 +58,19 @@ class DateRangeLock(models.TransientModel):
             if draft_move:
                 raise exceptions.UserError(
                     _('Unposted move in selected date range, \
-                    please post it before locking them'))
+                       please post it before locking them'))
 
             range.locked_journal_ids = locked_journals
 
-            if range.type_id.fiscal_year and range.lock_state == 'locked':
-                # Lock all date ranges below this one
-                child_ranges = date_range_obj.with_context(
+            if (range.type_id.fiscal_year and
+                    range.accounting_lock_state == 'locked'):
+                # Lock all accounting periods below this one
+                period_ranges = date_range_obj.with_context(
                     active_test=False).search(
                     [('company_id', '=', range.company_id.id),
                      ('date_start', '>=', range.date_start),
                      ('date_end', '<=', range.date_end),
-                     ('id', '!=', range.id)])
-                for child in child_ranges:
-                    child.locked_journal_ids = all_journals
+                     ('type_id.accounting', '=', True),
+                     ('type_id.fiscal_year', '=', False)])
+                for period in period_ranges:
+                    period.locked_journal_ids = all_journals

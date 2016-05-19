@@ -8,23 +8,26 @@ class DateRange(models.Model):
     _inherit = "date.range"
 
     @api.depends('locked_journal_ids')
-    def _get_lock_state(self):
+    def _get_accounting_lock_state(self):
         journal_obj = self.env['account.journal']
         for range in self:
-            all_journals = journal_obj.search(
-                [('company_id', '=', range.company_id.id)])
-            if not range.locked_journal_ids:
-                range.lock_state = 'unlocked'
-            elif range.locked_journal_ids == all_journals:
-                range.lock_state = 'locked'
-            else:
-                range.lock_state = 'partial'
+            range.accounting_lock_state = False
+            # Only set state on ranges with accounting type
+            if range.type_id.accounting:
+                all_journals = journal_obj.search(
+                    [('company_id', '=', range.company_id.id)])
+                if not range.locked_journal_ids:
+                    range.accounting_lock_state = 'unlocked'
+                elif range.locked_journal_ids == all_journals:
+                    range.accounting_lock_state = 'locked'
+                else:
+                    range.accounting_lock_state = 'partial'
 
-    lock_state = fields.Selection(
+    accounting_lock_state = fields.Selection(
         [('unlocked', 'Unlocked'),
          ('partial', 'Partially locked'),
          ('locked', 'Locked')],
-        compute="_get_lock_state",
+        compute="_get_accounting_lock_state",
         readonly=True,
         store=True)
     locked_journal_ids = fields.Many2many(
@@ -34,28 +37,31 @@ class DateRange(models.Model):
 
     @api.model
     def create(self, vals):
-        # Check if fiscal year is locked; if so, add all journals
+        # Check if account fiscal year is locked; if so, add all journals
         # to set is as locked
         journal_obj = self.env['account.journal']
-        if ('company_id' in vals and
-                'date_start' in vals and 'date_end' in vals):
+        result = super(DateRange, self).create(vals)
+        if result.type_id.accounting:
+            # Only lock accounting periods
             fy_ranges = self.search(
-                [('type_id.fiscal_year', '=', True),
-                 ('lock_state', '=', 'locked'),
-                 ('date_start', '<=', vals['date_start']),
-                 ('date_end', '>=', vals['date_end'])])
+                [('type_id.accounting', '=', True),
+                 ('type_id.fiscal_year', '=', True),
+                 ('accounting_lock_state', '=', 'locked'),
+                 ('date_start', '<=', result.date_start),
+                 ('date_end', '>=', result.date_end)])
             if fy_ranges:
-                all_journal_ids = journal_obj.search(
-                    [('company_id', '=', vals['company_id'])]).ids
-                vals['locked_journal_ids'] = [(6, 0, all_journal_ids)]
-        return super(DateRange, self).create(vals)
+                all_journals = journal_obj.search(
+                    [('company_id', '=', result.company_id)])
+                result.locked_journal_ids = all_journals
+        return result
 
     @api.multi
     def write(self, vals):
         for range in self:
             # Allow to modify locked_journal_ids (otherwise, the
-            # range cannot be unlocked)
-            if (range.lock_state == 'locked' and
+            # accounting range cannot be unlocked)
+            if (range.type_id.accounting and
+                    range.accounting_lock_state == 'locked' and
                     'locked_journal_ids' not in vals):
                 raise exceptions.UserError(
                     _("Cannot modify locked date range %s!")
@@ -65,7 +71,8 @@ class DateRange(models.Model):
     @api.multi
     def unlink(self):
         for range in self:
-            if range.lock_state == 'locked':
+            if (range.type_id.accounting and
+                    range.accounting_lock_state == 'locked'):
                 raise exceptions.UserError(
                     _("Cannot delete locked date range %s!")
                     % (range.name))

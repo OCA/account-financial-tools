@@ -38,7 +38,8 @@ class AccountMove(models.Model):
         date_range_obj = self.env['date.range']
         for move in self:
             current_ranges = date_range_obj.search(
-                [('date_start', '<=', move.date),
+                [('type_id.accounting', '=', True),
+                 ('date_start', '<=', move.date),
                  ('date_end', '>=', move.date)])
             intersect = move.journal_id.locked_date_range_ids & current_ranges
             if intersect:
@@ -80,7 +81,8 @@ class AccountMoveLine(models.Model):
         date_range_obj = self.env['date.range']
         for move in self:
             current_ranges = date_range_obj.search(
-                [('date_start', '<=', move.date),
+                [('type_id.accounting', '=', True),
+                 ('date_start', '<=', move.date),
                  ('date_end', '>=', move.date)])
             intersect = move.journal_id.locked_date_range_ids & current_ranges
             if intersect:
@@ -105,6 +107,7 @@ class AccountJournal(models.Model):
         journal = super(AccountJournal, self).create(vals)
         date_ranges = self.env['date.range'].search(
             [('company_id', '=', self.company_id.id,),
-             ('lock_state', '=', 'locked')])
+             ('type_id.accounting', '=', True),
+             ('accounting_lock_state', '=', 'locked')])
         journal.locked_date_range_ids = date_ranges
         return journal

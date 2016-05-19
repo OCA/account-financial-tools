@@ -11,7 +11,8 @@ class DateRangeUnlock(models.TransientModel):
         'date.range',
         string='Date Range',
         required=True,
-        domain=[('type_id.fiscal_year', '=', False)])
+        domain=[('type_id.accounting', '=', True),
+                ('type_id.fiscal_year', '=', False)])
 
     journal_ids = fields.Many2many(
         'account.journal',
@@ -38,8 +39,9 @@ class DateRangeUnlock(models.TransientModel):
             range = self.date_range_id
             # If range is inside a locked fiscal year, raise an error
             fy_ranges = date_range_obj.search(
-                [('type_id.fiscal_year', '=', True),
-                 ('lock_state', '=', 'locked'),
+                [('type_id.accounting', '=', True),
+                 ('type_id.fiscal_year', '=', True),
+                 ('accounting_lock_state', '=', 'locked'),
                  ('date_start', '<=', range.date_start),
                  ('date_end', '>=', range.date_end)])
             if fy_ranges:

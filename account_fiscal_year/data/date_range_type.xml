@@ -2,9 +2,16 @@
 <openerp>
     <data noupdate="0">
         <record id="fiscalyear" model="date.range.type">
-            <field name="name">Fiscal Year</field>
+            <field name="name">Accounting Fiscal Year</field>
             <field name="allow_overlap" eval="False"/>
+            <field name="accounting" eval="True"/>
             <field name="fiscal_year" eval="True"/>
+        </record>
+        <record id="period" model="date.range.type">
+            <field name="name">Accounting Period</field>
+            <field name="allow_overlap" eval="False"/>
+            <field name="accounting" eval="True"/>
+            <field name="fiscal_year" eval="False"/>
         </record>
     </data>
 </openerp>

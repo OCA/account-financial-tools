@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="date_range.view_date_range_tree"/>
         <field name="arch" type="xml">
             <field name="active" position="after">
-                <field name="lock_state"/>
+                <field name="accounting_lock_state"/>
             </field>
         </field>
     </record>
@@ -17,8 +17,7 @@
         <field name="inherit_id" ref="date_range.view_date_range_form_view"/>
         <field name="arch" type="xml">
             <field name="active" position="after">
-                <field name="lock_state"/>
-                <field name="locked_journal_ids" select="1"/>
+                <field name="accounting_lock_state"/>
             </field>
         </field>
     </record>
