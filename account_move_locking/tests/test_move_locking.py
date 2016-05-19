@@ -2,7 +2,6 @@
 # © 2015-2016 Camptocamp SA (Vincent Renaville)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-import datetime
 from openerp.tests import common
 from openerp import fields, tools
 from openerp.modules import get_module_resource
