@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="wizard_date_range_lock_view" model="ir.ui.view">
+        <field name="name">Lock Date Range</field>
+        <field name="model">date.range.lock</field>
+        <field name="arch" type="xml">
+            <form string="Lock Date Range">
+                <group>
+                    <field name="date_range_id"/>
+                    <field name="fy_range" invisible="1"/>
+                    <field name="journal_ids" attrs="{'invisible': [('fy_range', '=', True)]}"/>
+                </group>
+                <footer>
+                    <button string="Lock" name="lock" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('fy_range', '=', True)]}"/>
+                    <button string="Lock" name="lock" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('fy_range', '=', False)]}"
+                            confirm="IMPORTANT! Once the fiscal year is closed, it cannot be reopened again! Do you want to lock it permanently?"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="wizard_date_range_unlock_view" model="ir.ui.view">
+        <field name="name">Unlock Date Range</field>
+        <field name="model">date.range.unlock</field>
+        <field name="arch" type="xml">
+            <form string="Unlock Date Range">
+                <group>
+                    <field name="date_range_id"/>
+                    <field name="journal_ids"/>
+                </group>
+                <footer>
+                    <button string="Unlock" name="unlock" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="date_range_lock_action" model="ir.actions.act_window">
+        <field name="name">Lock Date Range</field>
+        <field name="res_model">date.range.lock</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wizard_date_range_lock_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="date_range_unlock_action" model="ir.actions.act_window">
+        <field name="name">Unlock Date Range</field>
+        <field name="res_model">date.range.unlock</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wizard_date_range_unlock_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="date_range_lock_action"
+              id="menu_date_range_lock_action" parent="account_fiscal_year.menu_date_range_accounting"/>
+    <menuitem action="date_range_unlock_action"
+              id="menu_date_range_unlock_action" parent="account_fiscal_year.menu_date_range_accounting"/>
+</odoo>

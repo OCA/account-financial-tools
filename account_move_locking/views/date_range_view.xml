@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_date_range_lock_tree" model="ir.ui.view">
+        <field name="name">date.range.lock.tree</field>
+        <field name="model">date.range</field>
+        <field name="inherit_id" ref="date_range.view_date_range_tree"/>
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="lock_state"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_date_range_lock_form_view" model="ir.ui.view">
+        <field name="name">date.range.lock.form</field>
+        <field name="model">date.range</field>
+        <field name="inherit_id" ref="date_range.view_date_range_form_view"/>
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="lock_state"/>
+                <field name="locked_journal_ids" select="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>
