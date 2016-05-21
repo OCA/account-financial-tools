@@ -3,13 +3,23 @@
 # * account_constraints
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2013
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015-2016
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 10:24+0000\n"
-"PO-Revision-Date: 2015-07-04 11:49+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:12+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +32,11 @@ msgstr ""
 #: model:ir.model,name:account_constraints.model_account_move
 msgid "Account Entry"
 msgstr "Knjigovodski vnos"
+
+#. module: account_constraints
+#: field:account.bank.statement.line,account_cancel_installed:0
+msgid "Allow Cancelling Entries"
+msgstr "Dovoli preklic vnosov"
 
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_bank_statement
@@ -78,12 +93,24 @@ msgid "Journal Items"
 msgstr "Dnevniške postavke"
 
 #. module: account_constraints
+#: field:account.bank.statement.line,state:0
+msgid "Statement state"
+msgstr "Stanje izpiska"
+
+#. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:147
 #, python-format
 msgid ""
 "The amount expressed in the secondary currency must be positive when journal"
 " item are debit and negatif when journal item are credit."
 msgstr "Znesek izkazan v sekundarni valuti mora biti pozitiven za obveznosti in negativen za terjatve."
+
+#. module: account_constraints
+#: help:account.bank.statement.line,state:0
+msgid ""
+"When new statement is created the status will be 'Draft'.\n"
+"And after getting confirmation from the bank it will be in 'Confirmed' status."
+msgstr "Ob nastanku novega izpiska bo ta v stanju 'Osnutek'.\nPo potrditvi s strani banke bo v stanju 'Potrjeno'."
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:157
