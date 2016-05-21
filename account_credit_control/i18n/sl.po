@@ -3,14 +3,18 @@
 # * account_credit_control
 # 
 # Translators:
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# njeudy <njeudy@tuxservices.com>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 01:39+0000\n"
-"PO-Revision-Date: 2016-03-03 05:25+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:08+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -461,6 +465,19 @@ msgid "Delay Setting"
 msgstr "Nastavitve zaostankov"
 
 #. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
 msgstr "Ne naredi ničesar"
@@ -611,6 +628,19 @@ msgstr "Zaračunani znesek"
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
 msgid "Issued Lines"
 msgstr "Izdane postavke"
+
+#. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -1112,11 +1142,13 @@ msgid ""
 msgstr "Ta čarovnik vam omogoča nastavitev pravil zapadlosti in nivo za izbrane račune"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr "Skupaj zapadlo"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr "Skupaj zaračunano"

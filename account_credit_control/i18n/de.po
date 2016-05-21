@@ -3,13 +3,33 @@
 # * account_credit_control
 # 
 # Translators:
+# Accounts-Payable - Alkemics, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Antonio Trueba, 2016
+# Chen-Do LU <clu@alkemics.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
+# Efstathios Iosifidis <iefstathios@gmail.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# François Breysse <fb@alkemics.com>, 2015
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Jim Spentzos, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# njeudy <njeudy@tuxservices.com>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Pierre Verkest <pverkest@anybox.fr>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 01:39+0000\n"
-"PO-Revision-Date: 2016-03-02 17:08+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:12+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -461,6 +481,19 @@ msgid "Delay Setting"
 msgstr "Verzugseinstellung"
 
 #. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
 msgstr "Mache nichts"
@@ -611,6 +644,19 @@ msgstr "Betrag"
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
 msgid "Issued Lines"
 msgstr "Ausgewiesene Posten"
+
+#. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -1112,11 +1158,13 @@ msgid ""
 msgstr "Dieser Assistent wird Ihnen beim Einstellen der Fälligkeitsregel und -stufe für ausgewählte Rechnungen helfen"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr "Fälliger Restbetrag"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr "Endbetrag"

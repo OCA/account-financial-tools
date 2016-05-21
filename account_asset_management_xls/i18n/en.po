@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:08+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,11 @@ msgid "Depreciation Table error for asset %s !"
 msgstr "Depreciation Table error for asset %s !"
 
 #. module: account_asset_management_xls
+#: field:wiz.account.asset.report,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
 #: model:ir.model,name:account_asset_management_xls.model_wiz_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
@@ -103,6 +108,11 @@ msgstr "Generate Report"
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0

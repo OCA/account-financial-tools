@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 08:57+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: model:ir.model,name:account_default_draft_move.model_account_move
 msgid "Account Entry"
 msgstr "Account Entry"
+
+#. module: account_default_draft_move
+#: field:account.move,update_posted:0
+msgid "Allow Cancelling Entries"
+msgstr "Allow Cancelling Entries"
 
 #. module: account_default_draft_move
 #: model:ir.model,name:account_default_draft_move.model_account_bank_statement

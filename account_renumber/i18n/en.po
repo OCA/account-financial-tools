@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:18+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,11 @@ msgstr "Created by"
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
 msgstr "Created on"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -82,6 +87,11 @@ msgstr "Journals and periods to consider"
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
 msgstr "Journals to renumber"
+
+#. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_uid:0

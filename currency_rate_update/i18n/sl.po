@@ -3,13 +3,31 @@
 # * currency_rate_update
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Accounts-Payable - Alkemics, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Chen-Do LU <clu@alkemics.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+# Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
+# Efstathios Iosifidis <iefstathios@gmail.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# François Breysse <fb@alkemics.com>, 2015
+# Hotellook, 2014
+# Jim Spentzos, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# njeudy <njeudy@tuxservices.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 01:39+0000\n"
-"PO-Revision-Date: 2015-06-13 06:14+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:15+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -111,6 +129,11 @@ msgid "Day(s)"
 msgstr "Dan(dni)"
 
 #. module: currency_rate_update
+#: field:currency.rate.update.service,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
 #, python-format
@@ -159,6 +182,11 @@ msgid "Interval number must be >= 0"
 msgstr "Število intervala mora biti >= 0"
 
 #. module: currency_rate_update
+#: field:currency.rate.update.service,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: currency_rate_update
 #: field:currency.rate.update.service,write_uid:0
 msgid "Last Updated by"
 msgstr "Zadnjič posodobil"
@@ -188,6 +216,11 @@ msgstr "Največja razlika v dnevih mora biti >= 0 "
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Month(s)"
 msgstr "Mesec(i)"
+
+#. module: currency_rate_update
+#: field:res.company,multi_company_currency_enable:0
+msgid "Multi company currency"
+msgstr "Valuta več podjetij"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
@@ -229,6 +262,13 @@ msgstr "Spletna storitev, ki bo uporabljena"
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Week(s)"
 msgstr "Tedni(ov)"
+
+#. module: currency_rate_update
+#: help:res.company,multi_company_currency_enable:0
+msgid ""
+"When this option is unchecked it will allow users to set a distinct currency"
+" updates on each company."
+msgstr "Če ta opcija ni označena, bo uporabnikom dovoljeno nastaviti ločene posodobitve valute za vsako družbo."
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0

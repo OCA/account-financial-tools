@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 10:24+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,11 @@ msgstr ""
 #: model:ir.model,name:account_constraints.model_account_move
 msgid "Account Entry"
 msgstr "Account Entry"
+
+#. module: account_constraints
+#: field:account.bank.statement.line,account_cancel_installed:0
+msgid "Allow Cancelling Entries"
+msgstr "Allow Cancelling Entries"
 
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_bank_statement
@@ -77,12 +82,24 @@ msgid "Journal Items"
 msgstr "Journal Items"
 
 #. module: account_constraints
+#: field:account.bank.statement.line,state:0
+msgid "Statement state"
+msgstr "Statement state"
+
+#. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:147
 #, python-format
 msgid ""
 "The amount expressed in the secondary currency must be positive when journal"
 " item are debit and negatif when journal item are credit."
 msgstr "The amount expressed in the secondary currency must be positive when journal item are debit and negatif when journal item are credit."
+
+#. module: account_constraints
+#: help:account.bank.statement.line,state:0
+msgid ""
+"When new statement is created the status will be 'Draft'.\n"
+"And after getting confirmation from the bank it will be in 'Confirmed' status."
+msgstr "When new statement is created the status will be 'Draft'.\nAnd after getting confirmation from the bank it will be in 'Confirmed' status."
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:157

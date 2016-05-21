@@ -3,13 +3,28 @@
 # * account_tax_analysis
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2013
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
+# UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-01 12:24+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:14+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +63,11 @@ msgstr "Ustvaril"
 #: field:account.vat.declaration.analysis,create_date:0
 msgid "Created on"
 msgstr "Ustvarjeno"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -89,6 +109,11 @@ msgstr "Dnevnik"
 #: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Journal Items"
 msgstr "Dnevniške postavke"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
