@@ -69,7 +69,8 @@ class account_asset_category(orm.Model):
         'note': fields.text('Note'),
         'account_analytic_id': fields.many2one(
             'account.analytic.account', 'Analytic account',
-            domain=[('type', '!=', 'view')]),
+            domain=[('type', '!=', 'view'),
+                    ('state', 'not in', ('close', 'cancelled'))]),
         'account_asset_id': fields.many2one(
             'account.account', 'Asset Account', required=True,
             domain=[('type', '=', 'other')]),
@@ -423,6 +424,7 @@ class account_asset_asset(orm.Model):
     def _compute_depreciation_table(self, cr, uid, asset, context=None):
         if not context:
             context = {}
+        context = context.copy()
 
         table = []
         if not asset.method_number:
@@ -607,6 +609,7 @@ class account_asset_asset(orm.Model):
     def compute_depreciation_board(self, cr, uid, ids, context=None):
         if not context:
             context = {}
+        context = context.copy()
         depreciation_lin_obj = self.pool.get(
             'account.asset.depreciation.line')
         digits = self.pool.get('decimal.precision').precision_get(
@@ -713,19 +716,16 @@ class account_asset_asset(orm.Model):
                     residual_amount_table - residual_amount, digits)
                 if amount_diff:
                     entry = table[table_i_start]
-                    if entry['fy_id']:
-                        cr.execute(
-                            "SELECT COALESCE(SUM(amount), 0.0) "
-                            "FROM account_asset_depreciation_line "
-                            "WHERE id in %s "
-                            "      AND line_date >= %s and line_date <= %s",
-                            (tuple(posted_depreciation_line_ids),
-                             entry['date_start'],
-                             entry['date_stop']))
-                        res = cr.fetchone()
-                        fy_amount_check = res[0]
-                    else:
-                        fy_amount_check = 0.0
+                    cr.execute(
+                        "SELECT COALESCE(SUM(amount), 0.0) "
+                        "FROM account_asset_depreciation_line "
+                        "WHERE id in %s "
+                        "      AND line_date >= %s and line_date <= %s",
+                        (tuple(posted_depreciation_line_ids),
+                         entry['date_start'],
+                         entry['date_stop']))
+                    res = cr.fetchone()
+                    fy_amount_check = res[0]
                     lines = entry['lines']
                     for line in lines[line_i_start:-1]:
                         line['depreciated_value'] = depreciated_value
@@ -1103,7 +1103,8 @@ class account_asset_asset(orm.Model):
             store=True, readonly=True,),
         'account_analytic_id': fields.many2one(
             'account.analytic.account', 'Analytic account',
-            domain=[('type', '!=', 'view')]),
+            domain=[('type', '!=', 'view'),
+                    ('state', 'not in', ('close', 'cancelled'))]),
     }
 
     _defaults = {

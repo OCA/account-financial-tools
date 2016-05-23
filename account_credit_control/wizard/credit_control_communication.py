@@ -81,6 +81,7 @@ class CreditCommunication(models.TransientModel):
         balance_field = 'credit_control_line_ids.balance_due'
         return sum(self.mapped(balance_field))
 
+    @api.one
     @api.depends('credit_control_line_ids',
                  'credit_control_line_ids.amount_due',
                  'credit_control_line_ids.balance_due')
@@ -194,7 +195,10 @@ class CreditCommunication(models.TransientModel):
                                                              comm.id,
                                                              context=context)
             email_values['type'] = 'email'
-
+            # model is Transient record (self) removed periodically so no point
+            # of storing res_id
+            email_values.pop('model', None)
+            email_values.pop('res_id', None)
             email = email_message_obj.create(email_values)
 
             state = 'sent'

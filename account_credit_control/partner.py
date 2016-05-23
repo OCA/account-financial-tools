@@ -19,6 +19,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api
+from openerp.exceptions import Warning, ValidationError
 
 
 class ResPartner(models.Model):
@@ -38,11 +39,11 @@ class ResPartner(models.Model):
              "the company setting.",
     )
     credit_control_line_ids = fields.One2many('credit.control.line',
-                                              'invoice_id',
+                                              'partner_id',
                                               string='Credit Control Lines',
                                               readonly=True)
 
-    @api.constrains('credit_policy_id')
+    @api.constrains('credit_policy_id', 'property_account_receivable')
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
         for partner in self:
@@ -53,6 +54,6 @@ class ResPartner(models.Model):
             policy = partner.credit_policy_id
             try:
                 policy.check_policy_against_account(account)
-            except api.Warning as err:
+            except Warning as err:
                 # constrains should raise ValidationError exceptions
-                raise api.ValidationError(err)
+                raise ValidationError(err)

@@ -16,7 +16,7 @@
                     </header>
                     <group attrs="{'invisible':[('state','!=','init')]}">
                         <h3>
-                            <p><center>This wizard will update your accounts, taxes and fiscal positions according to the selected chart template</center></p>
+                            <p><center>This wizard will update your accounts, taxes, fiscal positions and financial reports according to the selected chart template</center></p>
                         </h3>
                     </group>
                     <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
@@ -36,6 +36,7 @@
                             <field name="update_tax" />
                             <field name="update_account" />
                             <field name="update_fiscal_position" />
+                            <field name="update_financial_reports" />
                         </group>
                         <group string="Other options" attrs="{'invisible':[('state','!=','init')]}">
                             <field name="update_children_accounts_parent" />
@@ -90,6 +91,16 @@
                                         <field name="update_fiscal_position_id" />
                                         <field name="notes" readonly="1" />
                                         <field name="type" invisible="1" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Financial reports" attrs="{'invisible': [('update_financial_reports', '=', False)]}">
+                                <field name="financial_report_ids" nolabel="1">
+                                    <tree string="Financial reports" colors="red:type=='warn'">
+                                        <field name="financial_report_id" />
+                                        <field name="account_id" />
+                                        <field name="notes" readonly="1" />
+                                        <field name="type" />
                                     </tree>
                                 </field>
                             </page>

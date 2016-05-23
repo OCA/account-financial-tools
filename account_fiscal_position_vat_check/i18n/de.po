@@ -1,45 +1,22 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_fiscal_position_vat_check
-#
+# * account_fiscal_position_vat_check
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-19 19:46+0000\n"
-"PO-Revision-Date: 2015-01-06 17:35+0100\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
+"PO-Revision-Date: 2015-11-24 16:22+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: \n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Language: de\n"
-"X-Generator: Poedit 1.5.4\n"
-
-#. module: account_fiscal_position_vat_check
-#: view:res.partner:0
-msgid "fiscal_position_change(property_account_position, vat)"
-msgstr "fiscal_position_change(property_account_position, vat)"
-
-#. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:54
-#, python-format
-msgid ""
-"You are trying to validate %s with the fiscal position '%s' that require the "
-"customer to have a VAT number. But the Customer '%s' doesn't have a VAT "
-"number in OpenERP. Please add the VAT number of this Customer in OpenERP and "
-"try to validate again."
-msgstr ""
-"Sie versuchen eine %s in Bilanzposition '%s' zu bestätigen, die erfordert, "
-"dass der Kunde eine UStID-Nummer besitzt. Dieser Kunde '%s' hat jedoch keine "
-"UStID.Nummer im System. Ergänzen Sie diese Steueridentnummer für den Kunden "
-"und versuchen Sie es dann erneut."
-
-#. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:51
-#, python-format
-msgid "a Customer Refund"
-msgstr "Eine Kundengutschrift"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_position_vat_check
 #: field:account.fiscal.position,customer_must_have_vat:0
@@ -47,18 +24,16 @@ msgid "Customer Must Have VAT number"
 msgstr "Kunde muss eine UStID-Nummer haben"
 
 #. module: account_fiscal_position_vat_check
-#: help:account.fiscal.position,customer_must_have_vat:0
-msgid ""
-"If enabled, OpenERP will check that the customer has a VAT number when the "
-"user validates a customer invoice/refund."
-msgstr ""
-"Wenn gesetzt, stellt OpenERP/ODOO sicher, dass der Kunde eine UStID-Nummer "
-"eingetragen hat wenn der Anwender eune Rechnung/Gutschrift bestätigt."
-
-#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_fiscal_position
 msgid "Fiscal Position"
 msgstr "Bilanzposition"
+
+#. module: account_fiscal_position_vat_check
+#: help:account.fiscal.position,customer_must_have_vat:0
+msgid ""
+"If enabled, Odoo will check that the customer has a VAT number when the user"
+" validates a customer invoice/refund."
+msgstr "Wenn aktiviert, prüft Odoo, ob der Kunde eine USt-ID hat, bevor der Anwender eine Kundenrechnung/-gutschrift freigeben kann."
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -66,29 +41,48 @@ msgid "Invoice"
 msgstr "Rechnung"
 
 #. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Partner"
-
-#. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:49
-#, python-format
-msgid "a Customer Invoice"
-msgstr "Eine Kundenrechnung"
-
-#. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/account_invoice.py:53
-#: code:addons/account_fiscal_position_vat_check/partner.py:38
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:54
+#: code:addons/account_fiscal_position_vat_check/partner.py:40
 #, python-format
 msgid "Missing VAT number:"
 msgstr "Fehlende UStID-Nummer:"
 
 #. module: account_fiscal_position_vat_check
-#: code:addons/account_fiscal_position_vat_check/partner.py:39
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:55
+#, python-format
+msgid ""
+"You are trying to validate %s with the fiscal position '%s' that require the"
+" customer to have a VAT number. But the Customer '%s' doesn't have a VAT "
+"number in OpenERP.Please add the VAT number of this Customer in Odoo  and "
+"try to validate again."
+msgstr "Sie möchten %s mit der Steuerzuordnung '%s' freigeben, welches eine USt-ID beim Kunden erfordert. Der Kunde '%s' hat jedoch keine in Odoo eingepflegte USt-ID. Bitte pflegen Sie diese für den Kunden nach und versuchen die Freigabe nochmal."
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/partner.py:41
 #, python-format
 msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
-"VAT number. You should add the VAT number of this customer in OpenERP."
+"VAT number, but the VAT number is missing."
+msgstr "Sie haben die Steuerzuordnung '%s' angegeben, welche beim Kunden eine USt-ID erfordert, aber diese USt-ID fehlt hier."
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:50
+#, python-format
+msgid "a Customer Invoice"
+msgstr "Eine Kundenrechnung"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/account_invoice.py:52
+#, python-format
+msgid "a Customer Refund"
+msgstr "Eine Kundengutschrift"
+
+#. module: account_fiscal_position_vat_check
+#: view:res.partner:account_fiscal_position_vat_check.view_partner_property_form
+msgid "fiscal_position_change(property_account_position, vat, customer)"
 msgstr ""
-"Sie haben festgelegt, dass für die Bilanzposition '%s' der Kunde eine UStID-"
-"Nummer benötigt. Sie müssen zum Kunden eine UStID einpflegen."

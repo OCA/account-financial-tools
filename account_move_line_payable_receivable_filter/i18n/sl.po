@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_line_payable_receivable_filter
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-06-13 05:19+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+msgid "Payable Account"
+msgstr "Konto plačil"
+
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+msgid "Receivable Account"
+msgstr "Konto prejemkov"

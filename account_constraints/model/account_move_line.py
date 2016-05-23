@@ -24,6 +24,13 @@ from openerp import models, api, exceptions, _
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
+    @api.model
+    def _get_write_authorized_fields(self):
+        """ This method can be overrride to add some field that can be written
+        directly on account move line """
+        return ["reconcile_id", "reconcile_partial_id", "followup_line_id",
+                "followup_date"]
+
     @api.multi
     def _authorized_reconcile(self, vals):
         """ Check if only reconcile_id and/or reconcile_partial_id are altered.
@@ -33,7 +40,7 @@ class AccountMoveLine(models.Model):
         """
         if not vals:
             return False
-        rec_keys = set(["reconcile_id", "reconcile_partial_id"])
+        rec_keys = set(self._get_write_authorized_fields())
         write_keys = set(vals)
         return rec_keys.issuperset(write_keys)
 
@@ -80,6 +87,8 @@ class AccountMoveLine(models.Model):
         another object.  This is mandatory if you use the module setting
         all moves in draft (module: account_default_draft_move)
         """
+        if not context:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids)
             self._check_statement_related_move(cr, uid, ids)
@@ -102,6 +111,8 @@ class AccountMoveLine(models.Model):
         by another object.  This is mandatory if you use the module
         setting all moves in draft (module: account_default_draft_move)
         """
+        if not context:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids, vals)
             self._check_statement_related_move(cr, uid, ids, vals)
@@ -126,6 +137,9 @@ class AccountMoveLine(models.Model):
     @api.constrains('amount_currency')
     def _check_currency_amount(self):
         for l in self:
+            # If account have a second currency, don't apply constraint
+            if l.account_id.currency_id:
+                continue
             if l.amount_currency:
                 if ((l.amount_currency > 0.0 and l.credit > 0.0) or
                         (l.amount_currency < 0.0 and l.debit > 0.0)):

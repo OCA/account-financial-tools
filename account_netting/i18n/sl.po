@@ -1,0 +1,151 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_netting
+# 
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2013
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:13+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:56
+#, python-format
+msgid "AR/AP netting"
+msgstr "Mreženje terjatev/obveznosti"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:30
+#, python-format
+msgid "All entries must have a receivable or payable account"
+msgstr "Vsi vnosi morajo imeti konto terjatev ali obveznosti"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:33
+#, python-format
+msgid "All entries mustn't been reconciled"
+msgstr "Vnosi ne smejo biti usklajeni"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:39
+#, python-format
+msgid ""
+"All entries should have a partner and the partner must be the same for all."
+msgstr "Vsi vnosi morajo imeti partnerja, partner pa mora biti enak za vse."
+
+#. module: account_netting
+#: field:account.move.make.netting,balance:0
+msgid "Balance"
+msgstr "Bilanca"
+
+#. module: account_netting
+#: field:account.move.make.netting,balance_type:0
+msgid "Balance type"
+msgstr "Tip bilance"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+#: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
+msgid "Compensate"
+msgstr "Kompenzacija"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Compensate entries"
+msgstr "Kompenzacija vnosov"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_netting
+#: field:account.move.make.netting,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_netting
+#: field:account.move.make.netting,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_netting
+#: field:account.move.make.netting,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_netting
+#: field:account.move.make.netting,journal:0
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_netting
+#: field:account.move.make.netting,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: account_netting
+#: field:account.move.make.netting,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_netting
+#: field:account.move.make.netting,move_lines:0
+msgid "Move lines"
+msgstr "Postavke premikov"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "Select the journal where storing the journal entries"
+msgstr "Izberite dnevnik, kamor se bodo hranili dnevniški vnosi"
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid ""
+"This operation will generate account entries that are counterpart of the "
+"receivable/payable accounts selected, and reconcile each other, letting this"
+" balance in the partner:"
+msgstr "Ta operacija ustvari kontne vnose, ki so proti-postavka izbranih kontov terjatev/obveznosti in jih medsebojno uskladi, da omogoči bilanco pri partnerju:"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To pay"
+msgstr "Za plačilo"
+
+#. module: account_netting
+#: selection:account.move.make.netting,balance_type:0
+msgid "To receive"
+msgstr "Za prejem"
+
+#. module: account_netting
+#: code:addons/account_netting/wizard/account_move_make_netting.py:24
+#, python-format
+msgid "You should compensate at least 2 journal entries."
+msgstr "Kompenzirati morate vsaj 2 dnevniška vnosa."
+
+#. module: account_netting
+#: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
+msgid "or"
+msgstr "ali"

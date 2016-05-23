@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_default_draft_move
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-03 22:27+0000\n"
+"PO-Revision-Date: 2015-09-29 09:07+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_VE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_bank_statement
+msgid "Bank Statement"
+msgstr ""
+
+#. module: account_default_draft_move
+#: view:account.invoice:account_default_draft_move.invoice_form_supplier_group_invoice
+msgid "Cancel Invoice"
+msgstr ""
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_default_draft_move
+#: field:account.config.settings,use_journal_setting:0
+msgid ""
+"Use journal setting to post journal entries on invoice and bank statement "
+"validation"
+msgstr ""
+
+#. module: account_default_draft_move
+#: code:addons/account_default_draft_move/account.py:56
+#, python-format
+msgid ""
+"You cannot modify a posted entry of this journal.First you should set the "
+"journal to allow cancelling entries."
+msgstr ""
+
+#. module: account_default_draft_move
+#: view:account.invoice:account_default_draft_move.invoice_form_customer_group_invoice
+msgid "account.group_account_invoice"
+msgstr ""
+
+#. module: account_default_draft_move
+#: view:account.move:account_default_draft_move.view_move_form_remove_button
+msgid "{'invisible': ['|', ('update_posted', '=', False)]}"
+msgstr ""

@@ -212,7 +212,10 @@ class Currency_rate_update_service(models.Model):
                                           string='Currencies to update with '
                                           'this service')
     # Link with company
-    company_id = fields.Many2one('res.company', 'Company')
+    company_id = fields.Many2one(
+        'res.company', 'Company',
+        default=lambda self: self.env['res.company']._company_default_get(
+            'currency.rate.update.service'))
     # Note fileds that will be used as a logger
     note = fields.Text('Update logs')
     max_delta_days = fields.Integer(
@@ -323,7 +326,7 @@ class Currency_rate_update_service(models.Model):
     @api.multi
     def run_currency_update(self):
         # Update currency at the given frequence
-        services = self.search([('next_run', '=', fields.Date.today())])
+        services = self.search([('next_run', '<=', fields.Date.today())])
         services.with_context(cron=True).refresh_currency()
 
     @api.model

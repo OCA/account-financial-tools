@@ -1,0 +1,77 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_period_close
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
+"PO-Revision-Date: 2015-11-24 16:25+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_journal_period_close
+#: model:ir.model,name:account_journal_period_close.model_account_period
+msgid "Account period"
+msgstr "Buchungsperiode"
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Add all journals"
+msgstr "Füge alle Journale hinzu"
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Close journal for this period"
+msgstr "Schließe das Journal für diese Periode"
+
+#. module: account_journal_period_close
+#: code:addons/account_journal_period_close/model/account_journal_period.py:66
+#, python-format
+msgid ""
+"In order to close a journal, you must first post related journal entries."
+msgstr "Um ein Journal zu schließen, müssen Sie zuerst zugehörige Posten buchen."
+
+#. module: account_journal_period_close
+#: code:addons/account_journal_period_close/model/account_journal_period.py:65
+#, python-format
+msgid "Invalid Action!"
+msgstr "Unzulässige Aktion!"
+
+#. module: account_journal_period_close
+#: model:ir.model,name:account_journal_period_close.model_account_journal_period
+msgid "Journal Period"
+msgstr "Journalperiode"
+
+#. module: account_journal_period_close
+#: field:account.journal.period,type:0
+msgid "Journal Type"
+msgstr "Journalart"
+
+#. module: account_journal_period_close
+#: field:account.period,journal_period_ids:0
+msgid "Journal states"
+msgstr "Journal-Stati"
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Journals"
+msgstr "Journale"
+
+#. module: account_journal_period_close
+#: view:account.period:account_journal_period_close.view_account_period_form
+msgid "Reopen journal for this period"
+msgstr "Journal für diese Periode wieder-eröffnen"
+
+#. module: account_journal_period_close
+#: sql_constraint:account.journal.period:0
+msgid "You can not add same journal in the same period twice."
+msgstr "Sie können ein Journal nicht zweimal der gleichen Periode zuordnen."

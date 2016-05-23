@@ -40,6 +40,8 @@ class CA_BOC_getter(Currency_getter_interface):
         """implementation of abstract method of Curreny_getter_interface"""
 
         # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
+        # currency codes in the XML file have the suffix "_NOON" or "_CLOSE" as
+        # of April 2015
         url = ('http://www.bankofcanada.ca/stats/assets/'
                'rates_rss/noon/en_%s.xml')
         # closing rates are available as well (please note there are only 12
@@ -78,7 +80,7 @@ class CA_BOC_getter(Currency_getter_interface):
 
             # check for valid exchange data
             if (dom.entries[0].cb_basecurrency == main_currency) and \
-                    (dom.entries[0].cb_targetcurrency == curr):
+                    (dom.entries[0].cb_targetcurrency[:3] == curr):
                 rate = dom.entries[0].cb_exchangerate.split('\n', 1)[0]
                 rate_date_datetime = parser.parse(dom.entries[0].updated)\
                     .astimezone(pytz.utc).replace(tzinfo=None)

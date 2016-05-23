@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_auto_fy_sequence
+# 
+# Translators:
+# Carles Antolí <carlesantoli@hotmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-05 01:25+0000\n"
+"PO-Revision-Date: 2015-12-06 18:25+0000\n"
+"Last-Translator: Carles Antolí <carlesantoli@hotmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_auto_fy_sequence
+#: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form
+msgid "Day: %(day)s"
+msgstr "Día: %(day)s"
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:81
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:100
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:133
+#, python-format
+msgid "Error!"
+msgstr "¡Error!"
+
+#. module: account_auto_fy_sequence
+#: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form
+msgid "Fiscal Year: %(fy)s"
+msgstr "Año Fiscal: %(fy)s"
+
+#. module: account_auto_fy_sequence
+#: model:ir.model,name:account_auto_fy_sequence.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:101
+#, python-format
+msgid ""
+"The system tried to access a fiscal year sequence but there is more than one"
+" sequence to choose from."
+msgstr "El sistema ha intentado acceder a una secuencia del año fiscal pero se encuentra más de una secuencia para elegir."
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:82
+#, python-format
+msgid ""
+"The system tried to access a fiscal year sequence without specifying the "
+"actual fiscal year."
+msgstr "El sistema ha intentado acceder a una secuencia de año fiscal sin especificar el año fiscal actual."
+
+#. module: account_auto_fy_sequence
+#: code:addons/account_auto_fy_sequence/models/ir_sequence.py:138
+#, python-format
+msgid "You cannot change from %s to %s for a sequence with next number > 1"
+msgstr "No se puede cambiar de %s a %s para una secuencia con el número siguiente > 1"

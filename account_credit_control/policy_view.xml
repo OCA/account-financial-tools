@@ -40,6 +40,8 @@
                         <newline/>
                         <field name="custom_text" colspan="4"/>
                         <newline/>
+                        <field name="custom_text_after_details" colspan="4"/>
+                        <newline/>
                         <field name="custom_mail_text" colspan="4"/>
                       </group>
                     </page>

@@ -1,0 +1,232 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_asset_management_xls
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Bruno JOLIVEAU, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@gmail.com>, 2014
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# jeon <bluerespect@nate.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
+# Kevin Min <gr326887@graded.br>, 2015
+# Kunwoo Kim <crazyabtmath@naver.com>, 2015
+# LEE SI HYEONG <super2451894@gmail.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sam Ryoo <samryoo@gmail.com>, 2014
+# Seo. Junmin <sof.midnight@live.co.kr>, 2015
+# seungil <luck8778@gmail.com>, 2014
+# SEUNGWON <baeksw0620@gmail.com>, 2014
+# Yael Terrettaz, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:08+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:376
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:402
+#, python-format
+msgid "Active Assets"
+msgstr "Aktivna sredstva"
+
+#. module: account_asset_management_xls
+#: model:ir.model,name:account_asset_management_xls.model_account_asset_asset
+msgid "Asset"
+msgstr "Sredstvo"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,parent_asset_id:0
+msgid "Asset Filter"
+msgstr "Filter po sredstvih"
+
+#. module: account_asset_management_xls
+#: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:49
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:63
+#, python-format
+msgid "Configuration Error"
+msgstr "Nastavitvena napaka"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:608
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:828
+#, python-format
+msgid "Customization Error"
+msgstr "Prilagoditvena napaka"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:672
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:680
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:685
+#, python-format
+msgid "Data Error"
+msgstr "Podatkovna napaka"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:681
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:686
+#, python-format
+msgid "Depreciation Table error for asset %s !"
+msgstr "Napaka amortizacijske tabele za sredstvo %s !"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_asset_management_xls
+#: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
+#: model:ir.model,name:account_asset_management_xls.model_wiz_account_asset_report
+#: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
+#: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
+msgid "Financial Assets report"
+msgstr "Poročilo o finančnih sredstvih"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:368
+#: field:wiz.account.asset.report,fiscalyear_id:0
+#, python-format
+msgid "Fiscal Year"
+msgstr "Fiskalno leto"
+
+#. module: account_asset_management_xls
+#: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
+msgid "Generate Report"
+msgstr "Ustvari poročilo"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:371
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:400
+#, python-format
+msgid "New Acquisitions"
+msgstr "Novi nakupi"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:405
+#, python-format
+msgid "No"
+msgstr "Poz"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:70
+#, python-format
+msgid "No Data Available"
+msgstr "Ni podatkov na voljo"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:64
+#, python-format
+msgid "No parent asset defined for asset '%s'!"
+msgstr "Za sredstvo '%s' ni določeno nadrejeno sredstvo!"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:71
+#, python-format
+msgid "No records found for your selection!"
+msgstr "Za vaš izbor ni najdenih zapisov!"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:50
+#, python-format
+msgid "No top level asset of type 'view' defined!"
+msgstr "Gornje nivojsko sredstvo tipa 'pogled' ni določeno!"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:381
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:404
+#, python-format
+msgid "Removed Assets"
+msgstr "Odstranjena sredstva"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
+#, python-format
+msgid ""
+"The 'account' field is a mandatory entry of the '_xls_acquisition_fields' "
+"list !"
+msgstr "Polje 'konto' je obvezno polje seznama '_xls_acquisition_fields' !"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:608
+#, python-format
+msgid ""
+"The 'account' field is a mandatory entry of the '_xls_active_fields' list !"
+msgstr "Polje 'konto' je obvezno polje seznama '_xls_active_fields' !"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:828
+#, python-format
+msgid ""
+"The 'account' field is a mandatory entry of the '_xls_removal_fields' list !"
+msgstr "Polje 'konto' je obvezno polje seznama '_xls_removal_fields' !"
+
+#. module: account_asset_management_xls
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:673
+#, python-format
+msgid ""
+"You can not report on a Fiscal Year with unposted entries in prior years. "
+"Please post depreciation table entry dd. '%s'  of asset '%s' !"
+msgstr "Ni mogoče poročati za fiskalno leto z ne vknjiženimi vnosi v prejšnjih letih. Vknjižite vnos amortizacijske tabele dd. '%s' sredstva '%s' !"
+
+#. module: account_asset_management_xls
+#: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
+msgid "or"
+msgstr "ali"

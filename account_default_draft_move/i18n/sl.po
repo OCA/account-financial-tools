@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_default_draft_move
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Bruno JOLIVEAU, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# Yael Terrettaz, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:13+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_move
+msgid "Account Entry"
+msgstr "Knjigovodski vnos"
+
+#. module: account_default_draft_move
+#: field:account.move,update_posted:0
+msgid "Allow Cancelling Entries"
+msgstr "Dovoli preklic vnosov"
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Bančni izpisek"
+
+#. module: account_default_draft_move
+#: view:account.invoice:account_default_draft_move.invoice_form_supplier_group_invoice
+msgid "Cancel Invoice"
+msgstr "Preklic računa"
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_invoice
+msgid "Invoice"
+msgstr "Račun"
+
+#. module: account_default_draft_move
+#: model:ir.model,name:account_default_draft_move.model_account_journal
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_default_draft_move
+#: field:account.config.settings,use_journal_setting:0
+msgid ""
+"Use journal setting to post journal entries on invoice and bank statement "
+"validation"
+msgstr "Uporabi nastavitve dnevnika za knjiženje dnevniških vnosov pri overjanju računov in bančnih izpiskov"
+
+#. module: account_default_draft_move
+#: code:addons/account_default_draft_move/account.py:56
+#, python-format
+msgid ""
+"You cannot modify a posted entry of this journal.First you should set the "
+"journal to allow cancelling entries."
+msgstr "Na tem dnevniku ne morete spreminjati knjiženih vnosov. Najprej bi morali za dnevnik omogočiti preklic vnosov."
+
+#. module: account_default_draft_move
+#: view:account.invoice:account_default_draft_move.invoice_form_customer_group_invoice
+msgid "account.group_account_invoice"
+msgstr "account.group_account_invoice"
+
+#. module: account_default_draft_move
+#: view:account.move:account_default_draft_move.view_move_form_remove_button
+msgid "{'invisible': ['|', ('update_posted', '=', False)]}"
+msgstr "{'invisible': ['|', ('update_posted', '=', False)]}"

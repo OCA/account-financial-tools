@@ -1,0 +1,219 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_tax_analysis
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2013
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
+# UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:14+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account"
+msgstr "Konto"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account / Tax"
+msgstr "Konto/davek"
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
+msgid "Account Vat Declaration"
+msgstr "Konto DDV izjave"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Filters"
+msgstr "Filtri"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,fiscalyear_id:0
+msgid "Fiscalyear"
+msgstr "Fiskalno leto"
+
+#. module: account_tax_analysis
+#: help:account.vat.declaration.analysis,fiscalyear_id:0
+msgid "Fiscalyear to look on"
+msgstr "Fiskalno leto za pregled"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Group By..."
+msgstr "Združi po..."
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_tax_analysis
+#: help:account.vat.declaration.analysis,period_list:0
+msgid ""
+"If no period is selected, all the periods of the fiscal year will be used"
+msgstr "Če obdobje ni izbrano, se uporabijo vsa obdobja fiskalnega leta"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Journal Items"
+msgstr "Dnevniške postavke"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Period"
+msgstr "Obdobje"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: field:account.vat.declaration.analysis,period_list:0
+msgid "Periods"
+msgstr "Obdobja"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted"
+msgstr "Knjiženo"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted Journal Items"
+msgstr "Knjižene dnevniške postavke"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Search Journal Items"
+msgstr "Iskanje dnevniških postavk"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Show tax lines"
+msgstr "Prikaz davčnih postavk"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax account"
+msgstr "Konto davkov"
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
+#: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
+msgid "Taxes Analysis"
+msgstr "Analiza davkov"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Taxes Report"
+msgstr "Poročilo o davkih"
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
+msgid ""
+"This menu print a VAT declaration based on invoices or payments. You can "
+"select one or several periods of the fiscal year. Information required for a"
+" tax declaration is automatically generated by OpenERP from invoices (or "
+"payments, in some countries). This data is updated in real time. That’s very"
+" useful because it enables you to preview at any time the tax that you owe "
+"at the start and end of the month or quarter."
+msgstr "Ta meni natisne DDV izjavo na osnovi računov ali plačil. Izberete lahko eno ali več obdobij fiskalnega leta. Podatki potrebni za DDV izjavo se samodejno ustvarijo iz računov (ali plačil v nekaterih državah). Ti podatki se posodabljajo v realnem času. To je koristno, ker kadarkoli omogoči predogled davčnih obveznosti na začetku ali koncu meseca ali četrtletja."
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total Taxe"
+msgstr "Skupaj davki"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total credit"
+msgstr "Skupaj v dobro"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total debit"
+msgstr "Skupaj v breme"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted"
+msgstr "Ne knjiženo"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted Journal Items"
+msgstr "Ne knjižene dnevniške postavke"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "or"
+msgstr "ali"

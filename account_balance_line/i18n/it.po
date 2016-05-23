@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_balance_line
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"PO-Revision-Date: 2015-06-03 15:58+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_balance_line
+#: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
+msgid "Account"
+msgstr "Conto"
+
+#. module: account_balance_line
+#: field:account.move.line,line_balance:0
+msgid "Balance"
+msgstr ""
+
+#. module: account_balance_line
+#: model:ir.model,name:account_balance_line.model_account_move_line
+msgid "Journal Items"
+msgstr "Voci Sezionale"
+
+#. module: account_balance_line
+#: view:account.move.line:account_balance_line.account_move_line_balance_custom
+msgid "Total Balance"
+msgstr ""
+
+#. module: account_balance_line
+#: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
+msgid "{'group_by': 'account_id', 'invisible_balance': False}"
+msgstr ""
+
+#. module: account_balance_line
+#: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
+msgid "{'invisible_balance': False}"
+msgstr ""

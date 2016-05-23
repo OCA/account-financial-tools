@@ -1,0 +1,933 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_chart_update
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:09+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,code_digits:0
+msgid "# of digits"
+msgstr "# znakov"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:808
+#, python-format
+msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
+msgstr "Za instanco fiskalnega položaja: %s -> %s ni najdeno kontno mapiranje.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,account_id:0
+msgid "Account template"
+msgstr "Kontna predloga"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
+msgid "Account that needs to be updated (new or updated in the template)."
+msgstr "Konto, ki ga je potrebno posodobiti (nov ali posodobljen iz predloge)."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.financial.report,account_id:0
+msgid "Account to change on financial report"
+msgstr "Konto, ki bo spremenjen na finančnem poročilu"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,update_account_id:0
+msgid "Account to update"
+msgstr "Konto za posodobitev"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+#: field:wizard.update.charts.accounts,account_ids:0
+msgid "Accounts"
+msgstr "Konti"
+
+#. module: account_chart_update
+#: field:account.tax.code,active:0
+msgid "Active"
+msgstr "Aktivno"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.financial.report,type:0
+msgid "Add account"
+msgstr "Dodaj konto"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1197
+#, python-format
+msgid "Added account %s to financial report %s.\n"
+msgstr "Konto %s dodan v finančno poročilo %s.\n"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Cancel"
+msgstr "Preklic"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,chart_template_id:0
+msgid "Chart Template"
+msgstr "Predloga kontnega plana"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Chart of Accounts"
+msgstr "Kontni plan"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Close"
+msgstr "Zaključi"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:749
+#, python-format
+msgid "Code not found."
+msgstr "Koda ni najdena."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,company_id:0
+msgid "Company"
+msgstr "Družba"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,continue_on_errors:0
+msgid "Continue on errors"
+msgstr "Ob napakah nadaljuj"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Create/Update"
+msgstr "Ustvari/posodobi"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1095
+#, python-format
+msgid "Created account %s.\n"
+msgstr "Ustvarjen konto %s.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,create_uid:0
+#: field:wizard.update.charts.accounts.account,create_uid:0
+#: field:wizard.update.charts.accounts.financial.report,create_uid:0
+#: field:wizard.update.charts.accounts.fiscal.position,create_uid:0
+#: field:wizard.update.charts.accounts.tax,create_uid:0
+#: field:wizard.update.charts.accounts.tax.code,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,create_date:0
+#: field:wizard.update.charts.accounts.account,create_date:0
+#: field:wizard.update.charts.accounts.financial.report,create_date:0
+#: field:wizard.update.charts.accounts.fiscal.position,create_date:0
+#: field:wizard.update.charts.accounts.tax,create_date:0
+#: field:wizard.update.charts.accounts.tax.code,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
+#, python-format
+msgid "Created or updated fiscal position %s.\n"
+msgstr "Ustvarjen ali posodobljen fiskalni položaj %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1007
+#, python-format
+msgid "Created tax %s.\n"
+msgstr "Ustvarjen davek %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:942
+#, python-format
+msgid "Created tax code %s.\n"
+msgstr "Ustvarjena davčna koda %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:951
+#, python-format
+msgid "Deactivated %d tax codes\n"
+msgstr "Deaktivirano %d davčnih kod.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1022
+#, python-format
+msgid "Deactivated %d taxes\n"
+msgstr "Deaktiviranih %d davkov\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_tax_codes:0
+msgid "Deactivated tax codes"
+msgstr "Deaktivirane davčne kode"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_taxes:0
+msgid "Deactivated taxes"
+msgstr "Deaktivirani davki"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,display_name:0
+#: field:wizard.update.charts.accounts.account,display_name:0
+#: field:wizard.update.charts.accounts.financial.report,display_name:0
+#: field:wizard.update.charts.accounts.fiscal.position,display_name:0
+#: field:wizard.update.charts.accounts.tax,display_name:0
+#: field:wizard.update.charts.accounts.tax.code,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
+#, python-format
+msgid "Exception creating account %s: %s - %s.\n"
+msgstr "Izjema pri ustvarjanju konta %s: %s - %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1043
+#, python-format
+msgid "Exception setting the parent of account %s children: %s - %s.\n"
+msgstr "Izjema pri nastavljanju nadrejenega kontu %s podrejenega: %s - %s.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1108
+#, python-format
+msgid "Exception writing account %s: %s - %s.\n"
+msgstr "Izjema pri zapisu konta %s: %s - %s.\n"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_account:0
+msgid "Existing accounts are updated. Accounts are searched by code."
+msgstr "Obstoječi konti so posodobljeni. Iskanje kontov po kodi."
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_fiscal_position:0
+msgid ""
+"Existing fiscal positions are updated. Fiscal positions are searched by "
+"name."
+msgstr "Obstoječi fiskalni položaji so posodobljeni. Iskanje fiskalnih položajev po nazivu."
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_tax_code:0
+msgid "Existing tax codes are updated. Tax codes are searched by name."
+msgstr "Obstoječe kode davkov so posodobljene. Iskanje kod davkov po nazivu."
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_tax:0
+msgid "Existing taxes are updated. Taxes are searched by name."
+msgstr "Obstoječi davki so posodobljeni. Iskanje davkov po nazivu."
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_financial_report
+msgid ""
+"Financial report mapping that needs to be updated (new or updated in the "
+"template)."
+msgstr "Mapiranje finančnega poročila, ki mora biti posodobljeno (novo ali posodobljeno v predlogi)"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.financial.report,financial_report_id:0
+msgid "Financial report to update"
+msgstr "Finančno poročilo za posodobitev"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+#: field:wizard.update.charts.accounts,financial_report_ids:0
+msgid "Financial reports"
+msgstr "Finančna poročila"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
+msgid "Fiscal position template"
+msgstr "Predloga fiskalnih položajev"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
+msgid ""
+"Fiscal position that needs to be updated (new or updated in the template)."
+msgstr "Fiskalni položaj, ki ga je potrebno posodobiti (nov ali posodobljen iz predloge)."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.fiscal.position,update_fiscal_position_id:0
+msgid "Fiscal position to update"
+msgstr "Fiskalni položaj za posodobitev"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+#: field:wizard.update.charts.accounts,fiscal_position_ids:0
+msgid "Fiscal positions"
+msgstr "Fiskalni položaji"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,lang:0
+msgid ""
+"For records searched by name (taxes, tax codes, fiscal positions), the "
+"template name will be matched against the record name on this language."
+msgstr "Pri iskanju zapisov po nazivu (davki, kode davkov, fiskalni položaji), se naziv predloge primerja z zapisom imena v tem jeziku."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,id:0
+#: field:wizard.update.charts.accounts.account,id:0
+#: field:wizard.update.charts.accounts.financial.report,id:0
+#: field:wizard.update.charts.accounts.fiscal.position,id:0
+#: field:wizard.update.charts.accounts.tax,id:0
+#: field:wizard.update.charts.accounts.tax.code,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,continue_on_errors:0
+msgid ""
+"If set, the wizard will continue to the next step even if there are minor "
+"errors (for example the parent account of a new account couldn't be set)."
+msgstr "Če je označeno, bo čarovnik nadaljeval z naslednjim korakom tudi, če se pojavijo manjše napake (npr. nadrejeni konto novega konta ne bo nastavljen)."
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid ""
+"If you leave these options set, the wizard will not just create new records,"
+" but also update records with changes (i.e. different tax amount)"
+msgstr "Če pustite te opcije nastavljene, bo čarovnik, poleg ustvarjanja novih zapisov, tudi posodobil zapise s spremembami (npr. drugačen znesek davka)"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,lang:0
+msgid "Language"
+msgstr "Jezik"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,__last_update:0
+#: field:wizard.update.charts.accounts.account,__last_update:0
+#: field:wizard.update.charts.accounts.financial.report,__last_update:0
+#: field:wizard.update.charts.accounts.fiscal.position,__last_update:0
+#: field:wizard.update.charts.accounts.tax,__last_update:0
+#: field:wizard.update.charts.accounts.tax.code,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,write_uid:0
+#: field:wizard.update.charts.accounts.account,write_uid:0
+#: field:wizard.update.charts.accounts.financial.report,write_uid:0
+#: field:wizard.update.charts.accounts.fiscal.position,write_uid:0
+#: field:wizard.update.charts.accounts.tax,write_uid:0
+#: field:wizard.update.charts.accounts.tax.code,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnjič posodobil"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,write_date:0
+#: field:wizard.update.charts.accounts.account,write_date:0
+#: field:wizard.update.charts.accounts.financial.report,write_date:0
+#: field:wizard.update.charts.accounts.fiscal.position,write_date:0
+#: field:wizard.update.charts.accounts.tax,write_date:0
+#: field:wizard.update.charts.accounts.tax.code,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Log"
+msgstr "Dnevnik zabeležb"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,log:0
+msgid "Messages and Errors"
+msgstr "Sporočila in napake"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:842
+#, python-format
+msgid "Name not found."
+msgstr "Naziv ni najden."
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:543
+#, python-format
+msgid "Name or code not found."
+msgstr "Naziv ali koda nista najdena."
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:662
+#, python-format
+msgid "Name or description not found."
+msgstr "Naziv ali opis nista najdena."
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_accounts:0
+msgid "New accounts"
+msgstr "Novi konti"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_fps:0
+msgid "New fiscal positions"
+msgstr "Novi fiskalni položaji"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.tax.code,type:0
+msgid "New tax code"
+msgstr "Nova koda davka"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_tax_codes:0
+msgid "New tax codes"
+msgstr "Nove davčne kode"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_taxes:0
+msgid "New taxes"
+msgstr "Novi davki"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.account,type:0
+#: selection:wizard.update.charts.accounts.fiscal.position,type:0
+#: selection:wizard.update.charts.accounts.tax,type:0
+msgid "New template"
+msgstr "Nova predloga"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Next"
+msgstr "Naslednji"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,code_digits:0
+msgid ""
+"No. of digits to use for account code. Make sure it is the same number as "
+"existing accounts."
+msgstr "Število znakov, ki se uporablja v kontni kodi. Zagotovite, da bo enako tistemu na obstoječih kontih."
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:786
+#, python-format
+msgid "None"
+msgstr "Noben"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Note: Not all the fields are tested for changes, just the main ones"
+msgstr "Opomba: glede sprememb niso testirana vsa polja, ampak le glavna polja"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,notes:0
+#: field:wizard.update.charts.accounts.financial.report,notes:0
+#: field:wizard.update.charts.accounts.fiscal.position,notes:0
+#: field:wizard.update.charts.accounts.tax,notes:0
+#: field:wizard.update.charts.accounts.tax.code,notes:0
+msgid "Notes"
+msgstr "Opombe"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:386
+#, python-format
+msgid ""
+"One or more errors detected!\n"
+"\n"
+"%s"
+msgstr "Zaznana je ena ali več napak!\n\n%s"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Other options"
+msgstr "Druge opcije"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Previous"
+msgstr "Prejšnji"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Records to create/update"
+msgstr "Zapisi, ki se ustvarjajo/posodabljajo"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.financial.report,type:0
+msgid "Remove account"
+msgstr "Odstrani konto"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1203
+#, python-format
+msgid "Removed account %s from financial report %s.\n"
+msgstr "Konto %s odstranjen iz finančnega poročila %s.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Step 1"
+msgstr "Korak 1"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Step 2"
+msgstr "Korak 2"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Summary of created objects"
+msgstr "Povzetek ustvarjenih objektov"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Summary of deleted objects"
+msgstr "Povzetek izbrisanih objektov"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Summary of updated objects"
+msgstr "Povzetek posodobljenih objektov"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1133
+#, python-format
+msgid "Tax %s: The collected account can not be set.\n"
+msgstr "Davek %s: konta prejetih plačil ni možno nastaviti.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1136
+#, python-format
+msgid "Tax %s: The paid account can not be set.\n"
+msgstr "Davek %s: konta izdanih plačil ni možno nastaviti.\n"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_account_tax_code
+msgid "Tax Code"
+msgstr "Koda davka"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.tax.code,tax_code_id:0
+msgid "Tax code template"
+msgstr "Predloga kod davkov"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
+msgid "Tax code that needs to be updated (new or updated in the template)."
+msgstr "Koda davka, ki jo je potrebno posodobiti (nova ali posodobljena iz predloge)."
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.tax.code,type:0
+msgid "Tax code to deactivate"
+msgstr "Koda davka za deaktivacijo"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.tax.code,update_tax_code_id:0
+msgid "Tax code to update"
+msgstr "Koda davka za posodobitev"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+#: field:wizard.update.charts.accounts,tax_code_ids:0
+msgid "Tax codes"
+msgstr "Kode davkov"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:583
+#, python-format
+msgid "Tax is disabled.\n"
+msgstr "Davek je onemogočen.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:787
+#, python-format
+msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
+msgstr "Za instanco fiskalnega položaja: %s -> %s ni najdeno davčno mapiranje.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.tax,tax_id:0
+msgid "Tax template"
+msgstr "Davčna predloga"
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
+msgid "Tax that needs to be updated (new or updated in the template)."
+msgstr "Davek, ki ga je potrebno posodobiti (nov ali posodobljen iz predloge)."
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.tax,type:0
+msgid "Tax to deactivate"
+msgstr "Davek za deaktivacijo"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.tax,update_tax_id:0
+msgid "Tax to update"
+msgstr "Davek za posodobitev"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+#: field:wizard.update.charts.accounts,tax_ids:0
+msgid "Taxes"
+msgstr "Davki"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:616
+#, python-format
+msgid "The Tax Included in Price field is different.\n"
+msgstr "Polje 'davek vključen v ceni' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:636
+#, python-format
+msgid "The account_collected field is different.\n"
+msgstr "Polje account_collected je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:633
+#, python-format
+msgid "The account_paid field is different.\n"
+msgstr "Polje account_paid je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:591
+#, python-format
+msgid "The amount field is different.\n"
+msgstr "Polje znesek je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:595
+#, python-format
+msgid "The applicable type field is different.\n"
+msgstr "Polje applicable type je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:608
+#, python-format
+msgid "The base sign field is different.\n"
+msgstr "Polje base sign je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:620
+#, python-format
+msgid "The base_code_id field is different.\n"
+msgstr "Polje base_code_id je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:599
+#, python-format
+msgid "The child depend field is different.\n"
+msgstr "Polje 'podrejeno odvisno' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:509
+#, python-format
+msgid "The code field is different.\n"
+msgstr "Polje koda je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:587
+#, python-format
+msgid "The description field is different.\n"
+msgstr "Polje opis je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:597
+#, python-format
+msgid "The domain field is different.\n"
+msgstr "Polje domena je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:612
+#, python-format
+msgid "The include base amount field is different.\n"
+msgstr "Polje 'vključi osnovni znesek' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:511
+#, python-format
+msgid "The info field is different.\n"
+msgstr "Polje podrobnosti je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:507
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:585
+#, python-format
+msgid "The name field is different.\n"
+msgstr "Polje naziv je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:704
+#, python-format
+msgid "The name is different.\n"
+msgstr "Naziv je drugačen.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:515
+#, python-format
+msgid "The notprintable field is different.\n"
+msgstr "Polje notprintable je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:520
+#, python-format
+msgid "The parent field is different.\n"
+msgstr "Nadrejeno polje je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:602
+#, python-format
+msgid "The parent_id field is different.\n"
+msgstr "Nadrejeno polje 'parent_id' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:604
+#, python-format
+msgid "The python compute field is different.\n"
+msgstr "Polje 'izvedi python' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:710
+#, python-format
+msgid "The reconcile is different.\n"
+msgstr "Uskladitev je drugačna.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:626
+#, python-format
+msgid "The ref_base_code_id field is different.\n"
+msgstr "Polje ref_base_code_id je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:629
+#, python-format
+msgid "The ref_tax_code_id field is different.\n"
+msgstr "Polje ref_tax_code_id je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:517
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:589
+#, python-format
+msgid "The sequence field is different.\n"
+msgstr "Polje 'zaporedje' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:513
+#, python-format
+msgid "The sign field is different.\n"
+msgstr "Polje sign je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:610
+#, python-format
+msgid "The tax sign field is different.\n"
+msgstr "Polje tax sign je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:623
+#, python-format
+msgid "The tax_code_id field is different.\n"
+msgstr "Polje tax_code_id je drugačno..\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:814
+#, python-format
+msgid "The template has accounts the fiscal position instance does not.\n"
+msgstr "Predloga vsebuje konte, ki jih instanca fiskalnega položaja ne vsebuje.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:792
+#, python-format
+msgid "The template has taxes the fiscal position instance does not.\n"
+msgstr "Predloga vsebuje davke, ki jih instanca fiskalnega položaja ne vsebuje.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:593
+#, python-format
+msgid "The type field is different.\n"
+msgstr "Polje 'tip' je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:706
+#, python-format
+msgid "The type is different.\n"
+msgstr "Tip je drugačen.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:614
+#, python-format
+msgid "The type tax use field is different.\n"
+msgstr "Polje type tax use je drugačno.\n"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:708
+#, python-format
+msgid "The user type is different.\n"
+msgstr "Polje 'tip uporabnika' je drugačno.\n"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid ""
+"This wizard will update your accounts, taxes, fiscal positions and financial"
+" reports according to the selected chart template"
+msgstr "Čarovnik bo posodobil konte, davke, fiskalne položaje in finančna poročila glede na izbrano predlogo kontnega plana."
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:573
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:697
+#, python-format
+msgid "To deactivate: not in the template"
+msgstr "Za deaktivacijo: ni v predlogi"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,type:0
+#: field:wizard.update.charts.accounts.financial.report,type:0
+#: field:wizard.update.charts.accounts.fiscal.position,type:0
+#: field:wizard.update.charts.accounts.tax,type:0
+#: field:wizard.update.charts.accounts.tax.code,type:0
+msgid "Type"
+msgstr "Tip"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_account:0
+msgid "Update accounts"
+msgstr "Posodobitev kontov"
+
+#. module: account_chart_update
+#: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
+#: model:ir.ui.menu,name:account_chart_update.menu_wizard
+msgid "Update chart of accounts"
+msgstr "Posodobitev kontnega plana"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Update chart of accounts from a template"
+msgstr "Posodobitev kontnega plana po predlogi"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts.account,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.financial.report,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.fiscal.position,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.tax,update_chart_wizard_id:0
+#: field:wizard.update.charts.accounts.tax.code,update_chart_wizard_id:0
+msgid "Update chart wizard"
+msgstr "Čarovnik za posodobitev kontnega plana"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_children_accounts_parent:0
+msgid "Update children accounts parent"
+msgstr "Posodobitev nadrejenega konta podrejenim"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_financial_reports:0
+msgid "Update financial report accounts"
+msgstr "Posodobi konte finančnega poročila"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_fiscal_position:0
+msgid "Update fiscal positions"
+msgstr "Posodobi fiskalne položaje"
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "Update records?"
+msgstr "Posodobitev zapisov?"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_tax_code:0
+msgid "Update tax codes"
+msgstr "Posodobitev davčnih kod"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,update_tax:0
+msgid "Update taxes"
+msgstr "Posodobitev davkov"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_financial_reports:0
+msgid "Update the financial reports mapping the accounts"
+msgstr "Posodobi mapiranje kontov finančnega poročila"
+
+#. module: account_chart_update
+#: help:wizard.update.charts.accounts,update_children_accounts_parent:0
+msgid ""
+"Update the parent of accounts that seem (based on the code) to be children "
+"of the newly created ones. If you had an account 430 with a child 4300000, "
+"and a 4300 account is created, the 4300000 parent will be set to 4300."
+msgstr "Posodobitev nadrejenih kontov, ki so (glede na kodo) podrejeni novo ustvarjenim kontom. Če ste imeli konto 430 s podrejenim kontom 4300000, in se ustvari konto 4300, bo 4300 nastavljen kot nadrejeni kontu 4300000."
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1106
+#, python-format
+msgid "Updated account %s.\n"
+msgstr "Konto %s posodobljen.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_accounts:0
+msgid "Updated accounts"
+msgstr "Posodobljeni konti"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_fps:0
+msgid "Updated fiscal positions"
+msgstr "Posodobljeni davčni položaji"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
+#, python-format
+msgid "Updated tax %s.\n"
+msgstr "Davek %s posodobljen.\n"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.tax.code,type:0
+msgid "Updated tax code"
+msgstr "Davčna koda posodobljena"
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:946
+#, python-format
+msgid "Updated tax code %s.\n"
+msgstr "Davčna koda %s posodobljena.\n"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax_codes:0
+msgid "Updated tax codes"
+msgstr "Posodobljene davčne kode"
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_taxes:0
+msgid "Updated taxes"
+msgstr "Posodobljeni davki"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.account,type:0
+#: selection:wizard.update.charts.accounts.fiscal.position,type:0
+#: selection:wizard.update.charts.accounts.tax,type:0
+msgid "Updated template"
+msgstr "Predloga posodobljena"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts.financial.report,type:0
+msgid "Warning"
+msgstr "Pozor"
+
+#. module: account_chart_update
+#: selection:wizard.update.charts.accounts,state:0
+msgid "Wizard completed"
+msgstr "Čarovnik je dokončan."
+
+#. module: account_chart_update
+#: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
+msgid "or"
+msgstr "ali"

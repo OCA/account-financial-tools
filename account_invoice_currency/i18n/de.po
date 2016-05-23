@@ -1,60 +1,25 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_invoice_currency
-#
+# * account_invoice_currency
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0-20130927-231103\n"
+"Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 11:53+0000\n"
-"PO-Revision-Date: 2015-01-06 17:39+0100\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Language: de\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_invoice_currency
-#: help:account.invoice,cc_amount_total:0
-msgid ""
-"Invoice total amount in the company currency (useful when invoice currency "
-"is different from company currency)."
-msgstr ""
-"Rechnungsgesamtbetrag in Hauswährung (Sinnvoll, wenn die Rechnungswährung "
-"sich von der Hauswährung unterscheidet)."
-
-#. module: account_invoice_currency
-#: field:account.invoice,cc_amount_total:0
-msgid "Company Cur. Total"
-msgstr "Gesamtbetrag in Hauswährung"
-
-#. module: account_invoice_currency
-#: field:account.invoice,cc_amount_tax:0
-msgid "Company Cur. Tax"
-msgstr "Steuer in Hauswährung"
-
-#. module: account_invoice_currency
-#: help:account.invoice,cc_amount_tax:0
-msgid ""
-"Invoice tax amount in the company currency (useful when invoice currency is "
-"different from company currency)."
-msgstr ""
-"Steuerbetrag in Hauswährung (Sinnvoll, wenn die Rechnungswährung sich von "
-"der Hauswährung unterscheidet)."
-
-#. module: account_invoice_currency
-#: help:account.invoice,cc_amount_untaxed:0
-msgid ""
-"Invoice untaxed amount in the company currency(useful when invoice currency "
-"is different from company currency)."
-msgstr ""
-"Steuerfreier Betrag in Hauswährung (Sinnvoll, wenn die Rechnungswährung sich "
-"von der Hauswährung unterscheidet)."
-
-#. module: account_invoice_currency
-#: view:account.invoice:0
+#: view:account.invoice:account_invoice_currency.invoice_company_currency_form
+#: view:account.invoice:account_invoice_currency.invoice_supplier_company_currency_form
 msgid "Amounts in company currency"
 msgstr "Beträge in Hauswährung"
 
@@ -62,8 +27,3 @@ msgstr "Beträge in Hauswährung"
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
 msgid "Invoice"
 msgstr "RechnungInvoice"
-
-#. module: account_invoice_currency
-#: field:account.invoice,cc_amount_untaxed:0
-msgid "Company Cur. Untaxed"
-msgstr "Steuerfreier Betrag in Hauswährung"

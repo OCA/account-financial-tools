@@ -18,7 +18,7 @@
 #
 ##############################################################################
 {"name": "Tax analysis",
- "version": "1.0",
+ "version": "8.0.1.0.0",
  "depends": ["base", "account"],
  "author": "Camptocamp SA,Odoo Community Association (OCA)",
  "category": 'Accounting & Finance',

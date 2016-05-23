@@ -22,7 +22,7 @@
 
 {
     'name': 'Journal Items Search Extension',
-    'version': '0.6',
+    'version': '8.0.0.6.0',
     'license': 'AGPL-3',
     'author': 'Noviat, Odoo Community Association (OCA)',
     'category': 'Accounting & Finance',
