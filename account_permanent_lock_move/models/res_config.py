@@ -10,8 +10,8 @@ class AccountConfigSettings(models.TransientModel):
     permanent_lock_date = fields.Date(
         string="Permanent Lock Date",
         related='company_id.permanent_lock_date',
-        help="Non-revertible closing of accounts prior to and inclusive of "
-        "this date. Use it for fiscal year locking instead of ""Lock Date"".")
+        help='Non-revertible closing of accounts prior to and inclusive of '
+        'this date. Use it for fiscal year locking instead of "Lock Date".')
 
     @api.multi
     def change_permanent_lock_date(self):
