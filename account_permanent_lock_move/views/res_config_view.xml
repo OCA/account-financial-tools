@@ -10,7 +10,7 @@
                     <field name="permanent_lock_date" class="oe_inline" readonly="1"/>
                 </div>
                 <div>
-                    <button type="object" name="change_permanent_lock_date" string="Permanently Lock Entries" class="oe_inline oe_stat_button"/>
+                    <button type="object" name="change_permanent_lock_date" string="Permanently Lock Entries" class="oe_inline"/>
                 </div>
             </xpath>
         </field>
