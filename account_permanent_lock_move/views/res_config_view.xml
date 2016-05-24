@@ -7,10 +7,10 @@
             <xpath expr="//field[@name='fiscalyear_lock_date']/parent::div" position="after">
                 <div>
                     <label for="permanent_lock_date"/>
-                    <field name="permanent_lock_date" class="oe_inline" readonly="1"/>
+                    <field name="permanent_lock_date" readonly="1"/>
                 </div>
                 <div>
-                    <button type="object" name="change_permanent_lock_date" string="Permanently Lock Entries" class="oe_inline"/>
+                    <button type="object" name="change_permanent_lock_date" string="Permanently Lock Entries" class="btn-primary"/>
                 </div>
             </xpath>
         </field>

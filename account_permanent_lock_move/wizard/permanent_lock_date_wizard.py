@@ -19,7 +19,7 @@ class PermanentLockDateWizard(models.TransientModel):
         if (company.permanent_lock_date and
                 self.lock_date < company.permanent_lock_date):
             raise UserError(
-                _("You cannot set the permanent lock date in the past!")
+                _("You cannot set the permanent lock date in the past.")
             )
         # Then check if unposted moves are present before the date
         moves = self.env['account.move'].search(
@@ -29,7 +29,7 @@ class PermanentLockDateWizard(models.TransientModel):
         if moves:
             raise UserError(
                 _("You cannot permanently lock since entries "
-                  "are still unposted before this date!")
+                  "are still unposted before this date.")
             )
 
         company.permanent_lock_date = self.lock_date

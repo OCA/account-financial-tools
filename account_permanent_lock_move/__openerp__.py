@@ -11,7 +11,6 @@
     "data": [
         "views/res_config_view.xml",
         "wizard/permanent_lock_date_wizard.xml",
-        "security/ir.model.access.csv",
     ],
     'license': 'AGPL-3',
     "auto_install": False,
