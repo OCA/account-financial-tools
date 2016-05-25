@@ -1,156 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
 
-        <!-- Wizard for Multi Charts of Accounts -->
+<record id="view_update_multi_chart" model="ir.ui.view">
+    <field name="name">Update Chart of Accounts from a Chart Template</field>
+    <field name="model">wizard.update.charts.accounts</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <field
+                    name="state"
+                    select="2"
+                    widget="statusbar"
+                    statusbar_visible="init,ready,done"
+                    statusbar_colors='{"ready":"blue","done":"blue"}' />
+            </header>
+            <group attrs="{'invisible':[('state','!=','init')]}">
+                <h3>
+                    <p><center>This wizard will update your accounts, taxes and fiscal positions according to the selected chart template</center></p>
+                </h3>
+            </group>
+            <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
+                <field name="company_id"
+                       attrs="{'invisible':[('state','!=','init')]}"
+                        />
+                <field name="code_digits" attrs="{'invisible':[('state','!=','init')]}" />
+                <field name="chart_template_id"
+                       domain="[('visible', '=', True)]"
+                       attrs="{'invisible': [('state','!=','init')], 'required': True}"
+                        />
+                <field name="lang" attrs="{'invisible':[('state','!=','init')]}" />
+            </group>
+            <group attrs="{'invisible':[('state','!=','init')]}">
+                <group string="Update records?">
+                    <field name="update_tax" />
+                    <field name="update_account" />
+                    <field name="update_fiscal_position" />
+                </group>
+                <group string="Other options" attrs="{'invisible':[('state','!=','init')]}">
+                    <field name="continue_on_errors" />
+                </group>
+            </group>
 
-        <record id="view_update_multi_chart" model="ir.ui.view">
-            <field name="name">Update Chart of Accounts from a Chart Template
-            </field>
-            <field name="model">wizard.update.charts.accounts</field>
-            <field name="arch" type="xml">
-                <form string="Update chart of accounts from a template" version="7.0">
-                    <header>
-                        <field name="state" select="2" widget="statusbar"
-                            statusbar_visible="init,ready,done" statusbar_colors='{"ready":"blue","done":"blue"}' />
-                    </header>
-                    <group attrs="{'invisible':[('state','!=','init')]}">
-                        <h3>
-                            <p><center>This wizard will update your accounts, taxes and fiscal positions according to the selected chart template</center></p>
-                        </h3>
-                    </group>
-                    <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
-                        <field name="company_id"
-                               attrs="{'invisible':[('state','!=','init')]}"
-                                />
-                        <field name="code_digits" attrs="{'invisible':[('state','!=','init')]}" />
-                        <field name="chart_template_id"
-                               domain="[('visible', '=', True)]"
-                               attrs="{'invisible': [('state','!=','init')], 'required': True}"
-                                />
-                        <field name="lang" attrs="{'invisible':[('state','!=','init')]}" />
-                    </group>
-                    <group attrs="{'invisible':[('state','!=','init')]}">
-                        <group string="Update records?">
-                            <field name="update_tax_code" />
-                            <field name="update_tax" />
-                            <field name="update_account" />
-                            <field name="update_fiscal_position" />
-                        </group>
-                        <group string="Other options" attrs="{'invisible':[('state','!=','init')]}">
-                            <field name="update_children_accounts_parent" />
-                            <field name="continue_on_errors" />
-                        </group>
-                    </group>
+            <group attrs="{'invisible':[('state','!=','init')]}">
+                <h5>
+                    <p>If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)</p>
+                    <p>Note: Only the changed fields are updated.</p>
+                </h5>
+            </group>
+            <group attrs="{'invisible':[('state','!=','ready'),]}"
+                string="Records to create/update">
+                <notebook colspan="4">
+                    <page string="Taxes" attrs="{'invisible': [('update_tax', '=', False)]}">
+                        <field name="tax_ids" nolabel="1">
+                            <tree string="Taxes" colors="red:type=='updated'">
+                                <field name="tax_id" />
+                                <field name="update_tax_id" />
+                                <field name="type_tax_use"/>
+                                <field name="notes"/>
+                                <field name="type"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Accounts" attrs="{'invisible': [('update_account', '=', False)]}">
+                        <field name="account_ids" nolabel="1">
+                            <tree string="Accounts" colors="red:type=='updated'">
+                                <field name="account_id" />
+                                <field name="update_account_id" />
+                                <field name="notes"/>
+                                <field name="type"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Fiscal positions" attrs="{'invisible': [('update_fiscal_position', '=', False)]}">
+                        <field name="fiscal_position_ids" nolabel="1">
+                            <tree string="Fiscal positions" colors="red:type=='updated'">
+                                <field name="fiscal_position_id" />
+                                <field name="update_fiscal_position_id" />
+                                <field name="notes"/>
+                                <field name="type"/>
+                            </tree>
+                        </field>
+                    </page>
 
-                    <group attrs="{'invisible':[('state','!=','init')]}">
-                        <h5>
-                            <p>If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)</p>
-                            <p>Note: Not all the fields are tested for changes, just the main ones</p>
-                        </h5>
-                    </group>
-                    <group attrs="{'invisible':[('state','!=','ready'),]}"
-                        string="Records to create/update">
-                        <notebook colspan="4">
-                            <page string="Tax codes" attrs="{'invisible': [('update_tax_code', '=', False)]}">
-                                <field name="tax_code_ids">
-                                    <tree string="Tax codes" colors="red:type=='updated'">
-                                        <field name="tax_code_id" />
-                                        <field name="update_tax_code_id" />
-                                        <field name="notes" readonly="1" />
-                                        <field name="type" invisible="1" />
-                                    </tree>
-                                </field>
-                            </page>
+                </notebook>
+            </group>
 
-                            <page string="Taxes" attrs="{'invisible': [('update_tax', '=', False)]}">
-                                <field name="tax_ids" nolabel="1">
-                                    <tree string="Taxes" colors="red:type=='updated'">
-                                        <field name="tax_id" />
-                                        <field name="update_tax_id" />
-                                        <field name="notes" readonly="1"/>
-                                        <field name="type" invisible="1" />
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Accounts" attrs="{'invisible': [('update_account', '=', False)]}">
-                                <field name="account_ids" nolabel="1">
-                                    <tree string="Accounts" colors="red:type=='updated'">
-                                        <field name="account_id" />
-                                        <field name="update_account_id" />
-                                        <field name="notes" readonly="1"/>
-                                        <field name="type" invisible="1" />
-                                    </tree>
-                                </field>
-                            </page>
-                            <page string="Fiscal positions" attrs="{'invisible': [('update_fiscal_position', '=', False)]}">
-                                <field name="fiscal_position_ids" nolabel="1">
-                                    <tree string="Fiscal positions" colors="red:type=='updated'">
-                                        <field name="fiscal_position_id" />
-                                        <field name="update_fiscal_position_id" />
-                                        <field name="notes" readonly="1" />
-                                        <field name="type" invisible="1" />
-                                    </tree>
-                                </field>
-                            </page>
+            <group col="4" colspan="4"
+                attrs="{'invisible':[('state','!=','done'),]}">
+                <separator colspan="4" string="Log" />
+                <field name="log" colspan="4" nolabel="1" />
+                <group colspan="4">
+                    <separator colspan="4" string="Summary of created objects" />
+                    <field name="new_taxes" />
+                    <field name="new_accounts" />
+                    <field name="new_fps" />
+                </group>
+                <group colspan="4">
+                    <separator colspan="4" string="Summary of updated objects" />
+                    <field name="updated_taxes" />
+                    <field name="deleted_taxes" />
+                    <field name="updated_accounts" />
+                    <field name="updated_fps" />
+                </group>
+            </group>
 
-                        </notebook>
-                    </group>
+            <footer>
+                <span states="init">
+                    <button name="action_find_records" string="Next" class="oe_highlight" type="object" />
+                </span>
+                <span states="ready">
+                    <button name="action_init" string="Previous" type="object" />
+                    <button name="action_update_records" string="Create/Update" type="object" class="oe_highlight" />
+                </span>
+                <span states="init,ready"> or </span>
+                <button special="cancel" string="Close" class="oe_link" />
+            </footer>
+        </form>
+    </field>
+</record>
 
-                    <group col="4" colspan="4"
-                        attrs="{'invisible':[('state','!=','done'),]}">
-                        <separator colspan="4" string="Log" />
-                        <field name="log" colspan="4" nolabel="1" />
-                        <group colspan="4">
-                            <separator colspan="4" string="Summary of created objects" />
-                            <field name="new_tax_codes" />
-                            <field name="new_taxes" />
-                            <field name="new_accounts" />
-                            <field name="new_fps" />
-                        </group>
-                        <group colspan="4">
-                            <separator colspan="4" string="Summary of updated objects" />
-                            <field name="updated_tax_codes" />
-                            <field name="updated_taxes" />
-                            <field name="updated_accounts" />
-                            <field name="updated_fps" />
-                        </group>
-                        <group colspan="4">
-                            <separator colspan="4" string="Summary of deleted objects" />
-                            <field name="deleted_tax_codes" />
-                        </group>
-                    </group>
+<record id="action_wizard_update_chart" model="ir.actions.act_window">
+    <field name="name">Update chart of accounts</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">wizard.update.charts.accounts</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
 
-                    <footer>
-                        <div states="init">
-                            <button name="action_find_records" string="Next" class="oe_highlight" type="object" />
-                            or
-                            <button special="cancel" string="Cancel" class="oe_link" />
-                        </div>
-                        <div states="ready">
-                            <button name="action_init" string="Previous" type="object" />
-                            <button name="action_update_records" string="Create/Update" type="object" class="oe_highlight" />
-                            or
-                            <button special="cancel" string="Cancel" class="oe_link" />
-                        </div>
-                        <div states="done">
-                            <button special="cancel" string="Close" class="oe_link" />
-                        </div>
-                    </footer>
-                </form>
-            </field>
-        </record>
-
-        <record id="action_wizard_update_chart" model="ir.actions.act_window">
-            <field name="name">Update chart of accounts</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">wizard.update.charts.accounts</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-
-        <menuitem sequence="0" parent="account.account_account_menu" action="action_wizard_update_chart" id="menu_wizard" />
-
-    </data>
-</openerp>
+</odoo>
