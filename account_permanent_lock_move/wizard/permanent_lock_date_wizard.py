@@ -28,8 +28,8 @@ class PermanentLockDateWizard(models.TransientModel):
                 ('state', '=', 'draft')])
         if moves:
             raise UserError(
-                _("You cannot permanently lock since entries "
-                  "are still unposted before this date.")
+                _("You cannot set the permanent lock date since entries are "
+                  "still unposted before this date.")
             )
 
         company.permanent_lock_date = self.lock_date
