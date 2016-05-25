@@ -23,9 +23,9 @@ class PermanentLockDateWizard(models.TransientModel):
             )
         # Then check if unposted moves are present before the date
         moves = self.env['account.move'].search(
-            [('company_id', '=', self.id),
-                ('date', '<=', self.lock_date),
-                ('state', '=', 'draft')])
+            [('company_id', '=', company.id),
+             ('date', '<=', self.lock_date),
+             ('state', '=', 'draft')])
         if moves:
             raise UserError(
                 _("You cannot set the permanent lock date since entries are "
