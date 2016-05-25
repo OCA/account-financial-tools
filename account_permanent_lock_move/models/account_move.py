@@ -22,3 +22,20 @@ class AccountMove(models.Model):
         # Add check for button_cancel, as it does not use ORM
         self._check_lock_date()
         return super(AccountMove, self).button_cancel()
+
+    @api.multi
+    def create(self, vals):
+        # Add _check_lock_date for create of account.move,
+        # as it is not done by default
+        result = super(AccountMove, self).create(vals)
+        result._check_lock_date()
+        return result
+
+    @api.multi
+    def write(self, vals):
+        # Add _check_lock_date for write of account.move,
+        # as it is not done by default
+        self._check_lock_date()
+        result = super(AccountMove, self).write(vals)
+        self._check_lock_date()
+        return result
