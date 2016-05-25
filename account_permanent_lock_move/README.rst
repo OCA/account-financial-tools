@@ -8,15 +8,16 @@ Permanent Lock Move
 
 This module extends the functionality of the basic "lock date"
 functionality in invoicing, in order to add a more definitive
-lock date (which does not allow to be set at a previous date,
-or emptied, and only accepts unposted moves)
+lock date (which cannot be empty or set in the past, and only
+accepts unposted moves)
 
 Configuration
 =============
 
 To configure this module, you need to:
 
-* Go to Invoicing -> Settings, and set the Permanent Lock Date.
+#. Go to Invoicing -> Settings
+#. Set the Permanent Lock Date.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
