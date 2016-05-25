@@ -23,7 +23,7 @@ class AccountMove(models.Model):
         self._check_lock_date()
         return super(AccountMove, self).button_cancel()
 
-    @api.multi
+    @api.model
     def create(self, vals):
         # Add _check_lock_date for create of account.move,
         # as it is not done by default
