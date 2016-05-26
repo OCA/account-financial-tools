@@ -31,5 +31,4 @@
         'wizard/wizard_chart_update_view.xml',
         'views/account_config_settings_view.xml',
     ],
-    "active": False,
 }
