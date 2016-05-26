@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_account_config_settings_permanent_lock" model="ir.ui.view">
+        <field name="name">account settings permanent lock</field>
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fiscalyear_lock_date']/parent::div" position="after">
+                <div>
+                    <label for="permanent_lock_date"/>
+                    <field name="permanent_lock_date" readonly="1"/>
+                </div>
+                <div>
+                    <button type="object" name="change_permanent_lock_date" string="Permanently Lock Entries" class="btn-primary"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
