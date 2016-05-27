@@ -22,7 +22,9 @@
 ##############################################################################
 
 from . import account_asset_change_duration
+from . import account_asset_revaluation
 from . import wizard_asset_compute
 from . import account_asset_remove
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

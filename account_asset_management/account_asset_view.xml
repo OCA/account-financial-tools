@@ -23,6 +23,7 @@
               <field name="account_plus_value_id"/>
               <field name="account_min_value_id"/>
               <field name="account_residual_value_id"/>
+              <field name="account_revaluation_value_id"/>
             </group>
             <group string="Depreciation Dates">
               <field name="method_time" on_change="onchange_method_time(method_time)"/>
@@ -82,6 +83,9 @@
             <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
                     attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
                     help="Asset removal."/>
+            <button name="revaluate" string="Revaluate" type="object" groups="account.group_account_manager"
+                    attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
+                    help="Asset revaluation"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"/>
           </header>
           <sheet>

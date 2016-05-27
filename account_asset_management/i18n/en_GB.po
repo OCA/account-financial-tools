@@ -867,6 +867,12 @@ msgid "Generate Asset Removal entries"
 msgstr ""
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/account_asset.py:796
+#, python-format
+msgid "Generate Asset Revaluation entries"
+msgstr ""
+
+#. module: account_asset_management
 #: constraint:account.account:0
 msgid ""
 "The Asset Account defined in the Asset Category must be equal to the "
@@ -1150,6 +1156,12 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:327
 #, python-format
 msgid "The removal date must be after the last depreciation date."
+msgstr ""
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:327
+#, python-format
+msgid "The revaluation date must be after the last depreciation date."
 msgstr ""
 
 #. module: account_asset_management

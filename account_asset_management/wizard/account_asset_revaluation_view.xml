@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record model="ir.ui.view" id="asset_revaluation_form">
+      <field name="name">account.asset.revaluation.form</field>
+      <field name="model">account.asset.revaluation</field>
+      <field name="arch" type="xml">
+        <form string="Revaluate Asset" version="7.0">
+          <group colspan="2" col="2">
+            <field name="date_revaluation"/>
+            <field name="previous_value" readonly="1"/>
+            <field name="revaluated_value"/>
+            <field name="account_revaluation_id"/>
+          </group>
+          <separator string="Notes"/>
+          <field name="note"/>
+          <footer>
+            <button name="revaluate" string="Revaluate" type="object" class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_asset_revaluate" model="ir.actions.act_window">
+      <field name="name">Revaluate Asset</field>
+      <field name="res_model">account.asset.revaluation</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="asset_revaluation_form"/>
+      <field name="target">new</field>
+    </record>
+
+  </data>
+</openerp>

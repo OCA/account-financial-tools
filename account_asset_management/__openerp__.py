@@ -66,6 +66,7 @@ Contributors
     'data': [
         'security/account_asset_security.xml',
         'security/ir.model.access.csv',
+        'wizard/account_asset_revaluation_view.xml',
         'wizard/account_asset_change_duration_view.xml',
         'wizard/wizard_asset_compute_view.xml',
         'wizard/account_asset_remove_view.xml',
