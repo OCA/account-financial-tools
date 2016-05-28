@@ -6,8 +6,9 @@
 # Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
-# CarlesAntoli <carlesantoli@hotmail.com>, 2015
-# Davor Bojkić <bole@dajmi5.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Giacomo <giacomo.spettoli@gmail.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -17,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 08:25+0000\n"
-"PO-Revision-Date: 2016-03-07 17:27+0000\n"
+"POT-Creation-Date: 2016-05-21 00:52+0000\n"
+"PO-Revision-Date: 2016-05-22 18:16+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -554,6 +555,19 @@ msgid "Depreciation Name"
 msgstr "Nome da Depreciação"
 
 #. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Nome a exibir"
+
+#. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
 msgstr "Feito"
@@ -771,6 +785,19 @@ msgstr "Item do Diário"
 #: help:account.asset.remove,period_id:0
 msgid "Keep empty to use the period of the removal ate."
 msgstr "Manter vazio para usar o período da data de remoção."
+
+#. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Modificado pela última vez em"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
