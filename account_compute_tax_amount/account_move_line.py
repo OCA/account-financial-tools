@@ -21,7 +21,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
-
+from openerp.tools import float_is_zero
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
@@ -31,7 +31,8 @@ class AccountMoveLine(models.Model):
 
     @api.one
     def force_compute_tax_amount(self):
-        if self.tax_code_id:
+        precision_digits = self.env['decimal.precision'].precision_get('Account')
+        if self.tax_code_id and not float_is_zero(self.credit - self.debit, precision_digits):
             self.tax_amount = self.credit - self.debit
 
     @api.cr_uid_context
