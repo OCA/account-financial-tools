@@ -55,7 +55,7 @@
                         <group string="Check Payments" name="check_payments">
                             <field name="check_payment_ids" nolabel="1"
                                    widget="many2many"
-                                   domain="[('reconcile_id', '=', False),
+                                   domain="[('reconciled', '=', False),
                                             ('debit', '>', 0),
                                             ('check_deposit_id', '=', False),
                                             ('currency_id', '=', currency_none_same_company_id),
@@ -119,7 +119,7 @@
 
         <menuitem action="action_check_deposit_tree"
                   id="menu_check_deposit_tree"
-                  parent="account.menu_finance_bank_and_cash"
+                  parent="account.menu_finance_entries"
                   sequence="20"/>
 
     </data>
