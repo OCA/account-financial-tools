@@ -64,8 +64,8 @@ class AccountCheckDeposit(models.Model):
 
     name = fields.Char(string='Name', size=64, readonly=True, default='/')
     check_payment_ids = fields.One2many(
-        'account.move.line', 'check_deposit_id', string='Check Payments',)
-        # states={'done': [('readonly', '=', True)]})
+        'account.move.line', 'check_deposit_id', string='Check Payments',
+        states={'done': [('readonly', '=', True)]})
     deposit_date = fields.Date(
         string='Deposit Date', required=True,
         states={'done': [('readonly', '=', True)]},
@@ -82,9 +82,10 @@ class AccountCheckDeposit(models.Model):
     currency_none_same_company_id = fields.Many2one(
         'res.currency', compute='_compute_check_deposit',
         string='Currency (False if same as company)')
-    state = fields.Selection([
-        ('draft', 'Draft'),
-        ('done', 'Done'),
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('done', 'Done'),
         ], string='Status', default='draft', readonly=True)
     move_id = fields.Many2one(
         'account.move', string='Journal Entry', readonly=True)
@@ -189,7 +190,7 @@ class AccountCheckDeposit(models.Model):
             'partner_id': line.partner_id.id,
             'currency_id': line.currency_id.id or False,
             'amount_currency': line.amount_currency * -1,
-            }
+        }
 
     @api.model
     def _prepare_counterpart_move_lines_vals(
@@ -202,25 +203,24 @@ class AccountCheckDeposit(models.Model):
             'partner_id': False,
             'currency_id': deposit.currency_none_same_company_id.id or False,
             'amount_currency': total_amount_currency,
-            }
+        }
 
     @api.multi
     def validate_deposit(self):
         am_obj = self.env['account.move']
-        aml_obj = self.env['account.move.line']
         for deposit in self:
             move_vals = self._prepare_account_move_vals(deposit)
-            move = am_obj.create(move_vals)
             total_debit = 0.0
             total_amount_currency = 0.0
             to_reconcile_lines = []
+            mv_lines_vals = []
             for line in deposit.check_payment_ids:
                 total_debit += line.debit
                 total_amount_currency += line.amount_currency
                 line_vals = self._prepare_move_line_vals(line)
-                line_vals['move_id'] = move.id
-                move_line = aml_obj.create(line_vals)
-                to_reconcile_lines.append(line + move_line)
+                mv_lines_vals.append((0, 0, line_vals))
+
+                to_reconcile_lines.append(line)
 
             # Create counter-part
             if not deposit.company_id.check_deposit_account_id:
@@ -230,8 +230,10 @@ class AccountCheckDeposit(models.Model):
 
             counter_vals = self._prepare_counterpart_move_lines_vals(
                 deposit, total_debit, total_amount_currency)
-            counter_vals['move_id'] = move.id
-            aml_obj.create(counter_vals)
+            mv_lines_vals.append((0, 0, counter_vals))
+            move_vals['line_ids'] = mv_lines_vals
+            move = am_obj.create(move_vals)
+            to_reconcile_lines.extend(move.line_ids)
 
             move.post()
             deposit.write({'state': 'done', 'move_id': move.id})
