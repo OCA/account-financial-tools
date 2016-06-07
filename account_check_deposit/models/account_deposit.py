@@ -2,23 +2,13 @@
 ###############################################################################
 #
 #   account_check_deposit for Odoo
-#   Copyright (C) 2012-2015 Akretion (http://www.akretion.com/)
+#   Copyright (C) 2012-2016 Akretion (http://www.akretion.com/)
 #   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 #   @author: Chafique DELLI <chafique.delli@akretion.com>
 #   @author: Alexis de Lattre <alexis.delattre@akretion.com>
+#   @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 #
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU Affero General Public License as
-#   published by the Free Software Foundation, either version 3 of the
-#   License, or (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU Affero General Public License for more details.
-#
-#   You should have received a copy of the GNU Affero General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 #
 ###############################################################################
 
@@ -37,7 +27,7 @@ class AccountCheckDeposit(models.Model):
     @api.depends(
         'company_id', 'currency_id', 'check_payment_ids.debit',
         'check_payment_ids.amount_currency',
-        'move_id.line_id.reconcile_id')
+        'move_id.line_ids.reconciled')
     def _compute_check_deposit(self):
         for deposit in self:
             total = 0.0
@@ -53,8 +43,8 @@ class AccountCheckDeposit(models.Model):
                 else:
                     total += line.debit
             if deposit.move_id:
-                for line in deposit.move_id.line_id:
-                    if line.debit > 0 and line.reconcile_id:
+                for line in deposit.move_id.line_ids:
+                    if line.debit > 0 and line.reconciled:
                         reconcile = True
             deposit.total_amount = total
             deposit.is_reconcile = reconcile
@@ -82,9 +72,10 @@ class AccountCheckDeposit(models.Model):
     currency_none_same_company_id = fields.Many2one(
         'res.currency', compute='_compute_check_deposit',
         string='Currency (False if same as company)')
-    state = fields.Selection([
-        ('draft', 'Draft'),
-        ('done', 'Done'),
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('done', 'Done'),
         ], string='Status', default='draft', readonly=True)
     move_id = fields.Many2one(
         'account.move', string='Journal Entry', readonly=True)
@@ -93,7 +84,7 @@ class AccountCheckDeposit(models.Model):
         domain="[('company_id', '=', company_id)]",
         states={'done': [('readonly', '=', True)]})
     line_ids = fields.One2many(
-        'account.move.line', related='move_id.line_id',
+        'account.move.line', related='move_id.line_ids',
         string='Lines', readonly=True)
     company_id = fields.Many2one(
         'res.company', string='Company', required=True,
@@ -154,8 +145,8 @@ class AccountCheckDeposit(models.Model):
                 # It will raise here if journal_id.update_posted = False
                 deposit.move_id.button_cancel()
                 for line in deposit.check_payment_ids:
-                    if line.reconcile_id:
-                        line.reconcile_id.unlink()
+                    if line.reconciled:
+                        line.remove_move_reconcile()
                 deposit.move_id.unlink()
             deposit.write({'state': 'draft'})
         return True
@@ -170,16 +161,12 @@ class AccountCheckDeposit(models.Model):
     @api.model
     def _prepare_account_move_vals(self, deposit):
         date = deposit.deposit_date
-        period_obj = self.env['account.period']
-        period_ids = period_obj.find(dt=date)
-        # period_ids will always have a value, cf the code of find()
         move_vals = {
             'journal_id': deposit.journal_id.id,
             'date': date,
-            'period_id': period_ids[0].id,
             'name': _('Check Deposit %s') % deposit.name,
             'ref': deposit.name,
-            }
+        }
         return move_vals
 
     @api.model
@@ -193,7 +180,7 @@ class AccountCheckDeposit(models.Model):
             'partner_id': line.partner_id.id,
             'currency_id': line.currency_id.id or False,
             'amount_currency': line.amount_currency * -1,
-            }
+        }
 
     @api.model
     def _prepare_counterpart_move_lines_vals(
@@ -206,25 +193,24 @@ class AccountCheckDeposit(models.Model):
             'partner_id': False,
             'currency_id': deposit.currency_none_same_company_id.id or False,
             'amount_currency': total_amount_currency,
-            }
+        }
 
     @api.multi
     def validate_deposit(self):
         am_obj = self.env['account.move']
-        aml_obj = self.env['account.move.line']
         for deposit in self:
             move_vals = self._prepare_account_move_vals(deposit)
-            move = am_obj.create(move_vals)
             total_debit = 0.0
             total_amount_currency = 0.0
             to_reconcile_lines = []
+            mv_lines_vals = []
             for line in deposit.check_payment_ids:
                 total_debit += line.debit
                 total_amount_currency += line.amount_currency
                 line_vals = self._prepare_move_line_vals(line)
-                line_vals['move_id'] = move.id
-                move_line = aml_obj.create(line_vals)
-                to_reconcile_lines.append(line + move_line)
+                mv_lines_vals.append((0, 0, line_vals))
+
+                to_reconcile_lines.append(line)
 
             # Create counter-part
             if not deposit.company_id.check_deposit_account_id:
@@ -234,8 +220,10 @@ class AccountCheckDeposit(models.Model):
 
             counter_vals = self._prepare_counterpart_move_lines_vals(
                 deposit, total_debit, total_amount_currency)
-            counter_vals['move_id'] = move.id
-            aml_obj.create(counter_vals)
+            mv_lines_vals.append((0, 0, counter_vals))
+            move_vals['line_ids'] = mv_lines_vals
+            move = am_obj.create(move_vals)
+            to_reconcile_lines.extend(move.line_ids)
 
             move.post()
             deposit.write({'state': 'done', 'move_id': move.id})
@@ -257,8 +245,8 @@ class AccountCheckDeposit(models.Model):
     @api.onchange('journal_id')
     def onchange_journal_id(self):
         if self.journal_id:
-            if self.journal_id.currency:
-                self.currency_id = self.journal_id.currency
+            if self.journal_id.currency_id:
+                self.currency_id = self.journal_id.currency_id
             else:
                 self.currency_id = self.journal_id.company_id.currency_id
 
@@ -275,7 +263,4 @@ class ResCompany(models.Model):
 
     check_deposit_account_id = fields.Many2one(
         'account.account', string='Account for Check Deposits', copy=False,
-        domain=[
-            ('type', '<>', 'view'),
-            ('type', '<>', 'closed'),
-            ('reconcile', '=', True)])
+        domain=[('reconcile', '=', True)])
