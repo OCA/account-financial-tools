@@ -37,7 +37,7 @@ class AccountCheckDeposit(models.Model):
     @api.depends(
         'company_id', 'currency_id', 'check_payment_ids.debit',
         'check_payment_ids.amount_currency',
-        'move_id.line_id.reconcile_id')
+        'move_id.line_ids.reconciled')
     def _compute_check_deposit(self):
         for deposit in self:
             total = 0.0
@@ -53,8 +53,8 @@ class AccountCheckDeposit(models.Model):
                 else:
                     total += line.debit
             if deposit.move_id:
-                for line in deposit.move_id.line_id:
-                    if line.debit > 0 and line.reconcile_id:
+                for line in deposit.move_id.line_ids:
+                    if line.debit > 0 and line.reconciled:
                         reconcile = True
             deposit.total_amount = total
             deposit.is_reconcile = reconcile
@@ -64,8 +64,8 @@ class AccountCheckDeposit(models.Model):
 
     name = fields.Char(string='Name', size=64, readonly=True, default='/')
     check_payment_ids = fields.One2many(
-        'account.move.line', 'check_deposit_id', string='Check Payments',
-        states={'done': [('readonly', '=', True)]})
+        'account.move.line', 'check_deposit_id', string='Check Payments',)
+        # states={'done': [('readonly', '=', True)]})
     deposit_date = fields.Date(
         string='Deposit Date', required=True,
         states={'done': [('readonly', '=', True)]},
@@ -93,7 +93,7 @@ class AccountCheckDeposit(models.Model):
         domain="[('company_id', '=', company_id)]",
         states={'done': [('readonly', '=', True)]})
     line_ids = fields.One2many(
-        'account.move.line', related='move_id.line_id',
+        'account.move.line', related='move_id.line_ids',
         string='Lines', readonly=True)
     company_id = fields.Many2one(
         'res.company', string='Company', required=True,
@@ -154,8 +154,8 @@ class AccountCheckDeposit(models.Model):
                 # It will raise here if journal_id.update_posted = False
                 deposit.move_id.button_cancel()
                 for line in deposit.check_payment_ids:
-                    if line.reconcile_id:
-                        line.reconcile_id.unlink()
+                    if line.reconciled:
+                        line.remove_move_reconcile()
                 deposit.move_id.unlink()
             deposit.write({'state': 'draft'})
         return True
@@ -170,16 +170,12 @@ class AccountCheckDeposit(models.Model):
     @api.model
     def _prepare_account_move_vals(self, deposit):
         date = deposit.deposit_date
-        period_obj = self.env['account.period']
-        period_ids = period_obj.find(dt=date)
-        # period_ids will always have a value, cf the code of find()
         move_vals = {
             'journal_id': deposit.journal_id.id,
             'date': date,
-            'period_id': period_ids[0].id,
             'name': _('Check Deposit %s') % deposit.name,
             'ref': deposit.name,
-            }
+        }
         return move_vals
 
     @api.model
@@ -257,8 +253,8 @@ class AccountCheckDeposit(models.Model):
     @api.onchange('journal_id')
     def onchange_journal_id(self):
         if self.journal_id:
-            if self.journal_id.currency:
-                self.currency_id = self.journal_id.currency
+            if self.journal_id.currency_id:
+                self.currency_id = self.journal_id.currency_id
             else:
                 self.currency_id = self.journal_id.company_id.currency_id
 
@@ -275,7 +271,4 @@ class ResCompany(models.Model):
 
     check_deposit_account_id = fields.Many2one(
         'account.account', string='Account for Check Deposits', copy=False,
-        domain=[
-            ('type', '<>', 'view'),
-            ('type', '<>', 'closed'),
-            ('reconcile', '=', True)])
+        domain=[('reconcile', '=', True)])
