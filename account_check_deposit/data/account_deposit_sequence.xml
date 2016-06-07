@@ -9,12 +9,6 @@
 <openerp>
     <data noupdate="1">
 
-        <!-- Sequences for account.check.deposit -->
-        <record id="seq_type_account_check_deposit" model="ir.sequence.type">
-            <field name="name">Account Check Deposit</field>
-            <field name="code">account.check.deposit</field>
-        </record>
-
         <record id="seq_account_check_deposit" model="ir.sequence">
             <field name="name">Account Check Deposit</field>
             <field name="code">account.check.deposit</field>
