@@ -43,13 +43,13 @@ class AccountInvoice(models.Model):
             if self.move_id:
                 # Accounts to compute amount_untaxed
                 line_accounts = set([x.account_id.id for x in
-                                     self.invoice_line])
+                                     self.invoice_line_ids])
                 # Accounts to compute amount_tax
                 tax_accounts = set([x.account_id.id for x in
-                                    self.tax_line if x.amount != 0])
+                                    self.tax_line_ids if x.amount != 0])
                 # The company currency amounts are the debit-credit
                 # amounts in the account moves
-                for line in self.move_id.line_id:
+                for line in self.move_id.line_ids:
                     if line.account_id.id in line_accounts:
                         self.cc_amount_untaxed += line.debit - line.credit
                     if line.account_id.id in tax_accounts:

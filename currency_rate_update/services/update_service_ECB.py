@@ -49,7 +49,7 @@ class ECB_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
         url = 'http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml'
         # Important : as explained on the ECB web site, the currencies are
         # at the beginning of the afternoon ; so, until 3 p.m. Paris time

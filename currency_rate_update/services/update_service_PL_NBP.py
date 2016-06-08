@@ -51,7 +51,7 @@ class PL_NBP_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
         # LastA.xml is always the most recent one
         url = 'http://www.nbp.pl/kursy/xml/LastA.xml'
         # We do not want to update the main currency

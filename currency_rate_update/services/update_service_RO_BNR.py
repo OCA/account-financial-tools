@@ -50,7 +50,7 @@ class RO_BNR_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
         url = 'http://www.bnr.ro/nbrfxrates.xml'
         # we do not want to update the main currency
         if main_currency in currency_array:

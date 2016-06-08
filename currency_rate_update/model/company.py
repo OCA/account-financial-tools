@@ -36,7 +36,7 @@ class res_company(models.Model):
 
     @api.one
     def button_refresh_currency(self):
-        """Refresh the currencies rates !!for all companies now"""
+        """Refresh the currencies rates for all companies now"""
         self.services_to_use.refresh_currency()
 
     _inherit = "res.company"
@@ -51,7 +51,7 @@ class res_company(models.Model):
         string='Multi company currency', translate=True,
         compute="_compute_multi_curr_enable",
         help="When this option is unchecked it will allow users "
-             "to set a distinct currency updates on each company."
+             "to set distinct currency updates on each company."
         )
     # List of services to fetch rates
     services_to_use = fields.One2many(

@@ -122,7 +122,12 @@ PL_NBP_supported_currency_array = [
     "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
     "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
-supported_currecies = {
+UK_BOE_supported_currency_array = [
+    "AUD", "CAD", "CNY", "CZK", "DKK", "EUR", "HKD", "HUF", "INR", "ILS",
+    "JPY", "MYR", "NZD", "NOK", "PLN", "RUB", "SAR", "SGD", "ZAR", "KRW",
+    "SEK", "CHF", "TWD", "THB", "TRY", "USD"]
+
+supported_currencies = {
     'YAHOO_getter': YAHOO_supported_currency_array,
     'ECB_getter': ECB_supported_currency_array,
     'RO_BNR_getter': RO_BNR_supported_currency_array,
@@ -130,6 +135,7 @@ supported_currecies = {
     'CH_ADMIN_getter': CH_ADMIN_supported_currency_array,
     'MX_BdM_getter': MX_BdM_supported_currency_array,
     'PL_NBP_getter': PL_NBP_supported_currency_array,
+    'UK_BOE_getter': UK_BOE_supported_currency_array,
     }
 
 
@@ -167,7 +173,7 @@ class Currency_rate_update_service(models.Model):
             company_id = False
             if self.company_id.multi_company_currency_enable:
                 company_id = self.company_id.id
-            currency_list = supported_currecies[self.service]
+            currency_list = supported_currencies[self.service]
             if company_id:
                 currencies = self.env['res.currency'].search(
                     [('name', 'in', currency_list),
@@ -184,9 +190,9 @@ class Currency_rate_update_service(models.Model):
         [('CH_ADMIN_getter', 'Admin.ch'),
          ('ECB_getter', 'European Central Bank'),
          ('YAHOO_getter', 'Yahoo Finance'),
-         # Added for polish rates
+         # Added for Polish rates
          ('PL_NBP_getter', 'National Bank of Poland'),
-         # Added for mexican rates
+         # Added for Mexican rates
          ('MX_BdM_getter', 'Bank of Mexico'),
          # Bank of Canada is using RSS-CB
          # http://www.cbwiki.net/wiki/index.php/Specification_1.1
@@ -195,6 +201,8 @@ class Currency_rate_update_service(models.Model):
          ('CA_BOC_getter', 'Bank of Canada - noon rates'),
          # Added for romanian rates
          ('RO_BNR_getter', 'National Bank of Romania')
+         # Added for Bank of England rates
+         ('UK_BOE_getter', 'Bank of England'),
          ],
         string="Webservice to use",
         required=True)
@@ -222,7 +230,7 @@ class Currency_rate_update_service(models.Model):
         string='Max delta days', default=4, required=True,
         help="If the time delta between the rate date given by the "
         "webservice and the current date exceeds this value, "
-        "then the currency rate is not updated in OpenERP.")
+        "then the currency rate is not updated.")
     interval_type = fields.Selection([
         ('days', 'Day(s)'),
         ('weeks', 'Week(s)'),
@@ -239,7 +247,7 @@ class Currency_rate_update_service(models.Model):
 
     @api.one
     def refresh_currency(self):
-        """Refresh the currencies rates !!for all companies now"""
+        """Refresh the currencies rates for all companies now"""
         _logger.info(
             'Starting to refresh currencies with service %s (company: %s)',
             self.service, self.company_id.name)
@@ -247,9 +255,8 @@ class Currency_rate_update_service(models.Model):
         curr_obj = self.env['res.currency']
         rate_obj = self.env['res.currency.rate']
         company = self.company_id
-        # The multi company currency can be set or no so we handle
-        # The two case
         if company.auto_currency_up:
+            # Handle multi company currency if necessary
             main_currency = curr_obj.search(
                 [('base', '=', True), ('company_id', '=', company.id)],
                 limit=1)
@@ -325,7 +332,7 @@ class Currency_rate_update_service(models.Model):
 
     @api.multi
     def run_currency_update(self):
-        # Update currency at the given frequence
+        # Update currency at the given frequency
         services = self.search([('next_run', '=', fields.Date.today())])
         services.with_context(cron=True).refresh_currency()
 

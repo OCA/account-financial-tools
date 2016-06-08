@@ -50,7 +50,7 @@ class CH_ADMIN_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-        """Implementation of abstract method of Curreny_getter_interface"""
+        """Implementation of abstract method of Currency_getter_interface"""
         url = ('http://www.afd.admin.ch/publicdb/newdb/'
                'mwst_kurse/wechselkurse.php')
         # We do not want to update the main currency

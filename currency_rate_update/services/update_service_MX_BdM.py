@@ -57,7 +57,7 @@ class MX_BdM_getter(Currency_getter_interface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days=1):
-        """implementation of abstract method of Curreny_getter_interface"""
+        """implementation of abstract method of Currency_getter_interface"""
         logger = logging.getLogger(__name__)
         # we do not want to update the main currency
         if main_currency in currency_array:
