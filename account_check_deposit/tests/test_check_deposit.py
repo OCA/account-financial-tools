@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# © 2014-2016 Akretion (http://www.akretion.com)
+#   @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from openerp.addons.account.tests.account_test_classes\
     import AccountingTestCase
 import time
@@ -15,26 +20,40 @@ class TestPayment(AccountingTestCase):
         self.invoice_line_model = self.env['account.invoice.line']
         self.acc_bank_stmt_model = self.env['account.bank.statement']
         self.acc_bank_stmt_line_model = self.env['account.bank.statement.line']
+        self.res_partner_bank_model = self.env['res.partner.bank']
+        self.check_deposit_model = self.env['account.check.deposit']
 
         self.partner_agrolait = self.env.ref("base.res_partner_2")
         self.currency_eur_id = self.env.ref("base.EUR").id
-        self.env.ref('base.main_company').write(
-            {'currency_id': self.currency_eur_id})
+        self.main_company = self.env.ref('base.main_company')
+        self.main_company.write({'currency_id': self.currency_eur_id})
         self.product = self.env.ref("product.product_product_4")
         self.payment_method_manual_in = self.env.ref(
             "account.account_payment_method_manual_in")
         self.payment_method_manual_out = self.env.ref(
             "account.account_payment_method_manual_out")
+        # check if those accounts exist otherwise create them
+        self.account_receivable = self.account_account_model.search(
+            [('code', '=', '411100')], limit=1)
 
-        self.account_receivable = self.env['account.account'].search(
-            [('user_type_id', '=', self.env.ref(
-                'account.data_account_type_receivable').id)], limit=1)
-        self.account_payable = self.env['account.account'].search(
-            [('user_type_id', '=', self.env.ref(
-                'account.data_account_type_payable').id)], limit=1)
-        self.account_revenue = self.env['account.account'].search(
-            [('user_type_id', '=', self.env.ref(
-                'account.data_account_type_revenue').id)], limit=1)
+        if not self.account_receivable:
+            self.account_receivable = self.account_account_model.create(
+                {"code": '411100',
+                 "name": "Debtors - (test)",
+                 "reconcile": True,
+                 "user_type_id":
+                 self.ref('account.data_account_type_receivable')
+                 })
+
+        self.account_revenue = self.account_account_model.search(
+            [('code', '=', '707100')], limit=1)
+        if not self.account_revenue:
+            self.account_revenue = self.account_account_model.create(
+                {"code": '707100',
+                 "name": "Product Sales - (test)",
+                 "user_type_id":
+                 self.ref('account.data_account_type_revenue')
+                 })
 
         self.recived_check_account_id = self.account_account_model.search(
             [('code', '=', '511200')], limit=1)
@@ -64,12 +83,22 @@ class TestPayment(AccountingTestCase):
                 {'name': 'Recived check', 'type': 'bank', 'code': 'CHK'})
         self.check_journal.default_debit_account_id = \
             self.recived_check_account_id
+        self.check_journal.default_credit_account_id = \
+            self.recived_check_account_id
         self.bank_journal = self.journal_model.search(
             [('code', '=', 'BNK1')], limit=1)
         if not self.bank_journal:
             self.bank_journal = self.journal_model.create(
                 {'name': 'Bank', 'type': 'bank', 'code': 'BNK1'})
         self.bank_journal.default_debit_account_id = self.bank_account_id
+        self.bank_journal.default_credit_account_id = self.bank_account_id
+        self.partner_bank_id = self.res_partner_bank_model.search(
+            [('partner_id', '=', self.main_company.partner_id.id)], limit=1)
+        if not self.partner_bank_id:
+            self.partner_bank_id = self.res_partner_bank_model.create(
+                {"acc_number": 'SI56 1910 0000 0123 438 584',
+                 "partner_id": self.main_company.partner_id.id,
+                 })
 
     def create_invoice(self, amount=100, type='out_invoice', currency_id=None):
         """ Returns an open invoice """
@@ -78,7 +107,7 @@ class TestPayment(AccountingTestCase):
             'reference_type': 'none',
             'currency_id': currency_id,
             'name': type == 'out_invoice'
-                    and 'invoice to client' or 'invoice to supplier',
+            and 'invoice to client' or 'invoice to supplier',
             'account_id': self.account_receivable.id,
             'type': type,
             'date_invoice': time.strftime('%Y-%m-%d'),
@@ -94,87 +123,23 @@ class TestPayment(AccountingTestCase):
         invoice.signal_workflow('invoice_open')
         return invoice
 
-    def reconcile(
-            self,
-            liquidity_aml,
-            amount=0.0,
-            amount_currency=0.0,
-            currency_id=None):
-        """ Reconcile a journal entry corresponding
-            to a payment with its bank statement line """
-        bank_stmt = self.acc_bank_stmt_model.create({
-            'journal_id': liquidity_aml.journal_id.id,
-            'date': time.strftime('%Y-%m-%d'),
+    def create_check_deposit(
+            self, move_lines):
+        """ Returns an validated check deposit """
+        check_deposit = self.check_deposit_model.create({
+            'journal_id': self.bank_journal.id,
+            'partner_bank_id': self.partner_bank_id.id,
+            'deposit_date': time.strftime('%Y-%m-%d'),
+            'currency_id': self.currency_eur_id,
         })
-        bank_stmt_line = self.acc_bank_stmt_line_model.create({
-            'name': 'payment',
-            'statement_id': bank_stmt.id,
-            'partner_id': self.partner_agrolait.id,
-            'amount': amount,
-            'amount_currency': amount_currency,
-            'currency_id': currency_id,
-            'date': time.strftime('%Y-%m-%d')
-        })
-
-        bank_stmt_line.process_reconciliation(payment_aml_rec=liquidity_aml)
-        return bank_stmt
-
-    def check_journal_items(self, aml_recs, aml_dicts):
-        def compare_rec_dict(aml_rec, aml_dict):
-            return aml_rec.account_id.id == aml_dict['account_id'] \
-                and round(aml_rec.debit, 2) == aml_dict['debit'] \
-                and round(aml_rec.credit, 2) == aml_dict['credit'] \
-                and round(aml_rec.amount_currency, 2) ==\
-                aml_dict['amount_currency']\
-                and aml_rec.currency_id.id == aml_dict['currency_id']
-
-        for aml_dict in aml_dicts:
-            # There is no unique key to identify journal items
-            # (an account_payment may create several lines
-            # in the same account), so to check the expected entries
-            # are created, we check there is a line
-            # matching for each dict of expected values
-            aml_rec = aml_recs.filtered(
-                lambda r: compare_rec_dict(r, aml_dict))
-            self.assertEqual(
-                len(aml_rec),
-                1,
-                "Expected a move line with values : %s" %
-                str(aml_dict))
-            if aml_dict.get('currency_diff'):
-                if aml_rec.credit:
-                    rec_ids = [r.id for r in aml_rec.matched_debit_ids]
-                else:
-                    rec_ids = [r.id for r in aml_rec.matched_credit_ids]
-                currency_diff_move = self.env['account.move'].search(
-                    [('rate_diff_partial_rec_id', 'in', rec_ids)])
-                self.assertEqual(len(currency_diff_move), 1)
-                for currency_diff_line in currency_diff_move[0].line_ids:
-                    if aml_dict.get('currency_diff') > 0:
-                        if currency_diff_line.account_id.id == aml_rec.account_id.id:
-                            self.assertAlmostEquals(
-                                currency_diff_line.debit, aml_dict.get('currency_diff'))
-                        else:
-                            self.assertAlmostEquals(
-                                currency_diff_line.credit, aml_dict.get('currency_diff'))
-                            self.assertIn(
-                                currency_diff_line.account_id.id, [
-                                    self.diff_expense_account.id, self.diff_income_account.id])
-                    else:
-                        if currency_diff_line.account_id.id == aml_rec.account_id.id:
-                            self.assertAlmostEquals(
-                                currency_diff_line.credit, abs(
-                                    aml_dict.get('currency_diff')))
-                        else:
-                            self.assertAlmostEquals(
-                                currency_diff_line.debit, abs(
-                                    aml_dict.get('currency_diff')))
-                            self.assertIn(
-                                currency_diff_line.account_id.id, [
-                                    self.diff_expense_account.id, self.diff_income_account.id])
+        for move_line in move_lines:
+            move_line.check_deposit_id = check_deposit
+        check_deposit.validate_deposit()
+        return check_deposit
 
     def test_full_payment_process(self):
-        """ Create a payment for two invoices, post it and reconcile it with a bank statement """
+        """ Create a payment for on invoice by check,
+         post it and create check deposit"""
         inv_1 = self.create_invoice(
             amount=100, currency_id=self.currency_eur_id)
         inv_2 = self.create_invoice(
@@ -185,11 +150,12 @@ class TestPayment(AccountingTestCase):
             'active_ids': [
                 inv_1.id,
                 inv_2.id]}
-        register_payments = self.register_payments_model.with_context(ctx).create({
-            'payment_date': time.strftime('%Y-%m-%d'),
-            'journal_id': self.check_journal.id,
-            'payment_method_id': self.payment_method_manual_in.id,
-        })
+        register_payments = self.register_payments_model.with_context(
+            ctx).create({
+                        'payment_date': time.strftime('%Y-%m-%d'),
+                        'journal_id': self.check_journal.id,
+                        'payment_method_id': self.payment_method_manual_in.id,
+                        })
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
@@ -198,26 +164,14 @@ class TestPayment(AccountingTestCase):
         self.assertEqual(inv_1.state, 'paid')
         self.assertEqual(inv_2.state, 'paid')
 
-        self.check_journal_items(payment.move_line_ids,
-                                 [{'account_id': self.account_eur.id,
-                                   'debit': 300.0,
-                                   'credit': 0.0,
-                                   'amount_currency': 0,
-                                   'currency_id': False},
-                                  {'account_id': inv_1.account_id.id,
-                                     'debit': 0.0,
-                                     'credit': 300.0,
-                                     'amount_currency': 00,
-                                     'currency_id': False},
-                                  ])
+        check_aml = payment.move_line_ids.filtered(
+            lambda r: r.account_id == self.recived_check_account_id)
 
-        liquidity_aml = payment.move_line_ids.filtered(
-            lambda r: r.account_id == self.account_eur)
-        bank_statement = self.reconcile(liquidity_aml, 200, 0, False)
+        check_deposit = self.create_check_deposit([check_aml])
+        liquidity_aml = check_deposit.move_id.line_ids.filtered(
+            lambda r: r.account_id != self.recived_check_account_id)
 
-        self.assertEqual(liquidity_aml.statement_id, bank_statement)
-        self.assertEqual(
-            liquidity_aml.move_id.statement_line_id,
-            bank_statement.line_ids[0])
-
-        self.assertEqual(payment.state, 'reconciled')
+        self.assertEqual(check_deposit.total_amount, 300)
+        self.assertEqual(liquidity_aml.debit, 300)
+        self.assertEqual(check_deposit.move_id.state, 'posted')
+        self.assertEqual(check_deposit.state, 'done')
