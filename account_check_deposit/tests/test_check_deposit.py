@@ -118,8 +118,8 @@ class TestPayment(AccountingTestCase):
             'partner_id': self.partner_agrolait.id,
             'reference_type': 'none',
             'currency_id': currency_id,
-            'name': type == 'out_invoice'
-            and 'invoice to client' or 'invoice to supplier',
+            'name': type == 'out_invoice' and
+            'invoice to client' or 'invoice to supplier',
             'account_id': self.account_receivable.id,
             'type': type,
             'date_invoice': time.strftime('%Y-%m-%d'),
