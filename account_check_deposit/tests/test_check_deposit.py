@@ -65,6 +65,18 @@ class TestPayment(AccountingTestCase):
                  "user_type_id":
                  self.ref('account.data_account_type_liquidity')
                  })
+        self.main_company.check_deposit_account_id = \
+            self.account_account_model.search(
+                [('code', '=', '511201')], limit=1)
+        if not self.main_company.check_deposit_account_id:
+            self.main_company.check_deposit_account_id = \
+                self.account_account_model.create(
+                    {"code": '511201',
+                     "name": "Check deposited in bank - (test)",
+                     "reconcile": True,
+                     "user_type_id":
+                     self.ref('account.data_account_type_liquidity')
+                     })
         self.bank_account_id = self.account_account_model.search(
             [('code', '=', '512001')], limit=1)
         if not self.bank_account_id:
