@@ -4,7 +4,7 @@
 
     <record model="ir.ui.view" id="asset_revaluation_form">
       <field name="name">account.asset.revaluation.form</field>
-      <field name="model">account.asset.revaluation</field>
+      <field name="model">account.asset.revaluation.wizard</field>
       <field name="arch" type="xml">
         <form string="Revaluate Asset" version="7.0">
           <group colspan="2" col="2">
@@ -26,7 +26,7 @@
 
     <record id="action_asset_revaluate" model="ir.actions.act_window">
       <field name="name">Revaluate Asset</field>
-      <field name="res_model">account.asset.revaluation</field>
+      <field name="res_model">account.asset.revaluation.wizard</field>
       <field name="type">ir.actions.act_window</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>

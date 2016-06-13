@@ -114,17 +114,20 @@
               <page string="General">
                 <group colspan="4" col="4">
                   <group>
+                  	<field name="date_purchase"
+                  		   attrs="{'readonly':[('state','!=','draft')]}"
+                  		   on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
                     <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                            attrs="{'readonly':['|',('move_line_check','=',True),('state','!=','draft')]}"
-                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start)"/>
+                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
                     <field name="date_start"
                            attrs="{'readonly':[('state','!=','draft')],'required':[('type','=','normal')]}"
-                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start)"/>
+                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
                   </group>
                   <group>
                     <field name="salvage_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
                            attrs="{'readonly':['|',('move_line_check','=',True),('state','!=','draft')]}"
-                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start)"/>
+                           on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
                     <field name="date_remove"/>
                   </group>
                 </group>

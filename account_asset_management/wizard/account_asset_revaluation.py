@@ -32,6 +32,27 @@ class account_asset_revaluation(orm.Model):
     _name = 'account.asset.revaluation'
     _description = 'Revaluate Asset'
     
+    _columns = {
+        'date_revaluation': fields.date('Date', required=True),
+        'depr_id': fields.many2one('account.asset.depreciation.line', 'Asset depreciation line',
+            required=True, ondelete='cascade'),
+        'asset_id': fields.many2one('account.asset.asset', 'Asset',
+            required=True, ondelete='cascade'),
+        'previous_value': fields.float('Old Value', required=True),
+        'previous_value_residual': fields.float('Old Value Residual', required=True),
+        'revaluated_value': fields.float('New Value', required=True),
+        'account_revaluation_id': fields.many2one(
+            'account.account', 'Revaluation Value Account',
+            domain=[('type', '<>', 'view')], required=True, store=False),
+        'note': fields.text('Notes'),
+    }
+    
+    
+
+class account_asset_revaluation(orm.TransientModel):
+    _name = 'account.asset.revaluation.wizard'
+    _description = 'Revaluate Asset Wizard'
+    
     def _get_revaluation_account(self, cr, uid, context=None):
         if not context:
             context = {}
@@ -64,8 +85,6 @@ class account_asset_revaluation(orm.Model):
 
     _columns = {
         'date_revaluation': fields.date('Date', required=True),
-        'depr_id': fields.many2one('account.asset.depreciation.line', 'Asset depreciation line',
-            required=True, ondelete='cascade'),
         'previous_value': fields.float('Old Value', required=True),
         'previous_value_residual': fields.float('Old Value Residual', required=True),
         'revaluated_value': fields.float('New Value', required=True),
@@ -164,12 +183,14 @@ class account_asset_revaluation(orm.Model):
         revaluation_line_vals = {
             'date_revaluation': wiz_data.date_revaluation,
             'depr_id': depr_id,
+            'asset_id': asset.id,
             'previous_value': wiz_data.previous_value,
             'previous_value_residual': wiz_data.previous_value_residual,
             'revaluated_value': wiz_data.revaluated_value,
+            'account_revaluation_id': wiz_data.account_revaluation_id.id,
             'note':  wiz_data.note,
-        }
-#         obj_data = self.read(cr, uid, ids[0], context=context)
+        }#         obj_data = self.read(cr, uid, ids[0], context=context)
+
 #         for k,v in obj_data.items(): 
 #             if type( v ) in (list, tuple) and len( v ) == 2: 
 #                 obj_data[k] = v[0]
