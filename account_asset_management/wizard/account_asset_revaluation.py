@@ -170,8 +170,12 @@ class account_asset_revaluation(orm.TransientModel):
             'type': 'revaluate',
         }
         depr_id = asset_line_obj.create(cr, uid, asset_line_vals, context=context)
-        asset.write({'date_revaluation': wiz_data.date_revaluation, 
-                     'purchase_value' : new_value})
+        if new_value == 0:
+            state = 'close'
+        else:
+            state = 'open'
+        asset.write({'date_revaluation': wiz_data.date_revaluation,
+                     'state' : state})
 
         # create move lines
         move_lines = self._get_revaluation_data(
@@ -189,13 +193,10 @@ class account_asset_revaluation(orm.TransientModel):
             'revaluated_value': wiz_data.revaluated_value,
             'account_revaluation_id': wiz_data.account_revaluation_id.id,
             'note':  wiz_data.note,
-        }#         obj_data = self.read(cr, uid, ids[0], context=context)
-
-#         for k,v in obj_data.items(): 
-#             if type( v ) in (list, tuple) and len( v ) == 2: 
-#                 obj_data[k] = v[0]
-#         revaluation_obj.create(cr, uid, obj_data, context=context)
-        revaluation_obj.create(cr, uid, revaluation_line_vals, context=context)
+        }        revaluation_obj.create(cr, uid, revaluation_line_vals, context=context)
+        
+        #needed to trigger recomputation
+        asset.write({'purchase_value' :  wiz_data.previous_value})
         
         return {
             'name': _("Asset '%s' Revaluation Journal Entry") % asset_ref,

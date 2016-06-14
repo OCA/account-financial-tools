@@ -81,10 +81,10 @@
             <button name="validate" states="draft" string="Confirm Asset" type="object" class="oe_highlight"/>
             <button name="set_to_draft" states="open,close" string="Set to Draft" type="object" groups="account.group_account_manager"/>
             <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
-                    attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
+                    attrs="{'invisible':['|',('type','=','view'),'|',('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
                     help="Asset removal."/>
             <button name="revaluate" string="Revaluate" type="object" groups="account.group_account_manager"
-                    attrs="{'invisible':['|', ('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
+                    attrs="{'invisible':['|',('type','=','view'),'|',('method_time', '!=', 'year'),('state', '!=', 'open')]}"
                     help="Asset revaluation"/>
             <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"/>
           </header>
