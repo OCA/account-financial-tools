@@ -1107,6 +1107,9 @@ class account_asset_asset(orm.Model):
                  "if the Depreciation Start Date is different from the date "
                  "for which accounting entries need to be generated."),
         'date_remove': fields.date('Asset Removal Date', readonly=True),
+        'profit_loss_disposal': fields.float(
+            'Profit / (Loss) from Disposal', digits_compute=dp.get_precision('Account')
+            ),
         'date_revaluation': fields.date('Asset Revaluation Date', readonly=True),
         'state': fields.selection([
             ('draft', 'Draft'),
@@ -1794,8 +1797,9 @@ class account_asset_depreciation_line(orm.Model):
                     return self.reload_page(
                         cr, uid, line.asset_id.id, context)
             elif line.parent_state == 'removed' and line.type == 'remove':
-                line.asset_id.write({'state': 'close'})
+                line.asset_id.write({'state': 'open', 'date_remove': False, 'profit_loss_disposal': False})
                 self.unlink(cr, uid, [line.id])
+                self.unlink_move(cr, uid, [line.previous_id.id])
             if len(ids) == 1:
                 return self.reload_page(cr, uid, line.asset_id.id, context)
         return True

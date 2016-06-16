@@ -214,7 +214,7 @@ class account_asset_remove(orm.TransientModel):
                 cr, uid, [dl_ids[0]], context=context)
             dl_ids.pop(0)
         asset_line_obj.unlink(cr, uid, dl_ids, context=context)
-        return residual_value
+        return residual_value, first_to_depreciate_dl.id
 
     def _get_removal_data(self, cr, uid, wiz_data, asset, residual_value,
                           context=None):
@@ -281,7 +281,7 @@ class account_asset_remove(orm.TransientModel):
                 }
                 move_lines.append((0, 0, move_line_vals))
 
-        return move_lines
+        return move_lines, balance
 
     def remove(self, cr, uid, ids, context=None):
         asset_obj = self.pool.get('account.asset.asset')
@@ -296,7 +296,7 @@ class account_asset_remove(orm.TransientModel):
         wiz_data = self.browse(cr, uid, ids[0], context=context)
 
         if context.get('early_removal'):
-            residual_value = self._prepare_early_removal(
+            residual_value, previous_id = self._prepare_early_removal(
                 cr, uid, asset, wiz_data.date_remove, context=context)
         else:
             residual_value = asset.value_residual
@@ -348,6 +348,7 @@ class account_asset_remove(orm.TransientModel):
             'asset_id': asset_id,
             'name': line_name,
             'line_date': wiz_data.date_remove,
+            'previous_id': previous_id,
             'move_id': move_id,
             'type': 'remove',
         }
@@ -355,10 +356,11 @@ class account_asset_remove(orm.TransientModel):
         asset.write({'state': 'removed', 'date_remove': wiz_data.date_remove})
 
         # create move lines
-        move_lines = self._get_removal_data(
+        move_lines, balance = self._get_removal_data(
             cr, uid, wiz_data, asset, residual_value, context=context)
         move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
                        context=dict(context, allow_asset=True))
+        asset.write({'profit_loss_disposal': balance})
 
         return {
             'name': _("Asset '%s' Removal Journal Entry") % asset_ref,
