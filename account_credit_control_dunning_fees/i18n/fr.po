@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"POT-Creation-Date: 2016-03-26 00:20+0000\n"
+"PO-Revision-Date: 2016-06-13 09:05+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:186
 msgid "Open amount"
-msgstr ""
+msgstr "Montant ouvert"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
@@ -97,7 +97,7 @@ msgstr "credit.control.dunning.fees.computer"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:184
 msgid "Date due"
-msgstr ""
+msgstr "Date d'échéance"
 
 #. module: account_credit_control_dunning_fees
 #: selection:credit.control.policy.level,dunning_fees_type:0

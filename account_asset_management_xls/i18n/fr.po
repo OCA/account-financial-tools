@@ -3,14 +3,15 @@
 # * account_asset_management_xls
 # 
 # Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # LS Development <ls.development.nc@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 12:03+0000\n"
-"PO-Revision-Date: 2015-10-05 22:01+0000\n"
-"Last-Translator: LS Development <ls.development.nc@gmail.com>\n"
+"POT-Creation-Date: 2016-03-26 00:20+0000\n"
+"PO-Revision-Date: 2016-06-13 09:00+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +106,7 @@ msgstr ""
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:695
 #, python-format
 msgid "Data Error"
-msgstr ""
+msgstr "Erreur de donnée"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:368
@@ -119,7 +120,7 @@ msgstr "Exercice"
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:63
 #, python-format
 msgid "Configuration Error"
-msgstr ""
+msgstr "Erreur de paramétrage"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:618
@@ -144,7 +145,7 @@ msgstr "Pas de données disponibles"
 #: code:addons/account_asset_management_xls/wizard/account_asset_report_wizard.py:71
 #, python-format
 msgid "No records found for your selection!"
-msgstr ""
+msgstr "Pas d'enregistrements trouvés pour votre sélection!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:493
@@ -167,4 +168,4 @@ msgstr "ou"
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:0
 msgid "Generate Report"
-msgstr ""
+msgstr "Générer un rapport"

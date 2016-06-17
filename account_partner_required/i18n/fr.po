@@ -3,13 +3,14 @@
 # * account_partner_required
 # 
 # Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:24+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-03-26 00:20+0000\n"
+"PO-Revision-Date: 2016-06-13 08:56+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,13 +22,13 @@ msgstr ""
 #: code:addons/account_partner_required/account.py:33
 #, python-format
 msgid "Always"
-msgstr ""
+msgstr "Toujours"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:34
 #, python-format
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #. module: account_partner_required
 #: help:account.account.type,partner_policy:0
@@ -37,7 +38,7 @@ msgid ""
 "of account ; if you select 'Always', the accountant will get an error "
 "message if there is no partner ; if you select 'Never', the accountant will "
 "get an error message if a partner is present."
-msgstr ""
+msgstr "Mettre la politique pour le champ partenaire : Si vous sélectionnez 'Optionne', le comptable est de mettre un partenaire sur le mouvement d'écriture; si vous sélectionnez 'Toujours', the comptable aura un message d'erreur s'il n'y a pas de partenaire;  si vous sélectionnez 'Jamais', le comptablke aura un message d'erreur si un partenaire est présent."
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
@@ -47,7 +48,7 @@ msgstr "Écritures comptables"
 #. module: account_partner_required
 #: field:account.account.type,partner_policy:0
 msgid "Policy for partner field"
-msgstr ""
+msgstr "Politique pour le champ partenaire"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:74
@@ -55,18 +56,18 @@ msgstr ""
 msgid ""
 "Partner policy is set to 'Always' with account %s '%s' but the partner is "
 "missing in the account move line with label '%s'."
-msgstr ""
+msgstr "La politique partenaire est mise sur 'Toujours' avec un compte %s '%s' mais le partenaire est manquant sur l'écriture du mouvement avec le libellé '%s'."
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
 msgid "Account Type"
-msgstr ""
+msgstr "Type de compte"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:32
 #, python-format
 msgid "Optional"
-msgstr ""
+msgstr "Optionnel"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:82
@@ -74,4 +75,4 @@ msgstr ""
 msgid ""
 "Partner policy is set to 'Never' with account %s '%s' but the account move "
 "line with label '%s' has a partner '%s'."
-msgstr ""
+msgstr "La politique partenaire est mise sur 'Jamais' avec un compte %s '%s' mais la ligne d'écriture avec le libellé '%s' a pour partenaire '%s'."
