@@ -1785,7 +1785,6 @@ class account_asset_depreciation_line(orm.Model):
             move_obj.unlink(cr, uid, [move.id], context=ctx)
             # trigger store function
             self.write(cr, uid, [line.id], {'move_id': False}, context=ctx)
-            if line.parent_state == 'close':
                 if line.type == 'revaluate':
                     revaluation_obj = self.pool.get('account.asset.revaluation')
                     revaluation_ids = revaluation_obj.search(cr, uid, [('depr_id', '=', line.id)])
@@ -1797,7 +1796,13 @@ class account_asset_depreciation_line(orm.Model):
                                          'purchase_value': purchase_value, #needed to trigeer fields recalculation 
                                          })
                     self.unlink(cr, uid, [line.id])
+                if line.previous_id:
                     self.unlink_move(cr, uid, [line.previous_id.id])
+                line.asset_id.write({'state': 'open'})
+                if len(ids) == 1:
+                    return self.reload_page(
+                        cr, uid, line.asset_id.id, context)
+            elif line.parent_state == 'close':
                 line.asset_id.write({'state': 'open'})
                 if len(ids) == 1:
                     return self.reload_page(
@@ -1808,6 +1813,7 @@ class account_asset_depreciation_line(orm.Model):
                                      'profit_loss_disposal': False,
                                      'sale_value': False})
                 self.unlink(cr, uid, [line.id])
+                if line.previous_id:
                 self.unlink_move(cr, uid, [line.previous_id.id])
             if len(ids) == 1:
                 return self.reload_page(cr, uid, line.asset_id.id, context)

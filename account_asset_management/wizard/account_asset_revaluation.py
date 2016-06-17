@@ -63,15 +63,23 @@ class account_asset_revaluation(orm.TransientModel):
             acc = asset.category_id.account_revaluation_value_id
         return acc and acc.id or False
     
-    def _get_purchase_value(self, cr, uid, context=None):
+    def _get_previous_value(self, cr, uid, context=None):
         if not context:
             context = {}
-        acc = False
+        previous_value = False
+        asset_id = context.get('active_id')
+        revaluation_obj = self.pool.get('account.asset.revaluation')
         asset_obj = self.pool.get('account.asset.asset')
-        asset = asset_obj.browse(cr, uid, context.get('active_id'))
-        if asset:
-            acc = asset.purchase_value
-        return acc
+        revaluation_ids = revaluation_obj.search(cr, uid, [('asset_id','=',asset_id)], order='id desc')
+        if revaluation_ids:
+            revaluation = revaluation_obj.browse(cr, uid, revaluation_ids[0])
+            previous_value = revaluation.revaluated_value
+        
+        if not previous_value:
+            asset = asset_obj.browse(cr, uid, asset_id)
+            previous_value = asset.purchase_value
+            
+        return previous_value
     
     def _get_value_residual(self, cr, uid, context=None):
         if not context:
@@ -96,7 +104,7 @@ class account_asset_revaluation(orm.TransientModel):
     
     _defaults = {
         'account_revaluation_id': _get_revaluation_account,
-        'previous_value': _get_purchase_value,
+        'previous_value': _get_previous_value,
         'previous_value_residual': _get_value_residual,
     }
 
@@ -237,6 +245,10 @@ class account_asset_revaluation(orm.TransientModel):
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate'),
              ('init_entry', '=', False), ('move_check', '=', False)],
             order='line_date asc')
+        
+        if not dl_ids:
+            return asset.value_residual, None
+        
         first_to_depreciate_dl = asset_line_obj.browse(cr, uid, dl_ids[0])
 
         first_date = first_to_depreciate_dl.line_date

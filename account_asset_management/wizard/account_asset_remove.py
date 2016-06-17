@@ -173,6 +173,10 @@ class account_asset_remove(orm.TransientModel):
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate'),
              ('init_entry', '=', False), ('move_check', '=', False)],
             order='line_date asc')
+        
+        if not dl_ids:
+            return asset.value_residual, None
+        
         first_to_depreciate_dl = asset_line_obj.browse(cr, uid, dl_ids[0])
 
         first_date = first_to_depreciate_dl.line_date
