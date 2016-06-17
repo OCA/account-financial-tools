@@ -295,7 +295,7 @@ class account_asset_asset(orm.Model):
             cnt = fy_year_stop - fy_year_start + 1
             
             for i in range(cnt):
-                cy_days = calendar.isleap(year) and 366 or 365
+                #cy_days = calendar.isleap(year) and 366 or 365
                 if i == 0:  # first year
                     if fy_date_stop.year == year:
                         duration = (fy_date_stop - fy_date_start).days + 1
@@ -1110,6 +1110,9 @@ class account_asset_asset(orm.Model):
         'profit_loss_disposal': fields.float(
             'Profit / (Loss) from Disposal', digits_compute=dp.get_precision('Account')
             ),
+        'sale_value': fields.float(
+            'Sale Value', digits_compute=dp.get_precision('Account')
+            ),
         'date_revaluation': fields.date('Asset Revaluation Date', readonly=True),
         'state': fields.selection([
             ('draft', 'Draft'),
@@ -1788,8 +1791,11 @@ class account_asset_depreciation_line(orm.Model):
                     revaluation_ids = revaluation_obj.search(cr, uid, [('depr_id', '=', line.id)])
                     revaluation_id = revaluation_obj.browse(cr, uid, revaluation_ids[0])
                     
+                    purchase_value = line.asset_id.purchase_value
                     line.asset_id.write({'date_revaluation': False,
-                                         'value_residual': revaluation_id.previous_value_residual})
+                                         'value_residual': revaluation_id.previous_value_residual,
+                                         'purchase_value': purchase_value, #needed to trigeer fields recalculation 
+                                         })
                     self.unlink(cr, uid, [line.id])
                     self.unlink_move(cr, uid, [line.previous_id.id])
                 line.asset_id.write({'state': 'open'})
@@ -1797,7 +1803,10 @@ class account_asset_depreciation_line(orm.Model):
                     return self.reload_page(
                         cr, uid, line.asset_id.id, context)
             elif line.parent_state == 'removed' and line.type == 'remove':
-                line.asset_id.write({'state': 'open', 'date_remove': False, 'profit_loss_disposal': False})
+                line.asset_id.write({'state': 'open', 
+                                     'date_remove': False, 
+                                     'profit_loss_disposal': False,
+                                     'sale_value': False})
                 self.unlink(cr, uid, [line.id])
                 self.unlink_move(cr, uid, [line.previous_id.id])
             if len(ids) == 1:

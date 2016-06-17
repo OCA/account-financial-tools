@@ -100,6 +100,18 @@ class account_asset_revaluation(orm.TransientModel):
         'previous_value_residual': _get_value_residual,
     }
 
+    def _check_revaluated_value(self, cr, uid, ids, context=None):
+        for revaluation in self.browse(cr, uid, ids, context=context):
+            if revaluation.revaluated_value < 0:
+                return False
+        return True
+
+    _constraints = [(
+        _check_revaluated_value,
+        "The New Value must be positive or 0 (zero)!",
+        ['revaluated_value']
+    )]
+
     def revaluate(self, cr, uid, ids, context=None):
         asset_obj = self.pool.get('account.asset.asset')
         asset_line_obj = self.pool.get('account.asset.depreciation.line')
@@ -179,7 +191,7 @@ class account_asset_revaluation(orm.TransientModel):
 
         # create move lines
         move_lines = self._get_revaluation_data(
-            cr, uid, wiz_data, asset, wiz_data.revaluated_value, context=context)
+            cr, uid, wiz_data, asset, residual_value, wiz_data.revaluated_value, context=context)
         move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
                        context=dict(context, allow_asset=True))
         
@@ -268,12 +280,35 @@ class account_asset_revaluation(orm.TransientModel):
         asset_line_obj.unlink(cr, uid, dl_ids, context=context)
         return residual_value, first_to_depreciate_dl.id
     
-    def _get_revaluation_data(self, cr, uid, wiz_data, asset, new_value,
+    def _get_revaluation_data(self, cr, uid, wiz_data, asset, residual_value, new_value,
                           context=None):
         move_lines = []
         partner_id = asset.partner_id and asset.partner_id.id or False
         categ = asset.category_id
 
+        if new_value == 0.0:
+            # asset and asset depreciation account reversal
+            depr_amount = asset.asset_value - residual_value
+            if depr_amount:
+                move_line_vals = {
+                    'name': asset.name,
+                    'account_id': categ.account_depreciation_id.id,
+                    'debit': depr_amount > 0 and depr_amount or 0.0,
+                    'credit': depr_amount < 0 and -depr_amount or 0.0,
+                    'partner_id': partner_id,
+                    'asset_id': asset.id
+                }
+                move_lines.append((0, 0, move_line_vals))
+                move_line_vals = {
+                    'name': asset.name,
+                    'account_id': categ.account_expense_depreciation_id.id,
+                    'debit': depr_amount < 0 and -depr_amount or 0.0,
+                    'credit': depr_amount > 0 and depr_amount or 0.0,
+                    'partner_id': partner_id,
+                    'asset_id': asset.id
+                }
+                move_lines.append((0, 0, move_line_vals))
+        
         # asset and asset revaluation account reversal
         move_amount = new_value - asset.asset_value
         if move_amount:

@@ -361,6 +361,8 @@ class account_asset_remove(orm.TransientModel):
         move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
                        context=dict(context, allow_asset=True))
         asset.write({'profit_loss_disposal': balance})
+        if wiz_data.posting_regime == 'gain_loss_on_sale':
+            asset.write({'sale_value': wiz_data.sale_value})
 
         return {
             'name': _("Asset '%s' Removal Journal Entry") % asset_ref,
