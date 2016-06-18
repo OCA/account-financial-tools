@@ -33,6 +33,7 @@ class account_asset_revaluation(orm.Model):
     _description = 'Revaluate Asset'
     
     _columns = {
+        'previous_date_revaluation': fields.date('Date', required=True),
         'date_revaluation': fields.date('Date', required=True),
         'depr_id': fields.many2one('account.asset.depreciation.line', 'Asset depreciation line',
             required=True, ondelete='cascade'),
@@ -52,6 +53,19 @@ class account_asset_revaluation(orm.Model):
 class account_asset_revaluation(orm.TransientModel):
     _name = 'account.asset.revaluation.wizard'
     _description = 'Revaluate Asset Wizard'
+    
+    def _get_previous_date_revaluation(self, cr, uid, context=None):
+        if not context:
+            context = {}
+        previous_date_revaluation = False
+        asset_id = context.get('active_id')
+        revaluation_obj = self.pool.get('account.asset.revaluation')
+        revaluation_ids = revaluation_obj.search(cr, uid, [('asset_id','=',asset_id)], order='id desc')
+        if revaluation_ids:
+            revaluation = revaluation_obj.browse(cr, uid, revaluation_ids[0])
+            previous_date_revaluation = revaluation.date_revaluation
+        
+        return previous_date_revaluation
     
     def _get_revaluation_account(self, cr, uid, context=None):
         if not context:
@@ -92,6 +106,7 @@ class account_asset_revaluation(orm.TransientModel):
         return acc
 
     _columns = {
+        'previous_date_revaluation': fields.date('Date', required=True),
         'date_revaluation': fields.date('Date', required=True),
         'previous_value': fields.float('Old Value', required=True),
         'previous_value_residual': fields.float('Old Value Residual', required=True),
@@ -103,6 +118,7 @@ class account_asset_revaluation(orm.TransientModel):
     }
     
     _defaults = {
+        'previous_date_revaluation': _get_previous_date_revaluation,
         'account_revaluation_id': _get_revaluation_account,
         'previous_value': _get_previous_value,
         'previous_value_residual': _get_value_residual,
@@ -198,13 +214,14 @@ class account_asset_revaluation(orm.TransientModel):
                      'state' : state})
 
         # create move lines
-        move_lines = self._get_revaluation_data(
+        move_lines, balance = self._get_revaluation_data(
             cr, uid, wiz_data, asset, residual_value, wiz_data.revaluated_value, context=context)
         move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
                        context=dict(context, allow_asset=True))
         
         # create revaluation line (for history)
         revaluation_line_vals = {
+            'previous_date_revaluation': wiz_data.previous_date_revaluation,
             'date_revaluation': wiz_data.date_revaluation,
             'depr_id': depr_id,
             'asset_id': asset.id,
@@ -215,8 +232,9 @@ class account_asset_revaluation(orm.TransientModel):
             'note':  wiz_data.note,
         }        revaluation_obj.create(cr, uid, revaluation_line_vals, context=context)
         
-        #needed to trigger recomputation
-        asset.write({'purchase_value' :  wiz_data.previous_value})
+        asset.write({'profit_loss_disposal': balance,
+                     'purchase_value' :  wiz_data.previous_value #needed to trigger recomputation
+        })
         
         return {
             'name': _("Asset '%s' Revaluation Journal Entry") % asset_ref,
@@ -298,6 +316,7 @@ class account_asset_revaluation(orm.TransientModel):
         partner_id = asset.partner_id and asset.partner_id.id or False
         categ = asset.category_id
 
+        depr_amount = None
         if new_value == 0.0:
             # asset and asset depreciation account reversal
             depr_amount = asset.asset_value - residual_value
@@ -313,7 +332,27 @@ class account_asset_revaluation(orm.TransientModel):
                 move_lines.append((0, 0, move_line_vals))
                 move_line_vals = {
                     'name': asset.name,
-                    'account_id': categ.account_expense_depreciation_id.id,
+                    'account_id': categ.account_asset_id.id,
+                    'debit': depr_amount < 0 and -depr_amount or 0.0,
+                    'credit': depr_amount > 0 and depr_amount or 0.0,
+                    'partner_id': partner_id,
+                    'asset_id': asset.id
+                }
+                move_lines.append((0, 0, move_line_vals))
+                
+                #profit due to devaluation to zero (write off depreciations)
+                move_line_vals = {
+                    'name': asset.name,
+                    'account_id': categ.account_asset_id.id,
+                    'debit': depr_amount > 0 and depr_amount or 0.0,
+                    'credit': depr_amount < 0 and -depr_amount or 0.0,
+                    'partner_id': partner_id,
+                    'asset_id': asset.id
+                }
+                move_lines.append((0, 0, move_line_vals))
+                move_line_vals = {
+                    'name': asset.name,
+                    'account_id': categ.account_plus_value_id.id,
                     'debit': depr_amount < 0 and -depr_amount or 0.0,
                     'credit': depr_amount > 0 and depr_amount or 0.0,
                     'partner_id': partner_id,
@@ -343,6 +382,6 @@ class account_asset_revaluation(orm.TransientModel):
             }
             move_lines.append((0, 0, move_line_vals))
 
-        return move_lines
+        return move_lines, depr_amount
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

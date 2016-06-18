@@ -1791,8 +1791,9 @@ class account_asset_depreciation_line(orm.Model):
                     revaluation_id = revaluation_obj.browse(cr, uid, revaluation_ids[0])
                     
                     purchase_value = line.asset_id.purchase_value
-                    line.asset_id.write({'date_revaluation': False,
+                line.asset_id.write({'date_revaluation': revaluation_id.previous_date_revaluation,
                                          'value_residual': revaluation_id.previous_value_residual,
+                                     'profit_loss_disposal': False,
                                          'purchase_value': purchase_value, #needed to trigeer fields recalculation 
                                          })
                     self.unlink(cr, uid, [line.id])
