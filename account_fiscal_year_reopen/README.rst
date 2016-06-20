@@ -1,13 +1,15 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
+==================
 Reopen Fiscal Year
 ==================
 
 This module allows to reopen a fiscal year after it has been closed.
 
 Odoo advises to make a back-up of a database before closing a fiscal year, and
-to restore the database if the user regrets this decision. This in not a real
+to restore the database if the user regrets this decision. This is not a real
 solution as on restore all changes to the database made in the meantime will
 be lost.
 

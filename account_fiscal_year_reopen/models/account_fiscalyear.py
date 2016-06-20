@@ -12,5 +12,4 @@ class AccountFiscalYear(models.Model):
     def reopen_fiscalyear(self):
         """Handle request to reopen fiscal year."""
         # Ignore if already open (= 'draft')
-        if self.state != 'draft':
-            self.state = 'draft'
+        self.filtered(lambda x: x.state != 'draft').write({'state': 'draft'})
