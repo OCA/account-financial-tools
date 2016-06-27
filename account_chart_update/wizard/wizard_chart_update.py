@@ -72,25 +72,25 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         inverse_name='update_chart_wizard_id', string='Fiscal positions',
         ondelete='cascade')
     new_taxes = fields.Integer(
-        string='New taxes', compute="_get_new_taxes_count")
+        string='New taxes', compute="_compute_new_taxes_count")
     new_accounts = fields.Integer(
         string='New accounts',
-        compute="_get_new_accounts_count")
+        compute="_compute_new_accounts_count")
     new_fps = fields.Integer(
         string='New fiscal positions',
-        compute="_get_new_fps_count")
+        compute="_compute_new_fps_count")
     updated_taxes = fields.Integer(
         string='Updated taxes',
-        compute="_get_updated_taxes_count")
+        compute="_compute_updated_taxes_count")
     updated_accounts = fields.Integer(
         string='Updated accounts',
-        compute="_get_updated_accounts_count")
+        compute="_compute_updated_accounts_count")
     updated_fps = fields.Integer(
         string='Updated fiscal positions',
-        compute="_get_updated_fps_count")
+        compute="_compute_updated_fps_count")
     deleted_taxes = fields.Integer(
         string='Deactivated taxes',
-        compute="_get_deleted_taxes_count")
+        compute="_compute_deleted_taxes_count")
     log = fields.Text(string='Messages and Errors', readonly=True)
 
     @api.model
@@ -104,46 +104,46 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _compute_chart_template_ids(self):
         self.chart_template_ids = (
             self.env['wizard.multi.charts.accounts']
-            ._get_chart_parent_ids(self.chart_template_id))
+            ._compute_chart_parent_ids(self.chart_template_id))
 
     @api.multi
     @api.depends('tax_ids')
-    def _get_new_taxes_count(self):
+    def _compute_new_taxes_count(self):
         self.new_taxes = len(self.tax_ids.filtered(lambda x: x.type == 'new'))
 
     @api.multi
     @api.depends('account_ids')
-    def _get_new_accounts_count(self):
+    def _compute_new_accounts_count(self):
         self.new_accounts = len(
             self.account_ids.filtered(lambda x: x.type == 'new'))
 
     @api.multi
     @api.depends('fiscal_position_ids')
-    def _get_new_fps_count(self):
+    def _compute_new_fps_count(self):
         self.new_fps = len(
             self.fiscal_position_ids.filtered(lambda x: x.type == 'new'))
 
     @api.multi
     @api.depends('tax_ids')
-    def _get_updated_taxes_count(self):
+    def _compute_updated_taxes_count(self):
         self.updated_taxes = len(
             self.tax_ids.filtered(lambda x: x.type == 'updated'))
 
     @api.multi
     @api.depends('account_ids')
-    def _get_updated_accounts_count(self):
+    def _compute_updated_accounts_count(self):
         self.updated_accounts = len(
             self.account_ids.filtered(lambda x: x.type == 'updated'))
 
     @api.multi
     @api.depends('fiscal_position_ids')
-    def _get_updated_fps_count(self):
+    def _compute_updated_fps_count(self):
         self.updated_fps = len(
             self.fiscal_position_ids.filtered(lambda x: x.type == 'updated'))
 
     @api.multi
     @api.depends('tax_ids')
-    def _get_deleted_taxes_count(self):
+    def _compute_deleted_taxes_count(self):
         self.deleted_taxes = len(
             self.tax_ids.filtered(lambda x: x.type == 'deleted'))
 
@@ -565,7 +565,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""
-        tax_obj = self.env['account.tax']
         for wiz_tax in self.tax_ids:
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
@@ -604,7 +603,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def _update_accounts(self):
         """Process accounts to create/update."""
-        account_obj = self.env['account.account']
         for wiz_account in self.account_ids:
             account, template = (wiz_account.update_account_id,
                                  wiz_account.account_id)
@@ -618,7 +616,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         _logger.debug(
                             _("Created account %s."),
                             account.code)
-                except exceptions.except_orm as ex:
+                except exceptions.except_orm:
                     _logger.exception(
                         _("Exception creating account %s."),
                         template.code)
@@ -630,7 +628,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                            .iteritems()):
                             account[key] = value
                             _logger.debug(_("Updated account %s."), account)
-                except exceptions.except_orm as ex:
+                except exceptions.except_orm:
                     _logger.exception(
                         _("Exception writing account %s."),
                         account)
@@ -687,7 +685,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _update_fiscal_positions(self):
         """Process fiscal position templates to create/update."""
         for wiz_fp in self.fiscal_position_ids:
-            pf, template = (wiz_fp.update_fiscal_position_id,
+            fp, template = (wiz_fp.update_fiscal_position_id,
                             wiz_fp.fiscal_position_id)
             if wiz_fp.type == 'new':
                 # Create a new fiscal position
