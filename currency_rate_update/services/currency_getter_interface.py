@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (c) 2009 CamptoCamp. All rights reserved.
-#    @author Nicolas Bessi
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2008-2016 Camptocamp
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
@@ -63,8 +46,55 @@ class UnsuportedCurrencyError(Exception):
         return 'Unsupported currency %s' % self.curr
 
 
-class Currency_getter_interface(object):
-    "Abstract class of currency getter"
+class CurrencyGetterType(type):
+    """ Meta class for currency getters.
+        Automaticaly registers new curency getter on class definition
+    """
+    getters = {}
+
+    def __new__(mcs, name, bases, attrs):
+        cls = super(CurrencyGetterType, mcs).__new__(mcs, name, bases, attrs)
+        if getattr(cls, 'code', None):
+            mcs.getters[cls.code] = cls
+        return cls
+
+    @classmethod
+    def get(mcs, code, *args, **kwargs):
+        """ Get getter by code
+        """
+        return mcs.getters[code](*args, **kwargs)
+
+
+class CurrencyGetterInterface(object):
+    """ Abstract class of currency getter
+
+        To create new getter, just subclass this class
+        and define class variables 'code' and 'name'
+        and implement *get_updated_currency* method
+
+        For example::
+
+            from openerp.addons.currency_rate_update \
+                import CurrencyGetterInterface
+
+            class MySuperCurrencyGetter(CurrencyGetterInterface):
+                code = "MSCG"
+                name = "My Currency Rates"
+                supported_currency_array = ['USD', 'EUR']
+
+                def get_updated_currency(self, currency_array, main_currency,
+                                         max_delta_days):
+                    # your code that fills self.updated_currency
+
+                    # and return result
+                    return self.updated_currency, self.log_info
+
+    """
+    __metaclass__ = CurrencyGetterType
+
+    # attributes required for currency getters
+    code = None  # code for service selection
+    name = None  # displayed name
 
     log_info = " "
 

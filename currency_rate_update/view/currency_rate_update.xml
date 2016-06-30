@@ -29,6 +29,8 @@
                                 invisible="not context.get('currency_rate_update_main_view')"
                                 required="context.get('currency_rate_update_main_view')"/>
                             <field name="max_delta_days"/>
+                            <button name="refresh_currency" type="object"
+                                    string="Update now!"/>
                         </group>
                         <group name="right">
                             <field name="interval_type"/>
@@ -55,7 +57,7 @@
         </record>
 
         <menuitem id="currency_rate_update_menu" action="currency_rate_update_action"
-            parent="account.menu_configuration_misc" sequence="21"/>
+            parent="account.menu_finance_configuration" sequence="21"/>
 
     </data>
 </openerp>

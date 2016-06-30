@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (c) 2009 CamptoCamp. All rights reserved.
-#    @author Nicolas Bessi
-#
-#    Abstract class to fetch rates from National Bank of Poland
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-from .currency_getter_interface import Currency_getter_interface
+# © 2009 Camptocamp
+# © 2009 Grzegorz Grzelak
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from .currency_getter_interface import CurrencyGetterInterface
 
 from datetime import datetime
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
@@ -29,11 +12,19 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PL_NBP_getter(Currency_getter_interface):
+class PL_NBPGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
     """
+    code = 'PL_NBP'
+    name = 'National Bank of Poland'
+
+    supported_currency_array = [
+        "AUD", "BGN", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR",
+        "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW",
+        "LTL", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK",
+        "SGD", "THB", "TRY", "UAH", "USD", "XDR", "ZAR"]
 
     def rate_retrieve(self, dom, ns, curr):
         """ Parse a dom node to retrieve

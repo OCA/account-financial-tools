@@ -31,6 +31,7 @@ The module is able to use the following sources:
    Updated daily
 
 6. Bank of Canada
+   (WARNING: Currently not working)
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
@@ -63,6 +64,9 @@ currency found in database.
 Know issues / Roadmap
 =====================
 
+To fix:
+* Bank of Canada
+
 Roadmap:
 * Google Finance.
 * Updated daily from Citibank N.A., source in EUR. Information may be delayed.
@@ -74,8 +78,7 @@ Bug Tracker
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20currency_rate_update%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback.
 
 
 Credits
@@ -84,14 +87,27 @@ Credits
 Contributors
 ------------
 
+* Nicolas Bessi <nicolas.bessi@camptocamp.com>
+* Jean-Baptiste Aubort <jean-baptiste.aubort@camptocamp.com>
 * Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
-* JB Aubort
 * Grzegorz Grzelak <grzegorz.grzelak@openglobe.pl> (ECB, NBP)
-* Alexis de Lattre <alexis@via.ecp.fr>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com> (Port to V7)
 * Agustin Cruz <openpyme.mx> (BdM)
-* Dorin Hongu <dhongu@gmail.com> (BNR)
+* Jacque-Etienne Baudoux <je@bcim.be>
+* Juan Jose Scarafia <jjscarafia@paintballrosario.com.ar>
+* Mathieu Benoi <mathben963@gmail.com>
 * Fekete Mihai <feketemihai@gmail.com> (Port to V8)
+* Dorin Hongu <dhongu@gmail.com> (BNR)
+* Paul McDermott
+* Alexis de Lattre <alexis@via.ecp.fr>
+* Miku Laitinen
+* Assem Bayahi
+* Daniel Dico <ddico@oerp.ca> (BOC)
+* Dmytro Katyukha <firemage.dima@gmail.com>
+
 
 Maintainer
 ----------
