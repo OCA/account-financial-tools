@@ -163,7 +163,7 @@ class account_asset_category(orm.Model):
         "Degressive-Linear is only supported for Time Method = Year.",
         ['method']
     )]
-
+    
     def onchange_method_time(self, cr, uid, ids,
                              method_time='number', context=None):
         res = {'value': {}}
@@ -490,7 +490,7 @@ class account_asset_asset(orm.Model):
                     % asset_ref)
             while asset_date_start < fy_date_start:
                 fy_date_start = fy_date_start - relativedelta(years=1)
-            fy_duration_months = self._get_fy_duration(cr, uid, fy_id, option='months')
+            fy_duration_months = self._get_fy_duration(cr, uid, first_fy['id'], option='months')
             fy_date_stop = fy_date_start + relativedelta(months=fy_duration_months)
             fy_id = False
             fy = dummy_fy(
@@ -1015,7 +1015,7 @@ class account_asset_asset(orm.Model):
     def _get_company(self, cr, uid, context=None):
         return self.pool.get('res.company')._company_default_get(
             cr, uid, 'account.asset.asset', context=context)
-
+    
     _columns = {
         'account_move_line_ids': fields.one2many(
             'account.move.line', 'asset_id', 'Entries', readonly=True),
@@ -1239,7 +1239,7 @@ class account_asset_asset(orm.Model):
          "Degressive-Linear is only supported for Time Method = Year.",
          ['method']),
     ]
-
+    
     def onchange_type(self, cr, uid, ids, asset_type, context=None):
         res = {'value': {}}
         if asset_type == 'view':
@@ -1785,18 +1785,18 @@ class account_asset_depreciation_line(orm.Model):
             move_obj.unlink(cr, uid, [move.id], context=ctx)
             # trigger store function
             self.write(cr, uid, [line.id], {'move_id': False}, context=ctx)
-                if line.type == 'revaluate':
-                    revaluation_obj = self.pool.get('account.asset.revaluation')
-                    revaluation_ids = revaluation_obj.search(cr, uid, [('depr_id', '=', line.id)])
-                    revaluation_id = revaluation_obj.browse(cr, uid, revaluation_ids[0])
-                    
-                    purchase_value = line.asset_id.purchase_value
+            if line.type == 'revaluate':
+                revaluation_obj = self.pool.get('account.asset.revaluation')
+                revaluation_ids = revaluation_obj.search(cr, uid, [('depr_id', '=', line.id)])
+                revaluation_id = revaluation_obj.browse(cr, uid, revaluation_ids[0])
+                
+                purchase_value = line.asset_id.purchase_value
                 line.asset_id.write({'date_revaluation': revaluation_id.previous_date_revaluation,
-                                         'value_residual': revaluation_id.previous_value_residual,
+                                     'value_residual': revaluation_id.previous_value_residual,
                                      'profit_loss_disposal': False,
-                                         'purchase_value': purchase_value, #needed to trigeer fields recalculation 
-                                         })
-                    self.unlink(cr, uid, [line.id])
+                                     'purchase_value': purchase_value, #needed to trigeer fields recalculation 
+                                     })
+                self.unlink(cr, uid, [line.id])
                 if line.previous_id:
                     self.unlink_move(cr, uid, [line.previous_id.id])
                 line.asset_id.write({'state': 'open'})
@@ -1815,7 +1815,7 @@ class account_asset_depreciation_line(orm.Model):
                                      'sale_value': False})
                 self.unlink(cr, uid, [line.id])
                 if line.previous_id:
-                self.unlink_move(cr, uid, [line.previous_id.id])
+                    self.unlink_move(cr, uid, [line.previous_id.id])
             if len(ids) == 1:
                 return self.reload_page(cr, uid, line.asset_id.id, context)
         return True
