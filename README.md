@@ -26,6 +26,7 @@ addon | version | summary
 [account_fiscal_year](account_fiscal_year/) | 9.0.1.0.0 | Account Fiscal Year
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 | Permanent Lock Move
+[currency_rate_update](currency_rate_update/) | 9.0.1.0.0 | Currency Rate Update
 
 Unported addons
 ---------------
@@ -63,7 +64,6 @@ addon | version | summary
 [account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
 [async_move_line_importer](async_move_line_importer/) | 0.1.2 (unported) | Asynchronous move/move line CSV importer
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 (unported) | Make sure currency rates used are always up-to-update
-[currency_rate_update](currency_rate_update/) | 8.0.0.7.0 (unported) | Currency Rate Update
 
 [//]: # (end addons)
 
