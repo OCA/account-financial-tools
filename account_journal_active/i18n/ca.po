@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_active
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: odoo-addons (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-22 13:44+0000\n"
+"PO-Revision-Date: 2015-09-01 18:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Catalan (http://www.transifex.com/adhoc/ingadhoc-odoo-addons-8-0/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_journal_active
+#: field:account.journal,active:0
+msgid "Active"
+msgstr ""
+
+#. module: account_journal_active
+#: model:ir.model,name:account_journal_active.model_account_journal
+msgid "Journal"
+msgstr "Diari"
