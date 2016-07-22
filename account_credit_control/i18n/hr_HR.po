@@ -3,42 +3,19 @@
 # * account_credit_control
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
-# Antonio Trueba, 2016
-# bossnm11 <bossnm11@gmail.com>, 2014
-# Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok <kcsgoodboy@gmail.com>, 2014
-# danimaribeiro <danimaribeiro@gmail.com>, 2016
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
-# Giacomo <giacomo.spettoli@gmail.com>, 2015
-# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# jeon <bluerespect@nate.com>, 2014
-# Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
-# Kevin Min <gr326887@graded.br>, 2015
-# Kunwoo Kim <crazyabtmath@naver.com>, 2015
-# LEE SI HYEONG <super2451894@gmail.com>, 2014
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
-# Maxime Chambreuil <maxime.chambreuil@gmail.com>, 2015
-# Rudolf Schnapka <rs@techno-flex.de>, 2015
-# SaFi J. <safi2266@gmail.com>, 2015
-# Sam Ryoo <samryoo@gmail.com>, 2014
-# Seo. Junmin <sof.midnight@live.co.kr>, 2015
-# seungil <luck8778@gmail.com>, 2014
-# SEUNGWON <baeksw0620@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 00:52+0000\n"
-"PO-Revision-Date: 2016-05-22 18:16+0000\n"
+"POT-Creation-Date: 2016-05-28 00:59+0000\n"
+"PO-Revision-Date: 2016-05-31 13:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_PT\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -186,7 +163,7 @@ msgstr ""
 #: field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr "Conta"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:account_credit_control.credit_control_policy_form
@@ -197,7 +174,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
 msgid "Active"
-msgstr "Ativo"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -221,7 +198,7 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -261,14 +238,14 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Poduzeća"
 
 #. module: account_credit_control
 #: field:credit.control.communication,company_id:0
 #: field:credit.control.line,company_id:0
 #: field:credit.control.policy,company_id:0
 msgid "Company"
-msgstr "Empresa"
+msgstr "Poduzeće"
 
 #. module: account_credit_control
 #: view:credit.control.run:account_credit_control.credit_control_run_form
@@ -313,7 +290,7 @@ msgstr ""
 #: field:credit.control.printer,create_uid:0
 #: field:credit.control.run,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr "Kreirao"
 
 #. module: account_credit_control
 #: field:credit.control.communication,create_date:0
@@ -326,7 +303,7 @@ msgstr "Criado por"
 #: field:credit.control.printer,create_date:0
 #: field:credit.control.run,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr "Kreirano"
 
 #. module: account_credit_control
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
@@ -493,7 +470,7 @@ msgstr ""
 #: field:credit.control.printer,display_name:0
 #: field:credit.control.run,display_name:0
 msgid "Display Name"
-msgstr "Nome a exibir"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
@@ -504,13 +481,13 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr "Feito"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 #: selection:credit.control.line,state:0 selection:credit.control.run,state:0
 msgid "Draft"
-msgstr "Rascunho"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
@@ -595,7 +572,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Group By..."
-msgstr "Agrupar por..."
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,id:0 field:credit.control.emailer,id:0
@@ -604,7 +581,7 @@ msgstr "Agrupar por..."
 #: field:credit.control.policy.level,id:0 field:credit.control.printer,id:0
 #: field:credit.control.run,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.run,manual_ids:0
@@ -625,7 +602,7 @@ msgstr ""
 #: field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr "Fatura"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
@@ -658,7 +635,7 @@ msgstr ""
 #: field:credit.control.printer,__last_update:0
 #: field:credit.control.run,__last_update:0
 msgid "Last Modified on"
-msgstr "Modificado pela última vez em"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -671,7 +648,7 @@ msgstr "Modificado pela última vez em"
 #: field:credit.control.printer,write_uid:0
 #: field:credit.control.run,write_uid:0
 msgid "Last Updated by"
-msgstr "Atualizado pela última vez por"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_date:0
@@ -684,7 +661,7 @@ msgstr "Atualizado pela última vez por"
 #: field:credit.control.printer,write_date:0
 #: field:credit.control.run,write_date:0
 msgid "Last Updated on"
-msgstr "Atualizado pela última vez em"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
@@ -815,7 +792,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
@@ -936,7 +913,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr "Parceiro"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:109
@@ -1098,7 +1075,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
@@ -1174,7 +1151,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
-msgstr "Utilizador"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -1218,4 +1195,4 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "or"
-msgstr "ou"
+msgstr ""

@@ -3,33 +3,19 @@
 # * account_chart_update
 # 
 # Translators:
-# Alejandro Santana <alejandrosantana@anubia.es>, 2015
-# Alexsandro Haag <alex@hgsoft.com.br>, 2015
-# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
-# Carles Antoli <carlesantoli@hotmail.com>, 2015
-# danimaribeiro <danimaribeiro@gmail.com>, 2016
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
-# Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
-# llum.birque@gmail.com <llum.birque@gmail.com>, 2015
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
-# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# Stéphane Bidoul <sbi@skynet.be>, 2015
-# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
-# Yael Terrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 00:52+0000\n"
-"PO-Revision-Date: 2016-05-22 18:16+0000\n"
+"POT-Creation-Date: 2016-05-28 00:59+0000\n"
+"PO-Revision-Date: 2016-05-31 13:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_PT\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,code_digits:0
@@ -71,7 +57,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr "Ativo"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
@@ -87,7 +73,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
@@ -102,7 +88,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr "Fechar"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:749
@@ -113,7 +99,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,company_id:0
 msgid "Company"
-msgstr "Empresa"
+msgstr "Poduzeće"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
@@ -139,7 +125,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_uid:0
 #: field:wizard.update.charts.accounts.tax.code,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr "Kreirao"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,create_date:0
@@ -149,7 +135,7 @@ msgstr "Criado por"
 #: field:wizard.update.charts.accounts.tax,create_date:0
 #: field:wizard.update.charts.accounts.tax.code,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr "Kreirano"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
@@ -199,7 +185,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,display_name:0
 #: field:wizard.update.charts.accounts.tax.code,display_name:0
 msgid "Display Name"
-msgstr "Nome a exibir"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -296,7 +282,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
@@ -325,7 +311,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,__last_update:0
 #: field:wizard.update.charts.accounts.tax.code,__last_update:0
 msgid "Last Modified on"
-msgstr "Modificado pela última vez em"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -335,7 +321,7 @@ msgstr "Modificado pela última vez em"
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr "Atualizado pela última vez por"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -345,7 +331,7 @@ msgstr "Atualizado pela última vez por"
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr "Atualizado pela última vez em"
+msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -437,7 +423,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,notes:0
 #: field:wizard.update.charts.accounts.tax.code,notes:0
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:386
@@ -477,7 +463,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,state:0
 msgid "Status"
-msgstr "Estado"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
@@ -800,7 +786,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_account:0
@@ -933,4 +919,4 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "or"
-msgstr "ou"
+msgstr ""

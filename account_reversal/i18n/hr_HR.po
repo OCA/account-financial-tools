@@ -3,30 +3,29 @@
 # * account_reversal
 # 
 # Translators:
-# Alejandro Santana <alejandrosantana@anubia.es>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 00:52+0000\n"
-"PO-Revision-Date: 2016-05-22 18:16+0000\n"
+"POT-Creation-Date: 2016-05-28 00:59+0000\n"
+"PO-Revision-Date: 2016-05-31 13:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_PT\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
 msgid "Account Entry"
-msgstr "Movimento de Conta"
+msgstr ""
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: account_reversal
 #: help:account.move,to_be_reversed:0
@@ -46,17 +45,17 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr "Kreirao"
 
 #. module: account_reversal
 #: field:account.move.reverse,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr "Kreirano"
 
 #. module: account_reversal
 #: field:account.move.reverse,display_name:0
 msgid "Display Name"
-msgstr "Nome a exibir"
+msgstr ""
 
 #. module: account_reversal
 #: help:account.move.reverse,date:0
@@ -73,7 +72,7 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_reversal
 #: help:account.move.reverse,period_id:0
@@ -100,17 +99,17 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,__last_update:0
 msgid "Last Modified on"
-msgstr "Modificado pela última vez em"
+msgstr ""
 
 #. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
-msgstr "Atualizado pela última vez por"
+msgstr ""
 
 #. module: account_reversal
 #: field:account.move.reverse,write_date:0
 msgid "Last Updated on"
-msgstr "Atualizado pela última vez em"
+msgstr ""
 
 #. module: account_reversal
 #: help:account.move.reverse,move_prefix:0
@@ -188,4 +187,4 @@ msgstr ""
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
 msgid "or"
-msgstr "ou"
+msgstr ""
