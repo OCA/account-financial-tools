@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_move_trace_form" model="ir.ui.view">
+            <field name="name">account.move.trace.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Journal Items']" position="after">
+                    <page string="Trace">
+                        <group string="Trace Down">
+                            <field name="trace_down_ids" nolabel="1"
+                                readonly="1">
+                                <tree>
+                                    <field name="down_date" string="Date" />
+                                    <field name="up_move_id" />
+                                    <field name="down_move_id" />
+                                    <field name="down_ref" string="Ref" />
+                                    <field name="down_name" string="Name" />
+                                    <field name="down_journal_id" string="Journal" />
+                                    <field name="down_amount" string="Amount" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Trace Up">
+                            <field name="trace_up_ids" nolabel="1"
+                                readonly="1">
+                                <tree>
+                                    <field name="up_date" string="Date" />
+                                    <field name="up_move_id" />
+                                    <field name="down_move_id" />
+                                    <field name="up_ref" string="Ref" />
+                                    <field name="up_name" string="Name" />
+                                    <field name="up_journal_id" string="Journal" />
+                                    <field name="up_amount" string="Amount" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="invoice_trace_form" model="ir.ui.view">
+            <field name="name">account.invoice.trace.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Payments']" position="inside">
+                    <group string="Trace">
+                        <field name="trace_down_ids" nolabel="1" readonly="1">
+                            <tree string="Trace">
+                                <field name="down_date" string="Date" />
+                                <field name="up_move_id" />
+                                <field name="down_move_id" />
+                                <field name="down_ref" string="Ref" />
+                                <field name="down_name" string="Name" />
+                                <field name="down_journal_id" string="Journal" />
+                                <field name="down_amount" string="Amount" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_supplier_trace_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.trace.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Payments']" position="inside">
+                    <group string="Trace">
+                        <field name="trace_up_ids" nolabel="1" readonly="1">
+                            <tree string="Trace">
+                                <field name="up_date" string="Date" />
+                                <field name="up_move_id" />
+                                <field name="down_move_id" />
+                                <field name="up_ref" string="Ref" />
+                                <field name="up_name" string="Name" />
+                                <field name="up_journal_id" string="Journal" />
+                                <field name="up_amount" string="Amount" />
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_trace_form" model="ir.ui.view">
+            <field name="name">view.trace.form</field>
+            <field name="model">account.reconcile.trace.recursive</field>
+            <field name="arch" type="xml">
+                <form string="Trace">
+                    <group name="main">
+                        <group string="Trace Up">
+                            <field name="up_date" string="Date" />
+                            <field name="up_move_id" string="Move" />
+                            <field name="up_ref" string="Ref" />
+                            <field name="up_name" string="Name" />
+                            <field name="up_journal_id" string="Journal" />
+                            <field name="up_amount" string="Amount" />
+                        </group>
+                        <group string="Trace Down">
+                            <field name="down_date" string="Date" />
+                            <field name="down_move_id" string="Move" />
+                            <field name="down_ref" string="Ref" />
+                            <field name="down_name" string="Name" />
+                            <field name="down_journal_id" string="Journal" />
+                            <field name="down_amount" string="Amount" />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
