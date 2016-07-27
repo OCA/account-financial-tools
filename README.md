@@ -48,6 +48,7 @@ addon | version | summary
 [account_move_template](account_move_template/) | 8.0.1.0.0 | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 8.0.1.0.0 | Compensate AR/AP accounts from the same partner
 [account_partner_required](account_partner_required/) | 8.0.0.1.0 | Account partner required
+[account_reconcile_trace](account_reconcile_trace/) | 8.0.1.0.0 | Account Reconcile Trace
 [account_renumber](account_renumber/) | 8.0.1.0.0 | Account renumber wizard
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 | Delete the accounting setup from an otherwise reusable database
 [account_reversal](account_reversal/) | 8.0.1.0.0 | Account Reversal
