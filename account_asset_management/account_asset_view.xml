@@ -27,7 +27,8 @@
             </group>
             <group string="Depreciation Dates">
               <field name="method_time" on_change="onchange_method_time(method_time)"/>
-              <field name="method_number" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','in',['number','year'])]}"/>
+              <field name="method_number" attrs="{'invisible':[('method_time','in',['end','rate'])], 'required':[('method_time','in',['number','year'])]}"/>
+              <field name="method_rate" digits="(14, 4)" attrs="{'invisible':[('method_time','!=','rate')], 'required':[('method_time','=','rate')]}"/>
               <field name="method_period"/>
             </group>
             <group string="Depreciation Method">
@@ -83,9 +84,9 @@
             <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
                     attrs="{'invisible':['|',('type','=','view'),'|',('method_time', '!=', 'year'),('state', 'not in', ['open', 'close'])]}"
                     help="Asset removal."/>
-            <button name="revaluate" string="Revaluate" type="object" groups="account.group_account_manager"
+            <button name="revaluate" string="Value Adjustement" type="object" groups="account.group_account_manager"
                     attrs="{'invisible':['|',('type','=','view'),'|',('method_time', '!=', 'year'),('state', '!=', 'open')]}"
-                    help="Asset revaluation"/>
+                    help="Increases or Decreases of value caused by revaluations, additions or others..."/>
             <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"/>
           </header>
           <sheet>
@@ -115,8 +116,7 @@
                 <group colspan="4" col="4">
                   <group>
                   	<field name="date_purchase"
-                  		   attrs="{'readonly':[('state','!=','draft')]}"
-                  		   on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
+                  		   attrs="{'readonly':[('state','!=','draft')]}" />
                     <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                            attrs="{'readonly':['|',('move_line_check','=',True),('state','!=','draft')]}"
                            on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>
@@ -145,9 +145,10 @@
                       <field name="method_time" on_change="onchange_method_time(method_time)" class="oe_inline"/>
                       <button name="%(action_asset_modify)d" states="open" string="Change Duration" type="action" icon="terp-stock_effects-object-colorize" class="oe_inline" colspan="1"/>
                     </div>
-                    <field name="method_number" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','in',['number','year'])]}"/>
+                    <field name="method_number" attrs="{'invisible':[('method_time','in',['end','rate'])], 'required':[('method_time','in',['number','year'])]}"/>
+                    <field name="method_rate" digits="(14, 4)" attrs="{'invisible':[('method_time','!=','rate')], 'required':[('method_time','=','rate')]}"/>
                     <field name="method_period"/>
-                    <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','in',['number','year'])]}"/>
+                    <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','in',['number','year','rate'])]}"/>
                   </group>
                   <group>
                     <separator string="Depreciation Method" colspan="2"/>

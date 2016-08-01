@@ -53,8 +53,9 @@ class account_asset_category(orm.Model):
     def _get_method_time(self, cr, uid, context=None):
         return [
             ('year', _('Number of Years')),
-            # ('number', _('Number of Depreciations')),
-            # ('end', _('Ending Date'))
+            ('number', _('Number of Depreciations')),
+            ('rate', _('Rate of Depreciation')),
+            ('end', _('Ending Date'))
         ]
 
     def _get_company(self, cr, uid, context=None):
@@ -111,6 +112,9 @@ class account_asset_category(orm.Model):
         'method_number': fields.integer(
             'Number of Years',
             help="The number of years needed to depreciate your asset"),
+        'method_rate': fields.float(
+            'Rate of Depreciation',
+            help="The rate of depreciation per (fiscal) year"),
         'method_period': fields.selection([
             ('month', 'Month'),
             ('quarter', 'Quarter'),
@@ -125,10 +129,11 @@ class account_asset_category(orm.Model):
                  "number of depreciation lines.\n"
                  "  * Number of Years: Specify the number of years "
                  "for the depreciation.\n"
-                 # "  * Number of Depreciations: Fix the number of "
-                 # "depreciation lines and the time between 2 depreciations.\n"
-                 # "  * Ending Date: Choose the time between 2 depreciations "
-                 # "and the date the depreciations won't go beyond."
+                 "  * Number of Depreciations: Fix the number of "
+                 "depreciation lines and the time between 2 depreciations.\n"
+                 "  * Ending Date: Choose the time between 2 depreciations "
+                 "and the date the depreciations won't go beyond."
+                 "  * Rate: Choose the rate of depreciation per year."
         ),
         'prorata': fields.boolean(
             'Prorata Temporis',
@@ -391,10 +396,14 @@ class account_asset_asset(orm.Model):
         elif asset.method_time == 'end':
             depreciation_stop_date = datetime.strptime(
                 asset.method_end, '%Y-%m-%d')
+        elif asset.method_time == 'rate':
+            months = int(fy_duration_months // asset.method_rate)
+            depreciation_stop_date = depreciation_start_date + \
+                    relativedelta(months=months, days=-1)
         return depreciation_stop_date
 
     def _compute_year_amount(self, cr, uid, asset, amount_to_depr,
-                             residual_amount, context=None):
+                             residual_amount, fy_duration_days, context=None):
         """
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
@@ -412,7 +421,9 @@ class account_asset_asset(orm.Model):
             duration = \
                 (datetime.strptime(asset.method_end, '%Y-%m-%d') -
                  datetime.strptime(asset.date_start, '%Y-%m-%d')).days + 1
-            divisor = duration / 365.0
+            divisor = duration / fy_duration_days
+        elif asset.method_time == 'rate':
+            divisor = 1 / asset.method_rate
         year_amount_linear = amount_to_depr / divisor
         if asset.method == 'linear':
             return year_amount_linear
@@ -435,7 +446,7 @@ class account_asset_asset(orm.Model):
             context = {}
 
         table = []
-        if not asset.method_number:
+        if asset.method_time in ('year','number') and not asset.method_number:
             return table
 
         context['company_id'] = asset.company_id.id
@@ -465,6 +476,7 @@ class account_asset_asset(orm.Model):
             fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
             fy_date_stop = datetime.strptime(fy.date_stop, '%Y-%m-%d')
             fy_duration_months = self._get_fy_duration(cr, uid, fy_id, option='months')
+            fy_duration_days = self._get_fy_duration(cr, uid, fy_id, option='days')
         except:
             # The following logic is used when no fiscalyear
             # is defined for the asset start date:
@@ -491,6 +503,7 @@ class account_asset_asset(orm.Model):
             while asset_date_start < fy_date_start:
                 fy_date_start = fy_date_start - relativedelta(years=1)
             fy_duration_months = self._get_fy_duration(cr, uid, first_fy['id'], option='months')
+            fy_duration_days = self._get_fy_duration(cr, uid, first_fy['id'], option='days')
             fy_date_stop = fy_date_start + relativedelta(months=fy_duration_months)
             fy_id = False
             fy = dummy_fy(
@@ -538,7 +551,7 @@ class account_asset_asset(orm.Model):
         for i, entry in enumerate(table):
             year_amount = self._compute_year_amount(
                 cr, uid, asset, amount_to_depr,
-                fy_residual_amount, context=context)
+                fy_residual_amount, fy_duration_days, context=context)
             if asset.method_period == 'year':
                 period_amount = year_amount
             elif asset.method_period == 'quarter':
@@ -958,9 +971,9 @@ class account_asset_asset(orm.Model):
         if not context:
             context = {}
         val = {}
-        if date_purchase:
-            date_start = date_purchase
-            val['date_start'] = date_start
+#         if date_purchase and not date_start:
+#             date_start = date_purchase
+#             val['date_start'] = date_start
         purchase_value = purchase_value or 0.0
         salvage_value = salvage_value or 0.0
         if purchase_value or salvage_value:
@@ -1149,6 +1162,10 @@ class account_asset_asset(orm.Model):
             'Number of Years (fiscal)', readonly=True,
             states={'draft': [('readonly', False)]},
             help="The number of years (fiscal) needed to depreciate your asset"),
+        'method_rate': fields.float(
+            'Rate of Depreciation', readonly=True,
+            states={'draft': [('readonly', False)]},
+            help="The rate of depreciation per (fiscal) year"),
         'method_period': fields.selection([
             ('month', 'Month'),
             ('quarter', 'Quarter'),
@@ -1171,10 +1188,11 @@ class account_asset_asset(orm.Model):
                  "number of depreciation lines.\n"
                  "  * Number of Years: Specify the number of years "
                  "for the depreciation.\n"
-                 # "  * Number of Depreciations: Fix the number of "
-                 # "depreciation lines and the time between 2 depreciations.\n"
-                 # "  * Ending Date: Choose the time between 2 depreciations "
-                 # "and the date the depreciations won't go beyond."
+                 "  * Number of Depreciations: Fix the number of "
+                 "depreciation lines and the time between 2 depreciations.\n"
+                 "  * Ending Date: Choose the time between 2 depreciations "
+                 "and the date the depreciations won't go beyond."
+                 "  * Rate: Choose the rate of depreciation per year."
             ),
         'prorata': fields.boolean(
             'Prorata Temporis', readonly=True,
@@ -1840,12 +1858,16 @@ class account_asset_history(orm.Model):
             'account.asset.asset', 'Asset', required=True, ondelete='cascade'),
         'method_time': fields.selection([
             ('year', 'Number of Years'),
-            # ('number','Number of Depreciations'),
-            # ('end','Ending Date'),
+            ('number','Number of Depreciations'),
+            ('end','Ending Date'),
+            ('rate','Rate of Depreciation')
             ], 'Time Method', required=True),
         'method_number': fields.integer(
             'Number of Years',
             help="The number of years needed to depreciate your asset"),
+        'method_rate': fields.float(
+            'Rate of Depreciation',
+            help="The rate of depreciation per (fiscal) year"),
         'method_period': fields.selection([
             ('month', 'Month'),
             ('quarter', 'Quarter'),
