@@ -1,6 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
+===================
 Account chart reset
 ===================
 
@@ -39,14 +41,19 @@ modifications or extensions of the current implementation.
 
 Sequences are not reset during the process.
 
+* Error is generated if there are no default sales/vendor taxes defined for company:
+
+          File "/opt/odoo/addons/account/models/account.py", line 540, in unlink
+            supplier_taxes_id = set(ir_values.get_default('product.template', 'supplier_taxes_id', company_id=company_id))
+    ValueError: "'NoneType' object is not iterable" while evaluating
+
 
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_reset_chart%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback.
 
 
 Credits
@@ -56,6 +63,7 @@ Contributors
 ------------
 
 * Stefan Rijnhart <stefan@therp.nl>
+* Dave Lasley <dave@laslabs.com>
 
 Icon courtesy of Alan Klim (CC-BY-20) -
 https://www.flickr.com/photos/igraph/6469812927/
