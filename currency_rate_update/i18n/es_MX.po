@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * currency_rate_update
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -40,7 +40,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "Bank of Mexico"
-msgstr ""
+msgstr "Banco de México"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:262
@@ -57,6 +57,16 @@ msgstr ""
 #: field:currency.rate.update.service,company_id:0
 msgid "Company"
 msgstr "Compañía"
+
+#. module: currency_rate_update
+#: field:currency.rate.update.service,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: currency_rate_update
+#: field:currency.rate.update.service,service:0
+msgid "Webservice to use"
+msgstr "Webservice"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,create_uid:0
