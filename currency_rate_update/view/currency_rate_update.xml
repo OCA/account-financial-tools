@@ -24,6 +24,7 @@
                 <form string="Currency update services">
                     <group name="main">
                         <group name="left">
+                            <field name="name"/>
                             <field name="service"/>
                             <field name="company_id" groups="base.group_multi_company"
                                 invisible="not context.get('currency_rate_update_main_view')"

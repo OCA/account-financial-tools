@@ -179,6 +179,9 @@ class Currency_rate_update_service(models.Model):
                      ('company_id', '=', False)])
             self.currency_list = [(6, 0, [curr.id for curr in currencies])]
 
+    name = fields.Char(
+        string='Name'
+    )
     # List of webservicies the value sould be a class name
     service = fields.Selection(
         [('CH_ADMIN_getter', 'Admin.ch'),
