@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="asset_depreciation_confirmation_wizard_form_view">
+        <field name="name">asset.depreciation.confirmation.wizard.form (in account_asset_batch_compute)</field>
+        <field name="model">asset.depreciation.confirmation.wizard</field>
+        <field name="inherit_id" ref="account_asset_management.view_asset_depreciation_confirmation_wizard"/>
+        <field name="arch" type="xml">
+            <field name="period_id" position="after">
+                <field name="batch_processing" />
+            </field>
+        </field>
+    </record>
+
+</data>
+</openerp>

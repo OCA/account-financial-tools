@@ -639,6 +639,7 @@ class account_asset_asset(orm.Model):
             if old_depreciation_line_ids:
                 depreciation_lin_obj.unlink(
                     cr, uid, old_depreciation_line_ids, context=context)
+            context = context.copy()
             context['company_id'] = asset.company_id.id
 
             table = self._compute_depreciation_table(
@@ -1253,9 +1254,10 @@ class account_asset_asset(orm.Model):
             ('move_check', '=', False)], context=context)
         for depreciation in depreciation_obj.browse(
                 cr, uid, depreciation_ids, context=context):
-            context.update({'depreciation_date': depreciation.line_date})
+            ctx = context.copy()
+            ctx.update({'depreciation_date': depreciation.line_date})
             result += depreciation_obj.create_move(
-                cr, uid, [depreciation.id], context=context)
+                cr, uid, [depreciation.id], context=ctx)
 
         if check_triggers and recompute_ids:
             asset_company_ids = set([x.company_id.id for x in assets])
