@@ -38,7 +38,7 @@ class NI_BCNGetter(CurrencyGetterInterface):
         logger.debug("Bank Nicaragua sent a valid XML file")
 
         return float(rate)
- def get_updated_currency(self, currency_array, main_currency,
+    def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days=1):
         """implementation of abstract method of Curreny_getter_interface"""
         logger = logging.getLogger(__name__)
