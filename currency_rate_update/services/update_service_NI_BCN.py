@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2009 Camptocamp
-# © 2013-2014 Agustin Cruz openpyme.mx
+# Â© 2009 Camptocamp
+# Â© 2013-2014 Agustin Cruz openpyme.mx
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from .currency_getter_interface import CurrencyGetterInterface
 from datetime import datetime
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+from suds.client import Client
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -26,31 +26,19 @@ class NI_BCNGetter(CurrencyGetterInterface):
         TODO: Get correct data from xml instead of process string
         """
         url = ('https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL')
-		
-		"""url = ('http://www.banxico.org.mx/rsscb/rss?'
-               'BMXC_canal=pagos&BMXC_idioma=es')"""
-
-        from suds.client import Client
-        
         logger = logging.getLogger(__name__)
         logger.debug("Bank Nicaragua currency rate service : connecting...")
         client = Client(url)
-		dates = datetime.today().now()
-		""" Split the date into Year/Month/Day """"
-		year= dates.year
-		month=dates.month
-		day= dates.day
-		rate=  client.service.RecuperaTC_Dia(year,month,day)
-		logger.debug("Bank Nicaragua sent a valid XML file")
-		
-		""""rawfile = self.get_url(url)
-           dom = parse(StringIO(rawfile))
-           value = dom.getElementsByTagName('cb:value')[0]
-		   rate = value.firstChild.nodeValue"""
+        dates = datetime.today().now()
+        """ Split the date into Year/Month/Day """
+        year = dates.year
+        month = dates.month
+        day = dates.day
+        rate =  client.service.RecuperaTC_Dia(year,month,day)
+        logger.debug("Bank Nicaragua sent a valid XML file")
 
         return float(rate)
-
-    def get_updated_currency(self, currency_array, main_currency,
+ def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days=1):
         """implementation of abstract method of Curreny_getter_interface"""
         logger = logging.getLogger(__name__)
