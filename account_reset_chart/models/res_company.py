@@ -152,6 +152,21 @@ class ResCompany(models.Model):
         unlink_from_company('account.tax.code')
         unlink_from_company('account.journal')
         unlink_from_company('account.account')
+
+        try:
+            self.env['account.partial.reconcile'].search(
+                [('company_id', '=', self.id)]
+            ).unlink()
+        except KeyError:
+            pass
+
+        try:
+            self.env['account.full.reconcile'].search(
+                [('company_id', '=', self.id)]
+            ).unlink()
+        except KeyError:
+            pass
+
         settings_id = self.env['account.config.settings'].search(
             [('company_id', '=', self.id)]
         )
