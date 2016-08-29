@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from .currency_getter_interface import CurrencyGetterInterface
-from datetime import datetime
+from datetime import date
 from suds.client import Client
 
 import logging
@@ -29,7 +29,7 @@ class NI_BCNGetter(CurrencyGetterInterface):
         logger = logging.getLogger(__name__)
         logger.debug("Bank Nicaragua currency rate service : connecting...")
         client = Client(url)
-        dates = datetime.today().now()
+        dates = date.today()
         """ Split the date into Year/Month/Day """
         year = dates.year
         month = dates.month
