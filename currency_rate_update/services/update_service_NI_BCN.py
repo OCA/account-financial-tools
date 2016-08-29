@@ -22,8 +22,8 @@ class NI_BCNGetter(CurrencyGetterInterface):
         "NIO", "EUR", "USD"]
 
     def rate_retrieve(self):
-        """ Get currency exchange from Banxico.xml and proccess it
-        TODO: Get correct data from xml instead of process string
+         """ Get currency exchange from BCN and proccess it
+        TODO: Get correct data from SOAP information sent from BCN servers.
         """
         url = ('https://servicios.bcn.gob.ni/Tc_Servicio/ServicioTC.asmx?WSDL')
         logger = logging.getLogger(__name__)
