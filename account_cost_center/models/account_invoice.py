@@ -24,7 +24,7 @@ class AccountInvoice(models.Model):
                         context=None, toolbar=False, submenu=False):
         res = super(AccountInvoice, self).fields_view_get(
             cr, uid, view_id=view_id, view_type=view_type,
-            context=context, toolbar=toolbar, submenu=False)
+            context=context, toolbar=toolbar, submenu=submenu)
         if not context:
             context = {}
         if not context.get('cost_center_default', False):

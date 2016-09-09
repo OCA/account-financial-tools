@@ -10,8 +10,8 @@ class AccountInvoiceLine(models.Model):
 
     @api.model
     def _default_cost_center(self):
-        return self._context.get('cost_center_id') \
-            or self.env['account.cost.center']
+        return self.env['account.cost.center'].browse(
+            self._context.get('cost_center_id', None))
 
     cost_center_id = fields.Many2one(
         'account.cost.center', string='Cost Center',

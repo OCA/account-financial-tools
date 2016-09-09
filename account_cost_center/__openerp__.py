@@ -6,14 +6,14 @@
     'name': 'Costcenter',
     'images': ['static/description/main_screenshot.png'],
     'summary': """Costcenter information for invoice lines""",
-    'depends': [
-        'account',
-    ],
     'author': "ONESTEiN BV,Odoo Community Association (OCA)",
     'license': 'AGPL-3',
     'website': 'http://www.onestein.eu',
     'category': 'Accounting',
     'version': '8.0.1.0.0',
+    'depends': [
+        'account',
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/account_cost_center.xml',
@@ -22,8 +22,5 @@
         'views/account_invoice.xml',
         'views/account_invoice_report.xml',
     ],
-    'demo': [],
     'installable': True,
-    'auto_install': False,
-    'application': False,
 }
