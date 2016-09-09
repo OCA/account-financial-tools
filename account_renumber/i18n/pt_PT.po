@@ -3,25 +3,24 @@
 # * account_renumber
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-17 23:52+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/gl/)\n"
+"PO-Revision-Date: 2015-06-03 16:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: gl\n"
+"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_renumber
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "Account renumber wizard"
-msgstr "Asistente de renumeración de asentos"
+msgstr ""
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -31,7 +30,7 @@ msgstr ""
 #. module: account_renumber
 #: help:wizard.renumber,period_ids:0
 msgid "Fiscal periods to renumber"
-msgstr "Periodos fiscais a renumerar"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
@@ -42,7 +41,7 @@ msgstr ""
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
 msgid "First Number"
-msgstr "Primeiro número"
+msgstr ""
 
 #. module: account_renumber
 #: field:wizard.renumber,state:0
@@ -52,17 +51,17 @@ msgstr ""
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Renumber"
-msgstr "Renumerar"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0 field:wizard.renumber,journal_ids:0
 msgid "Journals"
-msgstr "Xornais"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Journals and periods to consider"
-msgstr "Xornais e períodos a considerar"
+msgstr ""
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -72,19 +71,19 @@ msgstr ""
 #. module: account_renumber
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
-msgstr "Xornais a renumerar"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "Renumber Account Moves"
-msgstr "Renumerar asentos contables"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
-msgstr "Asentos fixos deses xornais serán ordenados por data e logo seranlles asignados números secuenciais usando a secuencia do seu xornal."
+msgstr ""
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:88
@@ -95,29 +94,29 @@ msgstr ""
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "General Data"
-msgstr "Datos xerais"
+msgstr ""
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:137
 #, python-format
 msgid "Renumbered account moves"
-msgstr "Asentos contables renumerados"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr "Este asistente axudaralle a renumerar entradas nun ou máis diarios."
+msgstr ""
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89
 #, python-format
 msgid "No records found for your selection!"
-msgstr "¡Non se atoparon rexistros para a súa selección!"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0 field:wizard.renumber,period_ids:0
 msgid "Periods"
-msgstr "Períodos"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0
@@ -127,7 +126,7 @@ msgstr "Cancelar"
 #. module: account_renumber
 #: help:wizard.renumber,number_next:0
 msgid "Journal sequences will start counting on this number"
-msgstr "As secuencias dos diarios empezarán a contar neste número"
+msgstr ""
 
 #. module: account_renumber
 #: view:wizard.renumber:0

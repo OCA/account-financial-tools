@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"POT-Creation-Date: 2016-06-17 23:52+0000\n"
+"PO-Revision-Date: 2016-09-09 12:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr ""
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "General Data"
-msgstr ""
+msgstr "Dades Generals"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:137
@@ -105,13 +105,13 @@ msgstr "Assentaments comptables renumerats"
 #. module: account_renumber
 #: view:wizard.renumber:0
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr ""
+msgstr "Aquest assistent us ajudarà a tornar a numerar els assentaments en un o més diaris."
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89
 #, python-format
 msgid "No records found for your selection!"
-msgstr ""
+msgstr "No hi ha registres per la seva selecció!"
 
 #. module: account_renumber
 #: view:wizard.renumber:0 field:wizard.renumber,period_ids:0

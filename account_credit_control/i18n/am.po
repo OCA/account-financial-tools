@@ -3,45 +3,44 @@
 # * account_credit_control
 # 
 # Translators:
-# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-17 23:52+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
-"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
+"PO-Revision-Date: 2015-06-03 16:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Amharic (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/am/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
+"Language: am\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
-msgstr "Message personnalisé"
+msgstr ""
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:214
 msgid "Open amount"
-msgstr "Montant ouvert"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
 msgid "Allows to manually change credit level"
-msgstr "Autorise la modification manuelle du niveau d'encours"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "More..."
-msgstr "Plus..."
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Group By..."
-msgstr "Regrouper par..."
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -60,7 +59,7 @@ msgstr ""
 #: code:addons/account_credit_control/run.py:126
 #, python-format
 msgid "Please select a policy"
-msgstr "Veuillez choisir une politique"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,computation_mode:0
@@ -70,28 +69,28 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.no_follow_1
 msgid "No follow"
-msgstr "Ne pas suivre"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.line,date_entry:0
 msgid "Entry date"
-msgstr "Date d'entrée"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
-msgstr "Envoyé par mail"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.run:0
 msgid "Move lines To be treated manually"
-msgstr "Lignes de mouvements devant être traités manuellement"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
 msgid "A credit control line"
-msgstr "Ligne de relance"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:186
@@ -103,12 +102,12 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,move_line_id:0
 msgid "Move line"
-msgstr "Une ligne de mouvement"
+msgstr ""
 
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_info
 msgid "Credit Control Info"
-msgstr "Information du contrôle d'encours"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_emailer
@@ -119,51 +118,51 @@ msgstr ""
 #: view:credit.control.line:0 field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr "Compte"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr "Date d'échéance"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:0 field:credit.control.line,level:0
 #: field:credit.control.policy.level,level:0
 msgid "Level"
-msgstr "Niveau"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,delay_days:0
 msgid "Delay (in days)"
-msgstr "Délai (en jours)"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/invoice.py:70
 #, python-format
 msgid "Error!"
-msgstr "Erreur!"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0
 msgid "Send emails for the selected lines"
-msgstr "Envoyer un courriel pour les lignes sélectionnées"
+msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.policy,account_ids:0
 msgid "This policy will be active only for the selected accounts"
-msgstr "La politique sera active pour les comptes sélectionnés"
+msgstr ""
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:212
 msgid "Date due"
-msgstr "Date d'échéance"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:71
 #, python-format
 msgid "state can not be empty"
-msgstr "l'état ne peut pas être vide"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -174,7 +173,7 @@ msgstr ""
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0
 msgid "Ignored"
-msgstr "Ignorer"
+msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.printer,mark_as_sent:0
@@ -190,7 +189,7 @@ msgstr ""
 #: field:account.invoice,credit_policy_id:0
 #: field:res.company,credit_policy_id:0 field:res.partner,credit_policy_id:0
 msgid "Credit Control Policy"
-msgstr "Politique de contrôle d'encours"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
@@ -211,29 +210,29 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,date_sent:0
 msgid "Sent date"
-msgstr "Date d'envoi"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:0 field:credit.control.policy,account_ids:0
 msgid "Accounts"
-msgstr "Comptes"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.communication,partner_id:0 view:credit.control.line:0
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
 msgid "Set new policy"
-msgstr "Mettre une nouvelle politique"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.level:0
 msgid "Credit control policy level"
-msgstr "Politique du niveau de contrôle d'encours "
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -267,12 +266,12 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Manual change"
-msgstr "Changement manuel"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,policy_id:0
 msgid "Related Policy"
-msgstr "Politique liée"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,move_line_ids:0
@@ -287,7 +286,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.policy:0 view:credit.control.policy.level:0
 msgid "Mail and reporting"
-msgstr "Lettres et e-mails"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
@@ -320,7 +319,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Print"
-msgstr "Imprimer"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
@@ -338,18 +337,18 @@ msgstr ""
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Email"
-msgstr "Courriel"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,channel:0
 #: field:credit.control.policy.level,channel:0
 msgid "Channel"
-msgstr "Canal"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 msgid "credit.control.policy.changer"
-msgstr "credit.control.policy.changer"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/invoice.py:71
@@ -364,7 +363,7 @@ msgstr ""
 #: code:addons/account_credit_control/line.py:286
 #, python-format
 msgid "Error !"
-msgstr "Erreur !"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -387,7 +386,7 @@ msgstr ""
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:249
 msgid "Sub-total"
-msgstr "Sous-total"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:105
@@ -398,17 +397,17 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.printer,state:0
 msgid "state"
-msgstr "état"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.run,report:0
 msgid "Report"
-msgstr "Rapport"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr "Etat"
+msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.line,state:0
@@ -427,12 +426,12 @@ msgstr ""
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
 #: model:credit.control.policy.level,name:account_credit_control.3_time_2
 msgid "30 days end of month"
-msgstr "30 jours fin de mois"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date, End Of Month"
-msgstr "Date d'échéance, fin de mois"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -442,7 +441,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.marker,name:0
 msgid "Mark as"
-msgstr "Marquer comme"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
@@ -465,7 +464,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.run:0 field:credit.control.run,policy_ids:0
 msgid "Policies"
-msgstr "Politiques"
+msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
@@ -490,23 +489,23 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,date_due:0
 msgid "Due date"
-msgstr "Date d'échéance"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
-msgstr "Ne rien faire"
+msgstr ""
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:215
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
-msgstr "Devise"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_printer
 msgid "Mass printer"
-msgstr "Impression en masse"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -518,7 +517,7 @@ msgstr ""
 #: field:credit.control.line,company_id:0
 #: field:credit.control.policy,company_id:0
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -578,7 +577,7 @@ msgstr ""
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #: selection:credit.control.run,state:0
 msgid "Draft"
-msgstr "Brouillon"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.marker:0
@@ -625,7 +624,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
 msgid "Credit control line generator"
-msgstr "Générateur de relance"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:0
@@ -635,7 +634,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
-msgstr "Utilisateur"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
@@ -651,7 +650,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
 msgid "Active"
-msgstr "Actif"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
@@ -703,7 +702,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr "Sociétés"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:250
@@ -744,7 +743,7 @@ msgstr ""
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #, python-format
 msgid "Error"
-msgstr "Erreur"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:162
@@ -826,24 +825,24 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr "Fait"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr "Facture"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.policy.changer:0 view:credit.control.printer:0
 msgid "Cancel"
-msgstr "Annulée"
+msgstr "Cancelar"
 
 #. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
@@ -1026,7 +1025,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -1042,7 +1041,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.printer:0
 msgid "Lines"
-msgstr "Lignes"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.line,mail_message_id:0
@@ -1068,7 +1067,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
 msgid "A credit control policy level"
-msgstr "Une politique de relance"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.report.xml,name:account_credit_control.report_webkit_html
@@ -1104,7 +1103,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.policy.changer:0
 msgid "or"
-msgstr "ou"
+msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy:0
@@ -1119,7 +1118,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Filters"
-msgstr "Filtres"
+msgstr ""
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0

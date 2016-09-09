@@ -3,20 +3,19 @@
 # * account_move_template
 # 
 # Translators:
-# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-17 23:52+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
-"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
+"PO-Revision-Date: 2015-06-03 16:27+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:80
@@ -54,12 +53,12 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:0
 msgid "Next"
-msgstr "Suivant"
+msgstr ""
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr "Etat"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:190
@@ -84,13 +83,13 @@ msgstr ""
 #: code:addons/account_move_template/wizard/select_template.py:122
 #, python-format
 msgid "No period found !"
-msgstr "Pas de période trouvée !"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
@@ -102,7 +101,7 @@ msgstr ""
 #: code:addons/account_move_template/wizard/select_template.py:111
 #, python-format
 msgid "Error !"
-msgstr "Erreur !"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:123
@@ -119,7 +118,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: account_move_template
 #: view:wizard.select.move.template.line:0
@@ -153,7 +152,7 @@ msgstr ""
 #: field:account.move.template.line,account_id:0
 #: field:wizard.select.move.template.line,account_id:0
 msgid "Account"
-msgstr "Compte"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template,name:0
@@ -161,7 +160,7 @@ msgstr "Compte"
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
@@ -171,7 +170,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
 msgid "Lines"
-msgstr "Lignes"
+msgstr ""
 
 #. module: account_move_template
 #: view:account.move.template.line:0
@@ -198,7 +197,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr "Montant"
+msgstr ""
 
 #. module: account_move_template
 #: view:account.move.template:0
@@ -211,7 +210,7 @@ msgstr ""
 #: code:addons/account_move_template/account_document_template.py:90
 #, python-format
 msgid "Error"
-msgstr "Erreur"
+msgstr ""
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
@@ -265,7 +264,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
 msgid "Tax"
-msgstr "Taxes"
+msgstr ""
 
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
@@ -292,12 +291,12 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:0
 msgid "Cancel"
-msgstr "Annulée"
+msgstr "Cancelar"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr "Partenaire"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_document_template
@@ -307,7 +306,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:70
