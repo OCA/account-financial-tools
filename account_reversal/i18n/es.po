@@ -3,12 +3,35 @@
 # * account_reversal
 # 
 # Translators:
+# Accounts-Payable - Alkemics, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Alexis de Lattre <alexis@via.ecp.fr>, 2016
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chen-Do LU <clu@alkemics.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
+# Efstathios Iosifidis <iefstathios@gmail.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012,2014
+# François Breysse <fb@alkemics.com>, 2015
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Jim Spentzos, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# njeudy <njeudy@tuxservices.com>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Pierre Verkest <pverkest@anybox.fr>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-24 14:29+0000\n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -53,10 +76,15 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_reversal
+#: field:account.move.reverse,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
 "Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the next period."
+" the first day of the period following the period of the move to reverse."
 msgstr ""
 
 #. module: account_reversal
@@ -92,6 +120,11 @@ msgid "Journal Entries to be Reversed"
 msgstr ""
 
 #. module: account_reversal
+#: field:account.move.reverse,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
@@ -118,12 +151,17 @@ msgid ""
 msgstr ""
 
 #. module: account_reversal
+#: field:account.move.reverse,reconcile:0
+msgid "Reconcile"
+msgstr "Conciliación"
+
+#. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:114
+#: code:addons/account_reversal/wizard/account_move_reverse.py:113
 #, python-format
 msgid "Reversal Entries"
 msgstr ""
@@ -160,6 +198,18 @@ msgstr ""
 #: view:account.move:account_reversal.view_account_move_reversal_filter
 #: field:account.move,to_be_reversed:0
 msgid "To Be Reversed"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:84
+#, python-format
+msgid "Wrong company Journal is %s but we have %s"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:87
+#, python-format
+msgid "Wrong company Period is %s but we have %s"
 msgstr ""
 
 #. module: account_reversal
