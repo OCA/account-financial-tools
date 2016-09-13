@@ -50,7 +50,8 @@ class account_move(models.Model):
     @api.multi
     def _move_reversal(self, reversal_date,
                        reversal_period_id=False, reversal_journal_id=False,
-                       move_prefix=False, move_line_prefix=False):
+                       move_prefix=False, move_line_prefix=False,
+                       reconcile=False):
         """
         Create the reversal of a move
 
@@ -67,6 +68,7 @@ class account_move(models.Model):
         """
         self.ensure_one()
         period_obj = self.env['account.period']
+        amlo = self.env['account.move.line']
 
         if reversal_period_id:
             reversal_period = period_obj.browse([reversal_period_id])[0]
@@ -100,27 +102,44 @@ class account_move(models.Model):
             'to_be_reversed': False,
         })
 
-        for reversal_move_line in reversal_move.line_id:
-            reversal_ml_name = ' '.join(
+        rec_dict = {}
+        for rev_move_line in reversal_move.line_id:
+            rev_ml_name = ' '.join(
                 [x for x
-                 in [move_line_prefix, reversal_move_line.name]
+                 in [move_line_prefix, rev_move_line.name]
                  if x]
             )
-            reversal_move_line.write(
-                {'debit': reversal_move_line.credit,
-                 'credit': reversal_move_line.debit,
-                 'amount_currency': reversal_move_line.amount_currency * -1,
-                 'name': reversal_ml_name},
+            rev_move_line.write(
+                {'debit': rev_move_line.credit,
+                 'credit': rev_move_line.debit,
+                 'amount_currency': rev_move_line.amount_currency * -1,
+                 'name': rev_ml_name},
                 check=True,
                 update_check=True)
 
+            if reconcile and rev_move_line.account_id.reconcile:
+                rec_dict.setdefault(
+                    (rev_move_line.account_id, rev_move_line.partner_id),
+                    amlo.browse(False))
+                rec_dict[(rev_move_line.account_id, rev_move_line.partner_id)]\
+                    += rev_move_line
+
         reversal_move.validate()
+        if reconcile:
+            for mline in self.line_id:
+                if mline.account_id.reconcile:
+                    rec_dict[(mline.account_id, mline.partner_id)] += mline
+
+            for to_rec_move_lines in rec_dict.itervalues():
+                to_rec_move_lines.reconcile()
+
         return reversal_move.id
 
     @api.multi
     def create_reversals(self, reversal_date, reversal_period_id=False,
                          reversal_journal_id=False,
-                         move_prefix=False, move_line_prefix=False):
+                         move_prefix=False, move_line_prefix=False,
+                         reconcile=False):
         """
         Create the reversal of one or multiple moves
 
@@ -140,7 +159,8 @@ class account_move(models.Model):
                 reversal_period_id=reversal_period_id,
                 reversal_journal_id=reversal_journal_id,
                 move_prefix=move_prefix,
-                move_line_prefix=move_line_prefix
+                move_line_prefix=move_line_prefix,
+                reconcile=reconcile
             )
             for move in self
             if not move.reversal_id
