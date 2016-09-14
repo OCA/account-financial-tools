@@ -51,7 +51,7 @@ addon | version | summary
 [account_reconcile_trace](account_reconcile_trace/) | 8.0.1.0.0 | Account Reconcile Trace
 [account_renumber](account_renumber/) | 8.0.1.0.0 | Account renumber wizard
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 | Delete the accounting setup from an otherwise reusable database
-[account_reversal](account_reversal/) | 8.0.1.0.0 | Account Reversal
+[account_reversal](account_reversal/) | 8.0.1.1.0 | Account Reversal
 [account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 | Tax analysis
 [account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 | Tax chart for a period interval
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 | Make sure currency rates used are always up-to-update
