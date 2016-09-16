@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-07-05 13:19+0000\n"
+"POT-Creation-Date: 2016-09-09 23:38+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -308,7 +308,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Stanje"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -447,7 +447,7 @@ msgstr ""
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1235
@@ -628,7 +628,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Mesec"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -931,7 +931,7 @@ msgstr "Zapri"
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Open"
-msgstr ""
+msgstr "Odprto"
 
 #. module: account_asset_management
 #: field:account.asset.asset,move_line_check:0

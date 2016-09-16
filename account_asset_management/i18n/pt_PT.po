@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 23:52+0000\n"
+"POT-Creation-Date: 2016-09-09 23:38+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -719,7 +719,7 @@ msgstr ""
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Rascunho"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -729,7 +729,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_asset_management
 #: field:account.asset.asset,asset_value:0
@@ -852,7 +852,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 field:account.asset.asset,history_ids:0
 msgid "History"
-msgstr ""
+msgstr "Histórico"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0

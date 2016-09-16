@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-09-09 23:38+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr "Osnutek"
+msgstr "Rascunho"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
@@ -77,7 +77,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
 msgid "Company"
-msgstr "Podjetje"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -100,7 +100,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Group By"
-msgstr "Združi po"
+msgstr ""
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:253
@@ -116,7 +116,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Items"
-msgstr "Postavke"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -150,7 +150,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
 msgid "Name"
-msgstr "Naziv"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -188,7 +188,7 @@ msgstr ""
 #: code:addons/account_check_deposit/account_deposit.py:159
 #, python-format
 msgid "Error!"
-msgstr "Napaka!"
+msgstr ""
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:66
@@ -222,7 +222,7 @@ msgstr ""
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:64
 msgid "Reference"
-msgstr "Sklic"
+msgstr ""
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
@@ -266,4 +266,4 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,journal_id:0
 msgid "Journal"
-msgstr "Dnevnik"
+msgstr ""

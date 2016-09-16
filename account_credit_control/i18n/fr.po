@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 23:52+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2016-09-09 23:38+0000\n"
+"PO-Revision-Date: 2016-09-16 21:46+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -985,7 +985,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Sent"
-msgstr ""
+msgstr "Envoyé"
 
 #. module: account_credit_control
 #: constraint:credit.control.policy.level:0
@@ -1052,7 +1052,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Courriels sortants"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:68

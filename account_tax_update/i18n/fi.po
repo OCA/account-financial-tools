@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2016-09-09 23:39+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
+"Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_tax_update
@@ -32,7 +32,7 @@ msgstr ""
 #. module: account_tax_update
 #: view:account.update.tax.config:0 field:account.update.tax.config,log:0
 msgid "Log"
-msgstr "Registro"
+msgstr ""
 
 #. module: account_tax_update
 #: selection:account.update.tax.config,state:0
@@ -66,7 +66,7 @@ msgstr ""
 #: field:account.update.tax.config,state:0
 #: field:account.update.tax.config.line,state:0
 msgid "State"
-msgstr ""
+msgstr "Tila"
 
 #. module: account_tax_update
 #: field:account.update.tax.config.line,source_tax_description:0
@@ -76,7 +76,7 @@ msgstr ""
 #. module: account_tax_update
 #: selection:account.update.tax.config,state:0
 msgid "Draft"
-msgstr "Borrador"
+msgstr ""
 
 #. module: account_tax_update
 #: field:account.update.tax.config.line,target_tax_id:0
@@ -96,7 +96,7 @@ msgstr ""
 #. module: account_tax_update
 #: view:account.update.tax.select_taxes:0
 msgid "Save"
-msgstr "Guardar"
+msgstr ""
 
 #. module: account_tax_update
 #: field:account.update.tax.config,default_amount:0
@@ -190,7 +190,7 @@ msgstr ""
 #: view:account.update.tax.select_taxes:0
 #: field:account.update.tax.select_taxes,tax_ids:0
 msgid "Taxes"
-msgstr "Impuestos"
+msgstr ""
 
 #. module: account_tax_update
 #: field:account.update.tax.select_taxes,covered_tax_ids:0
@@ -208,7 +208,7 @@ msgstr ""
 #: code:addons/account_tax_update/model/update_tax_config.py:440
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #. module: account_tax_update
 #: selection:account.update.tax.config,state:0
@@ -238,7 +238,7 @@ msgstr ""
 #. module: account_tax_update
 #: model:ir.model,name:account_tax_update.model_account_update_tax_config
 msgid "Update taxes"
-msgstr "Actualizar impuestos"
+msgstr ""
 
 #. module: account_tax_update
 #: model:ir.model,name:account_tax_update.model_account_tax
@@ -259,7 +259,7 @@ msgstr ""
 #. module: account_tax_update
 #: selection:account.update.tax.config,state:0
 msgid "Done"
-msgstr ""
+msgstr "Valmis"
 
 #. module: account_tax_update
 #: field:account.update.tax.select_taxes,type_tax_use:0
@@ -269,7 +269,7 @@ msgstr ""
 #. module: account_tax_update
 #: view:account.update.tax.select_taxes:0
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #. module: account_tax_update
 #: model:ir.model,name:account_tax_update.model_account_update_tax_select_taxes

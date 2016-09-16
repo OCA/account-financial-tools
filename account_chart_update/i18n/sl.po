@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-11 09:11+0000\n"
+"POT-Creation-Date: 2016-09-09 23:38+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -273,7 +273,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_taxes:0
@@ -570,7 +570,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1557
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Napaka"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,update_account_id:0
