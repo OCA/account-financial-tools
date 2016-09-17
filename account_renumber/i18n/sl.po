@@ -3,15 +3,16 @@
 # * account_renumber
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-01 12:24+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"POT-Creation-Date: 2016-09-17 01:04+0000\n"
+"PO-Revision-Date: 2016-09-17 01:04+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,139 +25,138 @@ msgid "Account renumber wizard"
 msgstr "Čarovnik za preštevilčenje kontov"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Cancel"
 msgstr "Preklic"
 
 #. module: account_renumber
-#: field:wizard.renumber,create_uid:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: account_renumber
-#: field:wizard.renumber,create_date:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_renumber
-#: field:wizard.renumber,number_next:0
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Date ranges"
+msgstr "Datumski razponi"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_display_name
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_to
+msgid "Finish date"
+msgstr "Zaključni datum"
+
+#. module: account_renumber
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_to
+msgid "Finish renumbering in this date, inclusive."
+msgstr "Dokončaj s preštevilčenjem do vključno tega datuma."
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_number_next
 msgid "First Number"
 msgstr "Prva številka"
 
 #. module: account_renumber
-#: help:wizard.renumber,period_ids:0
-msgid "Fiscal periods to renumber"
-msgstr "Fiskalna obdobja za preštevilčenje"
-
-#. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "General Data"
 msgstr "Splošni podatki"
 
 #. module: account_renumber
-#: field:wizard.renumber,id:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_renumber
-#: selection:wizard.renumber,state:0
-msgid "Initial"
-msgstr "Začetno"
-
-#. module: account_renumber
-#: help:wizard.renumber,number_next:0
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber_number_next
 msgid "Journal sequences will start counting on this number"
 msgstr "Dnevniška zaporedja začnejo štetje od tega števila"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
-#: field:wizard.renumber,journal_ids:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_journal_ids
 msgid "Journals"
 msgstr "Dnevniki"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
-msgid "Journals and periods to consider"
-msgstr "Dnevniki in obdobja, ki se upoštevajo"
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
+msgid "Journals to consider"
+msgstr "Dnevniki, ki se upoštevajo"
 
 #. module: account_renumber
-#: help:wizard.renumber,journal_ids:0
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber_journal_ids
 msgid "Journals to renumber"
 msgstr "Dnevniki za preštevilčenje"
 
 #. module: account_renumber
-#: field:wizard.renumber,write_uid:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber___last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_renumber
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_uid
 msgid "Last Updated by"
 msgstr "Zadnjič posodobil"
 
 #. module: account_renumber
-#: field:wizard.renumber,write_date:0
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:89
-#, python-format
-msgid "No Data Available"
-msgstr "Ni podatkov na voljo"
-
-#. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:90
+#: code:addons/account_renumber/wizard/wizard_renumber.py:74
 #, python-format
 msgid "No records found for your selection!"
 msgstr "Za vaš izbor ni najdenih zapisov!"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
-#: field:wizard.renumber,period_ids:0
-msgid "Periods"
-msgstr "Obdobja"
-
-#. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
-msgstr "Knjiženi premiki teh dnevnikov bodo razvrščeni po datumu in jim bodo dodeljene zaporedne številke glede na zaporedje dnevnika."
+msgstr ""
+"Knjiženi premiki teh dnevnikov bodo razvrščeni po datumu in jim bodo "
+"dodeljene zaporedne številke glede na zaporedje dnevnika."
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Renumber"
 msgstr "Preštevilči"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Renumber Account Moves"
 msgstr "Preštevilčenje kontnih premikov"
 
 #. module: account_renumber
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
-msgid "Renumber journal entries"
+msgid "Renumber Journal Entries"
 msgstr "Preštevilčenje dnevniških vnosov"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:138
+#: code:addons/account_renumber/wizard/wizard_renumber.py:101
 #, python-format
 msgid "Renumbered account moves"
 msgstr "Preštevilčeni kontni premiki"
 
 #. module: account_renumber
-#: selection:wizard.renumber,state:0
-msgid "Renumbering"
-msgstr "Preštevilčenje"
+#: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_from
+msgid "Start renumbering in this date, inclusive."
+msgstr "Začni s preštevilčenjem na vključno ta datum"
 
 #. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
+#: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_from
+msgid "Starting date"
+msgstr "Začetni datum"
+
+#. module: account_renumber
+#: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "This wizard will help you renumber entries in one or more journals."
 msgstr "Čarovnik za preštevilčenje vnosov v enem ali več dnevnikih."
-
-#. module: account_renumber
-#: view:wizard.renumber:account_renumber.view_account_renumber_form
-msgid "or"
-msgstr "ali"
-
-#. module: account_renumber
-#: field:wizard.renumber,state:0
-msgid "unknown"
-msgstr "neznano"
