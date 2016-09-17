@@ -1,0 +1,130 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_locking
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_VE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_VE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_locking
+#: model:ir.model,name:account_move_locking.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_move_locking
+#: view:lock.account.move:account_move_locking.lock_account_move_view
+msgid "Approve"
+msgstr ""
+
+#. module: account_move_locking
+#: view:lock.account.move:account_move_locking.lock_account_move_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_move_locking
+#: field:lock.account.move,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,journal_ids:0
+msgid "Journal"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.model,name:account_move_locking.model_lock_account_move
+msgid "Lock Account Move"
+msgstr ""
+
+#. module: account_move_locking
+#: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
+#: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
+#: view:lock.account.move:account_move_locking.lock_account_move_view
+msgid "Lock Journal Entries"
+msgstr ""
+
+#. module: account_move_locking
+#: field:account.move,locked:0
+msgid "Locked"
+msgstr ""
+
+#. module: account_move_locking
+#: code:addons/account_move_locking/account.py:33
+#: code:addons/account_move_locking/account.py:41
+#: code:addons/account_move_locking/account.py:51
+#, python-format
+msgid "Move Locked!"
+msgstr ""
+
+#. module: account_move_locking
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:60
+#, python-format
+msgid "No move to locked found"
+msgstr ""
+
+#. module: account_move_locking
+#: field:lock.account.move,period_ids:0
+msgid "Period"
+msgstr ""
+
+#. module: account_move_locking
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
+#, python-format
+msgid ""
+"Unposted move in period/jounal                                        "
+"selected, please post it before                                        "
+"locking them"
+msgstr ""
+
+#. module: account_move_locking
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:49
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:59
+#, python-format
+msgid "Warning!"
+msgstr ""
+
+#. module: account_move_locking
+#: view:lock.account.move:account_move_locking.lock_account_move_view
+msgid "or"
+msgstr ""
