@@ -2,29 +2,27 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================================
-Supplier Invoice Allowed Product
-================================
+=====================================
+Account Invoice Constraint Chronology
+=====================================
 
-This module adds a restriction in supplier invoices that has the mark "Use only
-allowed products" checked for allowing to select only products that can be
-supplied by the supplier.
+This module helps ensuring the chronology of invoice numbers.
 
-The restriction can be set by default for each partner, and it's propagated
-to their supplier invoices, but it can be change for each invoice if you want.
+It prevents the validation of invoices when:
+* there are draft invoices with an anterior date
+* there are validated invoices with a posterior date
 
 Configuration
 =============
 
 To configure this module, go to the menu *Accounting > Configuration > Journals > Journals* and activate the option *Check Chronology* on the relevant journals.
-After the installation of the module, this option will be active on *sale* and *sale refund* journals.
 
 Usage
 =====
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/142/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/7.0
 
 Bug Tracker
 ===========
@@ -38,7 +36,8 @@ Credits
  
 Contributors
 ------------
- 
+
+* Adrien Peiffer <adrien.peiffer@acsone.eu> 
 * Chafique Delli <chafique.delli@akretion.com>
  
 Maintainer
