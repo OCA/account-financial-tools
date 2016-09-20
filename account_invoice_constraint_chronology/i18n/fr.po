@@ -1,0 +1,57 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_invoice_constraint_chronology
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-20 12:41+0000\n"
+"PO-Revision-Date: 2016-09-20 12:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_invoice_constraint_chronology
+#: field:account.journal,check_chronology:0
+msgid "Check Chronology"
+msgstr "Vérifiez la Chronologie"
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:32
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:50
+#, python-format
+msgid "Chronology Error!"
+msgstr "Erreur de Chronologie!"
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_journal.py:30
+#, python-format
+msgid "Configuration Error on journal '%s' because the option 'Check Chronology' can only be activated on journals that can be selected on invoices (i.e. Sale, Sale Refund, Purchase, Purchase Refund journals)."
+msgstr "Erreur de configuration dans le journal '%s' car l'option 'Vérifiez la Chronologie' peut seulement être activée sur les journaux qui sont sélectionnables dans les factures (ex. les journaux Vente, Avoir de Vente, Achat, Avoir d'Achat)."
+
+#. module: account_invoice_constraint_chronology
+#: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:33
+#, python-format
+msgid " Please confirm older draft invoices before %s and try again."
+msgstr " Merci de valider les factures brouillons avec une date antérieure au %s puis essayez à nouveau."
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:51
+#, python-format
+msgid "There exist at least one invoice with a date posterior to %s."
+msgstr "Il existe au moins une facture avec une date postérieure au %s."
+
