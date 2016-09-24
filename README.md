@@ -35,7 +35,7 @@ addon | version | summary
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 | Move in draft state by default
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.1 | Check VAT on invoice validation
 [account_fiscal_year_reopen](account_fiscal_year_reopen/) | 8.0.1.0.0 | Account fiscal year reopen
-[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 8.0.1.0.0 | Account Invoice Constraint Chronology
+[account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 8.0.1.0.1 | Account Invoice Constraint Chronology
 [account_invoice_currency](account_invoice_currency/) | 8.0.1.1.0 | Company currency in invoices
 [account_invoice_tax_required](account_invoice_tax_required/) | 8.0.1.0.0 | Tax required in invoice
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 | Option Check Date in Period always active on journals
