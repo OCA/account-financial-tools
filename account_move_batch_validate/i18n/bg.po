@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-18 05:21+0000\n"
+"POT-Creation-Date: 2016-09-23 23:40+0000\n"
+"PO-Revision-Date: 2016-09-25 14:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Фирма"
 
 #. module: account_move_batch_validate
 #: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
@@ -192,7 +192,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "or"
-msgstr ""
+msgstr "или"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,target_move:0

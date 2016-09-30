@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2016-09-23 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/bg/)\n"
@@ -222,7 +222,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Партньор"
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -517,7 +517,7 @@ msgstr ""
 #: field:credit.control.line,company_id:0
 #: field:credit.control.policy,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Фирма"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -650,7 +650,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
 msgid "Active"
-msgstr ""
+msgstr "Активен"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
@@ -1025,7 +1025,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr ""
+msgstr "Име"
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -1103,7 +1103,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.policy.changer:0
 msgid "or"
-msgstr ""
+msgstr "или"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0
