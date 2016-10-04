@@ -20,18 +20,25 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import fields, models
 
 
-class Config(orm.TransientModel):
-    _inherit = 'account.config.settings'
+class AccountAssetRecomputeTrigger(models.Model):
+    _name = 'account.asset.recompute.trigger'
+    _description = "Asset table recompute triggers"
 
-    _columns = {
-        'module_account_asset_management': fields.boolean(
-            'Assets management (OCA)',
-            help="""This allows you to manage the assets owned by a company
-                    or a person. It keeps track of the depreciation occurred
-                    on those assets, and creates account move for those
-                    depreciation lines.
-                    This installs the module account_asset_management."""),
-    }
+    reason = fields.Char(
+        string='Reason', required=True)
+    company_id = fields.Many2one(
+        'res.company', string='Company', required=True)
+    date_trigger = fields.Datetime(
+        'Trigger Date',
+        readonly=True,
+        help="Date of the event triggering the need to "
+             "recompute the Asset Tables.")
+    date_completed = fields.Datetime(
+        'Completion Date', readonly=True)
+    state = fields.Selection(
+        selection=[('open', 'Open'), ('done', 'Done')],
+        string='State', default='open',
+        readonly=True)
