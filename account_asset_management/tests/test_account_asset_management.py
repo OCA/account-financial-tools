@@ -32,8 +32,8 @@ class TestAssetManagement(common.TransactionCase):
 
     def setUp(self):
         super(TestAssetManagement, self).setUp()
-        self.asset_model = self.registry('account.asset.asset')
-        self.dl_model = self.registry('account.asset.depreciation.line')
+        self.asset_model = self.registry('account.asset')
+        self.dl_model = self.registry('account.asset.line')
 
     def test_1_hierarchy(self):
         """Test computations across the asset hierarchy."""

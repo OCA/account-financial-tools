@@ -22,7 +22,3 @@
 ##############################################################################
 
 from . import test_account_asset_management
-
-checks = [
-    test_account_asset_management,
-]

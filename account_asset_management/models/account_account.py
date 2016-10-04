@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution
-#x
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+#
+#    Copyright (c) 2009-2016 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +20,25 @@
 #
 ##############################################################################
 
-from . import models
-from . import wizard
+from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
+
+
+class AccountAccount(models.Model):
+    _inherit = 'account.account'
+
+    asset_profile_id = fields.Many2one(
+        'account.asset.profile',
+        name='Asset Profile',
+        help="Default Asset Profile when creating invoice lines "
+             "with this account.")
+
+    @api.multi
+    @api.constrains('asset_profile_id')
+    def _check_asset_profile(self):
+        for account in self:
+            if account.asset_profile_id and \
+                    account.asset_profile_id.account_asset_id != account:
+                raise ValidationError(_(
+                    "The Asset Account defined in the Asset Profile "
+                    "must be equal to the account."))
