@@ -1,29 +1,16 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
-from openerp import models, fields, api, _
+
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
+
 logger = logging.getLogger(__name__)
 
 
-class credit_control_policy_changer(models.TransientModel):
+class CreditControlPolicyChanger(models.TransientModel):
     """ Wizard that is run from invoices and allows to set manually a policy
     Policy are actually apply to related move lines availabe
     in selection widget
@@ -52,18 +39,17 @@ class credit_control_policy_changer(models.TransientModel):
         context = self.env.context
         active_ids = context.get('active_ids')
         invoice_obj = self.env['account.invoice']
-        move_line_obj = self.env['account.move.line']
         if not active_ids:
             return False
-        selected_lines = move_line_obj.browse()
+        selected_lines = self.env['account.move.line']
         for invoice in invoice_obj.browse(active_ids):
             if invoice.type in ('in_invoice', 'in_refund', 'out_refund'):
-                raise api.Warning(_('Please use wizard on customer invoices'))
+                raise UserError(_('Please use wizard on customer invoices'))
 
             domain = [('account_id', '=', invoice.account_id.id),
                       ('move_id', '=', invoice.move_id.id),
-                      ('reconcile_id', '=', False)]
-            move_lines = move_line_obj.search(domain)
+                      ('reconciled', '=', False)]
+            move_lines = selected_lines.search(domain)
             selected_lines |= move_lines
         return selected_lines
 
@@ -96,10 +82,7 @@ class credit_control_policy_changer(models.TransientModel):
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
         """ Force policy on invoice """
-        invoice_obj = self.env['account.invoice']
-        invoice_ids = set(line.invoice.id for line in move_lines
-                          if line.invoice)
-        invoices = invoice_obj.browse(invoice_ids)
+        invoices = move_lines.mapped('invoice_id')
         invoices.write({'credit_policy_id': policy.id})
 
     @api.model

@@ -1,28 +1,13 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from openerp import models, fields, api, _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
-logger = logging.getLogger('credit.control.run')
+logger = logging.getLogger(__name__)
 
 
 class CreditControlRun(models.Model):
@@ -74,7 +59,7 @@ class CreditControlRun(models.Model):
         copy=False,
     )
 
-    @api.multi
+    @api.model
     def _check_run_date(self, controlling_date):
         """ Ensure that there is no credit line in the future
         using controlling_date
@@ -83,33 +68,31 @@ class CreditControlRun(models.Model):
         runs = self.search([('date', '>', controlling_date)],
                            order='date DESC', limit=1)
         if runs:
-            raise api.Warning(_('A run has already been executed more '
-                                'recently than %s') % (runs.date))
+            raise UserError(_('A run has already been executed more '
+                              'recently than %s') % (runs.date))
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
-            raise api.Warning(_('A credit control line more '
-                                'recent than %s exists at %s') %
-                              (controlling_date, lines.date))
+            raise UserError(_('A credit control line more '
+                              'recent than %s exists at %s') %
+                            (controlling_date, lines.date))
 
     @api.multi
     @api.returns('credit.control.line')
     def _generate_credit_lines(self):
         """ Generate credit control lines. """
         self.ensure_one()
-        cr_line_obj = self.env['credit.control.line']
-        move_line_obj = self.env['account.move.line']
-        manually_managed_lines = move_line_obj.browse()
+        manually_managed_lines = self.env['account.move.line']
         self._check_run_date(self.date)
 
         policies = self.policy_ids
         if not policies:
-            raise api.Warning(_('Please select a policy'))
+            raise UserError(_('Please select a policy'))
 
         report = ''
-        generated = cr_line_obj.browse()
+        generated = self.env['credit.control.line']
         for policy in policies:
             if policy.do_nothing:
                 continue
@@ -117,11 +100,11 @@ class CreditControlRun(models.Model):
             manual_lines = policy._lines_different_policy(lines)
             lines -= manual_lines
             manually_managed_lines |= manual_lines
-            policy_lines_generated = cr_line_obj.browse()
+            policy_lines_generated = self.env['credit.control.line']
             if lines:
                 # policy levels are sorted by level
                 # so iteration is in the correct order
-                create = cr_line_obj.create_or_update_from_mv_lines
+                create = policy_lines_generated.create_or_update_from_mv_lines
                 for level in reversed(policy.level_ids):
                     level_lines = level.get_level_lines(self.date, lines)
                     policy_lines_generated += create(level_lines,
@@ -158,8 +141,8 @@ class CreditControlRun(models.Model):
         except Exception:
             # In case of exception openerp will do a rollback
             # for us and free the lock
-            raise api.Warning(_('A credit control run is already running'
-                                ' in background, please try later.'))
+            raise UserError(_('A credit control run is already running '
+                              'in background, please try later.'))
 
         self._generate_credit_lines()
         return True

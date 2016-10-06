@@ -1,28 +1,13 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from openerp import models, fields, api, _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
-logger = logging.getLogger('credit.line.control')
+logger = logging.getLogger(__name__)
 
 
 class CreditControlLine(models.Model):
@@ -40,7 +25,7 @@ class CreditControlLine(models.Model):
 
     date = fields.Date(string='Controlling date',
                        required=True,
-                       select=True)
+                       index=True)
     # maturity date of related move line we do not use
     # a related field in order to
     # allow manual changes
@@ -130,7 +115,7 @@ class CreditControlLine(models.Model):
                                 store=True,
                                 readonly=True)
 
-    level = fields.Integer('credit.control.policy.level',
+    level = fields.Integer('Level',
                            related='policy_level_id.level',
                            store=True,
                            readonly=True)
@@ -149,8 +134,8 @@ class CreditControlLine(models.Model):
         data['date_due'] = move_line.date_maturity
         data['state'] = 'draft'
         data['channel'] = level.channel
-        data['invoice_id'] = (move_line.invoice.id if
-                              move_line.invoice else False)
+        data['invoice_id'] = (move_line.invoice_id.id if
+                              move_line.invoice_id else False)
         data['partner_id'] = move_line.partner_id.id
         data['amount_due'] = (move_line.amount_currency or move_line.debit or
                               move_line.credit)
@@ -194,7 +179,10 @@ class CreditControlLine(models.Model):
 
         new_lines = self.browse()
         for move_line in lines:
-            open_amount = move_line.amount_residual_currency
+            if move_line.currency_id:
+                open_amount = move_line.amount_residual_currency
+            else:
+                open_amount = move_line.amount_residual
             cur_tolerance = tolerance.get(move_line.currency_id.id,
                                           tolerance_base)
             if check_tolerance and open_amount < cur_tolerance:
@@ -204,7 +192,7 @@ class CreditControlLine(models.Model):
                                                 controlling_date,
                                                 open_amount)
             line = self.create(vals)
-            new_lines += line
+            new_lines |= line
 
             # when we have lines generated earlier in draft,
             # on the same level, it means that we have left
@@ -222,7 +210,7 @@ class CreditControlLine(models.Model):
     def unlink(self):
         for line in self:
             if line.state != 'draft':
-                raise api.Warning(
+                raise UserError(
                     _('You are not allowed to delete a credit control '
                       'line that is not in draft state.')
                 )
