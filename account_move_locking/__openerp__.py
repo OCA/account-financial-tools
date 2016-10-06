@@ -26,6 +26,6 @@
     'website': 'http://www.camptocamp.com',
     'data': ['account_view.xml',
              'wizard/account_lock_move_view.xml'],
-    'installable': True,
+    'installable': False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
