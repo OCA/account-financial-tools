@@ -2,8 +2,8 @@
 # Author: Damien Crier
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields, api
-from openerp.tools import (DEFAULT_SERVER_DATETIME_FORMAT)
+from odoo import models, fields, api
+from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class ResCompany(models.Model):
