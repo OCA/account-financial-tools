@@ -3,14 +3,14 @@
 # * account_move_locking
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 02:44+0000\n"
-"PO-Revision-Date: 2016-07-29 06:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-09-17 01:04+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,12 +46,12 @@ msgstr "Ustvarjeno"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_end
 msgid "Date end"
-msgstr ""
+msgstr "Končni datum"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Začetni datum"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
@@ -59,7 +59,7 @@ msgstr ""
 msgid ""
 "Date start need to be                                           before Date "
 "end"
-msgstr ""
+msgstr "Začetni datum mora biti pred končnim"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
@@ -114,7 +114,7 @@ msgstr "Zaklenjeno"
 #: code:addons/account_move_locking/account.py:49
 #, python-format
 msgid "Move Locked! %s"
-msgstr ""
+msgstr "Premik zaklenjen! %s"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:67
@@ -129,7 +129,7 @@ msgid ""
 "Unposted move in period/jounal                                           "
 "selected, please post it before                                           "
 "locking them"
-msgstr ""
+msgstr "Neknjižen premik v izbranem obdobju/dnevniku. Vknjižite ga preden ga zaklenete."
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
