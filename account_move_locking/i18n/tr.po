@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"POT-Creation-Date: 2017-01-08 03:37+0000\n"
 "PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/tr/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Onayla"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
@@ -50,7 +50,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Başlama Zamanı"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
@@ -63,7 +63,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_id
@@ -73,12 +73,12 @@ msgstr "ID"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_journal_ids
 msgid "Journal"
-msgstr ""
+msgstr "Yevmiye Defteri"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_uid
@@ -133,4 +133,4 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "ya da"
