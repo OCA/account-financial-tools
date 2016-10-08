@@ -6,7 +6,7 @@
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Bruno JOLIVEAU, 2015
-# Chanseok <kcsgoodboy@gmail.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Hotellook, 2014
@@ -25,12 +25,13 @@
 # SEUNGWON <baeksw0620@gmail.com>, 2014
 # Yael Terrettaz, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 17:14+0000\n"
-"PO-Revision-Date: 2016-08-19 11:44+0000\n"
+"POT-Creation-Date: 2016-09-24 00:46+0000\n"
+"PO-Revision-Date: 2016-10-05 06:37+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -444,7 +445,7 @@ msgstr "Stvorena knjiženja imovine"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Kreirao"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -456,7 +457,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Kreirano"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -820,7 +821,7 @@ msgstr "Zadnja izmjena dana"
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0

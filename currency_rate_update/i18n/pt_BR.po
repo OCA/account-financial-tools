@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Bruno JOLIVEAU, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
@@ -16,12 +17,13 @@
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 # SaFi J. <safi2266@gmail.com>, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-08 13:37+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +127,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para Mostrar"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
@@ -178,7 +180,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_uid:0

@@ -4,9 +4,10 @@
 # 
 # Translators:
 # Accounts-Payable - Alkemics, 2015
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
 # Antonio Trueba, 2016
+# Bole <bole@dajmi5.com>, 2015
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Bole <bole@dajmi5.com>, 2015
 # Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
@@ -18,6 +19,7 @@
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Jim Spentzos, 2014
+# Jim Spentzos, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # njeudy <njeudy@tuxservices.com>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
@@ -28,8 +30,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 01:12+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -491,7 +493,7 @@ msgstr "Verzugseinstellung"
 #: field:credit.control.printer,display_name:0
 #: field:credit.control.run,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
@@ -656,7 +658,7 @@ msgstr "Ausgewiesene Posten"
 #: field:credit.control.printer,__last_update:0
 #: field:credit.control.run,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -693,6 +695,7 @@ msgstr "Brief"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Stufe"
@@ -1094,6 +1097,7 @@ msgid "Source"
 msgstr "Herkunft"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "Status"
