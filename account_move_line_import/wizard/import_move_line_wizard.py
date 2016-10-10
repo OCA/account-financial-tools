@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution
 #
-#    Copyright (c) 2009-2015 Noviat nv/sa (www.noviat.com).
+#    Copyright (c) 2009-2016 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -26,11 +26,12 @@ except ImportError:
     import StringIO
 import base64
 import csv
+import time
 from datetime import datetime
 from sys import exc_info
 from traceback import format_exception
 
-from openerp import models, fields, api, _
+from openerp import api, fields, models, _
 from openerp.exceptions import Warning
 
 import logging
@@ -48,10 +49,10 @@ class AccountMoveLineImport(models.TransientModel):
     dialect = fields.Binary(
         compute='_compute_dialect', string='Dialect', required=True)
     csv_separator = fields.Selection(
-        [(',', ' . (comma)'), (';', ', (semicolon)')],
+        [(',', ', (comma)'), (';', '; (semicolon)')],
         string='CSV Separator', required=True)
     decimal_separator = fields.Selection(
-        [('.', ' . (dot)'), (',', ', (comma)')],
+        [('.', '. (dot)'), (',', ', (comma)')],
         string='Decimal Separator',
         default='.', required=True)
     codepage = fields.Char(
@@ -69,7 +70,9 @@ class AccountMoveLineImport(models.TransientModel):
     @api.depends('aml_data')
     def _compute_lines(self):
         if self.aml_data:
-            self.lines = base64.decodestring(self.aml_data)
+            lines = base64.decodestring(self.aml_data)
+            # convert windows & mac line endings to unix style
+            self.lines = lines.replace('\r\n', '\n').replace('\r', '\n')
 
     @api.one
     @api.depends('lines', 'csv_separator')
@@ -473,6 +476,7 @@ class AccountMoveLineImport(models.TransientModel):
     @api.multi
     def aml_import(self):
 
+        time_start = time.time()
         self._err_log = ''
         move = self.env['account.move'].browse(
             self._context['active_id'])
@@ -548,7 +552,12 @@ class AccountMoveLineImport(models.TransientModel):
                 'type': 'ir.actions.act_window',
             }
         else:
-            move.write({'line_id': vals})
+            ctx = dict(self._context, novalidate=True)
+            move.with_context(ctx).write({'line_id': vals})
+            import_time = time.time() - time_start
+            _logger.warn(
+                'account.move %s import time = %.3f seconds',
+                move.name, import_time)
             return {'type': 'ir.actions.act_window_close'}
 
 

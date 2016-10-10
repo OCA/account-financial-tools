@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution
 #
-#    Copyright (c) 2009-2015 Noviat nv/sa (www.noviat.com).
+#    Copyright (c) 2009-2016 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,4 +20,21 @@
 #
 ##############################################################################
 
-from . import account_move
+{
+    'name': 'Account Move Line Import',
+    'version': '8.0.1.0.0',
+    'license': 'AGPL-3',
+    'author': 'Noviat',
+    'website': 'http://www.noviat.com',
+    'category': 'Accounting & Finance',
+    'summary': 'Import Accounting Entries',
+    'depends': ['account'],
+    'data': [
+        'views/account_move.xml',
+        'wizard/import_move_line_wizard.xml',
+    ],
+    'demo': [
+        'demo/account_move.xml',
+    ],
+    'installable': True,
+}

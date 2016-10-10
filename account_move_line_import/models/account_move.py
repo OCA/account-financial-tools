@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    Odoo, Open Source Management Solution
 #
-#    Copyright (c) 2009-2015 Noviat nv/sa (www.noviat.com).
+#    Copyright (c) 2009-2016 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,21 +20,23 @@
 #
 ##############################################################################
 
-{
-    'name': 'Account Move Import',
-    'version': '8.0.0.4.1',
-    'license': 'AGPL-3',
-    'author': 'Noviat, Odoo Community Association (OCA)',
-    'website': 'http://www.noviat.com',
-    'category': 'Accounting & Finance',
-    'summary': 'Import Accounting Entries',
-    'depends': ['account'],
-    'data': [
-        'views/account_move.xml',
-        'wizard/import_move_line_wizard.xml',
-    ],
-    'demo': [
-        'demo/account_move.xml',
-    ],
-    'installable': True,
-}
+from openerp import api, models, _
+
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    @api.multi
+    def import_lines(self):
+        self.ensure_one()
+        module = __name__.split('addons.')[1].split('.')[0]
+        view = self.env.ref('%s.aml_import_view_form' % module)
+        return {
+            'name': _('Import File'),
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'aml.import',
+            'view_id': view.id,
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
