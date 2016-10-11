@@ -2,8 +2,7 @@
 # Author: Damien Crier
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import models, fields, api
-from openerp.tools import (DEFAULT_SERVER_DATETIME_FORMAT)
+from odoo import models, fields, api
 
 
 class ResCompany(models.Model):
@@ -15,7 +14,7 @@ class ResCompany(models.Model):
         with @param:date contained in its date_start/date_end interval
         """
         fy_id = self.env.ref('account_fiscal_year.fiscalyear')
-        date_str = date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+        date_str = fields.Datetime.to_string(date)
         s_args = [
             ('type_id', '=', fy_id.id),
             ('date_start', '<=', date_str),
