@@ -10,17 +10,16 @@ class ResPartner(models.Model):
 
     @api.onchange('property_account_position_id')
     def fiscal_position_change(self):
-        '''Warning if the fiscal position requires a VAT number and the
-        partner doesn't have one yet'''
+        """Warning if the fiscal position requires a VAT number and the
+        partner doesn't have one yet"""
         fp = self.property_account_position_id
-        if fp and self.customer and not self.vat:
-            if fp.vat_required:
-                return {
-                    'warning': {
-                        'title': _('Missing VAT number:'),
-                        'message': _(
-                            "You have set the fiscal position '%s' "
-                            "that require the customer to have a VAT number, "
-                            "but the VAT number is missing.") % fp.name
-                    }
+        if fp and fp.vat_required and self.customer and not self.vat:
+            return {
+                'warning': {
+                    'title': _('Missing VAT number:'),
+                    'message': _(
+                        "You have set the fiscal position '%s' "
+                        "that require the customer to have a VAT number, "
+                        "but the VAT number is missing.") % fp.name
                 }
+            }

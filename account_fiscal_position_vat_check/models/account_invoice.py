@@ -11,8 +11,8 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_move_create(self):
-        '''Check that the customer has VAT set
-        if required by the fiscal position'''
+        """Check that the customer has VAT set if required by the
+        fiscal position"""
         for invoice in self:
             if (
                     invoice.type in ('out_invoice', 'out_refund') and
