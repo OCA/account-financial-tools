@@ -45,7 +45,7 @@ msgstr "Geschäftsjahr"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_date_range_type_fiscal_year
-msgid "Is fiscal year ?"
+msgid "Is fiscal year?"
 msgstr "Ist Geschäftsjahr?"
 
 #. module: account_fiscal_year
