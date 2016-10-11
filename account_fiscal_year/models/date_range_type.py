@@ -3,13 +3,13 @@
 # Copyright 2016 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, _, exceptions
+from odoo import models, fields, api, _, exceptions
 
 
 class DateRangeType(models.Model):
     _inherit = "date.range.type"
 
-    fiscal_year = fields.Boolean(string='Is fiscal year ?', default=False)
+    fiscal_year = fields.Boolean(string='Is fiscal year?', default=False)
 
     @api.multi
     def unlink(self):
