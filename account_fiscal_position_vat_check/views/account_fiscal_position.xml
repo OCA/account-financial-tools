@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
-    Copyright (C) 2013-2014 Akretion (http://www.akretion.com/)
-    @author Alexis de Lattre <alexis.delattre@akretion.com>
-    The licence is in the file __openerp__.py
+ © 2013-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
-<openerp>
-<data>
+<odoo>
 
 
 <record id="view_account_position_form" model="ir.ui.view">
@@ -15,8 +12,9 @@
     <field name="model">account.fiscal.position</field>
     <field name="inherit_id" ref="account.view_account_position_form" />
     <field name="arch" type="xml">
-        <field name="country_group_id" position="after">
-            <field name="customer_must_have_vat" />
+        <field name="vat_required" position="attributes">
+            <!-- always display that field -->
+            <attribute name="attrs">{}</attribute>
         </field>
     </field>
 </record>
@@ -28,10 +26,10 @@
     <field name="inherit_id" ref="account.view_account_position_tree" />
     <field name="arch" type="xml">
         <field name="name" position="after">
-            <field name="customer_must_have_vat" />
+            <field name="vat_required" />
         </field>
     </field>
 </record>
 
-</data>
-</openerp>
+
+</odoo>
