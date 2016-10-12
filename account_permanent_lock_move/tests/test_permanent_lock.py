@@ -2,10 +2,10 @@
 # © 2016 Camptocamp SA (Matthieu Dietrich)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import datetime
-from openerp import fields, tools
-from openerp.modules import get_module_resource
-from openerp.tests import common
-from openerp.exceptions import UserError
+from odoo import fields, tools
+from odoo.modules import get_module_resource
+from odoo.tests import common
+from odoo.exceptions import UserError
 
 
 class PermanentLock(common.TransactionCase):
