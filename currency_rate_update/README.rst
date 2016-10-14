@@ -37,6 +37,8 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. National Bank of Hungary (Magyar Nemzeti Bank - MNB)
+
 Configuration
 =============
 
