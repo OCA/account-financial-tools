@@ -164,7 +164,13 @@ class AccountAssetRemove(models.TransientModel):
                 _("You can't make an early removal if all the depreciation "
                   "lines for previous periods are not posted."))
 
-        last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        if first_to_depreciate_dl.previous_id:
+            last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        else:
+            create_dl = asset_line_obj.search(
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
+            last_depr_date = create_dl.line_date
+
         period_number_days = (
             datetime.strptime(first_date, '%Y-%m-%d') -
             datetime.strptime(last_depr_date, '%Y-%m-%d')).days
@@ -197,15 +203,17 @@ class AccountAssetRemove(models.TransientModel):
 
         # asset and asset depreciation account reversal
         depr_amount = asset.depreciation_base - residual_value
-        move_line_vals = {
-            'name': asset.name,
-            'account_id': profile.account_depreciation_id.id,
-            'debit': depr_amount > 0 and depr_amount or 0.0,
-            'credit': depr_amount < 0 and -depr_amount or 0.0,
-            'partner_id': partner_id,
-            'asset_id': asset.id
-        }
-        move_lines.append((0, 0, move_line_vals))
+        if depr_amount:
+            move_line_vals = {
+                'name': asset.name,
+                'account_id': profile.account_depreciation_id.id,
+                'debit': depr_amount > 0 and depr_amount or 0.0,
+                'credit': depr_amount < 0 and -depr_amount or 0.0,
+                'partner_id': partner_id,
+                'asset_id': asset.id
+            }
+            move_lines.append((0, 0, move_line_vals))
+
         move_line_vals = {
             'name': asset.name,
             'account_id': profile.account_asset_id.id,
@@ -279,7 +287,13 @@ class AccountAssetRemove(models.TransientModel):
         dlines = asset_line_obj.search(
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate')],
             order='line_date desc')
-        last_date = dlines[0].line_date
+        if dlines:
+            last_date = dlines[0].line_date
+        else:
+            create_dl = asset_line_obj.search(
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
+            last_date = create_dl.line_date
+
         if self.date_remove < last_date:
             raise exceptions.UserError(
                 _("The removal date must be after "

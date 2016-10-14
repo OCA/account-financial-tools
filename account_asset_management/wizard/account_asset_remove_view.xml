@@ -9,7 +9,7 @@
           <form string="Remove Asset">
             <group colspan="4" col="4">
               <field name="date_remove"/>
-              <field name="sale_value"/>
+              <field name="sale_value" attrs="{'invisible': [('prosting_regime', '!=', 'gain_loss_on_sale')]}"/>
               <field name="account_sale_id" attrs="{'invisible': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"/>
               <newline/>
               <field name="posting_regime"/>
