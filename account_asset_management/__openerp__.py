@@ -22,7 +22,7 @@
 {
     'name': 'Assets Management',
     'version': '9.0.2.6.0',
-    'depends': ['account'],
+    'depends': ['account', 'account_fiscal_year'],
     'conflicts': ['account_asset'],
     'author': "OpenERP & Noviat,Odoo Community Association (OCA)",
     'website': 'http://www.noviat.com',
