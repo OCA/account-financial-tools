@@ -48,16 +48,16 @@ class AccountInvoice(models.Model):
             move = inv.move_id
             assets = move and \
                 [aml.asset_id for aml in
-                 filter(lambda x: x.asset_id, move.line_id)]
+                 filter(lambda x: x.asset_id, move.line_ids)]
         super(AccountInvoice, self).action_cancel()
         if assets:
             assets.unlink()
         return True
 
     @api.model
-    def line_get_convert(self, x, part, date):
+    def line_get_convert(self, x, part):
         res = super(AccountInvoice, self).line_get_convert(
-            x, part, date)
+            x, part)
         if x.get('asset_profile_id'):
             # skip empty debit/credit
             if res.get('debit') or res.get('credit'):
