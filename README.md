@@ -33,7 +33,7 @@ addon | version | summary
 [account_credit_control](account_credit_control/) | 8.0.0.3.0 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 | Credit control dunning fees
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 | Move in draft state by default
-[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.1 | Check VAT on invoice validation
+[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.2 | Check VAT on invoice validation
 [account_fiscal_year_reopen](account_fiscal_year_reopen/) | 8.0.1.0.0 | Account fiscal year reopen
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 8.0.1.0.1 | Account Invoice Constraint Chronology
 [account_invoice_currency](account_invoice_currency/) | 8.0.1.1.0 | Company currency in invoices
