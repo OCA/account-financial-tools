@@ -848,7 +848,7 @@ class AccountAsset(models.Model):
 
     @api.onchange('type')
     def onchange_type(self):
-        if self.asset_type == 'view':
+        if self.type == 'view':
             self.date_start = False
             self.profile_id = False
             self.purchase_value = False

@@ -71,6 +71,16 @@ class AccountInvoice(models.Model):
         res += '-%s' % invoice_line.get('asset_profile_id', 'False')
         return res
 
+    @api.model
+    def invoice_line_move_line_get(self):
+        res = super(AccountInvoice, self).invoice_line_move_line_get()
+        invoice_line_obj = self.env['account.invoice.line']
+        for vals in res:
+            invline = invoice_line_obj.browse(vals['invl_id'])
+            if invline.asset_profile_id:
+                vals['asset_profile_id'] = invline.asset_profile_id.id
+        return res
+
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
@@ -90,5 +100,4 @@ class AccountInvoiceLine(models.Model):
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
-        super(AccountInvoiceLine, self).onchange_account_id()
         self.asset_profile_id = self.account_id.asset_profile_id.id

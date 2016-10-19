@@ -91,7 +91,7 @@ class AccountMoveLine(models.Model):
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_profile_id'):
             # create asset
-            move = self.env('account.move').browse(vals['move_id'])
+            move = self.env['account.move'].browse(vals['move_id'])
             depreciation_base = vals['debit'] or -vals['credit']
             asset_vals = {
                 'name': vals['name'],
@@ -104,7 +104,7 @@ class AccountMoveLine(models.Model):
                 asset_vals['company_id'] = self._context['company_id']
             ctx = dict(self._context, create_asset_from_move_line=True,
                        move_id=vals['move_id'])
-            asset = self.env['asset.asset'].with_context(
+            asset = self.env['account.asset'].with_context(
                 ctx).create(asset_vals)
             vals['asset_id'] = asset.id
         return super(AccountMoveLine, self).create(
