@@ -5,8 +5,8 @@
 import logging
 
 from datetime import datetime
-from openerp import fields
-from openerp.exceptions import except_orm
+from odoo import fields
+from odoo.exceptions import except_orm
 
 _logger = logging.getLogger(__name__)
 
@@ -74,7 +74,7 @@ class CurrencyGetterInterface(object):
 
         For example::
 
-            from openerp.addons.currency_rate_update \
+            from odoo.addons.currency_rate_update \
                 import CurrencyGetterInterface
 
             class MySuperCurrencyGetter(CurrencyGetterInterface):

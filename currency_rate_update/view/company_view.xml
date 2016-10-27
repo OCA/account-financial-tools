@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <data>
         <record model="ir.ui.view" id="currency_auto_comp">
             <field name="name">res.company.form.inherit</field>
@@ -18,5 +18,5 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>
 
