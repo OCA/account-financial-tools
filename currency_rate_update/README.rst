@@ -107,6 +107,7 @@ Contributors
 * Assem Bayahi
 * Daniel Dico <ddico@oerp.ca> (BOC)
 * Dmytro Katyukha <firemage.dima@gmail.com>
+* Darko Nikolovski <darko@hbee.eu> (NBRM)
 
 
 Maintainer
