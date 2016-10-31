@@ -35,6 +35,8 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. National Bank of the Republic of Macedonia
+
 Configuration
 =============
 
@@ -45,6 +47,11 @@ You can active or deactivate the update.
 The module uses internal ir-cron feature from Odoo, so the job is
 launched once the server starts if the 'first execute date' is before
 the current day.
+
+External Dependencies
+=====================
+* PySimpleSOAP is used as SOAP library for communication to the NBRM service. It can be installed with pip (``pip install pysimplesoap``)
+
 
 Usage
 =====

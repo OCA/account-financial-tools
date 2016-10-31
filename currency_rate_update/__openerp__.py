@@ -19,6 +19,11 @@
         "security/rule.xml",
         "security/ir.model.access.csv",
     ],
+    'external_dependencies': {
+        'python': [
+            'pysimplesoap',
+        ],
+    },
     "images": [],
     "demo": [],
     'installable': True
