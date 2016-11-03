@@ -289,4 +289,3 @@ class TestAssetManagement(common.TransactionCase):
             # I check that the new asset has the correct purchase value
             self.assertAlmostEqual(
                 asset.purchase_value, line.price_unit, places=2)
-

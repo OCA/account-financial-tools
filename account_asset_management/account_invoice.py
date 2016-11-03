@@ -2,7 +2,7 @@
 # Copyright 2016 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models, _
+from openerp import api, models
 
 import copy
 
@@ -20,7 +20,7 @@ class AccountInvoice(models.Model):
             line = line_tuple[2]
             dp = self.env['decimal.precision']
             if line.get('asset_category_id') and \
-                            line.get('quantity', 0.0) > 1.0:
+                    line.get('quantity', 0.0) > 1.0:
                 categ = self.env['account.asset.category'].browse(
                     [line.get('asset_category_id')])
                 if categ.asset_product_item:
@@ -65,7 +65,7 @@ class AccountInvoice(models.Model):
                     for analytic_line_tuple in line['analytic_lines']:
                         analytic_line = analytic_line_tuple[2]
                         origin_analytic_line = \
-                        origin_line['analytic_lines'][i][2]
+                            origin_line['analytic_lines'][i][2]
                         analytic_line['amount'] += round(
                             origin_analytic_line['amount'] - analytic_line[
                                 'amount'] * line_qty,
