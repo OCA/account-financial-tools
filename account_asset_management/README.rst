@@ -24,6 +24,13 @@ Configuration
 It is recommended to configure your Purchase Journal with "Group Invoice Lines" to avoid the
 creation of separate assets per Supplier Invoice Line.
 
+If you want to create one asset by product item defined on invoice line, you
+can configure "Create an asset by product item" parameter on asset categories.
+With this one, the validation of an invoice will split accounting entries
+related with invoice lines by one entry by product item. So, an asset by
+product item will be created automatically. This parameter has priority over
+"Group Invoice Lines".
+
 Known issues
 ============
 
@@ -47,6 +54,7 @@ Contributors
 - Frédéric Clementi (camptocamp)
 - Florian Dacosta (Akretion)
 - Stéphane Bidoul (Acsone)
+- Adrien Peiffer (adrien.peiffer@acsone.eu)
 
 Maintainer
 ----------

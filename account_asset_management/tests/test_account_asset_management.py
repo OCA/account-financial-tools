@@ -243,3 +243,50 @@ class TestAssetManagement(common.TransactionCase):
         else:
             self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
                                    8.22, places=2)
+
+    def test_5_asset_from_invoice(self):
+        all_asset = self.env['account.asset.asset'].search([])
+        invoice = self.env.ref('account.demo_invoice_0')
+        asset_categ = self.env.ref(
+            'account_asset_management.account_asset_category_ict_3Y')
+        asset_categ.asset_product_item = False
+        self.assertTrue(len(invoice.invoice_line) > 0)
+        line = invoice.invoice_line[0]
+        self.assertTrue(line.price_unit > 0.0)
+        line.quantity = 2
+        line.asset_category_id = asset_categ
+        invoice.signal_workflow('invoice_open')
+        # I get all asset after invoice validation
+        current_asset = self.env['account.asset.asset'].search([])
+        # I get the new asset
+        new_asset = current_asset - all_asset
+        # I check that a new asset is created
+        self.assertEqual(len(new_asset), 1)
+        # I check that the new asset has the correct purchase value
+        self.assertAlmostEqual(new_asset.purchase_value,
+                               line.price_unit * line.quantity,
+                               places=2)
+
+    def test_6_asset_from_invoice_product_item(self):
+        all_asset = self.env['account.asset.asset'].search([])
+        invoice = self.env.ref('account.demo_invoice_0')
+        asset_categ = self.env.ref(
+            'account_asset_management.account_asset_category_ict_3Y')
+        asset_categ.asset_product_item = True
+        self.assertTrue(len(invoice.invoice_line) > 0)
+        line = invoice.invoice_line[0]
+        self.assertTrue(line.price_unit > 0.0)
+        line.quantity = 2
+        line.asset_category_id = asset_categ
+        invoice.signal_workflow('invoice_open')
+        # I get all asset after invoice validation
+        current_asset = self.env['account.asset.asset'].search([])
+        # I get the new asset
+        new_asset = current_asset - all_asset
+        # I check that a new asset is created
+        self.assertEqual(len(new_asset), line.quantity)
+        for asset in new_asset:
+            # I check that the new asset has the correct purchase value
+            self.assertAlmostEqual(
+                asset.purchase_value, line.price_unit, places=2)
+

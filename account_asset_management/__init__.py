@@ -29,5 +29,6 @@ from . import account_move
 from . import wizard
 from . import report
 from . import res_config
+from . import account_invoice
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
