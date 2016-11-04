@@ -43,12 +43,9 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_cancel(self):
-        assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
-            assets = move and \
-                [aml.asset_id for aml in
-                 filter(lambda x: x.asset_id, move.line_ids)]
+            assets = move.line_ids.mapped('asset_id')
         super(AccountInvoice, self).action_cancel()
         if assets:
             assets.unlink()
