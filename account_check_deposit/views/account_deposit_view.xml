@@ -61,7 +61,23 @@
                                             ('currency_id', '=', currency_none_same_company_id),
                                             ('account_id', '=', journal_default_account_id)]"
                                     context="{'currency': currency_id,
-                                        'journal_id': journal_id}" />
+                                        'journal_id': journal_id}">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="date_maturity"/>
+                                    <field name="move_id"/>
+                                    <field name="journal_id"/>
+                                    <field name="name"/>
+                                    <field name="ref"/>
+                                    <field name="partner_id"/>
+                                    <field name="account_id"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="name"/>
+                                    <field name="amount_currency" readonly="True" groups="base.group_multi_currency"/>
+                                    <field name="full_reconcile_id"/>
+                                </tree>
+                            </field>
                         </group>
                     </sheet>
                 </form>
