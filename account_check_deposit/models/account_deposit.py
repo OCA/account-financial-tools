@@ -198,19 +198,21 @@ class AccountCheckDeposit(models.Model):
     @api.multi
     def validate_deposit(self):
         am_obj = self.env['account.move']
+        move_line_obj = self.env['account.move.line']
         for deposit in self:
             move_vals = self._prepare_account_move_vals(deposit)
+            move = am_obj.create(move_vals)
             total_debit = 0.0
             total_amount_currency = 0.0
             to_reconcile_lines = []
-            mv_lines_vals = []
             for line in deposit.check_payment_ids:
                 total_debit += line.debit
                 total_amount_currency += line.amount_currency
                 line_vals = self._prepare_move_line_vals(line)
-                mv_lines_vals.append((0, 0, line_vals))
-
-                to_reconcile_lines.append(line)
+                line_vals['move_id'] = move.id
+                move_line = move_line_obj.with_context(
+                    check_move_validity=False).create(line_vals)
+                to_reconcile_lines.append(line + move_line)
 
             # Create counter-part
             if not deposit.company_id.check_deposit_account_id:
@@ -220,10 +222,8 @@ class AccountCheckDeposit(models.Model):
 
             counter_vals = self._prepare_counterpart_move_lines_vals(
                 deposit, total_debit, total_amount_currency)
-            mv_lines_vals.append((0, 0, counter_vals))
-            move_vals['line_ids'] = mv_lines_vals
-            move = am_obj.create(move_vals)
-            to_reconcile_lines.extend(move.line_ids)
+            counter_vals['move_id'] = move.id
+            move_line_obj.create(counter_vals)
 
             move.post()
             deposit.write({'state': 'done', 'move_id': move.id})
