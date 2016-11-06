@@ -82,6 +82,17 @@ class AccountMoveLine(models.Model):
         self.asset_profile_id = self.account_id.asset_profile_id
 
     @api.model
+    def get_asset_onchange(self, vals):
+        asset_obj = self.env['account.asset']
+        asset_temp = asset_obj.new(vals)
+        asset_temp.onchange_profile_id()
+        for field in asset_temp._fields:
+            if field not in vals and asset_temp[field]:
+                vals[field] = asset_temp._fields[field].\
+                    convert_to_write(asset_temp[field])
+        return vals
+
+    @api.model
     def create(self, vals, apply_taxes=True):
         if vals.get('asset_id') and not self._context.get('allow_asset'):
             raise UserError(
@@ -91,20 +102,24 @@ class AccountMoveLine(models.Model):
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_profile_id'):
             # create asset
+            asset_obj = self.env['account.asset']
             move = self.env['account.move'].browse(vals['move_id'])
             depreciation_base = vals['debit'] or -vals['credit']
-            asset_vals = {
+            temp_asset = asset_obj.new({
                 'name': vals['name'],
                 'profile_id': vals['asset_profile_id'],
                 'purchase_value': depreciation_base,
                 'partner_id': vals['partner_id'],
                 'date_start': move.date,
-            }
+            })
+            temp_asset.onchange_profile_id()
+            asset_vals = temp_asset._convert_to_write(temp_asset._cache)
+
             if self._context.get('company_id'):
                 asset_vals['company_id'] = self._context['company_id']
             ctx = dict(self._context, create_asset_from_move_line=True,
                        move_id=vals['move_id'])
-            asset = self.env['account.asset'].with_context(
+            asset = asset_obj.with_context(
                 ctx).create(asset_vals)
             vals['asset_id'] = asset.id
         return super(AccountMoveLine, self).create(
@@ -130,6 +145,7 @@ class AccountMoveLine(models.Model):
         if vals.get('asset_profile_id'):
             assert len(self.ids) == 1, \
                 'This option should only be used for a single id at a time.'
+            asset_obj = self.env['account.asset']
             for aml in self:
                 if vals['asset_profile_id'] == aml.asset_profile_id.id:
                     continue
@@ -150,9 +166,10 @@ class AccountMoveLine(models.Model):
                     'date_start': date_start,
                     'company_id': vals.get('company_id') or aml.company_id.id,
                 }
+                asset_vals = asset_obj.play_onchanges(
+                asset_vals, ['profile_id'])
                 ctx = dict(self._context, create_asset_from_move_line=True,
                            move_id=aml.move_id.id)
-                asset = self.env['account.asset'].with_context(
-                    ctx).create(asset_vals)
+                asset = asset_obj.with_context(ctx).create(asset_vals)
                 vals['asset_id'] = asset.id
         return super(AccountMoveLine, self).write(vals)
