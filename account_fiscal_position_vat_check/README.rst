@@ -31,7 +31,7 @@ on a customer that doesn't have a VAT number yet.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/9.0
 
 Bug Tracker
 ===========
@@ -48,6 +48,7 @@ Contributors
 ------------
 
 * Alexis de Lattre <alexis.delattre@akretion.com>
+* Vicent Cubells <vicent.cubells@tecnativa.com>
 
 Maintainer
 ----------

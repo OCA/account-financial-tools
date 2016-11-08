@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2013-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+# © 2016 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api, _
@@ -20,13 +21,14 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_move_create(self):
-        '''Check that the customer has VAT set
-        if required by the fiscal position'''
+        """Check that the customer has VAT set
+        if required by the fiscal position"""
+
         for invoice in self:
             if (
                     invoice.type in ('out_invoice', 'out_refund') and
-                    invoice.fiscal_position and
-                    invoice.fiscal_position.customer_must_have_vat and
+                    invoice.fiscal_position_id and
+                    invoice.fiscal_position_id.customer_must_have_vat and
                     not invoice.partner_id.vat):
                 if invoice.type == 'out_invoice':
                     type_label = _('a Customer Invoice')
@@ -41,6 +43,6 @@ class AccountInvoice(models.Model):
                       "have a VAT number in OpenERP."
                       "Please add the VAT number of this Customer in Odoo "
                       " and try to validate again.")
-                    % (type_label, invoice.fiscal_position.name,
+                    % (type_label, invoice.fiscal_position_id.name,
                         invoice.partner_id.name))
         return super(AccountInvoice, self).action_move_create()
