@@ -24,6 +24,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_fiscal_year](account_fiscal_year/) | 9.0.1.0.0 | Account Fiscal Year
+[account_invoice_currency](account_invoice_currency/) | 9.0.1.0.0 | Company currency in invoices
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 | Permanent Lock Move
 [account_renumber](account_renumber/) | 9.0.1.0.0 | Account Renumber Wizard
@@ -47,7 +48,6 @@ addon | version | summary
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 (unported) | Move in draft state by default
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.1 (unported) | Check VAT on invoice validation
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 8.0.1.0.0 (unported) | Account Invoice Constraint Chronology
-[account_invoice_currency](account_invoice_currency/) | 8.0.1.0.0 (unported) | Company currency in invoices
 [account_invoice_tax_required](account_invoice_tax_required/) | 8.0.1.0.0 (unported) | Tax required in invoice
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 (unported) | Option Check Date in Period always active on journals
 [account_journal_period_close](account_journal_period_close/) | 8.0.1.0.0 (unported) | Account Journal Period Close
