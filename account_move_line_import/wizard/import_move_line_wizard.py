@@ -131,8 +131,7 @@ class AccountMoveLineImport(models.TransientModel):
         blacklist = models.MAGIC_COLUMNS + [aml_mod.CONCURRENCY_CHECK_FIELD]
         self._orm_fields = {
             f: orm_fields[f] for f in orm_fields
-            if f not in blacklist
-            and not orm_fields[f].get('depends')}
+            if f not in blacklist and not orm_fields[f].get('depends')}
 
     def _process_header(self, header_fields):
 
@@ -271,7 +270,7 @@ class AccountMoveLineImport(models.TransientModel):
                             orm_field=False):
         orm_field = orm_field or field
         if not aml_vals.get(orm_field):
-            val = line[field].strip().capitalize()
+            val = line[field].capitalize()
             if val in ['', '0', 'False']:
                 val = False
             elif val in ['1', 'True']:

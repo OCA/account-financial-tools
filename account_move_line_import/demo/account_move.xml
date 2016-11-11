@@ -4,7 +4,7 @@
 
     <record id="am_0" model="account.move">
       <field name="journal_id" ref="account.miscellaneous_journal"/>
-      <field name="journal_id" ref="account.period_0"/>
+      <field name="period_id" ref="account.period_0"/>
       <field eval="'Open Payables'" name="ref"/>
       <field eval="time.strftime('%Y')+'-01-01'" name="date"/>
       <field name="company_id" ref="base.main_company"/>
