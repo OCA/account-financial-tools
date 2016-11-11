@@ -1,24 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Odoo, Open Source Management Solution
-#
-#    Copyright (c) 2009-2016 Noviat nv/sa (www.noviat.com).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2009-2016 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 try:
     import cStringIO as StringIO
@@ -32,7 +14,7 @@ from sys import exc_info
 from traceback import format_exception
 
 from openerp import api, fields, models, _
-from openerp.exceptions import Warning
+from openerp.exceptions import Warning as UserError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -116,7 +98,7 @@ class AccountMoveLineImport(models.TransientModel):
             else:
                 header = ln.lower()
         if not header:
-            raise Warning(
+            raise UserError(
                 _("No header line found in the input file !"))
         output = input.read()
         return output, header
@@ -172,7 +154,7 @@ class AccountMoveLineImport(models.TransientModel):
         header_fields2 = []
         for hf in header_fields:
             if hf in header_fields2:
-                raise Warning(_(
+                raise UserError(_(
                     "Duplicate header field '%s' found !"
                     "\nPlease correct the input file.")
                     % hf)
@@ -220,6 +202,11 @@ class AccountMoveLineImport(models.TransientModel):
                     'method': self._handle_orm_float,
                     'orm_field': orm_field,
                     }
+            elif field_type == 'boolean':
+                self._field_methods[hf] = {
+                    'method': self._handle_orm_boolean,
+                    'orm_field': orm_field,
+                    }
             elif field_type == 'many2one':
                 self._field_methods[hf] = {
                     'method': self._handle_orm_many2one,
@@ -227,7 +214,8 @@ class AccountMoveLineImport(models.TransientModel):
                     }
             else:
                 _logger.error(
-                    _("%s, the import of ORM fields of type '%s' "
+                    _("%s, field '%s', "
+                      "the import of ORM fields of type '%s' "
                       "is not supported"),
                     self._name, hf, field_type)
                 self._skip_fields.append(hf)
@@ -274,6 +262,24 @@ class AccountMoveLineImport(models.TransientModel):
                 msg = _(
                     "Incorrect value '%s' "
                     "for field '%s' of type Numeric !"
+                    ) % (line[field], field)
+                self._log_line_error(line, msg)
+            else:
+                aml_vals[orm_field] = val
+
+    def _handle_orm_boolean(self, field, line, move, aml_vals,
+                            orm_field=False):
+        orm_field = orm_field or field
+        if not aml_vals.get(orm_field):
+            val = line[field].strip().capitalize()
+            if val in ['', '0', 'False']:
+                val = False
+            elif val in ['1', 'True']:
+                val = True
+            if isinstance(val, basestring):
+                msg = _(
+                    "Incorrect value '%s' "
+                    "for field '%s' of type Boolean !"
                     ) % (line[field], field)
                 self._log_line_error(line, msg)
             else:
@@ -506,7 +512,7 @@ class AccountMoveLineImport(models.TransientModel):
                     line[hf] = line[hf].decode(self.codepage).strip()
                 except:
                     tb = ''.join(format_exception(*exc_info()))
-                    raise Warning(
+                    raise UserError(
                         _("Wrong Code Page"),
                         _("Error while processing line '%s' :\n%s")
                         % (line, tb))
