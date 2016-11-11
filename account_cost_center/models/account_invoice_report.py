@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2015 ONESTEiN BV (<http://www.onestein.eu>)
+# Copyright 2015 Onestein (<http://www.onestein.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import fields, models
@@ -11,11 +11,13 @@ class AccountInvoiceReport(models.Model):
     cost_center_id = fields.Many2one(
         'account.cost.center',
         string="Cost Center",
-        readonly=True)
+        readonly=True
+    )
     account_analytic_id = fields.Many2one(
         'account.analytic.account',
         string="Analytic Account",
-        readonly=True)
+        readonly=True
+    )
 
     def _select(self):
         return super(AccountInvoiceReport, self)._select() + \
