@@ -186,32 +186,13 @@ class AccountMoveLineImport(models.TransientModel):
                 orm_field = hf
             field_type = field_def['type']
 
-            if field_type in ['char', 'text']:
+            try:
+                ft = field_type == 'text' and 'char' or field_type
                 self._field_methods[hf] = {
-                    'method': self._handle_orm_char,
+                    'method': getattr(self, '_handle_orm_%s' % ft),
                     'orm_field': orm_field,
                     }
-            elif field_type == 'integer':
-                self._field_methods[hf] = {
-                    'method': self._handle_orm_integer,
-                    'orm_field': orm_field,
-                    }
-            elif field_type == 'float':
-                self._field_methods[hf] = {
-                    'method': self._handle_orm_float,
-                    'orm_field': orm_field,
-                    }
-            elif field_type == 'boolean':
-                self._field_methods[hf] = {
-                    'method': self._handle_orm_boolean,
-                    'orm_field': orm_field,
-                    }
-            elif field_type == 'many2one':
-                self._field_methods[hf] = {
-                    'method': self._handle_orm_many2one,
-                    'orm_field': orm_field,
-                    }
-            else:
+            except AttributeError:
                 _logger.error(
                     _("%s, field '%s', "
                       "the import of ORM fields of type '%s' "
