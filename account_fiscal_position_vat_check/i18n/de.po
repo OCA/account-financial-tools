@@ -3,13 +3,14 @@
 # * account_fiscal_position_vat_check
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
+"PO-Revision-Date: 2015-11-24 16:22+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgstr "Bilanzposition"
 msgid ""
 "If enabled, Odoo will check that the customer has a VAT number when the user"
 " validates a customer invoice/refund."
-msgstr ""
+msgstr "Wenn aktiviert, prüft Odoo, ob der Kunde eine USt-ID hat, bevor der Anwender eine Kundenrechnung/-gutschrift freigeben kann."
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -59,7 +60,7 @@ msgid ""
 " customer to have a VAT number. But the Customer '%s' doesn't have a VAT "
 "number in OpenERP.Please add the VAT number of this Customer in Odoo  and "
 "try to validate again."
-msgstr ""
+msgstr "Sie möchten %s mit der Steuerzuordnung '%s' freigeben, welches eine USt-ID beim Kunden erfordert. Der Kunde '%s' hat jedoch keine in Odoo eingepflegte USt-ID. Bitte pflegen Sie diese für den Kunden nach und versuchen die Freigabe nochmal."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/partner.py:41
@@ -67,7 +68,7 @@ msgstr ""
 msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
 "VAT number, but the VAT number is missing."
-msgstr ""
+msgstr "Sie haben die Steuerzuordnung '%s' angegeben, welche beim Kunden eine USt-ID erfordert, aber diese USt-ID fehlt hier."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/account_invoice.py:50
