@@ -41,6 +41,7 @@ addon | version | summary
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 | Option Check Date in Period always active on journals
 [account_journal_period_close](account_journal_period_close/) | 8.0.1.0.0 | Account Journal Period Close
 [account_move_batch_validate](account_move_batch_validate/) | 8.0.0.2.0 | Account Move Batch Validate
+[account_move_line_import](account_move_line_import/) | 8.0.1.0.2 | Import Accounting Entries
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 | Move line search view - disable defaults for period and journal
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 | Journal Items Search Extension
