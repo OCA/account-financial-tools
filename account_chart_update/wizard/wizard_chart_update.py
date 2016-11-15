@@ -104,7 +104,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _compute_chart_template_ids(self):
         self.chart_template_ids = (
             self.env['wizard.multi.charts.accounts']
-            ._compute_chart_parent_ids(self.chart_template_id))
+            ._get_chart_parent_ids(self.chart_template_id))
 
     @api.multi
     @api.depends('tax_ids')

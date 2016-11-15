@@ -4,6 +4,7 @@
 # © 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
 # © 2015 Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>
 # © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# © 2016 Jacques-Etienne Baudoux <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -15,6 +16,7 @@
               "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
               "ACSONE A/V, "
               "Tecnativa, "
+              "BCIM sprl, "
               "Odoo Community Association (OCA)",
     'website': "http://odoo-community.org",
     'depends': ["account"],
@@ -25,6 +27,7 @@
         'invitu',
         'Stéphane Bidoul',
         'Jairo Llopis',
+        'Jacques-Etienne Baudoux',
     ],
     'license': "AGPL-3",
     "data": [
