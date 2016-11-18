@@ -3,15 +3,15 @@
 # * account_reconcile_trace
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 02:38+0000\n"
-"PO-Revision-Date: 2016-07-27 02:38+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-13 03:39+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -257,6 +257,16 @@ msgstr "Padajoče sledenje"
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace Up"
 msgstr "Naraščajoče sledenje"
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tcc
+msgid "Transfer Creditors Credit"
+msgstr "Prenos terjatev upnikov"
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tdd
+msgid "Transfer Debtors Debit"
+msgstr "Prenos obveznosti do dobaviteljev"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_amount:0

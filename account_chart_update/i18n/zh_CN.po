@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -193,7 +193,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,display_name:0
 #: field:wizard.update.charts.accounts.tax.code,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -319,7 +319,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,__last_update:0
 #: field:wizard.update.charts.accounts.tax.code,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -794,7 +794,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_account:0

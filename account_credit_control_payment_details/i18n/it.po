@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_credit_control_payment_details
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-06 13:40+0000\n"
+"PO-Revision-Date: 2016-12-06 14:41+0100\n"
+"Last-Translator: Alex Comba <alex.comba@agilebg.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: it\n"
+"X-Generator: Poedit 1.8.9\n"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Date due"
+msgstr "Data scadenza"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Invoice date"
+msgstr "Data fattura"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Invoice number"
+msgstr "Numero fattura"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Invoiced amount"
+msgstr "Totale fatturato"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Open amount"
+msgstr "Totale scoperto"
+
+#. module: account_credit_control_payment_details
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Payment"
+msgstr "Pagamento"

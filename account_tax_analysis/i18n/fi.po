@@ -8,6 +8,8 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
 # Hotellook, 2014
@@ -20,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-15 12:45+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +51,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_uid:0
@@ -84,7 +86,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Group By..."
-msgstr ""
+msgstr "Ryhmittele..."
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,id:0
@@ -125,7 +127,7 @@ msgstr "Viimeksi päivitetty"
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Partner"
-msgstr ""
+msgstr "Kumppani"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis

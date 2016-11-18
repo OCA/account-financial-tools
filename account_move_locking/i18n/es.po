@@ -8,6 +8,7 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
 # Hotellook, 2014
@@ -21,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +35,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Asiento contable"
 
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
@@ -89,19 +90,19 @@ msgstr "Última actualización el"
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr ""
+msgstr "Bloquear asiento"
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
-msgstr ""
+msgstr "Bloquear asientos contables"
 
 #. module: account_move_locking
 #: field:account.move,locked:0
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/account.py:33
@@ -115,7 +116,7 @@ msgstr ""
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:60
 #, python-format
 msgid "No move to locked found"
-msgstr ""
+msgstr "No se han encontrado asientos a bloquear"
 
 #. module: account_move_locking
 #: field:lock.account.move,period_ids:0
@@ -141,4 +142,4 @@ msgstr ""
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "o"
