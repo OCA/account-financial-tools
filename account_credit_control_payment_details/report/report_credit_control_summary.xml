@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_credit_control_summary_details" inherit_id="account_credit_control.report_credit_control_summary_document">
+            <xpath expr="//table[@id='summary_table']" position="replace">
+                <table class="table table-condensed" id="summary_table">
+                    <thead>
+                        <tr>
+                            <th>Invoice number</th>
+                            <th>Invoice date</th>
+                            <th>Date due</th>
+                            <th class="text-right">Invoiced amount</th>
+                            <th class="text-right">Open amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.credit_control_line_ids" t-as="l">
+                            <tr>
+                                <t t-if="l.invoice_id">
+                                    <td>
+                                        <span t-field="l.invoice_id.number"/>
+                                        <t t-if="l.invoice_id.name">
+                                            <span t-field="l.invoice_id.name"/>
+                                        </t>
+                                    </td>
+                                </t>
+                                <t t-if="not l.invoice_id">
+                                    <td>
+                                        <span t-field="l.move_line_id.name"/>
+                                    </td>
+                                </t>
+                                <td>
+                                    <span t-field="l.date_entry"/>
+                                </td>
+                                <td>
+                                    <span t-field="l.date_due"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.amount_due"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.balance_due"
+                                    t-field-options='{"widget": "monetary",
+                                    "display_currency": "l.currency_id or l.company_id.currency_id"}'/>
+                                </td>
+                            </tr>
+                            <t t-if="l.invoice_id.payment_ids">
+                                <t t-foreach="l.invoice_id.payment_ids" t-as="p">
+                                    <tr>
+                                        <td>
+                                            <b><i>Payment</i></b>
+                                        </td>
+                                        <td>
+                                            <span t-field="p.date"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">
+                                            -<span t-field="p.credit"
+                                            t-field-options='{"widget": "monetary",
+                                            "display_currency": "l.currency_id or l.company_id.currency_id"}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</openerp>
