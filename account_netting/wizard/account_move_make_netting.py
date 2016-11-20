@@ -166,8 +166,8 @@ class AccountMoveMakeNetting(models.TransientModel):
         for move_line in move.line_id:
             to_reconcile = move_line + self.move_lines.filtered(
                 lambda x:
-                x.account_id == move_line.account_id
-                and x.currency_id == move_line.currency_id)
+                x.account_id == move_line.account_id and
+                x.currency_id == move_line.currency_id)
             to_reconcile.reconcile_partial()
         # Open created move
         action = self.env.ref('account.action_move_journal_line').read()[0]
