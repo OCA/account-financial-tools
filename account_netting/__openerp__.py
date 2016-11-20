@@ -9,7 +9,7 @@
     'license': 'AGPL-3',
     'summary': "Compensate AR/AP accounts from the same partner",
     'category': 'Accounting & Finance',
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
+    'author': 'Tecnativa - Pedro M. Baeza, '
               'Noviat, '
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
