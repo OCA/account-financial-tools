@@ -17,8 +17,10 @@
         'account',
     ],
     'data': [
-        'demo/account_netting_demo.xml',
         'wizard/account_move_make_netting_view.xml',
     ],
-    "installable": True,
+    'demo': [
+        'demo/account_netting_demo.xml',
+    ],
+    'installable': True,
 }
