@@ -59,6 +59,7 @@ Contributors
 ------------
 
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Luc De Meyer <luc.demeyer@noviat.com>
 
 Maintainer
 ----------

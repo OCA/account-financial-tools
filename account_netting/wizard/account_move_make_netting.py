@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) 2015 Pedro M. Baeza
+# (c) 2016 Noviat nv/sa (www.noviat.com)
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from openerp import models, fields, api, exceptions, _
@@ -59,52 +60,114 @@ class AccountMoveMakeNetting(models.TransientModel):
         # Group amounts by account
         account_groups = self.move_lines.read_group(
             [('id', 'in', self.move_lines.ids)],
-            ['account_id', 'debit', 'credit'], ['account_id'])
-        debtors = []
-        creditors = []
-        total_debtors = 0
-        total_creditors = 0
+            ['account_id', 'debit', 'credit',
+             'currency_id', 'amount_currency'],
+            ['currency_id', 'account_id'],
+            lazy=False)
+        debtors = {}
+        creditors = {}
+        total_debtors = {}
+        total_creditors = {}
+        currency_ids = []
         for account_group in account_groups:
             balance = account_group['debit'] - account_group['credit']
             group_vals = {
                 'account_id': account_group['account_id'][0],
                 'balance': abs(balance),
             }
+            currency_id = account_group['currency_id'] \
+                and account_group['currency_id'][0] or False
+            if currency_id not in currency_ids:
+                currency_ids.append(currency_id)
+            if currency_id:
+                group_vals.update({
+                    'currency_id': currency_id,
+                    'amount_currency': account_group['amount_currency'],
+                })
             if balance > 0:
-                debtors.append(group_vals)
-                total_debtors += balance
+                if currency_id in total_debtors:
+                    debtors[currency_id].append(group_vals)
+                    total_debtors[currency_id]['balance'] += balance
+                    if currency_id:
+                        total_debtors[currency_id]['balance_currency'] += \
+                            account_group['amount_currency']
+                else:
+                    debtors[currency_id] = [group_vals]
+                    total_debtors[currency_id] = {'balance': balance}
+                    if currency_id:
+                        total_debtors[currency_id]['balance_currency'] = \
+                            account_group['amount_currency']
             else:
-                creditors.append(group_vals)
-                total_creditors += abs(balance)
+                if currency_id in total_creditors:
+                    creditors[currency_id].append(group_vals)
+                    total_creditors[currency_id]['balance'] += abs(balance)
+                    if currency_id:
+                        total_creditors[currency_id]['balance_currency'] += \
+                            account_group['amount_currency']
+                else:
+                    creditors[currency_id] = [group_vals]
+                    total_creditors[currency_id] = {'balance': abs(balance)}
+                    if currency_id:
+                        total_creditors[currency_id]['balance_currency'] = \
+                            account_group['amount_currency']
         # Create move lines
         move_line_model = self.env['account.move.line']
-        netting_amount = min(total_creditors, total_debtors)
         field_map = {1: 'debit', 0: 'credit'}
-        for i, group in enumerate([debtors, creditors]):
-            available_amount = netting_amount
-            for account_group in group:
-                if account_group['balance'] > available_amount:
-                    amount = available_amount
-                else:
-                    amount = account_group['balance']
-                move_line_vals = {
-                    field_map[i]: amount,
-                    'move_id': move.id,
-                    'partner_id': self.move_lines[0].partner_id.id,
-                    'date': move.date,
-                    'period_id': move.period_id.id,
-                    'journal_id': move.journal_id.id,
-                    'name': move.ref,
-                    'account_id': account_group['account_id'],
-                }
-                move_line_model.create(move_line_vals)
-                available_amount -= account_group['balance']
-                if available_amount <= 0:
-                    break
+        for currency_id in currency_ids:
+            if total_debtors[currency_id]['balance'] \
+                    < total_creditors[currency_id]['balance']:
+                netting_amount = total_debtors[currency_id]['balance']
+                if currency_id:
+                    netting_amount_currency = \
+                        total_debtors[currency_id]['balance_currency']
+            else:
+                netting_amount = total_creditors[currency_id]['balance']
+                netting_amount_currency = \
+                    total_creditors[currency_id]['balance_currency']
+            for i, group in enumerate(
+                    [debtors[currency_id], creditors[currency_id]]):
+                available_amount = netting_amount
+                if currency_id:
+                    available_amount_currency = netting_amount_currency
+                for account_group in group:
+                    balance = account_group['balance']
+                    if balance > available_amount:
+                        amount = available_amount
+                        if currency_id:
+                            amount_currency = -available_amount_currency
+                    else:
+                        amount = balance
+                        if currency_id:
+                            amount_currency = -account_group['amount_currency']
+                    move_line_vals = {
+                        field_map[i]: amount,
+                        'move_id': move.id,
+                        'partner_id': self.move_lines[0].partner_id.id,
+                        'date': move.date,
+                        'period_id': move.period_id.id,
+                        'journal_id': move.journal_id.id,
+                        'name': move.ref,
+                        'account_id': account_group['account_id'],
+                    }
+                    if currency_id:
+                        sign = i == 0 and 1 or -1
+                        move_line_vals.update({
+                            'currency_id': account_group['currency_id'],
+                            'amount_currency': sign * amount_currency,
+                        })
+                    move_line_model.create(move_line_vals)
+                    available_amount -= balance
+                    if currency_id:
+                        available_amount_currency -= \
+                            account_group['amount_currency']
+                    if available_amount <= 0:
+                        break
         # Make reconciliation
         for move_line in move.line_id:
             to_reconcile = move_line + self.move_lines.filtered(
-                lambda x: x.account_id == move_line.account_id)
+                lambda x:
+                x.account_id == move_line.account_id
+                and x.currency_id == move_line.currency_id)
             to_reconcile.reconcile_partial()
         # Open created move
         action = self.env.ref('account.action_move_journal_line').read()[0]
