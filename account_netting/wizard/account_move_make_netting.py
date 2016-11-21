@@ -122,8 +122,9 @@ class AccountMoveMakeNetting(models.TransientModel):
                         total_debtors[currency_id]['balance_currency']
             else:
                 netting_amount = total_creditors[currency_id]['balance']
-                netting_amount_currency = \
-                    total_creditors[currency_id]['balance_currency']
+                if currency_id:
+                    netting_amount_currency = \
+                        total_creditors[currency_id]['balance_currency']
             for i, group in enumerate(
                     [debtors[currency_id], creditors[currency_id]]):
                 available_amount = netting_amount
