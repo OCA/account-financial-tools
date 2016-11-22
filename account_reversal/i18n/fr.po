@@ -3,12 +3,26 @@
 # * account_reversal
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# Rudolf Schnapka <schnapkar@golive-saar.de>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-06 09:59+0000\n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-16 21:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -53,11 +67,16 @@ msgid "Created on"
 msgstr "Créer le"
 
 #. module: account_reversal
+#: field:account.move.reverse,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
 "Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the next period."
-msgstr "Entrer la date des pièces comptables d'extourne. Par défaut, OpenERP propose le premier jour de la période comptable suivante."
+" the first day of the period following the period of the move to reverse."
+msgstr ""
 
 #. module: account_reversal
 #: field:account.move.reverse,move_prefix:0
@@ -92,6 +111,11 @@ msgid "Journal Entries to be Reversed"
 msgstr "Pièces comptables à extourner"
 
 #. module: account_reversal
+#: field:account.move.reverse,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
 msgstr "Mis à jour par"
@@ -118,12 +142,17 @@ msgid ""
 msgstr "Préfixe qui sera ajouté au libellé des écritures comptables originales pour créer le libellé des écritures comptables d'extourne (un espace est ajouté après le préfixe)."
 
 #. module: account_reversal
+#: field:account.move.reverse,reconcile:0
+msgid "Reconcile"
+msgstr "Lettrer"
+
+#. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
 msgstr "Date des extournes"
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:114
+#: code:addons/account_reversal/wizard/account_move_reverse.py:113
 #, python-format
 msgid "Reversal Entries"
 msgstr "Pièces comptables d'extourne"
@@ -161,6 +190,18 @@ msgstr ""
 #: field:account.move,to_be_reversed:0
 msgid "To Be Reversed"
 msgstr "Extourne nécessaire"
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:84
+#, python-format
+msgid "Wrong company Journal is %s but we have %s"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/account_reversal.py:87
+#, python-format
+msgid "Wrong company Period is %s but we have %s"
+msgstr ""
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
