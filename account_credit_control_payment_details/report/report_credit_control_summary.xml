@@ -56,7 +56,7 @@
                                         <td></td>
                                         <td></td>
                                         <td class="text-right">
-                                            <span t-esc="0-p.credit"
+                                            <span t-esc="0-p.amount_currency"
                                             t-esc-options='{"widget": "monetary", "display_currency": "l.invoice_id.currency_id"}'/>
                                         </td>
                                     </tr>
