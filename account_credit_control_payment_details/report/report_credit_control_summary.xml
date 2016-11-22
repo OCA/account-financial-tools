@@ -41,7 +41,7 @@
                                 <td class="text-right">
                                     <span t-field="l.balance_due"
                                     t-field-options='{"widget": "monetary",
-                                    "display_currency": "l.currency_id or l.company_id.currency_id"}'/>
+                                    "display_currency": "l.invoice_id.currency_id"}'/>
                                 </td>
                             </tr>
                             <t t-if="l.invoice_id.payment_ids">
@@ -56,9 +56,8 @@
                                         <td></td>
                                         <td></td>
                                         <td class="text-right">
-                                            -<span t-field="p.credit"
-                                            t-field-options='{"widget": "monetary",
-                                            "display_currency": "l.currency_id or l.company_id.currency_id"}'/>
+                                            <span t-esc="0-p.credit"
+                                            t-esc-options='{"widget": "monetary", "display_currency": "l.invoice_id.currency_id"}'/>
                                         </td>
                                     </tr>
                                 </t>
