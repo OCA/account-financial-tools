@@ -29,6 +29,7 @@ addon | version | summary
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 | Permanent Lock Move
 [account_renumber](account_renumber/) | 9.0.1.0.0 | Account Renumber Wizard
+[account_reversal](account_reversal/) | 9.0.1.0.0 | Wizard for creating a reversal account move
 [currency_rate_update](currency_rate_update/) | 9.0.1.0.0 | Currency Rate Update
 
 Unported addons
@@ -58,7 +59,6 @@ addon | version | summary
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
 [account_partner_required](account_partner_required/) | 8.0.0.1.0 (unported) | Account partner required
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 (unported) | Delete the accounting setup from an otherwise reusable database
-[account_reversal](account_reversal/) | 8.0.1.0.0 (unported) | Account Reversal
 [account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 (unported) | Tax analysis
 [account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 (unported) | Tax chart for a period interval
 [account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
