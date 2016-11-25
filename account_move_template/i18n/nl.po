@@ -9,6 +9,8 @@
 # Artūras Griškonis <xbmc.lt@gmail.com>, 2012
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # Chanseok <kcsgoodboy@naver.com>, 2014
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
@@ -23,6 +25,7 @@
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Nicole <dlruddk1112@gmail.com>, 2014
@@ -37,13 +40,14 @@
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Thomas A. Jaeger, 2015
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 # Zapata11 <raimondas.duzinskas@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-09-17 18:43+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +114,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -120,7 +124,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -156,7 +160,7 @@ msgstr "Te tonen naam"
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
@@ -200,7 +204,7 @@ msgstr "Laatst bijgewerkt op"
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -210,7 +214,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65

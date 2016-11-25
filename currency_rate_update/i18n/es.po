@@ -4,9 +4,11 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Alexis de Lattre <alexis@via.ecp.fr>, 2016
 # Antonio Trueba, 2016
 # Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015-2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -15,6 +17,7 @@
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # John Toro <johntoro@gmail.com>, 2015
 # Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 # SaFi J. <safi2266@gmail.com>, 2015
@@ -22,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -195,7 +198,7 @@ msgstr "Última actualización en"
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
 msgid "Logs"
-msgstr ""
+msgstr "Registros"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,max_delta_days:0

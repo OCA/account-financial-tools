@@ -15,12 +15,13 @@
 # SaFi J. <safi2266@gmail.com>, 2015
 # Yael Terrettaz, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -762,7 +763,7 @@ msgstr "Journal"
 #: code:addons/account_asset_management/account_asset.py:1339
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Pièces comptables"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1651
@@ -773,7 +774,7 @@ msgstr "Pièce Comptable"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
 msgid "Journal Item"
-msgstr ""
+msgstr "Écriture comptable"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -922,12 +923,12 @@ msgstr "Immobilisation parente"
 #. module: account_asset_management
 #: field:account.asset.asset,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Parent Left"
 
 #. module: account_asset_management
 #: field:account.asset.asset,parent_right:0
 msgid "Parent Right"
-msgstr ""
+msgstr "Parent Right"
 
 #. module: account_asset_management
 #: field:account.asset.asset,partner_id:0

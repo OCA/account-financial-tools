@@ -5,6 +5,7 @@
 # Translators:
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -13,6 +14,7 @@
 # Kevin Min <gr326887@graded.br>, 2015
 # Kunwoo Kim <crazyabtmath@naver.com>, 2015
 # LEE SI HYEONG <super2451894@gmail.com>, 2014
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
 # Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Miku Laitinen <miku.laitinen@gmail.com>, 2015
@@ -26,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-09-17 18:43+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 12:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -144,12 +146,12 @@ msgstr "Bedrijf"
 #. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -208,7 +210,7 @@ msgstr "Groepeer op"
 #. module: account_check_deposit
 #: field:account.check.deposit,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_check_deposit
 #: help:account.check.deposit,journal_default_account_id:0
@@ -239,12 +241,12 @@ msgstr "Laatst bijgewerkt op"
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0

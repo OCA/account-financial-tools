@@ -4,10 +4,12 @@
 # 
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
 # Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # njeudy <njeudy@tuxservices.com>, 2015
@@ -20,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:27+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +60,7 @@ msgstr "Criado em"
 #. module: account_move_locking
 #: field:lock.account.move,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: account_move_locking
 #: field:lock.account.move,id:0
@@ -73,7 +75,7 @@ msgstr ""
 #. module: account_move_locking
 #: field:lock.account.move,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modificado a última vez por"
 
 #. module: account_move_locking
 #: field:lock.account.move,write_uid:0
@@ -140,4 +142,4 @@ msgstr ""
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "ou"

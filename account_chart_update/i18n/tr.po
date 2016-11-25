@@ -4,7 +4,10 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
@@ -16,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -345,7 +348,7 @@ msgstr "Son güncelleme"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr ""
+msgstr "günlük"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,log:0

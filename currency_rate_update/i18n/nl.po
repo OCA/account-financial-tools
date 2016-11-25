@@ -10,6 +10,7 @@
 # Artūras Griškonis <xbmc.lt@gmail.com>, 2012
 # Bruno JOLIVEAU, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
 # Dorin Hongu <dhongu@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
@@ -23,13 +24,14 @@
 # SaFi J. <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 # Zapata11 <raimondas.duzinskas@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-09-17 18:43+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 12:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -82,12 +84,12 @@ msgstr "Bedrijf"
 #. module: currency_rate_update
 #: field:currency.rate.update.service,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,currency_list:0
@@ -167,7 +169,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: currency_rate_update
 #: help:currency.rate.update.service,max_delta_days:0
@@ -191,12 +193,12 @@ msgstr "Laatst bijgewerkt op"
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form

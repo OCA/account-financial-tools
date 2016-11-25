@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-09-17 18:43+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 12:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -35,12 +35,12 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
@@ -88,7 +88,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,__last_update:0
@@ -98,12 +98,12 @@ msgstr "Laatst bijgewerkt op"
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_credit_control_dunning_fees
 #: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
