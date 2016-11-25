@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 01:04+0000\n"
+"POT-Creation-Date: 2016-11-23 03:37+0000\n"
 "PO-Revision-Date: 2016-05-26 05:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/zh_CN/)\n"
@@ -32,7 +32,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_res_company
@@ -57,7 +57,7 @@ msgstr "创建时间"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_id
@@ -67,7 +67,7 @@ msgstr "ID"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "最后修改时间"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_uid

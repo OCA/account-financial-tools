@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"POT-Creation-Date: 2016-11-23 03:37+0000\n"
 "PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/el_GR/)\n"
@@ -30,7 +30,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_uid

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"POT-Creation-Date: 2016-11-23 03:37+0000\n"
 "PO-Revision-Date: 2016-05-26 05:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/es_CR/)\n"
@@ -52,7 +52,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_display_name
@@ -62,7 +62,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update

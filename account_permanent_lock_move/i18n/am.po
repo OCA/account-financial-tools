@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"POT-Creation-Date: 2016-11-23 03:37+0000\n"
 "PO-Revision-Date: 2016-05-26 05:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Amharic (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/am/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Asiento contable"
 
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
