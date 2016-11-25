@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-09 23:38+0000\n"
-"PO-Revision-Date: 2016-09-16 01:27+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"PO-Revision-Date: 2016-11-22 16:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_to:0
 msgid "End Date"
-msgstr ""
+msgstr "Data Final"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
@@ -137,7 +137,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,action:0
 msgid "Action"
-msgstr ""
+msgstr "Ação"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move_batch_validate_installed
@@ -147,7 +147,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Entrada de conta"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,action:0
@@ -177,7 +177,7 @@ msgstr "Cancelar"
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_from:0
 msgid "Start Date"
-msgstr ""
+msgstr "Data Inicial"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,chart_account_id:0

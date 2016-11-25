@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/en_GB/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:78
+#: code:addons/account_move_template/account_document_template.py:80
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
 msgstr ""
@@ -89,7 +89,7 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
@@ -205,9 +205,9 @@ msgid "Journal Entry Template"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:68
-#: code:addons/account_move_template/account_document_template.py:77
-#: code:addons/account_move_template/account_document_template.py:88
+#: code:addons/account_move_template/account_document_template.py:69
+#: code:addons/account_move_template/account_document_template.py:79
+#: code:addons/account_move_template/account_document_template.py:90
 #, python-format
 msgid "Error"
 msgstr ""
@@ -256,7 +256,7 @@ msgid "Python Code"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:89
+#: code:addons/account_move_template/account_document_template.py:91
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
 msgstr ""
@@ -280,7 +280,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Sequence"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
@@ -309,7 +309,7 @@ msgid "Journal"
 msgstr "Journal"
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_document_template.py:69
+#: code:addons/account_move_template/account_document_template.py:70
 #, python-format
 msgid "Line %s can't refer to itself"
 msgstr ""

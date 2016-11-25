@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"PO-Revision-Date: 2016-11-22 12:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:res.company,interval_type:0
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Aktuelle Aktualisierungshäufigkeit"
 
 #. module: currency_rate_update
 #: view:res.company:0
@@ -134,7 +134,7 @@ msgid ""
 "If the time delta between the rate date given by the webservice and the "
 "current date exceeds this value, then the currency rate is not updated in "
 "OpenERP."
-msgstr ""
+msgstr "Wenn das Zeitdelta zwischen dem vom Webservice angegebenen Stichtag und dem aktuellen Datum diesen Wert übersteigt, wird der Wechselkurs in Odoo nicht aktualisiert."
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
@@ -196,7 +196,7 @@ msgstr "Währungsaktualisierungsdienst"
 #: code:addons/currency_rate_update/currency_rate_update.py:743
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
-msgstr ""
+msgstr "Austauschdaten für %s werden von der Bank von Kanada nicht gemeldet."
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/currency_rate_update.py:184

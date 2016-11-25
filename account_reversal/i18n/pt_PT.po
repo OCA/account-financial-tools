@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 23:52+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -112,7 +112,7 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Movimento de Conta"
 
 #. module: account_reversal
 #: view:account.move:0
@@ -139,4 +139,4 @@ msgstr "Cancelar"
 #. module: account_reversal
 #: view:account.move.reverse:0
 msgid "or"
-msgstr ""
+msgstr "ou"

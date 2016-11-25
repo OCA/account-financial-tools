@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -130,7 +130,7 @@ msgstr ""
 #: view:credit.control.line:0 field:credit.control.line,level:0
 #: field:credit.control.policy.level,level:0
 msgid "Level"
-msgstr ""
+msgstr "Livello"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,delay_days:0
@@ -825,7 +825,7 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr ""
+msgstr "Completato"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,invoice_id:0
@@ -1062,7 +1062,7 @@ msgstr ""
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:204
 msgid "Summary"
-msgstr ""
+msgstr "Periodo Iva"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
@@ -1118,7 +1118,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Filters"
-msgstr ""
+msgstr "Filtri"
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0

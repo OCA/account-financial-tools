@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-09 23:39+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -35,12 +35,12 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Sledilci"
 
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "New"
-msgstr ""
+msgstr "Novo"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,delimiter:0
@@ -155,7 +155,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Sporočila"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_summary:0
@@ -180,7 +180,7 @@ msgstr "Napaka"
 #. module: async_move_line_importer
 #: help:move.line.importer,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:330
@@ -191,7 +191,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: model:ir.model,name:async_move_line_importer.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Knjigovodski vnos"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0
@@ -201,7 +201,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Neprebrana sporočila"
 
 #. module: async_move_line_importer
 #: help:move.line.importer,message_summary:0
@@ -219,7 +219,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: model:ir.model,name:async_move_line_importer.model_move_line_importer
 msgid "Email Thread"
-msgstr ""
+msgstr "E-poštna nit"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,file:0

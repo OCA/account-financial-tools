@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-26 00:20+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
@@ -35,12 +35,12 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "New"
-msgstr ""
+msgstr "Nouveau"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,delimiter:0
@@ -80,7 +80,7 @@ msgstr "Société"
 #. module: async_move_line_importer
 #: help:move.line.importer,message_ids:0
 msgid "Messages and communication history"
-msgstr ""
+msgstr "Historique des messages et communications"
 
 #. module: async_move_line_importer
 #: model:mail.message.subtype,description:async_move_line_importer.mvl_imported
@@ -96,7 +96,7 @@ msgstr "En cours"
 #. module: async_move_line_importer
 #: field:move.line.importer,message_is_follower:0
 msgid "Is a Follower"
-msgstr ""
+msgstr "Est un abonné"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:214
@@ -155,12 +155,12 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_summary:0
 msgid "Summary"
-msgstr ""
+msgstr "Résumé"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0 field:move.line.importer,report:0
@@ -180,7 +180,7 @@ msgstr "Erreur"
 #. module: async_move_line_importer
 #: help:move.line.importer,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Si coché, les nouveaux messages seront portés à votre attention."
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:330
@@ -201,14 +201,14 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Messages non-lus"
 
 #. module: async_move_line_importer
 #: help:move.line.importer,message_summary:0
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "Contient le résumé de la discussion (nombre de messages, ...). Ce résumé est au format HTML pour permettre son utilisation dans la vue kanban."
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:329
@@ -219,7 +219,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: model:ir.model,name:async_move_line_importer.model_move_line_importer
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussion de courriel"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,file:0

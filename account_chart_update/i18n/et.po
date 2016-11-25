@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-11 09:11+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"PO-Revision-Date: 2016-11-22 16:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Estonian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "or"
-msgstr ""
+msgstr "või"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -273,7 +273,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tüüp"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_taxes:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/vi/)\n"
@@ -343,7 +343,7 @@ msgstr ""
 #: view:credit.control.line:0 field:credit.control.line,channel:0
 #: field:credit.control.policy.level,channel:0
 msgid "Channel"
-msgstr ""
+msgstr "Kênh"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
@@ -1025,7 +1025,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
@@ -1103,7 +1103,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.policy.changer:0
 msgid "or"
-msgstr ""
+msgstr "hoặc"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0

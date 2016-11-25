@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-17 23:52+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"PO-Revision-Date: 2016-11-22 16:24+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -270,12 +270,12 @@ msgstr "Taxes"
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
-msgstr ""
+msgstr "Numéro"
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
 msgid "Analytic Account"
-msgstr ""
+msgstr "Compte analytique"
 
 #. module: account_move_template
 #: field:account.document.template.line,sequence:0

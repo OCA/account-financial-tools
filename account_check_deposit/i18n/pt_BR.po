@@ -217,7 +217,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,is_reconcile:0
 msgid "Reconcile"
-msgstr ""
+msgstr "Reconciliar"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:64
