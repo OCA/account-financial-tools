@@ -75,7 +75,7 @@ openerp.account_move_line_search_extension = function (instance) {
                 }
                 else {
                     result[k] = false;
-                };
+                }
             });
             self.groups_dict = result;
         },
