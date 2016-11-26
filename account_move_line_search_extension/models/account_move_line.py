@@ -1,35 +1,17 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (c) 2013-2015 Noviat nv/sa (www.noviat.com).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from openerp import models
+# -*- coding: utf-8 -*-
+# Copyright 2009-2016 Noviat.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from lxml import etree
 
+from openerp import models
 
-class account_move_line(models.Model):
+
+class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
                         context=None, toolbar=False, submenu=False):
-        res = super(account_move_line, self).fields_view_get(
+        res = super(AccountMoveLine, self).fields_view_get(
             cr, uid, view_id=view_id, view_type=view_type,
             context=context, toolbar=toolbar, submenu=False)
         if context and 'account_move_line_search_extension' in context \
@@ -57,6 +39,6 @@ class account_move_line(models.Model):
                         cr, uid, [('id', 'child_of', ana_ids)])
                     arg[2] = ana_ids
                     break
-        return super(account_move_line, self).search(
+        return super(AccountMoveLine, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
             context=context, count=count)
