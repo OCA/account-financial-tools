@@ -3,13 +3,14 @@
 # * account_invoice_currency
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
 # Bole <bole@dajmi5.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-11-23 03:37+0000\n"
+"POT-Creation-Date: 2016-11-25 21:44+0000\n"
+"PO-Revision-Date: 2016-11-25 21:44+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2016\n"
 "Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +23,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_invoice_currency.invoice_company_currency_form
 #: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_company_currency_form
 msgid "Amounts in company currency"
-msgstr ""
+msgstr "Iznosi u valuti tvrtke"
 
 #. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
@@ -32,9 +33,9 @@ msgstr "Račun"
 #. module: account_invoice_currency
 #: model:ir.model.fields,help:account_invoice_currency.field_account_invoice_amount_tax_signed
 msgid "Invoice tax amount in the company currency, negative for credit notes."
-msgstr ""
+msgstr "Iznos poreza na računu u valuti poduzeća, negativan za odobrenja."
 
 #. module: account_invoice_currency
 #: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice_amount_tax_signed
 msgid "Tax"
-msgstr ""
+msgstr "Porez"
