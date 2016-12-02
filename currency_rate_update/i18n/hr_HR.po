@@ -26,7 +26,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:res.company,interval_type:0
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Frekvencija ažuriranja tečaja"
 
 #. module: currency_rate_update
 #: view:res.company:0
@@ -67,7 +67,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
 msgid "Day(s)"
-msgstr ""
+msgstr "Dan(a)"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/company.py:53
@@ -144,7 +144,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,max_delta_days:0
 msgid "Max delta days"
-msgstr ""
+msgstr "Maximalna razlika dana"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
@@ -190,7 +190,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:res.company,services_to_use:0
 msgid "Currency update services"
-msgstr ""
+msgstr "Servisi za ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/currency_rate_update.py:743
@@ -204,12 +204,12 @@ msgstr ""
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 #, python-format
 msgid "Currency Rate Update"
-msgstr ""
+msgstr "Ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:0
 msgid "Logs"
-msgstr ""
+msgstr "Logovi"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0

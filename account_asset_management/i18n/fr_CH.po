@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 00:47+0000\n"
+"POT-Creation-Date: 2016-11-28 21:00+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr_CH/)\n"
@@ -370,7 +370,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1493
@@ -611,7 +611,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
 msgid "Invoice Line"
-msgstr ""
+msgstr "Ligne de facture"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -675,7 +675,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_number:0
@@ -828,7 +828,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0

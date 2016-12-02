@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 20:32+0000\n"
+"POT-Creation-Date: 2016-11-28 21:00+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/hr_HR/)\n"
@@ -101,7 +101,7 @@ msgstr ""
 #: code:addons/account_move_template/wizard/select_template.py:111
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Greška !"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:123
