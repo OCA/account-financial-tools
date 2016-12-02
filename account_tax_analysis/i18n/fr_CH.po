@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
+"PO-Revision-Date: 2016-12-01 10:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr_CH/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Créé le"
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -97,7 +97,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
@@ -112,7 +112,7 @@ msgstr "Modifié le"
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis

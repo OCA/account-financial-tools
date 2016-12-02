@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2016-11-28 21:03+0000\n"
+"PO-Revision-Date: 2016-12-02 13:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -855,7 +855,7 @@ msgstr "Endre eiendel"
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Måned"
 
 #. module: account_asset_management
 #: field:account.asset.category,name:0

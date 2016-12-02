@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-25 21:28+0000\n"
-"PO-Revision-Date: 2016-11-28 14:57+0000\n"
+"PO-Revision-Date: 2016-11-29 09:31+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -85,17 +85,17 @@ msgstr "Valute za ažuriranje putem ovog servisa"
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 #: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
 msgid "Currency Rate Update"
-msgstr ""
+msgstr "Ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: view:res.company:currency_rate_update.currency_auto_comp
 msgid "Currency update configuration"
-msgstr ""
+msgstr "Postavke ažuriranja tečaja"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,interval_type:0
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Frekvencija ažuriranja tečaja"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
@@ -103,12 +103,12 @@ msgstr ""
 #: view:res.company:currency_rate_update.currency_auto_comp
 #: field:res.company,services_to_use:0
 msgid "Currency update services"
-msgstr ""
+msgstr "Servisi za ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Day(s)"
-msgstr ""
+msgstr "Dan(a)"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,display_name:0
@@ -120,7 +120,7 @@ msgstr "Naziv"
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Greška !"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
@@ -142,7 +142,7 @@ msgstr ""
 #. module: currency_rate_update
 #: field:currency.rate.update.service,interval_number:0
 msgid "Frequency"
-msgstr ""
+msgstr "Učestalost"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,id:0
@@ -161,7 +161,7 @@ msgstr ""
 #: code:addons/currency_rate_update/model/currency_rate_update.py:152
 #, python-format
 msgid "Interval number must be >= 0"
-msgstr ""
+msgstr "Broj intervala mora biti >=0"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,__last_update:0
@@ -181,18 +181,18 @@ msgstr "Zadnje ažurirano"
 #. module: currency_rate_update
 #: view:currency.rate.update.service:currency_rate_update.currency_rate_update_form
 msgid "Logs"
-msgstr ""
+msgstr "Logovi"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,max_delta_days:0
 msgid "Max delta days"
-msgstr ""
+msgstr "Maximalna razlika dana"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:146
 #, python-format
 msgid "Max delta days must be >= 0"
-msgstr ""
+msgstr "Maksimalna razlika dana mora biti >=0"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
@@ -262,4 +262,4 @@ msgstr ""
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
-msgstr ""
+msgstr "Servis možete koristiti samo jednom po poduzeću!"

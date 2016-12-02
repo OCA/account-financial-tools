@@ -3,6 +3,7 @@
 # * account_move_template
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2016
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Antonio Trueba, 2016
@@ -17,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
+"PO-Revision-Date: 2016-12-02 13:53+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -261,7 +262,7 @@ msgstr "Partner"
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: field:account.move.template.line,python_code:0
 msgid "Python Code"
-msgstr ""
+msgstr "Python kode"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
