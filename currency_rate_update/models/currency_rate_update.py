@@ -9,7 +9,9 @@ from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 from odoo import models, fields, api, _
-from odoo import exceptions
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare
+
 
 from ..services.currency_getter_interface import CurrencyGetterType
 
@@ -29,17 +31,20 @@ class CurrencyRateUpdateService(models.Model):
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
 
-    @api.one
+    @api.multi
     @api.constrains('max_delta_days')
     def _check_max_delta_days(self):
-        if self.max_delta_days < 0:
-            raise exceptions.Warning(_('Max delta days must be >= 0'))
+        for srv in self:
+            if srv.max_delta_days < 0:
+                raise ValidationError(_(
+                    'Max delta days must be >= 0'))
 
-    @api.one
+    @api.multi
     @api.constrains('interval_number')
     def _check_interval_number(self):
-        if self.interval_number < 0:
-            raise exceptions.Warning(_('Interval number must be >= 0'))
+        for srv in self:
+            if srv.interval_number < 0:
+                raise ValidationError(_('Interval number must be >= 0'))
 
     @api.onchange('interval_number')
     def _onchange_interval_number(self):
@@ -74,6 +79,10 @@ class CurrencyRateUpdateService(models.Model):
                                      'service_id',
                                      'currency_id',
                                      string='Currencies available')
+    # I can't just put readonly=True in the field above because I need
+    # it as r+w for the on_change to work
+    currency_list_readonly = fields.Many2many(
+        related='currency_list', readonly=True)
     # List of currency to update
     currency_to_update = fields.Many2many('res.currency',
                                           'res_currency_auto_update_rel',
@@ -83,7 +92,7 @@ class CurrencyRateUpdateService(models.Model):
                                           'this service')
     # Link with company
     company_id = fields.Many2one(
-        'res.company', 'Company',
+        'res.company', 'Company', required=True,
         default=lambda self: self.env['res.company']._company_default_get(
             'currency.rate.update.service'))
     # Note fileds that will be used as a logger
@@ -92,7 +101,7 @@ class CurrencyRateUpdateService(models.Model):
         string='Max delta days', default=4, required=True,
         help="If the time delta between the rate date given by the "
         "webservice and the current date exceeds this value, "
-        "then the currency rate is not updated in OpenERP.")
+        "then the currency rate is not updated in Odoo.")
     interval_type = fields.Selection([
         ('days', 'Day(s)'),
         ('weeks', 'Week(s)'),
@@ -107,81 +116,87 @@ class CurrencyRateUpdateService(models.Model):
                          _('You can use a service only one time per '
                            'company !'))]
 
-    @api.one
+    @api.multi
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        _logger.info(
-            'Starting to refresh currencies with service %s (company: %s)',
-            self.service, self.company_id.name)
         rate_obj = self.env['res.currency.rate']
-        company = self.company_id
-        # The multi company currency can be set or no so we handle
-        # The two case
-        if company.auto_currency_up:
-            main_currency = self.company_id.currency_id
-            if not main_currency:
-                raise exceptions.Warning(_('There is no main '
-                                           'currency defined!'))
-            if main_currency.rate != 1:
-                raise exceptions.Warning(_('Base currency rate should '
-                                           'be 1.00!'))
-            note = self.note or ''
-            try:
-                # We initalize the class that will handle the request
-                # and return a dict of rate
-                getter = CurrencyGetterType.get(self.service)
-                curr_to_fetch = [x.name for x in self.currency_to_update]
-                res, log_info = getter.get_updated_currency(
-                    curr_to_fetch,
-                    main_currency.name,
-                    self.max_delta_days
-                    )
-                rate_name = \
-                    fields.Datetime.to_string(datetime.utcnow().replace(
-                        hour=0, minute=0, second=0, microsecond=0))
-                for curr in self.currency_to_update:
-                    if curr.id == main_currency.id:
-                        continue
-                    do_create = True
-                    for rate in curr.rate_ids:
-                        if rate.name == rate_name:
-                            rate.rate = res[curr.name]
-                            do_create = False
-                            break
-                    if do_create:
-                        vals = {
-                            'currency_id': curr.id,
-                            'rate': res[curr.name],
-                            'name': rate_name
-                        }
-                        rate_obj.create(vals)
-                        _logger.info(
-                            'Updated currency %s via service %s',
-                            curr.name, self.service)
+        for srv in self:
+            _logger.info(
+                'Starting to refresh currencies with service %s (company: %s)',
+                srv.service, srv.company_id.name)
+            company = srv.company_id
+            # The multi company currency can be set or no so we handle
+            # The two case
+            if company.auto_currency_up:
+                main_currency = company.currency_id
+                # No need to test if main_currency exists, because it is a
+                # required field
+                if float_compare(
+                        main_currency.rate, 1,
+                        precision_rounding=main_currency.rounding):
+                    raise UserError(_(
+                        "In company '%s', the rate of the main currency (%s) "
+                        "must be 1.00 (current rate: %s).") % (
+                            company.name,
+                            main_currency.name,
+                            main_currency.rate))
+                note = srv.note or ''
+                try:
+                    # We initalize the class that will handle the request
+                    # and return a dict of rate
+                    getter = CurrencyGetterType.get(srv.service)
+                    curr_to_fetch = [x.name for x in srv.currency_to_update]
+                    res, log_info = getter.get_updated_currency(
+                        curr_to_fetch,
+                        main_currency.name,
+                        srv.max_delta_days
+                        )
+                    rate_name = \
+                        fields.Datetime.to_string(datetime.utcnow().replace(
+                            hour=0, minute=0, second=0, microsecond=0))
+                    for curr in srv.currency_to_update:
+                        if curr == main_currency:
+                            continue
+                        do_create = True
+                        for rate in curr.rate_ids:
+                            if rate.name == rate_name:
+                                rate.rate = res[curr.name]
+                                do_create = False
+                                break
+                        if do_create:
+                            vals = {
+                                'currency_id': curr.id,
+                                'rate': res[curr.name],
+                                'name': rate_name
+                            }
+                            rate_obj.create(vals)
+                            _logger.info(
+                                'Updated currency %s via service %s',
+                                curr.name, srv.service)
 
-                # Show the most recent note at the top
-                msg = '%s \n%s currency updated. %s' % (
-                    log_info or '',
-                    fields.Datetime.to_string(datetime.today()),
-                    note
-                )
-                self.write({'note': msg})
-            except Exception as exc:
-                error_msg = '\n%s ERROR : %s %s' % (
-                    fields.Datetime.to_string(datetime.today()),
-                    repr(exc),
-                    note
-                )
-                _logger.error(repr(exc))
-                self.write({'note': error_msg})
-            if self._context.get('cron', False):
-                midnight = time(0, 0)
-                next_run = (datetime.combine(
-                            fields.Date.from_string(self.next_run),
-                            midnight) +
-                            _intervalTypes[str(self.interval_type)]
-                            (self.interval_number)).date()
-                self.next_run = next_run
+                    # Show the most recent note at the top
+                    msg = '%s \n%s currency updated. %s' % (
+                        log_info or '',
+                        fields.Datetime.to_string(datetime.today()),
+                        note
+                    )
+                    srv.write({'note': msg})
+                except Exception as exc:
+                    error_msg = '\n%s ERROR: %s %s' % (
+                        fields.Datetime.to_string(datetime.today()),
+                        repr(exc),
+                        note
+                    )
+                    _logger.error(repr(exc))
+                    srv.write({'note': error_msg})
+                if self._context.get('cron'):
+                    midnight = time(0, 0)
+                    next_run = (datetime.combine(
+                                fields.Date.from_string(srv.next_run),
+                                midnight) +
+                                _intervalTypes[str(srv.interval_type)]
+                                (srv.interval_number)).date()
+                    srv.next_run = next_run
         return True
 
     @api.multi
