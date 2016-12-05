@@ -6,7 +6,7 @@
 from .currency_getter_interface import CurrencyGetterInterface
 
 from datetime import datetime
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+from lxml import etree
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -49,8 +49,6 @@ class ECBGetter(CurrencyGetterInterface):
         # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
-        # Move to new XML lib cf Launchpad bug #645263
-        from lxml import etree
         _logger.debug("ECB currency rate service : connecting...")
         rawfile = self.get_url(url)
         dom = etree.fromstring(rawfile)
@@ -61,8 +59,9 @@ class ECBGetter(CurrencyGetterInterface):
         }
         rate_date = dom.xpath('/gesmes:Envelope/def:Cube/def:Cube/@time',
                               namespaces=ecb_ns)[0]
-        rate_date_datetime = datetime.strptime(rate_date,
-                                               DEFAULT_SERVER_DATE_FORMAT)
+        # Don't use DEFAULT_SERVER_DATE_FORMAT here, because it's
+        # the format of the XML of ECB, not the format of Odoo server !
+        rate_date_datetime = datetime.strptime(rate_date, '%Y-%m-%d')
         self.check_rate_date(rate_date_datetime, max_delta_days)
         # We dynamically update supported currencies
         self.supported_currency_array = dom.xpath(
