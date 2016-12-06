@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  © 2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+<record id="view_account_config_settings" model="ir.ui.view">
+    <field name="name">currency_rate_update.account_config_settings.form</field>
+    <field name="model">account.config.settings</field>
+    <field name="inherit_id" ref="account.view_account_config_settings"/>
+    <field name="arch" type="xml">
+        <div name="bank_options" position="inside">
+            <div name="check_deposit_option">
+                <label for="check_deposit_offsetting_account"/>
+                <field name="check_deposit_offsetting_account" class="oe_inline"/>
+            </div>
+            <div name="check_deposit_transfer"
+                    attrs="{'invisible': ['|', ('has_chart_of_accounts', '=', False), ('check_deposit_offsetting_account', '!=', 'transfer_account')]}">
+                <label for="check_deposit_transfer_account_id"/>
+                <field name="check_deposit_transfer_account_id" class="oe_inline"
+                    context="{'default_reconcile': True}"/>
+            </div>
+        </div>
+    </field>
+</record>
+
+</odoo>
