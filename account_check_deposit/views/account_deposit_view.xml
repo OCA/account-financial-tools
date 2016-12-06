@@ -39,7 +39,7 @@
                                     invisible="1"/>
                                 <field name="currency_id"
                                     groups="base.group_multi_currency"/>
-                                <field name="partner_bank_id"/>
+                                <field name="bank_journal_id" widget="selection"/>
                             </group>
                             <group name="right">
                                 <field name="company_id"
@@ -92,7 +92,7 @@
                     <field name="name"/>
                     <field name="deposit_date"/>
                     <field name="journal_id"/>
-                    <field name="partner_bank_id"/>
+                    <field name="bank_journal_id"/>
                     <field name="check_count"/>
                     <field name="total_amount"/>
                     <field name="currency_id" groups="base.group_multi_currency"/>
