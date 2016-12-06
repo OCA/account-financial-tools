@@ -1,21 +1,14 @@
 # -*- coding: utf-8 -*-
-###############################################################################
-#
-#   account_check_deposit for Odoo
-#   Copyright (C) 2012-2016 Akretion (http://www.akretion.com/)
-#   @author: Benoît GUILLOT <benoit.guillot@akretion.com>
-#   @author: Chafique DELLI <chafique.delli@akretion.com>
-#   @author: Alexis de Lattre <alexis.delattre@akretion.com>
-#   @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
-#
+# © 2012-2016 Akretion (http://www.akretion.com/)
+# @author: Benoît GUILLOT <benoit.guillot@akretion.com>
+# @author: Chafique DELLI <chafique.delli@akretion.com>
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
+# @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-#
-###############################################################################
 
-from openerp import models, fields, api, _
-import openerp.addons.decimal_precision as dp
-from openerp.exceptions import ValidationError
-from openerp.exceptions import Warning as UserError
+from odoo import models, fields, api, _
+import odoo.addons.decimal_precision as dp
+from odoo.exceptions import ValidationError, UserError
 
 
 class AccountCheckDeposit(models.Model):
@@ -61,7 +54,8 @@ class AccountCheckDeposit(models.Model):
         states={'done': [('readonly', '=', True)]},
         default=fields.Date.context_today)
     journal_id = fields.Many2one(
-        'account.journal', string='Journal', domain=[('type', '=', 'bank')],
+        'account.journal', string='Journal',
+        domain=[('type', '=', 'bank'), ('bank_account_id', '=', False)],
         required=True, states={'done': [('readonly', '=', True)]})
     journal_default_account_id = fields.Many2one(
         'account.account', related='journal_id.default_debit_account_id',
@@ -79,9 +73,10 @@ class AccountCheckDeposit(models.Model):
         ], string='Status', default='draft', readonly=True)
     move_id = fields.Many2one(
         'account.move', string='Journal Entry', readonly=True)
-    partner_bank_id = fields.Many2one(
-        'res.partner.bank', string='Bank Account', required=True,
-        domain="[('company_id', '=', company_id)]",
+    bank_journal_id = fields.Many2one(
+        'account.journal', string='Bank Account', required=True,
+        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
+        "('bank_account_id', '!=', False)]",
         states={'done': [('readonly', '=', True)]})
     line_ids = fields.One2many(
         'account.move.line', related='move_id.line_ids',
@@ -185,11 +180,28 @@ class AccountCheckDeposit(models.Model):
     @api.model
     def _prepare_counterpart_move_lines_vals(
             self, deposit, total_debit, total_amount_currency):
+        company = deposit.company_id
+        if not company.check_deposit_offsetting_account:
+            raise UserError(_(
+                "You must configure the 'Check Deposit Offsetting Account' "
+                "on the Accounting Settings page"))
+        if company.check_deposit_offsetting_account == 'bank_account':
+            if not deposit.bank_journal_id.default_debit_account_id:
+                raise UserError(_(
+                    "Missing 'Default Debit Account' on bank journal '%s'")
+                    % deposit.bank_journal_id.name)
+            account_id = deposit.bank_journal_id.default_debit_account_id.id
+        elif company.check_deposit_offsetting_account == 'transfer_account':
+            if not company.check_deposit_transfer_account_id:
+                raise UserError(_(
+                    "Missing 'Account for Check Deposits' on the "
+                    "company '%s'.") % company.name)
+            account_id = company.check_deposit_transfer_account_id.id
         return {
             'name': _('Check Deposit %s') % deposit.name,
             'debit': total_debit,
             'credit': 0.0,
-            'account_id': deposit.company_id.check_deposit_account_id.id,
+            'account_id': account_id,
             'partner_id': False,
             'currency_id': deposit.currency_none_same_company_id.id or False,
             'amount_currency': total_amount_currency,
@@ -215,11 +227,6 @@ class AccountCheckDeposit(models.Model):
                 to_reconcile_lines.append(line + move_line)
 
             # Create counter-part
-            if not deposit.company_id.check_deposit_account_id:
-                raise UserError(
-                    _("Missing Account for Check Deposits on the "
-                        "company '%s'.") % deposit.company_id.name)
-
             counter_vals = self._prepare_counterpart_move_lines_vals(
                 deposit, total_debit, total_amount_currency)
             counter_vals['move_id'] = move.id
@@ -235,12 +242,14 @@ class AccountCheckDeposit(models.Model):
     @api.onchange('company_id')
     def onchange_company_id(self):
         if self.company_id:
-            partner_banks = self.env['res.partner.bank'].search(
-                [('company_id', '=', self.company_id.id)])
-            if len(partner_banks) == 1:
-                self.partner_bank_id = partner_banks[0]
+            bank_journals = self.env['account.journal'].search([
+                ('company_id', '=', self.company_id.id),
+                ('type', '=', 'bank'),
+                ('bank_account_id', '!=', False)])
+            if len(bank_journals) == 1:
+                self.bank_journal_id = bank_journals[0]
         else:
-            self.partner_bank_id = False
+            self.bank_journal_id = False
 
     @api.onchange('journal_id')
     def onchange_journal_id(self):
@@ -256,11 +265,3 @@ class AccountMoveLine(models.Model):
 
     check_deposit_id = fields.Many2one(
         'account.check.deposit', string='Check Deposit', copy=False)
-
-
-class ResCompany(models.Model):
-    _inherit = 'res.company'
-
-    check_deposit_account_id = fields.Many2one(
-        'account.account', string='Account for Check Deposits', copy=False,
-        domain=[('reconcile', '=', True)])
