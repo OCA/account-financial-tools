@@ -3,7 +3,7 @@
 #   @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.addons.account.tests.account_test_classes\
+from odoo.addons.account.tests.account_test_classes\
     import AccountingTestCase
 import time
 
@@ -55,12 +55,15 @@ class TestPayment(AccountingTestCase):
                  self.ref('account.data_account_type_revenue')
                  })
 
-        self.recived_check_account_id = self.account_account_model.search(
+        self.received_check_account_id = self.account_account_model.search(
             [('code', '=', '511200')], limit=1)
-        if not self.recived_check_account_id:
-            self.recived_check_account_id = self.account_account_model.create(
+        if self.received_check_account_id:
+            if not self.received_check_account_id.reconcile:
+                self.received_check_account_id.reconcile = True
+        else:
+            self.received_check_account_id = self.account_account_model.create(
                 {"code": '511200',
-                 "name": "Recived check - (test)",
+                 "name": "Received check - (test)",
                  "reconcile": True,
                  "user_type_id":
                  self.ref('account.data_account_type_liquidity')
@@ -92,11 +95,11 @@ class TestPayment(AccountingTestCase):
             [('code', '=', 'CHK')], limit=1)
         if not self.check_journal:
             self.check_journal = self.journal_model.create(
-                {'name': 'Recived check', 'type': 'bank', 'code': 'CHK'})
+                {'name': 'received check', 'type': 'bank', 'code': 'CHK'})
         self.check_journal.default_debit_account_id = \
-            self.recived_check_account_id
+            self.received_check_account_id
         self.check_journal.default_credit_account_id = \
-            self.recived_check_account_id
+            self.received_check_account_id
         self.bank_journal = self.journal_model.search(
             [('code', '=', 'BNK1')], limit=1)
         if not self.bank_journal:
@@ -111,6 +114,7 @@ class TestPayment(AccountingTestCase):
                 {"acc_number": 'SI56 1910 0000 0123 438 584',
                  "partner_id": self.main_company.partner_id.id,
                  })
+        self.bank_journal.bank_account_id = self.partner_bank_id.id
 
     def create_invoice(self, amount=100, type='out_invoice', currency_id=None):
         """ Returns an open invoice """
@@ -132,7 +136,7 @@ class TestPayment(AccountingTestCase):
             'name': 'something',
             'account_id': self.account_revenue.id,
         })
-        invoice.signal_workflow('invoice_open')
+        invoice.action_invoice_open()
         return invoice
 
     def create_check_deposit(
@@ -140,7 +144,7 @@ class TestPayment(AccountingTestCase):
         """ Returns an validated check deposit """
         check_deposit = self.check_deposit_model.create({
             'journal_id': self.bank_journal.id,
-            'partner_bank_id': self.partner_bank_id.id,
+            'bank_journal_id': self.bank_journal.id,
             'deposit_date': time.strftime('%Y-%m-%d'),
             'currency_id': self.currency_eur_id,
         })
@@ -177,11 +181,11 @@ class TestPayment(AccountingTestCase):
         self.assertEqual(inv_2.state, 'paid')
 
         check_aml = payment.move_line_ids.filtered(
-            lambda r: r.account_id == self.recived_check_account_id)
+            lambda r: r.account_id == self.received_check_account_id)
 
         check_deposit = self.create_check_deposit([check_aml])
         liquidity_aml = check_deposit.move_id.line_ids.filtered(
-            lambda r: r.account_id != self.recived_check_account_id)
+            lambda r: r.account_id != self.received_check_account_id)
 
         self.assertEqual(check_deposit.total_amount, 300)
         self.assertEqual(liquidity_aml.debit, 300)
