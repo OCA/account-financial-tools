@@ -13,15 +13,11 @@ from odoo.exceptions import ValidationError
 class AccountAccountType(models.Model):
     _inherit = "account.account.type"
 
-    @api.model
-    def _get_partner_policies(self):
-        """This is the method to be inherited for adding policies"""
-        return [('optional', _('Optional')),
-                ('always', _('Always')),
-                ('never', _('Never'))]
-
-    partner_policy = fields.Selection(
-        _get_partner_policies, string='Policy for Partner Field',
+    partner_policy = fields.Selection([
+        ('optional', 'Optional'),
+        ('always', 'Always'),
+        ('never', 'Never'),
+        ], string='Policy for Partner Field',
         required=True, default='optional',
         help="Set the policy for the partner field : if you select "
              "'Optional', the accountant is free to put a partner "
