@@ -1,131 +1,132 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Account partner required module for OpenERP
-#    Copyright (C) 2014 Acsone (http://acsone.eu).
-#    @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# © 2014-2016 Acsone (http://acsone.eu)
+# © 2016 Akretion (http://www.akretion.com/)
+# @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
+# @author Alexis de Lattre <alexis.delattre@akretion.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 
 from datetime import datetime
+from odoo.tests import common
+from odoo.exceptions import ValidationError
 
-from openerp.tests import common
-from openerp.osv import orm
 
-
-class test_account_partner_required(common.TransactionCase):
+class TestAccountPartnerRequired(common.TransactionCase):
 
     def setUp(self):
-        super(test_account_partner_required, self).setUp()
-        self.account_obj = self.registry('account.account')
-        self.account_type_obj = self.registry('account.account.type')
-        self.move_obj = self.registry('account.move')
-        self.move_line_obj = self.registry('account.move.line')
+        super(TestAccountPartnerRequired, self).setUp()
+        self.account_obj = self.env['account.account']
+        self.account_type_obj = self.env['account.account.type']
+        self.move_obj = self.env['account.move']
+        self.move_line_obj = self.env['account.move.line']
+        self.sale_journal = self.env['account.journal'].create({
+            'type': 'sale',
+            'code': 'SJXX',
+            'name': 'Sale journal',
+            })
+        liq_acc_type = self.env.ref('account.data_account_type_liquidity')
+        self.account1 = self.account_obj.create({
+            'code': '124242',
+            'name': 'Test 1',
+            'user_type_id': liq_acc_type.id,
+            })
+        self.account_type_custom = self.account_type_obj.create({
+            'name': 'acc type test',
+            'type': 'other',
+            'partner_policy': 'optional',
+        })
+        self.account2 = self.account_obj.create({
+            'code': '124243',
+            'name': 'Test 2',
+            'user_type_id': self.account_type_custom.id,
+            })
+        self.account3 = self.account_obj.create({
+            'code': '124244',
+            'name': 'Test 3',
+            'user_type_id': self.account_type_custom.id,
+            })
 
     def _create_move(self, with_partner, amount=100):
         date = datetime.now()
-        period_id = self.registry('account.period').find(
-            self.cr, self.uid, date,
-            context={'account_period_prefer_normal': True})[0]
+        if with_partner:
+            partner_id = self.env.ref('base.res_partner_1').id
+        else:
+            partner_id = False
         move_vals = {
-            'journal_id': self.ref('account.sales_journal'),
-            'period_id': period_id,
+            'journal_id': self.sale_journal.id,
             'date': date,
-        }
-        move_id = self.move_obj.create(self.cr, self.uid, move_vals)
-        self.move_line_obj.create(self.cr, self.uid,
-                                  {'move_id': move_id,
-                                   'name': '/',
-                                   'debit': 0,
-                                   'credit': amount,
-                                   'account_id': self.ref('account.a_sale')})
-        move_line_id = self.move_line_obj.create(
-            self.cr, self.uid,
-            {
-                'move_id': move_id,
-                'name': '/',
-                'debit': amount,
-                'credit': 0,
-                'account_id': self.ref('account.a_recv'),
-                'partner_id': self.ref('base.res_partner_1') if
-                with_partner else False
+            'line_ids': [
+                (0, 0, {
+                    'name': '/',
+                    'debit': 0,
+                    'credit': amount,
+                    'account_id': self.account1.id,
+                    }),
+                (0, 0, {
+                    'name': '/',
+                    'debit': amount,
+                    'credit': 0,
+                    'account_id': self.account2.id,
+                    'partner_id': partner_id,
+                    })
+                ],
             }
-        )
-        return move_line_id
-
-    def _set_partner_policy(self, policy, aref='account.a_recv'):
-        account_type = self.account_obj.browse(self.cr, self.uid,
-                                               self.ref(aref)).user_type
-        self.account_type_obj.write(self.cr, self.uid, account_type.id,
-                                    {'partner_policy': policy})
+        move = self.move_obj.create(move_vals)
+        move_line = False
+        for line in move.line_ids:
+            if line.account_id == self.account2:
+                move_line = line
+                break
+        return move_line
 
     def test_optional(self):
         self._create_move(with_partner=False)
         self._create_move(with_partner=True)
 
     def test_always_no_partner(self):
-        self._set_partner_policy('always')
-        with self.assertRaises(orm.except_orm):
+        self.account_type_custom.partner_policy = 'always'
+        with self.assertRaises(ValidationError):
             self._create_move(with_partner=False)
 
     def test_always_no_partner_0(self):
         # accept missing partner when debit=credit=0
-        self._set_partner_policy('always')
+        self.account_type_custom.partner_policy = 'always'
         self._create_move(with_partner=False, amount=0)
 
     def test_always_with_partner(self):
-        self._set_partner_policy('always')
+        self.account_type_custom.partner_policy = 'always'
         self._create_move(with_partner=True)
 
     def test_never_no_partner(self):
-        self._set_partner_policy('never')
+        self.account_type_custom.partner_policy = 'never'
         self._create_move(with_partner=False)
 
     def test_never_with_partner(self):
-        self._set_partner_policy('never')
-        with self.assertRaises(orm.except_orm):
+        self.account_type_custom.partner_policy = 'never'
+        with self.assertRaises(ValidationError):
             self._create_move(with_partner=True)
 
     def test_never_with_partner_0(self):
+        self.account_type_custom.partner_policy = 'never'
         # accept partner when debit=credit=0
-        self._set_partner_policy('never')
         self._create_move(with_partner=True, amount=0)
 
     def test_always_remove_partner(self):
         # remove partner when policy is always
-        self._set_partner_policy('always')
-        line_id = self._create_move(with_partner=True)
-        with self.assertRaises(orm.except_orm):
-            self.move_line_obj.write(self.cr, self.uid, [line_id],
-                                     {'partner_id': False})
+        self.account_type_custom.partner_policy = 'always'
+        line = self._create_move(with_partner=True)
+        with self.assertRaises(ValidationError):
+            line.write({'partner_id': False})
 
     def test_change_account(self):
-        self._set_partner_policy('always', aref='account.a_pay')
-        line_id = self._create_move(with_partner=False)
-        # change account to a_pay with policy always but missing partner
-        with self.assertRaises(orm.except_orm):
-            self.move_line_obj.write(self.cr, self.uid, [line_id],
-                                     {'account_id': self.ref('account.a_pay')})
-        # change account to a_pay with policy always with partner -> ok
-        self.move_line_obj.write(
-            self.cr,
-            self.uid,
-            [line_id],
-            {
-                'account_id': self.ref('account.a_pay'),
-                'partner_id': self.ref('base.res_partner_1')
-            }
-        )
+        self.account_type_custom.partner_policy = 'optional'
+        line = self._create_move(with_partner=False)
+        # change account to an account with policy always but missing partner
+        self.account_type_custom.partner_policy = 'always'
+        with self.assertRaises(ValidationError):
+            line.write({'account_id': self.account3.id})
+        # change account to an account with policy always with partner
+        line.write({
+            'account_id': self.account3.id,
+            'partner_id': self.env.ref('base.res_partner_1').id
+            })
