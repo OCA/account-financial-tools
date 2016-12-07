@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=================
-Account Type Menu
-=================
+==================
+Account Types Menu
+==================
 
 This module adds a menu entry *Account Type* under *Accounting > Configuration > Accounting*, because this menu entry doesn't exists in the official *account* module of Odoo 10.
 
