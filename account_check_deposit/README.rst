@@ -16,7 +16,15 @@ one in EUR and one in USD).
 Configuration
 =============
 
-A journal named *Check Received* is automatically created. It will be available as a payment method in Odoo. On this journal, you must configure the *Default Debit Account* and *Defaut Credit Account* ; this is the account via which the amounts of checks will transit between the reception of a check from a customer and the validation of the check deposit in Odoo.
+In the menu *Accounting > Configuration > Accounting > Journals*, create a new journal:
+
+* Name: Checks Received
+* Type: Bank
+* Short Code: CHK (or any code you want)
+* Default Debit Account: select an account for checks received
+* Default Credit Account: idem
+
+This bank journal will be available as a payment method in Odoo. The account you configured as *Default Debit Account* and *Defaut Credit Account* is the account via which the amounts of checks will transit between the reception of a check from a customer and the validation of the check deposit in Odoo.
 
 On the Settings page of the Accounting, you should configure the *Check Deposit Offsetting Account*:
 

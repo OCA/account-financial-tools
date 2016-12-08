@@ -19,11 +19,9 @@
     'data': [
         'views/account_deposit_view.xml',
         'views/account_move_line_view.xml',
-        'data/account_deposit_sequence.xml',
         'views/account_config_settings.xml',
         'security/ir.model.access.csv',
         'security/check_deposit_security.xml',
-        'data/account_data.xml',
         'report/report.xml',
         'report/report_checkdeposit.xml',
     ],
