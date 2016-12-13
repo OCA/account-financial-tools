@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# License AGPL-3: Antiun Ingenieria S.L. - Antonio Espinosa
+# License AGPL-3: Tecnativa S.L. - Antonio Espinosa
 # See README.rst file on addon root folder for more details
 
 import logging
@@ -52,7 +52,7 @@ class ResPartner(models.Model):
         vat_country = 'XX'
         vat_number = vat
         if vat and re.match(r'[A-Za-z]{2}', vat):
-            vat_country = vat[:2].upper()
+            vat_country = vat[:2].lower()
             vat_number = vat[2:].replace(' ', '')
         elif country:
             vat_country = country
