@@ -51,8 +51,8 @@ Credits
 
 Contributors
 ------------
-- Serpent Consulting Services Pvt. Ltd.
-- Agile Business Group
+* Serpent Consulting Services Pvt. Ltd.
+* Agile Business Group
 
 Maintainer
 ----------

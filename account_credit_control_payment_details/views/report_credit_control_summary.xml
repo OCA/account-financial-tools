@@ -55,16 +55,15 @@
                                         </td>
                                         <td></td>
                                         <td></td>
-                                        <t t-if="p.amount_currency !=0">
+                                        <t t-if="p.amount_currency != 0.00">
                                             <td class="text-right">
                                                 <span t-esc="p.amount_currency"
                                                 t-esc-options='{"widget": "monetary", "display_currency": "p.currency_id"}'/>
                                             </td>
                                         </t>
-                                         <t t-if="not p.amount_currency !=0">
+                                         <t t-if="not p.amount_currency != 0.00">
                                             <td class="text-right">
-                                                <span t-esc="p.credit or p.debit"
-                                                t-esc-options='{"widget": "monetary"}'/>
+                                                <span t-esc="0-p.credit"/>
                                             </td>
                                         </t>
                                     </tr>
