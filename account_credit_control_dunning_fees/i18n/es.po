@@ -3,6 +3,7 @@
 # * account_credit_control_dunning_fees
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Antonio Trueba, 2016
@@ -18,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
+"PO-Revision-Date: 2016-12-16 00:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +95,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: selection:credit.control.policy.level,dunning_fees_type:0
 msgid "Fixed"
-msgstr ""
+msgstr "Fijo"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,id:0
