@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:24+0000\n"
+"POT-Creation-Date: 2016-12-09 23:16+0000\n"
+"PO-Revision-Date: 2016-12-16 12:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
 msgid "Total Amount"
-msgstr ""
+msgstr "Gesamtbetrag"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:47
@@ -126,7 +126,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Back to Draft"
-msgstr ""
+msgstr "Zurück auf Entwurf"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:130
@@ -172,7 +172,7 @@ msgstr "Fehler:"
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Bankkonto"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company

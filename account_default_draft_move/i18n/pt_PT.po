@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-09 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -66,7 +66,7 @@ msgstr ""
 #. module: account_default_draft_move
 #: model:ir.model,name:account_default_draft_move.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_default_draft_move
 #: view:account.invoice:0

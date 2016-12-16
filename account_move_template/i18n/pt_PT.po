@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-09 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -89,7 +89,7 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
@@ -118,7 +118,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_move_template
 #: view:wizard.select.move.template.line:0
@@ -269,7 +269,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0

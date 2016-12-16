@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-09 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
@@ -126,7 +126,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Back to Draft"
-msgstr ""
+msgstr "Devolver a borrador"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:130
@@ -172,7 +172,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Cuenta bancaria"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company

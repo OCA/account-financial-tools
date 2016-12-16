@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-09 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: field:account.asset.recompute.trigger,company_id:0
 #: view:asset.asset.report:0 field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1488
@@ -340,7 +340,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,code:0
 msgid "Reference"
-msgstr ""
+msgstr "Referência"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -445,7 +445,7 @@ msgstr ""
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1235
@@ -546,7 +546,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,previous_id:0
@@ -611,7 +611,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
 msgid "Invoice Line"
-msgstr ""
+msgstr "Linha da Fatura"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -828,7 +828,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
 msgid "Active"
-msgstr ""
+msgstr "Ativo"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
