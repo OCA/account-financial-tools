@@ -89,7 +89,7 @@ class ResPartner(models.Model):
             # Can not be sure that this VAT is signed up in VIES
             data['vies_passed'] = False
         if res:
-            vat = country_code + vat_number
+            vat = country_code.upper() + vat_number
             if self.vat != vat:
                 data['vat'] = vat
         if data:
@@ -123,7 +123,7 @@ class ResPartner(models.Model):
             if self.vies_passed:
                 data['vies_passed'] = False
         if res:
-            vat = country_code + vat_number
+            vat = country_code.upper() + vat_number
             if self.vat != vat:
                 data['vat'] = vat
         if data:
