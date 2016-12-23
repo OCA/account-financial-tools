@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-03 16:41+0000\n"
+"POT-Creation-Date: 2016-12-16 23:17+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,move_line_prefix:0
 msgid "Items Name Prefix"
-msgstr ""
+msgstr "Prefijo del nombre de los apuntes"
 
 #. module: account_reversal
 #: field:account.move.reverse,period_id:0
@@ -31,7 +31,7 @@ msgstr ""
 #: view:account.move.reverse:0
 #: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
 msgid "Reverse Entries"
-msgstr ""
+msgstr "Asientos revertidos"
 
 #. module: account_reversal
 #: help:account.move.reverse,move_line_prefix:0
@@ -54,12 +54,12 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,journal_id:0
 msgid "Reversal Journal"
-msgstr ""
+msgstr "Diario de reversión"
 
 #. module: account_reversal
 #: view:account.move:0 field:account.move,to_be_reversed:0
 msgid "To Be Reversed"
-msgstr ""
+msgstr "A ser revertido"
 
 #. module: account_reversal
 #: help:account.move.reverse,journal_id:0
@@ -71,12 +71,12 @@ msgstr ""
 msgid ""
 "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
-msgstr ""
+msgstr "Esto creará una reversión de todos los asientos seleccionados tanto si tienen la casilla \"a ser revertido\" como si no."
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
-msgstr ""
+msgstr "Revertir asientos contables"
 
 #. module: account_reversal
 #: code:addons/account_reversal/wizard/account_move_reverse.py:116
@@ -87,12 +87,12 @@ msgstr ""
 #. module: account_reversal
 #: view:account.move.reverse:0
 msgid "Create reversal journal entries"
-msgstr ""
+msgstr "Revertir asientos contables"
 
 #. module: account_reversal
 #: field:account.move,reversal_id:0
 msgid "Reversal Entry"
-msgstr ""
+msgstr "Asiento revertido"
 
 #. module: account_reversal
 #: help:account.move.reverse,date:0
@@ -119,17 +119,17 @@ msgstr "Asiento contable"
 #: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
 #: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
 msgid "Journal Entries to be Reversed"
-msgstr ""
+msgstr "Asientos contables a ser revertidos"
 
 #. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
-msgstr ""
+msgstr "Fecha de reversión"
 
 #. module: account_reversal
 #: field:account.move.reverse,move_prefix:0
 msgid "Entries Ref. Prefix"
-msgstr ""
+msgstr "Prefijo de la ref. de los asientos"
 
 #. module: account_reversal
 #: view:account.move.reverse:0

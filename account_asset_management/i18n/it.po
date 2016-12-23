@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:20+0000\n"
+"POT-Creation-Date: 2016-12-16 23:16+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -627,7 +627,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Mese"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0

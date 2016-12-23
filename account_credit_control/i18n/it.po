@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-16 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -337,7 +337,7 @@ msgstr ""
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,channel:0
@@ -1051,7 +1051,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Mail in Uscita"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:68

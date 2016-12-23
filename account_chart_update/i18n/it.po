@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:20+0000\n"
+"POT-Creation-Date: 2016-12-16 23:16+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -358,7 +358,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:797
 #, python-format
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
