@@ -3,19 +3,18 @@
 # * account_chart_update
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-16 23:19+0000\n"
-"PO-Revision-Date: 2016-12-23 08:32+0000\n"
+"PO-Revision-Date: 2016-12-17 10:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
+"Language-Team: Spanish (Paraguay) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_PY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
+"Language: es_PY\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_chart_update
@@ -53,12 +52,12 @@ msgstr ""
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,account_ids:0
 msgid "Accounts"
-msgstr "Conti"
+msgstr ""
 
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr "Attivo"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
@@ -74,7 +73,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Cancel"
-msgstr "Annulla"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
@@ -89,7 +88,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr "Chiudi"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:749
@@ -100,7 +99,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,company_id:0
 msgid "Company"
-msgstr "Azienda"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
@@ -126,7 +125,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_uid:0
 #: field:wizard.update.charts.accounts.tax.code,create_uid:0
 msgid "Created by"
-msgstr "Creato da"
+msgstr "Creado por"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,create_date:0
@@ -136,7 +135,7 @@ msgstr "Creato da"
 #: field:wizard.update.charts.accounts.tax,create_date:0
 #: field:wizard.update.charts.accounts.tax.code,create_date:0
 msgid "Created on"
-msgstr "Creato il"
+msgstr "Creado en"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
@@ -186,7 +185,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,display_name:0
 #: field:wizard.update.charts.accounts.tax.code,display_name:0
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -312,7 +311,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,__last_update:0
 #: field:wizard.update.charts.accounts.tax.code,__last_update:0
 msgid "Last Modified on"
-msgstr "Ultima modifica il"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -322,7 +321,7 @@ msgstr "Ultima modifica il"
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Ultima actualización por"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -332,7 +331,7 @@ msgstr "Last Updated by"
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Ultima actualización en"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -397,7 +396,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr "Avanti"
+msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,code_digits:0
@@ -410,7 +409,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:786
 #, python-format
 msgid "None"
-msgstr "Nessuno"
+msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -424,7 +423,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,notes:0
 #: field:wizard.update.charts.accounts.tax.code,notes:0
 msgid "Notes"
-msgstr "Note"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:386
@@ -464,7 +463,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,state:0
 msgid "Status"
-msgstr "Stato"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
@@ -920,4 +919,4 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "or"
-msgstr "o"
+msgstr ""

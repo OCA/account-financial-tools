@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-14 00:45+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
+"PO-Revision-Date: 2016-11-25 21:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr ""
 #. module: account_reconcile_trace
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 #. module: account_reconcile_trace
 #: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
@@ -255,6 +255,16 @@ msgstr ""
 #: field:account.move,trace_up_ids:0
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace Up"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tcc
+msgid "Transfer Creditors Credit"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tdd
+msgid "Transfer Debtors Debit"
 msgstr ""
 
 #. module: account_reconcile_trace

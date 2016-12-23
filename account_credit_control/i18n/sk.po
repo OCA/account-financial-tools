@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2016-12-16 23:19+0000\n"
+"PO-Revision-Date: 2016-12-22 21:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -174,7 +174,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktívne"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -491,7 +491,7 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr ""
+msgstr "Hotovo"
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
@@ -929,7 +929,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:109
@@ -1086,7 +1086,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,run_id:0
 msgid "Source"
-msgstr ""
+msgstr "Zdroj"
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
