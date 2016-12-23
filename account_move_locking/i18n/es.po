@@ -3,13 +3,14 @@
 # * account_move_locking
 # 
 # Translators:
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-04-14 08:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-12-17 23:17+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgstr "Asiento contable"
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Aprobar"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
@@ -50,7 +51,7 @@ msgstr "Fecha de fin"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Fecha de inicio"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
@@ -58,7 +59,7 @@ msgstr ""
 msgid ""
 "Date start need to be                                           before Date "
 "end"
-msgstr ""
+msgstr "La fecha de inicio debe ser anterior a la fecha de fin"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
@@ -93,19 +94,19 @@ msgstr "Última actualización en"
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr ""
+msgstr "Bloquear asiento"
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
-msgstr ""
+msgstr "Bloquear asientos contables"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_account_move_locked
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/account.py:33
@@ -113,13 +114,13 @@ msgstr ""
 #: code:addons/account_move_locking/account.py:49
 #, python-format
 msgid "Move Locked! %s"
-msgstr ""
+msgstr "Asiento %s bloqueado"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:67
 #, python-format
 msgid "No move to locked found"
-msgstr ""
+msgstr "No se han encontrado asientos a bloquear"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:57
@@ -128,7 +129,7 @@ msgid ""
 "Unposted move in period/jounal                                           "
 "selected, please post it before                                           "
 "locking them"
-msgstr ""
+msgstr "Asientos no asentados en el periodo/diario seleccionados. Por favor asiéntelos antes de bloquearlos."
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
