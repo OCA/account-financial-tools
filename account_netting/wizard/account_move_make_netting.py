@@ -32,6 +32,12 @@ class AccountMoveMakeNetting(models.TransientModel):
         if any(move_lines.mapped('reconcile_id')):
             raise exceptions.ValidationError(
                 _("All entries mustn't been reconciled"))
+        if len(move_lines.mapped('account_id')) == 1:
+            raise exceptions.ValidationError(
+                _("The 'Compensate' function is intended to balance "
+                  "operations on different accounts for the same partner.\n"
+                  "In this case all selected entries belong to the same "
+                  "account.\n Please use the 'Reconcile' function."))
         partner_id = None
         for move in move_lines:
             if (not move.partner_id or (
