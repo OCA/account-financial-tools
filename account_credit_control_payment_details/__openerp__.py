@@ -7,7 +7,6 @@
     "summary": "Account Credit Control Payment Details",
     "version": "8.0.1.0.0",
     "category": "Accounting",
-    "description": "Account Credit Control Payment Details",
     'website': 'http://www.serpentcs.com',
     "author": """Serpent Consulting Services Pvt. Ltd.,
                 Agile Business Group,
