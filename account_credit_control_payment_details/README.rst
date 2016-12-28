@@ -25,9 +25,8 @@ Usage
 
 To use this module, you need to:
 
-* Go to ``Accounting > Periodical Processing > Credit
-Control Line > More > Print Lines``
- - This will enable you to see the PDF which details the payments and credit control lines.
+* Go to ``Accounting > Periodical Processing > Credit Control Line > More > Print Lines``
+* This will enable you to see the PDF which details the payments and credit control lines.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
