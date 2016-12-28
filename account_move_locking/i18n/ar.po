@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:24+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -35,22 +35,22 @@ msgstr "إلغاء"
 #. module: account_move_locking
 #: field:lock.account.move,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: account_move_locking
 #: field:lock.account.move,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: account_move_locking
 #: field:lock.account.move,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: account_move_locking
 #: field:lock.account.move,id:0
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: account_move_locking
 #: field:lock.account.move,journal_ids:0
@@ -60,17 +60,17 @@ msgstr ""
 #. module: account_move_locking
 #: field:lock.account.move,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "آخر تعديل في"
 
 #. module: account_move_locking
 #: field:lock.account.move,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: account_move_locking
 #: field:lock.account.move,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
@@ -127,4 +127,4 @@ msgstr ""
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "أو"

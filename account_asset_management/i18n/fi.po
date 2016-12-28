@@ -7,11 +7,13 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
@@ -20,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-15 12:46+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -305,7 +307,7 @@ msgstr ""
 #: view:asset.depreciation.confirmation.wizard:account_asset_management.view_asset_depreciation_confirmation_wizard
 #: view:asset.modify:account_asset_management.asset_modify_form
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -580,7 +582,7 @@ msgstr "Valmis"
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 #: selection:asset.asset.report,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Luonnos"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -672,7 +674,7 @@ msgstr ""
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 msgid "Group By..."
-msgstr ""
+msgstr "Ryhmittele..."
 
 #. module: account_asset_management
 #: field:account.asset.asset,move_line_check:0
@@ -860,7 +862,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
@@ -887,7 +889,7 @@ msgstr ""
 #: view:asset.modify:account_asset_management.asset_modify_form
 #: field:asset.modify,note:0
 msgid "Notes"
-msgstr ""
+msgstr "Huomautukset"
 
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
@@ -934,7 +936,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Kumppani"
 
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0
@@ -1123,7 +1125,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 msgid "Status"
-msgstr ""
+msgstr "Tila"
 
 #. module: account_asset_management
 #: constraint:account.account:0
@@ -1217,7 +1219,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.history,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0

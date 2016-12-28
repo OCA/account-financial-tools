@@ -3,13 +3,23 @@
 # * account_tax_analysis
 # 
 # Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:55+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,12 +51,17 @@ msgstr "إلغاء"
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,display_name:0
+msgid "Display Name"
+msgstr "اسم العرض"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -71,7 +86,7 @@ msgstr "تجميع حسب..."
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,id:0
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: account_tax_analysis
 #: help:account.vat.declaration.analysis,period_list:0
@@ -90,14 +105,19 @@ msgid "Journal Items"
 msgstr "عناصر دفتر اليومية"
 
 #. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,__last_update:0
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis

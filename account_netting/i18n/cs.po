@@ -3,13 +3,19 @@
 # * account_netting
 # 
 # Translators:
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# Thomas A. Jaeger, 2015
+# UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 18:49+0000\n"
-"PO-Revision-Date: 2015-10-14 18:45+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Czech (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,17 +77,22 @@ msgstr ""
 #. module: account_netting
 #: field:account.move.make.netting,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Vytvořil(a)"
 
 #. module: account_netting
 #: field:account.move.make.netting,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Vytvořeno"
+
+#. module: account_netting
+#: field:account.move.make.netting,display_name:0
+msgid "Display Name"
+msgstr "Zobrazovaný název"
 
 #. module: account_netting
 #: field:account.move.make.netting,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_netting
 #: field:account.move.make.netting,journal:0
@@ -89,14 +100,19 @@ msgid "Journal"
 msgstr "Deník"
 
 #. module: account_netting
+#: field:account.move.make.netting,__last_update:0
+msgid "Last Modified on"
+msgstr "Naposled upraveno"
+
+#. module: account_netting
 #: field:account.move.make.netting,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: account_netting
 #: field:account.move.make.netting,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: account_netting
 #: field:account.move.make.netting,move_lines:0
@@ -135,4 +151,4 @@ msgstr ""
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid "or"
-msgstr ""
+msgstr "nebo"

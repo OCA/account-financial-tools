@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Bruno JOLIVEAU, 2015
@@ -19,12 +20,13 @@
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 # UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-15 12:45+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +43,7 @@ msgstr ""
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #. module: account_reversal
 #: help:account.move,to_be_reversed:0

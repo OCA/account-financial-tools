@@ -1,0 +1,333 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_line_import
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-13 03:39+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_CR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:385
+#, python-format
+msgid "%s '%s' not found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:197
+#, python-format
+msgid "%s, field '%s', the import of ORM fields of type '%s' is not supported"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:172
+#, python-format
+msgid "%s, undefined field '%s' found while importing move lines"
+msgstr ""
+
+#. module: account_move_line_import
+#: selection:aml.import,csv_separator:0
+#: selection:aml.import,decimal_separator:0
+msgid ", (comma)"
+msgstr ""
+
+#. module: account_move_line_import
+#: selection:aml.import,decimal_separator:0
+msgid ". (dot)"
+msgstr ""
+
+#. module: account_move_line_import
+#: selection:aml.import,csv_separator:0
+msgid "; (semicolon)"
+msgstr ""
+
+#. module: account_move_line_import
+#: model:ir.model,name:account_move_line_import.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:292
+#, python-format
+msgid "Account with code '%s' not found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,csv_separator:0
+msgid "CSV Separator"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form_result
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: account_move_line_import
+#: field:aml.import,codepage:0
+msgid "Code Page"
+msgstr ""
+
+#. module: account_move_line_import
+#: help:aml.import,codepage:0
+msgid ""
+"Code Page of the system that has generated the csv file.\n"
+"E.g. Windows-1252, utf-8"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_move_line_import
+#: field:aml.import,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:372
+#, python-format
+msgid "Currency '%s' not found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,decimal_separator:0
+msgid "Decimal Separator"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,dialect:0
+msgid "Dialect"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:156
+#, python-format
+msgid ""
+"Duplicate header field '%s' found !\n"
+"Please correct the input file."
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:456
+#, python-format
+msgid ""
+"Error in CSV file, Total Debit (%s) is different from Total Credit (%s) !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:208
+#, python-format
+msgid "Error when processing line '%s'"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:497
+#, python-format
+msgid ""
+"Error while processing line '%s' :\n"
+"%s"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,aml_data:0
+msgid "File"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,aml_fname:0
+msgid "Filename"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_line_import
+#: view:account.move:account_move_line_import.view_move_form
+msgid "Import Entry Lines from csv File"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/models/account_move.py:17
+#: view:aml.import:account_move_line_import.aml_import_view_form
+#: view:aml.import:account_move_line_import.aml_import_view_form_result
+#, python-format
+msgid "Import File"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:531
+#, python-format
+msgid "Import File result"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:account.move:account_move_line_import.view_move_form
+msgid "Import Lines"
+msgstr ""
+
+#. module: account_move_line_import
+#: model:ir.model,name:account_move_line_import.model_aml_import
+msgid "Import account move lines"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:359
+#, python-format
+msgid ""
+"Incorrect data format for field '%s' with value '%s',  should be YYYY-MM-DD"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:260
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Boolean !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:224
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Integer !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:275
+#, python-format
+msgid ""
+"Incorrect value '%s' for field '%s' of type Many2One !\n"
+"You should specify the database key or contact your IT department to add support for this field."
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:242
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Numeric !"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,lines:0
+msgid "Input Lines"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:414
+#, python-format
+msgid "Invalid Analytic Account '%s' !"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_line_import
+#: field:aml.import,write_uid:0
+msgid "Last Updated by"
+msgstr "Ultima actualización por"
+
+#. module: account_move_line_import
+#: field:aml.import,write_date:0
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: account_move_line_import
+#: field:aml.import,note:0
+msgid "Log"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:389
+#, python-format
+msgid "Multiple %s entries with Code or Name '%s' found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:417
+#, python-format
+msgid "Multiple Analytic Accounts found that match with '%s' !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:322
+#, python-format
+msgid "Multiple partners with Reference or Name '%s' found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:344
+#, python-format
+msgid "Multiple products with Internal Reference or Name '%s' found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:102
+#, python-format
+msgid "No header line found in the input file !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:318
+#, python-format
+msgid "Partner '%s' not found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:340
+#, python-format
+msgid "Product '%s' not found !"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form_result
+msgid "Results :"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form
+msgid "Select your file :"
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:445
+#, python-format
+msgid "The '%s' field is a required field that must be correctly set."
+msgstr ""
+
+#. module: account_move_line_import
+#: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:496
+#, python-format
+msgid "Wrong Code Page"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form
+msgid "_Import"
+msgstr ""
+
+#. module: account_move_line_import
+#: view:aml.import:account_move_line_import.aml_import_view_form
+msgid "or"
+msgstr "o"
