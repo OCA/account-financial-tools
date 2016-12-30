@@ -10,8 +10,10 @@
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Chanseok <kcsgoodboy@gmail.com>, 2014
 # Chen-Do LU <clu@alkemics.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
@@ -30,8 +32,10 @@
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Nicole <dlruddk1112@gmail.com>, 2014
 # njeudy <njeudy@tuxservices.com>, 2015
@@ -46,12 +50,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +111,7 @@ msgstr ""
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:53
