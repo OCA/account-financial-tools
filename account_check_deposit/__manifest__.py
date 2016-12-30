@@ -17,6 +17,7 @@
         'account_accountant',
     ],
     'data': [
+        'data/sequence.xml',
         'views/account_deposit_view.xml',
         'views/account_move_line_view.xml',
         'views/account_config_settings.xml',
