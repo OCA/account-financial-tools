@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-23 23:17+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Persian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fa/)\n"
@@ -837,7 +837,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.policy.changer:0 view:credit.control.printer:0
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #. module: account_credit_control
 #: view:credit.control.printer:0

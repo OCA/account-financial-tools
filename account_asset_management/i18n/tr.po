@@ -5,13 +5,14 @@
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:22+0000\n"
+"POT-Creation-Date: 2016-12-23 23:16+0000\n"
+"PO-Revision-Date: 2016-12-30 22:02+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -448,7 +449,7 @@ msgstr ""
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1235
@@ -639,7 +640,7 @@ msgstr "Amortisman Tablosu"
 #. module: account_asset_management
 #: field:account.asset.asset,parent_right:0
 msgid "Parent Right"
-msgstr ""
+msgstr "Sağ Ebeveyn"
 
 #. module: account_asset_management
 #: selection:account.asset.depreciation.line,type:0
@@ -678,7 +679,7 @@ msgstr "ya da"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_number:0
@@ -983,7 +984,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Sol Ebeveyn"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0

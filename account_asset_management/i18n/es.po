@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 23:16+0000\n"
-"PO-Revision-Date: 2016-12-23 08:32+0000\n"
+"POT-Creation-Date: 2016-12-23 23:16+0000\n"
+"PO-Revision-Date: 2016-12-27 13:02+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -267,7 +267,7 @@ msgstr "Asiento de amortización"
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Journal Item"
-msgstr ""
+msgstr "Apunte contable"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -619,7 +619,7 @@ msgstr "Línea de factura"
 #: code:addons/account_asset_management/account_asset.py:1337
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Asientos contables"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,method_period:0

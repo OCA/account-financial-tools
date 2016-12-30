@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 21:00+0000\n"
-"PO-Revision-Date: 2016-12-02 13:53+0000\n"
+"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"PO-Revision-Date: 2016-12-27 15:42+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Débit"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:122

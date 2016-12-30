@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2016-12-23 23:17+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/tr/)\n"
@@ -337,7 +337,7 @@ msgstr ""
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Email"
-msgstr ""
+msgstr "Eposta"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,channel:0
@@ -702,7 +702,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Şirketler"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:250
@@ -1041,7 +1041,7 @@ msgstr ""
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.printer:0
 msgid "Lines"
-msgstr ""
+msgstr "Satırlar"
 
 #. module: account_credit_control
 #: field:credit.control.line,mail_message_id:0
@@ -1118,7 +1118,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Filters"
-msgstr ""
+msgstr "Filtreler"
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0

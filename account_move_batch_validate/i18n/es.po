@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-16 23:17+0000\n"
-"PO-Revision-Date: 2016-12-23 08:32+0000\n"
+"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"PO-Revision-Date: 2016-12-27 13:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: selection:account.move.marker,target_move:0
 msgid "All Posted Entries"
-msgstr ""
+msgstr "Todos los asientos asentados"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,fiscalyear_id:0
@@ -157,7 +157,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,target_move:0
 msgid "Target Moves"
-msgstr ""
+msgstr "Asientos destino"
 
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move_marker
