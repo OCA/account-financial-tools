@@ -11,12 +11,13 @@
 # SaFi J. <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-10-11 09:47+0000\n"
+"POT-Creation-Date: 2016-12-23 23:21+0000\n"
+"PO-Revision-Date: 2016-12-27 08:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Belgium) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl_BE/)\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +60,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0

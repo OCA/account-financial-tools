@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 21:28+0000\n"
-"PO-Revision-Date: 2016-11-28 14:55+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:75
@@ -244,7 +244,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_move_template
 #: field:account.document.template.line,python_code:0

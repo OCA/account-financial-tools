@@ -8,6 +8,8 @@
 # Antonio Trueba, 2016
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # Chanseok <kcsgoodboy@naver.com>, 2014
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Chul Park <parkchul@nate.com>, 2015
@@ -23,10 +25,12 @@
 # Hotellook, 2014
 # jeon <bluerespect@nate.com>, 2014
 # Jim Spentzos, 2014
+# Jim Spentzos, 2014
 # JiyeonLee <leejiyeon00@gmail.com>, 2014
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Nicole <dlruddk1112@gmail.com>, 2014
@@ -40,12 +44,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +72,7 @@ msgstr "Cancelar"
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_renumber
 #: field:wizard.renumber,create_date:0
@@ -133,12 +138,12 @@ msgstr ""
 #. module: account_renumber
 #: field:wizard.renumber,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89

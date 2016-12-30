@@ -7,6 +7,7 @@
 # Florian Hatat, 2015
 # Hotellook, 2014
 # Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Miku Laitinen <miku.laitinen@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-10-11 09:48+0000\n"
+"POT-Creation-Date: 2016-12-23 23:21+0000\n"
+"PO-Revision-Date: 2016-12-27 08:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +60,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "الشركات"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0

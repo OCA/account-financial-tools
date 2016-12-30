@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-10-11 09:50+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-22 14:07+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Danish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Cancel"
-msgstr ""
+msgstr "Annuller"
 
 #. module: account_move_locking
 #: field:lock.account.move,create_uid:0

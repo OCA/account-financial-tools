@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-10-05 06:29+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -187,6 +187,16 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_1
+msgid "B2B Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_2
+msgid "B2C Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
@@ -198,7 +208,7 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -602,7 +612,7 @@ msgstr ""
 #: field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Račun"
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
@@ -796,6 +806,11 @@ msgid "Name"
 msgstr ""
 
 #. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_3
+msgid "New Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
 msgid "New Policy to Apply"
 msgstr ""
@@ -914,7 +929,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:109

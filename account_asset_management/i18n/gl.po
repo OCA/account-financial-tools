@@ -7,6 +7,8 @@
 # Alexsandro Haag <alex@hgsoft.com.br>, 2015
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# César Castro Cruz <ulmroan@gmail.com>, 2016
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
@@ -17,12 +19,13 @@
 # César Castro Cruz <ulmroan@gmail.com>, 2016
 # Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: César Castro Cruz <ulmroan@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -747,7 +750,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
@@ -935,7 +938,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0

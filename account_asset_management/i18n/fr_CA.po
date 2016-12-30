@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 12:24+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -292,7 +292,7 @@ msgstr ""
 #: view:asset.depreciation.confirmation.wizard:account_asset_management.view_asset_depreciation_confirmation_wizard
 #: view:asset.modify:account_asset_management.asset_modify_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -422,7 +422,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -434,7 +434,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -554,7 +554,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,display_name:0
 #: field:asset.modify,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Afficher le nom"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -684,7 +684,7 @@ msgstr ""
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -733,7 +733,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Facture"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
@@ -798,7 +798,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -810,7 +810,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -921,7 +921,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-27 02:38+0000\n"
-"PO-Revision-Date: 2016-07-27 02:38+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-23 23:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Romanian (https://www.transifex.com/oca/teams/23907/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -89,7 +89,7 @@ msgstr ""
 #: field:account.reconcile.trace.direct,display_name:0
 #: field:account.reconcile.trace.recursive,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nume Afişat"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_amount:0
@@ -137,7 +137,7 @@ msgstr ""
 #: field:account.reconcile.trace.direct,id:0
 #: field:account.reconcile.trace.recursive,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_reconcile_trace
 #: model:ir.model,name:account_reconcile_trace.model_account_invoice
@@ -168,7 +168,7 @@ msgstr ""
 #: field:account.reconcile.trace.direct,__last_update:0
 #: field:account.reconcile.trace.recursive,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima actualizare în"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,super_down_move_id:0
@@ -255,6 +255,16 @@ msgstr ""
 #: field:account.move,trace_up_ids:0
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace Up"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tcc
+msgid "Transfer Creditors Credit"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tdd
+msgid "Transfer Debtors Debit"
 msgstr ""
 
 #. module: account_reconcile_trace

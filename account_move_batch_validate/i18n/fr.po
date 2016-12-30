@@ -3,12 +3,17 @@
 # * account_move_batch_validate
 # 
 # Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
+# UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 09:00+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 16:49+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +46,7 @@ msgstr "Sélectionner pour validation"
 #: code:addons/account_move_batch_validate/account.py:166
 #, python-format
 msgid "Nothing to do because the record has been deleted"
-msgstr ""
+msgstr "Rien à faire car l'enregistrement a été supprimé"
 
 #. module: account_move_batch_validate
 #: field:account.move,to_post:0
