@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="report_open_invoices">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-xs-5 col-xs-offset-7">
+                                    <span t-field="o.name"/><br/>
+                                    <span t-raw="addresses[o.id].replace('\n\n', '\n').replace('\n', '&lt;br&gt;')"/>
+                                    <span t-field="o.vat"/>
+                                </div>
+                            </div>
+                            <t t-if="(getLinesReceivable(o) or getLinesPayable(o))">
+                                <p>
+                                    Document: Card Account Client<br/>
+                                    Date: <span t-esc="formatLang(time.strftime('%Y-%m-%d'), date=True)"/><br/>
+                                    Customer ref: <span t-field="o.ref"/>
+                                </p>
+                                <t t-if="message(o, res_company)" t-as="messageline">
+                                    <t t-foreach="message(o, res_company)" t-as="messageline">
+                                        <p t-esc="messageline"/>
+                                    </t>
+                                </t>
+                                <t t-if="o.property_account_receivable">
+                                    <table width="100%">
+                                        <tr style="background-color: #F0F0F0;">
+                                            <td>
+                                                <span t-field="o.property_account_receivable" style="font-size:12px;font-weight:bold;page-break-after: avoid;"/><br/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </t>
+                                <t t-if="getLinesReceivable(o)">
+                                    <span t-field="o.name" style="font-size:12px;font-weight:bold;page-break-after: avoid;"/><br/>
+                                    <t t-set="debit_counter" t-value="0" />
+                                    <t t-set="credit_counter" t-value="0" />
+                                    <t t-set="cumul_counter" t-value="0" />
+                                    <table width="100%">
+                                        <thead>
+                                            <tr style="background-color: #F0F0F0;">
+                                                <td style="text-left;font-size:10px;" width="8%">
+                                                    Date
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Reference
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Rec.
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Due Date
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Debit
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Credit
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Cumul. Bal.
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="getLinesReceivable(o)" t-as="line">
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.date"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.ref"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.reconcile_id.name"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.date_maturity"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.debit"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.credit"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <t t-esc="line.debit-(-line.credit)" />
+                                                </td>
+                                                <t t-set="debit_counter" t-value="debit_counter+line.debit" />
+                                                <t t-set="credit_counter" t-value="credit_counter+line.credit" />
+                                                <t t-set="cumul_counter" t-value="cumul_counter+(line.debit-(-line.credit))" />
+                                            </tr>
+                                            <tr style="background-color: #F0F0F0;">
+                                                <td></td><td></td>
+                                                <td colspan="2" style="font-size:10px;">
+                                                    Cumulated Balance on Partner
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(debit_counter, digits=2)" />
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(credit_counter, digits=2)" />
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(cumul_counter, digits=2)" />
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </t>
+                                <br/>
+                                <t t-if="o.property_account_payable">
+                                    <table width="100%">
+                                        <tr style="background-color: #F0F0F0;">
+                                            <td>
+                                                <span t-field="o.property_account_payable" style="font-size:12px;font-weight:bold;page-break-after: avoid;"/><br/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </t>
+                                <t t-if="getLinesPayable(o)">
+                                    <span t-field="o.name" style="font-size:12px;font-weight:bold;page-break-after: avoid;"/><br/>
+                                    <t t-set="debit_counter" t-value="0" />
+                                    <t t-set="credit_counter" t-value="0" />
+                                    <t t-set="cumul_counter" t-value="0" />
+                                    <table width="100%">
+                                        <thead>
+                                            <tr style="background-color: #F0F0F0;">
+                                                <td style="text-left;font-size:10px;" width="8%">
+                                                    Date
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Reference
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Rec.
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Due Date
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Debit
+                                                </td>
+                                                <td class="text-left" width="5%" style="font-size:10px;">
+                                                    Credit
+                                                </td>
+                                                <td class="text-left" width="8%" style="font-size:10px;">
+                                                    Cumul. Bal.
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="getLinesPayable(o)" t-as="line">
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.date"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.ref"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.reconcile_id.name"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.date_maturity"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.debit"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-field="line.credit"/>
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <t t-esc="line.debit-(-line.credit)" />
+                                                </td>
+                                                <t t-set="debit_counter" t-value="debit_counter+line.debit" />
+                                                <t t-set="credit_counter" t-value="credit_counter+line.credit" />
+                                                <t t-set="cumul_counter" t-value="cumul_counter+(line.debit-(-line.credit))" />
+                                            </tr>
+                                            <tr style="background-color: #F0F0F0;">
+                                                <td></td><td></td>
+                                                <td colspan="2" style="font-size:10px;">
+                                                    Cumulated Balance on Partner
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(debit_counter, digits=2)" />
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(credit_counter, digits=2)" />
+                                                </td>
+                                                <td style="font-size:10px;">
+                                                    <span t-esc="formatLang(cumul_counter, digits=2)" />
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </t>
+                            </t>
+                            <br/>
+                            <p t-if="not getLinesPayable(o)">
+                                <strong>There is no open invoice for this supplier.</strong>
+                            </p>
+                            <br/>
+                            <p t-if="not getLinesReceivable(o)">
+                                <strong>There is no open invoice for this customer.</strong>
+                            </p>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

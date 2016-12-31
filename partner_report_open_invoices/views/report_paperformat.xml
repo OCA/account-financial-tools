@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report 
+            id="action_report_print_open_invoices"
+            model="res.partner"
+            report_type="qweb-pdf"
+            string="Open Invoices"
+            name="partner_report_open_invoices.report_open_invoices"
+            file="partner_report_open_invoices.report_open_invoices"
+        />
+        <record id="open_invoice_report_format" model="report.paperformat">
+            <field name="name">Open Invoice Report Format</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">12</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">25</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(4, ref('partner_report_open_invoices.action_report_print_open_invoices'))]"></field>
+        </record>
+
+    </data>
+</openerp>
