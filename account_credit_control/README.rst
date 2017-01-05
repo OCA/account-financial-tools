@@ -27,3 +27,6 @@ On each generated line, you have many choices:
  * Send a email
  * Print a letter
  * Change the state (so you can ignore or reopen lines)
+
+To change manually overdue level of invoice you can use the wizard ``More >
+Change current credit policy`` in the invoice form or list.
