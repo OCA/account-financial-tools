@@ -30,7 +30,7 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.depends('amount_total', 'amount_untaxed', 'amount_tax',
                  'currency_id', 'move_id')
-    def _compute_amount_all(self):
+    def _compute_cc_amount_all(self):
         for inv in self:
             if inv.company_id.currency_id == inv.currency_id:
                 inv.cc_amount_untaxed = inv.amount_untaxed
@@ -63,17 +63,17 @@ class AccountInvoice(models.Model):
                                            inv.cc_amount_untaxed)
 
     cc_amount_untaxed = fields.Float(
-        compute="_compute_amount_all", digits=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Untaxed',
         help="Invoice untaxed amount in the company currency (useful when "
              "invoice currency is different from company currency).")
     cc_amount_tax = fields.Float(
-        compute="_compute_amount_all", digits=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Tax',
         help="Invoice tax amount in the company currency (useful when invoice "
              "currency is different from company currency).")
     cc_amount_total = fields.Float(
-        compute="_compute_amount_all", digits=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Total',
         help="Invoice total amount in the company currency (useful when "
              "invoice currency is different from company currency).")
