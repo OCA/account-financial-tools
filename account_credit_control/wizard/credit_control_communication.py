@@ -195,10 +195,19 @@ class CreditCommunication(models.TransientModel):
                                                              comm.id,
                                                              context=context)
             email_values['type'] = 'email'
-            # model is Transient record (self) removed periodically so no point
-            # of storing res_id
-            email_values.pop('model', None)
-            email_values.pop('res_id', None)
+            # Gives possibility to continue communication under related invoice
+            invoices = comm.credit_control_line_ids.filtered(
+                'invoice_id').mapped('invoice_id')
+            if invoices:
+                invoice = invoices[0]
+                email_values.update({
+                    'model': invoice._name,
+                    'res_id': invoice.id,
+                })
+            else:
+                email_values.pop('model', None)
+                email_values.pop('res_id', None)
+
             email = email_message_obj.create(email_values)
 
             state = 'sent'
