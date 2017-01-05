@@ -77,5 +77,3 @@ class AccountInvoice(models.Model):
         string='Company Cur. Total',
         help="Invoice total amount in the company currency (useful when "
              "invoice currency is different from company currency).")
-    company_currency_id = fields.Many2one(
-        'res.currency', related='company_id.currency_id', readonly=True)
