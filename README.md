@@ -25,7 +25,7 @@ addon | version | summary
 --- | --- | ---
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
-[account_invoice_currency](account_invoice_currency/) | 8.0.1.0.0 (unported) | Company currency in invoices
+[account_invoice_currency](account_invoice_currency/) | 10.0.1.0.0 (unported) | Company currency in invoices
 
 Unported addons
 ---------------
