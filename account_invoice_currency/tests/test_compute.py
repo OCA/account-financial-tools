@@ -32,7 +32,7 @@ class TestCompute(TransactionCase):
                                     'quantity': 10,
                                     })],
              })
-        invoice.invoice_validate()
+        invoice.action_invoice_open()
         return invoice
 
     def test_compute_same_currency(self):
@@ -50,9 +50,15 @@ class TestCompute(TransactionCase):
         """Test the case where the currency invoice is not the same of the company
         currency"""
         test_invoice = self.create_invoice(self.currency_usd_id)
+        amount_total = 0
+        for line in test_invoice.move_id.line_ids:
+            # Only credit, will ignore payable accounts since this is a
+            # customer invoice
+            amount_total += line.credit
+        self.assertNotEqual(test_invoice.cc_amount_total, 0)
         self.assertNotEqual(test_invoice.cc_amount_total,
                             test_invoice.amount_total)
+        self.assertEqual(test_invoice.cc_amount_total, amount_total)
         self.assertEqual(test_invoice.cc_amount_total,
                          test_invoice.cc_amount_tax +
                          test_invoice.cc_amount_untaxed)
-        # FIXME: More tests required
