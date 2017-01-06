@@ -16,4 +16,4 @@ class TestAccountFiscalPositionVatCheck(TransactionCase):
         self.assertEqual(res['warning']['title'], 'Missing VAT number:')
         fp.write({'customer_must_have_vat': False})
         res = customer.fiscal_position_change()
-        self.assertEqual(res)
+        self.assertFalse(res)
