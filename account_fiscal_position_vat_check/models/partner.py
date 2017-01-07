@@ -9,11 +9,11 @@ from openerp import models, api, _
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    @api.onchange('property_account_position')
+    @api.onchange('property_account_position_id')
     def fiscal_position_change(self):
         """Warning if the fiscal position requires a VAT number and the
         partner doesn't have one yet"""
-        fp = self.property_account_position
+        fp = self.property_account_position_id
         if fp.customer_must_have_vat and self.customer and not self.vat:
             return {
                 'warning': {
