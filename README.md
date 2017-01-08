@@ -23,6 +23,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_balance_line](account_balance_line/) | 9.0.1.0.0 | Display balance totals in move line view
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 9.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 9.0.1.0.0 | Account Fiscal Year
 [account_invoice_currency](account_invoice_currency/) | 9.0.1.0.0 | Company currency in invoices
@@ -39,7 +40,6 @@ addon | version | summary
 [account_asset_management](account_asset_management/) | 8.0.2.6.0 (unported) | Assets Management
 [account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 (unported) | Assets Management Excel reporting
 [account_auto_fy_sequence](account_auto_fy_sequence/) | 8.0.0.1.0 (unported) | Automatic Fiscal Year Sequences
-[account_balance_line](account_balance_line/) | 8.0.1.1.0 (unported) | Display balance totals in move line view
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
 [account_chart_update](account_chart_update/) | 8.0.1.2.0 (unported) | Detect changes and update the Account Chart from a template
