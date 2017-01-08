@@ -21,7 +21,8 @@
 #
 ##############################################################################
 
-from datetime import datetime
+import calendar
+from datetime import date, datetime
 
 import openerp.tests.common as common
 
@@ -138,20 +139,28 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [asset.id])
         asset.refresh()
-        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 47.33,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[6].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
-                               places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
+                                   46.44, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
+                                   47.33, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[6].amount,
+                               55.55, places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   9.11, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   8.22, places=2)
 
     def test_3_proprata_init_prev_year(self):
         """Prorata temporis depreciation with init value in prev year."""
@@ -220,9 +229,17 @@ class TestAssetManagement(common.TransactionCase):
         self.assertAlmostEqual(asset.value_depreciated, 279.44,
                                places=2)
         # I check computed values in the depreciation board
-        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 45.64,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
-                               places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
-                               places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                                   44.75, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                                   45.64, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount,
+                               55.55, places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   9.11, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   8.22, places=2)

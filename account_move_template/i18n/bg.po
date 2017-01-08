@@ -3,13 +3,27 @@
 # * account_move_template
 # 
 # Translators:
+# Alexsandro Haag <alex@hgsoft.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# llum.birque@gmail.com <llum.birque@gmail.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Stéphane Bidoul <sbi@skynet.be>, 2015
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +67,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Фирма"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
@@ -75,7 +89,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Създадено от"
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -85,7 +99,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Създадено на"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -105,13 +119,23 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
+msgstr "Име за Показване"
+
+#. module: account_move_template
 #: field:account.document.template,id:0
 #: field:account.document.template.line,id:0 field:account.move.template,id:0
 #: field:account.move.template.line,id:0
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
@@ -138,6 +162,16 @@ msgid "Journal Entry Template Line"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Последно обновено на"
+
+#. module: account_move_template
 #: field:account.document.template,write_uid:0
 #: field:account.document.template.line,write_uid:0
 #: field:account.move.template,write_uid:0
@@ -145,7 +179,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Последно обновено от"
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -155,7 +189,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Последно обновено на"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65
@@ -203,7 +237,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr ""
+msgstr "Име"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
@@ -224,7 +258,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Партньор"
 
 #. module: account_move_template
 #: field:account.document.template.line,python_code:0
@@ -242,7 +276,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Последователност"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
@@ -285,7 +319,7 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Вид"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:104

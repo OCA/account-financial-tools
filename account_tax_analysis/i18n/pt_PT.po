@@ -1,0 +1,236 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_tax_analysis
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Alexsandro Haag <alex@hgsoft.com.br>, 2015
+# Antonio Trueba, 2016
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@gmail.com>, 2014
+# Chul Park <parkchul@nate.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# David10000 <gameness@naver.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Gil <gedwarp@gmail.com>, 2014
+# Hongseob Lee <shevious@gmail.com>, 2015
+# Hongseob Lee <shevreg@yahoo.com>, 2015
+# jeon <bluerespect@nate.com>, 2014
+# JiyeonLee <leejiyeon00@gmail.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013
+# Kevin Min <gr326887@graded.br>, 2015
+# KimKyudong <choemh@nate.com>, 2014
+# llum.birque@gmail.com <llum.birque@gmail.com>, 2015
+# mariana1201 <gogo3135@naver.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Nicole <dlruddk1112@gmail.com>, 2014
+# Paolo Valier, 2016
+# Pope, 2014
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Sarina Canelake <sarina@edx.org>, 2014
+# Seok Jun Yoon <fake2real@dctribe.com>, 2015
+# shin2012 <shin2013@gmail.com>, 2014
+# Stéphane Bidoul <sbi@skynet.be>, 2015
+# Sujin Lee <sujinlee.me@gmail.com>, 2014
+# Sunah Lim <whitetree70@snu.ac.kr>, 2013
+# Yael Terrettaz, 2015
+# Young C. Kim, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-21 00:52+0000\n"
+"PO-Revision-Date: 2016-05-22 18:16+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account"
+msgstr "Conta"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account / Tax"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
+msgid "Account Vat Declaration"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,create_uid:0
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,create_date:0
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,display_name:0
+msgid "Display Name"
+msgstr "Nome a exibir"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Filters"
+msgstr ""
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,fiscalyear_id:0
+msgid "Fiscalyear"
+msgstr ""
+
+#. module: account_tax_analysis
+#: help:account.vat.declaration.analysis,fiscalyear_id:0
+msgid "Fiscalyear to look on"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_tax_analysis
+#: help:account.vat.declaration.analysis,period_list:0
+msgid ""
+"If no period is selected, all the periods of the fiscal year will be used"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Journal"
+msgstr "Diário"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Journal Items"
+msgstr "Item do Diário"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,__last_update:0
+msgid "Last Modified on"
+msgstr "Modificado pela última vez em"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,write_uid:0
+msgid "Last Updated by"
+msgstr "Atualizado pela última vez por"
+
+#. module: account_tax_analysis
+#: field:account.vat.declaration.analysis,write_date:0
+msgid "Last Updated on"
+msgstr "Atualizado pela última vez em"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Period"
+msgstr "Período"
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: field:account.vat.declaration.analysis,period_list:0
+msgid "Periods"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted"
+msgstr "Publicado"
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted Journal Items"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Search Journal Items"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Show tax lines"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax account"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
+#: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
+msgid "Taxes Analysis"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Taxes Report"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
+msgid ""
+"This menu print a VAT declaration based on invoices or payments. You can "
+"select one or several periods of the fiscal year. Information required for a"
+" tax declaration is automatically generated by OpenERP from invoices (or "
+"payments, in some countries). This data is updated in real time. That’s very"
+" useful because it enables you to preview at any time the tax that you owe "
+"at the start and end of the month or quarter."
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total Taxe"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total credit"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total debit"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted Journal Items"
+msgstr ""
+
+#. module: account_tax_analysis
+#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "or"
+msgstr "ou"

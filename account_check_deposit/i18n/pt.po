@@ -3,13 +3,24 @@
 # * account_check_deposit
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Miku Laitinen <miku.laitinen@gmail.com>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:58+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,14 +39,9 @@ msgid "Account for Check Deposits"
 msgstr ""
 
 #. module: account_check_deposit
-#: constraint:account.check.deposit:0
-msgid "All the checks of the deposit must be in the currency of the deposit"
-msgstr ""
-
-#. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Amount"
-msgstr ""
+msgstr "Montante"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -76,14 +82,14 @@ msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:194
-#: code:addons/account_check_deposit/account_deposit.py:216
+#: code:addons/account_check_deposit/models/account_deposit.py:180
+#: code:addons/account_check_deposit/models/account_deposit.py:202
 #, python-format
 msgid "Check Deposit %s"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:203
+#: code:addons/account_check_deposit/models/account_deposit.py:189
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -128,20 +134,14 @@ msgid "Company"
 msgstr "Empresa"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:252
-#, python-format
-msgid "Configuration Error:"
-msgstr ""
-
-#. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -176,10 +176,15 @@ msgid "Deposit Date"
 msgstr ""
 
 #. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr "Nome"
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -188,26 +193,18 @@ msgid "Draft"
 msgstr "Rascunho"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:159
-#, python-format
-msgid "Error!"
-msgstr ""
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:129
-#: code:addons/account_check_deposit/account_deposit.py:140
-#, python-format
-msgid "Error:"
-msgstr ""
-
-#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,id:0
 msgid "ID"
+msgstr "ID"
+
+#. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
 msgstr ""
 
 #. module: account_check_deposit
@@ -219,7 +216,7 @@ msgstr "Diário"
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr ""
+msgstr "Mov. de Diário"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
@@ -227,14 +224,19 @@ msgid "Journal Items"
 msgstr "Items Diários"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr "Modificado a última vez por"
+
+#. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Atualizado pela última vez por"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Atualizado pela última vez em"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
@@ -247,7 +249,7 @@ msgid "List of checks:"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:253
+#: code:addons/account_check_deposit/models/account_deposit.py:232
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
 msgstr ""
@@ -283,8 +285,8 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:130
-#: code:addons/account_check_deposit/account_deposit.py:141
+#: code:addons/account_check_deposit/models/account_deposit.py:123
+#: code:addons/account_check_deposit/models/account_deposit.py:133
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -292,7 +294,7 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:160
+#: code:addons/account_check_deposit/models/account_deposit.py:145
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "

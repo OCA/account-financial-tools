@@ -19,7 +19,7 @@
 ##############################################################################
 {
     "name": "Move in draft state by default",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     "depends": ["base", "account", "account_constraints"],
     "author": "Camptocamp,"
               "ACSONE SA/NV,"

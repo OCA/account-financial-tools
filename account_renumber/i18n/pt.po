@@ -3,13 +3,36 @@
 # * account_renumber
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Bruno JOLIVEAU, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# jeon <bluerespect@nate.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
+# Kevin Min <gr326887@graded.br>, 2015
+# Kunwoo Kim <crazyabtmath@naver.com>, 2015
+# LEE SI HYEONG <super2451894@gmail.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Sam Ryoo <samryoo@gmail.com>, 2014
+# Seo. Junmin <sof.midnight@live.co.kr>, 2015
+# seungil <luck8778@gmail.com>, 2014
+# SEUNGWON <baeksw0620@gmail.com>, 2014
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -31,12 +54,17 @@ msgstr "Cancelar"
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_renumber
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Nome"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -56,7 +84,7 @@ msgstr ""
 #. module: account_renumber
 #: field:wizard.renumber,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -85,14 +113,19 @@ msgid "Journals to renumber"
 msgstr "Diários para renumear"
 
 #. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Modificado a última vez por"
+
+#. module: account_renumber
 #: field:wizard.renumber,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Atualizado pela última vez por"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Atualizado pela última vez em"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89

@@ -4,13 +4,15 @@
 ##############################################################################
 
 from openerp import models, fields, api
+from openerp.tools.safe_eval import safe_eval
 
 
 class AccountTaxChart(models.TransientModel):
     _inherit = 'account.tax.chart'
 
     def default_fiscalyear(self):
-        return self.env['account.fiscalyear'].find()
+        fy_obj = self.env['account.fiscalyear']
+        return fy_obj.browse(fy_obj.find())
 
     fiscalyear_id = fields.Many2one(
         comodel_name='account.fiscalyear', string='Fiscal year',
@@ -33,7 +35,7 @@ class AccountTaxChart(models.TransientModel):
     @api.multi
     def account_tax_chart_open_window(self):
         res = super(AccountTaxChart, self).account_tax_chart_open_window()
-        res['context'] = eval(res['context'])
+        res['context'] = safe_eval(res['context'])
         if self.fiscalyear_id:
             res['context']['fiscalyear_id'] = self.fiscalyear_id.id
         if self.period_from and self.period_to:

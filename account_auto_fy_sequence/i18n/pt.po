@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
+"POT-Creation-Date: 2015-11-08 01:04+0000\n"
 "PO-Revision-Date: 2015-06-03 15:58+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:133
 #, python-format
 msgid "Error!"
-msgstr ""
+msgstr "Erro!"
 
 #. module: account_auto_fy_sequence
 #: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form

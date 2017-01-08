@@ -3,13 +3,21 @@
 # * account_reversal
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Accounts-Payable - Alkemics, 2015
+# Antonio Trueba, 2016
+# Bole <bole@dajmi5.com>, 2015
+# Chen-Do LU <clu@alkemics.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# François Breysse <fb@alkemics.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-30 11:27+0000\n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -54,11 +62,16 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_reversal
+#: field:account.move.reverse,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
 "Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the next period."
-msgstr "Vnos datuma za preobrnjene kontne vnose. Privzeto OpenERP predlaga prvi dan naslednjega obdobja."
+" the first day of the period following the period of the move to reverse."
+msgstr "Vnos datuma za preobrnjene kontne vnose. Privzeto OpenERP predlaga prvi dan naslednjega obdobja po obdobju premika, ki ga preobračamo."
 
 #. module: account_reversal
 #: field:account.move.reverse,move_prefix:0
@@ -93,6 +106,11 @@ msgid "Journal Entries to be Reversed"
 msgstr "Dnevniški vnosi, ki bodo preobrnjeni"
 
 #. module: account_reversal
+#: field:account.move.reverse,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
 msgstr "Zadnjič posodobil"
@@ -119,12 +137,17 @@ msgid ""
 msgstr "Predpona, ki bo dodana sklicu dnevniške postavke, ki bo preobrnjena, za ustvarjanje sklica preobrnjenih dnevniških postavk (s prostorom po predponi)."
 
 #. module: account_reversal
+#: field:account.move.reverse,reconcile:0
+msgid "Reconcile"
+msgstr "Uskladi"
+
+#. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
 msgstr "Datum preobrnitve"
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:114
+#: code:addons/account_reversal/wizard/account_move_reverse.py:113
 #, python-format
 msgid "Reversal Entries"
 msgstr "Preobrnjeni vnosi"
@@ -164,13 +187,13 @@ msgid "To Be Reversed"
 msgstr "Za preobrnitev"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:82
+#: code:addons/account_reversal/account_reversal.py:84
 #, python-format
 msgid "Wrong company Journal is %s but we have %s"
 msgstr "Napačen dnevnik družbe je %s,  a mi imamo %s"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:85
+#: code:addons/account_reversal/account_reversal.py:87
 #, python-format
 msgid "Wrong company Period is %s but we have %s"
 msgstr "Napačno obdobje družbe je %s, a mi imamo %s"

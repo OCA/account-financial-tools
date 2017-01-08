@@ -219,7 +219,8 @@ class CreditControlPolicyLevel(models.Model):
     name = fields.Char(string='Name', required=True, translate=True)
     policy_id = fields.Many2one('credit.control.policy',
                                 string='Related Policy',
-                                required=True)
+                                required=True,
+                                ondelete='cascade')
     level = fields.Integer(string='Level', required=True)
     computation_mode = fields.Selection(
         [('net_days', 'Due Date'),
@@ -241,6 +242,8 @@ class CreditControlPolicyLevel(models.Model):
                               translate=True)
     custom_mail_text = fields.Html(string='Custom Mail Message',
                                    required=True, translate=True)
+    custom_text_after_details = fields.Text(
+        string='Custom Message after details', translate=True)
 
     _sql_constraint = [('unique level',
                         'UNIQUE (policy_id, level)',

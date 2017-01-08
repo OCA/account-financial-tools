@@ -6,7 +6,7 @@
             <field name="name">account.move.reverse.form</field>
             <field name="model">account.move.reverse</field>
             <field name="arch" type="xml">
-                <form string="Create reversal journal entries" version="7.0">
+                <form string="Create reversal journal entries">
                     <label string="This will create reversal for all selected entries whether checked 'to be reversed' or not."/>
                     <group>
                         <field name="date"/>
@@ -15,6 +15,7 @@
                         <newline/>
                         <field name="move_prefix" />
                         <field name="move_line_prefix" />
+                        <field name="reconcile"/>
                     </group>
 
                     <footer>
@@ -30,7 +31,6 @@
         <record id="act_account_move_reverse" model="ir.actions.act_window">
             <field name="name">Reverse Entries</field>
             <field name="res_model">account.move.reverse</field>
-            <field name="view_type">form</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_account_move_reverse"/>
             <field name="target">new</field>

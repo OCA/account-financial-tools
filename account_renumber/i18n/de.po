@@ -3,12 +3,21 @@
 # * account_renumber
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
+# Florian Hatat, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +39,17 @@ msgstr "Abbrechen"
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: account_renumber
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -55,7 +69,7 @@ msgstr "Allgemeine Daten"
 #. module: account_renumber
 #: field:wizard.renumber,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -84,14 +98,19 @@ msgid "Journals to renumber"
 msgstr "Zu nummerierende Journal"
 
 #. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: account_renumber
 #: field:wizard.renumber,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert von"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89

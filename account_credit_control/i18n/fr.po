@@ -3,13 +3,28 @@
 # * account_credit_control
 # 
 # Translators:
-# Christophe kryskool <christophe.chauvet@gmail.com>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Alexis de Lattre <alexis@via.ecp.fr>, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 08:56+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +203,7 @@ msgid "An error has occured during the sending of the email."
 msgstr "Erreur lors de la génération des mails."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:308
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Impossible de trouver une fonction pour le mode de calcul: %s n'est pas implémentée"
@@ -435,6 +450,11 @@ msgid "Custom Message"
 msgstr "Message personnalisable"
 
 #. module: account_credit_control
+#: field:credit.control.policy.level,custom_text_after_details:0
+msgid "Custom Message after details"
+msgstr ""
+
+#. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
 msgstr "Date d'échéance"
@@ -454,6 +474,19 @@ msgstr "Retard (en jours)"
 #: view:credit.control.policy.level:account_credit_control.credit_mangement_policy_level_form
 msgid "Delay Setting"
 msgstr "Paramétrages jours de retard"
+
+#. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
@@ -608,6 +641,19 @@ msgid "Issued Lines"
 msgstr "Lignes de relance"
 
 #. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
 #: field:credit.control.emailer,write_uid:0
 #: field:credit.control.line,write_uid:0
@@ -642,6 +688,7 @@ msgstr "Lettre"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Niveau"
@@ -916,6 +963,11 @@ msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr "La politique de relance \"<b>%s</b>\" n'a pas généré de lignes de relance.<br/>"
 
 #. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
 msgstr "Niveaux de relance"
@@ -968,7 +1020,7 @@ msgstr "Prêt à l'envoi"
 #: field:credit.control.line,policy_id:0
 #: field:credit.control.policy.level,policy_id:0
 msgid "Related Policy"
-msgstr "Niveau de relance"
+msgstr "Politique associée"
 
 #. module: account_credit_control
 #: view:credit.control.run:account_credit_control.credit_control_run_form
@@ -1038,6 +1090,7 @@ msgid "Source"
 msgstr "Source"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "État"
@@ -1079,7 +1132,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr "Les autres devises optionnelles en cas de multi-devises."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:258
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Le premier niveau ne peut pas être basé sur un précédent rappel"
@@ -1102,11 +1155,13 @@ msgid ""
 msgstr "Cette action vous permet de définir une politique et un niveau de relance pour les factures sélectionnées"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr "Total dû"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr "Total facturé"
@@ -1151,11 +1206,6 @@ msgstr "Vous ne pouvez pas annuler cette facture ! Une lettre de relance a été
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "Lettre de relance"
-
-#. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
-msgstr "Une politique de relance"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form
