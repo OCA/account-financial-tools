@@ -73,16 +73,16 @@ class AccountAssetLine(models.Model):
     depreciation_base = fields.Float(
         related='asset_id.depreciation_base', string='Asset Value')
     amount = fields.Float(
-        'Amount', digits_compute=dp.get_precision('Account'),
+        'Amount', digits=dp.get_precision('Account'),
         required=True)
     remaining_value = fields.Float(
         compute='_compute',
-        digits_compute=dp.get_precision('Account'),
+        digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
         store=True)
     depreciated_value = fields.Integer(
         compute='_compute',
-        digits_compute=dp.get_precision('Account'),
+        digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
         store=True)
     line_date = fields.Date('Date', required=True)
