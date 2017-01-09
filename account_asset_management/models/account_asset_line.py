@@ -22,7 +22,7 @@
 
 import time
 from odoo import api, fields, exceptions, models, _
-from odoo.addons.decimal_precision import decimal_precision as dp
+import odoo.addons.decimal_precision as dp
 
 
 class AccountAssetLine(models.Model):
