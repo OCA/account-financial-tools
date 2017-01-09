@@ -890,7 +890,7 @@ class AccountAsset(models.Model):
             recomputes = recompute_obj.sudo().search(
                 [('state', '=', 'open')])
         if check_triggers and recomputes:
-            trigger_companies = triggers.mapped('company_id')
+            trigger_companies = recomputes.mapped('company_id')
             for asset in self:
                 if asset.company_id.id in trigger_companies.ids:
                     asset.compute_depreciation_board()
@@ -905,13 +905,12 @@ class AccountAsset(models.Model):
                 depreciation_date=depreciation.line_date).create_move()
 
         if check_triggers and recomputes:
-            companies = assets.mapped('company_id')
+            companies = recomputes.mapped('company_id')
             triggers = recomputes.filtered(
                 lambda r: r.company_id.id in companies.ids)
             if triggers:
                 recompute_vals = {
-                    'date_completed': time.strftime(
-                        DEFAULT_SERVER_DATETIME_FORMAT),
+                    'date_completed': fields.Datetime.now(),
                     'state': 'done',
                 }
                 triggers.sudo().write(recompute_vals)
