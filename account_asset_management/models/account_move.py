@@ -93,6 +93,11 @@ class AccountMoveLine(models.Model):
         return vals
 
     @api.model
+    def _get_asset_analytic_values(self, vals, asset_vals):
+        asset_vals['account_analytic_id'] =\
+            vals.get('analytic_account_id', False)
+
+    @api.model
     def create(self, vals):
         if vals.get('asset_id') and not self._context.get('allow_asset'):
             raise UserError(
@@ -114,7 +119,7 @@ class AccountMoveLine(models.Model):
             })
             temp_asset.onchange_profile_id()
             asset_vals = temp_asset._convert_to_write(temp_asset._cache)
-
+            self._get_asset_analytic_values(vals, asset_vals)
             if self._context.get('company_id'):
                 asset_vals['company_id'] = self._context['company_id']
             ctx = dict(self._context, create_asset_from_move_line=True,
