@@ -690,13 +690,13 @@ class AccountAsset(models.Model):
         help="This amount represent the initial value of the asset.")
     depreciation_base = fields.Float(
         compute='_depreciation_base',
-        digits_compute=dp.get_precision('Account'),
+        digits=dp.get_precision('Account'),
         string='Depreciation Base',
         store=True,
         help="\nThe Asset Value is calculated as follows:"
              "\nPurchase Value - Salvage Value.")
     salvage_value = fields.Float(
-        string='Salvage Value', digits_compute=dp.get_precision('Account'),
+        string='Salvage Value', digits=dp.get_precision('Account'),
         readonly=True,
         states={'draft': [('readonly', False)]},
         help="The estimated value that an asset will realize upon "
@@ -817,12 +817,12 @@ class AccountAsset(models.Model):
         'account.analytic.account', 'Analytic account')
     value_residual = fields.Float(
         compute='_compute_depreciation',
-        digits_compute=dp.get_precision('Account'),
+        digits=dp.get_precision('Account'),
         string='Residual Value',
         store=True)
     value_depreciated = fields.Float(
         compute='_compute_depreciation',
-        digits_compute=dp.get_precision('Account'),
+        digits=dp.get_precision('Account'),
         string='Depreciated Value',
         store=True)
 
