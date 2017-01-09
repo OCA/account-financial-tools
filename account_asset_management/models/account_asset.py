@@ -24,9 +24,9 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import calendar
 import logging
-from openerp import api, fields, exceptions, models, _
-from openerp.addons.decimal_precision import decimal_precision as dp
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import api, fields, exceptions, models, _
+from odoo.addons.decimal_precision import decimal_precision as dp
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 _logger = logging.getLogger(__name__)

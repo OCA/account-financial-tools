@@ -21,8 +21,8 @@
 #
 ##############################################################################
 
-from openerp import tools
-from openerp.osv import fields, orm
+from odoo import tools
+from odoo.osv import fields, orm
 
 
 class asset_asset_report(orm.Model):

@@ -23,7 +23,7 @@
 
 from datetime import datetime
 
-import openerp.tests.common as common
+import odoo.tests.common as common
 
 import time
 

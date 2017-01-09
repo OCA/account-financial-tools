@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import api, fields, exceptions, models, _
+from odoo import api, fields, exceptions, models, _
 
 
 class AccountAssetProfile(models.Model):
