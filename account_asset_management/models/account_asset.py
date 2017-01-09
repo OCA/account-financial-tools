@@ -814,9 +814,7 @@ class AccountAsset(models.Model):
         string='Company Currency',
         store=True, readonly=True)
     account_analytic_id = fields.Many2one(
-        'account.analytic.account', 'Analytic account',
-        domain=[('type', '!=', 'view'),
-                ('state', 'not in', ('close', 'cancelled'))])
+        'account.analytic.account', 'Analytic account')
     value_residual = fields.Float(
         compute='_compute_depreciation',
         digits_compute=dp.get_precision('Account'),
