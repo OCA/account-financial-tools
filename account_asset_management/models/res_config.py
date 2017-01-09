@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import fields, models
+from odoo import fields, models
 
 
 class Config(models.TransientModel):

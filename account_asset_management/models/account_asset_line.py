@@ -21,8 +21,8 @@
 ##############################################################################
 
 import time
-from openerp import api, fields, exceptions, models, _
-from openerp.addons.decimal_precision import decimal_precision as dp
+from odoo import api, fields, exceptions, models, _
+from odoo.addons.decimal_precision import decimal_precision as dp
 
 
 class AccountAssetLine(models.Model):
