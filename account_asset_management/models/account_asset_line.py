@@ -53,7 +53,7 @@ class AccountAssetLine(models.Model):
     @api.multi
     def _move_check(self):
         for line in self:
-            line.move_check = bool(self.move_id)
+            line.move_check = bool(line.move_id)
 
     name = fields.Char('Depreciation Name', size=64, readonly=True)
     asset_id = fields.Many2one(
