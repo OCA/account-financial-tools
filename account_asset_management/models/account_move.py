@@ -93,7 +93,7 @@ class AccountMoveLine(models.Model):
         return vals
 
     @api.model
-    def create(self, vals, apply_taxes=True):
+    def create(self, vals):
         if vals.get('asset_id') and not self._context.get('allow_asset'):
             raise UserError(
                 _('Error!'),
@@ -122,8 +122,7 @@ class AccountMoveLine(models.Model):
             asset = asset_obj.with_context(
                 ctx).create(asset_vals)
             vals['asset_id'] = asset.id
-        return super(AccountMoveLine, self).create(
-            vals, apply_taxes=apply_taxes)
+        return super(AccountMoveLine, self).create(vals)
 
     @api.multi
     def write(self, vals):
