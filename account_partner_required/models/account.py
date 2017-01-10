@@ -51,20 +51,18 @@ class AccountMoveLine(models.Model):
                 continue
             policy = line.account_id.get_partner_policy()
             if policy == 'always' and not line.partner_id:
-                return _("Partner policy is set to 'Always' "
-                         "with account '%s' but the "
-                         "partner is missing in the account "
-                         "move line with label '%s'." %
-                         (line.account_id.name_get()[0][1],
-                          line.name))
+                return _(
+                    "Partner policy is set to 'Always' with account '%s' but "
+                    "the partner is missing in the account move line with "
+                    "label '%s'.") % (line.account_id.name_get()[0][1],
+                                      line.name)
             elif policy == 'never' and line.partner_id:
-                return _("Partner policy is set to 'Never' "
-                         "with account '%s' but the "
-                         "account move line with label '%s' "
-                         "has a partner '%s'." %
-                         (line.account_id.name_get()[0][1],
-                          line.name,
-                          line.partner_id.name))
+                return _(
+                    "Partner policy is set to 'Never' with account '%s' but "
+                    "the account move line with label '%s' has a partner "
+                    "'%s'.") % (line.account_id.name_get()[0][1],
+                                line.name,
+                                line.partner_id.name)
 
     @api.multi
     @api.constrains('partner_id', 'account_id', 'debit', 'credit')
