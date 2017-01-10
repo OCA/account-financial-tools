@@ -4,18 +4,15 @@
 
         <!-- Cost Center views -->
         <record id="account_cost_center_form" model="ir.ui.view">
-            <field name="name">account.cost.center.form</field>
             <field name="model">account.cost.center</field>
             <field name="arch" type="xml">
-                <form string="Cost Center" version="7.0">
+                <form>
                     <sheet>
                         <group>
                             <div class="oe_title">
-                                <div class="oe_edit_only">
-                                    <label for="name" string="Title"/>
-                                </div>
+                                <label for="name"/>
                                 <h1>
-                                    <field name="name" required="1"/>
+                                    <field name="name"/>
                                 </h1>
                             </div>
                         </group>
@@ -34,7 +31,6 @@
         </record>
 
         <record id="account_cost_center_tree" model="ir.ui.view">
-            <field name="name">account.cost.center.tree</field>
             <field name="model">account.cost.center</field>
             <field name="arch" type="xml">
                 <tree string="Cost Centers">
@@ -45,7 +41,6 @@
         </record>
 
         <record id="account_cost_center_filter" model="ir.ui.view">
-            <field name="name">account.cost.center.filter</field>
             <field name="model">account.cost.center</field>
             <field name="arch" type="xml">
                 <search string="Cost Centers">
@@ -60,7 +55,6 @@
             <field name="res_model">account.cost.center</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="context">{'search_default_actual' : 1}</field>
             <field name="search_view_id" ref="account_cost_center_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
@@ -73,7 +67,12 @@
         </record>
 
         <!-- Cost Center menu-->
-        <menuitem id="cost_center_menu" name="Cost Centers" parent="account.menu_analytic_accounting" action="account_cost_center_action" sequence="40"/>
+        <menuitem id="cost_center_menu"
+                  name="Cost Centers"
+                  parent="account.menu_analytic_accounting"
+                  action="account_cost_center_action"
+                  groups="account.group_account_user"
+                  sequence="40"/>
 
     </data>
 </openerp>

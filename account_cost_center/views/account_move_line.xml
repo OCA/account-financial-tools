@@ -3,7 +3,6 @@
     <data>
 
         <record id="move_line_form_cost_center" model="ir.ui.view">
-            <field name="name">account.move.line.form.cost.center</field>
             <field name="model">account.move.line</field>
             <field name="inherit_id" ref="account.view_move_line_form"/>
             <field name="arch" type="xml">
@@ -14,7 +13,6 @@
         </record>
 
         <record id="move_line_tree_cost_center" model="ir.ui.view">
-            <field name="name">account.move.line.tree.cost.center</field>
             <field name="model">account.move.line</field>
             <field name="inherit_id" ref="account.view_move_line_tree"/>
             <field name="priority">1</field>
