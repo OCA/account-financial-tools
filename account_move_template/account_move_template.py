@@ -53,6 +53,7 @@ class AccountMoveTemplate(models.Model):
         required=False
     )
 
+
 class AccountMoveTemplateLine(models.Model):
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
@@ -91,7 +92,7 @@ class AccountMoveTemplateLine(models.Model):
         ('sequence_template_uniq', 'unique (template_id,sequence)',
          'The sequence of the line must be unique per template !')
     ]
-    
+
     @api.constrains('journal_id')
     def _check_different_journal(self):
         # Check that the journal on these lines are different/same in the case
