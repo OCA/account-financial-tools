@@ -12,6 +12,7 @@
     'version': '8.0.1.0.0',
     'depends': [
         'account',
+        'base_view_inheritance_extension'
     ],
     'data': [
         'security/ir.model.access.csv',
