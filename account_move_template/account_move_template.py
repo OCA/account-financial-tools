@@ -53,30 +53,6 @@ class AccountMoveTemplate(models.Model):
         required=False
     )
 
-    @api.constrains('journal_id')
-    def _check_different_journal(self):
-        # Check that the journal on these lines are different/same in the case
-        # of cross journals/single journal
-        journal_ids = []
-        all_journal_ids = []
-        error_message = (
-            u'If the template is "cross-journals", the Journals must be '
-            u'different, if the template does not "cross-journals" the '
-            u'Journals must be the same!'
-        )
-        for move_template in self:
-            if move_template.template_line_ids:
-                for template_line in move_template.template_line_ids:
-                    all_journal_ids.append(template_line.journal_id.id)
-                    if template_line.journal_id.id not in journal_ids:
-                        journal_ids.append(template_line.journal_id.id)
-                if move_template.cross_journals:
-                    if len(all_journal_ids) != len(journal_ids):
-                        raise ValidationError(error_message)
-                elif len(journal_ids) != 1:
-                    raise ValidationError(error_message)
-
-
 class AccountMoveTemplateLine(models.Model):
     _name = 'account.move.template.line'
     _inherit = 'account.document.template.line'
@@ -115,3 +91,26 @@ class AccountMoveTemplateLine(models.Model):
         ('sequence_template_uniq', 'unique (template_id,sequence)',
          'The sequence of the line must be unique per template !')
     ]
+    
+    @api.constrains('journal_id')
+    def _check_different_journal(self):
+        # Check that the journal on these lines are different/same in the case
+        # of cross journals/single journal
+        journal_ids = []
+        all_journal_ids = []
+        error_message = (
+            u'If the template is "cross-journals", the Journals must be '
+            u'different, if the template does not "cross-journals" the '
+            u'Journals must be the same!'
+        )
+        for move_template in self.template_id:
+            if move_template.template_line_ids:
+                for template_line in move_template.template_line_ids:
+                    all_journal_ids.append(template_line.journal_id.id)
+                    if template_line.journal_id.id not in journal_ids:
+                        journal_ids.append(template_line.journal_id.id)
+                if move_template.cross_journals:
+                    if len(all_journal_ids) != len(journal_ids):
+                        raise ValidationError(error_message)
+                elif len(journal_ids) != 1:
+                    raise ValidationError(error_message)
