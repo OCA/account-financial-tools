@@ -24,18 +24,19 @@
 
 {
     'name': "Company currency in invoices",
-    'version': "8.0.1.0.0",
-    'author': "Zikzakmedia SL, ,Odoo Community Association (OCA)"
+    'version': "10.0.1.0.0",
+    'author': "Zikzakmedia SL, Odoo Community Association (OCA), "
               "Joaquín Gutierrez, "
-              "Serv. Tecnol. Avanzados - Pedro M. Baeza",
+              "Serv. Tecnol. Avanzados - Pedro M. Baeza, "
+              "Sébastien Namèche",
     'website': "http://www.zikzakmedia.com, "
                "http://www.gutierrezweb.es, "
                "http://www.serviciosbaeza.com",
-    'category': "Localisation / Accounting",
+    'category': "Accounting",
     'license': "AGPL-3",
     'depends': ["account"],
     'data': [
-        "views/account_invoice_view.xml"
+        "views/account_invoice.xml"
     ],
-    'installable': False,
+    'installable': True,
 }

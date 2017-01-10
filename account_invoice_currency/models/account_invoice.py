@@ -19,59 +19,61 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api
-import openerp.addons.decimal_precision as dp
+
+from odoo import models, fields, api
+import odoo.addons.decimal_precision as dp
 
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    @api.one
+    @api.multi
     @api.depends('amount_total', 'amount_untaxed', 'amount_tax',
                  'currency_id', 'move_id')
-    def _cc_amount_all(self):
-        if self.company_id.currency_id == self.currency_id:
-            self.cc_amount_untaxed = self.amount_untaxed
-            self.cc_amount_tax = self.amount_tax
-            self.cc_amount_total = self.amount_total
-        else:
-            self.cc_amount_untaxed = 0.0
-            self.cc_amount_tax = 0.0
-            self.cc_amount_total = 0.0
-            # It could be computed only in open or paid invoices with a
-            # generated account move
-            if self.move_id:
-                # Accounts to compute amount_untaxed
-                line_accounts = set([x.account_id.id for x in
-                                     self.invoice_line])
-                # Accounts to compute amount_tax
-                tax_accounts = set([x.account_id.id for x in
-                                    self.tax_line if x.amount != 0])
-                # The company currency amounts are the debit-credit
-                # amounts in the account moves
-                for line in self.move_id.line_id:
-                    if line.account_id.id in line_accounts:
-                        self.cc_amount_untaxed += line.debit - line.credit
-                    if line.account_id.id in tax_accounts:
-                        self.cc_amount_tax += line.debit - line.credit
-                if self.type in ('out_invoice', 'in_refund'):
-                    self.cc_amount_untaxed = -self.cc_amount_untaxed
-                    self.cc_amount_tax = -self.cc_amount_tax
-                self.cc_amount_total = (self.cc_amount_tax +
-                                        self.cc_amount_untaxed)
+    def _compute_cc_amount_all(self):
+        for inv in self:
+            if inv.company_id.currency_id == inv.currency_id:
+                inv.cc_amount_untaxed = inv.amount_untaxed
+                inv.cc_amount_tax = inv.amount_tax
+                inv.cc_amount_total = inv.amount_total
+            else:
+                inv.cc_amount_untaxed = 0.0
+                inv.cc_amount_tax = 0.0
+                inv.cc_amount_total = 0.0
+                # It could be computed only in open or paid invoices with a
+                # generated account move
+                if inv.move_id:
+                    # Accounts to compute amount_untaxed
+                    line_accounts = set([x.account_id.id for x in
+                                         inv.invoice_line_ids])
+                    # Accounts to compute amount_tax
+                    tax_accounts = set([x.account_id.id for x in
+                                        inv.tax_line_ids if x.amount != 0])
+                    # The company currency amounts are the debit-credit
+                    # amounts in the account moves
+                    for line in inv.move_id.line_ids:
+                        if line.account_id.id in line_accounts:
+                            inv.cc_amount_untaxed += line.debit - line.credit
+                        if line.account_id.id in tax_accounts:
+                            inv.cc_amount_tax += line.debit - line.credit
+                    if inv.type in ('out_invoice', 'in_refund'):
+                        inv.cc_amount_untaxed = -inv.cc_amount_untaxed
+                        inv.cc_amount_tax = -inv.cc_amount_tax
+                    inv.cc_amount_total = (inv.cc_amount_tax +
+                                           inv.cc_amount_untaxed)
 
     cc_amount_untaxed = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Untaxed',
         help="Invoice untaxed amount in the company currency (useful when "
              "invoice currency is different from company currency).")
     cc_amount_tax = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Tax',
         help="Invoice tax amount in the company currency (useful when invoice "
              "currency is different from company currency).")
     cc_amount_total = fields.Float(
-        compute="_cc_amount_all", digits_compute=dp.get_precision('Account'),
+        compute="_compute_cc_amount_all", digits=dp.get_precision('Account'),
         string='Company Cur. Total',
         help="Invoice total amount in the company currency (useful when "
              "invoice currency is different from company currency).")

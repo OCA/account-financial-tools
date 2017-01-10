@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ###############################################
+                    INVOICE INHERITANCE
+         ############################################### -->
+        
+    <!-- ## Suppliers ## -->
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.currency.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fiscal_position_id']/.." position="after">
+                <group string="Amounts in company currency">
+                    <field name="cc_amount_untaxed" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="cc_amount_tax" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="cc_amount_total" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ## Customers ## -->
+    <record id="invoice_form" model="ir.ui.view">
+        <field name="name">account.invoice.currency.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_id']/.." position="after">
+                <group string="Amounts in company currency">
+                    <field name="cc_amount_untaxed" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="cc_amount_tax" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="cc_amount_total" widget="monetary"
+                           options="{'currency_field': 'company_currency_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree views -->
+
+    <!-- ## Suppliers ## -->
+    <record id="invoice_supplier_tree" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.currency.tree</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+        <field name="arch" type="xml">
+            <!-- It makes no sense to do the sum of multiple currencies -->
+            <field name="amount_total_signed" position="attributes">
+                <attribute name="sum"/>
+            </field>
+            <field name="residual_signed" position="attributes">
+                <attribute name="sum"/>
+            </field>
+            <!-- Here, amounts are all in company currency -->
+            <field name="residual_signed" position="after">
+                <field name="cc_amount_total" sum="Total"
+                       string="Total (Company Currency)" widget="monetary"
+                       options="{'currency_field': 'company_currency_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- ## Customers ## -->
+    <record id="invoice_tree" model="ir.ui.view">
+        <field name="name">account.invoice.currency.tree</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_tree"/>
+        <field name="arch" type="xml">
+            <!-- It makes no sense to do the sum of multiple currencies -->
+            <field name="amount_total_signed" position="attributes">
+                <attribute name="sum"/>
+            </field>
+            <field name="residual_signed" position="attributes">
+                <attribute name="sum"/>
+            </field>
+            <!-- Here, amounts are all in company currency -->
+            <field name="residual_signed" position="after">
+                <field name="cc_amount_total" sum="Total"
+                       string="Total (Company Currency)" widget="monetary"
+                       options="{'currency_field': 'company_currency_id'}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
