@@ -3,11 +3,24 @@
 # * account_partner_required
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
+# Florian Hatat, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"POT-Creation-Date: 2016-11-25 21:28+0000\n"
 "PO-Revision-Date: 2015-06-03 15:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_MX/)\n"
@@ -20,13 +33,13 @@ msgstr ""
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
 msgid "Account Type"
-msgstr ""
+msgstr "Tipo de cuenta"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:33
 #, python-format
 msgid "Always"
-msgstr ""
+msgstr "Siempre"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
@@ -37,13 +50,13 @@ msgstr "Elementos diario"
 #: code:addons/account_partner_required/account.py:34
 #, python-format
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:32
 #, python-format
 msgid "Optional"
-msgstr ""
+msgstr "Opcional"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:74

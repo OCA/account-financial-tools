@@ -3,12 +3,35 @@
 # * account_check_deposit
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
+# Antonio Trueba, 2016
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012,2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Stéphane Bidoul <sbi@skynet.be>, 2015
+# Yael Terrettaz, 2015
+# yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-04 11:44+0000\n"
-"PO-Revision-Date: 2016-01-04 11:47+0000\n"
+"POT-Creation-Date: 2016-12-09 23:20+0000\n"
+"PO-Revision-Date: 2016-12-16 00:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -35,13 +58,13 @@ msgstr "Importe"
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Devolver a borrador"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Cuenta bancaria"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -51,7 +74,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Bank:"
-msgstr ""
+msgstr "Banco:"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -115,7 +138,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
@@ -136,6 +159,11 @@ msgstr "Creado en"
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,currency_id:0
 msgid "Currency"
+msgstr "Divisa"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,currency_none_same_company_id:0
+msgid "Currency (False if same as company)"
 msgstr ""
 
 #. module: account_check_deposit
@@ -149,10 +177,20 @@ msgid "Debtor"
 msgstr ""
 
 #. module: account_check_deposit
+#: field:account.check.deposit,journal_default_account_id:0
+msgid "Default Debit Account of the Journal"
+msgstr ""
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,deposit_date:0
 msgid "Deposit Date"
 msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -169,12 +207,17 @@ msgstr "Borrador"
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -193,6 +236,11 @@ msgid "Journal Items"
 msgstr "Apuntes contables"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
@@ -201,6 +249,11 @@ msgstr "Última actualización por"
 #: field:account.check.deposit,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización en"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,line_ids:0
+msgid "Lines"
+msgstr "Líneas"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -219,9 +272,19 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,check_count:0
+msgid "Number of Checks"
+msgstr ""
+
+#. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Number of checks:"
 msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,is_reconcile:0
+msgid "Reconcile"
+msgstr "Conciliación"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -248,6 +311,11 @@ msgstr ""
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
 "it."
+msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,total_amount:0
+msgid "Total Amount"
 msgstr ""
 
 #. module: account_check_deposit

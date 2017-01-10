@@ -3,13 +3,18 @@
 # * account_credit_control
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# njeudy <njeudy@tuxservices.com>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 09:18+0000\n"
-"PO-Revision-Date: 2015-12-03 05:23+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +193,17 @@ msgid "An error has occured during the sending of the email."
 msgstr "Med razpošiljanjem e-pošte je prišlo do napake."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:310
+#: model:account.account,name:account_credit_control.a_recv_1
+msgid "B2B Debtors - (test)"
+msgstr "B2B dolžniki - (test)"
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_2
+msgid "B2C Debtors - (test)"
+msgstr "B2C dolžniki - (test)"
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr "Funkcija za izvedbeni način ni dobljena: %s ni implementiran"
@@ -461,6 +476,19 @@ msgid "Delay Setting"
 msgstr "Nastavitve zaostankov"
 
 #. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
 msgstr "Ne naredi ničesar"
@@ -613,6 +641,19 @@ msgid "Issued Lines"
 msgstr "Izdane postavke"
 
 #. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
 #: field:credit.control.emailer,write_uid:0
 #: field:credit.control.line,write_uid:0
@@ -647,6 +688,7 @@ msgstr "Dopis"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Nivo"
@@ -768,6 +810,11 @@ msgstr "Postavke premika, na katere vplivamo"
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
 msgstr "Naziv"
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_3
+msgid "New Debtors - (test)"
+msgstr "Novi dolžniki - (test)"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
@@ -921,6 +968,11 @@ msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr "Pravilo \"<b>%s</b>\" ni ustvarilo nobenih postavk kreditnega nadzora.<br/>"
 
 #. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
+msgstr "Nivo pravila"
+
+#. module: account_credit_control
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
 msgstr "Nivoji pravil"
@@ -1043,6 +1095,7 @@ msgid "Source"
 msgstr "Vir"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "Stanje"
@@ -1084,7 +1137,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr "Opcijska druga valuta pri več-valutnih vnosih."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:260
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr "Najnižji nivo ne more biti tipa \"prejšnji opomin\""
@@ -1107,11 +1160,13 @@ msgid ""
 msgstr "Ta čarovnik vam omogoča nastavitev pravil zapadlosti in nivo za izbrane račune"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr "Skupaj zapadlo"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr "Skupaj zaračunano"
@@ -1156,11 +1211,6 @@ msgstr "Tega računa ne morete preklicati.\nOpomin o zapadlosti je že bil odpos
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
 msgstr "komunikacija kreditnega nadzora"
-
-#. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
-msgstr "credit.control.policy.level"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form

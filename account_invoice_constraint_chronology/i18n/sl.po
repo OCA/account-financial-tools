@@ -3,13 +3,15 @@
 # * account_invoice_constraint_chronology
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-04 11:49+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-09-24 15:48+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +26,7 @@ msgid "Check Chronology"
 msgstr "Preveri kronologijo"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:59
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:35
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
@@ -32,12 +34,21 @@ msgid ""
 msgstr "Kronološka napaka. Starejše osnutke računov potrdite pred %s in poskusite ponovno."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:78
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "
 "%s."
 msgstr "Kronološka napaka. Obstaja vsaj en račun z datumom za %s."
+
+#. module: account_invoice_constraint_chronology
+#: code:addons/account_invoice_constraint_chronology/model/account_journal.py:22
+#, python-format
+msgid ""
+"Configuration error on journal '%s': the option 'Check Chronology' can only "
+"be activated on journals that can be selected on invoices (i.e. Sale, Sale "
+"Refund, Purchase, Purchase Refund journals)"
+msgstr "Nastavitvena napaka na dnevniku '%s': opcijo 'Preveri kronologijo' se lahko aktivira le na dnevnikih, ki se lahko izbirajo na računih (npr. Prodaja, Izdani dobropis, Nabava, Prejeti dobropis, Dnevniki prejetih dobropisov)"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice

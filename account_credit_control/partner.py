@@ -39,7 +39,7 @@ class ResPartner(models.Model):
              "the company setting.",
     )
     credit_control_line_ids = fields.One2many('credit.control.line',
-                                              'invoice_id',
+                                              'partner_id',
                                               string='Credit Control Lines',
                                               readonly=True)
 

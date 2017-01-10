@@ -3,13 +3,25 @@
 # * account_asset_management_xls
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012,2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,12 +61,12 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
@@ -80,6 +92,11 @@ msgid "Depreciation Table error for asset %s !"
 msgstr ""
 
 #. module: account_asset_management_xls
+#: field:wiz.account.asset.report,display_name:0
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
 #: model:ir.model,name:account_asset_management_xls.model_wiz_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
@@ -102,17 +119,22 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,__last_update:0
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:371

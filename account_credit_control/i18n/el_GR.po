@@ -3,13 +3,26 @@
 # * account_credit_control
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Hotellook, 2014
+# Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# John Toro <johntoro@gmail.com>, 2015
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 01:25+0000\n"
-"PO-Revision-Date: 2015-12-09 16:40+0000\n"
-"Last-Translator: Goutoudis Kostas <goutoudis@gmail.com>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 16:30+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -187,7 +200,17 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:310
+#: model:account.account,name:account_credit_control.a_recv_1
+msgid "B2B Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_2
+msgid "B2C Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -198,7 +221,7 @@ msgstr ""
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #. module: account_credit_control
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
@@ -460,6 +483,19 @@ msgid "Delay Setting"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
 msgstr ""
@@ -589,7 +625,7 @@ msgstr ""
 #: field:credit.control.line,invoice_id:0
 #: model:ir.model,name:account_credit_control.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Τιμολόγιο"
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
@@ -609,6 +645,19 @@ msgstr ""
 #. module: account_credit_control
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
 msgid "Issued Lines"
+msgstr ""
+
+#. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: account_credit_control
@@ -646,6 +695,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr ""
@@ -769,6 +819,11 @@ msgid "Name"
 msgstr ""
 
 #. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_3
+msgid "New Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
 msgid "New Policy to Apply"
 msgstr ""
@@ -887,7 +942,7 @@ msgstr ""
 #: field:credit.control.line,partner_id:0
 #: model:ir.model,name:account_credit_control.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Συνεργάτης"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:109
@@ -917,6 +972,11 @@ msgstr ""
 #: code:addons/account_credit_control/run.py:136
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
+msgstr ""
+
+#. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
 msgstr ""
 
 #. module: account_credit_control
@@ -978,7 +1038,7 @@ msgstr ""
 #: view:credit.control.run:account_credit_control.credit_control_run_form
 #: field:credit.control.run,report:0
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"
 
 #. module: account_credit_control
 #: field:credit.control.communication,report_date:0
@@ -1014,7 +1074,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Sent"
-msgstr ""
+msgstr "Αποστολή"
 
 #. module: account_credit_control
 #: field:credit.control.line,mail_message_id:0
@@ -1039,9 +1099,10 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,run_id:0
 msgid "Source"
-msgstr ""
+msgstr "Πηγή"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr ""
@@ -1083,7 +1144,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:260
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
@@ -1106,11 +1167,13 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr ""
@@ -1154,11 +1217,6 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
-msgstr ""
-
-#. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
 msgstr ""
 
 #. module: account_credit_control

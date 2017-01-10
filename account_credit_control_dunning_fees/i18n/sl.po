@@ -3,13 +3,28 @@
 # * account_credit_control_dunning_fees
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Artūras Griškonis <ArtX38@gmail.com>, 2012,2015-2016
+# Artūras Griškonis <xbmc.lt@gmail.com>, 2012
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2015-2016
+# Dorin Hongu <dhongu@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Zapata11 <raimondas.duzinskas@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-08 04:48+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:13+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +42,11 @@ msgstr "Postavka kreditnega nadzora"
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
 msgid "A credit control policy level"
 msgstr "Nivo pravilnika kreditnega nadzora"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.line,balance_due_total:0
+msgid "Balance due with fees"
+msgstr "Stanje zapadlosti s pristojbinami"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,create_uid:0
@@ -48,6 +68,11 @@ msgstr "Generator postavk kreditnega nadzora"
 msgid ""
 "Currency of the dunning fees. If empty, it takes the company's currency."
 msgstr "Valuta terjatev. Če je prazno upošteva valuto družbe."
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.line,dunning_fees_amount:0
@@ -80,6 +105,11 @@ msgstr "Fiksne"
 #: field:credit.control.dunning.fees.computer,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_uid:0

@@ -3,12 +3,21 @@
 # * account_renumber
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
+# Florian Hatat, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 14:50+0000\n"
-"PO-Revision-Date: 2015-11-05 16:59+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +45,11 @@ msgstr "Erstellt von"
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
 msgstr "Erstellt am"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -82,6 +96,11 @@ msgstr "Zu berücksichtigende Journale und Perioden"
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
 msgstr "Zu nummerierende Journal"
+
+#. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_uid:0

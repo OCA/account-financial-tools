@@ -21,7 +21,7 @@
             <button name="generate_credit_lines"
               string="Compute Credit Control Lines"
               class="oe_highlight"
-              type="object" icon="gtk-execute"
+              type="object"
               attrs="{'invisible': [('state', '!=', 'draft')]}"/>
             <button name="open_credit_lines"
               string="Open Credit Control Lines"

@@ -3,6 +3,11 @@
 # * account_check_deposit
 # 
 # Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2015-2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2015
 # Thomas A. Jaeger, 2015
 # Thomas A. Jaeger, 2015
@@ -10,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-04 11:44+0000\n"
-"PO-Revision-Date: 2016-01-04 11:47+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -142,6 +147,11 @@ msgid "Currency"
 msgstr "Währung"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,currency_none_same_company_id:0
+msgid "Currency (False if same as company)"
+msgstr "Währung (Falsch wenn gleich wie Unternehmenswährung)"
+
+#. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Date"
 msgstr "Datum"
@@ -152,10 +162,20 @@ msgid "Debtor"
 msgstr "Debitor"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,journal_default_account_id:0
+msgid "Default Debit Account of the Journal"
+msgstr "Standard Aufwandskonto des Journals"
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,deposit_date:0
 msgid "Deposit Date"
 msgstr "Einreicherdatum"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr "Anzeigename"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -180,6 +200,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr ""
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,journal_id:0
 msgid "Journal"
@@ -196,6 +221,11 @@ msgid "Journal Items"
 msgstr "Journalposten"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
 msgid "Last Updated by"
 msgstr "Zuletzt geändert von"
@@ -204,6 +234,11 @@ msgstr "Zuletzt geändert von"
 #: field:account.check.deposit,write_date:0
 msgid "Last Updated on"
 msgstr "Zuletzt geändert am"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,line_ids:0
+msgid "Lines"
+msgstr "Zeilen"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -222,9 +257,19 @@ msgid "Name"
 msgstr "Name"
 
 #. module: account_check_deposit
+#: field:account.check.deposit,check_count:0
+msgid "Number of Checks"
+msgstr "Anzahl Schecks"
+
+#. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Number of checks:"
 msgstr "Anzahl Schecks:"
+
+#. module: account_check_deposit
+#: field:account.check.deposit,is_reconcile:0
+msgid "Reconcile"
+msgstr "Ausgleichen"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -252,6 +297,11 @@ msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
 "it."
 msgstr "Die Einzahlung '%s' ist bereits bewilligt. Sie müssen sie zuerst absagen bevor Sie sie löschen können."
+
+#. module: account_check_deposit
+#: field:account.check.deposit,total_amount:0
+msgid "Total Amount"
+msgstr "Gesamtbetrag"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit

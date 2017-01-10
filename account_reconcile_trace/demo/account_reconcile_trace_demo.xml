@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!--
+        Account Accountant
+        -->    
+        <record id="tdd" model="account.account">
+            <field name="code">X110010</field>
+            <field name="name">Transfer Debtors Debit</field>
+            <field ref="account.cas" name="parent_id"/>
+            <field name="type">receivable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account.data_account_type_receivable"/>
+        </record>
+        
+        <record id="tcc" model="account.account">
+            <field name="code">X1115</field>
+            <field name="name">Transfer Creditors Credit</field>
+            <field ref="account.cli" name="parent_id"/>
+            <field name="type">payable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account.data_account_type_payable"/>
+        </record>
+        
+        <!--
+        Account Journal
+        -->
+
+        <record id="checks_debit_journal" model="account.journal">
+            <field name="name">Checks Transfer Debit</field>
+            <field name="code">CTDJ</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="account.sequence_bank_journal"/>
+            <field name="default_credit_account_id" ref="tdd"/>
+            <field name="default_debit_account_id" ref="account.a_recv"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record> 
+        
+        <record id="checks_credit_journal" model="account.journal">
+            <field name="name">Checks Transfer Credit</field>
+            <field name="code">CTCJ</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="account.sequence_bank_journal"/>
+            <field name="default_credit_account_id" ref="tcc"/>
+            <field name="default_debit_account_id" ref="account.a_pay"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record> 
+
+    </data>
+</openerp>

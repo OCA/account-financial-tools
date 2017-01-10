@@ -3,13 +3,25 @@
 # * account_move_template
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Polish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +87,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Utworzone przez"
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -85,7 +97,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Utworzono"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -105,13 +117,23 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
+msgstr "Wyświetlana nazwa "
+
+#. module: account_move_template
 #: field:account.document.template,id:0
 #: field:account.document.template.line,id:0 field:account.move.template,id:0
 #: field:account.move.template.line,id:0
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
@@ -138,6 +160,16 @@ msgid "Journal Entry Template Line"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Ostatnio modyfikowano"
+
+#. module: account_move_template
 #: field:account.document.template,write_uid:0
 #: field:account.document.template.line,write_uid:0
 #: field:account.move.template,write_uid:0
@@ -145,7 +177,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ostatnio modyfikowane przez"
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -155,7 +187,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ostatnia zmiana"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65
@@ -203,7 +235,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nazwa"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
@@ -242,7 +274,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Numeracja"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
@@ -285,7 +317,7 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:104

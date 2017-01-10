@@ -135,6 +135,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
              " to be children of the newly created ones."
              " If you had an account 430 with a child 4300000, and a 4300 "
              "account is created, the 4300000 parent will be set to 4300.")
+    update_financial_reports = fields.Boolean(
+        string="Update financial report accounts", default=True,
+        help="Update the financial reports mapping the accounts")
     continue_on_errors = fields.Boolean(
         string="Continue on errors", default=False,
         help="If set, the wizard will continue to the next step even if "
@@ -154,6 +157,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     fiscal_position_ids = fields.One2many(
         comodel_name='wizard.update.charts.accounts.fiscal.position',
         inverse_name='update_chart_wizard_id', string='Fiscal positions',
+        ondelete='cascade')
+    financial_report_ids = fields.One2many(
+        comodel_name='wizard.update.charts.accounts.financial.report',
+        inverse_name='update_chart_wizard_id', string='Financial reports',
         ondelete='cascade')
     new_tax_codes = fields.Integer(
         string='New tax codes', readonly=True,
@@ -342,6 +349,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             self._find_fiscal_positions(
                 chart_template_ids, mapping_taxes, mapping_accounts,
                 mapping_fps)
+        if self.update_financial_reports:
+            self._find_financial_reports(mapping_accounts)
         # Write the results, and go to the next step.
         self.write({'state': 'ready'})
         return _reopen(self)
@@ -369,6 +378,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         if self_lang.update_fiscal_position:
             self_lang._update_fiscal_positions(
                 log, mapping_taxes, mapping_accounts)
+        if self_lang.update_financial_reports:
+            self._update_financial_reports(log)
         # Check if errors where detected and wether we should stop.
         if log.has_errors() and not self_lang.continue_on_errors:
             raise exceptions.Warning(
@@ -601,6 +612,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The include base amount field is different.\n")
         if tax.type_tax_use != tax_template.type_tax_use:
             notes += _("The type tax use field is different.\n")
+        if tax.price_include != tax_template.price_include:
+            notes += _("The Tax Included in Price field is different.\n")
         # compare tax code fields
         if tax.base_code_id != self.map_tax_code_template(
                 tax_template.base_code_id, mapping_tax_codes):
@@ -697,14 +710,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The reconcile is different.\n")
         return notes
 
-    @api.one
-    def _find_accounts(self, mapping_accounts):
-        """Search for, and load, account templates to create/update."""
-        wiz_accounts = self.env['wizard.update.charts.accounts.account']
-        # Remove previous accounts
-        self.account_ids.unlink()
-        # Search for new / updated accounts
-        root_account_id = self.chart_template_id.account_root_id.id
+    def _acc_tmpl_to_search_criteria(self, chart_template):
+        root_account_id = chart_template.account_root_id.id
         acc_templ_criteria = [
             ('chart_template_id', '=', self.chart_template_id.id)]
         if root_account_id:
@@ -712,6 +719,21 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             acc_templ_criteria += [
                 '&', ('parent_id', 'child_of', [root_account_id]),
                 ('chart_template_id', '=', False)]
+        if chart_template.parent_id:
+            acc_templ_criteria = ['|'] + acc_templ_criteria
+            acc_templ_criteria += self._acc_tmpl_to_search_criteria(
+                chart_template.parent_id)
+        return acc_templ_criteria
+
+    @api.one
+    def _find_accounts(self, mapping_accounts):
+        """Search for, and load, account templates to create/update."""
+        wiz_accounts = self.env['wizard.update.charts.accounts.account']
+        # Remove previous accounts
+        self.account_ids.unlink()
+        # Search for new / updated accounts
+        acc_templ_criteria = self._acc_tmpl_to_search_criteria(
+            self.chart_template_id)
         account_templates = self.env['account.account.template'].search(
             acc_templ_criteria)
         for account_template in account_templates:
@@ -833,6 +855,56 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     'notes': notes,
                 })
 
+    @api.one
+    def _find_financial_reports(self, mapping_accounts):
+        wiz_fr = self.env['wizard.update.charts.accounts.financial.report']
+        # Remove previous financial reports
+        self.financial_report_ids.unlink()
+        # Search for new / updated accounts
+        root_account_id = self.chart_template_id.account_root_id.id
+        acc_templ_criteria = [
+            ('chart_template_id', '=', self.chart_template_id.id)]
+        if root_account_id:
+            acc_templ_criteria = ['|'] + acc_templ_criteria
+            acc_templ_criteria += [
+                '&', ('parent_id', 'child_of', [root_account_id]),
+                ('chart_template_id', '=', False)]
+        account_templates = self.env['account.account.template'].search(
+            acc_templ_criteria)
+        for account_template in account_templates:
+            template_fr_ids = set([fr.id for fr in
+                                   account_template.financial_report_ids])
+            account = self.map_account_template(
+                account_template, mapping_accounts)
+            if account:
+                fr_ids = set([fr.id for fr in
+                              account.financial_report_ids])
+                new_fr_ids = template_fr_ids - fr_ids
+                for fr_id in new_fr_ids:
+                    wiz_fr.create({
+                        'update_chart_wizard_id': self.id,
+                        'type': 'new',
+                        'account_id': account.id,
+                        'financial_report_id': fr_id,
+                    })
+                deleted_fr_ids = fr_ids - template_fr_ids
+                for fr_id in deleted_fr_ids:
+                    wiz_fr.create({
+                        'update_chart_wizard_id': self.id,
+                        'type': 'deleted',
+                        'account_id': account.id,
+                        'financial_report_id': fr_id,
+                    })
+            else:
+                for fr_id in template_fr_ids:
+                    wiz_fr.create({
+                        'update_chart_wizard_id': self.id,
+                        'type': 'warn',
+                        'financial_report_id': fr_id,
+                        'notes': ('Missing account %s' %
+                                  account_template.code),
+                    })
+
     ##########################################################################
     # Update methods
     ##########################################################################
@@ -913,7 +985,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             'include_base_amount': tax_template.include_base_amount,
             'description': tax_template.description,
             'company_id': self.company_id.id,
-            'type_tax_use': tax_template.type_tax_use
+            'type_tax_use': tax_template.type_tax_use,
+            'price_include': tax_template.price_include,
         }
 
     @api.multi
@@ -1115,6 +1188,22 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             log.add(_("Created or updated fiscal position %s.\n") %
                     fp_template.name)
 
+    @api.multi
+    def _update_financial_reports(self, log):
+        for wiz_fr in self.financial_report_ids:
+            if wiz_fr.type == 'new':
+                wiz_fr.financial_report_id.write(
+                    {'account_ids': [(4, wiz_fr.account_id.id, False)]})
+                log.add(_("Added account %s to financial report %s.\n") %
+                        (wiz_fr.account_id.code,
+                         wiz_fr.financial_report_id.name))
+            elif wiz_fr.type == 'deleted':
+                wiz_fr.financial_report_id.write(
+                    {'account_ids': [(3, wiz_fr.account_id.id, False)]})
+                log.add(_("Removed account %s from financial report %s.\n") %
+                        (wiz_fr.account_id.code,
+                         wiz_fr.financial_report_id.name))
+
 
 class WizardUpdateChartsAccountsTaxCode(models.TransientModel):
     _name = 'wizard.update.charts.accounts.tax.code'
@@ -1196,4 +1285,25 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
     update_fiscal_position_id = fields.Many2one(
         comodel_name='account.fiscal.position', required=False,
         string='Fiscal position to update', ondelete='set null')
+    notes = fields.Text('Notes')
+
+
+class WizardUpdateFinancialReport(models.TransientModel):
+    _name = 'wizard.update.charts.accounts.financial.report'
+    _description = ("Financial report mapping that needs to be updated "
+                    "(new or updated in the template).")
+
+    update_chart_wizard_id = fields.Many2one(
+        comodel_name='wizard.update.charts.accounts',
+        string='Update chart wizard', required=True, ondelete='cascade')
+    type = fields.Selection(
+        selection=[('new', 'Add account'),
+                   ('deleted', 'Remove account'),
+                   ('warn', 'Warning')], string='Type')
+    financial_report_id = fields.Many2one(
+        comodel_name='account.financial.report', required=True,
+        string='Financial report to update', ondelete='set null')
+    account_id = fields.Many2one(
+        comodel_name='account.account', required=False,
+        string='Account to change on financial report', ondelete='set null')
     notes = fields.Text('Notes')

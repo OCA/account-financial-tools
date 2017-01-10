@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="view_account_fiscalyear_form" model="ir.ui.view">
+      <field name="name">account.fiscalyear.form.reopen</field>
+      <field name="model">account.fiscalyear</field>
+      <field name="inherit_id" ref="account.view_account_fiscalyear_form"/>
+      <field name="arch" type="xml">
+          <button name="create_period3" position="after">
+              <button
+                  name="reopen_fiscalyear"
+                  states="done"
+                  string="Reopen fiscal year" type="object"
+                  />
+          </button>
+      </field>
+    </record>
+
+</data>
+</openerp>

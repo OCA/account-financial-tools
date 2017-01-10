@@ -1,23 +1,44 @@
-# Danish translation of Odoo Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_credit_control
-#
+# * account_credit_control
+# 
+# Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Alejandro Santana <alejandrosantana@anubia.es>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Mohamed HABOU <m.habou@agoradeveloppement.com>, 2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
+# UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-26 10:32+0000\n"
-"PO-Revision-Date: 2015-01-26 10:32+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 01:12+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
-msgid "\n"
+msgid ""
+"\n"
 "        Our records indicate that we still have not received the payment of the above mentioned invoice despite our two reminders.\n"
 "        If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
 "        If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.\n"
@@ -33,11 +54,12 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:email.template,body_html:account_credit_control.email_template_credit_control_base
-msgid "\n"
+msgid ""
+"\n"
 "      Dear ${object.contact_address.name or ''}\n"
 "      <br/>\n"
 "      <br/>\n"
-"      ${object.current_policy_level.custom_mail_text}\n"
+"      ${object.current_policy_level.custom_mail_text | safe}\n"
 "      "
 msgstr ""
 
@@ -63,12 +85,75 @@ msgid "60 days last reminder"
 msgstr ""
 
 #. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
+msgid "<p>Manual no follow</p>"
+msgstr ""
+
+#. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
+msgid ""
+"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr ""
+
+#. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
+msgid ""
+"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br><br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr ""
+
+#. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
+msgid ""
+"<p>Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br><br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr ""
+
+#. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
+msgid ""
+"<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.\n"
+"      <br><br>\n"
+"      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br>\n"
+"      If your payment has not been received in the next 5 days, your file will be transfered to our debt<br>\n"
+"      collection agency.<br><br>\n"
+"      Should you need us to arrange a payment plan for you, please advise.<br>\n"
+"      A customer account statement is enclosed for you convenience.<br><br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr ""
+
+#. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
+msgid ""
+"<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br>\n"
+"      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br> \n"
+"      If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br><br>\n"
+"      Should you need us to arrange a payment plan for you, please advise.<br>\n"
+"      A customer account statement is enclosed for you convenience.<br><br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
 msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:87
+#: code:addons/account_credit_control/run.py:93
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr ""
@@ -79,13 +164,14 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:154
+#: code:addons/account_credit_control/run.py:161
 #, python-format
-msgid "A credit control run is already running in background, please try later."
+msgid ""
+"A credit control run is already running in background, please try later."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:80
+#: code:addons/account_credit_control/run.py:86
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr ""
@@ -119,7 +205,7 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:308
+#: code:addons/account_credit_control/policy.py:311
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -273,8 +359,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: field:account.invoice,credit_policy_id:0
-#: field:res.company,credit_policy_id:0
-#: field:res.partner,credit_policy_id:0
+#: field:res.company,credit_policy_id:0 field:res.partner,credit_policy_id:0
 msgid "Credit Control Policy"
 msgstr ""
 
@@ -367,6 +452,11 @@ msgid "Custom Message"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.policy.level,custom_text_after_details:0
+msgid "Custom Message after details"
+msgstr ""
+
+#. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
 msgstr "Forfalds dato"
@@ -388,21 +478,32 @@ msgid "Delay Setting"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,display_name:0
+#: field:credit.control.emailer,display_name:0
+#: field:credit.control.line,display_name:0
+#: field:credit.control.marker,display_name:0
+#: field:credit.control.policy,display_name:0
+#: field:credit.control.policy.changer,display_name:0
+#: field:credit.control.policy.level,display_name:0
+#: field:credit.control.printer,display_name:0
+#: field:credit.control.run,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
 msgstr ""
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
-#: selection:credit.control.run,state:0
+#: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
 msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
-#: selection:credit.control.line,state:0
-#: selection:credit.control.run,state:0
+#: selection:credit.control.line,state:0 selection:credit.control.run,state:0
 msgid "Draft"
 msgstr ""
 
@@ -413,7 +514,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.line,state:0
-msgid "Draft lines need to be triaged.\n"
+msgid ""
+"Draft lines need to be triaged.\n"
 "Ignored lines are lines for which we do not want to send something.\n"
 "Draft and ignored lines will be generated again on the next run."
 msgstr ""
@@ -491,21 +593,19 @@ msgid "Group By..."
 msgstr ""
 
 #. module: account_credit_control
-#: field:credit.control.communication,id:0
-#: field:credit.control.emailer,id:0
-#: field:credit.control.line,id:0
-#: field:credit.control.marker,id:0
-#: field:credit.control.policy,id:0
-#: field:credit.control.policy.changer,id:0
-#: field:credit.control.policy.level,id:0
-#: field:credit.control.printer,id:0
+#: field:credit.control.communication,id:0 field:credit.control.emailer,id:0
+#: field:credit.control.line,id:0 field:credit.control.marker,id:0
+#: field:credit.control.policy,id:0 field:credit.control.policy.changer,id:0
+#: field:credit.control.policy.level,id:0 field:credit.control.printer,id:0
 #: field:credit.control.run,id:0
 msgid "ID"
 msgstr ""
 
 #. module: account_credit_control
 #: help:credit.control.run,manual_ids:0
-msgid "If a credit control line has been generatedon a policy and the policy has been changed in the meantime, it has to be handled manually"
+msgid ""
+"If a credit control line has been generatedon a policy and the policy has "
+"been changed in the meantime, it has to be handled manually"
 msgstr ""
 
 #. module: account_credit_control
@@ -540,6 +640,19 @@ msgstr "Beløb"
 #. module: account_credit_control
 #: view:account.invoice:account_credit_control.invoice_followup_form_view
 msgid "Issued Lines"
+msgstr ""
+
+#. module: account_credit_control
+#: field:credit.control.communication,__last_update:0
+#: field:credit.control.emailer,__last_update:0
+#: field:credit.control.line,__last_update:0
+#: field:credit.control.marker,__last_update:0
+#: field:credit.control.policy,__last_update:0
+#: field:credit.control.policy.changer,__last_update:0
+#: field:credit.control.policy.level,__last_update:0
+#: field:credit.control.printer,__last_update:0
+#: field:credit.control.run,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: account_credit_control
@@ -640,7 +753,6 @@ msgid "Manual change"
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
 msgstr ""
@@ -696,8 +808,7 @@ msgid "Move lines to affect"
 msgstr ""
 
 #. module: account_credit_control
-#: field:credit.control.policy,name:0
-#: field:credit.control.policy.level,name:0
+#: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
 msgstr ""
 
@@ -752,7 +863,8 @@ msgstr "Åben saldo"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
-msgid "Our records indicate that we have not received the payment of the above mentioned invoice.\n"
+msgid ""
+"Our records indicate that we have not received the payment of the above mentioned invoice.\n"
 "        If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.\n"
 "\n"
 "        Thank you in advance for your anticipated cooperation in this matter.\n"
@@ -763,30 +875,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_1
-msgid "Our records indicate that we have not received the payment of the above mentioned invoice.\n"
-"If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.\n"
-"\n"
-"Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"Best regards\n"
-"      "
-msgstr ""
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
-msgid "Our records indicate that we have not received the payment of the invoices mentioned in the attached document.\n"
-"\n"
-"If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.\n"
-"\n"
-"Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"Best regards\n"
-"      "
-msgstr ""
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
-msgid "Our records indicate that we have not received the payment of the invoices mentioned in the attached document.\n"
+msgid ""
+"Our records indicate that we have not received the payment of the above mentioned invoice.\n"
 "If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.\n"
 "\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
@@ -797,18 +887,8 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
-msgid "Our records indicate that we have not yet received the payment of the above mentioned invoice despite our first reminder.\n"
-"        If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.\n"
-"\n"
-"Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"Best regards\n"
-"      "
-msgstr ""
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
-msgid "Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.\n"
+msgid ""
+"Our records indicate that we have not yet received the payment of the above mentioned invoice despite our first reminder.\n"
 "        If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.\n"
 "\n"
 "Thank you in advance for your anticipated cooperation in this matter.\n"
@@ -819,43 +899,12 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
-msgid "Our records indicate that we still have not received the payment of the above mentioned invoice despite our reminder.\n"
+msgid ""
+"Our records indicate that we still have not received the payment of the above mentioned invoice despite our reminder.\n"
 "\n"
 "        If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
 "        If your payment has not been received in the next 5 days, your file will be transfered to our debt\n"
 "        collection agency.\n"
-"\n"
-"        Should you need us to arrange a payment plan for you, please advise.\n"
-"        A customer account statement is enclosed for you convenience.\n"
-"\n"
-"        Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"        Best regards\n"
-"      "
-msgstr ""
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
-msgid "Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.\n"
-"\n"
-"If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
-"If your payment has not been received in the next 5 days, your file will be transfered to our debt\n"
-"        collection agency.\n"
-"\n"
-"        Should you need us to arrange a payment plan for you, please advise.\n"
-"        A customer account statement is enclosed for you convenience.\n"
-"\n"
-"        Thank you in advance for your anticipated cooperation in this matter.\n"
-"\n"
-"        Best regards\n"
-"      "
-msgstr ""
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
-msgid "Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.\n"
-"        If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
-"        If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.\n"
 "\n"
 "        Should you need us to arrange a payment plan for you, please advise.\n"
 "        A customer account statement is enclosed for you convenience.\n"
@@ -885,7 +934,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/run.py:103
+#: code:addons/account_credit_control/run.py:109
 #, python-format
 msgid "Please select a policy"
 msgstr ""
@@ -912,6 +961,11 @@ msgstr ""
 #: code:addons/account_credit_control/run.py:136
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
+msgstr ""
+
+#. module: account_credit_control
+#: field:credit.control.line,level:0
+msgid "Policy Level"
 msgstr ""
 
 #. module: account_credit_control
@@ -967,11 +1021,6 @@ msgstr ""
 #: field:credit.control.line,policy_id:0
 #: field:credit.control.policy.level,policy_id:0
 msgid "Related Policy"
-msgstr ""
-
-#. module: account_credit_control
-#: view:website:account_credit_control.report_credit_control_summary_document
-msgid "Reminder"
 msgstr ""
 
 #. module: account_credit_control
@@ -1042,8 +1091,7 @@ msgid "Source"
 msgstr ""
 
 #. module: account_credit_control
-#: field:credit.control.line,state:0
-#: field:credit.control.run,state:0
+#: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr ""
 
@@ -1054,17 +1102,23 @@ msgstr "Oversigt"
 
 #. module: account_credit_control
 #: help:account.invoice,credit_policy_id:0
-msgid "The Credit Control Policy used for this invoice. If nothing is defined, it will use the account setting or the partner setting."
+msgid ""
+"The Credit Control Policy used for this invoice. If nothing is defined, it "
+"will use the account setting or the partner setting."
 msgstr ""
 
 #. module: account_credit_control
 #: help:res.partner,credit_policy_id:0
-msgid "The Credit Control Policy used for this partner. This setting can be forced on the invoice. If nothing is defined, it will use the company setting."
+msgid ""
+"The Credit Control Policy used for this partner. This setting can be forced "
+"on the invoice. If nothing is defined, it will use the company setting."
 msgstr ""
 
 #. module: account_credit_control
 #: help:res.company,credit_policy_id:0
-msgid "The Credit Control Policy used on partners by default. This setting can be overridden on partners or invoices."
+msgid ""
+"The Credit Control Policy used on partners by default. This setting can be "
+"overridden on partners or invoices."
 msgstr ""
 
 #. module: account_credit_control
@@ -1078,7 +1132,7 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/policy.py:258
+#: code:addons/account_credit_control/policy.py:261
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
@@ -1095,15 +1149,19 @@ msgstr ""
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
-msgid "This wizard will let you set the overdue policy and level for selected invoices"
+msgid ""
+"This wizard will let you set the overdue policy and level for selected "
+"invoices"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_due:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Due"
 msgstr "I alt forfalden"
 
 #. module: account_credit_control
+#: field:credit.control.communication,total_invoiced:0
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Total Invoiced"
 msgstr "I alt faktureret"
@@ -1119,23 +1177,27 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/line.py:223
+#: code:addons/account_credit_control/line.py:226
 #, python-format
-msgid "You are not allowed to delete a credit control line that is not in draft state."
+msgid ""
+"You are not allowed to delete a credit control line that is not in draft "
+"state."
 msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:203
 #, python-format
-msgid "You can only use a policy set on account %s.\n"
+msgid ""
+"You can only use a policy set on account %s.\n"
 "Please choose one of the following policies:\n"
 " %s"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/invoice.py:57
+#: code:addons/account_credit_control/invoice.py:60
 #, python-format
-msgid "You cannot cancel this invoice.\n"
+msgid ""
+"You cannot cancel this invoice.\n"
 "A payment reminder has already been sent to the customer.\n"
 "You must create a credit note and issue a new invoice."
 msgstr ""
@@ -1146,15 +1208,9 @@ msgid "credit control communication"
 msgstr ""
 
 #. module: account_credit_control
-#: field:credit.control.line,level:0
-msgid "credit.control.policy.level"
-msgstr ""
-
-#. module: account_credit_control
 #: view:credit.control.emailer:account_credit_control.credit_line_emailer_form
 #: view:credit.control.marker:account_credit_control.credit_line_marker_form
 #: view:credit.control.policy.changer:account_credit_control.credit_control_policy_changer_form
 #: view:credit.control.printer:account_credit_control.credit_line_printer_form
 msgid "or"
 msgstr ""
-

@@ -3,13 +3,52 @@
 # * account_move_template
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Antonio Trueba, 2016
+# Artūras Griškonis <ArtX38@gmail.com>, 2012,2015-2016
+# Artūras Griškonis <xbmc.lt@gmail.com>, 2012
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# Chul Park <parkchul@nate.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# David10000 <gameness@naver.com>, 2014
+# Dorin Hongu <dhongu@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2013
+# Gil <gedwarp@gmail.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
+# Hongseob Lee <shevreg@yahoo.com>, 2015
+# jeon <bluerespect@nate.com>, 2014
+# JiyeonLee <leejiyeon00@gmail.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013
+# Kevin Min <gr326887@graded.br>, 2015
+# KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
+# mariana1201 <gogo3135@naver.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Nicole <dlruddk1112@gmail.com>, 2014
+# Paolo Valier, 2016
+# Pope, 2014
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sarina Canelake <sarina@edx.org>, 2014
+# Seok Jun Yoon <fake2real@dctribe.com>, 2015
+# shin2012 <shin2013@gmail.com>, 2014
+# Sujin Lee <sujinlee.me@gmail.com>, 2014
+# Sunah Lim <whitetree70@snu.ac.kr>, 2013
+# Thomas A. Jaeger, 2015
+# Young C. Kim, 2015
+# Young C. Kim, 2015
+# Zapata11 <raimondas.duzinskas@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +114,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -85,7 +124,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -105,13 +144,23 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
+msgstr "Te tonen naam"
+
+#. module: account_move_template
 #: field:account.document.template,id:0
 #: field:account.document.template.line,id:0 field:account.move.template,id:0
 #: field:account.move.template.line,id:0
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
@@ -138,6 +187,16 @@ msgid "Journal Entry Template Line"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_move_template
 #: field:account.document.template,write_uid:0
 #: field:account.document.template.line,write_uid:0
 #: field:account.move.template,write_uid:0
@@ -145,7 +204,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -155,7 +214,7 @@ msgstr ""
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65
@@ -285,7 +344,7 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:104
