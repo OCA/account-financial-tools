@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="move_form_cost_center" model="ir.ui.view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//field[@name='line_id']/form//field[@name='analytic_account_id']" position="after">
+                    <field name="cost_center_id"/>
+                </xpath>
+                <xpath expr="//notebook//field[@name='line_id']/tree/field[@name='analytic_account_id']" position="after">
+                    <field name="cost_center_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
