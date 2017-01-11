@@ -25,6 +25,8 @@ addon | version | summary
 --- | --- | ---
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
+[account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
+[account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
 
 Unported addons
 ---------------
@@ -53,7 +55,6 @@ addon | version | summary
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 (unported) | Journal Items Search Extension
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 (unported) | Move locked to prevent modification
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
-[account_partner_required](account_partner_required/) | 8.0.0.1.0 (unported) | Account partner required
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 (unported) | Permanent Lock Move
 [account_renumber](account_renumber/) | 9.0.1.0.0 (unported) | Account Renumber Wizard
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 (unported) | Delete the accounting setup from an otherwise reusable database
