@@ -26,7 +26,6 @@ import calendar
 import logging
 from odoo import api, fields, exceptions, models, _
 import openerp.addons.decimal_precision as dp
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 _logger = logging.getLogger(__name__)
@@ -100,8 +99,7 @@ class AccountAsset(models.Model):
                             datetime(year, 12, 31) - fy_date_start).days + 1
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
-                    duration = (
-                        fy_date_stop - datetime(year, 01, 01)).days + 1
+                    duration = (fy_date_stop - datetime(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
@@ -657,6 +655,7 @@ class AccountAsset(models.Model):
     def onchange_purchase_salvage_value(self):
         purchase_value = self.purchase_value or 0.0
         salvage_value = self.salvage_value or 0.0
+        date_start = self.date_start
         if purchase_value or salvage_value:
             self.depreciation_base = purchase_value - salvage_value
         if self.ids:
@@ -860,7 +859,6 @@ class AccountAsset(models.Model):
                 raise exceptions.UserError(
                     _("You cannot change the category of an asset "
                       "with accounting entries."))
-        asset_categ_obj = self.pool.get('account.asset.profile')
         if self.profile_id:
             categ = self.profile_id
             self.parent_id = categ.parent_id.id
