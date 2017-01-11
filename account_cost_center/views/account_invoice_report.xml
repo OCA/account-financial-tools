@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_invoice_report_search" model="ir.ui.view">
+            <field name="model">account.invoice.report</field>
+            <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+            <field name="arch" type="xml">
+                <filter name="user" position="after">
+                    <filter string="Analytic Account" context="{'group_by':'account_analytic_id'}"  />
+                    <filter string="Cost Center" context="{'group_by':'cost_center_id'}"  />
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>
