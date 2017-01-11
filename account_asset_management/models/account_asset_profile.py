@@ -52,7 +52,7 @@ class AccountAssetProfile(models.Model):
             ('year', 'Year'),
         ]
 
-    name = fields.Char('Name', size=64, required=True, select=1)
+    name = fields.Char('Name', size=64, required=True, index=1)
     note = fields.Text('Note')
     account_analytic_id = fields.Many2one(
         'account.analytic.account', 'Analytic account',
