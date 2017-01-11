@@ -28,7 +28,6 @@
     'website': 'http://www.noviat.com',
     'category': 'Accounting & Finance',
     'sequence': 32,
-#    'demo': ['account_asset_demo.xml'],
     'test': [
 #        'test/account_asset_demo.yml',
 #        'test/account_asset.yml',

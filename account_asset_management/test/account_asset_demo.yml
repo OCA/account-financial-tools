@@ -1,9 +1,0 @@
--
-  !record {model: account.asset.profile, id: account_asset_profile_ict_3Y}:
-    account_asset_id: account.xfa
--
-  !record {model: account.asset, id: account_asset_ict0}:
-    profile_id: account_asset_profile_ict_3Y
--
-  !record {model: account.asset, id: account_asset_ict0}:
-    method_number: 3
