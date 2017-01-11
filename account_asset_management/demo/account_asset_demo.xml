@@ -2,6 +2,23 @@
 <openerp>
   <data noupdate="1">
 
+
+    <record id="date_range_fy" model="date.range">
+        <field name="type_id" ref="account_fiscal_year.fiscalyear" />
+        <field name="name">FY_assets</field>
+        <field name="date_start" eval="time.strftime('%Y-01-01')"/>
+        <field name="date_end" eval="time.strftime('%Y-12-31')"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
+    <record id="date_range_fy_previous" model="date.range">
+        <field name="type_id" ref="account_fiscal_year.fiscalyear" />
+        <field name="name">FY_assets previous</field>
+        <field name="date_start" eval="(datetime.now() - relativedelta(years=1, month=1, day=1)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(datetime.now() - relativedelta(years=1, month=12, day=31)).strftime('%Y-%m-%d')"/>
+        <field name="company_id" ref="base.main_company"/>
+    </record>
+
     <!-- 
             Type View Assets
         -->

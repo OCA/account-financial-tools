@@ -24,57 +24,79 @@
 from datetime import datetime
 
 import odoo.tests.common as common
+from odoo import tools
+from odoo.modules.module import get_resource_path
 
 import time
 
 
 class TestAssetManagement(common.TransactionCase):
 
+    def _load(self, module, *args):
+        tools.convert_file(self.cr, module,
+                           get_resource_path(module, *args),
+                           {}, 'init', False, 'test',
+                           self.registry._assertion_report)
+
     def setUp(self):
         super(TestAssetManagement, self).setUp()
-        self.asset_model = self.registry('account.asset')
-        self.dl_model = self.registry('account.asset.line')
+        self.asset_model = self.env['account.asset']
+        self.dl_model = self.env['account.asset.line']
+        self._load('account', 'test', 'account_minimal_test.xml')
+        self._load('account_asset_management', 'demo',
+                   'account_asset_demo.xml')
+
+    def test_0(self):
+        asset01 = self.env.ref(
+            "account_asset_management.account_asset_vehicle0")
+        asset01.validate()
+        self.assertEqual(asset01.state, 'open')
+        asset01.compute_depreciation_board()
+        self.assertTrue(asset01.method_number ==
+                        (len(asset01.depreciation_line_ids) - 1))
+        dl = self.dl_model.search([('asset_id', '=', asset01.id),
+                                   ('type', '=', 'depreciate')], limit=1)
+        dl.create_move()
 
     def test_1_hierarchy(self):
         """Test computations across the asset hierarchy."""
         #
         # first load demo assets and do some sanity checks
         #
-        ict0 = self.browse_ref('account_asset_management.'
-                               'account_asset_asset_ict0')
+        ict0 = self.env.ref('account_asset_management.account_asset_ict0')
         self.assertEquals(ict0.state, 'draft')
         self.assertEquals(ict0.purchase_value, 1500)
         self.assertEquals(ict0.salvage_value, 0)
-        self.assertEquals(ict0.asset_value, 1500)
+        self.assertEquals(ict0.depreciation_base, 1500)
         self.assertEquals(len(ict0.depreciation_line_ids), 1)
-        vehicle0 = self.browse_ref('account_asset_management.'
-                                   'account_asset_asset_vehicle0')
+        vehicle0 = self.env.ref('account_asset_management.'
+                                'account_asset_vehicle0')
         self.assertEquals(vehicle0.state, 'draft')
         self.assertEquals(vehicle0.purchase_value, 12000)
         self.assertEquals(vehicle0.salvage_value, 2000)
-        self.assertEquals(vehicle0.asset_value, 10000)
+        self.assertEquals(vehicle0.depreciation_base, 10000)
         self.assertEquals(len(vehicle0.depreciation_line_ids), 1)
-        ict = self.browse_ref('account_asset_management.'
-                              'account_asset_view_ict')
+        ict = self.env.ref('account_asset_management.'
+                           'account_asset_view_ict')
         # self.assertEquals(ict.purchase_value, 1500)
         # self.assertEquals(ict.salvage_value, 0)
-        self.assertEquals(ict.asset_value, 1500)
-        vehicle = self.browse_ref('account_asset_management.'
-                                  'account_asset_view_vehicle')
+        self.assertEquals(ict.depreciation_base, 1500)
+        vehicle = self.env.ref('account_asset_management.'
+                               'account_asset_view_vehicle')
         # self.assertEquals(vehicle.purchase_value, 12000)
         # self.assertEquals(vehicle.salvage_value, 2000)
-        self.assertEquals(vehicle.asset_value, 10000)
-        fa = self.browse_ref('account_asset_management.'
-                             'account_asset_view_fa')
+        self.assertEquals(vehicle.depreciation_base, 10000)
+        fa = self.env.ref('account_asset_management.'
+                          'account_asset_view_fa')
         # self.assertEquals(fa.purchase_value, 13500)
         # self.assertEquals(fa.salvage_value, 2000)
-        self.assertEquals(fa.asset_value, 11500)
+        self.assertEquals(fa.depreciation_base, 11500)
 
         #
         # I compute the depreciation boards
         #
-        self.asset_model.compute_depreciation_board(
-            self.cr, self.uid, [ict0.id, vehicle0.id])
+        ict0.compute_depreciation_board()
+        vehicle0.compute_depreciation_board()
         ict0.refresh()
         self.assertEquals(len(ict0.depreciation_line_ids), 4)
         self.assertEquals(ict0.depreciation_line_ids[1].amount, 500)
@@ -123,10 +145,10 @@ class TestAssetManagement(common.TransactionCase):
 
     def test_2_prorata_basic(self):
         """Prorata temporis depreciation basic test."""
-        asset_id = self.asset_model.create(self.cr, self.uid, {
+        asset = self.asset_model.create({
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -134,9 +156,7 @@ class TestAssetManagement(common.TransactionCase):
             'method_period': 'month',
             'prorata': True,
         })
-        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
-        self.asset_model.compute_depreciation_board(
-            self.cr, self.uid, [asset.id])
+        asset.compute_depreciation_board()
         asset.refresh()
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 47.33,
                                places=2)
@@ -156,10 +176,10 @@ class TestAssetManagement(common.TransactionCase):
     def test_3_proprata_init_prev_year(self):
         """Prorata temporis depreciation with init value in prev year."""
         # I create an asset in current year
-        asset_id = self.asset_model.create(self.cr, self.uid, {
+        asset = self.asset_model.create({
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': '%d-07-07' % (datetime.now().year - 1,),
@@ -168,17 +188,15 @@ class TestAssetManagement(common.TransactionCase):
             'prorata': True,
         })
         # I create a initial depreciation line in previous year
-        self.dl_model.create(self.cr, self.uid, {
-            'asset_id': asset_id,
+        self.dl_model.create({
+            'asset_id': asset.id,
             'amount': 325.08,
             'line_date': '%d-12-31' % (datetime.now().year - 1,),
             'type': 'depreciate',
             'init_entry': True,
         })
-        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
         self.assertEquals(len(asset.depreciation_line_ids), 2)
-        self.asset_model.compute_depreciation_board(
-            self.cr, self.uid, [asset.id])
+        asset.compute_depreciation_board()
         asset.refresh()
         # I check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 325.08,
@@ -193,10 +211,10 @@ class TestAssetManagement(common.TransactionCase):
 
     def test_4_prorata_init_cur_year(self):
         """Prorata temporis depreciation with init value in curent year."""
-        asset_id = self.asset_model.create(self.cr, self.uid, {
+        asset = self.asset_model.create({
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -204,17 +222,15 @@ class TestAssetManagement(common.TransactionCase):
             'method_period': 'month',
             'prorata': True,
         })
-        self.dl_model.create(self.cr, self.uid, {
-            'asset_id': asset_id,
+        self.dl_model.create({
+            'asset_id': asset.id,
             'amount': 279.44,
             'line_date': time.strftime('%Y-11-30'),
             'type': 'depreciate',
             'init_entry': True,
         })
-        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
         self.assertEquals(len(asset.depreciation_line_ids), 2)
-        self.asset_model.compute_depreciation_board(
-            self.cr, self.uid, [asset.id])
+        asset.compute_depreciation_board()
         asset.refresh()
         # I check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 279.44,

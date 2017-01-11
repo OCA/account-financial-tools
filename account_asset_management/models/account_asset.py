@@ -140,7 +140,7 @@ class AccountAsset(models.Model):
                         float(first_fy_asset_days) / first_fy_duration
             elif daterange_id:
                 duration_factor = self._get_fy_duration(
-                    cr, uid, daterange_id, option='years')
+                    daterange_id, option='years')
         elif daterange_id:
             fy_months = self._get_fy_duration(
                 daterange_id, option='months')
@@ -248,9 +248,9 @@ class AccountAsset(models.Model):
             # with a duration equals to calendar year
             self.env.cr.execute(
                 "SELECT id, date_start, date_end "
-                "FROM date_range r JOIN date_range_type t"
-                "ON r.type_id = t.id"
-                "WHERE r.company_id = %s"
+                "FROM date_range r JOIN date_range_type t "
+                "ON r.type_id = t.id "
+                "WHERE r.company_id = %s "
                 "ORDER BY date_stop ASC LIMIT 1", (company.id,))
             first_fy = self.env.cr.dictfetchone()
             first_fy_date_start = datetime.strptime(
@@ -300,7 +300,7 @@ class AccountAsset(models.Model):
                 if fiscalyear_lock_date > fy_range.date_end:
                     init_flag = True
                 fy_date_stop = datetime.strptime(
-                    fy_range.date_stop, '%Y-%m-%d')
+                    fy_range.date_end, '%Y-%m-%d')
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
 
@@ -609,38 +609,36 @@ class AccountAsset(models.Model):
             depreciation_base = self.purchase_value - self.salvage_value
         return depreciation_base
 
-    @api.depends('purchase_value', 'salvage_value', 'parent_id')
+    @api.depends('purchase_value', 'salvage_value', 'child_ids',
+                 'child_ids.write_date',
+                 'child_ids.depreciation_base')
     @api.multi
     def _depreciation_base(self):
         for asset in self:
-            if asset.type == 'normal':
-                self.depreciation_base = asset._depreciation_base_compute()
-            else:
-                def _value_get(record):
-                    depreciation_base = asset._depreciation_base_compute()
-                    for rec in record.child_ids:
-                        depreciation_base += \
-                            rec.type == 'normal' and \
-                            rec._depreciation_base_compute() \
-                            or _value_get(rec)
-                    return depreciation_base
-                asset.depreciation_base = _value_get(asset)
+            depreciation_base = asset._depreciation_base_compute()
+            if asset.type != 'normal':
+                for rec in asset.child_ids:
+                    depreciation_base += rec.depreciation_base
+            asset.depreciation_base = depreciation_base
 
     @api.multi
     @api.depends('purchase_value', 'salvage_value',
                  'depreciation_line_ids.amount',
                  'depreciation_line_ids.init_entry',
-                 'depreciation_line_ids.move_id')
+                 'depreciation_line_ids.move_id', 'child_ids.write_date',
+                 'child_ids.depreciation_base')
     def _compute_depreciation(self):
         for asset in self:
-            if asset.type != 'view' and self.ids:
+            child_ids = self.search([('parent_id', 'child_of', [asset.id]),
+                                     ('type', '=', 'normal')])
+            if child_ids:
                 self.env.cr.execute(
                     "SELECT COALESCE(SUM(amount),0.0) AS amount "
                     "FROM account_asset_line "
                     "WHERE asset_id in %s "
                     "AND type in ('depreciate','remove') "
                     "AND (init_entry=TRUE OR move_check=TRUE)",
-                    (tuple(asset.ids),))
+                    (tuple(child_ids.ids),))
                 value_depreciated = self.env.cr.fetchone()[0]
             else:
                 value_depreciated = 0.0
