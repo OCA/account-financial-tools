@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
 
     <record model="ir.ui.view" id="view_asset_asset_report_tree">
@@ -73,7 +73,7 @@
       <field name="name">Assets Analysis</field>
       <field name="res_model">asset.asset.report</field>
       <field name="view_type">form</field>
-      <field name="view_mode">tree,graph</field>
+      <field name="view_mode">tree,pivot,graph</field>
       <field name="search_view_id" ref="view_asset_asset_report_search"/>
       <field name="context">{'search_default_year':1,'search_default_this_month':1,'search_default_asset_category':1, 'search_default_posted':1, 'group_by':[], 'group_by_no_leaf':1}</field>
       <field name="help" type="html">
@@ -87,6 +87,6 @@
 
     <menuitem action="action_asset_asset_report"
               id="menu_action_asset_asset_report"
-              parent="account.menu_finance_reporting"/>
+              parent="account.account_reports_business_intelligence_menu"/>
   </data>
-</openerp>
+</odoo>

@@ -38,7 +38,7 @@
         'views/account_asset_view.xml',
         'views/account_account.xml',
         'views/account_invoice.xml',
-#        'report/account_asset_report_view.xml',
+        'report/account_asset_report_view.xml',
         'views/res_config_view.xml',
         'wizard/wizard_asset_compute_view.xml',
         'wizard/account_asset_remove_view.xml',
