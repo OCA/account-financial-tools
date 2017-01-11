@@ -217,10 +217,10 @@ class AccountAssetRemove(models.TransientModel):
         move_line_vals = {
             'name': asset.name,
             'account_id': profile.account_asset_id.id,
-            'debit': asset.depreciation_base < 0 and \
-                     -asset.depreciation_base or 0.0,
-            'credit': asset.depreciation_base > 0 and \
-                      asset.depreciation_base or 0.0,
+            'debit': (asset.depreciation_base < 0 and -asset
+                      .depreciation_base or 0.0),
+            'credit': (asset.depreciation_base > 0 and asset
+                       .depreciation_base or 0.0),
             'partner_id': partner_id,
             'asset_id': asset.id
         }

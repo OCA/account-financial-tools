@@ -29,7 +29,7 @@ class AssetAssetReport(models.Model):
     _name = "asset.asset.report"
     _description = "Assets Analysis"
     _auto = False
-    
+
     name = fields.Char('Year', size=16, required=False, readonly=True)
     date_start = fields.Date('Asset Start Date', readonly=True)
     date_remove = fields.Date('Asset Removal Date', readonly=True)

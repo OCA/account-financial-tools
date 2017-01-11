@@ -171,7 +171,7 @@ class AccountMoveLine(models.Model):
                     'company_id': vals.get('company_id') or aml.company_id.id,
                 }
                 asset_vals = asset_obj.play_onchanges(
-                asset_vals, ['profile_id'])
+                    asset_vals, ['profile_id'])
                 ctx = dict(self._context, create_asset_from_move_line=True,
                            move_id=aml.move_id.id)
                 asset = asset_obj.with_context(ctx).create(asset_vals)
