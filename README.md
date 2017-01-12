@@ -30,6 +30,7 @@ addon | version | summary
 [account_check_deposit](account_check_deposit/) | 8.0.0.1.0 | Manage deposit of checks to the bank
 [account_compute_tax_amount](account_compute_tax_amount/) | 8.0.1.0.0 | Recompute tax_amount
 [account_constraints](account_constraints/) | 8.0.1.1.0 | Account Constraints
+[account_cost_center](account_cost_center/) | 8.0.1.0.0 | Cost center information for invoice lines
 [account_credit_control](account_credit_control/) | 8.0.0.3.0 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 | Credit control dunning fees
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 | Move in draft state by default
