@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-01-06 23:16+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es_ES/)\n"
@@ -160,7 +160,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: currency_rate_update
 #: view:currency.rate.update.service:0

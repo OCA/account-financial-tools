@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"POT-Creation-Date: 2017-01-06 23:15+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/gl/)\n"
@@ -280,7 +280,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0

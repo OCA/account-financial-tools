@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:16+0000\n"
+"POT-Creation-Date: 2017-01-06 23:15+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -771,7 +771,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.history,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Utilizador"
 
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
@@ -904,7 +904,7 @@ msgstr ""
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr ""
+msgstr "Concluído"
 
 #. module: account_asset_management
 #: field:account.account,asset_category_id:0
@@ -1196,7 +1196,7 @@ msgstr ""
 #: field:account.asset.depreciation.line,line_date:0
 #: field:account.asset.history,date:0
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:182

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:16+0000\n"
-"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"POT-Creation-Date: 2017-01-06 23:15+0000\n"
+"PO-Revision-Date: 2017-01-11 15:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -671,7 +671,7 @@ msgstr ""
 #: view:account.asset.remove:0 view:asset.depreciation.confirmation.wizard:0
 #: view:asset.modify:0
 msgid "or"
-msgstr ""
+msgstr "tai"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -853,7 +853,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 field:account.asset.asset,history_ids:0
 msgid "History"
-msgstr ""
+msgstr "Historia"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
@@ -1047,7 +1047,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Piväkirja"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
@@ -1197,7 +1197,7 @@ msgstr ""
 #: field:account.asset.depreciation.line,line_date:0
 #: field:account.asset.history,date:0
 msgid "Date"
-msgstr ""
+msgstr "Päivämäärä"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:182

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-01-06 23:15+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt/)\n"
@@ -825,7 +825,7 @@ msgstr ""
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
-msgstr ""
+msgstr "Concluído"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,invoice_id:0
