@@ -73,6 +73,11 @@ class CreditControlRun(models.Model):
         readonly=True,
         copy=False,
     )
+    company_id = fields.Many2one(
+        'res.company', string='Company', required=True,
+        default=lambda self: self.env['res.company']._company_default_get(
+            'credit.control.run')
+    )
 
     @api.multi
     def _check_run_date(self, controlling_date):

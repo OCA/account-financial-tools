@@ -34,6 +34,7 @@
           <sheet>
             <group>
               <field name="date"/>
+              <field name="company_id"/>
             </group>
             <notebook>
               <page string="Policies">
