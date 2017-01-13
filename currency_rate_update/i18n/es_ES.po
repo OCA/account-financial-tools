@@ -3,12 +3,27 @@
 # * currency_rate_update
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Hotellook, 2014
+# Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# John Toro <johntoro@gmail.com>, 2015
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Miku Laitinen <miku.laitinen@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-24 14:29+0000\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-13 09:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +58,7 @@ msgid "Bank of Mexico"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:262
+#: code:addons/currency_rate_update/model/currency_rate_update.py:265
 #, python-format
 msgid "Base currency rate should be 1.00!"
 msgstr ""
@@ -51,7 +66,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
@@ -110,8 +125,13 @@ msgid "Day(s)"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:94
+#: field:currency.rate.update.service,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
 #, python-format
 msgid "Error !"
 msgstr ""
@@ -122,13 +142,13 @@ msgid "European Central Bank"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:77
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:98
 #, python-format
 msgid "Exchange data format error for Bank of Canada - %s !"
 msgstr ""
@@ -155,6 +175,11 @@ msgstr ""
 #: code:addons/currency_rate_update/model/currency_rate_update.py:152
 #, python-format
 msgid "Interval number must be >= 0"
+msgstr ""
+
+#. module: currency_rate_update
+#: field:currency.rate.update.service,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: currency_rate_update
@@ -189,6 +214,11 @@ msgid "Month(s)"
 msgstr ""
 
 #. module: currency_rate_update
+#: field:res.company,multi_company_currency_enable:0
+msgid "Multi company currency"
+msgstr ""
+
+#. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "National Bank of Poland"
 msgstr ""
@@ -209,7 +239,7 @@ msgid "Refresh currencies"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:260
+#: code:addons/currency_rate_update/model/currency_rate_update.py:263
 #, python-format
 msgid "There is no base currency set!"
 msgstr ""
@@ -230,12 +260,19 @@ msgid "Week(s)"
 msgstr ""
 
 #. module: currency_rate_update
+#: help:res.company,multi_company_currency_enable:0
+msgid ""
+"When this option is unchecked it will allow users to set a distinct currency"
+" updates on each company."
+msgstr ""
+
+#. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0
 msgid "Yahoo Finance"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:234
+#: code:addons/currency_rate_update/model/currency_rate_update.py:237
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"

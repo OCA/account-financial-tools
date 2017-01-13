@@ -11,6 +11,7 @@
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # David10000 <gameness@naver.com>, 2014
@@ -45,8 +46,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-13 09:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +130,7 @@ msgstr "ID"
 #. module: account_netting
 #: field:account.move.make.netting,journal:0
 msgid "Journal"
-msgstr ""
+msgstr "Piväkirja"
 
 #. module: account_netting
 #: field:account.move.make.netting,__last_update:0
@@ -183,4 +184,4 @@ msgstr ""
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid "or"
-msgstr ""
+msgstr "tai"

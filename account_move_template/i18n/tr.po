@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-30 22:03+0000\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Tutar"
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
@@ -284,7 +284,7 @@ msgstr "Durum"
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
 msgid "Tax"
-msgstr ""
+msgstr "Vergi"
 
 #. module: account_move_template
 #: field:account.move.template.line,template_id:0

@@ -1,0 +1,145 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_cost_center
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 03:43+0000\n"
+"PO-Revision-Date: 2017-01-12 03:43+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Hebrew (https://www.transifex.com/oca/teams/23907/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_cost_center
+#: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to add a new event.\n"
+"                </p>\n"
+"                <p>\n"
+"                    Cost centers provide an extra analytic dimension\n"
+"                </p>\n"
+"            "
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_cost_center
+msgid "Account Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: view:account.invoice.report:account_cost_center.view_account_invoice_report_search
+#: field:account.invoice.report,account_analytic_id:0
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,code:0
+msgid "Code"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.invoice,cost_center_id:0
+#: field:account.invoice.line,cost_center_id:0
+#: view:account.invoice.report:account_cost_center.view_account_invoice_report_search
+#: field:account.invoice.report,cost_center_id:0
+#: field:account.move.line,cost_center_id:0
+msgid "Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: view:account.cost.center:account_cost_center.account_cost_center_filter
+#: view:account.cost.center:account_cost_center.account_cost_center_tree
+#: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
+#: model:ir.ui.menu,name:account_cost_center.cost_center_menu
+msgid "Cost Centers"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,create_uid:0
+msgid "Created by"
+msgstr "נוצר על ידי"
+
+#. module: account_cost_center
+#: field:account.cost.center,create_date:0
+msgid "Created on"
+msgstr "נוצר ב-"
+
+#. module: account_cost_center
+#: help:account.invoice,cost_center_id:0
+msgid "Default Cost Center"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,display_name:0
+msgid "Display Name"
+msgstr "השם המוצג"
+
+#. module: account_cost_center
+#: field:account.cost.center,id:0
+msgid "ID"
+msgstr "מזהה"
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_invoice_line
+msgid "Invoice Line"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model,name:account_cost_center.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,__last_update:0
+msgid "Last Modified on"
+msgstr "תאריך שינוי אחרון"
+
+#. module: account_cost_center
+#: field:account.cost.center,write_uid:0
+msgid "Last Updated by"
+msgstr "עודכן לאחרונה על ידי"
+
+#. module: account_cost_center
+#: field:account.cost.center,write_date:0
+msgid "Last Updated on"
+msgstr "עודכן לאחרונה על"
+
+#. module: account_cost_center
+#: view:account.cost.center:account_cost_center.account_cost_center_filter
+msgid "Name/Code"
+msgstr ""
+
+#. module: account_cost_center
+#: field:account.cost.center,name:0
+msgid "Title"
+msgstr "כותרת"
+
+#. module: account_cost_center
+#: view:account.invoice:account_cost_center.invoice_form_inherit
+#: view:account.invoice:account_cost_center.invoice_supplier_form_inherit
+msgid "cost_center_id"
+msgstr ""

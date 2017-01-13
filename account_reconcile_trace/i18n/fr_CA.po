@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-23 23:20+0000\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-12 03:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: French (Canada) (https://www.transifex.com/oca/teams/23907/fr_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgstr ""
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,down_date:0
