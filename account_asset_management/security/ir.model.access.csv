@@ -10,3 +10,4 @@ access_account_asset_line_user,account.asset.line,model_account_asset_line,accou
 access_account_asset_line_manager,account.asset.line,model_account_asset_line,account.group_account_manager,1,1,1,1
 access_account_asset_recompute_trigger_user,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_user,1,1,1,1
 access_account_asset_recompute_trigger_manager,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_manager,1,1,1,1
+access_asset_asset_report,access_asset_asset_report,model_asset_asset_report,account.group_account_user,1,0,0,0
