@@ -196,7 +196,7 @@ class AccountAssetRemove(models.TransientModel):
 
     @api.multi
     def _get_removal_data(self, asset, residual_value):
-        self.ensure_one
+        self.ensure_one()
         move_lines = []
         partner_id = asset.partner_id and asset.partner_id.id or False
         profile = asset.profile_id
