@@ -2,13 +2,12 @@
 # Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestAccountInvoiceCurrency(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super(TestAccountInvoiceCurrency, self).setUp(*args, **kwargs)
-
+    def setUp(self):
+        super(TestAccountInvoiceCurrency, self).setUp()
         type_revenue = self.env.ref('account.data_account_type_revenue')
         type_payable = self.env.ref('account.data_account_type_payable')
         tax_group_taxes = self.env.ref('account.tax_group_taxes')
