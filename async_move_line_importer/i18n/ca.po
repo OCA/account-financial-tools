@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-01-13 23:23+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
@@ -127,7 +127,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0

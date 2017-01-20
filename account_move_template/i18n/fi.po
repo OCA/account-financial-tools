@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 23:15+0000\n"
+"POT-Creation-Date: 2017-01-13 23:22+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fi/)\n"
@@ -77,7 +77,7 @@ msgstr ""
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Debet"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:122
@@ -118,7 +118,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Yritys"
 
 #. module: account_move_template
 #: view:wizard.select.move.template.line:0
@@ -197,7 +197,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Määrä"
 
 #. module: account_move_template
 #: view:account.move.template:0
@@ -210,7 +210,7 @@ msgstr ""
 #: code:addons/account_move_template/account_document_template.py:90
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
