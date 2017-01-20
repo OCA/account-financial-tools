@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"POT-Creation-Date: 2017-01-13 23:25+0000\n"
+"PO-Revision-Date: 2017-01-17 19:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Import"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
@@ -746,7 +746,7 @@ msgstr "Factura"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
 msgid "Invoice Line"
-msgstr ""
+msgstr "Línia factura"
 
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
@@ -855,7 +855,7 @@ msgstr "Mes"
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0

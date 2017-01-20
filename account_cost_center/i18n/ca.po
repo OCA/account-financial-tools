@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-12 03:43+0000\n"
+"POT-Creation-Date: 2017-01-13 23:26+0000\n"
+"PO-Revision-Date: 2017-01-13 23:26+0000\n"
 "Last-Translator: Carles Antoli <carlesantoli@hotmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: view:account.invoice.report:account_cost_center.view_account_invoice_report_search
 #: field:account.invoice.report,account_analytic_id:0
 msgid "Analytic Account"
-msgstr ""
+msgstr "Compte analític"
 
 #. module: account_cost_center
 #: field:account.cost.center,code:0
@@ -102,7 +102,7 @@ msgstr "Factura"
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_line
 msgid "Invoice Line"
-msgstr ""
+msgstr "Línia factura"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report

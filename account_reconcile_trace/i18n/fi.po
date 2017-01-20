@@ -52,7 +52,7 @@ msgstr ""
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Amount"
-msgstr ""
+msgstr "Määrä"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,down_amount:0
