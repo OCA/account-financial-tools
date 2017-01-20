@@ -29,8 +29,9 @@ class CreditControlRun(models.Model):
     """ Credit Control run generate all credit control lines and reject """
 
     _name = "credit.control.run"
-    _rec_name = 'date desc'
+    _rec_name = 'date'
     _description = "Credit control line generator"
+    _order = 'date desc'
 
     date = fields.Date(string='Controlling Date', required=True,
                        readonly=True,
