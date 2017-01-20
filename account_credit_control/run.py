@@ -29,7 +29,7 @@ class CreditControlRun(models.Model):
     """ Credit Control run generate all credit control lines and reject """
 
     _name = "credit.control.run"
-    _rec_name = 'date'
+    _rec_name = 'date desc'
     _description = "Credit control line generator"
 
     date = fields.Date(string='Controlling Date', required=True,
