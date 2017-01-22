@@ -3,13 +3,33 @@
 # * account_move_template
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Alexsandro Haag <alex@hgsoft.com.br>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Gustavo Lepri <gustavolepri@gmail.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Mohamed HABOU <m.habou@agoradeveloppement.com>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-13 09:28+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +41,7 @@ msgstr ""
 #: field:account.move.template.line,account_id:0
 #: field:wizard.select.move.template.line,account_id:0
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
@@ -53,7 +73,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
@@ -105,6 +125,16 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_template
 #: field:account.document.template,id:0
 #: field:account.document.template.line,id:0 field:account.move.template,id:0
 #: field:account.move.template.line,id:0
@@ -136,6 +166,16 @@ msgstr ""
 #: view:account.move.template.line:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
 msgstr ""
+
+#. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación"
 
 #. module: account_move_template
 #: field:account.document.template,write_uid:0
@@ -224,7 +264,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_move_template
 #: field:account.document.template.line,python_code:0
@@ -242,7 +282,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0

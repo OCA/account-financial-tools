@@ -3,13 +3,19 @@
 # * account_renumber
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012
+# Hotellook, 2014
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -31,12 +37,17 @@ msgstr "Отмяна"
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Създадено от"
 
 #. module: account_renumber
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Създадено на"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Име за Показване"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -56,7 +67,7 @@ msgstr ""
 #. module: account_renumber
 #: field:wizard.renumber,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
@@ -85,14 +96,19 @@ msgid "Journals to renumber"
 msgstr ""
 
 #. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Последно обновено на"
+
+#. module: account_renumber
 #: field:wizard.renumber,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Последно обновено от"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Последно обновено на"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89
@@ -154,7 +170,7 @@ msgstr ""
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "or"
-msgstr ""
+msgstr "или"
 
 #. module: account_renumber
 #: field:wizard.renumber,state:0

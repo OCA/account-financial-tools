@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-28 00:59+0000\n"
-"PO-Revision-Date: 2016-05-31 13:38+0000\n"
+"POT-Creation-Date: 2016-12-23 23:21+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: account_reversal
 #: help:account.move,to_be_reversed:0
@@ -55,13 +55,13 @@ msgstr "Kreirano"
 #. module: account_reversal
 #: field:account.move.reverse,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
 "Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the next period."
+" the first day of the period following the period of the move to reverse."
 msgstr ""
 
 #. module: account_reversal
@@ -72,7 +72,7 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_reversal
 #: help:account.move.reverse,period_id:0
@@ -99,17 +99,17 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: account_reversal
 #: field:account.move.reverse,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_reversal
 #: field:account.move.reverse,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: account_reversal
 #: help:account.move.reverse,move_prefix:0
@@ -128,12 +128,17 @@ msgid ""
 msgstr ""
 
 #. module: account_reversal
+#: field:account.move.reverse,reconcile:0
+msgid "Reconcile"
+msgstr ""
+
+#. module: account_reversal
 #: field:account.move.reverse,date:0
 msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:114
+#: code:addons/account_reversal/wizard/account_move_reverse.py:113
 #, python-format
 msgid "Reversal Entries"
 msgstr ""
@@ -173,13 +178,13 @@ msgid "To Be Reversed"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:82
+#: code:addons/account_reversal/account_reversal.py:84
 #, python-format
 msgid "Wrong company Journal is %s but we have %s"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:85
+#: code:addons/account_reversal/account_reversal.py:87
 #, python-format
 msgid "Wrong company Period is %s but we have %s"
 msgstr ""

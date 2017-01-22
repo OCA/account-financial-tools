@@ -1,0 +1,121 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_credit_control_dunning_fees
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-10-11 09:50+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Danish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/da/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_line
+msgid "A credit control line"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
+msgid "A credit control policy level"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.line,balance_due_total:0
+msgid "Balance due with fees"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,create_uid:0
+msgid "Created by"
+msgstr "Oprettet af"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,create_date:0
+msgid "Created on"
+msgstr "Oprettet den"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
+msgid "Credit control line generator"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: help:credit.control.policy.level,dunning_currency_id:0
+msgid ""
+"Currency of the dunning fees. If empty, it takes the company's currency."
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,display_name:0
+msgid "Display Name"
+msgstr "Vist navn"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.line,dunning_fees_amount:0
+#: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
+#: view:website:account_credit_control.report_credit_control_summary_document
+msgid "Fees"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fixed_amount:0
+msgid "Fees Fixed Amount"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_product_id:0
+msgid "Fees Product"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_currency_id:0
+msgid "Fees currency"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: selection:credit.control.policy.level,dunning_fees_type:0
+msgid "Fixed"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,id:0
+msgid "ID"
+msgstr "Id"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,__last_update:0
+msgid "Last Modified on"
+msgstr "Sidst ændret den"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,write_uid:0
+msgid "Last Updated by"
+msgstr "Sidst opdateret af"
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.dunning.fees.computer,write_date:0
+msgid "Last Updated on"
+msgstr "Sidst opdateret den"
+
+#. module: account_credit_control_dunning_fees
+#: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy
+msgid "Mail and reporting"
+msgstr ""
+
+#. module: account_credit_control_dunning_fees
+#: field:credit.control.policy.level,dunning_fees_type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: account_credit_control_dunning_fees
+#: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_communication
+msgid "credit control communication"
+msgstr ""

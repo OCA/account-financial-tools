@@ -3,10 +3,12 @@
 # * account_asset_management
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2013,2015-2016
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2013
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2015-2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
@@ -18,13 +20,15 @@
 # SaFi J. <safi2266@gmail.com>, 2015
 # Stéphane Bidoul <sbi@skynet.be>, 2015
 # Yael Terrettaz, 2015
+# yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 08:25+0000\n"
-"PO-Revision-Date: 2016-02-21 21:15+0000\n"
-"Last-Translator: Ahmet Altınışık <aaltinisik@altinkaya.com.tr>\n"
+"POT-Creation-Date: 2017-01-12 03:43+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,7 +89,7 @@ msgstr "Buraya iç not ekleyin..."
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Tutar"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
@@ -312,7 +316,7 @@ msgstr "Vazgeç"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -437,7 +441,7 @@ msgstr "Oluşturulan Demirbaş Hareketleri"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -449,7 +453,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturuldu"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -557,6 +561,19 @@ msgstr "Amortisman Yöntemi"
 #: field:account.asset.depreciation.line,name:0
 msgid "Depreciation Name"
 msgstr "Amortisman Adı"
+
+#. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Görünen İsim"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -686,7 +703,7 @@ msgstr "Geçmiş adı"
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -778,6 +795,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Son değişiklik"
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -787,7 +817,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Son güncelleyen"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -799,7 +829,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Son güncelleme"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -899,12 +929,12 @@ msgstr "Ana Demirbaş"
 #. module: account_asset_management
 #: field:account.asset.asset,parent_left:0
 msgid "Parent Left"
-msgstr ""
+msgstr "Sol Ebeveyn"
 
 #. module: account_asset_management
 #: field:account.asset.asset,parent_right:0
 msgid "Parent Right"
-msgstr ""
+msgstr "Sağ Ebeveyn"
 
 #. module: account_asset_management
 #: field:account.asset.asset,partner_id:0
@@ -1089,7 +1119,7 @@ msgstr "Taslak Durumu Atla"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Durum"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
@@ -1183,7 +1213,7 @@ msgstr ""
 #: field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: account_asset_management
 #: field:asset.asset.report,unposted_value:0

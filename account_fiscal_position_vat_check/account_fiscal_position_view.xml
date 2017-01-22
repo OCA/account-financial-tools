@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-    Copyright (C) 2013-2014 Akretion (http://www.akretion.com/)
-    @author Alexis de Lattre <alexis.delattre@akretion.com>
-    The licence is in the file __openerp__.py
+  © 2013-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 
 <openerp>

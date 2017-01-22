@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-28 00:59+0000\n"
-"PO-Revision-Date: 2016-05-31 13:38+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktivan"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
@@ -73,7 +73,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
@@ -185,7 +185,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,display_name:0
 #: field:wizard.update.charts.accounts.tax.code,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -282,7 +282,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
@@ -311,7 +311,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,__last_update:0
 #: field:wizard.update.charts.accounts.tax.code,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -321,7 +321,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -331,7 +331,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart

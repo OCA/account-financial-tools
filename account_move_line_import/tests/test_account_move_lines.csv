@@ -1,0 +1,6 @@
+name;partner;account;date_maturity;debit;credit;;Comments
+Balance Suppliers;;X1111;;5000,00;0,00;;Balance suppliers Opening Entry
+PI14/0101;ASUSTeK;X1111;2015-01-12;0,00;3500,00;;Open Invoice from supplier ASUSTeK
+PI14/0250;Axelor;X1111;2015-02-01;0,00;1500,00;;Open Invoice from supplier with reference '032/0029'
+;;;;;;;
+#;;;;5000,00;5000,00;;

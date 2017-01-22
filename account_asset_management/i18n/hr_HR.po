@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-28 00:59+0000\n"
-"PO-Revision-Date: 2016-05-31 13:38+0000\n"
+"POT-Creation-Date: 2017-01-12 03:43+0000\n"
+"PO-Revision-Date: 2017-01-13 09:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktivan"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -292,7 +292,7 @@ msgstr ""
 #: view:asset.depreciation.confirmation.wizard:account_asset_management.view_asset_depreciation_confirmation_wizard
 #: view:asset.modify:account_asset_management.asset_modify_form
 msgid "Cancel"
-msgstr ""
+msgstr "Otkaži"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -440,7 +440,7 @@ msgstr "Kreirano"
 #: field:account.asset.depreciation.line,line_date:0
 #: field:account.asset.history,date:0
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
@@ -554,7 +554,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,display_name:0
 #: field:asset.modify,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -670,7 +670,7 @@ msgstr ""
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
 #: field:account.asset.asset,history_ids:0
 msgid "History"
-msgstr ""
+msgstr "Povijest"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
@@ -684,7 +684,7 @@ msgstr ""
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -733,7 +733,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Račun"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
@@ -786,7 +786,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,__last_update:0
 #: field:asset.modify,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
@@ -798,7 +798,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -810,7 +810,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -921,7 +921,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0

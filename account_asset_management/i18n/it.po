@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-23 00:52+0000\n"
-"PO-Revision-Date: 2016-05-12 10:25+0000\n"
+"POT-Creation-Date: 2016-12-16 23:19+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -548,6 +548,19 @@ msgid "Depreciation Name"
 msgstr "Nome Ammortamento"
 
 #. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Nome da visualizzare"
+
+#. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
 msgstr "Fatto"
@@ -767,6 +780,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -820,7 +846,7 @@ msgstr "Modifica Immobilizzazione"
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Mese"
 
 #. module: account_asset_management
 #: field:account.asset.category,name:0

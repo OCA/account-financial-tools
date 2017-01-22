@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # njeudy <njeudy@tuxservices.com>, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 05:08+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,6 +191,16 @@ msgstr "Omogoča ročno spreminjanje kreditnega nivoja"
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr "Med razpošiljanjem e-pošte je prišlo do napake."
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_1
+msgid "B2B Debtors - (test)"
+msgstr "B2B dolžniki - (test)"
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_2
+msgid "B2C Debtors - (test)"
+msgstr "B2C dolžniki - (test)"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:311
@@ -677,6 +688,7 @@ msgstr "Dopis"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Nivo"
@@ -798,6 +810,11 @@ msgstr "Postavke premika, na katere vplivamo"
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
 msgstr "Naziv"
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_3
+msgid "New Debtors - (test)"
+msgstr "Novi dolžniki - (test)"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
@@ -1078,6 +1095,7 @@ msgid "Source"
 msgstr "Vir"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "Stanje"

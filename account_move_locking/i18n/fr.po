@@ -3,12 +3,23 @@
 # * account_move_locking
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sofce Dimitrijeva <sofce@eskon.com.mk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-07-06 09:59+0000\n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-16 21:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -43,6 +54,11 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: account_move_locking
+#: field:lock.account.move,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: account_move_locking
 #: field:lock.account.move,id:0
 msgid "ID"
 msgstr "ID"
@@ -51,6 +67,11 @@ msgstr "ID"
 #: field:lock.account.move,journal_ids:0
 msgid "Journal"
 msgstr "Journal"
+
+#. module: account_move_locking
+#: field:lock.account.move,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: account_move_locking
 #: field:lock.account.move,write_uid:0

@@ -3,8 +3,10 @@
 # * account_credit_control
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alexis de Lattre <alexis@via.ecp.fr>, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
@@ -21,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 01:12+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -484,7 +486,7 @@ msgstr "Paramétrages jours de retard"
 #: field:credit.control.printer,display_name:0
 #: field:credit.control.run,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom à afficher"
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
@@ -649,7 +651,7 @@ msgstr "Lignes de relance"
 #: field:credit.control.printer,__last_update:0
 #: field:credit.control.run,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -686,6 +688,7 @@ msgstr "Lettre"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Niveau"
@@ -1087,6 +1090,7 @@ msgid "Source"
 msgstr "Source"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "État"

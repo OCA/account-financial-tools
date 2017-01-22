@@ -3,13 +3,28 @@
 # * account_check_deposit
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# Dimitrios Glentadakis <dglent@gmail.com>, 2012-2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Glentadakis Dimitrios <dglent@gmail.com>, 2009-2011
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# nikos_pap <231036448@freemail.gr>, 2008-2009
+# Paolo Valier, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Thanos Kyritsis <djart@hellug.gr>, 2001
+# Thomas A. Jaeger, 2015
+# Νίκος Νύκταρης (Nick Niktaris) <niktarin@yahoo.com>, 2003
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-03 09:18+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-01-13 23:26+0000\n"
+"PO-Revision-Date: 2017-01-17 12:11+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,14 +43,9 @@ msgid "Account for Check Deposits"
 msgstr ""
 
 #. module: account_check_deposit
-#: constraint:account.check.deposit:0
-msgid "All the checks of the deposit must be in the currency of the deposit"
-msgstr ""
-
-#. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Amount"
-msgstr ""
+msgstr "Määrä"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
@@ -46,7 +56,7 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Pankkitili"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -76,14 +86,14 @@ msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:194
-#: code:addons/account_check_deposit/account_deposit.py:216
+#: code:addons/account_check_deposit/models/account_deposit.py:180
+#: code:addons/account_check_deposit/models/account_deposit.py:202
 #, python-format
 msgid "Check Deposit %s"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:203
+#: code:addons/account_check_deposit/models/account_deposit.py:189
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -128,12 +138,6 @@ msgid "Company"
 msgstr "Yritys"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:252
-#, python-format
-msgid "Configuration Error:"
-msgstr ""
-
-#. module: account_check_deposit
 #: field:account.check.deposit,create_uid:0
 msgid "Created by"
 msgstr "Luonut"
@@ -157,7 +161,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
 msgid "Date"
-msgstr ""
+msgstr "Päivämäärä"
 
 #. module: account_check_deposit
 #: view:website:account_check_deposit.report_checkdeposit
@@ -176,29 +180,21 @@ msgid "Deposit Date"
 msgstr ""
 
 #. module: account_check_deposit
+#: field:account.check.deposit,display_name:0
+msgid "Display Name"
+msgstr "Nimi"
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Done"
-msgstr ""
+msgstr "Valmis"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr ""
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:159
-#, python-format
-msgid "Error!"
-msgstr ""
-
-#. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:129
-#: code:addons/account_check_deposit/account_deposit.py:140
-#, python-format
-msgid "Error:"
-msgstr ""
+msgstr "Luonnos"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -211,10 +207,15 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_check_deposit
+#: help:account.check.deposit,journal_default_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr ""
+
+#. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: field:account.check.deposit,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Piväkirja"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
@@ -225,6 +226,11 @@ msgstr ""
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Items"
 msgstr ""
+
+#. module: account_check_deposit
+#: field:account.check.deposit,__last_update:0
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0
@@ -247,7 +253,7 @@ msgid "List of checks:"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:253
+#: code:addons/account_check_deposit/models/account_deposit.py:232
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
 msgstr ""
@@ -255,7 +261,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
@@ -280,11 +286,11 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
 msgid "Status"
-msgstr ""
+msgstr "Tila"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:130
-#: code:addons/account_check_deposit/account_deposit.py:141
+#: code:addons/account_check_deposit/models/account_deposit.py:123
+#: code:addons/account_check_deposit/models/account_deposit.py:133
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -292,7 +298,7 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/account_deposit.py:160
+#: code:addons/account_check_deposit/models/account_deposit.py:145
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "

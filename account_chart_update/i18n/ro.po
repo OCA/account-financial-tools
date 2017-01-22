@@ -3,12 +3,47 @@
 # * account_chart_update
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015-2016
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Chul Park <parkchul@nate.com>, 2015
+# David10000 <gameness@naver.com>, 2014
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Gil <gedwarp@gmail.com>, 2014
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# kmooc <shevious@gmail.com>, 2015
+# Hongseob Lee <shevreg@yahoo.com>, 2015
+# Hotellook, 2014
+# jeon <bluerespect@nate.com>, 2014
+# JiyeonLee <leejiyeon00@gmail.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013
+# Kevin Min <gr326887@graded.br>, 2015
+# KimKyudong <choemh@nate.com>, 2014
+# mariana1201 <gogo3135@naver.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Nicole <dlruddk1112@gmail.com>, 2014
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Pope, 2014
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sarina Canelake <sarina@edx.org>, 2014
+# Seok Jun Yoon <fake2real@dctribe.com>, 2015
+# shin2012 <shin2013@gmail.com>, 2014
+# Sofce Dimitrijeva <sofce@eskon.com.mk>, 2013
+# Sujin Lee <sujinlee.me@gmail.com>, 2014
+# Sunah Lim <whitetree70@snu.ac.kr>, 2013
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 15:38+0000\n"
-"PO-Revision-Date: 2016-03-21 16:00+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +160,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_uid:0
 #: field:wizard.update.charts.accounts.tax.code,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat de"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,create_date:0
@@ -135,7 +170,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_date:0
 #: field:wizard.update.charts.accounts.tax.code,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat la"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
@@ -166,6 +201,26 @@ msgstr ""
 #, python-format
 msgid "Deactivated %d taxes\n"
 msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_tax_codes:0
+msgid "Deactivated tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_taxes:0
+msgid "Deactivated taxes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,display_name:0
+#: field:wizard.update.charts.accounts.account,display_name:0
+#: field:wizard.update.charts.accounts.financial.report,display_name:0
+#: field:wizard.update.charts.accounts.fiscal.position,display_name:0
+#: field:wizard.update.charts.accounts.tax,display_name:0
+#: field:wizard.update.charts.accounts.tax.code,display_name:0
+msgid "Display Name"
+msgstr "Nume Afişat"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -262,7 +317,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
@@ -284,6 +339,16 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,__last_update:0
+#: field:wizard.update.charts.accounts.account,__last_update:0
+#: field:wizard.update.charts.accounts.financial.report,__last_update:0
+#: field:wizard.update.charts.accounts.fiscal.position,__last_update:0
+#: field:wizard.update.charts.accounts.tax,__last_update:0
+#: field:wizard.update.charts.accounts.tax.code,__last_update:0
+msgid "Last Modified on"
+msgstr "Ultima actualizare în"
+
+#. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
 #: field:wizard.update.charts.accounts.account,write_uid:0
 #: field:wizard.update.charts.accounts.financial.report,write_uid:0
@@ -291,7 +356,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualizare făcută de"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -301,7 +366,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizare la"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -332,8 +397,28 @@ msgid "Name or description not found."
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_accounts:0
+msgid "New accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_fps:0
+msgid "New fiscal positions"
+msgstr ""
+
+#. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax.code,type:0
 msgid "New tax code"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_tax_codes:0
+msgid "New tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_taxes:0
+msgid "New taxes"
 msgstr ""
 
 #. module: account_chart_update
@@ -813,6 +898,16 @@ msgid "Updated account %s.\n"
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_accounts:0
+msgid "Updated accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_fps:0
+msgid "Updated fiscal positions"
+msgstr ""
+
+#. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
 #, python-format
 msgid "Updated tax %s.\n"
@@ -827,6 +922,16 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:946
 #, python-format
 msgid "Updated tax code %s.\n"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax_codes:0
+msgid "Updated tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_taxes:0
+msgid "Updated taxes"
 msgstr ""
 
 #. module: account_chart_update

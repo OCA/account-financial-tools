@@ -3,12 +3,26 @@
 # * account_chart_update
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 15:38+0000\n"
-"PO-Revision-Date: 2016-03-21 16:00+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +139,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_uid:0
 #: field:wizard.update.charts.accounts.tax.code,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,create_date:0
@@ -135,7 +149,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_date:0
 #: field:wizard.update.charts.accounts.tax.code,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
@@ -166,6 +180,26 @@ msgstr ""
 #, python-format
 msgid "Deactivated %d taxes\n"
 msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_tax_codes:0
+msgid "Deactivated tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,deleted_taxes:0
+msgid "Deactivated taxes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,display_name:0
+#: field:wizard.update.charts.accounts.account,display_name:0
+#: field:wizard.update.charts.accounts.financial.report,display_name:0
+#: field:wizard.update.charts.accounts.fiscal.position,display_name:0
+#: field:wizard.update.charts.accounts.tax,display_name:0
+#: field:wizard.update.charts.accounts.tax.code,display_name:0
+msgid "Display Name"
+msgstr "Nome para Mostrar"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
@@ -262,7 +296,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr ""
+msgstr "Identificação"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
@@ -284,6 +318,16 @@ msgid "Language"
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,__last_update:0
+#: field:wizard.update.charts.accounts.account,__last_update:0
+#: field:wizard.update.charts.accounts.financial.report,__last_update:0
+#: field:wizard.update.charts.accounts.fiscal.position,__last_update:0
+#: field:wizard.update.charts.accounts.tax,__last_update:0
+#: field:wizard.update.charts.accounts.tax.code,__last_update:0
+msgid "Last Modified on"
+msgstr "Última atualização em"
+
+#. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
 #: field:wizard.update.charts.accounts.account,write_uid:0
 #: field:wizard.update.charts.accounts.financial.report,write_uid:0
@@ -291,7 +335,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última atualização por"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -301,12 +345,12 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr ""
+msgstr "Histórico"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,log:0
@@ -332,8 +376,28 @@ msgid "Name or description not found."
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_accounts:0
+msgid "New accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_fps:0
+msgid "New fiscal positions"
+msgstr ""
+
+#. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax.code,type:0
 msgid "New tax code"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_tax_codes:0
+msgid "New tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,new_taxes:0
+msgid "New taxes"
 msgstr ""
 
 #. module: account_chart_update
@@ -736,7 +800,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_account:0
@@ -813,6 +877,16 @@ msgid "Updated account %s.\n"
 msgstr ""
 
 #. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_accounts:0
+msgid "Updated accounts"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_fps:0
+msgid "Updated fiscal positions"
+msgstr ""
+
+#. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
 #, python-format
 msgid "Updated tax %s.\n"
@@ -827,6 +901,16 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:946
 #, python-format
 msgid "Updated tax code %s.\n"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_tax_codes:0
+msgid "Updated tax codes"
+msgstr ""
+
+#. module: account_chart_update
+#: field:wizard.update.charts.accounts,updated_taxes:0
+msgid "Updated taxes"
 msgstr ""
 
 #. module: account_chart_update

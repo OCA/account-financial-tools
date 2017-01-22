@@ -3,26 +3,32 @@
 # * account_asset_management
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Bruno JOLIVEAU, 2015
-# CarlesAntoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Kostas Goutoudis <goutoudis@gmail.com>, 2015
 # Hotellook, 2014
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 # SaFi J. <safi2266@gmail.com>, 2015
 # Yael Terrettaz, 2015
+# yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 08:25+0000\n"
-"PO-Revision-Date: 2015-08-29 03:26+0000\n"
+"POT-Creation-Date: 2017-01-13 23:25+0000\n"
+"PO-Revision-Date: 2017-01-19 20:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -311,7 +317,7 @@ msgstr "Cancelar"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -436,7 +442,7 @@ msgstr "Movimentação de Bens"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -448,7 +454,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -558,9 +564,22 @@ msgid "Depreciation Name"
 msgstr "Nome da Depreciação"
 
 #. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Nome para Mostrar"
+
+#. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -627,7 +646,7 @@ msgstr "Filtros Extendidos..."
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscalyear
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Ano Fiscal"
 
 #. module: account_asset_management
 #: field:account.asset.remove,period_id:0
@@ -685,7 +704,7 @@ msgstr "Nome do Histórico"
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "Identificação"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -777,6 +796,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Última atualização em"
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -786,7 +818,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última atualização por"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -798,7 +830,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -830,7 +862,7 @@ msgstr "Modificar Patrimônio"
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Mês"
 
 #. module: account_asset_management
 #: field:account.asset.category,name:0
@@ -845,7 +877,7 @@ msgstr "Depreciação do Próximo Período"
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. module: account_asset_management
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
@@ -1088,7 +1120,7 @@ msgstr "Pular a Situação Provisório"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
@@ -1182,7 +1214,7 @@ msgstr ""
 #: field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_asset_management
 #: field:asset.asset.report,unposted_value:0

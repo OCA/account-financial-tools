@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Accounts-Payable - Alkemics, 2015
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
@@ -14,6 +14,7 @@
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Hotellook, 2014
 # Jim Spentzos, 2014
+# Jim Spentzos, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # njeudy <njeudy@tuxservices.com>, 2015
 # Pierre Verkest <pverkest@anybox.fr>, 2015
@@ -22,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 08:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Russian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -437,7 +438,7 @@ msgstr "Созданные операции по активам"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Создано"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -449,7 +450,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Создан"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -557,6 +558,19 @@ msgstr "Метод амортизации"
 #: field:account.asset.depreciation.line,name:0
 msgid "Depreciation Name"
 msgstr "Название амортизации"
+
+#. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr ""
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -686,7 +700,7 @@ msgstr "Название истории"
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -778,6 +792,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -787,7 +814,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Последний раз обновлено"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -799,7 +826,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Последний раз обновлено"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51

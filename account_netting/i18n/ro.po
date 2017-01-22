@@ -3,13 +3,38 @@
 # * account_netting
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# jeon <bluerespect@nate.com>, 2014
+# John Toro <johntoro@gmail.com>, 2015
+# Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
+# Kevin Min <gr326887@graded.br>, 2015
+# Kunwoo Kim <crazyabtmath@naver.com>, 2015
+# LEE SI HYEONG <super2451894@gmail.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sam Ryoo <samryoo@gmail.com>, 2014
+# Seo. Junmin <sof.midnight@live.co.kr>, 2015
+# seungil <luck8778@gmail.com>, 2014
+# SEUNGWON <baeksw0620@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 18:49+0000\n"
-"PO-Revision-Date: 2015-10-14 18:45+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-12-23 23:20+0000\n"
+"PO-Revision-Date: 2016-12-27 08:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -71,17 +96,22 @@ msgstr ""
 #. module: account_netting
 #: field:account.move.make.netting,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat de"
 
 #. module: account_netting
 #: field:account.move.make.netting,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat la"
+
+#. module: account_netting
+#: field:account.move.make.netting,display_name:0
+msgid "Display Name"
+msgstr "Nume Afişat"
 
 #. module: account_netting
 #: field:account.move.make.netting,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_netting
 #: field:account.move.make.netting,journal:0
@@ -89,14 +119,19 @@ msgid "Journal"
 msgstr "Registru"
 
 #. module: account_netting
+#: field:account.move.make.netting,__last_update:0
+msgid "Last Modified on"
+msgstr "Ultima actualizare în"
+
+#. module: account_netting
 #: field:account.move.make.netting,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualizare făcută de"
 
 #. module: account_netting
 #: field:account.move.make.netting,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizare la"
 
 #. module: account_netting
 #: field:account.move.make.netting,move_lines:0

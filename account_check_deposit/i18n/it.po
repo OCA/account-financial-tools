@@ -3,7 +3,8 @@
 # * account_check_deposit
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010-2013
 # Giedrius Slavinskas <giedrius@inovera.lt>, 2012
@@ -17,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 01:10+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +178,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -194,7 +195,7 @@ msgstr "Bozza"
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,id:0
@@ -225,7 +226,7 @@ msgstr "Voci Sezionale"
 #. module: account_check_deposit
 #: field:account.check.deposit,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,write_uid:0

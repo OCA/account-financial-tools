@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-28 00:59+0000\n"
-"PO-Revision-Date: 2016-05-31 13:38+0000\n"
+"POT-Creation-Date: 2016-09-24 00:47+0000\n"
+"PO-Revision-Date: 2016-10-05 06:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.line,dunning_fees_amount:0
@@ -88,22 +88,22 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zadnje modificirano"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.dunning.fees.computer,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano"
 
 #. module: account_credit_control_dunning_fees
 #: view:credit.control.policy:account_credit_control_dunning_fees.add_dunning_fees_on_policy

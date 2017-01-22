@@ -3,13 +3,25 @@
 # * account_move_template
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012,2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-01-12 03:44+0000\n"
+"PO-Revision-Date: 2017-01-13 09:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +43,7 @@ msgstr "Montant"
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
 msgid "Analytic Account"
-msgstr ""
+msgstr "Compte analytique"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:96
@@ -102,7 +114,17 @@ msgstr ""
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Débit"
+
+#. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
+msgstr "Nom à afficher"
 
 #. module: account_move_template
 #: field:account.document.template,id:0
@@ -136,6 +158,16 @@ msgstr ""
 #: view:account.move.template.line:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
 msgstr ""
+
+#. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: account_move_template
 #: field:account.document.template,write_uid:0
@@ -219,7 +251,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
-msgstr ""
+msgstr "Numéro"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
@@ -231,7 +263,7 @@ msgstr "Partenaire"
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: field:account.move.template.line,python_code:0
 msgid "Python Code"
-msgstr ""
+msgstr "Code Python"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
@@ -242,7 +274,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Sequence"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0

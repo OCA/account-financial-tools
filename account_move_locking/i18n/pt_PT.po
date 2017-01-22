@@ -6,6 +6,7 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -19,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 00:52+0000\n"
-"PO-Revision-Date: 2016-05-22 18:16+0000\n"
+"POT-Creation-Date: 2016-09-14 00:45+0000\n"
+"PO-Revision-Date: 2016-09-13 11:35+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +38,7 @@ msgstr "Movimento de Conta"
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Aprovar"
 
 #. module: account_move_locking
 #: view:lock.account.move:account_move_locking.lock_account_move_view

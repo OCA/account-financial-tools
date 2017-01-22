@@ -3,7 +3,8 @@
 # * account_credit_control
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
@@ -13,7 +14,8 @@
 # Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # John Toro <johntoro@gmail.com>, 2015
-# LS Development <ls.development.nc@gmail.com>, 2016
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # SaFi J. <safi2266@gmail.com>, 2015
 # Stefano <stefano.sforzi@agilebg.com>, 2016
@@ -21,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 01:12+0000\n"
+"POT-Creation-Date: 2016-12-16 23:19+0000\n"
+"PO-Revision-Date: 2016-12-23 08:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -199,6 +201,16 @@ msgstr "Permette il cambio manuale del livello del controllo del credito"
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr "Si e' verificato un errore durante l'invio della email"
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_1
+msgid "B2B Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_2
+msgid "B2C Debtors - (test)"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:311
@@ -484,7 +496,7 @@ msgstr "Configurazione ritardo"
 #: field:credit.control.printer,display_name:0
 #: field:credit.control.run,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
@@ -649,7 +661,7 @@ msgstr ""
 #: field:credit.control.printer,__last_update:0
 #: field:credit.control.run,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_credit_control
 #: field:credit.control.communication,write_uid:0
@@ -686,6 +698,7 @@ msgstr "Lettera"
 #. module: account_credit_control
 #: field:credit.control.communication,current_policy_level:0
 #: view:credit.control.line:account_credit_control.credit_control_line_search
+#: view:credit.control.line:account_credit_control.credit_control_line_tree
 #: field:credit.control.policy.level,level:0
 msgid "Level"
 msgstr "Livello"
@@ -809,6 +822,11 @@ msgid "Name"
 msgstr "Nome"
 
 #. module: account_credit_control
+#: model:account.account,name:account_credit_control.a_recv_3
+msgid "New Debtors - (test)"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
 msgid "New Policy to Apply"
 msgstr ""
@@ -914,7 +932,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Mail in Uscita"
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0
@@ -1087,6 +1105,7 @@ msgid "Source"
 msgstr "Origine"
 
 #. module: account_credit_control
+#: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
 msgstr "Stato"

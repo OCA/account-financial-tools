@@ -1,0 +1,304 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_reconcile_trace
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-13 03:39+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_reconcile_trace
+#: model:ir.model,name:account_reconcile_trace.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:ir.model,name:account_reconcile_trace.model_account_reconcile_trace_direct
+msgid "Account Reconcile Trace Direct"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:ir.model,name:account_reconcile_trace.model_account_reconcile_trace_recursive
+msgid "Account Reconcile Trace Recursive"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_move_id:0
+#: help:account.reconcile.trace.recursive,down_move_id:0
+msgid "Account entry on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_move_id:0
+#: help:account.reconcile.trace.recursive,up_move_id:0
+msgid "Account entry on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Amount"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_amount:0
+#: help:account.reconcile.trace.recursive,down_amount:0
+msgid "Amount on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_amount:0
+#: help:account.reconcile.trace.recursive,up_amount:0
+msgid "Amount on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Date"
+msgstr "Tanggal"
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_date:0
+#: help:account.reconcile.trace.recursive,down_date:0
+msgid "Date on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_date:0
+#: help:account.reconcile.trace.recursive,up_date:0
+msgid "Date on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,display_name:0
+#: field:account.reconcile.trace.recursive,display_name:0
+msgid "Display Name"
+msgstr "Nama Tampilan"
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_amount:0
+#: field:account.reconcile.trace.recursive,down_amount:0
+msgid "Down Amount"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_date:0
+#: field:account.reconcile.trace.recursive,down_date:0
+msgid "Down Date"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_journal_id:0
+#: field:account.reconcile.trace.recursive,down_journal_id:0
+msgid "Down Journal"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_move_id:0
+#: field:account.reconcile.trace.recursive,down_move_id:0
+msgid "Down Move"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_name:0
+#: field:account.reconcile.trace.recursive,down_name:0
+msgid "Down Name"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,down_ref:0
+#: field:account.reconcile.trace.recursive,down_ref:0
+msgid "Down Ref"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,super_up_move_id:0
+#: help:account.reconcile.trace.recursive,super_up_move_id:0
+msgid "First account entry on reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,id:0
+#: field:account.reconcile.trace.recursive,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_reconcile_trace
+#: model:ir.model,name:account_reconcile_trace.model_account_invoice
+msgid "Invoice"
+msgstr "Faktur"
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Journal"
+msgstr "Jurnal"
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_journal_id:0
+#: help:account.reconcile.trace.recursive,down_journal_id:0
+msgid "Journal on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_journal_id:0
+#: help:account.reconcile.trace.recursive,up_journal_id:0
+msgid "Journal on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,__last_update:0
+#: field:account.reconcile.trace.recursive,__last_update:0
+msgid "Last Modified on"
+msgstr "Terakhir Dimodifikasi pada"
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,super_down_move_id:0
+#: help:account.reconcile.trace.recursive,super_down_move_id:0
+msgid "Last account entry on reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Move"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Name"
+msgstr "Nama"
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_name:0
+#: help:account.reconcile.trace.recursive,down_name:0
+msgid "Name of journal item on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_name:0
+#: help:account.reconcile.trace.recursive,up_name:0
+msgid "Name of journal item on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Ref"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,down_ref:0
+#: help:account.reconcile.trace.recursive,down_ref:0
+msgid "Reference of journal item on down reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: help:account.reconcile.trace.direct,up_ref:0
+#: help:account.reconcile.trace.recursive,up_ref:0
+msgid "Reference of journal item on up reconciliation trace."
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,super_down_move_id:0
+#: field:account.reconcile.trace.recursive,super_down_move_id:0
+msgid "Super Down Move"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,super_up_move_id:0
+#: field:account.reconcile.trace.recursive,super_up_move_id:0
+msgid "Super Up Move"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
+#: view:account.invoice:account_reconcile_trace.invoice_trace_form
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Trace"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.invoice,trace_down_ids:0
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: field:account.move,trace_down_ids:0
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Trace Down"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.invoice,trace_up_ids:0
+#: view:account.move:account_reconcile_trace.view_move_trace_form
+#: field:account.move,trace_up_ids:0
+#: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
+msgid "Trace Up"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tcc
+msgid "Transfer Creditors Credit"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: model:account.account,name:account_reconcile_trace.tdd
+msgid "Transfer Debtors Debit"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_amount:0
+#: field:account.reconcile.trace.recursive,up_amount:0
+msgid "Up Amount"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_date:0
+#: field:account.reconcile.trace.recursive,up_date:0
+msgid "Up Date"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_journal_id:0
+#: field:account.reconcile.trace.recursive,up_journal_id:0
+msgid "Up Journal"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_move_id:0
+#: field:account.reconcile.trace.recursive,up_move_id:0
+msgid "Up Move"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_name:0
+#: field:account.reconcile.trace.recursive,up_name:0
+msgid "Up Name"
+msgstr ""
+
+#. module: account_reconcile_trace
+#: field:account.reconcile.trace.direct,up_ref:0
+#: field:account.reconcile.trace.recursive,up_ref:0
+msgid "Up Ref"
+msgstr ""

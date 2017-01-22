@@ -6,7 +6,7 @@
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Bruno JOLIVEAU, 2015
-# Chanseok <kcsgoodboy@gmail.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Hotellook, 2014
@@ -24,12 +24,14 @@
 # seungil <luck8778@gmail.com>, 2014
 # SEUNGWON <baeksw0620@gmail.com>, 2014
 # Yael Terrettaz, 2015
+# yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-31 08:25+0000\n"
-"PO-Revision-Date: 2015-10-19 10:25+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -318,7 +320,7 @@ msgstr "Odustani"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -443,7 +445,7 @@ msgstr "Stvorena knjiženja imovine"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Kreirao"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -455,7 +457,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Kreirano"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -565,9 +567,22 @@ msgid "Depreciation Name"
 msgstr "Naziv amortizacije"
 
 #. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Prikaži ime"
+
+#. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr ""
+msgstr "Izvršeno"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
@@ -784,6 +799,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnja izmjena dana"
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -793,7 +821,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji ažurirao"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -805,7 +833,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnje ažurirano dana"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -1095,7 +1123,7 @@ msgstr "Preskoči stanje nacrta"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
@@ -1189,7 +1217,7 @@ msgstr ""
 #: field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 #. module: account_asset_management
 #: field:asset.asset.report,unposted_value:0
