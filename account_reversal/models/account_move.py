@@ -13,6 +13,7 @@ class AccountMove(models.Model):
 
     to_be_reversed = fields.Boolean(
         string="To Be Reversed",
+        copy=False,
         help="Check this box if your entry has to be reversed at the end "
              "of period.")
     reversal_id = fields.Many2one(
