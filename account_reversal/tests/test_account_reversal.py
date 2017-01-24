@@ -67,7 +67,16 @@ class TestAccountReversal(TransactionCase):
         move = self._create_move()
         self.assertEqual(
             self._move_str(move), '0.00100.00:SALE_100.000.00:CUSTOMER_')
-        rev = move.create_reversals()
+        move_prefix = 'REV_TEST_MOVE:'
+        line_prefix = 'REV_TEST_LINE:'
+        rev = move.create_reversals(move_prefix=move_prefix,
+                                    line_prefix=line_prefix, reconcile=True)
         self.assertEqual(len(rev), 1)
+        self.assertEqual(rev.state, 'posted')
         self.assertEqual(
             self._move_str(rev), '100.000.00:SALE_0.00100.00:CUSTOMER_')
+        self.assertEqual(rev.ref[0:len(move_prefix)], move_prefix)
+        for line in rev.line_ids:
+            self.assertEqual(line.name[0:len(line_prefix)], line_prefix)
+            if line.account_id.reconcile:
+                self.assertTrue(line.reconciled)

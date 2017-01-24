@@ -33,18 +33,15 @@ class AccountMoveReverse(models.TransientModel):
         help="Enter the date of the reversal account entries. "
              "If empty, Odoo uses the same journal of the move to reverse.")
     move_prefix = fields.Char(
-        string="Entries Ref. Prefix", default="REV:",
+        string="Entries Ref. Prefix",
         help="Prefix that will be added to the 'Ref' of the reversal account "
              "entries. If empty, Odoo uses the Ref of the move to reverse. "
              "(NOTE: A space is added after the prefix).")
     line_prefix = fields.Char(
-        string="Items Name Prefix", default="REV:",
+        string="Items Name Prefix",
         help="Prefix that will be added to the 'Name' of the reversal account "
              "entrie items. If empty, Odoo uses the same name of the move "
              "line to reverse. (NOTE: A space is added after the prefix).")
-    post = fields.Boolean(
-        string="Post", default=True,
-        help="Mark this if you want to post reversal move")
     reconcile = fields.Boolean(
         string="Reconcile", default=True,
         help="Mark this if you want to reconcile items of both moves.")
@@ -57,7 +54,7 @@ class AccountMoveReverse(models.TransientModel):
             moves |= orig.create_reversals(
                 date=wizard.date, journal=wizard.journal_id,
                 move_prefix=wizard.move_prefix, line_prefix=wizard.line_prefix,
-                post=wizard.post, reconcile=wizard.reconcile)
+                reconcile=wizard.reconcile)
         action = {
             'name': _('Reverse moves'),
             'type': 'ir.actions.act_window',

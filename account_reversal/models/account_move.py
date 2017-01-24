@@ -20,50 +20,6 @@ class AccountMove(models.Model):
         comodel_name='account.move', ondelete='set null', readonly=True,
         string="Reversal Entry")
 
-    def _move_lines_reverse_prepare(self, move, date=False, journal=False,
-                                    line_prefix=False):
-        for line in move.get('line_ids', []):
-            date = date or line[2].get('date', False)
-            journal_id = journal and journal.id
-            journal_id = journal_id or line[2].get('journal_id', False)
-            name = line[2].get('name', False) or line_prefix
-            debit = line[2].get('debit', 0.)
-            credit = line[2].get('credit', 0.)
-            amount_currency = line[2].get('amount_currency', 0.)
-            if line_prefix and line_prefix != name:
-                name = ' '.join([line_prefix, name])
-            line[2].update({
-                'name': name,
-                'date': date,
-                'journal_id': journal_id,
-                'debit': credit,
-                'credit': debit,
-                'amount_currency': -amount_currency,
-            })
-        return move
-
-    def _move_reverse_prepare(self, date=False, journal=False,
-                              move_prefix=False):
-        self.ensure_one()
-        journal = journal or self.journal_id
-        if journal.company_id != self.company_id:
-            raise UserError(
-                _("Wrong company Journal is '%s' but we have '%s'") % (
-                    journal.company_id.name, self.company_id.name))
-        ref = self.ref or move_prefix
-        if move_prefix and move_prefix != ref:
-            ref = ' '.join([move_prefix, ref])
-        date = date or self.date
-        move = self.copy_data()[0]
-        move.update({
-            'journal_id': journal.id,
-            'date': date,
-            'ref': ref,
-            'to_be_reversed': False,
-            'state': 'draft',
-        })
-        return move
-
     @api.multi
     def move_reverse_reconcile(self):
         for move in self.filtered('reversal_id'):
@@ -81,8 +37,20 @@ class AccountMove(models.Model):
         return True
 
     @api.multi
+    def _reverse_move(self, date=None, journal_id=None):
+        reversal_move = super(AccountMove, self)._reverse_move(
+            date=date,
+            journal_id=journal_id)
+
+        self.write({
+            'reversal_id': reversal_move.id,
+            'to_be_reversed': False,
+        })
+        return reversal_move
+
+    @api.multi
     def create_reversals(self, date=False, journal=False, move_prefix=False,
-                         line_prefix=False, post=False, reconcile=False):
+                         line_prefix=False, reconcile=False):
         """
         Create the reversal of one or multiple moves
 
@@ -97,20 +65,21 @@ class AccountMove(models.Model):
 
         :return: Returns a recordset of the created reversal moves
         """
-        moves = self.env['account.move']
-        for orig in self:
-            data = orig._move_reverse_prepare(
-                date=date, journal=journal, move_prefix=move_prefix)
-            data = orig._move_lines_reverse_prepare(
-                data, date=date, journal=journal, line_prefix=line_prefix)
-            reversal_move = self.create(data)
-            moves |= reversal_move
-            orig.write({
-                'reversal_id': reversal_move.id,
-                'to_be_reversed': False,
-            })
-        if moves and post:
-            moves.post()
+        self.reverse_moves(date=date, journal_id=journal)
+        moves = self.mapped('reversal_id')
+        if move_prefix or line_prefix:
+            for orig in self:
+                ref = orig.name or move_prefix
+                if move_prefix and move_prefix != ref:
+                    ref = ' '.join([move_prefix, ref])
+                    orig.reversal_id.write({'ref': ref})
+                if line_prefix:
+                    for line in orig.reversal_id.line_ids:
+                        if line.name and line_prefix != line.name:
+                            name = ' '.join([line_prefix, line.name])
+                            line.write({'name': name})
+
+        if moves:
             if reconcile:
-                moves.move_reverse_reconcile()
+                self.move_reverse_reconcile()
         return moves

@@ -19,9 +19,7 @@
                 <group>
                     <field name="move_prefix" />
                     <field name="line_prefix" />
-                    <field name="post"/>
-                    <field name="reconcile"
-                           attrs="{'invisible': [('post', '=', False)]}"/>
+                    <field name="reconcile"/>
                 </group>
             </group>
 
