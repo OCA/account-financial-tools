@@ -9,8 +9,7 @@
           <separator string="Print the selected lines" colspan="4"/>
           <newline/>
           <group>
-            <field name="mark_as_sent"
-              colspan="4"/>
+            <field name="mark_as_sent" />
           </group>
           <newline/>
           <notebook>
