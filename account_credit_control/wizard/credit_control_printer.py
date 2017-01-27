@@ -34,7 +34,9 @@ class CreditControlPrinter(models.TransientModel):
         context = self.env.context
         if context.get('active_model') != 'credit.control.line':
             return False
-        return context.get('active_ids', False)
+        line_obj = self.env['credit.control.line']
+        lines = line_obj.browse(context['active_ids'])
+        return self._filter_lines(lines)
 
     mark_as_sent = fields.Boolean(string='Mark letter lines as sent',
                                   default=True,
@@ -44,24 +46,25 @@ class CreditControlPrinter(models.TransientModel):
                                 default=_get_line_ids)
 
     @api.model
-    def _credit_line_predicate(self, line):
-        return True
-
-    @api.model
     @api.returns('credit.control.line')
-    def _get_lines(self, lines, predicate):
-        return lines.filtered(predicate)
+    def _filter_lines(self, lines):
+        """ filter lines to use in the wizard """
+        line_obj = self.env['credit.control.line']
+        domain = [('state', '=', 'to_be_sent'),
+                  ('id', 'in', lines.ids),
+                  ('channel', '=', 'letter')]
+        return line_obj.search(domain)
 
     @api.multi
     def print_lines(self):
         self.ensure_one()
-        comm_obj = self.env['credit.control.communication']
         if not self.line_ids:
             raise api.Warning(_('No credit control lines selected.'))
 
-        lines = self._get_lines(self.line_ids, self._credit_line_predicate)
+        comm_obj = self.env['credit.control.communication']
 
-        comms = comm_obj._generate_comm_from_credit_lines(lines)
+        filtered_lines = self._filter_lines(self.line_ids)
+        comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
 
         if self.mark_as_sent:
             comms._mark_credit_line_as_sent()
