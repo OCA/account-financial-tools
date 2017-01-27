@@ -37,6 +37,7 @@
                     <page string="Mail and reporting">
                       <group>
                         <field name="email_template_id"/>
+                        <field name="email_copy" attrs="{'invisible':[('channel','=','email')]}"/>
                         <newline/>
                         <field name="custom_text" colspan="4"/>
                         <newline/>

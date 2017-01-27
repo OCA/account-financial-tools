@@ -67,6 +67,9 @@ class CreditControlPrinter(models.TransientModel):
         comms = comm_obj._generate_comm_from_credit_lines(filtered_lines)
 
         if self.mark_as_sent:
+            comms_email = comms.filtered("current_policy_level.email_copy")
+            if comms_email:
+                comms_email._generate_emails()
             comms._mark_credit_line_as_sent()
 
         report_name = 'account_credit_control.report_credit_control_summary'

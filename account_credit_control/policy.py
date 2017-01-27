@@ -237,6 +237,7 @@ class CreditControlPolicyLevel(models.Model):
                                 ('email', 'Email')],
                                string='Channel',
                                required=True)
+    email_copy = fields.Boolean('Send copy by email')
     custom_text = fields.Text(string='Custom Message',
                               required=True,
                               translate=True)

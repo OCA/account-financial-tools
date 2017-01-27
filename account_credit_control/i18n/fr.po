@@ -445,6 +445,11 @@ msgid "Custom Mail Message"
 msgstr "Email personnalisé"
 
 #. module: account_credit_control
+#: field:credit.control.policy.level,email_copy:0
+msgid "Send copy by email"
+msgstr "Envoyer une copie par email"
+
+#. module: account_credit_control
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
 msgstr "Message personnalisable"

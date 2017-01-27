@@ -362,6 +362,11 @@ msgid "Custom Mail Message"
 msgstr ""
 
 #. module: account_credit_control
+#: field:credit.control.policy.level,email_copy:0
+msgid "Send copy by email"
+msgstr ""
+
+#. module: account_credit_control
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
 msgstr ""
