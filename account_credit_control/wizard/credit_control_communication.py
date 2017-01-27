@@ -199,16 +199,18 @@ class CreditCommunication(models.TransientModel):
             # of storing res_id
             email_values.pop('model', None)
             email_values.pop('res_id', None)
+
+            if not all(email_values.get(field) for field in required_fields):
+                # Do not put erroneous email in the mail queue. Mark it in
+                # error state. User will have to fix the error (likely missing
+                # email_to) and mark it again as ready to send.
+                state = 'email_error'
+                comm.credit_control_line_ids.write({'state': state})
+                continue
+
             email = email_message_obj.create(email_values)
 
             state = 'sent'
-            # The mail will not be send, however it will be in the pool, in an
-            # error state. So we create it, link it with
-            # the credit control line
-            # and put this latter in a `email_error` state we not that we have
-            # a problem with the email
-            if not all(email_values.get(field) for field in required_fields):
-                state = 'email_error'
 
             comm.credit_control_line_ids.write({'mail_message_id': email.id,
                                                 'state': state})
