@@ -24,8 +24,8 @@
     'version': '8.0.1.0.0',
     'category': 'Generic Modules/Accounting',
     'summary': "Templates for recurring Journal Entries",
-    'author': "Agile Business Group,Odoo Community Association (OCA)",
-    'website': 'http://www.agilebg.com',
+    'author': "Agile Business Group,Odoo Community Association (OCA), Aurium Technologies",
+    'website': 'http://www.agilebg.com , http://www.auriumtechnologies.com',
     'license': 'AGPL-3',
     'depends': ['account_accountant', 'analytic'],
     'data': [
