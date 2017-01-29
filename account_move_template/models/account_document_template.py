@@ -1,27 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2011 - 2014 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
-#    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2015-2017 See manifest
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import models, fields, api, exceptions, _
-from openerp.tools.safe_eval import safe_eval
+from odoo import models, fields, api, exceptions, _
+from odoo.tools.safe_eval import safe_eval
 from functools import partial
 import re
 
@@ -77,13 +59,12 @@ class AccountDocumentTemplate(models.Model):
 
     @api.multi
     def compute_lines(self, input_lines):
-        # input_lines: dictionary in the form {line_number: line_amount}
-        # returns all the lines (included input lines)
-        # in the form {line_number: line_amount}
         if len(input_lines) != self._input_lines():
             raise exceptions.Warning(
-                _('Inconsistency between input lines and '
-                  'filled lines for template %s') % self.name
+                _('You can not add a different number of lines in this wizard '
+                  'you should try to create the move normally and then edit the'
+                  ' created move. Inconsistent between input lines and filled'
+                  ' lines for template %s') % self.name
             )
         computed_lines = self._generate_empty_lines()
         computed_lines.update(input_lines)
@@ -97,10 +78,8 @@ class AccountDocumentTemplateLine(models.Model):
     _name = 'account.document.template.line'
 
     name = fields.Char(required=True)
-    sequence = fields.Integer(string='Sequence', required=True)
-    type = fields.Selection(
-        [('computed', 'Computed'), ('input', 'User input')],
-        string='Type',
-        required=True
-    )
-    python_code = fields.Text(string='Python Code')
+    sequence = fields.Integer(required=True)
+    type = fields.Selection([('computed', 'Computed'), ('input', 'User input')],
+                            required=True, 
+                            default='input')
+    python_code = fields.Text()
