@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+<!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     Copyright 2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <openerp>
 <data>
@@ -12,17 +13,28 @@
         <button name="set_to_close" position="attributes">
             <attribute name='invisible'>1</attribute>
         </button>
+        <button name="compute_depreciation_board" position="attributes">
+            <attribute name="attrs">{'invisible':[('state', '!=', 'draft')]}</attribute>
+        </button>
         <button name="set_to_close" position="after">
-            <button name="action_disposal" states="open"
-                    string="Disposal" type="object" class="oe_highlight"/>
-            <button name="action_disposal_undo" states="close"
-                    string="Undo disposal" type="object" class="oe_highlight"/>
+            <button name="action_disposal"
+                    states="open,close"
+                    string="Disposal"
+                    type="object"
+                    class="oe_highlight"
+            />
+            <button name="action_disposal_undo"
+                    states="disposed"
+                    string="Undo disposal"
+                    type="object"
+                    class="oe_highlight"
+            />
         </button>
         <field name="purchase_date" position="after">
             <field name="disposal_date"
-                   attrs="{'invisible': [('state', 'not in', ('close',))]}"/>
+                   attrs="{'invisible': [('state', '!=', 'disposed')]}"/>
             <field name="disposal_move_id"
-                   attrs="{'invisible': [('state', 'not in', ('close',))]}"/>
+                   attrs="{'invisible': [('state', '!=', 'disposed')]}"/>
         </field>
     </field>
 </record>
