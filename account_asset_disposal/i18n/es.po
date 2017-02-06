@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 11:20+0000\n"
-"PO-Revision-Date: 2016-06-09 11:20+0000\n"
+"POT-Creation-Date: 2017-02-06 18:15+0000\n"
+"PO-Revision-Date: 2017-02-06 18:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,25 +16,40 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_asset_disposal
+#: field:account.asset.asset,annual_percentage:0
+msgid "Annual depreciation percentage"
+msgstr "Porcentajes anuales de depreciación"
+
+#. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_asset
 msgid "Asset"
 msgstr "Activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:32
+#: model:ir.model,name:account_asset_disposal.model_account_asset_category
+msgid "Asset category"
+msgstr "Categoría de activo"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:33
 #, python-format
 msgid "Asset depreciation"
 msgstr "Depreciación del activo"
 
 #. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_depreciation_line
+msgid "Asset depreciation line"
+msgstr "Línea de depreciación del activo"
+
+#. module: account_asset_disposal
 #: view:account.asset.disposal.wizard:account_asset_disposal.account_asset_disposal_wizard_form
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:19
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:20
 #, python-format
 msgid "Asset disposal"
 msgstr "Baja del activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:45
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:46
 #, python-format
 msgid "Asset loss"
 msgstr "Pérdida del activo"
@@ -57,12 +72,12 @@ msgstr "Creado en"
 #. module: account_asset_disposal
 #: field:account.asset.disposal.wizard,display_name:0
 msgid "Display Name"
-msgstr "Nombre a mostrar"
+msgstr "Nombre mostrado"
 
 #. module: account_asset_disposal
 #: view:account.asset.asset:account_asset_disposal.view_account_asset_asset_form
 msgid "Disposal"
-msgstr "Baja"
+msgstr "Dar de baja"
 
 #. module: account_asset_disposal
 #: view:account.asset.disposal.wizard:account_asset_disposal.account_asset_disposal_wizard_form
@@ -81,9 +96,19 @@ msgid "Disposal move"
 msgstr "Asiento de baja"
 
 #. module: account_asset_disposal
+#: selection:account.asset.asset,state:0
+msgid "Disposed"
+msgstr "Dado de baja"
+
+#. module: account_asset_disposal
 #: field:account.asset.disposal.wizard,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_move_line
+msgid "Journal Items"
+msgstr "Apuntes contables"
 
 #. module: account_asset_disposal
 #: field:account.asset.disposal.wizard,__last_update:0
@@ -101,9 +126,20 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: account_asset_disposal
+#: field:account.asset.category,loss_account_id:0
+msgid "Loss Account"
+msgstr "Cuenta de pérdidas"
+
+#. module: account_asset_disposal
 #: field:account.asset.disposal.wizard,loss_account_id:0
 msgid "Loss account"
 msgstr "Cuenta de pérdidas"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_move_line.py:20
+#, python-format
+msgid "Move line '%s' is related with a disposed asset '%s'"
+msgstr "El apunte '%s' está relacionado con el activo dado de baja '%s'"
 
 #. module: account_asset_disposal
 #: view:account.asset.asset:account_asset_disposal.view_account_asset_asset_form
@@ -114,3 +150,9 @@ msgstr "Cancelar baja"
 #: view:account.asset.disposal.wizard:account_asset_disposal.account_asset_disposal_wizard_form
 msgid "or"
 msgstr "o"
+
+#. module: account_asset_disposal
+#: view:account.asset.asset:account_asset_disposal.view_account_asset_asset_form
+msgid "{'invisible':[('state', '!=', 'draft')]}"
+msgstr "{'invisible':[('state', '!=', 'draft')]}"
+

@@ -8,6 +8,9 @@ from openerp import models, fields, api, _
 class AccountAssetAsset(models.Model):
     _inherit = "account.asset.asset"
 
+    state = fields.Selection(
+        selection_add=[('disposed', 'Disposed')],
+    )
     disposal_date = fields.Date(string="Disposal date")
     disposal_move_id = fields.Many2one(
         comodel_name='account.move', string="Disposal move")
@@ -104,8 +107,11 @@ class AccountAssetAsset(models.Model):
             if asset.disposal_move_id:
                 asset.disposal_move_id.button_cancel()
                 asset.disposal_move_id.unlink()
+            if asset.currency_id.is_zero(asset.value_residual):
+                asset.state = 'close'
+            else:
+                asset.state = 'open'
         return self.write({
             'disposal_date': False,
             'disposal_move_id': False,
-            'state': 'open',
         })

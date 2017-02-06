@@ -34,4 +34,4 @@ class AccountAssetDisposalWizard(models.TransientModel):
             asset.disposal_move_create(
                 self.disposal_date, self.loss_account_id)
         self._disposal_date_set(assets)
-        return assets.set_to_close()
+        return assets.write({'state': 'disposed'})
