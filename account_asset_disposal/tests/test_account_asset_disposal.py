@@ -11,7 +11,7 @@ class TestAccountAsset(TransactionCase):
         # Create a payable account for suppliers
         self.account_suppliers = self.env['account.account'].create({
             'name': 'Suppliers',
-            'code': '410000',
+            'code': '410x',
             'type': 'other',
             'user_type': self.env.ref('account.data_account_type_payable').id,
             'reconcile': True,
@@ -37,7 +37,7 @@ class TestAccountAsset(TransactionCase):
         # Create an account for assets
         self.account_asset = self.env['account.account'].create({
             'name': 'Asset',
-            'code': '216000',
+            'code': '216x',
             'type': 'other',
             'user_type': self.env.ref('account.data_account_type_asset').id,
             'reconcile': False,
@@ -45,7 +45,7 @@ class TestAccountAsset(TransactionCase):
         # Create an account for assets dereciation
         self.account_asset_depreciation = self.env['account.account'].create({
             'name': 'Asset depreciation',
-            'code': '281600',
+            'code': '2816x',
             'type': 'other',
             'user_type': self.env.ref('account.data_account_type_asset').id,
             'reconcile': False,
@@ -53,7 +53,7 @@ class TestAccountAsset(TransactionCase):
         # Create an account for assets expense
         self.account_asset_expense = self.env['account.account'].create({
             'name': 'Asset expense',
-            'code': '681000',
+            'code': '681x',
             'type': 'other',
             'user_type': self.env.ref('account.data_account_type_expense').id,
             'reconcile': False,
@@ -61,7 +61,7 @@ class TestAccountAsset(TransactionCase):
         # Create an account for assets loss
         self.account_asset_loss = self.env['account.account'].create({
             'name': 'Asset loss',
-            'code': '671000',
+            'code': '671x',
             'type': 'other',
             'user_type': self.env.ref('account.data_account_type_expense').id,
             'reconcile': False,
