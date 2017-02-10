@@ -3,13 +3,22 @@
 # * account_constraints
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012,2014
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2017
+# SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 10:24+0000\n"
-"PO-Revision-Date: 2015-11-24 16:22+0000\n"
+"POT-Creation-Date: 2017-02-03 23:25+0000\n"
+"PO-Revision-Date: 2017-02-09 15:59+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +31,11 @@ msgstr ""
 #: model:ir.model,name:account_constraints.model_account_move
 msgid "Account Entry"
 msgstr "Kontobuchung"
+
+#. module: account_constraints
+#: field:account.bank.statement.line,account_cancel_installed:0
+msgid "Allow Cancelling Entries"
+msgstr "Erlaube Postenstornierung"
 
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_bank_statement
@@ -78,12 +92,24 @@ msgid "Journal Items"
 msgstr "Journaleinträge"
 
 #. module: account_constraints
+#: field:account.bank.statement.line,state:0
+msgid "Statement state"
+msgstr ""
+
+#. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:147
 #, python-format
 msgid ""
 "The amount expressed in the secondary currency must be positive when journal"
 " item are debit and negatif when journal item are credit."
 msgstr "Der in Zweitwährung ausgedrückte Betrag muss positiv ausfallen, wenn der Journaleintrag im Soll, negativ wenn er im haben gebucht ist."
+
+#. module: account_constraints
+#: help:account.bank.statement.line,state:0
+msgid ""
+"When new statement is created the status will be 'Draft'.\n"
+"And after getting confirmation from the bank it will be in 'Confirmed' status."
+msgstr ""
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:157
