@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-02-03 23:22+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
@@ -21,13 +21,13 @@ msgstr ""
 #: code:addons/account_partner_required/account.py:33
 #, python-format
 msgid "Always"
-msgstr ""
+msgstr "Immer"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:34
 #, python-format
 msgid "Never"
-msgstr ""
+msgstr "Niemals"
 
 #. module: account_partner_required
 #: help:account.account.type,partner_policy:0
@@ -60,13 +60,13 @@ msgstr ""
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
 msgid "Account Type"
-msgstr ""
+msgstr "Kontoart"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:32
 #, python-format
 msgid "Optional"
-msgstr ""
+msgstr "Wahlfrei"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:82
