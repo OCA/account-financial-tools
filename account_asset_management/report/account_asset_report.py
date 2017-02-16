@@ -22,7 +22,7 @@
 ##############################################################################
 
 from openerp import tools
-from openerp import api, fields, models
+from openerp import fields, models
 
 
 class AssetAssetReport(models.Model):
