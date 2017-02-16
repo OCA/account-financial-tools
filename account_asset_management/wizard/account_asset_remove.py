@@ -22,7 +22,7 @@
 
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
-from odoo import api, fields, models, exceptions, _
+from openerp import api, fields, models, exceptions, _
 import logging
 _logger = logging.getLogger(__name__)
 

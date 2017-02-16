@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 
 class AccountInvoice(models.Model):

@@ -21,8 +21,8 @@
 #
 ##############################################################################
 
-from odoo import tools
-from odoo import api, fields, models
+from openerp import tools
+from openerp import api, fields, models
 
 
 class AssetAssetReport(models.Model):
@@ -51,10 +51,9 @@ class AssetAssetReport(models.Model):
     unposted_value = fields.Float('Unposted Amount', readonly=True)
     company_id = fields.Many2one('res.company', 'Company', readonly=True)
 
-    @api.model_cr
-    def init(self):
-        tools.drop_view_if_exists(self.env.cr, 'asset_asset_report')
-        self.env.cr.execute("""
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, 'asset_asset_report')
+        cr.execute("""
             create or replace view asset_asset_report as (
                 select
                     min(dl.id) as id,

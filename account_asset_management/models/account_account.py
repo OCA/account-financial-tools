@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
 
 
 class AccountAccount(models.Model):

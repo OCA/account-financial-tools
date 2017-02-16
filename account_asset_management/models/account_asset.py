@@ -24,7 +24,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import calendar
 import logging
-from odoo import api, fields, exceptions, models, _
+from openerp import api, fields, exceptions, models, _
 import openerp.addons.decimal_precision as dp
 
 
