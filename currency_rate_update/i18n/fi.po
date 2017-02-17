@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 23:30+0000\n"
-"PO-Revision-Date: 2017-01-13 23:30+0000\n"
+"POT-Creation-Date: 2017-01-20 23:25+0000\n"
+"PO-Revision-Date: 2017-01-20 23:25+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2017\n"
 "Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Nimi"
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:92
 #, python-format
 msgid "Error !"
-msgstr ""
+msgstr "Virhe!"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:73
