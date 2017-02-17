@@ -161,9 +161,7 @@ class ResCompany(models.Model):
             pass
 
         try:
-            self.env['account.full.reconcile'].search(
-                [('company_id', '=', self.id)]
-            ).unlink()
+            self.env['account.full.reconcile'].search([]).unlink()
         except KeyError:
             pass
 
@@ -172,6 +170,12 @@ class ResCompany(models.Model):
         )
         settings_id.write({
             'has_chart_of_accounts': False,
-            'expects_chart_of_accounts': False,
+            'expects_chart_of_accounts': True,
+            'chart_template_id': False,
         })
+        self.chart_template_id = False
+
+        if settings_id:
+            settings_id.execute()
+
         return True
