@@ -23,7 +23,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[account_balance_line](account_balance_line/) | 9.0.1.0.0 | Display balance totals in move line view
+[account_balance_line](account_balance_line/) | 9.0.1.1.0 | Display balance totals in move line view
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 9.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 9.0.1.0.0 | Account Fiscal Year
 [account_invoice_currency](account_invoice_currency/) | 9.0.1.0.0 | Company currency in invoices
