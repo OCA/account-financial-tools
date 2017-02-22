@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009-2016 Noviat
+# Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 try:
@@ -162,7 +162,8 @@ class AccountMoveLineImport(models.TransientModel):
 
         for i, hf in enumerate(header_fields):
 
-            if hf in self._field_methods:
+            if hf in self._field_methods \
+                    and self._field_methods[hf].get('method'):
                 continue
 
             if hf not in self._orm_fields \
@@ -431,6 +432,13 @@ class AccountMoveLineImport(models.TransientModel):
 
         if 'credit' not in aml_vals:
             aml_vals['credit'] = 0.0
+
+        debit_sign = line['debit'] and line['debit'][0]
+        credit_sign = line['credit'] and line['credit'][0]
+        if aml_vals['debit'] < 0 or aml_vals['credit'] < 0 \
+                or aml_vals['debit'] * aml_vals['credit'] != 0:
+            msg = _("Incorrect debit/credit values !")
+            self._log_line_error(line, msg)
 
         if 'partner_id' not in aml_vals:
             # required since otherwise the partner_id
