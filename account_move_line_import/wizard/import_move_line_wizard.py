@@ -433,8 +433,6 @@ class AccountMoveLineImport(models.TransientModel):
         if 'credit' not in aml_vals:
             aml_vals['credit'] = 0.0
 
-        debit_sign = line['debit'] and line['debit'][0]
-        credit_sign = line['credit'] and line['credit'][0]
         if aml_vals['debit'] < 0 or aml_vals['credit'] < 0 \
                 or aml_vals['debit'] * aml_vals['credit'] != 0:
             msg = _("Incorrect debit/credit values !")
