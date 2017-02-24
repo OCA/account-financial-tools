@@ -21,24 +21,24 @@ msgstr ""
 #. module: account_journal_period_close
 #: model:ir.model,name:account_journal_period_close.model_account_period
 msgid "Account period"
-msgstr ""
+msgstr "Periodo contable"
 
 #. module: account_journal_period_close
 #: view:account.period:account_journal_period_close.view_account_period_form
 msgid "Add all journals"
-msgstr ""
+msgstr "Añadir todos los diarios"
 
 #. module: account_journal_period_close
 #: view:account.period:account_journal_period_close.view_account_period_form
 msgid "Close journal for this period"
-msgstr ""
+msgstr "Cerrar diario para este periodo"
 
 #. module: account_journal_period_close
 #: code:addons/account_journal_period_close/model/account_journal_period.py:66
 #, python-format
 msgid ""
 "In order to close a journal, you must first post related journal entries."
-msgstr ""
+msgstr "Para poder cerrar un diario, antes debe asentar todos los asientos"
 
 #. module: account_journal_period_close
 #: code:addons/account_journal_period_close/model/account_journal_period.py:65
@@ -49,7 +49,7 @@ msgstr "Acción no válida."
 #. module: account_journal_period_close
 #: model:ir.model,name:account_journal_period_close.model_account_journal_period
 msgid "Journal Period"
-msgstr ""
+msgstr "Periodo del diario"
 
 #. module: account_journal_period_close
 #: field:account.journal.period,type:0
@@ -59,7 +59,7 @@ msgstr "Tipo de diario"
 #. module: account_journal_period_close
 #: field:account.period,journal_period_ids:0
 msgid "Journal states"
-msgstr ""
+msgstr "Estados del diario"
 
 #. module: account_journal_period_close
 #: view:account.period:account_journal_period_close.view_account_period_form
@@ -69,9 +69,9 @@ msgstr "Diarios"
 #. module: account_journal_period_close
 #: view:account.period:account_journal_period_close.view_account_period_form
 msgid "Reopen journal for this period"
-msgstr ""
+msgstr "Reabrir diario para este periodo"
 
 #. module: account_journal_period_close
 #: sql_constraint:account.journal.period:0
 msgid "You can not add same journal in the same period twice."
-msgstr ""
+msgstr "No puede añadir el mismo diario en el mismo periodo dos veces"
