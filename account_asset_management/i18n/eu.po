@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:26+0000\n"
+"POT-Creation-Date: 2017-02-17 23:22+0000\n"
+"PO-Revision-Date: 2017-02-23 15:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Basque (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -345,7 +345,7 @@ msgstr ""
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 #: selection:asset.asset.report,state:0
 msgid "Close"
-msgstr ""
+msgstr "Itxi"
 
 #. module: account_asset_management
 #: field:account.asset.asset,company_id:0
@@ -354,7 +354,7 @@ msgstr ""
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 #: field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Enpresa"
 
 #. module: account_asset_management
 #: field:account.asset.asset,company_currency_id:0
@@ -842,7 +842,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Hilabete"
 
 #. module: account_asset_management
 #: field:account.asset.category,name:0
@@ -921,7 +921,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Kidea"
 
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0
@@ -1231,7 +1231,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: field:asset.asset.report,name:0 selection:asset.modify,method_period:0
 msgid "Year"
-msgstr ""
+msgstr "Urtea"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:105

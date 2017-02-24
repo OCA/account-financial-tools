@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:26+0000\n"
+"POT-Creation-Date: 2017-02-17 23:22+0000\n"
+"PO-Revision-Date: 2017-02-23 15:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Basque (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/eu/)\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr ""
+msgstr "Itxi"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:749
@@ -99,7 +99,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Enpresa"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
@@ -909,7 +909,7 @@ msgstr ""
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
 msgid "Warning"
-msgstr ""
+msgstr "Kontuz"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0

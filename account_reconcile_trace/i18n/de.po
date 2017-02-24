@@ -44,7 +44,7 @@ msgstr "Buchung zu verfolgbarer Ratenzahlung"
 #: help:account.reconcile.trace.direct,up_move_id:0
 #: help:account.reconcile.trace.recursive,up_move_id:0
 msgid "Account entry on up reconciliation trace."
-msgstr ""
+msgstr "Buchungsposten in aufwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
@@ -58,13 +58,13 @@ msgstr "Betrag"
 #: help:account.reconcile.trace.direct,down_amount:0
 #: help:account.reconcile.trace.recursive,down_amount:0
 msgid "Amount on down reconciliation trace."
-msgstr ""
+msgstr "Betrag in abwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,up_amount:0
 #: help:account.reconcile.trace.recursive,up_amount:0
 msgid "Amount on up reconciliation trace."
-msgstr ""
+msgstr "Betrag bei aufwärts Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
@@ -78,13 +78,13 @@ msgstr "Datum"
 #: help:account.reconcile.trace.direct,down_date:0
 #: help:account.reconcile.trace.recursive,down_date:0
 msgid "Date on down reconciliation trace."
-msgstr ""
+msgstr "Datum der abwärtigen Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,up_date:0
 #: help:account.reconcile.trace.recursive,up_date:0
 msgid "Date on up reconciliation trace."
-msgstr ""
+msgstr "Datum in aufwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,display_name:0
@@ -96,43 +96,43 @@ msgstr "Anzeigename"
 #: field:account.reconcile.trace.direct,down_amount:0
 #: field:account.reconcile.trace.recursive,down_amount:0
 msgid "Down Amount"
-msgstr ""
+msgstr "Abwärtige Summe"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_date:0
 #: field:account.reconcile.trace.recursive,down_date:0
 msgid "Down Date"
-msgstr ""
+msgstr "Abwärtiges Datum"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_journal_id:0
 #: field:account.reconcile.trace.recursive,down_journal_id:0
 msgid "Down Journal"
-msgstr ""
+msgstr "Abwärtiges Journal"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_move_id:0
 #: field:account.reconcile.trace.recursive,down_move_id:0
 msgid "Down Move"
-msgstr ""
+msgstr "Abwärtige Buchung"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_name:0
 #: field:account.reconcile.trace.recursive,down_name:0
 msgid "Down Name"
-msgstr ""
+msgstr "Abwärtige Bezeichnung"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,down_ref:0
 #: field:account.reconcile.trace.recursive,down_ref:0
 msgid "Down Ref"
-msgstr ""
+msgstr "Abwärtiger Bezug"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,super_up_move_id:0
 #: help:account.reconcile.trace.recursive,super_up_move_id:0
 msgid "First account entry on reconciliation trace."
-msgstr ""
+msgstr "Erster Posten der Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,id:0
@@ -157,13 +157,13 @@ msgstr "Journal"
 #: help:account.reconcile.trace.direct,down_journal_id:0
 #: help:account.reconcile.trace.recursive,down_journal_id:0
 msgid "Journal on down reconciliation trace."
-msgstr ""
+msgstr "Journal der abwärtigen Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,up_journal_id:0
 #: help:account.reconcile.trace.recursive,up_journal_id:0
 msgid "Journal on up reconciliation trace."
-msgstr ""
+msgstr "Journal der aufwärtigen Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,__last_update:0
@@ -175,7 +175,7 @@ msgstr "Zuletzt geändert am"
 #: help:account.reconcile.trace.direct,super_down_move_id:0
 #: help:account.reconcile.trace.recursive,super_down_move_id:0
 msgid "Last account entry on reconciliation trace."
-msgstr ""
+msgstr "Letzter Posten der Ausgleichverfolgung."
 
 #. module: account_reconcile_trace
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
@@ -194,13 +194,13 @@ msgstr "Name"
 #: help:account.reconcile.trace.direct,down_name:0
 #: help:account.reconcile.trace.recursive,down_name:0
 msgid "Name of journal item on down reconciliation trace."
-msgstr ""
+msgstr "Bezeichnung des Journalpostens bei abwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,up_name:0
 #: help:account.reconcile.trace.recursive,up_name:0
 msgid "Name of journal item on up reconciliation trace."
-msgstr ""
+msgstr "Bezeichnung des Journalpostens bei aufwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: view:account.invoice:account_reconcile_trace.invoice_supplier_trace_form
@@ -208,19 +208,19 @@ msgstr ""
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Ref"
-msgstr ""
+msgstr "Bez"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,down_ref:0
 #: help:account.reconcile.trace.recursive,down_ref:0
 msgid "Reference of journal item on down reconciliation trace."
-msgstr ""
+msgstr "Referenz des Journalpostens bei abwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,up_ref:0
 #: help:account.reconcile.trace.recursive,up_ref:0
 msgid "Reference of journal item on up reconciliation trace."
-msgstr ""
+msgstr "Referenz des Journalpostens bei aufwärtiger Ausgleichsverfolgung."
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,super_down_move_id:0
@@ -240,7 +240,7 @@ msgstr ""
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace"
-msgstr ""
+msgstr "Verfolgung"
 
 #. module: account_reconcile_trace
 #: field:account.invoice,trace_down_ids:0
@@ -248,7 +248,7 @@ msgstr ""
 #: field:account.move,trace_down_ids:0
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace Down"
-msgstr ""
+msgstr "Verfolge abwärts"
 
 #. module: account_reconcile_trace
 #: field:account.invoice,trace_up_ids:0
@@ -256,50 +256,50 @@ msgstr ""
 #: field:account.move,trace_up_ids:0
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Trace Up"
-msgstr ""
+msgstr "Verfolge aufwärts"
 
 #. module: account_reconcile_trace
 #: model:account.account,name:account_reconcile_trace.tcc
 msgid "Transfer Creditors Credit"
-msgstr ""
+msgstr "Übertrage Kreditoren-Haben"
 
 #. module: account_reconcile_trace
 #: model:account.account,name:account_reconcile_trace.tdd
 msgid "Transfer Debtors Debit"
-msgstr ""
+msgstr "Übertrage Debitoren-Soll"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_amount:0
 #: field:account.reconcile.trace.recursive,up_amount:0
 msgid "Up Amount"
-msgstr ""
+msgstr "Aufwärtige Summe"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_date:0
 #: field:account.reconcile.trace.recursive,up_date:0
 msgid "Up Date"
-msgstr ""
+msgstr "Aufwärtiges Datum"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_journal_id:0
 #: field:account.reconcile.trace.recursive,up_journal_id:0
 msgid "Up Journal"
-msgstr ""
+msgstr "Aufwärtiges Journal"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_move_id:0
 #: field:account.reconcile.trace.recursive,up_move_id:0
 msgid "Up Move"
-msgstr ""
+msgstr "Aufwärtige Buchung"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_name:0
 #: field:account.reconcile.trace.recursive,up_name:0
 msgid "Up Name"
-msgstr ""
+msgstr "Aufwärtige Bezeichnung"
 
 #. module: account_reconcile_trace
 #: field:account.reconcile.trace.direct,up_ref:0
 #: field:account.reconcile.trace.recursive,up_ref:0
 msgid "Up Ref"
-msgstr ""
+msgstr "Aufw Ref"

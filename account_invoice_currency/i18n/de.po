@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
@@ -17,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:26+0000\n"
-"PO-Revision-Date: 2017-02-09 15:58+0000\n"
+"POT-Creation-Date: 2017-02-17 23:22+0000\n"
+"PO-Revision-Date: 2017-02-19 18:04+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -58,18 +59,18 @@ msgstr "RechnungInvoice"
 msgid ""
 "Invoice tax amount in the company currency (useful when invoice currency is "
 "different from company currency)."
-msgstr ""
+msgstr "Rechnungssteuerbetrag in Unternehmenswährung (nützlich, wenn Rechnungswährung sich von Unternehmenswährung unterscheidet)."
 
 #. module: account_invoice_currency
 #: help:account.invoice,cc_amount_total:0
 msgid ""
 "Invoice total amount in the company currency (useful when invoice currency "
 "is different from company currency)."
-msgstr ""
+msgstr "Rechnungsbruttosumme in Unternehmenswährung (nützlich, wenn Rechnungswährung sich von Unternehmenswährung unterscheidet)."
 
 #. module: account_invoice_currency
 #: help:account.invoice,cc_amount_untaxed:0
 msgid ""
 "Invoice untaxed amount in the company currency (useful when invoice currency"
 " is different from company currency)."
-msgstr ""
+msgstr "Rechnungsnettosumme in Unternehmenswährung (nützlich, wenn Rechnungswährung sich von Unternehmenswährung unterscheidet)."

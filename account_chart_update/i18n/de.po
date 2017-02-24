@@ -12,15 +12,15 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
-# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2017
 # UAB "Draugiški sprendimai" <transifex@draugiskisprendimai.lt>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-02-17 23:22+0000\n"
+"PO-Revision-Date: 2017-02-24 22:42+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Konto, welches aktualisiert werden muss (neue oder geänderte Vorlage)."
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.financial.report,account_id:0
 msgid "Account to change on financial report"
-msgstr ""
+msgstr "Im Finanzbericht zu änderndes Konto"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,update_account_id:0
@@ -73,13 +73,13 @@ msgstr "Aktiv"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
 msgid "Add account"
-msgstr ""
+msgstr "Konto hinzufügen"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1197
 #, python-format
 msgid "Added account %s to financial report %s.\n"
-msgstr ""
+msgstr "Konto %s dem Finanzbericht %s hinzugefügt.\n"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -181,12 +181,12 @@ msgstr "%d Steuern deaktiviert\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_tax_codes:0
 msgid "Deactivated tax codes"
-msgstr ""
+msgstr "Deaktivierte Steuerschlüssel"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_taxes:0
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Deaktivierte Steuern"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,display_name:0
@@ -243,18 +243,18 @@ msgstr "Bestehende Steuern sind aktualisiert. Steuern werden nach Name gesucht."
 msgid ""
 "Financial report mapping that needs to be updated (new or updated in the "
 "template)."
-msgstr ""
+msgstr "Finanzberichts-Zuordnung, die aktualisiert werden soll (neu oder Vorlagenanpassung)."
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.financial.report,financial_report_id:0
 msgid "Financial report to update"
-msgstr ""
+msgstr "Zu aktualisierender Finanzbericht"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 #: field:wizard.update.charts.accounts,financial_report_ids:0
 msgid "Financial reports"
-msgstr ""
+msgstr "Finanzberichte"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
@@ -375,12 +375,12 @@ msgstr "Name oder Beschreibung nicht gefunden."
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_accounts:0
 msgid "New accounts"
-msgstr ""
+msgstr "Neue Konten"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_fps:0
 msgid "New fiscal positions"
-msgstr ""
+msgstr "Neue Steuerzuordnungen"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax.code,type:0
@@ -390,12 +390,12 @@ msgstr "Neuer Steuerschlüssel"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_tax_codes:0
 msgid "New tax codes"
-msgstr ""
+msgstr "Neue Steuerschlüssel"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_taxes:0
 msgid "New taxes"
-msgstr ""
+msgstr "Neue Steuern"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -463,13 +463,13 @@ msgstr "Zu aktualisierende/erstellende Datensätze"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
 msgid "Remove account"
-msgstr ""
+msgstr "Konto entfernen"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1203
 #, python-format
 msgid "Removed account %s from financial report %s.\n"
-msgstr ""
+msgstr "Konto %s aus Finanzbericht %s entfernt.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,state:0
@@ -586,7 +586,7 @@ msgstr "Steuern"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:616
 #, python-format
 msgid "The Tax Included in Price field is different.\n"
-msgstr ""
+msgstr "Die Steuer des Preisfeldes weicht ab.\n"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:636
@@ -781,7 +781,7 @@ msgstr "Die Anwenderart weicht ab.\n"
 msgid ""
 "This wizard will update your accounts, taxes, fiscal positions and financial"
 " reports according to the selected chart template"
-msgstr ""
+msgstr "Dieser Assistent aktualisiert Ihre Konten, Steuern, Steuerzuordnungen und Finanzberichte gemäß der ausgewählten Kontenplanschablone"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:573
@@ -832,7 +832,7 @@ msgstr "Aktualisiere übergeordnete Konten"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_financial_reports:0
 msgid "Update financial report accounts"
-msgstr ""
+msgstr "Aktualisiere Finanzberichtskonten"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_fiscal_position:0
@@ -857,7 +857,7 @@ msgstr "Steuern aktualisieren"
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_financial_reports:0
 msgid "Update the financial reports mapping the accounts"
-msgstr ""
+msgstr "Aktualisiere die Kontenzuordnung von Finanzberichten"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_children_accounts_parent:0
@@ -876,12 +876,12 @@ msgstr "Aktualisiertes Konto %s.\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_accounts:0
 msgid "Updated accounts"
-msgstr ""
+msgstr "Geänderte Konten"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_fps:0
 msgid "Updated fiscal positions"
-msgstr ""
+msgstr "Geänderte Steuerzuordnungen"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
@@ -903,12 +903,12 @@ msgstr "Aktualisierter Steuerschlüssel %s.\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_tax_codes:0
 msgid "Updated tax codes"
-msgstr ""
+msgstr "Geänderte Steuerschlüssel"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_taxes:0
 msgid "Updated taxes"
-msgstr ""
+msgstr "Geänderte Steuern"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -920,7 +920,7 @@ msgstr "Aktualisierte Vorlage"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0
 msgid "Warning"
-msgstr ""
+msgstr "Hinweis"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
