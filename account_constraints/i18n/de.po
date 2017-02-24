@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:25+0000\n"
-"PO-Revision-Date: 2017-02-09 15:59+0000\n"
+"POT-Creation-Date: 2017-02-17 23:22+0000\n"
+"PO-Revision-Date: 2017-02-19 18:04+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Journaleinträge"
 #. module: account_constraints
 #: field:account.bank.statement.line,state:0
 msgid "Statement state"
-msgstr ""
+msgstr "Auszugsstatus"
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:147
@@ -109,7 +109,7 @@ msgstr "Der in Zweitwährung ausgedrückte Betrag muss positiv ausfallen, wenn d
 msgid ""
 "When new statement is created the status will be 'Draft'.\n"
 "And after getting confirmation from the bank it will be in 'Confirmed' status."
-msgstr ""
+msgstr "Wenn neuer Auszug angelegt wird, ist der Status 'Entwurf'.\nNach der Bestätigung von Seiten der Bank wird der Status 'Bestätigt'."
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:157
