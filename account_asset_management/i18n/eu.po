@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:16+0000\n"
+"POT-Creation-Date: 2017-02-17 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Basque (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/eu/)\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: field:account.asset.recompute.trigger,company_id:0
 #: view:asset.asset.report:0 field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Enpresa"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1488
@@ -370,7 +370,7 @@ msgstr ""
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Kidea"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1493
@@ -626,7 +626,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr ""
+msgstr "Hilabete"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -924,7 +924,7 @@ msgstr "Ezeztatu"
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Close"
-msgstr ""
+msgstr "Itxi"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -1212,7 +1212,7 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: field:asset.asset.report,name:0 selection:asset.modify,method_period:0
 msgid "Year"
-msgstr ""
+msgstr "Urtea"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0

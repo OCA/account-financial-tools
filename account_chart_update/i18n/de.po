@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-16 23:40+0000\n"
-"PO-Revision-Date: 2016-09-20 19:42+0000\n"
+"POT-Creation-Date: 2017-02-17 23:13+0000\n"
+"PO-Revision-Date: 2017-02-24 20:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "Das Info-Feld weicht ab.\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_taxes:0
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Deaktivierte Steuern"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:466
@@ -151,7 +151,7 @@ msgstr "Neue Steuern"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_tax_codes:0
 msgid "Deactivated tax codes"
-msgstr ""
+msgstr "Deaktivierte Steuerschlüssel"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_tax_codes:0

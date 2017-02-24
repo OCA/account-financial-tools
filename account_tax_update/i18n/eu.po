@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"POT-Creation-Date: 2017-02-17 23:14+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Basque (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/eu/)\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: account_tax_update
 #: view:account.update.tax.select_taxes:0
 msgid "Save"
-msgstr ""
+msgstr "Gorde"
 
 #. module: account_tax_update
 #: field:account.update.tax.config,default_amount:0
@@ -154,7 +154,7 @@ msgstr ""
 #: field:account.update.tax.config.line,sale_config_id:0
 #: field:account.update.tax.select_taxes,config_id:0
 msgid "Configuration"
-msgstr ""
+msgstr "Konfigurazioa"
 
 #. module: account_tax_update
 #: field:account.update.tax.config,name:0
@@ -208,7 +208,7 @@ msgstr ""
 #: code:addons/account_tax_update/model/update_tax_config.py:440
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Errorea"
 
 #. module: account_tax_update
 #: selection:account.update.tax.config,state:0

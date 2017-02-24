@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-02-17 23:14+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_journal_period_close
 #: model:ir.model,name:account_journal_period_close.model_account_period
 msgid "Account period"
-msgstr ""
+msgstr "Période du compte"
 
 #. module: account_journal_period_close
 #: code:addons/account_journal_period_close/model/account_journal_period.py:65
