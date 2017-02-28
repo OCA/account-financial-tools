@@ -26,10 +26,11 @@ that can be used later for testing the renumber wizard.
 
 author: Borja López Soilán (Pexego)
 """
-
 import sys
 import xmlrpclib
 import logging
+
+
 logger = logging.getLogger("create_lots_of_account_moves")
 
 
@@ -52,9 +53,7 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
         url_template % (server, port, 'object'))
 
     for i in range(1, howmany):
-        #
         # Create one account move
-        #
         move_id = object_facade.execute(dbname, user_id, passwd,
                                         'account.move', 'create', {
                                             'ref': 'Test%s' % i,
@@ -97,15 +96,11 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
                                             'to_check': 0
                                         },
                                         {})
-
         # Validate the move
         object_facade.execute(dbname, user_id, passwd,
                               u'account.move', 'button_validate',
                               [move_id], {})
 
-# ------------------------------------------------------------------------
-# ------------------------------------------------------------------------
-# ------------------------------------------------------------------------
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:

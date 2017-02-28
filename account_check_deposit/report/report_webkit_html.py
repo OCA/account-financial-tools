@@ -36,6 +36,7 @@ class report_webkit_html(report_sxw.rml_parse):
             'uid': uid,
         })
 
+
 report_sxw.report_sxw('report.account.check.deposit',
                       'account.check.deposit',
                       'addons/account_check_deposit/report/check_deposit.mako',
