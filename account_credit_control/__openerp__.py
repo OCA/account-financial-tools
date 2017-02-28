@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Account Credit Control',
- 'version': '0.2.0',
+ 'version': '7.0.0.2.1',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Finance',

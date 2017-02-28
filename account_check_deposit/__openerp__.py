@@ -21,10 +21,9 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-
 {
     'name': 'Account Check Deposit',
-    'version': '0.1',
+    'version': '7.0.0.1.1',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Manage deposit of checks to the bank',
