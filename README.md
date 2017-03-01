@@ -27,6 +27,7 @@ addon | version | summary
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 9.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 9.0.1.0.0 | Account Fiscal Year
 [account_invoice_currency](account_invoice_currency/) | 9.0.1.0.0 | Company currency in invoices
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 9.0.1.0.0 | Introduces the purchase order line to the journal items
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 | Permanent Lock Move
 [account_renumber](account_renumber/) | 9.0.1.0.0 | Account Renumber Wizard
