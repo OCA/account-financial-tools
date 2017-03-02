@@ -44,7 +44,7 @@
             <field name="model">account.cost.center</field>
             <field name="arch" type="xml">
                 <search string="Cost Centers">
-                    <field name="name" string="Name/Code" filter_domain="['|', '|', ('code','ilike', self), ('name','ilike',self)]"/>
+                    <field name="name" string="Name/Code" filter_domain="['|', ('code','ilike', self), ('name','ilike',self)]"/>
                 </search>
             </field>
         </record>
