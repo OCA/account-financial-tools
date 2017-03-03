@@ -3,13 +3,14 @@
 # * async_move_line_importer
 # 
 # Translators:
+# Carla Berjano <berjano.carla@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-09 23:16+0000\n"
-"PO-Revision-Date: 2015-06-03 16:24+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-02-24 23:15+0000\n"
+"PO-Revision-Date: 2017-03-02 09:15+0000\n"
+"Last-Translator: Carla Berjano <berjano.carla@gmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,12 +87,12 @@ msgstr "História das mensagens e comunicações"
 #: model:mail.message.subtype,description:async_move_line_importer.mvl_imported
 #: model:mail.message.subtype,name:async_move_line_importer.mvl_imported
 msgid "Import successfully finished"
-msgstr ""
+msgstr "Importação terminada com sucesso"
 
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "Running"
-msgstr ""
+msgstr "Em execução"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_is_follower:0
@@ -102,12 +103,12 @@ msgstr "É um Seguidor"
 #: code:addons/async_move_line_importer/model/move_line_importer.py:214
 #, python-format
 msgid "%s lines imported"
-msgstr ""
+msgstr "%s linhas importadas"
 
 #. module: async_move_line_importer
 #: model:ir.model,name:async_move_line_importer.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Itens do Diário"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:187
@@ -122,7 +123,7 @@ msgid ""
 "Unexpected exception.\n"
 " %s \n"
 " %s"
-msgstr ""
+msgstr "Excepção inesperada.\n%s \n%s "
 
 #. module: async_move_line_importer
 #: field:move.line.importer,name:0
@@ -132,25 +133,25 @@ msgstr "Nome"
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "Success"
-msgstr ""
+msgstr "Sucesso"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:370
 #, python-format
 msgid "Import is running"
-msgstr ""
+msgstr "Importação em execução"
 
 #. module: async_move_line_importer
 #: model:ir.actions.act_window,name:async_move_line_importer.move_line_importer_action
 #: model:ir.ui.menu,name:async_move_line_importer.move_line_importer_action_menu
 msgid "Import Move lines"
-msgstr ""
+msgstr "Importar Linhas de Movimentos"
 
 #. module: async_move_line_importer
 #: model:mail.message.subtype,description:async_move_line_importer.mvl_error
 #: model:mail.message.subtype,name:async_move_line_importer.mvl_error
 msgid "Import failed"
-msgstr ""
+msgstr "Importação falhada"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_ids:0
@@ -165,7 +166,7 @@ msgstr "Resumo"
 #. module: async_move_line_importer
 #: view:move.line.importer:0 field:move.line.importer,report:0
 msgid "Report"
-msgstr ""
+msgstr "Relatório"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0
@@ -175,7 +176,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. module: async_move_line_importer
 #: help:move.line.importer,message_unread:0
@@ -186,7 +187,7 @@ msgstr "Se assinalada, há novas mensagens a requerer a sua atenção."
 #: code:addons/async_move_line_importer/model/move_line_importer.py:330
 #, python-format
 msgid "Please try latter"
-msgstr ""
+msgstr "Por favor tente mais tarde"
 
 #. module: async_move_line_importer
 #: model:ir.model,name:async_move_line_importer.model_account_move
@@ -196,7 +197,7 @@ msgstr "Movimento de Conta"
 #. module: async_move_line_importer
 #: view:move.line.importer:0
 msgid "Imported files"
-msgstr ""
+msgstr "Ficheiros importados"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_unread:0
@@ -224,7 +225,7 @@ msgstr "Tópico de Email"
 #. module: async_move_line_importer
 #: field:move.line.importer,file:0
 msgid "File"
-msgstr ""
+msgstr "Ficheiro"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0

@@ -1,6 +1,5 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# * account_balance_line
 # 
 # Translators:
 msgid ""
@@ -17,32 +16,7 @@ msgstr ""
 "Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "Account"
-msgstr ""
-
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "{'invisible_balance': False}"
-msgstr ""
-
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "{'group_by': 'account_id', 'invisible_balance': False}"
-msgstr ""
-
-#. module: account_balance_line
-#: view:account.move.line:0
-msgid "Total Balance"
-msgstr ""
-
-#. module: account_balance_line
-#: model:ir.model,name:account_balance_line.model_account_move_line
+#. module: account_compute_tax_amount
+#: model:ir.model,name:account_compute_tax_amount.model_account_move_line
 msgid "Journal Items"
 msgstr "Itens do Diário"
-
-#. module: account_balance_line
-#: field:account.move.line,line_balance:0
-msgid "Balance"
-msgstr "Saldo"
