@@ -60,7 +60,7 @@
         </field>
     </record>
 
-       <record id="account_followup_stat_by_partner_tree" model="ir.ui.view">
+    <record id="account_followup_stat_by_partner_tree" model="ir.ui.view">
         <field name="name">account_followup.stat.by.partner.tree</field>
         <field name="model">account_followup.stat.by.partner</field>
         <field name="arch" type="xml">
@@ -73,16 +73,16 @@
                <field name="company_id" groups="base.group_multi_company"/>
             </tree>
         </field>
-       </record>
+    </record>
 
-       <record id="view_account_followup_sending_results" model="ir.ui.view">
+    <record id="view_account_followup_sending_results" model="ir.ui.view">
         <field name="name">account_followup.sending.results.form</field>
         <field name="model">account_followup.sending.results</field>
         <field name="arch" type="xml">
-        <form string="Summary of actions">
-            <header>
+        <form>
+            <group>
                 <field name="description" widget="html" class="oe_view_only"/>
-            </header>
+            </group>
             <footer>
                 <field name="needprinting" invisible="1"/>
                 <div attrs="{'invisible':[('needprinting','=', False)]}">

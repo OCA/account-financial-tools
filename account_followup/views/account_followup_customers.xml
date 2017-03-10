@@ -109,13 +109,13 @@
                         order to exclude it from the next follow-up actions.
                     </p>
                     <field name="unreconciled_aml_ids">
-                        <tree string="Account Move line" editable="bottom" create="false" delete="false" colors="red:(not date_maturity or date_maturity&lt;=current_date) and result&gt;0">
+                        <tree string="Account Move line" editable="bottom" create="false" delete="false" colors="red:(not date_maturity or date_maturity&lt;=current_date) and balance&gt;0">
                             <field name="date" readonly="True"/>
                             <field name="company_id" readonly="True" groups="base.group_multi_company" />
                             <field name="move_id" readonly="True"/>
                             <field name="blocked"/>
                             <field name="date_maturity" readonly="True"/>
-                            <field name="result" readonly="True"/>
+                            <field name="balance" readonly="True"/>
                             <field name="followup_line_id" invisible='1'/>
                         </tree>
                     </field>

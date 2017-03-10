@@ -44,19 +44,20 @@ class AccountFollowupPrint(models.TransientModel):
     _name = 'account_followup.print'
     _description = 'Print Follow-up & Send Mail to Customers'
 
+    @api.model
     def _get_followup(self):
         if self.env.context.get('active_model') == 'account_followup.followup':
             return self.env.context.get('active_id', False)
         company_id = self.env.user.company_id.id
-        followup_id = self.env['account_followup.followup'].search([
+        followup = self.env['account_followup.followup'].search([
             ('company_id', '=', company_id)
         ])
-        return followup_id.id
+        return followup.id
 
     date = fields.Date(
         string='Follow-up Sending Date',
         required=True,
-        default=fields.Date.context_today,
+        default=fields.Date.today,
         help="This field allow you to select a forecast date to plan your "
              "follow-ups",
     )
@@ -65,7 +66,7 @@ class AccountFollowupPrint(models.TransientModel):
         string='Follow-Up',
         required=True,
         readonly=True,
-        default=_get_followup,
+        default=lambda self: self._get_followup(),
     )
     partner_ids = fields.Many2many(
         comodel_name='account_followup.stat.by.partner',
@@ -117,7 +118,7 @@ class AccountFollowupPrint(models.TransientModel):
         for partner in self.env['account_followup.stat.by.partner'].browse(
                 partner_ids):
             if partner.max_followup_id.manual_action:
-                partner_obj.do_partner_manual_action([partner.partner_id.id])
+                partner.partner_id.do_partner_manual_action()
                 nbmanuals += 1
                 key = partner.partner_id.payment_responsible_id.name or _(
                     "Anybody")
@@ -137,7 +138,7 @@ class AccountFollowupPrint(models.TransientModel):
                     .latest_followup_level_id_without_lit.name,
                     _(" will be sent")
                 )
-                partner_obj.message_post([partner.partner_id.id], body=message)
+                partner.partner_id.message_post(body=message)
         if nbunknownmails == 0:
             resulttext += str(nbmails) + _(" email(s) sent")
         else:
@@ -183,21 +184,19 @@ class AccountFollowupPrint(models.TransientModel):
     def clear_manual_actions(self, partner_list):
         # Partnerlist is list to exclude
         # Will clear the actions of partners that have no due payments anymore
-        partner_list_ids = [
-            partner.partner_id.id for partner in
-            self.env['account_followup.stat.by.partner'].browse(partner_list)
-        ]
-        ids = self.env['res.partner'].search([
+        StatByPartner = self.env['account_followup.stat.by.partner']
+        partner_list_ids = StatByPartner.browse(partner_list).ids
+        partners = self.env['res.partner'].search([
             '&', ('id', 'not in', partner_list_ids), '|',
             ('payment_responsible_id', '!=', False),
             ('payment_next_action_date', '!=', False)
         ])
 
-        partners_to_clear = []
-        for part in self.env['res.partner'].browse(ids):
+        partners_to_clear = self.env['res.partner']
+        for part in partners:
             if not part.unreconciled_aml_ids:
-                partners_to_clear.append(part.id)
-        self.env['res.partner'].action_done(partners_to_clear)
+                partners_to_clear += part
+        partners_to_clear.action_done()
         return len(partners_to_clear)
 
     @api.multi
@@ -207,47 +206,44 @@ class AccountFollowupPrint(models.TransientModel):
         tmp = self._get_partners_followup()
         partner_list = tmp['partner_ids']
         to_update = tmp['to_update']
-        for afp in self:
-            date = afp.date
-            # Update partners
-            afp.do_update_followup_level(to_update, partner_list, date)
-            # process the partners (send mails...)
-            restot_context = self.env.context.copy()
-            restot = self.with_context(restot_context).process_partners(
-                partner_list, afp)
-            # clear the manual actions if nothing is due anymore
-            nbactionscleared = self.clear_manual_actions(partner_list)
-            if nbactionscleared > 0:
-                restot['resulttext'] += \
-                    "<li>" + \
-                    _("%s partners have no credits and as such the action is "
-                        "cleared") % (str(nbactionscleared)) + "</li>"
-            # return the next action
-            mod_obj = self.env['ir.model.data']
-            model_data_ids = mod_obj.search([
-                ('model', '=', 'ir.ui.view'),
-                ('name', '=', 'view_account_followup_sending_results')
-            ])
-            resource_id = mod_obj.read(
-                model_data_ids, fields=['res_id'])[0]['res_id']
-            restot_context.update({
-                'description': restot['resulttext'],
-                'needprinting': restot['needprinting'],
-                'report_data': restot['action']
-            })
-            return {
-                'name': _('Send Letters and Emails: Actions Summary'),
-                'view_type': 'form',
-                'context': restot_context,
-                'view_mode': 'tree,form',
-                'res_model': 'account_followup.sending.results',
-                'views': [(resource_id, 'form')],
-                'type': 'ir.actions.act_window',
-                'target': 'new',
-                }
+        date = self.date
+        data = self.read([])[0]
+        # Update partners
+        self.do_update_followup_level(to_update, partner_list, date)
+        # process the partners (send mails...)
+        restot_context = self.env.context.copy()
+        restot = self.with_context(restot_context).process_partners(
+            partner_list, data)
+        # clear the manual actions if nothing is due anymore
+        nbactionscleared = self.clear_manual_actions(partner_list)
+        if nbactionscleared > 0:
+            restot['resulttext'] += \
+                "<li>" + \
+                _("%s partners have no credits and as such the action is "
+                    "cleared") % (str(nbactionscleared)) + "</li>"
+        # return the next action
+        resource = self.env.ref(
+            'account_followup.view_account_followup_sending_results'
+        )
+        restot_context.update({
+            'description': restot['resulttext'],
+            'needprinting': restot['needprinting'],
+            'report_data': restot['action']
+        })
+        return {
+            'name': _('Send Letters and Emails: Actions Summary'),
+            'view_type': 'form',
+            'context': restot_context,
+            'view_mode': 'tree,form',
+            'res_model': 'account_followup.sending.results',
+            'views': [(resource.id, 'form')],
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            }
 
     @api.multi
     def _get_msg(self):
+        # TODO is this needed?
         return self.env.user.company_id.follow_up_msg
 
     @api.multi
@@ -263,6 +259,7 @@ class AccountFollowupPrint(models.TransientModel):
                 "LEFT JOIN account_account AS a "
                 "ON (l.account_id=a.id) "
                 "WHERE (l.reconciled IS False) "
+                "AND (a.internal_type='receivable') "
                 "AND (l.partner_id is NOT NULL) "
                 "AND (l.debit > 0) "
                 "AND (l.company_id = %s) "
@@ -281,7 +278,7 @@ class AccountFollowupPrint(models.TransientModel):
                 "SELECT * "
                 "FROM account_followup_followup_line "
                 "WHERE followup_id=%s "
-                "ORDER BY delay", (fup_id.id,))
+                "ORDER BY delay", (fup_id,))
 
             # Create dictionary of tuples where first element is the date to
             # compare with the due date and second element is the id of the

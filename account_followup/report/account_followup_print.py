@@ -5,7 +5,7 @@
 
 import time
 from collections import defaultdict
-from openerp import fields, models, _
+from openerp import api, fields, models, _
 from openerp.exceptions import ValidationError
 from openerp.report import report_sxw
 
@@ -13,8 +13,9 @@ from openerp.report import report_sxw
 class ReportRappel(report_sxw.rml_parse):
     _name = "account_followup.report.rappel"
 
-    def init(self, cr):
-        super(ReportRappel, self).init(cr)
+    @api.model_cr
+    def init(self):
+        super(ReportRappel, self).init()
         self.localcontext.update({
             'time': time,
             'ids_to_objects': self._ids_to_objects,
@@ -37,10 +38,11 @@ class ReportRappel(report_sxw.rml_parse):
         moveline_obj = self.env['account.move.line']
         moveline_ids = moveline_obj.search([
             ('partner_id', '=', partner.id),
+            ('account_id.internal_type', '=', 'receivable'),
             ('reconciled', '=', False),
             ('company_id', '=', company_id),
             '|', ('date_maturity', '=', False),
-            ('date_maturity', '<=', fields.date.context_today(self)),
+            ('date_maturity', '<=', fields.Date.today()),
         ])
 
         # lines_per_currency = {currency: [line data, ...], ...}
@@ -93,6 +95,7 @@ class ReportRappel(report_sxw.rml_parse):
             ('company_id', '=', stat_line.company_id.id),
             ('blocked', '=', False),
             ('debit', '!=', False),
+            ('account_id.internal_type', '=', 'receivable'),
             ('followup_line_id', '!=', False)
         ])
         partner_max_delay = 0

@@ -44,10 +44,10 @@ class ResPartner(models.Model):
              "his promises.",
     )
     unreconciled_aml_ids = fields.One2many(
-        comodel_name='account.move.line',
-        inverse_name='followup_id',
-        string='partner_id',
-        domain=[('reconciled', '=', False)],
+        'account.move.line',
+        'partner_id',
+        domain=[('reconciled', '=', False),
+                ('account_id.internal_type', '=', 'receivable')]
     )
     latest_followup_date = fields.Date(
         string="Latest Follow-up Date",
@@ -71,10 +71,12 @@ class ResPartner(models.Model):
     payment_amount_due = fields.Float(
         string="Amount Due",
         compute='_compute_amounts_and_date',
+        search='_payment_due_search'
     )
     payment_amount_overdue = fields.Float(
         string="Amount Overdue",
         compute='_compute_amounts_and_date',
+        search='_payment_overdue_search'
     )
     payment_earliest_due_date = fields.Date(
         string="Worst Due Date",
@@ -82,7 +84,7 @@ class ResPartner(models.Model):
     )
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type=None, toolbar=False,
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
         res = super(ResPartner, self).fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
@@ -96,12 +98,11 @@ class ResPartner(models.Model):
         return res
 
     @api.multi
-    @api.depends('latest_followup_date', 'latest_followup_level_id',
-                 'latest_followup_level_id_without_lit')
+    @api.depends('unreconciled_aml_ids.amount_residual',
+                 'unreconciled_aml_ids.followup_line_id')
     def _compute_latest(self, company_id=None):
-        res = {}
-        company = self.company_id or self.env.user.company_id
         for partner in self:
+            company = partner.company_id or self.env.user.company_id
             amls = partner.unreconciled_aml_ids
             latest_date = False
             latest_level = False
@@ -109,34 +110,32 @@ class ResPartner(models.Model):
             latest_level_without_lit = False
             latest_days_without_lit = False
             for aml in amls:
-                if (aml.company_id == company) and \
-                        (aml.followup_line_id is not False) and \
+                if aml.company_id == company and \
+                        aml.followup_line_id is not False and \
                         (not latest_days or
                             latest_days < aml.followup_line_id.delay):
                     latest_days = aml.followup_line_id.delay
                     latest_level = aml.followup_line_id.id
-                if (aml.company_id == company) and \
+                if aml.company_id == company and \
                         (not latest_date or latest_date < aml.followup_date):
                     latest_date = aml.followup_date
-                if (aml.company_id == company) and \
-                        (aml.blocked is False) and (
+                if aml.company_id == company and \
+                        aml.blocked is False and (
                             aml.followup_line_id is not False and (
                                 not latest_days_without_lit or
                                 latest_days_without_lit <
                                 aml.followup_line_id.delay)):
                     latest_days_without_lit = aml.followup_line_id.delay
                     latest_level_without_lit = aml.followup_line_id.id
-            res[partner.id] = {
+            partner.write({
                 'latest_followup_date': latest_date,
                 'latest_followup_level_id': latest_level,
                 'latest_followup_level_id_without_lit':
                     latest_level_without_lit
-            }
-        return res
+            })
 
     @api.multi
     def do_partner_manual_action(self):
-        # partner_ids -> res.partner
         for partner in self:
             # Check action: check if the action was not empty, if not add
             if partner.payment_next_action:
@@ -150,12 +149,10 @@ class ResPartner(models.Model):
 
             # Check date: only change when it did not exist already
             action_date = \
-                partner.payment_next_action_date or \
-                fields.date.context_today(self)
+                partner.payment_next_action_date or fields.Date.today()
 
             # Check responsible: if partner has not got a responsible already,
             # take from follow-up
-            responsible_id = False
             if partner.payment_responsible_id:
                 responsible_id = partner.payment_responsible_id.id
             else:
@@ -173,7 +170,7 @@ class ResPartner(models.Model):
         # wizard_partner_ids are ids from special view, not from res.partner
         if not wizard_partner_ids:
             return {}
-        data['partner_ids'] = wizard_partner_ids
+        data.update({'partner_ids': wizard_partner_ids})
         datas = {
             'ids': wizard_partner_ids,
             'model': 'account_followup.followup',
@@ -216,10 +213,10 @@ class ResPartner(models.Model):
                 action_text = _("Email not sent because of email address of "
                                 "partner not filled in")
                 if partner.payment_next_action_date:
-                    payment_action_date = min(fields.date.context_today(self),
+                    payment_action_date = min(fields.Date.context_today(self),
                                               partner.payment_next_action_date)
                 else:
-                    payment_action_date = fields.date.context_today(self)
+                    payment_action_date = fields.Date.context_today(self)
                 if partner.payment_next_action:
                     payment_next_action = \
                         partner.payment_next_action + " \n " + action_text
@@ -238,9 +235,9 @@ class ResPartner(models.Model):
             :param ids: [id] of the partner for whom we are building the tables
             :rtype: string
         """
+        self.ensure_one()
         account_followup_print = self.env['account_followup.print']
 
-        self.ensure_one()
         partner = self.commercial_partner_id
         # copy the context to not change global context. Overwrite it because
         # _() looks for the lang in local variable 'context'.
@@ -248,8 +245,7 @@ class ResPartner(models.Model):
         followup_table = ''
         if partner.unreconciled_aml_ids:
             company = self.with_context(lang=partner.lang).env.user.company_id
-            current_date = fields.date.context_today(
-                self.with_context(lang=partner.lang))
+            current_date = fields.Date.today()
             rml_parse = \
                 account_followup_print.report_rappel("followup_rml_parser")
             final_res = rml_parse._lines_get_with_partner(partner, company.id)
@@ -302,24 +298,25 @@ class ResPartner(models.Model):
 
     @api.multi
     def write(self, values):
-        if values.get("payment_responsible_id", False):
+        new_responsible_id = values.get("payment_responsible_id", False)
+        if new_responsible_id:
             for part in self:
-                if part.payment_responsible_id != \
-                        values["payment_responsible_id"]:
+                if part.payment_responsible_id.id != new_responsible_id:
                     # Find partner_id of user put as responsible
-                    responsible_partner_id = self.env.user.partner_id.id
-                    self.env["mail.thread"].message_post(
+                    responsible_partner = self.env["res.users"].browse(
+                        values['payment_responsible_id']
+                    ).partner_id
+                    responsible_partner.message_post(
                         body=_(
                             "You became responsible to do the next action for "
                             "the payment follow-up of") + " <b><a href='#id=" +
-                        str(
-                            part.id) + "&view_type=form&model=res.partner'> " +
+                        str(part.id) + "&view_type=form&model=res.partner'> " +
                         part.name + " </a></b>",
                         type='comment',
                         subtype="mail.mt_comment",
                         model='res.partner',
                         res_id=part.id,
-                        partner_ids=[responsible_partner_id],
+                        partner_ids=[responsible_partner.id],
                     )
         return super(ResPartner, self).write(values)
 
@@ -340,10 +337,11 @@ class ResPartner(models.Model):
             # so we need to stop the user here.
             if not self.env['account.move.line'].search([
                 ('partner_id', '=', partner.id),
+                ('account_id.internal_type', '=', 'receivable'),
                 ('reconciled', '=', False),
                 ('company_id', '=', company_id),
                     '|', ('date_maturity', '=', False),
-                    ('date_maturity', '<=', fields.date.context_today(self))]):
+                    ('date_maturity', '<=', fields.Date.today())]):
                 raise ValidationError(
                     _("The partner does not have any accounting entries to "
                       "print in the overdue report for the current company."))
@@ -369,16 +367,15 @@ class ResPartner(models.Model):
             return self.do_partner_print(wizard_partner_ids, data)
 
     @api.multi
-    @api.depends('payment_amount_due', 'payment_amount_overdue',
-                 'payment_earliest_due_date')
+    @api.depends('unreconciled_aml_ids.date_maturity',
+                 'unreconciled_aml_ids.balance')
     def _compute_amounts_and_date(self):
         """ Function that computes values for the followup functional fields.
             Note that 'payment_amount_due' is similar to 'credit' field on
             res.partner except it filters on user's company.
         """
-        res = {}
         company = self.env.user.company_id
-        current_date = fields.Date.context_today(self)
+        current_date = fields.Date.today()
         for partner in self:
             worst_due_date = False
             amount_due = amount_overdue = 0.0
@@ -387,61 +384,31 @@ class ResPartner(models.Model):
                     date_maturity = aml.date_maturity or aml.date
                     if not worst_due_date or date_maturity < worst_due_date:
                         worst_due_date = date_maturity
-                    amount_due += aml.result
+                    amount_due += aml.balance
                     if date_maturity <= current_date:
-                        amount_overdue += aml.result
-            res[partner.id] = {
+                        amount_overdue += aml.balance
+            partner.write({
                 'payment_amount_due': amount_due,
                 'payment_amount_overdue': amount_overdue,
                 'payment_earliest_due_date': worst_due_date
-            }
-        return res
+            })
+
+    @api.multi
+    def _payment_due_search(self, operator, value):
+        domain = self.get_followup_lines_domain(
+            fields.Date.today(),
+            overdue_only=False
+        )
+        amls = self.env['account.move.line'].search(domain)
+        partners = amls.mapped('partner_id')
+        return [('id', 'in', partners.ids)]
 
     @api.model
-    def _get_followup_overdue_query(self, args, overdue_only=False):
-        """
-        This function is used to build the query and arguments to use when
-        making a search on functional fields
-            * payment_amount_due
-            * payment_amount_overdue
-        Basically, the query is exactly the same except that for overdue there
-        is an extra clause in the WHERE.
-
-        :param args: arguments given to the search in the usual domain
-            notation (list of tuples)
-        :param overdue_only: option to add the extra argument to filter on
-            overdue accounting entries or not
-        :returns: a tuple with
-            * the query to execute as first element
-            * the arguments for the execution of this query
-        :rtype: (string, [])
-        """
-        company_id = self.env.user.company_id.id
-        having_where_clause = ' AND '.join(
-            map(lambda x: '(SUM(bal2) %s %%s)' % (x[1]), args))
-        having_values = [x[2] for x in args]
-        query = self.env['account.move.line']._query_get()
-        overdue_only_str = overdue_only and 'AND date_maturity <= NOW()' or ''
-        return ("""
-            SELECT pid AS partner_id, SUM(bal2)
-            FROM (
-                SELECT CASE WHEN bal IS NOT NULL THEN bal
-                ELSE 0.0 END AS bal2, p.id as pid
-                FROM (
-                    SELECT (debit-credit) AS bal, partner_id
-                    FROM account_move_line l
-                    WHERE account_id IN(SELECT id FROM account_account)
-                    %s
-                    AND reconciled IS FALSE
-                    AND company_id = %s
-                    AND %s) AS l
-                RIGHT JOIN res_partner p
-                ON p.id = partner_id ) AS pl
-                GROUP BY pid HAVING """ %
-                (
-                    overdue_only_str,
-                    query,
-                    having_where_clause,
-                    [company_id] +
-                    having_values
-                ))
+    def _payment_overdue_search(self, operator, value):
+        domain = self.get_followup_lines_domain(
+            fields.Date.today(),
+            overdue_only=True
+        )
+        amls = self.env['account.move.line'].search(domain)
+        partners = amls.mapped('partner_id')
+        return [('id', 'in', partners.ids)]

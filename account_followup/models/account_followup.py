@@ -13,20 +13,20 @@ class AccountFollowup(models.Model):
     _rec_name = 'name'
 
     followup_line = fields.One2many(
-        comodel_name='account_followup.followup.line',
-        inverse_name='followup_id',
+        'account_followup.followup.line',
+        'followup_id',
         string='Follow-up',
         copy=True,
     )
     company_id = fields.Many2one(
-        comodel_name='res.company',
+        'res.company',
         string='Company',
         required=True,
         default=lambda self: self.env.user.company_id,
     )
     name = fields.Char(
-        string="Name",
-        related="company_id.name",
+        related='company_id.name',
+        readonly=True
     )
 
     @api.multi
@@ -46,7 +46,6 @@ class AccountFollowupLine(models.Model):
         required=True,
     )
     sequence = fields.Integer(
-        string='Sequence',
         help="Gives the sequence order when displaying a list of follow-up "
              "lines.",
     )
@@ -61,12 +60,12 @@ class AccountFollowupLine(models.Model):
         comodel_name='account_followup.followup',
         string='Follow Ups',
         required=True,
-        ondelete="cascade",
+        ondelete='cascade',
     )
     description = fields.Text(
         string='Printed Message',
         translate=True,
-        default='_get_default_description',
+        default=lambda self: self._get_default_description(),
     )
     send_email = fields.Boolean(
         string='Send an Email',
@@ -79,7 +78,6 @@ class AccountFollowupLine(models.Model):
         default=True,
     )
     manual_action = fields.Boolean(
-        string='Manual Action',
         help="When processing, it will set the manual action to be taken "
              "for that customer.",
     )
@@ -90,13 +88,11 @@ class AccountFollowupLine(models.Model):
     manual_action_responsible_id = fields.Many2one(
         comodel_name='res.users',
         string='Assign a Responsible',
-        ondelete='set null',
     )
     email_template_id = fields.Many2one(
         comodel_name='mail.template',
         string='Email Template',
-        ondelete='set null',
-        default='_get_default_template',
+        default=lambda self: self._get_default_template(),
     )
     _order = 'delay'
     _sql_constraints = [
@@ -106,7 +102,7 @@ class AccountFollowupLine(models.Model):
 
     @api.model
     def _get_default_description(self):
-        return """
+        return _("""
             Dear %(partner_name)s,
 
             Exception made if there was a mistake of ours, it seems that the
@@ -118,15 +114,12 @@ class AccountFollowupLine(models.Model):
             accounting department.
 
             Best Regards,
-        """
+        """)
 
     @api.model
     def _get_default_template(self):
-        try:
-            return self.env.ref(
-                'account_followup.email_template_account_followup_default')[1]
-        except ValueError:
-            return False
+        return self.env.ref(
+            'account_followup.email_template_account_followup_default', False)
 
     @api.multi
     @api.constrains('description')
@@ -145,4 +138,3 @@ class AccountFollowupLine(models.Model):
                         _('Your description is invalid, use the right legend '
                           'or %% if you want to use the percent character.')
                     )
-        return True

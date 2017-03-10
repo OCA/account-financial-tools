@@ -65,7 +65,7 @@ class AccountFollowupStat(models.Model):
                 max(l.followup_line_id) AS followup_id,
                 sum(l.debit) AS debit,
                 sum(l.credit) AS credit,
-                sum(l.debit - l.credit) AS balance,
+                sum(l.balance) AS balance,
                 l.company_id AS company_id,
                 l.blocked as blocked
         """
@@ -91,9 +91,10 @@ class AccountFollowupStat(models.Model):
         """
         return group_by_str
 
-    def init(self, cr):
-        tools.drop_view_if_exists(cr, self._table)
-        cr.execute("""
+    @api.model_cr
+    def init(self):
+        tools.drop_view_if_exists(self._cr, self._table)
+        self._cr.execute("""
             create or replace view %s as (
                 %s
                 FROM
@@ -112,11 +113,10 @@ class AccountFollowupStatByPartner(models.Model):
 
     @api.model
     def _get_invoice_partner_id(self):
-        result = {}
         for rec in self:
-            result[rec.id] = rec.partner_id.address_get(
-                adr_pref=['invoice']).get('invoice', rec.partner_id.id)
-        return result
+            rec.invoice_partner_id = rec.partner_id.address_get(
+                adr_pref=['invoice']
+            ).get('invoice', rec.partner_id)
 
     partner_id = fields.Many2one(
         comodel_name='res.partner',
@@ -161,6 +161,7 @@ class AccountFollowupStatByPartner(models.Model):
             'account_id', 'company_id', 'credit', 'date', 'debit',
             'followup_date', 'followup_line_id', 'partner_id', 'reconciled',
         ],
+        'account.account': ['internal_type'],
     }
 
     def _select(self):
@@ -171,7 +172,7 @@ class AccountFollowupStatByPartner(models.Model):
                 max(l.date) AS date_move_last,
                 max(l.followup_date) AS date_followup,
                 max(l.followup_line_id) AS max_followup_id,
-                sum(l.debit - l.credit) AS balance,
+                sum(l.balance) AS balance,
                 l.company_id as company_id
         """
         return select_str
@@ -185,14 +186,17 @@ class AccountFollowupStatByPartner(models.Model):
 
     def _where(self):
         where_str = """
-            WHERE l.reconciled is FALSE
+            WHERE
+                a.internal_type = 'receivable'
+                AND l.reconciled is FALSE
                 AND l.partner_id IS NOT NULL
                 GROUP BY l.partner_id, l.company_id
         """
         return where_str
 
-    def init(self, cr):
-        tools.drop_view_if_exists(cr, self._table)
+    @api.model_cr
+    def init(self):
+        tools.drop_view_if_exists(self._cr, self._table)
         # Here we don't have other choice but to create a virtual ID based
         # on the concatenation of the partner_id and the company_id, because
         # if a partner is shared between 2 companies, we want to see 2 lines
@@ -200,7 +204,7 @@ class AccountFollowupStatByPartner(models.Model):
         # to send him follow-ups separately . An assumption that the number of
         # companies will not reach 10 000 records is made, what should be
         # enough for a time.
-        cr.execute("""
+        self._cr.execute("""
             create view %s as (
                 %s
                 FROM %s

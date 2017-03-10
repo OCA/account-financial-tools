@@ -12,11 +12,13 @@ class AccountConfigSettings(models.TransientModel):
 
     @api.multi
     def open_followup_level_form(self):
-        res_ids = self.env['account_followup.followup'].search([])
+        res = self.env['account_followup.followup'].search([
+            ('company_id', '=', self.env.user.company_id.id)
+        ])
         return {
             'type': 'ir.actions.act_window',
             'name': _('Payment Follow-ups'),
             'res_model': 'account_followup.followup',
-            'res_id': res_ids and res_ids[0] or False,
+            'res_id': res and res.id or False,
             'view_mode': 'form,tree',
         }

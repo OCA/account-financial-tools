@@ -58,6 +58,7 @@ Contributors
 * Vincent revaville <vincent.renaville@camptocamp.com>
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
 * Vicent Cubells <vicent.cubells@tecnativa.com>
+* Andrea Stirpe <a.stirpe@onestein.nl>
 
 Maintainer
 ----------
