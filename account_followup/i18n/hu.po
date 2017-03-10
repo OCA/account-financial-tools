@@ -22,7 +22,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -49,13 +49,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Tisztelt ${object.name},</p>\n    <p>\n    Ha időközben kiegyenlítésre került, vagy a mi hibánkból adódóan téves, akkor tárgytalan, \nde adataink szerint a következő tétel kifizetés nélkül maradt. \nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\n\nHa a levél elküldése előtt a fizetés már megtörtént akkor kérjük tekintsék ezt tárgytalannak. Kérjük vegyék fel a kapcsolatot  könyvelési csoportunkkal.  \n\n    </p>\n<br/>\nÜdvözlettel,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Tisztelt ${object.name},</p>\n    <p>\n    Ha időközben kiegyenlítésre került, vagy a mi hibánkból adódóan téves, akkor tárgytalan, \nde adataink szerint a következő tétel kifizetés nélkül maradt. \nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\n\nHa a levél elküldése előtt a fizetés már megtörtént akkor kérjük tekintsék ezt tárgytalannak. Kérjük vegyék fel a kapcsolatot  könyvelési csoportunkkal.  \n\n    </p>\n<br/>\nÜdvözlettel,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -80,13 +80,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n    <p>\n    A többszörös fizetési-emlékeztető ellenére, még mindig nem történt meg a számla kiegyenlítése.\nHa nem történik meg a kiegyenlítés 8 napon belül, törvényes úton vagyunk kénytelenek az adósságot behajtani, minden további felszólítás nélkül.\nÚgy gondoljuk, hogy ez nem lesz szükséges lépés a lenti részletekkel kapcsolatban.\nAz üggyel kapcsolatban felmerült kérdésekben, kérjük vegyék fel a kapcsolatot a könyvelési csoportunkkal.\n</p>\n<br/>\nTisztelttel,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n    <p>\n    A többszörös fizetési-emlékeztető ellenére, még mindig nem történt meg a számla kiegyenlítése.\nHa nem történik meg a kiegyenlítés 8 napon belül, törvényes úton vagyunk kénytelenek az adósságot behajtani, minden további felszólítás nélkül.\nÚgy gondoljuk, hogy ez nem lesz szükséges lépés a lenti részletekkel kapcsolatban.\nAz üggyel kapcsolatban felmerült kérdésekben, kérjük vegyék fel a kapcsolatot a könyvelési csoportunkkal.\n</p>\n<br/>\nTisztelttel,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -108,13 +108,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Tisztelt ${object.name},</p>\n    <p>\n      Ha időközben kiegyenlítésre került, vagy a mi hibánkból adódóan téves, akkor tárgytalan, \nde adataink szerint a következő tétel kifizetés nélkül maradt. \nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\nHa a levél elküldése előtt a fizetés már megtörtént akkor kérjük tekintsék ezt tárgytalannak. Kérjük vegyék fel a kapcsolatot  könyvelési csoportunkkal.  \n    </p>\n<br/>\nÜdvözlettel,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Tisztelt ${object.name},</p>\n    <p>\n      Ha időközben kiegyenlítésre került, vagy a mi hibánkból adódóan téves, akkor tárgytalan, \nde adataink szerint a következő tétel kifizetés nélkül maradt. \nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\nHa a levél elküldése előtt a fizetés már megtörtént akkor kérjük tekintsék ezt tárgytalannak. Kérjük vegyék fel a kapcsolatot  könyvelési csoportunkkal.  \n    </p>\n<br/>\nÜdvözlettel,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -142,7 +142,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n   <p>\n    Csalódottan vettük tudomásul, és ezért fizetési-emlékeztetőt vagyunk kénytelenek küldeni, mivel a számlája már régebben esedékessé vált.Fontos, hogy azonnal fizessenek, egyéb esetben kénytelenek vagyunk elbírálni a számlájuk lezárását, ami azzal jár, hogy nem leszünk képesek időben szállítani az Önök vállalakozásának (termékeket/szolgáltatásokat).\nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\nHa a fizetéssel kapcsolatban probléma merült fel, amit mi nem vettünk figyelembe, akkor kérjük vegyék fel a könyvelési csoportunkkal a kapcsolatot, hogy elháríthassuk azt amilyen gyorsan csak lehet.\nA lejárt számlák részleteit lentebb találják.\n </p>\n<br/>\nÜdvözlettel,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n   <p>\n    Csalódottan vettük tudomásul, és ezért fizetési-emlékeztetőt vagyunk kénytelenek küldeni, mivel a számlája már régebben esedékessé vált.Fontos, hogy azonnal fizessenek, egyéb esetben kénytelenek vagyunk elbírálni a számlájuk lezárását, ami azzal jár, hogy nem leszünk képesek időben szállítani az Önök vállalakozásának (termékeket/szolgáltatásokat).\nKérjük Önöket a fizetés 8 napon belüli pontos teljesítésére.\nHa a fizetéssel kapcsolatban probléma merült fel, amit mi nem vettünk figyelembe, akkor kérjük vegyék fel a könyvelési csoportunkkal a kapcsolatot, hogy elháríthassuk azt amilyen gyorsan csak lehet.\nA lejárt számlák részleteit lentebb találják.\n </p>\n<br/>\nÜdvözlettel,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

@@ -29,12 +29,8 @@ class AccountFollowup(models.Model):
         readonly=True
     )
 
-    @api.multi
-    @api.constrains('company_id')
-    def _check_journal_id(self):
-        if len(self.company_id) > 1:
-            raise ValidationError(
-                _('Only one follow-up per company is allowed.'))
+    _sql_constraints = [('company_uniq', 'unique(company_id)',
+                         _('Only one follow-up per company is allowed'))]
 
 
 class AccountFollowupLine(models.Model):
@@ -102,19 +98,17 @@ class AccountFollowupLine(models.Model):
 
     @api.model
     def _get_default_description(self):
-        return _("""
-            Dear %(partner_name)s,
-
-            Exception made if there was a mistake of ours, it seems that the
-            following amount stays unpaid. Please, take appropriate measures
-            in order to carry out this payment in the next 8 days.
-
-            Would your payment have been carried out after this mail was sent,
-            please ignore this message. Do not hesitate to contact our
-            accounting department.
-
-            Best Regards,
-        """)
+        return _(
+            "<p>Dear %(partner_name)s,</p><br />"
+            "<p>Exception made if there was a mistake of ours, it seems that "
+            "the following amount stays unpaid. Please, take appropriate "
+            "measures in order to carry out this payment in the next 8 days."
+            "</p><br />"
+            "<p>Would your payment have been carried out after this mail was "
+            "sent, please ignore this message. Do not hesitate to contact our "
+            "accounting department.</p><br />"
+            "<p>Best Regards,</p>"
+        )
 
     @api.model
     def _get_default_template(self):

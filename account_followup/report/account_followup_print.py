@@ -5,7 +5,7 @@
 
 import time
 from collections import defaultdict
-from openerp import api, fields, models, _
+from openerp import fields, models, _
 from openerp.exceptions import ValidationError
 from openerp.report import report_sxw
 
@@ -13,8 +13,7 @@ from openerp.report import report_sxw
 class ReportRappel(report_sxw.rml_parse):
     _name = "account_followup.report.rappel"
 
-    @api.model_cr
-    def init(self):
+    def init(self, cr):
         super(ReportRappel, self).init()
         self.localcontext.update({
             'time': time,
@@ -64,7 +63,7 @@ class ReportRappel(report_sxw.rml_parse):
             lines_per_currency[currency].append(line_data)
 
         return [
-            {'line': lines, 'currency': currency} for currency, lines
+            {'line': lines, 'currency': new_currency} for new_currency, lines
             in lines_per_currency.items()]
 
     def _get_text(self, stat_line, followup_id, context=None):

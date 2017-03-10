@@ -24,7 +24,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -51,13 +51,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Beste ${object.name},</p>\n    <p>\n    Volgens onze informatie, heeft u nog een openstaand saldo. Wij verzoeken u het nodige te doen om dit bedrag binnen de 8 dagen over te schrijven op onze rekening.\n\nIndien uw betaling deze e-mail heeft gekruist, mag u dit bericht als onbestaand beschouwen. Neem gerust contact op met onze boekhouding mocht u nog vragen hebben.\n\n    </p>\n<br/>\nMet vriendelijke groeten,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Beste ${object.name},</p>\n    <p>\n    Volgens onze informatie, heeft u nog een openstaand saldo. Wij verzoeken u het nodige te doen om dit bedrag binnen de 8 dagen over te schrijven op onze rekening.\n\nIndien uw betaling deze e-mail heeft gekruist, mag u dit bericht als onbestaand beschouwen. Neem gerust contact op met onze boekhouding mocht u nog vragen hebben.\n\n    </p>\n<br/>\nMet vriendelijke groeten,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -82,13 +82,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n    <p>\n    Ondanks het feit dat wij u meerdere aanmaningen hebben gestuurd, is uw openstaand saldo nog steeds niet betaald.\nIndien dit bedrag niet binnen de 8 dagen op onze rekening staat, schakelen wij een advocaat in om het verschuldigde saldo bij u te innen. U ontvangt hierover geen verdere communicatie.\nWij gaan ervan uit dat deze stap niet nodig zal zijn. De details van de openstaande betalingen vindt u hierna.\nAarzel niet contact op te nemen met onze boekhouding als u nog vragen heeft.\n</p>\n<br/>\nHoogachtend,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n    <p>\n    Ondanks het feit dat wij u meerdere aanmaningen hebben gestuurd, is uw openstaand saldo nog steeds niet betaald.\nIndien dit bedrag niet binnen de 8 dagen op onze rekening staat, schakelen wij een advocaat in om het verschuldigde saldo bij u te innen. U ontvangt hierover geen verdere communicatie.\nWij gaan ervan uit dat deze stap niet nodig zal zijn. De details van de openstaande betalingen vindt u hierna.\nAarzel niet contact op te nemen met onze boekhouding als u nog vragen heeft.\n</p>\n<br/>\nHoogachtend,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -110,13 +110,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n    <p>\n    Volgens onze administratie hebben wij het onderstaande bedrag nog niet ontvangen. Wij verzoeken\nu het verschuldigde bedrag uiterlijk binnen 8 dagen over te maken.\nIndien dit schrijven uw betaling heeft gekruist, kunt u deze herinnering als niet verzonden beschouwen.\nVoor meer info kunt u steeds contact opnemen met onze boekhouding.\n    </p>\n<br/>\nHoogachtend,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n    <p>\n    Volgens onze administratie hebben wij het onderstaande bedrag nog niet ontvangen. Wij verzoeken\nu het verschuldigde bedrag uiterlijk binnen 8 dagen over te maken.\nIndien dit schrijven uw betaling heeft gekruist, kunt u deze herinnering als niet verzonden beschouwen.\nVoor meer info kunt u steeds contact opnemen met onze boekhouding.\n    </p>\n<br/>\nHoogachtend,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -144,7 +144,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n   <p>\n    Het spijt ons te moeten vaststellen dat u, ondanks een eerdere aanmaning, nog steeds een openstaand saldo hebt.\nWij verzoeken u dringend het openstaande saldo te betalen. Bij gebrek aan betaling, zijn wij genoodzaakt de verdere levering van goederen en diensten stop te zetten.\nGelieve de betalingen uit te voeren binnen de 8 dagen.\n\nAls er een probleem is rond de betaling waarvan wij niet op de hoogte zijn, kunt u steeds contact opnemen met onze boekhouding, zodat dit snel kan worden opgelost.\n\nHierna vindt u een overzicht van de vervallen documenten.\n </p>\n<br/>\nHoogachtend,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Beste ${object.name},</p>\n   <p>\n    Het spijt ons te moeten vaststellen dat u, ondanks een eerdere aanmaning, nog steeds een openstaand saldo hebt.\nWij verzoeken u dringend het openstaande saldo te betalen. Bij gebrek aan betaling, zijn wij genoodzaakt de verdere levering van goederen en diensten stop te zetten.\nGelieve de betalingen uit te voeren binnen de 8 dagen.\n\nAls er een probleem is rond de betaling waarvan wij niet op de hoogte zijn, kunt u steeds contact opnemen met onze boekhouding, zodat dit snel kan worden opgelost.\n\nHierna vindt u een overzicht van de vervallen documenten.\n </p>\n<br/>\nHoogachtend,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

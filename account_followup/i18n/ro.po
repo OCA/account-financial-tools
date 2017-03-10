@@ -23,7 +23,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -50,13 +50,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div stil=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-size: 12px; culoare: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n\n    <p>Stimate ${object.name},</p>\n    <p>\n    Exceptând cazul în care noi am făcut o greșeală, se pare ca următoarea sumă este încă neplătită. Vă rugăm să luați\nmăsurile necesare pentru a efectua aceasta plata în următoarele 8 zile.\n\nDacă ați efectuat plata după ce acest email a fost trimis, vă rugăm să nu luați în considerare acest mesaj. Nu ezitați să\ncontactați departamentul nostru contabil.  \n\n    </p>\n<br/>\nCu stima,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div stil=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-size: 12px; culoare: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n\n    <p>Stimate ${object.name},</p>\n    <p>\n    Exceptând cazul în care noi am făcut o greșeală, se pare ca următoarea sumă este încă neplătită. Vă rugăm să luați\nmăsurile necesare pentru a efectua aceasta plata în următoarele 8 zile.\n\nDacă ați efectuat plata după ce acest email a fost trimis, vă rugăm să nu luați în considerare acest mesaj. Nu ezitați să\ncontactați departamentul nostru contabil.  \n\n    </p>\n<br/>\nCu stima,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -81,13 +81,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div stil=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; culoare: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimater ${object.name},</p>\n    <p>\n    In ciuda mai multor instiintari trimise, contul dumneavoastra inca nu este rezolvat.\nDaca plata completa nu este efectuata in urmatoarele 8 zile, vom intreprinde actiunea legala pentru recuperarea datoriei fara\nalte instiintare.\nSperam ca aceasta actiune se va dovedi a nu fi necesara, detaliile platilor restante sunt tiparite mai jos.\nIn cazul in care aveti intrebari referitoare la aceasta chestiune, nu ezitati sa contactati departamentul nostru contabil.\n</p>\n<br/>\nCu stima,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div stil=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; culoare: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimater ${object.name},</p>\n    <p>\n    In ciuda mai multor instiintari trimise, contul dumneavoastra inca nu este rezolvat.\nDaca plata completa nu este efectuata in urmatoarele 8 zile, vom intreprinde actiunea legala pentru recuperarea datoriei fara\nalte instiintare.\nSperam ca aceasta actiune se va dovedi a nu fi necesara, detaliile platilor restante sunt tiparite mai jos.\nIn cazul in care aveti intrebari referitoare la aceasta chestiune, nu ezitati sa contactati departamentul nostru contabil.\n</p>\n<br/>\nCu stima,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -109,13 +109,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div stil=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; color: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimate ${object.name},</p>\n    <p>\n    Exceptand faptul ca a fost o greseala din partea noastra, se pare ca urmatoarea suma este neplatita. Va rugam sa\nluati masurile necesare pentru a efectua plata in urmatoarele 8 zile.\nDaca ati efectuat plata dupa ce acest email a fost trimis, va rugam sa nu luati in considerare acest mesaj. Nu ezitati sa\ncontactati departamentul nostru contabil.\n    </p>\n<br/>\nCu stima,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div stil=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; color: rgb(34, 34, 34); culoare-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimate ${object.name},</p>\n    <p>\n    Exceptand faptul ca a fost o greseala din partea noastra, se pare ca urmatoarea suma este neplatita. Va rugam sa\nluati masurile necesare pentru a efectua plata in urmatoarele 8 zile.\nDaca ati efectuat plata dupa ce acest email a fost trimis, va rugam sa nu luati in considerare acest mesaj. Nu ezitati sa\ncontactati departamentul nostru contabil.\n    </p>\n<br/>\nCu stima,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -143,7 +143,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div stil=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; culoare: rgb(34, 34, 34); culoarea-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimate ${object.name},</p>\n   <p>\n    Suntem dezamagiti sa constatam faptul ca, in ciuda instriintarii trimise, contul dumneavoastra este foarte restant.\nEste esential sa efectuati imediat plata, in caz contrar vom fi nevoiti sa va blocam contul,\nceea ce inseamna ca nu vom mai putea sa furnizam companiei dumneavoastra (bunuri/servicii).\nVa rugam sa luati masurile care se impun pentru a efectua aceasta plata in urmatoarele 8 zile.\nDaca exista vreo problema cu plata facturii de care noi nu suntem constienti, nu ezitati sa contactati departamentul\nnostru contabil pentru a putea rezolva problema rapid.\nDetaiile platii restante sunt tiparite mai jos.\n </p>\n<br/>\nCu stima,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div stil=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; dimensiune-font: 12px; culoare: rgb(34, 34, 34); culoarea-fundal: rgb(255, 255, 255); \">\n    \n    <p>Stimate ${object.name},</p>\n   <p>\n    Suntem dezamagiti sa constatam faptul ca, in ciuda instriintarii trimise, contul dumneavoastra este foarte restant.\nEste esential sa efectuati imediat plata, in caz contrar vom fi nevoiti sa va blocam contul,\nceea ce inseamna ca nu vom mai putea sa furnizam companiei dumneavoastra (bunuri/servicii).\nVa rugam sa luati masurile care se impun pentru a efectua aceasta plata in urmatoarele 8 zile.\nDaca exista vreo problema cu plata facturii de care noi nu suntem constienti, nu ezitati sa contactati departamentul\nnostru contabil pentru a putea rezolva problema rapid.\nDetaiile platii restante sunt tiparite mai jos.\n </p>\n<br/>\nCu stima,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

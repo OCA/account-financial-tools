@@ -13,7 +13,6 @@ class ResPartner(models.Model):
 
     payment_responsible_id = fields.Many2one(
         comodel_name='res.users',
-        ondelete='set null',
         string='Follow-up Responsible',
         track_visibility="onchange",
         copy=False,
@@ -44,10 +43,10 @@ class ResPartner(models.Model):
              "his promises.",
     )
     unreconciled_aml_ids = fields.One2many(
-        'account.move.line',
-        'partner_id',
+        comodel_name='account.move.line',
+        inverse_name='partner_id',
         domain=[('reconciled', '=', False),
-                ('account_id.internal_type', '=', 'receivable')]
+                ('account_id.internal_type', '=', 'receivable')],
     )
     latest_followup_date = fields.Date(
         string="Latest Follow-up Date",
@@ -71,12 +70,12 @@ class ResPartner(models.Model):
     payment_amount_due = fields.Float(
         string="Amount Due",
         compute='_compute_amounts_and_date',
-        search='_payment_due_search'
+        search='_search__payment_due_search',
     )
     payment_amount_overdue = fields.Float(
         string="Amount Overdue",
         compute='_compute_amounts_and_date',
-        search='_payment_overdue_search'
+        search='_search_payment_overdue_search',
     )
     payment_earliest_due_date = fields.Date(
         string="Worst Due Date",
@@ -394,7 +393,7 @@ class ResPartner(models.Model):
             })
 
     @api.multi
-    def _payment_due_search(self, operator, value):
+    def _search__payment_due_search(self, operator, value):
         domain = self.get_followup_lines_domain(
             fields.Date.today(),
             overdue_only=False
@@ -404,7 +403,7 @@ class ResPartner(models.Model):
         return [('id', 'in', partners.ids)]
 
     @api.model
-    def _payment_overdue_search(self, operator, value):
+    def _search_payment_overdue_search(self, operator, value):
         domain = self.get_followup_lines_domain(
             fields.Date.today(),
             overdue_only=True

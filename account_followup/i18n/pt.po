@@ -22,7 +22,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -49,13 +49,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Exmo/a ${object.name},</p>\n    <p>\nOs nossos registos indicam que tem pagamentos em atraso. Pode ver os detalhes em baixo.\nAgradecíamos que regularizasse esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n\n\n    </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Exmo/a ${object.name},</p>\n    <p>\nOs nossos registos indicam que tem pagamentos em atraso. Pode ver os detalhes em baixo.\nAgradecíamos que regularizasse esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n\n\n    </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -80,13 +80,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n    <p>\nVoltamos a relembrar que os nossos registos indicam que tem pagamentos em atraso. Pode rever os detalhes em baixo.\nAgradecíamos que regularizasse esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n</p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n    <p>\nVoltamos a relembrar que os nossos registos indicam que tem pagamentos em atraso. Pode rever os detalhes em baixo.\nAgradecíamos que regularizasse esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n</p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -108,13 +108,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n    <p>\nOs nossos registos indicam-nos que existe ainda saldo em aberto. Por favor tome as medidas necessárias regularizar esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n\n    </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n    <p>\nOs nossos registos indicam-nos que existe ainda saldo em aberto. Por favor tome as medidas necessárias regularizar esta situação o quanto antes.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n\n    </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -142,7 +142,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n   <p>\n    O prazo para saldar os vossos documentos em aberto ultrapassou largamente o esperado.\n\nAgradecíamos que regularizasse esta situação o quanto antes. De outro modo algumas medidas severas terão de ser tomadas.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Exmo/a ${object.name},</p>\n   <p>\n    O prazo para saldar os vossos documentos em aberto ultrapassou largamente o esperado.\n\nAgradecíamos que regularizasse esta situação o quanto antes. De outro modo algumas medidas severas terão de ser tomadas.\n\nSe entretanto já regularizou, por favor, ignore este aviso.\n\nSe tem alguma dúvida em relação aos registos enviados, por favor não hesite em contactar-nos,\n </p>\n<br/>\nAgradecidos pela sua compreensão,\n<br/>\n<br/>\nCumprimentos.\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

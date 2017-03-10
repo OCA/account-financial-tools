@@ -7,13 +7,13 @@
     'name': 'Payment Follow-up Management',
     'version': '9.0.1.0.0',
     'category': 'Accounting & Finance',
-    'author': 'Odoo SA,'
-              'Tecnativa',
+    'author': 'Odoo SA, '
+              'Tecnativa, '
+              'Odoo Community Association (OCA),',
     'license': 'AGPL-3',
     'website': 'https://www.odoo.com/',
     'depends': [
         'account',
-        'account_accountant',
         'mail'
     ],
     'data': [

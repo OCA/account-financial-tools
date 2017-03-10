@@ -91,18 +91,17 @@ class AccountFollowupStat(models.Model):
         """
         return group_by_str
 
-    @api.model_cr
-    def init(self):
-        tools.drop_view_if_exists(self._cr, self._table)
-        self._cr.execute("""
-            create or replace view %s as (
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, self._table)
+        cr.execute("""
+            create or replace view account_followup_stat as (
                 %s
                 FROM
                     %s
                 %s
                 %s
-            )""" % (self._table, self._select(), self._from(), self._where(),
-                    self._group_by(),))
+            )""" % (self._select(), self._from(), self._where(),
+                   self._group_by(),))
 
 
 class AccountFollowupStatByPartner(models.Model):
@@ -194,9 +193,8 @@ class AccountFollowupStatByPartner(models.Model):
         """
         return where_str
 
-    @api.model_cr
-    def init(self):
-        tools.drop_view_if_exists(self._cr, self._table)
+    def init(self, cr):
+        tools.drop_view_if_exists(cr, self._table)
         # Here we don't have other choice but to create a virtual ID based
         # on the concatenation of the partner_id and the company_id, because
         # if a partner is shared between 2 companies, we want to see 2 lines
@@ -204,9 +202,9 @@ class AccountFollowupStatByPartner(models.Model):
         # to send him follow-ups separately . An assumption that the number of
         # companies will not reach 10 000 records is made, what should be
         # enough for a time.
-        self._cr.execute("""
-            create view %s as (
+        cr.execute("""
+            create view account_followup_stat_by_partner as (
                 %s
                 FROM %s
                 %s
-            )""" % (self._table, self._select(), self._from(), self._where(),))
+            )""" % (self._select(), self._from(), self._where(),))

@@ -23,7 +23,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -50,13 +50,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Spoštovani ${object.name}.</p>\n    <p>\nPri pregledu evidenc smo opazili, da imate še vedno neporavnane obveznosti do našega podjetja.\nProsimo vas, da zapadle obveznosti v izogib dodatnim stroškom poravnate najkasneje v 8-ih dneh.\n\nV kolikor ste obveznosti že poravnali, vzemite ta opomin kot brezpredmeten. Za kakršnakoli vprašanja smo dosegljivi preko e-pošte in telefona.\n   \n    </p>\n<br/>\nS spoštovanjem,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Spoštovani ${object.name}.</p>\n    <p>\nPri pregledu evidenc smo opazili, da imate še vedno neporavnane obveznosti do našega podjetja.\nProsimo vas, da zapadle obveznosti v izogib dodatnim stroškom poravnate najkasneje v 8-ih dneh.\n\nV kolikor ste obveznosti že poravnali, vzemite ta opomin kot brezpredmeten. Za kakršnakoli vprašanja smo dosegljivi preko e-pošte in telefona.\n   \n    </p>\n<br/>\nS spoštovanjem,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -81,13 +81,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Spoštovani ${object.name},</p>\n    <p>\n    Kljub večkratnemu opominjanju vaše obveznosti niso bile poravnane.\nProsimo, da poravnate svoje obveznosti v roku 8 dni, v nasprotnem primeru bomo dolg prisiljeni sodno izterjati.\nV primeru morebitnih nejasnosti, nas kadarkoli pokličite.\n</p>\n<br/>\nS spoštovanjem,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Spoštovani ${object.name},</p>\n    <p>\n    Kljub večkratnemu opominjanju vaše obveznosti niso bile poravnane.\nProsimo, da poravnate svoje obveznosti v roku 8 dni, v nasprotnem primeru bomo dolg prisiljeni sodno izterjati.\nV primeru morebitnih nejasnosti, nas kadarkoli pokličite.\n</p>\n<br/>\nS spoštovanjem,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -109,13 +109,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Spoštovani ${object.name}.</p>\n    <p>\nPri pregledu evidenc smo opazili, da imate še vedno neporavnane obveznosti do našega podjetja.\nProsimo vas, da zapadle obveznosti v izogib dodatnim stroškom poravnate najkasneje v 8-ih dneh.\n\nV kolikor ste obveznosti že poravnali, vzemite ta opomin kot brezpredmeten. Za kakršnakoli vprašanja smo dosegljivi preko e-pošte in telefona.\n   \n    </p>\n<br/>\nS spoštovanjem,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Spoštovani ${object.name}.</p>\n    <p>\nPri pregledu evidenc smo opazili, da imate še vedno neporavnane obveznosti do našega podjetja.\nProsimo vas, da zapadle obveznosti v izogib dodatnim stroškom poravnate najkasneje v 8-ih dneh.\n\nV kolikor ste obveznosti že poravnali, vzemite ta opomin kot brezpredmeten. Za kakršnakoli vprašanja smo dosegljivi preko e-pošte in telefona.\n   \n    </p>\n<br/>\nS spoštovanjem,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -143,7 +143,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Spoštovani ${object.name},</p>\n   <p>\nKljub opominu vaše zapadle obveznosti do našega podjetja še niso bile poravnane.\nProsimo, da sprejmete potrebne ukrepe za izvršitev plačila v naslednjih 8 dneh.\nV kolikor obstaja težava za plačilo, za katero ne vemo, prosimo, da nas pokličete, da zadevo hitro rešimo.\nDetajli zapadlih obveznosti so izkazani spodaj.\n </p>\n<br/>\nS spoštovanjem,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Spoštovani ${object.name},</p>\n   <p>\nKljub opominu vaše zapadle obveznosti do našega podjetja še niso bile poravnane.\nProsimo, da sprejmete potrebne ukrepe za izvršitev plačila v naslednjih 8 dneh.\nV kolikor obstaja težava za plačilo, za katero ne vemo, prosimo, da nas pokličete, da zadevo hitro rešimo.\nDetajli zapadlih obveznosti so izkazani spodaj.\n </p>\n<br/>\nS spoštovanjem,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

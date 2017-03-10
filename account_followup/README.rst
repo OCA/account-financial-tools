@@ -6,17 +6,21 @@
 Payment Follow-up Management
 ============================
 
-Module to automate letters for unpaid invoices, with multi-level recalls.
+Module to automate communications to customers for unpaid invoices, with
+multi-level recalls.
+
+Configuration
+=============
+
+You can define your multiple levels of recall through the menu:
+---------------------------------------------------------------
+    Accounting > Configuration > Follow-up > **Follow-up Levels**
 
 Usage
 =====
 
-You can define your multiple levels of recall through the menu:
----------------------------------------------------------------
-    Accounting > Configuration > Follow-up > Follow-up Levels
-
-Once it is defined, you can automatically print recalls every day through
--------------------------------------------------------------------------
+Once levels are defined, you can automatically print recalls every day through
+------------------------------------------------------------------------------
 simply clicking on the menu:
 ----------------------------
     Accounting > Payment Follow-Up / Send Email and letters
@@ -29,7 +33,7 @@ Note that if you want to check the follow-up level for a given partner/account
 ------------------------------------------------------------------------------
 entry, you can do from in the menu:
 -----------------------------------
-    Accounting > Reporting > Accounting > **Follow-ups Analysis
+    Accounting > Reporting > Accounting > **Follow-ups Analysis**
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
@@ -55,8 +59,7 @@ Images
 Contributors
 ------------
 
-* Vincent revaville <vincent.renaville@camptocamp.com>
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
+* Odoo S. A.
 * Vicent Cubells <vicent.cubells@tecnativa.com>
 * Andrea Stirpe <a.stirpe@onestein.nl>
 
@@ -74,3 +77,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
 To contribute to this module, please visit https://odoo-community.org.
+
+**This module is a backport from Odoo SA and as such, it is not included in
+the OCA CLA. That means we do not have a copy of the copyright on it like all
+other OCA modules.**

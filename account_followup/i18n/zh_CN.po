@@ -27,7 +27,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -54,13 +54,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>亲爱的 ${object.name},</p>\n    <p>\n\n    希望这封邮件是一个的误会,贵公司有一些款项看来依然未支付,请在8天内及时支付这些货款.\n    如果上述款项已经被支付,请您忽略这封邮件.并联系我们的会计部门.\n\n    </p>\n<br/>\n诚挚的问候,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>亲爱的 ${object.name},</p>\n    <p>\n\n    希望这封邮件是一个的误会,贵公司有一些款项看来依然未支付,请在8天内及时支付这些货款.\n    如果上述款项已经被支付,请您忽略这封邮件.并联系我们的会计部门.\n\n    </p>\n<br/>\n诚挚的问候,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -85,13 +85,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱旳 ${object.name},</p>\n    <p>\n    经过多次提醒，您的余款我们至今仍未收到。\n如果贵公司不在8天内付清所有的货款，那么我们将直接通过法律途径来解决，\n我相信我们没有必要用这样的方式，下面列出的是应付款的明细。\n如果对此有任何疑问，您可以随时联系我们的会计部门。\n</p>\n<br/>\n致以诚挚的问候,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱旳 ${object.name},</p>\n    <p>\n    经过多次提醒，您的余款我们至今仍未收到。\n如果贵公司不在8天内付清所有的货款，那么我们将直接通过法律途径来解决，\n我相信我们没有必要用这样的方式，下面列出的是应付款的明细。\n如果对此有任何疑问，您可以随时联系我们的会计部门。\n</p>\n<br/>\n致以诚挚的问候,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -113,13 +113,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱的 ${object.name},</p>\n    <p>\n    除非我们这里发生了差错, 看来您的尾款依然未支付. 请您\n在后面8天里采取适当的措施来落实这个款项.\n如果您的款项在邮件发出之后已经落实了, 请忽略这个信息. \n您可以随时联系我们的会计部门.\n    </p>\n<br/>\n致以诚挚的问候,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱的 ${object.name},</p>\n    <p>\n    除非我们这里发生了差错, 看来您的尾款依然未支付. 请您\n在后面8天里采取适当的措施来落实这个款项.\n如果您的款项在邮件发出之后已经落实了, 请忽略这个信息. \n您可以随时联系我们的会计部门.\n    </p>\n<br/>\n致以诚挚的问候,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -147,7 +147,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱的 ${object.name},</p>\n   <p>\n希望这封邮件是一个的误会，\n贵公司有一些款项看来依然未支付，\n请在8天内及时支付这些货款\n如果上述款项已经被支付，\n请您忽略这封邮件.并联系我们的会计部门。\n </p>\n<br/>\n致以诚挚的问候，\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>亲爱的 ${object.name},</p>\n   <p>\n希望这封邮件是一个的误会，\n贵公司有一些款项看来依然未支付，\n请在8天内及时支付这些货款\n如果上述款项已经被支付，\n请您忽略这封邮件.并联系我们的会计部门。\n </p>\n<br/>\n致以诚挚的问候，\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

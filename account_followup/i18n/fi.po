@@ -24,7 +24,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -51,13 +51,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Hyvä ${object.name},</p>\n    <p>\nKirjanpitomme mukaan viestin lopusta löytyvä summa on vielä maksamatta. Olkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi 8 päivän kuluessa.\n\nJos maksu on jo suoritettu ennen tämän viestin lähettämistä, voitte jättää kehoituksen huomioimatta.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n\n    </p>\n<br/>\nParhain terveisin,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Hyvä ${object.name},</p>\n    <p>\nKirjanpitomme mukaan viestin lopusta löytyvä summa on vielä maksamatta. Olkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi 8 päivän kuluessa.\n\nJos maksu on jo suoritettu ennen tämän viestin lähettämistä, voitte jättää kehoituksen huomioimatta.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n\n    </p>\n<br/>\nParhain terveisin,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -82,13 +82,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n    <p>\nToistuvista muistutuksista huolimatta hoitamattomia laskujanne ei ole maksettu. \n\nEllei maksua suoriteta kokonaisuudessaan seuraavan 8 päivän aikana, maksu tullaan perimään oikeusteitse ilman erillistä ilmoitusta.\n\nToivomme että perintätoimiin ei tarvitse ryhtyä, vaan hoidatte viestin alaosassa olevan velan viipymättä.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n</p>\n<br/>\nParhain terveisin,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n    <p>\nToistuvista muistutuksista huolimatta hoitamattomia laskujanne ei ole maksettu. \n\nEllei maksua suoriteta kokonaisuudessaan seuraavan 8 päivän aikana, maksu tullaan perimään oikeusteitse ilman erillistä ilmoitusta.\n\nToivomme että perintätoimiin ei tarvitse ryhtyä, vaan hoidatte viestin alaosassa olevan velan viipymättä.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n</p>\n<br/>\nParhain terveisin,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -110,13 +110,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n    <p>\nKirjanpitomme mukaan viestin lopusta löytyvä summa on vielä maksamatta. Olkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi 8 päivän kuluessa.\n\nJos maksu on jo suoritettu ennen tämän viestin lähettämistä, voitte jättää kehoituksen huomioimatta.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n    </p>\n<br/>\nParhain terveisin,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n    <p>\nKirjanpitomme mukaan viestin lopusta löytyvä summa on vielä maksamatta. Olkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi 8 päivän kuluessa.\n\nJos maksu on jo suoritettu ennen tämän viestin lähettämistä, voitte jättää kehoituksen huomioimatta.\n\nEpäselvissä tapauksissa voitte olla yhteydessä laskutusosastoomme.\n    </p>\n<br/>\nParhain terveisin,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -144,7 +144,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n   <p>\nToistuvista muistutuksista huolimatta laskunne näyttävät olevan edelleen maksamatta.\n\nJos maksua ei suoriteta välittömästi, joudumme harkitsemaan palvelunne keskeyttämistä. Tämä tarkoittaa että emme tule toimittamaan teille enää tuotteitamme (tai palveluitamme) ennen kuin velka on hoidettu kokonaisuudessaan.\n\nOlkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi seuraavan 8 päivän aikana.\n\nJos laskun kanssa on ongelma, josta emme ole tietoisia, kannattaa olla yhteydessä laskutusosastoomme.\n </p>\n<br/>\nParhain terveisin,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Hyvä ${object.name},</p>\n   <p>\nToistuvista muistutuksista huolimatta laskunne näyttävät olevan edelleen maksamatta.\n\nJos maksua ei suoriteta välittömästi, joudumme harkitsemaan palvelunne keskeyttämistä. Tämä tarkoittaa että emme tule toimittamaan teille enää tuotteitamme (tai palveluitamme) ennen kuin velka on hoidettu kokonaisuudessaan.\n\nOlkaa hyvät ja tehkää tarvittavat toimenpiteet maksun suorittamiseksi seuraavan 8 päivän aikana.\n\nJos laskun kanssa on ongelma, josta emme ole tietoisia, kannattaa olla yhteydessä laskutusosastoomme.\n </p>\n<br/>\nParhain terveisin,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

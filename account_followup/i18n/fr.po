@@ -26,7 +26,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -53,13 +53,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Cher ${object.name},</p>\n    <p>\n    A l'examen de votre compte, nous constatons que sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation sous huitaine.\n\n\nAu cas où votre règlement se serait croisé avec la présente, nous vous prions de ne pas en tenir compte. N'hésitez pas à contacter notre service comptable.\n\n    </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Cher ${object.name},</p>\n    <p>\n    A l'examen de votre compte, nous constatons que sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation sous huitaine.\n\n\nAu cas où votre règlement se serait croisé avec la présente, nous vous prions de ne pas en tenir compte. N'hésitez pas à contacter notre service comptable.\n\n    </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -84,13 +84,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Cher ${object.name},</p>\n    <p>\n    Malgré plusieurs rappels, votre compte est toujours débiteur.\nNous vous mettons donc en demeure de nous régler sous huitaine l’intégralité de la somme. Passé ce délai,\nnous mettrons en œuvre toutes les démarches légales nécessaires au recouvrement de notre créance sans nouvelle notification.\nJ'espère que ces actions ne seront pas nécessaires et vous trouverez le détail des factures impayées ci-dessous.\nPour toutes questions concernant ce sujet. n'hésitez pas à prendre contact avec notre service comptable.\n</p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Cher ${object.name},</p>\n    <p>\n    Malgré plusieurs rappels, votre compte est toujours débiteur.\nNous vous mettons donc en demeure de nous régler sous huitaine l’intégralité de la somme. Passé ce délai,\nnous mettrons en œuvre toutes les démarches légales nécessaires au recouvrement de notre créance sans nouvelle notification.\nJ'espère que ces actions ne seront pas nécessaires et vous trouverez le détail des factures impayées ci-dessous.\nPour toutes questions concernant ce sujet. n'hésitez pas à prendre contact avec notre service comptable.\n</p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -112,13 +112,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n    <p>\n    A l'examen de votre compte, nous constatons que sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation sous huitaine.\nAu cas où votre règlement se serait croisé avec ce courriel, nous vous prions de ne pas en tenir compte. N'hésitez pas à contacter notre service comptable. \n    </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Dear ${object.name},</p>\n    <p>\n    A l'examen de votre compte, nous constatons que sauf erreur ou omission de notre part, nous n'avons toujours pas reçu à ce jour de règlement des factures reprises sur le relevé ci-dessous. Nous vous remercions de bien vouloir régulariser cette situation sous huitaine.\nAu cas où votre règlement se serait croisé avec ce courriel, nous vous prions de ne pas en tenir compte. N'hésitez pas à contacter notre service comptable. \n    </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -146,7 +146,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Cher ${object.name},</p>\n   <p>\n    Nous constatons avec regret que malgré notre précédent rappel, votre compte est toujours débiteur.\nNous vous mettons donc en demeure de nous régler sous huitaine l’intégralité de la somme. Passé ce délai,\nnous bloquerons votre compte ce qui signifie que vous ne pourrez plus passer de commandes\nauprès de notre société (articles/services).\nSi pour une raison qui nous est inconnue vous ne pouvez régler ces factures, n'hésitez pas à prendre contact\navec notre service comptable afin que nous trouvions une solution rapide à ce problème.\n\nLe détail des factures impayées est listé ci-dessous.\n </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Cher ${object.name},</p>\n   <p>\n    Nous constatons avec regret que malgré notre précédent rappel, votre compte est toujours débiteur.\nNous vous mettons donc en demeure de nous régler sous huitaine l’intégralité de la somme. Passé ce délai,\nnous bloquerons votre compte ce qui signifie que vous ne pourrez plus passer de commandes\nauprès de notre société (articles/services).\nSi pour une raison qui nous est inconnue vous ne pouvez régler ces factures, n'hésitez pas à prendre contact\navec notre service comptable afin que nous trouvions une solution rapide à ce problème.\n\nLe détail des factures impayées est listé ci-dessous.\n </p>\n<br/>\nVeuillez agréer nos salutations distinguées,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

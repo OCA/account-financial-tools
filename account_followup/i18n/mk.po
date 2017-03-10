@@ -24,7 +24,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -51,13 +51,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Драги ${object.name},</p>\n    <p>\n    Ќе се направи исклучок ако е наша грешка, но изгледа дека следната сума е неподмирена. Ве молиме да преземете\nсоодветни мерки со цел да се изврши уплатата во следните 8 дена.\n\nАко вашата уплата е направена по праќањето на овој е-маил, ве молиме игнорирајте ја оваа порака. Слободно \nконтактирајте го нашиот оддел за сметководство.  \n\n    </p>\n<br/>\nСо почит,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Драги ${object.name},</p>\n    <p>\n    Ќе се направи исклучок ако е наша грешка, но изгледа дека следната сума е неподмирена. Ве молиме да преземете\nсоодветни мерки со цел да се изврши уплатата во следните 8 дена.\n\nАко вашата уплата е направена по праќањето на овој е-маил, ве молиме игнорирајте ја оваа порака. Слободно \nконтактирајте го нашиот оддел за сметководство.  \n\n    </p>\n<br/>\nСо почит,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -82,13 +82,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Драги ${object.name},</p>\n    <p>\n    И покрај неколку потсетувања, Вашиот долг сеуште не е подмирен.\nДоколку целосна уплата не се изврши во следните 8 дена, ќе се преземат правни дејствија за подмирување на долгот\nбез понатамошно предупредување.\nВеруваме дека оваа дејство ќе биде непотребно и деталите за долгот се наведени подолу.\nВо случај на било какви прашања поврзани со ова, слободно контактирајте го нашиот оддел за сметководство.\n</p>\n<br/>\nСо почит,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Драги ${object.name},</p>\n    <p>\n    И покрај неколку потсетувања, Вашиот долг сеуште не е подмирен.\nДоколку целосна уплата не се изврши во следните 8 дена, ќе се преземат правни дејствија за подмирување на долгот\nбез понатамошно предупредување.\nВеруваме дека оваа дејство ќе биде непотребно и деталите за долгот се наведени подолу.\nВо случај на било какви прашања поврзани со ова, слободно контактирајте го нашиот оддел за сметководство.\n</p>\n<br/>\nСо почит,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -110,13 +110,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Драги ${object.name},</p>\n    <p>\n    Ќе се направи исклучок ако е наша грешка, но изгледа дека следната сума е неподмирена. Ве молиме да преземете\nсоодветни мерки со цел да се изврши уплатата во следните 8 дена.\nАко вашата уплата е направена по праќањето на овој е-маил, ве молиме игнорирајте ја оваа порака. Слободно \nконтактирајте го нашиот оддел за сметководство.\n    </p>\n<br/>\nСо почит,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Драги ${object.name},</p>\n    <p>\n    Ќе се направи исклучок ако е наша грешка, но изгледа дека следната сума е неподмирена. Ве молиме да преземете\nсоодветни мерки со цел да се изврши уплатата во следните 8 дена.\nАко вашата уплата е направена по праќањето на овој е-маил, ве молиме игнорирајте ја оваа порака. Слободно \nконтактирајте го нашиот оддел за сметководство.\n    </p>\n<br/>\nСо почит,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -144,7 +144,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n <p>Почитувани ${object.name},</p> \n<p>\nАпелираме дека и покрај пратените известувања, Вашата обврска во овој момент сеуште не е подмирена.\nНеопходно е плаќањето да се изврши веднаш, во спротивно ќе бидеме приморани да ја блокираме Вашата сметка, што значи дека повеќе нема да можеме да ја снабдуваме вашата компанија со (средства/услуги).\nВе молиме да превземете соодветни мерки за да ја извршите уплатата во наредните 8 дена.\nАко постои проблем со фактурата за плаќање што не сме го воочиле, Ве молиме да го контактирате нашиот оддел за сметководство, за да ја разрешиме ситуацијата што побргу.\nДеталите за доспеаните плаќања се прикажани подолу.\n</p>\n <br/>\nСо почит,\n\n<br/>\n <br/>\n${user.name}\n\n <br/>\n <br/>\n\n ${object.get_followup_table_html() | safe}\n \n <br/>\n \n </div>"
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n <p>Почитувани ${object.name},</p> \n<p>\nАпелираме дека и покрај пратените известувања, Вашата обврска во овој момент сеуште не е подмирена.\nНеопходно е плаќањето да се изврши веднаш, во спротивно ќе бидеме приморани да ја блокираме Вашата сметка, што значи дека повеќе нема да можеме да ја снабдуваме вашата компанија со (средства/услуги).\nВе молиме да превземете соодветни мерки за да ја извршите уплатата во наредните 8 дена.\nАко постои проблем со фактурата за плаќање што не сме го воочиле, Ве молиме да го контактирате нашиот оддел за сметководство, за да ја разрешиме ситуацијата што побргу.\nДеталите за доспеаните плаќања се прикажани подолу.\n</p>\n <br/>\nСо почит,\n\n<br/>\n <br/>\n${user.name}\n\n <br/>\n <br/>\n\n ${object.get_followup_table_html() | safe}\n \n <br/>\n \n </div>"
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3

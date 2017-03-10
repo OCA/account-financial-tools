@@ -22,7 +22,7 @@ msgstr ""
 #: model:email.template,body_html:account_followup.email_template_account_followup_level0
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "\n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -49,13 +49,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Сайн байна уу? Эрхэм ${object.name},</p>\n    <p>\nСаатал тохиолдлоо. Хэрэв энэ нь бидний алдаа байсан бол дараах дүн төлөгдөөгүй үлдлээ. Ойрын 8 хоногийн хугацаанд төлбөрийн талаар зохих арга хэмжээг гүйцэтгэнэ үү.\n\nЭнэ имэйл илгээгдсэн дараа таны төлбөр хийгдсэн бол энэ имэйлийг хэрэгсэхгүй байж болно. Манай санхүүгийн албатай эргэлзэлгүйгээр холбогдож болно.\n\n    </p>\n<br/>\nХүндэтгэсэн,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n\n    <p>Сайн байна уу? Эрхэм ${object.name},</p>\n    <p>\nСаатал тохиолдлоо. Хэрэв энэ нь бидний алдаа байсан бол дараах дүн төлөгдөөгүй үлдлээ. Ойрын 8 хоногийн хугацаанд төлбөрийн талаар зохих арга хэмжээг гүйцэтгэнэ үү.\n\nЭнэ имэйл илгээгдсэн дараа таны төлбөр хийгдсэн бол энэ имэйлийг хэрэгсэхгүй байж болно. Манай санхүүгийн албатай эргэлзэлгүйгээр холбогдож болно.\n\n    </p>\n<br/>\nХүндэтгэсэн,\n<br/>\n   <br/>\n${user.name}\n\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level2
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -80,13 +80,13 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Эрхэм ${object.name},</p>\n    <p>\n    Танд олон удаа сануулсан боловч тооцоо дуусаагүй хэвээр байна.\n8 хоногийн хугацаанд бүрэн төлбөр хийгдэхгүй бол дахин мэдэгдэл үгүйгээр хуулийн арга хэмжээнд шилжих болно.\nТөлбөрийн тухай мэдээллийг доор хэвлэлээ.  \nҮүнтэй холбоотой асуух, магадлах зүйлс байвал санаа зоволгүйгээр манай санхүүгийн албатай холбогдоно уу.\n</p>\n<br/>\nХүндэтгэсэн\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Эрхэм ${object.name},</p>\n    <p>\n    Танд олон удаа сануулсан боловч тооцоо дуусаагүй хэвээр байна.\n8 хоногийн хугацаанд бүрэн төлбөр хийгдэхгүй бол дахин мэдэгдэл үгүйгээр хуулийн арга хэмжээнд шилжих болно.\nТөлбөрийн тухай мэдээллийг доор хэвлэлээ.  \nҮүнтэй холбоотой асуух, магадлах зүйлс байвал санаа зоволгүйгээр манай санхүүгийн албатай холбогдоно уу.\n</p>\n<br/>\nХүндэтгэсэн\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_default
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "    <p>\n"
@@ -108,13 +108,13 @@ msgid ""
 "<br/>\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Эрхэм ${object.name},</p>\n    <p>\n    Хэрэв бидний алдаа байвал залруулах болно. Гэхдээ дүн төлөгдөөгүй байгаа бололтой байна. Ойрын 8 хоногийн хугацаанд холбогдох тооцоог хийнэ үү. Хэрэв энэ имэйл илгээгдсэн дараа төлбөр тань хийгдсэн байгаа бол энэ имэйлийг хэрэгсэхгүй байж болно. Манай санхүүгийн албатай санаа зоволтгүй холбогдож асууж болно.\n    </p>\n<br/>\nАмжилт хүсье,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Эрхэм ${object.name},</p>\n    <p>\n    Хэрэв бидний алдаа байвал залруулах болно. Гэхдээ дүн төлөгдөөгүй байгаа бололтой байна. Ойрын 8 хоногийн хугацаанд холбогдох тооцоог хийнэ үү. Хэрэв энэ имэйл илгээгдсэн дараа төлбөр тань хийгдсэн байгаа бол энэ имэйлийг хэрэгсэхгүй байж болно. Манай санхүүгийн албатай санаа зоволтгүй холбогдож асууж болно.\n    </p>\n<br/>\nАмжилт хүсье,\n<br/>\n<br/>\n${user.name}\n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n<br/>\n</div>\n            "
 
 #. module: account_followup
 #: model:email.template,body_html:account_followup.email_template_account_followup_level1
 msgid ""
 "\n"
-"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n"
 "    \n"
 "    <p>Dear ${object.name},</p>\n"
 "   <p>\n"
@@ -142,7 +142,7 @@ msgid ""
 "\n"
 "</div>\n"
 "            "
-msgstr "\n<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Сайн байна уу? Эрхэм ${object.name},</p>\n   <p>\nБид танд хэдэнтээ сануулга явуулсан хэдий ч таны тооцоо ноцтойгоор хугацаа хэтрээд байгааг мэдэгдэж байгаадаа харамсаж байна.\n\nДаруйхан төлбөрөө төлөх явдал чухал байна. Эс бөгөөс бид таны данстай харилцах харилцааг зогсоох бөгөөд ингэснээр бид танай компанид аливаа бараа, үйлчилгээг нийлүүлэхгүй болно.\nОйрын 8 хоногийн хугацаанд төлбөрийн талаар зохих арга хэмжээг гүйцэтгэнэ үү.\n\nХэрэв нэхэмжлэлийг төлөхтэй холбоотой бидний анхаарахгүй, мэдэхгүй байгаа асуудал байгаа бол бидэнд санаа зоволгүй мэдэгдэнэ үү. Бид асуудлыг хурдан шийдвэрлэх болно.\nХугацаа хэтэрсэн нэхэмжлэлийн талаарх дэлгэрэнгүйг доор хэвлэлээ.\n\n </p>\n<br/>\nBest Regards,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
+msgstr "\n<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); \">\n    \n    <p>Сайн байна уу? Эрхэм ${object.name},</p>\n   <p>\nБид танд хэдэнтээ сануулга явуулсан хэдий ч таны тооцоо ноцтойгоор хугацаа хэтрээд байгааг мэдэгдэж байгаадаа харамсаж байна.\n\nДаруйхан төлбөрөө төлөх явдал чухал байна. Эс бөгөөс бид таны данстай харилцах харилцааг зогсоох бөгөөд ингэснээр бид танай компанид аливаа бараа, үйлчилгээг нийлүүлэхгүй болно.\nОйрын 8 хоногийн хугацаанд төлбөрийн талаар зохих арга хэмжээг гүйцэтгэнэ үү.\n\nХэрэв нэхэмжлэлийг төлөхтэй холбоотой бидний анхаарахгүй, мэдэхгүй байгаа асуудал байгаа бол бидэнд санаа зоволгүй мэдэгдэнэ үү. Бид асуудлыг хурдан шийдвэрлэх болно.\nХугацаа хэтэрсэн нэхэмжлэлийн талаарх дэлгэрэнгүйг доор хэвлэлээ.\n\n </p>\n<br/>\nBest Regards,\n    \n<br/>\n<br/>\n${user.name}\n    \n<br/>\n<br/>\n\n${object.get_followup_table_html() | safe}\n\n    <br/>\n\n</div>\n            "
 
 #. module: account_followup
 #: model:account_followup.followup.line,description:account_followup.demo_followup_line3
