@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-17 23:14+0000\n"
+"POT-Creation-Date: 2017-03-03 23:15+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Follower"
 
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
@@ -160,7 +160,7 @@ msgstr "Nachrichten"
 #. module: async_move_line_importer
 #: field:move.line.importer,message_summary:0
 msgid "Summary"
-msgstr ""
+msgstr "Zusammenfassung"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0 field:move.line.importer,report:0
