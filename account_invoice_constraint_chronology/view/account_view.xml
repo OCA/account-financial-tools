@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<!-- Copyright 2015-2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
     <data>
         <record id="view_account_journal_form" model="ir.ui.view">
             <field name="name">account.journal.form (account_constraint_chronology)</field>
             <field name="model">account.journal</field>
             <field name="inherit_id" ref="account.view_account_journal_form"/>
             <field name="arch" type="xml">
-                <field name="entry_posted" position="after">
+                <field name="refund_sequence" position="after">
                     <field name="check_chronology" attrs="{'readonly': [('type', 'not in', ['sale', 'purchase', 'sale_refund', 'purchase_refund'])]}"/>
                 </field>
              </field>
         </record>
     </data>
-</openerp>
+</odoo>
