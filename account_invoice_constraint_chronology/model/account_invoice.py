@@ -9,10 +9,9 @@ from odoo.exceptions import UserError
 class account_invoice(models.Model):
     _inherit = "account.invoice"
 
-    already_validated = fields.Boolean(readonly=True, copy=False)
-
     @api.multi
     def action_move_create(self):
+        previously_validated = self.filtered(lambda inv: inv.move_name)
         res = super(account_invoice, self).action_move_create()
         for inv in self:
             if inv.journal_id.check_chronology:
@@ -33,7 +32,7 @@ class account_invoice(models.Model):
                                       "Please confirm older draft "
                                       "invoices before %s and try again.")
                                     % date_invoice_tz)
-                if not inv.already_validated:
+                if inv not in previously_validated:
                     invoices = self.search([('state', 'in', ['open', 'paid']),
                                             ('date_invoice', '>',
                                              inv.date_invoice),
@@ -50,6 +49,4 @@ class account_invoice(models.Model):
                                           "There exist at least one invoice "
                                           "with a date posterior to %s.") %
                                         date_invoice_tz)
-            if not inv.already_validated:
-                inv.already_validated = True
         return res
