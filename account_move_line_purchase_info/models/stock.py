@@ -5,14 +5,14 @@
 from openerp import api, models
 
 
-class StockQuant(models.Model):
-    _inherit = "stock.quant"
+class StockMove(models.Model):
+    _inherit = "stock.move"
 
     @api.model
-    def _prepare_account_move_line(self, move, qty, cost,
+    def _prepare_account_move_line(self, qty, cost,
                                    credit_account_id, debit_account_id):
-        res = super(StockQuant, self)._prepare_account_move_line(
-            move, qty, cost, credit_account_id, debit_account_id)
+        res = super(StockMove, self)._prepare_account_move_line(
+            qty, cost, credit_account_id, debit_account_id)
         for line in res:
-            line[2]['purchase_line_id'] = move.purchase_line_id.id
+            line[2]['purchase_line_id'] = self.purchase_line_id.id
         return res
