@@ -11,4 +11,4 @@ class AccountMoveLine(models.Model):
 
     purchase_line_id = fields.Many2one('purchase.order.line',
                                        'Purchase Order Line',
-                                       ondelete='set null', select=True)
+                                       ondelete='set null', index=True)
