@@ -4,7 +4,6 @@
 
 <odoo>
 <data>
-    
     <record model="ir.ui.view" id="financial_cashflow_tree_view">
         <field name="name">financial.cashflow.tree (in financial)</field>
         <field name="model">financial.cashflow</field>
@@ -43,6 +42,5 @@
         <field name="action" ref="financial_cashflow_act_window"/>
         <field name="sequence" eval="16"/>
     </record>
-
 </data>
 </odoo>
