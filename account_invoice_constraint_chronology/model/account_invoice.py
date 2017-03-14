@@ -6,13 +6,13 @@ from odoo import models, api, fields, _
 from odoo.exceptions import UserError
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     @api.multi
     def action_move_create(self):
         previously_validated = self.filtered(lambda inv: inv.move_name)
-        res = super(account_invoice, self).action_move_create()
+        res = super(AccountInvoice, self).action_move_create()
         for inv in self:
             if inv.journal_id.check_chronology:
                 invoices = \
