@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+
+    <record model="ir.ui.view" id="financial_pay_receive_form_view">
+        <field name="name">financial.pay_receive.form (in financial)</field>
+        <field name="model">financial.pay_receive</field>
+        <field name="arch" type="xml">
+            <form string="Financial Pay_receive">
+                <!-- TODO -->
+                <group>
+                    <group>
+                        <field name="amount_paid" string="Ammount Paid"/>
+                        <field name="amount_discount"/>
+                        <field name="amount_interest"/>
+                    </group>
+
+                    <group>
+                        <field name="journal_id"/>
+                        <field name="currency_id"/>
+                        <field name="payment_method_id"/>
+                        <field name="date_payment"/>
+                        <field name="date_credit_debit"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name='doit'
+                        string='OK'
+                        class='btn-primary oe_highlight'
+                        type='object'/>
+                    or
+                    <button string='Cancel'
+                        class='btn-default oe_link'
+                        special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_pay_receive_act_window">
+        <field name="name">Financial Pay_receive</field>
+        <field name="res_model">financial.pay_receive</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+
+
+</data>
+</odoo>

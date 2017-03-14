@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+    
+    <record model="ir.ui.view" id="financial_cashflow_tree_view">
+        <field name="name">financial.cashflow.tree (in financial)</field>
+        <field name="model">financial.cashflow</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Value At Date" create="0" delete="0">
+                <field name="date_business_maturity"/>
+                <!-- <field name="create_date"/> -->
+                <!-- <field name="expected_date"/> -->
+                <field name="partner_id"/>
+                <field name="payment_method_id"/>
+                <field name="payment_term_id"/>
+                <field name="account_id"/>
+                <field name="account_analytic_id"/>
+                <field name="currency_id"/>
+                <field name="amount_total"/>
+                <!-- <field name="balance"/> -->
+                <field name="state"/>
+                <field name="amount_credit"/>
+                <field name="amount_debit"/>
+                <field name="amount_cumulative_balance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_cashflow_act_window">
+        <field name="name">Cashflow</field>
+        <field name="res_model">financial.cashflow</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_cashflow_menu">
+        <field name="name">Financial Cashflow</field>
+        <field name="parent_id" ref="financial_dashboard_menu"/>
+        <field name="action" ref="financial_cashflow_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data noupdate="1">
+
+    <!-- TODO
+    <record model="financial.move" id="financial_move_demo_1">
+       <field name="name">...</field>
+    </record>
+    -->
+
+</data>
+</odoo>

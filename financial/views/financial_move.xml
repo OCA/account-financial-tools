@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+    <record model="ir.ui.view" id="financial_move_tree_view">
+        <field name="name">financial.move.tree (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="date_business_maturity" string="Maturity"/>
+                <field name="date_issue" string="Issue"/>
+                <field name="display_name"/>
+                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                <field name="partner_id"/>
+                <field name="document_number" string="Ref."/>
+                <field name="document_item" string=""/>
+                <field name="payment_method_id" string="Payment method"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="amount" string="Amount" sum="Amount"/>
+                <field name="amount_discount" sum="Discount"/>
+                <field name="amount_interest" sum="Interest"/>
+                <field name="amount_refund" sum="Refund"/>
+                <field name="amount_cancel" sum="Cancel"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="date_payment"/>
+                <field name="amount_paid" sum="Paid"/>
+                <field name="amount_residual" sum="Residual"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_form_view">
+        <field name="name">financial.move.form (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <button name="action_confirm" icon="fa-check" type="object"
+                            states="draft,budget" string="Validate" class="oe_highlight"/>
+                    <button name="%(financial_pay_receive_act_window)d"  type="action"
+                            states="open" class="oe_highlight" icon="fa-money" string="Pay/Recieve"
+                    />
+                    <!--<button name="%(financial_cancel_act_window)d" type="action"-->
+                            <!--states="open" class="oe_stat_button" icon="fa-undo" string="Refund"-->
+                            <!--confirm="Confirm the refund?"-->
+                    <!--/>-->
+                    <button name="%(financial_edit_act_window)d" type="action"
+                            states="open" class="oe_stat_button" icon="fa-edit" string="Edit"/>
+                    <button name="%(financial_cancel_act_window)d" type="action"
+                            states="open" class="oe_stat_button" icon="fa-ban" string="Cancel"
+                    />
+                    <button name="action_print" type="button"
+                             states="open" class="oe_stat_button" icon="fa-print" string="Print"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
+                </header>
+                <sheet>
+                    <field name="financial_type" invisible="1"/>
+                    <field name="hide_payment_method" invisible="1"/>
+                    <field name="payment_method_code" invisible="1"/>
+                    <div>
+                        <label string="Draft Receivable"
+                               attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('financial_type','&lt;&gt;','r')]}"/>
+                        <label string="Draft Payable" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('financial_type','&lt;&gt;','p')]}"/>
+                        <label string="Receivable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('financial_type','&lt;&gt;','r')]}"/>
+                        <label string="Payable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('financial_type','&lt;&gt;','p')]}"/>
+                        <h1 class="mt0">
+                            <field name="display_name" class="oe_inline"  attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="journal_id"  options="{'no_open': True}"/>
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                            <field name="partner_id" attrs="{'required': [('financial_type', 'in', ('r', 'p', 'rr', 'pp'))], 'invisible': [('financial_type', 'not in', ('r', 'p'))], 'readonly': [('state', '!=', 'draft')]}" context="{'default_is_company': True, 'default_supplier': financial_type == 'p', 'default_customer': financial_type == 'r'}"/>
+                            <field name="account_id"/>
+                            <field name="account_analytic_id"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="document_number"/>
+                            <field name="document_item"/>
+                            <field name="date_issue"/>
+                            <field name="date_maturity"/>
+                            <field name="date_business_maturity"/>
+                        </group>
+                    </group>
+                    <notebook>
+                            <page string="Info">
+                                <group>
+                                    <group>
+                                        <field name="payment_method_id" widget="radio" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="payment_term_id"/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right">
+                                        <field name="amount" string="Amount"/>
+                                        <field name="amount_interest" string="Interest (+)"/>
+                                        <field name="amount_discount" string="Discount (-)"/>
+                                        <field name="amount_refund" string="Refund (-)" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_cancel" string="Cancel (-)" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
+                                        <field name="amount_paid" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_residual" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                    </group>
+                                </group>
+                                <div>
+                                    <field name="communication" placeholder="Communication ..."/>
+                                    <field name="note" placeholder="Notes ..."/>
+                                </div>
+                            </page>
+                            <page string="Payments">
+
+                            </page>
+                            <page string="Accounting">
+
+                            </page>
+                        </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_search_view">
+        <field name="name">financial.move.search (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- TODO -->
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_receivable_act_window">
+        <field name="name">Financial Move (Account Receivable)</field> <!-- TODO-->
+        <field name="res_model">financial.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('financial_type','=','r')]</field>
+        <field name="context" >{'default_financial_type': 'r'}</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_payable_act_window">
+        <field name="name">Financial Move (Account Payable)</field> <!-- TODO-->
+        <field name="res_model">financial.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('financial_type','=','p')]</field>
+        <field name="context">{'default_financial_type': 'p'} </field>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_recieve_menu">
+        <field name="name">Accounts Receivable</field>
+        <field name="parent_id" ref="financial_dashboard_menu"/>
+        <field name="action" ref="financial_receivable_act_window"/>
+        <field name="sequence" eval="30"/>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_pay2_menu">
+        <field name="name">Accounts Payable</field>
+        <field name="parent_id" ref="financial_dashboard_menu"/>
+        <field name="action" ref="financial_payable_act_window"/>
+        <field name="sequence" eval="40"/>
+    </record>
+
+</data>
+</odoo>
