@@ -102,7 +102,10 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         #        group_ids = [group.id for group in groups]
         product_ctg = self.product_ctg_model.create({
             'name': 'test_product_ctg',
-            'property_stock_valuation_account_id': self.account_inventory.id
+            'property_stock_valuation_account_id': self.account_inventory.id,
+            'property_valuation': 'real_time',
+            'property_stock_account_input_categ_id': self.account_grni.id,
+            'property_stock_account_output_categ_id': self.account_cogs.id,
         })
         product = self.product_model.create({
             'name': 'test_product',
@@ -110,9 +113,6 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             'type': 'product',
             'standard_price': 1.0,
             'list_price': 1.0,
-            'valuation': 'real_time',
-            'property_stock_account_input': self.account_grni.id,
-            'property_stock_account_output': self.account_cogs.id,
         })
         return product
 
