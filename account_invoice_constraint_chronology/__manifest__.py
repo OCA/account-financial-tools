@@ -10,14 +10,6 @@
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],
-    "description": """
-    Account Invoice Constraint Chronology
-    This module helps ensuring the chronology of invoice numbers.
-    It prevents the validation of invoices when:
-    * there are draft invoices with an anterior date
-    * there are validated invoices with a posterior date
-    """,
-    "test": ["../account/test/account_minimal_test.xml"],
     "data": ["view/account_view.xml"],
     'installable': True,
 }
