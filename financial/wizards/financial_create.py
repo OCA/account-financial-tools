@@ -51,7 +51,7 @@ class FinancialMoveCreate(models.TransientModel):
         comodel_name='account.account',
         string=u'Account',
         required=True,
-        domain=[('deprecated', '=', False)],
+        domain=[('internal_type', 'in', ('receivable', 'payable'))],
         help="The partner account used for this invoice."
     )
     document_number = fields.Char(

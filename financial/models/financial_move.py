@@ -122,7 +122,7 @@ class FinancialMove(models.Model):
         string=u'Account',
         # required=True,
         readonly=True, states={'draft': [('readonly', False)]},
-        domain=[('deprecated', '=', False)],
+        domain=[('internal_type', 'in', ('receivable', 'payable'))],
         help="The partner account used for this invoice."
     )
     ref = fields.Char(
