@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="maintenance_equipment_view_form" model="ir.ui.view">
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position='before'>
+                <header>
+                    <button name="action_perform_scrap" string="Scrap" type="object" attrs="{'invisible':[('scrap_date','!=',False)]}" context="{'default_equipment_id':active_id}"/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position='after'>
+                <field name="asset_id" domain="['|',('equipment_id','=',active_id),('equipment_id','=',None)]" context="{'default_equipment_id':active_id}"/>
+            </xpath>
+            <xpath expr="//field[@name='scrap_date']" position='attributes'>
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='location']" position='after'>
+                <field name="equipment_scrap_template_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

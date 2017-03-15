@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_asset_maintenance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0alpha1e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-02 11:31+0000\n"
+"PO-Revision-Date: 2016-08-02 13:34+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: nl\n"
+"X-Generator: Poedit 1.8.8\n"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_maintenance_equipment_asset_id
+msgid "Asset"
+msgstr "Activa"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_account_asset_asset
+msgid "Asset/Revenue Recognition"
+msgstr "Activa/Inkomsten herkenning"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_perform_equipment_scrap
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_res_company
+msgid "Companies"
+msgstr "Bedrijven"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_display_name
+msgid "Display Name"
+msgstr "Schermnaam"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_maintenance_equipment
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_asset_asset_equipment_id
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_equipment_id
+msgid "Equipment"
+msgstr "Apparaat"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_maintenance_equipment_equipment_scrap_template_id
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_res_company_equipment_scrap_template_id
+msgid "Equipment Scrap Email Template"
+msgstr "Apparaat Verwerp E-Mail Sjabloon"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap___last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_wizard_perform_equipment_scrap
+msgid "Perform Scrap (Equipment)"
+msgstr "Verwerp (Apparatuur)"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.maintenance_equipment_view_form
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_perform_equipment_scrap
+msgid "Scrap"
+msgstr "Verwerp"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_wizard_perform_equipment_scrap_scrap_date
+msgid "Scrap Date"
+msgstr "Verwerp Datum"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_perform_equipment_scrap
+msgid "Scrap Equipment"
+msgstr "Verwerp Apparaat"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.edit_res_company_form_scrapping
+msgid "Scrapping"
+msgstr "Verwerpen"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_perform_equipment_scrap
+msgid "Scrapping equipment"
+msgstr "Verwerp Apparaat"
+
+#. module: account_asset_maintenance
+#: model:ir.actions.act_window,name:account_asset_maintenance.wizard_perform_equipment_scrap_action
+msgid "Wizard Scrap"
+msgstr "Wizard Verwerpen"
