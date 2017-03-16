@@ -13,7 +13,7 @@
                 <!-- TODO -->
                 <group>
                     <group>
-                        <field name="amount_paid" string="Ammount Paid"/>
+                        <field name="amount" string="Ammount Paid"/>
                         <field name="amount_discount"/>
                         <field name="amount_interest"/>
                     </group>
@@ -21,7 +21,6 @@
                     <group>
                         <field name="journal_id"/>
                         <field name="currency_id"/>
-                        <field name="payment_method_id"/>
                         <field name="date_payment"/>
                         <field name="date_credit_debit"/>
                     </group>

@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
+from odoo.tools import float_is_zero, float_compare
 from odoo.exceptions import UserError, ValidationError
 
 FINANCIAL_MOVE = [
@@ -24,6 +25,13 @@ FINANCIAL_STATE = [
     ('cancel', u'Cancel'),
 ]
 
+FINANCIAL_SEQUENCE = {
+    'r': 'financial.move.receivable',
+    'rr': 'financial.move.receipt',
+    'p': 'financial.move.payable',
+    'pp': 'financial.move.payment',
+}
+
 
 class FinancialMove(models.Model):
     _name = 'financial.move'
@@ -44,15 +52,6 @@ class FinancialMove(models.Model):
                 record.display_name = record.ref + '/' + record.ref_item
             else:
                 record.display_name = record.ref or ''
-
-    @api.multi
-    @api.depends('financial_type')
-    def _compute_payment_type(self):
-        for record in self:
-            if record.financial_type in ('r', 'rr'):
-                record.payment_type = 'inbound'
-            elif record.financial_type in ('p', 'pp'):
-                record.payment_type = 'outbound'
 
     @api.multi
     @api.depends('date_maturity')
@@ -80,17 +79,43 @@ class FinancialMove(models.Model):
             raise ValidationError(
                 'The payment amount must be strictly positive.')
 
-    @api.depends('amount', 'amount_interest', 'amount_discount',
-                 'amount_refund', 'amount_cancel')
+    @api.depends('amount',
+                 'amount_interest',
+                 'amount_discount',
+                 'amount_refund',
+                 'amount_cancel',
+                 )
     def _compute_totals(self):
         for record in self:
-            record.amount_total = (
+            amount_total = (
                 record.amount +
                 record.amount_interest -
                 record.amount_discount -
                 record.amount_refund -
                 record.amount_cancel
             )
+            record.amount_total = amount_total
+
+    @api.multi
+    @api.depends('state', 'currency_id', 'amount_total',
+                 'related_payment_ids.amount_total')
+    def _compute_residual(self):
+        for record in self:
+            amount_paid = 0.00
+            if record.financial_type in ('r', 'p'):
+                for payment in record.related_payment_ids:
+                    amount_paid += payment.amount_total
+                amount_residual = record.amount_total - amount_paid
+                digits_rounding_precision = record.currency_id.rounding
+
+                record.amount_residual = amount_residual
+                record.amount_paid = amount_paid
+                if float_is_zero(
+                        amount_residual,
+                        precision_rounding=digits_rounding_precision):
+                    record.reconciled = True
+                else:
+                    record.reconciled = False
 
     state = fields.Selection(
         selection=FINANCIAL_STATE,
@@ -106,7 +131,19 @@ class FinancialMove(models.Model):
         required=True,
     )
     payment_type = fields.Selection(
-        compute='_compute_payment_type',
+        required=False,
+    )
+    payment_method_id = fields.Many2one(
+        required=False,
+    )
+    payment_mode_id = fields.Many2one(
+        comodel_name='account.payment.mode', string="Payment Mode",
+        ondelete='restrict',
+        readonly=True, states={'draft': [('readonly', False)]})
+    payment_term_id = fields.Many2one(
+        string=u'Payment term',
+        comodel_name='account.payment.term',
+        track_visibility='onchange',
     )
     payment_term_id = fields.Many2one(
         string=u'Payment term',
@@ -186,7 +223,8 @@ class FinancialMove(models.Model):
     amount_paid = fields.Monetary(
         string=u'Paid',
         readonly=True,
-        # required=True
+        compute='_compute_residual',
+        store=True,
     )
     amount_discount = fields.Monetary(
         string=u'Discount',
@@ -205,7 +243,8 @@ class FinancialMove(models.Model):
     amount_residual = fields.Monetary(
         string=u'Residual',
         readonly=True,
-        # required=True
+        compute='_compute_residual',
+        store=True,
     )
     amount_cancel = fields.Monetary(
         string=u'Cancel',
@@ -216,24 +255,29 @@ class FinancialMove(models.Model):
         string="Note",
         track_visibility='onchange',
     )
+    related_payment_ids = fields.One2many(
+        comodel_name='financial.move',
+        inverse_name='financial_payment_id',
+        readonly=True,
+    )
+    financial_payment_id = fields.Many2one(
+        comodel_name='financial.move',
+    )
+    reconciled = fields.Boolean(
+        string='Paid/Reconciled',
+        store=True,
+        readonly=True,
+        compute='_compute_residual',
+    )
 
     def _before_create(self, values):
+        # TODO: call this method in action_confirm to avoid sequence gaps
         if values.get('name', 'New') == 'New':
-            if values.get('move_type') == 'r':
-                values['ref'] = self.env['ir.sequence'].next_by_code(
-                    'financial.move.receivable') or 'New'
-                if not values.get('ref_item'):
-                    values['ref_item'] = '1'
-            elif values.get('move_type') == 'p':
-                values['ref'] = self.env['ir.sequence'].next_by_code(
-                    'financial.move.payable') or 'New'
-                if not values.get('ref_item'):
-                    values['ref_item'] = '1'
-            else:
-                values['ref'] = self.env['ir.sequence'].next_by_code(
-                    'financial.move.receipt') or 'New'
-                if not values.get('ref_item'):
-                    values['ref_item'] = '1'
+            values['ref'] = self.env['ir.sequence'].next_by_code(
+                    FINANCIAL_SEQUENCE[values.get('financial_type')]
+            ) or 'New'
+        if not values.get('ref_item'):
+            values['ref_item'] = '1'
 
     @api.model
     def create(self, values):
@@ -243,6 +287,35 @@ class FinancialMove(models.Model):
 
     def _after_create(self, result):
         return result
+
+    @api.multi
+    def _write(self, vals):
+        pre_not_reconciled = self.filtered(
+            lambda financial: not financial.reconciled)
+        pre_reconciled = self - pre_not_reconciled
+        res = super(FinancialMove, self)._write(vals)
+        reconciled = self.filtered(lambda financial: financial.reconciled)
+        not_reconciled = self - reconciled
+        (reconciled & pre_reconciled).filtered(
+            lambda financial: financial.state == 'open').action_paid()
+        (not_reconciled & pre_not_reconciled).filtered(
+            lambda invoice: invoice.state == 'paid').action_estorno()
+        return res
+
+    @api.multi
+    def unlink(self):
+        for financial in self:
+            if financial.state not in ('draft', 'cancel'):
+                raise UserError(
+                    _('You cannot delete an financial move which is not \n'
+                      'draft or cancelled'))
+                if financial.document_number:
+                    # TODO: Improve this validation!
+                    raise UserError(
+                        _('You cannot delete an financial move which is \n'
+                          'generated by another document \n'
+                          'try to cancel you document first'))
+        return super(FinancialMove, self).unlink()
 
     @api.multi
     def change_state(self, new_state):
@@ -268,6 +341,11 @@ class FinancialMove(models.Model):
             record.change_state('paid')
 
     @api.multi
+    def action_estorno(self):
+        for record in self:
+            record.change_state('open')
+
+    @api.multi
     def action_cancel(self, reason):
         for record in self:
             record.change_state('cancel')
@@ -281,14 +359,50 @@ class FinancialMove(models.Model):
                 'note': new_note
             })
 
-    # payment_id = fields.Many2one(
-    #     'financial.move',
-    # )
-    # related_payment_ids = fields.One2many(
-    #     comodel_name='financial.move',
-    #     inverse_name='payment_id',
-    #     readonly=True,
-    # )
+    @staticmethod
+    def _prepare_payment(journal_id, company_id, currency_id,
+                         financial_type, partner_id, document_number,
+                         date_issue, document_item, date_maturity, amount,
+                         account_analytic_id=False, account_id=False,
+                         payment_term_id=False, payment_mode_id=False,
+                         args={}):
+
+        return dict(
+            args,
+            journal_id=journal_id,
+            company_id=company_id,
+            currency_id=currency_id,
+            financial_type=financial_type,
+            partner_id=partner_id,
+            document_number=document_number,
+            date_issue=date_issue,
+            payment_mode_id=payment_mode_id,
+            payment_term_id=payment_term_id,
+            account_analytic_id=account_analytic_id,
+            account_id=account_id,
+            document_item=document_item,
+            date_maturity=date_maturity,
+            amount=amount,
+        )
+
+    @api.multi
+    def action_view_financial(self, financial_type):
+        if financial_type == 'r':
+            action = self.env.ref(
+                'financial.financial_receivable_act_window').read()[0]
+        else:
+            action = self.env.ref(
+                'financial.financial_payable_act_window').read()[0]
+        if len(self) > 1:
+            action['domain'] = [('id', 'in', self.ids)]
+        elif len(self) == 1:
+            action['views'] = [
+                (self.env.ref('financial.financial_move_form_view').id, 'form')
+            ]
+            action['res_id'] = self.ids[0]
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
 
     # # percent_interest = fields.Float() #  TODO:
     # # percent_discount = fields.Float() #  TODO:
@@ -352,9 +466,7 @@ class FinancialMove(models.Model):
     #                             payment.amount_interest -
     #                             payment.amount_delay_fee)
     #             record.balance = balance
-    #         if record.balance <= 0 and record.related_payment_ids \
-    #                 and record.state == 'open':
-    #             record.change_state('paid')
+
 
     # def executa_antes_create(self, values):
     #     #

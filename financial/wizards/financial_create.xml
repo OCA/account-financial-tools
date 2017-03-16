@@ -28,7 +28,7 @@
                         <field name="date_issue"/>
                     </group>
                     <group>
-                        <field name="payment_method_id" widget="radio"/>
+                        <field name="payment_mode_id" widget="radio"/>
                         <field name="payment_term_id"/>
                     </group>
                     <group class="oe_subtotal_footer oe_right">

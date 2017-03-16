@@ -13,20 +13,17 @@ class FinancialMoveCreate(models.TransientModel):
     _name = 'financial.move.create'
     _inherit = ['account.abstract.payment']
 
-    @api.multi
-    @api.depends('financial_type')
-    def _compute_payment_type(self):
-        for record in self:
-            if record.financial_type in ('r', 'rr'):
-                record.payment_type = 'inbound'
-            elif record.financial_type in ('p', 'pp'):
-                record.payment_type = 'outbound'
-
     @api.depends('amount', 'amount_discount')
     def _compute_totals(self):
         for record in self:
             record.amount_total = record.amount - record.amount_discount
 
+    payment_type = fields.Selection(
+        required=False,
+    )
+    payment_method_id = fields.Many2one(
+        required=False,
+    )
     line_ids = fields.One2many(
         comodel_name='financial.move.line.create',
         inverse_name='financial_move_id',
@@ -36,8 +33,9 @@ class FinancialMoveCreate(models.TransientModel):
         selection=FINANCIAL_MOVE,
         required=True,
     )
-    payment_type = fields.Selection(
-        compute='_compute_payment_type',
+    payment_mode_id = fields.Many2one(
+        comodel_name='account.payment.mode', string="Payment Mode",
+        ondelete='restrict',
     )
     payment_term_id = fields.Many2one(
         string='Payment Term',
@@ -99,9 +97,8 @@ class FinancialMoveCreate(models.TransientModel):
     def compute(self):
         financial_move = self.env['financial.move']
         for record in self:
-            res = []
             for move in record.line_ids:
-                financial = financial_move.create(dict(
+                vals = financial_move._prepare_payment(
                     journal_id=self.journal_id.id,
                     company_id=self.company_id.id,
                     currency_id=self.currency_id.id,
@@ -109,33 +106,18 @@ class FinancialMoveCreate(models.TransientModel):
                     partner_id=self.partner_id.id,
                     document_number=self.document_number,
                     date_issue=self.date_issue,
-                    payment_method_id=self.payment_method_id.id,
+                    payment_mode_id=self.payment_mode_id.id,
                     payment_term_id=self.payment_term_id.id,
                     account_analytic_id=self.account_analytic_id.id,
                     account_id=self.account_id.id,
                     document_item=move.document_item,
                     date_maturity=move.date_maturity,
                     amount=move.amount,
-                ))
+                )
+                financial = financial_move.create(vals)
                 financial.action_confirm()
-                res.append(financial.id)
-
-        if record.financial_type == 'r':
-            name = 'Receivable'
-        else:
-            name = 'Payable'
-        action = {
-            'name': name,
-            'type': 'ir.actions.act_window',
-            'res_model': 'financial.move',
-            'domain': [('id', 'in', res)],
-            'views': [(self.env.ref(
-                'financial.financial_move_tree_view').id, 'list')],
-            'view_type': 'list',
-            'view_mode': 'form,tree',
-            'target': 'current'
-        }
-        return action
+                financial_move |= financial
+        return financial_move.action_view_financial(record.financial_type)
 
 
 class FinancialMoveLineCreate(models.TransientModel):

@@ -16,7 +16,7 @@
                 <field name="partner_id"/>
                 <field name="document_number" string="Ref."/>
                 <field name="document_item" string=""/>
-                <field name="payment_method_id" string="Payment method"/>
+                <field name="payment_mode_id" string="Payment method"/>
                 <field name="currency_id" groups="base.group_multi_currency"/>
                 <field name="amount" string="Amount" sum="Amount"/>
                 <field name="amount_discount" sum="Discount"/>
@@ -58,8 +58,6 @@
                 </header>
                 <sheet>
                     <field name="financial_type" invisible="1"/>
-                    <field name="hide_payment_method" invisible="1"/>
-                    <field name="payment_method_code" invisible="1"/>
                     <div>
                         <label string="Draft Receivable"
                                attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('financial_type','&lt;&gt;','r')]}"/>
@@ -91,7 +89,7 @@
                             <page string="Info">
                                 <group>
                                     <group>
-                                        <field name="payment_method_id" widget="radio" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                        <field name="payment_mode_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                                         <field name="payment_term_id"/>
                                     </group>
                                     <group class="oe_subtotal_footer oe_right">
@@ -105,6 +103,7 @@
                                         <field name="amount_residual" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="reconciled" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                     </group>
                                 </group>
                                 <div>
@@ -112,8 +111,20 @@
                                     <field name="note" placeholder="Notes ..."/>
                                 </div>
                             </page>
-                            <page string="Payments">
-
+                            <page string="Payments" name="payments">
+                                <field name="related_payment_ids">
+                                    <tree>
+                                        <field name="date_payment"/>
+                                        <field name="date_credit_debit"/>
+                                        <field name="amount" string="Amount" sum="Amount"/>
+                                        <field name="amount_discount" sum="Discount"/>
+                                        <field name="amount_interest" sum="Interest"/>
+                                        <field name="amount_refund" sum="Refund"/>
+                                        <field name="amount_cancel" sum="Cancel"/>
+                                        <field name="amount_total" sum="Total"/>
+                                        <field name="state" invisible="1"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="Accounting">
 
@@ -139,7 +150,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="financial_receivable_act_window">
-        <field name="name">Financial Move (Account Receivable)</field> <!-- TODO-->
+        <field name="name">Financial Move (Account Receivable)</field>
         <field name="res_model">financial.move</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('financial_type','=','r')]</field>
@@ -147,7 +158,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="financial_payable_act_window">
-        <field name="name">Financial Move (Account Payable)</field> <!-- TODO-->
+        <field name="name">Financial Move (Account Payable)</field>
         <field name="res_model">financial.move</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('financial_type','=','p')]</field>
