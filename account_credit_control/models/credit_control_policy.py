@@ -18,7 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _
+from odoo import models, fields, api, _
+from odoo.exceptions import Warning
 
 
 class CreditControlPolicy(models.Model):
@@ -39,7 +40,7 @@ class CreditControlPolicy(models.Model):
         'account.account',
         string='Accounts',
         required=True,
-        domain="[('type', '=', 'receivable')]",
+        domain="[('internal_type', '=', 'receivable')]",
         help="This policy will be active only"
              " for the selected accounts",
     )
@@ -51,7 +52,7 @@ class CreditControlPolicy(models.Model):
         self.ensure_one()
         return [('account_id', 'in', self.account_ids.ids),
                 ('date_maturity', '<=', controlling_date),
-                ('reconcile_id', '=', False),
+                ('reconciled', '=', False),
                 ('partner_id', '!=', False)]
 
     @api.multi
@@ -71,7 +72,7 @@ class CreditControlPolicy(models.Model):
         move_l_obj = self.env['account.move.line']
         user = self.env.user
         if user.company_id.credit_policy_id.id != self.id:
-            return move_l_obj.browse()
+            return move_l_obj
         domain_line = self._move_lines_domain(controlling_date)
         return move_l_obj.search(domain_line)
 
@@ -97,11 +98,10 @@ class CreditControlPolicy(models.Model):
         self.ensure_one()
         # MARK possible place for a good optimisation
         my_obj = self.env[model]
-        move_l_obj = self.env['account.move.line']
         default_domain = self._move_lines_domain(controlling_date)
 
-        to_add = move_l_obj.browse()
-        to_remove = move_l_obj.browse()
+        to_add = self.env['account.move.line']
+        to_remove = self.env['account.move.line']
 
         # The lines which are linked to this policy have to be included in the
         # run for this policy.
@@ -110,7 +110,7 @@ class CreditControlPolicy(models.Model):
         if add_objs:
             domain = list(default_domain)
             domain.append((move_relation_field, 'in', add_objs.ids))
-            to_add = move_l_obj.search(domain)
+            to_add = to_add.search(domain)
 
         # The lines which are linked to another policy do not have to be
         # included in the run for this policy.
@@ -119,7 +119,7 @@ class CreditControlPolicy(models.Model):
         if neg_objs:
             domain = list(default_domain)
             domain.append((move_relation_field, 'in', neg_objs.ids))
-            to_remove = move_l_obj.search(domain)
+            to_remove = to_remove.search(domain)
         return to_add, to_remove
 
     @api.multi
@@ -177,8 +177,7 @@ class CreditControlPolicy(models.Model):
             existing credit line but with a different policy.
         """
         self.ensure_one()
-        move_line_obj = self.env['account.move.line']
-        different_lines = move_line_obj.browse()
+        different_lines = self.env['account.move.line']
         if not lines:
             return different_lines
         cr = self.env.cr
@@ -188,7 +187,7 @@ class CreditControlPolicy(models.Model):
                    (self.id, tuple(lines.ids)))
         res = cr.fetchall()
         if res:
-            return move_line_obj.browse([row[0] for row in res])
+            return different_lines.browse([row[0] for row in res])
         return different_lines
 
     @api.multi
@@ -199,7 +198,7 @@ class CreditControlPolicy(models.Model):
                    if account in x.account_ids or x.do_nothing]
         if self not in allowed:
             allowed_names = u"\n".join(x.name for x in allowed)
-            raise api.Warning(
+            raise Warning(
                 _('You can only use a policy set on '
                   'account %s.\n'
                   'Please choose one of the following '
@@ -229,7 +228,7 @@ class CreditControlPolicyLevel(models.Model):
         required=True
     )
     delay_days = fields.Integer(string='Delay (in days)', required=True)
-    email_template_id = fields.Many2one('email.template',
+    email_template_id = fields.Many2one('mail.template',
                                         string='Email Template',
                                         required=True)
     channel = fields.Selection([('letter', 'Letter'),
@@ -246,17 +245,20 @@ class CreditControlPolicyLevel(models.Model):
                         'UNIQUE (policy_id, level)',
                         'Level must be unique per policy')]
 
-    @api.one
+    @api.multi
     @api.constrains('level', 'computation_mode')
     def _check_level_mode(self):
         """ The smallest level of a policy cannot be computed on the
         "previous_date".
         """
-        smallest_level = self.search([('policy_id', '=', self.policy_id.id)],
-                                     order='level asc', limit=1)
-        if smallest_level.computation_mode == 'previous_date':
-            return api.ValidationError(_('The smallest level can not be of '
-                                         'type Previous Reminder'))
+
+        for policy_level in self:
+            smallest_level = \
+                self.search([('policy_id', '=', policy_level.policy_id.id)],
+                            order='level asc', limit=1)
+            if smallest_level.computation_mode == 'previous_date':
+                return api.ValidationError(_('The smallest level can not be '
+                                             'of type Previous Reminder'))
 
     @api.multi
     def _previous_level(self):
@@ -321,7 +323,7 @@ class CreditControlPolicyLevel(models.Model):
         self.ensure_one()
         move_line_obj = self.env['account.move.line']
         if not lines:
-            return move_line_obj.browse()
+            return move_line_obj
         cr = self.env.cr
         sql = ("SELECT DISTINCT mv_line.id\n"
                " FROM account_move_line mv_line\n"
@@ -345,7 +347,7 @@ class CreditControlPolicyLevel(models.Model):
         res = cr.fetchall()
         if res:
             return move_line_obj.browse([row[0] for row in res])
-        return move_line_obj.browse()
+        return move_line_obj
 
     @api.multi
     @api.returns('account.move.line')
@@ -355,7 +357,7 @@ class CreditControlPolicyLevel(models.Model):
         self.ensure_one()
         move_line_obj = self.env['account.move.line']
         if not lines:
-            return move_line_obj.browse()
+            return move_line_obj
         cr = self.env.cr
         sql = ("SELECT mv_line.id\n"
                " FROM account_move_line mv_line\n"
@@ -389,15 +391,14 @@ class CreditControlPolicyLevel(models.Model):
         res = cr.fetchall()
         if res:
             return move_line_obj.browse([row[0] for row in res])
-        return move_line_obj.browse()
+        return move_line_obj
 
     @api.multi
     @api.returns('account.move.line')
     def get_level_lines(self, controlling_date, lines):
         """ get all move lines in entry lines that match the current level """
         self.ensure_one()
-        move_line_obj = self.env['account.move.line']
-        matching_lines = move_line_obj.browse()
+        matching_lines = self.env['account.move.line']
         if self._previous_level() is None:
             method = self._get_first_level_move_lines
         else:

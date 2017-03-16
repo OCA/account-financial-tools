@@ -19,9 +19,9 @@
 #
 ##############################################################################
 import logging
-from openerp import models, fields, api
+from odoo import models, fields, api
 
-logger = logging.getLogger('credit.control.line.mailing')
+logger = logging.getLogger(__name__)
 
 
 class CreditCommunication(models.TransientModel):
@@ -81,13 +81,14 @@ class CreditCommunication(models.TransientModel):
         balance_field = 'credit_control_line_ids.balance_due'
         return sum(self.mapped(balance_field))
 
-    @api.one
+    @api.multi
     @api.depends('credit_control_line_ids',
                  'credit_control_line_ids.amount_due',
                  'credit_control_line_ids.balance_due')
     def _compute_total(self):
-        self.total_invoiced = self._get_total()
-        self.total_due = self._get_total_due()
+        for communication in self:
+            communication.total_invoiced = communication._get_total()
+            communication.total_due = communication._get_total_due()
 
     @api.model
     @api.returns('self', lambda value: value.id)
@@ -176,30 +177,21 @@ class CreditCommunication(models.TransientModel):
     @api.returns('mail.mail')
     def _generate_emails(self):
         """ Generate email message using template related to level """
-        email_message_obj = self.env['mail.mail']
-        # Warning: still using the old-api on 'email.template' because
-        # the method generate_email() does not follow the cr, uid, ids
-        # convention and the new api wrapper can't translate the call
-        email_template_obj = self.pool['email.template']
-        att_obj = self.env['ir.attachment']
-        emails = email_message_obj.browse()
+        emails = self.env['mail.mail']
+        attachments = self.env['ir.attachment']
         required_fields = ['subject',
                            'body_html',
                            'email_from',
                            'email_to']
-        cr, uid, context = self.env.cr, self.env.uid, self.env.context
         for comm in self:
             template = comm.current_policy_level.email_template_id
-            email_values = email_template_obj.generate_email(cr, uid,
-                                                             template.id,
-                                                             comm.id,
-                                                             context=context)
+            email_values = template.generate_email(comm.id)
             email_values['type'] = 'email'
             # model is Transient record (self) removed periodically so no point
             # of storing res_id
             email_values.pop('model', None)
             email_values.pop('res_id', None)
-            email = email_message_obj.create(email_values)
+            email = emails.create(email_values)
 
             state = 'sent'
             # The mail will not be send, however it will be in the pool, in an
@@ -213,7 +205,6 @@ class CreditCommunication(models.TransientModel):
             comm.credit_control_line_ids.write({'mail_message_id': email.id,
                                                 'state': state})
 
-            attachments = att_obj.browse()
             for att in email_values.get('attachments', []):
                 attach_fname = att[0]
                 attach_datas = att[1]
@@ -225,7 +216,7 @@ class CreditCommunication(models.TransientModel):
                     'res_id': email.id,
                     'type': 'binary',
                 }
-                attachments += att_obj.create(data_attach)
+                attachments |= attachments.create(data_attach)
             email.write({'attachment_ids': [(6, 0, attachments.ids)]})
             emails += email
         return emails
@@ -242,8 +233,7 @@ class CreditCommunication(models.TransientModel):
     @api.multi
     @api.returns('credit.control.line')
     def _mark_credit_line_as_sent(self):
-        line_obj = self.env['credit.control.line']
-        lines = line_obj.browse()
+        lines = self.env['credit.control.line']
         for comm in self:
             lines |= comm.credit_control_line_ids
 
