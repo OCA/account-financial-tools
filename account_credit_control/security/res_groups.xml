@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="category_credit_control" model="ir.module.category">
+        <field name="name">Credit Control</field>
+        <field name="sequence" eval="99" />
+    </record>
+
+    <record id="group_account_credit_control_info" model="res.groups" context="{'noadmin':True}">
+        <field name="name">Info</field>
+        <field name="category_id" ref="category_credit_control"/>
+    </record>
+
+    <record id="group_account_credit_control_user" model="res.groups" context="{'noadmin':True}">
+        <field name="name">User</field>
+        <field name="category_id" ref="category_credit_control"/>
+        <field name="implied_ids" eval="[(4, ref('group_account_credit_control_info'))]"/>
+    </record>
+
+    <record id="group_account_credit_control_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="category_credit_control"/>
+        <field name="implied_ids" eval="[(4, ref('group_account_credit_control_user'))]"/>
+    </record>
+
+</odoo>
