@@ -157,9 +157,9 @@ class FinancialMove(models.Model):
     account_id = fields.Many2one(
         comodel_name='account.account',
         string=u'Account',
-        # required=True,
+        required=True,
         readonly=True, states={'draft': [('readonly', False)]},
-        domain=[('internal_type', 'in', ('receivable', 'payable'))],
+        domain=[('internal_type', '=', 'other')],
         help="The partner account used for this invoice."
     )
     ref = fields.Char(
