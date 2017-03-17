@@ -25,6 +25,12 @@ class TestFinancialMove(TransactionCase):
         self.partner_agrolait = self.env.ref("base.res_partner_2")
         self.partner_axelor = self.env.ref("base.res_partner_2")
 
+        self.bank_journal_id = self.env['account.journal'].search(
+            [
+                ('company_id', '=', self.company_id),
+                ('type', '=', 'bank')
+            ])[0]
+
         self.cr_1 = self.financial_move.create(dict(
             date_maturity='2017-02-27',
             company_id=self.main_company.id,
@@ -54,6 +60,7 @@ class TestFinancialMove(TransactionCase):
         E impedir lançamento"""
         with self.assertRaises(ValidationError):
             self.financial_move.create(dict(
+                journal_id=self.bank_journal_id.id,
                 date_maturity='2017-02-27',
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
@@ -64,6 +71,7 @@ class TestFinancialMove(TransactionCase):
                 financial_type='r',
             ))
             self.financial_move.create(dict(
+                journal_id=self.bank_journal_id.id,
                 date_maturity='2017-02-27',
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
@@ -89,6 +97,7 @@ class TestFinancialMove(TransactionCase):
         cr_1.action_confirm()
 
         cr_2 = self.financial_move.create(dict(
+            journal_id=self.bank_journal_id.id,
             date_maturity='2017-02-27',
             company_id=self.main_company.id,
             currency_id=self.currency_euro.id,
@@ -265,6 +274,7 @@ class TestFinancialMove(TransactionCase):
         fm = self.financial_move_create
         cr_1 = fm.create(
             dict(
+                journal_id=self.bank_journal_id.id,
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
                 financial_type='r',
