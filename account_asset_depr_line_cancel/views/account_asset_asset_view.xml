@@ -1,0 +1,25 @@
+<openerp>
+<data>
+    <record model="ir.ui.view" id="view_account_asset_asset_form">
+        <field name="name">Account Asset Form (cancel button)</field>
+        <field name="model">account.asset.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+        <field name="arch" type="xml">
+            <field name="depreciation_line_ids" position="attributes">
+                <attribute name="options">{'reload_on_button': true}</attribute>
+            </field>
+            <button name="create_move" position="after">
+                <field name="move_id" invisible="1"/>
+                <button name="unlink_move"
+                        icon="gtk-cancel"
+                        string="Delete Move"
+                        type="object"
+                        confirm="Are you sure?"
+                        groups="account.group_account_manager"
+                        attrs="{'invisible': [('move_check', '=', False)]}"
+                />
+            </button>
+        </field>
+    </record>
+</data>
+</openerp>
