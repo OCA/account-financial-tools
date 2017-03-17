@@ -358,7 +358,6 @@ class FinancialMove(models.Model):
                 new_note = u'Cancel reason: ' + reason
             record.write({
                 'amount_cancel': record.amount,
-                'amount': 0.00,
                 'note': new_note
             })
 
