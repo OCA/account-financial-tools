@@ -27,7 +27,6 @@
         'report/financial_cashflow.xml',
     ],
     'demo': [
-        'demo/financial_move_history.xml',
         'demo/financial_move.xml',
     ],
 }
