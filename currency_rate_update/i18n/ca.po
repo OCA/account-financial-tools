@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-03-10 23:17+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
@@ -67,7 +67,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
 msgid "Day(s)"
-msgstr ""
+msgstr "Dia(es)"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/company.py:53
@@ -176,7 +176,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
 msgid "Week(s)"
-msgstr ""
+msgstr "Setmana(es)"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/company.py:52
@@ -232,7 +232,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:res.company,interval_type:0
 msgid "Month(s)"
-msgstr ""
+msgstr "Mes(os)"
 
 #. module: currency_rate_update
 #: constraint:currency.rate.update.service:0

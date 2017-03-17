@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 23:22+0000\n"
-"PO-Revision-Date: 2017-01-17 19:17+0000\n"
+"POT-Creation-Date: 2017-03-10 23:16+0000\n"
+"PO-Revision-Date: 2017-03-14 18:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
 msgid "Group By..."
-msgstr ""
+msgstr "Agrupat per..."
 
 #. module: account_asset_management
 #: help:account.asset.asset,method:0 help:account.asset.category,method:0
