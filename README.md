@@ -22,6 +22,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_asset_depr_line_cancel](account_asset_depr_line_cancel/) | 8.0.1.0.0 | Assets Management - Cancel button
 [account_asset_management](account_asset_management/) | 8.0.2.6.0 | Assets Management
 [account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 | Assets Management Excel reporting
 [account_auto_fy_sequence](account_auto_fy_sequence/) | 8.0.0.1.0 | Automatic Fiscal Year Sequences
