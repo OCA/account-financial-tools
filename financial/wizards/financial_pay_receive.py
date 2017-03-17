@@ -3,9 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from ..models.financial_move import (
-    FINANCIAL_IN_OUT,
-)
 
 
 class FinancialPayreceive(models.TransientModel):
@@ -50,7 +47,6 @@ class FinancialPayreceive(models.TransientModel):
 
     @api.multi
     def doit(self):
-        print "hetreas"
         for wizard in self:
             active_id = self._context['active_id']
             account_financial = self.env['financial.move']
@@ -70,7 +66,6 @@ class FinancialPayreceive(models.TransientModel):
                 partner_id=financial_to_pay.partner_id.id,
                 document_number=financial_to_pay.document_number,
                 date_issue=wizard.date_payment,
-                # payment_mode_id=wizard.payment_mode_id.id,
                 document_item=financial_to_pay.document_item,
                 date_maturity=financial_to_pay.date_maturity,
                 amount=wizard.amount,

@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
-from odoo.tools import float_is_zero, float_compare
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_is_zero
 
 FINANCIAL_MOVE = [
     ('r', u'Account Receivable'),
@@ -41,7 +41,6 @@ class FinancialMove(models.Model):
              "ref desc, ref_item desc, document_number, id desc"
     _rec_name = 'ref'
 
-    @staticmethod
     def _readonly_state(self):
         return {'draft': [('readonly', False)]}
 
