@@ -173,7 +173,6 @@ class FinancialMove(models.Model):
     )
     ref_item = fields.Char(
         string=u"ref item",
-        required=True,
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
@@ -270,18 +269,21 @@ class FinancialMove(models.Model):
         compute='_compute_residual',
     )
 
+    @api.multi
+    def action_number(self):
+        for record in self:
+            if record.ref == 'New':
+                record.ref = self.env['ir.sequence'].next_by_code(
+                    FINANCIAL_SEQUENCE[record.financial_type]) or 'New'
+            if not record.ref_item:
+                record.ref_item = '1'
+
     def _before_create(self, values):
-        # TODO: call this method in action_confirm to avoid sequence gaps
-        if values.get('name', 'New') == 'New':
-            values['ref'] = self.env['ir.sequence'].next_by_code(
-                    FINANCIAL_SEQUENCE[values.get('financial_type')]
-            ) or 'New'
-        if not values.get('ref_item'):
-            values['ref_item'] = '1'
+        return values
 
     @api.model
     def create(self, values):
-        self._before_create(values)
+        values = self._before_create(values)
         result = super(FinancialMove, self).create(values)
         return self._after_create(result)
 
@@ -329,6 +331,7 @@ class FinancialMove(models.Model):
     def action_confirm(self):
         for record in self:
             record.change_state('open')
+            record.action_number()
 
     @api.multi
     def action_budget(self):
@@ -404,8 +407,7 @@ class FinancialMove(models.Model):
             action = {'type': 'ir.actions.act_window_close'}
         return action
 
-    # # percent_interest = fields.Float() #  TODO:
-    # # percent_discount = fields.Float() #  TODO:
+
     # storno = fields.Boolean(
     #     string=u'Storno',
     #     readonly=True
