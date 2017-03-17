@@ -13,6 +13,7 @@
     'depends': [
         'l10n_br_resource',
         'account_payment_mode',
+        'account_parent',
         'account',
         'mail',
     ],
@@ -25,6 +26,7 @@
         'wizards/financial_pay_receive.xml',
         'views/financial_move.xml',
         'report/financial_cashflow.xml',
+        'report/financial_statement_report.xml',
     ],
     'demo': [
         'demo/financial_move.xml',

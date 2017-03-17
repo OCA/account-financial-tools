@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+
+
+    <record model="ir.actions.act_window" id="financial_statement_report_act_window">
+        <field name="name">Financial Statement Report</field> <!-- TODO -->
+        <field name="res_model">financial.statement.report</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_statement_report_menu">
+        <field name="name">Financial Statement Report</field>
+        <field name="parent_id" ref="financial_report_menu"/>
+        <field name="action" ref="financial_statement_report_act_window"/>
+        <field name="sequence" eval="16"/> <!-- TODO -->
+    </record>
+
+</data>
+</odoo>

@@ -16,6 +16,12 @@
         <field name="sequence" eval="16"/>
     </record>
 
+    <record model="ir.ui.menu" id="financial_report_menu">
+        <field name="name">Reports</field>
+        <field name="parent_id" ref="financial_top_menu"/>
+        <field name="sequence" eval="46"/>
+    </record>
+
 
     <record model="ir.ui.menu" id="financial_config_menu">
         <field name="name">Configuration</field>
