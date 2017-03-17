@@ -248,7 +248,7 @@ class TestFinancialMove(TransactionCase):
     # receber/pagar de forma automatica dependendo do termo de pagamento.
     # """
 
-    def test_usX_ac_Y(self):
+    def test_usx_ac_y(self):
         """
         DADO o lancamento de uma parcela via assistente
         QUANDO especificado algum termo de pagamento
