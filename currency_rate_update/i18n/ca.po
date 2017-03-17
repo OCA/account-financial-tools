@@ -9,7 +9,7 @@
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
@@ -46,8 +46,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:44+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-03-14 18:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +146,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Day(s)"
-msgstr ""
+msgstr "Dia(es)"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,display_name:0
@@ -235,7 +235,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Month(s)"
-msgstr ""
+msgstr "Mes(os)"
 
 #. module: currency_rate_update
 #: field:res.company,multi_company_currency_enable:0
@@ -281,7 +281,7 @@ msgstr ""
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
 msgid "Week(s)"
-msgstr ""
+msgstr "Setmana(es)"
 
 #. module: currency_rate_update
 #: help:res.company,multi_company_currency_enable:0
