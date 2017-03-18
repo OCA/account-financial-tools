@@ -20,8 +20,8 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
-from openerp.exceptions import ValidationError
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class AccountMoveTemplate(models.Model):
