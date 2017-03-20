@@ -81,6 +81,13 @@ class FinancialCashflow(models.Model):
         comodel_name='account.account',
         string=u'Account',
     )
+    journal_id = fields.Many2one(
+        'account.journal',
+        string='Payment Journal',
+        required=True,
+        domain=[('type', 'in', ('bank', 'cash'))]
+    )
+
 
     @api.model
     def search_read(self, domain=None, fields=None, offset=0, limit=None,
@@ -112,6 +119,7 @@ class FinancialCashflow(models.Model):
 
                     financial_move.account_id,
                     financial_move.analytic_account_id,
+                    financial_move.journal_id,
 
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -147,6 +155,7 @@ class FinancialCashflow(models.Model):
 
                     financial_move.account_id,
                     financial_move.analytic_account_id,
+                    financial_move.journal_id,
 
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -178,6 +187,7 @@ class FinancialCashflow(models.Model):
                     c.currency_id,
                     c.account_id,
                     c.analytic_account_id,
+                    c.journal_id,
                     c.amount_total,
                     c.amount_credit,
                     c.amount_debit,
@@ -202,12 +212,41 @@ class FinancialCashflow(models.Model):
                     d.currency_id,
                     d.account_id,
                     d.analytic_account_id,
+                    d.journal_id,
                     d.amount_total,
                     d.amount_credit,
                     d.amount_debit,
                     d.amount_balance
                 FROM
-                    financial_cashflow_debit d;
+                    financial_cashflow_debit d
+                UNION ALL
+
+                SELECT
+                    a.date as create_date,
+                    a.journal_id * (-1) as id,
+                    '0' as document_number,
+                    'open' as financial_type,
+                    'residual' as state,
+                    a.date as date_business_maturity,
+                    a.date,
+                    NULL as payment_method_id,
+                    NULL as payment_term_id,
+                    a.date as date_maturity,
+                    NULL as partner_id,
+                    NULL ascurrency_id,
+                    NULL as account_id,
+                    NULL as analytic_account_id,
+                    a.journal_id,
+                    0 as amount_total,
+                    0 as amount_credit,
+                    0 as amount_debit,
+                    a.balance_end as amount_balance
+                        FROM account_bank_statement AS a,
+                            (SELECT c.date, max(c.id) AS stmt_id
+                                FROM account_bank_statement AS c
+                                GROUP BY date, id
+                                    ORDER BY date, id) AS b
+                        WHERE a.id = b.stmt_id
         """)
 
         self.env.cr.execute("""
@@ -227,6 +266,7 @@ class FinancialCashflow(models.Model):
                     b.currency_id,
                     b.account_id,
                     b.analytic_account_id,
+                    b.journal_id,
                     b.amount_total,
                     b.amount_credit,
                     b.amount_debit,
