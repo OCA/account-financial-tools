@@ -20,12 +20,12 @@
                         <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                         <field name="partner_id" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" attrs="{'required': [('financial_type', 'in', ('r', 'p', 'rr', 'pp'))]}" context="{'default_is_company': True, 'default_supplier': financial_type == 'p', 'default_customer': financial_type == 'r'}"/>
                         <field name="account_id"/>
-                        <field name="account_analytic_id"/>
+                        <field name="analytic_account_id"/>
                     </group>
                     <group>
                         <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                         <field name="document_number"/>
-                        <field name="date_issue"/>
+                        <field name="date"/>
                     </group>
                     <group>
                         <field name="payment_mode_id"/>

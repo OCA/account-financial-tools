@@ -5,6 +5,8 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
+from odoo.tools.safe_eval import safe_eval
+
 
 FINANCIAL_MOVE = [
     ('r', u'Account Receivable'),
@@ -145,7 +147,7 @@ class FinancialMove(models.Model):
         comodel_name='account.payment.term',
         track_visibility='onchange',
     )
-    account_analytic_id = fields.Many2one(
+    analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string=u'Analytic account'
     )
@@ -185,7 +187,7 @@ class FinancialMove(models.Model):
     document_item = fields.Char(
         string=u"Document item",
     )
-    date_issue = fields.Date(
+    date = fields.Date(
         string=u'Financial date',
         default=fields.Date.context_today,
     )
@@ -355,8 +357,8 @@ class FinancialMove(models.Model):
     @staticmethod
     def _prepare_payment(journal_id, company_id, currency_id,
                          financial_type, partner_id, document_number,
-                         date_issue, document_item, date_maturity, amount,
-                         account_analytic_id=False, account_id=False,
+                         date, document_item, date_maturity, amount,
+                         analytic_account_id=False, account_id=False,
                          payment_term_id=False, payment_mode_id=False,
                          args=False):
         if not args:
@@ -369,10 +371,10 @@ class FinancialMove(models.Model):
             financial_type=financial_type,
             partner_id=partner_id,
             document_number=document_number,
-            date_issue=date_issue,
+            date=date,
             payment_mode_id=payment_mode_id,
             payment_term_id=payment_term_id,
-            account_analytic_id=account_analytic_id,
+            analytic_account_id=analytic_account_id,
             account_id=account_id,
             document_item=document_item,
             date_maturity=date_maturity,
@@ -397,3 +399,4 @@ class FinancialMove(models.Model):
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
+

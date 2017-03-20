@@ -27,6 +27,7 @@
         'views/financial_move.xml',
         'report/financial_cashflow.xml',
         'report/financial_statement_report.xml',
+        'report/report_financial.xml',
     ],
     'demo': [
         'demo/financial_move.xml',

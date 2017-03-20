@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, tools
+from odoo.tools.safe_eval import safe_eval
 
 from ..models.financial_move import (
     FINANCIAL_STATE,
@@ -47,7 +48,7 @@ class FinancialCashflow(models.Model):
     document_item = fields.Char(
         string=u"Document item",
     )
-    date_issue = fields.Date(
+    date = fields.Date(
         string=u"Document date",
     )
     amount_total = fields.Monetary(
@@ -72,7 +73,7 @@ class FinancialCashflow(models.Model):
         string=u'Payment term',
         comodel_name='account.payment.term',
     )
-    account_analytic_id = fields.Many2one(
+    analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string=u'Analytic account'
     )
@@ -101,7 +102,7 @@ class FinancialCashflow(models.Model):
 
                     financial_move.state,
                     financial_move.date_business_maturity,
-                    financial_move.date_issue,
+                    financial_move.date,
                     financial_move.payment_method_id,
                     financial_move.payment_term_id,
 
@@ -110,7 +111,7 @@ class FinancialCashflow(models.Model):
                     financial_move.currency_id,
 
                     financial_move.account_id,
-                    financial_move.account_analytic_id,
+                    financial_move.analytic_account_id,
 
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -136,7 +137,7 @@ class FinancialCashflow(models.Model):
 
                     financial_move.state,
                     financial_move.date_business_maturity,
-                    financial_move.date_issue,
+                    financial_move.date,
                     financial_move.payment_method_id,
                     financial_move.payment_term_id,
 
@@ -145,7 +146,7 @@ class FinancialCashflow(models.Model):
                     financial_move.currency_id,
 
                     financial_move.account_id,
-                    financial_move.account_analytic_id,
+                    financial_move.analytic_account_id,
 
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -169,14 +170,14 @@ class FinancialCashflow(models.Model):
                     c.financial_type,
                     c.state,
                     c.date_business_maturity,
-                    c.date_issue,
+                    c.date,
                     c.payment_method_id,
                     c.payment_term_id,
                     c.date_maturity,
                     c.partner_id,
                     c.currency_id,
                     c.account_id,
-                    c.account_analytic_id,
+                    c.analytic_account_id,
                     c.amount_total,
                     c.amount_credit,
                     c.amount_debit,
@@ -193,14 +194,14 @@ class FinancialCashflow(models.Model):
                     d.financial_type,
                     d.state,
                     d.date_business_maturity,
-                    d.date_issue,
+                    d.date,
                     d.payment_method_id,
                     d.payment_term_id,
                     d.date_maturity,
                     d.partner_id,
                     d.currency_id,
                     d.account_id,
-                    d.account_analytic_id,
+                    d.analytic_account_id,
                     d.amount_total,
                     d.amount_credit,
                     d.amount_debit,
@@ -218,14 +219,14 @@ class FinancialCashflow(models.Model):
                     b.financial_type,
                     b.state,
                     b.date_business_maturity,
-                    b.date_issue,
+                    b.date,
                     b.payment_method_id,
                     b.payment_term_id,
                     b.date_maturity,
                     b.partner_id,
                     b.currency_id,
                     b.account_id,
-                    b.account_analytic_id,
+                    b.analytic_account_id,
                     b.amount_total,
                     b.amount_credit,
                     b.amount_debit,
@@ -241,3 +242,67 @@ class FinancialCashflow(models.Model):
                 FROM
                     financial_cashflow_base b;
         """)
+
+    @api.model
+    def _query_get(self, domain=None):
+        context = dict(self._context or {})
+        domain = domain and safe_eval(str(domain)) or []
+
+        date_field = 'date'
+        if context.get('aged_balance'):
+            date_field = 'date_maturity'
+        if context.get('date_to'):
+            domain += [(date_field, '<=', context['date_to'])]
+        if context.get('date_from'):
+            if not context.get('strict_range'):
+                domain += ['|', (date_field, '>=', context['date_from']), (
+                    'account_id.user_type_id.include_initial_balance', '=',
+                    True)]
+            elif context.get('initial_bal'):
+                domain += [(date_field, '<', context['date_from'])]
+            else:
+                domain += [(date_field, '>=', context['date_from'])]
+
+        # if context.get('journal_ids'):
+        #     domain += [('journal_id', 'in', context['journal_ids'])]
+
+        state = context.get('state')
+        if state and state.lower() != 'all':
+            domain += [('state', '=', state)]
+
+        if context.get('company_id'):
+            domain += [('company_id', '=', context['company_id'])]
+
+        if 'company_ids' in context:
+            domain += [('company_id', 'in', context['company_ids'])]
+
+        # if context.get('reconcile_date'):
+        #     domain += ['|', ('reconciled', '=', False), '|', (
+        #         'matched_debit_ids.create_date', '>',
+        #         context['reconcile_date']), (
+        #         'matched_credit_ids.create_date', '>',
+        #         context['reconcile_date'])]
+
+        if context.get('account_tag_ids'):
+            domain += [
+                ('account_id.tag_ids', 'in', context['account_tag_ids'].ids)]
+
+        if context.get('analytic_tag_ids'):
+            domain += ['|', (
+                'analytic_account_id.tag_ids', 'in',
+                context['analytic_tag_ids'].ids),
+                       ('analytic_tag_ids', 'in',
+                        context['analytic_tag_ids'].ids)]
+
+        if context.get('analytic_account_ids'):
+            domain += [
+                ('analytic_account_id', 'in',
+                 context['analytic_account_ids'].ids)]
+
+        where_clause = ""
+        where_clause_params = []
+        tables = ''
+        if domain:
+            query = self._where_calc(domain)
+            tables, where_clause, where_clause_params = query.get_sql()
+        return tables, where_clause, where_clause_params

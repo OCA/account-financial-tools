@@ -3,23 +3,147 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+    <data>
 
+        <record model="ir.ui.view" id="financial_statement_report_form_view">
+            <field name="name">financial.statement.report.form (in financial)
+            </field>
+            <field name="model">financial.statement.report</field>
+            <field name="arch" type="xml">
+                <form string="Report Options">
+                    <header>
+                        <button string="Generate report" type="object"
+                                name="action_report" class="oe_highlight"/>
+                    </header>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="company_id" readonly="1" can_create="true"
+                           can_write="true"/>
+                        <field name="account_report_id"
+                               domain="[('parent_id','=',False)]"
+                               can_create="true" can_write="true"
+                               modifiers="{'required': true}"/>
+                        <field name="analytic_account_id"/>
+                        <field name="date_report"/>
+                        <field name="target_move" widget="radio"
+                               modifiers="{'required': true}"/>
+                        <field name="enable_filter" modifiers="{}"/>
+                        <field name="debit_credit"
+                               attrs="{'invisible': [('enable_filter','=',True)]}"
+                               modifiers="{'invisible': [['enable_filter', '=', true]]}"/>
+                        <field name="date_from" modifiers="{}"/>
+                        <field name="date_to" modifiers="{}"/>
+                    </group>
+                    <group string="Comparison" name="comparison"
+                           attrs="{'invisible': [('enable_filter','=',False)]}"
+                           modifiers="{'invisible': [['enable_filter', '=', false]]}">
+                        <group>
+                            <field name="label_filter"
+                                   attrs="{'required': [('enable_filter', '=', True)]}"
+                                   modifiers="{'required': [['enable_filter', '=', true]]}"/>
+                            <field name="filter_cmp"
+                                   modifiers="{'required': true}"/>
+                        </group>
+                        <group string="Dates"
+                               attrs="{'invisible':[('filter_cmp', '!=', 'filter_date')]}"
+                               modifiers="{'invisible': [['filter_cmp', '!=', 'filter_date']]}">
+                            <field name="date_from_cmp"
+                                   attrs="{'required':[('filter_cmp', '=', 'filter_date')]}"
+                                   modifiers="{'required': [['filter_cmp', '=', 'filter_date']]}"/>
+                            <field name="date_to_cmp"
+                                   attrs="{'required':[('filter_cmp', '=', 'filter_date')]}"
+                                   modifiers="{'required': [['filter_cmp', '=', 'filter_date']]}"/>
+                        </group>
+                    </group>
+                    <notebook name="notebook_report">
+                        <page string="Report itens" name="included_accounts">
+                            <field name="included_ids">
+                                <tree>
+                                    <field name="type"/>
+                                    <field name="account_type"/>
+                                    <field name="name"/>
+                                    <field name="level"/>
+                                    <field name="balance"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Not included accounts"
+                              name="not_included_accounts">
+                            <field name="not_included_ids"></field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
 
-    <record model="ir.actions.act_window" id="financial_statement_report_act_window">
-        <field name="name">Financial Statement Report</field> <!-- TODO -->
-        <field name="res_model">financial.statement.report</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
-    </record>
+        <record model="ir.ui.view" id="financial_statement_report_search_view">
+            <field name="name">financial.statement.report.search (in
+                financial)
+            </field>
+            <field name="model">financial.statement.report</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="account_report_id"
+                           domain="[('parent_id','=',False)]"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="analytic_account_id"/>
+                </search>
+            </field>
+        </record>
 
-    <record model="ir.ui.menu" id="financial_statement_report_menu">
-        <field name="name">Financial Statement Report</field>
-        <field name="parent_id" ref="financial_report_menu"/>
-        <field name="action" ref="financial_statement_report_act_window"/>
-        <field name="sequence" eval="16"/> <!-- TODO -->
-    </record>
+        <record model="ir.ui.view" id="financial_statement_report_tree_view">
+            <field name="name">financial.statement.report.tree (in financial)
+            </field>
+            <field name="model">financial.statement.report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="account_report_id"
+                           domain="[('parent_id','=',False)]"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="analytic_account_id"/>
+                    <field name="date_report"/>
+                </tree>
+            </field>
+        </record>
 
-</data>
+        <record model="ir.actions.act_window"
+                id="financial_statement_report_act_window">
+            <field name="name">Financial Statement Report</field>
+            <field name="res_model">financial.statement.report</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field eval="False" name="view_id"/>
+            <field name="search_view_id"
+                   ref="financial_statement_report_search_view"/>
+        </record>
+
+        <record id="action_financial_statement_report_tree_view"
+                model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="financial_statement_report_tree_view"/>
+            <field name="act_window_id"
+                   ref="financial_statement_report_act_window"/>
+        </record>
+
+        <record id="action_financial_statement_report_form_view"
+                model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="financial_statement_report_form_view"/>
+            <field name="act_window_id"
+                   ref="financial_statement_report_act_window"/>
+        </record>
+
+        <record model="ir.ui.menu" id="financial_statement_report_menu">
+            <field name="name">Financial Statement Report</field>
+            <field name="parent_id" ref="financial_report_menu"/>
+            <field name="action" ref="financial_statement_report_act_window"/>
+            <field name="sequence" eval="16"/>
+        </record>
+    </data>
 </odoo>

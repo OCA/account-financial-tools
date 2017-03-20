@@ -16,7 +16,7 @@
                 <field name="payment_method_id"/>
                 <field name="payment_term_id"/>
                 <field name="account_id"/>
-                <field name="account_analytic_id"/>
+                <field name="analytic_account_id"/>
                 <field name="currency_id"/>
                 <field name="amount_total"/>
                 <!-- <field name="balance"/> -->
