@@ -184,9 +184,6 @@ class FinancialMove(models.Model):
         states=_readonly_state,
         track_visibility='onchange',
     )
-    document_item = fields.Char(
-        string=u"Document item",
-    )
     date = fields.Date(
         string=u'Financial date',
         default=fields.Date.context_today,
@@ -376,7 +373,6 @@ class FinancialMove(models.Model):
             payment_term_id=payment_term_id,
             analytic_account_id=analytic_account_id,
             account_id=account_id,
-            document_item=document_item,
             date_maturity=date_maturity,
             amount=amount,
         )

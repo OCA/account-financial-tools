@@ -64,7 +64,6 @@ class FinancialPayreceive(models.TransientModel):
                 currency_id=wizard.currency_id.id,
                 financial_type=financial_type,
                 partner_id=financial_to_pay.partner_id.id,
-                document_number=financial_to_pay.document_number,
                 date=wizard.date_payment,
                 document_item=financial_to_pay.document_item,
                 date_maturity=financial_to_pay.date_maturity,

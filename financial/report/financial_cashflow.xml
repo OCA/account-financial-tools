@@ -13,14 +13,15 @@
                 <!-- <field name="create_date"/> -->
                 <!-- <field name="expected_date"/> -->
                 <field name="partner_id"/>
-                <field name="payment_method_id"/>
-                <field name="payment_term_id"/>
                 <field name="account_id"/>
-                <field name="analytic_account_id"/>
-                <field name="currency_id"/>
-                <field name="amount_total"/>
+                <field name="document_number"/>
+                <field name="journal_id"/>
+                <field name="payment_method_id"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="amount_total" invisible="1"/>
                 <!-- <field name="balance"/> -->
-                <field name="state"/>
+                <field name="state" invisible="1"/>
                 <field name="amount_credit"/>
                 <field name="amount_debit"/>
                 <field name="amount_cumulative_balance"/>
@@ -37,7 +38,7 @@
     </record>
 
     <record model="ir.ui.menu" id="financial_cashflow_menu">
-        <field name="name">Financial Cashflow</field>
+        <field name="name">Cashflow</field>
         <field name="parent_id" ref="financial_report_menu"/>
         <field name="action" ref="financial_cashflow_act_window"/>
         <field name="sequence" eval="16"/>

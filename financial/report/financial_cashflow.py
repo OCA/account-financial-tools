@@ -104,7 +104,6 @@ class FinancialCashflow(models.Model):
                     financial_move.create_date,
                     financial_move.id,
                     financial_move.document_number,
-                    financial_move.document_item,
                     financial_move.financial_type,
 
                     financial_move.state,
@@ -140,7 +139,6 @@ class FinancialCashflow(models.Model):
                     financial_move.create_date,
                     financial_move.id,
                     financial_move.document_number,
-                    financial_move.document_item,
                     financial_move.financial_type,
 
                     financial_move.state,
@@ -224,7 +222,7 @@ class FinancialCashflow(models.Model):
                 SELECT
                     a.date as create_date,
                     a.journal_id * (-1) as id,
-                    '0' as document_number,
+                    'Saldo inicial' as document_number,
                     'open' as financial_type,
                     'residual' as state,
                     a.date as date_business_maturity,

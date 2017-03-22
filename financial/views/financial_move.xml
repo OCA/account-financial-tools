@@ -15,7 +15,6 @@
                 <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                 <field name="partner_id"/>
                 <field name="document_number" string="Ref."/>
-                <field name="document_item" string=""/>
                 <field name="payment_mode_id" string="Payment method"/>
                 <field name="currency_id" groups="base.group_multi_currency"/>
                 <field name="amount" string="Amount" sum="Amount"/>
@@ -79,7 +78,6 @@
                         <group>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                             <field name="document_number"/>
-                            <field name="document_item"/>
                             <field name="date"/>
                             <field name="date_maturity"/>
                             <field name="date_business_maturity"/>
