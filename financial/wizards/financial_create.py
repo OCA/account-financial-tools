@@ -72,6 +72,13 @@ class FinancialMoveCreate(models.TransientModel):
     note = fields.Text(
         string="Note",
     )
+    journal_id = fields.Many2one(
+        required=False,
+    )
+    bank_id = fields.Many2one(
+        'res.partner.bank',
+        string=u'Bank Account',
+    )
 
     @api.onchange('payment_term_id', 'document_number',
                   'date', 'amount')
@@ -101,7 +108,7 @@ class FinancialMoveCreate(models.TransientModel):
         for record in self:
             for move in record.line_ids:
                 vals = financial_move._prepare_payment(
-                    journal_id=self.journal_id.id,
+                    bank_id=self.bank_id.id,
                     company_id=self.company_id.id,
                     currency_id=self.currency_id.id,
                     financial_type=self.financial_type,

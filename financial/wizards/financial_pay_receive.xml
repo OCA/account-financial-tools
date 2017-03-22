@@ -19,7 +19,7 @@
                     </group>
 
                     <group>
-                        <field name="journal_id"/>
+                        <field name="bank_id"/>
                         <field name="currency_id"/>
                         <field name="date_payment"/>
                         <field name="date_credit_debit"/>

@@ -258,6 +258,13 @@ class FinancialMove(models.Model):
         readonly=True,
         compute='_compute_residual',
     )
+    journal_id = fields.Many2one(
+        required=False,
+    )
+    bank_id = fields.Many2one(
+        'res.partner.bank',
+        string=u'Bank Account',
+    )
 
     @api.multi
     def action_number(self):
@@ -352,9 +359,9 @@ class FinancialMove(models.Model):
             })
 
     @staticmethod
-    def _prepare_payment(journal_id, company_id, currency_id,
+    def _prepare_payment(bank_id, company_id, currency_id,
                          financial_type, partner_id, document_number,
-                         date, document_item, date_maturity, amount,
+                         date, date_maturity, amount,
                          analytic_account_id=False, account_id=False,
                          payment_term_id=False, payment_mode_id=False,
                          args=False):
@@ -362,7 +369,7 @@ class FinancialMove(models.Model):
             args = {}
         return dict(
             args,
-            journal_id=journal_id,
+            bank_id=bank_id,
             company_id=company_id,
             currency_id=currency_id,
             financial_type=financial_type,

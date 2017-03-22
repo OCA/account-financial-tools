@@ -32,6 +32,13 @@ class FinancialPayreceive(models.TransientModel):
         string=u'Interest',
         readonly=True,
     )
+    journal_id = fields.Many2one(
+        required=False,
+    )
+    bank_id = fields.Many2one(
+        'res.partner.bank',
+        string=u'Bank Account',
+    )
 
     @api.model
     def default_get(self, vals):
@@ -59,15 +66,16 @@ class FinancialPayreceive(models.TransientModel):
                 financial_type = 'rr'
 
             vals = account_financial._prepare_payment(
-                journal_id=wizard.journal_id.id,
+                bank_id=wizard.bank_id.id,
                 company_id=wizard.company_id.id,
                 currency_id=wizard.currency_id.id,
                 financial_type=financial_type,
                 partner_id=financial_to_pay.partner_id.id,
                 date=wizard.date_payment,
-                document_item=financial_to_pay.document_item,
+                document_number=financial_to_pay.document_number,
                 date_maturity=financial_to_pay.date_maturity,
                 amount=wizard.amount,
+                account_id=financial_to_pay.account_id.id,
             )
 
             vals['financial_payment_id'] = active_id

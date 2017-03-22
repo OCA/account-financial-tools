@@ -27,7 +27,7 @@ class FinancialStatementReport(models.Model):
         string=u"Report format",
         selection=[
             ('pdf', u'PDF'),
-            ('xls', u'XLS'),
+            ('xls', u'XLS'), # TODO
         ]
     )
     included_ids = fields.One2many(

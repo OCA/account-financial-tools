@@ -15,7 +15,7 @@
                 <field name="partner_id"/>
                 <field name="account_id"/>
                 <field name="document_number"/>
-                <field name="journal_id"/>
+                <field name="bank_id"/>
                 <field name="payment_method_id"/>
                 <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
                 <field name="currency_id" groups="base.group_multi_currency"/>
@@ -28,13 +28,36 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="financial_cashflow_pivot">
+        <field name="name">financial.cashflow.pivot</field>
+        <field name="model">financial.cashflow</field>
+        <field name="arch" type="xml">
+            <pivot string="Cash Flow" display_quantity="true">
+                <field name="account_id"/>
+                <field name="date_maturity" interval="month" type="col"/>
+                <field name="amount_cumulative_balance" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_cashflow_graph">
+        <field name="name">financial.cashflow.graph</field>
+        <field name="model">financial.cashflow</field>
+        <field name="arch" type="xml">
+            <graph string="Cash Flow" type="line">
+                <field name="date_maturity"  type="row" interval="day"/>
+                <field name="amount_cumulative_balance" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
 
     <record model="ir.actions.act_window" id="financial_cashflow_act_window">
         <field name="name">Cashflow</field>
         <field name="res_model">financial.cashflow</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">pivot,graph</field>
         <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="context">{'graph_mode':'line'}</field>
     </record>
 
     <record model="ir.ui.menu" id="financial_cashflow_menu">
@@ -43,5 +66,21 @@
         <field name="action" ref="financial_cashflow_act_window"/>
         <field name="sequence" eval="16"/>
     </record>
+
+    <record model="ir.actions.act_window" id="financial_statement_act_window">
+        <field name="name">Statement</field>
+        <field name="res_model">financial.cashflow</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_statement_menu">
+        <field name="name">Statement</field>
+        <field name="parent_id" ref="financial_report_menu"/>
+        <field name="action" ref="financial_statement_act_window"/>
+        <field name="sequence" eval="10"/>
+    </record>
+
 </data>
 </odoo>

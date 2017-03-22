@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+<data>
+
+    <record model="ir.ui.view" id="res_partner_bank_form_view">
+        <field name="name">res.partner.bank.form (in financial)</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group string="Balance">
+                    <field name="initial_balance"/>
+                    <field name="date_balance"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_bank_tree_view">
+        <field name="name">res.partner.bank.tree (in financial)</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="initial_balance"/>
+                <field name="date_balance"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="res_partner_bank_act_window">
+        <field name="name">Bank Accounts</field>
+        <field name="res_model">res.partner.bank</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="res_partner_bank_menu">
+        <field name="name">Bank Accounts</field>
+        <field name="parent_id" ref="financial_config_menu"/>
+        <field name="action" ref="res_partner_bank_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</data>
+</odoo>

@@ -16,7 +16,7 @@
 
                     <group>
                         <field name="financial_type"/>
-                        <field name="journal_id"  options="{'no_open': True}"/>
+                        <field name="bank_id"  options="{'no_create': True, 'no_open': True}"/>
                         <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                         <field name="partner_id" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" attrs="{'required': [('financial_type', 'in', ('r', 'p', 'rr', 'pp'))]}" context="{'default_is_company': True, 'default_supplier': financial_type == 'p', 'default_customer': financial_type == 'r'}"/>
                         <field name="account_id"/>
