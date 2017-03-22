@@ -25,6 +25,9 @@ class FinancialCashflow(models.Model):
     amount_credit = fields.Monetary(
         string=u"Credit",
     )
+    amount_paid = fields.Monetary(
+        string=u"Paid",
+    )
     state = fields.Selection(
         selection=FINANCIAL_STATE,
         string=u'Status',
@@ -118,7 +121,8 @@ class FinancialCashflow(models.Model):
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
                     financial_move.journal_id,
-
+                    coalesce(financial_move.amount_paid, 0)
+                        AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
                     coalesce(financial_move.amount_total, 0)
@@ -151,6 +155,8 @@ class FinancialCashflow(models.Model):
                     res_partner_bank.currency_id,
                     NULL as account_id,
                     NULL as analytic_account_id,
+                    coalesce(res_partner_bank.initial_balance, 0)
+                    as amount_paid,
                     coalesce(res_partner_bank.initial_balance, 0)
                     as amount_balance,
                     0 as amount_total,
@@ -218,6 +224,7 @@ class FinancialCashflow(models.Model):
                     c.journal_id,
                     c.bank_id,
                     c.amount_total,
+                    c.amount_paid,
                     c.amount_credit,
                     c.amount_debit,
                     c.amount_balance
@@ -244,6 +251,7 @@ class FinancialCashflow(models.Model):
                     d.journal_id,
                     d.bank_id,
                     d.amount_total,
+                    d.amount_paid,
                     d.amount_credit,
                     d.amount_debit,
                     d.amount_balance
@@ -269,6 +277,7 @@ class FinancialCashflow(models.Model):
                     b.journal_id,
                     b.bank_id,
                     b.amount_total,
+                    b.amount_paid,
                     b.amount_credit,
                     b.amount_debit,
                     b.amount_balance
@@ -296,6 +305,7 @@ class FinancialCashflow(models.Model):
                     b.journal_id,
                     b.bank_id,
                     b.amount_total,
+                    b.amount_paid,
                     b.amount_credit,
                     b.amount_debit,
                     b.amount_balance,

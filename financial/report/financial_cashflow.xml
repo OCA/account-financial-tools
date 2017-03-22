@@ -35,6 +35,7 @@
             <pivot string="Cash Flow" display_quantity="true">
                 <field name="account_id"/>
                 <field name="date_maturity" interval="month" type="col"/>
+                <field name="amount_paid" type="measure"/>
                 <field name="amount_cumulative_balance" type="measure"/>
             </pivot>
         </field>
