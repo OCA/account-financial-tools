@@ -41,6 +41,7 @@ Contributors
 
 * Vincent Renaville <vincent.renaville@camptocamp.com>
 * Angel Moya <odoo@tecnativa.com>
+* Sylvain Van Hoof <sylvain@okia.be>
 
 Maintainer
 ----------
