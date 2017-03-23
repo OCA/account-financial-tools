@@ -10,7 +10,7 @@
         <field name="model">asset.depreciation.confirmation.wizard</field>
         <field name="inherit_id" ref="account_asset_management.view_asset_depreciation_confirmation_wizard"/>
         <field name="arch" type="xml">
-            <field name="period_id" position="after">
+            <field name="date_end" position="after">
                 <field name="batch_processing" />
             </field>
         </field>
