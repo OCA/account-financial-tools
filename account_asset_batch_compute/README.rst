@@ -9,16 +9,12 @@ Account Asset Batch Compute
 Add the possibility to compute assets in batch.
 This module adds a flag on compute assets wizard in order to execute this process in batch.
 
-
 Usage
 =====
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
-
-
+   :target: https://runbot.odoo-community.org/runbot/92/10.0
 
 Bug Tracker
 ===========
