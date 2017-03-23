@@ -330,9 +330,10 @@ class FinancialMove(models.Model):
     @api.multi
     def action_number(self):
         for record in self:
-            if record.ref == 'New':
+
+            if record.ref == _('New'):
                 record.ref = self.env['ir.sequence'].next_by_code(
-                    FINANCIAL_SEQUENCE[record.financial_type]) or 'New'
+                    FINANCIAL_SEQUENCE[record.financial_type]) or _('New')
             if not record.ref_item:
                 record.ref_item = '1'
 
