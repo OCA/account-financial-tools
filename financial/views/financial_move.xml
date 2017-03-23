@@ -31,6 +31,7 @@
         </field>
     </record>
 
+
     <record model="ir.ui.view" id="financial_move_form_view">
         <field name="name">financial.move.form (in financial)</field>
         <field name="model">financial.move</field>
@@ -141,9 +142,51 @@
         <field name="name">financial.move.search (in financial)</field>
         <field name="model">financial.move</field>
         <field name="arch" type="xml">
-            <search>
-                <!-- TODO -->
-            </search>
+            <search string="Search Moves">
+               <group col='10' colspan='4'>
+										<filter icon="terp-sale" string="State"
+												context="{'group_by': 'state'}"
+												help="State"
+										/>
+										<filter name="state_draft" string="Status is Draft" domain="[('state','=','draft')]" help="Status is Draft"/>
+										<filter name="state_open" string="Status is Open" domain="[('state','=','open')]" help="Status is Open"/>
+										<filter name="state_paid" string="Status is Paid" domain="[('state','=','paid')]" help="Status is Paid"/>
+										<filter name="state_cancel" string="Status is Canceled" domain="[('state','=','cancel')]" help="Status is Canceled"/>
+										<filter name="payment_due_today" string="Due today" domain="[('date_business_maturity','=',time.strftime('%%Y-%%m-%%d'))]" help="Payments due today"/>
+										<filter name="payment_overdue" string="Overdue" domain="[('date_business_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Payments overdue"/>
+                    <filter name="due_this_week" string="Due this week"
+											domain="[
+													'&amp;',
+													('date_business_maturity', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
+													('date_business_maturity', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),
+											]"
+                    />
+                    <filter name="due_this_month" string="Due this month"
+											domain="[
+													'&amp;',
+													('date_business_maturity', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),
+													('date_business_maturity', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d')),
+											]"
+                    />
+										<field name="document_number_search" filter_domain="[('document_number', 'ilike', self)]" string="Document number is"/>
+										<field name="document_item_search" filter_domain="[('document_item', 'ilike', self)]" string="Document item is"/>
+										<field name="partner_search" filter_domain="[('partner_id', 'ilike', self)]" string="Partner is"/>
+										<field name="date_issue_search" filter_domain="[('date_issue', '&gt;=', self)]" string="Issue from"/>
+										<field name="date_issue_search" filter_domain="[('date_issue', '&lt;=', self)]" string="Issue to"/>
+										<field name="date_issue_search" filter_domain="[('date_issue', '=', self)]" string="Issue is"/>
+										<field name="date_business_maturity_search" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Maturity from"/>
+										<field name="date_business_maturity_search" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Maturity to"/>
+										<field name="date_business_maturity_search" filter_domain="[('date_business_maturity', '=', self)]" string="Maturity is"/>
+										<field name="payment_mode_search" filter_domain="[('payment_mode_id', 'ilike', self)]" string="Mode is"/>
+										<field name="account_analytic_search" filter_domain="[('account_analytic_id', 'ilike', self)]" string="Analytic account is"/>
+										<filter name="group_partner" string="By partner" context="{'group_by': 'partner_id'}"/>
+										<filter name="group_date_payment" string="By payment date" context="{'group_by': 'date_business_maturity'}"/>
+										<filter name="group_journal" string="By payment journal" context="{'group_by': 'journal_id'}"/>
+               </group>
+                <newline/>
+                <group expand="0" string="Group By...">
+               </group>
+           </search>
         </field>
     </record>
 

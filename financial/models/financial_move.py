@@ -43,6 +43,67 @@ class FinancialMove(models.Model):
              "ref desc, ref_item desc, document_number, id desc"
     _rec_name = 'ref'
 
+    date_business_maturity_search = fields.Date(
+        # string="Payment date from",
+        compute='date_business_maturity_search_filter',
+        store=True,
+    )
+
+    date_issue_search = fields.Date(
+        # string="Payment date from",
+        compute='date_issue_search_filter',
+        store=True,
+    )
+
+    partner_search = fields.Many2one(
+        comodel_name='res.partner',
+        compute='partner_search_filter',
+        store=True,
+    )
+
+    account_analytic_search = fields.Many2one(
+        comodel_name='account.analytic.account',
+        compute='account_analytic_search_filter',
+        store=True,
+    )
+
+    payment_mode_search = fields.Many2one(
+        comodel_name='account.payment.mode',
+        compute='payment_mode_search_filter',
+        store=True,
+    )
+
+    document_number_search = fields.Char(
+        compute='document_number_search_filter',
+        store=True,
+    )
+
+    document_item_search = fields.Char(
+        compute='document_item_search_filter',
+        store=True,
+    )
+
+    def date_business_maturity_search_filter(self):
+        return self
+
+    def date_issue_search_filter(self):
+        return self
+
+    def partner_search_filter(self):
+        return self
+
+    def account_analytic_search_filter(self):
+        return self
+
+    def payment_mode_search_filter(self):
+        return self
+
+    def document_number_search_filter(self):
+        return self
+
+    def document_item_search_filter(self):
+        return self
+
     def _readonly_state(self):
         return {'draft': [('readonly', False)]}
 
