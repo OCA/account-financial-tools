@@ -245,12 +245,15 @@ class AccountAsset(models.Model):
             # - The 'undefined' fiscal years are assumed to be years
             # with a duration equals to calendar year
             self.env.cr.execute(
-                "SELECT id, date_start, date_end "
+                "SELECT date_start, date_end "
                 "FROM date_range r JOIN date_range_type t "
                 "ON r.type_id = t.id "
                 "WHERE r.company_id = %s "
-                "ORDER BY date_stop ASC LIMIT 1", (company.id,))
+                "ORDER BY date_end ASC LIMIT 1", (company.id,))
             first_fy = self.env.cr.dictfetchone()
+            if not first_fy:
+                raise exceptions.UserError(
+                    _("No date range found for this period"))
             first_fy_date_start = datetime.strptime(
                 first_fy['date_start'], '%Y-%m-%d')
             asset_date_start = datetime.strptime(self.date_start, '%Y-%m-%d')
