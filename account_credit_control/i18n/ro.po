@@ -7,7 +7,9 @@
 # Antonio Trueba, 2016
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok <kcsgoodboy@naver.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # David10000 <gameness@naver.com>, 2014
@@ -21,6 +23,7 @@
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Nicole <dlruddk1112@gmail.com>, 2014
@@ -33,12 +36,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:24+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-23 20:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -550,7 +554,7 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr ""
+msgstr "Data scadenței"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0

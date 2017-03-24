@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-03-14 18:29+0000\n"
+"PO-Revision-Date: 2017-03-24 09:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -634,7 +634,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscalyear
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Exercici Fiscal "
 
 #. module: account_asset_management
 #: field:account.asset.remove,period_id:0
@@ -1217,7 +1217,7 @@ msgstr "Usuari"
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
 msgid "View"
-msgstr ""
+msgstr "Vista"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form

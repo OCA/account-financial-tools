@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-23 20:09+0000\n"
 "Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -539,7 +539,7 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr ""
+msgstr "Vade Tarihi"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0

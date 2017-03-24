@@ -3,12 +3,22 @@
 # * account_move_batch_validate
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Alexsandro Haag <alex@hgsoft.com.br>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
+# Florian Hatat, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 09:00+0000\n"
+"POT-Creation-Date: 2017-03-03 23:22+0000\n"
+"PO-Revision-Date: 2017-03-20 15:34+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +35,7 @@ msgstr "Assentament comptable"
 #. module: account_move_batch_validate
 #: field:validate.account.move,action:0
 msgid "Action"
-msgstr ""
+msgstr "Acció"
 
 #. module: account_move_batch_validate
 #: help:account.move,to_post:0

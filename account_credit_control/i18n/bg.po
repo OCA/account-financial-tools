@@ -9,8 +9,8 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
-# Chanseok <kcsgoodboy@naver.com>, 2014
-# Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
@@ -51,8 +51,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:23+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-23 20:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -564,7 +564,7 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr ""
+msgstr "Насрочена дата"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0

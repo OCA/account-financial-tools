@@ -4,10 +4,13 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok <kcsgoodboy@naver.com>, 2014
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
+# Chanseok Kang <kcsgoodboy@naver.com>, 2014
 # Chul Park <parkchul@nate.com>, 2015
 # David10000 <gameness@naver.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
@@ -19,6 +22,7 @@
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Nicole <dlruddk1112@gmail.com>, 2014
@@ -31,12 +35,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 03:43+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-24 09:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -125,7 +130,7 @@ msgstr ""
 #: field:wiz.account.asset.report,fiscalyear_id:0
 #, python-format
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Exercici Fiscal "
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard

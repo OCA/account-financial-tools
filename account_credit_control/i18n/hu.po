@@ -4,8 +4,10 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
@@ -16,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:44+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-23 20:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -529,7 +531,7 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr ""
+msgstr "Fizetési határidő"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0

@@ -7,6 +7,7 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Bole <bole@dajmi5.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
 # Gustavo Lepri <gustavolepri@gmail.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -19,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:24+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-03-23 20:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -532,7 +533,7 @@ msgstr ""
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date"
-msgstr ""
+msgstr "期日"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0

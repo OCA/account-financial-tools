@@ -47,7 +47,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-03-14 18:36+0000\n"
+"PO-Revision-Date: 2017-03-24 09:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -90,7 +90,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empreses"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,company_id:0
