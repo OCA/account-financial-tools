@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-03 23:15+0000\n"
-"PO-Revision-Date: 2017-03-06 19:29+0000\n"
+"POT-Creation-Date: 2017-03-17 23:13+0000\n"
+"PO-Revision-Date: 2017-03-19 11:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Gebühren"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:174
 msgid "Dear"
-msgstr ""
+msgstr "Geehrter"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
