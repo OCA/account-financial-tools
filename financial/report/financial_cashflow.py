@@ -82,23 +82,51 @@ class FinancialCashflow(models.Model):
         string=u'Account',
     )
     journal_id = fields.Many2one(
-        'account.journal',
+        comodel_name='account.journal',
         string=u'Payment Journal',
     )
     bank_id = fields.Many2one(
-        'res.partner.bank',
+        comodel_name='res.partner.bank',
         string=u'Bank Account',
     )
 
+    def recalculate_balance(self, res):
+        balance = 0
+        for record in res:
+            credit = record['amount_credit']
+            debit = record['amount_debit']
+            if debit == 0 and credit == 0:
+                balance += record['amount_cumulative_balance']
+            balance += credit + debit
+            record['amount_cumulative_balance'] = balance
+
     @api.model
-    def search_read(self, domain=None, fields=None, offset=0, limit=None,
-                    order=None):
-        return super(FinancialCashflow, self).search_read(
-            domain, fields, offset, limit, order=False)
+    def read_group(self, domain, fields, groupby, offset=0,
+                   limit=None, orderby=False, lazy=True):
+        res = super(FinancialCashflow, self)\
+            .read_group(domain, fields, groupby, offset=offset,
+                        limit=limit, orderby=orderby, lazy=lazy)
+        self.recalculate_balance(res)
+        return res
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0,
+                    limit=None, order=None):
+        res = super(FinancialCashflow, self)\
+            .search_read(domain, fields, offset, limit, order=False)
+        self.recalculate_balance(res)
+        return res
 
     @api.model_cr
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
+        self.env.cr.execute("""
+            DROP VIEW IF EXISTS financial_cashflow;
+            DROP VIEW IF EXISTS financial_cashflow_base;
+            DROP VIEW IF EXISTS financial_cashflow_debit;
+            DROP VIEW IF EXISTS financial_cashflow_bank;
+            DROP VIEW IF EXISTS financial_cashflow_credit;
+        """)
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW financial_cashflow_credit AS
                 SELECT
@@ -157,11 +185,11 @@ class FinancialCashflow(models.Model):
                     NULL as analytic_account_id,
                     coalesce(res_partner_bank.initial_balance, 0)
                     as amount_paid,
-                    coalesce(res_partner_bank.initial_balance, 0)
-                    as amount_balance,
+                    0 as amount_balance,
                     0 as amount_total,
-                    0 as amount_credit,
-                        0 as amount_debit
+                    coalesce(res_partner_bank.initial_balance, 0)
+                        as amount_credit,
+                    0 as amount_debit
                 FROM public.res_partner_bank
                 INNER JOIN public.res_company
                 ON res_partner_bank.partner_id = res_company.partner_id;
@@ -369,8 +397,8 @@ class FinancialCashflow(models.Model):
             domain += ['|', (
                 'analytic_account_id.tag_ids', 'in',
                 context['analytic_tag_ids'].ids),
-                       ('analytic_tag_ids', 'in',
-                        context['analytic_tag_ids'].ids)]
+                ('analytic_tag_ids', 'in',
+                    context['analytic_tag_ids'].ids)]
 
         if context.get('analytic_account_ids'):
             domain += [

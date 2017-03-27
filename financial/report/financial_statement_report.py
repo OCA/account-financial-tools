@@ -27,7 +27,7 @@ class FinancialStatementReport(models.Model):
         string=u"Report format",
         selection=[
             ('pdf', u'PDF'),
-            ('xls', u'XLS'), # TODO
+            ('xls', u'XLS'),  # TODO
         ]
     )
     included_ids = fields.One2many(
@@ -206,7 +206,7 @@ class FinancialStatementReport(models.Model):
                 + filters + \
                 " GROUP BY account_id"
             params = (tuple(accounts._ids),) + tuple(where_params)
-            print request, '    ', params
+            # print request, '    ', params
             self.env.cr.execute(request, params)
             for row in self.env.cr.dictfetchall():
                 res[row['id']] = row

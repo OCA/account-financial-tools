@@ -28,6 +28,23 @@
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="financial_cashflow_search_view">
+        <field name="name">financial.cashflow.search (in financial)</field>
+        <field name="model">financial.cashflow</field>
+        <field name="arch" type="xml">
+            <search string="Search Moves">
+               <group col='10' colspan='4'>
+                    <field name="bank_id" filter_domain="[('bank_id', 'ilike', self)]" string="Bank account is"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Business maturity is"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Business maturity from"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Business maturity to"/>
+               </group>
+                <newline/>
+                <group expand="0" string="Group By...">
+               </group>
+           </search>
+        </field>
+    </record>
     <record model="ir.ui.view" id="financial_cashflow_pivot">
         <field name="name">financial.cashflow.pivot</field>
         <field name="model">financial.cashflow</field>
