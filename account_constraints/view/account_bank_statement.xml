@@ -1,22 +1,20 @@
 <?xml version="1.0"?>
-<openerp>
-    <data>
-        <!--
-            Since account_constraint forbids the deletion of account moves that
-            are linked to a bank statement, we add the possibility to delete them
-            from the bank statement itself, to let the user fix erroneous reconciles.
-        -->
-        <record id="bank_statement_cancel_form_inherit" model="ir.ui.view">
-            <field name="name">bank.statement.cancel.form.inherit</field>
-            <field name="model">account.bank.statement</field>
-            <field name="inherit_id" ref="account.view_bank_statement_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='bank_account_id']" position="after">
-                    <field name="state" invisible="1"/>
-                    <field name='account_cancel_installed' invisible="1"/>
-                    <button name="cancel" attrs="{'invisible': ['|', ('journal_entry_id', '=', False),('account_cancel_installed','=', True)]}" string="Cancel" type="object" icon="gtk-undo"/>
-                </xpath>
-            </field>
-        </record>
-    </data>
-</openerp>
+<odoo>
+    <!--
+        Since account_constraint forbids the deletion of account moves that
+        are linked to a bank statement, we add the possibility to delete them
+        from the bank statement itself, to let the user fix erroneous reconciles.
+    -->
+    <record id="bank_statement_cancel_form_inherit" model="ir.ui.view">
+        <field name="name">bank.statement.cancel.form.inherit</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_account_id']" position="after">
+                <field name="state" invisible="1"/>
+                <field name='account_cancel_installed' invisible="1"/>
+                <button name="cancel" attrs="{'invisible': ['|', ('journal_entry_id', '=', False),('account_cancel_installed','=', True)]}" string="Cancel" type="object" icon="gtk-undo"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
