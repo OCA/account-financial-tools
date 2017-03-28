@@ -35,6 +35,7 @@ addon | version | summary
 [account_reversal](account_reversal/) | 9.0.1.0.0 | Wizard for creating a reversal account move
 [currency_rate_update](currency_rate_update/) | 9.0.1.0.0 | Currency Rate Update
 
+
 Unported addons
 ---------------
 addon | version | summary
