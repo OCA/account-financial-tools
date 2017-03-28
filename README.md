@@ -62,6 +62,7 @@ addon | version | summary
 [currency_rate_update](currency_rate_update/) | 8.0.0.8.0 | Currency Rate Update
 [l10n_account_translate](l10n_account_translate/) | 8.0.0.2.0 | Multilingual General Accounts
 
+
 Unported addons
 ---------------
 addon | version | summary
