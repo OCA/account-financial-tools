@@ -24,10 +24,12 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
 [account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
+
 
 Unported addons
 ---------------
@@ -40,7 +42,6 @@ addon | version | summary
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
 [account_chart_update](account_chart_update/) | 8.0.1.2.0 (unported) | Detect changes and update the Account Chart from a template
-[account_check_deposit](account_check_deposit/) | 8.0.0.1.0 (unported) | Manage deposit of checks to the bank
 [account_constraints](account_constraints/) | 8.0.1.1.0 (unported) | Account Constraints
 [account_credit_control](account_credit_control/) | 8.0.0.3.0 (unported) | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 (unported) | Credit control dunning fees
