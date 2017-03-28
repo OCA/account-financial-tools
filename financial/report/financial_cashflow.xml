@@ -8,7 +8,8 @@
         <field name="name">financial.cashflow.tree (in financial)</field>
         <field name="model">financial.cashflow</field>
         <field name="arch" type="xml">
-            <tree string="Stock Value At Date" create="0" delete="0">
+            <tree string="Cashflow" create="0" delete="0" colors="black:financial_type in ('rr', 'pp');gray:financial_type in ('r', 'p')">
+            <!-- <tree string="Cashflow" create="0" delete="0"> -->
                 <field name="date_business_maturity"/>
                 <!-- <field name="create_date"/> -->
                 <!-- <field name="expected_date"/> -->
@@ -22,6 +23,7 @@
                 <field name="amount_total" invisible="1"/>
                 <!-- <field name="balance"/> -->
                 <field name="state" invisible="1"/>
+                <field name="financial_type" invisible="1"/>
                 <field name="amount_credit"/>
                 <field name="amount_debit"/>
                 <field name="amount_cumulative_balance"/>
@@ -38,6 +40,8 @@
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Business maturity is"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Business maturity from"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Business maturity to"/>
+                    <filter string="Effective payments" domain="['|', ('financial_type', '=', 'pp'), ('financial_type', '=', 'rr')]"/>
+                    <filter string="Projected payments" domain="['|', ('financial_type', '=', 'p'), ('financial_type', '=', 'r')]"/>
                </group>
                 <newline/>
                 <group expand="0" string="Group By...">
