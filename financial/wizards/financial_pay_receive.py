@@ -60,8 +60,7 @@ class FinancialPayreceive(models.TransientModel):
                 active_id):
             fm = self.env['financial.move'].browse(active_id)
             res['currency_id'] = fm.currency_id.id
-            res['amount'] = fm.amount
-            res['payment_mode_id'] = fm.payment_mode_id.id
+            res['amount'] = fm.amount_residual
             res['company_id'] = fm.company_id.id
             res['bank_id'] = fm.bank_id.id
         return res
