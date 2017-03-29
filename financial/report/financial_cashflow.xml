@@ -40,8 +40,8 @@
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Business maturity is"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Business maturity from"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Business maturity to"/>
-                    <filter string="Effective payments" domain="['|', ('financial_type', '=', 'pp'), ('financial_type', '=', 'rr')]"/>
-                    <filter string="Projected payments" domain="['|', ('financial_type', '=', 'p'), ('financial_type', '=', 'r')]"/>
+                    <filter string="Effective payments" domain="[('financial_type', 'in', ['pp', 'rr', 'open'])]"/>
+                    <filter string="Projected payments" domain="[('financial_type', 'in', ['p', 'r', 'open'])]"/>
                </group>
                 <newline/>
                 <group expand="0" string="Group By...">
