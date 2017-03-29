@@ -63,7 +63,7 @@ class FinancialCashflow(models.Model):
         selection=FINANCIAL_TYPE,
     )
     date_business_maturity = fields.Date(
-        string=u'Business maturity',
+        string=u'Date',
     )
     payment_method_id = fields.Many2one(
         comodel_name='account.payment.method',
