@@ -37,9 +37,9 @@
             <search string="Search Moves">
                <group col='10' colspan='4'>
                     <field name="bank_id" filter_domain="[('bank_id', 'ilike', self)]" string="Bank account is"/>
-                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Business maturity is"/>
-                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Business maturity from"/>
-                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Business maturity to"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Date is"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Date from"/>
+                    <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Date to"/>
                     <filter string="Effective payments" domain="[('financial_type', 'in', ['pp', 'rr', 'open'])]"/>
                     <filter string="Projected payments" domain="[('financial_type', 'in', ['p', 'r', 'open'])]"/>
                </group>
