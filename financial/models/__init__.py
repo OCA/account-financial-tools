@@ -4,3 +4,6 @@
 
 from . import financial_move
 from . import res_partner_bank
+from . import account_payment_mode
+# from . import res_partner
+from . import res_partner_bank

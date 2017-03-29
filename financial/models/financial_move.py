@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
@@ -286,6 +287,7 @@ class FinancialMove(models.Model):
     amount_interest = fields.Monetary(
         string=u'Interest',
         readonly=True,
+        compute='compute_interest',
     )
     amount_refund = fields.Monetary(
         string=u'Refund',
@@ -319,6 +321,24 @@ class FinancialMove(models.Model):
         readonly=True,
         compute='_compute_residual',
     )
+    journal_id = fields.Many2one(
+        required=False,
+    )
+    bank_id = fields.Many2one(
+        'res.partner.bank',
+        string=u'Bank Account',
+    )
+
+    @api.multi
+    def action_number(self):
+        for record in self:
+
+            if record.ref == _('New'):
+                record.ref = self.env['ir.sequence'].next_by_code(
+                    FINANCIAL_SEQUENCE[record.financial_type]) or _('New')
+            if not record.ref_item:
+                record.ref_item = '1'
+
     journal_id = fields.Many2one(
         required=False,
     )
@@ -464,3 +484,30 @@ class FinancialMove(models.Model):
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
+
+    def cron_interest(self):
+        if self.env['resource.calendar'].data_eh_dia_util_bancario(datetime.today()):
+            record = self.search([
+                ('state', '=', 'open'),
+                ('date_business_maturity', '<', datetime.today())])
+            record.compute_interest()
+
+    @api.depends('payment_mode_id', 'amount', 'date_business_maturity')
+    def compute_interest(self):
+        for record in self:
+            if self.env['resource.calendar']. \
+                    data_eh_dia_util_bancario(datetime.today()) and record. \
+                    state == 'open' and \
+                    (datetime.today() > datetime.strptime
+                        (record.date_business_maturity, '%Y-%m-%d')):
+                day = (
+                    datetime.today() - datetime.strptime(
+                        record.date_maturity,
+                        '%Y-%m-%d'))
+                interest = record.amount * (record.payment_mode_id.
+                                            interest_percent * day.days) / 100
+
+                delay_fee = (record.payment_mode_id.
+                             delay_fee_percent / 100) * record.amount
+                record.amount_interest = interest + delay_fee
+        pass
