@@ -30,7 +30,6 @@
         'report/financial_statement_report.xml',
         'report/report_financial.xml',
         # 'views/res_partner.xml',
-        'views/payment_mode.xml',
         'views/res_partner_bank.xml',
     ],
     'demo': [
