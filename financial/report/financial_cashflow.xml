@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <tree string="Cashflow" create="0" delete="0" colors="black:financial_type in ('rr', 'pp');gray:financial_type in ('r', 'p')">
             <!-- <tree string="Cashflow" create="0" delete="0"> -->
-                <field name="date_business_maturity"/>
+                <field string="Date" name="date_business_maturity"/>
                 <!-- <field name="create_date"/> -->
                 <!-- <field name="expected_date"/> -->
                 <field name="partner_id"/>
