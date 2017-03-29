@@ -38,6 +38,7 @@ class FinancialPayreceive(models.TransientModel):
     bank_id = fields.Many2one(
         'res.partner.bank',
         string=u'Bank Account',
+        required=True,
     )
 
     @api.model
@@ -50,6 +51,7 @@ class FinancialPayreceive(models.TransientModel):
             res['currency_id'] = fm.currency_id.id
             res['amount'] = fm.amount
             res['company_id'] = fm.company_id.id
+            res['bank_id'] = fm.bank_id.id
         return res
 
     @api.multi
@@ -80,4 +82,3 @@ class FinancialPayreceive(models.TransientModel):
             )
             financial = account_financial.create(values)
             financial.action_confirm()
-
