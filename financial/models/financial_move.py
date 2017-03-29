@@ -6,7 +6,6 @@ from datetime import datetime
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
-from odoo.tools.safe_eval import safe_eval
 
 
 FINANCIAL_MOVE = [
@@ -332,30 +331,20 @@ class FinancialMove(models.Model):
     @api.multi
     def action_number(self):
         for record in self:
-
             if record.ref == _('New'):
-                record.ref = self.env['ir.sequence'].next_by_code(
-                    FINANCIAL_SEQUENCE[record.financial_type]) or _('New')
-            if not record.ref_item:
-                record.ref_item = '1'
-
-    journal_id = fields.Many2one(
-        required=False,
-    )
-    bank_id = fields.Many2one(
-        'res.partner.bank',
-        string=u'Bank Account',
-    )
-
-    @api.multi
-    def action_number(self):
-        for record in self:
-
-            if record.ref == _('New'):
-                record.ref = self.env['ir.sequence'].next_by_code(
-                    FINANCIAL_SEQUENCE[record.financial_type]) or _('New')
-            if not record.ref_item:
-                record.ref_item = '1'
+                sequencial_ids = self.search([
+                    ('document_number', '=', record.document_number),
+                ], order='date_business_maturity')
+                if self.search_count([
+                    ('document_number', '=', record.document_number),
+                    ('ref', '=', _('New')),
+                ]) == len(sequencial_ids.ids):
+                    sequencial_ids.write({
+                        'ref': self.env['ir.sequence'].next_by_code(
+                            FINANCIAL_SEQUENCE[record.financial_type]) or 'New'
+                    })
+                    for i, x in enumerate(sequencial_ids):
+                        x.ref_item = i+1
 
     def _before_create(self, values):
         return values
@@ -410,7 +399,7 @@ class FinancialMove(models.Model):
     def action_confirm(self):
         for record in self:
             record.change_state('open')
-            record.action_number()
+        self.action_number()
 
     @api.multi
     def action_budget(self):
@@ -441,16 +430,13 @@ class FinancialMove(models.Model):
             })
 
     @staticmethod
-    def _prepare_payment(bank_id, company_id, currency_id,
-                         financial_type, partner_id, document_number,
-                         date, date_maturity, amount,
-                         analytic_account_id=False, account_id=False,
-                         payment_term_id=False, payment_mode_id=False,
-                         args=False):
-        if not args:
-            args = {}
+    def _prepare_financial_move(bank_id, company_id, currency_id,
+                                financial_type, partner_id, document_number,
+                                date, date_maturity, amount,
+                                analytic_account_id=False, account_id=False,
+                                payment_term_id=False, payment_mode_id=False,
+                                **kwargs):
         return dict(
-            args,
             bank_id=bank_id,
             company_id=company_id,
             currency_id=currency_id,
@@ -464,6 +450,7 @@ class FinancialMove(models.Model):
             account_id=account_id,
             date_maturity=date_maturity,
             amount=amount,
+            **kwargs
         )
 
     @api.multi
@@ -511,3 +498,31 @@ class FinancialMove(models.Model):
                              delay_fee_percent / 100) * record.amount
                 record.amount_interest = interest + delay_fee
         pass
+
+    def create_contract(self, financial_create):
+        financial_move = self.env['financial.move']
+        for record in financial_create:
+            for move in record.line_ids:
+                kargs = {}
+                values = self._prepare_financial_move(
+                    bank_id=financial_create.bank_id.id,
+                    company_id=financial_create.company_id.id,
+                    currency_id=financial_create.currency_id.id,
+                    financial_type=financial_create.financial_type,
+                    partner_id=financial_create.partner_id.id,
+                    document_number=move.document_item,
+                    date=financial_create.date,
+                    payment_mode_id=financial_create.payment_mode_id.id,
+                    payment_term_id=financial_create.payment_term_id.id,
+                    analytic_account_id=
+                    financial_create.analytic_account_id.id,
+                    account_id=financial_create.account_id.id,
+                    date_maturity=move.date_maturity,
+                    amount=move.amount,
+                    note=record.note,
+                    **kargs
+                )
+                financial = self.create(values)
+                financial.action_confirm()
+                financial_move |= financial
+        return financial_move

@@ -125,9 +125,6 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Accounting">
-
-                            </page>
                         </notebook>
                 </sheet>
                 <div class="oe_chatter">

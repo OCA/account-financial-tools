@@ -103,30 +103,8 @@ class FinancialMoveCreate(models.TransientModel):
 
     @api.multi
     def compute(self):
-        financial_move = self.env['financial.move']
-        financial_type = False
-        for record in self:
-            for move in record.line_ids:
-                vals = financial_move._prepare_payment(
-                    bank_id=self.bank_id.id,
-                    company_id=self.company_id.id,
-                    currency_id=self.currency_id.id,
-                    financial_type=self.financial_type,
-                    partner_id=self.partner_id.id,
-                    document_number=move.document_item,
-                    date=self.date,
-                    payment_mode_id=self.payment_mode_id.id,
-                    payment_term_id=self.payment_term_id.id,
-                    analytic_account_id=self.analytic_account_id.id,
-                    account_id=self.account_id.id,
-                    date_maturity=move.date_maturity,
-                    amount=move.amount,
-                )
-                financial = financial_move.create(vals)
-                financial.action_confirm()
-                financial_move |= financial
-                financial_type = record.financial_type
-
+        financial_move = self.env['financial.move'].create_contract(self)
+        financial_type = financial_move and financial_move[0].financial_type
         return financial_move.action_view_financial(financial_type)
 
 

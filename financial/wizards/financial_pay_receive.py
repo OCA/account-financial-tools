@@ -65,7 +65,7 @@ class FinancialPayreceive(models.TransientModel):
             else:
                 financial_type = 'rr'
 
-            vals = account_financial._prepare_payment(
+            values = account_financial._prepare_financial_move(
                 bank_id=wizard.bank_id.id,
                 company_id=wizard.company_id.id,
                 currency_id=wizard.currency_id.id,
@@ -76,7 +76,8 @@ class FinancialPayreceive(models.TransientModel):
                 date_maturity=financial_to_pay.date_maturity,
                 amount=wizard.amount,
                 account_id=financial_to_pay.account_id.id,
+                financial_payment_id=active_id,
             )
+            financial = account_financial.create(values)
+            financial.action_confirm()
 
-            vals['financial_payment_id'] = active_id
-            account_financial.create(vals)
