@@ -40,6 +40,10 @@ class FinancialPayreceive(models.TransientModel):
         string=u'Bank Account',
         required=True,
     )
+    payment_mode_id = fields.Many2one(
+        comodel_name='account.payment.mode',
+        string=u'Payment mode',
+    )
 
     @api.model
     def default_get(self, vals):
@@ -50,6 +54,7 @@ class FinancialPayreceive(models.TransientModel):
             fm = self.env['financial.move'].browse(active_id)
             res['currency_id'] = fm.currency_id.id
             res['amount'] = fm.amount
+            res['payment_mode_id'] = fm.payment_mode_id.id
             res['company_id'] = fm.company_id.id
             res['bank_id'] = fm.bank_id.id
         return res
