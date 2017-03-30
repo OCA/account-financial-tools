@@ -29,7 +29,7 @@ class AccountInvoice(models.Model):
     @api.multi
     def invoice_validate(self):
         if not (config['test_enable'] and
-                not self.env.context.get('test_connector')):
+                not self.env.context.get('test_tax_required')):
             self.test_invoice_line_tax()
         res = super(AccountInvoice, self).invoice_validate()
         return res
