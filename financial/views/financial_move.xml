@@ -113,7 +113,7 @@
                             <page string="Payments" name="payments">
                                 <field name="related_payment_ids">
                                     <tree>
-                                        <field name="date_payment"/>
+                                        <field name="payment_date"/>
                                         <field name="date_credit_debit"/>
                                         <field name="amount" string="Amount" sum="Amount"/>
                                         <field name="amount_discount" sum="Discount"/>
