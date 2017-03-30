@@ -70,4 +70,4 @@ class TestAccountInvoiceTaxRequired(TransactionCase):
         self.invoice.action_move_create()
         with self.assertRaises(exceptions.Warning):
             self.invoice.with_context(
-                test_connector=True).invoice_validate()
+                test_tax_required=True).invoice_validate()
