@@ -18,3 +18,7 @@ class AccountPaymentMode(models.Model):
         string=_('Included in credit limit'),
         store=True,
     )
+    compensation_days = fields.Integer(
+        string=_('Days elapsed to compansate the payment'),
+        store=True,
+    )

@@ -11,6 +11,7 @@
                 <field name="payment_type" position="after">
                         <field name="interest_percent"/>
                         <field name="delay_fee_percent"/>
+                        <field name="compensation_days"/>
                 </field>
             </field>
         </record>
