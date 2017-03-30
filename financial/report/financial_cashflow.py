@@ -91,11 +91,12 @@ class FinancialCashflow(models.Model):
     )
 
     def recalculate_balance(self, res):
-        balance = 0
+        balance = 0.00
         for record in res:
             credit = record.get('amount_credit', 0.00)
             debit = record.get('amount_debit', 0.00)
-            if debit == 0 and credit == 0:
+            if not debit and not credit and record.get(
+                    'amount_cumulative_balance', 0.00):
                 balance += record.get('amount_cumulative_balance', 0.00)
             balance += credit + debit
             record['amount_cumulative_balance'] = balance
