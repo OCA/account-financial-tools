@@ -14,6 +14,7 @@
                 <group>
                     <group>
                         <field name="amount" string="Amount Paid"/>
+                        <field name="payment_mode_id" string="Payment Mode" readonly="1"/>
                         <field name="amount_discount"/>
                         <field name="amount_interest"/>
                     </group>

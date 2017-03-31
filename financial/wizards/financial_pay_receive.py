@@ -47,10 +47,13 @@ class FinancialPayreceive(models.TransientModel):
 
     @api.onchange('payment_mode_id', 'date_payment')
     def _compute_date_credit_debit(self):
-        date_payment = datetime.datetime.strptime(self.date_payment,
-                                                  "%Y-%m-%d")
-        self.date_credit_debit = date_payment + datetime.timedelta(
-            days=self.payment_mode_id.compensation_days)
+        compensation_days = self.payment_mode_id.compensation_days
+        date_base = datetime.datetime.strptime(self.date_payment, '%Y-%m-%d')
+        while compensation_days > 0:
+            if self.env['resource.calendar'].data_eh_dia_util(date_base):
+                compensation_days -= 1
+            date_base = date_base + datetime.timedelta(days=1)
+        self.date_credit_debit = date_base
 
     @api.model
     def default_get(self, vals):
@@ -61,6 +64,8 @@ class FinancialPayreceive(models.TransientModel):
             fm = self.env['financial.move'].browse(active_id)
             res['currency_id'] = fm.currency_id.id
             res['amount'] = fm.amount_residual
+            res['payment_mode_id'] = fm.payment_mode_id.id
+            # res['payment_term_id'] = fm.payment_term_id.id
             res['company_id'] = fm.company_id.id
             res['bank_id'] = fm.bank_id.id
         return res
