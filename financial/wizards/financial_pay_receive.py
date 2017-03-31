@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+import datetime
 
 
 class FinancialPayreceive(models.TransientModel):
@@ -22,8 +23,7 @@ class FinancialPayreceive(models.TransientModel):
         default=fields.Date.context_today
     )
     date_credit_debit = fields.Date(
-        readonly=True,
-        # TODO: compute bussiness date
+        compute='_compute_date_credit_debit'
     )
     amount_discount = fields.Monetary(
         string=u'Discount',
@@ -44,6 +44,13 @@ class FinancialPayreceive(models.TransientModel):
         comodel_name='account.payment.mode',
         string=u'Payment mode',
     )
+
+    @api.onchange('payment_mode_id', 'date_payment')
+    def _compute_date_credit_debit(self):
+        date_payment = datetime.datetime.strptime(self.date_payment,
+                                                  "%Y-%m-%d")
+        self.date_credit_debit = date_payment + datetime.timedelta(
+            days=self.payment_mode_id.compensation_days)
 
     @api.model
     def default_get(self, vals):
@@ -84,6 +91,7 @@ class FinancialPayreceive(models.TransientModel):
                 amount=wizard.amount,
                 account_id=financial_to_pay.account_id.id,
                 financial_payment_id=active_id,
+                date_credit_debit=wizard.date_credit_debit,
             )
             financial = account_financial.create(values)
             financial.action_confirm()
