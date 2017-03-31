@@ -81,7 +81,7 @@
                             <field name="document_number"/>
                             <field name="date"/>
                             <field name="date_maturity"/>
-                            <field name="date_business_maturity"/>
+                            <field name="date_business_maturity" string="Valid maturity date"/>
                         </group>
                     </group>
                     <notebook>

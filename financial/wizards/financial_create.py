@@ -37,10 +37,12 @@ class FinancialMoveCreate(models.TransientModel):
     payment_mode_id = fields.Many2one(
         comodel_name='account.payment.mode', string="Payment Mode",
         ondelete='restrict',
+        required=True,
     )
     payment_term_id = fields.Many2one(
         string='Payment Term',
         comodel_name='account.payment.term',
+        required=True,
     )
     analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
@@ -78,6 +80,7 @@ class FinancialMoveCreate(models.TransientModel):
     bank_id = fields.Many2one(
         'res.partner.bank',
         string=u'Bank Account',
+        required=True,
     )
 
     @api.onchange('payment_term_id', 'document_number',
