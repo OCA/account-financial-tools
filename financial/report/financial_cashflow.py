@@ -175,7 +175,8 @@ class FinancialCashflow(models.Model):
                     financial_move.financial_type,
 
                     financial_move.state,
-                    financial_move.date_business_maturity,
+                    -- financial_move.date_business_maturity,
+                    financial_move.date_credit_debit as date_business_maturity,
                     financial_move.date,
                     financial_move.payment_method_id,
                     financial_move.payment_term_id,
@@ -282,7 +283,8 @@ class FinancialCashflow(models.Model):
                     financial_move.financial_type,
 
                     financial_move.state,
-                    financial_move.date_business_maturity,
+                    -- financial_move.date_business_maturity,
+                    financial_move.date_credit_debit as date_business_maturity,
                     financial_move.date,
                     financial_move.payment_method_id,
                     financial_move.payment_term_id,
