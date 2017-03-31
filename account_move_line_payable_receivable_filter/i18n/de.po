@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_line_payable_receivable_filter
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-09 01:25+0000\n"
+"PO-Revision-Date: 2016-01-14 10:25+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+msgid "Payable Account"
+msgstr "Kreditorisches Konto"
+
+#. module: account_move_line_payable_receivable_filter
+#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+msgid "Receivable Account"
+msgstr "Debitorisches Konto"
