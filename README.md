@@ -27,6 +27,7 @@ addon | version | summary
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
+[account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
 
@@ -53,7 +54,6 @@ addon | version | summary
 [account_journal_period_close](account_journal_period_close/) | 8.0.1.0.0 (unported) | Account Journal Period Close
 [account_move_batch_validate](account_move_batch_validate/) | 8.0.0.2.0 (unported) | Account Move Batch Validate
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 (unported) | Move line search view - disable defaults for period and journal
-[account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 (unported) | Filter your Journal Items per payable and receivable account
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 (unported) | Journal Items Search Extension
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 (unported) | Move locked to prevent modification
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
