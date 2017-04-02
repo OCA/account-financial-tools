@@ -55,7 +55,7 @@ Contributors
 
 * Jordi Esteve <jesteve@zikzakmedia.com>
 * Joaquín Gutierrez <joaquing.pedrosa@gmail.com>
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
 
 Maintainer
