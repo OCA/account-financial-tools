@@ -28,6 +28,7 @@
                 <group name="main">
                     <group name="left">
                         <field name="service"/>
+                        <field name="currency_list" invisible="1"/>
                         <field name="currency_list_readonly" widget="many2many_tags"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                     </group>
@@ -40,8 +41,7 @@
                 </group>
                 <group string="Currencies to update with this service" name="currencies">
                     <!-- I need to have currency_list as r+w for the on_change -->
-                    <field name="currency_list" invisible="1"/>
-                    <field name="currency_to_update" nolabel="1" domain="[('id','in', currency_list[0][2])]"/>
+                    <field name="currency_to_update" nolabel="1"/>
                 </group>
                 <group string="Logs" name="logs">
                     <field name="note" nolabel="1"/>

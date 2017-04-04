@@ -30,6 +30,7 @@ class CurrencyRateUpdateService(models.Model):
     have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
+    _rec_name = "service"
 
     @api.multi
     @api.constrains('max_delta_days')
@@ -56,13 +57,20 @@ class CurrencyRateUpdateService(models.Model):
     @api.onchange('service')
     def _onchange_service(self):
         currency_list = ''
+        res = {'domain': {
+            'currency_to_update': "[('id', '=', False)]",
+            }}
         if self.service:
             currencies = []
             getter = CurrencyGetterType.get(self.service)
             currency_list = getter.supported_currency_array
             currencies = self.env['res.currency'].search(
                 [('name', 'in', currency_list)])
-            self.currency_list = [(6, 0, [curr.id for curr in currencies])]
+            currency_list = [(6, 0, currencies.ids)]
+            res['domain']['currency_to_update'] =\
+                "[('id', 'in', %s)]" % currencies.ids
+        self.currency_list = currency_list
+        return res
 
     def _selection_service(self, *a, **k):
         res = [(x.code, x.name) for x in CurrencyGetterType.getters.values()]
