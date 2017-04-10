@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_asset_maintenance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-07 12:00+0000\n"
+"PO-Revision-Date: 2017-04-07 12:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_account_asset_category
+msgid "Asset category"
+msgstr "Categoría de activo"
+
+#. module: account_asset_maintenance
+#: code:addons/account_asset_maintenance/models/account_invoice.py:61
+#, python-format
+msgid "Asset category '{}' hasn't got an equipment category assigned."
+msgstr "La categoría de activo '{}'  no tiene una categoría de equipo asignada."
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_account_asset_asset
+msgid "Asset/Revenue Recognition"
+msgstr "Aceptación de pagos/Ingresos"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_maintenance_equipment_asset_ids
+msgid "Assets"
+msgstr "Assets"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_maintenance_equipment
+msgid "Equipment"
+msgstr "Equipamiento"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_asset_category_equipment_category_id
+msgid "Equipment category"
+msgstr "Equipment category"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_asset_asset_equipment_count
+msgid "Equipment count"
+msgstr "Equipment count"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_asset_asset_equipment_ids
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_invoice_equipment_ids
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_account_invoice_line_equipment_ids
+#: model:ir.ui.view,arch_db:account_asset_maintenance.invoice_supplier_form
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_account_asset_asset_form
+msgid "Equipments"
+msgstr "Equipos"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_asset_maintenance
+#: model:ir.model,name:account_asset_maintenance.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Linea de Factura"
+
+#. module: account_asset_maintenance
+#: model:ir.ui.view,arch_db:account_asset_maintenance.view_account_asset_category_form
+msgid "Maintenance equipments"
+msgstr "Maintenance equipments"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,field_description:account_asset_maintenance.field_maintenance_equipment_invoice_line_id
+msgid "Origin line invoice"
+msgstr "Origin line invoice"
+
+#. module: account_asset_maintenance
+#: model:ir.model.fields,help:account_asset_maintenance.field_account_asset_category_equipment_category_id
+msgid "This category will be used for the created equipment when it is created automatically on validating a vendor bill that contains this asset category."
+msgstr "This category will be used for the created equipment when it is created automatically on validating a vendor bill that contains this asset category."
+

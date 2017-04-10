@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="view_account_asset_category_form" model="ir.ui.view">
+        <field name="model">account.asset.category</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/group" position="inside">
+                <group string="Maintenance equipments" name="group_maintenance_equipment">
+                    <field name="equipment_category_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
