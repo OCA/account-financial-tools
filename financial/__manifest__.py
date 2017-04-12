@@ -30,6 +30,8 @@
         'report/financial_cashflow.xml',
         'report/financial_statement_report.xml',
         'report/report_financial.xml',
+        # 'views/res_partner.xml',
+        'views/inherited_res_partner_bank_view.xml',
     ],
     'demo': [
         'demo/financial_move.xml',
