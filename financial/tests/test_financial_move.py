@@ -333,4 +333,3 @@ class TestFinancialMove(TransactionCase):
         # Amounts verification
         self.assertEqual(fm_1.amount, expected_1[1])
         self.assertEqual(fm_2.amount, expected_2[1])
- 

@@ -344,7 +344,7 @@ class FinancialMove(models.Model):
                             FINANCIAL_SEQUENCE[record.financial_type]) or 'New'
                     })
                     for i, x in enumerate(sequencial_ids):
-                        x.ref_item = i+1
+                        x.ref_item = i + 1
 
     def _before_create(self, values):
         return values
@@ -473,7 +473,8 @@ class FinancialMove(models.Model):
         return action
 
     def cron_interest(self):
-        if self.env['resource.calendar'].data_eh_dia_util_bancario(datetime.today()):
+        if self.env['resource.calendar'].data_eh_dia_util_bancario(
+                datetime.today()):
             record = self.search([
                 ('state', '=', 'open'),
                 ('date_business_maturity', '<', datetime.today())])
@@ -514,8 +515,9 @@ class FinancialMove(models.Model):
                     date=financial_create.date,
                     payment_mode_id=financial_create.payment_mode_id.id,
                     payment_term_id=financial_create.payment_term_id.id,
-                    analytic_account_id=
-                    financial_create.analytic_account_id.id,
+                    analytic_account_id=(
+                        financial_create.analytic_account_id.id
+                    ),
                     account_id=financial_create.account_id.id,
                     date_maturity=move.date_maturity,
                     amount=move.amount,

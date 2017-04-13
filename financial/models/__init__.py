@@ -5,4 +5,3 @@
 from . import financial_move
 from . import inherited_res_partner_bank
 from . import account_payment_mode
-
