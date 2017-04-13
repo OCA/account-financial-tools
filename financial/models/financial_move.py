@@ -45,63 +45,63 @@ class FinancialMove(models.Model):
 
     date_business_maturity_search = fields.Date(
         # string="Payment date from",
-        compute='date_business_maturity_search_filter',
+        compute='_compute_date_business_maturity_search_filter',
         store=True,
     )
 
     date_issue_search = fields.Date(
         # string="Payment date from",
-        compute='date_issue_search_filter',
+        compute='_compute_date_issue_search_filter',
         store=True,
     )
 
     partner_search = fields.Many2one(
         comodel_name='res.partner',
-        compute='partner_search_filter',
+        compute='_compute_partner_search_filter',
         store=True,
     )
 
     account_analytic_search = fields.Many2one(
         comodel_name='account.analytic.account',
-        compute='account_analytic_search_filter',
+        compute='_compute_account_analytic_search_filter',
         store=True,
     )
 
     payment_mode_search = fields.Many2one(
         comodel_name='account.payment.mode',
-        compute='payment_mode_search_filter',
+        compute='_compute_payment_mode_search_filter',
         store=True,
     )
 
     document_number_search = fields.Char(
-        compute='document_number_search_filter',
+        compute='_compute_document_number_search_filter',
         store=True,
     )
 
     document_item_search = fields.Char(
-        compute='document_item_search_filter',
+        compute='_compute_document_item_search_filter',
         store=True,
     )
 
-    def date_business_maturity_search_filter(self):
+    def _compute_date_business_maturity_search_filter(self):
         return self
 
-    def date_issue_search_filter(self):
+    def _compute_date_issue_search_filter(self):
         return self
 
-    def partner_search_filter(self):
+    def _compute_partner_search_filter(self):
         return self
 
-    def account_analytic_search_filter(self):
+    def _compute_account_analytic_search_filter(self):
         return self
 
-    def payment_mode_search_filter(self):
+    def _compute_payment_mode_search_filter(self):
         return self
 
-    def document_number_search_filter(self):
+    def _compute_document_number_search_filter(self):
         return self
 
-    def document_item_search_filter(self):
+    def _compute_document_item_search_filter(self):
         return self
 
     def _readonly_state(self):
@@ -135,12 +135,14 @@ class FinancialMove(models.Model):
         ]
         return (old_state, new_state) in allowed
 
-    @api.one
+    @api.multi
     @api.constrains('amount')
     def _check_amount(self):
-        if not self.amount > 0.0 and self.state not in 'cancel':
-            raise ValidationError(
-                'The payment amount must be strictly positive.')
+        for record in self:
+            if not record.amount > 0.0 and record.state not in 'cancel':
+                raise ValidationError(
+                    'The payment amount must be strictly positive.'
+                )
 
     @api.depends('amount',
                  'amount_interest',
@@ -286,7 +288,7 @@ class FinancialMove(models.Model):
     amount_interest = fields.Monetary(
         string=u'Interest',
         readonly=True,
-        compute='compute_interest',
+        compute='_compute_interest',
     )
     amount_refund = fields.Monetary(
         string=u'Refund',
@@ -478,10 +480,10 @@ class FinancialMove(models.Model):
             record = self.search([
                 ('state', '=', 'open'),
                 ('date_business_maturity', '<', datetime.today())])
-            record.compute_interest()
+            record._compute_interest()
 
     @api.depends('payment_mode_id', 'amount', 'date_business_maturity')
-    def compute_interest(self):
+    def _compute_interest(self):
         for record in self:
             if self.env['resource.calendar']. \
                     data_eh_dia_util_bancario(datetime.today()) and record. \

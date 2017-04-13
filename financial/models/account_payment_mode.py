@@ -2,23 +2,21 @@
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, _
+from odoo import fields, models
 
 
 class AccountPaymentMode(models.Model):
     _inherit = 'account.payment.mode'
 
     interest_percent = fields.Float(
-        store=True
+        string=u'Interest (%)',
     )
     delay_fee_percent = fields.Float(
-        store=True
+        string=u'Delay fee (%)',
     )
     liquidity = fields.Boolean(
-        string=_('Included in credit limit'),
-        store=True,
+        string=u'Included in credit limit',
     )
     compensation_days = fields.Integer(
-        string=_('Days elapsed to compansate the payment'),
-        store=True,
+        string=u'Days elapsed to compensate the payment',
     )
