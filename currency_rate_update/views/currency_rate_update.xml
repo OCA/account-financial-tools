@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="currency_rate_update_tree">
+        <field name="name">Update Rates service</field>
+        <field name="model">currency.rate.update.service</field>
+        <field name="arch" type="xml">
+            <tree string="Currency update services">
+                <field name="service"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="currency_to_update"/>
+                <field name="interval_type"/>
+                <field name="interval_number"/>
+                <field name="next_run"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="currency_rate_update_form">
+        <field name="name">Update Rates</field>
+        <field name="model">currency.rate.update.service</field>
+        <field name="arch" type="xml">
+            <form string="Currency update services">
+                <header>
+                    <button name="refresh_currency" type="object"
+                            string="Update now"/>
+                </header>
+                <group name="main">
+                    <group name="left">
+                        <field name="service"/>
+                        <field name="currency_list" invisible="1"/>
+                        <field name="currency_list_readonly" widget="many2many_tags"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group name="right">
+                        <field name="interval_type"/>
+                        <field name="interval_number"/>
+                        <field name="next_run"/>
+                        <field name="max_delta_days"/>
+                    </group>
+                </group>
+                <group string="Currencies to update with this service" name="currencies">
+                    <!-- I need to have currency_list as r+w for the on_change -->
+                    <field name="currency_to_update" nolabel="1"/>
+                </group>
+                <group string="Logs" name="logs">
+                    <field name="note" nolabel="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="currency_rate_update_action" model="ir.actions.act_window">
+        <field name="name">Rate Auto-download</field>
+        <field name="res_model">currency.rate.update.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="currency_rate_update_menu" action="currency_rate_update_action"
+        parent="account.menu_config_multi_currency" sequence="30"/>
+
+</odoo>
