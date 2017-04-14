@@ -71,9 +71,7 @@ class FinancialMoveCreate(models.TransientModel):
     amount_discount = fields.Monetary(
         string=u'Discount',
     )
-    note = fields.Text(
-        string="Note",
-    )
+    note = fields.Text()
     journal_id = fields.Many2one(
         required=False,
     )
@@ -119,23 +117,16 @@ class FinancialMoveLineCreate(models.TransientModel):
         comodel_name='res.currency',
         string=u'Currency',
     )
-
-    document_item = fields.Char(
-        string=u"Document item",
-    )
-
+    document_item = fields.Char()
     date = fields.Date(
         string=u"Document date",
     )
-
     date_maturity = fields.Date(
         string=u"Due date",
     )
-
     amount = fields.Monetary(
         string=u"Document amount",
     )
-
     financial_move_id = fields.Many2one(
         comodel_name='financial.move.create',
         required=True

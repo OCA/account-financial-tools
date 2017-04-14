@@ -140,9 +140,9 @@ class FinancialMove(models.Model):
     def _check_amount(self):
         for record in self:
             if not record.amount > 0.0 and record.state not in 'cancel':
-                raise ValidationError(
+                raise ValidationError(_(
                     'The payment amount must be strictly positive.'
-                )
+                ))
 
     @api.depends('amount',
                  'amount_interest',
@@ -223,7 +223,6 @@ class FinancialMove(models.Model):
         help="The partner account used for this invoice."
     )
     ref = fields.Char(
-        string=u'Ref',
         required=True,
         copy=False,
         readonly=True,
@@ -305,7 +304,6 @@ class FinancialMove(models.Model):
         readonly=True,
     )
     note = fields.Text(
-        string="Note",
         track_visibility='onchange',
     )
     related_payment_ids = fields.One2many(

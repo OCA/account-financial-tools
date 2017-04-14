@@ -24,7 +24,6 @@ class FinancialEdit(models.TransientModel):
         # required=True
     )
     date_maturity = fields.Date(
-        string=u"Date maturity",
         required=True,
     )
     note = fields.Text(

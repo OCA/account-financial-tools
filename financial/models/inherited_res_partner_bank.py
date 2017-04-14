@@ -11,12 +11,10 @@ class ResPartnerBank(models.Model):
     # _inherits = ['mail.thread']
 
     initial_balance = fields.Monetary(
-        string=u'Initial Balance',
         track_visibility='onchange',
         default=0.00
     )
     date_balance = fields.Date(
-        string=u'Balance date',
         track_visibility='onchange',
         default=fields.Date.context_today,
     )

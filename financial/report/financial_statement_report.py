@@ -12,7 +12,6 @@ class FinancialStatementReport(models.Model):
     _transient = False
 
     name = fields.Char(
-        string=u'Name',
         required=True,
     )
     analytic_account_id = fields.Many2one(
@@ -20,11 +19,9 @@ class FinancialStatementReport(models.Model):
         string=u'Analytic account'
     )
     date_report = fields.Datetime(
-        string=u"Date report",
         readonly=True,
     )
     report_format = fields.Selection(
-        string=u"Report format",
         selection=[
             ('pdf', u'PDF'),
             ('xls', u'XLS'),  # TODO
@@ -38,7 +35,7 @@ class FinancialStatementReport(models.Model):
     not_included_ids = fields.One2many(
         comodel_name='financial.statement.report.not_included',
         inverse_name='financial_statement_report_id',
-        string=u"Included accounts"
+        string=u"Not Included accounts"
     )
     currency_id = fields.Many2one(
         related='company_id.currency_id',
@@ -272,21 +269,10 @@ class ReportFinancialStatement(models.AbstractModel):
 class FinancialStatementReportIncluded(models.Model):
     _name = 'financial.statement.report.included'
 
-    name = fields.Char(
-        string=u"Name",
-    )
-    type = fields.Char(
-
-    )
-    account_type = fields.Char(
-
-    )
-    level = fields.Integer(
-        string="Level"
-    )
-    # currency_id = fields.Many2one(
-    #     related='financial_statement_report_id.currency_id',
-    # )
+    name = fields.Char()
+    type = fields.Char()
+    account_type = fields.Char()
+    level = fields.Integer()
     balance = fields.Float(
         string=u"Amount",
         default=0.00,
@@ -311,7 +297,6 @@ class FinancialStatementReportNotIncluded(models.Model):
         related='financial_statement_report_id.currency_id',
     )
     amount = fields.Monetary(
-        string=u"Amount",
         default=0.00,
     )
     financial_statement_report_id = fields.Many2one(

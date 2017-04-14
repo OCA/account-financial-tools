@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <data>
             <record id="ir_cron_scheduler_demo_action" model="ir.cron">
                 <field name="name">Calculate Interest</field>
@@ -11,4 +11,4 @@
                 <field eval="'_compute_interest'" name="function"/>
             </record>
     </data>
-</openerp>
+</odoo>

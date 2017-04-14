@@ -47,9 +47,7 @@ class FinancialCashflow(models.Model):
     document_number = fields.Char(
         string=u"Document Nº",
     )
-    document_item = fields.Char(
-        string=u"Document item",
-    )
+    document_item = fields.Char()
     date = fields.Date(
         string=u"Document date",
     )
