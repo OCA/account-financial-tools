@@ -30,6 +30,7 @@ addon | version | summary
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
+[currency_rate_update](currency_rate_update/) | 10.0.1.0.0 | Currency Rate Update
 
 
 Unported addons
@@ -66,7 +67,6 @@ addon | version | summary
 [account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
 [async_move_line_importer](async_move_line_importer/) | 0.1.2 (unported) | Asynchronous move/move line CSV importer
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 (unported) | Make sure currency rates used are always up-to-update
-[currency_rate_update](currency_rate_update/) | 9.0.1.0.0 (unported) | Currency Rate Update
 
 [//]: # (end addons)
 
