@@ -24,7 +24,7 @@ import xlwt
 from datetime import datetime
 from openerp.osv import orm
 from openerp.report import report_sxw
-from openerp.addons.report_xls.report_xls import report_xls
+from openerp.addons.report_xls.report_xls import ReportXls
 from openerp.addons.report_xls.utils import rowcol_to_cell, _render
 from openerp.tools.translate import translate, _
 import logging
@@ -64,7 +64,7 @@ class asset_report_xls_parser(report_sxw.rml_parse):
         return res or src
 
 
-class asset_report_xls(report_xls):
+class asset_report_xls(ReportXls):
 
     def __init__(self, name, table, rml=False, parser=False, header=True,
                  store=False):
@@ -87,7 +87,7 @@ class asset_report_xls(report_xls):
         self.av_cell_style = xlwt.easyxf(av_cell_format)
         self.av_cell_style_decimal = xlwt.easyxf(
             av_cell_format + _xs['right'],
-            num_format_str=report_xls.decimal_format)
+            num_format_str=ReportXls.decimal_format)
 
         # Type normal Column Data format
         an_cell_format = _xs['borders_all']
@@ -95,10 +95,10 @@ class asset_report_xls(report_xls):
         self.an_cell_style_center = xlwt.easyxf(an_cell_format + _xs['center'])
         self.an_cell_style_date = xlwt.easyxf(
             an_cell_format + _xs['left'],
-            num_format_str=report_xls.date_format)
+            num_format_str=ReportXls.date_format)
         self.an_cell_style_decimal = xlwt.easyxf(
             an_cell_format + _xs['right'],
-            num_format_str=report_xls.decimal_format)
+            num_format_str=ReportXls.decimal_format)
 
         # totals
         rt_cell_format = _xs['bold'] + _xs['fill'] + _xs['borders_all']
@@ -106,7 +106,7 @@ class asset_report_xls(report_xls):
         self.rt_cell_style_right = xlwt.easyxf(rt_cell_format + _xs['right'])
         self.rt_cell_style_decimal = xlwt.easyxf(
             rt_cell_format + _xs['right'],
-            num_format_str=report_xls.decimal_format)
+            num_format_str=ReportXls.decimal_format)
 
         # XLS Template
         self.acquisition_template = {
