@@ -3,7 +3,8 @@
 # Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
+import random
 
 
 class TestAccountReversal(TransactionCase):
@@ -80,3 +81,36 @@ class TestAccountReversal(TransactionCase):
             self.assertEqual(line.name[0:len(line_prefix)], line_prefix)
             if line.account_id.reconcile:
                 self.assertTrue(line.reconciled)
+
+    def test_reverse_huge_move(self):
+
+        move = self._create_move()
+
+        for x in range(1, 100):
+            amount = random.randint(10, 100) * x
+            move.write({
+                'line_ids': [(0, 0, {
+                    'name': '/',
+                    'debit': amount,
+                    'credit': 0,
+                    'account_id': self.account_customer.id,
+                    'company_id': self.company_id,
+                    'partner_id': self.partner.id
+                }), (0, 0, {
+                    'name': '/',
+                    'debit': 0,
+                    'credit': amount,
+                    'company_id': self.company_id,
+                    'account_id': self.account_sale.id,
+                })]
+            })
+        self.assertEqual(len(move.line_ids), 200)
+
+        move_prefix = 'REV_TEST_MOVE:'
+        line_prefix = 'REV_TEST_LINE:'
+
+        rev = move.create_reversals(move_prefix=move_prefix,
+                                    line_prefix=line_prefix, reconcile=True)
+
+        self.assertEqual(len(rev.line_ids), 200)
+        self.assertEqual(rev.state, 'posted')
