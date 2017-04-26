@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA (Matthieu Dietrich)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from openerp import _, api, fields, models
-from openerp.exceptions import UserError
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class PermanentLockDateWizard(models.TransientModel):
