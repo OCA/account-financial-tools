@@ -5,11 +5,15 @@
 <odoo>
 <data noupdate="1">
 
-    <!-- TODO
-    <record model="financial.move" id="financial_move_demo_1">
-       <field name="name">...</field>
+    <!-- Bank Account Fibonnaci -->
+
+    <record model="res.partner.bank" id="bank_112358_13">
+            <field name="acc_number">112358-13</field>
+            <field name="acc_type">bank</field>
+            <field name="partner_id" ref="base.main_partner" />
+            <field name="bank_id" ref="base.res_bank_1"/>
+            <field name="initial_balance">20094.40</field>
     </record>
-    -->
 
 </data>
 </odoo>

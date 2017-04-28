@@ -35,5 +35,6 @@
     ],
     'demo': [
         'demo/financial_move.xml',
+        'demo/financial_demo.yml'
     ],
 }
