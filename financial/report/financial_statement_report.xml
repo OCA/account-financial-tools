@@ -60,7 +60,7 @@
                             <field name="included_ids">
                                 <tree>
                                     <field name="type"/>
-                                    <field name="account_type"/>
+                                    <field name="account_type_id"/>
                                     <field name="name"/>
                                     <field name="level"/>
                                     <field name="balance"/>

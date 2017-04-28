@@ -1,148 +1,24 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from datetime import datetime
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
-
-
-FINANCIAL_MOVE = [
-    ('r', u'Account Receivable'),
-    ('p', u'Account Payable'),
-]
-
-FINANCIAL_IN_OUT = [
-    ('rr', u'Receipt'),
-    ('pp', u'Payment'),
-]
-
-FINANCIAL_TYPE = FINANCIAL_MOVE + FINANCIAL_IN_OUT
-
-FINANCIAL_STATE = [
-    ('draft', u'Draft'),
-    ('open', u'Open'),
-    ('paid', u'Paid'),
-    ('cancel', u'Cancel'),
-]
-
-FINANCIAL_SEQUENCE = {
-    'r': 'financial.move.receivable',
-    'rr': 'financial.move.receipt',
-    'p': 'financial.move.payable',
-    'pp': 'financial.move.payment',
-}
+from ..constants import (
+    FINANCIAL_SEQUENCE,
+)
 
 
 class FinancialMove(models.Model):
     _name = 'financial.move'
     _description = 'Financial Move'
-    _inherit = ['mail.thread', 'account.abstract.payment']
+    _inherit = ['mail.thread', 'abstract.financial']
     _order = "date_business_maturity desc, " \
              "ref desc, ref_item desc, document_number, id desc"
     _rec_name = 'ref'
-
-    date_business_maturity_search = fields.Date(
-        # string="Payment date from",
-        compute='_compute_date_business_maturity_search_filter',
-        store=True,
-    )
-
-    date_issue_search = fields.Date(
-        # string="Payment date from",
-        compute='_compute_date_issue_search_filter',
-        store=True,
-    )
-
-    partner_search = fields.Many2one(
-        comodel_name='res.partner',
-        compute='_compute_partner_search_filter',
-        store=True,
-    )
-
-    account_analytic_search = fields.Many2one(
-        comodel_name='account.analytic.account',
-        compute='_compute_account_analytic_search_filter',
-        store=True,
-    )
-
-    payment_mode_search = fields.Many2one(
-        comodel_name='account.payment.mode',
-        compute='_compute_payment_mode_search_filter',
-        store=True,
-    )
-
-    document_number_search = fields.Char(
-        compute='_compute_document_number_search_filter',
-        store=True,
-    )
-
-    document_item_search = fields.Char(
-        compute='_compute_document_item_search_filter',
-        store=True,
-    )
-
-    def _compute_date_business_maturity_search_filter(self):
-        return self
-
-    def _compute_date_issue_search_filter(self):
-        return self
-
-    def _compute_partner_search_filter(self):
-        return self
-
-    def _compute_account_analytic_search_filter(self):
-        return self
-
-    def _compute_payment_mode_search_filter(self):
-        return self
-
-    def _compute_document_number_search_filter(self):
-        return self
-
-    def _compute_document_item_search_filter(self):
-        return self
-
-    def _readonly_state(self):
-        return {'draft': [('readonly', False)]}
-
-    @api.multi
-    @api.depends('ref', 'ref_item')
-    def _compute_display_name(self):
-        for record in self:
-            if record.ref_item:
-                record.display_name = record.ref + '/' + record.ref_item
-            else:
-                record.display_name = record.ref or ''
-
-    @api.multi
-    @api.depends('date_maturity')
-    def _compute_date_business_maturity(self):
-        # TODO: refactory for global OCA use
-        for record in self:
-            if record.date_maturity:
-                record.date_business_maturity = self.env[
-                    'resource.calendar'].proximo_dia_util_bancario(
-                    fields.Date.from_string(record.date_maturity))
-
-    @api.model
-    def _avaliable_transition(self, old_state, new_state):
-        allowed = [
-            ('draft', 'open'),
-            ('open', 'paid'),
-            ('open', 'cancel'),
-        ]
-        return (old_state, new_state) in allowed
-
-    @api.multi
-    @api.constrains('amount')
-    def _check_amount(self):
-        for record in self:
-            if not record.amount > 0.0 and record.state not in 'cancel':
-                raise ValidationError(_(
-                    'The payment amount must be strictly positive.'
-                ))
 
     @api.depends('amount',
                  'amount_interest',
@@ -167,7 +43,7 @@ class FinancialMove(models.Model):
     def _compute_residual(self):
         for record in self:
             amount_paid = 0.00
-            if record.financial_type in ('r', 'p'):
+            if record.financial_type in ('r', 'p'):  # FIXME
                 for payment in record.related_payment_ids:
                     amount_paid += payment.amount_total
                 amount_residual = record.amount_total - amount_paid
@@ -182,69 +58,84 @@ class FinancialMove(models.Model):
                 else:
                     record.reconciled = False
 
-    state = fields.Selection(
-        selection=FINANCIAL_STATE,
-        string=u'Status',
-        index=True,
-        readonly=True,
-        default='draft',
-        track_visibility='onchange',
-        copy=False,
+    @api.multi
+    @api.depends('ref', 'ref_item')
+    def _compute_display_name(self):
+        for record in self:
+            if record.ref_item:
+                record.display_name = record.ref + '/' + record.ref_item
+            else:
+                record.display_name = record.ref or ''
+
+    @api.multi
+    @api.depends('date_maturity')
+    def _compute_date_business_maturity(self):
+        # TODO: refactory for global OCA use avoiding l10n_br_resource
+        for record in self:
+            if record.date_maturity:
+                record.date_business_maturity = self.env[
+                    'resource.calendar'].proximo_dia_util_bancario(
+                    fields.Date.from_string(record.date_maturity))
+
+    def _readonly_state(self):
+        return {'draft': [('readonly', False)]}
+
+    def _required_fields(self):
+        return True
+
+    def _track_visibility_onchange(self):
+        return 'onchange'
+
+    def _compute_search_filter(self):
+        return self
+
+    date_business_maturity_search = fields.Date(
+        compute='_compute_search_filter',
+        store=True,
     )
-    financial_type = fields.Selection(
-        selection=FINANCIAL_TYPE,
-        required=True,
+    date_issue_search = fields.Date(
+        compute='_compute_search_filter',
+        store=True,
     )
-    payment_type = fields.Selection(
-        required=False,
+    partner_search = fields.Many2one(
+        comodel_name='res.partner',
+        compute='_compute_search_filter',
+        store=True,
     )
-    payment_method_id = fields.Many2one(
-        required=False,
-    )
-    payment_mode_id = fields.Many2one(
-        comodel_name='account.payment.mode', string="Payment Mode",
-        ondelete='restrict',
-        readonly=True, states={'draft': [('readonly', False)]})
-    payment_term_id = fields.Many2one(
-        string=u'Payment term',
-        comodel_name='account.payment.term',
-        track_visibility='onchange',
-    )
-    analytic_account_id = fields.Many2one(
+    account_analytic_search = fields.Many2one(
         comodel_name='account.analytic.account',
-        string=u'Analytic account'
+        compute='_compute_search_filter',
+        store=True,
     )
-    account_id = fields.Many2one(
-        comodel_name='account.account',
-        string=u'Account',
-        required=True,
-        readonly=True, states={'draft': [('readonly', False)]},
-        domain=[('internal_type', '=', 'other')],
-        help="The partner account used for this invoice."
+    payment_mode_search = fields.Many2one(
+        comodel_name='account.payment.mode',
+        compute='_compute_search_filter',
+        store=True,
+    )
+    document_number_search = fields.Char(
+        compute='_compute_search_filter',
+        store=True,
+    )
+    document_item_search = fields.Char(
+        compute='_compute_date_filter',
+        store=True,
     )
     ref = fields.Char(
         required=True,
         copy=False,
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        states=_readonly_state,
         index=True,
         default=lambda self: _('New')
     )
     ref_item = fields.Char(
         string=u"ref item",
         readonly=True,
-        states={'draft': [('readonly', False)]},
+        states=_readonly_state,
     )
     display_name = fields.Char(
         string=u'Financial Reference',
         compute='_compute_display_name',
-    )
-    document_number = fields.Char(
-        string=u"Document Nº",
-        required=True,
-        readonly=True,
-        states=_readonly_state,
-        track_visibility='onchange',
     )
     date = fields.Date(
         string=u'Financial date',
@@ -303,9 +194,6 @@ class FinancialMove(models.Model):
         string=u'Cancel',
         readonly=True,
     )
-    note = fields.Text(
-        track_visibility='onchange',
-    )
     related_payment_ids = fields.One2many(
         comodel_name='financial.move',
         inverse_name='financial_payment_id',
@@ -320,13 +208,24 @@ class FinancialMove(models.Model):
         readonly=True,
         compute='_compute_residual',
     )
-    journal_id = fields.Many2one(
-        required=False,
-    )
-    bank_id = fields.Many2one(
-        'res.partner.bank',
-        string=u'Bank Account',
-    )
+
+    @api.multi
+    @api.constrains('amount')
+    def _check_amount(self):
+        for record in self:
+            if not record.amount > 0.0 and record.state not in 'cancel':
+                raise ValidationError(_(
+                    'The payment amount must be strictly positive.'
+                ))
+
+    @api.model
+    def _avaliable_transition(self, old_state, new_state):
+        allowed = [
+            ('draft', 'open'),
+            ('open', 'paid'),
+            ('open', 'cancel'),
+        ]
+        return (old_state, new_state) in allowed
 
     @api.multi
     def action_number(self):
@@ -430,12 +329,13 @@ class FinancialMove(models.Model):
             })
 
     @staticmethod
-    def _prepare_financial_move(bank_id, company_id, currency_id,
-                                financial_type, partner_id, document_number,
-                                date, date_maturity, amount,
-                                analytic_account_id=False, account_id=False,
-                                payment_term_id=False, payment_mode_id=False,
-                                **kwargs):
+    def _prepare_financial_move(
+            bank_id, company_id, currency_id,
+            financial_type, partner_id, document_number,
+            date, date_maturity, amount,
+            analytic_account_id=False, account_type_id=False,
+            payment_term_id=False, payment_mode_id=False,
+            **kwargs):
         return dict(
             bank_id=bank_id,
             company_id=company_id,
@@ -447,7 +347,7 @@ class FinancialMove(models.Model):
             payment_mode_id=payment_mode_id,
             payment_term_id=payment_term_id,
             analytic_account_id=analytic_account_id,
-            account_id=account_id,
+            account_type_id=account_type_id,
             date_maturity=date_maturity,
             amount=amount,
             **kwargs
@@ -518,7 +418,7 @@ class FinancialMove(models.Model):
                     analytic_account_id=(
                         financial_create.analytic_account_id.id
                     ),
-                    account_id=financial_create.account_id.id,
+                    account_type_id=financial_create.account_type_id.id,
                     date_maturity=move.date_maturity,
                     amount=move.amount,
                     note=record.note,

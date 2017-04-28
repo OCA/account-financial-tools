@@ -8,13 +8,13 @@
         <field name="name">financial.cashflow.tree (in financial)</field>
         <field name="model">financial.cashflow</field>
         <field name="arch" type="xml">
-            <tree string="Cashflow" create="0" delete="0" colors="black:financial_type in ('rr', 'pp');gray:financial_type in ('r', 'p')">
+            <tree string="Cashflow" create="0" delete="0" colors="black:financial_type in ('receipt_item', 'payment_item');gray:financial_type in ('2recieve', '2pay')">
             <!-- <tree string="Cashflow" create="0" delete="0"> -->
                 <field string="Date" name="date_business_maturity"/>
                 <!-- <field name="create_date"/> -->
                 <!-- <field name="expected_date"/> -->
                 <field name="partner_id"/>
-                <field name="account_id"/>
+                <field name="account_type_id"/>
                 <field name="document_number"/>
                 <field name="bank_id"/>
                 <field name="payment_method_id"/>
@@ -40,8 +40,8 @@
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '=', self)]" string="Date is"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&gt;=', self)]" string="Date from"/>
                     <field name="date_business_maturity" filter_domain="[('date_business_maturity', '&lt;=', self)]" string="Date to"/>
-                    <filter string="Effective payments" domain="[('financial_type', 'in', ['pp', 'rr', 'open'])]"/>
-                    <filter string="Projected payments" domain="[('financial_type', 'in', ['p', 'r', 'open'])]"/>
+                    <filter string="Effective payments" domain="[('financial_type', 'in', ['payment_item', 'receipt_item', 'open'])]"/>
+                    <filter string="Projected payments" domain="[('financial_type', 'in', ['2receive', '2receive', 'open'])]"/>
                </group>
                 <newline/>
                 <group expand="0" string="Group By...">
@@ -54,7 +54,7 @@
         <field name="model">financial.cashflow</field>
         <field name="arch" type="xml">
             <pivot string="Cash Flow" display_quantity="true">
-                <field name="account_id"/>
+                <field name="account_type_id"/>
                 <field name="date_maturity" interval="month" type="col"/>
                 <field name="amount_paid" type="measure"/>
                 <field name="amount_cumulative_balance" type="measure"/>

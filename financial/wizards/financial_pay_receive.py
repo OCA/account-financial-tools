@@ -93,7 +93,7 @@ class FinancialPayreceive(models.TransientModel):
                 document_number=financial_to_pay.document_number,
                 date_maturity=financial_to_pay.date_maturity,
                 amount=wizard.amount,
-                account_id=financial_to_pay.account_id.id,
+                account_type_id=financial_to_pay.account_type_id.id,
                 financial_payment_id=active_id,
                 date_credit_debit=wizard.date_credit_debit,
             )

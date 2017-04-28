@@ -75,13 +75,9 @@ class FinancialCashflow(models.Model):
         comodel_name='account.analytic.account',
         string=u'Analytic account'
     )
-    account_id = fields.Many2one(
-        comodel_name='account.account',
+    account_type_id = fields.Many2one(
+        comodel_name='account.account.type',
         string=u'Account',
-    )
-    journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        string=u'Payment Journal',
     )
     bank_id = fields.Many2one(
         comodel_name='res.partner.bank',
@@ -144,10 +140,9 @@ class FinancialCashflow(models.Model):
                     financial_move.partner_id,
                     financial_move.currency_id,
 
-                    financial_move.account_id,
+                    financial_move.account_type_id,
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
-                    financial_move.journal_id,
                     coalesce(financial_move.amount_paid, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
@@ -160,7 +155,7 @@ class FinancialCashflow(models.Model):
                 FROM
                     public.financial_move
                 WHERE
-                    financial_move.financial_type = 'r' and
+                    financial_move.financial_type = '2receive' and
                     financial_move.amount_residual != 0.0
                 ;
         """)
@@ -183,10 +178,10 @@ class FinancialCashflow(models.Model):
                     financial_move.partner_id,
                     financial_move.currency_id,
 
-                    financial_move.account_id,
+                    financial_move.account_type_id,
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
-                    financial_move.journal_id,
+                    --- financial_move.journal_id,
                     coalesce(financial_move.amount_paid, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
@@ -199,7 +194,7 @@ class FinancialCashflow(models.Model):
                 FROM
                     public.financial_move
                 WHERE
-                    financial_move.financial_type = 'rr';
+                    financial_move.financial_type = 'receipt_item';
         """)
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW financial_cashflow_bank AS
@@ -212,14 +207,14 @@ class FinancialCashflow(models.Model):
                     res_partner_bank.date_balance as date_business_maturity,
                     res_partner_bank.date_balance as date,
                     res_partner_bank.id as bank_id,
-                    NULL as journal_id,
+                    --- NULL as journal_id,
                     NULL as payment_method_id,
                     NULL as payment_term_id,
 
                     res_partner_bank.date_balance as date_maturity,
                     NULL as partner_id,
                     res_partner_bank.currency_id,
-                    NULL as account_id,
+                    NULL as account_type_id,
                     NULL as analytic_account_id,
                     coalesce(res_partner_bank.initial_balance, 0)
                     as amount_paid,
@@ -251,10 +246,10 @@ class FinancialCashflow(models.Model):
                     financial_move.partner_id,
                     financial_move.currency_id,
 
-                    financial_move.account_id,
+                    financial_move.account_type_id,
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
-                    financial_move.journal_id,
+                    --- financial_move.journal_id,
                     coalesce(financial_move.amount_paid, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
@@ -267,7 +262,7 @@ class FinancialCashflow(models.Model):
                 FROM
                     public.financial_move
                 WHERE
-                    financial_move.financial_type = 'p' and
+                    financial_move.financial_type = '2pay' and
                     financial_move.amount_residual != 0.0
                 ;
         """)
@@ -291,10 +286,10 @@ class FinancialCashflow(models.Model):
                     financial_move.partner_id,
                     financial_move.currency_id,
 
-                    financial_move.account_id,
+                    financial_move.account_type_id,
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
-                    financial_move.journal_id,
+                    --- financial_move.journal_id,
                     coalesce(financial_move.amount_paid, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
@@ -307,7 +302,7 @@ class FinancialCashflow(models.Model):
                 FROM
                     public.financial_move
                 WHERE
-                    financial_move.financial_type = 'pp';
+                    financial_move.financial_type = 'payment_item';
         """)
 
         self.env.cr.execute("""
@@ -325,9 +320,9 @@ class FinancialCashflow(models.Model):
                     c.date_maturity,
                     c.partner_id,
                     c.currency_id,
-                    c.account_id,
+                    c.account_type_id,
                     c.analytic_account_id,
-                    c.journal_id,
+                    --- c.journal_id,
                     c.bank_id,
                     c.amount_total,
                     c.amount_paid,
@@ -352,9 +347,9 @@ class FinancialCashflow(models.Model):
                     crr.date_maturity,
                     crr.partner_id,
                     crr.currency_id,
-                    crr.account_id,
+                    crr.account_type_id,
                     crr.analytic_account_id,
-                    crr.journal_id,
+                    --- crr.journal_id,
                     crr.bank_id,
                     crr.amount_total,
                     crr.amount_paid,
@@ -379,9 +374,9 @@ class FinancialCashflow(models.Model):
                     d.date_maturity,
                     d.partner_id,
                     d.currency_id,
-                    d.account_id,
+                    d.account_type_id,
                     d.analytic_account_id,
-                    d.journal_id,
+                    --- d.journal_id,
                     d.bank_id,
                     d.amount_total,
                     d.amount_paid,
@@ -405,9 +400,9 @@ class FinancialCashflow(models.Model):
                     dpp.date_maturity,
                     dpp.partner_id,
                     dpp.currency_id,
-                    dpp.account_id,
+                    dpp.account_type_id,
                     dpp.analytic_account_id,
-                    dpp.journal_id,
+                    --- dpp.journal_id,
                     dpp.bank_id,
                     dpp.amount_total,
                     dpp.amount_paid,
@@ -432,9 +427,9 @@ class FinancialCashflow(models.Model):
                     b.date_maturity,
                     b.partner_id,
                     b.currency_id,
-                    b.account_id,
+                    b.account_type_id,
                     b.analytic_account_id,
-                    b.journal_id,
+                    --- b.journal_id,
                     b.bank_id,
                     b.amount_total,
                     b.amount_paid,
@@ -460,9 +455,9 @@ class FinancialCashflow(models.Model):
                     b.date_maturity,
                     b.partner_id,
                     b.currency_id,
-                    b.account_id,
+                    b.account_type_id,
                     b.analytic_account_id,
-                    b.journal_id,
+                    --- b.journal_id,
                     b.bank_id,
                     b.amount_total,
                     b.amount_paid,
@@ -493,9 +488,11 @@ class FinancialCashflow(models.Model):
             domain += [(date_field, '<=', context['date_to'])]
         if context.get('date_from'):
             if not context.get('strict_range'):
-                domain += ['|', (date_field, '>=', context['date_from']), (
-                    'account_id.user_type_id.include_initial_balance', '=',
-                    True)]
+                domain += [
+                    '|',
+                    (date_field, '>=', context['date_from']),
+                    ('account_type_id.user_type_id.include_initial_balance',
+                     '=', True)]
             elif context.get('initial_bal'):
                 domain += [(date_field, '<', context['date_from'])]
             else:
@@ -523,7 +520,8 @@ class FinancialCashflow(models.Model):
 
         if context.get('account_tag_ids'):
             domain += [
-                ('account_id.tag_ids', 'in', context['account_tag_ids'].ids)]
+                ('account_type_id.tag_ids',
+                 'in', context['account_tag_ids'].ids)]
 
         if context.get('analytic_tag_ids'):
             domain += ['|', (

@@ -8,7 +8,7 @@
         <field name="name">financial.move.tree (in financial)</field>
         <field name="model">financial.move</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="false" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
                 <field name="date_business_maturity" string="Maturity"/>
                 <field name="date" string="Issue"/>
                 <field name="display_name"/>
@@ -73,7 +73,7 @@
                             <field name="bank_id"  options="{'no_create': True, 'no_open': True}" />
                             <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                             <field name="partner_id" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" attrs="{'required': [('financial_type', 'in', ('r', 'p', 'rr', 'pp'))], 'invisible': [('financial_type', 'not in', ('r', 'p'))], 'readonly': [('state', '!=', 'draft')]}" context="{'default_is_company': True, 'default_supplier': financial_type == 'p', 'default_customer': financial_type == 'r'}"/>
-                            <field name="account_id"/>
+                            <field name="account_type_id"/>
                             <field name="analytic_account_id"/>
                         </group>
                         <group>
@@ -191,16 +191,16 @@
         <field name="name">Financial Move (Account Receivable)</field>
         <field name="res_model">financial.move</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('financial_type','=','r')]</field>
-        <field name="context" >{'default_financial_type': 'r'}</field>
+        <field name="domain">[('financial_type','=','2receive')]</field>
+        <field name="context" >{'default_financial_type': '2receive'}</field>
     </record>
 
     <record model="ir.actions.act_window" id="financial_payable_act_window">
         <field name="name">Financial Move (Account Payable)</field>
         <field name="res_model">financial.move</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[('financial_type','=','p')]</field>
-        <field name="context">{'default_financial_type': 'p'} </field>
+        <field name="domain">[('financial_type','=','2pay')]</field>
+        <field name="context">{'default_financial_type': '2pay'} </field>
     </record>
 
     <record model="ir.ui.menu" id="financial_recieve_menu">

@@ -43,7 +43,8 @@ class TestFinancialMove(TransactionCase):
             document_date=time.strftime('%Y') + '-01-01',
             document_number='1111',
             financial_type='r',
-            account_id=44,
+            account_type_id=self.env.ref(
+                'account.data_account_type_receivable'),
         ))
 
     # """US1 # Como um operador de cobrança, eu gostaria de cadastrar uma conta
@@ -73,7 +74,7 @@ class TestFinancialMove(TransactionCase):
                 document_date=time.strftime('%Y') + '-01-02',
                 document_number='2222',
                 financial_type='r',
-                account_id=44,
+                account_type_id=44,
                 note="!",
             ))
             self.financial_move.create(dict(
@@ -86,7 +87,7 @@ class TestFinancialMove(TransactionCase):
                 document_date=time.strftime('%Y') + '-01-03',
                 document_number='3333',
                 financial_type='r',
-                account_id=44,
+                account_type_id=44,
                 note="!",
             ))
 
@@ -114,7 +115,7 @@ class TestFinancialMove(TransactionCase):
             document_date=time.strftime('%Y') + '-01-01',
             document_number='2222',
             financial_type='r',
-            account_id=45,
+            account_type_id=45,
         ))
 
         cty = cr_2._context.copy()
@@ -203,7 +204,7 @@ class TestFinancialMove(TransactionCase):
                 date_payment=time.strftime('%Y') + '-01-10',
                 financial_type='rr',
                 currency_id=self.currency_euro.id,
-                account_id=44,
+                account_type_id=44,
             )
         )
         pay.doit()
@@ -231,7 +232,7 @@ class TestFinancialMove(TransactionCase):
                 date_payment=time.strftime('%Y') + '-01-10',
                 financial_type='rr',
                 currency_id=self.currency_euro.id,
-                account_id=40,
+                account_type_id=40,
             )
         )
         pay.doit()
@@ -297,7 +298,7 @@ class TestFinancialMove(TransactionCase):
                 payment_mode_id=self.payment_mode_1.id,
                 payment_term_id=self.payment_term_id_30_70.id,
                 amount=amount,
-                account_id=44,
+                account_type_id=44,
             )
         )
         ctx = cr_1._context.copy()

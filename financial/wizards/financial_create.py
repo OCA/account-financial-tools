@@ -4,7 +4,7 @@
 
 from odoo import api, fields, models
 
-from ..models.financial_move import (
+from ..constants import (
     FINANCIAL_MOVE,
 )
 
@@ -12,32 +12,17 @@ from ..models.financial_move import (
 class FinancialMoveCreate(models.TransientModel):
 
     _name = 'financial.move.create'
-    _inherit = ['account.abstract.payment']
+    _inherit = ['abstract.financial']
 
     @api.depends('amount', 'amount_discount')
     def _compute_totals(self):
         for record in self:
             record.amount_total = record.amount - record.amount_discount
 
-    payment_type = fields.Selection(
-        required=False,
-    )
-    payment_method_id = fields.Many2one(
-        required=False,
-    )
     line_ids = fields.One2many(
         comodel_name='financial.move.line.create',
         inverse_name='financial_move_id',
         # readonly=True,
-    )
-    financial_type = fields.Selection(
-        selection=FINANCIAL_MOVE,
-        required=True,
-    )
-    payment_mode_id = fields.Many2one(
-        comodel_name='account.payment.mode', string="Payment Mode",
-        ondelete='restrict',
-        required=True,
     )
     payment_term_id = fields.Many2one(
         string='Payment Term',
@@ -47,13 +32,6 @@ class FinancialMoveCreate(models.TransientModel):
     analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string=u'Analytic account',
-    )
-    account_id = fields.Many2one(
-        comodel_name='account.account',
-        string=u'Account',
-        required=True,
-        domain=[('internal_type', '=', 'other')],
-        help="The partner account used for this invoice."
     )
     document_number = fields.Char(
         string=u"Document Nº",
@@ -70,15 +48,6 @@ class FinancialMoveCreate(models.TransientModel):
     )
     amount_discount = fields.Monetary(
         string=u'Discount',
-    )
-    note = fields.Text()
-    journal_id = fields.Many2one(
-        required=False,
-    )
-    bank_id = fields.Many2one(
-        'res.partner.bank',
-        string=u'Bank Account',
-        required=True,
     )
 
     @api.onchange('payment_term_id', 'document_number',
