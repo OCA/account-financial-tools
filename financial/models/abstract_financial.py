@@ -117,9 +117,10 @@ class AbstractFinancial(models.AbstractModel):
         track_visibility=_track_visibility_onchange,
     )
 
-    @api.one
+    @api.multi
     @api.constrains('amount')
     def _check_amount(self):
-        if not self.amount > 0.0:
-            raise ValidationError(_(
-                'The payment amount must be strictly positive.'))
+        for record in self:
+            if not record.amount > 0.0:
+                raise ValidationError(_(
+                    'The payment amount must be strictly positive.'))
