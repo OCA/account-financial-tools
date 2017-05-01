@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-03 23:22+0000\n"
-"PO-Revision-Date: 2017-03-20 15:34+0000\n"
+"PO-Revision-Date: 2017-03-31 14:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr ""
 #: code:addons/account_move_batch_validate/account.py:166
 #, python-format
 msgid "Nothing to do because the record has been deleted"
-msgstr ""
+msgstr "No hi ha res a fer, per que el registre ha estat esborrat "
 
 #. module: account_move_batch_validate
 #: field:account.move,to_post:0

@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-04-25 17:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgstr "Activa rekening"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Boeking"
 
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
@@ -763,7 +763,7 @@ msgstr "Dagboek"
 #: code:addons/account_asset_management/account_asset.py:1339
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Boekingsregel"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1651

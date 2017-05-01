@@ -3,13 +3,14 @@
 # * account_tax_chart_interval
 # 
 # Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:21+0000\n"
-"PO-Revision-Date: 2015-09-29 09:03+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-03-27 13:48+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,22 +21,22 @@ msgstr ""
 #. module: account_tax_chart_interval
 #: model:ir.model,name:account_tax_chart_interval.model_account_tax_chart
 msgid "Account tax chart"
-msgstr ""
+msgstr "Plan de compte de taxe"
 
 #. module: account_tax_chart_interval
 #: field:account.tax.chart,period_to:0
 msgid "End period"
-msgstr ""
+msgstr "Période de fin"
 
 #. module: account_tax_chart_interval
 #: field:account.tax.chart,fiscalyear_id:0
 msgid "Fiscal year"
-msgstr ""
+msgstr "Exercice fiscal"
 
 #. module: account_tax_chart_interval
 #: field:account.tax.chart,period_from:0
 msgid "Start period"
-msgstr ""
+msgstr "Période de début"
 
 #. module: account_tax_chart_interval
 #: model:ir.model,name:account_tax_chart_interval.model_account_tax_code

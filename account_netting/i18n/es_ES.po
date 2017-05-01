@@ -6,6 +6,8 @@
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
 # Antonio Trueba, 2016
+# Bole <bole@dajmi5.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Chen-Do LU <clu@alkemics.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
@@ -16,7 +18,9 @@
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
+# Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Paolo Valier, 2016
 # Pedro Castro Silva <pedrocs@sossia.pt>, 2015
@@ -26,8 +30,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:26+0000\n"
-"PO-Revision-Date: 2017-02-16 15:55+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-04-25 10:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +114,7 @@ msgstr "ID"
 #. module: account_netting
 #: field:account.move.make.netting,journal:0
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_netting
 #: field:account.move.make.netting,__last_update:0

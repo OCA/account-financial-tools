@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-23 23:20+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-02-26 22:34+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Norwegian Bokmål (Norway) (https://www.transifex.com/oca/teams/23907/nb_NO/)\n"
 "MIME-Version: 1.0\n"
@@ -150,7 +150,7 @@ msgstr "Innmelding"
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,down_journal_id:0

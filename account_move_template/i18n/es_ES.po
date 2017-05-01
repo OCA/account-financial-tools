@@ -7,22 +7,24 @@
 # Alexsandro Haag <alex@hgsoft.com.br>, 2015
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Hans Henrik Gabelgaard <hhg@gabelgaard.org>, 2015
-# llum.birque@gmail.com <llum.birque@gmail.com>, 2015
+# llum.birque@gmail.com <inactive+Quim@transifex.com>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Pedro Castro Silva <pedrocs@sossia.pt>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 # Stéphane Bidoul <sbi@skynet.be>, 2015
 # Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 # yterrettaz, 2015
+# yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:26+0000\n"
-"PO-Revision-Date: 2017-02-16 15:55+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-04-25 10:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +148,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_move_template
 #: view:account.move.template:account_move_template.view_move_template_form

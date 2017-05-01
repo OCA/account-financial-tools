@@ -29,7 +29,7 @@ msgstr ""
 #. module: account_balance_line
 #: view:account.move.line:account_balance_line.view_account_move_line_filter_balance
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #. module: account_balance_line
 #: field:account.move.line,line_balance:0
