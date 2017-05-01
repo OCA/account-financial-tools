@@ -3,15 +3,15 @@
 # * account_permanent_lock_move
 # 
 # Translators:
-# Bole <bole@dajmi5.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (9.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-28 01:06+0000\n"
-"PO-Revision-Date: 2016-05-31 15:42+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>\n"
-"Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/hr_HR/)\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -28,7 +28,9 @@ msgstr "Stavka dnevnika"
 msgid ""
 "All journal entries prior to and included at this date will be permanently "
 "locked."
-msgstr "Sve stavke dnevnika prije i uključujući ovaj datum biti će kompletno zaključani."
+msgstr ""
+"Sve stavke dnevnika prije i uključujući ovaj datum biti će kompletno "
+"zaključani."
 
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
@@ -68,17 +70,17 @@ msgstr "ID"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update
 msgid "Last Modified on"
-msgstr "Zadnje izmjenio"
+msgstr "Zadnje modificirano"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažurirao"
+msgstr "Zadnji ažurirao"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr "Zadnje ažurirano"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_lock_date
@@ -100,14 +102,18 @@ msgstr "Kompletno zaključaj stavke"
 msgid ""
 "Non-revertible closing of accounts prior to and inclusive of this date. Use "
 "it for fiscal year locking instead of \"Lock Date\"."
-msgstr "Nepovratno zaključavanje stavaka prije i uključujući ovaj datum. Koristite ga za zaključavanje fiskalnog perioda umjesto  \"Datum zaključavanja\" polja"
+msgstr ""
+"Nepovratno zaključavanje stavaka prije i uključujući ovaj datum. Koristite "
+"ga za zaključavanje fiskalnog perioda umjesto  \"Datum zaključavanja\" polja"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,help:account_permanent_lock_move.field_res_company_permanent_lock_date
 msgid ""
 "Non-revertible closing of accounts prior to and inclusive of this date. Use "
 "it for fiscal year locking instead of Lock Date."
-msgstr "Nepovratno zaključavanje stavaka prije i uključujući ovaj datum. Koristite ga za zaključavanje fiskalnog perioda umjesto  polja Datum zaključavanja"
+msgstr ""
+"Nepovratno zaključavanje stavaka prije i uključujući ovaj datum. Koristite "
+"ga za zaključavanje fiskalnog perioda umjesto  polja Datum zaključavanja"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_account_config_settings_permanent_lock_date
