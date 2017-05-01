@@ -5,7 +5,7 @@
 from odoo import api, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
 
-from ..models.financial_move import (
+from ..constants import (
     FINANCIAL_STATE,
     FINANCIAL_TYPE
 )
@@ -214,7 +214,11 @@ class FinancialCashflow(models.Model):
                     res_partner_bank.date_balance as date_maturity,
                     NULL as partner_id,
                     res_partner_bank.currency_id,
-                    NULL as account_type_id,
+                    (
+                     select res_id
+                     from ir_model_data
+                     where name = 'data_account_type_liquidity'
+                    ) as account_type_id,
                     NULL as analytic_account_id,
                     coalesce(res_partner_bank.initial_balance, 0)
                     as amount_paid,

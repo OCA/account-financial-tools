@@ -17,16 +17,25 @@
         'mail',
     ],
     'data': [
+
+        'security/account_account_type.xml',
+        'security/financial_move.xml',
+        'security/res_partner_bank.xml',
+        'views/financial_menu.xml',
+
         'data/ir_sequence_data.xml',
         'data/financial_move_data.xml',
-        'views/financial_menu.xml',
+
         'wizards/financial_cancel.xml',
         'wizards/financial_edit.xml',
         'wizards/financial_create.xml',
         'wizards/financial_pay_receive.xml',
+
+        'views/account_account_type.xml',
         'views/financial_move_base_view.xml',
         'views/payment_mode.xml',
         'views/inherited_res_partner_bank_view.xml',
+
         'report/financial_cashflow.xml',
         'report/financial_statement_report.xml',
         'report/report_financial.xml',

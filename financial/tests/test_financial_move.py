@@ -42,7 +42,7 @@ class TestFinancialMove(TransactionCase):
             partner_id=self.partner_agrolait.id,
             document_date=time.strftime('%Y') + '-01-01',
             document_number='1111',
-            financial_type='r',
+            financial_type='2receive',
             account_type_id=self.env.ref(
                 'account.data_account_type_receivable'),
         ))
@@ -73,7 +73,7 @@ class TestFinancialMove(TransactionCase):
                 partner_id=self.partner_agrolait.id,
                 document_date=time.strftime('%Y') + '-01-02',
                 document_number='2222',
-                financial_type='r',
+                financial_type='2receive',
                 account_type_id=44,
                 note="!",
             ))
@@ -86,7 +86,7 @@ class TestFinancialMove(TransactionCase):
                 partner_id=self.partner_agrolait.id,
                 document_date=time.strftime('%Y') + '-01-03',
                 document_number='3333',
-                financial_type='r',
+                financial_type='2receive',
                 account_type_id=44,
                 note="!",
             ))
@@ -114,7 +114,7 @@ class TestFinancialMove(TransactionCase):
             partner_id=self.partner_agrolait.id,
             document_date=time.strftime('%Y') + '-01-01',
             document_number='2222',
-            financial_type='r',
+            financial_type='2receive',
             account_type_id=45,
         ))
 
@@ -202,7 +202,7 @@ class TestFinancialMove(TransactionCase):
                 journal_id=self.bank_journal_id.id,
                 amount=50.00,
                 date_payment=time.strftime('%Y') + '-01-10',
-                financial_type='rr',
+                financial_type='receipt_item',
                 currency_id=self.currency_euro.id,
                 account_type_id=44,
             )
@@ -230,7 +230,7 @@ class TestFinancialMove(TransactionCase):
                 journal_id=self.bank_journal_id.id,
                 amount=100.00,
                 date_payment=time.strftime('%Y') + '-01-10',
-                financial_type='rr',
+                financial_type='receipt_item',
                 currency_id=self.currency_euro.id,
                 account_type_id=40,
             )
@@ -259,7 +259,7 @@ class TestFinancialMove(TransactionCase):
                 journal_id=self.bank_journal_id.id,
                 amount=150.00,
                 date_payment=time.strftime('%Y') + '-01-10',
-                financial_type='rr',
+                financial_type='receipt_item',
                 currency_id=self.currency_euro.id,
             )
         )
@@ -291,7 +291,7 @@ class TestFinancialMove(TransactionCase):
                 journal_id=self.bank_journal_id.id,
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
-                financial_type='r',
+                financial_type='2receive',
                 partner_id=self.partner_agrolait.id,
                 document_number=doc_number,
                 document_date=date_today_iso,

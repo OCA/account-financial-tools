@@ -43,7 +43,7 @@ class FinancialMove(models.Model):
     def _compute_residual(self):
         for record in self:
             amount_paid = 0.00
-            if record.financial_type in ('r', 'p'):  # FIXME
+            if record.financial_type in ('2receive', '2pay'):  # FIXME
                 for payment in record.related_payment_ids:
                     amount_paid += payment.amount_total
                 amount_residual = record.amount_total - amount_paid
@@ -126,7 +126,7 @@ class FinancialMove(models.Model):
         readonly=True,
         states=_readonly_state,
         index=True,
-        default=lambda self: _('New')
+        default=lambda self: _(u'New')
     )
     ref_item = fields.Char(
         string=u"ref item",
@@ -230,17 +230,18 @@ class FinancialMove(models.Model):
     @api.multi
     def action_number(self):
         for record in self:
-            if record.ref == _('New'):
+            if record.ref == _(u'New'):
                 sequencial_ids = self.search([
                     ('document_number', '=', record.document_number),
                 ], order='date_business_maturity')
                 if self.search_count([
                     ('document_number', '=', record.document_number),
-                    ('ref', '=', _('New')),
+                    ('ref', '=', _(u'New')),
                 ]) == len(sequencial_ids.ids):
                     sequencial_ids.write({
                         'ref': self.env['ir.sequence'].next_by_code(
-                            FINANCIAL_SEQUENCE[record.financial_type]) or 'New'
+                            FINANCIAL_SEQUENCE[
+                                record.financial_type]) or u'New'
                     })
                     for i, x in enumerate(sequencial_ids):
                         x.ref_item = i + 1
@@ -355,10 +356,10 @@ class FinancialMove(models.Model):
 
     @api.multi
     def action_view_financial(self, financial_type):
-        if financial_type == 'r':
+        if financial_type == '2receive':
             action = self.env.ref(
                 'financial.financial_receivable_act_window').read()[0]
-        else:
+        elif financial_type == '2pay':
             action = self.env.ref(
                 'financial.financial_payable_act_window').read()[0]
         if len(self) > 1:
