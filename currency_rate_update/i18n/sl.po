@@ -3,15 +3,14 @@
 # * currency_rate_update
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 02:44+0000\n"
-"PO-Revision-Date: 2016-07-01 02:44+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
+"POT-Creation-Date: 2017-04-27 00:40+0000\n"
+"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,20 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: currency_rate_update
+#: model:ir.ui.view,arch_db:currency_rate_update.view_account_config_settings
+msgid "Auto-download Rates"
+msgstr ""
+
+#. module: currency_rate_update
+#: model:ir.model.fields,field_description:currency_rate_update.field_account_config_settings_auto_currency_up
 #: model:ir.model.fields,field_description:currency_rate_update.field_res_company_auto_currency_up
-msgid "Automatic Update"
-msgstr "Samodejna posodobitev"
+msgid "Automatic Currency Rates Download"
+msgstr ""
 
 #. module: currency_rate_update
+#: model:ir.model.fields,help:currency_rate_update.field_account_config_settings_auto_currency_up
 #: model:ir.model.fields,help:currency_rate_update.field_res_company_auto_currency_up
-msgid "Automatic update of the currencies for this company"
-msgstr "Samodejna posodobitev valut te družbe"
-
-#. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:126
-#, python-format
-msgid "Base currency rate should be 1.00!"
-msgstr "Osnovni valutni tečaj mora biti 1.00!"
+msgid "Automatic download of currency rates for this company"
+msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
@@ -57,6 +57,7 @@ msgstr "Ustvarjeno"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
+#: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list_readonly
 msgid "Currencies available"
 msgstr "Razpoložljive valute"
 
@@ -67,16 +68,9 @@ msgid "Currencies to update with this service"
 msgstr "Valute, ki se posodabljajo s to storitvijo"
 
 #. module: currency_rate_update
-#: model:ir.actions.act_window,name:currency_rate_update.currency_rate_update_action
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
-#: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
 msgid "Currency Rate Update"
 msgstr "Posodobitev menjalnega tečaja"
-
-#. module: currency_rate_update
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
-msgid "Currency update configuration"
-msgstr "Nastavitve posodabljanja valut"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_interval_type
@@ -84,8 +78,6 @@ msgid "Currency update frequency"
 msgstr "Frekvenca posodabljanja valut"
 
 #. module: currency_rate_update
-#: model:ir.model.fields,field_description:currency_rate_update.field_res_company_services_to_use
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_tree
 msgid "Currency update services"
@@ -135,14 +127,19 @@ msgstr "ID"
 msgid ""
 "If the time delta between the rate date given by the webservice and the "
 "current date exceeds this value, then the currency rate is not updated in "
-"OpenERP."
+"Odoo."
 msgstr ""
-"Če časovna razlika med datumom tečaja, ki ga poda spletna storitev in "
-"trenutnim datumom tečaja presega to vrednost, se menjalni tečaj v OpenERP ne"
-" posodobi."
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:42
+#: code:addons/currency_rate_update/models/currency_rate_update.py:145
+#, python-format
+msgid ""
+"In company '%s', the rate of the main currency (%s) must be 1.00 (current "
+"rate: %s)."
+msgstr ""
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/models/currency_rate_update.py:48
 #, python-format
 msgid "Interval number must be >= 0"
 msgstr "Število intervala mora biti >= 0"
@@ -173,7 +170,7 @@ msgid "Max delta days"
 msgstr "Največja razlika v dnevih"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:36
+#: code:addons/currency_rate_update/models/currency_rate_update.py:40
 #, python-format
 msgid "Max delta days must be >= 0"
 msgstr "Največja razlika v dnevih mora biti >= 0 "
@@ -189,15 +186,16 @@ msgid "Next run on"
 msgstr "Naslednji zagon"
 
 #. module: currency_rate_update
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
-msgid "Refresh currencies"
-msgstr "Osvežitev valut"
+#: model:ir.actions.act_window,name:currency_rate_update.currency_rate_update_action
+#: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
+msgid "Rate Auto-download"
+msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:123
+#: code:addons/currency_rate_update/services/currency_getter_interface.py:147
 #, python-format
-msgid "There is no main currency defined!"
-msgstr "Glavna valuta ni določena!"
+msgid "Unable to import urllib."
+msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_note
@@ -206,8 +204,14 @@ msgstr "Posodobitev dnevnikov zapisov"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
-msgid "Update now!"
-msgstr "Posodobi zdaj!"
+msgid "Update now"
+msgstr ""
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/services/currency_getter_interface.py:150
+#, python-format
+msgid "Web Service does not exist (%s)!"
+msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_service
@@ -220,8 +224,13 @@ msgid "Week(s)"
 msgstr "Tedni(ov)"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:107
+#: code:addons/currency_rate_update/models/currency_rate_update.py:124
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
 msgstr "Storitev lahko uporabljate le enkrat za vsako družbo!"
+
+#. module: currency_rate_update
+#: model:ir.model,name:currency_rate_update.model_account_config_settings
+msgid "account.config.settings"
+msgstr ""

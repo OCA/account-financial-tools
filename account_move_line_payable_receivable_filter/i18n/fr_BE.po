@@ -1,27 +1,29 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_line_payable_receivable_filter
-#
+# * account_move_line_payable_receivable_filter
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-04 08:52+0000\n"
-"PO-Revision-Date: 2015-02-04 08:52+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2017-04-27 00:40+0000\n"
+"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (Belgium) (https://www.transifex.com/oca/teams/23907/fr_BE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: fr_BE\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_move_line_payable_receivable_filter
-#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+#: model:ir.ui.view,arch_db:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
 msgid "Payable Account"
 msgstr "Compte fournisseur"
 
 #. module: account_move_line_payable_receivable_filter
-#: view:account.move.line:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
+#: model:ir.ui.view,arch_db:account_move_line_payable_receivable_filter.view_account_move_line_filter_inherit
 msgid "Receivable Account"
 msgstr "Compte client"
-
