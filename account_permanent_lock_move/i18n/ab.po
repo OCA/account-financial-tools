@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-28 00:48+0000\n"
-"PO-Revision-Date: 2016-05-26 05:40+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/ca/)\n"
+"PO-Revision-Date: 2017-03-24 23:31+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Abkhaz (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/ab/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca\n"
+"Language: ab\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_account_move
 msgid "Account Entry"
-msgstr "Assentament comptable"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
@@ -37,47 +37,47 @@ msgstr "Cancel·la"
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_res_company
 msgid "Companies"
-msgstr "Empreses"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_company_id
 msgid "Company"
-msgstr "Companyia"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_uid
 msgid "Created by"
-msgstr "Creat per"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_date
 msgid "Created on"
-msgstr "Creat el"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_display_name
 msgid "Display Name"
-msgstr "Veure el nom"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update
 msgid "Last Modified on"
-msgstr "Darrera modificació el"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Darrera Actualització per"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_date
 msgid "Last Updated on"
-msgstr "Darrera Actualització el"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_lock_date
@@ -144,7 +144,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_account_config_settings
 msgid "account.config.settings"
-msgstr "account.config.settings"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_permanent_lock_date_wizard

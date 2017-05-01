@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 03:37+0000\n"
+"POT-Creation-Date: 2017-03-28 00:48+0000\n"
 "PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/es_MX/)\n"
@@ -73,7 +73,7 @@ msgstr "ID"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_journal_ids
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
