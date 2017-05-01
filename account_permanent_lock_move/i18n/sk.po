@@ -4,20 +4,19 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 00:40+0000\n"
 "PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
-"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_account_move
@@ -34,52 +33,52 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_res_company
 msgid "Companies"
-msgstr "Poduzeća"
+msgstr "Spoločnosti"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_company_id
 msgid "Company"
-msgstr "Organizacija"
+msgstr "Spoločnosť"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_uid
 msgid "Created by"
-msgstr "Kreirao"
+msgstr "Vytvoril"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_date
 msgid "Created on"
-msgstr "Kreirano na"
+msgstr "Vytvorené"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_display_name
 msgid "Display Name"
-msgstr "Naziv "
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update
 msgid "Last Modified on"
-msgstr "Zadnje modificirano"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Naposledy upravil"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr "Naposledy upravené"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_lock_date
@@ -146,7 +145,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_account_config_settings
 msgid "account.config.settings"
-msgstr "account.config.settings"
+msgstr ""
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_permanent_lock_date_wizard
