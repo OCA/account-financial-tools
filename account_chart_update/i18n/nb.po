@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 21:00+0000\n"
-"PO-Revision-Date: 2016-12-02 13:53+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"PO-Revision-Date: 2017-04-25 10:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -494,7 +494,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,state:0
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0

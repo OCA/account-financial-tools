@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 23:15+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sk/)\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: field:account.asset.recompute.trigger,company_id:0
 #: view:asset.asset.report:0 field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Spoločnosť"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1488

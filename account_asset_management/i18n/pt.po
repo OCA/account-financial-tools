@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 23:15+0000\n"
-"PO-Revision-Date: 2017-01-11 15:35+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"PO-Revision-Date: 2017-04-25 10:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -619,7 +619,7 @@ msgstr "Linha de fatura"
 #: code:addons/account_asset_management/account_asset.py:1337
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Movs. de Diário"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,method_period:0

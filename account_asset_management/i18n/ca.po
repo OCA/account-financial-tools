@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 23:12+0000\n"
-"PO-Revision-Date: 2017-03-23 14:13+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"PO-Revision-Date: 2017-04-25 10:40+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Data final"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_config_settings
 msgid "account.config.settings"
-msgstr ""
+msgstr "account.config.settings"
 
 #. module: account_asset_management
 #: field:account.asset.asset,value_residual:0
@@ -220,7 +220,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 23:15+0000\n"
-"PO-Revision-Date: 2017-01-11 15:38+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"PO-Revision-Date: 2017-04-25 10:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/hr_HR/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Poduzeće"
 
 #. module: account_move_batch_validate
 #: model:ir.actions.act_window,name:account_move_batch_validate.action_account_move_marker
@@ -147,7 +147,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: model:ir.model,name:account_move_batch_validate.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Stavka dnevnika"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,action:0

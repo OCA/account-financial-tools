@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 23:15+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -618,7 +618,7 @@ msgstr "Linha da Fatura"
 #: code:addons/account_asset_management/account_asset.py:1337
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Movs. de Diário"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,method_period:0
@@ -1046,7 +1046,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Diário"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
@@ -1072,7 +1072,7 @@ msgstr ""
 #: field:account.asset.depreciation.line,move_check:0
 #: view:asset.asset.report:0 field:asset.asset.report,move_check:0
 msgid "Posted"
-msgstr ""
+msgstr "Publicado"
 
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0

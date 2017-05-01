@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca_ES/)\n"
@@ -1046,7 +1046,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Diari"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0

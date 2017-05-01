@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2016-02-27 00:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/gl/)\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. module: account_journal_entry_posted_async
 #: model:ir.model,name:account_journal_entry_posted_async.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_journal_entry_posted_async
 #: help:account.journal,entry_posted_async:0

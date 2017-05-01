@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 23:13+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
@@ -102,7 +102,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: selection:credit.control.policy.level,dunning_fees_type:0
 msgid "Fixed"
-msgstr ""
+msgstr "Fix "
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:16+0000\n"
-"PO-Revision-Date: 2017-03-10 13:16+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"PO-Revision-Date: 2017-04-25 17:36+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -620,7 +620,7 @@ msgstr "Postavka računa"
 #: code:addons/account_asset_management/account_asset.py:1337
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Dnevniški vnosi"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,method_period:0

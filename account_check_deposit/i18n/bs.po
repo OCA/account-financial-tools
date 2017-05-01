@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Bosnian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/bs/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr ""
+msgstr "U pripremi"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
@@ -77,7 +77,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -222,7 +222,7 @@ msgstr ""
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:64
 msgid "Reference"
-msgstr ""
+msgstr "Referenca"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
@@ -266,4 +266,4 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Dnevnik"

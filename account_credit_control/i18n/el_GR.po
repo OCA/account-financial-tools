@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/el_GR/)\n"
@@ -517,7 +517,7 @@ msgstr ""
 #: field:credit.control.line,company_id:0
 #: field:credit.control.policy,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Εταιρεία"
 
 #. module: account_credit_control
 #: view:credit.control.line:0

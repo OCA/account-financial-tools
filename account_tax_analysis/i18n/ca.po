@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:16+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca/)\n"
@@ -98,7 +98,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Account"
-msgstr ""
+msgstr "Compte"
 
 #. module: account_tax_analysis
 #: code:addons/account_tax_analysis/account_tax_analysis.py:47

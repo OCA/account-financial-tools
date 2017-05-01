@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/zh_CN/)\n"
@@ -96,7 +96,7 @@ msgstr "运行中"
 #. module: async_move_line_importer
 #: field:move.line.importer,message_is_follower:0
 msgid "Is a Follower"
-msgstr ""
+msgstr "关注者"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:214
@@ -208,7 +208,7 @@ msgstr "未读消息"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "HTML格式的简介，包括了各种项目的总结信息（比如消息数，作业数……）"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:329

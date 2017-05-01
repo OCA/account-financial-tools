@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 23:15+0000\n"
+"POT-Creation-Date: 2017-03-24 23:13+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Bosnian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/bs/)\n"
@@ -134,7 +134,7 @@ msgstr ""
 #: field:account.asset.recompute.trigger,company_id:0
 #: view:asset.asset.report:0 field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1488
@@ -340,7 +340,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,code:0
 msgid "Reference"
-msgstr ""
+msgstr "Referenca"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -719,7 +719,7 @@ msgstr ""
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Draft"
-msgstr ""
+msgstr "U pripremi"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -729,7 +729,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: account_asset_management
 #: field:account.asset.asset,asset_value:0
@@ -1046,7 +1046,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Dnevnik"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
@@ -1072,7 +1072,7 @@ msgstr ""
 #: field:account.asset.depreciation.line,move_check:0
 #: view:asset.asset.report:0 field:asset.asset.report,move_check:0
 msgid "Posted"
-msgstr ""
+msgstr "Proknjiženo"
 
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0
