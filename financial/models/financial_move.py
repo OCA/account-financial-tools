@@ -172,9 +172,6 @@ class FinancialMove(models.Model):
         compute='_compute_residual',
         store=True,
     )
-    amount_discount = fields.Monetary(
-        string=u'Discount',
-    )
     amount_interest = fields.Monetary(
         string=u'Interest',
         readonly=True,

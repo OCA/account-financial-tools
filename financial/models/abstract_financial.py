@@ -47,18 +47,32 @@ class AbstractFinancial(models.AbstractModel):
     amount = fields.Monetary(
         string='Payment Amount',
         required=_required_fields,
+        track_visibility=_track_visibility_onchange,
+    )
+    amount_discount = fields.Monetary(
+        string=u'Discount',
+        track_visibility=_track_visibility_onchange,
     )
     currency_id = fields.Many2one(
         string='Currency',
         comodel_name='res.currency',
         required=_required_fields,
         default=lambda self: self.env.user.company_id.currency_id,
+        track_visibility=_track_visibility_onchange,
     )
     payment_date = fields.Date(
         string='Payment Date',
         default=fields.Date.context_today,
         required=_required_fields,
         copy=False,
+    )
+    document_date = fields.Date(
+        string=u'Document date',
+        track_visibility=_track_visibility_onchange,
+    )
+    date_maturity = fields.Date(
+        string=u'Maturity date',
+        track_visibility=_track_visibility_onchange,
     )
     communication = fields.Char(
         string='Memo',
@@ -73,7 +87,8 @@ class AbstractFinancial(models.AbstractModel):
         comodel_name='res.company',
     )
     note = fields.Text(
-        string='Note'
+        string='Note',
+        track_visibility=_track_visibility_onchange,
     )
     state = fields.Selection(
         selection=FINANCIAL_STATE,
@@ -95,7 +110,7 @@ class AbstractFinancial(models.AbstractModel):
         string=u'Payment term',
         comodel_name='account.payment.term',
         track_visibility='onchange',
-        required=_required_fields,
+        required=False,
     )
     analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',

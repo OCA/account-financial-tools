@@ -26,6 +26,12 @@ class TestFinancialMove(TransactionCase):
         self.partner_axelor = self.env.ref("base.res_partner_2")
         self.payment_term_id_30_70 = self.env.\
             ref("account.account_payment_term_advance")
+        self.type_receivable = self.env.ref(
+            'account.data_account_type_receivable')
+
+        self.bank_112358 = self.env.ref(
+            'financial.bank_112358_13'
+        )
         self.payment_mode_1 = self.env.\
             ref("account_payment_mode.payment_mode_outbound_ct1")
         self.bank_journal_id = self.env['account.journal'].search(
@@ -34,7 +40,7 @@ class TestFinancialMove(TransactionCase):
             ])[0]
 
         self.cr_1 = self.financial_move.create(dict(
-            journal_id=self.bank_journal_id.id,
+            bank_id=self.bank_112358.id,
             date_maturity='2018-02-12',
             company_id=self.main_company.id,
             currency_id=self.currency_euro.id,
@@ -43,8 +49,7 @@ class TestFinancialMove(TransactionCase):
             document_date=time.strftime('%Y') + '-01-01',
             document_number='1111',
             financial_type='2receive',
-            account_type_id=self.env.ref(
-                'account.data_account_type_receivable'),
+            account_type_id=self.type_receivable.id,
         ))
 
     # """US1 # Como um operador de cobrança, eu gostaria de cadastrar uma conta
@@ -54,7 +59,6 @@ class TestFinancialMove(TransactionCase):
         """ DADO a data de vencimento de 12/02/2017
         QUANDO criado um lançamento de contas a receber
         ENTÃO a data de vencimento útil deve ser de 14/03/2017"""
-
         self.assertEqual(self.cr_1.date_business_maturity, '2018-02-14')
 
     def test_us_1_ac_2(self):
@@ -65,7 +69,7 @@ class TestFinancialMove(TransactionCase):
         E impedir lançamento"""
         with self.assertRaises(ValidationError):
             self.financial_move.create(dict(
-                journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
                 date_maturity='2017-02-27',
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
@@ -74,11 +78,11 @@ class TestFinancialMove(TransactionCase):
                 document_date=time.strftime('%Y') + '-01-02',
                 document_number='2222',
                 financial_type='2receive',
-                account_type_id=44,
+                account_type_id=self.type_receivable.id,
                 note="!",
             ))
             self.financial_move.create(dict(
-                journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
                 date_maturity='2017-02-27',
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
@@ -87,7 +91,7 @@ class TestFinancialMove(TransactionCase):
                 document_date=time.strftime('%Y') + '-01-03',
                 document_number='3333',
                 financial_type='2receive',
-                account_type_id=44,
+                account_type_id=self.type_receivable.id,
                 note="!",
             ))
 
@@ -106,7 +110,7 @@ class TestFinancialMove(TransactionCase):
         cr_1.action_confirm()
 
         cr_2 = self.financial_move.create(dict(
-            journal_id=self.bank_journal_id.id,
+            bank_id=self.bank_112358.id,
             date_maturity='2017-02-27',
             company_id=self.main_company.id,
             currency_id=self.currency_euro.id,
@@ -115,7 +119,7 @@ class TestFinancialMove(TransactionCase):
             document_date=time.strftime('%Y') + '-01-01',
             document_number='2222',
             financial_type='2receive',
-            account_type_id=45,
+            account_type_id=self.type_receivable.id,
         ))
 
         cty = cr_2._context.copy()
@@ -126,15 +130,16 @@ class TestFinancialMove(TransactionCase):
         cr_2.action_confirm()
 
         self.assertNotEqual(cr_1.display_name, cr_2.display_name)
-
-    # def test_us1_ac_4(self):
-    #     """ DADO a criação de uma nova parcela
-    #     QUANDO confirmada
-    #     ENTÃO os seus campos não poderão mais ser alterados pela
-    #     interface de cadastro
-    #     :return:
-    #     """
-    #     TODO: implementar teste quando for possivel pelo framework
+    #
+    # # def test_us1_ac_4(self):
+    # #     """ DADO a criação de uma nova parcela
+    # #     QUANDO confirmada
+    # #     ENTÃO os seus campos não poderão mais ser alterados pela
+    # #     interface de cadastro
+    # #     :return:
+    # #     """
+    # #     TODO: implementar teste quando for possivel pelo framework
+    #
 
     # """ Como um operador de cobrança, eu gostaria de alterar o vencimento ou
     # valor de uma conta a receber/pagar para auditar as alterações do fluxo
@@ -199,12 +204,12 @@ class TestFinancialMove(TransactionCase):
         fr = self.financial_pay_receive.with_context(ctx)
         pay = fr.create(
             dict(
-                journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
                 amount=50.00,
                 date_payment=time.strftime('%Y') + '-01-10',
                 financial_type='receipt_item',
                 currency_id=self.currency_euro.id,
-                account_type_id=44,
+                account_type_id=self.type_receivable.id,
             )
         )
         pay.doit()
@@ -227,12 +232,13 @@ class TestFinancialMove(TransactionCase):
         fr = self.financial_pay_receive.with_context(ctx)
         pay = fr.create(
             dict(
-                journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
                 amount=100.00,
                 date_payment=time.strftime('%Y') + '-01-10',
                 financial_type='receipt_item',
                 currency_id=self.currency_euro.id,
-                account_type_id=40,
+                account_type_id=self.env.ref(
+                    'account.data_account_type_receivable'),
             )
         )
         pay.doit()
@@ -240,40 +246,11 @@ class TestFinancialMove(TransactionCase):
         self.assertEqual(0.00, cr_1.amount_residual)
         self.assertEqual('paid', cr_1.state)
 
-    def test_us_3_cr_5(self):
-        """DADO que existe uma parcela de 100 reais em aberto
-        QUANDO for recebido/pago 150 reais
-        ENTÃO o valor do balanço da parcela deve ser 0
-        E o status da parcela deve mudar para pago
-        E o parceiro deve ficar com um crédito de 50 reais"""
-        cr_1 = self.cr_1
-        ctx = cr_1._context.copy()
+    """ Como um operador de cobrança, eu gostaria de criar multiplas
+     contas a receber/pagar de forma automatica dependendo do termo de
+     pagamento. """
 
-        ctx['active_id'] = self.cr_1.id
-        ctx['active_ids'] = [self.cr_1.id]
-        ctx['active_model'] = self.cr_1._module
-        cr_1.action_confirm()
-        fr = self.financial_pay_receive.with_context(ctx)
-        pay = fr.create(
-            dict(
-                journal_id=self.bank_journal_id.id,
-                amount=150.00,
-                date_payment=time.strftime('%Y') + '-01-10',
-                financial_type='receipt_item',
-                currency_id=self.currency_euro.id,
-            )
-        )
-        pay.doit()
-
-        self.assertEqual(-50.00, cr_1.amount_residual)
-        self.assertEqual('paid', cr_1.state)
-
-    # """
-    # Como um operador de cobrança, eu gostaria de criar multiplas contas a
-    # receber/pagar de forma automatica dependendo do termo de pagamento.
-    # """
-
-    def test_usx_ac_y(self):
+    def test_us_financial_create_term_30_70(self):
         """
         DADO o lancamento de uma parcela via assistente
         QUANDO especificado algum termo de pagamento
@@ -288,7 +265,8 @@ class TestFinancialMove(TransactionCase):
         fm = self.financial_move_create
         cr_1 = fm.create(
             dict(
-                journal_id=self.bank_journal_id.id,
+                # journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
                 company_id=self.main_company.id,
                 currency_id=self.currency_euro.id,
                 financial_type='2receive',
@@ -298,7 +276,7 @@ class TestFinancialMove(TransactionCase):
                 payment_mode_id=self.payment_mode_1.id,
                 payment_term_id=self.payment_term_id_30_70.id,
                 amount=amount,
-                account_type_id=44,
+                account_type_id=self.type_receivable.id,
             )
         )
         ctx = cr_1._context.copy()
@@ -334,3 +312,35 @@ class TestFinancialMove(TransactionCase):
         # Amounts verification
         self.assertEqual(fm_1.amount, expected_1[1])
         self.assertEqual(fm_2.amount, expected_2[1])
+
+    def test_us_3_cr_5(self):
+        """DADO que existe uma parcela de 100 reais em aberto
+        QUANDO for recebido/pago 150 reais
+        ENTÃO o valor do balanço da parcela deve ser 0
+        E o status da parcela deve mudar para pago
+        E o parceiro deve ficar com um crédito de 50 reais"""
+        cr_1 = self.cr_1
+        ctx = cr_1._context.copy()
+
+        ctx['active_id'] = self.cr_1.id
+        ctx['active_ids'] = [self.cr_1.id]
+        ctx['active_model'] = 'financial.move'
+        cr_1.action_confirm()
+        fr = self.financial_pay_receive.with_context(ctx)
+
+        pay = fr.create(
+            dict(
+                # journal_id=self.bank_journal_id.id,
+                bank_id=self.bank_112358.id,
+                currency_id=self.currency_euro.id,
+                date_payment=time.strftime('%Y') + '-01-10',
+                # account_type_id=self.type_receivable.id,
+                amount=150.00,
+                financial_type='receipt_item',
+
+            )
+        )
+        pay.doit()
+
+        self.assertEqual(-50.00, cr_1.amount_residual)
+        self.assertEqual('paid', cr_1.state)
