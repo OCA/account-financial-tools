@@ -29,6 +29,12 @@ class TestJournalLockDate(common.TransactionCase):
         self.journal = self.browse_ref("account.bank_journal")
 
     def test_journal_lock_date(self):
+        self.env.user.write({
+            'groups_id': [(3, self.ref('account.group_account_manager'))],
+        })
+        self.assertFalse(self.env.user.has_group(
+            'account.group_account_manager'))
+
         # create a move and post it
         move = self.account_move_obj.create({
             'date': fields.Date.today(),
@@ -86,3 +92,29 @@ class TestJournalLockDate(common.TransactionCase):
             })]
         })
         move3.post()
+
+    def test_journal_lock_date_adviser(self):
+        """ The journal lock date is ignored for Advisers """
+        self.env.user.write({
+            'groups_id': [(4, self.ref('account.group_account_manager'))],
+        })
+        self.assertTrue(self.env.user.has_group(
+            'account.group_account_manager'))
+
+        # lock journal
+        self.journal.journal_lock_date = fields.Date.today()
+
+        # advisers can create moves before or on the lock date
+        self.account_move_obj.create({
+            'date': fields.Date.today(),
+            'journal_id': self.journal.id,
+            'line_ids': [(0, 0, {
+                'account_id': self.account.id,
+                'credit': 1000.0,
+                'name': 'Credit line',
+            }), (0, 0, {
+                'account_id': self.account2.id,
+                'debit': 1000.0,
+                'name': 'Debit line',
+            })]
+        })
