@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-18 13:48+0000\n"
+"POT-Creation-Date: 2017-05-01 13:20+0000\n"
+"PO-Revision-Date: 2017-05-05 21:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Ligne de relance"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:183
 msgid "Invoice date"
-msgstr ""
+msgstr "Invoice date"
 
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:182
