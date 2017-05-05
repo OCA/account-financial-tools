@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-01 13:16+0000\n"
+"PO-Revision-Date: 2017-05-01 13:16+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -60,29 +60,29 @@ msgstr "Kreirano"
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list_readonly
 msgid "Currencies available"
-msgstr ""
+msgstr "Raspoložive valute"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_to_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 msgid "Currencies to update with this service"
-msgstr ""
+msgstr "Valute za ažuriranje putem ovog servisa"
 
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 msgid "Currency Rate Update"
-msgstr ""
+msgstr "Ažuriranje tečajne liste"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_interval_type
 msgid "Currency update frequency"
-msgstr ""
+msgstr "Frekvencija ažuriranja tečajna"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_tree
 msgid "Currency update services"
-msgstr ""
+msgstr "Servisi za ažuriranje tečaja"
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,interval_type:0
@@ -116,7 +116,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_interval_number
 msgid "Frequency"
-msgstr ""
+msgstr "Frekvencija"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_id
@@ -143,7 +143,7 @@ msgstr ""
 #: code:addons/currency_rate_update/models/currency_rate_update.py:48
 #, python-format
 msgid "Interval number must be >= 0"
-msgstr ""
+msgstr "Interval mora biti >= 0."
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
