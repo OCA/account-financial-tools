@@ -1,0 +1,197 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_reversal
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-23 03:37+0000\n"
+"PO-Revision-Date: 2016-11-23 03:37+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_reversal
+#: model:ir.model,name:account_reversal.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
+msgid "Check this box if your entry has to be reversed at the end of period."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
+msgid "Create reversal journal entries"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model,name:account_reversal.model_account_move_reverse
+msgid "Create reversal of account moves"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_uid
+msgid "Created by"
+msgstr "Luonut"
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_date
+msgid "Created on"
+msgstr "Luotu"
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_display_name
+msgid "Display Name"
+msgstr "Nimi"
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_date
+msgid ""
+"Enter the date of the reversal account entries. By default, Odoo proposes "
+"the same date of the move to reverse."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
+msgid ""
+"Enter the date of the reversal account entries. If empty, Odoo uses the same"
+" journal of the move to reverse."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
+msgid "Entries Ref. Prefix"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_line_prefix
+msgid "Items Name Prefix"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
+#: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
+msgid "Journal Entries to be Reversed"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse___last_update
+msgid "Last Modified on"
+msgstr "Viimeksi muokattu"
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_write_uid
+msgid "Last Updated by"
+msgstr "Viimeksi päivittänyt"
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_write_date
+msgid "Last Updated on"
+msgstr "Viimeksi päivitetty"
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_post
+msgid "Mark this if you want to post reversal move"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
+msgid "Mark this if you want to reconcile items of both moves."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_post
+msgid "Post"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
+msgid ""
+"Prefix that will be added to the 'Name' of the reversal account entrie "
+"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE:"
+" A space is added after the prefix)."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_move_prefix
+msgid ""
+"Prefix that will be added to the 'Ref' of the reversal account entries. If "
+"empty, Odoo uses the Ref of the move to reverse. (NOTE: A space is added "
+"after the prefix)."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
+msgid "Reconcile"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_date
+msgid "Reversal Date"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3580
+msgid "Reversal Entry"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_journal_id
+msgid "Reversal Journal"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
+msgid "Reverse Entries"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/wizard/account_move_reverse.py:62
+#, python-format
+msgid "Reverse moves"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
+msgid ""
+"This will create reversal for all selected entries whether checked 'to be "
+"reversed' or not."
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_to_be_reversed
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
+msgid "To Be Reversed"
+msgstr ""
+
+#. module: account_reversal
+#: code:addons/account_reversal/models/account_move.py:51
+#, python-format
+msgid "Wrong company Journal is '%s' but we have '%s'"
+msgstr ""
+
+#. module: account_reversal
+#: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
+msgid "or"
+msgstr "tai"
