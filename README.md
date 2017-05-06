@@ -30,6 +30,7 @@ addon | version | summary
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
 [account_permanent_lock_move](account_permanent_lock_move/) | 10.0.1.0.0 | Permanent Lock Move
+[account_reversal](account_reversal/) | 10.0.1.0.0 | Wizard for creating a reversal account move
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
 [currency_rate_update](currency_rate_update/) | 10.0.1.0.0 | Currency Rate Update
 
@@ -61,7 +62,6 @@ addon | version | summary
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
 [account_renumber](account_renumber/) | 9.0.1.0.0 (unported) | Account Renumber Wizard
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 (unported) | Delete the accounting setup from an otherwise reusable database
-[account_reversal](account_reversal/) | 8.0.1.0.0 (unported) | Account Reversal
 [account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 (unported) | Tax analysis
 [account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 (unported) | Tax chart for a period interval
 [account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
