@@ -62,8 +62,6 @@ addon | version | summary
 [account_move_template](account_move_template/) | 8.0.1.0.0 (unported) | Templates for recurring Journal Entries
 [account_renumber](account_renumber/) | 9.0.1.0.0 (unported) | Account Renumber Wizard
 [account_reset_chart](account_reset_chart/) | 8.0.1.0.0 (unported) | Delete the accounting setup from an otherwise reusable database
-[account_tax_analysis](account_tax_analysis/) | 8.0.1.0.0 (unported) | Tax analysis
-[account_tax_chart_interval](account_tax_chart_interval/) | 8.0.1.0.0 (unported) | Tax chart for a period interval
 [account_tax_update](account_tax_update/) | 1.0.44 (unported) | Update tax wizard
 [async_move_line_importer](async_move_line_importer/) | 0.1.2 (unported) | Asynchronous move/move line CSV importer
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 (unported) | Make sure currency rates used are always up-to-update
