@@ -80,11 +80,12 @@ class AbstractFinancial(models.AbstractModel):
     bank_id = fields.Many2one(
         string=u'Bank Account',
         comodel_name='res.partner.bank',
-        required=True,
     )
     company_id = fields.Many2one(
         string='Company',
         comodel_name='res.company',
+        default=lambda self: self.env.user.company_id.id,
+        required=True,
     )
     note = fields.Text(
         string='Note',
@@ -119,16 +120,12 @@ class AbstractFinancial(models.AbstractModel):
     account_type_id = fields.Many2one(
         comodel_name='account.account.type',
         string=u'Category',
-        # required=_required_fields,
-        # readonly=True,
-        # states=_readonly_state,
+        required=True,
         help="The partner account used for this invoice."
     )
     document_number = fields.Char(
         string=u"Document Nº",
-        required=_required_fields,
-        readonly=True,
-        states=_readonly_state,
+        required=True,
         track_visibility=_track_visibility_onchange,
     )
 

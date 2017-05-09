@@ -35,7 +35,6 @@ class FinancialMoveCreate(models.TransientModel):
     )
     document_number = fields.Char(
         required=True,
-        readonly=False,
     )
     date = fields.Date(
         string=u'Financial date',
