@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"POT-Creation-Date: 2017-05-05 22:24+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/nl/)\n"
@@ -160,7 +160,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_summary:0
 msgid "Summary"
-msgstr ""
+msgstr "Samenvatting"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0 field:move.line.importer,report:0

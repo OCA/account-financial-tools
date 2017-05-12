@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-05-05 22:23+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Russian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ru/)\n"
@@ -67,7 +67,7 @@ msgstr ""
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:83
 msgid "Total:"
-msgstr ""
+msgstr "Итого:"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.move.line,check_deposit_id:0
@@ -256,7 +256,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0
 msgid "Done"
-msgstr ""
+msgstr "Завершен"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0

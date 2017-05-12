@@ -10,17 +10,17 @@ msgstr ""
 "POT-Creation-Date: 2017-05-05 22:23+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_fees_type:0
 msgid "unknown"
-msgstr "desconocido"
+msgstr ""
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_currency_id:0
@@ -60,12 +60,12 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:179
 msgid "Summary"
-msgstr "Resumen"
+msgstr "Samenvatting"
 
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:188
 msgid "Currency"
-msgstr "Moneda"
+msgstr ""
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_fixed_amount:0
@@ -87,7 +87,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:174
 msgid "Dear"
-msgstr "Estimado"
+msgstr ""
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_dunning_fees_computer
@@ -102,7 +102,7 @@ msgstr ""
 #. module: account_credit_control_dunning_fees
 #: selection:credit.control.policy.level,dunning_fees_type:0
 msgid "Fixed"
-msgstr "Fijo"
+msgstr ""
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_run
