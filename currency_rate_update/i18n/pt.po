@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-11 00:39+0000\n"
+"PO-Revision-Date: 2017-05-11 00:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
@@ -147,7 +147,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação Em"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-11 00:38+0000\n"
+"PO-Revision-Date: 2017-05-11 00:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (Ecuador) (https://www.transifex.com/oca/teams/23907/es_EC/)\n"
 "MIME-Version: 1.0\n"
@@ -143,12 +143,12 @@ msgstr "Compañia"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_currency_id
@@ -185,7 +185,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: account_check_deposit
 #: selection:account.check.deposit,state:0
@@ -207,7 +207,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit_journal_default_account_id
@@ -233,17 +233,17 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización de"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización en"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_line_ids

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-11 00:38+0000\n"
+"PO-Revision-Date: 2017-05-11 00:38+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -280,7 +280,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_is_reconcile
 msgid "Reconcile"
-msgstr ""
+msgstr "Reconciliar"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit

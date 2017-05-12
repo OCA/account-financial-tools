@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-11 00:39+0000\n"
+"PO-Revision-Date: 2017-05-11 00:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Zobraziť meno"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
@@ -120,7 +120,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,help:currency_rate_update.field_currency_rate_update_service_max_delta_days
@@ -147,7 +147,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Posledná modifikácia"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid

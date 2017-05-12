@@ -3,14 +3,14 @@
 # * currency_rate_update
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-01 02:44+0000\n"
-"PO-Revision-Date: 2016-07-01 02:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-05-11 00:39+0000\n"
+"PO-Revision-Date: 2017-05-11 00:39+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/oca/teams/23907/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,19 +19,20 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: currency_rate_update
+#: model:ir.ui.view,arch_db:currency_rate_update.view_account_config_settings
+msgid "Auto-download Rates"
+msgstr ""
+
+#. module: currency_rate_update
+#: model:ir.model.fields,field_description:currency_rate_update.field_account_config_settings_auto_currency_up
 #: model:ir.model.fields,field_description:currency_rate_update.field_res_company_auto_currency_up
-msgid "Automatic Update"
+msgid "Automatic Currency Rates Download"
 msgstr ""
 
 #. module: currency_rate_update
+#: model:ir.model.fields,help:currency_rate_update.field_account_config_settings_auto_currency_up
 #: model:ir.model.fields,help:currency_rate_update.field_res_company_auto_currency_up
-msgid "Automatic update of the currencies for this company"
-msgstr ""
-
-#. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:126
-#, python-format
-msgid "Base currency rate should be 1.00!"
+msgid "Automatic download of currency rates for this company"
 msgstr ""
 
 #. module: currency_rate_update
@@ -47,15 +48,16 @@ msgstr "Společnost"
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Vytvořil(a)"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Vytvořeno"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
+#: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list_readonly
 msgid "Currencies available"
 msgstr ""
 
@@ -66,15 +68,8 @@ msgid "Currencies to update with this service"
 msgstr ""
 
 #. module: currency_rate_update
-#: model:ir.actions.act_window,name:currency_rate_update.currency_rate_update_action
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
-#: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
 msgid "Currency Rate Update"
-msgstr ""
-
-#. module: currency_rate_update
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
-msgid "Currency update configuration"
 msgstr ""
 
 #. module: currency_rate_update
@@ -83,8 +78,6 @@ msgid "Currency update frequency"
 msgstr ""
 
 #. module: currency_rate_update
-#: model:ir.model.fields,field_description:currency_rate_update.field_res_company_services_to_use
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_tree
 msgid "Currency update services"
@@ -98,7 +91,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Zobrazovaný název"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
@@ -127,18 +120,26 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,help:currency_rate_update.field_currency_rate_update_service_max_delta_days
 msgid ""
 "If the time delta between the rate date given by the webservice and the "
 "current date exceeds this value, then the currency rate is not updated in "
-"OpenERP."
+"Odoo."
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:42
+#: code:addons/currency_rate_update/models/currency_rate_update.py:145
+#, python-format
+msgid ""
+"In company '%s', the rate of the main currency (%s) must be 1.00 (current "
+"rate: %s)."
+msgstr ""
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/models/currency_rate_update.py:48
 #, python-format
 msgid "Interval number must be >= 0"
 msgstr ""
@@ -146,17 +147,17 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Naposled upraveno"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
@@ -169,7 +170,7 @@ msgid "Max delta days"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:36
+#: code:addons/currency_rate_update/models/currency_rate_update.py:40
 #, python-format
 msgid "Max delta days must be >= 0"
 msgstr ""
@@ -185,14 +186,15 @@ msgid "Next run on"
 msgstr ""
 
 #. module: currency_rate_update
-#: model:ir.ui.view,arch_db:currency_rate_update.currency_auto_comp
-msgid "Refresh currencies"
+#: model:ir.actions.act_window,name:currency_rate_update.currency_rate_update_action
+#: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
+msgid "Rate Auto-download"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:123
+#: code:addons/currency_rate_update/services/currency_getter_interface.py:147
 #, python-format
-msgid "There is no main currency defined!"
+msgid "Unable to import urllib."
 msgstr ""
 
 #. module: currency_rate_update
@@ -202,7 +204,13 @@ msgstr ""
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form
-msgid "Update now!"
+msgid "Update now"
+msgstr ""
+
+#. module: currency_rate_update
+#: code:addons/currency_rate_update/services/currency_getter_interface.py:150
+#, python-format
+msgid "Web Service does not exist (%s)!"
 msgstr ""
 
 #. module: currency_rate_update
@@ -216,8 +224,13 @@ msgid "Week(s)"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/model/currency_rate_update.py:107
+#: code:addons/currency_rate_update/models/currency_rate_update.py:124
 #: sql_constraint:currency.rate.update.service:0
 #, python-format
 msgid "You can use a service only one time per company !"
+msgstr ""
+
+#. module: currency_rate_update
+#: model:ir.model,name:currency_rate_update.model_account_config_settings
+msgid "account.config.settings"
 msgstr ""

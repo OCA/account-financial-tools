@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-05-11 00:39+0000\n"
+"PO-Revision-Date: 2017-05-11 00:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/oca/teams/23907/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -48,12 +48,12 @@ msgstr "Company"
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Created by"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Created on"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
@@ -120,7 +120,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,help:currency_rate_update.field_currency_rate_update_service_max_delta_days
@@ -152,12 +152,12 @@ msgstr "Last Modified on"
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Last Updated by"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Last Updated on"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form

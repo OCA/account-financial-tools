@@ -3,14 +3,14 @@
 # * account_check_deposit
 # 
 # Translators:
-# Ediz Duman <neps1192@gmail.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: Ediz Duman <neps1192@gmail.com>, 2017\n"
+"POT-Creation-Date: 2017-05-11 00:38+0000\n"
+"PO-Revision-Date: 2017-05-11 00:38+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,12 +143,12 @@ msgstr "Firma"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturulma tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_currency_id
@@ -185,7 +185,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen ad"
 
 #. module: account_check_deposit
 #: selection:account.check.deposit,state:0
@@ -233,17 +233,17 @@ msgstr "Yevmiye Öğe"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "En son güncelleme tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "En son güncelleyen "
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "En son güncelleme tarihi"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_line_ids
