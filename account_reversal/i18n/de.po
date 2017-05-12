@@ -3,14 +3,14 @@
 # * account_reversal
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-08 03:37+0000\n"
-"PO-Revision-Date: 2017-01-08 03:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2017-05-30 00:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,19 +110,9 @@ msgid "Last Updated on"
 msgstr "Zuletzt geändert am"
 
 #. module: account_reversal
-#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_post
-msgid "Mark this if you want to post reversal move"
-msgstr ""
-
-#. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
 msgstr ""
-
-#. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_post
-msgid "Post"
-msgstr "bekanntgeben"
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
@@ -151,7 +141,7 @@ msgid "Reversal Date"
 msgstr "Umkehrdatum"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3581
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3707
 msgid "Reversal Entry"
 msgstr "Umkehrbuchung"
 
@@ -167,7 +157,7 @@ msgid "Reverse Entries"
 msgstr "Umkehrbuchungen"
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:62
+#: code:addons/account_reversal/wizard/account_move_reverse.py:59
 #, python-format
 msgid "Reverse moves"
 msgstr ""
@@ -188,7 +178,7 @@ msgid "To Be Reversed"
 msgstr "Umzukehren"
 
 #. module: account_reversal
-#: code:addons/account_reversal/models/account_move.py:51
+#: code:addons/account_reversal/models/account_move.py:57
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
 msgstr ""
