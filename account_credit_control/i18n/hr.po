@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-03-23 20:10+0000\n"
+"PO-Revision-Date: 2017-05-11 14:12+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -1109,7 +1109,7 @@ msgstr "Status"
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
-msgstr ""
+msgstr "Sažetak"
 
 #. module: account_credit_control
 #: help:account.invoice,credit_policy_id:0
