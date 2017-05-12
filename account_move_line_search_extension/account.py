@@ -47,7 +47,10 @@ class account_move_line(models.Model):
         if context and 'account_move_line_search_extension' in context:
             ana_obj = self.pool['account.analytic.account']
             for arg in args:
-                if arg[0] == 'analytic_account_id':
+                if (
+                    arg[0] == 'analytic_account_id' and
+                    isinstance(arg[0], basestring)
+                ):
                     ana_dom = ['|',
                                ('name', 'ilike', arg[2]),
                                ('code', 'ilike', arg[2])]
