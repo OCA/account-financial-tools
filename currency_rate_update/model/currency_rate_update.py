@@ -110,14 +110,17 @@ class CurrencyRateUpdateService(models.Model):
     @api.one
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        _logger.info(
-            'Starting to refresh currencies with service %s (company: %s)',
-            self.service, self.company_id.name)
         rate_obj = self.env['res.currency.rate']
         company = self.company_id
-        # The multi company currency can be set or no so we handle
-        # The two case
-        if company.auto_currency_up:
+        # The multi company currency can be set or no so we handle both cases
+        if not company.auto_currency_up:
+            _logger.info(
+                'Currency updates disabled (company: %s)',
+                self.company_id.name)
+        else:
+            _logger.info(
+                'Starting to refresh currencies with service %s (company: %s)',
+                self.service, self.company_id.name)
             main_currency = self.company_id.currency_id
             if not main_currency:
                 raise exceptions.Warning(_('There is no main '
