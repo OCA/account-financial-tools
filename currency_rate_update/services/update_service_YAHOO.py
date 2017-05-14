@@ -29,7 +29,12 @@ class YAHOOGetter(CurrencyGetterInterface):
         "SRD", "STD", "SVC", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP",
         "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VEF",
         "VND", "VUV", "WST", "XAF", "XAG", "XAU", "XCD", "XCP", "XDR", "XOF",
-        "XPD", "XPF", "XPT", "YER", "ZAR", "ZMW", "ZWL"]
+        "XPD", "XPF", "XPT", "YER", "ZAR", "ZMW", "ZWL", "BTC"]
+
+    # We can get a more accurate decimal rate by converting the other way
+    invert_currencies = [
+        "BTC",
+    ]
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
@@ -41,8 +46,12 @@ class YAHOOGetter(CurrencyGetterInterface):
             currency_array.remove(main_currency)
         for curr in currency_array:
             self.validate_cur(curr)
-            res = self.get_url(url % (main_currency + curr))
-            val = res.split(',')[1]
+            if curr in self.invert_currencies:
+                res = self.get_url(url % (curr + main_currency))
+                val = str(1.0 / float(res.split(',')[1]))
+            else:
+                res = self.get_url(url % (main_currency + curr))
+                val = res.split(',')[1]
             if val:
                 self.updated_currency[curr] = val
             else:
