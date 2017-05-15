@@ -7,7 +7,6 @@
       <field name="inherit_id" ref="account.view_move_form"/>
       <field name="arch" type="xml">
         <data>
-          <button name="button_validate" position="replace"/>
           <button name="button_cancel" position="after">
             <field name="update_posted" invisible="1"/>
           </button>

@@ -25,16 +25,12 @@ accountants validate them and correct the corresponding invoices before posting
 the moves.
 * It hides the Cancel button on account moves unless account_cancel is installed
 and cancellation is allowed on the corresponding journal. 
-* Additionnaly, the Post button is hidden on account moves, therefore providing
-a framework where the user work with draft moves until everything is correct,
-and validates all account moves at once and the end. [2]
 
 [1] provided the parameter is set in Settings > Configuration, if this
 parameter is not set the moves generated from invoices and bank statement
 always remain in draft state ignoring the "Skip draft move flag" on
 account journal. This parameter is not set by default for backward
 compatibility with previous versions of account_default_draft_move.
-[2] this behaviour will be made configurable in the near future.
 
 Installation
 ============
