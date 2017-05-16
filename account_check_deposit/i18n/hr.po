@@ -3,15 +3,15 @@
 # * account_check_deposit
 # 
 # Translators:
-# Bole <bole@dajmi5.com>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-11-28 23:23+0000\n"
+"PO-Revision-Date: 2017-11-28 23:23+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -186,7 +186,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_display_name
 msgid "Display Name"
-msgstr "Naziv "
+msgstr "Prikaži ime"
 
 #. module: account_check_deposit
 #: selection:account.check.deposit,state:0
@@ -234,7 +234,7 @@ msgstr "Stavka dnevnika"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit___last_update
 msgid "Last Modified on"
-msgstr "Zadnje modificirano"
+msgstr "Zadnja izmjena dana"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_uid
@@ -244,7 +244,7 @@ msgstr "Zadnji ažurirao"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr "Zadnje ažurirano dana"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_line_ids
