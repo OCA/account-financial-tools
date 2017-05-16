@@ -2,8 +2,8 @@
 # Copyright 2016 - Tecnativa - Angel Moya <odoo@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests.common import TransactionCase
-from openerp import exceptions
+from odoo.tests.common import TransactionCase
+from odoo import exceptions
 
 
 class TestAccountInvoiceTaxRequired(TransactionCase):
