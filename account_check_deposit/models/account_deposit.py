@@ -237,9 +237,8 @@ class AccountCheckDeposit(models.Model):
             counter_vals['move_id'] = move.id
             aml_obj.create(counter_vals)
 
-            move.post()
+            move.validate()
             deposit.write({'state': 'done', 'move_id': move.id})
-            # We have to reconcile after post()
             for reconcile_lines in to_reconcile_lines:
                 reconcile_lines.reconcile()
         return True
