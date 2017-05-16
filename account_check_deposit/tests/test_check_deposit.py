@@ -189,5 +189,5 @@ class TestPayment(AccountingTestCase):
 
         self.assertEqual(check_deposit.total_amount, 300)
         self.assertEqual(liquidity_aml.debit, 300)
-        self.assertEqual(check_deposit.move_id.state, 'posted')
+        self.assertEqual(check_deposit.move_id.state, 'draft')
         self.assertEqual(check_deposit.state, 'done')
