@@ -31,6 +31,9 @@ column_renames = {
         ('asset_value', 'depreciation_base'),
         ('category_id', 'profile_id'),
     ],
+    'account_account': [
+        ('asset_category_id', 'asset_profile_id'),
+    ],
 }
 
 table_renames = [
