@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 23:12+0000\n"
-"PO-Revision-Date: 2017-03-24 18:23+0000\n"
+"POT-Creation-Date: 2017-05-12 22:18+0000\n"
+"PO-Revision-Date: 2017-05-13 18:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -905,7 +905,7 @@ msgstr ""
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #. module: account_asset_management
 #: field:account.account,asset_category_id:0
