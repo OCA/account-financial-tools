@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp import models, api
+from odoo import models, api
 
 
 class AccountAssetDepreciationLine(models.Model):
