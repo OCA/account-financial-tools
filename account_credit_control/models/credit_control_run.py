@@ -20,8 +20,8 @@
 ##############################################################################
 import logging
 
-from odoo import models, fields, api, _
-from odoo.exceptions import Warning
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 logger = logging.getLogger(__name__)
 
@@ -84,16 +84,16 @@ class CreditControlRun(models.Model):
         runs = self.search([('date', '>', controlling_date)],
                            order='date DESC', limit=1)
         if runs:
-            raise Warning(_('A run has already been executed more '
-                            'recently than %s') % (runs.date))
+            raise UserError(_('A run has already been executed more '
+                              'recently than %s') % (runs.date))
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
-            raise Warning(_('A credit control line more '
-                            'recent than %s exists at %s') %
-                          (controlling_date, lines.date))
+            raise UserError(_('A credit control line more '
+                              'recent than %s exists at %s') %
+                            (controlling_date, lines.date))
 
     @api.multi
     @api.returns('credit.control.line')
@@ -105,7 +105,7 @@ class CreditControlRun(models.Model):
 
         policies = self.policy_ids
         if not policies:
-            raise Warning(_('Please select a policy'))
+            raise UserError(_('Please select a policy'))
 
         report = ''
         generated = self.env['credit.control.line']
@@ -157,8 +157,8 @@ class CreditControlRun(models.Model):
         except Exception:
             # In case of exception openerp will do a rollback
             # for us and free the lock
-            raise Warning(_('A credit control run is already running '
-                            'in background, please try later.'))
+            raise UserError(_('A credit control run is already running '
+                              'in background, please try later.'))
 
         self._generate_credit_lines()
         return True
