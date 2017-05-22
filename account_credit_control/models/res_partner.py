@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api
-from odoo.exceptions import Warning, ValidationError
+from odoo import api, fields, models
+from odoo.exceptions import UserError, ValidationError
 
 
 class ResPartner(models.Model):
@@ -54,6 +54,6 @@ class ResPartner(models.Model):
             policy = partner.credit_policy_id
             try:
                 policy.check_policy_against_account(account)
-            except Warning as err:
+            except UserError as err:
                 # constrains should raise ValidationError exceptions
                 raise ValidationError(err)

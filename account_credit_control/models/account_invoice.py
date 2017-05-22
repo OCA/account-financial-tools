@@ -18,8 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, fields, api, _
-from odoo.exceptions import Warning
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountInvoice(models.Model):
@@ -57,7 +57,7 @@ class AccountInvoice(models.Model):
                                ('state', '!=', 'draft')]
             cc_nondraft_lines = cc_line_obj.search(nondraft_domain)
             if cc_nondraft_lines:
-                raise Warning(
+                raise UserError(
                     _('You cannot cancel this invoice.\n'
                       'A payment reminder has already been '
                       'sent to the customer.\n'

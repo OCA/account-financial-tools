@@ -49,26 +49,26 @@
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
             <search string="Control Credit Lines">
-                <group string="Filters">
-                    <filter name="filter_draft" icon="terp-mail-message-new"
+                <group string="Filters" name="filters">
+                    <filter name="filter_draft" icon="fa-envelope"
                             string="Draft" domain="[('state', '=', 'draft')]"
                             help="Draft lines have to be triaged."/>
-                    <filter name="filter_to_be_sent" icon="terp-mail-forward"
+                    <filter name="filter_to_be_sent" icon="fa-share"
                             string="Ready To Send"
                             domain="[('state', '=', 'to_be_sent')]"
                             help="These lines are ready to send by email or by letter using the Actions."/>
-                    <filter name="filter_ignored" icon="terp-mail_delete"
+                    <filter name="filter_ignored" icon="fa-times"
                             string="Ignored"
                             domain="[('state', '=', 'ignored')]"
                             help="Lines which have been ignored from previous runs."/>
-                    <filter name="filter_sent" icon="terp-mail-replied"
+                    <filter name="filter_sent" icon="fa-paper-plane"
                             string="Sent" domain="[('state', '=', 'sent')]"
                             help="Lines already sent."/>
-                    <filter name="filter_error" icon="terp-gtk-stop"
+                    <filter name="filter_error" icon="fa-exclamation-triangle"
                             string="Error"
                             domain="[('state', 'in', ('error', 'email_error'))]"
                             help="An error has occured during the sending of the email."/>
-                    <filter name="filter_manual" icon="terp-gtk-stop"
+                    <filter name="filter_manual" icon="fa-hand-paper-o"
                             string="Manual change"
                             domain="[('manually_overridden', '=', True)]"
                             help="The line was deprecated by a manual change of policy on invoice."/>
@@ -79,7 +79,7 @@
                     <field name="policy_id"/>
                 </group>
                 <newline/>
-                <group expand="0" string="More...">
+                <group expand="0" string="More..." name="group_by">
                     <field name="partner_id"/>
                     <field name="account_id"/>
                     <field name="invoice_id"/>
