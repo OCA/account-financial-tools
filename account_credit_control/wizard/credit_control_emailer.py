@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
-from odoo.exceptions import Warning
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class CreditControlEmailer(models.TransientModel):
@@ -60,7 +60,7 @@ class CreditControlEmailer(models.TransientModel):
     def email_lines(self):
         self.ensure_one()
         if not self.line_ids:
-            raise Warning(_('No credit control lines selected.'))
+            raise UserError(_('No credit control lines selected.'))
 
         comm_obj = self.env['credit.control.communication']
 
