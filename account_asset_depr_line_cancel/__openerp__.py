@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
     'name': 'Assets Management - Cancel button',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'depends': [
         'account_asset',
     ],

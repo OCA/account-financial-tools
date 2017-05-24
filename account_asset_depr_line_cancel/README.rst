@@ -17,7 +17,7 @@ button with a white cross in a red circle that allows to remove that entry.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/9.0
 
 Bug Tracker
 ===========
@@ -36,6 +36,7 @@ Contributors
 ------------
 
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* David Vidal <david.vidal@tecnativa.com>
 
 Maintainer
 ----------
