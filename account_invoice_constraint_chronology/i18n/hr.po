@@ -3,14 +3,16 @@
 # * account_invoice_constraint_chronology
 # 
 # Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hr/)\n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2017-05-30 00:47+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,12 +20,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_invoice_constraint_chronology
-#: field:account.journal,check_chronology:0
-msgid "Check Chronology"
-msgstr ""
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal_check_chronology
+msgid "Check chronology"
+msgstr "Provjeri kronološki"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:59
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:31
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
@@ -31,7 +33,7 @@ msgid ""
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:78
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:48
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "
