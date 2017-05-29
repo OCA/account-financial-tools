@@ -2,9 +2,10 @@
 # Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from datetime import datetime, timedelta
+
 import odoo.tests.common as common
 from odoo.exceptions import UserError
-from datetime import datetime, timedelta
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
@@ -53,24 +54,24 @@ class TestAccountConstraintChronology(common.TransactionCase):
         return journal
 
     def create_simple_invoice(self, journal_id, date):
-        invoice = self.env['account.invoice'].create(
-            {'partner_id': self.env.ref('base.res_partner_2').id,
-             'account_id': self.account_account.id,
-             'type': 'in_invoice',
-             'journal_id': journal_id,
-             'date_invoice': date,
-             'state': 'draft',
-             })
+        invoice = self.env['account.invoice'].create({
+            'partner_id': self.env.ref('base.res_partner_2').id,
+            'account_id': self.account_account.id,
+            'type': 'in_invoice',
+            'journal_id': journal_id,
+            'date_invoice': date,
+            'state': 'draft',
+        })
 
-        self.env['account.invoice.line'].create(
-            {'product_id': self.product.id,
-             'quantity': 1.0,
-             'price_unit': 100.0,
-             'invoice_id': invoice.id,
-             'name': 'product that cost 100',
-             'account_id': self.account_account_line.id,
-             'account_analytic_id': self.analytic_account.id,
-             })
+        self.env['account.invoice.line'].create({
+            'product_id': self.product.id,
+            'quantity': 1.0,
+            'price_unit': 100.0,
+            'invoice_id': invoice.id,
+            'name': 'product that cost 100',
+            'account_id': self.account_account_line.id,
+            'account_analytic_id': self.analytic_account.id,
+        })
         return invoice
 
     def test_invoice_draft(self):
