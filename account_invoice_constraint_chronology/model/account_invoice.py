@@ -23,7 +23,7 @@ class AccountInvoice(models.Model):
                                  ('date_invoice', '<', inv.date_invoice),
                                  ('journal_id', '=', inv.journal_id.id)],
                                 limit=1)
-                if len(invoices) > 0:
+                if invoices:
                     date_invoice_format = fields.Date.\
                         from_string(inv.date_invoice)
                     date_invoice_tz = fields\
@@ -40,7 +40,7 @@ class AccountInvoice(models.Model):
                                              inv.journal_id.id)],
                                            limit=1)
 
-                    if len(invoices) > 0:
+                    if invoices:
                         date_invoice_format = fields.Date.\
                             from_string(inv.date_invoice)
                         date_invoice_tz = fields\
