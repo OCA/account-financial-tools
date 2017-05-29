@@ -1,23 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
 from odoo import _, api, fields, models
@@ -99,9 +83,7 @@ class CreditControlPolicyChanger(models.TransientModel):
     def _set_invoice_policy(self, move_lines, policy):
         """ Force policy on invoice """
         invoice_obj = self.env['account.invoice']
-        invoice_ids = set(line.invoice.id for line in move_lines
-                          if line.invoice)
-        invoices = invoice_obj.browse(invoice_ids)
+        invoices = move_lines.mapped('invoice_id')
         invoices.write({'credit_policy_id': policy.id})
 
     @api.model

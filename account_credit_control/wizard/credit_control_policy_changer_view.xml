@@ -29,7 +29,6 @@
                             name="set_new_policy"
                             string="Set new policy"
                             type="object"/>
-                    or
                     <button class="oe_link"
                             special="cancel"
                             string="Cancel"/>

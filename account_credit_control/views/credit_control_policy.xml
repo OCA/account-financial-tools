@@ -70,7 +70,8 @@
     <menuitem
             name="Credit Control"
             parent="account.menu_finance_configuration"
-            id="base_credit_control_configuration_menu"/>
+            id="base_credit_control_configuration_menu"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
 
     <record model="ir.actions.act_window"
             id="credit_policy_configuration_action">

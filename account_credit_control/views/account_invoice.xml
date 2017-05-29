@@ -17,7 +17,7 @@
                 <page string="Credit Control"
                       groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info">
                     <group>
-                        <field name="credit_policy_id" widget="selection"
+                        <field name="credit_policy_id"
                                string="Manual Credit Control Policy"
                                attrs="{'invisible': [('credit_policy_id', '=', False)]}"
                                groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info"/>

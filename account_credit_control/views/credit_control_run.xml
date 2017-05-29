@@ -20,7 +20,7 @@
                     <button name="generate_credit_lines"
                             string="Compute Credit Control Lines"
                             class="oe_highlight"
-                            type="object" icon="gtk-execute"
+                            type="object" icon="fa-cogs"
                             attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                     <button name="open_credit_lines"
                             string="Open Credit Control Lines"
@@ -68,6 +68,7 @@
             parent="base_credit_control_menu"
             action="credit_control_run"
             sequence="10"
-            id="credit_control_run_menu"/>
+            id="credit_control_run_menu"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
 
 </odoo>
