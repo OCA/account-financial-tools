@@ -20,7 +20,6 @@
                 <footer>
                     <button class="oe_highlight" name="print_lines"
                             string="Print" type="object"/>
-                    or
                     <button class="oe_link" special="cancel" string="Cancel"/>
                 </footer>
             </form>

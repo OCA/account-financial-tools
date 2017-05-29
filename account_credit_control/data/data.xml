@@ -61,13 +61,10 @@
                ref="email_template_credit_control_base"/>
         <field name="policy_id" ref="credit_control_3_time"/>
         <field name="channel">email</field>
-        <field name="custom_text">Our records indicate that we have not
-            received the payment of the above mentioned invoice.
-            If it has already been sent, please disregard this notice. If
-            not, please proceed with payment within 10 days.
+        <field name="custom_text">Our records indicate that we have not received the payment of the invoice mentioned below.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
-            Thank you in advance for your anticipated cooperation in this
-            matter.
+            Thank you in advance for your anticipated cooperation in this matter.
 
             Best regards
         </field>
@@ -93,14 +90,10 @@
                ref="email_template_credit_control_base"/>
         <field name="policy_id" ref="credit_control_3_time"/>
         <field name="channel">email</field>
-        <field name="custom_text">Our records indicate that we have not yet
-            received the payment of the above mentioned invoice despite our
-            first reminder.
-            If it has already been sent, please disregard this notice. If
-            not, please proceed with payment within 5 days.
+        <field name="custom_text">Our records indicate that we have not yet received the payment of the invoice mentioned below despite our first reminder.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.
 
-            Thank you in advance for your anticipated cooperation in this
-            matter.
+            Thank you in advance for your anticipated cooperation in this matter.
 
             Best regards
         </field>
@@ -125,20 +118,14 @@
         <field name="policy_id" ref="credit_control_3_time"/>
         <field name="channel">letter</field>
         <field name="custom_text">
-            Our records indicate that we still have not received the
-            payment of the above mentioned invoice despite our two
-            reminders.
-            If payment have already been sent, please disregard this
-            notice. If not, please proceed with payment.
-            If your payment has not been received in the next 5 days, your
-            file will be transfered to our debt collection agency.
+            Our records indicate that we still have not received the payment of the invoice mentioned below despite our two reminders.
+            If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
 
-            Should you need us to arrange a payment plan for you, please
-            advise.
+            Should you need us to arrange a payment plan for you, please advise.
             A customer account statement is enclosed for you convenience.
 
-            Thank you in advance for your anticipated cooperation in this
-            matter.
+            Thank you in advance for your anticipated cooperation in this matter.
 
             Best regards
         </field>
@@ -173,13 +160,10 @@
                ref="email_template_credit_control_base"/>
         <field name="policy_id" ref="credit_control_2_time"/>
         <field name="channel">email</field>
-        <field name="custom_text">Our records indicate that we have not
-            received the payment of the above mentioned invoice.
-            If it has already been sent, please disregard this notice. If
-            not, please proceed with payment within 10 days.
+        <field name="custom_text">Our records indicate that we have not received the payment of the invoice mentioned below.
+            If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.
 
-            Thank you in advance for your anticipated cooperation in this
-            matter.
+            Thank you in advance for your anticipated cooperation in this matter.
 
             Best regards
         </field>
@@ -203,22 +187,15 @@
                ref="email_template_credit_control_base"/>
         <field name="policy_id" ref="credit_control_2_time"/>
         <field name="channel">letter</field>
-        <field name="custom_text">Our records indicate that we still have
-            not received the payment of the above mentioned invoice despite
-            our reminder.
+        <field name="custom_text">Our records indicate that we still have not received the payment of the mentioned below invoice despite our reminder.
 
-            If payment have already been sent, please disregard this
-            notice. If not, please proceed with payment.
-            If your payment has not been received in the next 5 days, your
-            file will be transfered to our debt
-            collection agency.
+            If payment have already been sent, please disregard this notice. If not, please proceed with payment.
+            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.
 
-            Should you need us to arrange a payment plan for you, please
-            advise.
+            Should you need us to arrange a payment plan for you, please advise.
             A customer account statement is enclosed for you convenience.
 
-            Thank you in advance for your anticipated cooperation in this
-            matter.
+            Thank you in advance for your anticipated cooperation in this matter.
 
             Best regards
         </field>

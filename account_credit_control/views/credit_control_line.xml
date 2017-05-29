@@ -49,6 +49,18 @@
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
             <search string="Control Credit Lines">
+                <group>
+                    <field name="date"/>
+                    <field name="channel"/>
+                    <field name="policy_id"/>
+                    <separator />
+                    <field name="partner_id"/>
+                    <field name="account_id"/>
+                    <field name="invoice_id"/>
+                    <field name="level"/>
+                    <field name="policy_level_id"/>
+                </group>
+
                 <group string="Filters" name="filters">
                     <filter name="filter_draft" icon="fa-envelope"
                             string="Draft" domain="[('state', '=', 'draft')]"
@@ -72,47 +84,24 @@
                             string="Manual change"
                             domain="[('manually_overridden', '=', True)]"
                             help="The line was deprecated by a manual change of policy on invoice."/>
-                    <separator orientation="vertical"/>
-
-                    <field name="date"/>
-                    <field name="channel"/>
-                    <field name="policy_id"/>
                 </group>
-                <newline/>
-                <group expand="0" string="More..." name="group_by">
-                    <field name="partner_id"/>
-                    <field name="account_id"/>
-                    <field name="invoice_id"/>
-                    <field name="level"/>
-                    <field name="policy_level_id"/>
-                </group>
-
-                <newline/>
-                <group expand="0" string="Group By...">
-                    <separator orientation="vertical"/>
+                <group expand="0" string="Group By" name="group_by">
                     <filter domain='[]' context="{'group_by': 'date'}"
                             icon="terp-go-month" string="Run date"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'level'}"
                             icon="terp-gtk-jump-to-rtl" string="Level"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'partner_id'}"
                             icon="terp-partner" string="Partner"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'account_id'}"
                             icon="terp-folder-green" string="Account"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'invoice_id'}"
                             icon="terp-document-new" string="Invoice"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'policy_id'}"
                             icon="terp-document-new" string="Credit policy"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]'
                             context="{'group_by': 'policy_level_id'}"
                             icon="terp-document-new"
                             string="Credit policy level"/>
-                    <separator orientation="vertical"/>
                     <filter domain='[]' context="{'group_by': 'channel'}"
                             icon="terp-document-new" string="Channel"/>
                     <filter domain='[]'
@@ -151,8 +140,9 @@
 
     <menuitem
             name="Credit Control"
-            parent="account.menu_finance_reports"
-            id="base_credit_control_menu" sequence="10"/>
+            parent="account.menu_finance_entries"
+            id="base_credit_control_menu" sequence="10"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info"/>
 
     <record model="ir.actions.act_window" id="credit_control_line_action">
         <field name="name">Credit Control Lines</field>
@@ -174,7 +164,8 @@
             parent="base_credit_control_menu"
             action="credit_control_line_action"
             sequence="20"
-            id="credit_control_line_action_menu"/>
+            id="credit_control_line_action_menu"
+            />
 
 
 </odoo>

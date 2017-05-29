@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-# Copyright 2012-2014 Camptocamp SA
-# Copyright 2017 Okia SPRL (https://okia.be)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from . import account_account
 from . import account_invoice
 from . import credit_control_line
