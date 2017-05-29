@@ -8,7 +8,7 @@ from odoo import models, fields, api
 class AccountJournal(models.Model):
     _inherit = ['account.journal']
 
-    check_chronology = fields.Boolean(string='Check Chronology', default=False)
+    check_chronology = fields.Boolean(default=False)
 
     @api.onchange('type')
     def _onchange_type(self):
