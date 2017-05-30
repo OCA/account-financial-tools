@@ -26,6 +26,7 @@ from .currency_getter_interface import CurrencyGetterInterface
 
 import re
 
+
 class GOOGLEGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Google currency conversion service
