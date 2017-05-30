@@ -118,6 +118,7 @@ class TestPayment(AccountingTestCase):
 
     def create_invoice(self, amount=100, type='out_invoice', currency_id=None):
         """ Returns an open invoice """
+        default_tax = self.env.ref('l10n_generic_coa.1_sale_tax_template')
         invoice = self.invoice_model.create({
             'partner_id': self.partner_agrolait.id,
             'reference_type': 'none',
@@ -135,6 +136,7 @@ class TestPayment(AccountingTestCase):
             'invoice_id': invoice.id,
             'name': 'something',
             'account_id': self.account_revenue.id,
+            'invoice_line_tax_ids': [(6, 0, [default_tax.id])]
         })
         invoice.action_invoice_open()
         return invoice
