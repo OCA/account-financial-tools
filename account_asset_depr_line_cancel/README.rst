@@ -19,6 +19,11 @@ button with a white cross in a red circle that allows to remove that entry.
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/92/9.0
 
+Known Issues
+============
+
+- It can cause a sequence gap if the entries are posted (with a sequence number)
+
 Bug Tracker
 ===========
 
