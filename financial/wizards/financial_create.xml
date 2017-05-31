@@ -72,9 +72,9 @@
 
     <record model="ir.ui.menu" id="financial_create_menu">
         <field name="name">New financial move</field>
-        <field name="parent_id" ref="financial_dashboard_menu"/>
+        <field name="parent_id" ref="financial_top_menu"/>
         <field name="action" ref="financial_create_act_window"/>
-        <field name="sequence" eval="50"/>
+        <field name="sequence" eval="17"/>
     </record>
 
 </data>
