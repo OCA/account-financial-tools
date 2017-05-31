@@ -1,0 +1,1274 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* financial
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-31 00:18+0000\n"
+"PO-Revision-Date: 2017-05-31 00:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "<strong>Date from :</strong>"
+msgstr "Data de:"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "<strong>Date to :</strong>"
+msgstr "Data até:"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "<strong>Target Moves:</strong>"
+msgstr "Lançamentos"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_account_type_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_account_type_id
+msgid "Account"
+msgstr ""
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.account_account_type_act_window
+#: model:ir.ui.menu,name:financial.account_account_type_menu
+msgid "Account Account Type"
+msgstr "Categorias"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Account Payable"
+msgstr "Contas a pagar"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Account Receivable"
+msgstr "Contas a receber"
+
+#. module: financial
+#: model:ir.model,name:financial.model_account_account_type
+#: model:ir.ui.view,arch_db:financial.view_account_type_form
+#: model:ir.ui.view,arch_db:financial.view_account_type_tree
+msgid "Account Type"
+msgstr "Categoria"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_account_analytic_search
+msgid "Account analytic search"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_account_type_id
+msgid "Account type id"
+msgstr "Categoria"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "All Entries"
+msgstr "Todos os lançamentos"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "All Posted Entries"
+msgstr "Todos os lançamentos postados"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_balance
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_amount
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Amount"
+msgstr "Valor"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "Amount Paid"
+msgstr "Valor pago"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_analytic_account_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_analytic_account_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_analytic_account_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_analytic_account_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_analytic_account_id
+msgid "Analytic account"
+msgstr "Centro de custo"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Analytic account is"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_cumulative_balance
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+#: model:ir.ui.view,arch_db:financial.res_partner_bank_form_view
+msgid "Balance"
+msgstr "Saldo"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_bank_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_bank_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_bank_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_bank_id
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_bank_id
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.res_partner_bank_act_window
+#: model:ir.model,name:financial.model_res_partner_bank
+#: model:ir.ui.menu,name:financial.res_partner_bank_menu
+msgid "Bank Accounts"
+msgstr "Contas Bancárias"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Bank account is"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_date_business_maturity
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_business_maturity
+msgid "Business maturity"
+msgstr "Vencimento útil"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "By partner"
+msgstr "Parceiro"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "By payment date"
+msgstr "Data de pagamento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "By payment journal"
+msgstr "Diário"
+
+#. module: financial
+#: selection:abstract.financial,state:0
+#: selection:financial.cashflow,state:0
+#: selection:financial.move,state:0
+#: selection:financial.move.create,state:0
+#: model:ir.actions.act_window,name:financial.financial_cancel_act_window
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_cancel
+#: model:ir.ui.view,arch_db:financial.financial_cancel_form_view
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+#: model:ir.ui.view,arch_db:financial.financial_edit_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Cancel (-)"
+msgstr "Cancelado (-)"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_reason
+msgid "Cancel reason"
+msgstr "Motivo do cancelamento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_graph
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_pivot
+msgid "Cash Flow"
+msgstr "Fluxo de caixa"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_cashflow_act_window
+#: model:ir.ui.menu,name:financial.financial_cashflow_menu
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_tree_view
+msgid "Cashflow"
+msgstr "Fluxo de caixa"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_account_type_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_account_type_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_account_type_id
+msgid "Category"
+msgstr "Categoria"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_edit_note
+msgid "Change reason"
+msgstr "Motivo do cancelamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_name
+msgid "Code"
+msgstr "Código"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Communication ..."
+msgstr "Mensagem"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_company_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_company_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_company_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Comparison"
+msgstr "Comparação"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+msgid "Compute"
+msgstr "Calcular"
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_config_menu
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: financial
+#: model:ir.model,name:financial.model_abstract_financial
+msgid "Contains the logic shared between models which\n"
+"        allows to register financial moves"
+msgstr "Contem toda a ĺogica compartilhada entre os modelos\n"
+"        que permitem registrar os lançamentos financeiros"
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_edit_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_edit_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_credit
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "Credit"
+msgstr "Crédito"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_credit_debit
+msgid "Credit debit date"
+msgstr "Data crédito/débito"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_edit_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_tree_view
+msgid "Date"
+msgstr "Data"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_res_partner_bank_date_balance
+msgid "Date balance"
+msgstr "Data do saldo"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_business_maturity_search
+msgid "Date business maturity search"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_date_credit_debit
+msgid "Date credit debit"
+msgstr "Data crédito/débito"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Date from"
+msgstr "Data de"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Date is"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_issue_search
+msgid "Date issue search"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_edit_date_maturity
+msgid "Date maturity"
+msgstr "Data de vencimento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_date_payment
+msgid "Date payment"
+msgstr "Data pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_date_report
+msgid "Date report"
+msgstr "Data relatório"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Date to"
+msgstr "De"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Dates"
+msgstr "Datas"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_account_payment_mode_compensation_days
+msgid "Days elapsed to compensate the payment"
+msgstr "Dias de compensação"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_debit
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "Debit"
+msgstr "Débito"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_account_payment_mode_delay_fee_percent
+msgid "Taxa de juros(%)"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.view_account_type_form
+msgid "Description"
+msgstr "Descrição"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_amount_discount
+#: model:ir.model.fields,field_description:financial.field_financial_edit_amount_discount
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_discount
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount_discount
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_amount_discount
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Discount"
+msgstr "Desconto (-)"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Discount (-)"
+msgstr "Desconto (-)"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_edit_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_display_name
+#: model:ir.model.fields,field_description:financial.field_report_financial_report_financial_statement_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_document_number
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_document_number
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_document_number
+#: model:ir.model.fields,field_description:financial.field_financial_move_document_number
+msgid "Document Nº"
+msgstr "Nº Documento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_edit_amount
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_amount
+msgid "Document amount"
+msgstr "Valor documento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_document_date
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_document_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_document_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_date
+msgid "Document date"
+msgstr "Data documento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_document_item
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_document_item
+msgid "Item documento"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Document item is"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_document_item_search
+msgid "Document item search"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Document number is"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_document_number_search
+msgid "Document number search"
+msgstr ""
+
+#. module: financial
+#: selection:abstract.financial,state:0
+#: selection:financial.cashflow,state:0
+#: selection:financial.move,state:0
+#: selection:financial.move.create,state:0
+msgid "Draft"
+msgstr "Provisório"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Draft Payable"
+msgstr "Contas a pagar provisória"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Draft Receivable"
+msgstr "Contas a receber provisória"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_date_maturity
+msgid "Due date"
+msgstr "Data vencimento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Due this month"
+msgstr "Vence neste mês"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Due this week"
+msgstr "Vence esta semana"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Due today"
+msgstr "Vence hoje"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Edit"
+msgstr "Editar"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Effective payments"
+msgstr "Efetivos"
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_top_menu
+msgid "Financial"
+msgstr "Financeiro"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cancel_form_view
+msgid "Financial Cancel"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_dashboard_menu
+msgid "Financial Dashboard"
+msgstr "Painel"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_edit_act_window
+#: model:ir.ui.view,arch_db:financial.financial_edit_form_view
+msgid "Financial Edit"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_move
+msgid "Financial Move"
+msgstr ""
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_receivable_act_window
+msgid "Financial Move (Account Receivable)"
+msgstr "Lançamento financeiro (Contas a receber)"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_pay_receive_act_window
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "Financial Pay_receive"
+msgstr "Pagamento/Recebimento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_display_name
+msgid "Financial Reference"
+msgstr "Referência"
+
+#. module: financial
+#: model:ir.actions.report.xml,name:financial.financial_statement
+msgid "Financial Report"
+msgstr "Relatório financeiro"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_financial_type
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_financial_type
+#: model:ir.model.fields,field_description:financial.field_financial_move_financial_type
+msgid "Financial Type"
+msgstr "Tipo financeiro"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_date_4532
+#: model:ir.model.fields,field_description:financial.field_financial_move_date
+msgid "Financial date"
+msgstr "Data lançamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_financial_move_id
+msgid "Financial move id"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_financial_payment_id
+msgid "Financial payment id"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_financial_statement_report_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_financial_statement_report_id
+msgid "Financial statement report id"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_financial_type
+msgid "Financial type"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+msgid "Financial_create"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Generate report"
+msgstr "Gerar relatório"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_id
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_id
+#: model:ir.model.fields,field_description:financial.field_financial_edit_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_id
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_id
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_id
+#: model:ir.model.fields,field_description:financial.field_report_financial_report_financial_statement_id
+msgid "ID"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_ids
+msgid "Included accounts"
+msgstr "Categorias inclusas"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_account_payment_mode_liquidity
+msgid "Included in credit limit"
+msgstr "Considerar no limite de crédito"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Info"
+msgstr "Informações"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_res_partner_bank_initial_balance
+msgid "Initial balance"
+msgstr "Valor inicial"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_interest
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_amount_interest
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Interest"
+msgstr "Juros"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_account_payment_mode_interest_percent
+msgid "Interest (%)"
+msgstr "Juros (%)"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Interest (+)"
+msgstr "Juros (+)"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Issue"
+msgstr "Emissão"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Emissão de"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Emissão é"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Emissão até"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_cancel___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_edit___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_move___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_move_create___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included___last_update
+#: model:ir.model.fields,field_description:financial.field_report_financial_report_financial_statement___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_edit_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_move_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cancel_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_edit_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_line_create_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_level
+msgid "Level"
+msgstr "Nível"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_line_ids
+msgid "Line ids"
+msgstr ""
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_statement_report_act_window
+#: model:ir.ui.menu,name:financial.financial_statement_report_menu
+msgid "Managment Reports"
+msgstr "Relatórios"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_date_maturity
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Maturity"
+msgstr "Vencimento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_date_maturity
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_date_maturity
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_maturity
+msgid "Maturity date"
+msgstr "Data de vencimento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Maturity from"
+msgstr "Vencimento de"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Maturity is"
+msgstr "Vencimento é"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Maturity to"
+msgstr "Vencimento até"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_communication
+#: model:ir.model.fields,field_description:financial.field_financial_move_communication
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_communication
+msgid "Memo"
+msgstr "Anotações"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Mode is"
+msgstr "Modo é"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Money In"
+msgstr "Entrada"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Money Out"
+msgstr "Saída"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_edit_name
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_name
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_name
+#: model:ir.ui.view,arch_db:financial.report_financial_statement
+msgid "Name"
+msgstr "Nome"
+
+#. module: financial
+#: code:addons/financial/models/financial_move.py:129
+#: code:addons/financial/models/financial_move.py:230
+#: code:addons/financial/models/financial_move.py:236
+#, python-format
+msgid "New"
+msgstr "Novo"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_create_act_window
+#: model:ir.ui.menu,name:financial.financial_create_menu
+msgid "New financial move"
+msgstr "Novo lançamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_ids
+msgid "Not Included accounts"
+msgstr "Categorias não inclusas"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Not included accounts"
+msgstr "Categorias não inclusas"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_note
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_note
+#: model:ir.model.fields,field_description:financial.field_financial_move_note
+msgid "Note"
+msgstr "Notas"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Notes ..."
+msgstr "Notas ..."
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cancel_form_view
+#: model:ir.ui.view,arch_db:financial.financial_edit_form_view
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "OK"
+msgstr "Confirmar"
+
+#. module: financial
+#: selection:abstract.financial,state:0
+#: selection:financial.cashflow,state:0
+#: selection:financial.move,state:0
+#: selection:financial.move.create,state:0
+msgid "Open"
+msgstr "Efetivo"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Overdue"
+msgstr "Vencido"
+
+#. module: financial
+#: selection:financial.statement.report,report_format:0
+msgid "PDF"
+msgstr "PDF"
+
+#. module: financial
+#: selection:abstract.financial,state:0
+#: selection:financial.cashflow,state:0
+#: selection:financial.move,state:0
+#: selection:financial.move.create,state:0
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_paid
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_paid
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Paid"
+msgstr "Pago"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_reconciled
+msgid "Paid/Reconciled"
+msgstr "Pago/Reconciliado"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_partner_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_partner_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_partner_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_partner_id
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Partner is"
+msgstr "Parceiro é"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_partner_search
+msgid "Partner search"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Pay/Recieve"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_pay2_menu
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Payable"
+msgstr "Contas a pagar"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_amount
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount
+msgid "Payment Amount"
+msgstr "Valor pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_date
+#: model:ir.model.fields,field_description:financial.field_financial_move_payment_date
+msgid "Payment Date"
+msgstr "Data pagamento"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Payment Item"
+msgstr "Item do pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_journal_id
+msgid "Payment Journal"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_payment_method_id
+msgid "Payment Method"
+msgstr "Método pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_method_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_method_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_payment_method_id
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_payment_method_id
+msgid "Payment Method Type"
+msgstr "Método de pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_mode_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_mode_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_payment_mode_id
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "Payment Mode"
+msgstr "Modo de pagamento"
+
+#. module: financial
+#: model:ir.model,name:financial.model_account_payment_mode
+msgid "Payment Modes"
+msgstr "Modo de pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_term_id
+msgid "Payment Term"
+msgstr "Forma de pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_payment_type
+msgid "Payment Type"
+msgstr "Tipo"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_date_payment
+msgid "Payment date"
+msgstr "Data pagamento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Payment method"
+msgstr "Modo do pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_payment_mode_id
+msgid "Payment mode"
+msgstr "Modo de pagamento"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_payment_mode_search
+msgid "Payment mode search"
+msgstr ""
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_term_id
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_payment_term_id
+#: model:ir.model.fields,field_description:financial.field_financial_move_payment_term_id
+msgid "Payment term"
+msgstr "Forma de pagamento"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Payments due today"
+msgstr "Vencem hoje"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Payments overdue"
+msgstr "Vencidos"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+msgid "Projected payments"
+msgstr "Provisionado"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Receipt Item"
+msgstr "Item recebimento"
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_recieve_menu
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Receivable"
+msgstr "Contas a receber"
+
+#. module: financial
+#: selection:financial.pay_receive,payment_type:0
+msgid "Receive Money"
+msgstr "Entrada"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_ref
+#: model:ir.model.fields,field_description:financial.field_financial_pay_receive_ref
+msgid "Ref"
+msgstr "Ref"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Ref."
+msgstr "Ref"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_refund
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Refund"
+msgstr "Reembolso"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Refund (-)"
+msgstr "Reembolso (-)"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Report Options"
+msgstr "Configurações do relatório"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_report_format
+msgid "Report format"
+msgstr "Formato do relatório"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_statement_report_form_view
+msgid "Report itens"
+msgstr "Itens"
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.financial_report_menu
+msgid "Reports"
+msgstr "Relatórios"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_residual
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Residual"
+msgstr "Residual"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cashflow_search_view
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Search Moves"
+msgstr "Pesquisar"
+
+#. module: financial
+#: selection:financial.pay_receive,payment_type:0
+msgid "Send Money"
+msgstr "Saída"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_account_account_type_sequence
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "State"
+msgstr "Situação"
+
+#. module: financial
+#: model:ir.actions.act_window,name:financial.financial_statement_act_window
+#: model:ir.ui.menu,name:financial.financial_statement_menu
+msgid "Statement"
+msgstr "Extrato"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_abstract_financial_state
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_state
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_state
+#: model:ir.model.fields,field_description:financial.field_financial_move_state
+msgid "Status"
+msgstr "Situação"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Status is Canceled"
+msgstr "Cancelado"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Status is Draft"
+msgstr "Rascunho"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Status is Open"
+msgstr "Aberto"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_search_view
+msgid "Status is Paid"
+msgstr "Pago"
+
+#. module: financial
+#: model:ir.model.fields,help:financial.field_abstract_financial_account_type_id
+#: model:ir.model.fields,help:financial.field_financial_move_account_type_id
+#: model:ir.model.fields,help:financial.field_financial_move_create_account_type_id
+msgid "The partner account used for this invoice."
+msgstr ""
+
+#. module: financial
+#: code:addons/financial/models/abstract_financial.py:137
+#: code:addons/financial/models/financial_move.py:214
+#, python-format
+msgid "The payment amount must be strictly positive."
+msgstr "O valor deve ser sempre positivo"
+
+#. module: financial
+#: model:ir.model.fields,help:financial.field_financial_cancel_reason
+msgid "The reason will be saved in record history"
+msgstr ""
+
+#. module: financial
+#: code:addons/financial/models/financial_move.py:293
+#, python-format
+msgid "This state transition is not allowed"
+msgstr "Esta transição de situação não é permitida"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_total
+#: model:ir.model.fields,field_description:financial.field_financial_move_amount_total
+#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount_total
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+msgid "Total"
+msgstr "Total"
+
+#. module: financial
+#: selection:abstract.financial,financial_type:0
+#: selection:financial.cashflow,financial_type:0
+#: selection:financial.move,financial_type:0
+#: selection:financial.move.create,financial_type:0
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_statement_report_included_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Valid maturity date"
+msgstr "Data de vencimento válida"
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_move_form_view
+msgid "Validate"
+msgstr "Validar"
+
+#. module: financial
+#: selection:financial.statement.report,report_format:0
+msgid "XLS"
+msgstr "Excel"
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_cancel
+msgid "financial.cancel"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_cashflow
+msgid "financial.cashflow"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_edit
+msgid "financial.edit"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_move_create
+msgid "financial.move.create"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_move_line_create
+msgid "financial.move.line.create"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_pay_receive
+msgid "financial.pay_receive"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_statement_report
+msgid "financial.statement.report"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_statement_report_included
+msgid "financial.statement.report.included"
+msgstr ""
+
+#. module: financial
+#: model:ir.model,name:financial.model_financial_statement_report_not_included
+msgid "financial.statement.report.not_included"
+msgstr ""
+
+#. module: financial
+#: model:ir.ui.view,arch_db:financial.financial_cancel_form_view
+#: model:ir.ui.view,arch_db:financial.financial_create_form_view
+#: model:ir.ui.view,arch_db:financial.financial_edit_form_view
+#: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
+msgid "or"
+msgstr "ou"
+
+#. module: financial
+#: model:ir.model.fields,field_description:financial.field_financial_move_ref_item
+msgid "ref item"
+msgstr "Referência do item"
+
+#. module: financial
+#: model:ir.model,name:financial.model_report_financial_report_financial_statement
+msgid "report.financial.report_financial_statement"
+msgstr ""
