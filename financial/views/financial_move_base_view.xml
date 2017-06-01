@@ -81,6 +81,7 @@
                         <group>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                             <field name="document_number"/>
+                            <field name="doc_source_id"/>
                             <field name="date"/>
                             <field name="date_maturity"/>
                             <field name="date_business_maturity" string="Valid maturity date"/>
