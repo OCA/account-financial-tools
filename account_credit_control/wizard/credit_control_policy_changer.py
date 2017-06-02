@@ -82,10 +82,13 @@ class CreditControlPolicyChanger(models.TransientModel):
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
         """ Force policy on invoice """
+<<<<<<< 3bb811bb84ec5c265d8e9245eff93a4a5f98059f
 <<<<<<< f4a71683cf11965d8ffc1f5016e254fe6aa2eaf5
 =======
         invoice_obj = self.env['account.invoice']
 >>>>>>> Fix errors, improve menus, views, readme
+=======
+>>>>>>> Add some unit tests on the module account_credit_control
         invoices = move_lines.mapped('invoice_id')
         invoices.write({'credit_policy_id': policy.id})
 
