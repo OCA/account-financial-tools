@@ -449,11 +449,20 @@ class FinancialMove(models.Model):
         financial_move_ids = self.env['financial.move']
 
         for item in lines:
+            date_maturity = item.pop('date_maturity')
+            amount = item.pop('amount')
+            document_number = item.pop('document_number')
+            #
+            # Override move_dict with item data!
+            #
+            kwargs = move_dict.copy()
+            kwargs.update(item)
+
             values = self._prepare_financial_move(
-                date_maturity=item['date_maturity'],
-                amount=item['amount'],
-                document_number=item['document_number'],
-                **move_dict
+                date_maturity=date_maturity,
+                amount=amount,
+                document_number=document_number,
+                **kwargs
             )
             financial = self.create(values)
             financial_move_ids |= financial
