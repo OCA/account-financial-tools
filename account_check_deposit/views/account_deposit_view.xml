@@ -34,18 +34,15 @@
                             <group name="left">
                                 <field name="deposit_date" />
                                 <field name="journal_id"
-                                    widget="selection"
-                                    on_change="onchange_journal_id(journal_id, context)"/>
+                                    widget="selection"/>
                                 <field name="journal_default_account_id"
                                     invisible="1"/>
                                 <field name="currency_id"
-                                    groups="base.group_multi_currency"
-                                    on_change="onchange_currency_id(currency_id, company_id, context)"/>
+                                    groups="base.group_multi_currency"/>
                                 <field name="partner_bank_id"/>
                             </group>
                             <group name="right">
                                 <field name="company_id"
-                                       on_change="onchange_company_id(company_id, currency_id, context)"
                                        groups="base.group_multi_company"/>
                                 <field name="currency_none_same_company_id"
                                     invisible="1"/>
@@ -58,13 +55,29 @@
                         <group string="Check Payments" name="check_payments">
                             <field name="check_payment_ids" nolabel="1"
                                    widget="many2many"
-                                   domain="[('reconcile_id', '=', False),
+                                   domain="[('reconciled', '=', False),
                                             ('debit', '>', 0),
                                             ('check_deposit_id', '=', False),
                                             ('currency_id', '=', currency_none_same_company_id),
                                             ('account_id', '=', journal_default_account_id)]"
                                     context="{'currency': currency_id,
-                                        'journal_id': journal_id}" />
+                                        'journal_id': journal_id}">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="date_maturity"/>
+                                    <field name="move_id"/>
+                                    <field name="journal_id"/>
+                                    <field name="name"/>
+                                    <field name="ref"/>
+                                    <field name="partner_id"/>
+                                    <field name="account_id"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="name"/>
+                                    <field name="amount_currency" readonly="True" groups="base.group_multi_currency"/>
+                                    <field name="full_reconcile_id"/>
+                                </tree>
+                            </field>
                         </group>
                     </sheet>
                 </form>
@@ -122,7 +135,7 @@
 
         <menuitem action="action_check_deposit_tree"
                   id="menu_check_deposit_tree"
-                  parent="account.menu_finance_bank_and_cash"
+                  parent="account.menu_finance_entries"
                   sequence="20"/>
 
     </data>
