@@ -3,7 +3,7 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class CreditControlPolicy(models.Model):
@@ -241,8 +241,8 @@ class CreditControlPolicyLevel(models.Model):
                 self.search([('policy_id', '=', policy_level.policy_id.id)],
                             order='level asc', limit=1)
             if smallest_level.computation_mode == 'previous_date':
-                return api.ValidationError(_('The smallest level can not be '
-                                             'of type Previous Reminder'))
+                raise ValidationError(_('The smallest level can not be '
+                                        'of type Previous Reminder'))
 
     @api.multi
     def _previous_level(self):
@@ -280,7 +280,7 @@ class CreditControlPolicyLevel(models.Model):
         return "(cr_line.date + %(delay)s)::date <= date(%(controlling_date)s)"
 
     @api.multi
-    def _get_sql_date_boundary_for_computation_mode(self, controlling_date):
+    def _get_sql_date_boundary_for_computation_mode(self):
         """ Return a where clauses statement for the given controlling
         date and computation mode of the level
         """
@@ -323,7 +323,7 @@ class CreditControlPolicyLevel(models.Model):
                " AND (mv_line.debit IS NOT NULL AND mv_line.debit != 0.0)\n")
         sql += " AND"
         _get_sql_date_part = self._get_sql_date_boundary_for_computation_mode
-        sql += _get_sql_date_part(controlling_date)
+        sql += _get_sql_date_part()
         data_dict = {'controlling_date': controlling_date,
                      'line_ids': tuple(lines.ids),
                      'delay': self.delay_days}
@@ -363,7 +363,7 @@ class CreditControlPolicyLevel(models.Model):
                " AND mv_line.id in %(line_ids)s\n")
         sql += " AND "
         _get_sql_date_part = self._get_sql_date_boundary_for_computation_mode
-        sql += _get_sql_date_part(controlling_date)
+        sql += _get_sql_date_part()
         previous_level = self._previous_level()
         data_dict = {'controlling_date': controlling_date,
                      'line_ids': tuple(lines.ids),
