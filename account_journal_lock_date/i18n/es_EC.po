@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_journal_lock_date
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2017-05-30 00:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (Ecuador) (https://www.transifex.com/oca/teams/23907/es_EC/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_EC\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model,name:account_journal_lock_date.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal_journal_lock_date
+msgid "Lock date"
+msgstr ""
+
+#. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_journal_journal_lock_date
+msgid ""
+"Moves cannot be entered nor modified in this journal prior to the lock date,"
+" unless the user has the Adviser role."
+msgstr ""
+
+#. module: account_journal_lock_date
+#: code:addons/account_journal_lock_date/models/account_move.py:23
+#, python-format
+msgid ""
+"You cannot add/modify entries prior to and inclusive of the journal lock "
+"date %s"
+msgstr ""
