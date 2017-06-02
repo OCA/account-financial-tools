@@ -59,7 +59,7 @@ class CreditControlRun(models.Model):
         copy=False,
     )
 
-    @api.multi
+    @api.model
     def _check_run_date(self, controlling_date):
         """ Ensure that there is no credit line in the future
         using controlling_date
