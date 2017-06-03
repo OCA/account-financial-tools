@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Equipments"
+                      name="page_equipment"
+                      attrs="{'invisible': [('equipment_ids', '=', [])]}"
+                >
+                    <field name="equipment_ids"
+                           readonly="False"
+                           context="{'tree_view_ref': 'account_asset_maintenance.hr_equipment_view_tree'}"
+                    />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
