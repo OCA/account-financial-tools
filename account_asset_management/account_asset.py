@@ -783,9 +783,9 @@ class account_asset_asset(orm.Model):
             if asset.type == 'normal' and currency_obj.is_zero(
                     cr, uid, asset.company_id.currency_id,
                     asset.value_residual):
-                asset.write({'state': 'close'}, context=context)
+                asset.write({'state': 'close'})
             else:
-                asset.write({'state': 'open'}, context=context)
+                asset.write({'state': 'open'})
         return True
 
     def remove(self, cr, uid, ids, context=None):
