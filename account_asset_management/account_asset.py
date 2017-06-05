@@ -1628,10 +1628,10 @@ class account_asset_depreciation_line(orm.Model):
             ctx = dict(context, allow_asset=True)
             move_line_obj.create(cr, uid, self._setup_move_line_data(
                 line, depreciation_date, period_id, depr_acc_id,
-                'depreciation', move_id, context), ctx)
+                'depreciation', move_id, context), context=ctx)
             move_line_obj.create(cr, uid, self._setup_move_line_data(
                 line, depreciation_date, period_id, exp_acc_id, 'expense',
-                move_id, context), ctx)
+                move_id, context), context=ctx)
             self.write(
                 cr, uid, line.id, {'move_id': move_id},
                 context={'allow_asset_line_update': True})
