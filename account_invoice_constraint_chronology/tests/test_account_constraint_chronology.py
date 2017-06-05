@@ -28,7 +28,6 @@
 #
 
 import openerp.tests.common as common
-from openerp import workflow
 from openerp import exceptions
 from datetime import datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
@@ -60,23 +59,24 @@ def get_simple_account_invoice_line_values(self, product_id):
 def create_simple_invoice(self, journal_id, date):
     partner_id = self.ref('base.res_partner_2')
     product = get_simple_product_id(self)
-    return self.env['account.invoice']\
-        .create({'partner_id': partner_id,
-                 'account_id':
-                 self.ref('account.a_recv'),
-                 'journal_id':
-                 journal_id,
-                 'date_invoice': date,
-                 'invoice_line': [(0, 0, {'name': 'test',
-                                          'account_id':
-                                          self.ref('account.a_sale'),
-                                          'price_unit': 2000.00,
-                                          'quantity': 1,
-                                          'product_id': product.id,
-                                          }
-                                   )
-                                  ],
-                 })
+    invoice_obj = self.env['account.invoice'].with_context(
+        test_constraint_chronology=True
+    )
+    return invoice_obj.create({
+        'partner_id': partner_id,
+        'account_id': self.ref('account.a_recv'),
+        'journal_id': journal_id,
+        'date_invoice': date,
+        'invoice_line': [
+            (0, 0, {
+                'name': 'test',
+                'account_id': self.ref('account.a_sale'),
+                'price_unit': 2000.00,
+                'quantity': 1,
+                'product_id': product.id,
+            })
+        ],
+    })
 
 
 class TestAccountConstraintChronology(common.TransactionCase):
@@ -94,9 +94,10 @@ class TestAccountConstraintChronology(common.TransactionCase):
         create_simple_invoice(self, journal.id, date)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal.id, date)
-        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
-                          'account.invoice', invoice_2.id, 'invoice_open',
-                          self.cr)
+        with self.assertRaises(exceptions.Warning):
+            # FIXME: As workflow doesn't keep context, the check is done this
+            #   way, but on later versions, this should be done when validating
+            invoice_2.action_move_create()
 
     def test_invoice_validate(self):
         journal = get_journal_check(self, True)
@@ -104,13 +105,13 @@ class TestAccountConstraintChronology(common.TransactionCase):
         tomorrow = today + timedelta(days=1)
         date = tomorrow.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice = create_simple_invoice(self, journal.id, date)
-        workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
-                              'invoice_open', self.cr)
+        invoice.signal_workflow('invoice_open')
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = create_simple_invoice(self, journal.id, date)
-        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
-                          'account.invoice', invoice_2.id, 'invoice_open',
-                          self.cr)
+        with self.assertRaises(exceptions.Warning):
+            # FIXME: As workflow doesn't keep context, the check is done this
+            #   way, but on later versions, this should be done when validating
+            invoice_2.action_move_create()
 
     def test_invoice_without_date(self):
         journal = get_journal_check(self, True)
@@ -119,6 +120,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         create_simple_invoice(self, journal.id, date)
         invoice_2 = create_simple_invoice(self, journal.id, False)
-        self.assertRaises(exceptions.Warning, workflow.trg_validate, self.uid,
-                          'account.invoice', invoice_2.id, 'invoice_open',
-                          self.cr)
+        with self.assertRaises(exceptions.Warning):
+            # FIXME: As workflow doesn't keep context, the check is done this
+            #   way, but on later versions, this should be done when validating
+            invoice_2.action_move_create()
