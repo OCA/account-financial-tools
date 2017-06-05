@@ -18,6 +18,7 @@
 #
 ##############################################################################
 from openerp import models, api, exceptions, _
+from openerp.tools import config
 
 
 class AccountInvoice(models.Model):
@@ -25,6 +26,9 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def test_invoice_line_tax(self):
+        if (config['test_enable'] and
+                not self.env.context.get('test_tax_required')):
+            return True
         errors = []
         error_template = _("Invoice has a line with product %s with no taxes")
         for invoice in self:
