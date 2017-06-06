@@ -19,6 +19,7 @@
 ##############################################################################
 
 from openerp import models, api, exceptions, _
+from openerp.tools import config
 
 
 class AccountMove(models.Model):
@@ -26,6 +27,9 @@ class AccountMove(models.Model):
 
     @api.constrains('journal_id', 'period_id', 'date')
     def _check_fiscal_year(self):
+        if (config['test_enable'] and
+                not self.env.context.get('test_account_constraints')):
+            return True
         for move in self:
             if move.journal_id.allow_date_fy:
                 date_start = move.period_id.fiscalyear_id.date_start
