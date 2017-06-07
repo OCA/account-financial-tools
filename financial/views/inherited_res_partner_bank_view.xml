@@ -31,7 +31,7 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="res_partner_bank_act_window">
+    <record model="ir.actions.act_window" id="res_partner_bank_action">
         <field name="name">Bank Accounts</field>
         <field name="res_model">res.partner.bank</field>
         <field name="view_mode">tree,form</field>
@@ -39,11 +39,25 @@
         <field name="context">{}</field>
     </record>
 
+    <record model="ir.actions.act_window.view" id="res_partner_bank_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="base.view_partner_bank_tree"/>
+        <field name="act_window_id" ref="res_partner_bank_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="res_partner_bank_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="base.view_partner_bank_form"/>
+        <field name="act_window_id" ref="res_partner_bank_action"/>
+    </record>
+
     <record model="ir.ui.menu" id="res_partner_bank_menu">
         <field name="name">Bank Accounts</field>
         <field name="parent_id" ref="financial_config_menu"/>
-        <field name="action" ref="res_partner_bank_act_window"/>
-        <field name="sequence" eval="16"/>
+        <field name="action" ref="res_partner_bank_action"/>
+        <field name="sequence" eval="20"/>
     </record>
 
 </data>

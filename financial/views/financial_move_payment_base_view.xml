@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="financial_move_payment_base_tree">
+        <field name="name">financial.move.payment.base.tree (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">9999</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="type" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="account_id" invisible="1"/>
+                <field name="account_type_id" invisible="1"/>
+                <field name="journal_id" invisible="1"/>
+                <field name="date_payment" required="1" />
+                <field name="document_type_id" required="1" />
+                <field name="document_number" required="1" />
+                <field name="amount_document" required="1" sum="Document" />
+                <field name="amount_interest" sum="Interest" />
+                <field name="amount_discount" sum="Discount" />
+                <field name="amount_total" readonly="1" sum="Total"/>
+                <field name="bank_id" required="1" />
+                <field name="date_credit_debit" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_payment_base_form">
+        <field name="name">financial.move.payment.base.form (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">9999</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="type" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="account_id" invisible="1"/>
+                <field name="account_type_id" invisible="1"/>
+                <field name="journal_id" invisible="1"/>
+                <group colspan="4" col="4">
+                    <group col="4" colspan="4">
+
+                    <field name="date_payment" required="1" />
+                    <field name="amount_document" required="1" />
+
+                    <field name="document_type_id" required="1" />
+                    <field name="amount_interest" />
+
+                    <field name="document_number" required="1" />
+                    <field name="amount_discount" />
+
+                    <field name="bank_id" required="1" />
+                    <field name="amount_paid" readonly="1"/>
+
+                    <field name="date_credit_debit" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!--<record model="ir.ui.view" id="financial_move_payment_base_search">-->
+        <!--<field name="name">financial.move.payment.base.search (in financial)</field>-->
+        <!--<field name="model">financial.move</field>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<search string="Search Moves">-->
+           <!--</search>-->
+        <!--</field>-->
+    <!--</record>-->
+
+</odoo>

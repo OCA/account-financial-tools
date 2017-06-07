@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="financial_document_type_form" >
+        <field name="name">financial.document.type.form</field>
+        <field name="model">financial.document.type</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form string="Document Type">
+                <sheet>
+                    <group>
+                        <group colspan="4" col="4">
+                            <field name="name" required="1" colspan="4" />
+                            <newline />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_document_type_tree">
+        <field name="name">financial.document.type.tree</field>
+        <field name="model">financial.document.type</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree string="Document type">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_document_type_search">
+        <field name="name">financial.document.type.search</field>
+        <field name="model">financial.document.type</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <search string="Document type">
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_document_type_action">
+        <field name="name">Account</field>
+        <field name="res_model">financial.document.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    
+    <record model="ir.actions.act_window.view" id="financial_document_type_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="financial_document_type_tree"/>
+        <field name="act_window_id" ref="financial_document_type_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_document_type_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="financial_document_type_form"/>
+        <field name="act_window_id" ref="financial_document_type_action"/>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_document_type_menu">
+        <field name="name">Document Type</field>
+        <field name="parent_id" ref="financial_config_menu"/>
+        <field name="action" ref="financial_document_type_action"/>
+        <field name="sequence" eval="18"/>
+    </record>
+
+</odoo>

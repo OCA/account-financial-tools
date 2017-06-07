@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2017 KMEE
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
 <odoo>
-<data>
 
     <record model="ir.ui.menu" id="financial_top_menu">
         <field name="name">Financial</field>
@@ -28,5 +29,4 @@
         <field name="sequence" eval="96"/>
     </record>
 
-</data>
 </odoo>

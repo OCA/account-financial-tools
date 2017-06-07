@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.actions.act_window" id="account_account_type_action">
+        <field name="name">Account Type</field>
+        <field name="res_model">account.account.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    
+    <record model="ir.actions.act_window.view" id="account_account_type_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="account.view_account_type_tree"/>
+        <field name="act_window_id" ref="account_account_type_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="account_account_type_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account.view_account_type_form"/>
+        <field name="act_window_id" ref="account_account_type_action"/>
+    </record>
+
+    <record model="ir.ui.menu" id="account_account_type_menu">
+        <field name="name">Account Type</field>
+        <field name="parent_id" ref="financial_config_menu"/>
+        <field name="action" ref="account_account_type_action"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</odoo>

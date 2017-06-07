@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_form">
+        <field name="name">financial.move.debt.2receive.form (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="type">form</field>
+        <field name="copy_id" ref="financial.financial_move_debt_base_form" />
+        <field name="arch" eval="False" />
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_tree">
+        <field name="name">financial.move.debt.2receive.tree (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="type">tree</field>
+        <field name="copy_id" ref="financial.financial_move_debt_base_tree" />
+        <field name="arch" eval="False" />
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_search">
+        <field name="name">financial.move.debt.2receive.search (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="type">search</field>
+        <field name="copy_id" ref="financial.financial_move_debt_base_search" />
+        <field name="arch" eval="False" />
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_inherited_form">
+        <field name="name">financial.move.debt.2receive.inherited.form (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">2</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_2receive_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]" position="attributes">
+                <attribute name="string">Receivable</attribute>
+            </xpath>
+            <field name="payment_ids" position="attributes">
+                <attribute name="context">{'default_type': 'receipt_item', 'default_amount_document': amount_residual, 'default_account_id': account_id, 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'form_view_ref': 'financial.financial_move_payment_base_form'}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_inherited_tree">
+        <field name="name">financial.move.debt.2receive.inherited.tree (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">2</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_2receive_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree[1]" position="attributes">
+                <attribute name="string">Receivables</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_move_debt_2receive_inherited_search">
+        <field name="name">financial.move.debt.2receive.inherited.search (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">2</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_2receive_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//search[1]" position="attributes">
+                <attribute name="string">Receivables</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_move_debt_2receive_action">
+        <field name="name">Receivable</field>
+        <field name="res_model">financial.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', '=', '2receive')]</field>
+        <field name="context">{'default_type': '2receive'}</field>
+        <field name="search_view_ref" ref="financial.financial_move_debt_2receive_search" />
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_move_debt_2receive_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="financial_move_debt_2receive_tree"/>
+        <field name="act_window_id" ref="financial_move_debt_2receive_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_move_debt_2receive_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="financial_move_debt_2receive_form"/>
+        <field name="act_window_id" ref="financial_move_debt_2receive_action"/>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_move_debt_2receive_menu">
+        <field name="name">Receivable</field>
+        <field name="parent_id" ref="financial_dashboard_menu"/>
+        <field name="action" ref="financial_move_debt_2receive_action"/>
+        <field name="sequence" eval="2"/>
+    </record>
+
+</odoo>
