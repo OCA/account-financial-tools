@@ -83,7 +83,7 @@ class FinancialMove(models.Model):
     )
 
     #
-    # Accounting
+    # Move classification
     #
     journal_id = fields.Many2one(
         comodel_name='account.journal',
@@ -112,17 +112,6 @@ class FinancialMove(models.Model):
         string='Analytic account',
         ondelete='restrict',
         index=True,
-    )
-    account_move_id = fields.Many2one(
-        comodel_name='account.move',
-        string='Account move',
-        ondelete='restrict',
-    )
-    account_move_line_ids = fields.One2many(
-        comodel_name='account.move.line',
-        inverse_name='move_id',
-        string='Partidas do lançamento contábil',
-        related='account_move_id.line_ids',
     )
     payment_term_id = fields.Many2one(
         comodel_name='account.payment.term',

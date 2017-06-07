@@ -17,6 +17,7 @@ class FinancialDocumentType(models.Model):
         required=True,
         index=True,
     )
+<<<<<<< HEAD
     account_move_template_2receive_id = fields.Many2one(
         comodel_name='financial.account.move.template',
         string='Account Move Template when Receivable',
@@ -52,3 +53,5 @@ class FinancialDocumentType(models.Model):
         string='Journal',
         ondelete='restrict',
     )
+=======
+>>>>>>> [FEA] Revisão e início do fluxo de caixa

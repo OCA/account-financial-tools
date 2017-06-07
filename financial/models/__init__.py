@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from . import inherited_account_account
 from . import abstract_financial
 from . import financial_document_type
 from . import financial_account_move_template

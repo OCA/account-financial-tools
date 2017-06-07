@@ -18,6 +18,7 @@
                             <field name="name" required="1" colspan="4" />
                             <newline />
                         </group>
+<<<<<<< HEAD
                         <group colspan="4" col="4" string="Accounting">
                             <field name="journal_id" colspan="4" />
                             <newline />
@@ -33,6 +34,8 @@
                                 <field name="account_move_template_money_out_id" string="Money out" />
                             </group>
                         </group>
+=======
+>>>>>>> [FEA] Revisão e início do fluxo de caixa
                     </group>
                 </sheet>
             </form>
