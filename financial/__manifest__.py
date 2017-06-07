@@ -39,17 +39,18 @@
         # 'wizards/financial_edit.xml',
         # 'wizards/financial_create.xml',
         # 'wizards/financial_pay_receive.xml',
+        'wizards/financial_cashflow.xml',
 
         # 'report/financial_cashflow.xml',
         # 'report/financial_statement_report.xml',
         # 'report/report_financial.xml',
 
-        'security/inherited_account_account_type_security.xml',
+        # 'security/inherited_account_account_type_security.xml',
         'security/inherited_res_partner_bank_security.xml',
         # 'security/financial_move_security.xml',
     ],
     'demo': [
         'demo/financial_move.xml',
-        'demo/financial_demo.yml'
+        # 'demo/financial_demo.yml'
     ],
 }

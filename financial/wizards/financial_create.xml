@@ -69,7 +69,6 @@
         <field name="target">new</field>
     </record>
 
-
     <record model="ir.ui.menu" id="financial_create_menu">
         <field name="name">New financial move</field>
         <field name="parent_id" ref="financial_top_menu"/>
