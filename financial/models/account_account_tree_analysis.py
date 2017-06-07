@@ -6,11 +6,7 @@ from __future__ import division, print_function, unicode_literals
 
 
 from odoo import api, fields, models, _
-<<<<<<< HEAD
 from odoo.tools.sql import drop_view_if_exists
-=======
-from odoo.tools.sql import drop_view_if_exists, drop_table_if_exists
->>>>>>> [FEA] Revisão e início do fluxo de caixa
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
 from ..constants import *
@@ -24,7 +20,7 @@ select
     1 as level
 from
     account_account a1
-    
+
 union all
 
 select
@@ -152,13 +148,10 @@ from
     join account_account a10 on a9.parent_id = a10.id;
 '''
 
-<<<<<<< HEAD
 DROP_TABLE = '''
-    DROP TABLE IF EXISTS account_account_tree_analysis
+    DROP view IF EXISTS account_account_tree_analysis
 '''
 
-=======
->>>>>>> [FEA] Revisão e início do fluxo de caixa
 SQL_ACCOUNT_TREE_ANALYSIS_TABLE = '''
 create table account_account_tree_analysis as
 select
@@ -171,10 +164,6 @@ order by
   parent_account_id;
 '''
 
-<<<<<<< HEAD
-
-=======
->>>>>>> [FEA] Revisão e início do fluxo de caixa
 class AccountAccountTreeAnalysis(models.Model):
     _name = b'account.account.tree.analysis'
     _description = 'Account Tree Analysis'
@@ -183,12 +172,8 @@ class AccountAccountTreeAnalysis(models.Model):
     @api.model_cr
     def init(self):
         drop_view_if_exists(self._cr, 'account_account_tree_analysis_view')
-<<<<<<< HEAD
         # drop_table_if_exists(self._cr, 'account_account_tree_analysis')
         self._cr.execute(DROP_TABLE)
-=======
-        drop_table_if_exists(self._cr, 'account_account_tree_analysis')
->>>>>>> [FEA] Revisão e início do fluxo de caixa
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_VIEW)
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_TABLE)
 
