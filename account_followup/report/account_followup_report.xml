@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_followup_stat_graph" model="ir.ui.view">
+        <field name="name">account_followup.stat.graph</field>
+        <field name="model">account_followup.stat</field>
+        <field name="arch" type="xml">
+            <graph string="Follow-up lines" type="pivot">
+                <field name="followup_id" type="row"/>
+                <field name="date_followup" type="col"/>
+                <field name="balance" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_account_followup_stat_search" model="ir.ui.view">
+        <field name="name">account_followup.stat.search</field>
+        <field name="model">account_followup.stat</field>
+        <field name="arch" type="xml">
+            <search string="Follow-ups Sent">
+                <field name="date_move"/>
+                <field name="date_move_last"/>
+                <separator/>
+                <filter string="Not Litigation" domain="[('blocked','=', False)]"
+                        help = "Including journal entries marked as a litigation"/>
+                <field name="partner_id"/>
+                <field name="balance"/>
+                <group expand="1" string="Group By">
+                    <filter string="Partner" context="{'group_by':'partner_id'}" />
+                    <filter string="Litigation" context="{'group_by':'blocked'}" />
+                    <filter string="Follow-up Level" name="followup_level" context="{'group_by':'followup_id'}" />
+                    <filter string="Company" groups="base.group_multi_company" context="{'group_by':'company_id'}" />
+                    <separator/>
+                    <filter string="Latest Follow-up Month" context="{'group_by':'date_followup:month'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_followup_stat" model="ir.actions.act_window">
+        <field name="name">Follow-ups Sent</field>
+        <field name="res_model">account_followup.stat</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="context">{'search_default_followup_level':1}</field>
+        <field name="search_view_id" ref="view_account_followup_stat_search"/>
+    </record>
+    <menuitem id="menu_finance_followup" parent="account.menu_finance" name="Payment Follow-up" groups="account.group_account_invoice"/>
+    <menuitem action="action_followup_stat" id="menu_action_followup_stat_follow" parent="account.menu_finance_reports" groups="account.group_account_invoice" name="Follow-Ups Analysis" sequence="10"/>
+
+    <record id="account_followup_stat_by_partner_search" model="ir.ui.view">
+        <field name="name">account_followup.stat.by.partner.search</field>
+        <field name="model">account_followup.stat.by.partner</field>
+        <field name="arch" type="xml">
+            <search string="Partner to Remind">
+                <field name="date_followup"/>
+                <filter string="Balance > 0" domain="[('balance','&gt;',0)]" icon="terp-dolar" name="balance_positive"/>
+                <field name="partner_id"/>
+                <field name="max_followup_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="account_followup_stat_by_partner_tree" model="ir.ui.view">
+        <field name="name">account_followup.stat.by.partner.tree</field>
+        <field name="model">account_followup.stat.by.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Partner to Remind">
+               <field name="partner_id"/>
+               <field name="balance"/>
+               <field name="max_followup_id"/>
+               <field name="date_followup"/>
+               <field name="date_move_last"/>
+               <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_followup_sending_results" model="ir.ui.view">
+        <field name="name">account_followup.sending.results.form</field>
+        <field name="model">account_followup.sending.results</field>
+        <field name="arch" type="xml">
+        <form>
+            <group>
+                <field name="description" widget="html" class="oe_view_only"/>
+            </group>
+            <footer>
+                <field name="needprinting" invisible="1"/>
+                <div attrs="{'invisible':[('needprinting','=', False)]}">
+                    <button name="do_report" string="Download Letters" type="object" class="oe_highlight"/>
+                </div>
+                <div attrs="{'invisible':[('needprinting','!=', False)]}">
+                    <button name="do_done" string="Close" type="object" class="oe_highlight"/>
+                </div>
+            </footer>
+        </form>
+        </field>
+    </record>
+
+</odoo>
