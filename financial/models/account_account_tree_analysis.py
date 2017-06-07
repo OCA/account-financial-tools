@@ -6,7 +6,7 @@ from __future__ import division, print_function, unicode_literals
 
 
 from odoo import api, fields, models, _
-from odoo.tools.sql import drop_view_if_exists, drop_table_if_exists
+from odoo.tools.sql import drop_view_if_exists
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_is_zero
 from ..constants import *
@@ -148,6 +148,10 @@ from
     join account_account a10 on a9.parent_id = a10.id;
 '''
 
+DROP_TABLE = '''
+    DROP view IF EXISTS account_account_tree_analysis
+'''
+
 SQL_ACCOUNT_TREE_ANALYSIS_TABLE = '''
 create table account_account_tree_analysis as
 select
@@ -168,7 +172,8 @@ class AccountAccountTreeAnalysis(models.Model):
     @api.model_cr
     def init(self):
         drop_view_if_exists(self._cr, 'account_account_tree_analysis_view')
-        drop_table_if_exists(self._cr, 'account_account_tree_analysis')
+        # drop_table_if_exists(self._cr, 'account_account_tree_analysis')
+        self._cr.execute(DROP_TABLE)
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_VIEW)
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_TABLE)
 
