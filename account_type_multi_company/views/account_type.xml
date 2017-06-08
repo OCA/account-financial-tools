@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_account_type_form_inherit" model="ir.ui.view">
+          <field name="name">account.account.type.form.inherit</field>
+          <field name="model">account.account.type</field>
+          <field name="inherit_id" ref="account.view_account_type_form"/>
+          <field name="arch" type="xml">
+            <field name="code" position="after">
+              <field name="company_id" groups="base.group_multi_company"/>
+              <field name="active"/>
+            </field>
+          </field>
+        </record>
+    </data>
+</openerp>
