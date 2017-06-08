@@ -43,20 +43,29 @@
                 <field name="journal_id" invisible="1"/>
                 <group colspan="4" col="4">
                     <group col="4" colspan="4">
+                        <field name="date_payment" required="1" />
+                        <field name="amount_document" required="1" />
 
-                    <field name="date_payment" required="1" />
-                    <field name="amount_document" required="1" />
+                        <field name="document_type_id" required="1" />
+                        <field name="amount_interest" />
 
-                    <field name="document_type_id" required="1" />
-                    <field name="amount_interest" />
+                        <field name="document_number" required="1" />
+                        <field name="amount_discount" />
 
-                    <field name="document_number" required="1" />
-                    <field name="amount_discount" />
+                        <field name="bank_id" required="1" />
+                        <field name="amount_paid" readonly="1"/>
 
-                    <field name="bank_id" required="1" />
-                    <field name="amount_paid" readonly="1"/>
-
-                    <field name="date_credit_debit" />
+                        <field name="date_credit_debit" />
+                    </group>
+                    <group col="4" colspan="4" string="Accounting">
+                        <field name="account_type_id" invisible="1"/>
+                        <field name="analytic_account_id" invisible="1"/>
+                        <field name="journal_id" />
+                        <field name="account_move_template_id" />
+                        <field name="account_move_id" readonly="1" />
+                        <button type="object" name="create_account_move" string="Gera lançamento contábil" />
+                        <separator string="Partidas do lançamento contábil" colspan="4" />
+                        <field name="account_move_line_ids" nolabel="1" colspan="4" context="{'tree_view_ref': 'sped_account.account_move_line_tree'}" />
                     </group>
                 </group>
             </form>

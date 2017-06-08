@@ -11,9 +11,15 @@
         <field name="inherit_id" ref="base.view_partner_bank_form"/>
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
-                <group string="Balance">
-                    <field name="initial_balance"/>
-                    <field name="date_balance"/>
+                <newline />
+                <group colspan="4" col="4">
+                    <group string="Balance">
+                        <field name="initial_balance"/>
+                        <field name="date_balance"/>
+                    </group>
+                    <group string="Accounting">
+                        <field name="account_id"/>
+                    </group>
                 </group>
             </xpath>
         </field>
@@ -27,6 +33,7 @@
             <field name="partner_id" position="after">
                 <field name="initial_balance"/>
                 <field name="date_balance"/>
+                <field name="account_id"/>
             </field>
         </field>
     </record>

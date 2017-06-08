@@ -7,7 +7,7 @@ FINANCIAL_DEBT = [
     ('2pay', 'Account Payable'),  # p
 ]
 FINANCIAL_DEBT_2RECEIVE = '2receive'
-FINANCIAL_DEBT_2PAY = '2PAY'
+FINANCIAL_DEBT_2PAY = '2pay'
 
 FINANCIAL_IN_OUT = [
     ('receipt_item', 'Receipt Item'),  # rr
@@ -15,12 +15,21 @@ FINANCIAL_IN_OUT = [
     ('money_in', 'Money In'),
     ('money_out', 'Money Out'),
 ]
+FINANCIAL_RECEIPT = 'receipt_item'
+FINANCIAL_PAYMENT = 'payment_item'
+FINANCIAL_MONEY_IN = 'money_in'
+FINANCIAL_MONEY_OUT = 'money_out'
 
-FINANCIAL_TRANSFER = [
-    ('transfer', 'Transfer')
+FINANCIAL_INCOMING_MOVE = [
+    FINANCIAL_RECEIPT,
+    FINANCIAL_MONEY_IN,
+]
+FINANCIAL_OUTGOING_MOVE = [
+    FINANCIAL_PAYMENT,
+    FINANCIAL_MONEY_OUT,
 ]
 
-FINANCIAL_TYPE = FINANCIAL_DEBT + FINANCIAL_IN_OUT + FINANCIAL_TRANSFER
+FINANCIAL_TYPE = FINANCIAL_DEBT + FINANCIAL_IN_OUT
 
 FINANCIAL_STATE = [
     ('draft', 'Draft'),
