@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    <record id="view_account_invoice_groupby_state" model="ir.ui.view">
+      <field name="name">account.invoice.groupby.state</field>
+      <field name="inherit_id" ref="account.view_account_invoice_filter" />
+      <field name="model">account.invoice</field>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@string='Group By...']" position="inside">
+          <filter string="Partner State" domain="[]" context="{'group_by': 'partner_state_name'}" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>
+
