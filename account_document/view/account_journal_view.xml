@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_account_journal_form" model="ir.ui.view">
+            <field name="model">account.journal</field>
+            <field name="name">account.journal.form</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="id" invisible="1"/>
+                    <field name="localization" invisible="1"/>
+                </form>
+
+                <!-- This was just in case we want to replace  -->
+<!--                 <field name="refund_sequence" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('type', 'not in', ['sale', 'purchase']), ('use_documents', '=', True)]}</attribute>
+                </field>
+                <field name="sequence_id" position="attributes">
+                    <attribute name="attrs">{'invisible': [('type', 'in', ['sale', 'purchase']), ('use_documents', '=', True)]}</attribute>
+                </field>
+                <field name="refund_sequence_id" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', '|', ('type', 'not in', ['sale', 'purchase']), ('refund_sequence', '!=', True), ('use_documents', '=', True)]}</attribute>
+                </field> -->
+
+                <field name="type" position="after">
+                    <field name="use_documents" attrs="{'invisible': [('type','not in',['purchase','sale','purchase_refund','sale_refund'])]}"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Documents" attrs="{'invisible': ['|',('use_documents','=',False),('type','not in',['purchase','sale','purchase_refund','sale_refund'])]}">
+                        <group>
+                            <field name='document_sequence_type' attrs="{'required': [('use_documents', '=', True),('type', 'in', ['purchase','sale'])]}"/>
+                        </group>
+                        <button name="update_journal_document_types" type="object" string="Update Documents"/>
+                        <field name='journal_document_type_ids' context="{'default_journal_id': id}"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="view_journal_document_type_tree" model="ir.ui.view">
+            <field name="name">Journal Documents Type Mapping Tree</field>
+            <field name="model">account.journal.document.type</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Documents Types">
+                    <field name="sequence" widget="handle"/>
+                    <field name="document_type_id"/>
+                    <field name="sequence_id"/>
+                    <field name="journal_type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_journal_document_type_form" model="ir.ui.view">
+            <field name="name">Journal Documents Type Mapping Form</field>
+            <field name="model">account.journal.document.type</field>
+            <field name="arch" type="xml">
+                <form string="Journal Documents Types">
+                    <header>
+                    </header>
+                    <sheet>
+                        <field name="journal_type" invisible="1"/>
+                        <field name="journal_id" invisible="1"/>
+                        <group>
+                            <group>
+                                <field name="document_type_id"/>
+                                <field name="sequence_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
