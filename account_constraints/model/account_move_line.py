@@ -1,24 +1,8 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author Joel Grand-Guillaume. Copyright 2012 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2012, Joel Grand-Guillaume, Camptocamp SA.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, exceptions, _
+from odoo import models, api, exceptions, _
 
 
 class AccountMoveLine(models.Model):
@@ -28,7 +12,8 @@ class AccountMoveLine(models.Model):
     def _get_write_authorized_fields(self):
         """ This method can be overrride to add some field that can be written
         directly on account move line """
-        return ["reconcile_id", "reconcile_partial_id"]
+        return ["reconcile_id", "reconcile_partial_id", "followup_line_id",
+                "followup_date"]
 
     @api.multi
     def _authorized_reconcile(self, vals):
@@ -86,6 +71,8 @@ class AccountMoveLine(models.Model):
         another object.  This is mandatory if you use the module setting
         all moves in draft (module: account_default_draft_move)
         """
+        if not context:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids)
             self._check_statement_related_move(cr, uid, ids)
@@ -108,6 +95,8 @@ class AccountMoveLine(models.Model):
         by another object.  This is mandatory if you use the module
         setting all moves in draft (module: account_default_draft_move)
         """
+        if not context:
+            context = {}
         if not context.get('from_parent_object', False):
             self._check_invoice_related_move(cr, uid, ids, vals)
             self._check_statement_related_move(cr, uid, ids, vals)
