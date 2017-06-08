@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="bank_statement_cancel_duplicate_form_inherit" model="ir.ui.view">
+            <field name="name">bank.statement.cancel.duplicate.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account_constraints.bank_statement_cancel_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='cancel']" position="replace">
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
