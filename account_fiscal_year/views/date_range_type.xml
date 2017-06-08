@@ -8,6 +8,7 @@
             <field name="inherit_id" ref="date_range.view_date_range_type_tree"/>
             <field name="arch" type="xml">
                 <field name="allow_overlap" position="after">
+                    <field name="accounting" readonly="1"/>
                     <field name="fiscal_year" readonly="1"/>
                 </field>
             </field>
@@ -18,6 +19,7 @@
             <field name="inherit_id" ref="date_range.view_date_range_type_form_view"/>
             <field name="arch" type="xml">
                 <field name="allow_overlap" position="after">
+                    <field name="accounting" readonly="1"/>
                     <field name="fiscal_year" readonly="1"/>
                 </field>
             </field>
