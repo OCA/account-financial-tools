@@ -164,6 +164,7 @@ order by
   parent_account_id;
 '''
 
+
 class AccountAccountTreeAnalysis(models.Model):
     _name = b'account.account.tree.analysis'
     _description = 'Account Tree Analysis'
