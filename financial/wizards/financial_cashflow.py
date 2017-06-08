@@ -14,11 +14,10 @@ class FinancialPayreceive(models.TransientModel):
         string='Period',
         required=False,
         selection=[
-            ('periodo_previsto', u'Periodo Previsto'),
-            ('periodo_realizado', u'Periodo Realizado')
+            ('date_maturity', u'Periodo Previsto'),
+            ('date_payment', u'Periodo Realizado')
         ],
     )
-
     date_from = fields.Date(
         string='Date From',
     )
@@ -33,4 +32,26 @@ class FinancialPayreceive(models.TransientModel):
         Método disparado pela view
         :return:
         """
+        SQL = '''
+            SELECT
+                aa.code, aa.name, fm.{}, SUM(fm.amount_total * fm.sign)
+            FROM
+                financial_move fm
+            JOIN
+                account_account_tree_analysis aat
+                ON aat.child_account_id = fm.account_id
+            JOIN
+                account_account aa on aa.id = aat.parent_account_id
+            WHERE
+                fm.type not in ('2receive', '2pay')
+                AND {} <= '{}' AND {} <= '{}'
+            GROUP BY
+                aa.code, aa.name, fm.{}
+        '''
+
+        SQL = SQL.format(self.period, self.period, self.date_from,
+                         self.period, self.date_to, self.period)
+
+        result = self._cr.execute(SQL)
+
         return True

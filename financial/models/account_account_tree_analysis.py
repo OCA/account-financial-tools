@@ -149,7 +149,7 @@ from
 '''
 
 DROP_TABLE = '''
-    DROP view IF EXISTS account_account_tree_analysis
+    DROP TABLE IF EXISTS account_account_tree_analysis
 '''
 
 SQL_ACCOUNT_TREE_ANALYSIS_TABLE = '''
