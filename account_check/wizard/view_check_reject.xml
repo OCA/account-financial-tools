@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="account.check_dreject_form_view">
+            <field name="name">account.check.dreject.wizard.form</field>
+            <field name="model">account.check.dreject</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Deposited Check Reject" col="2" version="7.0">
+                    <field name="type" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <group>
+                        <field name="reject_date"/>
+                        <field name="has_expense"/>
+                        <field name="expense_account" domain="[('company_id','=',company_id), ('type', 'in', ['other'])]" attrs="{'invisible':[('has_expense','=',False)],'required':[('has_expense','=',True)]}"/>
+                        <field name="expense_amount" attrs="{'invisible':[('has_expense','=',False)],'required':[('has_expense','=',True)]}"/>
+                        <field name="expense_to_customer" attrs="{'invisible':['|',('type','!=','third'),('has_expense','=',False)]}"/>
+                    </group>    
+                    <footer>
+                        <button string="Confirm" name="action_dreject" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+            name="Check Rejected"
+            res_model="account.check.dreject"
+            view_mode="form"
+            target="new"
+            id="action_check_rejected"/>
+            
+    </data>
+</openerp>

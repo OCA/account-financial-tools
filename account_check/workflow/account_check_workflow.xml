@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="account_checks" model="workflow">
+            <field name="name">Checks Workflow</field>
+            <field name="osv">account.check</field>
+            <field name="on_create">True</field>
+        </record>
+
+    <!-- Activities -->
+
+        <record id="actt_draft" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+        
+        <record id="actt_router" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">router</field>
+        </record>
+
+        <record id="actt_holding" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">holding</field>
+            <field name="kind">function</field>
+            <field name="action">action_hold()</field>
+        </record>
+
+        <record id="actt_deposited" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">deposited</field>
+            <field name="kind">function</field>
+            <field name="action">action_deposit()</field>
+        </record>        
+
+        <record id="actt_handed" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">handed</field>
+            <field name="kind">function</field>
+            <field name="action">action_hand()</field>
+        </record>
+        
+        <record id="actt_rejected" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">hrejected</field>
+            <field name="kind">function</field>
+            <field name="action">action_reject()</field>
+        </record>     
+
+        <record id="actt_drejected" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">drejected</field>
+            <field name="kind">function</field>
+            <field name="action">action_reject()</field>
+        </record>
+
+        <record id="actt_debited" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">debited</field>
+            <field name="kind">function</field>
+            <field name="action">action_debit()</field>
+        </record>
+h        
+        <record id="actt_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="account_checks"/>
+            <field name="name">cancel</field>
+            <field name="flow_stop">True</field>
+            <field name="kind">function</field>
+            <field name="action">action_cancel()</field>
+        </record>
+        
+    <!-- Transition -->
+
+        <record id="transs_draft_router" model="workflow.transition">
+            <field name="act_from" ref="actt_draft"/>
+            <field name="act_to" ref="actt_router"/>
+            <field name="signal">draft_router</field>
+        </record>
+
+        <record id="transs_router_holding" model="workflow.transition">
+            <field name="act_from" ref="actt_router"/>
+            <field name="act_to" ref="actt_holding"/>
+            <field name="signal"></field>
+            <field name="condition">type == 'third'</field>
+        </record>
+
+        <record id="transs_router_handed" model="workflow.transition">
+            <field name="act_from" ref="actt_router"/>
+            <field name="act_to" ref="actt_handed"/>
+            <field name="signal"></field>
+            <field name="condition">type == 'issue'</field>
+        </record>
+        
+        <record id="transs_holding_handed" model="workflow.transition">
+            <field name="act_from" ref="actt_holding"/>
+            <field name="act_to" ref="actt_handed"/>
+            <field name="signal">holding_handed</field>
+        </record>        
+
+        <record id="transs_holding_cancel" model="workflow.transition">
+            <field name="act_from" ref="actt_holding"/>
+            <field name="act_to" ref="actt_cancel"/>
+            <field name="signal">cancel</field>
+        </record>
+
+        <record id="transs_holding_deposited" model="workflow.transition">
+            <field name="act_from" ref="actt_holding"/>
+            <field name="act_to" ref="actt_deposited"/>
+            <field name="signal">holding_deposited</field>
+        </record>
+
+        <record id="transs_handed_hrejected" model="workflow.transition">
+            <field name="act_from" ref="actt_handed"/>
+            <field name="act_to" ref="actt_rejected"/>
+            <field name="signal">rejected</field>
+        </record>    
+
+        <record id="transs_deposited_rejected" model="workflow.transition">
+            <field name="act_from" ref="actt_deposited"/>
+            <field name="act_to" ref="actt_drejected"/>
+            <field name="signal">rejected</field>
+        </record>    
+                
+        <record id="transs_draft_cancel" model="workflow.transition">
+            <field name="act_from" ref="actt_draft"/>
+            <field name="act_to" ref="actt_cancel"/>
+            <field name="signal">cancel</field>
+        </record>
+
+        <record id="transs_rejected_handed" model="workflow.transition">
+            <field name="act_from" ref="actt_rejected"/>
+            <field name="act_to" ref="actt_handed"/>
+            <field name="signal">cancel_rejection</field>
+        </record>
+
+        <record id="transs_rejected_deposited" model="workflow.transition">
+            <field name="act_from" ref="actt_drejected"/>
+            <field name="act_to" ref="actt_deposited"/>
+            <field name="signal">cancel_rejection</field>
+        </record>
+
+        <record id="transs_cancel_handed_issue" model="workflow.transition">
+            <field name="act_from" ref="actt_handed"/>
+            <field name="act_to" ref="actt_cancel"/>
+            <field name="signal">cancel</field>
+            <field name="condition">type == 'issue'</field>
+        </record>
+
+        <record id="transs_handed_debited" model="workflow.transition">
+            <field name="act_from" ref="actt_handed"/>
+            <field name="act_to" ref="actt_debited"/>
+            <field name="signal">handed_debited</field>
+            <field name="condition">type == 'issue'</field>
+        </record>
+
+        <record id="transs_debited_handed" model="workflow.transition">
+            <field name="act_from" ref="actt_debited"/>
+            <field name="act_to" ref="actt_handed"/>
+            <field name="signal">debited_handed</field>
+            <field name="condition">type == 'issue'</field>
+        </record>
+
+        <record id="transs_cancel_handed_third" model="workflow.transition">
+            <field name="act_from" ref="actt_handed"/>
+            <field name="act_to" ref="actt_holding"/>
+            <field name="signal">cancel</field>
+            <field name="condition">type == 'third' and third_handed_voucher_id</field>
+        </record>
+
+        <record id="transs_cancel_deposit" model="workflow.transition">
+            <field name="act_from" ref="actt_deposited"/>
+            <field name="act_to" ref="actt_holding"/>
+            <field name="signal">cancel_deposit</field>
+        </record>
+                
+        <record id="transs_draft_cancel" model="workflow.transition">
+            <field name="act_from" ref="actt_draft"/>
+            <field name="act_to" ref="actt_cancel"/>
+            <field name="signal">cancel</field>
+        </record> 
+
+        <record id="transs_cancel_draft" model="workflow.transition">
+            <field name="act_from" ref="actt_cancel"/>
+            <field name="act_to" ref="actt_draft"/>
+            <field name="signal">cancel_to_draft</field>
+        </record>
+    </data>
+</openerp>

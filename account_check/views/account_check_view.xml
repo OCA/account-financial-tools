@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       
+    <!--  Checks -->
+        <record model="ir.ui.view" id="view_account_check_tree">
+            <field name="name">account.check.tree</field>
+            <field name="model">account.check</field>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';black:state in ('handed');red:state == 'hrejected';gray:state == 'cancel'" create="false" string="Checks">
+                    <field name="checkbook_id" invisible="context.get('default_type',False) != 'issue'"/>
+                    <field name="journal_id"/>
+                    <field name="name"/>
+                    <field name="issue_date"/>
+                    <field name="payment_date"/>
+                    <field name="source_partner_id" invisible="context.get('default_type',False) != 'third'"/>
+                    <field name="destiny_partner_id"/>
+                    <field name="bank_id" invisible="context.get('default_type',False) != 'third'"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_account_check_create_tree">
+            <field name="name">account.check.tree</field>
+            <field name="model">account.check</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state == 'draft';black:state in ('handed');red:state == 'hrejected';gray:state == 'cancel'" string="Checks">
+                    <field name="checkbook_id" invisible="context.get('default_type',False) != 'issue'"/>
+                    <field name="name"/>
+                    <field name="issue_date"/>
+                    <field name="payment_date"/>
+                    <field name="source_partner_id" invisible="context.get('default_type',False) != 'third'"/>
+                    <field name="bank_id" invisible="context.get('default_type',False) != 'third'"/>
+                    <field name="amount" sum="Total Amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+                  
+        <record model="ir.ui.view" id="view_account_check_form">
+            <field name="name">account.check.form</field>
+            <field name="model">account.check</field>
+            <field name="arch" type="xml">
+                <form string="Checks" create="false" version="7.0">
+                    <field name="type" invisible="1"/>
+                    <field name="issue_check_subtype" invisible="1"/>
+                    <field name="journal_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                <header>
+                    <button name="%(action_check_deposit)d" type="action" string="Deposited" states="holding" class="oe_highlight"/>
+                    <button name="%(action_check_debit)d" type="action" string="Debited" attrs="{'invisible':['|',('type','!=','issue'),('state','!=','handed')]}" class="oe_highlight"/>
+                    <button name="%(action_check_rejected)d" type="action" string="Rejected" states="handed,deposited" context="{'default_state':state,'default_type':type}"/>
+                    <button name="action_cancel_debit" type="object" string="Cancel Debit" states="debited" context="{'default_state':state,'default_type':type}"/>
+                    <button name="action_cancel_rejection" type="object" string="Cancel Rejection" states="rejected" context="{'default_state':state,'default_type':type}"/>
+                    <button name="action_cancel_deposit" type="object" string="Cancel Deposit" states="deposited" context="{'default_state':state,'default_type':type}"/>
+                    <field name="state" widget="statusbar" statusbar_colors='{"hrejected":"red"}'/>
+                </header>
+                <sheet string="Checks">
+                    <h1 attrs="{'invisible': [('name','=',False)]}">
+                        <field name="name"/>
+                    </h1>
+                    <group>  
+                        <group>
+                            <field name="checkbook_id" widget="selection" domain="[('journal_id','=',journal_id),('state','=','active')]" attrs="{'invisible':[('type','!=','issue')],'required':[('type','=','issue')]}"/>
+                            <field name="bank_id" attrs="{'invisible':[('type','!=','third')],'required':[('type','=','third')]}"/>
+                            <field name="vat" attrs="{'invisible':[('type','!=','third')],'required':[('type','=','third')]}"/>
+                            <field name="number"/>
+                            <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="company_currency_amount" attrs="{'invisible':[('company_currency_amount','=', 0)]}" /> <!-- groups="base.group_no_one" -->
+                        </group>
+                        <group>    
+                            <field name="issue_date"/>
+                            <field name="payment_date" attrs="{'invisible':[('type','=','issue'),('issue_check_subtype','=','currents')],'required':[('type','=','issue'),('issue_check_subtype','=','deferred')]}"/>
+                            <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                        </group>
+                    </group>
+                    <group string="Related Documents">
+                        <group>
+                            <field name="voucher_id" invisible="'from_voucher' in context" required="'from_voucher' not in context" readonly="1"/>
+                            <field name="third_handed_voucher_id" invisible="'from_voucher' in context"  context="{'form_view_ref':'account_voucher.view_vendor_payment_form'}" attrs="{'invisible':[('third_handed_voucher_id','=',False)]}"/>
+                            <field name="source_partner_id" invisible="'from_voucher' in context" attrs="{'invisible':[('source_partner_id','=',False)]}"/>
+                            <field name="destiny_partner_id" invisible="'from_voucher' in context" attrs="{'invisible':[('destiny_partner_id','=',False)]}"/>
+                        </group>
+                        <group>
+                            <field name="debit_account_move_id" attrs="{'invisible':[('debit_account_move_id','=',False)]}"/>
+                            <field name="deposit_account_move_id" attrs="{'invisible':[('deposit_account_move_id','=',False)]}"/>
+                            <field name="customer_reject_debit_note_id" attrs="{'invisible':[('customer_reject_debit_note_id','=',False)]}"/>
+                            <field name="expense_account_move_id" attrs="{'invisible':[('expense_account_move_id','=',False)]}"/>
+                            <field name="supplier_reject_debit_note_id" attrs="{'invisible':[('supplier_reject_debit_note_id','=',False)]}"/>                            
+                        </group>
+                    </group>
+                </sheet>    
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>                
+                </form>
+            </field>
+        </record> 
+
+        <record model="ir.ui.view" id="view_checks_search">
+            <field name="name">check.search</field>
+            <field name="model">account.check</field>
+            <field name="arch" type="xml">
+                <search string="Checks">
+                    <field name="number"/>
+                    <field name="destiny_partner_id"/>
+                    <field name="journal_id"/>
+                    <field name="voucher_id"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Issue Date" context="{'group_by':'issue_date'}"/>
+                        <filter string="Payment Date" context="{'group_by':'payment_date'}"/>                        
+                        <filter string="Journal" context="{'group_by':'journal_id'}"/>
+                        <filter string="State" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record> 
+
+        <!-- mode="month" --> 
+        <record model="ir.ui.view" id="view_account_check_calendar">
+            <field name="name">account.check.calendar</field>
+            <field name="model">account.check</field>
+            <field name="arch" type="xml">
+                <calendar string="Checks" 
+                          date_start="payment_date" 
+                          color="destiny_partner_id">
+                    <field name="amount"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Third Check Menu -->
+        <record model="ir.actions.act_window" id="action_third_check">
+            <field name="name">Third Checks</field>
+            <field name="res_model">account.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="search_view_id" ref=""/>
+            <field name="view_id" ref="view_account_check_tree"/>
+            <field name="domain">[('type','=','third')]</field>
+            <field name="context">{'search_default_state':'holding','default_type':'third'}</field>
+        </record>
+        
+        <menuitem
+            action="action_third_check"
+            id="menu_third_check"
+            sequence="30"
+            parent="account.menu_finance_bank_and_cash"/> 
+        
+        <!-- Issued Check Menu -->
+        <record model="ir.actions.act_window" id="action_issue_check">
+            <field name="name">Issue Checks</field>
+            <field name="res_model">account.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="search_view_id" ref=""/>
+            <field name="view_id" ref="view_account_check_tree"/>
+            <field name="domain">[('type','=','issue')]</field>
+            <field name="context">{'search_default_state':'handed','default_type':'issue'}</field>
+        </record>
+        
+        <menuitem
+            action="action_issue_check"
+            id="menu_issue_check"
+            sequence="40"
+            parent="account.menu_finance_bank_and_cash"/>   
+
+    </data>
+</openerp>

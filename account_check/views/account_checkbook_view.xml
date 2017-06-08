@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_checkbook_search" model="ir.ui.view">
+            <field name="name">account.checkbook.search</field>
+            <field name="model">account.checkbook</field>
+            <field name="arch" type="xml">
+                <search string="Checkbooks">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_account_checkbook_tree" model="ir.ui.view">
+            <field name="name">account.checkbook.tree</field>
+            <field name="model">account.checkbook</field>
+            <field name="arch" type="xml">
+                <tree string="Checkbooks" colors="blue:state == 'draft';black:state in ('active');red:state == 'hrejected';gray:state == 'used'">
+                    <field name="name"/>
+                    <field name="debit_journal_id"/>
+                    <field name="range_from"/>
+                    <field name="range_to"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_checkbook_form" model="ir.ui.view">
+            <field name="name">account.checkbook.form</field>
+            <field name="model">account.checkbook</field>
+            <field name="arch" type="xml">
+                <form string="Checkbooks" version="7.0"> 
+                    <header string="Checkbooks">
+                        <button name="wkf_active" string="In Use"  states="draft"/>
+                        <button name="wkf_used" string="Used"  states="active"/>
+                        <button name="action_cancel_draft" string="To Draft" type="object" states="used"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,used" statusbar_colors='{"active":"blue"}'/>
+                    </header>
+                    <sheet string="Checkbooks">
+                        <group>
+                            <group>
+                                <field name="name"/>  
+                                <field name="issue_check_subtype"/>
+                                <field name="debit_journal_id" domain="[('company_id', '=', company_id),('type', '=', 'bank')]" context="{'default_company_id': company_id, 'default_type': 'bank'}"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                            </group>
+                            <group>  
+                                <field name="range_from"/>
+                                <field name="range_to"/>
+                                <field name="next_check_number"/>
+                                <field name="padding"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>                     
+                </form>
+            </field>
+        </record>
+ 
+    </data>
+</openerp>        
