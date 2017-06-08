@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * currency_rate_update
-# 
+#
 # Translators:
 # Bole <bole@dajmi5.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
@@ -76,6 +76,16 @@ msgid "Company"
 msgstr "Compañía"
 
 #. module: currency_rate_update
+#: field:currency.rate.update.service,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: currency_rate_update
+#: field:currency.rate.update.service,service:0
+msgid "Webservice to use"
+msgstr "Webservice"
+
+#. module: currency_rate_update
 #: field:currency.rate.update.service,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
@@ -101,7 +111,7 @@ msgstr ""
 #: model:ir.model,name:currency_rate_update.model_currency_rate_update_service
 #: model:ir.ui.menu,name:currency_rate_update.currency_rate_update_menu
 msgid "Currency Rate Update"
-msgstr ""
+msgstr "Actualizar tasa de cambio"
 
 #. module: currency_rate_update
 #: view:res.company:currency_rate_update.currency_auto_comp
