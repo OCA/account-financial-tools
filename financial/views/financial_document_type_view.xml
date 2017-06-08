@@ -18,24 +18,6 @@
                             <field name="name" required="1" colspan="4" />
                             <newline />
                         </group>
-<<<<<<< HEAD
-                        <group colspan="4" col="4" string="Accounting">
-                            <field name="journal_id" colspan="4" />
-                            <newline />
-                            <separator string="Move templates" colspan="4" />
-                            <group string="Incoming moves">
-                                <field name="account_move_template_2receive_id" string="Receivable" />
-                                <field name="account_move_template_receipt_item_id" string="Receipt" />
-                                <field name="account_move_template_money_in_id" string="Money in" />
-                            </group>
-                            <group string="Outgoing moves">
-                                <field name="account_move_template_2pay_id" string="Payable" />
-                                <field name="account_move_template_payment_item_id" string="Payment" />
-                                <field name="account_move_template_money_out_id" string="Money out" />
-                            </group>
-                        </group>
-=======
->>>>>>> [FEA] Revisão e início do fluxo de caixa
                     </group>
                 </sheet>
             </form>
@@ -71,7 +53,7 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-    
+
     <record model="ir.actions.act_window.view" id="financial_document_type_tree_action">
         <field eval="1" name="sequence"/>
         <field name="view_mode">tree</field>
