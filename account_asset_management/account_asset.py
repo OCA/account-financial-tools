@@ -1562,7 +1562,7 @@ class account_asset_depreciation_line(orm.Model):
                          period_id, context):
         asset = depreciation_line.asset_id
         move_data = {
-            'name': asset.name,
+            'name': "/",
             'date': depreciation_date,
             'ref': depreciation_line.name,
             'period_id': period_id,

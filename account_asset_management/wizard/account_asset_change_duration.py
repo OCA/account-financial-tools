@@ -54,7 +54,8 @@ class asset_modify(orm.TransientModel):
             toolbar=toolbar, submenu=submenu)
         asset_id = context.get('active_id', False)
         active_model = context.get('active_model', '')
-        if active_model == 'account.asset.asset' and asset_id:
+        if active_model == 'account.asset.asset' and asset_id \
+                and view_type == 'form':
             asset = asset_obj.browse(cr, uid, asset_id, context=context)
             doc = etree.XML(result['arch'])
             if asset.method_time == 'number':
