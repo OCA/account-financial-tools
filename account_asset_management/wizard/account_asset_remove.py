@@ -182,7 +182,9 @@ class account_asset_remove(orm.TransientModel):
                 _("You can't make an early removal if all the depreciation "
                   "lines for previous periods are not posted."))
 
-        last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        last_depr_date = first_to_depreciate_dl.previous_id.line_date or \
+            first_to_depreciate_dl.asset_id.date_start
+
         period_number_days = (
             datetime.strptime(first_date, '%Y-%m-%d') -
             datetime.strptime(last_depr_date, '%Y-%m-%d')).days
