@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+
+        <record id="view_move_line_tree_payment" model="ir.ui.view">
+            <field name="name">account.move.line.tree.payment</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <tree string="Move lines">
+                    <field name="date" readonly="True"/>
+                    <field name="name" readonly="True"/>
+                    <field name="partner_id" readonly="True" />
+                    <field name="ref" readonly="True" />
+                    <field name="amount_residual_currency" readonly="True"/>
+                    <field name="currency_id" readonly="True"  />
+                    <field name="date_maturity" readonly="True"/>
+                    <field name="reconcile_partial_id" readonly="True"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+    <record id="view_create_payment_order_lines_over" model="ir.ui.view">
+      <field name="name">payment.order.create.form.over</field>
+      <field name="model">payment.order.create</field>
+      <field name="inherit_id" ref="account_payment.view_create_payment_order_lines"/>
+      <field name="arch" type="xml">
+          <field name="entries" position="replace">
+                <field name="entries" context="{'tree_view_ref': 'account_payment_multicurrency_extension.view_move_line_tree_payment'}">
+                    <tree string="Move lines">
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="partner_id" />
+                        <field name="ref" />
+                        <field name="amount_residual_currency"/>
+                        <field name="currency_id"/>
+                        <field name="date_maturity"/>
+                        <field name="reconcile_partial_id"/>
+                    </tree>
+                </field>
+          </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>
+
