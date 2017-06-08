@@ -61,8 +61,9 @@ class credit_control_policy_changer(models.TransientModel):
                 raise api.Warning(_('Please use wizard on customer invoices'))
 
             domain = [('account_id', '=', invoice.account_id.id),
-                      ('move_id', '=', invoice.move_id.id),
-                      ('reconcile_id', '=', False)]
+                      ('move_id', '=', invoice.move_id.id)]
+            if invoice.state != 'paid':
+                domain.append(('reconcile_id', '=', False))
             move_lines = move_line_obj.search(domain)
             selected_lines |= move_lines
         return selected_lines

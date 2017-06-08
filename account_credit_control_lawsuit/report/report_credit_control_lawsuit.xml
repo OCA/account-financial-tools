@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <template id="report_lawsuit_requisition_document">
+      <t t-call="report.external_layout">
+        <div class="page">
+          <h2>Lawsuit Requisition</h2>
+
+          <t t-if="not o.partner.lawsuit_office_id">
+            <h2>No lawsuit office found for:</h2>
+            <address t-field="o.partner"
+              t-field-options='{"widget": "contact",
+              "fields": ["address", "name", "phone"],
+              "no_marker": true}' />
+            <p>Invoice(s) :</p>
+            <ul>
+              <div t-foreach="o.invoices" t-as="inv">
+                <li><span t-field="inv.number"/></li>
+              </div>
+            </ul>
+          </t>
+
+          <t t-if="o.partner.lawsuit_office_id">
+
+            <div class="row mt16" id="office_address">
+              <div class="col-xs-6">
+                <address t-field="o.partner.lawsuit_office_id.partner_id"
+                  t-field-options='{"widget": "contact",
+                  "fields": ["address", "name"],
+                  "no_marker": true}' />
+              </div>
+            </div>
+
+            <div class="row mt16 mb32" id="debtor_creditor_address">
+              <div class="col-xs-6">
+                <strong>Debtor</strong>
+                <address t-field="o.partner"
+                  t-field-options='{"widget": "contact",
+                  "fields": ["address", "name", "phone"],
+                  "no_marker": true}' />
+                Customer Reference <span t-field="o.partner.ref"/>
+              </div>
+              <div class="col-xs-6">
+                <strong>Creditor</strong>
+                <address t-field="res_company.partner_id"
+                  t-field-options='{"widget": "contact",
+                  "fields": ["address", "name", "phone"],
+                  "no_marker": true}' />
+              </div>
+            </div>
+
+            <h3>Lawsuit Reasons</h3>
+
+            <table class="table table-condensed mb32" id="invoices">
+              <thead>
+                <tr>
+                  <th>Invoice number</th>
+                  <th>Invoice date</th>
+                  <th>Date due</th>
+                  <th class="text-right">Invoiced amount</th>
+                  <th class="text-right">Open amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr t-foreach="o.invoices" t-as="inv">
+                  <td><span t-field="inv.number"/>
+                      <span t-field="inv.name"/>
+                  </td>
+                  <td>
+                    <span t-field="inv.date_invoice"/>
+                  </td>
+                  <td>
+                    <span t-field="inv.date_due"/>
+                  </td>
+
+                  <td class="text-right">
+                    <span t-field="inv.amount_total"
+                      t-field-options='{"widget": "monetary",
+                      "display_currency": "inv.currency_id or inv.company_id.currency_id"}'/>
+                  </td>
+                  <td class="text-right">
+                    <span t-field="inv.residual"
+                      t-field-options='{"widget": "monetary",
+                      "display_currency": "inv.currency_id or inv.company_id.currency_id"}'/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row mb32">
+              <div class="col-xs-6 col-xs-offset-6">
+                <table class="table table-condensed" id="total">
+                  <tr>
+                    <td>Amount due</td>
+                    <td class="text-right">
+                      <span t-field="o.due_amount"
+                        t-field-options='{"widget": "monetary",
+                        "display_currency": "o.currency"}'/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Dunning Fees</td>
+                    <td class="text-right">
+                      <span t-field="o.dunning_fees"
+                        t-field-options='{"widget": "monetary",
+                        "display_currency": "o.currency"}'/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Lawsuit Fees</td>
+                    <td class="text-right">
+                      <span t-field="o.lawsuit_fees"
+                        t-field-options='{"widget": "monetary",
+                        "display_currency": "o.currency"}'/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Debtor already paid amount</td>
+                    <td class="text-right">
+                      <span t-field="o.paid_amount"
+                        t-field-options='{"widget": "monetary",
+                        "display_currency": "o.currency"}'/>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="row" id="signature">
+              <div class="col-xs-6">Date and place</div>
+              <div class="col-xs-6">Signature</div>
+            </div>
+          </t>
+        </div>
+      </t>
+    </template>
+
+    <template id="report_lawsuit_requisition">
+      <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+          <t t-raw="translate_doc(doc_id, doc_model, 'partner.lang', 'account_credit_control_lawsuit.report_lawsuit_requisition_document')"/>
+        </t>
+      </t>
+    </template>
+  </data>
+</openerp>

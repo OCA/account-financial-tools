@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record id="invoice_lawsuit_form_view" model="ir.ui.view">
+      <field name="name">invoice.lawsuit.form.view</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account_credit_control.invoice_followup_form_view" />
+      <field name="arch" type="xml">
+        <field name="credit_policy_id" position="after">
+          <group>
+            <field name="need_lawsuit"/>
+            <field name="lawsuit_step_id"/>
+          </group>
+        </field>
+      </field>
+    </record>
+
+    <record id="view_account_invoice_filter" model="ir.ui.view">
+      <field name="name">account.invoice.select</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.view_account_invoice_filter" />
+      <field name="arch" type="xml">
+        <xpath expr="//group[1]" position="before">
+          <field name="lawsuit_step_id"/>
+          <filter domain="[('need_lawsuit', '=', True)]" string="Needs a Lawsuit Procedure" />
+        </xpath>
+        <xpath expr="//group[1]" position="inside">
+          <filter string="Lawsuit Step" context="{'group_by': 'lawsuit_step_id'}"/>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</openerp>

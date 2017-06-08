@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record id="view_account_invoice_lawsuit_step_tree" model="ir.ui.view">
+      <field name="name">account.invoice.lawsuit.step.tree</field>
+      <field name="model">account.invoice.lawsuit.step</field>
+      <field name="arch" type="xml">
+        <tree string="Invoice Lawsuit Step" editable="bottom">
+          <field name="sequence" widget="handle"/>
+          <field name="name"/>
+          <field name="set_when_requisition_printed"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_account_invoice_lawsuit_step_form" model="ir.ui.view">
+      <field name="name">account.invoice.lawsuit.step.form</field>
+      <field name="model">account.invoice.lawsuit.step</field>
+      <field name="arch" type="xml">
+        <form string="Invoice Lawsuit Step">
+          <group>
+            <field name="name"/>
+            <field name="set_when_requisition_printed"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_account_invoice_lawsuit_step_search" model="ir.ui.view">
+      <field name="name">account.invoice.lawsuit.step.search</field>
+      <field name="model">account.invoice.lawsuit.step</field>
+      <field name="arch" type="xml">
+        <search string="Invoice Lawsuit Step">
+          <field name="name"/>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_account_invoice_lawsuit_step_view">
+      <field name="name">Invoice Lawsuit Steps</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">account.invoice.lawsuit.step</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" ref="view_account_invoice_lawsuit_step_search"/>
+    </record>
+
+    <menuitem id="menu_account_invoice_lawsuit_step"
+      parent="account_credit_control.base_credit_control_configuration_menu"
+      sequence="20"
+      action="action_account_invoice_lawsuit_step_view"/>
+  </data>
+</openerp>

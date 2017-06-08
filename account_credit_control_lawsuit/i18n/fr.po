@@ -1,0 +1,386 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_credit_control_lawsuit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-14 10:14+0000\n"
+"PO-Revision-Date: 2014-12-12 13:01+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.model,name:account_credit_control_lawsuit.model_res_better_zip
+msgid " City/locations completion object"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: model:ir.model,name:account_credit_control_lawsuit.model_credit_control_policy_level
+msgid "A credit control policy level"
+msgstr "Un niveau de relance"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Amount due"
+msgstr "Montant dû"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.office,location_ids:0
+msgid "Applicable in ZIPs"
+msgstr "Applicable pour les codes postaux"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Change the lawsuit step of the invoice"
+msgstr "Changer l'étape de recouvrement des factures"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,create_uid:0
+#: field:credit.control.lawsuit.printer,create_uid:0
+#: field:lawsuit.fees.schedule,create_uid:0
+#: field:lawsuit.fees.schedule.line,create_uid:0
+#: field:lawsuit.office,create_uid:0
+#: field:lawsuit.requisition.partner,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,create_date:0
+#: field:credit.control.lawsuit.printer,create_date:0
+#: field:lawsuit.fees.schedule,create_date:0
+#: field:lawsuit.fees.schedule.line,create_date:0
+#: field:lawsuit.office,create_date:0
+#: field:lawsuit.requisition.partner,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.report.xml,name:account_credit_control_lawsuit.action_report_lawsuit
+msgid "Credit Lawsuit Requisition"
+msgstr "Avis de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Creditor"
+msgstr "Créancier"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule,currency_id:0
+#: field:lawsuit.requisition.partner,currency:0
+msgid "Currency"
+msgstr "Devise"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Customer Reference"
+msgstr "Référence client"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Date and place"
+msgstr "Lieu et date"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Date due"
+msgstr "Date d'échéance"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Debtor"
+msgstr "Débiteur"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Debtor already paid amount"
+msgstr "Le débiteur a payé le montant"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Dunning Fees"
+msgstr "Frais de rappel"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule.line,fees:0
+msgid "Fees"
+msgstr "Frais"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.office,fees_schedule_id:0
+msgid "Fees Schedule"
+msgstr "Table de frais"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,id:0
+#: field:credit.control.lawsuit.printer,id:0 field:lawsuit.fees.schedule,id:0
+#: field:lawsuit.fees.schedule.line,id:0 field:lawsuit.office,id:0
+#: field:lawsuit.requisition.partner,id:0
+#: field:report.account_credit_control_lawsuit.report_lawsuit_requisition,id:0
+msgid "ID"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: model:ir.model,name:account_credit_control_lawsuit.model_account_invoice
+msgid "Invoice"
+msgstr "Factures"
+
+#. module: account_credit_control_lawsuit
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_form
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_search
+#: view:account.invoice.lawsuit.step:account_credit_control_lawsuit.view_account_invoice_lawsuit_step_tree
+msgid "Invoice Lawsuit Step"
+msgstr "Étape de recouvrement de facture"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.action_account_invoice_lawsuit_step_view
+#: model:ir.ui.menu,name:account_credit_control_lawsuit.menu_account_invoice_lawsuit_step
+msgid "Invoice Lawsuit Steps"
+msgstr "Étapes de recouvrement de facture"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Invoice date"
+msgstr "Date de la facture"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Invoice number"
+msgstr "Numéro de facture"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Invoiced amount"
+msgstr "Montant facturé"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+#: field:credit.control.lawsuit.printer,invoice_ids:0
+#: field:lawsuit.requisition.partner,invoices:0
+msgid "Invoices"
+msgstr "Factures"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,write_uid:0
+#: field:credit.control.lawsuit.printer,write_uid:0
+#: field:lawsuit.fees.schedule,write_uid:0
+#: field:lawsuit.fees.schedule.line,write_uid:0
+#: field:lawsuit.office,write_uid:0
+#: field:lawsuit.requisition.partner,write_uid:0
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,write_date:0
+#: field:credit.control.lawsuit.printer,write_date:0
+#: field:lawsuit.fees.schedule,write_date:0
+#: field:lawsuit.fees.schedule.line,write_date:0
+#: field:lawsuit.office,write_date:0
+#: field:lawsuit.requisition.partner,write_date:0
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_credit_control_lawsuit
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_list_view
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Lawsuit Fees"
+msgstr "Frais de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
+msgid "Lawsuit Fees Schedule"
+msgstr "Table de frais de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_schedule_menu_action
+#: model:ir.ui.menu,name:account_credit_control_lawsuit.lawsuit_schedule_menu_action_menu
+msgid "Lawsuit Fees Schedules"
+msgstr "Tables de frais de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_office_action
+#: view:lawsuit.office:account_credit_control_lawsuit.lawsuit_office_form_view
+#: view:lawsuit.office:account_credit_control_lawsuit.lawsuit_office_list_view
+msgid "Lawsuit Office"
+msgstr "Office de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.ui.menu,name:account_credit_control_lawsuit.lawsuit_office_action_menu
+msgid "Lawsuit Offices"
+msgstr "Offices de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Lawsuit Printer"
+msgstr "Imprimer un avis de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Lawsuit Reasons"
+msgstr "Motifs des créances"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Lawsuit Requisition"
+msgstr "Avis de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:account.invoice:account_credit_control_lawsuit.view_account_invoice_filter
+#: field:account.invoice,lawsuit_step_id:0
+#: field:credit.control.lawsuit.printer,lawsuit_step_id:0
+msgid "Lawsuit Step"
+msgstr "Étape de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: field:res.better.zip,lawsuit_office_id:0
+msgid "Lawsuit office"
+msgstr "Office de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
+msgid "Line"
+msgstr "Ligne"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,name:0
+#: field:lawsuit.fees.schedule,name:0 field:lawsuit.office,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: account_credit_control_lawsuit
+#: view:account.invoice:account_credit_control_lawsuit.view_account_invoice_filter
+msgid "Needs a Lawsuit Procedure"
+msgstr "Nécessite une procédure de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: field:credit.control.policy.level,need_lawsuit:0
+msgid "Needs a Lawsuit procedure"
+msgstr "Nécessite une procédure de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice,need_lawsuit:0
+msgid "Needs a lawsuit procedure"
+msgstr "Nécessite une procédure de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: code:addons/account_credit_control_lawsuit/wizard/credit_control_lawsuit_printer.py:105
+#, python-format
+msgid "No invoice to print"
+msgstr "Pas de facture à imprimer"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.office,partner_id:0
+msgid "Office Address"
+msgstr "Adresse de l'office"
+
+#. module: account_credit_control_lawsuit
+#: code:addons/account_credit_control_lawsuit/model/policy.py:39
+#, python-format
+msgid ""
+"Only the highest level can be selected for lawsuits. The highest level is %s"
+msgstr ""
+"Uniquement le plus haut niveau de relance peut être sélectionné pour les "
+"procédures de recouvrement. Le plus haut niveau est %s."
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule.line,open_amount:0
+msgid "Open Amount"
+msgstr "Montant ouvert"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Open amount"
+msgstr "Montant ouvert"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.model,name:account_credit_control_lawsuit.model_res_partner
+#: field:lawsuit.requisition.partner,partner:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule.line,schedule_id:0
+msgid "Price list"
+msgstr "Liste de prix"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule,line_ids:0
+msgid "Price lists"
+msgstr "Listes de prix"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: account_credit_control_lawsuit
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_printer_action
+#: model:ir.actions.act_window,name:account_credit_control_lawsuit.lawsuit_printer_action_menu_action
+msgid "Print Lawsuit Requisition"
+msgstr "Imprimer l'avis de recouvrement"
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "Print lawsuit requisition letter for invoices"
+msgstr "Imprimer les lettres de réquisition de recouvrement pour des factures"
+
+#. module: account_credit_control_lawsuit
+#: model:account.invoice.lawsuit.step,name:account_credit_control_lawsuit.invoice_lawsuit_step_printed
+msgid "Printed"
+msgstr "Imprimé"
+
+#. module: account_credit_control_lawsuit
+#: field:lawsuit.fees.schedule,product_id:0
+msgid "Product"
+msgstr "Article"
+
+#. module: account_credit_control_lawsuit
+#: view:lawsuit.fees.schedule:account_credit_control_lawsuit.lawsuit_schedule_form_view
+msgid "Schedule values"
+msgstr "Valeurs de la table"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,sequence:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: account_credit_control_lawsuit
+#: field:account.invoice.lawsuit.step,set_when_requisition_printed:0
+msgid "Set when requisition printed"
+msgstr "Défini quand l'avis de recouvrement est imprimé"
+
+#. module: account_credit_control_lawsuit
+#: view:website:account_credit_control_lawsuit.report_lawsuit_requisition_document
+msgid "Signature"
+msgstr "Signature"
+
+#. module: account_credit_control_lawsuit
+#: help:lawsuit.fees.schedule.line,fees:0
+msgid "The amount of fees when the open amount is reached."
+msgstr "Le montant des frais quand le montant ouvert est atteint."
+
+#. module: account_credit_control_lawsuit
+#: help:lawsuit.fees.schedule.line,open_amount:0
+msgid "The amount unpaid by the debtor. "
+msgstr "Le montant impayé par le débiteur. "
+
+#. module: account_credit_control_lawsuit
+#: view:credit.control.lawsuit.printer:account_credit_control_lawsuit.credit_control_lawsuit_printer_view
+msgid "or"
+msgstr "ou"

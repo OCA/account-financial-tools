@@ -1,0 +1,57 @@
+<openerp>
+  <data>
+
+    <record id="credit_control_lawsuit_printer_view" model="ir.ui.view">
+      <field name="name">credit control lawsuit printer view</field>
+      <field name="model">credit.control.lawsuit.printer</field>
+      <field name="arch" type="xml">
+        <form version="7.0"
+              string="Lawsuit Printer">
+          <separator string="Print lawsuit requisition letter for invoices" colspan="4"/>
+          <newline/>
+          <group>
+            <group cols="4" col="4">
+              <field name="lawsuit_step_id"
+                string="Change the lawsuit step of the invoice"
+                colspan="1"/>
+            </group>
+          </group>
+          <newline/>
+          <notebook>
+            <page string="Invoices">
+              <field name="invoice_ids" colspan="4" nolabel="1"/>
+            </page>
+          </notebook>
+          <newline/>
+          <footer>
+            <button string="Print" name="print_lawsuit" type="object" class="oe_highlight"/>
+            or
+            <button string="Cancel" class="oe_link" special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- for button -->
+    <record id="lawsuit_printer_action" model="ir.actions.act_window">
+      <field name="name">Print Lawsuit Requisition</field>
+      <field name="res_model">credit.control.lawsuit.printer</field>
+      <field name="src_model">account.invoice</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="credit_control_lawsuit_printer_view"/>
+      <field name="target">new</field>
+      <field name="help"></field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Print Lawsuit Requisition"
+                res_model="credit.control.lawsuit.printer"
+                src_model="account.invoice"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="lawsuit_printer_action_menu_action"/>
+
+  </data>
+</openerp>

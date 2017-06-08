@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data noupdate="0">
+    <record id="invoice_lawsuit_step_printed" model="account.invoice.lawsuit.step">
+      <field name="name">Printed</field>
+      <field name="set_when_requisition_printed" eval="True"/>
+    </record>
+  </data>
+</openerp>
