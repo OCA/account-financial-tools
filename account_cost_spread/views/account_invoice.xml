@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="view_supplier_invoice_spread" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line']/tree/field[@name='quantity']"
+                       position="before">
+                    <button name="spread_details" string="Spread" icon="terp-gtk-jump-to-ltr"
+                            type="object"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_customer_invoice_spread" model="ir.ui.view">
+            <field name="name">account.invoice.customer.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line']/tree/field[@name='quantity']"
+                       position="before">
+                    <button name="spread_details" string="Spread" icon="terp-gtk-jump-to-ltr"
+                            type="object"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>
