@@ -33,12 +33,18 @@ class MX_BdM_getter(Currency_getter_interface):
 
     """
 
-    def rate_retrieve(self):
+    def rate_retrieve(self, curr):
         """ Get currency exchange from Banxico.xml and proccess it
         TODO: Get correct data from xml instead of process string
         """
-        url = ('http://www.banxico.org.mx/rsscb/rss?'
-               'BMXC_canal=pagos&BMXC_idioma=es')
+        url = ''
+
+        if curr == 'USD':
+            url = ('http://www.banxico.org.mx/rsscb/rss?'
+                   'BMXC_canal=pagos&BMXC_idioma=es')
+        elif curr == 'EUR':
+            url = ('http://www.banxico.org.mx/rsscb/rss?'
+                   'BMXC_canal=euro&BMXC_idioma=es')
 
         from xml.dom.minidom import parse
         from StringIO import StringIO
@@ -63,12 +69,12 @@ class MX_BdM_getter(Currency_getter_interface):
         if main_currency in currency_array:
             currency_array.remove(main_currency)
 
-        # Suported currencies
-        suported = ['MXN', 'USD']
+        # Supported currencies
+        supported = ['MXN', 'USD', 'EUR']
         for curr in currency_array:
-            if curr in suported:
+            if curr in supported:
                 # Get currency data
-                main_rate = self.rate_retrieve()
+                main_rate = self.rate_retrieve(curr)
                 if main_currency == 'MXN':
                     rate = 1 / main_rate
                 else:
