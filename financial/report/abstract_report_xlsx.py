@@ -40,22 +40,15 @@ class AbstractReportXslx(ReportXlsx):
         report = objects
 
         self.row_pos = 0
-
-        self._define_formats(workbook)
-
         report_name = self._get_report_name()
-        # filters = self._get_report_filters(report)
+        self.sheet = workbook.add_worksheet(report_name[:31])
+        self._define_formats(workbook)
+        filters = self._get_report_filters(report)
         self.columns = self._get_report_columns(report)
         self.columns_resumo = self._get_report_columns_resumo(report)
-
-        self.sheet = workbook.add_worksheet(report_name[:31])
-
         self._set_column_width()
-
         self._write_report_title(report_name)
-
-        # self._write_filters(filters)
-        #
+        self._write_filters(filters)
         self._generate_report_content(workbook, report)
 
     def _define_formats(self, workbook):
@@ -81,25 +74,42 @@ class AbstractReportXslx(ReportXlsx):
         self.format_header_left = workbook.add_format(
             {'bold': True,
              'border': True,
-             'bg_color': '#FFFFCC'})
+             'bg_color': '#DEDEDE'})
         self.format_header_center = workbook.add_format(
             {'bold': True,
              'align': 'center',
+             'valign': 'vcenter',
+             'font_size': 12,
              'border': True,
-             'bg_color': '#FFFFCC'})
+             'bg_color': '#DEDEDE'})
+        self.sheet.set_row(0, 70)
+        self.sheet.set_column('A:A', 30)
         self.format_header_right = workbook.add_format(
             {'bold': True,
              'align': 'right',
              'border': True,
-             'bg_color': '#FFFFCC'})
+             'bg_color': '#DEDEDE'})
         self.format_header_amount = workbook.add_format(
             {'bold': True,
              'border': True,
-             'bg_color': '#FFFFCC'})
+             'bg_color': '#DEDEDE'})
         self.format_header_amount.set_num_format('#,##0.00')
         self.format_amount = workbook.add_format()
         self.format_amount.set_num_format('[$R$-416] #,##0.00;[RED]-[$R$-416] #,##0.00')
-
+        self.format_custom_saldo = workbook.add_format(
+            {'bold': True,
+             'border': False,
+             'bg_color': '#DEDEDE'})
+        self.format_custom_saldo.set_num_format('[$R$-416] #,##0.00;[RED]-[$R$-416] #,##0.00')
+        self.format_report_title = workbook.add_format(
+            {'bold': True,
+             'border': True,
+             'bg_color': '#DEDEDE',
+             'font_size': 30,
+             'align': 'center',
+             'valign': 'vcenter',
+             }
+        )
         self.format_percent_bold_italic = workbook.add_format(
             {'bold': True, 'italic': True}
         )
@@ -118,7 +128,7 @@ class AbstractReportXslx(ReportXlsx):
         """
         self.sheet.merge_range(
             self.row_pos, 0, self.row_pos, len(self.columns) - 1,
-            title, self.format_bold
+            title, self.format_report_title
         )
         self.row_pos += 3
 

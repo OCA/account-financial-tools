@@ -16,7 +16,7 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
             name, table, rml, parser, header, store)
 
     def _get_report_name(self):
-        return _('CashFlow')
+        return _('Planilha de Fluxo de Caixa')
 
     def _get_report_columns(self, report):
         row_mes = 2
@@ -63,6 +63,14 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
             row_mes += 1
         return result
 
+    def _get_report_filters(self, report):
+        return [
+            [_('Data'),
+             _('De: %s Até: %s') % (report.date_from, report.date_to)],
+            [_('Empresa'),
+             _(report.company_id.name)],
+        ]
+
     def write_line(self, line_object):
         """Write a line on current line using all defined columns field name.
         Columns are defined with `_get_report_columns` method.
@@ -81,7 +89,6 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
 
                     if column.get('mes_ano') == mes_ano:
                         valor = value[mes_ano]
-
                 self.sheet.write_number(
                     self.row_pos, col_pos, valor, self.format_amount)
 
@@ -100,18 +107,22 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
     def write_linha_soma(self):
         alfabeto = '.ABCDEFGHIJKLMNOPQRSTUVWYXZ'
         qtd_linhas = len(self.env.context['fluxo_de_caixa']['resumo'])
-        for col_pos, column in self.columns.iteritems():
+        for col_pos, column in self.columns_resumo.iteritems():
             if column.get('type') == 'float':
                 celula = alfabeto[col_pos+1] + str(self.row_pos+1)
                 formula = '{=SUM(%s%s:%s%s)}' % (
                     alfabeto[col_pos+1], str(self.row_pos-qtd_linhas),
                     alfabeto[col_pos+1], str(self.row_pos),
                 )
-                self.sheet.write_formula(celula, formula, self.format_amount)
+                self.sheet.write_formula(
+                    celula, formula, self.format_custom_saldo
+                )
             else:
                 if col_pos == 1:
                     self.sheet.write_string(
-                        self.row_pos, col_pos, 'SALDO' or '')
+                        self.row_pos, col_pos, 'SALDO' or '',
+                        self.format_custom_saldo
+                    )
         self.row_pos += 1
 
     def write_linha_soma_acumulativa(self):
@@ -129,11 +140,15 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
                         alfabeto[col_pos+1], str(self.row_pos)
                     )
                     primeira = False
-                self.sheet.write_formula(celula, formula, self.format_amount)
+                self.sheet.write_formula(
+                    celula, formula, self.format_custom_saldo
+                )
             else:
                 if col_pos == 1:
                     self.sheet.write_string(
-                        self.row_pos, col_pos, 'SALDO ACUMULATIVO' or '')
+                        self.row_pos, col_pos, 'SALDO ACUMULATIVO' or '',
+                        self.format_custom_saldo
+                    )
         self.row_pos += 1
 
     def _generate_report_content(self, workbook, report):

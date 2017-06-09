@@ -218,7 +218,7 @@ class TrialBalanceReportWizard(models.TransientModel):
                     join account_account_tree_analysis aat on aat.child_account_id = fm.account_id
                     join account_account aa on aa.id = aat.parent_account_id
                 where
-                    fm.type in ('2receive', '2pay') and fm.{} >= '{}' and fm.{} <= '{}'
+                    fm.type {} ('2receive', '2pay') and fm.{} >= '{}' and fm.{} <= '{}'
                 group by
                     aa.code, aa.name, Month
                 '''
@@ -227,11 +227,15 @@ class TrialBalanceReportWizard(models.TransientModel):
         self._cr.execute(DROP_TABLE)
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_VIEW)
         self._cr.execute(SQL_ACCOUNT_TREE_ANALYSIS_TABLE)
+        if self.period == 'date_maturity':
+            condition = 'in'
+        else:
+            condition = 'not in'
         SQL_BUSCA = SQL_BUSCA.format(
-            self.period, self.period, self.date_from,
+            self.period, condition, self.period, self.date_from,
             self.period, self.date_to
         )
-        # print (SQL_BUSCA)
+        print (SQL_BUSCA)
         self.env.cr.execute(SQL_BUSCA)
         accounts_return = self.env.cr.dictfetchall()
         date_from = fields.Datetime.from_string(self.date_from)
@@ -258,7 +262,7 @@ class TrialBalanceReportWizard(models.TransientModel):
             }
             if mes == 12:
                 virada_ano += 1
-                mes_ano = 0
+                mes = 0
             mes += 1
 
         def formata_dict(self, account_values):
@@ -351,7 +355,7 @@ class TrialBalanceReportWizard(models.TransientModel):
         """Default export is PDF."""
         model = self.env['report_financial_cashflow']
         report = model.create(self._prepare_report_trial_balance())
-        print (self._prepare_dict())
+        # print (self._prepare_dict())
         return \
             report.with_context(
                 fluxo_de_caixa=self._prepare_dict()
