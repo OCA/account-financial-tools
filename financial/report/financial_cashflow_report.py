@@ -39,7 +39,7 @@ class FinancialCashflowReportCompute(models.TransientModel):
         self.ensure_one()
         # self.compute_data_for_report()
         if xlsx_report:
-            report_name = 'cashflow_report.report_financial_cashflow_xlsx'
+            report_name = 'financial.report_financial_cashflow_xlsx'
 
         return self.env['report'].get_action(
             docids=self.ids, report_name=report_name)

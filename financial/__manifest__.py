@@ -15,6 +15,7 @@
         'copy_views',
         'account',
         'mail',
+        'report_xlsx',
     ],
     'data': [
         'data/ir_sequence_data.xml',

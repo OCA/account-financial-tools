@@ -165,7 +165,7 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
 
 
 TrialBalanceXslx(
-    'report.cashflow_report.report_financial_cashflow_xlsx',
+    'report.financial.report_financial_cashflow_xlsx',
     'report_financial_cashflow',
     parser=report_sxw.rml_parse
 )

@@ -231,7 +231,7 @@ class TrialBalanceReportWizard(models.TransientModel):
             self.period, self.period, self.date_from,
             self.period, self.date_to
         )
-        print (SQL_BUSCA)
+        # print (SQL_BUSCA)
         self.env.cr.execute(SQL_BUSCA)
         accounts_return = self.env.cr.dictfetchall()
         date_from = fields.Datetime.from_string(self.date_from)
