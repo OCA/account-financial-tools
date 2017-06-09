@@ -26,7 +26,7 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
         }
 
         meses = self.env.context['fluxo_de_caixa']['meses']
-        for mes in sorted(meses):
+        for mes in sorted(meses, key=int):
             result.update({
                 row_mes: {
                     'header': meses[mes].values()[0],
@@ -52,8 +52,9 @@ class TrialBalanceXslx(abstract_report_xlsx.AbstractReportXslx):
                 'type': 'amount',
                 'width': 25},
         }
+
         # Dict que sera iterado as colunas das contas (lines)
-        for mes in self.env.context['fluxo_de_caixa']['meses']:
+        for mes in sorted(self.env.context['fluxo_de_caixa']['meses'], key=int):
             result.update({
                 row_mes: {'header': mes,
                           'field': row_mes,

@@ -235,7 +235,7 @@ class TrialBalanceReportWizard(models.TransientModel):
             self.period, condition, self.period, self.date_from,
             self.period, self.date_to
         )
-        print (SQL_BUSCA)
+        # print (SQL_BUSCA)
         self.env.cr.execute(SQL_BUSCA)
         accounts_return = self.env.cr.dictfetchall()
         date_from = fields.Datetime.from_string(self.date_from)
@@ -256,7 +256,7 @@ class TrialBalanceReportWizard(models.TransientModel):
         meses = {}
 
         for i in range(0, months):
-            key = str(mes) + '-' + str(ano)
+            key = str(mes) + '-' + str(ano + virada_ano)
             meses[i] = {
                 key: MONTH[mes] + '/' + str(ano + virada_ano)
             }
