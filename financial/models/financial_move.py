@@ -316,7 +316,7 @@ class FinancialMove(models.Model):
             amount_paid = 0.00
             if record.type in ('2receive', '2pay'):  # FIXME
                 for payment in record.payment_ids:
-                    amount_paid += payment.amount_total
+                    amount_paid += payment.amount_document
                 amount_residual = record.amount_total - amount_paid
                 digits_rounding_precision = record.currency_id.rounding
 
