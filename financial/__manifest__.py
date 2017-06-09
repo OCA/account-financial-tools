@@ -19,15 +19,12 @@
     'data': [
         'data/ir_sequence_data.xml',
         # 'data/financial_move_data.xml',
-
         'views/financial_menu.xml',
-
         'views/financial_move_payment_base_view.xml',
         'views/financial_move_debt_base_view.xml',
         'views/financial_move_debt_2receive_view.xml',
         'views/financial_move_debt_2pay_view.xml',
         # 'views/payment_mode.xml',
-
         'views/inherited_account_account_type_view.xml',
         'views/inherited_account_account_view.xml',
         'views/financial_document_type_view.xml',
@@ -44,6 +41,7 @@
         # 'report/financial_cashflow.xml',
         # 'report/financial_statement_report.xml',
         # 'report/report_financial.xml',
+        'report/financial_cashflow_report.xml',
 
         # 'security/inherited_account_account_type_security.xml',
         'security/inherited_res_partner_bank_security.xml',
