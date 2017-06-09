@@ -1,25 +1,10 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Nicolas Bessi, Guewen Baconnier
-#    Copyright 2012-2014 Camptocamp SA
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2012-2017 Camptocamp SA
+# Copyright 2017 Okia SPRL (https://okia.be)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class CreditControlPrinter(models.TransientModel):
@@ -57,7 +42,7 @@ class CreditControlPrinter(models.TransientModel):
         self.ensure_one()
         comm_obj = self.env['credit.control.communication']
         if not self.line_ids:
-            raise api.Warning(_('No credit control lines selected.'))
+            raise UserError(_('No credit control lines selected.'))
 
         lines = self._get_lines(self.line_ids, self._credit_line_predicate)
 
