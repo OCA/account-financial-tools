@@ -402,6 +402,7 @@ class FinancialMove(models.Model):
             ('draft', 'open'),
             ('open', 'paid'),
             ('open', 'cancel'),
+            ('paid', 'open'),
         ]
         return (old_state, new_state) in allowed
 
