@@ -1,68 +1,85 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2009-2017 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import logging
+
+from openerp import api, fields, models, _
+from openerp.exceptions import Warning as UserError
+
 _logger = logging.getLogger(__name__)
 
 
-class account_asset_remove(orm.TransientModel):
+class AccountAssetRemove(models.TransientModel):
     _name = 'account.asset.remove'
     _description = 'Remove Asset'
 
-    _residual_value_regime_countries = ['FR']
+    _sql_constraints = [(
+        'sale_value', 'CHECK (sale_value>=0)',
+        'The Sale Value must be positive!')]
 
-    def _posting_regime(self, cr, uid, context=None):
-        return[
-            ('residual_value', _('Residual Value')),
-            ('gain_loss_on_sale', _('Gain/Loss on Sale')),
-        ]
+    date_remove = fields.Date(
+        string='Asset Removal Date', required=True,
+        default=fields.Date.today,
+        help="Removal date must be after the last posted entry "
+             "in case of early removal")
+    period_id = fields.Many2one(
+        comodel_name='account.period',
+        string='Force Period',
+        domain=[('state', '!=', 'done'), ('special', '=', False)],
+        help="Keep empty to use the period of the removal ate.")
+    sale_value = fields.Float(
+        string='Sale Value',
+        default=lambda self: self._default_sale_value())
+    account_sale_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Asset Sale Account',
+        domain=[('type', '=', 'other')],
+        default=lambda self: self._default_account_sale_id())
+    account_plus_value_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Plus-Value Account',
+        domain=[('type', '=', 'other')],
+        default=lambda self: self._default_account_plus_value_id())
+    account_min_value_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Min-Value Account',
+        domain=[('type', '=', 'other')],
+        default=lambda self: self._default_account_min_value_id())
+    account_residual_value_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Residual Value Account',
+        domain=[('type', '=', 'other')],
+        default=lambda self: self._default_account_residual_value_id())
+    posting_regime = fields.Selection(
+        selection=lambda self: self._selection_posting_regime(),
+        string='Removal Entry Policy',
+        required=True,
+        default=lambda self: self._get_posting_regime(),
+        help="Removal Entry Policy \n"
+             "  * Residual Value: The non-depreciated value will be "
+             "posted on the 'Residual Value Account' \n"
+             "  * Gain/Loss on Sale: The Gain or Loss will be posted on "
+             "the 'Plus-Value Account' or 'Min-Value Account' ")
+    note = fields.Text('Notes')
 
-    def _get_posting_regime(self, cr, uid, context=None):
-        if not context:
-            context = {}
-        asset_obj = self.pool.get('account.asset.asset')
-        asset = asset_obj.browse(cr, uid, context.get('active_id'))
-        country = asset and asset.company_id.country_id.code or False
-        if country in self._residual_value_regime_countries:
-            return 'residual_value'
-        else:
-            return 'gain_loss_on_sale'
+    @api.model
+    def _default_sale_value(self):
+        return self._get_sale()['sale_value']
 
-    def _get_sale(self, cr, uid, context=None):
-        if not context:
-            context = {}
-        inv_line_obj = self.pool.get('account.invoice.line')
-        currency_obj = self.pool.get('res.currency')
-        asset_id = context.get('active_id')
+    @api.model
+    def _default_account_sale_id(self):
+        return self._get_sale()['account_sale_id']
+
+    def _get_sale(self):
+        asset_id = self._context.get('active_id')
         sale_value = 0.0
         account_sale_id = False
-        inv_line_ids = inv_line_obj.search(
-            cr, uid, [('asset_id', '=', asset_id)], context=context)
-        for line in inv_line_obj.browse(cr, uid, inv_line_ids):
+        inv_lines = self.env['account.invoice.line'].search(
+            [('asset_id', '=', asset_id)])
+        for line in inv_lines:
             inv = line.invoice_id
             comp_curr = inv.company_id.currency_id
             inv_curr = inv.currency_id
@@ -70,119 +87,169 @@ class account_asset_remove(orm.TransientModel):
                 account_sale_id = line.account_id.id
                 amount = line.price_subtotal
                 if inv_curr != comp_curr:
-                    amount = currency_obj.compute(
-                        cr, uid, inv_curr.id, comp_curr.id, amount,
-                        context=context)
+                    amount = comp_curr.compute(amount)
                 sale_value += amount
         return {'sale_value': sale_value, 'account_sale_id': account_sale_id}
 
-    def _get_sale_value(self, cr, uid, context=None):
-        return self._get_sale(cr, uid, context=context)['sale_value']
+    @api.model
+    def _default_account_plus_value_id(self):
+        asset_id = self._context.get('active_id')
+        asset = self.env['account.asset.asset'].browse(asset_id)
+        return asset.category_id.account_plus_value_id
 
-    def _get_sale_account(self, cr, uid, context=None):
-        return self._get_sale(cr, uid, context=context)['account_sale_id']
+    @api.model
+    def _default_account_min_value_id(self):
+        asset_id = self._context.get('active_id')
+        asset = self.env['account.asset.asset'].browse(asset_id)
+        return asset.category_id.account_min_value_id
 
-    def _get_plus_account(self, cr, uid, context=None):
-        if not context:
-            context = {}
-        acc = False
-        asset_obj = self.pool.get('account.asset.asset')
-        asset = asset_obj.browse(cr, uid, context.get('active_id'))
-        if asset:
-            acc = asset.category_id.account_plus_value_id
-        return acc and acc.id or False
+    @api.model
+    def _default_account_residual_value_id(self):
+        asset_id = self._context.get('active_id')
+        asset = self.env['account.asset.asset'].browse(asset_id)
+        return asset.category_id.account_residual_value_id
 
-    def _get_min_account(self, cr, uid, context=None):
-        if not context:
-            context = {}
-        acc = False
-        asset_obj = self.pool.get('account.asset.asset')
-        asset = asset_obj.browse(cr, uid, context.get('active_id'))
-        if asset:
-            acc = asset.category_id.account_min_value_id
-        return acc and acc.id or False
+    @api.model
+    def _selection_posting_regime(self):
+        return[
+            ('residual_value', _('Residual Value')),
+            ('gain_loss_on_sale', _('Gain/Loss on Sale')),
+        ]
 
-    def _get_residual_account(self, cr, uid, context=None):
-        if not context:
-            context = {}
-        acc = False
-        asset_obj = self.pool.get('account.asset.asset')
-        asset = asset_obj.browse(cr, uid, context.get('active_id'))
-        if asset:
-            acc = asset.category_id.account_residual_value_id
-        return acc and acc.id or False
+    @api.model
+    def _get_posting_regime(self):
+        asset_obj = self.env['account.asset.asset']
+        asset = asset_obj.browse(self._context.get('active_id'))
+        country = asset and asset.company_id.country_id.code or False
+        if country in self._residual_value_regime_countries():
+            return 'residual_value'
+        else:
+            return 'gain_loss_on_sale'
 
-    _columns = {
-        'date_remove': fields.date(
-            'Asset Removal Date', required=True,
-            help="Removal date must be after the last posted entry "
-                 "in case of early removal"),
-        'period_id': fields.many2one(
-            'account.period', 'Force Period',
-            domain=[('state', '<>', 'done')],
-            help="Keep empty to use the period of the removal ate."),
-        'sale_value': fields.float('Sale Value'),
-        'account_sale_id': fields.many2one(
-            'account.account', 'Asset Sale Account',
-            domain=[('type', '=', 'other')]),
-        'account_plus_value_id': fields.many2one(
-            'account.account', 'Plus-Value Account',
-            domain=[('type', '=', 'other')]),
-        'account_min_value_id': fields.many2one(
-            'account.account', 'Min-Value Account',
-            domain=[('type', '=', 'other')]),
-        'account_residual_value_id': fields.many2one(
-            'account.account', 'Residual Value Account',
-            domain=[('type', '=', 'other')]),
-        'posting_regime': fields.selection(
-            _posting_regime, 'Removal Entry Policy',
-            required=True,
-            help="Removal Entry Policy \n"
-                 "  * Residual Value: The non-depreciated value will be "
-                 "posted on the 'Residual Value Account' \n"
-                 "  * Gain/Loss on Sale: The Gain or Loss will be posted on "
-                 "the 'Plus-Value Account' or 'Min-Value Account' "),
-        'note': fields.text('Notes'),
-    }
+    def _residual_value_regime_countries(self):
+        return ['FR']
 
-    _defaults = {
-        'sale_value': _get_sale_value,
-        'account_sale_id': _get_sale_account,
-        'account_plus_value_id': _get_plus_account,
-        'account_min_value_id': _get_min_account,
-        'account_residual_value_id': _get_residual_account,
-        'posting_regime': _get_posting_regime,
-    }
+    @api.multi
+    def remove(self):
+        self.ensure_one()
+        asset_obj = self.env['account.asset.asset']
+        asset_line_obj = self.env['account.asset.depreciation.line']
+        move_obj = self.env['account.move']
 
-    _sql_constraints = [(
-        'sale_value', 'CHECK (sale_value>=0)',
-        'The Sale Value must be positive!')]
+        asset_id = self._context.get('active_id')
+        asset = asset_obj.browse(asset_id)
+        asset_ref = asset.code and '%s (ref: %s)' \
+            % (asset.name, asset.code) or asset.name
 
-    def _prepare_early_removal(self, cr, uid,
-                               asset, date_remove, context=None):
+        if self._context.get('early_removal'):
+            residual_value = self._prepare_early_removal(asset)
+        else:
+            residual_value = asset.value_residual
+
+        ctx = dict(self._context, company_id=asset.company_id.id)
+        period_id = self.period_id.id
+        if not period_id:
+            ctx.update(account_period_prefer_normal=True)
+            period_ids = self.env['account.period'].with_context(ctx).find(
+                self.date_remove)
+            if not period_ids:
+                raise UserError(_(
+                    "No period defined for the removal date."))
+            period_id = period_ids[0].id
+
+        dlines = asset_line_obj.search(
+            [('asset_id', '=', asset.id), ('type', '=', 'depreciate')],
+            order='line_date desc')
+        if dlines:
+            last_date = dlines[0].line_date
+        else:
+            create_dl = asset_line_obj.search(
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])[0]
+            last_date = create_dl.line_date
+
+        if self.date_remove < last_date:
+            raise UserError(
+                _("The removal date must be after "
+                  "the last depreciation date."))
+
+        line_name = asset._get_depreciation_entry_name(len(dlines) + 1)
+        journal_id = asset.category_id.journal_id.id
+
+        # create move
+        move_vals = {
+            'name': asset.name,
+            'date': self.date_remove,
+            'ref': line_name,
+            'period_id': period_id,
+            'journal_id': journal_id,
+            'narration': self.note,
+            }
+        move = move_obj.create(move_vals)
+
+        # create asset line
+        asset_line_vals = {
+            'amount': residual_value,
+            'asset_id': asset_id,
+            'name': line_name,
+            'line_date': self.date_remove,
+            'move_id': move.id,
+            'type': 'remove',
+        }
+        asset_line_obj.create(asset_line_vals)
+        asset.write({'state': 'removed', 'date_remove': self.date_remove})
+
+        # create move lines
+        move_lines = self._get_removal_data(asset, residual_value)
+        move.with_context(allow_asset=True).write({'line_id': move_lines})
+
+        return {
+            'name': _("Asset '%s' Removal Journal Entry") % asset_ref,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'context': self._context,
+            'nodestroy': True,
+            'domain': [('id', '=', move.id)],
+        }
+
+    def _prepare_early_removal(self, asset):
         """
         Generate last depreciation entry on the day before the removal date.
         """
-        asset_line_obj = self.pool.get('account.asset.depreciation.line')
+        date_remove = self.date_remove
+        asset_line_obj = self.env['account.asset.depreciation.line']
 
-        digits = self.pool.get('decimal.precision').precision_get(
-            cr, uid, 'Account')
+        digits = self.env['decimal.precision'].precision_get('Account')
 
-        dl_ids = asset_line_obj.search(
-            cr, uid,
-            [('asset_id', '=', asset.id), ('type', '=', 'depreciate'),
-             ('init_entry', '=', False), ('move_check', '=', False)],
-            order='line_date asc')
-        first_to_depreciate_dl = asset_line_obj.browse(cr, uid, dl_ids[0])
+        def _dlines(asset):
+            lines = asset.depreciation_line_ids
+            dlines = lines.filtered(
+                lambda l: l.type == 'depreciate'
+                and not l.init_entry and not l.move_check)
+            dlines = dlines.sorted(key=lambda l: l.line_date)
+            return dlines
+
+        dlines = _dlines(asset)
+        if not dlines:
+            asset.compute_depreciation_board()
+            dlines = _dlines(asset)
+        first_to_depreciate_dl = dlines[0]
 
         first_date = first_to_depreciate_dl.line_date
         if date_remove > first_date:
-            raise orm.except_orm(
-                _('Error!'),
+            raise UserError(
                 _("You can't make an early removal if all the depreciation "
                   "lines for previous periods are not posted."))
 
-        last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        if first_to_depreciate_dl.previous_id:
+            last_depr_date = first_to_depreciate_dl.previous_id.line_date
+        else:
+            create_dl = asset_line_obj.search(
+                [('asset_id', '=', asset.id), ('type', '=', 'create')])
+            last_depr_date = create_dl.line_date
+
         period_number_days = (
             datetime.strptime(first_date, '%Y-%m-%d') -
             datetime.strptime(last_depr_date, '%Y-%m-%d')).days
@@ -201,44 +268,46 @@ class account_asset_remove(orm.TransientModel):
                 'line_date': new_line_date
             }
             first_to_depreciate_dl.write(update_vals)
-            asset_line_obj.create_move(
-                cr, uid, [dl_ids[0]], context=context)
-            dl_ids.pop(0)
-        asset_line_obj.unlink(cr, uid, dl_ids, context=context)
+            dlines[0].create_move()
+            dlines -= dlines[0]
+        dlines.unlink()
         return residual_value
 
-    def _get_removal_data(self, cr, uid, wiz_data, asset, residual_value,
-                          context=None):
+    def _get_removal_data(self, asset, residual_value):
         move_lines = []
         partner_id = asset.partner_id and asset.partner_id.id or False
-        categ = asset.category_id
+        profile = asset.category_id
 
         # asset and asset depreciation account reversal
-        depr_amount = asset.asset_value - residual_value
+        depr_amount = asset.depreciation_base - residual_value
+        if depr_amount:
+            move_line_vals = {
+                'name': asset.name,
+                'account_id': profile.account_depreciation_id.id,
+                'debit': depr_amount > 0 and depr_amount or 0.0,
+                'credit': depr_amount < 0 and -depr_amount or 0.0,
+                'partner_id': partner_id,
+                'asset_id': asset.id
+            }
+            move_lines.append((0, 0, move_line_vals))
+
         move_line_vals = {
             'name': asset.name,
-            'account_id': categ.account_depreciation_id.id,
-            'debit': depr_amount > 0 and depr_amount or 0.0,
-            'credit': depr_amount < 0 and -depr_amount or 0.0,
-            'partner_id': partner_id,
-            'asset_id': asset.id
-        }
-        move_lines.append((0, 0, move_line_vals))
-        move_line_vals = {
-            'name': asset.name,
-            'account_id': categ.account_asset_id.id,
-            'debit': asset.asset_value < 0 and -asset.asset_value or 0.0,
-            'credit': asset.asset_value > 0 and asset.asset_value or 0.0,
+            'account_id': profile.account_asset_id.id,
+            'debit': (asset.depreciation_base < 0 and -asset
+                      .depreciation_base or 0.0),
+            'credit': (asset.depreciation_base > 0 and asset
+                       .depreciation_base or 0.0),
             'partner_id': partner_id,
             'asset_id': asset.id
         }
         move_lines.append((0, 0, move_line_vals))
 
         if residual_value:
-            if wiz_data.posting_regime == 'residual_value':
+            if self.posting_regime == 'residual_value':
                 move_line_vals = {
                     'name': asset.name,
-                    'account_id': wiz_data.account_residual_value_id.id,
+                    'account_id': self.account_residual_value_id.id,
                     'analytic_account_id': asset.account_analytic_id.id,
                     'debit': residual_value,
                     'credit': 0.0,
@@ -246,12 +315,12 @@ class account_asset_remove(orm.TransientModel):
                     'asset_id': asset.id
                 }
                 move_lines.append((0, 0, move_line_vals))
-            elif wiz_data.posting_regime == 'gain_loss_on_sale':
-                if wiz_data.sale_value:
-                    sale_value = wiz_data.sale_value
+            elif self.posting_regime == 'gain_loss_on_sale':
+                if self.sale_value:
+                    sale_value = self.sale_value
                     move_line_vals = {
                         'name': asset.name,
-                        'account_id': wiz_data.account_sale_id.id,
+                        'account_id': self.account_sale_id.id,
                         'analytic_account_id': asset.account_analytic_id.id,
                         'debit': sale_value,
                         'credit': 0.0,
@@ -259,10 +328,10 @@ class account_asset_remove(orm.TransientModel):
                         'asset_id': asset.id
                     }
                     move_lines.append((0, 0, move_line_vals))
-                balance = wiz_data.sale_value - residual_value
-                account_id = (wiz_data.account_plus_value_id.id
+                balance = self.sale_value - residual_value
+                account_id = (self.account_plus_value_id.id
                               if balance > 0
-                              else wiz_data.account_min_value_id.id)
+                              else self.account_min_value_id.id)
                 move_line_vals = {
                     'name': asset.name,
                     'account_id': account_id,
@@ -273,86 +342,4 @@ class account_asset_remove(orm.TransientModel):
                     'asset_id': asset.id
                 }
                 move_lines.append((0, 0, move_line_vals))
-
         return move_lines
-
-    def remove(self, cr, uid, ids, context=None):
-        asset_obj = self.pool.get('account.asset.asset')
-        asset_line_obj = self.pool.get('account.asset.depreciation.line')
-        move_obj = self.pool.get('account.move')
-        period_obj = self.pool.get('account.period')
-
-        asset_id = context['active_id']
-        asset = asset_obj.browse(cr, uid, asset_id, context=context)
-        asset_ref = asset.code and '%s (ref: %s)' \
-            % (asset.name, asset.code) or asset.name
-        wiz_data = self.browse(cr, uid, ids[0], context=context)
-
-        if context.get('early_removal'):
-            residual_value = self._prepare_early_removal(
-                cr, uid, asset, wiz_data.date_remove, context=context)
-        else:
-            residual_value = asset.value_residual
-
-        ctx = dict(context, company_id=asset.company_id.id)
-        period_id = wiz_data.period_id and wiz_data.period_id.id or False
-        if not period_id:
-            ctx.update(account_period_prefer_normal=True)
-            period_ids = period_obj.find(
-                cr, uid, wiz_data.date_remove, context=ctx)
-            period_id = period_ids[0]
-        dl_ids = asset_line_obj.search(
-            cr, uid,
-            [('asset_id', '=', asset.id), ('type', '=', 'depreciate')],
-            order='line_date desc')
-        last_date = asset_line_obj.browse(cr, uid, dl_ids[0]).line_date
-        if wiz_data.date_remove < last_date:
-            raise orm.except_orm(
-                _('Error!'),
-                _("The removal date must be after "
-                  "the last depreciation date."))
-
-        line_name = asset_obj._get_depreciation_entry_name(
-            cr, uid, asset, len(dl_ids) + 1, context=context)
-        journal_id = asset.category_id.journal_id.id
-
-        # create move
-        move_vals = {
-            'name': asset.name,
-            'date': wiz_data.date_remove,
-            'ref': line_name,
-            'period_id': period_id,
-            'journal_id': journal_id,
-            'narration': wiz_data.note,
-            }
-        move_id = move_obj.create(cr, uid, move_vals, context=context)
-
-        # create asset line
-        asset_line_vals = {
-            'amount': residual_value,
-            'asset_id': asset_id,
-            'name': line_name,
-            'line_date': wiz_data.date_remove,
-            'move_id': move_id,
-            'type': 'remove',
-        }
-        asset_line_obj.create(cr, uid, asset_line_vals, context=context)
-        asset.write({'state': 'removed', 'date_remove': wiz_data.date_remove})
-
-        # create move lines
-        move_lines = self._get_removal_data(
-            cr, uid, wiz_data, asset, residual_value, context=context)
-        move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
-                       context=dict(context, allow_asset=True))
-
-        return {
-            'name': _("Asset '%s' Removal Journal Entry") % asset_ref,
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'view_id': False,
-            'type': 'ir.actions.act_window',
-            'context': context,
-            'nodestroy': True,
-            'domain': [('id', '=', move_id)],
-        }

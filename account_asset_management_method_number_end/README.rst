@@ -2,29 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
-Financial asset management
-==========================
+================================================
+Financial asset management - method Number & End
+================================================
 
-This Module manages the assets owned by a company. It will keep
-track of depreciation's occurred on those assets. And it allows to create
-accounting entries from the depreciation lines.
+This module enables the Time Methods 'Number of Depreciations' and 'Ending Date' for the Financial Assets.
 
-The full asset life-cycle is managed (from asset creation to asset removal).
-
-Assets can be created manually as well as automatically
-(via the creation of an accounting entry on the asset account).
-
-Excel based reporting is available via the 'account_asset_management_xls' module.
-
-The module contains a large number of functional enhancements compared to
-the standard account_asset module from Odoo.
-
-Configuration
-=============
-
-It is recommended to configure your Purchase Journal with "Group Invoice Lines" to avoid the
-creation of separate assets per Supplier Invoice Line.
+By doing so, you can use the depreciation table calculation and posting functionality
+for e.g. Cost/Revenue spreading purposes.
 
 Usage
 =====
@@ -32,11 +17,6 @@ Usage
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/92/8.0
-
-Known issues
-============
-
-The module in NOT compatible with the standard account_asset module.
 
 Bug Tracker
 ===========
@@ -51,11 +31,8 @@ Credits
 
 Contributors
 ------------
-- OpenERP SA
 - Luc De Meyer (Noviat)
-- Frédéric Clementi (camptocamp)
-- Florian Dacosta (Akretion)
-- Stéphane Bidoul (Acsone)
+
 
 Maintainer
 ----------

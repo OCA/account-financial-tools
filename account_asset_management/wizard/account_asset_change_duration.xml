@@ -2,11 +2,11 @@
 <openerp>
   <data>
 
-    <record model="ir.ui.view" id="asset_modify_form">
-      <field name="name">wizard.asset.modify.form</field>
+    <record id="asset_modify_view_form" model="ir.ui.view">
+      <field name="name">asset.modify.form</field>
       <field name="model">asset.modify</field>
       <field name="arch" type="xml">
-        <form string="Modify Asset" version="7.0">
+        <form string="Modify Asset">
           <group string="Asset Durations to Modify" col="4">
             <group colspan="2" col="2">
               <field name="name"/>
@@ -14,10 +14,7 @@
             </group>
             <group colspan="2" col="2">
               <field name="method_end"/>
-              <label for="method_period"/>
-              <div>
-                <field name="method_period" class="oe_inline"/>
-              </div>
+              <field name="method_period"/>
             </group>
           </group>
           <separator string="Notes"/>
@@ -31,13 +28,13 @@
       </field>
     </record>
 
-    <record id="action_asset_modify" model="ir.actions.act_window">
+    <record id="asset_modify_action" model="ir.actions.act_window">
       <field name="name">Modify Asset</field>
       <field name="res_model">asset.modify</field>
       <field name="type">ir.actions.act_window</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
-      <field name="view_id" ref="asset_modify_form"/>
+      <field name="view_id" ref="asset_modify_view_form"/>
       <field name="target">new</field>
     </record>
 

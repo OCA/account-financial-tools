@@ -1,24 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2009-2017 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import xlwt
 from datetime import datetime
@@ -139,15 +121,15 @@ class asset_report_xls(report_xls):
                             "or None"),
                     None, self.an_cell_style_date],
                 'totals': [1, 0, 'text', None]},
-            'asset_value': {
+            'depreciation_base': {
                 'header': [
-                    1, 18, 'text', _render("_('Asset Value')"),
+                    1, 18, 'text', _render("_('Depreciation Base')"),
                     None, self.rh_cell_style_right],
                 'asset_view': [
                     1, 0, 'number', None,
                     _render("asset_formula"), self.av_cell_style_decimal],
                 'asset': [
-                    1, 0, 'number', _render("asset.asset_value"),
+                    1, 0, 'number', _render("asset.depreciation_base"),
                     None, self.an_cell_style_decimal],
                 'totals': [
                     1, 0, 'number', None, _render("asset_total_formula"),
@@ -197,15 +179,15 @@ class asset_report_xls(report_xls):
                             "or None"),
                     None, self.an_cell_style_date],
                 'totals': [1, 0, 'text', None]},
-            'asset_value': {
+            'depreciation_base': {
                 'header': [
-                    1, 18, 'text', _render("_('Asset Value')"),
+                    1, 18, 'text', _render("_('Depreciation Base')"),
                     None, self.rh_cell_style_right],
                 'asset_view': [
                     1, 0, 'number', None,
                     _render("asset_formula"), self.av_cell_style_decimal],
                 'asset': [
-                    1, 0, 'number', _render("asset.asset_value"),
+                    1, 0, 'number', _render("asset.depreciation_base"),
                     None, self.an_cell_style_decimal],
                 'totals': [
                     1, 0, 'number', None, _render("asset_total_formula"),
@@ -332,15 +314,15 @@ class asset_report_xls(report_xls):
                             "or None"),
                     None, self.an_cell_style_date],
                 'totals': [1, 0, 'text', None]},
-            'asset_value': {
+            'depreciation_base': {
                 'header': [
-                    1, 18, 'text', _render("_('Asset Value')"),
+                    1, 18, 'text', _render("_('Depreciation Base')"),
                     None, self.rh_cell_style_right],
                 'asset_view': [
                     1, 0, 'number', None,
                     _render("asset_formula"), self.av_cell_style_decimal],
                 'asset': [
-                    1, 0, 'number', _render("asset.asset_value"),
+                    1, 0, 'number', _render("asset.depreciation_base"),
                     None, self.an_cell_style_decimal],
                 'totals': [
                     1, 0, 'number', None, _render("asset_total_formula"),
@@ -488,8 +470,8 @@ class asset_report_xls(report_xls):
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_acquisition_fields' list !"))
-        asset_value_pos = 'asset_value' in wl_acq and \
-            wl_acq.index('asset_value')
+        depreciation_base_pos = 'depreciation_base' in wl_acq and \
+            wl_acq.index('depreciation_base')
         salvage_value_pos = 'salvage_value' in wl_acq and \
             wl_acq.index('salvage_value')
 
@@ -516,10 +498,10 @@ class asset_report_xls(report_xls):
         for entry in entries:
             asset = entry['asset']
             if asset.type == 'view':
-                asset_value_cells = [
-                    rowcol_to_cell(row_pos_start + x, asset_value_pos)
+                depreciation_base_cells = [
+                    rowcol_to_cell(row_pos_start + x, depreciation_base_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
+                asset_formula = '+'.join(depreciation_base_cells)  # noqa: disable F841, report_xls namespace trick
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
                     for x in entry['child_pos']]
@@ -542,7 +524,7 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        asset_total_formula = rowcol_to_cell(row_pos_start, depreciation_base_pos)  # noqa: disable F841, report_xls namespace trick
         salvage_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
 
@@ -580,11 +562,10 @@ class asset_report_xls(report_xls):
         cr.execute(
             "SELECT id FROM account_asset_asset "
             "WHERE date_start <= %s"
-            "AND ((date_remove IS NULL) OR "
-            "(date_remove >= %s AND date_remove <= %s)) "
+            "AND (date_remove IS NULL OR date_remove >= %s) "
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_start ASC",
-            (fy.date_stop, fy.date_start, fy.date_stop, tuple(self.asset_ids))
+            (fy.date_stop, fy.date_start, tuple(self.asset_ids))
             )
         act_ids = [x[0] for x in cr.fetchall()]
 
@@ -608,8 +589,8 @@ class asset_report_xls(report_xls):
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_active_fields' list !"))
-        asset_value_pos = 'asset_value' in wl_act and \
-            wl_act.index('asset_value')
+        depreciation_base_pos = 'depreciation_base' in wl_act and \
+            wl_act.index('depreciation_base')
         salvage_value_pos = 'salvage_value' in wl_act and \
             wl_act.index('salvage_value')
         fy_start_value_pos = 'fy_start_value' in wl_act and \
@@ -685,7 +666,8 @@ class asset_report_xls(report_xls):
                             _('Data Error'),
                             _("Depreciation Table error for asset %s !")
                             % error_name)
-                asset.fy_start_value = asset.asset_value - value_depreciated
+                asset.fy_start_value = \
+                    asset.depreciation_base - value_depreciated
 
                 # fy_end_value
                 cr.execute(
@@ -701,8 +683,9 @@ class asset_report_xls(report_xls):
                 elif not asset.method_number:
                     value_depreciated = 0.0
                 else:
-                    value_depreciated = asset.asset_value
-                asset.fy_end_value = asset.asset_value - value_depreciated
+                    value_depreciated = asset.depreciation_base
+                asset.fy_end_value = \
+                    asset.depreciation_base - value_depreciated
             entry['asset'] = asset
             entries.append(entry)
 
@@ -711,16 +694,18 @@ class asset_report_xls(report_xls):
 
             fy_start_value_cell = rowcol_to_cell(row_pos, fy_start_value_pos)
             fy_end_value_cell = rowcol_to_cell(row_pos, fy_end_value_pos)
-            asset_value_cell = rowcol_to_cell(row_pos, asset_value_pos)
+            depreciation_base_cell = rowcol_to_cell(
+                row_pos, depreciation_base_pos)
             fy_diff_formula = fy_start_value_cell + '-' + fy_end_value_cell
-            total_depr_formula = asset_value_cell + '-' + fy_end_value_cell
+            total_depr_formula = depreciation_base_cell \
+                + '-' + fy_end_value_cell
 
             if asset.type == 'view':
 
-                asset_value_cells = [
-                    rowcol_to_cell(row_pos_start + x, asset_value_pos)
+                depreciation_base_cells = [
+                    rowcol_to_cell(row_pos_start + x, depreciation_base_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
+                asset_formula = '+'.join(depreciation_base_cells)  # noqa: disable F841, report_xls namespace trick
 
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
@@ -756,7 +741,7 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        asset_total_formula = rowcol_to_cell(row_pos_start, depreciation_base_pos)  # noqa: disable F841, report_xls namespace trick
         salvage_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
         fy_start_total_formula = rowcol_to_cell(row_pos_start,  # noqa: disable F841, report_xls namespace trick
@@ -765,9 +750,9 @@ class asset_report_xls(report_xls):
 
         fy_start_value_cell = rowcol_to_cell(row_pos, fy_start_value_pos)
         fy_end_value_cell = rowcol_to_cell(row_pos, fy_end_value_pos)
-        asset_value_cell = rowcol_to_cell(row_pos, asset_value_pos)
+        depreciation_base_cell = rowcol_to_cell(row_pos, depreciation_base_pos)
         fy_diff_formula = fy_start_value_cell + '-' + fy_end_value_cell  # noqa: disable F841, report_xls namespace trick
-        total_depr_formula = asset_value_cell + '-' + fy_end_value_cell  # noqa: disable F841, report_xls namespace trick
+        total_depr_formula = depreciation_base_cell + '-' + fy_end_value_cell  # noqa: disable F841, report_xls namespace trick
 
         c_specs = map(
             lambda x: self.render(
@@ -828,8 +813,8 @@ class asset_report_xls(report_xls):
             raise orm.except_orm(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_removal_fields' list !"))
-        asset_value_pos = 'asset_value' in wl_dsp and \
-            wl_dsp.index('asset_value')
+        depreciation_base_pos = 'depreciation_base' in wl_dsp and \
+            wl_dsp.index('depreciation_base')
         salvage_value_pos = 'salvage_value' in wl_dsp and \
             wl_dsp.index('salvage_value')
 
@@ -856,10 +841,10 @@ class asset_report_xls(report_xls):
         for entry in entries:
             asset = entry['asset']
             if asset.type == 'view':
-                asset_value_cells = [
-                    rowcol_to_cell(row_pos_start + x, asset_value_pos)
+                depreciation_base_cells = [
+                    rowcol_to_cell(row_pos_start + x, depreciation_base_pos)
                     for x in entry['child_pos']]
-                asset_formula = '+'.join(asset_value_cells)  # noqa: disable F841, report_xls namespace trick
+                asset_formula = '+'.join(depreciation_base_cells)  # noqa: disable F841, report_xls namespace trick
                 salvage_value_cells = [
                     rowcol_to_cell(row_pos_start + x, salvage_value_pos)
                     for x in entry['child_pos']]
@@ -882,7 +867,7 @@ class asset_report_xls(report_xls):
                 row_pos = self.xls_write_row(
                     ws, row_pos, row_data, row_style=self.an_cell_style)
 
-        asset_total_formula = rowcol_to_cell(row_pos_start, asset_value_pos)  # noqa: disable F841, report_xls namespace trick
+        asset_total_formula = rowcol_to_cell(row_pos_start, depreciation_base_pos)  # noqa: disable F841, report_xls namespace trick
         salvage_total_formula = rowcol_to_cell(row_pos_start,   # noqa: disable F841, report_xls namespace trick
                                                salvage_value_pos)
 
@@ -917,5 +902,3 @@ asset_report_xls(
     'report.account.asset.xls',
     'account.asset.asset',
     parser=asset_report_xls_parser)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

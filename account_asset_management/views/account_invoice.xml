@@ -2,19 +2,7 @@
 <openerp>
   <data>
 
-    <record model="ir.ui.view" id="view_account_invoice_asset_form">
-      <field name="name">account.invoice.form.add.asset_category</field>
-      <field name="model">account.invoice.line</field>
-      <field name="inherit_id" ref="account.view_invoice_line_form"/>
-      <field name="arch" type="xml">
-        <field name="account_id" position="before">
-          <field name="asset_id" groups="account.group_account_manager"/>
-          <field name="asset_category_id" invisible="context.get('type') not in ['in_invoice','in_refund']"/>
-        </field>
-      </field>
-    </record>
-
-    <record model="ir.ui.view" id="view_invoice_asset_category">
+    <record id="invoice_supplier_form" model="ir.ui.view">
       <field name="name">account.invoice.supplier.form</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="account.invoice_supplier_form"/>
@@ -25,7 +13,7 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="view_customer_invoice_asset">
+    <record id="invoice_form" model="ir.ui.view">
       <field name="name">account.invoice.customer.form</field>
       <field name="model">account.invoice</field>
       <field name="inherit_id" ref="account.invoice_form"/>

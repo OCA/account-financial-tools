@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<openerp>
+  <data>
+
+    <menuitem id="menu_finance_assets"
+              name="Assets"
+              parent="account.menu_finance"
+              sequence="9"/>
+
+    <menuitem id="account_asset_asset_menu"
+              action="account_asset_asset_action"
+              parent="menu_finance_assets"/>
+
+    <menuitem id="account_asset_asset_menu_hierarchy"
+              action="account_asset_asset_action_hierarchy"
+              parent="menu_finance_assets"
+              sequence="100"/>
+
+    <menuitem id="menu_finance_config_assets"
+              name="Assets"
+              parent="account.menu_finance_configuration"
+              sequence="25"/>
+    
+    <menuitem id="account_asset_category_menu"
+              action="account_asset_category_action"
+              parent="menu_finance_config_assets"/>
+
+  </data>
+</openerp>

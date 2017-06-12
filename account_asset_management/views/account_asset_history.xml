@@ -1,0 +1,45 @@
+<openerp>
+  <data>
+
+    <record id="account_asset_history_view_form" model="ir.ui.view">
+      <field name="name">account.asset.history.form</field>
+      <field name="model">account.asset.history</field>
+      <field name="arch" type="xml">
+        <form string="Asset History">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="date"/>
+              <field name="user_id"/>
+            </group>
+            <group>
+              <field name="method_time"/>
+              <field name="method_number" attrs="{'invisible':[('method_time','=','end')]}"/>
+              <field name="method_period"/>
+              <field name="method_end" attrs="{'invisible':[('method_time','in',['number','year'])]}"/>
+            </group>
+          </group>
+          <separator string="Notes"/>
+          <field name="note"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="account_asset_history_view_tree" model="ir.ui.view" >
+      <field name="name">account.asset.history.tree</field>
+      <field name="model">account.asset.history</field>
+      <field name="arch" type="xml">
+        <tree string="Asset history">
+          <field name="date"/>
+          <field name="name"/>
+          <field name="user_id"/>
+          <field name="method_time"/>
+          <field name="method_number" invisible="1"/>
+          <field name="method_period" invisible="1"/>
+          <field name="method_end" invisible="1"/>
+        </tree>
+      </field>
+    </record>
+
+  </data>
+</openerp>

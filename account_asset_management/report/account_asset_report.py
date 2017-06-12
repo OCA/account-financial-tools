@@ -1,58 +1,40 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
+# Copyright 2009-2017 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import tools
-from openerp.osv import fields, orm
+from openerp import fields, models, tools
 
 
-class asset_asset_report(orm.Model):
-    _name = "asset.asset.report"
+class AssetAssetReport(models.Model):
+    _name = 'asset.asset.report'
     _description = "Assets Analysis"
     _auto = False
-    _columns = {
-        'name': fields.char('Year', size=16, required=False, readonly=True),
-        'date_start': fields.date('Asset Start Date', readonly=True),
-        'date_remove': fields.date('Asset Removal Date', readonly=True),
-        'depreciation_date': fields.date(
-            'Depreciation Date', readonly=True),
-        'asset_id': fields.many2one(
-            'account.asset.asset', string='Asset', readonly=True),
-        'asset_category_id': fields.many2one(
-            'account.asset.category', string='Asset category'),
-        'partner_id': fields.many2one(
-            'res.partner', 'Partner', readonly=True),
-        'state': fields.selection(
-            [('draft', 'Draft'), ('open', 'Running'), ('close', 'Close')],
-            'Status', readonly=True),
-        'depreciation_value': fields.float(
-            'Amount of Depreciation Lines', readonly=True),
-        'move_check': fields.boolean('Posted', readonly=True),
-        'nbr': fields.integer('# of Depreciation Lines', readonly=True),
-        'asset_value': fields.float('Asset Value', readonly=True),
-        'posted_value': fields.float('Posted Amount', readonly=True),
-        'unposted_value': fields.float('Unposted Amount', readonly=True),
-        'company_id': fields.many2one('res.company', 'Company', readonly=True),
-    }
+
+    name = fields.Char(string='Year', size=16, required=False, readonly=True)
+    date_start = fields.Date(string='Asset Start Date', readonly=True)
+    date_remove = fields.Date(string='Asset Removal Date', readonly=True)
+    depreciation_date = fields.Date(string='Depreciation Date', readonly=True)
+    asset_id = fields.Many2one(
+        comodel_name='account.asset.asset', string='Asset', readonly=True)
+    asset_category_id = fields.Many2one(
+        comodel_name='account.asset.category', string='Asset category')
+    partner_id = fields.Many2one(
+        comodel_name='res.partner', string='Partner', readonly=True)
+    state = fields.Selection(
+        selection=[('draft', 'Draft'),
+                   ('open', 'Running'),
+                   ('close', 'Close')],
+        string='Status', readonly=True)
+    depreciation_value = fields.Float(
+        string='Amount of Depreciation Lines', readonly=True)
+    move_check = fields.Boolean(string='Posted', readonly=True)
+    nbr = fields.Integer(string='# of Depreciation Lines', readonly=True)
+    depreciation_base = fields.Float(string='Depreciation Base', readonly=True)
+    posted_value = fields.Float(string='Posted Amount', readonly=True)
+    unposted_value = fields.Float(string='Unposted Amount', readonly=True)
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company', readonly=True)
 
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'asset_asset_report')
@@ -64,7 +46,7 @@ class asset_asset_report(orm.Model):
                     dl.line_date as depreciation_date,
                     a.date_start as date_start,
                     a.date_remove as date_remove,
-                    a.asset_value as asset_value,
+                    a.depreciation_base as depreciation_base,
                     dl.amount as depreciation_value,
                     (CASE WHEN dl.move_check
                       THEN dl.amount
@@ -86,8 +68,6 @@ class asset_asset_report(orm.Model):
                 group by
                     dl.amount, dl.asset_id, dl.line_date, dl.name,
                     a.date_start, a.date_remove, dl.move_check, a.state,
-                    a.category_id, a.partner_id, a.company_id, a.asset_value,
-                    a.id, a.salvage_value
+                    a.category_id, a.partner_id, a.company_id,
+                    a.depreciation_base, a.id, a.salvage_value
         )""")
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

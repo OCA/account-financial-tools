@@ -1,64 +1,57 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
+# Copyright 2009-2017 Noviat
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+from openerp import api, fields, models, _
 
 
-class asset_depreciation_confirmation_wizard(orm.TransientModel):
+class AssetDepreciationConfirmationWizard(models.TransientModel):
     _name = "asset.depreciation.confirmation.wizard"
     _description = "asset.depreciation.confirmation.wizard"
-    _columns = {
-        'period_id': fields.many2one(
-            'account.period', 'Period',
-            domain="[('special', '=', False), ('state', '=', 'draft')]",
-            required=True,
-            help="Choose the period for which you want to automatically "
-                 "post the depreciation lines of running assets"),
-    }
 
-    def _get_period(self, cr, uid, context=None):
-        ctx = dict(context or {}, account_period_prefer_normal=True)
-        periods = self.pool.get('account.period').find(cr, uid, context=ctx)
+    period_id = fields.Many2one(
+        comodel_name='account.period', string='Period', required=True,
+        domain="[('special', '=', False), ('state', '=', 'draft')]",
+        default=lambda self: self._default_period_id(),
+        help="Choose the period for which you want to automatically "
+             "post the depreciation lines of running assets")
+    note = fields.Text()
+
+    @api.model
+    def _default_period_id(self):
+        ctx = dict(self._context, account_period_prefer_normal=True)
+        periods = self.env['account.period'].with_context(ctx).find()
+        periods = periods.filtered(lambda r: r.state == 'draft')
         if periods:
             return periods[0]
         return False
 
-    _defaults = {
-        'period_id': _get_period,
-    }
+    @api.multi
+    def asset_compute(self):
+        assets = self.env['account.asset.asset'].search(
+            [('state', '=', 'open'), ('type', '=', 'normal')])
+        created_move_ids, error_log = assets._compute_entries(
+            self.period_id, check_triggers=True)
 
-    def asset_compute(self, cr, uid, ids, context):
-        ass_obj = self.pool.get('account.asset.asset')
-        asset_ids = ass_obj.search(
-            cr, uid,
-            [('state', '=', 'open'), ('type', '=', 'normal')],
-            context=context)
-        data = self.browse(cr, uid, ids, context=context)
-        period_id = data[0].period_id.id
-        created_move_ids = ass_obj._compute_entries(
-            cr, uid, asset_ids, period_id,
-            check_triggers=True, context=context)
+        if error_log:
+            module = __name__.split('addons.')[1].split('.')[0]
+            result_view = self.env.ref(
+                '%s.asset_depreciation_confirmation_wizard_view_form_result'
+                % module)
+            self.note = _("Compute Assets errors") + ':\n' + error_log
+            return {
+                'name': _('Compute Assets result'),
+                'res_id': self.id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'asset.depreciation.confirmation.wizard',
+                'view_id': result_view.id,
+                'target': 'new',
+                'type': 'ir.actions.act_window',
+                'context': {'asset_move_ids': created_move_ids},
+                }
+
         domain = "[('id', 'in', [" + \
             ','.join(map(str, created_move_ids)) + "])]"
         return {
@@ -71,4 +64,16 @@ class asset_depreciation_confirmation_wizard(orm.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    @api.multi
+    def view_asset_moves(self):
+        self.ensure_one()
+        domain = [('id', 'in', self._context.get('asset_move_ids', []))]
+        return {
+            'name': _('Created Asset Moves'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',
+            'view_id': False,
+            'domain': domain,
+            'type': 'ir.actions.act_window',
+        }

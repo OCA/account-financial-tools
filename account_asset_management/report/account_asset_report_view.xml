@@ -2,7 +2,7 @@
 <openerp>
   <data>
 
-    <record model="ir.ui.view" id="view_asset_asset_report_tree">
+    <record id="view_asset_asset_report_tree" model="ir.ui.view">
       <field name="name">asset.asset.report.tree</field>
       <field name="model">asset.asset.report</field>
       <field name="arch" type="xml">
@@ -17,7 +17,7 @@
           <field name="move_check" invisible="1"/>
           <field name="company_id" invisible="1"/>
           <field name="nbr" sum="# of Depreciation Lines"/>
-          <field name="asset_value"/>
+          <field name="depreciation_base"/>
           <field name="depreciation_value" sum="Amount of Depreciation Lines"/>
           <field name="posted_value"/>
           <field name="unposted_value" invisible="not context.get('unposted_value_visible', True)"/>

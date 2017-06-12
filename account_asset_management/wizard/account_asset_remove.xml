@@ -2,11 +2,11 @@
 <openerp>
     <data>
 
-      <record model="ir.ui.view" id="account_asset_remove_form">
+      <record id="account_asset_remove_view_form" model="ir.ui.view">
         <field name="name">account.asset.remove.form</field>
         <field name="model">account.asset.remove</field>
         <field name="arch" type="xml">
-          <form string="Remove Asset" version="7.0">
+          <form string="Remove Asset">
             <group colspan="4" col="4">
               <field name="date_remove"/>
               <field name="period_id"/>

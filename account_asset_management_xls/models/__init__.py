@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 try:
-    from . import models
+    from . import account_asset_asset
     from . import wizard
     from . import report
 except ImportError:
