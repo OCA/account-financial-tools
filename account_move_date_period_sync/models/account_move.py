@@ -14,5 +14,3 @@ class AccountMove(models.Model):
             period_obj = self.env['account.period']
             period_id = period_obj.find(self.date)
             self.period_id = period_id
-            return period_id
-        return False
