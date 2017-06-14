@@ -152,6 +152,7 @@ DROP_TABLE = '''
     DROP TABLE IF EXISTS financial_account_tree_analysis
 '''
 
+<<<<<<< HEAD
 SQL_SELECT_ACCOUNT_TREE_ANALYSIS = '''
 select
   row_number() over() as id,
@@ -162,11 +163,21 @@ select
 from
   financial_account_tree_analysis_view
   
+=======
+SQL_ACCOUNT_TREE_ANALYSIS_TABLE = '''
+create table financial_account_tree_analysis as
+select
+  row_number() over() as id,
+  *
+from
+  financial_account_tree_analysis_view
+>>>>>>> [WIP] Criação da conta financeira
 order by
   child_account_id,
   parent_account_id;
 '''
 
+<<<<<<< HEAD
 SQL_ACCOUNT_TREE_ANALYSIS_TABLE = '''
 create table financial_account_tree_analysis as
 ''' + SQL_SELECT_ACCOUNT_TREE_ANALYSIS + '''
@@ -184,6 +195,8 @@ create index financial_account_tree_analysis_level
   (level);
 '''
 
+=======
+>>>>>>> [WIP] Criação da conta financeira
 
 class FinancialAccountTreeAnalysis(models.Model):
     _name = b'financial.account.tree.analysis'

@@ -22,3 +22,38 @@ class FinancialDocumentType(models.Model):
         string='Account',
         ondelete='restrict',
     )
+    # account_move_template_2receive_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Receivable',
+    #     ondelete='restrict',
+    # )
+    # account_move_template_2pay_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Payable',
+    #     ondelete='restrict',
+    # )
+    # account_move_template_receipt_item_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Receipt Item',
+    #     ondelete='restrict',
+    # )
+    # account_move_template_payment_item_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Payment Item',
+    #     ondelete='restrict',
+    # )
+    # account_move_template_money_in_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Money In',
+    #     ondelete='restrict',
+    # )
+    # account_move_template_money_out_id = fields.Many2one(
+    #     comodel_name='financial.account.move.template',
+    #     string='Account Move Template when Money Out',
+    #     ondelete='restrict',
+    # )
+    # journal_id = fields.Many2one(
+    #     comodel_name='account.journal',
+    #     string='Journal',
+    #     ondelete='restrict',
+    # )
