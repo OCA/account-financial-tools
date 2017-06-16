@@ -105,6 +105,7 @@ Contributors
 * Assem Bayahi
 * Daniel Dico <ddico@oerp.ca> (BOC)
 * Dmytro Katyukha <firemage.dima@gmail.com>
+* Lam Thai Binh <binh.lt@komit-consulting.com> (VCB)
 
 Maintainer
 ----------
