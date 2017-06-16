@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="financial_account_tree">
+        <field name="name">financial.account.tree (in financial)</field>
+        <field name="model">financial.account</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="parent_id" invisible="1" />
+                <field name="type" invisible="1" />
+                <field name="complete_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_account_form">
+        <field name="name">financial.account.form (in financial)</field>
+        <field name="model">financial.account</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group colspan="4" col="4">
+                            <field name="code" required="1" />
+                            <newline />
+                            <field name="name" required="1" colspan="4" />
+                            <newline />
+                            <field name="parent_id" colspan="4" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_account_search">
+        <field name="name">financial.account.search (in financial)</field>
+        <field name="model">financial.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="complete_name" />
+           </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_account_action">
+        <field name="name">Financial Accounts</field>
+        <field name="res_model">financial.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_ref" ref="financial.financial_account_search" />
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_account_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="financial_account_tree"/>
+        <field name="act_window_id" ref="financial_account_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_account_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="financial_account_form"/>
+        <field name="act_window_id" ref="financial_account_action"/>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_account_menu">
+        <field name="name">Financial Accounts</field>
+        <field name="parent_id" ref="financial_config_menu"/>
+        <field name="action" ref="financial_account_action"/>
+        <field name="sequence" eval="2"/>
+    </record>
+
+</odoo>

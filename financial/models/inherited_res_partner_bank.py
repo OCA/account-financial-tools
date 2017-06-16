@@ -9,7 +9,6 @@ from odoo import fields, models
 
 class ResPartnerBank(models.Model):
     _inherit = 'res.partner.bank'
-    # _inherits = ['mail.thread']
 
     initial_balance = fields.Monetary(
         track_visibility='onchange',
@@ -19,8 +18,3 @@ class ResPartnerBank(models.Model):
         track_visibility='onchange',
         default=fields.Date.context_today,
     )
-    # account_id = fields.Many2one(
-    #     comodel_name='account.account',
-    #     string='Account',
-    #     ondelete='restrict',
-    # )

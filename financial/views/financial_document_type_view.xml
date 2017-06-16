@@ -7,16 +7,15 @@
 <odoo>
 
     <record model="ir.ui.view" id="financial_document_type_form" >
-        <field name="name">financial.document.type.form</field>
+        <field name="name">financial.document.type.form (in financial)</field>
         <field name="model">financial.document.type</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
             <form string="Document Type">
                 <sheet>
                     <group>
-                        <group colspan="4" col="4">
-                            <field name="name" required="1" colspan="4" />
-                            <newline />
+                        <group name="general" colspan="4" col="2">
+                            <field name="name" required="1" colspan="2" />
                         </group>
                     </group>
                 </sheet>
@@ -72,7 +71,7 @@
         <field name="name">Document Type</field>
         <field name="parent_id" ref="financial_config_menu"/>
         <field name="action" ref="financial_document_type_action"/>
-        <field name="sequence" eval="18"/>
+        <field name="sequence" eval="3"/>
     </record>
 
 </odoo>

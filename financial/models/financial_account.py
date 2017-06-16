@@ -8,7 +8,7 @@
 from __future__ import division, print_function, unicode_literals
 
 from odoo import api, fields, models
-from ..constants import *
+from .financial_account_tree_analysis import SQL_SELECT_ACCOUNT_TREE_ANALYSIS
 
 
 class FinancialAccount(models.Model):
@@ -17,8 +17,9 @@ class FinancialAccount(models.Model):
     _parent_name = 'parent_id'
     # _parent_store = True
     # _parent_order = 'code, name'
-    # _order = 'parent_left, code'
-    
+    _rec_name = 'complete_name'
+    _order = 'code, complete_name'
+
     code = fields.Char(
         string='Code', 
         size=20,
@@ -120,3 +121,36 @@ class FinancialAccount(models.Model):
             if account.code and account.name:
                 account.complete_name = account.code + ' - ' + \
                     account._compute_complete_name()
+
+    def recreate_financial_account_tree_analysis(self):
+        SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS = '''
+        delete from financial_account_tree_analysis;
+        insert into financial_account_tree_analysis (id, child_account_id,
+          parent_account_id, level)
+        ''' + SQL_SELECT_ACCOUNT_TREE_ANALYSIS
+
+        self.env.cr.execute(SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS)
+
+    @api.model
+    def create(self, vals):
+        res = super(FinancialAccount, self).create(vals)
+
+        self.recreate_financial_account_tree_analysis()
+
+        return res
+
+    @api.model
+    def write(self, vals):
+        res = super(FinancialAccount, self).write(vals)
+
+        self.recreate_financial_account_tree_analysis()
+
+        return res
+
+    @api.model
+    def unlink(self):
+        res = super(FinancialAccount, self).unlink()
+
+        self.recreate_financial_account_tree_analysis()
+
+        return res

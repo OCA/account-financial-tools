@@ -5,7 +5,7 @@
 <odoo>
 <data>
 
-    <record model="ir.ui.view" id="res_partner_bank_form_view">
+    <record model="ir.ui.view" id="res_partner_bank_form">
         <field name="name">res.partner.bank.form (in financial)</field>
         <field name="model">res.partner.bank</field>
         <field name="inherit_id" ref="base.view_partner_bank_form"/>
@@ -13,19 +13,16 @@
             <xpath expr="//group" position="after">
                 <newline />
                 <group colspan="4" col="4">
-                    <group string="Balance">
+                    <group string="Balance" name="general">
                         <field name="initial_balance"/>
                         <field name="date_balance"/>
-                    </group>
-                    <group string="Accounting">
-                        <field name="account_id"/>
                     </group>
                 </group>
             </xpath>
         </field>
     </record>
 
-    <record model="ir.ui.view" id="res_partner_bank_tree_view">
+    <record model="ir.ui.view" id="res_partner_bank_tree">
         <field name="name">res.partner.bank.tree (in financial)</field>
         <field name="model">res.partner.bank</field>
         <field name="inherit_id" ref="base.view_partner_bank_tree"/>
@@ -33,7 +30,6 @@
             <field name="partner_id" position="after">
                 <field name="initial_balance"/>
                 <field name="date_balance"/>
-                <field name="account_id"/>
             </field>
         </field>
     </record>
@@ -64,7 +60,7 @@
         <field name="name">Bank Accounts</field>
         <field name="parent_id" ref="financial_config_menu"/>
         <field name="action" ref="res_partner_bank_action"/>
-        <field name="sequence" eval="20"/>
+        <field name="sequence" eval="1"/>
     </record>
 
 </data>

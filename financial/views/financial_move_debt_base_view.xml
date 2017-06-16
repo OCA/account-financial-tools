@@ -85,10 +85,22 @@
                     <notebook>
                         <page string="Payments" name="payments">
                             <!--<field name="bank_id"  options="{'no_create': True, 'no_open': True}" />-->
-                            <field name="payment_ids" context="{'form_view_ref': 'financial.financial_move_payment_base_form', 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'search_view_ref': 'financial.financial_move_payment_base_search'}" />
+                            <field name="payment_ids" context="{'default_account_id': account_id, 'form_view_ref': 'financial.financial_move_payment_base_form', 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'search_view_ref': 'financial.financial_move_payment_base_search'}" />
                         </page>
-                        <page string="Accounting" name="accounting">
-                        </page>
+                        <!--<page string="Accounting" name="accounting">-->
+                            <!--<group>-->
+                                <!--<group colspan="4" col="4">-->
+                                    <!--<field name="account_type_id" invisible="1"/>-->
+                                    <!--<field name="analytic_account_id" invisible="1"/>-->
+                                    <!--<field name="journal_id" />-->
+                                    <!--<field name="account_move_template_id" />-->
+                                    <!--<field name="account_move_id" readonly="1" />-->
+                                    <!--<button type="object" name="create_account_move" string="Gera lançamento contábil" />-->
+                                    <!--<separator string="Partidas do lançamento contábil" colspan="4" />-->
+                                    <!--<field name="account_move_line_ids" nolabel="1" colspan="4" context="{'tree_view_ref': 'sped_account.account_move_line_tree'}" />-->
+                                <!--</group>-->
+                            <!--</group>-->
+                        <!--</page>-->
                     </notebook>
                     <div>
                         <field name="communication" placeholder="Communication ..."/>
@@ -106,6 +118,7 @@
     <record model="ir.ui.view" id="financial_move_debt_base_search">
         <field name="name">financial.move.debt.base.search (in financial)</field>
         <field name="model">financial.move</field>
+        <field name="priority">9999</field>
         <field name="arch" type="xml">
             <search string="Debts">
                 <filter icon="terp-sale" string="State" context="{'group_by': 'state'}" />

@@ -11,9 +11,7 @@
     'author': 'KMEE,Odoo Community Association (OCA)',
     'website': 'www.kmee.com.br',
     'depends': [
-        'l10n_br_resource',
         'copy_views',
-        'account',
         'mail',
         'report_xlsx',
     ],
@@ -25,13 +23,10 @@
         'views/financial_move_debt_base_view.xml',
         'views/financial_move_debt_2receive_view.xml',
         'views/financial_move_debt_2pay_view.xml',
-        # 'views/payment_mode.xml',
-        'views/inherited_account_account_type_view.xml',
-        'views/inherited_account_account_view.xml',
+
         'views/financial_document_type_view.xml',
-        'views/financial_account_move_template_view.xml',
+        'views/financial_account_view.xml',
         'views/inherited_res_partner_bank_view.xml',
-        'views/inherited_account_journal_view.xml',
 
         # 'wizards/financial_cancel.xml',
         # 'wizards/financial_edit.xml',
@@ -44,8 +39,7 @@
         # 'report/report_financial.xml',
         'report/financial_cashflow_report.xml',
 
-        # 'security/inherited_account_account_type_security.xml',
-        'security/inherited_res_partner_bank_security.xml',
+        # 'security/inherited_res_partner_bank_security.xml',
         # 'security/financial_move_security.xml',
     ],
     'demo': [
