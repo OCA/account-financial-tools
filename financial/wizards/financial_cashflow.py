@@ -6,9 +6,7 @@
 from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
-
 from operator import itemgetter
-
 from odoo import api, fields, models
 
 
@@ -28,12 +26,16 @@ MONTH = {
 }
 
 
+class TrialBalanceReportWizard(models.TransientModel):
+    """Trial balance report wizard."""
+    _name = b'trial.balance.report.wizard'
+    _description = 'Trial Balance Report Wizard'
+
     company_id = fields.Many2one(
         comodel_name='res.company',
         default=lambda self: self.env.user.company_id,
         string='Company'
     )
-
     period = fields.Selection(
         string='Period',
         required=True,
@@ -43,7 +45,6 @@ MONTH = {
             ('date_payment', 'Período Realizado')
         ],
     )
-
     date_from = fields.Date(
         required=True,
         default=datetime.now().strftime('%Y-%m-01'),
@@ -52,7 +53,6 @@ MONTH = {
         required=True,
         default=datetime.now().strftime('%Y-12-01'),
     )
-
     hide_account_balance_at_0 = fields.Boolean(
         string='Hide account ending balance at 0',
         help='Use this filter to hide an account with an ending balance at 0.'

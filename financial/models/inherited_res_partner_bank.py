@@ -18,8 +18,3 @@ class ResPartnerBank(models.Model):
         track_visibility='onchange',
         default=fields.Date.context_today,
     )
-    # account_id = fields.Many2one(
-    #     comodel_name='account.account',
-    #     string='Account',
-    #     ondelete='restrict',
-    # )
