@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    ODOO, Open Source Management Solution
-#    Copyright (C) 2016 Steigend IT Solutions
-#    For more details, check COPYRIGHT and LICENSE files
-#
-##############################################################################
+# Copyright (C) 2016 Steigend IT Solutions
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
@@ -23,7 +18,6 @@ class AccountAccount(models.Model):
     @api.model
     def _move_domain_get(self, domain=None):
         context = dict(self._context or {})
-        domain = domain and safe_eval(str(domain)) or []
 
         res = ''
         date_field = 'date'
@@ -36,8 +30,8 @@ class AccountAccount(models.Model):
                 res += " AND ({} >= '{}' OR at.include_initial_balance = true) ".format(
                     date_field, context['date_from'], )
             elif context.get('initial_bal'):
-                res += " AND l.{} < '{}' ".format(date_field,
-                                                  context['date_from'])
+                res += " AND l.{} < '{}' ".format(
+                    date_field, context['date_from'])
             else:
                 res += " AND l.{} >= '{}' ".format(
                     date_field, context['date_from'])
@@ -60,18 +54,18 @@ class AccountAccount(models.Model):
         return res
 
     @api.multi
-    @api.depends('move_line_ids', 'move_line_ids.amount_currency', 'move_line_ids.debit', 'move_line_ids.credit')
+    @api.depends('move_line_ids', 'move_line_ids.amount_currency',
+                 'move_line_ids.debit', 'move_line_ids.credit')
     def _compute_values(self):
         default_domain = self._move_domain_get()
-        query = '''
-            SELECT sum(debit) debit, sum(credit) credit, sum(debit - credit) balance
-            FROM account_move_line l
-            LEFT JOIN account_move m ON l.move_id = m.id
-            LEFT JOIN account_account a ON l.account_id = a.id
-            LEFT JOIN account_account_type at ON a.user_type_id = at.id
-            WHERE 1 = 1 AND l.account_id in %s
-        ''' + default_domain
-
+        query = 'SELECT sum(debit) debit, sum(credit) credit, ' \
+                'sum(debit - credit) balance ' \
+                'FROM account_move_line l ' \
+                'LEFT JOIN account_move m ON l.move_id = m.id ' \
+                'LEFT JOIN account_account a ON l.account_id = a.id ' \
+                'LEFT JOIN account_account_type at ON a.user_type_id = at.id '\
+                'WHERE 1 = 1 AND l.account_id in %s '
+        query += default_domain
         for account in self:
             sub_accounts = self.with_context(
                 {'show_parent_account': True}).search([
@@ -85,12 +79,12 @@ class AccountAccount(models.Model):
 
     move_line_ids = fields.One2many(
         'account.move.line', 'account_id', 'Journal Entry Lines')
-    balance = fields.Float(compute="_compute_values",
-                           digits=dp.get_precision('Account'))
-    credit = fields.Float(compute="_compute_values",
-                          digits=dp.get_precision('Account'))
-    debit = fields.Float(compute="_compute_values",
-                         digits=dp.get_precision('Account'))
+    balance = fields.Float(
+        compute='_compute_values', digits=dp.get_precision('Account'))
+    credit = fields.Float(
+        compute='_compute_values', digits=dp.get_precision('Account'))
+    debit = fields.Float(
+        compute='_compute_values', digits=dp.get_precision('Account'))
     parent_id = fields.Many2one(
         'account.account', 'Parent Account', ondelete="set null")
     child_ids = fields.One2many(
@@ -108,7 +102,8 @@ class AccountAccount(models.Model):
         context = self._context or {}
         if not context.get('show_parent_account', False):
             args += [('user_type_id.type', '!=', 'view')]
-        return super(AccountAccount, self).search(args, offset, limit, order, count=count)
+        return super(AccountAccount, self).search(
+            args, offset, limit, order, count=count)
 
 
 class AccountJournal(models.Model):
@@ -120,14 +115,16 @@ class AccountJournal(models.Model):
             name, company, currency_id, type)
         # Seek the next available number for the account code
         code_digits = company.accounts_code_digits or 0
+        account_code_prefix = company.cash_account_code_prefix or \
+            company.bank_account_code_prefix or ''
         if type == 'bank':
             account_code_prefix = company.bank_account_code_prefix or ''
-        else:
-            account_code_prefix = company.cash_account_code_prefix or company.bank_account_code_prefix or ''
 
         liquidity_type = self.env.ref('account_parent.data_account_type_view')
-        parent_id = self.env['account.account'].search([('code', '=', account_code_prefix),
-                                                        ('company_id', '=', company.id), ('user_type_id', '=', liquidity_type.id)], limit=1)
+        parent_id = self.env['account.account'].search(
+            [('code', '=', account_code_prefix),
+             ('company_id', '=', company.id),
+             ('user_type_id', '=', liquidity_type.id)], limit=1)
 
         if parent_id:
             res.update({'parent_id': parent_id.id})

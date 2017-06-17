@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    ODOO, Open Source Management Solution
-#    Copyright (C) 2016 Steigend IT Solutions
-#    For more details, check COPYRIGHT and LICENSE files
-#
-##############################################################################
+# Copyright (C) 2016 Steigend IT Solutions
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import account_chart
+from . import account_chart

@@ -6,19 +6,18 @@
     'summary': 'Restore account hierarchy and views',
     'author': 'Steigend IT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.steigendit.com',
-    'category': 'Accounting &amp; Finance',
+    'category': 'Accounting',
     'version': '10.0.1.0.0',
     'depends': [
         'account'
     ],
     'data': [
         'security/account_parent_security.xml',
+        'data/account_type_data.xml',
         'views/account_view.xml',
         'views/open_chart.xml',
-        'data/account_type_data.xml',
     ],
     'installable': True,
-    'application': True,
-    'auto_install': False,
+    'application': False,
     'license': 'AGPL-3',
 }

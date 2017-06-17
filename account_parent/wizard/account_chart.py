@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    ODOO, Open Source Management Solution
-#    Copyright (C) 2016 Steigend IT Solutions
-#    For more details, check COPYRIGHT and LICENSE files
-#
-##############################################################################
+# Copyright (C) 2016 Steigend IT Solutions
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import ast
 
-from odoo import models, fields, api
-from openerp.tools.translate import _
+from odoo import api, fields, models, _
 
 
 class OpenAccountChart(models.TransientModel):
@@ -20,13 +14,15 @@ class OpenAccountChart(models.TransientModel):
     _name = "account.open.chart"
     _description = "Account Open chart"
 
-    company_id = fields.Many2one('res.company', string='Company',
-                                 readonly=True, default=lambda self: self.env.user.company_id)
+    company_id = fields.Many2one(
+        'res.company', string='Company', readonly=True,
+        default=lambda self: self.env.user.company_id)
     date_from = fields.Date(string='Start Date')
     date_to = fields.Date(string='End Date')
-    target_move = fields.Selection([('posted', 'All Posted Entries'),
-                                    ('all', 'All Entries'),
-                                    ], string='Target Moves', required=True, default='posted')
+    target_move = fields.Selection(
+        [('posted', 'All Posted Entries'),
+         ('all', 'All Entries'), ],
+        string='Target Moves', required=True, default='posted')
     parent_needed = fields.Boolean('Parent Grouping Needed')
 
     def _build_contexts(self, data):
@@ -42,13 +38,15 @@ class OpenAccountChart(models.TransientModel):
     def account_chart_open_window(self):
         """
         Opens chart of Accounts
-        @return: dictionary of Open account chart window on given date(s) and all Entries or posted entries
+        @return: dictionary of Open account chart window on given date(s)
+        and all Entries or posted entries
         """
         self.ensure_one()
         data = self.read([])[0]
         used_context = self._build_contexts(data)
         self = self.with_context(used_context)
-        if self.env['account.account'].search([('parent_id', '!=', False)], limit=1):
+        if self.env['account.account'].search(
+                [('parent_id', '!=', False)], limit=1):
             result = self.env.ref(
                 'account_parent.open_view_account_tree').read([])[0]
         else:

@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    ODOO, Open Source Management Solution
-#    Copyright (C) 2016 Steigend IT Solutions
-#    For more details, check COPYRIGHT and LICENSE files
-#
-##############################################################################
+# Copyright (C) 2016 Steigend IT Solutions
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, _
+from odoo import _, api, fields, models
 
 
 class AccountAccountTemplate(models.Model):
@@ -22,10 +17,10 @@ class AccountAccountTemplate(models.Model):
         PropertyObj = self.env['ir.property']
         value = account_id and 'account.account,' + str(account_id) or False
         if value:
-            field = self.env['ir.model.fields'].search([('name', '=', 'property_temp_related_account_id'),
-                                                        ('model', '=',
-                                                         "account.account.template"),
-                                                        ('relation', '=', 'account.account')], limit=1)
+            field = self.env['ir.model.fields'].search(
+                [('name', '=', 'property_temp_related_account_id'),
+                 ('model', '=', "account.account.template"),
+                 ('relation', '=', 'account.account')], limit=1)
             vals = {
                 'name': 'property_temp_related_account_id',
                 'company_id': company.id,
@@ -33,8 +28,10 @@ class AccountAccountTemplate(models.Model):
                 'value': value,
                 'res_id': 'account.account.template,' + str(self.id)
             }
-            properties = PropertyObj.search([('res_id', '=', self.id), (
-                'name', '=', 'property_temp_related_account_id'), ('company_id', '=', company.id)])
+            properties = PropertyObj.search(
+                [('res_id', '=', self.id),
+                 ('name', '=', 'property_temp_related_account_id'),
+                 ('company_id', '=', company.id)])
             if properties:
                 # the property exist: modify it
                 properties.write(vals)
@@ -48,16 +45,19 @@ class AccountChartTemplate(models.Model):
     _inherit = "account.chart.template"
 
     @api.multi
-    def generate_account(self, tax_template_ref, acc_template_ref, code_digits, company):
+    def generate_account(self, tax_template_ref, acc_template_ref, code_digits,
+                         company):
         account_tmpl_pool = self.env['account.account.template']
         account_pool = self.env['account.account']
-        account_template_account_dict = super(AccountChartTemplate, self).generate_account(
-            tax_template_ref, acc_template_ref, code_digits, company)
+        account_template_account_dict = super(
+            AccountChartTemplate, self).generate_account(
+                tax_template_ref, acc_template_ref, code_digits, company)
         account_template_objs = account_tmpl_pool.browse(
             account_template_account_dict.keys())
         for account_template_obj in account_template_objs:
             account_template_obj.update_template_property_field(
-                account_template_account_dict[account_template_obj.id], company)
+                account_template_account_dict[account_template_obj.id],
+                company)
             if not account_template_obj.parent_id:
                 continue
             account_parent_id = account_template_account_dict.get(
@@ -68,12 +68,17 @@ class AccountChartTemplate(models.Model):
         return account_template_account_dict
 
     @api.multi
-    def update_generated_account(self, tax_template_ref=[], code_digits=1, company=False, importing_parent=False):
+    def update_generated_account(self, tax_template_ref=[], code_digits=1,
+                                 company=False, importing_parent=False):
         """ This method for generating parent accounts from templates.
 
-            :param tax_template_ref: Taxes templates reference for write taxes_id in account_account.
-            :param code_digits: number of digits got from wizard.multi.charts.accounts, this is use for account code.
-            :param company_id: company_id selected from wizard.multi.charts.accounts.
+            :param tax_template_ref: Taxes templates reference for write
+                taxes_id in account_account.
+            :param code_digits: number of digits got
+                from wizard.multi.charts.accounts,
+                this is use for account code.
+            :param company_id: company_id selected
+                from wizard.multi.charts.accounts.
             :returns: return acc_template_ref for reference purpose.
             :rtype: dict
         """
@@ -83,18 +88,13 @@ class AccountChartTemplate(models.Model):
         view_liquidity_type = self.env.ref(
             'account_parent.data_account_type_view')
         if not importing_parent:
-            #             parent_account_id = account_obj.with_context({'show_parent_account':True}).search([('parent_id','=',False),
-            #                                                              ('user_type_id','=',view_liquidity_type.id),('company_id','=',company.id)], limit=1)
-            #             account = account_obj.search([('code','=',"999999"),('company_id','=',company.id)])
-            #             account and account.with_context({'company_id':company.id}).write({'parent_id':parent_account_id.id})
             return True
         self.ensure_one()
         if not company:
             company = self.env.user.company_id
-        account_tmpl_obj = self.env['account.account.template']
-        account_obj = self.env['account.account']
-        acc_template = account_tmpl_obj.search([('nocreate', '!=', True), ('chart_template_id', '=', self.id),
-                                                ], order='id')
+        acc_template = account_tmpl_obj.search(
+            [('nocreate', '!=', True),
+             ('chart_template_id', '=', self.id), ], order='id')
         code_account_dict = {}
 
         for account_template in acc_template:
@@ -112,21 +112,27 @@ class AccountChartTemplate(models.Model):
                 new_code = account_template.code
             else:
                 new_code = code_acc
-            new_account = self.env['account.account'].with_context({'show_parent_account': True}).search(
-                [('code', '=', new_code), ('company_id', '=', company.id)], limit=1)
+            new_account = account_obj.with_context(
+                {'show_parent_account': True}).search(
+                    [('code', '=', new_code),
+                     ('company_id', '=', company.id)], limit=1)
             if not new_account:
+                currency_id = account_template.currency_id and \
+                    account_template.currency_id.id or False
+                user_type_id = account_template.user_type_id and \
+                    account_template.user_type_id.id or False
                 vals = {
                     'name': account_template.name,
-                    'currency_id': account_template.currency_id and account_template.currency_id.id or False,
+                    'currency_id': currency_id,
                     'code': new_code,
-                    'user_type_id': account_template.user_type_id and account_template.user_type_id.id or False,
+                    'user_type_id': user_type_id,
                     'reconcile': account_template.reconcile,
                     'note': account_template.note,
                     'tax_ids': [(6, 0, tax_ids)],
                     'company_id': company.id,
-                    'tag_ids': [(6, 0, [t.id for t in account_template.tag_ids])],
+                    'tag_ids': [(6, 0, [tuple(account_template.tag_ids)])],
                 }
-                new_account = self.env['account.account'].create(vals)
+                new_account = account_obj.create(vals)
             account_template.update_template_property_field(
                 new_account.id, company)
             if new_code not in code_account_dict:
@@ -136,32 +142,45 @@ class AccountChartTemplate(models.Model):
                 parent_account_id = code_account_dict.get(
                     company.bank_account_code_prefix, False)
             else:
-                parent_account_id = account_obj.with_context({'show_parent_account': True}).search(
-                    [('code', '=', company.bank_account_code_prefix), ('company_id', '=', company.id)], limit=1)
-            account = account_obj.search([('code', 'like', "%s%%" % company.bank_account_code_prefix),
-                                          ('id', '!=', parent_account_id.id), ('company_id', '=', company.id)])
-            account and account.write({'parent_id': parent_account_id.id})
+                parent_account_id = account_obj.with_context(
+                    {'show_parent_account': True}).search(
+                        [('code', '=', company.bank_account_code_prefix),
+                         ('company_id', '=', company.id)], limit=1)
+            account = account_obj.search(
+                [('code', 'like', "%s%%" % company.bank_account_code_prefix),
+                 ('id', '!=', parent_account_id.id),
+                 ('company_id', '=', company.id)])
+            if account:
+                account.write({
+                    'parent_id': parent_account_id.id
+                })
         if company.cash_account_code_prefix:
             if code_account_dict.get(company.cash_account_code_prefix, False):
                 parent_account_id = code_account_dict.get(
                     company.cash_account_code_prefix, False)
             else:
-                parent_account_id = account_obj.with_context({'show_parent_account': True}).search(
-                    [('code', '=', company.cash_account_code_prefix), ('company_id', '=', company.id)], limit=1)
+                parent_account_id = account_obj.with_context(
+                    {'show_parent_account': True}).search(
+                        [('code', '=', company.cash_account_code_prefix),
+                         ('company_id', '=', company.id)], limit=1)
 
-            account = account_obj.search([('code', 'like', "%s%%" % company.cash_account_code_prefix),
-                                          ('id', '!=', parent_account_id.id), ('company_id', '=', company.id)])
-            account and account.write({'parent_id': parent_account_id.id})
-#         parent_account_id = account_obj.with_context({'show_parent_account':True}).search([('parent_id','=',False),
-#                                                              ('user_type_id','=',view_liquidity_type.id),('company_id','=',company.id)], limit=1)
-#         account = account_obj.search([('code','=',"999999"),('company_id','=',company.id)])
-#         account and account.with_context({'company_id':company.id}).write({'parent_id':parent_account_id.id})
+            account = account_obj.search(
+                [('code', 'like', "%s%%" % company.cash_account_code_prefix),
+                 ('id', '!=', parent_account_id.id),
+                 ('company_id', '=', company.id)])
+            if account:
+                account.write({
+                    'parent_id': parent_account_id.id
+                })
 
         all_acc_templates = acc_template.with_context(
             {'company_id': company.id})
         for account_template in all_acc_templates:
             if not account_template.parent_id:
                 continue
-            account_template.property_temp_related_account_id.write(
-                {'parent_id': account_template.parent_id.property_temp_related_account_id.id})
+            parent_id = account_template.parent_id and \
+                account_template.parent_id.property_temp_related_account_id.id
+            account_template.property_temp_related_account_id.write({
+                'parent_id': parent_id
+            })
         return True
