@@ -183,7 +183,7 @@ class AccountAssetRemove(models.TransientModel):
             'period_id': period_id,
             'journal_id': journal_id,
             'narration': self.note,
-            }
+        }
         move = move_obj.create(move_vals)
 
         # create asset line
@@ -226,8 +226,8 @@ class AccountAssetRemove(models.TransientModel):
         def _dlines(asset):
             lines = asset.depreciation_line_ids
             dlines = lines.filtered(
-                lambda l: l.type == 'depreciate'
-                and not l.init_entry and not l.move_check)
+                lambda l: l.type == 'depreciate' and not
+                l.init_entry and not l.move_check)
             dlines = dlines.sorted(key=lambda l: l.line_date)
             return dlines
 

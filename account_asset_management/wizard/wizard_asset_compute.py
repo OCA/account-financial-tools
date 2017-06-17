@@ -50,7 +50,7 @@ class AssetDepreciationConfirmationWizard(models.TransientModel):
                 'target': 'new',
                 'type': 'ir.actions.act_window',
                 'context': {'asset_move_ids': created_move_ids},
-                }
+            }
 
         domain = "[('id', 'in', [" + \
             ','.join(map(str, created_move_ids)) + "])]"

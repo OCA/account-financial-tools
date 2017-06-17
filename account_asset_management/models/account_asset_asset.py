@@ -17,7 +17,7 @@ from openerp.exceptions import Warning as UserError
 _logger = logging.getLogger(__name__)
 
 
-class dummy_fy(object):
+class DummyFy(object):
     def __init__(self, *args, **argv):
         for key, arg in argv.items():
             setattr(self, key, arg)
@@ -164,7 +164,7 @@ class AccountAssetAsset(models.Model):
              # "depreciation lines and the time between 2 depreciations.\n"
              # "  * Ending Date: Choose the time between 2 depreciations "
              # "and the date the depreciations won't go beyond."
-        )
+    )
     prorata = fields.Boolean(
         string='Prorata Temporis', readonly=True,
         states={'draft': [('readonly', False)]},
@@ -237,8 +237,8 @@ class AccountAssetAsset(models.Model):
         for asset in self:
             if asset.type == 'normal':
                 lines = asset.depreciation_line_ids.filtered(
-                    lambda l: l.type in ('depreciate', 'remove')
-                    and (l.init_entry or l.move_check))
+                    lambda l: l.type in ('depreciate', 'remove') and
+                    (l.init_entry or l.move_check))
                 value_depreciated = sum([l.amount for l in lines])
                 asset.value_residual = \
                     asset.depreciation_base - value_depreciated
@@ -265,13 +265,14 @@ class AccountAssetAsset(models.Model):
                     _("Degressive-Linear is only supported for Time Method = "
                       "Year."))
 
-    @api.one
+    @api.multi
     @api.constrains('date_start', 'method_end')
     def _check_dates(self):
-        if self.method_time == 'end':
-            if self.method_end <= self.date_start:
-                raise UserError(
-                    _("The Start Date must precede the Ending Date."))
+        for asset in self:
+            if asset.method_time == 'end':
+                if asset.method_end <= asset.date_start:
+                    raise UserError(
+                        _("The Start Date must precede the Ending Date."))
 
     @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method')
     def _onchange_purchase_salvage_value(self):
@@ -339,7 +340,7 @@ class AccountAssetAsset(models.Model):
                 'line_date': asset.date_start,
                 'init_entry': True,
                 'type': 'create',
-                }
+            }
             asset_line = asset_line_obj.create(asset_line_vals)
             if self._context.get('create_asset_from_move_line'):
                 asset_line.move_id = self._context['move_id']
@@ -776,8 +777,8 @@ class AccountAssetAsset(models.Model):
                 i += 1
 
         # last entry
-        if not (self.method_time == 'number'
-                and len(line_dates) == self.method_number):
+        if not (self.method_time == 'number' and
+                len(line_dates) == self.method_number):
             line_dates.append(line_date)
 
         return line_dates
@@ -803,8 +804,8 @@ class AccountAssetAsset(models.Model):
                     break
 
                 if (line_date > min(entry['date_stop'],
-                                    depreciation_stop_date)
-                        and not (i == i_max and li == li_max)):
+                                    depreciation_stop_date) and not
+                        (i == i_max and li == li_max)):
                     break
 
                 if self.method == 'degr-linear' \
@@ -831,7 +832,7 @@ class AccountAssetAsset(models.Model):
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
-                    }
+                }
                 lines.append(line)
                 depreciated_value += amount
 
@@ -851,7 +852,7 @@ class AccountAssetAsset(models.Model):
                     lines[-1].update({
                         'amount': amount,
                         'remaining_value': remaining_value,
-                        })
+                    })
                     depreciated_value -= diff
 
             if not lines:
@@ -907,7 +908,7 @@ class AccountAssetAsset(models.Model):
                 fy_date_start = fy_date_start - relativedelta(years=1)
             fy_date_stop = fy_date_start + relativedelta(years=1, days=-1)
             fy_id = False
-            fy = dummy_fy(
+            fy = DummyFy(
                 date_start=fy_date_start.strftime('%Y-%m-%d'),
                 date_stop=fy_date_stop.strftime('%Y-%m-%d'),
                 id=False,
@@ -955,9 +956,9 @@ class AccountAssetAsset(models.Model):
                 if self.method_period == 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
-                    period_amount = year_amount/4
+                    period_amount = year_amount / 4
                 elif self.method_period == 'month':
-                    period_amount = year_amount/12
+                    period_amount = year_amount / 12
                 if i == i_max:
                     if self.method in ['linear-limit', 'degr-limit']:
                         fy_amount = fy_residual_amount - self.salvage_value
@@ -1052,10 +1053,10 @@ class AccountAssetAsset(models.Model):
                     % (asset.name, asset.code) or asset.name
                 error_log += _(
                     "\nError while processing asset '%s': %s"
-                    ) % (asset_ref, str(e))
+                ) % (asset_ref, str(e))
                 error_msg = _(
                     "Error while processing asset '%s': \n\n%s"
-                    ) % (asset_ref, tb)
+                ) % (asset_ref, tb)
                 _logger.error("%s, %s", self._name, error_msg)
 
         if check_triggers and recomputes:

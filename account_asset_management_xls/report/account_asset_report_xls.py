@@ -2,24 +2,26 @@
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import logging
 import xlwt
 from datetime import datetime
-from openerp.osv import orm
+
+from openerp.exceptions import Warning as UserError
 from openerp.report import report_sxw
 from openerp.addons.report_xls.report_xls import report_xls
 from openerp.addons.report_xls.utils import rowcol_to_cell, _render
 from openerp.tools.translate import translate, _
-import logging
+
 _logger = logging.getLogger(__name__)
 
 
 _ir_translation_name = 'account.asset.report'
 
 
-class asset_report_xls_parser(report_sxw.rml_parse):
+class AssetReportXlsParser(report_sxw.rml_parse):
 
     def __init__(self, cr, uid, name, context):
-        super(asset_report_xls_parser, self).__init__(
+        super(AssetReportXlsParser, self).__init__(
             cr, uid, name, context=context)
         asset_obj = self.pool.get('account.asset.asset')
         self.context = context
@@ -46,11 +48,11 @@ class asset_report_xls_parser(report_sxw.rml_parse):
         return res or src
 
 
-class asset_report_xls(report_xls):
+class AssetReportXls(report_xls):
 
     def __init__(self, name, table, rml=False, parser=False, header=True,
                  store=False):
-        super(asset_report_xls, self).__init__(
+        super(AssetReportXls, self).__init__(
             name, table, rml, parser, header, store)
 
         # Cell Styles
@@ -467,7 +469,7 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_acq:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise UserError(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_acquisition_fields' list !"))
         depreciation_base_pos = 'depreciation_base' in wl_acq and \
@@ -566,7 +568,7 @@ class asset_report_xls(report_xls):
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_start ASC",
             (fy.date_stop, fy.date_start, tuple(self.asset_ids))
-            )
+        )
         act_ids = [x[0] for x in cr.fetchall()]
 
         if not act_ids:
@@ -586,7 +588,7 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_act:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise UserError(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_active_fields' list !"))
         depreciation_base_pos = 'depreciation_base' in wl_act and \
@@ -649,7 +651,7 @@ class asset_report_xls(report_xls):
                             (data[0], fy.date_start))
                         res = cr.fetchone()
                         if res:
-                            raise orm.except_orm(
+                            raise UserError(
                                 _('Data Error'),
                                 _("You can not report on a Fiscal Year "
                                   "with unposted entries in prior years. "
@@ -657,12 +659,12 @@ class asset_report_xls(report_xls):
                                   "dd. '%s'  of asset '%s' !")
                                 % (res[0], error_name))
                         else:
-                            raise orm.except_orm(
+                            raise UserError(
                                 _('Data Error'),
                                 _("Depreciation Table error for asset %s !")
                                 % error_name)
                     else:
-                        raise orm.except_orm(
+                        raise UserError(
                             _('Data Error'),
                             _("Depreciation Table error for asset %s !")
                             % error_name)
@@ -810,7 +812,7 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_dsp:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise UserError(_('Customization Error'), _(
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_removal_fields' list !"))
         depreciation_base_pos = 'depreciation_base' in wl_dsp and \
@@ -898,7 +900,7 @@ class asset_report_xls(report_xls):
         self._removal_report(_p, _xs, data, objects, wb)
 
 
-asset_report_xls(
+AssetReportXls(
     'report.account.asset.xls',
     'account.asset.asset',
-    parser=asset_report_xls_parser)
+    parser=AssetReportXlsParser)

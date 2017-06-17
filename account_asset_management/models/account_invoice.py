@@ -21,7 +21,7 @@ class AccountInvoice(models.Model):
                 asset_line_name = asset._get_depreciation_entry_name(0)
                 asset.depreciation_line_ids[0].with_context(
                     {'allow_asset_line_update': True}
-                    ).name = asset_line_name
+                ).name = asset_line_name
         return True
 
     @api.multi

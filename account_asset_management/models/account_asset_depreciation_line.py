@@ -41,12 +41,12 @@ class AccountAssetDepreciationLine(models.Model):
         string='Amount', digits=dp.get_precision('Account'),
         required=True)
     remaining_value = fields.Float(
-        compute='_compute',
+        compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
         store=True)
     depreciated_value = fields.Float(
-        compute='_compute',
+        compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
         store=True)
@@ -71,7 +71,7 @@ class AccountAssetDepreciationLine(models.Model):
 
     @api.depends('amount', 'previous_id')
     @api.multi
-    def _compute(self):
+    def _compute_values(self):
         dlines = self
         if self._context.get('no_compute_asset_line_ids'):
             # skip compute for lines in unlink
@@ -131,8 +131,8 @@ class AccountAssetDepreciationLine(models.Model):
                     "with an associated accounting entry."))
             elif vals.get('init_entry'):
                 check = asset_lines.filtered(
-                    lambda l: l.move_check and l.type == 'depreciate'
-                    and l.line_date <= line_date)
+                    lambda l: l.move_check and l.type == 'depreciate' and
+                    l.line_date <= line_date)
                 if check:
                     raise UserError(_(
                         "You cannot set the 'Initial Balance Entry' flag "
@@ -141,18 +141,17 @@ class AccountAssetDepreciationLine(models.Model):
             elif vals.get('line_date'):
                 if dl.type == 'create':
                     check = asset_lines.filtered(
-                        lambda l: l.type != 'create'
-                        and (l.init_entry or l.move_check)
-                        and l.line_date < vals['line_date'])
+                        lambda l: l.type != 'create' and
+                        (l.init_entry or l.move_check) and
+                        l.line_date < vals['line_date'])
                     if check:
                         raise UserError(
                             _("You cannot set the Asset Start Date "
                               "after already posted entries."))
                 else:
                     check = asset_lines.filtered(
-                        lambda l: (l.init_entry or l.move_check)
-                        and l.line_date > vals['line_date']
-                        and l != dl)
+                        lambda l: (l.init_entry or l.move_check) and
+                        l.line_date > vals['line_date'] and l != dl)
                     if check:
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
@@ -269,7 +268,7 @@ class AccountAssetDepreciationLine(models.Model):
             'context': self._context,
             'nodestroy': True,
             'domain': [('id', '=', self.move_id.id)],
-            }
+        }
 
     @api.multi
     def unlink_move(self):

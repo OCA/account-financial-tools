@@ -202,7 +202,9 @@ class TestAssetManagement(common.TransactionCase):
                                    8.22, places=2)
 
     def test_5_degressive_linear(self):
-        """Degressive-Linear with annual depreciation."""
+        """Degressive-Linear with annual and quarterly depreciation."""
+
+        # annual depreciation
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
@@ -233,7 +235,7 @@ class TestAssetManagement(common.TransactionCase):
         self.assertAlmostEqual(asset.depreciation_line_ids[4].amount,
                                160.00, places=2)
 
-        """Degressive-Linear with quarterly depreciation."""
+        # quarterly depreciation
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
             'category_id': self.ref('account_asset_management.'
