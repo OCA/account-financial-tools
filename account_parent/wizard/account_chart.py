@@ -7,7 +7,10 @@
 #
 ##############################################################################
 
-from odoo import models, fields, api, _
+import ast
+
+from odoo import models, fields, api
+from openerp.tools.translate import _
 
 
 class OpenAccountChart(models.TransientModel):
@@ -51,7 +54,7 @@ class OpenAccountChart(models.TransientModel):
         else:
             result = self.env.ref(
                 'account_parent.open_view_account_noparent_tree').read([])[0]
-        result_context = eval(result.get('context', '{}')) or {}
+        result_context = ast.literal_eval(result.get('context', '{}'))
         used_context.update(result_context)
         result['context'] = str(used_context)
         return result
@@ -66,5 +69,3 @@ class WizardMultiChartsAccounts(models.TransientModel):
         self.chart_template_id.update_generated_account(
             {}, self.code_digits, self.company_id)
         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

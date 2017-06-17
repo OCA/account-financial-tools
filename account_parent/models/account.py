@@ -61,7 +61,7 @@ class AccountAccount(models.Model):
 
     @api.multi
     @api.depends('move_line_ids', 'move_line_ids.amount_currency', 'move_line_ids.debit', 'move_line_ids.credit')
-    def compute_values(self):
+    def _compute_values(self):
         default_domain = self._move_domain_get()
         query_tmpl = '''
             SELECT sum(debit) debit, sum(credit) credit, sum(debit - credit) balance
@@ -85,12 +85,12 @@ class AccountAccount(models.Model):
 
     move_line_ids = fields.One2many(
         'account.move.line', 'account_id', 'Journal Entry Lines')
-    balance = fields.Float(compute="compute_values",
-                           digits=dp.get_precision('Account'), string='Balance')
-    credit = fields.Float(compute="compute_values",
-                          digits=dp.get_precision('Account'), string='Credit')
-    debit = fields.Float(compute="compute_values",
-                         digits=dp.get_precision('Account'), string='Debit')
+    balance = fields.Float(compute="_compute_values",
+                           digits=dp.get_precision('Account'))
+    credit = fields.Float(compute="_compute_values",
+                          digits=dp.get_precision('Account'))
+    debit = fields.Float(compute="_compute_values",
+                         digits=dp.get_precision('Account'))
     parent_id = fields.Many2one(
         'account.account', 'Parent Account', ondelete="set null")
     child_ids = fields.One2many(
