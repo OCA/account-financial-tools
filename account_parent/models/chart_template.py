@@ -68,7 +68,7 @@ class AccountChartTemplate(models.Model):
         return account_template_account_dict
 
     @api.multi
-    def update_generated_account(self, tax_template_ref=[], code_digits=1,
+    def update_generated_account(self, tax_template_ref=None, code_digits=1,
                                  company=False, importing_parent=False):
         """ This method for generating parent accounts from templates.
 
@@ -82,7 +82,8 @@ class AccountChartTemplate(models.Model):
             :returns: return acc_template_ref for reference purpose.
             :rtype: dict
         """
-
+        if tax_template_ref is None:
+            tax_template_ref = []
         account_tmpl_obj = self.env['account.account.template']
         account_obj = self.env['account.account']
         view_liquidity_type = self.env.ref(

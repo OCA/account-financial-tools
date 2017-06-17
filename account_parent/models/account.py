@@ -86,7 +86,7 @@ class AccountAccount(models.Model):
     debit = fields.Float(
         compute='_compute_values', digits=dp.get_precision('Account'))
     parent_id = fields.Many2one(
-        'account.account', 'Parent Account', ondelete="set null")
+        'account.account', 'Parent Account', ondelete='restrict')
     child_ids = fields.One2many(
         'account.account', 'parent_id', 'Child Accounts')
     parent_left = fields.Integer('Left Parent', index=1)
