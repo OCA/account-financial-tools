@@ -2,8 +2,8 @@
 # Copyright (C) 2016 Steigend IT Solutions
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name': "Parent Account",
-    'summary': "Restore account hierarchy and views",
+    'name': 'Parent Account',
+    'summary': 'Restore account hierarchy and views',
     'author': 'Steigend IT Solutions, Odoo Community Association (OCA)',
     'website': 'http://www.steigendit.com',
     'category': 'Accounting &amp; Finance',

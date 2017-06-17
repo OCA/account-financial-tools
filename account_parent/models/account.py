@@ -63,21 +63,21 @@ class AccountAccount(models.Model):
     @api.depends('move_line_ids', 'move_line_ids.amount_currency', 'move_line_ids.debit', 'move_line_ids.credit')
     def _compute_values(self):
         default_domain = self._move_domain_get()
-        query_tmpl = '''
+        query = '''
             SELECT sum(debit) debit, sum(credit) credit, sum(debit - credit) balance
             FROM account_move_line l
             LEFT JOIN account_move m ON l.move_id = m.id
             LEFT JOIN account_account a ON l.account_id = a.id
             LEFT JOIN account_account_type at ON a.user_type_id = at.id
-            WHERE 1 = 1 AND l.account_id in (%s)
+            WHERE 1 = 1 AND l.account_id in %s
         ''' + default_domain
 
         for account in self:
             sub_accounts = self.with_context(
                 {'show_parent_account': True}).search([
                     ('id', 'child_of', [account.id])])
-            query = query_tmpl % ','.join(map(str, tuple(sub_accounts.ids)))
-            self.env.cr.execute(query)
+            params = [tuple(sub_accounts.ids)]
+            self.env.cr.execute(query, params)
             result = self.env.cr.dictfetchall()[0]
             account.balance = result['balance']
             account.credit = result['credit']
