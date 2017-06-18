@@ -9,17 +9,17 @@ _logger.setLevel(logging.DEBUG)
 
 column_renames = {
     'account_account': [
-        ('asset_category_id', 'asset_profile_id'),
+        ('asset_category_id', 'asset_profile_id', 'Asset Profile'),
     ],
     'account_asset': [
-        ('asset_value', 'depreciation_base'),
-        ('category_id', 'profile_id'),
+        ('asset_value', 'depreciation_base', 'Depreciation Base'),
+        ('category_id', 'profile_id', 'Asset Profile'),
     ],
     'account_invoice_line': [
-        ('asset_category_id', 'asset_profile_id'),
+        ('asset_category_id', 'asset_profile_id', 'Asset Profile'),
     ],
     'account_move_line': [
-        ('asset_category_id', 'asset_profile_id'),
+        ('asset_category_id', 'asset_profile_id', 'Asset Profile'),
     ],
 }
 
@@ -32,6 +32,14 @@ model_renames = [
     ('account.asset.asset', 'account.asset'),
     ('account.asset.category', 'account.asset.profile'),
     ('account.asset.depreciation.line', 'account.asset.line')]
+
+view_refs = [
+    'account_asset_management.view_account_asset_form',
+    'account_asset_management.view_invoice_asset_category',
+    'account_asset_management.view_account_invoice_asset_form',
+    'account_asset_management.view_account_move_line_form_inherit',
+    'account_asset_management.view_account_move_asset_form'
+]
 
 
 def is_module_installed(cr, module):
@@ -52,7 +60,7 @@ def table_exists(cr, table):
 
 def rename_columns(cr, column_spec):
     for table in column_spec.keys():
-        for (old, new) in column_spec[table]:
+        for (old, new, comment) in column_spec[table]:
             cr.execute(
                 "SELECT column_name "
                 "FROM information_schema.columns "
@@ -67,6 +75,10 @@ def rename_columns(cr, column_spec):
                     'ALTER TABLE "%s" RENAME "%s" TO "%s"'
                     % (table, old, new,))
                 cr.execute('DROP INDEX IF EXISTS "%s_%s_index"' % (table, old))
+                if comment:
+                    cr.execute(
+                        "COMMENT ON COLUMN %s.%s IS '%s'"
+                        % (table, new, comment))
 
 
 def rename_tables(cr, table_spec):
@@ -108,12 +120,28 @@ def rename_models(cr, model_spec):
             if table_exists(cr, 'mail_followers'):
                 cr.execute(
                     'UPDATE mail_followers SET res_model=%s '
-                    'where res_model=%s',
+                    'WHERE res_model=%s',
                     (new, old),
                 )
 
 
+def remove_views(cr, view_refs):
+    model = 'ir.ui.view'
+    for view_ref in view_refs:
+        module, name = view_ref.split('.')
+        cr.execute(
+            'SELECT res_id FROM ir_model_data '
+            'WHERE module = %s AND name = %s AND model = %s',
+            (module, name, model)
+        )
+        res = cr.fetchone()
+        if res:
+            cr.execute(
+                'DELETE FROM ir_ui_view WHERE id = %s', (res[0],))
+
+
 def migrate(cr, version):
+    remove_views(cr, view_refs)
     rename_tables(cr, table_renames)
     rename_models(cr, model_renames)
     rename_columns(cr, column_renames)
