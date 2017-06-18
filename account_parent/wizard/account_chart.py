@@ -4,7 +4,7 @@
 
 import ast
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class OpenAccountChart(models.TransientModel):

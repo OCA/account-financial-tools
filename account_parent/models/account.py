@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import odoo.addons.decimal_precision as dp
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountAccountType(models.Model):
@@ -16,7 +16,7 @@ class AccountAccount(models.Model):
     _inherit = "account.account"
 
     @api.model
-    def _move_domain_get(self, domain=None):
+    def _move_domain_get(self):
         context = dict(self._context or {})
 
         res = ''
@@ -27,8 +27,9 @@ class AccountAccount(models.Model):
             res += " AND l.{} <= '{}' ".format(date_field, context['date_to'])
         if context.get('date_from'):
             if not context.get('strict_range'):
-                res += " AND ({} >= '{}' OR at.include_initial_balance = true) ".format(
+                res += " AND ({} >= '{}' ".format(
                     date_field, context['date_from'], )
+                res += " OR at.include_initial_balance = true) "
             elif context.get('initial_bal'):
                 res += " AND l.{} < '{}' ".format(
                     date_field, context['date_from'])
@@ -114,7 +115,6 @@ class AccountJournal(models.Model):
         res = super(AccountJournal, self)._prepare_liquidity_account(
             name, company, currency_id, type)
         # Seek the next available number for the account code
-        code_digits = company.accounts_code_digits or 0
         account_code_prefix = company.cash_account_code_prefix or \
             company.bank_account_code_prefix or ''
         if type == 'bank':
