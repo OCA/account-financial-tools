@@ -11,15 +11,15 @@ class TestAssetManagement(common.TransactionCase):
 
     def setUp(self):
         super(TestAssetManagement, self).setUp()
-        self.asset_model = self.registry('account.asset.asset')
-        self.dl_model = self.registry('account.asset.depreciation.line')
+        self.asset_model = self.registry('account.asset')
+        self.dl_model = self.registry('account.asset.line')
 
     def test_1_linear_number(self):
         """Linear with Method Time 'Number'."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -45,8 +45,8 @@ class TestAssetManagement(common.TransactionCase):
         """Linear with Method Time End Date."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-01-30'),

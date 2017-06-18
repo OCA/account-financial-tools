@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import fields, models, tools
 
 
-class AssetAssetReport(models.Model):
-    _name = 'asset.asset.report'
+class AccountAssetReport(models.Model):
+    _name = 'account.asset.report'
     _description = "Assets Analysis"
     _auto = False
 
@@ -16,9 +15,9 @@ class AssetAssetReport(models.Model):
     date_remove = fields.Date(string='Asset Removal Date', readonly=True)
     depreciation_date = fields.Date(string='Depreciation Date', readonly=True)
     asset_id = fields.Many2one(
-        comodel_name='account.asset.asset', string='Asset', readonly=True)
-    asset_category_id = fields.Many2one(
-        comodel_name='account.asset.category', string='Asset category')
+        comodel_name='account.asset', string='Asset', readonly=True)
+    asset_profile_id = fields.Many2one(
+        comodel_name='account.asset.profile', string='Asset Profile')
     partner_id = fields.Many2one(
         comodel_name='res.partner', string='Partner', readonly=True)
     state = fields.Selection(
@@ -37,9 +36,9 @@ class AssetAssetReport(models.Model):
         comodel_name='res.company', string='Company', readonly=True)
 
     def init(self, cr):
-        tools.drop_view_if_exists(cr, 'asset_asset_report')
+        tools.drop_view_if_exists(cr, 'account_asset_report')
         cr.execute("""
-            create or replace view asset_asset_report as (
+            create or replace view account_asset_report as (
                 select
                     min(dl.id) as id,
                     dl.name as name,
@@ -58,16 +57,16 @@ class AssetAssetReport(models.Model):
                       END) as unposted_value,
                     dl.asset_id as asset_id,
                     dl.move_check as move_check,
-                    a.category_id as asset_category_id,
+                    a.profile_id as asset_profile_id,
                     a.partner_id as partner_id,
                     a.state as state,
                     count(dl.*) as nbr,
                     a.company_id as company_id
-                from account_asset_depreciation_line dl
-                    left join account_asset_asset a on (dl.asset_id=a.id)
+                from account_asset_line dl
+                    left join account_asset a on (dl.asset_id=a.id)
                 group by
                     dl.amount, dl.asset_id, dl.line_date, dl.name,
                     a.date_start, a.date_remove, dl.move_check, a.state,
-                    a.category_id, a.partner_id, a.company_id,
+                    a.profile_id, a.partner_id, a.company_id,
                     a.depreciation_base, a.id, a.salvage_value
         )""")

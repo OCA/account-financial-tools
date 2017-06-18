@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,8 +7,8 @@ from lxml import etree
 from openerp import api, fields, models
 
 
-class AssetModify(models.TransientModel):
-    _name = 'asset.modify'
+class AccountAssetModify(models.TransientModel):
+    _name = 'account.asset.modify'
     _description = 'Modify Asset'
 
     name = fields.Char(
@@ -28,14 +27,14 @@ class AssetModify(models.TransientModel):
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
-        res = super(AssetModify, self).fields_view_get(
+        res = super(AccountAssetModify, self).fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
             submenu=submenu)
         asset_id = self._context.get('active_id')
         active_model = self._context.get('active_model')
-        if active_model == 'account.asset.asset' and asset_id \
+        if active_model == 'account.asset' and asset_id \
                 and view_type == 'form':
-            asset = self.env['account.asset.asset'].browse(asset_id)
+            asset = self.env['account.asset'].browse(asset_id)
             doc = etree.XML(res['arch'])
             node_me = doc.xpath("//field[@name='method_end']")[0]
             if asset.method_time in ['year', 'number']:
@@ -49,9 +48,9 @@ class AssetModify(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(AssetModify, self).default_get(fields_list)
+        res = super(AccountAssetModify, self).default_get(fields_list)
         asset_id = self._context.get('active_id')
-        asset = self.env['account.asset.asset'].browse(asset_id)
+        asset = self.env['account.asset'].browse(asset_id)
         if 'name' in fields_list:
             res.update({'name': asset.name})
         if 'method_number' in fields_list and \
@@ -71,7 +70,7 @@ class AssetModify(models.TransientModel):
         """
         self.ensure_one()
         asset_id = self._context.get('active_id')
-        asset = self.env['account.asset.asset'].browse(asset_id)
+        asset = self.env['account.asset'].browse(asset_id)
 
         history_vals = {
             'asset_id': asset_id,

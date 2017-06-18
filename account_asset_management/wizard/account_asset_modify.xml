@@ -2,9 +2,9 @@
 <openerp>
   <data>
 
-    <record id="asset_modify_view_form" model="ir.ui.view">
-      <field name="name">asset.modify.form</field>
-      <field name="model">asset.modify</field>
+    <record id="account_asset_modify_view_form" model="ir.ui.view">
+      <field name="name">account.asset.modify.form</field>
+      <field name="model">account.asset.modify</field>
       <field name="arch" type="xml">
         <form string="Modify Asset">
           <group string="Asset Durations to Modify" col="4">
@@ -28,13 +28,13 @@
       </field>
     </record>
 
-    <record id="asset_modify_action" model="ir.actions.act_window">
+    <record id="account_asset_modify_action" model="ir.actions.act_window">
       <field name="name">Modify Asset</field>
-      <field name="res_model">asset.modify</field>
+      <field name="res_model">account.asset.modify</field>
       <field name="type">ir.actions.act_window</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
-      <field name="view_id" ref="asset_modify_view_form"/>
+      <field name="view_id" ref="account_asset_modify_view_form"/>
       <field name="target">new</field>
     </record>
 

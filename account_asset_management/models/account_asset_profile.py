@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -11,9 +10,9 @@ from openerp.exceptions import Warning as UserError
 _logger = logging.getLogger(__name__)
 
 
-class AccountAssetCategory(models.Model):
-    _name = 'account.asset.category'
-    _description = 'Asset category'
+class AccountAssetProfile(models.Model):
+    _name = 'account.asset.profile'
+    _description = 'Asset profile'
     _order = 'name'
 
     name = fields.Char('Name', size=64, required=True, index=1)
@@ -55,7 +54,7 @@ class AccountAssetCategory(models.Model):
         string='Company', required=True,
         default=lambda self: self._default_company_id())
     parent_id = fields.Many2one(
-        comodel_name='account.asset.asset',
+        comodel_name='account.asset',
         string='Parent Asset',
         domain=[('type', '=', 'view')])
     method = fields.Selection(
@@ -105,14 +104,14 @@ class AccountAssetCategory(models.Model):
     open_asset = fields.Boolean(
         string='Skip Draft State',
         help="Check this if you want to automatically confirm the assets "
-             "of this category when created by invoices.")
+             "of this profile when created by invoices.")
     active = fields.Boolean(default=True)
 
     @api.model
     @api.model
     def _default_company_id(self):
         return self.env[
-            'res.company']._company_default_get('account.asset.asset')
+            'res.company']._company_default_get('account.asset')
 
     @api.model
     def _selection_method(self):
@@ -137,8 +136,9 @@ class AccountAssetCategory(models.Model):
     @api.multi
     @api.constrains('method')
     def _check_method(self):
-        for categ in self:
-            if categ.method == 'degr-linear' and categ.method_time != 'year':
+        for profile in self:
+            if profile.method == 'degr-linear' and \
+                    profile.method_time != 'year':
                 raise UserError(
                     _("Degressive-Linear is only supported for Time Method = "
                       "Year."))
@@ -152,12 +152,12 @@ class AccountAssetCategory(models.Model):
     def create(self, vals):
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        profile = super(AccountAssetCategory, self).create(vals)
+        profile = super(AccountAssetProfile, self).create(vals)
         acc_id = vals.get('account_asset_id')
         if acc_id:
             account = self.env['account.account'].browse(acc_id)
-            if not account.asset_category_id:
-                account.write({'asset_category_id': profile.id})
+            if not account.asset_profile_id:
+                account.write({'asset_profile_id': profile.id})
         return profile
 
     @api.multi
@@ -165,11 +165,11 @@ class AccountAssetCategory(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        super(AccountAssetCategory, self).write(vals)
+        super(AccountAssetProfile, self).write(vals)
         for profile in self:
             acc_id = vals.get('account_asset_id')
             if acc_id:
                 account = self.env['account.account'].browse(acc_id)
-                if not account.asset_category_id:
-                    account.write({'asset_category_id': profile.id})
+                if not account.asset_profile_id:
+                    account.write({'asset_profile_id': profile.id})
         return True

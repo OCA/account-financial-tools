@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -26,7 +25,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_cancel(self):
-        assets = self.env['account.asset.asset']
+        assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
             assets = move.line_ids.mapped('asset_id')
@@ -38,28 +37,28 @@ class AccountInvoice(models.Model):
     @api.model
     def line_get_convert(self, line, part, date):
         res = super(AccountInvoice, self).line_get_convert(line, part, date)
-        if line.get('asset_category_id'):
+        if line.get('asset_profile_id'):
             # skip empty debit/credit
             if res.get('debit') or res.get('credit'):
-                res['asset_category_id'] = line['asset_category_id']
+                res['asset_profile_id'] = line['asset_profile_id']
         return res
 
     @api.model
     def inv_line_characteristic_hashcode(self, invoice_line):
         res = super(AccountInvoice, self).inv_line_characteristic_hashcode(
             invoice_line)
-        res += '-%s' % invoice_line.get('asset_category_id', 'False')
+        res += '-%s' % invoice_line.get('asset_profile_id', 'False')
         return res
 
 
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
-    asset_category_id = fields.Many2one(
-        comodel_name='account.asset.category',
-        string='Asset Category')
+    asset_profile_id = fields.Many2one(
+        comodel_name='account.asset.profile',
+        string='Asset Profile')
     asset_id = fields.Many2one(
-        comodel_name='account.asset.asset',
+        comodel_name='account.asset',
         string='Asset',
         domain=[('type', '=', 'normal'),
                 ('state', 'in', ['open', 'close'])],
@@ -75,9 +74,9 @@ class AccountInvoiceLine(models.Model):
             product_id, partner_id, inv_type, fposition_id, account_id)
         if account_id:
             account = self.env['account.account'].browse(account_id)
-            asset_category = account.asset_category_id
-            if asset_category:
-                vals = {'asset_category_id': asset_category.id}
+            asset_profile = account.asset_profile_id
+            if asset_profile:
+                vals = {'asset_profile_id': asset_profile.id}
                 if 'value' not in res:
                     res['value'] = vals
                 else:
@@ -87,6 +86,6 @@ class AccountInvoiceLine(models.Model):
     @api.model
     def move_line_get_item(self, line):
         res = super(AccountInvoiceLine, self).move_line_get_item(line)
-        if line.asset_category_id:
-            res['asset_category_id'] = line.asset_category_id.id
+        if line.asset_profile_id:
+            res['asset_profile_id'] = line.asset_profile_id.id
         return res

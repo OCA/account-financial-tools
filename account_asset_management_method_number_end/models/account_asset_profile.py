@@ -5,8 +5,8 @@
 from openerp import api, fields, models, _
 
 
-class AccountAssetCategory(models.Model):
-    _inherit = 'account.asset.category'
+class AccountAssetProfile(models.Model):
+    _inherit = 'account.asset.profile'
 
     method_number = fields.Integer(
         string='Number',
@@ -30,7 +30,7 @@ class AccountAssetCategory(models.Model):
 
     @api.model
     def _selection_method_time(self):
-        res = super(AccountAssetCategory, self)._selection_method_time()
+        res = super(AccountAssetProfile, self)._selection_method_time()
         res += [
             ('number', _('Number of Depreciations')),
             ('end', _('Ending Date'))]

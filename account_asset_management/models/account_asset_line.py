@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -13,17 +12,17 @@ from openerp.exceptions import Warning as UserError
 _logger = logging.getLogger(__name__)
 
 
-class AccountAssetDepreciationLine(models.Model):
-    _name = 'account.asset.depreciation.line'
-    _description = 'Asset depreciation line'
+class AccountAssetLine(models.Model):
+    _name = 'account.asset.line'
+    _description = 'Asset depreciation table line'
     _order = 'type, line_date'
 
     name = fields.Char(string='Depreciation Name', size=64, readonly=True)
     asset_id = fields.Many2one(
-        comodel_name='account.asset.asset', string='Asset',
+        comodel_name='account.asset', string='Asset',
         required=True, ondelete='cascade')
     previous_id = fields.Many2one(
-        comodel_name='account.asset.depreciation.line',
+        comodel_name='account.asset.line',
         string='Previous Depreciation Line',
         readonly=True)
     parent_state = fields.Selection(
@@ -156,7 +155,7 @@ class AccountAssetDepreciationLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        return super(AccountAssetDepreciationLine, self).write(vals)
+        return super(AccountAssetLine, self).write(vals)
 
     @api.multi
     def unlink(self):
@@ -176,7 +175,7 @@ class AccountAssetDepreciationLine(models.Model):
                 next.previous_id = previous
             ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
         return super(
-            AccountAssetDepreciationLine, self.with_context(ctx)).unlink()
+            AccountAssetLine, self.with_context(ctx)).unlink()
 
     def _setup_move_data(self, depreciation_date, period):
         asset = self.asset_id
@@ -185,7 +184,7 @@ class AccountAssetDepreciationLine(models.Model):
             'date': depreciation_date,
             'ref': self.name,
             'period_id': period.id,
-            'journal_id': asset.category_id.journal_id.id,
+            'journal_id': asset.profile_id.journal_id.id,
         }
         return move_data
 
@@ -209,7 +208,7 @@ class AccountAssetDepreciationLine(models.Model):
             'credit': credit,
             'debit': debit,
             'period_id': period.id,
-            'journal_id': asset.category_id.journal_id.id,
+            'journal_id': asset.profile_id.journal_id.id,
             'partner_id': asset.partner_id.id,
             'analytic_account_id': analytic_id,
             'date': depreciation_date,
@@ -233,8 +232,8 @@ class AccountAssetDepreciationLine(models.Model):
                 depreciation_date)
             am_vals = line._setup_move_data(depreciation_date, period)
             move = self.env['account.move'].with_context(ctx).create(am_vals)
-            depr_acc = asset.category_id.account_depreciation_id
-            exp_acc = asset.category_id.account_expense_depreciation_id
+            depr_acc = asset.profile_id.account_depreciation_id
+            exp_acc = asset.profile_id.account_expense_depreciation_id
             aml_d_vals = line._setup_move_line_data(
                 depreciation_date, period, depr_acc, 'depreciation', move)
             self.env['account.move.line'].with_context(ctx).create(aml_d_vals)
@@ -249,7 +248,7 @@ class AccountAssetDepreciationLine(models.Model):
             created_move_ids.append(move.id)
             asset_ids.append(asset.id)
         # we re-evaluate the assets to determine if we can close them
-        for asset in self.env['account.asset.asset'].browse(
+        for asset in self.env['account.asset'].browse(
                 list(set(asset_ids))):
             if asset.company_id.currency_id.is_zero(asset.value_residual):
                 asset.state = 'close'

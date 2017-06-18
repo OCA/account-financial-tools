@@ -1,5 +1,5 @@
-account_asset module documentation
-==================================
+account_asset_management module documentation
+=============================================
 
 Changelog
 '''''''''

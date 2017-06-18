@@ -14,8 +14,8 @@ class TestAssetManagement(common.TransactionCase):
 
     def setUp(self):
         super(TestAssetManagement, self).setUp()
-        self.asset_model = self.registry('account.asset.asset')
-        self.dl_model = self.registry('account.asset.depreciation.line')
+        self.asset_model = self.registry('account.asset')
+        self.dl_model = self.registry('account.asset.line')
 
     def test_1_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
@@ -69,8 +69,8 @@ class TestAssetManagement(common.TransactionCase):
         """Prorata temporis depreciation basic test."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -111,8 +111,8 @@ class TestAssetManagement(common.TransactionCase):
         # I create an asset in current year
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': '%d-07-07' % (datetime.now().year - 1,),
@@ -160,8 +160,8 @@ class TestAssetManagement(common.TransactionCase):
         """Prorata temporis depreciation with init value in curent year."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -207,8 +207,8 @@ class TestAssetManagement(common.TransactionCase):
         # annual depreciation
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -238,8 +238,8 @@ class TestAssetManagement(common.TransactionCase):
         # quarterly depreciation
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 0,
             'date_start': time.strftime('%Y-07-07'),
@@ -271,8 +271,8 @@ class TestAssetManagement(common.TransactionCase):
         """Degressive with annual depreciation."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 100,
             'date_start': time.strftime('%Y-07-07'),
@@ -305,8 +305,8 @@ class TestAssetManagement(common.TransactionCase):
         """Degressive with annual depreciation."""
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset',
-            'category_id': self.ref('account_asset_management.'
-                                    'account_asset_category_car_5Y'),
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
             'purchase_value': 1000,
             'salvage_value': 100,
             'date_start': time.strftime('%Y-07-07'),

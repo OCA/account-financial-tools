@@ -94,20 +94,20 @@ class AccountAssetRemove(models.TransientModel):
     @api.model
     def _default_account_plus_value_id(self):
         asset_id = self._context.get('active_id')
-        asset = self.env['account.asset.asset'].browse(asset_id)
-        return asset.category_id.account_plus_value_id
+        asset = self.env['account.asset'].browse(asset_id)
+        return asset.profile_id.account_plus_value_id
 
     @api.model
     def _default_account_min_value_id(self):
         asset_id = self._context.get('active_id')
-        asset = self.env['account.asset.asset'].browse(asset_id)
-        return asset.category_id.account_min_value_id
+        asset = self.env['account.asset'].browse(asset_id)
+        return asset.profile_id.account_min_value_id
 
     @api.model
     def _default_account_residual_value_id(self):
         asset_id = self._context.get('active_id')
-        asset = self.env['account.asset.asset'].browse(asset_id)
-        return asset.category_id.account_residual_value_id
+        asset = self.env['account.asset'].browse(asset_id)
+        return asset.profile_id.account_residual_value_id
 
     @api.model
     def _selection_posting_regime(self):
@@ -118,7 +118,7 @@ class AccountAssetRemove(models.TransientModel):
 
     @api.model
     def _get_posting_regime(self):
-        asset_obj = self.env['account.asset.asset']
+        asset_obj = self.env['account.asset']
         asset = asset_obj.browse(self._context.get('active_id'))
         country = asset and asset.company_id.country_id.code or False
         if country in self._residual_value_regime_countries():
@@ -132,8 +132,8 @@ class AccountAssetRemove(models.TransientModel):
     @api.multi
     def remove(self):
         self.ensure_one()
-        asset_obj = self.env['account.asset.asset']
-        asset_line_obj = self.env['account.asset.depreciation.line']
+        asset_obj = self.env['account.asset']
+        asset_line_obj = self.env['account.asset.line']
         move_obj = self.env['account.move']
 
         asset_id = self._context.get('active_id')
@@ -173,7 +173,7 @@ class AccountAssetRemove(models.TransientModel):
                   "the last depreciation date."))
 
         line_name = asset._get_depreciation_entry_name(len(dlines) + 1)
-        journal_id = asset.category_id.journal_id.id
+        journal_id = asset.profile_id.journal_id.id
 
         # create move
         move_vals = {
@@ -219,7 +219,7 @@ class AccountAssetRemove(models.TransientModel):
         Generate last depreciation entry on the day before the removal date.
         """
         date_remove = self.date_remove
-        asset_line_obj = self.env['account.asset.depreciation.line']
+        asset_line_obj = self.env['account.asset.line']
 
         digits = self.env['decimal.precision'].precision_get('Account')
 
@@ -276,7 +276,7 @@ class AccountAssetRemove(models.TransientModel):
     def _get_removal_data(self, asset, residual_value):
         move_lines = []
         partner_id = asset.partner_id and asset.partner_id.id or False
-        profile = asset.category_id
+        profile = asset.profile_id
 
         # asset and asset depreciation account reversal
         depr_amount = asset.depreciation_base - residual_value

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -17,7 +16,7 @@ class AccountAssetHistory(models.Model):
         default=lambda self: self.env.user)
     date = fields.Date(required=True, default=fields.Date.context_today)
     asset_id = fields.Many2one(
-        comodel_name='account.asset.asset', string='Asset',
+        comodel_name='account.asset', string='Asset',
         required=True, ondelete='cascade')
     method_time = fields.Selection(
         selection=[('year', 'Number of Years'),

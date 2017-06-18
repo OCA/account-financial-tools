@@ -5,8 +5,8 @@
 from openerp import api, models
 
 
-class AccountSssetAsset(models.Model):
-    _inherit = 'account.asset.asset'
+class AccountAsset(models.Model):
+    _inherit = 'account.asset'
 
     @api.model
     def _xls_acquisition_fields(self):

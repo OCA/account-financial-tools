@@ -15,13 +15,13 @@ class WizAccountAssetReport(models.TransientModel):
         comodel_name='account.fiscalyear',
         string='Fiscal Year', required=True)
     parent_asset_id = fields.Many2one(
-        comodel_name='account.asset.asset',
+        comodel_name='account.asset',
         string='Asset Filter', domain=[('type', '=', 'view')])
 
     @api.multi
     def xls_export(self):
         self.ensure_one()
-        asset_obj = self.env['account.asset.asset']
+        asset_obj = self.env['account.asset']
         parent_asset = self.parent_asset_id
         if not parent_asset:
             parents = asset_obj.search(
@@ -52,7 +52,7 @@ class WizAccountAssetReport(models.TransientModel):
                 _('No records found for your selection!'))
 
         datas = {
-            'model': 'account.asset.asset',
+            'model': 'account.asset',
             'fiscalyear_id': self.fiscalyear_id.id,
             'ids': [parent_asset.id],
         }

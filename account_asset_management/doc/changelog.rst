@@ -109,3 +109,32 @@ Enhancements/changes
 
 - Generation of accounting entries in case of early removal.
 
+`V3.0`
+------
+
+A summary of the main changes
+
+- Major performance boost primarily by removing the calculated fields on the 'view' assets.
+
+- Performance optimisation in the 'recompute trigger'.
+  Recomputes are now limited to changes in fiscal year duration.
+ 
+- Code refactoring : OCA guidelines compliancy, new api, removal of all "cr.execute"
+
+- Cost/Revenue Spreading now possible via the new add-on module 'account_asset_management_method_number_end'.
+  This module enables the Time Methods 'Number' and 'End'.
+  The logic for these time methods is included in the 'account_asset_management' module (as it was before)
+  but a number of bugs for these time methods have now been made and tests suites are added for these methods.
+
+- New Computation Methods : linear-limit and degressive-limit.
+  As a consequence we now support the 'double-declining-balance depreciation'.
+  Tests are added to ensure that this depreciation method will not be broken in the future.
+
+ - Tests have been added to cover quarterly depreciations.
+
+- Rounding errors are now consistently adjusted at the last posting date of the fiscal year.
+  Incorrect postings via uploading historical depreciations in 'init' entries are now always adjusted in the first unposted entry.
+
+- Tests have also been added to the account_asset_management_xls module.
+
+- Table renames to avoid technical conflicts with the standard addons 'account_asset' module.

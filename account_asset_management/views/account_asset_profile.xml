@@ -1,11 +1,11 @@
 <openerp>
   <data>
 
-    <record id="account_asset_category_view_form" model="ir.ui.view">
-      <field name="name">account.asset.category.form</field>
-      <field name="model">account.asset.category</field>
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+      <field name="name">account.asset.profile.form</field>
+      <field name="model">account.asset.profile</field>
       <field name="arch" type="xml">
-        <form string="Asset category">
+        <form string="Asset profile">
           <group>
             <group>
               <field name="name"/>
@@ -46,11 +46,11 @@
       </field>
     </record>
 
-    <record id="account_asset_category_view_tree" model="ir.ui.view">
-      <field name="name">account.asset.category.tree</field>
-      <field name="model">account.asset.category</field>
+    <record id="account_asset_profile_view_tree" model="ir.ui.view">
+      <field name="name">account.asset.profile.tree</field>
+      <field name="model">account.asset.profile</field>
       <field name="arch" type="xml">
-        <tree string="Asset category">
+        <tree string="Asset profile">
           <field name="name"/>
           <field name="journal_id"/>
           <field name="method"/>
@@ -59,20 +59,20 @@
       </field>
     </record>
 
-    <record id="account_asset_category_view_search" model="ir.ui.view">
-      <field name="name">account.asset.category.search</field>
-      <field name="model">account.asset.category</field>
+    <record id="account_asset_profile_view_search" model="ir.ui.view">
+      <field name="name">account.asset.profile.search</field>
+      <field name="model">account.asset.profile</field>
       <field name="arch" type="xml">
-        <search string="Search Asset Category">
-          <field name="name" string="Asset Category"/>
+        <search string="Search Asset Profile">
+          <field name="name" string="Asset Profile"/>
           <field name="journal_id"/>
         </search>
       </field>
     </record>
 
-    <record id="account_asset_category_action" model="ir.actions.act_window">
-      <field name="name">Asset Categories</field>
-      <field name="res_model">account.asset.category</field>
+    <record id="account_asset_profile_action" model="ir.actions.act_window">
+      <field name="name">Asset Profiles</field>
+      <field name="res_model">account.asset.profile</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
     </record>

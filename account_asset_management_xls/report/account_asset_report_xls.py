@@ -23,7 +23,7 @@ class AssetReportXlsParser(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(AssetReportXlsParser, self).__init__(
             cr, uid, name, context=context)
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.pool.get('account.asset')
         self.context = context
         wl_acq = asset_obj._xls_acquisition_fields(cr, uid, context)
         wl_act = asset_obj._xls_active_fields(cr, uid, context)
@@ -99,7 +99,7 @@ class AssetReportXls(report_xls):
                 'asset_view': [1, 0, 'text', None],
                 'asset': [
                     1, 0, 'text',
-                    _render("asset.category_id.account_asset_id.code")],
+                    _render("asset.profile_id.account_asset_id.code")],
                 'totals': [
                     1, 0, 'text', _render("_('Totals')"),
                     None, self.rt_cell_style]},
@@ -157,7 +157,7 @@ class AssetReportXls(report_xls):
                 'asset_view': [1, 0, 'text', None],
                 'asset': [
                     1, 0, 'text',
-                    _render("asset.category_id.account_asset_id.code")],
+                    _render("asset.profile_id.account_asset_id.code")],
                 'totals': [
                     1, 0, 'text', _render("_('Totals')"),
                     None, self.rt_cell_style]},
@@ -292,7 +292,7 @@ class AssetReportXls(report_xls):
                 'asset_view': [1, 0, 'text', None],
                 'asset': [
                     1, 0, 'text',
-                    _render("asset.category_id.account_asset_id.code")],
+                    _render("asset.profile_id.account_asset_id.code")],
                 'totals': [
                     1, 0, 'text', _render("_('Totals')"),
                     None, self.rt_cell_style]},
@@ -401,7 +401,7 @@ class AssetReportXls(report_xls):
             assets = []
             # SQL in stead of child_ids since ORDER BY different from _order
             cr.execute(
-                "SELECT id, type FROM account_asset_asset "
+                "SELECT id, type FROM account_asset "
                 "WHERE parent_id = %s AND state != 'draft' "
                 "ORDER BY date_start ASC, name",
                 (asset_id, ))
@@ -429,7 +429,7 @@ class AssetReportXls(report_xls):
         fy = self.fiscalyear
         wl_acq = _p.wanted_list_acquisition
         template = self.acquisition_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.pool['account.asset']
 
         title = self._get_title('acquisition', 'normal')
         title_short = self._get_title('acquisition', 'short')
@@ -445,7 +445,7 @@ class AssetReportXls(report_xls):
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
         cr.execute(
-            "SELECT id FROM account_asset_asset "
+            "SELECT id FROM account_asset "
             "WHERE date_start >= %s AND date_start <= %s"
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_start ASC",
@@ -546,7 +546,7 @@ class AssetReportXls(report_xls):
         fy = self.fiscalyear
         wl_act = _p.wanted_list_active
         template = self.active_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.pool['account.asset']
 
         title = self._get_title('active', 'normal')
         title_short = self._get_title('active', 'short')
@@ -562,7 +562,7 @@ class AssetReportXls(report_xls):
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
         cr.execute(
-            "SELECT id FROM account_asset_asset "
+            "SELECT id FROM account_asset "
             "WHERE date_start <= %s"
             "AND (date_remove IS NULL OR date_remove >= %s) "
             "AND id IN %s AND type = 'normal' "
@@ -624,7 +624,7 @@ class AssetReportXls(report_xls):
                 # fy_start_value
                 cr.execute(
                     "SELECT depreciated_value "
-                    "FROM account_asset_depreciation_line "
+                    "FROM account_asset_line "
                     "WHERE line_date >= %s"
                     "AND asset_id = %s AND type = 'depreciate' "
                     "ORDER BY line_date ASC LIMIT 1",
@@ -643,7 +643,7 @@ class AssetReportXls(report_xls):
                     if asset.state in ['open']:
                         cr.execute(
                             "SELECT line_date "
-                            "FROM account_asset_depreciation_line "
+                            "FROM account_asset_line "
                             "WHERE asset_id = %s AND type = 'depreciate' "
                             "AND init_entry=FALSE AND move_check=FALSE "
                             "AND line_date < %s"
@@ -674,7 +674,7 @@ class AssetReportXls(report_xls):
                 # fy_end_value
                 cr.execute(
                     "SELECT depreciated_value "
-                    "FROM account_asset_depreciation_line "
+                    "FROM account_asset_line "
                     "WHERE line_date > %s"
                     "AND asset_id = %s AND type = 'depreciate' "
                     "ORDER BY line_date ASC LIMIT 1",
@@ -772,7 +772,7 @@ class AssetReportXls(report_xls):
         fy = self.fiscalyear
         wl_dsp = _p.wanted_list_removal
         template = self.removal_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.pool['account.asset']
 
         title = self._get_title('removal', 'normal')
         title_short = self._get_title('removal', 'short')
@@ -788,7 +788,7 @@ class AssetReportXls(report_xls):
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
         cr.execute(
-            "SELECT id FROM account_asset_asset "
+            "SELECT id FROM account_asset "
             "WHERE date_remove >= %s AND date_remove <= %s"
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_remove ASC",
@@ -902,5 +902,5 @@ class AssetReportXls(report_xls):
 
 AssetReportXls(
     'report.account.asset.xls',
-    'account.asset.asset',
+    'account.asset',
     parser=AssetReportXlsParser)

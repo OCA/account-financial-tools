@@ -5,8 +5,8 @@
 from openerp import fields, models
 
 
-class AccountAssetAsset(models.Model):
-    _inherit = 'account.asset.asset'
+class AccountAsset(models.Model):
+    _inherit = 'account.asset'
 
     method_number = fields.Integer(
         string='Number',

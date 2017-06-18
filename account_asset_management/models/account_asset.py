@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -23,8 +22,8 @@ class DummyFy(object):
             setattr(self, key, arg)
 
 
-class AccountAssetAsset(models.Model):
-    _name = 'account.asset.asset'
+class AccountAsset(models.Model):
+    _name = 'account.asset'
     _description = 'Asset'
     _order = 'date_start desc, name'
     _parent_store = True
@@ -73,13 +72,13 @@ class AccountAssetAsset(models.Model):
         string='Depreciated Value',
         store=True)
     note = fields.Text('Note')
-    category_id = fields.Many2one(
-        comodel_name='account.asset.category',
-        string='Asset Category',
+    profile_id = fields.Many2one(
+        comodel_name='account.asset.profile',
+        string='Asset Profile',
         change_default=True, readonly=True,
         states={'draft': [('readonly', False)]})
     parent_id = fields.Many2one(
-        comodel_name='account.asset.asset',
+        comodel_name='account.asset',
         string='Parent Asset', readonly=True,
         states={'draft': [('readonly', False)]},
         domain=[('type', '=', 'view')],
@@ -87,7 +86,7 @@ class AccountAssetAsset(models.Model):
     parent_left = fields.Integer(index=True)
     parent_right = fields.Integer(index=True)
     child_ids = fields.One2many(
-        comodel_name='account.asset.asset',
+        comodel_name='account.asset',
         inverse_name='parent_id',
         string='Child Assets')
     date_start = fields.Date(
@@ -119,7 +118,7 @@ class AccountAssetAsset(models.Model):
         comodel_name='res.partner', string='Partner', readonly=True,
         states={'draft': [('readonly', False)]})
     method = fields.Selection(
-        selection=lambda self: self.env['account.asset.category'].
+        selection=lambda self: self.env['account.asset.profile'].
         _selection_method(),
         string='Computation Method',
         required=True, readonly=True,
@@ -152,7 +151,7 @@ class AccountAssetAsset(models.Model):
         string='Degressive Factor', readonly=True,
         states={'draft': [('readonly', False)]}, default=0.3)
     method_time = fields.Selection(
-        selection=lambda self: self.env['account.asset.category'].
+        selection=lambda self: self.env['account.asset.profile'].
         _selection_method_time(), string='Time Method',
         required=True, readonly=True,
         states={'draft': [('readonly', False)]}, default='year',
@@ -177,7 +176,7 @@ class AccountAssetAsset(models.Model):
         string='History', copy=False,
         readonly=True)
     depreciation_line_ids = fields.One2many(
-        comodel_name='account.asset.depreciation.line',
+        comodel_name='account.asset.line',
         inverse_name='asset_id',
         string='Depreciation Lines', copy=False,
         readonly=True, states={'draft': [('readonly', False)]})
@@ -205,7 +204,7 @@ class AccountAssetAsset(models.Model):
     @api.model
     def _default_company_id(self):
         return self.env[
-            'res.company']._company_default_get('account.asset.asset')
+            'res.company']._company_default_get('account.asset')
 
     @api.multi
     def _compute_move_line_check(self):
@@ -250,7 +249,7 @@ class AccountAssetAsset(models.Model):
     @api.multi
     @api.constrains('parent_id')
     def _check_recursion(self, parent=None):
-        res = super(AccountAssetAsset, self)._check_recursion(parent=parent)
+        res = super(AccountAsset, self)._check_recursion(parent=parent)
         if not res:
             raise UserError(
                 _("Error ! You can not create recursive assets."))
@@ -288,23 +287,23 @@ class AccountAssetAsset(models.Model):
             'amount': self.depreciation_base,
             'line_date': self.date_start})
 
-    @api.onchange('category_id')
-    def _onchange_category_id(self):
+    @api.onchange('profile_id')
+    def _onchange_profile_id(self):
         for line in self.depreciation_line_ids:
             if line.move_id:
                 raise UserError(
-                    _("You cannot change the category of an asset "
+                    _("You cannot change the profile of an asset "
                       "with accounting entries."))
-        if self.category_id:
-            categ = self.category_id
-            self.parent_id = categ.parent_id
-            self.method = categ.method
-            self.method_number = categ.method_number
-            self.method_time = categ.method_time
-            self.method_period = categ.method_period
-            self.method_progress_factor = categ.method_progress_factor
-            self.prorata = categ.prorata
-            self.account_analytic_id = categ.account_analytic_id
+        if self.profile_id:
+            profile = self.profile_id
+            self.parent_id = profile.parent_id
+            self.method = profile.method
+            self.method_number = profile.method_number
+            self.method_time = profile.method_time
+            self.method_period = profile.method_period
+            self.method_progress_factor = profile.method_progress_factor
+            self.prorata = profile.prorata
+            self.account_analytic_id = profile.account_analytic_id
 
     @api.onchange('method_time')
     def _onchange_method_time(self):
@@ -315,7 +314,7 @@ class AccountAssetAsset(models.Model):
     def _onchange_type(self):
         if self.type == 'view':
             self.date_start = False
-            self.category_id = False
+            self.profile_id = False
             self.purchase_value = False
             self.salvage_value = False
         if self.depreciation_line_ids:
@@ -325,13 +324,13 @@ class AccountAssetAsset(models.Model):
     def create(self, vals):
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        asset = super(AccountAssetAsset, self).create(vals)
+        asset = super(AccountAsset, self).create(vals)
         if self._context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
         if asset.type == 'normal':
             # create first asset line
-            asset_line_obj = self.env['account.asset.depreciation.line']
+            asset_line_obj = self.env['account.asset.line']
             line_name = asset._get_depreciation_entry_name(0)
             asset_line_vals = {
                 'amount': asset.depreciation_base,
@@ -353,11 +352,11 @@ class AccountAssetAsset(models.Model):
                 vals['prorata'] = True
         for asset in self:
             asset_type = vals.get('type') or asset.type
-            super(AccountAssetAsset, self).write(vals)
+            super(AccountAsset, self).write(vals)
             if asset_type == 'view' or \
                     self._context.get('asset_validate_from_write'):
                 continue
-            if asset.category_id.open_asset and \
+            if asset.profile_id.open_asset and \
                     self._context.get('create_asset_from_move_line'):
                 asset.compute_depreciation_board()
                 # extra context to avoid recursion
@@ -381,7 +380,7 @@ class AccountAssetAsset(models.Model):
                    from_parent_object=True)
         amls = self.with_context(ctx).mapped('account_move_line_ids')
         amls.write({'asset_id': False})
-        return super(AccountAssetAsset, self).unlink()
+        return super(AccountAsset, self).unlink()
 
     @api.multi
     def validate(self):
@@ -442,7 +441,7 @@ class AccountAssetAsset(models.Model):
 
     @api.multi
     def compute_depreciation_board(self):
-        line_obj = self.env['account.asset.depreciation.line']
+        line_obj = self.env['account.asset.line']
         digits = self.env['decimal.precision'].precision_get('Account')
 
         for asset in self:
@@ -1011,7 +1010,7 @@ class AccountAssetAsset(models.Model):
         # generate periodical accounting entries
         result = []
         error_log = ''
-        asset_line_obj = self.env['account.asset.depreciation.line']
+        asset_line_obj = self.env['account.asset.line']
         if check_triggers:
             recompute_obj = self.env['account.asset.recompute.trigger']
             recomputes = recompute_obj.sudo().search([('state', '=', 'open')])

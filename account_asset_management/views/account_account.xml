@@ -8,7 +8,7 @@
       <field name="inherit_id" ref="account.view_account_form"/>
       <field name="arch" type="xml">
         <field name="active" position="before">
-          <field name="asset_category_id"/>
+          <field name="asset_profile_id"/>
         </field>
       </field>
     </record>
