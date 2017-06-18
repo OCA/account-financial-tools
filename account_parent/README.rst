@@ -22,7 +22,7 @@ Just install it
 Configuration
 =============
 
-Need to set the group show chart of account structure to view the chart of account heirarchy.
+Need to set the group show chart of account structure to view the chart of account hierarchy.
 If no parent account is set, then just a list view with credit,debit, balance will be showed
 
 Usage
