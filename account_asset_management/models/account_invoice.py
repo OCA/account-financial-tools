@@ -28,7 +28,7 @@ class AccountInvoice(models.Model):
         assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
-            assets = move.line_ids.mapped('asset_id')
+            assets = move.line_id.mapped('asset_id')
         super(AccountInvoice, self).action_cancel()
         if assets:
             assets.unlink()
