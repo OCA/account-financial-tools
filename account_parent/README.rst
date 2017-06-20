@@ -51,16 +51,12 @@ help us smashing it by providing a detailed and welcomed feedback.
 Credits
 =======
 
-Images
-------
-
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
-
 Contributors
 ------------
 
 * Steigend IT Solutions <contact@steigendit.com>
 * MinhHQ <minh.hquang09@gmail.com>
+* Jean-Charles Drubay <jc@komit-consulting.com>
 
 Maintainer
 ----------
