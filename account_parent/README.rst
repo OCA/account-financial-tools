@@ -8,6 +8,7 @@ Parent Account
 
 This module will be very useful for those who are still using v7/v8 
 because of the no parent account and chart of account heirarchy view in the latest versions
+
 * Adds parent account in account
 * Adds new type 'view' in account type
 * Adds Chart of account heirachy view

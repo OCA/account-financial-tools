@@ -12,7 +12,6 @@
         'account'
     ],
     'data': [
-        'security/account_parent_security.xml',
         'data/account_type_data.xml',
         'views/account_view.xml',
         'views/open_chart.xml',

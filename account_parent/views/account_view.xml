@@ -6,13 +6,13 @@
         <field name="inherit_id" ref="account.view_account_form"/>
         <field name="arch" type="xml">
             <field name="code" position="after">
-                <field name="parent_id" domain="[('internal_type','=','view')]" groups="account_parent.group_coas_user" context="{'show_parent_account':True}" /></field>
+                <field name="parent_id" domain="[('internal_type','=','view')]" groups="account.group_account_manager" context="{'show_parent_account':True}" /></field>
         </field>
     </record>
     <record id="account.action_account_form" model="ir.actions.act_window">
         <field name="context">{'show_parent_account':True}</field>
     </record>
-    <menuitem action="account.action_account_type_form" id="menu_action_account_type_form" parent="account.account_account_menu" sequence="1" groups="account_parent.group_coas_user"/>
+    <menuitem action="account.action_account_type_form" id="menu_action_account_type_form" parent="account.account_account_menu" sequence="1" groups="account.group_account_manager"/>
     <record id="view_account_tree" model="ir.ui.view">
         <field name="name">account.account.tree</field>
         <field name="model">account.account</field>
