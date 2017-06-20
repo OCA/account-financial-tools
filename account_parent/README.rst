@@ -7,7 +7,7 @@ Parent Account
 ==============
 
 This module will be very useful for those who are still using v7/v8 
-because of the no parent account and chart of account heirarchy view in the latest versions
+because of the no parent account and chart of account hierarchy view in the latest versions
 
 * Adds parent account in account
 * Adds new type 'view' in account type
@@ -29,7 +29,7 @@ If no parent account is set, then just a list view with credit,debit, balance wi
 Usage
 =====
 
-The wizard, accesible from *Accounting > Adviser > Chart of Accounts Heirarchy*
+The wizard, accesible from *Accounting > Adviser > Chart of Accounts Hierarchy*
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

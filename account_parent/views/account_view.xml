@@ -33,7 +33,7 @@
         </field>
     </record>
     <record id="open_view_account_tree" model="ir.actions.act_window">
-        <field name="name">Chart of Account Heirarchy</field>
+        <field name="name">Chart of Account Hierarchy</field>
         <field name="res_model">account.account</field>
         <field name="view_type">tree</field>
         <field name="view_mode">tree,form</field>
@@ -60,7 +60,7 @@
         </field>
     </record>
     <record id="open_view_account_noparent_tree" model="ir.actions.act_window">
-        <field name="name">Chart of Account Heirarchy</field>
+        <field name="name">Chart of Account Hierarchy</field>
         <field name="res_model">account.account</field>
         <field name="view_type">tree</field>
         <field name="view_mode">tree,form</field>

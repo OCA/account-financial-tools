@@ -43,7 +43,7 @@ class AccountAccount(models.Model):
 
         state = context.get('state')
         if state and state.lower() != 'all':
-            res += " AND m.state = '{}' ".format(state)
+            res += """ AND m.state = '%s' """ % state
 
         if context.get('company_id'):
             res += " AND l.company_id = {} ".format(context['company_id'])
@@ -58,21 +58,22 @@ class AccountAccount(models.Model):
     @api.depends('move_line_ids', 'move_line_ids.amount_currency',
                  'move_line_ids.debit', 'move_line_ids.credit')
     def _compute_values(self):
+        query = """
+        SELECT sum(debit) debit, sum(credit) credit,
+                sum(debit - credit) balance
+        FROM account_move_line l
+        LEFT JOIN account_move m ON l.move_id = m.id
+        LEFT JOIN account_account a ON l.account_id = a.id
+        LEFT JOIN account_account_type at ON a.user_type_id = at.id
+        WHERE 1 = 1 AND l.account_id in %s
+        """
         default_domain = self._move_domain_get()
-        query = 'SELECT sum(debit) debit, sum(credit) credit, ' \
-                'sum(debit - credit) balance ' \
-                'FROM account_move_line l ' \
-                'LEFT JOIN account_move m ON l.move_id = m.id ' \
-                'LEFT JOIN account_account a ON l.account_id = a.id ' \
-                'LEFT JOIN account_account_type at ON a.user_type_id = at.id '\
-                'WHERE 1 = 1 AND l.account_id in %s '
-        query += default_domain
+        query += default_domain and default_domain
         for account in self:
             sub_accounts = self.with_context(
                 {'show_parent_account': True}).search([
                     ('id', 'child_of', [account.id])])
-            params = [tuple(sub_accounts.ids)]
-            self.env.cr.execute(query, params)
+            self.env.cr.execute(query, (tuple(sub_accounts.ids),))
             result = self.env.cr.dictfetchall()[0]
             account.balance = result['balance']
             account.credit = result['credit']
