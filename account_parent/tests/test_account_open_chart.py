@@ -17,5 +17,6 @@ class TestAcountOpenChart(TransactionCase):
             'company_id': self.company_id
         })
 
-        # Test that the open chart cannot open window
+        # Test that the function account_chart_open_window can be executed
+        # without arguments/special context
         self.assertTrue(open_chart_id.account_chart_open_window())

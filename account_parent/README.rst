@@ -29,7 +29,11 @@ If no parent account is set, then just a list view with credit,debit, balance wi
 Usage
 =====
 
-Nothing
+The wizard, accesible from *Accounting > Adviser > Chart of Accounts Heirarchy*
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/92/8.0
 
 Known issues / Roadmap
 ======================
