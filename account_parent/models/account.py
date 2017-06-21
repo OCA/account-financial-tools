@@ -17,8 +17,17 @@ class AccountAccount(models.Model):
 
     @api.model
     def _move_domain_get(self):
+        self.ensure_one()
         context = dict(self._context or {})
-
+        query = """
+        SELECT sum(debit) debit, sum(credit) credit,
+                sum(debit - credit) balance
+        FROM account_move_line l
+        LEFT JOIN account_move m ON l.move_id = m.id
+        LEFT JOIN account_account a ON l.account_id = a.id
+        LEFT JOIN account_account_type at ON a.user_type_id = at.id
+        WHERE 1 = 1 AND l.account_id in %s
+        """
         res = ''
         date_field = 'date'
         if context.get('aged_balance'):
@@ -36,40 +45,26 @@ class AccountAccount(models.Model):
             else:
                 res += " AND l.{} >= '{}' ".format(
                     date_field, context['date_from'])
-
         if context.get('journal_ids'):
             res += " AND l.journal_id in {} ".format(
                 tuple(context['journal_ids']))
-
         state = context.get('state')
         if state and state.lower() != 'all':
             res += """ AND m.state = '%s' """ % state
-
         if context.get('company_id'):
             res += " AND l.company_id = {} ".format(context['company_id'])
-
         if 'company_ids' in context:
             res += " AND l.company_id  in {} ".format(
                 tuple(context['company_ids']))
-
-        return res
+        query += res and res
+        return query
 
     @api.multi
     @api.depends('move_line_ids', 'move_line_ids.amount_currency',
                  'move_line_ids.debit', 'move_line_ids.credit')
     def _compute_values(self):
-        query = """
-        SELECT sum(debit) debit, sum(credit) credit,
-                sum(debit - credit) balance
-        FROM account_move_line l
-        LEFT JOIN account_move m ON l.move_id = m.id
-        LEFT JOIN account_account a ON l.account_id = a.id
-        LEFT JOIN account_account_type at ON a.user_type_id = at.id
-        WHERE 1 = 1 AND l.account_id in %s
-        """
-        default_domain = self._move_domain_get()
-        query += default_domain and default_domain
         for account in self:
+            query = account._move_domain_get()
             sub_accounts = self.with_context(
                 {'show_parent_account': True}).search([
                     ('id', 'child_of', [account.id])])
