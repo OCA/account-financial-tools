@@ -132,7 +132,6 @@ class FinancialAccount(models.Model):
 
         self.env.cr.execute(SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS)
 
-    @api.model
     def create(self, vals):
         res = super(FinancialAccount, self).create(vals)
 
@@ -140,9 +139,15 @@ class FinancialAccount(models.Model):
 
         return res
 
-    # @api.model
     def write(self, vals):
         res = super(FinancialAccount, self).write(vals)
+
+        self.recreate_financial_account_tree_analysis()
+
+        return res
+
+    def unlink(self):
+        res = super(FinancialAccount, self).unlink()
 
         self.recreate_financial_account_tree_analysis()
 
