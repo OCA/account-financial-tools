@@ -13,9 +13,9 @@ Usage
 In order to lock the journal entry, you need to follow this process:
 
 * You need to post your entry, with the standard wizard Post Journal Entries
-  (Invoicing -> Periodic Processing -> Draft Entries -> Post Journal Entries) 
+  (Invoicing -> Adviser -> Journal Entries -> Post Journal Entries)
 * Then, you can use the wizard Lock Journal Entries 
-  (Invoicing -> Periodic Processing -> Draft Entries -> Lock Journal Entries) 
+  (Invoicing -> Adviser -> Lock Journal Entries)
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
