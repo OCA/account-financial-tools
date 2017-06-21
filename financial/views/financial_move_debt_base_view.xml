@@ -10,6 +10,7 @@
         <field name="name">financial.move.debt.base.tree (in financial)</field>
         <field name="model">financial.move</field>
         <field name="priority">9999</field>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
                 <field name="date_business_maturity" string="Maturity"/>
@@ -34,6 +35,7 @@
         <field name="name">financial.move.debt.base.form (in financial)</field>
         <field name="model">financial.move</field>
         <field name="priority">9999</field>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <form>
                 <field name="type" invisible="1"/>
@@ -119,6 +121,7 @@
         <field name="name">financial.move.debt.base.search (in financial)</field>
         <field name="model">financial.move</field>
         <field name="priority">9999</field>
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <search string="Debts">
                 <filter icon="terp-sale" string="State" context="{'group_by': 'state'}" />

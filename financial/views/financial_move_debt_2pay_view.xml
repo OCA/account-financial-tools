@@ -9,32 +9,8 @@
     <record model="ir.ui.view" id="financial_move_debt_2pay_form">
         <field name="name">financial.move.debt.2pay.form (in financial)</field>
         <field name="model">financial.move</field>
-        <field name="type">form</field>
-        <field name="copy_id" ref="financial.financial_move_debt_base_form" />
-        <field name="arch" eval="False" />
-    </record>
-
-    <record model="ir.ui.view" id="financial_move_debt_2pay_tree">
-        <field name="name">financial.move.debt.2pay.tree (in financial)</field>
-        <field name="model">financial.move</field>
-        <field name="type">tree</field>
-        <field name="copy_id" ref="financial.financial_move_debt_base_tree" />
-        <field name="arch" eval="False" />
-    </record>
-
-    <record model="ir.ui.view" id="financial_move_debt_2pay_search">
-        <field name="name">financial.move.debt.2pay.search (in financial)</field>
-        <field name="model">financial.move</field>
-        <field name="type">search</field>
-        <field name="copy_id" ref="financial.financial_move_debt_base_search" />
-        <field name="arch" eval="False" />
-    </record>
-
-    <record model="ir.ui.view" id="financial_move_debt_2pay_inherited_form">
-        <field name="name">financial.move.debt.2pay.inherited.form (in financial)</field>
-        <field name="model">financial.move</field>
-        <field name="priority">2</field>
-        <field name="inherit_id" ref="financial.financial_move_debt_2pay_form" />
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_base_form" />
         <field name="arch" type="xml">
             <xpath expr="//form[1]" position="attributes">
                 <attribute name="string">Payable</attribute>
@@ -45,11 +21,11 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="financial_move_debt_2pay_inherited_tree">
-        <field name="name">financial.move.debt.2pay.inherited.tree (in financial)</field>
+    <record model="ir.ui.view" id="financial_move_debt_2pay_tree">
+        <field name="name">financial.move.debt.2pay.tree (in financial)</field>
         <field name="model">financial.move</field>
-        <field name="priority">2</field>
-        <field name="inherit_id" ref="financial.financial_move_debt_2pay_tree" />
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_base_tree" />
         <field name="arch" type="xml">
             <xpath expr="//tree[1]" position="attributes">
                 <attribute name="string">Payables</attribute>
@@ -57,11 +33,11 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="financial_move_debt_2pay_inherited_search">
-        <field name="name">financial.move.debt.2pay.inherited.search (in financial)</field>
+    <record model="ir.ui.view" id="financial_move_debt_2pay_search">
+        <field name="name">financial.move.debt.2pay.search (in financial)</field>
         <field name="model">financial.move</field>
-        <field name="priority">2</field>
-        <field name="inherit_id" ref="financial.financial_move_debt_2pay_search" />
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="financial.financial_move_debt_base_search" />
         <field name="arch" type="xml">
             <xpath expr="//search[1]" position="attributes">
                 <attribute name="string">Payables</attribute>
