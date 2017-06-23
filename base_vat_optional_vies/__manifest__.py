@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# License AGPL-3: Tecnativa S.L. - Antonio Espinosa
-# See README.rst file on addon root folder for more details
-
+# Copyright 2015 Tecnativa - Antonio Espinosa
+# Copyright 2016 Tecnativa - Sergio Teruel
+# Copyright 2017 Tecnativa - David Vidal
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': "Optional validation of VAT via VIES",
     'category': 'Accounting',
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'depends': [
         'base_vat',
     ],
@@ -15,11 +16,9 @@
     'data': [
         'views/res_partner_view.xml',
     ],
-    'author': 'Antiun Ingeniería S.L., '
-              'Tecnativa,'
+    'author': 'Tecnativa,'
               'Odoo Community Association (OCA)',
-    'website': 'http://www.tecnativa.com',
+    'website': 'https://www.tecnativa.com',
     'license': 'AGPL-3',
-    'images': [],
     'installable': True,
 }
