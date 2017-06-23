@@ -1,3 +1,3 @@
-# See README.rst file on addon root folder for more details
+# -*- coding: utf-8 -*-
 
 from . import res_partner
