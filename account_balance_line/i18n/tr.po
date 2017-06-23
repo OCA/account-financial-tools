@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-06-09 22:24+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/tr/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_balance_line
 #: view:account.move.line:0
 msgid "Account"
-msgstr ""
+msgstr "Hesap"
 
 #. module: account_balance_line
 #: view:account.move.line:0
