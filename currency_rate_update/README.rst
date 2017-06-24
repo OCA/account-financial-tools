@@ -37,6 +37,9 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. Joint Stock Commercial Bank for Foreign Trade of Vietnam - Vietcombank
+
+
 Configuration
 =============
 
