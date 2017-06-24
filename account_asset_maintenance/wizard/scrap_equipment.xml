@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_perform_equipment_scrap" model="ir.ui.view">
+        <field name="model">wizard.perform.equipment.scrap</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="equipment_id" readonly="1" string="Scrapping equipment"/>
+                            <field name="scrap_date" default_focus="1" />
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="do_scrap" string="Scrap" type="object" class="oe_highlight" />
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="wizard_perform_equipment_scrap_action">
+        <field name="name">Wizard Scrap</field>
+        <field name="res_model">wizard.perform.equipment.scrap</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_perform_equipment_scrap" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>

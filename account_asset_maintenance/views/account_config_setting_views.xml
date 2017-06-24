@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_config_asset_maintenance_form">
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="model">account.config.settings</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting']" position="after">
+                <group name="scrapping" string="Scrapping">
+                    <group>
+                        <field name="equipment_scrap_template_id" />
+                    </group>
+                    <group>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
