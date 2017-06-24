@@ -72,14 +72,16 @@ class VCBGetter(CurrencyGetterInterface):
         for curr in currency_array:
             self.validate_cur(curr)
             if curr == 'VND':
-                rate = 1 / main_curr_data['rate_currency']
+                rate = main_curr_data['rate_currency']
             else:
                 curr_data = self.rate_retrieve(dom, vcb_ns, curr)
                 if main_currency == 'VND':
-                    rate = curr_data['rate_currency']
+                    print ' === [2]'
+                    rate = 1 / curr_data['rate_currency']
                 else:
-                    rate = (curr_data['rate_currency'] /
-                            main_curr_data['rate_currency'])
+                    rate = (
+                        main_curr_data['rate_currency']
+                        / curr_data['rate_currency'])
 
             self.updated_currency[curr] = rate
             _logger.debug(
