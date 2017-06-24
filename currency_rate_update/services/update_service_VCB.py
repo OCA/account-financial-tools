@@ -76,7 +76,6 @@ class VCBGetter(CurrencyGetterInterface):
             else:
                 curr_data = self.rate_retrieve(dom, vcb_ns, curr)
                 if main_currency == 'VND':
-                    print ' === [2]'
                     rate = 1 / curr_data['rate_currency']
                 else:
                     rate = (
