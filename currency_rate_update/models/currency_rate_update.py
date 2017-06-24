@@ -106,7 +106,7 @@ class CurrencyRateUpdateService(models.Model):
     # Note fileds that will be used as a logger
     note = fields.Text('Update logs')
     max_delta_days = fields.Integer(
-        string='Max delta days', default=4, required=True,
+        default=4, required=True,
         help="If the time delta between the rate date given by the "
         "webservice and the current date exceeds this value, "
         "then the currency rate is not updated in Odoo.")

@@ -10,7 +10,7 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 _logger = logging.getLogger(__name__)
 
 
-class CH_ADMINGetter(CurrencyGetterInterface):
+class ChAdminGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for Admin.ch service.
     """

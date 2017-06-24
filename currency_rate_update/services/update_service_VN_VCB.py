@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# © 2017 Binh Lam
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 
 from datetime import datetime
 import logging
@@ -10,11 +13,10 @@ from .currency_getter_interface import CurrencyGetterInterface
 _logger = logging.getLogger(__name__)
 
 
-class VCBGetter(CurrencyGetterInterface):
-    """Implementation of Currency_getter_factory interface
-    for VCB service
-    """
-    code = 'VCB'
+class VnVcbGetter(CurrencyGetterInterface):
+    """Implementation of Currency_getter_factory interface for VCB service."""
+
+    code = 'VN_VCB'
     name = 'Joint Stock Commercial Bank for Foreign ' \
            'Trade of Vietnam - Vietcombank'
     supported_currency_array = [
@@ -22,9 +24,7 @@ class VCBGetter(CurrencyGetterInterface):
         "KWD", "MYR", "NOK", "RUB", "SAR", "SEK", "SGD", "THB", "USD", "VND"]
 
     def rate_retrieve(self, dom, ns, curr):
-        """Parse a dom node to retrieve-
-        currencies data
-        """
+        """Parse a dom node to retrieve-currencies data."""
         res = {}
         xpath_curr_rate = ("/ExrateList/Exrate[@CurrencyCode='%s']/@Transfer"
                            % curr.upper())
@@ -36,8 +36,7 @@ class VCBGetter(CurrencyGetterInterface):
 
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
-
-        """implementation of abstract method of Curreny_getter_interface"""
+        """Implementation of abstract method of Curreny_getter_interface."""
         url = 'http://www.vietcombank.com.vn/ExchangeRates/ExrateXML.aspx'
         # we do not want to update the main currency
         if main_currency in currency_array:
@@ -72,14 +71,15 @@ class VCBGetter(CurrencyGetterInterface):
         for curr in currency_array:
             self.validate_cur(curr)
             if curr == 'VND':
-                rate = 1 / main_curr_data['rate_currency']
+                rate = main_curr_data['rate_currency']
             else:
                 curr_data = self.rate_retrieve(dom, vcb_ns, curr)
                 if main_currency == 'VND':
-                    rate = curr_data['rate_currency']
+                    rate = 1 / curr_data['rate_currency']
                 else:
-                    rate = (curr_data['rate_currency'] /
-                            main_curr_data['rate_currency'])
+                    rate = (
+                        main_curr_data['rate_currency'] /
+                        curr_data['rate_currency'])
 
             self.updated_currency[curr] = rate
             _logger.debug(
