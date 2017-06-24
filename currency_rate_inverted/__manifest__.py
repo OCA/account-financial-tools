@@ -10,7 +10,7 @@
     'category': 'Accounting & Finance',
     'summary': 'Allows to maintain an exchange rate using the inversion '
                'method',
-    'author': 'Eficent',
+    'author': 'Eficent,Odoo Community Association (OCA)',
     'website': 'http://www.eficent.com',
     'license': 'AGPL-3',
     'depends': ['base'],
