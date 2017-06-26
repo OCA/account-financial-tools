@@ -1,0 +1,219 @@
+<odoo>
+    <data>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_ACORDO">
+            <field name="name">Acordo</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_ADIANTAMENTO">
+            <field name="name">Adiantamento</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_APLICACAO">
+            <field name="name">Aplicação</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_BOLETO">
+            <field name="name">Boleto</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CARTAO">
+            <field name="name">Cartão</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CARTAO_DE_CREDITO">
+            <field name="name">Cartão de Crédito</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CARTAO_DE_DEBITO">
+            <field name="name">Cartão de Débito</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CHEQUE">
+            <field name="name">Cheque</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CHEQUE_DE_TERCEIROS">
+            <field name="name">Cheque de Terceiros</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CHEQUE_PRE">
+            <field name="name">Cheque Pré</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CONVENIOS">
+            <field name="name">Convênios</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CREDIARIO">
+            <field name="name">Crediário</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CREDITO_EM_CONTA">
+            <field name="name">Crédito em conta</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_CT_E">
+            <field name="name">CT-E</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_CUPOM_FISCAL">
+            <field name="name">Cupom Fiscal</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DAE">
+            <field name="name">DAE</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DEJE">
+            <field name="name">DEJE</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DAM">
+            <field name="name">DAM</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DANGE">
+            <field name="name">DANGE</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DARE">
+            <field name="name">DARE</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DARF">
+            <field name="name">DARF</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DARJ">
+            <field name="name">DARJ</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DARM">
+            <field name="name">DARM</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DAS">
+            <field name="name">DAS</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DEBITO_AUTOMATICO">
+            <field name="name">Débito Automático</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DEBITO_EM_CONTA">
+            <field name="name">Débito em conta</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DEPOSITO">
+            <field name="name">Depósito</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DINHEIRO">
+            <field name="name">Dinheiro</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DOC">
+            <field name="name">DOC</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_DOCUMENTO_NAO_FISCAL">
+            <field name="name">Documento não fiscal</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_DUA">
+            <field name="name">DUA</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_ENCARGOS">
+            <field name="name">Encargos</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_FATURA">
+            <field name="name">Fatura</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_FINANCIAMENTO">
+            <field name="name">Financiamento</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_FOLHA_DE_PAGAMENTO">
+            <field name="name">Folha de pagamento</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_GNRE">
+            <field name="name">GNRE</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_GPS">
+            <field name="name">GPS</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_GRCS">
+            <field name="name">GRCS</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_GRU">
+            <field name="name">GRU</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_GUIA_DE_RECOLHIMENTO">
+            <field name="name">Guia de Recolhimento</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_IMPOSTO">
+            <field name="name">Imposto</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_NOTA_DE_DEBITO">
+            <field name="name">Nota de Débito</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_NOTA_FISCAL">
+            <field name="name">Nota Fiscal</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_NOTA_FISCAL_DO_CONSUMIDOR">
+            <field name="name">Nota Fiscal do Consumidor</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_NOTA_DE_SERVICO">
+            <field name="name">Nota de Serviço</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_NOTA_FISCAL_ELETRONICA">
+            <field name="name">Nota Fiscal Eletrônica</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_OUTROS">
+            <field name="name">Outros</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_PROTESTO">
+            <field name="name">Protesto</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_PROVISAO">
+            <field name="name">Provisão</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_RECIBO">
+            <field name="name">Recibo</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_REEMBOLSO">
+            <field name="name">Reembolso</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_RESGATE">
+            <field name="name">Resgate</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_RPA">
+            <field name="name">RPA</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_SAQUE">
+            <field name="name">Saque</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_TAXA">
+            <field name="name">Taxa</field>
+        </record>
+        <record model="financial.document.type" id="DOCUMENTO_FINANCEIRO_TED">
+            <field name="name">TED</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_TICKET">
+            <field name="name">Ticket</field>
+        </record>
+        <record model="financial.document.type"
+                id="DOCUMENTO_FINANCEIRO_TRANSFERENCIA">
+            <field name="name">Transferência</field>
+        </record>
+    </data>
+
+</odoo>
