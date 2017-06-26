@@ -16,6 +16,7 @@
     ],
     'data': [
         'data/ir_sequence_data.xml',
+        'data/financial_document_type_data.xml',
         # 'data/financial_move_data.xml',
         'views/financial_menu.xml',
         'views/financial_move_payment_base_view.xml',
@@ -43,6 +44,7 @@
     ],
     'demo': [
         'demo/financial_move.xml',
-        # 'demo/financial_demo.yml'
+        'demo/financial.account.csv',
+        'demo/financial_demo.yml'
     ],
 }

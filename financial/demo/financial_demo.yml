@@ -1,186 +1,94 @@
 -
-   Test
+  I create a receivable financial move
 -
-  !python {model: financial.move.create, id: False}: |
-        from datetime import datetime
-        from dateutil.relativedelta import relativedelta
-
-        receive = [
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_12'),
-                document_number=100001,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_15days'),
-                amount=55500.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_2'),
-                document_number=100002,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_net'),
-                amount=15000.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_3'),
-                document_number=100003,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_advance'),
-                amount=2459.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_10'),
-                document_number=100004,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_advance'),
-                amount=87000.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_12'),
-                document_number=100005,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term'),
-                amount=107000.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2receive',
-                partner_id=ref('base.res_partner_18'),
-                document_number=100006,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_immediate'),
-                amount=800.00,
-                account_type_id=ref('account.data_account_type_receivable'),
-            ),
-        ]
-        for item in receive:
-          cr_1 = self.create(
-              item
-          )
-          ctx = cr_1._context.copy()
-          ctx['active_id'] = cr_1.id
-          ctx['active_ids'] = [cr_1.id]
-          ctx['active_model'] = cr_1._module
-          cr_1.onchange_fields()
-          cr_1.compute()
+  !record {model: financial.move, id: financial_move_receivable_0}:
+    type: 2receive
+    document_type_id: financial.DOCUMENTO_FINANCEIRO_TED
+    document_number: 852456
+    date_document: !eval datetime.now()
+    company_id: base.main_company
+    partner_id: base.res_partner_10
+    account_id: financial.financial_account_101001
+    amount_document: 1234.00
+    date_maturity: !eval (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d')
 -
-  !python {model: financial.move.create, id: False}: |
-        from datetime import datetime
-        from dateutil.relativedelta import relativedelta
-
-        receive = [
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2pay',
-                partner_id=ref('base.res_partner_12'),
-                document_number=1583,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=3, month=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_advance'),
-                amount=1459.00,
-                account_type_id=ref('account.data_account_type_payable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2pay',
-                partner_id=ref('base.res_partner_3'),
-                document_number=87981,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=3, month=1),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_advance'),
-                amount=47000.00,
-                account_type_id=ref('account.data_account_type_payable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2pay',
-                partner_id=ref('base.res_partner_4'),
-                document_number=87974,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=3, month=2),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term'),
-                amount=87000.00,
-                account_type_id=ref('account.data_account_type_payable'),
-            ),
-        dict(
-                bank_id=ref('bank_112358_13'),
-                company_id=ref('base.main_company'),
-                currency_id=ref('base.BRL'),
-                financial_type='2pay',
-                partner_id=ref('base.res_partner_1'),
-                document_number=1706,
-                document_date=datetime.now().replace(
-                    day=1,month=1) - relativedelta(days=3, month=6),
-                payment_mode_id=ref(
-                    'account_payment_mode.payment_mode_outbound_ct1'),
-                payment_term_id=ref('account.account_payment_term_immediate'),
-                amount=400.00,
-                account_type_id=ref('account.data_account_type_payable'),
-            ),
-        ]
-        for item in receive:
-          cr_1 = self.create(
-              item
-          )
-          ctx = cr_1._context.copy()
-          ctx['active_id'] = cr_1.id
-          ctx['active_ids'] = [cr_1.id]
-          ctx['active_model'] = cr_1._module
-          cr_1.onchange_fields()
-          cr_1.compute()
+  I confirm the financial move using Validate button
+-
+  !python {model: financial.move, id: False}: |
+    self.browse(ref("financial_move_receivable_0")).action_confirm()
+-
+  I check that financial move state is now "Open"
+-
+  !assert {model: financial.move, id: financial_move_receivable_0}:
+    - state == 'open'
+-
+  I pay the financial move
+-
+  !record {model: financial.move, id: financial_move_receivable_0}:
+    payment_ids:
+      - type: receipt_item
+        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+        document_number: 11235813
+        date_document: !eval time.strftime('%Y-%m-%d')
+        date_payment: !eval time.strftime('%Y-%m-%d')
+        bank_id: financial.bank_112358_13
+        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+        amount_document: 1000.00
+        account_id: financial.financial_account_101001
+      - type: receipt_item
+        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+        document_number: 11235813
+        date_document: !eval time.strftime('%Y-%m-%d')
+        date_payment: !eval time.strftime('%Y-%m-%d')
+        bank_id: financial.bank_112358_13
+        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+        amount_document: 234.00
+        account_id: financial.financial_account_101001
+-
+  I check that financial move state is now "Paid"
+-
+  !assert {model: financial.move, id: financial_move_receivable_0}:
+    - state == 'paid'
+-
+  I create a payable financial move
+-
+  !record {model: financial.move, id: financial_move_payable_0}:
+    type: 2pay
+    document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+    document_number: 123123
+    date_document: !eval datetime.now()
+    company_id: base.main_company
+    partner_id: base.res_partner_4
+    account_id: financial.financial_account_201008
+    amount_document: 5000.00
+    date_maturity: !eval (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d')
+-
+  I confirm the financial move using Validate button
+-
+  !python {model: financial.move, id: False}: |
+    self.browse(ref("financial_move_payable_0")).action_confirm()
+-
+  I check that financial move state is now "Open"
+-
+  !assert {model: financial.move, id: financial_move_payable_0}:
+    - state == 'open'
+-
+  I pay the financial move
+-
+  !record {model: financial.move, id: financial_move_payable_0}:
+    payment_ids:
+      - type: payment_item
+        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+        document_number: 11235813
+        date_document: !eval time.strftime('%Y-%m-%d')
+        date_payment: !eval time.strftime('%Y-%m-%d')
+        bank_id: financial.bank_112358_13
+        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+        amount_document: 1000.00
+        account_id: financial.financial_account_101001
+-
+  I check that financial move state is now "Open"
+-
+  !assert {model: financial.move, id: financial_move_payable_0}:
+    - state == 'open'
+    - amount_residual == 4000.00
