@@ -73,6 +73,10 @@ class FinancialAccount(models.Model):
         store=True,
     )
     type = fields.Selection(
+        selection=[
+            ('A', 'Analytic'),
+            ('S', 'Sinthetic')
+        ],
         string='Type',
         compute='_compute_account',
         store=True,

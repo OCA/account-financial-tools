@@ -219,7 +219,10 @@ class FinancialMove(models.Model):
     debt_id = fields.Many2one(
         comodel_name='financial.move',
         string='Debt',
-        domain=[('type', 'in', (FINANCIAL_DEBT_2RECEIVE, FINANCIAL_DEBT_2PAY))]
+        domain=[('type', 'in', (
+            FINANCIAL_DEBT_2RECEIVE,
+            FINANCIAL_DEBT_2PAY,
+        ))]
     )
     payment_ids = fields.One2many(
         comodel_name='financial.move',
