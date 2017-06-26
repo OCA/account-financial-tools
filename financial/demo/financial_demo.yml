@@ -1,7 +1,7 @@
 -
   I create a receivable financial move
 -
-  !record {model: financial.move, id: financial_move_receivable_0}:
+  !record {model: financial.move, id: financial_move_receivable_1}:
     type: 2receive
     document_type_id: financial.DOCUMENTO_FINANCEIRO_TED
     document_number: 852456
@@ -15,44 +15,58 @@
   I confirm the financial move using Validate button
 -
   !python {model: financial.move, id: False}: |
-    self.browse(ref("financial_move_receivable_0")).action_confirm()
+    self.browse(ref("financial_move_receivable_1")).action_confirm()
 -
   I check that financial move state is now "Open"
 -
-  !assert {model: financial.move, id: financial_move_receivable_0}:
+  !assert {model: financial.move, id: financial_move_receivable_1}:
     - state == 'open'
 -
   I pay the financial move
 -
-  !record {model: financial.move, id: financial_move_receivable_0}:
-    payment_ids:
-      - type: receipt_item
-        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
-        document_number: 11235813
-        date_document: !eval time.strftime('%Y-%m-%d')
-        date_payment: !eval time.strftime('%Y-%m-%d')
-        bank_id: financial.bank_112358_13
-        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
-        amount_document: 1000.00
-        account_id: financial.financial_account_101001
-      - type: receipt_item
-        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
-        document_number: 11235813
-        date_document: !eval time.strftime('%Y-%m-%d')
-        date_payment: !eval time.strftime('%Y-%m-%d')
-        bank_id: financial.bank_112358_13
-        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
-        amount_document: 234.00
-        account_id: financial.financial_account_101001
+  !record {model: financial.move, id: financial_move_receivable_1_receipt_item_1}:
+    type: receipt_item
+    document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+    document_number: 852456
+    date_document: !eval datetime.now()
+    company_id: base.main_company
+    partner_id: base.res_partner_10
+    account_id: financial.financial_account_101001
+    amount_document: 1000.00
+    date_payment: !eval time.strftime('%Y-%m-%d')
+    date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+    debt_id: financial_move_receivable_1
+-
+  I check that financial move state is now "Open"
+-
+  !assert {model: financial.move, id: financial_move_receivable_1}:
+    - state == 'open'
+    - amount_residual == 234.00
+-
+  I pay the financial move
+-
+  !record {model: financial.move, id: financial_move_receivable_1_receipt_item_2}:
+    type: receipt_item
+    document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+    document_number: 852456
+    date_document: !eval datetime.now()
+    company_id: base.main_company
+    partner_id: base.res_partner_10
+    account_id: financial.financial_account_101001
+    amount_document: 234.00
+    date_payment: !eval time.strftime('%Y-%m-%d')
+    date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+    debt_id: financial_move_receivable_1
 -
   I check that financial move state is now "Paid"
 -
-  !assert {model: financial.move, id: financial_move_receivable_0}:
+  !assert {model: financial.move, id: financial_move_receivable_1}:
     - state == 'paid'
+    - amount_residual == 0.00
 -
   I create a payable financial move
 -
-  !record {model: financial.move, id: financial_move_payable_0}:
+  !record {model: financial.move, id: financial_move_payable_1}:
     type: 2pay
     document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
     document_number: 123123
@@ -66,29 +80,30 @@
   I confirm the financial move using Validate button
 -
   !python {model: financial.move, id: False}: |
-    self.browse(ref("financial_move_payable_0")).action_confirm()
+    self.browse(ref("financial_move_payable_1")).action_confirm()
 -
   I check that financial move state is now "Open"
 -
-  !assert {model: financial.move, id: financial_move_payable_0}:
+  !assert {model: financial.move, id: financial_move_payable_1}:
     - state == 'open'
 -
   I pay the financial move
 -
-  !record {model: financial.move, id: financial_move_payable_0}:
-    payment_ids:
-      - type: payment_item
-        document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
-        document_number: 11235813
-        date_document: !eval time.strftime('%Y-%m-%d')
-        date_payment: !eval time.strftime('%Y-%m-%d')
-        bank_id: financial.bank_112358_13
-        date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
-        amount_document: 1000.00
-        account_id: financial.financial_account_101001
+  !record {model: financial.move, id: financial_move_payable_1_receipt_item_1}:
+    type: payment_item
+    document_type_id: financial.DOCUMENTO_FINANCEIRO_BOLETO
+    document_number: 11235813
+    date_document: !eval time.strftime('%Y-%m-%d')
+    date_payment: !eval time.strftime('%Y-%m-%d')
+    date_credit_debit: !eval (datetime.now() + timedelta(days=2)).strftime('%Y-%m-%d')
+    company_id: base.main_company
+    partner_id: base.res_partner_4
+    account_id: financial.financial_account_201008
+    amount_document: 1000.00
+    debt_id: financial_move_payable_1
 -
   I check that financial move state is now "Open"
 -
-  !assert {model: financial.move, id: financial_move_payable_0}:
+  !assert {model: financial.move, id: financial_move_payable_1}:
     - state == 'open'
     - amount_residual == 4000.00
