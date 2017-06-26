@@ -1,0 +1,62 @@
+id,code,name,parent_id/id
+financial_account_1,1,RECEITAS,
+financial_account_101,1.01,RECEITAS OPERACIONAIS,financial_account_1
+financial_account_101001,1.01.001, Receitas com Vendas,financial_account_101
+financial_account_101999,1.01.999,Receitas Diversas,financial_account_101
+financial_account_102,1.02,CUSTOS COM VENDAS,financial_account_1
+financial_account_102001,1.02.001,Custos com Insumos,financial_account_102
+financial_account_102002,1.02.002,Comissão,financial_account_102
+financial_account_102999,1.02.999,Outros custos com vendas,financial_account_102
+financial_account_2,2,DESPESAS,
+financial_account_201,2.01,DESPESAS ADMINISTRATIVAS,financial_account_2
+financial_account_201001,2.01.001,Aluguel,financial_account_201
+financial_account_201002,2.01.002,Condomínio,financial_account_201
+financial_account_201003,2.01.003,IPTU,financial_account_201
+financial_account_201004,2.01.004,Telefones,financial_account_201
+financial_account_201005,2.01.005,Luz,financial_account_201
+financial_account_201006,2.01.006,Internet,financial_account_201
+financial_account_201007,2.01.007,Serviços Diversos,financial_account_201
+financial_account_201008,2.01.008,Máquinas e Equipamentos,financial_account_201
+financial_account_201009,2.01.009,Material de Escritório,financial_account_201
+financial_account_201010,2.01.010,Alimentação/Refeições,financial_account_201
+financial_account_201011,2.01.011,Material de Limpeza,financial_account_201
+financial_account_201012,2.01.012,Acessoria Contábil,financial_account_201
+financial_account_201013,2.01.013,Acessória Advocatícia,financial_account_201
+financial_account_201999,2.01.999,Outras Despesas Administrativas,financial_account_201
+financial_account_202,2.02,DESPESAS COM PESSOAL,financial_account_2
+financial_account_202001,2.02.001,Salários e Ordenados,financial_account_202
+financial_account_202002,2.02.002,Férias,financial_account_202
+financial_account_202003,2.02.003,13º Salário,financial_account_202
+financial_account_202004,2.02.004,INSS,financial_account_202
+financial_account_202005,2.02.005,FGTS,financial_account_202
+financial_account_202006,2.02.006,Pró-Labore,financial_account_202
+financial_account_202007,2.02.007,Vale Transporte,financial_account_202
+financial_account_202999,2.02.999,Outras Despesas com Pessoal,financial_account_202
+financial_account_203,2.03,DESPESAS NÃO OPERACIONAIS,financial_account_2
+financial_account_203001,2.03.001,Assinaturas de Jornais e Revistas,financial_account_203
+financial_account_203002,2.03.002,Propaganda e Publicidade,financial_account_203
+financial_account_203003,2.03.003,Anúncios Jornais e Revistas,financial_account_203
+financial_account_203004,2.03.004,Correspondências Diversas,financial_account_203
+financial_account_203005,2.03.005,Combustíveis e Lubrificantes,financial_account_203
+financial_account_203006,2.03.006,Fretes e Carretos,financial_account_203
+financial_account_203007,2.03.007,Processo Trabalhistas,financial_account_203
+financial_account_203008,2.03.008,Cartórios,financial_account_203
+financial_account_203009,2.03.009,Processos Civis,financial_account_203
+financial_account_203010,2.03.010,Fotocópias e Impressões ,financial_account_203
+financial_account_203011,2.03.011,Estacionamentos,financial_account_203
+financial_account_203012,2.03.012,Manutenção e Mecânica,financial_account_203
+financial_account_203013,2.03.013,Construções e Reformas,financial_account_203
+financial_account_203999,2.03.999,Outras Despesas Não Operacionais,financial_account_203
+financial_account_204,2.04,DESPESAS FINANCEIRAS,financial_account_2
+financial_account_204001,2.04.001,Tarifas Bancárias,financial_account_204
+financial_account_204002,2.04.002,IOF,financial_account_204
+financial_account_204999,2.04.999,Outras Despesas Financeiras,financial_account_204
+financial_account_205,2.05,DESPESAS COM IMPOSTOS,financial_account_2
+financial_account_205001,2.05.001,ISS,financial_account_205
+financial_account_205002,2.05.002,INSS,financial_account_205
+financial_account_205003,2.05.003,CSLL,financial_account_205
+financial_account_205004,2.05.004,COFINS,financial_account_205
+financial_account_205005,2.05.005,IRRF,financial_account_205
+financial_account_205006,2.05.006,ICMS,financial_account_205
+financial_account_205007,2.05.007,IPI,financial_account_205
+financial_account_205999,2.05.999,Outras Despesas com Impostos,financial_account_205
