@@ -73,7 +73,6 @@ class FinancialAccount(models.Model):
         store=True,
     )
     type = fields.Selection(
-        selection=[['A', 'Analytic'], ['S', 'Sinthetic']],
         string='Type',
         compute='_compute_account',
         store=True,
@@ -132,6 +131,7 @@ class FinancialAccount(models.Model):
 
         self.env.cr.execute(SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS)
 
+    @api.model
     def create(self, vals):
         res = super(FinancialAccount, self).create(vals)
 
@@ -139,6 +139,7 @@ class FinancialAccount(models.Model):
 
         return res
 
+    @api.multi
     def write(self, vals):
         res = super(FinancialAccount, self).write(vals)
 
@@ -146,6 +147,7 @@ class FinancialAccount(models.Model):
 
         return res
 
+    @api.multi
     def unlink(self):
         res = super(FinancialAccount, self).unlink()
 
