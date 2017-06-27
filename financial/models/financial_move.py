@@ -349,10 +349,11 @@ class FinancialMove(models.Model):
     )
 
     @api.multi
-    @api.constrains('amount')
+    @api.constrains('amount_document')
     def _check_amount(self):
         for record in self:
-            if not record.amount > 0.0 and record.state not in 'cancel':
+            if not (record.amount_document > 0.0 and
+                            record.state not in 'cancel'):
                 raise ValidationError(_(
                     'The payment amount must be strictly positive.'
                 ))
