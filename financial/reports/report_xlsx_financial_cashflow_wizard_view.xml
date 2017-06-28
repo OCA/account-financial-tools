@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.ui.view" id="report_xlsx_financial_cashflow_wizard_form">
+        <field name="name">report.xlsx.financial.cashflow.wizard.form (in financial)</field>
+        <field name="model">report.xlsx.financial.cashflow.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main_info">
+                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                </group>
+                <group string="Period Info">
+                    <field name="period"/>
+                    <field name="time_span"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Generate cashflow" type="object"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="report_xlsx_financial_cashflow_wizard_action">
+        <field name="name">Cashflow</field>
+        <field name="res_model">report.xlsx.financial.cashflow.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.menu" id="report_xlsx_financial_cashflow_wizard_menu">
+        <field name="name">Cashflow</field>
+        <field name="parent_id" ref="financial.financial_report_menu"/>
+        <field name="action" ref="report_xlsx_financial_cashflow_wizard_action"/>
+        <field name="sequence" eval="2"/>
+    </record>
+
+</odoo>

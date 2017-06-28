@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record model="ir.actions.report.xml" id="report_xlsx_financial_cashflow_action">
+        <field name="name">Cashflow</field>
+        <field name="type">ir.actions.report.xml</field>
+        <!-- model is where the data for the report will come from -->
+        <field name="model">report.xlsx.financial.cashflow.wizard</field>
+        <!-- name must *never* be preceeded by "report.", it will be added automaticaly -->
+        <field name="report_name">report_xlsx_financial_cashflow</field>
+        <field name="report_type">xlsx</field>
+        <field name="auto" eval="False"/>
+    </record>
+
+</odoo>
