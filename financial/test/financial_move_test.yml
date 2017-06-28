@@ -1,7 +1,7 @@
 -
   I create a receivable financial move
 -
-  !record {model: financial.move, id: test_test_financial_move_receivable_1}:
+  !record {model: financial.move, id: test_financial_move_receivable_1}:
     type: 2receive
     document_type_id: financial.DOCUMENTO_FINANCEIRO_TED
     document_number: 852456
