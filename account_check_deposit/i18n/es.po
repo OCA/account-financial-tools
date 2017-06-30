@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 22:18+0000\n"
+"POT-Creation-Date: 2017-06-23 22:27+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
@@ -40,7 +40,7 @@ msgstr "Borrador"
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
 msgid "Lines"
-msgstr ""
+msgstr "Líneas"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:194
