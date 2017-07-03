@@ -18,13 +18,13 @@ because of the no parent account and chart of account hierarchy view in the late
 Installation
 ============
 
-Just install it
+Just install it.
 
 Configuration
 =============
 
-Need to set the group show chart of account structure to view the chart of account hierarchy.
-If no parent account is set, then just a list view with credit,debit, balance will be showed
+Need to set the parent account for each account to view the chart of account hierarchy.
+If no parent account is set, then just a list view with credit, debit, balance will be showed.
 
 Usage
 =====
