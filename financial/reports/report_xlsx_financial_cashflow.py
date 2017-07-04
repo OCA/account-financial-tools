@@ -7,6 +7,8 @@
 
 from __future__ import division, print_function, unicode_literals
 
+from psycopg2.extensions import AsIs
+
 from dateutil.relativedelta import relativedelta
 from odoo import _
 from odoo import fields
@@ -195,8 +197,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 join financial_account fa
                  on fa.id = fat.parent_account_id
             where
-                fm.type {type} ('2receive', '2pay')
-                and fm.{period} < '{date_from}'
+                fm.type %(type)s ('2receive', '2pay')
+                and fm.%(period)s < %(date_from)s
 
             group by
                 fa.code
@@ -204,8 +206,13 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             order by
                 fa.code
         '''
-        sql = SQL_INICIAL_VALUE.format(**sql_filter)
-        self.env.cr.execute(sql)
+
+        filters = {
+            'type': AsIs(sql_filter.get('type')),
+            'period': AsIs(sql_filter.get('period')),
+            'date_from': sql_filter.get('date_from'),
+        }
+        self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
 
         for account_code, value in data:
@@ -225,7 +232,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         SQL_DATA = '''
             select
                 fa.code,
-                {time_span} as time_span_date,
+                %(time_span)s as time_span_date,
                 sum(fm.amount_total * fm.sign)
             from
                 financial_move fm
@@ -234,8 +241,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                  join financial_account fa
                   on fa.id = fat.parent_account_id
             where
-                fm.type {type} ('2receive', '2pay')
-                and fm.{period} between '{date_from}' and '{date_to}'
+                fm.type %(type)s ('2receive', '2pay')
+                and fm.%(period)s between %(date_from)s and %(date_to)s
 
             group by
                 fa.id, fa.code, time_span_date
@@ -243,9 +250,15 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             order by
                 fa.code, time_span_date
         '''
-        sql = SQL_DATA.format(**sql_filter)
-        print(sql)
-        self.env.cr.execute(sql)
+
+        filters = {
+            'time_span': AsIs(sql_filter.get('time_span')),
+            'type': AsIs(sql_filter.get('type')),
+            'period': AsIs(sql_filter.get('period')),
+            'date_from': sql_filter.get('date_from'),
+            'date_to': sql_filter.get('date_to'),
+        }
+        self.env.cr.execute(SQL_DATA, filters)
         data = self.env.cr.fetchall()
 
         for account_code, time_span_date, value in data:
