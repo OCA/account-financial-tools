@@ -100,7 +100,7 @@ class FinancialMoveCreate(models.TransientModel):
             'note': self.note,
             'lines': [
                 self._prepare_move_item(item) for item in self.line_ids
-                ],
+            ],
         }
 
     @api.multi

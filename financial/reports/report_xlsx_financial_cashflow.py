@@ -15,6 +15,7 @@ from dateutil.relativedelta import relativedelta
 
 
 class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
+
     def define_title(self):
         if self.report_wizard.time_span == 'days':
             if self.report_wizard.period == 'date_maturity':
@@ -44,8 +45,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             0: {
                 'title': _('Date'),
                 'value': _('From %s to %s') %
-                         (date_from.strftime('%d/%m/%Y'),
-                          date_to.strftime('%d/%m/%Y')),
+                (date_from.strftime('%d/%m/%Y'),
+                 date_to.strftime('%d/%m/%Y')),
             },
             1: {
                 'title': _('Company'),
@@ -145,7 +146,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             line[time_span_date] = 0
 
         report_data['summaries_accumulated'] = line
-        
+
         #
         # Now, the actual report data
         #
@@ -154,7 +155,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             'date_from': self.report_wizard.date_from,
             'date_to': self.report_wizard.date_to,
         }
-        
+
         if self.report_wizard.period == 'date_maturity':
             sql_filter['type'] = 'in'
 
@@ -163,18 +164,22 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             elif self.report_wizard.time_span == 'weeks':
                 sql_filter['time_span'] = "to_char(fm.date_maturity, 'IYYY')"
             else:
-                sql_filter['time_span'] = "to_char(fm.date_maturity, 'YYYY-MM-01')"
+                sql_filter[
+                    'time_span'] = "to_char(fm.date_maturity, 'YYYY-MM-01')"
 
         else:
             sql_filter['type'] = 'not in'
 
             if self.report_wizard.time_span == 'days':
-                sql_filter['time_span'] = 'coalesce(fm.date_credit_debit, fm.date_payment)'
+                sql_filter[
+                    'time_span'] = 'coalesce(fm.date_credit_debit, fm.date_payment)'
             elif self.report_wizard.time_span == 'weeks':
-                sql_filter['time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'IYYY')"
+                sql_filter[
+                    'time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'IYYY')"
             else:
-                sql_filter['time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'YYYY-MM-01')"
-        
+                sql_filter[
+                    'time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'YYYY-MM-01')"
+
         SQL_INICIAL_VALUE = '''
             select
                 fa.code,
@@ -196,12 +201,13 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         sql = SQL_INICIAL_VALUE.format(**sql_filter)
         self.env.cr.execute(sql)
         data = self.env.cr.fetchall()
-        
+
         for account_code, value in data:
             if account_code in report_data['lines']:
-                report_data['lines'][account_code]['initial_value'] = value or 0
+                report_data['lines'][account_code][
+                    'initial_value'] = value or 0
                 report_data['lines'][account_code]['final_value'] = value or 0
-                
+
             if account_code in report_data['summaries']:
                 # report_data['summaries'][account_code]['initial_value'] += \
                 #     value or 0
@@ -233,13 +239,13 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         print(sql)
         self.env.cr.execute(sql)
         data = self.env.cr.fetchall()
-        
+
         for account_code, time_span_date, value in data:
             time_span_date = 'value_' + time_span_date.replace('-', '_')
             if account_code not in report_data['lines']:
                 # raise ?
                 continue
-                
+
             if time_span_date not in report_data['lines'][account_code]:
                 # raise ?
                 continue
@@ -247,7 +253,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
             report_data['lines'][account_code][time_span_date] = \
                 value or 0
             report_data['lines'][account_code]['final_value'] += value or 0
-            
+
             if account_code in report_data['summaries']:
                 report_data['summaries_total'][time_span_date] += \
                     value or 0
@@ -257,7 +263,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         return report_data
 
     def define_columns(self):
-        result ={
+        result = {
             0: {
                 'header': _('Conta'),
                 'field': 'account_code',
@@ -303,7 +309,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         return result
 
     def define_columns_summary_total(self):
-        result ={
+        result = {
             0: {
                 'header': _('Conta'),
                 'field': 'account_code',
@@ -338,7 +344,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                   '=SUM({current_column}{first_row}:{current_column}{previous_row})',
+                '=SUM({current_column}{first_row}:{current_column}{previous_row})',
             }
             next_col += 1
 
@@ -355,7 +361,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         return result
 
     def define_columns_summary_accumulated(self):
-        result ={
+        result = {
             0: {
                 'header': _('Conta'),
                 'field': 'account_code',
@@ -390,7 +396,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                   '={previous_column}{current_row} + {current_column}{previous_row}',
+                '={previous_column}{current_row} + {current_column}{previous_row}',
             }
             next_col += 1
 
@@ -407,7 +413,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         return result
 
     def define_columns_detail_total(self):
-        result ={
+        result = {
             0: {
                 'header': _('Conta'),
                 'field': 'account_code',
@@ -442,7 +448,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                   '={current_column}{summary_total_row}',
+                '={current_column}{summary_total_row}',
             }
             next_col += 1
 
@@ -459,7 +465,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         return result
 
     def define_columns_detail_accumulated(self):
-        result ={
+        result = {
             0: {
                 'header': _('Conta'),
                 'field': 'account_code',
@@ -494,7 +500,7 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                   '={current_column}{summary_accumulated_row}',
+                '={current_column}{summary_accumulated_row}',
             }
             next_col += 1
 
@@ -512,7 +518,6 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
 
     def write_content(self):
         self.sheet.set_zoom(85)
-
 
         #
         # Summary
@@ -588,8 +593,6 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         # 1 / 2.54 = 1 cm converted in inches
         #
         self.sheet.set_margins(1 / 2.54, 1 / 2.54, 1 / 2.54, 1 / 2.54)
-
-
 
 
 ReportXslxFinancialCashflow(

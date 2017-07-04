@@ -55,9 +55,9 @@ class FinancialTestCase(SingleTransactionCase):
 
         # {'active_model': 'financial.move', 'active_ids': [financial.id]}
 
-        ctx ={
+        ctx = {
             'default_type': financial.type == '2receive' and 'receipt_item' or
-                'payment_item',
+            'payment_item',
             'default_amount_document': financial.amount_residual,
             'default_account_id': financial.account_id,
             'default_currency_id': financial.currency_id,

@@ -164,13 +164,13 @@ class FinancialMove(models.Model):
         string='Total',
         compute='_compute_totals',
         store=True,
-        )
+    )
     amount_paid = fields.Monetary(
         string='Paid',
         compute='_compute_residual',
         store=True,
-        )
-    amount_residual = fields.Monetary(
+    )
+    amount_residual = fields.Float(
         string='Residual',
         compute='_compute_residual',
         store=True,
@@ -181,7 +181,7 @@ class FinancialMove(models.Model):
     #
     interest_rate = fields.Float(
         string='Interest rate',
-        digits=(18,10),
+        digits=(18, 10),
     )
     date_interest = fields.Date(
         string='Interest since',
@@ -191,7 +191,7 @@ class FinancialMove(models.Model):
     )
     penalty_rate = fields.Float(
         string='Penalty rate',
-        digits=(18,10),
+        digits=(18, 10),
     )
     date_penalty = fields.Date(
         string='Penalty since',
@@ -201,7 +201,7 @@ class FinancialMove(models.Model):
     )
     discount_rate = fields.Float(
         string='Penalty rate',
-        digits=(18,10),
+        digits=(18, 10),
     )
     date_discount = fields.Date(
         string='Discount up to',
@@ -353,7 +353,7 @@ class FinancialMove(models.Model):
     def _check_amount(self):
         for record in self:
             if not (record.amount_document > 0.0 and
-                            record.state not in 'cancel'):
+                    record.state not in 'cancel'):
                 raise ValidationError(_(
                     'The payment amount must be strictly positive.'
                 ))

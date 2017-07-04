@@ -20,7 +20,7 @@ class FinancialAccount(models.Model):
     _order = 'code, complete_name'
 
     code = fields.Char(
-        string='Code', 
+        string='Code',
         size=20,
         index=True,
         required=True,
@@ -108,7 +108,7 @@ class FinancialAccount(models.Model):
             account.level = account._compute_level()
 
             if account.name and (account.name.startswith('(-)')
-                               or account.name.startswith('( - )')):
+                                 or account.name.startswith('( - )')):
                 account.is_reduction = True
                 account.sign = -1
             else:
