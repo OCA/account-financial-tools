@@ -4,10 +4,6 @@
 
 from odoo import api, fields, models
 
-from ..constants import (
-    FINANCIAL_MOVE,
-)
-
 
 class FinancialMoveCreate(models.TransientModel):
 

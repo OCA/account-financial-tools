@@ -8,7 +8,8 @@
 from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
-from odoo import api, fields, models
+
+from odoo import fields, models
 
 
 class ReportXlsxFinancialCashflowWizard(models.TransientModel):

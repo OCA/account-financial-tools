@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from odoo.tests.common import SingleTransactionCase
 from datetime import datetime, timedelta
 import time
+
+from odoo.tests.common import SingleTransactionCase
 
 
 class FinancialTestCase(SingleTransactionCase):
