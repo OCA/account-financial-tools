@@ -43,7 +43,7 @@
         'reports/report_xlsx_financial_cashflow_wizard_view.xml',
 
         # 'security/inherited_res_partner_bank_security.xml',
-        # 'security/financial_move_security.xml',
+        'security/financial_move_security.xml',
     ],
     'demo': [
         'demo/financial_move.xml',

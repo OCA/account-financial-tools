@@ -5,15 +5,44 @@
 <odoo>
 <data>
 
-    <record model="ir.model.access" id="financial_move_access_name"> <!-- TODO acl id -->
-        <field name="name">financial.move access name</field> <!-- TODO acl name -->
-        <field name="model_id" ref="model_financial_move"/>
-        <!-- TODO review and adapt -->
-        <field name="group_id" ref="base.group_user"/>
+    <record model="ir.model.access" id="financial_document_type_access_name">
+        <field name="name">financial.document.type</field>
+        <field name="model_id" ref="model_financial_document_type"/>
+        <!--  <field name="group_id" ref="base.group_user"/> -->
         <field name="perm_read" eval="1"/>
-        <field name="perm_create" eval="0"/>
-        <field name="perm_write" eval="0"/>
-        <field name="perm_unlink" eval="0"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record model="ir.model.access" id="financial_move_access_name">
+        <field name="name">financial.move</field> 
+        <field name="model_id" ref="model_financial_move"/>
+        <!--  <field name="group_id" ref="base.group_user"/> -->
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record model="ir.model.access" id="financial_account_access_name">
+        <field name="name">financial.account</field> 
+        <field name="model_id" ref="model_financial_account"/>
+        <!--  <field name="group_id" ref="base.group_user"/> -->
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record model="ir.model.access" id="financial_tree_analysis_access_name">
+        <field name="name">financial.account.tree.analysis</field> 
+        <field name="model_id" ref="model_financial_account_tree_analysis"/>
+        <!--  <field name="group_id" ref="base.group_user"/> -->
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
     </record>
 
 </data>
