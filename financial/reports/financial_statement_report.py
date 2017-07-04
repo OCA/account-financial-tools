@@ -178,14 +178,14 @@ class FinancialStatementReport(models.Model):
     def _compute_account_balance(self, accounts):
         """ compute the balance, debit and credit for the provided accounts
         """
-        mapping = {
-            'balance':
-                """COALESCE(
-                SUM(amount_debit),0) - COALESCE(
-                SUM(amount_credit), 0) as balance""",
-            'debit': "COALESCE(SUM(amount_debit), 0) as debit",
-            'credit': "COALESCE(SUM(amount_credit), 0) as credit",
-        }
+        # mapping = {
+        #     'balance':
+        #         """COALESCE(
+        #         SUM(amount_debit),0) - COALESCE(
+        #         SUM(amount_credit), 0) as balance""",
+        #     'debit': "COALESCE(SUM(amount_debit), 0) as debit",
+        #     'credit': "COALESCE(SUM(amount_credit), 0) as credit",
+        # }
 
         res = {}
         for account in accounts:

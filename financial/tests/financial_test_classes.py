@@ -64,7 +64,7 @@ class FinancialTestCase(SingleTransactionCase):
             'default_currency_id': financial.currency_id,
         }
 
-        debt = self.financial_model.with_context(ctx).create({
+        self.financial_model.with_context(ctx).create({
             'date_payment': datetime.now(),
             'amount_document': amount_payment,
             'document_type_id': self.DOCUMENTO_FINANCEIRO_BOLETO,

@@ -7,11 +7,12 @@
 
 from __future__ import division, print_function, unicode_literals
 
-from .report_xlsx_financial_base import ReportXlsxFinancialBase
-from odoo.report import report_sxw
+from dateutil.relativedelta import relativedelta
 from odoo import _
 from odoo import fields
-from dateutil.relativedelta import relativedelta
+from odoo.report import report_sxw
+
+from .report_xlsx_financial_base import ReportXlsxFinancialBase
 
 
 class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
@@ -172,13 +173,16 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
 
             if self.report_wizard.time_span == 'days':
                 sql_filter[
-                    'time_span'] = 'coalesce(fm.date_credit_debit, fm.date_payment)'
+                    'time_span'] = 'coalesce(fm.date_credit_debit,' \
+                                   ' fm.date_payment)'
             elif self.report_wizard.time_span == 'weeks':
                 sql_filter[
-                    'time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'IYYY')"
+                    'time_span'] = "to_char(coalesce(fm.date_credit_debit," \
+                                   " fm.date_payment), 'IYYY')"
             else:
                 sql_filter[
-                    'time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'YYYY-MM-01')"
+                    'time_span'] = "to_char(coalesce(fm.date_credit_debit," \
+                                   " fm.date_payment), 'YYYY-MM-01')"
 
         SQL_INICIAL_VALUE = '''
             select
@@ -186,15 +190,17 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 sum(fm.amount_total * fm.sign)
             from
                 financial_move fm
-                join financial_account_tree_analysis fat on fat.child_account_id = fm.account_id
-                join financial_account fa on fa.id = fat.parent_account_id
+                join financial_account_tree_analysis fat
+                 on fat.child_account_id = fm.account_id
+                join financial_account fa
+                 on fa.id = fat.parent_account_id
             where
                 fm.type {type} ('2receive', '2pay')
                 and fm.{period} < '{date_from}'
-                
+
             group by
                 fa.code
-                
+
             order by
                 fa.code
         '''
@@ -223,15 +229,17 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 sum(fm.amount_total * fm.sign)
             from
                 financial_move fm
-                join financial_account_tree_analysis fat on fat.child_account_id = fm.account_id
-                join financial_account fa on fa.id = fat.parent_account_id
+                 join financial_account_tree_analysis fat
+                  on fat.child_account_id = fm.account_id
+                 join financial_account fa
+                  on fa.id = fat.parent_account_id
             where
                 fm.type {type} ('2receive', '2pay')
                 and fm.{period} between '{date_from}' and '{date_to}'
-                
+
             group by
                 fa.id, fa.code, time_span_date
-                
+
             order by
                 fa.code, time_span_date
         '''
@@ -329,7 +337,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'style': self.style.header.currency,
                 'type': 'formula',
                 'formula':
-                    '=SUM({current_column}{first_row}:{current_column}{previous_row})',
+                    '=SUM({current_column}{first_row}:'
+                    '{current_column}{previous_row})',
             },
         }
 
@@ -344,7 +353,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                '=SUM({current_column}{first_row}:{current_column}{previous_row})',
+                '=SUM({current_column}{first_row}:'
+                '{current_column}{previous_row})',
             }
             next_col += 1
 
@@ -396,7 +406,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 'width': 20,
                 'type': 'formula',
                 'formula':
-                '={previous_column}{current_row} + {current_column}{previous_row}',
+                '={previous_column}{current_row} + '
+                '{current_column}{previous_row}',
             }
             next_col += 1
 

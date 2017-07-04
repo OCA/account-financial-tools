@@ -7,9 +7,12 @@ from __future__ import division, print_function, unicode_literals
 from datetime import datetime
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
+from odoo.exceptions import Warning as UserError
 from odoo.tools import float_is_zero
-from ..constants import *
+
+from ..constants import FINANCIAL_TYPE, FINANCIAL_STATE, \
+    FINANCIAL_DEBT_2RECEIVE, FINANCIAL_DEBT_2PAY, FINANCIAL_SEQUENCE
 
 
 class FinancialMove(models.Model):

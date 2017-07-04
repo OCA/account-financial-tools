@@ -107,8 +107,9 @@ class FinancialAccount(models.Model):
         for account in self:
             account.level = account._compute_level()
 
-            if account.name and (account.name.startswith('(-)')
-                                 or account.name.startswith('( - )')):
+            if account.name and \
+                    account.name.startswith('(-)') or \
+                    account.name.startswith('( - )'):
                 account.is_reduction = True
                 account.sign = -1
             else:
@@ -125,14 +126,17 @@ class FinancialAccount(models.Model):
                     account._compute_complete_name()
 
     def recreate_financial_account_tree_analysis(self):
-        from .financial_account_tree_analysis import \
-            SQL_SELECT_ACCOUNT_TREE_ANALYSIS
+        # from .financial_account_tree_analysis import \
+        #     SQL_SELECT_ACCOUNT_TREE_ANALYSIS
         SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS = '''
         delete from financial_account_tree_analysis;
         insert into financial_account_tree_analysis (id, child_account_id,
-          parent_account_id, level)
-        ''' + SQL_SELECT_ACCOUNT_TREE_ANALYSIS
-
+         parent_account_id, level)
+         select row_number() over()
+          as id, child_account_id, parent_account_id, level
+         from financial_account_tree_analysis_view
+         order by child_account_id, parent_account_id;
+        '''
         self.env.cr.execute(SQL_RECREATE_FINANCIAL_ACCOUNT_TREE_ANALYSIS)
 
     @api.model

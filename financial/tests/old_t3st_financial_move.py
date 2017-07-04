@@ -246,12 +246,12 @@ class TestFinancialMove(TransactionCase):
         self.assertEqual(0.00, cr_1.amount_residual)
         self.assertEqual('paid', cr_1.state)
 
-    """ Como um operador de cobrança, eu gostaria de criar multiplas
-     contas a receber/pagar de forma automatica dependendo do termo de
-     pagamento. """
-
     def test_us_financial_create_term_30_70(self):
         """
+        Como um operador de cobrança, eu gostaria de criar multiplas
+        contas a receber/pagar de forma automatica dependendo do termo de
+        pagamento.
+
         DADO o lancamento de uma parcela via assistente
         QUANDO especificado algum termo de pagamento
         ENTÃO devem ser registradas uma ou mais parcelas em funcao do termo de
