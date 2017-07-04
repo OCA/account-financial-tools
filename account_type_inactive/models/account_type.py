@@ -19,5 +19,5 @@ class AccountAccountType(models.Model):
                 ('user_type_id', '=', self.id)])
             if accounts:
                 raise ValidationError(_('You cannot inactive this account type'
-                                        ' as this type is is used on %d '
+                                        ' as this type is used on %d '
                                         'accounts.' % len(accounts)))
