@@ -21,6 +21,11 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 title = _('Expected Dayly Cashflow')
             else:
                 title = _('Realized Dayly Cashflow')
+        elif self.report_wizard.time_span == 'weeks':
+            if self.report_wizard.period == 'date_maturity':
+                title = _('Expected Weekly Cashflow')
+            else:
+                title = _('Realized Weekly Cashflow')
         else:
             if self.report_wizard.period == 'date_maturity':
                 title = _('Expected Monthly Cashflow')
@@ -81,6 +86,13 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
                 report_data['time_span_titles'][time_span_date] = title
                 current_date += relativedelta(days=1)
 
+        elif self.report_wizard.time_span == 'weeks':
+            current_date = date_from
+            while current_date <= date_to:
+                title = current_date.strftime('%V/%Y')
+                time_span_date = 'value_' + str(current_date).replace('-', '_')
+                report_data['time_span_titles'][time_span_date] = title
+                current_date += relativedelta(weeks=1)
         else:
             current_date = date_from + relativedelta(day=1)
             last_date = date_to + relativedelta(day=1)
@@ -148,6 +160,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
 
             if self.report_wizard.time_span == 'days':
                 sql_filter['time_span'] = 'fm.date_maturity'
+            elif self.report_wizard.time_span == 'weeks':
+                sql_filter['time_span'] = "to_char(fm.date_maturity, 'IYYY')"
             else:
                 sql_filter['time_span'] = "to_char(fm.date_maturity, 'YYYY-MM-01')"
 
@@ -156,6 +170,8 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
 
             if self.report_wizard.time_span == 'days':
                 sql_filter['time_span'] = 'coalesce(fm.date_credit_debit, fm.date_payment)'
+            elif self.report_wizard.time_span == 'weeks':
+                sql_filter['time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'IYYY')"
             else:
                 sql_filter['time_span'] = "to_char(coalesce(fm.date_credit_debit, fm.date_payment), 'YYYY-MM-01')"
         
