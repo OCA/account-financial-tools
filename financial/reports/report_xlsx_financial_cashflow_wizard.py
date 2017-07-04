@@ -9,7 +9,7 @@ from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class ReportXlsxFinancialCashflowWizard(models.TransientModel):
@@ -49,9 +49,11 @@ class ReportXlsxFinancialCashflowWizard(models.TransientModel):
         default=datetime.now().strftime('%Y-12-31'),
     )
 
+    @api.multi
     def generate_report(self):
         self.ensure_one()
+
         return self.env['report'].get_action(
-            docids=self.ids,
+            self,
             report_name='report_xlsx_financial_cashflow'
         )
