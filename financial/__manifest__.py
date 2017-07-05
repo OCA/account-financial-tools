@@ -34,13 +34,12 @@
         # 'wizards/financial_edit.xml',
         # 'wizards/financial_create.xml',
         # 'wizards/financial_pay_receive.xml',
+        'wizards/report_xlsx_financial_cashflow_wizard_view.xml',
 
         # 'report/financial_cashflow.xml',
         # 'report/financial_statement_report.xml',
         # 'report/report_financial.xml',
-
         'reports/report_xlsx_financial_cashflow_data.xml',
-        'reports/report_xlsx_financial_cashflow_wizard_view.xml',
 
         # 'security/inherited_res_partner_bank_security.xml',
         'security/financial_move_security.xml',
