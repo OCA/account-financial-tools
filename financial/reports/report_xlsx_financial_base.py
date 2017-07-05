@@ -271,10 +271,12 @@ class ReportXlsxFinancialBase(ReportXlsx):
         self.current_row += 1
 
     def write_detail(self, line, columns=None, last_row=None,
-                     formula_changes={}):
+                     formula_changes=None):
+
+        if formula_changes is None:
+            formula_changes = {}
         if columns is None:
             columns = self.columns
-
         if last_row is None:
             first_row = self.current_row
         else:

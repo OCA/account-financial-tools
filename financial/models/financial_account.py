@@ -132,8 +132,8 @@ class FinancialAccount(models.Model):
         delete from financial_account_tree_analysis;
         insert into financial_account_tree_analysis (id, child_account_id,
           parent_account_id, level)
-          select row_number() over() 
-              as id, child_account_id, parent_account_id, level
+          select row_number() over()
+           as id, child_account_id, parent_account_id, level
            from financial_account_tree_analysis_view
            order by child_account_id, parent_account_id;
         '''
