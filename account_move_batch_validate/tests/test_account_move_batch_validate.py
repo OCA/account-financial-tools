@@ -2,14 +2,15 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SingleTransactionCase
 from odoo.addons.queue_job.job import Job
 
 
-class TestAccountMoveBatchValidate(TransactionCase):
+class TestAccountMoveBatchValidate(SingleTransactionCase):
 
-    def setUp(self):
-        super(TestAccountMoveBatchValidate, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(TestAccountMoveBatchValidate, self).setUpClass()
         self.AccountObj = self.env['account.account']
         self.AccountJournalObj = self.env['account.journal']
         self.AccountMoveObj = self.env['account.move']
@@ -22,13 +23,13 @@ class TestAccountMoveBatchValidate(TransactionCase):
             'account.data_account_type_revenue')
 
         self.account_recv = self.AccountObj.create({
-            'code': 'RECV',
+            'code': 'RECVT',
             'name': "Receivable (test)",
             'reconcile': True,
             'user_type_id': self.account_type_recv.id,
         })
         self.account_sale = self.AccountObj.create({
-            'code': 'SALE',
+            'code': 'SALET',
             'name': "Receivable (sale)",
             'reconcile': True,
             'user_type_id': self.account_type_rev.id,
@@ -36,7 +37,7 @@ class TestAccountMoveBatchValidate(TransactionCase):
 
         self.sales_journal = self.AccountJournalObj.create({
             'name': "Sales journal",
-            'code': 'SAJ',
+            'code': 'SAJT',
             'type': 'sale',
             'default_credit_account_id': self.account_sale.id,
             'default_debit_account_id': self.account_sale.id,
