@@ -7,4 +7,3 @@
 
 from . import report_xlsx_financial_base
 from . import report_xlsx_financial_cashflow
-
