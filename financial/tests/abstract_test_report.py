@@ -48,6 +48,21 @@ class AbstractTestReport(TransactionCase):
         self.assertGreaterEqual(len(report_xlsx[0]), 1)
         self.assertEqual(report_xlsx[1], 'xlsx')
 
+    def test_02_compute_data(self):
+        """Check that the SQL queries work with all filters options"""
+
+        for filters in [{}] + self.additional_filters:
+            current_filter = self.base_filters.copy()
+            current_filter.update(filters)
+            report = self.model.create(current_filter)
+            # TODO: Refatorar este test e o report, pois não podemos garantir
+            # que as queries estão sendo executadas da forma correta.
+            self.env.ref(self.xlsx_action_name).render_report(
+                report.ids,
+                self.xlsx_report_name,
+                {'report_type': 'xlsx'}
+            )
+
     def _partner_test_is_possible(self, filters):
         """
             :return:

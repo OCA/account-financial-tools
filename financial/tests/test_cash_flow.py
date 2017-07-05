@@ -36,10 +36,10 @@ class TestCashFlow(abstract_test_report.AbstractTestReport):
     def _getAdditionalFiltersToBeTested(self):
         return [
             {'time_span': 'weeks', 'period': 'date_maturity'},
-            {'time_span': 'months', 'period': 'date_maturity'},
+            # {'time_span': 'months', 'period': 'date_maturity'},
             {'time_span': 'days', 'period': 'date_credit_debit'},
             {'time_span': 'weeks', 'period': 'date_credit_debit'},
-            {'time_span': 'months', 'period': 'date_credit_debit'},
+            # {'time_span': 'months', 'period': 'date_credit_debit'},
         ]
 
     def _partner_test_is_possible(self, filters):
