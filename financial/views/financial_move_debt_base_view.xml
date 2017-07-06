@@ -40,8 +40,11 @@
             <form>
                 <field name="type" invisible="1"/>
                 <header>
-                    <button name="action_confirm" icon="fa-check" type="object"
+                    <button name="action_confirm" type="object"
                             states="draft,budget" string="Validate" class="oe_highlight"/>
+                    <button name="%(financial_cancel_act_window)d" type="action"
+                            states="open" string="Cancel"
+                    />
                     <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
                 </header>
                 <sheet>

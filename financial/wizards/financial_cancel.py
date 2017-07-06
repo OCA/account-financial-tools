@@ -2,7 +2,7 @@
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class FinancialCancel(models.TransientModel):
@@ -15,6 +15,7 @@ class FinancialCancel(models.TransientModel):
         help=u'The reason will be saved in record history',
     )
 
+    @api.multi
     def doit(self):
         for wizard in self:
             active_id = self._context['active_id']
