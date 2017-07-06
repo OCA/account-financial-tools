@@ -16,6 +16,8 @@
         'report_xlsx',
     ],
     'data': [
+        'views/financial_menu.xml',
+
         'data/ir_sequence_data.xml',
         'data/financial_document_type_data.xml',
         # 'data/financial_move_data.xml',
@@ -26,7 +28,6 @@
         # 'wizards/financial_pay_receive.xml',
         'wizards/report_xlsx_financial_cashflow_wizard_view.xml',
 
-        'views/financial_menu.xml',
         'views/financial_move_payment_base_view.xml',
         'views/financial_move_debt_base_view.xml',
         'views/financial_move_debt_2receive_view.xml',
