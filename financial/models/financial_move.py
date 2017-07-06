@@ -11,8 +11,14 @@ from odoo.exceptions import ValidationError
 from odoo.exceptions import Warning as UserError
 from odoo.tools import float_is_zero
 
-from ..constants import FINANCIAL_TYPE, FINANCIAL_STATE, \
-    FINANCIAL_DEBT_2RECEIVE, FINANCIAL_DEBT_2PAY, FINANCIAL_SEQUENCE
+from ..constants import (
+    FINANCIAL_DEBT_2RECEIVE,
+    FINANCIAL_DEBT_2PAY,
+    FINANCIAL_PAYMENT_STATE,
+    FINANCIAL_STATE,
+    FINANCIAL_SEQUENCE,
+    FINANCIAL_TYPE,
+)
 
 
 class FinancialMove(models.Model):
@@ -43,6 +49,17 @@ class FinancialMove(models.Model):
         index=True,
         readonly=True,
         default='draft',
+        track_visibility='onchange',
+        copy=False,
+    )
+    #
+    # TODO: Converter este campo em um similar ao semáforo de projetos
+    #
+    payment_state = fields.Selection(
+        selection=FINANCIAL_PAYMENT_STATE,
+        string='Financial Status',
+        index=True,
+        readonly=True,
         track_visibility='onchange',
         copy=False,
     )

@@ -41,6 +41,14 @@ FINANCIAL_STATE = [
     ('cancel', 'Cancel'),
 ]
 
+FINANCIAL_PAYMENT_STATE = [
+    ('scheduled', 'Scheduled'),
+    ('regular', 'Regular'),
+    ('overdue', 'Overdue'),
+    ('legal_dispute', 'Legal dispute'),
+    ('renegotiated', 'Renegotiated'),
+]
+
 FINANCIAL_SEQUENCE = {
     '2receive': 'financial.move.receivable',
     'receipt_item': 'financial.move.receipt',

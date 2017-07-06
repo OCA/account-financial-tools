@@ -75,6 +75,7 @@
                             </group>
                             <!--<group name="amounts" string="Values" class="oe_mini_footer_separator oe_right">-->
                             <group name="amounts" string="Values">
+                                <field name="payment_state" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                 <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                                 <field name="amount_document" string="Amount" required="1" />
                                 <field name="amount_interest" string="(+) Interest" readonly="1"/>
