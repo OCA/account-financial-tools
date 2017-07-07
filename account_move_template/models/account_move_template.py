@@ -9,7 +9,7 @@ from odoo.exceptions import ValidationError
 class AccountMoveTemplate(models.Model):
     _name = 'account.move.template'
     _inherit = ['account.document.template',
-                'mail.activity.mixin',
+                # 'mail.activity.mixin',  TODO:  uncomment for saas-15
                 'mail.thread']
 
     @api.model
