@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo.tests.common import TransactionCase
-from odoo.exceptions import ValidationError
+from openerp.tests.common import TransactionCase
+from openerp.exceptions import ValidationError
 
 
 class TestCreditControlPolicyLevel(TransactionCase):

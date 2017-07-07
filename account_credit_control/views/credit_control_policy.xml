@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="credit_control_policy_form" model="ir.ui.view">
         <field name="name">credit.control.policy.form</field>
         <field name="model">credit.control.policy</field>
@@ -78,7 +79,6 @@
         <field name="name">Credit Control Policies</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.policy</field>
-        <field name="domain"></field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_policy_tree"/>
@@ -130,4 +130,5 @@
             </tree>
         </field>
     </record>
+
 </odoo>

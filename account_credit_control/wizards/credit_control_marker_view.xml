@@ -8,14 +8,13 @@
                 <separator string="Change the state of the selected lines"
                            colspan="4"/>
                 <newline/>
-                <label string="Warning: you will maybe not be able to revert this operation."
-                       colspan="4"></label>
+                <label string="Warning: you will maybe not be able to revert this operation." colspan="4"/>
                 <newline/>
                 <group>
                     <group>
                         <field name="name"/>
                     </group>
-                    <group></group>
+                    <group/>
                 </group>
                 <notebook>
                     <page string="Lines">

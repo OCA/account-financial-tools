@@ -4,8 +4,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 logger = logging.getLogger(__name__)
 
@@ -82,13 +82,6 @@ class CreditControlPolicyChanger(models.TransientModel):
     @api.model
     def _set_invoice_policy(self, move_lines, policy):
         """ Force policy on invoice """
-<<<<<<< 3bb811bb84ec5c265d8e9245eff93a4a5f98059f
-<<<<<<< f4a71683cf11965d8ffc1f5016e254fe6aa2eaf5
-=======
-        invoice_obj = self.env['account.invoice']
->>>>>>> Fix errors, improve menus, views, readme
-=======
->>>>>>> Add some unit tests on the module account_credit_control
         invoices = move_lines.mapped('invoice_id')
         invoices.write({'credit_policy_id': policy.id})
 

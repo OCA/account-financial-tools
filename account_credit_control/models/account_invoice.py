@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class AccountInvoice(models.Model):
@@ -11,7 +13,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     credit_policy_id = fields.Many2one(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         string='Credit Control Policy',
         help="The Credit Control Policy used for this "
              "invoice. If nothing is defined, it will "
@@ -25,7 +27,8 @@ class AccountInvoice(models.Model):
     )
 
     credit_control_line_ids = fields.One2many(
-        'credit.control.line', 'invoice_id',
+        comodel_name='credit.control.line',
+        inverse_name='invoice_id',
         string='Credit Lines',
         readonly=True,
         copy=False,

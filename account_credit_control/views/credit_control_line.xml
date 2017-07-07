@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="credit_control_line_form" model="ir.ui.view">
         <field name="name">credit.control.line.form</field>
         <field name="model">credit.control.line</field>
@@ -148,7 +149,6 @@
         <field name="name">Credit Control Lines</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.line</field>
-        <field name="domain"></field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_line_tree"/>
@@ -166,6 +166,5 @@
             sequence="20"
             id="credit_control_line_action_menu"
             />
-
 
 </odoo>

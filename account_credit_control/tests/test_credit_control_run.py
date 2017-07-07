@@ -5,9 +5,9 @@ import re
 from datetime import datetime
 from dateutil import relativedelta
 
-from odoo import fields
-from odoo.tests.common import TransactionCase
-from odoo.exceptions import UserError
+from openerp import fields
+from openerp.tests.common import TransactionCase
+from openerp.exceptions import UserError
 
 
 class TestCreditControlRun(TransactionCase):
@@ -80,7 +80,7 @@ class TestCreditControlRun(TransactionCase):
         })
 
         # Validate the invoice
-        self.invoice.action_invoice_open()
+        self.invoice.signal_workflow('invoice_open')
 
     def test_check_run_date(self):
         """

@@ -17,7 +17,7 @@
                         <field name="new_policy_level_id"
                                domain="[('policy_id', '=', new_policy_id)]"/>
                     </group>
-                    <group></group>
+                    <group/>
                 </group>
                 <notebook colspan="4">
                     <page string="Move lines to affect">

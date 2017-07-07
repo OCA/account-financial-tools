@@ -3,7 +3,7 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 logger = logging.getLogger(__name__)
 
@@ -170,7 +170,6 @@ class CreditCommunication(models.TransientModel):
         for comm in self:
             template = comm.current_policy_level.email_template_id
             email_values = template.generate_email(comm.id)
-            email_values['type'] = 'email'
             # model is Transient record (self) removed periodically so no point
             # of storing res_id
             email_values.pop('model', None)

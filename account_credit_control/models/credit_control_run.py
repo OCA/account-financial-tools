@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 import logging
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 logger = logging.getLogger(__name__)
 
@@ -17,16 +19,18 @@ class CreditControlRun(models.Model):
     _rec_name = 'date'
     _description = "Credit control line generator"
 
-    date = fields.Date(string='Controlling Date', required=True,
-                       readonly=True,
-                       states={'draft': [('readonly', False)]})
-
     @api.model
     def _get_policies(self):
         return self.env['credit.control.policy'].search([])
 
+    date = fields.Date(
+        string='Controlling Date',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     policy_ids = fields.Many2many(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         rel="credit_run_policy_rel",
         id1='run_id', id2='policy_id',
         string='Policies',
@@ -34,21 +38,29 @@ class CreditControlRun(models.Model):
         states={'draft': [('readonly', False)]},
         default=_get_policies,
     )
-    report = fields.Html(string='Report', readonly=True, copy=False)
-    state = fields.Selection([('draft', 'Draft'),
-                              ('done', 'Done')],
-                             string='State',
-                             required=True,
-                             readonly=True,
-                             default='draft')
-
+    report = fields.Html(
+        string='Report',
+        readonly=True,
+        copy=False,
+    )
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('done', 'Done'),
+        ],
+        string='State',
+        required=True,
+        readonly=True,
+        default='draft',
+    )
     line_ids = fields.One2many(
         comodel_name='credit.control.line',
         inverse_name='run_id',
-        string='Generated lines')
+        string='Generated lines',
+    )
 
     manual_ids = fields.Many2many(
-        'account.move.line',
+        comodel_name='account.move.line',
         rel="credit_runreject_rel",
         string='Lines to handle manually',
         help='If a credit control line has been generated'

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
-from odoo.exceptions import UserError, ValidationError
+
+from openerp import api, fields, models
+from openerp.exceptions import UserError, ValidationError
 
 
 class ResPartner(models.Model):
@@ -14,7 +16,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     credit_policy_id = fields.Many2one(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         string='Credit Control Policy',
         domain="[('account_ids', 'in', property_account_receivable_id)]",
         help="The Credit Control Policy used for this "
@@ -22,10 +24,12 @@ class ResPartner(models.Model):
              "invoice. If nothing is defined, it will use "
              "the company setting.",
     )
-    credit_control_line_ids = fields.One2many('credit.control.line',
-                                              'invoice_id',
-                                              string='Credit Control Lines',
-                                              readonly=True)
+    credit_control_line_ids = fields.One2many(
+        comodel_name='credit.control.line',
+        inverse_name='invoice_id',
+        string='Credit Control Lines',
+        readonly=True,
+    )
 
     @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):

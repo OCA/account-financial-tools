@@ -14,14 +14,18 @@ Just install it
 Configuration
 =============
 
-Configure the policies and policy levels in ``Accounting  > Configuration >
-Credit Control > Credit Control Policies``.
-You can define as many policy levels as you need.
+* Configure the policies and policy levels in **Accounting  > Configuration >
+  Credit Control > Credit Control Policies**. You can define as many policy
+  levels as you need.
 
-Configure a tolerance for the Credit control and a default policy
-applied on all partners in each company, under the Accounting tab.
+* You must add in every policy, to which account or accounts this policy is
+  applied. To do, you must go to "Accounts" tab in policy form.
 
-You are able to specify a particular policy for one partner or one invoice.
+* Configure a tolerance for the Credit control and a default policy
+  applied on all partners in each company, under the Accounting tab.
+
+* You are able to specify a particular policy for one partner or one invoice.
+
 
 Usage
 =====
@@ -40,7 +44,7 @@ On each generated line, you have many choices:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/10.0
+   :target: https://runbot.odoo-community.org/runbot/92/9.0
 
 Bug Tracker
 ===========
@@ -65,6 +69,7 @@ Contributors
 * Guewen Baconnier (Camptocamp)
 * Sylvain Van Hoof (Okia SPRL) <sylvain@okia.be>
 * Akim Juillerat (Camptocamp <akim.juillerat@camptocamp.com>
+* Vicent Cubells <vicent.cubells@tecnativa.com>
 
 Maintainer
 ----------

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from datetime import datetime
 from dateutil import relativedelta
 
-from odoo import fields
-from odoo.tests.common import TransactionCase
-from odoo.exceptions import UserError
+from openerp import fields
+from openerp.tests.common import TransactionCase
+from openerp.exceptions import UserError
 
 
 class TestAccountInvoice(TransactionCase):
@@ -82,7 +83,7 @@ class TestAccountInvoice(TransactionCase):
         })
 
         # Validate the invoice
-        invoice.action_invoice_open()
+        invoice.signal_workflow('invoice_open')
 
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),

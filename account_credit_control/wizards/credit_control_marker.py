@@ -2,8 +2,8 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 
 class CreditControlMarker(models.TransientModel):

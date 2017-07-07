@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import fields, models
+
+from openerp import fields, models
 
 
 class AccountAccount(models.Model):
@@ -10,7 +12,9 @@ class AccountAccount(models.Model):
 
     _inherit = "account.account"
 
-    credit_control_line_ids = fields.One2many('credit.control.line',
-                                              'account_id',
-                                              string='Credit Lines',
-                                              readonly=True)
+    credit_control_line_ids = fields.One2many(
+        comodel_name='credit.control.line',
+        inverse_name='account_id',
+        string='Credit Lines',
+        readonly=True,
+    )

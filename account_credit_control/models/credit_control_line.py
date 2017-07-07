@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 import logging
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from openerp import _, api, fields, models
+from openerp.exceptions import UserError
 
 logger = logging.getLogger(__name__)
 
@@ -23,107 +25,136 @@ class CreditControlLine(models.Model):
     _rec_name = "id"
     _order = "date DESC"
 
-    date = fields.Date(string='Controlling date',
-                       required=True,
-                       index=True)
+    date = fields.Date(
+        string='Controlling date',
+        required=True,
+        index=True,
+    )
     # maturity date of related move line we do not use
     # a related field in order to
     # allow manual changes
-    date_due = fields.Date(string='Due date',
-                           required=True,
-                           readonly=True,
-                           states={'draft': [('readonly', False)]})
-
-    date_entry = fields.Date(string='Entry date',
-                             related='move_line_id.date',
-                             store=True,
-                             readonly=True)
-
-    date_sent = fields.Date(string='Sent date',
-                            readonly=True,
-                            states={'draft': [('readonly', False)]})
-
-    state = fields.Selection([('draft', 'Draft'),
-                              ('ignored', 'Ignored'),
-                              ('to_be_sent', 'Ready To Send'),
-                              ('sent', 'Done'),
-                              ('error', 'Error'),
-                              ('email_error', 'Emailing Error')],
-                             'State',
-                             required=True,
-                             readonly=True,
-                             default='draft',
-                             help="Draft lines need to be triaged.\n"
-                                  "Ignored lines are lines for which we do "
-                                  "not want to send something.\n"
-                                  "Draft and ignored lines will be "
-                                  "generated again on the next run.")
-
-    channel = fields.Selection([('letter', 'Letter'),
-                                ('email', 'Email')],
-                               string='Channel',
-                               required=True,
-                               readonly=True,
-                               states={'draft': [('readonly', False)]})
-
-    invoice_id = fields.Many2one('account.invoice',
-                                 string='Invoice',
-                                 readonly=True)
-
-    partner_id = fields.Many2one('res.partner',
-                                 string='Partner',
-                                 required=True)
-
-    amount_due = fields.Float(string='Due Amount Tax incl.',
-                              required=True, readonly=True)
-
-    balance_due = fields.Float(string='Due balance', required=True,
-                               readonly=True)
-
-    mail_message_id = fields.Many2one('mail.mail', string='Sent Email',
-                                      readonly=True)
-
-    move_line_id = fields.Many2one('account.move.line',
-                                   string='Move line',
-                                   required=True,
-                                   readonly=True)
-
-    account_id = fields.Many2one('account.account',
-                                 related='move_line_id.account_id',
-                                 store=True,
-                                 readonly=True)
-
-    currency_id = fields.Many2one('res.currency',
-                                  related='move_line_id.currency_id',
-                                  store=True,
-                                  readonly=True)
-
-    company_id = fields.Many2one('res.company',
-                                 related='move_line_id.company_id',
-                                 store=True,
-                                 readonly=True)
-
+    date_due = fields.Date(
+        string='Due date',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    date_entry = fields.Date(
+        string='Entry date',
+        related='move_line_id.date',
+        store=True,
+        readonly=True,
+    )
+    date_sent = fields.Date(
+        string='Sent date',
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('ignored', 'Ignored'),
+            ('to_be_sent', 'Ready To Send'),
+            ('sent', 'Done'),
+            ('error', 'Error'),
+            ('email_error', 'Emailing Error'),
+        ],
+        string='State',
+        required=True,
+        readonly=True,
+        default='draft',
+        help="Draft lines need to be triaged.\n"
+             "Ignored lines are lines for which we do "
+             "not want to send something.\n"
+             "Draft and ignored lines will be "
+             "generated again on the next run.",
+    )
+    channel = fields.Selection(
+        selection=[
+            ('letter', 'Letter'),
+            ('email', 'Email'),
+        ],
+        string='Channel',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    invoice_id = fields.Many2one(
+        comodel_name='account.invoice',
+        string='Invoice',
+        readonly=True,
+    )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        required=True,
+    )
+    amount_due = fields.Float(
+        string='Due Amount Tax incl.',
+        required=True,
+        readonly=True,
+    )
+    balance_due = fields.Float(
+        string='Due balance',
+        required=True,
+        readonly=True,
+    )
+    mail_message_id = fields.Many2one(
+        comodel_name='mail.mail',
+        string='Sent Email',
+        readonly=True,
+    )
+    move_line_id = fields.Many2one(
+        comodel_name='account.move.line',
+        string='Move line',
+        required=True,
+        readonly=True,
+    )
+    account_id = fields.Many2one(
+        comodel_name='account.account',
+        related='move_line_id.account_id',
+        store=True,
+        readonly=True,
+    )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        related='move_line_id.currency_id',
+        store=True,
+        readonly=True,
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        related='move_line_id.company_id',
+        store=True,
+        readonly=True,
+    )
     # we can allow a manual change of policy in draft state
-    policy_level_id = fields.Many2one('credit.control.policy.level',
-                                      string='Overdue Level',
-                                      required=True,
-                                      readonly=True,
-                                      states={'draft': [('readonly', False)]})
-
-    policy_id = fields.Many2one('credit.control.policy',
-                                related='policy_level_id.policy_id',
-                                store=True,
-                                readonly=True)
-
-    level = fields.Integer('Level',
-                           related='policy_level_id.level',
-                           store=True,
-                           readonly=True)
-
-    manually_overridden = fields.Boolean(string='Manually overridden')
-
-    run_id = fields.Many2one(comodel_name='credit.control.run',
-                             string='Source')
+    policy_level_id = fields.Many2one(
+        comodel_name='credit.control.policy.level',
+        string='Overdue Level',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
+    policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        related='policy_level_id.policy_id',
+        store=True,
+        readonly=True,
+    )
+    level = fields.Integer(
+        string='Level',
+        related='policy_level_id.level',
+        store=True,
+        readonly=True,
+    )
+    manually_overridden = fields.Boolean(
+        string='Manually overridden',
+    )
+    run_id = fields.Many2one(
+        comodel_name='credit.control.run',
+        string='Source',
+    )
 
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,

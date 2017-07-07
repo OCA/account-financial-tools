@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="partner_followup_form_view" model="ir.ui.view">
         <field name="name">partner.credit_control.form.view</field>
         <field name="model">res.partner</field>

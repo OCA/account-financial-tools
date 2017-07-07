@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <act_window
             id="act_account_credit_relation_relation"
             name="Credit Lines"
