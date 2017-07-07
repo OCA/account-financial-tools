@@ -62,9 +62,9 @@ class AccountDocumentTemplate(models.Model):
         if len(input_lines) != self._input_lines():
             raise exceptions.Warning(
                 _('You can not add a different number of lines in this wizard '
-                  'you should try to create the move normally and then edit the'
-                  ' created move. Inconsistent between input lines and filled'
-                  ' lines for template %s') % self.name
+                  'you should try to create the move normally and then edit '
+                  'the created move. Inconsistent between input lines and '
+                  ' filled lines for template %s') % self.name
             )
         computed_lines = self._generate_empty_lines()
         computed_lines.update(input_lines)
@@ -79,7 +79,8 @@ class AccountDocumentTemplateLine(models.Model):
 
     name = fields.Char(required=True)
     sequence = fields.Integer(required=True)
-    type = fields.Selection([('computed', 'Computed'), ('input', 'User input')],
-                            required=True, 
-                            default='input')
+    type = fields.Selection([
+        ('computed', 'Computed'),
+        ('input', 'User input'),
+    ], required=True, default='input')
     python_code = fields.Text()

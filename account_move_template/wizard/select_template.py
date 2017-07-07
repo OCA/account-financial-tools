@@ -2,7 +2,7 @@
 # Copyright 2015-2017 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import models, fields, api, exceptions, _
+from odoo import models, fields, api
 import time
 
 
@@ -60,7 +60,8 @@ class WizardSelectMoveTemplate(models.TransientModel):
             moves = moves + move
             for line in self.template_id.template_line_ids.filtered(
                     lambda j: j.journal_id == journal):
-                lines.append((0, 0, self._prepare_line(line, amounts, partner)))
+                lines.append((0, 0,
+                              self._prepare_line(line, amounts, partner)))
             move.write({'line_ids': lines})
         return {
             'domain': [('id', 'in', moves.ids)],
