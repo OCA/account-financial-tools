@@ -18,7 +18,6 @@
         'wizard/select_template.xml',
     ],
     'test': [
-        'test/generate_move.yml',
     ],
     'installable': True,
 }
