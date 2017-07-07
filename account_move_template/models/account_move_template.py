@@ -57,7 +57,6 @@ class AccountMoveTemplateLine(models.Model):
         ondelete="cascade"
     )
     template_id = fields.Many2one('account.move.template')
-    account_tax_id = fields.Many2one('account.tax')
 
     _sql_constraints = [
         ('sequence_template_uniq', 'unique (template_id,sequence)',

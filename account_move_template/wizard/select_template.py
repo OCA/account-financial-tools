@@ -89,7 +89,6 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'analytic_account_id': line.analytic_account_id.id,
             'account_id': line.account_id.id,
             'date': time.strftime('%Y-%m-%d'),
-            # 'account_tax_id': line.account_tax_id.id,
             'credit': not debit and amounts[line.sequence] or 0.0,
             'debit': debit and amounts[line.sequence] or 0.0,
             'partner_id': partner_id,
