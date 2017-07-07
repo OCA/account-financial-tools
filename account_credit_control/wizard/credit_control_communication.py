@@ -170,7 +170,7 @@ class CreditCommunication(models.TransientModel):
         for comm in self:
             template = comm.current_policy_level.email_template_id
             email_values = template.generate_email(comm.id)
-            email_values['type'] = 'email'
+            email_values['message_type'] = 'email'
             # model is Transient record (self) removed periodically so no point
             # of storing res_id
             email_values.pop('model', None)
