@@ -13,7 +13,6 @@
                     <field name="type"/>
                     <field name="python_code" />
                     <field name="move_line_type"/>
-                    <field name="account_tax_id"/>
                 </tree>
             </field>
         </record>
@@ -35,7 +34,6 @@
                             <group>
                                 <field name="type"/>
                                 <field name="move_line_type"/>
-                                <field name="account_tax_id"/>
                             </group>
                         </group>
                         <label for="python_code" string="Python Code"
