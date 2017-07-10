@@ -44,7 +44,7 @@ to a view of all the entries that have been renumbered.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/10.0
 
 Bug Tracker
 ===========
@@ -64,6 +64,7 @@ Contributors
 * Jordi Llinares
 * Joaquín Gutiérrez <http://www.gutierrezweb.es>
 * Jairo Llopis <jairo.llopis@tecnativa.com>
+* David Vidal <david.vidal@tecnativa.com>
 
 Maintainer
 ----------
