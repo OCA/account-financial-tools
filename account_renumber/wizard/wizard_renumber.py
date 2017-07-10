@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2009 Pexego Sistemas Informáticos. All Rights Reserved
-# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2009 Pexego Sistemas Informáticos. All Rights Reserved
+# Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 from datetime import date
-from openerp import _, api, exceptions, fields, models
+from odoo import _, api, exceptions, fields, models
 
 _logger = logging.getLogger(__name__)
 
