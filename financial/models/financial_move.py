@@ -297,7 +297,7 @@ class FinancialMove(models.Model):
     def _compute_residual(self):
         for record in self:
             amount_paid = 0.00
-            if record.type in ('2receive', '2pay'):  # FIXME
+            if record.type in (FINANCIAL_DEBT_2RECEIVE, FINANCIAL_DEBT_2PAY):
                 for payment in record.payment_ids:
                     amount_paid += payment.amount_document
                 amount_residual = record.amount_total - amount_paid
