@@ -4,7 +4,6 @@
 
 from __future__ import division, print_function, unicode_literals
 
-
 FINANCIAL_DEBT = [
     ('2receive', 'Account Receivable'),  # r
     ('2pay', 'Account Payable'),  # p
@@ -41,12 +40,19 @@ FINANCIAL_STATE = [
     ('cancel', 'Cancel'),
 ]
 
-FINANCIAL_PAYMENT_STATE = [
-    ('scheduled', 'Scheduled'),
-    ('regular', 'Regular'),
-    ('overdue', 'Overdue'),
-    ('legal_dispute', 'Legal dispute'),
-    ('renegotiated', 'Renegotiated'),
+FINANCIAL_DATE_STATE = [
+    ('open', 'Open'),  # Aberto / A vencer
+    ('overdue', 'Overdue'),  # Vencido
+    ('due_today', 'Due today'),  # Vence hoje
+    #   1 - Ainda não gerou o recebivél:
+    #        por exemplo o boleto ainda não foi enviado/gerado.
+    #   2 - Quitado
+    #   3 - Quitado Parcial
+    #   4 - Baixado Parcial
+    #   5 - Baixado
+    #   6 - Enviando para disputa judicial
+    #   7 - Disputa Judicial
+    #   8 - Renegotiated
 ]
 
 FINANCIAL_SEQUENCE = {

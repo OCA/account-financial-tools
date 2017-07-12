@@ -12,9 +12,9 @@ from odoo.exceptions import Warning as UserError
 from odoo.tools import float_is_zero
 
 from ..constants import (
+    FINANCIAL_DATE_STATE,
     FINANCIAL_DEBT_2RECEIVE,
     FINANCIAL_DEBT_2PAY,
-    FINANCIAL_PAYMENT_STATE,
     FINANCIAL_STATE,
     FINANCIAL_SEQUENCE,
     FINANCIAL_TYPE,
@@ -43,11 +43,7 @@ class FinancialMove(models.Model):
 
     date_state = fields.Selection(
         string=u'Date State',
-        selection=[
-            ('open', 'Open'),
-            ('overdue', 'Overdue'),
-            ('due_today', 'Due today'),
-        ],
+        selection=FINANCIAL_DATE_STATE,
         compute='_compute_date_state',
         store=True
     )
