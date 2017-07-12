@@ -68,7 +68,7 @@
                                 <!--<field name="doc_source_id"/>-->
                                 <field name="account_id" required="1" />
                                 <field name="date_maturity" required="1" />
-                                <!--<field name="date_business_maturity"/>-->
+                                <field name="date_business_maturity"/>
                                 <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
                                 <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1"/>
                                 <field name="reconciled" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />

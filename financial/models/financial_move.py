@@ -322,15 +322,15 @@ class FinancialMove(models.Model):
 
     @api.depends('date_maturity')
     def _compute_date_business_maturity(self):
-        for move in self:
-            if move.date_maturity:
-                move.date_business_maturity = move.date_maturity
+        # for move in self:
+        #     if move.date_maturity:
+        #         move.date_business_maturity = move.date_maturity
         # # TODO: refactory for global OCA use avoiding l10n_br_resource
-        # for record in self:
-        #     if record.date_maturity:
-        #         record.date_business_maturity = self.env[
-        #             'resource.calendar'].proximo_dia_util_bancario(
-        #             fields.Date.from_string(record.date_maturity))
+        for record in self:
+            if record.date_maturity:
+                record.date_business_maturity = self.env[
+                    'resource.calendar'].proximo_dia_util_bancario(
+                    fields.Date.from_string(record.date_maturity))
 
     def _readonly_state(self):
         return {'draft': [('readonly', False)]}

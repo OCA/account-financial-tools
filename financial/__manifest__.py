@@ -11,7 +11,8 @@
     'author': 'KMEE,Odoo Community Association (OCA)',
     'website': 'www.kmee.com.br',
     'depends': [
-        'resource',
+        'base',
+        'l10n_br_resource',
         'mail',
         'report_xlsx',
     ],
