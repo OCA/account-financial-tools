@@ -161,6 +161,7 @@ class FinancialMove(models.Model):
     )
     date_payment = fields.Date(
         string='Payment date',
+        copy=False,
     )
     date_credit_debit = fields.Date(
         string='Credit/debit date',
@@ -511,6 +512,9 @@ class FinancialMove(models.Model):
     def action_paid(self):
         for record in self:
             record.change_state('paid')
+            if record.state == 'paid':
+                date_payment = max([x.date_payment for x in record.payment_ids])
+                record.date_payment = date_payment
 
     @api.multi
     def action_estorno(self):
