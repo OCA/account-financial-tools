@@ -21,6 +21,7 @@
 
         'data/ir_sequence_data.xml',
         'data/financial_document_type_data.xml',
+        'data/interest_data.xml',
         # 'data/financial_move_data.xml',
 
         'wizards/financial_cancel.xml',

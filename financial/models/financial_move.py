@@ -29,6 +29,28 @@ class FinancialMove(models.Model):
              'ref desc, ref_item desc, document_number, id desc'
     _rec_name = 'ref'
 
+    @api.depends('date_business_maturity')
+    def _compute_date_state(self):
+        for record in self:
+            hoje = fields.Date.context_today(record)
+            vencimento = record.date_business_maturity
+            if record.state == 'open' and hoje > vencimento:
+                record.date_state = 'overdue'
+            elif record.state == 'open' and hoje == vencimento:
+                record.date_state = 'due_today'
+            else:
+                record.date_state = 'open'
+
+    date_state = fields.Selection(
+        string=u'Date State',
+        selection=[
+            ('open', 'Open'),
+            ('overdue', 'Overdue'),
+            ('due_today', 'Due today'),
+        ],
+        compute='_compute_date_state',
+        store=True
+    )
     #
     # Move identification
     #
@@ -559,9 +581,10 @@ class FinancialMove(models.Model):
             record = self.search([
                 ('state', '=', 'open'),
                 ('date_business_maturity', '<', datetime.today())])
-            record._compute_interest()
+            # record._compute_interest()
+            record._compute_date_state()
 
-    @api.depends('payment_mode_id', 'amount', 'date_business_maturity')
+    @api.depends('payment_mode_id', 'amount_document', 'date_business_maturity')
     def _compute_interest(self):
         for record in self:
             if self.env['resource.calendar']. \
@@ -573,11 +596,11 @@ class FinancialMove(models.Model):
                     datetime.today() - datetime.strptime(
                         record.date_maturity,
                         '%Y-%m-%d'))
-                interest = record.amount * (record.payment_mode_id.
+                interest = record.amount_document * (record.payment_mode_id.
                                             interest_percent * day.days) / 100
 
                 delay_fee = (record.payment_mode_id.
-                             delay_fee_percent / 100) * record.amount
+                             delay_fee_percent / 100) * record.amount_document
                 record.amount_interest = interest + delay_fee
 
     def _create_from_dict(self, move_dict):
