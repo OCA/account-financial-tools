@@ -1,128 +1,72 @@
 # -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2017 Tecnativa - Luis M. Ontalba - <luis.martinez@tecnativa.com>
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0
 
-from openerp.tests.common import TransactionCase
+from odoo.tests import common
+from odoo import fields
+from datetime import datetime
 
 
-class TestAccountAsset(TransactionCase):
-    def setUp(self):
-        super(TestAccountAsset, self).setUp()
-        # Create a payable account for suppliers
-        self.account_suppliers = self.env['account.account'].create({
-            'name': 'Suppliers',
-            'code': '410x',
-            'type': 'other',
-            'user_type': self.env.ref('account.data_account_type_payable').id,
-            'reconcile': True,
-        })
-        # Create a supplier
-        self.supplier = self.env['res.partner'].create({
-            'name': 'Asset provider',
-            'supplier': True,
-            'customer': False,
-        })
-        # Create a journal for purchases
-        self.journal_purchase = self.env['account.journal'].create({
-            'name': 'Purchase journal',
-            'code': 'PRCH',
-            'type': 'purchase',
-        })
-        # Create a journal for assets
-        self.journal_asset = self.env['account.journal'].create({
-            'name': 'Asset journal',
-            'code': 'JRNL',
+class TestAccountAssetDisposal(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestAccountAssetDisposal, cls).setUpClass()
+        cls.journal = cls.env['account.journal'].create({
+            'name': 'Test Journal',
             'type': 'general',
+            'code': 'TJ',
+            'update_posted': True,
         })
-        # Create an account for assets
-        self.account_asset = self.env['account.account'].create({
-            'name': 'Asset',
-            'code': '216x',
-            'type': 'other',
-            'user_type': self.env.ref('account.data_account_type_asset').id,
-            'reconcile': False,
+        cls.account_type = cls.env['account.account.type'].create({
+            'name': 'Test Account Type',
         })
-        # Create an account for assets dereciation
-        self.account_asset_depreciation = self.env['account.account'].create({
-            'name': 'Asset depreciation',
-            'code': '2816x',
-            'type': 'other',
-            'user_type': self.env.ref('account.data_account_type_asset').id,
-            'reconcile': False,
+        cls.asset_account = cls.env['account.account'].create({
+            'code': 'TAA',
+            'name': 'Test Asset Account',
+            'internal_type': 'other',
+            'user_type_id': cls.account_type.id,
         })
-        # Create an account for assets expense
-        self.account_asset_expense = self.env['account.account'].create({
-            'name': 'Asset expense',
-            'code': '681x',
-            'type': 'other',
-            'user_type': self.env.ref('account.data_account_type_expense').id,
-            'reconcile': False,
+        cls.asset_category_number = cls.env['account.asset.category'].create({
+            'name': 'Test Category Number',
+            'journal_id': cls.journal.id,
+            'account_asset_id': cls.asset_account.id,
+            'account_depreciation_id': cls.asset_account.id,
+            'account_depreciation_expense_id': cls.asset_account.id,
+            'method_time': 'number',
+            'method_number': 10,
+            'method_period': 12,
+            'method': 'linear',
         })
-        # Create an account for assets loss
-        self.account_asset_loss = self.env['account.account'].create({
-            'name': 'Asset loss',
-            'code': '671x',
-            'type': 'other',
-            'user_type': self.env.ref('account.data_account_type_expense').id,
-            'reconcile': False,
+        cls.asset = cls.env['account.asset.asset'].create({
+            'name': 'Test Asset Number',
+            'category_id': cls.asset_category_number.id,
+            'value': 16000.0,
+            'salvage_value': 1000.0,
+            'method_number': 15,
         })
-        # Create an assset category, with analytic account A
-        self.asset_category = self.env['account.asset.category'].create({
-            'name': 'Asset category for testing',
-            'journal_id': self.journal_asset.id,
-            'account_asset_id': self.account_asset.id,
-            'account_depreciation_id': self.account_asset_depreciation.id,
-            'account_expense_depreciation_id': self.account_asset_expense.id,
-        })
-        # Create an invoice
-        self.asset_name = 'Office table'
-        self.invoice = self.env['account.invoice'].create({
-            'partner_id': self.supplier.id,
-            'account_id': self.account_suppliers.id,
-            'journal_id': self.journal_purchase.id,
-            'reference_type': 'none',
-            'reference': 'PURCHASE/12345',
-            'invoice_line': [
-                (0, False, {
-                    'name': self.asset_name,
-                    'account_id': self.account_asset.id,
-                    'asset_category_id': self.asset_category.id,
-                    'quantity': 1.0,
-                    'price_unit': 100.00,
-                }),
-            ],
-        })
-        # Validate invoice
-        self.invoice.signal_workflow('invoice_open')
-        # Last period opened
-        self.last_period = self.env['account.period'].search([
-            ('state', '=', 'draft'),
-            ('special', '=', False),
-        ], limit=1, order='date_stop DESC')
+        cls.asset.validate()
+        cls.date_time = fields.Date.to_string(datetime.now())
 
-    def test_asset_disposal(self):
-        # Search asset created
-        asset = self.env['account.asset.asset'].search([
-            ('code', '=', self.invoice.number),
-        ])
-        # Asset must be created with code == invoice number
-        self.assertTrue(asset)
-        # Depreciate the first line
-        line = asset.depreciation_line_ids.filtered(
-            lambda x: x.move_check is False)[0]
-        line.create_move()
-        # Disposal asset
-        disposal_date = self.last_period.date_stop
-        wizard = self.env['account.asset.disposal.wizard'].with_context(
-            active_ids=[asset.id]).create({
-                'disposal_date': disposal_date,
-                'loss_account_id': self.account_asset_loss.id,
-            })
-        wizard.action_disposal()
-        # Disposal date
-        self.assertEqual(disposal_date, asset.disposal_date)
-        # Disposal move exists and posted
-        self.assertTrue(asset.disposal_move_id)
-        self.assertEqual('posted', asset.disposal_move_id.state)
-        # Disposal move amount must be equal to asset purchase value
-        self.assertEqual(asset.purchase_value, asset.disposal_move_id.amount)
+    def test_asset_depreciation_board(self):
+        self.assertEqual(len(self.asset.depreciation_line_ids), 15)
+        self.first_line = self.asset.depreciation_line_ids[0]
+        self.assertEqual(self.first_line.depreciated_value, 1000.0)
+        self.assertEqual(self.first_line.remaining_value, 14000.0)
+
+    def test_asset_unamortized(self):
+        self.asset.set_to_close()
+        self.assertTrue(self.asset.disposal_move_id)
+        self.assertEqual(self.asset.disposal_date, self.date_time)
+        self.assertEqual(self.asset.state, 'disposed')
+        self.asset.action_disposal_undo()
+        self.assertEqual(self.asset.state, 'open')
+        self.assertEqual(self.asset.method_end,
+                         self.asset.category_id.method_end)
+        self.assertEqual(self.asset.method_number,
+                         self.asset.category_id.method_number)
+
+    def test_asset_amortized(self):
+        self.asset.depreciation_line_ids.create_move()
+        self.asset.set_to_close()
+        self.asset.action_disposal_undo()
+        self.assertEqual(self.asset.state, 'close')
