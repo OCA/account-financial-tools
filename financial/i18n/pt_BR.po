@@ -46,7 +46,7 @@ msgstr "Categorias"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Account Payable"
 msgstr "Contas a pagar"
 
@@ -54,7 +54,7 @@ msgstr "Contas a pagar"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Account Receivable"
 msgstr "Contas a receber"
 
@@ -102,7 +102,7 @@ msgstr "Valor pago"
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_analytic_account_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_analytic_account_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_analytic_account_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_analytic_account_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_analytic_account_id
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_analytic_account_id
 msgid "Analytic account"
 msgstr "Centro de custo"
@@ -123,7 +123,7 @@ msgstr "Saldo"
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_bank_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_bank_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_bank_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_bank_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_bank_id
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_bank_id
 msgid "Bank Account"
 msgstr "Conta Bancária"
@@ -165,7 +165,7 @@ msgstr "Diário"
 #: selection:abstract.financial,state:0
 #: selection:financial.cashflow,state:0
 #: selection:financial.move,state:0
-#: selection:financial.move.create,state:0
+#: selection:financial.installment,state:0
 #: model:ir.actions.act_window,name:financial.financial_cancel_act_window
 #: model:ir.model.fields,field_description:financial.field_financial_move_amount_cancel
 #: model:ir.ui.view,arch_db:financial.financial_cancel_form_view
@@ -203,7 +203,7 @@ msgstr "Fluxo de caixa"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_account_type_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_account_type_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_account_type_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_account_type_id
 msgid "Category"
 msgstr "Categoria"
 
@@ -226,7 +226,7 @@ msgstr "Mensagem"
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_company_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_company_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_company_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_company_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_company_id
 msgid "Company"
 msgstr "Empresa"
 
@@ -254,8 +254,8 @@ msgstr "Contem toda a ĺogica compartilhada entre os modelos\n"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_create_uid
 #: model:ir.model.fields,field_description:financial.field_financial_edit_create_uid
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_create_uid
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_installment_create_uid
+#: model:ir.model.fields,field_description:financial.field_financial_installment_uid
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_create_uid
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_create_uid
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_create_uid
@@ -267,8 +267,8 @@ msgstr "Criado por"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_create_date
 #: model:ir.model.fields,field_description:financial.field_financial_edit_create_date
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_create_date
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_installment_create_date
+#: model:ir.model.fields,field_description:financial.field_financial_installment_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_create_date
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_create_date
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_create_date
@@ -292,7 +292,7 @@ msgstr "Data crédito/débito"
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_currency_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_currency_id
 #: model:ir.model.fields,field_description:financial.field_financial_edit_currency_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_currency_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_currency_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_currency_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_currency_id
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_currency_id
@@ -385,7 +385,7 @@ msgstr "Descrição"
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_amount_discount
 #: model:ir.model.fields,field_description:financial.field_financial_edit_amount_discount
 #: model:ir.model.fields,field_description:financial.field_financial_move_amount_discount
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount_discount
+#: model:ir.model.fields,field_description:financial.field_financial_installment_amount_discount
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_amount_discount
 #: model:ir.ui.view,arch_db:financial.financial_move_form_view
 #: model:ir.ui.view,arch_db:financial.financial_move_tree_view
@@ -403,7 +403,7 @@ msgstr "Desconto (-)"
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_display_name
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_display_name
 #: model:ir.model.fields,field_description:financial.field_financial_edit_display_name
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_display_name
+#: model:ir.model.fields,field_description:financial.field_financial_installment_display_name
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_display_name
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_display_name
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_display_name
@@ -416,7 +416,7 @@ msgstr ""
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_document_number
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_document_number
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_document_number
+#: model:ir.model.fields,field_description:financial.field_financial_installment_document_number
 #: model:ir.model.fields,field_description:financial.field_financial_move_document_number
 msgid "Document Nº"
 msgstr "Nº Documento"
@@ -430,7 +430,7 @@ msgstr "Valor documento"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_document_date
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_date
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_document_date
+#: model:ir.model.fields,field_description:financial.field_financial_installment_document_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_document_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_date
 msgid "Document date"
@@ -466,7 +466,7 @@ msgstr ""
 #: selection:abstract.financial,state:0
 #: selection:financial.cashflow,state:0
 #: selection:financial.move,state:0
-#: selection:financial.move.create,state:0
+#: selection:financial.installment,state:0
 msgid "Draft"
 msgstr "Provisório"
 
@@ -559,13 +559,13 @@ msgstr "Relatório financeiro"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_financial_type
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_financial_type
+#: model:ir.model.fields,field_description:financial.field_financial_installment_financial_type
 #: model:ir.model.fields,field_description:financial.field_financial_move_financial_type
 msgid "Financial Type"
 msgstr "Tipo financeiro"
 
 #. module: financial
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_date_4532
+#: model:ir.model.fields,field_description:financial.field_financial_installment_date_4532
 #: model:ir.model.fields,field_description:financial.field_financial_move_date
 msgid "Financial date"
 msgstr "Data lançamento"
@@ -612,7 +612,7 @@ msgstr "Agrupar por..."
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_id
 #: model:ir.model.fields,field_description:financial.field_financial_edit_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_id
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_id
@@ -687,7 +687,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow___last_update
 #: model:ir.model.fields,field_description:financial.field_financial_edit___last_update
 #: model:ir.model.fields,field_description:financial.field_financial_move___last_update
-#: model:ir.model.fields,field_description:financial.field_financial_move_create___last_update
+#: model:ir.model.fields,field_description:financial.field_financial_installment___last_update
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create___last_update
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive___last_update
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report___last_update
@@ -700,7 +700,7 @@ msgstr ""
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_write_uid
 #: model:ir.model.fields,field_description:financial.field_financial_edit_write_uid
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_write_uid
+#: model:ir.model.fields,field_description:financial.field_financial_installment_write_uid
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_write_uid
 #: model:ir.model.fields,field_description:financial.field_financial_move_write_uid
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_write_uid
@@ -713,7 +713,7 @@ msgstr ""
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_financial_cancel_write_date
 #: model:ir.model.fields,field_description:financial.field_financial_edit_write_date
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_write_date
+#: model:ir.model.fields,field_description:financial.field_financial_installment_write_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_line_create_write_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_write_date
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_write_date
@@ -729,7 +729,7 @@ msgid "Level"
 msgstr "Nível"
 
 #. module: financial
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_line_ids
+#: model:ir.model.fields,field_description:financial.field_financial_installment_line_ids
 msgid "Line ids"
 msgstr ""
 
@@ -747,7 +747,7 @@ msgstr "Vencimento"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_date_maturity
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_date_maturity
+#: model:ir.model.fields,field_description:financial.field_financial_installment_date_maturity
 #: model:ir.model.fields,field_description:financial.field_financial_move_date_maturity
 msgid "Maturity date"
 msgstr "Data de vencimento"
@@ -770,7 +770,7 @@ msgstr "Vencimento até"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_communication
 #: model:ir.model.fields,field_description:financial.field_financial_move_communication
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_communication
+#: model:ir.model.fields,field_description:financial.field_financial_installment_communication
 msgid "Memo"
 msgstr "Anotações"
 
@@ -783,7 +783,7 @@ msgstr "Modo é"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Money In"
 msgstr "Entrada"
 
@@ -791,7 +791,7 @@ msgstr "Entrada"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Money Out"
 msgstr "Saída"
 
@@ -829,7 +829,7 @@ msgstr "Categorias não inclusas"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_note
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_note
+#: model:ir.model.fields,field_description:financial.field_financial_installment_note
 #: model:ir.model.fields,field_description:financial.field_financial_move_note
 msgid "Note"
 msgstr "Notas"
@@ -851,7 +851,7 @@ msgstr "Confirmar"
 #: selection:abstract.financial,state:0
 #: selection:financial.cashflow,state:0
 #: selection:financial.move,state:0
-#: selection:financial.move.create,state:0
+#: selection:financial.installment,state:0
 msgid "Open"
 msgstr "Efetivo"
 
@@ -869,7 +869,7 @@ msgstr "PDF"
 #: selection:abstract.financial,state:0
 #: selection:financial.cashflow,state:0
 #: selection:financial.move,state:0
-#: selection:financial.move.create,state:0
+#: selection:financial.installment,state:0
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_paid
 #: model:ir.model.fields,field_description:financial.field_financial_move_amount_paid
 #: model:ir.ui.view,arch_db:financial.financial_move_tree_view
@@ -884,7 +884,7 @@ msgstr "Pago/Reconciliado"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_partner_id
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_partner_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_partner_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_partner_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_partner_id
 msgid "Partner"
 msgstr "Parceiro"
@@ -913,13 +913,13 @@ msgstr "Contas a pagar"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_amount
 #: model:ir.model.fields,field_description:financial.field_financial_move_amount
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount
+#: model:ir.model.fields,field_description:financial.field_financial_installment_amount
 msgid "Payment Amount"
 msgstr "Valor pagamento"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_date
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_date
+#: model:ir.model.fields,field_description:financial.field_financial_installment_payment_date
 #: model:ir.model.fields,field_description:financial.field_financial_move_payment_date
 msgid "Payment Date"
 msgstr "Data pagamento"
@@ -928,7 +928,7 @@ msgstr "Data pagamento"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Payment Item"
 msgstr "Item do pagamento"
 
@@ -944,7 +944,7 @@ msgstr "Método pagamento"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_method_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_method_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_payment_method_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_payment_method_id
 #: model:ir.model.fields,field_description:financial.field_financial_pay_receive_payment_method_id
 msgid "Payment Method Type"
@@ -952,7 +952,7 @@ msgstr "Método de pagamento"
 
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_payment_mode_id
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_mode_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_payment_mode_id
 #: model:ir.model.fields,field_description:financial.field_financial_move_payment_mode_id
 #: model:ir.ui.view,arch_db:financial.financial_pay_receive_form_view
 msgid "Payment Mode"
@@ -964,7 +964,7 @@ msgid "Payment Modes"
 msgstr "Modo de pagamento"
 
 #. module: financial
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_payment_term_id
+#: model:ir.model.fields,field_description:financial.field_financial_installment_payment_term_id
 msgid "Payment Term"
 msgstr "Forma de pagamento"
 
@@ -1029,7 +1029,7 @@ msgstr "Provisionado"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Receipt Item"
 msgstr "Item recebimento"
 
@@ -1123,7 +1123,7 @@ msgstr "Extrato"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_abstract_financial_state
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_state
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_state
+#: model:ir.model.fields,field_description:financial.field_financial_installment_state
 #: model:ir.model.fields,field_description:financial.field_financial_move_state
 msgid "Status"
 msgstr "Situação"
@@ -1151,7 +1151,7 @@ msgstr "Pago"
 #. module: financial
 #: model:ir.model.fields,help:financial.field_abstract_financial_account_type_id
 #: model:ir.model.fields,help:financial.field_financial_move_account_type_id
-#: model:ir.model.fields,help:financial.field_financial_move_create_account_type_id
+#: model:ir.model.fields,help:financial.field_financial_installment_account_type_id
 msgid "The partner account used for this invoice."
 msgstr ""
 
@@ -1176,7 +1176,7 @@ msgstr "Esta transição de situação não é permitida"
 #. module: financial
 #: model:ir.model.fields,field_description:financial.field_financial_cashflow_amount_total
 #: model:ir.model.fields,field_description:financial.field_financial_move_amount_total
-#: model:ir.model.fields,field_description:financial.field_financial_move_create_amount_total
+#: model:ir.model.fields,field_description:financial.field_financial_installment_amount_total
 #: model:ir.ui.view,arch_db:financial.financial_move_form_view
 #: model:ir.ui.view,arch_db:financial.financial_move_tree_view
 msgid "Total"
@@ -1186,7 +1186,7 @@ msgstr "Total"
 #: selection:abstract.financial,financial_type:0
 #: selection:financial.cashflow,financial_type:0
 #: selection:financial.move,financial_type:0
-#: selection:financial.move.create,financial_type:0
+#: selection:financial.installment,financial_type:0
 msgid "Transfer"
 msgstr "Transferir"
 
@@ -1226,13 +1226,13 @@ msgid "financial.edit"
 msgstr ""
 
 #. module: financial
-#: model:ir.model,name:financial.model_financial_move_create
-msgid "financial.move.create"
+#: model:ir.model,name:financial.model_financial_installment
+msgid "financial.installment"
 msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_move_line_create
-msgid "financial.move.line.create"
+msgid "financial.installment.line"
 msgstr ""
 
 #. module: financial

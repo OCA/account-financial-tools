@@ -17,9 +17,9 @@ class TestFinancialMove(TransactionCase):
         self.currency_euro = self.env.ref('base.EUR')
 
         self.financial_move = self.env['financial.move']
-        self.financial_move_create = self.env['financial.move.create']
+        self.financial_installment = self.env['financial.installment']
         self.financial_move_line_create = \
-            self.env['financial.move.line.create']
+            self.env['financial.installment.line']
         self.financial_pay_receive = self.env['financial.pay_receive']
         self.financial_edit = self.env['financial.edit']
         self.partner_agrolait = self.env.ref("base.res_partner_2")
@@ -262,7 +262,7 @@ class TestFinancialMove(TransactionCase):
         amount = 1000.00
         doc_number = '2222'
 
-        fm = self.financial_move_create
+        fm = self.financial_installment
         cr_1 = fm.create(
             dict(
                 # journal_id=self.bank_journal_id.id,

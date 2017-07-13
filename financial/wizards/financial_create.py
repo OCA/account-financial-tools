@@ -5,24 +5,25 @@
 from odoo import api, fields, models
 
 
-class FinancialMoveCreate(models.Model):
+class FinancialInstallment(models.Model):
 
-    _name = 'financial.move.create'
+    _name = 'financial.installment'
     _inherit = ['abstract.financial']
-
+    _rec_name = 'document_number' # FIXME: criar display name correto
     @api.depends('amount_document', 'amount_discount')
     def _compute_totals(self):
         for record in self:
-            record.amount_total = record.amount_document - record.amount_discount
+            record.amount_total = \
+                record.amount_document - record.amount_discount
 
-    @api.depends('line_ids.have_generated_move')
+    @api.depends('line_ids.generated_move')
     def _compute_moves_created(self):
         for record in self:
             record.moves_created = record.line_ids and all(
-                [x.have_generated_move for x in record.line_ids])
+                [x.generated_move for x in record.line_ids])
 
     line_ids = fields.One2many(
-        comodel_name='financial.move.line.create',
+        comodel_name='financial.installment.line',
         inverse_name='financial_move_id',
         # readonly=True,
     )
@@ -57,9 +58,9 @@ class FinancialMoveCreate(models.Model):
         compute='_compute_moves_created',
         copy=False
     )
-    generated_line_ids = fields.One2many(
+    generated_move_line_ids = fields.One2many(
         comodel_name='financial.move',
-        inverse_name='move_create_line_id',
+        inverse_name='installment_line_id',
         string=u'Generated Lines'
     )
 
@@ -122,7 +123,7 @@ class FinancialMoveCreate(models.Model):
         if not self.moves_created:
             p = self._prepare_financial_move()
             financial_move = financial_move._create_from_dict(p)
-            self.generated_line_ids = financial_move
+            self.generated_move_line_ids = financial_move
             for line in self.line_ids:
                 line.generated_move_id = financial_move.search([
                     ('document_number', '=', line.document_item),
@@ -130,15 +131,15 @@ class FinancialMoveCreate(models.Model):
                     ('date_maturity', '=', line.date_maturity),
                  ], limit=1)
                 if line.generated_move_id:
-                    line.have_generated_move = True
+                    line.generated_move = True
             financial_move.action_confirm()
         type = financial_move and financial_move[0].type
         return financial_move.action_view_financial(type)
 
 
-class FinancialMoveLineCreate(models.Model):
+class FinancialInstallmentLine(models.Model):
 
-    _name = 'financial.move.line.create'
+    _name = 'financial.installment.line'
 
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -155,10 +156,10 @@ class FinancialMoveLineCreate(models.Model):
         string=u"Document amount",
     )
     financial_move_id = fields.Many2one(
-        comodel_name='financial.move.create',
+        comodel_name='financial.installment',
 
     )
     generated_move_id = fields.Many2one(
         comodel_name='financial.move'
     )
-    have_generated_move = fields.Boolean()
+    generated_move = fields.Boolean()
