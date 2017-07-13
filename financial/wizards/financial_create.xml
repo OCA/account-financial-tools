@@ -25,10 +25,10 @@
                         <field name="company_id" options="{'no_create': True}"/>
                         <field name="document_number"/>
                         <field name="date_document"/>
-                        <field name="payment_mode_id"/>
+                        <!--<field name="payment_mode_id"/>-->
                     </group>
                     <group>
-                        <field name="payment_mode_id"/>
+                        <!--<field name="payment_mode_id"/>-->
                         <field name="payment_term_id"/>
                     </group>
                     <group class="oe_subtotal_footer oe_right">
@@ -37,15 +37,27 @@
                         <field name="amount_total" class="oe_subtotal_footer_separator"/>
                     </group>
                     <field name="moves_created" invisible="1"/>
-                    <field nolabel="1" name="line_ids" attrs="{'invisible': [('moves_created', '=', True)] }">
-                        <tree>
-                            <field name="document_item"/>
-                            <field name="date_maturity"/>
-                            <field name="amount_document"/>
-                        </tree>
-                    </field>
-                    <field nolabel="1" name="generated_line_ids" attrs="{'invisible': [('moves_created', '!=', True)] }">
-                        <tree>
+                    <group attrs="{'invisible': [('moves_created', '=', True)]}" colspan="1">
+                        <field nolabel="1" name="line_ids" colspan="2">
+                            <tree string="Origin Lines">
+                                <field name="document_item"/>
+                                <field name="date_maturity"/>
+                                <field name="amount_document"/>
+                            </tree>
+                        </field>
+                        <group cols="3">
+                            <button name='compute'
+                                string='Compute'
+                                class='btn-primary oe_highlight'
+                                type='object'
+                            /><p>or</p><button string='Cancel'
+                                class='btn-default oe_link'
+                                special='cancel'
+                            />
+                            </group>
+                    </group>
+                    <field nolabel="1" name="generated_line_ids" attrs="{'invisible': [('moves_created', '=', False)] }">
+                        <tree string="Generated Lines">
                             <field name="document_number"/>
                             <field name="date_maturity"/>
                             <field name="amount_document"/>
@@ -55,17 +67,6 @@
                         <field name="note" placeholder="Notes ..."/>
                     </div>
                 </group>
-                <footer  attrs="{'invisible': [('moves_created', '!=', True)] }">
-                    <button name='compute'
-                        string='Compute'
-                        class='btn-primary oe_highlight'
-                        type='object'
-                    />
-                    or
-                    <button string='Cancel'
-                        class='btn-default oe_link'
-                        special='cancel'/>
-                </footer>
             </form>
         </field>
     </record>

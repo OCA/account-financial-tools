@@ -18,11 +18,8 @@ class FinancialMoveCreate(models.Model):
     @api.depends('line_ids.have_generated_move')
     def _compute_moves_created(self):
         for record in self:
-            for line in record.line_ids:
-                if not line.have_generated_move:
-                    record.moves_created = False
-            record.moves_created = True
-        return
+            record.moves_created = record.line_ids and all(
+                [x.have_generated_move for x in record.line_ids])
 
     line_ids = fields.One2many(
         comodel_name='financial.move.line.create',
@@ -121,9 +118,10 @@ class FinancialMoveCreate(models.Model):
 
     @api.multi
     def compute(self):
+        financial_move = self.env['financial.move']
         if not self.moves_created:
             p = self._prepare_financial_move()
-            financial_move = self.env['financial.move']._create_from_dict(p)
+            financial_move = financial_move._create_from_dict(p)
             self.generated_line_ids = financial_move
             for line in self.line_ids:
                 line.generated_move_id = financial_move.search([
@@ -134,12 +132,6 @@ class FinancialMoveCreate(models.Model):
                 if line.generated_move_id:
                     line.have_generated_move = True
             financial_move.action_confirm()
-        else:
-            financial_move = self.line_ids
-            for line in financial_move:
-                line.generated_move_id.due_date = line.due_date
-                line.generated_move_id.document_item = line.document_item
-                line.generated_move_id.amount_document = line.amount_document
         type = financial_move and financial_move[0].type
         return financial_move.action_view_financial(type)
 
