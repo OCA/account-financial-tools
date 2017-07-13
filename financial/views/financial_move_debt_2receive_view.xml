@@ -51,7 +51,7 @@
         <field name="view_mode">tree,form</field>
         <field name="domain">[('type', '=', '2receive')]</field>
         <field name="context">{'default_type': '2receive'}</field>
-        <field name="search_view_ref" ref="financial.financial_move_debt_2receive_search" />
+        <field name="search_view_id" ref="financial.financial_move_debt_2receive_search" />
     </record>
 
     <record model="ir.actions.act_window.view" id="financial_move_debt_2receive_tree_action">

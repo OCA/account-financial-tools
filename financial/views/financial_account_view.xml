@@ -50,7 +50,7 @@
         <field name="name">Financial Accounts</field>
         <field name="res_model">financial.account</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_ref" ref="financial.financial_account_search" />
+        <field name="search_view_id" ref="financial.financial_account_search" />
     </record>
 
     <record model="ir.actions.act_window.view" id="financial_account_tree_action">
