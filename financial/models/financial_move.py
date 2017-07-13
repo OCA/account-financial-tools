@@ -70,17 +70,6 @@ class FinancialMove(models.Model):
         track_visibility='onchange',
         copy=False,
     )
-    #
-    # TODO: Converter este campo em um similar ao semáforo de projetos
-    #
-    payment_state = fields.Selection(
-        selection=FINANCIAL_PAYMENT_STATE,
-        string='Financial Status',
-        index=True,
-        readonly=True,
-        track_visibility='onchange',
-        copy=False,
-    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
