@@ -1,28 +1,24 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
 
 ======================
 Account asset disposal
 ======================
 
-This module extends the functionality of account_asset and automatically
-generates the asset close move
+This module extends the functionality of account_asset adding a disposal
+date, allowing reversion of disposal operation and adding the state
+"Disposed" to the asset.
 
 Usage
 =====
 
-When an asset is broken or is totally depreciated you can close it and Odoo
-will generate automacally the asset close move (and compute the loss if a residual
-value is pending)
-
-In asset you will find a 'Disposal' button (instead of standard 'Set to Close').
-After click, a wizard pops-up for asking disposal date and loss account to use
-if any residual value is pending.
+In a disposed asset you will find an 'Undo disposal' button to revert
+operation.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/10.0
 
 
 Bug Tracker
@@ -46,6 +42,7 @@ Contributors
 
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------
