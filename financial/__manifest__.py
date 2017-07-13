@@ -26,7 +26,6 @@
 
         'wizards/financial_cancel.xml',
         # 'wizards/financial_edit.xml',
-        'wizards/financial_create.xml',
         # 'wizards/financial_pay_receive.xml',
         'wizards/report_xlsx_financial_cashflow_wizard_view.xml',
 
@@ -34,6 +33,7 @@
         'views/financial_move_debt_base_view.xml',
         'views/financial_move_debt_2receive_view.xml',
         'views/financial_move_debt_2pay_view.xml',
+        'views/financial_installment_view.xml',
 
         'views/financial_document_type_view.xml',
         'views/financial_account_view.xml',

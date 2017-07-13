@@ -9,3 +9,4 @@ from . import abstract_financial
 from . import financial_document_type
 from . import inherited_res_partner_bank
 from . import financial_move
+from . import financial_installment
