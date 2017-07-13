@@ -12,8 +12,8 @@ from ..constants import (
 
 class AbstractFinancial(models.AbstractModel):
     _name = 'abstract.financial'
-    _description = """Contains the logic shared between models which
-        allows to register financial moves"""
+    # _description = '''Contains the logic shared between models which
+    #     allows to register financial moves'''
 
     def _readonly_state(self):
         return {}
@@ -24,7 +24,7 @@ class AbstractFinancial(models.AbstractModel):
     def _track_visibility_onchange(self):
         return False
 
-    financial_type = fields.Selection(
+    type = fields.Selection(
         string='Financial Type',
         selection=FINANCIAL_TYPE,
         required=True,
@@ -44,7 +44,7 @@ class AbstractFinancial(models.AbstractModel):
         comodel_name='res.partner',
         string='Partner',
     )
-    amount = fields.Monetary(
+    amount_document = fields.Float(
         string='Payment Amount',
         required=_required_fields,
         track_visibility=_track_visibility_onchange,
@@ -117,22 +117,30 @@ class AbstractFinancial(models.AbstractModel):
         comodel_name='account.analytic.account',
         string=u'Analytic account'
     )
-    account_type_id = fields.Many2one(
-        comodel_name='account.account.type',
-        string=u'Category',
+    account_id = fields.Many2one(
+        comodel_name='financial.account',
+        string='Account',
+        index=True,
         required=True,
-        help="The partner account used for this invoice."
+        domain=[('type', '=', 'A')],
     )
     document_number = fields.Char(
         string=u"Document Nº",
         required=True,
         track_visibility=_track_visibility_onchange,
     )
+    document_type_id = fields.Many2one(
+        comodel_name='financial.document.type',
+        string='Document type',
+        ondelete='restrict',
+        index=True,
+        required=True,
+    )
 
     @api.multi
-    @api.constrains('amount')
+    @api.constrains('amount_document')
     def _check_amount(self):
         for record in self:
-            if not record.amount > 0.0:
+            if not record.amount_document > 0.0:
                 raise ValidationError(_(
                     'The payment amount must be strictly positive.'))
