@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_unlink,perm_create,perm_unlink
+financial.financial_account_access_name,financial.account,financial.model_financial_account,base.group_user,1,1,1,1
+financial.financial_document_type_access_name,financial.document.type,financial.model_financial_document_type,base.group_user,1,1,1,1
+financial.financial_installment_access_name,financial.installment,financial.model_financial_installment,base.group_user,1,1,1,1
+financial.financial_installment_line_access_name,financial.installment.line,financial.model_financial_installment_line,base.group_user,1,1,1,1
+financial.financial_move_access_name,financial.move,financial.model_financial_move,base.group_user,1,1,1,1
+financial.financial_tree_analysis_access_name,financial.account.tree.analysis,financial.model_financial_account_tree_analysis,base.group_user,1,1,1,1

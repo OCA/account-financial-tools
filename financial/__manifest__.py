@@ -45,7 +45,7 @@
         'reports/report_xlsx_financial_cashflow_data.xml',
 
         # 'security/inherited_res_partner_bank_security.xml',
-        'security/financial_move_security.xml',
+        'security/ir.model.access.csv',
     ],
     'demo': [
         'demo/financial_move.xml',
