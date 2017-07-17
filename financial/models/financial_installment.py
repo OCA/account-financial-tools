@@ -44,7 +44,7 @@ class FinancialInstallment(models.Model):
         default=fields.Date.context_today,
     )
     amount_document = fields.Float(
-        required=False,
+        required=True,
     )
     amount_total = fields.Monetary(
         string=u'Total',
@@ -65,7 +65,7 @@ class FinancialInstallment(models.Model):
     )
 
     @api.onchange('payment_term_id', 'document_number',
-                  'date_document', 'amount_document')
+                  'date_document', 'amount_total')
     def onchange_fields(self):
         res = {}
         if not (self.payment_term_id and self.document_number and
@@ -73,7 +73,7 @@ class FinancialInstallment(models.Model):
             return res
 
         computations = self.payment_term_id.compute(
-            self.amount_document, self.date_document)[0]
+            self.amount_document - self.amount_discount, self.date_document)[0]
         payment_ids = []
         for idx, item in enumerate(computations):
             payment = dict(
