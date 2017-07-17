@@ -90,6 +90,7 @@ msgstr "Todos os lançamentos postados"
 #: model:ir.model.fields,field_description:financial.field_financial_statement_report_not_included_amount
 #: model:ir.ui.view,arch_db:financial.financial_move_form_view
 #: model:ir.ui.view,arch_db:financial.financial_move_tree_view
+#: view:financial.move:financial.financial_move_debt_base_form
 msgid "Amount"
 msgstr "Valor"
 
@@ -1272,3 +1273,247 @@ msgstr "Referência do item"
 #: model:ir.model,name:financial.model_report_financial_report_financial_statement
 msgid "report.financial.report_financial_statement"
 msgstr ""
+
+#. module: financial
+#: selection:abstract.financial,type:0
+#: selection:financial.installment,type:0
+#: selection:financial.move,type:0
+#: model:ir.ui.menu,name:financial.financial_move_debt_receipt_item_menu
+msgid "Receipt Item"
+msgstr "Item a Receber"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_receipt_item_form
+#: view:financial.move:financial.financial_move_debt_receipt_item_search
+#: view:financial.move:financial.financial_move_debt_receipt_item_tree
+msgid "Receipt Items"
+msgstr "Items a Receber"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_2receive_form
+#: model:ir.actions.act_window,name:financial.financial_move_debt_2receive_action
+#: model:ir.actions.act_window,name:financial.financial_move_debt_receipt_item_action
+#: model:ir.ui.menu,name:financial.financial_move_debt_2receive_menu
+msgid "Receivable"
+msgstr "Recebíveis"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_2receive_search
+#: view:financial.move:financial.financial_move_debt_2receive_tree
+#: model:ir.ui.menu,name:financial.financial_receivable_menu
+msgid "Receivables"
+msgstr "Recebíveis"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_2pay_form
+#: model:ir.actions.act_window,name:financial.financial_move_debt_2pay_action
+#: model:ir.actions.act_window,name:financial.financial_move_debt_payment_item_action
+#: model:ir.ui.menu,name:financial.financial_move_debt_2pay_menu
+msgid "Payable"
+msgstr "A Pagar"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_2pay_search
+#: view:financial.move:financial.financial_move_debt_2pay_tree
+#: model:ir.ui.menu,name:financial.financial_payable_menu
+msgid "Payables"
+msgstr "A Pagar"
+
+#. module: financial
+#: selection:abstract.financial,type:0
+#: selection:financial.installment,type:0
+#: selection:financial.move,type:0
+#: model:ir.ui.menu,name:financial.financial_move_debt_payment_item_menu
+msgid "Payment Item"
+msgstr "Item a Pagar"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_payment_item_form
+#: view:financial.move:financial.financial_move_debt_payment_item_search
+#: view:financial.move:financial.financial_move_debt_payment_item_tree
+msgid "Payment Items"
+msgstr "Items a Pagar"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_form
+#: view:financial.move:financial.financial_move_debt_base_tree
+#: view:financial.move:financial.financial_move_payment_base_tree
+#: field:financial.move,amount_document:0
+msgid "Document"
+msgstr "Documento"
+
+#. module: financial
+#: field:abstract.financial,document_number:0
+#: field:financial.installment,document_number:0
+msgid "Document Nº"
+msgstr "Nº do Documento"
+
+#. module: financial
+#: view:financial.document.type:financial.financial_document_type_form
+#: field:financial.document.type,name:0
+#: model:ir.ui.menu,name:financial.financial_document_type_menu
+msgid "Document Type"
+msgstr "Tipo do Documento"
+
+#. module: financial
+#: field:financial.installment.line,amount_document:0
+msgid "Document amount"
+msgstr "Valor"
+
+#. module: financial
+#: field:abstract.financial,document_date:0
+#: field:financial.installment,document_date:0
+#: field:financial.installment.line,date_document:0
+#: field:financial.move,date_document:0
+msgid "Document date"
+msgstr "Data"
+
+#. module: financial
+#: field:financial.installment.line,document_item:0
+msgid "Document item"
+msgstr "Item"
+
+#. module: financial
+#: field:financial.move,document_number:0
+msgid "Document number"
+msgstr "Número do Documento"
+
+#. module: financial
+#: field:abstract.financial,document_type_id:0
+#: view:financial.document.type:financial.financial_document_type_search
+#: view:financial.document.type:financial.financial_document_type_tree
+#: field:financial.installment,document_type_id:0
+#: field:financial.move,document_type_id:0
+msgid "Document type"
+msgstr "Tipo do Documento"
+
+#. module: financial
+#: field:abstract.financial,partner_id:0
+#: field:financial.installment,partner_id:0
+#: field:financial.move,partner_id:0
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: financial
+#: field:abstract.financial,account_id:0
+#: field:financial.account,complete_name:0
+#: field:financial.document.type,account_id:0
+#: field:financial.installment,account_id:0
+#: field:financial.move,account_id:0
+#: model:ir.actions.act_window,name:financial.financial_document_type_action
+msgid "Account"
+msgstr "Conta"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_tree
+msgid "Maturity"
+msgstr "Vencimento"
+
+#. module: financial
+#: field:abstract.financial,date_maturity:0
+#: field:financial.installment,date_maturity:0
+#: field:financial.move,date_maturity:0
+msgid "Maturity date"
+msgstr "Data de Vencimento"
+
+#. module: financial
+#: field:financial.move,date_business_maturity:0
+msgid "Business maturity date"
+msgstr "Data de Maturidade do Negócio"
+
+#. module: financial
+#: field:financial.move,date_state:0
+msgid "Date State"
+msgstr "Data Estado"
+
+#. module: financial
+#: field:abstract.financial,payment_date:0
+#: field:financial.installment,payment_date:0
+#: field:financial.move,date_payment:0
+msgid "Payment Date"
+msgstr "Data de Pagamento"
+
+#. module: financial
+#: field:financial.move,date_credit_debit:0
+msgid "Credit/debit date"
+msgstr "Data de Credito/Debito"
+
+#. module: financial
+#: field:financial.move,reconciled:0
+msgid "Paid/Reconciled"
+msgstr "Pago/Reconciliado"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_form
+msgid "Values"
+msgstr "Valores"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_form
+msgid "(+) Interest"
+msgstr "(+) Juros"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_form
+msgid "(-) Discount"
+msgstr "(-) Desconto"
+
+#. module: financial
+#: view:financial.move:financial.financial_move_debt_base_form
+msgid "(-) Paid"
+msgstr "(-) Pago"
+
+#. module: financial
+#: field:abstract.financial,type:0
+#: field:financial.installment,type:0
+#: field:financial.move,type:0
+msgid "Financial Type"
+msgstr "Tipo de Financeiro"
+
+#. module: financial
+#: field:abstract.financial,bank_id:0
+#: field:financial.installment,bank_id:0
+#: field:financial.move,bank_id:0
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: financial
+#: field:abstract.financial,amount_document:0
+#: field:financial.installment,amount_document:0
+msgid "Payment Amount"
+msgstr "Valor de Pagamento"
+
+#. module: financial
+#: view:financial.installment:financial.financial_create_form_view
+msgid "Discount (-)"
+msgstr "Desconto (-)"
+
+#. module: financial
+#: field:abstract.financial,company_id:0
+#: code:addons/financial/reports/report_xlsx_financial_cashflow.py:55
+#: field:financial.installment,company_id:0
+#: field:financial.move,company_id:0
+#: field:report.xlsx.financial.cashflow.wizard,company_id:0
+#, python-format
+msgid "Company"
+msgstr "Empresa"
+
+#. module: financial
+#: field:financial.installment,date_document:0
+msgid "Financial date"
+msgstr "Data Financeira"
+
+#. module: financial
+#: field:financial.installment,payment_term_id:0
+msgid "Payment Term"
+msgstr "Termo de Pagamento"
+
+#. module: financial
+#: field:abstract.financial,payment_term_id:0
+msgid "Payment term"
+msgstr "Termo de Pagamento"
+
+#. module: financial
+#: view:financial.installment:financial.financial_create_form_view
+msgid "Simulation Lines"
+msgstr "Linhas de Simulação"
