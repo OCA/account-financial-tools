@@ -79,26 +79,36 @@
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="financial_create_act_window">
-        <field name="name">Installment</field>
+    <record model="ir.actions.act_window" id="financial_create_2pay_act_window">
+        <field name="name">Parcelamento</field>
         <field name="res_model">financial.installment</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{}</field>
+        <field name="domain">[('type', '=', '2pay')]</field>
+        <field name="context">{'default_type': '2pay'}</field>
         <field name="target">current</field>
     </record>
 
-    <record model="ir.ui.menu" id="financial_create_menu_parent">
-        <field name="name">Installment</field>
-        <field name="parent_id" ref="financial_top_menu"/>
-        <!--<field name="action" ref="financial_create_act_window"/>-->
-        <field name="sequence" eval="17"/>
+    <record model="ir.actions.act_window" id="financial_create_2receive_act_window">
+        <field name="name">Parcelamento</field>
+        <field name="res_model">financial.installment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', '=', '2receive')]</field>
+        <field name="context">{'default_type': '2receive'}</field>
+        <field name="target">current</field>
     </record>
 
-    <record model="ir.ui.menu" id="financial_create_menu">
-        <field name="name">Installment</field>
-        <field name="parent_id" ref="financial_create_menu_parent"/>
-        <field name="action" ref="financial_create_act_window"/>
-        <field name="sequence" eval="1"/>
+    <record model="ir.ui.menu" id="financial_2receive_menu">
+        <field name="name">Parcelamento</field>
+        <field name="parent_id" ref="financial.financial_receivable_menu"/>
+        <field name="action" ref="financial_create_2receive_act_window"/>
+        <field name="sequence" eval="25"/>
+    </record>
+
+    <record model="ir.ui.menu" id="financial_2pay_menu">
+        <field name="name">Parcelamento</field>
+        <field name="parent_id" ref="financial.financial_payable_menu"/>
+        <field name="action" ref="financial_create_2pay_act_window"/>
+        <field name="sequence" eval="25"/>
     </record>
 
 </data>

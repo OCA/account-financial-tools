@@ -11,8 +11,13 @@
         <field name="sequence" eval="10"/>
     </record>
 
-    <record model="ir.ui.menu" id="financial_dashboard_menu">
-        <field name="name">Financial Dashboard</field>
+    <record model="ir.ui.menu" id="financial_receivable_menu">
+        <field name="name">Receivables</field>
+        <field name="parent_id" ref="financial_top_menu"/>
+        <field name="sequence" eval="16"/>
+    </record>
+    <record model="ir.ui.menu" id="financial_payable_menu">
+        <field name="name">Payables</field>
         <field name="parent_id" ref="financial_top_menu"/>
         <field name="sequence" eval="16"/>
     </record>
