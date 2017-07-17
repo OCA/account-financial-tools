@@ -58,9 +58,9 @@ class FinancialInstallment(models.Model):
         compute='_compute_moves_created',
         copy=False
     )
-    generated_move_line_ids = fields.One2many(
+    move_created_id = fields.One2many(
         comodel_name='financial.move',
-        inverse_name='installment_line_id',
+        inverse_name='origin_move_create_id',
         string=u'Generated Lines'
     )
 
@@ -89,6 +89,7 @@ class FinancialInstallment(models.Model):
             'document_number': item.document_item,
             'date_maturity': item.date_maturity,
             'amount_document': item.amount_document,
+            'installment_line_id': item.id,
         }
 
     def _prepare_financial_move(self):
@@ -123,14 +124,9 @@ class FinancialInstallment(models.Model):
         if not self.moves_created:
             p = self._prepare_financial_move()
             financial_move = financial_move._create_from_dict(p)
-            self.generated_move_line_ids = financial_move
+            self.move_created_id = financial_move
             for line in self.line_ids:
-                line.generated_move_id = financial_move.search([
-                    ('document_number', '=', line.document_item),
-                    ('amount_document', '=', line.amount_document),
-                    ('date_maturity', '=', line.date_maturity),
-                 ], limit=1)
-                if line.generated_move_id:
+                if line.move_id:
                     line.generated_move = True
             financial_move.action_confirm()
         type = financial_move and financial_move[0].type
@@ -159,7 +155,8 @@ class FinancialInstallmentLine(models.Model):
         comodel_name='financial.installment',
 
     )
-    generated_move_id = fields.Many2one(
-        comodel_name='financial.move'
+    move_id = fields.One2many(
+        comodel_name='financial.move',
+        inverse_name='installment_line_id',
     )
     generated_move = fields.Boolean()

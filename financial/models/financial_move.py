@@ -280,7 +280,6 @@ class FinancialMove(models.Model):
     )
     origin_move_create_id = fields.Many2one(
         comodel_name='financial.installment',
-        related='installment_line_id.financial_move_id'
     )
 
 

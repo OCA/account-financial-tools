@@ -53,7 +53,7 @@
                             </field>
                         </page>
                         <page attrs="{'invisible': [('moves_created', '=', False)] }" string="Generated Lines">
-                            <field nolabel="1" name="generated_move_line_ids" />
+                            <field nolabel="1" name="move_created_id" />
                         </page>
                     </notebook>
                     <div>
