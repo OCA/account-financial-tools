@@ -1280,14 +1280,14 @@ msgstr ""
 #: selection:financial.move,type:0
 #: model:ir.ui.menu,name:financial.financial_move_debt_receipt_item_menu
 msgid "Receipt Item"
-msgstr "Item a Receber"
+msgstr "Recebimentos"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_receipt_item_form
 #: view:financial.move:financial.financial_move_debt_receipt_item_search
 #: view:financial.move:financial.financial_move_debt_receipt_item_tree
 msgid "Receipt Items"
-msgstr "Items a Receber"
+msgstr "Recebimentos"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2receive_form
@@ -1295,14 +1295,14 @@ msgstr "Items a Receber"
 #: model:ir.actions.act_window,name:financial.financial_move_debt_receipt_item_action
 #: model:ir.ui.menu,name:financial.financial_move_debt_2receive_menu
 msgid "Receivable"
-msgstr "Recebíveis"
+msgstr "A receber"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2receive_search
 #: view:financial.move:financial.financial_move_debt_2receive_tree
 #: model:ir.ui.menu,name:financial.financial_receivable_menu
 msgid "Receivables"
-msgstr "Recebíveis"
+msgstr "A receber"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2pay_form
@@ -1325,14 +1325,14 @@ msgstr "A Pagar"
 #: selection:financial.move,type:0
 #: model:ir.ui.menu,name:financial.financial_move_debt_payment_item_menu
 msgid "Payment Item"
-msgstr "Item a Pagar"
+msgstr "Pagamentos"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_payment_item_form
 #: view:financial.move:financial.financial_move_debt_payment_item_search
 #: view:financial.move:financial.financial_move_debt_payment_item_tree
 msgid "Payment Items"
-msgstr "Items a Pagar"
+msgstr "Pagamentos"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
