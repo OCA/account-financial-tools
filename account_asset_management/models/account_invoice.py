@@ -98,3 +98,4 @@ class AccountInvoiceLine(models.Model):
     @api.onchange('account_id')
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id.id
+        return super(AccountInvoiceLine, self)._onchange_account_id()
