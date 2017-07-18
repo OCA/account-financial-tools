@@ -1003,6 +1003,7 @@ msgstr "Forma de pagamento"
 
 #. module: financial
 #: model:ir.ui.view,arch_db:financial.financial_move_form_view
+#: view:financial.move:financial.financial_move_debt_base_form
 msgid "Payments"
 msgstr "Pagamentos"
 
@@ -1517,3 +1518,17 @@ msgstr "Termo de Pagamento"
 #: view:financial.installment:financial.financial_create_form_view
 msgid "Simulation Lines"
 msgstr "Linhas de Simulação"
+
+#. module: financial
+#: selection:abstract.financial,type:0
+#: selection:financial.installment,type:0
+#: selection:financial.move,type:0
+msgid "Account Payable"
+msgstr "A Pagar"
+
+#. module: financial
+#: selection:abstract.financial,type:0
+#: selection:financial.installment,type:0
+#: selection:financial.move,type:0
+msgid "Account Receivable"
+msgstr "A Receber"
