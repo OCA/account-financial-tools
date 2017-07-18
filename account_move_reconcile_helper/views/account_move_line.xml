@@ -11,10 +11,10 @@
         <field name="arch" type="xml">
 
             <field name="full_reconcile_id" position="after">
-                <field name="reconcile_line_ids" invisible="1"/>
+                <field name="partial_reconciliation_in_progress" invisible="1"/>
                 <button name="open_full_reconcile_view" type="object"
                         string="Reconciled lines" icon="fa-list"
-                        attrs="{'invisible': [('reconcile_line_ids', '=', [])]}"/>
+                        attrs="{'invisible': [('full_reconcile_id', '=', False), ('partial_reconciliation_in_progress', '=', False)]}"/>
             </field>
 
             <field name="credit" position="after">

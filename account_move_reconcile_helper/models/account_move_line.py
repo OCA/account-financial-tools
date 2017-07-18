@@ -9,10 +9,19 @@ class AccountMoveLine(models.Model):
 
     _inherit = 'account.move.line'
 
+    partial_reconciliation_in_progress = fields.Boolean(
+        compute='_compute_partial_reconciliation_in_progress')
     reconcile_line_ids = fields.One2many(
         compute='_compute_reconciled_lines',
         comodel_name='account.move.line',
         string="Reconciled lines")
+
+    @api.multi
+    @api.depends('matched_debit_ids', 'matched_credit_ids')
+    def _compute_partial_reconciliation_in_progress(self):
+        for rec in self:
+            rec.partial_reconciliation_in_progress = (
+                bool(rec.matched_debit_ids) or bool(rec.matched_credit_ids))
 
     @api.multi
     def _compute_reconciled_lines(self):
@@ -38,7 +47,7 @@ class AccountMoveLine(models.Model):
                 partial_reconciles = line.full_reconcile_id.mapped(
                     'partial_reconcile_ids')
                 matched_lines = (
-                    partial_reconciles.mapped('debit_move_id') +
+                    partial_reconciles.mapped('debit_move_id') |
                     partial_reconciles.mapped('credit_move_id'))
             elif line.credit > 0:
                 matched_lines = line.matched_debit_ids.mapped('debit_move_id')
