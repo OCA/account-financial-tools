@@ -15,8 +15,8 @@
             <xpath expr="//form[1]" position="attributes">
                 <attribute name="string">Payable</attribute>
             </xpath>
-            <field name="payment_ids" position="attributes">
-                <attribute name="context">{'default_type': '2pay', 'default_amount_document': amount_residual, 'default_account_id': account_id, 'default_currency_id': currency_id, 'default_document_type_id': document_type_id, 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'form_view_ref': 'financial.financial_move_payment_base_form'}</attribute>
+            <field name="date_state" position="attributes">
+                <attribute name="context">{'default_type': 'payment_item', 'default_amount_document': amount_residual, 'default_partner_id': partner_id, 'default_account_id': account_id, 'default_currency_id': currency_id, 'default_document_type_id': document_type_id, 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'form_view_ref': 'financial.financial_move_payment_base_form'}</attribute>
             </field>
         </field>
     </record>
@@ -30,9 +30,15 @@
             <xpath expr="//form[1]" position="attributes">
                 <attribute name="string">Payment Items</attribute>
             </xpath>
-            <field name="payment_ids" position="attributes">
-                <attribute name="context">{'default_type': 'payment_item', 'default_amount_document': amount_residual, 'default_account_id': account_id, 'default_currency_id': currency_id, 'default_document_type_id': document_type_id, 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'form_view_ref': 'financial.financial_move_payment_base_form'}</attribute>
-            </field>
+            <xpath expr="//h1[@name='document_name']" position="after">
+                <h3>
+                    <label for="debt_id" string="Debito de Origem"/>
+                    <field name="debt_id"/>
+                </h3>
+            </xpath>
+            <xpath expr="//page[@name='payments']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
         </field>
     </record>
 

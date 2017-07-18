@@ -53,7 +53,7 @@
                         <!--<label string="Draft Payable" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','p')]}"/>-->
                         <!--<label string="Receivable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','r')]}"/>-->
                         <!--<label string="Payable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','p')]}"/>-->
-                        <h1>
+                        <h1 name="document_name">
                             <field name="display_name" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                         </h1>
                     </div>
@@ -75,7 +75,7 @@
                                 <field name="reconciled" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
                             </group>
                             <!--<group name="amounts" string="Values" class="oe_mini_footer_separator oe_right">-->
-                            <group name="amounts" string="Values">
+                            <group name="amounts" string="Values" class="oe_subtotal_footer oe_center">
                                 <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                                 <field name="amount_document" string="Amount" required="1" />
                                 <field name="amount_interest" string="(+) Interest" readonly="1"/>

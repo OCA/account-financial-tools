@@ -20,7 +20,7 @@
                 </header>
                 <group>
                     <group>
-                        <field name="type"/>
+                        <field name="type" readonly="1"/>
                         <field name="document_type_id"/>
                         <field name="bank_id"  options="{'no_create': True, 'no_open': True}"/>
                         <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
@@ -31,15 +31,15 @@
                         <field name="account_id"/>
                         <field name="company_id" options="{'no_create': True}"/>
                     </group>
-                    <group class="oe_subtotal_footer oe_left">
-                        <field name="amount_document"/>
-                        <field name="amount_discount" string="Discount (-)"/>
-                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
-                    </group>
                     <group>
                         <field name="document_number"/>
                         <field name="date_document"/>
                         <field name="payment_term_id"/>
+                    </group>
+                    <group class="oe_subtotal_footer oe_center">
+                        <field name="amount_document"/>
+                        <field name="amount_discount" string="Discount (-)"/>
+                        <field name="amount_total" class="oe_subtotal_footer_separator"/>
                     </group>
                     <field name="moves_created" invisible="1"/>
                     <notebook colspan="4">
