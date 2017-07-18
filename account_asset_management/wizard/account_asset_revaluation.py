@@ -28,12 +28,16 @@ from openerp.tools.translate import _
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
+import logging
+_logger = logging.getLogger(__name__)
+_debug = False
+
 class account_asset_revaluation(orm.Model):
     _name = 'account.asset.revaluation'
     _description = 'Revaluate Asset'
     
     _columns = {
-        'previous_date_revaluation': fields.date('Date', required=True),
+        'previous_date_revaluation': fields.date('Previous Date Revaluation'),
         'date_revaluation': fields.date('Date', required=True),
         'depr_id': fields.many2one('account.asset.depreciation.line', 'Asset depreciation line',
             required=True, ondelete='cascade'),
@@ -47,7 +51,6 @@ class account_asset_revaluation(orm.Model):
             domain=[('type', '<>', 'view')], required=True, store=False),
         'note': fields.text('Notes'),
     }
-    
     
 
 class account_asset_revaluation(orm.TransientModel):
@@ -64,6 +67,11 @@ class account_asset_revaluation(orm.TransientModel):
         if revaluation_ids:
             revaluation = revaluation_obj.browse(cr, uid, revaluation_ids[0])
             previous_date_revaluation = revaluation.date_revaluation
+            
+#         if not previous_date_revaluation:
+#             asset_obj = self.pool.get('account.asset.asset')
+#             asset = asset_obj.browse(cr, uid, asset_id)
+#             previous_date_revaluation = asset.date_purchase
         
         return previous_date_revaluation
     
@@ -106,7 +114,7 @@ class account_asset_revaluation(orm.TransientModel):
         return acc
 
     _columns = {
-        'previous_date_revaluation': fields.date('Date', required=True),
+        'previous_date_revaluation': fields.date('Previous Date Revaluation'),
         'date_revaluation': fields.date('Date', required=True),
         'previous_value': fields.float('Old Value', required=True),
         'previous_value_residual': fields.float('Old Value Residual', required=True),
@@ -123,7 +131,7 @@ class account_asset_revaluation(orm.TransientModel):
         'previous_value': _get_previous_value,
         'previous_value_residual': _get_value_residual,
     }
-
+    
     def _check_revaluated_value(self, cr, uid, ids, context=None):
         for revaluation in self.browse(cr, uid, ids, context=context):
             if revaluation.revaluated_value < 0:
