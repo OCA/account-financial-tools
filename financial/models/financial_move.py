@@ -34,12 +34,13 @@ class FinancialMove(models.Model):
         for record in self:
             hoje = fields.Date.context_today(record)
             vencimento = record.date_business_maturity
-            if record.state == 'open' and hoje > vencimento:
-                record.date_state = 'overdue'
-            elif record.state == 'open' and hoje == vencimento:
-                record.date_state = 'due_today'
-            else:
-                record.date_state = 'open'
+            if vencimento:
+                if hoje > vencimento:
+                    record.date_state = 'overdue'
+                elif hoje == vencimento:
+                    record.date_state = 'due_today'
+                else:
+                    record.date_state = 'open'
 
     date_state = fields.Selection(
         string=u'Date State',
