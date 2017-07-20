@@ -11,6 +11,14 @@ Provides tools to facilitate reconciliation.
 * Display a button on Journal entries list to show reconciled lines.
 * Added Balance field in Journal entries list
 
+.. image:: ./static/docs/journal_entries_1.png
+   :alt: Journal entries
+   :scale: 50 %
+
+.. image:: ./static/docs/journal_entries_2.png
+   :alt: Reconciled lines view
+   :scale: 50 %
+
 Installation
 ============
 
@@ -20,7 +28,6 @@ Configuration
 =============
 
 No configuration needed.
-
 
 Bug Tracker
 ===========
