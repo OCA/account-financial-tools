@@ -56,7 +56,15 @@
                         <h1 name="document_name">
                             <field name="display_name" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                         </h1>
+                        <h2>
+                            <group>
+                                <field name="motivo_cancelamento_id" options='{"no_open": True}'
+                                       class="oe_inline"
+                                       attrs="{'invisible':[('motivo_cancelamento_id','=', False)]}"/>
+                            </group>
+                        </h2>
                     </div>
+
                     <group>
                         <group name="document_header" colspan="4">
                             <group name="document_identification" string="Document">

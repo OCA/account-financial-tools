@@ -10,9 +10,9 @@
         <field name="model">financial.cancel</field>
         <field name="arch" type="xml">
             <form string="Financial Cancel">
-                <!-- TODO -->
                 <group>
-                    <field name="reason"/>
+                    <field name="motivo_cancelamento_id"/>
+                    <field name="obs"/>
                 </group>
                 <footer>
                     <button name='doit'

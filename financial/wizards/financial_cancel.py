@@ -7,12 +7,15 @@ from odoo import fields, models, api
 
 class FinancialCancel(models.TransientModel):
     _name = 'financial.cancel'
-    _rec_name = 'reason'
 
-    reason = fields.Text(
-        string=u'Cancel reason',
+    motivo_cancelamento_id = fields.Many2one(
+        comodel_name="financial.move.motivo.cancelamento",
+        string="Motivo do Cancelamento",
         required=True,
-        help=u'The reason will be saved in record history',
+    )
+
+    obs = fields.Text(
+        string=u'Observações',
     )
 
     @api.multi
@@ -22,7 +25,9 @@ class FinancialCancel(models.TransientModel):
             if (self.env.context.get('active_model') == 'financial.move' and
                     active_id):
                 fm = self.env['financial.move'].browse(active_id)
-                fm.action_cancel(reason=wizard.reason)
+                fm.action_cancel(
+                    motivo_id=wizard.motivo_cancelamento_id.id, obs=wizard.obs
+                )
         return {
             'type': 'ir.actions.act_window_close',
         }

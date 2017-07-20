@@ -387,7 +387,10 @@ class FinancialMove(models.Model):
         string='Source Document',
         readonly=True,
     )
-
+    motivo_cancelamento_id = fields.Many2one(
+        comodel_name="financial.move.motivo.cancelamento",
+        string="Motivo do Cancelamento",
+    )
     @api.multi
     @api.constrains('amount_document')
     def _check_amount(self):
@@ -517,17 +520,19 @@ class FinancialMove(models.Model):
             record.change_state('open')
 
     @api.multi
-    def action_cancel(self, reason):
+    def action_cancel(self, motivo_id, obs):
         for record in self:
             record.change_state('cancel')
             if record.note:
-                new_note = record.note + '\nCancel reason: ' + reason
+                new_note = record.note + '\n' + obs
             else:
-                new_note = 'Cancel reason: ' + reason
+                new_note = obs
             record.write({
+                'motivo_cancelamento_id': motivo_id,
                 'amount_cancel': record.amount_document,
                 'note': new_note
             })
+            record.with_context(no_email=True).message_post(body=new_note)
 
     @staticmethod
     def _prepare_financial_move(
@@ -665,3 +670,13 @@ class FinancialMove(models.Model):
             financial = self.create(values)
             financial_move_ids |= financial
         return financial_move_ids
+
+
+class FinancialMoveMotivoCancelamento(models.Model):
+    _name = b'financial.move.motivo.cancelamento'
+    _rec_name = 'motivo_cancelamento'
+
+    motivo_cancelamento = fields.Char(
+        string="Motivo do Cancelamento",
+        required=True,
+    )
