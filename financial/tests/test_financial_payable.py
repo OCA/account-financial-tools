@@ -300,3 +300,47 @@ class ManualFinancialProcess(FinancialTestCase):
         self.check_bank_account_balance(
             bank_account_id, bank_initial_balance,
             sum(amount_credit_debit))
+
+    def test_financial_payable_cancel(self):
+        """Scenario 6: Cancel a Financial Move
+
+        Given a financial payable already confirmed of 5000.00
+        And the amount document of 5000.00
+        And the date of the document is 2017-01-01
+        And tne business maturity date is 2017-01-02
+        And the financial account is 'Receitas com Vendas'
+        And the Document number is 1000/1
+
+        Then the financial payable should be cancel
+        And the user must provide a reason why this financial will be cancel
+        And after that verify if the state of the financial changed to 'cancel'
+        And the Amount Residual change to 0.00 by
+        Amount Document - Amount Cancel = 0.00 in this scenario
+        """
+        financial_move = self.create_financial(
+            type='2pay',
+            amount_document=5000,
+            currency_id=self.currency_eur_id,
+            date_document='2017-01-01',
+            date_maturity='2017-01-01',
+            account_id=self.env.ref(
+                "financial.financial_account_101001").id,
+            document_number='200/1',
+        )
+        financial_move.action_confirm()
+        cancel_reason_01 = \
+            self.env['financial.move.motivo.cancelamento'].create(
+                {'motivo_cancelamento': 'Motivo 01 para o cancelamento'}
+            )
+        wizard_cancel = self.env['financial.cancel'].with_context(
+            active_id=financial_move.id,
+            active_model=financial_move._model._name
+        ).create(
+            {
+                'motivo_cancelamento_id': cancel_reason_01.id,
+                'obs': 'Observações para o cancelamento',
+            }
+        )
+        wizard_cancel.doit()
+        self.assertEqual(financial_move.state, 'cancel')
+        self.assertEqual(financial_move.amount_residual, 0)
