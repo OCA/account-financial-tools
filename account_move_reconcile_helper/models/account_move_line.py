@@ -44,11 +44,7 @@ class AccountMoveLine(models.Model):
 
         for line in self:
             if line.full_reconcile_id:
-                partial_reconciles = line.full_reconcile_id.mapped(
-                    'partial_reconcile_ids')
-                matched_lines = (
-                    partial_reconciles.mapped('debit_move_id') |
-                    partial_reconciles.mapped('credit_move_id'))
+                matched_lines = line.full_reconcile_id.reconciled_line_ids
             elif line.credit > 0:
                 matched_lines = line.matched_debit_ids.mapped('debit_move_id')
             else:
