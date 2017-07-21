@@ -18,6 +18,7 @@ from ..constants import (
     FINANCIAL_STATE,
     FINANCIAL_SEQUENCE,
     FINANCIAL_TYPE,
+    FINANCIAL_TYPE_CODE,
 )
 
 
@@ -333,10 +334,17 @@ class FinancialMove(models.Model):
     @api.depends('ref', 'ref_item')
     def _compute_display_name(self):
         for record in self:
-            if record.ref_item:
-                record.display_name = record.ref + '/' + record.ref_item
-            else:
-                record.display_name = record.ref or ''
+            financial_type = FINANCIAL_TYPE_CODE.get(record.type) or ''
+            doc_type = '/' + record.document_type_id.name \
+                if record.document_type_id.name else ''
+            doc_number = '/' + record.document_number \
+                         if record.document_number else ''
+            partner = '-' + record.partner_id.name \
+                if record.partner_id.name else ''
+
+            record.display_name = (financial_type + doc_type +doc_number) \
+                if not self._context.get('with_partner_name') \
+                else(financial_type + doc_type + doc_number + partner)
 
     @api.depends('date_maturity')
     def _compute_date_business_maturity(self):
@@ -411,25 +419,6 @@ class FinancialMove(models.Model):
         ]
         return (old_state, new_state) in allowed
 
-    @api.multi
-    def action_number(self):
-        for record in self:
-            if record.ref == _('New'):
-                sequencial_ids = self.search([
-                    ('document_number', '=', record.document_number),
-                ], order='date_business_maturity')
-                if self.search_count([
-                    ('document_number', '=', record.document_number),
-                    ('ref', '=', _('New')),
-                ]) == len(sequencial_ids.ids):
-                    sequencial_ids.write({
-                        'ref': self.env['ir.sequence'].next_by_code(
-                            FINANCIAL_SEQUENCE[
-                                record.type]) or 'New'
-                    })
-                    for i, x in enumerate(sequencial_ids):
-                        x.ref_item = i + 1
-
     def do_before_create(self, values):
         return values
 
@@ -499,7 +488,6 @@ class FinancialMove(models.Model):
     def action_confirm(self):
         for record in self:
             record.change_state('open')
-        self.action_number()
 
     @api.multi
     def action_budget(self):

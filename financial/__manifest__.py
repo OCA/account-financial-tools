@@ -19,7 +19,6 @@
     'data': [
         'views/financial_menu.xml',
 
-        'data/ir_sequence_data.xml',
         'data/financial_document_type_data.xml',
         'data/interest_data.xml',
         # 'data/financial_move_data.xml',
