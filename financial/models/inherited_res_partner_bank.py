@@ -12,7 +12,7 @@ class ResPartnerBank(models.Model):
 
     initial_balance = fields.Monetary(
         track_visibility='onchange',
-        default=0.00
+        digits=(18, 2),
     )
     date_balance = fields.Date(
         track_visibility='onchange',

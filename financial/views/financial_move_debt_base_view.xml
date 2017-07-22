@@ -12,7 +12,7 @@
         <field name="priority">9999</field>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancelled'">
                 <field name="date_business_maturity" string="Maturity"/>
                 <field name="date_document" />
                 <field name="display_name" />
@@ -24,7 +24,7 @@
                 <field name="amount_document" sum="Document"/>
                 <field name="amount_total" sum="Total"/>
                 <field name="date_payment"/>
-                <field name="amount_paid" sum="Paid"/>
+                <field name="amount_paid_document" sum="Paid"/>
                 <field name="amount_residual" sum="Residual"/>
                 <field name="state"/>
             </tree>
@@ -40,19 +40,12 @@
             <form>
                 <field name="type" invisible="1"/>
                 <header>
-                    <button name="action_confirm" type="object"
-                            states="draft,budget" string="Validate" class="oe_highlight"/>
-                    <button name="%(financial_cancel_act_window)d" type="action"
-                            states="open" string="Cancel"
-                    />
+                    <button name="action_confirm" type="object" states="draft,budget" string="Validate" class="oe_highlight"/>
+                    <button name="%(financial_cancel_act_window)d" type="action" states="open" string="Cancel" />
                     <field name="state" widget="statusbar" statusbar_visible="draft,open,paid" />
                 </header>
                 <sheet>
                     <div>
-                        <!--<label string="Draft Receivable" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','r')]}"/>-->
-                        <!--<label string="Draft Payable" attrs="{'invisible': ['|',('state','&lt;&gt;','draft'), ('type','&lt;&gt;','p')]}"/>-->
-                        <!--<label string="Receivable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','r')]}"/>-->
-                        <!--<label string="Payable " attrs="{'invisible': ['|',('state', '=', 'draft'), ('type','&lt;&gt;','p')]}"/>-->
                         <h1 name="document_name">
                             <field name="display_name" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                         </h1>
@@ -77,48 +70,43 @@
                                 <field name="account_id" required="1" />
                                 <field name="date_maturity" required="1" />
                                 <field name="date_business_maturity"/>
-                                <field name="date_state"  />
+                                <field name="debt_status"  />
                                 <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
                                 <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1"/>
                                 <field name="reconciled" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
                             </group>
-                            <!--<group name="amounts" string="Values" class="oe_mini_footer_separator oe_right">-->
-                            <group name="amounts" string="Values" class="oe_subtotal_footer oe_center">
-                                <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
-                                <field name="amount_document" string="Amount" required="1" />
-                                <field name="amount_interest" string="(+) Interest" readonly="1"/>
-                                <field name="amount_discount" string="(-) Discount" readonly="1"/>
-                                <field name="amount_total" class="oe_subtotal_footer_separator"/>
-                                <field name="amount_paid" string="(-) Paid" readonly="1" />
-                                <!--<field name="amount_refund" string="(-) Refund" readonly="1"/>-->
-                                <!--<field name="amount_cancel" string="(-) Cancel" readonly="1"/>-->
-                                <field name="amount_residual" class="oe_subtotal_footer_separator" readonly="1" />
+                            <group>
+                                <separator string="Values" />
+                                <group name="amounts" colspan="2" class="oe_subtotal_footer oe_center">
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                                    <field name="amount_document" string="Amount" required="1" />
+                                    <field name="amount_paid_document" string="(-) Paid" readonly="1" />
+                                    <!--<field name="amount_refund" string="(-) Refund" readonly="1"/>-->
+                                    <!--<field name="amount_cancel" string="(-) Cancel" readonly="1"/>-->
+                                    <field name="amount_residual" string="(=) Residual" class="oe_subtotal_footer_separator" readonly="1" />
+                                </group>
+                                <newline />
+                                <separator string="Paid Values" />
+                                <group name="paid_amounts" colspan="2" class="oe_subtotal_footer oe_center">
+                                    <field name="amount_paid_interest" string="(+) Interest" />
+                                    <field name="amount_paid_penalty" string="(+) Penaly" />
+                                    <field name="amount_paid_other_credits" string="(+) Other credits" />
+                                    <field name="amount_paid_discount" string="(-) Discount" />
+                                    <field name="amount_paid_other_debits" string="(-) Other debits" />
+                                    <field name="amount_paid_bank_fees" string="(-) Bank fees" />
+                                    <field name="amount_paid_total" string="(=) Total paid" class="oe_subtotal_footer_separator" readonly="1" />
+                                </group>
                             </group>
                         </group>
                     </group>
                     <notebook>
                         <page string="Payments" name="payments">
-                            <!--<field name="bank_id"  options="{'no_create': True, 'no_open': True}" />-->
-                            <field name="payment_ids" context="{'default_account_id': account_id, 'form_view_ref': 'financial.financial_move_payment_base_form', 'tree_view_ref': 'financial.financial_move_payment_base_tree', 'search_view_id': 'financial.financial_move_payment_base_search'}" />
+                            <field name="payment_ids" context="{'default_account_id': account_id, 'form_view_ref': 'financial.financial_move_payment_base_one2many_form', 'tree_view_ref': 'financial.financial_move_payment_base_one2many_tree', 'search_view_id': 'financial.financial_move_payment_base_one2many_search'}" />
                         </page>
-                        <!--<page string="Accounting" name="accounting">-->
-                            <!--<group>-->
-                                <!--<group colspan="4" col="4">-->
-                                    <!--<field name="account_type_id" invisible="1"/>-->
-                                    <!--<field name="analytic_account_id" invisible="1"/>-->
-                                    <!--<field name="journal_id" />-->
-                                    <!--<field name="account_move_template_id" />-->
-                                    <!--<field name="account_move_id" readonly="1" />-->
-                                    <!--<button type="object" name="create_account_move" string="Gera lançamento contábil" />-->
-                                    <!--<separator string="Partidas do lançamento contábil" colspan="4" />-->
-                                    <!--<field name="account_move_line_ids" nolabel="1" colspan="4" context="{'tree_view_ref': 'sped_account.account_move_line_tree'}" />-->
-                                <!--</group>-->
-                            <!--</group>-->
-                        <!--</page>-->
                     </notebook>
                     <div>
-                        <field name="communication" placeholder="Communication ..."/>
-                        <field name="note" placeholder="Notes ..."/>
+                        <field name="communication" placeholder="Communication..."/>
+                        <field name="note" placeholder="Notes..."/>
                     </div>
                 </sheet>
                 <div class="oe_chatter">
@@ -136,34 +124,19 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <search string="Debts">
-                <filter icon="terp-sale" string="State" context="{'group_by': 'state'}" />
-                <filter name="state_draft" string="Status is Draft" domain="[('state','=','draft')]" help="Status is Draft"/>
-                <filter name="state_open" string="Status is Open" domain="[('state','=','open')]" help="Status is Open"/>
-                <filter name="state_paid" string="Status is Paid" domain="[('state','=','paid')]" help="Status is Paid"/>
-                <filter name="state_cancel" string="Status is Canceled" domain="[('state','=','cancel')]" help="Status is Canceled"/>
-                <filter name="payment_due_today" string="Due today" domain="[('date_business_maturity','=',time.strftime('%%Y-%%m-%%d'))]" help="Payments due today"/>
-                <filter name="payment_overdue" string="Overdue" domain="[('date_business_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Payments overdue"/>
-                <!--<filter name="due_this_week" string="Due this week" domain="[-->
-                                                    <!--'&amp;',-->
-                                                    <!--('date_business_maturity', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),-->
-                                                    <!--('date_business_maturity', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),-->
-                                            <!--]"-->
-                <!--/>-->
-                <!--<filter name="due_this_month" string="Due this month"-->
-                                        <!--domain="[-->
-                                                <!--'&amp;',-->
-                                                <!--('date_business_maturity', '>=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d')),-->
-                                                <!--('date_business_maturity', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d')),-->
-                                        <!--]"-->
-                <!--/>-->
+                <filter name="status_draft" string="Open" domain="[('debt_concise_status','=','open')]" />
+                <filter name="status_open" string="Paid" domain="[('debt_concise_status','=','paid')]" />
+                <filter name="status_paid" string="Cancelled" domain="[('debt_concise_status','=','cancelled')]" />
+                <filter name="payment_due_today" string="Due today" domain="[('debt_status','=', 'due_today')]" />
+                <filter name="payment_overdue" string="Overdue" domain="[('debt_status','=','overdue')]" />
                 <field name="document_number" />
                 <field name="partner_id" />
                 <field name="date_document" />
                 <field name="date_business_maturity" />
                 <group expand="0" string="Group By...">
-                    <filter name="group_partner" string="By partner" context="{'group_by': 'partner_id'}"/>
-                    <filter name="group_date_payment" string="By payment date" context="{'group_by': 'date_business_maturity'}"/>
-                    <filter name="group_journal" string="By payment journal" context="{'group_by': 'journal_id'}"/>
+                    <filter name="group_debt_status" string="Status" context="{'group_by': 'debt_status'}" />
+                    <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_date_business_maturity" string="Business maturity date" context="{'group_by': 'date_business_maturity'}"/>
                </group>
            </search>
         </field>

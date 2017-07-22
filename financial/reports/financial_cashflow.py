@@ -143,7 +143,7 @@ class FinancialCashflow(models.Model):
                     financial_move.account_type_id,
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
-                    coalesce(financial_move.amount_paid, 0)
+                    coalesce(financial_move.amount_paid_document, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -182,7 +182,7 @@ class FinancialCashflow(models.Model):
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
                     --- financial_move.journal_id,
-                    coalesce(financial_move.amount_paid, 0)
+                    coalesce(financial_move.amount_paid_document, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -254,7 +254,7 @@ class FinancialCashflow(models.Model):
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
                     --- financial_move.journal_id,
-                    coalesce(financial_move.amount_paid, 0)
+                    coalesce(financial_move.amount_paid_document, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,
@@ -294,7 +294,7 @@ class FinancialCashflow(models.Model):
                     financial_move.analytic_account_id,
                     financial_move.bank_id,
                     --- financial_move.journal_id,
-                    coalesce(financial_move.amount_paid, 0)
+                    coalesce(financial_move.amount_paid_document, 0)
                         AS amount_paid,
                     coalesce(financial_move.amount_total, 0)
                         AS amount_total,

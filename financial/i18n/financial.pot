@@ -2,73 +2,70 @@
 # This file contains the translation of the following modules:
 #	* financial
 #
-# Ari Caldeira <ari@laumi.org>, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 01:21+0000\n"
-"PO-Revision-Date: 2017-07-21 23:06-0300\n"
-"Last-Translator: Ari Caldeira <aristides.caldeira@tauga.com.br>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"POT-Creation-Date: 2017-07-22 02:10+0000\n"
+"PO-Revision-Date: 2017-07-22 02:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: pt_BR\n"
-"X-Generator: Lokalize 2.0\n"
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(+) Interest"
-msgstr "(+) Juros"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(+) Other credits"
-msgstr "(+) Outros créditos"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(+) Penaly"
-msgstr "(+) Multa"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(-) Bank fees"
-msgstr "(-) Tarifas bancárias"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(-) Discount"
-msgstr "(-) Desconto"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(-) Other debits"
-msgstr "(-) Outros débitos"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 msgid "(-) Paid"
-msgstr "(-) Pago"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 msgid "(=) Residual"
-msgstr "(=) Saldo devedor"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "(=) Total paid"
-msgstr "(=) Total pago"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,complete_name:0
@@ -77,57 +74,57 @@ msgstr "(=) Total pago"
 #: field:financial.move,account_id:0
 #: model:ir.actions.act_window,name:financial.financial_document_type_action
 msgid "Account"
-msgstr "Conta"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "Amount"
-msgstr "Valor"
+msgstr ""
 
 #. module: financial
 #: selection:financial.account,type:0
 msgid "Analytic"
-msgstr "Analítico"
+msgstr ""
 
 #. module: financial
 #: view:res.partner.bank:financial.res_partner_bank_form
 msgid "Balance"
-msgstr "Saldo"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,bank_id:0
 msgid "Bank Account"
-msgstr "Conta bancária"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.res_partner_bank_action
 #: model:ir.model,name:financial.model_res_partner_bank
 #: model:ir.ui.menu,name:financial.res_partner_bank_menu
 msgid "Bank Accounts"
-msgstr "Contas bancárias"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_search
 msgid "Bank account"
-msgstr "Conta bancária"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_bank_fees:0
 msgid "Bank fees"
-msgstr "Tarifas bancárias"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
 #: field:financial.move,date_business_maturity:0
 msgid "Business maturity date"
-msgstr "Data útil de vencimento"
+msgstr ""
 
 #. module: financial
 #: field:report.xlsx.financial.cashflow.wizard,time_span:0
 msgid "By time span in"
-msgstr "Por período em"
+msgstr ""
 
 #. module: financial
 #: view:financial.cancel:financial.financial_cancel_form_view
@@ -135,17 +132,17 @@ msgstr "Por período em"
 #: model:ir.actions.act_window,name:financial.financial_cancel_act_window
 #: view:report.xlsx.financial.cashflow.wizard:financial.report_xlsx_financial_cashflow_wizard_form
 msgid "Cancel"
-msgstr "Baixar"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_cancel:0
 msgid "Cancel date"
-msgstr "Data de baixa"
+msgstr ""
 
 #. module: financial
 #: field:financial.cancel,reason:0
 msgid "Cancel reason"
-msgstr "Motivo da baixa"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
@@ -153,40 +150,40 @@ msgstr "Motivo da baixa"
 #: selection:financial.move,debt_status:0
 #: selection:financial.move,state:0
 msgid "Cancelled"
-msgstr "Baixado"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_cancel:0
 msgid "Cancelled amount"
-msgstr "Valor baixado"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.report_xlsx_financial_cashflow_wizard_action
 #: model:ir.actions.report.xml,name:financial.report_xlsx_financial_cashflow_action
 #: model:ir.ui.menu,name:financial.report_xlsx_financial_cashflow_wizard_menu
 msgid "Cashflow"
-msgstr "Fluxo de Caixa"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,child_ids:0
 msgid "Child Accounts"
-msgstr "Contas relacionadas"
+msgstr ""
 
 #. module: financial
 #: field:financial.account.tree.analysis,child_account_id:0
 msgid "Child account"
-msgstr "Conta relacionada"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,code:0
 msgid "Code"
-msgstr "Código"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "Communication..."
-msgstr "Comunicação..."
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:55
@@ -195,23 +192,23 @@ msgstr "Comunicação..."
 #: field:report.xlsx.financial.cashflow.wizard,company_id:0
 #, python-format
 msgid "Company"
-msgstr "Empresa"
+msgstr ""
 
 #. module: financial
 #: model:ir.ui.menu,name:financial.financial_config_menu
 msgid "Configuration"
-msgstr "Configuração"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 msgid "Confirm"
-msgstr "Confirmar"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_search
 #: selection:financial.installment,state:0
 msgid "Confirmed"
-msgstr "Confirmado"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:289
@@ -221,7 +218,7 @@ msgstr "Confirmado"
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:494
 #, python-format
 msgid "Conta"
-msgstr "Conta"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,create_uid:0
@@ -232,7 +229,7 @@ msgstr "Conta"
 #: field:financial.move,create_uid:0
 #: field:report.xlsx.financial.cashflow.wizard,create_uid:0
 msgid "Created by"
-msgstr "Criado por"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,create_date:0
@@ -243,7 +240,7 @@ msgstr "Criado por"
 #: field:financial.move,create_date:0
 #: field:report.xlsx.financial.cashflow.wizard,create_date:0
 msgid "Created on"
-msgstr "Criado em"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:604
@@ -254,30 +251,30 @@ msgstr ""
 #. module: financial
 #: field:financial.move,date_credit_debit:0
 msgid "Credit/debit date"
-msgstr "Data de crédito/débito"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,currency_id:0
 #: field:financial.installment.simulation,currency_id:0
 #: field:financial.move,currency_id:0
 msgid "Currency"
-msgstr "Moeda"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:49
 #, python-format
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 #. module: financial
 #: field:res.partner.bank,date_balance:0
 msgid "Date balance"
-msgstr "Data do saldo"
+msgstr ""
 
 #. module: financial
 #: field:report.xlsx.financial.cashflow.wizard,date_from:0
 msgid "Date from"
-msgstr "Data de"
+msgstr ""
 
 #. module: financial
 #: help:financial.move,message_last_post:0
@@ -287,18 +284,18 @@ msgstr ""
 #. module: financial
 #: field:report.xlsx.financial.cashflow.wizard,date_to:0
 msgid "Date to"
-msgstr "Data até"
+msgstr ""
 
 #. module: financial
 #: selection:report.xlsx.financial.cashflow.wizard,time_span:0
 msgid "Days"
-msgstr "Dias"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_form
 #: field:financial.move,debt_id:0
 msgid "Debt"
-msgstr "Dívida"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_move_debt_base_action
@@ -308,12 +305,12 @@ msgstr ""
 #. module: financial
 #: field:financial.move,debt_concise_status:0
 msgid "Debt Concise Status"
-msgstr "Situação da Dívida (resumida)"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,debt_status:0
 msgid "Debt Status"
-msgstr "Situação da Dívida"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,debt_ids:0
@@ -323,30 +320,30 @@ msgstr ""
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
 msgid "Debts"
-msgstr "Dívidas"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:583
 #, python-format
 msgid "Detail"
-msgstr "Detalhe"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_tree
 #: view:financial.move:financial.financial_move_payment_one2many_base_tree
 #: field:financial.move,amount_discount:0
 msgid "Discount"
-msgstr "Desconto"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_discount_forecast:0
 msgid "Discount forecast"
-msgstr "Desconto previsto"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_discount:0
 msgid "Discount up to"
-msgstr "Desconto a partir de"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,display_name:0
@@ -367,42 +364,42 @@ msgstr ""
 #: view:financial.move:financial.financial_move_payment_base_tree
 #: view:financial.move:financial.financial_move_payment_one2many_base_tree
 msgid "Document"
-msgstr "Documento"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,amount_document:0
 #: field:financial.move,amount_document:0
 msgid "Document Amount"
-msgstr "Valor do documento"
+msgstr ""
 
 #. module: financial
 #: view:financial.document.type:financial.financial_document_type_form
 #: field:financial.document.type,name:0
 #: model:ir.ui.menu,name:financial.financial_document_type_menu
 msgid "Document Type"
-msgstr "Tipo do documento"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment.simulation,amount_document:0
 msgid "Document amount"
-msgstr "Valor do documento"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,original_currency_amount:0
 msgid "Document amount in original currency"
-msgstr "Valor do documento na moeda original"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,date_document:0
 #: field:financial.move,date_document:0
 msgid "Document date"
-msgstr "Data do documento"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,document_number:0
 #: field:financial.move,document_number:0
 msgid "Document number"
-msgstr "Número do documento"
+msgstr ""
 
 #. module: financial
 #: view:financial.document.type:financial.financial_document_type_search
@@ -410,47 +407,47 @@ msgstr "Número do documento"
 #: field:financial.installment,document_type_id:0
 #: field:financial.move,document_type_id:0
 msgid "Document type"
-msgstr "Tipo do documento"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,state:0
 #: selection:financial.move,state:0
 msgid "Draft"
-msgstr "Provisionado"
+msgstr ""
 
 #. module: financial
 #: selection:financial.move,debt_status:0
 msgid "Due"
-msgstr "Vencido"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment.simulation,date_maturity:0
 msgid "Due date"
-msgstr "Data de vencimento"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
 #: selection:financial.move,debt_status:0
 msgid "Due today"
-msgstr "Vence hoje"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:25
 #, python-format
 msgid "Expected Dayly Cashflow"
-msgstr "Fluxo de Caixa - Diário - Previsto"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:35
 #, python-format
 msgid "Expected Monthly Cashflow"
-msgstr "Fluxo de Caixa - Mensal - Previsto"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:30
 #, python-format
 msgid "Expected Weekly Cashflow"
-msgstr "Fluxo de Caixa - Semanal - Previsto"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:321
@@ -460,28 +457,28 @@ msgstr "Fluxo de Caixa - Semanal - Previsto"
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:532
 #, python-format
 msgid "Final"
-msgstr "Final"
+msgstr ""
 
 #. module: financial
 #: model:ir.ui.menu,name:financial.financial_top_menu
 msgid "Financial"
-msgstr "Financeiro"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_account
 msgid "Financial Account"
-msgstr "Conta financeira"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_account_tree_analysis
 msgid "Financial Account Tree Analysis"
-msgstr "Conta Financeira - Análise em Árvore"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_account_action
 #: model:ir.ui.menu,name:financial.financial_account_menu
 msgid "Financial Accounts"
-msgstr "Contas Financeiras"
+msgstr ""
 
 #. module: financial
 #: view:financial.cancel:financial.financial_cancel_form_view
@@ -491,72 +488,70 @@ msgstr ""
 #. module: financial
 #: model:ir.model,name:financial.model_financial_document_type
 msgid "Financial Document Type"
-msgstr "Tipo de Documento Financeiro"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_installment
 msgid "Financial Installment"
-msgstr "Parcelamento Financeiro"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_installment_simulation
 msgid "Financial Installment Simulation"
-msgstr "Simulação de Parcelamento Financeiro"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_financial_move
 msgid "Financial Move"
-msgstr "Lançamento Financeiro"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,move_ids:0
 msgid "Financial Moves"
-msgstr "Lançamentos Financeiros"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,display_name:0
 msgid "Financial Reference"
-msgstr "Referência Financeira"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,type:0
 #: field:financial.move,type:0
 msgid "Financial Type"
-msgstr "Tipo Financeiro"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment.simulation,move_id:0
 msgid "Financial move"
-msgstr "Lançamento Financeiro"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,message_follower_ids:0
 msgid "Followers"
-msgstr "Seguidores"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:50
 #, python-format
 msgid "From %s to %s"
-msgstr "De %s a %s"
+msgstr ""
 
 #. module: financial
 #: view:report.xlsx.financial.cashflow.wizard:financial.report_xlsx_financial_cashflow_wizard_form
 msgid "Generate cashflow"
-msgstr "Gerar fluxo de caixa"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_search
 #: view:financial.move:financial.financial_move_debt_base_search
 #: view:financial.move:financial.financial_move_payment_base_search
 msgid "Group By..."
-msgstr "Agrupar por..."
+msgstr ""
 
 #. module: financial
 #: help:financial.move,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is directly"
-" in html format in order to be inserted in kanban views."
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: financial
@@ -584,24 +579,24 @@ msgstr ""
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:506
 #, python-format
 msgid "Initial"
-msgstr "Inicial"
+msgstr ""
 
 #. module: financial
 #: field:res.partner.bank,initial_balance:0
 msgid "Initial balance"
-msgstr "Saldo inicial"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 #: field:financial.installment.simulation,installment_id:0
 #: field:financial.move,installment_id:0
 msgid "Installment"
-msgstr "Parcelamento"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,installment_simulation_id:0
 msgid "Installment simulation"
-msgstr "Simulação de parcelamento"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
@@ -609,45 +604,45 @@ msgstr "Simulação de parcelamento"
 #: model:ir.ui.menu,name:financial.financial_installment_2pay_menu
 #: model:ir.ui.menu,name:financial.financial_installment_2receive_menu
 msgid "Installments"
-msgstr "Parcelas"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 #: field:financial.installment,simulation_ids:0
 msgid "Installments (simulation)"
-msgstr "Parcelas (simulação)"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_installment_2pay_action
 msgid "Installments to pay"
-msgstr "Parcelamentos a pagar"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_installment_2receive_action
 msgid "Installments to receive"
-msgstr "Parcelamentos a receber"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_tree
 #: view:financial.move:financial.financial_move_payment_one2many_base_tree
 #: field:financial.move,amount_interest:0
 msgid "Interest"
-msgstr "Juros"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_interest_forecast:0
 msgid "Interest forecast"
-msgstr "Juros previsto"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,interest_rate:0
 msgid "Interest rate"
-msgstr "Taxa de juros"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_interest:0
 msgid "Interest since"
-msgstr "Juros a partir de"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,message_is_follower:0
@@ -657,7 +652,7 @@ msgstr ""
 #. module: financial
 #: field:financial.account,is_reduction:0
 msgid "Is reduction account?"
-msgstr "É conta redutora?"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,message_last_post:0
@@ -707,17 +702,17 @@ msgstr ""
 #: field:financial.account,level:0
 #: field:financial.account.tree.analysis,level:0
 msgid "Level"
-msgstr "Nível"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_tree
 msgid "Maturity"
-msgstr "Vencimento"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_maturity:0
 msgid "Maturity date"
-msgstr "Data de vencimento"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,communication:0
@@ -727,29 +722,29 @@ msgstr ""
 #. module: financial
 #: field:financial.move,message_ids:0
 msgid "Messages"
-msgstr "Mensagens"
+msgstr ""
 
 #. module: financial
 #: help:financial.move,message_ids:0
 msgid "Messages and communication history"
-msgstr "Mensagens e histórico de comunicação"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,type:0
 #: selection:financial.move,type:0
 msgid "Money In"
-msgstr "Entrada"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,type:0
 #: selection:financial.move,type:0
 msgid "Money Out"
-msgstr "Saída"
+msgstr ""
 
 #. module: financial
 #: selection:report.xlsx.financial.cashflow.wizard,time_span:0
 msgid "Months"
-msgstr "Meses"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:294
@@ -760,7 +755,7 @@ msgstr "Meses"
 #: field:financial.account,name:0
 #, python-format
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/models/financial_move.py:564
@@ -768,29 +763,29 @@ msgstr "Nome"
 #: code:addons/financial/models/financial_move.py:610
 #, python-format
 msgid "New"
-msgstr "Novo"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,note:0
 #: field:financial.move,note:0
 msgid "Note"
-msgstr "Notas"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 msgid "Notes ..."
-msgstr "Notas..."
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "Notes..."
-msgstr "Notas..."
+msgstr ""
 
 #. module: financial
 #: field:financial.installment.simulation,number:0
 msgid "Number"
-msgstr "Número"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_search
@@ -798,28 +793,28 @@ msgstr "Número"
 #: selection:financial.move,debt_concise_status:0
 #: selection:financial.move,state:0
 msgid "Open"
-msgstr "A vencer"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,original_currency_id:0
 msgid "Original currecy"
-msgstr "Moeda original"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_other_credits:0
 msgid "Other credits"
-msgstr "Outros créditos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_other_debits:0
 msgid "Other debits"
-msgstr "Outros débitos"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
 #: selection:financial.move,debt_status:0
 msgid "Overdue"
-msgstr "Vencido"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_search
@@ -828,74 +823,74 @@ msgstr "Vencido"
 #: selection:financial.move,debt_status:0
 #: selection:financial.move,state:0
 msgid "Paid"
-msgstr "Quitado"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_bank_fees:0
 msgid "Paid Bank fees"
-msgstr "Tarifas bancárias pagas"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_discount:0
 msgid "Paid Discount"
-msgstr "Desconto pago"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_document:0
 msgid "Paid Document Amount"
-msgstr "Valor do documento pago"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_interest:0
 msgid "Paid Interest"
-msgstr "Juros pagos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_other_credits:0
 msgid "Paid Other credits"
-msgstr "Outros créditos pagos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_other_debits:0
 msgid "Paid Other debits"
-msgstr "Outros débitos pagos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_penalty:0
 msgid "Paid Penalty"
-msgstr "Multa paga"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_paid_total:0
 msgid "Paid Total"
-msgstr "Total pago"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "Paid Values"
-msgstr "Valores pagos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,reconciled:0
 msgid "Paid/Reconciled"
-msgstr "Quitado/conciliado"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,parent_id:0
 #: field:financial.account.tree.analysis,parent_account_id:0
 msgid "Parent account"
-msgstr "Conta superior"
+msgstr ""
 
 #. module: financial
 #: selection:financial.move,debt_status:0
 msgid "Partially cancelled"
-msgstr "Baixado parcialmente"
+msgstr ""
 
 #. module: financial
 #: selection:financial.move,debt_status:0
 msgid "Partially paid"
-msgstr "Quitado parcialmente"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_search
@@ -904,7 +899,7 @@ msgstr "Quitado parcialmente"
 #: view:financial.move:financial.financial_move_payment_base_search
 #: field:financial.move,partner_id:0
 msgid "Partner"
-msgstr "Participante"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,type:0
@@ -913,19 +908,19 @@ msgstr "Participante"
 #: model:ir.actions.act_window,name:financial.financial_move_debt_2pay_action
 #: model:ir.ui.menu,name:financial.financial_move_debt_2pay_menu
 msgid "Payable"
-msgstr "A pagar"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2pay_search
 #: view:financial.move:financial.financial_move_debt_2pay_tree
 #: model:ir.ui.menu,name:financial.financial_payable_menu
 msgid "Payables"
-msgstr "A pagar"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_form
 msgid "Payment"
-msgstr "Pagamento"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_move_payment_base_action
@@ -937,25 +932,25 @@ msgstr ""
 #: selection:financial.move,type:0
 #: model:ir.ui.menu,name:financial.financial_move_payment_payment_item_menu
 msgid "Payment Item"
-msgstr "Pagamento"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_payment_item_form
 #: view:financial.move:financial.financial_move_payment_payment_item_search
 #: view:financial.move:financial.financial_move_payment_payment_item_tree
 msgid "Payment Items"
-msgstr "Pagamentos"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,payment_term_id:0
 msgid "Payment Term"
-msgstr "Condição de pagamento"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_search
 #: field:financial.move,date_payment:0
 msgid "Payment date"
-msgstr "Data de pagamento"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,payment_ids:0
@@ -965,90 +960,90 @@ msgstr ""
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_move_payment_payment_item_action
 msgid "Payment item"
-msgstr "Pagamento"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 msgid "Payments"
-msgstr "Pagamentos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_penalty:0
 msgid "Penalty"
-msgstr "Multa"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_penalty_forecast:0
 msgid "Penalty forecast"
-msgstr "Multa prevista"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,discount_rate:0
 #: field:financial.move,penalty_rate:0
 msgid "Penalty rate"
-msgstr "Taxa de multa"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_penalty:0
 msgid "Penalty since"
-msgstr "Multa a partir de"
+msgstr ""
 
 #. module: financial
 #: field:report.xlsx.financial.cashflow.wizard,period:0
 msgid "Period"
-msgstr "Período"
+msgstr ""
 
 #. module: financial
 #: view:report.xlsx.financial.cashflow.wizard:financial.report_xlsx_financial_cashflow_wizard_form
 msgid "Period Info"
-msgstr "Período"
+msgstr ""
 
 #. module: financial
 #: selection:report.xlsx.financial.cashflow.wizard,period:0
 msgid "Período Previsto"
-msgstr "Período previsto"
+msgstr ""
 
 #. module: financial
 #: selection:report.xlsx.financial.cashflow.wizard,period:0
 msgid "Período Realizado"
-msgstr "Período realizado"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:27
 #, python-format
 msgid "Realized Dayly Cashflow"
-msgstr "Fluxo de Caixa - Diário - Realizado"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:37
 #, python-format
 msgid "Realized Monthly Cashflow"
-msgstr "Fluxo de Caixa - Mensal - Realizado"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:32
 #, python-format
 msgid "Realized Weekly Cashflow"
-msgstr "Fluxo de Caixa - Semanal - Realizado"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,type:0
 #: selection:financial.move,type:0
 #: model:ir.ui.menu,name:financial.financial_move_payment_receipt_item_menu
 msgid "Receipt Item"
-msgstr "Recebimento"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_receipt_item_form
 #: view:financial.move:financial.financial_move_payment_receipt_item_search
 #: view:financial.move:financial.financial_move_payment_receipt_item_tree
 msgid "Receipt Items"
-msgstr "Recebimentos"
+msgstr ""
 
 #. module: financial
 #: model:ir.actions.act_window,name:financial.financial_move_payment_receipt_item_action
 msgid "Receipt item"
-msgstr "Recebimento"
+msgstr ""
 
 #. module: financial
 #: selection:financial.installment,type:0
@@ -1057,13 +1052,13 @@ msgstr "Recebimento"
 #: model:ir.actions.act_window,name:financial.financial_move_debt_2receive_action
 #: model:ir.ui.menu,name:financial.financial_move_debt_2receive_menu
 msgid "Receivable"
-msgstr "A receber"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_2pay_form
 #: view:financial.installment:financial.financial_installment_2receive_form
 msgid "Receivable installment"
-msgstr "Parcelamento a receber"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_2pay_search
@@ -1071,14 +1066,14 @@ msgstr "Parcelamento a receber"
 #: view:financial.installment:financial.financial_installment_2receive_search
 #: view:financial.installment:financial.financial_installment_2receive_tree
 msgid "Receivable installments"
-msgstr "Parcelamentos a receber"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2receive_search
 #: view:financial.move:financial.financial_move_debt_2receive_tree
 #: model:ir.ui.menu,name:financial.financial_receivable_menu
 msgid "Receivables"
-msgstr "A receber"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,ref:0
@@ -1088,12 +1083,12 @@ msgstr ""
 #. module: financial
 #: field:financial.move,amount_refund:0
 msgid "Refund amount"
-msgstr "Valor de reembolso"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,date_refund:0
 msgid "Refund date"
-msgstr "Data de reembolso"
+msgstr ""
 
 #. module: financial
 #: model:ir.model,name:financial.model_report_xlsx_financial_cashflow_wizard
@@ -1103,13 +1098,13 @@ msgstr ""
 #. module: financial
 #: model:ir.ui.menu,name:financial.financial_report_menu
 msgid "Reports"
-msgstr "Relatórios"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_tree
 #: field:financial.move,amount_residual:0
 msgid "Residual"
-msgstr "Saldo devedor"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,parent_right:0
@@ -1120,46 +1115,46 @@ msgstr ""
 #: field:financial.account,sign:0
 #: field:financial.move,sign:0
 msgid "Sign"
-msgstr "Sinal"
+msgstr ""
 
 #. module: financial
 #: selection:financial.account,type:0
 msgid "Sinthetic"
-msgstr "Sintética"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,doc_source_id:0
 msgid "Source Document"
-msgstr "Documento de origem"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_search
 msgid "State"
-msgstr "Situação"
+msgstr ""
 
 #. module: financial
 #: field:financial.installment,state:0
 #: view:financial.move:financial.financial_move_debt_base_search
 #: field:financial.move,state:0
 msgid "Status"
-msgstr "Situação"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,message_summary:0
 msgid "Summary"
-msgstr "Resumo"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/reports/report_xlsx_financial_cashflow.py:554
 #, python-format
 msgid "Summmary"
-msgstr "Resumo"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/models/financial_move.py:587
 #, python-format
 msgid "The payment amount must be strictly positive."
-msgstr "O valor do pagamento deve, obrigatoriamente, ser positivo."
+msgstr ""
 
 #. module: financial
 #: help:financial.cancel,reason:0
@@ -1170,7 +1165,7 @@ msgstr ""
 #: code:addons/financial/models/financial_move.py:683
 #, python-format
 msgid "This state transition is not allowed"
-msgstr "A mudança de situação não é permitida"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_tree
@@ -1178,17 +1173,17 @@ msgstr "A mudança de situação não é permitida"
 #: view:financial.move:financial.financial_move_payment_one2many_base_tree
 #: field:financial.move,amount_total:0
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,amount_total_forecast:0
 msgid "Total forecast"
-msgstr "Total previsto"
+msgstr ""
 
 #. module: financial
 #: field:financial.account,type:0
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,message_unread:0
@@ -1198,52 +1193,47 @@ msgstr ""
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 msgid "Validate"
-msgstr "Validar"
+msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_base_form
 msgid "Value"
-msgstr "Valor"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_base_form
 msgid "Values"
-msgstr "Valores"
+msgstr ""
 
 #. module: financial
 #: selection:report.xlsx.financial.cashflow.wizard,time_span:0
 msgid "Weeks"
-msgstr "Semanas"
+msgstr ""
 
 #. module: financial
 #: code:addons/financial/models/financial_move.py:658
 #, python-format
-msgid ""
-"You cannot delete an financial move which is \n"
+msgid "You cannot delete an financial move which is \n"
 "related to another document \n"
 "try to cancel the related document"
 msgstr ""
-"Você não pode excluir um lançamento financeiro\n"
-"que seja relacionado a outro documento;\n"
-"tente cancelar o documento relacionado"
 
 #. module: financial
 #: code:addons/financial/models/financial_move.py:662
 #, python-format
-msgid ""
-"You cannot delete an financial move which is not \n"
+msgid "You cannot delete an financial move which is not \n"
 "draft or cancelled"
 msgstr ""
 
 #. module: financial
 #: view:financial.cancel:financial.financial_cancel_form_view
 msgid "or"
-msgstr "ou"
+msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_payment_base_search
 msgid "payments"
-msgstr "pagamentos"
+msgstr ""
 
 #. module: financial
 #: field:financial.move,ref_item:0
@@ -1252,38 +1242,21 @@ msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2pay_form
-msgid ""
-"{'default_type': 'payment_item', 'default_amount_document': amount_residual,"
-" 'default_partner_id': partner_id, 'default_account_id': account_id,"
-" 'default_currency_id': currency_id, 'default_document_type_id':"
-" document_type_id, 'tree_view_ref': 'financial.financial_move_payment_one2many"
-"_base_tree', 'form_view_ref': 'financial.financial_move_payment_one2many_base_"
-"form'}"
+msgid "{'default_type': 'payment_item', 'default_amount_document': amount_residual, 'default_partner_id': partner_id, 'default_account_id': account_id, 'default_currency_id': currency_id, 'default_document_type_id': document_type_id, 'tree_view_ref': 'financial.financial_move_payment_one2many_base_tree', 'form_view_ref': 'financial.financial_move_payment_one2many_base_form'}"
 msgstr ""
 
 #. module: financial
 #: view:financial.move:financial.financial_move_debt_2receive_form
-msgid ""
-"{'default_type': 'receipt_item', 'default_amount_document': amount_residual,"
-" 'default_partner_id': partner_id, 'default_account_id': account_id,"
-" 'default_currency_id': currency_id, 'default_document_type_id':"
-" document_type_id, 'tree_view_ref': 'financial.financial_move_payment_one2many"
-"_base_tree', 'form_view_ref': 'financial.financial_move_payment_one2many_base_"
-"form'}"
+msgid "{'default_type': 'receipt_item', 'default_amount_document': amount_residual, 'default_partner_id': partner_id, 'default_account_id': account_id, 'default_currency_id': currency_id, 'default_document_type_id': document_type_id, 'tree_view_ref': 'financial.financial_move_payment_one2many_base_tree', 'form_view_ref': 'financial.financial_move_payment_one2many_base_form'}"
 msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_2pay_form
-msgid ""
-"{'tree_view_ref': 'financial.financial_move_debt_2pay_tree', 'form_view_ref':"
-" 'financial.financial_move_debt_2pay_form'}"
+msgid "{'tree_view_ref': 'financial.financial_move_debt_2pay_tree', 'form_view_ref': 'financial.financial_move_debt_2pay_form'}"
 msgstr ""
 
 #. module: financial
 #: view:financial.installment:financial.financial_installment_2receive_form
-msgid ""
-"{'tree_view_ref': 'financial.financial_move_debt_2receive_tree',"
-" 'form_view_ref': 'financial.financial_move_debt_2receive_form'}"
+msgid "{'tree_view_ref': 'financial.financial_move_debt_2receive_tree', 'form_view_ref': 'financial.financial_move_debt_2receive_form'}"
 msgstr ""
-
 

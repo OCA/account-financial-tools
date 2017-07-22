@@ -28,11 +28,18 @@
         # 'wizards/financial_pay_receive.xml',
         'wizards/report_xlsx_financial_cashflow_wizard_view.xml',
 
-        'views/financial_move_payment_base_view.xml',
+        'views/financial_move_payment_one2many_base_view.xml',
         'views/financial_move_debt_base_view.xml',
         'views/financial_move_debt_2receive_view.xml',
         'views/financial_move_debt_2pay_view.xml',
-        'views/financial_installment_view.xml',
+
+        'views/financial_move_payment_base_view.xml',
+        'views/financial_move_payment_receipt_item_view.xml',
+        'views/financial_move_payment_payment_item_view.xml',
+
+        'views/financial_installment_base_view.xml',
+        'views/financial_installment_2receive_view.xml',
+        'views/financial_installment_2pay_view.xml',
 
         'views/financial_document_type_view.xml',
         'views/financial_account_view.xml',

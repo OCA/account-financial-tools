@@ -12,7 +12,7 @@
         <field name="priority">9999</field>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+            <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancelled'" delete="false" create="false" edit="false">
                 <field name="type" invisible="1"/>
                 <field name="state" invisible="1"/>
                 <field name="account_id" invisible="1"/>
@@ -26,6 +26,9 @@
                 <field name="amount_total" readonly="1" sum="Total"/>
                 <field name="bank_id" required="1" />
                 <field name="date_credit_debit" />
+                <field name="partner_id"/>
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="debt_id" />
             </tree>
         </field>
     </record>
@@ -36,39 +39,104 @@
         <field name="priority">9999</field>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <form>
+            <form delete="false" create="false" edit="false">
                 <field name="type" invisible="1"/>
-                <field name="state" invisible="1"/>
-                <field name="account_id" invisible="1"/>
-                <field name="currency_id" invisible="1"/>
-                <group colspan="4" col="4">
-                    <group col="4" colspan="4" name="general">
-                        <field name="date_payment" required="1" />
-                        <field name="amount_document" required="1" />
-
-                        <field name="document_type_id" required="1" />
-                        <field name="amount_interest" />
-
-                        <field name="document_number" required="1" />
-                        <field name="amount_discount" />
-
-                        <field name="bank_id" required="1" />
-                        <field name="amount_paid" readonly="1"/>
-
-                        <field name="date_credit_debit" />
+                <header>
+                </header>
+                <sheet>
+                    <div>
+                        <label for="debt_id" string="Debt" />
+                        <h1 name="document_name">
+                            <field name="debt_id" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="document_header" colspan="4">
+                            <group name="document_identification" string="Payment">
+                                <field name="document_type_id" required="1" options="{'no_create': True, 'no_open': True}" />
+                                <field name="document_number"/>
+                                <field name="date_payment" required="1" />
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="partner_id" required="1" options="{'no_create': True}" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': type == 'p', 'default_customer': type == 'r'}"/>
+                                <field name="account_id" required="1" />
+                                <field name="bank_id"  options="{'no_create': True, 'no_open': True}" required="1" />
+                                <field name="date_credit_debit" />
+                            </group>
+                            <group>
+                               <group name="paid_amounts" colspan="2" string="Paid Values" class="oe_subtotal_footer oe_center">
+                                    <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                                    <field name="amount_document" string="Amount" required="1" />
+                                    <field name="amount_interest" string="(+) Interest" />
+                                    <field name="amount_penalty" string="(+) Penaly" />
+                                    <field name="amount_other_credits" string="(+) Other credits" />
+                                    <field name="amount_discount" string="(-) Discount" />
+                                    <field name="amount_other_debits" string="(-) Other debits" />
+                                    <field name="amount_bank_fees" string="(-) Bank fees" />
+                                    <field name="amount_total" string="(=) Total paid" class="oe_subtotal_footer_separator" readonly="1" />
+                               </group>
+                            </group>
+                        </group>
                     </group>
-                </group>
+                    <div>
+                        <field name="communication" placeholder="Communication..."/>
+                        <field name="note" placeholder="Notes..."/>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
 
-    <!--<record model="ir.ui.view" id="financial_move_payment_base_search">-->
-        <!--<field name="name">financial.move.payment.base.search (in financial)</field>-->
-        <!--<field name="model">financial.move</field>-->
-        <!--<field name="arch" type="xml">-->
-            <!--<search string="Search Moves">-->
-           <!--</search>-->
-        <!--</field>-->
+    <record model="ir.ui.view" id="financial_move_payment_base_search">
+        <field name="name">financial.move.payment.base.search (in financial)</field>
+        <field name="model">financial.move</field>
+        <field name="priority">9999</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search string="payments">
+                <field name="document_number" />
+                <field name="partner_id" />
+                <field name="date_payment" />
+                <group expand="0" string="Group By...">
+                    <filter name="group_bank" string="Bank account" context="{'group_by': 'bank_id'}" />
+                    <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_date_payment" string="Payment date" context="{'group_by': 'date_payment'}"/>
+               </group>
+           </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="financial_move_payment_base_action">
+        <field name="name">Payment (base)</field>
+        <field name="res_model">financial.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type', 'in', ('receipt_item', 'payment_item'))]</field>
+        <field name="context">{}</field>
+        <field name="search_view_id" ref="financial.financial_move_payment_base_search" />
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_move_payment_base_tree_action">
+        <field eval="1" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="financial_move_payment_base_tree"/>
+        <field name="act_window_id" ref="financial_move_payment_base_action"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="financial_move_payment_base_form_action">
+        <field eval="2" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="financial_move_payment_base_form"/>
+        <field name="act_window_id" ref="financial_move_payment_base_action"/>
+    </record>
+
+    <!--<record model="ir.ui.menu" id="financial_move_payment_base_menu">-->
+        <!--<field name="name">Payment</field>-->
+        <!--<field name="parent_id" ref="financial_dashboard_menu"/>-->
+        <!--<field name="action" ref="financial_move_payment_base_action"/>-->
+        <!--<field name="sequence" eval="1"/>-->
     <!--</record>-->
 
 </odoo>

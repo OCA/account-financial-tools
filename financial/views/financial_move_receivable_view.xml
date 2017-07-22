@@ -26,7 +26,7 @@
                 <field name="amount_cancel" sum="Cancel"/>
                 <field name="amount_total" sum="Total"/>
                 <field name="date_payment"/>
-                <field name="amount_paid" sum="Paid"/>
+                <field name="amount_paid_document" sum="Paid"/>
                 <field name="amount_residual" sum="Residual"/>
                 <field name="state"/>
             </tree>
@@ -100,7 +100,7 @@
                                         <field name="amount_refund" string="Refund (-)" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="amount_cancel" string="Cancel (-)" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="amount_total" class="oe_subtotal_footer_separator"/>
-                                        <field name="amount_paid" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        <field name="amount_paid_document" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="amount_residual" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}"/>
                                         <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}"/>

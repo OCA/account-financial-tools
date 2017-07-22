@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 KMEE
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="financial_installment_base_tree">
+        <field name="name">financial.installment.base.tree (in financial)</field>
+        <field name="model">financial.installment</field>
+        <field name="priority">9999</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'">
+                <field name="date_document" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="partner_id"/>
+                <field name="document_type_id" />
+                <field name="document_number" />
+                <field name="currency_id" groups="base.group_multi_currency"/>
+                <field name="amount_document" sum="Document"/>
+                <field name="payment_term_id" />
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_installment_base_form">
+        <field name="name">financial.installment.base.form (in financial)</field>
+        <field name="model">financial.installment</field>
+        <field name="priority">9999</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form string="Installment">
+                <header>
+                    <button name='confirm'
+                                string='Confirm'
+                                class='btn-primary oe_highlight'
+                                type='object'
+                                attrs="{'invisible': [('state', '!=', 'draft')]}"
+                            />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed" />
+                </header>
+                <group>
+                    <group name="document_header" colspan="4">
+                        <group name="document_identification" string="Document">
+                            <field name="document_type_id" required="1" options="{'no_create': True, 'no_open': True}" />
+                            <field name="document_number"/>
+                            <field name="date_document" required="1" />
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="partner_id" required="1" options="{'no_create': True}" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': type == '2pay', 'default_customer': type == '2receive'}"/>
+                            <field name="account_id" required="1" />
+                        </group>
+                        <group>
+                            <group name="amounts" string="Value">
+                                <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                                <field name="amount_document" string="Amount" required="1" />
+                                <field name="payment_term_id" required="1" />
+                            </group>
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page  attrs="{'invisible': [('state', '!=', 'draft')]}" string="Installments (simulation)">
+                            <field nolabel="1" name="simulation_ids">
+                                <tree>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="number"/>
+                                    <field name="date_maturity"/>
+                                    <field name="amount_document"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page attrs="{'invisible': [('state', '=', 'draft')] }" string="Installments">
+                            <field nolabel="1" readonly="1" name="move_ids" />
+                        </page>
+                    </notebook>
+                    <div>
+                        <field name="note" placeholder="Notes ..."/>
+                    </div>
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="financial_installment_base_search">
+        <field name="name">financial.installment.base.search (in financial)</field>
+        <field name="model">financial.installment</field>
+        <field name="priority">9999</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <search string="Installments">
+                <filter name="status_draft" string="Open" domain="[('state','=','draft')]" />
+                <filter name="status_confirmed" string="Confirmed" domain="[('state','=','confirmed')]" />
+                <field name="document_number" />
+                <field name="company_id" />
+                <field name="partner_id" />
+                <field name="date_document" />
+                <group expand="0" string="Group By...">
+                    <filter icon="terp-sale" string="State" context="{'group_by': 'state'}" />
+                    <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+               </group>
+           </search>
+        </field>
+    </record>
+
+</data>
+</openerp>
