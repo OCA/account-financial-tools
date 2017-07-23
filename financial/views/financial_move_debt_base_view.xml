@@ -61,21 +61,24 @@
                     <group>
                         <group name="document_header" colspan="4">
                             <group name="document_identification" string="Document">
-                                <field name="document_type_id" required="1" options="{'no_create': True, 'no_open': True}" />
-                                <field name="document_number"/>
-                                <field name="date_document" required="1" />
-                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True, 'no_open': True}"/>
+
+                                <field name="company_id" groups="base.group_multi_company" widget="selection"/>
                                 <field name="partner_id" required="1" options="{'no_create': True}" domain="['|', ('parent_id', '=', False), ('is_company', '=', True)]" context="{'default_is_company': True, 'default_supplier': type == 'p', 'default_customer': type == 'r'}"/>
-                                <!--<field name="doc_source_id"/>-->
-                                <field name="account_id" required="1" />
+                                <field name="document_number"/>
+                                <field name="doc_source_id" />
+                                <field name="date_document" required="1" />
+                                <field name="account_id" required="1"  options="{'no_create': True}"/>
+                                <field name="document_type_id" required="1" widget="selection"/>
                                 <field name="date_maturity" required="1" />
                                 <field name="date_business_maturity"/>
-                                <field name="debt_status"  />
+                                <field name="debt_status"/>
                                 <field name="date_payment" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
                                 <field name="date_credit_debit" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1"/>
                                 <field name="reconciled" attrs="{'invisible': [('state', '=', 'draft')]}" readonly="1" />
+                                <field name="payment_mode_id" widget="selection"/>
+                                <!--<field name="payment_term_id"/> # Removido da visão, verificar comentário no arquivo python-->
                             </group>
-                            <group>
+                            <group name="document_amounts">
                                 <separator string="Values" />
                                 <group name="amounts" colspan="2" class="oe_subtotal_footer oe_center">
                                     <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>

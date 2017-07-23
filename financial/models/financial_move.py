@@ -399,6 +399,24 @@ class FinancialMove(models.Model):
         digits=(18, 2),
     )
 
+    #
+    #
+    # Payment term and Payment mode
+    #
+    payment_mode_id = fields.Many2one(
+        comodel_name='payment.mode',
+        string="Payment Mode",
+    )
+    # Este campo esta sendo inserido somente para fins gerenciais e não será
+    # exibido na visão por enquanto.
+    # TODO: Implementar um relatório que proporcione informações sobre o
+    # ganho associado a diferentes condições de pagamentos.
+    #
+    payment_term_id = fields.Many2one(
+        comodel_name='account.payment.term',
+        string="Payment term",
+    )
+
     @api.depends('type')
     def _compute_sign(self):
         for move in self:

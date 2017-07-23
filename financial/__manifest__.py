@@ -12,9 +12,23 @@
     'website': 'www.kmee.com.br',
     'depends': [
         'base',
-        'l10n_br_resource',
+        'l10n_br_resource',  # FIXME: Implementar esta funcionalidade no core
         'mail',
         'report_xlsx',
+        # 'account_payment_mode' # FIXME: Modulo da OCA/bank-payment in v10
+        # Estamos temporariamente dependendo deste módulo pois na v8 o model
+        # payment.mode esta no core.
+        'account_payment',
+        #
+        # Em um futuro distante não deveremos mais depender de account, pois os
+        # models:
+        #   - account.payment.term
+        #   - account.payment.mode
+        # Estarão em um módulo separado
+        #
+        # TODO: Criar um PR no core separando models do módulo account
+        #
+        'account',
     ],
     'data': [
         'views/financial_menu.xml',
