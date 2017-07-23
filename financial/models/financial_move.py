@@ -42,7 +42,7 @@ class FinancialMove(models.Model):
     _inherit = ['mail.thread']
     _order = 'date_business_maturity desc, ' \
              'ref desc, ref_item desc, document_number, id desc'
-    _rec_name = 'ref'
+    _rec_name = 'display_name'
 
     #
     # Move identification
@@ -597,6 +597,7 @@ class FinancialMove(models.Model):
     display_name = fields.Char(
         string='Financial Reference',
         compute='_compute_display_name',
+        store=True,
     )
     doc_source_id = fields.Reference(
         selection=[],
