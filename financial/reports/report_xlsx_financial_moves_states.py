@@ -21,14 +21,14 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
     def define_title(self):
         if self.report_wizard.group_by == 'maturity':
             if self.report_wizard.type == '2receive':
-                title = _('Fiscal Moves To Receive by Maturity')
+                title = _('Financial Moves To Receive by Maturity')
             else:
-                title = _('Fiscal Moves To Pay by Maturity')
+                title = _('Financial Moves To Pay by Maturity')
         else:
             if self.report_wizard.type == '2pay':
-                title = _('Fiscal Moves To Receive by Partner')
+                title = _('Financial Moves To Receive by Partner')
             else:
-                title = _('Fiscal Moves To Pay by Partner')
+                title = _('Financial Moves To Pay by Partner')
 
         return title
 
@@ -222,16 +222,23 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 'header': _('Dt. Doc.'),
                 'field': 'dt_doc',
                 'width': 20,
+                'style': 'date',
+                'type': 'date',
             },
             4: {
                 'header': _('Dt. Venc.'),
                 'field': 'date_business_maturity',
                 'width': 20,
+                'style': 'date',
+                'type': 'date',
             },
             5: {
                 'header': _('Dt. Quit.'),
                 'field': 'dt_quit',
                 'width': 20,
+                'style': 'date',
+                'type': 'date',
+
             },
             6: {
                 'header': _('Prov.'),
@@ -242,26 +249,36 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 'header': _('Vlr. Original'),
                 'field': 'vlr_original',
                 'width': 20,
+                'style': 'currency',
+                'type': 'currency',
             },
             8: {
                 'header': _('Desc.'),
                 'field': 'desc',
                 'width': 20,
+                'style': 'currency',
+                'type': 'currency',
             },
             9: {
                 'header': _('Multa'),
                 'field': 'multa',
                 'width': 20,
+                'style': 'currency',
+                'type': 'currency',
             },
             10: {
                 'header': _('Juros'),
                 'field': 'juros',
                 'width': 20,
+                'style': 'currency',
+                'type': 'currency',
             },
             11: {
                 'header': _('Parc./Total'),
                 'field': 'parc_total',
                 'width': 20,
+                'style': 'currency',
+                'type': 'currency',
             },
         }
 
