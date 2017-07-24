@@ -110,6 +110,8 @@ class AccountAssetRemove(models.TransientModel):
         default=fields.Date.today,
         help="Removal date must be after the last posted entry "
              "in case of early removal")
+    force_date = fields.Date(
+        string='Force accounting date')
     sale_value = fields.Float(
         'Sale Value',
         default=lambda self: self._get_sale_value())
@@ -302,10 +304,14 @@ class AccountAssetRemove(models.TransientModel):
         line_name = asset._get_depreciation_entry_name(len(dlines) + 1)
         journal_id = asset.profile_id.journal_id.id
 
+        if not self.force_date:
+            date_remove = self.date_remove
+        else:
+            date_remove = self.force_date
         # create move
         move_vals = {
             'name': asset.name,
-            'date': self.date_remove,
+            'date': date_remove,
             'ref': line_name,
             'journal_id': journal_id,
             'narration': self.note,
