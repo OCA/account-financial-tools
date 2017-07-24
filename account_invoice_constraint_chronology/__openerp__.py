@@ -29,7 +29,7 @@
 
 {
     "name": "Account Invoice Constraint Chronology",
-    "version": "8.0.1.0.0",
+    "version": "1.0",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainer": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
@@ -54,7 +54,7 @@ The check can be activated on a per-journal basis
     "demo": [],
     "test": [],
     "licence": "AGPL-3",
-    'installable': False,
+    'installable': True,
     "auto_install": False,
     "application": True,
 }
