@@ -125,6 +125,13 @@ class AccountAssetProfile(models.Model):
         help="Check this if you want to automatically confirm the assets "
         "of this category when created by invoices.")
     active = fields.Boolean('Active', default=True)
+    asset_product_item = fields.Boolean(
+        string='Create an asset by product item',
+        help="""By default during the validation of an invoice, an asset
+                is created by invoice line as long as an accounting entry is
+                created by invoice line. With this setting, an accounting entry
+                will be created by product item. So, there will be an asset by
+                product item.""")
 
     @api.model
     def _get_company(self):

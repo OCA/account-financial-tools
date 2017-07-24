@@ -14,6 +14,7 @@
               <field name="parent_id" required="1"/>
               <field name="active"/>
               <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+              <field name="asset_product_item" />
             </group>
             <group>
               <field name="journal_id"/>

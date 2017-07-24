@@ -45,6 +45,65 @@ class TestAssetManagement(common.TransactionCase):
         self._load('account', 'test', 'account_minimal_test.xml')
         self._load('account_asset_management', 'demo',
                    'account_asset_demo.xml')
+        # ENVIRONEMENTS
+
+        self.account_invoice = self.env['account.invoice']
+        self.account_move_line = self.env['account.move.line']
+        self.account_account = self.env['account.account']
+        self.account_journal = self.env['account.journal']
+        self.account_invoice_line = self.env['account.invoice.line']
+
+        # INSTANCES
+
+        # Instance: company
+        self.company = self.env.ref('base.main_company')
+
+        # Instance: account type (receivable)
+        self.type_recv = self.env.ref('account.data_account_type_receivable')
+
+        # Instance: account type (payable)
+        self.type_payable = self.env.ref('account.data_account_type_payable')
+
+        # Instance: account (receivable)
+        self.account_recv = self.account_account.create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': self.type_recv.id,
+            'company_id': self.company.id,
+            'reconcile': True})
+
+        # Instance: account (payable)
+        self.account_payable = self.account_account.create({
+            'name': 'test_account_payable',
+            'code': '321',
+            'user_type_id': self.type_payable.id,
+            'company_id': self.company.id,
+            'reconcile': True})
+
+        # Instance: partner
+        self.partner = self.env.ref('base.res_partner_2')
+
+        # Instance: journal
+        self.journal = self.account_journal.search([('code', '=', 'BILL')])
+
+        # Instance: product
+        self.product = self.env.ref('product.product_product_4')
+
+        # Instance: invoice line
+        self.invoice_line = self.account_invoice_line.create({
+            'name': 'test',
+            'account_id': self.account_payable.id,
+            'price_unit': 2000.00,
+            'quantity': 1,
+            'product_id': self.product.id})
+
+        # Instance: invoice
+        self.invoice = self.account_invoice.create({
+            'partner_id': self.partner.id,
+            'account_id': self.account_recv.id,
+            'payment_term': False,
+            'journal_id': self.journal.id,
+            'invoice_line_ids': [(4, self.invoice_line.id)]})
 
     def test_0(self):
         asset01 = self.env.ref(
@@ -242,3 +301,49 @@ class TestAssetManagement(common.TransactionCase):
                                places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
                                places=2)
+
+    def test_5_asset_from_invoice(self):
+        all_asset = self.env['account.asset'].search([])
+        invoice = self.invoice
+        asset_profile = self.env.ref(
+            'account_asset_management.account_asset_profile_car_5Y')
+        asset_profile.asset_product_item = False
+        self.assertTrue(len(invoice.invoice_line_ids) > 0)
+        line = invoice.invoice_line_ids[0]
+        self.assertTrue(line.price_unit > 0.0)
+        line.quantity = 2
+        line.asset_profile_id = asset_profile
+        invoice.action_invoice_open()
+        # I get all asset after invoice validation
+        current_asset = self.env['account.asset'].search([])
+        # I get the new asset
+        new_asset = current_asset - all_asset
+        # I check that a new asset is created
+        self.assertEqual(len(new_asset), 1)
+        # I check that the new asset has the correct purchase value
+        self.assertAlmostEqual(new_asset.purchase_value,
+                               -line.price_unit * line.quantity,
+                               places=2)
+
+    def test_6_asset_from_invoice_product_item(self):
+        all_asset = self.env['account.asset'].search([])
+        invoice = self.invoice
+        asset_profile = self.env.ref(
+            'account_asset_management.account_asset_profile_car_5Y')
+        asset_profile.asset_product_item = True
+        self.assertTrue(len(invoice.invoice_line_ids) > 0)
+        line = invoice.invoice_line_ids[0]
+        self.assertTrue(line.price_unit > 0.0)
+        line.quantity = 2
+        line.asset_profile_id = asset_profile
+        invoice.action_invoice_open()
+        # I get all asset after invoice validation
+        current_asset = self.env['account.asset'].search([])
+        # I get the new asset
+        new_asset = current_asset - all_asset
+        # I check that a new asset is created
+        self.assertEqual(len(new_asset), line.quantity)
+        for asset in new_asset:
+            # I check that the new asset has the correct purchase value
+            self.assertAlmostEqual(
+                asset.purchase_value, -line.price_unit, places=2)
