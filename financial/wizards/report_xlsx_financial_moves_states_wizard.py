@@ -8,7 +8,6 @@
 from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
-
 from openerp import fields, models, api
 
 
@@ -25,10 +24,19 @@ class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
         string='Group By',
         required=True,
         selection=[
-            ('maturity', 'Maturity'),
-            ('partner', 'Partner'),
+            ('date_business_maturity', 'Maturity'),
+            ('partner_id', 'Partner'),
         ],
-        default='maturity',
+        default='date_business_maturity',
+    )
+    type = fields.Selection(
+        string='Type',
+        required=True,
+        selection=[
+            ('2receive', 'To Receive'),
+            ('2pay', 'To Pay')
+        ],
+        default='2receive',
     )
     date_from = fields.Date(
         required=True,

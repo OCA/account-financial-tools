@@ -20,9 +20,15 @@ from .report_xlsx_financial_base import ReportXlsxFinancialBase
 class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
     def define_title(self):
         if self.report_wizard.group_by == 'maturity':
-            title = _('Fiscal Moves by Maturity')
+            if self.report_wizard.type == '2receive':
+                title = _('Fiscal Moves To Receive by Maturity')
+            else:
+                title = _('Fiscal Moves To Pay by Maturity')
         else:
-            title = _('Fiscal Moves by Partner')
+            if self.report_wizard.type == '2pay':
+                title = _('Fiscal Moves To Receive by Partner')
+            else:
+                title = _('Fiscal Moves To Pay by Partner')
 
         return title
 
@@ -58,25 +64,9 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
         # First, we prepare the report_data lines, time_span and accounts
         #
         report_data = {
-            # 'cod_conta': {},
-            # 'conta': {},
-            # 'num_documento': {},
-            # 'dt_doc': {},
-            # 'dt_venc': {},
-            # 'dt_quit': {},
-            # 'prov': {},
-            # 'vlr_original': {},
-            # 'desc': {},
-            # 'multa': {},
-            # 'juros': {},
-            # 'parc_total': {},
             'lines': {},
+            'total_lines': {},
         }
-
-        date_from = fields.Datetime.from_string(self.report_wizard.date_from)
-        date_from = date_from.date()
-        date_to = fields.Datetime.from_string(self.report_wizard.date_to)
-        date_to = date_to.date()
 
         SQL_INICIAL_VALUE = '''
             SELECT 
@@ -91,14 +81,26 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                fm.amount_paid_discount,
                fm.amount_paid_penalty,
                fm.amount_paid_interest,
-               fm.amount_paid_total
+               fm.amount_paid_total,
+               fm.partner_id
             FROM 
               financial_move fm
               join financial_account fa on fa.id = fm.account_id
             WHERE
-              fm.type = '2pay' and fm.state = 'open';
+              fm.type = %(type)s
+              and fm.date_business_maturity between %(date_from)s and
+               %(date_to)s
+              and fm.state = 'open'
+            ORDER BY
+              fm.%(group_by)s;
         '''
-        self.env.cr.execute(SQL_INICIAL_VALUE)
+        filters = {
+            'group_by': AsIs(self.report_wizard.group_by),
+            'type': self.report_wizard.type,
+            'date_to': self.report_wizard.date_to,
+            'date_from': self.report_wizard.date_from,
+        }
+        self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
         for line in data:
             line_dict = {
@@ -106,7 +108,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 'conta': line[2],
                 'num_documento': line[3],
                 'dt_doc': line[4],
-                'dt_venc': line[5],
+                'date_business_maturity': line[5],
                 'dt_quit': line[6],
                 # 'prov': line[7],
                 'vlr_original': line[7],
@@ -114,9 +116,89 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 'multa': line[9],
                 'juros': line[10],
                 'parc_total': line[11],
+                'partner_id': line[12],
             }
             report_data['lines'][line[0]] = line_dict
-
+        if self.report_wizard.group_by == "partner_id":
+            SQL_VALUE = '''
+                SELECT 
+                   fm.partner_id,
+                   sum(fm.amount_document) as amount_document,
+                   sum(fm.amount_paid_discount) as amount_paid_discount,
+                   sum(fm.amount_paid_penalty) as amount_paid_penalty,
+                   sum(fm.amount_paid_interest) as amount_paid_interest,
+                   sum(fm.amount_paid_total) as amount_paid_total
+                FROM 
+                    financial_move fm
+                    join financial_account fa on fa.id = fm.account_id
+                WHERE
+                  fm.type = %(type)s
+                  and fm.date_business_maturity between %(date_from)s and
+                   %(date_to)s
+                  and fm.state = 'open'
+                GROUP BY
+                  fm.%(group_by)s
+                ORDER BY
+                  fm.%(group_by)s;
+            '''
+            filters = {
+                'group_by': AsIs(self.report_wizard.group_by),
+                'type': self.report_wizard.type,
+                'date_to': self.report_wizard.date_to,
+                'date_from': self.report_wizard.date_from,
+            }
+            self.env.cr.execute(SQL_VALUE, filters)
+            data = self.env.cr.fetchall()
+            for line in data:
+                line_dict = {
+                    'vlr_original': line[1],
+                    'desc': line[2],
+                    'multa': line[3],
+                    'juros': line[4],
+                    'parc_total': line[5],
+                    'partner_id': line[0],
+                }
+                report_data['total_lines'][line[0]] = line_dict
+        elif self.report_wizard.group_by == "date_business_maturity":
+            SQL_VALUE = '''
+                SELECT 
+                   fm.date_business_maturity,
+                   sum(fm.amount_document) as amount_document,
+                   sum(fm.amount_paid_discount) as amount_paid_discount,
+                   sum(fm.amount_paid_penalty) as amount_paid_penalty,
+                   sum(fm.amount_paid_interest) as amount_paid_interest,
+                   sum(fm.amount_paid_total) as amount_paid_total
+                FROM 
+                    financial_move fm
+                    join financial_account fa on fa.id = fm.account_id
+                WHERE
+                  fm.type = %(type)s
+                  and fm.date_business_maturity between %(date_from)s and
+                   %(date_to)s
+                  and fm.state = 'open'
+                GROUP BY
+                  fm.%(group_by)s
+                ORDER BY
+                  fm.%(group_by)s;
+            '''
+            filters = {
+                'group_by': AsIs(self.report_wizard.group_by),
+                'type': self.report_wizard.type,
+                'date_to': self.report_wizard.date_to,
+                'date_from': self.report_wizard.date_from,
+            }
+            self.env.cr.execute(SQL_VALUE, filters)
+            data = self.env.cr.fetchall()
+            for line in data:
+                line_dict = {
+                    'vlr_original': line[1],
+                    'desc': line[2],
+                    'multa': line[3],
+                    'juros': line[4],
+                    'parc_total': line[5],
+                    'date_business_maturity': line[0],
+                }
+                report_data['total_lines'][line[0]] = line_dict
         return report_data
 
     def define_columns(self):
@@ -143,7 +225,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
             },
             4: {
                 'header': _('Dt. Venc.'),
-                'field': 'dt_venc',
+                'field': 'date_business_maturity',
                 'width': 20,
             },
             5: {
@@ -187,9 +269,91 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
 
     def write_content(self):
         self.sheet.set_zoom(85)
-        self.write_header()
+
+        group_by_separator = ''
         for move_id in sorted(self.report_data['lines'].keys()):
+            if group_by_separator != self.report_data['lines'][move_id][self.report_wizard.group_by]:
+                if group_by_separator:
+                    if self.report_wizard.group_by == "date_business_maturity":
+                        self.sheet.merge_range(
+                            self.current_row, 0,
+                            self.current_row + 0,
+                            6,
+                            _('Total: ' +
+                              str(self.report_data['lines'][move_id][
+                                  self.report_wizard.group_by])),
+                            self.style.footer
+                        )
+                        self.report_data['total_lines'][group_by_separator].pop('date_business_maturity')
+                        self.write_detail(self.report_data['total_lines'][group_by_separator])
+                        self.current_row += 1
+                    elif self.report_wizard.group_by == "partner_id":
+                        self.sheet.merge_range(
+                            self.current_row, 0,
+                            self.current_row + 0,
+                            6,
+                            _('Total: ' +
+                              str(self.report_data['lines'][move_id][
+                                  self.report_wizard.group_by])),
+                            self.style.footer
+                        )
+                        self.report_data['total_lines'][group_by_separator].pop(
+                            'partner_id')
+                        self.write_detail(self.report_data['total_lines'][group_by_separator])
+                        self.current_row += 1
+                group_by_separator = self.report_data['lines'][move_id][self.report_wizard.group_by]
+                if self.report_wizard.group_by == "date_business_maturity":
+                    self.sheet.merge_range(
+                        self.current_row, 0,
+                        self.current_row + 1,
+                        len(self.columns) - 1,
+                        _('Data de Vencimento: ' + self.report_data['lines'][move_id][self.report_wizard.group_by]),
+                        self.style.header.align_left
+                    )
+                elif self.report_wizard.group_by == "partner_id":
+                    self.sheet.merge_range(
+                        self.current_row, 0,
+                        self.current_row + 1,
+                        len(self.columns) - 1,
+                        _('Parceiro: ' +
+                          str(self.report_data['lines'][move_id][
+                              self.report_wizard.group_by])),
+                        self.style.header.align_left
+                    )
+                self.current_row += 2
+                self.write_header()
             self.write_detail(self.report_data['lines'][move_id])
+            if move_id == sorted(self.report_data['lines'].keys())[-1]:
+                if self.report_wizard.group_by == "date_business_maturity":
+                    self.sheet.merge_range(
+                        self.current_row, 0,
+                        self.current_row + 0,
+                        6,
+                        _('Total: ' +
+                          str(self.report_data['lines'][move_id][
+                                  self.report_wizard.group_by])),
+                        self.style.footer
+                    )
+                    self.report_data['total_lines'][group_by_separator].pop(
+                        'date_business_maturity')
+                    self.write_detail(
+                        self.report_data['total_lines'][group_by_separator])
+                    self.current_row += 1
+                elif self.report_wizard.group_by == "partner_id":
+                    self.sheet.merge_range(
+                        self.current_row, 0,
+                        self.current_row + 0,
+                        6,
+                        _('Total: ' +
+                          str(self.report_data['lines'][move_id][
+                                  self.report_wizard.group_by])),
+                        self.style.footer
+                    )
+                    self.report_data['total_lines'][group_by_separator].pop(
+                        'partner_id')
+                    self.write_detail(
+                        self.report_data['total_lines'][group_by_separator])
+                    self.current_row += 1
 
     def generate_xlsx_report(self, workbook, data, report_wizard):
         super(ReportXslxFinancialMovesStates, self).generate_xlsx_report(
