@@ -67,6 +67,25 @@ class AccountMove(models.Model):
                           "linked to an asset depreciation line."))
         return super(AccountMove, self).write(vals)
 
+    @api.multi
+    def post(self):
+        res = super(AccountMove, self).post()
+        for rec in self:
+            rec._update_assets_code()
+        return res
+
+    @api.multi
+    def _update_assets_code(self):
+        self.ensure_one()
+        move_name = self.name
+        assets = self.line_ids.mapped('asset_id')
+        for index, asset in enumerate(assets):
+            asset.code = move_name
+            asset_line_name = asset._get_depreciation_entry_name(index)
+            asset.depreciation_line_ids[0].with_context(
+                {'allow_asset_line_update': True}
+            ).name = asset_line_name
+
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'

@@ -91,21 +91,6 @@ class AccountInvoice(models.Model):
         return move_lines
 
     @api.multi
-    def action_number(self):
-        super(AccountInvoice, self).action_number()
-        for inv in self:
-            move = inv.move_id
-            assets = [aml.asset_id for aml in
-                      filter(lambda x: x.asset_id, move.line_ids)]
-            for asset in assets:
-                asset.code = inv.internal_number
-                asset_line_name = asset._get_depreciation_entry_name()
-                asset.depreciation_line_ids[0].with_context(
-                    {'allow_asset_line_update': True}
-                    ).name = asset_line_name
-        return True
-
-    @api.multi
     def action_cancel(self):
         for inv in self:
             move = inv.move_id
