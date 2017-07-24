@@ -97,7 +97,7 @@
 
         <menuitem
             action="action_move_template_form" id="menu_action_move_template_form" sequence="5"
-            parent="	account.account_management_menu" groups="account.group_account_manager"/>
+            parent="account.account_management_menu" groups="account.group_account_manager"/>
 
     </data>
 </openerp>
