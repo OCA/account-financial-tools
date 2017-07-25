@@ -1286,4 +1286,41 @@ msgid ""
 " 'form_view_ref': 'financial.financial_move_debt_2receive_form'}"
 msgstr ""
 
+#. module: financial
+#: view:report.xlsx.financial.moves.states.wizard:financial.report_xlsx_financial_moves_states_wizard_form
+msgid "Generate"
+msgstr "Gerar"
 
+#. module: financial
+#: field:report.xlsx.financial.moves.states.wizard,group_by:0
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: financial
+#: code:addons/financial/reports/report_xlsx_financial_moves_states.py:24
+#, python-format
+msgid "Financial Moves To Pay by Maturity"
+msgstr "Movimentações Financeiras a pagar por vencimento"
+
+#. module: financial
+#: code:addons/financial/reports/report_xlsx_financial_moves_states.py:29
+#, python-format
+msgid "Financial Moves To Pay by Partner"
+msgstr "Movimentações Financeiras a pagar por parceiros"
+
+#. module: financial
+#: code:addons/financial/reports/report_xlsx_financial_moves_states.py:22
+#, python-format
+msgid "Financial Moves To Receive by Maturity"
+msgstr "Movimentações Financeiras a receber por vencimento"
+
+#. module: financial
+#: code:addons/financial/reports/report_xlsx_financial_moves_states.py:27
+#, python-format
+msgid "Financial Moves To Receive by Partner"
+msgstr "Movimentações Financeiras a receber por parceiros"
+
+#. module: financial
+#: model:ir.ui.menu,name:financial.report_xlsx_financial_moves_states_wizard_menu
+msgid "Moves State"
+msgstr "Movimentações Financeiras"
