@@ -118,7 +118,16 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 'parc_total': line[11],
                 'partner_id': line[12],
             }
-            report_data['lines'][line[0]] = line_dict
+            if self.report_wizard.group_by == "date_business_maturity":
+                if report_data['lines'].get(line[5]):
+                    report_data['lines'][line[5]].append(line_dict)
+                else:
+                    report_data['lines'][line[5]] = [line_dict]
+            elif self.report_wizard.group_by == "partner_id":
+                if report_data['lines'].get(line[12]):
+                    report_data['lines'][line[12]].append(line_dict)
+                else:
+                    report_data['lines'][line[12]] = [line_dict]
         if self.report_wizard.group_by == "partner_id":
             SQL_VALUE = '''
                 SELECT 
@@ -287,90 +296,63 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
     def write_content(self):
         self.sheet.set_zoom(85)
 
-        group_by_separator = ''
         for move_id in sorted(self.report_data['lines'].keys()):
-            if group_by_separator != self.report_data['lines'][move_id][self.report_wizard.group_by]:
-                if group_by_separator:
-                    if self.report_wizard.group_by == "date_business_maturity":
-                        self.sheet.merge_range(
-                            self.current_row, 0,
-                            self.current_row + 0,
-                            6,
-                            _('Total: ' +
-                              str(self.report_data['lines'][move_id][
-                                  self.report_wizard.group_by])),
-                            self.style.footer
-                        )
-                        self.report_data['total_lines'][group_by_separator].pop('date_business_maturity')
-                        self.write_detail(self.report_data['total_lines'][group_by_separator])
-                        self.current_row += 1
-                    elif self.report_wizard.group_by == "partner_id":
-                        self.sheet.merge_range(
-                            self.current_row, 0,
-                            self.current_row + 0,
-                            6,
-                            _('Total: ' +
-                              str(self.report_data['lines'][move_id][
-                                  self.report_wizard.group_by])),
-                            self.style.footer
-                        )
-                        self.report_data['total_lines'][group_by_separator].pop(
-                            'partner_id')
-                        self.write_detail(self.report_data['total_lines'][group_by_separator])
-                        self.current_row += 1
-                group_by_separator = self.report_data['lines'][move_id][self.report_wizard.group_by]
-                if self.report_wizard.group_by == "date_business_maturity":
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 1,
-                        len(self.columns) - 1,
-                        _('Data de Vencimento: ' + self.report_data['lines'][move_id][self.report_wizard.group_by]),
-                        self.style.header.align_left
-                    )
-                elif self.report_wizard.group_by == "partner_id":
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 1,
-                        len(self.columns) - 1,
-                        _('Parceiro: ' +
-                          str(self.report_data['lines'][move_id][
-                              self.report_wizard.group_by])),
-                        self.style.header.align_left
-                    )
+            if self.report_wizard.group_by == "date_business_maturity":
+                current_date = fields.Datetime.from_string(move_id)
+                current_date = current_date.strftime('%d/%m/%Y')
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Data de Vencimento: ' + current_date),
+                    self.style.header.align_left
+                )
                 self.current_row += 2
                 self.write_header()
-            self.write_detail(self.report_data['lines'][move_id])
-            if move_id == sorted(self.report_data['lines'].keys())[-1]:
-                if self.report_wizard.group_by == "date_business_maturity":
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 0,
-                        6,
-                        _('Total: ' +
-                          str(self.report_data['lines'][move_id][
-                                  self.report_wizard.group_by])),
-                        self.style.footer
-                    )
-                    self.report_data['total_lines'][group_by_separator].pop(
-                        'date_business_maturity')
-                    self.write_detail(
-                        self.report_data['total_lines'][group_by_separator])
-                    self.current_row += 1
-                elif self.report_wizard.group_by == "partner_id":
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 0,
-                        6,
-                        _('Total: ' +
-                          str(self.report_data['lines'][move_id][
-                                  self.report_wizard.group_by])),
-                        self.style.footer
-                    )
-                    self.report_data['total_lines'][group_by_separator].pop(
-                        'partner_id')
-                    self.write_detail(
-                        self.report_data['total_lines'][group_by_separator])
-                    self.current_row += 1
+            elif self.report_wizard.group_by == "partner_id":
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Parceiro: ' + str(move_id)),
+                    self.style.header.align_left
+                )
+                self.current_row += 2
+                self.write_header()
+
+            for line in self.report_data['lines'][move_id]:
+                self.write_detail(line)
+
+            if self.report_wizard.group_by == "date_business_maturity":
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Total'),
+                    self.style.header.align_left
+                )
+                self.current_row += 1
+                self.write_header()
+                self.report_data['total_lines'][move_id].pop(
+                    'date_business_maturity')
+                self.write_detail(
+                    self.report_data['total_lines'][move_id])
+                self.current_row += 1
+            elif self.report_wizard.group_by == "partner_id":
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Total'),
+                    self.style.header.align_left
+                )
+                self.current_row += 1
+                self.write_header()
+                self.report_data['total_lines'][move_id].pop(
+                    'partner_id')
+                self.write_detail(
+                    self.report_data['total_lines'][move_id])
+                self.current_row += 1
 
     def generate_xlsx_report(self, workbook, data, report_wizard):
         super(ReportXslxFinancialMovesStates, self).generate_xlsx_report(
