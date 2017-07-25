@@ -11,11 +11,9 @@ from odoo.exceptions import ValidationError
 from odoo.exceptions import Warning as UserError
 
 from ..constants import (
-    FINANCIAL_DEBT,
     FINANCIAL_DEBT_2RECEIVE,
     FINANCIAL_DEBT_2PAY,
     FINANCIAL_STATE,
-    FINANCIAL_SEQUENCE,
     FINANCIAL_TYPE,
     FINANCIAL_TYPE_CODE,
     FINANCIAL_DEBT_STATUS,
@@ -502,9 +500,9 @@ class FinancialMove(models.Model):
             partner = '-' + record.partner_id.name \
                 if record.partner_id.name else ''
 
-            record.display_name = (financial_type + doc_type +doc_number) \
+            record.display_name = (financial_type + doc_type + doc_number) \
                 if not self._context.get('with_partner_name') \
-                else(financial_type + doc_type + doc_number + partner)
+                else (financial_type + doc_type + doc_number + partner)
 
     @api.depends('date_maturity')
     def _compute_date_business_maturity(self):
@@ -608,6 +606,7 @@ class FinancialMove(models.Model):
         comodel_name="financial.move.motivo.cancelamento",
         string="Motivo do Cancelamento",
     )
+
     @api.multi
     @api.constrains('amount_document')
     def _check_amount(self):
