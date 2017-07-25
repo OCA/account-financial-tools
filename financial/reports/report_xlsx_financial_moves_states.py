@@ -7,12 +7,10 @@
 
 from __future__ import division, print_function, unicode_literals
 
-from psycopg2.extensions import AsIs
-
-from dateutil.relativedelta import relativedelta
 from openerp import _
 from openerp import fields
 from openerp.report import report_sxw
+from psycopg2.extensions import AsIs
 
 from .report_xlsx_financial_base import ReportXlsxFinancialBase
 
@@ -69,7 +67,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
         }
 
         SQL_INICIAL_VALUE = '''
-            SELECT 
+            SELECT
                fm.id,
                fa.code,
                fa.name,
@@ -83,7 +81,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                fm.amount_paid_interest,
                fm.amount_paid_total,
                fm.partner_id
-            FROM 
+            FROM
               financial_move fm
               join financial_account fa on fa.id = fm.account_id
             WHERE
@@ -92,10 +90,14 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                %(date_to)s
               and fm.state = 'open'
             ORDER BY
-              fm.%(group_by)s;
+              fm.%(group_by)s, fm.%(group_by2);
         '''
         filters = {
             'group_by': AsIs(self.report_wizard.group_by),
+            'group_by2':
+                AsIs('partner_id') if
+                self.report_wizard.group_by == 'date_business_maturity' else
+                AsIs('date_business_maturity'),
             'type': self.report_wizard.type,
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
@@ -130,14 +132,14 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                     report_data['lines'][line[12]] = [line_dict]
         if self.report_wizard.group_by == "partner_id":
             SQL_VALUE = '''
-                SELECT 
+                SELECT
                    fm.partner_id,
                    sum(fm.amount_document) as amount_document,
                    sum(fm.amount_paid_discount) as amount_paid_discount,
                    sum(fm.amount_paid_penalty) as amount_paid_penalty,
                    sum(fm.amount_paid_interest) as amount_paid_interest,
                    sum(fm.amount_paid_total) as amount_paid_total
-                FROM 
+                FROM
                     financial_move fm
                     join financial_account fa on fa.id = fm.account_id
                 WHERE
@@ -170,14 +172,14 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 report_data['total_lines'][line[0]] = line_dict
         elif self.report_wizard.group_by == "date_business_maturity":
             SQL_VALUE = '''
-                SELECT 
+                SELECT
                    fm.date_business_maturity,
                    sum(fm.amount_document) as amount_document,
                    sum(fm.amount_paid_discount) as amount_paid_discount,
                    sum(fm.amount_paid_penalty) as amount_paid_penalty,
                    sum(fm.amount_paid_interest) as amount_paid_interest,
                    sum(fm.amount_paid_total) as amount_paid_total
-                FROM 
+                FROM
                     financial_move fm
                     join financial_account fa on fa.id = fm.account_id
                 WHERE
@@ -310,11 +312,18 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 self.current_row += 2
                 self.write_header()
             elif self.report_wizard.group_by == "partner_id":
+                partner = self.env['res.partner'].browse(move_id)
+                partner_cnpj_cpf = " - " + \
+                                   partner.cnpj_cpf if partner.cnpj_cpf else ""
+                partner_email = " - " + \
+                                partner.email if partner.email else ""
                 self.sheet.merge_range(
                     self.current_row, 0,
                     self.current_row + 1,
                     len(self.columns) - 1,
-                    _('Parceiro: ' + str(move_id)),
+                    _('Parceiro: ' + partner.display_name +
+                      partner_cnpj_cpf + partner_email
+                      ),
                     self.style.header.align_left
                 )
                 self.current_row += 2
