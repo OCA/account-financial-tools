@@ -88,9 +88,9 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
               fm.type = %(type)s
               and fm.date_business_maturity between %(date_from)s and
                %(date_to)s
-              and fm.state = 'open'
+              and fm.state in ('open', 'paid')
             ORDER BY
-              fm.%(group_by)s, fm.%(group_by2);
+              fm.%(group_by)s, fm.%(group_by2)s;
         '''
         filters = {
             'group_by': AsIs(self.report_wizard.group_by),
@@ -146,7 +146,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                   fm.type = %(type)s
                   and fm.date_business_maturity between %(date_from)s and
                    %(date_to)s
-                  and fm.state = 'open'
+                  and fm.state in ('open', 'paid')
                 GROUP BY
                   fm.%(group_by)s
                 ORDER BY
@@ -186,7 +186,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                   fm.type = %(type)s
                   and fm.date_business_maturity between %(date_from)s and
                    %(date_to)s
-                  and fm.state = 'open'
+                  and fm.state in ('open', 'paid')
                 GROUP BY
                   fm.%(group_by)s
                 ORDER BY
@@ -295,6 +295,46 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
 
         return result
 
+    def define_columns_summary_total(self):
+        result = {
+            7: {
+                'header': _('Vlr. Original'),
+                'field': 'vlr_original',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            8: {
+                'header': _('Desc.'),
+                'field': 'desc',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            9: {
+                'header': _('Multa'),
+                'field': 'multa',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            10: {
+                'header': _('Juros'),
+                'field': 'juros',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            11: {
+                'header': _('Parc./Total'),
+                'field': 'parc_total',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+        }
+        return result
+
     def write_content(self):
         self.sheet.set_zoom(85)
 
@@ -309,7 +349,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                     _('Data de Vencimento: ' + current_date),
                     self.style.header.align_left
                 )
-                self.current_row += 2
+                self.current_row += 1
                 self.write_header()
             elif self.report_wizard.group_by == "partner_id":
                 partner = self.env['res.partner'].browse(move_id)
@@ -329,8 +369,27 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 self.current_row += 2
                 self.write_header()
 
+            line_position = 0
             for line in self.report_data['lines'][move_id]:
+                if self.report_wizard.group_by == "date_business_maturity" and (line_position == 0 or line['partner_id'] != self.report_data['lines'][move_id][line_position-1]['partner_id']):
+                    partner = self.env['res.partner'].browse(line[u'partner_id'])
+                    partner_cnpj_cpf = " - " + \
+                                       partner.cnpj_cpf if partner.cnpj_cpf else ""
+                    partner_email = " - " + \
+                                    partner.email if partner.email else ""
+                    self.sheet.merge_range(
+                        self.current_row, 0,
+                        self.current_row + 1,
+                        len(self.columns) - 1,
+                        _('Parceiro: ' + partner.display_name +
+                          partner_cnpj_cpf + partner_email
+                          ),
+                        self.style.header.align_left
+                    )
+                    self.current_row += 2
+                    self.write_header()
                 self.write_detail(line)
+                line_position += 1
 
             if self.report_wizard.group_by == "date_business_maturity":
                 self.sheet.merge_range(
@@ -362,6 +421,34 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 self.write_detail(
                     self.report_data['total_lines'][move_id])
                 self.current_row += 1
+
+        self.current_row += 1
+        self.sheet.merge_range(
+            self.current_row, 0,
+            self.current_row + 1,
+            len(self.columns) - 1,
+            _('Total Geral'),
+            self.style.header.align_left
+        )
+        self.current_row += 1
+        self.write_header()
+        total_columns = self.define_columns_summary_total()
+        total_geral_dict = {
+            'vlr_original': 0.00,
+            'desc': 0.00,
+            'multa': 0.00,
+            'juros': 0.00,
+            'parc_total': 0.00,
+        }
+        for total in self.report_data['total_lines']:
+            total_geral_dict['vlr_original'] += float(self.report_data['total_lines'][total]['vlr_original'])
+            total_geral_dict['desc'] += float(self.report_data['total_lines'][total]['desc'])
+            total_geral_dict['multa'] += float(self.report_data['total_lines'][total]['multa'])
+            total_geral_dict['juros'] += float(self.report_data['total_lines'][total]['juros'])
+            total_geral_dict['parc_total'] += float(self.report_data['total_lines'][total]['parc_total'])
+        first_data_row = self.current_row + 1
+        self.write_detail(total_geral_dict, total_columns,
+                          first_data_row)
 
     def generate_xlsx_report(self, workbook, data, report_wizard):
         super(ReportXslxFinancialMovesStates, self).generate_xlsx_report(
