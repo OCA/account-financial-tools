@@ -65,39 +65,69 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
             'lines': {},
             'total_lines': {},
         }
-
-        SQL_INICIAL_VALUE = '''
-            SELECT
-               fm.id,
-               fa.code,
-               fa.name,
-               fm.document_number,
-               fm.date_document,
-               fm.date_business_maturity,
-               fm.date_payment,
-               fm.amount_document,
-               fm.amount_paid_discount,
-               fm.amount_paid_penalty,
-               fm.amount_paid_interest,
-               fm.amount_paid_total,
-               fm.partner_id
-            FROM
-              financial_move fm
-              join financial_account fa on fa.id = fm.account_id
-            WHERE
-              fm.type = %(type)s
-              and fm.date_business_maturity between %(date_from)s and
-               %(date_to)s
-              and fm.state in ('open', 'paid')
-            ORDER BY
-              fm.%(group_by)s, fm.%(group_by2)s;
-        '''
+        if self.report_wizard.selected_partners:
+            SQL_INICIAL_VALUE = '''
+                SELECT
+                   fm.id,
+                   fa.code,
+                   fa.name,
+                   fm.document_number,
+                   fm.date_document,
+                   fm.date_business_maturity,
+                   fm.date_payment,
+                   fm.amount_document,
+                   fm.amount_paid_discount,
+                   fm.amount_paid_penalty,
+                   fm.amount_paid_interest,
+                   fm.amount_paid_total,
+                   fm.partner_id
+                FROM
+                  financial_move fm
+                  join financial_account fa on fa.id = fm.account_id
+                WHERE
+                  fm.type = %(type)s
+                  and fm.partner_id in %(selected_partners)s
+                  and fm.date_business_maturity between %(date_from)s and 
+                  %(date_to)s
+                  and fm.state in ('open', 'paid')
+                ORDER BY
+                  fm.%(group_by)s, fm.%(group_by2)s;
+            '''
+        else:
+            SQL_INICIAL_VALUE = '''
+               SELECT
+                  fm.id,
+                  fa.code,
+                  fa.name,
+                  fm.document_number,
+                  fm.date_document,
+                  fm.date_business_maturity,
+                  fm.date_payment,
+                  fm.amount_document,
+                  fm.amount_paid_discount,
+                  fm.amount_paid_penalty,
+                  fm.amount_paid_interest,
+                  fm.amount_paid_total,
+                  fm.partner_id
+               FROM
+                 financial_move fm
+                 join financial_account fa on fa.id = fm.account_id
+               WHERE
+                 fm.type = %(type)s
+                 and fm.date_business_maturity between %(date_from)s and 
+                 %(date_to)s
+                 and fm.state in ('open', 'paid')
+               ORDER BY
+                 fm.%(group_by)s, fm.%(group_by2)s;
+           '''
         filters = {
             'group_by': AsIs(self.report_wizard.group_by),
             'group_by2':
                 AsIs('partner_id') if
                 self.report_wizard.group_by == 'date_business_maturity' else
                 AsIs('date_business_maturity'),
+            'selected_partners':
+                AsIs(tuple(self.report_wizard.selected_partners.ids)),
             'type': self.report_wizard.type,
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,

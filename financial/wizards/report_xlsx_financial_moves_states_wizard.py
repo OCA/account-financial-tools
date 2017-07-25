@@ -8,7 +8,7 @@
 from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
-from openerp import fields, models, api
+from openerp import fields, models, api, _
 
 
 class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
@@ -24,25 +24,33 @@ class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
         string='Group By',
         required=True,
         selection=[
-            ('date_business_maturity', 'Maturity'),
-            ('partner_id', 'Partner'),
+            ('date_business_maturity', _('Maturity')),
+            ('partner_id', _('Partner')),
         ],
         default='date_business_maturity',
     )
+    selected_partners = fields.Many2many(
+        comodel_name="res.partner",
+        relation="financial_move_partner",
+        column1="wizard_id",
+        column2="partner_id",
+    )
     type = fields.Selection(
-        string='Type',
+        string=_('Type'),
         required=True,
         selection=[
-            ('2receive', 'To Receive'),
-            ('2pay', 'To Pay')
+            ('2receive', _('To Receive')),
+            ('2pay', _('To Pay'))
         ],
         default='2receive',
     )
     date_from = fields.Date(
+        string=_("Date From"),
         required=True,
         default=datetime.now().strftime('%Y-%m-01'),
     )
     date_to = fields.Date(
+        string=_("Date To"),
         required=True,
         default=datetime.now().strftime('%Y-12-31'),
     )
