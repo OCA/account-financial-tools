@@ -44,6 +44,16 @@ class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
         ],
         default='2receive',
     )
+    move_state = fields.Selection(
+        string=_('State'),
+        selection=[
+            ('open', 'Open'),
+            ('paid', 'Paid'),
+        ],
+        help=_(
+            "If none of the options was selected, all of them will be search!"
+        )
+    )
     date_from = fields.Date(
         string=_("Date From"),
         required=True,

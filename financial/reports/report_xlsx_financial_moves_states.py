@@ -89,7 +89,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                   and fm.partner_id in %(selected_partners)s
                   and fm.date_business_maturity between %(date_from)s and 
                   %(date_to)s
-                  and fm.state in ('open', 'paid')
+                  and fm.state %(state)s
                 ORDER BY
                   fm.%(group_by)s, fm.%(group_by2)s;
             '''
@@ -116,10 +116,12 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                  fm.type = %(type)s
                  and fm.date_business_maturity between %(date_from)s and 
                  %(date_to)s
-                 and fm.state in ('open', 'paid')
+                 and fm.state %(state)s
                ORDER BY
                  fm.%(group_by)s, fm.%(group_by2)s;
            '''
+        fm_state = "= '" + self.report_wizard.move_state + "'" if\
+            self.report_wizard.move_state else "in ('open', 'paid')"
         filters = {
             'group_by': AsIs(self.report_wizard.group_by),
             'group_by2':
@@ -131,6 +133,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
             'type': self.report_wizard.type,
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
+            'state': AsIs(fm_state),
         }
         self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
@@ -176,17 +179,20 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                   fm.type = %(type)s
                   and fm.date_business_maturity between %(date_from)s and
                    %(date_to)s
-                  and fm.state in ('open', 'paid')
+                  and fm.state %(state)s
                 GROUP BY
                   fm.%(group_by)s
                 ORDER BY
                   fm.%(group_by)s;
             '''
+            fm_state = "= '" + self.report_wizard.move_state + "'" if \
+                self.report_wizard.move_state else "in ('open', 'paid')"
             filters = {
                 'group_by': AsIs(self.report_wizard.group_by),
                 'type': self.report_wizard.type,
                 'date_to': self.report_wizard.date_to,
                 'date_from': self.report_wizard.date_from,
+                'state': AsIs(fm_state),
             }
             self.env.cr.execute(SQL_VALUE, filters)
             data = self.env.cr.fetchall()
@@ -216,17 +222,20 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                   fm.type = %(type)s
                   and fm.date_business_maturity between %(date_from)s and
                    %(date_to)s
-                  and fm.state in ('open', 'paid')
+                  and fm.state %(state)s
                 GROUP BY
                   fm.%(group_by)s
                 ORDER BY
                   fm.%(group_by)s;
             '''
+            fm_state = "= '" + self.report_wizard.move_state + "'" if \
+                self.report_wizard.move_state else "in ('open', 'paid')"
             filters = {
                 'group_by': AsIs(self.report_wizard.group_by),
                 'type': self.report_wizard.type,
                 'date_to': self.report_wizard.date_to,
                 'date_from': self.report_wizard.date_from,
+                'state': AsIs(fm_state),
             }
             self.env.cr.execute(SQL_VALUE, filters)
             data = self.env.cr.fetchall()

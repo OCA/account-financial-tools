@@ -21,6 +21,9 @@
                 <group>
                     <field name="type" />
                 </group>
+                <group>
+                    <field name="move_state" />
+                </group>
                 <group string="Period">
                     <group>
                         <field name="date_from"/>
