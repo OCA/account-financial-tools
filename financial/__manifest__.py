@@ -30,6 +30,9 @@
         #
         'account',
     ],
+    'external_dependencies': {
+        'python': ['html2text'],
+    },
     'data': [
         'views/financial_menu.xml',
 
