@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Daniel Sadamo <daniel.sadamo@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<openerp>
+<data>
+    <record model="ir.actions.report.xml" id="report_xlsx_financial_partner_statement_action">
+        <field name="name">Financial Partner Statement</field>
+        <field name="type">ir.actions.report.xml</field>
+        <!-- model is where the data for the report will come from -->
+        <field name="model">report.xlsx.financial.partner.statement.wizard</field>
+        <!-- name must *never* be preceeded by "report.", it will be added automaticaly -->
+        <field name="report_name">report_xlsx_financial_partner_statement</field>
+        <field name="report_type">xlsx</field>
+        <field name="auto" eval="False"/>
+    </record>
+</data>
+</openerp>
