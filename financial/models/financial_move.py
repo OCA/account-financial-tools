@@ -579,6 +579,21 @@ class FinancialMove(models.Model):
     def _track_visibility_onchange(self):
         return 'onchange'
 
+    @api.depends('company_id.today_date')
+    def _compute_arrears_days(self):
+        def date_value(date_str):
+            return fields.Date.from_string(date_str)
+        for record in self:
+            date_diference = False
+            if record.debt_status == 'paid':
+                date_diference = date_value(record.date_payment) - \
+                                 date_value(record.date_business_maturity)
+            elif record.debt_status == 'overdue':
+                date_diference = date_value(record.company_id.today_date) - \
+                                 date_value(record.date_business_maturity)
+            arrears = date_diference and date_diference.days or 0
+            record.arrears_days = arrears
+
     ref = fields.Char(
         required=True,
         copy=False,
@@ -605,6 +620,11 @@ class FinancialMove(models.Model):
     motivo_cancelamento_id = fields.Many2one(
         comodel_name="financial.move.motivo.cancelamento",
         string="Motivo do Cancelamento",
+    )
+    arrears_days = fields.Integer(
+        string='Arrears Days',
+        compute='_compute_arrears_days',
+        store=True
     )
 
     @api.multi

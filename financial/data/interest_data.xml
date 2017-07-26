@@ -14,5 +14,17 @@
                 <field eval="'financial.move'" name="model"/>
                 <field eval="'cron_interest'" name="function"/>
             </record>
+
+            <record id="ir_cron_scheduler_today_date" model="ir.cron">
+                <field name="name">Update reference date today</field>
+                <field name="user_id" ref="base.user_root"/>
+                <field name="interval_number">1</field>
+                <field name="interval_type">days</field>
+                <field name="numbercall">-1</field>
+                <field eval="True" name="doall"/>
+                <field eval="'res.company'" name="model"/>
+                <field eval="'cron_update_reference_date_today'" name="function"/>
+            </record>
+
     </data>
 </odoo>

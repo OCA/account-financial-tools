@@ -10,3 +10,4 @@ from . import inherited_res_partner_bank
 from . import financial_move
 from . import financial_installment
 from . import financial_installment_simulation
+from . import inherited_res_company
