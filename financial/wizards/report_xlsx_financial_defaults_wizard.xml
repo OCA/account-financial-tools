@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2017 KMEE
+    Copyright 2017 KMEE - Luiz Felipe do Divino <luiz.divino@kmee.com.br>
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<openerp>
+<data>
+    <record model="ir.ui.view" id="report_xlsx_financial_defaults_wizard_form">
+        <field name="name">report.xlsx.financial.defaults.wizard.form (in financial)</field>
+        <field name="model">report.xlsx.financial.defaults.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group name="main_info">
+                    <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                </group>
+                <group>
+                    <field name="selected_partners" />
+                </group>
+                <group string="Period">
+                    <group>
+                        <field name="date_from"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="generate_report" string="Generate" type="object"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="report_xlsx_financial_defaults_wizard_action">
+        <field name="name">Financial Defaults</field>
+        <field name="res_model">report.xlsx.financial.defaults.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.menu" id="report_xlsx_financial_defaults_wizard_menu">
+        <field name="name">Defaults</field>
+        <field name="parent_id" ref="financial.financial_report_menu"/>
+        <field name="action" ref="report_xlsx_financial_defaults_wizard_action"/>
+        <field name="sequence" eval="4"/>
+    </record>
+</data>
+</openerp>
