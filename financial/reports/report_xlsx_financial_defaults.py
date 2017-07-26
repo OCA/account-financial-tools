@@ -339,6 +339,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                 )
                 self.current_row += 1
                 self.write_header()
+                self.current_row += 1
 
                 line_position = 0
                 for line in self.report_data['lines']['due_today'][move_id]:
@@ -408,6 +409,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             )
             self.current_row += 1
             self.write_header()
+            self.current_row += 1
             for move_id in sorted(self.report_data['lines']['overdue'].keys()):
                 line_position = 0
                 for line in self.report_data['lines']['overdue'][move_id]:
