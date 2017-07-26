@@ -6,7 +6,7 @@
 #
 
 from __future__ import division, print_function, unicode_literals
-
+import html2text
 from openerp import _
 from openerp import fields
 from openerp.report import report_sxw
@@ -79,16 +79,19 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                 join financial_account fa on fa.id = fm.account_id
             WHERE
                 fm.type = '2receive'
-                and fm.partner_id in %(selected_partners)s
+                and fm.partner_id %(selected_partners)s
                 and fm.date_business_maturity between %(date_from)s and 
                 %(date_to)s
                 and fm.debt_status in ('due_today', 'overdue')
             ORDER BY
                 fm.debt_status, fm.date_business_maturity;
         '''
+        selected_partners = "= " + str(
+            self.report_wizard.selected_partners.id) if len(
+            self.report_wizard.selected_partners.ids) == 1 else "in " + str(
+            tuple(self.report_wizard.selected_partners.ids))
         filters = {
-            'selected_partners':
-                AsIs(tuple(self.report_wizard.selected_partners.ids)),
+            'selected_partners': AsIs(selected_partners),
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
         }
@@ -96,6 +99,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
         data = self.env.cr.fetchall()
         for line in data:
             line_dict = {
+                'id': line[0],
                 'cod_conta': line[1],
                 'conta': line[2],
                 'num_documento': line[3],
@@ -109,6 +113,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                 'juros': line[10],
                 'parc_total': line[11],
                 'partner_id': line[12],
+
             }
             if line[13] == "due_today":
                 if report_data['lines']['due_today'].get(line[5]):
@@ -133,7 +138,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                 join financial_account fa on fa.id = fm.account_id
             WHERE
               fm.type = '2receive'
-              and fm.partner_id in %(selected_partners)s
+              and fm.partner_id %(selected_partners)s
               and fm.date_business_maturity between %(date_from)s and 
               %(date_to)s
               and fm.debt_status in ('due_today', 'overdue')
@@ -142,9 +147,12 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             ORDER BY
               fm.date_business_maturity;
         '''
+        selected_partners = "= " + str(
+            self.report_wizard.selected_partners.id) if len(
+            self.report_wizard.selected_partners.ids) == 1 else "in " + str(
+            tuple(self.report_wizard.selected_partners.ids))
         filters = {
-            'selected_partners':
-                AsIs(tuple(self.report_wizard.selected_partners.ids)),
+            'selected_partners': AsIs(selected_partners),
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
         }
@@ -285,107 +293,179 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
         }
         return result
 
+    def define_columns_messages(self):
+        result = {
+            0: {
+                'header': _('Data:'),
+                'field': 'date_email',
+                'width': 20,
+                'style': 'date',
+                'type': 'date',
+            },
+            1: {
+                'header': _('Email:'),
+                'field': 'body_email',
+                'width': 20,
+            },
+        }
+        return result
+
+    def define_columns_messages_header(self):
+        result = {
+            0: {
+                'header': _('Data:'),
+                'field': 'date_email',
+                'width': 20,
+            },
+            1: {
+                'header': _('Email:'),
+                'field': 'body_email',
+                'width': 20,
+            },
+        }
+        return result
+
     def write_content(self):
         self.sheet.set_zoom(85)
 
-        for move_id in sorted(self.report_data['lines']['due_today'].keys()):
-            current_date = fields.Datetime.from_string(move_id)
-            current_date = current_date.strftime('%d/%m/%Y')
+        if len(self.report_data['lines']['due_today']) > 0:
+            for move_id in sorted(self.report_data['lines']['due_today'].keys()):
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Situação: A Vencer'),
+                    self.style.header.align_left
+                )
+                self.current_row += 1
+                self.write_header()
+
+                line_position = 0
+                for line in self.report_data['lines']['due_today'][move_id]:
+                    if line_position == 0 or line['partner_id'] != self.report_data['lines']['due_today'][move_id][line_position-1]['partner_id']:
+                        partner = self.env['res.partner'].browse(line[u'partner_id'])
+                        partner_cnpj_cpf = " - " + \
+                                           partner.cnpj_cpf if partner.cnpj_cpf else ""
+                        partner_email = " - " + \
+                                        partner.email if partner.email else ""
+                        self.sheet.merge_range(
+                            self.current_row, 0,
+                            self.current_row + 1,
+                            len(self.columns) - 1,
+                            _('Parceiro: ' + partner.display_name +
+                              partner_cnpj_cpf + partner_email
+                              ),
+                            self.style.header.align_left
+                        )
+                        self.current_row += 2
+                        self.write_header()
+                    self.write_detail(line)
+                    line_position += 1
+                    financial_move = self.env['financial.move'].browse(line['id'])
+                    if len(financial_move.message_ids) > 2:
+                        self.current_row += 1
+                        message_columns = self.define_columns_messages()
+                        message_columns_head = self.define_columns_messages_header()
+                        for current_column, column in iter(
+                                message_columns_head.items()):
+                            self.sheet.write(self.current_row, current_column,
+                                             column['header'],
+                                             self.style.header.align_center)
+                        self.current_row += 1
+
+                        for message in financial_move.message_ids[:-2]:
+                            message_info = {
+                                'date_email': message.date,
+                                'body_email': html2text.html2text(message.body),
+                            }
+                            self.write_detail(
+                                message_info, message_columns, self.current_row + 1
+                            )
+                            self.current_row += 1
+
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Total'),
+                    self.style.header.align_left
+                )
+                self.current_row += 1
+                self.write_header()
+                self.report_data['total_lines'][move_id].pop(
+                    'date_business_maturity')
+                self.write_detail(
+                    self.report_data['total_lines'][move_id])
+                self.current_row += 1
+
+        if len(self.report_data['lines']['overdue']) > 0:
             self.sheet.merge_range(
                 self.current_row, 0,
                 self.current_row + 1,
                 len(self.columns) - 1,
-                _('Situação: A Vencer'),
+                _('Situação: Vencidos'),
                 self.style.header.align_left
             )
             self.current_row += 1
             self.write_header()
+            for move_id in sorted(self.report_data['lines']['overdue'].keys()):
+                line_position = 0
+                for line in self.report_data['lines']['overdue'][move_id]:
+                    if line_position == 0 or line['partner_id'] != self.report_data['lines']['overdue'][move_id][line_position-1]['partner_id']:
+                        partner = self.env['res.partner'].browse(line[u'partner_id'])
+                        partner_cnpj_cpf = " - " + \
+                                           partner.cnpj_cpf if partner.cnpj_cpf else ""
+                        partner_email = " - " + \
+                                        partner.email if partner.email else ""
+                        self.sheet.merge_range(
+                            self.current_row, 0,
+                            self.current_row + 1,
+                            len(self.columns) - 1,
+                            _('Parceiro: ' + partner.display_name +
+                              partner_cnpj_cpf + partner_email
+                              ),
+                            self.style.header.align_left
+                        )
+                        self.current_row += 2
+                        self.write_header()
+                    self.write_detail(line)
+                    line_position += 1
+                    financial_move = self.env['financial.move'].browse(line['id'])
+                    if len(financial_move.message_ids) > 2:
+                        self.current_row += 1
+                        message_columns = self.define_columns_messages()
+                        message_columns_head = self.define_columns_messages_header()
+                        for current_column, column in iter(message_columns_head.items()):
+                            self.sheet.write(self.current_row, current_column,
+                                             column['header'],
+                                             self.style.header.align_center)
+                        self.current_row += 1
 
-            line_position = 0
-            for line in self.report_data['lines']['due_today'][move_id]:
-                if line_position == 0 or line['partner_id'] != self.report_data['lines']['due_today'][move_id][line_position-1]['partner_id']:
-                    partner = self.env['res.partner'].browse(line[u'partner_id'])
-                    partner_cnpj_cpf = " - " + \
-                                       partner.cnpj_cpf if partner.cnpj_cpf else ""
-                    partner_email = " - " + \
-                                    partner.email if partner.email else ""
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 1,
-                        len(self.columns) - 1,
-                        _('Parceiro: ' + partner.display_name +
-                          partner_cnpj_cpf + partner_email
-                          ),
-                        self.style.header.align_left
-                    )
-                    self.current_row += 2
-                    self.write_header()
-                self.write_detail(line)
-                line_position += 1
+                        for message in financial_move.message_ids[:-2]:
+                            message_info = {
+                                'date_email': message.date,
+                                'body_email': html2text.html2text(message.body),
+                            }
+                            self.write_detail(
+                                message_info, message_columns, self.current_row + 1
+                            )
+                            self.current_row += 1
 
-            self.sheet.merge_range(
-                self.current_row, 0,
-                self.current_row + 1,
-                len(self.columns) - 1,
-                _('Total'),
-                self.style.header.align_left
-            )
-            self.current_row += 1
-            self.write_header()
-            self.report_data['total_lines'][move_id].pop(
-                'date_business_maturity')
-            self.write_detail(
-                self.report_data['total_lines'][move_id])
-            self.current_row += 1
+                self.sheet.merge_range(
+                    self.current_row, 0,
+                    self.current_row + 1,
+                    len(self.columns) - 1,
+                    _('Total'),
+                    self.style.header.align_left
+                )
+                self.current_row += 1
+                self.write_header()
+                self.report_data['total_lines'][move_id].pop(
+                    'date_business_maturity')
+                self.write_detail(
+                    self.report_data['total_lines'][move_id])
+                self.current_row += 1
 
-        current_date = fields.Datetime.from_string(move_id)
-        current_date = current_date.strftime('%d/%m/%Y')
-        self.sheet.merge_range(
-            self.current_row, 0,
-            self.current_row + 1,
-            len(self.columns) - 1,
-            _('Situação: Vencidos'),
-            self.style.header.align_left
-        )
-        self.current_row += 1
-        self.write_header()
-        for move_id in sorted(self.report_data['lines']['overdue'].keys()):
-            line_position = 0
-            for line in self.report_data['lines']['overdue'][move_id]:
-                if line_position == 0 or line['partner_id'] != self.report_data['lines']['overdue'][move_id][line_position-1]['partner_id']:
-                    partner = self.env['res.partner'].browse(line[u'partner_id'])
-                    partner_cnpj_cpf = " - " + \
-                                       partner.cnpj_cpf if partner.cnpj_cpf else ""
-                    partner_email = " - " + \
-                                    partner.email if partner.email else ""
-                    self.sheet.merge_range(
-                        self.current_row, 0,
-                        self.current_row + 1,
-                        len(self.columns) - 1,
-                        _('Parceiro: ' + partner.display_name +
-                          partner_cnpj_cpf + partner_email
-                          ),
-                        self.style.header.align_left
-                    )
-                    self.current_row += 2
-                    self.write_header()
-                self.write_detail(line)
-                line_position += 1
-
-            self.sheet.merge_range(
-                self.current_row, 0,
-                self.current_row + 1,
-                len(self.columns) - 1,
-                _('Total'),
-                self.style.header.align_left
-            )
-            self.current_row += 1
-            self.write_header()
-            self.report_data['total_lines'][move_id].pop(
-                'date_business_maturity')
-            self.write_detail(
-                self.report_data['total_lines'][move_id])
-            self.current_row += 1
 
         self.current_row += 1
         self.sheet.merge_range(
