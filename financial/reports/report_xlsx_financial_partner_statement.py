@@ -22,7 +22,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             partner_type = 'Client'
         else:
             partner_type = 'Supplier'
-        return _('%s Statement - %s' % partner_type, partner_name)
+        return _('%s Statement - %s' % (partner_type, partner_name))
 
     def define_filters(self):
         date_from = fields.Datetime.from_string(self.report_wizard.date_from)
@@ -56,42 +56,40 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         # First, we prepare the report_data lines, time_span and accounts
         #
         report_data = {
-            'lines': {},
-            'total_lines': {},
+            'moves': [],
+            'total_lines': {
+                'total_vlr_bruto': 0.00,
+                'total_vlr': 0.00,
+                'total_saldo_dev': 0.00,
+                'total_valor_rec': 0.00,
+                'total_desc': 0.00,
+                'total_multa': 0.00,
+                'total_juros': 0.00,
+                'total_rec': 0.00,
+            },
         }
 
         SQL_INICIAL_VALUE = '''
             SELECT
                fm.id,
-               fa.code,
-               fa.name,
-               fm.document_number,
                fm.date_document,
+               fm.document_number,
                fm.date_business_maturity,
-               fm.date_payment,
-               fm.amount_document,
-               fm.amount_paid_discount,
-               fm.amount_paid_penalty,
-               fm.amount_paid_interest,
-               fm.amount_paid_total,
+               COALESCE(fm.amount_document, 0.0),
+               COALESCE(fm.amount_paid, 0.0),
+               fm.arrears_days,
+               COALESCE(fm.amount_residual, 0.0),
                fm.partner_id
             FROM
               financial_move fm
-              join financial_account fa on fa.id = fm.account_id
             WHERE
               fm.type = %(type)s
               and fm.date_business_maturity between %(date_from)s and
                %(date_to)s
-              and fm.state = 'open'
-            ORDER BY
-              fm.%(group_by)s, fm.%(group_by2);
+              and fm.partner_id = %(partner_id)s;
         '''
         filters = {
-            'group_by': AsIs(self.report_wizard.group_by),
-            'group_by2':
-                AsIs('partner_id') if
-                self.report_wizard.group_by == 'date_business_maturity' else
-                AsIs('date_business_maturity'),
+            'partner_id': self.report_wizard.partner_id.id,
             'type': self.report_wizard.type,
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
@@ -99,111 +97,60 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
         for line in data:
-            line_dict = {
-                'cod_conta': line[1],
-                'conta': line[2],
-                'num_documento': line[3],
-                'dt_doc': line[4],
-                'date_business_maturity': line[5],
-                'dt_quit': line[6],
-                # 'prov': line[7],
-                'vlr_original': line[7],
-                'desc': line[8],
-                'multa': line[9],
-                'juros': line[10],
-                'parc_total': line[11],
-                'partner_id': line[12],
+            move_dict = {
+                'move_id': line[0],
+                'date_document': line[1],
+                'document_number': line[2],
+                'date_business_maturity': line[3],
+                'amount_document': line[4],
+                'amount_paid': line[5],
+                'arrears_days': line[6],
+                'amount_residual': line[7],
+                'partner_id': line[8],
             }
-            if self.report_wizard.group_by == "date_business_maturity":
-                if report_data['lines'].get(line[5]):
-                    report_data['lines'][line[5]].append(line_dict)
-                else:
-                    report_data['lines'][line[5]] = [line_dict]
-            elif self.report_wizard.group_by == "partner_id":
-                if report_data['lines'].get(line[12]):
-                    report_data['lines'][line[12]].append(line_dict)
-                else:
-                    report_data['lines'][line[12]] = [line_dict]
-        if self.report_wizard.group_by == "partner_id":
+            report_data['total_lines']['total_vlr_bruto'] += float(line[4])
+            report_data['total_lines']['total_vlr'] += float(line[5])
+            report_data['total_lines']['total_saldo_dev'] += float(line[7])
+
             SQL_VALUE = '''
                 SELECT
-                   fm.partner_id,
-                   sum(fm.amount_document) as amount_document,
-                   sum(fm.amount_paid_discount) as amount_paid_discount,
-                   sum(fm.amount_paid_penalty) as amount_paid_penalty,
-                   sum(fm.amount_paid_interest) as amount_paid_interest,
-                   sum(fm.amount_paid_total) as amount_paid_total
+                   COALESCE(fm.amount_paid, 0.0),
+                   COALESCE(fm.amount_discount, 0.0),
+                   COALESCE(fm.amount_penalty_forecast, 0.0),
+                   COALESCE(fm.amount_interest_forecast, 0.0),
+                   fm.date_payment,
+                   COALESCE(fm.amount_total, 0.0),
+                   fm.debt_status,
+                   fm.debt_id
                 FROM
-                    financial_move fm
-                    join financial_account fa on fa.id = fm.account_id
+                  financial_move fm
                 WHERE
-                  fm.type = %(type)s
-                  and fm.date_business_maturity between %(date_from)s and
-                   %(date_to)s
-                  and fm.state = 'open'
-                GROUP BY
-                  fm.%(group_by)s
-                ORDER BY
-                  fm.%(group_by)s;
+                  fm.debt_id = %(debt_id)s ;
             '''
             filters = {
-                'group_by': AsIs(self.report_wizard.group_by),
-                'type': self.report_wizard.type,
-                'date_to': self.report_wizard.date_to,
-                'date_from': self.report_wizard.date_from,
+                'debt_id': line[0],
             }
             self.env.cr.execute(SQL_VALUE, filters)
-            data = self.env.cr.fetchall()
-            for line in data:
+            data2 = self.env.cr.fetchall()
+            for line in data2:
                 line_dict = {
-                    'vlr_original': line[1],
-                    'desc': line[2],
-                    'multa': line[3],
-                    'juros': line[4],
-                    'parc_total': line[5],
-                    'partner_id': line[0],
+                    'amount_paid': line[0] or 0.0,
+                    'amount_discount': line[1] or 0.0,
+                    'amount_penalty_forecast': line[2] or 0.0,
+                    'amount_interest_forecast': line[3] or 0.0,
+                    'date_payment': line[4],
+                    'amount_total': line[5] or 0.0,
+                    'debt_status': line[6],
                 }
-                report_data['total_lines'][line[0]] = line_dict
-        elif self.report_wizard.group_by == "date_business_maturity":
-            SQL_VALUE = '''
-                SELECT
-                   fm.date_business_maturity,
-                   sum(fm.amount_document) as amount_document,
-                   sum(fm.amount_paid_discount) as amount_paid_discount,
-                   sum(fm.amount_paid_penalty) as amount_paid_penalty,
-                   sum(fm.amount_paid_interest) as amount_paid_interest,
-                   sum(fm.amount_paid_total) as amount_paid_total
-                FROM
-                    financial_move fm
-                    join financial_account fa on fa.id = fm.account_id
-                WHERE
-                  fm.type = %(type)s
-                  and fm.date_business_maturity between %(date_from)s and
-                   %(date_to)s
-                  and fm.state = 'open'
-                GROUP BY
-                  fm.%(group_by)s
-                ORDER BY
-                  fm.%(group_by)s;
-            '''
-            filters = {
-                'group_by': AsIs(self.report_wizard.group_by),
-                'type': self.report_wizard.type,
-                'date_to': self.report_wizard.date_to,
-                'date_from': self.report_wizard.date_from,
-            }
-            self.env.cr.execute(SQL_VALUE, filters)
-            data = self.env.cr.fetchall()
-            for line in data:
-                line_dict = {
-                    'vlr_original': line[1],
-                    'desc': line[2],
-                    'multa': line[3],
-                    'juros': line[4],
-                    'parc_total': line[5],
-                    'date_business_maturity': line[0],
-                }
-                report_data['total_lines'][line[0]] = line_dict
+                move_dict['payment_lines'] = line_dict
+                report_data['total_lines']['total_valor_rec'] += float(line[0])
+                report_data['total_lines']['total_desc'] += float(line[1])
+                report_data['total_lines']['total_multa'] += float(line[2])
+                report_data['total_lines']['total_juros'] += float(line[3])
+                report_data['total_lines']['total_rec'] += float(line[5])
+
+            report_data['moves'].append(move_dict)
+
         return report_data
 
     def define_columns(self):
@@ -243,7 +190,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             },
             5: {
                 'header': _('Atraso'),
-                'field': '',
+                'field': 'arrears_days',
                 'width': 20,
             },
             6: {
@@ -258,49 +205,49 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             #
             7: {
                 'header': _('Valor'),
-                'field': '',
+                'field': 'amount_paid',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency',
             },
             8: {
                 'header': _('Desc.'),
-                'field': 'desc',
+                'field': 'amount_discount',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency',
             },
             9: {
                 'header': _('Multa'),
-                'field': 'multa',
+                'field': 'amount_penalty_forecast',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency',
             },
             10: {
                 'header': _('Juros'),
-                'field': 'juros',
+                'field': 'amount_interest_forecast',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency',
             },
             11: {
                 'header': _('Data Recebimento'),
-                'field': '',
+                'field': 'date_payment',
                 'width': 20,
                 'style': 'date',
                 'type': 'date',
             },
             12: {
                 'header': _('Total Recebido'),
-                'field': '',
+                'field': 'amount_total',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency'
             },
             13: {
                 'header': _('Status'),
-                'field': 'state',
+                'field': 'debt_status',
                 'width': 20,
             },
         }

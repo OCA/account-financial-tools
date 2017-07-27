@@ -25,6 +25,15 @@ class ReportXlsxFinancialFinancialPartnerStatementWizard(models.TransientModel):
     _name = b'report.xlsx.financial.partner.statement.wizard'
     _description = 'Report Xlsx Financial Partner Statement Wizard'
 
+    @api.onchange('type')
+    def _onchange_type(self):
+        if self.type == '2pay':
+            field = 'supplier'
+        else:
+            field = 'customer'
+        domain = {'domain': {'partner_id': [(field, '=', True)]}}
+        return domain
+
     company_id = fields.Many2one(
         comodel_name='res.company',
         default=lambda self: self.env.user.company_id,
@@ -33,7 +42,6 @@ class ReportXlsxFinancialFinancialPartnerStatementWizard(models.TransientModel):
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         required=True,
-        domain="[('customer','=', True)]"
     )
     date_from = fields.Date(
         required=True,
