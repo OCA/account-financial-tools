@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Cristian Salamea <ovnicraft@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 00:39+0000\n"
-"PO-Revision-Date: 2017-05-11 00:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-05-30 00:47+0000\n"
+"PO-Revision-Date: 2017-05-30 00:47+0000\n"
+"Last-Translator: Cristian Salamea <ovnicraft@gmail.com>, 2017\n"
 "Language-Team: Spanish (Ecuador) (https://www.transifex.com/oca/teams/23907/es_EC/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,7 +134,7 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
 msgid "Reconcile"
-msgstr ""
+msgstr "Conciliar"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_date
@@ -141,7 +142,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3705
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3707
 msgid "Reversal Entry"
 msgstr ""
 
