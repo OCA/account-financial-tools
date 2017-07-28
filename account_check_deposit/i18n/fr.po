@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2018-01-25 11:46+0000\n"
+"PO-Revision-Date: 2018-01-25 11:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -83,14 +83,14 @@ msgid "Check Deposit"
 msgstr "Remise de chèque"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:162
-#: code:addons/account_check_deposit/models/account_deposit.py:201
+#: code:addons/account_check_deposit/models/account_deposit.py:167
+#: code:addons/account_check_deposit/models/account_deposit.py:206
 #, python-format
 msgid "Check Deposit %s"
 msgstr "Remise de chèque %s"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:171
+#: code:addons/account_check_deposit/models/account_deposit.py:176
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -143,12 +143,12 @@ msgstr "Société"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_uid
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Créer par"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_create_date
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Créer le"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_currency_id
@@ -256,13 +256,13 @@ msgid "List of checks:"
 msgstr "Liste des chèques :"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:196
+#: code:addons/account_check_deposit/models/account_deposit.py:201
 #, python-format
 msgid "Missing 'Account for Check Deposits' on the company '%s'."
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:190
+#: code:addons/account_check_deposit/models/account_deposit.py:195
 #, python-format
 msgid "Missing 'Default Debit Account' on bank journal '%s'"
 msgstr ""
@@ -345,7 +345,7 @@ msgid "Validate"
 msgstr "Valider"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:185
+#: code:addons/account_check_deposit/models/account_deposit.py:190
 #, python-format
 msgid ""
 "You must configure the 'Check Deposit Offsetting Account' on the Accounting "
