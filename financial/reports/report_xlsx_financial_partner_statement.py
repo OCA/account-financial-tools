@@ -57,6 +57,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         #
         report_data = {
             'moves': [],
+            'moves_lines': [],
             'total_lines': {
                 'total_vlr_bruto': 0.00,
                 'total_vlr': 0.00,
@@ -76,17 +77,20 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                fm.document_number,
                fm.date_business_maturity,
                COALESCE(fm.amount_document, 0.0),
-               COALESCE(fm.amount_paid, 0.0),
+               COALESCE(fm.amount_paid_document, 0.0),
                fm.arrears_days,
                COALESCE(fm.amount_residual, 0.0),
-               fm.partner_id
+               fm.partner_id,
+               fm.debt_status
             FROM
               financial_move fm
             WHERE
               fm.type = %(type)s
               and fm.date_business_maturity between %(date_from)s and
                %(date_to)s
-              and fm.partner_id = %(partner_id)s;
+              and fm.partner_id = %(partner_id)s
+            ORDER BY
+              fm.date_business_maturity
         '''
         filters = {
             'partner_id': self.report_wizard.partner_id.id,
@@ -96,6 +100,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         }
         self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
+        move_ids = []
         for line in data:
             move_dict = {
                 'move_id': line[0],
@@ -107,14 +112,16 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                 'arrears_days': line[6],
                 'amount_residual': line[7],
                 'partner_id': line[8],
+                'debt_status': line[9],
             }
+            move_ids.append(line[0])
             report_data['total_lines']['total_vlr_bruto'] += float(line[4])
             report_data['total_lines']['total_vlr'] += float(line[5])
             report_data['total_lines']['total_saldo_dev'] += float(line[7])
 
             SQL_VALUE = '''
                 SELECT
-                   COALESCE(fm.amount_paid, 0.0),
+                   COALESCE(fm.amount_paid_document, 0.0),
                    COALESCE(fm.amount_discount, 0.0),
                    COALESCE(fm.amount_penalty_forecast, 0.0),
                    COALESCE(fm.amount_interest_forecast, 0.0),
@@ -128,7 +135,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                   fm.debt_id = %(debt_id)s ;
             '''
             filters = {
-                'debt_id': line[0],
+                'debt_id': AsIs(line[0]),
             }
             self.env.cr.execute(SQL_VALUE, filters)
             data2 = self.env.cr.fetchall()
@@ -151,6 +158,49 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
 
             report_data['moves'].append(move_dict)
 
+        SQL_MOVE_LINE_VALUE = '''
+            SELECT
+               fm.id,
+               fm.date_document,
+               fm.document_number,
+               fm.date_business_maturity,
+               COALESCE(fm.amount_document, 0.0),
+               COALESCE(fm.amount_paid_document, 0.0),
+               COALESCE(fm.amount_paid_interest, 0.0),
+               COALESCE(fm.amount_paid_penalty, 0.0),
+               COALESCE(fm.amount_paid_discount, 0.0),
+               fm.arrears_days,
+               COALESCE(fm.amount_residual, 0.0),
+               fm.partner_id,
+               fm.debt_id,
+               fm.date_payment
+            FROM
+              financial_move fm
+            WHERE
+              fm.debt_id in %(move_ids)s
+            ORDER BY
+              fm.debt_id
+                '''
+        filters = {
+            'partner_id': self.report_wizard.partner_id.id,
+            'type': self.report_wizard.type,
+            'date_to': self.report_wizard.date_to,
+            'date_from': self.report_wizard.date_from,
+            'move_ids': AsIs(tuple(move_ids)),
+        }
+        self.env.cr.execute(SQL_MOVE_LINE_VALUE, filters)
+        data_move_lines = self.env.cr.fetchall()
+        for line in data_move_lines:
+            move_line_dict = {
+                'amount_paid_receipt_item': line[4],
+                'amount_discount': line[8],
+                'amount_penalty_forecast': line[7],
+                'amount_interest_forecast': line[6],
+                'date_payment': line[13],
+                'move_id': line[0],
+                'debt_id': line[12],
+            }
+            report_data['moves_lines'].append(move_line_dict)
         return report_data
 
     def define_columns(self):
@@ -205,7 +255,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             #
             7: {
                 'header': _('Valor'),
-                'field': 'amount_paid',
+                'field': 'amount_paid_receipt_item',
                 'width': 20,
                 'style': 'currency',
                 'type': 'currency',
@@ -257,70 +307,114 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
     def write_content(self):
         self.sheet.set_zoom(85)
 
-        for move_id in sorted(self.report_data['lines'].keys()):
-            if self.report_wizard.group_by == "date_business_maturity":
-                current_date = fields.Datetime.from_string(move_id)
-                current_date = current_date.strftime('%d/%m/%Y')
-                self.sheet.merge_range(
-                    self.current_row, 0,
-                    self.current_row + 1,
-                    len(self.columns) - 1,
-                    _('Data de Vencimento: ' + current_date),
-                    self.style.header.align_left
-                )
-                self.current_row += 2
-                self.write_header()
-            elif self.report_wizard.group_by == "partner_id":
-                partner = self.env['res.partner'].browse(move_id)
-                partner_cnpj_cpf = " - " + \
-                                   partner.cnpj_cpf if partner.cnpj_cpf else ""
-                partner_email = " - " + \
-                                partner.email if partner.email else ""
-                self.sheet.merge_range(
-                    self.current_row, 0,
-                    self.current_row + 1,
-                    len(self.columns) - 1,
-                    _('Parceiro: ' + partner.display_name +
-                      partner_cnpj_cpf + partner_email
-                      ),
-                    self.style.header.align_left
-                )
-                self.current_row += 2
-                self.write_header()
+        for move_id in self.report_data['moves']:
+            move_dict = {
+                'document_date': move_id[u'date_document'],
+                'document_number': move_id[u'document_number'],
+                'date_business_maturity': move_id[u'date_business_maturity'],
+                'amount_document': move_id[u'amount_document'],
+                'amount_paid': move_id[u'amount_paid'],
+                'arrears_days': move_id[u'arrears_days'],
+                'amount_residual': move_id[u'amount_residual'],
+                'debt_status': move_id[u'debt_status'],
+                'amount_paid_receipt_item': 0,
+                'amount_discount': 0,
+                'amount_penalty_forecast': 0,
+                'amount_interest_forecast': 0,
+                'date_payment': '',
+                'amount_total': 0,
 
-            for line in self.report_data['lines'][move_id]:
-                self.write_detail(line)
+            }
+            self.write_detail(move_dict)
+            self.current_row += 1
+            cont = 0
+            for move_line_id in self.report_data['moves_lines']:
+                if move_line_id['debt_id'] == move_id['move_id']:
+                    move_line_dict = {
+                        'document_date': '',
+                        'document_number': '',
+                        'date_business_maturity': '',
+                        'amount_document': 0,
+                        'amount_paid_receipt_item': move_line_id['amount_paid_receipt_item'],
+                        'arrears_days': move_line_id['amount_discount'],
+                        'amount_residual': 0,
+                        'amount_discount': move_line_id[u'amount_discount'],
+                        'amount_penalty_forecast': move_line_id['amount_penalty_forecast'],
+                        'amount_interest_forecast': move_line_id['amount_interest_forecast'],
+                        'date_payment': move_line_id[u'date_payment'],
+                        'amount_total': 0,
+                        'debt_status': '',
+                        'amount_paid': 0,
+                    }
+                    self.write_detail(move_line_dict)
+                    self.current_row += 1
+                    del self.report_data['moves_lines'][cont]
+                cont += 1
 
-            if self.report_wizard.group_by == "date_business_maturity":
-                self.sheet.merge_range(
-                    self.current_row, 0,
-                    self.current_row + 1,
-                    len(self.columns) - 1,
-                    _('Total'),
-                    self.style.header.align_left
-                )
-                self.current_row += 1
-                self.write_header()
-                self.report_data['total_lines'][move_id].pop(
-                    'date_business_maturity')
-                self.write_detail(
-                    self.report_data['total_lines'][move_id])
-                self.current_row += 1
-            elif self.report_wizard.group_by == "partner_id":
-                self.sheet.merge_range(
-                    self.current_row, 0,
-                    self.current_row + 1,
-                    len(self.columns) - 1,
-                    _('Total'),
-                    self.style.header.align_left
-                )
-                self.current_row += 1
-                self.write_header()
-                self.report_data['total_lines'][move_id].pop(
-                    'partner_id')
-                self.write_detail(
-                    self.report_data['total_lines'][move_id])
-                self.current_row += 1
+        # for move_id in self.report_data[u'moves']:
+        #     if self.report_wizard.group_by == "date_business_maturity":
+        #         current_date = fields.Datetime.from_string(move_id)
+        #         current_date = current_date.strftime('%d/%m/%Y')
+        #         self.sheet.merge_range(
+        #             self.current_row, 0,
+        #             self.current_row + 1,
+        #             len(self.columns) - 1,
+        #             _('Data de Vencimento: ' + current_date),
+        #             self.style.header.align_left
+        #         )
+        #         self.current_row += 2
+        #         self.write_header()
+        #     elif self.report_wizard.group_by == "partner_id":
+        #         partner = self.env['res.partner'].browse(move_id)
+        #         partner_cnpj_cpf = " - " + \
+        #                            partner.cnpj_cpf if partner.cnpj_cpf else ""
+        #         partner_email = " - " + \
+        #                         partner.email if partner.email else ""
+        #         self.sheet.merge_range(
+        #             self.current_row, 0,
+        #             self.current_row + 1,
+        #             len(self.columns) - 1,
+        #             _('Parceiro: ' + partner.display_name +
+        #               partner_cnpj_cpf + partner_email
+        #               ),
+        #             self.style.header.align_left
+        #         )
+        #         self.current_row += 2
+        #         self.write_header()
+        #
+        #     for line in self.report_data['lines'][move_id]:
+        #         self.write_detail(line)
+        #
+        #     if self.report_wizard.group_by == "date_business_maturity":
+        #         self.sheet.merge_range(
+        #             self.current_row, 0,
+        #             self.current_row + 1,
+        #             len(self.columns) - 1,
+        #             _('Total'),
+        #             self.style.header.align_left
+        #         )
+        #         self.current_row += 1
+        #         self.write_header()
+        #         self.report_data['total_lines'][move_id].pop(
+        #             'date_business_maturity')
+        #         self.write_detail(
+        #             self.report_data['total_lines'][move_id])
+        #         self.current_row += 1
+        #     elif self.report_wizard.group_by == "partner_id":
+        #         self.sheet.merge_range(
+        #             self.current_row, 0,
+        #             self.current_row + 1,
+        #             len(self.columns) - 1,
+        #             _('Total'),
+        #             self.style.header.align_left
+        #         )
+        #         self.current_row += 1
+        #         self.write_header()
+        #         self.report_data['total_lines'][move_id].pop(
+        #             'partner_id')
+        #         self.write_detail(
+        #             self.report_data['total_lines'][move_id])
+        #         self.current_row += 1
 
     def generate_xlsx_report(self, workbook, data, report_wizard):
         super(ReportXslxFinancialPartnerStatement, self).generate_xlsx_report(
