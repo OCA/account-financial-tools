@@ -145,6 +145,14 @@ class ReportXlsxFinancialBase(ReportXlsx):
     def define_detail_default_style(self):
         return self.define_default_style()
 
+    def define_detail_center_default_style(self):
+        style = self.define_default_style()
+        style.update({
+            'align': 'center',
+            'valign': 'vcenter',
+        })
+        return style
+
     def define_footer_default_style(self):
         style = self.define_default_style()
         style.update({
@@ -204,6 +212,7 @@ class ReportXlsxFinancialBase(ReportXlsx):
         self.style.group_header = ReportXlsxStyle()
         self.style.header = ReportXlsxStyle()
         self.style.detail = ReportXlsxStyle()
+        self.style.detail_center = ReportXlsxStyle()
         self.style.footer = ReportXlsxStyle()
         self.style.group_footer = ReportXlsxStyle()
 
@@ -217,6 +226,8 @@ class ReportXlsxFinancialBase(ReportXlsx):
                                    self.define_header_default_style())
         self.define_default_styles(self.style.detail,
                                    self.define_detail_default_style())
+        self.define_default_styles(self.style.detail_center,
+                                   self.define_detail_center_default_style())
         self.define_default_styles(self.style.footer,
                                    self.define_footer_default_style())
         self.define_default_styles(self.style.group_footer,
