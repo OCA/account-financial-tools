@@ -81,7 +81,8 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                fm.arrears_days,
                COALESCE(fm.amount_residual, 0.0),
                fm.partner_id,
-               fm.debt_status
+               fm.debt_status,
+               COALESCE(fm.amount_paid_total)
             FROM
               financial_move fm
             WHERE
@@ -113,6 +114,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                 'amount_residual': line[7],
                 'partner_id': line[8],
                 'debt_status': line[9],
+                'amount_total': line[10],
             }
             move_ids.append(line[0])
             report_data['total_lines']['total_vlr_bruto'] += float(line[4])
@@ -122,9 +124,9 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             SQL_VALUE = '''
                 SELECT
                    COALESCE(fm.amount_paid_document, 0.0),
-                   COALESCE(fm.amount_discount, 0.0),
-                   COALESCE(fm.amount_penalty_forecast, 0.0),
-                   COALESCE(fm.amount_interest_forecast, 0.0),
+                   COALESCE(fm.amount_paid_discount, 0.0),
+                   COALESCE(fm.amount_paid_penalty, 0.0),
+                   COALESCE(fm.amount_paid_interest, 0.0),
                    fm.date_payment,
                    COALESCE(fm.amount_total, 0.0),
                    fm.debt_status,
@@ -165,15 +167,15 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                fm.document_number,
                fm.date_business_maturity,
                COALESCE(fm.amount_document, 0.0),
-               COALESCE(fm.amount_paid_document, 0.0),
-               COALESCE(fm.amount_paid_interest, 0.0),
-               COALESCE(fm.amount_paid_penalty, 0.0),
-               COALESCE(fm.amount_paid_discount, 0.0),
+               COALESCE(fm.amount_interest, 0.0),
+               COALESCE(fm.amount_penalty, 0.0),
+               COALESCE(fm.amount_discount, 0.0),
                fm.arrears_days,
                COALESCE(fm.amount_residual, 0.0),
                fm.partner_id,
                fm.debt_id,
-               fm.date_payment
+               fm.date_payment,
+               COALESCE(fm.amount_total, 0.0)
             FROM
               financial_move fm
             WHERE
@@ -193,14 +195,18 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         for line in data_move_lines:
             move_line_dict = {
                 'amount_paid_receipt_item': line[4],
-                'amount_discount': line[8],
-                'amount_penalty_forecast': line[7],
-                'amount_interest_forecast': line[6],
-                'date_payment': line[13],
+                'amount_discount': line[7],
+                'amount_penalty_forecast': line[6],
+                'amount_interest_forecast': line[5],
+                'date_payment': line[12],
                 'move_id': line[0],
-                'debt_id': line[12],
+                'debt_id': line[11],
+                'amount_total': line[13],
             }
             report_data['moves_lines'].append(move_line_dict)
+            report_data['total_lines']['total_desc'] += float(line[7])
+            report_data['total_lines']['total_multa'] += float(line[6])
+            report_data['total_lines']['total_juros'] += float(line[5])
         return report_data
 
     def define_columns(self):
@@ -208,7 +214,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             0: {
                 'header': _('Data Documento'),
                 'field': 'document_date',
-                'width': 12,
+                'width': 20,
                 'style': 'date',
                 'type': 'date'
             },
@@ -216,6 +222,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                 'header': _('Nº Documento'),
                 'field': 'document_number',
                 'width': 25,
+                'style': self.style.detail_center.align_center,
             },
             2: {
                 'header': _('Vencimento'),
@@ -299,6 +306,69 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                 'header': _('Status'),
                 'field': 'debt_status',
                 'width': 20,
+                'style': self.style.detail_center.align_center,
+            },
+        }
+
+        return result
+
+    def define_total_columns(self):
+        result = {
+            3: {
+                'header': _('Valor Bruto'),
+                'field': 'amount_document',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            4: {
+                'header': _('Valor Pago'),
+                'field': 'amount_paid',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            6: {
+                'header': _('Saldo Devido'),
+                'field': 'amount_residual',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            7: {
+                'header': _('Valor'),
+                'field': 'amount_paid_receipt_item',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            8: {
+                'header': _('Desc.'),
+                'field': 'amount_discount',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            9: {
+                'header': _('Multa'),
+                'field': 'amount_penalty_forecast',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            10: {
+                'header': _('Juros'),
+                'field': 'amount_interest_forecast',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency',
+            },
+            12: {
+                'header': _('Total Recebido'),
+                'field': 'amount_total',
+                'width': 20,
+                'style': 'currency',
+                'type': 'currency'
             },
         }
 
@@ -306,14 +376,29 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
 
     def write_content(self):
         self.sheet.set_zoom(85)
-
+        self.sheet.merge_range(
+            self.current_row, 0,
+            self.current_row + 1,
+            6,
+            _('Lançamentos'),
+            self.style.header.align_center
+        )
+        self.sheet.merge_range(
+            self.current_row, 7,
+            self.current_row + 1,
+            len(self.columns) - 1,
+            _('Recebimentos / Baixa'),
+            self.style.header.align_center
+        )
+        self.current_row += 2
+        self.write_header()
         for move_id in self.report_data['moves']:
             move_dict = {
                 'document_date': move_id[u'date_document'],
                 'document_number': move_id[u'document_number'],
                 'date_business_maturity': move_id[u'date_business_maturity'],
                 'amount_document': move_id[u'amount_document'],
-                'amount_paid': move_id[u'amount_paid'],
+                'amount_paid': move_id[u'amount_total'],
                 'arrears_days': move_id[u'arrears_days'],
                 'amount_residual': move_id[u'amount_residual'],
                 'debt_status': move_id[u'debt_status'],
@@ -326,7 +411,6 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
 
             }
             self.write_detail(move_dict)
-            self.current_row += 1
             cont = 0
             for move_line_id in self.report_data['moves_lines']:
                 if move_line_id['debt_id'] == move_id['move_id']:
@@ -342,79 +426,37 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                         'amount_penalty_forecast': move_line_id['amount_penalty_forecast'],
                         'amount_interest_forecast': move_line_id['amount_interest_forecast'],
                         'date_payment': move_line_id[u'date_payment'],
-                        'amount_total': 0,
+                        'amount_total': move_line_id[u'amount_total'],
                         'debt_status': '',
                         'amount_paid': 0,
                     }
                     self.write_detail(move_line_dict)
-                    self.current_row += 1
-                    del self.report_data['moves_lines'][cont]
+                    # del self.report_data['moves_lines'][cont]
                 cont += 1
-
-        # for move_id in self.report_data[u'moves']:
-        #     if self.report_wizard.group_by == "date_business_maturity":
-        #         current_date = fields.Datetime.from_string(move_id)
-        #         current_date = current_date.strftime('%d/%m/%Y')
-        #         self.sheet.merge_range(
-        #             self.current_row, 0,
-        #             self.current_row + 1,
-        #             len(self.columns) - 1,
-        #             _('Data de Vencimento: ' + current_date),
-        #             self.style.header.align_left
-        #         )
-        #         self.current_row += 2
-        #         self.write_header()
-        #     elif self.report_wizard.group_by == "partner_id":
-        #         partner = self.env['res.partner'].browse(move_id)
-        #         partner_cnpj_cpf = " - " + \
-        #                            partner.cnpj_cpf if partner.cnpj_cpf else ""
-        #         partner_email = " - " + \
-        #                         partner.email if partner.email else ""
-        #         self.sheet.merge_range(
-        #             self.current_row, 0,
-        #             self.current_row + 1,
-        #             len(self.columns) - 1,
-        #             _('Parceiro: ' + partner.display_name +
-        #               partner_cnpj_cpf + partner_email
-        #               ),
-        #             self.style.header.align_left
-        #         )
-        #         self.current_row += 2
-        #         self.write_header()
-        #
-        #     for line in self.report_data['lines'][move_id]:
-        #         self.write_detail(line)
-        #
-        #     if self.report_wizard.group_by == "date_business_maturity":
-        #         self.sheet.merge_range(
-        #             self.current_row, 0,
-        #             self.current_row + 1,
-        #             len(self.columns) - 1,
-        #             _('Total'),
-        #             self.style.header.align_left
-        #         )
-        #         self.current_row += 1
-        #         self.write_header()
-        #         self.report_data['total_lines'][move_id].pop(
-        #             'date_business_maturity')
-        #         self.write_detail(
-        #             self.report_data['total_lines'][move_id])
-        #         self.current_row += 1
-        #     elif self.report_wizard.group_by == "partner_id":
-        #         self.sheet.merge_range(
-        #             self.current_row, 0,
-        #             self.current_row + 1,
-        #             len(self.columns) - 1,
-        #             _('Total'),
-        #             self.style.header.align_left
-        #         )
-        #         self.current_row += 1
-        #         self.write_header()
-        #         self.report_data['total_lines'][move_id].pop(
-        #             'partner_id')
-        #         self.write_detail(
-        #             self.report_data['total_lines'][move_id])
-        #         self.current_row += 1
+        self.sheet.merge_range(
+            self.current_row, 0,
+            self.current_row + 1,
+            len(self.columns) - 1,
+            _('Total Geral'),
+            self.style.header.align_left
+        )
+        self.current_row += 2
+        self.write_header()
+        first_data_row = self.current_row + 1
+        total_columns = self.define_total_columns()
+        total_dict = {
+            'amount_document': self.report_data['total_lines']['total_vlr_bruto'],
+            'amount_paid_receipt_item': self.report_data['total_lines']['total_valor_rec'],
+            'amount_residual': self.report_data['total_lines']['total_saldo_dev'],
+            'amount_discount': self.report_data['total_lines']['total_desc'],
+            'amount_penalty_forecast': self.report_data['total_lines']['total_multa'],
+            'amount_interest_forecast': self.report_data['total_lines']['total_juros'],
+            'amount_total': self.report_data['total_lines']['total_vlr'],
+            'amount_paid': self.report_data['total_lines']['total_rec'],
+        }
+        self.write_detail(
+            total_dict, total_columns, first_data_row
+        )
 
     def generate_xlsx_report(self, workbook, data, report_wizard):
         super(ReportXslxFinancialPartnerStatement, self).generate_xlsx_report(
