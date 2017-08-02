@@ -87,7 +87,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                 WHERE
                   fm.type = %(type)s
                   and fm.partner_id in %(selected_partners)s
-                  and fm.date_business_maturity between %(date_from)s and 
+                  and fm.date_business_maturity between %(date_from)s and
                   %(date_to)s
                   and fm.state %(state)s
                 ORDER BY
@@ -114,7 +114,7 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
                  join financial_account fa on fa.id = fm.account_id
                WHERE
                  fm.type = %(type)s
-                 and fm.date_business_maturity between %(date_from)s and 
+                 and fm.date_business_maturity between %(date_from)s and
                  %(date_to)s
                  and fm.state %(state)s
                ORDER BY
@@ -410,10 +410,17 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
 
             line_position = 0
             for line in self.report_data['lines'][move_id]:
-                if self.report_wizard.group_by == "date_business_maturity" and (line_position == 0 or line['partner_id'] != self.report_data['lines'][move_id][line_position-1]['partner_id']):
-                    partner = self.env['res.partner'].browse(line[u'partner_id'])
+                partner_last_line = \
+                    self.report_data['lines'][move_id][line_position-1][
+                        'partner_id']
+                if self.report_wizard.group_by == "date_business_maturity" and\
+                        (line_position == 0 or line['partner_id'] !=
+                            partner_last_line):
+                    partner = \
+                        self.env['res.partner'].browse(line[u'partner_id'])
                     partner_cnpj_cpf = " - " + \
-                                       partner.cnpj_cpf if partner.cnpj_cpf else ""
+                                       partner.cnpj_cpf if \
+                        partner.cnpj_cpf else ""
                     partner_email = " - " + \
                                     partner.email if partner.email else ""
                     self.sheet.merge_range(
@@ -480,11 +487,16 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
             'parc_total': 0.00,
         }
         for total in self.report_data['total_lines']:
-            total_geral_dict['vlr_original'] += float(self.report_data['total_lines'][total]['vlr_original'])
-            total_geral_dict['desc'] += float(self.report_data['total_lines'][total]['desc'])
-            total_geral_dict['multa'] += float(self.report_data['total_lines'][total]['multa'])
-            total_geral_dict['juros'] += float(self.report_data['total_lines'][total]['juros'])
-            total_geral_dict['parc_total'] += float(self.report_data['total_lines'][total]['parc_total'])
+            total_geral_dict['vlr_original'] += float(
+                self.report_data['total_lines'][total]['vlr_original'])
+            total_geral_dict['desc'] += float(
+                self.report_data['total_lines'][total]['desc'])
+            total_geral_dict['multa'] += float(
+                self.report_data['total_lines'][total]['multa'])
+            total_geral_dict['juros'] += float(
+                self.report_data['total_lines'][total]['juros'])
+            total_geral_dict['parc_total'] += float(
+                self.report_data['total_lines'][total]['parc_total'])
         first_data_row = self.current_row + 1
         self.write_detail(total_geral_dict, total_columns,
                           first_data_row)

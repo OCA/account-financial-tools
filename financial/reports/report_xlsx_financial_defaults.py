@@ -80,7 +80,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             WHERE
                 fm.type = '2receive'
                 and fm.partner_id %(selected_partners)s
-                and fm.date_business_maturity between %(date_from)s and 
+                and fm.date_business_maturity between %(date_from)s and
                 %(date_to)s
                 and fm.debt_status in ('due_today', 'overdue')
             ORDER BY
@@ -117,7 +117,8 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             }
             if line[13] == "due_today":
                 if report_data['lines']['due_today'].get(line[5]):
-                    report_data['lines']['due_today'][line[5]].append(line_dict)
+                    report_data['lines']['due_today'][line[5]].append(
+                        line_dict)
                 else:
                     report_data['lines']['due_today'][line[5]] = [line_dict]
             elif line[13] == "overdue":
@@ -139,7 +140,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             WHERE
               fm.type = '2receive'
               and fm.partner_id %(selected_partners)s
-              and fm.date_business_maturity between %(date_from)s and 
+              and fm.date_business_maturity between %(date_from)s and
               %(date_to)s
               and fm.debt_status in ('due_today', 'overdue')
             GROUP BY
@@ -329,7 +330,8 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
         self.sheet.set_zoom(85)
 
         if len(self.report_data['lines']['due_today']) > 0:
-            for move_id in sorted(self.report_data['lines']['due_today'].keys()):
+            for move_id in sorted(
+                    self.report_data['lines']['due_today'].keys()):
                 self.sheet.merge_range(
                     self.current_row, 0,
                     self.current_row + 1,
@@ -343,10 +345,16 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
 
                 line_position = 0
                 for line in self.report_data['lines']['due_today'][move_id]:
-                    if line_position == 0 or line['partner_id'] != self.report_data['lines']['due_today'][move_id][line_position-1]['partner_id']:
-                        partner = self.env['res.partner'].browse(line[u'partner_id'])
+                    partner_last_line = \
+                        self.report_data['lines']['due_today'][move_id][
+                            line_position-1]['partner_id']
+                    if line_position == 0 or line['partner_id'] != \
+                            partner_last_line:
+                        partner = self.env['res.partner'].browse(
+                            line[u'partner_id'])
                         partner_cnpj_cpf = " - " + \
-                                           partner.cnpj_cpf if partner.cnpj_cpf else ""
+                                           partner.cnpj_cpf if \
+                            partner.cnpj_cpf else ""
                         partner_email = " - " + \
                                         partner.email if partner.email else ""
                         self.sheet.merge_range(
@@ -362,11 +370,13 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                         self.write_header()
                     self.write_detail(line)
                     line_position += 1
-                    financial_move = self.env['financial.move'].browse(line['id'])
+                    financial_move = self.env['financial.move'].browse(
+                        line['id'])
                     if len(financial_move.message_ids) > 2:
                         self.current_row += 1
                         message_columns = self.define_columns_messages()
-                        message_columns_head = self.define_columns_messages_header()
+                        message_columns_head = \
+                            self.define_columns_messages_header()
                         for current_column, column in iter(
                                 message_columns_head.items()):
                             self.sheet.write(self.current_row, current_column,
@@ -377,10 +387,12 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                         for message in financial_move.message_ids[:-2]:
                             message_info = {
                                 'date_email': message.date,
-                                'body_email': html2text.html2text(message.body),
+                                'body_email':
+                                    html2text.html2text(message.body),
                             }
                             self.write_detail(
-                                message_info, message_columns, self.current_row + 1
+                                message_info, message_columns,
+                                self.current_row + 1
                             )
                             self.current_row += 1
 
@@ -413,10 +425,16 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             for move_id in sorted(self.report_data['lines']['overdue'].keys()):
                 line_position = 0
                 for line in self.report_data['lines']['overdue'][move_id]:
-                    if line_position == 0 or line['partner_id'] != self.report_data['lines']['overdue'][move_id][line_position-1]['partner_id']:
-                        partner = self.env['res.partner'].browse(line[u'partner_id'])
+                    partner_last_line = \
+                        self.report_data['lines']['overdue'][move_id][
+                            line_position-1]['partner_id']
+                    if line_position == 0 or line['partner_id'] != \
+                            partner_last_line:
+                        partner = self.env['res.partner'].browse(
+                            line[u'partner_id'])
                         partner_cnpj_cpf = " - " + \
-                                           partner.cnpj_cpf if partner.cnpj_cpf else ""
+                                           partner.cnpj_cpf if \
+                            partner.cnpj_cpf else ""
                         partner_email = " - " + \
                                         partner.email if partner.email else ""
                         self.sheet.merge_range(
@@ -432,12 +450,15 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                         self.write_header()
                     self.write_detail(line)
                     line_position += 1
-                    financial_move = self.env['financial.move'].browse(line['id'])
+                    financial_move = self.env['financial.move'].browse(
+                        line['id'])
                     if len(financial_move.message_ids) > 2:
                         self.current_row += 1
                         message_columns = self.define_columns_messages()
-                        message_columns_head = self.define_columns_messages_header()
-                        for current_column, column in iter(message_columns_head.items()):
+                        message_columns_head = \
+                            self.define_columns_messages_header()
+                        for current_column, column in iter(
+                                message_columns_head.items()):
                             self.sheet.write(self.current_row, current_column,
                                              column['header'],
                                              self.style.header.align_center)
@@ -446,10 +467,12 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                         for message in financial_move.message_ids[:-2]:
                             message_info = {
                                 'date_email': message.date,
-                                'body_email': html2text.html2text(message.body),
+                                'body_email':
+                                    html2text.html2text(message.body),
                             }
                             self.write_detail(
-                                message_info, message_columns, self.current_row + 1
+                                message_info, message_columns,
+                                self.current_row + 1
                             )
                             self.current_row += 1
 
@@ -467,7 +490,6 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                 self.write_detail(
                     self.report_data['total_lines'][move_id])
                 self.current_row += 1
-
 
         self.current_row += 1
         self.sheet.merge_range(
@@ -488,11 +510,16 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
             'parc_total': 0.00,
         }
         for total in self.report_data['total_lines']:
-            total_geral_dict['vlr_original'] += float(self.report_data['total_lines'][total]['vlr_original'])
-            total_geral_dict['desc'] += float(self.report_data['total_lines'][total]['desc'])
-            total_geral_dict['multa'] += float(self.report_data['total_lines'][total]['multa'])
-            total_geral_dict['juros'] += float(self.report_data['total_lines'][total]['juros'])
-            total_geral_dict['parc_total'] += float(self.report_data['total_lines'][total]['parc_total'])
+            total_geral_dict['vlr_original'] += float(
+                self.report_data['total_lines'][total]['vlr_original'])
+            total_geral_dict['desc'] += float(
+                self.report_data['total_lines'][total]['desc'])
+            total_geral_dict['multa'] += float(
+                self.report_data['total_lines'][total]['multa'])
+            total_geral_dict['juros'] += float(
+                self.report_data['total_lines'][total]['juros'])
+            total_geral_dict['parc_total'] += float(
+                self.report_data['total_lines'][total]['parc_total'])
         first_data_row = self.current_row + 1
         self.write_detail(total_geral_dict, total_columns,
                           first_data_row)

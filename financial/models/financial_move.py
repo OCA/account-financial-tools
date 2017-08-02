@@ -586,11 +586,13 @@ class FinancialMove(models.Model):
         for record in self:
             date_diference = False
             if record.debt_status == 'paid':
-                date_diference = date_value(record.date_payment) - \
-                                 date_value(record.date_business_maturity)
+                date_diference = \
+                    date_value(record.date_payment) - date_value(
+                        record.date_business_maturity)
             elif record.debt_status == 'overdue':
-                date_diference = date_value(record.company_id.today_date) - \
-                                 date_value(record.date_business_maturity)
+                date_diference = \
+                    date_value(record.company_id.today_date) - date_value(
+                        record.date_business_maturity)
             arrears = date_diference and date_diference.days or 0
             record.arrears_days = arrears
 

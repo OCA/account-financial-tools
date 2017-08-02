@@ -258,7 +258,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                 'type': 'currency',
             },
             #
-            #RECEBIMENTO/BAIXA
+            # RECEBIMENTO/BAIXA
             #
             7: {
                 'header': _('Valor'),
@@ -419,12 +419,15 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                         'document_number': '',
                         'date_business_maturity': '',
                         'amount_document': 0,
-                        'amount_paid_receipt_item': move_line_id['amount_paid_receipt_item'],
+                        'amount_paid_receipt_item':
+                            move_line_id['amount_paid_receipt_item'],
                         'arrears_days': move_line_id['amount_discount'],
                         'amount_residual': 0,
                         'amount_discount': move_line_id[u'amount_discount'],
-                        'amount_penalty_forecast': move_line_id['amount_penalty_forecast'],
-                        'amount_interest_forecast': move_line_id['amount_interest_forecast'],
+                        'amount_penalty_forecast':
+                            move_line_id['amount_penalty_forecast'],
+                        'amount_interest_forecast':
+                            move_line_id['amount_interest_forecast'],
                         'date_payment': move_line_id[u'date_payment'],
                         'amount_total': move_line_id[u'amount_total'],
                         'debt_status': '',
@@ -445,12 +448,17 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         first_data_row = self.current_row + 1
         total_columns = self.define_total_columns()
         total_dict = {
-            'amount_document': self.report_data['total_lines']['total_vlr_bruto'],
-            'amount_paid_receipt_item': self.report_data['total_lines']['total_valor_rec'],
-            'amount_residual': self.report_data['total_lines']['total_saldo_dev'],
+            'amount_document':
+                self.report_data['total_lines']['total_vlr_bruto'],
+            'amount_paid_receipt_item':
+                self.report_data['total_lines']['total_valor_rec'],
+            'amount_residual':
+                self.report_data['total_lines']['total_saldo_dev'],
             'amount_discount': self.report_data['total_lines']['total_desc'],
-            'amount_penalty_forecast': self.report_data['total_lines']['total_multa'],
-            'amount_interest_forecast': self.report_data['total_lines']['total_juros'],
+            'amount_penalty_forecast':
+                self.report_data['total_lines']['total_multa'],
+            'amount_interest_forecast':
+                self.report_data['total_lines']['total_juros'],
             'amount_total': self.report_data['total_lines']['total_vlr'],
             'amount_paid': self.report_data['total_lines']['total_rec'],
         }

@@ -11,8 +11,8 @@ from datetime import datetime
 from openerp import fields, models, api
 
 from ..constants import (
-FINANCIAL_DEBT_2RECEIVE,
-FINANCIAL_DEBT_2PAY
+    FINANCIAL_DEBT_2RECEIVE,
+    FINANCIAL_DEBT_2PAY
 )
 
 STATEMENT_TYPE = [
@@ -21,7 +21,8 @@ STATEMENT_TYPE = [
 ]
 
 
-class ReportXlsxFinancialFinancialPartnerStatementWizard(models.TransientModel):
+class ReportXlsxFinancialFinancialPartnerStatementWizard(
+        models.TransientModel):
     _name = b'report.xlsx.financial.partner.statement.wizard'
     _description = 'Report Xlsx Financial Partner Statement Wizard'
 
