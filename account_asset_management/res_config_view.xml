@@ -5,7 +5,7 @@
         <record model="ir.ui.view" id="view_account_config_settings">
             <field name="name">account.config.settings.inherit</field>
             <field name="inherit_id" ref="account.view_account_config_settings"/>
-            <field name="priority" eval="1"/>
+            <field name="priority" eval="99"/>
             <field name="model">account.config.settings</field>
             <field name="arch" type="xml">
                 <field name="module_account_asset" position="replace">
