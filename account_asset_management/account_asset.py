@@ -403,7 +403,7 @@ class account_asset_asset(orm.Model):
         elif asset.method_time == 'rate':
             months = int(fy_duration_months // asset.method_rate)
             depreciation_stop_date = depreciation_start_date + \
-            relativedelta(months=months, days=-1)
+                relativedelta(months=months, days=-1)
         return depreciation_stop_date
 
     def _compute_year_amount(self, cr, uid, asset, amount_to_depr,
@@ -751,7 +751,7 @@ class account_asset_asset(orm.Model):
                           "posted depreciation table entry dates."))
 
                 for table_i, entry in enumerate(table):
- 
+
                     residual_amount_table = \
                         entry['lines'][-1]['remaining_value']
                     if entry['date_start'] <= last_depreciation_date \
@@ -905,7 +905,7 @@ class account_asset_asset(orm.Model):
             if asset.date_revaluation:
                 rev_obj = self.pool.get('account.asset.revaluation')
                 rev_ids = rev_obj.search(
-                    cr, uid, [('asset_id', '=', asset.id)], 
+                    cr, uid, [('asset_id', '=', asset.id)],
                     order='id desc', limit=1)
                 rev_id = rev_obj.browse(cr, uid, rev_ids[0])
                 asset_value = rev_id.revaluated_value - asset.salvage_value
@@ -958,8 +958,8 @@ class account_asset_asset(orm.Model):
             if asset.date_revaluation:
                 rev_obj = self.pool.get('account.asset.revaluation')
                 rev_ids = rev_obj.search(
-                        cr, uid, [('asset_id', '=', asset.id)],
-                        order='id desc', limit=1)
+                    cr, uid, [('asset_id', '=', asset.id)],
+                    order='id desc', limit=1)
                 rev_id = rev_obj.browse(
                     cr, uid, rev_ids[0])
                 asset_value = rev_id.revaluated_value - asset.salvage_value
@@ -1137,14 +1137,14 @@ class account_asset_asset(orm.Model):
                  "for which accounting entries need to be generated."),
         'date_remove': fields.date('Asset Removal Date', readonly=True),
         'profit_loss_disposal': fields.float(
-            'Profit / (Loss) from Disposal', 
+            'Profit / (Loss) from Disposal',
             digits_compute=dp.get_precision('Account')
             ),
         'sale_value': fields.float(
             'Sale Value', digits_compute=dp.get_precision('Account')
             ),
         'date_revaluation': fields.date(
-            'Asset Revaluation Date', 
+            'Asset Revaluation Date',
             readonly=True),
         'state': fields.selection([
             ('draft', 'Draft'),
@@ -1774,8 +1774,8 @@ class account_asset_depreciation_line(orm.Model):
             period_id = period_ids and period_ids[0] or False
             move_id = move_obj.create(
                 cr, uid, self._setup_move_data(
-                    cr, uid, line, depreciation_date, period_id, context),
-                    context=context)
+                cr, uid, line, depreciation_date, period_id, context),
+                context=context)
             depr_acc_id = asset.category_id.account_depreciation_id.id
             exp_acc_id = asset.category_id.account_expense_depreciation_id.id
             ctx = dict(context, allow_asset=True)
@@ -1841,7 +1841,8 @@ class account_asset_depreciation_line(orm.Model):
                         rev_id.previous_value_residual,
                     'profit_loss_disposal': False,
                     'purchase_value':
-                        purchase_value,  # needed to trigeer fields recalculation
+                        # needed to trigeer fields recalculation
+                        purchase_value,
                     })
                 self.unlink(cr, uid, [line.id])
                 if line.previous_id:

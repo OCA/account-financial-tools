@@ -103,12 +103,8 @@ def create_lots_of_account_moves(dbname, user, passwd, howmany):
                               u'account.move', 'button_validate',
                               [move_id], {})
 
-# ------------------------------------------------------------------------
-# ------------------------------------------------------------------------
-# ------------------------------------------------------------------------
 
 if __name__ == "__main__":
-
 
     if len(sys.argv) < 5:
         logger.info(u"Usage: %s <dbname> <user> <password> <howmany>" %

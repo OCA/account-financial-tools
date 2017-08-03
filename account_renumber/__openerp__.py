@@ -26,7 +26,7 @@
 
 {
     'name': "Account renumber wizard",
-    'version': "1.0",
+    'version': "7.0.1.0.0",
     'author': "Pexego,Odoo Community Association (OCA)",
     'website': "http://www.pexego.es",
     'category': "Enterprise Specific Modules",
