@@ -118,5 +118,3 @@ class account_invoice_line(orm.Model):
         if line.asset_category_id:
             res['asset_category_id'] = line.asset_category_id.id
         return res
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

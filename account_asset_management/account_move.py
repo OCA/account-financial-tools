@@ -166,5 +166,3 @@ class account_move_line(orm.Model):
 
         return super(account_move_line, self).write(
             cr, uid, ids, vals, context, check, update_check)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

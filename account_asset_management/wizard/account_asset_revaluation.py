@@ -391,5 +391,3 @@ class account_asset_revaluation(orm.TransientModel):
             move_lines.append((0, 0, move_line_vals))
 
         return move_lines, depr_amount
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

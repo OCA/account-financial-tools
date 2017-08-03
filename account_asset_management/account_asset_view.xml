@@ -115,8 +115,8 @@
               <page string="General">
                 <group colspan="4" col="4">
                   <group>
-                  	<field name="date_purchase"
-                  		   attrs="{'readonly':[('state','!=','draft')]}" />
+                      <field name="date_purchase"
+                             attrs="{'readonly':[('state','!=','draft')]}" />
                     <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                            attrs="{'readonly':['|',('move_line_check','=',True),('state','!=','draft')]}"
                            on_change="onchange_purchase_salvage_value(purchase_value, salvage_value, date_start, date_purchase)"/>

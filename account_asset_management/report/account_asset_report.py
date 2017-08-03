@@ -89,5 +89,3 @@ class asset_asset_report(orm.Model):
                     a.category_id, a.partner_id, a.company_id, a.asset_value,
                     a.id, a.salvage_value
         )""")
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
