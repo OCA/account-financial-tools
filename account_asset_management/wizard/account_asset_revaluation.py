@@ -21,8 +21,6 @@
 #
 ##############################################################################
 
-import time
-from lxml import etree
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
 from dateutil.relativedelta import relativedelta
@@ -32,49 +30,55 @@ import logging
 _logger = logging.getLogger(__name__)
 _debug = False
 
+
 class account_asset_revaluation(orm.Model):
     _name = 'account.asset.revaluation'
     _description = 'Revaluate Asset'
-    
+
     _columns = {
         'previous_date_revaluation': fields.date('Previous Date Revaluation'),
         'date_revaluation': fields.date('Date', required=True),
-        'depr_id': fields.many2one('account.asset.depreciation.line', 'Asset depreciation line',
-            required=True, ondelete='cascade'),
+        'depr_id': fields.many2one('account.asset.depreciation.line',
+            'Asset depreciation line',
+            required=True, ondelete='cascade'
+        ),
         'asset_id': fields.many2one('account.asset.asset', 'Asset',
             required=True, ondelete='cascade'),
         'previous_value': fields.float('Old Value', required=True),
-        'previous_value_residual': fields.float('Old Value Residual', required=True),
+        'previous_value_residual': fields.float(
+            'Old Value Residual', required=True
+        ),
         'revaluated_value': fields.float('New Value', required=True),
         'account_revaluation_id': fields.many2one(
             'account.account', 'Revaluation Value Account',
             domain=[('type', '<>', 'view')], required=True, store=False),
         'note': fields.text('Notes'),
     }
-    
+
 
 class account_asset_revaluation(orm.TransientModel):
     _name = 'account.asset.revaluation.wizard'
     _description = 'Revaluate Asset Wizard'
-    
+
     def _get_previous_date_revaluation(self, cr, uid, context=None):
         if not context:
             context = {}
         previous_date_revaluation = False
         asset_id = context.get('active_id')
         revaluation_obj = self.pool.get('account.asset.revaluation')
-        revaluation_ids = revaluation_obj.search(cr, uid, [('asset_id','=',asset_id)], order='id desc')
+        revaluation_ids = revaluation_obj.search(
+            cr, uid, [('asset_id', '=', asset_id)], order='id desc'
+        )
         if revaluation_ids:
             revaluation = revaluation_obj.browse(cr, uid, revaluation_ids[0])
             previous_date_revaluation = revaluation.date_revaluation
-            
 #         if not previous_date_revaluation:
 #             asset_obj = self.pool.get('account.asset.asset')
 #             asset = asset_obj.browse(cr, uid, asset_id)
 #             previous_date_revaluation = asset.date_purchase
         
         return previous_date_revaluation
-    
+
     def _get_revaluation_account(self, cr, uid, context=None):
         if not context:
             context = {}
@@ -84,7 +88,7 @@ class account_asset_revaluation(orm.TransientModel):
         if asset:
             acc = asset.category_id.account_revaluation_value_id
         return acc and acc.id or False
-    
+
     def _get_previous_value(self, cr, uid, context=None):
         if not context:
             context = {}
@@ -92,17 +96,19 @@ class account_asset_revaluation(orm.TransientModel):
         asset_id = context.get('active_id')
         revaluation_obj = self.pool.get('account.asset.revaluation')
         asset_obj = self.pool.get('account.asset.asset')
-        revaluation_ids = revaluation_obj.search(cr, uid, [('asset_id','=',asset_id)], order='id desc')
+        revaluation_ids = revaluation_obj.search(
+            cr, uid, [('asset_id', '=', asset_id)], order='id desc'
+        )
         if revaluation_ids:
             revaluation = revaluation_obj.browse(cr, uid, revaluation_ids[0])
             previous_value = revaluation.revaluated_value
-        
+
         if not previous_value:
             asset = asset_obj.browse(cr, uid, asset_id)
             previous_value = asset.purchase_value
-            
+
         return previous_value
-    
+
     def _get_value_residual(self, cr, uid, context=None):
         if not context:
             context = {}
@@ -117,7 +123,9 @@ class account_asset_revaluation(orm.TransientModel):
         'previous_date_revaluation': fields.date('Previous Date Revaluation'),
         'date_revaluation': fields.date('Date', required=True),
         'previous_value': fields.float('Old Value', required=True),
-        'previous_value_residual': fields.float('Old Value Residual', required=True),
+        'previous_value_residual': fields.float(
+            'Old Value Residual', required=True
+        ),
         'revaluated_value': fields.float('New Value', required=True),
         'account_revaluation_id': fields.many2one(
             'account.account', 'Revaluation Value Account',
@@ -220,12 +228,12 @@ class account_asset_revaluation(orm.TransientModel):
             state = 'close'
         else:
             state = 'open'
-        asset.write({'date_revaluation' : wiz_data.date_revaluation,
-                     'state' : state})
+        asset.write({'date_revaluation': wiz_data.date_revaluation,
+                     'state': state})
 
         # create move lines
         move_lines, balance = self._get_revaluation_data(
-            cr, uid, wiz_data, asset, residual_value, 
+            cr, uid, wiz_data, asset, residual_value,
             wiz_data.revaluated_value, context=context
         )
         move_obj.write(cr, uid, [move_id], {'line_id': move_lines},
@@ -244,9 +252,9 @@ class account_asset_revaluation(orm.TransientModel):
             'note':  wiz_data.note,
         }        revaluation_obj.create(cr, uid, revaluation_line_vals, context=context)
 
-        asset.write({'profit_loss_disposal' : balance,
+        asset.write({'profit_loss_disposal': balance,
                      # needed to trigger recomputation
-                     'purchase_value' :  wiz_data.previous_value,
+                     'purchase_value':  wiz_data.previous_value,
                      })
 
         return {
