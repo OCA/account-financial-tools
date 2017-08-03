@@ -1839,14 +1839,6 @@ class account_asset_depreciation_line(orm.Model):
         return True
 
 
-class account_move_line(orm.Model):
-    _inherit = 'account.move.line'
-    _columns = {
-        'asset_id': fields.many2one(
-            'account.asset.asset', 'Asset', ondelete="restrict"),
-    }
-
-
 class account_asset_history(orm.Model):
     _name = 'account.asset.history'
     _description = 'Asset history'

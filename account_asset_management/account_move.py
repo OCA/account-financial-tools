@@ -71,6 +71,8 @@ class account_move_line(orm.Model):
     _inherit = 'account.move.line'
 
     _columns = {
+        'asset_id': fields.many2one(
+            'account.asset.asset', 'Asset', ondelete="restrict"),
         'asset_category_id': fields.many2one(
             'account.asset.category', 'Asset Category'),
     }
