@@ -39,11 +39,10 @@ class account_asset_revaluation(orm.Model):
         'previous_date_revaluation': fields.date('Previous Date Revaluation'),
         'date_revaluation': fields.date('Date', required=True),
         'depr_id': fields.many2one('account.asset.depreciation.line',
-            'Asset depreciation line',
-            required=True, ondelete='cascade'
-        ),
+                                   'Asset depreciation line',
+                                   required=True, ondelete='cascade'),
         'asset_id': fields.many2one('account.asset.asset', 'Asset',
-            required=True, ondelete='cascade'),
+                                    required=True, ondelete='cascade'),
         'previous_value': fields.float('Old Value', required=True),
         'previous_value_residual': fields.float(
             'Old Value Residual', required=True
@@ -76,7 +75,6 @@ class account_asset_revaluation(orm.TransientModel):
 #             asset_obj = self.pool.get('account.asset.asset')
 #             asset = asset_obj.browse(cr, uid, asset_id)
 #             previous_date_revaluation = asset.date_purchase
-        
         return previous_date_revaluation
 
     def _get_revaluation_account(self, cr, uid, context=None):

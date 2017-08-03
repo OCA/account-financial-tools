@@ -32,6 +32,7 @@ from openerp import tools
 from openerp.tools.translate import _
 from openerp import SUPERUSER_ID
 
+
 class dummy_fy(object):
     def __init__(self, *args, **argv):
         for key, arg in argv.items():
@@ -168,7 +169,7 @@ class account_asset_category(orm.Model):
         "Degressive-Linear is only supported for Time Method = Year.",
         ['method']
     )]
-    
+
     def onchange_method_time(self, cr, uid, ids,
                              method_time='number', context=None):
         res = {'value': {}}
@@ -298,9 +299,9 @@ class account_asset_asset(orm.Model):
             fy_year_stop = int(fy_vals['date_stop'][:4])
             year = fy_year_start
             cnt = fy_year_stop - fy_year_start + 1
-            
+
             for i in range(cnt):
-                #cy_days = calendar.isleap(year) and 366 or 365
+                # cy_days = calendar.isleap(year) and 366 or 365
                 if i == 0:  # first year
                     if fy_date_stop.year == year:
                         duration = (fy_date_stop - fy_date_start).days + 1
@@ -330,11 +331,12 @@ class account_asset_asset(orm.Model):
                 depreciation_date_start = datetime.strptime(
                     asset.date_revaluation or asset.date_start, '%Y-%m-%d')
                 fy_date_stop = entry['date_stop']
-                fy_duration = self._get_fy_duration(cr, uid, fy_id, option='months')
+                fy_duration = self._get_fy_duration(cr, uid, fy_id, 
+                                                    option='months')
                 delta = relativedelta(fy_date_stop, depreciation_date_start)
                 months_remaining = delta.months + 1
                 duration_factor = float(months_remaining) / fy_duration
-                
+
                 first_fy_asset_days = \
                     (fy_date_stop - depreciation_date_start).days + 1
                 if fy_id:
@@ -343,7 +345,8 @@ class account_asset_asset(orm.Model):
                     first_fy_year_factor = self._get_fy_duration(
                         cr, uid, fy_id, option='years')
                     duration_factor = \
-                        float(first_fy_asset_days) / first_fy_duration * first_fy_year_factor
+                        float(first_fy_asset_days) / first_fy_duration \
+                        * first_fy_year_factor
                 else:
 
                     first_fy_duration = \
@@ -351,16 +354,16 @@ class account_asset_asset(orm.Model):
                         and 366 or 365
                     duration_factor = \
                         float(first_fy_asset_days) / first_fy_duration
-                    
+
             elif fy_id:
-#                 duration_factor = self._get_fy_duration(
-#                     cr, uid, fy_id, option='years')
+                # duration_factor = self._get_fy_duration(
+                #    cr, uid, fy_id, option='years')
                 duration_factor = 1.0
         elif fy_id:
             fy_months = self._get_fy_duration(
                 cr, uid, fy_id, option='months')
             duration_factor = float(fy_months) / 12
-            
+
         return duration_factor
 
     def _get_depreciation_start_date(self, cr, uid, asset, fy, context=None):
@@ -378,7 +381,7 @@ class account_asset_asset(orm.Model):
         return depreciation_start_date
 
     def _get_depreciation_stop_date(self, cr, uid, asset,
-                                    depreciation_start_date, fy_duration_months, context=None):
+                depreciation_start_date, fy_duration_months, context=None):
         if asset.method_time == 'year':
             fy_duration_months = fy_duration_months * asset.method_number
             depreciation_stop_date = depreciation_start_date + \
@@ -1688,11 +1691,13 @@ class account_asset_depreciation_line(orm.Model):
             'tag': 'reload',
         }
 
-    def _setup_move_data(self, cr, uid, depreciation_line, depreciation_date,
+    def _setup_move_data(self, cr, uid, depreciation_line, 
+                         depreciation_date,
                          period_id, context):
         asset = depreciation_line.asset_id
         move_data = {
-            'name': self.pool.get('ir.sequence')._next(cr, uid, [asset.category_id.journal_id.sequence_id.id]),
+            'name': self.pool.get('ir.sequence')._next(
+                cr, uid, [asset.category_id.journal_id.sequence_id.id]),
             'date': depreciation_date,
             'ref': depreciation_line.name,
             'period_id': period_id,
@@ -1805,14 +1810,20 @@ class account_asset_depreciation_line(orm.Model):
             self.write(cr, uid, [line.id], {'move_id': False}, context=ctx)
             if line.type == 'revaluate':
                 revaluation_obj = self.pool.get('account.asset.revaluation')
-                revaluation_ids = revaluation_obj.search(cr, uid, [('depr_id', '=', line.id)])
-                revaluation_id = revaluation_obj.browse(cr, uid, revaluation_ids[0])
-                
+                revaluation_ids = revaluation_obj.search(
+                    cr, uid, [('depr_id', '=', line.id)])
+                revaluation_id = revaluation_obj.browse(
+                    cr, uid, revaluation_ids[0])
+
                 purchase_value = line.asset_id.purchase_value
-                line.asset_id.write({'date_revaluation': revaluation_id.previous_date_revaluation,
-                                     'value_residual': revaluation_id.previous_value_residual,
-                                     'profit_loss_disposal': False,
-                                     'purchase_value': purchase_value, #needed to trigeer fields recalculation 
+                line.asset_id.write({
+                    'date_revaluation': 
+                        revaluation_id.previous_date_revaluation,
+                    'value_residual': 
+                        revaluation_id.previous_value_residual,
+                    'profit_loss_disposal': False,
+                    'purchase_value': 
+                        purchase_value, #needed to trigeer fields recalculation
                                      })
                 self.unlink(cr, uid, [line.id])
                 if line.previous_id:
@@ -1849,9 +1860,9 @@ class account_asset_history(orm.Model):
         'asset_id': fields.many2one(
             'account.asset.asset', 'Asset', required=True, ondelete='cascade'),
         'method_time': fields.selection([
-            ('year', 'Number of Years'),
-            ('number','Number of Depreciations'),
-            ('end','Ending Date'),
+            ('year','Number of Years'), 
+            ('number','Number of Depreciations'), 
+            ('end','Ending Date'), 
             ('rate','Rate of Depreciation')
             ], 'Time Method', required=True),
         'method_number': fields.integer(
