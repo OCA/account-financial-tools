@@ -964,7 +964,7 @@ class account_asset_asset(orm.Model):
                     res[asset.id] = True
                     continue
         return res
-
+    
     def onchange_purchase_salvage_value(
             self, cr, uid, ids, purchase_value,
             salvage_value, date_start, date_purchase, context=None):
@@ -1688,11 +1688,11 @@ class account_asset_depreciation_line(orm.Model):
             'tag': 'reload',
         }
 
-    def _setup_move_data(self, depreciation_line, depreciation_date,
+    def _setup_move_data(self, cr, uid, depreciation_line, depreciation_date,
                          period_id, context):
         asset = depreciation_line.asset_id
         move_data = {
-            'name': asset.name,
+            'name': self.pool.get('ir.sequence')._next(cr, uid, [asset.category_id.journal_id.sequence_id.id]),
             'date': depreciation_date,
             'ref': depreciation_line.name,
             'period_id': period_id,
@@ -1750,7 +1750,7 @@ class account_asset_depreciation_line(orm.Model):
             period_ids = period_obj.find(
                 cr, uid, depreciation_date, context=ctx)
             period_id = period_ids and period_ids[0] or False
-            move_id = move_obj.create(cr, uid, self._setup_move_data(
+            move_id = move_obj.create(cr, uid, self._setup_move_data(cr, uid, 
                 line, depreciation_date, period_id, context),
                 context=context)
             depr_acc_id = asset.category_id.account_depreciation_id.id

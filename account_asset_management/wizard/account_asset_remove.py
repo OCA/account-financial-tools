@@ -223,6 +223,7 @@ class account_asset_remove(orm.TransientModel):
     def _get_removal_data(self, cr, uid, wiz_data, asset, residual_value,
                           context=None):
         move_lines = []
+        balance = 0.0
         partner_id = asset.partner_id and asset.partner_id.id or False
         categ = asset.category_id
 
@@ -337,7 +338,7 @@ class account_asset_remove(orm.TransientModel):
 
         # create move
         move_vals = {
-            'name': asset.name,
+            'name': self.pool.get('ir.sequence')._next(cr, uid, [asset.category_id.journal_id.sequence_id.id]),
             'date': wiz_data.date_remove,
             'ref': line_name,
             'period_id': period_id,
