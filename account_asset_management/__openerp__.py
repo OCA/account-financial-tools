@@ -22,7 +22,7 @@
 ##############################################################################
 {
     'name': 'Assets Management',
-    'version': '(7.0) 2.4.0',
+    'version': '7.0.2.4.0',
     'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
