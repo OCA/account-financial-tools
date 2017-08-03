@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -22,7 +22,8 @@
 ##############################################################################
 {
     'name': 'Assets Management',
-    'version': '2.4',
+    'version': '(7.0) 2.4.0',
+    'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
     'author': "OpenERP & Noviat,Odoo Community Association (OCA)",
