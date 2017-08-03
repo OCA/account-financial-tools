@@ -33,6 +33,7 @@ class CreditSummaryReport(report_sxw.rml_parse):
             'uid': uid,
         })
 
+
 report_sxw.report_sxw(
     'report.credit_control_summary',
     'credit.control.communication',
