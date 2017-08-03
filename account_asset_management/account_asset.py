@@ -278,7 +278,7 @@ class account_asset_asset(orm.Model):
         cr.execute(
             "SELECT date_start, date_stop, "
             "date_stop-date_start+1 AS total_days "
-            "FROM account_fiscalyear WHERE id=%s" % fy_id)
+            "FROM account_fiscalyear WHERE id=%s", (fy_id,))
         fy_vals = cr.dictfetchall()[0]
         days = fy_vals['total_days']
         months = (int(fy_vals['date_stop'][:4]) -
@@ -1621,7 +1621,7 @@ class account_asset_depreciation_line(orm.Model):
             previous_id = dl.previous_id and dl.previous_id.id or False
             cr.execute(
                 "SELECT id FROM account_asset_depreciation_line "
-                "WHERE previous_id = %s" % dl.id)
+                "WHERE previous_id = %s", (dl.id,))
             next = cr.fetchone()
             if next:
                 next_id = next[0]
