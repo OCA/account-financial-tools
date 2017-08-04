@@ -5,3 +5,4 @@ financial.financial_installment_access_name,financial.installment,financial.mode
 financial.financial_installment_simulation_access_name,financial.installment.simulation,financial.model_financial_installment_simulation,base.group_user,1,1,1,1
 financial.financial_move_access_name,financial.move,financial.model_financial_move,base.group_user,1,1,1,1
 financial.financial_tree_analysis_access_name,financial.account.tree.analysis,financial.model_financial_account_tree_analysis,base.group_user,1,1,1,1
+access_financial_move_motivo_cancelamento,access_financial_move_motivo_cancelamento,model_financial_move_motivo_cancelamento,base.group_user,1,1,1,1
