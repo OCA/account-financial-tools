@@ -830,69 +830,69 @@ class FinancialMove(models.Model):
                              delay_fee_percent / 100) * record.amount_document
                 record.amount_interest = interest + delay_fee
 
-    def _create_from_dict(self, move_dict):
-        '''How to use:
-
-   def _prepare_lancamento_item(self, item):
-        return {
-            'document_number':
-                '{0.serie}-{0.numero:0.0f}-{1.numero}/{2}'.format(
-                    self, item, len(self.duplicata_ids)),
-            'date_maturity': item.data_vencimento,
-            'amount': item.valor
-        }
-
-    def _prepare_lancamento_financeiro(self):
-        return {
-            'date': self.data_emissao,
-            'type': '2receive',
-            'partner_id':
-                self.participante_id and self.participante_id.partner_id.id,
-            'doc_source_id': self._name + ',' + str(self.id),
-            'bank_id': 1,
-            'company_id': self.empresa_id and self.empresa_id.company_id.id,
-            'currency_id': self.currency_id.id,
-            'payment_term_id':
-                self.payment_term_id and self.payment_term_id.id or False,
-            # 'account_type_id':
-            # 'analytic_account_id':
-            # 'payment_mode_id:
-            'lines': [self._prepara_lancamento_item(parcela)
-                      for parcela in self.duplicata_ids],
-        }
-
-    def action_financial_create(self):
-
-        p = self._prepare_lancamento_financeiro()
-        financial_move_ids = self.env['financial.move']._create_from_dict(p)
-        financial_move_ids.action_confirm()
-
-        :param move_dict:
-        :return: a record set of financial.move
-        '''
-        lines = move_dict.pop('lines')
-
-        financial_move_ids = self.env['financial.move']
-
-        for item in lines:
-            date_maturity = item.pop('date_maturity')
-            amount_document = item.pop('amount_document')
-            document_number = item.pop('document_number')
-            #
-            # Override move_dict with item data!
-            #
-            kwargs = move_dict.copy()
-            kwargs.update(item)
-
-            values = self._prepare_financial_move(
-                date_maturity=date_maturity,
-                amount_document=amount_document,
-                document_number=document_number,
-                **kwargs
-            )
-            financial = self.create(values)
-            financial_move_ids |= financial
-        return financial_move_ids
+    # def _create_from_dict(self, move_dict):
+    #     '''How to use:
+    #
+   # def _prepare_lancamento_item(self, item):
+   #      return {
+   #          'document_number':
+   #              '{0.serie}-{0.numero:0.0f}-{1.numero}/{2}'.format(
+   #                  self, item, len(self.duplicata_ids)),
+   #          'date_maturity': item.data_vencimento,
+   #          'amount': item.valor
+   #      }
+   #
+   #  def _prepare_lancamento_financeiro(self):
+   #      return {
+   #          'date': self.data_emissao,
+   #          'type': '2receive',
+   #          'partner_id':
+   #              self.participante_id and self.participante_id.partner_id.id,
+   #          'doc_source_id': self._name + ',' + str(self.id),
+   #          'bank_id': 1,
+   #          'company_id': self.empresa_id and self.empresa_id.company_id.id,
+   #          'currency_id': self.currency_id.id,
+   #          'payment_term_id':
+   #              self.payment_term_id and self.payment_term_id.id or False,
+   #          # 'account_type_id':
+   #          # 'analytic_account_id':
+   #          # 'payment_mode_id:
+   #          'lines': [self._prepara_lancamento_item(parcela)
+   #                    for parcela in self.duplicata_ids],
+   #      }
+   #
+   #  def action_financial_create(self):
+   #
+   #      p = self._prepare_lancamento_financeiro()
+   #      financial_move_ids = self.env['financial.move']._create_from_dict(p)
+   #      financial_move_ids.action_confirm()
+   #
+   #      :param move_dict:
+   #      :return: a record set of financial.move
+   #      '''
+   #      lines = move_dict.pop('lines')
+   #
+   #      financial_move_ids = self.env['financial.move']
+   #
+   #      for item in lines:
+   #          date_maturity = item.pop('date_maturity')
+   #          amount_document = item.pop('amount_document')
+   #          document_number = item.pop('document_number')
+   #          #
+   #          # Override move_dict with item data!
+   #          #
+   #          kwargs = move_dict.copy()
+   #          kwargs.update(item)
+   #
+   #          values = self._prepare_financial_move(
+   #              date_maturity=date_maturity,
+   #              amount_document=amount_document,
+   #              document_number=document_number,
+   #              **kwargs
+   #          )
+   #          financial = self.create(values)
+   #          financial_move_ids |= financial
+   #      return financial_move_ids
 
 
 class FinancialMoveMotivoCancelamento(models.Model):
