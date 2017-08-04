@@ -5,3 +5,4 @@ from . import test_financial_payable
 from . import abstract_test_report
 from . import test_cash_flow
 from . import test_financial_move
+from . import test_financial_installment
