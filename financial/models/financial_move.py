@@ -644,7 +644,7 @@ class FinancialMove(models.Model):
         allowed = [
             ('draft', 'open'),
             ('open', 'paid'),
-            ('open', 'cancel'),
+            ('open', 'cancelled'),
             ('paid', 'open'),
         ]
         return (old_state, new_state) in allowed
@@ -741,7 +741,7 @@ class FinancialMove(models.Model):
     @api.multi
     def action_cancel(self, motivo_id, obs):
         for record in self:
-            record.change_state('cancel')
+            record.change_state('cancelled')
             if record.note:
                 new_note = record.note + '\n' + obs
             else:
