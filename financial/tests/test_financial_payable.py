@@ -344,4 +344,4 @@ class ManualFinancialProcess(FinancialTestCase):
         )
         wizard_cancel.doit()
         self.assertEqual(financial_move.state, 'cancelled')
-        self.assertEqual(financial_move.amount_residual, 5000)
+        self.assertEqual(financial_move.amount_residual, 0)
