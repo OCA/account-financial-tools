@@ -42,6 +42,7 @@ class ManualFinancialProcess(FinancialTestCase):
         self.env.ref('base.main_company').write(
             {'currency_id': self.currency_eur_id}
         )
+        self.env.ref('base.main_company').cron_update_reference_date_today()
         self.bank_112358 = self.env.ref('financial.bank_112358_13')
 
         self.DOCUMENTO_FINANCEIRO_TED = self.env.ref(
