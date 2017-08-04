@@ -137,12 +137,13 @@ class FinancialInstallment(models.Model):
                 'amount_document': amount_document,
                 'installment_id': self.id,
             }
-            # simulation = self.env['financial.installment.simulation'].create(
-            #     simulation_data
-            # )
-
             simulation_ids.append(simulation_data)
         self.simulation_ids = simulation_ids
+
+        # Retornar dict com informação das simulaçoes
+        # Como o onchange nao instancia o objeto, as informações sao passadas
+        # no dict para realizar testes unitarios
+        return simulation_ids
 
     @api.multi
     def confirm(self):
