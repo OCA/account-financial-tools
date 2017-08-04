@@ -791,9 +791,11 @@ class FinancialMove(models.Model):
         if len(self) > 1:
             action['domain'] = [('id', 'in', self.ids)]
         elif len(self) == 1:
-            action['views'] = [
-                (self.env.ref('financial.financial_move_form_view').id, 'form')
-            ]
+            # action['views'] = \
+            #     [(
+            #         self.env.ref('financial.financial_move_form_view').id,
+            #         'form',
+            #     )]
             action['res_id'] = self.ids[0]
         else:
             action = {'type': 'ir.actions.act_window_close'}
