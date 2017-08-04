@@ -10,6 +10,7 @@ from openerp.addons.financial.tests.financial_test_classes import \
 class ManualFinancialProcess(FinancialTestCase):
 
     def setUp(self):
+        self.financial_model = self.env['financial.move']
         super(ManualFinancialProcess, self).setUp()
 
     def test_01_check_return_views(self):
