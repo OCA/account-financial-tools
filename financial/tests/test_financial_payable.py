@@ -91,7 +91,7 @@ class ManualFinancialProcess(FinancialTestCase):
         #  '2017-01-02')
 
     def test_financial_payable_full_pay_one(self):
-        """Scenario 1: Financial payable of 100.00
+        """Scenario 2: Financial payable of 100.00
 
         Given a financial payable already confirmed of 100.00
         And the amount document of 100.00
@@ -144,7 +144,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_payable_full_pay_multi(self):
-        """Scenario 1: Financial payable of 5000.00
+        """Scenario 3: Financial payable of 5000.00
 
         Given a financial payable already confirmed of 5000.00
         And the amount document of 100.00
@@ -197,7 +197,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_payable_partial_pay_one(self):
-        """Scenario 1: Financial payable of 5000.00
+        """Scenario 4: Financial payable of 5000.00
 
         Given a financial payable already confirmed of 5000.00
         And the amount document of 5000.00
@@ -250,7 +250,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_payable_partial_pay_multi(self):
-        """Scenario 1: Financial payable of 5000.00
+        """Scenario 5: Financial payable of 5000.00
 
         Given a financial payable already confirmed of 5000.00
         And the amount document of 100.00
@@ -343,5 +343,5 @@ class ManualFinancialProcess(FinancialTestCase):
             }
         )
         wizard_cancel.doit()
-        self.assertEqual(financial_move.state, 'cancel')
-        self.assertEqual(financial_move.amount_residual, 0)
+        self.assertEqual(financial_move.state, 'cancelled')
+        self.assertEqual(financial_move.amount_residual, 5000)

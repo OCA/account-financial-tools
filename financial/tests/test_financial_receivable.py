@@ -93,7 +93,7 @@ class ManualFinancialProcess(FinancialTestCase):
         #  '2017-01-02')
 
     def test_financial_receivable_full_pay_one(self):
-        """Scenario 1: Financial receivable of 100.00
+        """Scenario 2: Financial receivable of 100.00
 
         Given a financial receivable already confirmed of 100.00
         And the amount document of 100.00
@@ -146,7 +146,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_receivable_full_pay_multi(self):
-        """Scenario 1: Financial receivable of 5000.00
+        """Scenario 3: Financial receivable of 5000.00
 
         Given a financial receivable already confirmed of 5000.00
         And the amount document of 100.00
@@ -199,7 +199,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_receivable_partial_pay_one(self):
-        """Scenario 1: Financial receivable of 5000.00
+        """Scenario 4: Financial receivable of 5000.00
 
         Given a financial receivable already confirmed of 5000.00
         And the amount document of 5000.00
@@ -252,7 +252,7 @@ class ManualFinancialProcess(FinancialTestCase):
             sum(amount_credit_debit))
 
     def test_financial_receivable_partial_pay_multi(self):
-        """Scenario 1: Financial receivable of 5000.00
+        """Scenario 5: Financial receivable of 5000.00
 
         Given a financial receivable already confirmed of 5000.00
         And the amount document of 100.00
