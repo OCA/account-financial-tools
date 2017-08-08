@@ -12,10 +12,7 @@
     'author': "Zikzakmedia SL, Odoo Community Association (OCA), "
               "Joaquín Gutierrez, "
               "Serv. Tecnol. Avanzados - Pedro M. Baeza",
-    'website': "http://www.zikzakmedia.com, "
-               "http://www.gutierrezweb.es, "
-               "http://www.serviciosbaeza.com",
-    'category': "Localisation / Accounting",
+    'website': "https://github.com/OCA/account-financial-tools",
     'license': "AGPL-3",
     'depends': ["account"],
     'data': [
