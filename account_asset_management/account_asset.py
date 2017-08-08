@@ -401,9 +401,14 @@ class account_asset_asset(orm.Model):
             depreciation_stop_date = datetime.strptime(
                 asset.method_end, '%Y-%m-%d')
         elif asset.method_time == 'rate':
-            months = int(fy_duration_months // asset.method_rate)
-            depreciation_stop_date = depreciation_start_date + \
-                relativedelta(months=months, days=-1)
+            try:
+                months = int(fy_duration_months // asset.method_rate)
+                depreciation_stop_date = depreciation_start_date + \
+                    relativedelta(months=months, days=-1)
+            except:
+                raise orm.except_orm(
+                    _('Asset Error!'),
+                    _("Illegal value %s in asset.method_rate for [%s] %s.") % (asset.method_rate, asset.code, asset.name))
         return depreciation_stop_date
 
     def _compute_year_amount(self, cr, uid, asset, amount_to_depr,
@@ -1312,6 +1317,7 @@ class account_asset_asset(orm.Model):
                 'parent_id': category_obj.parent_id.id,
                 'method': category_obj.method,
                 'method_number': category_obj.method_number,
+                'method_rate' : category_obj.method_rate,
                 'method_time': category_obj.method_time,
                 'method_period': category_obj.method_period,
                 'method_progress_factor': category_obj.method_progress_factor,
