@@ -20,7 +20,7 @@ class FinancialAccount(models.Model):
     _order = 'code, complete_name'
 
     code = fields.Char(
-        string='Code',
+        string='Code', 
         size=20,
         index=True,
         required=True,

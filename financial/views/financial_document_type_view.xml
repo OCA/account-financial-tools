@@ -52,7 +52,7 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
+    
     <record model="ir.actions.act_window.view" id="financial_document_type_tree_action">
         <field eval="1" name="sequence"/>
         <field name="view_mode">tree</field>
