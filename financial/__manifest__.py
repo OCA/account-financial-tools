@@ -18,7 +18,7 @@
         # 'account_payment_mode' # FIXME: Modulo da OCA/bank-payment in v10
         # Estamos temporariamente dependendo deste módulo pois na v8 o model
         # payment.mode esta no core.
-        'account_payment',
+        # 'account_payment',
         #
         # Em um futuro distante não deveremos mais depender de account, pois os
         # models:
@@ -78,11 +78,11 @@
         'security/ir.model.access.csv',
     ],
     'demo': [
-        'demo/financial_move.xml',
-        'demo/financial.account.csv',
-        'demo/financial_demo.yml'
+        # 'demo/financial_move.xml',
+        # 'demo/financial.account.csv',
+        # 'demo/financial_demo.yml'
     ],
     'test': [
-        'test/financial_move_test.yml',
+        # 'test/financial_move_test.yml',
     ]
 }
