@@ -337,7 +337,7 @@ class ManualFinancialProcess(FinancialTestCase):
             )
         wizard_cancel = self.env['financial.cancel'].with_context(
             active_id=financial_move.id,
-            active_model=financial_move._model._name
+            active_model=financial_move._name
         ).create(
             {
                 'motivo_cancelamento_id': cancel_reason_01.id,
