@@ -408,7 +408,7 @@ class account_asset_asset(orm.Model):
             except:
                 raise orm.except_orm(
                     _('Asset Error!'),
-                    _("Illegal value %s in asset.method_rate for [%s] %s.") 
+                    _("Illegal value %s in asset.method_rate for [%s] %s.")
                     % (asset.method_rate, asset.code, asset.name))
         return depreciation_stop_date
 
