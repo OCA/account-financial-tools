@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-    <data>
             <record id="ir_cron_scheduler_demo_action" model="ir.cron">
                 <field name="name">Calculate Interest</field>
                 <field name="user_id" ref="base.user_root"/>
@@ -26,5 +25,4 @@
                 <field eval="'cron_update_reference_date_today'" name="function"/>
             </record>
 
-    </data>
 </odoo>

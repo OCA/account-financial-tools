@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+
 
     <record model="ir.ui.view" id="financial_statement_report_form_view">
         <field name="name">financial.statement.report.form (in financial)</field>
@@ -60,5 +60,5 @@
         <field name="sequence" eval="16"/> <!-- TODO -->
     </record>
 
-</data>
+
 </odoo>

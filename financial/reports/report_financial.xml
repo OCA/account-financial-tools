@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-    <data>
+
 
         <report
                 id="financial_statement"
@@ -162,6 +162,6 @@
             </t>
         </template>
 
-    </data>
+
 </odoo>
 

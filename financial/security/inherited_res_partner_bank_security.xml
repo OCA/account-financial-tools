@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+
 
     <record model="ir.model.access" id="res_partner_bank_access_name"> <!-- TODO acl id -->
         <field name="name">res.partner.bank access name</field> <!-- TODO acl name -->
@@ -16,5 +16,5 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
-</data>
+
 </odoo>

@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+
 
     <record model="ir.ui.view" id="financial_renegociate_form_view">
         <field name="name">financial.renegociate.form (in financial)</field>
@@ -37,5 +37,5 @@
 
 
 
-</data>
+
 </odoo>

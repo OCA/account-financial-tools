@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+
 
     <record model="ir.ui.view" id="res_partner_bank_form">
         <field name="name">res.partner.bank.form (in financial)</field>
@@ -63,5 +63,5 @@
         <field name="sequence" eval="1"/>
     </record>
 
-</data>
+
 </odoo>

@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
+
     <record model="ir.ui.view" id="financial_cashflow_tree_view">
         <field name="name">financial.cashflow.tree (in financial)</field>
         <field name="model">financial.cashflow</field>
@@ -104,5 +104,4 @@
         <field name="sequence" eval="10"/>
     </record>
 
-</data>
 </odoo>

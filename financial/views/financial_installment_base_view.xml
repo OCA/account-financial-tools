@@ -2,8 +2,8 @@
 <!-- Copyright 2017 KMEE
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
-<data>
+<odoo>
+
 
     <record model="ir.ui.view" id="financial_installment_base_tree">
         <field name="name">financial.installment.base.tree (in financial)</field>
@@ -104,5 +104,5 @@
         </field>
     </record>
 
-</data>
-</openerp>
+
+</odoo>

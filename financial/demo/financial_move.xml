@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data noupdate="1">
+
 
     <!-- Bank Account Fibonnaci -->
 
@@ -15,5 +15,4 @@
             <field name="initial_balance">20094.40</field>
     </record>
 
-</data>
 </odoo>

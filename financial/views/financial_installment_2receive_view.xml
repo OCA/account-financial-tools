@@ -4,8 +4,8 @@
     Copyright 2017 KMEE - Aristides Caldeira <aristides.caldeira@kmee.com.br>
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
-<openerp>
-<data>
+<odoo>
+
     <record model="ir.ui.view" id="financial_installment_2receive_form">
         <field name="name">financial.installment.2receive.form (in financial)</field>
         <field name="model">financial.installment</field>
@@ -75,5 +75,5 @@
         <field name="sequence" eval="3"/>
     </record>
 
-</data>
-</openerp>
+
+</odoo>
