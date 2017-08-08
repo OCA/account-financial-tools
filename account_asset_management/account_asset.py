@@ -408,7 +408,8 @@ class account_asset_asset(orm.Model):
             except:
                 raise orm.except_orm(
                     _('Asset Error!'),
-                    _("Illegal value %s in asset.method_rate for [%s] %s.") % (asset.method_rate, asset.code, asset.name))
+                    _("Illegal value %s in asset.method_rate for [%s] %s.") 
+                    % (asset.method_rate, asset.code, asset.name))
         return depreciation_stop_date
 
     def _compute_year_amount(self, cr, uid, asset, amount_to_depr,
@@ -1317,7 +1318,7 @@ class account_asset_asset(orm.Model):
                 'parent_id': category_obj.parent_id.id,
                 'method': category_obj.method,
                 'method_number': category_obj.method_number,
-                'method_rate' : category_obj.method_rate,
+                'method_rate': category_obj.method_rate,
                 'method_time': category_obj.method_time,
                 'method_period': category_obj.method_period,
                 'method_progress_factor': category_obj.method_progress_factor,
@@ -1780,7 +1781,7 @@ class account_asset_depreciation_line(orm.Model):
             period_id = period_ids and period_ids[0] or False
             move_id = move_obj.create(
                 cr, uid, self._setup_move_data(
-                cr, uid, line, depreciation_date, period_id, context),
+                    cr, uid, line, depreciation_date, period_id, context),
                 context=context)
             depr_acc_id = asset.category_id.account_depreciation_id.id
             exp_acc_id = asset.category_id.account_expense_depreciation_id.id
