@@ -7,9 +7,9 @@
 
 from __future__ import division, print_function, unicode_literals
 import html2text
-from openerp import _
-from openerp import fields
-from openerp.report import report_sxw
+from odoo import _
+from odoo import fields
+from odoo.report import report_sxw
 from psycopg2.extensions import AsIs
 
 from .report_xlsx_financial_base import ReportXlsxFinancialBase

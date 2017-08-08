@@ -4,7 +4,7 @@
 
 from __future__ import division, print_function, unicode_literals
 
-from openerp import fields, models
+from odoo import fields, models
 
 
 class FinancialInstallmentPreview(models.Model):
