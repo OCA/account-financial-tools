@@ -402,7 +402,7 @@ class FinancialMove(models.Model):
     # Payment term and Payment mode
     #
     payment_mode_id = fields.Many2one(
-        comodel_name='payment.mode',
+        comodel_name='account.payment.mode',
         string="Payment Mode",
     )
     # Este campo esta sendo inserido somente para fins gerenciais e não será
@@ -489,7 +489,7 @@ class FinancialMove(models.Model):
             move.amount_paid_bank_fees = amount_paid_bank_fees
             move.amount_paid_total = amount_paid_total
 
-    @api.depends('ref', 'ref_item')
+    @api.depends('ref', 'ref_item', 'type')
     def _compute_display_name(self):
         for record in self:
             financial_type = FINANCIAL_TYPE_CODE.get(record.type) or ''
