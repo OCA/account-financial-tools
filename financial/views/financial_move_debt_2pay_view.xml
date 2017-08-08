@@ -75,11 +75,4 @@
         <field name="sequence" eval="2"/>
     </record>
 
-    <record model="ir.ui.menu" id="financial_move_debt_payment_item_menu">
-        <field name="name">Payment Item</field>
-        <field name="parent_id" ref="financial_payable_menu"/>
-        <field name="action" ref="financial_move_debt_payment_item_action"/>
-        <field name="sequence" eval="2"/>
-    </record>
-
 </odoo>

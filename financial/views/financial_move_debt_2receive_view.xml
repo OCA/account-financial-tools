@@ -75,11 +75,4 @@
         <field name="sequence" eval="1"/>
     </record>
 
-    <record model="ir.ui.menu" id="financial_move_debt_receipt_item_menu">
-        <field name="name">Receipt Item</field>
-        <field name="parent_id" ref="financial_receivable_menu"/>
-        <field name="action" ref="financial_move_debt_receipt_item_action"/>
-        <field name="sequence" eval="2"/>
-    </record>
-
 </odoo>
