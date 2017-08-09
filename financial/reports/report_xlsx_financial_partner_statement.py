@@ -8,7 +8,7 @@
 from __future__ import division, print_function, unicode_literals
 
 from odoo import _
-from odoo import fields
+from odoo import exceptions, fields
 from odoo.report import report_sxw
 from psycopg2.extensions import AsIs
 
@@ -101,6 +101,10 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         }
         self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
+        if not data:
+            raise exceptions.Warning(
+                _('Não encontrado movimentações.')
+            )
         move_ids = []
         for line in data:
             move_dict = {
