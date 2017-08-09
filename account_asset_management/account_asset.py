@@ -331,7 +331,7 @@ class account_asset_asset(orm.Model):
                 depreciation_date_start = datetime.strptime(
                     asset.date_revaluation or asset.date_start, '%Y-%m-%d')
                 fy_date_stop = entry['date_stop']
-                fy_date_start = entry['fy_date_start']
+                fy_date_start = entry['date_start']
                 if fy_id:
                     fy_duration = self._get_fy_duration(
                         cr, uid, fy_id, option='months')
