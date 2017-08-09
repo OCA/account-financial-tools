@@ -40,6 +40,7 @@ addon | version | summary
 [account_reversal](account_reversal/) | 10.0.1.0.0 | Wizard for creating a reversal account move
 [account_type_inactive](account_type_inactive/) | 10.0.1.0.0 | Allows to set account type to inactive
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
+[base_vat_optional_vies](base_vat_optional_vies/) | 10.0.1.0.0 | Optional validation of VAT via VIES
 [currency_rate_update](currency_rate_update/) | 10.0.1.0.0 | Currency Rate Update
 
 
