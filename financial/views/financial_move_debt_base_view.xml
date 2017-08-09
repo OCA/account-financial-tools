@@ -80,7 +80,7 @@
                             </group>
                             <group name="document_amounts">
                                 <separator string="Values" />
-                                <group name="amounts" colspan="2" class="oe_subtotal_footer oe_center">
+                                <group name="amounts" colspan="2" class="oe_center">
                                     <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
                                     <field name="amount_document" string="Amount" required="1" />
                                     <field name="amount_paid_document" string="(-) Paid" readonly="1" />
