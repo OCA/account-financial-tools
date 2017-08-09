@@ -331,8 +331,13 @@ class account_asset_asset(orm.Model):
                 depreciation_date_start = datetime.strptime(
                     asset.date_revaluation or asset.date_start, '%Y-%m-%d')
                 fy_date_stop = entry['date_stop']
-                fy_duration = self._get_fy_duration(
-                    cr, uid, fy_id, option='months')
+                fy_date_start = entry['fy_date_start']
+                if fy_id:
+                    fy_duration = self._get_fy_duration(
+                        cr, uid, fy_id, option='months')
+                else: # the fiscal year was 'undefined' (dummy_fy is used)
+                    fy_duration = relativedelta(fy_date_stop, 
+                                                fy_date_start).months
                 delta = relativedelta(fy_date_stop, depreciation_date_start)
                 months_remaining = delta.months + 1
                 duration_factor = float(months_remaining) / fy_duration
