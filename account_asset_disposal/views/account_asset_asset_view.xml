@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_asset_asset_form">
+        <field name="name">Add disposal fields</field>
+        <field name="model">account.asset.asset</field>
+        <field name="inherit_id"
+               ref="account_asset.view_account_asset_asset_form"/>
+        <field name="arch" type="xml">
+            <button name="compute_depreciation_board" position="attributes">
+                <attribute name="attrs">{
+                    'invisible':[('state', '!=', 'draft')]}</attribute>
+            </button>
+            <button name="set_to_close" position="after">
+                <button name="action_disposal_undo"
+                        states="disposed"
+                        string="Undo disposal"
+                        type="object"
+                        class="oe_highlight"
+                />
+            </button>
+            <field name="date" position="after">
+                <field name="disposal_date"
+                       attrs="{'invisible': [('state', '!=', 'disposed')]}"/>
+                <field name="disposal_move_id"
+                       attrs="{'invisible': [('state', '!=', 'disposed')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
