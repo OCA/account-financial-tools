@@ -237,7 +237,7 @@ msgstr ""
 #. module: account_asset
 #: model:ir.actions.act_window,name:account_asset.action_asset_depreciation_confirmation_wizard
 #: model:ir.ui.menu,name:account_asset.menu_asset_depreciation_confirmation_wizard
-msgid "Compute Assets"
+msgid "Compute Depreciations"
 msgstr ""
 
 #. module: account_asset

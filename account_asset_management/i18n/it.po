@@ -356,7 +356,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_asset_depreciation_confirmation_wizard
 #: model:ir.ui.menu,name:account_asset_management.menu_asset_depreciation_confirmation_wizard
-msgid "Compute Assets"
+msgid "Compute Depreciations"
 msgstr "Calcola Ammortamenti"
 
 #. module: account_asset_management

@@ -209,7 +209,7 @@ msgstr ""
 #: wizard_button:account.asset.compute,init,asset_compute:0
 #: model:ir.actions.wizard,name:account_asset.wizard_asset_compute
 #: model:ir.ui.menu,name:account_asset.menu_wizard_asset_compute
-msgid "Compute assets"
+msgid "Compute Depreciations"
 msgstr ""
 
 #. module: account_asset
