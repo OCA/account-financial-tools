@@ -857,7 +857,7 @@ msgstr "المؤرخات"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "حساب الأصول"
 
 #. module: account_asset_management

@@ -857,7 +857,7 @@ msgstr "Povijest"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "Izračunaj imovinu"
 
 #. module: account_asset_management

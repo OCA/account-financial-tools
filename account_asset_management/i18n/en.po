@@ -856,8 +856,8 @@ msgstr "History"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
-msgstr "Compute Asset"
+msgid "Compute Depreciations"
+msgstr "Compute Depreciations"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:796

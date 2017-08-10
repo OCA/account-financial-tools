@@ -857,7 +857,7 @@ msgstr "Historiek"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "Afschrijving berekenen"
 
 #. module: account_asset_management

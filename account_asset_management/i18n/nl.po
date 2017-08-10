@@ -857,7 +857,7 @@ msgstr "Historie"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "Bereken activa"
 
 #. module: account_asset_management

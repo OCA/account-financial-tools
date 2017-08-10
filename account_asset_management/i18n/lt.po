@@ -857,7 +857,7 @@ msgstr "Istorija"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "Skaičiuoti nusidėvėjimą"
 
 #. module: account_asset_management

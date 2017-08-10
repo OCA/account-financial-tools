@@ -858,7 +858,7 @@ msgstr "Geçmiş"
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
-msgid "Compute Asset"
+msgid "Compute Depreciations"
 msgstr "Demirbaş Hesapla"
 
 #. module: account_asset_management
