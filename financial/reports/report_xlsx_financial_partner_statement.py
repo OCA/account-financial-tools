@@ -141,7 +141,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
                   fm.debt_id = %(debt_id)s ;
             '''
             filters = {
-                'debt_id': AsIs(line[0]),
+                'debt_id': AsIs(str(line[0]).replace(',)', ')')),
             }
             self.env.cr.execute(SQL_VALUE, filters)
             data2 = self.env.cr.fetchall()
@@ -192,7 +192,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
             'type': self.report_wizard.type,
             'date_to': self.report_wizard.date_to,
             'date_from': self.report_wizard.date_from,
-            'move_ids': AsIs(tuple(move_ids)),
+            'move_ids': AsIs(str(tuple(move_ids)).replace(',)',')')),
         }
         self.env.cr.execute(SQL_MOVE_LINE_VALUE, filters)
         data_move_lines = self.env.cr.fetchall()
