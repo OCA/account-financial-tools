@@ -120,7 +120,7 @@ msgstr "Lopend"
 
 #. module: account_asset_management
 #: field:account.asset.remove,account_sale_id:0
-msgid "Asset Sale Account"
+msgid "Payment Method"
 msgstr ""
 
 #. module: account_asset_management

@@ -121,7 +121,7 @@ msgstr "Executando"
 
 #. module: account_asset_management
 #: field:account.asset.remove,account_sale_id:0
-msgid "Asset Sale Account"
+msgid "Payment Method"
 msgstr "Conta de ativo de venda"
 
 #. module: account_asset_management

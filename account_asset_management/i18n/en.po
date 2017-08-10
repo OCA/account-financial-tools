@@ -119,8 +119,8 @@ msgstr "Running"
 
 #. module: account_asset_management
 #: field:account.asset.remove,account_sale_id:0
-msgid "Asset Sale Account"
-msgstr "Asset Sale Account"
+msgid "Payment Method"
+msgstr "Payment Method"
 
 #. module: account_asset_management
 #: view:account.asset.history:0
