@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"POT-Creation-Date: 2017-08-04 22:28+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Croatian (Croatia) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/hr_HR/)\n"
@@ -407,7 +407,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr ""
+msgstr "Oblast/Županija"
 
 #. module: account_credit_control
 #: help:credit.control.line,state:0
@@ -1025,7 +1025,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0

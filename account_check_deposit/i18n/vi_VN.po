@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-04 22:28+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/el_GR/)\n"
+"Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/vi_VN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: el_GR\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: vi_VN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
 msgid "Status"
-msgstr "Κατάσταση"
+msgstr ""
 
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
@@ -77,7 +77,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
 msgid "Company"
-msgstr "Εταιρεία"
+msgstr ""
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -150,7 +150,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
 msgid "Name"
-msgstr "Ονομασία"
+msgstr "Tên"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -177,7 +177,7 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company
 msgid "Companies"
-msgstr "Εταιρίες"
+msgstr ""
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:41

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-08-04 22:28+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Czech (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/cs/)\n"
@@ -58,7 +58,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr ""
+msgstr "Stav"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:190

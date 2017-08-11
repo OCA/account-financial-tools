@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 22:28+0000\n"
+"POT-Creation-Date: 2017-08-04 22:27+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/vi_VN/)\n"
@@ -1084,7 +1084,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
