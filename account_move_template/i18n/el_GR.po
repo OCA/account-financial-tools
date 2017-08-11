@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
@@ -19,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:30+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-08-11 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -235,7 +237,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr ""
+msgstr "Ονομασία"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template

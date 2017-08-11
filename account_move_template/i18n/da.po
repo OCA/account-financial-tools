@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-04-25 10:44+0000\n"
+"PO-Revision-Date: 2017-08-11 11:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Danish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -267,7 +267,7 @@ msgstr "Rækkefølge"
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr ""
+msgstr "Delstat"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0

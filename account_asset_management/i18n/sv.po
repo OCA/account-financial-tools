@@ -8,8 +8,9 @@
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok Kang <kcsgoodboy@naver.com>, 2014
-# Chanseok Kang <kcsgoodboy@naver.com>, 2014
+# chans <kcsgoodboy@naver.com>, 2014
+# chans <kcsgoodboy@naver.com>, 2014
+# chans <kcsgoodboy@naver.com>, 2014
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
@@ -24,7 +25,7 @@
 # jeon <bluerespect@nate.com>, 2014
 # JiyeonLee <leejiyeon00@gmail.com>, 2014
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
-# Kevin Min <gr326887@graded.br>, 2015
+# Gu Hong Min <placidmoon1@gmail.com>, 2015
 # KimKyudong <choemh@nate.com>, 2014
 # kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
@@ -45,8 +46,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2017-01-19 20:16+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-11 11:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -1138,7 +1139,7 @@ msgstr "Hoppa över preleminär status"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0

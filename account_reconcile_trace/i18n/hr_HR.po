@@ -187,7 +187,7 @@ msgstr ""
 #: view:account.move:account_reconcile_trace.view_move_trace_form
 #: view:account.reconcile.trace.recursive:account_reconcile_trace.view_trace_form
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_reconcile_trace
 #: help:account.reconcile.trace.direct,down_name:0

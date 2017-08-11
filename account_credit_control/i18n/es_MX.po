@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-03-23 20:09+0000\n"
+"PO-Revision-Date: 2017-08-11 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_MX/)\n"
 "MIME-Version: 1.0\n"
@@ -1111,7 +1111,7 @@ msgstr ""
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document

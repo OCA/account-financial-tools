@@ -3,12 +3,22 @@
 # * account_default_draft_move
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# Eduardo Rodríguez Crespo <erocre@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2013
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-09-29 09:07+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-07 15:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -23,9 +33,14 @@ msgid "Account Entry"
 msgstr "Asiento contable"
 
 #. module: account_default_draft_move
+#: field:account.move,update_posted:0
+msgid "Allow Cancelling Entries"
+msgstr ""
+
+#. module: account_default_draft_move
 #: model:ir.model,name:account_default_draft_move.model_account_bank_statement
 msgid "Bank Statement"
-msgstr ""
+msgstr "Extracto bancario"
 
 #. module: account_default_draft_move
 #: view:account.invoice:account_default_draft_move.invoice_form_supplier_group_invoice

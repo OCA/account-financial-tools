@@ -8,8 +8,8 @@
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
-# Chanseok Kang <kcsgoodboy@naver.com>, 2014
-# Chanseok Kang <kcsgoodboy@naver.com>, 2014
+# chans <kcsgoodboy@naver.com>, 2014
+# chans <kcsgoodboy@naver.com>, 2014
 # Chul Park <parkchul@nate.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # David10000 <gameness@naver.com>, 2014
@@ -21,7 +21,7 @@
 # jeon <bluerespect@nate.com>, 2014
 # JiyeonLee <leejiyeon00@gmail.com>, 2014
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
-# Kevin Min <gr326887@graded.br>, 2015
+# Gu Hong Min <placidmoon1@gmail.com>, 2015
 # KimKyudong <choemh@nate.com>, 2014
 # kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-03-23 20:09+0000\n"
+"PO-Revision-Date: 2017-08-11 11:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -1126,7 +1126,7 @@ msgstr ""
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr ""
+msgstr "Județ"
 
 #. module: account_credit_control
 #: view:website:account_credit_control.report_credit_control_summary_document

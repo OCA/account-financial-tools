@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-04-25 10:44+0000\n"
+"PO-Revision-Date: 2017-08-11 11:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nb/)\n"
 "MIME-Version: 1.0\n"
@@ -1113,7 +1113,7 @@ msgstr "Hopp over Utkast stat"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0

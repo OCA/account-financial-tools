@@ -4,8 +4,11 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
@@ -13,15 +16,16 @@
 # Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # John Toro <johntoro@gmail.com>, 2015
-# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
+# Lixon Jean-Yves <jy.lixon@ls-development.net>, 2016
+# Lixon Jean-Yves <jy.lixon@ls-development.net>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:30+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-11 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
@@ -816,7 +820,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,name:0 field:credit.control.policy.level,name:0
 msgid "Name"
-msgstr ""
+msgstr "Ονομασία"
 
 #. module: account_credit_control
 #: model:account.account,name:account_credit_control.a_recv_3

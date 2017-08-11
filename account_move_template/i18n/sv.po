@@ -5,8 +5,10 @@
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
 # Antonio Trueba, 2016
+# Bole <bole@dajmi5.com>, 2015
 # Chen-Do LU <clu@alkemics.com>, 2015
 # Bole <bole@dajmi5.com>, 2015
 # Dimitrios Glentadakis <dglent@gmail.com>, 2013-2014, 2015-2016
@@ -16,6 +18,7 @@
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Jim Spentzos, 2014
 # Jim Spentzos, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # njeudy <njeudy@tuxservices.com>, 2015
@@ -27,8 +30,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-08-11 11:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -287,7 +290,7 @@ msgstr "Nummerserie"
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0

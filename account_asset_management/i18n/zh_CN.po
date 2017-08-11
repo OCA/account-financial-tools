@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 22:33+0000\n"
-"PO-Revision-Date: 2017-03-03 07:09+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-11 11:59+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -1115,7 +1115,7 @@ msgstr "跳过草稿状态"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0

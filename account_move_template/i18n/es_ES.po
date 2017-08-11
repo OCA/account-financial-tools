@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-04-25 10:42+0000\n"
+"PO-Revision-Date: 2017-08-11 11:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -283,7 +283,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0

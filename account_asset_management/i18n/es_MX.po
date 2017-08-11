@@ -15,7 +15,7 @@
 # Hotellook, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Miku Laitinen <miku.laitinen@gmail.com>, 2015
-# nikos_pap <231036448@freemail.gr>, 2008-2009
+# nikos_pap <nikos769@yahoo.gr>, 2008-2009
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 23:17+0000\n"
-"PO-Revision-Date: 2016-12-05 09:32+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-11 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Mexico) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_MX/)\n"
 "MIME-Version: 1.0\n"
@@ -1118,7 +1118,7 @@ msgstr "Omitir estado borrador"
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
