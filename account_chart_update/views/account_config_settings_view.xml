@@ -8,14 +8,14 @@
     <field name="model">account.config.settings</field>
     <field name="inherit_id" ref="account.view_account_config_settings"/>
     <field name="arch" type="xml">
-        <xpath expr="//button[@name='%(account.open_account_charts_modules)d']
-                     /.."
-               position="after">
+        <xpath expr="//button[@name='%(account.open_account_charts_modules)d']/.." position="after">
             <div>
-                <button string="Update current chart template"
-                    name="%(action_wizard_update_chart)d"
-                    type="action"
-                    class="oe_link"/>
+                <button string="Update chart template"
+                        name="%(action_wizard_update_chart)d"
+                        context="{'default_company_id': company_id}"
+                        type="action"
+                        class="oe_link"
+                />
             </div>
         </xpath>
     </field>
