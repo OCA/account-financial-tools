@@ -54,13 +54,7 @@ Credits
 Contributors
 ------------
 
-* Jordi Esteve
-* Borja López Soilán
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-* Joaquín Gutierrez <joaquingpedrosa@gmail.com>
-* invitu
-* Stéphane Bidoul <stephane.bidoul@acsone.eu>
-* Antonio Espinosa <antonioea@antiun.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Jairo Llopis <jairo.llopis@tecnativa.com>
 * Jacques-Etienne Baudoux <je@bcim.be>
 
