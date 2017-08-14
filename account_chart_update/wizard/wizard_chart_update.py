@@ -59,8 +59,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     continue_on_errors = fields.Boolean(
         string="Continue on errors", default=False,
         help="If set, the wizard will continue to the next step even if "
-             "there are minor errors (for example the parent account "
-             "of a new account couldn't be set).")
+             "there are minor errors.")
     tax_ids = fields.One2many(
         comodel_name='wizard.update.charts.accounts.tax', ondelete='cascade',
         inverse_name='update_chart_wizard_id', string='Taxes')
