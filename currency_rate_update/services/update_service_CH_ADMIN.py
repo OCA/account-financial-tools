@@ -58,7 +58,7 @@ class CH_ADMINGetter(CurrencyGetterInterface):
         dom = etree.fromstring(rawfile)
         _logger.debug("Admin.ch sent a valid XML file")
         adminch_ns = {
-            'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'
+            'def': 'http://www.pwebapps.ezv.admin.ch/apps/rates'
         }
         rate_date = dom.xpath(
             '/def:wechselkurse/def:datum/text()',
