@@ -26,6 +26,7 @@ addon | version | summary
 --- | --- | ---
 [account_asset_depr_line_cancel](account_asset_depr_line_cancel/) | 9.0.1.0.0 | Assets Management - Cancel button
 [account_balance_line](account_balance_line/) | 9.0.1.1.0 | Display balance totals in move line view
+[account_chart_update](account_chart_update/) | 9.0.1.0.0 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 9.0.0.1.0 | Manage deposit of checks to the bank
 [account_credit_control](account_credit_control/) | 9.0.0.1.0 | Account Credit Control
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 9.0.1.0.0 | Check VAT on invoice validation
@@ -48,7 +49,6 @@ addon | version | summary
 [account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 (unported) | Assets Management Excel reporting
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
-[account_chart_update](account_chart_update/) | 8.0.1.2.0 (unported) | Detect changes and update the Account Chart from a template
 [account_constraints](account_constraints/) | 8.0.1.1.0 (unported) | Account Constraints
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 (unported) | Credit control dunning fees
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 (unported) | Move in draft state by default
