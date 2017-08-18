@@ -5,13 +5,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': "Detect changes and update the Account Chart from a template",
-    "summary": "Wizard to update a company's account chart from a template",
-    'version': "9.0.1.0.0",
+    'name': "Account Chart Update",
+    "summary": "Update a company's Account Chart from a template",
+    'version': "10.0.1.0.0",
     'author': "Tecnativa, "
-              "BCIM,"
+              "BCIM, "
               "Odoo Community Association (OCA)",
-    'website': "http://odoo-community.org",
+    'website': "https://github.com/OCA/account-financial-tools",
     'depends': ["account"],
     'category': "Accounting & Finance",
     'contributors': [

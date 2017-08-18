@@ -8,9 +8,12 @@
 # © 2016 Jacques-Etienne Baudoux <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _, tools
+from odoo import api, exceptions, fields, models, tools, _
 from contextlib import closing
-from cStringIO import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -261,10 +264,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Find a tax that matches the template."""
         # search inactive taxes too, to avoid re-creating
         # taxes that have been deactivated before
-        Tax = self.env['account.tax'].with_context(active_test=False)
-        result = Tax
+        tax = self.env['account.tax'].with_context(active_test=False)
+        result = tax
         for template in templates:
-            single = Tax
+            single = tax
             criteria = (
                 ("name", "=", template.name),
                 ("description", "=", template.name),
@@ -275,7 +278,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if single:
                     break
                 if domain[2]:
-                    single = Tax.search(
+                    single = tax.search(
                         [domain,
                          ("company_id", "=", self.company_id.id),
                          ("type_tax_use", "=", template.type_tax_use)],

@@ -2,13 +2,13 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===========================================================
-Detect changes and update the Account Chart from a template
-===========================================================
+====================
+Account Chart Update
+====================
 
-This is a pretty useful tool to update Odoo installations after tax reforms
-on the official charts of accounts, or to apply fixes performed on the chart
-template.
+Detect changes and update the Account Chart from a template. This is a pretty
+useful tool to update Odoo installations after tax reforms on the official
+charts of accounts, or to apply fixes performed on the chart template.
 
 The wizard:
 
@@ -33,7 +33,7 @@ individually.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/9.0
+   :target: https://runbot.odoo-community.org/runbot/92/10.0
 
 Known issues / Roadmap
 ======================
