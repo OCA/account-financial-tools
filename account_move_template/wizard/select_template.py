@@ -90,7 +90,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
     @api.multi
     def load_template(self):
         self.ensure_one()
-        account_period_model = self.env['account.period']
+#         account_period_model = self.env['account.period']
         if not self.check_zero_lines():
             raise exceptions.Warning(
                 _('At least one amount has to be non-zero!')
@@ -99,9 +99,9 @@ class WizardSelectMoveTemplate(models.TransientModel):
         for template_line in self.line_ids:
             input_lines[template_line.sequence] = template_line.amount
 
-        period = account_period_model.find()
-        if not period:
-            raise exceptions.Warning(_('Unable to find a valid period !'))
+#         period = account_period_model.find()
+#         if not period:
+#             raise exceptions.Warning(_('Unable to find a valid period !'))
 
         computed_lines = self.template_id.compute_lines(input_lines)
 
@@ -110,7 +110,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             if line.journal_id.id not in moves:
                 moves[line.journal_id.id] = self._make_move(
                     self.template_id.name,
-                    period.id,
+                    #period.id,
                     line.journal_id.id,
                     self.partner_id.id
                 )
@@ -119,7 +119,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 line,
                 computed_lines,
                 moves[line.journal_id.id],
-                period.id,
+                #period.id,
                 self.partner_id.id
             )
             if self.template_id.cross_journals:
@@ -128,7 +128,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     line,
                     computed_lines,
                     moves[line.journal_id.id],
-                    period.id,
+                    #period.id,
                     trans_account_id,
                     self.partner_id.id
                 )
@@ -144,10 +144,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
         }
 
     @api.model
-    def _make_move(self, ref, period_id, journal_id, partner_id):
+    def _make_move(self, ref, journal_id, partner_id):
         move = self.env['account.move'].create({
             'ref': ref,
-            'period_id': period_id,
+            #'period_id': period_id,
             'journal_id': journal_id,
             'partner_id': partner_id,
         })
@@ -155,7 +155,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
     @api.model
     def _make_move_line(self, line, computed_lines,
-                        move_id, period_id, partner_id):
+                        move_id, partner_id):
         account_move_line_model = self.env['account.move.line']
         analytic_account_id = False
         if line.analytic_account_id:
@@ -171,7 +171,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'name': line.name,
             'move_id': move_id,
             'journal_id': line.journal_id.id,
-            'period_id': period_id,
+            #'period_id': period_id,
             'analytic_account_id': analytic_account_id,
             'account_id': line.account_id.id,
             'date': time.strftime('%Y-%m-%d'),

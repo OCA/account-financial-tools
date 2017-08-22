@@ -30,7 +30,7 @@
                             <field name="name" select="1"/>
                             <field name="sequence"/>
                             <field name="journal_id"/>
-                            <field name="account_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                            <field name="account_id"/>
                             <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
                         </group>
                         <group>

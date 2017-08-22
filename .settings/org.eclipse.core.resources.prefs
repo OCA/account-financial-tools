@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//account_invoice_constraint_chronology/__init__.py=utf-8
+encoding//account_invoice_constraint_chronology/__openerp__.py=utf-8
+encoding//account_invoice_constraint_chronology/model/account.py=utf-8
+encoding//account_invoice_constraint_chronology/model/account_invoice.py=utf-8
+encoding//account_invoice_constraint_chronology/tests/test_account_constraint_chronology.py=utf-8
+encoding//account_move_template/__init__.py=utf-8
+encoding//account_move_template/__openerp__.py=utf-8
+encoding//account_move_template/models/__init__.py=utf-8
+encoding//account_move_template/models/account_document_template.py=utf-8
+encoding//account_move_template/models/account_move_template.py=utf-8
+encoding//account_move_template/wizard/select_template.py=utf-8

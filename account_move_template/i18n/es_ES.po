@@ -1,43 +1,45 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_move_template
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
+"PO-Revision-Date: 2017-08-22 15:01+0200\n"
 "Last-Translator: <>\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es_ES/)\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_id:0
 #: field:wizard.select.move.template.line,account_id:0
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Importe"
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
 msgid "Analytic Account"
-msgstr ""
+msgstr "Cuenta analítica"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:96
 #, python-format
 msgid "At least one amount has to be non-zero!"
-msgstr ""
+msgstr "Por lo menos una cantidad no debe de ser cero"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
@@ -48,7 +50,7 @@ msgstr "Cancelar"
 #: code:addons/account_move_template/account_document_template.py:75
 #, python-format
 msgid "Code \"%s\" refers to non existing line"
-msgstr ""
+msgstr "El código \"%s\"hace referencia a un alínea inexistente"
 
 #. module: account_move_template
 #: field:account.move.template,company_id:0
@@ -59,13 +61,13 @@ msgstr "Compañía"
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "Computed"
-msgstr ""
+msgstr "Calculado"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
 #: model:ir.ui.menu,name:account_move_template.menu_action_wizard_select_template
 msgid "Create Move from Template"
-msgstr ""
+msgstr "Crear asiento desde plantilla"
 
 #. module: account_move_template
 #: field:account.document.template,create_uid:0
@@ -91,18 +93,18 @@ msgstr "Creado en"
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Credit"
-msgstr ""
+msgstr "Credito"
 
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
 msgid "Cross-Journals"
-msgstr ""
+msgstr "Diario Cruzado"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Debito"
 
 #. module: account_move_template
 #: field:account.document.template,id:0
@@ -117,19 +119,19 @@ msgstr "ID"
 #: code:addons/account_move_template/account_document_template.py:85
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
-msgstr ""
+msgstr "Inscosistencia entre las lineas de entrada y las ya existentes %s"
 
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_move_template
 #: view:account.move.template:account_move_template.view_move_template_form
 #: view:account.move.template:account_move_template.view_move_template_search
 #: view:account.move.template:account_move_template.view_move_template_tree
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Diario vorrador"
 
 #. module: account_move_template
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
@@ -161,41 +163,41 @@ msgstr "Última actualización en"
 #: code:addons/account_move_template/account_document_template.py:65
 #, python-format
 msgid "Line %s can't refer to itself"
-msgstr ""
+msgstr "La línea %s no se puede referenciar a si misma"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
 msgid "Lines"
-msgstr ""
+msgstr "Línea"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Load"
-msgstr ""
+msgstr "Crear"
 
 #. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
 #: field:wizard.select.move.template.line,move_line_type:0
 msgid "Move Line Type"
-msgstr ""
+msgstr "Tipo de apunte"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 #: field:wizard.select.move.template,template_id:0
 msgid "Move Template"
-msgstr ""
+msgstr "Asiento Borrador"
 
 #. module: account_move_template
 #: view:wizard.select.move.template.line:account_move_template.wizard_select_template_line
 #: view:wizard.select.move.template.line:account_move_template.wizard_select_template_line_tree
 msgid "Move Template Line"
-msgstr ""
+msgstr "Apunte Borrador"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_move_template_form
 #: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
 msgid "Move Templates"
-msgstr ""
+msgstr "Aiento borrador"
 
 #. module: account_move_template
 #: field:account.document.template,name:0
@@ -203,7 +205,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
@@ -214,62 +216,62 @@ msgstr "Siguiente"
 #: code:addons/account_move_template/wizard/select_template.py:199
 #, python-format
 msgid "No Analytic Journal !"
-msgstr ""
+msgstr "No hay diario analítico"
 
 #. module: account_move_template
 #: field:wizard.select.move.template.line,sequence:0
 msgid "Number"
-msgstr ""
+msgstr "Numero"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa / Cliente"
 
 #. module: account_move_template
 #: field:account.document.template.line,python_code:0
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: field:account.move.template.line,python_code:0
 msgid "Python Code"
-msgstr ""
+msgstr "Código python"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
 msgid "Select Move Template"
-msgstr ""
+msgstr "Seleccionar asiento borrador"
 
 #. module: account_move_template
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
 msgid "Tax"
-msgstr ""
+msgstr "Impuesto"
 
 #. module: account_move_template
 #: field:account.move.template.line,template_id:0
 #: field:wizard.select.move.template.line,template_id:0
 msgid "Template"
-msgstr ""
+msgstr "Plantilla"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
 msgid "Template Lines"
-msgstr ""
+msgstr "Líneas de plantilla"
 
 #. module: account_move_template
 #: selection:wizard.select.move.template,state:0
 msgid "Template selected"
-msgstr ""
+msgstr "Borrador selecionado"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
@@ -279,7 +281,7 @@ msgstr ""
 #. module: account_move_template
 #: field:account.move.template,transitory_acc_id:0
 msgid "Transitory account"
-msgstr ""
+msgstr "Cuenta de transición"
 
 #. module: account_move_template
 #: field:account.document.template.line,type:0
@@ -291,7 +293,7 @@ msgstr "Tipo"
 #: code:addons/account_move_template/wizard/select_template.py:104
 #, python-format
 msgid "Unable to find a valid period !"
-msgstr ""
+msgstr "No se puede encontrar un periodo válido !"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
@@ -306,6 +308,9 @@ msgid ""
 "first line). Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + "
 "L(3)'; '1250'"
 msgstr ""
+"Puede relacionar unas líneas con otroas usando el código de secuencia (e."
+"g. 'L(1)' para la primera línea). Ejemplo del código: 'L(1) * 0.2'; 'L(2) "
+"- L(1)'; 'L(1) + L(2) + L(3)'; '1250'"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:164

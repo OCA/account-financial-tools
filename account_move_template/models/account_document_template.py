@@ -99,8 +99,15 @@ class AccountDocumentTemplateLine(models.Model):
     name = fields.Char(required=True)
     sequence = fields.Integer(string='Sequence', required=True)
     type = fields.Selection(
-        [('computed', 'Computed'), ('input', 'User input')],
+        selection = [
+            ('computed', 'Computed'), 
+            ('input', 'User input')],
         string='Type',
-        required=True
+        required=True,
+        default='input'
     )
     python_code = fields.Text(string='Python Code')
+    
+    
+    
+    
