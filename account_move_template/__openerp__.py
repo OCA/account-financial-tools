@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': "Account Move Template",
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'category': 'Generic Modules/Accounting',
     'summary': "Templates for recurring Journal Entries",
     'author': "Agile Business Group,Odoo Community Association (OCA)",
@@ -36,6 +36,6 @@
     'test': [
         'test/generate_move.yml',
     ],
-    'active': False,
-    'installable': False,
+    'active': True,
+    'installable': True,
 }

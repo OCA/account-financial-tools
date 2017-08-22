@@ -73,6 +73,12 @@
             id="action_wizard_select_template_by_move"
             view_id="wizard_select_template"/>
 
-        <menuitem name="Create Move from Template" action="action_wizard_select_template" id="menu_action_wizard_select_template" sequence="10" parent="account.menu_finance_entries"/>
+        <menuitem 
+        name="Create Move from Template" 
+        action="action_wizard_select_template" 
+        id="menu_action_wizard_select_template" 
+        sequence="10" 
+        parent="account.menu_finance_entries"/>
+        
     </data>
 </openerp>

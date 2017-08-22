@@ -62,7 +62,7 @@ class account_invoice(models.Model):
                                                " try again.") %
                                              date_invoice_tz)
 
-                if inv.internal_number is False:
+                if inv.number is False:
                     invoices = self.search([('state', 'in', ['open', 'paid']),
                                             ('date_invoice', '>',
                                              inv.date_invoice),

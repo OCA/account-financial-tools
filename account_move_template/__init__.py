@@ -19,6 +19,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import account_document_template
-from . import account_move_template
+from . import models
 from . import wizard
