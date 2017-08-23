@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-
+<odoo>
         <record id="wizard_select_template" model="ir.ui.view">
             <field name="name">Select Move Template</field>
             <field name="model">wizard.select.move.template</field>
             <field name="arch" type="xml">
                 <form string="Move Template" >
-                    <group col="2" width="600" height="500">
+                    <field name="state" invisible="1"/>
+                    <group>
                         <group>
-                            <field name="template_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
-                            <field name="partner_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
-                            <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
-                            <field name="state" invisible="1"/>
+                            <field name="template_id" widget="selection"
+                                   attrs="{'invisible':[('state','=','template_selected')]}"/>
                         </group>
-                        <newline/>
-                        <group col="3">
-                            <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="1"/>
-                            <button icon="gtk-ok" name="load_template" string="Load" type="object" colspan="1" attrs="{'invisible':[('state','!=','template_selected')]}" />
-                            <button name="load_lines" string="Next" icon="terp-gtk-go-back-rtl" type="object" colspan="1" attrs="{'invisible':[('state','=','template_selected')]}" />
+                        <group>
+                            <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
                         </group>
                     </group>
+                    <separator
+                            string="Modify the lines before create them or edit them after creation."
+                            attrs="{'invisible':[('state','!=','template_selected')]}"/>
+                    <field name="line_ids" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
+                    <footer>
+                        <button name="load_template" class="btn-primary" string="Load" type="object" colspan="1" attrs="{'invisible':[('state','!=','template_selected')]}" />
+                        <button name="load_lines" class="btn-primary" string="Next" type="object" attrs="{'invisible':[('state','=','template_selected')]}" />
+                        <button special="cancel" string="Cancel" class="btn-default"/>
+                    </footer>
                 </form>
             </field>
         </record>
@@ -30,7 +33,7 @@
             <field name="model">wizard.select.move.template.line</field>
             <field name="arch" type="xml">
                 <form string="Move Template Line">
-                    <group col="2">
+                    <group>
                         <field name="sequence" invisible="1"/>
                         <field name="name" />
                         <field name="account_id" />
@@ -60,8 +63,8 @@
             <field name="res_model">wizard.select.move.template</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
-               <field name="view_id" ref="wizard_select_template"/>
-               <field name="target">new</field>
+            <field name="view_id" ref="wizard_select_template"/>
+            <field name="target">new</field>
         </record>
 
        <act_window name="Create Move from Template"
@@ -74,5 +77,4 @@
             view_id="wizard_select_template"/>
 
         <menuitem name="Create Move from Template" action="action_wizard_select_template" id="menu_action_wizard_select_template" sequence="10" parent="account.menu_finance_entries"/>
-    </data>
-</openerp>
+</odoo>
