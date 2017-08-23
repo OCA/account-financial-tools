@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
-
+<odoo>
         <record id="view_move_template_line_tree" model="ir.ui.view">
             <field name="name">account.move.template.line.tree</field>
             <field name="model">account.move.template.line</field>
@@ -15,7 +13,6 @@
                     <field name="type"/>
                     <field name="python_code" />
                     <field name="move_line_type"/>
-                    <field name="account_tax_id"/>
                 </tree>
             </field>
         </record>
@@ -25,23 +22,28 @@
             <field name="model">account.move.template.line</field>
             <field name="arch" type="xml">
                 <form string="Journal Entry Template Line">
-                    <group>
+                    <sheet>
                         <group>
-                            <field name="name" select="1"/>
-                            <field name="sequence"/>
-                            <field name="journal_id"/>
-                            <field name="account_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
-                            <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                            <group>
+                                <field name="name"/>
+                                <field name="sequence"/>
+                                <field name="journal_id"/>
+                                <field name="account_id"/>
+                                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                            </group>
+                            <group>
+                                <field name="type"/>
+                                <field name="move_line_type"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="type"/>
-                            <field name="move_line_type"/>
-                            <field name="account_tax_id"/>
-                        </group>
-                        <separator string="Python Code" colspan="4"/>
+                        <label for="python_code" string="Python Code"
+                                   attrs="{'invisible': [('type', '!=', 'computed')]}" nolabel="1"/>
                         <field name="python_code" colspan="4" attrs="{'readonly': [('type', '!=', 'computed')]}" nolabel="1"/>
-                        <label string="You can refer to other lines using their sequence number (e.g. 'L(1)' for first line). Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + L(3)'; '1250'" colspan="4"/>
-                    </group>
+                        <div class="oe_account_help">You can refer to other lines using their
+                        sequence number (e.g. 'L(1)' for first line).
+                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1)
+                            + L(2) + L(3)'; '1250'</div>
+                    </sheet>
                 </form>
             </field>
         </record>
@@ -51,13 +53,28 @@
             <field name="model">account.move.template</field>
             <field name="arch" type="xml">
                 <form string="Journal Entry Template">
-                    <group>
-                        <field name="name"/>
-                        <field name="company_id" widget='selection' groups="base.group_multi_company"/>
-                        <field name="cross_journals" />
-                        <field name="transitory_acc_id" attrs="{'invisible':[('cross_journals','!=',True)],'required':[('cross_journals','==',True)]}"/>
-                        <field colspan="4" nolabel="1" name="template_line_ids"/>
-                    </group>
+                    <header>
+                        <button string="Test template"
+                                name="action_run_template"
+                                class="btn-primary"
+                                type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <field name="company_id" widget='selection' groups="base.group_multi_company"/>
+                        </group>
+                        <field nolabel="1" name="template_line_ids"/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <!--<field name="activity_ids"
+                        widget="mail_activity"/>  TODO: uncomment on saas-15-->
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -96,8 +113,8 @@
         </record>
 
         <menuitem
-            action="action_move_template_form" id="menu_action_move_template_form" sequence="5"
-            parent="account.menu_configuration_misc" groups="account.group_account_manager"/>
-
-    </data>
-</openerp>
+            action="action_move_template_form"
+            id="menu_action_move_template_form" sequence="300"
+            parent="account.menu_finance_configuration"
+            groups="account.group_account_manager"/>
+</odoo>
