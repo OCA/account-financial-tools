@@ -4,9 +4,11 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
 # Artūras Griškonis <ArtX38@gmail.com>, 2012,2015-2016
 # Artūras Griškonis <xbmc.lt@gmail.com>, 2012
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # Dorin Hongu <dhongu@gmail.com>, 2015
@@ -16,6 +18,7 @@
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
+# Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015
 # SaFi J. <safi2266@gmail.com>, 2015
 # Zapata11 <raimondas.duzinskas@gmail.com>, 2015
@@ -23,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2017-02-26 22:34+0000\n"
+"PO-Revision-Date: 2017-08-21 07:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -146,7 +149,7 @@ msgstr ""
 #. module: account_reversal
 #: field:account.move.reverse,reconcile:0
 msgid "Reconcile"
-msgstr ""
+msgstr "Reconcile"
 
 #. module: account_reversal
 #: field:account.move.reverse,date:0

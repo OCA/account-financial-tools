@@ -5,6 +5,7 @@
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
 # Antonio Trueba, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2016
@@ -27,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-08-21 07:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -195,7 +196,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_taxes:0
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Impuestos desactivados"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,display_name:0
@@ -384,12 +385,12 @@ msgstr "Nombre o descripción no encontrada."
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_accounts:0
 msgid "New accounts"
-msgstr ""
+msgstr "Nuevas cuentas"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_fps:0
 msgid "New fiscal positions"
-msgstr ""
+msgstr "New fiscal positions"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax.code,type:0
@@ -404,7 +405,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,new_taxes:0
 msgid "New taxes"
-msgstr ""
+msgstr "Nuevos impuestos"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
@@ -885,12 +886,12 @@ msgstr "Actualizada cuenta %s.\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_accounts:0
 msgid "Updated accounts"
-msgstr ""
+msgstr "Cuentas actualizadas"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_fps:0
 msgid "Updated fiscal positions"
-msgstr ""
+msgstr "Posiciones fiscales actualizadas"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
@@ -917,7 +918,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_taxes:0
 msgid "Updated taxes"
-msgstr ""
+msgstr "Impuestos actualizados"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
