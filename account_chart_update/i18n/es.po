@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:35+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgstr "El campo info es diferente.\n"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,deleted_taxes:0
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Impuestos desactivados"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:466
@@ -223,7 +223,7 @@ msgstr "Anterior"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Impuesto a desactivar"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -403,7 +403,7 @@ msgstr "Actualizar posiciones fiscales"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:649
 #, python-format
 msgid "Name or description not found."
-msgstr ""
+msgstr "Nombre o descripción no encontrada."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:595

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 #. module: currency_rate_date_check
 #: model:ir.model,name:currency_rate_date_check.model_res_currency
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: currency_rate_date_check
 #: code:addons/currency_rate_date_check/currency_rate_date_check.py:104

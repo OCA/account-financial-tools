@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -65,7 +65,7 @@ msgstr "Periodo Iva"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:188
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: account_credit_control_dunning_fees
 #: field:credit.control.policy.level,dunning_fixed_amount:0

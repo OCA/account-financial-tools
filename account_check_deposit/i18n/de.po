@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-09 23:16+0000\n"
-"PO-Revision-Date: 2016-12-16 12:44+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
+"PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -47,12 +47,12 @@ msgstr "Zeilen"
 #: code:addons/account_check_deposit/account_deposit.py:216
 #, python-format
 msgid "Check Deposit %s"
-msgstr ""
+msgstr "Scheck-Konto %s"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,journal_default_account_id:0
 msgid "Default Debit Account of the Journal"
-msgstr ""
+msgstr "Standard Aufwandskonto des Journals"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
@@ -62,7 +62,7 @@ msgstr "Status"
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
 msgid "Currency (False if same as company)"
-msgstr ""
+msgstr "Währung (Falsch wenn gleich wie Unternehmenswährung)"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:83
@@ -84,7 +84,7 @@ msgstr "Unternehmen"
 #: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
 #: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
 msgid "Checks Deposits"
-msgstr ""
+msgstr "Scheck-Konten"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,deposit_date:0
@@ -95,7 +95,7 @@ msgstr "Einreicherdatum"
 #. module: account_check_deposit
 #: field:res.company,check_deposit_account_id:0
 msgid "Account for Check Deposits"
-msgstr ""
+msgstr "Scheck-Konto"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -106,7 +106,7 @@ msgstr "Gruppieren nach"
 #: code:addons/account_check_deposit/account_deposit.py:253
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
-msgstr ""
+msgstr "Fehlendes Scheck-Konto im Unternehmen '%s'"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:63
@@ -121,7 +121,7 @@ msgstr "Journalposten"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Validate"
-msgstr ""
+msgstr "Prüfen"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -135,17 +135,17 @@ msgstr "Zurück auf Entwurf"
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
 "deposit is in currency %s."
-msgstr ""
+msgstr "Beim Scheck mit Betrag %s und Referenz '%s' stimmt die Währung %s nicht mit der Währung des Kontos %s überein.  "
 
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
 msgid "Number of Checks"
-msgstr ""
+msgstr "Anzahl Schecks"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:65
 msgid "Debtor"
-msgstr ""
+msgstr "Debitor"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
@@ -212,7 +212,7 @@ msgstr "Scheckzahlungen"
 #: code:addons/account_check_deposit/account_deposit.py:203
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
-msgstr ""
+msgstr "Scheck-Konto - Scheckref. %s"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,is_reconcile:0
@@ -235,7 +235,7 @@ msgstr "Scheck-Konto"
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
 "it."
-msgstr ""
+msgstr "Die Einzahlung '%s' ist bereits bewilligt. Sie müssen sie zuerst absagen bevor Sie sie löschen können."
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:46

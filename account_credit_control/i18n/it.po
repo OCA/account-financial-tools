@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 23:22+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -215,7 +215,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.policy:0 field:credit.control.policy,account_ids:0
 msgid "Accounts"
-msgstr ""
+msgstr "Conti"
 
 #. module: account_credit_control
 #: field:credit.control.communication,partner_id:0 view:credit.control.line:0
@@ -500,7 +500,7 @@ msgstr ""
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:215
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_printer

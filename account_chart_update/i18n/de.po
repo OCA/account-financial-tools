@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-17 23:13+0000\n"
-"PO-Revision-Date: 2017-02-24 20:45+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -223,7 +223,7 @@ msgstr "Voriger"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Zu deaktivierende Steuer"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0

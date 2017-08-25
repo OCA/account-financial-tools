@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-23 22:27+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
@@ -193,7 +193,7 @@ msgstr "Error"
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:66
 msgid "Amount"
-msgstr ""
+msgstr "Importe"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -261,7 +261,7 @@ msgstr "Hecho"
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr ""
+msgstr "Asiento contable"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,journal_id:0

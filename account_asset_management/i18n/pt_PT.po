@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-04 22:27+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
@@ -251,7 +251,7 @@ msgstr ""
 #: field:account.asset.remove,note:0 view:asset.modify:0
 #: field:asset.modify,note:0
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
@@ -383,7 +383,7 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:1657
 #, python-format
 msgid "Journal Entry"
-msgstr ""
+msgstr "Mov. de Diário"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:364
@@ -924,7 +924,7 @@ msgstr "Cancelar"
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -1190,7 +1190,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Valor"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0

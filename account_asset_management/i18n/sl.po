@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
-"PO-Revision-Date: 2017-04-25 17:36+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -221,7 +221,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -385,7 +385,7 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:1657
 #, python-format
 msgid "Journal Entry"
-msgstr ""
+msgstr "Dnevniški vnos"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:364
@@ -1192,7 +1192,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Znesek"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
-"PO-Revision-Date: 2017-04-25 11:09+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Bosnian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/bs/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,notes:0
 #: field:wizard.update.charts.accounts.tax.code,notes:0
 msgid "Notes"
-msgstr ""
+msgstr "Zabilješke"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -549,7 +549,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_tax_code:0
@@ -613,7 +613,7 @@ msgstr "Otkaži"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Close"
-msgstr ""
+msgstr "Zatvori"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0

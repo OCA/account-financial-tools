@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
-"PO-Revision-Date: 2016-11-22 16:27+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "Impuesto %s: No se pudo establecer el código de impuesto para la devolu
 msgid ""
 "If you leave these options set, the wizard will not just create new records,"
 " but also update records with changes (i.e. different tax amount)"
-msgstr ""
+msgstr "Si deja esta opción marcada, el asistente creará no sólo nuevos registros, si no que también actualizará aquellos con cambios (por ejemplo, diferente porcentaje de impuesto)"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,updated_tax_codes:0
@@ -223,7 +223,7 @@ msgstr "Anterior"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "Tax to deactivate"
-msgstr ""
+msgstr "Impuesto a desactivar"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -242,7 +242,7 @@ msgstr "Nueva plantilla"
 msgid ""
 "No. of digits to use for account code. Make sure it is the same number as "
 "existing accounts."
-msgstr ""
+msgstr "Nº de dígitos a usar para el código de cuenta. Asegúrese que este número es el mismo que el de las cuentas existentes."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:468
@@ -335,7 +335,7 @@ msgstr "Impuesto %s: No se pudo establecer la cuenta a pagar.\n"
 #: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
 #: model:ir.ui.menu,name:account_chart_update.menu_wizard
 msgid "Update chart of accounts"
-msgstr ""
+msgstr "Actualizar plan de cuentas"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1312
@@ -403,7 +403,7 @@ msgstr "Actualizar posiciones fiscales"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:649
 #, python-format
 msgid "Name or description not found."
-msgstr ""
+msgstr "Nombre o descripción no encontrada."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:595
@@ -532,7 +532,7 @@ msgstr "Las cuentas contables existentes serán actualizadas. Las cuentas se bus
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,code_digits:0
 msgid "# of digits"
-msgstr ""
+msgstr "Nº de dígitos"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:458
@@ -549,7 +549,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_tax_code:0
@@ -613,7 +613,7 @@ msgstr "Cancelar"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0

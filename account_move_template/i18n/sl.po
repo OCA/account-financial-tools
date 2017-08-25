@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -53,7 +53,7 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:0
 msgid "Next"
-msgstr ""
+msgstr "Naslednji"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
@@ -152,7 +152,7 @@ msgstr ""
 #: field:account.move.template.line,account_id:0
 #: field:wizard.select.move.template.line,account_id:0
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_move_template
 #: field:account.document.template,name:0
@@ -170,7 +170,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,line_ids:0
 msgid "Lines"
-msgstr ""
+msgstr "Postavke"
 
 #. module: account_move_template
 #: view:account.move.template.line:0
@@ -197,7 +197,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Znesek"
 
 #. module: account_move_template
 #: view:account.move.template:0

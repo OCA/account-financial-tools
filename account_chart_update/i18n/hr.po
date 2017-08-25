@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 21:00+0000\n"
-"PO-Revision-Date: 2016-11-29 09:33+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr "Bilješke"
 #: view:wizard.update.charts.accounts:0
 #: field:wizard.update.charts.accounts,tax_ids:0
 msgid "Taxes"
-msgstr ""
+msgstr "Porezi"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:462
@@ -196,7 +196,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:0
 #: field:wizard.update.charts.accounts,account_ids:0
 msgid "Accounts"
-msgstr ""
+msgstr "Konta"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1160
@@ -218,7 +218,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Previous"
-msgstr ""
+msgstr "Prethodni"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
@@ -228,14 +228,14 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Next"
-msgstr ""
+msgstr "Sljedeći"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
 #: selection:wizard.update.charts.accounts.fiscal.position,type:0
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "New template"
-msgstr ""
+msgstr "Novi predložak"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,code_digits:0
@@ -301,7 +301,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Kontni plan"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1491
@@ -346,7 +346,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,continue_on_errors:0
 msgid "Continue on errors"
-msgstr ""
+msgstr "Nastavi nakon grešaka"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:575
@@ -499,7 +499,7 @@ msgstr "Status"
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,fiscal_position_id:0
 msgid "Fiscal position template"
-msgstr ""
+msgstr "Predložak fiskalne pozicije"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -559,7 +559,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,lang:0
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,account_id:0
@@ -575,7 +575,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,update_account_id:0
 msgid "Account to update"
-msgstr ""
+msgstr "Konta za ažuriranje"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -592,7 +592,7 @@ msgstr ""
 #: view:wizard.update.charts.accounts:0
 #: field:wizard.update.charts.accounts,fiscal_position_ids:0
 msgid "Fiscal positions"
-msgstr ""
+msgstr "Fiskalne pozicije"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:603
@@ -656,7 +656,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
 msgid "Chart Template"
-msgstr ""
+msgstr "Predložak kontnog plana"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:582
@@ -764,7 +764,7 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Other options"
-msgstr ""
+msgstr "Ostale opcije"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position

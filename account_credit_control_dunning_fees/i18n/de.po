@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 23:13+0000\n"
-"PO-Revision-Date: 2017-03-19 11:47+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
+"PO-Revision-Date: 2017-08-21 07:26+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr "Gebührwährung"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:185
 msgid "Invoiced amount"
-msgstr ""
+msgstr "Betrag"
 
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:186
 msgid "Open amount"
-msgstr ""
+msgstr "Offener Betrag"
 
 #. module: account_credit_control_dunning_fees
 #: model:ir.model,name:account_credit_control_dunning_fees.model_credit_control_policy_level
@@ -50,12 +50,12 @@ msgstr "Ein Mahnposten"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:183
 msgid "Invoice date"
-msgstr ""
+msgstr "Rechnungdatum"
 
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:182
 msgid "Invoice number"
-msgstr ""
+msgstr "Rechnungsnummer"
 
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:179
@@ -97,7 +97,7 @@ msgstr "credit.control.dunning.fees.computer"
 #. module: account_credit_control_dunning_fees
 #: report:addons/account_credit_control_dunning_fees/report/credit_control_summary.html.mako:184
 msgid "Date due"
-msgstr ""
+msgstr "Rechnungdatum"
 
 #. module: account_credit_control_dunning_fees
 #: selection:credit.control.policy.level,dunning_fees_type:0

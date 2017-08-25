@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-04 22:27+0000\n"
-"PO-Revision-Date: 2017-08-11 11:54+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -384,7 +384,7 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:1657
 #, python-format
 msgid "Journal Entry"
-msgstr ""
+msgstr "Mov. de Diário"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:364
@@ -1191,7 +1191,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Montante"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0

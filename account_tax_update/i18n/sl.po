@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 23:17+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -190,7 +190,7 @@ msgstr ""
 #: view:account.update.tax.select_taxes:0
 #: field:account.update.tax.select_taxes,tax_ids:0
 msgid "Taxes"
-msgstr ""
+msgstr "Davki"
 
 #. module: account_tax_update
 #: field:account.update.tax.select_taxes,covered_tax_ids:0
@@ -238,7 +238,7 @@ msgstr ""
 #. module: account_tax_update
 #: model:ir.model,name:account_tax_update.model_account_update_tax_config
 msgid "Update taxes"
-msgstr ""
+msgstr "Posodobitev davkov"
 
 #. module: account_tax_update
 #: model:ir.model,name:account_tax_update.model_account_tax

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-05 22:23+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -20,17 +20,17 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_text:0
 msgid "Custom Message"
-msgstr ""
+msgstr "Prilagojeno sporočilo"
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:214
 msgid "Open amount"
-msgstr ""
+msgstr "Odprti znesek"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
 msgid "Allows to manually change credit level"
-msgstr ""
+msgstr "Omogoča ročno spreminjanje kreditnega nivoja"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -47,40 +47,40 @@ msgstr "Združeno po..."
 msgid ""
 "This wizard will let you set the overdue policy and level for selected "
 "invoices"
-msgstr ""
+msgstr "Ta čarovnik vam omogoča nastavitev pravil zapadlosti in nivo za izbrane račune"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.credit_control_run
 #: model:ir.ui.menu,name:account_credit_control.credit_control_run_menu
 msgid "Credit Control Run"
-msgstr ""
+msgstr "Zagon kreditnega nadzora"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:126
 #, python-format
 msgid "Please select a policy"
-msgstr ""
+msgstr "Izberite pravilo"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,computation_mode:0
 msgid "Compute Mode"
-msgstr ""
+msgstr "Način obdelave"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.no_follow_1
 msgid "No follow"
-msgstr ""
+msgstr "Ne spremljaj"
 
 #. module: account_credit_control
 #: field:credit.control.line,date_entry:0
 msgid "Entry date"
-msgstr ""
+msgstr "Datum vnosa"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
-msgstr ""
+msgstr "Pošlji po e-pošti"
 
 #. module: account_credit_control
 #: view:credit.control.run:0
@@ -90,19 +90,19 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line
 msgid "A credit control line"
-msgstr ""
+msgstr "Postavka nadzora kredita"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:186
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
-msgstr ""
+msgstr "Kreditni nadzor je že zagnan v ozadju, poskusite kasneje."
 
 #. module: account_credit_control
 #: field:credit.control.line,move_line_id:0
 msgid "Move line"
-msgstr ""
+msgstr "Postavka premika"
 
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_info
@@ -112,13 +112,13 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_emailer
 msgid "Mass credit line emailer"
-msgstr ""
+msgstr "E-poštar za masovne kreditne postavke"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 field:credit.control.line,account_id:0
 #: model:ir.model,name:account_credit_control.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
@@ -130,12 +130,12 @@ msgstr "Datum zapadlosti"
 #: view:credit.control.line:0 field:credit.control.line,level:0
 #: field:credit.control.policy.level,level:0
 msgid "Level"
-msgstr ""
+msgstr "Nivo"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,delay_days:0
 msgid "Delay (in days)"
-msgstr ""
+msgstr "Zaostanek (v dnevih)"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/invoice.py:70
@@ -146,17 +146,17 @@ msgstr "Napaka!"
 #. module: account_credit_control
 #: view:credit.control.emailer:0
 msgid "Send emails for the selected lines"
-msgstr ""
+msgstr "Pošlji e-poštna sporočila za izbrane postavke"
 
 #. module: account_credit_control
 #: help:credit.control.policy,account_ids:0
 msgid "This policy will be active only for the selected accounts"
-msgstr ""
+msgstr "To pravilo bo aktivno le za izbrane konte"
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:212
 msgid "Date due"
-msgstr ""
+msgstr "Datum zapadlosti"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:71
@@ -167,29 +167,29 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "These lines are ready to send by email or by letter using the Actions."
-msgstr ""
+msgstr "Te postavke so bile že odposlane po e-pošti ali pošti preko 'ukrepov'."
 
 #. module: account_credit_control
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0
 msgid "Ignored"
-msgstr ""
+msgstr "Prezrto"
 
 #. module: account_credit_control
 #: help:credit.control.printer,mark_as_sent:0
 msgid "Only letter lines will be marked."
-msgstr ""
+msgstr "Le postavke dopisa bodo označene."
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_marker
 msgid "Mass marker"
-msgstr ""
+msgstr "Masovni označevalec"
 
 #. module: account_credit_control
 #: field:account.invoice,credit_policy_id:0
 #: field:res.company,credit_policy_id:0 field:res.partner,credit_policy_id:0
 msgid "Credit Control Policy"
-msgstr ""
+msgstr "Pravilo kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
@@ -210,12 +210,12 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,date_sent:0
 msgid "Sent date"
-msgstr ""
+msgstr "Datum odpošiljanja"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0 field:credit.control.policy,account_ids:0
 msgid "Accounts"
-msgstr ""
+msgstr "Konti"
 
 #. module: account_credit_control
 #: field:credit.control.communication,partner_id:0 view:credit.control.line:0
@@ -227,12 +227,12 @@ msgstr "Poslovni partner"
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
 msgid "Set new policy"
-msgstr ""
+msgstr "Nastavi novo pravilo"
 
 #. module: account_credit_control
 #: view:credit.control.policy.level:0
 msgid "Credit control policy level"
-msgstr ""
+msgstr "Nivo pravilnika kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -256,7 +256,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard_menu_action
 msgid "Change Lines' State"
-msgstr ""
+msgstr "Sprememba stanja postavk"
 
 #. module: account_credit_control
 #: constraint:res.partner:0
@@ -266,27 +266,27 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Manual change"
-msgstr ""
+msgstr "Ročna sprememba"
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,policy_id:0
 msgid "Related Policy"
-msgstr ""
+msgstr "Povezano pravilo"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,move_line_ids:0
 msgid "Move line to change"
-msgstr ""
+msgstr "Postavka premika, ki se spreminja"
 
 #. module: account_credit_control
 #: field:credit.control.line,manually_overridden:0
 msgid "Manually overridden"
-msgstr ""
+msgstr "Ročno vsiljeno"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0 view:credit.control.policy.level:0
 msgid "Mail and reporting"
-msgstr ""
+msgstr "Pošta in poročanje"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
@@ -303,7 +303,7 @@ msgstr ""
 #. module: account_credit_control
 #: help:credit.control.policy,do_nothing:0
 msgid "For policies which should not generate lines or are obsolete"
-msgstr ""
+msgstr "Za pravila, ki ne ustvarjajo postavk ali so opuščena"
 
 #. module: account_credit_control
 #: model:email.template,body_html:account_credit_control.email_template_credit_control_base
@@ -319,7 +319,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Print"
-msgstr ""
+msgstr "Natisni"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
@@ -343,7 +343,7 @@ msgstr "E-pošta"
 #: view:credit.control.line:0 field:credit.control.line,channel:0
 #: field:credit.control.policy.level,channel:0
 msgid "Channel"
-msgstr ""
+msgstr "Kanal"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
@@ -357,7 +357,7 @@ msgid ""
 "You cannot cancel this invoice.\n"
 "A payment reminder has already been sent to the customer.\n"
 "You must create a credit note and issue a new invoice."
-msgstr ""
+msgstr "Tega računa ne morete preklicati.\nOpomin o zapadlosti je že bil odposlan kupcu.\nUstvariti morate opomin in izdati nov račun."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/line.py:286
@@ -392,7 +392,7 @@ msgstr ""
 #: code:addons/account_credit_control/run.py:105
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
-msgstr ""
+msgstr "Novejša postavka nadzora kredita od %s obstaja na %s"
 
 #. module: account_credit_control
 #: field:credit.control.printer,state:0
@@ -402,7 +402,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.run,report:0
 msgid "Report"
-msgstr ""
+msgstr "Poročilo"
 
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
@@ -415,33 +415,33 @@ msgid ""
 "Draft lines need to be triaged.\n"
 "Ignored lines are lines for which we do not want to send something.\n"
 "Draft and ignored lines will be generated again on the next run."
-msgstr ""
+msgstr "Osnutki postavk za triažo.\nPrezrte postavke so tiste, za katere česa ne želimo pošiljati.\nOsnutki postavk in prezrte postavke bodo ponovno ustvarjene ob naslednjem zagonu."
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_level_id:0
 msgid "New level to apply"
-msgstr ""
+msgstr "Nov nivo za uporabo"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
 #: model:credit.control.policy.level,name:account_credit_control.3_time_2
 msgid "30 days end of month"
-msgstr ""
+msgstr "30 dni od konca meseca"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Due Date, End Of Month"
-msgstr ""
+msgstr "Datum zapadlosti, konec meseca"
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
 msgid "Change the overdue level of current invoice"
-msgstr ""
+msgstr "Sprememba nivoja zapadlosti trenutnega računa"
 
 #. module: account_credit_control
 #: field:credit.control.marker,name:0
 msgid "Mark as"
-msgstr ""
+msgstr "Označi kot"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
@@ -459,12 +459,12 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.run:0
 msgid "Credit control run"
-msgstr ""
+msgstr "Zagon kreditnega nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.run:0 field:credit.control.run,policy_ids:0
 msgid "Policies"
-msgstr ""
+msgstr "Pravila"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
@@ -484,33 +484,33 @@ msgstr ""
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:84
 #, python-format
 msgid "No credit control lines selected."
-msgstr ""
+msgstr "Nobena postavka kreditnega nadzora ni izbrana."
 
 #. module: account_credit_control
 #: field:credit.control.line,date_due:0
 msgid "Due date"
-msgstr ""
+msgstr "Datum zapadlosti"
 
 #. module: account_credit_control
 #: field:credit.control.policy,do_nothing:0
 msgid "Do nothing"
-msgstr ""
+msgstr "Ne naredi ničesar"
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:215
 #: field:credit.control.line,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_printer
 msgid "Mass printer"
-msgstr ""
+msgstr "Masovni tiskalnik"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "The line was deprecated by a manual change of policy on invoice."
-msgstr ""
+msgstr "Postavka je bila povožena z ročno spremembo pravila na računu."
 
 #. module: account_credit_control
 #: field:credit.control.communication,company_id:0
@@ -522,32 +522,32 @@ msgstr "Podjetje"
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "An error has occured during the sending of the email."
-msgstr ""
+msgstr "Med razpošiljanjem e-pošte je prišlo do napake."
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
 msgid "Set current credit level"
-msgstr ""
+msgstr "Nastavi trenutni kreditni nivo"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
 msgid "Change the state of the selected lines."
-msgstr ""
+msgstr "Sprememba stanja izbranih postavk."
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
 msgid "credit control communication"
-msgstr ""
+msgstr "komunikacija kreditnega nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Run date"
-msgstr ""
+msgstr "Datum zagona"
 
 #. module: account_credit_control
 #: view:credit.control.marker:0
 msgid "Change the state of the selected lines"
-msgstr ""
+msgstr "Sprememba stanja izbranih postavk"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/line.py:287
@@ -555,23 +555,23 @@ msgstr ""
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
 "state."
-msgstr ""
+msgstr "Ni vam dovoljeno brisati postavke kreditnega nadzora, ki ni v stanju osnutka."
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Lines which have been ignored from previous runs."
-msgstr ""
+msgstr "Postavke, ki so bile v predhodnih zagonih prezrte."
 
 #. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Print the selected lines"
-msgstr ""
+msgstr "Natisni izbrane postavke"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.action_wizard_credit_policy_changer
 #: model:ir.actions.act_window,name:account_credit_control.action_wizard_credit_policy_changer_menu_action
 msgid "Change current credit policy"
-msgstr ""
+msgstr "Sprememba trenutnih kreditnih pravil"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 selection:credit.control.line,state:0
@@ -582,7 +582,7 @@ msgstr "Osnutek"
 #. module: account_credit_control
 #: view:credit.control.marker:0
 msgid "Warning: you will maybe not be able to revert this operation."
-msgstr ""
+msgstr "Pozor: te operacije lahko ne bo več mogoče povrniti."
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -592,7 +592,7 @@ msgstr "Kreditni pravilnik"
 #. module: account_credit_control
 #: view:credit.control.emailer:0
 msgid "Send the emails"
-msgstr ""
+msgstr "Razpošlji e-pošto"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:248
@@ -603,17 +603,17 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.policy:0 view:credit.control.policy.level:0
 msgid "Delay Setting"
-msgstr ""
+msgstr "Nastavitve zaostankov"
 
 #. module: account_credit_control
 #: field:credit.control.line,balance_due:0
 msgid "Due balance"
-msgstr ""
+msgstr "Bilanca zapadlosti"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Credit policy level"
-msgstr ""
+msgstr "Nivo kreditnega pravilnika"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:69
@@ -624,12 +624,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
 msgid "Credit control line generator"
-msgstr ""
+msgstr "Generator postavk kreditnega nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0
 msgid "Credit control policy"
-msgstr ""
+msgstr "Pravilo kreditnega nadzora"
 
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
@@ -640,12 +640,12 @@ msgstr "Uporabnik"
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Letter"
-msgstr ""
+msgstr "Dopis"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,do_nothing:0
 msgid "No follow  policy"
-msgstr ""
+msgstr "Pravilo 'ne spremljanja'"
 
 #. module: account_credit_control
 #: field:credit.control.policy,active:0
@@ -655,7 +655,7 @@ msgstr "Aktivno"
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
 msgid "Print selected lines"
-msgstr ""
+msgstr "Natisni izbrane postavke"
 
 #. module: account_credit_control
 #: field:credit.control.emailer,line_ids:0
@@ -665,39 +665,39 @@ msgstr ""
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
 #: field:res.partner,credit_control_line_ids:0
 msgid "Credit Control Lines"
-msgstr ""
+msgstr "Postavke kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard_menu_action
 msgid "Print Lines"
-msgstr ""
+msgstr "Natisni postavke"
 
 #. module: account_credit_control
 #: field:credit.control.run,date:0
 msgid "Controlling Date"
-msgstr ""
+msgstr "Datum nadzora"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy
 msgid "Define a reminder policy"
-msgstr ""
+msgstr "Določitev pravilnika opominjanja"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Lines already sent."
-msgstr ""
+msgstr "Že odposlane postavke."
 
 #. module: account_credit_control
 #: field:credit.control.policy.level,email_template_id:0
 msgid "Email Template"
-msgstr ""
+msgstr "Predloga e-pošte"
 
 #. module: account_credit_control
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0
 msgid "Ready To Send"
-msgstr ""
+msgstr "Pripravljeno za odpošiljanje"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
@@ -715,22 +715,22 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.printer,mark_as_sent:0
 msgid "Mark letter lines as sent"
-msgstr ""
+msgstr "Označi postavke dopisa kot odposlane."
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:210
 msgid "Invoice number"
-msgstr ""
+msgstr "Številka računa"
 
 #. module: account_credit_control
 #: view:credit.control.run:0
 msgid "Compute Credit Control Lines"
-msgstr ""
+msgstr "Obdelava postavk kreditnega nadzora"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Previous Reminder"
-msgstr ""
+msgstr "Prejšnji opomin"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/run.py:95
@@ -760,7 +760,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy,level_ids:0
 msgid "Policy Levels"
-msgstr ""
+msgstr "Nivoji pravil"
 
 #. module: account_credit_control
 #: view:credit.control.run:0
@@ -775,7 +775,7 @@ msgstr ""
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:213
 msgid "Invoiced amount"
-msgstr ""
+msgstr "Zaračunani znesek"
 
 #. module: account_credit_control
 #: model:email.template,subject:account_credit_control.email_template_credit_control_base
@@ -785,7 +785,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy.level,custom_mail_text:0
 msgid "Custom Mail Message"
-msgstr ""
+msgstr "Prilagojeno e-poštno sporočilo"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -810,7 +810,7 @@ msgstr ""
 msgid ""
 "If a credit control line has been generatedon a policy and the policy has "
 "been changed in the meantime, it has to be handled manually"
-msgstr ""
+msgstr "Ko se postavka kreditnega nadzora ustvari iz pravila, in je to pravilo bilo med tem spremenjeno, je potrebno ročno urejanje."
 
 #. module: account_credit_control
 #: field:account.account,credit_control_line_ids:0
@@ -819,7 +819,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_credit_control.act_account_credit_relation_relation
 #: model:ir.actions.act_window,name:account_credit_control.act_partner_credit_relation_relation
 msgid "Credit Lines"
-msgstr ""
+msgstr "Kreditne postavke"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
@@ -847,14 +847,14 @@ msgstr "Zapri"
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 msgid "Emailing Error"
-msgstr ""
+msgstr "E-poštna napaka"
 
 #. module: account_credit_control
 #: help:account.invoice,credit_policy_id:0
 msgid ""
 "The Credit Control Policy used for this invoice. If nothing is defined, it "
 "will use the account setting or the partner setting."
-msgstr ""
+msgstr "Pravilo kreditnega nadzora uporabljeno za ta račun. Če ni določeno, se uporabi kontna nastavitev ali nastavitev partnerja."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:97
@@ -871,37 +871,37 @@ msgstr ""
 #: code:addons/account_credit_control/run.py:96
 #, python-format
 msgid "A run has already been executed more recently than %s"
-msgstr ""
+msgstr "Zagon je bil izveden že pred %s"
 
 #. module: account_credit_control
 #: view:credit.control.policy:0 view:credit.control.policy.level:0
 msgid "Policy level"
-msgstr ""
+msgstr "Nivo pravila"
 
 #. module: account_credit_control
 #: field:credit.control.run,manual_ids:0
 msgid "Lines to handle manually"
-msgstr ""
+msgstr "Postavke za ročno upravljanje"
 
 #. module: account_credit_control
 #: help:res.partner,credit_policy_id:0
 msgid ""
 "The Credit Control Policy used for this partner. This setting can be forced "
 "on the invoice. If nothing is defined, it will use the company setting."
-msgstr ""
+msgstr "Pravilo kreditnega nadzora uporabljeno za tega partnerja. To pravilo je lahko vsiljeno na računu. Če ni določeno, se uporabi nastavitev družbe."
 
 #. module: account_credit_control
 #: view:account.invoice:0
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 msgid "Credit Control"
-msgstr ""
+msgstr "Kreditni nadzor"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/policy.py:361
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
-msgstr ""
+msgstr "Funkcija za izvedbeni način ni dobljena: %s ni implementiran"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
@@ -923,12 +923,12 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.policy:0
 msgid "Credit control policy Level"
-msgstr ""
+msgstr "Nivo pravilnika kreditnega nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0
 msgid "Mailer"
-msgstr ""
+msgstr "Poštar"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_1
@@ -947,7 +947,7 @@ msgstr ""
 msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
 "overridden on partners or invoices."
-msgstr ""
+msgstr "Privzeto pravilo kreditnega nadzora partnerjev. To nastavitev se lahko povozi pri partnerjih ali računih."
 
 #. module: account_credit_control
 #: view:account.invoice:0
@@ -958,28 +958,28 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_credit_control.credit_policy_configuration_action
 #: model:ir.ui.menu,name:account_credit_control.credit_policy_configuration_action_menu
 msgid "Credit Control Policies"
-msgstr ""
+msgstr "Pravila kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
 msgid "Send an email for the selected lines."
-msgstr ""
+msgstr "Pošlji e-pošto za izbrane postavke."
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
-msgstr ""
+msgstr "10 dni od zadnjega opomina"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:98
 #, python-format
 msgid "No lines will be changed. All the selected lines are already done."
-msgstr ""
+msgstr "Nobena postavka ne bo spremenjena. Izbrane postavke so že obdelane."
 
 #. module: account_credit_control
 #: view:credit.control.marker:0
 msgid "Lines marker"
-msgstr ""
+msgstr "Označevalec postavk"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
@@ -989,18 +989,18 @@ msgstr "Poslano"
 #. module: account_credit_control
 #: constraint:credit.control.policy.level:0
 msgid "The smallest level can not be of type Previous Reminder"
-msgstr ""
+msgstr "Najnižji nivo ne more biti tipa \"prejšnji opomin\""
 
 #. module: account_credit_control
 #: view:credit.control.printer:0
 msgid "Lines report"
-msgstr ""
+msgstr "Poročilo o postavkah"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
-msgstr ""
+msgstr "Ročno ne sledenje"
 
 #. module: account_credit_control
 #: field:credit.control.printer,report_file:0
@@ -1010,12 +1010,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_1
 msgid "10 days net"
-msgstr ""
+msgstr "10 dni neto"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Control Credit Lines"
-msgstr ""
+msgstr "Postavke kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:res.groups,name:account_credit_control.group_account_credit_control_manager
@@ -1030,23 +1030,23 @@ msgstr "Naziv"
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
 msgid "Move lines to affect"
-msgstr ""
+msgstr "Postavke premika, na katere vplivamo"
 
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:211
 msgid "Invoice date"
-msgstr ""
+msgstr "Datum računa"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0 view:credit.control.marker:0
 #: view:credit.control.printer:0
 msgid "Lines"
-msgstr ""
+msgstr "Postavke"
 
 #. module: account_credit_control
 #: field:credit.control.line,mail_message_id:0
 msgid "Sent Email"
-msgstr ""
+msgstr "Poslana e-pošta"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
@@ -1067,7 +1067,7 @@ msgstr "Povzetek"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
 msgid "A credit control policy level"
-msgstr ""
+msgstr "Nivo pravilnika kreditnega nadzora"
 
 #. module: account_credit_control
 #: model:ir.actions.report.xml,name:account_credit_control.report_webkit_html
@@ -1077,27 +1077,27 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.policy.changer,new_policy_id:0
 msgid "New Policy to Apply"
-msgstr ""
+msgstr "Novo pravilo za uporabo"
 
 #. module: account_credit_control
 #: field:credit.control.line,date:0
 msgid "Controlling date"
-msgstr ""
+msgstr "Datum nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Draft lines have to be triaged."
-msgstr ""
+msgstr "Osnutki postavk za triažo."
 
 #. module: account_credit_control
 #: field:credit.control.line,amount_due:0
 msgid "Due Amount Tax incl."
-msgstr ""
+msgstr "Zapadli znesek vključno davek"
 
 #. module: account_credit_control
 #: field:res.company,credit_control_tolerance:0
 msgid "Credit Control Tolerance"
-msgstr ""
+msgstr "Toleranca kreditnega nadzora"
 
 #. module: account_credit_control
 #: view:credit.control.emailer:0 view:credit.control.marker:0
@@ -1108,19 +1108,19 @@ msgstr "ali"
 #. module: account_credit_control
 #: view:credit.control.policy:0
 msgid "Policy levels"
-msgstr ""
+msgstr "Nivoji pravil"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_2
 msgid "60 days last reminder"
-msgstr ""
+msgstr "60 dni od zadnjega opomina"
 
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Filters"
-msgstr ""
+msgstr "Filtri"
 
 #. module: account_credit_control
 #: field:credit.control.line,policy_level_id:0
 msgid "Overdue Level"
-msgstr ""
+msgstr "Nivo zapadlosti"

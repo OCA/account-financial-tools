@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-24 23:15+0000\n"
-"PO-Revision-Date: 2017-03-02 09:14+0000\n"
+"POT-Creation-Date: 2017-08-11 22:20+0000\n"
+"PO-Revision-Date: 2017-08-21 07:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,notes:0
 #: field:wizard.update.charts.accounts.tax.code,notes:0
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
@@ -613,7 +613,7 @@ msgstr "Cancelar"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:0
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0

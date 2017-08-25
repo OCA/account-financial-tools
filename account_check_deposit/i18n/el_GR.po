@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-04 22:28+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/el_GR/)\n"
@@ -251,7 +251,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "Νόμισμα"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0

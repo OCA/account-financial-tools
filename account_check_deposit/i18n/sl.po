@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:17+0000\n"
+"POT-Creation-Date: 2017-08-11 22:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
 msgid "Total Amount"
-msgstr ""
+msgstr "Skupni znesek"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:47
@@ -40,19 +40,19 @@ msgstr "Osnutek"
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
 msgid "Lines"
-msgstr ""
+msgstr "Postavke"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:194
 #: code:addons/account_check_deposit/account_deposit.py:216
 #, python-format
 msgid "Check Deposit %s"
-msgstr ""
+msgstr "Čekovni depozit %s"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,journal_default_account_id:0
 msgid "Default Debit Account of the Journal"
-msgstr ""
+msgstr "Privzeti konto obveznosti za dnevnik"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,state:0
@@ -62,7 +62,7 @@ msgstr "Status"
 #. module: account_check_deposit
 #: field:account.check.deposit,currency_none_same_company_id:0
 msgid "Currency (False if same as company)"
-msgstr ""
+msgstr "Valuta (neveljavno če je ista kot valuta družbe)"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:83
@@ -72,7 +72,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.move.line,check_deposit_id:0
 msgid "Check Deposit"
-msgstr ""
+msgstr "Čekovni depozit"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,company_id:0
@@ -84,18 +84,18 @@ msgstr "Podjetje"
 #: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
 #: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
 msgid "Checks Deposits"
-msgstr ""
+msgstr "Čekovni depoziti"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,deposit_date:0
 #: report:addons/account_check_deposit/report/check_deposit.mako:45
 msgid "Deposit Date"
-msgstr ""
+msgstr "Datum depozita"
 
 #. module: account_check_deposit
 #: field:res.company,check_deposit_account_id:0
 msgid "Account for Check Deposits"
-msgstr ""
+msgstr "Konto za čekovne depozite"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
@@ -106,7 +106,7 @@ msgstr "Združi po"
 #: code:addons/account_check_deposit/account_deposit.py:253
 #, python-format
 msgid "Missing Account for Check Deposits on the company '%s'."
-msgstr ""
+msgstr "Konto čekovnih depozitov družbe '%s' manjka."
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:63
@@ -121,12 +121,12 @@ msgstr "Postavke"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Validate"
-msgstr ""
+msgstr "Overi"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Back to Draft"
-msgstr ""
+msgstr "Nazaj v osnutek"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:130
@@ -135,17 +135,17 @@ msgstr ""
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
 "deposit is in currency %s."
-msgstr ""
+msgstr "Ček z zneskom %s in sklicem '%s' je v valuti %s, a depozit je v valuti %s."
 
 #. module: account_check_deposit
 #: field:account.check.deposit,check_count:0
 msgid "Number of Checks"
-msgstr ""
+msgstr "Število čekov"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:65
 msgid "Debtor"
-msgstr ""
+msgstr "Dolžnik"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,name:0
@@ -155,7 +155,7 @@ msgstr "Naziv"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Checks Deposit Search"
-msgstr ""
+msgstr "Iskalnik čekovnih depozitov"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:48
@@ -172,7 +172,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,partner_bank_id:0
 msgid "Bank Account"
-msgstr ""
+msgstr "Bančni račun"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_company
@@ -193,26 +193,26 @@ msgstr "Napaka!"
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:66
 msgid "Amount"
-msgstr ""
+msgstr "Znesek"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 #: model:ir.actions.report.xml,name:account_check_deposit.check_deposit_webkit
 msgid "Checks Deposit"
-msgstr ""
+msgstr "Čekovni depozit"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 #: field:account.check.deposit,check_payment_ids:0
 #: report:addons/account_check_deposit/report/check_deposit.mako:58
 msgid "Check Payments"
-msgstr ""
+msgstr "Čekovna plačila"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:203
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
-msgstr ""
+msgstr "Čekovni depozit - sklic čeka %s"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,is_reconcile:0
@@ -227,7 +227,7 @@ msgstr "Sklic"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
 msgid "Account Check Deposit"
-msgstr ""
+msgstr "Konto čekovnih depozitov"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:160
@@ -235,7 +235,7 @@ msgstr ""
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting "
 "it."
-msgstr ""
+msgstr "Depozit '%s' je v overjenem stanju, zato ga morate preklicati preden bi ga brisali."
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:46
@@ -251,7 +251,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,currency_id:0
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0
@@ -261,7 +261,7 @@ msgstr "Opravljeno"
 #. module: account_check_deposit
 #: field:account.check.deposit,move_id:0
 msgid "Journal Entry"
-msgstr ""
+msgstr "Dnevniški vnos"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0 field:account.check.deposit,journal_id:0
