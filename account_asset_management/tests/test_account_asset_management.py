@@ -16,6 +16,7 @@ class TestAssetManagement(common.TransactionCase):
         super(TestAssetManagement, self).setUp()
         self.asset_model = self.registry('account.asset')
         self.dl_model = self.registry('account.asset.line')
+        self.remove_model = self.registry('account.asset.remove')
 
     def test_1_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
@@ -327,3 +328,40 @@ class TestAssetManagement(common.TransactionCase):
                                200.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
                                100.00, places=2)
+
+    def test_8_asset_removal(self):
+        """Asset removal"""
+        asset_id = self.asset_model.create(self.cr, self.uid, {
+            'name': 'test asset removal',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 5000,
+            'salvage_value': 0,
+            'date_start': time.strftime('%Y-01-01'),
+            'method_time': 'year',
+            'method_number': 5,
+            'method_period': 'quarter',
+            'prorata': False,
+        })
+        asset = self.asset_model.browse(self.cr, self.uid, asset_id)
+        self.asset_model.compute_depreciation_board(
+            self.cr, self.uid, [asset.id])
+        asset.validate()
+        wiz_id = self.remove_model.create(self.cr, self.uid, {
+            'date_remove': time.strftime('%Y-01-31'),
+            'sale_value': 0.0,
+            'posting_regime': 'gain_loss_on_sale',
+            'account_plus_value_id': self.ref('account.a_sale'),
+            'account_min_value_id': self.ref('account.a_expense'),
+        })
+        wiz = self.remove_model.browse(self.cr, self.uid, wiz_id, context={
+            'active_id': asset_id,
+            'early_removal': True,
+        })
+        wiz.remove()
+        asset.refresh()
+        self.assertEquals(len(asset.depreciation_line_ids), 3)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
+                               81.46, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                               4918.54, places=2)
