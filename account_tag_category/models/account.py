@@ -90,7 +90,8 @@ class AccountAccount(models.Model):
 
     _inherit = 'account.account'
 
-    @api.constrains('tag_ids')
+    # field name is constrained to ensure this method is called on create
+    @api.constrains('tag_ids', 'name')
     def _check_tags_categories(self):
         self.ensure_one()
         self._check_required_categories()
