@@ -6,15 +6,15 @@
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2017
 # njeudy <njeudy@tuxservices.com>, 2015
 # SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"POT-Creation-Date: 2017-08-25 22:30+0000\n"
+"PO-Revision-Date: 2017-08-30 05:41+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -78,62 +78,76 @@ msgid "<p>Manual no follow</p>"
 msgstr "<p>Ročno odstrani sledenje</p>"
 
 #. module: account_credit_control
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
+msgid ""
+"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
+"      <br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
+"      Best regards\n"
+"      </p>"
+msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi.<br>\n      <br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 10 dneh poravnate.<br>\n      <br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br>\n      <br>\n      Lep pozdrav,\n      </p>"
+
+#. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
 msgid ""
 "<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
-msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi.<br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 10 dneh poravnate.<br><br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br><br>\n      Lep pozdrav,\n      </p>"
-
-#. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
-msgid ""
-"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br><br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
-"      Best regards\n"
-"      </p>"
-msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi.<br><br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 10 dneh poravnate.<br><br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br><br>\n      Lep pozdrav,\n      </p>"
+msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi.<br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 10 dneh poravnate.<br>\n      <br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br>\n      <br>\n      Lep pozdrav,\n      </p>"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
 msgid ""
 "<p>Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
-msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi, kljub našemu prvemu opominu.<br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 5 dneh poravnate.<br><br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br><br>\n      Lep pozdrav,\n      </p>"
+msgstr "<p>Po naši evidenci še nismo prejeli plačila računov v prilogi, kljub našemu prvemu opominu.<br>\n      V kolikor je bilo plačilo že izvedeno, smatrajte ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da ga v naslednjih 5 dneh poravnate.<br>\n      <br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br>\n      <br>\n      Lep pozdrav,\n      </p>"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
 msgid ""
 "<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.\n"
-"      <br><br>\n"
+"      <br>\n"
+"      <br>\n"
 "      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br>\n"
 "      If your payment has not been received in the next 5 days, your file will be transfered to our debt<br>\n"
-"      collection agency.<br><br>\n"
+"      collection agency.<br>\n"
+"      <br>\n"
 "      Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"      A customer account statement is enclosed for you convenience.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      A customer account statement is enclosed for you convenience.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
-msgstr "<p>Po naši evidenci, navkljub opominu, še vedno nismo prejeli plačila priloženih računov.\n      <br><br>\n      V kolikor je plačilo bilo že izvedeno, lahko smatrate ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da račun poravnate.<br>\n      Če terjatev ne bo poravnana v naslednjih 5 dnevih, jo bomo prisiljeni posredovati naši<br>\n      agenciji za izterjave.<br><br>\n      V kolikor želite, da vam uredimo plačilni načrt, nam sporočite.<br>\n      Priložena je kontna kartica kupca.<br><br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br><br>\n      Lep pozdrav,\n      </p>"
+msgstr "<p>Po naši evidenci, navkljub opominu, še vedno nismo prejeli plačila priloženih računov.\n      <br>\n      <br>\n      V kolikor je plačilo bilo že izvedeno, lahko smatrate ta opomin kot brezpredmeten. V nasprotnem primeru vas prosimo, da račun poravnate.<br>\n      If your payment has not been received in the next 5 days, your file will be transfered to our debt<br>\n      collection agency.<br>\n      <br>\n      Če terjatev ne bo poravnana v naslednjih 5 dnevih, jo bomo prisiljeni posredovati naši agenciji za terjatve.<br>\n      Priložena je kontna kartica kupca.<br>\n      <br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br>\n      <br>\n      Lep pozdrav,\n      </p>"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
 msgid ""
 "<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br>\n"
 "      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br> \n"
-"      If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br><br>\n"
+"      If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br>\n"
+"      <br>\n"
 "      Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"      A customer account statement is enclosed for you convenience.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      A customer account statement is enclosed for you convenience.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
-msgstr "<p>Po naši evidenci, navkljub dvema opominoma, še vedno nismo prejeli plačila priloženih računov.<br>\n       V kolikor je plačilo bilo že izvedeno, lahko smatrate ta opomin kot nepredmeten. V nasprotnem primeru vas prosimo, da račun poravnate.<br> \n       Če terjatev ne bo poravnana v naslednjih 5 dnevih, jo bomo prisiljeni posredovati naši agenciji za izterjave.<br><br>\n      V kolikor želite, da vam uredimo plačilni načrt, nam sporočite.<br>\n      Priložena je kontna kartica kupca.<br><br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br><br>\n      Lep pozdrav,\n      </p>"
+msgstr "<p>Po naši evidenci, navkljub dvema opominoma, še vedno nismo prejeli plačila priloženih računov.<br>\n      V kolikor je plačilo bilo že izvedeno, lahko smatrate ta opomin kot nepredmeten. V nasprotnem primeru vas prosimo, da račun poravnate.<br> \n      Če terjatev ne bo poravnana v naslednjih 5 dnevih, jo bomo prisiljeni posredovati naši agenciji za izterjave.<br>\n      <br>\n      V kolikor želite, da vam uredimo plačilni načrt, nam sporočite.<br>\n      Priložena je kontna kartica kupca.<br>\n      <br>\n      Za sodelovanje pri razrešitvi te zadeve se vam v naprej zahvaljujemo.<br>\n      <br>\n      Lep pozdrav,\n      </p>"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_line

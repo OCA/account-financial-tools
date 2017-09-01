@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-04-25 10:43+0000\n"
+"POT-Creation-Date: 2017-08-25 22:30+0000\n"
+"PO-Revision-Date: 2017-08-28 09:54+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -267,7 +267,7 @@ msgstr "Modèle de position fiscale"
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "La position fiscale qui a besoin d'être mise à jour (nouvelle ou mise à jour dans le modèle)."
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,update_fiscal_position_id:0
@@ -566,7 +566,7 @@ msgstr "Modèle de taxe"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "La taxe a besoin d'être mise à jour (nouvelle ou mise à jour dans le modèle)."
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
@@ -790,7 +790,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:697
 #, python-format
 msgid "To deactivate: not in the template"
-msgstr ""
+msgstr "À désactiver : pas dans le modèle"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,type:0

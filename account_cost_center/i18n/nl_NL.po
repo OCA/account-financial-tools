@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-03-10 23:23+0000\n"
+"POT-Creation-Date: 2017-08-25 22:30+0000\n"
+"PO-Revision-Date: 2017-08-25 22:30+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -71,12 +71,12 @@ msgstr ""
 #. module: account_cost_center
 #: field:account.cost.center,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_cost_center
 #: field:account.cost.center,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_cost_center
 #: help:account.invoice,cost_center_id:0
@@ -96,12 +96,12 @@ msgstr "ID"
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factuur"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_line
 msgid "Invoice Line"
-msgstr ""
+msgstr "Factuurregel"
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_invoice_report
@@ -121,12 +121,12 @@ msgstr "Laatst gewijzigd op"
 #. module: account_cost_center
 #: field:account.cost.center,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_cost_center
 #: field:account.cost.center,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_cost_center
 #: view:account.cost.center:account_cost_center.account_cost_center_filter

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-06-30 08:47+0000\n"
+"POT-Creation-Date: 2017-08-25 22:30+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgstr ""
 #. module: account_constraints
 #: view:account.bank.statement:account_constraints.bank_statement_cancel_form_inherit
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: account_constraints
 #: field:account.journal,allow_date_fy:0
@@ -63,7 +63,7 @@ msgstr ""
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factuur"
 
 #. module: account_constraints
 #: code:addons/account_constraints/model/account_move_line.py:53

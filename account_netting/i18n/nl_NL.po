@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-06-30 08:53+0000\n"
+"POT-Creation-Date: 2017-08-25 22:31+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr ""
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid "Cancel"
-msgstr ""
+msgstr "Verwijderen"
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
@@ -71,12 +71,12 @@ msgstr ""
 #. module: account_netting
 #: field:account.move.make.netting,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_netting
 #: field:account.move.make.netting,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_netting
 #: field:account.move.make.netting,display_name:0
@@ -101,12 +101,12 @@ msgstr "Laatst gewijzigd op"
 #. module: account_netting
 #: field:account.move.make.netting,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_netting
 #: field:account.move.make.netting,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_netting
 #: field:account.move.make.netting,move_lines:0
