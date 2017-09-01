@@ -90,6 +90,10 @@
                     </div>
                 </div>
 
+                <t t-if="doc.current_policy_level.custom_text_after_details">
+                    <p class="mt32 mb32" t-field="doc.current_policy_level.custom_text_after_details"/>
+                </t>
+
             </div>
         </t>
     </template>
