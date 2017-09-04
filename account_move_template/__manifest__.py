@@ -9,7 +9,7 @@
     'summary': "Templates for recurring Journal Entries",
     'author': "Agile Business Group,Odoo Community Association (OCA), Aurium "
               "Technologies,Vauxoo",
-    'website': 'http://www.agilebg.com , http://www.auriumtechnologies.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
     'depends': ['account_accountant', 'analytic'],
     'data': [
