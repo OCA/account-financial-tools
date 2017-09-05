@@ -5,6 +5,7 @@
         <field name="name">partner.credit_control.form.view</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="groups_id" eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"/>
         <field name="arch" type="xml">
             <field name="credit" position="after">
                 <field name="credit_policy_id" widget="selection"
