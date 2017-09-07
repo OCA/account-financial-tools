@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_account_config_settings" model="ir.ui.view">
+            <field name="name">view.account.config.settings</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <div name="account_config" position="inside">
+                    <div>
+                        <label for="renumber_by_period"/>
+                        <field name="renumber_by_period" class="oe_inline"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</openerp>

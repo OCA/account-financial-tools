@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record forcecreate="0" id="res_config_renumber_by_period" model="ir.config_parameter">
+            <field name="key">renumber_by_period</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</openerp>
