@@ -17,10 +17,6 @@
                         attrs="{'invisible': [('full_reconcile_id', '=', False), ('partial_reconciliation_in_progress', '=', False)]}"/>
             </field>
 
-            <field name="credit" position="after">
-                <field name="balance" sum="Balance"/>
-            </field>
-
         </field>
     </record>
 

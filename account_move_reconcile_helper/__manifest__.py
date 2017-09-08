@@ -11,7 +11,7 @@
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
     'website': 'https://www.acsone.eu',
     'depends': [
-        'account',
+        'account_balance_line',
     ],
     'data': [
         'views/account_move_line.xml',
