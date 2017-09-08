@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 23:23+0000\n"
+"POT-Creation-Date: 2017-09-01 22:45+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/fi/)\n"
@@ -91,7 +91,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "Running"
-msgstr ""
+msgstr "Käynnissä"
 
 #. module: async_move_line_importer
 #: field:move.line.importer,message_is_follower:0
