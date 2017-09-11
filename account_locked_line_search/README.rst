@@ -1,8 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-Account Move Line Locking
-=========================
+Account Locked Line Search
+==========================
 
 This module add the ability to search move lines related to locked moves.
 
