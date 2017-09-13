@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_invoice_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header" position="inside">
+                <button type="action" name="%(account_invoice_change_currency.action_wizard_update_currency)d" string="Update Currency" states="draft" groups="account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_invoice_supplier_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header" position="inside">
+                <button type="action" name="%(account_invoice_change_currency.action_wizard_update_currency)d" string="Update Currency" states="draft" groups="account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
