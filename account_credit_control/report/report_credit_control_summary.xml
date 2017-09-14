@@ -2,6 +2,7 @@
 <odoo>
     <template id="report_credit_control_summary_document">
         <t t-call="report.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
                 <div class="row" id="address">
                     <div class="col-xs-5 col-xs-offset-7">
