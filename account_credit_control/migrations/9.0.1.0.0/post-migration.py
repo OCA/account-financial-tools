@@ -33,7 +33,7 @@ def migrate_followup_data(env):
                 'delay_days': line['delay'],
                 'email_template_id': env.ref(
                     'account_credit_control.email_template_credit_control_base'
-                ),
+                ).id,
                 'channel': 'email' if line['send_email'] else 'letter',
                 'custom_text': line['description'],
                 'custom_mail_text': line['description'],
