@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    Author Vincent Renaville. Copyright 2012 Camptocamp SA
+#    Fabien Moret. Copyright 2017 Martronic SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,11 +20,11 @@
 ##############################################################################
 {
     "name": "Cancel invoice, check on payment order",
-    "version": "1.0",
+    "version": "9.0.1.0.1",
     "depends": ["account",
-                "account_payment",
+                "account_payment_order",
                 "account_cancel"],
-    "author": "Camptocamp,Odoo Community Association (OCA)",
+    "author": "Camptocamp,Martronic SA,Odoo Community Association (OCA)",
     "description": """
 Prevents to cancel an invoice which has already been imported in a
 payment order.
@@ -31,6 +32,6 @@ payment order.
     'website': 'http://www.camptocamp.com',
     'license': 'AGPL-3',
     'data': [],
-    'installable': False,
-    'active': False,
+    'installable': True,
+    'active': True,
 }
