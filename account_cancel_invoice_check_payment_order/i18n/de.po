@@ -19,13 +19,7 @@ msgstr ""
 "Language: de\n"
 
 #. module: account_cancel_invoice_check_payment_order
-#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:48
-#, python-format
-msgid "Error !"
-msgstr "Fehler!"
-
-#. module: account_cancel_invoice_check_payment_order
-#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:51
+#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:50
 #, python-format
 msgid "Invoice already imported in the payment order (%s) at %s on line %s"
 msgstr "Diese Rechnung wurde bereits zur Zahlanweisung (%s) zum %s an Position %s importiert"
