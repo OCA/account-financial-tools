@@ -2,6 +2,7 @@
 ##############################################################################
 #
 #    Author Vincent Renaville. Copyright 2012 Camptocamp SA
+#    Fabien Moret. Copyright 2017 Martronic SA
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,38 +19,38 @@
 #
 ##############################################################################
 
-from openerp.tools.translate import _
-from openerp.osv import osv, orm
+from openerp import fields, models, api, _
+from openerp.exceptions import UserError
 
 
-class account_invoice(orm.Model):
+class account_invoice(models.Model):
     _inherit = "account.invoice"
 
-    def action_cancel(self, cr, uid, ids, *args):
-        invoices = self.read(cr, uid, ids, ['move_id', 'payment_ids'])
+    @api.multi
+    def action_cancel(self):
+        invoices = self.read(['move_id', 'payment_ids'])
         for invoice in invoices:
             if invoice['move_id']:
                 # This invoice have a move line, we search move_line
                 # concerned by this move
-                cr.execute("""SELECT po.reference as payment_name,
-                                     po.date_done as payment_date,
+                self._cr.execute("""SELECT po.name as payment_name,
+                                     po.date_generated as payment_date,
                                      pl.name
-                              FROM payment_line as pl
-                              INNER JOIN payment_order AS po
-                              ON pl.id = order_id
+                              FROM account_payment_line as pl
+                              INNER JOIN account_payment_order AS po
+                              ON po.id = order_id
                               WHERE move_line_id IN (SELECT id
                                                      FROM account_move_line
                                                      WHERE move_id = %s)
                               LIMIT 1""",
                            (invoice['move_id'][0],))
-                payment_orders = cr.dictfetchone()
+                payment_orders = self._cr.dictfetchone()
                 if payment_orders:
-                    raise osv.except_osv(
-                        _('Error !'),
+                    raise UserError(
                         _("Invoice already imported in the payment "
                           "order (%s) at %s on line %s" %
                           (payment_orders['payment_name'],
                            payment_orders['payment_date'],
                            payment_orders['name']))
                     )
-        return super(account_invoice, self).action_cancel(cr, uid, ids, *args)
+        return super(account_invoice, self).action_cancel()
