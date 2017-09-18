@@ -18,13 +18,7 @@ msgstr ""
 "X-Generator: Launchpad (build 17041)\n"
 
 #. module: account_cancel_invoice_check_payment_order
-#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:48
-#, python-format
-msgid "Error !"
-msgstr "Error"
-
-#. module: account_cancel_invoice_check_payment_order
-#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:51
+#: code:addons/account_cancel_invoice_check_payment_order/account_invoice.py:50
 #, python-format
 msgid "Invoice already imported in the payment order (%s) at %s on line %s"
 msgstr "Factura ya importada en la orden de pago (%s) en %s en la línea %s"
