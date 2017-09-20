@@ -12,20 +12,17 @@
         <field name="name">invoice.followup.form.view</field>
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="groups_id" eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user')), (4, ref('account_credit_control.group_account_credit_control_info'))]"/>
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page string="Credit Control"
-                      groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info">
+                <page string="Credit Control">
                     <group>
                         <field name="credit_policy_id"
                                string="Manual Credit Control Policy"
-                               attrs="{'invisible': [('credit_policy_id', '=', False)]}"
-                               groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info"/>
+                               attrs="{'invisible': [('credit_policy_id', '=', False)]}"/>
                     </group>
                     <separator string="Issued Lines" colspan="4"/>
-                    <field name="credit_control_line_ids" colspan="4"
-                           nolabel="1"
-                           groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info">
+                    <field name="credit_control_line_ids" colspan="4" nolabel="1">
                         <tree string="Credit Control Lines">
                             <field name="date"/>
                             <field name="level"/>
