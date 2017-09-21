@@ -28,7 +28,7 @@ addon | version | summary
 [account_asset_disposal](account_asset_disposal/) | 10.0.1.0.0 | Makes asset close account move automatically
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
-[account_credit_control](account_credit_control/) | 10.0.1.1.0 | Account Credit Control
+[account_credit_control](account_credit_control/) | 10.0.1.2.0 | Account Credit Control
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 10.0.1.0.0 | Account Invoice Constraint Chronology
