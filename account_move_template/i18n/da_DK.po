@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
 "PO-Revision-Date: 2017-09-22 09:51+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl_NL/)\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl_NL\n"
+"Language: da_DK\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_template
@@ -42,7 +42,7 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 msgid "Cancel"
-msgstr "Verwijderen"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:75
@@ -75,7 +75,7 @@ msgstr ""
 #: field:wizard.select.move.template,create_uid:0
 #: field:wizard.select.move.template.line,create_uid:0
 msgid "Created by"
-msgstr "Aangemaakt door"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template,create_date:0
@@ -85,7 +85,7 @@ msgstr "Aangemaakt door"
 #: field:wizard.select.move.template,create_date:0
 #: field:wizard.select.move.template.line,create_date:0
 msgid "Created on"
-msgstr "Aangemaakt op"
+msgstr ""
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -112,7 +112,7 @@ msgstr ""
 #: field:wizard.select.move.template,display_name:0
 #: field:wizard.select.move.template.line,display_name:0
 msgid "Display Name"
-msgstr "Weergavenaam"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template,id:0
@@ -121,7 +121,7 @@ msgstr "Weergavenaam"
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
@@ -155,7 +155,7 @@ msgstr ""
 #: field:wizard.select.move.template,__last_update:0
 #: field:wizard.select.move.template.line,__last_update:0
 msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template,write_uid:0
@@ -165,7 +165,7 @@ msgstr "Laatst gewijzigd op"
 #: field:wizard.select.move.template,write_uid:0
 #: field:wizard.select.move.template.line,write_uid:0
 msgid "Last Updated by"
-msgstr "Laatst bijgewerkt door"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.document.template,write_date:0
@@ -175,7 +175,7 @@ msgstr "Laatst bijgewerkt door"
 #: field:wizard.select.move.template,write_date:0
 #: field:wizard.select.move.template.line,write_date:0
 msgid "Last Updated on"
-msgstr "Laatst bijgewerkt op"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:65
@@ -223,7 +223,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr "Naam"
+msgstr ""
 
 #. module: account_move_template
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
@@ -262,12 +262,12 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Rækkefølge"
 
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr "Provincie"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
