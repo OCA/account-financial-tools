@@ -10,11 +10,11 @@ msgstr ""
 "POT-Creation-Date: 2017-09-08 22:18+0000\n"
 "PO-Revision-Date: 2015-06-03 16:27+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/nl_NL/)\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl_NL\n"
+"Language: da_DK\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_template
@@ -58,7 +58,7 @@ msgstr ""
 #. module: account_move_template
 #: field:wizard.select.move.template,state:0
 msgid "State"
-msgstr "Provincie"
+msgstr ""
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/select_template.py:190
@@ -160,7 +160,7 @@ msgstr ""
 #: field:account.move.template,name:0 field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
-msgstr "Naam"
+msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
@@ -280,7 +280,7 @@ msgstr ""
 #: field:account.document.template.line,sequence:0
 #: field:account.move.template.line,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Rækkefølge"
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
@@ -291,7 +291,7 @@ msgstr ""
 #. module: account_move_template
 #: view:wizard.select.move.template:0
 msgid "Cancel"
-msgstr "Verwijderen"
+msgstr ""
 
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0

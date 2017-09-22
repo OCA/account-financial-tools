@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 22:21+0000\n"
+"POT-Creation-Date: 2017-09-08 22:18+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/nl_NL/)\n"
@@ -306,7 +306,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -1084,7 +1084,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
