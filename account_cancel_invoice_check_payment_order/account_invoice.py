@@ -33,17 +33,17 @@ class account_invoice(models.Model):
             if invoice['move_id']:
                 # This invoice have a move line, we search move_line
                 # concerned by this move
-                self._cr.execute("""SELECT po.name as payment_name,
-                                     po.date_generated as payment_date,
-                                     pl.name
-                              FROM account_payment_line as pl
-                              INNER JOIN account_payment_order AS po
-                              ON po.id = order_id
-                              WHERE move_line_id IN (SELECT id
-                                                     FROM account_move_line
-                                                     WHERE move_id = %s)
-                              LIMIT 1""",
-                                (invoice['move_id'][0],))
+                self._cr.execute("""
+                    SELECT po.name as payment_name,
+                        po.date_generated as payment_date,
+                        pl.name
+                    FROM account_payment_line as pl
+                        INNER JOIN account_payment_order AS po
+                        ON po.id = order_id
+                    WHERE move_line_id IN (SELECT id
+                        FROM account_move_line
+                        WHERE move_id = %s)
+                    LIMIT 1""", (invoice['move_id'][0],))
                 payment_orders = self._cr.dictfetchone()
                 if payment_orders:
                     raise UserError(
