@@ -43,7 +43,7 @@ class account_invoice(models.Model):
                                                      FROM account_move_line
                                                      WHERE move_id = %s)
                               LIMIT 1""",
-                              (invoice['move_id'][0],))
+                    (invoice['move_id'][0],))
                 payment_orders = self._cr.dictfetchone()
                 if payment_orders:
                     raise UserError(
