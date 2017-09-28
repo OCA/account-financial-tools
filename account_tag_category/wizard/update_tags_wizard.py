@@ -2,7 +2,8 @@
 # Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class AccountTagCategoryUpdateTags(models.TransientModel):
@@ -27,6 +28,17 @@ class AccountTagCategoryUpdateTags(models.TransientModel):
 
     @api.multi
     def save_tags_to_category(self):
+
+        categorized_tags = self.tag_ids.filtered(
+            lambda t: t.tag_category_id and
+            t.tag_category_id != self.tag_category_id)
+        if categorized_tags:
+            tags_error = ["- %s (%s)" % (t.name, t.tag_category_id.name)
+                          for t in categorized_tags]
+            raise ValidationError(_('Following tags are already defined on '
+                                    'another tag category : \n %s') %
+                                  "\n".join(tags_error)
+                                  )
 
         self.tag_category_id.write({
             'tag_ids': [(6, False, self.tag_ids.ids)]
