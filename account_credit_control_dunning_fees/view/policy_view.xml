@@ -6,7 +6,7 @@
       <field name="model">credit.control.policy</field>
       <field name="inherit_id" ref="account_credit_control.credit_control_policy_form" />
       <field name="arch" type="xml">
-        <page string="Mail and reporting" position="after">
+        <xpath expr="//field[@name='level_ids']/form/notebook" position="inside">
           <page string="Fees">
             <group>
               <group>
@@ -16,7 +16,7 @@
               </group>
             </group>
           </page>
-        </page>
+        </xpath>
       </field>
     </record>
 
