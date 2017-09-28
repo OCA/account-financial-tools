@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
+    <!-- Account tag category views -->
     <record id="account_tag_category_form" model="ir.ui.view">
         <field name="name">account.account.tag.category.form</field>
         <field name="model">account.account.tag.category</field>
@@ -33,6 +33,7 @@
         </field>
     </record>
 
+    <!-- Account tag category action and menu -->
     <record id="account_tag_category_action" model="ir.actions.act_window">
         <field name="name">Account Tag Categories</field>
         <field name="res_model">account.account.tag.category</field>
@@ -43,7 +44,34 @@
     <menuitem id="account_tag_category_menu"
               action="account_tag_category_action"
               parent="account.account_account_menu"
+              groups="account_tag_category.group_account_tag_category"
               sequence="40" />
+
+    <!-- Account tag views -->
+
+    <record id="account_tag_view_form" model="ir.ui.view">
+        <field name="name">account tags inherit</field>
+        <field name="model">account.account.tag</field>
+        <field name="inherit_id" ref="account.account_tag_view_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="tag_category_id" groups="account_tag_category.group_account_tag_category"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="account_tag_tree" model="ir.ui.view">
+        <field name="name">account tags tree</field>
+        <field name="model">account.account.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Account tags">
+                <field name="name" />
+                <field name="tag_category_id" groups="account_tag_category.group_account_tag_category"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Account account view -->
 
     <record id="view_account_form" model="ir.ui.view">
         <field name="name">account.account.form.inherit</field>
