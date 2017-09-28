@@ -108,3 +108,24 @@ class TestAccountTagCategory(TransactionCase):
                              ['|', ('name', '=', '123'),
                               ('name', '=', 'DEF')]).ids)]
         })
+
+    def test_wizard(self):
+
+        wiz = self.env['account.tag.category.update.tags'].with_context(
+            default_tag_category_id=self.letters_category.id).create({})
+        tag_123 = self.env['account.account.tag'].search(
+            [('name', '=', '123')])
+        wiz.write({
+            'tag_ids': [(4, tag_123.id, False)]
+        })
+        with self.assertRaises(ValidationError):
+            wiz.save_tags_to_category()
+
+        self.assertEqual(len(self.letters_category.tag_ids), 3)
+
+        wiz.write({
+            'tag_ids': [(3, tag_123.id, False), (0, False, {'name': 'JKL'})]
+        })
+        wiz.save_tags_to_category()
+
+        self.assertEqual(len(self.letters_category.tag_ids), 4)
