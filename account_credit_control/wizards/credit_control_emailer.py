@@ -5,6 +5,10 @@
 
 from openerp import _, api, fields, models
 from openerp.exceptions import UserError
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class CreditControlEmailer(models.TransientModel):
@@ -16,12 +20,15 @@ class CreditControlEmailer(models.TransientModel):
 
     @api.model
     def _get_line_ids(self):
+        _logger.info("In get line ids")
         context = self.env.context
         if not (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
+            _logger.info("wrong active model - or no ids")
             return False
         line_obj = self.env['credit.control.line']
         lines = line_obj.browse(context['active_ids'])
+        _logger.info("Lines before filter: %r", lines)
         return self._filter_lines(lines)
 
     line_ids = fields.Many2many('credit.control.line',
