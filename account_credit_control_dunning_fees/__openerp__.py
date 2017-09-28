@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {'name': 'Credit control dunning fees',
- 'version': '8.0.0.1.0',
+ 'version': '9.0.0.1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Accounting',
@@ -33,7 +33,7 @@
           ],
  'demo': [],
  'test': [],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  'license': 'AGPL-3',
  'application': False}
