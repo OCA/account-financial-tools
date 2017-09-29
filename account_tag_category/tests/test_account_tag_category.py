@@ -113,6 +113,9 @@ class TestAccountTagCategory(TransactionCase):
 
         wiz = self.env['account.tag.category.update.tags'].with_context(
             default_tag_category_id=self.letters_category.id).create({})
+
+        self.assertEqual(wiz.tag_ids, self.letters_category.tag_ids)
+
         tag_123 = self.env['account.account.tag'].search(
             [('name', '=', '123')])
         wiz.write({
