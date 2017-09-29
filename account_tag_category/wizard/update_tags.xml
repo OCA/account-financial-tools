@@ -18,7 +18,12 @@
             <form string="Update tags">
                 <group>
                     <field name="tag_category_id" />
-                    <field name="tag_ids" />
+                    <field name="tag_ids">
+                        <tree string="Tags" editable="bottom" >
+                            <field name="name" />
+                            <field name="tag_category_id" />
+                        </tree>
+                    </field>
                 </group>
                 <footer>
                     <button name='save_tags_to_category' string='Save tags' class='oe_highlight' type='object' />

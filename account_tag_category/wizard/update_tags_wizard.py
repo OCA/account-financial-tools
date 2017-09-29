@@ -12,11 +12,12 @@ class AccountTagCategoryUpdateTags(models.TransientModel):
 
     _description = 'Update account tags on account tag category'
 
-    tag_ids = fields.Many2many('account.account.tag',
+    tag_ids = fields.Many2many('account.account.tag', string='Tags'
                                domain=[('applicability', '=', 'accounts')])
     # TODO support applicability for taxes in domain
 
-    tag_category_id = fields.Many2one('account.account.tag.category')
+    tag_category_id = fields.Many2one('account.account.tag.category',
+                                      string='Tag category')
 
     @api.model
     def default_get(self, fields):
