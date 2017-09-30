@@ -1175,7 +1175,7 @@ msgstr "État"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
-msgstr "Listes des factures en attente de règlement"
+msgstr "Liste des factures en attente de règlement"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_invoice_credit_policy_id
