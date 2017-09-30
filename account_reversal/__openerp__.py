@@ -25,7 +25,7 @@
 
 {
     'name': 'Account Reversal',
-    'version': '8.0.1.1.0',
+    'version': '8.0.1.1.1',
     'category': 'Generic Modules/Accounting',
     'license': 'AGPL-3',
     'author': "Akretion,Camptocamp,Odoo Community Association (OCA)",
