@@ -7,8 +7,8 @@
                     <div class="col-xs-5 col-xs-offset-7">
                         <address t-field="doc.contact_address"
                                  t-field-options='{"widget": "contact",
-                "fields": ["address", "name"],
-                "no_marker": true}'/>
+                                                   "fields": ["address", "name"],
+                                                   "no_marker": true}'/>
                     </div>
                     <div class="col-xs-5 col-xs-offset-7">
                         <span t-field="doc.report_date"/>
@@ -19,8 +19,10 @@
                     <span t-field="doc.current_policy_level.name"/>
                 </h2>
 
-                <div class="col-xs-12">
-                   <span t-field="doc.current_policy_level.custom_text" />
+                <div class="row mt32 mb32">
+                    <div class="col-xs-12">
+                       <span t-field="doc.current_policy_level.custom_text"/>
+                    </div>
                 </div>
 
                 <h3>Summary</h3>
@@ -91,7 +93,11 @@
                 </div>
 
                 <t t-if="doc.current_policy_level.custom_text_after_details">
-                    <p class="mt32 mb32" t-field="doc.current_policy_level.custom_text_after_details"/>
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-12">
+                            <p t-field="doc.current_policy_level.custom_text_after_details"/>
+                        </div>
+                    </div>
                 </t>
 
             </div>
