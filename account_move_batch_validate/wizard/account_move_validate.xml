@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Camptocamp SA, 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+    <record model="ir.ui.view" id="validate_account_move_form">
+        <field name="name">validate.account.move.form (in account_move_batch_validate)</field>
+        <field name="model">validate.account.move</field>
+        <field name="inherit_id" ref="account.validate_account_move_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//footer" position="before">
+                <group>
+                    <field name="asynchronous"/>
+                    <field name="action" attrs="{'invisible': [('asynchronous', '=', False)]}"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
