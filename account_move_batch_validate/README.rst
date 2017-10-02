@@ -5,20 +5,14 @@ Account Move Batch Validate
 ===========================
 
 This module provides a wizard to post many Journal Entries in batch. it
-uses the queue system introduced by the OpenERP Connector to handle a
+uses the queue system introduced by the Odoo Queue job module to handle a
 big quantity of moves in batch.
-
-The module account_default_draft_move introduces a workflow where the
-Journal Entries are always entered in OpenERP in draft state, and the
-posting happens later, for example at the end of the period. The core
-account module provides a wizard to post all the moves in the period,
-but that is problematic when there are many moves.
 
 The posting of a move takes some time, and doing that synchronously,
 in one transaction is problematic.
 
 In this module, we leverage the power of the queue system of the
-OpenERP Connector, that can be very well used without other concepts
+Odoo queue job module, that can be very well used without other concepts
 like Backends and Bindings.
 
 This approach provides many advantages, similar to the ones we get
@@ -56,6 +50,7 @@ Contributors
 * Rudolf Schnapka <rs@techno-flex.de>
 * Stéphane Bidoul (ACSONE) <stephane.bidoul@acsone.eu>
 * Adrien Peiffer (ACSONE) <adrien.peiffer@acsone.eu>
+* Benjamin Willig (ACSONE) <benjamin.willig@acsone.eu>
 
 Maintainer
 ----------
