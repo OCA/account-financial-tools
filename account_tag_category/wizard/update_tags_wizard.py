@@ -12,7 +12,7 @@ class AccountTagCategoryUpdateTags(models.TransientModel):
 
     _description = 'Update account tags on account tag category'
 
-    tag_ids = fields.Many2many('account.account.tag', string='Tags'
+    tag_ids = fields.Many2many('account.account.tag', string='Tags',
                                domain=[('applicability', '=', 'accounts')])
     # TODO support applicability for taxes in domain
 
