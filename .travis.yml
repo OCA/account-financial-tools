@@ -1,0 +1,40 @@
+language: python
+
+python:
+  - "3.5"
+
+sudo: false
+cache: pip
+
+addons:
+  postgresql: "9.2" # minimal postgresql version for the daterange method
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+      - python-lxml # because pip installation is slow
+      - python-simplejson
+      - python-serial
+
+env:
+  global:
+  - VERSION="11.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: "XzZzWhiVWXHI+tmcdYH0rPjietxvr1nUXuCRiqnDY3fM0lq6RmtwOlpDDwYEiX+9fHAE8mDttlJ7H4J/YZ+0ugwZxeM10yuT7FwkJY9kPvBe6T59P9aD9R6mSC/da4JGVd+Th5QXDBuBGRBVdY/qBT2lagHuSzBZdKwvMMsaBtA="
+
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="OCA/OCB
+
+
+install:
+  - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - travis_install_nightly
+
+script:
+  - travis_run_tests
+
+after_success:
+  - travis_after_tests_success
