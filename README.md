@@ -29,11 +29,13 @@ addon | version | summary
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_credit_control](account_credit_control/) | 10.0.1.2.1 | Account Credit Control
+[account_fiscal_month](account_fiscal_month/) | 10.0.1.0.0 | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 10.0.1.0.0 | Account Invoice Constraint Chronology
 [account_invoice_tax_required](account_invoice_tax_required/) | 10.0.1.0.0 | Tax required in invoice
 [account_journal_lock_date](account_journal_lock_date/) | 10.0.1.0.0 | Lock each journal independently
+[account_move_batch_validate](account_move_batch_validate/) | 10.0.1.0.0 | Account Move Batch Validate
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 10.0.1.0.0 | Allows to edit taxes on non-posted account move lines
 [account_move_template](account_move_template/) | 10.0.2.0.0 | Templates for recurring Journal Entries
@@ -61,7 +63,6 @@ addon | version | summary
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 (unported) | Move in draft state by default
 [account_invoice_currency](account_invoice_currency/) | 8.0.1.0.0 (unported) | Company currency in invoices
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 (unported) | Option Check Date in Period always active on journals
-[account_move_batch_validate](account_move_batch_validate/) | 8.0.0.2.0 (unported) | Account Move Batch Validate
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 (unported) | Move line search view - disable defaults for period and journal
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 (unported) | Journal Items Search Extension
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 (unported) | Move locked to prevent modification
