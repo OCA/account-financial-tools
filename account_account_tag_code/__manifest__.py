@@ -11,7 +11,7 @@
     """,
     'author': 'Noviat,'
               'Odoo Community Association (OCA)',
-    'website': 'http://www.noviat.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account',
     ],
