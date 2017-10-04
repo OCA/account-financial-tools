@@ -28,19 +28,22 @@ addon | version | summary
 [account_asset_disposal](account_asset_disposal/) | 10.0.1.0.0 | Makes asset close account move automatically
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
-[account_credit_control](account_credit_control/) | 10.0.1.2.1 | Account Credit Control
+[account_credit_control](account_credit_control/) | 10.0.1.3.0 | Account Credit Control
 [account_fiscal_month](account_fiscal_month/) | 10.0.1.0.0 | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 10.0.1.0.0 | Account Invoice Constraint Chronology
 [account_invoice_tax_required](account_invoice_tax_required/) | 10.0.1.0.0 | Tax required in invoice
 [account_journal_lock_date](account_journal_lock_date/) | 10.0.1.0.0 | Lock each journal independently
+[account_lock_date_update](account_lock_date_update/) | 10.0.1.0.0 | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_batch_validate](account_move_batch_validate/) | 10.0.1.0.0 | Account Move Batch Validate
+[account_move_fiscal_month](account_move_fiscal_month/) | 10.0.1.0.0 | Display the fiscal month on journal entries/item
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 10.0.1.0.0 | Allows to edit taxes on non-posted account move lines
 [account_move_template](account_move_template/) | 10.0.2.0.0 | Templates for recurring Journal Entries
 [account_partner_required](account_partner_required/) | 10.0.1.0.0 | Adds an option 'partner policy' on account types
 [account_permanent_lock_move](account_permanent_lock_move/) | 10.0.1.0.0 | Permanent Lock Move
+[account_permanent_lock_move_update](account_permanent_lock_move_update/) | 10.0.1.0.0 | Allow an Account adviser to update permanent lock date without having access to all technical settings
 [account_renumber](account_renumber/) | 10.0.1.0.0 | Account Renumber Wizard
 [account_reversal](account_reversal/) | 10.0.1.0.0 | Wizard for creating a reversal account move
 [account_type_inactive](account_type_inactive/) | 10.0.1.0.0 | Allows to set account type to inactive
