@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 22:21+0000\n"
-"PO-Revision-Date: 2017-08-21 07:26+0000\n"
+"POT-Creation-Date: 2017-09-22 22:19+0000\n"
+"PO-Revision-Date: 2017-09-29 07:18+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: view:account.move.marker:0 field:account.move.marker,journal_ids:0
 msgid "Journals"
-msgstr ""
+msgstr "Dnevniki"
 
 #. module: account_move_batch_validate
 #: code:addons/account_move_batch_validate/account.py:161

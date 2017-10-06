@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-11 22:21+0000\n"
+"POT-Creation-Date: 2017-09-22 22:19+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_check_deposit
 #: field:account.check.deposit,total_amount:0
 msgid "Total Amount"
-msgstr ""
+msgstr "Importo Totale"
 
 #. module: account_check_deposit
 #: report:addons/account_check_deposit/report/check_deposit.mako:47
@@ -121,7 +121,7 @@ msgstr "Voci Sezionale"
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Validate"
-msgstr ""
+msgstr "Conferma"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:0
