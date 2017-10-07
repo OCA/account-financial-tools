@@ -36,7 +36,7 @@ addon | version | summary
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 9.0.1.0.0 | Introduces the purchase order line to the journal items
 [account_move_locking](account_move_locking/) | 9.0.1.0.0 | Move locked to prevent modification
 [account_permanent_lock_move](account_permanent_lock_move/) | 9.0.1.0.0 | Permanent Lock Move
-[account_renumber](account_renumber/) | 9.0.1.0.0 | Account Renumber Wizard
+[account_renumber](account_renumber/) | 9.0.1.0.1 | Account Renumber Wizard
 [account_reversal](account_reversal/) | 9.0.1.0.0 | Wizard for creating a reversal account move
 [currency_rate_update](currency_rate_update/) | 9.0.1.0.0 | Currency Rate Update
 
