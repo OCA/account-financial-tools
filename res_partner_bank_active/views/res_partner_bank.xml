@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_bank_form_view">
+        <field name="name">res.partner.bank.form (in res_partner_bank_active)</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+
+            <field name="company_id" position="after">
+                <field name="active"/>
+            </field>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_bank_search_view">
+        <field name="name">res.partner.bank.search (in res_partner_bank_active)</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_search"/>
+        <field name="arch" type="xml">
+
+            <field name="partner_id" position="after">
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
