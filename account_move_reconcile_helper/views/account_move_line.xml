@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_line_tree_view">
+        <field name="name">account.move.line.tree (in account_move_reconcile_helper)</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+
+            <field name="full_reconcile_id" position="after">
+                <field name="partial_reconciliation_in_progress" invisible="1"/>
+                <button name="open_full_reconcile_view" type="object"
+                        string="Reconciled lines" icon="fa-list"
+                        attrs="{'invisible': [('full_reconcile_id', '=', False), ('partial_reconciliation_in_progress', '=', False)]}"/>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
