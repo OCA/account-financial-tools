@@ -1,36 +1,37 @@
 # -*- coding: utf-8 -*-
 # Copyright 2014 Stéphane Bidoul <stephane.bidoul@acsone.eu>
-# Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2016 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests import common
 import random
 
 
-class TestAccountReversal(TransactionCase):
-
-    def setUp(self):
-        super(TestAccountReversal, self).setUp()
-        self.move_obj = self.env['account.move']
-        self.move_line_obj = self.env['account.move.line']
-        self.company_id = self.env.ref('base.main_company').id
-        self.partner = self.env['res.partner'].create({
+class TestAccountReversal(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestAccountReversal, cls).setUpClass()
+        cls.move_obj = cls.env['account.move']
+        cls.move_line_obj = cls.env['account.move.line']
+        cls.company_id = cls.env.ref('base.main_company').id
+        cls.partner = cls.env['res.partner'].create({
             'name': 'Test partner',
         })
-        self.journal = self.env['account.journal'].create({
+        cls.journal = cls.env['account.journal'].create({
             'name': 'Test journal',
             'code': 'COD',
             'type': 'sale',
-            'company_id': self.company_id
+            'company_id': cls.company_id
         })
-        type_revenue = self.env.ref('account.data_account_type_revenue')
-        type_payable = self.env.ref('account.data_account_type_payable')
-        self.account_sale = self.env['account.account'].create({
+        type_revenue = cls.env.ref('account.data_account_type_revenue')
+        type_payable = cls.env.ref('account.data_account_type_payable')
+        cls.account_sale = cls.env['account.account'].create({
             'name': 'Test sale',
             'code': 'XX_700',
             'user_type_id': type_revenue.id,
         })
-        self.account_customer = self.env['account.account'].create({
+        cls.account_customer = cls.env['account.account'].create({
             'name': 'Test customer',
             'code': 'XX_430',
             'user_type_id': type_payable.id,
@@ -83,10 +84,8 @@ class TestAccountReversal(TransactionCase):
                 self.assertTrue(line.reconciled)
 
     def test_reverse_huge_move(self):
-
         move = self._create_move()
-
-        for x in range(1, 100):
+        for x in range(1, 50):
             amount = random.randint(10, 100) * x
             move.write({
                 'line_ids': [(0, 0, {
@@ -104,13 +103,10 @@ class TestAccountReversal(TransactionCase):
                     'account_id': self.account_sale.id,
                 })]
             })
-        self.assertEqual(len(move.line_ids), 200)
-
+        self.assertEqual(len(move.line_ids), 100)
         move_prefix = 'REV_TEST_MOVE:'
         line_prefix = 'REV_TEST_LINE:'
-
         rev = move.create_reversals(move_prefix=move_prefix,
                                     line_prefix=line_prefix, reconcile=True)
-
-        self.assertEqual(len(rev.line_ids), 200)
+        self.assertEqual(len(rev.line_ids), 100)
         self.assertEqual(rev.state, 'posted')

@@ -7,7 +7,7 @@
 {
     "name": "Account Reversal",
     "summary": "Wizard for creating a reversal account move",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://odoo-community.org/",
     "author": "Akretion,"
@@ -19,7 +19,7 @@
     "application": False,
     "installable": True,
     "depends": [
-        "account"
+        "account",
     ],
     "data": [
         "wizard/account_move_reverse_view.xml",

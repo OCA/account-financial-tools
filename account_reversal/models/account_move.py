@@ -82,7 +82,7 @@ class AccountMove(models.Model):
             lines = move.line_ids.filtered('account_id.reconcile')
             for line in lines:
                 rec[(line.account_id, line.partner_id)] += line
-            for lines in rec.itervalues():
+            for lines in rec.values():
                 lines.reconcile()
         return True
 

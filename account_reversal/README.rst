@@ -12,7 +12,7 @@ Also add on account entries:
 * a checkbox and filter "to be reversed"
 * a link between an entry and its reversal entry
 
-Odoo v9c include a similar action (overwritten by this addon), but with less
+Odoo v11c includes a similar action (overwritten by this addon), but with less
 features, for instance:
 
 * Allowing inheritance
@@ -23,7 +23,7 @@ features, for instance:
 Usage
 =====
 
-As in Odoo v9c, if you select an entry from Accounting > Adviser > Journal Entries,
+As in Odoo v11c, if you select an entry from Accounting > Adviser > Journal Entries,
 then an action menu 'Reverse Entries' is available. If clicked, then a wizard
 allows user to select Reversal Date, Reversal Journal, Prefix, Post and Reconcile.
 
@@ -38,7 +38,7 @@ in order to allow tracking entries that must be reserved for any reason.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/9.0
+   :target: https://runbot.odoo-community.org/runbot/92/11.0
 
 
 Credits
@@ -59,6 +59,7 @@ Contributors
 * Sandy Carter (Savoir-faire Linux)
 * Stéphane Bidoul (ACSONE)
 * Antonio Espinosa (Tecnativa)
+* Pedro M. Baeza (Tecnativa)
 
 Maintainer
 ----------
