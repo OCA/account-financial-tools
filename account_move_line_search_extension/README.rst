@@ -1,6 +1,8 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
+==============================
 Journal Items Search Extension
 ==============================
 
@@ -17,12 +19,28 @@ the sought-after entry.
 This allows an intuitive click-through to the related accounting documents
 such as the originating Bank Statement, Invoice, Asset, ...
 
+Usage
+=====
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/92/8.0
+
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/account-financial-tools/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
+
 Credits
 =======
 
-Author
-------
-* Luc De Meyer, Noviat <info@noviat.com>
+Contributors
+------------
+
+* Luc De Meyer, Noviat <luc.demeyer@noviat.com>
 
 Maintainer
 ----------

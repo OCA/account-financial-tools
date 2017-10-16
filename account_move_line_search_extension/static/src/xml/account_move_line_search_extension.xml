@@ -25,6 +25,10 @@
         <h4>Period :</h4>
         <input type="text" class="oe_account_select_period"/>
       </div>
+      <div class="oe_form_char_section">
+        <h4>Reconcile :</h4>
+        <input type="text" class="oe_account_select_reconcile"/>
+      </div>
     </div>
   </t>
 
