@@ -23,7 +23,8 @@ features, for instance:
 Usage
 =====
 
-As in Odoo v11c, if you select an entry from Accounting > Adviser > Journal Entries,
+As in Odoo v11c, if you select an entry from
+*Accounting > Adviser > Accounting entries > Journal Entries*,
 then an action menu 'Reverse Entries' is available. If clicked, then a wizard
 allows user to select Reversal Date, Reversal Journal, Prefix, Post and Reconcile.
 

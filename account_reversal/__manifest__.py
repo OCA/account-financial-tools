@@ -19,7 +19,7 @@
     "application": False,
     "installable": True,
     "depends": [
-        "account",
+        "account_invoicing",
     ],
     "data": [
         "wizard/account_move_reverse_view.xml",
