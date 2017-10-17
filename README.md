@@ -35,6 +35,7 @@ addon | version | summary
 [account_cost_center](account_cost_center/) | 8.0.1.0.0 | Cost center information for invoice lines
 [account_credit_control](account_credit_control/) | 8.0.0.3.0 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 | Credit control dunning fees
+[account_credit_control_payment_details](account_credit_control_payment_details/) | 8.0.1.0.0 | Account Credit Control Payment Details
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 | Move in draft state by default
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 8.0.0.1.2 | Check VAT on invoice validation
 [account_fiscal_year_reopen](account_fiscal_year_reopen/) | 8.0.1.0.0 | Account fiscal year reopen
@@ -43,11 +44,12 @@ addon | version | summary
 [account_invoice_tax_required](account_invoice_tax_required/) | 8.0.1.0.0 | Tax required in invoice
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 | Option Check Date in Period always active on journals
 [account_journal_period_close](account_journal_period_close/) | 8.0.1.0.0 | Account Journal Period Close
+[account_locked_line_search](account_locked_line_search/) | 8.0.1.0.0 | Move Line locked
 [account_move_batch_validate](account_move_batch_validate/) | 8.0.0.2.0 | Account Move Batch Validate
-[account_move_line_import](account_move_line_import/) | 8.0.1.0.2 | Import Accounting Entries
+[account_move_line_import](account_move_line_import/) | 8.0.1.0.3 | Import Accounting Entries
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 | Move line search view - disable defaults for period and journal
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 | Filter your Journal Items per payable and receivable account
-[account_move_line_search_extension](account_move_line_search_extension/) | 8.0.0.6.0 | Journal Items Search Extension
+[account_move_line_search_extension](account_move_line_search_extension/) | 8.0.1.0.0 | Journal Items Search Extension
 [account_move_locking](account_move_locking/) | 8.0.1.0.0 | Move locked to prevent modification
 [account_move_template](account_move_template/) | 8.0.1.0.0 | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 8.0.1.0.0 | Compensate AR/AP accounts from the same partner
@@ -61,6 +63,7 @@ addon | version | summary
 [currency_rate_date_check](currency_rate_date_check/) | 8.0.1.0.0 | Make sure currency rates used are always up-to-update
 [currency_rate_update](currency_rate_update/) | 8.0.0.8.0 | Currency Rate Update
 [l10n_account_translate](l10n_account_translate/) | 8.0.0.2.0 | Multilingual General Accounts
+[partner_report_open_invoices](partner_report_open_invoices/) | 8.0.1.0.0 | Open Invoices Reports
 
 
 Unported addons
