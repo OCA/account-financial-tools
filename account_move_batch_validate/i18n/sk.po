@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
-"PO-Revision-Date: 2017-04-25 10:42+0000\n"
+"POT-Creation-Date: 2017-10-06 22:17+0000\n"
+"PO-Revision-Date: 2017-10-16 18:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_to:0
 msgid "End Date"
-msgstr ""
+msgstr "Dátum ukončenia"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
@@ -177,7 +177,7 @@ msgstr "Zrušiť"
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_from:0
 msgid "Start Date"
-msgstr ""
+msgstr "Počiatočný dátum"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,chart_account_id:0
