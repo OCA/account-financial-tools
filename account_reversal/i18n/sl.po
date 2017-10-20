@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-16 21:45+0000\n"
+"POT-Creation-Date: 2017-10-17 02:57+0000\n"
+"PO-Revision-Date: 2017-09-29 07:19+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -187,13 +187,13 @@ msgid "To Be Reversed"
 msgstr "Za preobrnitev"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:84
+#: code:addons/account_reversal/account_reversal.py:85
 #, python-format
 msgid "Wrong company Journal is %s but we have %s"
 msgstr "Napačen dnevnik družbe je %s,  a mi imamo %s"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:87
+#: code:addons/account_reversal/account_reversal.py:88
 #, python-format
 msgid "Wrong company Period is %s but we have %s"
 msgstr "Napačno obdobje družbe je %s, a mi imamo %s"

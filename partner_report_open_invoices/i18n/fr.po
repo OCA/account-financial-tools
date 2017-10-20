@@ -4,74 +4,75 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-17 02:57+0000\n"
 "PO-Revision-Date: 2017-10-17 02:57+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: partner_report_open_invoices
 #: model:ir.model,name:partner_report_open_invoices.model_res_company
 msgid "Companies"
-msgstr "Aziende"
+msgstr "Sociétés"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Credit"
-msgstr "Avere"
+msgstr "Crédit"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Cumul. Bal."
-msgstr "Bil. Cumul."
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Cumulated Balance on Partner"
-msgstr "Bilancio Cumulativo del Partner"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Customer ref:"
-msgstr "Riferimento Cliente:"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Date"
-msgstr "Data"
+msgstr "Date"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Date:"
-msgstr "Data:"
+msgstr "Date :"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Debit"
-msgstr "Dare"
+msgstr "Débit"
 
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,display_name:0
 msgid "Display Name"
-msgstr "Display Name"
+msgstr "Afficher le nom"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Document: Card Account Client"
-msgstr "Documento: estratto conto cliente"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Due Date"
-msgstr "Data scadenza"
+msgstr "Date d'échéance"
 
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,id:0
@@ -81,34 +82,34 @@ msgstr "ID"
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,__last_update:0
 msgid "Last Modified on"
-msgstr "Last Modified on"
+msgstr "Dernière Modification le"
 
 #. module: partner_report_open_invoices
 #: model:ir.actions.report.xml,name:partner_report_open_invoices.action_report_print_open_invoices
 #: view:res.company:partner_report_open_invoices.view_company_form
 msgid "Open Invoices"
-msgstr "Fatture Aperte"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:res.company:partner_report_open_invoices.view_company_form
 #: field:res.company,open_invoices_msg:0
 msgid "Open Invoices Message"
-msgstr "Fatture Aperte Messaggio"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Rec."
-msgstr "Rec."
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Reference"
-msgstr "Riferimento"
+msgstr "Référence"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "There is no open invoice for this customer."
-msgstr "Non c'è alcuna fattura aperta verso questo cliente."
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices

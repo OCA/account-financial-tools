@@ -19,14 +19,14 @@
 # Pedro Castro Silva <pedrocs@sossia.pt>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2017
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:26+0000\n"
-"PO-Revision-Date: 2017-02-24 22:42+0000\n"
+"POT-Creation-Date: 2017-10-17 02:57+0000\n"
+"PO-Revision-Date: 2017-09-22 09:51+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -196,13 +196,13 @@ msgid "To Be Reversed"
 msgstr "Umzukehren"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:84
+#: code:addons/account_reversal/account_reversal.py:85
 #, python-format
 msgid "Wrong company Journal is %s but we have %s"
 msgstr "Falsches Unternehmen, Journal ist %s, aber wir haben %s"
 
 #. module: account_reversal
-#: code:addons/account_reversal/account_reversal.py:87
+#: code:addons/account_reversal/account_reversal.py:88
 #, python-format
 msgid "Wrong company Period is %s but we have %s"
 msgstr "Falsches Unternehmen, Periode ist %s, aber wir haben %s"
