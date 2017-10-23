@@ -35,3 +35,10 @@ class AccountMove(models.Model):
                         _('You cannot create entries with date not in the '
                           'fiscal year of the chosen period'))
         return True
+
+    @api.constrains('state')
+    def _check_state(self):
+        for rec in self:
+            if rec.period_id.state == 'done':
+                raise exceptions.Warning(
+                    _('You cannot cancel a journal entry on a closed period'))
