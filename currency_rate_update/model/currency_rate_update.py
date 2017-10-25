@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 
 _intervalTypes = {
     'days': lambda interval: relativedelta(days=interval),
-    'weeks': lambda interval: relativedelta(days=7*interval),
+    'weeks': lambda interval: relativedelta(days=7 * interval),
     'months': lambda interval: relativedelta(months=interval),
 }
 
@@ -135,7 +135,7 @@ class CurrencyRateUpdateService(models.Model):
                     curr_to_fetch,
                     main_currency.name,
                     self.max_delta_days
-                    )
+                )
                 rate_name = \
                     fields.Datetime.to_string(datetime.utcnow().replace(
                         hour=0, minute=0, second=0, microsecond=0))
@@ -195,3 +195,16 @@ class CurrencyRateUpdateService(models.Model):
         _logger.info('Starting the currency rate update cron')
         self.run_currency_update()
         _logger.info('End of the currency rate update cron')
+
+    @api.multi
+    def onchange(self, values, field_name, field_onchange):
+        """
+        Idea obtained from here
+        https://github.com/odoo/odoo/issues/16072#issuecomment-289833419
+        by the change that was introduced in that same conversation.
+        """
+        for field in field_onchange.keys():
+            if field.startswith('currency_list.'):
+                del field_onchange[field]
+        return super(CurrencyRateUpdateService, self).onchange(
+            values, field_name, field_onchange)
