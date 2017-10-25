@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-10 02:45+0000\n"
+"POT-Creation-Date: 2016-12-09 23:24+0000\n"
 "PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/pt_PT/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Movimento de Conta"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
@@ -50,7 +50,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Data inicial"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
@@ -63,7 +63,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a Apresentar"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_id
@@ -78,7 +78,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação Em"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_write_uid
@@ -133,4 +133,4 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
-msgstr ""
+msgstr "ou"
