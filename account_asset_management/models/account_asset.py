@@ -626,6 +626,7 @@ class AccountAsset(models.Model):
     @api.depends('purchase_value', 'salvage_value',
                  'depreciation_line_ids.amount',
                  'depreciation_line_ids.init_entry',
+                 'depreciation_line_ids.move_check',
                  'depreciation_line_ids.move_id', 'child_ids.write_date',
                  'child_ids.depreciation_base')
     def _compute_depreciation(self):
