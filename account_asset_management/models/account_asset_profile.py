@@ -55,9 +55,8 @@ class AccountAssetProfile(models.Model):
     name = fields.Char('Name', size=64, required=True, index=1)
     note = fields.Text('Note')
     account_analytic_id = fields.Many2one(
-        'account.analytic.account', 'Analytic account',
-        domain=[('type', '!=', 'view'),
-                ('state', 'not in', ('close', 'cancelled'))])
+        'account.analytic.account', 'Analytic account'
+        )
     account_asset_id = fields.Many2one(
         'account.account', 'Asset Account', required=True)
     account_depreciation_id = fields.Many2one(
