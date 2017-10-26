@@ -93,42 +93,49 @@ class ResCompany(models.Model):
         unlink_from_company('account.banking.account.settings')
         unlink_from_company('res.partner.bank')
 
+        _logger.info("Cancel payments...")
+        payments = self.env['account.payment'].search([
+            ('company_id', '=', self.id),
+        ])
+        payments.cancel()
+        payments.write({'move_name': False})
+        payments.unlink()
+
         _logger.info('Reset paid invoices\'s workflows')
         paid_invoices = self.env['account.invoice'].search(
             [('company_id', '=', self.id), ('state', '=', 'paid')])
         if paid_invoices:
-            self._cr.execute(
-                """
-                UPDATE wkf_instance
-                SET state = 'active'
-                WHERE res_type = 'account_invoice'
-                AND res_id IN %s""", (tuple(paid_invoices.ids),))
-            self._cr.execute(
-                """
-                UPDATE wkf_workitem
-                SET act_id = (
-                    SELECT res_id FROM ir_model_data
-                    WHERE module = 'account'
-                        AND name = 'act_open')
-                WHERE inst_id IN (
-                    SELECT id FROM wkf_instance
-                    WHERE res_type = 'account_invoice'
-                    AND res_id IN %s)
-                """, (tuple(paid_invoices.ids),))
-            paid_invoices.signal_workflow('invoice_cancel')
+            for invoice in paid_invoices:
+                invoice.action_cancel()
 
-        inv_ids = self.env['account.invoice'].search(
-            [('company_id', '=', self.id)]).ids
-        if inv_ids:
+        _logger.info("Canceling open invoices...")
+        open_invoices = self.env['account.invoice'].search([
+            ('state', '=', 'open'),
+            ('company_id', '=', self.id)
+        ])
+        for invoice in open_invoices:
+            invoice.action_invoice_cancel()
+
+        _logger.info("Move canceled invoices to draft stage")
+        canceled_invoices = self.env['account.invoice'].search([
+            ('state', '=', 'cancel'),
+            ('company_id', '=', self.id)
+        ])
+        for invoice in canceled_invoices:
+            invoice.action_invoice_draft()
+            invoice.move_name = False
+
+        invoices = self.env['account.invoice'].search(
+            [('company_id', '=', self.id)])
+        if invoices:
             _logger.info('Unlinking invoices')
-            self.env['account.invoice.line'].search(
-                [('invoice_id', 'in', inv_ids)]).unlink()
-            self.env['account.invoice.tax'].search(
-                [('invoice_id', 'in', inv_ids)]).unlink()
-            self._cr.execute(
-                """
-                DELETE FROM account_invoice
-                WHERE id IN %s""", (tuple(inv_ids),))
+            for invoice in invoices:
+                _logger.info('Unlinking invoice: %s[%d]: %s',
+                             invoice.display_name, invoice.id,
+                             invoice.state)
+                invoice.invoice_line_ids.unlink()
+                invoice.tax_line_ids.unlink()
+                invoice.unlink()
 
         _logger.info('Unlinking moves')
         moves = self.env['account.move'].search([('company_id', '=', self.id)])
@@ -136,6 +143,7 @@ class ResCompany(models.Model):
             self._cr.execute(
                 """UPDATE account_move SET state = 'draft'
                    WHERE id IN %s""", (tuple(moves.ids),))
+        moves.mapped('line_ids').mapped('payment_id').unlink()
         moves.unlink()
 
         self.env['account.fiscal.position.tax'].search(

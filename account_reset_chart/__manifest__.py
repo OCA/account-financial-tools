@@ -6,7 +6,7 @@
     "name": "Reset a chart of accounts",
     "summary": "Delete the accounting setup from an otherwise reusable "
                "database",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Therp BV, LasLabs, Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     "depends": [
