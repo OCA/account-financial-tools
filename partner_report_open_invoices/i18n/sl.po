@@ -3,15 +3,15 @@
 # * partner_report_open_invoices
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-17 02:57+0000\n"
-"PO-Revision-Date: 2017-10-17 02:57+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-10-20 23:00+0000\n"
+"PO-Revision-Date: 2017-10-20 23:00+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,17 +32,17 @@ msgstr "Terjatve"
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Cumul. Bal."
-msgstr ""
+msgstr "Kumulativna bilanca"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Cumulated Balance on Partner"
-msgstr ""
+msgstr "Kumulativna bilanca partnerja"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Customer ref:"
-msgstr ""
+msgstr "Sklic kupca"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -67,7 +67,7 @@ msgstr "Prikazni naziv"
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Document: Card Account Client"
-msgstr ""
+msgstr "Dokument: Konto kartica kupca"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -88,18 +88,18 @@ msgstr "Zadnjič spremenjeno"
 #: model:ir.actions.report.xml,name:partner_report_open_invoices.action_report_print_open_invoices
 #: view:res.company:partner_report_open_invoices.view_company_form
 msgid "Open Invoices"
-msgstr ""
+msgstr "Odpri račune"
 
 #. module: partner_report_open_invoices
 #: view:res.company:partner_report_open_invoices.view_company_form
 #: field:res.company,open_invoices_msg:0
 msgid "Open Invoices Message"
-msgstr ""
+msgstr "Sporočilo o odprtju računov"
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Rec."
-msgstr ""
+msgstr "Knjiž."
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -109,9 +109,9 @@ msgstr "Sklic"
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "There is no open invoice for this customer."
-msgstr ""
+msgstr "Ta kupec nima odprtih računov."
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "There is no open invoice for this supplier."
-msgstr ""
+msgstr "Ta dobavitelj nima odprtih računov"
