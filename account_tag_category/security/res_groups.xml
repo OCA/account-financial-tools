@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="res.groups" id="group_account_tag_category">
+        <field name="name">Account tag categories</field>
+        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+    </record>
+</odoo>

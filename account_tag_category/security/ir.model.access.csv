@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_account_account_tag_category_user,access_account_account_tag_category_user,model_account_account_tag_category,account.group_account_user,1,0,0,0
+access_account_account_tag_category_manager,access_account_account_tag_category_manager,model_account_account_tag_category,account_tag_category.group_account_tag_category,1,1,1,1
+access_account_account_tag_manager,account.account.tag,account.model_account_account_tag,account_tag_category.group_account_tag_category,1,1,1,1

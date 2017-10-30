@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_update_tags_on_category" model="ir.actions.act_window">
+        <field name="name">Update Tags</field>
+        <field name="res_model">account.tag.category.update.tags</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+        <field name="context">{'default_tag_category_id': active_id}</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="account_tag_category_update_tags_form" model="ir.ui.view">
+        <field name="name">account.tag.category.update.tags.form</field>
+        <field name="model">account.tag.category.update.tags</field>
+        <field name="arch" type="xml">
+            <form string="Update tags">
+                <group>
+                    <field name="tag_category_id" />
+                    <field name="tag_ids">
+                        <tree string="Tags" editable="bottom" >
+                            <field name="name" />
+                            <field name="tag_category_id" />
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name='save_tags_to_category' string='Save tags' class='oe_highlight' type='object' />
+                    <button special="cancel" string="Close" type="object" class="oe_link oe_inline"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
