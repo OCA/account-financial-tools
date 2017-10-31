@@ -48,6 +48,7 @@ addon | version | summary
 [account_permanent_lock_move_update](account_permanent_lock_move_update/) | 10.0.1.0.0 | Allow an Account adviser to update permanent lock date without having access to all technical settings
 [account_renumber](account_renumber/) | 10.0.1.0.1 | Account Renumber Wizard
 [account_reversal](account_reversal/) | 10.0.1.0.0 | Wizard for creating a reversal account move
+[account_tag_category](account_tag_category/) | 10.0.1.0.0 | Group account tags by categories
 [account_type_inactive](account_type_inactive/) | 10.0.1.0.0 | Allows to set account type to inactive
 [account_type_menu](account_type_menu/) | 10.0.1.0.0 | Adds a menu entry for Account Types
 [base_vat_optional_vies](base_vat_optional_vies/) | 10.0.1.0.0 | Optional validation of VAT via VIES
