@@ -154,31 +154,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     @api.model
     def _get_code_digits(self, company=None):
-        """Returns the default code size for the accounts.
-        To figure out the number of digits of the accounts it look at the
-        code size of the default receivable account of the company
-        (or user's company if any company is given).
+        """Returns the number of digits for the accounts, fetched from
+        the company.
         """
-        property_obj = self.env['ir.property']
-        if not company:
+        if company is None:
             company = self.env.user.company_id
-        properties = property_obj.search(
-            [('name', '=', 'property_account_receivable'),
-             ('company_id', '=', company.id),
-             ('res_id', '=', False),
-             ('value_reference', '!=', False)])
-        number_digits = 6
-        if not properties:
-            # Try to get a generic (no-company) property
-            properties = property_obj.search(
-                [('name', '=', 'property_account_receivable'),
-                 ('res_id', '=', False),
-                 ('value_reference', '!=', False)])
-        if properties:
-            account = property_obj.get_by_record(properties[0])
-            if account:
-                number_digits = len(account.code)
-        return number_digits
+        return company.accounts_code_digits or 6
 
     @api.onchange('company_id')
     def onchange_company_id(self):
