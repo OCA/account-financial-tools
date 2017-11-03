@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
 # Copyright 2012-2013 Guewen Baconnier (Camptocamp)
 # Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
@@ -7,7 +6,7 @@
 {
     "name": "Account Reversal",
     "summary": "Wizard for creating a reversal account move",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://odoo-community.org/",
     "author": "Akretion,"

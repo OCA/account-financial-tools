@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
 # Copyright 2012-2013 Guewen Baconnier (Camptocamp)
 # Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>

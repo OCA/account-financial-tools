@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
 Account Reversal
@@ -12,7 +12,7 @@ Also add on account entries:
 * a checkbox and filter "to be reversed"
 * a link between an entry and its reversal entry
 
-Odoo v9c include a similar action (overwritten by this addon), but with less
+Odoo v11c include a similar action (overwritten by this addon), but with less
 features, for instance:
 
 * Allowing inheritance
@@ -23,22 +23,22 @@ features, for instance:
 Usage
 =====
 
-As in Odoo v9c, if you select an entry from Accounting > Adviser > Journal Entries,
+If you select an entry from Invoicing > Adviser > Journal Entries,
 then an action menu 'Reverse Entries' is available. If clicked, then a wizard
 allows user to select Reversal Date, Reversal Journal, Prefix, Post and Reconcile.
 
 * If no Reversal Journal is selected, then the same journal is used
 * If Post is True, then reversal entry will be posted else it will be leaved
-  as a draft entry
+  as a draft entry.
 * If Post and Reconcile are True, then all entry lines with reconciled accounts
   of the entry will be reconciled with the reserval entry ones.
 
-There is also a new menu Accounting > Adviser > Journal Entries to be Reversed
+There is also a new menu Invoicing > Adviser > Journal Entries to be Reversed
 in order to allow tracking entries that must be reserved for any reason.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/9.0
+   :target: https://runbot.odoo-community.org/runbot/92/11.0
 
 
 Credits
