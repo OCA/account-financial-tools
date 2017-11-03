@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:16+0000\n"
-"PO-Revision-Date: 2016-12-27 08:22+0000\n"
+"POT-Creation-Date: 2017-10-27 22:21+0000\n"
+"PO-Revision-Date: 2017-11-03 12:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -307,7 +307,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -720,7 +720,7 @@ msgstr ""
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -772,7 +772,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.history,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Pengguna"
 
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0

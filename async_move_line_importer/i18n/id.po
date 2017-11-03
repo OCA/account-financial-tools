@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-10-27 22:23+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -96,7 +96,7 @@ msgstr ""
 #. module: async_move_line_importer
 #: field:move.line.importer,message_is_follower:0
 msgid "Is a Follower"
-msgstr ""
+msgstr "Ini Adalah Pengikut"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:214
@@ -160,7 +160,7 @@ msgstr "Pesan"
 #. module: async_move_line_importer
 #: field:move.line.importer,message_summary:0
 msgid "Summary"
-msgstr ""
+msgstr "Ringkasan"
 
 #. module: async_move_line_importer
 #: view:move.line.importer:0 field:move.line.importer,report:0
@@ -208,7 +208,7 @@ msgstr "Pesan Belum Dibaca"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "Memegang ringkasan Chatter (jumlah pesan, ...). Ringkasan ini langsung dalam format html agar bisa dimasukkan dalam pandangan kanban."
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:329

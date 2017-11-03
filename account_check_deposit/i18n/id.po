@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-30 23:40+0000\n"
+"POT-Creation-Date: 2017-10-27 22:22+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -35,7 +35,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0 selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: account_check_deposit
 #: field:account.check.deposit,line_ids:0
@@ -126,7 +126,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:0
 msgid "Back to Draft"
-msgstr ""
+msgstr "Kembali ke Draf"
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/account_deposit.py:130

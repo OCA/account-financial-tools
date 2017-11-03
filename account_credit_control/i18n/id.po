@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-17 23:13+0000\n"
+"POT-Creation-Date: 2017-10-27 22:22+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -407,7 +407,7 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.line,state:0 field:credit.control.run,state:0
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: account_credit_control
 #: help:credit.control.line,state:0
@@ -577,7 +577,7 @@ msgstr ""
 #: view:credit.control.line:0 selection:credit.control.line,state:0
 #: selection:credit.control.run,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: account_credit_control
 #: view:credit.control.marker:0
@@ -634,13 +634,13 @@ msgstr ""
 #. module: account_credit_control
 #: field:credit.control.communication,user_id:0
 msgid "User"
-msgstr ""
+msgstr "Pengguna"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
 msgid "Letter"
-msgstr ""
+msgstr "Surat"
 
 #. module: account_credit_control
 #: field:credit.control.policy.changer,do_nothing:0
@@ -984,7 +984,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Sent"
-msgstr ""
+msgstr "Kirim"
 
 #. module: account_credit_control
 #: constraint:credit.control.policy.level:0
@@ -1062,7 +1062,7 @@ msgstr ""
 #. module: account_credit_control
 #: report:addons/account_credit_control/report/credit_control_summary.html.mako:204
 msgid "Summary"
-msgstr ""
+msgstr "Ringkasan"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_level
