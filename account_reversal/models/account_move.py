@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
 # Copyright 2011 Nicolas Bessi (Camptocamp)
 # Copyright 2012-2013 Guewen Baconnier (Camptocamp)
@@ -82,7 +81,7 @@ class AccountMove(models.Model):
             lines = move.line_ids.filtered('account_id.reconcile')
             for line in lines:
                 rec[(line.account_id, line.partner_id)] += line
-            for lines in rec.itervalues():
+            for lines in list(rec.values()):
                 lines.reconcile()
         return True
 
