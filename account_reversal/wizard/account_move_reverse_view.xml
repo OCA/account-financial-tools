@@ -33,17 +33,13 @@
     </field>
 </record>
 
-<record id="act_account_move_reverse" model="ir.actions.act_window">
+<record id="account.action_view_account_move_reversal" model="ir.actions.act_window">
     <field name="name">Reverse Entries</field>
     <field name="res_model">account.move.reverse</field>
     <field name="view_mode">form</field>
     <field name="view_id" ref="view_account_move_reverse"/>
     <field name="target">new</field>
-</record>
-
-<record id="account.action_account_move_reversal" model="ir.values">
-    <field name="value"
-           eval="'ir.actions.act_window,' + str(ref('act_account_move_reverse'))" />
+    <field name="binding_model_id" ref="account.model_account_move" />
 </record>
 
 </odoo>

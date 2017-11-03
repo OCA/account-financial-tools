@@ -20,13 +20,10 @@
     <field name="model">account.move</field>
     <field name="inherit_id" ref="account.view_move_form"/>
     <field name="arch" type="xml">
-            <button name="%(account.action_view_account_move_reversal)d" position="attributes">
-                <attribute name="name">%(act_account_move_reverse)d</attribute>
-            </button>
-            <xpath expr="//field[@name='company_id']" position="after">
-            <field name="to_be_reversed"/>
-            <field name="reversal_id"
-                   attrs="{'invisible': [('to_be_reversed', '=', False), ('reversal_id', '=', False)]}"/>
+        <xpath expr="//field[@name='company_id']" position="after">
+        <field name="to_be_reversed"/>
+        <field name="reversal_id"
+               attrs="{'invisible': [('to_be_reversed', '=', False), ('reversal_id', '=', False)]}"/>
         </xpath>
     </field>
 </record>
