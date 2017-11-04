@@ -4,9 +4,11 @@
 # 
 # Translators:
 # Accounts-Payable - Alkemics, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2016
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Antonio Trueba, 2016
+# Bole <bole@dajmi5.com>, 2015
 # Chen-Do LU <clu@alkemics.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # Bole <bole@dajmi5.com>, 2015
@@ -16,14 +18,14 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-05-14 01:10+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-11-03 12:14+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +52,7 @@ msgstr ""
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.account_check_deposit_view_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Kembali ke Draf"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
@@ -194,7 +196,7 @@ msgstr ""
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
 #: selection:account.check.deposit,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: account_check_deposit
 #: view:account.check.deposit:account_check_deposit.view_check_deposit_search
