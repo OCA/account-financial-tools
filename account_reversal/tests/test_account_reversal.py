@@ -70,8 +70,15 @@ class TestAccountReversal(TransactionCase):
             self._move_str(move), '0.00100.00:SALE_100.000.00:CUSTOMER_')
         move_prefix = 'REV_TEST_MOVE:'
         line_prefix = 'REV_TEST_LINE:'
-        rev = move.create_reversals(move_prefix=move_prefix,
-                                    line_prefix=line_prefix, reconcile=True)
+        wizard = self.env['account.move.reverse'].with_context(
+            active_ids=move.ids
+        ).create({
+            'move_prefix': move_prefix,
+            'line_prefix': line_prefix
+        })
+        self.assertEqual(wizard.date, move.date)
+        res = wizard.action_reverse()
+        rev = self.env['account.move'].browse(res['res_id'])
         self.assertEqual(len(rev), 1)
         self.assertEqual(rev.state, 'posted')
         self.assertEqual(
