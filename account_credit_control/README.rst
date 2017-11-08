@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
 ==============
@@ -64,7 +64,8 @@ Contributors
 * Nicolas Bessi (Camptocamp)
 * Guewen Baconnier (Camptocamp)
 * Sylvain Van Hoof (Okia SPRL) <sylvain@okia.be>
-* Akim Juillerat (Camptocamp <akim.juillerat@camptocamp.com>
+* Akim Juillerat (Camptocamp) <akim.juillerat@camptocamp.com>
+* Vicent Cubells (Tecnativa) <vicent.cubells@tecnativa.com>
 
 Maintainer
 ----------
