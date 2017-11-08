@@ -84,6 +84,10 @@
                             string="Manual change"
                             domain="[('manually_overridden', '=', True)]"
                             help="The line was deprecated by a manual change of policy on invoice."/>
+                    <filter name="filter_manual" icon="fa-hand-paper-o"
+                            string="Manual followup"
+                            domain="[('manually_followup', '=', True)]"
+                            help="The partner had a manual followup."/>
                 </group>
                 <group expand="0" string="Group By" name="group_by">
                     <filter domain='[]' context="{'group_by': 'date'}"
@@ -107,6 +111,9 @@
                     <filter domain='[]'
                             context="{'group_by': 'manually_overridden'}"
                             icon="terp-document-new" string="Manual change"/>
+                    <filter domain='[]'
+                            context="{'group_by': 'manual_followup'}"
+                            icon="terp-document-new" string="Manual followup"/>
                 </group>
             </search>
         </field>
@@ -126,6 +133,7 @@
                 <field name="channel"/>
                 <field name="invoice_id"/>
                 <field name="partner_id"/>
+                <field name="manual_followup"/>
                 <field name="amount_due"/>
                 <field name="balance_due"/>
                 <field name="currency_id"/>
@@ -140,8 +148,8 @@
 
     <menuitem
             name="Credit Control"
-            parent="account.menu_finance_entries"
-            id="base_credit_control_menu" sequence="10"
+            parent="account.menu_finance"
+            id="base_credit_control_menu" sequence="4"
             groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user,account_credit_control.group_account_credit_control_info"/>
 
     <record model="ir.actions.act_window" id="credit_control_line_action">
@@ -166,6 +174,5 @@
             sequence="20"
             id="credit_control_line_action_menu"
             />
-
 
 </odoo>
