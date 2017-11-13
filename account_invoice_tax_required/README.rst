@@ -42,6 +42,7 @@ Contributors
 * Vincent Renaville <vincent.renaville@camptocamp.com>
 * Angel Moya <odoo@tecnativa.com>
 * Kitti U. <kittiu@ecosoft.co.th>
+* Jorge Camacho <jcamacho@trey.es>
 
 Maintainer
 ----------
