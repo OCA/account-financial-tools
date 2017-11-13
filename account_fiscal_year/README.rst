@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
 ===================
@@ -15,22 +15,12 @@ encloses the give date.
 If it does not find it, it falls back on the standard Odoo
 technique based on the day/month of end of fiscal year.
 
-Installation
-============
-
-Just install it
-
-Configuration
-=============
-
-Nothing
-
 Usage
 =====
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/10.0
+   :target: https://runbot.odoo-community.org/runbot/92/11.0
 
 
 Bug Tracker
