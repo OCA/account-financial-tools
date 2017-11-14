@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2008-2016 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -65,7 +64,7 @@ class CurrencyGetterType(type):
         return mcs.getters[code](*args, **kwargs)
 
 
-class CurrencyGetterInterface(object):
+class CurrencyGetterInterface(object, metaclass=CurrencyGetterType):
     """ Abstract class of currency getter
 
         To create new getter, just subclass this class
@@ -90,7 +89,6 @@ class CurrencyGetterInterface(object):
                     return self.updated_currency, self.log_info
 
     """
-    __metaclass__ = CurrencyGetterType
 
     # attributes required for currency getters
     code = None  # code for service selection
@@ -137,8 +135,10 @@ class CurrencyGetterInterface(object):
     def get_url(self, url):
         """Return a string of a get url query"""
         try:
-            import urllib
-            objfile = urllib.urlopen(url)
+            import urllib.request
+            import urllib.parse
+            import urllib.error
+            objfile = urllib.request.urlopen(url)
             rawfile = objfile.read()
             objfile.close()
             return rawfile

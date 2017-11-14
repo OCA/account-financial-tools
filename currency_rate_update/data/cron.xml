@@ -6,10 +6,10 @@
             <field name="interval_number">1</field>
             <field name="interval_type">days</field><!-- it s every day -->
             <field name="numbercall">-1</field>
+            <field name="state">code</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'currency.rate.update.service'"/>
-            <field name="function" eval="'_run_currency_update'"/>
-            <field name="args">()</field>
+            <field name="model_id" ref="currency_rate_update.model_currency_rate_update_service"/>
+            <field name="code">model._run_currency_update()</field>
         </record>
 
     </data>

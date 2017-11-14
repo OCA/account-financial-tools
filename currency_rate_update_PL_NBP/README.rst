@@ -2,23 +2,15 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Currency Rate Update
-====================
+=================================================
+Currency Rate Update polish national bank service
+=================================================
 
-Base module to download exchange rates automatically from the Internet.
-
-This module download exchange rates automatically from European central bank service (ported by Grzegorz Grzelak - OpenGLOBE.pl)
-The reference rates are based on the regular daily query procedure between central banks within and outside the European System of Central Banks, which normally takes place at 2.15 p.m. (14:15) ECB time. Source in EUR. http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html
-
-Configuration
-=============
-
-To configure the module, go to *Accounting > Configuration > Multi-currencies > Rate Auto-download* and create one or several services to download rates from the Internet.
-
-Then, go to the page *Accounting > Configuration > Settings* and, in the section *Multi Currencies*, make sure that the option *Automatic Currency Rates Download* is enabled.
-
-In developper mode, in the menu *Settings > Technical > Scheduled Actions*, make sure that the action *Currency Rate Update* is active. If you want to run it immediately, use the button *Run Manually*.
+Download exchange rates automatically from polish national bank service (Narodowy Bank Polski) (by Grzegorz Grzelak - OpenGLOBE.pl)
+   Takes official rates from www.nbp.pl. Adds rate table symbol in log.
+   You should check when rates should apply to bookkeeping.
+   If next day you should change the update hour in schedule settings
+   because in Odoo they apply from date of update (date - no hours).
 
 Usage
 =====
@@ -34,19 +26,6 @@ A function field lets you know your currency configuration.
 
 If in multi-company mode, the base currency will be the first company's
 currency found in database.
-
-Know issues / Roadmap
-=====================
-
-To fix:
-
-* Bank of Canada
-
-Roadmap:
-
-* Google Finance.
-* Updated daily from Citibank N.A., source in EUR. Information may be delayed.
-  This is parsed from an HTML page, so it may be broken at anytime.
 
 Bug Tracker
 ===========

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2009 Camptocamp
 # © 2014 Daniel Dico
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
