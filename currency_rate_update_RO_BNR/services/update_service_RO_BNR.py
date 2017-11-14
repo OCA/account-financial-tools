@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 # © 2009 Camptocamp
 # © 2014 Dorin Hongu
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import CurrencyGetterInterface
+from odoo.addons.currency_rate_update.services.currency_getter_interface \
+    import CurrencyGetterInterface
 
 from datetime import datetime, timedelta
 

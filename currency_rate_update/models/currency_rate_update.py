@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2009-2016 Camptocamp
 # © 2010 Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -29,6 +28,7 @@ class CurrencyRateUpdateService(models.Model):
     """Class keep services and currencies that
     have to be updated"""
     _name = "currency.rate.update.service"
+    _inherit = ['mail.thread']
     _description = "Currency Rate Update"
     _rec_name = "service"
 
@@ -47,12 +47,16 @@ class CurrencyRateUpdateService(models.Model):
             if srv.interval_number < 0:
                 raise ValidationError(_('Interval number must be >= 0'))
 
-    @api.onchange('interval_number')
-    def _onchange_interval_number(self):
-        if self.interval_number == 0:
-            self.note = '%s Service deactivated. Currencies will no longer ' \
-                        'be updated. \n%s' % (fields.Datetime.now(),
-                                              self.note and self.note or '')
+    @api.multi
+    def write(self, vals):
+        if 'interval_number' in vals and vals['interval_number'] == 0:
+            for service in self:
+                msg = '%s Service deactivated. Currencies will no longer ' \
+                    'be updated.' % (fields.Datetime.now())
+                service.message_post(body=msg,
+                                     message_type='comment',
+                                     subtype='mt_comment')
+        return super(CurrencyRateUpdateService, self).write(vals)
 
     @api.onchange('service')
     def _onchange_service(self):
@@ -103,8 +107,6 @@ class CurrencyRateUpdateService(models.Model):
         'res.company', 'Company', required=True,
         default=lambda self: self.env['res.company']._company_default_get(
             'currency.rate.update.service'))
-    # Note fileds that will be used as a logger
-    note = fields.Text('Update logs')
     max_delta_days = fields.Integer(
         string='Max delta days', default=4, required=True,
         help="If the time delta between the rate date given by the "
@@ -148,7 +150,6 @@ class CurrencyRateUpdateService(models.Model):
                             company.name,
                             main_currency.name,
                             main_currency.rate))
-                note = srv.note or ''
                 try:
                     # We initalize the class that will handle the request
                     # and return a dict of rate
@@ -183,20 +184,20 @@ class CurrencyRateUpdateService(models.Model):
                                 curr.name, srv.service, company.name)
 
                     # Show the most recent note at the top
-                    msg = '%s \n%s currency updated. %s' % (
+                    msg = '%s <br/>%s currency updated.' % (
                         log_info or '',
-                        fields.Datetime.to_string(datetime.today()),
-                        note
+                        fields.Datetime.to_string(datetime.today())
                     )
-                    srv.write({'note': msg})
+                    srv.message_post(body=msg)
                 except Exception as exc:
-                    error_msg = '\n%s ERROR: %s %s' % (
+                    error_msg = '%s ERROR: %s' % (
                         fields.Datetime.to_string(datetime.today()),
-                        repr(exc),
-                        note
+                        repr(exc)
                     )
                     _logger.error(repr(exc))
-                    srv.write({'note': error_msg})
+                    srv.message_post(body=error_msg,
+                                     message_type='comment',
+                                     subtype='mt_comment')
                 if self._context.get('cron'):
                     midnight = time(0, 0)
                     next_run = (datetime.combine(

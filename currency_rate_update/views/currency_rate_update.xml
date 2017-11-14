@@ -25,27 +25,30 @@
                     <button name="refresh_currency" type="object"
                             string="Update now"/>
                 </header>
-                <group name="main">
-                    <group name="left">
-                        <field name="service"/>
-                        <field name="currency_list" invisible="1"/>
-                        <field name="currency_list_readonly" widget="many2many_tags"/>
-                        <field name="company_id" groups="base.group_multi_company"/>
+                <sheet>
+                    <group name="main">
+                        <group name="left">
+                            <field name="service"/>
+                            <field name="currency_list" invisible="1"/>
+                            <field name="currency_list_readonly" widget="many2many_tags"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group name="right">
+                            <field name="interval_type"/>
+                            <field name="interval_number"/>
+                            <field name="next_run"/>
+                            <field name="max_delta_days"/>
+                        </group>
                     </group>
-                    <group name="right">
-                        <field name="interval_type"/>
-                        <field name="interval_number"/>
-                        <field name="next_run"/>
-                        <field name="max_delta_days"/>
+                    <group string="Currencies to update with this service" name="currencies">
+                        <!-- I need to have currency_list as r+w for the on_change -->
+                        <field name="currency_to_update" nolabel="1"/>
                     </group>
-                </group>
-                <group string="Currencies to update with this service" name="currencies">
-                    <!-- I need to have currency_list as r+w for the on_change -->
-                    <field name="currency_to_update" nolabel="1"/>
-                </group>
-                <group string="Logs" name="logs">
-                    <field name="note" nolabel="1"/>
-                </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
@@ -57,6 +60,6 @@
     </record>
 
     <menuitem id="currency_rate_update_menu" action="currency_rate_update_action"
-        parent="account.menu_config_multi_currency" sequence="30"/>
+        parent="account.account_account_menu" sequence="30"/>
 
 </odoo>

@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 # © 2009 Camptocamp
 # © 2013-2014 Agustin Cruz openpyme.mx
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from .currency_getter_interface import CurrencyGetterInterface
+from odoo.addons.currency_rate_update.services.currency_getter_interface \
+    import CurrencyGetterInterface
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -33,13 +33,13 @@ class MX_BdMGetter(CurrencyGetterInterface):
                'BMXC_canal=pagos&BMXC_idioma=es')
 
         from xml.dom.minidom import parse
-        from StringIO import StringIO
+        from io import BytesIO
 
         logger = logging.getLogger(__name__)
         logger.debug("Banxico currency rate service : connecting...")
         rawfile = self.get_url(url)
 
-        dom = parse(StringIO(rawfile))
+        dom = parse(BytesIO(rawfile))
         logger.debug("Banxico sent a valid XML file")
 
         value = dom.getElementsByTagName('cb:value')[0]
@@ -72,3 +72,4 @@ class MX_BdMGetter(CurrencyGetterInterface):
             self.updated_currency[curr] = rate
             logger.debug("Rate retrieved : %s = %s %s" %
                          (main_currency, rate, curr))
+        return self.updated_currency, self.log_info
