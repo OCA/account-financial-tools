@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2013-2016 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -9,7 +8,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.onchange('property_account_position_id')
-    def fiscal_position_change(self):
+    def onchange_fiscal_position_change(self):
         """Warning if the fiscal position requires a VAT number and the
         partner doesn't have one yet"""
         fp = self.property_account_position_id
