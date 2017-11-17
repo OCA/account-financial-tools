@@ -37,6 +37,9 @@ The module is able to use the following sources:
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
+8. Joint Stock Commercial Bank for Foreign Trade of Vietnam - Vietcombank
+
+
 Configuration
 =============
 
@@ -105,6 +108,7 @@ Contributors
 * Assem Bayahi
 * Daniel Dico <ddico@oerp.ca> (BOC)
 * Dmytro Katyukha <firemage.dima@gmail.com>
+* Lam Thai Binh <binh.lt@komit-consulting.com> (VCB)
 
 Maintainer
 ----------
