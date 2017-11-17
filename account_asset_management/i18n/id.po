@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-27 22:29+0000\n"
-"PO-Revision-Date: 2017-11-03 12:15+0000\n"
+"PO-Revision-Date: 2017-11-17 09:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -522,7 +522,7 @@ msgstr ""
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_search
 msgid "Group By..."
-msgstr ""
+msgstr "Dikelompokan berdasarkan .."
 
 #. module: account_asset_management
 #: field:account.asset.asset,move_line_check:0
