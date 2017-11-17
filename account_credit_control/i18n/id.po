@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-27 22:22+0000\n"
+"POT-Creation-Date: 2017-11-10 23:18+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -40,7 +40,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:0
 msgid "Group By..."
-msgstr ""
+msgstr "Dikelompokan berdasarkan .."
 
 #. module: account_credit_control
 #: view:credit.control.policy.changer:0
