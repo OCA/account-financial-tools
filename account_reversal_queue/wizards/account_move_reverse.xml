@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_reverse_form_view">
+        <field name="name">account.move.reverse.form (in account_reversal_batch)</field>
+        <field name="model">account.move.reverse</field>
+        <field name="inherit_id" ref="account_reversal.view_account_move_reverse"/>
+        <field name="arch" type="xml">
+
+            <field name="reconcile" position="after">
+                <field name="asynchronous"/>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
