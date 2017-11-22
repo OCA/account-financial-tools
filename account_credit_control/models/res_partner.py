@@ -34,7 +34,8 @@ class ResPartner(models.Model):
     @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
-        for partner in self:
+        # sudo needed for those w/o permission that duplicate records
+        for partner in self.sudo():
             if (not partner.property_account_receivable_id or
                     not partner.credit_policy_id):
                 continue
