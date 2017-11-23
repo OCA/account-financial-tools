@@ -11,7 +11,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class RO_BNRGetter(CurrencyGetterInterface):
+class RoBnrGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface for BNR service"""
 
     code = 'RO_BNR'

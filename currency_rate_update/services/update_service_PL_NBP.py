@@ -12,7 +12,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class PL_NBPGetter(CurrencyGetterInterface):
+class PlNbpGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface
     for PL NBP service
 
