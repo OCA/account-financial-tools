@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2009-2017 Noviat
+# Copyright OpenUpgrade contributors (https://github.com/oca/openupgradelib)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
