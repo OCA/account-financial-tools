@@ -80,7 +80,3 @@ class TestCurrencyRateUpdate(TransactionCase):
         """
         self._test_cron_by_service('VN_VCB', ['base.USD'])
 
-    def test_cron_YAHOO(self):
-        """Test the ir.cron with Yahoo service for USD
-        """
-        self._test_cron_by_service('YAHOO', ['base.USD'])
