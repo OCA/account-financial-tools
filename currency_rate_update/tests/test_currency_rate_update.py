@@ -79,4 +79,3 @@ class TestCurrencyRateUpdate(TransactionCase):
         """Test the ir.cron with Vietcombank service for USD
         """
         self._test_cron_by_service('VN_VCB', ['base.USD'])
-
