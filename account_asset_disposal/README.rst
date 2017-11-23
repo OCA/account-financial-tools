@@ -9,6 +9,8 @@ Account asset disposal
 This module extends the functionality of account_asset adding a disposal
 date, allowing reversion of disposal operation and adding the state
 "Disposed" to the asset.
+It adds an expense account at asset category level to post expenses when
+asset is disposed.
 
 Usage
 =====

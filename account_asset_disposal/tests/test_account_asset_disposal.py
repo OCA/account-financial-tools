@@ -67,6 +67,6 @@ class TestAccountAssetDisposal(common.SavepointCase):
 
     def test_asset_amortized(self):
         self.asset.depreciation_line_ids.create_move()
-        self.asset.set_to_close()
-        self.asset.action_disposal_undo()
+        for line in self.asset.depreciation_line_ids:
+            line.move_id.post()
         self.assertEqual(self.asset.state, 'close')

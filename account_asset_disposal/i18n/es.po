@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-13 16:50+0000\n"
-"PO-Revision-Date: 2017-09-13 16:50+0000\n"
+"POT-Creation-Date: 2017-11-23 09:15+0000\n"
+"PO-Revision-Date: 2017-11-23 09:15+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -17,14 +17,37 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_category
+msgid "Asset category"
+msgstr "Categoría de activo"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset.py:88
+#, python-format
+msgid "Asset depreciation"
+msgstr "Depreciación de activo"
+
+#. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_depreciation_line
 msgid "Asset depreciation line"
-msgstr "Línea de amortización del activo"
+msgstr "Línea de Depreciación de Activo"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset.py:77
+#, python-format
+msgid "Asset disposal"
+msgstr "Baja de activo"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset.py:99
+#, python-format
+msgid "Asset loss"
+msgstr "Pérdida valor de activo"
 
 #. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_asset
 msgid "Asset/Revenue Recognition"
-msgstr "Activo fijo"
+msgstr "Aceptación de pagos/Ingresos"
 
 #. module: account_asset_disposal
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
@@ -35,6 +58,11 @@ msgstr "Fecha de baja"
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_move_id
 msgid "Disposal move"
 msgstr "Asiento de baja"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_category_loss_account_id
+msgid "Loss Account"
+msgstr "Cuenta de pérdidas"
 
 #. module: account_asset_disposal
 #: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form

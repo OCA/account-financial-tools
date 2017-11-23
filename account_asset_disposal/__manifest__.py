@@ -6,7 +6,7 @@
 {
     "name": "Account asset disposal",
     "summary": "Makes asset close account move automatically",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "category": "Accounting & Finance",
     "website": "https://www.tecnativa.com",
     "author": "Tecnativa, "
@@ -19,6 +19,6 @@
         "account_cancel",
     ],
     "data": [
-        "views/account_asset_asset_view.xml",
+        "views/account_asset_view.xml",
     ],
 }
