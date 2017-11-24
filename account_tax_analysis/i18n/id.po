@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-10 23:19+0000\n"
+"POT-Creation-Date: 2017-11-17 23:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -78,7 +78,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: account_tax_analysis
 #: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
@@ -149,7 +149,7 @@ msgstr "Batalkan"
 #. module: account_tax_analysis
 #: view:account.move.line:0
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: account_tax_analysis
 #: view:account.move.line:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-28 22:29+0000\n"
-"PO-Revision-Date: 2017-08-03 09:32+0000\n"
+"POT-Creation-Date: 2017-11-17 23:20+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/vi_VN/)\n"
 "MIME-Version: 1.0\n"
@@ -192,7 +192,7 @@ msgstr ""
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
 msgid "or"
-msgstr ""
+msgstr "hoặc"
 
 #. module: account_move_batch_validate
 #: selection:account.move.marker,target_move:0

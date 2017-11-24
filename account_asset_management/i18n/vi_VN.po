@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-04 22:27+0000\n"
+"POT-Creation-Date: 2017-11-17 23:20+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/vi_VN/)\n"
@@ -670,7 +670,7 @@ msgstr ""
 #: view:account.asset.remove:0 view:asset.depreciation.confirmation.wizard:0
 #: view:asset.modify:0
 msgid "or"
-msgstr ""
+msgstr "hoặc"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -828,7 +828,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
 msgid "Active"
-msgstr ""
+msgstr "Có hiệu lực"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0

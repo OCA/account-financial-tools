@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-22 22:19+0000\n"
+"POT-Creation-Date: 2017-11-17 23:21+0000\n"
 "PO-Revision-Date: 2015-06-03 16:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/sl/)\n"
@@ -132,7 +132,7 @@ msgstr "Naziv"
 #. module: async_move_line_importer
 #: selection:move.line.importer,state:0
 msgid "Success"
-msgstr ""
+msgstr "Uspeh"
 
 #. module: async_move_line_importer
 #: code:addons/async_move_line_importer/model/move_line_importer.py:370

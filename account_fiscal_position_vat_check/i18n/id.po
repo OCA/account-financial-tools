@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-11-17 23:20+0000\n"
 "PO-Revision-Date: 2015-06-03 16:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/id/)\n"
@@ -63,7 +63,7 @@ msgstr "Faktur"
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/account_invoice.py:52
