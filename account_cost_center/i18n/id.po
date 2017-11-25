@@ -112,7 +112,7 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: account_cost_center
 #: field:account.cost.center,__last_update:0

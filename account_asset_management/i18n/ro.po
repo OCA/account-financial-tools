@@ -16,14 +16,14 @@
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2017-08-25 22:32+0000\n"
+"POT-Creation-Date: 2017-10-27 22:29+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -274,7 +274,7 @@ msgstr "Anuleaza"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 msgid "Category"
-msgstr ""
+msgstr "Categorie"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form

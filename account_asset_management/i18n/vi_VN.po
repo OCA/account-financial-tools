@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2017-08-25 22:32+0000\n"
+"POT-Creation-Date: 2017-10-27 22:29+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Vietnamese (Viet Nam) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/vi_VN/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,active:0
 msgid "Active"
-msgstr ""
+msgstr "Có hiệu lực"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -987,4 +987,4 @@ msgstr ""
 #: view:asset.depreciation.confirmation.wizard:account_asset_management.view_asset_depreciation_confirmation_wizard
 #: view:asset.modify:account_asset_management.asset_modify_form
 msgid "or"
-msgstr ""
+msgstr "hoặc"

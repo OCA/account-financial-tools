@@ -6,6 +6,7 @@
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2013
 # Hotellook, 2014
@@ -14,14 +15,14 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:22+0000\n"
+"POT-Creation-Date: 2017-10-27 22:29+0000\n"
+"PO-Revision-Date: 2017-11-23 23:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +93,7 @@ msgstr "Jurnal"
 #. module: account_constraints
 #: model:ir.model,name:account_constraints.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: account_constraints
 #: field:account.bank.statement.line,state:0

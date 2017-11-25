@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-11-03 12:15+0000\n"
+"PO-Revision-Date: 2017-11-23 23:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgstr "Nomer"
 #. module: account_move_template
 #: field:wizard.select.move.template,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: account_move_template
 #: field:account.document.template.line,python_code:0
