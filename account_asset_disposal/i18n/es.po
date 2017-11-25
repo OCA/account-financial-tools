@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-23 09:15+0000\n"
-"PO-Revision-Date: 2017-11-23 09:15+0000\n"
+"POT-Creation-Date: 2017-11-25 12:17+0000\n"
+"PO-Revision-Date: 2017-11-25 12:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -22,35 +22,76 @@ msgid "Asset category"
 msgstr "Categoría de activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset.py:88
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:35
 #, python-format
 msgid "Asset depreciation"
-msgstr "Depreciación de activo"
+msgstr "Amortización del activo"
 
 #. module: account_asset_disposal
-#: model:ir.model,name:account_asset_disposal.model_account_asset_depreciation_line
-msgid "Asset depreciation line"
-msgstr "Línea de Depreciación de Activo"
-
-#. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset.py:77
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:23
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
 #, python-format
 msgid "Asset disposal"
-msgstr "Baja de activo"
+msgstr "Baja del activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset.py:99
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:158
+#, python-format
+msgid "Asset disposal cancelled."
+msgstr "Baja del activo cancelada."
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:123
+#, python-format
+msgid "Asset disposed."
+msgstr "Activo dado de baja."
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:46
 #, python-format
 msgid "Asset loss"
-msgstr "Pérdida valor de activo"
+msgstr "Pérdida del activo"
 
 #. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_asset
 msgid "Asset/Revenue Recognition"
-msgstr "Aceptación de pagos/Ingresos"
+msgstr "Activo/Reconocimiento de beneficio"
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:130
+#, python-format
+msgid "Disposal Move"
+msgstr "Asiento de baja"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:133
+#, python-format
+msgid "Disposal Moves"
+msgstr "Asientos de baja"
 
 #. module: account_asset_disposal
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_disposal_date
 msgid "Disposal date"
 msgstr "Fecha de baja"
 
@@ -60,7 +101,49 @@ msgid "Disposal move"
 msgstr "Asiento de baja"
 
 #. module: account_asset_disposal
-#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_category_loss_account_id
+#: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
+msgid "Dispose"
+msgstr "Dar de baja"
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:78
+#, python-format
+msgid "Dispose Asset"
+msgstr "Dar de baja activo"
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
+msgid "Dispose asset"
+msgstr "Dar de baja activo"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte contable"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_category_account_loss_id
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_loss_account_id
 msgid "Loss Account"
 msgstr "Cuenta de pérdidas"
 
