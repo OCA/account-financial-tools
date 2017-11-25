@@ -122,7 +122,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_active
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -146,7 +146,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
@@ -403,7 +403,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
@@ -420,7 +420,7 @@ msgstr ""
 #: selection:credit.control.line,state:0 selection:credit.control.run,state:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -577,7 +577,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer___last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_write_uid

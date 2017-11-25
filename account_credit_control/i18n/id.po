@@ -147,7 +147,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr ""
+msgstr "Batalkan"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
@@ -239,7 +239,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Dibuat oleh"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_create_date
@@ -252,7 +252,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Dibuat pada"
 
 #. module: account_credit_control
 #: model:ir.module.category,name:account_credit_control.category_credit_control
@@ -914,7 +914,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_id
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:104

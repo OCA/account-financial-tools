@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 00:38+0000\n"
-"PO-Revision-Date: 2017-08-22 00:38+0000\n"
+"POT-Creation-Date: 2017-10-27 23:09+0000\n"
+"PO-Revision-Date: 2017-10-27 23:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +238,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_create_date
@@ -251,7 +251,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: account_credit_control
 #: model:ir.module.category,name:account_credit_control.category_credit_control
@@ -518,7 +518,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_run_manual_ids
@@ -590,7 +590,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_write_date
@@ -603,7 +603,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
