@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_date_range_type_fiscalyear_tree" model="ir.ui.view">
+            <field name="name">date.range.type.tree</field>
+            <field name="model">date.range.type</field>
+            <field name="inherit_id" ref="date_range.view_date_range_type_tree"/>
+            <field name="arch" type="xml">
+                <field name="allow_overlap" position="after">
+                    <field name="fiscal_year" readonly="1"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_date_range_type_fiscalyear_form_view" model="ir.ui.view">
+            <field name="name">date.range.type.form</field>
+            <field name="model">date.range.type</field>
+            <field name="inherit_id" ref="date_range.view_date_range_type_form_view"/>
+            <field name="arch" type="xml">
+                <field name="allow_overlap" position="after">
+                    <field name="fiscal_year" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="menu_date_range_accounting" name="Date ranges"
+            parent="account.account_account_menu" sequence="50"/>
+        <menuitem action="date_range.date_range_action" id="menu_date_range_action_accounting" parent="menu_date_range_accounting"/>
+        <menuitem action="date_range.date_range_type_action"
+            id="menu_date_range_type_action_accounting" parent="menu_date_range_accounting"/>
+
+</odoo>
