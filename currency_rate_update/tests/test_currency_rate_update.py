@@ -41,7 +41,10 @@ class TestCurrencyRateUpdate(TransactionCase):
             rates.unlink()
         self.service_env._run_currency_update()
         logging.info("Service note: %s", service_x.note)
-        self.assertFalse('ERROR' in service_x.note)
+        if service_x.note:
+            self.assertFalse('ERROR' in service_x.note)
+        else:
+            logging.info('warning: No value returned from the service.')
 
     # FIXME: except_orm(u'Error !', u'Exchange data for USD is not reported
     # by Bank of Canada.')
@@ -79,3 +82,12 @@ class TestCurrencyRateUpdate(TransactionCase):
         """Test the ir.cron with Vietcombank service for USD
         """
         self._test_cron_by_service('VN_VCB', ['base.USD'])
+
+    def test_ir_cron_currency_update(self):
+        """
+        Ensure that no exception is raised when running the cron.
+        :return:
+        """
+        self.env.ref(
+            'currency_rate_update.ir_cron_currency_update_every_day'
+        ).method_direct_trigger()

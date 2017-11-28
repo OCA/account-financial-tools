@@ -125,7 +125,7 @@ class CurrencyRateUpdateService(models.Model):
                            'company !'))]
 
     @api.multi
-    def refresh_currency(self):
+    def refresh_currency(self, retry=0):
         """Refresh the currencies rates !!for all companies now"""
         rate_obj = self.env['res.currency.rate']
         for srv in self:
@@ -149,6 +149,7 @@ class CurrencyRateUpdateService(models.Model):
                             main_currency.name,
                             main_currency.rate))
                 note = srv.note or ''
+                msg = ''
                 try:
                     # We initalize the class that will handle the request
                     # and return a dict of rate
@@ -197,6 +198,11 @@ class CurrencyRateUpdateService(models.Model):
                     )
                     _logger.error(repr(exc))
                     srv.write({'note': error_msg})
+                if not msg and retry < 3:
+                    # Something went wrong, retry:
+                    time.sleep(5)
+                    self.refresh_currency(retry=retry + 1)
+                    return True
                 if self._context.get('cron'):
                     midnight = time(0, 0)
                     next_run = (datetime.combine(
