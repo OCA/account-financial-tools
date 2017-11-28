@@ -157,6 +157,8 @@ class ResCompany(models.Model):
             [('company_id', '=', self.id)]
         ).unlink()
 
+        self.env['account.full.reconcile'].search([]).unlink()
+
         settings_id = self.env['account.config.settings'].search(
             [('company_id', '=', self.id)]
         )
