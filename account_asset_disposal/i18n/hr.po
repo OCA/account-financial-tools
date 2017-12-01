@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_asset_disposal
+# 
+# Translators:
+# Bole <bole@dajmi5.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_depreciation_line
+msgid "Asset depreciation line"
+msgstr "Stavka amortizacije"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_asset
+msgid "Asset/Revenue Recognition"
+msgstr "Priznavanje troškova"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
+msgid "Disposal date"
+msgstr "Datum otpisa"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_move_id
+msgid "Disposal move"
+msgstr "Temeljnica otpisa"
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
+msgid "Undo disposal"
+msgstr "Vrati iz otpisa"
