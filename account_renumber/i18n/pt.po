@@ -3,15 +3,14 @@
 # * account_renumber
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 23:19+0000\n"
-"PO-Revision-Date: 2016-12-02 23:19+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>, 2016\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +21,7 @@ msgstr ""
 #. module: account_renumber
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "Account renumber wizard"
-msgstr "Assistente renumear Conta"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -42,7 +41,7 @@ msgstr "Criado em"
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Date ranges"
-msgstr "Intervalo de datas"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_display_name
@@ -62,7 +61,7 @@ msgstr ""
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_number_next
 msgid "First Number"
-msgstr "Primeiro NṔrimeiro Número"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -77,12 +76,12 @@ msgstr "ID"
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_number_next
 msgid "Journal sequences will start counting on this number"
-msgstr "A sequência do diário vai começar a contar neste número"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_journal_ids
 msgid "Journals"
-msgstr "Diários"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -92,12 +91,12 @@ msgstr ""
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_journal_ids
 msgid "Journals to renumber"
-msgstr "Diários para renumear"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber___last_update
 msgid "Last Modified on"
-msgstr "Modificado a última vez por"
+msgstr "Última Modificação Em"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_uid
@@ -121,19 +120,16 @@ msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
 msgstr ""
-"Movimentos publicados a partir daqueles diários, serão classificados por "
-"data e então assinados por números sequênciais utilizando a sequência dos "
-"seus diários."
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Renumber"
-msgstr "Renumear"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Renumber Account Moves"
-msgstr "Renumear Movimentos de Conta"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
@@ -145,7 +141,7 @@ msgstr ""
 #: code:addons/account_renumber/wizard/wizard_renumber.py:101
 #, python-format
 msgid "Renumbered account moves"
-msgstr "Movimentos de Conta renumerados"
+msgstr ""
 
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_from

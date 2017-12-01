@@ -1,70 +1,73 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_chart_update
-#
+# * account_chart_update
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-14 17:37+0000\n"
-"PO-Revision-Date: 2017-08-14 17:37+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2017-11-28 23:23+0000\n"
+"PO-Revision-Date: 2017-11-28 23:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_code_digits
 msgid "# of digits"
-msgstr "Nº de dígitos"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "<span states=\"init,ready\"> or </span>"
-msgstr "<span states=\"init,ready\"> or </span>"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_account_id
 msgid "Account template"
-msgstr "Plantilla de cuenta"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr "Cuenta que necesita actualizarse (nueva o actualizada en la plantilla)"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_update_account_id
 msgid "Account to update"
-msgstr "Cuenta a actualizar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_ids
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Accounts"
-msgstr "Cuentas"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_chart_template_id
 msgid "Chart Template"
-msgstr "Plantilla plan contable"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_chart_template_ids
 msgid "Chart Templates"
-msgstr "Plantillas de cuentas"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr "Plan contable"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Close"
-msgstr "Cerrar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_company_id
@@ -74,23 +77,23 @@ msgstr "Compañía"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Configuration"
-msgstr "Configuración"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_continue_on_errors
 msgid "Continue on errors"
-msgstr "Continuar tras algún error"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Create/Update"
-msgstr "Crear/Actualizar"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:645
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:625
 #, python-format
 msgid "Created account %s."
-msgstr "Creada cuenta %s."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_create_uid
@@ -109,43 +112,40 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:728
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:708
 #, python-format
 msgid "Created or updated fiscal position %s."
-msgstr "Creada o actualizada posición fiscal %s."
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:607
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:587
 #, python-format
 msgid "Created tax %s."
-msgstr "Creado impuesto %s."
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:600
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:580
 #, python-format
 msgid "Deactivated tax %s."
-msgstr "Desactivado impuesto %s."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_deleted_taxes
 msgid "Deactivated taxes"
-msgstr "Impuestos desactivados"
-
-#. module: account_chart_update
-#: selection:wizard.update.charts.accounts.fiscal.position,type:0
-msgid "Deleted template"
-msgstr "Plantilla borrada"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_tax_type_tax_use
-msgid "Determines where the tax is selectable. Note : 'None' means a tax can't be used by itself, however it can still be used in a group."
-msgstr "Determina dónde puede seleccionarse un impuesto. Nota : 'Ninguno' significa que un impuesto no puede ser usado por sí mismo; aun así, puede utilizarse en un grupo."
+msgid ""
+"Determines where the tax is selectable. Note : 'None' means a tax can't be "
+"used by itself, however it can still be used in a group."
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:474
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:453
 #, python-format
 msgid "Differences in these fields: %s."
-msgstr "Diferencias en este(os) campo(s)s: %s."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_display_name
@@ -156,57 +156,62 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:649
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:629
 #, python-format
 msgid "Exception creating account %s."
-msgstr "Excepción creando cuenta %s."
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:661
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:641
 #, python-format
 msgid "Exception writing account %s."
-msgstr "Excepción escribiendo cuenta %s."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_update_account
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr "Las cuentas existentes son actualizadas. Las cuentas se buscan por código."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_update_fiscal_position
-msgid "Existing fiscal positions are updated. Fiscal positions are searched by name."
-msgstr "Las posiciones fiscales existentes son actualizadas. Las posiciones fiscales se buscan por nombre."
+msgid ""
+"Existing fiscal positions are updated. Fiscal positions are searched by "
+"name."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_update_tax
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr "Los impuestos existentes son actualizados. Los impuestos se buscan por nombre."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_fiscal_position_id
 msgid "Fiscal position template"
-msgstr "Plantilla de posición fiscal"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
-msgid "Fiscal position that needs to be updated (new or updated in the template)."
-msgstr "Posición fiscal que necesita actualizarse (nueva o actualizada en la plantilla)."
+msgid ""
+"Fiscal position that needs to be updated (new or updated in the template)."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_update_fiscal_position_id
 msgid "Fiscal position to update"
-msgstr "Posición fiscal a actualizar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_ids
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Fiscal positions"
-msgstr "Posiciones fiscales"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_lang
-msgid "For records searched by name (taxes, fiscal positions), the template name will be matched against the record name on this language."
-msgstr "Para registros buscados por nombre (impuestos, posiciones fiscales), el nombre de la plantilla se casará contra el nombre del registro en este idioma."
+msgid ""
+"For records searched by name (taxes, fiscal positions), the template name "
+"will be matched against the record name on this language."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_id
@@ -214,27 +219,31 @@ msgstr "Para registros buscados por nombre (impuestos, posiciones fiscales), el 
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_id
 msgid "ID"
-msgstr "ID (identificación)"
+msgstr "ID"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_continue_on_errors
-msgid "If set, the wizard will continue to the next step even if there are minor errors."
-msgstr "Si está establecido, este asistente continuará al siguiente paso incluso si hay errores menores."
+msgid ""
+"If set, the wizard will continue to the next step even if there are minor "
+"errors."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
-msgid "If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)"
-msgstr "Si deja esta opción marcada, el asistente creará no sólo nuevos registros, si no que también actualizará aquellos con cambios (por ejemplo, diferente porcentaje de impuesto)"
+msgid ""
+"If you leave these options set, the wizard will not just create new records,"
+" but also update records with changes (i.e. different tax amount)"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_chart_template_ids
 msgid "Includes all chart templates."
-msgstr "Incluye todos los planes de cuenta."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_lang
 msgid "Language"
-msgstr "Idioma"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts___last_update
@@ -242,7 +251,7 @@ msgstr "Idioma"
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position___last_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax___last_update
 msgid "Last Modified on"
-msgstr "Última modificación en"
+msgstr "Última modificación el"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_write_uid
@@ -250,7 +259,7 @@ msgstr "Última modificación en"
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_write_uid
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización de"
+msgstr "Última actualización por"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_write_date
@@ -263,104 +272,105 @@ msgstr "Última actualización en"
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Log"
-msgstr "Registro"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_log
 msgid "Messages and Errors"
-msgstr "Mensajes y errores"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:499
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:478
 #, python-format
 msgid "Name or description not found."
-msgstr "Nombre o descripción no encontrada."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_new_accounts
 msgid "New accounts"
-msgstr "Nuevas cuentas"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_new_fps
 msgid "New fiscal positions"
-msgstr "New fiscal positions"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_new_taxes
 msgid "New taxes"
-msgstr "Nuevos impuestos"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
 #: selection:wizard.update.charts.accounts.fiscal.position,type:0
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "New template"
-msgstr "Nueva plantilla"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Next"
-msgstr "Siguiente"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:545
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:524
 #, python-format
 msgid "No account found with this code."
-msgstr "No se ha encontrado una cuenta con este código."
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:577
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:557
 #, python-format
 msgid "No fiscal position found with this name."
-msgstr "No se ha encontrado un posición fiscal con este nombre."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_code_digits
-msgid "No. of digits to use for account code. Make sure it is the same number as existing accounts."
-msgstr "Nº de dígitos a usar para el código de cuenta. Asegúrese que es el mismo número que el de las cuentas existentes."
+msgid ""
+"No. of digits to use for account code. Make sure it is the same number as "
+"existing accounts."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Note: Only the changed fields are updated."
-msgstr "Nota: Sólo los campos cambiados son actualizados."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_notes
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_notes
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:253
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:233
 #, python-format
-msgid "One or more errors detected!\n"
+msgid ""
+"One or more errors detected!\n"
 "\n"
 "%s"
-msgstr "¡Uno o más errores detectados!\n"
-"\n"
-"%s"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Other options"
-msgstr "Otras opciones"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Previous"
-msgstr "Anterior"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Records to create/update"
-msgstr "Registros a crear/actualizar"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Select records to update"
-msgstr "Selecciones registros a actualizar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_state
@@ -370,146 +380,147 @@ msgstr "Estado"
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of created objects"
-msgstr "Resumen de objetos creados"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Summary of updated objects"
-msgstr "Resumen de objetos actualizados"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_type_tax_use
 msgid "Tax Scope"
-msgstr "Ámbito del impuesto"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:479
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:458
 #, python-format
 msgid "Tax is disabled."
-msgstr "El impuesto está deshabilitado."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_tax_id
 msgid "Tax template"
-msgstr "Plantilla de impuesto"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr "Impuesto que necesita actualizarse (nuevo o actualizado en la plantilla)."
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "Tax to deactivate"
-msgstr "Impuesto a desactivar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_update_tax_id
 msgid "Tax to update"
-msgstr "Impuesto a actualizar"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_ids
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Taxes"
-msgstr "Impuestos"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
-msgid "This wizard will update your accounts, taxes and fiscal positions according to the selected chart template"
-msgstr "Este asistente actualizará sus cuentas, impuestos y posiciones fiscales de acuerdo con el plan contable seleccionado"
+msgid ""
+"This wizard will update your accounts, taxes and fiscal positions according "
+"to the selected chart template"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:527
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:506
 #, python-format
 msgid "To deactivate: not in the template"
-msgstr "A desactivar: no está en la plantilla"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_type
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_type
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_type
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_update_account
 msgid "Update accounts"
-msgstr "Actualizar cuentas"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.actions.act_window,name:account_chart_update.action_wizard_update_chart
 msgid "Update chart of accounts"
-msgstr "Actualizar plan contable"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.ui.view,arch_db:account_chart_update.view_account_config_settings
+msgid "Update chart template"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_update_chart_wizard_id
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_update_chart_wizard_id
 msgid "Update chart wizard"
-msgstr "Asistente de actualización de plan"
-
-#. module: account_chart_update
-#: model:ir.ui.view,arch_db:account_chart_update.view_account_config_settings
-msgid "Update chart template"
-msgstr "Actualizar plan contable"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_update_fiscal_position
 msgid "Update fiscal positions"
-msgstr "Actualizar posiciones fiscales"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Update records?"
-msgstr "¿Actualizar registros?"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_update_tax
 msgid "Update taxes"
-msgstr "Actualizar impuestos"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:658
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:638
 #, python-format
 msgid "Updated account %s."
-msgstr "Cuentas %s actualizada."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_updated_accounts
 msgid "Updated accounts"
-msgstr "Cuentas actualizadas"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_updated_fps
 msgid "Updated fiscal positions"
-msgstr "Posiciones fiscales actualizadas"
+msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:613
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:593
 #, python-format
 msgid "Updated tax %s."
-msgstr "Impuesto %s actualizado."
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_updated_taxes
 msgid "Updated taxes"
-msgstr "Impuestos actualizados"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.account,type:0
 #: selection:wizard.update.charts.accounts.fiscal.position,type:0
 #: selection:wizard.update.charts.accounts.tax,type:0
 msgid "Updated template"
-msgstr "Plantilla actualizada"
+msgstr ""
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Wizard completed"
-msgstr "Asistente completado"
+msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
 msgid "wizard.update.charts.accounts"
-msgstr "wizard.update.charts.accounts"
-
+msgstr ""

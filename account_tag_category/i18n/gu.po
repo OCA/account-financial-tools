@@ -1,0 +1,268 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_tag_category
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Gujarati (https://www.transifex.com/oca/teams/23907/gu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: gu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_tag_category
+#: model:ir.model,name:account_tag_category.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model,name:account_tag_category.model_account_account_tag
+msgid "Account Tag"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.actions.act_window,name:account_tag_category.account_tag_category_action
+#: model:ir.ui.menu,name:account_tag_category.account_tag_category_menu
+msgid "Account Tag Categories"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model,name:account_tag_category.model_account_account_tag_category
+msgid "Account Tag Category"
+msgstr ""
+
+#. module: account_tag_category
+#: model:res.groups,name:account_tag_category.group_account_tag_category
+msgid "Account tag categories"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_tree
+msgid "Account tags"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,applicability:0
+msgid "Accounts"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_applicability
+msgid "Applicability"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Aquamarine"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Blue"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
+msgid "Close"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_4024
+msgid "Color Index"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_create_uid
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_create_date
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Cyan"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_display_name
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_enforce_policy
+msgid "Enforce policy"
+msgstr ""
+
+#. module: account_tag_category
+#: code:addons/account_tag_category/models/account.py:131
+#, python-format
+msgid ""
+"Following tag categories are set as required, but there is no tag from these categories : \n"
+" %s"
+msgstr ""
+
+#. module: account_tag_category
+#: code:addons/account_tag_category/wizard/update_tags_wizard.py:39
+#, python-format
+msgid ""
+"Following tags are already defined on another tag category : \n"
+" %s"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Green"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Grey"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_id
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_id
+msgid "ID"
+msgstr "ઓળખ"
+
+#. module: account_tag_category
+#: model:ir.model.fields,help:account_tag_category.field_account_account_tag_category_enforce_policy
+msgid ""
+"If required, this option enforces the use of a tag from this category. If "
+"optional, the user is not required to use a tag from this category."
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category___last_update
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_write_uid
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_write_date
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_name
+msgid "Name"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,enforce_policy:0
+msgid "Optional"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Orange"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Pink"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Purple"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Red"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,enforce_policy:0
+msgid "Required"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
+msgid "Save tags"
+msgstr ""
+
+#. module: account_tag_category
+#: code:addons/account_tag_category/models/account.py:85
+#, python-format
+msgid ""
+"Selected tag must be applicable on the same model as this category (%s)"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_tree
+msgid "Tag Categories"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_form
+msgid "Tag Category"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_tag_category_id
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_tag_category_id
+msgid "Tag category"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_tag_ids
+#: model:ir.model.fields,field_description:account_tag_category.field_account_tag_category_update_tags_tag_ids
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
+msgid "Tags"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_picker
+msgid "Tags Color"
+msgstr ""
+
+#. module: account_tag_category
+#: code:addons/account_tag_category/models/account.py:112
+#, python-format
+msgid "There is more than one tag from the same category which is used"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.actions.act_window,name:account_tag_category.action_update_tags_on_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_form
+msgid "Update Tags"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.model,name:account_tag_category.model_account_tag_category_update_tags
+msgid "Update account tags on account tag category"
+msgstr ""
+
+#. module: account_tag_category
+#: model:ir.ui.view,arch_db:account_tag_category.account_tag_category_update_tags_form
+msgid "Update tags"
+msgstr ""
+
+#. module: account_tag_category
+#: selection:account.account.tag.category,color_picker:0
+msgid "Yellow"
+msgstr ""

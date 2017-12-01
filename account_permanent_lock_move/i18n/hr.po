@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.ui.view,arch_db:account_permanent_lock_move.permanent_lock_date_wizard_form
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Odustani"
 
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_res_company
@@ -54,12 +54,12 @@ msgstr "Kreirao"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_create_date
 msgid "Created on"
-msgstr "Kreirano na"
+msgstr "Kreirano"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_display_name
 msgid "Display Name"
-msgstr "Naziv "
+msgstr "Prikaži ime"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_id
@@ -69,7 +69,7 @@ msgstr "ID"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard___last_update
 msgid "Last Modified on"
-msgstr "Zadnje modificirano"
+msgstr "Zadnja izmjena dana"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_uid
@@ -79,7 +79,7 @@ msgstr "Zadnji ažurirao"
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr "Zadnje ažurirano dana"
 
 #. module: account_permanent_lock_move
 #: model:ir.model.fields,field_description:account_permanent_lock_move.field_permanent_lock_date_wizard_lock_date

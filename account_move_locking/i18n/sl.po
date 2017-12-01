@@ -3,15 +3,15 @@
 # * account_move_locking
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (9.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 01:04+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/sl/)\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,7 +26,7 @@ msgstr "Knjigovodski vnos"
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr "Odobritev"
+msgstr ""
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
@@ -46,20 +46,20 @@ msgstr "Ustvarjeno"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_end
 msgid "Date end"
-msgstr "Končni datum"
+msgstr ""
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr "Začetni datum"
+msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:24
 #, python-format
 msgid ""
 "Date start need to be                                           before Date "
 "end"
-msgstr "Začetni datum mora biti pred končnim"
+msgstr ""
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
@@ -94,7 +94,7 @@ msgstr "Zadnjič posodobljeno"
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr "Zakleni knjigovodski premik"
+msgstr ""
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
@@ -106,32 +106,27 @@ msgstr "Zakleni dnevniške vnose"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_account_move_locked
 msgid "Locked"
-msgstr "Zaklenjeno"
+msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/account.py:33
-#: code:addons/account_move_locking/account.py:40
-#: code:addons/account_move_locking/account.py:49
+#: code:addons/account_move_locking/models/account.py:17
+#: code:addons/account_move_locking/models/account.py:24
+#: code:addons/account_move_locking/models/account.py:33
 #, python-format
 msgid "Move Locked! %s"
-msgstr "Premik zaklenjen! %s"
+msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:67
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
 #, python-format
 msgid "No move to locked found"
-msgstr "Ni premika za zaklepanje"
+msgstr ""
 
 #. module: account_move_locking
-#: code:addons/account_move_locking/wizard/account_lock_account_move.py:57
+#: code:addons/account_move_locking/wizard/account_lock_account_move.py:40
 #, python-format
 msgid ""
 "Unposted move in period/jounal                                           "
 "selected, please post it before                                           "
 "locking them"
-msgstr "Neknjižen premik v izbranem obdobju/dnevniku. Vknjižite ga preden ga zaklenete."
-
-#. module: account_move_locking
-#: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
-msgid "or"
-msgstr "ali"
+msgstr ""

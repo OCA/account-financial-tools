@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_permanent_lock_move_update
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Croatian (Croatia) (https://www.transifex.com/oca/teams/23907/hr_HR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: hr_HR\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: account_permanent_lock_move_update
+#: model:ir.model,name:account_permanent_lock_move_update.model_account_update_lock_date
+msgid "Account Update Lock_date"
+msgstr ""
+
+#. module: account_permanent_lock_move_update
+#: model:ir.model.fields,field_description:account_permanent_lock_move_update.field_account_update_lock_date_permanent_lock_date
+msgid "Permanent Lock Date"
+msgstr "Datum trajnog zaključavanja"
+
+#. module: account_permanent_lock_move_update
+#: model:ir.ui.view,arch_db:account_permanent_lock_move_update.account_update_lock_date_form_view
+msgid "Permanently Lock Entries"
+msgstr "Trajno zaključaj stavke"
+
+#. module: account_permanent_lock_move_update
+#: model:ir.model,name:account_permanent_lock_move_update.model_permanent_lock_date_wizard
+msgid "permanent.lock.date.wizard"
+msgstr "permanent.lock.date.wizard"
