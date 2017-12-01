@@ -20,6 +20,7 @@
 # 
 # Translators:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> OCA Transbot updated translations from Transifex
 =======
 # OCA Transbot <transbot@odoo-community.org>, 2016
@@ -28,9 +29,13 @@
 =======
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
 >>>>>>> OCA Transbot updated translations from Transifex
+=======
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2017
+>>>>>>> OCA Transbot updated translations from Transifex
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -47,7 +52,12 @@ msgstr ""
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 4ade6cbf... OCA Transbot updated translations from Transifex
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex
 "POT-Creation-Date: 2013-09-26 16:17+0000\n"
 "PO-Revision-Date: 2014-04-08 19:42+0000\n"
 "Last-Translator: Juan A. Pérez Ruiz (Otherway) <juanalfonso@otherway.es>\n"
@@ -144,6 +154,15 @@ msgstr "Renumerar asientos"
 "PO-Revision-Date: 2016-12-17 23:17+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
 >>>>>>> OCA Transbot updated translations from Transifex
+=======
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+=======
+"POT-Creation-Date: 2017-12-29 23:24+0000\n"
+"PO-Revision-Date: 2017-12-29 23:24+0000\n"
+>>>>>>> OCA Transbot updated translations from Transifex
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2017\n"
+>>>>>>> OCA Transbot updated translations from Transifex
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 >>>>>>> OCA Transbot updated translations from Transifex
 "MIME-Version: 1.0\n"
@@ -157,7 +176,7 @@ msgstr "Renumerar asientos"
 #. module: account_renumber
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "Account renumber wizard"
-msgstr "Asistente de renumeración contable"
+msgstr "Asistente de renumeración"
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -218,17 +237,29 @@ msgstr "Periodos a renumerar"
 =======
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_to
 msgid "Finish date"
+<<<<<<< HEAD
 msgstr "Fecha de fin"
 >>>>>>> 4ade6cbf... OCA Transbot updated translations from Transifex
+=======
+msgstr "Fecha fin"
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex
 
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_to
 msgid "Finish renumbering in this date, inclusive."
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 msgstr ""
 >>>>>>> OCA Transbot updated translations from Transifex
 =======
 msgstr "Finalizar renumerando en esta fecha, incluida."
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+msgstr ""
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+msgstr "Finalizar la renumeración en esta fecha, incluida."
 >>>>>>> OCA Transbot updated translations from Transifex
 
 #. module: account_renumber
@@ -254,7 +285,12 @@ msgid "Journal sequences will start counting on this number"
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex
 msgstr "Las secuencias de diario comenzarán a contar en este número"
 =======
 msgstr "Las secuencias de los diarios empezarán a contar en este número"
@@ -267,7 +303,16 @@ msgstr "Las secuencias de los diarios empezarán a contar en este número"
 =======
 msgstr "Las secuencias de los diarios empezarán a contar en este número"
 >>>>>>> [MIG] Migration of account_renumber to 8.0.
+<<<<<<< HEAD
 >>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
+=======
+=======
+msgstr ""
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+msgstr "Las secuencias de asiento comenzarán a contar en este número"
+>>>>>>> OCA Transbot updated translations from Transifex
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_journal_ids
@@ -314,7 +359,7 @@ msgstr "Diarios a renumerar"
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber___last_update
 msgid "Last Modified on"
-msgstr "Última modificación en"
+msgstr "Última modificación el"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_uid
@@ -442,10 +487,21 @@ msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
 msgstr ""
+<<<<<<< HEAD
+<<<<<<< HEAD
 "Los asientos asentados de estos diarios se ordenarán por fecha y entonces se"
 " les asignará un número de secuencia usando su secuencia de diario."
 >>>>>>> OCA Transbot updated translations from Transifex
+<<<<<<< HEAD
 >>>>>>> 4ade6cbf... OCA Transbot updated translations from Transifex
+=======
+=======
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+"Los asientos confirmados de estos diarios serán ordenados por fecha y "
+"entonces asignados números secuenciales usando la secuencia del diario."
+>>>>>>> OCA Transbot updated translations from Transifex
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -515,6 +571,14 @@ msgstr "Renumerar asientos contables"
 =======
 msgid "Renumber Journal Entries"
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+msgstr ""
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+msgstr "Renumerar asientos contables"
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
 msgstr ""
 >>>>>>> OCA Transbot updated translations from Transifex
 =======
@@ -550,7 +614,7 @@ msgstr ""
 >>>>>>> [MIG] Migration of account_renumber to 8.0.
 >>>>>>> 646c8466... [MIG] Migration of account_renumber to 8.0.
 msgid "Renumbered account moves"
-msgstr "Asientos contables renumerados"
+msgstr "Asientos renumerados"
 
 #. module: account_renumber
 <<<<<<< HEAD
@@ -580,6 +644,14 @@ msgstr "Este asistente le permite renumerar los asientos de uno o más diarios."
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_from
 msgid "Start renumbering in this date, inclusive."
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+msgstr ""
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+msgstr "Comenzar renumerando en esta fecha, incluida."
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
 msgstr ""
 >>>>>>> OCA Transbot updated translations from Transifex
 =======
@@ -589,7 +661,7 @@ msgstr "Comenzar renumerando en esta fecha, incluida."
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_from
 msgid "Starting date"
-msgstr "Fecha inicio"
+msgstr "Fecha de inicio"
 
 #. module: account_renumber
 <<<<<<< HEAD
@@ -629,6 +701,16 @@ msgstr "Asistente de renumeración de asientos"
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "This wizard will help you renumber entries in one or more journals."
 msgstr ""
+<<<<<<< HEAD
+<<<<<<< HEAD
 "Este asistente le permite renumerar los asientos de uno o más diarios."
 >>>>>>> OCA Transbot updated translations from Transifex
+<<<<<<< HEAD
 >>>>>>> 4ade6cbf... OCA Transbot updated translations from Transifex
+=======
+=======
+>>>>>>> OCA Transbot updated translations from Transifex
+=======
+"Este asistente le ayudará a renumerar los asientos en uno o más diarios."
+>>>>>>> OCA Transbot updated translations from Transifex
+>>>>>>> 86d67fec... OCA Transbot updated translations from Transifex

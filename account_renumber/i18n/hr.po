@@ -3,15 +3,15 @@
 # * account_renumber
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
-# Bole <bole@dajmi5.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 01:04+0000\n"
-"PO-Revision-Date: 2016-09-17 01:04+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2016\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,17 +42,17 @@ msgstr "Kreirano"
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Date ranges"
-msgstr ""
+msgstr "Rasponi datuma"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_display_name
 msgid "Display Name"
-msgstr "Naziv "
+msgstr "Prikaži ime"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_to
 msgid "Finish date"
-msgstr ""
+msgstr "Datum završetka"
 
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_to
@@ -62,7 +62,7 @@ msgstr ""
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_number_next
 msgid "First Number"
-msgstr ""
+msgstr "Prvi broj"
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
@@ -97,7 +97,7 @@ msgstr ""
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber___last_update
 msgid "Last Modified on"
-msgstr "Zadnje modificirano"
+msgstr "Zadnja izmjena dana"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_uid
@@ -107,7 +107,7 @@ msgstr "Zadnji ažurirao"
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje"
+msgstr "Zadnje ažurirano dana"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:74
