@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2017-08-29 08:01+0000\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-30 19:09+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr ""
 #. module: account_chart_update
 #: field:account.tax.code,active:0
 msgid "Active"
-msgstr ""
+msgstr "Actief"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.financial.report,type:0

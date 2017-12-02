@@ -18,17 +18,18 @@
 # Miku Laitinen <miku.laitinen@gmail.com>, 2015
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rubén Cabrera <rcabrera@praxya.com>, 2017
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 # Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-05-11 14:12+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-11-28 23:24+0000\n"
+"PO-Revision-Date: 2017-11-28 11:20+0000\n"
+"Last-Translator: Rubén Cabrera <rcabrera@praxya.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,21 +92,26 @@ msgid "<p>Manual no follow</p>"
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
 msgid ""
 "<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      <br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
 msgstr ""
 
 #. module: account_credit_control
-#: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
+#: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
 msgid ""
-"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br><br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"<p>Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
 msgstr ""
@@ -114,8 +120,10 @@ msgstr ""
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
 msgid ""
 "<p>Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br>\n"
-"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
 msgstr ""
@@ -124,13 +132,17 @@ msgstr ""
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
 msgid ""
 "<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.\n"
-"      <br><br>\n"
+"      <br>\n"
+"      <br>\n"
 "      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br>\n"
 "      If your payment has not been received in the next 5 days, your file will be transfered to our debt<br>\n"
-"      collection agency.<br><br>\n"
+"      collection agency.<br>\n"
+"      <br>\n"
 "      Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"      A customer account statement is enclosed for you convenience.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      A customer account statement is enclosed for you convenience.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
 msgstr ""
@@ -140,10 +152,13 @@ msgstr ""
 msgid ""
 "<p>Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br>\n"
 "      If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br> \n"
-"      If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br><br>\n"
+"      If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br>\n"
+"      <br>\n"
 "      Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"      A customer account statement is enclosed for you convenience.<br><br>\n"
-"      Thank you in advance for your anticipated cooperation in this matter.<br><br>\n"
+"      A customer account statement is enclosed for you convenience.<br>\n"
+"      <br>\n"
+"      Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"      <br>\n"
 "      Best regards\n"
 "      </p>"
 msgstr ""
@@ -439,7 +454,7 @@ msgstr ""
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search
 msgid "Credit policy"
-msgstr "Póliza de crédito"
+msgstr "Política de seguimiento"
 
 #. module: account_credit_control
 #: view:credit.control.line:account_credit_control.credit_control_line_search

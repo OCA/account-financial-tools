@@ -11,17 +11,19 @@
 # Giedrius Slavinskas <giedrius@inovera.lt>, 2012
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
+# Jesús Alan Ramos Rodríguez <alan.ramos@jarsa.com.mx>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Paolo Valier, 2016
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro Castro Silva <inactive+pcs.sossia@transifex.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
+# yterrettaz, 2015
 # yterrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2017-03-10 23:23+0000\n"
+"PO-Revision-Date: 2017-12-01 20:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +112,7 @@ msgstr ""
 #: field:wiz.account.asset.report,fiscalyear_id:0
 #, python-format
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Anno Fiscale"
 
 #. module: account_asset_management_xls
 #: view:wiz.account.asset.report:account_asset_management_xls.view_account_asset_report_wizard
