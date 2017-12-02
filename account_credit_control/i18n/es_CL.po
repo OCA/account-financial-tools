@@ -11,11 +11,11 @@ msgstr ""
 "POT-Creation-Date: 2017-11-28 23:21+0000\n"
 "PO-Revision-Date: 2017-11-28 23:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
+"Language-Team: Spanish (Chile) (https://www.transifex.com/oca/teams/23907/es_CL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl_NL\n"
+"Language: es_CL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_credit_control
@@ -122,7 +122,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_active
 msgid "Active"
-msgstr "Actief"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.action_wizard_credit_policy_changer
@@ -146,7 +146,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Cancel"
-msgstr "Verwijderen"
+msgstr "Cancelar"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_marker_wizard
@@ -186,7 +186,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_company
 msgid "Companies"
-msgstr "Bedrijven"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_company_id
@@ -238,7 +238,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_uid
 msgid "Created by"
-msgstr "Aangemaakt door"
+msgstr "Creado por"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_create_date
@@ -251,7 +251,7 @@ msgstr "Aangemaakt door"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_create_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_create_date
 msgid "Created on"
-msgstr "Aangemaakt op"
+msgstr "Creado en"
 
 #. module: account_credit_control
 #: model:ir.module.category,name:account_credit_control.category_credit_control
@@ -403,7 +403,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
@@ -505,7 +505,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Group By"
-msgstr "Groeperen op"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_id
@@ -518,7 +518,7 @@ msgstr "Groeperen op"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_run_manual_ids
@@ -544,7 +544,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_invoice_id
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Invoice"
-msgstr "Factuur"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -577,7 +577,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer___last_update
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_write_uid
@@ -590,7 +590,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_write_uid
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_write_uid
 msgid "Last Updated by"
-msgstr "Laatst bijgewerkt door"
+msgstr "Última actualización de"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_write_date
@@ -603,7 +603,7 @@ msgstr "Laatst bijgewerkt door"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_write_date
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_write_date
 msgid "Last Updated on"
-msgstr "Laatst bijgewerkt op"
+msgstr "Última actualización en"
 
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
@@ -737,7 +737,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_name
 msgid "Name"
-msgstr "Naam"
+msgstr "Nombre"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer_new_policy_id
@@ -1065,13 +1065,13 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_run_id
 msgid "Source"
-msgstr "Bron"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_state
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_state
 msgid "State"
-msgstr "Provincie"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document

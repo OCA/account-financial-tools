@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:24+0000\n"
+"POT-Creation-Date: 2017-11-28 23:21+0000\n"
 "PO-Revision-Date: 2016-05-09 17:06+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/it/)\n"
@@ -40,7 +40,7 @@ msgstr ""
 #. module: account_fiscal_year
 #: model:date.range.type,name:account_fiscal_year.fiscalyear
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Anno Fiscale"
 
 #. module: account_fiscal_year
 #: model:ir.model.fields,field_description:account_fiscal_year.field_date_range_type_fiscal_year
