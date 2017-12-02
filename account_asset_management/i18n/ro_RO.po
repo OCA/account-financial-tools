@@ -3,32 +3,31 @@
 # * account_asset_management
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-24 23:21+0000\n"
-"PO-Revision-Date: 2017-12-01 20:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/it/)\n"
+"PO-Revision-Date: 2015-06-03 16:26+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Romanian (Romania) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ro_RO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ro_RO\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #. module: account_asset_management
 #: view:asset.modify:0
 #: model:ir.actions.act_window,name:account_asset_management.action_asset_modify
 #: model:ir.model,name:account_asset_management.model_asset_modify
 msgid "Modify Asset"
-msgstr "Modifica Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.history,method_end:0 field:asset.modify,method_end:0
 msgid "Ending date"
-msgstr "Data finale"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_config_settings
@@ -40,18 +39,18 @@ msgstr ""
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:40
 #, python-format
 msgid "Residual Value"
-msgstr "Valore residuo"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.category,account_expense_depreciation_id:0
 msgid "Depr. Expense Account"
-msgstr "Conto Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
 #, python-format
 msgid "Linear"
-msgstr "Costante"
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.asset,purchase_value:0
@@ -64,7 +63,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
 msgid "Group By..."
-msgstr "Raggruppa per..."
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.asset,method:0 help:account.asset.category,method:0
@@ -88,7 +87,7 @@ msgstr ""
 #: field:asset.asset.report,asset_id:0
 #: model:ir.model,name:account_asset_management.model_account_asset_asset
 msgid "Asset"
-msgstr "Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.config.settings,module_account_asset_management:0
@@ -116,7 +115,7 @@ msgstr ""
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Running"
-msgstr "In esecuzione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.remove,account_sale_id:0
@@ -127,7 +126,7 @@ msgstr ""
 #: view:account.asset.history:0
 #: model:ir.model,name:account_asset_management.model_account_asset_history
 msgid "Asset history"
-msgstr "Storico immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,company_id:0
@@ -135,7 +134,7 @@ msgstr "Storico immobilizzazione"
 #: field:account.asset.recompute.trigger,company_id:0
 #: view:asset.asset.report:0 field:asset.asset.report,company_id:0
 msgid "Company"
-msgstr "Azienda"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1488
@@ -146,17 +145,17 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.modify:0
 msgid "Modify"
-msgstr "Modifica"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 msgid "Amount Already Depreciated"
-msgstr "Importo Già Ammortizzato"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Set to Draft"
-msgstr "Imposta come Bozza"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.category,account_min_value_id:0
@@ -170,34 +169,34 @@ msgstr ""
 #: model:ir.model,name:account_asset_management.model_asset_asset_report
 #: model:ir.ui.menu,name:account_asset_management.menu_action_asset_asset_report
 msgid "Assets Analysis"
-msgstr "Analisi Immobilizzazioni"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,reason:0 field:asset.modify,name:0
 msgid "Reason"
-msgstr "Causale"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 msgid "Degressive Factor"
-msgstr "Tasso Degressivo"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_asset_list_normal
 #: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_asset_list_normal
 msgid "Asset Categories"
-msgstr "Categorie Immobilizzazioni"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,account_move_line_ids:0
 msgid "Entries"
-msgstr "Registrazioni"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 msgid "Depreciation Lines"
-msgstr "Righe Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.remove,posting_regime:0
@@ -210,7 +209,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0 field:asset.asset.report,depreciation_date:0
 msgid "Depreciation Date"
-msgstr "Data Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -220,7 +219,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
 msgid "Account"
-msgstr "Conto"
+msgstr "cont"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -234,12 +233,12 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_assets
 #: model:ir.ui.menu,name:account_asset_management.menu_finance_config_assets
 msgid "Assets"
-msgstr "Immobilizzazioni"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 msgid "Depreciation Account"
-msgstr "F.do Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -252,7 +251,7 @@ msgstr ""
 #: field:account.asset.remove,note:0 view:asset.modify:0
 #: field:asset.modify,note:0
 msgid "Notes"
-msgstr "Note"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
@@ -262,7 +261,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 msgid "Depreciation Entry"
-msgstr "Riga Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -272,7 +271,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Total Debit"
-msgstr "Totale debito"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:244
@@ -294,7 +293,7 @@ msgstr "Totale debito"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:326
 #, python-format
 msgid "Error!"
-msgstr ""
+msgstr "Eroare!"
 
 #. module: account_asset_management
 #: help:account.asset.asset,method_time:0
@@ -307,7 +306,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,state:0
 msgid "State"
-msgstr "State"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -331,22 +330,22 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0 field:asset.asset.report,nbr:0
 msgid "# of Depreciation Lines"
-msgstr "# di Righe Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_end:0
 msgid "Ending Date"
-msgstr "Data finale"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,code:0
 msgid "Reference"
-msgstr "Riferimento"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Account Asset"
-msgstr "Conto Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -357,7 +356,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_asset_management.action_asset_depreciation_confirmation_wizard
 #: model:ir.ui.menu,name:account_asset_management.menu_asset_depreciation_confirmation_wizard
 msgid "Compute Assets"
-msgstr "Calcola Ammortamenti"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_period:0
@@ -365,13 +364,13 @@ msgstr "Calcola Ammortamenti"
 #: field:account.asset.history,method_period:0
 #: field:asset.modify,method_period:0
 msgid "Period Length"
-msgstr "Durata del Periodo"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,partner_id:0
 #: field:asset.asset.report,partner_id:0
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1493
@@ -395,7 +394,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Change Duration"
-msgstr "Modifica Durata"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.remove,period_id:0
@@ -411,7 +410,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_analytic_id:0
 msgid "Analytic account"
-msgstr "Conto analitico"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.remove:0
@@ -421,7 +420,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 msgid "Computation Method"
-msgstr "Metodo di calcolo"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -446,7 +445,7 @@ msgstr ""
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1235
@@ -466,7 +465,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,prorata:0 field:account.asset.category,prorata:0
 msgid "Prorata Temporis"
-msgstr "Prorata Temporis"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,help:account_asset_management.action_asset_asset_report
@@ -536,7 +535,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,salvage_value:0
 msgid "Salvage Value"
-msgstr "Valore di Realizzo"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1164
@@ -547,7 +546,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
 msgid "Invoice"
-msgstr "Fattura"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,previous_id:0
@@ -572,17 +571,17 @@ msgstr ""
 #: field:account.asset.asset,parent_id:0
 #: field:account.asset.category,parent_id:0
 msgid "Parent Asset"
-msgstr "Immobilizzazione Padre"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.category:0
 msgid "Analytic Information"
-msgstr "Informazioni Analitiche"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.category:0
 msgid "Search Asset Category"
-msgstr "Ricerca Categoria Immobilizzazioni"
+msgstr ""
 
 #. module: account_asset_management
 #: sql_constraint:account.asset.remove:0
@@ -612,7 +611,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice_line
 msgid "Invoice Line"
-msgstr "Riga fattura"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -627,12 +626,12 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: selection:asset.modify,method_period:0
 msgid "Month"
-msgstr "Mese"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Depreciation Board"
-msgstr "Piano d'Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,parent_right:0
@@ -647,14 +646,14 @@ msgstr ""
 #. module: account_asset_management
 #: field:asset.asset.report,unposted_value:0
 msgid "Unposted Amount"
-msgstr "Importi Non Pubblicati"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_time:0
 #: field:account.asset.category,method_time:0
 #: field:account.asset.history,method_time:0
 msgid "Time Method"
-msgstr "Metodo Temporale"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
@@ -671,12 +670,12 @@ msgstr ""
 #: view:account.asset.remove:0 view:asset.depreciation.confirmation.wizard:0
 #: view:asset.modify:0
 msgid "or"
-msgstr "o"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Category"
-msgstr "Categoria"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,method_number:0
@@ -707,7 +706,7 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 msgid "Note"
-msgstr "Nota"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1526
@@ -720,7 +719,7 @@ msgstr ""
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Draft"
-msgstr "Bozza"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -730,7 +729,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 msgid "Status"
-msgstr "Stato"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,asset_value:0
@@ -743,7 +742,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0
 msgid "Posted depreciation lines"
-msgstr "Righe di ammortamento emesse"
+msgstr ""
 
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
@@ -759,7 +758,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0
 msgid "Date of depreciation"
-msgstr "Data di ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.category,prorata:0
@@ -772,12 +771,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.history,user_id:0
 msgid "User"
-msgstr "Utente"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 msgid "Asset Account"
-msgstr "Conto Immo bilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
@@ -787,7 +786,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0
 msgid "Extended Filters..."
-msgstr "Filtri Estesi..."
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.remove,date_remove:0
@@ -803,12 +802,12 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.depreciation.confirmation.wizard:0
 msgid "Compute"
-msgstr "Calcola"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.history:0
 msgid "Asset History"
-msgstr "Storico Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,init_entry:0
@@ -824,22 +823,22 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_asset_depreciation_confirmation_wizard
 msgid "asset.depreciation.confirmation.wizard"
-msgstr "asset.depreciation.confirmation.wizard"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,active:0 field:account.asset.category,active:0
 msgid "Active"
-msgstr "Attivo"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 msgid "State of Asset"
-msgstr "Stato dell'Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 msgid "Depreciation Name"
-msgstr "Nome Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1518
@@ -853,12 +852,12 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 field:account.asset.asset,history_ids:0
 msgid "History"
-msgstr "Storico"
+msgstr ""
 
 #. module: account_asset_management
 #: view:asset.depreciation.confirmation.wizard:0
 msgid "Compute Asset"
-msgstr "Calcola Ammortamenti"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:796
@@ -884,7 +883,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0
 msgid "Period"
-msgstr "Periodo"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.remove,posting_regime:0
@@ -894,7 +893,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "General"
-msgstr "Generale"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,date_start:0 view:asset.asset.report:0
@@ -905,7 +904,7 @@ msgstr ""
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr "Completato"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.account,asset_category_id:0
@@ -913,19 +912,19 @@ msgstr "Completato"
 #: field:account.invoice.line,asset_category_id:0
 #: field:account.move.line,asset_category_id:0 view:asset.asset.report:0
 msgid "Asset Category"
-msgstr "Categoria Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.remove:0 view:asset.depreciation.confirmation.wizard:0
 #: view:asset.modify:0
 msgid "Cancel"
-msgstr "Annulla"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 selection:account.asset.asset,state:0
 #: view:asset.asset.report:0 selection:asset.asset.report,state:0
 msgid "Close"
-msgstr "Chiudi"
+msgstr ""
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -942,12 +941,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
 #: model:ir.model,name:account_asset_management.model_account_move_line
 msgid "Journal Items"
-msgstr "Voci Sezionale"
+msgstr "Articole Jurnal"
 
 #. module: account_asset_management
 #: view:asset.modify:0
 msgid "Asset Durations to Modify"
-msgstr "Durate Immobilizzazione da Modificare"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,date_completed:0
@@ -963,14 +962,14 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:52
 #, python-format
 msgid "Degressive"
-msgstr "Regressivo"
+msgstr ""
 
 #. module: account_asset_management
 #: help:asset.depreciation.confirmation.wizard,period_id:0
 msgid ""
 "Choose the period for which you want to automatically post the depreciation "
 "lines of running assets"
-msgstr "Selezionare il periodo per il quale saranno create automaticamente le righe d'ammortamento delle immobilizzazioni attive."
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:592
@@ -991,7 +990,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:account.asset.category:0
 msgid "Depreciation Method"
-msgstr "Metodo Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -1001,7 +1000,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 msgid "Asset Name"
-msgstr "Nome Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.category,account_residual_value_id:0
@@ -1017,12 +1016,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,open_asset:0
 msgid "Skip Draft State"
-msgstr "Salta lo Stato Bozza"
+msgstr ""
 
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 msgid "Posted Amount"
-msgstr "Importo Contabilizzato"
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.asset,method_number:0
@@ -1034,7 +1033,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:account.asset.category:0
 msgid "Depreciation Dates"
-msgstr "Date Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:676
@@ -1047,17 +1046,17 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 msgid "Journal"
-msgstr "Sezionale"
+msgstr "jurnal"
 
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 msgid "History name"
-msgstr "Nome Storico"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 msgid "Next Period Depreciation"
-msgstr "Prossimo Periodo di Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.asset,company_currency_id:0
@@ -1073,7 +1072,7 @@ msgstr ""
 #: field:account.asset.depreciation.line,move_check:0
 #: view:asset.asset.report:0 field:asset.asset.report,move_check:0
 msgid "Posted"
-msgstr "Pubblicato"
+msgstr ""
 
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0
@@ -1085,7 +1084,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0
@@ -1105,7 +1104,7 @@ msgstr ""
 msgid ""
 "Check this if you want to automatically confirm the assets of this category "
 "when created by invoices."
-msgstr "Selezionare per confermare automaticamento le immobilizzazioni di questa categoria quando create dalle fatture."
+msgstr ""
 
 #. module: account_asset_management
 #: constraint:account.asset.asset:0
@@ -1120,18 +1119,18 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscalyear
 msgid "Fiscal Year"
-msgstr "Anno Fiscale"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_depreciation_line
 msgid "Asset depreciation line"
-msgstr "Riga ammortamento immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.category:0 field:asset.asset.report,asset_category_id:0
 #: model:ir.model,name:account_asset_management.model_account_asset_category
 msgid "Asset category"
-msgstr "Categoria immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: selection:account.asset.depreciation.line,type:0
@@ -1155,13 +1154,13 @@ msgstr ""
 #. module: account_asset_management
 #: view:asset.asset.report:0 field:asset.asset.report,depreciation_value:0
 msgid "Amount of Depreciation Lines"
-msgstr "Importo delle Righe d'Ammortamento"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/wizard_asset_compute.py:64
 #, python-format
 msgid "Created Asset Moves"
-msgstr "Movimenti Immobilizzazioni Creati"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
@@ -1176,7 +1175,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move
 msgid "Account Entry"
-msgstr "Registrazione Contabile"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.move:0
@@ -1191,13 +1190,13 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 msgid "Amount"
-msgstr "Importo"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
 #: field:account.asset.history,date:0
 msgid "Date"
-msgstr "Data"
+msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:182
@@ -1213,12 +1212,12 @@ msgstr ""
 #: selection:account.asset.history,method_period:0
 #: field:asset.asset.report,name:0 selection:asset.modify,method_period:0
 msgid "Year"
-msgstr "Anno"
+msgstr ""
 
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Create Move"
-msgstr "Crea Movimento"
+msgstr ""
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,date_trigger:0
@@ -1228,10 +1227,10 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.asset.asset:0
 msgid "Confirm Asset"
-msgstr "Conferma Immobilizzazione"
+msgstr ""
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_asset_tree
 #: model:ir.ui.menu,name:account_asset_management.menu_action_account_asset_asset_tree
 msgid "Asset Hierarchy"
-msgstr "Gerarchia Immobilizzazioni"
+msgstr ""
