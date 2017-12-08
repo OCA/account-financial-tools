@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"POT-Creation-Date: 2017-12-03 03:47+0000\n"
+"PO-Revision-Date: 2017-12-03 03:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgid "Reversal Date"
 msgstr "Date des extournes"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4005
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4016
 msgid "Reversal Entry"
 msgstr "Pièce comptable d'extourne"
 
