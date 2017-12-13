@@ -5,6 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api, _
+from odoo.tools import float_is_zero
 
 
 class AccountAssetAsset(models.Model):
@@ -31,7 +32,10 @@ class AccountAssetAsset(models.Model):
 
     def _disposal_line_depreciation_prepare(self, date):
         self.ensure_one()
-        loss_value = self.salvage_value + self.value_residual
+        loss_value = self.salvage_value
+        if not float_is_zero(self.value_residual,
+                             precision_rounding=self.currency_id.rounding):
+            loss_value += self.value_residual
         depreciation_value = self.value - loss_value
         return {
             'name': _('Asset depreciation'),
@@ -44,7 +48,10 @@ class AccountAssetAsset(models.Model):
 
     def _disposal_line_loss_prepare(self, date, loss_account):
         self.ensure_one()
-        loss_value = self.salvage_value + self.value_residual
+        loss_value = self.salvage_value
+        if not float_is_zero(self.value_residual,
+                             precision_rounding=self.currency_id.rounding):
+            loss_value += self.value_residual
         return {
             'name': _('Asset loss'),
             'journal_id': self.category_id.journal_id.id,
@@ -62,7 +69,10 @@ class AccountAssetAsset(models.Model):
             (0, False, self._disposal_line_asset_prepare(date)),
             (0, False, self._disposal_line_depreciation_prepare(date)),
         ]
-        loss_value = self.salvage_value + self.value_residual
+        loss_value = self.salvage_value
+        if not float_is_zero(self.value_residual,
+                             precision_rounding=self.currency_id.rounding):
+            loss_value += self.value_residual
         if loss_value:
             lines.append((
                 0, False, self._disposal_line_loss_prepare(date, loss_account)
