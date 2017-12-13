@@ -6,14 +6,14 @@
 Account Types Menu
 ==================
 
-This module adds a menu entry *Account Type* under *Accounting > Configuration > Accounting*, because this menu entry doesn't exists in the official *account* module of Odoo 10.
+This module adds a menu entry *Account Type* under *Accounting > Configuration > Accounting*, because this menu entry doesn't exists in the official *account* module of Odoo 11.
 
 Usage
 =====
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/10.0
+   :target: https://runbot.odoo-community.org/runbot/92/11.0
 
 Bug Tracker
 ===========
