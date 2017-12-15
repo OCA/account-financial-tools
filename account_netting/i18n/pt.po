@@ -3,13 +3,14 @@
 # * account_netting
 # 
 # Translators:
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
+"POT-Creation-Date: 2017-12-08 23:22+0000\n"
+"PO-Revision-Date: 2017-12-08 23:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -22,19 +23,19 @@ msgstr ""
 #: code:addons/account_netting/wizards/account_move_make_netting.py:72
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Encontro de Contas"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:41
 #, python-format
 msgid "All entries must have a receivable or payable account"
-msgstr ""
+msgstr "Os itens de diário devem ter uma conta a receber ou a pagar"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:44
 #, python-format
 msgid "All entries mustn't been reconciled"
-msgstr ""
+msgstr "Os itens de diário não podem estar reconciliados"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:56
@@ -42,16 +43,17 @@ msgstr ""
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
 msgstr ""
+"Os itens de diário devem ter um parceiro e este deve ser o mesmo para todos."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_balance
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_balance_type
 msgid "Balance type"
-msgstr ""
+msgstr "Tipo de Saldo"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -62,12 +64,12 @@ msgstr "Cancelar"
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Compensar"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate entries"
-msgstr ""
+msgstr "Compensar os itens de diário"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_create_uid
@@ -82,7 +84,7 @@ msgstr "Criado em"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_display_name
 msgid "Display Name"
-msgstr "Nome"
+msgstr "Nome a Exibir"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_id
@@ -92,32 +94,32 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_journal_id
 msgid "Journal id"
-msgstr ""
+msgstr "Id do Diário"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting___last_update
 msgid "Last Modified on"
-msgstr "Última Modificação Em"
+msgstr "Última Modificação em"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_write_uid
 msgid "Last Updated by"
-msgstr "Atualizado pela última vez por"
+msgstr "Última Actualização por"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_write_date
 msgid "Last Updated on"
-msgstr "Atualizado pela última vez em"
+msgstr "Última Actualização em"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_move_line_ids
 msgid "Move line ids"
-msgstr ""
+msgstr "Ids. da linha de movimento"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Select the journal where storing the journal entries"
-msgstr ""
+msgstr "Selecione o Diário onde guardar os lançamentos"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:47
@@ -127,6 +129,9 @@ msgid ""
 "In this case all selected entries belong to the same account.\n"
 " Please use the 'Reconcile' function."
 msgstr ""
+"A função 'Compensar' pretende balancear operações em contas diferentes para o mesmo parceiro.\n"
+"Neste caso todos os lançamentos selecionados pertencem à mesma conta.\n"
+"Por favor, use a função 'Reconciliar'."
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -135,24 +140,27 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this"
 " balance in the partner:"
 msgstr ""
+"Esta operação gerará itens de diário que são contrapartida das contas a "
+"receber/a pagar selecionadas, e realizará a reconciliação, deixando este "
+"saldo no parceiro:"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To pay"
-msgstr ""
+msgstr "A Pagar"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To receive"
-msgstr ""
+msgstr "A receber"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:35
 #, python-format
 msgid "You should compensate at least 2 journal entries."
-msgstr ""
+msgstr "Deve compensar pelos menos 2 itens de diário."
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "account.move.make.netting"
-msgstr ""
+msgstr "account.move.make.netting"
