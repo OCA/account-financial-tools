@@ -61,10 +61,10 @@
                             </td>
 
                             <td class="text-right">
-                                <span t-field="l.amount_due"/>
+                                <span t-field="l.amount_due" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                             </td>
                             <td class="text-right">
-                                <span t-field="l.balance_due"/>
+                                <span t-field="l.balance_due" t-options='{"widget": "monetary", "display_currency": l.currency_id or l.company_id.currency_id}'/>
                             </td>
                         </tr>
                     </tbody>
@@ -78,7 +78,7 @@
                                     <strong>Total Invoiced</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_invoiced" />
+                                    <span t-field="doc.total_invoiced" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +86,7 @@
                                     <strong>Total Due</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_due"/>
+                                    <span t-field="doc.total_due" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
                                 </td>
                             </tr>
                         </table>
