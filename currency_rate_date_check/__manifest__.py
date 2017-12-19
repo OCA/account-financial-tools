@@ -16,6 +16,9 @@
         'base',
         'account',
     ],
-    'data': ['views/company_view.xml'],
+    'data': [
+        'views/company_view.xml',
+        'views/account_config_settings.xml',
+    ],
     'installable': True,
 }

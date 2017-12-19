@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 # Here are some explainations about the design of this module.
 # In odoo/odoo/addons/base/res/res_currency.py :
@@ -62,7 +62,7 @@ class ResCurrency(models.Model):
                         date_dt = fields.Datetime.from_string(date)
                         max_delta = user.company_id.currency_rate_max_delta
                         if (date_dt - rate_date_dt).days > max_delta:
-                            raise Warning(
+                            raise UserError(
                                 _('You are requesting a rate conversion on %s '
                                   'for currency %s but the nearest '
                                   'rate before that date is '

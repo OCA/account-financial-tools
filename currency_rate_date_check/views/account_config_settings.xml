@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_account_config_settings" model="ir.ui.view">
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <div name="account_config" position="inside">
+                <div>
+                    <label for="currency_rate_max_delta"/>
+                    <field name="currency_rate_max_delta" class="oe_inline"/>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>
