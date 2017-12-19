@@ -23,7 +23,7 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/10.0
+   :target: https://runbot.odoo-community.org/runbot/92/11.0
 
 Bug Tracker
 ===========
@@ -41,6 +41,7 @@ Contributors
 
 * Adrien Peiffer (`Acsone SA/NV <http://www.acsone.eu>`_)
 * Gilles Gilles <meyomesse.gilles@gmail.com>
+* Francesco Apruzzese <f.apruzzese@apuliasoftware.it>
 
 Maintainer
 ----------
