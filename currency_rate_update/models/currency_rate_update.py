@@ -59,7 +59,7 @@ class CurrencyRateUpdateService(models.Model):
         currency_list = ''
         res = {'domain': {
             'currency_to_update': "[('id', '=', False)]",
-            }}
+        }}
         if self.service:
             currencies = []
             getter = CurrencyGetterType.get(self.service)
@@ -158,7 +158,7 @@ class CurrencyRateUpdateService(models.Model):
                         curr_to_fetch,
                         main_currency.name,
                         srv.max_delta_days
-                        )
+                    )
                     rate_name = \
                         fields.Datetime.to_string(datetime.utcnow().replace(
                             hour=0, minute=0, second=0, microsecond=0))
