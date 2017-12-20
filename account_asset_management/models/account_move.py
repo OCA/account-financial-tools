@@ -29,12 +29,12 @@ _logger = logging.getLogger(__name__)
 
 # List of move's fields that can't be modified if move is linked
 # with a depreciation line
-FIELDS_AFFECTS_ASSET_MOVE = set(['journal_id', 'date'])
+FIELDS_AFFECTS_ASSET_MOVE = {'journal_id', 'date'}
 # List of move line's fields that can't be modified if move is linked
 # with a depreciation line
-FIELDS_AFFECTS_ASSET_MOVE_LINE = \
-    set(['credit', 'debit', 'account_id', 'journal_id', 'date',
-         'asset_profile_id', 'asset_id'])
+FIELDS_AFFECTS_ASSET_MOVE_LINE = {
+    'credit', 'debit', 'account_id', 'journal_id', 'date',
+    'asset_profile_id', 'asset_id'}
 
 
 class AccountMove(models.Model):
