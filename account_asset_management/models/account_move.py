@@ -136,24 +136,10 @@ class AccountMoveLine(models.Model):
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_profile_id'):
             # create asset
-            asset_obj = self.env['account.asset']
-            move = self.env['account.move'].browse(vals['move_id'])
-            depreciation_base = vals['debit'] or -vals['credit']
-            temp_asset = asset_obj.new({
-                'name': vals['name'],
-                'profile_id': vals['asset_profile_id'],
-                'purchase_value': depreciation_base,
-                'partner_id': vals['partner_id'],
-                'date_start': move.date,
-            })
-            temp_asset.onchange_profile_id()
-            asset_vals = temp_asset._convert_to_write(temp_asset._cache)
-            self._get_asset_analytic_values(vals, asset_vals)
-            if self._context.get('company_id'):
-                asset_vals['company_id'] = self._context['company_id']
+            asset_vals = self._get_asset_values_on_create(vals)
             ctx = dict(self._context, create_asset_from_move_line=True,
                        move_id=vals['move_id'])
-            asset = asset_obj.with_context(
+            asset = self.env['account.asset'].with_context(
                 ctx).create(asset_vals)
             vals['asset_id'] = asset.id
         return super(AccountMoveLine, self).create(vals)
@@ -181,26 +167,46 @@ class AccountMoveLine(models.Model):
                 if vals['asset_profile_id'] == aml.asset_profile_id.id:
                     continue
                 # create asset
-                debit = 'debit' in vals and vals.get('debit', 0.0) or aml.debit
-                credit = 'credit' in vals and \
-                    vals.get('credit', 0.0) or aml.credit
-                asset_value = debit - credit
-                partner_id = 'partner' in vals and \
-                    vals.get('partner', False) or aml.partner_id.id
-                date_start = 'date' in vals and \
-                    vals.get('date', False) or aml.date
-                asset_vals = {
-                    'name': vals.get('name') or aml.name,
-                    'category_id': vals['asset_category_id'],
-                    'purchase_value': asset_value,
-                    'partner_id': partner_id,
-                    'date_start': date_start,
-                    'company_id': vals.get('company_id') or aml.company_id.id,
-                }
-                asset_vals = asset_obj.play_onchanges(
-                    asset_vals, ['profile_id'])
-                ctx = dict(self._context, create_asset_from_move_line=True,
-                           move_id=aml.move_id.id)
-                asset = asset_obj.with_context(ctx).create(asset_vals)
+                asset_values = self._get_asset_values_on_write(aml, vals)
+                ctx = dict(
+                    self._context, create_asset_from_move_line=True,
+                    move_id=aml.move_id.id)
+                asset = asset_obj.with_context(ctx).create(asset_values)
                 vals['asset_id'] = asset.id
         return super(AccountMoveLine, self).write(vals)
+
+    @api.model
+    def _get_asset_values_on_create(self, move_values):
+        Asset = self.env['account.asset']
+        move = self.env['account.move'].browse(move_values['move_id'])
+        depreciation_base = move_values['debit'] or -move_values['credit']
+        temp_asset = Asset.new({
+            'name': move_values['name'],
+            'profile_id': move_values['asset_profile_id'],
+            'purchase_value': depreciation_base,
+            'partner_id': move_values['partner_id'],
+            'date_start': move.date,
+        })
+        temp_asset.onchange_profile_id()
+        asset_values = temp_asset._convert_to_write(temp_asset._cache)
+        self._get_asset_analytic_values(move_values, asset_values)
+        if self._context.get('company_id'):
+            asset_values['company_id'] = self._context['company_id']
+        return asset_values
+
+    @api.model
+    def _get_asset_values_on_write(self, aml, move_values):
+        Asset = self.env['account.asset']
+        debit = move_values.get('debit', aml.debit)
+        credit = move_values.get('credit', aml.credit)
+        temp_asset = Asset.new({
+            'name': move_values.get('name', aml.name),
+            'category_id': move_values['asset_category_id'],
+            'purchase_value': debit - credit,
+            'partner_id': move_values.get('partner_id', aml.partner_id.id),
+            'date_start': move_values.get('date', aml.date),
+            'company_id': move_values.get('company_id', aml.company_id.id),
+        })
+        temp_asset.onchange_profile_id()
+        asset_values = temp_asset._convert_to_write(temp_asset._cache)
+        return asset_values
