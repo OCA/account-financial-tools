@@ -42,30 +42,41 @@ class AccountMove(models.Model):
 
     @api.multi
     def unlink(self):
-        for move in self:
-            deprs = self.env['account.asset.line'].search(
-                [('move_id', '=', move.id),
-                 ('type', 'in', ['depreciate', 'remove'])])
-            if deprs and not self._context.get('unlink_from_asset'):
-                raise UserError(
-                    _('Error!'),
-                    _("You are not allowed to remove an accounting entry "
-                      "linked to an asset."
-                      "\nYou should remove such entries from the asset."))
+        self._unlink_allowed_check()
         return super(AccountMove, self).unlink()
 
     @api.multi
     def write(self, vals):
-        if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE):
-            for move in self:
-                deprs = self.env['account.asset.line'].search(
-                    [('move_id', '=', move.id), ('type', '=', 'depreciate')])
-                if deprs:
-                    raise UserError(
-                        _('Error!'),
-                        _("You cannot change an accounting entry "
-                          "linked to an asset depreciation line."))
+        self._write_allowed_check(vals)
         return super(AccountMove, self).write(vals)
+
+    @api.multi
+    def _unlink_allowed_check(self):
+        AssetLine = self.env['account.asset.line']
+        deprs = AssetLine.search([
+            ('move_id', 'in', self.ids),
+            ('type', 'in', ['depreciate', 'remove'])
+        ])
+        if deprs and not self._context.get('unlink_from_asset'):
+            raise UserError(
+                _("You are not allowed to remove an accounting entry "
+                  "linked to an asset."
+                  "\nYou should remove such entries from the asset."))
+
+    @api.multi
+    def _write_allowed_check(self, values):
+        if not set(values).intersection(FIELDS_AFFECTS_ASSET_MOVE):
+            return
+
+        AssetLine = self.env['account.asset.line']
+        deprs = AssetLine.search([
+            ('move_id', 'in', self.ids),
+            ('type', '=', 'depreciate')
+        ])
+        if deprs:
+            raise UserError(
+                _("You cannot change an accounting entry "
+                  "linked to an asset depreciation line."))
 
     @api.multi
     def post(self):
