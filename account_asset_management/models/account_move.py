@@ -131,7 +131,6 @@ class AccountMoveLine(models.Model):
     def create(self, vals):
         if vals.get('asset_id') and not self._context.get('allow_asset'):
             raise UserError(
-                _('Error!'),
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
@@ -167,12 +166,10 @@ class AccountMoveLine(models.Model):
                     if not self.env.context.get('allow_asset_removal') \
                             and vals.keys() == ['asset_id']:
                         raise UserError(
-                            _('Error!'),
                             _("You cannot change an accounting item "
                               "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise UserError(
-                _('Error!'),
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
