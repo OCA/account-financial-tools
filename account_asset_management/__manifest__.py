@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': 'Assets Management',
-    'version': '10.0.2.6.0',
+    'version': '10.0.2.6.1',
     'depends': ['account', 'account_fiscal_year'],
     'conflicts': ['account_asset'],
     'author': "OpenERP & Noviat,Odoo Community Association (OCA)",

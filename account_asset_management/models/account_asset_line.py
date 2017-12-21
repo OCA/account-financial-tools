@@ -33,21 +33,32 @@ class AccountAssetLine(models.Model):
     @api.depends('amount', 'asset_id.depreciation_line_ids')
     @api.multi
     def _compute(self):
-        depreciation_base = self[0].asset_id.depreciation_base
-        dlines = self.filtered(lambda l: l.type == 'depreciate')
-        dlines = dlines.sorted(key=lambda l: l.line_date)
+        # When modifying amount or adding a depreciation line to an asset,
+        # recompute all lines of the asset to ensure coherent values.
+        # TODO: not sure that remaining_value and depreciated_value should be
+        # computed fields
+        assets = self.mapped('asset_id')
 
-        for i, dl in enumerate(dlines):
-            if i == 0:
-                depreciated_value = dl.previous_id and \
-                    (depreciation_base - dl.previous_id.remaining_value) or 0.0
-                remaining_value = depreciation_base - depreciated_value - \
-                    dl.amount
-            else:
-                depreciated_value += dl.previous_id.amount
-                remaining_value -= dl.amount
-            dl.depreciated_value = depreciated_value
-            dl.remaining_value = remaining_value
+        for asset in assets:
+            # Always recompute all lines of an asset
+            depreciation_base = asset.depreciation_base
+            lines = self.search([
+                ('asset_id', '=', asset.id),
+            ], order='line_date')
+
+            depreciated_value = 0.0
+            remaining_value = 0.0
+
+            for dl in lines:
+                if not dl.previous_id:
+                    depreciated_value = 0.0
+                    remaining_value = (
+                        depreciation_base - depreciated_value - dl.amount)
+                else:
+                    depreciated_value += dl.previous_id.amount
+                    remaining_value -= dl.amount
+                dl.depreciated_value = depreciated_value
+                dl.remaining_value = remaining_value
 
     @api.depends('move_id')
     @api.multi
@@ -80,7 +91,7 @@ class AccountAssetLine(models.Model):
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
         store=True)
-    depreciated_value = fields.Integer(
+    depreciated_value = fields.Float(
         compute='_compute',
         digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
