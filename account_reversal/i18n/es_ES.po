@@ -3,14 +3,14 @@
 # * account_reversal
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-11-23 03:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2018-05-17 15:49+0000\n"
+"PO-Revision-Date: 2018-05-17 15:49+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,7 +56,7 @@ msgstr "Creado en"
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_date
@@ -97,7 +97,7 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_write_uid
@@ -110,18 +110,8 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: account_reversal
-#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_post
-msgid "Mark this if you want to post reversal move"
-msgstr ""
-
-#. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
-
-#. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_post
-msgid "Post"
 msgstr ""
 
 #. module: account_reversal
@@ -151,7 +141,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3580
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
 msgid "Reversal Entry"
 msgstr ""
 
@@ -161,13 +151,12 @@ msgid "Reversal Journal"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:62
+#: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
 msgstr ""
@@ -186,7 +175,7 @@ msgid "To Be Reversed"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/models/account_move.py:51
+#: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
 msgstr ""
