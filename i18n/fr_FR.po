@@ -3,14 +3,15 @@
 # * account_reversal
 # 
 # Translators:
-# Mohamed HABOU <m.habou@agoradeveloppement.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Quentin THEURET <odoo@kerpeo.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-11-23 03:37+0000\n"
-"Last-Translator: Mohamed HABOU <m.habou@agoradeveloppement.com>, 2016\n"
+"POT-Creation-Date: 2017-12-23 03:40+0000\n"
+"PO-Revision-Date: 2017-12-23 03:40+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
 "Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Pièce comptable"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -32,31 +33,32 @@ msgstr "Annuler"
 #: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
 msgid "Check this box if your entry has to be reversed at the end of period."
 msgstr ""
+"Cochez cette case si votre pièce doit être inversée à la fin de la période."
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Create reversal journal entries"
-msgstr ""
+msgstr "Créer des entrées de journaux d'inversion"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
-msgstr ""
+msgstr "Créer des écritures de journaux d'inversion"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affichée"
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_date
@@ -75,17 +77,17 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
 msgid "Entries Ref. Prefix"
-msgstr ""
+msgstr "Préfixe de ref. des entrées"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_line_prefix
 msgid "Items Name Prefix"
-msgstr ""
+msgstr "Préfixe du nom des écritures "
 
 #. module: account_reversal
 #: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
@@ -110,18 +112,8 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_post
-msgid "Mark this if you want to post reversal move"
-msgstr ""
-
-#. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
-
-#. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_post
-msgid "Post"
 msgstr ""
 
 #. module: account_reversal
@@ -151,7 +143,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3580
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3808
 msgid "Reversal Entry"
 msgstr ""
 
@@ -161,13 +153,12 @@ msgid "Reversal Journal"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:62
+#: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
 msgstr ""
@@ -183,15 +174,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "To Be Reversed"
-msgstr ""
+msgstr "Doit être inversé"
 
 #. module: account_reversal
-#: code:addons/account_reversal/models/account_move.py:51
+#: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
-msgstr ""
+msgstr "Le mauvais journal de la société est '%s' mais vous avez '%s'"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "or"
-msgstr ""
+msgstr "ou"
