@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 - Tecnativa - Angel Moya <odoo@tecnativa.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import TransactionCase
 from odoo import exceptions
@@ -53,15 +52,14 @@ class TestAccountInvoiceTaxRequired(TransactionCase):
             'name': 'product test 5',
             'price_unit': 100.00,
         })]
-
-        self.invoice = self.account_invoice.create(dict(
-            name="Test Customer Invoice",
-            reference_type="none",
-            journal_id=self.journal.id,
-            partner_id=self.partner.id,
-            account_id=self.account_rec1_id.id,
-            invoice_line_ids=invoice_line_data
-        ))
+        self.invoice = self.account_invoice.create({
+            'name': "Test Customer Invoice",
+            'reference_type': "none",
+            'journal_id': self.journal.id,
+            'partner_id': self.partner.id,
+            'account_id': self.account_rec1_id.id,
+            'invoice_line_ids': invoice_line_data,
+        })
 
     def test_exception(self):
         """Validate invoice without tax must raise exception
