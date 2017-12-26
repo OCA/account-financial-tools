@@ -456,6 +456,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         if template._name == "account.tax.template":
             if not real.active:
                 result.append(_("Tax is disabled."))
+            if real.children_tax_ids.ids != template.children_tax_ids.ids:
+                result.append(_("Children taxes are not the same."))
         return "\n".join(result)
 
     @api.multi
@@ -591,6 +593,12 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 for key, value in self.diff_fields(template, tax).iteritems():
                     tax[key] = value
                 _logger.debug(_("Updated tax %s."), template.name)
+                # Special for taxes
+                if template._name != "account.tax.template":
+                    continue
+                children = template.children_tax_ids.ids
+                if tax.children_tax_ids.ids != children:
+                    tax.children_tax_ids = [(6, 0, children)]
             wiz_tax.update_tax_id = tax
 
     def _create_account_from_template(self, account_template):
