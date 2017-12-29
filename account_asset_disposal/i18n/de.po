@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_asset_disposal
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-22 23:20+0000\n"
+"PO-Revision-Date: 2017-12-22 23:20+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_depreciation_line
+msgid "Asset depreciation line"
+msgstr "Abschreibungsposition"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_asset
+msgid "Asset/Revenue Recognition"
+msgstr "Anlage/Umsatz Anerkennung"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
+msgid "Disposal date"
+msgstr "Entsorgungsdatum"
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_move_id
+msgid "Disposal move"
+msgstr "Entsorgungsbuchung"
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
+msgid "Undo disposal"
+msgstr "Entsorgung Rückgängig"

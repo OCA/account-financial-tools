@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_balance_line
+# * account_asset_depr_line_cancel
 # 
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -18,7 +18,17 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: account_balance_line
-#: model:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_custom
-msgid "Total Balance"
-msgstr "Gesamtsaldo"
+#. module: account_asset_depr_line_cancel
+#: model:ir.ui.view,arch_db:account_asset_depr_line_cancel.view_account_asset_asset_form
+msgid "Are you sure?"
+msgstr "Sind Sie sicher?"
+
+#. module: account_asset_depr_line_cancel
+#: model:ir.model,name:account_asset_depr_line_cancel.model_account_asset_depreciation_line
+msgid "Asset depreciation line"
+msgstr "Abschreibungsposition"
+
+#. module: account_asset_depr_line_cancel
+#: model:ir.ui.view,arch_db:account_asset_depr_line_cancel.view_account_asset_asset_form
+msgid "Delete Move"
+msgstr "Buchung löschen"

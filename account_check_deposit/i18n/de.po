@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 00:40+0000\n"
-"PO-Revision-Date: 2017-04-27 00:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-22 23:20+0000\n"
+"PO-Revision-Date: 2017-12-22 23:20+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,27 +22,27 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Bank Account Number to Credit:</b>"
-msgstr ""
+msgstr "<b>Zu belastendes Bankkonto:</b>"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Check Currency:</b>"
-msgstr ""
+msgstr "<b>Scheckwährung:</b>"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Number of checks:</b>"
-msgstr ""
+msgstr "<b>Anzahl Schecks:</b>"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Total:</b>"
-msgstr ""
+msgstr "<b>Gesamt:</b>"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Transfer Date:</b>"
-msgstr ""
+msgstr "<b>Überweisungsdatum:</b>"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_check_deposit
@@ -73,7 +74,7 @@ msgstr "Bank:"
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Beneficiary:"
-msgstr "Berechtigter:"
+msgstr "Begünstigter:"
 
 #. module: account_check_deposit
 #: model:ir.actions.report.xml,name:account_check_deposit.report_account_check_deposit
@@ -212,7 +213,7 @@ msgstr "ID"
 #. module: account_check_deposit
 #: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit_journal_default_account_id
 msgid "It acts as a default account for debit amount"
-msgstr ""
+msgstr "Es dient als Standardkonto bei Sollbeträgen"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_journal_id
@@ -228,7 +229,7 @@ msgstr "Journalbuchung"
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Journalposten"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit___last_update
@@ -321,23 +322,23 @@ msgstr "Gesamtbetrag"
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Total Credit"
-msgstr ""
+msgstr "Gesamt-Soll"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Total Debit"
-msgstr ""
+msgstr "Gesamt-Haben"
 
 #. module: account_check_deposit
 #: selection:res.company,check_deposit_offsetting_account:0
 msgid "Transfer Account"
-msgstr ""
+msgstr "Transfer-Konto"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_config_settings_check_deposit_transfer_account_id
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company_check_deposit_transfer_account_id
 msgid "Transfer Account for Check Deposits"
-msgstr ""
+msgstr "Transferkonto bei Scheckeinreichern"
 
 #. module: account_check_deposit
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
