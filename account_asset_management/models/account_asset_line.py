@@ -44,6 +44,7 @@ class AccountAssetLine(models.Model):
             depreciation_base = asset.depreciation_base
             lines = self.search([
                 ('asset_id', '=', asset.id),
+                ('type', '=', 'depreciate'),
             ], order='line_date')
 
             depreciated_value = 0.0
