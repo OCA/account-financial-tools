@@ -18,7 +18,9 @@ It provides addons to:
 
 And much more.
 
-
+Contributing
+------------
+Do you want to contribute? Please read our [contributing guidelines](https://github.com/OCA/maintainer-tools/blob/master/CONTRIBUTING.md).
 
 Translation Status
 ------------------
