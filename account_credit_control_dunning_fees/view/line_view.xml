@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
 
     <record id="add_fees_on_credit_control_line" model="ir.ui.view">
@@ -27,4 +27,4 @@
     </record>
 
   </data>
-</openerp>
+</odoo>

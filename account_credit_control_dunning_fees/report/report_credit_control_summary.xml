@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
     <template id="report_credit_control_summary_document_fees"
       inherit_id="account_credit_control.report_credit_control_summary_document">
@@ -19,4 +19,4 @@
     </template>
 
   </data>
-</openerp>
+</odoo>

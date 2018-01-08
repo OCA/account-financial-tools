@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
   <data>
     <record id="add_dunning_fees_on_policy" model="ir.ui.view">
       <field name="name">add dunning fees on policy</field>
       <field name="model">credit.control.policy</field>
       <field name="inherit_id" ref="account_credit_control.credit_control_policy_form" />
       <field name="arch" type="xml">
-        <page string="Mail and reporting" position="after">
+        <xpath expr="//notebook" position="inside">
           <page string="Fees">
             <group>
               <group>
@@ -16,9 +16,9 @@
               </group>
             </group>
           </page>
-        </page>
+        </xpath>
       </field>
     </record>
 
   </data>
-</openerp>
+</odoo>

@@ -18,13 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields
+from odoo import models, fields
 
 
 class CreditControlPolicy(models.Model):
     """ADD dunning fees fields"""
 
-    _inherit = "credit.control.policy.level"
+    _inherit = "credit.control.policy"
 
     dunning_product_id = fields.Many2one('product.product',
                                          string='Fees Product')
