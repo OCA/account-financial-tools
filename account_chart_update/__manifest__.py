@@ -8,7 +8,7 @@
 {
     'name': "Detect changes and update the Account Chart from a template",
     "summary": "Wizard to update a company's account chart from a template",
-    'version': "10.0.1.0.1",
+    'version': "10.0.1.0.2",
     'author': "Tecnativa, "
               "BCIM, "
               "Okia, "
