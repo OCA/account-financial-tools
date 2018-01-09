@@ -158,6 +158,8 @@ class AccountAssetRemove(models.TransientModel):
             [('asset_id', '=', asset.id), ('type', '=', 'depreciate'),
              ('init_entry', '=', False), ('move_check', '=', False)],
             order='line_date asc')
+        if not dlines:
+            return asset.value_residual
         first_to_depreciate_dl = dlines[0]
 
         first_date = first_to_depreciate_dl.line_date
