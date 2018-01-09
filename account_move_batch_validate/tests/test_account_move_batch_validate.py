@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
+# Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import SingleTransactionCase
@@ -74,7 +74,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
         """
         move = self.create_account_move(1000)
 
-        self.assertEquals(move.state, 'draft')
+        self.assertEqual(move.state, 'draft')
 
         wizard = self.create_move_validate_wizard('mark')
         wizard.with_context({
@@ -93,7 +93,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
         post_job = Job.load(self.env, job_uuid)
         post_job.perform()
 
-        self.assertEquals(
+        self.assertEqual(
             move.state, 'posted', msg="Move should be posted.")
 
     def test_02_delete_move_before_job_run(self):
@@ -119,9 +119,9 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
         post_job = Job.load(self.env, job_uuid)
         post_job.perform()
 
-        self.assertEquals(
+        self.assertEqual(
             post_job.result,
-            u'Nothing to do because the record has been deleted')
+            'Nothing to do because the record has been deleted')
 
     def test_03_mark_and_unmark(self):
         """
@@ -150,14 +150,14 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
 
         job_uuid = move.post_job_uuid
 
-        self.assertEquals(mark_job_uuid, job_uuid)
+        self.assertEqual(mark_job_uuid, job_uuid)
 
         post_job = Job.load(self.env, job_uuid)
 
-        self.assertEquals(post_job.state, 'done', msg="Job should be done")
-        self.assertEquals(
+        self.assertEqual(post_job.state, 'done', msg="Job should be done")
+        self.assertEqual(
             post_job.result,
             "Task set to Done because the user unmarked the move.")
 
-        self.assertEquals(
+        self.assertEqual(
             move.state, 'draft', msg="Move should be in 'draft' state")

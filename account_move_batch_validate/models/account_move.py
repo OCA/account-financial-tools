@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2014 Camptocamp SA, 2017 ACSONE
+# Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -28,7 +28,7 @@ class AccountMove(models.Model):
         if move.exists():
             move.post()
         else:
-            return _(u"Nothing to do because the record has been deleted")
+            return _("Nothing to do because the record has been deleted")
 
     @api.model
     def _delay_post_marked(self, eta=None):
@@ -88,7 +88,7 @@ class AccountMove(models.Model):
 
         values = {'to_post': True}
 
-        for index in xrange(0, moves_count, BLOCK_SIZE):
+        for index in range(0, moves_count, BLOCK_SIZE):
             moves = self[index:index + BLOCK_SIZE]
             moves.write(values)
             # users like to see the flag sooner rather than later
