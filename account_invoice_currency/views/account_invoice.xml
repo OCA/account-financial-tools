@@ -43,6 +43,9 @@
                     string="Total (Company Currency)" widget="monetary"
                     options="{'currency_field': 'company_currency_id'}"/>
         </field>
+        <field name="residual_signed" position="after">
+            <field name="residual_company_signed" sum="Amount Due"/>
+        </field>
     </field>
 </record>
 
@@ -80,6 +83,9 @@
             <field name="amount_total_company_signed" sum="Total"
                     string="Total (Company Currency)" widget="monetary"
                     options="{'currency_field': 'company_currency_id'}"/>
+        </field>
+        <field name="residual_signed" position="after">
+            <field name="residual_company_signed" sum="Amount Due"/>
         </field>
     </field>
 </record>
