@@ -17,5 +17,7 @@ class ResCompany(models.Model):
             ('type_id', '=', fm_id.id),
             ('date_start', '<=', date_str),
             ('date_end', '>=', date_str),
+            '|',
             ('company_id', '=', self.id),
-        ])
+            ('company_id', '=', False),
+        ], limit=1, order='company_id asc')
