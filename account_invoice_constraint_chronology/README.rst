@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :target: https://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
 =====================================
@@ -10,13 +10,13 @@ This module helps ensuring the chronology of invoice numbers.
 
 It prevents the validation of invoices when:
 
-* there are draft invoices with an anterior date
-* there are validated invoices with a posterior date
+* there are draft invoices with a prior date
+* there are validated invoices with a later date
 
 Configuration
 =============
 
-To configure this module, go to the menu *Accounting > Configuration > Journals > Journals* and activate the option *Check Chronology* on the relevant journals. After the installation of the module, this option will be active on *sale* and *sale refund* journals.
+To configure this module, go to the menu *Accounting/Invoicing > Configuration > Accounting > Journals* and activate the option *Check Chronology* on the relevant journals. After the installation of the module, this option will be active on *sale* and *sale refund* journals.
 
 Usage
 =====
