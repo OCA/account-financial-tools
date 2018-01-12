@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0rc1\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 14:51+0000\n"
-"PO-Revision-Date: 2014-08-20 14:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,20 +14,20 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_invoice_constraint_chronology
-#: field:account.journal,check_chronology:0
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal_check_chronology
 msgid "Check Chronology"
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:30
 #, python-format
 msgid "Chronology Error. Please confirm older draft invoices before %s and try again."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:76
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:47
 #, python-format
-msgid "Chronology Error. There exist at least one invoice with a date posterior to %s."
+msgid "Chronology Error. There exist at least one invoice with a later date to %s."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
