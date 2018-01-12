@@ -46,6 +46,6 @@ class AccountInvoice(models.Model):
                             .Date.context_today(self, date_invoice_format)
                         raise UserError(_("Chronology Error. "
                                           "There exist at least one invoice "
-                                          "with a date posterior to %s.") %
+                                          "with a later date to %s.") %
                                         date_invoice_tz)
         return res
