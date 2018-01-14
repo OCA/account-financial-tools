@@ -3,7 +3,10 @@
 # Copyright 2017 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openupgradelib import openupgrade
+try:
+    from openupgradelib import openupgrade
+except ImportError:
+    openupgrade = False
 
 column_renames = {
     'account_invoice': [
@@ -17,4 +20,6 @@ column_renames = {
 
 
 def migrate(cr, version):
+    if not version or not openupgrade:
+        return
     openupgrade.rename_columns(cr, column_renames)
