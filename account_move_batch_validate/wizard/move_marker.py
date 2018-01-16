@@ -1,28 +1,11 @@
 # -*- coding: utf-8 -*-
-###############################################################################
-#                                                                             #
-#   Author: Leonardo Pistone
-#   Copyright 2014 Camptocamp SA
-#                                                                             #
-#   This program is free software: you can redistribute it and/or modify      #
-#   it under the terms of the GNU Affero General Public License as            #
-#   published by the Free Software Foundation, either version 3 of the        #
-#   License, or (at your option) any later version.                           #
-#                                                                             #
-#   This program is distributed in the hope that it will be useful,           #
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
-#   GNU Affero General Public License for more details.                       #
-#                                                                             #
-#   You should have received a copy of the GNU Affero General Public License  #
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.     #
-#                                                                             #
-###############################################################################
-"""Wizards for batch posting."""
+# Copyright 2014 Leonardo Pistone Camptocamp SA
+# Copyright 2018 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 import logging
 
-from openerp.osv import fields, orm
+from openerp import models, fields, api
 
 _logger = logging.getLogger(__name__)
 
@@ -37,91 +20,98 @@ except ImportError:
     job = empty_decorator
 
 
-class ValidateAccountMove(orm.TransientModel):
-
+class ValidateAccountMove(models.TransientModel):
     """Wizard to mark account moves for batch posting."""
 
     _inherit = "validate.account.move"
 
-    _columns = {
-        'action': fields.selection([('mark', 'Mark for posting'),
-                                    ('unmark', 'Unmark for posting')],
-                                   "Action", required=True),
-        'eta': fields.integer('Seconds to wait before starting the jobs'),
-        'asynchronous': fields.boolean('Use asynchronous validation'),
-    }
+    journal_ids = fields.Many2many(
+        comodel_name='account.journal',
+        string='Journal',
+    )
+    date_start = fields.Date(required=True)
+    date_end = fields.Date(required=True)
+    action = fields.Selection(
+        [('mark', 'Mark for posting'),
+         ('unmark', 'Unmark for posting')],
+        "Action", required=True, default='mark',
+    )
+    eta = fields.Integer(
+        'Seconds to wait before starting the jobs'
+    )
+    asynchronous = fields.Boolean(
+        'Use asynchronous validation',
+        default=True,
+    )
 
-    _defaults = {
-        'action': 'mark',
-        'asynchronous': True,
-    }
+    def _search_move(self):
+        move_obj = self.env['account.move']
 
-    def validate_move(self, cr, uid, ids, context=None):
+        domain = [('state', '=', 'draft'),
+                  ('date', '>=', self.date_start),
+                  ('date', '<=', self.date_end)]
+
+        if self.journal_ids:
+            domain.append(
+                ('journal_id', 'in', self.journal_ids.ids)
+            )
+
+        move_ids = move_obj.search(domain, order='date')
+
+        return move_ids
+
+    @api.multi
+    def validate_move(self):
         """Create a single job that will create one job per move.
-
         Return action.
-
         """
-        session = ConnectorSession(cr, uid, context=context)
-        wizard_id = ids[0]
+        session = ConnectorSession.from_env(self.env)
         # to find out what _classic_write does, read the documentation.
-        wizard_data = self.read(cr, uid, wizard_id, context=context,
-                                load='_classic_write')
-        if not wizard_data.get('asynchronous'):
-            return super(ValidateAccountMove, self)\
-                .validate_move(cr, uid, ids, context=context)
-        wizard_data.pop('id')
-        if wizard_data.get('journal_ids'):
-            journals_ids_vals = [(6, False,
-                                  wizard_data.get('journal_ids'))]
-            wizard_data['journal_ids'] = journals_ids_vals
-        if wizard_data.get('period_ids'):
-            periods_ids_vals = [(6, False,
-                                wizard_data.get('period_ids'))]
-            wizard_data['period_ids'] = periods_ids_vals
 
-        if context.get('automated_test_execute_now'):
+        if not self.asynchronous:
+            move_ids = self._search_move()
+
+            return super(ValidateAccountMove,
+                         self.with_context(active_ids=move_ids.ids)
+                         ).validate_move()
+
+        wizard_data = {
+            'journal_ids': self.journal_ids.ids,
+            'date_start': self.date_start,
+            'date_end': self.date_end,
+            'action': self.action,
+            'eta': self.eta,
+        }
+
+        if self.env.context.get('automated_test_execute_now'):
             process_wizard(session, self._name, wizard_data)
         else:
             process_wizard.delay(session, self._name, wizard_data)
 
         return {'type': 'ir.actions.act_window_close'}
 
-    def process_wizard(self, cr, uid, ids, context=None):
+    @api.multi
+    def process_wizard(self):
         """Choose the correct list of moves to mark and then validate."""
-        for wiz in self.browse(cr, uid, ids, context=context):
-
-            move_obj = self.pool['account.move']
-
-            domain = [('state', '=', 'draft'),
-                      ('journal_id', 'in', wiz.journal_ids.ids),
-                      ('period_id', 'in', wiz.period_ids.ids)]
-            move_ids = move_obj.search(cr, uid, domain, order='date',
-                                       context=context)
+        for wiz in self:
+            move_ids = self._search_move()
 
             if wiz.action == 'mark':
-                move_obj.mark_for_posting(cr, uid, move_ids, eta=wiz.eta,
-                                          context=context)
+                move_ids.mark_for_posting(eta=wiz.eta)
 
             elif wiz.action == 'unmark':
-                move_obj.unmark_for_posting(cr, uid, move_ids, context=context)
+                move_ids.unmark_for_posting()
 
 
 @job
 def process_wizard(session, model_name, wizard_data):
     """Create jobs to validate Journal Entries."""
 
-    wiz_obj = session.pool[model_name]
+    wiz_obj = session.env[model_name]
     new_wiz_id = wiz_obj.create(
-        session.cr,
-        session.uid,
         wizard_data,
-        session.context
     )
+    if wizard_data.get('journal_ids'):
+        new_wiz_id.journal_ids = [(6, 0, wizard_data.get('journal_ids'))]
 
-    wiz_obj.process_wizard(
-        session.cr,
-        session.uid,
-        ids=[new_wiz_id],
-        context=session.context,
-    )
+    new_wiz_id.process_wizard()

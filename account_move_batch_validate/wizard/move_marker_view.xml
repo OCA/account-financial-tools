@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
 
-        <record id="validate_account_move_view" model="ir.ui.view">
-            <field name="name">Post Journal Entries</field>
-            <field name="model">validate.account.move</field>
-            <field name="inherit_id" ref="account.validate_account_move_view" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='journal_ids']" position="before">
-                    <field name="asynchronous" />
+    <!--Account Moves-->
+    <record id="validate_account_move_view_2" model="ir.ui.view">
+        <field name="name">Post Journal Entries</field>
+        <field name="model">validate.account.move</field>
+        <field name="arch" type="xml">
+            <form string="Post Journal Entries">
+                <group>
+                    <field name="journal_ids"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="asynchronous"/>
                     <field name="action" attrs="{'invisible': [('asynchronous', '=', False)]}"/>
-                </xpath>
-            </field>
-        </record>
+                </group>
+                <footer>
+                    <button string="Approve" name="validate_move" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <record id="account.menu_validate_account_moves" model="ir.ui.menu">
-            <field name="name">Post Journal Entries</field>
-        </record>
+    <record id="action_validate_account_move_2" model="ir.actions.act_window">
+        <field name="name">Post Journal Entries</field>
+        <field name="res_model">validate.account.move</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="validate_account_move_view_2"/>
+        <field name="target">new</field>
+        <field name="help">The validation of journal entries process is also called 'ledger posting' and is the process of transferring debit and credit amounts from a journal of original entry to a ledger book.</field>
+    </record>
 
-    </data>
+    <menuitem
+        name="Post Journal Entries"
+        parent="account.menu_finance_entries"
+        action="action_validate_account_move_2"
+        id="menu_validate_account_moves_2"
+       />
+
 </openerp>
