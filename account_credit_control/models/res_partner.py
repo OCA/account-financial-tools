@@ -26,11 +26,37 @@ class ResPartner(models.Model):
                                               'invoice_id',
                                               string='Credit Control Lines',
                                               readonly=True)
+    payment_responsible_id = fields.Many2one(
+        comodel_name='res.users',
+        ondelete='set null',
+        string='Follow-up Responsible',
+        help="Optionally you can assign a user to this field, "
+             "which will make him responsible for the action.",
+        track_visibility="onchange",
+    )
+    payment_note = fields.Text(
+        string='Customer Payment Promise',
+        help="Payment Note",
+        track_visibility="onchange",
+    )
+    payment_next_action = fields.Text(
+        string='Next Action',
+        help="This is the next action to be taken.",
+        track_visibility="onchange",
+    )
+    payment_next_action_date = fields.Date(
+        string='Next Action Date',
+        help="This is when the manual follow-up is needed.",
+    )
+    manual_followup = fields.Boolean(
+        string='Manual Followup',
+    )
 
     @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
-        for partner in self:
+        # sudo needed for those w/o permission that duplicate records
+        for partner in self.sudo():
             if (not partner.property_account_receivable_id or
                     not partner.credit_policy_id):
                 continue
