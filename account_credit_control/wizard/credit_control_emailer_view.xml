@@ -4,7 +4,7 @@
         <field name="name">credit.line.emailer.form</field>
         <field name="model">credit.control.emailer</field>
         <field name="arch" type="xml">
-            <form string="Mailer" version="7.0">
+            <form string="Mailer">
                 <separator string="Send emails for the selected lines"
                            colspan="4"/>
                 <newline/>

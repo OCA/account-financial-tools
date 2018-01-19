@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -13,7 +12,7 @@ class CreditControlMarker(models.TransientModel):
     _description = 'Mass marker'
 
     @api.model
-    def _get_line_ids(self):
+    def _default_lines(self):
         context = self.env.context
         if not (context.get('active_model') == 'credit.control.line' and
                 context.get('active_ids')):
@@ -30,7 +29,7 @@ class CreditControlMarker(models.TransientModel):
                             required=True)
     line_ids = fields.Many2many('credit.control.line',
                                 string='Credit Control Lines',
-                                default=_get_line_ids,
+                                default=lambda self: self._default_lines(),
                                 domain="[('state', '!=', 'sent')]")
 
     @api.model
@@ -65,7 +64,7 @@ class CreditControlMarker(models.TransientModel):
 
         self._mark_lines(filtered_lines, self.name)
 
-        return {'domain': unicode([('id', 'in', filtered_lines.ids)]),
+        return {'domain': str([('id', 'in', filtered_lines.ids)]),
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'view_id': False,

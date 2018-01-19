@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -17,36 +16,32 @@ class CreditControlRun(models.Model):
     _rec_name = 'date'
     _description = "Credit control line generator"
 
+    @api.model
+    def _default_policies(self):
+        return self.env['credit.control.policy'].search([])
+
     date = fields.Date(string='Controlling Date', required=True,
                        readonly=True,
                        states={'draft': [('readonly', False)]})
-
-    @api.model
-    def _get_policies(self):
-        return self.env['credit.control.policy'].search([])
-
     policy_ids = fields.Many2many(
         'credit.control.policy',
-        rel="credit_run_policy_rel",
-        id1='run_id', id2='policy_id',
+        relation="credit_run_policy_rel",
+        column1='run_id', column2='policy_id',
         string='Policies',
         readonly=True,
         states={'draft': [('readonly', False)]},
-        default=_get_policies,
+        default=lambda self: self._default_policies(),
     )
-    report = fields.Html(string='Report', readonly=True, copy=False)
+    report = fields.Html(readonly=True, copy=False)
     state = fields.Selection([('draft', 'Draft'),
                               ('done', 'Done')],
-                             string='State',
                              required=True,
                              readonly=True,
                              default='draft')
-
     line_ids = fields.One2many(
         comodel_name='credit.control.line',
         inverse_name='run_id',
         string='Generated lines')
-
     manual_ids = fields.Many2many(
         'account.move.line',
         rel="credit_runreject_rel",
