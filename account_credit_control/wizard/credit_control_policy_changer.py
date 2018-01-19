@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -18,17 +17,8 @@ class CreditControlPolicyChanger(models.TransientModel):
     """
     _name = "credit.control.policy.changer"
 
-    new_policy_id = fields.Many2one('credit.control.policy',
-                                    string='New Policy to Apply',
-                                    required=True)
-    new_policy_level_id = fields.Many2one('credit.control.policy.level',
-                                          string='New level to apply',
-                                          required=True)
-    # Only used to provide dynamic filtering on form
-    do_nothing = fields.Boolean(string='No follow  policy')
-
     @api.model
-    def _get_default_lines(self):
+    def _default_move_lines(self):
         """ Get default lines for fields move_line_ids
         of wizard. Only take lines that are on the same account
         and move of the invoice and not reconciled
@@ -53,10 +43,19 @@ class CreditControlPolicyChanger(models.TransientModel):
             selected_lines |= move_lines
         return selected_lines
 
+    new_policy_id = fields.Many2one('credit.control.policy',
+                                    string='New Policy to Apply',
+                                    required=True)
+    new_policy_level_id = fields.Many2one('credit.control.policy.level',
+                                          string='New level to apply',
+                                          required=True)
+    # Only used to provide dynamic filtering on form
+    do_nothing = fields.Boolean(string='No follow  policy')
     move_line_ids = fields.Many2many('account.move.line',
                                      rel='credit_changer_ml_rel',
                                      string='Move line to change',
-                                     default=_get_default_lines)
+                                     default=lambda self:
+                                         self._default_move_lines())
 
     @api.onchange('new_policy_level_id')
     def onchange_policy_id(self):

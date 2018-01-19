@@ -4,7 +4,7 @@
         <field name="name">credit control policy form</field>
         <field name="model">credit.control.policy.changer</field>
         <field name="arch" type="xml">
-            <form version="7.0" string="Set current credit level">
+            <form string="Set current credit level">
                 <separator string="Change the overdue level of current invoice"
                            colspan="4"/>
                 <label string="This wizard will let you set the overdue policy and level for selected invoices"/>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -12,12 +11,11 @@ class CreditControlPolicy(models.Model):
     _name = "credit.control.policy"
     _description = """Define a reminder policy"""
 
-    name = fields.Char('Name', required=True)
+    name = fields.Char(required=True)
     level_ids = fields.One2many('credit.control.policy.level',
                                 'policy_id',
                                 string='Policy Levels')
-    do_nothing = fields.Boolean('Do nothing',
-                                help='For policies which should not '
+    do_nothing = fields.Boolean(help='For policies which should not '
                                      'generate lines or are obsolete')
     company_id = fields.Many2one('res.company', string='Company')
     account_ids = fields.Many2many(
@@ -28,7 +26,7 @@ class CreditControlPolicy(models.Model):
         help="This policy will be active only"
              " for the selected accounts",
     )
-    active = fields.Boolean('Active', default=True)
+    active = fields.Boolean(default=True)
 
     @api.multi
     def _move_lines_domain(self, controlling_date):
@@ -177,11 +175,10 @@ class CreditControlPolicy(models.Model):
     @api.multi
     def check_policy_against_account(self, account):
         """ Ensure that the policy corresponds to account relation """
-        policies = self.search([])
-        allowed = [x for x in policies
-                   if account in x.account_ids or x.do_nothing]
+        allowed = self.search(['|', ('account_ids', 'in', account.ids),
+                               ('do_nothing', '=', True)])
         if self not in allowed:
-            allowed_names = u"\n".join(x.name for x in allowed)
+            allowed_names = "\n".join(x.name for x in allowed)
             raise UserError(
                 _('You can only use a policy set on '
                   'account %s.\n'
@@ -199,11 +196,11 @@ class CreditControlPolicyLevel(models.Model):
     _order = 'level'
     _description = """A credit control policy level"""
 
-    name = fields.Char(string='Name', required=True, translate=True)
+    name = fields.Char(required=True, translate=True)
     policy_id = fields.Many2one('credit.control.policy',
                                 string='Related Policy',
                                 required=True)
-    level = fields.Integer(string='Level', required=True)
+    level = fields.Integer(required=True)
     computation_mode = fields.Selection(
         [('net_days', 'Due Date'),
          ('end_of_month', 'Due Date, End Of Month'),
@@ -217,7 +214,6 @@ class CreditControlPolicyLevel(models.Model):
                                         required=True)
     channel = fields.Selection([('letter', 'Letter'),
                                 ('email', 'Email')],
-                               string='Channel',
                                required=True)
     custom_text = fields.Text(string='Custom Message',
                               required=True,

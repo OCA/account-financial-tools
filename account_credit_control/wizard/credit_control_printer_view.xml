@@ -4,7 +4,7 @@
         <field name="name">credit.line.printer.form</field>
         <field name="model">credit.control.printer</field>
         <field name="arch" type="xml">
-            <form string="Lines report" version="7.0">
+            <form string="Lines report">
                 <separator string="Print the selected lines" colspan="4"/>
                 <newline/>
                 <group>

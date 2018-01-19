@@ -7,8 +7,7 @@
             <form string="Control Credit Lines">
                 <header>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,to_be_sent,sent"
-                           statusbar_colors='{"error":"red","email_error":"red"}'/>
+                           statusbar_visible="draft,to_be_sent,sent"/>
                 </header>
                 <sheet>
                     <group>
@@ -124,7 +123,8 @@
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
             <tree editable="bottom" string="Control Credit Lines"
-                  colors="green:state == 'sent';red:state in ('error', 'email_error');">
+                  decoration-danger="state in ('error', 'email_error')"
+                  decoration-success="state == 'sent'">
                 <field name="date"/>
                 <field name="date_due"/>
                 <field name="level"/>

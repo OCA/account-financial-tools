@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -15,7 +14,7 @@ class CreditControlPrinter(models.TransientModel):
     _description = 'Mass printer'
 
     @api.model
-    def _get_line_ids(self):
+    def _default_line_ids(self):
         context = self.env.context
         if context.get('active_model') != 'credit.control.line':
             return False
@@ -26,7 +25,7 @@ class CreditControlPrinter(models.TransientModel):
                                   help="Only letter lines will be marked.")
     line_ids = fields.Many2many('credit.control.line',
                                 string='Credit Control Lines',
-                                default=_get_line_ids)
+                                default=lambda self: self._default_line_ids())
 
     @api.model
     def _credit_line_predicate(self, line):
@@ -52,5 +51,6 @@ class CreditControlPrinter(models.TransientModel):
             comms._mark_credit_line_as_sent()
 
         report_name = 'account_credit_control.report_credit_control_summary'
-        report_obj = self.env['report'].with_context(active_ids=comms.ids)
-        return report_obj.get_action(comms, report_name)
+        report_obj = self.env['ir.actions.report'].\
+            _get_report_from_name(report_name)
+        return report_obj.report_action(comms)
