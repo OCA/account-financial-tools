@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -48,9 +47,7 @@ class ResPartner(models.Model):
         string='Next Action Date',
         help="This is when the manual follow-up is needed.",
     )
-    manual_followup = fields.Boolean(
-        string='Manual Followup',
-    )
+    manual_followup = fields.Boolean()
 
     @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):

@@ -27,8 +27,7 @@
                             type="object"
                             attrs="{'invisible': [('state', '=', 'draft')]}"/>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,done"
-                           statusbar_colors='{}'/>
+                           statusbar_visible="draft,done"/>
                 </header>
                 <sheet>
                     <group>

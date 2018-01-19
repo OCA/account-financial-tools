@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -33,23 +32,19 @@ class CreditControlLine(models.Model):
                            required=True,
                            readonly=True,
                            states={'draft': [('readonly', False)]})
-
     date_entry = fields.Date(string='Entry date',
                              related='move_line_id.date',
                              store=True,
                              readonly=True)
-
     date_sent = fields.Date(string='Sent date',
                             readonly=True,
                             states={'draft': [('readonly', False)]})
-
     state = fields.Selection([('draft', 'Draft'),
                               ('ignored', 'Ignored'),
                               ('to_be_sent', 'Ready To Send'),
                               ('sent', 'Done'),
                               ('error', 'Error'),
                               ('email_error', 'Emailing Error')],
-                             'State',
                              required=True,
                              readonly=True,
                              default='draft',
@@ -58,74 +53,56 @@ class CreditControlLine(models.Model):
                                   "not want to send something.\n"
                                   "Draft and ignored lines will be "
                                   "generated again on the next run.")
-
     channel = fields.Selection([('letter', 'Letter'),
                                 ('email', 'Email')],
-                               string='Channel',
                                required=True,
                                readonly=True,
                                states={'draft': [('readonly', False)]})
-
     invoice_id = fields.Many2one('account.invoice',
                                  string='Invoice',
                                  readonly=True)
-
     partner_id = fields.Many2one('res.partner',
                                  string='Partner',
                                  required=True)
-
     amount_due = fields.Float(string='Due Amount Tax incl.',
                               required=True, readonly=True)
-
     balance_due = fields.Float(string='Due balance', required=True,
                                readonly=True)
-
     mail_message_id = fields.Many2one('mail.mail', string='Sent Email',
                                       readonly=True)
-
     move_line_id = fields.Many2one('account.move.line',
                                    string='Move line',
                                    required=True,
                                    readonly=True)
-
     account_id = fields.Many2one('account.account',
                                  related='move_line_id.account_id',
                                  store=True,
                                  readonly=True)
-
     currency_id = fields.Many2one('res.currency',
                                   related='move_line_id.currency_id',
                                   store=True,
                                   readonly=True)
-
     company_id = fields.Many2one('res.company',
                                  related='move_line_id.company_id',
                                  store=True,
                                  readonly=True)
-
     # we can allow a manual change of policy in draft state
     policy_level_id = fields.Many2one('credit.control.policy.level',
                                       string='Overdue Level',
                                       required=True,
                                       readonly=True,
                                       states={'draft': [('readonly', False)]})
-
     policy_id = fields.Many2one('credit.control.policy',
                                 related='policy_level_id.policy_id',
                                 store=True,
                                 readonly=True)
-
-    level = fields.Integer('Level',
-                           related='policy_level_id.level',
+    level = fields.Integer(related='policy_level_id.level',
                            store=True,
                            readonly=True)
-
-    manually_overridden = fields.Boolean(string='Manually overridden')
-
+    manually_overridden = fields.Boolean()
     run_id = fields.Many2one(comodel_name='credit.control.run',
                              string='Source')
-
-    manual_followup = fields.Boolean(string='Manual Followup')
+    manual_followup = fields.Boolean()
 
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,
@@ -181,7 +158,8 @@ class CreditControlLine(models.Model):
 
         new_lines = self.browse()
         for move_line in lines:
-            if move_line.currency_id:
+            ml_currency = move_line.currency_id
+            if ml_currency and ml_currency != user_currency:
                 open_amount = move_line.amount_residual_currency
             else:
                 open_amount = move_line.amount_residual

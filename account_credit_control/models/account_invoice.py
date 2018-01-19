@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -23,7 +22,6 @@ class AccountInvoice(models.Model):
                "account_credit_control.group_account_credit_control_user,"
                "account_credit_control.group_account_credit_control_info",
     )
-
     credit_control_line_ids = fields.One2many(
         'credit.control.line', 'invoice_id',
         string='Credit Lines',

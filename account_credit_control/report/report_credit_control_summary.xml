@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_credit_control_summary_document">
-        <t t-call="report.external_layout">
+        <t t-call="web.external_layout">
             <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
             <div class="page">
                 <div class="row" id="address">
                     <div class="col-xs-5 col-xs-offset-7">
                         <address t-field="doc.contact_address"
-                                 t-field-options='{"widget": "contact",
-                                                   "fields": ["address", "name"],
-                                                   "no_marker": true}'/>
+                                 t-options='{"widget": "contact",
+                                             "fields": ["address", "name"],
+                                             "no_marker": true}'/>
                     </div>
                     <div class="col-xs-5 col-xs-offset-7">
                         <span t-field="doc.report_date"/>
@@ -61,10 +61,10 @@
                             </td>
 
                             <td class="text-right">
-                                <span t-field="l.amount_due"/>
+                                <span t-field="l.amount_due" t-options='{"widget": "monetary", "display_currency": l.currency_id or l.company_id.currency_id}'/>
                             </td>
                             <td class="text-right">
-                                <span t-field="l.balance_due"/>
+                                <span t-field="l.balance_due" t-options="{'widget': 'monetary', 'display_currency': l.currency_id or l.company_id.currency_id}"/>
                             </td>
                         </tr>
                     </tbody>
@@ -78,7 +78,7 @@
                                     <strong>Total Invoiced</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_invoiced" />
+                                    <span t-field="doc.total_invoiced" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +86,7 @@
                                     <strong>Total Due</strong>
                                 </td>
                                 <td class="text-right">
-                                    <span t-field="doc.total_due"/>
+                                    <span t-field="doc.total_due" t-options="{'widget': 'monetary', 'display_currency': doc.currency_id}"/>
                                 </td>
                             </tr>
                         </table>
@@ -106,7 +106,7 @@
     </template>
 
     <template id="report_credit_control_summary">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="account_credit_control.report_credit_control_summary_document" t-lang="doc.partner_id.lang" />
             </t>

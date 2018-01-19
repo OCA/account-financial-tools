@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
- 'version': '10.0.1.3.2',
- 'author': "Camptocamp,Odoo Community Association (OCA),Okia",
+ 'version': '11.0.1.0.0',
+ 'author': "Camptocamp,Odoo Community Association (OCA),Okia,Access Bookings",
  'maintainer': 'Camptocamp',
  'category': 'Finance',
  'depends': [
@@ -12,9 +12,12 @@
      'account',
      'mail',
  ],
- 'website': 'https://www.camptocamp.com',
+ 'website': 'https://github.com/OCA/account-financial-tools',
  'data': [
+     # Security
      "security/res_groups.xml",
+     "security/ir.model.access.csv",
+
      # Reports
      "report/report.xml",
      "report/report_credit_control_summary.xml",
@@ -29,15 +32,13 @@
      "views/credit_control_run.xml",
      "views/res_company.xml",
      "views/res_partner.xml",
+     "views/res_config_settings_view.xml",
 
      # Wizards
      "wizard/credit_control_emailer_view.xml",
      "wizard/credit_control_marker_view.xml",
      "wizard/credit_control_printer_view.xml",
      "wizard/credit_control_policy_changer_view.xml",
-
-     # Security
-     "security/ir.model.access.csv",
  ],
  'installable': True,
  'license': 'AGPL-3',

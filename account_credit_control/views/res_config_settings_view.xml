@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.credit.control</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='invoicing_settings']" position="after">
+                <h2>Credit Control</h2>
+                <div class="row mt16 o_settings_container">
+                  <div class="row col-md-6 o_setting_box" id="credit_control_policy"
+                    title="This allows credit control team to chase overdue payments with different means"
+                    groups="account.group_account_user">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label string="Default Policy"/>
+                        <div class="text-muted">
+                            Default credit control policy to partners
+                        </div>
+                        <div class="row mt16">
+                            <label string="Policy" for="credit_policy_id" class="col-md-3 o_light_label"/>
+                            <field name="credit_policy_id"/>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row col-md-6 o_setting_box" id="credit_control_tolerance"
+                      groups="account.group_account_user">
+                      <div class="o_setting_left_pane"/>
+                      <div class="o_setting_right_pane">
+                          <label string="Default Credit Tolerance"/>
+                          <div class="text-muted">
+                              Credit Tolerance Limit
+                          </div>
+                          <div class="row mt16">
+                              <label string="Tolerance" for="credit_control_tolerance" class="col-md-3 o_light_label"/>
+                              <field name="credit_control_tolerance"/>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

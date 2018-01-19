@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
+# Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 from odoo import api, fields, models
@@ -19,22 +19,16 @@ class CreditCommunication(models.TransientModel):
     _rec_name = 'partner_id'
 
     partner_id = fields.Many2one('res.partner', 'Partner', required=True)
-
     current_policy_level = fields.Many2one('credit.control.policy.level',
                                            'Level',
                                            required=True)
-
     currency_id = fields.Many2one('res.currency', 'Currency', required=True)
-
     credit_control_line_ids = fields.Many2many('credit.control.line',
                                                rel='comm_credit_rel',
                                                string='Credit Lines')
-
     contact_address = fields.Many2one('res.partner',
-                                      string='Contact Address',
                                       readonly=True)
-    report_date = fields.Date(string='Report Date',
-                              default=fields.Date.context_today)
+    report_date = fields.Date(default=fields.Date.context_today)
 
     @api.model
     def _get_company(self):
@@ -43,17 +37,15 @@ class CreditCommunication(models.TransientModel):
 
     company_id = fields.Many2one('res.company',
                                  string='Company',
-                                 default=_get_company,
+                                 default=lambda self: self._get_company(),
                                  required=True)
     user_id = fields.Many2one('res.users',
                               default=lambda self: self.env.user,
                               string='User')
 
-    total_invoiced = fields.Float(string='Total Invoiced',
-                                  compute='_compute_total')
+    total_invoiced = fields.Float(compute='_compute_total')
 
-    total_due = fields.Float(string='Total Due',
-                             compute='_compute_total')
+    total_due = fields.Float(compute='_compute_total')
 
     @api.model
     def _get_total(self):
@@ -203,15 +195,6 @@ class CreditCommunication(models.TransientModel):
             email.write({'attachment_ids': [(6, 0, attachments.ids)]})
             emails += email
         return emails
-
-    @api.multi
-    def _generate_report(self):
-        """ Will generate a report by inserting mako template
-        of related policy template
-
-        """
-        report_name = 'account_credit_control.report_credit_control_summary'
-        return self.env['report'].get_pdf(self, report_name)
 
     @api.multi
     @api.returns('credit.control.line')
