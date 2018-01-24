@@ -5,7 +5,7 @@
 {
     'name': 'Account Lock Date Update',
     'summary': """
-        Allow an Account adviser to update locking date without having
+        Allow an Account adviser to update lock dates without having
         access to all technical settings""",
     'version': '10.0.1.0.0',
     'license': 'AGPL-3',

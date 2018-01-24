@@ -6,7 +6,7 @@
 Account Lock Date Update
 ========================
 
-Allow an Account adviser to update locking date without having
+Allow an Account adviser to update lock dates without having
 access to all technical settings.
 
 Installation
@@ -24,8 +24,8 @@ Usage
 
 To use this module, you need to be an account adviser and go to:
 
-* Accounting -> Configuration -> Accounting -> Update accounting lock dates
-* Change values and click on update button
+* Accounting -> Configuration -> Accounting -> Lock Dates
+* Change values and click on *Update* button
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
