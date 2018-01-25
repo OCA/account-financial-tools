@@ -48,13 +48,11 @@ class AccountMoveMakeNetting(models.TransientModel):
                   "In this case all selected entries belong to the same "
                   "account.\n Please use the 'Reconcile' function."))
         partner_id = None
-        for move in move_lines:
-            if (not move.partner_id or (
-                    move.partner_id != partner_id and partner_id is not None)):
-                raise exceptions.ValidationError(
-                    _("All entries should have a partner and the partner must "
-                      "be the same for all."))
-            partner_id = move.partner_id
+        if len(move_lines.mapped('partner_id')) != 1:
+            raise exceptions.ValidationError(
+                _("All entries should have a partner and the partner must "
+                  "be the same for all."))
+        partner_id = move_lines[0].partner_id
         res = super(AccountMoveMakeNetting, self).default_get(fields)
         res['move_line_ids'] = [(6, 0, move_lines.ids)]
         balance = (sum(move_lines.mapped('debit')) -
@@ -72,8 +70,8 @@ class AccountMoveMakeNetting(models.TransientModel):
             'journal_id': self.journal_id.id,
         })
         # Group amounts by account
-        account_groups = self.move_line_ids.read_group([
-            ('id', 'in', self.move_line_ids.ids)],
+        account_groups = self.move_line_ids.read_group(
+            [('id', 'in', self.move_line_ids.ids)],
             ['account_id', 'debit', 'credit'],
             ['account_id'],
         )
