@@ -47,12 +47,10 @@ class AccountMoveMakeNetting(models.TransientModel):
                   "operations on different accounts for the same partner.\n"
                   "In this case all selected entries belong to the same "
                   "account.\n Please use the 'Reconcile' function."))
-        partner_id = None
         if len(move_lines.mapped('partner_id')) != 1:
             raise exceptions.ValidationError(
                 _("All entries should have a partner and the partner must "
                   "be the same for all."))
-        partner_id = move_lines[0].partner_id
         res = super(AccountMoveMakeNetting, self).default_get(fields)
         res['move_line_ids'] = [(6, 0, move_lines.ids)]
         balance = (sum(move_lines.mapped('debit')) -
