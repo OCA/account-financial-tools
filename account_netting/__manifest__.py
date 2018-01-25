@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza
 # Copyright 2017 Vicent Cubells - Tecnativa <vicent.cubells@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
     'name': 'Account netting',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'summary': 'Compensate AR/AP accounts from the same partner',
     'category': 'Accounting & Finance',
     'author': 'Tecnativa, '
