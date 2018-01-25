@@ -1,22 +1,25 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
-from odoo import fields
+from datetime import date
+from odoo.tests.common import SavepointCase
 
 
-class TestCurrencyMonthlyRate(TransactionCase):
+class TestCurrencyMonthlyRate(SavepointCase):
 
-    def setUp(self):
-        super(TestCurrencyMonthlyRate, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.usd = self.env.ref('base.USD')
-        self.eur = self.env.ref('base.EUR')
+        cls.usd = cls.env.ref('base.USD')
+        cls.eur = cls.env.ref('base.EUR')
 
-        self.year = str(fields.Date.from_string(fields.Date.today()).year)
+        # as fields.Date.today() only calls date.today() and then converts it
+        # to ORM format string, we don't need it here
+        cls.year = str(date.today().year)
 
-        monthly_rate = self.env['res.currency.rate.monthly']
-        rate = self.env['res.currency.rate']
+        monthly_rate = cls.env['res.currency.rate.monthly']
+        rate = cls.env['res.currency.rate']
 
         monthly_rates_to_create = [
             {'month': '01', 'rate': 1.20},
@@ -24,38 +27,41 @@ class TestCurrencyMonthlyRate(TransactionCase):
         ]
         for r in monthly_rates_to_create:
             r.update({
-                'year': self.year,
-                'currency_id': self.usd.id
+                'year': cls.year,
+                'currency_id': cls.usd.id
             })
             monthly_rate.create(r)
 
         rates_to_create = [
-            {'name': '%s-01-01' % self.year, 'rate': 1.15},
-            {'name': '%s-01-11' % self.year, 'rate': 1.10},
-            {'name': '%s-01-31' % self.year, 'rate': 1.35},
-            {'name': '%s-02-01' % self.year, 'rate': 1.50},
-            {'name': '%s-02-11' % self.year, 'rate': 1.30},
+            {'name': '%s-01-01' % cls.year, 'rate': 1.15},
+            {'name': '%s-01-11' % cls.year, 'rate': 1.10},
+            {'name': '%s-01-31' % cls.year, 'rate': 1.35},
+            {'name': '%s-02-01' % cls.year, 'rate': 1.50},
+            {'name': '%s-02-11' % cls.year, 'rate': 1.30},
         ]
         for r in rates_to_create:
             r.update({
-                'currency_id': self.usd.id
+                'currency_id': cls.usd.id
             })
             rate.create(r)
 
-        self.jan_2 = '%s-01-02' % self.year
-        self.jan_12 = '%s-01-12' % self.year
-        self.jan_31 = '%s-01-31' % self.year
-        self.feb_2 = '%s-02-02' % self.year
-        self.feb_12 = '%s-02-12' % self.year
+        cls.jan_2 = '%s-01-02' % cls.year
+        cls.jan_12 = '%s-01-12' % cls.year
+        cls.jan_31 = '%s-01-31' % cls.year
+        cls.feb_2 = '%s-02-02' % cls.year
+        cls.feb_12 = '%s-02-12' % cls.year
 
-    def compute_eur_usd(self, amount, date, monthly):
+    def compute_eur_usd(self, amount, date_, monthly):
         self.usd.invalidate_cache()
         self.eur.invalidate_cache()
         if monthly:
-            return self.eur.with_context(date=date, monthly_rate=True).compute(
-                amount, self.usd)
+            return self.eur.with_context(
+                date=date_, monthly_rate=True
+            ).compute(amount, self.usd)
         else:
-            return self.eur.with_context(date=date).compute(amount, self.usd)
+            return self.eur.with_context(
+                date=date_
+            ).compute(amount, self.usd)
 
     def test_monthly_compute(self):
         self.assertEqual(self.compute_eur_usd(10, self.jan_2, True), 12)
