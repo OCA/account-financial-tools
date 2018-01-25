@@ -14,6 +14,11 @@ class TestAccountNetting(common.SavepointCase):
             'customer': True,
             'name': "Supplier/Customer",
         })
+        cls.partner1 = cls.env['res.partner'].create({
+            'supplier': True,
+            'customer': True,
+            'name': "Supplier/Customer 1",
+        })
         res_users_account_manager = cls.env.ref(
             'account.group_account_manager')
         partner_manager = cls.env.ref('base.group_partner_manager')
@@ -90,13 +95,102 @@ class TestAccountNetting(common.SavepointCase):
         supplier_move = cls.supplier_invoice.move_id
         cls.move_line_2 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable)
+        cls.move_line_3 = supplier_move.line_ids.filtered(
+            lambda x: x.account_id == cls.account_expense)
+        cls.supplier_invoice = cls.env['account.invoice'].create({
+            'journal_id': cls.expenses_journal.id,
+            'type': 'in_invoice',
+            'partner_id': cls.partner1.id,
+            'account_id': cls.account_payable.id,
+            'invoice_line_ids': [(0, 0, {
+                'name': 'Test',
+                'price_unit': 200.0,
+                'account_id': cls.account_expense.id,
+            })],
+        })
+        cls.supplier_invoice.action_invoice_open()
+        supplier_move = cls.supplier_invoice.move_id
+        cls.move_line_4 = supplier_move.line_ids.filtered(
+            lambda x: x.account_id == cls.account_payable)
+        cls.supplier_invoice = cls.env['account.invoice'].create({
+            'journal_id': cls.expenses_journal.id,
+            'type': 'in_refund',
+            'partner_id': cls.partner1.id,
+            'account_id': cls.account_payable.id,
+            'invoice_line_ids': [(0, 0, {
+                'name': 'Test',
+                'price_unit': 200.0,
+                'account_id': cls.account_expense.id,
+            })],
+        })
+        cls.supplier_invoice.action_invoice_open()
+        supplier_move = cls.supplier_invoice.move_id
+        cls.move_line_5 = supplier_move.line_ids.filtered(
+            lambda x: x.account_id == cls.account_payable)
+        cls.supplier_invoice = cls.env['account.invoice'].create({
+            'journal_id': cls.expenses_journal.id,
+            'type': 'in_refund',
+            'partner_id': cls.partner1.id,
+            'account_id': cls.account_payable.id,
+            'invoice_line_ids': [(0, 0, {
+                'name': 'Test',
+                'price_unit': 200.0,
+                'account_id': cls.account_expense.id,
+            })],
+        })
+        cls.supplier_invoice.action_invoice_open()
+        supplier_move = cls.supplier_invoice.move_id
+        cls.move_line_6 = supplier_move.line_ids.filtered(
+            lambda x: x.account_id == cls.account_payable)
 
     def test_compensation(self):
+        # Test exception line 33 from account_move_make_netting
+        obj = self.env['account.move.make.netting'].with_context(
+            active_ids=[self.move_line_1.id])
+        with self.assertRaises(Exception):
+            wizard = obj.create(
+                {'move_line_ids': [(6, 0, [self.move_line_1.id])],
+                 'journal_id': self.miscellaneous_journal.id})
+        # Test exception line 39 from account_move_make_netting
+        obj = self.env['account.move.make.netting'].with_context(
+            active_ids=[self.move_line_1.id, self.move_line_3.id])
+        with self.assertRaises(Exception):
+            wizard = obj.create(
+                {'move_line_ids': [(6, 0, [self.move_line_1.id,
+                                           self.move_line_3.id])],
+                 'journal_id': self.miscellaneous_journal.id})
+        # Test exception line 45 from account_move_make_netting
+        obj = self.env['account.move.make.netting'].with_context(
+            active_ids=[self.move_line_4.id, self.move_line_5.id])
+        with self.assertRaises(Exception):
+            wizard = obj.create(
+                {'move_line_ids': [(6, 0, [self.move_line_4.id,
+                                           self.move_line_5.id])],
+                 'journal_id': self.miscellaneous_journal.id})
+        # Test exception line 42 from account_move_make_netting
+        moves = self.env['account.move.line'].browse([self.move_line_4.id,
+                                                      self.move_line_5.id])
+        moves.reconcile()
+        obj = self.env['account.move.make.netting'].with_context(
+            active_ids=[self.move_line_4.id, self.move_line_5.id])
+        with self.assertRaises(Exception):
+            wizard = obj.create(
+                {'move_line_ids': [(6, 0, [self.move_line_4.id,
+                                           self.move_line_5.id])],
+                 'journal_id': self.miscellaneous_journal.id})
+        # Test exception line 52 from account_move_make_netting
+        obj = self.env['account.move.make.netting'].with_context(
+            active_ids=[self.move_line_1.id, self.move_line_6.id])
+        with self.assertRaises(Exception):
+            wizard = obj.create(
+                {'move_line_ids': [(6, 0, [self.move_line_1.id,
+                                           self.move_line_6.id])],
+                 'journal_id': self.miscellaneous_journal.id})
         obj = self.env['account.move.make.netting'].with_context(
             active_ids=[self.move_line_1.id, self.move_line_2.id])
         wizard = obj.create(
-            {'move_line_ids':
-                [(6, 0, [self.move_line_1.id, self.move_line_2.id])],
+            {'move_line_ids': [(6, 0, [self.move_line_1.id,
+                                       self.move_line_2.id])],
              'journal_id': self.miscellaneous_journal.id})
         res = wizard.button_compensate()
         move = self.env['account.move'].browse(res['res_id'])
