@@ -3,21 +3,20 @@
 # * currency_rate_update
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Viktoras Norkus <viktoras@bmx.lt>, 2018
+# Frank Schellenberg <opensource@schellenberg.nl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-25 11:47+0000\n"
 "PO-Revision-Date: 2018-01-25 11:47+0000\n"
-"Last-Translator: Viktoras Norkus <viktoras@bmx.lt>, 2018\n"
-"Language-Team: Lithuanian (https://www.transifex.com/oca/teams/23907/lt/)\n"
+"Last-Translator: Frank Schellenberg <opensource@schellenberg.nl>, 2018\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: lt\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.view_account_config_settings
@@ -39,22 +38,22 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model,name:currency_rate_update.model_res_company
 msgid "Companies"
-msgstr "Įmonės"
+msgstr "Bedrijven"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_company_id
 msgid "Company"
-msgstr "Įmonė"
+msgstr "Bedrijf"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_uid
 msgid "Created by"
-msgstr "Sukūrė"
+msgstr "Aangemaakt door"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_create_date
 msgid "Created on"
-msgstr "Sukurta"
+msgstr "Aangemaakt op"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_currency_list
@@ -92,7 +91,7 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_display_name
 msgid "Display Name"
-msgstr "Vaizduojamas pavadinimas"
+msgstr "Te tonen naam"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
@@ -148,17 +147,17 @@ msgstr ""
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service___last_update
 msgid "Last Modified on"
-msgstr "Paskutinį kartą keista"
+msgstr "Laatst bijgewerkt op"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_uid
 msgid "Last Updated by"
-msgstr "Paskutinį kartą atnaujino"
+msgstr "Laatst bijgewerkt door"
 
 #. module: currency_rate_update
 #: model:ir.model.fields,field_description:currency_rate_update.field_currency_rate_update_service_write_date
 msgid "Last Updated on"
-msgstr "Paskutinį kartą atnaujinta"
+msgstr "Laatst bijgewerkt op"
 
 #. module: currency_rate_update
 #: model:ir.ui.view,arch_db:currency_rate_update.currency_rate_update_form

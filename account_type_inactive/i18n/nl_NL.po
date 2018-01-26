@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_type_inactive
+# 
+# Translators:
+# Frank Schellenberg <opensource@schellenberg.nl>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-25 11:47+0000\n"
+"PO-Revision-Date: 2018-01-25 11:47+0000\n"
+"Last-Translator: Frank Schellenberg <opensource@schellenberg.nl>, 2018\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_type_inactive
+#: model:ir.model,name:account_type_inactive.model_account_account_type
+msgid "Account Type"
+msgstr ""
+
+#. module: account_type_inactive
+#: model:ir.model.fields,field_description:account_type_inactive.field_account_account_type_active
+msgid "Active"
+msgstr "Actief"
+
+#. module: account_type_inactive
+#: code:addons/account_type_inactive/models/account_type.py:23
+#, python-format
+msgid ""
+"You cannot inactive this account type as this type is used on %d accounts."
+msgstr ""
