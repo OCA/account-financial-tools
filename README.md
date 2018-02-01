@@ -30,6 +30,7 @@ addon | version | summary
 [account_chart_update](account_chart_update/) | 10.0.1.0.1 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_credit_control](account_credit_control/) | 10.0.1.3.2 | Account Credit Control
+[account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 10.0.1.0.0 | Credit control dunning fees
 [account_fiscal_month](account_fiscal_month/) | 10.0.1.0.0 | Provide a fiscal month date range type
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 10.0.1.0.0 | Check VAT on invoice validation
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
@@ -67,7 +68,6 @@ addon | version | summary
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
 [account_constraints](account_constraints/) | 8.0.1.1.0 (unported) | Account Constraints
-[account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 8.0.0.1.0 (unported) | Credit control dunning fees
 [account_default_draft_move](account_default_draft_move/) | 8.0.1.0.0 (unported) | Move in draft state by default
 [account_journal_always_check_date](account_journal_always_check_date/) | 8.0.0.1.0 (unported) | Option Check Date in Period always active on journals
 [account_move_line_no_default_search](account_move_line_no_default_search/) | 8.0.0.1.0 (unported) | Move line search view - disable defaults for period and journal
