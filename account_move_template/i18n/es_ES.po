@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"POT-Creation-Date: 2018-02-01 03:44+0000\n"
+"PO-Revision-Date: 2018-02-01 03:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (Spain) (https://www.transifex.com/oca/teams/23907/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_display_name
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_id
@@ -140,7 +140,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template___last_update
 #: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_write_uid
@@ -289,7 +289,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"POT-Creation-Date: 2018-02-01 03:44+0000\n"
+"PO-Revision-Date: 2018-02-01 03:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Slovak (https://www.transifex.com/oca/teams/23907/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -289,7 +289,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_type
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #. module: account_move_template
 #: selection:account.document.template.line,type:0
