@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
+# Copyright 2014-2017 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Credit control dunning fees',
- 'version': '10.0.1.0.0',
+ 'version': '11.0.1.0.0',
  'author': "Camptocamp, Odoo Community Association (OCA)",
  'maintainer': 'Camptocamp',
  'category': 'Accounting',
  'complexity': 'normal',
  'depends': ['account_credit_control'],
- 'website': 'http://www.camptocamp.com',
+ 'website': 'https://github.com/OCA/account-financial-tools',
  'data': ['view/policy_view.xml',
           'view/line_view.xml',
           'report/report_credit_control_summary.xml',
