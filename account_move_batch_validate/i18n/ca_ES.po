@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
-"PO-Revision-Date: 2015-06-18 05:21+0000\n"
+"POT-Creation-Date: 2017-12-02 00:50+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Períodes"
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_to:0
 msgid "End Date"
-msgstr ""
+msgstr "Data final"
 
 #. module: account_move_batch_validate
 #: view:account.move.marker:0
@@ -177,7 +177,7 @@ msgstr "Cancel·la"
 #. module: account_move_batch_validate
 #: field:account.move.marker,date_from:0
 msgid "Start Date"
-msgstr ""
+msgstr "Data d'inici"
 
 #. module: account_move_batch_validate
 #: help:account.move.marker,chart_account_id:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-24 23:13+0000\n"
+"POT-Creation-Date: 2017-12-02 00:49+0000\n"
 "PO-Revision-Date: 2015-06-03 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/ca_ES/)\n"
@@ -251,7 +251,7 @@ msgstr ""
 #: field:account.asset.remove,note:0 view:asset.modify:0
 #: field:asset.modify,note:0
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
@@ -445,7 +445,7 @@ msgstr ""
 #: view:account.asset.asset:0 field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1235
@@ -747,7 +747,7 @@ msgstr ""
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:420
@@ -1084,7 +1084,7 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #. module: account_asset_management
 #: view:account.asset.asset:0 view:asset.asset.report:0

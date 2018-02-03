@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 09:14+0000\n"
+"POT-Creation-Date: 2017-12-02 00:49+0000\n"
 "PO-Revision-Date: 2015-06-03 16:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-7-0/language/es/)\n"
@@ -51,7 +51,7 @@ msgstr ""
 #. module: account_auto_fy_sequence
 #: model:ir.model,name:account_auto_fy_sequence.model_ir_sequence
 msgid "ir.sequence"
-msgstr ""
+msgstr "ir.sequence"
 
 #. module: account_auto_fy_sequence
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:130
