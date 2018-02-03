@@ -14,7 +14,7 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Miku Laitinen <miku.laitinen@gmail.com>, 2015
 # Paolo Valier, 2016
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro Castro Silva <inactive+pcs.sossia@transifex.com>, 2015
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 # Thomas A. Jaeger, 2015
@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-02 00:56+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -57,17 +57,17 @@ msgstr "Cancel·la"
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
@@ -113,17 +113,17 @@ msgstr ""
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: account_tax_analysis
 #: field:account.vat.declaration.analysis,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: account_tax_analysis
 #: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis

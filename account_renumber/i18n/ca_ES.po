@@ -3,12 +3,23 @@
 # * account_renumber
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
+# Thomas A. Jaeger, 2015
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 16:14+0000\n"
+"POT-Creation-Date: 2017-12-02 00:56+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +41,17 @@ msgstr "Cancel·la"
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_renumber
 #: field:wizard.renumber,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
+
+#. module: account_renumber
+#: field:wizard.renumber,display_name:0
+msgid "Display Name"
+msgstr "Nom visible"
 
 #. module: account_renumber
 #: field:wizard.renumber,number_next:0
@@ -84,14 +100,19 @@ msgid "Journals to renumber"
 msgstr "Diaris a renumerar"
 
 #. module: account_renumber
+#: field:wizard.renumber,__last_update:0
+msgid "Last Modified on"
+msgstr "Darrera modificació en"
+
+#. module: account_renumber
 #: field:wizard.renumber,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: account_renumber
 #: field:wizard.renumber,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:89

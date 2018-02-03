@@ -4,20 +4,21 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
 # Giedrius Slavinskas <giedrius@inovera.lt>, 2012
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Paolo Valier, 2016
-# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro Castro Silva <inactive+pcs.sossia@transifex.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015
 # Sofce Dimitrijeva <sofce@eskon.com.mk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2017-08-25 22:32+0000\n"
+"POT-Creation-Date: 2017-12-02 00:55+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -342,13 +343,13 @@ msgstr ""
 #: field:account.asset.recompute.trigger,create_uid:0
 #: field:account.asset.remove,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,create_date:0
 #: field:account.asset.remove,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -428,7 +429,7 @@ msgstr ""
 #: field:account.asset.recompute.trigger,display_name:0
 #: field:account.asset.remove,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -605,19 +606,19 @@ msgstr ""
 #: field:account.asset.recompute.trigger,__last_update:0
 #: field:account.asset.remove,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,write_uid:0
 #: field:account.asset.remove,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,write_date:0
 #: field:account.asset.remove,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -646,7 +647,7 @@ msgstr ""
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -656,7 +657,7 @@ msgstr ""
 #: field:account.asset.remove,note:0
 #: view:asset.modify:account_asset_management.asset_modify_form
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:58
@@ -864,7 +865,7 @@ msgstr ""
 #: field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: account_asset_management
 #: selection:account.asset.asset,type:0
