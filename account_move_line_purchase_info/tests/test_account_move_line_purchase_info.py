@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-# © 2017 Eficent Business and IT Consulting Services S.L. (www.eficent.com)
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
+#           (www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests import common
@@ -178,8 +178,8 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
         picking.force_assign()
-        picking.pack_operation_product_ids.write({'qty_done': 1.0})
-        picking.do_new_transfer()
+        picking.move_lines.write({'quantity_done': 1.0})
+        picking.button_validate()
 
         expected_balance = 1.0
         self._check_account_balance(self.account_inventory.id,
@@ -192,7 +192,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             'account_id': purchase.partner_id.property_account_payable_id.id,
         })
         invoice.purchase_order_change()
-        invoice.signal_workflow('invoice_open')
+        invoice.action_invoice_open()
 
         for aml in invoice.move_id.line_ids:
             if aml.product_id == po_line.product_id and aml.invoice_id:
