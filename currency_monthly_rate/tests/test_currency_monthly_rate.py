@@ -76,3 +76,9 @@ class TestCurrencyMonthlyRate(SavepointCase):
         self.assertEqual(self.compute_eur_usd(10, self.jan_31, False), 13.5)
         self.assertEqual(self.compute_eur_usd(10, self.feb_2, False), 15)
         self.assertEqual(self.compute_eur_usd(10, self.feb_12, False), 13)
+
+    def test_monthly_rate(self):
+        self.assertEqual(self.usd.with_context(date=self.jan_2).monthly_rate,
+                         1.2)
+        self.assertEqual(self.usd.with_context(date=self.feb_2).monthly_rate,
+                         1.4)

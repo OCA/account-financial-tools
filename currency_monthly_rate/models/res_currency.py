@@ -40,8 +40,7 @@ class ResCurrency(models.Model):
     def _get_conversion_rate(self, from_currency, to_currency):
         monthly = self.env.context.get('monthly_rate')
         if not monthly:
-            return super(ResCurrency, self)._get_conversion_rate(from_currency,
-                                                                 to_currency)
+            return super()._get_conversion_rate(from_currency, to_currency)
         from_currency = from_currency.with_env(self.env)
         to_currency = to_currency.with_env(self.env)
         return to_currency.monthly_rate / from_currency.monthly_rate
