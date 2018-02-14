@@ -62,7 +62,7 @@ class AccountMove(models.Model):
 
         for move_id in move_ids:
             job_uuid = validate_one_move.delay(session, name, move_id.id,
-                                               eta=eta)
+                                               eta=eta, priority=40)
             move_id.write({'post_job_uuid': job_uuid})
 
     def _cancel_jobs(self):
