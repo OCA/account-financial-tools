@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_lock_date_update
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
 "PO-Revision-Date: 2017-11-28 23:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/23907/fr_CH/)\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/"
+"teams/23907/fr_CH/)\n"
+"Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_lock_date_update
@@ -105,7 +106,7 @@ msgid "Update accounting lock dates"
 msgstr ""
 
 #. module: account_lock_date_update
-#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:44
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:42
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
