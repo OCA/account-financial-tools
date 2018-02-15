@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
+# Copyright 2017 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
 
 
 class AccountJournal(models.Model):
-
     _inherit = 'account.journal'
 
-    journal_lock_date = fields.Date(
-        string="Lock date",
+    lock_date = fields.Date(
+        string="Lock date", oldname="journal_lock_date",
         help="Moves cannot be entered nor modified in this "
              "journal prior to the lock date, unless the user "
              "has the Adviser role."

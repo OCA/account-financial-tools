@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="lock_account_journal_view" model="ir.ui.view">
+        <field name="name">Lock Journal Entries</field>
+        <field name="model">wizard.lock.account.journal</field>
+        <field name="arch" type="xml">
+            <form string="Lock Journal Entries">
+                <group>
+                    <field name="journal_ids"/>
+                    <field name="lock_date"/>
+                </group>
+                <footer>
+                    <button string="Lock" name="execute" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lock_account_journal" model="ir.actions.act_window">
+        <field name="name">Lock Journal Entries</field>
+        <field name="res_model">wizard.lock.account.journal</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="lock_account_journal_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        name="Lock Journal Entries"
+        parent="account.menu_finance_entries_actions"
+        action="action_lock_account_journal"
+        id="menu_lock_account_journal"
+    />
+</odoo>

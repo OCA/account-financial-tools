@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_form">
+        <field name="name">account.move.form.lock.date</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="post" position="after">
+                <button name="lock_move" states="draft" string="Lock Move" type="object" class="oe_highlight" groups="account.group_account_invoice" attrs="{'invisible':[('can_be_locked','=',True)]}"/>
+            </button>
+            <field name="state" position="before">
+                <field name="can_be_locked" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_move_tree">
+        <field name="name">account.move.tree.lock.date</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="locked"/>
+            </field>
+        </field>
+    </record>
+</odoo>
