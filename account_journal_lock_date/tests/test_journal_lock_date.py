@@ -133,7 +133,7 @@ class TestJournalLockDate(common.TransactionCase):
 
         moves = self.account_move_obj.search([])
         moves.post()
-        
+
         # lock journal
         vals = {
             'journal_ids': [(4, self.journal.id)],
@@ -141,7 +141,6 @@ class TestJournalLockDate(common.TransactionCase):
         }
         lock_wiz = self.env['wizard.lock.account.journal'].create(vals)
         lock_wiz.execute()
-
 
         # advisers can create moves before or on the lock date
         move = self.account_move_obj.create({
@@ -167,7 +166,6 @@ class TestJournalLockDate(common.TransactionCase):
         }
         lock_wiz = self.env['wizard.lock.account.journal'].create(vals)
         lock_wiz.execute()
-
 
         # neither advisers cannot create moves before or on the lock date
         with self.assertRaises(JournalLockDateError):
