@@ -10,6 +10,7 @@
     'author': 'ACSONE SA/NV,Camptocamp,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
     'data': [
+        'views/account_move_view.xml',
         'views/account_journal_view.xml',
         'wizards/wizard_account_lock_journal_view.xml',
     ],
