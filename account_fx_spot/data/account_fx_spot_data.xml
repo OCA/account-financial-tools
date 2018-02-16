@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="seq_account_fx_spot" model="ir.sequence">
+        <field name="name">Foreign Exchange Spot Transaction</field>
+        <field name="code">account.fx.spot</field>
+        <field name="prefix">FXST/%(range_year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="journal_account_fx_spot" model="account.journal">
+        <field name="name">FX Spot Transactions</field>
+        <field name="code">FXST</field>
+        <field name="type">general</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="decimal_fx_rate" model="decimal.precision" forcecreate="True">
+        <field name="name">Exchange Rate</field>
+        <field name="digits">4</field>
+    </record>
+
+</odoo>

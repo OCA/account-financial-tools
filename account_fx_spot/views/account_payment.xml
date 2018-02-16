@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">account.payment.form - account_fx_spot</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" name="button_fx_spot"
+                        string="FX Spot Trans." type="object"
+                        attrs="{'invisible':[('has_fx_spots','=',False)]}"
+                        icon="fa-bars"/>
+            </div>
+            <field name="partner_id" position="after">
+                <field name="has_fx_spots" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
