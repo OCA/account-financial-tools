@@ -9,6 +9,8 @@ from odoo.modules import get_module_resource
 from odoo.tests import common
 
 from ..exceptions import JournalLockDateError
+from ..exceptions import JournalPermanentLockDateError
+from ..exceptions import AccesRightsLockError
 
 
 class TestJournalLockDate(common.TransactionCase):
@@ -107,7 +109,7 @@ class TestJournalLockDate(common.TransactionCase):
         })
         move3.post()
         # Check update moves locked with date upper than lock date.
-        with self.assertRaises(JournalLockDateError):
+        with self.assertRaises(AccesRightsLockError):
             self.account_move_obj.create({
                 'date': tomorrow,
                 'journal_id': self.journal.id,
@@ -168,7 +170,7 @@ class TestJournalLockDate(common.TransactionCase):
         lock_wiz.execute()
 
         # neither advisers cannot create moves before or on the lock date
-        with self.assertRaises(JournalLockDateError):
+        with self.assertRaises(JournalPermanentLockDateError):
             self.account_move_obj.create({
                 'date': fields.Date.today(),
                 'journal_id': self.journal.id,

@@ -21,14 +21,17 @@ class WizardLockAccountJournal(models.TransientModel):
     permanent_lock = fields.Boolean('Permanent Lock')
 
     @api.multi
-    def _check_execute_allowed(self):
-        self.ensure_one()
-        obj_move = self.env['account.move']
+    def _check_execute_acces_rights(self):
         has_adviser_group = self.env.user.has_group(
             'account.group_account_manager')
         if not (has_adviser_group or self.env.uid == SUPERUSER_ID):
             raise JournalLockDateError(
                 _("You are not allowed to execute this action."))
+
+    @api.multi
+    def _check_execute_allowed(self):
+        self.ensure_one()
+        obj_move = self.env['account.move']
         fy_lock_date = self.company_id.fiscalyear_lock_date
         if fy_lock_date and self.lock_date < fy_lock_date:
             raise JournalLockDateError(
@@ -71,5 +74,6 @@ class WizardLockAccountJournal(models.TransientModel):
     @api.multi
     def execute(self):
         self.ensure_one()
+        self._check_execute_acces_rights()
         self._check_execute_allowed()
         self.lock_moves()

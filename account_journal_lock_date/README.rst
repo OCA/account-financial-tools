@@ -65,6 +65,11 @@ Contributors
 ------------
 
 * Stéphane Bidoul <stephane.bidoul@acsone.eu>
+* Benjamin Willig <benjamin.willig@acsone.eu>
+* Adrien Peiffer <adrien.peiffer@acsone.eu>
+* Vincent Renaville <vincent.renaville@camptocamp.com>
+* Akim Juillerat <akim.juillerat@camptocamp.com>
+* Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
 * Fekete Mihai <feketemihai@gmail.com>
 
 Maintainer

@@ -5,6 +5,8 @@
 from odoo import api, fields, models, _
 
 from ..exceptions import JournalLockDateError
+from ..exceptions import JournalPermanentLockDateError
+from ..exceptions import AccesRightsLockError
 
 
 class AccountMove(models.Model):
@@ -47,7 +49,7 @@ class AccountMove(models.Model):
                 lock_date = move.journal_id.lock_date
                 lock = move.journal_id.permanent_lock
                 if lock and lock_date and move.date <= lock_date:
-                    raise JournalLockDateError(
+                    raise JournalPermanentLockDateError(
                         _("The journal %s has been lock permanently "
                           "at date %s. Please update lock date without "
                           "permanency from the Lock Wizard.") %
@@ -57,7 +59,7 @@ class AccountMove(models.Model):
             lock_date = move.journal_id.lock_date
             lock = move.journal_id.permanent_lock
             if lock and lock_date and move.date <= lock_date:
-                raise JournalLockDateError(
+                raise JournalPermanentLockDateError(
                     _("The journal has been lock permanently "
                       "at date %s. Please update lock date without "
                       "permanency from the Lock Wizard.") % (lock_date, ))
@@ -67,7 +69,7 @@ class AccountMove(models.Model):
                       "inclusive of the journal lock date %s") %
                     (lock_date, ))
             if move.locked:
-                raise JournalLockDateError(
+                raise AccesRightsLockError(
                     _("The move %s has been locked. You need to have "
                       "'Adviser' role.") % move.name)
         return res
