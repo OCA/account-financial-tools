@@ -23,9 +23,13 @@ class AccountMove(models.Model):
             else:
                 fy_lock_date = move.company_id.fiscalyear_lock_date
                 journal_lock_date = move.journal_id.lock_date
-                lock_date = max(fy_lock_date or '0000-00-00',
-                                journal_lock_date or '0000-00-00')
-                move.can_be_locked = bool(move.date >= lock_date)
+                lock = move.journal_id.permanent_lock
+                if lock:
+                    move.can_be_locked = bool(move.date >= journal_lock_date)
+                else:
+                    lock_date = max(fy_lock_date or '0000-00-00',
+                                    journal_lock_date or '0000-00-00')
+                    move.can_be_locked = bool(move.date >= lock_date)
 
     @api.multi
     def lock_move(self):
@@ -39,9 +43,24 @@ class AccountMove(models.Model):
     def _check_lock_date(self):
         res = super(AccountMove, self)._check_lock_date()
         if self.env['account.journal']._can_bypass_journal_lock_date():
+            for move in self:
+                lock_date = move.journal_id.lock_date
+                lock = move.journal_id.permanent_lock
+                if lock and lock_date and move.date <= lock_date:
+                    raise JournalLockDateError(
+                        _("The journal %s has been lock permanently "
+                          "at date %s. Please update lock date without "
+                          "permanency from the Lock Wizard.") %
+                        (move.journal_id.name, lock_date, ))
             return res
         for move in self:
             lock_date = move.journal_id.lock_date
+            lock = move.journal_id.permanent_lock
+            if lock and lock_date and move.date <= lock_date:
+                raise JournalLockDateError(
+                    _("The journal has been lock permanently "
+                      "at date %s. Please update lock date without "
+                      "permanency from the Lock Wizard.") % (lock_date, ))
             if lock_date and move.date <= lock_date:
                 raise JournalLockDateError(
                     _("You cannot add/modify entries prior to and "

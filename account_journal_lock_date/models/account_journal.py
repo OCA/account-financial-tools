@@ -9,11 +9,12 @@ class AccountJournal(models.Model):
     _inherit = 'account.journal'
 
     lock_date = fields.Date(
-        string="Lock date", oldname="journal_lock_date",
+        string="Lock date", oldname="journal_lock_date", readonly=True,
         help="Moves cannot be entered nor modified in this "
              "journal prior to the lock date, unless the user "
              "has the Adviser role."
     )
+    permanent_lock = fields.Boolean('Permanent Lock', readonly=True)
 
     @api.model
     def _can_bypass_journal_lock_date(self):

@@ -18,6 +18,7 @@ class WizardLockAccountJournal(models.TransientModel):
         'account.journal', rel='wizard_lock_account_move_journal',
         string='Journals', required=True)
     lock_date = fields.Date(string='Lock Date', required=True)
+    permanent_lock = fields.Boolean('Permanent Lock')
 
     @api.multi
     def _check_execute_allowed(self):
@@ -62,7 +63,8 @@ class WizardLockAccountJournal(models.TransientModel):
              ('date', '>', self.lock_date)],
             order='date')
         to_unlock_moves.unlock_move()
-        self.journal_ids.write({'lock_date': self.lock_date})
+        self.journal_ids.write({'lock_date': self.lock_date,
+                                'permanent_lock': self.permanent_lock})
         # Write journals lock date
         return {'type': 'ir.actions.act_window_close'}
 

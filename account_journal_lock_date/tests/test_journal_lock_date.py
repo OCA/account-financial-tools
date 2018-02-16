@@ -124,18 +124,27 @@ class TestJournalLockDate(common.TransactionCase):
             })
 
     def test_journal_lock_date_adviser(self):
-        """ The journal lock date is ignored for Advisers """
+        """ The journal lock date for Advisers """
         self.env.user.sudo().write({
             'groups_id': [(4, self.ref('account.group_account_manager'))],
         })
         self.assertTrue(
             self.env.user.has_group('account.group_account_manager'))
 
+        moves = self.account_move_obj.search([])
+        moves.post()
+        
         # lock journal
-        self.journal.lock_date = fields.Date.today()
+        vals = {
+            'journal_ids': [(4, self.journal.id)],
+            'lock_date': fields.Date.today(),
+        }
+        lock_wiz = self.env['wizard.lock.account.journal'].create(vals)
+        lock_wiz.execute()
+
 
         # advisers can create moves before or on the lock date
-        self.account_move_obj.create({
+        move = self.account_move_obj.create({
             'date': fields.Date.today(),
             'journal_id': self.journal.id,
             'line_ids': [(0, 0, {
@@ -148,6 +157,33 @@ class TestJournalLockDate(common.TransactionCase):
                 'name': 'Debit line',
             })]
         })
+        move.post()
+
+        # lock journal permananet
+        vals = {
+            'journal_ids': [(4, self.journal.id)],
+            'lock_date': fields.Date.today(),
+            'permanent_lock': True,
+        }
+        lock_wiz = self.env['wizard.lock.account.journal'].create(vals)
+        lock_wiz.execute()
+
+
+        # neither advisers cannot create moves before or on the lock date
+        with self.assertRaises(JournalLockDateError):
+            self.account_move_obj.create({
+                'date': fields.Date.today(),
+                'journal_id': self.journal.id,
+                'line_ids': [(0, 0, {
+                    'account_id': self.account.id,
+                    'credit': 1000.0,
+                    'name': 'Credit line',
+                }), (0, 0, {
+                    'account_id': self.account2.id,
+                    'debit': 1000.0,
+                    'name': 'Debit line',
+                })]
+            })
 
     def test_locking(self):
         moves = self.account_move_obj.search([])

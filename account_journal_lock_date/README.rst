@@ -9,11 +9,14 @@ Account Journal Lock Date
 Lock each accounting journal or accounting move independently.
 
 In addition to the lock dates provided by standard Odoo, this module 
-provide a journal lock date.
+provide a journal lock date plus a permanent option.
 
-Note: the journal lock date is ignored for users that are part of
+Note: 
+* the journal lock date is ignored for users that are part of
 the Adviser group. This rule can be adapted by overriding method
 `_can_bypass_journal_lock_date` of `account.journal`.
+* if the journal is set at permanent lock, you can use the wizard to 
+overwrite the permanency option.
 
 Usage
 =====
@@ -21,11 +24,13 @@ Usage
 For locking account moves independently, you have a button available based
 on certain conditions: 
 * The move in not locked
-* The date of the move is bigger than journal lock date or company fiscalyear lock date
+* The journal is not permanent lock for the move date or the date of the move 
+is bigger than journal lock date or company fiscalyear lock date
 
 For locking account journals independently, you need to be an Adviser and go to:
 * Accounting -> Adviser -> Actions -> Lock Journal Entries
-* Change lock date, add journal that you want to lock and click on the Lock button
+* Change lock date, add journals that you want to lock, check/uncheck permanency 
+lock and click on the Lock button
 
 The wizard will mark all the moves before lock date as 'locked', and will unlock 
 the moves after the lock date. There are certain restiction in locking, like 
@@ -39,8 +44,6 @@ the moves after the lock date. There are certain restiction in locking, like
 Known issues / Roadmap
 ======================
 
-The account moves can be updates with an Adviser account. For permanent locking 
-use account_journal_permanent_lock_date.
 
 Bug Tracker
 ===========
