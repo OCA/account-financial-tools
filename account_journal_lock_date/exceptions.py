@@ -8,8 +8,10 @@ from odoo.exceptions import UserError
 class JournalLockDateError(UserError):
     pass
 
+
 class JournalPermanentLockDateError(UserError):
     pass
-    
+
+
 class AccesRightsLockError(UserError):
     pass
