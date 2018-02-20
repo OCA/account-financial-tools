@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_account_analytic_account_form" model="ir.ui.view">
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form" />
+            <field name="arch" type="xml">
+                <field name="manager_id" position="after">
+                    <field name="blocked" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
