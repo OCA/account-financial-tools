@@ -30,8 +30,11 @@ class AccountInvoice(models.Model):
         # Always test if it is required by context
         force_test = self.env.context.get('test_tax_required')
         skip_test = any((
-            # This addon fails when installing any l10n_* addon
-            any(key.startswith("l10n_") for key in config["init"]),
+            # It usually fails when installing other addons with demo data
+            self.env["ir.module.module"].search([
+                ("state", "in", ["to install", "to upgrade"]),
+                ("demo", "=", True),
+            ]),
             # Avoid breaking unaware addons' tests by default
             config["test_enable"],
         ))
