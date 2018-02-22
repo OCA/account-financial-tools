@@ -27,8 +27,14 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def invoice_validate(self):
-        if self.env.context.get('test_tax_required') or not (
-                config['test_enable'] or
-                config["init"].get("l10n_generic_coa")):
+        # Always test if it is required by context
+        force_test = self.env.context.get('test_tax_required')
+        skip_test = any((
+            # This addon fails when installing any l10n_* addon
+            any(key.startswith("l10n_") for key in config["init"]),
+            # Avoid breaking unaware addons' tests by default
+            config["test_enable"],
+        ))
+        if force_test or not skip_test:
             self._test_invoice_line_tax()
         return super(AccountInvoice, self).invoice_validate()
