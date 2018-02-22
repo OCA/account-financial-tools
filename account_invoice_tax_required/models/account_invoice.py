@@ -27,8 +27,8 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def invoice_validate(self):
-        if not (config['test_enable'] and
-                not self.env.context.get('test_tax_required')):
+        if self.env.context.get('test_tax_required') or not (
+                config['test_enable'] or
+                config["init"].get("l10n_generic_coa")):
             self._test_invoice_line_tax()
-        res = super(AccountInvoice, self).invoice_validate()
-        return res
+        return super(AccountInvoice, self).invoice_validate()
