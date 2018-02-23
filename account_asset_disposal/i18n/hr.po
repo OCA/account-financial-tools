@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:23+0000\n"
-"PO-Revision-Date: 2017-11-28 23:23+0000\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -26,19 +26,19 @@ msgstr "Stavka amortizacije"
 #. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_asset
 msgid "Asset/Revenue Recognition"
-msgstr ""
+msgstr "Priznavanje troškova"
 
 #. module: account_asset_disposal
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
 msgid "Disposal date"
-msgstr ""
+msgstr "Datum otpisa"
 
 #. module: account_asset_disposal
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_move_id
 msgid "Disposal move"
-msgstr ""
+msgstr "Temeljnica otpisa"
 
 #. module: account_asset_disposal
 #: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
 msgid "Undo disposal"
-msgstr ""
+msgstr "Vrati iz otpisa"

@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:23+0000\n"
-"PO-Revision-Date: 2017-11-28 23:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,6 +26,8 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+"%s\n"
+"%s"
 
 #. module: account_invoice_tax_required
 #: model:ir.model,name:account_invoice_tax_required.model_account_invoice
@@ -35,10 +38,10 @@ msgstr "Račun"
 #: code:addons/account_invoice_tax_required/models/account_invoice.py:17
 #, python-format
 msgid "Invoice has a line with product %s with no taxes"
-msgstr ""
+msgstr "Račun sadrži stavku sa proizvodom %s ali bez poreza"
 
 #. module: account_invoice_tax_required
 #: code:addons/account_invoice_tax_required/models/account_invoice.py:24
 #, python-format
 msgid "No Taxes Defined!"
-msgstr ""
+msgstr "Nema definiranih poreza!"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 11:46+0000\n"
-"PO-Revision-Date: 2018-01-25 11:46+0000\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
 "Last-Translator: Frank Schellenberg <opensource@schellenberg.nl>, 2017\n"
 "Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -1359,7 +1359,7 @@ msgstr ""
 "Waarschuwing: Deze actie niet kan wellicht niet ongedaan worden gemaakt."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:216
+#: code:addons/account_credit_control/models/credit_control_line.py:217
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "

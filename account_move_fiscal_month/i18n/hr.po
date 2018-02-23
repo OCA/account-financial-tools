@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,13 @@ msgstr ""
 #. module: account_move_fiscal_month
 #: model:ir.model,name:account_move_fiscal_month.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Stavka knjiženja"
 
 #. module: account_move_fiscal_month
 #: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_date_range_fm_id
 #: model:ir.model.fields,field_description:account_move_fiscal_month.field_account_move_line_date_range_fm_id
 msgid "Fiscal month"
-msgstr ""
+msgstr "Fiskalni mjesec"
 
 #. module: account_move_fiscal_month
 #: model:ir.model,name:account_move_fiscal_month.model_account_move_line

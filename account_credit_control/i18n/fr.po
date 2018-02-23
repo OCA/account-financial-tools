@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 11:46+0000\n"
-"PO-Revision-Date: 2018-01-25 11:46+0000\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -1278,7 +1278,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr "Attention: Cette opération ne peut pas être annulée"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:216
+#: code:addons/account_credit_control/models/credit_control_line.py:217
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "

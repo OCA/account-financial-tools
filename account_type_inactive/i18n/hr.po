@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
+"POT-Creation-Date: 2018-02-23 01:41+0000\n"
+"PO-Revision-Date: 2018-02-23 01:41+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -26,11 +26,11 @@ msgstr "Vrsta konta"
 #. module: account_type_inactive
 #: model:ir.model.fields,field_description:account_type_inactive.field_account_account_type_active
 msgid "Active"
-msgstr ""
+msgstr "Aktivan"
 
 #. module: account_type_inactive
 #: code:addons/account_type_inactive/models/account_type.py:23
 #, python-format
 msgid ""
 "You cannot inactive this account type as this type is used on %d accounts."
-msgstr ""
+msgstr "Nije moguće deaktivirati ovaj tip konta jer se koristi na %d konta."
