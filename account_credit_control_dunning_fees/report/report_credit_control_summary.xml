@@ -6,7 +6,7 @@
       <xpath expr="//table[@id='summary_table']/thead/tr/th[last()]" position="before">
         <th class="text-right">Fees</th>
       </xpath>
-      <xpath expr="//table[@id='summary_table']/tbody/tr/td[last()]" position="before">
+      <xpath expr="//span[@t-field='l.balance_due']/.." position="before">
         <td class="text-right">
           <span t-field="l.dunning_fees_amount"/>
         </td>

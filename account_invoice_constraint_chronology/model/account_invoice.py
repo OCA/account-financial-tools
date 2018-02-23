@@ -8,6 +8,7 @@ from openerp.tools.translate import _
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from datetime import datetime
 from openerp import exceptions
+from openerp.tools import config
 
 
 class AccountInvoice(models.Model):
@@ -16,6 +17,9 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_move_create(self):
         res = super(AccountInvoice, self).action_move_create()
+        if (config['test_enable'] and
+                not self.env.context.get('test_constraint_chronology')):
+            return res
         for inv in self:
             if inv.journal_id.check_chronology:
                 invoices = \

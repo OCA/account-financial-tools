@@ -23,8 +23,14 @@ env:
   matrix:
   - LINT_CHECK="1"
   - TRANSIFEX="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
-  - TESTS="1" ODOO_REPO="OCA/OCB
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="account_asset_management,account_asset_management_xls,account_journal_always_check_date,account_constraints"
+  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="account_asset_management,account_asset_management_xls,account_journal_always_check_date,account_constraints"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_asset_management,account_asset_management_xls"
+  - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_asset_management,account_asset_management_xls"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_journal_always_check_date"
+  - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_journal_always_check_date"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_constraints"
+  - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_constraints"
 
 virtualenv:
   system_site_packages: true

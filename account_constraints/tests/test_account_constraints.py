@@ -60,9 +60,6 @@ def create_simple_invoice(self):
 
 class TestAccountConstraints(common.TransactionCase):
 
-    def setUp(self):
-        super(TestAccountConstraints, self).setUp()
-
     def test_draft_move_invoice(self):
         invoice = create_simple_invoice(self)
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
