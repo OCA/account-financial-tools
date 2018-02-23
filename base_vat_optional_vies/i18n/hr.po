@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-02-23 01:42+0000\n"
+"PO-Revision-Date: 2018-02-23 01:42+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,4 +28,4 @@ msgstr "Partner"
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_partner_vies_passed
 #: model:ir.model.fields,field_description:base_vat_optional_vies.field_res_users_vies_passed
 msgid "VIES validation passed"
-msgstr ""
+msgstr "Prošao VIES provjeru"
