@@ -3,23 +3,23 @@
 # * account_constraints
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013,2015-2016
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2013
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2013
 # Antonio Trueba, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2015-2016
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 01:07+0000\n"
-"PO-Revision-Date: 2016-05-14 05:12+0000\n"
+"POT-Creation-Date: 2018-02-23 15:25+0000\n"
+"PO-Revision-Date: 2017-11-23 23:29+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -120,7 +120,7 @@ msgid ""
 msgstr "Ne morete določiti sekundarne valute, ki je enaka valuti družbe."
 
 #. module: account_constraints
-#: code:addons/account_constraints/model/account_move.py:35
+#: code:addons/account_constraints/model/account_move.py:39
 #, python-format
 msgid ""
 "You cannot create entries with date not in the fiscal year of the chosen "

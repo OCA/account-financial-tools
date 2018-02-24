@@ -4,25 +4,28 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Giacomo <giacomo.spettoli@gmail.com>, 2015
 # Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# llum.birque@gmail.com <llum.birque@gmail.com>, 2015
+# llum.birque@gmail.com <inactive+Quim@transifex.com>, 2015
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
+# Maxime Chambreuil <mchambreuil@ursainfosystems.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015,2017
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 23:26+0000\n"
-"PO-Revision-Date: 2017-02-09 16:10+0000\n"
+"POT-Creation-Date: 2018-02-23 15:25+0000\n"
+"PO-Revision-Date: 2017-09-22 09:51+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +40,7 @@ msgid "Check Chronology"
 msgstr "Chronologie prüfen"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:35
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:39
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
@@ -45,7 +48,7 @@ msgid ""
 msgstr "Chronologie-Fehler. Bitte geben Sie ältere, im Entwurf vorliegende Rechnungen vor dem %s frei und versuchen es dann nochmal."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "

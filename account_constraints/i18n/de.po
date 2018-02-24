@@ -12,13 +12,13 @@
 # Paolo Valier, 2016
 # Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2017
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-17 23:22+0000\n"
-"PO-Revision-Date: 2017-02-19 18:04+0000\n"
+"POT-Creation-Date: 2018-02-23 15:25+0000\n"
+"PO-Revision-Date: 2017-11-23 23:28+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgid ""
 msgstr "Sie können keine Zweitwährung angeben, wenn Sie mit der Hauswährung übereinstimmt."
 
 #. module: account_constraints
-#: code:addons/account_constraints/model/account_move.py:35
+#: code:addons/account_constraints/model/account_move.py:39
 #, python-format
 msgid ""
 "You cannot create entries with date not in the fiscal year of the chosen "

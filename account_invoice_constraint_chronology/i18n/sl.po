@@ -5,13 +5,13 @@
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2015
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-24 00:47+0000\n"
-"PO-Revision-Date: 2016-09-24 15:48+0000\n"
+"POT-Creation-Date: 2018-02-23 15:25+0000\n"
+"PO-Revision-Date: 2017-10-23 10:52+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid "Check Chronology"
 msgstr "Preveri kronologijo"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:35
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:39
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
@@ -34,7 +34,7 @@ msgid ""
 msgstr "Kronološka napaka. Starejše osnutke računov potrdite pred %s in poskusite ponovno."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "

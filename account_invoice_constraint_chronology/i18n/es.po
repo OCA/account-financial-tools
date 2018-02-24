@@ -6,14 +6,15 @@
 # Antonio Trueba, 2016
 # Antonio Trueba, 2016
 # Bole <bole@dajmi5.com>, 2015
+# Bole <bole@dajmi5.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Jesús Ventosinos Mayor <jesus@comunitea.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-17 23:22+0000\n"
-"PO-Revision-Date: 2017-02-23 10:15+0000\n"
+"POT-Creation-Date: 2018-02-23 15:25+0000\n"
+"PO-Revision-Date: 2017-12-22 09:49+0000\n"
 "Last-Translator: Jesús Ventosinos Mayor <jesus@comunitea.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +29,7 @@ msgid "Check Chronology"
 msgstr "Comprobar cronología"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:35
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:39
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
@@ -36,7 +37,7 @@ msgid ""
 msgstr "Error cronológico. Confirme las facturas en borrador anteriores a %s e intentelo de nuevo."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "

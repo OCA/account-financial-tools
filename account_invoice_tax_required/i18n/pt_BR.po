@@ -3,13 +3,26 @@
 # * account_invoice_tax_required
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alexsandro Haag <alex@hgsoft.com.br>, 2015
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2014
+# Gustavo Lepri <gustavolepri@gmail.com>, 2015
+# Hotellook, 2014
+# llum.birque@gmail.com <inactive+Quim@transifex.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-08-29 03:30+0000\n"
+"POT-Creation-Date: 2018-02-23 15:26+0000\n"
+"PO-Revision-Date: 2017-09-22 11:15+0000\n"
 "Last-Translator: Alexsandro Haag <alex@hgsoft.com.br>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -24,13 +37,13 @@ msgid "Invoice"
 msgstr "Fatura"
 
 #. module: account_invoice_tax_required
-#: code:addons/account_invoice_tax_required/models/account_invoice.py:29
+#: code:addons/account_invoice_tax_required/models/account_invoice.py:33
 #, python-format
 msgid "Invoice has a line with product %s with no taxes"
 msgstr "A Fatura com o produto %s está sem impostos"
 
 #. module: account_invoice_tax_required
-#: code:addons/account_invoice_tax_required/models/account_invoice.py:37
+#: code:addons/account_invoice_tax_required/models/account_invoice.py:41
 #, python-format
 msgid "No Taxes Defined!"
 msgstr "Sem Impostos Definidos!"
