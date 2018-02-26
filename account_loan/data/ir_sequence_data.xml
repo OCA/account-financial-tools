@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+    Copyright 2017 Eficent Business and IT Consulting Services, S.L.
+    Copyright 2017 Creu Blanca
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+-->
+
+<odoo>
+
+    <record id="seq_account_loan" model="ir.sequence">
+        <field name="name">Account loan sequence</field>
+        <field name="code">account.loan</field>
+        <field name="prefix">ACL</field>
+        <field name="padding">6</field>
+    </record>
+
+</odoo>
