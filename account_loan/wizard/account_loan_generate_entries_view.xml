@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+
+    <record id="account_loan_generate_wizard_form" model="ir.ui.view">
+        <field name="name">Pay amount</field>
+        <field name="model">account.loan.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate moves">
+                <group>
+                    <field name="date"/>
+                    <field name="loan_type"/>
+                </group>
+                <footer>
+                    <button name="run" string="Run"
+                            type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_loan_generate_wizard_action" model="ir.actions.act_window">
+        <field name="name">Generate moves</field>
+        <field name="res_model">account.loan.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Generate Loan Entries" action="account_loan_generate_wizard_action"
+            id="account_loan_generate_wizard_menu"
+            parent="account.menu_finance_entries_generate_entries" sequence="111" groups="base.group_no_one"/>
+</odoo>
