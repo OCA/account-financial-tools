@@ -27,8 +27,17 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def invoice_validate(self):
-        if not (config['test_enable'] and
-                not self.env.context.get('test_tax_required')):
+        # Always test if it is required by context
+        force_test = self.env.context.get('test_tax_required')
+        skip_test = any((
+            # It usually fails when installing other addons with demo data
+            self.env["ir.module.module"].search([
+                ("state", "in", ["to install", "to upgrade"]),
+                ("demo", "=", True),
+            ]),
+            # Avoid breaking unaware addons' tests by default
+            config["test_enable"],
+        ))
+        if force_test or not skip_test:
             self._test_invoice_line_tax()
-        res = super(AccountInvoice, self).invoice_validate()
-        return res
+        return super(AccountInvoice, self).invoice_validate()
