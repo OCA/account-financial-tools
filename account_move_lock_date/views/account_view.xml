@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <record id="view_date_range_tree" model="ir.ui.view">
+      <field name="name">date.range.tree</field>
+      <field name="model">date.range</field>
+      <field name="inherit_id" ref="date_range.view_date_range_tree"/>
+      <field name="arch" type="xml">
+	<field name="active" position="after">
+	  <field name="accounting_state" groups="account.group_account_user"/>
+	  <button name="action_change_state" icon="fa-rotate-left"
+		  confirm="Are you sure to change the state ?"
+		  type="object" groups="account.group_account_user"/>
+	</field>
+      </field>
+    </record>
+  </data>
+</odoo>
