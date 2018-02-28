@@ -27,7 +27,7 @@ class DateRange(models.Model):
             ('date_start', '<=', date),
             ('date_end', '>=', date)
         ]
-        return self.search(dmn)
+        return self.search(dmn, limit=1)
 
     @api.multi
     def closed(self):
@@ -50,7 +50,7 @@ class AccountMove(models.Model):
     @api.constrains('date')
     def _check_lock_date(self):
         for move in self:
-            MSG = _('Not allow to post with date %s, period is closed.') % (move.date)  # noqa
+            MSG = _('Is not allowed to post on date %s, period is closed.') % (move.date)  # noqa
             fy = self.env['date.range.type'].search([('fiscal_year', '=', True)])  # noqa
             acc_range = self.env['date.range'].get_range(fy.id, move.date)
             if acc_range.closed():

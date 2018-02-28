@@ -2,12 +2,12 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-==================
-Move locking Dates
-==================
+===================
+Locking Entry Dates
+===================
 
-This module extends the functionality of account entries to dont allow
-post moves out of current date range.
+This module extends the functionality of account entries posting
+Journal Entries out of current date range.
 
 
 Installation
@@ -15,7 +15,7 @@ Installation
 
 To install this module, you need to:
 
-#. Need a date range generate
+#. Generate a date range
 
 Configuration
 =============
