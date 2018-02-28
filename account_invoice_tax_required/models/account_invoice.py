@@ -31,7 +31,7 @@ class AccountInvoice(models.Model):
         force_test = self.env.context.get('test_tax_required')
         skip_test = any((
             # It usually fails when installing other addons with demo data
-            self.env["ir.module.module"].search([
+            self.sudo().env["ir.module.module"].search([
                 ("state", "in", ["to install", "to upgrade"]),
                 ("demo", "=", True),
             ]),
