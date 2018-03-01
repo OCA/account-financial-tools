@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2014-2016 Acsone (http://acsone.eu)
 # © 2016 Akretion (http://www.akretion.com/)
 # @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
