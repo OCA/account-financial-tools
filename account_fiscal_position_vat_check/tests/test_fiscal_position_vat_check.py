@@ -110,7 +110,8 @@ class TestFiscalPositionVatCheck(TransactionCase):
         # Create Invoice for B2C partner with B2B fiscal position
         self.partner_b2c.property_account_position_id = self.fp_b2b
         invoice = self.create_out_invoice(partner=self.partner_b2c)
-        with self.assertRaisesRegex(UserError, "But the Customer '.*' doesn't have a VAT number"):
+        err_msg = "But the Customer '.*' doesn't have a VAT number"
+        with self.assertRaisesRegex(UserError, err_msg):
             invoice.action_invoice_open()
 
         # Empty fiscal position should not return a warning

@@ -19,6 +19,7 @@ class ResPartner(models.Model):
                     'message': _(
                         "You have set the fiscal position '%s' "
                         "that require the customer to have a VAT number, "
-                        "but the VAT number is missing.") % fiscal_position.name
+                        "but the VAT number is missing."
+                    ) % fiscal_position.name
                 }
             }
