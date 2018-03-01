@@ -9,11 +9,6 @@ Currency Monthly Rate
 This module extends the functionality of base module to support monthly average
 of currency rates.
 
-Installation
-============
-
-Just install it.
-
 Usage
 =====
 
