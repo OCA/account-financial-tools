@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2014-2016 Acsone (http://acsone.eu)
 # © 2016 Akretion (http://www.akretion.com/)
 # @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
@@ -13,12 +12,14 @@ from odoo.exceptions import ValidationError
 class AccountAccountType(models.Model):
     _inherit = "account.account.type"
 
-    partner_policy = fields.Selection([
-        ('optional', 'Optional'),
-        ('always', 'Always'),
-        ('never', 'Never'),
-        ], string='Policy for Partner Field',
-        required=True, default='optional',
+    partner_policy = fields.Selection(
+        selection=[
+            ('optional', 'Optional'),
+            ('always', 'Always'),
+            ('never', 'Never')],
+        string='Policy for Partner Field',
+        required=True,
+        default='optional',
         help="Set the policy for the partner field : if you select "
              "'Optional', the accountant is free to put a partner "
              "on an account move line with this type of account ; "
