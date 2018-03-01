@@ -82,3 +82,14 @@ class TestCurrencyMonthlyRate(SavepointCase):
                          1.2)
         self.assertEqual(self.usd.with_context(date=self.feb_2).monthly_rate,
                          1.4)
+
+    def test_get_conversion_rate(self):
+        currency_model = self.env['res.currency']
+        eur_usd_jan_2 = currency_model.with_context(
+            date=self.jan_2)._get_conversion_rate(self.eur, self.usd)
+        self.assertEqual(eur_usd_jan_2, 1.15)
+
+        monthly_eur_usd_jan_2 = currency_model.with_context(
+            date=self.jan_2, monthly_rate=True)._get_conversion_rate(self.eur,
+                                                                     self.usd)
+        self.assertEqual(monthly_eur_usd_jan_2, 1.2)
