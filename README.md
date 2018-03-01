@@ -36,7 +36,7 @@ addon | version | summary
 [account_fiscal_year](account_fiscal_year/) | 10.0.1.0.0 | Account Fiscal Year
 [account_invoice_constraint_chronology](account_invoice_constraint_chronology/) | 10.0.1.0.0 | Account Invoice Constraint Chronology
 [account_invoice_currency](account_invoice_currency/) | 10.0.1.1.0 | Company currency in invoices
-[account_invoice_tax_required](account_invoice_tax_required/) | 10.0.1.0.0 | Tax required in invoice
+[account_invoice_tax_required](account_invoice_tax_required/) | 10.0.1.0.1 | Tax required in invoice
 [account_journal_lock_date](account_journal_lock_date/) | 10.0.1.0.0 | Lock each journal independently
 [account_lock_date_update](account_lock_date_update/) | 10.0.1.0.0 | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_batch_validate](account_move_batch_validate/) | 10.0.1.0.0 | Account Move Batch Validate
