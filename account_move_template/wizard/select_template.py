@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import models, fields, api
 import time
+from odoo import models, fields, api
 
 
 class WizardSelectMoveTemplate(models.TransientModel):
@@ -14,7 +13,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
     line_ids = fields.One2many(
         'wizard.select.move.template.line', 'template_id')
     state = fields.Selection(
-        [('template_selected', 'Template selected')], 'State')
+        [('template_selected', 'Template selected')])
 
     @api.multi
     def load_lines(self):
@@ -59,7 +58,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             move = self._create_move(name, journal.id, partner)
             moves = moves + move
             for line in self.template_id.template_line_ids.filtered(
-                    lambda j: j.journal_id == journal):
+                    lambda l, j=journal: l.journal_id == j):
                 lines.append((0, 0,
                               self._prepare_line(line, amounts, partner)))
             move.write({'line_ids': lines})
