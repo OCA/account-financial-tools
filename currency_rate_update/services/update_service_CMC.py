@@ -8,6 +8,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 import json
+from decimal import Decimal
 
 
 class CMCGetter(CurrencyGetterInterface):
@@ -43,7 +44,7 @@ class CMCGetter(CurrencyGetterInterface):
             val = json.loads(res)
             attr = ("price_" + main_currency).lower()
             if val:
-                self.updated_currency[curr] = val[0][attr]
+                self.updated_currency[curr] = Decimal(1.0) / Decimal(val[0][attr])
             else:
                 raise Exception('Could not update the %s' % (curr))
 
