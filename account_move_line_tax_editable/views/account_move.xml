@@ -3,7 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
 
     <record model="ir.ui.view" id="account_move_form_view">
         <field name="name">account.move.form (in account_move_line_tax_editable)</field>
@@ -19,5 +18,4 @@
         </field>
     </record>
 
-</data>
 </odoo>
