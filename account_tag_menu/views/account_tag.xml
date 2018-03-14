@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<menuitem id="account_tag_menu"
+    action="account.account_tag_action"
+    sequence="40"
+    parent="account.account_account_menu"/>
+
+</odoo>
