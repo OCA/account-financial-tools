@@ -1,4 +1,4 @@
-# Copyright  2018 Forest and Biomass Romania
+# Copyright 2018 Forest and Biomass Romania
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -11,5 +11,7 @@
     'website': 'https://github.com/OCA/account-financial-tools',
     'depends': ['account'],
     'data': ['views/account_tag.xml'],
+    'demo': ['demo/account_tax_tags.xml',
+             'demo/account_tax_data.xml'],
     'installable': True,
 }
