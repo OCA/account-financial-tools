@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="demo_tax_tag_vat" model="account.account.tag">
+        <field name="name">VAT</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatc" model="account.account.tag">
+        <field name="name">VAT Colected</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatc_5" model="account.account.tag">
+        <field name="name">VAT Colected 5%</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatc_9" model="account.account.tag">
+        <field name="name">VAT Colected 9%</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatc_19" model="account.account.tag">
+        <field name="name">VAT Colected 19%</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatccb" model="account.account.tag">
+        <field name="name">VAT Colected Cash-Basis</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatccb_5" model="account.account.tag">
+        <field name="name">VAT Colected Cash-Basis 5%</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatccb_9" model="account.account.tag">
+        <field name="name">VAT Colected Cash-Basis 9%</field>
+        <field name="applicability">taxes</field>
+    </record>
+    <record id="demo_tax_tag_vatccb_19" model="account.account.tag">
+        <field name="name">VAT Colected Cash-Basis 19%</field>
+        <field name="applicability">taxes</field>
+    </record>
+
+</odoo>
