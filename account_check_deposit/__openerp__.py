@@ -21,6 +21,7 @@
     'website': 'http://www.akretion.com/',
     'depends': [
         'account_accountant',
+        'account_full_reconcile',
     ],
     'data': [
         'views/account_deposit_view.xml',
