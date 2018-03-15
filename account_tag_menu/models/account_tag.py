@@ -12,6 +12,6 @@ class AccountAccountTag(models.Model):
         string='Accounts',
         help="Assigned accounts for custom reporting")
     tax_ids = fields.Many2many(
-        'account.account.tag', 'account_tax_account_tag',
+        'account.tax', 'account_tax_account_tag',
         string='Taxes',
         help="Assigned taxes for custom reporting")
