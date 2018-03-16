@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools",
     "category": "Accounting",
-    "depends": ["account"],
+    "depends": ["base", "account"],
     "data": [
         "data/account_fx_spot_data.xml",
         "security/ir.model.access.csv",
