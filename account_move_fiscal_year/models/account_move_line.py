@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,4 +9,5 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     date_range_fy_id = fields.Many2one(
-        related='move_id.date_range_fy_id', readonly=True)
+        related='move_id.date_range_fy_id', readonly=True,
+        store=True, copy=False)
