@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -12,7 +11,8 @@ class AccountMove(models.Model):
 
     date_range_fm_id = fields.Many2one(
         comodel_name='date.range', string="Fiscal month",
-        compute='_compute_date_range_fm', search='_search_date_range_fm')
+        compute='_compute_date_range_fm', search='_search_date_range_fm',
+    )
 
     @api.multi
     @api.depends('date', 'company_id')
