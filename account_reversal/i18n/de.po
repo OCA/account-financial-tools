@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-22 00:38+0000\n"
-"PO-Revision-Date: 2017-08-22 00:38+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2016\n"
+"POT-Creation-Date: 2018-03-03 00:30+0000\n"
+"PO-Revision-Date: 2018-03-03 00:30+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +161,7 @@ msgid "Reversal Date"
 msgstr "Umkehrdatum"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3803
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3807
 msgid "Reversal Entry"
 msgstr "Umkehrbuchung"
 
