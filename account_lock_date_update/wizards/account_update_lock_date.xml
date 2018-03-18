@@ -9,7 +9,7 @@
         <field name="model">account.update.lock_date</field>
         <field name="arch" type="xml">
             <form>
-                <group>
+                <group name="main">
                     <field name="company_id" invisible="1"/>
                     <field name="period_lock_date"/>
                     <field name="fiscalyear_lock_date"/>

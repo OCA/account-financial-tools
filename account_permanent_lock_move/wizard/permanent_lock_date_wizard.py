@@ -8,9 +8,12 @@ from odoo.exceptions import UserError
 class PermanentLockDateWizard(models.TransientModel):
     _name = 'permanent.lock.date.wizard'
 
-    lock_date = fields.Date(string="Lock Date")
+    lock_date = fields.Date(string="New Lock Date")
     company_id = fields.Many2one(comodel_name='res.company',
                                  string='Company')
+    current_lock_date = fields.Date(
+        related='company_id.permanent_lock_date', readonly=True,
+        string='Current Lock Date')
 
     @api.multi
     def confirm_date(self):
