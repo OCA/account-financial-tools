@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="view_account_fx_spot_tree" model="ir.ui.view">
+        <field name="name">account.fx.spot.tree</field>
+        <field name="model">account.fx.spot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="amount_out"/>
+                <field name="out_currency_id" invisible="1"/>
+                <field name="rate"/>
+                <field name="amount_in"/>
+                <field name="in_currency_id" invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_fx_spot_form" model="ir.ui.view">
+        <field name="name">account.fx.spot.form</field>
+        <field name="model">account.fx.spot</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm"
+                            type="object" states="draft"
+                            string="Confirm" class="oe_highlight" />
+                    <button name="%(action_account_payment_from_fx_spot)d"
+                            id="account_fx_spot_payment_btn" type="action"
+                            states="open" string="Register Payment"
+                            groups="account.group_account_invoice"
+                            class="oe_highlight"/>
+                    <button name="action_cancel" type="object"
+                            string="Cancel" states="open"/>
+                    <button name="action_draft" states="cancel"
+                            string="Reset to Draft" type="object"
+                            groups="account.group_account_invoice"/>
+                    <field name="state" widget="statusbar"
+                    statusbar_visible="draft,open,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                          <button name="action_view_payments"
+                                  type="object" class="oe_stat_button"
+                                  icon="fa-credit-card">
+                              <field name="payments_count"
+                                     widget="statinfo"
+                                     string="Payments"/>
+                          </button>
+                    </div>
+                    <div class="oe_title">
+                        <label string="FX Spot Transaction"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+                    <group name="top">
+                        <group name="main_info">
+                            <field name="partner_id"/>
+                            <field name="journal_id"/>
+                            <field name="date_transaction"/>
+                        </group>
+                        <group name="other_info">
+                            <field name="move_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="reconciled"/>
+                            <field name="comment"/>
+                        </group>
+                    </group>
+                    <group name="transaction" col="3">
+                        <group name="out" string="Outgoing">
+                            <field name="amount_out"/>
+                            <field name="out_currency_id"/>
+                            <field name="residual_out"/>
+                        </group>
+                        <group name="rate" string="Spot Exchange Rate">
+                            <field name="rate" nolabel="1"/>
+                        </group>
+                        <group name="in" string="Incoming">
+                            <field name="amount_in"/>
+                            <field name="in_currency_id"/>
+                            <field name="residual_in"/>
+                        </group>
+                    </group>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_fx_spot_search" model="ir.ui.view">
+        <field name="name">account.fx.spot.search</field>
+        <field name="model">account.fx.spot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id" operator="child_of"/>
+                <field name="out_currency_id"/>
+                <field name="in_currency_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <separator/>
+                <filter name="to_pay" string="Unpaid (outgoing)" domain="[('residual_out','>',0.0)]"/>
+                <filter name="to_get_paid" string="Unpaid (incoming)" domain="[('residual_in','>',0.0)]"/>
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="open" string="Open" domain="[('state','=','open')]"/>
+                <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_partner_id" string="Partner"
+                            context="{'group_by':'commercial_partner_id'}"/> <!--TODO: FIX-->
+                    <filter name="status" string="Status"
+                            context="{'group_by':'state'}"/>
+                    <separator/>
+                    <filter string="Transaction Date"
+                            context="{'group_by':'date_transaction'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_account_fx_spot">
+        <field name="name">FX Spot Transaction</field>
+        <field name="res_model">account.fx.spot</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Foreign Exchange"
+              parent="account.menu_finance"
+              id="menu_account_fx"
+              groups="base.group_multi_currency"
+              sequence="4"/>
+
+    <menuitem parent="menu_account_fx"
+              id="menu_account_fx_spot"
+              action="action_account_fx_spot"/>
+
+</odoo>
