@@ -4,6 +4,8 @@
 from odoo.exceptions import UserError
 from odoo.fields import Date
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
+from psycopg2 import IntegrityError
 
 
 class TestAccountFiscalMonth(TransactionCase):
@@ -45,9 +47,8 @@ class TestAccountFiscalMonth(TransactionCase):
         })
 
     def test_00_delete_type(self):
-        with self.assertRaises(Exception):
-            with self.env.cr.savepoint():
-                self.date_range_type.unlink()
+        with self.assertRaises(IntegrityError), mute_logger('odoo.sql_db'):
+            self.date_range_type.unlink()
 
     def test_01_delete_type_fiscal_month(self):
         with self.assertRaises(UserError):
