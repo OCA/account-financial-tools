@@ -4,14 +4,14 @@
 
 from datetime import datetime
 
-from .currency_getter_interface_hr import CurrencyGetterInterfaceHR
+from .currency_getter_interface import CurrencyGetterInterface
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 import logging
 _logger = logging.getLogger(__name__)
 
 
-class HR_HNBGetter(CurrencyGetterInterfaceHR):
+class HrHnbGetter(CurrencyGetterInterface):
     """Implementation of Currency_getter_factory interface for HR HNB service"""
 
     code = 'HR_HNB'
@@ -43,8 +43,6 @@ class HR_HNBGetter(CurrencyGetterInterfaceHR):
         for line in rawfile.splitlines():
             line_number += 1
             if line_number == 1:
-                file_date = datetime.strptime(line[11:19], '%d%m%Y')
-                #self.check_rate_date(file_date, max_delta_days)
                 continue
             line = line.split()
             if len(line) == 4:
