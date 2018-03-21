@@ -39,6 +39,8 @@ The module is able to use the following sources:
 
 8. Joint Stock Commercial Bank for Foreign Trade of Vietnam - Vietcombank
 
+9. National Bank of Croatia - HNB (Hrvatska narodna banka)
+
 
 Configuration
 =============
@@ -108,6 +110,7 @@ Contributors
 * Daniel Dico <ddico@oerp.ca> (BOC)
 * Dmytro Katyukha <firemage.dima@gmail.com>
 * Lam Thai Binh <binh.lt@komit-consulting.com> (VCB)
+* Davor Bojkić <bole@dajmi5.com>
 
 Maintainer
 ----------
