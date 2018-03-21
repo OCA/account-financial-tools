@@ -76,7 +76,7 @@ class CurrencyRateUpdateService(models.Model):
         res = [(x.code, x.name) for x in CurrencyGetterType.getters.values()]
         return res
 
-    # List of webservicies the value sould be a class name
+    # List of webservicies the value should be a class name
     service = fields.Selection(
         _selection_service,
         string="Webservice to use",

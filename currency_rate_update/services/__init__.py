@@ -7,3 +7,4 @@ from . import update_service_PL_NBP
 from . import update_service_MX_BdM
 from . import update_service_RO_BNR
 from . import update_service_VN_VCB
+from . import update_service_HR_HNB
