@@ -20,22 +20,13 @@ class HrHnbGetter(CurrencyGetterInterface):
         "AUD", "CAD", "CHF", "CZK", "DKK", "EUR", "GBP", "HUF", "JPY", "NOK",
         "PLN", "SEK", "USD"]
 
-    def get_updated_currency(self, currency_array, main_currency,
-                             max_delta_days, date_str=False):
-        """implementation of abstract method of curreny_getter_interface
-           date_str added in case i want to fetch rates in past.
-           this service has all the rates in past available so i can use it
-        """
+    def get_updated_currency(self, currency_array, main_currency, max_delta_days):
 
         # we do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
         rate_date = self.rate_date or datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)
-        if not date_str:
-            date_str = datetime.strftime(datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT), '%d%m%y')
-        else:
-            date_str = datetime.strftime(datetime.strptime(date_str, DEFAULT_SERVER_DATE_FORMAT), '%d%m%y')
-
+        date_str = datetime.strftime(datetime.strptime(rate_date, DEFAULT_SERVER_DATE_FORMAT), '%d%m%y')
         rawfile = self.get_url('http://www.hnb.hr/tecajn/f%s.dat' % date_str)
 
         curr_rates = {}
