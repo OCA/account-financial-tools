@@ -75,7 +75,8 @@ class test_account_reversal(common.TransactionCase):
                 'account_id': account2.id,
                 'company_id': company_id,
                 'partner_id': self.ref('base.res_partner_1')
-                if with_partner else False
+                if with_partner else False,
+                'tax_amount': -amount,
             }
         )
         return move_line_id.move_id
@@ -110,6 +111,8 @@ class test_account_reversal(common.TransactionCase):
                              x.account_id == account1 and 'aaaa' or 'bbbb')
              for x in reversed_moves.line_id])
         self.assertEqual(movestr_reversed, '0.00100.00bbbb100.000.00aaaa')
+        self.assertEqual(
+            reversed_moves.line_id.filtered('credit').tax_amount, 100)
 
     def test_reverse_closed_period(self):
         move_period = self.env.ref('account.period_0')

@@ -114,6 +114,7 @@ class account_move(models.Model):
                 {'debit': rev_move_line.credit,
                  'credit': rev_move_line.debit,
                  'amount_currency': rev_move_line.amount_currency * -1,
+                 'tax_amount': rev_move_line.tax_amount * -1,
                  'name': rev_ml_name},
                 check=True,
                 update_check=True)
