@@ -63,11 +63,16 @@ class TestAccountReversal(TransactionCase):
             ':SALE_' or ':CUSTOMER_')
             for x in move.line_ids.sorted(key=lambda r: r.account_id.id)])
 
-    def test_reverse(self):
+    def test_reverse_posted_reconcile(self):
         move = self._create_move()
         self.assertEqual(
             self._move_str(move), '0.00100.00:SALE_100.000.00:CUSTOMER_')
-        rev = move.create_reversals()
+        rev = move.create_reversals(post=True, reconcile=True)
         self.assertEqual(len(rev), 1)
         self.assertEqual(
             self._move_str(rev), '100.000.00:SALE_0.00100.00:CUSTOMER_')
+        reconciled_line = move.line_ids.filtered(
+            lambda l: l.account_id.reconcile)
+        self.assertEqual(
+            'posted', rev.state)
+        self.assertTrue(reconciled_line.full_reconcile_id)
