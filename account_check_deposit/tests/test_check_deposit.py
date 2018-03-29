@@ -24,9 +24,8 @@ class TestPayment(AccountingTestCase):
         self.check_deposit_model = self.env['account.check.deposit']
 
         self.partner_agrolait = self.env.ref("base.res_partner_2")
-        self.currency_eur_id = self.env.ref("base.EUR").id
         self.main_company = self.env.ref('base.main_company')
-        self.main_company.write({'currency_id': self.currency_eur_id})
+        self.currency_id = self.main_company.currency_id.id
         self.product = self.env.ref("product.product_product_4")
         self.payment_method_manual_in = self.env.ref(
             "account.account_payment_method_manual_in")
@@ -142,7 +141,7 @@ class TestPayment(AccountingTestCase):
             'journal_id': self.bank_journal.id,
             'partner_bank_id': self.partner_bank_id.id,
             'deposit_date': time.strftime('%Y-%m-%d'),
-            'currency_id': self.currency_eur_id,
+            'currency_id': self.currency_id,
         })
         for move_line in move_lines:
             move_line.check_deposit_id = check_deposit
@@ -153,9 +152,9 @@ class TestPayment(AccountingTestCase):
         """ Create a payment for on invoice by check,
          post it and create check deposit"""
         inv_1 = self.create_invoice(
-            amount=100, currency_id=self.currency_eur_id)
+            amount=100, currency_id=self.currency_id)
         inv_2 = self.create_invoice(
-            amount=200, currency_id=self.currency_eur_id)
+            amount=200, currency_id=self.currency_id)
 
         ctx = {
             'active_model': 'account.invoice',
