@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="credit_control_company_form" model="ir.ui.view">
+        <field name="name">credit.control.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="groups_id" eval="[(4,ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="credit_policy_id" widget="selection"/>
+                <field name="credit_control_tolerance"/>
+            </field>
+        </field>
+    </record>
+</odoo>

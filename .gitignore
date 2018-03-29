@@ -54,3 +54,6 @@ docs/_build/
 # Backup files
 *~
 *.swp
+
+# Vscode
+.vscode

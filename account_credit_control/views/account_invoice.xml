@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <act_window
+            id="act_account_credit_relation_relation"
+            name="Credit Lines"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+            domain="[('account_id', '=', active_id)]"
+            res_model="credit.control.line"
+            src_model="account.account"/>
+
+    <record id="invoice_followup_form_view" model="ir.ui.view">
+        <field name="name">invoice.followup.form.view</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="groups_id" eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user')), (4, ref('account_credit_control.group_account_credit_control_info'))]"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Credit Control">
+                    <group>
+                        <field name="credit_policy_id"
+                               string="Manual Credit Control Policy"
+                               attrs="{'invisible': [('credit_policy_id', '=', False)]}"/>
+                    </group>
+                    <separator string="Issued Lines" colspan="4"/>
+                    <field name="credit_control_line_ids" colspan="4" nolabel="1">
+                        <tree string="Credit Control Lines">
+                            <field name="date"/>
+                            <field name="level"/>
+                            <field name="state"/>
+                            <field name="channel"/>
+                            <field name="balance_due"/>
+                            <field name="policy_level_id"/>
+                            <field name="policy_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="credit_control_policy_form" model="ir.ui.view">
+        <field name="name">credit.control.policy.form</field>
+        <field name="model">credit.control.policy</field>
+        <field name="arch" type="xml">
+            <form string="Credit control policy">
+                <group>
+                    <field name="name"/>
+                    <field name="do_nothing"/>
+                    <field name="company_id"/>
+                    <field name="active"/>
+                </group>
+                <notebook colspan="4">
+                    <page string="Policy levels">
+                        <field name="level_ids" nolabel="1" colspan="4">
+                            <tree string="Credit control policy Level">
+                                <field name="name"/>
+                                <field name="level"/>
+                                <field name="channel"/>
+                                <field name="delay_days"/>
+                                <field name="computation_mode"/>
+                                <field name="email_template_id"/>
+                            </tree>
+                            <form string="Policy level">
+                                <field name="name"/>
+                                <notebook colspan="4">
+                                    <page string="Delay Setting">
+                                        <group>
+                                            <field name="level"/>
+                                            <field name="channel"/>
+                                            <field name="delay_days"/>
+                                            <field name="computation_mode"/>
+                                        </group>
+                                    </page>
+                                    <page string="Mail and reporting">
+                                        <group>
+                                            <field name="email_template_id"/>
+                                            <newline/>
+                                            <field name="custom_text"
+                                                   colspan="4"/>
+                                            <newline/>
+                                            <field name="custom_text_after_details"
+                                                   colspan="4"/>
+                                            <newline/>
+                                            <field name="custom_mail_text"
+                                                   colspan="4"/>
+                                        </group>
+                                    </page>
+                                </notebook>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Accounts">
+                        <field name="account_ids" nolabel="1"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="credit_control_policy_tree" model="ir.ui.view">
+        <field name="name">credit.control.policy.tree</field>
+        <field name="model">credit.control.policy</field>
+        <field name="arch" type="xml">
+            <tree string="Credit control policy">
+                <field name="name"/>
+                <field name="do_nothing"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem
+            name="Credit Control"
+            parent="account.menu_finance_configuration"
+            id="base_credit_control_configuration_menu"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+
+    <record model="ir.actions.act_window"
+            id="credit_policy_configuration_action">
+        <field name="name">Credit Control Policies</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">credit.control.policy</field>
+        <field name="domain"></field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="credit_control_policy_tree"/>
+    </record>
+
+    <menuitem
+            name="Credit Control Policies"
+            parent="base_credit_control_configuration_menu"
+            action="credit_policy_configuration_action"
+            id="credit_policy_configuration_action_menu"/>
+
+    <record id="credit_mangement_policy_level_form" model="ir.ui.view">
+        <field name="name">credit.mangement.policy.level.form</field>
+        <field name="model">credit.control.policy.level</field>
+        <field name="arch" type="xml">
+            <form string="Policy level">
+                <field name="name"/>
+                <notebook colspan="4">
+                    <page string="Delay Setting">
+                        <group>
+                            <field name="level"/>
+                            <field name="channel"/>
+                            <field name="delay_days"/>
+                            <field name="computation_mode"/>
+                        </group>
+                    </page>
+                    <page string="Mail and reporting">
+                        <group>
+                            <field name="email_template_id"/>
+                            <field name="custom_text"/>
+                        </group>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="credit_control_policy_level_tree" model="ir.ui.view">
+        <field name="name">credit.control.policy.level.tree</field>
+        <field name="model">credit.control.policy.level</field>
+        <field name="arch" type="xml">
+            <tree string="Credit control policy level">
+                <field name="name"/>
+                <field name="level"/>
+                <field name="channel"/>
+                <field name="delay_days"/>
+                <field name="computation_mode"/>
+                <field name="email_template_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

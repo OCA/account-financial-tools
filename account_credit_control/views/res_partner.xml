@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_followup_form_view" model="ir.ui.view">
+        <field name="name">partner.credit_control.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="groups_id" eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='accounting_entries']" position="after">
+                <group string="Follow-up" name="followup">
+                    <field name="credit_policy_id" widget="selection"/>
+                    <field name="payment_responsible_id"/>
+                    <field name="payment_note"/>
+                    <field name="payment_next_action"/>
+                    <field name="payment_next_action_date"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <act_window
+            id="act_partner_credit_relation_relation"
+            name="Credit Lines"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+            domain="[('partner_id', '=',  active_id)]"
+            res_model="credit.control.line"
+            src_model="res.partner"/>
+    <record id="customer_followup_tree" model="ir.ui.view">
+        <field name="name">res.partner.followup.inherit.tree</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="20"/>
+        <field name="groups_id" eval="[(4, ref('account_credit_control.group_account_credit_control_manager')), (4, ref('account_credit_control.group_account_credit_control_user'))]"/>
+        <field name="arch" type="xml">
+            <tree string="Customer Followup" create="false" delete="false">
+                <field name="display_name"/>
+                <field name="payment_next_action_date"/>
+                <field name="payment_next_action"/>
+                <field name="payment_responsible_id"/>
+                <field name="payment_note"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_customer_followup" model="ir.actions.act_window">
+        <field name="name">Manual Follow-Ups</field>
+        <field name="view_id" ref="customer_followup_tree"/>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('manual_followup', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+    <record id="action_view_customer_followup_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="customer_followup_tree"/>
+        <field name="act_window_id" ref="action_customer_followup"/>
+    </record>
+    <menuitem
+            name="Do Manual Follow-Ups"
+            parent="base_credit_control_menu"
+            action="action_customer_followup"
+            sequence="30"
+            id="credit_control_manual_action_menu"/>
+
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="credit_control_run_tree" model="ir.ui.view">
+        <field name="name">credit.control.run.tree</field>
+        <field name="model">credit.control.run</field>
+        <field name="arch" type="xml">
+            <tree string="Credit control run">
+                <field name="date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="credit_control_run_form" model="ir.ui.view">
+        <field name="name">credit.control.run.form</field>
+        <field name="model">credit.control.run</field>
+        <field name="arch" type="xml">
+            <form string="Credit control run">
+                <header>
+                    <button name="generate_credit_lines"
+                            string="Compute Credit Control Lines"
+                            class="oe_highlight"
+                            type="object" icon="fa-cogs"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="open_credit_lines"
+                            string="Open Credit Control Lines"
+                            type="object"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                    </group>
+                    <notebook>
+                        <page string="Policies">
+                            <field name="policy_ids" colspan="4" nolabel="1"/>
+                            <separator string="Report"
+                                       attrs="{'invisible': [('report', '=', False)]}"/>
+                            <field name="report" colspan="4" nolabel="1"
+                                   attrs="{'invisible': [('report', '=', False)]}"/>
+                        </page>
+                        <page string="Manual Lines" groups="base.group_no_one">
+                            <field name="manual_ids" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="credit_control_run">
+        <field name="name">Credit Control Run</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">credit.control.run</field>
+        <field name="domain"></field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="credit_control_run_tree"/>
+    </record>
+
+
+    <menuitem
+            name="Credit Control Run"
+            parent="base_credit_control_menu"
+            action="credit_control_run"
+            sequence="10"
+            id="credit_control_run_menu"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"/>
+
+</odoo>

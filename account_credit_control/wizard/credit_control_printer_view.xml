@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="credit_line_printer_form" model="ir.ui.view">
+        <field name="name">credit.line.printer.form</field>
+        <field name="model">credit.control.printer</field>
+        <field name="arch" type="xml">
+            <form string="Lines report">
+                <separator string="Print the selected lines" colspan="4"/>
+                <newline/>
+                <group>
+                    <field name="mark_as_sent"
+                           colspan="4"/>
+                </group>
+                <newline/>
+                <notebook>
+                    <page string="Lines">
+                        <field name="line_ids" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button class="oe_highlight" name="print_lines"
+                            string="Print" type="object"/>
+                    <button class="oe_link" special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- for menu -->
+    <act_window name="Print Lines"
+                res_model="credit.control.printer"
+                src_model="credit.control.line"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"
+                id="open_credit_line_printer_wizard_menu_action"/>
+
+    <record id="open_credit_line_printer_wizard" model="ir.actions.act_window">
+        <field name="name">Print Lines</field>
+        <field name="res_model">credit.control.printer</field>
+        <field name="src_model">credit.control.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="credit_line_printer_form"/>
+        <field name="target">new</field>
+        <field name="help">Print selected lines</field>
+    </record>
+
+</odoo>
