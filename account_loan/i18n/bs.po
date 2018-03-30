@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-22 03:41+0000\n"
-"PO-Revision-Date: 2018-03-22 03:41+0000\n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2018-03-30 02:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Bosnian (https://www.transifex.com/oca/teams/23907/bs/)\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +134,7 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_company_id
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_partner_id
@@ -199,7 +199,7 @@ msgstr "Prikaži naziv"
 #. module: account_loan
 #: selection:account.loan,state:0
 msgid "Draft"
-msgstr ""
+msgstr "U pripremi"
 
 #. module: account_loan
 #: selection:account.loan,rate_type:0
@@ -460,7 +460,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_name
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: account_loan
 #: selection:account.loan,rate_type:0

@@ -3,15 +3,15 @@
 # * account_move_fiscal_year
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2018
+# Ricardo Gross <rwgross@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-22 23:20+0000\n"
-"PO-Revision-Date: 2017-12-22 23:20+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2018-03-30 02:39+0000\n"
+"Last-Translator: Ricardo Gross <rwgross@gmail.com>, 2018\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "Kontobuchung"
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_date_range_fy_id
 #: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line_date_range_fy_id
 msgid "Fiscal year"
-msgstr ""
+msgstr "Steuerjahr"
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line

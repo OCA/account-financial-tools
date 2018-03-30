@@ -3,14 +3,14 @@
 # * account_credit_control
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 23:23+0000\n"
-"PO-Revision-Date: 2017-11-28 23:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2018-03-30 02:39+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Hungarian (https://www.transifex.com/oca/teams/23907/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +83,7 @@ msgid "A credit control line"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:78
+#: code:addons/account_credit_control/models/credit_control_run.py:73
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr ""
@@ -94,14 +94,14 @@ msgid "A credit control policy level"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:144
+#: code:addons/account_credit_control/models/credit_control_run.py:139
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:71
+#: code:addons/account_credit_control/models/credit_control_run.py:66
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr ""
@@ -135,7 +135,7 @@ msgid "An error has occured during the sending of the email."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:296
+#: code:addons/account_credit_control/models/credit_control_policy.py:292
 #, python-format
 msgid "Can not get function for computation mode: %s is not implemented"
 msgstr ""
@@ -206,6 +206,11 @@ msgid "Compute Mode"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_contact_address
 msgid "Contact Address"
 msgstr ""
@@ -258,6 +263,7 @@ msgstr "Létrehozás dátuma"
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
 msgstr ""
 
@@ -282,6 +288,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_account_invoice_credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company_credit_policy_id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings_credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_policy_id
 msgid "Credit Control Policy"
@@ -294,12 +301,13 @@ msgid "Credit Control Run"
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.actions.report.xml,name:account_credit_control.credit_control_summary
+#: model:ir.actions.report,name:account_credit_control.credit_control_summary
 msgid "Credit Control Summary"
 msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_company_credit_control_tolerance
+#: model:ir.model.fields,field_description:account_credit_control.field_res_config_settings_credit_control_tolerance
 msgid "Credit Control Tolerance"
 msgstr ""
 
@@ -318,6 +326,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_account_invoice_credit_control_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_credit_control_line_ids
 msgid "Credit Lines"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Credit Tolerance Limit"
 msgstr ""
 
 #. module: account_credit_control
@@ -379,8 +392,34 @@ msgid "Custom Message after details"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.customer_followup_tree
+msgid "Customer Followup"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_note
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_note
+msgid "Customer Payment Promise"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Default Credit Tolerance"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Default Policy"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Default credit control policy to partners"
 msgstr ""
 
 #. module: account_credit_control
@@ -413,8 +452,13 @@ msgid "Display Name"
 msgstr "Név megjelenítése"
 
 #. module: account_credit_control
+#: model:ir.ui.menu,name:account_credit_control.credit_control_manual_action_menu
+msgid "Do Manual Follow-Ups"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
-msgid "Do nothing"
+msgid "Do Nothing"
 msgstr ""
 
 #. module: account_credit_control
@@ -497,6 +541,17 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Filters"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
+msgid "Follow-up"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_responsible_id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_responsible_id
+msgid "Follow-up Responsible"
 msgstr ""
 
 #. module: account_credit_control
@@ -680,6 +735,18 @@ msgid "Manual Credit Control Policy"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.action_customer_followup
+msgid "Manual Follow-Ups"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_manual_followup
+msgid "Manual Followup"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Manual Lines"
 msgstr ""
@@ -690,6 +757,11 @@ msgid "Manual change"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Manual followup"
+msgstr ""
+
+#. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
 #: model:credit.control.policy.level,custom_text:account_credit_control.no_follow_1
 msgid "Manual no follow"
@@ -697,7 +769,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manually_overridden
-msgid "Manually overridden"
+msgid "Manually Overridden"
 msgstr ""
 
 #. module: account_credit_control
@@ -757,9 +829,21 @@ msgid "New level to apply"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_emailer.py:47
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:59
-#: code:addons/account_credit_control/wizard/credit_control_printer.py:45
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action
+msgid "Next Action"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action_date
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action_date
+msgid "Next Action Date"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/wizard/credit_control_emailer.py:46
+#: code:addons/account_credit_control/wizard/credit_control_marker.py:58
+#: code:addons/account_credit_control/wizard/credit_control_printer.py:44
 #, python-format
 msgid "No credit control lines selected."
 msgstr ""
@@ -775,7 +859,7 @@ msgid "No follow  policy"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_marker.py:63
+#: code:addons/account_credit_control/wizard/credit_control_marker.py:62
 #, python-format
 msgid "No lines will be changed. All the selected lines are already done."
 msgstr ""
@@ -793,6 +877,14 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_responsible_id
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_responsible_id
+msgid ""
+"Optionally you can assign a user to this field, which will make him "
+"responsible for the action."
 msgstr ""
 
 #. module: account_credit_control
@@ -915,7 +1007,6 @@ msgid "Overdue Level"
 msgstr ""
 
 #. module: account_credit_control
-#: model:ir.model,name:account_credit_control.model_res_partner
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_partner_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_id
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -923,13 +1014,19 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:92
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_note
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_note
+msgid "Payment Note"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_run.py:87
 #, python-format
 msgid "Please select a policy"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:47
+#: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:37
 #, python-format
 msgid "Please use wizard on customer invoices"
 msgstr ""
@@ -941,13 +1038,18 @@ msgid "Policies"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:115
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Policy"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_run.py:110
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:119
+#: code:addons/account_credit_control/models/credit_control_run.py:114
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1102,6 +1204,7 @@ msgstr ""
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_company_credit_policy_id
+#: model:ir.model.fields,help:account_credit_control.field_res_config_settings_credit_policy_id
 msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
 "overridden on partners or invoices."
@@ -1118,7 +1221,12 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:246
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "The partner had a manual followup."
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_policy.py:242
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
 msgstr ""
@@ -1126,6 +1234,25 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are ready to send by email or by letter using the Actions."
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid ""
+"This allows credit control team to chase overdue payments with different "
+"means"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action
+msgid "This is the next action to be taken."
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action_date
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action_date
+msgid "This is when the manual follow-up is needed."
 msgstr ""
 
 #. module: account_credit_control
@@ -1138,6 +1265,11 @@ msgstr ""
 msgid ""
 "This wizard will let you set the overdue policy and level for selected "
 "invoices"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
+msgid "Tolerance"
 msgstr ""
 
 #. module: account_credit_control
@@ -1162,7 +1294,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:214
+#: code:addons/account_credit_control/models/credit_control_line.py:194
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
@@ -1170,7 +1302,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_policy.py:186
+#: code:addons/account_credit_control/models/credit_control_policy.py:183
 #, python-format
 msgid ""
 "You can only use a policy set on account %s.\n"
@@ -1179,7 +1311,7 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/account_invoice.py:45
+#: code:addons/account_credit_control/models/account_invoice.py:43
 #, python-format
 msgid ""
 "You cannot cancel this invoice.\n"
@@ -1195,4 +1327,9 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 msgid "credit.control.policy.changer"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model,name:account_credit_control.model_res_config_settings
+msgid "res.config.settings"
 msgstr ""
