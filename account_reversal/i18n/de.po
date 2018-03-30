@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-22 03:41+0000\n"
-"PO-Revision-Date: 2018-03-22 03:41+0000\n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2018-03-30 02:39+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,7 @@ msgid "Reversal Date"
 msgstr "Umkehrdatum"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3934
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4080
 msgid "Reversal Entry"
 msgstr "Umkehrbuchung"
 
