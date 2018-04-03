@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2004-2011 Pexego Sistemas Informáticos. (http://pexego.es)
 # © 2004-2011 Zikzakmedia S.L. (http://zikzakmedia.com)
 #             Jordi Esteve <jesteve@zikzakmedia.com>
@@ -8,10 +7,11 @@
 
 {
     'name': "Company currency in invoices",
-    'version': "10.0.1.1.0",
+    'version': "11.0.1.0.0",
     'author': "Zikzakmedia SL, "
               "Joaquín Gutierrez, "
               "Tecnativa, "
+              "Softdil S.L, "
               "Odoo Community Association (OCA) ",
     'website': "https://odoo-community.org/",
     'category': "Accounting",
