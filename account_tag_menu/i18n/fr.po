@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
+# Quentin THEURET <odoo@kerpeo.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2018-03-30 02:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"POT-Creation-Date: 2018-04-06 02:40+0000\n"
+"PO-Revision-Date: 2018-04-06 02:40+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,12 +22,12 @@ msgstr ""
 #. module: account_tag_menu
 #: model:ir.model,name:account_tag_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Étiquette de compte"
 
 #. module: account_tag_menu
 #: model:ir.ui.menu,name:account_tag_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Étiquettes de compte"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_account_ids
@@ -36,14 +37,14 @@ msgstr "Comptes"
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_account_ids
 msgid "Assigned accounts for custom reporting"
-msgstr ""
+msgstr "Comptes attribués pour un compte-rendu personnalisé"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_tax_ids
 msgid "Assigned taxes for custom reporting"
-msgstr ""
+msgstr "Taxes attribuées pour un compte-rendu personnalisé"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Taxes"

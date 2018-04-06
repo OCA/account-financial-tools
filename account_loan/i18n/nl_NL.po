@@ -4,68 +4,67 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
-# Quentin THEURET <odoo@kerpeo.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-06 02:40+0000\n"
 "PO-Revision-Date: 2018-04-06 02:40+0000\n"
-"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
-"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_account_id
 msgid "Account"
-msgstr "Compte"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard_date
 msgid "Account Date"
-msgstr "Date comptable"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
 msgid "Account Entry"
-msgstr "Pièce comptable"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_line_long_term_loan_account_id
 #: model:ir.model.fields,help:account_loan.field_account_loan_long_term_loan_account_id
 msgid "Account that will contain the pending amount on Long term"
-msgstr "Le compte qui va contenir les montants dus sur le long terme"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_short_term_loan_account_id
 msgid "Account that will contain the pending amount on short term"
-msgstr "Le compte qui va contenir les montants dus sur le court terme"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_interest_expenses_account_id
 msgid "Account where the interests will be assigned to"
-msgstr "Le compte où les intérêts seront déclarés"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Accounts"
-msgstr "Comptes"
+msgstr ""
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:81
 #, python-format
 msgid "Amount cannot be bigger than debt"
-msgstr "Le montant ne peut pas être supérieur à la dette"
+msgstr ""
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:83
 #, python-format
 msgid "Amount cannot be less than zero"
-msgstr "Le montant ne peut pas être inférieur à zéro"
+msgstr ""
 
 #. module: account_loan
 #: code:addons/account_loan/model/account_loan_line.py:173
@@ -108,7 +107,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
 #: model:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_cancel_loan
@@ -135,7 +134,7 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_company_id
 msgid "Company"
-msgstr "Société"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_partner_id
@@ -154,7 +153,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_create_uid
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_create_uid
 msgid "Created by"
-msgstr "Créer par"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_create_date
@@ -163,14 +162,14 @@ msgstr "Créer par"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_create_date
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_create_date
 msgid "Created on"
-msgstr "Créer le"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_currency_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_currency_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_currency_id
 msgid "Currency"
-msgstr "Devise"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_rate
@@ -195,12 +194,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_display_name
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_display_name
 msgid "Display Name"
-msgstr "Nom à afficher"
+msgstr ""
 
 #. module: account_loan
 #: selection:account.loan,state:0
 msgid "Draft"
-msgstr "Brouillon"
+msgstr ""
 
 #. module: account_loan
 #: selection:account.loan,rate_type:0
@@ -265,7 +264,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_interests_product_id
@@ -286,7 +285,7 @@ msgstr ""
 #: model:ir.model,name:account_loan.model_account_invoice
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_invoice_ids
 msgid "Invoice"
-msgstr "Facture"
+msgstr "Factuur"
 
 #. module: account_loan
 #: model:ir.ui.view,arch_db:account_loan.account_loan_form
@@ -308,7 +307,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_journal_id
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_journal_id
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_journal_type
@@ -322,7 +321,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount___last_update
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post___last_update
 msgid "Last Modified on"
-msgstr "Dernière modification le"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard_write_uid
@@ -331,7 +330,7 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_write_uid
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_write_uid
 msgid "Last Updated by"
-msgstr "Mis à jour par"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_generate_wizard_write_date
@@ -340,7 +339,7 @@ msgstr "Mis à jour par"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_write_date
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_write_date
 msgid "Last Updated on"
-msgstr "Mis à jour le"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_leased_asset_account_id
@@ -461,7 +460,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_name
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_name
 msgid "Name"
-msgstr "Nom"
+msgstr ""
 
 #. module: account_loan
 #: selection:account.loan,rate_type:0
@@ -689,7 +688,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_loan_state
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_state
 msgid "State"
-msgstr "État"
+msgstr ""
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_method_period
@@ -758,4 +757,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_loan.account_loan_pay_amount_form
 #: model:ir.ui.view,arch_db:account_loan.account_loan_post_form
 msgid "or"
-msgstr "ou"
+msgstr ""
