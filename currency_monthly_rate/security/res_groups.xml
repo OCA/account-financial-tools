@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="monthly_rates_group" model="res.groups">
+        <field name="name">Monthly currency rates</field>
+        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_multi_currency'))]"/>
+    </record>
+
+    <record id="base.user_root" model="res.users">
+        <field name="groups_id" eval="[(4, ref('currency_monthly_rate.monthly_rates_group'))]"/>
+    </record>
+</odoo>
