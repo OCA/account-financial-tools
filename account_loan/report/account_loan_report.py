@@ -68,11 +68,8 @@ class AccountLoanReport(models.Model):
         'account.account', string='Interests account', readonly=True,
         )
 
-    @api.model_cr
-    def init(self):
-        tools.drop_view_if_exists(self._cr, 'account_loan_report')
-        self._cr.execute("""
-            CREATE OR REPLACE VIEW account_loan_report AS (
+    def _select(self):
+        select_str = """
             SELECT
                 al.id as id,
                 al.name as name,
@@ -94,10 +91,11 @@ class AccountLoanReport(models.Model):
                 al.short_term_loan_account_id as short_term_loan_account_id,
                 al.long_term_loan_account_id as long_term_loan_account_id,
                 al.interest_expenses_account_id as interest_expenses_account_id
-            FROM
-                account_loan as al
-                Left JOIN account_loan_line as ll on (ll.loan_id=al.id AND
-                (ll.has_moves = True OR ll.has_invoices = True))
+        """
+        return select_str
+
+    def _group_by(self):
+        group_by_str = """
             GROUP BY
                 al.name,
                 al.description,
@@ -111,4 +109,18 @@ class AccountLoanReport(models.Model):
                 al.long_term_loan_account_id,
                 al.interest_expenses_account_id,
                 al.id
-        )""")
+        """
+        return group_by_str
+
+    @api.model_cr
+    def init(self):
+        tools.drop_view_if_exists(self._cr, self._table)
+        self._cr.execute("""
+            CREATE OR REPLACE VIEW %s AS
+            %s
+            FROM
+                account_loan as al
+                Left JOIN account_loan_line as ll on (ll.loan_id=al.id AND
+                (ll.has_moves = True OR ll.has_invoices = True))
+            %s
+        """ % (self._table, self._select(), self._group_by()))

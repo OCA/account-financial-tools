@@ -394,10 +394,10 @@ class AccountLoanLine(models.Model):
     @api.model
     def _cron_generate_loan_entries(self):
         lines = self.search([
-           ('has_moves', '=', False),
-           ('has_invoices', '=', False),
-           ('loan_id.state', '=', 'posted'),
-           ('date', '<=', datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)),
+            ('has_moves', '=', False),
+            ('has_invoices', '=', False),
+            ('loan_id.state', '=', 'posted'),
+            ('date', '<=', datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)),
         ])
         for line in lines:
             if line.is_leasing:
@@ -416,6 +416,7 @@ class AccountLoanLine(models.Model):
             _('Interests Amount'): self.interests_amount,
             _('Principal Amount'): self.principal_amount,
             }
-        msg = self.env['account.loan']._format_message(_("Loan Line posted."),
-            msg_values)
+        msg = self.env['account.loan']._format_message(
+            _("Loan Line posted."), msg_values
+            )
         self.loan_id.message_post(body=msg)
