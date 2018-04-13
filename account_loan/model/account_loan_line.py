@@ -393,11 +393,12 @@ class AccountLoanLine(models.Model):
 
     @api.model
     def _cron_generate_loan_entries(self):
+        date_now = datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)
         lines = self.search([
             ('has_moves', '=', False),
             ('has_invoices', '=', False),
             ('loan_id.state', '=', 'posted'),
-            ('date','<=',datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)),
+            ('date', '<=', date_now),
         ])
         for line in lines:
             if line.is_leasing:
