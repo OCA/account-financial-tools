@@ -1,7 +1,7 @@
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
 from datetime import datetime
@@ -86,7 +86,6 @@ class AccountLoan(models.Model):
         default=0.0,
         digits=(8, 6),
         help='Currently applied rate',
-        track_visibility='always',
     )
     rate_period = fields.Float(
         compute='_compute_rate_period', digits=(8, 6),
@@ -175,7 +174,7 @@ class AccountLoan(models.Model):
     )
     short_term_loan_account_id = fields.Many2one(
         'account.account',
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_id', '=', company_id), ('deprecated', '=', False)]",
         string='Short term account',
         help='Account that will contain the pending amount on short term',
         required=True,
@@ -186,13 +185,13 @@ class AccountLoan(models.Model):
         'account.account',
         string='Long term account',
         help='Account that will contain the pending amount on Long term',
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_id', '=', company_id), ('deprecated', '=', False)]",
         readonly=True,
         states={'draft': [('readonly', False)]},
     )
     interest_expenses_account_id = fields.Many2one(
         'account.account',
-        domain="[('company_id', '=', company_id)]",
+        domain="[('company_id', '=', company_id), ('deprecated', '=', False)]",
         string='Interests account',
         help='Account where the interests will be assigned to',
         required=True,
@@ -241,6 +240,8 @@ class AccountLoan(models.Model):
         string='Total interests payed',
         compute='_compute_total_amounts',
     )
+
+    description = fields.Char(string='Description', index=True)
 
     _sql_constraints = [
         ('name_uniq', 'unique(name, company_id)',
@@ -351,10 +352,43 @@ class AccountLoan(models.Model):
         if not self.start_date:
             self.start_date = fields.Datetime.now()
         self.compute_draft_lines()
+        msg_values = {
+            _('Lender'): self.partner_id.name,
+            _('Periods'): self.periods,
+            _('Period Length'): self.method_period,
+            _('Start Date'): self.start_date,
+            _('Rate'): self.rate,
+            _('Rate Period'): self.rate_period,
+            _('Rate Type'): self.rate_type,
+            _('Loan Type'): self.loan_type,
+            _('Currency'): self.currency_id.name,
+            _('Loan Amount'): self.loan_amount,
+            }
+        msg = self._format_message(_("Loan posted."), msg_values)
+        self.message_post(body=msg)
         self.write({'state': 'posted'})
 
     @api.multi
     def close(self):
+        payment_amount = 0
+        interests_amount = 0
+        principal_amount = 0
+        for line in self.line_ids:
+            payment_amount += line.payment_amount
+            interests_amount += line.interests_amount
+            principal_amount += line.principal_amount
+            if line.sequence == self.periods:
+                line.log_posted_line()
+        pending_principal_amount = self.loan_amount - payment_amount + interests_amount
+        msg_values = {
+            _('End Date'): datetime.now().date(),
+            _('Total Pending Principal Amount'): pending_principal_amount,
+            _('Total Payment Amount'): payment_amount,
+            _('Total Interests Amount'): interests_amount,
+            _('Total Principal Amount'): principal_amount,
+            }
+        msg = self._format_message(_("Loan closed."), msg_values)
+        self.message_post(body=msg)
         self.write({'state': 'closed'})
 
     @api.multi
@@ -482,3 +516,13 @@ class AccountLoan(models.Model):
                     r.date, DF).date() <= date and not r.invoice_ids
             ).generate_invoice()
         return res
+	
+    def _format_message(self, msg_description=None, msg_values=None):
+        msg = ''
+        if msg_description:
+            msg = '<strong>%s</strong>' % msg_description
+        if msg_values:
+            for name, value in msg_values.items():
+                msg += '<div>- <strong>%s</strong>: ' % name
+                msg += '%s</div>' % value
+        return msg

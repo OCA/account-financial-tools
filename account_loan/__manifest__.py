@@ -12,6 +12,7 @@
     ],
     "data": [
         'data/ir_sequence_data.xml',
+        'data/account_loan_data.xml',
         'security/ir.model.access.csv',
         'security/account_loan_security.xml',
         'wizard/account_loan_generate_entries_view.xml',
@@ -19,6 +20,7 @@
         'wizard/account_loan_post_view.xml',
         'views/account_loan_view.xml',
         'views/account_move_view.xml',
+        'report/account_loan_report_views.xml',
     ],
     'installable': True,
     'external_dependencies': {

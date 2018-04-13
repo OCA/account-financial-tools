@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="ir.ui.view" id="action_account_loan_report_pivot">
+            <field name="name">account.loan.report.pivot</field>
+            <field name="model">account.loan.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Loans Analysis" disable_linking="True">
+                    <field name="name" type="row"/>
+                    <field name="loan_amount" type="measure"/>
+                    <field name="pending_principal_amount" type="measure"/>
+                    <field name="payment_amount" type="measure"/>
+                    <field name="interests_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="action_account_loan_report_graph">
+            <field name="name">account.loan.report.graph</field>
+            <field name="model">account.loan.report</field>
+            <field name="arch" type="xml">
+                <graph string="Loans Analysis">
+                    <field name="name" type="row"/>
+                    <field name="loan_amount" type="measure"/>
+                    <field name="pending_principal_amount" type="measure"/>
+                    <field name="payment_amount" type="measure"/>
+                    <field name="interests_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+ 
+        <record id="view_account_loan_report_search" model="ir.ui.view">
+            <field name="name">account.loan.report.search</field>
+            <field name="model">account.loan.report</field>
+            <field name="arch" type="xml">
+                <search string="Loans Analysis">
+                    <field name="start_date"/>
+                    <filter string="Draft" name="draft" domain="[('state','=','draft')]" help="Drafted Loans"/>
+                    <filter string="Posted" name="posted" domain="[('state','=','posted')]" help="Posted Loans"/>
+                    <separator/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state','=','cancelled')]" help="Cancelled Loans"/>
+                    <filter string="Close" name="close" domain="[('state','=','Close')]" help="Closed Loans"/>
+                    <group expand="0" string="Extended Filters...">
+                        <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                    </group>
+                    <group expand="1" string="Group By">
+                        <field name="partner_id" filter_domain="[('partner_id','child_of',self)]"/>
+                        <filter string="Company" name="company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                        <separator/>
+                        <filter string="Loan Month" name="loan_month" help="Date of Loan Start"
+                            context="{'group_by':'start_date:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_loan_report">
+            <field name="name">Loans Analysis</field>
+            <field name="res_model">account.loan.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="search_view_id" ref="view_account_loan_report_search"/>
+            <field name="context">{}</field>  <!-- force empty -->
+            <field name="help" type="html">
+                <p>
+                    From this report, you can have an overview on all loans.
+                </p>
+            </field>
+        </record>
+    
+        <menuitem name="Loans" action="action_account_loan_report"
+        id="menu_action_account_loan_report"
+        parent="account.account_reports_management_menu" sequence="22"/>
+
+    </data>
+</odoo>
