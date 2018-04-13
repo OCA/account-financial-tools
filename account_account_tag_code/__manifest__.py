@@ -16,7 +16,7 @@
         'account',
     ],
     'data': [
-        'views/acccount_account_tag.xml',
+        'views/account_account_tag.xml',
     ],
     'installable': True,
     'license': 'AGPL-3',
