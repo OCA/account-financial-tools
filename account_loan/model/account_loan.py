@@ -86,6 +86,7 @@ class AccountLoan(models.Model):
         default=0.0,
         digits=(8, 6),
         help='Currently applied rate',
+        track_visibility='always',
     )
     rate_period = fields.Float(
         compute='_compute_rate_period', digits=(8, 6),

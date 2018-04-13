@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright 2018 Ahmed Yousif
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
 <odoo>
     <data noupdate="1">
 
@@ -68,7 +74,7 @@
                 </p>
             </field>
         </record>
-    
+
         <menuitem name="Loans" action="action_account_loan_report"
         id="menu_action_account_loan_report"
         parent="account.account_reports_management_menu" sequence="22"/>
