@@ -380,7 +380,9 @@ class AccountLoan(models.Model):
             principal_amount += line.principal_amount
             if line.sequence == self.periods:
                 line.log_posted_line()
-        pending_principal_amount = self.loan_amount - payment_amount + interests_amount
+        pending_principal_amount = (
+            self.loan_amount - payment_amount + interests_amount
+            )
         msg_values = {
             _('End Date'): datetime.now().date(),
             _('Total Pending Principal Amount'): pending_principal_amount,
@@ -517,7 +519,7 @@ class AccountLoan(models.Model):
                     r.date, DF).date() <= date and not r.invoice_ids
             ).generate_invoice()
         return res
-	
+
     def _format_message(self, msg_description=None, msg_values=None):
         msg = ''
         if msg_description:
