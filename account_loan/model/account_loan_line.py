@@ -397,7 +397,7 @@ class AccountLoanLine(models.Model):
             ('has_moves', '=', False),
             ('has_invoices', '=', False),
             ('loan_id.state', '=', 'posted'),
-            ('date', '<=', datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)),
+            ('date','<=',datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)),
         ])
         for line in lines:
             if line.is_leasing:
