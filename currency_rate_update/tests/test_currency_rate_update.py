@@ -14,7 +14,13 @@ class TestCurrencyRateUpdate(TransactionCase):
     def setUp(self):
         super(TestCurrencyRateUpdate, self).setUp()
         self.env.user.company_id.auto_currency_up = True
-        self.env.user.company_id.currency_id = self.env.ref('base.EUR')
+        if self.env.user.company_id.currency_id != self.env.ref('base.EUR'):
+            self.env.cr.execute("""
+                UPDATE res_company
+                SET currency_id = %(currency)s
+                WHERE id = %(company)s
+                """, {'currency': self.env.ref('base.EUR').id,
+                      'company': self.env.user.company_id.id})
         self.service_env = self.env['currency.rate.update.service']
         self.rate_env = self.env['res.currency.rate']
 
@@ -79,3 +85,8 @@ class TestCurrencyRateUpdate(TransactionCase):
         """Test the ir.cron with Vietcombank service for USD
         """
         self._test_cron_by_service('VN_VCB', ['base.USD'])
+
+    def test_cron_HR_HNB(self):
+        """Test the ir.cron with HNB service for USD
+        """
+        self._test_cron_by_service('HR_HNB', ['base.USD'])
