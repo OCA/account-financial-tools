@@ -311,8 +311,8 @@ class AccountLoanLine(models.Model):
                 move = self.env['account.move'].create(record.move_vals())
                 move.post()
                 res.append(move.id)
-        if self.loan_id.state == 'posted':
-            self.log_posted_line()
+            if record.move_ids and record.loan_id.state == 'posted':
+                record.log_posted_line()
         return res
 
     @api.multi
@@ -334,8 +334,8 @@ class AccountLoanLine(models.Model):
                 for line in invoice.invoice_line_ids:
                     line._set_taxes()
                 invoice.compute_taxes()
-        if self.loan_id.state == 'posted':
-            self.log_posted_line()
+            if record.invoice_ids and record.loan_id.state == 'posted':
+                record.log_posted_line()
         return res
 
     @api.multi
@@ -417,7 +417,14 @@ class AccountLoanLine(models.Model):
             _('Interests Amount'): self.interests_amount,
             _('Principal Amount'): self.principal_amount,
             }
-        msg = self.env['account.loan']._format_message(
-            _("Loan Line posted."), msg_values
+        if self.loan_id.is_leasing:
+            msg = self.env['account.loan']._format_message(
+                _("Loan Invoice posted,\
+                You need to validate generated invoice."),
+                msg_values
+            )
+        else:
+            msg = self.env['account.loan']._format_message(
+                _("Loan Line posted."), msg_values
             )
         self.loan_id.message_post(body=msg)

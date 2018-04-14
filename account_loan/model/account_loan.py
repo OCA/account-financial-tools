@@ -365,6 +365,10 @@ class AccountLoan(models.Model):
             _('Currency'): self.currency_id.name,
             _('Loan Amount'): self.loan_amount,
             }
+        if self.is_leasing:
+            msg_values[_('Loan Product')] = self.product_id.name
+            msg_values[_('Interest Product')] = self.interests_product_id.name
+            msg_values[_('Residual Amount')] = self.residual_amount
         msg = self._format_message(_("Loan posted."), msg_values)
         self.message_post(body=msg)
         self.write({'state': 'posted'})
