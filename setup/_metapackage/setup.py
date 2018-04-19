@@ -1,0 +1,57 @@
+import setuptools
+
+with open('VERSION.txt', 'r') as f:
+    version = f.read().strip()
+
+setuptools.setup(
+    name="odoo8-addons-oca-account-financial-tools",
+    description="Meta package for oca-account-financial-tools Odoo addons",
+    version=version,
+    install_requires=[
+        'odoo8-addon-account_asset_depr_line_cancel',
+        'odoo8-addon-account_asset_management',
+        'odoo8-addon-account_asset_management_xls',
+        'odoo8-addon-account_auto_fy_sequence',
+        'odoo8-addon-account_balance_line',
+        'odoo8-addon-account_chart_update',
+        'odoo8-addon-account_check_deposit',
+        'odoo8-addon-account_compute_tax_amount',
+        'odoo8-addon-account_constraints',
+        'odoo8-addon-account_cost_center',
+        'odoo8-addon-account_credit_control',
+        'odoo8-addon-account_credit_control_dunning_fees',
+        'odoo8-addon-account_credit_control_payment_details',
+        'odoo8-addon-account_default_draft_move',
+        'odoo8-addon-account_fiscal_position_vat_check',
+        'odoo8-addon-account_fiscal_year_reopen',
+        'odoo8-addon-account_invoice_constraint_chronology',
+        'odoo8-addon-account_invoice_currency',
+        'odoo8-addon-account_invoice_tax_required',
+        'odoo8-addon-account_journal_always_check_date',
+        'odoo8-addon-account_journal_period_close',
+        'odoo8-addon-account_locked_line_search',
+        'odoo8-addon-account_move_batch_validate',
+        'odoo8-addon-account_move_line_import',
+        'odoo8-addon-account_move_line_no_default_search',
+        'odoo8-addon-account_move_line_payable_receivable_filter',
+        'odoo8-addon-account_move_line_search_extension',
+        'odoo8-addon-account_move_locking',
+        'odoo8-addon-account_move_template',
+        'odoo8-addon-account_netting',
+        'odoo8-addon-account_partner_required',
+        'odoo8-addon-account_reconcile_trace',
+        'odoo8-addon-account_renumber',
+        'odoo8-addon-account_reset_chart',
+        'odoo8-addon-account_reversal',
+        'odoo8-addon-account_tax_analysis',
+        'odoo8-addon-account_tax_chart_interval',
+        'odoo8-addon-currency_rate_date_check',
+        'odoo8-addon-currency_rate_update',
+        'odoo8-addon-l10n_account_translate',
+        'odoo8-addon-partner_report_open_invoices',
+    ],
+    classifiers=[
+        'Programming Language :: Python',
+        'Framework :: Odoo',
+    ]
+)
