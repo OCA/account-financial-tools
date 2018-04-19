@@ -17,12 +17,13 @@ class LockAccountMove(models.TransientModel):
     date_end = fields.Datetime(string='Date end',
                                required=True)
 
-    @api.one
+    @api.multi
     @api.constrains('date_start', 'date_end')
     def _check_date_stop_start(self):
-        if self.date_start > self.date_end:
-            raise exceptions.UserError(_('Date start need to be \
-                                          before Date end'))
+        for lmove in self:
+            if lmove.date_start > lmove.date_end:
+                raise exceptions.UserError(
+                    _('Date start need to be before Date end'))
 
     @api.multi
     def lock_move(self, data):

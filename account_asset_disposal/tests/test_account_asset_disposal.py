@@ -4,7 +4,7 @@
 
 from odoo.tests import common
 from odoo import fields
-from datetime import datetime
+# from datetime import datetime
 
 
 class TestAccountAssetDisposal(common.SavepointCase):
@@ -45,7 +45,7 @@ class TestAccountAssetDisposal(common.SavepointCase):
             'method_number': 15,
         })
         cls.asset.validate()
-        cls.date_time = fields.Date.to_string(datetime.now())
+        cls.date_time = fields.Date.context_today(cls.env.user)
 
     def test_asset_depreciation_board(self):
         self.assertEqual(len(self.asset.depreciation_line_ids), 15)
