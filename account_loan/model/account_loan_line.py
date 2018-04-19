@@ -3,6 +3,8 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from datetime import datetime
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -98,14 +100,16 @@ class AccountLoanLine(models.Model):
         inverse_name='loan_line_id',
     )
     has_moves = fields.Boolean(
-        compute='_compute_has_moves'
+        compute='_compute_has_moves',
+        store=True,
     )
     invoice_ids = fields.One2many(
         'account.invoice',
         inverse_name='loan_line_id',
     )
     has_invoices = fields.Boolean(
-        compute='_compute_has_invoices'
+        compute='_compute_has_invoices',
+        store=True,
     )
     _sql_constraints = [
         ('sequence_loan',
@@ -307,6 +311,8 @@ class AccountLoanLine(models.Model):
                 move = self.env['account.move'].create(record.move_vals())
                 move.post()
                 res.append(move.id)
+            if record.move_ids and record.loan_id.state == 'posted':
+                record.log_posted_line()
         return res
 
     @api.multi
@@ -328,6 +334,8 @@ class AccountLoanLine(models.Model):
                 for line in invoice.invoice_line_ids:
                     line._set_taxes()
                 invoice.compute_taxes()
+            if record.invoice_ids and record.loan_id.state == 'posted':
+                record.log_posted_line()
         return res
 
     @api.multi
@@ -382,3 +390,41 @@ class AccountLoanLine(models.Model):
             result['views'] = [(res and res.id or False, 'form')]
             result['res_id'] = self.invoice_ids.id
         return result
+
+    @api.model
+    def _cron_generate_loan_entries(self):
+        date_now = datetime.now().strftime(DEFAULT_SERVER_DATE_FORMAT)
+        lines = self.search([
+            ('has_moves', '=', False),
+            ('has_invoices', '=', False),
+            ('loan_id.state', '=', 'posted'),
+            ('date', '<=', date_now),
+        ])
+        for line in lines:
+            if line.is_leasing:
+                line.generate_invoice()
+            else:
+                line.generate_move()
+
+    @api.multi
+    def log_posted_line(self):
+        msg_values = {
+            _('Current Period'): self.sequence,
+            _('Remaining Periods'): self.loan_id.periods - self.sequence,
+            _('Currency'): self.currency_id.name,
+            _('Pending Principal Amount'): self.pending_principal_amount,
+            _('Payment Amount'): self.payment_amount,
+            _('Interests Amount'): self.interests_amount,
+            _('Principal Amount'): self.principal_amount,
+            }
+        if self.loan_id.is_leasing:
+            msg = self.env['account.loan']._format_message(
+                _("Loan Invoice posted,\
+                You need to validate generated invoice."),
+                msg_values
+            )
+        else:
+            msg = self.env['account.loan']._format_message(
+                _("Loan Line posted."), msg_values
+            )
+        self.loan_id.message_post(body=msg)
