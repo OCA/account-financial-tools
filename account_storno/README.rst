@@ -10,16 +10,37 @@ Account Storno
 This module adds the posibility to use Storno Accounting, a business practice
 commonly used in Eastern European countries.
 
+Storno accounting is a practice of using negative debit or credit amounts
+to reverse original journal account entries.
+Because bookkeepers typically write Storno entries in red ink,
+this accounting practice is also known as Red Storno.
+
+There is a difference between debit turnover and credit turnover,
+because the reverse entry makes redundant debit and credit turnover.
+
+
 Countries where Storno accounting is mandatory or considered as best practice:
-Czech Republic, Poland, Romania, Russia, China, Slovakia, Slovenia,
-Ukraine, Croatia, Bosnia and Herzegovina, Serbia, China ...
+
+* Bosnia and Herzegovina
+* China
+* Czech Republic
+* Croatia
+* Poland
+* Romania
+* Russia
+* Serbia
+* Slovakia
+* Slovenia
+* Ukraine
 
 Configuration
 =============
 
-To configure this module, go to the menu Accounting/Invoicing > Configuration >
-Accounting > Journals and change the value of field Posting policy to "Storno"
-on the relevant journals.
+To configure this module:
+
+* Go to the menu Accounting/Invoicing > Configuration > Accounting > Journals
+* Open in form view the journals for which you want to allow storno 
+* Change the value of field Posting policy to "Storno"
 
 Usage
 =====

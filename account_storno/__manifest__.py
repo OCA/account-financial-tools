@@ -4,7 +4,7 @@
 
 {
     'name': 'Account Storno',
-    'summary': 'Storno Accounting',
+    'summary': 'Allows Storno accounting (negative accounting entries)',
     'version': '11.0.1.0.0',
     'category': 'Accounting',
     'author': 'Slobodni programi d.o.o., '

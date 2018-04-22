@@ -206,27 +206,27 @@ class AccountInvoice(models.Model):
         if self.journal_id.posting_policy == 'storno':
             if self.journal_id.group_invoice_lines:
                 line2 = {}
-                for x, y, l in line:
-                    tmp = self.inv_line_characteristic_hashcode(l)
+                for oldline in line:
+                    convline = oldline[2]
+                    tmp = self.inv_line_characteristic_hashcode(convline)
                     if tmp in line2:
-                        deb_am = line2[tmp]['debit'] + l['debit']
-                        cre_am = line2[tmp]['credit'] + l['credit']
-                        line2[tmp]['debit'] = line2[tmp]['debit'] + l['debit']
-                        line2[tmp]['credit'] = line2[tmp]['credit'] +\
-                            l['credit']
+                        line2[tmp]['debit'] = \
+                            line2[tmp]['debit'] + convline['debit']
+                        line2[tmp]['credit'] = \
+                            line2[tmp]['credit'] + convline['credit']
                         line2[tmp]['amount_currency'] += \
-                            l['amount_currency']
+                            convline['amount_currency']
                         line2[tmp]['analytic_line_ids'] += \
-                            l['analytic_line_ids']
-                        qty = l.get('quantity')
+                            convline['analytic_line_ids']
+                        qty = convline.get('quantity')
                         if qty:
                             line2[tmp]['quantity'] = line2[tmp].get(
                                 'quantity', 0.0) + qty
                     else:
-                        line2[tmp] = l
+                        line2[tmp] = convline
                 line = []
-                for key, val in line2.items():
-                    line.append((0, 0, val))
+                for newline in line2.values():
+                    line.append((0, 0, newline))
             return line
         else:
             super(AccountInvoice, self).group_lines(iml, line)

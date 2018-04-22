@@ -45,8 +45,8 @@ class AccountInvoiceRefund(models.TransientModel):
                     if inv.reconciled and mode in ('cancel', 'modify'):
                         raise UserError(
                             _('Cannot create credit note for the invoice which'
-                              ' is already reconciled, invoice should be'
-                              ' unreconciled first, then only you can add'
+                              ' is already reconciled. The invoice should be'
+                              ' unreconciled first: only then can you add'
                               ' credit note for this invoice.'))
 
                     date = form.date or False

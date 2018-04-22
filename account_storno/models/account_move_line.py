@@ -11,7 +11,7 @@ class AccountMoveLine(models.Model):
 
     _sql_constraints = [
         ('credit_debit2', 'CHECK (1=1)',
-         'Wrong credit or debit value in accounting entry !'),
+         'Wrong credit or debit value in accounting entry.'),
     ]
 
     @api.model
@@ -30,15 +30,13 @@ class AccountMoveLine(models.Model):
         """ This is to restore credit_debit2 check functionality,
             for contra journals.
         """
-        storno_lines = self.filtered(
-            lambda line: line.move_id.journal_id.posting_policy == 'storno')
-        contra_lines = self - storno_lines
-        for line in self:
+        contra_lines = self.filtered(
+            lambda line: line.move_id.journal_id.posting_policy == 'contra')
+        for line in contra_lines:
             if line.journal_id.posting_policy == 'contra':
                 if line.debit + line.credit < 0.0:
                     raise ValidationError(
-                        _('Wrong credit or debit value in accounting entry !'))
-        super(AccountMoveLine, contra_lines)._check_contra_minus()
+                        _('Wrong credit or debit value in accounting entry.'))
 
     @api.multi
     @api.constrains('amount_currency')
