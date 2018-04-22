@@ -180,6 +180,8 @@ class TestAccountInvoice(TransactionCase):
         # Validate the invoice
         invoice.action_invoice_open()
 
+        print(invoice.state)
+        
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
             'policy_ids': [(6, 0, [policy.id])]
@@ -263,6 +265,7 @@ class TestAccountInvoice(TransactionCase):
 
         # Validate the invoice
         invoice.action_invoice_open()
+        print(invoice.state)
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
             'policy_ids': [(6, 0, [policy.id])]

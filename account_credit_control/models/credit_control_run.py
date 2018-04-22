@@ -121,7 +121,6 @@ class CreditControlRun(models.Model):
                 'manual_ids': [(6, 0, manually_managed_lines.ids)],
                 'line_ids': [(6, 0, generated.ids)]}
         self.write(vals)
-        print(report)
         return generated
 
     @api.multi
