@@ -38,12 +38,13 @@ class AccountInvoice(models.Model):
         to_open_invoices.action_move_create()
         return to_open_invoices.invoice_validate()
 
-    @api.one
+    @api.multi
     @api.depends(
         'state', 'currency_id', 'invoice_line_ids.price_subtotal',
         'move_id.line_ids.amount_residual',
         'move_id.line_ids.currency_id')
     def _compute_residual(self):
+        self.ensure_one()
         residual = 0.0
         residual_company_signed = 0.0
         if self.journal_id.posting_policy == 'storno':
@@ -70,8 +71,9 @@ class AccountInvoice(models.Model):
         else:
             super(AccountInvoice, self)._compute_residual()
 
-    @api.one
+    @api.multi
     def _get_outstanding_info_JSON(self):
+        self.ensure_one()
         self.outstanding_credits_debits_widget = json.dumps(False)
         if self.journal_id.posting_policy == 'storno':
             if self.state == 'open':

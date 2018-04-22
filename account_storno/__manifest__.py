@@ -15,6 +15,5 @@
     'installable': True,
     'depends': ['account'],
     'data': ['views/account_view.xml'],
-    'demo_xml': [],
-    
+    'demo_xml': [],    
 }
