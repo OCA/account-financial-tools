@@ -13,9 +13,12 @@ class AccountInvoice(models.Model):
 
     @api.onchange('amount_total')
     def _onchange_amount_total(self):
-        contra_inv = self.filtered(
-            lambda inv: inv.journal_id.posting_policy == 'contra')
-        super(self, contra_inv)._onchange_amount_total()
+        for inv in self:
+            if inv.journal_id.posting_policy == 'contra' and\
+                    inv.amount_total < 0:
+                raise UserError(_('You cannot validate an invoice with a '
+                                  'negative total amount. You should create '
+                                  'a credit note instead.'))
 
     @api.multi
     def action_invoice_open(self):
@@ -39,33 +42,33 @@ class AccountInvoice(models.Model):
         'move_id.line_ids.amount_residual',
         'move_id.line_ids.currency_id')
     def _compute_residual(self):
-        storno_inv = self.filtered(
-            lambda inv: inv.journal_id.posting_policy == 'storno')
-        contra_inv = self - storno_inv
-        for invoice in storno_inv:
-            residual = 0.0
-            residual_company_signed = 0.0
-            sign = -1 if self.type in ['in_refund', 'out_refund'] else 1
-            for line in invoice.sudo().move_id.line_ids:
-                if line.account_id == invoice.account_id:
-                    residual_company_signed += line.amount_residual
-                    if line.currency_id == invoice.currency_id:
-                        residual += line.amount_residual_currency if \
-                            line.currency_id else line.amount_residual
-                    else:
-                        from_currency = line.currency_id.with_context(
-                            date=line.date) if line.currency_id else\
-                            line.company_id.currency_id.with_context(
-                                date=line.date)
-                        residual += from_currency.compute(
-                            line.amount_residual, self.currency_id)
-            invoice.residual_company_signed = residual_company_signed * sign
-            invoice.residual_signed = residual * sign
-            invoice.residual = residual
-            digits_rounding = invoice.currency_id.rounding
-            invoice.reconciled = bool(float_is_zero(
-                self.residual, precision_rounding=digits_rounding))
-        super(AccountInvoice, contra_inv)._compute_residual()
+        for invoice in self:
+            if invoice.journal_id.posting_policy == 'storno':
+                residual = 0.0
+                residual_company_signed = 0.0
+                sign = -1 if invoice.type in ['in_refund', 'out_refund'] else 1
+                for line in invoice.sudo().move_id.line_ids:
+                    if line.account_id == invoice.account_id:
+                        residual_company_signed += line.amount_residual
+                        if line.currency_id == invoice.currency_id:
+                            residual += line.amount_residual_currency if \
+                                line.currency_id else line.amount_residual
+                        else:
+                            from_currency = line.currency_id.with_context(
+                                date=line.date) if line.currency_id else\
+                                line.company_id.currency_id.with_context(
+                                    date=line.date)
+                            residual += from_currency.compute(
+                                line.amount_residual, invoice.currency_id)
+                invoice.residual_company_signed = \
+                    residual_company_signed * sign
+                invoice.residual_signed = residual * sign
+                invoice.residual = residual
+                digits_rounding = invoice.currency_id.rounding
+                invoice.reconciled = bool(float_is_zero(
+                    invoice.residual, precision_rounding=digits_rounding))
+            else:
+                super(AccountInvoice, invoice)._compute_residual()
 
     @api.multi
     def _get_outstanding_info_JSON(self):
@@ -204,14 +207,13 @@ class AccountInvoice(models.Model):
         if self.journal_id.posting_policy == 'storno':
             if self.journal_id.group_invoice_lines:
                 line2 = {}
-                for oldline in line:
-                    convline = oldline[2]
+                for index1, index2, convline in line:
                     tmp = self.inv_line_characteristic_hashcode(convline)
                     if tmp in line2:
-                        line2[tmp]['debit'] = \
-                            line2[tmp]['debit'] + convline['debit']
-                        line2[tmp]['credit'] = \
-                            line2[tmp]['credit'] + convline['credit']
+                        debit = line2[tmp]['debit'] + convline['debit']
+                        credit = line2[tmp]['credit'] + convline['credit']
+                        line2[tmp]['debit'] = debit
+                        line2[tmp]['credit'] = credit
                         line2[tmp]['amount_currency'] += \
                             convline['amount_currency']
                         line2[tmp]['analytic_line_ids'] += \
@@ -223,8 +225,8 @@ class AccountInvoice(models.Model):
                     else:
                         line2[tmp] = convline
                 line = []
-                for newline in line2.values():
-                    line.append((0, 0, newline))
-            return line
+                for val in line2.values():
+                    line.append((0, 0, val))
         else:
-            super(AccountInvoice, self).group_lines(iml, line)
+            line = super(AccountInvoice, self).group_lines(iml, line)
+        return line
