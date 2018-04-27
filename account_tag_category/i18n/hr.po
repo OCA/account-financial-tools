@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 01:41+0000\n"
-"PO-Revision-Date: 2018-02-23 01:41+0000\n"
+"POT-Creation-Date: 2018-04-20 22:35+0000\n"
+"PO-Revision-Date: 2018-04-20 22:35+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +77,7 @@ msgstr "Zatvori"
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color
-#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_4047
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_4048
 msgid "Color Index"
 msgstr "Index boje"
 
