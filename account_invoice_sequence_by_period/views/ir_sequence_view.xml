@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="sequence_period_form" model="ir.ui.view">
+      <field name="name">sequence.period.form</field>
+      <field name="model">ir.sequence</field>
+      <field name="type">form</field>
+      <field name="inherit_id" ref="account.sequence_inherit_form"/>
+      <field name="arch" type="xml">
+        <field name="fiscalyear_id" position="after">
+          <field name="period_id" domain="[('fiscalyear_id', '=', fiscalyear_id), ('special', '=', False)]"/>
+        </field>
+      </field>
+    </record>
+
+  </data>
+</openerp>
