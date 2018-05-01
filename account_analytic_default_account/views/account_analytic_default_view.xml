@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_analytic_default_add_account_tree" model="ir.ui.view">
+            <field name="name">account.analytic.default.tree</field>
+            <field name="inherit_id" ref="account_analytic_default.view_account_analytic_default_tree"/>
+            <field name="model">account.analytic.default</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='analytic_id']" position="after">
+                    <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_default_add_account_form" model="ir.ui.view">
+            <field name="name">account.analytic.default.form</field>
+            <field name="inherit_id" ref="account_analytic_default.view_account_analytic_default_form"/>
+            <field name="model">account.analytic.default</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sequence']" position="after">
+                    <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
