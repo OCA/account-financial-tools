@@ -3,7 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2013 Noviat nv/sa (www.noviat.com). All rights reserved.
+#    Copyright (c) 2013-2015 Noviat nv/sa (www.noviat.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -22,10 +22,10 @@
 
 {
     'name': 'Journal Items Search Extension',
-    'version': '0.1',
+    'version': '0.3',
     'license': 'AGPL-3',
     'author': "Noviat,Odoo Community Association (OCA)",
-    'category': 'Generic Modules',
+    'category': 'Accounting & Finance',
     'description': """
 Journal Items Search Extension
 ==============================
@@ -34,6 +34,14 @@ This module adds the 'Journal Items Search All' menu entry.
 
 This menu entry adds a number of search fields on top of the List View rows.
 These fields can be used in combination with the Search window.
+
+The purpose of this view is to offer a fast drill down capability
+when searching through large number of accounting entries.
+
+The drill down is facilitated further by opening the Form View when clicking on
+the sought-after entry.
+This allows an intuitive click-through to the related accounting documents
+such as the originating Bank Statement, Invoice, Asset, ...
 
     """,
     'depends': ['account'],
