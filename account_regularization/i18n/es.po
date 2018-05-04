@@ -1,0 +1,203 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_regularization
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-26 15:14+0000\n"
+"PO-Revision-Date: 2015-06-26 15:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_regularization
+#: model:ir.model,name:account_regularization.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_regularization
+#: model:ir.model,name:account_regularization.model_account_move
+msgid "Account Entry"
+msgstr "Asiento contable"
+
+#. module: account_regularization
+#: model:ir.model,name:account_regularization.model_account_regularization
+msgid "Account Regularization Model"
+msgstr "Modelo de regularización contable"
+
+#. module: account_regularization
+#: field:account.regularization,account_ids:0
+msgid "Accounts to balance"
+msgstr "Cuentas a balancear"
+
+#. module: account_regularization
+#: view:wizard.regularize:account_regularization.view_wizard_regularization_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_regularization
+#: view:account.regularization:account_regularization.view_account_regularization_form
+#: model:ir.actions.act_window,name:account_regularization.action_regularize
+msgid "Create Regularization Move"
+msgstr "Crear asiento de regularización"
+
+#. module: account_regularization
+#: field:account.regularization,create_uid:0
+#: field:wizard.regularize,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_regularization
+#: field:account.regularization,create_date:0
+#: field:wizard.regularize,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_regularization
+#: selection:account.regularization,balance_calc:0
+#: selection:wizard.regularize,balance_calc:0
+#: field:wizard.regularize,date_move:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: account_regularization
+#: field:wizard.regularize,date_to:0
+msgid "Date To"
+msgstr "Hasta"
+
+#. module: account_regularization
+#: help:wizard.regularize,date_move:0
+msgid "Date for the move"
+msgstr "Fecha del asiento"
+
+#. module: account_regularization
+#: help:wizard.regularize,fiscalyear:0
+msgid "Fiscal Year for the write move"
+msgstr "Ejercicio fiscal del asiento"
+
+#. module: account_regularization
+#: field:wizard.regularize,fiscalyear:0
+msgid "Fiscal year"
+msgstr "Ejercicio fiscal"
+
+#. module: account_regularization
+#: field:account.regularization,id:0
+#: field:wizard.regularize,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_regularization
+#: help:wizard.regularize,date_to:0
+msgid "Include movements up tho this date"
+msgstr "Incluir asientos hasta esta fecha"
+
+#. module: account_regularization
+#: field:wizard.regularize,journal_id:0
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_regularization
+#: help:wizard.regularize,journal_id:0
+msgid "Journal for the move"
+msgstr "Diario para el asiento"
+
+#. module: account_regularization
+#: field:account.regularization,write_uid:0
+#: field:wizard.regularize,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_regularization
+#: field:account.regularization,write_date:0
+#: field:wizard.regularize,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: account_regularization
+#: view:account.regularization:account_regularization.view_account_regularization_form
+msgid "Main"
+msgstr "General"
+
+#. module: account_regularization
+#: view:account.regularization:account_regularization.view_account_regularization_form
+msgid "Moves"
+msgstr "Asientos"
+
+#. module: account_regularization
+#: field:account.regularization,name:0
+msgid "Name"
+msgstr "Nombre"
+
+
+
+#. module: account_regularization
+#: field:wizard.regularize,period_id:0
+msgid "Period"
+msgstr "Período"
+
+#. module: account_regularization
+#: help:wizard.regularize,period_id:0
+msgid "Period for the move"
+msgstr "Período para el asiento"
+
+#. module: account_regularization
+#: selection:account.regularization,balance_calc:0
+#: selection:wizard.regularize,balance_calc:0
+#: field:wizard.regularize,periods:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: account_regularization
+#: help:wizard.regularize,periods:0
+msgid "Periods to regularize"
+msgstr "Períodos a regularizar"
+
+#. module: account_regularization
+#: field:account.move,regularization_id:0
+#: view:account.regularization:account_regularization.view_account_regularization_form
+#: view:wizard.regularize:account_regularization.view_wizard_regularization_form
+msgid "Regularization"
+msgstr "Regularización"
+
+#. module: account_regularization
+#: field:account.regularization,move_ids:0
+msgid "Regularization Moves"
+msgstr "Asientos regularización"
+
+#. module: account_regularization
+#: field:account.regularization,balance_calc:0
+#: field:wizard.regularize,balance_calc:0
+msgid "Regularization time calculation"
+msgstr "Tiempo de cálculo de la regularización"
+
+#. module: account_regularization
+#: model:ir.actions.act_window,name:account_regularization.action_account_regularization_form
+#: model:ir.ui.menu,name:account_regularization.menu_action_account_regularization_form
+msgid "Regularizations"
+msgstr "Regularizaciones"
+
+#. module: account_regularization
+#: view:wizard.regularize:account_regularization.view_wizard_regularization_form
+msgid "Regularize"
+msgstr "Regularizar"
+
+#. module: account_regularization
+#: field:account.regularization,credit_account_id:0
+msgid "Result account, credit"
+msgstr "Cuenta resultado haber"
+
+#. module: account_regularization
+#: field:account.regularization,debit_account_id:0
+msgid "Result account, debit"
+msgstr "Cuenta resultado debe"
+
+#. module: account_regularization
+#: view:wizard.regularize:account_regularization.view_wizard_regularization_form
+msgid "or"
+msgstr "o"
+
