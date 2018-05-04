@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_reconcile_helper
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-04 12:53+0000\n"
+"PO-Revision-Date: 2018-05-04 12:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"Language-Team: Mongolian (https://www.transifex.com/oca/teams/23907/mn/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: mn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_reconcile_helper
+#: field:account.move.line,credit_debit_balance:0
+msgid "Balance"
+msgstr ""
+
+#. module: account_move_reconcile_helper
+#: model:ir.model,name:account_move_reconcile_helper.model_account_move_line
+msgid "Journal Items"
+msgstr "Журналын бичилт"
+
+#. module: account_move_reconcile_helper
+#: view:account.move.line:account_move_reconcile_helper.view_account_move_line_filter_inherit
+msgid "Reconcile Ref"
+msgstr ""
+
+#. module: account_move_reconcile_helper
+#: view:account.move.line:account_move_reconcile_helper.view_move_line_tree_inherit
+msgid "Total Balance"
+msgstr ""
