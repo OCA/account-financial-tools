@@ -51,6 +51,7 @@ addon | version | summary
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 8.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_search_extension](account_move_line_search_extension/) | 8.0.1.0.0 | Journal Items Search Extension
 [account_move_locking](account_move_locking/) | 8.0.1.0.0 | Move locked to prevent modification
+[account_move_reconcile_helper](account_move_reconcile_helper/) | 8.0.1.1.0 | Account Move Reconcile Helper
 [account_move_template](account_move_template/) | 8.0.1.0.0 | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 8.0.1.0.0 | Compensate AR/AP accounts from the same partner
 [account_partner_required](account_partner_required/) | 8.0.0.1.0 | Account partner required
