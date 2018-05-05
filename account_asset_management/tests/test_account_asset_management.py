@@ -21,9 +21,11 @@
 #
 ##############################################################################
 
-from datetime import datetime
+import calendar
+from datetime import date, datetime
 
 import openerp.tests.common as common
+import openerp.tools as tools
 
 import time
 
@@ -138,13 +140,36 @@ class TestAssetManagement(common.TransactionCase):
         self.asset_model.compute_depreciation_board(
             self.cr, self.uid, [asset.id])
         asset.refresh()
-        self.assertEquals(asset.depreciation_line_ids[1].amount, 47.33)
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[4].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[5].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[6].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
+                                   46.44, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].depreciated_value,
+                46.44, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
+                                   47.33, places=2)
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[2].depreciated_value,
+                47.33, places=2)
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[1].depreciated_value, 0, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[4].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[5].amount,
+                               55.55, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[6].amount,
+                               55.55, places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   9.11, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   8.22, places=2)
 
     def test_3_proprata_init_prev_year(self):
         """Prorata temporis depreciation with init value in prev year."""
@@ -174,11 +199,15 @@ class TestAssetManagement(common.TransactionCase):
             self.cr, self.uid, [asset.id])
         asset.refresh()
         # I check the depreciated value is the initial value
-        self.assertEquals(asset.value_depreciated, 325.08)
+        self.assertAlmostEqual(asset.value_depreciated, 325.08,
+                               places=2)
         # I check computed values in the depreciation board
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55,
+                               places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount, 8.22,
+                               places=2)
 
     def test_4_prorata_init_cur_year(self):
         """Prorata temporis depreciation with init value in curent year."""
@@ -206,8 +235,50 @@ class TestAssetManagement(common.TransactionCase):
             self.cr, self.uid, [asset.id])
         asset.refresh()
         # I check the depreciated value is the initial value
-        self.assertEquals(asset.value_depreciated, 279.44)
+        self.assertAlmostEqual(asset.value_depreciated, 279.44,
+                               places=2)
         # I check computed values in the depreciation board
-        self.assertEquals(asset.depreciation_line_ids[2].amount, 45.64)
-        self.assertEquals(asset.depreciation_line_ids[3].amount, 55.55)
-        self.assertEquals(asset.depreciation_line_ids[-1].amount, 8.22)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                                   44.75, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
+                                   45.64, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[3].amount,
+                               55.55, places=2)
+        if calendar.isleap(date.today().year):
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   9.11, places=2)
+        else:
+            self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
+                                   8.22, places=2)
+
+    def test_5_import_multi_depreciation_lines(self):
+        base_import_model = self.registry('base_import.import')
+        account_asset_management_file = tools.file_open(
+            'account_asset_management/tests/test_account_asset_management.csv')
+        base_import_id = base_import_model.create(
+            self.cr, self.uid,
+            {'res_model': 'account.asset.asset',
+             'file': account_asset_management_file.read(),
+             'file_name': 'test_account_asset_management.csv',
+             'file_type': 'csv', })
+        base_import_model.do(self.cr, self.uid, base_import_id,
+                             ['name', 'type', 'purchase_value', 'date_start',
+                              'depreciation_line_ids/amount',
+                              'depreciation_line_ids/line_date',
+                              'depreciation_line_ids/init_entry',
+                              'method_period', 'method', 'method_time'],
+                             {'quoting': '"', 'separator': ',',
+                              'encoding': 'utf-8'})
+        asset_ids = self.asset_model.search(
+            self.cr, self.uid, [('name', '=', 'Test Account')])
+        self.assertEqual(len(asset_ids), 1)
+        asset = self.asset_model.browse(self.cr, self.uid, asset_ids[0])
+        self.assertEquals(len(asset.depreciation_line_ids), 3)
+        self.assertEquals(asset.depreciation_line_ids[1].amount, 1253.03)
+        self.assertEquals(asset.depreciation_line_ids[2].amount, 388.03)
+        self.assertEquals(
+            asset.depreciation_line_ids[1].depreciated_value, 0)
+        self.assertEquals(
+            asset.depreciation_line_ids[2].depreciated_value, 1253.03)

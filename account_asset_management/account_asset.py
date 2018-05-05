@@ -614,12 +614,9 @@ class account_asset_asset(orm.Model):
         for asset in self.browse(cr, uid, ids, context=context):
             if asset.value_residual == 0.0:
                 continue
-            domain = [
-                ('asset_id', '=', asset.id),
-                ('type', '=', 'depreciate'),
-                '|', ('move_check', '=', True), ('init_entry', '=', True)]
-            posted_depreciation_line_ids = depreciation_lin_obj.search(
-                cr, uid, domain, order='line_date desc')
+            posted_depreciation_line_ids = \
+                depreciation_lin_obj._get_posted_depreciation_line_ids(
+                    cr, uid, asset.id, context=context)
             if (len(posted_depreciation_line_ids) > 0):
                 last_depreciation_line = depreciation_lin_obj.browse(
                     cr, uid, posted_depreciation_line_ids[0], context=context)
@@ -1479,6 +1476,26 @@ class account_asset_depreciation_line(orm.Model):
             res['value'] = {
                 'remaining_value': asset_value - depreciated_value - amount}
         return res
+
+    def _get_posted_depreciation_line_ids(self, cr, uid, asset_id, context=None):
+        domain = [('asset_id', '=', asset_id),
+                  ('type', '=', 'depreciate'),
+                  '|', ('move_check', '=', True), ('init_entry', '=', True)]
+        return self.search(
+            cr, uid, domain, order='line_date desc', context=context)
+
+    def create(self, cr, uid, vals, context=None):
+        if not context:
+            context = {}
+        if not vals.get('previous_id') and vals.get('asset_id'):
+            # check if there is a previous line and set the previous line
+            posted_depreciation_line_ids = \
+                self._get_posted_depreciation_line_ids(
+                    cr, uid, vals.get('asset_id'), context=context)
+            if (len(posted_depreciation_line_ids) > 0):
+                vals['previous_id'] = posted_depreciation_line_ids[0]
+        return super(account_asset_depreciation_line, self).create(
+            cr, uid, vals, context=context)
 
     def unlink(self, cr, uid, ids, context=None):
         for dl in self.browse(cr, uid, ids, context):
