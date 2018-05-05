@@ -36,6 +36,7 @@ setuptools.setup(
         'odoo8-addon-account_move_line_payable_receivable_filter',
         'odoo8-addon-account_move_line_search_extension',
         'odoo8-addon-account_move_locking',
+        'odoo8-addon-account_move_reconcile_helper',
         'odoo8-addon-account_move_template',
         'odoo8-addon-account_netting',
         'odoo8-addon-account_partner_required',
