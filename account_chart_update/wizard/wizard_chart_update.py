@@ -441,6 +441,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Register detected differences
             try:
                 if not relation:
+                    if len(real) > 1:
+                        raise exceptions.Warning(
+                            _("Fiscal position duplicated:\n\n%s") % real[0].name)
                     if expected is not None and expected != real[key]:
                         result[key] = expected
                     elif template[key] != real[key]:
