@@ -7,7 +7,7 @@
 {
     'name': "Detect changes and update the Account Chart from a template",
     "summary": "Wizard to update a company's account chart from a template",
-    'version': "9.0.1.0.0",
+    'version': "9.0.1.0.1",
     'author': "Tecnativa, "
               "BCIM,"
               "Odoo Community Association (OCA)",
@@ -18,6 +18,7 @@
         'Pedro M. Baeza',
         'Jairo Llopis',
         'Jacques-Etienne Baudoux',
+        'Nacho Muñoz',
     ],
     'license': "AGPL-3",
     "data": [
