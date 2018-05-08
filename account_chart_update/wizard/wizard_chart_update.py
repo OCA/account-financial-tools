@@ -303,7 +303,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Find a real fiscal position from a template."""
         return self.env['account.fiscal.position'].search(
             [('name', 'in', templates.mapped("name")),
-             ('company_id', '=', self.company_id.id)])
+             ('company_id', '=', self.company_id.id)], limit=1)
 
     @api.multi
     @tools.ormcache("templates", "current_fp_accounts")
@@ -441,8 +441,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Register detected differences
             try:
                 if not relation:
-                    if len(real) > 1:
-                        real = real[0]
                     if expected is not None and expected != real[key]:
                         result[key] = expected
                     elif template[key] != real[key]:
