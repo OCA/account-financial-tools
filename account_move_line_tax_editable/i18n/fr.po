@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 13:32+0000\n"
-"PO-Revision-Date: 2018-04-13 13:32+0000\n"
+"POT-Creation-Date: 2018-04-14 02:39+0000\n"
+"PO-Revision-Date: 2018-04-14 02:39+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. module: account_move_line_tax_editable
 #: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line_is_tax_editable
 msgid "Is tax data editable?"
-msgstr ""
+msgstr "Les données de la taxe sont-elles éditables ?"
 
 #. module: account_move_line_tax_editable
 #: model:ir.model,name:account_move_line_tax_editable.model_account_move_line
