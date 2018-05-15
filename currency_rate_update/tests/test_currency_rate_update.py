@@ -14,7 +14,11 @@ class TestCurrencyRateUpdate(TransactionCase):
     def setUp(self):
         super(TestCurrencyRateUpdate, self).setUp()
         self.env.user.company_id.auto_currency_up = True
-        self.env.user.company_id.currency_id = self.env.ref('base.EUR')
+        self.env.cr.execute(
+            """UPDATE res_company SET currency_id = %s
+            WHERE id = %s""",
+            (self.env.user.company_id.id, self.env.ref('base.EUR').id),
+        )
         self.service_env = self.env['currency.rate.update.service']
         self.rate_env = self.env['res.currency.rate']
 
