@@ -131,3 +131,10 @@ class TestAccountMoveFiscalYear(TransactionCase):
             move_2018 in moves,
             move_2019 not in moves,
         ]))
+        # Search non existing year
+        moves = self.AccountMoveObj.search([
+            ('date_range_fy_id', 'ilike', '2016'),
+        ])
+        self.assertFalse(
+            moves
+        )

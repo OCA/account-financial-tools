@@ -154,3 +154,10 @@ class TestAccountMoveFiscalMonth(TransactionCase):
             move_march_2017 not in moves,
             move_jan_2018 not in moves,
         ]))
+        # Search non existing month
+        moves = self.AccountMoveObj.search([
+            ('date_range_fm_id', 'ilike', '2016'),
+        ])
+        self.assertFalse(
+            moves
+        )

@@ -30,6 +30,8 @@ class AccountMove(models.Model):
             date_range_domain = [('name', operator, value)]
 
         date_ranges = self.env['date.range'].search(date_range_domain)
+        if not date_ranges:
+            return [('id', '=', False)]
         domain = []
         for date_range in date_ranges:
             domain = expression.OR([domain, [

@@ -40,6 +40,9 @@ class AccountMove(models.Model):
         date_range_domain.append(('type_id', '=', fiscal_year_type.id))
         date_ranges = self.env['date.range'].search(date_range_domain)
 
+        if not date_ranges:
+            return [('id', '=', False)]
+
         domain = []
         for date_range in date_ranges:
             domain = expression.OR([domain, [
