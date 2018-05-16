@@ -2,10 +2,12 @@
 # Copyright 2016 - Tecnativa - Angel Moya <odoo@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import at_install, post_install, TransactionCase
 from odoo import exceptions
 
 
+@at_install(False)
+@post_install(True)
 class TestAccountInvoiceTaxRequired(TransactionCase):
 
     def setUp(self):
