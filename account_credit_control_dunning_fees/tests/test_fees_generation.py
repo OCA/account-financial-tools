@@ -15,7 +15,10 @@ class FixedFeesTester(common.TransactionCase):
         self.assertTrue(self.usd)
 
         self.company = self.browse_ref('base.main_company')
-        self.company.currency_id = self.euro
+        self.env.cr.execute(
+            """UPDATE res_company SET currency_id = %s
+            WHERE id = %s""", (self.company.id, self.euro.id),
+        )
 
         level_obj = self.env['credit.control.policy.level']
         self.euro_level = level_obj.new({
