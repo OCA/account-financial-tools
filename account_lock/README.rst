@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-=========================
-Account Journal Lock Date
-=========================
+============
+Account Lock
+============
 
 Lock each accounting journal or accounting move independently.
 
@@ -40,10 +40,6 @@ the moves after the lock date. There are certain restiction in locking, like
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/92/11.0
-
-Known issues / Roadmap
-======================
-
 
 Bug Tracker
 ===========
