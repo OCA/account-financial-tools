@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-19 09:13+0000\n"
-"PO-Revision-Date: 2014-11-19 09:13+0000\n"
+"POT-Creation-Date: 2018-06-12 11:22+0000\n"
+"PO-Revision-Date: 2018-06-12 11:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Account"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Account / Tax"
+#: model:ir.model.fields,help:account_tax_analysis.field_account_move_line_account_type
+msgid "Account Type is used for information purpose, to generate country-specific legal reports, and set the rules to close a fiscal year and generate opening entries."
 msgstr ""
 
 #. module: account_tax_analysis
@@ -32,109 +32,140 @@ msgid "Account Vat Declaration"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account type"
+msgstr ""
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Entries"
+msgstr ""
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Posted Entries"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_tax_analysis_name
+msgid "Analysis name"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Cancel"
 msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,create_uid:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,create_date:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_date
 msgid "Created on"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Filters"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_date_range_id
+msgid "Date Range"
 msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,fiscalyear_id:0
-msgid "Fiscalyear"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_display_name
+msgid "Display Name"
 msgstr ""
 
 #. module: account_tax_analysis
-#: help:account.vat.declaration.analysis,fiscalyear_id:0
-msgid "Fiscalyear to look on"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_end_date
+msgid "End date"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Group By..."
-msgstr ""
-
-#. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,id:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_id
 msgid "ID"
 msgstr ""
 
 #. module: account_tax_analysis
-#: help:account.vat.declaration.analysis,period_list:0
-msgid "If no period is selected, all the periods of the fiscal year will be used"
-msgstr ""
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Journal"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
-msgid "Journal Items"
+#: model:ir.model,name:account_tax_analysis.model_account_move_line
+msgid "Journal Item"
 msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,write_uid:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,write_date:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Month"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Partner"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Period"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
-#: field:account.vat.declaration.analysis,period_list:0
-msgid "Periods"
-msgstr ""
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted Journal Items"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Search Journal Items"
-msgstr ""
-
-#. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Show tax lines"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Tax account"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_start_date
+msgid "Start date"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_target_move
+msgid "Target Moves"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_tax
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_analysis_tax
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax / Account Type"
 msgstr ""
 
 #. module: account_tax_analysis
@@ -144,42 +175,42 @@ msgid "Taxes Analysis"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Taxes Report"
 msgstr ""
 
 #. module: account_tax_analysis
-#: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
-msgid "This menu print a VAT declaration based on invoices or payments. You can select one or several periods of the fiscal year. Information required for a tax declaration is automatically generated by OpenERP from invoices (or payments, in some countries). This data is updated in real time. That’s very useful because it enables you to preview at any time the tax that you owe at the start and end of the month or quarter."
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total Tax"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
-msgid "Total Taxe"
-msgstr ""
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total credit"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total debit"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_account_type
+msgid "Type"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted Journal Items"
 msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
-msgid "or"
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Year"
 msgstr ""
 
