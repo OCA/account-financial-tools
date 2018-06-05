@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: Vincent Renaville
+     Copyright 2013 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <record id="view_account_move_line_filter_vat_analysis" model="ir.ui.view">
+        <field name="name">Journal Items Tax</field>
+        <field name="model">account.move.line</field>
+        <field eval="32" name="priority"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="date"/>
+                <field name="account_id"/>
+                <group name="filters">
+                    <filter name="unposted"
+                          string="Unposted"
+                          domain="[('move_id.state','=','draft')]"
+                          help="Unposted Journal Items"/>
+                    <filter name="posted"
+                          string="Posted"
+                          domain="[('move_id.state','=','posted')]"
+                          help="Posted Journal Items"/>
+                </group>
+                <group name="group_by">
+                    <filter string="Tax / Account Type"
+                          name="group_by_tax_type"
+                          domain="[]"
+                          context="{'group_by': ['analysis_tax', 'account_type', 'account_id'] }"/>
+                    <filter string="Tax"
+                          name="group_by_tax"
+                          domain="[]"
+                          context="{'group_by': 'analysis_tax'}"/>
+                    <filter string="Account type"
+                          name="group_by_account_type"
+                          context="{'group_by': 'account_type'}"/>
+                    <filter string="Account"
+                          name="group_by_account"
+                          context="{'group_by': 'account_id'}"/>
+                    <filter string="Partner"
+                          name="group_by_partner"
+                          domain="[]"
+                          context="{'group_by': 'partner_id'}"/>
+                    <filter string="Journal"
+                          name="group_by_journal"
+                          domain="[]"
+                          context="{'group_by': 'journal_id'}"/>
+                    <filter name="group_by_month"
+                          string="Month"
+                          context="{'group_by': 'date:month'}" />
+                    <filter name="group_by_year"
+                          string="Year"
+                          context="{'group_by': 'date:year'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_move_line_tree_tax_analysis" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field eval="16" name="priority"/>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="analysis_tax" />
+                <field name="account_type" />
+                <field name="account_id" />
+                <field name="partner_id" />
+                <field name="debit" sum="Total debit"/>
+                <field name="credit" sum="Total credit"/>
+                <field name="balance" sum="Total Tax"/>
+                <field name="name"/>
+                <field name="journal_type" invisible="1"/>
+                <button type="object" name="action_show_invoice" string="View invoice" icon="fa-search" attrs="{'invisible': [('journal_type', 'not in', ['sale', 'purchase'])]}"/>
+                <field name="move_id"/>
+                <field name="date"/>
+                <field name="amount_currency" groups="base.group_multi_currency" />
+                <field name="currency_id" groups="base.group_multi_currency" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_view_tax_analysis" model="ir.actions.act_window">
+        <field name="name">Taxes Analysis</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_account_move_line_filter_vat_analysis"/>
+        <field name="view_id" ref="view_move_line_tree_tax_analysis"/>
+    </record>
+
+</odoo>
