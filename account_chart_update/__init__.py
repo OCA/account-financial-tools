@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2010 Zikzakmedia S.L. (http://www.zikzakmedia.com)
 # © 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 # © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
