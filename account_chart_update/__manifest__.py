@@ -8,12 +8,12 @@
 {
     'name': "Detect changes and update the Account Chart from a template",
     "summary": "Wizard to update a company's account chart from a template",
-    'version': "10.0.2.0.0",
+    'version': "11.0.1.0.0",
     'author': "Tecnativa, "
               "BCIM, "
               "Okia, "
               "Odoo Community Association (OCA)",
-    'website': "http://odoo-community.org",
+    'website': "http://github.com/OCA/account-financial-tools",
     'depends': ["account"],
     'development_status': 'Mature',
     'category': "Accounting",
