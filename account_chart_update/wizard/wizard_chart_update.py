@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2010 Jordi Esteve, Zikzakmedia S.L. (http://www.zikzakmedia.com)
 # © 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #        Borja López Soilán
@@ -12,7 +11,7 @@
 from odoo import _, api, exceptions, fields, models, tools
 from odoo.tools import config
 from contextlib import closing
-from cStringIO import StringIO
+from io import StringIO
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -445,7 +444,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         result = list()
         different_fields = sorted(
             template._fields[f].get_description(self.env)["string"]
-            for f in self.diff_fields(template, real).keys())
+            for f in list(self.diff_fields(template, real).keys()))
         if different_fields:
             result.append(
                 _("Differences in these fields: %s.") %
@@ -629,8 +628,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Update the account
                 try:
                     with self.env.cr.savepoint():
-                        for key, value in (self.diff_fields(template, account)
-                                           .iteritems()):
+                        for key, value in (iter(self.diff_fields(
+                                template, account).items())):
                             account[key] = value
                             _logger.info(
                                 _("Updated account %s."),
@@ -709,7 +708,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 )
             else:
                 # Update the given fiscal position
-                for key, value in self.diff_fields(template, fp).iteritems():
+                for key, value in self.diff_fields(template, fp).items():
                     fp[key] = value
             _logger.info(
                 _("Created or updated fiscal position %s."),
