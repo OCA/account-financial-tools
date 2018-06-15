@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 Onestein (<http://www.onestein.eu>)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2015-2018 Onestein (<http://www.onestein.eu>)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class AccountInvoiceLine(models.Model):
@@ -17,12 +17,5 @@ class AccountInvoiceLine(models.Model):
         'account.cost.center',
         string='Cost Center',
         index=True,
-        default=_default_cost_center
+        default=lambda self: self._default_cost_center(),
     )
-
-    @api.model
-    def move_line_get_item(self, line):
-        res = super(AccountInvoiceLine, self).move_line_get_item(line)
-        if line.cost_center_id:
-            res['cost_center_id'] = line.cost_center_id.id
-        return res
