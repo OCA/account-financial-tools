@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_invoice_currency
-# 
+#
 # Translators:
 # Ozge Altinisik <ozge@altinkaya.com.tr>, 2017
 msgid ""
@@ -11,16 +11,23 @@ msgstr ""
 "POT-Creation-Date: 2016-12-31 00:07+0000\n"
 "PO-Revision-Date: 2016-12-31 00:07+0000\n"
 "Last-Translator: Ozge Altinisik <ozge@altinkaya.com.tr>, 2017\n"
-"Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/tr_TR/)\n"
+"Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/"
+"tr_TR/)\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: tr_TR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_invoice_currency
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_company_currency_form
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_company_currency_form
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Amount Due"
+msgstr ""
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_form
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_form
 msgid "Amounts in company currency"
 msgstr ""
 
@@ -37,4 +44,16 @@ msgstr ""
 #. module: account_invoice_currency
 #: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice_amount_tax_signed
 msgid "Tax"
+msgstr ""
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Total"
+msgstr ""
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Total (Company Currency)"
 msgstr ""
