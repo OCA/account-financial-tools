@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_balance_line
-# 
+#
 # Translators:
 # Claudio Araujo Santos <claudioaraujosantos@gmail.com>, 2017
 msgid ""
@@ -10,25 +10,20 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-08 03:37+0000\n"
 "PO-Revision-Date: 2017-01-08 03:37+0000\n"
-"Last-Translator: Claudio Araujo Santos <claudioaraujosantos@gmail.com>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"Last-Translator: Claudio Araujo Santos <claudioaraujosantos@gmail.com>, "
+"2017\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#. module: account_balance_line
-#: model:ir.model.fields,field_description:account_balance_line.field_account_move_line_line_balance
-msgid "Balance"
-msgstr ""
-
-#. module: account_balance_line
-#: model:ir.model,name:account_balance_line.model_account_move_line
-msgid "Journal Item"
-msgstr "Diário  Item"
 
 #. module: account_balance_line
 #: model:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_custom
 msgid "Total Balance"
 msgstr ""
+
+#~ msgid "Journal Item"
+#~ msgstr "Diário  Item"
