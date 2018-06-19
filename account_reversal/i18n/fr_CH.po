@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_reversal
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # leemannd <leemannd@gmail.com>, 2016
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-25 21:44+0000\n"
 "PO-Revision-Date: 2016-11-25 21:44+0000\n"
 "Last-Translator: leemannd <leemannd@gmail.com>, 2016\n"
-"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/23907/fr_CH/)\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/"
+"teams/23907/fr_CH/)\n"
+"Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_reversal
@@ -69,8 +70,8 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
 msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same"
-" journal of the move to reverse."
+"Enter the date of the reversal account entries. If empty, Odoo uses the same "
+"journal of the move to reverse."
 msgstr ""
 
 #. module: account_reversal
@@ -111,26 +112,16 @@ msgid "Last Updated on"
 msgstr "Modifié le"
 
 #. module: account_reversal
-#: model:ir.model.fields,help:account_reversal.field_account_move_reverse_post
-msgid "Mark this if you want to post reversal move"
-msgstr ""
-
-#. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
-
-#. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_post
-msgid "Post"
 msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
 msgid ""
 "Prefix that will be added to the 'Name' of the reversal account entrie "
-"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE:"
-" A space is added after the prefix)."
+"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
+"A space is added after the prefix)."
 msgstr ""
 
 #. module: account_reversal
@@ -152,7 +143,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3580
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
 msgid "Reversal Entry"
 msgstr ""
 
@@ -162,13 +153,12 @@ msgid "Reversal Journal"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:62
+#: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
 msgstr ""
@@ -187,7 +177,7 @@ msgid "To Be Reversed"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/models/account_move.py:51
+#: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
 msgstr ""

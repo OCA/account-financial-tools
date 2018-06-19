@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_reversal
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-05-11 00:39+0000\n"
 "PO-Revision-Date: 2017-05-11 00:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: English (United Kingdom) (https://www.transifex.com/oca/teams/23907/en_GB/)\n"
+"Language-Team: English (United Kingdom) (https://www.transifex.com/oca/"
+"teams/23907/en_GB/)\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_reversal
@@ -68,8 +69,8 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
 msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same"
-" journal of the move to reverse."
+"Enter the date of the reversal account entries. If empty, Odoo uses the same "
+"journal of the move to reverse."
 msgstr ""
 
 #. module: account_reversal
@@ -118,8 +119,8 @@ msgstr ""
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
 msgid ""
 "Prefix that will be added to the 'Name' of the reversal account entrie "
-"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE:"
-" A space is added after the prefix)."
+"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
+"A space is added after the prefix)."
 msgstr ""
 
 #. module: account_reversal
@@ -141,7 +142,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3705
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
 msgid "Reversal Entry"
 msgstr ""
 
@@ -151,13 +152,12 @@ msgid "Reversal Journal"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.actions.act_window,name:account_reversal.act_account_move_reverse
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/wizard/account_move_reverse.py:59
+#: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
 msgstr ""
@@ -176,7 +176,7 @@ msgid "To Be Reversed"
 msgstr ""
 
 #. module: account_reversal
-#: code:addons/account_reversal/models/account_move.py:57
+#: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
 msgstr ""
