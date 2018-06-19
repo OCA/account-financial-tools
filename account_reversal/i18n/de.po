@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_reversal
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2018-05-17 15:49+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_reversal
@@ -72,8 +72,8 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
 msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same"
-" journal of the move to reverse."
+"Enter the date of the reversal account entries. If empty, Odoo uses the same "
+"journal of the move to reverse."
 msgstr ""
 "Geben Sie das Journal der Kontosaldierung an. Ohne Vorgabe wird Odoo das "
 "Journal der Ursprungsbuchung für die Saldierungsbuchung heranziehen."
@@ -118,15 +118,14 @@ msgstr "Zuletzt geändert am"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
-"Dies setzen, wenn Sie die Posten beider Buchungen ausgleichen möchten."
+msgstr "Dies setzen, wenn Sie die Posten beider Buchungen ausgleichen möchten."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
 msgid ""
 "Prefix that will be added to the 'Name' of the reversal account entrie "
-"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE:"
-" A space is added after the prefix)."
+"items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
+"A space is added after the prefix)."
 msgstr ""
 "Präfix, der der Bezeichnung der Umkehrbuchungen vorangestellt wird. Wenn "
 "leer, wird Odoo die Bezeichnung aus der Ursprungsbuchung übernehmen. "
@@ -140,8 +139,8 @@ msgid ""
 "after the prefix)."
 msgstr ""
 "Präfix, der der Referenz den Umkehrbuchungen vorangestellt wird. Wenn leer, "
-"wird Odoo die Bezeichnung aus der Ursprungsbuchung übernehmen. (HINWEIS: dem"
-" Präfix wird ein Leerzeichen angehängt)."
+"wird Odoo die Bezeichnung aus der Ursprungsbuchung übernehmen. (HINWEIS: dem "
+"Präfix wird ein Leerzeichen angehängt)."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
