@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_chart_update
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Quentin THEURET <odoo@kerpeo.com>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-08-25 23:15+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_chart_update
@@ -181,8 +181,7 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_update_fiscal_position
 msgid ""
-"Existing fiscal positions are updated. Fiscal positions are searched by "
-"name."
+"Existing fiscal positions are updated. Fiscal positions are searched by name."
 msgstr ""
 "Les positions fiscales existantes seront mises à jour. Les positions "
 "fiscales sont recherchées par nom."
@@ -203,8 +202,8 @@ msgstr "Modèle de position fiscale"
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
 msgstr ""
-"La position fiscale qui a besoin d'être mise à jour (nouvelle ou mise à jour"
-" dans le modèle)."
+"La position fiscale qui a besoin d'être mise à jour (nouvelle ou mise à jour "
+"dans le modèle)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fiscal_position_update_fiscal_position_id
@@ -246,10 +245,12 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid ""
-"If you leave these options set, the wizard will not just create new records,"
-" but also update records with changes (i.e. different tax amount)"
+"If you leave these options set, the wizard will not just create new records, "
+"but also update records with changes (i.e. different tax amount)"
 msgstr ""
-"Si vous quittez le paramétrage des options, l'assistant ne créera  pas seulement de nouveaux enregistrements, mais mettra à jour également les enregistrements modifiés.\n"
+"Si vous quittez le paramétrage des options, l'assistant ne créera  pas "
+"seulement de nouveaux enregistrements, mais mettra à jour également les "
+"enregistrements modifiés.\n"
 "(ex. montant de la taxe différent)"
 
 #. module: account_chart_update
@@ -429,8 +430,7 @@ msgstr "Modèle de taxe"
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
 msgstr ""
-"La taxe a besoin d'être mise à jour (nouvelle ou mise à jour dans le "
-"modèle)."
+"La taxe a besoin d'être mise à jour (nouvelle ou mise à jour dans le modèle)."
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
