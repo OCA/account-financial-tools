@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_fiscal_year
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2016-05-27 02:44+0000\n"
 "PO-Revision-Date: 2016-05-23 07:25+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-9-0/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_year
@@ -52,7 +53,8 @@ msgstr "Ist Geschäftsjahr?"
 #: code:addons/account_fiscal_year/models/date_range_type.py:22
 #, python-format
 msgid "You cannot delete a date range type with flag \"fiscal_year\""
-msgstr "Sie dürfen eine Zeitraumart mit Kennzeichen \"Geschäftsjahr\" nicht löschen"
+msgstr ""
+"Sie dürfen eine Zeitraumart mit Kennzeichen \"Geschäftsjahr\" nicht löschen"
 
 #. module: account_fiscal_year
 #: model:ir.model,name:account_fiscal_year.model_date_range_type
