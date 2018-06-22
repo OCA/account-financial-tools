@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * currency_rate_update
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # Bole <bole@dajmi5.com>, 2015
@@ -26,11 +26,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
 "PO-Revision-Date: 2017-04-25 10:43+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: currency_rate_update
@@ -146,13 +147,15 @@ msgstr "banque Centrale Européenne"
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:77
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
-msgstr "La donnée d'échange pour %s n'est pas rapporter par la Banque du Canada"
+msgstr ""
+"La donnée d'échange pour %s n'est pas rapporter par la Banque du Canada"
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/services/update_service_CA_BOC.py:98
 #, python-format
 msgid "Exchange data format error for Bank of Canada - %s !"
-msgstr "Erreur de formatage des données échangées pour la Banque du Canada - %s !"
+msgstr ""
+"Erreur de formatage des données échangées pour la Banque du Canada - %s !"
 
 #. module: currency_rate_update
 #: field:currency.rate.update.service,interval_number:0
@@ -170,7 +173,10 @@ msgid ""
 "If the time delta between the rate date given by the webservice and the "
 "current date exceeds this value, then the currency rate is not updated in "
 "OpenERP."
-msgstr "Si la différence de temps entre le taux à la date donnée par le service web et la date actuelle dépasse cette valeur, alors la devise ne sera pas mise à jour dans Odoo."
+msgstr ""
+"Si la différence de temps entre le taux à la date donnée par le service web "
+"et la date actuelle dépasse cette valeur, alors la devise ne sera pas mise à "
+"jour dans Odoo."
 
 #. module: currency_rate_update
 #: code:addons/currency_rate_update/model/currency_rate_update.py:152
@@ -263,9 +269,11 @@ msgstr "Semaines(s)"
 #. module: currency_rate_update
 #: help:res.company,multi_company_currency_enable:0
 msgid ""
-"When this option is unchecked it will allow users to set a distinct currency"
-" updates on each company."
-msgstr "Lorsque cette option est décochée, cela autorise les utilisateurs a avoir des mises à jours de devise par société."
+"When this option is unchecked it will allow users to set a distinct currency "
+"updates on each company."
+msgstr ""
+"Lorsque cette option est décochée, cela autorise les utilisateurs a avoir "
+"des mises à jours de devise par société."
 
 #. module: currency_rate_update
 #: selection:currency.rate.update.service,service:0

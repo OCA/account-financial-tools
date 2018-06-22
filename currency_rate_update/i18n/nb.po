@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * currency_rate_update
-# 
+#
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
@@ -29,11 +29,12 @@ msgstr ""
 "POT-Creation-Date: 2016-12-23 23:21+0000\n"
 "PO-Revision-Date: 2016-12-27 08:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nb/)\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/nb/)\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: currency_rate_update
@@ -266,8 +267,8 @@ msgstr ""
 #. module: currency_rate_update
 #: help:res.company,multi_company_currency_enable:0
 msgid ""
-"When this option is unchecked it will allow users to set a distinct currency"
-" updates on each company."
+"When this option is unchecked it will allow users to set a distinct currency "
+"updates on each company."
 msgstr ""
 
 #. module: currency_rate_update
