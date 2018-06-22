@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_netting
-# 
+#
 # Translators:
 # Pedro Castro Silva <pedrocs@exo.pt>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-12-08 23:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_netting
@@ -125,11 +125,13 @@ msgstr "Selecione o Diário onde guardar os lançamentos"
 #: code:addons/account_netting/wizards/account_move_make_netting.py:47
 #, python-format
 msgid ""
-"The 'Compensate' function is intended to balance operations on different accounts for the same partner.\n"
+"The 'Compensate' function is intended to balance operations on different "
+"accounts for the same partner.\n"
 "In this case all selected entries belong to the same account.\n"
 " Please use the 'Reconcile' function."
 msgstr ""
-"A função 'Compensar' pretende balancear operações em contas diferentes para o mesmo parceiro.\n"
+"A função 'Compensar' pretende balancear operações em contas diferentes para "
+"o mesmo parceiro.\n"
 "Neste caso todos os lançamentos selecionados pertencem à mesma conta.\n"
 "Por favor, use a função 'Reconciliar'."
 
@@ -137,8 +139,8 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid ""
 "This operation will generate account entries that are counterpart of the "
-"receivable/payable accounts selected, and reconcile each other, letting this"
-" balance in the partner:"
+"receivable/payable accounts selected, and reconcile each other, letting this "
+"balance in the partner:"
 msgstr ""
 "Esta operação gerará itens de diário que são contrapartida das contas a "
 "receber/a pagar selecionadas, e realizará a reconciliação, deixando este "

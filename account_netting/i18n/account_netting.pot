@@ -1,23 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_netting
+#	* account_netting
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/"
-"tr_TR/)\n"
-"Language: tr_TR\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:72
@@ -40,8 +34,7 @@ msgstr ""
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:56
 #, python-format
-msgid ""
-"All entries should have a partner and the partner must be the same for all."
+msgid "All entries should have a partner and the partner must be the same for all."
 msgstr ""
 
 #. module: account_netting
@@ -57,7 +50,7 @@ msgstr ""
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Cancel"
-msgstr "İptal et"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
@@ -73,22 +66,22 @@ msgstr ""
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_create_uid
 msgid "Created by"
-msgstr "Oluşturan"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_create_date
 msgid "Created on"
-msgstr "Oluşturulma tarihi"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_display_name
 msgid "Display Name"
-msgstr "Görünen ad"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_id
 msgid "ID"
-msgstr "Kimlik"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_journal_id
@@ -98,17 +91,17 @@ msgstr ""
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting___last_update
 msgid "Last Modified on"
-msgstr "En son güncelleme tarihi"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_write_uid
 msgid "Last Updated by"
-msgstr "En son güncelleyen "
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_write_date
 msgid "Last Updated on"
-msgstr "En son güncelleme tarihi"
+msgstr ""
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_move_line_ids
@@ -123,19 +116,14 @@ msgstr ""
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:47
 #, python-format
-msgid ""
-"The 'Compensate' function is intended to balance operations on different "
-"accounts for the same partner.\n"
+msgid "The 'Compensate' function is intended to balance operations on different accounts for the same partner.\n"
 "In this case all selected entries belong to the same account.\n"
 " Please use the 'Reconcile' function."
 msgstr ""
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
-msgid ""
-"This operation will generate account entries that are counterpart of the "
-"receivable/payable accounts selected, and reconcile each other, letting this "
-"balance in the partner:"
+msgid "This operation will generate account entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner:"
 msgstr ""
 
 #. module: account_netting
@@ -158,3 +146,4 @@ msgstr ""
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "account.move.make.netting"
 msgstr ""
+
