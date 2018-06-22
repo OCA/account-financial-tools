@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_asset_management
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
@@ -21,11 +21,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
 "PO-Revision-Date: 2017-08-25 22:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_asset_management
@@ -37,12 +38,19 @@ msgstr "Nº de Linhas de Depreciação"
 #: model:ir.actions.act_window,help:account_asset_management.action_asset_asset_report
 msgid ""
 "<p>\n"
-"          From this report, you can have an overview on all depreciations. The\n"
-"          tool search can also be used to personalise your Assets reports and\n"
+"          From this report, you can have an overview on all depreciations. "
+"The\n"
+"          tool search can also be used to personalise your Assets reports "
+"and\n"
 "          so, match this analysis to your needs;\n"
 "        </p>\n"
 "      "
-msgstr "<p>\nA partir deste relatório, consegue ter uma visão geral das depreciações. A\nferramenta de pesquisa pode também ser usada para personalizar os seus\nrelatórios de Ativos e assim ajustar esta análise às suas necessidades;\n</p>"
+msgstr ""
+"<p>\n"
+"A partir deste relatório, consegue ter uma visão geral das depreciações. A\n"
+"ferramenta de pesquisa pode também ser usada para personalizar os seus\n"
+"relatórios de Ativos e assim ajustar esta análise às suas necessidades;\n"
+"</p>"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -111,7 +119,9 @@ msgstr "Mov. Diário Remoção Ativo '%s'"
 msgid ""
 "Asset '%s' contains unposted lines prior to the selected period.\n"
 "Please post these entries first !"
-msgstr "O Ativo '%s' contém linhas não registadas anteriores ao período selecionado. Por favor, valide primeiro os referidos movimentos!"
+msgstr ""
+"O Ativo '%s' contém linhas não registadas anteriores ao período selecionado. "
+"Por favor, valide primeiro os referidos movimentos!"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_asset_list_normal
@@ -300,7 +310,10 @@ msgid ""
 "Complete this field when selling an asset in order to facilitate the "
 "creation of the asset removal accounting entries via the asset 'Removal' "
 "button"
-msgstr "Complete este campo quando vende um ativo, de forma a facilitar a criação dos movimentos contabilísticos de remoção do ativo através do botão 'Remover' do ativo."
+msgstr ""
+"Complete este campo quando vende um ativo, de forma a facilitar a criação "
+"dos movimentos contabilísticos de remoção do ativo através do botão "
+"'Remover' do ativo."
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,date_completed:0
@@ -365,12 +378,15 @@ msgstr "Data de depreciação"
 #. module: account_asset_management
 #: help:account.asset.recompute.trigger,date_trigger:0
 msgid "Date of the event triggering the need to recompute the Asset Tables."
-msgstr "Data do evento que despoleta a necessidade de recalcular as Tabelas do Ativo."
+msgstr ""
+"Data do evento que despoleta a necessidade de recalcular as Tabelas do Ativo."
 
 #. module: account_asset_management
 #: help:account.account,asset_category_id:0
 msgid "Default Asset Category when creating invoice lines with this account."
-msgstr "Categoria por Defeito do Ativo na criação de linhas de faturas com esta conta."
+msgstr ""
+"Categoria por Defeito do Ativo na criação de linhas de faturas com esta "
+"conta."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:52
@@ -733,15 +749,24 @@ msgstr "Política de Movimentos de Remoção"
 #: help:account.asset.remove,posting_regime:0
 msgid ""
 "Removal Entry Policy \n"
-"  * Residual Value: The non-depreciated value will be posted on the 'Residual Value Account' \n"
-"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value Account' or 'Min-Value Account' "
-msgstr "Política Remoção Movimentos:\n* Valor Residual: o valor não depreciado será registado na 'Conta de Valor Residual'\n* Ganhos/Perdas na Venda: O Ganho ou Perda será registado respetivamente na 'Conta de Mais-Valia' ou 'Conta de Menos-Valia'"
+"  * Residual Value: The non-depreciated value will be posted on the "
+"'Residual Value Account' \n"
+"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value "
+"Account' or 'Min-Value Account' "
+msgstr ""
+"Política Remoção Movimentos:\n"
+"* Valor Residual: o valor não depreciado será registado na 'Conta de Valor "
+"Residual'\n"
+"* Ganhos/Perdas na Venda: O Ganho ou Perda será registado respetivamente na "
+"'Conta de Mais-Valia' ou 'Conta de Menos-Valia'"
 
 #. module: account_asset_management
 #: help:account.asset.remove,date_remove:0
 msgid ""
 "Removal date must be after the last posted entry in case of early removal"
-msgstr "A data de remoção deve ser posterior à do último registo no caso de remoção prematura."
+msgstr ""
+"A data de remoção deve ser posterior à do último registo no caso de remoção "
+"prematura."
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -791,9 +816,11 @@ msgstr "Pesquisar categoria de ativos"
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0
 msgid ""
-"Set this flag for entries of previous fiscal years for which OpenERP has not"
-" generated accounting entries."
-msgstr "Assinale esta opção para movimentos de anos fiscais anteriores para os quais o Odoo não gerou movimentos contabilísticos."
+"Set this flag for entries of previous fiscal years for which OpenERP has not "
+"generated accounting entries."
+msgstr ""
+"Assinale esta opção para movimentos de anos fiscais anteriores para os quais "
+"o Odoo não gerou movimentos contabilísticos."
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -808,9 +835,9 @@ msgstr "Estado"
 #. module: account_asset_management
 #: constraint:account.account:0
 msgid ""
-"The Asset Account defined in the Asset Category must be equal to the "
-"account."
-msgstr "A Conta de Ativo definida na Categoria de Ativo tem que ser igual à conta."
+"The Asset Account defined in the Asset Category must be equal to the account."
+msgstr ""
+"A Conta de Ativo definida na Categoria de Ativo tem que ser igual à conta."
 
 #. module: account_asset_management
 #: sql_constraint:account.asset.remove:0
@@ -821,9 +848,11 @@ msgstr "O Valor de Venda tem que ser positivo!"
 #: code:addons/account_asset_management/account_asset.py:680
 #, python-format
 msgid ""
-"The duration of the asset conflicts with the posted depreciation table entry"
-" dates."
-msgstr "A duração do ativo é incompatível com as datas dos movs. da tabela de depreciação."
+"The duration of the asset conflicts with the posted depreciation table entry "
+"dates."
+msgstr ""
+"A duração do ativo é incompatível com as datas dos movs. da tabela de "
+"depreciação."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:312
@@ -835,11 +864,17 @@ msgstr "A data de remoção tem que ser posterior à data da última depreciaç�
 #: help:account.config.settings,module_account_asset_management:0
 msgid ""
 "This allows you to manage the assets owned by a company\n"
-"                    or a person. It keeps track of the depreciation occurred\n"
+"                    or a person. It keeps track of the depreciation "
+"occurred\n"
 "                    on those assets, and creates account move for those\n"
 "                    depreciation lines.\n"
 "                    This installs the module account_asset_management."
-msgstr "Permite que possa gerir os ativos na posse de uma empresa\nou pessoa. Mantém o registo das depreciações ocorridas\nnesses ativos e cria movimentos contabilísticos para essas\ndepreciações.\nInstala o módulo account_asset_management."
+msgstr ""
+"Permite que possa gerir os ativos na posse de uma empresa\n"
+"ou pessoa. Mantém o registo das depreciações ocorridas\n"
+"nesses ativos e cria movimentos contabilísticos para essas\n"
+"depreciações.\n"
+"Instala o módulo account_asset_management."
 
 #. module: account_asset_management
 #: help:account.asset.asset,asset_value:0
@@ -885,7 +920,9 @@ msgstr "Vista Movimento"
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
-msgstr "Não é permitido ligar um movimento contabilístico a um ativo.\nDeve gerar esses movimentos através do ativo."
+msgstr ""
+"Não é permitido ligar um movimento contabilístico a um ativo.\n"
+"Deve gerar esses movimentos através do ativo."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1520
@@ -894,7 +931,9 @@ msgstr "Não é permitido ligar um movimento contabilístico a um ativo.\nDeve g
 msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
-msgstr "Não é permitido remover um movimento contabilístico ligado a um ativo.\nDeve fazê-lo através do ativo."
+msgstr ""
+"Não é permitido remover um movimento contabilístico ligado a um ativo.\n"
+"Deve fazê-lo através do ativo."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:243
@@ -908,49 +947,64 @@ msgstr "Apenas pode remover ativos no estado Rascunho."
 msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
-msgstr "Não pode efetuar um remoção antecipada enquanto houver linhas de depreciação por registar relativas a períodos anteriores."
+msgstr ""
+"Não pode efetuar um remoção antecipada enquanto houver linhas de depreciação "
+"por registar relativas a períodos anteriores."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1528
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
-msgstr "Não pode modificar uma linha de depreciação com movimento contabilístico associado."
+msgstr ""
+"Não pode modificar uma linha de depreciação com movimento contabilístico "
+"associado."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:74
 #, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
-msgstr "Não pode modificar um movimento contabilístico ligado a uma linha de depreciação de ativo."
+msgstr ""
+"Não pode modificar um movimento contabilístico ligado a uma linha de "
+"depreciação de ativo."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:141
 #, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
-msgstr "Não pode modificar um item contabilístico ligado a uma linha de depreciação de ativo."
+msgstr ""
+"Não pode modificar um item contabilístico ligado a uma linha de depreciação "
+"de ativo."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1165
 #, python-format
 msgid "You cannot change the category of an asset with accounting entries."
-msgstr "Não pode modificar a categoria de um ativo com movimentos contabilísticos."
+msgstr ""
+"Não pode modificar a categoria de um ativo com movimentos contabilísticos."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:462
 #, python-format
 msgid ""
-"You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
+"You cannot compute a depreciation table for an asset starting in an "
+"undefined future fiscal year.\n"
 "Please correct the start date for asset '%s'."
-msgstr "Não pode calcular a tabela de depreciação para um ativo começando num futuro ano fiscal indefinido.\nPor favor, corrija a data de início para o ativo '%s'."
+msgstr ""
+"Não pode calcular a tabela de depreciação para um ativo começando num futuro "
+"ano fiscal indefinido.\n"
+"Por favor, corrija a data de início para o ativo '%s'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1495
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
-msgstr "Não pode apagar uma linha de depreciação com um movimento contabilístico associado."
+msgstr ""
+"Não pode apagar uma linha de depreciação com um movimento contabilístico "
+"associado."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:247
@@ -970,7 +1024,9 @@ msgstr "Não pode remover uma linha de ativo do tipo 'Valor do Ativo'."
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
-msgstr "Não pode assinalar a opção 'Mov. Saldo Inicial' numa linha de depreciação com movimentos previamente registados."
+msgstr ""
+"Não pode assinalar a opção 'Mov. Saldo Inicial' numa linha de depreciação "
+"com movimentos previamente registados."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1556
@@ -978,7 +1034,9 @@ msgstr "Não pode assinalar a opção 'Mov. Saldo Inicial' numa linha de depreci
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
-msgstr "Não pode atribuir, numa linha de depreciação, uma data anterior à de movimentos já registados."
+msgstr ""
+"Não pode atribuir, numa linha de depreciação, uma data anterior à de "
+"movimentos já registados."
 
 #. module: account_asset_management
 #: help:account.asset.asset,date_start:0
@@ -986,7 +1044,10 @@ msgid ""
 "You should manually add depreciation lines with the depreciations of "
 "previous fiscal years if the Depreciation Start Date is different from the "
 "date for which accounting entries need to be generated."
-msgstr "Deve adicionar manualmente linhas de depreciação com as depreciações de anos fiscais anteriores se a Data de Início de Depreciação é diferente da data para a qual é necessário gerar movs. contabilísticos."
+msgstr ""
+"Deve adicionar manualmente linhas de depreciação com as depreciações de anos "
+"fiscais anteriores se a Data de Início de Depreciação é diferente da data "
+"para a qual é necessário gerar movs. contabilísticos."
 
 #. module: account_asset_management
 #: view:account.move:account_asset_management.view_account_move_asset_form

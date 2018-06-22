@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_asset_management
-# 
+#
 # Translators:
 # Artūras Griškonis <ArtX38@gmail.com>, 2012,2015-2016
 # Artūras Griškonis <xbmc.lt@gmail.com>, 2012
@@ -20,12 +20,14 @@ msgstr ""
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
 "PO-Revision-Date: 2017-08-25 22:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_tree
@@ -36,12 +38,20 @@ msgstr "# amortizacijskih postavk"
 #: model:ir.actions.act_window,help:account_asset_management.action_asset_asset_report
 msgid ""
 "<p>\n"
-"          From this report, you can have an overview on all depreciations. The\n"
-"          tool search can also be used to personalise your Assets reports and\n"
+"          From this report, you can have an overview on all depreciations. "
+"The\n"
+"          tool search can also be used to personalise your Assets reports "
+"and\n"
 "          so, match this analysis to your needs;\n"
 "        </p>\n"
 "      "
-msgstr "<p>\n          Iz tega poročila dobite pregled vseh amortizacij. Iskalnik se\n          lahko uporabi tudi za prilagajanje poročil o sredstvih po meri,\n          tako, da prilagodite analizo svojim potrebam;\n        </p>\n      "
+msgstr ""
+"<p>\n"
+"          Iz tega poročila dobite pregled vseh amortizacij. Iskalnik se\n"
+"          lahko uporabi tudi za prilagajanje poročil o sredstvih po meri,\n"
+"          tako, da prilagodite analizo svojim potrebam;\n"
+"        </p>\n"
+"      "
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -110,7 +120,9 @@ msgstr "Dnevniški vnos odstranitve sredstva '%s'"
 msgid ""
 "Asset '%s' contains unposted lines prior to the selected period.\n"
 "Please post these entries first !"
-msgstr "Sredstvo '%s' vsebuje ne knjižene postavke pred izbranim obdobjem.\nNajprej razknjižite postavke!"
+msgstr ""
+"Sredstvo '%s' vsebuje ne knjižene postavke pred izbranim obdobjem.\n"
+"Najprej razknjižite postavke!"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_asset_list_normal
@@ -299,7 +311,9 @@ msgid ""
 "Complete this field when selling an asset in order to facilitate the "
 "creation of the asset removal accounting entries via the asset 'Removal' "
 "button"
-msgstr "Izpolnite to polje ob prodaji sredstva, da bi olajšali ustvarjanje knjigovodskih vnosov odstranitve sredstva preko gumba 'Odstranitev' sredstva"
+msgstr ""
+"Izpolnite to polje ob prodaji sredstva, da bi olajšali ustvarjanje "
+"knjigovodskih vnosov odstranitve sredstva preko gumba 'Odstranitev' sredstva"
 
 #. module: account_asset_management
 #: field:account.asset.recompute.trigger,date_completed:0
@@ -369,7 +383,8 @@ msgstr "Datum dogodka, ki je sprožil potrebo po preračunu tabel sredstev"
 #. module: account_asset_management
 #: help:account.account,asset_category_id:0
 msgid "Default Asset Category when creating invoice lines with this account."
-msgstr "Privzeta kategorija sredstva pri ustvarjanju postavk računa za ta konto."
+msgstr ""
+"Privzeta kategorija sredstva pri ustvarjanju postavk računa za ta konto."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:52
@@ -732,15 +747,24 @@ msgstr "Pravilo odstranitve vnosa"
 #: help:account.asset.remove,posting_regime:0
 msgid ""
 "Removal Entry Policy \n"
-"  * Residual Value: The non-depreciated value will be posted on the 'Residual Value Account' \n"
-"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value Account' or 'Min-Value Account' "
-msgstr "Pravilo odstranitve vnosa \n  * Preostala vrednost: neamortizirana vrednost se knjiži na 'konto preostale vrednosti' \n  * Pridobitev/izguba ob prodaji: pridobitev ali izgba se knjižita na 'Konto pridobljene vrednosti' ali 'Konto zmanjšane vrednosti' "
+"  * Residual Value: The non-depreciated value will be posted on the "
+"'Residual Value Account' \n"
+"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value "
+"Account' or 'Min-Value Account' "
+msgstr ""
+"Pravilo odstranitve vnosa \n"
+"  * Preostala vrednost: neamortizirana vrednost se knjiži na 'konto "
+"preostale vrednosti' \n"
+"  * Pridobitev/izguba ob prodaji: pridobitev ali izgba se knjižita na 'Konto "
+"pridobljene vrednosti' ali 'Konto zmanjšane vrednosti' "
 
 #. module: account_asset_management
 #: help:account.asset.remove,date_remove:0
 msgid ""
 "Removal date must be after the last posted entry in case of early removal"
-msgstr "Datum odstranitve mora biti v primeru zgodnje odstranitve po zadnjem vknjiženem vnosu."
+msgstr ""
+"Datum odstranitve mora biti v primeru zgodnje odstranitve po zadnjem "
+"vknjiženem vnosu."
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -790,9 +814,11 @@ msgstr "Iskanje po kategoriji osnovnega sredstva"
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0
 msgid ""
-"Set this flag for entries of previous fiscal years for which OpenERP has not"
-" generated accounting entries."
-msgstr "Označite za vnose prejšnjih fiskalnih let, za katere OpenERP ni ustvaril kontnih vnosov."
+"Set this flag for entries of previous fiscal years for which OpenERP has not "
+"generated accounting entries."
+msgstr ""
+"Označite za vnose prejšnjih fiskalnih let, za katere OpenERP ni ustvaril "
+"kontnih vnosov."
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -807,8 +833,7 @@ msgstr "Stanje"
 #. module: account_asset_management
 #: constraint:account.account:0
 msgid ""
-"The Asset Account defined in the Asset Category must be equal to the "
-"account."
+"The Asset Account defined in the Asset Category must be equal to the account."
 msgstr "Konto sredstev določen v kategoriji sredstva mora biti enak kontu."
 
 #. module: account_asset_management
@@ -820,9 +845,10 @@ msgstr "Prodajna vrednost mora biti pozitivna!"
 #: code:addons/account_asset_management/account_asset.py:680
 #, python-format
 msgid ""
-"The duration of the asset conflicts with the posted depreciation table entry"
-" dates."
-msgstr "Trajanje konfliktov sredstva s knjiženimi datumi amortizacijske tabele."
+"The duration of the asset conflicts with the posted depreciation table entry "
+"dates."
+msgstr ""
+"Trajanje konfliktov sredstva s knjiženimi datumi amortizacijske tabele."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:312
@@ -834,11 +860,17 @@ msgstr "Datum odstranitve mora biti po zadnjem datumu amortizacije."
 #: help:account.config.settings,module_account_asset_management:0
 msgid ""
 "This allows you to manage the assets owned by a company\n"
-"                    or a person. It keeps track of the depreciation occurred\n"
+"                    or a person. It keeps track of the depreciation "
+"occurred\n"
 "                    on those assets, and creates account move for those\n"
 "                    depreciation lines.\n"
 "                    This installs the module account_asset_management."
-msgstr "Omogoča upravljanje sredstev v lasti družbe\n                    ali oseb. Beleži amortizacijo na teh sredstvih\n                    in ustvari knjigovodske premike za te\n                    amortizacijske postavke.\n                    Namesti modul account_asset_management."
+msgstr ""
+"Omogoča upravljanje sredstev v lasti družbe\n"
+"                    ali oseb. Beleži amortizacijo na teh sredstvih\n"
+"                    in ustvari knjigovodske premike za te\n"
+"                    amortizacijske postavke.\n"
+"                    Namesti modul account_asset_management."
 
 #. module: account_asset_management
 #: help:account.asset.asset,asset_value:0
@@ -884,7 +916,9 @@ msgstr "Prikaz premika"
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
 "You should generate such entries from the asset."
-msgstr "Nimate dovoljenj za povezovanje knjigovodskih vnosov s sredstvom.\nTake vnose bi morali ustvarjate iz sredstva."
+msgstr ""
+"Nimate dovoljenj za povezovanje knjigovodskih vnosov s sredstvom.\n"
+"Take vnose bi morali ustvarjate iz sredstva."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1520
@@ -893,7 +927,9 @@ msgstr "Nimate dovoljenj za povezovanje knjigovodskih vnosov s sredstvom.\nTake 
 msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
 "You should remove such entries from the asset."
-msgstr "Nimate dovoljenj za odstranitev s sredstvom povezanih knjigovodskih vnosov.\nTake vnose bi morali odstranjevati iz sredstva."
+msgstr ""
+"Nimate dovoljenj za odstranitev s sredstvom povezanih knjigovodskih vnosov.\n"
+"Take vnose bi morali odstranjevati iz sredstva."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:243
@@ -907,49 +943,63 @@ msgstr "Brišete lahko le sredstva v stanju 'osnutek'."
 msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
 "periods are not posted."
-msgstr "Zgodnje odstranitve ne morete izvesti, dokler niso vknjižene vse amortizacijske postavke predhodnih obdobij ."
+msgstr ""
+"Zgodnje odstranitve ne morete izvesti, dokler niso vknjižene vse "
+"amortizacijske postavke predhodnih obdobij ."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1528
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
-msgstr "Amortizacijske postavke, ki je povezana s knjigovodskim vnosom, ne morete spreminjati."
+msgstr ""
+"Amortizacijske postavke, ki je povezana s knjigovodskim vnosom, ne morete "
+"spreminjati."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:74
 #, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
-msgstr "Knjigovodskega vnosa povezanega z amortizacijsko postavko sredstva ni mogoče spreminjati."
+msgstr ""
+"Knjigovodskega vnosa povezanega z amortizacijsko postavko sredstva ni mogoče "
+"spreminjati."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_move.py:141
 #, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
-msgstr "Knjigovodske vknjižbe povezane z amortizacijsko postavko sredstva ni mogoče spreminjati."
+msgstr ""
+"Knjigovodske vknjižbe povezane z amortizacijsko postavko sredstva ni mogoče "
+"spreminjati."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1165
 #, python-format
 msgid "You cannot change the category of an asset with accounting entries."
-msgstr "Kategorije sredstva, ki vsebuje knjigovodske vnose, ne morete spreminjati."
+msgstr ""
+"Kategorije sredstva, ki vsebuje knjigovodske vnose, ne morete spreminjati."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:462
 #, python-format
 msgid ""
-"You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
+"You cannot compute a depreciation table for an asset starting in an "
+"undefined future fiscal year.\n"
 "Please correct the start date for asset '%s'."
-msgstr "Ne morete izvesti amortizacijske tabele sredstva s pričetkom v nedoločenem prihodnjem fiskalnem letu.\nPopravite začetni datum za sredstvo '%s'."
+msgstr ""
+"Ne morete izvesti amortizacijske tabele sredstva s pričetkom v nedoločenem "
+"prihodnjem fiskalnem letu.\n"
+"Popravite začetni datum za sredstvo '%s'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1495
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
-msgstr "Amortizacijske postavke povezane s knjigovodskim vnosom ne morete brisati."
+msgstr ""
+"Amortizacijske postavke povezane s knjigovodskim vnosom ne morete brisati."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:247
@@ -969,7 +1019,9 @@ msgstr "Postavke sredstva tipa 'vrednost sredstva' ne morete odstraniti."
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
 "prior posted entries."
-msgstr "V amortizacijski postavki s knjiženimi vnosi ne morete označiti polja 'vnos začetnega stanja'."
+msgstr ""
+"V amortizacijski postavki s knjiženimi vnosi ne morete označiti polja 'vnos "
+"začetnega stanja'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1556
@@ -977,7 +1029,9 @@ msgstr "V amortizacijski postavki s knjiženimi vnosi ne morete označiti polja 
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
 "entries."
-msgstr "Na amortizacijski postavki ne morete določiti datuma pred že knjiženimi vnosi."
+msgstr ""
+"Na amortizacijski postavki ne morete določiti datuma pred že knjiženimi "
+"vnosi."
 
 #. module: account_asset_management
 #: help:account.asset.asset,date_start:0
@@ -985,7 +1039,10 @@ msgid ""
 "You should manually add depreciation lines with the depreciations of "
 "previous fiscal years if the Depreciation Start Date is different from the "
 "date for which accounting entries need to be generated."
-msgstr "Ročno dodajte amortizacijske postavke z amortizacijami prejšnjih fiskalnih let, če je začetni datum amortizacije drugačen od datuma, na katerega se knjigovodski vnosi ustvarjajo."
+msgstr ""
+"Ročno dodajte amortizacijske postavke z amortizacijami prejšnjih fiskalnih "
+"let, če je začetni datum amortizacije drugačen od datuma, na katerega se "
+"knjigovodski vnosi ustvarjajo."
 
 #. module: account_asset_management
 #: view:account.move:account_asset_management.view_account_move_asset_form

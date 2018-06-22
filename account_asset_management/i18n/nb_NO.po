@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_asset_management
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
 "PO-Revision-Date: 2017-08-25 22:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Norwegian Bokmål (Norway) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/nb_NO/)\n"
+"Language-Team: Norwegian Bokmål (Norway) (http://www.transifex.com/oca/OCA-"
+"account-financial-tools-8-0/language/nb_NO/)\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nb_NO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_asset_management
@@ -26,8 +27,10 @@ msgstr ""
 #: model:ir.actions.act_window,help:account_asset_management.action_asset_asset_report
 msgid ""
 "<p>\n"
-"          From this report, you can have an overview on all depreciations. The\n"
-"          tool search can also be used to personalise your Assets reports and\n"
+"          From this report, you can have an overview on all depreciations. "
+"The\n"
+"          tool search can also be used to personalise your Assets reports "
+"and\n"
 "          so, match this analysis to your needs;\n"
 "        </p>\n"
 "      "
@@ -722,8 +725,10 @@ msgstr ""
 #: help:account.asset.remove,posting_regime:0
 msgid ""
 "Removal Entry Policy \n"
-"  * Residual Value: The non-depreciated value will be posted on the 'Residual Value Account' \n"
-"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value Account' or 'Min-Value Account' "
+"  * Residual Value: The non-depreciated value will be posted on the "
+"'Residual Value Account' \n"
+"  * Gain/Loss on Sale: The Gain or Loss will be posted on the 'Plus-Value "
+"Account' or 'Min-Value Account' "
 msgstr ""
 
 #. module: account_asset_management
@@ -780,8 +785,8 @@ msgstr ""
 #. module: account_asset_management
 #: help:account.asset.depreciation.line,init_entry:0
 msgid ""
-"Set this flag for entries of previous fiscal years for which OpenERP has not"
-" generated accounting entries."
+"Set this flag for entries of previous fiscal years for which OpenERP has not "
+"generated accounting entries."
 msgstr ""
 
 #. module: account_asset_management
@@ -797,8 +802,7 @@ msgstr "Stat"
 #. module: account_asset_management
 #: constraint:account.account:0
 msgid ""
-"The Asset Account defined in the Asset Category must be equal to the "
-"account."
+"The Asset Account defined in the Asset Category must be equal to the account."
 msgstr ""
 
 #. module: account_asset_management
@@ -810,8 +814,8 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:680
 #, python-format
 msgid ""
-"The duration of the asset conflicts with the posted depreciation table entry"
-" dates."
+"The duration of the asset conflicts with the posted depreciation table entry "
+"dates."
 msgstr ""
 
 #. module: account_asset_management
@@ -824,7 +828,8 @@ msgstr ""
 #: help:account.config.settings,module_account_asset_management:0
 msgid ""
 "This allows you to manage the assets owned by a company\n"
-"                    or a person. It keeps track of the depreciation occurred\n"
+"                    or a person. It keeps track of the depreciation "
+"occurred\n"
 "                    on those assets, and creates account move for those\n"
 "                    depreciation lines.\n"
 "                    This installs the module account_asset_management."
@@ -930,7 +935,8 @@ msgstr ""
 #: code:addons/account_asset_management/account_asset.py:462
 #, python-format
 msgid ""
-"You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
+"You cannot compute a depreciation table for an asset starting in an "
+"undefined future fiscal year.\n"
 "Please correct the start date for asset '%s'."
 msgstr ""
 
