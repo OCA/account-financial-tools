@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_move_locking
+#	* account_move_locking
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (9.0)\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:24+0000\n"
-"PO-Revision-Date: 2016-04-14 08:56+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: French (France) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-9-0/language/fr_FR/)\n"
-"Language: fr_FR\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
@@ -31,7 +26,7 @@ msgstr ""
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Cancel"
-msgstr "Annuler"
+msgstr ""
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_create_uid
@@ -56,9 +51,7 @@ msgstr ""
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:41
 #, python-format
-msgid ""
-"Date start need to be                                           before Date "
-"end"
+msgid "Date start need to be                                           before Date end"
 msgstr ""
 
 #. module: account_move_locking
@@ -125,13 +118,11 @@ msgstr ""
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:57
 #, python-format
-msgid ""
-"Unposted move in period/jounal                                           "
-"selected, please post it before                                           "
-"locking them"
+msgid "Unposted move in period/jounal                                           selected, please post it before                                           locking them"
 msgstr ""
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "or"
 msgstr ""
+
