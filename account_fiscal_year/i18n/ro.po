@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_fiscal_year
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,12 +10,14 @@ msgstr ""
 "POT-Creation-Date: 2016-12-23 23:24+0000\n"
 "PO-Revision-Date: 2016-05-09 17:06+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-tools-9-0/language/ro/)\n"
+"Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-9-0/language/ro/)\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
 
 #. module: account_fiscal_year
 #: model:ir.model,name:account_fiscal_year.model_res_company
