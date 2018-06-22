@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_reversal
-# 
+#
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Antonio Trueba, 2016
@@ -19,12 +19,14 @@ msgstr ""
 "POT-Creation-Date: 2017-10-17 02:57+0000\n"
 "PO-Revision-Date: 2017-09-29 07:19+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
@@ -69,9 +71,11 @@ msgstr "Prikazni naziv"
 #. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
-"Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the period following the period of the move to reverse."
-msgstr "Vnos datuma za preobrnjene kontne vnose. Privzeto OpenERP predlaga prvi dan naslednjega obdobja po obdobju premika, ki ga preobračamo."
+"Enter the date of the reversal account entries. By default, OpenERP proposes "
+"the first day of the period following the period of the move to reverse."
+msgstr ""
+"Vnos datuma za preobrnjene kontne vnose. Privzeto OpenERP predlaga prvi dan "
+"naslednjega obdobja po obdobju premika, ki ga preobračamo."
 
 #. module: account_reversal
 #: field:account.move.reverse,move_prefix:0
@@ -126,7 +130,10 @@ msgid ""
 "Prefix that will be added to the 'Ref' of the journal entry to be reversed "
 "to create the 'Ref' of the reversal journal entry (no space added after the "
 "prefix)."
-msgstr "Predpona, ki bo dodana sklicu dnevniškega vnosa, ki bo preobrnjen, za ustvarjanje sklica preobrnjenih dnevniških vnosov (brez prostora po predponi)."
+msgstr ""
+"Predpona, ki bo dodana sklicu dnevniškega vnosa, ki bo preobrnjen, za "
+"ustvarjanje sklica preobrnjenih dnevniških vnosov (brez prostora po "
+"predponi)."
 
 #. module: account_reversal
 #: help:account.move.reverse,move_line_prefix:0
@@ -134,7 +141,9 @@ msgid ""
 "Prefix that will be added to the name of the journal item to be reversed to "
 "create the name of the reversal journal item (a space is added after the "
 "prefix)."
-msgstr "Predpona, ki bo dodana sklicu dnevniške postavke, ki bo preobrnjena, za ustvarjanje sklica preobrnjenih dnevniških postavk (s prostorom po predponi)."
+msgstr ""
+"Predpona, ki bo dodana sklicu dnevniške postavke, ki bo preobrnjena, za "
+"ustvarjanje sklica preobrnjenih dnevniških postavk (s prostorom po predponi)."
 
 #. module: account_reversal
 #: field:account.move.reverse,reconcile:0
@@ -178,7 +187,9 @@ msgstr "Preobrnjeni vnosi"
 msgid ""
 "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
-msgstr "Preobrne vse izbrane vnose, ne glede, če imajo označbo 'za preobrnitev' ali ne."
+msgstr ""
+"Preobrne vse izbrane vnose, ne glede, če imajo označbo 'za preobrnitev' ali "
+"ne."
 
 #. module: account_reversal
 #: view:account.move:account_reversal.view_account_move_reversal_filter

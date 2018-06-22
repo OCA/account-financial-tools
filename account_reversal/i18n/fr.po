@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_reversal
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
 # Antonio Trueba, 2016
@@ -25,11 +25,12 @@ msgstr ""
 "POT-Creation-Date: 2017-10-17 02:57+0000\n"
 "PO-Revision-Date: 2017-09-22 09:51+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_reversal
@@ -45,7 +46,9 @@ msgstr "Annuler"
 #. module: account_reversal
 #: help:account.move,to_be_reversed:0
 msgid "Check this box if your entry has to bereversed at the end of period."
-msgstr "Coché cette case si votre entrée si votre entrée doit être inversée à la fin de la période."
+msgstr ""
+"Coché cette case si votre entrée si votre entrée doit être inversée à la fin "
+"de la période."
 
 #. module: account_reversal
 #: view:account.move.reverse:account_reversal.view_account_move_reverse
@@ -75,9 +78,12 @@ msgstr "Nom à afficher"
 #. module: account_reversal
 #: help:account.move.reverse,date:0
 msgid ""
-"Enter the date of the reversal account entries. By default, OpenERP proposes"
-" the first day of the period following the period of the move to reverse."
-msgstr "Entrez la date des entrées de compte d'inversion. Par défaut, OpenERP propose le premier jour de la période suivant la période du mouvement à contrepasser."
+"Enter the date of the reversal account entries. By default, OpenERP proposes "
+"the first day of the period following the period of the move to reverse."
+msgstr ""
+"Entrez la date des entrées de compte d'inversion. Par défaut, OpenERP "
+"propose le premier jour de la période suivant la période du mouvement à "
+"contrepasser."
 
 #. module: account_reversal
 #: field:account.move.reverse,move_prefix:0
@@ -92,12 +98,15 @@ msgstr "ID"
 #. module: account_reversal
 #: help:account.move.reverse,period_id:0
 msgid "If empty, take the period of the date."
-msgstr "Si laissé vide, utilise la période correspondant à la date de la pièce comptable"
+msgstr ""
+"Si laissé vide, utilise la période correspondant à la date de la pièce "
+"comptable"
 
 #. module: account_reversal
 #: help:account.move.reverse,journal_id:0
 msgid "If empty, uses the journal of the journal entry to be reversed."
-msgstr "Si laissé vide, le journal de la pièce comptable à extourner sera conservé"
+msgstr ""
+"Si laissé vide, le journal de la pièce comptable à extourner sera conservé"
 
 #. module: account_reversal
 #: field:account.move.reverse,move_line_prefix:0
@@ -132,7 +141,10 @@ msgid ""
 "Prefix that will be added to the 'Ref' of the journal entry to be reversed "
 "to create the 'Ref' of the reversal journal entry (no space added after the "
 "prefix)."
-msgstr "Préfixe qui sera ajouté aux références des pièces comptables originales pour créer les références des pièces d'extourne (pas d'espace ajouté après le préfixe)."
+msgstr ""
+"Préfixe qui sera ajouté aux références des pièces comptables originales pour "
+"créer les références des pièces d'extourne (pas d'espace ajouté après le "
+"préfixe)."
 
 #. module: account_reversal
 #: help:account.move.reverse,move_line_prefix:0
@@ -140,7 +152,10 @@ msgid ""
 "Prefix that will be added to the name of the journal item to be reversed to "
 "create the name of the reversal journal item (a space is added after the "
 "prefix)."
-msgstr "Préfixe qui sera ajouté au libellé des écritures comptables originales pour créer le libellé des écritures comptables d'extourne (un espace est ajouté après le préfixe)."
+msgstr ""
+"Préfixe qui sera ajouté au libellé des écritures comptables originales pour "
+"créer le libellé des écritures comptables d'extourne (un espace est ajouté "
+"après le préfixe)."
 
 #. module: account_reversal
 #: field:account.move.reverse,reconcile:0
@@ -184,7 +199,9 @@ msgstr "Créer les pièces comptables d'extourne"
 msgid ""
 "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
-msgstr "Cela va créer une contrepartie pour les entrées sélectionnées qu'il s'agisse des cocher à 'contrepasser' ou non."
+msgstr ""
+"Cela va créer une contrepartie pour les entrées sélectionnées qu'il s'agisse "
+"des cocher à 'contrepasser' ou non."
 
 #. module: account_reversal
 #: view:account.move:account_reversal.view_account_move_reversal_filter
