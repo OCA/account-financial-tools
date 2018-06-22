@@ -1,34 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_asset_depr_line_cancel
+#	* account_asset_depr_line_cancel
 #
-# Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-22 23:20+0000\n"
-"PO-Revision-Date: 2017-12-22 23:20+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
-"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
-"Language: de\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_asset_depr_line_cancel
 #: model:ir.ui.view,arch_db:account_asset_depr_line_cancel.view_account_asset_asset_form
 msgid "Are you sure?"
-msgstr "Sind Sie sicher?"
+msgstr ""
 
 #. module: account_asset_depr_line_cancel
 #: model:ir.model,name:account_asset_depr_line_cancel.model_account_asset_depreciation_line
 msgid "Asset depreciation line"
-msgstr "Abschreibungsposition"
+msgstr ""
 
 #. module: account_asset_depr_line_cancel
 #: model:ir.ui.view,arch_db:account_asset_depr_line_cancel.view_account_asset_asset_form
 msgid "Delete Move"
-msgstr "Buchung löschen"
+msgstr ""
+
