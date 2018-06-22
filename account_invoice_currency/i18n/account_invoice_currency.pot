@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_invoice_currency
+#	* account_invoice_currency
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/hu/)\n"
-"Language: hu\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_invoice_currency
 #: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
@@ -33,7 +28,7 @@ msgstr ""
 #. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
 msgid "Invoice"
-msgstr "Számla"
+msgstr ""
 
 #. module: account_invoice_currency
 #: model:ir.model.fields,help:account_invoice_currency.field_account_invoice_amount_tax_signed
@@ -56,3 +51,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Total (Company Currency)"
 msgstr ""
+
