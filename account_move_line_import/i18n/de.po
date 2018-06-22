@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_move_line_import
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -13,10 +13,10 @@ msgstr ""
 "PO-Revision-Date: 2017-10-17 02:56+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_line_import
@@ -141,8 +141,7 @@ msgstr ""
 msgid ""
 "Error in CSV file, Total Debit (%s) is different from Total Credit (%s) !"
 msgstr ""
-"Fehler in CSV-Datei. Soll-Summe (%s) unterscheidet sich von Haben-Summe "
-"(%s)."
+"Fehler in CSV-Datei. Soll-Summe (%s) unterscheidet sich von Haben-Summe (%s)."
 
 #. module: account_move_line_import
 #: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:209
@@ -235,10 +234,12 @@ msgstr "Unpassender Wert '%s' im Feld '%s' vom Typ Ganzzahl."
 #, python-format
 msgid ""
 "Incorrect value '%s' for field '%s' of type Many2One !\n"
-"You should specify the database key or contact your IT department to add support for this field."
+"You should specify the database key or contact your IT department to add "
+"support for this field."
 msgstr ""
 "Unpassender Wert '%s' im Feld '%s' vom Typ Many2One.\n"
-"Sie müssen den Datenbankschlüssel angeben oder Ihre IT-Abteilung bitten, dieses Feld zu unterstützen."
+"Sie müssen den Datenbankschlüssel angeben oder Ihre IT-Abteilung bitten, "
+"dieses Feld zu unterstützen."
 
 #. module: account_move_line_import
 #: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:243
@@ -299,8 +300,7 @@ msgstr "Mehrere Partner mit Referenz oder Bezeichnung '%s' gefunden."
 #: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:345
 #, python-format
 msgid "Multiple products with Internal Reference or Name '%s' found !"
-msgstr ""
-"Mehrere Produkte mit interner Referenz oder Bezeichnung '%s' gefunden."
+msgstr "Mehrere Produkte mit interner Referenz oder Bezeichnung '%s' gefunden."
 
 #. module: account_move_line_import
 #: code:addons/account_move_line_import/wizard/import_move_line_wizard.py:102
