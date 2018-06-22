@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_invoice_constraint_chronology
+#	* account_invoice_constraint_chronology
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/hu/)\n"
-"Language: hu\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_invoice_constraint_chronology
 #: field:account.journal,check_chronology:0
@@ -26,34 +21,28 @@ msgstr ""
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:39
 #, python-format
-msgid ""
-"Chronology Error. Please confirm older draft invoices before %s and try "
-"again."
+msgid "Chronology Error. Please confirm older draft invoices before %s and try again."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
 #, python-format
-msgid ""
-"Chronology Error. There exist at least one invoice with a date posterior to "
-"%s."
+msgid "Chronology Error. There exist at least one invoice with a date posterior to %s."
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_journal.py:22
 #, python-format
-msgid ""
-"Configuration error on journal '%s': the option 'Check Chronology' can only "
-"be activated on journals that can be selected on invoices (i.e. Sale, Sale "
-"Refund, Purchase, Purchase Refund journals)"
+msgid "Configuration error on journal '%s': the option 'Check Chronology' can only be activated on journals that can be selected on invoices (i.e. Sale, Sale Refund, Purchase, Purchase Refund journals)"
 msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
 msgid "Invoice"
-msgstr "Számla"
+msgstr ""
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_journal
 msgid "Journal"
-msgstr "Napló"
+msgstr ""
+
