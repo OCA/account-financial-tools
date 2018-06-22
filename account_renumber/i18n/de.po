@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_renumber
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
@@ -19,11 +19,12 @@ msgstr ""
 "POT-Creation-Date: 2016-09-24 00:47+0000\n"
 "PO-Revision-Date: 2016-10-04 09:42+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_renumber
@@ -135,7 +136,9 @@ msgstr "Perioden"
 msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
-msgstr "Gebuchte Einträge aus diesen Journalen werden nach Datum sortiert und anschließend gemäß Journal-Nummernkreis durchnummeriert"
+msgstr ""
+"Gebuchte Einträge aus diesen Journalen werden nach Datum sortiert und "
+"anschließend gemäß Journal-Nummernkreis durchnummeriert"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
@@ -167,7 +170,9 @@ msgstr "Nummeriere neu"
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr "Dieser Assistent hilft Ihnen Einträge in ein oder mehreren Journalen neu zu nummerieren"
+msgstr ""
+"Dieser Assistent hilft Ihnen Einträge in ein oder mehreren Journalen neu zu "
+"nummerieren"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form

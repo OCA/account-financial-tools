@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_renumber
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
@@ -34,11 +34,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
 "PO-Revision-Date: 2016-11-25 14:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_renumber
@@ -150,7 +151,10 @@ msgstr "Periodos"
 msgid ""
 "Posted moves from those journals will be sorted by date and then assigned "
 "sequential numbers using their journal sequence."
-msgstr "Movimentos publicados a partir daqueles diários, serão classificados por data e então assinados por números sequênciais utilizando a sequência dos seus diários."
+msgstr ""
+"Movimentos publicados a partir daqueles diários, serão classificados por "
+"data e então assinados por números sequênciais utilizando a sequência dos "
+"seus diários."
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
