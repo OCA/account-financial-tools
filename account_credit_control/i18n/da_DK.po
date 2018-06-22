@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_credit_control
+# 	* account_credit_control
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2017-11-08 21:20+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -381,6 +382,11 @@ msgid "Custom Message after details"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.customer_followup_tree
+msgid "Customer Followup"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_note
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_note
 msgid "Customer Payment Promise"
@@ -421,13 +427,18 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.menu,name:account_credit_control.credit_control_manual_action_menu
+msgid "Do Manual Follow-Ups"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
 msgid "Do nothing"
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
-#: selection:credit.control.run,state:0
+#: selection:credit.control.line,state:0
+#: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
 msgid "Done"
 msgstr ""
 
@@ -508,6 +519,11 @@ msgid "Filters"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
+msgid "Follow-up"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_responsible_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_responsible_id
 msgid "Follow-up Responsible"
@@ -549,7 +565,8 @@ msgid ""
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0
+#: selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ignored"
 msgstr ""
@@ -693,6 +710,18 @@ msgid "Manual Credit Control Policy"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.action_customer_followup
+msgid "Manual Follow-Ups"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_manual_followup
+msgid "Manual Followup"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Manual Lines"
 msgstr ""
@@ -700,6 +729,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Manual change"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Manual followup"
 msgstr ""
 
 #. module: account_credit_control
@@ -1057,7 +1091,8 @@ msgid "Print the selected lines"
 msgstr ""
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0
+#: selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ready To Send"
 msgstr ""
@@ -1179,6 +1214,11 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "The partner had a manual followup."
+msgstr ""
+
+#. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:246
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
@@ -1235,7 +1275,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:214
+#: code:addons/account_credit_control/models/credit_control_line.py:217
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "

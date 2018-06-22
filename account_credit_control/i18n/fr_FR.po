@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_credit_control
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,25 +11,31 @@ msgstr ""
 "POT-Creation-Date: 2017-11-28 23:23+0000\n"
 "PO-Revision-Date: 2017-11-28 23:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/fr_FR/)\n"
+"Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/"
+"fr_FR/)\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
 msgid ""
 "\n"
-"            Our records indicate that we still have not received the payment of the invoice mentioned below despite our two reminders.\n"
-"            If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
-"            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.\n"
+"            Our records indicate that we still have not received the payment "
+"of the invoice mentioned below despite our two reminders.\n"
+"            If payment have already been sent, please disregard this notice. "
+"If not, please proceed with payment.\n"
+"            If your payment has not been received in the next 5 days, your "
+"file will be transfered to our debt collection agency.\n"
 "\n"
-"            Should you need us to arrange a payment plan for you, please advise.\n"
+"            Should you need us to arrange a payment plan for you, please "
+"advise.\n"
 "            A customer account statement is enclosed for you convenience.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this matter.\n"
+"            Thank you in advance for your anticipated cooperation in this "
+"matter.\n"
 "\n"
 "            Best regards\n"
 "        "
@@ -379,6 +385,17 @@ msgid "Custom Message after details"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.customer_followup_tree
+msgid "Customer Followup"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_note
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_note
+msgid "Customer Payment Promise"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Date due"
 msgstr ""
@@ -410,6 +427,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_display_name
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.menu,name:account_credit_control.credit_control_manual_action_menu
+msgid "Do Manual Follow-Ups"
 msgstr ""
 
 #. module: account_credit_control
@@ -497,6 +519,17 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Filters"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
+msgid "Follow-up"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_responsible_id
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_responsible_id
+msgid "Follow-up Responsible"
 msgstr ""
 
 #. module: account_credit_control
@@ -680,6 +713,18 @@ msgid "Manual Credit Control Policy"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.actions.act_window,name:account_credit_control.action_customer_followup
+msgid "Manual Follow-Ups"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_manual_followup
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_manual_followup
+msgid "Manual Followup"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Manual Lines"
 msgstr ""
@@ -687,6 +732,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Manual change"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Manual followup"
 msgstr ""
 
 #. module: account_credit_control
@@ -757,6 +807,18 @@ msgid "New level to apply"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action
+msgid "Next Action"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action_date
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action_date
+msgid "Next Action Date"
+msgstr ""
+
+#. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:47
 #: code:addons/account_credit_control/wizard/credit_control_marker.py:59
 #: code:addons/account_credit_control/wizard/credit_control_printer.py:45
@@ -796,13 +858,24 @@ msgid "Open amount"
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_responsible_id
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_responsible_id
+msgid ""
+"Optionally you can assign a user to this field, which will make him "
+"responsible for the action."
+msgstr ""
+
+#. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_1
 msgid ""
-"Our records indicate that we have not received the payment of the invoice mentioned below.\n"
-"            If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.\n"
+"Our records indicate that we have not received the payment of the invoice "
+"mentioned below.\n"
+"            If it has already been sent, please disregard this notice. If "
+"not, please proceed with payment within 10 days.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this matter.\n"
+"            Thank you in advance for your anticipated cooperation in this "
+"matter.\n"
 "\n"
 "            Best regards\n"
 "        "
@@ -811,9 +884,11 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_1
 msgid ""
-"Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
+"Our records indicate that we have not received the payment of the invoices "
+"mentioned in the attached document.<br>\n"
 "  <br>\n"
-"  If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"  If it has already been sent, please disregard this notice. If not, please "
+"proceed with payment within 10 days.<br>\n"
 "  <br>\n"
 "  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
 "  <br>\n"
@@ -823,8 +898,10 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_1
 msgid ""
-"Our records indicate that we have not received the payment of the invoices mentioned in the attached document.<br>\n"
-"  If it has already been sent, please disregard this notice. If not, please proceed with payment within 10 days.<br>\n"
+"Our records indicate that we have not received the payment of the invoices "
+"mentioned in the attached document.<br>\n"
+"  If it has already been sent, please disregard this notice. If not, please "
+"proceed with payment within 10 days.<br>\n"
 "  <br>\n"
 "  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
 "  <br>\n"
@@ -834,10 +911,13 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_2
 msgid ""
-"Our records indicate that we have not yet received the payment of the invoice mentioned below despite our first reminder.\n"
-"            If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.\n"
+"Our records indicate that we have not yet received the payment of the "
+"invoice mentioned below despite our first reminder.\n"
+"            If it has already been sent, please disregard this notice. If "
+"not, please proceed with payment within 5 days.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this matter.\n"
+"            Thank you in advance for your anticipated cooperation in this "
+"matter.\n"
 "\n"
 "            Best regards\n"
 "        "
@@ -846,8 +926,10 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_2
 msgid ""
-"Our records indicate that we have not yet received the payment of the invoices mentioned in the attached document despite our first reminder.<br>\n"
-"  If it has already been sent, please disregard this notice. If not, please proceed with payment within 5 days.<br>\n"
+"Our records indicate that we have not yet received the payment of the "
+"invoices mentioned in the attached document despite our first reminder.<br>\n"
+"  If it has already been sent, please disregard this notice. If not, please "
+"proceed with payment within 5 days.<br>\n"
 "  <br>\n"
 "  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
 "  <br>\n"
@@ -857,11 +939,14 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
 msgid ""
-"Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our reminder.\n"
+"Our records indicate that we still have not received the payment of the "
+"invoices mentioned in the attached document despite our reminder.\n"
 "  <br>\n"
 "  <br>\n"
-"  If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br>\n"
-"  If your payment has not been received in the next 5 days, your file will be transfered to our debt<br>\n"
+"  If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.<br>\n"
+"  If your payment has not been received in the next 5 days, your file will "
+"be transfered to our debt<br>\n"
 "  collection agency.<br>\n"
 "  <br>\n"
 "  Should you need us to arrange a payment plan for you, please advise.<br>\n"
@@ -875,9 +960,12 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
 msgid ""
-"Our records indicate that we still have not received the payment of the invoices mentioned in the attached document despite our two reminders.<br>\n"
-"  If payment have already been sent, please disregard this notice. If not, please proceed with payment.<br>\n"
-"  If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.<br>\n"
+"Our records indicate that we still have not received the payment of the "
+"invoices mentioned in the attached document despite our two reminders.<br>\n"
+"  If payment have already been sent, please disregard this notice. If not, "
+"please proceed with payment.<br>\n"
+"  If your payment has not been received in the next 5 days, your file will "
+"be transfered to our debt collection agency.<br>\n"
 "  <br>\n"
 "  Should you need us to arrange a payment plan for you, please advise.<br>\n"
 "  A customer account statement is enclosed for you convenience.<br>\n"
@@ -890,15 +978,20 @@ msgstr ""
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
 msgid ""
-"Our records indicate that we still have not received the payment of the mentioned below invoice despite our reminder.\n"
+"Our records indicate that we still have not received the payment of the "
+"mentioned below invoice despite our reminder.\n"
 "\n"
-"            If payment have already been sent, please disregard this notice. If not, please proceed with payment.\n"
-"            If your payment has not been received in the next 5 days, your file will be transfered to our debt collection agency.\n"
+"            If payment have already been sent, please disregard this notice. "
+"If not, please proceed with payment.\n"
+"            If your payment has not been received in the next 5 days, your "
+"file will be transfered to our debt collection agency.\n"
 "\n"
-"            Should you need us to arrange a payment plan for you, please advise.\n"
+"            Should you need us to arrange a payment plan for you, please "
+"advise.\n"
 "            A customer account statement is enclosed for you convenience.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this matter.\n"
+"            Thank you in advance for your anticipated cooperation in this "
+"matter.\n"
 "\n"
 "            Best regards\n"
 "        "
@@ -920,6 +1013,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_id
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Partner"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_note
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_note
+msgid "Payment Note"
 msgstr ""
 
 #. module: account_credit_control
@@ -1118,6 +1217,11 @@ msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "The partner had a manual followup."
+msgstr ""
+
+#. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:246
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
@@ -1126,6 +1230,18 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are ready to send by email or by letter using the Actions."
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action
+msgid "This is the next action to be taken."
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action_date
+#: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action_date
+msgid "This is when the manual follow-up is needed."
 msgstr ""
 
 #. module: account_credit_control
@@ -1162,7 +1278,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:214
+#: code:addons/account_credit_control/models/credit_control_line.py:217
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
