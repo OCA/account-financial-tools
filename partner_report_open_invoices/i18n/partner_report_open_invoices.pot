@@ -1,28 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * partner_report_open_invoices
+#	* partner_report_open_invoices
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-17 02:57+0000\n"
-"PO-Revision-Date: 2017-10-17 02:57+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Norwegian Bokmål (https://www.transifex.com/oca/teams/23907/"
-"nb/)\n"
-"Language: nb\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: partner_report_open_invoices
 #: model:ir.model,name:partner_report_open_invoices.model_res_company
 msgid "Companies"
-msgstr "Firmaer"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -47,12 +41,12 @@ msgstr ""
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Date"
-msgstr "Dato"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Date:"
-msgstr "Dato :"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -62,7 +56,7 @@ msgstr ""
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,display_name:0
 msgid "Display Name"
-msgstr "Visnings navn"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -72,17 +66,17 @@ msgstr ""
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Due Date"
-msgstr "Utløps Dato."
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: field:report.partner_report_open_invoices.report_open_invoices,__last_update:0
 msgid "Last Modified on"
-msgstr "Sist oppdatert "
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: model:ir.actions.report.xml,name:partner_report_open_invoices.action_report_print_open_invoices
@@ -104,7 +98,7 @@ msgstr ""
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "Reference"
-msgstr "Referanse"
+msgstr ""
 
 #. module: partner_report_open_invoices
 #: view:website:partner_report_open_invoices.report_open_invoices
@@ -115,3 +109,4 @@ msgstr ""
 #: view:website:partner_report_open_invoices.report_open_invoices
 msgid "There is no open invoice for this supplier."
 msgstr ""
+
