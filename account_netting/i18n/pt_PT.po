@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_netting
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Antonio Trueba, 2016
@@ -28,11 +28,12 @@ msgstr ""
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
 "PO-Revision-Date: 2016-09-12 22:57+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@sossia.pt>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-"
+"account-financial-tools-8-0/language/pt_PT/)\n"
+"Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_PT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_netting
@@ -58,7 +59,8 @@ msgstr "Todas as entradas devem estar por reconciliar"
 #, python-format
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
-msgstr "Todas as entradas devem ter um parceiro e este deve ser o mesmo para todas."
+msgstr ""
+"Todas as entradas devem ter um parceiro e este deve ser o mesmo para todas."
 
 #. module: account_netting
 #: field:account.move.make.netting,balance:0
@@ -140,9 +142,12 @@ msgstr "Selecione o diário onde guardar as entradas de diário"
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid ""
 "This operation will generate account entries that are counterpart of the "
-"receivable/payable accounts selected, and reconcile each other, letting this"
-" balance in the partner:"
-msgstr "Esta operação irá gerar movimentos contabilísticos,  contrapartida das contas a pagar/receber selecionadas, e reconciliar cada uma delas deixando o seu saldo visível no balancete do parceiro."
+"receivable/payable accounts selected, and reconcile each other, letting this "
+"balance in the partner:"
+msgstr ""
+"Esta operação irá gerar movimentos contabilísticos,  contrapartida das "
+"contas a pagar/receber selecionadas, e reconciliar cada uma delas deixando o "
+"seu saldo visível no balancete do parceiro."
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0

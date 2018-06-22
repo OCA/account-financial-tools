@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_netting
-# 
+#
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
@@ -26,11 +26,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
 "PO-Revision-Date: 2016-11-25 14:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/bg/)\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_netting
@@ -138,8 +139,8 @@ msgstr ""
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid ""
 "This operation will generate account entries that are counterpart of the "
-"receivable/payable accounts selected, and reconcile each other, letting this"
-" balance in the partner:"
+"receivable/payable accounts selected, and reconcile each other, letting this "
+"balance in the partner:"
 msgstr ""
 
 #. module: account_netting

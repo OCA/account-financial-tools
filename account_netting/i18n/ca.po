@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_netting
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
@@ -24,11 +24,12 @@ msgstr ""
 "POT-Creation-Date: 2017-01-12 03:44+0000\n"
 "PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/ca/)\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/ca/)\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_netting
@@ -54,7 +55,9 @@ msgstr "Totes les entrades no s'han reconciliat"
 #, python-format
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
-msgstr "Totes les entrades han de tenir una empresa i l'empresa ha de ser la mateixa per a tothom."
+msgstr ""
+"Totes les entrades han de tenir una empresa i l'empresa ha de ser la mateixa "
+"per a tothom."
 
 #. module: account_netting
 #: field:account.move.make.netting,balance:0
@@ -136,9 +139,12 @@ msgstr "Seleccioneu el diari on emmagatzemar els assentaments del diari"
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid ""
 "This operation will generate account entries that are counterpart of the "
-"receivable/payable accounts selected, and reconcile each other, letting this"
-" balance in the partner:"
-msgstr "Aquesta operació generarà anotacions en compte que són la contrapartida dels comptes de cobrament / pagament seleccionats, i reconciliar entre si, deixant aquest balanç en la empresa:"
+"receivable/payable accounts selected, and reconcile each other, letting this "
+"balance in the partner:"
+msgstr ""
+"Aquesta operació generarà anotacions en compte que són la contrapartida dels "
+"comptes de cobrament / pagament seleccionats, i reconciliar entre si, "
+"deixant aquest balanç en la empresa:"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
