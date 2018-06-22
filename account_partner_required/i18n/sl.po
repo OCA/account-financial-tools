@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_partner_required
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
 "PO-Revision-Date: 2015-06-21 08:58+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
@@ -52,7 +54,9 @@ msgstr "Opcijsko"
 msgid ""
 "Partner policy is set to 'Always' with account %s '%s' but the partner is "
 "missing in the account move line with label '%s'."
-msgstr "Pravilo partnerja je nastavljeno na 'vedno' s kontom %s '%s', a partnerju manjka kontna postavka premika z oznako '%s'."
+msgstr ""
+"Pravilo partnerja je nastavljeno na 'vedno' s kontom %s '%s', a partnerju "
+"manjka kontna postavka premika z oznako '%s'."
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/account.py:82
@@ -60,7 +64,9 @@ msgstr "Pravilo partnerja je nastavljeno na 'vedno' s kontom %s '%s', a partnerj
 msgid ""
 "Partner policy is set to 'Never' with account %s '%s' but the account move "
 "line with label '%s' has a partner '%s'."
-msgstr "Pravilo partnerja je nastavljeno na 'nikoli' s kontom %s '%s', a postavka premika z oznako '%s' vsebuje partnerja '%s'."
+msgstr ""
+"Pravilo partnerja je nastavljeno na 'nikoli' s kontom %s '%s', a postavka "
+"premika z oznako '%s' vsebuje partnerja '%s'."
 
 #. module: account_partner_required
 #: field:account.account.type,partner_policy:0
@@ -75,4 +81,9 @@ msgid ""
 "of account ; if you select 'Always', the accountant will get an error "
 "message if there is no partner ; if you select 'Never', the accountant will "
 "get an error message if a partner is present."
-msgstr "Nastavitev pravila polja partnerja: če izberete 'opcijsko', lahko računovodja določa partnerja na kontnem premiku s tem tipom konta; če izberete 'vedno', računovodja dobi opozorilo o napaki, kadar ni partnerja; če izberete 'nikoli', računovodja dobi sporočilo o napaki, kadar partner je prisoten."
+msgstr ""
+"Nastavitev pravila polja partnerja: če izberete 'opcijsko', lahko "
+"računovodja določa partnerja na kontnem premiku s tem tipom konta; če "
+"izberete 'vedno', računovodja dobi opozorilo o napaki, kadar ni partnerja; "
+"če izberete 'nikoli', računovodja dobi sporočilo o napaki, kadar partner je "
+"prisoten."
