@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_auto_fy_sequence
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:26+0000\n"
 "PO-Revision-Date: 2015-07-01 12:22+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_auto_fy_sequence
 #: view:ir.sequence:account_auto_fy_sequence.sequence_inherit_form
@@ -45,9 +47,11 @@ msgstr "Dnevnik"
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:101
 #, python-format
 msgid ""
-"The system tried to access a fiscal year sequence but there is more than one"
-" sequence to choose from."
-msgstr "Sistem je poskušal vzpostaviti dostop do zaporedja fiskalnega leta, a tu je možna izbira več zaporedij."
+"The system tried to access a fiscal year sequence but there is more than one "
+"sequence to choose from."
+msgstr ""
+"Sistem je poskušal vzpostaviti dostop do zaporedja fiskalnega leta, a tu je "
+"možna izbira več zaporedij."
 
 #. module: account_auto_fy_sequence
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:82
@@ -55,7 +59,9 @@ msgstr "Sistem je poskušal vzpostaviti dostop do zaporedja fiskalnega leta, a t
 msgid ""
 "The system tried to access a fiscal year sequence without specifying the "
 "actual fiscal year."
-msgstr "Sistem je poskušal vzpostaviti dostop do zaporedja fiskalnega leta, ne da bi določil dejansko fiskalno leto."
+msgstr ""
+"Sistem je poskušal vzpostaviti dostop do zaporedja fiskalnega leta, ne da bi "
+"določil dejansko fiskalno leto."
 
 #. module: account_auto_fy_sequence
 #: code:addons/account_auto_fy_sequence/models/ir_sequence.py:138
