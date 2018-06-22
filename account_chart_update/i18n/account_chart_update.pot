@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_chart_update
+#	* account_chart_update
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-financial-tools (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:25+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Hebrew (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/he/)\n"
-"Language: he\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,code_digits:0
@@ -27,6 +22,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:808
 #, python-format
 msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -69,12 +65,13 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1197
 #, python-format
 msgid "Added account %s to financial report %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "Cancel"
-msgstr "בטל"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,chart_template_id:0
@@ -116,6 +113,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1095
 #, python-format
 msgid "Created account %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -126,7 +124,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,create_uid:0
 #: field:wizard.update.charts.accounts.tax.code,create_uid:0
 msgid "Created by"
-msgstr "נוצר על ידי"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,create_date:0
@@ -136,36 +134,41 @@ msgstr "נוצר על ידי"
 #: field:wizard.update.charts.accounts.tax,create_date:0
 #: field:wizard.update.charts.accounts.tax.code,create_date:0
 msgid "Created on"
-msgstr "נוצר ב-"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1188
 #, python-format
 msgid "Created or updated fiscal position %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1007
 #, python-format
 msgid "Created tax %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:942
 #, python-format
 msgid "Created tax code %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:951
 #, python-format
 msgid "Deactivated %d tax codes\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1022
 #, python-format
 msgid "Deactivated %d taxes\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -186,24 +189,27 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,display_name:0
 #: field:wizard.update.charts.accounts.tax.code,display_name:0
 msgid "Display Name"
-msgstr "השם המוצג"
+msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1097
 #, python-format
 msgid "Exception creating account %s: %s - %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1043
 #, python-format
 msgid "Exception setting the parent of account %s children: %s - %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1108
 #, python-format
 msgid "Exception writing account %s: %s - %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -213,8 +219,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_fiscal_position:0
-msgid ""
-"Existing fiscal positions are updated. Fiscal positions are searched by name."
+msgid "Existing fiscal positions are updated. Fiscal positions are searched by name."
 msgstr ""
 
 #. module: account_chart_update
@@ -229,9 +234,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_financial_report
-msgid ""
-"Financial report mapping that needs to be updated (new or updated in the "
-"template)."
+msgid "Financial report mapping that needs to be updated (new or updated in the template)."
 msgstr ""
 
 #. module: account_chart_update
@@ -252,8 +255,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
-msgid ""
-"Fiscal position that needs to be updated (new or updated in the template)."
+msgid "Fiscal position that needs to be updated (new or updated in the template)."
 msgstr ""
 
 #. module: account_chart_update
@@ -269,9 +271,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,lang:0
-msgid ""
-"For records searched by name (taxes, tax codes, fiscal positions), the "
-"template name will be matched against the record name on this language."
+msgid "For records searched by name (taxes, tax codes, fiscal positions), the template name will be matched against the record name on this language."
 msgstr ""
 
 #. module: account_chart_update
@@ -282,20 +282,16 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,id:0
 #: field:wizard.update.charts.accounts.tax.code,id:0
 msgid "ID"
-msgstr "מזהה"
+msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,continue_on_errors:0
-msgid ""
-"If set, the wizard will continue to the next step even if there are minor "
-"errors (for example the parent account of a new account couldn't be set)."
+msgid "If set, the wizard will continue to the next step even if there are minor errors (for example the parent account of a new account couldn't be set)."
 msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
-msgid ""
-"If you leave these options set, the wizard will not just create new records, "
-"but also update records with changes (i.e. different tax amount)"
+msgid "If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)"
 msgstr ""
 
 #. module: account_chart_update
@@ -311,7 +307,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,__last_update:0
 #: field:wizard.update.charts.accounts.tax.code,__last_update:0
 msgid "Last Modified on"
-msgstr "תאריך שינוי אחרון"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_uid:0
@@ -321,7 +317,7 @@ msgstr "תאריך שינוי אחרון"
 #: field:wizard.update.charts.accounts.tax,write_uid:0
 #: field:wizard.update.charts.accounts.tax.code,write_uid:0
 msgid "Last Updated by"
-msgstr "עודכן לאחרונה על ידי"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,write_date:0
@@ -331,7 +327,7 @@ msgstr "עודכן לאחרונה על ידי"
 #: field:wizard.update.charts.accounts.tax,write_date:0
 #: field:wizard.update.charts.accounts.tax.code,write_date:0
 msgid "Last Updated on"
-msgstr "עודכן לאחרונה על"
+msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -400,9 +396,7 @@ msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,code_digits:0
-msgid ""
-"No. of digits to use for account code. Make sure it is the same number as "
-"existing accounts."
+msgid "No. of digits to use for account code. Make sure it is the same number as existing accounts."
 msgstr ""
 
 #. module: account_chart_update
@@ -428,8 +422,7 @@ msgstr ""
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:386
 #, python-format
-msgid ""
-"One or more errors detected!\n"
+msgid "One or more errors detected!\n"
 "\n"
 "%s"
 msgstr ""
@@ -458,6 +451,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1203
 #, python-format
 msgid "Removed account %s from financial report %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -494,12 +488,14 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1133
 #, python-format
 msgid "Tax %s: The collected account can not be set.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1136
 #, python-format
 msgid "Tax %s: The paid account can not be set.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -537,12 +533,14 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:583
 #, python-format
 msgid "Tax is disabled.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:787
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -575,78 +573,91 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:616
 #, python-format
 msgid "The Tax Included in Price field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:636
 #, python-format
 msgid "The account_collected field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:633
 #, python-format
 msgid "The account_paid field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:591
 #, python-format
 msgid "The amount field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:595
 #, python-format
 msgid "The applicable type field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:608
 #, python-format
 msgid "The base sign field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:620
 #, python-format
 msgid "The base_code_id field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:599
 #, python-format
 msgid "The child depend field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:509
 #, python-format
 msgid "The code field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:587
 #, python-format
 msgid "The description field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:597
 #, python-format
 msgid "The domain field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:612
 #, python-format
 msgid "The include base amount field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:511
 #, python-format
 msgid "The info field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -654,54 +665,63 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:585
 #, python-format
 msgid "The name field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:704
 #, python-format
 msgid "The name is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:515
 #, python-format
 msgid "The notprintable field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:520
 #, python-format
 msgid "The parent field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:602
 #, python-format
 msgid "The parent_id field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:604
 #, python-format
 msgid "The python compute field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:710
 #, python-format
 msgid "The reconcile is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:626
 #, python-format
 msgid "The ref_base_code_id field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:629
 #, python-format
 msgid "The ref_tax_code_id field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -709,67 +729,75 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:589
 #, python-format
 msgid "The sequence field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:513
 #, python-format
 msgid "The sign field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:610
 #, python-format
 msgid "The tax sign field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:623
 #, python-format
 msgid "The tax_code_id field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:814
 #, python-format
 msgid "The template has accounts the fiscal position instance does not.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:792
 #, python-format
 msgid "The template has taxes the fiscal position instance does not.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:593
 #, python-format
 msgid "The type field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:706
 #, python-format
 msgid "The type is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:614
 #, python-format
 msgid "The type tax use field is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:708
 #, python-format
 msgid "The user type is different.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
-msgid ""
-"This wizard will update your accounts, taxes, fiscal positions and financial "
-"reports according to the selected chart template"
+msgid "This wizard will update your accounts, taxes, fiscal positions and financial reports according to the selected chart template"
 msgstr ""
 
 #. module: account_chart_update
@@ -786,7 +814,7 @@ msgstr ""
 #: field:wizard.update.charts.accounts.tax,type:0
 #: field:wizard.update.charts.accounts.tax.code,type:0
 msgid "Type"
-msgstr "סוג"
+msgstr ""
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,update_account:0
@@ -850,16 +878,14 @@ msgstr ""
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_children_accounts_parent:0
-msgid ""
-"Update the parent of accounts that seem (based on the code) to be children "
-"of the newly created ones. If you had an account 430 with a child 4300000, "
-"and a 4300 account is created, the 4300000 parent will be set to 4300."
+msgid "Update the parent of accounts that seem (based on the code) to be children of the newly created ones. If you had an account 430 with a child 4300000, and a 4300 account is created, the 4300000 parent will be set to 4300."
 msgstr ""
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1106
 #, python-format
 msgid "Updated account %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -876,6 +902,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1012
 #, python-format
 msgid "Updated tax %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -887,6 +914,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:946
 #, python-format
 msgid "Updated tax code %s.\n"
+""
 msgstr ""
 
 #. module: account_chart_update
@@ -919,4 +947,5 @@ msgstr ""
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid "or"
-msgstr "או"
+msgstr ""
+

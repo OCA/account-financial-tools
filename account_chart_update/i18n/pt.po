@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_chart_update
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
@@ -20,11 +20,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
 "PO-Revision-Date: 2016-11-25 14:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_chart_update
@@ -36,7 +37,9 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:808
 #, python-format
 msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
-msgstr "Mapeamento da conta não encontrada na instância da posição fiscal: %s -> %s.\n"
+msgstr ""
+"Mapeamento da conta não encontrada na instância da posição fiscal: %s -> "
+"%s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,account_id:0
@@ -218,24 +221,31 @@ msgstr "Excepção ao escrever a conta %s: %s - %s.\n"
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_account:0
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr "As contas existentes estão actualizadas. As Contas são pesquisadas por código."
+msgstr ""
+"As contas existentes estão actualizadas. As Contas são pesquisadas por "
+"código."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_fiscal_position:0
 msgid ""
-"Existing fiscal positions are updated. Fiscal positions are searched by "
-"name."
-msgstr "As posições fiscais existentes estão actualizadas. Posições fiscais são pesquisadas pelo nome."
+"Existing fiscal positions are updated. Fiscal positions are searched by name."
+msgstr ""
+"As posições fiscais existentes estão actualizadas. Posições fiscais são "
+"pesquisadas pelo nome."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax_code:0
 msgid "Existing tax codes are updated. Tax codes are searched by name."
-msgstr "Os códigos de imposto existentes estão actualizados. O Código de impostos são pesquisados pelo nome."
+msgstr ""
+"Os códigos de imposto existentes estão actualizados. O Código de impostos "
+"são pesquisados pelo nome."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr "Os impostos existenstes estão actualizados. Os impostos são localizados pelo nome."
+msgstr ""
+"Os impostos existenstes estão actualizados. Os impostos são localizados pelo "
+"nome."
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_financial_report
@@ -299,13 +309,16 @@ msgstr "ID"
 msgid ""
 "If set, the wizard will continue to the next step even if there are minor "
 "errors (for example the parent account of a new account couldn't be set)."
-msgstr "Se definido o assistente vai continuar o próximo passo mesmo que existam erros menores (por exemplo, o ascendente da conta de uma nova conta não pode ser definida)."
+msgstr ""
+"Se definido o assistente vai continuar o próximo passo mesmo que existam "
+"erros menores (por exemplo, o ascendente da conta de uma nova conta não pode "
+"ser definida)."
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid ""
-"If you leave these options set, the wizard will not just create new records,"
-" but also update records with changes (i.e. different tax amount)"
+"If you leave these options set, the wizard will not just create new records, "
+"but also update records with changes (i.e. different tax amount)"
 msgstr ""
 
 #. module: account_chart_update
@@ -442,7 +455,10 @@ msgid ""
 "One or more errors detected!\n"
 "\n"
 "%s"
-msgstr "Um ou mais erros detectado!\n\n%s"
+msgstr ""
+"Um ou mais erros detectado!\n"
+"\n"
+"%s"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -553,7 +569,9 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:787
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
-msgstr "Mapeamento de imposto não encontrado na instância da posição fiscal: %s -> %s.\n"
+msgstr ""
+"Mapeamento de imposto não encontrado na instância da posição fiscal: %s -> "
+"%s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.tax,tax_id:0
@@ -778,8 +796,8 @@ msgstr "O tipo de utilizador é diferente.\n"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid ""
-"This wizard will update your accounts, taxes, fiscal positions and financial"
-" reports according to the selected chart template"
+"This wizard will update your accounts, taxes, fiscal positions and financial "
+"reports according to the selected chart template"
 msgstr ""
 
 #. module: account_chart_update
@@ -864,7 +882,11 @@ msgid ""
 "Update the parent of accounts that seem (based on the code) to be children "
 "of the newly created ones. If you had an account 430 with a child 4300000, "
 "and a 4300 account is created, the 4300000 parent will be set to 4300."
-msgstr "Actualize contas ascendente que parecem (com base no código) a ser descendentes dos recém-criado. Se tiver uma conta de 430 com uma descendente 4.300.000, e uma conta de 4300 é criado, ascendente 4.300.000 serão definidos para 4300."
+msgstr ""
+"Actualize contas ascendente que parecem (com base no código) a ser "
+"descendentes dos recém-criado. Se tiver uma conta de 430 com uma descendente "
+"4.300.000, e uma conta de 4300 é criado, ascendente 4.300.000 serão "
+"definidos para 4300."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1106

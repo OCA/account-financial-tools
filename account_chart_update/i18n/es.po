@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_chart_update
-# 
+#
 # Translators:
 # Accounts-Payable - Alkemics, 2015
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
@@ -31,11 +31,12 @@ msgstr ""
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
 "PO-Revision-Date: 2017-08-21 07:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_chart_update
@@ -47,7 +48,8 @@ msgstr "Nº de dígitos"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:808
 #, python-format
 msgid "Account mapping not found on the fiscal position instance: %s -> %s.\n"
-msgstr "Mapeo de cuenta no encontrado en la instancia de posición fiscal: %s -> %s.\n"
+msgstr ""
+"Mapeo de cuenta no encontrado en la instancia de posición fiscal: %s -> %s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.account,account_id:0
@@ -218,7 +220,8 @@ msgstr "Excepción creando cuenta %s: %s - %s.\n"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1043
 #, python-format
 msgid "Exception setting the parent of account %s children: %s - %s.\n"
-msgstr "Excepción estableciendo el padre de los hijos de la cuenta %s: %s - %s.\n"
+msgstr ""
+"Excepción estableciendo el padre de los hijos de la cuenta %s: %s - %s.\n"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1108
@@ -229,24 +232,31 @@ msgstr "Excepción escribiendo cuenta %s: %s - %s.\n"
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_account:0
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr "Las cuentas contables existentes serán actualizadas. Las cuentas se buscarán por código."
+msgstr ""
+"Las cuentas contables existentes serán actualizadas. Las cuentas se buscarán "
+"por código."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_fiscal_position:0
 msgid ""
-"Existing fiscal positions are updated. Fiscal positions are searched by "
-"name."
-msgstr "Las posiciones fiscales existentes serán actualizadas. Las posiciones fiscales se buscarán por nombre."
+"Existing fiscal positions are updated. Fiscal positions are searched by name."
+msgstr ""
+"Las posiciones fiscales existentes serán actualizadas. Las posiciones "
+"fiscales se buscarán por nombre."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax_code:0
 msgid "Existing tax codes are updated. Tax codes are searched by name."
-msgstr "Los códigos de impuestos existentes serán actualizados. Los códigos de impuestos se buscarán por nombre."
+msgstr ""
+"Los códigos de impuestos existentes serán actualizados. Los códigos de "
+"impuestos se buscarán por nombre."
 
 #. module: account_chart_update
 #: help:wizard.update.charts.accounts,update_tax:0
 msgid "Existing taxes are updated. Taxes are searched by name."
-msgstr "Los impuestos existentes serán actualizados. Los impuestos se buscarán por nombre."
+msgstr ""
+"Los impuestos existentes serán actualizados. Los impuestos se buscarán por "
+"nombre."
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_financial_report
@@ -275,7 +285,9 @@ msgstr "Plantilla de posición fiscal"
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_fiscal_position
 msgid ""
 "Fiscal position that needs to be updated (new or updated in the template)."
-msgstr "Posición fiscal que necesita actualizarse (nueva o actualizada en la plantilla)."
+msgstr ""
+"Posición fiscal que necesita actualizarse (nueva o actualizada en la "
+"plantilla)."
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.fiscal.position,update_fiscal_position_id:0
@@ -293,7 +305,9 @@ msgstr "Posiciones fiscales"
 msgid ""
 "For records searched by name (taxes, tax codes, fiscal positions), the "
 "template name will be matched against the record name on this language."
-msgstr "Para los registros de impuestos,  códigos de impuestos y posiciones fiscales, sus nombres se comparan con los de la plantilla seleccionada."
+msgstr ""
+"Para los registros de impuestos,  códigos de impuestos y posiciones "
+"fiscales, sus nombres se comparan con los de la plantilla seleccionada."
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,id:0
@@ -310,14 +324,20 @@ msgstr "ID"
 msgid ""
 "If set, the wizard will continue to the next step even if there are minor "
 "errors (for example the parent account of a new account couldn't be set)."
-msgstr "Si está marcado, el asistente continuará al paso siguiente incluso si hay errores menores (por ejemplo, no se pudo establecer la cuenta padre de una nueva cuenta)."
+msgstr ""
+"Si está marcado, el asistente continuará al paso siguiente incluso si hay "
+"errores menores (por ejemplo, no se pudo establecer la cuenta padre de una "
+"nueva cuenta)."
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid ""
-"If you leave these options set, the wizard will not just create new records,"
-" but also update records with changes (i.e. different tax amount)"
-msgstr "Si deja esta opción marcada, el asistente creará no sólo nuevos registros, si no que también actualizará aquellos con cambios (por ejemplo, diferente porcentaje de impuesto)"
+"If you leave these options set, the wizard will not just create new records, "
+"but also update records with changes (i.e. different tax amount)"
+msgstr ""
+"Si deja esta opción marcada, el asistente creará no sólo nuevos registros, "
+"si no que también actualizará aquellos con cambios (por ejemplo, diferente "
+"porcentaje de impuesto)"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts,lang:0
@@ -424,7 +444,9 @@ msgstr "Siguiente"
 msgid ""
 "No. of digits to use for account code. Make sure it is the same number as "
 "existing accounts."
-msgstr "Nº de dígitos a usar para el código de cuenta. Asegúrese que este número es el mismo que el de las cuentas existentes."
+msgstr ""
+"Nº de dígitos a usar para el código de cuenta. Asegúrese que este número es "
+"el mismo que el de las cuentas existentes."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:786
@@ -453,7 +475,10 @@ msgid ""
 "One or more errors detected!\n"
 "\n"
 "%s"
-msgstr "¡Uno o más errores detectados!\n\n%s"
+msgstr ""
+"¡Uno o más errores detectados!\n"
+"\n"
+"%s"
 
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
@@ -536,7 +561,9 @@ msgstr "Plantilla de código de impuesto"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax_code
 msgid "Tax code that needs to be updated (new or updated in the template)."
-msgstr "Código de impuesto que necesita actualizarse (nuevo o actualizado en la plantilla)."
+msgstr ""
+"Código de impuesto que necesita actualizarse (nuevo o actualizado en la "
+"plantilla)."
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax.code,type:0
@@ -564,7 +591,9 @@ msgstr "Impuesto está desactivado.\n"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:787
 #, python-format
 msgid "Tax mapping not found on the fiscal position instance: %s -> %s.\n"
-msgstr "Mapeo de cuenta no encontrado en la instancia de la posición fiscal: %s -> %s.\n"
+msgstr ""
+"Mapeo de cuenta no encontrado en la instancia de la posición fiscal: %s -> "
+"%s.\n"
 
 #. module: account_chart_update
 #: field:wizard.update.charts.accounts.tax,tax_id:0
@@ -574,7 +603,8 @@ msgstr "Plantilla de impuesto"
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_tax
 msgid "Tax that needs to be updated (new or updated in the template)."
-msgstr "Impuesto que necesita actualizarse (nuevo o actualizado en la plantilla)."
+msgstr ""
+"Impuesto que necesita actualizarse (nuevo o actualizado en la plantilla)."
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts.tax,type:0
@@ -789,8 +819,8 @@ msgstr "El tipo de usuario es diferente.\n"
 #. module: account_chart_update
 #: view:wizard.update.charts.accounts:account_chart_update.view_update_multi_chart
 msgid ""
-"This wizard will update your accounts, taxes, fiscal positions and financial"
-" reports according to the selected chart template"
+"This wizard will update your accounts, taxes, fiscal positions and financial "
+"reports according to the selected chart template"
 msgstr ""
 
 #. module: account_chart_update
@@ -875,7 +905,11 @@ msgid ""
 "Update the parent of accounts that seem (based on the code) to be children "
 "of the newly created ones. If you had an account 430 with a child 4300000, "
 "and a 4300 account is created, the 4300000 parent will be set to 4300."
-msgstr "Actualizar el padre de las cuentas que parecen (basándose en el código) ser hijas de las cuentas recién creadas. Si tiene una cuenta 430 con una hija 4300000, y se crea una cuenta 4300, se establecerá la cuenta 4300 como padre de la cuenta 4300000."
+msgstr ""
+"Actualizar el padre de las cuentas que parecen (basándose en el código) ser "
+"hijas de las cuentas recién creadas. Si tiene una cuenta 430 con una hija "
+"4300000, y se crea una cuenta 4300, se establecerá la cuenta 4300 como padre "
+"de la cuenta 4300000."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:1106
