@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Komit <http://komit-consulting.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_recompute_currency_form_view" model="ir.ui.view">
+        <field name="name">wizard.recompute.currency.form.view</field>
+        <field name="model">wizard.recompute.invoice.currency</field>
+        <field name="arch" type="xml">
+            <form string="Recompute Currency">
+                <group>
+                    <group>
+                        <field name="currency_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Recompute" class="btn-primary" type="object" name="button_recompute_currency"/>
+                    or
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_recompute_currency" model="ir.actions.act_window">
+        <field name="name">Recompute currency of the Invoice</field>
+        <field name="res_model">wizard.recompute.invoice.currency</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
