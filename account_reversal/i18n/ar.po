@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-11 00:39+0000\n"
-"PO-Revision-Date: 2017-05-11 00:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-06-29 06:01+0000\n"
+"Last-Translator: Osoul <baruni@osoul.ly>\n"
 "Language-Team: Arabic (https://www.transifex.com/oca/teams/23907/ar/)\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "القيد المحاسبي"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -32,17 +33,17 @@ msgstr "إلغاء"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
 msgid "Check this box if your entry has to be reversed at the end of period."
-msgstr ""
+msgstr "قم بتحديد هذا المربع في حال يجب عكس القيد المحاسبي في نهاية الفترة."
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Create reversal journal entries"
-msgstr ""
+msgstr "إنشاء قيود عكسية"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
-msgstr ""
+msgstr "إنشاء قيود عكسية"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_uid
@@ -65,6 +66,8 @@ msgid ""
 "Enter the date of the reversal account entries. By default, Odoo proposes "
 "the same date of the move to reverse."
 msgstr ""
+"أدخل تاريخ القيد العكسي. في حال عدم تحديد أي تاريخ فستقوم المنظومة باستخدام "
+"نفس تاريخ القيد الأصلي."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
@@ -72,11 +75,13 @@ msgid ""
 "Enter the date of the reversal account entries. If empty, Odoo uses the same "
 "journal of the move to reverse."
 msgstr ""
+"أدخل تاريخ القيد العكسي. في حال عدم تحديد أي تاريخ فستقوم المنظومة باستخدام "
+"نفس تاريخ القيد الأصلي."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
 msgid "Entries Ref. Prefix"
-msgstr ""
+msgstr "مرجع القيود"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_id
@@ -86,14 +91,14 @@ msgstr "المعرف"
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_line_prefix
 msgid "Items Name Prefix"
-msgstr ""
+msgstr "المقدمة في عناصر اليومية"
 
 #. module: account_reversal
 #: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
 #: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "Journal Entries to be Reversed"
-msgstr ""
+msgstr "القيود في انتظار عكسها"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse___last_update
@@ -113,7 +118,7 @@ msgstr "آخر تحديث في"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
+msgstr "قم بالتحديد هنا لتسوية القيود ببعضها."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
@@ -134,33 +139,33 @@ msgstr ""
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
 msgid "Reconcile"
-msgstr ""
+msgstr "التسوية"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_date
 msgid "Reversal Date"
-msgstr ""
+msgstr "تاريخ القيد العكسي"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
 msgid "Reversal Entry"
-msgstr ""
+msgstr "قيد عكسي"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_journal_id
 msgid "Reversal Journal"
-msgstr ""
+msgstr "يومية القيد العكسي"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
-msgstr ""
+msgstr "إنشاء القيود العكسية"
 
 #. module: account_reversal
 #: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
-msgstr ""
+msgstr "إنشاء القيود العكسية"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -173,7 +178,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "To Be Reversed"
-msgstr ""
+msgstr "في انتظار قيد عكسي"
 
 #. module: account_reversal
 #: code:addons/account_reversal/models/account_move.py:56
