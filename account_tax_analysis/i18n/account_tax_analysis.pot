@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-12 11:22+0000\n"
-"PO-Revision-Date: 2018-06-12 11:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -142,6 +140,14 @@ msgid "Posted Journal Items"
 msgstr ""
 
 #. module: account_tax_analysis
+#: model:ir.model.fields,help:account_tax_analysis.field_account_move_line_journal_type
+msgid "Select 'Sale' for customer invoices journals.\n"
+"Select 'Purchase' for vendor bills journals.\n"
+"Select 'Cash' or 'Bank' for journals that are used in customer or vendor payments.\n"
+"Select 'General' for miscellaneous operations journals."
+msgstr ""
+
+#. module: account_tax_analysis
 #: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Show tax lines"
 msgstr ""
@@ -171,6 +177,7 @@ msgstr ""
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
 #: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
+#: model:ir.ui.menu,name:account_tax_analysis.menu_action_account_vat_declaration_analysis
 msgid "Taxes Analysis"
 msgstr ""
 
@@ -196,6 +203,7 @@ msgstr ""
 
 #. module: account_tax_analysis
 #: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_account_type
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_journal_type
 msgid "Type"
 msgstr ""
 
@@ -207,6 +215,11 @@ msgstr ""
 #. module: account_tax_analysis
 #: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted Journal Items"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "View invoice"
 msgstr ""
 
 #. module: account_tax_analysis
