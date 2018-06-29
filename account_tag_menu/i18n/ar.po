@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2018-06-30 06:01+0000\n"
+"Last-Translator: Osoul <baruni@osoul.ly>\n"
 "Language-Team: none\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -14,21 +15,22 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: account_tag_menu
 #: model:ir.model,name:account_tag_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "وسم الحساب"
 
 #. module: account_tag_menu
 #: model:ir.ui.menu,name:account_tag_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "وسوم الحسابات"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "الحسابات"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_account_ids
@@ -43,4 +45,4 @@ msgstr ""
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "الضرائب"
