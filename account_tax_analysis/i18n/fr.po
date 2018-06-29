@@ -1,0 +1,216 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_tax_analysis
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-12 11:17+0000\n"
+"PO-Revision-Date: 2018-06-12 11:17+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account"
+msgstr "Compte"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,help:account_tax_analysis.field_account_move_line_account_type
+msgid "Account Type is used for information purpose, to generate country-specific legal reports, and set the rules to close a fiscal year and generate opening entries."
+msgstr "Le type de compte est utilisé comme indication pour l'utilisateur, ainsi que pour créer des rapports comptables spécifiques à certains pays, et enfin pour gérer les clôtures d'exercices (et établir les écritures correspondantes)"
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_vat_declaration_analysis
+msgid "Account Vat Declaration"
+msgstr "Déclaration de TVA"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Account type"
+msgstr "Type de compte"
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Entries"
+msgstr "Toutes les écritures"
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Posted Entries"
+msgstr "Toutes les écritures comptabilisées"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_tax_analysis_name
+msgid "Analysis name"
+msgstr "Non analyse"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_date_range_id
+msgid "Date Range"
+msgstr "Plage de date"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_end_date
+msgid "End date"
+msgstr "Date de fin"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_tax_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis___last_update
+msgid "Last Modified on"
+msgstr "Dernière Modification le"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Month"
+msgstr "Mois"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Period"
+msgstr "Périodes"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted"
+msgstr "Comptabilisée"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Posted Journal Items"
+msgstr "Ecritures comptabilisée"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Show tax lines"
+msgstr "Afficher les lignes de taxes"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_start_date
+msgid "Start date"
+msgstr "Date de début"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_target_move
+msgid "Target Moves"
+msgstr "Mouvements cibles"
+
+#. module: account_tax_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_tax
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_analysis_tax
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax"
+msgstr "Taxe"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax / Account Type"
+msgstr "Taxe / Type de compte"
+
+#. module: account_tax_analysis
+#: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
+#: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
+msgid "Taxes Analysis"
+msgstr "Analyses des taxes"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
+msgid "Taxes Report"
+msgstr "Rapport de taxe"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total Tax"
+msgstr "Total Taxe"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total credit"
+msgstr "Total crédit"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "Total debit"
+msgstr "Total débit"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_account_type
+msgid "Type"
+msgstr "Type"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted"
+msgstr "Non comptabilisée"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Unposted Journal Items"
+msgstr "Lignes comptables non-comptabilisée"
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Year"
+msgstr "Année"
+
