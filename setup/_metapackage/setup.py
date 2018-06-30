@@ -37,6 +37,7 @@ setuptools.setup(
         'odoo10-addon-account_renumber',
         'odoo10-addon-account_reversal',
         'odoo10-addon-account_tag_category',
+        'odoo10-addon-account_tax_analysis',
         'odoo10-addon-account_type_inactive',
         'odoo10-addon-account_type_menu',
         'odoo10-addon-base_vat_optional_vies',
