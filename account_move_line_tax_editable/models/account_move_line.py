@@ -10,10 +10,9 @@ class AccountMoveLine(models.Model):
 
     is_tax_editable = fields.Boolean(
         string="Is tax data editable?", compute='_compute_is_tax_editable')
-    move_state = fields.Selection(related="move_id.state", readonly=True)
 
     @api.multi
-    @api.depends('move_state')
+    @api.depends('move_id.state')
     def _compute_is_tax_editable(self):
         for rec in self:
             rec.is_tax_editable = rec._get_is_tax_editable()
