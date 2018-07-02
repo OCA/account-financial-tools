@@ -23,14 +23,18 @@
                           help="Posted Journal Items"/>
                 </group>
                 <group name="group_by">
-                    <filter string="Tax / Account Type"
+                    <filter string="Analysis Tax / Account Type / Account"
                           name="group_by_tax_type"
                           domain="[]"
                           context="{'group_by': ['analysis_tax', 'account_type', 'account_id'] }"/>
-                    <filter string="Tax"
-                          name="group_by_tax"
+                    <filter string="Analysis Tax"
+                          name="group_by_analysis_tax"
                           domain="[]"
                           context="{'group_by': 'analysis_tax'}"/>
+                    <filter string="Originator Tax"
+                          name="group_by_originator_tax"
+                          domain="[]"
+                          context="{'group_by': 'tax_line_id'}"/>
                     <filter string="Account type"
                           name="group_by_account_type"
                           context="{'group_by': 'account_type'}"/>

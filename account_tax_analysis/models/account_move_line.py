@@ -10,8 +10,9 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     analysis_tax = fields.Char(
-        string="Tax", compute="_compute_analysis_tax", store=True)
+        string="Analysis Tax", compute="_compute_analysis_tax", store=True)
     account_type = fields.Many2one(
+        string="Account Type",
         related='account_id.user_type_id', store=True)
     journal_type = fields.Selection(related="journal_id.type")
 
