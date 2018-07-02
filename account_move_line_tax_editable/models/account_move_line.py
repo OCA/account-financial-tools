@@ -21,4 +21,4 @@ class AccountMoveLine(models.Model):
     @api.multi
     def _get_is_tax_editable(self):
         self.ensure_one()
-        return self.move_state in (False, 'draft')
+        return not self.move_id or self.move_id.state == 'draft'
