@@ -20,7 +20,7 @@
                     <field name="target_move"/>
                 </group>
                 <footer>
-                    <button name="show_vat" string="Show tax lines" type="object" class="oe_highlight"/>
+                    <button name="show_vat" string="Show" type="object" class="oe_highlight"/>
                     <button special="cancel" string="Cancel" class="oe_link"/>
                 </footer>
             </form>

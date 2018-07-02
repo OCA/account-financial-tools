@@ -74,8 +74,8 @@
                 <field name="credit" sum="Total credit"/>
                 <field name="balance" sum="Total Tax"/>
                 <field name="name"/>
-                <field name="journal_type" invisible="1"/>
-                <button type="object" name="action_show_invoice" string="View invoice" icon="fa-search" attrs="{'invisible': [('journal_type', 'not in', ['sale', 'purchase'])]}"/>
+                <field name="invoice_id" invisible="1"/>
+                <button type="object" name="action_show_invoice" string="View invoice" icon="fa-search" attrs="{'invisible': [('invoice_id', '=', False)]}"/>
                 <field name="move_id"/>
                 <field name="date"/>
                 <field name="amount_currency" groups="base.group_multi_currency" />

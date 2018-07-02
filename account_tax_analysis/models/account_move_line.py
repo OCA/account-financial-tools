@@ -14,7 +14,6 @@ class AccountMoveLine(models.Model):
     account_type = fields.Many2one(
         string="Account Type",
         related='account_id.user_type_id', store=True)
-    journal_type = fields.Selection(related="journal_id.type")
 
     @api.multi
     @api.depends("tax_line_id", "tax_ids", "company_id")
@@ -33,10 +32,12 @@ class AccountMoveLine(models.Model):
                         lang_line.tax_ids.mapped('analysis_name'))))
 
     def action_show_invoice(self):
-        self.ensure_one()
-        invoices = self.env["account.invoice"].search(
-            [("move_id", "=", self.move_id.id)])
-        action = self.env.ref("account.action_invoice_tree")
-        action_fields = action.read()[0]
-        action_fields["domain"] = [("id", "in", invoices.ids)]
-        return action_fields
+        if len(self) != 1 or not self.invoice_id:
+            return False
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': self.invoice_id.id,
+            'res_model': 'account.invoice',
+        }
