@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 try:
     import numpy
 except (ImportError, IOError) as err:
-    _logger.error(err)
+    _logger.debug(err)
 
 
 class AccountLoan(models.Model):
