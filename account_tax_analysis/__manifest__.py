@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Tax analysis",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "description": """
         Add a report on tax (Invoicing / Reports / Taxes Analysis)""",
     "depends": [
