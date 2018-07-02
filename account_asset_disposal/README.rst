@@ -1,20 +1,43 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl
-   :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
 
 ======================
 Account asset disposal
 ======================
 
-This module extends the functionality of account_asset adding a disposal
-date, allowing reversion of disposal operation and adding the state
-"Disposed" to the asset.
+This module enables a real asset disposal with the proper accounting entries.
+
+When an asset gets broken or is totally depreciated, you can close it and Odoo
+will generate automatically the asset close move (and compute the loss if a
+residual value is pending).
+
+You can also cancel this disposal for returning to the previous state.
+
+Configuration
+=============
+
+#. Go to *Accounting > Configuration > Management > Asset Types*.
+#. There's a new field called "Loss Account" for setting the default loss
+   account when disposing assets.
 
 Usage
 =====
 
-In a disposed asset you will find an 'Undo disposal' button to revert
-operation.
+#. Go to *Accounting > Adviser > Assets*.
+#. There you will find a 'Dispose' button (instead of standard 'Set to Close').
+#. After clicking it, a wizard pops-up for asking disposal date and loss
+   account to use if any residual value is pending.
+#. Click on "Dispose asset".
+#. A new screen will appear with the disposal account entry.
+#. On the asset, all remaining depreciation lines are removed, and a new one
+   appears for the disposal move.
+
+You can cancel afterwards the disposal:
+
+#. Click on "Undo disposal" on the asset.
+#. The disposal entry is removed.
+#. The depreciation board is restored with all the remaining depreciations.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -29,6 +52,11 @@ Bugs are tracked on `GitHub Issues
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 
+Known issues / Roadmap
+======================
+
+* Include a specific message type for notifying the disposal.
+
 Credits
 =======
 
@@ -40,9 +68,10 @@ Images
 Contributors
 ------------
 
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Antonio Espinosa <antonio.espinosa@tecnativa.com>
-* Luis M. Ontalba <luis.martinez@tecnativa.com>
+* Tecnativa (https://www.tecnativa.com):
+  * Pedro M. Baeza <pedro.baeza@tecnativa.com>
+  * Antonio Espinosa <antonio.espinosa@tecnativa.com>
+  * Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------
