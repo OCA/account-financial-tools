@@ -10,10 +10,16 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     analysis_tax = fields.Char(
-        string="Analysis Tax", compute="_compute_analysis_tax", store=True)
+        string="Analysis Tax",
+        compute="_compute_analysis_tax",
+        store=True,
+    )
     account_type = fields.Many2one(
         string="Account Type",
-        related='account_id.user_type_id', store=True)
+        related='account_id.user_type_id',
+        readonly=True,
+        store=True,
+    )
 
     @api.multi
     @api.depends("tax_line_id", "tax_ids", "company_id")
