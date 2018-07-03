@@ -25,7 +25,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_asset_depr_line_cancel](account_asset_depr_line_cancel/) | 10.0.1.0.0 | Assets Management - Cancel button
-[account_asset_disposal](account_asset_disposal/) | 10.0.1.0.0 | Makes asset close account move automatically
+[account_asset_disposal](account_asset_disposal/) | 10.0.2.0.0 | Makes asset close account move automatically
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 10.0.1.0.1 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
@@ -43,6 +43,7 @@ addon | version | summary
 [account_move_fiscal_month](account_move_fiscal_month/) | 10.0.1.0.0 | Display the fiscal month on journal entries/item
 [account_move_fiscal_year](account_move_fiscal_year/) | 10.0.1.0.0 | Display the fiscal year on journal entries/item
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
+[account_move_line_purchase_info](account_move_line_purchase_info/) | 10.0.1.0.0 | Introduces the purchase order line to the journal items
 [account_move_line_tax_editable](account_move_line_tax_editable/) | 10.0.1.0.0 | Allows to edit taxes on non-posted account move lines
 [account_move_locking](account_move_locking/) | 10.0.1.0.0 | Move locked to prevent modification
 [account_move_template](account_move_template/) | 10.0.2.0.0 | Templates for recurring Journal Entries
