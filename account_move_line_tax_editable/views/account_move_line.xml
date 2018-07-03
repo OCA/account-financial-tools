@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2017 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
-
 <odoo>
-<data>
-
     <record model="ir.ui.view" id="account_move_line_form_view">
         <field name="name">account.move.line.form (in account_move_line_tax_editable)</field>
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account.view_move_line_form"/>
         <field name="arch" type="xml">
             <field name="tax_line_id" position="before">
+                <field name="move_id" invisible="1"/>
                 <field name="is_tax_editable" invisible="1"/>
             </field>
             <field name="tax_line_id" position="attributes">
@@ -23,6 +21,4 @@
             </field>
         </field>
     </record>
-
-</data>
 </odoo>

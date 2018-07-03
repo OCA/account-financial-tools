@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = 'account.move.line'
 
     is_tax_editable = fields.Boolean(
@@ -21,4 +20,4 @@ class AccountMoveLine(models.Model):
     @api.multi
     def _get_is_tax_editable(self):
         self.ensure_one()
-        return self.move_id.state == 'draft'
+        return not self.move_id or self.move_id.state == 'draft'

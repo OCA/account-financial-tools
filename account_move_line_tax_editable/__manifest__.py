@@ -6,7 +6,7 @@
     'name': 'Account Move Line Tax Editable',
     'summary': """
         Allows to edit taxes on non-posted account move lines""",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://www.acsone.eu',
