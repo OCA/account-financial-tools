@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo10-addon-account_move_fiscal_month',
         'odoo10-addon-account_move_fiscal_year',
         'odoo10-addon-account_move_line_payable_receivable_filter',
+        'odoo10-addon-account_move_line_purchase_info',
         'odoo10-addon-account_move_line_tax_editable',
         'odoo10-addon-account_move_locking',
         'odoo10-addon-account_move_template',
