@@ -44,7 +44,7 @@ addon | version | summary
 [account_move_fiscal_year](account_move_fiscal_year/) | 10.0.1.0.0 | Display the fiscal year on journal entries/item
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 10.0.1.0.0 | Introduces the purchase order line to the journal items
-[account_move_line_tax_editable](account_move_line_tax_editable/) | 10.0.1.0.0 | Allows to edit taxes on non-posted account move lines
+[account_move_line_tax_editable](account_move_line_tax_editable/) | 10.0.1.0.1 | Allows to edit taxes on non-posted account move lines
 [account_move_locking](account_move_locking/) | 10.0.1.0.0 | Move locked to prevent modification
 [account_move_template](account_move_template/) | 10.0.2.0.0 | Templates for recurring Journal Entries
 [account_netting](account_netting/) | 10.0.1.0.0 | Compensate AR/AP accounts from the same partner
