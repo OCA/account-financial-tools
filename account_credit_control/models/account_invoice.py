@@ -30,6 +30,56 @@ class AccountInvoice(models.Model):
         readonly=True,
         copy=False,
     )
+    credit_control_notes = fields.Char(
+        compute='_compute_credit_control_notes',
+        inverse='_inverse_credit_control_notes',
+        readonly=True,
+        states={'open': [('readonly', False)]}
+    )
+    credit_control_date = fields.Date(
+        compute='_compute_credit_control_date',
+        inverse='_inverse_credit_control_date',
+        string='Credit Control Ignore Before',
+        readonly=True,
+        states={'open': [('readonly', False)]}
+    )
+
+    @api.multi
+    def _inverse_credit_control_notes(self):
+        """
+        Set credit control notes on every move line if invoice notes
+        have been modified
+        :return:
+        """
+        for invoice in self:
+            line = invoice._get_payable_receivable_move_line()
+            line.credit_control_notes = invoice.credit_control_notes
+
+    @api.multi
+    def _compute_credit_control_notes(self):
+        for invoice in self:
+            line = invoice._get_payable_receivable_move_line()
+            invoice.credit_control_notes = line.credit_control_notes
+
+    @api.multi
+    def _get_payable_receivable_move_line(self):
+        self.ensure_one()
+        return self.move_id.line_ids.filtered(
+            lambda l: l.account_id.internal_type in ['payable', 'receivable'])
+
+    @api.multi
+    def _inverse_credit_control_date(self):
+        for invoice in self:
+            line = invoice._get_payable_receivable_move_line()
+            line.credit_control_date = invoice.credit_control_date
+
+    @api.multi
+    @api.depends('move_id.line_ids.credit_control_date',
+                 'move_id.line_ids.invoice_id')
+    def _compute_credit_control_date(self):
+        for invoice in self:
+            line = invoice._get_payable_receivable_move_line()
+            invoice.credit_control_date = line.credit_control_date
 
     @api.multi
     def action_cancel(self):

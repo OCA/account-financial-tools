@@ -17,6 +17,7 @@ class ResPartner(models.Model):
         'credit.control.policy',
         string='Credit Control Policy',
         domain="[('account_ids', 'in', property_account_receivable_id)]",
+        default=lambda self: self._get_default_credit_policy(),
         help="The Credit Control Policy used for this "
              "partner. This setting can be forced on the "
              "invoice. If nothing is defined, it will use "
@@ -51,6 +52,20 @@ class ResPartner(models.Model):
     manual_followup = fields.Boolean(
         string='Manual Followup',
     )
+    credit_control_notes = fields.Char(
+        help="These are notes related to Credit Control for this partner",
+    )
+    credit_control_email = fields.Char(
+        help="This is the email used in place of standard email to manage"
+             " credit control"
+    )
+
+    @api.model
+    def _get_default_credit_policy(self):
+        policy_obj = self.env['credit.control.policy']
+        default_policy = policy_obj.search([('default_on_partner', '=', True)])
+        if default_policy:
+            return default_policy
 
     @api.constrains('credit_policy_id', 'property_account_receivable_id')
     def _check_credit_policy(self):

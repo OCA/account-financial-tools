@@ -13,6 +13,8 @@
                     <field name="payment_note"/>
                     <field name="payment_next_action"/>
                     <field name="payment_next_action_date"/>
+                    <field name="credit_control_notes" />
+                    <field name="credit_control_email" />
                 </group>
             </xpath>
         </field>

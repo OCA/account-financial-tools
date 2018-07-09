@@ -32,6 +32,8 @@
                             <field name="invoice_id"/>
                             <field name="move_line_id"/>
                             <field name="account_id"/>
+                            <field name="partner_notes" />
+                            <field name="move_line_notes" />
                         </group>
                         <group>
                             <field name="amount_due"/>
@@ -133,6 +135,8 @@
                 <field name="channel"/>
                 <field name="invoice_id"/>
                 <field name="partner_id"/>
+                <field name="partner_notes" />
+                <field name="move_line_notes" />
                 <field name="manual_followup"/>
                 <field name="amount_due"/>
                 <field name="balance_due"/>

@@ -60,7 +60,8 @@ class CreditControlLine(models.Model):
                                   "generated again on the next run.")
 
     channel = fields.Selection([('letter', 'Letter'),
-                                ('email', 'Email')],
+                                ('email', 'Email'),
+                                ('phone', 'Phone')],
                                string='Channel',
                                required=True,
                                readonly=True,
@@ -127,15 +128,34 @@ class CreditControlLine(models.Model):
 
     manual_followup = fields.Boolean(string='Manual Followup')
 
+    # Notes to help accountant to get partner related notes and
+    # particular move lines notes.
+    partner_notes = fields.Char(
+        string='Partner Notes',
+        related='partner_id.credit_control_notes',
+        readonly=True
+    )
+    move_line_notes = fields.Char(
+        string='Invoice Notes',
+        related='move_line_id.credit_control_notes',
+        readonly=True
+    )
+
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,
                                 open_amount):
         """ Create credit control line """
         data = {}
+        channel = level.channel
+        partner = move_line.partner_id
+        # Fallback to letter
+        if channel == 'email' and partner and\
+                not partner.email and not partner.credit_control_email:
+            channel = 'letter'
         data['date'] = controlling_date
         data['date_due'] = move_line.date_maturity
         data['state'] = 'draft'
-        data['channel'] = level.channel
+        data['channel'] = channel
         data['invoice_id'] = (move_line.invoice_id.id if
                               move_line.invoice_id else False)
         data['partner_id'] = move_line.partner_id.id

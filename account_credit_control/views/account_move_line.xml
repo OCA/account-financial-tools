@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_line_tree_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.tree (in account_credit_control)</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="credit_control_notes" />
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="credit_control_date" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_move_line_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.line.form (in account_credit_control)</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="credit_control_notes" />
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="credit_control_date" />
+                </xpath>
+            </field>
+        </record>
+</odoo>

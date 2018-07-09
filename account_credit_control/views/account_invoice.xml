@@ -20,6 +20,8 @@
                         <field name="credit_policy_id"
                                string="Manual Credit Control Policy"
                                attrs="{'invisible': [('credit_policy_id', '=', False)]}"/>
+                        <field name="credit_control_date" />
+                        <field name="credit_control_notes" />
                     </group>
                     <separator string="Issued Lines" colspan="4"/>
                     <field name="credit_control_line_ids" colspan="4" nolabel="1">
