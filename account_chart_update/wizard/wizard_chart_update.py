@@ -462,7 +462,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         found_taxes_ids = []
         self.tax_ids.unlink()
         # Search for changes between template and real tax
-        for template in self.chart_template_ids.mapped("tax_template_ids"):
+        for template in self.chart_template_ids.\
+                with_context(active_test=False).mapped("tax_template_ids"):
             # Check if the template matches a real tax
             tax_id = self.find_tax_by_templates(template)
             if not tax_id:
