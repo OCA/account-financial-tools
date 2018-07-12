@@ -12,3 +12,5 @@ class AccountConfigSettings(models.TransientModel):
         related='company_id.check_deposit_offsetting_account')
     check_deposit_transfer_account_id = fields.Many2one(
         related='company_id.check_deposit_transfer_account_id')
+    check_deposit_post_move = fields.Boolean(
+        related='company_id.check_deposit_post_move')
