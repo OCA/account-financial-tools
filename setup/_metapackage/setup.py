@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo11-addon-account_invoice_currency',
         'odoo11-addon-account_loan',
         'odoo11-addon-account_move_fiscal_year',
+        'odoo11-addon-account_move_line_purchase_info',
         'odoo11-addon-account_move_line_tax_editable',
         'odoo11-addon-account_partner_required',
         'odoo11-addon-account_reversal',
