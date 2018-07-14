@@ -4,7 +4,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
  'version': '11.0.1.0.1',
- 'author': "Camptocamp,Odoo Community Association (OCA),Okia,Access Bookings",
+ 'author': "Camptocamp,"
+           "Odoo Community Association (OCA),"
+           "Okia,"
+           "Access Bookings,"
+           "Tecnativa",
  'maintainer': 'Camptocamp',
  'category': 'Finance',
  'depends': [
