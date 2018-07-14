@@ -56,12 +56,12 @@ class ResPartner(models.Model):
     def _check_credit_policy(self):
         """ Ensure that policy on partner are limited to the account policy """
         # sudo needed for those w/o permission that duplicate records
-        for partner in self.sudo():
+        for partner in self:
             if (not partner.property_account_receivable_id or
-                    not partner.credit_policy_id):
+                    not partner.sudo().credit_policy_id):
                 continue
             account = partner.property_account_receivable_id
-            policy = partner.credit_policy_id
+            policy = partner.sudo().credit_policy_id
             try:
                 policy.check_policy_against_account(account)
             except UserError as err:
