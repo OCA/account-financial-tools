@@ -126,7 +126,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4807
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4808
 msgid "Reversal Entry"
 msgstr ""
 
