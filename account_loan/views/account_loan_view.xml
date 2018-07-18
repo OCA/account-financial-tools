@@ -114,6 +114,7 @@
                                            attrs="{'required': [('is_leasing', '=', True)]}"/>
                                     <field name="interests_product_id"
                                            attrs="{'required': [('is_leasing', '=', True)]}"/>
+                                    <field name="post_invoice"/>
                                 </group>
                             </group>
                         </page>
