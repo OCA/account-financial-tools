@@ -286,6 +286,11 @@ msgid "Invoices"
 msgstr ""
 
 #. module: account_loan
+#: model:ir.model.fields,help:account_loan.field_account_loan_post_invoice
+msgid "Invoices will be posted automatically"
+msgstr ""
+
+#. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_is_leasing
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_is_leasing
 msgid "Is Leasing"
@@ -528,6 +533,11 @@ msgstr ""
 #. module: account_loan
 #: model:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Post"
+msgstr ""
+
+#. module: account_loan
+#: model:ir.model.fields,field_description:account_loan.field_account_loan_post_invoice
+msgid "Post Invoice"
 msgstr ""
 
 #. module: account_loan
