@@ -241,6 +241,10 @@ class AccountLoan(models.Model):
         string='Total interests payed',
         compute='_compute_total_amounts',
     )
+    post_invoice = fields.Boolean(
+        default=True,
+        help='Invoices will be posted automatically'
+    )
 
     _sql_constraints = [
         ('name_uniq', 'unique(name, company_id)',
