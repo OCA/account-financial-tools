@@ -328,6 +328,8 @@ class AccountLoanLine(models.Model):
                 for line in invoice.invoice_line_ids:
                     line._set_taxes()
                 invoice.compute_taxes()
+                if record.loan_id.post_invoice:
+                    invoice.action_invoice_open()
         return res
 
     @api.multi
