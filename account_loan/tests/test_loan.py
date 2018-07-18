@@ -223,6 +223,7 @@ class TestLoan(TransactionCase):
         self.partner.property_account_payable_id = self.payable_account
         self.assertEqual(loan.journal_type, 'general')
         loan.is_leasing = True
+        loan.post_invoice = False
         self.assertEqual(loan.journal_type, 'purchase')
         loan.long_term_loan_account_id = self.lt_loan_account
         loan.rate_type = 'real'
@@ -243,8 +244,6 @@ class TestLoan(TransactionCase):
         }).run()
         self.assertTrue(line.has_invoices)
         self.assertFalse(line.has_moves)
-        self.assertTrue(line.invoice_ids)
-        self.assertFalse(line.move_ids)
         self.assertIn(line.invoice_ids.id, action['domain'][0][2])
         with self.assertRaises(UserError):
             self.env['account.loan.pay.amount'].create({
@@ -298,6 +297,34 @@ class TestLoan(TransactionCase):
         line = loan.line_ids.filtered(lambda r: r.sequence == 4)
         with self.assertRaises(UserError):
             line.view_process_values()
+
+    def test_fixed_principal_loan_auto_post(self):
+        amount = 24000
+        periods = 24
+        loan = self.create_loan('fixed-principal', amount, 1, periods)
+        self.partner.property_account_payable_id = self.payable_account
+        self.assertEqual(loan.journal_type, 'general')
+        loan.is_leasing = True
+        self.assertEqual(loan.journal_type, 'purchase')
+        loan.long_term_loan_account_id = self.lt_loan_account
+        loan.rate_type = 'real'
+        loan.compute_lines()
+        self.assertTrue(loan.line_ids)
+        self.assertEqual(len(loan.line_ids), periods)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertEqual(amount / periods, line.principal_amount)
+        self.assertEqual(amount / periods, line.long_term_principal_amount)
+        self.post(loan)
+        line = loan.line_ids.filtered(lambda r: r.sequence == 1)
+        self.assertTrue(line)
+        self.assertFalse(line.has_invoices)
+        self.assertFalse(line.has_moves)
+        self.env['account.loan.generate.wizard'].create({
+            'date': fields.date.today(),
+            'loan_type': 'leasing',
+        }).run()
+        self.assertTrue(line.has_invoices)
+        self.assertTrue(line.has_moves)
 
     def test_interests_on_end_loan(self):
         amount = 10000
