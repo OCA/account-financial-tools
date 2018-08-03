@@ -52,25 +52,30 @@ class AccountLoanPost(models.TransientModel):
             'partner_id': partner.id,
             'credit': 0,
             'debit': line.pending_principal_amount,
+            'name': self.loan_id.name,
         })
         if (
-            line.pending_principal_amount -
-            line.long_term_pending_principal_amount > 0
+                line.pending_principal_amount -
+                line.long_term_pending_principal_amount > 0
         ):
             res.append({
                 'account_id': self.loan_id.short_term_loan_account_id.id,
                 'credit': (line.pending_principal_amount -
                            line.long_term_pending_principal_amount),
                 'debit': 0,
+                'name': self.loan_id.name,
+
             })
         if (
-            line.long_term_pending_principal_amount > 0 and
-            self.loan_id.long_term_loan_account_id
+                line.long_term_pending_principal_amount > 0 and
+                self.loan_id.long_term_loan_account_id
         ):
             res.append({
                 'account_id': self.loan_id.long_term_loan_account_id.id,
                 'credit': line.long_term_pending_principal_amount,
                 'debit': 0,
+                'name': self.loan_id.name,
+
             })
 
         return res

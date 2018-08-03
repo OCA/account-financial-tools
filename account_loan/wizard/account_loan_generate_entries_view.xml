@@ -33,5 +33,5 @@
 
     <menuitem name="Generate Loan Entries" action="account_loan_generate_wizard_action"
             id="account_loan_generate_wizard_menu"
-            parent="account.menu_finance_entries_generate_entries" sequence="111" groups="base.group_no_one"/>
+            parent="account.menu_finance_entries" sequence="111" groups="base.group_no_one"/>
 </odoo>

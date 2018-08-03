@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -150,8 +151,7 @@ class AccountLoanLine(models.Model):
             return self.loan_id.fixed_amount + self.interests_amount
         if self.loan_type == 'fixed-principal':
             return (
-                self.pending_principal_amount -
-                self.loan_id.residual_amount
+                self.pending_principal_amount - self.loan_id.residual_amount
             ) / (
                 self.loan_id.periods - self.sequence + 1
             ) + self.interests_amount
@@ -180,7 +180,8 @@ class AccountLoanLine(models.Model):
             self.payment_amount = self.currency_id.round(self.compute_amount())
         else:
             self.interests_amount = (
-                self.pending_principal_amount * self.rate / 100)
+                self.pending_principal_amount * self.rate / 100
+            )
             self.payment_amount = self.compute_amount()
 
     @api.multi
@@ -233,27 +234,32 @@ class AccountLoanLine(models.Model):
             'partner_id': partner.id,
             'credit': self.payment_amount,
             'debit': 0,
+            'name': self.loan_id.name,
         })
         vals.append({
             'account_id': self.loan_id.interest_expenses_account_id.id,
             'credit': 0,
             'debit': self.interests_amount,
+            'name': self.loan_id.name,
         })
         vals.append({
             'account_id': self.loan_id.short_term_loan_account_id.id,
             'credit': 0,
             'debit': self.payment_amount - self.interests_amount,
+            'name': self.loan_id.name,
         })
         if self.long_term_loan_account_id and self.long_term_principal_amount:
             vals.append({
                 'account_id': self.loan_id.short_term_loan_account_id.id,
                 'credit': self.long_term_principal_amount,
                 'debit': 0,
+                'name': self.loan_id.name,
             })
             vals.append({
                 'account_id': self.long_term_loan_account_id.id,
                 'credit': 0,
                 'debit': self.long_term_principal_amount,
+                'name': self.loan_id.name,
             })
         return vals
 

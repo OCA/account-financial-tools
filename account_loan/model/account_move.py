@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -21,7 +22,7 @@ class AccountMove(models.Model):
 
     @api.multi
     def post(self):
-        res = super().post()
+        res = super(AccountMove, self).post()
         for record in self:
             if record.loan_line_id:
                 record.loan_id = record.loan_line_id.loan_id

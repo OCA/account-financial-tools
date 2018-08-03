@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -26,11 +27,13 @@ class AccountInvoice(models.Model):
                 default_loan_line_id=self.loan_line_id.id,
                 default_loan_id=self.loan_id.id,
             )).action_move_create()
-        return super().action_move_create()
+        return super(AccountInvoice, self).action_move_create()
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
-        vals = super().finalize_invoice_move_lines(move_lines)
+        vals = super(AccountInvoice, self).finalize_invoice_move_lines(
+            move_lines,
+        )
         if self.loan_line_id:
             ll = self.loan_line_id
             if (
@@ -41,10 +44,12 @@ class AccountInvoice(models.Model):
                     'account_id': ll.loan_id.short_term_loan_account_id.id,
                     'credit': ll.long_term_principal_amount,
                     'debit': 0,
+                    'name': ll.loan_id.name,
                 }))
                 vals.append((0, 0, {
                     'account_id': ll.long_term_loan_account_id.id,
                     'credit': 0,
                     'debit': ll.long_term_principal_amount,
+                    'name': ll.loan_id.name,
                 }))
         return vals

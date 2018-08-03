@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -19,7 +20,7 @@ except (ImportError, IOError) as err:
 class AccountLoan(models.Model):
     _name = 'account.loan'
     _description = 'Loan'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread']
 
     def _default_company(self):
         force_company = self._context.get('force_company')
@@ -347,7 +348,7 @@ class AccountLoan(models.Model):
     def create(self, vals):
         if vals.get('name', '/') == '/':
             vals['name'] = self.get_default_name(vals)
-        return super().create(vals)
+        return super(AccountLoan, self).create(vals)
 
     @api.multi
     def post(self):
