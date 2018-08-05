@@ -1,8 +1,10 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
 
-Financial asset management.
-===========================
+==========================
+Financial asset management
+==========================
 
 This Module manages the assets owned by a company. It will keep
 track of depreciation's occurred on those assets. And it allows to create
@@ -24,6 +26,13 @@ Configuration
 It is recommended to configure your Purchase Journal with "Group Invoice Lines" to avoid the
 creation of separate assets per Supplier Invoice Line.
 
+Usage
+=====
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/92/10.0
+
 Known issues
 ============
 
@@ -32,10 +41,10 @@ The module in NOT compatible with the standard account_asset module.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/{project_repo}/issues>`_.
-In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/{project_repo}/issues/new?body=module:%20{module_name}%0Aversion:%20{version}%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/account-financial-tools/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smash it by providing detailed and welcomed feedback.
 
 Credits
 =======
@@ -47,6 +56,7 @@ Contributors
 - Frédéric Clementi (camptocamp)
 - Florian Dacosta (Akretion)
 - Stéphane Bidoul (Acsone)
+- Adrien Peiffer (Acsone)
 
 Maintainer
 ----------
