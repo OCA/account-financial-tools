@@ -1,9 +1,0 @@
--
-  !record {model: account.asset.category, id: account_asset_category_ict_3Y}:
-    account_asset_id: account.xfa
--
-  !record {model: account.asset.asset, id: account_asset_asset_ict0}:
-    category_id: account_asset_category_ict_3Y
--
-  !record {model: account.asset.asset, id: account_asset_asset_ict0}:
-    method_number: 3
