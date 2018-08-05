@@ -3,14 +3,30 @@
 # * account_asset_management
 # 
 # Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015-2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# SaFi J. <safi2266@gmail.com>, 2015
 # Sofce Dimitrijeva <sofce@eskon.com.mk>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 22:27+0000\n"
-"PO-Revision-Date: 2015-06-03 16:21+0000\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Macedonian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/mk/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +138,7 @@ msgid "Asset '%s' Removal Journal Entry"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1238
+#: code:addons/account_asset_management/account_asset.py:1237
 #, python-format
 msgid ""
 "Asset '%s' contains unposted lines prior to the selected period.\n"
@@ -299,7 +315,7 @@ msgstr "Откажи"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_search
 msgid "Category"
-msgstr ""
+msgstr "Категорија"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
@@ -424,7 +440,7 @@ msgstr "Креирани движења на средство"
 #: field:asset.depreciation.confirmation.wizard,create_uid:0
 #: field:asset.modify,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Креирано од"
 
 #. module: account_asset_management
 #: field:account.asset.asset,create_date:0
@@ -436,7 +452,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,create_date:0
 #: field:asset.modify,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Креирано на"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,line_date:0
@@ -546,6 +562,19 @@ msgid "Depreciation Name"
 msgstr "Име на амортизација"
 
 #. module: account_asset_management
+#: field:account.asset.asset,display_name:0
+#: field:account.asset.category,display_name:0
+#: field:account.asset.depreciation.line,display_name:0
+#: field:account.asset.history,display_name:0
+#: field:account.asset.recompute.trigger,display_name:0
+#: field:account.asset.remove,display_name:0
+#: field:asset.asset.report,display_name:0
+#: field:asset.depreciation.confirmation.wizard,display_name:0
+#: field:asset.modify,display_name:0
+msgid "Display Name"
+msgstr "Прикажи име"
+
+#. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
 msgstr ""
@@ -586,16 +615,16 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:246
-#: code:addons/account_asset_management/account_asset.py:460
-#: code:addons/account_asset_management/account_asset.py:677
-#: code:addons/account_asset_management/account_asset.py:1165
-#: code:addons/account_asset_management/account_asset.py:1237
-#: code:addons/account_asset_management/account_asset.py:1490
-#: code:addons/account_asset_management/account_asset.py:1495
-#: code:addons/account_asset_management/account_asset.py:1520
-#: code:addons/account_asset_management/account_asset.py:1528
-#: code:addons/account_asset_management/account_asset.py:1541
-#: code:addons/account_asset_management/account_asset.py:1556
+#: code:addons/account_asset_management/account_asset.py:461
+#: code:addons/account_asset_management/account_asset.py:679
+#: code:addons/account_asset_management/account_asset.py:1164
+#: code:addons/account_asset_management/account_asset.py:1236
+#: code:addons/account_asset_management/account_asset.py:1489
+#: code:addons/account_asset_management/account_asset.py:1494
+#: code:addons/account_asset_management/account_asset.py:1519
+#: code:addons/account_asset_management/account_asset.py:1527
+#: code:addons/account_asset_management/account_asset.py:1540
+#: code:addons/account_asset_management/account_asset.py:1555
 #: code:addons/account_asset_management/account_move.py:53
 #: code:addons/account_asset_management/account_move.py:73
 #: code:addons/account_asset_management/account_move.py:103
@@ -634,7 +663,7 @@ msgid "General"
 msgstr "Општо"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:798
+#: code:addons/account_asset_management/account_asset.py:797
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr ""
@@ -673,7 +702,7 @@ msgstr "Име на историја"
 #: field:asset.asset.report,id:0
 #: field:asset.depreciation.confirmation.wizard,id:0 field:asset.modify,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:422
@@ -682,7 +711,7 @@ msgid "Illegal value %s in asset.method."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:594
+#: code:addons/account_asset_management/account_asset.py:595
 #, python-format
 msgid "Illegal value %s in asset.method_period."
 msgstr ""
@@ -736,13 +765,13 @@ msgstr "Дневник"
 
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
-#: code:addons/account_asset_management/account_asset.py:1340
+#: code:addons/account_asset_management/account_asset.py:1339
 #, python-format
 msgid "Journal Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1652
+#: code:addons/account_asset_management/account_asset.py:1651
 #, python-format
 msgid "Journal Entry"
 msgstr ""
@@ -765,6 +794,19 @@ msgid "Keep empty to use the period of the removal ate."
 msgstr ""
 
 #. module: account_asset_management
+#: field:account.asset.asset,__last_update:0
+#: field:account.asset.category,__last_update:0
+#: field:account.asset.depreciation.line,__last_update:0
+#: field:account.asset.history,__last_update:0
+#: field:account.asset.recompute.trigger,__last_update:0
+#: field:account.asset.remove,__last_update:0
+#: field:asset.asset.report,__last_update:0
+#: field:asset.depreciation.confirmation.wizard,__last_update:0
+#: field:asset.modify,__last_update:0
+msgid "Last Modified on"
+msgstr "Последна промена на"
+
+#. module: account_asset_management
 #: field:account.asset.asset,write_uid:0
 #: field:account.asset.category,write_uid:0
 #: field:account.asset.depreciation.line,write_uid:0
@@ -774,7 +816,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_uid:0
 #: field:asset.modify,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Последно ажурирање од"
 
 #. module: account_asset_management
 #: field:account.asset.asset,write_date:0
@@ -786,7 +828,7 @@ msgstr ""
 #: field:asset.depreciation.confirmation.wizard,write_date:0
 #: field:asset.modify,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Последно ажурирање на"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:51
@@ -950,7 +992,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:421
-#: code:addons/account_asset_management/account_asset.py:593
+#: code:addons/account_asset_management/account_asset.py:594
 #, python-format
 msgid "Programming Error!"
 msgstr ""
@@ -1101,7 +1143,7 @@ msgid "The Sale Value must be positive!"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:678
+#: code:addons/account_asset_management/account_asset.py:680
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry"
@@ -1170,7 +1212,7 @@ msgstr ""
 #: field:account.asset.asset,type:0
 #: field:account.asset.depreciation.line,type:0
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #. module: account_asset_management
 #: field:asset.asset.report,unposted_value:0
@@ -1219,7 +1261,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1521
+#: code:addons/account_asset_management/account_asset.py:1520
 #: code:addons/account_asset_management/account_move.py:54
 #, python-format
 msgid ""
@@ -1242,7 +1284,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1529
+#: code:addons/account_asset_management/account_asset.py:1528
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
@@ -1263,13 +1305,13 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1166
+#: code:addons/account_asset_management/account_asset.py:1165
 #, python-format
 msgid "You cannot change the category of an asset with accounting entries."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:461
+#: code:addons/account_asset_management/account_asset.py:462
 #, python-format
 msgid ""
 "You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
@@ -1277,7 +1319,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1496
+#: code:addons/account_asset_management/account_asset.py:1495
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
@@ -1290,13 +1332,13 @@ msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr "Не може да избришете средство кое содржи објавени ставки за амортизација."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1491
+#: code:addons/account_asset_management/account_asset.py:1490
 #, python-format
 msgid "You cannot remove an asset line of type 'Asset Value'."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1542
+#: code:addons/account_asset_management/account_asset.py:1541
 #, python-format
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
@@ -1304,7 +1346,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/account_asset.py:1557
+#: code:addons/account_asset_management/account_asset.py:1556
 #, python-format
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
