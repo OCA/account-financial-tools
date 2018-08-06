@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2012-2016 Akretion (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
