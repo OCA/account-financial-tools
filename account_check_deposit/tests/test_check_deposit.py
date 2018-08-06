@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# © 2014-2016 Akretion (http://www.akretion.com)
-#   @author Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
+# Copyright 2014-2016 Akretion - Mourad EL HADJ MIMOUNE
+# Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.addons.account.tests.account_test_classes\
@@ -143,8 +142,7 @@ class TestPayment(AccountingTestCase):
         invoice.action_invoice_open()
         return invoice
 
-    def create_check_deposit(
-            self, move_lines):
+    def create_check_deposit(self, move_lines):
         """ Returns an validated check deposit """
         check_deposit = self.check_deposit_model.create({
             'journal_id': self.bank_journal.id,
@@ -176,7 +174,7 @@ class TestPayment(AccountingTestCase):
                         'journal_id': self.check_journal.id,
                         'payment_method_id': self.payment_method_manual_in.id,
                         })
-        register_payments.create_payment()
+        register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
         self.assertAlmostEquals(payment.amount, 300)
