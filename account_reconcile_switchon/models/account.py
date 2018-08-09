@@ -20,16 +20,26 @@ class AccountAccount(models.Model):
         accounts = []
         aml = self.env['account.move.line']
         for account in self:
+            # we check if the write tries to set reconcile to true and there are move lines with this account, but not
+            # yet reconciled, because then the computation becomes a lot more difficult. We fill the accounts list and
+            # remove the "reconcile" key from the vals dict so it will not stumble upon the original write.
             if vals.get('reconcile') \
                      and not account.reconcile \
-                     and not len(aml.search([('account_id','=', account.id),('reconciled','=', True)])) > 0\
-                     and len(aml.search([('account_id','=', account.id)])) > 0:
+                     and not len(aml.search([('account_id','=', account.id),('reconciled','=', True)], limit=1)) \
+                     and len(aml.search([('account_id','=', account.id)], limit=1)):
                 accounts.append(account.id)
                 vals.pop('reconcile')
-            elif vals.get('reconcile') == False:
-                move_lines = self.env['account.move.line'].search([('account_id', 'in', self.ids)], limit=1)
-                if len(move_lines):
-                    raise UserError(_('You cannot switch reconciliation off on this account as it already has some moves'))
+            # in the case, that there are already reconciled lines, a user error is displayed
+            elif vals.get('reconcile') \
+                     and len(aml.search([('account_id', '=', account.id), ('reconciled', '=', True)], limit=1)):
+                raise UserError(_('You cannot switch reconciliation on on this account as it already has reconciled moves'
+                                  'it must have been switched off before. Now you will have to create a new account'))
+            # not sure if this is still necessary. In the original write unsetting was allowed and we take care, that
+            # with reconciled move lines but switched off, it cannot be set again. Maybe we should allow to unset it.
+            elif vals.get('reconcile') == False \
+                     and account.reconcile\
+                     and len(self.env['account.move.line'].search([('account_id', '=', account.id),('reconciled','=', True)], limit=1)):
+                raise UserError(_('You cannot switch reconciliation off on this account as it already has reconciled moves'))
         if accounts != []:
             self.set_reconcile_true(accounts)
         return super(AccountAccount, self).write(vals)
