@@ -32,6 +32,7 @@
                             <field name="invoice_id"/>
                             <field name="move_line_id"/>
                             <field name="account_id"/>
+                            <field name="move_line_journal_id"/>
                             <field name="partner_notes" />
                             <field name="move_line_notes" />
                         </group>
@@ -58,6 +59,7 @@
                     <separator />
                     <field name="partner_id"/>
                     <field name="account_id"/>
+                    <field name="move_line_journal_id" />
                     <field name="invoice_id"/>
                     <field name="level"/>
                     <field name="policy_level_id"/>
@@ -100,6 +102,8 @@
                             icon="terp-partner" string="Partner"/>
                     <filter domain='[]' context="{'group_by': 'account_id'}"
                             icon="terp-folder-green" string="Account"/>
+                    <filter domain='[]' context="{'group_by': 'move_line_journal_id'}"
+                            string="Journal"/>
                     <filter domain='[]' context="{'group_by': 'invoice_id'}"
                             icon="terp-document-new" string="Invoice"/>
                     <filter domain='[]' context="{'group_by': 'policy_id'}"
@@ -143,6 +147,7 @@
                 <field name="currency_id"/>
                 <field name="move_line_id"/>
                 <field name="account_id"/>
+                <field name="move_line_journal_id"/>
                 <field name="policy_level_id"/>
                 <field name="policy_id"/>
                 <field name="mail_message_id"/>

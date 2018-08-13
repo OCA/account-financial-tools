@@ -128,6 +128,15 @@ class CreditControlLine(models.Model):
 
     manual_followup = fields.Boolean(string='Manual Followup')
 
+    # Helps to filter
+    move_line_journal_id = fields.Many2one(
+        related='move_line_id.journal_id',
+        comodel_name='account.journal',
+        string='Journal',
+        readonly=True,
+        store=True
+    )
+
     # Notes to help accountant to get partner related notes and
     # particular move lines notes.
     partner_notes = fields.Char(
