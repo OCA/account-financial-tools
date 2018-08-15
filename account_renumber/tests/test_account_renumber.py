@@ -22,7 +22,7 @@ class AccountRenumberCase(TransactionCase):
             })
 
         self.sequence = self.env["ir.sequence"].create({
-            "name": u"Test Sëquence",
+            "name": "Test Sëquence",
             "implementation": "no_gap",
             "prefix": "TEST/%(year)s/",
             "use_date_range": True,
@@ -35,7 +35,7 @@ class AccountRenumberCase(TransactionCase):
         })
 
         self.journal = self.env["account.journal"].create({
-            "name": u"Test Jöurnal",
+            "name": "Test Jöurnal",
             "type": "cash",
             "sequence_id": self.sequence.id,
         })
@@ -108,8 +108,8 @@ class AccountRenumberCase(TransactionCase):
         wizard.journal_ids = self.journal
         wizard.renumber()
 
-        expected_month = range(4, 7) + range(12, 6, -1)
-        expected_number = range(9, 0, -1)
+        expected_month = list(range(4, 7)) + list(range(12, 6, -1))
+        expected_number = list(range(9, 0, -1))
         for n, move in enumerate(self.moves_by_name(self.moves)):
             self.assertEqual(int(move.name[-1]), expected_number[n])
             self.assertEqual(
