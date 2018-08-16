@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo11-addon-account_move_line_purchase_info',
         'odoo11-addon-account_move_line_tax_editable',
         'odoo11-addon-account_partner_required',
+        'odoo11-addon-account_renumber',
         'odoo11-addon-account_reversal',
         'odoo11-addon-account_tag_menu',
         'odoo11-addon-account_type_menu',
