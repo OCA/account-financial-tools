@@ -245,11 +245,44 @@ class AccountLoan(models.Model):
         default=True,
         help='Invoices will be posted automatically'
     )
-
+    account_analytic_id = fields.Many2one(
+        'account.analytic.account', string='Analytic Account',
+    )
+    down_payment = fields.Monetary(
+        currency_field='currency_id',
+        string="Down Payment",
+        readonly=True,
+        required=True,
+        states={'draft': [('readonly', False)]},
+    )
+    is_down_payment = fields.Boolean(string="Down Payment", default=False, states={'draft': [('readonly', False)]})
+    insurance_product = fields.Many2one(
+        'product.product',
+        string='Insurance product',
+    )
+    tax_product = fields.Many2one(
+        'product.product',
+        string='Tax product',
+    )
+    fee_product = fields.Many2one(
+        'product.product',
+        string='Fee product',
+    )
     _sql_constraints = [
         ('name_uniq', 'unique(name, company_id)',
          'Loan name must be unique'),
     ]
+
+    @api.multi
+    def create_analytic_account(self):
+        for loan in self:
+            analytic = self.env['account.analytic.account'].create({
+                'name': "",
+                'code': loan.name,
+                'company_id': loan.company_id.id,
+                'partner_id': loan.partner_id.id
+            })
+            loan.account_analytic_id = analytic
 
     @api.depends('line_ids', 'currency_id', 'loan_amount')
     def _compute_total_amounts(self):
@@ -257,13 +290,23 @@ class AccountLoan(models.Model):
             lines = record.line_ids.filtered(lambda r: r.move_ids)
             record.payment_amount = sum(
                 lines.mapped('payment_amount')) or 0.
+            if record.is_down_payment:
+                record.payment_amount += record.down_payment
             record.interests_amount = sum(
                 lines.mapped('interests_amount')) or 0.
-            record.pending_principal_amount = (
-                record.loan_amount -
-                record.payment_amount +
-                record.interests_amount
-            )
+            if record.is_down_payment:
+                amount = record.loan_amount
+                record.pending_principal_amount = (
+                    amount -
+                    record.payment_amount +
+                    record.interests_amount
+                )
+            else:
+                record.pending_principal_amount = (
+                    record.loan_amount -
+                    record.payment_amount +
+                    record.interests_amount
+                )
 
     @api.depends('rate_period', 'fixed_loan_amount', 'fixed_periods',
                  'currency_id')
@@ -347,15 +390,19 @@ class AccountLoan(models.Model):
     def create(self, vals):
         if vals.get('name', '/') == '/':
             vals['name'] = self.get_default_name(vals)
-        return super().create(vals)
+        return super(AccountLoan, self).create(vals)
 
     @api.multi
     def post(self):
         self.ensure_one()
         if not self.start_date:
             self.start_date = fields.Datetime.now()
-        self.compute_draft_lines()
-        self.write({'state': 'posted'})
+        if self.is_down_payment:
+            self.write({'state': 'posted'})
+            self.compute_draft_lines()
+        else:
+            self.compute_draft_lines()
+            self.write({'state': 'posted'})
 
     @api.multi
     def close(self):
@@ -373,6 +420,8 @@ class AccountLoan(models.Model):
         Recompute the amounts of not finished lines. Useful if rate is changed
         """
         amount = self.loan_amount
+        if self.is_down_payment:
+            amount -= self.down_payment
         for line in self.line_ids.sorted('sequence'):
             if line.move_ids:
                 amount = line.final_pending_principal_amount
@@ -381,8 +430,9 @@ class AccountLoan(models.Model):
                 line.pending_principal_amount = amount
                 line.check_amount()
                 amount -= line.payment_amount - line.interests_amount
-        if self.long_term_loan_account_id:
-            self.check_long_term_principal_amount()
+        if len(self.line_ids) == self.periods:
+            if self.long_term_loan_account_id:
+                self.check_long_term_principal_amount()
 
     def check_long_term_principal_amount(self):
         """
@@ -399,6 +449,13 @@ class AccountLoan(models.Model):
                     self.line_ids.filtered(
                         lambda r: datetime.strptime(r.date, DF).date() >= date
                     ).mapped('principal_amount'))
+            elif self.state == 'posted' and line.sequence == final_sequence:
+                line.long_term_pending_principal_amount = sum(
+                    self.line_ids.filtered(
+                        lambda r: datetime.strptime(r.date, DF).date() >= date
+                    ).mapped('principal_amount'))
+            else:
+                pass
             line.long_term_principal_amount = (
                 line.long_term_pending_principal_amount - amount)
             amount = line.long_term_pending_principal_amount
@@ -419,6 +476,9 @@ class AccountLoan(models.Model):
         self.fixed_loan_amount = self.loan_amount
         self.line_ids.unlink()
         amount = self.loan_amount
+        if self.is_down_payment and self.state == 'posted':
+            amount -= self.down_payment
+            self.fixed_loan_amount = self.loan_amount - self.down_payment
         if self.start_date:
             date = datetime.strptime(self.start_date, DF).date()
         else:

@@ -235,14 +235,18 @@ class AccountLoanLine(models.Model):
             'debit': 0,
         })
         vals.append({
+            'name': self.loan_id.name,
             'account_id': self.loan_id.interest_expenses_account_id.id,
             'credit': 0,
             'debit': self.interests_amount,
+            'analytic_account_id': self.loan_id.account_analytic_id.id,
         })
         vals.append({
+            'name': self.loan_id.name,
             'account_id': self.loan_id.short_term_loan_account_id.id,
             'credit': 0,
             'debit': self.payment_amount - self.interests_amount,
+            'analytic_account_id': self.loan_id.account_analytic_id.id,
         })
         if self.long_term_loan_account_id and self.long_term_principal_amount:
             vals.append({
@@ -251,9 +255,11 @@ class AccountLoanLine(models.Model):
                 'debit': 0,
             })
             vals.append({
+                'name': self.loan_id.name,
                 'account_id': self.long_term_loan_account_id.id,
                 'credit': 0,
                 'debit': self.long_term_principal_amount,
+                'analytic_account_id': self.loan_id.account_analytic_id.id,
             })
         return vals
 
@@ -275,12 +281,19 @@ class AccountLoanLine(models.Model):
 
     def invoice_line_vals(self):
         vals = list()
+        if not self.loan_id.fee_product.categ_id.property_account_expense_categ_id \
+                or not self.loan_id.insurance_product.categ_id.property_account_expense_categ_id \
+                or not self.loan_id.tax_product.categ_id.property_account_expense_categ_id:
+            raise UserError(_(
+                'Give proper Expense Account for the products'
+            ))
         vals.append({
             'product_id': self.loan_id.product_id.id,
             'name': self.loan_id.product_id.name,
             'quantity': 1,
             'price_unit': self.principal_amount,
             'account_id': self.loan_id.short_term_loan_account_id.id,
+            'account_analytic_id': self.loan_id.account_analytic_id.id,
         })
         vals.append({
             'product_id': self.loan_id.interests_product_id.id,
@@ -288,6 +301,31 @@ class AccountLoanLine(models.Model):
             'quantity': 1,
             'price_unit': self.interests_amount,
             'account_id': self.loan_id.interest_expenses_account_id.id,
+            'account_analytic_id': self.loan_id.account_analytic_id.id,
+        })
+        vals.append({
+            'product_id': self.loan_id.insurance_product.id,
+            'name': self.loan_id.insurance_product.name,
+            'quantity': 1,
+            'price_unit': self.loan_id.insurance_product.standard_price,
+            'account_id': self.loan_id.insurance_product.categ_id.property_account_expense_categ_id.id,
+            'account_analytic_id': self.loan_id.account_analytic_id.id
+        })
+        vals.append({
+            'product_id': self.loan_id.fee_product.id,
+            'name': self.loan_id.fee_product.name,
+            'quantity': 1,
+            'price_unit': self.loan_id.fee_product.standard_price,
+            'account_id': self.loan_id.fee_product.categ_id.property_account_expense_categ_id.id,
+            'account_analytic_id': self.loan_id.account_analytic_id.id
+        })
+        vals.append({
+            'product_id': self.loan_id.tax_product.id,
+            'name': self.loan_id.tax_product.name,
+            'quantity': 1,
+            'price_unit': self.loan_id.tax_product.standard_price,
+            'account_id': self.loan_id.tax_product.categ_id.property_account_expense_categ_id.id,
+            'account_analytic_id': self.loan_id.account_analytic_id.id
         })
         return vals
 
@@ -325,9 +363,9 @@ class AccountLoanLine(models.Model):
                 invoice = self.env['account.invoice'].create(
                     record.invoice_vals())
                 res.append(invoice.id)
-                for line in invoice.invoice_line_ids:
-                    line._set_taxes()
-                invoice.compute_taxes()
+                # for line in invoice.invoice_line_ids:
+                #     line._set_taxes()
+                # invoice.compute_taxes()
                 if record.loan_id.post_invoice:
                     invoice.action_invoice_open()
         return res

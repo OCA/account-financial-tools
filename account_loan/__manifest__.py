@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": [
-        "account"
+        'account', 'analytic', 'account_invoicing'
     ],
     "data": [
         'data/ir_sequence_data.xml',

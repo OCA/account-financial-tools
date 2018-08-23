@@ -56,6 +56,7 @@
                                    options="{'no_create': True}"/>
                             <field name="loan_type"/>
                             <field name="loan_amount"/>
+                             <field name="down_payment" attrs="{'invisible':[('is_down_payment', '=', False)]}"/>
                         </group>
                         <group>
                             <field name="rate_type"/>
@@ -72,6 +73,7 @@
                         </group>
                         <group>
                             <field name="is_leasing"/>
+                             <field name="is_down_payment"/>
                             <field name="round_on_end"/>
                             <field name="payment_on_first_period"/>
                         </group>
@@ -93,6 +95,7 @@
                                     <field name="journal_id"/>
                                     <field name="short_term_loan_account_id"/>
                                     <field name="journal_type" invisible="1"/>
+                                    <field name="account_analytic_id" invisible="1"/>
                                 </group>
                                 <group>
                                     <field name="long_term_loan_account_id"/>
@@ -114,6 +117,9 @@
                                            attrs="{'required': [('is_leasing', '=', True)]}"/>
                                     <field name="interests_product_id"
                                            attrs="{'required': [('is_leasing', '=', True)]}"/>
+                                    <field name="insurance_product" attrs="{'required': [('is_leasing', '=', True)]}"/>
+                                    <field name="tax_product" attrs="{'required': [('is_leasing', '=', True)]}"/>
+                                    <field name="fee_product" attrs="{'required': [('is_leasing', '=', True)]}"/>
                                     <field name="post_invoice"/>
                                 </group>
                             </group>
@@ -140,7 +146,7 @@
                 <field name="rate"/>
                 <field name="pending_principal_amount"/>
                 <field name="payment_amount" sum="Total payments"/>
-                <field name="principal_amount"/>
+                <field name="principal_amount" sum="Total principal"/>
                 <field name="interests_amount" sum="Total interests"/>
                 <field name="long_term_pending_principal_amount"
                        attrs="{'invisible': [('long_term_loan_account_id', '=', False)]}"/>

@@ -19,7 +19,7 @@ except (ImportError, IOError) as err:
 
 class TestLoan(TransactionCase):
     def setUp(self):
-        super().setUp()
+        super(TestLoan,self).setUp()
         self.company = self.browse_ref('base.main_company')
         self.company_02 = self.env['res.company'].create({
             'name': 'Auxiliar company'
