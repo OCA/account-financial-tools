@@ -596,8 +596,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _create_account_from_template(self, account_template):
         return self.env["account.account"].create({
             'name': account_template.name,
-            'currency_id': account_template.currency_id and
-                           account_template.currency_id.id,
+            'currency_id': account_template.currency_id.id,
             'code': self.padded_code(account_template.code),
             'user_type_id': account_template.user_type_id.id,
             'reconcile': account_template.reconcile,
