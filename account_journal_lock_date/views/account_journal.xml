@@ -3,8 +3,6 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
 <odoo>
-<data>
-
     <record model="ir.ui.view" id="account_journal_form_view">
         <field name="name">account.journal.form (in account_journal_lock_date)</field>
         <field name="model">account.journal</field>
@@ -27,7 +25,4 @@
             </field>
         </field>
     </record>
-
-
-</data>
 </odoo>

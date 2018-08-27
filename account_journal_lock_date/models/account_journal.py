@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
+# Migrated by Coop IT Easy SCRL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from openerp import models, fields, api
 
 
 class AccountJournal(models.Model):
-
     _inherit = 'account.journal'
 
     journal_lock_date = fields.Date(
-        string="Lock date",
+        string='Lock date',
         help="Moves cannot be entered nor modified in this "
              "journal prior to the lock date, unless the user "
-             "has the Adviser role."
+             "has the Adviser role.",
     )
 
     @api.model

@@ -2,6 +2,8 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
+.. _account_journal_lock_date: https://github.com/OCA/account-financial-tools/tree/10.0/account_journal_lock_date
+
 =========================
 Account Journal Lock Date
 =========================
@@ -58,6 +60,7 @@ Contributors
 ------------
 
 * Stéphane Bidoul <stephane.bidoul@acsone.eu>
+* Robin Keunen <robin@keunen.net>
 
 Maintainer
 ----------
