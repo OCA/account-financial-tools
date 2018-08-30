@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: German (account-financial-tools-10.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-30 16:00+0000\n"
-"PO-Revision-Date: 2018-08-30 16:07+0000\n"
+"PO-Revision-Date: 2018-08-31 16:25+0000\n"
 "Last-Translator: dscherrer <daniel.scherrer@camptocamp.com>\n"
 "Language-Team: German <https://translation.odoo-community.org/projects/"
 "account-financial-tools-10-0/"
@@ -1266,7 +1266,7 @@ msgstr "Emailversand für ausgewählte Posten."
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send emails for the selected lines"
-msgstr "Emailversand für ausgewählte Posten."
+msgstr "Emailversand für ausgewählte Posten"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
