@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: German (account-financial-tools-10.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-30 13:07+0000\n"
-"PO-Revision-Date: 2018-08-30 15:37+0000\n"
+"POT-Creation-Date: 2018-08-30 16:00+0000\n"
+"PO-Revision-Date: 2018-08-30 16:07+0000\n"
 "Last-Translator: dscherrer <daniel.scherrer@camptocamp.com>\n"
 "Language-Team: German <https://translation.odoo-community.org/projects/"
 "account-financial-tools-10-0/"
@@ -37,22 +37,22 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Unsere Buchhaltung weist aus, dass wir, trotz zweier "
-"Erinnerungen, die Zahlung zu unten aufgeführten Rechnungen bei uns nicht "
-"eingegangen ist.\n"
-"            Sollten die Zahlungen zwischenzeitlich erfolgt sein, so "
-"betrachten Sie dieses Schreiben bitte als gegenstandslos. Ansonsten nehmen "
-"Sie die Zahlung bitte vor. \n"
-"             Können wir nicht innerhalb der kommenden 5 Werktage einen "
-"entsprechenden Zahlungseingang verbuchen, werden wir die Forderung an eine "
-"beauftragte Agentur abtreten.\n"
+"            Unsere Durchsicht hat ergeben, dass wir trotz wiederholter "
+"Mahnungen noch keinen Zahlungseingang zu der unten aufgeführten Rechnung "
+"erhalten haben.\n"
+"            Wenn Sie die Zahlung in der Zwischenzeit übermittelt haben, "
+"ignorieren Sie bitte diese Nachricht. Ansonsten erwarten wir ihre "
+"unmittelbare Zahlung. \n"
+"             Wenn wir Ihre Zahlung nicht innerhalb der nächsten 5 Tage "
+"erhalten, werden wir die Angelegenheit an eine Inkassofirma übergeben.\n"
 "\n"
-"             Wünschen Sie geänderte Zahlungsmodalitäten, sprechen Sie uns "
-"bitte an. Ein Kunden-Kontoauszug wurde für Sie beigefügt.\n"
-"             Vielen Dank für Ihre mutmaßliche Zusammenarbeit in dieser "
-"Angelegenheit.\n"
+"             Für Zahlungsvorschläge bitten wir Sie, uns umgehend zu "
+"kontaktieren.\n"
+"Wir haben Ihnen einen Auszug der Ausstände beigelegt.\n"
+"             Vielen Dank für Ihre Mitarbeit.\n"
 "\n"
-"Mit freundlichem Gruß"
+"            Freundliche Grüsse\n"
+"        "
 
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
@@ -131,7 +131,7 @@ msgstr ""
 #: code:addons/account_credit_control/models/credit_control_run.py:71
 #, python-format
 msgid "A run has already been executed more recently than %s"
-msgstr "Ein Mahnlauf wurde soeben vor %s gestartet."
+msgstr "Ein Mahnlauf wurde soeben vor %s gestartet"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_account
@@ -458,7 +458,7 @@ msgstr "Manuelle Nachfragen machen"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
 msgid "Do nothing"
-msgstr "nichts unternehmen"
+msgstr "Nichts unternehmen"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
@@ -475,7 +475,7 @@ msgstr "Entwurf"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Draft lines have to be triaged."
-msgstr "Entwurfszeilen zur Durchsicht"
+msgstr "Entwurfszeilen zur Durchsicht."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line_state
@@ -695,7 +695,7 @@ msgstr "Zeilen"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Lines already sent."
-msgstr "Bereits übermittelte Posten"
+msgstr "Bereits übermittelte Posten."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
@@ -883,7 +883,7 @@ msgstr "Öffne Mahnposten"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
-msgstr "offener Betrag"
+msgstr "Offener Betrag"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_responsible_id
