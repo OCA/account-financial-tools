@@ -734,7 +734,6 @@ class AccountAsset(models.Model):
         """
         if self.method_time != 'year':
             raise UserError(
-                _("Programming Error"),
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
 
