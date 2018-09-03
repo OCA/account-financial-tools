@@ -30,7 +30,6 @@ class AccountMove(models.Model):
                  ('type', 'in', ['depreciate', 'remove'])])
             if deprs and not self._context.get('unlink_from_asset'):
                 raise UserError(
-                    _('Error!'),
                     _("You are not allowed to remove an accounting entry "
                       "linked to an asset."
                       "\nYou should remove such entries from the asset."))
@@ -46,7 +45,6 @@ class AccountMove(models.Model):
                     [('move_id', '=', move.id), ('type', '=', 'depreciate')])
                 if deprs:
                     raise UserError(
-                        _('Error!'),
                         _("You cannot change an accounting entry "
                           "linked to an asset depreciation line."))
         return super(AccountMove, self).write(vals)
@@ -70,7 +68,6 @@ class AccountMoveLine(models.Model):
     def create(self, vals, **kwargs):
         if vals.get('asset_id') and not self._context.get('allow_asset'):
             raise UserError(
-                _('Error!'),
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
@@ -107,12 +104,10 @@ class AccountMoveLine(models.Model):
                     if not (self.env.context.get('allow_asset_removal') and
                             vals.keys() == ['asset_id']):
                         raise UserError(
-                            _('Error!'),
                             _("You cannot change an accounting item "
                               "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise UserError(
-                _('Error!'),
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
