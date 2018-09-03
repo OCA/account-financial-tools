@@ -118,5 +118,5 @@ class AccountMove(models.Model):
             moves._post_validate()
             moves.post()
             if reconcile:
-                orig.move_reverse_reconcile()
+                self.move_reverse_reconcile()
         return moves
