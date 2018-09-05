@@ -26,6 +26,12 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "Tipo de Rangos de Fechas"
+
+#. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
 msgid "Date Range Types"
 msgstr "Tipo de Rangos de Fechas"
@@ -58,7 +64,5 @@ msgstr ""
 "Tu no puedes eliminar un tipo de rangos de fechas con el indicador de "
 "\"periodo_fiscal\""
 
-#. module: account_fiscal_year
-#: model:ir.model,name:account_fiscal_year.model_date_range_type
-msgid "date.range.type"
-msgstr "tipo.rango.fecha"
+#~ msgid "date.range.type"
+#~ msgstr "tipo.rango.fecha"
