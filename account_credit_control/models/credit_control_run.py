@@ -53,6 +53,29 @@ class CreditControlRun(models.Model):
         readonly=True,
         copy=False,
     )
+    credit_control_count = fields.Integer(
+        compute='_compute_credit_control_count',
+        string='# of Credit Control Lines',
+    )
+    hide_change_state_button = fields.Boolean()
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+        default=lambda self: self.env['res.company']._company_default_get(
+            'account.account'),
+        index=True,
+    )
+
+    def _compute_credit_control_count(self):
+        fetch_data = self.env['credit.control.line'].read_group(
+            domain=[('run_id', 'in', self.ids)],
+            fields=['run_id'],
+            groupby=['run_id'],
+        )
+        result = {data['run_id'][0]: data['run_id_count']
+                  for data in fetch_data}
+        for rec in self:
+            rec.credit_control_count = result.get(rec.id, 0)
 
     @api.model
     def _check_run_date(self, controlling_date):
@@ -60,8 +83,12 @@ class CreditControlRun(models.Model):
         using controlling_date
 
         """
-        runs = self.search([('date', '>', controlling_date)],
-                           order='date DESC', limit=1)
+        runs = self.search(
+            [('date', '>', controlling_date),
+             ('company_id', '=', self.env.user.company_id.id)],
+            order='date DESC',
+            limit=1,
+        )
         if runs:
             raise UserError(_('A run has already been executed more '
                               'recently than %s') % (runs.date))
@@ -142,7 +169,11 @@ class CreditControlRun(models.Model):
         self._generate_credit_lines()
         return True
 
-    @api.multi
+    def unlink(self):
+        # Ondelete cascade don't check unlink lines restriction
+        self.mapped('line_ids').unlink()
+        return super().unlink()
+
     def open_credit_lines(self):
         """ Open the generated lines """
         self.ensure_one()
@@ -151,3 +182,35 @@ class CreditControlRun(models.Model):
         action = action.read()[0]
         action['domain'] = [('id', 'in', self.line_ids.ids)]
         return action
+
+    def set_to_ready_lines(self):
+        self.ensure_one()
+        draft_lines = self.line_ids.filtered(lambda x: x.state == 'draft')
+        draft_lines.write({'state': 'to_be_sent'})
+        self.hide_change_state_button = True
+        # if not draft_lines:
+        #     raise UserError(_('No lines in draft state'))
+        # action_name = ('account_credit_control'
+        #                '.open_credit_line_marker_wizard_menu_action')
+        # action = self.env.ref(action_name)
+        # action = action.read()[0]
+        # action['context'] = {
+        #     'active_model': 'credit.control.line',
+        #     'active_ids': draft_lines.ids,
+        # }
+        # return action
+
+    def run_channel_action(self):
+        self.ensure_one()
+        lines = self.line_ids.filtered(lambda x: x.state == 'to_be_sent')
+        letter_lines = lines.filtered(lambda x: x.channel == 'letter')
+        email_lines = lines.filtered(lambda x: x.channel == 'email')
+        if email_lines:
+            comm_obj = self.env['credit.control.communication']
+            comms = comm_obj._generate_comm_from_credit_lines(email_lines)
+            comms._generate_emails()
+        if letter_lines:
+            wiz = self.env['credit.control.printer'].create({
+                'line_ids': letter_lines.ids,
+            })
+            return wiz.print_lines
