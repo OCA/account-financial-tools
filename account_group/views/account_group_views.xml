@@ -1,0 +1,66 @@
+<odoo>
+
+    <record id="view_account_group_form" model="ir.ui.view">
+        <field name="name">account.group.form</field>
+        <field name="model">account.group</field>
+        <field name="arch" type="xml">
+            <form string="Accounts Group">
+                <group>
+                    <field name="name"/>
+                    <field name="code_prefix"/>
+                    <field name="parent_id"/>
+                    <field name="level"/>
+                </group>
+                <group>
+                    <group id="links">
+                        <label for="account_ids"/>
+                        <field name="account_ids"
+                               widget="many2many"
+                               nolabel="1"
+                               options="{'no_create_edit': True}"
+                        />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_group_search" model="ir.ui.view">
+        <field name="name">account.group.search</field>
+        <field name="model">account.group</field>
+        <field name="arch" type="xml">
+            <search string="Accounts Groups">
+                <field name="name"
+                        filter_domain="['|', ('code_prefix', '=like', str(self) + '%'), ('name', 'ilike', self)]"
+                        string="Accounts Group"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_account_group_tree" model="ir.ui.view">
+        <field name="name">account.group.tree</field>
+        <field name="model">account.group</field>
+        <field name="arch" type="xml">
+            <tree string="Accounts Group">
+                <field name="code_prefix"/>
+                <field name="name"/>
+                <field name="level"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_account_group_tree" model="ir.actions.act_window">
+        <field name="name">Accounts Groups</field>
+        <field name="res_model">account.group</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_account_group_search"/>
+    </record>
+
+    <menuitem id="account_group_menu"
+              action="action_account_group_tree"
+              sequence="50"
+              parent="account.account_account_menu"
+    />
+
+</odoo>
