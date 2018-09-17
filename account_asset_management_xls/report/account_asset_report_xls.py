@@ -1,32 +1,13 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# -*- coding: utf-8 -*-
+# Copyright 2014 Noviat nv/sa <https://noviat.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import xlwt
 from datetime import datetime
-from openerp.osv import orm
 from openerp.report import report_sxw
 from openerp.addons.report_xls.report_xls import report_xls
 from openerp.addons.report_xls.utils import rowcol_to_cell, _render
 from openerp.tools.translate import translate, _
+from openerp import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -34,19 +15,17 @@ _logger = logging.getLogger(__name__)
 _ir_translation_name = 'account.asset.report'
 
 
-class asset_report_xls_parser(report_sxw.rml_parse):
+class AssetReportXlsParser(report_sxw.rml_parse):
 
-    def __init__(self, cr, uid, name, context):
-        super(asset_report_xls_parser, self).__init__(
-            cr, uid, name, context=context)
-        asset_obj = self.pool.get('account.asset.asset')
-        self.context = context
-        wl_acq = asset_obj._xls_acquisition_fields(cr, uid, context)
-        wl_act = asset_obj._xls_active_fields(cr, uid, context)
-        wl_rem = asset_obj._xls_removal_fields(cr, uid, context)
-        tmpl_acq_upd = asset_obj._xls_acquisition_template(cr, uid, context)
-        tmpl_act_upd = asset_obj._xls_active_template(cr, uid, context)
-        tmpl_rem_upd = asset_obj._xls_removal_template(cr, uid, context)
+    def __init__(self, name):
+        super(AssetReportXlsParser, self).__init__(name)
+        asset_obj = self.env['account.asset.asset']
+        wl_acq = asset_obj._xls_acquisition_fields()
+        wl_act = asset_obj._xls_active_fields()
+        wl_rem = asset_obj._xls_removal_fields()
+        tmpl_acq_upd = asset_obj._xls_acquisition_template()
+        tmpl_act_upd = asset_obj._xls_active_template()
+        tmpl_rem_upd = asset_obj._xls_removal_template()
         self.localcontext.update({
             'datetime': datetime,
             'wanted_list_acquisition': wl_acq,
@@ -64,11 +43,11 @@ class asset_report_xls_parser(report_sxw.rml_parse):
         return res or src
 
 
-class asset_report_xls(report_xls):
+class AssetReportXls(report_xls):
 
     def __init__(self, name, table, rml=False, parser=False, header=True,
                  store=False):
-        super(asset_report_xls, self).__init__(
+        super(AssetReportXls, self).__init__(
             name, table, rml, parser, header, store)
 
         # Cell Styles
@@ -411,17 +390,16 @@ class asset_report_xls(report_xls):
             ws, row_pos, row_data, row_style=cell_style)
 
     def _get_children(self, parent_id):
-        cr = self.cr
 
         def _child_get(asset_id):
             assets = []
             # SQL in stead of child_ids since ORDER BY different from _order
-            cr.execute(
+            self.env.cr.execute(
                 "SELECT id, type FROM account_asset_asset "
                 "WHERE parent_id = %s AND state != 'draft' "
                 "ORDER BY date_start ASC, name",
                 (asset_id, ))
-            children = cr.fetchall()
+            children = self.env.cr.fetchall()
             for child in children:
                 assets.append((child[0], child[1], asset_id))
                 assets += _child_get(child[0])
@@ -439,13 +417,10 @@ class asset_report_xls(report_xls):
         assets.append(acq)
 
     def _acquisition_report(self, _p, _xs, data, objects, wb):
-        cr = self.cr
-        uid = self.uid
-        context = self.context
         fy = self.fiscalyear
         wl_acq = _p.wanted_list_acquisition
         template = self.acquisition_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.env['account.asset.asset']
 
         title = self._get_title('acquisition', 'normal')
         title_short = self._get_title('acquisition', 'short')
@@ -460,13 +435,13 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
+        self.env.cr.execute(
             "SELECT id FROM account_asset_asset "
             "WHERE date_start >= %s AND date_start <= %s"
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_start ASC",
             (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
-        acq_ids = [x[0] for x in cr.fetchall()]
+        acq_ids = [x[0] for x in self.env.cr.fetchall()]
 
         if not acq_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'acquisition')
@@ -485,7 +460,8 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_acq:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise ValidationError(_(
+                "Customization Error"
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_acquisition_fields' list !"))
         asset_value_pos = 'asset_value' in wl_acq and \
@@ -501,7 +477,7 @@ class asset_report_xls(report_xls):
         entries = []
         for asset_i, data in enumerate(acqs_and_parents):
             entry = {}
-            asset = asset_obj.browse(cr, uid, data[0], context=context)
+            asset = asset_obj.browse(data[0])
             if data[1] == 'view':
                 cp_i = asset_i + 1
                 cp = []
@@ -556,13 +532,10 @@ class asset_report_xls(report_xls):
             ws, row_pos, row_data, row_style=self.rt_cell_style_right)
 
     def _active_report(self, _p, _xs, data, objects, wb):
-        cr = self.cr
-        uid = self.uid
-        context = self.context
         fy = self.fiscalyear
         wl_act = _p.wanted_list_active
         template = self.active_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.env['account.asset.asset']
 
         title = self._get_title('active', 'normal')
         title_short = self._get_title('active', 'short')
@@ -577,7 +550,7 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
+        self.env.cr.execute(
             "SELECT id FROM account_asset_asset "
             "WHERE date_start <= %s"
             "AND ((date_remove IS NULL) OR "
@@ -586,7 +559,7 @@ class asset_report_xls(report_xls):
             "ORDER BY date_start ASC",
             (fy.date_stop, fy.date_start, fy.date_stop, tuple(self.asset_ids))
             )
-        act_ids = [x[0] for x in cr.fetchall()]
+        act_ids = [x[0] for x in self.env.cr.fetchall()]
 
         if not act_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'active')
@@ -605,7 +578,8 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_act:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise ValidationError(_(
+                "Customization Error'\n"
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_active_fields' list !"))
         asset_value_pos = 'asset_value' in wl_act and \
@@ -625,7 +599,7 @@ class asset_report_xls(report_xls):
         entries = []
         for asset_i, data in enumerate(acts_and_parents):
             entry = {}
-            asset = asset_obj.browse(cr, uid, data[0], context=context)
+            asset = asset_obj.browse(data[0])
 
             if data[1] == 'view':
                 cp_i = asset_i + 1
@@ -639,14 +613,14 @@ class asset_report_xls(report_xls):
             else:
 
                 # fy_start_value
-                cr.execute(
+                self.env.cr.execute(
                     "SELECT depreciated_value "
                     "FROM account_asset_depreciation_line "
                     "WHERE line_date >= %s"
                     "AND asset_id = %s AND type = 'depreciate' "
                     "ORDER BY line_date ASC LIMIT 1",
                     (fy.date_start, data[0]))
-                res = cr.fetchone()
+                res = self.env.cr.fetchone()
                 if res:
                     value_depreciated = res[0]
                 elif asset.state in ['close', 'removed']:
@@ -658,7 +632,7 @@ class asset_report_xls(report_xls):
                     if asset.code:
                         error_name += ' (' + asset.code + ')' or ''
                     if asset.state in ['open']:
-                        cr.execute(
+                        self.env.cr.execute(
                             "SELECT line_date "
                             "FROM account_asset_depreciation_line "
                             "WHERE asset_id = %s AND type = 'depreciate' "
@@ -666,36 +640,36 @@ class asset_report_xls(report_xls):
                             "AND line_date < %s"
                             "ORDER BY line_date ASC LIMIT 1",
                             (data[0], fy.date_start))
-                        res = cr.fetchone()
+                        res = self.env.cr.fetchone()
                         if res:
-                            raise orm.except_orm(
-                                _('Data Error'),
-                                _("You can not report on a Fiscal Year "
-                                  "with unposted entries in prior years. "
-                                  "Please post depreciation table entry "
-                                  "dd. '%s'  of asset '%s' !")
+                            raise ValidationError(_(
+                                "Data Error \nYou can not report on a "
+                                "Fiscal Year "
+                                "with unposted entries in prior years. "
+                                "Please post depreciation table entry "
+                                "dd. '%s'  of asset '%s' !")
                                 % (res[0], error_name))
                         else:
-                            raise orm.except_orm(
-                                _('Data Error'),
-                                _("Depreciation Table error for asset %s !")
-                                % error_name)
+                            raise ValidationError(_(
+                                "Data Error \n"
+                                "Depreciation Table error for asset "
+                                "%s !") % error_name)
                     else:
-                        raise orm.except_orm(
-                            _('Data Error'),
-                            _("Depreciation Table error for asset %s !")
+                        raise ValidationError(_(
+                            "Data Error \n Depreciation Table error "
+                            "for asset %s !")
                             % error_name)
                 asset.fy_start_value = asset.asset_value - value_depreciated
 
                 # fy_end_value
-                cr.execute(
+                self.env.cr.execute(
                     "SELECT depreciated_value "
                     "FROM account_asset_depreciation_line "
                     "WHERE line_date > %s"
                     "AND asset_id = %s AND type = 'depreciate' "
                     "ORDER BY line_date ASC LIMIT 1",
                     (fy.date_stop, data[0]))
-                res = cr.fetchone()
+                res = self.env.cr.fetchone()
                 if res:
                     value_depreciated = res[0]
                 elif not asset.method_number:
@@ -779,13 +753,10 @@ class asset_report_xls(report_xls):
             ws, row_pos, row_data, row_style=self.rt_cell_style_right)
 
     def _removal_report(self, _p, _xs, data, objects, wb):
-        cr = self.cr
-        uid = self.uid
-        context = self.context
         fy = self.fiscalyear
         wl_dsp = _p.wanted_list_removal
         template = self.removal_template
-        asset_obj = self.pool.get('account.asset.asset')
+        asset_obj = self.env['account.asset.asset']
 
         title = self._get_title('removal', 'normal')
         title_short = self._get_title('removal', 'short')
@@ -800,13 +771,13 @@ class asset_report_xls(report_xls):
         ws.footer_str = self.xls_footers['standard']
         row_pos = self._report_title(ws, _p, row_pos, _xs, title)
 
-        cr.execute(
+        self.env.cr.execute(
             "SELECT id FROM account_asset_asset "
             "WHERE date_remove >= %s AND date_remove <= %s"
             "AND id IN %s AND type = 'normal' "
             "ORDER BY date_remove ASC",
             (fy.date_start, fy.date_stop, tuple(self.asset_ids)))
-        dsp_ids = [x[0] for x in cr.fetchall()]
+        dsp_ids = [x[0] for x in self.env.cr.fetchall()]
 
         if not dsp_ids:
             return self._empty_report(ws, _p, row_pos, _xs, 'removal')
@@ -825,7 +796,8 @@ class asset_report_xls(report_xls):
 
         row_pos_start = row_pos
         if 'account' not in wl_dsp:
-            raise orm.except_orm(_('Customization Error'), _(
+            raise ValidationError(_(
+                "Customization Error \n"
                 "The 'account' field is a mandatory entry of the "
                 "'_xls_removal_fields' list !"))
         asset_value_pos = 'asset_value' in wl_dsp and \
@@ -841,7 +813,7 @@ class asset_report_xls(report_xls):
         entries = []
         for asset_i, data in enumerate(dsps_and_parents):
             entry = {}
-            asset = asset_obj.browse(cr, uid, data[0], context=context)
+            asset = asset_obj.browse(data[0])
             if data[1] == 'view':
                 cp_i = asset_i + 1
                 cp = []
@@ -913,9 +885,7 @@ class asset_report_xls(report_xls):
         self._removal_report(_p, _xs, data, objects, wb)
 
 
-asset_report_xls(
+AssetReportXls(
     'report.account.asset.xls',
     'account.asset.asset',
-    parser=asset_report_xls_parser)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    parser=AssetReportXlsParser)

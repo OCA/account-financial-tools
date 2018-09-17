@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # #############################################################################
 #
 # Account partner required module for OpenERP
@@ -27,10 +27,10 @@ from openerp.tests import common
 from openerp import fields
 
 
-class test_account_reversal(common.TransactionCase):
+class TestAccountReversal(common.TransactionCase):
 
     def setUp(self):
-        super(test_account_reversal, self).setUp()
+        super(TestAccountReversal, self).setUp()
         self.move_obj = self.env['account.move']
         self.move_line_obj = self.env['account.move.line']
 

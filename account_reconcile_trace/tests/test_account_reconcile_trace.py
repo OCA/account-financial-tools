@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
-from openerp.addons.account_reconcile_trace.tests.common \
-    import TestCommon
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from .common import TestCommon
 from openerp.tools import mute_logger
 import time
 

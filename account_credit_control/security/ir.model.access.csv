@@ -18,3 +18,4 @@
 "account_credit_control.ir_model_access_290",0,0,"account.group_account_user","credit_control_fin_user_line","account_credit_control.model_credit_control_line",1,0
 "account_credit_control.ir_model_access_291",0,0,"account.group_account_invoice","credit_control_fin_invoice_line","account_credit_control.model_credit_control_line",1,0
 "account_credit_control.ir_model_access_292",1,1,"account.group_account_manager","credit_control_fin_manager_line","account_credit_control.model_credit_control_line",1,1
+

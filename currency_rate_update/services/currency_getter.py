@@ -55,7 +55,7 @@ class UnsuportedCurrencyError(Exception):
         return 'Unsupported currency %s' % self.curr
 
 
-class Currency_getter_factory():
+class CurrencyGetterFactory():
     """Factory pattern class that will return
     a currency getter class base on the name passed
     to the register method

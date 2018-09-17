@@ -18,13 +18,13 @@ dangerous by some.
 To work around this issue, this module does the following:
 
 * It makes sure the flag "Skip draft moves" is always honored, including when
-validating invoices and bank statements [1]. This enables different workflows,
-such as 1/ the automatic posting of moves coming from some journals (such as
-invoices coming from e-commerce), or 2/ moves remaining in draft state, letting
-accountants validate them and correct the corresponding invoices before posting
-the moves.
+  validating invoices and bank statements [1]. This enables different workflows,
+  such as 1/ the automatic posting of moves coming from some journals (such as
+  invoices coming from e-commerce), or 2/ moves remaining in draft state, letting
+  accountants validate them and correct the corresponding invoices before posting
+  the moves.
 * It hides the Cancel button on account moves unless account_cancel is installed
-and cancellation is allowed on the corresponding journal. 
+  and cancellation is allowed on the corresponding journal. 
 
 [1] provided the parameter is set in Settings > Configuration, if this
 parameter is not set the moves generated from invoices and bank statement

@@ -1,32 +1,10 @@
-# coding=utf-8
-##############################################################################
-#
-#    account_auto_fy_sequence module for Odoo
-#    Copyright (C) 2014 ACSONE SA/NV (<http://acsone.eu>)
-#    @author Stéphane Bidoul <stephane.bidoul@acsone.eu>
-#
-#    account_auto_fy_sequence is free software:
-#    you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License v3 or later
-#    as published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    account_auto_fy_sequence is distributed
-#    in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License v3 or later for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    v3 or later along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# -*- coding: utf-8 -*-
+# Copyright 2014 ACSONE SA/NV (<http://acsone.eu>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import time
 
 import openerp.tests.common as common
-from openerp.osv import orm
+from openerp.exceptions import except_orm
 
 
 class TestAutoFYSequence(common.TransactionCase):
@@ -53,7 +31,7 @@ class TestAutoFYSequence(common.TransactionCase):
         """ invoke fiscal year sequence
         without specifying the fiscal year """
         seq_id = self._create_seq('SEQ/%(fy)s/')
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(except_orm):
             self.seq_obj._next(self.cr, self.uid, [seq_id])
 
     def test_2(self):

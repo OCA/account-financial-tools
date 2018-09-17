@@ -1,28 +1,9 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
-#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+# -*- coding: utf-8 -*-
+# Copyright 2010-2012 OpenERP s.a. (<http://openerp.com>)
+# Copyright 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from openerp import api, fields, models, _
+from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -36,80 +17,72 @@ FIELDS_AFFECTS_ASSET_MOVE_LINE = \
          'asset_category_id', 'asset_id', 'tax_code_id', 'tax_amount'])
 
 
-class account_move(orm.Model):
+class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    def unlink(self, cr, uid, ids, context=None, check=True):
-        if not context:
-            context = {}
-        depr_obj = self.pool.get('account.asset.depreciation.line')
-        for move_id in ids:
+    @api.multi
+    def unlink(self, check=True):
+        depr_obj = self.env['account.asset.depreciation.line']
+        for move_id in self:
             depr_ids = depr_obj.search(
-                cr, uid,
-                [('move_id', '=', move_id),
+                [('move_id', '=', move_id.id),
                  ('type', 'in', ['depreciate', 'remove'])])
-            if depr_ids and not context.get('unlink_from_asset'):
-                raise orm.except_orm(
-                    _('Error!'),
+            if depr_ids and not self.env.context.get('unlink_from_asset'):
+                raise ValidationError(
                     _("You are not allowed to remove an accounting entry "
                       "linked to an asset."
                       "\nYou should remove such entries from the asset."))
             # trigger store function
-            depr_obj.write(cr, uid, depr_ids, {'move_id': False}, context)
-        return super(account_move, self).unlink(
-            cr, uid, ids, context=context, check=check)
+            depr_ids.write({'move_id': False})
+        return super(AccountMove, self).unlink(check=check)
 
-    def write(self, cr, uid, ids, vals, context=None):
+    @api.multi
+    def write(self, vals):
         if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE):
-            if isinstance(ids, (int, long)):
-                ids = [ids]
-            depr_obj = self.pool.get('account.asset.depreciation.line')
-            for move_id in ids:
-                depr_ids = depr_obj.search(
-                    cr, uid,
-                    [('move_id', '=', move_id), ('type', '=', 'depreciate')])
+            depr_obj = self.env['account.asset.depreciation.line']
+            for move_id in self:
+                depr_ids = depr_obj.search_count([
+                    ('move_id', '=', move_id.id),
+                    ('type', '=', 'depreciate')])
                 if depr_ids:
-                    raise orm.except_orm(
-                        _('Error!'),
+                    raise ValidationError(
                         _("You cannot change an accounting entry "
                           "linked to an asset depreciation line."))
-        return super(account_move, self).write(cr, uid, ids, vals, context)
+        return super(AccountMove, self).write(vals)
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    _columns = {
-        'asset_category_id': fields.many2one(
-            'account.asset.category', 'Asset Category'),
-    }
+    asset_category_id = fields.Many2one(
+        'account.asset.category',
+        'Asset Category',
+    )
+    asset_id = fields.Many2one(
+        'account.asset.asset',
+        'Asset',
+        ondelete="restrict",
+    )
 
-    def onchange_account_id(self, cr, uid, ids,
-                            account_id=False, partner_id=False, context=None):
-        res = super(account_move_line, self).onchange_account_id(
-            cr, uid, ids, account_id, partner_id, context)
-        account_obj = self.pool.get('account.account')
-        if account_id:
-            account = account_obj.browse(cr, uid, account_id)
-            asset_category = account.asset_category_id
+    @api.onchange('account_id')
+    def onchange_account_id(self):
+        super(AccountMoveLine, self).onchange_account_id()
+        if self.account_id:
+            asset_category = self.account_id.asset_category_id
             if asset_category:
-                res['value'].update({'asset_category_id': asset_category.id})
-        return res
+                self.asset_category_id = asset_category.id
 
-    def create(self, cr, uid, vals, context=None, check=True):
-        if not context:
-            context = {}
-        if vals.get('asset_id') and not context.get('allow_asset'):
-            raise orm.except_orm(_(
-                'Error!'),
+    @api.model
+    def create(self, vals, check=True):
+        if vals.get('asset_id') and not self.env.context.get('allow_asset'):
+            raise ValidationError(
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_category_id'):
-            asset_obj = self.pool.get('account.asset.asset')
+            asset_obj = self.env['account.asset.asset']
             # create asset
-            move = self.pool.get('account.move').browse(
-                cr, uid, vals['move_id'])
+            move = self.env['account.move'].browse(vals['move_id'])
             asset_value = vals['debit'] or -vals['credit']
             asset_vals = {
                 'name': vals['name'],
@@ -118,39 +91,37 @@ class account_move_line(orm.Model):
                 'partner_id': vals['partner_id'],
                 'date_start': move.date,
             }
-            if context.get('company_id'):
-                asset_vals['company_id'] = context['company_id']
+            if self.env.context.get('company_id'):
+                asset_vals['company_id'] = self.env.context['company_id']
             changed_vals = asset_obj.onchange_category_id(
-                cr, uid, [], vals['asset_category_id'], context=context)
+                vals['asset_category_id'])
             asset_vals.update(changed_vals['value'])
-            ctx = dict(context, create_asset_from_move_line=True,
+            ctx = dict(self.env.context, create_asset_from_move_line=True,
                        move_id=vals['move_id'])
-            asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
+            asset_id = asset_obj.with_context(**ctx).create(asset_vals)
             vals['asset_id'] = asset_id
+        return super(AccountMoveLine, self).create(vals, check)
 
-        return super(account_move_line, self).create(
-            cr, uid, vals, context, check)
-
-    def write(self, cr, uid, ids, vals,
-              context=None, check=True, update_check=True):
-        for move_line in self.browse(cr, uid, ids, context=context):
+    @api.multi
+    def write(self, vals, check=True, update_check=True):
+        for move_line in self:
             if move_line.asset_id.id:
                 if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE):
-                    raise orm.except_orm(
-                        _('Error!'),
+                    raise ValidationError(
                         _("You cannot change an accounting item "
                           "linked to an asset depreciation line."))
         if vals.get('asset_id'):
-            raise orm.except_orm(
-                _('Error!'),
+            raise ValidationError(
                 _("You are not allowed to link "
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_category_id'):
-            assert len(ids) == 1, \
-                'This option should only be used for a single id at a time.'
-            asset_obj = self.pool.get('account.asset.asset')
-            for aml in self.browse(cr, uid, ids, context):
+            if len(self) > 1:
+                raise ValidationError(_(
+                    'This option should only be used for a single id '
+                    'at a time.'))
+            asset_obj = self.env['account.asset.asset']
+            for aml in self:
                 if vals['asset_category_id'] == aml.asset_category_id.id:
                     continue
                 # create asset
@@ -171,14 +142,11 @@ class account_move_line(orm.Model):
                     'company_id': vals.get('company_id') or aml.company_id.id,
                 }
                 changed_vals = asset_obj.onchange_category_id(
-                    cr, uid, [], vals['asset_category_id'], context=context)
+                    [], vals['asset_category_id'])
                 asset_vals.update(changed_vals['value'])
-                ctx = dict(context, create_asset_from_move_line=True,
+                ctx = dict(self.env.context, create_asset_from_move_line=True,
                            move_id=aml.move_id.id)
-                asset_id = asset_obj.create(cr, uid, asset_vals, context=ctx)
+                asset_id = asset_obj.with_context(**ctx).create(asset_vals)
                 vals['asset_id'] = asset_id
 
-        return super(account_move_line, self).write(
-            cr, uid, ids, vals, context, check, update_check)
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+        return super(AccountMoveLine, self).write(vals, check, update_check)

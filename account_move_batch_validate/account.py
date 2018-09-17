@@ -22,7 +22,7 @@
 
 import logging
 
-from openerp.osv import fields, orm
+from openerp import fields, models
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
@@ -43,43 +43,34 @@ except ImportError:
 BLOCK_SIZE = 1000
 
 
-class account_move(orm.Model):
+class AccountMove(models.Model):
 
     """We modify the account move to allow delayed posting."""
 
     _name = 'account.move'
     _inherit = 'account.move'
 
-    _columns = {
-        'to_post': fields.boolean(
-            'Posting Requested',
-            readonly=True,
-            help='Check this box to mark the move for batch posting'
-        ),
-        'post_job_uuid': fields.char(
-            'UUID of the Job to approve this move'
-        ),
-    }
+    to_post = fields.Boolean(
+        'Posting Requested',
+        readonly=True,
+        help='Check this box to mark the move for batch posting'
+    )
+    post_job_uuid = fields.Char(
+        'UUID of the Job to approve this move'
+    )
 
-    def _delay_post_marked(self, cr, uid, eta=None, context=None):
+    def _delay_post_marked(self, eta=None):
         """Create a job for every move marked for posting.
 
         If some moves already have a job, they are skipped.
 
         """
-
-        if context is None:
-            context = {}
-
-        session = ConnectorSession(cr, uid, context=context)
-
-        move_ids = self.search(cr, uid, [
+        session = ConnectorSession()
+        move_ids = self.search([
             ('to_post', '=', True),
             ('post_job_uuid', '=', False),
             ('state', '=', 'draft'),
-        ], context=context)
-        name = self._name
-
+        ])
         # maybe not creating too many dictionaries will make us a bit faster
         values = {'post_job_uuid': None}
         _logger.info(
@@ -89,32 +80,28 @@ class account_move(orm.Model):
         )
 
         for move_id in move_ids:
-            job_uuid = validate_one_move.delay(session, name, move_id,
-                                               eta=eta)
+            job_uuid = validate_one_move.delay(
+                session,
+                self._name,
+                move_id,
+                eta=eta)
             values['post_job_uuid'] = job_uuid
-            self.write(cr, uid, [move_id], values)
-            cr.commit()
+            move_id.write(values)
 
-    def _cancel_jobs(self, cr, uid, context=None):
+    def _cancel_jobs(self):
         """Find moves where the mark has been removed and cancel the jobs.
-
         For the moves that are posted already it's too late: we skip them.
-
         """
-
-        if context is None:
-            context = {}
-
-        session = ConnectorSession(cr, uid, context=context)
+        session = ConnectorSession()
         storage = OpenERPJobStorage(session)
 
-        move_ids = self.search(cr, uid, [
+        move_ids = self.search([
             ('to_post', '=', False),
             ('post_job_uuid', '!=', False),
             ('state', '=', 'draft'),
-        ], context=context)
+        ])
 
-        for move in self.browse(cr, uid, move_ids, context=context):
+        for move in move_ids:
             job_rec = storage.load(move.post_job_uuid)
             if job_rec.state in (u'pending', u'enqueued'):
                 job_rec.set_done(result=_(
@@ -122,10 +109,8 @@ class account_move(orm.Model):
                 ))
                 storage.store(job_rec)
 
-    def mark_for_posting(self, cr, uid, move_ids, eta=None, context=None):
+    def mark_for_posting(self, move_ids, eta=None):
         """Mark a list of moves for delayed posting, and enqueue the jobs."""
-        if context is None:
-            context = {}
         # For massive amounts of moves, this becomes necessary to avoid
         # MemoryError's
 
@@ -134,25 +119,16 @@ class account_move(orm.Model):
         )
 
         for start in xrange(0, len(move_ids), BLOCK_SIZE):
-            self.write(
-                cr,
-                uid,
-                move_ids[start:start + BLOCK_SIZE],
-                {'to_post': True},
-                context=context)
-            # users like to see the flag sooner rather than later
-            cr.commit()
-        self._delay_post_marked(cr, uid, eta=eta, context=context)
+            move_ids[start:start + BLOCK_SIZE].write({'to_post': True})
+        self._delay_post_marked(eta=eta)
 
-    def unmark_for_posting(self, cr, uid, move_ids, context=None):
+    def unmark_for_posting(self, move_ids):
         """Unmark moves for delayed posting, and cancel the jobs."""
-        if context is None:
-            context = {}
-        self.write(cr, uid, move_ids, {'to_post': False}, context=context)
-        self._cancel_jobs(cr, uid, context=context)
+        move_ids.write({'to_post': False})
+        self._cancel_jobs()
 
 
-@job(default_channel='root.account_move_batch_validate')
+@job(default_channel='root.AccountMove_batch_validate')
 def validate_one_move(session, model_name, move_id):
     """Validate a move, and leave the job reference in place."""
     move_pool = session.pool['account.move']

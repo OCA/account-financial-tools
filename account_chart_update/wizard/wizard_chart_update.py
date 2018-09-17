@@ -21,9 +21,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
-from openerp.osv.orm import except_orm
-from openerp.osv.osv import except_osv
+from openerp import api, fields, models, exceptions, _
 import logging
 
 
@@ -164,98 +162,110 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         ondelete='cascade')
     new_tax_codes = fields.Integer(
         string='New tax codes', readonly=True,
-        compute="_get_new_tax_codes_count")
+        compute="_compute_get_new_tax_codes_count")
     new_taxes = fields.Integer(
-        string='New taxes', readonly=True, compute="_get_new_taxes_count")
+        string='New taxes',
+        readonly=True,
+        compute="_compute_get_new_taxes_count")
     new_accounts = fields.Integer(
         string='New accounts', readonly=True,
-        compute="_get_new_accounts_count")
+        compute="_compute_new_accounts_count")
     new_fps = fields.Integer(
         string='New fiscal positions', readonly=True,
-        compute="_get_new_fps_count")
+        compute="_compute_get_new_fps_count")
     updated_tax_codes = fields.Integer(
         string='Updated tax codes', readonly=True,
-        compute="_get_updated_tax_codes_count")
+        compute="_compute_get_updated_tax_codes_count")
     updated_taxes = fields.Integer(
         string='Updated taxes', readonly=True,
-        compute="_get_updated_taxes_count")
+        compute="_compute_get_updated_taxes_count")
     updated_accounts = fields.Integer(
         string='Updated accounts', readonly=True,
-        compute="_get_updated_accounts_count")
+        compute="_compute_get_updated_accounts_count")
     updated_fps = fields.Integer(
         string='Updated fiscal positions', readonly=True,
-        compute="_get_updated_fps_count")
+        compute="_compute_get_updated_fps_count")
     deleted_tax_codes = fields.Integer(
         string='Deactivated tax codes', readonly=True,
-        compute="_get_deleted_tax_codes_count")
+        compute="_compute_get_deleted_tax_codes_count")
     deleted_taxes = fields.Integer(
         string='Deactivated taxes', readonly=True,
-        compute="_get_deleted_taxes_count")
+        compute="_compute_get_deleted_taxes_count")
     log = fields.Text(string='Messages and Errors', readonly=True)
 
     ##########################################################################
     # Compute methods
     ##########################################################################
 
-    @api.one
+    @api.multi
     @api.depends('tax_code_ids')
-    def _get_new_tax_codes_count(self):
-        self.new_tax_codes = len(
-            [x for x in self.tax_code_ids if x.type == 'new'])
+    def _compute_get_new_tax_codes_count(self):
+        for rec in self:
+            rec.new_tax_codes = len(
+                [x for x in rec.tax_code_ids if x.type == 'new'])
 
-    @api.one
+    @api.multi
     @api.depends('tax_ids')
-    def _get_new_taxes_count(self):
-        self.new_taxes = len(
-            [x for x in self.tax_ids if x.type == 'new'])
+    def _compute_get_new_taxes_count(self):
+        for rec in self:
+            rec.new_taxes = len(
+                [x for x in rec.tax_ids if x.type == 'new'])
 
-    @api.one
+    @api.multi
     @api.depends('account_ids')
-    def _get_new_accounts_count(self):
-        self.new_accounts = len(
-            [x for x in self.account_ids if x.type == 'new'])
+    def _compute_new_accounts_count(self):
+        for rec in self:
+            rec.new_accounts = len(
+                [x for x in rec.account_ids if x.type == 'new'])
 
-    @api.one
+    @api.multi
     @api.depends('fiscal_position_ids')
-    def _get_new_fps_count(self):
-        self.new_fps = len(
-            [x for x in self.fiscal_position_ids if x.type == 'new'])
+    def _compute_get_new_fps_count(self):
+        for rec in self:
+            rec.new_fps = len(
+                [x for x in rec.fiscal_position_ids if x.type == 'new'])
 
-    @api.one
+    @api.multi
     @api.depends('tax_code_ids')
-    def _get_updated_tax_codes_count(self):
-        self.updated_tax_codes = len(
-            [x for x in self.tax_code_ids if x.type == 'updated'])
+    def _compute_get_updated_tax_codes_count(self):
+        for rec in self:
+            rec.updated_tax_codes = len(
+                [x for x in rec.tax_code_ids if x.type == 'updated'])
 
-    @api.one
+    @api.multi
     @api.depends('tax_ids')
-    def _get_updated_taxes_count(self):
-        self.updated_taxes = len(
-            [x for x in self.tax_ids if x.type == 'updated'])
+    def _compute_get_updated_taxes_count(self):
+        for rec in self:
+            rec.updated_taxes = len(
+                [x for x in rec.tax_ids if x.type == 'updated'])
 
-    @api.one
+    @api.multi
     @api.depends('account_ids')
-    def _get_updated_accounts_count(self):
-        self.updated_accounts = len(
-            [x for x in self.account_ids if x.type == 'updated'])
+    def _compute_get_updated_accounts_count(self):
+        for rec in self:
+            rec.updated_accounts = len(
+                [x for x in rec.account_ids if x.type == 'updated'])
 
-    @api.one
+    @api.multi
     @api.depends('fiscal_position_ids')
-    def _get_updated_fps_count(self):
-        self.updated_fps = len(
-            [x for x in self.fiscal_position_ids if x.type == 'updated'])
+    def _compute_get_updated_fps_count(self):
+        for rec in self:
+            rec.updated_fps = len(
+                [x for x in rec.fiscal_position_ids if x.type == 'updated'])
 
-    @api.one
+    @api.multi
     @api.depends('tax_code_ids')
-    def _get_deleted_tax_codes_count(self):
-        self.deleted_tax_codes = len(
-            [x for x in self.tax_code_ids if x.type == 'deleted'])
+    def _compute_get_deleted_tax_codes_count(self):
+        for rec in self:
+            rec.deleted_tax_codes = len(
+                [x for x in rec.tax_code_ids if x.type == 'deleted'])
 
-    @api.one
+    @api.multi
     @api.depends('tax_ids')
-    def _get_deleted_taxes_count(self):
-        self.deleted_taxes = len(
-            [x for x in self.tax_ids if x.type == 'deleted'])
+    def _compute_get_deleted_taxes_count(self):
+        for rec in self:
+            rec.deleted_taxes = len(
+                [x for x in rec.tax_ids if x.type == 'deleted'])
 
     ##########################################################################
     # Main methods
@@ -520,58 +530,59 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The parent field is different.\n")
         return notes
 
-    @api.one
+    @api.multi
     def _find_tax_codes(self, mapping_tax_codes):
         """Search for, and load, tax code templates to create/update."""
         wiz_tax_code_obj = self.env['wizard.update.charts.accounts.tax.code']
-        # Remove previous tax codes
-        self.tax_code_ids.unlink()
-        # Search for new / updated tax codes
-        children_tax_code_template = \
-            self._get_depth_first_tax_code_template_ids(
-                self.chart_template_id.tax_code_root_id)
-        for tax_code_template in children_tax_code_template:
-            if tax_code_template == self.chart_template_id.tax_code_root_id:
-                continue
-            tax_code = self.map_tax_code_template(
-                tax_code_template, mapping_tax_codes)
-            if not tax_code:
-                wiz_tax_code_obj.create({
-                    'tax_code_id': tax_code_template.id,
-                    'update_chart_wizard_id': self.id,
-                    'type': 'new',
-                    'notes': _('Name or code not found.'),
-                })
-            else:
-                notes = self._is_different_tax_code(
-                    tax_code, tax_code_template, mapping_tax_codes)
-                if notes:
-                    # Tax code to update
+        for rec in self:
+            # Remove previous tax codes
+            rec.tax_code_ids.unlink()
+            # Search for new / updated tax codes
+            children_tax_code_template = \
+                rec._get_depth_first_tax_code_template_ids(
+                    rec.chart_template_id.tax_code_root_id)
+            for tax_code_template in children_tax_code_template:
+                if tax_code_template == rec.chart_template_id.tax_code_root_id:
+                    continue
+                tax_code = rec.map_tax_code_template(
+                    tax_code_template, mapping_tax_codes)
+                if not tax_code:
                     wiz_tax_code_obj.create({
                         'tax_code_id': tax_code_template.id,
-                        'update_chart_wizard_id': self.id,
-                        'type': 'updated',
-                        'update_tax_code_id': tax_code.id,
-                        'notes': notes,
+                        'update_chart_wizard_id': rec.id,
+                        'type': 'new',
+                        'notes': _('Name or code not found.'),
                     })
-        # search for tax codes not in the template and propose them for
-        # deactivation
-        root_code = self.map_tax_code_template(
-            self.chart_template_id.tax_code_root_id, mapping_tax_codes)
-        tax_codes_to_delete = self.env['account.tax.code'].search(
-            [('company_id', '=', self.company_id.id),
-             ('id', '!=', root_code.id)])
-        for tax_code in mapping_tax_codes.values():
-            if tax_code:
-                tax_codes_to_delete -= tax_code
-        for tax_code_to_delete in tax_codes_to_delete:
-            wiz_tax_code_obj.create({
-                'tax_code_id': False,
-                'update_chart_wizard_id': self.id,
-                'type': 'deleted',
-                'update_tax_code_id': tax_code_to_delete.id,
-                'notes': _("To deactivate: not in the template"),
-            })
+                else:
+                    notes = rec._is_different_tax_code(
+                        tax_code, tax_code_template, mapping_tax_codes)
+                    if notes:
+                        # Tax code to update
+                        wiz_tax_code_obj.create({
+                            'tax_code_id': tax_code_template.id,
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'updated',
+                            'update_tax_code_id': tax_code.id,
+                            'notes': notes,
+                        })
+            # search for tax codes not in the template and propose them for
+            # deactivation
+            root_code = rec.map_tax_code_template(
+                rec.chart_template_id.tax_code_root_id, mapping_tax_codes)
+            tax_codes_to_delete = self.env['account.tax.code'].search(
+                [('company_id', '=', rec.company_id.id),
+                 ('id', '!=', root_code.id)])
+            for tax_code in mapping_tax_codes.values():
+                if tax_code:
+                    tax_codes_to_delete -= tax_code
+            for tax_code_to_delete in tax_codes_to_delete:
+                wiz_tax_code_obj.create({
+                    'tax_code_id': False,
+                    'update_chart_wizard_id': rec.id,
+                    'type': 'deleted',
+                    'update_tax_code_id': tax_code_to_delete.id,
+                    'notes': _("To deactivate: not in the template"),
+                })
 
     def _is_different_tax(self, tax, tax_template, mapping_taxes,
                           mapping_tax_codes, mapping_accounts):
@@ -636,7 +647,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             notes += _("The account_collected field is different.\n")
         return notes
 
-    @api.one
+    @api.multi
     def _find_taxes(self, chart_template_ids, mapping_tax_codes,
                     mapping_taxes, mapping_accounts):
         """Search for, and load, tax templates to create/update.
@@ -645,57 +656,59 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             calculated once in the calling method.
         """
         wiz_taxes_obj = self.env['wizard.update.charts.accounts.tax']
-        delay_wiz_tax = []
-        # Remove previous taxes
-        self.tax_ids.unlink()
-        # Search for new / updated taxes
-        tax_templates = self.env['account.tax.template'].search(
-            [('chart_template_id', 'in', chart_template_ids)])
-        for tax_template in tax_templates:
-            # Ensure tax template is on the map (search for the mapped tax id)
-            tax = self.map_tax_template(tax_template, mapping_taxes)
-            if not tax:
-                vals_wiz = {
-                    'tax_id': tax_template.id,
-                    'update_chart_wizard_id': self.id,
-                    'type': 'new',
-                    'notes': _('Name or description not found.'),
-                }
-                if not tax_template.parent_id:
-                    wiz_taxes_obj.create(vals_wiz)
-                else:
-                    delay_wiz_tax.append(vals_wiz)
-            else:
-                # Check the tax for changes.
-                notes = self._is_different_tax(
-                    tax, tax_template, mapping_taxes, mapping_tax_codes,
-                    mapping_accounts)
-                if notes:
-                    # Tax code to update.
-                    wiz_taxes_obj.create({
+        for rec in self:
+            delay_wiz_tax = []
+            # Remove previous taxes
+            rec.tax_ids.unlink()
+            # Search for new / updated taxes
+            tax_templates = self.env['account.tax.template'].search(
+                [('chart_template_id', 'in', chart_template_ids)])
+            for tax_template in tax_templates:
+                # Ensure tax template is on the map
+                # (search for the mapped tax id)
+                tax = rec.map_tax_template(tax_template, mapping_taxes)
+                if not tax:
+                    vals_wiz = {
                         'tax_id': tax_template.id,
-                        'update_chart_wizard_id': self.id,
-                        'type': 'updated',
-                        'update_tax_id': tax.id,
-                        'notes': notes,
-                    })
-        for delay_vals_wiz in delay_wiz_tax:
-            wiz_taxes_obj.create(delay_vals_wiz)
-        # search for taxes not in the template and propose them for
-        # deactivation
-        taxes_to_delete = self.env['account.tax'].search(
-            [('company_id', '=', self.company_id.id)])
-        for tax in mapping_taxes.values():
-            if tax:
-                taxes_to_delete -= tax
-        for tax_to_delete in taxes_to_delete:
-            wiz_taxes_obj.create({
-                'tax_id': False,
-                'update_chart_wizard_id': self.id,
-                'type': 'deleted',
-                'update_tax_id': tax_to_delete.id,
-                'notes': _("To deactivate: not in the template"),
-            })
+                        'update_chart_wizard_id': rec.id,
+                        'type': 'new',
+                        'notes': _('Name or description not found.'),
+                    }
+                    if not tax_template.parent_id:
+                        wiz_taxes_obj.create(vals_wiz)
+                    else:
+                        delay_wiz_tax.append(vals_wiz)
+                else:
+                    # Check the tax for changes.
+                    notes = rec._is_different_tax(
+                        tax, tax_template, mapping_taxes, mapping_tax_codes,
+                        mapping_accounts)
+                    if notes:
+                        # Tax code to update.
+                        wiz_taxes_obj.create({
+                            'tax_id': tax_template.id,
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'updated',
+                            'update_tax_id': tax.id,
+                            'notes': notes,
+                        })
+            for delay_vals_wiz in delay_wiz_tax:
+                wiz_taxes_obj.create(delay_vals_wiz)
+            # search for taxes not in the template and propose them for
+            # deactivation
+            taxes_to_delete = self.env['account.tax'].search(
+                [('company_id', '=', rec.company_id.id)])
+            for tax in mapping_taxes.values():
+                if tax:
+                    taxes_to_delete -= tax
+            for tax_to_delete in taxes_to_delete:
+                wiz_taxes_obj.create({
+                    'tax_id': False,
+                    'update_chart_wizard_id': rec.id,
+                    'type': 'deleted',
+                    'update_tax_id': tax_to_delete.id,
+                    'notes': _("To deactivate: not in the template"),
+                })
 
     def _is_different_account(self, account, account_template):
         notes = ""
@@ -725,41 +738,44 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 chart_template.parent_id)
         return acc_templ_criteria
 
-    @api.one
+    @api.multi
     def _find_accounts(self, mapping_accounts):
         """Search for, and load, account templates to create/update."""
         wiz_accounts = self.env['wizard.update.charts.accounts.account']
-        # Remove previous accounts
-        self.account_ids.unlink()
-        # Search for new / updated accounts
-        acc_templ_criteria = self._acc_tmpl_to_search_criteria(
-            self.chart_template_id)
-        account_templates = self.env['account.account.template'].search(
-            acc_templ_criteria)
-        for account_template in account_templates:
-            # Ensure the account template is on the map (search for the mapped
-            # account id).
-            account = self.map_account_template(
-                account_template, mapping_accounts)
-            if not account:
-                wiz_accounts.create({
-                    'account_id': account_template.id,
-                    'update_chart_wizard_id': self.id,
-                    'type': 'new',
-                    'notes': _('Code not found.'),
-                })
-            else:
-                # Check the account for changes.
-                notes = self._is_different_account(account, account_template)
-                if notes:
-                    # Account to update.
+        for rec in self:
+            # Remove previous accounts
+            rec.account_ids.unlink()
+            # Search for new / updated accounts
+            acc_templ_criteria = rec._acc_tmpl_to_search_criteria(
+                rec.chart_template_id)
+            account_templates = self.env['account.account.template'].search(
+                acc_templ_criteria)
+            for account_template in account_templates:
+                # Ensure the account template is on the map
+                # (search for the mapped account id).
+                account = rec.map_account_template(
+                    account_template, mapping_accounts)
+                if not account:
                     wiz_accounts.create({
                         'account_id': account_template.id,
-                        'update_chart_wizard_id': self.id,
-                        'type': 'updated',
-                        'update_account_id': account.id,
-                        'notes': notes,
+                        'update_chart_wizard_id': rec.id,
+                        'type': 'new',
+                        'notes': _('Code not found.'),
                     })
+                else:
+                    # Check the account for changes.
+                    notes = rec._is_different_account(
+                        account,
+                        account_template)
+                    if notes:
+                        # Account to update.
+                        wiz_accounts.create({
+                            'account_id': account_template.id,
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'updated',
+                            'update_account_id': account.id,
+                            'notes': notes,
+                        })
 
     def _is_different_fiscal_position(self, fp, fp_template, mapping_taxes,
                                       mapping_accounts):
@@ -815,7 +831,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                        "instance does not.\n")
         return notes
 
-    @api.one
+    @api.multi
     def _find_fiscal_positions(self, chart_template_ids, mapping_taxes,
                                mapping_accounts, mapping_fps):
         """Search for, and load, fiscal position templates to create/update.
@@ -825,85 +841,87 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         wiz_fp = self.env['wizard.update.charts.accounts.fiscal.position']
         # Remove previous fiscal positions
-        self.fiscal_position_ids.unlink()
-        # Search for new / updated fiscal positions
-        fp_templates = self.env['account.fiscal.position.template'].search(
-            [('chart_template_id', 'in', chart_template_ids)])
-        for fp_template in fp_templates:
-            # Ensure the fiscal position template is on the map (search for the
-            # mapped fiscal position id).
-            fp = self.map_fp_template(fp_template, mapping_fps)
-            if not fp:
-                # New fiscal position template.
-                wiz_fp.create({
-                    'fiscal_position_id': fp_template.id,
-                    'update_chart_wizard_id': self.id,
-                    'type': 'new',
-                    'notes': _('Name not found.')
-                })
-                continue
-            # Check the fiscal position for changes
-            notes = self._is_different_fiscal_position(
-                fp, fp_template, mapping_taxes, mapping_accounts)
-            if notes:
-                # Fiscal position template to update
-                wiz_fp.create({
-                    'fiscal_position_id': fp_template.id,
-                    'update_chart_wizard_id': self.id,
-                    'type': 'updated',
-                    'update_fiscal_position_id': fp.id,
-                    'notes': notes,
-                })
+        for rec in self:
+            rec.fiscal_position_ids.unlink()
+            # Search for new / updated fiscal positions
+            fp_templates = self.env['account.fiscal.position.template'].search(
+                [('chart_template_id', 'in', chart_template_ids)])
+            for fp_template in fp_templates:
+                # Ensure the fiscal position template is on the map
+                # (search for the mapped fiscal position id).
+                fp = rec.map_fp_template(fp_template, mapping_fps)
+                if not fp:
+                    # New fiscal position template.
+                    wiz_fp.create({
+                        'fiscal_position_id': fp_template.id,
+                        'update_chart_wizard_id': rec.id,
+                        'type': 'new',
+                        'notes': _('Name not found.')
+                    })
+                    continue
+                # Check the fiscal position for changes
+                notes = rec._is_different_fiscal_position(
+                    fp, fp_template, mapping_taxes, mapping_accounts)
+                if notes:
+                    # Fiscal position template to update
+                    wiz_fp.create({
+                        'fiscal_position_id': fp_template.id,
+                        'update_chart_wizard_id': rec.id,
+                        'type': 'updated',
+                        'update_fiscal_position_id': fp.id,
+                        'notes': notes,
+                    })
 
-    @api.one
+    @api.multi
     def _find_financial_reports(self, mapping_accounts):
         wiz_fr = self.env['wizard.update.charts.accounts.financial.report']
         # Remove previous financial reports
-        self.financial_report_ids.unlink()
-        # Search for new / updated accounts
-        root_account_id = self.chart_template_id.account_root_id.id
-        acc_templ_criteria = [
-            ('chart_template_id', '=', self.chart_template_id.id)]
-        if root_account_id:
-            acc_templ_criteria = ['|'] + acc_templ_criteria
-            acc_templ_criteria += [
-                '&', ('parent_id', 'child_of', [root_account_id]),
-                ('chart_template_id', '=', False)]
-        account_templates = self.env['account.account.template'].search(
-            acc_templ_criteria)
-        for account_template in account_templates:
-            template_fr_ids = set([fr.id for fr in
-                                   account_template.financial_report_ids])
-            account = self.map_account_template(
-                account_template, mapping_accounts)
-            if account:
-                fr_ids = set([fr.id for fr in
-                              account.financial_report_ids])
-                new_fr_ids = template_fr_ids - fr_ids
-                for fr_id in new_fr_ids:
-                    wiz_fr.create({
-                        'update_chart_wizard_id': self.id,
-                        'type': 'new',
-                        'account_id': account.id,
-                        'financial_report_id': fr_id,
-                    })
-                deleted_fr_ids = fr_ids - template_fr_ids
-                for fr_id in deleted_fr_ids:
-                    wiz_fr.create({
-                        'update_chart_wizard_id': self.id,
-                        'type': 'deleted',
-                        'account_id': account.id,
-                        'financial_report_id': fr_id,
-                    })
-            else:
-                for fr_id in template_fr_ids:
-                    wiz_fr.create({
-                        'update_chart_wizard_id': self.id,
-                        'type': 'warn',
-                        'financial_report_id': fr_id,
-                        'notes': ('Missing account %s' %
-                                  account_template.code),
-                    })
+        for rec in self:
+            rec.financial_report_ids.unlink()
+            # Search for new / updated accounts
+            root_account_id = rec.chart_template_id.account_root_id.id
+            acc_templ_criteria = [
+                ('chart_template_id', '=', rec.chart_template_id.id)]
+            if root_account_id:
+                acc_templ_criteria = ['|'] + acc_templ_criteria
+                acc_templ_criteria += [
+                    '&', ('parent_id', 'child_of', [root_account_id]),
+                    ('chart_template_id', '=', False)]
+            account_templates = self.env['account.account.template'].search(
+                acc_templ_criteria)
+            for account_template in account_templates:
+                template_fr_ids = set([fr.id for fr in
+                                       account_template.financial_report_ids])
+                account = rec.map_account_template(
+                    account_template, mapping_accounts)
+                if account:
+                    fr_ids = set([fr.id for fr in
+                                  account.financial_report_ids])
+                    new_fr_ids = template_fr_ids - fr_ids
+                    for fr_id in new_fr_ids:
+                        wiz_fr.create({
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'new',
+                            'account_id': account.id,
+                            'financial_report_id': fr_id,
+                        })
+                    deleted_fr_ids = fr_ids - template_fr_ids
+                    for fr_id in deleted_fr_ids:
+                        wiz_fr.create({
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'deleted',
+                            'account_id': account.id,
+                            'financial_report_id': fr_id,
+                        })
+                else:
+                    for fr_id in template_fr_ids:
+                        wiz_fr.create({
+                            'update_chart_wizard_id': rec.id,
+                            'type': 'warn',
+                            'financial_report_id': fr_id,
+                            'notes': ('Missing account %s' %
+                                      account_template.code),
+                        })
 
     ##########################################################################
     # Update methods
@@ -1039,7 +1057,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         if children:
             try:
                 children.write({'parent_id': parent_account.id})
-            except (exceptions.Warning, except_orm, except_osv) as ex:
+            except (exceptions.Warning, exceptions.except_orm) as ex:
                 log.add(_("Exception setting the parent of account %s "
                           "children: %s - %s.\n") % (parent_account.code,
                                                      ex.name, ex.value), True)
@@ -1093,7 +1111,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     account = account_obj.create(vals)
                     mapping_accounts[account_template] = account
                     log.add(_("Created account %s.\n") % vals['code'])
-                except (exceptions.Warning, except_orm, except_osv) as ex:
+                except (exceptions.Warning, exceptions.except_orm) as ex:
                     log.add(_("Exception creating account %s: %s - %s.\n") %
                             (vals['code'], ex.name, ex.value), True)
             else:
@@ -1104,7 +1122,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 try:
                     account.write(vals)
                     log.add(_("Updated account %s.\n") % code)
-                except (exceptions.Warning, except_orm, except_osv) as ex:
+                except (exceptions.Warning, exceptions.except_orm) as ex:
                     log.add(_("Exception writing account %s: %s - %s.\n") %
                             (code, ex.name, ex.value), True)
             # Set this account as the parent of the accounts that seem to

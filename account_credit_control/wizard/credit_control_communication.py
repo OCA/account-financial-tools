@@ -81,13 +81,14 @@ class CreditCommunication(models.TransientModel):
         balance_field = 'credit_control_line_ids.balance_due'
         return sum(self.mapped(balance_field))
 
-    @api.one
+    @api.multi
     @api.depends('credit_control_line_ids',
                  'credit_control_line_ids.amount_due',
                  'credit_control_line_ids.balance_due')
     def _compute_total(self):
-        self.total_invoiced = self._get_total()
-        self.total_due = self._get_total_due()
+        for rec in self:
+            rec.total_invoiced = rec._get_total()
+            rec.total_due = rec._get_total_due()
 
     @api.model
     @api.returns('self', lambda value: value.id)

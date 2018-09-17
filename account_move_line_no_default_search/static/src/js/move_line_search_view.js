@@ -1,13 +1,6 @@
-/*
-
-   Copyright (C) 2013 Therp BV
-   License: GNU AFFERO GENERAL PUBLIC LICENSE
-            Version 3 or any later version
-
-  Disable default search on the default journal and period
-  in the javascript search extension on move lines in
-  openobject-addons/account/static/src/js/account_move_line_quickadd.js
-*/     
+// -*- coding: utf-8 -*-
+// Copyright 2013 Therp BV <https://therp.nl>
+// License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 openerp.account_move_line_no_default_search = function (instance) {
     instance.web.account.QuickAddListView.include({
         start: function() {

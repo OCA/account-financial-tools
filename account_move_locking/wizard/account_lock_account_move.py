@@ -18,19 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##############################################################################
 
-from openerp import fields, models, api, _, exceptions
+from openerp import fields, models, api, _
+from openerp.exceptions import ValidationError
 
 
-class lock_account_move(models.TransientModel):
+class LockAccountMove(models.TransientModel):
     _name = "lock.account.move"
     _description = "Lock Account Move"
 
     journal_ids = fields.Many2many('account.journal',
-                                   rel='wizard_lock_account_move_journal',
+                                   rel='wizard_LockAccountMove_journal',
                                    string='Journal',
                                    required=True)
     period_ids = fields.Many2many('account.period',
-                                  rel='wizard_lock_account_move_period',
+                                  rel='wizard_LockAccountMove_period',
                                   string='Period',
                                   required=True,
                                   domain=[('state', '<>', 'done')])
@@ -46,17 +47,15 @@ class lock_account_move(models.TransientModel):
                                        self.period_ids.ids)],
                                      order='date')
         if draft_move:
-            raise exceptions.Warning(_('Warning!'),
-                                     _('Unposted move in period/jounal \
-                                       selected, please post it before \
-                                       locking them'))
+            raise ValidationError(_('Unposted move in period/jounal \
+                                    selected, please post it before \
+                                    locking them'))
         move = obj_move.search([('state', '=', 'posted'),
                                 ('locked', '=', False),
                                 ('journal_id', 'in', self.journal_ids.ids),
                                 ('period_id', 'in', self.period_ids.ids)],
                                order='date')
         if not move:
-            raise exceptions.Warning(_('Warning!'),
-                                     _('No move to locked found'))
+            raise ValidationError(_('No move to locked found'))
         move.write({'locked': True})
         return {'type': 'ir.actions.act_window_close'}

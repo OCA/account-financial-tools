@@ -28,7 +28,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class RO_BNR_getter(Currency_getter_interface):
+class ROBNRGetter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface for BNR service"""
 
     def rate_retrieve(self, dom, ns, curr):
@@ -44,7 +44,7 @@ class RO_BNR_getter(Currency_getter_interface):
         try:
             res['rate_ref'] = float(dom.xpath(xpath_rate_ref,
                                               namespaces=ns)[0])
-        except:
+        except ValueError:
             res['rate_ref'] = 1
         return res
 
