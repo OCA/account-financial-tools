@@ -6,14 +6,17 @@
 # © 2015 Antonio Espinosa <antonioea@tecnativa.com>
 # © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # © 2016 Jacques-Etienne Baudoux <je@bcim.be>
+# Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _, tools
+from odoo import _, api, exceptions, fields, models, tools
+from odoo.tools import config
 from contextlib import closing
 from cStringIO import StringIO
 import logging
 
 _logger = logging.getLogger(__name__)
+EXCEPTION_TEXT = u"Traceback (most recent call last)"
 
 
 class WizardUpdateChartsAccounts(models.TransientModel):
@@ -76,12 +79,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     new_accounts = fields.Integer(
         string='New accounts',
         compute="_compute_new_accounts_count")
+    rejected_new_account_number = fields.Integer()
     new_fps = fields.Integer(
         string='New fiscal positions',
         compute="_compute_new_fps_count")
     updated_taxes = fields.Integer(
         string='Updated taxes',
         compute="_compute_updated_taxes_count")
+    rejected_updated_account_number = fields.Integer()
     updated_accounts = fields.Integer(
         string='Updated accounts',
         compute="_compute_updated_accounts_count")
@@ -115,7 +120,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.depends('account_ids')
     def _compute_new_accounts_count(self):
         self.new_accounts = len(
-            self.account_ids.filtered(lambda x: x.type == 'new'))
+            self.account_ids.filtered(lambda x: x.type == 'new')
+        ) - self.rejected_new_account_number
 
     @api.multi
     @api.depends('fiscal_position_ids')
@@ -133,7 +139,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.depends('account_ids')
     def _compute_updated_accounts_count(self):
         self.updated_accounts = len(
-            self.account_ids.filtered(lambda x: x.type == 'updated'))
+            self.account_ids.filtered(lambda x: x.type == 'updated')
+        ) - self.rejected_updated_account_number
 
     @api.multi
     @api.depends('fiscal_position_ids')
@@ -208,30 +215,35 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def action_update_records(self):
         """Action that creates/updates/deletes the selected elements."""
         self = self.with_context(lang=self.lang)
-
+        self.rejected_new_account_number = 0
+        self.rejected_updated_account_number = 0
         with closing(StringIO()) as log_output:
             handler = logging.StreamHandler(log_output)
             _logger.addHandler(handler)
-
             # Create or update the records.
             if self.update_tax:
                 self._update_taxes()
+            perform_rest = True
             if self.update_account:
                 self._update_accounts()
-            if self.update_fiscal_position:
+                if (EXCEPTION_TEXT in log_output.getvalue() and
+                        not self.continue_on_errors):  # Abort early
+                    perform_rest = False
+            # Clear this cache for avoiding incorrect account hits (as it was
+            # queried before account creation)
+            self.find_account_by_templates.clear_cache(self)
+            if self.update_tax and perform_rest:
+                self._update_taxes_pending_for_accounts()
+            if self.update_fiscal_position and perform_rest:
                 self._update_fiscal_positions()
-
             # Store new chart in the company
             self.company_id.chart_template_id = self.chart_template_id
-
             _logger.removeHandler(handler)
             self.log = log_output.getvalue()
-
         # Check if errors where detected and wether we should stop.
-        if self.log and not self.continue_on_errors:
+        if EXCEPTION_TEXT in self.log and not self.continue_on_errors:
             raise exceptions.Warning(
                 _("One or more errors detected!\n\n%s") % self.log)
-
         # Store the data and go to the next step.
         self.state = 'done'
         return self._reopen()
@@ -295,11 +307,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             pos_id = self.find_fp_by_templates(tpl.position_id)
             src_id = self.find_account_by_templates(tpl.account_src_id)
             dest_id = self.find_account_by_templates(tpl.account_dest_id)
-            mappings = self.env["account.fiscal.position.account"].search([
+            existing = self.env["account.fiscal.position.account"].search([
                 ("position_id", "=", pos_id),
                 ("account_src_id", "=", src_id),
+                ("account_dest_id", "=", dest_id),
             ])
-            existing = mappings.filtered(lambda x: x.account_dest_id == dest)
             if not existing:
                 # create a new mapping
                 result.append((0, 0, {
@@ -322,11 +334,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             pos_id = self.find_fp_by_templates(tpl.position_id)
             src_id = self.find_tax_by_templates(tpl.tax_src_id)
             dest_id = self.find_tax_by_templates(tpl.tax_dest_id)
-            mappings = self.env["account.fiscal.position.tax"].search([
+            existing = self.env["account.fiscal.position.tax"].search([
                 ("position_id", "=", pos_id),
                 ("tax_src_id", "=", src_id),
+                ("tax_dest_id", "=", dest_id),
             ])
-            existing = mappings.filtered(lambda x: x.tax_dest_id.id == dest_id)
             if not existing:
                 # create a new mapping
                 result.append((0, 0, {
@@ -342,40 +354,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return result
 
     @api.model
-    @tools.ormcache("template")
-    def fields_to_ignore(self, template):
+    @tools.ormcache("name")
+    def fields_to_ignore(self, template, name):
         """Get fields that will not be used when checking differences.
 
-        :param str template:
-            The template record.
-
-        :return set:
-            Fields to ignore in diff.
+        :param str template: A template record.
+        :param str name: The name of the template model.
+        :return set: Fields to ignore in diff.
         """
-        specials = {
+        specials_mapping = {
+            "account.tax.template": {
+                "children_tax_ids",
+            },
             "account.account.template": {
                 "code",
             },
-            "account.tax.template": {
-                "account_id",
-                "refund_account_id",
-            }
         }
-        to_include = {
-            "account.fiscal.position.template": [
-                'tax_ids',
-                'account_ids',
-            ],
-        }
-        specials = ({"display_name", "__last_update"} |
-                    specials.get(template._name, set()))
-        for key, field in template._fields.iteritems():
-            if (template._name in to_include and
-                    key in to_include[template._name]):
-                continue
-            if ".template" in field.get_description(self.env).get(
-                    "relation", ""):
-                specials.add(key)
+        specials = ({"display_name", "__last_update", "company_id"} |
+                    specials_mapping.get(name, set()))
         return set(models.MAGIC_COLUMNS) | specials
 
     @api.model
@@ -391,43 +387,44 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             Fields that are different in both records, and the expected value.
         """
         result = dict()
-        ignore = self.fields_to_ignore(template)
+        ignore = self.fields_to_ignore(template, template._name)
         for key, field in template._fields.iteritems():
             if key in ignore:
                 continue
-            relation = expected = t = None
-            # Code must be padded to check equality
-            if key == "code":
-                expected = self.padded_code(template.code)
+            expected = t = None
             # Translate template records to reals for comparison
-            else:
-                relation = field.get_description(self.env).get("relation", "")
-                if relation:
-                    if ".tax.template" in relation:
-                        t = "tax"
-                    elif ".account.template" in relation:
-                        t = "account"
-                    if t:
-                        find = getattr(
-                            self,
-                            "find_%s%s_by_templates" % (
-                                "fp_" if ".fiscal.position" in relation
-                                else "",
-                                t))
-                        if ".fiscal.position" in relation:
-                            # Special case
-                            expected = find(template[key], real[key])
-                        else:
-                            expected = find(template[key])
+            relation = field.get_description(self.env).get("relation", "")
+            if relation:
+                if ".tax.template" in relation:
+                    t = "tax"
+                elif ".account.template" in relation:
+                    t = "account"
+                if t:
+                    find = getattr(
+                        self,
+                        "find_%s%s_by_templates" % (
+                            "fp_" if ".fiscal.position" in relation
+                            else "",
+                            t))
+                    if ".fiscal.position" in relation:
+                        # Special case: if something is returned, then
+                        # there's any difference, so it will get non equal
+                        # when comparing, although we get the warning
+                        # "Comparing apples with oranges"
+                        expected = find(template[key], real[key])
+                    else:
+                        exp_id = find(template[key])
+                        expected = self.env[relation[:-9]].browse(exp_id)
             # Register detected differences
             try:
-                if not relation:
-                    if expected is not None and expected != real[key]:
+                if expected is not None:
+                    if expected != [] and expected != real[key]:
                         result[key] = expected
-                    elif template[key] != real[key]:
-                        result[key] = template[key]
-                elif expected:
-                    result[key] = expected
+                elif template[key] != real[key]:
+                    result[key] = template[key]
+                if isinstance(result.get(key, False), models.Model):
+                    # Avoid to cache recordset references
+                    result[key] = result[key].id
             except KeyError:
                 pass
         return result
@@ -464,12 +461,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Search for, and load, tax templates to create/update/delete."""
         found_taxes_ids = []
         self.tax_ids.unlink()
-
         # Search for changes between template and real tax
         for template in self.chart_template_ids.mapped("tax_template_ids"):
             # Check if the template matches a real tax
             tax_id = self.find_tax_by_templates(template)
-
             if not tax_id:
                 # Tax to be created
                 self.tax_ids.create({
@@ -480,7 +475,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 })
             else:
                 found_taxes_ids.append(tax_id)
-
                 # Check the tax for changes
                 tax = self.env['account.tax'].browse(tax_id)
                 notes = self.diff_notes(template, tax)
@@ -493,14 +487,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         'update_tax_id': tax_id,
                         'notes': notes,
                     })
-
         # search for taxes not in the template and propose them for
         # deactivation
-        taxes_to_delete = self.env['account.tax'].search(
+        taxes_to_deactivate = self.env['account.tax'].search(
             [('company_id', '=', self.company_id.id),
              ("id", "not in", found_taxes_ids),
              ("active", "=", True)])
-        for tax in taxes_to_delete:
+        for tax in taxes_to_deactivate:
             self.tax_ids.create({
                 'update_chart_wizard_id': self.id,
                 'type': 'deleted',
@@ -512,11 +505,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def _find_accounts(self):
         """Load account templates to create/update."""
         self.account_ids.unlink()
-
         for template in self.chart_template_ids.mapped("account_ids"):
             # Search for a real account that matches the template
             account_id = self.find_account_by_templates(template)
-
             if not account_id:
                 # Account to be created
                 self.account_ids.create({
@@ -581,35 +572,20 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Deactivate tax
             if wiz_tax.type == 'deleted':
                 tax.active = False
-                _logger.debug(_("Deactivated tax %s."), tax)
+                _logger.info(_("Deactivated tax %s."), "'%s'" % tax.name)
                 continue
-
             # Create tax
             if wiz_tax.type == 'new':
-                tax = template._generate_tax(self.company_id)
-                tax = tax['tax_template_to_tax'][template.id]
-                _logger.debug(_("Created tax %s."), template.name)
-
+                template._generate_tax(self.company_id)
+                _logger.info(_("Created tax %s."), "'%s'" % template.name)
             # Update tax
             else:
                 for key, value in self.diff_fields(template, tax).iteritems():
+                    # We defer update because account might not be created yet
+                    if key in {'account_id', 'refund_account_id'}:
+                        continue
                     tax[key] = value
-                _logger.debug(_("Updated tax %s."), template.name)
-            wiz_tax.update_tax_id = tax
-
-    def _create_account_from_template(self, account_template):
-        return self.env["account.account"].create({
-            'name': account_template.name,
-            'currency_id': account_template.currency_id,
-            'code': self.padded_code(account_template.code),
-            'user_type_id': account_template.user_type_id.id,
-            'reconcile': account_template.reconcile,
-            'note': account_template.note,
-            'tax_ids': [
-                (6, 0, [self.find_tax_by_templates(account_template.tax_ids)]),
-            ],
-            'company_id': self.company_id.id,
-        })
+                _logger.info(_("Updated tax %s."), "'%s'" % template.name)
 
     @api.multi
     def _update_accounts(self):
@@ -619,18 +595,35 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                  wiz_account.account_id)
             if wiz_account.type == 'new':
                 # Create the account
+                tax_template_ref = {
+                    tax.id: self.find_tax_by_templates(tax) for tax in
+                    template.tax_ids
+                }
+                vals = self.chart_template_id._get_account_vals(
+                    self.company_id, template,
+                    self.padded_code(template.code),
+                    tax_template_ref,
+                )
                 try:
                     with self.env.cr.savepoint():
-                        account = (
-                            self._create_account_from_template(
-                                template))
-                        _logger.debug(
+                        self.chart_template_id.create_record_with_xmlid(
+                            self.company_id, template, 'account.account', vals,
+                        )
+                        _logger.info(
                             _("Created account %s."),
-                            account.code)
-                except exceptions.except_orm:
-                    _logger.exception(
-                        _("Exception creating account %s."),
-                        template.code)
+                            "'%s - %s'" % (vals['code'], vals['name']),
+                        )
+                except Exception:
+                    self.rejected_new_account_number += 1
+                    if config['test_enable']:
+                        _logger.info(EXCEPTION_TEXT)
+                    else:  # pragma: no cover
+                        _logger.exception(
+                            "ERROR: " + _("Exception creating account %s."),
+                            "'%s - %s'" % (template.code, template.name),
+                        )
+                    if not self.continue_on_errors:
+                        break
             else:
                 # Update the account
                 try:
@@ -638,15 +631,21 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         for key, value in (self.diff_fields(template, account)
                                            .iteritems()):
                             account[key] = value
-                            _logger.debug(_("Updated account %s."), account)
-                except exceptions.except_orm:
-                    _logger.exception(
-                        _("Exception writing account %s."),
-                        account)
-            wiz_account.update_account_id = account
-
-        if self.update_tax:
-            self._update_taxes_pending_for_accounts()
+                            _logger.info(
+                                _("Updated account %s."),
+                                "'%s - %s'" % (account.code, account.name),
+                            )
+                except Exception:
+                    self.rejected_updated_account_number += 1
+                    if config['test_enable']:
+                        _logger.info(EXCEPTION_TEXT)
+                    else:  # pragma: no cover
+                        _logger.exception(
+                            "ERROR: " + _("Exception writing account %s."),
+                            "'%s - %s'" % (account.code, account.name),
+                        )
+                    if not self.continue_on_errors:
+                        break
 
     @api.multi
     def _update_taxes_pending_for_accounts(self):
@@ -657,10 +656,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         for wiz_tax in self.tax_ids:
             if wiz_tax.type == "deleted" or not wiz_tax.update_tax_id:
                 continue
-
-            for field in ("account_id", "refund_account_id"):
-                wiz_tax.update_tax_id[field] = (
-                    self.find_account_by_templates(wiz_tax.tax_id[field]))
+            template = wiz_tax.tax_id
+            tax = wiz_tax.update_tax_id
+            done = False
+            for key, value in self.diff_fields(template, tax).iteritems():
+                if key in {'account_id', 'refund_account_id'}:
+                    tax[key] = value
+                    done = True
+            if done:
+                _logger.info(_("Post-updated tax %s."), "'%s'" % tax.name)
 
     def _prepare_fp_vals(self, fp_template):
         # Tax mappings
@@ -698,16 +702,17 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                             wiz_fp.fiscal_position_id)
             if wiz_fp.type == 'new':
                 # Create a new fiscal position
-                fp = self.env['account.fiscal.position'].create(
-                    self._prepare_fp_vals(template))
+                self.chart_template_id.create_record_with_xmlid(
+                    self.company_id, template, 'account.fiscal.position',
+                    self._prepare_fp_vals(template),
+                )
             else:
                 # Update the given fiscal position
                 for key, value in self.diff_fields(template, fp).iteritems():
                     fp[key] = value
-            wiz_fp.update_fiscal_position_id = fp
-            _logger.debug(
+            _logger.info(
                 _("Created or updated fiscal position %s."),
-                template.name)
+                "'%s'" % template.name)
 
 
 class WizardUpdateChartsAccountsTax(models.TransientModel):
