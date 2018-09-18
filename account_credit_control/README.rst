@@ -35,6 +35,8 @@ On each generated line, you have many choices:
  * Send a email
  * Print a letter
  * Change the state (so you can ignore or reopen lines)
+ * Mark a line as Manually Overridden. The line will get the ignored state when a second credit control run is done.
+ * Mark one line as Manual followup will also mark all the lines of the partner. The partner will be visible in "Do Manual Follow-ups".
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
