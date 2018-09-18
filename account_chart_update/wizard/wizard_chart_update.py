@@ -262,7 +262,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                          ("type_tax_use", "=", template.type_tax_use)],
                         limit=1)
             result |= single
-        return result
+        return result[:1].id
 
     @api.model
     @tools.ormcache("code")
@@ -276,7 +276,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Find an account that matches the template."""
         return self.env['account.account'].search(
             [('code', 'in', map(self.padded_code, templates.mapped("code"))),
-             ('company_id', '=', self.company_id.id)])
+             ('company_id', '=', self.company_id.id)],
+        ).id
 
     @api.multi
     @tools.ormcache("templates")
@@ -284,27 +285,27 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Find a real fiscal position from a template."""
         return self.env['account.fiscal.position'].search(
             [('name', 'in', templates.mapped("name")),
-             ('company_id', '=', self.company_id.id)], limit=1)
+             ('company_id', '=', self.company_id.id)], limit=1).id
 
     @api.multi
     @tools.ormcache("templates", "current_fp_accounts")
     def find_fp_account_by_templates(self, templates, current_fp_accounts):
         result = []
         for tpl in templates:
-            pos = self.find_fp_by_templates(tpl.position_id)
-            src = self.find_account_by_templates(tpl.account_src_id)
-            dest = self.find_account_by_templates(tpl.account_dest_id)
+            pos_id = self.find_fp_by_templates(tpl.position_id)
+            src_id = self.find_account_by_templates(tpl.account_src_id)
+            dest_id = self.find_account_by_templates(tpl.account_dest_id)
             mappings = self.env["account.fiscal.position.account"].search([
-                ("position_id", "=", pos.id),
-                ("account_src_id", "=", src.id),
+                ("position_id", "=", pos_id),
+                ("account_src_id", "=", src_id),
             ])
             existing = mappings.filtered(lambda x: x.account_dest_id == dest)
             if not existing:
                 # create a new mapping
                 result.append((0, 0, {
-                    'position_id': pos.id,
-                    'account_src_id': src.id,
-                    'account_dest_id': dest.id,
+                    'position_id': pos_id,
+                    'account_src_id': src_id,
+                    'account_dest_id': dest_id,
                 }))
             else:
                 current_fp_accounts -= existing
@@ -318,20 +319,20 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def find_fp_tax_by_templates(self, templates, current_fp_taxes):
         result = []
         for tpl in templates:
-            pos = self.find_fp_by_templates(tpl.position_id)
-            src = self.find_tax_by_templates(tpl.tax_src_id)
-            dest = self.find_tax_by_templates(tpl.tax_dest_id)
+            pos_id = self.find_fp_by_templates(tpl.position_id)
+            src_id = self.find_tax_by_templates(tpl.tax_src_id)
+            dest_id = self.find_tax_by_templates(tpl.tax_dest_id)
             mappings = self.env["account.fiscal.position.tax"].search([
-                ("position_id", "=", pos.id),
-                ("tax_src_id", "=", src.id),
+                ("position_id", "=", pos_id),
+                ("tax_src_id", "=", src_id),
             ])
-            existing = mappings.filtered(lambda x: x.tax_dest_id == dest)
+            existing = mappings.filtered(lambda x: x.tax_dest_id.id == dest_id)
             if not existing:
                 # create a new mapping
                 result.append((0, 0, {
-                    'position_id': pos.id,
-                    'tax_src_id': src.id,
-                    'tax_dest_id': dest.id,
+                    'position_id': pos_id,
+                    'tax_src_id': src_id,
+                    'tax_dest_id': dest_id,
                 }))
             else:
                 current_fp_taxes -= existing
@@ -461,15 +462,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def _find_taxes(self):
         """Search for, and load, tax templates to create/update/delete."""
-        found_taxes = self.env["account.tax"]
+        found_taxes_ids = []
         self.tax_ids.unlink()
 
         # Search for changes between template and real tax
         for template in self.chart_template_ids.mapped("tax_template_ids"):
             # Check if the template matches a real tax
-            tax = self.find_tax_by_templates(template)
+            tax_id = self.find_tax_by_templates(template)
 
-            if not tax:
+            if not tax_id:
                 # Tax to be created
                 self.tax_ids.create({
                     'tax_id': template.id,
@@ -478,9 +479,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     'notes': _('Name or description not found.'),
                 })
             else:
-                found_taxes |= tax
+                found_taxes_ids.append(tax_id)
 
                 # Check the tax for changes
+                tax = self.env['account.tax'].browse(tax_id)
                 notes = self.diff_notes(template, tax)
                 if notes:
                     # Tax to be updated
@@ -488,7 +490,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         'tax_id': template.id,
                         'update_chart_wizard_id': self.id,
                         'type': 'updated',
-                        'update_tax_id': tax.id,
+                        'update_tax_id': tax_id,
                         'notes': notes,
                     })
 
@@ -496,7 +498,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         # deactivation
         taxes_to_delete = self.env['account.tax'].search(
             [('company_id', '=', self.company_id.id),
-             ("id", "not in", found_taxes.ids),
+             ("id", "not in", found_taxes_ids),
              ("active", "=", True)])
         for tax in taxes_to_delete:
             self.tax_ids.create({
@@ -513,9 +515,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
         for template in self.chart_template_ids.mapped("account_ids"):
             # Search for a real account that matches the template
-            account = self.find_account_by_templates(template)
+            account_id = self.find_account_by_templates(template)
 
-            if not account:
+            if not account_id:
                 # Account to be created
                 self.account_ids.create({
                     'account_id': template.id,
@@ -525,6 +527,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 })
             else:
                 # Check the account for changes
+                account = self.env['account.account'].browse(account_id)
                 notes = self.diff_notes(template, account)
                 if notes:
                     # Account to be updated
@@ -532,7 +535,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         'account_id': template.id,
                         'update_chart_wizard_id': self.id,
                         'type': 'updated',
-                        'update_account_id': account.id,
+                        'update_account_id': account_id,
                         'notes': notes,
                     })
 
@@ -547,8 +550,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             [('chart_template_id', 'in', self.chart_template_ids.ids)])
         for template in templates:
             # Search for a real fiscal position that matches the template
-            fp = self.find_fp_by_templates(template)
-            if not fp:
+            fp_id = self.find_fp_by_templates(template)
+            if not fp_id:
                 # Fiscal position to be created
                 wiz_fp.create({
                     'fiscal_position_id': template.id,
@@ -558,6 +561,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 })
             else:
                 # Check the fiscal position for changes
+                fp = self.env['account.fiscal.position'].browse(fp_id)
                 notes = self.diff_notes(template, fp)
                 if notes:
                     # Fiscal position template to be updated
@@ -565,7 +569,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         'fiscal_position_id': template.id,
                         'update_chart_wizard_id': self.id,
                         'type': 'updated',
-                        'update_fiscal_position_id': fp.id,
+                        'update_fiscal_position_id': fp_id,
                         'notes': notes,
                     })
 
@@ -602,8 +606,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             'reconcile': account_template.reconcile,
             'note': account_template.note,
             'tax_ids': [
-                (6, 0,
-                 self.find_tax_by_templates(account_template.tax_ids).ids),
+                (6, 0, [self.find_tax_by_templates(account_template.tax_ids)]),
             ],
             'company_id': self.company_id.id,
         })
@@ -665,10 +668,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         for fp_tax in fp_template.tax_ids:
             # Create the fp tax mapping
             tax_mapping.append({
-                'tax_src_id': self.find_tax_by_templates(
-                    fp_tax.tax_src_id).id,
-                'tax_dest_id': self.find_tax_by_templates(
-                    fp_tax.tax_dest_id).id,
+                'tax_src_id': self.find_tax_by_templates(fp_tax.tax_src_id),
+                'tax_dest_id': self.find_tax_by_templates(fp_tax.tax_dest_id),
             })
         # Account mappings
         account_mapping = []
@@ -676,11 +677,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # Create the fp account mapping
             account_mapping.append({
                 'account_src_id': (
-                    self.find_account_by_templates(
-                        fp_account.account_src_id).id),
+                    self.find_account_by_templates(fp_account.account_src_id)
+                ),
                 'account_dest_id': (
-                    self.find_account_by_templates(
-                        fp_account.account_dest_id).id),
+                    self.find_account_by_templates(fp_account.account_dest_id)
+                ),
             })
         return {
             'company_id': self.company_id.id,
