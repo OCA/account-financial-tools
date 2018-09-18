@@ -303,7 +303,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Find a real fiscal position from a template."""
         return self.env['account.fiscal.position'].search(
             [('name', 'in', templates.mapped("name")),
-             ('company_id', '=', self.company_id.id)])
+             ('company_id', '=', self.company_id.id)], limit=1)
 
     @api.multi
     @tools.ormcache("templates", "current_fp_accounts")
