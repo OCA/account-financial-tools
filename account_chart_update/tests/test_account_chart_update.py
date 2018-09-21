@@ -89,6 +89,12 @@ class TestAccountChartUpdate(common.HttpCase):
         self.tax_group = self.env['account.tax.group'].create({
             'name': 'Test tax group',
         })
+        self.account_tag_1 = self.env['account.account.tag'].create({
+            'name': 'Test account tag 1',
+        })
+        self.account_tag_2 = self.env['account.account.tag'].create({
+            'name': 'Test account tag 2',
+        })
         self.company = self.env['res.company'].create({
             'name': 'Test account_chart_update company',
             'currency_id': self.chart_template.currency_id.id,
@@ -212,6 +218,9 @@ class TestAccountChartUpdate(common.HttpCase):
         self.tax_template.tax_group_id = self.tax_group.id
         self.tax_template.refund_account_id = new_account_tmpl.id
         self.account_template.name = "Other name"
+        self.account_template.tag_ids = [
+            (6, 0, [self.account_tag_1.id, self.account_tag_2.id]),
+        ]
         self.fp_template.note = "Test note"
         self.fp_template.account_ids.account_dest_id = new_account_tmpl.id
         self.fp_template.tax_ids.tax_dest_id = self.tax_template.id
@@ -237,6 +246,8 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(self.tax.tax_group_id, self.tax_group)
         self.assertEqual(self.tax.refund_account_id, new_account)
         self.assertEqual(self.account.name, self.account_template.name)
+        self.assertIn(self.account_tag_1, self.account.tag_ids)
+        self.assertIn(self.account_tag_2, self.account.tag_ids)
         self.assertEqual(self.fp.note, self.fp_template.note)
         self.assertEqual(self.fp.account_ids.account_dest_id, new_account)
         self.assertEqual(self.fp.tax_ids.tax_dest_id, self.tax)

@@ -422,8 +422,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         result[key] = expected
                 elif template[key] != real[key]:
                     result[key] = template[key]
-                if isinstance(result.get(key, False), models.Model):
-                    # Avoid to cache recordset references
+                # Avoid to cache recordset references
+                if isinstance(real._fields[key], fields.Many2many):
+                    result[key] = [(6, 0, result[key].ids)]
+                elif isinstance(real._fields[key], fields.Many2one):
                     result[key] = result[key].id
             except KeyError:
                 pass
