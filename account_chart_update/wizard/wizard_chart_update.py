@@ -15,7 +15,7 @@ from io import StringIO
 import logging
 
 _logger = logging.getLogger(__name__)
-EXCEPTION_TEXT = u"Traceback (most recent call last)"
+EXCEPTION_TEXT = "Traceback (most recent call last)"
 
 
 class WizardUpdateChartsAccounts(models.TransientModel):
@@ -286,7 +286,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     def find_account_by_templates(self, templates):
         """Find an account that matches the template."""
         return self.env['account.account'].search(
-            [('code', 'in', map(self.padded_code, templates.mapped("code"))),
+            [('code', 'in',
+              list(map(self.padded_code, templates.mapped("code")))),
              ('company_id', '=', self.company_id.id)],
         ).id
 
@@ -387,7 +388,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         result = dict()
         ignore = self.fields_to_ignore(template, template._name)
-        for key, field in template._fields.iteritems():
+        for key, field in template._fields.items():
             if key in ignore:
                 continue
             expected = t = None
@@ -444,7 +445,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         result = list()
         different_fields = sorted(
             template._fields[f].get_description(self.env)["string"]
-            for f in list(self.diff_fields(template, real).keys()))
+            for f in self.diff_fields(template, real).keys())
         if different_fields:
             result.append(
                 _("Differences in these fields: %s.") %
@@ -580,7 +581,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 _logger.info(_("Created tax %s."), "'%s'" % template.name)
             # Update tax
             else:
-                for key, value in self.diff_fields(template, tax).iteritems():
+                for key, value in self.diff_fields(template, tax).items():
                     # We defer update because account might not be created yet
                     if key in {'account_id', 'refund_account_id'}:
                         continue
@@ -659,7 +660,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             template = wiz_tax.tax_id
             tax = wiz_tax.update_tax_id
             done = False
-            for key, value in self.diff_fields(template, tax).iteritems():
+            for key, value in self.diff_fields(template, tax).items():
                 if key in {'account_id', 'refund_account_id'}:
                     tax[key] = value
                     done = True
