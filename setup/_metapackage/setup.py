@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo11-addon-account_balance_line',
+        'odoo11-addon-account_chart_update',
         'odoo11-addon-account_check_deposit',
         'odoo11-addon-account_credit_control',
         'odoo11-addon-account_credit_control_dunning_fees',
