@@ -3,6 +3,7 @@
 
 from odoo import fields
 from odoo.tests import common
+from odoo.tools import mute_logger
 
 
 class TestAccountChartUpdate(common.HttpCase):
@@ -126,6 +127,7 @@ class TestAccountChartUpdate(common.HttpCase):
             'lang': 'en_US'
         }
 
+    @mute_logger('odoo.sql_db')
     def test_chart_update(self):
         # Test no changes
         wizard = self.wizard_obj.create(self.wizard_vals)
