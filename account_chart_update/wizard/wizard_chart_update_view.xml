@@ -25,7 +25,7 @@
                 <field name="company_id"
                        attrs="{'invisible':[('state','!=','init')]}"
                         />
-                <field name="code_digits" attrs="{'invisible':[('state','!=','init')]}" />
+                <field name="code_digits" invisible="1" />
                 <field name="chart_template_id"
                        domain="[('visible', '=', True)]"
                        attrs="{'invisible': [('state','!=','init')], 'required': True}"
