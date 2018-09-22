@@ -226,7 +226,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             perform_rest = True
             if self.update_account:
                 self._update_accounts()
-                if (EXCEPTION_TEXT in log_output.getvalue() and
+                if (EXCEPTION_TEXT in log_output.getvalue().decode('utf-8') and
                         not self.continue_on_errors):  # Abort early
                     perform_rest = False
             # Clear this cache for avoiding incorrect account hits (as it was
