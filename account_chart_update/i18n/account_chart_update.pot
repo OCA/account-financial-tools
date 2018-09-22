@@ -24,6 +24,11 @@ msgid "<span states=\"init,ready\"> or </span>"
 msgstr ""
 
 #. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_field_ids
+msgid "Account fields"
+msgstr ""
+
+#. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account_account_id
 msgid "Account template"
 msgstr ""
@@ -85,7 +90,7 @@ msgid "Create/Update"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:616
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:679
 #, python-format
 msgid "Created account %s."
 msgstr ""
@@ -107,19 +112,19 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:717
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:780
 #, python-format
 msgid "Created or updated fiscal position %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:583
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:646
 #, python-format
 msgid "Created tax %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:578
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:641
 #, python-format
 msgid "Deactivated tax %s."
 msgstr ""
@@ -135,7 +140,7 @@ msgid "Determines where the tax is selectable. Note : 'None' means a tax can't b
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:453
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:516
 #, python-format
 msgid "Differences in these fields: %s."
 msgstr ""
@@ -149,13 +154,13 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:625
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:688
 #, python-format
 msgid "Exception creating account %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:647
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:710
 #, python-format
 msgid "Exception writing account %s."
 msgstr ""
@@ -173,6 +178,21 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_update_tax
 msgid "Existing taxes are updated. Taxes are searched by name."
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Field options"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model,name:account_chart_update.model_ir_model_fields
+msgid "Fields"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_fp_field_ids
+msgid "Fiscal position fields"
 msgstr ""
 
 #. module: account_chart_update
@@ -199,6 +219,16 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_lang
 msgid "For records searched by name (taxes, fiscal positions), the template name will be matched against the record name on this language."
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "General options"
+msgstr ""
+
+#. module: account_chart_update
+#: model:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
+msgid "Here you can select the fields you want to check if they have been updated in the templates."
 msgstr ""
 
 #. module: account_chart_update
@@ -264,7 +294,7 @@ msgid "Messages and Errors"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:477
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:540
 #, python-format
 msgid "Name or description not found."
 msgstr ""
@@ -297,13 +327,13 @@ msgid "Next"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:520
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:583
 #, python-format
 msgid "No account found with this code."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:554
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:617
 #, python-format
 msgid "No fiscal position found with this name."
 msgstr ""
@@ -326,7 +356,7 @@ msgid "Notes"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:245
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:296
 #, python-format
 msgid "One or more errors detected!\n"
 "\n"
@@ -339,7 +369,7 @@ msgid "Other options"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:670
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:733
 #, python-format
 msgid "Post-updated tax %s."
 msgstr ""
@@ -390,7 +420,12 @@ msgid "Tax Scope"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:458
+#: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_tax_field_ids
+msgid "Tax fields"
+msgstr ""
+
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:521
 #, python-format
 msgid "Tax is disabled."
 msgstr ""
@@ -427,7 +462,7 @@ msgid "This wizard will update your accounts, taxes and fiscal positions accordi
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:504
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:567
 #, python-format
 msgid "To deactivate: not in the template"
 msgstr ""
@@ -487,7 +522,7 @@ msgid "Update taxes"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:638
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:701
 #, python-format
 msgid "Updated account %s."
 msgstr ""
@@ -503,7 +538,7 @@ msgid "Updated fiscal positions"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:591
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:654
 #, python-format
 msgid "Updated tax %s."
 msgstr ""
