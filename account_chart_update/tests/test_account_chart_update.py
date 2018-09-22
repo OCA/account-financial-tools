@@ -135,9 +135,21 @@ class TestAccountChartUpdate(common.HttpCase):
 
     @mute_logger('odoo.sql_db')
     def test_chart_update(self):
-        # Test no changes
         wizard = self.wizard_obj.create(self.wizard_vals)
         wizard.action_find_records()
+        # Test ir.model.fields name_get
+        field = wizard.fp_field_ids[:1]
+        name = field.with_context(account_chart_update=True).name_get()[0]
+        self.assertEqual(name[0], field.id)
+        self.assertEqual(
+            name[1], "%s (%s)" % (field.field_description, field.name),
+        )
+        name = field.name_get()[0]
+        self.assertEqual(name[0], field.id)
+        self.assertEqual(
+            name[1], "%s (%s)" % (field.field_description, field.model),
+        )
+        # Test no changes
         self.assertEqual(wizard.state, 'ready')
         self.assertFalse(wizard.tax_ids)
         self.assertFalse(wizard.account_ids)
@@ -253,6 +265,32 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(self.fp.note, self.fp_template.note)
         self.assertEqual(self.fp.account_ids.account_dest_id, new_account)
         self.assertEqual(self.fp.tax_ids.tax_dest_id, self.tax)
+        wizard.unlink()
+        # Exclude fields from check
+        self.tax_template.description = "Test description 2"
+        self.account_template.name = "Other name 2"
+        self.fp_template.note = "Test note 2"
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        wizard.tax_field_ids -= self.env['ir.model.fields'].search([
+            ('model', '=', 'account.tax.template'),
+            ('name', '=', 'description'),
+        ])
+        wizard.account_field_ids -= self.env['ir.model.fields'].search([
+            ('model', '=', 'account.account.template'),
+            ('name', '=', 'name'),
+        ])
+        wizard.fp_field_ids -= self.env['ir.model.fields'].search([
+            ('model', '=', 'account.fiscal.position.template'),
+            ('name', '=', 'note'),
+        ])
+        wizard.action_find_records()
+        self.assertFalse(wizard.tax_ids)
+        self.assertFalse(wizard.account_ids)
+        self.assertFalse(wizard.fiscal_position_ids)
+        self.tax_template.description = "Test description"
+        self.account_template.name = "Other name"
+        self.fp_template.note = "Test note"
         wizard.unlink()
         # Remove objects
         new_tax_tmpl.unlink()
