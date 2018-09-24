@@ -4,7 +4,7 @@
 
 {
     'name': 'Assets Management',
-    'version': '10.0.3.0.2',
+    'version': '10.0.3.0.3',
     'license': 'AGPL-3',
     'depends': [
         'account_fiscal_year',
