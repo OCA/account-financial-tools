@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-09-25 16:44+0000\n"
+"Last-Translator: Jimmy Ramos <jimmybanegas93@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:67
@@ -52,7 +53,6 @@ msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_balance_type
-#, fuzzy
 msgid "Balance Type"
 msgstr "Tipo de saldo"
 
@@ -94,7 +94,6 @@ msgstr "ID"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_journal_id
-#, fuzzy
 msgid "Journal"
 msgstr "Diario"
 
@@ -115,7 +114,6 @@ msgstr "Última actualización en"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_move_line_ids
-#, fuzzy
 msgid "Move Line"
 msgstr "Apuntes"
 
@@ -168,4 +166,4 @@ msgstr "Debe compensar al menos 2 apuntes."
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "account.move.make.netting"
-msgstr ""
+msgstr "cuenta.asiento.hacer.neteo"
