@@ -277,9 +277,10 @@ class AccountAsset(models.Model):
             self.depreciation_base = purchase_value - salvage_value
         dl_create_line = self.depreciation_line_ids.filtered(
             lambda r: r.type == 'create')
-        dl_create_line.write({
-            'amount': self.depreciation_base,
-            'line_date': self.date_start})
+        if dl_create_line:
+            dl_create_line.write({
+                'amount': self.depreciation_base,
+                'line_date': self.date_start})
 
     @api.onchange('profile_id')
     def _onchange_profile_id(self):
@@ -325,20 +326,7 @@ class AccountAsset(models.Model):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
         if asset.type == 'normal':
-            # create first asset line
-            asset_line_obj = self.env['account.asset.line']
-            line_name = asset._get_depreciation_entry_name(0)
-            asset_line_vals = {
-                'amount': asset.depreciation_base,
-                'asset_id': asset.id,
-                'name': line_name,
-                'line_date': asset.date_start,
-                'init_entry': True,
-                'type': 'create',
-            }
-            asset_line = asset_line_obj.create(asset_line_vals)
-            if self._context.get('create_asset_from_move_line'):
-                asset_line.move_id = self._context['move_id']
+            asset._create_first_asset_line()
         return asset
 
     @api.multi
@@ -352,6 +340,7 @@ class AccountAsset(models.Model):
             if asset_type == 'view' or \
                     self._context.get('asset_validate_from_write'):
                 continue
+            asset._create_first_asset_line()
             if asset.profile_id.open_asset and \
                     self._context.get('create_asset_from_move_line'):
                 asset.compute_depreciation_board()
@@ -359,6 +348,23 @@ class AccountAsset(models.Model):
                 ctx = dict(self._context, asset_validate_from_write=True)
                 asset.with_context(ctx).validate()
         return True
+
+    def _create_first_asset_line(self):
+        self.ensure_one()
+        if self.depreciation_base and not self.depreciation_line_ids:
+            asset_line_obj = self.env['account.asset.line']
+            line_name = self._get_depreciation_entry_name(0)
+            asset_line_vals = {
+                'amount': self.depreciation_base,
+                'asset_id': self.id,
+                'name': line_name,
+                'line_date': self.date_start,
+                'init_entry': True,
+                'type': 'create',
+            }
+            asset_line = asset_line_obj.create(asset_line_vals)
+            if self._context.get('create_asset_from_move_line'):
+                asset_line.move_id = self._context['move_id']
 
     @api.multi
     def unlink(self):
