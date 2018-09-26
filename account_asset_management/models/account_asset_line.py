@@ -157,7 +157,7 @@ class AccountAssetLine(models.Model):
     @api.multi
     def unlink(self):
         for dl in self:
-            if dl.type == 'create':
+            if dl.type == 'create' and dl.amount:
                 raise UserError(_(
                     "You cannot remove an asset line "
                     "of type 'Depreciation Base'."))
@@ -170,7 +170,7 @@ class AccountAssetLine(models.Model):
                 lambda l: l.previous_id == dl and l not in self)
             if next:
                 next.previous_id = previous
-            ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
+        ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
         return super(
             AccountAssetLine, self.with_context(ctx)).unlink()
 
