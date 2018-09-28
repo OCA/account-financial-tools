@@ -3,13 +3,20 @@
 # * account_asset_management_xls
 # 
 # Translators:
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2014
+# Florian Hatat, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-06-03 15:58+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2016-11-13 03:39+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,12 +56,12 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Created by"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Created on"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:488
@@ -80,6 +87,11 @@ msgid "Depreciation Table error for asset %s !"
 msgstr ""
 
 #. module: account_asset_management_xls
+#: field:wiz.account.asset.report,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
 #: model:ir.model,name:account_asset_management_xls.model_wiz_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
@@ -102,17 +114,22 @@ msgstr ""
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Last Updated by"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Last Updated on"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:371

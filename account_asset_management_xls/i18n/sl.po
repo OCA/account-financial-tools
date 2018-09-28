@@ -3,13 +3,40 @@
 # * account_asset_management_xls
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# bossnm11 <bossnm11@gmail.com>, 2014
+# Bruno JOLIVEAU, 2015
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# Chanseok <kcsgoodboy@gmail.com>, 2014
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
+# Guewen Baconnier <guewen.baconnier@camptocamp.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# jeon <bluerespect@nate.com>, 2014
+# Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
+# Kevin Min <gr326887@graded.br>, 2015
+# Kunwoo Kim <crazyabtmath@naver.com>, 2015
+# LEE SI HYEONG <super2451894@gmail.com>, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Pedro Castro Silva <pedrocs@sossia.pt>, 2015
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2015
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# SaFi J. <safi2266@gmail.com>, 2015
+# Sam Ryoo <samryoo@gmail.com>, 2014
+# Seo. Junmin <sof.midnight@live.co.kr>, 2015
+# seungil <luck8778@gmail.com>, 2014
+# SEUNGWON <baeksw0620@gmail.com>, 2014
+# Yael Terrettaz, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 13:26+0000\n"
-"PO-Revision-Date: 2015-07-01 12:24+0000\n"
+"POT-Creation-Date: 2016-05-14 01:07+0000\n"
+"PO-Revision-Date: 2016-05-14 05:08+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -81,6 +108,11 @@ msgid "Depreciation Table error for asset %s !"
 msgstr "Napaka amortizacijske tabele za sredstvo %s !"
 
 #. module: account_asset_management_xls
+#: field:wiz.account.asset.report,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.action_account_asset_report_wizard
 #: model:ir.model,name:account_asset_management_xls.model_wiz_account_asset_report
 #: model:ir.ui.menu,name:account_asset_management_xls.menu_account_asset_report_wizard
@@ -104,6 +136,11 @@ msgstr "Ustvari poročilo"
 #: field:wiz.account.asset.report,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: account_asset_management_xls
+#: field:wiz.account.asset.report,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: account_asset_management_xls
 #: field:wiz.account.asset.report,write_uid:0

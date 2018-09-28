@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<odoo>
+
+  <record id="fixed_asset_import_view_form" model="ir.ui.view">
+    <field name="name">fixed.asset.import.form</field>
+    <field name="model">fixed.asset.import</field>
+    <field name="priority">1</field>
+    <field name="arch" type="xml">
+      <form string="Import File">
+        <group col="4">
+          <separator string="Select your file :" colspan="4"/>
+          <field name="fa_data" filename="aml_fname"/>
+          <field name="fa_fname" readonly="1"/>
+          <newline/>
+          <field name="csv_separator"/>
+          <field name="decimal_separator"/>
+          <field name="codepage"/>
+        </group>
+        <group>
+          <field name="compute_board"/>
+        </group>
+        <footer>
+          <button name="fa_import" string="_Import" type="object" class="oe_highlight"/>
+          or
+          <button string="Cancel" class="oe_link" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="fixed_asset_import_view_form_result" model="ir.ui.view">
+    <field name="name">fixed.asset.import.form.result</field>
+    <field name="model">fixed.asset.import</field>
+    <field name="priority">2</field>
+    <field name="arch" type="xml">
+      <form string="Import File">
+        <separator colspan="4" string="Results :"/>
+        <field name="note" colspan="4" nolabel="1" width="850" height="400"/>
+        <footer>
+          <button string="View Assets" name="view_assets" type="object" class="oe_highlight"/>
+          or
+          <button string="Close" class="oe_link" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="fixed_asset_import_action" model="ir.actions.act_window">
+    <field name="name">Fixed Assets Import</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">fixed.asset.import</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="view_id" ref="fixed_asset_import_view_form"/>
+  </record>
+
+  <menuitem id="fixed_asset_import_menu"
+            parent="account_asset_management.menu_finance_config_assets"
+            action="fixed_asset_import_action" sequence="100"/>
+
+</odoo>
