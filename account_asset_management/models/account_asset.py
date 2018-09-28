@@ -34,7 +34,7 @@ class AccountAsset(models.Model):
         inverse_name='asset_id',
         string='Entries', readonly=True, copy=False)
     move_line_check = fields.Boolean(
-        compute='_compute_move_line_check', type='boolean',
+        compute='_compute_move_line_check',
         string='Has accounting entries')
     name = fields.Char(
         string='Asset Name', size=64, required=True,
@@ -93,7 +93,6 @@ class AccountAsset(models.Model):
     date_start = fields.Date(
         string='Asset Start Date', readonly=True,
         states={'draft': [('readonly', False)]},
-        default=fields.Datetime.now,
         help="You should manually add depreciation lines "
              "with the depreciations of previous fiscal years "
              "if the Depreciation Start Date is different from the date "
@@ -119,8 +118,8 @@ class AccountAsset(models.Model):
         comodel_name='res.partner', string='Partner', readonly=True,
         states={'draft': [('readonly', False)]})
     method = fields.Selection(
-        selection=lambda self: self.env['account.asset.profile'].
-        _selection_method(),
+        selection=lambda self: self.env[
+            'account.asset.profile']._selection_method(),
         string='Computation Method',
         required=True, readonly=True,
         states={'draft': [('readonly', False)]}, default='linear',
@@ -138,8 +137,9 @@ class AccountAsset(models.Model):
         states={'draft': [('readonly', False)]}, default=5,
         help="The number of years needed to depreciate your asset")
     method_period = fields.Selection(
-        selection=lambda self: self.env['account.asset.profile'].
-        _selection_method_period(), string='Period Length',
+        selection=lambda self: self.env[
+            'account.asset.profile']._selection_method_period(),
+        string='Period Length',
         required=True, readonly=True,
         states={'draft': [('readonly', False)]}, default='year',
         help="Period length for the depreciation accounting entries")
@@ -150,8 +150,9 @@ class AccountAsset(models.Model):
         string='Degressive Factor', readonly=True,
         states={'draft': [('readonly', False)]}, default=0.3)
     method_time = fields.Selection(
-        selection=lambda self: self.env['account.asset.profile'].
-        _selection_method_time(), string='Time Method',
+        selection=lambda self: self.env[
+            'account.asset.profile']._selection_method_time(),
+        string='Time Method',
         required=True, readonly=True,
         states={'draft': [('readonly', False)]}, default='year',
         help="Choose the method to use to compute the dates and "
@@ -197,8 +198,7 @@ class AccountAsset(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env[
-            'res.company']._company_default_get('account.asset')
+        return self.env['res.company']._company_default_get('account.asset')
 
     @api.multi
     def _compute_move_line_check(self):
@@ -221,11 +221,12 @@ class AccountAsset(models.Model):
                     asset.purchase_value - asset.salvage_value
 
     @api.multi
-    @api.depends('depreciation_base',
+    @api.depends('type', 'depreciation_base',
+                 'depreciation_line_ids.type',
                  'depreciation_line_ids.amount',
                  'depreciation_line_ids.previous_id',
                  'depreciation_line_ids.init_entry',
-                 'depreciation_line_ids.move_id')
+                 'depreciation_line_ids.move_check',)
     def _compute_depreciation(self):
         for asset in self:
             if asset.type == 'normal':
@@ -250,7 +251,7 @@ class AccountAsset(models.Model):
         return res
 
     @api.multi
-    @api.constrains('method')
+    @api.constrains('method', 'method_time')
     def _check_method(self):
         for asset in self:
             if asset.method == 'degr-linear' and asset.method_time != 'year':
@@ -259,7 +260,7 @@ class AccountAsset(models.Model):
                       "Year."))
 
     @api.multi
-    @api.constrains('date_start', 'method_end')
+    @api.constrains('date_start', 'method_end', 'method_time')
     def _check_dates(self):
         for asset in self:
             if asset.method_time == 'end':
@@ -267,7 +268,8 @@ class AccountAsset(models.Model):
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
 
-    @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method')
+    @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method',
+                  'depreciation_line_ids.type')
     def _onchange_purchase_salvage_value(self):
         if self.method in ['linear-limit', 'degr-limit']:
             self.depreciation_base = self.purchase_value or 0.0
@@ -334,9 +336,9 @@ class AccountAsset(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
+        super(AccountAsset, self).write(vals)
         for asset in self:
             asset_type = vals.get('type') or asset.type
-            super(AccountAsset, self).write(vals)
             if asset_type == 'view' or \
                     self._context.get('asset_validate_from_write'):
                 continue
@@ -479,7 +481,7 @@ class AccountAsset(models.Model):
                 '|', ('move_check', '=', True), ('init_entry', '=', True)]
             posted_lines = line_obj.search(
                 domain, order='line_date desc')
-            if (len(posted_lines) > 0):
+            if posted_lines:
                 last_line = posted_lines[0]
             else:
                 last_line = line_obj
@@ -521,7 +523,7 @@ class AccountAsset(models.Model):
             # check table with posted entries and
             # recompute in case of deviation
             depreciated_value_posted = depreciated_value = 0.0
-            if (len(posted_lines) > 0):
+            if posted_lines:
                 last_depreciation_date = datetime.strptime(
                     last_line.line_date, '%Y-%m-%d')
                 last_date_in_table = table[-1]['lines'][-1]['date']
