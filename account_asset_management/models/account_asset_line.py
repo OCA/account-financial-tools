@@ -65,7 +65,7 @@ class AccountAssetLine(models.Model):
         help="Set this flag for entries of previous fiscal years "
              "for which OpenERP has not generated accounting entries.")
 
-    @api.depends('amount', 'previous_id')
+    @api.depends('amount', 'previous_id', 'type')
     @api.multi
     def _compute_values(self):
         dlines = self
