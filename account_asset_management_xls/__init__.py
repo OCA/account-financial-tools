@@ -6,4 +6,4 @@ try:
 except ImportError:
     import logging
     logging.getLogger(__name__).warn(
-        "report_xlsx_helpers not available in addons path")
+        "report_xlsx_helper not available in addons path")
