@@ -639,7 +639,7 @@ class AccountAsset(models.Model):
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
                     duration = (
-                        fy_date_stop - datetime(year, 01, 01)).days + 1
+                        fy_date_stop - datetime(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
