@@ -32,7 +32,6 @@
             <group string="Depreciation Method">
               <field name="method"/>
               <field name="method_progress_factor"
-                     digits="(14, 4)"
                      attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"/>
               <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
               <field name="open_asset"/>
