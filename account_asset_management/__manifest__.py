@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'Assets Management',
-    'version': '10.0.3.1.0',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
         'account_fiscal_year',
@@ -22,7 +21,7 @@
         'views/account_account.xml',
         'views/account_asset.xml',
         'views/account_asset_profile.xml',
-        'views/account_config_settings.xml',
+        'views/res_config_settings.xml',
         'views/account_invoice.xml',
         'views/account_invoice_line.xml',
         'views/account_move.xml',
