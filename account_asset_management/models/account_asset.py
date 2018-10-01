@@ -902,7 +902,7 @@ class AccountAsset(models.Model):
         asset_date_start = datetime.strptime(self.date_start, '%Y-%m-%d')
         fy = company.find_daterange_fy(asset_date_start)
         fiscalyear_lock_date = company.fiscalyear_lock_date
-        if fiscalyear_lock_date >= self.date_start:
+        if fiscalyear_lock_date and fiscalyear_lock_date >= self.date_start:
             init_flag = True
         if fy:
             fy_id = fy.id
@@ -957,14 +957,20 @@ class AccountAsset(models.Model):
             fy_date_start = fy_date_stop + relativedelta(days=1)
             fy = company.find_daterange_fy(fy_date_start)
             if fy:
-                if fiscalyear_lock_date >= fy.date_end:
+                if (
+                    fiscalyear_lock_date and
+                    fiscalyear_lock_date >= fy.date_end
+                ):
                     init_flag = True
                 else:
                     init_flag = False
                 fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
-                if fiscalyear_lock_date >= fy_date_stop.strftime('%Y-%m-%d'):
+                if (
+                    fiscalyear_lock_date and
+                    fiscalyear_lock_date >= fy.date_end
+                ):
                     init_flag = True
                 else:
                     init_flag = False
