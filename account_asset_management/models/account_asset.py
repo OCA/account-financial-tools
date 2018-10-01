@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -13,6 +12,7 @@ from odoo import api, fields, models, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
 from odoo.osv import expression
+from functools import reduce
 
 _logger = logging.getLogger(__name__)
 
@@ -639,7 +639,7 @@ class AccountAsset(models.Model):
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
                     duration = (
-                        fy_date_stop - datetime(year, 01, 01)).days + 1
+                        fy_date_stop - datetime(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
@@ -729,7 +729,7 @@ class AccountAsset(models.Model):
         """
         amount = entry.get('period_amount')
         if self.prorata and self.method_time == 'year':
-            dates = filter(lambda x: x <= entry['date_stop'], line_dates)
+            dates = [x for x in line_dates if x <= entry['date_stop']]
             full_periods = len(dates) - 1
             amount = entry['fy_amount'] - amount * full_periods
         return amount

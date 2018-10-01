@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -110,7 +109,7 @@ class AccountAssetLine(models.Model):
                     vals['line_date'] = vals['line_date'].strftime('%Y-%m-%d')
             line_date = vals.get('line_date') or dl.line_date
             asset_lines = dl.asset_id.depreciation_line_ids
-            if vals.keys() == ['move_id'] and not vals['move_id']:
+            if list(vals.keys()) == ['move_id'] and not vals['move_id']:
                 # allow to remove an accounting entry via the
                 # 'Delete Move' button on the depreciation lines.
                 if not self._context.get('unlink_from_asset'):
@@ -118,7 +117,7 @@ class AccountAssetLine(models.Model):
                         "You are not allowed to remove an accounting entry "
                         "linked to an asset."
                         "\nYou should remove such entries from the asset."))
-            elif vals.keys() == ['asset_id']:
+            elif list(vals.keys()) == ['asset_id']:
                 continue
             elif dl.move_id and not self._context.get(
                     'allow_asset_line_update'):
