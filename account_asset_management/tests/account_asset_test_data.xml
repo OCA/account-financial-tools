@@ -90,6 +90,7 @@
       <field name="method_time">year</field>
       <field name="method_number" eval="5"/>
       <field name="method_period">year</field>
+      <field name="date_start" eval="time.strftime('%Y-01-01')"/>
       <field name="name">CEO's Car</field>
       <field name="purchase_value" eval="12000.0"/>
       <field name="salvage_value" eval="2000.0"/>
