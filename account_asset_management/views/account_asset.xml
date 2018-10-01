@@ -17,8 +17,8 @@
                  attrs="{'invisible': [('type', '=', 'view')]}"/>
         </header>
         <sheet>
-          <div class="oe_button_box oe_right">
-            <button name="open_entries" string="Journal Entries" type="object" class="oe_inline"
+          <div class="oe_button_box">
+            <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"
                     attrs="{'invisible': [('type', '=', 'view')]}"/>
           </div>
           <div class="oe_title">
@@ -90,7 +90,7 @@
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
               </header>
               <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
-                <tree string="Asset Lines" colors="blue:(move_check == False) and (init_entry == False)" create="false">
+                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" create="false">
                   <field name="type"/>
                   <field name="line_date"/>
                   <field name="depreciated_value" readonly="1"/>
@@ -172,7 +172,7 @@
     <field name="name">account.asset.tree</field>
     <field name="model">account.asset</field>
     <field name="arch" type="xml">
-      <tree string="Assets" colors="blue:(type == 'view')">
+      <tree string="Assets" decoration-info="type == 'view'">
         <field name="name"/>
         <field name="type" invisible="1"/>
         <field name="code"/>
@@ -224,7 +224,7 @@
     <field name="model">account.asset</field>
     <field name="field_parent">child_ids</field>
     <field name="arch" type="xml">
-      <tree string="Assets" colors="blue:(type == 'view')">
+      <tree string="Assets" decoration-info="type == 'view'">
         <field name="name"/>
         <field name="type" invisible="1"/>
         <field name="code"/>
