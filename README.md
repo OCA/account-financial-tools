@@ -27,7 +27,7 @@ addon | version | summary
 [account_asset_depr_line_cancel](account_asset_depr_line_cancel/) | 10.0.1.0.0 | Assets Management - Cancel button
 [account_asset_disposal](account_asset_disposal/) | 10.0.2.0.0 | Makes asset close account move automatically
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
-[account_chart_update](account_chart_update/) | 10.0.1.0.1 | Wizard to update a company's account chart from a template
+[account_chart_update](account_chart_update/) | 10.0.2.0.1 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_credit_control](account_credit_control/) | 10.0.1.3.4 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 10.0.1.0.0 | Credit control dunning fees

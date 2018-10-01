@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_group
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-17 17:46+0000\n"
+"PO-Revision-Date: 2018-09-17 17:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_account_ids
+msgid "Accounts"
+msgstr "Cuentas"
+
+#. module: account_group
+#: model:ir.ui.view,arch_db:account_group.view_account_group_form
+#: model:ir.ui.view,arch_db:account_group.view_account_group_search
+#: model:ir.ui.view,arch_db:account_group.view_account_group_tree
+msgid "Accounts Group"
+msgstr "Grupo de cuentas"
+
+#. module: account_group
+#: model:ir.actions.act_window,name:account_group.action_account_group_tree
+#: model:ir.ui.menu,name:account_group.account_group_menu
+#: model:ir.ui.view,arch_db:account_group.view_account_group_search
+msgid "Accounts Groups"
+msgstr "Grupos de cuentas"
+
+#. module: account_group
+#: model:ir.model.fields,help:account_group.field_account_group_account_ids
+msgid "Assigned accounts."
+msgstr "Cuentas asignadas"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_code_prefix
+msgid "Code prefix"
+msgstr "Código prefijo"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_account_group_id
+#: model:ir.model.fields,field_description:account_group.field_account_account_template_group_id
+msgid "Group"
+msgstr "Grupo"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_left
+msgid "Left Parent"
+msgstr "Padre izquierdo"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_level
+msgid "Level"
+msgstr "Nivel"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_id
+msgid "Parent"
+msgstr "Padre"
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_right
+msgid "Right Parent"
+msgstr "Padre derecho"
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_chart_template
+msgid "Templates for Account Chart"
+msgstr "Plantillas de plan contable"
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_account_template
+msgid "Templates for Accounts"
+msgstr "Plantillas de cuentas"
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_group
+msgid "account.group"
+msgstr "account.group"

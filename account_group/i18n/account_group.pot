@@ -1,0 +1,130 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_group
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_account_ids
+msgid "Accounts"
+msgstr ""
+
+#. module: account_group
+#: model:ir.ui.view,arch_db:account_group.view_account_group_form
+#: model:ir.ui.view,arch_db:account_group.view_account_group_search
+#: model:ir.ui.view,arch_db:account_group.view_account_group_tree
+msgid "Accounts Group"
+msgstr ""
+
+#. module: account_group
+#: model:ir.actions.act_window,name:account_group.action_account_group_tree
+#: model:ir.ui.menu,name:account_group.account_group_menu
+#: model:ir.ui.view,arch_db:account_group.view_account_group_search
+msgid "Accounts Groups"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,help:account_group.field_account_group_account_ids
+msgid "Assigned accounts."
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_code_prefix
+msgid "Code prefix"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_account_group_id
+#: model:ir.model.fields,field_description:account_group.field_account_account_template_group_id
+msgid "Group"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_id
+msgid "ID"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_left
+msgid "Left Parent"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_level
+msgid "Level"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_name
+msgid "Name"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_id
+msgid "Parent"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model.fields,field_description:account_group.field_account_group_parent_right
+msgid "Right Parent"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_chart_template
+msgid "Templates for Account Chart"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_account_template
+msgid "Templates for Accounts"
+msgstr ""
+
+#. module: account_group
+#: model:ir.model,name:account_group.model_account_group
+msgid "account.group"
+msgstr ""
+
