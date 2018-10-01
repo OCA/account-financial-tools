@@ -268,8 +268,7 @@ class AccountAsset(models.Model):
                     raise UserError(
                         _("The Start Date must precede the Ending Date."))
 
-    @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method',
-                  'depreciation_line_ids.type')
+    @api.onchange('purchase_value', 'salvage_value', 'date_start', 'method')
     def _onchange_purchase_salvage_value(self):
         if self.method in ['linear-limit', 'degr-limit']:
             self.depreciation_base = self.purchase_value or 0.0
