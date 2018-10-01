@@ -77,7 +77,7 @@
                 <group>
                   <separator string="Depreciation Method" colspan="2"/>
                   <field name="method"/>
-                  <field name="method_progress_factor" digits="(14, 4)"
+                  <field name="method_progress_factor"
                          attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"/>
                   <field name="prorata" attrs="{'readonly': [('method_time', '!=', 'year')]}"/>
                 </group>
