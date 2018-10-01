@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -7,87 +6,89 @@ import calendar
 from datetime import date, datetime
 import time
 
-import odoo.tests.common as common
+from odoo.tests.common import SavepointCase
 from odoo import tools
 from odoo.modules.module import get_resource_path
 
 
-class TestAssetManagement(common.TransactionCase):
+class TestAssetManagement(SavepointCase):
 
-    def _load(self, module, *args):
-        tools.convert_file(self.cr, module,
+    @classmethod
+    def _load(cls, module, *args):
+        tools.convert_file(cls.cr, module,
                            get_resource_path(module, *args),
                            {}, 'init', False, 'test',
-                           self.registry._assertion_report)
+                           cls.registry._assertion_report)
 
-    def setUp(self):
-        super(TestAssetManagement, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'tests',
-                   'account_asset_test_data.xml')
+        cls._load('account', 'test', 'account_minimal_test.xml')
+        cls._load('account_asset_management', 'tests',
+                  'account_asset_test_data.xml')
 
         # ENVIRONEMENTS
-        self.asset_model = self.env['account.asset']
-        self.dl_model = self.env['account.asset.line']
-        self.remove_model = self.env['account.asset.remove']
-        self.account_invoice = self.env['account.invoice']
-        self.account_move_line = self.env['account.move.line']
-        self.account_account = self.env['account.account']
-        self.account_journal = self.env['account.journal']
-        self.account_invoice_line = self.env['account.invoice.line']
+        cls.asset_model = cls.env['account.asset']
+        cls.dl_model = cls.env['account.asset.line']
+        cls.remove_model = cls.env['account.asset.remove']
+        cls.account_invoice = cls.env['account.invoice']
+        cls.account_move_line = cls.env['account.move.line']
+        cls.account_account = cls.env['account.account']
+        cls.account_journal = cls.env['account.journal']
+        cls.account_invoice_line = cls.env['account.invoice.line']
 
         # INSTANCES
 
         # Instance: company
-        self.company = self.env.ref('base.main_company')
+        cls.company = cls.env.ref('base.main_company')
 
         # Instance: account type (receivable)
-        self.type_recv = self.env.ref('account.data_account_type_receivable')
+        cls.type_recv = cls.env.ref('account.data_account_type_receivable')
 
         # Instance: account type (payable)
-        self.type_payable = self.env.ref('account.data_account_type_payable')
+        cls.type_payable = cls.env.ref('account.data_account_type_payable')
 
         # Instance: account (receivable)
-        self.account_recv = self.account_account.create({
+        cls.account_recv = cls.account_account.create({
             'name': 'test_account_receivable',
             'code': '123',
-            'user_type_id': self.type_recv.id,
-            'company_id': self.company.id,
+            'user_type_id': cls.type_recv.id,
+            'company_id': cls.company.id,
             'reconcile': True})
 
         # Instance: account (payable)
-        self.account_payable = self.account_account.create({
+        cls.account_payable = cls.account_account.create({
             'name': 'test_account_payable',
             'code': '321',
-            'user_type_id': self.type_payable.id,
-            'company_id': self.company.id,
+            'user_type_id': cls.type_payable.id,
+            'company_id': cls.company.id,
             'reconcile': True})
 
         # Instance: partner
-        self.partner = self.env.ref('base.res_partner_2')
+        cls.partner = cls.env.ref('base.res_partner_2')
 
         # Instance: journal
-        self.journal = self.account_journal.search(
+        cls.journal = cls.account_journal.search(
             [('type', '=', 'purchase')])[0]
 
         # Instance: product
-        self.product = self.env.ref('product.product_product_4')
+        cls.product = cls.env.ref('product.product_product_4')
 
         # Instance: invoice line
-        self.invoice_line = self.account_invoice_line.create({
+        cls.invoice_line = cls.account_invoice_line.create({
             'name': 'test',
-            'account_id': self.account_payable.id,
+            'account_id': cls.account_payable.id,
             'price_unit': 2000.00,
             'quantity': 1,
-            'product_id': self.product.id})
+            'product_id': cls.product.id})
 
         # Instance: invoice
-        self.invoice = self.account_invoice.create({
-            'partner_id': self.partner.id,
-            'account_id': self.account_recv.id,
-            'journal_id': self.journal.id,
-            'invoice_line_ids': [(4, self.invoice_line.id)]})
+        cls.invoice = cls.account_invoice.create({
+            'partner_id': cls.partner.id,
+            'account_id': cls.account_recv.id,
+            'journal_id': cls.journal.id,
+            'invoice_line_ids': [(4, cls.invoice_line.id)]})
 
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
@@ -96,30 +97,30 @@ class TestAssetManagement(common.TransactionCase):
         #
         ict0 = self.browse_ref('account_asset_management.'
                                'account_asset_asset_ict0')
-        self.assertEquals(ict0.state, 'draft')
-        self.assertEquals(ict0.purchase_value, 1500)
-        self.assertEquals(ict0.salvage_value, 0)
-        self.assertEquals(ict0.depreciation_base, 1500)
-        self.assertEquals(len(ict0.depreciation_line_ids), 1)
+        self.assertEqual(ict0.state, 'draft')
+        self.assertEqual(ict0.purchase_value, 1500)
+        self.assertEqual(ict0.salvage_value, 0)
+        self.assertEqual(ict0.depreciation_base, 1500)
+        self.assertEqual(len(ict0.depreciation_line_ids), 1)
         vehicle0 = self.browse_ref('account_asset_management.'
                                    'account_asset_asset_vehicle0')
-        self.assertEquals(vehicle0.state, 'draft')
-        self.assertEquals(vehicle0.purchase_value, 12000)
-        self.assertEquals(vehicle0.salvage_value, 2000)
-        self.assertEquals(vehicle0.depreciation_base, 10000)
-        self.assertEquals(len(vehicle0.depreciation_line_ids), 1)
+        self.assertEqual(vehicle0.state, 'draft')
+        self.assertEqual(vehicle0.purchase_value, 12000)
+        self.assertEqual(vehicle0.salvage_value, 2000)
+        self.assertEqual(vehicle0.depreciation_base, 10000)
+        self.assertEqual(len(vehicle0.depreciation_line_ids), 1)
 
         #
         # I compute the depreciation boards
         #
         ict0.compute_depreciation_board()
         ict0.refresh()
-        self.assertEquals(len(ict0.depreciation_line_ids), 4)
-        self.assertEquals(ict0.depreciation_line_ids[1].amount, 500)
+        self.assertEqual(len(ict0.depreciation_line_ids), 4)
+        self.assertEqual(ict0.depreciation_line_ids[1].amount, 500)
         vehicle0.compute_depreciation_board()
         vehicle0.refresh()
-        self.assertEquals(len(vehicle0.depreciation_line_ids), 6)
-        self.assertEquals(vehicle0.depreciation_line_ids[1].amount, 2000)
+        self.assertEqual(len(vehicle0.depreciation_line_ids), 6)
+        self.assertEqual(vehicle0.depreciation_line_ids[1].amount, 2000)
 
         #
         # I post the first depreciation line
@@ -127,15 +128,15 @@ class TestAssetManagement(common.TransactionCase):
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
         ict0.refresh()
-        self.assertEquals(ict0.state, 'open')
-        self.assertEquals(ict0.value_depreciated, 500)
-        self.assertEquals(ict0.value_residual, 1000)
+        self.assertEqual(ict0.state, 'open')
+        self.assertEqual(ict0.value_depreciated, 500)
+        self.assertEqual(ict0.value_residual, 1000)
         vehicle0.validate()
         vehicle0.depreciation_line_ids[1].create_move()
         vehicle0.refresh()
-        self.assertEquals(vehicle0.state, 'open')
-        self.assertEquals(vehicle0.value_depreciated, 2000)
-        self.assertEquals(vehicle0.value_residual, 8000)
+        self.assertEqual(vehicle0.state, 'open')
+        self.assertEqual(vehicle0.value_depreciated, 2000)
+        self.assertEqual(vehicle0.value_residual, 8000)
 
     def test_02_prorata_basic(self):
         """Prorata temporis depreciation basic test."""
@@ -199,7 +200,7 @@ class TestAssetManagement(common.TransactionCase):
             'type': 'depreciate',
             'init_entry': True,
         })
-        self.assertEquals(len(asset.depreciation_line_ids), 2)
+        self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
         asset.refresh()
         # I check the depreciated value is the initial value
@@ -245,7 +246,7 @@ class TestAssetManagement(common.TransactionCase):
             'type': 'depreciate',
             'init_entry': True,
         })
-        self.assertEquals(len(asset.depreciation_line_ids), 2)
+        self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
         asset.refresh()
         # I check the depreciated value is the initial value
@@ -289,7 +290,7 @@ class TestAssetManagement(common.TransactionCase):
         asset.refresh()
 
         # check values in the depreciation board
-        self.assertEquals(len(asset.depreciation_line_ids), 5)
+        self.assertEqual(len(asset.depreciation_line_ids), 5)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                400.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
@@ -318,7 +319,7 @@ class TestAssetManagement(common.TransactionCase):
         asset.refresh()
 
         # check values in the depreciation board
-        self.assertEquals(len(asset.depreciation_line_ids), 15)
+        self.assertEqual(len(asset.depreciation_line_ids), 15)
         # lines prior to asset start period are grouped in the first entry
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                300.00, places=2)
@@ -349,7 +350,7 @@ class TestAssetManagement(common.TransactionCase):
         asset.refresh()
 
         # check values in the depreciation board
-        self.assertEquals(len(asset.depreciation_line_ids), 6)
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                400.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
@@ -380,7 +381,7 @@ class TestAssetManagement(common.TransactionCase):
         asset.refresh()
 
         # check values in the depreciation board
-        self.assertEquals(len(asset.depreciation_line_ids), 6)
+        self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                200.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[-1].amount,
@@ -415,7 +416,7 @@ class TestAssetManagement(common.TransactionCase):
         })
         wiz.remove()
         asset.refresh()
-        self.assertEquals(len(asset.depreciation_line_ids), 3)
+        self.assertEqual(len(asset.depreciation_line_ids), 3)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount,
                                81.46, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
