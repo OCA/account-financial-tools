@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -41,22 +40,20 @@ class AccountAssetCompute(models.TransientModel):
                 'context': {'asset_move_ids': created_move_ids},
             }
 
-        domain = "[('id', 'in', [" + \
-            ','.join(map(str, created_move_ids)) + "])]"
         return {
             'name': _('Created Asset Moves'),
             'view_type': 'form',
             'view_mode': 'tree,form',
             'res_model': 'account.move',
             'view_id': False,
-            'domain': domain,
+            'domain': [('id', 'in', created_move_ids)],
             'type': 'ir.actions.act_window',
         }
 
     @api.multi
     def view_asset_moves(self):
         self.ensure_one()
-        domain = [('id', 'in', self._context.get('asset_move_ids', []))]
+        domain = [('id', 'in', self.env.context.get('asset_move_ids', []))]
         return {
             'name': _('Created Asset Moves'),
             'view_type': 'form',
