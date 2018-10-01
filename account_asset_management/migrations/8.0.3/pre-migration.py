@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2017 Noviat
 # Copyright OpenUpgrade contributors (https://github.com/oca/openupgradelib)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -60,7 +59,7 @@ def table_exists(cr, table):
 
 
 def rename_columns(cr, column_spec):
-    for table in column_spec.keys():
+    for table in list(column_spec.keys()):
         for (old, new, comment) in column_spec[table]:
             cr.execute(
                 "SELECT column_name "

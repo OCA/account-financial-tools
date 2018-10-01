@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -78,7 +77,7 @@ class AccountInvoice(models.Model):
         for inv in self:
             move = inv.move_id
             assets = [aml.asset_id for aml in
-                      filter(lambda x: x.asset_id, move.line_ids)]
+                      [x for x in move.line_ids if x.asset_id]]
             for asset in assets:
                 asset.code = inv.move_name
                 asset_line_name = asset._get_depreciation_entry_name(0)
