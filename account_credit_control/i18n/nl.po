@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-31 12:31+0000\n"
-"PO-Revision-Date: 2018-10-01 14:38+0000\n"
+"PO-Revision-Date: 2018-10-02 15:13+0000\n"
 "Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -64,6 +64,12 @@ msgid ""
 "  ${object.current_policy_level.custom_mail_text | safe}\n"
 "  "
 msgstr ""
+"\n"
+"  Geachte ${object.contact_address.name or ''}\n"
+"  <br/>\n"
+"  <br/>\n"
+"  ${object.current_policy_level.custom_mail_text | safe}\n"
+"  "
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
@@ -184,7 +190,7 @@ msgstr "Verander huidige aanmaningsbeleid"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Change the overdue level of current invoice"
-msgstr "Change the overdue level of current invoice"
+msgstr "Verander het aanmaningsniveau van de huidige factuur"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
@@ -338,6 +344,9 @@ msgid ""
 "            (${object.current_policy_level.name or 'n/a'})\n"
 "        "
 msgstr ""
+"Aanamaning:\n"
+"            (${object.current_policy_level.name or 'n/a'})\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.act_account_credit_relation_relation
@@ -351,7 +360,7 @@ msgstr "Aanmaningsregels"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Tolerance Limit"
-msgstr ""
+msgstr "Aanmaning tolerantie limiet"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_run
@@ -409,18 +418,18 @@ msgstr "Eigen Bericht"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level_custom_text_after_details
 msgid "Custom Message after details"
-msgstr ""
+msgstr "Aangepast bericht na details"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.customer_followup_tree
 msgid "Customer Followup"
-msgstr ""
+msgstr "Klanten aanmaning"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_note
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_note
 msgid "Customer Payment Promise"
-msgstr ""
+msgstr "Klant betalingsregeling"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -430,17 +439,17 @@ msgstr "Vervaldatum"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Default Credit Tolerance"
-msgstr ""
+msgstr "Standaard aanmaningstolerantie"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Default Policy"
-msgstr ""
+msgstr "Standaard beleid"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Default credit control policy to partners"
-msgstr ""
+msgstr "Standaard aanmaningsbeleid voor partners"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy
@@ -474,12 +483,12 @@ msgstr "Weergave naam"
 #. module: account_credit_control
 #: model:ir.ui.menu,name:account_credit_control.credit_control_manual_action_menu
 msgid "Do Manual Follow-Ups"
-msgstr ""
+msgstr "Handmatige aanmaningen uitvoeren"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_do_nothing
 msgid "Do Nothing"
-msgstr ""
+msgstr "Niets doen"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
@@ -569,13 +578,13 @@ msgstr "Filters"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.partner_followup_form_view
 msgid "Follow-up"
-msgstr ""
+msgstr "Opvolging"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_responsible_id
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_responsible_id
 msgid "Follow-up Responsible"
-msgstr ""
+msgstr "Opvolgingsverantwoordelijke"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy_do_nothing
@@ -611,8 +620,8 @@ msgid ""
 "If a credit control line has been generatedon a policy and the policy has "
 "been changed in the meantime, it has to be handled manually"
 msgstr ""
-"If a credit control line has been generatedon a policy and the policy has "
-"been changed in the meantime, it has to be handled manually"
+"Als een aanmaningsregel is gegenereerd op basis van een beleid en het beleid "
+"is in de tussentijd gewijzigd, moet dit handmatig worden afgehandeld"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
@@ -636,12 +645,12 @@ msgstr "Factuur"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Invoice date"
-msgstr "Invoice date"
+msgstr "Factuurdatum"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Invoice number"
-msgstr "Invoice number"
+msgstr "Factuurnummer"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -651,7 +660,7 @@ msgstr "Gefactureerd bedrag"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
 msgid "Issued Lines"
-msgstr "Issued Lines"
+msgstr "Uitgevoerde regels"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication___last_update
@@ -762,14 +771,14 @@ msgstr "Handmatige Aanmaningsbeleid"
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.action_customer_followup
 msgid "Manual Follow-Ups"
-msgstr ""
+msgstr "Handmatige aanmaningen"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manual_followup
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_manual_followup
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_manual_followup
 msgid "Manual Followup"
-msgstr ""
+msgstr "Handmatig aanmaning"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
@@ -784,7 +793,7 @@ msgstr "Handmatige aanpassing"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Manual followup"
-msgstr ""
+msgstr "Handmatig aanmaning"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.no_follow_1
@@ -795,7 +804,7 @@ msgstr "Handmatig niet opvolgen"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_manually_overridden
 msgid "Manually Overridden"
-msgstr ""
+msgstr "Handmatig overschreven"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker_name
@@ -857,13 +866,13 @@ msgstr "Nieuw niveau voor van toepassing"
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action
 msgid "Next Action"
-msgstr ""
+msgstr "Volgende actie"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action_date
 #: model:ir.model.fields,field_description:account_credit_control.field_res_users_payment_next_action_date
 msgid "Next Action Date"
-msgstr ""
+msgstr "Volgende actie datum"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_emailer.py:46
@@ -911,6 +920,8 @@ msgid ""
 "Optionally you can assign a user to this field, which will make him "
 "responsible for the action."
 msgstr ""
+"Optioneel kunt u een gebruiker aan dit veld toewijzen, waardoor hij "
+"verantwoordelijk wordt voor de actie."
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_1
@@ -998,15 +1009,15 @@ msgid ""
 "            Best regards\n"
 "        "
 msgstr ""
-"Our records indicate that we have not yet received the payment of the "
-"invoice mentioned below despite our first reminder.\n"
-"            If it has already been sent, please disregard this notice. If "
-"not, please proceed with payment within 5 days.\n"
+"Volgens onze administratie hebben we geen betalingen ontvangen van "
+"onderstaande facturen.<br>\n"
+"  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 5 dagen.<br>"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
-"\n"
-"            Best regards\n"
+"  <br>\n"
+"  Bijvoorbaat dank voor uw medewerking.<br>\n"
+"  <br>\n"
+"  Met vriendelijke groet\n"
 "        "
 
 #. module: account_credit_control
@@ -1158,7 +1169,7 @@ msgstr "Relatie"
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_note
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_note
 msgid "Payment Note"
-msgstr ""
+msgstr "Betalingsnotitie"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:87
@@ -1181,7 +1192,7 @@ msgstr "Beleid"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Policy"
-msgstr ""
+msgstr "Beleid"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:110
@@ -1374,7 +1385,7 @@ msgstr "De optionele andere valuta als het een multi-valuta boeking is."
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The partner had a manual followup."
-msgstr ""
+msgstr "De partner had een handmatige aanmaning"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:242
@@ -1395,18 +1406,20 @@ msgid ""
 "This allows credit control team to chase overdue payments with different "
 "means"
 msgstr ""
+"Hiermee kan debiteurenbeheer de achterstallige betalingen met verschillende "
+"mogelijk afhandelen"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action
 msgid "This is the next action to be taken."
-msgstr ""
+msgstr "Dit is de volgende actie welke ondernomen wordt."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action_date
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action_date
 msgid "This is when the manual follow-up is needed."
-msgstr ""
+msgstr "Dit is wanneer handmatige aanmaning nodig is."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy_account_ids
@@ -1425,7 +1438,7 @@ msgstr ""
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Tolerance"
-msgstr ""
+msgstr "Tolerantie"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_total_due
