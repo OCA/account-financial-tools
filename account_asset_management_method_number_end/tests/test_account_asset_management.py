@@ -21,8 +21,8 @@ class TestAssetManagement(common.TransactionCase):
         super(TestAssetManagement, self).setUp()
 
         self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'demo',
-                   'account_asset_demo.xml')
+        self._load('account_asset_management', 'tests',
+                   'account_asset_test_data.xml')
 
         self.asset_model = self.env['account.asset']
         self.dl_model = self.env['account.asset.line']
