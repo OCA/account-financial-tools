@@ -206,7 +206,7 @@ class AccountAsset(models.Model):
             for line in asset.depreciation_line_ids:
                 if line.move_id:
                     asset.move_line_check = True
-                    continue
+                    break
 
     @api.depends('purchase_value', 'salvage_value', 'type', 'method')
     @api.multi
