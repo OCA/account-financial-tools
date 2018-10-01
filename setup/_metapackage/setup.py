@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo10-addon-account_fiscal_month',
         'odoo10-addon-account_fiscal_position_vat_check',
         'odoo10-addon-account_fiscal_year',
+        'odoo10-addon-account_group',
         'odoo10-addon-account_invoice_constraint_chronology',
         'odoo10-addon-account_invoice_currency',
         'odoo10-addon-account_invoice_tax_required',
