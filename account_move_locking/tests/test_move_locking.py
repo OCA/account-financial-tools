@@ -21,8 +21,8 @@ class MoveLocking(common.TransactionCase):
     def test_locking(self):
         vals = {
             'journal_ids': [(4, self.cust_invoices_journal.id, 0)],
-            'date_start': Date.to_string(datetime.now() - timedelta(days=365)),
-            'date_end': Date.today(),
+            'date_start': Date.to_string(datetime.now() - timedelta(days=335)),
+            'date_end': Date.to_string(datetime.now() + timedelta(days=30)),
         }
         lock_wiz = self.env['lock.account.move'].create(vals)
         lock_wiz.lock_move({})
