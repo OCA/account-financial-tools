@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -23,16 +22,15 @@ class AccountAssetLine(models.Model):
         string='Previous Depreciation Line',
         readonly=True)
     parent_state = fields.Selection(
-        selection=[
-            ('draft', 'Draft'),
-            ('open', 'Running'),
-            ('close', 'Close'),
-            ('removed', 'Removed')],
         related='asset_id.state',
-        string='State of Asset')
+        string='State of Asset',
+        readonly=True,
+    )
     depreciation_base = fields.Float(
         related='asset_id.depreciation_base',
-        string='Depreciation Base')
+        string='Depreciation Base',
+        readonly=True,
+    )
     amount = fields.Float(
         string='Amount', digits=dp.get_precision('Account'),
         required=True)
@@ -63,17 +61,17 @@ class AccountAssetLine(models.Model):
     init_entry = fields.Boolean(
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
-             "for which OpenERP has not generated accounting entries.")
+             "for which Odoo has not generated accounting entries.")
 
     @api.depends('amount', 'previous_id', 'type')
     @api.multi
     def _compute_values(self):
         dlines = self
-        if self._context.get('no_compute_asset_line_ids'):
+        if self.env.context.get('no_compute_asset_line_ids'):
             # skip compute for lines in unlink
-            exclude_ids = self._context['no_compute_asset_line_ids']
-            dlines = dlines.filtered(lambda l: l.id not in exclude_ids)
-        dlines = self.filtered(lambda l: l.type == 'depreciate')
+            exclude_ids = self.env.context['no_compute_asset_line_ids']
+            dlines = self.filtered(lambda l: l.id not in exclude_ids)
+        dlines = dlines.filtered(lambda l: l.type == 'depreciate')
         dlines = dlines.sorted(key=lambda l: l.line_date)
 
         for i, dl in enumerate(dlines):
@@ -107,20 +105,21 @@ class AccountAssetLine(models.Model):
         for dl in self:
             if vals.get('line_date'):
                 if isinstance(vals['line_date'], datetime.date):
-                    vals['line_date'] = vals['line_date'].strftime('%Y-%m-%d')
+                    vals['line_date'] = fields.Date.to_string(
+                        vals['line_date'])
             line_date = vals.get('line_date') or dl.line_date
             asset_lines = dl.asset_id.depreciation_line_ids
-            if vals.keys() == ['move_id'] and not vals['move_id']:
+            if list(vals.keys()) == ['move_id'] and not vals['move_id']:
                 # allow to remove an accounting entry via the
                 # 'Delete Move' button on the depreciation lines.
-                if not self._context.get('unlink_from_asset'):
+                if not self.env.context.get('unlink_from_asset'):
                     raise UserError(_(
                         "You are not allowed to remove an accounting entry "
                         "linked to an asset."
                         "\nYou should remove such entries from the asset."))
-            elif vals.keys() == ['asset_id']:
+            elif list(vals.keys()) == ['asset_id']:
                 continue
-            elif dl.move_id and not self._context.get(
+            elif dl.move_id and not self.env.context.get(
                     'allow_asset_line_update'):
                 raise UserError(_(
                     "You cannot change a depreciation line "
@@ -152,7 +151,7 @@ class AccountAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        return super(AccountAssetLine, self).write(vals)
+        return super().write(vals)
 
     @api.multi
     def unlink(self):
@@ -166,13 +165,12 @@ class AccountAssetLine(models.Model):
                     "You cannot delete a depreciation line with "
                     "an associated accounting entry."))
             previous = dl.previous_id
-            next = dl.asset_id.depreciation_line_ids.filtered(
+            next_line = dl.asset_id.depreciation_line_ids.filtered(
                 lambda l: l.previous_id == dl and l not in self)
-            if next:
-                next.previous_id = previous
-        ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
-        return super(
-            AccountAssetLine, self.with_context(ctx)).unlink()
+            if next_line:
+                next_line.previous_id = previous
+        return super(AccountAssetLine, self.with_context(
+            no_compute_asset_line_ids=self.ids)).unlink()
 
     def _setup_move_data(self, depreciation_date):
         asset = self.asset_id
@@ -184,14 +182,14 @@ class AccountAssetLine(models.Model):
         }
         return move_data
 
-    def _setup_move_line_data(self, depreciation_date, account, type, move):
+    def _setup_move_line_data(self, depreciation_date, account, ml_type, move):
         asset = self.asset_id
         amount = self.amount
         analytic_id = False
-        if type == 'depreciation':
+        if ml_type == 'depreciation':
             debit = amount < 0 and -amount or 0.0
             credit = amount > 0 and amount or 0.0
-        elif type == 'expense':
+        elif ml_type == 'expense':
             debit = amount > 0 and amount or 0.0
             credit = amount < 0 and -amount or 0.0
             analytic_id = asset.account_analytic_id.id
@@ -213,8 +211,9 @@ class AccountAssetLine(models.Model):
     @api.multi
     def create_move(self):
         created_move_ids = []
-        asset_ids = []
-        ctx = dict(self._context, allow_asset=True, check_move_validity=False)
+        asset_ids = set()
+        ctx = dict(self.env.context,
+                   allow_asset=True, check_move_validity=False)
         for line in self:
             asset = line.asset_id
             depreciation_date = line.line_date
@@ -229,14 +228,14 @@ class AccountAssetLine(models.Model):
                 depreciation_date, exp_acc, 'expense', move)
             self.env['account.move.line'].with_context(ctx).create(aml_e_vals)
             move.post()
-            write_ctx = dict(self._context, allow_asset_line_update=True)
-            line.with_context(write_ctx).write({'move_id': move.id})
+            line.with_context(allow_asset_line_update=True).write({
+                'move_id': move.id
+            })
             created_move_ids.append(move.id)
-            asset_ids.append(asset.id)
+            asset_ids.add(asset.id)
         # we re-evaluate the assets to determine if we can close them
-        for asset in self.env['account.asset'].browse(
-                list(set(asset_ids))):
-            if asset.company_id.currency_id.is_zero(asset.value_residual):
+        for asset in self.env['account.asset'].browse(list(asset_ids)):
+            if asset.company_currency_id.is_zero(asset.value_residual):
                 asset.state = 'close'
         return created_move_ids
 
@@ -250,8 +249,7 @@ class AccountAssetLine(models.Model):
             'res_model': 'account.move',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'context': self._context,
-            'nodestroy': True,
+            'context': self.env.context,
             'domain': [('id', '=', self.move_id.id)],
         }
 

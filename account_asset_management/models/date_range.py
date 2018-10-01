@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -29,7 +28,7 @@ class DateRange(models.Model):
             }
             self.env['account.asset.recompute.trigger'].sudo().create(
                 recompute_vals)
-        return super(DateRange, self).create(vals)
+        return super().create(vals)
 
     @api.multi
     def write(self, vals):
@@ -48,4 +47,4 @@ class DateRange(models.Model):
                     }
                     self.env['account.asset.recompute.trigger'].sudo().\
                         create(recompute_vals)
-        return super(DateRange, self).write(vals)
+        return super().write(vals)
