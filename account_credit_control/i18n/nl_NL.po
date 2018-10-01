@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-06 02:40+0000\n"
-"PO-Revision-Date: 2018-04-06 02:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/"
-"teams/23907/nl_NL/)\n"
+"PO-Revision-Date: 2018-10-02 15:13+0000\n"
+"Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/"
+"23907/nl_NL/)\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -40,6 +41,22 @@ msgid ""
 "            Best regards\n"
 "        "
 msgstr ""
+"\n"
+"            Volgens onze administratie hebben we geen betalingen ontvangen "
+"van onderstaande facturen ondanks twee eerder gestuurde aanmaningen.\n"
+"            Het kan zijn dat deze brief en betaling elkaar kruisen, deze "
+"brief kunt u dan negeren. Zo niet, dan ontvangen we graag uw betaling.\n"
+"            Als we uw betaling niet binnen 5 dagen ontvangen, dan wordt het "
+"dossier doorgestuurd naar onze incassobureau.\n"
+"\n"
+"            Eventueel kunnen we samen een betalingsregeling opstellen.\n"
+"            Een volledige lijst openstaande postenlijst is vind U hieronder."
+"\n"
+"\n"
+"            Bijvoorbaat dank voor uw medewerking.\n"
+"\n"
+"            Met vriendelijke groet\n"
+"        "
 
 #. module: account_credit_control
 #: model:mail.template,body_html:account_credit_control.email_template_credit_control_base
@@ -51,16 +68,22 @@ msgid ""
 "  ${object.current_policy_level.custom_mail_text | safe}\n"
 "  "
 msgstr ""
+"\n"
+"  Geachte ${object.contact_address.name or ''}\n"
+"  <br/>\n"
+"  <br/>\n"
+"  ${object.current_policy_level.custom_mail_text | safe}\n"
+"  "
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
-msgstr ""
+msgstr "10 dagen late herinnering"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_1
 msgid "10 days net"
-msgstr ""
+msgstr "10 dagen netto"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.2_time_1
