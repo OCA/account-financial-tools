@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -12,8 +11,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
-        move_lines = super(AccountInvoice, self) \
-            .finalize_invoice_move_lines(move_lines)
+        move_lines = super().finalize_invoice_move_lines(move_lines)
         new_lines = []
         for line_tuple in move_lines:
             line = line_tuple[2]
@@ -74,11 +72,9 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_move_create(self):
-        res = super(AccountInvoice, self).action_move_create()
+        res = super().action_move_create()
         for inv in self:
-            move = inv.move_id
-            assets = [aml.asset_id for aml in
-                      filter(lambda x: x.asset_id, move.line_ids)]
+            assets = inv.move_id.line_ids.mapped('asset_id')
             for asset in assets:
                 asset.code = inv.move_name
                 asset_line_name = asset._get_depreciation_entry_name(0)
@@ -92,15 +88,15 @@ class AccountInvoice(models.Model):
         assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
-            assets = move.line_ids.mapped('asset_id')
-        super(AccountInvoice, self).action_cancel()
+            assets |= move.line_ids.mapped('asset_id')
+        super().action_cancel()
         if assets:
             assets.unlink()
         return True
 
     @api.model
     def line_get_convert(self, line, part):
-        res = super(AccountInvoice, self).line_get_convert(line, part)
+        res = super().line_get_convert(line, part)
         if line.get('asset_profile_id'):
             # skip empty debit/credit
             if res.get('debit') or res.get('credit'):
@@ -109,19 +105,20 @@ class AccountInvoice(models.Model):
 
     @api.model
     def inv_line_characteristic_hashcode(self, invoice_line):
-        res = super(AccountInvoice, self).inv_line_characteristic_hashcode(
+        res = super().inv_line_characteristic_hashcode(
             invoice_line)
         res += '-%s' % invoice_line.get('asset_profile_id', 'False')
         return res
 
     @api.model
     def invoice_line_move_line_get(self):
-        res = super(AccountInvoice, self).invoice_line_move_line_get()
+        res = super().invoice_line_move_line_get()
         invoice_line_obj = self.env['account.invoice.line']
         for vals in res:
-            invline = invoice_line_obj.browse(vals['invl_id'])
-            if invline.asset_profile_id:
-                vals['asset_profile_id'] = invline.asset_profile_id.id
+            if vals.get('invl_id'):
+                invline = invoice_line_obj.browse(vals['invl_id'])
+                if invline.asset_profile_id:
+                    vals['asset_profile_id'] = invline.asset_profile_id.id
         return res
 
 
@@ -144,4 +141,4 @@ class AccountInvoiceLine(models.Model):
     @api.onchange('account_id')
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id.id
-        return super(AccountInvoiceLine, self)._onchange_account_id()
+        return super()._onchange_account_id()

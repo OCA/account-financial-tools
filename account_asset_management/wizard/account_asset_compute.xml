@@ -11,7 +11,6 @@
         </group>
         <footer>
           <button string="Compute" name="asset_compute" type="object" class="oe_highlight"/>
-          or
           <button string="Cancel" class="oe_link" special="cancel"/>
         </footer>
       </form>
@@ -28,7 +27,6 @@
         <field name="note" colspan="4" nolabel="1" width="850" height="400"/>
         <footer>
           <button string="View Asset Moves" name="view_asset_moves" type="object" class="oe_highlight"/>
-          or
           <button string="Cancel" class="oe_link" special="cancel"/>
         </footer>
       </form>
