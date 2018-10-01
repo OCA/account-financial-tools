@@ -183,14 +183,14 @@ class AccountAssetLine(models.Model):
         }
         return move_data
 
-    def _setup_move_line_data(self, depreciation_date, account, type, move):
+    def _setup_move_line_data(self, depreciation_date, account, ml_type, move):
         asset = self.asset_id
         amount = self.amount
         analytic_id = False
-        if type == 'depreciation':
+        if ml_type == 'depreciation':
             debit = amount < 0 and -amount or 0.0
             credit = amount > 0 and amount or 0.0
-        elif type == 'expense':
+        elif ml_type == 'expense':
             debit = amount > 0 and amount or 0.0
             credit = amount < 0 and -amount or 0.0
             analytic_id = asset.account_analytic_id.id
