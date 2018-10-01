@@ -19,8 +19,8 @@ class TestAssetManagementXls(common.TransactionCase):
         super(TestAssetManagementXls, self).setUp()
 
         self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'demo',
-                   'account_asset_demo.xml')
+        self._load('account_asset_management', 'tests',
+                   'account_asset_test_data.xml')
 
         ctx = {'xlsx_export': 1}
         self.act_report = self.env['ir.actions.report.xml'].with_context(ctx)
