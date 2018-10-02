@@ -1,2 +1,3 @@
 server-ux
 account-financial-tools https://github.com/grindtildeath/account-financial-tools 11.0-mig-account_asset_management
+reporting-engine
