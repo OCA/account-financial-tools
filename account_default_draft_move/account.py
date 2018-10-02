@@ -63,14 +63,14 @@ class AccountMove(models.Model):
         return True
 
     @api.multi
-    def _is_update_posted(self):
+    def _compute_is_update_posted(self):
         ir_module = self.env['ir.module.module']
         can_cancel = ir_module.search([('name', '=', 'account_cancel'),
                                        ('state', '=', 'installed')])
         for move in self:
             move.update_posted = can_cancel and move.journal_id.update_posted
 
-    update_posted = fields.Boolean(compute='_is_update_posted',
+    update_posted = fields.Boolean(compute='_compute_is_update_posted',
                                    string='Allow Cancelling Entries')
 
 

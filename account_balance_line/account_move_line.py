@@ -28,10 +28,10 @@ class AccountMoveLine(models.Model):
 
     @api.multi
     @api.depends('credit', 'debit')
-    def _line_balance(self):
+    def _compute_line_balance(self):
         for line in self:
             line.line_balance = line.debit - line.credit
 
     line_balance = fields.Float(
-        compute='_line_balance', string='Balance', store=True,
+        compute='_compute_line_balance', string='Balance', store=True,
         digits=dp.get_precision('Account'))

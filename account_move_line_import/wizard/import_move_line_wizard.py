@@ -14,7 +14,7 @@ from sys import exc_info
 from traceback import format_exception
 
 from openerp import api, fields, models, _
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -48,32 +48,34 @@ class AccountMoveLineImport(models.TransientModel):
     def _default_codepage(self):
         return 'Windows-1252'
 
-    @api.one
+    @api.multi
     @api.depends('aml_data')
     def _compute_lines(self):
-        if self.aml_data:
-            lines = base64.decodestring(self.aml_data)
-            # convert windows & mac line endings to unix style
-            self.lines = lines.replace('\r\n', '\n').replace('\r', '\n')
+        for rec in self:
+            if rec.aml_data:
+                lines = base64.decodestring(rec.aml_data)
+                # convert windows & mac line endings to unix style
+                rec.lines = lines.replace('\r\n', '\n').replace('\r', '\n')
 
-    @api.one
+    @api.multi
     @api.depends('lines', 'csv_separator')
     def _compute_dialect(self):
-        if self.lines:
-            try:
-                self.dialect = csv.Sniffer().sniff(
-                    self.lines[:128], delimiters=';,')
-            except:
-                # csv.Sniffer is not always reliable
-                # in the detection of the delimiter
-                self.dialect = csv.Sniffer().sniff(
-                    '"header 1";"header 2";\r\n')
-                if ',' in self.lines[128]:
-                    self.dialect.delimiter = ','
-                elif ';' in self.lines[128]:
-                    self.dialect.delimiter = ';'
-        if self.csv_separator:
-            self.dialect.delimiter = str(self.csv_separator)
+        for rec in self:
+            if rec.lines:
+                try:
+                    rec.dialect = csv.Sniffer().sniff(
+                        self.lines[:128], delimiters=';,')
+                except csv.Error:
+                    # csv.Sniffer is not always reliable
+                    # in the detection of the delimiter
+                    rec.dialect = csv.Sniffer().sniff(
+                        '"header 1";"header 2";\r\n')
+                    if ',' in rec.lines[128]:
+                        rec.dialect.delimiter = ','
+                    elif ';' in rec.lines[128]:
+                        rec.dialect.delimiter = ';'
+            if rec.csv_separator:
+                rec.dialect.delimiter = str(rec.csv_separator)
 
     @api.onchange('aml_data')
     def _onchange_aml_data(self):
@@ -98,7 +100,7 @@ class AccountMoveLineImport(models.TransientModel):
             else:
                 header = ln.lower()
         if not header:
-            raise UserError(
+            raise ValidationError(
                 _("No header line found in the input file !"))
         output = input.read()
         return output, header
@@ -153,7 +155,7 @@ class AccountMoveLineImport(models.TransientModel):
         header_fields2 = []
         for hf in header_fields:
             if hf in header_fields2:
-                raise UserError(_(
+                raise ValidationError(_(
                     "Duplicate header field '%s' found !"
                     "\nPlease correct the input file.")
                     % hf)
@@ -356,7 +358,7 @@ class AccountMoveLineImport(models.TransientModel):
             try:
                 datetime.strptime(due, '%Y-%m-%d')
                 aml_vals['date_maturity'] = due
-            except:
+            except ValueError:
                 msg = _("Incorrect data format for field '%s' "
                         "with value '%s', "
                         " should be YYYY-MM-DD") % (field, due)
@@ -496,9 +498,9 @@ class AccountMoveLineImport(models.TransientModel):
             for i, hf in enumerate(self._header_fields):
                 try:
                     line[hf] = line[hf].decode(self.codepage).strip()
-                except:
+                except UnicodeDecodeError:
                     tb = ''.join(format_exception(*exc_info()))
-                    raise UserError(
+                    raise ValidationError(
                         _("Wrong Code Page"),
                         _("Error while processing line '%s' :\n%s")
                         % (line, tb))
@@ -561,7 +563,7 @@ def str2float(amount, decimal_separator):
             return float(amount.replace(',', ''))
         else:
             return float(amount.replace('.', '').replace(',', '.'))
-    except:
+    except ValueError:
         return False
 
 
@@ -573,5 +575,5 @@ def str2int(amount, decimal_separator):
             return int(amount.replace(',', ''))
         else:
             return int(amount.replace('.', '').replace(',', '.'))
-    except:
+    except ValueError:
         return False

@@ -22,7 +22,7 @@
 from openerp import models, fields, api
 
 
-class res_company(models.Model):
+class ResCompany(models.Model):
     """override company to add currency update"""
 
     @api.multi
@@ -34,10 +34,11 @@ class res_company(models.Model):
             company.multi_company_currency_enable = \
                 1 if company_currency else 0
 
-    @api.one
+    @api.multi
     def button_refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        self.services_to_use.refresh_currency()
+        for rec in self:
+            rec.services_to_use.refresh_currency()
 
     _inherit = "res.company"
 

@@ -25,7 +25,6 @@
 from openerp import models, fields, api, _
 import openerp.addons.decimal_precision as dp
 from openerp.exceptions import ValidationError
-from openerp.exceptions import Warning as UserError
 
 
 class AccountCheckDeposit(models.Model):
@@ -141,7 +140,7 @@ class AccountCheckDeposit(models.Model):
     def unlink(self):
         for deposit in self:
             if deposit.state == 'done':
-                raise UserError(
+                raise ValidationError(
                     _("The deposit '%s' is in valid state, so you must "
                         "cancel it before deleting it.")
                     % deposit.name)
@@ -228,7 +227,7 @@ class AccountCheckDeposit(models.Model):
 
             # Create counter-part
             if not deposit.company_id.check_deposit_account_id:
-                raise UserError(
+                raise ValidationError(
                     _("Missing Account for Check Deposits on the "
                         "company '%s'.") % deposit.company_id.name)
 

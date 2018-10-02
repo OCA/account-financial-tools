@@ -12,16 +12,15 @@ class AccountJournal(models.Model):
 
     check_chronology = fields.Boolean(string='Check Chronology', default=False)
 
-    @api.one
+    @api.multi
     @api.constrains('type', 'check_chronology')
     def check_chronology_constrains(self):
-        if (
-                self.check_chronology and
-                self.type not in
-                ['sale', 'purchase', 'sale_refund', 'purchase_refund']):
-            raise ValidationError(_(
-                "Configuration error on journal '%s': the option "
-                "'Check Chronology' can only be activated on "
-                "journals that can be selected on invoices (i.e. "
-                "Sale, Sale Refund, Purchase, Purchase Refund "
-                "journals)") % self.name)
+        for rec in self:
+            if (rec.check_chronology and rec.type not in
+                    ['sale', 'purchase', 'sale_refund', 'purchase_refund']):
+                raise ValidationError(_(
+                    "Configuration error on journal '%s': the option "
+                    "'Check Chronology' can only be activated on "
+                    "journals that can be selected on invoices (i.e. "
+                    "Sale, Sale Refund, Purchase, Purchase Refund "
+                    "journals)") % rec.name)

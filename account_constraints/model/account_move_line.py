@@ -73,8 +73,8 @@ class AccountMoveLine(models.Model):
                       ' directly.\n%s.') % err_msg)
         return True
 
-    @api.cr_uid_ids_context
-    def unlink(self, cr, uid, ids, context=None, check=True):
+    @api.multi
+    def unlink(self, check=True):
         """ Add the following checks:
 
         - Is the move related to an invoice
@@ -87,18 +87,13 @@ class AccountMoveLine(models.Model):
         another object.  This is mandatory if you use the module setting
         all moves in draft (module: account_default_draft_move)
         """
-        if not context:
-            context = {}
-        if not context.get('from_parent_object', False):
-            self._check_invoice_related_move(cr, uid, ids)
-            self._check_statement_related_move(cr, uid, ids)
-        return super(AccountMoveLine, self).unlink(cr, uid, ids,
-                                                   context=context,
-                                                   check=check)
+        if not self.env.context.get('from_parent_object', False):
+            self._check_invoice_related_move()
+            self._check_statement_related_move()
+        return super(AccountMoveLine, self).unlink(check=check)
 
-    @api.cr_uid_ids_context
-    def write(self, cr, uid, ids, vals, context=None, check=True,
-              update_check=True):
+    @api.multi
+    def write(self, vals, check=True, update_check=True):
         """ Add the following checks:
 
         - Is the move related to an invoice
@@ -111,15 +106,12 @@ class AccountMoveLine(models.Model):
         by another object.  This is mandatory if you use the module
         setting all moves in draft (module: account_default_draft_move)
         """
-        if not context:
-            context = {}
-        if not context.get('from_parent_object', False):
-            self._check_invoice_related_move(cr, uid, ids, vals)
-            self._check_statement_related_move(cr, uid, ids, vals)
-        return super(AccountMoveLine, self).write(cr, uid, ids, vals,
-                                                  context=context,
-                                                  check=check,
-                                                  update_check=update_check)
+        if not self.env.context.get('from_parent_object', False):
+            self._check_invoice_related_move(vals)
+            self._check_statement_related_move(vals)
+        return super(AccountMoveLine, self).write(
+            check=check,
+            update_check=update_check)
 
     @api.constrains('currency_id', 'amount_currency')
     def _check_currency_and_amount(self):

@@ -19,7 +19,7 @@
 #
 ##############################################################################
 from openerp import models, fields, api
-from openerp.exceptions import Warning, ValidationError
+from openerp.exceptions import UserError
 
 
 class ResPartner(models.Model):
@@ -54,6 +54,6 @@ class ResPartner(models.Model):
             policy = partner.credit_policy_id
             try:
                 policy.check_policy_against_account(account)
-            except Warning as err:
-                # constrains should raise ValidationError exceptions
-                raise ValidationError(err)
+            except UserError as err:
+                # constrains should raise UserError exceptions
+                raise UserError(err)

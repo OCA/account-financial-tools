@@ -1,24 +1,21 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 import time
 
 from openerp.report import report_sxw
 from openerp import models
 
 
-class report_open_invoices_parser(report_sxw.rml_parse):
+class ReportOpenInvoicesParser(report_sxw.rml_parse):
 
-    def __init__(self, cr, uid, name, context):
-        super(report_open_invoices_parser, self).__init__(
-            cr, uid, name, context=context)
-        ids = context.get('active_ids')
-        partner_obj = self.pool['res.partner']
-        docs = partner_obj.browse(cr, uid, ids, context)
+    def __init__(self, name):
+        super(ReportOpenInvoicesParser, self).__init__(name)
+        ids = self.env.context.get('active_ids')
+        partner_obj = self.env['res.partner']
+        docs = partner_obj.browse(ids)
 
-        addresses = self.pool['res.partner']._address_display(
-            cr, uid, ids, None, None)
+        addresses = docs._address_display(None, None)
         self.localcontext.update({
             'docs': docs,
             'time': time,
@@ -27,45 +24,39 @@ class report_open_invoices_parser(report_sxw.rml_parse):
             'getLinesPayable': self._lines_get_payable,
             'addresses': addresses,
         })
-        self.context = context
 
     def _lines_get_receivable(self, partner):
-        inv_obj = self.pool['account.invoice']
+        inv_obj = self.env['account.invoice']
         dom = [('partner_id', '=', partner.id),
                ('account_id.type', '=', 'receivable'),
                ('state', '=', 'open')]
-        inv_rec = inv_obj.search(self.cr, self.uid, dom)
+        inv_rec = inv_obj.search(dom)
         move_lines = []
         for invoice in inv_rec:
-            for invoice_data in inv_obj.browse(self.cr, self.uid, invoice):
-                for move_line_data in invoice_data.move_id.line_id:
-                    if move_line_data.date_maturity:
-                        move_lines.append(move_line_data)
+            for move_line_data in invoice.move_id.line_id:
+                if move_line_data.date_maturity:
+                    move_lines.append(move_line_data)
         return move_lines
 
     def _lines_get_payable(self, partner):
-        inv_obj = self.pool['account.invoice']
+        inv_obj = self.env['account.invoice']
         dom = [('partner_id', '=', partner.id),
                ('account_id.type', '=', 'payable'),
                ('state', '=', 'open')]
-        inv_rec = inv_obj.search(self.cr, self.uid, dom)
+        inv_rec = inv_obj.search(dom)
         move_lines = []
         for invoice in inv_rec:
-            for invoice_data in inv_obj.browse(self.cr, self.uid, invoice):
-                for move_line_data in invoice_data.move_id.line_id:
-                    if move_line_data.date_maturity:
-                        move_lines.append(move_line_data)
+            for move_line_data in invoice.move_id.line_id:
+                if move_line_data.date_maturity:
+                    move_lines.append(move_line_data)
         return move_lines
 
     def _message(self, obj, company):
-        company_pool = self.pool['res.company']
-        message = company_pool.browse(self.cr, self.uid, company.id, {
-                                      'lang': obj.lang}).open_invoices_msg
-        return message.split('\n')
+        return company.open_invoices_msg.split('\n')
 
 
-class report_open_invoices(models.AbstractModel):
+class ReportOpenInvoices(models.AbstractModel):
     _name = 'report.partner_report_open_invoices.report_open_invoices'
     _inherit = 'report.abstract_report'
     _template = 'partner_report_open_invoices.report_open_invoices'
-    _wrapped_report_class = report_open_invoices_parser
+    _wrapped_report_class = ReportOpenInvoicesParser

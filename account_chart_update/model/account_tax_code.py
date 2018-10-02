@@ -18,7 +18,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields
+from openerp import api, fields, models
 
 
 class AccountTaxCode(models.Model):
@@ -26,12 +26,12 @@ class AccountTaxCode(models.Model):
 
     active = fields.Boolean('Active', default=True)
 
-    def _sum(self, cr, uid, ids, name, args, context, where='',
-             where_params=()):
+    @api.multi
+    def _sum(self, name, args, where='', where_params=()):
         try:
             return super(AccountTaxCode, self)._sum(
-                cr, uid, ids, name, args, context, where=where,
+                name, args, where=where,
                 where_params=where_params)
         except:
-            cr.rollback()
-            return dict.fromkeys(ids, 0.0)
+            self.env.cr.rollback()
+            return dict.fromkeys(self.ids, 0.0)

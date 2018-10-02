@@ -25,7 +25,7 @@ from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 from openerp import models, fields, api, _
-from openerp import exceptions
+from openerp.exceptions import ValidationError
 
 from ..services.currency_getter import Currency_getter_factory
 
@@ -133,23 +133,21 @@ supported_currecies = {
     }
 
 
-class Currency_rate_update_service(models.Model):
+class CurrencyRateUpdateService(models.Model):
     """Class keep services and currencies that
     have to be updated"""
     _name = "currency.rate.update.service"
     _description = "Currency Rate Update"
 
-    @api.one
     @api.constrains('max_delta_days')
     def _check_max_delta_days(self):
         if self.max_delta_days < 0:
-            raise exceptions.Warning(_('Max delta days must be >= 0'))
+            raise ValidationError(_('Max delta days must be >= 0'))
 
-    @api.one
     @api.constrains('interval_number')
     def _check_interval_number(self):
         if self.interval_number < 0:
-            raise exceptions.Warning(_('Interval number must be >= 0'))
+            raise ValidationError(_('Interval number must be >= 0'))
 
     @api.onchange('interval_number')
     def _onchange_interval_number(self):
@@ -237,91 +235,93 @@ class Currency_rate_update_service(models.Model):
                          _('You can use a service only one time per '
                            'company !'))]
 
-    @api.one
+    @api.multi
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
-        _logger.info(
-            'Starting to refresh currencies with service %s (company: %s)',
-            self.service, self.company_id.name)
-        factory = Currency_getter_factory()
-        curr_obj = self.env['res.currency']
-        rate_obj = self.env['res.currency.rate']
-        company = self.company_id
-        # The multi company currency can be set or no so we handle
-        # The two case
-        if company.auto_currency_up:
-            main_currency = curr_obj.search(
-                [('base', '=', True), ('company_id', '=', company.id)],
-                limit=1)
-            if not main_currency:
-                # If we can not find a base currency for this company
-                # we look for one with no company set
+        for rec in self:
+            _logger.info(
+                'Starting to refresh currencies with service %s (company: %s)',
+                rec.service, rec.company_id.name)
+            factory = Currency_getter_factory()
+            curr_obj = self.env['res.currency']
+            rate_obj = self.env['res.currency.rate']
+            company = rec.company_id
+            # The multi company currency can be set or no so we handle
+            # The two case
+            if company.auto_currency_up:
                 main_currency = curr_obj.search(
-                    [('base', '=', True), ('company_id', '=', False)],
+                    [('base', '=', True), ('company_id', '=', company.id)],
                     limit=1)
-            if not main_currency:
-                raise exceptions.Warning(_('There is no base currency set!'))
-            if main_currency.rate != 1:
-                raise exceptions.Warning(_('Base currency rate should '
-                                           'be 1.00!'))
-            note = self.note or ''
-            try:
-                # We initalize the class that will handle the request
-                # and return a dict of rate
-                getter = factory.register(self.service)
-                curr_to_fetch = map(lambda x: x.name,
-                                    self.currency_to_update)
-                res, log_info = getter.get_updated_currency(
-                    curr_to_fetch,
-                    main_currency.name,
-                    self.max_delta_days
-                    )
-                rate_name = \
-                    fields.Datetime.to_string(datetime.utcnow().replace(
-                        hour=0, minute=0, second=0, microsecond=0))
-                for curr in self.currency_to_update:
-                    if curr.id == main_currency.id:
-                        continue
-                    do_create = True
-                    for rate in curr.rate_ids:
-                        if rate.name == rate_name:
-                            rate.rate = res[curr.name]
-                            do_create = False
-                            break
-                    if do_create:
-                        vals = {
-                            'currency_id': curr.id,
-                            'rate': res[curr.name],
-                            'name': rate_name
-                        }
-                        rate_obj.create(vals)
-                        _logger.info(
-                            'Updated currency %s via service %s',
-                            curr.name, self.service)
+                if not main_currency:
+                    # If we can not find a base currency for this company
+                    # we look for one with no company set
+                    main_currency = curr_obj.search(
+                        [('base', '=', True), ('company_id', '=', False)],
+                        limit=1)
+                if not main_currency:
+                    raise ValidationError(_('There is no base currency set!'))
+                if main_currency.rate != 1:
+                    raise ValidationError(_(
+                        'Base currency rate should be 1.00!'))
+                note = rec.note or ''
+                try:
+                    # We initalize the class that will handle the request
+                    # and return a dict of rate
+                    getter = factory.register(rec.service)
+                    curr_to_fetch = map(lambda x: x.name,
+                                        rec.currency_to_update)
+                    res, log_info = getter.get_updated_currency(
+                        curr_to_fetch,
+                        main_currency.name,
+                        rec.max_delta_days
+                        )
+                    rate_name = \
+                        fields.Datetime.to_string(datetime.utcnow().replace(
+                            hour=0, minute=0, second=0, microsecond=0))
+                    for curr in rec.currency_to_update:
+                        if curr.id == main_currency.id:
+                            continue
+                        do_create = True
+                        for rate in curr.rate_ids:
+                            if rate.name == rate_name:
+                                rate.rate = res[curr.name]
+                                do_create = False
+                                break
+                        if do_create:
+                            vals = {
+                                'currency_id': curr.id,
+                                'rate': res[curr.name],
+                                'name': rate_name
+                            }
+                            rate_obj.create(vals)
+                            _logger.info(
+                                'Updated currency %s via service %s',
+                                curr.name, rec.service)
 
-                # Show the most recent note at the top
-                msg = '%s \n%s currency updated. %s' % (
-                    log_info or '',
-                    fields.Datetime.to_string(datetime.today()),
-                    note
-                )
-                self.write({'note': msg})
-            except Exception as exc:
-                error_msg = '\n%s ERROR : %s %s' % (
-                    fields.Datetime.to_string(datetime.today()),
-                    repr(exc),
-                    note
-                )
-                _logger.error(repr(exc))
-                self.write({'note': error_msg})
-            if self._context.get('cron', False):
-                midnight = time(0, 0)
-                next_run = (datetime.combine(
-                            fields.Date.from_string(self.next_run),
+                    # Show the most recent note at the top
+                    msg = '%s \n%s currency updated. %s' % (
+                        log_info or '',
+                        fields.Datetime.to_string(datetime.today()),
+                        note
+                    )
+                    rec.write({'note': msg})
+                except Exception as exc:
+                    error_msg = '\n%s ERROR : %s %s' % (
+                        fields.Datetime.to_string(datetime.today()),
+                        repr(exc),
+                        note
+                    )
+                    _logger.error(repr(exc))
+                    rec.write({'note': error_msg})
+                if self.env.context.get('cron', False):
+                    midnight = time(0, 0)
+                    next_run = (
+                        datetime.combine(
+                            fields.Date.from_string(rec.next_run),
                             midnight) +
-                            _intervalTypes[str(self.interval_type)]
-                            (self.interval_number)).date()
-                self.next_run = next_run
+                        _intervalTypes[str(rec.interval_type)]
+                        (rec.interval_number)).date()
+                    rec.next_run = next_run
 
     @api.multi
     def run_currency_update(self):

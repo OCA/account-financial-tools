@@ -29,27 +29,24 @@ class AccountMoveLine(models.Model):
     # We set the tax_amount readonly, because we recompute it in every case.
     tax_amount = fields.Float(readonly=True)
 
-    @api.one
+    @api.multi
     def force_compute_tax_amount(self):
-        if self.tax_code_id:
-            self.tax_amount = self.credit - self.debit
+        for rec in self:
+            if rec.tax_code_id:
+                rec.tax_amount = rec.credit - rec.debit
 
-    @api.cr_uid_context
-    def create(self, cr, uid, vals, context=None, check=True):
-        record_id = super(AccountMoveLine, self).create(cr, uid, vals,
-                                                        context=context,
-                                                        check=check)
-        self.force_compute_tax_amount(cr, uid, [record_id], context=context)
+    @api.model
+    def create(self, vals, check=True):
+        record_id = super(AccountMoveLine, self).create(vals, check=check)
+        record_id.force_compute_tax_amount()
         return record_id
 
-    @api.cr_uid_ids_context
-    def write(self, cr, uid, ids, vals, context=None, check=True,
-              update_check=True):
-        result = super(AccountMoveLine, self).write(cr, uid, ids, vals,
-                                                    context=context,
-                                                    check=check,
-                                                    update_check=update_check)
-
+    @api.multi
+    def write(self, vals, check=True, update_check=True):
+        result = super(AccountMoveLine, self).write(
+            vals,
+            check=check,
+            update_check=update_check)
         if ('debit' in vals) or ('credit' in vals):
-            self.force_compute_tax_amount(cr, uid, ids, context=context)
+            self.force_compute_tax_amount()
         return result

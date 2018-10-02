@@ -22,7 +22,7 @@
 
 import logging
 
-from openerp.osv import fields, orm
+from openerp import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -37,39 +37,38 @@ except ImportError:
     job = empty_decorator
 
 
-class ValidateAccountMove(orm.TransientModel):
+class ValidateAccountMove(models.TransientModel):
 
     """Wizard to mark account moves for batch posting."""
 
     _inherit = "validate.account.move"
 
-    _columns = {
-        'action': fields.selection([('mark', 'Mark for posting'),
-                                    ('unmark', 'Unmark for posting')],
-                                   "Action", required=True),
-        'eta': fields.integer('Seconds to wait before starting the jobs'),
-        'asynchronous': fields.boolean('Use asynchronous validation'),
-    }
+    action = fields.Selection([
+        ('mark', 'Mark for posting'),
+        ('unmark', 'Unmark for posting')],
+        "Action",
+        required=True,
+        default='mark',
+    )
+    eta = fields.Integer('Seconds to wait before starting the jobs')
+    asynchronous = fields.Boolean(
+        'Use asynchronous validation',
+        default=True,
+    )
 
-    _defaults = {
-        'action': 'mark',
-        'asynchronous': True,
-    }
-
-    def validate_move(self, cr, uid, ids, context=None):
+    @api.multi
+    def validate_move(self):
         """Create a single job that will create one job per move.
 
         Return action.
 
         """
-        session = ConnectorSession(cr, uid, context=context)
-        wizard_id = ids[0]
+        self.ensure_one()
+        session = ConnectorSession()
         # to find out what _classic_write does, read the documentation.
-        wizard_data = self.read(cr, uid, wizard_id, context=context,
-                                load='_classic_write')
+        wizard_data = self.read(self.id, load='_classic_write')
         if not wizard_data.get('asynchronous'):
-            return super(ValidateAccountMove, self)\
-                .validate_move(cr, uid, ids, context=context)
+            return super(ValidateAccountMove, self).validate_move()
         wizard_data.pop('id')
         if wizard_data.get('journal_ids'):
             journals_ids_vals = [(6, False,
@@ -80,48 +79,30 @@ class ValidateAccountMove(orm.TransientModel):
                                 wizard_data.get('period_ids'))]
             wizard_data['period_ids'] = periods_ids_vals
 
-        if context.get('automated_test_execute_now'):
+        if self.env.context.get('automated_test_execute_now'):
             process_wizard(session, self._name, wizard_data)
         else:
             process_wizard.delay(session, self._name, wizard_data)
 
         return {'type': 'ir.actions.act_window_close'}
 
-    def process_wizard(self, cr, uid, ids, context=None):
+    def process_wizard(self):
         """Choose the correct list of moves to mark and then validate."""
-        for wiz in self.browse(cr, uid, ids, context=context):
-
-            move_obj = self.pool['account.move']
-
+        for wiz in self:
+            move_obj = self.env['account.move']
             domain = [('state', '=', 'draft'),
                       ('journal_id', 'in', wiz.journal_ids.ids),
                       ('period_id', 'in', wiz.period_ids.ids)]
-            move_ids = move_obj.search(cr, uid, domain, order='date',
-                                       context=context)
-
+            move_ids = move_obj.search(domain, order='date')
             if wiz.action == 'mark':
-                move_obj.mark_for_posting(cr, uid, move_ids, eta=wiz.eta,
-                                          context=context)
-
+                move_ids.mark_for_posting(eta=wiz.eta)
             elif wiz.action == 'unmark':
-                move_obj.unmark_for_posting(cr, uid, move_ids, context=context)
+                move_ids.unmark_for_posting()
 
 
 @job
 def process_wizard(session, model_name, wizard_data):
     """Create jobs to validate Journal Entries."""
-
-    wiz_obj = session.pool[model_name]
-    new_wiz_id = wiz_obj.create(
-        session.cr,
-        session.uid,
-        wizard_data,
-        session.context
-    )
-
-    wiz_obj.process_wizard(
-        session.cr,
-        session.uid,
-        ids=[new_wiz_id],
-        context=session.context,
-    )
+    wiz_obj = session.env[model_name]
+    new_wiz_id = wiz_obj.create(wizard_data)
+    wiz_obj.process_wizard(ids=[new_wiz_id])

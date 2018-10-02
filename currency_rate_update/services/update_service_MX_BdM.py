@@ -27,7 +27,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class MX_BdM_getter(Currency_getter_interface):
+class MXBdMGetter(Currency_getter_interface):
     """Implementation of Currency_getter_factory interface
     for Banco de México service
 

@@ -1,44 +1,25 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Account reversal module for OpenERP
-#    Copyright (C) 2011 Akretion (http://www.akretion.com). All Rights Reserved
-#    @author Alexis de Lattre <alexis.delattre@akretion.com>
-#    with the kind advice of Nicolas Bessi from Camptocamp
-#    Copyright (C) 2012-2013 Camptocamp SA (http://www.camptocamp.com)
-#    @author Guewen Baconnier <guewen.baconnier@camptocamp.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# Copyright 2011 Akretion (http://www.akretion.com). All Rights Reserved
+# Copyright 2012-2013 Camptocamp SA (http://www.camptocamp.com)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openerp import fields, models, api, _
 
 
-class account_move(models.Model):
+class AccountMove(models.Model):
     _inherit = "account.move"
 
     to_be_reversed = fields.Boolean(
         'To Be Reversed',
         help='Check this box if your entry has to be'
-        'reversed at the end of period.')
+        'reversed at the end of period.',
+    )
     reversal_id = fields.Many2one(
         'account.move',
         'Reversal Entry',
         ondelete='set null',
         copy=False,
-        readonly=True)
+        readonly=True,
+    )
 
     @api.multi
     def validate(self):
@@ -46,13 +27,17 @@ class account_move(models.Model):
         #       https://github.com/odoo/odoo/pull/7735 is merged
         if self.env.context.get('novalidate'):
             return
-        return super(account_move, self).validate()
+        return super(AccountMove, self).validate()
 
     @api.multi
-    def _move_reversal(self, reversal_date,
-                       reversal_period_id=False, reversal_journal_id=False,
-                       move_prefix=False, move_line_prefix=False,
-                       reconcile=False):
+    def _move_reversal(
+            self,
+            reversal_date,
+            reversal_period_id=False,
+            reversal_journal_id=False,
+            move_prefix=False,
+            move_line_prefix=False,
+            reconcile=False):
         """
         Create the reversal of a move
 
@@ -137,10 +122,14 @@ class account_move(models.Model):
         return reversal_move.id
 
     @api.multi
-    def create_reversals(self, reversal_date, reversal_period_id=False,
-                         reversal_journal_id=False,
-                         move_prefix=False, move_line_prefix=False,
-                         reconcile=False):
+    def create_reversals(
+            self,
+            reversal_date,
+            reversal_period_id=False,
+            reversal_journal_id=False,
+            move_prefix=False,
+            move_line_prefix=False,
+            reconcile=False):
         """
         Create the reversal of one or multiple moves
 

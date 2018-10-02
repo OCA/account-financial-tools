@@ -23,7 +23,7 @@ import logging
 
 from datetime import datetime
 from openerp import fields
-from openerp.exceptions import except_orm
+from openerp.exceptions import MissingError
 
 _logger = logging.getLogger(__name__)
 
@@ -63,7 +63,7 @@ class UnsuportedCurrencyError(Exception):
         return 'Unsupported currency %s' % self.curr
 
 
-class Currency_getter_interface(object):
+class CurrencyGetterInterface(object):
     "Abstract class of currency getter"
 
     log_info = " "
@@ -113,14 +113,12 @@ class Currency_getter_interface(object):
             objfile.close()
             return rawfile
         except ImportError:
-            raise except_orm(
-                'Error !',
-                self.MOD_NAME + 'Unable to import urllib !'
+            raise MissingError(
+                'Error !' + self.MOD_NAME + 'Unable to import urllib !'
             )
         except IOError:
-            raise except_orm(
-                'Error !',
-                self.MOD_NAME + 'Web Service does not exist !'
+            raise MissingError(
+                'Error !' + self.MOD_NAME + 'Web Service does not exist !'
             )
 
     def check_rate_date(self, rate_date, max_delta_days):
