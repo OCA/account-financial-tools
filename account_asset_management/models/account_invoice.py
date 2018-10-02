@@ -119,9 +119,10 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).invoice_line_move_line_get()
         invoice_line_obj = self.env['account.invoice.line']
         for vals in res:
-            invline = invoice_line_obj.browse(vals['invl_id'])
-            if invline.asset_profile_id:
-                vals['asset_profile_id'] = invline.asset_profile_id.id
+            if vals.get('invl_id'):
+                invline = invoice_line_obj.browse(vals['invl_id'])
+                if invline.asset_profile_id:
+                    vals['asset_profile_id'] = invline.asset_profile_id.id
         return res
 
 
