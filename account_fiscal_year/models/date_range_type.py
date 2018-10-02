@@ -21,5 +21,4 @@ class DateRangeType(models.Model):
                     _('You cannot delete a date range type with '
                       'flag "fiscal_year"')
                 )
-            else:
-                super(DateRangeType, rec).unlink()
+        return super(DateRangeType, self).unlink()
