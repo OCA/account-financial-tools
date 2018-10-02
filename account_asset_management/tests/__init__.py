@@ -20,9 +20,4 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 from . import test_account_asset_management
-
-checks = [
-    test_account_asset_management,
-]
