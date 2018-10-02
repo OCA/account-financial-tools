@@ -43,7 +43,7 @@
             <field name="name">account.tax.group.tree</field>
             <field name="model">account.tax.group</field>
             <field name="arch" type="xml">
-                <tree string="Account Tax Group">
+                <tree name="account_tax_group">
                     <field name="sequence"/>
                     <field name="name"/>
                 </tree>
