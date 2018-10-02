@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
 
-from odoo.addons.report_xlsx_helper.report.abstract_report_xlsx \
-    import AbstractReportXlsx
+from odoo import models, _
 from odoo.exceptions import UserError
-from odoo.report import report_sxw
-from odoo.tools.translate import translate, _
+from odoo.tools.translate import translate
 
 _logger = logging.getLogger(__name__)
 
@@ -16,7 +13,9 @@ _logger = logging.getLogger(__name__)
 IR_TRANSLATION_NAME = 'account.asset.report'
 
 
-class AssetReportXlsx(AbstractReportXlsx):
+class AssetReportXlsx(models.AbstractModel):
+    _name = 'report.account_asset_management_xls.asset_report_xls'
+    _inherit = 'report.report_xlsx.abstract'
 
     def _(self, src):
         lang = self.env.context.get('lang', 'en_US')
@@ -831,9 +830,3 @@ class AssetReportXlsx(AbstractReportXlsx):
                 'salvage_total_formula': salvage_total_formula,
             },
             default_format=self.format_theader_yellow_left)
-
-
-AssetReportXlsx(
-    'report.account.asset.xlsx',
-    'wiz.account.asset.report',
-    parser=report_sxw.rml_parse)

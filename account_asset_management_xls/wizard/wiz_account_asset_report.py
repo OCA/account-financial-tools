@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+import unicodedata
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
 class WizAccountAssetReport(models.TransientModel):
-
     _name = 'wiz.account.asset.report'
     _description = 'Financial Assets report'
 
@@ -53,11 +53,18 @@ class WizAccountAssetReport(models.TransientModel):
             raise UserError(
                 _('No records found for your selection!'))
 
+        module = __name__.split('addons.')[1].split('.')[0]
+        report_name = '{}.asset_report_xls'.format(module)
+        prefix = unicodedata.normalize(
+            'NFKD', self.date_range_id.name
+        ).encode('ascii', 'ignore').decode('ascii')
+        prefix = ''.join(x for x in prefix if x.isalnum())
+        report_file = '{}_asset_report'.format(prefix)
         report = {
-            'type': 'ir.actions.report.xml',
+            'type': 'ir.actions.report',
             'report_type': 'xlsx',
-            'report_name': 'account.asset.xlsx',
-            'context': dict(self._context, xlsx_export=True),
-            'datas': {'ids': [self.id]},
+            'report_name': report_name,
+            'context': dict(self.env.context, report_file=report_file),
+            'data': {'dynamic_report': True},
         }
         return report
