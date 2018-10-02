@@ -56,7 +56,7 @@
         <field name="tax_exigibility">on_payment</field>
         <field name="account_id" ref="demo_account_vatccb"/>
         <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account" ref="demo_account_vatc"/>
+        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
         <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_5')])]"/>
     </record>
     <record id="demo_vatccb_09" model="account.tax">
@@ -69,7 +69,7 @@
         <field name="tax_exigibility">on_payment</field>
         <field name="account_id" ref="demo_account_vatccb"/>
         <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account" ref="demo_account_vatc"/>
+        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
         <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_9')])]"/>
     </record>
     <record id="demo_vatccb_19" model="account.tax">
@@ -82,7 +82,7 @@
         <field name="tax_exigibility">on_payment</field>
         <field name="account_id" ref="demo_account_vatccb"/>
         <field name="refund_account_id" ref="demo_account_vatc"/>
-        <field name="cash_basis_account" ref="demo_account_vatc"/>
+        <field name="cash_basis_account_id" ref="demo_account_vatc"/>
         <field name="tag_ids" eval="[(6,0,[ref('demo_tax_tag_vat'), ref('demo_tax_tag_vatccb'), ref('demo_tax_tag_vatccb_19')])]"/>
     </record>
 </odoo>
