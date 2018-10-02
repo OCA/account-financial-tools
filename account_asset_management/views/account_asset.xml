@@ -219,37 +219,6 @@
     <field name="search_view_id" ref="account_asset_view_search"/>
   </record>
 
-  <record model="ir.ui.view" id="account_asset_view_tree_hierarchy">
-    <field name="name">account.asset.hierarchy</field>
-    <field name="model">account.asset</field>
-    <field name="field_parent">child_ids</field>
-    <field name="arch" type="xml">
-      <tree string="Assets" decoration-info="type == 'view'">
-        <field name="name"/>
-        <field name="type" invisible="1"/>
-        <field name="code"/>
-        <!--
-        <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="date_start"/>
-        <field name="date_remove"/>
-        <field name="profile_id"/>
-        <field name="state" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="company_id" groups="base.group_multi_company"/>
-        -->
-      </tree>
-    </field>
-  </record>
-
-  <record id="account_asset_action_hierarchy" model="ir.actions.act_window">
-    <field name="name">Asset Hierarchy</field>
-    <field name="res_model">account.asset</field>
-    <field name="view_type">tree</field>
-    <field name="domain">[('parent_id','=',False)]</field>
-    <field name="view_id" ref="account_asset_view_tree_hierarchy"/>
-  </record>
-
   <act_window id="act_entries_open"
               name="Journal Items"
               src_model="account.asset"
