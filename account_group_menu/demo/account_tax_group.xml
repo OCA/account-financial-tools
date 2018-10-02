@@ -63,7 +63,7 @@
         <field name="tax_group_id" ref="demo_account_tax_group_4"/>
         <field name="account_id" ref="demo_account_130"/>
         <field name="refund_account_id" ref="demo_account_130"/>
-        <field name="cash_basis_account" ref="demo_account_110"/>
+        <field name="cash_basis_account_id" ref="demo_account_110"/>
     </record>
     <record id="demo_vatccb_09" model="account.tax">
         <field name="sequence">22</field>
@@ -76,7 +76,7 @@
         <field name="tax_group_id" ref="demo_account_tax_group_4"/>
         <field name="account_id" ref="demo_account_130"/>
         <field name="refund_account_id" ref="demo_account_130"/>
-        <field name="cash_basis_account" ref="demo_account_111"/>
+        <field name="cash_basis_account_id" ref="demo_account_111"/>
     </record>
     <record id="demo_vatccb_19" model="account.tax">
         <field name="sequence">23</field>
@@ -89,6 +89,6 @@
         <field name="tax_group_id" ref="demo_account_tax_group_4"/>
         <field name="account_id" ref="demo_account_130"/>
         <field name="refund_account_id" ref="demo_account_130"/>
-        <field name="cash_basis_account" ref="demo_account_112"/>
+        <field name="cash_basis_account_id" ref="demo_account_112"/>
     </record>
 </odoo>
