@@ -6,6 +6,7 @@
             <field name="name">account.config.settings.inherit</field>
             <field name="inherit_id" ref="account.view_account_config_settings"/>
             <field name="model">account.config.settings</field>
+            <field name="priority">99</field>
             <field name="arch" type="xml">
                 <field name="module_account_asset" position="replace">
                     <field name="module_account_asset_management" class="oe_inline"/>
