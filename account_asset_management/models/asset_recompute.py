@@ -2,9 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    account_asset_management tests
 #
-#    Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
+#    Copyright (c) 2014 ACSONE SA/NV (http://acsone.eu).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,4 +20,25 @@
 #
 ##############################################################################
 
-from . import test_account_asset_management
+from odoo import fields, models
+
+
+class AccountAssetRecomputeTrigger(models.Model):
+    _name = 'account.asset.recompute.trigger'
+    _description = "Asset table recompute triggers"
+
+    reason = fields.Char(
+        string='Reason', required=True)
+    company_id = fields.Many2one(
+        'res.company', string='Company', required=True)
+    date_trigger = fields.Datetime(
+        'Trigger Date',
+        readonly=True,
+        help="Date of the event triggering the need to "
+             "recompute the Asset Tables.")
+    date_completed = fields.Datetime(
+        'Completion Date', readonly=True)
+    state = fields.Selection(
+        selection=[('open', 'Open'), ('done', 'Done')],
+        string='State', default='open',
+        readonly=True)

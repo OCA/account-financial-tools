@@ -2,9 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    account_asset_management tests
 #
-#    Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
+#    Copyright (c) 2014 ACSONE SA/NV (http://acsone.eu).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -21,4 +20,16 @@
 #
 ##############################################################################
 
-from . import test_account_asset_management
+from odoo import fields, models
+
+
+class Config(models.TransientModel):
+    _inherit = 'account.config.settings'
+
+    module_account_asset_management = fields.Boolean(
+        'Assets management (OCA)',
+        help="""This allows you to manage the assets owned by a company
+                or a person. It keeps track of the depreciation occurred
+                on those assets, and creates account move for those
+                depreciation lines.
+                This installs the module account_asset_management.""")

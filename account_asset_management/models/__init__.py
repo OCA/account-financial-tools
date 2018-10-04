@@ -3,7 +3,9 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (c) 2014 ACSONE SA/NV (http://acsone.eu).
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
+#    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,18 +22,12 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
-
-
-class Config(orm.TransientModel):
-    _inherit = 'account.config.settings'
-
-    _columns = {
-        'module_account_asset_management': fields.boolean(
-            'Assets management (OCA)',
-            help="""This allows you to manage the assets owned by a company
-                    or a person. It keeps track of the depreciation occurred
-                    on those assets, and creates account move for those
-                    depreciation lines.
-                    This installs the module account_asset_management."""),
-    }
+from . import account_asset
+from . import account_asset_profile
+from . import account_asset_line
+from . import account_invoice
+from . import account_account
+from . import account_move
+from . import asset_recompute
+from . import date_range
+from . import res_config

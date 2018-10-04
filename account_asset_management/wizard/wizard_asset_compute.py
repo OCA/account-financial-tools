@@ -21,44 +21,28 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
-from openerp.tools.translate import _
+from odoo import api, fields, models, _
 
 
-class asset_depreciation_confirmation_wizard(orm.TransientModel):
+class AssetDepreciationConfirmationWizard(models.TransientModel):
     _name = "asset.depreciation.confirmation.wizard"
     _description = "asset.depreciation.confirmation.wizard"
-    _columns = {
-        'period_id': fields.many2one(
-            'account.period', 'Period',
-            domain="[('special', '=', False), ('state', '=', 'draft')]",
-            required=True,
-            help="Choose the period for which you want to automatically "
-                 "post the depreciation lines of running assets"),
-    }
 
-    def _get_period(self, cr, uid, context=None):
-        ctx = dict(context or {}, account_period_prefer_normal=True)
-        periods = self.pool.get('account.period').find(cr, uid, context=ctx)
-        if periods:
-            return periods[0]
-        return False
+    date_end = fields.Date(
+        'Date',
+        required=True,
+        default=fields.Date.today,
+        help="All depreciation lines prior to this date will be automatically"
+             " posted")
 
-    _defaults = {
-        'period_id': _get_period,
-    }
-
-    def asset_compute(self, cr, uid, ids, context):
-        ass_obj = self.pool.get('account.asset.asset')
-        asset_ids = ass_obj.search(
-            cr, uid,
-            [('state', '=', 'open'), ('type', '=', 'normal')],
-            context=context)
-        data = self.browse(cr, uid, ids, context=context)
-        period_id = data[0].period_id.id
-        created_move_ids = ass_obj._compute_entries(
-            cr, uid, asset_ids, period_id,
-            check_triggers=True, context=context)
+    @api.multi
+    def asset_compute(self):
+        self.ensure_one()
+        ass_obj = self.env['account.asset']
+        assets = ass_obj.search(
+            [('state', '=', 'open'), ('type', '=', 'normal')])
+        created_move_ids = assets._compute_entries(self.date_end,
+                                                   check_triggers=True)
         domain = "[('id', 'in', [" + \
             ','.join(map(str, created_move_ids)) + "])]"
         return {
@@ -70,5 +54,3 @@ class asset_depreciation_confirmation_wizard(orm.TransientModel):
             'domain': domain,
             'type': 'ir.actions.act_window',
         }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

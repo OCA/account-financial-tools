@@ -3,7 +3,6 @@
 #
 #    OpenERP, Open Source Management Solution
 #
-#    Copyright (C) 2010-2012 OpenERP s.a. (<http://openerp.com>).
 #    Copyright (c) 2014 Noviat nv/sa (www.noviat.com). All rights reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,8 +20,5 @@
 #
 ##############################################################################
 
-from . import account_asset_change_duration
 from . import wizard_asset_compute
 from . import account_asset_remove
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
