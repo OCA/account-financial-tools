@@ -6,7 +6,7 @@ from datetime import datetime
 import logging
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -14,10 +14,6 @@ _logger = logging.getLogger(__name__)
 class AccountAssetRemove(models.TransientModel):
     _name = 'account.asset.remove'
     _description = 'Remove Asset'
-
-    _sql_constraints = [(
-        'sale_value', 'CHECK (sale_value>=0)',
-        'The Sale Value must be positive!')]
 
     date_remove = fields.Date(
         string='Asset Removal Date', required=True,
@@ -61,6 +57,11 @@ class AccountAssetRemove(models.TransientModel):
              "the 'Plus-Value Account' or 'Min-Value Account' ")
     note = fields.Text('Notes')
 
+    @api.constrains('sale_value')
+    def _check_sale_value(self):
+        if self.sale_value < 0:
+            raise ValidationError(_('The Sale Value must be positive!'))
+
     @api.model
     def _default_sale_value(self):
         return self._get_sale()['sale_value']
@@ -70,7 +71,7 @@ class AccountAssetRemove(models.TransientModel):
         return self._get_sale()['account_sale_id']
 
     def _get_sale(self):
-        asset_id = self._context.get('active_id')
+        asset_id = self.env.context.get('active_id')
         sale_value = 0.0
         account_sale_id = False
         inv_lines = self.env['account.invoice.line'].search(
@@ -89,19 +90,19 @@ class AccountAssetRemove(models.TransientModel):
 
     @api.model
     def _default_account_plus_value_id(self):
-        asset_id = self._context.get('active_id')
+        asset_id = self.env.context.get('active_id')
         asset = self.env['account.asset'].browse(asset_id)
         return asset.profile_id.account_plus_value_id
 
     @api.model
     def _default_account_min_value_id(self):
-        asset_id = self._context.get('active_id')
+        asset_id = self.env.context.get('active_id')
         asset = self.env['account.asset'].browse(asset_id)
         return asset.profile_id.account_min_value_id
 
     @api.model
     def _default_account_residual_value_id(self):
-        asset_id = self._context.get('active_id')
+        asset_id = self.env.context.get('active_id')
         asset = self.env['account.asset'].browse(asset_id)
         return asset.profile_id.account_residual_value_id
 
@@ -115,7 +116,7 @@ class AccountAssetRemove(models.TransientModel):
     @api.model
     def _get_posting_regime(self):
         asset_obj = self.env['account.asset']
-        asset = asset_obj.browse(self._context.get('active_id'))
+        asset = asset_obj.browse(self.env.context.get('active_id'))
         country = asset and asset.company_id.country_id.code or False
         if country in self._residual_value_regime_countries():
             return 'residual_value'
@@ -130,12 +131,12 @@ class AccountAssetRemove(models.TransientModel):
         self.ensure_one()
         asset_line_obj = self.env['account.asset.line']
 
-        asset_id = self._context.get('active_id')
+        asset_id = self.env.context.get('active_id')
         asset = self.env['account.asset'].browse(asset_id)
         asset_ref = asset.code and '%s (ref: %s)' \
             % (asset.name, asset.code) or asset.name
 
-        if self._context.get('early_removal'):
+        if self.env.context.get('early_removal'):
             residual_value = self._prepare_early_removal(asset)
         else:
             residual_value = asset.value_residual
@@ -195,8 +196,7 @@ class AccountAssetRemove(models.TransientModel):
             'res_model': 'account.move',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'context': self._context,
-            'nodestroy': True,
+            'context': self.env.context,
             'domain': [('id', '=', move.id)],
         }
 
