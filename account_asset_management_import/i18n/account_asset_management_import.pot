@@ -1,0 +1,293 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_asset_management_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:188
+#, python-format
+msgid "%s, field '%s', the import of ORM fields of type '%s' is not supported"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:163
+#, python-format
+msgid "%s, undefined field '%s' found while importing assets"
+msgstr ""
+
+#. module: account_asset_management_import
+#: selection:fixed.asset.import,csv_separator:0
+#: selection:fixed.asset.import,decimal_separator:0
+msgid ", (comma)"
+msgstr ""
+
+#. module: account_asset_management_import
+#: selection:fixed.asset.import,decimal_separator:0
+msgid ". (dot)"
+msgstr ""
+
+#. module: account_asset_management_import
+#: selection:fixed.asset.import,csv_separator:0
+msgid "; (semicolon)"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_csv_separator
+msgid "CSV Separator"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form_result
+msgid "Close"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_codepage
+msgid "Code Page"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,help:account_asset_management_import.field_fixed_asset_import_codepage
+msgid "Code Page of the system that has generated the csv file.\n"
+"E.g. Windows-1252, utf-8"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_compute_board
+msgid "Compute Depreciation Board"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_decimal_separator
+msgid "Decimal Separator"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_dialect
+msgid "Dialect"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:287
+#, python-format
+msgid "Duplicate Asset with reference '%s' found !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:146
+#, python-format
+msgid "Duplicate header field '%s' found !\n"
+"Please correct the input file."
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:199
+#, python-format
+msgid "Error when processing line '%s'"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:384
+#, python-format
+msgid "Error while processing line '%s' :\n"
+"%s"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_fa_data
+msgid "File"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_fa_fname
+msgid "Filename"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.actions.act_window,name:account_asset_management_import.fixed_asset_import_action
+#: model:ir.ui.menu,name:account_asset_management_import.fixed_asset_import_menu
+msgid "Fixed Assets Import"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_id
+msgid "ID"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form_result
+msgid "Import File"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:433
+#, python-format
+msgid "Import result"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:449
+#, python-format
+msgid "Imported Assets"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:257
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Boolean !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:223
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Integer !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:271
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Many2One !\n"
+"You should specify the database key or contact your IT department to add support for this field."
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:240
+#, python-format
+msgid "Incorrect value '%s' for field '%s' of type Numeric !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_lines
+msgid "Input Lines"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,field_description:account_asset_management_import.field_fixed_asset_import_note
+msgid "Log"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:307
+#, python-format
+msgid "Multiple partners with Reference or Name '%s' found !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:325
+#, python-format
+msgid "Multiple profiles with Internal Reference or Name '%s' found !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:106
+#, python-format
+msgid "No header line found in the input file !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:303
+#, python-format
+msgid "Partner '%s' not found !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:321
+#, python-format
+msgid "Profile '%s' not found !"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form_result
+msgid "Results :"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model.fields,help:account_asset_management_import.field_fixed_asset_import_compute_board
+msgid "Select this option if you want to compute the depreciation tables for the new created assets.\n"
+"This option may take a considerable amount of time when importing a large number of assets."
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form
+msgid "Select your file :"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:343
+#, python-format
+msgid "The '%s' field is a required field that must be correctly set."
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form_result
+msgid "View Assets"
+msgstr ""
+
+#. module: account_asset_management_import
+#: code:addons/account_asset_management_import/wizard/fixed_asset_import.py:383
+#, python-format
+msgid "Wrong Code Page"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form
+msgid "_Import"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.model,name:account_asset_management_import.model_fixed_asset_import
+msgid "fixed.asset.import"
+msgstr ""
+
+#. module: account_asset_management_import
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form
+#: model:ir.ui.view,arch_db:account_asset_management_import.fixed_asset_import_view_form_result
+msgid "or"
+msgstr ""
+
