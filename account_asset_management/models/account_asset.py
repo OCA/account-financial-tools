@@ -83,7 +83,9 @@ class AccountAsset(models.Model):
         string='Parent Asset', readonly=True,
         states={'draft': [('readonly', False)]},
         domain=[('type', '=', 'view')],
-        ondelete='restrict')
+        ondelete='restrict',
+        index=True,
+    )
     parent_left = fields.Integer(index=True)
     parent_right = fields.Integer(index=True)
     child_ids = fields.One2many(
@@ -234,12 +236,15 @@ class AccountAsset(models.Model):
                     lambda l: l.type in ('depreciate', 'remove') and
                     (l.init_entry or l.move_check))
                 value_depreciated = sum([l.amount for l in lines])
-                asset.value_residual = \
-                    asset.depreciation_base - value_depreciated
-                asset.value_depreciated = value_depreciated
+                residual = asset.depreciation_base - value_depreciated
+                depreciated = value_depreciated
             else:
-                asset.value_residual = 0.0
-                asset.value_depreciated = 0.0
+                residual = 0.0
+                depreciated = 0.0
+            asset.update({
+                'value_residual': residual,
+                'value_depreciated': depreciated
+            })
 
     @api.multi
     @api.constrains('parent_id')
@@ -279,9 +284,10 @@ class AccountAsset(models.Model):
         dl_create_line = self.depreciation_line_ids.filtered(
             lambda r: r.type == 'create')
         if dl_create_line:
-            dl_create_line.write({
+            dl_create_line.update({
                 'amount': self.depreciation_base,
-                'line_date': self.date_start})
+                'line_date': self.date_start
+            })
 
     @api.onchange('profile_id')
     def _onchange_profile_id(self):
@@ -290,16 +296,18 @@ class AccountAsset(models.Model):
                 raise UserError(
                     _("You cannot change the profile of an asset "
                       "with accounting entries."))
-        if self.profile_id:
-            profile = self.profile_id
-            self.parent_id = profile.parent_id
-            self.method = profile.method
-            self.method_number = profile.method_number
-            self.method_time = profile.method_time
-            self.method_period = profile.method_period
-            self.method_progress_factor = profile.method_progress_factor
-            self.prorata = profile.prorata
-            self.account_analytic_id = profile.account_analytic_id
+        profile = self.profile_id
+        if profile:
+            self.update({
+                'parent_id': profile.parent_id,
+                'method': profile.method,
+                'method_number': profile.method_number,
+                'method_time': profile.method_time,
+                'method_period': profile.method_period,
+                'method_progress_factor': profile.method_progress_factor,
+                'prorata': profile.prorata,
+                'account_analytic_id': profile.account_analytic_id,
+            })
 
     @api.onchange('method_time')
     def _onchange_method_time(self):
@@ -309,10 +317,12 @@ class AccountAsset(models.Model):
     @api.onchange('type')
     def _onchange_type(self):
         if self.type == 'view':
-            self.date_start = False
-            self.profile_id = False
-            self.purchase_value = False
-            self.salvage_value = False
+            self.update({
+                'date_start': False,
+                'profile_id': False,
+                'purchase_value': False,
+                'salvage_value': False,
+            })
         if self.depreciation_line_ids:
             self.depreciation_line_ids.unlink()
 
@@ -323,7 +333,7 @@ class AccountAsset(models.Model):
         if vals.get('type') == 'view':
             vals['date_start'] = False
         asset = super(AccountAsset, self).create(vals)
-        if self._context.get('create_asset_from_move_line'):
+        if self.env.context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
         if asset.type == 'normal':
@@ -335,20 +345,19 @@ class AccountAsset(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        super(AccountAsset, self).write(vals)
+        res = super(AccountAsset, self).write(vals)
         for asset in self:
             asset_type = vals.get('type') or asset.type
             if asset_type == 'view' or \
-                    self._context.get('asset_validate_from_write'):
+                    self.env.context.get('asset_validate_from_write'):
                 continue
             asset._create_first_asset_line()
             if asset.profile_id.open_asset and \
-                    self._context.get('create_asset_from_move_line'):
+                    self.env.context.get('create_asset_from_move_line'):
                 asset.compute_depreciation_board()
                 # extra context to avoid recursion
-                ctx = dict(self._context, asset_validate_from_write=True)
-                asset.with_context(ctx).validate()
-        return True
+                asset.with_context(asset_validate_from_write=True).validate()
+        return res
 
     def _create_first_asset_line(self):
         self.ensure_one()
@@ -364,8 +373,8 @@ class AccountAsset(models.Model):
                 'type': 'create',
             }
             asset_line = asset_line_obj.create(asset_line_vals)
-            if self._context.get('create_asset_from_move_line'):
-                asset_line.move_id = self._context['move_id']
+            if self.env.context.get('create_asset_from_move_line'):
+                asset_line.move_id = self.env.context['move_id']
 
     @api.multi
     def unlink(self):
@@ -379,9 +388,9 @@ class AccountAsset(models.Model):
                     _("You cannot delete an asset that contains "
                       "posted depreciation lines."))
         # update accounting entries linked to lines of type 'create'
-        ctx = dict(self._context, allow_asset_removal=True,
-                   from_parent_object=True)
-        amls = self.with_context(ctx).mapped('account_move_line_ids')
+        amls = self.with_context(
+            allow_asset_removal=True, from_parent_object=True
+        ).mapped('account_move_line_ids')
         amls.write({'asset_id': False})
         return super(AccountAsset, self).unlink()
 
@@ -422,7 +431,7 @@ class AccountAsset(models.Model):
     @api.multi
     def remove(self):
         self.ensure_one()
-        ctx = dict(self._context, active_ids=self.ids, active_id=self.id)
+        ctx = dict(self.env.context, active_ids=self.ids, active_id=self.id)
 
         early_removal = False
         if self.method in ['linear-limit', 'degr-limit']:
@@ -441,7 +450,6 @@ class AccountAsset(models.Model):
             'target': 'new',
             'type': 'ir.actions.act_window',
             'context': ctx,
-            'nodestroy': True,
         }
 
     @api.multi
@@ -461,13 +469,17 @@ class AccountAsset(models.Model):
             'res_model': 'account.move',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'context': self._context,
-            'nodestroy': True,
+            'context': self.env.context,
             'domain': [('id', 'in', am_ids)],
         }
 
     @api.multi
     def compute_depreciation_board(self):
+
+        def group_lines(x, y):
+            y.update({'amount': x['amount'] + y['amount']})
+            return y
+
         line_obj = self.env['account.asset.line']
         digits = self.env['decimal.precision'].precision_get('Account')
 
@@ -498,8 +510,8 @@ class AccountAsset(models.Model):
                 continue
 
             # group lines prior to depreciation start period
-            depreciation_start_date = datetime.strptime(
-                asset.date_start, '%Y-%m-%d')
+            depreciation_start_date = fields.Datetime.from_string(
+                asset.date_start)
             lines = table[0]['lines']
             lines1 = []
             lines2 = []
@@ -512,9 +524,6 @@ class AccountAsset(models.Model):
                 else:
                     lines2.append(line)
             if lines1:
-                def group_lines(x, y):
-                    y.update({'amount': x['amount'] + y['amount']})
-                    return y
                 lines1 = [reduce(group_lines, lines1)]
                 lines1[0]['depreciated_value'] = 0.0
             table[0]['lines'] = lines1 + lines2
@@ -523,8 +532,8 @@ class AccountAsset(models.Model):
             # recompute in case of deviation
             depreciated_value_posted = depreciated_value = 0.0
             if posted_lines:
-                last_depreciation_date = datetime.strptime(
-                    last_line.line_date, '%Y-%m-%d')
+                last_depreciation_date = fields.Datetime.from_string(
+                    last_line.line_date)
                 last_date_in_table = table[-1]['lines'][-1]['date']
                 if last_date_in_table <= last_depreciation_date:
                     raise UserError(
@@ -616,8 +625,8 @@ class AccountAsset(models.Model):
         - years: duration in calendar years, considering also leap years
         """
         fy = self.env['date.range'].browse(fy_id)
-        fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
-        fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+        fy_date_start = fields.Datetime.from_string(fy.date_start)
+        fy_date_stop = fields.Datetime.from_string(fy.date_end)
         days = (fy_date_stop - fy_date_start).days + 1
         months = (fy_date_stop.year - fy_date_start.year) * 12  \
             + (fy_date_stop.month - fy_date_start.month) + 1
@@ -655,8 +664,8 @@ class AccountAsset(models.Model):
         fy_id = entry['fy_id']
         if self.prorata:
             if firstyear:
-                depreciation_date_start = datetime.strptime(
-                    self.date_start, '%Y-%m-%d')
+                depreciation_date_start = fields.Date.from_string(
+                    self.date_start)
                 fy_date_stop = entry['date_stop']
                 first_fy_asset_days = \
                     (fy_date_stop - depreciation_date_start).days + 1
@@ -689,10 +698,10 @@ class AccountAsset(models.Model):
         if the fiscal year starts in the middle of a month.
         """
         if self.prorata:
-            depreciation_start_date = datetime.strptime(
-                self.date_start, '%Y-%m-%d')
+            depreciation_start_date = fields.Datetime.from_string(
+                self.date_start)
         else:
-            fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
+            fy_date_start = fields.Datetime.from_string(fy.date_start)
             depreciation_start_date = datetime(
                 fy_date_start.year, fy_date_start.month, 1)
         return depreciation_start_date
@@ -717,8 +726,8 @@ class AccountAsset(models.Model):
                 depreciation_stop_date = depreciation_start_date + \
                     relativedelta(years=self.method_number, days=-1)
         elif self.method_time == 'end':
-            depreciation_stop_date = datetime.strptime(
-                self.method_end, '%Y-%m-%d')
+            depreciation_stop_date = fields.Date.from_string(
+                self.method_end)
         return depreciation_stop_date
 
     def _get_first_period_amount(self, table, entry, depreciation_start_date,
@@ -812,7 +821,7 @@ class AccountAsset(models.Model):
                                           depreciation_stop_date, line_dates):
 
         digits = self.env['decimal.precision'].precision_get('Account')
-        asset_sign = self.depreciation_base >= 0 and 1 or -1
+        asset_sign = 1 if self.depreciation_base >= 0 else -1
         i_max = len(table) - 1
         remaining_value = self.depreciation_base
         depreciated_value = 0.0
@@ -1041,7 +1050,7 @@ class AccountAsset(models.Model):
 
     @api.multi
     def _compute_entries(self, date_end, check_triggers=False):
-        # To DO : add ir_cron job calling this method to
+        # TODO : add ir_cron job calling this method to
         # generate periodical accounting entries
         result = []
         error_log = ''
@@ -1063,9 +1072,9 @@ class AccountAsset(models.Model):
             order='line_date')
         for depreciation in depreciations:
             try:
-                with self._cr.savepoint():
+                with self.env.cr.savepoint():
                     result += depreciation.create_move()
-            except:
+            except Exception:
                 e = exc_info()[0]
                 tb = ''.join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.code and '%s (ref: %s)' \

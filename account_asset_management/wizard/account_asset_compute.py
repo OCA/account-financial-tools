@@ -53,7 +53,7 @@ class AccountAssetCompute(models.TransientModel):
     @api.multi
     def view_asset_moves(self):
         self.ensure_one()
-        domain = [('id', 'in', self._context.get('asset_move_ids', []))]
+        domain = [('id', 'in', self.env.context.get('asset_move_ids', []))]
         return {
             'name': _('Created Asset Moves'),
             'view_type': 'form',

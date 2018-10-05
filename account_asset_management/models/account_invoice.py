@@ -11,8 +11,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
-        move_lines = super(AccountInvoice, self) \
-            .finalize_invoice_move_lines(move_lines)
+        move_lines = super().finalize_invoice_move_lines(move_lines)
         new_lines = []
         for line_tuple in move_lines:
             line = line_tuple[2]
@@ -73,7 +72,7 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_move_create(self):
-        res = super(AccountInvoice, self).action_move_create()
+        res = super().action_move_create()
         for inv in self:
             move = inv.move_id
             assets = [aml.asset_id for aml in
