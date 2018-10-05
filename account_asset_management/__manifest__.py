@@ -10,9 +10,8 @@
     ],
     'conflicts': ['account_asset'],
     'author': "Noviat,Odoo Community Association (OCA)",
-    'website': 'http://www.noviat.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
-    'sequence': 32,
     'data': [
         'security/account_asset_security.xml',
         'security/ir.model.access.csv',
@@ -28,7 +27,4 @@
         'views/account_move_line.xml',
         'views/menuitem.xml',
     ],
-    'auto_install': False,
-    'installable': True,
-    'application': True,
 }

@@ -10,7 +10,7 @@ class AccountAssetProfile(models.Model):
     _description = 'Asset profile'
     _order = 'name'
 
-    name = fields.Char(string='Name', size=64, required=True, index=1)
+    name = fields.Char(string='Name', size=64, required=True, index=True)
     note = fields.Text()
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
@@ -170,11 +170,11 @@ class AccountAssetProfile(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        super(AccountAssetProfile, self).write(vals)
-        for profile in self:
-            acc_id = vals.get('account_asset_id')
-            if acc_id:
-                account = self.env['account.account'].browse(acc_id)
-                if not account.asset_profile_id:
-                    account.write({'asset_profile_id': profile.id})
-        return True
+        res = super(AccountAssetProfile, self).write(vals)
+        # TODO last profile in self is defined as default on the related
+        # account. must be improved.
+        account = self.env['account.account'].browse(
+            vals.get('account_asset_id'))
+        if self and account and not account.asset_profile_id:
+            account.write({'asset_profile_id': self[-1].id})
+        return res
