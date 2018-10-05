@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_withparent_form" model="ir.ui.view">
+        <field name="name">account.account.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="parent_id" domain="[('internal_type','=','view')]" groups="account.group_account_manager" context="{'show_parent_account':True}" /></field>
+        </field>
+    </record>
+    <record id="account.action_account_form" model="ir.actions.act_window">
+        <field name="context">{'show_parent_account':True}</field>
+    </record>
+    <menuitem action="account.action_account_type_form" id="menu_action_account_type_form" parent="account.account_account_menu" sequence="1" groups="account.group_account_manager"/>
+    <record id="view_account_tree" model="ir.ui.view">
+        <field name="name">account.account.tree</field>
+        <field name="model">account.account</field>
+        <field name="field_parent">child_ids</field>
+        <field name="arch" type="xml">
+            <tree string="Chart of accounts" toolbar="1" colors="blue:internal_type=='view'">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="parent_id" invisible="1"/>
+                <field name="user_type_id"/>
+                <field name="internal_type" invisible="1"/>
+                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance" sum="Total Balance"/>
+            </tree>
+        </field>
+    </record>
+    <record id="open_view_account_tree" model="ir.actions.act_window">
+        <field name="name">Chart of Account Hierarchy</field>
+        <field name="res_model">account.account</field>
+        <field name="view_type">tree</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_tree"/>
+        <field name="domain">[('parent_id','=',False)]</field>
+        <field name="context">{'show_parent_account':True}</field>
+    </record>
+    <record id="view_account_noparent_tree" model="ir.ui.view">
+        <field name="name">account.account.tree</field>
+        <field name="model">account.account</field>
+        <field name="arch" type="xml">
+            <tree string="Chart of accounts" colors="blue:internal_type=='view'">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="parent_id" invisible="1" />
+                <field name="user_type_id"/>
+                <field name="internal_type" invisible="1"/>
+                <field name="currency_id" options="{'no_create': True}" groups="base.group_multi_currency"/>
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="debit" sum="Total Debit"/>
+                <field name="credit" sum="Total Credit"/>
+                <field name="balance" sum="Total Balance"/>
+            </tree>
+        </field>
+    </record>
+    <record id="open_view_account_noparent_tree" model="ir.actions.act_window">
+        <field name="name">Chart of Account Hierarchy</field>
+        <field name="res_model">account.account</field>
+        <field name="view_type">tree</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_noparent_tree"/>
+        <field name="context">{'show_parent_account':True}</field>
+    </record>
+    <record id="action_move_lines_open" model="ir.actions.act_window">
+        <field name="name">Journal Entry Items</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('account_id','child_of',[active_id])]</field>
+    </record>
+    <record id="action_open_account" model="ir.values">
+        <field eval="'tree_but_open'" name="key2"/>
+        <field eval="'account.account'" name="model"/>
+        <field name="name">Accounts</field>
+        <field eval="'ir.actions.act_window,%d'%action_move_lines_open" name="value"/>
+    </record>
+</odoo>

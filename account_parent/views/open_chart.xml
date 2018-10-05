@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_chart" model="ir.ui.view">
+        <field name="name">account.open.chart.form</field>
+        <field name="model">account.open.chart</field>
+        <field name="arch" type="xml">
+            <form string="Account charts">
+                <group>
+                    <field name="target_move"/>
+                    <label for="date_from" string="Date(s)"/>
+                    <div>
+                        <field name="date_from" class="oe_inline"/> -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                        <field name="date_to" class="oe_inline"/>
+                    </div>
+                </group>
+                <footer>
+                    <button string="Open Charts" name="account_chart_open_window" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_account_chart" model="ir.actions.act_window">
+        <field name="name">Chart of Accounts Hierarchy</field>
+        <field name="res_model">account.open.chart</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_chart"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem action="action_account_chart" id="menu_action_account_chart" parent="account.menu_finance_entries" sequence="21" groups="account.group_account_manager" />
+</odoo>
