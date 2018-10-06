@@ -10,6 +10,10 @@ setuptools.setup(
     install_requires=[
         'odoo10-addon-account_asset_depr_line_cancel',
         'odoo10-addon-account_asset_disposal',
+        'odoo10-addon-account_asset_management',
+        'odoo10-addon-account_asset_management_import',
+        'odoo10-addon-account_asset_management_method_number_end',
+        'odoo10-addon-account_asset_management_xls',
         'odoo10-addon-account_balance_line',
         'odoo10-addon-account_chart_update',
         'odoo10-addon-account_check_deposit',
