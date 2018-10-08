@@ -156,7 +156,7 @@ class AccountAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        return super(AccountAssetLine, self).write(vals)
+        return super().write(vals)
 
     @api.multi
     def unlink(self):

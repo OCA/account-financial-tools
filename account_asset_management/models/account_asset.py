@@ -249,7 +249,7 @@ class AccountAsset(models.Model):
     @api.multi
     @api.constrains('parent_id')
     def _check_recursion(self, parent=None):
-        res = super(AccountAsset, self)._check_recursion(parent=parent)
+        res = super()._check_recursion(parent=parent)
         if not res:
             raise UserError(
                 _("Error ! You can not create recursive assets."))
@@ -332,7 +332,7 @@ class AccountAsset(models.Model):
             vals['prorata'] = True
         if vals.get('type') == 'view':
             vals['date_start'] = False
-        asset = super(AccountAsset, self).create(vals)
+        asset = super().create(vals)
         if self.env.context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
@@ -345,7 +345,7 @@ class AccountAsset(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        res = super(AccountAsset, self).write(vals)
+        res = super().write(vals)
         for asset in self:
             asset_type = vals.get('type') or asset.type
             if asset_type == 'view' or \
@@ -392,7 +392,7 @@ class AccountAsset(models.Model):
             allow_asset_removal=True, from_parent_object=True
         ).mapped('account_move_line_ids')
         amls.write({'asset_id': False})
-        return super(AccountAsset, self).unlink()
+        return super().unlink()
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
