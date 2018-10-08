@@ -6,7 +6,7 @@
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'author': "Noviat,Odoo Community Association (OCA)",
-    'website': 'http://www.noviat.com',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
     'depends': [
         'account_asset_management',
