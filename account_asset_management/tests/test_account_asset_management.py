@@ -6,87 +6,89 @@ import calendar
 from datetime import date, datetime
 import time
 
-import odoo.tests.common as common
+from odoo.tests.common import SavepointCase
 from odoo import tools
 from odoo.modules.module import get_resource_path
 
 
-class TestAssetManagement(common.TransactionCase):
+class TestAssetManagement(SavepointCase):
 
-    def _load(self, module, *args):
-        tools.convert_file(self.cr, module,
+    @classmethod
+    def _load(cls, module, *args):
+        tools.convert_file(cls.cr, module,
                            get_resource_path(module, *args),
                            {}, 'init', False, 'test',
-                           self.registry._assertion_report)
+                           cls.registry._assertion_report)
 
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'tests',
-                   'account_asset_test_data.xml')
+        cls._load('account', 'test', 'account_minimal_test.xml')
+        cls._load('account_asset_management', 'tests',
+                  'account_asset_test_data.xml')
 
         # ENVIRONEMENTS
-        self.asset_model = self.env['account.asset']
-        self.dl_model = self.env['account.asset.line']
-        self.remove_model = self.env['account.asset.remove']
-        self.account_invoice = self.env['account.invoice']
-        self.account_move_line = self.env['account.move.line']
-        self.account_account = self.env['account.account']
-        self.account_journal = self.env['account.journal']
-        self.account_invoice_line = self.env['account.invoice.line']
+        cls.asset_model = cls.env['account.asset']
+        cls.dl_model = cls.env['account.asset.line']
+        cls.remove_model = cls.env['account.asset.remove']
+        cls.account_invoice = cls.env['account.invoice']
+        cls.account_move_line = cls.env['account.move.line']
+        cls.account_account = cls.env['account.account']
+        cls.account_journal = cls.env['account.journal']
+        cls.account_invoice_line = cls.env['account.invoice.line']
 
         # INSTANCES
 
         # Instance: company
-        self.company = self.env.ref('base.main_company')
+        cls.company = cls.env.ref('base.main_company')
 
         # Instance: account type (receivable)
-        self.type_recv = self.env.ref('account.data_account_type_receivable')
+        cls.type_recv = cls.env.ref('account.data_account_type_receivable')
 
         # Instance: account type (payable)
-        self.type_payable = self.env.ref('account.data_account_type_payable')
+        cls.type_payable = cls.env.ref('account.data_account_type_payable')
 
         # Instance: account (receivable)
-        self.account_recv = self.account_account.create({
+        cls.account_recv = cls.account_account.create({
             'name': 'test_account_receivable',
             'code': '123',
-            'user_type_id': self.type_recv.id,
-            'company_id': self.company.id,
+            'user_type_id': cls.type_recv.id,
+            'company_id': cls.company.id,
             'reconcile': True})
 
         # Instance: account (payable)
-        self.account_payable = self.account_account.create({
+        cls.account_payable = cls.account_account.create({
             'name': 'test_account_payable',
             'code': '321',
-            'user_type_id': self.type_payable.id,
-            'company_id': self.company.id,
+            'user_type_id': cls.type_payable.id,
+            'company_id': cls.company.id,
             'reconcile': True})
 
         # Instance: partner
-        self.partner = self.env.ref('base.res_partner_2')
+        cls.partner = cls.env.ref('base.res_partner_2')
 
         # Instance: journal
-        self.journal = self.account_journal.search(
+        cls.journal = cls.account_journal.search(
             [('type', '=', 'purchase')])[0]
 
         # Instance: product
-        self.product = self.env.ref('product.product_product_4')
+        cls.product = cls.env.ref('product.product_product_4')
 
         # Instance: invoice line
-        self.invoice_line = self.account_invoice_line.create({
+        cls.invoice_line = cls.account_invoice_line.create({
             'name': 'test',
-            'account_id': self.account_payable.id,
+            'account_id': cls.account_payable.id,
             'price_unit': 2000.00,
             'quantity': 1,
-            'product_id': self.product.id})
+            'product_id': cls.product.id})
 
         # Instance: invoice
-        self.invoice = self.account_invoice.create({
-            'partner_id': self.partner.id,
-            'account_id': self.account_recv.id,
-            'journal_id': self.journal.id,
-            'invoice_line_ids': [(4, self.invoice_line.id)]})
+        cls.invoice = cls.account_invoice.create({
+            'partner_id': cls.partner.id,
+            'account_id': cls.account_recv.id,
+            'journal_id': cls.journal.id,
+            'invoice_line_ids': [(4, cls.invoice_line.id)]})
 
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""

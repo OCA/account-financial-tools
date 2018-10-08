@@ -664,7 +664,7 @@ class AccountAsset(models.Model):
         fy_id = entry['fy_id']
         if self.prorata:
             if firstyear:
-                depreciation_date_start = fields.Date.from_string(
+                depreciation_date_start = fields.Datetime.from_string(
                     self.date_start)
                 fy_date_stop = entry['date_stop']
                 first_fy_asset_days = \
