@@ -20,7 +20,7 @@ class TestAssetManagement(common.TransactionCase):
                            self.registry._assertion_report)
 
     def setUp(self):
-        super(TestAssetManagement, self).setUp()
+        super().setUp()
 
         self._load('account', 'test', 'account_minimal_test.xml')
         self._load('account_asset_management', 'tests',

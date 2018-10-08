@@ -157,7 +157,7 @@ class AccountAssetProfile(models.Model):
     def create(self, vals):
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        profile = super(AccountAssetProfile, self).create(vals)
+        profile = super().create(vals)
         acc_id = vals.get('account_asset_id')
         if acc_id:
             account = self.env['account.account'].browse(acc_id)
@@ -170,7 +170,7 @@ class AccountAssetProfile(models.Model):
         if vals.get('method_time'):
             if vals['method_time'] != 'year' and not vals.get('prorata'):
                 vals['prorata'] = True
-        res = super(AccountAssetProfile, self).write(vals)
+        res = super().write(vals)
         # TODO last profile in self is defined as default on the related
         # account. must be improved.
         account = self.env['account.account'].browse(

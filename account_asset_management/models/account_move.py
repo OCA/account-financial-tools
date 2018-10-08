@@ -34,7 +34,7 @@ class AccountMove(models.Model):
                   "\nYou should remove such entries from the asset."))
         # trigger store function
         deprs.write({'move_id': False})
-        return super(AccountMove, self).unlink()
+        return super().unlink()
 
     @api.multi
     def write(self, vals):
@@ -45,7 +45,7 @@ class AccountMove(models.Model):
                 raise UserError(
                     _("You cannot change an accounting entry "
                       "linked to an asset depreciation line."))
-        return super(AccountMove, self).write(vals)
+        return super().write(vals)
 
 
 class AccountMoveLine(models.Model):
@@ -91,7 +91,7 @@ class AccountMoveLine(models.Model):
                 create_asset_from_move_line=True,
                 move_id=vals['move_id']).create(asset_vals)
             vals['asset_id'] = asset.id
-        return super(AccountMoveLine, self).create(vals)
+        return super().create(vals)
 
     @api.multi
     def _prepare_asset_create(self, vals):
@@ -147,7 +147,7 @@ class AccountMoveLine(models.Model):
                     create_asset_from_move_line=True,
                     move_id=aml.move_id.id).create(asset_vals)
                 vals['asset_id'] = asset.id
-        return super(AccountMoveLine, self).write(vals)
+        return super().write(vals)
 
     @api.model
     def _get_asset_analytic_values(self, vals, asset_vals):

@@ -91,14 +91,14 @@ class AccountInvoice(models.Model):
         for inv in self:
             move = inv.move_id
             assets = move.line_ids.mapped('asset_id')
-        super(AccountInvoice, self).action_cancel()
+        super().action_cancel()
         if assets:
             assets.unlink()
         return True
 
     @api.model
     def line_get_convert(self, line, part):
-        res = super(AccountInvoice, self).line_get_convert(line, part)
+        res = super().line_get_convert(line, part)
         if line.get('asset_profile_id'):
             # skip empty debit/credit
             if res.get('debit') or res.get('credit'):
@@ -107,14 +107,14 @@ class AccountInvoice(models.Model):
 
     @api.model
     def inv_line_characteristic_hashcode(self, invoice_line):
-        res = super(AccountInvoice, self).inv_line_characteristic_hashcode(
+        res = super().inv_line_characteristic_hashcode(
             invoice_line)
         res += '-%s' % invoice_line.get('asset_profile_id', 'False')
         return res
 
     @api.model
     def invoice_line_move_line_get(self):
-        res = super(AccountInvoice, self).invoice_line_move_line_get()
+        res = super().invoice_line_move_line_get()
         invoice_line_obj = self.env['account.invoice.line']
         for vals in res:
             if vals.get('invl_id'):
@@ -143,4 +143,4 @@ class AccountInvoiceLine(models.Model):
     @api.onchange('account_id')
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id.id
-        return super(AccountInvoiceLine, self)._onchange_account_id()
+        return super()._onchange_account_id()
