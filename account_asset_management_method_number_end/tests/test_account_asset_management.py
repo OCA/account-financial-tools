@@ -3,28 +3,30 @@
 
 import time
 
-import odoo.tests.common as common
+from odoo.tests.common import SavepointCase
 from odoo import tools
 from odoo.modules.module import get_resource_path
 
 
-class TestAssetManagement(common.TransactionCase):
+class TestAssetManagement(SavepointCase):
 
-    def _load(self, module, *args):
-        tools.convert_file(self.cr, module,
+    @classmethod
+    def _load(cls, module, *args):
+        tools.convert_file(cls.cr, module,
                            get_resource_path(module, *args),
                            {}, 'init', False, 'test',
-                           self.registry._assertion_report)
+                           cls.registry._assertion_report)
 
-    def setUp(self):
-        super(TestAssetManagement, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestAssetManagement, cls).setUpClass()
 
-        self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'tests',
-                   'account_asset_test_data.xml')
+        cls._load('account', 'test', 'account_minimal_test.xml')
+        cls._load('account_asset_management', 'tests',
+                  'account_asset_test_data.xml')
 
-        self.asset_model = self.env['account.asset']
-        self.dl_model = self.env['account.asset.line']
+        cls.asset_model = cls.env['account.asset']
+        cls.dl_model = cls.env['account.asset.line']
 
     def test_1_linear_number(self):
         """Linear with Method Time 'Number'."""
