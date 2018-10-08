@@ -21,7 +21,7 @@ class TestAssetManagementXls(SavepointCase):
 
         cls._load('account', 'test', 'account_minimal_test.xml')
         cls._load('account_asset_management', 'tests',
-                   'account_asset_test_data.xml')
+                  'account_asset_test_data.xml')
         module = __name__.split('addons.')[1].split('.')[0]
         cls.xls_report_name = '{}.asset_report_xls'.format(module)
         cls.wiz_model = cls.env['wiz.account.asset.report']

@@ -28,12 +28,12 @@ class WizAccountAssetReport(models.TransientModel):
         parent_asset = self.parent_asset_id
         if not parent_asset:
             parents = asset_obj.search(
-                [('type', '=', 'view'), ('parent_id', '=', False)])
+                [('type', '=', 'view'), ('parent_id', '=', False)], limit=1)
             if not parents:
                 raise UserError(
                     _("Configuration Error."
                       "\nNo top level asset of type 'view' defined!"))
-            self.parent_asset_id = parents[0]
+            self.parent_asset_id = parents
 
         # sanity check
         errors = asset_obj.search(
@@ -48,13 +48,12 @@ class WizAccountAssetReport(models.TransientModel):
 
         domain = [('type', '=', 'normal'),
                   ('id', 'child_of', self.parent_asset_id.id)]
-        assets = asset_obj.search(domain)
+        assets = asset_obj.search_count(domain)
         if not assets:
             raise UserError(
                 _('No records found for your selection!'))
 
-        module = __name__.split('addons.')[1].split('.')[0]
-        report_name = '{}.asset_report_xls'.format(module)
+        report_name = '{}.asset_report_xls'.format(self._module)
         prefix = unicodedata.normalize(
             'NFKD', self.date_range_id.name
         ).encode('ascii', 'ignore').decode('ascii')
