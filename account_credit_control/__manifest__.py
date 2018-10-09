@@ -3,7 +3,7 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {'name': 'Account Credit Control',
- 'version': '10.0.1.3.4',
+ 'version': '10.0.1.4.4',
  'author': "Camptocamp,Odoo Community Association (OCA),Okia",
  'maintainer': 'Camptocamp',
  'category': 'Finance',

@@ -86,7 +86,7 @@
                             help="The line was deprecated by a manual change of policy on invoice."/>
                     <filter name="filter_manual" icon="fa-hand-paper-o"
                             string="Manual followup"
-                            domain="[('manually_followup', '=', True)]"
+                            domain="[('manual_followup', '=', True)]"
                             help="The partner had a manual followup."/>
                 </group>
                 <group expand="0" string="Group By" name="group_by">
