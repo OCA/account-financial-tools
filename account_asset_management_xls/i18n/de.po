@@ -22,21 +22,22 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
-"PO-Revision-Date: 2016-10-04 09:43+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2018-10-10 11:50+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:40
 #, python-format
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:365
@@ -57,15 +58,15 @@ msgstr "Anlagenfilter"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:101
-#, fuzzy, python-format
+#, python-format
 msgid "Asset Removal Date"
-msgstr "Anlagenfilter"
+msgstr "Anlagenabgangsdatum"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:86
 #, python-format
 msgid "Asset Start Date"
-msgstr ""
+msgstr "Anlagenaktivierungsdatum"
 
 #. module: account_asset_management_xls
 #: model:ir.ui.view,arch_db:account_asset_management_xls.wiz_account_asset_report_view_form
@@ -76,23 +77,27 @@ msgstr "Abbrechen"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:253
 #, python-format
 msgid "Comput. Method"
-msgstr ""
+msgstr "Berechnungsverfahren"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/wiz_account_asset_report.py:46
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Configuration Error\n"
 "No parent asset defined for asset '%s'!"
-msgstr "Keine übergeordnete Anlage zu Anlage '%s' festgelegt."
+msgstr ""
+"Konfigurationsfehler\n"
+"Kein Anlagenstamm zu Anlage '%s' festgelegt."
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/wiz_account_asset_report.py:34
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Configuration Error.\n"
 "No top level asset of type 'view' defined!"
-msgstr "Keine Hauptanlage vom Typ 'Sicht' definiert."
+msgstr ""
+"Konfigurationsfehler.\n"
+"Kein oberster Anlagenknoten vom Typ 'Sicht' definiert."
 
 #. module: account_asset_management_xls
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_create_uid
@@ -108,7 +113,7 @@ msgstr "Erstellt am"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:115
 #, python-format
 msgid "Depreciation Base"
-msgstr ""
+msgstr "Abschreibungsbasis"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:612
@@ -126,19 +131,19 @@ msgstr "Anzeigename"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:184
 #, python-format
 msgid "FY Depreciation"
-msgstr ""
+msgstr "GJ-Abschreibung"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:207
 #, python-format
 msgid "FY End Value"
-msgstr ""
+msgstr "GJ-Endwert"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:161
 #, python-format
 msgid "FY Start Value"
-msgstr ""
+msgstr "GJ-Anfangswert"
 
 #. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.wiz_account_asset_report_action
@@ -184,7 +189,7 @@ msgstr "Zuletzt geändert am"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:56
 #, python-format
 msgid "Name"
-msgstr ""
+msgstr "Bezeichnung"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:360
@@ -209,19 +214,19 @@ msgstr "Keine Datensätze für Ihre Auswahl getroffen!"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:266
 #, python-format
 msgid "Number of Years"
-msgstr ""
+msgstr "Anzahl Jahre"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:279
 #, python-format
 msgid "Prorata Temporis"
-msgstr ""
+msgstr "Prorata Temporis"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:71
 #, python-format
 msgid "Reference"
-msgstr ""
+msgstr "Referenz"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:370
@@ -234,7 +239,7 @@ msgstr "Gelöschte Anlagen"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:138
 #, python-format
 msgid "Salvage Value"
-msgstr ""
+msgstr "Liquidationswert"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:418
@@ -269,18 +274,20 @@ msgid ""
 "The current version of the asset mangement reporting module supports only "
 "fiscal year based reports."
 msgstr ""
+"Die aktuelle Version der Anlagenverwaltungsberichte unterstützt nur Berichte "
+"auf Basis eines Geschäftsjahres."
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:230
 #, python-format
 msgid "Tot. Depreciation"
-msgstr ""
+msgstr "Ges. Abschreibung"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:49
 #, python-format
 msgid "Totals"
-msgstr ""
+msgstr "Summen"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:605
