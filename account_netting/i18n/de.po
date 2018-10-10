@@ -9,32 +9,33 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-10-10 13:26+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:67
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Kred/Deb-Verrechnung"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:40
 #, python-format
 msgid "All entries must have a receivable or payable account"
-msgstr ""
+msgstr "Alle Posten müssen ein Kreditoren- oder Debitorenkonto aufweisen"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:43
 #, python-format
 msgid "All entries mustn't been reconciled"
-msgstr ""
+msgstr "Kein Posten darf ausgeglichen sein"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:52
@@ -42,16 +43,17 @@ msgstr ""
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
 msgstr ""
+"Alle Posten müssen einen Partner haben und dieser muss für alle gleich sein."
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_balance
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_balance_type
 msgid "Balance Type"
-msgstr ""
+msgstr "Saldo-Art"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -62,12 +64,12 @@ msgstr "Abbrechen"
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Kompensieren"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate entries"
-msgstr ""
+msgstr "Posten kompensieren"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_create_uid
@@ -92,7 +94,7 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting___last_update
@@ -112,12 +114,12 @@ msgstr "Zuletzt geändert am"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting_move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Buchung"
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Select the journal where storing the journal entries"
-msgstr ""
+msgstr "Wählen Sie das Journal zur Aufnahme der Posten"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:46
@@ -128,6 +130,10 @@ msgid ""
 "In this case all selected entries belong to the same account.\n"
 " Please use the 'Reconcile' function."
 msgstr ""
+"Die Funktion 'Kompensieren' soll Vorgänge auf unterschiedlichen Konten des "
+"gleichen Partners saldieren.\n"
+"In diesem Fall gehören alle ausgewählten Posten zum gleichen Konto.\n"
+"Verwenden Sie bitte die Funktion 'Ausgleichen'."
 
 #. module: account_netting
 #: model:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -136,24 +142,27 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner:"
 msgstr ""
+"Dieser Vorgang wird Gegenbuchungen zu den ausgewählten kreditorische/"
+"debitorischen Konten erzeugen, die sich dann gegenseitig saldieren. Beim "
+"Partner ergibt sich folgender Saldo:"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To pay"
-msgstr ""
+msgstr "Zu zahlen"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To receive"
-msgstr ""
+msgstr "Zu erhalten"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:34
 #, python-format
 msgid "You should compensate at least 2 journal entries."
-msgstr ""
+msgstr "Sie müssen mindestens 2 Journalposten kompensieren."
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "account.move.make.netting"
-msgstr ""
+msgstr "account.move.make.netting"
