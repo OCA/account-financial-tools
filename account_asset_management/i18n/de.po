@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2018-10-11 12:24+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1073
@@ -30,6 +31,8 @@ msgid ""
 "\n"
 "Error while processing asset '%s': %s"
 msgstr ""
+"\n"
+"Fehler bei Bearbeitung von Anlage '%s': %s"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -60,7 +63,7 @@ msgstr "Schreiben Sie hier Ihre Mitteilung"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute_date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
-msgstr ""
+msgstr "Alle Abschreibungen vor diesem Datum werden automatisch gebucht"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line_amount
@@ -136,16 +139,14 @@ msgstr "Anlagegut Bezeichnung"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line_asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line_asset_profile_id
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "Anlagenposition"
+msgstr "Anlagenprofil"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
-#, fuzzy
 msgid "Asset Profiles"
-msgstr "Anlagenpositionen"
+msgstr "Anlagenprofile"
 
 #. module: account_asset_management
 #: selection:account.asset.line,type:0
@@ -170,17 +171,15 @@ msgstr "Anlagen-Gültigkeitsbeginn"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
-#, fuzzy
 msgid "Asset depreciation table line"
-msgstr "Anlage Abschreibungeszeile"
+msgstr "Abschreibungsgitterposition"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
-#, fuzzy
 msgid "Asset profile"
-msgstr "Anlagenposition"
+msgstr "Anlagenprofil"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -230,6 +229,10 @@ msgid ""
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
 msgstr ""
+"Per Standard wird bei der Freigabe einer Rechnung eine Anlage je "
+"Rechnungsposition angelegt, sofern eine Finanzbuchung jeweiliger "
+"Rechnungsposition erfolgt. Mit dieser Einstellung wird zu jedem Produkt eine "
+"Finanzbuchung erstellt. So gibt es zu jeder Produktposition eine Anlage."
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -240,13 +243,12 @@ msgstr "Abbrechen"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_open_asset
-#, fuzzy
 msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
-"Aktivieren, wenn die Anlage dieser Kategorie automatisch mit der Verbuchung "
-"der Rechnung bestätigt werden soll."
+"Aktivieren, wenn die Anlagenerstellung bei diesem Anlagenprofil automatisch "
+"mit der Verbuchung der Rechnung bestätigt werden soll."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_child_ids
@@ -281,10 +283,16 @@ msgid ""
 "  * Ending Date: Choose the time between 2 depreciations and the date the "
 "depreciations won't go beyond."
 msgstr ""
+"Wähle die Methode zur Bestimmung von Daten und Anzahl der "
+"Abschreibungspositionen.\n"
+"  * Anzahl Jahre: Geben Sie die Anzahl Jahre zur Abschreibung an.\n"
+"  * Anzahl Abschreibungen: Geben Sie die Anzahl Abschreibungen und den "
+"Abstand zwischen den Abschreibungen an.\n"
+"  * Enddatum: Geben Sie den Abstand zwischen 2 Abschreibungen und das "
+"Enddatum der Abschreibungen an."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile_method
-#, fuzzy
 msgid ""
 "Choose the method to use to compute the depreciation lines.\n"
 "  * Linear: Calculated on basis of: Depreciation Base / Number of "
@@ -299,10 +307,15 @@ msgid ""
 "is equal to the asset value."
 msgstr ""
 "Wählen Sie das Verfahren zur Berechnung der Abschreibungsbeträge.\n"
-"* Linear: Berechnet als Bruttobetrag / Abschreibungsanzahl\n"
-"* Degessiv: Berechnet als Restbuchwert * Degressionsfaktor\n"
+"* Linear: Berechnet als Abschreibungsbasis / Abschreibungsperiodenzahl. "
+"Abschreibungsbasis = Beschaffungswert - Schrottwert.\n"
+"* Linear-Begrenzt: Linear bis Restwert. Abschreibungsbasis = "
+"Beschaffungswert.\n"
+"* Degressiv: Berechnet als Restbuchwert * Degressionsfaktor\n"
 "* Degressiv-Linear (nur auf Jahresbasis): Zunächst degressiv bis lineare "
-"Abschreibungsbeträge die degressiven übersteigen, dann linear"
+"Abschreibungsbeträge die degressiven übersteigen, dann linear.\n"
+"* Degressiv-Begrenzt: Degressiv bis zum Schrottwert. Abschreibungsbasis "
+"entspricht dem Anschaffungswert."
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
@@ -363,21 +376,20 @@ msgstr "Berechne Anlagen"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:31
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets errors"
-msgstr "Berechne Anlagen"
+msgstr "Ermittele Anlagenfehler"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:33
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets result"
-msgstr "Berechne Anlagen"
+msgstr "Ergebnis der Anlagenberechnung"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "Compute Assets results"
-msgstr "Berechne Anlagen"
+msgstr "Ergebnisse der Anlagenberechnung"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -392,7 +404,7 @@ msgstr "Erzeuge Buchung"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_asset_product_item
 msgid "Create an asset by product item"
-msgstr ""
+msgstr "Erzeuge eine Anlage je Einzelprodukt"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:45
@@ -435,10 +447,9 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_account_asset_profile_id
-#, fuzzy
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
-"Vorgabe-Anlagenkategorie für das Anlegen von Rechnungspositionen mit diesem "
+"Vorgabe-Anlagenprofil für das Anlegen von Rechnungspositionen mit diesem "
 "Konto."
 
 #. module: account_asset_management
@@ -451,7 +462,7 @@ msgstr "Degressiv"
 #: code:addons/account_asset_management/models/account_asset_profile.py:121
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr ""
+msgstr "Degressiv  bis zum Schrottwert"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_progress_factor
@@ -501,9 +512,8 @@ msgstr "kum. Wertberichtigungskonto"
 #: selection:account.asset.line,type:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line_depreciation_base
-#, fuzzy
 msgid "Depreciation Base"
-msgstr "Abschreibungs Datum"
+msgstr "Abschreibungsbasis"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -587,12 +597,14 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Fehler beim Bearbeiten der Anlage '%s':\n"
+"\n"
+"%s"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove_force_date
-#, fuzzy
 msgid "Force accounting date"
-msgstr "Hat anhängige Finanzbuchungen"
+msgstr "Erzwinge Buchungsdatum"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:113
@@ -753,9 +765,9 @@ msgstr "Linear"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:118
-#, fuzzy, python-format
+#, python-format
 msgid "Linear up to Salvage Value"
-msgstr "Liquidationswert"
+msgstr "Linear  bis zum Liquidationswert"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_account_min_value_id
@@ -781,9 +793,9 @@ msgstr "Nächste Abschreibungsperiode"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:923
-#, fuzzy, python-format
+#, python-format
 msgid "No Fiscal Year defined."
-msgstr "Geschäftsjahr"
+msgstr "Kein Geschäftsjahr festgelegt."
 
 #. module: account_asset_management
 #: selection:account.asset,type:0
@@ -809,7 +821,7 @@ msgstr "Bemerkungen"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_method_number
 msgid "Number"
-msgstr ""
+msgstr "Anzahl"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:139
@@ -881,7 +893,7 @@ msgstr "Vorige Abschreibungsposition"
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile_prorata
@@ -971,7 +983,7 @@ msgstr "Restbuchwert"
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
-msgstr ""
+msgstr "Ergebnisse :"
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
@@ -991,9 +1003,8 @@ msgstr "Liquidationswert"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Search Asset Profile"
-msgstr "Suche Anlagen Kategorie"
+msgstr "Suche Anlagenprofil"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line_init_entry
@@ -1036,15 +1047,16 @@ msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years."
 msgstr ""
+"Die Methode '_compute_year_amount' ist nur für das Zeitverfahren 'Anzahl "
+"Jahre' gedacht."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:24
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
-"Das Anlagenkonto aus der Anlagen-Kategorie muss mit diesem Konto "
-"übereinstimmen."
+"Das Anlagenkonto aus dem Anlagenprofil muss mit diesem Konto übereinstimmen."
 
 #. module: account_asset_management
 #: sql_constraint:account.asset.remove:0
@@ -1055,7 +1067,7 @@ msgstr "Der Verkaufserlöse muss positiv sein."
 #: code:addons/account_asset_management/models/account_asset.py:269
 #, python-format
 msgid "The Start Date must precede the Ending Date."
-msgstr ""
+msgstr "Das Anfangsdatum muss vor dem Enddatum liegen."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:531
@@ -1089,6 +1101,12 @@ msgid ""
 "  * Ending Date: Choose the time between 2 depreciations and the date the "
 "depreciations won't go beyond."
 msgstr ""
+"Die Bedeutung dieses Parameters hängt von dem Zeitverfahren ab:\n"
+"  * Anzahl Jahre: Geben Sie die Anzahl zur Abschreibung vor.\n"
+"  * Anzahl Abschreibungen: Legen Sie die Anzahl Abschreibungspositionen und "
+"die Zeit zwischen zwei Abschreibungen vor.\n"
+"  * Enddatum: Wählen Sie die Zeit zwischen zwei Abschreibungen und das "
+"Abschreibungs-Enddatum vor."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:156
@@ -1114,23 +1132,23 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line_depreciation_base
-#, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value."
-msgstr "Dieser Betrag stellt den Anfangswert der Anlage dar."
+msgstr ""
+"Dieser Betrag stellt den Anfangswert der Anlage dar (Beschaffungswert - "
+"Liquidationswert)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_purchase_value
-#, fuzzy
 msgid ""
 "This amount represent the initial value of the asset.\n"
 "The Depreciation Base is calculated as follows:\n"
 "Purchase Value - Salvage Value."
 msgstr ""
-"\n"
-"Der Anlagenbuchwert wird wie folgt berechnet:\n"
-"Anschaffungspreis - Bezugskosten."
+"Dieser Betrag stellt den Anfangswert der Anlage dar.\n"
+"Die Abschreibungsbasis wird wie folgt berechnet:\n"
+"Anschaffungspreis - Liquidationswert."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_method_time
@@ -1167,9 +1185,8 @@ msgstr "Sicht"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "View Asset Moves"
-msgstr "Erzeugte Anlagenbuchungen"
+msgstr "Anlagenbuchungen betrachten"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1266,10 +1283,10 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:291
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
-"Sie dürfen die Kategorie einer Anlage nicht ändern, wenn diese bereits "
+"Sie dürfen das Profil einer Anlage nicht ändern, wenn diese bereits "
 "Finanzbuchungen aufweist."
 
 #. module: account_asset_management
@@ -1303,9 +1320,10 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:161
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
-msgstr "Sie dürfen eine Anlagenposition vom Typ 'Anlagenwert' nicht löschen."
+msgstr ""
+"Sie dürfen eine Anlagenposition vom Typ 'Abschreibungsbasis' nicht löschen."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:133
@@ -1319,11 +1337,10 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:145
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
-"Sie dürfen das Datum von Abschreibungspositionen nicht vor das Datum "
-"bestehender Buchungen setzen."
+"Sie dürfen die Anlage nicht nach dem Datum bestehender Buchungen aktivieren."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:152
@@ -1348,13 +1365,14 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_config_settings
+#, fuzzy
 msgid "account.config.settings"
-msgstr ""
+msgstr "account.config.settings"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_date_range
 msgid "date.range"
-msgstr ""
+msgstr "date.range"
 
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
