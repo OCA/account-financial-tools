@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 02:38+0000\n"
-"PO-Revision-Date: 2018-09-22 00:19+0000\n"
+"PO-Revision-Date: 2018-10-10 13:02+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -547,7 +547,6 @@ msgstr "Fälligkeitsdatum"
 #. module: account_credit_control
 #: selection:credit.control.line,channel:0
 #: selection:credit.control.policy.level,channel:0
-#, fuzzy
 msgid "Email"
 msgstr "Email"
 
@@ -1107,6 +1106,21 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
+"Unsere Unterlagen zeigen, dass wir trotz unserer beiden Mahnungen die "
+"Zahlung der im Anhang genannten Rechnungen noch nicht erhalten haben.<br>\n"
+"  Wenn die Zahlung bereits erfolgt ist, betrachten Sie diesen Hinweis bitte "
+"als nichtig. Wenn nicht, leiten Sie den Ausgleich bitte ein.<br>\n"
+"  Wenn Ihre Zahlung innerhalb der nächsten 5 Tage nicht eingegangen ist, "
+"wird Ihre Datei an unser Inkassounternehmen weitergeleitet.<br>\n"
+"  <br>\n"
+"  Sollten Sie eine Ratenzahlungsvereinbarung vereinbaren wollen, teilen Sie "
+"uns dies bitte mit.<br>\n"
+"  Ein Kundenkontoauszug liegt Ihnen zur Übersicht bei.<br>\n"
+"  <br>\n"
+"  Vielen Dank im Voraus für Ihre erwartete Zusammenarbeit in dieser "
+"Angelegenheit.\n"
+"  <br>\n"
+"  Mit freundlichen Grüßen"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -1129,16 +1143,33 @@ msgid ""
 "            Best regards\n"
 "        "
 msgstr ""
+"Unsere Unterlagen zeigen, dass wir trotz vorausgegangener Erinnerung die "
+"Zahlung der unten genannten Rechnungen noch nicht erhalten haben.\n"
+"\n"
+"  Wenn die Zahlung bereits erfolgt ist, betrachten Sie diesen Hinweis bitte "
+"als nichtig. Wenn nicht, leiten Sie den Ausgleich bitte ein.\n"
+"  Wenn Ihre Zahlung innerhalb der nächsten 5 Tage nicht eingegangen ist, "
+"wird Ihre Datei an unser Inkassounternehmen weitergeleitet.\n"
+"\n"
+"  Sollten Sie eine Ratenzahlungsvereinbarung vereinbaren wollen, teilen Sie "
+"uns dies bitte mit.\n"
+"  Ein Kundenkontoauszug liegt Ihnen zur Übersicht bei.\n"
+"\n"
+"  Vielen Dank im Voraus für Ihre erwartete Zusammenarbeit in dieser "
+"Angelegenheit.\n"
+"\n"
+"  Mit freundlichen Grüßen\n"
+"        "
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Ausgehende Mails"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_policy_level_id
 msgid "Overdue Level"
-msgstr ""
+msgstr "Mahnstufe"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_partner_id
@@ -1151,175 +1182,175 @@ msgstr "Partner"
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_note
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_note
 msgid "Payment Note"
-msgstr ""
+msgstr "Zahlungsmitteilung"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:87
 #, python-format
 msgid "Please select a policy"
-msgstr ""
+msgstr "Bitte eine Regel auswählen"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/wizard/credit_control_policy_changer.py:37
 #, python-format
 msgid "Please use wizard on customer invoices"
-msgstr ""
+msgstr "Bitte den Assistenten zu Kundenrechnungen verwenden"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_policy_ids
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Policies"
-msgstr ""
+msgstr "Regeln"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Policy"
-msgstr ""
+msgstr "Regel"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:110
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
-msgstr ""
+msgstr "Regel \"<b>%s</b>\" hat <b>%d Mahnposten generiert.</b><br/>"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:114
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
-msgstr ""
+msgstr "Regel \"<b>%s</b>\" hat keine Mahnposten erzeugt.<br/>"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level_ids
 msgid "Policy Levels"
-msgstr ""
+msgstr "Mahnstufen"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
 msgid "Policy level"
-msgstr ""
+msgstr "Mahnstufe"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 msgid "Policy levels"
-msgstr ""
+msgstr "Mahnstufen"
 
 #. module: account_credit_control
 #: selection:credit.control.policy.level,computation_mode:0
 msgid "Previous Reminder"
-msgstr ""
+msgstr "Vorherige Erinnerung"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print"
-msgstr ""
+msgstr "Druck"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_printer_wizard_menu_action
 msgid "Print Lines"
-msgstr ""
+msgstr "Posten drucken"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_printer_wizard
 msgid "Print selected lines"
-msgstr ""
+msgstr "Ausgewählte Posten drucken"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_printer_form
 msgid "Print the selected lines"
-msgstr ""
+msgstr "Drucke die ausgewählten Posten"
 
 #. module: account_credit_control
 #: selection:credit.control.line,state:0
 #: selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ready To Send"
-msgstr ""
+msgstr "Bereit zum Senden"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_policy_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_level_policy_id
 msgid "Related Policy"
-msgstr ""
+msgstr "Zugehörige Regel"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_report
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Report"
-msgstr ""
+msgstr "Bericht"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_report_date
 msgid "Report Date"
-msgstr ""
+msgstr "Berichtsdatum"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Run date"
-msgstr ""
+msgstr "Laufdatum"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
-msgstr ""
+msgstr "Sende per Email"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
 msgid "Send an email for the selected lines."
-msgstr ""
+msgstr "Versende eine Email zu ausgewählten Posten."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send emails for the selected lines"
-msgstr ""
+msgstr "Versende Emails zu ausgewählten Posten"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send the emails"
-msgstr ""
+msgstr "Versende die Emails"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Sent"
-msgstr ""
+msgstr "Versendet"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_mail_message_id
 msgid "Sent Email"
-msgstr ""
+msgstr "Versandte Email"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_date_sent
 msgid "Sent date"
-msgstr ""
+msgstr "Sendedatum"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set current credit level"
-msgstr ""
+msgstr "Setze aktuelle Mahnstufe"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
-msgstr ""
+msgstr "Setze neue Regel"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_run_id
 msgid "Source"
-msgstr ""
+msgstr "Herkunft"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_state
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_state
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Summary"
-msgstr ""
+msgstr "Zusammenfassung"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_account_invoice_credit_policy_id
@@ -1327,6 +1358,8 @@ msgid ""
 "The Credit Control Policy used for this invoice. If nothing is defined, it "
 "will use the account setting or the partner setting."
 msgstr ""
+"Die bei dieser Rechnung zutreffende Mahnregel. Wenn nicht gepflegt, wird die "
+"Regel aus den Partnerstammdaten herangezogen."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_credit_policy_id
@@ -1335,6 +1368,9 @@ msgid ""
 "The Credit Control Policy used for this partner. This setting can be forced "
 "on the invoice. If nothing is defined, it will use the company setting."
 msgstr ""
+"Die bei diesem Partner zu verwendende Mahnregel. Die Einstellung kann in der "
+"Rechnung überschrieben werden. Wenn nicht gepflegt, wird die Einstellung aus "
+"den Unternehmensstammdaten verwendet."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_company_credit_policy_id
@@ -1343,32 +1379,40 @@ msgid ""
 "The Credit Control Policy used on partners by default. This setting can be "
 "overridden on partners or invoices."
 msgstr ""
+"Die Mahnregel, die bei Geschäftspartnern per Vorgabe verwendet werden soll. "
+"Dies kann in den Partnerstammdaten und in jeder Rechnung überschrieben "
+"werden."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The line was deprecated by a manual change of policy on invoice."
 msgstr ""
+"Diese Position wurde durch eine manuelle Regelvorgabe in der Rechnung "
+"hinfällig."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line_currency_id
 msgid "The optional other currency if it is a multi-currency entry."
 msgstr ""
+"Die optionale Zweitwährung, wenn es sich um einen währungsübergreifenden "
+"Posten handelt."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The partner had a manual followup."
-msgstr ""
+msgstr "Der Partner erhielt eine manuelle Erinnerung."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:242
 #, python-format
 msgid "The smallest level can not be of type Previous Reminder"
-msgstr ""
+msgstr "Die niedrigste Stufe kann nicht vom Typ vorherige Erinnerung sein"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are ready to send by email or by letter using the Actions."
 msgstr ""
+"Diese Posten sind zum Versand per Email oder Brief über Aktionen bereit."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1376,23 +1420,25 @@ msgid ""
 "This allows credit control team to chase overdue payments with different "
 "means"
 msgstr ""
+"Dies ermöglicht den Mahnsachbearbeitern die überfälligen Zahlungen auf "
+"unterschiedliche Art zu verfolgen"
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action
 msgid "This is the next action to be taken."
-msgstr ""
+msgstr "Dies ist die nächste auszuführende Aktion."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_res_partner_payment_next_action_date
 #: model:ir.model.fields,help:account_credit_control.field_res_users_payment_next_action_date
 msgid "This is when the manual follow-up is needed."
-msgstr ""
+msgstr "Hier ist manuelle Weiterbearbeitung erforderlich."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy_account_ids
 msgid "This policy will be active only for the selected accounts"
-msgstr ""
+msgstr "Diese Regel wird nur für ausgewählte Konten aktiviert"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -1400,32 +1446,35 @@ msgid ""
 "This wizard will let you set the overdue policy and level for selected "
 "invoices"
 msgstr ""
+"Dieser Assistent ermöglicht Ihnen das Setzen der Mahnregel und -stufe für "
+"ausgewählte Rechnungen"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Tolerance"
-msgstr ""
+msgstr "Toleranz"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_total_due
 msgid "Total Due"
-msgstr ""
+msgstr "Fällige Summe"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_total_invoiced
 msgid "Total Invoiced"
-msgstr ""
+msgstr "Rechnungssumme"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_user_id
 #: model:res.groups,name:account_credit_control.group_account_credit_control_user
 msgid "User"
-msgstr ""
+msgstr "Anwender"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Warning: you will maybe not be able to revert this operation."
 msgstr ""
+"Warnung: Sie können möglicherweise diesen Vorgang nicht rückgängig machen."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_line.py:194
@@ -1433,7 +1482,7 @@ msgstr ""
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
 "state."
-msgstr ""
+msgstr "Sie dürfen Mahnposten nicht löschen, die nicht im Entwurf vorliegen."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:183
@@ -1443,6 +1492,9 @@ msgid ""
 "Please choose one of the following policies:\n"
 " %s"
 msgstr ""
+"Sie dürfen nur eine für Konto %s gepflegte Regel verwenden.\n"
+"Bitte wählen Sie aus folgenden Regeln aus:\n"
+" %s"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/account_invoice.py:43
@@ -1452,6 +1504,9 @@ msgid ""
 "A payment reminder has already been sent to the customer.\n"
 "You must create a credit note and issue a new invoice."
 msgstr ""
+"Sie dürfen diese Rechnung nicht stornieren.\n"
+"Eine Zahlungserinnerung wurde bereits an den Kunden versandt.\n"
+"Sie müssen eine Gutschrift erstellen und eine neue Rechnung stellen."
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_communication
@@ -1461,9 +1516,9 @@ msgstr "Mahn-Kommunikation"
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_credit_control_policy_changer
 msgid "credit.control.policy.changer"
-msgstr ""
+msgstr "credit.control.policy.changer"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_res_config_settings
 msgid "res.config.settings"
-msgstr ""
+msgstr "res.config.settings"
