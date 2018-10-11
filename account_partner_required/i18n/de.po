@@ -9,29 +9,30 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-22 23:21+0000\n"
-"PO-Revision-Date: 2017-12-22 23:21+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
+"PO-Revision-Date: 2018-10-11 11:21+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
 msgid "Account Type"
-msgstr ""
+msgstr "Kontoart"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Always"
-msgstr ""
+msgstr "Immer"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
@@ -41,12 +42,12 @@ msgstr "Journalposten"
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Never"
-msgstr ""
+msgstr "Nie"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Optional"
-msgstr ""
+msgstr "Wahlweise"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/models/account.py:55
@@ -55,6 +56,8 @@ msgid ""
 "Partner policy is set to 'Always' with account '%s' but the partner is "
 "missing in the account move line with label '%s'."
 msgstr ""
+"Die Partnerregel zum Konto '%s' ist auf 'Immer' gesetzt, in der "
+"Buchungsposition mit Bezeichnung '%s' fehlt der Partner."
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/models/account.py:61
@@ -63,11 +66,13 @@ msgid ""
 "Partner policy is set to 'Never' with account '%s' but the account move line "
 "with label '%s' has a partner '%s'."
 msgstr ""
+"Die Partnerregel zum Konto '%s' ist auf 'Nie' gesetzt, in der "
+"Buchungsposition mit Bezeichnung '%s' ist der Partner '%s' eingetragen."
 
 #. module: account_partner_required
 #: model:ir.model.fields,field_description:account_partner_required.field_account_account_type_partner_policy
 msgid "Policy for Partner Field"
-msgstr ""
+msgstr "Regel für Partner-Feld"
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account_type_partner_policy
@@ -78,3 +83,9 @@ msgid ""
 "message if there is no partner ; if you select 'Never', the accountant will "
 "get an error message if a partner is present."
 msgstr ""
+"Legen Sie die Regel für das Partnerfeld fest: Wenn Sie 'Wahlweise' "
+"auswählen, steht es dem Buchhalter frei, einen Partner auf eine "
+"Buchungsposition mit dieser Art von Konto zu setzen; wenn Sie 'Immer' "
+"auswählen, erhält der Buchhalter eine Fehlermeldung, wenn es keinen Partner "
+"gibt; wenn Sie 'Nie' auswählen, erhält der Buchhalter eine Fehlermeldung, "
+"wenn ein Partner vorhanden ist."
