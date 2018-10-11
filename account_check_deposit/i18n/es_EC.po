@@ -78,7 +78,7 @@ msgid "Beneficiary:"
 msgstr "Beneficiario:"
 
 #. module: account_check_deposit
-#: model:ir.actions.report.xml,name:account_check_deposit.report_account_check_deposit
+#: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line_check_deposit_id
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
 msgid "Check Deposit"
@@ -98,8 +98,8 @@ msgid "Check Deposit - Ref. Check %s"
 msgstr "Depósito de Cheque - Ref. Cheque %s"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_config_settings_check_deposit_offsetting_account
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company_check_deposit_offsetting_account
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings_check_deposit_offsetting_account
 msgid "Check Deposit Offsetting Account"
 msgstr "Cuenta Cheque deposito"
 
@@ -107,6 +107,12 @@ msgstr "Cuenta Cheque deposito"
 #: model:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "Check Deposit n°"
 msgstr "Deposito n°"
+
+#. module: account_check_deposit
+#: model:ir.ui.view,arch_db:account_check_deposit.res_config_settings_view_form
+#, fuzzy
+msgid "Check Deposits"
+msgstr "Depósitos"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_check_payment_ids
@@ -331,8 +337,8 @@ msgid "Transfer Account"
 msgstr "Cuenta de Transferencia"
 
 #. module: account_check_deposit
-#: model:ir.model.fields,field_description:account_check_deposit.field_account_config_settings_check_deposit_transfer_account_id
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company_check_deposit_transfer_account_id
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings_check_deposit_transfer_account_id
 msgid "Transfer Account for Check Deposits"
 msgstr "Cta. de Transferencia para Depósitos"
 
@@ -350,6 +356,6 @@ msgid ""
 msgstr "Debe configurar la 'Cta. de Depósitos' en la configuración Financiera"
 
 #. module: account_check_deposit
-#: model:ir.model,name:account_check_deposit.model_account_config_settings
-msgid "account.config.settings"
+#: model:ir.model,name:account_check_deposit.model_res_config_settings
+msgid "res.config.settings"
 msgstr ""
