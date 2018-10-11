@@ -74,18 +74,19 @@ msgstr ""
 #: model:ir.actions.report.xml,name:account_check_deposit.report_account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line_check_deposit_id
 #: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+#: model:ir.ui.view,arch_db:account_check_deposit.view_account_config_settings
 msgid "Check Deposit"
 msgstr ""
 
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_deposit.py:167
-#: code:addons/account_check_deposit/models/account_deposit.py:206
+#: code:addons/account_check_deposit/models/account_deposit.py:205
 #, python-format
 msgid "Check Deposit %s"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:176
+#: code:addons/account_check_deposit/models/account_deposit.py:175
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr ""
@@ -251,13 +252,13 @@ msgid "List of checks:"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:201
+#: code:addons/account_check_deposit/models/account_deposit.py:200
 #, python-format
 msgid "Missing 'Account for Check Deposits' on the company '%s'."
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:195
+#: code:addons/account_check_deposit/models/account_deposit.py:194
 #, python-format
 msgid "Missing 'Default Debit Account' on bank journal '%s'"
 msgstr ""
@@ -270,6 +271,12 @@ msgstr ""
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_check_count
 msgid "Number of Checks"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_config_settings_check_deposit_post_move
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_company_check_deposit_post_move
+msgid "Post Move for Check Deposits"
 msgstr ""
 
 #. module: account_check_deposit
@@ -332,7 +339,7 @@ msgid "Validate"
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:190
+#: code:addons/account_check_deposit/models/account_deposit.py:189
 #, python-format
 msgid "You must configure the 'Check Deposit Offsetting Account' on the Accounting Settings page"
 msgstr ""
