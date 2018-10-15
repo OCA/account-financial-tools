@@ -66,6 +66,7 @@ class AccountAssetLine(models.Model):
     @api.depends('amount', 'previous_id', 'type')
     @api.multi
     def _compute_values(self):
+        dlines = self
         if self.env.context.get('no_compute_asset_line_ids'):
             # skip compute for lines in unlink
             exclude_ids = self.env.context['no_compute_asset_line_ids']
