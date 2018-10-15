@@ -6,4 +6,4 @@ from . import account_asset_recompute_trigger
 from . import account_invoice
 from . import account_move
 from . import date_range
-from . import res_config
+from . import res_config_settings

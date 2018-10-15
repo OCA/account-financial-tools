@@ -74,9 +74,7 @@ class AccountInvoice(models.Model):
     def action_move_create(self):
         res = super().action_move_create()
         for inv in self:
-            move = inv.move_id
-            assets = [aml.asset_id for aml in
-                      [x for x in move.line_ids if x.asset_id]]
+            assets = inv.move_id.line_ids.mapped('asset_id')
             for asset in assets:
                 asset.code = inv.move_name
                 asset_line_name = asset._get_depreciation_entry_name(0)
@@ -90,7 +88,7 @@ class AccountInvoice(models.Model):
         assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
-            assets = move.line_ids.mapped('asset_id')
+            assets |= move.line_ids.mapped('asset_id')
         super().action_cancel()
         if assets:
             assets.unlink()

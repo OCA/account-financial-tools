@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
   <record model="ir.ui.view" id="account_asset_view_form">
@@ -194,9 +195,9 @@
     <field name="arch" type="xml">
       <search string="Account Asset">
         <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]" help="Draft Assets"/>
-        <filter string="Running" domain="[('state', '=', 'open')]" help="Assets in Running State"/>
-        <filter string="Close" domain="[('state', '=', 'close')]" help="Assets in Close State"/>
-        <filter string="Removed" domain="[('state', '=', 'removed')]" help="Assets which have been removed"/>
+        <filter string="Running" name="running" domain="[('state', '=', 'open')]" help="Assets in Running State"/>
+        <filter string="Close" name="close" domain="[('state', '=', 'close')]" help="Assets in Close State"/>
+        <filter string="Removed" name="removed" domain="[('state', '=', 'removed')]" help="Assets which have been removed"/>
         <separator orientation="vertical"/>
         <field name="name" string="Asset"/>
         <field name="code"/>
