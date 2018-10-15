@@ -1,4 +1,5 @@
-<openerp>
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
   <data>
 
     <record id="account_asset_profile_view_form" model="ir.ui.view">
@@ -78,4 +79,4 @@
     </record>
 
   </data>
-</openerp>
+</odoo>

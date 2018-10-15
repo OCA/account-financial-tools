@@ -22,11 +22,6 @@ class AccountAssetLine(models.Model):
         string='Previous Depreciation Line',
         readonly=True)
     parent_state = fields.Selection(
-        selection=[
-            ('draft', 'Draft'),
-            ('open', 'Running'),
-            ('close', 'Close'),
-            ('removed', 'Removed')],
         related='asset_id.state',
         string='State of Asset',
         readonly=True,
@@ -66,17 +61,16 @@ class AccountAssetLine(models.Model):
     init_entry = fields.Boolean(
         string='Initial Balance Entry',
         help="Set this flag for entries of previous fiscal years "
-             "for which OpenERP has not generated accounting entries.")
+             "for which Odoo has not generated accounting entries.")
 
     @api.depends('amount', 'previous_id', 'type')
     @api.multi
     def _compute_values(self):
-        dlines = self
         if self.env.context.get('no_compute_asset_line_ids'):
             # skip compute for lines in unlink
             exclude_ids = self.env.context['no_compute_asset_line_ids']
-            dlines = dlines.filtered(lambda l: l.id not in exclude_ids)
-        dlines = self.filtered(lambda l: l.type == 'depreciate')
+            dlines = self.filtered(lambda l: l.id not in exclude_ids)
+        dlines = dlines.filtered(lambda l: l.type == 'depreciate')
         dlines = dlines.sorted(key=lambda l: l.line_date)
 
         for i, dl in enumerate(dlines):
@@ -240,7 +234,7 @@ class AccountAssetLine(models.Model):
             asset_ids.add(asset.id)
         # we re-evaluate the assets to determine if we can close them
         for asset in self.env['account.asset'].browse(list(asset_ids)):
-            if asset.company_id.currency_id.is_zero(asset.value_residual):
+            if asset.company_currency_id.is_zero(asset.value_residual):
                 asset.state = 'close'
         return created_move_ids
 
