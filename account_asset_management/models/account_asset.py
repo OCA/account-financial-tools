@@ -106,7 +106,7 @@ class AccountAsset(models.Model):
             ('open', 'Running'),
             ('close', 'Close'),
             ('removed', 'Removed'),
-        ], string='Status', required=True, default='draft', copy='draft',
+        ], string='Status', required=True, default='draft', copy=False,
         help="When an asset is created, the status is 'Draft'.\n"
              "If the asset is confirmed, the status goes in 'Running' "
              "and the depreciation lines can be posted "
