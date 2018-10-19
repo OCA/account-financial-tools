@@ -726,7 +726,7 @@ class AccountAsset(models.Model):
                 depreciation_stop_date = depreciation_start_date + \
                     relativedelta(years=self.method_number, days=-1)
         elif self.method_time == 'end':
-            depreciation_stop_date = fields.Date.from_string(
+            depreciation_stop_date = fields.Datetime.from_string(
                 self.method_end)
         return depreciation_stop_date
 
