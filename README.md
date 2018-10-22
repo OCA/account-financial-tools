@@ -31,7 +31,7 @@ addon | version | summary
 [account_asset_management_method_number_end](account_asset_management_method_number_end/) | 10.0.1.0.0 | Financial asset management - method Number & End
 [account_asset_management_xls](account_asset_management_xls/) | 10.0.1.0.0 | Assets Management Excel reporting
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
-[account_chart_update](account_chart_update/) | 10.0.2.0.1 | Wizard to update a company's account chart from a template
+[account_chart_update](account_chart_update/) | 10.0.2.1.0 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
 [account_credit_control](account_credit_control/) | 10.0.1.4.4 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 10.0.1.0.0 | Credit control dunning fees
