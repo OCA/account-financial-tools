@@ -97,6 +97,57 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         string='Deactivated taxes',
         compute="_compute_deleted_taxes_count")
     log = fields.Text(string='Messages and Errors', readonly=True)
+    tax_field_ids = fields.Many2many(
+        comodel_name="ir.model.fields",
+        relation="wizard_update_charts_tax_fields_rel",
+        string="Tax fields",
+        domain=lambda self: self._domain_tax_field_ids(),
+        default=lambda self: self._default_tax_field_ids(),
+    )
+    account_field_ids = fields.Many2many(
+        comodel_name="ir.model.fields",
+        relation="wizard_update_charts_account_fields_rel",
+        string="Account fields",
+        domain=lambda self: self._domain_account_field_ids(),
+        default=lambda self: self._default_account_field_ids(),
+    )
+    fp_field_ids = fields.Many2many(
+        comodel_name="ir.model.fields",
+        relation="wizard_update_charts_fp_fields_rel",
+        string="Fiscal position fields",
+        domain=lambda self: self._domain_fp_field_ids(),
+        default=lambda self: self._default_fp_field_ids(),
+    )
+
+    def _domain_per_name(self, name):
+        return [
+            ('model', '=', name),
+            ('name', 'not in', tuple(self.fields_to_ignore(name))),
+        ]
+
+    def _domain_tax_field_ids(self):
+        return self._domain_per_name('account.tax.template')
+
+    def _domain_account_field_ids(self):
+        return self._domain_per_name('account.account.template')
+
+    def _domain_fp_field_ids(self):
+        return self._domain_per_name('account.fiscal.position.template')
+
+    def _default_tax_field_ids(self):
+        return [(4, x.id) for x in self.env['ir.model.fields'].search(
+            self._domain_tax_field_ids()
+        )]
+
+    def _default_account_field_ids(self):
+        return [(4, x.id) for x in self.env['ir.model.fields'].search(
+            self._domain_account_field_ids()
+        )]
+
+    def _default_fp_field_ids(self):
+        return [(4, x.id) for x in self.env['ir.model.fields'].search(
+            self._domain_fp_field_ids()
+        )]
 
     @api.model
     def _get_lang_selection_options(self):
@@ -355,7 +406,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     @api.model
     @tools.ormcache("name")
-    def fields_to_ignore(self, template, name):
+    def fields_to_ignore(self, name):
         """Get fields that will not be used when checking differences.
 
         :param str template: A template record.
@@ -364,10 +415,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         specials_mapping = {
             "account.tax.template": {
+                "chart_template_id",
                 "children_tax_ids",
             },
             "account.account.template": {
+                "chart_template_id",
                 "code",
+            },
+            "account.fiscal.position.template": {
+                "chart_template_id",
             },
         }
         specials = ({"display_name", "__last_update", "company_id"} |
@@ -387,9 +443,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             Fields that are different in both records, and the expected value.
         """
         result = dict()
-        ignore = self.fields_to_ignore(template, template._name)
+        ignore = self.fields_to_ignore(template._name)
+        to_include = []
+        if template._name == 'account.tax.template':
+            to_include = self.tax_field_ids.mapped('name')
+        elif template._name == 'account.account.template':
+            to_include = self.account_field_ids.mapped('name')
+        elif template._name == 'account.fiscal.position.template':
+            to_include = self.fp_field_ids.mapped('name')
         for key, field in template._fields.iteritems():
-            if key in ignore:
+            if key in ignore or key not in to_include:
                 continue
             expected = t = None
             # Translate template records to reals for comparison
