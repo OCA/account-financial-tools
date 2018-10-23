@@ -3,9 +3,16 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
-from odoo.addons.report_xlsx_helper.report.abstract_report_xlsx \
-    import AbstractReportXlsx
-_render = AbstractReportXlsx._render
+import logging
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from odoo.addons.report_xlsx_helper.report.abstract_report_xlsx \
+        import AbstractReportXlsx
+    _render = AbstractReportXlsx._render
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class AccountAsset(models.Model):
