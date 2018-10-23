@@ -73,6 +73,42 @@ msgid "VAT Cash Basis"
 msgstr ""
 
 #. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_19
+#: model:account.tax,name:account_group_menu.demo_vatc_19
+msgid "VAT Colected 19%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_05
+#: model:account.tax,name:account_group_menu.demo_vatc_05
+msgid "VAT Colected 5%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_09
+#: model:account.tax,name:account_group_menu.demo_vatc_09
+msgid "VAT Colected 9%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_19
+#: model:account.tax,name:account_group_menu.demo_vatccb_19
+msgid "VAT Colected Cash-Basis 19%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_05
+#: model:account.tax,name:account_group_menu.demo_vatccb_05
+msgid "VAT Colected Cash-Basis 5%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_09
+#: model:account.tax,name:account_group_menu.demo_vatccb_09
+msgid "VAT Colected Cash-Basis 9%"
+msgstr ""
+
+#. module: account_group_menu
 #: model:ir.model,name:account_group_menu.model_account_group
 msgid "account.group"
 msgstr ""
