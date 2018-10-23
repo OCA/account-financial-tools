@@ -177,7 +177,6 @@ class AccountAssetLine(models.Model):
     def _setup_move_data(self, depreciation_date):
         asset = self.asset_id
         move_data = {
-            'name': asset.name,
             'date': depreciation_date,
             'ref': self.name,
             'journal_id': asset.profile_id.journal_id.id,
