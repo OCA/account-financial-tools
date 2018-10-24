@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_reclassify_account_move_line_form" model="ir.ui.view">
+            <field name="name">Reclassify Journal Items</field>
+            <field name="model">reclassify.account.move.line</field>
+            <field name="arch" type="xml">
+                <form string="Reclassify Journal Items" version="7.0">
+                    <p class="o_default_snippet_text">This wizard allows you to reclassify multiple
+                        journal items at once. This is useful to change the general account, the analytic account,
+                        the analytic tags and/or the partner of multiple lines at once.</p>
+                    <p class="o_default_snippet_text">When the non-required fields are left blank, the wizard will use the information from the line to reclassify.</p>
+                    <p class="o_default_snippet_text">If necessary, you can specify a transitory account.</p>
+                    <group string="General Accounting Information">
+                        <field name="journal_id" class="oe_inline"/>
+                        <field name="line_prefix" class="oe_inline"/>
+                        <field name="use_transitory_account"/>
+                    </group>
+                    <group>
+                        <group string="Transitory Move" attrs="{'invisible': [('use_transitory_account', '=', False)]}">
+                            <field name="transitory_account_id" class="oe_inline"
+                                   attrs="{'required': [('use_transitory_account', '=', True)]}"/>
+                            <field name="transitory_date" class="oe_inline"/>
+                        </group>
+                        <group string="Destination Move">
+                            <field name="destination_account_id" attrs="{'required': [('use_transitory_account', '=', False)]}" class="oe_inline"/>
+                            <field name="destination_date" attrs="{'required': [('use_transitory_account', '=', False)]}"  class="oe_inline"/>
+                        </group>
+                    </group>
+                    <group string="Analytic Accounting Information" groups="analytic.group_analytic_accounting">
+                        <field name="analytic_account_id" class="oe_inline"/>
+                        <field name="analytic_tag_ids" widget="many2many_tags"/>
+                    </group>
+                    <group string="Other Information">
+                        <field name="partner_id"/>
+                    </group>
+                    <footer>
+                        <button name="reclassify" type="object" string="Reclassify" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+            id="action_reclassify_move_lines"
+            res_model="reclassify.account.move.line"
+            src_model="account.move.line"
+            target="new"
+            multi="True"
+            key2="client_action_multi"
+            view_mode="form"
+            name="Reclassify Move Lines"/>
+
+    </data>
+</openerp>
+

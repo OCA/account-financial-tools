@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2018 FIEF Management SA <svalaeys@fiefmanage.ch>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <data>
+        <record id="view_reclassify_move_line_form" model="ir.ui.view">
+            <field name="name">reclassify.account.move.line.form</field>
+            <field name="model">account.move.line</field>
+            <field ref="account.view_move_line_form" name="inherit_id"/>
+            <field name="arch" type="xml">
+                <field name="invoice_id" position="after">
+                    <field name="to_reclassify" groups="account.group_account_manager"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_reclassify_move_line_filter" model="ir.ui.view">
+            <field name="name">reclassify.account.move.line.filter</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter" />
+            <field name="arch" type="xml">
+                <field name="account_id" position="before">
+                    <filter string="To Reclassify" domain="[('to_reclassify', '=', True)]"/>
+                    <separator/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+
+</odoo>

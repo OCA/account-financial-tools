@@ -1,0 +1,227 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_reclassify
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-21 15:20+0000\n"
+"PO-Revision-Date: 2018-10-21 17:34+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_CH\n"
+"X-Generator: Poedit 2.2\n"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_analytic_account_id
+msgid "Analytic Account"
+msgstr "Compte analytique"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Analytic Accounting Information"
+msgstr "Information analytique"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_analytic_tag_ids
+msgid "Analytic Tags"
+msgstr "Étiquettes analytiques"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_move_line_reclassify
+#: code:addons/account_move_line_reclassify/wizards/reclassify_account_move_line.py:118
+#, python-format
+msgid "Created Lines"
+msgstr "Écritures créées"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_destination_date
+msgid "Date On The Move To The Destination Account"
+msgstr "Date de la pièce vers le compte de destination"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_transitory_date
+msgid "Date On The Move To The Transitory Account"
+msgstr "Date de la pièce vers le compte transitoire"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_destination_account_id
+msgid "Destination Account"
+msgstr "Compte de destination"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Destination Move"
+msgstr "Pièce de destination"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_line_prefix
+msgid "Entry prefix"
+msgstr "Préfixe au nom des écritures"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "General Accounting Information"
+msgstr "Information de comptabilité générale"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "If necessary, you can specify a transitory account."
+msgstr "Si nécessaire, un compte transitoire peut être exigé"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_journal_id
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_move_line_reclassify
+#: model:ir.model,name:account_move_line_reclassify.model_account_move_line
+msgid "Journal Item"
+msgstr "Écriture comptable"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,help:account_move_line_reclassify.field_reclassify_account_move_line_transitory_date
+msgid "Leave blank to use original line date"
+msgstr "Laisser vide pour utiliser la date originale"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,help:account_move_line_reclassify.field_reclassify_account_move_line_destination_account_id
+msgid "Leave blank to use the original line account"
+msgstr "Laisser vide pour utiliser le compte original"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,help:account_move_line_reclassify.field_reclassify_account_move_line_destination_date
+msgid "Leave blank to use the original line date"
+msgstr "Laisser vide pour utiliser la date originale"
+
+#. module: account_move_line_reclassify
+#: code:addons/account_move_line_reclassify/wizards/reclassify_account_move_line.py:127
+#, python-format
+msgid "No accounting entry have been posted."
+msgstr "Aucune pièce comptable n'a été enregistrée."
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Other Information"
+msgstr "Autres informations"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Reclassify"
+msgstr "Recalsser"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Reclassify Journal Items"
+msgstr "Reclasser les écritures comptables"
+
+#. module: account_move_line_reclassify
+#: model:ir.actions.act_window,name:account_move_line_reclassify.action_reclassify_move_lines
+msgid "Reclassify Move Lines"
+msgstr "Reclasser les écritures comptables"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,help:account_move_line_reclassify.field_reclassify_account_move_line_transitory_account_id
+msgid "This is the account through which the items will transit for the duration of the transit. It should be a balance sheet account."
+msgstr "Ceci est le compte à travers lequel les écritures vont transiter pour la durée du transit. C'est un compte de bilan."
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,help:account_move_line_reclassify.field_reclassify_account_move_line_line_prefix
+msgid "This label will be inserted in entries description."
+msgstr "Ce libellé sera inséré dans la description des écritures"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid ""
+"This wizard allows you to reclassify multiple\n"
+"                        journal items at once. This is useful to change the general account, the analytic account,\n"
+"                        the analytic tags and/or the partner of multiple lines at once."
+msgstr ""
+"Cet assistant permet de reclasser\n"
+"                        de nombreuses écritures à la fois. Ceci est utile modifier le compte général,\n"
+"                        le compte analytique, les étiquettes analytiques et/ou le partenaire sur plusieurs écritures à la fois."
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_account_move_line_to_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_move_line_filter
+msgid "To Reclassify"
+msgstr "À reclasser"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_transitory_account_id
+msgid "Transitory Account"
+msgstr "Compte transitoire"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "Transitory Move"
+msgstr "Pièce transitoire"
+
+#. module: account_move_line_reclassify
+#: model:ir.model.fields,field_description:account_move_line_reclassify.field_reclassify_account_move_line_use_transitory_account
+msgid "Use Transitory Account"
+msgstr "Utiliser un compte transitoire"
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "When the non-required fields are left blank, the wizard will use the information from the line to reclassify."
+msgstr "Quand les champs optionnels sont laissés vides, l'assistant utilise l'information de la ligne à reclasser."
+
+#. module: account_move_line_reclassify
+#: model:ir.ui.view,arch_db:account_move_line_reclassify.view_reclassify_account_move_line_form
+msgid "or"
+msgstr "ou"
+
+#. module: account_move_line_reclassify
+#: model:ir.model,name:account_move_line_reclassify.model_reclassify_account_move_line
+msgid "reclassify.account.move.line"
+msgstr "reclassify.account.move.line"
