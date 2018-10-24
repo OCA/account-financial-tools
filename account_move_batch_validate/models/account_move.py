@@ -54,6 +54,8 @@ class AccountMove(models.Model):
                 move.id)
             values['post_job_uuid'] = new_job.uuid
             move.write(values)
+            # Explicit committing is done for the capability of tracking
+            # created jobs in live, during creation process
             self.env.cr.commit()  # pylint:disable=invalid-commit
 
     @api.model
@@ -91,6 +93,8 @@ class AccountMove(models.Model):
         for index in range(0, moves_count, BLOCK_SIZE):
             moves = self[index:index + BLOCK_SIZE]
             moves.write(values)
+            # Explicit committing is done for the capability of tracking
+            # created jobs in live, during creation process
             # users like to see the flag sooner rather than later
             self.env.cr.commit()  # pylint:disable=invalid-commit
         self._delay_post_marked(eta=eta)
