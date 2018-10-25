@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.ui.view" id="account_asset_view_form">
+    <field name="name">account.asset.form</field>
+    <field name="model">account.asset</field>
+    <field name="arch" type="xml">
+      <form string="Asset">
+        <header>
+          <button name="validate" string="Confirm Asset" type="object" class="oe_highlight"
+                  attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('type', '=', 'view')]}"/>
+          <button name="set_to_draft" states="open,close"
+                  string="Set to Draft" type="object" groups="account.group_account_manager"/>
+          <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
+                  attrs="{'invisible':['|', ('method_time', '!=', 'year'), ('state', 'not in', ['open', 'close'])]}"
+                  help="Asset removal."/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"
+                 attrs="{'invisible': [('type', '=', 'view')]}"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box">
+            <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"
+                    attrs="{'invisible': [('type', '=', 'view')]}"/>
+          </div>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1>
+              <field name="name" class="oe_inline"/>
+            </h1>
+          </div>
+          <group colspan="4" col="4">
+            <field name="code"/>
+            <field name="parent_id"
+                   attrs="{'required': [('type', '=', 'normal')]}"/>
+            <field name="type"/>
+            <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+            <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
+            <field name="move_line_check" invisible="1"/>
+            <newline/>
+            <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                   attrs="{'invisible': [('type', '=', 'view')]}"/>
+            <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                   attrs="{'invisible': [('type', '=', 'view')]}"/>
+            <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                   attrs="{'invisible': [('type', '=', 'view')]}"/>
+          </group>
+          <notebook colspan="4" attrs="{'invisible': [('type', '=', 'view')]}">
+            <page string="General">
+              <group colspan="4" col="4">
+                <group>
+                  <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
+                         attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                  <field name="date_start"
+                         attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('type', '=', 'normal')]}"/>
+                </group>
+                <group>
+                  <field name="salvage_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                         attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                  <field name="date_remove"/>
+                </group>
+              </group>
+              <separator string="Other Information" colspan="4"/>
+              <group colspan="4" col="4">
+                <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}"/>
+                <field name="partner_id"/>
+                <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+              </group>
+              <group colspan="4">
+                <group>
+                  <separator string="Depreciation Dates" colspan="2"/>
+                  <field name="method_time"/>
+                  <field name="method_number"
+                         attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
+                  <field name="method_period"/>
+                  <field name="method_end"
+                         attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number', 'year'])]}"/>
+                </group>
+                <group>
+                  <separator string="Depreciation Method" colspan="2"/>
+                  <field name="method"/>
+                  <field name="method_progress_factor"
+                         attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"/>
+                  <field name="prorata" attrs="{'readonly': [('method_time', '!=', 'year')]}"/>
+                </group>
+              </group>
+            </page>
+            <page string="Depreciation Board">
+              <div>
+                <button type="object" name="compute_depreciation_board"
+                        string=" Compute" icon="fa-gears"
+                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
+              </div>
+              <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
+                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" create="false">
+                  <field name="type"/>
+                  <field name="line_date"/>
+                  <field name="depreciated_value" readonly="1"/>
+                  <field name="amount"/>
+                  <field name="remaining_value" readonly="1"/>
+                  <field name="init_entry" string="Init"/>
+                  <field name="move_check"/>
+                  <field name="parent_state" invisible="1"/>
+                  <button name="create_move" icon="fa-cog" string="Create Move" type="object"
+                          attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"/>
+                  <button name="open_move" icon="fa-folder-open-o" string="View Move" type="object"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                  <button name="unlink_move" icon="fa-times"
+                          string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                </tree>
+                <form string="Asset Line">
+                  <group>
+                    <group>
+                      <field name="parent_state" invisible="1"/>
+                      <field name="depreciation_base" invisible="1"/>
+                      <field name="type"/>
+                      <field name="name"/>
+                      <field name="amount" attrs="{'readonly': [('move_check', '=', True)]}"/>
+                      <field name="init_entry" attrs="{'readonly': ['|', ('move_check', '=', True), ('type', '=', 'create')]}"/>
+                      <field name="move_id"/>
+                      <field name="move_check"/>
+                    </group>
+                    <group>
+                      <field name="line_date" attrs="{'readonly': [('move_check', '=', True)]}"/>
+                      <field name="depreciated_value" readonly="1"/>
+                      <field name="remaining_value" readonly="1"/>
+                    </group>
+                  </group>
+                </form>
+              </field>
+            </page>
+            <page string="History">
+              <field name="account_move_line_ids" readonly="1">
+                <tree string="Journal Items">
+                  <field name="move_id"/>
+                  <field name="journal_id"/>
+                  <field name="date"/>
+                  <field name="ref"/>
+                  <field name="partner_id"/>
+                  <field name="account_id"/>
+                  <field name="debit" sum="Total Debit"/>
+                  <field name="credit" sum="Total Credit"/>
+                </tree>
+                <form string="Journal Item">
+                  <field name="journal_id" options='{"no_open":True}'/>
+                  <field name="move_id" options='{"no_open":True}'/>
+                  <newline/>
+                  <field name="name"/>
+                  <field name="ref"/>
+                  <newline/>
+                  <field name="date"/>
+                  <newline/>
+                  <field name="partner_id" options='{"no_open":True}'/>
+                  <newline/>
+                  <field name="account_id" options='{"no_open":True}'/>
+                  <field name="analytic_account_id" groups="analytic.group_analytic_accounting" options='{"no_open": True}'/>
+                  <newline/>
+                  <field name="debit" sum="Total Debit"/>
+                  <field name="credit" sum="Total Credit"/>
+                </form>
+              </field>
+            </page>
+            <page string="Notes">
+              <field name="note" placeholder="Add an internal note here..."/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="account_asset_view_tree">
+    <field name="name">account.asset.tree</field>
+    <field name="model">account.asset</field>
+    <field name="arch" type="xml">
+      <tree string="Assets" decoration-info="type == 'view'">
+        <field name="name"/>
+        <field name="type" invisible="1"/>
+        <field name="code"/>
+        <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="date_start"/>
+        <field name="date_remove"/>
+        <field name="profile_id"/>
+        <field name="state" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="company_id" groups="base.group_multi_company"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="account_asset_view_search" model="ir.ui.view">
+    <field name="name">account.asset.search</field>
+    <field name="model">account.asset</field>
+    <field name="arch" type="xml">
+      <search string="Account Asset">
+        <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]" help="Draft Assets"/>
+        <filter string="Running" name="running" domain="[('state', '=', 'open')]" help="Assets in Running State"/>
+        <filter string="Close" name="close" domain="[('state', '=', 'close')]" help="Assets in Close State"/>
+        <filter string="Removed" name="removed" domain="[('state', '=', 'removed')]" help="Assets which have been removed"/>
+        <separator orientation="vertical"/>
+        <field name="name" string="Asset"/>
+        <field name="code"/>
+        <field name="date_start"/>
+        <field name="profile_id"/>
+        <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+        <group expand="0" string="Group By...">
+          <filter string="Type" domain="" context="{'group_by': 'type'}"/>
+          <filter string="Profile" domain="" context="{'group_by': 'profile_id'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="account_asset_action" model="ir.actions.act_window">
+    <field name="name">Assets</field>
+    <field name="res_model">account.asset</field>
+    <field name="view_type">form</field>
+    <field name="view_id" ref="account_asset_view_tree"/>
+    <field name="search_view_id" ref="account_asset_view_search"/>
+  </record>
+
+  <act_window id="act_entries_open"
+              name="Journal Items"
+              src_model="account.asset"
+              res_model="account.move.line"
+              domain="['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]"/>
+
+</odoo>

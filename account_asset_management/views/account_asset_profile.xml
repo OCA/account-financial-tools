@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="account_asset_profile_view_form" model="ir.ui.view">
+      <field name="name">account.asset.profile.form</field>
+      <field name="model">account.asset.profile</field>
+      <field name="arch" type="xml">
+        <form string="Asset profile">
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="parent_id" required="1"/>
+              <field name="asset_product_item"/>
+              <field name="active"/>
+              <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+            </group>
+            <group>
+              <field name="journal_id"/>
+              <field name="account_asset_id"/>
+              <field name="account_depreciation_id"/>
+              <field name="account_expense_depreciation_id"/>
+              <field name="account_plus_value_id"/>
+              <field name="account_min_value_id"/>
+              <field name="account_residual_value_id"/>
+            </group>
+            <group string="Depreciation Dates">
+              <field name="method_time"/>
+              <field name="method_number"
+                     attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
+              <field name="method_period"/>
+            </group>
+            <group string="Depreciation Method">
+              <field name="method"/>
+              <field name="method_progress_factor"
+                     attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"/>
+              <field name="prorata" attrs="{'readonly':[('method_time','!=','year')]}"/>
+              <field name="open_asset"/>
+            </group>
+            <group groups="analytic.group_analytic_accounting" string="Analytic Information">
+              <field name="account_analytic_id"/>
+            </group>
+          </group>
+          <separator string="Notes"/>
+          <field name="note"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="account_asset_profile_view_tree" model="ir.ui.view">
+      <field name="name">account.asset.profile.tree</field>
+      <field name="model">account.asset.profile</field>
+      <field name="arch" type="xml">
+        <tree string="Asset profile">
+          <field name="name"/>
+          <field name="journal_id"/>
+          <field name="method"/>
+          <field name="company_id" groups="base.group_multi_company"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="account_asset_profile_view_search" model="ir.ui.view">
+      <field name="name">account.asset.profile.search</field>
+      <field name="model">account.asset.profile</field>
+      <field name="arch" type="xml">
+        <search string="Search Asset Profile">
+          <field name="name" string="Asset Profile"/>
+          <field name="journal_id"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="account_asset_profile_action" model="ir.actions.act_window">
+      <field name="name">Asset Profiles</field>
+      <field name="res_model">account.asset.profile</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>
