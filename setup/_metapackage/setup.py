@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-financial-tools Odoo addons",
     version=version,
     install_requires=[
+        'odoo11-addon-account_asset_management',
         'odoo11-addon-account_balance_line',
         'odoo11-addon-account_chart_update',
         'odoo11-addon-account_check_deposit',
