@@ -22,13 +22,14 @@ class AccountMove(models.Model):
         help="Check this box to mark the move for batch posting")
     post_job_uuid = fields.Char(string="UUID of the Job to approve this move")
 
+    @api.multi
     @job(default_channel='root.account_move_batch_validate')
-    def validate_one_move(self, move_id):
-        move = self.browse(move_id)
-        if move.exists():
-            move.post()
+    def validate_one_move(self):
+        if self.exists():
+            self.post()
+            return _("Move has been posted successfully.")
         else:
-            return _("Nothing to do because the record has been deleted")
+            return _("Nothing to do because the record has been deleted.")
 
     @api.model
     def _delay_post_marked(self, eta=None):
@@ -36,27 +37,30 @@ class AccountMove(models.Model):
         Create a job for every move marked for posting.
         If some moves already have a job, they are skipped.
         """
-        AccountMoveObj = self.env[self._name]
-
         moves = self.search([
             ('to_post', '=', True),
             ('post_job_uuid', '=', False),
             ('state', '=', 'draft'),
         ])
 
-        # maybe not creating too many dictionaries will make us a bit faster
-        values = {'post_job_uuid': None}
+        moves_job_mapping = []
         _logger.info(
-            "%s jobs for posting moves have been created.", len(moves))
+            "Creating %s jobs for posting moves.", len(moves))
 
         for move in moves:
-            new_job = AccountMoveObj.with_delay(eta=eta).validate_one_move(
-                move.id)
-            values['post_job_uuid'] = new_job.uuid
-            move.write(values)
-            # Explicit committing is done for the capability of tracking
-            # created jobs in live, during creation process
-            self.env.cr.commit()  # pylint:disable=invalid-commit
+            job = move.with_delay(eta=eta).validate_one_move()
+            moves_job_mapping.append((move.id, job.uuid))
+        self._update_moves_with_job_uuid(moves_job_mapping)
+
+    @api.model
+    def _update_moves_with_job_uuid(self, moves_job_mapping):
+        sql = """
+            UPDATE account_move AS am
+            SET post_job_uuid = v.job_uuid
+            FROM (VALUES %s ) AS v (move_id, job_uuid)
+            WHERE am.id = v.move_id;
+        """
+        self.env.cr.execute(sql, tuple(moves_job_mapping))
 
     @api.model
     def _cancel_post_jobs(self):
@@ -88,15 +92,7 @@ class AccountMove(models.Model):
         moves_count = len(self)
         _logger.info("%s moves marked for posting.", moves_count)
 
-        values = {'to_post': True}
-
-        for index in range(0, moves_count, BLOCK_SIZE):
-            moves = self[index:index + BLOCK_SIZE]
-            moves.write(values)
-            # Explicit committing is done for the capability of tracking
-            # created jobs in live, during creation process
-            # users like to see the flag sooner rather than later
-            self.env.cr.commit()  # pylint:disable=invalid-commit
+        self.write({'to_post': True})
         self._delay_post_marked(eta=eta)
 
     @api.multi

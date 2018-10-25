@@ -30,7 +30,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
         })
         self.account_sale = self.AccountObj.create({
             'code': 'SALET',
-            'name': "Receivable (sale)",
+            'name': "Revenue (sale)",
             'reconcile': True,
             'user_type_id': self.account_type_rev.id,
         })
@@ -81,12 +81,11 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
             'active_ids': [move.id],
             'automated_test_execute_now': True,
         }).validate_move()
-
+        move.invalidate_cache()
         job_uuid = move.post_job_uuid
 
         self.assertTrue(
             move.to_post, msg="Move should be marked as 'to post'.")
-
         self.assertTrue(
             bool(job_uuid), msg="A job should have been assigned to the move.")
 
@@ -108,7 +107,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
             'active_ids': [move.id],
             'automated_test_execute_now': True,
         }).validate_move()
-
+        move.invalidate_cache()
         job_uuid = move.post_job_uuid
 
         self.assertTrue(
@@ -121,7 +120,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
 
         self.assertEqual(
             post_job.result,
-            'Nothing to do because the record has been deleted')
+            'Nothing to do because the record has been deleted.')
 
     def test_03_mark_and_unmark(self):
         """
@@ -135,7 +134,7 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
             'active_ids': [move.id],
             'automated_test_execute_now': True,
         }).validate_move()
-
+        move.invalidate_cache()
         mark_job_uuid = move.post_job_uuid
 
         self.assertTrue(move.to_post)
