@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="inherited_account_view_general_configuration" model="ir.ui.view">
+            <field name="name">General accounting settings</field>
+            <field name="model">base.config.settings</field>
+            <field name="priority" eval="12"/>
+            <field name="inherit_id" ref="base_setup.view_general_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='multi_company']" position="after">
+                   <div name="activate_currency_rate_check">
+                       <field name="activate_currency_rate_max_delta" class="oe_inline"/>
+                       <label for="activate_currency_rate_max_delta"/>
+                   </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

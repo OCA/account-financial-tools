@@ -17,6 +17,7 @@
     <field name="arch" type="xml">
         <field name="currency_id" position="after">
             <field name="currency_rate_max_delta" />
+            <field name="activate_currency_rate_max_delta" invisible="1" />
         </field>
     </field>
 </record>

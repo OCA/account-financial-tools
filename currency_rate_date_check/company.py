@@ -32,6 +32,11 @@ class ResCompany(models.Model):
         "the date associated with the amount to convert and the date "
         "of the nearest currency rate available in Odoo.")
 
+    activate_currency_rate_max_delta = fields.Boolean(
+        default=False, string='Activate check of the max date rate',
+        help="This must be true to execute the validation of Max Time Delta "
+        "in Days for Currency Rates")
+
     _sql_constraints = [
         ('currency_rate_max_delta_positive',
          'CHECK (currency_rate_max_delta >= 0)',

@@ -43,8 +43,8 @@ for any help or question about this module.
     """,
     'author': "Akretion,Odoo Community Association (OCA)",
     'website': 'http://www.akretion.com',
-    'depends': ['base'],
-    'data': ['company_view.xml'],
+    'depends': ['base_setup'],
+    'data': ['company_view.xml', 'res_config_views.xml'],
     'images': [
         'images/date_check_error_popup.jpg',
         'images/date_check_company_config.jpg',

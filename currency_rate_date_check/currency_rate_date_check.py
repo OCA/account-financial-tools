@@ -51,14 +51,16 @@ class ResCurrency(models.Model):
         # on today's date with an old rate, but otherwize it would raise
         # too often, for example it would raise entering the
         # Currencies menu entry !
-        if context.get('date') and not context.get('disable_rate_date_check'):
+
+        user = self.pool['res.users'].browse(cr, uid, uid, context=context)
+        if context.get('date') and not context.get('disable_rate_date_check') \
+                and user.company_id.activate_currency_rate_max_delta:
             date = context.get('date')
             for currency_id in ids:
                 # We could get the company from the currency, but it's not a
                 # 'required' field, so we should probably continue to get it
                 # from the user, shouldn't we ?
-                user = self.pool['res.users'].browse(cr, uid, uid,
-                                                     context=context)
+
                 # if it's the company currency, don't do anything
                 # (there is just one old rate at 1.0)
                 if user.company_id.currency_id.id == currency_id:
