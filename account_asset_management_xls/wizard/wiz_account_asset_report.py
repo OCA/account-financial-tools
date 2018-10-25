@@ -11,6 +11,11 @@ class WizAccountAssetReport(models.TransientModel):
     _name = 'wiz.account.asset.report'
     _description = 'Financial Assets report'
 
+    @api.model
+    def _default_parent_asset_id(self):
+        return self.env['account.asset'].search([
+            ('type', '=', 'view'), ('parent_id', '=', False)], limit=1).id
+
     # TODO: add support for all date range types
     date_range_id = fields.Many2one(
         comodel_name='date.range',
@@ -19,22 +24,16 @@ class WizAccountAssetReport(models.TransientModel):
         required=True)
     parent_asset_id = fields.Many2one(
         comodel_name='account.asset',
-        string='Asset Filter', domain=[('type', '=', 'view')])
+        string='Asset Filter',
+        domain=[('type', '=', 'view')],
+        required=True,
+        default=lambda a: a._default_parent_asset_id(),
+    )
 
     @api.multi
     def xls_export(self):
         self.ensure_one()
         asset_obj = self.env['account.asset']
-        parent_asset = self.parent_asset_id
-        if not parent_asset:
-            parents = asset_obj.search(
-                [('type', '=', 'view'), ('parent_id', '=', False)], limit=1)
-            if not parents:
-                raise UserError(
-                    _("Configuration Error."
-                      "\nNo top level asset of type 'view' defined!"))
-            self.parent_asset_id = parents
-
         # sanity check
         errors = asset_obj.search(
             [('type', '=', 'normal'), ('parent_id', '=', False)])
