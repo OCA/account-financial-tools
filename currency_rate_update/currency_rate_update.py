@@ -62,6 +62,7 @@ class Currency_rate_update_service(osv.osv):
                                                     ('Yahoo_getter', 'Yahoo Finance '),
                                                     ('PL_NBP_getter', 'Narodowy Bank Polski'),  # Added for polish rates
                                                     ('Banxico_getter', 'Banco de México'),  # Added for mexican rates
+                                                    ('FX_getter', 'FX Exchange'),   # has everything, including BZD
                                                     ],
                                                     "Webservice to use",
                                                     required=True
@@ -267,7 +268,8 @@ class Currency_getter_factory():
                           'NYFB_getter',
                           'Google_getter',
                           'Yahoo_getter',
-                          'Banxico_getter'
+                          'Banxico_getter',
+                          'FX_getter'
                     ]
         if class_name in allowed:
             class_def = eval(class_name)
@@ -597,5 +599,38 @@ class Banxico_getter(Curreny_getter_interface) :  # class added for Mexico rates
 
             self.updated_currency[curr] = rate
             logger.debug("Rate retrieved : " + main_currency + ' = ' + str(rate) + ' ' + curr)
+
+        return self.updated_currency, self.log_info
+
+# fxexchangerate.com
+class FX_getter(Curreny_getter_interface) :
+
+    def get_updated_currency(self, currency_array, main_currency, max_delta_days) :
+        url = 'https://'+main_currency.lower()+'.fxexchangerate.com/rss.xml'
+
+        # we do not want to update the main currency
+        if main_currency in currency_array :
+            currency_array.remove(main_currency)
+
+        from lxml import etree
+        logger = logging.getLogger(__name__)
+        logger.debug("FX currency rate service : connecting...")
+        rawfile = self.get_url(url)
+        dom = etree.fromstring(rawfile)  # If rawfile is not XML, it crashes here
+        logger.debug("fxexchangerate.com sent a valid XML file")
+
+        ns = {'atom': 'http://www.w3.org/2005/Atom'}
+        rate_date = dom.xpath('//channel/lastBuildDate', namespaces=ns)[0].text
+        rate_date_datetime = datetime.strptime(rate_date, '%a %b %d %Y %H:%M:%S %Z ')
+        self.check_rate_date(rate_date_datetime, max_delta_days)
+
+        items = dom.xpath('//channel/item', namespaces=ns)
+        for item in items:
+            curr = item.find('title').text[-4:-1]
+            rate = float(item.find('description').text.split('=')[1].split(' ')[1])
+            if curr in currency_array:
+                self.validate_cur(curr)
+                self.updated_currency[curr] = rate
+                logger.debug("Rate retrieved : 1 " + main_currency + ' = ' + str(rate) + ' ' + curr)
 
         return self.updated_currency, self.log_info
