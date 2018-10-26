@@ -61,7 +61,7 @@ class AssetReportXlsx(AbstractReportXlsx):
                 },
                 'asset': {
                     'type': 'string',
-                    'value': self._render("asset.code or ''"),
+                    'value': self._render("asset.name"),
                 },
                 'width': 40,
             },
@@ -390,8 +390,11 @@ class AssetReportXlsx(AbstractReportXlsx):
 
         def _child_get(parent):
             assets = self.env['account.asset']
-            children = parent.child_ids.filtered(lambda r: r.state != 'draft')
-            children = children.sorted(lambda r: (r.date_start, r.code))
+            children = parent.child_ids.filtered(
+                lambda r: r.type == 'view' or
+                (r.type == 'normal' and r.state != 'draft'))
+            children = children.sorted(
+                lambda r: (r.date_start or '', r.code))
             for child in children:
                 assets += child
                 assets += _child_get(child)
