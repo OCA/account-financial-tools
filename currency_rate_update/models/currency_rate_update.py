@@ -128,6 +128,7 @@ class CurrencyRateUpdateService(models.Model):
     def refresh_currency(self):
         """Refresh the currencies rates !!for all companies now"""
         rate_obj = self.env['res.currency.rate']
+        today_dt = fields.Date.from_string(fields.Date.context_today(self))
         for srv in self:
             _logger.info(
                 'Starting to refresh currencies with service %s (company: %s)',
@@ -200,7 +201,7 @@ class CurrencyRateUpdateService(models.Model):
                 if self._context.get('cron'):
                     midnight = time(0, 0)
                     next_run = (datetime.combine(
-                                fields.Date.from_string(srv.next_run),
+                                today_dt,
                                 midnight) +
                                 _intervalTypes[str(srv.interval_type)]
                                 (srv.interval_number)).date()
@@ -210,7 +211,7 @@ class CurrencyRateUpdateService(models.Model):
     @api.multi
     def run_currency_update(self):
         # Update currency at the given frequence
-        services = self.search([('next_run', '=', fields.Date.today())])
+        services = self.search([('next_run', '<=', fields.Date.today())])
         services.with_context(cron=True).refresh_currency()
 
     @api.model
