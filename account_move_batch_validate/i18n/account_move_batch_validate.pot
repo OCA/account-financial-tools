@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 07:21+0000\n"
-"PO-Revision-Date: 2015-08-18 07:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,54 +19,50 @@ msgid "Account Entry"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: field:validate.account.move,action:0
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_action
 msgid "Action"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: help:account.move,to_post:0
+#: model:ir.model.fields,help:account_move_batch_validate.field_account_move_to_post
 msgid "Check this box to mark the move for batch posting"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: selection:validate.account.move,action:0
-msgid "Mark for posting"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/account.py:158
+#: code:addons/account_move_batch_validate/models/account_move.py:30
 #, python-format
-msgid "Nothing to do because the record has been deleted"
+msgid "Move has been posted successfully."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: field:account.move,to_post:0
-msgid "Posting Requested"
+#: code:addons/account_move_batch_validate/models/account_move.py:32
+#, python-format
+msgid "Nothing to do because the record has been deleted."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: field:validate.account.move,eta:0
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_to_post
+msgid "Posting requested"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_eta
 msgid "Seconds to wait before starting the jobs"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/account.py:112
+#: code:addons/account_move_batch_validate/models/account_move.py:81
 #, python-format
-msgid "Task set to Done because the user unmarked the move"
+msgid "Task set to Done because the user unmarked the move."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: field:account.move,post_job_uuid:0
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_post_job_uuid
 msgid "UUID of the Job to approve this move"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: selection:validate.account.move,action:0
-msgid "Unmark for posting"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: field:validate.account.move,asynchronous:0
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_asynchronous
 msgid "Use asynchronous validation"
 msgstr ""
 
