@@ -8,11 +8,19 @@ class WizardSelectMoveTemplate(models.TransientModel):
     _name = "wizard.select.move.template"
 
     template_id = fields.Many2one('account.move.template', required=True)
+    company_id = fields.Many2one(
+        'res.company', required=True,
+        default=lambda self: self.env.user.company_id)
     partner_id = fields.Many2one('res.partner', 'Partner')
     line_ids = fields.One2many(
         'wizard.select.move.template.line', 'template_id')
     state = fields.Selection(
         [('template_selected', 'Template selected')])
+
+    @api.onchange('template_id', 'company_id')
+    def onchange_company_id(self):
+        template_domain = [('company_id', '=', self.company_id.id)]
+        return {'domain': {'template_id': template_domain}}
 
     @api.multi
     def load_lines(self):
@@ -32,16 +40,13 @@ class WizardSelectMoveTemplate(models.TransientModel):
             return self.load_template()
         self.state = 'template_selected'
         view_rec = self.env.ref('account_move_template.wizard_select_template')
-        return {
-            'view_type': 'form',
-            'view_id': [view_rec.id],
-            'view_mode': 'form',
-            'res_model': 'wizard.select.move.template',
-            'res_id': self.id,
-            'type': 'ir.actions.act_window',
-            'target': 'new',
-            'context': self.env.context,
-        }
+        action = self.env.ref(
+            'account_move_template.action_wizard_select_template_by_move')
+        result = action.read()[0]
+        result['res_id'] = self.id
+        result['view_id'] = [view_rec.id]
+        result['context'] = self.env.context
+        return result
 
     @api.multi
     def load_template(self):
@@ -62,15 +67,12 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 lines.append((0, 0,
                               self._prepare_line(line, amounts, partner)))
             move.write({'line_ids': lines})
-        return {
-            'domain': [('id', 'in', moves.ids)],
-            'name': _('Entries from template: %s') % name,
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'account.move',
-            'type': 'ir.actions.act_window',
-            'target': 'current',
-        }
+        action = self.env.ref('account.action_move_journal_line')
+        result = action.read()[0]
+        result['domain'] = [('id', 'in', moves.ids)],
+        result['name'] = _('Entries from template: %s') % name
+        result['context'] = self.env.context
+        return result
 
     @api.model
     def _create_move(self, ref, journal_id):
@@ -101,6 +103,9 @@ class WizardSelectMoveTemplateLine(models.TransientModel):
 
     template_id = fields.Many2one(
         'wizard.select.move.template')
+    company_id = fields.Many2one('res.company',
+                                 related='template_id.company_id',
+                                 readonly=True)
     sequence = fields.Integer(required=True)
     name = fields.Char(required=True, readonly=True)
     account_id = fields.Many2one(
