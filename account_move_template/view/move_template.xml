@@ -105,7 +105,7 @@
     </record>
 
     <record id="action_move_template_form" model="ir.actions.act_window">
-        <field name="name">Move Templates</field>
+        <field name="name">Journal Entry Templates</field>
         <field name="res_model">account.move.template</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
@@ -115,6 +115,6 @@
     <menuitem
         action="action_move_template_form"
         id="menu_action_move_template_form" sequence="300"
-        parent="account.menu_finance_configuration"
+        parent="account.account_account_menu"
         groups="account.group_account_manager"/>
 </odoo>
