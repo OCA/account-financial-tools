@@ -8,7 +8,6 @@ cache: pip
 
 addons:
   postgresql: "9.6"
-  postgresql: "9.2" # minimal postgresql version for the daterange method
   apt:
     packages:
       - expect-dev  # provides unbuffer utility
