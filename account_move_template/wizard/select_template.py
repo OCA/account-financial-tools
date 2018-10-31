@@ -1,7 +1,6 @@
 # Copyright 2015-2017 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import time
 from odoo import models, fields, api, _
 
 
@@ -26,6 +25,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                 'name': line.name,
                 'amount': 0.0,
                 'account_id': line.account_id.id,
+                'partner_id': line.partner_id.id or self.partner_id.id,
                 'move_line_type': line.move_line_type,
             })
         if not self.line_ids:
@@ -55,7 +55,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
         moves = self.env['account.move']
         for journal in self.template_id.template_line_ids.mapped('journal_id'):
             lines = []
-            move = self._create_move(name, journal.id, partner)
+            move = self._create_move(name, journal.id)
             moves = moves + move
             for line in self.template_id.template_line_ids.filtered(
                     lambda l, j=journal: l.journal_id == j):
@@ -73,11 +73,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
         }
 
     @api.model
-    def _create_move(self, ref, journal_id, partner_id):
+    def _create_move(self, ref, journal_id):
         return self.env['account.move'].create({
             'ref': ref,
             'journal_id': journal_id,
-            'partner_id': partner_id,
         })
 
     @api.model
@@ -91,7 +90,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'date': fields.Date.today(),
             'credit': not debit and amounts[line.sequence] or 0.0,
             'debit': debit and amounts[line.sequence] or 0.0,
-            'partner_id': partner_id,
+            'partner_id': line.partner_id.id or partner_id,
         }
         return values
 
@@ -106,6 +105,8 @@ class WizardSelectMoveTemplateLine(models.TransientModel):
     name = fields.Char(required=True, readonly=True)
     account_id = fields.Many2one(
         'account.account', required=True, readonly=True)
+    partner_id = fields.Many2one('res.partner', readonly=True,
+                                 string='Partner')
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')], required=True, readonly=True)
     amount = fields.Float(required=True)

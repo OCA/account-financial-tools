@@ -35,10 +35,11 @@
             <form string="Move Template Line">
                 <group>
                     <field name="sequence" invisible="1"/>
-                    <field name="name" />
-                    <field name="account_id" />
-                    <field name="move_line_type" />
-                    <field name="amount" />
+                    <field name="name"/>
+                    <field name="account_id"/>
+                    <field name="partner_id"/>
+                    <field name="move_line_type"/>
+                    <field name="amount"/>
                 </group>
             </form>
         </field>
@@ -50,8 +51,9 @@
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="sequence" invisible="1"/>
-                <field name="name" />
-                <field name="account_id" />
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="partner_id"/>
                 <field name="move_line_type" />
                 <field name="amount" />
             </tree>

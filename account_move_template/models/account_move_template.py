@@ -46,6 +46,7 @@ class AccountMoveTemplateLine(models.Model):
         required=True,
         ondelete="cascade"
     )
+    partner_id = fields.Many2one('res.partner', string='Partner')
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')],
         required=True
