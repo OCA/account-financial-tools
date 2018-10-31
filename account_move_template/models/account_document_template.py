@@ -1,4 +1,4 @@
-# Copyright 2015-2017 See manifest
+# Copyright 2015-2018 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from functools import partial
@@ -10,7 +10,14 @@ from odoo.tools.safe_eval import safe_eval
 class AccountDocumentTemplate(models.Model):
     _name = 'account.document.template'
 
-    name = fields.Char(required=True)
+    name = fields.Char('Name', required=True,
+                       )
+
+    @api.multi
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {}, name=_('%s (copy)') % self.name)
+        return super(AccountDocumentTemplate, self).copy(default)
 
     @api.multi
     def _input_lines(self):
@@ -76,10 +83,13 @@ class AccountDocumentTemplate(models.Model):
 class AccountDocumentTemplateLine(models.Model):
     _name = 'account.document.template.line'
 
-    name = fields.Char(required=True)
-    sequence = fields.Integer(required=True)
+    name = fields.Char('Name', required=True,
+                       )
+    sequence = fields.Integer('Sequence', required=True,
+                              )
     type = fields.Selection([
         ('computed', 'Computed'),
         ('input', 'User input'),
-    ], required=True, default='input')
-    python_code = fields.Text()
+    ], string='Type', required=True, default='input',
+    )
+    python_code = fields.Text('Python code')

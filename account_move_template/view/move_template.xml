@@ -7,12 +7,17 @@
             <tree>
                 <field name="sequence"/>
                 <field name="name"/>
-                <field name="journal_id"/>
-                <field name="account_id" />
-                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <field name="journal_id" domain="[('company_id','=',company_id)]"/>
+                <field name="account_id" domain="[('company_id','=',company_id)]"/>
+                <field name="partner_id"/>
+                <field name="analytic_account_id" domain="[('company_id','=',company_id)]" groups="analytic.group_analytic_accounting"/>
+                <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_accounting"/>
+                <field name="tax_line_id"/>
+                <field name="tax_ids" widget="many2many_tags"/>
                 <field name="type"/>
-                <field name="python_code" />
+                <field name="python_code"/>
                 <field name="move_line_type"/>
+                <field name="company_id" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -27,13 +32,22 @@
                         <group>
                             <field name="name"/>
                             <field name="sequence"/>
-                            <field name="journal_id"/>
-                            <field name="account_id"/>
-                            <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                            <field name="journal_id" domain="[('company_id','=',company_id)]"/>
+                            <field name="account_id" domain="[('company_id','=',company_id)]"/>
+                            <field name="partner_id"/>
+                           <field name="company_id" invisible="1"/>
+                        </group>
+                        <group groups="analytic.group_analytic_accounting" string="Analytic">
+                            <field name="analytic_account_id" domain="[('company_id','=',company_id)]"/>
+                            <field name="analytic_tag_ids" widget="many2many_tags"/>
                         </group>
                         <group>
                             <field name="type"/>
                             <field name="move_line_type"/>
+                        </group>
+                        <group string="Taxes">
+                            <field name="tax_line_id"/>
+                            <field name="tax_ids" widget="many2many_tags"/>
                         </group>
                     </group>
                     <label for="python_code" string="Python Code"
@@ -67,7 +81,7 @@
                     <group>
                         <field name="company_id" widget='selection' groups="base.group_multi_company"/>
                     </group>
-                    <field nolabel="1" name="template_line_ids"/>
+                    <field nolabel="1" name="template_line_ids" context="{'default_company_id' : company_id}"/>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
