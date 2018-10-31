@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo11-addon-account_invoice_currency',
         'odoo11-addon-account_loan',
         'odoo11-addon-account_lock_date_update',
+        'odoo11-addon-account_move_batch_validate',
         'odoo11-addon-account_move_fiscal_year',
         'odoo11-addon-account_move_line_purchase_info',
         'odoo11-addon-account_move_line_tax_editable',
