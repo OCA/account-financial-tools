@@ -8,7 +8,7 @@
     'depends': [
         'account_fiscal_year',
     ],
-    'conflicts': ['account_asset'],
+    'excludes': ['account_asset'],
     'author': "Noviat,Odoo Community Association (OCA)",
     'website': 'https://github.com/OCA/account-financial-tools',
     'category': 'Accounting & Finance',
