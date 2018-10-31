@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import time
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class WizardSelectMoveTemplate(models.TransientModel):
@@ -64,7 +64,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             move.write({'line_ids': lines})
         return {
             'domain': [('id', 'in', moves.ids)],
-            'name': 'Entries from template: %s' % name,
+            'name': _('Entries from template: %s') % name,
             'view_type': 'form',
             'view_mode': 'tree,form',
             'res_model': 'account.move',
@@ -88,7 +88,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'journal_id': line.journal_id.id,
             'analytic_account_id': line.analytic_account_id.id,
             'account_id': line.account_id.id,
-            'date': time.strftime('%Y-%m-%d'),
+            'date': fields.Date.today(),
             'credit': not debit and amounts[line.sequence] or 0.0,
             'debit': debit and amounts[line.sequence] or 0.0,
             'partner_id': partner_id,
