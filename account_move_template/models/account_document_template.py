@@ -1,4 +1,4 @@
-# Copyright 2015-2017 See manifest
+# Copyright 2015-2018 See manifest
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from functools import partial
@@ -11,6 +11,12 @@ class AccountDocumentTemplate(models.Model):
     _name = 'account.document.template'
 
     name = fields.Char(required=True)
+
+    @api.multi
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {}, name=_('%s (copy)') % self.name)
+        return super(AccountDocumentTemplate, self).copy(default)
 
     @api.multi
     def _input_lines(self):
