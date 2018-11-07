@@ -1,3 +1,3 @@
-# Bank account number uniqueness constraint
+# Override bank account number uniqueness constraint
 
-Enables ability to create records with dublicate bank account numbers.
+Enables ability to create bank accounts with duplicated bank account numbers.

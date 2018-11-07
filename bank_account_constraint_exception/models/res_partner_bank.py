@@ -37,6 +37,6 @@ class BankAccount(models.Model):
 
         if errors:
             raise models.ValidationError(
-                u'Account Number must be unique. '
-                u'Following accounts have duplicates: {}'
+                u'Account number must be unique. '
+                u'The following accounts have duplicates: {}'
                 .format(", ".join(errors)))
