@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM: res.partner.bank.form -->
+    <record id="base.view_partner_bank_form_inherit" model="ir.ui.view">
+        <field name="name">base.view_partner_bank_form_inherit</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            
+            <field name="acc_number" position="after">
+                <field name="override_uniqueness"/>
+            </field>
+            
+        </field>
+    </record>
+
+</odoo>
