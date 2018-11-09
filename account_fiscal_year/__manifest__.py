@@ -1,23 +1,24 @@
-# Author: Damien Crier
 # Copyright 2016 Camptocamp SA
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2018 Lorenzo Battistini <https://github.com/eLBati>
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 {
-    'name': 'Account Fiscal Year',
-    'version': '11.0.1.0.0',
-    'category': 'Accounting',
-    'author': 'Camptocamp SA,'
-              'Odoo Community Association (OCA)',
-    'website': 'http://www.camptocamp.com',
-    'depends': [
-        'account',
-        'date_range'
+    "name": "Account Fiscal Year",
+    "summary": "Create a menu for Account Fiscal Year",
+    "version": "12.0.1.0.0",
+    "development_status": "Beta",
+    "category": "Accounting",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "author": "Agile Business Group, Camptocamp SA, "
+              "Odoo Community Association (OCA)",
+    "maintainers": ["eLBati"],
+    "license": "LGPL-3",
+    "application": False,
+    "installable": True,
+    "depends": [
+        "account",
+        "date_range",
     ],
-    'data': [
-        'data/date_range_type.xml',
-        'views/date_range_type.xml',
+    "data": [
+        "views/account_views.xml"
     ],
-    'installable': True,
-    'application': True,
-    'auto_install': False,
-    'license': 'AGPL-3',
 }
