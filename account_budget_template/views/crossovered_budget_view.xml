@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="crossovered_budget_form_view" model="ir.ui.view">
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button string="Apply Template" type="object"
+                        name="button_compute_lines" states="draft"/>
+            </header>
+            <field name="creating_user_id" position="after">
+                <field name="budget_tmpl_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

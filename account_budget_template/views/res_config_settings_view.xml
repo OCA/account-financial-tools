@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_config_settings_form_view" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="analytic" position="inside">
+                <div class="col-xs-12 col-md-6 o_setting_box" id="budget_template"
+                     attrs="{'invisible': [('module_account_budget','=',False)]}">
+                    <div class="o_setting_right_pane">
+                        <label for="budget_templ_id"/>
+                        <div class="row">
+                            <div class="text-muted col-md-8">
+                                You can set a budget template by default.
+                            </div>
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="budget_templ_id" class="o_light_label" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
