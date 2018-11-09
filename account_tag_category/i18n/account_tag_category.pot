@@ -71,7 +71,7 @@ msgstr ""
 
 #. module: account_tag_category
 #: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color
-#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_5237
+#: model:ir.model.fields,field_description:account_tag_category.field_account_account_tag_category_color_5240
 msgid "Color Index"
 msgstr ""
 
