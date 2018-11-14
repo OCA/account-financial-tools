@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-account_fiscal_year',
+        'odoo12-addon-account_type_menu',
     ],
     classifiers=[
         'Programming Language :: Python',
