@@ -596,7 +596,7 @@ class AccountAsset(models.Model):
                             'asset_id': asset.id,
                             'name': name,
                             'line_date': line['date'].strftime('%Y-%m-%d'),
-                            'init_entry': entry['init'],
+                            'init_entry': line['init_entry'],
                         }
                         depreciated_value += amount
                         depr_line = line_obj.create(vals)
@@ -808,8 +808,13 @@ class AccountAsset(models.Model):
 
         return line_dates
 
-    def _compute_depreciation_table_lines(self, table, depreciation_start_date,
-                                          depreciation_stop_date, line_dates):
+    def _compute_depreciation_table_lines(
+        self, table,
+        depreciation_start_date,
+        depreciation_stop_date,
+        line_dates,
+        fiscalyear_lock_date
+    ):
 
         digits = self.env['decimal.precision'].precision_get('Account')
         asset_sign = self.depreciation_base >= 0 and 1 or -1
@@ -852,11 +857,22 @@ class AccountAsset(models.Model):
                 else:
                     remaining_value -= amount
                 fy_amount_check += amount
+
+                fiscalyear_lock_date_formated = datetime.strptime(
+                    fiscalyear_lock_date, '%Y-%m-%d'
+                )
+
+                if line_date <= fiscalyear_lock_date_formated:
+                    init_entry = True
+                else:
+                    init_entry = False
+
                 line = {
                     'date': line_date,
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
+                    'init_entry': init_entry
                 }
                 lines.append(line)
                 depreciated_value += amount
@@ -1031,7 +1047,7 @@ class AccountAsset(models.Model):
         # over the depreciation periods.
         self._compute_depreciation_table_lines(
             table, depreciation_start_date, depreciation_stop_date,
-            line_dates)
+            line_dates, fiscalyear_lock_date)
 
         return table
 
