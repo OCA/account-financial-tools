@@ -42,6 +42,13 @@ class TestAssetManagement(common.TransactionCase):
         # Instance: company
         self.company = self.env.ref('base.main_company')
 
+        # Instance: Account settings
+        self.acs_model = self.env['account.config.settings']
+
+        values = {'fiscalyear_lock_date': "%s-12-31" % (date.today().year - 2)}
+
+        self.acs_model.create(values)
+
         # Instance: account type (receivable)
         self.type_recv = self.env.ref('account.data_account_type_receivable')
 
