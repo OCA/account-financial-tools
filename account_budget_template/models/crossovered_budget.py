@@ -1,6 +1,7 @@
 # Copyright 2018 Oihane Crucelaegui - AvanzOSC
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from ast import literal_eval
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
@@ -19,8 +20,15 @@ _periodicityMonths = {
 class CrossoveredBudget(models.Model):
     _inherit = 'crossovered.budget'
 
+    def _default_budget_tmpl_id(self):
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        default_tmpl_id = literal_eval(
+            get_param('account_budget_template.budget_template_id', 'False'))
+        return self.env['crossovered.budget.template'].browse(default_tmpl_id)
+
     budget_tmpl_id = fields.Many2one(
-        comodel_name='crossovered.budget.template', string='Template')
+        comodel_name='crossovered.budget.template', string='Template',
+        default=_default_budget_tmpl_id)
 
     @api.multi
     def button_compute_lines(self):
