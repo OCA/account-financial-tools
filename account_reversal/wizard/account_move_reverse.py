@@ -29,7 +29,7 @@ class AccountMoveReverse(models.TransientModel):
     journal_id = fields.Many2one(
         comodel_name='account.journal', string="Reversal Journal",
         default=_default_journal_id,
-        help="Enter the date of the reversal account entries. "
+        help="Enter the journal of the reversal account entries. "
              "If empty, Odoo uses the same journal of the move to reverse.")
     move_prefix = fields.Char(
         string="Entries Ref. Prefix",
