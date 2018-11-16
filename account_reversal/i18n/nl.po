@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-11-23 03:37+0000\n"
-"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>, 2016\n"
+"PO-Revision-Date: 2018-11-17 08:06+0000\n"
+"Last-Translator: Cas Vissers <c.vissers@brahoo.nl>\n"
 "Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
@@ -33,16 +34,18 @@ msgstr "Annuleren"
 #: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
 msgid "Check this box if your entry has to be reversed at the end of period."
 msgstr ""
+"Vink aan wanneer deze boeking moet worden teruggeboekt aan het einde van de "
+"periode."
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Create reversal journal entries"
-msgstr ""
+msgstr "Maak terugboekingsregels"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move_reverse
 msgid "Create reversal of account moves"
-msgstr ""
+msgstr "Maak terugboekingsregels"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_create_uid
@@ -65,6 +68,8 @@ msgid ""
 "Enter the date of the reversal account entries. By default, Odoo proposes "
 "the same date of the move to reverse."
 msgstr ""
+"Voer de datum in voor de terugboekingsregels. Standaard, stelt Odoo dezelfde "
+"datum voor om terug te boeken."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
@@ -72,11 +77,13 @@ msgid ""
 "Enter the date of the reversal account entries. If empty, Odoo uses the same "
 "journal of the move to reverse."
 msgstr ""
+"Voer het daboek in voor de terugboekingsregels. Wanneer leeg, zal Odoo "
+"hetzelde dagboek gebruiken als de boeking."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
 msgid "Entries Ref. Prefix"
-msgstr ""
+msgstr "Boeking ref. voorvoegsel"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_id
@@ -86,14 +93,14 @@ msgstr "ID"
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_line_prefix
 msgid "Items Name Prefix"
-msgstr ""
+msgstr "Boekingsregels voorvoegsel"
 
 #. module: account_reversal
 #: model:ir.actions.act_window,name:account_reversal.action_move_to_be_reversed
 #: model:ir.ui.menu,name:account_reversal.menu_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "Journal Entries to be Reversed"
-msgstr ""
+msgstr "Boekingen terug te draaien"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse___last_update
@@ -113,7 +120,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_reconcile
 msgid "Mark this if you want to reconcile items of both moves."
-msgstr ""
+msgstr "Vink dit aan als u de boekingen wilt afletteren."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
@@ -122,6 +129,9 @@ msgid ""
 "items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
 "A space is added after the prefix)."
 msgstr ""
+"Voorvoegsel dat wordt toegevoegd aan de naam van terugboekingsregels. "
+"Wanneer leeg, zal Odoo dezelfde naam gebruiken als de boeking. (Let op. een "
+"spatie wordt toegevoegd na een voorvoegsel)."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_move_prefix
@@ -130,37 +140,40 @@ msgid ""
 "empty, Odoo uses the Ref of the move to reverse. (NOTE: A space is added "
 "after the prefix)."
 msgstr ""
+"Voorvoegsel dat wordt toegevoegd aan het 'Referentie' veld van de "
+"terugboekingsregels. Wanneer leeg, gebruikt Odoo de referentie van de "
+"boeking. (Let op: Een spaitie wordt toegevoegd na een voorvoegsel)"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_reconcile
 msgid "Reconcile"
-msgstr ""
+msgstr "Afletteren"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_date
 msgid "Reversal Date"
-msgstr ""
+msgstr "Terugboekingsdatum"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
 msgid "Reversal Entry"
-msgstr ""
+msgstr "Terugboeking"
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_journal_id
 msgid "Reversal Journal"
-msgstr ""
+msgstr "Terugboeking dagboek"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
 msgid "Reverse Entries"
-msgstr ""
+msgstr "Terugboekingsregels"
 
 #. module: account_reversal
 #: code:addons/account_reversal/wizard/account_move_reverse.py:58
 #, python-format
 msgid "Reverse moves"
-msgstr ""
+msgstr "Boek regels terug"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -168,18 +181,20 @@ msgid ""
 "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
 msgstr ""
+"Dit keert een terugboeking voor alle geselecteerde boekingsregel, ook "
+"wanneer deze niet aangevinkt zijn als terug te boeken."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_to_be_reversed
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_filter
 msgid "To Be Reversed"
-msgstr ""
+msgstr "Terug te boeken"
 
 #. module: account_reversal
 #: code:addons/account_reversal/models/account_move.py:56
 #, python-format
 msgid "Wrong company Journal is '%s' but we have '%s'"
-msgstr ""
+msgstr "Fout bedrijf dagboek is '%s' zou moeten zijn '%s'"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
