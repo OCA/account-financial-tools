@@ -857,11 +857,11 @@ class AccountAsset(models.Model):
                     remaining_value -= amount
                 fy_amount_check += amount
 
-                fiscalyear_lock_date_formated = fields.Datetime.from_string(
+                fiscalyear_lock_date_formatted = fields.Datetime.from_string(
                     fiscalyear_lock_date
                 )
 
-                if line_date <= fiscalyear_lock_date_formated:
+                if line_date <= fiscalyear_lock_date_formatted:
                     init_entry = True
                 else:
                     init_entry = False
