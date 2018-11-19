@@ -498,8 +498,8 @@ class AccountAsset(models.Model):
                 continue
 
             # group lines prior to depreciation start period
-            depreciation_start_date = datetime.strptime(
-                asset.date_start, '%Y-%m-%d')
+            depreciation_start_date = fields.Datetime.from_string(
+                asset.date_start)
             lines = table[0]['lines']
             lines1 = []
             lines2 = []
@@ -523,8 +523,8 @@ class AccountAsset(models.Model):
             # recompute in case of deviation
             depreciated_value_posted = depreciated_value = 0.0
             if posted_lines:
-                last_depreciation_date = datetime.strptime(
-                    last_line.line_date, '%Y-%m-%d')
+                last_depreciation_date = fields.Datetime.from_string(
+                    last_line.line_date)
                 last_date_in_table = table[-1]['lines'][-1]['date']
                 if last_date_in_table <= last_depreciation_date:
                     raise UserError(
@@ -596,7 +596,7 @@ class AccountAsset(models.Model):
                             'asset_id': asset.id,
                             'name': name,
                             'line_date': line['date'].strftime('%Y-%m-%d'),
-                            'init_entry': entry['init'],
+                            'init_entry': line['init_entry'],
                         }
                         depreciated_value += amount
                         depr_line = line_obj.create(vals)
@@ -616,8 +616,8 @@ class AccountAsset(models.Model):
         - years: duration in calendar years, considering also leap years
         """
         fy = self.env['date.range'].browse(fy_id)
-        fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
-        fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+        fy_date_start = fields.Datetime.from_string(fy.date_start)
+        fy_date_stop = fields.Datetime.from_string(fy.date_end)
         days = (fy_date_stop - fy_date_start).days + 1
         months = (fy_date_stop.year - fy_date_start.year) * 12  \
             + (fy_date_stop.month - fy_date_start.month) + 1
@@ -655,8 +655,8 @@ class AccountAsset(models.Model):
         fy_id = entry['fy_id']
         if self.prorata:
             if firstyear:
-                depreciation_date_start = datetime.strptime(
-                    self.date_start, '%Y-%m-%d')
+                depreciation_date_start = fields.Datetime.from_string(
+                    self.date_start)
                 fy_date_stop = entry['date_stop']
                 first_fy_asset_days = \
                     (fy_date_stop - depreciation_date_start).days + 1
@@ -689,10 +689,10 @@ class AccountAsset(models.Model):
         if the fiscal year starts in the middle of a month.
         """
         if self.prorata:
-            depreciation_start_date = datetime.strptime(
-                self.date_start, '%Y-%m-%d')
+            depreciation_start_date = fields.Datetime.from_string(
+                self.date_start)
         else:
-            fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
+            fy_date_start = fields.Datetime.from_string(fy.date_start)
             depreciation_start_date = datetime(
                 fy_date_start.year, fy_date_start.month, 1)
         return depreciation_start_date
@@ -717,8 +717,8 @@ class AccountAsset(models.Model):
                 depreciation_stop_date = depreciation_start_date + \
                     relativedelta(years=self.method_number, days=-1)
         elif self.method_time == 'end':
-            depreciation_stop_date = datetime.strptime(
-                self.method_end, '%Y-%m-%d')
+            depreciation_stop_date = fields.Datetime.from_string(
+                self.method_end)
         return depreciation_stop_date
 
     def _get_first_period_amount(self, table, entry, depreciation_start_date,
@@ -808,11 +808,16 @@ class AccountAsset(models.Model):
 
         return line_dates
 
-    def _compute_depreciation_table_lines(self, table, depreciation_start_date,
-                                          depreciation_stop_date, line_dates):
+    def _compute_depreciation_table_lines(
+            self,
+            table,
+            depreciation_start_date,
+            depreciation_stop_date,
+            line_dates,
+            fiscalyear_lock_date):
 
         digits = self.env['decimal.precision'].precision_get('Account')
-        asset_sign = self.depreciation_base >= 0 and 1 or -1
+        asset_sign = 1 if self.depreciation_base >= 0 else -1
         i_max = len(table) - 1
         remaining_value = self.depreciation_base
         depreciated_value = 0.0
@@ -852,11 +857,22 @@ class AccountAsset(models.Model):
                 else:
                     remaining_value -= amount
                 fy_amount_check += amount
+
+                fiscalyear_lock_date_formatted = fields.Datetime.from_string(
+                    fiscalyear_lock_date
+                )
+
+                if line_date <= fiscalyear_lock_date_formatted:
+                    init_entry = True
+                else:
+                    init_entry = False
+
                 line = {
                     'date': line_date,
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
+                    'init_entry': init_entry,
                 }
                 lines.append(line)
                 depreciated_value += amount
@@ -899,15 +915,15 @@ class AccountAsset(models.Model):
 
         company = self.company_id
         init_flag = False
-        asset_date_start = datetime.strptime(self.date_start, '%Y-%m-%d')
+        asset_date_start = fields.Datetime.from_string(self.date_start)
         fy = company.find_daterange_fy(asset_date_start)
         fiscalyear_lock_date = company.fiscalyear_lock_date
         if fiscalyear_lock_date and fiscalyear_lock_date >= self.date_start:
             init_flag = True
         if fy:
             fy_id = fy.id
-            fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
-            fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+            fy_date_start = fields.Datetime.from_string(fy.date_start)
+            fy_date_stop = fields.Datetime.from_string(fy.date_end)
         else:
             # The following logic is used when no fiscal year
             # is defined for the asset start date:
@@ -921,8 +937,8 @@ class AccountAsset(models.Model):
             if not first_fy:
                 raise UserError(
                     _("No Fiscal Year defined."))
-            first_fy_date_start = datetime.strptime(
-                first_fy.date_start, '%Y-%m-%d')
+            first_fy_date_start = fields.Datetime.from_string(
+                first_fy.date_start)
             fy_date_start = first_fy_date_start
             if asset_date_start > fy_date_start:
                 asset_ref = self.code and '%s (ref: %s)' \
@@ -964,7 +980,7 @@ class AccountAsset(models.Model):
                     init_flag = True
                 else:
                     init_flag = False
-                fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+                fy_date_stop = fields.Datetime.from_string(fy.date_end)
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
                 if (
@@ -1026,12 +1042,16 @@ class AccountAsset(models.Model):
         i_max = i
         table = table[:i_max + 1]
 
+        if not fiscalyear_lock_date:
+            raise UserError(
+                _("You should set in account settings the 'Lock Date' first."))
+
         # Step 2:
         # Spread depreciation amount per fiscal year
         # over the depreciation periods.
         self._compute_depreciation_table_lines(
             table, depreciation_start_date, depreciation_stop_date,
-            line_dates)
+            line_dates, fiscalyear_lock_date)
 
         return table
 
