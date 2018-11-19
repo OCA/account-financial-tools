@@ -20,7 +20,7 @@ Excel based reporting is available via the 'account_asset_management_xls' module
 The module contains a large number of functional enhancements compared to
 the standard account_asset module from Odoo.
 
-* When the depreciation board an asset is compute, lines computed are flagged 'Init'
+* When you compute the asset depreciation board, lines are flagged 'Init'
   if they are before **Lock Date** `fiscalyear_lock_date`
 
 Configuration

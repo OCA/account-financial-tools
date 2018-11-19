@@ -616,7 +616,7 @@ class AccountAsset(models.Model):
         - years: duration in calendar years, considering also leap years
         """
         fy = self.env['date.range'].browse(fy_id)
-        fy_date_start =fields.Datetime.from_string(fy.date_start)
+        fy_date_start = fields.Datetime.from_string(fy.date_start)
         fy_date_stop = fields.Datetime.from_string(fy.date_end)
         days = (fy_date_stop - fy_date_start).days + 1
         months = (fy_date_stop.year - fy_date_start.year) * 12  \
@@ -809,11 +809,12 @@ class AccountAsset(models.Model):
         return line_dates
 
     def _compute_depreciation_table_lines(
-        self, table,
-        depreciation_start_date,
-        depreciation_stop_date,
-        line_dates,
-        fiscalyear_lock_date):
+            self,
+            table,
+            depreciation_start_date,
+            depreciation_stop_date,
+            line_dates,
+            fiscalyear_lock_date):
 
         digits = self.env['decimal.precision'].precision_get('Account')
         asset_sign = 1 if self.depreciation_base >= 0 else -1

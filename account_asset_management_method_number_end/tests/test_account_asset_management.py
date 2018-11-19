@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import time
+from datetime import date
 
 import odoo.tests.common as common
 from odoo import tools
@@ -26,6 +27,13 @@ class TestAssetManagement(common.TransactionCase):
 
         self.asset_model = self.env['account.asset']
         self.dl_model = self.env['account.asset.line']
+
+        # Instance: Account settings
+        self.acs_model = self.env['account.config.settings']
+
+        values = {'fiscalyear_lock_date': "%s-12-31" % (date.today().year - 2)}
+
+        self.acs_model.create(values)
 
     def test_1_linear_number(self):
         """Linear with Method Time 'Number'."""
