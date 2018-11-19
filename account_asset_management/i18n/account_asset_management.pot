@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1073
+#: code:addons/account_asset_management/models/account_asset.py:1093
 #, python-format
 msgid "\n"
 "Error while processing asset '%s': %s"
@@ -520,7 +520,7 @@ msgid "Error ! You can not create recursive assets."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1076
+#: code:addons/account_asset_management/models/account_asset.py:1096
 #, python-format
 msgid "Error while processing asset '%s': \n"
 "\n"
@@ -710,7 +710,7 @@ msgid "Next Period Depreciation"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:923
+#: code:addons/account_asset_management/models/account_asset.py:939
 #, python-format
 msgid "No Fiscal Year defined."
 msgstr ""
@@ -1124,7 +1124,7 @@ msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:931
+#: code:addons/account_asset_management/models/account_asset.py:947
 #, python-format
 msgid "You cannot compute a depreciation table for an asset starting in an undefined future fiscal year.\n"
 "Please correct the start date for asset '%s'."
@@ -1169,6 +1169,12 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_date_start
 msgid "You should manually add depreciation lines with the depreciations of previous fiscal years if the Depreciation Start Date is different from the date for which accounting entries need to be generated."
+msgstr ""
+
+#. module: account_asset_management
+#: code:addons/account_asset_management/models/account_asset.py:1047
+#, python-format
+msgid "You should set in account settings the 'Lock Date' first."
 msgstr ""
 
 #. module: account_asset_management
