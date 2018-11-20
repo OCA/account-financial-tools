@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-25 22:30+0000\n"
-"PO-Revision-Date: 2017-08-25 22:32+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2018-11-21 18:09+0000\n"
+"Last-Translator: Peter Schubert <psc@saco.info>\n"
+"Language-Team: German (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_tree
@@ -71,7 +72,7 @@ msgstr "Aktiv"
 #. module: account_asset_management
 #: view:account.asset.asset:account_asset_management.view_account_asset_asset_form
 msgid "Add an internal note here..."
-msgstr "Schreiben Sie hier Ihre Mitteilung"
+msgstr "Schreiben Sie hier Ihre Mitteilung.."
 
 #. module: account_asset_management
 #: view:asset.asset.report:account_asset_management.view_asset_asset_report_tree
@@ -117,7 +118,7 @@ msgid ""
 "Please post these entries first !"
 msgstr ""
 "Anlage '%s' hat noch ungebuchte Posten vor der ausgewählten Periode.\n"
-"Buchen Sie diese bitte zuvor."
+"Buchen Sie diese bitte zuvor!"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.action_account_asset_asset_list_normal
@@ -751,9 +752,9 @@ msgid ""
 msgstr ""
 "Buchungsregel für Löschung\n"
 "* Restbuchwert: Der nicht abgeschriebene Wert wird auf das Konto "
-"'Restbuchwert' gebucht\n"
+"'Restbuchwert' gebucht.\n"
 "* Gewinn/Verlust bei Verkauf: Der Gewinn wird auf das 'Gewinn bei Verkauf', "
-"Verluste auf das Konto 'Verluste bei Verkauf' gebucht"
+"Verluste auf das Konto 'Verluste bei Verkauf' gebucht. "
 
 #. module: account_asset_management
 #: help:account.asset.remove,date_remove:0
@@ -838,7 +839,7 @@ msgstr ""
 #. module: account_asset_management
 #: sql_constraint:account.asset.remove:0
 msgid "The Sale Value must be positive!"
-msgstr "Der Verkaufserlöse muss positiv sein."
+msgstr "Der Verkaufserlös muss positiv sein!"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:680
@@ -1008,7 +1009,7 @@ msgstr ""
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
 "Sie können kein Anlagegut löschen, welches über Abschreibungspositionen "
-"verfügt"
+"verfügt."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/account_asset.py:1490
@@ -1050,7 +1051,7 @@ msgstr ""
 #. module: account_asset_management
 #: view:account.move:account_asset_management.view_account_move_asset_form
 msgid "onchange_account_id(account_id)"
-msgstr ""
+msgstr "onchange_account_id(account_id)"
 
 #. module: account_asset_management
 #: view:account.asset.remove:account_asset_management.account_asset_remove_form
