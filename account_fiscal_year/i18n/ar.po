@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_year
+# 	* account_fiscal_year
 #
 msgid ""
 msgstr ""
@@ -21,6 +21,12 @@ msgstr ""
 #: model:ir.model,name:account_fiscal_year.model_res_company
 msgid "Companies"
 msgstr "المؤسسات"
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "أنواع الفترات"
 
 #. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
@@ -53,7 +59,5 @@ msgstr "سنة مالية؟"
 msgid "You cannot delete a date range type with flag \"fiscal_year\""
 msgstr "لا يمكنك حذف فترة من نوع \"سنة مالية\""
 
-#. module: account_fiscal_year
-#: model:ir.model,name:account_fiscal_year.model_date_range_type
-msgid "date.range.type"
-msgstr "نوع الفترة"
+#~ msgid "date.range.type"
+#~ msgstr "نوع الفترة"
