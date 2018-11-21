@@ -365,6 +365,11 @@ msgid "Date"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_date_range
+msgid "Date Range"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger_date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
 msgstr ""
@@ -1161,11 +1166,6 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_date_start
 msgid "You should manually add depreciation lines with the depreciations of previous fiscal years if the Depreciation Start Date is different from the date for which accounting entries need to be generated."
-msgstr ""
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_date_range
-msgid "date.range"
 msgstr ""
 
 #. module: account_asset_management
