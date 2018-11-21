@@ -134,11 +134,11 @@ class TestAccountMoveTemplate(TransactionCase):
         template = self.env['account.move.template'].sudo(self.user).create({
             'name': 'Test Move Template',
             'company_id': self.company.id,
+            'journal_id': self.account_journal_1.id,
             'template_line_ids': [
                 (0, 0, {
                     'name': 'L1',
                     'sequence': 1,
-                    'journal_id': self.account_journal_1.id,
                     'account_id': self.account_company_1.id,
                     'partner_id': self.partner.id,
                     'tax_line_id': self.tax.id,
@@ -148,7 +148,6 @@ class TestAccountMoveTemplate(TransactionCase):
                 (0, 0, {
                     'name': 'L2',
                     'sequence': 2,
-                    'journal_id': self.account_journal_1.id,
                     'account_id': self.account_company_1.id,
                     'move_line_type': 'cr',
                     'tax_ids': [(4, self.tax.id)],
