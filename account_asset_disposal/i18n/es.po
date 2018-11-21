@@ -22,32 +22,32 @@ msgid "Asset category"
 msgstr "Categoría de activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:35
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:41
 #, python-format
 msgid "Asset depreciation"
 msgstr "Amortización del activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:23
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:25
 #: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
 #, python-format
 msgid "Asset disposal"
 msgstr "Baja del activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:158
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:172
 #, python-format
 msgid "Asset disposal cancelled."
 msgstr "Baja del activo cancelada."
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:123
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:137
 #, python-format
 msgid "Asset disposed."
 msgstr "Activo dado de baja."
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:46
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:56
 #, python-format
 msgid "Asset loss"
 msgstr "Pérdida del activo"
@@ -78,13 +78,13 @@ msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:130
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:144
 #, python-format
 msgid "Disposal Move"
 msgstr "Asiento de baja"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:133
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:147
 #, python-format
 msgid "Disposal Moves"
 msgstr "Asientos de baja"
@@ -106,7 +106,7 @@ msgid "Dispose"
 msgstr "Dar de baja"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:78
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:92
 #, python-format
 msgid "Dispose Asset"
 msgstr "Dar de baja activo"
@@ -120,11 +120,6 @@ msgstr "Dar de baja activo"
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_id
 msgid "ID"
 msgstr "ID"
-
-#. module: account_asset_disposal
-#: model:ir.model,name:account_asset_disposal.model_account_move_line
-msgid "Journal Item"
-msgstr "Apunte contable"
 
 #. module: account_asset_disposal
 #: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard___last_update
@@ -151,3 +146,11 @@ msgstr "Cuenta de pérdidas"
 #: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
 msgid "Undo disposal"
 msgstr "Cancelar baja"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_disposal_wizard
+msgid "account.asset.disposal.wizard"
+msgstr ""
+
+#~ msgid "Journal Item"
+#~ msgstr "Apunte contable"
