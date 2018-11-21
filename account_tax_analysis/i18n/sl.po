@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_tax_analysis
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 msgid ""
@@ -11,22 +11,27 @@ msgstr ""
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
 "PO-Revision-Date: 2015-07-01 12:24+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Account"
 msgstr "Konto"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Account / Tax"
-msgstr "Konto/davek"
+#: model:ir.model.fields,help:account_tax_analysis.field_account_move_line_account_type
+msgid ""
+"Account Type is used for information purpose, to generate country-specific "
+"legal reports, and set the rules to close a fiscal year and generate opening "
+"entries."
+msgstr ""
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_account_vat_declaration_analysis
@@ -35,160 +40,249 @@ msgid "Account Vat Declaration"
 msgstr "Konto DDV izjave"
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#, fuzzy
+msgid "Account type"
+msgstr "Konto"
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Entries"
+msgstr ""
+
+#. module: account_tax_analysis
+#: selection:account.vat.declaration.analysis,target_move:0
+msgid "All Posted Entries"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_tax_analysis_name
+msgid "Analysis name"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Cancel"
 msgstr "Preklic"
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,create_uid:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,create_date:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Filters"
-msgstr "Filtri"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_date_range_id
+msgid "Date Range"
+msgstr ""
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,fiscalyear_id:0
-msgid "Fiscalyear"
-msgstr "Fiskalno leto"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: account_tax_analysis
-#: help:account.vat.declaration.analysis,fiscalyear_id:0
-msgid "Fiscalyear to look on"
-msgstr "Fiskalno leto za pregled"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_end_date
+msgid "End date"
+msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Group By..."
-msgstr "Združi po..."
-
-#. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,id:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_tax_analysis
-#: help:account.vat.declaration.analysis,period_list:0
-msgid ""
-"If no period is selected, all the periods of the fiscal year will be used"
-msgstr "Če obdobje ni izbrano, se uporabijo vsa obdobja fiskalnega leta"
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Journal"
 msgstr "Dnevnik"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
-msgid "Journal Items"
+#: model:ir.model,name:account_tax_analysis.model_account_move_line
+#, fuzzy
+msgid "Journal Item"
 msgstr "Dnevniške postavke"
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,write_uid:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis___last_update
+#, fuzzy
+msgid "Last Modified on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_uid
 msgid "Last Updated by"
 msgstr "Zadnjič posodobil"
 
 #. module: account_tax_analysis
-#: field:account.vat.declaration.analysis,write_date:0
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Month"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Partner"
 msgstr "Partner"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Period"
 msgstr "Obdobje"
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
-#: field:account.vat.declaration.analysis,period_list:0
-msgid "Periods"
-msgstr "Obdobja"
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted"
 msgstr "Knjiženo"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Posted Journal Items"
 msgstr "Knjižene dnevniške postavke"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Search Journal Items"
-msgstr "Iskanje dnevniških postavk"
+#: model:ir.model.fields,help:account_tax_analysis.field_account_move_line_journal_type
+msgid ""
+"Select 'Sale' for customer invoices journals.\n"
+"Select 'Purchase' for vendor bills journals.\n"
+"Select 'Cash' or 'Bank' for journals that are used in customer or vendor "
+"payments.\n"
+"Select 'General' for miscellaneous operations journals."
+msgstr ""
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Show tax lines"
 msgstr "Prikaz davčnih postavk"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
-msgid "Tax account"
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_start_date
+msgid "Start date"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_vat_declaration_analysis_target_move
+msgid "Target Moves"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.model,name:account_tax_analysis.model_account_tax
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_analysis_tax
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Tax"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#, fuzzy
+msgid "Tax / Account Type"
 msgstr "Konto davkov"
 
 #. module: account_tax_analysis
 #: model:ir.actions.act_window,name:account_tax_analysis.action_view_tax_analysis
 #: model:ir.ui.menu,name:account_tax_analysis.menu_account_vat_declaration_analysis
+#: model:ir.ui.menu,name:account_tax_analysis.menu_action_account_vat_declaration_analysis
 msgid "Taxes Analysis"
 msgstr "Analiza davkov"
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_vat_declaration_analysis
 msgid "Taxes Report"
 msgstr "Poročilo o davkih"
 
 #. module: account_tax_analysis
-#: model:ir.actions.act_window,help:account_tax_analysis.action_account_vat_declaration_analysis
-msgid ""
-"This menu print a VAT declaration based on invoices or payments. You can "
-"select one or several periods of the fiscal year. Information required for a"
-" tax declaration is automatically generated by OpenERP from invoices (or "
-"payments, in some countries). This data is updated in real time. That’s very"
-" useful because it enables you to preview at any time the tax that you owe "
-"at the start and end of the month or quarter."
-msgstr "Ta meni natisne DDV izjavo na osnovi računov ali plačil. Izberete lahko eno ali več obdobij fiskalnega leta. Podatki potrebni za DDV izjavo se samodejno ustvarijo iz računov (ali plačil v nekaterih državah). Ti podatki se posodabljajo v realnem času. To je koristno, ker kadarkoli omogoči predogled davčnih obveznosti na začetku ali koncu meseca ali četrtletja."
-
-#. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
-msgid "Total Taxe"
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+#, fuzzy
+msgid "Total Tax"
 msgstr "Skupaj davki"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total credit"
 msgstr "Skupaj v dobro"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_move_line_tree_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
 msgid "Total debit"
 msgstr "Skupaj v breme"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_account_type
+#: model:ir.model.fields,field_description:account_tax_analysis.field_account_move_line_journal_type
+msgid "Type"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted"
 msgstr "Ne knjiženo"
 
 #. module: account_tax_analysis
-#: view:account.move.line:account_tax_analysis.view_account_move_line_filter_vat_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
 msgid "Unposted Journal Items"
 msgstr "Ne knjižene dnevniške postavke"
 
 #. module: account_tax_analysis
-#: view:account.vat.declaration.analysis:account_tax_analysis.view_account_vat_declaration_analysis
-msgid "or"
-msgstr "ali"
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_move_line_tree_tax_analysis
+msgid "View invoice"
+msgstr ""
+
+#. module: account_tax_analysis
+#: model:ir.ui.view,arch_db:account_tax_analysis.view_account_move_line_filter_vat_analysis
+msgid "Year"
+msgstr ""
+
+#~ msgid "Account / Tax"
+#~ msgstr "Konto/davek"
+
+#~ msgid "Filters"
+#~ msgstr "Filtri"
+
+#~ msgid "Fiscalyear"
+#~ msgstr "Fiskalno leto"
+
+#~ msgid "Fiscalyear to look on"
+#~ msgstr "Fiskalno leto za pregled"
+
+#~ msgid "Group By..."
+#~ msgstr "Združi po..."
+
+#~ msgid ""
+#~ "If no period is selected, all the periods of the fiscal year will be used"
+#~ msgstr "Če obdobje ni izbrano, se uporabijo vsa obdobja fiskalnega leta"
+
+#~ msgid "Periods"
+#~ msgstr "Obdobja"
+
+#~ msgid "Search Journal Items"
+#~ msgstr "Iskanje dnevniških postavk"
+
+#~ msgid ""
+#~ "This menu print a VAT declaration based on invoices or payments. You can "
+#~ "select one or several periods of the fiscal year. Information required "
+#~ "for a tax declaration is automatically generated by OpenERP from invoices "
+#~ "(or payments, in some countries). This data is updated in real time. "
+#~ "That’s very useful because it enables you to preview at any time the tax "
+#~ "that you owe at the start and end of the month or quarter."
+#~ msgstr ""
+#~ "Ta meni natisne DDV izjavo na osnovi računov ali plačil. Izberete lahko "
+#~ "eno ali več obdobij fiskalnega leta. Podatki potrebni za DDV izjavo se "
+#~ "samodejno ustvarijo iz računov (ali plačil v nekaterih državah). Ti "
+#~ "podatki se posodabljajo v realnem času. To je koristno, ker kadarkoli "
+#~ "omogoči predogled davčnih obveznosti na začetku ali koncu meseca ali "
+#~ "četrtletja."
+
+#~ msgid "or"
+#~ msgstr "ali"
