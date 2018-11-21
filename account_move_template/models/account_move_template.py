@@ -22,6 +22,7 @@ class AccountMoveTemplate(models.Model):
         change_default=True,
         default=_company_get,
     )
+    journal_id = fields.Many2one('account.journal', required=True)
     template_line_ids = fields.One2many(
         'account.move.template.line',
         inverse_name='template_id',
@@ -48,7 +49,9 @@ class AccountMoveTemplateLine(models.Model):
     company_id = fields.Many2one('res.company',
                                  related='template_id.company_id',
                                  readonly=True)
-    journal_id = fields.Many2one('account.journal', required=True)
+    journal_id = fields.Many2one('account.journal',
+                                 related='template_id.journal_id',
+                                 store=True, readonly=True)
     account_id = fields.Many2one(
         'account.account',
         required=True,
