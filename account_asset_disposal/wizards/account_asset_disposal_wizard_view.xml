@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     Copyright 2018 Tecnativa - Pedro M. Baeza
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
-<openerp>
-<data>
+<odoo>
 
 <record model="ir.ui.view" id="account_asset_disposal_wizard_form">
     <field name="name">account.asset.disposal.wizard.form</field>
@@ -23,5 +23,4 @@
     </field>
 </record>
 
-</data>
-</openerp>
+</odoo>
