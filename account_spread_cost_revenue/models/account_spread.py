@@ -265,7 +265,7 @@ class AccountSpread(models.Model):
         return spread_date
 
     @api.multi
-    def _next_spread_line_date(self, month_day, spread_date):
+    def _next_line_date(self, month_day, spread_date):
         """Calculates the next spread date. This method
         is used by "def _compute_spread_board()" method.
         """
@@ -325,7 +325,7 @@ class AccountSpread(models.Model):
                 }
                 commands.append((0, False, vals))
 
-                spread_date = self._next_spread_line_date(month_day, spread_date)
+                spread_date = self._next_line_date(month_day, spread_date)
 
         self.write({'line_ids': commands})
         self.message_post(body=_("Spread table created."))
