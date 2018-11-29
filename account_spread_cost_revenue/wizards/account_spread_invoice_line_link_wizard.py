@@ -147,7 +147,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 account = self.invoice_line_id.account_id
                 spread_vals = self.template_id._prepare_spread_from_template()
 
-                date_invoice = self.invoice_id.date_invoice or fields.Date.today()
+                date_invoice = self.invoice_id.date_invoice
+                date_invoice = date_invoice or fields.Date.today()
                 spread_vals['spread_date'] = date_invoice
 
                 spread_vals['name'] = ('%s %s') % (
