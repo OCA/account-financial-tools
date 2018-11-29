@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_company_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook">
-                <page name="account_spread_cost_revenue" string="Account Spread" groups="account.group_account_user">
+                <page name="account_spread_cost_revenue" string="Account Spread" groups="account.group_account_manager">
                     <group>
                         <group string="Default Spread Accounts">
                             <field name="default_spread_revenue_account_id" />

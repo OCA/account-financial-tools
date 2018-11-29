@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
-                <field name="spread_check" widget="spread_line_widget"/>
+                <field name="spread_check" widget="spread_line_widget" groups="account.group_account_user,account.group_account_manager"/>
             </xpath>
         </field>
     </record>
@@ -16,7 +16,7 @@
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
-                <field name="spread_check" widget="spread_line_widget"/>
+                <field name="spread_check" widget="spread_line_widget" groups="account.group_account_user,account.group_account_manager"/>
             </xpath>
         </field>
     </record>

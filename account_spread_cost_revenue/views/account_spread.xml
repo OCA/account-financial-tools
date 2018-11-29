@@ -7,9 +7,9 @@
             <form>
                 <header>
                     <button name="compute_spread_board" type="object" string="Recalculate unposted lines" class="oe_highlight" attrs="{'invisible': [('debit_account_id', '=', False)]}" />
-                    <button name="action_recalculate_spread" type="object" string="Recalculate entire spread" attrs="{'invisible': [('debit_account_id', '=', False)]}" groups="account.group_account_user" />
-                    <button name="action_undo_spread" type="object" string="Undo spread" attrs="{'invisible': [('line_ids', '=', [])]}" groups="account.group_account_user" />
-                    <button name="action_unlink_invoice_line" type="object" string="Unlink Invoice Line" attrs="{'invisible': [('invoice_line_id', '=', False)]}" groups="account.group_account_user" />
+                    <button name="action_recalculate_spread" type="object" string="Recalculate entire spread" attrs="{'invisible': [('debit_account_id', '=', False)]}" groups="account.group_account_manager" />
+                    <button name="action_undo_spread" type="object" string="Undo spread" attrs="{'invisible': [('line_ids', '=', [])]}" groups="account.group_account_manager" />
+                    <button name="action_unlink_invoice_line" type="object" string="Unlink Invoice Line" attrs="{'invisible': [('invoice_line_id', '=', False)]}" groups="account.group_account_manager" />
                 </header>
                 <sheet>
                     <div class="oe_button_box">
@@ -95,11 +95,11 @@
                                     <field name="amount" attrs="{'readonly':[('move_id','!=',False)]}" sum="Total"/>
                                     <field name="date" readonly="1"/>
                                     <field name="move_id" readonly="1"/>
-                                    <button name="create_move" icon="fa fa-play" string="Create Move" type="object" groups="account.group_account_user"
+                                    <button name="create_move" icon="fa fa-play" string="Create Move" type="object" groups="account.group_account_manager"
                                             attrs="{'invisible':['|',('move_id','!=',False)]}"/>
                                     <button name="open_move" icon="fa fa-plus-square-o" string="View Move" type="object"
                                             attrs="{'invisible':[('move_id','=',False)]}"/>
-                                    <button name="unlink_move" icon="fa fa-times" string="Delete Move" type="object" confirm="This will delete the move. Are you sure ?" groups="account.group_account_user"
+                                    <button name="unlink_move" icon="fa fa-times" string="Delete Move" type="object" confirm="This will delete the move. Are you sure ?" groups="account.group_account_manager"
                                             attrs="{'invisible':[('move_id','=',False)]}"/>
                                 </tree>
                             </field>

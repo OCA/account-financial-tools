@@ -50,6 +50,6 @@
     <menuitem id="menu_action_account_spread_template_form"
               parent="account.account_account_menu"
               action="action_account_spread_template_form"
-              groups="account.group_account_user"/>
+              groups="account.group_account_manager"/>
 
 </odoo>

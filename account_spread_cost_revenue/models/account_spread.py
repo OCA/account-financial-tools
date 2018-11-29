@@ -58,16 +58,16 @@ class AccountSpread(models.Model):
         compute='_compute_deprecated_accounts')
     unspread_amount = fields.Float(
         digits=dp.get_precision('Account'),
-        compute='_compute_spread_amount')
+        compute='_compute_amounts')
     unposted_amount = fields.Float(
         digits=dp.get_precision('Account'),
-        compute='_compute_spread_amount')
+        compute='_compute_amounts')
     posted_amount = fields.Float(
         digits=dp.get_precision('Account'),
-        compute='_compute_spread_amount')
+        compute='_compute_amounts')
     total_amount = fields.Float(
         digits=dp.get_precision('Account'),
-        compute='_compute_spread_amount')
+        compute='_compute_amounts')
     line_ids = fields.One2many(
         'account.spread.line',
         'spread_id',
@@ -88,8 +88,8 @@ class AccountSpread(models.Model):
     invoice_line_id = fields.Many2one(
         'account.invoice.line',
         string='Invoice line',
-        compute='_compute_invoice',
-        inverse='_inverse_invoice',
+        compute='_compute_invoice_line',
+        inverse='_inverse_invoice_line',
         store=True)
     invoice_id = fields.Many2one(
         related='invoice_line_id.invoice_id',
@@ -124,8 +124,8 @@ class AccountSpread(models.Model):
             company_id = res['company_id']
         default_journal = self.env['account.journal'].search([
             ('type', '=', 'general'),
-            ('company_id', '=', company_id)],
-            limit=1)
+            ('company_id', '=', company_id)
+        ], limit=1)
         if 'journal_id' not in res and default_journal:
             res['journal_id'] = default_journal.id
         return res
@@ -139,14 +139,14 @@ class AccountSpread(models.Model):
                 spread.spread_type = 'purchase'
 
     @api.depends('invoice_line_ids', 'invoice_line_ids.invoice_id')
-    def _compute_invoice(self):
+    def _compute_invoice_line(self):
         for spread in self:
             invoice_lines = spread.invoice_line_ids
             line = invoice_lines and invoice_lines[0] or False
             spread.invoice_line_id = line
 
     @api.multi
-    def _inverse_invoice(self):
+    def _inverse_invoice_line(self):
         for spread in self:
             invoice_line = spread.invoice_line_id
             spread.write({
@@ -154,7 +154,7 @@ class AccountSpread(models.Model):
             })
 
     @api.multi
-    def _compute_spread_amount(self):
+    def _compute_amounts(self):
         for spread in self:
             moves_amount = 0.0
             posted_amount = 0.0
@@ -249,7 +249,7 @@ class AccountSpread(models.Model):
         return 1
 
     @api.multi
-    def _init_spread_line_date(self, posted_line_ids):
+    def _init_line_date(self, posted_line_ids):
         """Calculates the initial spread date. This method
         is used by "def _compute_spread_board()" method.
         """
@@ -265,22 +265,18 @@ class AccountSpread(models.Model):
         return spread_date
 
     @api.multi
-    def _next_line_date(self, month_day, spread_date):
+    def _next_line_date(self, month_day, date):
         """Calculates the next spread date. This method
         is used by "def _compute_spread_board()" method.
         """
         self.ensure_one()
         months = self._compute_spread_period_duration()
-        spread_date = spread_date + relativedelta(months=months)
+        date = date + relativedelta(months=months)
         # get the last day of the month
         if month_day > 28:
-            max_day_in_month = calendar.monthrange(
-                spread_date.year, spread_date.month
-            )[1]
-            spread_date = spread_date.replace(
-                day=min(max_day_in_month, month_day)
-            )
-        return spread_date
+            max_day_in_month = calendar.monthrange(date.year, date.month)[1]
+            date = date.replace(day=min(max_day_in_month, month_day))
+        return date
 
     @api.multi
     def _compute_spread_board(self):
@@ -302,7 +298,7 @@ class AccountSpread(models.Model):
         if self.unposted_amount != 0.0:
             unposted_amount = self.unposted_amount
 
-            spread_date = self._init_spread_line_date(posted_line_ids)
+            spread_date = self._init_line_date(posted_line_ids)
 
             month_day = spread_date.day
             number_of_periods = self._get_number_of_periods(month_day)
@@ -343,13 +339,11 @@ class AccountSpread(models.Model):
         return fields.Date.to_string(spread_date + relativedelta(day=31))
 
     @api.multi
-    def _compute_board_amount(self, sequence, unposted_amount,
-                              undone_dotation_number):
+    def _compute_board_amount(self, sequence, amount, number_of_periods):
         """Calculates the amount for the spread lines."""
         self.ensure_one()
-        amount = unposted_amount
         amount_to_spread = self.total_amount
-        if sequence != undone_dotation_number:
+        if sequence != number_of_periods:
             amount = amount_to_spread / self.period_number
             if sequence == 1:
                 date = fields.Datetime.from_string(self.spread_date)

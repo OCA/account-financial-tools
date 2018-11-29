@@ -15,9 +15,9 @@ class AccountInvoiceSpreadLine(models.Model):
     amount = fields.Float(digits=dp.get_precision('Account'), required=True)
     date = fields.Date(required=True)
     spread_id = fields.Many2one(
-        'account.spread', string='Spread', ondelete='cascade')
+        'account.spread', string='Spread Board', ondelete='cascade')
     move_id = fields.Many2one(
-        'account.move', string='Spread Entry', readonly=True)
+        'account.move', string='Journal Entry', readonly=True)
 
     @api.multi
     def create_and_reconcile_moves(self):
