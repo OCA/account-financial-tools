@@ -460,6 +460,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'period_type': 'month',
             'spread_date': '2017-01-07',
             'invoice_line_id': self.invoice_line.id,
+            'move_line_auto_post': False,
         })
 
         spread_lines = self.spread.line_ids
@@ -519,6 +520,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'period_type': 'month',
             'spread_date': '2017-01-07',
             'invoice_line_id': self.invoice_line.id,
+            'move_line_auto_post': False,
         })
 
         spread_lines = self.spread.line_ids
@@ -579,6 +581,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'period_type': 'month',
             'spread_date': '2017-01-07',
             'invoice_line_id': self.invoice_line_2.id,
+            'move_line_auto_post': False,
         })
 
         spread_lines = self.spread2.line_ids

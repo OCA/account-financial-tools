@@ -156,7 +156,8 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-31'
+            'spread_date': '2017-01-31',
+            'move_line_auto_post': False
         })
 
         self.spread.compute_spread_board()
@@ -295,7 +296,8 @@ class TestComputeSpreadBoard(AccountingTestCase):
         # spread date set
         self.spread.write({
             'period_number': 3,
-            'period_type': 'quarter'
+            'period_type': 'quarter',
+            'move_line_auto_post': False
         })
 
         self.spread.compute_spread_board()
@@ -410,6 +412,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
             self.assertTrue(line.move_id)
 
     def test_11_create_move_sale_invoice(self):
+        self.spread2.move_line_auto_post = False
         self.spread2.compute_spread_board()
         for line in self.spread2.line_ids:
             self.assertFalse(line.move_id)

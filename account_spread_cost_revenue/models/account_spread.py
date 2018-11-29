@@ -113,7 +113,7 @@ class AccountSpread(models.Model):
     analytic_tag_ids = fields.Many2many(
         'account.analytic.tag',
         string='Analytic Tags')
-    move_line_auto_post = fields.Boolean('Auto-post lines')
+    move_line_auto_post = fields.Boolean('Auto-post lines', default=True)
 
     @api.model
     def default_get(self, fields):

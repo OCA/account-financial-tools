@@ -118,6 +118,10 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
             else:
                 debit_account = self.invoice_line_id.account_id
 
+            analytic_account = self.invoice_line_id.account_analytic_id
+            analytic_tags = self.invoice_line_id.analytic_tag_ids
+            date_invoice = self.invoice_id.date_invoice or fields.Date.today()
+
             return {
                 'name': _('New Spread Board'),
                 'view_type': 'form',
@@ -133,20 +137,37 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     'default_debit_account_id': debit_account.id,
                     'default_credit_account_id': credit_account.id,
                     'default_journal_id': self.spread_journal_id.id,
+                    'default_account_analytic_id': analytic_account.id,
+                    'default_analytic_tag_ids': analytic_tags.ids,
+                    'default_spread_date': date_invoice,
                 },
             }
         elif self.spread_action_type == 'template':
             if not self.invoice_line_id.spread_id:
                 account = self.invoice_line_id.account_id
                 spread_vals = self.template_id._prepare_spread_from_template()
-                spread_vals['debit_account_id'] = account.id
+
+                date_invoice = self.invoice_id.date_invoice or fields.Date.today()
+                spread_vals['spread_date'] = date_invoice
+
+                spread_vals['name'] = ('%s %s') % (
+                    spread_vals['name'],
+                    self.invoice_line_id.name
+                )
 
                 if spread_vals['invoice_type'] == 'out_invoice':
                     spread_vals['credit_account_id'] = account.id
                 else:
                     spread_vals['debit_account_id'] = account.id
 
+                analytic_account = self.invoice_line_id.account_analytic_id
+                spread_vals['account_analytic_id'] = analytic_account.id
+
                 spread = self.env['account.spread'].create(spread_vals)
+
+                analytic_tags = self.invoice_line_id.analytic_tag_ids
+                spread.analytic_tag_ids = analytic_tags
+
                 self.invoice_line_id.spread_id = spread
             return {
                 'name': _('Spread Details'),

@@ -52,7 +52,7 @@ class TestAccountSpreadCostRevenue(AccountingTestCase):
         self.assertFalse(spread.invoice_id)
         self.assertFalse(spread.account_analytic_id)
         self.assertFalse(spread.analytic_tag_ids)
-        self.assertFalse(spread.move_line_auto_post)
+        self.assertTrue(spread.move_line_auto_post)
         self.assertEqual(spread.name, 'test')
         self.assertEqual(spread.invoice_type, 'out_invoice')
         self.assertEqual(spread.company_id, my_company)

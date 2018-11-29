@@ -25,7 +25,7 @@ class AccountSpreadTemplate(models.Model):
         required=True)
     spread_account_id = fields.Many2one(
         'account.account',
-        string='Spread Account',
+        string='Spread Balance Sheet Account',
         required=True)
 
     @api.model

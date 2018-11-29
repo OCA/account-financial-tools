@@ -1,3 +1,6 @@
+Define Spread Costs/Revenues Board
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Under Invoicing -> Adviser -> Accounting Entries -> Spread Costs/Revenues, create a new spread board.
 
 Complete the definition of the spreading criteria, by setting the the fields:
@@ -23,8 +26,14 @@ A cron job will automatically create the accounting moves for all the lines havi
 .. figure:: https://raw.githubusercontent.com/OCA/account-financial-tools/11.0/account_spread_cost_revenue/static/description/update_spread.png
    :alt: The spreading board is updated by the cron job
 
-By default, the status of the created accounting moves is unposted, so you should post them manually one by one.
-To allow the automatic posting of the accounting moves, set the flag *Auto-post lines* to True.
+By default, the status of the created accounting moves is posted.
+To disable the automatic posting of the accounting moves, set the flag *Auto-post lines* to False.
+
+Click on button *Recalculate entire spread* button in the spread board to force the recalculation of the spread lines:
+this will also reset all the journal entries previously created.
+
+Link Invoice to Spread Costs/Revenues Board
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Create an invoice or vendor bill in draft. On its lines, the spreading right-arrow icon are displayed in dark-grey color.
 
@@ -52,5 +61,14 @@ on the smart button *Reconciled entries*: the moves of the spread lines are reco
 In case the Subtotal Price of the invoice line is different than the *Estimated Amount* of the spread board, the spread
 lines (not yet posted) will be recalculated when validating the invoice/bill.
 
-Click on button *Recalculate entire spread* button in the spread board to force the recalculation of the spread lines:
-this will also reset all the journal entries previously created.
+Define Spread Costs/Revenues Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Under Invoicing -> Configuration -> Accounting -> Spread Templates, create a new spread template.
+
+* *Spread Type*
+* *Spread Balance Sheet Account*
+* *Journal*
+
+When creating a new Spread Costs/Revenues Board, select the right template.
+This way the above fields will be copied to the Spread Board.
