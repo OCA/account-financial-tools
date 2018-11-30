@@ -94,6 +94,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
             line.create_move()
             self.assertTrue(line.move_id)
 
+        self.spread.journal_id.update_posted = True
         self.spread.action_recalculate_spread()
         spread_lines = self.spread.line_ids
         for line in spread_lines:
@@ -391,8 +392,8 @@ class TestComputeSpreadBoard(AccountingTestCase):
             self.assertTrue(line.move_id)
             action = line.open_move()
             self.assertTrue(action)
-        # for line in self.spread.line_ids:
-        #     line.move_id.post()
+
+        self.spread.journal_id.update_posted = True
         self.spread.line_ids.unlink_move()
         for line in self.spread.line_ids:
             self.assertFalse(line.move_id)
