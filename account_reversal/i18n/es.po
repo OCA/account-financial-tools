@@ -70,11 +70,9 @@ msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
-msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same "
+msgid "Enter the date of the reversal account entries. If empty, Odoo uses the same "
 "journal of the move to reverse."
-msgstr ""
-"Introduzca la fecha para los asientos contables revertidos. Si está vacío, "
+msgstr "Introduzca la fecha para los asientos contables revertidos. Si está vacío, "
 "Odoo usa la misma fecha que el asiento a revertir."
 
 #. module: account_reversal
