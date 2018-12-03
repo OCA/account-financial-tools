@@ -631,40 +631,32 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     })
 
     @api.multi
-    def _generate_tax(self, company, template, tax_template_to_tax):
-        for tax in self:
-            vals_tax = template._get_tax_vals(
-                company, tax_template_to_tax)
-            # If there's an existing account already created, assign it now.
-            account_id = self.find_account_by_templates(template.account_id)
-            if account_id:
-                vals_tax['account_id'] = account_id
-            refund_account_id = tax.find_account_by_templates(
-                template.refund_account_id)
-            if refund_account_id:
-                vals_tax['refund_account_id'] = refund_account_id
-            new_tax = self.env[
-                'account.chart.template'].create_record_with_xmlid(
-                company, template, 'account.tax', vals_tax)
-            tax_template_to_tax[template.id] = new_tax
-
-    @api.multi
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""
-        tax_template_to_tax = {}
-        for wiz_tax in self.tax_ids:
+        new_templates = self.tax_ids.filtered(
+            lambda w: w.type == 'new').mapped('tax_id')
+        if new_templates:
+            generated_tax_res = new_templates._generate_tax(self.company_id)
+            tax_template_to_tax = generated_tax_res['tax_template_to_tax']
+            for template in new_templates:
+                # If there's an existing account already created,
+                # assign it now.
+                tax_id = tax_template_to_tax[template.id]
+                tax = self.env['account.tax'].browse(tax_id)
+                account_id = self.find_account_by_templates(
+                    template.account_id)
+                refund_account_id = self.find_account_by_templates(
+                    template.refund_account_id)
+                tax.account_id = account_id
+                tax.refund_account_id = refund_account_id
+                _logger.info(_("Created tax %s."), "'%s'" % template.name)
+        for wiz_tax in self.tax_ids.filtered(lambda w: w.type != 'new'):
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
             if wiz_tax.type == 'deleted':
                 tax.active = False
                 _logger.info(_("Deactivated tax %s."), "'%s'" % tax.name)
                 continue
-            # Create tax
-            if wiz_tax.type == 'new':
-                self._generate_tax(self.company_id, template,
-                                   tax_template_to_tax)
-                _logger.info(_("Created tax %s."), "'%s'" % template.name)
-            # Update tax
             else:
                 for key, value in self.diff_fields(template, tax).items():
                     # We defer update because account might not be created yet
