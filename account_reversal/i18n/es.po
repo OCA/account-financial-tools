@@ -31,8 +31,7 @@ msgstr "Cancelar"
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_to_be_reversed
 msgid "Check this box if your entry has to be reversed at the end of period."
-msgstr ""
-"Marque esta casilla si su asiento debe ser revertido al final de periodo."
+msgstr "Marque esta casilla si su asiento debe ser revertido al final de periodo."
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
@@ -61,11 +60,9 @@ msgstr "Nombre mostrado"
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_date
-msgid ""
-"Enter the date of the reversal account entries. By default, Odoo proposes "
+msgid "Enter the date of the reversal account entries. By default, Odoo proposes "
 "the same date of the move to reverse."
-msgstr ""
-"Introduzca la fecha para los asientos contables revertidos. Por defecto, "
+msgstr "Introduzca la fecha para los asientos contables revertidos. Por defecto, "
 "Odoo propone la misma fecha que el asiento a revertir."
 
 #. module: account_reversal
@@ -119,23 +116,19 @@ msgstr "Marque esto si desea conciliar los apuntes de ambos asientos."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
-msgid ""
-"Prefix that will be added to the 'Name' of the reversal account entrie "
+msgid "Prefix that will be added to the 'Name' of the reversal account entrie "
 "items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
 "A space is added after the prefix)."
-msgstr ""
-"Prefijo que se añadirá al nombre del apunte revertido. Si está vacío, Odoo "
+msgstr "Prefijo que se añadirá al nombre del apunte revertido. Si está vacío, Odoo "
 "usará el mismo nombre del movimiento a revertir. (NOTA: se añade "
 "automáticamente un espacio después del prefijo)."
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_move_prefix
-msgid ""
-"Prefix that will be added to the 'Ref' of the reversal account entries. If "
+msgid "Prefix that will be added to the 'Ref' of the reversal account entries. If "
 "empty, Odoo uses the Ref of the move to reverse. (NOTE: A space is added "
 "after the prefix)."
-msgstr ""
-"Prefijo que se añadirá a la referencia del asiento revertido. Si está vacío, "
+msgstr "Prefijo que se añadirá a la referencia del asiento revertido. Si está vacío, "
 "Odoo usará la misma referencia del asiento a revertir. (NOTA: se añade "
 "automáticamente un espacio después del prefijo)."
 
@@ -172,11 +165,9 @@ msgstr "Asientos revertidos"
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
-msgid ""
-"This will create reversal for all selected entries whether checked 'to be "
+msgid "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
-msgstr ""
-"Esto creará una reversión de todos los asientos seleccionados tanto si "
+msgstr "Esto creará una reversión de todos los asientos seleccionados tanto si "
 "tienen la casilla \"A ser revertido\" como si no."
 
 #. module: account_reversal
