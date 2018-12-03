@@ -631,8 +631,27 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     })
 
     @api.multi
+    def _generate_tax(self, company, template, tax_template_to_tax):
+        for tax in self:
+            vals_tax = template._get_tax_vals(
+                company, tax_template_to_tax)
+            # If there's an existing account already created, assign it now.
+            account_id = self.find_account_by_templates(template.account_id)
+            if account_id:
+                vals_tax['account_id'] = account_id
+            refund_account_id = tax.find_account_by_templates(
+                template.refund_account_id)
+            if refund_account_id:
+                vals_tax['refund_account_id'] = refund_account_id
+            new_tax = self.env[
+                'account.chart.template'].create_record_with_xmlid(
+                company, template, 'account.tax', vals_tax)
+            tax_template_to_tax[template.id] = new_tax
+
+    @api.multi
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""
+        tax_template_to_tax = {}
         for wiz_tax in self.tax_ids:
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
@@ -642,7 +661,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 continue
             # Create tax
             if wiz_tax.type == 'new':
-                template._generate_tax(self.company_id)
+                self._generate_tax(self.company_id, template, tax_template_to_tax)
                 _logger.info(_("Created tax %s."), "'%s'" % template.name)
             # Update tax
             else:
