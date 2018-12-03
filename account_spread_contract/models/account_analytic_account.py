@@ -52,10 +52,12 @@ class AccountAnalyticAccount(models.Model):
         if self.contract_type == 'purchase':
             invoice_type = 'in_invoice'
 
+        fpos_id = self._prepare_invoice().get('fiscal_position_id')
+        fiscal_position = self.env['account.fiscal.position'].browse(fpos_id)
         account = self.env['account.invoice.line'].get_invoice_line_account(
             invoice_type,
             line.product_id,
-            self._prepare_invoice().get('fiscal_position_id'),
+            fiscal_position,
             self.company_id
         )
         if not account:
