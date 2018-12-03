@@ -10,3 +10,6 @@ the spreading right-arrow icon is now displayed in green color.
 
 When generating an invoice from the contract, the spread table will be automatically created
 and linked to the respective invoice line.
+The spread date is the date from the next invoice date present in the contract.
+The period of the contract is copied to the spread. So if the contract is 3 months, it will also set
+the spread period to 3x1 months.
