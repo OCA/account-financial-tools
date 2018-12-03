@@ -661,7 +661,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 continue
             # Create tax
             if wiz_tax.type == 'new':
-                self._generate_tax(self.company_id, template, tax_template_to_tax)
+                self._generate_tax(self.company_id, template,
+                                   tax_template_to_tax)
                 _logger.info(_("Created tax %s."), "'%s'" % template.name)
             # Update tax
             else:
