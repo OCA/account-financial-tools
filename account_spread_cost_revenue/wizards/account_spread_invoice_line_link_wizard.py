@@ -12,7 +12,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         'account.invoice.line',
         string='Invoice Line',
         readonly=True,
-        required=True)
+        required=True,
+        ondelete='cascade')
     invoice_id = fields.Many2one(
         related='invoice_line_id.invoice_id',
         readonly=True)
