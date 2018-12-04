@@ -40,23 +40,34 @@ class CrossoveredBudget(models.Model):
         for budget in self.filtered(lambda b: not b.crossovered_budget_line and
                                     b.state == 'draft'):
             budget_posts = budget.budget_tmpl_id.budget_post_ids
-            periodicity_months = (
-                _periodicityMonths[budget.budget_tmpl_id.periodicity])
+            periodicity_months = False
+            if budget.budget_tmpl_id.periodicity:
+                periodicity_months = (
+                    _periodicityMonths[budget.budget_tmpl_id.periodicity])
             vals = {
                 'crossovered_budget_id': budget.id,
                 'planned_amount': 0.0,
             }
-            ds = from_string(budget.date_from)
-            while to_string(ds) < budget.date_to:
-                de = ds + relativedelta(months=periodicity_months, days=-1)
-                if to_string(de) > budget.date_to:
-                    de = from_string(budget.date_to)
+            if not periodicity_months:
                 for budget_post in budget_posts:
                     vals.update({
-                        'date_from': to_string(ds),
-                        'date_to': to_string(de),
+                        'date_from': budget.date_from,
+                        'date_to': budget.date_to,
                         'general_budget_id': budget_post.id,
                     })
                     budget_line_obj.create(vals)
-                ds = ds + relativedelta(months=periodicity_months)
+            else:
+                ds = from_string(budget.date_from)
+                while to_string(ds) < budget.date_to:
+                    de = ds + relativedelta(months=periodicity_months, days=-1)
+                    if to_string(de) > budget.date_to:
+                        de = from_string(budget.date_to)
+                    for budget_post in budget_posts:
+                        vals.update({
+                            'date_from': to_string(ds),
+                            'date_to': to_string(de),
+                            'general_budget_id': budget_post.id,
+                        })
+                        budget_line_obj.create(vals)
+                    ds = ds + relativedelta(months=periodicity_months)
         return True

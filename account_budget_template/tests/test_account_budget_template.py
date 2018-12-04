@@ -44,7 +44,7 @@ class TestAccountBudgetTemplate(common.SavepointCase):
              len(self.budget_tmpl.budget_post_ids)))
 
     def test_template_quaterly(self):
-        self.budget.periodicity = 'quaterly'
+        self.budget_tmpl.periodicity = 'quaterly'
         self.assertFalse(self.budget.crossovered_budget_line)
         self.budget.button_compute_lines()
         self.assertEqual(
@@ -53,7 +53,7 @@ class TestAccountBudgetTemplate(common.SavepointCase):
              len(self.budget_tmpl.budget_post_ids)))
 
     def test_template_sixmonthly(self):
-        self.budget.periodicity = 'sixmonthly'
+        self.budget_tmpl.periodicity = 'sixmonthly'
         self.assertFalse(self.budget.crossovered_budget_line)
         self.budget.button_compute_lines()
         self.assertEqual(
@@ -62,13 +62,21 @@ class TestAccountBudgetTemplate(common.SavepointCase):
              len(self.budget_tmpl.budget_post_ids)))
 
     def test_template_yearly(self):
-        self.budget.periodicity = 'yearly'
+        self.budget_tmpl.periodicity = 'yearly'
         self.assertFalse(self.budget.crossovered_budget_line)
         self.budget.button_compute_lines()
         self.assertEqual(
             len(self.budget.crossovered_budget_line),
             ((12 / _periodicityMonths[self.budget_tmpl.periodicity]) *
              len(self.budget_tmpl.budget_post_ids)))
+
+    def test_template_noperiodicity(self):
+        self.budget_tmpl.periodicity = False
+        self.assertFalse(self.budget.crossovered_budget_line)
+        self.budget.button_compute_lines()
+        self.assertEqual(
+            len(self.budget.crossovered_budget_line),
+            len(self.budget_tmpl.budget_post_ids))
 
     def test_res_config(self):
         self.assertFalse(
