@@ -136,7 +136,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             )
         return self.purchase_model.create({
             'partner_id': self.partner1.id,
-            'order_line': lines
+            'order_line': lines,
         })
 
     def _get_balance(self, domain):
@@ -177,7 +177,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             break
         purchase.button_confirm()
         picking = purchase.picking_ids[0]
-        picking.force_assign()
+        picking.action_confirm()
         picking.move_lines.write({'quantity_done': 1.0})
         picking.button_validate()
 
