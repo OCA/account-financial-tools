@@ -61,15 +61,13 @@ msgstr "Nombre desplegado"
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_date
-msgid ""
-"Enter the date of the reversal account entries. By default, Odoo proposes "
+msgid "Enter the date of the reversal account entries. By default, Odoo proposes "
 "the same date of the move to reverse."
 msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
-msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same "
+msgid "Enter the date of the reversal account entries. If empty, Odoo uses the same "
 "journal of the move to reverse."
 msgstr ""
 
@@ -117,16 +115,14 @@ msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_line_prefix
-msgid ""
-"Prefix that will be added to the 'Name' of the reversal account entrie "
+msgid "Prefix that will be added to the 'Name' of the reversal account entrie "
 "items. If empty, Odoo uses the same name of the move line to reverse. (NOTE: "
 "A space is added after the prefix)."
 msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_move_prefix
-msgid ""
-"Prefix that will be added to the 'Ref' of the reversal account entries. If "
+msgid "Prefix that will be added to the 'Ref' of the reversal account entries. If "
 "empty, Odoo uses the Ref of the move to reverse. (NOTE: A space is added "
 "after the prefix)."
 msgstr ""
@@ -142,7 +138,7 @@ msgid "Reversal Date"
 msgstr ""
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id
 msgid "Reversal Entry"
 msgstr ""
 
@@ -164,8 +160,7 @@ msgstr ""
 
 #. module: account_reversal
 #: model:ir.ui.view,arch_db:account_reversal.view_account_move_reverse
-msgid ""
-"This will create reversal for all selected entries whether checked 'to be "
+msgid "This will create reversal for all selected entries whether checked 'to be "
 "reversed' or not."
 msgstr ""
 
