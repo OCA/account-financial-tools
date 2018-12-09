@@ -435,6 +435,11 @@ msgid "Date"
 msgstr "Fecha"
 
 #. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_date_range
+msgid "Date Range"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger_date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
 msgstr ""
@@ -1351,11 +1356,6 @@ msgstr ""
 "ejercicios fiscales anteriores si la fecha de inicio de amortización es "
 "diferente de la fecha para la que loas asientos contables necesitan ser "
 "generados."
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_date_range
-msgid "date.range"
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_res_config_settings
