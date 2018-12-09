@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_group_menu
+# 	* account_group_menu
 #
 msgid ""
 msgstr ""
@@ -74,6 +74,46 @@ msgstr "ضريبة 9٪"
 #. module: account_group_menu
 #: model:account.tax.group,name:account_group_menu.demo_account_tax_group_4
 msgid "VAT Cash Basis"
+msgstr "ضريبة على النقدي"
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_19
+#: model:account.tax,name:account_group_menu.demo_vatc_19
+#, fuzzy
+msgid "VAT Colected 19%"
+msgstr "ضريبة 19٪"
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_05
+#: model:account.tax,name:account_group_menu.demo_vatc_05
+msgid "VAT Colected 5%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatc_09
+#: model:account.tax,name:account_group_menu.demo_vatc_09
+msgid "VAT Colected 9%"
+msgstr ""
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_19
+#: model:account.tax,name:account_group_menu.demo_vatccb_19
+#, fuzzy
+msgid "VAT Colected Cash-Basis 19%"
+msgstr "ضريبة على النقدي"
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_05
+#: model:account.tax,name:account_group_menu.demo_vatccb_05
+#, fuzzy
+msgid "VAT Colected Cash-Basis 5%"
+msgstr "ضريبة على النقدي"
+
+#. module: account_group_menu
+#: model:account.tax,description:account_group_menu.demo_vatccb_09
+#: model:account.tax,name:account_group_menu.demo_vatccb_09
+#, fuzzy
+msgid "VAT Colected Cash-Basis 9%"
 msgstr "ضريبة على النقدي"
 
 #. module: account_group_menu
