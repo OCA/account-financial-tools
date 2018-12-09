@@ -72,9 +72,10 @@ msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
+#, fuzzy
 msgid ""
-"Enter the date of the reversal account entries. If empty, Odoo uses the same "
-"journal of the move to reverse."
+"Enter the journal of the reversal account entries. If empty, Odoo uses the "
+"same journal of the move to reverse."
 msgstr ""
 "Saisissez la date des écritures contre-passées. S'il est vide, Odoo propose "
 "le même journal que l'écriture à contre-passer."
@@ -156,7 +157,7 @@ msgid "Reversal Date"
 msgstr "Date des extournes"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_4085
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_5338
 msgid "Reversal Entry"
 msgstr "Pièce comptable d'extourne"
 
