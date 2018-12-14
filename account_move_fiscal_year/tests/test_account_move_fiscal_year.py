@@ -12,7 +12,7 @@ class TestAccountMoveFiscalYear(TransactionCase):
         self.AccountObj = self.env['account.account']
         self.AccountJournalObj = self.env['account.journal']
         self.AccountMoveObj = self.env['account.move']
-        self.DateRangeObj = self.env['date.range']
+        self.DateRangeObj = self.env['account.fiscal.year']
 
         self.bank_journal = self.AccountJournalObj.search([
             ('type', '=', 'bank')
@@ -36,21 +36,16 @@ class TestAccountMoveFiscalYear(TransactionCase):
             'user_type_id': self.account_type_rev.id,
         })
 
-        self.date_range_type_year = self.env.ref(
-            'account_fiscal_year.fiscalyear')
-
         self.date_range_2017 = self.DateRangeObj.create({
             'name': "2017",
-            'date_start': '2017-01-01',
-            'date_end': '2017-12-31',
-            'type_id': self.date_range_type_year.id,
+            'date_from': '2017-01-01',
+            'date_to': '2017-12-31',
         })
 
         self.date_range_2018 = self.DateRangeObj.create({
             'name': "2018",
-            'date_start': '2018-01-01',
-            'date_end': '2018-12-31',
-            'type_id': self.date_range_type_year.id,
+            'date_from': '2018-01-01',
+            'date_to': '2018-12-31',
         })
 
     def create_account_move(self, date_str):
@@ -72,7 +67,7 @@ class TestAccountMoveFiscalYear(TransactionCase):
         })
 
     def test_01_account_move_date_range_fy_id_compute(self):
-        january_1st = Date.from_string('2017-01-01')
+        january_1st = Date.to_date('2017-01-01')
         move = self.create_account_move(january_1st)
 
         self.assertEquals(
@@ -83,16 +78,16 @@ class TestAccountMoveFiscalYear(TransactionCase):
             for line in move.line_ids
         ]), msg="All lines period should be 2017")
 
-        january_2019 = Date.from_string('2019-01-01')
+        january_2019 = Date.to_date('2019-01-01')
         move = self.create_account_move(january_2019)
         self.assertFalse(
             bool(move.date_range_fy_id),
             msg="Move shouldn't have any date range")
 
     def test_02_account_move_date_range_fy_id_search(self):
-        january_2017 = Date.from_string('2017-01-01')
-        january_2018 = Date.from_string('2018-01-01')
-        january_2019 = Date.from_string('2019-01-01')
+        january_2017 = Date.to_date('2017-01-01')
+        january_2018 = Date.to_date('2018-01-01')
+        january_2019 = Date.to_date('2019-01-01')
 
         move_2017 = self.create_account_move(january_2017)
         move_2018 = self.create_account_move(january_2018)
