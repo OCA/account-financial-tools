@@ -20,17 +20,27 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_move_fiscal_year
-#: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Account Entry"
-msgstr "Asiento contable"
+#: model:ir.model,name:account_move_fiscal_year.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: account_move_fiscal_year
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_date_range_fy_id
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line_date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
 msgid "Fiscal year"
 msgstr "Año Fiscal"
+
+#. module: account_move_fiscal_year
+#: model:ir.model,name:account_move_fiscal_year.model_account_move
+#, fuzzy
+#| msgid "Journal Item"
+msgid "Journal Entries"
+msgstr "Diario"
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
 msgstr "Diario"
+
+#~ msgid "Account Entry"
+#~ msgstr "Asiento contable"

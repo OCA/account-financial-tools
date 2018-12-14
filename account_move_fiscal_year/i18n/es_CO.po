@@ -21,17 +21,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_move_fiscal_year
-#: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Account Entry"
-msgstr "Registro Contable"
+#: model:ir.model,name:account_move_fiscal_year.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: account_move_fiscal_year
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_date_range_fy_id
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line_date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
 msgid "Fiscal year"
+msgstr ""
+
+#. module: account_move_fiscal_year
+#: model:ir.model,name:account_move_fiscal_year.model_account_move
+msgid "Journal Entries"
 msgstr ""
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
 msgstr ""
+
+#~ msgid "Account Entry"
+#~ msgstr "Registro Contable"
