@@ -6,68 +6,70 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2018-12-16 13:58+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.3\n"
 
 #. module: account_group
 #: model:ir.model,name:account_group.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Contas"
 
 #. module: account_group
 #: model:ir.ui.view,arch_db:account_group.view_account_group_form
 #: model:ir.ui.view,arch_db:account_group.view_account_group_search
 #: model:ir.ui.view,arch_db:account_group.view_account_group_tree
 msgid "Accounts Group"
-msgstr ""
+msgstr "Grupo de Contas"
 
 #. module: account_group
 #: model:ir.actions.act_window,name:account_group.action_account_group_tree
 #: model:ir.ui.menu,name:account_group.account_group_menu
 #: model:ir.ui.view,arch_db:account_group.view_account_group_search
 msgid "Accounts Groups"
-msgstr ""
+msgstr "Grupos de Contas"
 
 #. module: account_group
 #: model:ir.model.fields,help:account_group.field_account_group_account_ids
 msgid "Assigned accounts."
-msgstr ""
+msgstr "Contas atribuídas."
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_code_prefix
 msgid "Code prefix"
-msgstr ""
+msgstr "Prefixo do Código"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a Exibir"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_account_group_id
 #: model:ir.model.fields,field_description:account_group.field_account_account_template_group_id
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_id
@@ -77,52 +79,52 @@ msgstr ""
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação Em"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Atualização por"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Atualização em"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_parent_left
 msgid "Left Parent"
-msgstr ""
+msgstr "Ascendente à Esquerda"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_level
 msgid "Level"
-msgstr ""
+msgstr "Nível"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_parent_id
 msgid "Parent"
-msgstr ""
+msgstr "Ascendente"
 
 #. module: account_group
 #: model:ir.model.fields,field_description:account_group.field_account_group_parent_right
 msgid "Right Parent"
-msgstr ""
+msgstr "Ascendente à Direita"
 
 #. module: account_group
 #: model:ir.model,name:account_group.model_account_chart_template
 msgid "Templates for Account Chart"
-msgstr ""
+msgstr "Modelos para Plano de Contas"
 
 #. module: account_group
 #: model:ir.model,name:account_group.model_account_account_template
 msgid "Templates for Accounts"
-msgstr ""
+msgstr "Modelos para Contas"
 
 #. module: account_group
 #: model:ir.model,name:account_group.model_account_group
