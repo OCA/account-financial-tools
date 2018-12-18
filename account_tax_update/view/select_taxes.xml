@@ -8,16 +8,22 @@
             <field name="arch" type="xml">
                 <form string="Taxes">
                     <label colspan="4" string="Add the taxes that need to be replaced here. Any parent or child taxes will be added automatically when you close this window."/>
+                    <field name="type_tax_use"/>
                     <field name="tax_ids" colspan="4" nolabel="1"
-                           domain="['|',('type_tax_use','=','all'),('type_tax_use','=',type_tax_use),('id', 'not in', covered_tax_ids[0][2])]"
-                           context="{'tree_view_ref': 'account_tax_update.tax_tree_view'}"
-                                    />
+                           domain="[('type_tax_use','=', type_tax_use),('id', 'not in', covered_tax_ids) ]">
+                        <tree>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="amount"/>
+                            <field name="type_tax_use"/>
+                        </tree>
+                    </field>
                     <newline/>
-                    <button icon="gtk-close"
+                    <button 
                             special="cancel"
                             string="Cancel"
                             />
-                    <button icon="gtk-ok"
+                    <button 
                             name="save_taxes"
                             string="Save"
                             type="object"

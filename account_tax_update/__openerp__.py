@@ -45,18 +45,16 @@ You can select to also duplicate linked tax code
 
 After the transition, the old taxes can be made inactive.
 
-This module is compatible with OpenERP 7.0
 
     """,
     'images': ['images/update_tax.png'],
     'depends': ['account'],
     'data': [
-        'view/account_tax.xml',
         'view/update_tax_config.xml',
         'view/select_taxes.xml',
         'security/ir.model.access.csv',
     ],
     "license": 'AGPL-3',
-    "installable": False,
+    "installable": True,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

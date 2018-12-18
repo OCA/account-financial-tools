@@ -7,64 +7,61 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Taxes">
-                    <field name="name"
-                           attrs="{'readonly': [('state', '!=', 'draft')]}"
-                           />
-                    <field name="duplicate_tax_code"
-                           attrs="{'readonly': [('state', '!=', 'draft')]}"
-                           />
-                    <field name="state"/>
-                    <field name="default_amount"
-                           attrs="{'readonly': [('state', '!=', 'draft')]}"
-                           />
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <h3>
+                        <field name="name"
+                            attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                        </h3>
+                    </group>
                     <notebook colspan="4">
                         <page string="Taxes">
                             <group string="Sales taxes" col="4" colspan="4">
                                 <field name="sale_line_ids" height="200" 
-                                       nolabel="1" colspan="4"
-                                       context="{'tax_real_name': 1}"
-                                       />
+                                    nolabel="1" colspan="4"
+                                    />
                                 <button name="add_lines"
-                                        type="object"
-                                        string="Add sale taxes"
-                                        context="{'type_tax_use': 'sale'}"
-                                        states="draft"/>
+                                    type="object"
+                                    string="Add sale taxes"
+                                    context="{'type_tax_use': 'sale'}"
+                                    states="draft"/>
                                 <button name="set_defaults"
-                                        string="Replace sales tax defaults"
-                                        type="object"
-                                        context="{'type_tax_use': 'sale'}"
-                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_defaults', '!=', False)]}"
-                                        />
+                                    string="Replace sales tax defaults"
+                                    type="object"
+                                    context="{'type_tax_use': 'sale'}"
+                                    attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_defaults', '!=', False)]}"
+                                    />
                                 <button name="set_inactive"
-                                        string="Set legacy sales taxes inactive"
-                                        type="object"
-                                        context="{'type_tax_use': 'sale'}"
-                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_inactive', '!=', False)]}"
-                                        />
+                                    string="Set legacy sales taxes inactive"
+                                    type="object"
+                                    context="{'type_tax_use': 'sale'}"
+                                    attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('sale_set_inactive', '!=', False)]}"
+                                    />
                             </group>
                             <group string="Purchase taxes" col="4" colspan="4">
                                 <field name="purchase_line_ids"
-                                       nolabel="1" colspan="4" height="200"
-                                       context="{'tax_real_name': 1}"
-                                       />
+                                    nolabel="1" colspan="4" height="200"
+                                    />
                                 <button name="add_lines"
-                                        type="object"
-                                        string="Add purchase taxes"
-                                        context="{'type_tax_use': 'purchase'}"
-                                        states="draft"/>
+                                    type="object"
+                                    string="Add purchase taxes"
+                                    context="{'type_tax_use': 'purchase'}"
+                                    states="draft"/>
                                 <button name="set_defaults"
-                                        string="Replace purchase tax defaults"
-                                        type="object"
-                                        context="{'type_tax_use': 'purchase'}"
-                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_defaults', '!=', False)]}"
-                                        />
-                                
+                                    string="Replace purchase tax defaults"
+                                    type="object"
+                                    context="{'type_tax_use': 'purchase'}"
+                                    attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_defaults', '!=', False)]}"
+                                    />
+
                                 <button name="set_inactive"
-                                        string="Set legacy purchase taxes inactive"
-                                        type="object"
-                                        attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_inactive', '!=', False)]}"
-                                        context="{'type_tax_use': 'purchase'}"
-                                        />
+                                    string="Set legacy purchase taxes inactive"
+                                    type="object"
+                                    attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('purchase_set_inactive', '!=', False)]}"
+                                    context="{'type_tax_use': 'purchase'}"
+                                    />
                             </group>
                             <field name="purchase_set_inactive" invisible="1"/>
                             <field name="sale_set_inactive" invisible="1"/>
@@ -76,11 +73,11 @@
                         </page>
                     </notebook>
                     <button name="confirm"
-                            string="Create tax mappings"
-                            states="draft"
-                            type="object"
-                            help="When you are done configuring the new tax amounts, click here to create the new taxes and a mapping between the new and old taxes"
-                            />
+                        string="Create tax mappings"
+                        states="draft"
+                        type="object"
+                        help="When you are done configuring the new tax amounts, click here to create the new taxes and a mapping between the new and old taxes"
+                        />
                 </form>  
             </field>
         </record>
@@ -110,7 +107,7 @@
         </record>
 
         <menuitem id="menu_update_tax_config"
-                  parent="account.next_id_27" name="Update tax wizard"
+                  parent="account.account_account_menu" name="Update tax wizard"
                   action="action_update_tax_config"
                   sequence="45"/>
 
