@@ -277,19 +277,15 @@ class UpdateTaxConfig(models.Model):
         tax_model = self.env['account.tax']
         tax_ids = tax_model.search(
             [('id', 'in', [x.source_tax_id.id for x in tax_lines])])
-        tax_ids.write(
-             {'active': False})
+        tax_ids.write({'active': False})
         log = (self.log or '') + (
             "\n*** %s: Setting %s %s taxes inactive\n" % (
                 fields.Datetime.now(),
                 len(tax_ids),
                 self.env.context['type_tax_use']))
         self.write(
-            {
-             'log': log,
-             '%s_set_inactive' % self.env.context['type_tax_use']: True
-            })
-
+            {'log': log,
+             '%s_set_inactive' % self.env.context['type_tax_use']: True})
         return {
             'name': self._description,
             'view_type': 'form',
