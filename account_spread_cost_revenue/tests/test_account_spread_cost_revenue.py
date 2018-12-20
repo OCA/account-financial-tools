@@ -1,17 +1,17 @@
 # Copyright 2018 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import time
+import datetime
 
 from psycopg2 import IntegrityError
 
 from odoo.tools import convert_file, mute_logger
 from odoo.modules.module import get_module_resource
 from odoo.exceptions import ValidationError
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.tests import common
 
 
-class TestAccountSpreadCostRevenue(AccountingTestCase):
+class TestAccountSpreadCostRevenue(common.TransactionCase):
 
     def _load(self, module, *args):
         convert_file(
@@ -65,7 +65,7 @@ class TestAccountSpreadCostRevenue(AccountingTestCase):
         self.assertEqual(spread.unposted_amount, 0.)
         self.assertEqual(spread.total_amount, 0.)
         self.assertEqual(spread.estimated_amount, 0.)
-        self.assertEqual(spread.spread_date, time.strftime('%Y-01-01'))
+        self.assertEqual(spread.spread_date, datetime.date(2018, 1, 1))
         self.assertTrue(spread.journal_id)
         self.assertEqual(spread.journal_id.type, 'general')
 
