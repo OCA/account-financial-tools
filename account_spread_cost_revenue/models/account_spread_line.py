@@ -75,8 +75,8 @@ class AccountInvoiceSpreadLine(models.Model):
         company_currency = spread.company_id.currency_id
         current_currency = spread.currency_id
         not_same_curr = company_currency != current_currency
-        amount = current_currency.with_context(date=spread_date).compute(
-            self.amount, company_currency)
+        amount = current_currency._convert(
+            self.amount, company_currency, spread.company_id, spread_date)
 
         line_ids = [(0, 0, {
             'name': spread.name.split('\n')[0][:64],

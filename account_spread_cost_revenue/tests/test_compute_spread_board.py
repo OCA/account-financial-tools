@@ -1,11 +1,13 @@
 # Copyright 2017-2018 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+import datetime
+
+from odoo.tests import common
 from odoo.exceptions import UserError
 
 
-class TestComputeSpreadBoard(AccountingTestCase):
+class TestComputeSpreadBoard(common.TransactionCase):
 
     def setUp(self):
         super().setUp()
@@ -71,18 +73,18 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(83.33, spread_lines[10].amount)
         self.assertEqual(83.37, spread_lines[11].amount)
 
-        self.assertEqual('2017-02-28', spread_lines[0].date)
-        self.assertEqual('2017-03-31', spread_lines[1].date)
-        self.assertEqual('2017-04-30', spread_lines[2].date)
-        self.assertEqual('2017-05-31', spread_lines[3].date)
-        self.assertEqual('2017-06-30', spread_lines[4].date)
-        self.assertEqual('2017-07-31', spread_lines[5].date)
-        self.assertEqual('2017-08-31', spread_lines[6].date)
-        self.assertEqual('2017-09-30', spread_lines[7].date)
-        self.assertEqual('2017-10-31', spread_lines[8].date)
-        self.assertEqual('2017-11-30', spread_lines[9].date)
-        self.assertEqual('2017-12-31', spread_lines[10].date)
-        self.assertEqual('2018-01-31', spread_lines[11].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[10].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[11].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -105,7 +107,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07'
+            'spread_date': datetime.date(2017, 1, 7)
         })
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
@@ -128,19 +130,19 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(16.17, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[10].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[11].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[12].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -157,7 +159,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-31',
+            'spread_date': datetime.date(2017, 1, 31),
             'move_line_auto_post': False
         })
 
@@ -178,19 +180,19 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(80.68, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[10].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[11].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[12].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -225,19 +227,19 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(80.68, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[10].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[11].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[12].date)
 
     def test_04_supplier_invoice(self):
         self.spread.write({
@@ -245,7 +247,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
             'debit_account_id': self.spread_account.id,
             'period_number': 3,
             'period_type': 'year',
-            'spread_date': '2018-10-24'
+            'spread_date': datetime.date(2018, 10, 24)
         })
 
         # change the state of invoice to open by clicking Validate button
@@ -274,7 +276,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-02-01'
+            'spread_date': datetime.date(2017, 2, 1)
         })
 
         self.spread.compute_spread_board()
@@ -345,7 +347,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 3,
             'period_type': 'month',
-            'spread_date': '2017-01-01',
+            'spread_date': datetime.date(2017, 1, 1),
             'estimated_amount': 345.96,
         })
 
@@ -355,9 +357,9 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(115.32, spread_lines[0].amount)
         self.assertEqual(115.32, spread_lines[1].amount)
         self.assertEqual(115.32, spread_lines[2].amount)
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -370,7 +372,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-02-01'
+            'spread_date': datetime.date(2017, 2, 1)
         })
 
         self.spread.compute_spread_board()
@@ -386,7 +388,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-02-01'
+            'spread_date': datetime.date(2017, 2, 1)
         })
 
         self.spread.compute_spread_board()
@@ -490,7 +492,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
             'estimated_amount': -1000.0,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07'
+            'spread_date': datetime.date(2017, 1, 7)
         })
         with self.assertRaises(UserError):
             self.spread.compute_spread_board()
@@ -536,7 +538,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.spread.write({
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07'
+            'spread_date': datetime.date(2017, 1, 7)
         })
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
@@ -579,19 +581,19 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(83.33, spread_lines[11].amount)
         self.assertEqual(16.17, spread_lines[12].amount)
 
-        self.assertEqual('2017-01-31', spread_lines[0].date)
-        self.assertEqual('2017-02-28', spread_lines[1].date)
-        self.assertEqual('2017-03-31', spread_lines[2].date)
-        self.assertEqual('2017-04-30', spread_lines[3].date)
-        self.assertEqual('2017-05-31', spread_lines[4].date)
-        self.assertEqual('2017-06-30', spread_lines[5].date)
-        self.assertEqual('2017-07-31', spread_lines[6].date)
-        self.assertEqual('2017-08-31', spread_lines[7].date)
-        self.assertEqual('2017-09-30', spread_lines[8].date)
-        self.assertEqual('2017-10-31', spread_lines[9].date)
-        self.assertEqual('2017-11-30', spread_lines[10].date)
-        self.assertEqual('2017-12-31', spread_lines[11].date)
-        self.assertEqual('2018-01-31', spread_lines[12].date)
+        self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
+        self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
+        self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
+        self.assertEqual(datetime.date(2017, 4, 30), spread_lines[3].date)
+        self.assertEqual(datetime.date(2017, 5, 31), spread_lines[4].date)
+        self.assertEqual(datetime.date(2017, 6, 30), spread_lines[5].date)
+        self.assertEqual(datetime.date(2017, 7, 31), spread_lines[6].date)
+        self.assertEqual(datetime.date(2017, 8, 31), spread_lines[7].date)
+        self.assertEqual(datetime.date(2017, 9, 30), spread_lines[8].date)
+        self.assertEqual(datetime.date(2017, 10, 31), spread_lines[9].date)
+        self.assertEqual(datetime.date(2017, 11, 30), spread_lines[10].date)
+        self.assertEqual(datetime.date(2017, 12, 31), spread_lines[11].date)
+        self.assertEqual(datetime.date(2018, 1, 31), spread_lines[12].date)
 
         self.assertAlmostEqual(self.spread.unspread_amount, 682.81)
         self.assertAlmostEqual(self.spread.unposted_amount, 682.81)
