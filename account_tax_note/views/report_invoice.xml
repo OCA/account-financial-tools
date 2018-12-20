@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+                <t t-foreach="o._get_notes_by_tax()" t-as="tax_note">
+                    <tr><td><span t-esc="tax_note[1]"/></td></tr>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

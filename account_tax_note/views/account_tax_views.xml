@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2018 Eficent Business and IT Consulting Services, S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_tax_form" model="ir.ui.view">
+        <field name="name">account.tax.form</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="note" string="Note">
+                    <field name="note" nolabel="1"/>
+                </page>
+            </notebook>
+          </field>
+    </record>
+
+    <record id="view_account_tax_template_form" model="ir.ui.view">
+        <field name="name">account.tax.template.form</field>
+        <field name="model">account.tax.template</field>
+        <field name="inherit_id" ref="account.view_account_tax_template_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="note" string="Note">
+                    <field name="note" nolabel="1"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
