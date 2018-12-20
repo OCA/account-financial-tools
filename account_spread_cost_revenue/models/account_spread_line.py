@@ -34,7 +34,10 @@ class AccountInvoiceSpreadLine(models.Model):
 
             if created_moves:
                 post_msg = _("Created move(s) ")
-                post_msg += ", ".join(str(id) for id in created_moves.ids)
+                post_msg += ", ".join(
+                    '<a href=# data-oe-model=account.move data-oe-id=%d'
+                    '>%s</a>' % (move.id, move.name)
+                    for move in created_moves)
                 spread.message_post(body=post_msg)
 
             spread._reconcile_spread_moves(created_moves)
