@@ -27,6 +27,15 @@ class AccountSpreadTemplate(models.Model):
         'account.account',
         string='Spread Balance Sheet Account',
         required=True)
+    period_number = fields.Integer(
+        string='Number of Repetitions',
+        help="Define the number of spread lines")
+    period_type = fields.Selection([
+        ('month', 'Month'),
+        ('quarter', 'Quarter'),
+        ('year', 'Year')],
+        help="Period length for the entries")
+    start_date = fields.Date()
 
     @api.model
     def default_get(self, fields):
@@ -73,6 +82,13 @@ class AccountSpreadTemplate(models.Model):
         else:
             invoice_type = 'in_invoice'
             spread_vals['credit_account_id'] = self.spread_account_id.id
+
+        if self.period_number:
+            spread_vals['period_number'] = self.period_number
+        if self.period_type:
+            spread_vals['period_type'] = self.period_type
+        if self.start_date:
+            spread_vals['spread_date'] = self.start_date
 
         spread_vals['invoice_type'] = invoice_type
         return spread_vals
