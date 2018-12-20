@@ -148,8 +148,8 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual(self.spread.unspread_amount, 1000.0)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
-        spread_lines.create_and_reconcile_moves()
-        for line in spread_lines:
+        self.spread.line_ids.create_and_reconcile_moves()
+        for line in self.spread.line_ids:
             self.assertTrue(line.move_id)
 
     def test_03_supplier_invoice(self):
@@ -190,6 +190,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual('2017-10-31', spread_lines[9].date)
         self.assertEqual('2017-11-30', spread_lines[10].date)
         self.assertEqual('2017-12-31', spread_lines[11].date)
+        self.assertEqual('2018-01-31', spread_lines[12].date)
 
         for line in spread_lines:
             self.assertFalse(line.move_id)
@@ -203,6 +204,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertTrue(any(line.move_id for line in spread_lines))
         self.assertTrue(any(not line.move_id for line in spread_lines))
 
+        self.spread._compute_amounts()
         self.assertEqual(self.spread.unspread_amount, 830.65)
         self.assertEqual(self.spread.unposted_amount, 1000.0)
 
@@ -235,6 +237,7 @@ class TestComputeSpreadBoard(AccountingTestCase):
         self.assertEqual('2017-10-31', spread_lines[9].date)
         self.assertEqual('2017-11-30', spread_lines[10].date)
         self.assertEqual('2017-12-31', spread_lines[11].date)
+        self.assertEqual('2018-01-31', spread_lines[12].date)
 
     def test_04_supplier_invoice(self):
         self.spread.write({

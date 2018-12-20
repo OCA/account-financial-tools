@@ -75,7 +75,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
         })
 
         self.invoice_2 = self.env['account.invoice'].with_context(
-            default_type='in_invoice'
+            default_type='out_invoice'
         ).create({
             'partner_id': partner.id,
             'account_id': self.invoice_account.id,
@@ -168,14 +168,18 @@ class TestAccountInvoiceSpread(AccountingTestCase):
         self.assertFalse(wizard1.spread_id)
         self.assertEqual(wizard1.company_id, my_company)
         self.assertEqual(wizard1.spread_action_type, 'link')
-        self.assertTrue(wizard1.spread_account_id)
-        self.assertTrue(wizard1.spread_journal_id)
-        self.assertEqual(wizard1.spread_account_id, account_payable)
-        self.assertEqual(wizard1.spread_journal_id.id, exp_journal)
+        self.assertFalse(wizard1.spread_account_id)
+        self.assertFalse(wizard1.spread_journal_id)
 
         res_onchange = wizard1.onchange_invoice_type()
         self.assertTrue(res_onchange)
         self.assertTrue(res_onchange.get('domain'))
+
+        wizard1._onchange_spread_journal_account()
+        self.assertTrue(wizard1.spread_account_id)
+        self.assertTrue(wizard1.spread_journal_id)
+        self.assertEqual(wizard1.spread_account_id, account_payable)
+        self.assertEqual(wizard1.spread_journal_id.id, exp_journal)
 
         wizard2 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line_2.id,
@@ -188,14 +192,18 @@ class TestAccountInvoiceSpread(AccountingTestCase):
         self.assertFalse(wizard2.spread_id)
         self.assertEqual(wizard2.company_id, my_company)
         self.assertEqual(wizard2.spread_action_type, 'link')
-        self.assertTrue(wizard2.spread_account_id)
-        self.assertTrue(wizard2.spread_journal_id)
-        self.assertEqual(wizard2.spread_account_id, account_revenue)
-        self.assertEqual(wizard2.spread_journal_id.id, sales_journal)
+        self.assertFalse(wizard2.spread_account_id)
+        self.assertFalse(wizard2.spread_journal_id)
 
         res_onchange = wizard2.onchange_invoice_type()
         self.assertTrue(res_onchange)
         self.assertTrue(res_onchange.get('domain'))
+
+        wizard2._onchange_spread_journal_account()
+        self.assertTrue(wizard2.spread_account_id)
+        self.assertTrue(wizard2.spread_journal_id)
+        self.assertEqual(wizard2.spread_account_id, account_revenue)
+        self.assertEqual(wizard2.spread_journal_id.id, sales_journal)
 
     def test_03_link_invoice_line_with_spread_sheet(self):
 
@@ -265,10 +273,13 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             default_company_id=my_company.id,
         ).create({
             'spread_action_type': 'new',
+        })
+        self.assertEqual(wizard1.spread_action_type, 'new')
+
+        wizard1.write({
             'spread_account_id': spread_account.id,
             'spread_journal_id': spread_journal_id,
         })
-        self.assertEqual(wizard1.spread_action_type, 'new')
 
         res_action = wizard1.confirm()
         self.assertTrue(isinstance(res_action, dict))
@@ -296,10 +307,13 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             default_company_id=my_company.id,
         ).create({
             'spread_action_type': 'new',
+        })
+        self.assertEqual(wizard2.spread_action_type, 'new')
+
+        wizard2.write({
             'spread_account_id': spread_account.id,
             'spread_journal_id': spread_journal_id,
         })
-        self.assertEqual(wizard2.spread_action_type, 'new')
 
         res_action = wizard2.confirm()
         self.assertTrue(isinstance(res_action, dict))
@@ -370,10 +384,13 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             default_company_id=my_company.id,
         ).create({
             'spread_action_type': 'new',
+        })
+        self.assertEqual(wizard2.spread_action_type, 'new')
+
+        wizard2.write({
             'spread_account_id': spread_account.id,
             'spread_journal_id': spread_journal_id,
         })
-        self.assertEqual(wizard2.spread_action_type, 'new')
 
         res_action = wizard2.confirm()
         self.assertTrue(isinstance(res_action, dict))

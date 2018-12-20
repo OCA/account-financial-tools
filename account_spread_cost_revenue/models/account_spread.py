@@ -153,7 +153,9 @@ class AccountSpread(models.Model):
                 'invoice_line_ids': [(6, 0, [invoice_line.id])],
             })
 
-    @api.multi
+    @api.depends(
+        'estimated_amount', 'invoice_line_id.price_subtotal',
+        'line_ids.move_id.amount', 'line_ids.move_id.state')
     def _compute_amounts(self):
         for spread in self:
             moves_amount = 0.0

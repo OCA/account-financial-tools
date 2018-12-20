@@ -22,11 +22,13 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         ('in_invoice', 'Vendor Bill'),
         ('out_refund', 'Customer Credit Note'),
         ('in_refund', 'Vendor Credit Note')],
-        compute='_compute_invoice_type')
+        compute='_compute_invoice_type',
+        store=True)
     spread_type = fields.Selection([
         ('sale', 'Customer'),
         ('purchase', 'Supplier')],
-        compute='_compute_invoice_type')
+        compute='_compute_invoice_type',
+        store=True)
     spread_id = fields.Many2one(
         'account.spread',
         string='Spread Board')
@@ -45,14 +47,10 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
     spread_account_id = fields.Many2one(
         'account.account',
         string='Balance sheet account / Spread account',
-        compute='_compute_spread_journal_account',
-        inverse='_inverse_spread_journal_account',
         store=True)
     spread_journal_id = fields.Many2one(
         'account.journal',
         string='Spread Journal',
-        compute='_compute_spread_journal_account',
-        inverse='_inverse_spread_journal_account',
         store=True)
 
     @api.depends('invoice_line_id')
@@ -65,8 +63,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
             else:
                 wizard.spread_type = 'purchase'
 
-    @api.depends('company_id', 'invoice_type')
-    def _compute_spread_journal_account(self):
+    @api.onchange('company_id', 'invoice_type')
+    def _onchange_spread_journal_account(self):
         for wizard in self:
             company = wizard.company_id
             acc_revenue = company.default_spread_revenue_account_id
