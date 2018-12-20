@@ -259,11 +259,11 @@ class AccountSpread(models.Model):
         if posted_line_ids:
             # if we already have some previous validated entries,
             # starting date is last entry + method period
-            last_date = fields.Date.from_string(posted_line_ids[-1].date)
+            last_date = posted_line_ids[-1].date
             months = self._compute_spread_period_duration()
             spread_date = last_date + relativedelta(months=months)
         else:
-            spread_date = fields.Date.from_string(self.spread_date)
+            spread_date = self.spread_date
         return spread_date
 
     @api.multi
@@ -338,7 +338,7 @@ class AccountSpread(models.Model):
 
     @staticmethod
     def _get_last_day_of_month(spread_date):
-        return fields.Date.to_string(spread_date + relativedelta(day=31))
+        return spread_date + relativedelta(day=31)
 
     @api.multi
     def _compute_board_amount(self, sequence, amount, number_of_periods):
@@ -348,7 +348,7 @@ class AccountSpread(models.Model):
         if sequence != number_of_periods:
             amount = amount_to_spread / self.period_number
             if sequence == 1:
-                date = fields.Datetime.from_string(self.spread_date)
+                date = self.spread_date
                 month_days = calendar.monthrange(date.year, date.month)[1]
                 days = month_days - date.day + 1
                 period = self.period_number

@@ -1,13 +1,15 @@
 # Copyright 2018 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import datetime
+
 from odoo.tools import convert_file
 from odoo.modules.module import get_module_resource
 from odoo.exceptions import UserError, ValidationError
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.tests import common
 
 
-class TestAccountInvoiceSpread(AccountingTestCase):
+class TestAccountInvoiceSpread(common.TransactionCase):
 
     def _load(self, module, *args):
         convert_file(
@@ -41,9 +43,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'name': 'Partner Name',
             'supplier': True,
         })
-        self.invoice = self.env['account.invoice'].with_context(
-            default_type='in_invoice'
-        ).create({
+        self.invoice = self.env['account.invoice'].create({
             'partner_id': partner.id,
             'account_id': self.invoice_account.id,
             'type': 'in_invoice',
@@ -60,23 +60,23 @@ class TestAccountInvoiceSpread(AccountingTestCase):
         self.analytic_account = self.env['account.analytic.account'].create({
             'name': 'test account',
         })
-        self.spread = self.env['account.spread'].create({
+        self.spread = self.env['account.spread'].with_context(
+            mail_create_nosubscribe=True
+        ).create([{
             'name': 'test',
             'debit_account_id': self.spread_account.id,
             'credit_account_id': self.invoice_line_account.id,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-02-01',
+            'spread_date': datetime.date(2017, 2, 1),
             'estimated_amount': 1000.0,
             'journal_id': self.invoice.journal_id.id,
             'invoice_type': 'in_invoice',
             'account_analytic_id': self.analytic_account.id,
             'analytic_tag_ids': analytic_tags,
-        })
+        }])
 
-        self.invoice_2 = self.env['account.invoice'].with_context(
-            default_type='out_invoice'
-        ).create({
+        self.invoice_2 = self.env['account.invoice'].create({
             'partner_id': partner.id,
             'account_id': self.invoice_account.id,
             'type': 'out_invoice',
@@ -88,17 +88,17 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'name': 'product that cost 1000',
             'account_id': self.invoice_line_account.id,
         })
-        self.spread2 = self.env['account.spread'].create({
+        self.spread2 = self.env['account.spread'].create([{
             'name': 'test2',
             'debit_account_id': self.spread_account.id,
             'credit_account_id': self.invoice_line_account.id,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-02-01',
+            'spread_date': datetime.date(2017, 2, 1),
             'estimated_amount': 1000.0,
             'journal_id': self.invoice_2.journal_id.id,
             'invoice_type': 'out_invoice',
-        })
+        }])
 
     def test_01_wizard_defaults(self):
         my_company = self.env.user.company_id
@@ -475,7 +475,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'estimated_amount': 1000.0,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07',
+            'spread_date': datetime.date(2017, 1, 7),
             'invoice_line_id': self.invoice_line.id,
             'move_line_auto_post': False,
         })
@@ -535,7 +535,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'estimated_amount': 1000.0,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07',
+            'spread_date': datetime.date(2017, 1, 7),
             'invoice_line_id': self.invoice_line.id,
             'move_line_auto_post': False,
         })
@@ -596,7 +596,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'estimated_amount': 1000.0,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07',
+            'spread_date': datetime.date(2017, 1, 7),
             'invoice_line_id': self.invoice_line_2.id,
             'move_line_auto_post': False,
         })
@@ -658,7 +658,7 @@ class TestAccountInvoiceSpread(AccountingTestCase):
             'estimated_amount': 1000.0,
             'period_number': 12,
             'period_type': 'month',
-            'spread_date': '2017-01-07',
+            'spread_date': datetime.date(2017, 1, 7),
         })
 
         self.spread2.compute_spread_board()
