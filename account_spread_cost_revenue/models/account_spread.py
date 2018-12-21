@@ -114,6 +114,9 @@ class AccountSpread(models.Model):
         'account.analytic.tag',
         string='Analytic Tags')
     move_line_auto_post = fields.Boolean('Auto-post lines', default=True)
+    display_create_all_moves = fields.Boolean(
+        compute='_compute_display_create_all_moves',
+        string='Display Button All Moves')
 
     @api.model
     def default_get(self, fields):
@@ -172,6 +175,14 @@ class AccountSpread(models.Model):
             spread.unposted_amount = total_amount - posted_amount
             spread.posted_amount = posted_amount
             spread.total_amount = total_amount
+
+    @api.multi
+    def _compute_display_create_all_moves(self):
+        for spread in self:
+            if any(not line.move_id for line in spread.line_ids):
+                spread.display_create_all_moves = True
+            else:
+                spread.display_create_all_moves = False
 
     @api.multi
     def _get_spread_entry_name(self, seq):
@@ -409,8 +420,7 @@ class AccountSpread(models.Model):
             spread_mls = spread.line_ids.mapped('move_id.line_ids')
             spread_mls.remove_move_reconcile()
             inv_link = '<a href=# data-oe-model=account.invoice ' \
-                            'data-oe-id=%d>%s</a>' % (
-                spread.invoice_id.id, _("Invoice"))
+                'data-oe-id=%d>%s</a>' % (spread.invoice_id.id, _("Invoice"))
             msg_body = _("Unlinked invoice line '%s' (view %s).") % (
                 spread.invoice_line_id.name, inv_link)
             spread.message_post(body=msg_body)
@@ -476,6 +486,13 @@ class AccountSpread(models.Model):
             do_reconcile = spread_mls + to_be_reconciled
             do_reconcile.remove_move_reconcile()
             do_reconcile.reconcile()
+
+    @api.multi
+    def create_all_moves(self):
+        for spread in self:
+            for line in spread.line_ids:
+                if not line.move_id:
+                    line.create_move()
 
     @api.multi
     def _compute_deprecated_accounts(self):
