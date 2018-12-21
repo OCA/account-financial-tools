@@ -107,6 +107,9 @@
                                 <group name="extension_left">
                                 </group>
                                 <group name="extension_right">
+                                    <field name="display_create_all_moves" invisible="1"/>
+                                    <button name="create_all_moves" string="Create All Moves" type="object"
+                                            icon="fa-play" attrs="{'invisible':[('display_create_all_moves','!=',True)]}"/>
                                     <field name="unspread_amount" attrs="{'invisible': [('unspread_amount', '=', 0)]}" />
                                     <field name="unposted_amount" attrs="{'invisible': [('unposted_amount', '=', 0)]}" />
                                     <field name="posted_amount" attrs="{'invisible': [('posted_amount', '=', 0)]}" />
