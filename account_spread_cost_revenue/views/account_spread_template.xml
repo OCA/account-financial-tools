@@ -16,6 +16,9 @@
                         <group>
                             <field name="spread_type"/>
                             <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="period_number"/>
+                            <field name="period_type"/>
+                            <field name="start_date"/>
                         </group>
                         <group>
                             <field name="spread_account_id" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"/>

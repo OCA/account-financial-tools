@@ -8,10 +8,10 @@ from psycopg2 import IntegrityError
 from odoo.tools import convert_file, mute_logger
 from odoo.modules.module import get_module_resource
 from odoo.exceptions import ValidationError
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.tests import common
 
 
-class TestAccountSpreadCostRevenue(AccountingTestCase):
+class TestAccountSpreadCostRevenue(common.TransactionCase):
 
     def _load(self, module, *args):
         convert_file(

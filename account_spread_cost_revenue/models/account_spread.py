@@ -114,6 +114,9 @@ class AccountSpread(models.Model):
         'account.analytic.tag',
         string='Analytic Tags')
     move_line_auto_post = fields.Boolean('Auto-post lines', default=True)
+    display_create_all_moves = fields.Boolean(
+        compute='_compute_display_create_all_moves',
+        string='Display Button All Moves')
 
     @api.model
     def default_get(self, fields):
@@ -174,6 +177,14 @@ class AccountSpread(models.Model):
             spread.total_amount = total_amount
 
     @api.multi
+    def _compute_display_create_all_moves(self):
+        for spread in self:
+            if any(not line.move_id for line in spread.line_ids):
+                spread.display_create_all_moves = True
+            else:
+                spread.display_create_all_moves = False
+
+    @api.multi
     def _get_spread_entry_name(self, seq):
         """Use this method to customise the name of the accounting entry."""
         self.ensure_one()
@@ -188,6 +199,12 @@ class AccountSpread(models.Model):
             else:
                 if self.invoice_type in ['out_invoice', 'out_refund']:
                     self.invoice_type = 'in_invoice'
+            if self.template_id.period_number:
+                self.period_number = self.template_id.period_number
+            if self.template_id.period_type:
+                self.period_type = self.template_id.period_type
+            if self.template_id.start_date:
+                self.spread_date = self.template_id.start_date
 
     @api.onchange('invoice_type', 'company_id')
     def onchange_invoice_type(self):
@@ -326,7 +343,11 @@ class AccountSpread(models.Model):
                 spread_date = self._next_line_date(month_day, spread_date)
 
         self.write({'line_ids': commands})
-        self.message_post(body=_("Spread table created."))
+        invoice_type_selection = dict(self.fields_get(
+            allfields=['invoice_type']
+        )['invoice_type']['selection'])[self.invoice_type]
+        msg_body = _("Spread table '%s' created.") % invoice_type_selection
+        self.message_post(body=msg_body)
 
     @api.multi
     def _get_number_of_periods(self, month_day):
@@ -398,7 +419,27 @@ class AccountSpread(models.Model):
         for spread in self:
             spread_mls = spread.line_ids.mapped('move_id.line_ids')
             spread_mls.remove_move_reconcile()
+            inv_link = '<a href=# data-oe-model=account.invoice ' \
+                'data-oe-id=%d>%s</a>' % (spread.invoice_id.id, _("Invoice"))
+            msg_body = _("Unlinked invoice line '%s' (view %s).") % (
+                spread.invoice_line_id.name, inv_link)
+            spread.message_post(body=msg_body)
             spread.write({'invoice_line_ids': [(5, 0, 0)]})
+
+    @api.multi
+    def unlink(self):
+        for spread in self:
+            if spread.invoice_line_id:
+                raise UserError(
+                    _('Cannot delete spread(s) that are linked '
+                      'to an invoice line.'))
+            posted_line_ids = self.line_ids.filtered(
+                lambda x: x.move_id.state == 'posted')
+            if posted_line_ids:
+                raise ValidationError(
+                    _('Cannot delete spread(s): there are some '
+                      'posted Journal Entries.'))
+        return super().unlink()
 
     @api.multi
     def reconcile_spread_moves(self):
@@ -445,6 +486,13 @@ class AccountSpread(models.Model):
             do_reconcile = spread_mls + to_be_reconciled
             do_reconcile.remove_move_reconcile()
             do_reconcile.reconcile()
+
+    @api.multi
+    def create_all_moves(self):
+        for spread in self:
+            for line in spread.line_ids:
+                if not line.move_id:
+                    line.create_move()
 
     @api.multi
     def _compute_deprecated_accounts(self):

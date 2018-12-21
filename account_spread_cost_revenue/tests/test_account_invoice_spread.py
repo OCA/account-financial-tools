@@ -4,10 +4,10 @@
 from odoo.tools import convert_file
 from odoo.modules.module import get_module_resource
 from odoo.exceptions import UserError, ValidationError
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.tests import common
 
 
-class TestAccountInvoiceSpread(AccountingTestCase):
+class TestAccountInvoiceSpread(common.TransactionCase):
 
     def _load(self, module, *args):
         convert_file(
@@ -724,3 +724,16 @@ class TestAccountInvoiceSpread(AccountingTestCase):
         self.assertTrue(other_journal)
         with self.assertRaises(ValidationError):
             self.spread2.journal_id = other_journal
+
+    def test_14_create_all_moves(self):
+        self.spread.compute_spread_board()
+        spread_lines = self.spread.line_ids
+        self.assertEqual(len(spread_lines), 12)
+        for line in spread_lines:
+            self.assertFalse(line.move_id)
+
+        # create moves for all the spread lines
+        self.spread.create_all_moves()
+        spread_lines = self.spread.line_ids
+        for line in spread_lines:
+            self.assertTrue(line.move_id)
