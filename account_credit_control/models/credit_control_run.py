@@ -140,8 +140,7 @@ class CreditControlRun(models.Model):
             else:
                 report += _(
                     "Policy \"<b>%s</b>\" has not generated any "
-                    "Credit Control Lines.<br/>" % policy.name
-                )
+                    "Credit Control Lines.<br/>") % policy.name
 
         vals = {'state': 'done',
                 'report': report,
