@@ -4,7 +4,7 @@
         <field name="name">credit.control.run.tree</field>
         <field name="model">credit.control.run</field>
         <field name="arch" type="xml">
-            <tree string="Credit control run">
+            <tree>
                 <field name="date"/>
                 <field name="state"/>
             </tree>

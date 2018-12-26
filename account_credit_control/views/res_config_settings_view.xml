@@ -4,13 +4,14 @@
         <field name="name">res.config.settings.view.form.inherit.credit.control</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="groups_id"
+               eval="[(4, ref('account_credit_control.group_account_credit_control_manager'))]"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@id='invoicing_settings']" position="after">
                 <h2>Credit Control</h2>
                 <div class="row mt16 o_settings_container">
                   <div class="row col-md-6 o_setting_box" id="credit_control_policy"
-                    title="This allows credit control team to chase overdue payments with different means"
-                    groups="account.group_account_user">
+                    title="This allows credit control team to chase overdue payments with different means">
                     <div class="o_setting_left_pane"/>
                     <div class="o_setting_right_pane">
                         <label string="Default Policy"/>
@@ -23,8 +24,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row col-md-6 o_setting_box" id="credit_control_tolerance"
-                      groups="account.group_account_user">
+                  <div class="row col-md-6 o_setting_box" id="credit_control_tolerance">
                       <div class="o_setting_left_pane"/>
                       <div class="o_setting_right_pane">
                           <label string="Default Credit Tolerance"/>

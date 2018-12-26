@@ -122,7 +122,7 @@
         <field name="name">credit.control.line.tree</field>
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
-            <tree editable="bottom" string="Control Credit Lines"
+            <tree editable="bottom"
                   decoration-danger="state in ('error', 'email_error')"
                   decoration-success="state == 'sent'">
                 <field name="date"/>
