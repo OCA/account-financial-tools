@@ -430,7 +430,7 @@ class AccountSpread(models.Model):
             self.invoice_line_id.name, inv_link)
         self.message_post(body=msg_body)
         spread_link = '<a href=# data-oe-model=account.spread ' \
-                   'data-oe-id=%d>%s</a>' % (self.id, _("Spread Board"))
+                      'data-oe-id=%d>%s</a>' % (self.id, _("Spread Board"))
         msg_body = _("Unlinked '%s' (invoice line %s).") % (
             spread_link, self.invoice_line_id.name)
         self.invoice_id.message_post(body=msg_body)
