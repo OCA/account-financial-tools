@@ -102,7 +102,7 @@ class AccountInvoiceSpreadLine(models.Model):
         })]
 
         return {
-            'name': self.spread_id and self.spread_id.name or "/",
+            'name': self.name or "/",
             'ref': self.name,
             'date': spread_date,
             'journal_id': spread.journal_id.id,
