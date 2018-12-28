@@ -419,12 +419,21 @@ class AccountSpread(models.Model):
         for spread in self:
             spread_mls = spread.line_ids.mapped('move_id.line_ids')
             spread_mls.remove_move_reconcile()
-            inv_link = '<a href=# data-oe-model=account.invoice ' \
-                'data-oe-id=%d>%s</a>' % (spread.invoice_id.id, _("Invoice"))
-            msg_body = _("Unlinked invoice line '%s' (view %s).") % (
-                spread.invoice_line_id.name, inv_link)
-            spread.message_post(body=msg_body)
+            spread._message_post_unlink_invoice_line()
             spread.write({'invoice_line_ids': [(5, 0, 0)]})
+
+    def _message_post_unlink_invoice_line(self):
+        self.ensure_one()
+        inv_link = '<a href=# data-oe-model=account.invoice ' \
+                   'data-oe-id=%d>%s</a>' % (self.invoice_id.id, _("Invoice"))
+        msg_body = _("Unlinked invoice line '%s' (view %s).") % (
+            self.invoice_line_id.name, inv_link)
+        self.message_post(body=msg_body)
+        spread_link = '<a href=# data-oe-model=account.spread ' \
+                      'data-oe-id=%d>%s</a>' % (self.id, _("Spread Board"))
+        msg_body = _("Unlinked '%s' (invoice line %s).") % (
+            spread_link, self.invoice_line_id.name)
+        self.invoice_id.message_post(body=msg_body)
 
     @api.multi
     def unlink(self):
@@ -437,7 +446,7 @@ class AccountSpread(models.Model):
                 lambda x: x.move_id.state == 'posted')
             if posted_line_ids:
                 raise ValidationError(
-                    _('Cannot delete spread(s): there are some '
+                    _('Cannot delete spread(s): there are '
                       'posted Journal Entries.'))
         return super().unlink()
 
