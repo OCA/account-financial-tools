@@ -24,6 +24,11 @@ msgid "Companies"
 msgstr "Sociétés"
 
 #. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_date_range_type
+msgid "Date Range Type"
+msgstr ""
+
+#. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
 msgid "Date Range Types"
 msgstr ""
@@ -52,9 +57,4 @@ msgstr ""
 #: code:addons/account_fiscal_year/models/date_range_type.py:22
 #, python-format
 msgid "You cannot delete a date range type with flag \"fiscal_year\""
-msgstr ""
-
-#. module: account_fiscal_year
-#: model:ir.model,name:account_fiscal_year.model_date_range_type
-msgid "date.range.type"
 msgstr ""

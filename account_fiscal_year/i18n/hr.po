@@ -25,6 +25,12 @@ msgid "Companies"
 msgstr "Tvrtke"
 
 #. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "Tipovi raspona datuma"
+
+#. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
 msgid "Date Range Types"
 msgstr "Tipovi raspona datuma"
@@ -55,7 +61,5 @@ msgstr "Je fiskalna godina?"
 msgid "You cannot delete a date range type with flag \"fiscal_year\""
 msgstr "Nije moguće brisanje raspona sa oznakom \"fiskalna_godina\""
 
-#. module: account_fiscal_year
-#: model:ir.model,name:account_fiscal_year.model_date_range_type
-msgid "date.range.type"
-msgstr "date.range.type"
+#~ msgid "date.range.type"
+#~ msgstr "date.range.type"

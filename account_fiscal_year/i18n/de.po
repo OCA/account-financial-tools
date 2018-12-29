@@ -25,6 +25,12 @@ msgid "Companies"
 msgstr "Unternehmen"
 
 #. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "Arten von Zeiträumen"
+
+#. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
 msgid "Date Range Types"
 msgstr "Arten von Zeiträumen"
@@ -56,7 +62,5 @@ msgid "You cannot delete a date range type with flag \"fiscal_year\""
 msgstr ""
 "Sie dürfen eine Zeitraumart mit Kennzeichen \"Geschäftsjahr\" nicht löschen"
 
-#. module: account_fiscal_year
-#: model:ir.model,name:account_fiscal_year.model_date_range_type
-msgid "date.range.type"
-msgstr "date.range.type"
+#~ msgid "date.range.type"
+#~ msgstr "date.range.type"
