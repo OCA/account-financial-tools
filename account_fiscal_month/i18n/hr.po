@@ -25,6 +25,12 @@ msgid "Companies"
 msgstr "Poduzeća"
 
 #. module: account_fiscal_month
+#: model:ir.model,name:account_fiscal_month.model_date_range_type
+#, fuzzy
+msgid "Date Range Type"
+msgstr "date.range.type"
+
+#. module: account_fiscal_month
 #: model:date.range.type,name:account_fiscal_month.date_range_fiscal_month
 msgid "Fiscal month"
 msgstr "Fiskalni mjesec"
@@ -39,8 +45,3 @@ msgstr "Je fiskalni mjesec?"
 #, python-format
 msgid "You can't delete date range type: Fiscal month"
 msgstr "Nije moguće brisanje raspona tipa \"Fiskalni mjesec\""
-
-#. module: account_fiscal_month
-#: model:ir.model,name:account_fiscal_month.model_date_range_type
-msgid "date.range.type"
-msgstr "date.range.type"

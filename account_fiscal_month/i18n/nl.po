@@ -24,6 +24,11 @@ msgid "Companies"
 msgstr "Bedrijven"
 
 #. module: account_fiscal_month
+#: model:ir.model,name:account_fiscal_month.model_date_range_type
+msgid "Date Range Type"
+msgstr ""
+
+#. module: account_fiscal_month
 #: model:date.range.type,name:account_fiscal_month.date_range_fiscal_month
 msgid "Fiscal month"
 msgstr ""
@@ -37,9 +42,4 @@ msgstr ""
 #: code:addons/account_fiscal_month/models/date_range_type.py:20
 #, python-format
 msgid "You can't delete date range type: Fiscal month"
-msgstr ""
-
-#. module: account_fiscal_month
-#: model:ir.model,name:account_fiscal_month.model_date_range_type
-msgid "date.range.type"
 msgstr ""
