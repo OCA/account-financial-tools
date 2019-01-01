@@ -23,7 +23,7 @@ features, for instance:
 Usage
 =====
 
-If you select an entry from Invoicing > Adviser > Journal Entries,
+If you select an entry from Invoicing > Adviser > Accounting Entries > Journal Entries,
 then an action menu 'Reverse Entries' is available. If clicked, then a wizard
 allows user to select Reversal Date, Reversal Journal, Prefix, Post and Reconcile.
 
@@ -33,7 +33,7 @@ allows user to select Reversal Date, Reversal Journal, Prefix, Post and Reconcil
 * If Post and Reconcile are True, then all entry lines with reconciled accounts
   of the entry will be reconciled with the reserval entry ones.
 
-There is also a new menu Invoicing > Adviser > Journal Entries to be Reversed
+There is also a new menu Invoicing > Adviser > Accounting Entries > Journal Entries to be Reversed
 in order to allow tracking entries that must be reserved for any reason.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
@@ -59,6 +59,7 @@ Contributors
 * Sandy Carter (Savoir-faire Linux)
 * Stéphane Bidoul (ACSONE)
 * Antonio Espinosa (Tecnativa)
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
 
 Maintainer
 ----------
