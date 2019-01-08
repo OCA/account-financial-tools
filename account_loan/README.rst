@@ -69,6 +69,7 @@ Contributors
 ------------
 
 * Enric Tobella <etobella@creublanca.es>
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
 
 Do not contact contributors directly about support or help with technical issues.
 
