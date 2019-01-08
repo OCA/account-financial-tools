@@ -390,6 +390,8 @@ class AccountLoan(models.Model):
         """
         lines = self.line_ids.filtered(lambda r: not r.move_ids)
         amount = 0
+        if not lines:
+            return
         final_sequence = min(lines.mapped('sequence'))
         for line in lines.sorted('sequence', reverse=True):
             date = datetime.strptime(
