@@ -49,14 +49,16 @@ class AccountMoveLine(models.Model):
                         COALESCE(SUM(l.credit), 0) AS balance\
                         FROM account_move_line l\
                         WHERE l.account_id = %s AND\
-                        l.date <= %s AND l.id <= %s""") + where_partner + \
-                        ("""GROUP BY l.account_id""") + group_by_partner
+                        (l.date < %s OR (l.date = %s AND l.id <= %s))""") + \
+                        where_partner + ("""GROUP BY l.account_id""") + \
+                        group_by_partner
                     params = (acc_move_line.account_id.id, acc_move_line.date,
-                              acc_move_line.id)
+                              acc_move_line.date, acc_move_line.id)
                     cr.execute(sql, params)
                     bal = cr.fetchone()
                     acc_move_line.outstanding_balance = bal[0]
 
-    outstanding_balance = fields.Monetary(string='Outstanding balance',
+    outstanding_balance = fields.Monetary(
+        string='Outstanding balance',
         currency_field='company_currency_id',
         compute='_compute_outstanding_balance')
