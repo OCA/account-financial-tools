@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_invoice_line_form" model="ir.ui.view">
+      <field name="name">account.invoice.form.add.asset_profile</field>
+      <field name="model">account.invoice.line</field>
+      <field name="inherit_id" ref="account.view_invoice_line_form"/>
+      <field name="arch" type="xml">
+        <field name="account_id" position="before">
+          <field name="asset_id" groups="account.group_account_manager"/>
+          <field name="asset_profile_id" invisible="context.get('type') not in ['in_invoice', 'in_refund']"/>
+        </field>
+      </field>
+    </record>
+
+</odoo>
