@@ -11,7 +11,7 @@
     <field name="model">account.move.reverse</field>
     <field name="arch" type="xml">
         <form string="Create reversal journal entries">
-            <label for="date" string="This will create reversal for all selected entries whether checked 'to be reversed' or not."/>
+            <label for="" string="This will create reversal for all selected entries whether checked 'to be reversed' or not."/>
             <group>
                 <group>
                     <field name="date"/>
