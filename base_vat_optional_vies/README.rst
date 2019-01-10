@@ -19,8 +19,8 @@ VAT ID is valid in its country.
 Configuration
 =============
 
-In order to activate VIES validation, you must set this option in your company:
-Settings > Companies > Your Company > VIES VAT Check
+In order to activate VIES validation, you must set this option in Settings:
+Settings > Account > Verify VAT Numbers
 
 Usage
 =====
@@ -62,6 +62,7 @@ Contributors
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
+* Rodrigo Bonilla <rodrigo.bonilla@factorlibre.com>
 
 Maintainer
 ----------
