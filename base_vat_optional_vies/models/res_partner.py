@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Tecnativa - Antonio Espinosa
 # Copyright 2017 Tecnativa - David Vidal
+# Copyright 2019 FactorLibre - Rodrigo Bonilla
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 from odoo import api, fields, models
 
 
@@ -35,7 +34,7 @@ class ResPartner(models.Model):
             return self.simple_vat_check(country_code, vat_number)
         return res
 
-    @api.constrains('vat')
+    @api.constrains('vat', 'commercial_partner_country_id')
     def check_vat(self):
         for partner in self:
             partner = partner.with_context(vat_partner=partner)
