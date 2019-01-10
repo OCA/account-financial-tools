@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2011 Alexis de Lattre <alexis.delattre@akretion.com>
+     Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+<record id="view_account_move_reverse" model="ir.ui.view">
+    <field name="name">account.move.reverse.form</field>
+    <field name="model">account.move.reverse</field>
+    <field name="arch" type="xml">
+        <form string="Create reversal journal entries">
+            <label string="This will create reversal for all selected entries whether checked 'to be reversed' or not."/>
+            <group>
+                <group>
+                    <field name="date"/>
+                    <field name="journal_id"/>
+                </group>
+                <group>
+                    <field name="move_prefix" />
+                    <field name="line_prefix" />
+                    <field name="reconcile"/>
+                </group>
+            </group>
+
+            <footer>
+                <button name="action_reverse" string="Reverse Entries"
+                    type="object" class="oe_highlight"/>
+                or
+                <button string="Cancel" class="oe_link" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="account.action_view_account_move_reversal" model="ir.actions.act_window">
+    <field name="name">Reverse Entries</field>
+    <field name="res_model">account.move.reverse</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_account_move_reverse"/>
+    <field name="target">new</field>
+    <field name="binding_model_id" ref="account.model_account_move" />
+</record>
+
+</odoo>
