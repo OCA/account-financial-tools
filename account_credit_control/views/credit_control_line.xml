@@ -133,7 +133,8 @@
                   decoration-danger="state in ('error', 'email_error')"
                   decoration-muted="state == 'ignored'"
                   decoration-success="state == 'sent'">
-                <button name="action_sale_order_form" type="object" icon="fa-external-link" class="oe_stat_button"/>
+                <button name="button_credit_control_line_form"
+                        type="object" icon="fa-external-link" class="oe_stat_button"/>
                 <field name="date"/>
                 <field name="date_due"/>
                 <field name="level"/>
