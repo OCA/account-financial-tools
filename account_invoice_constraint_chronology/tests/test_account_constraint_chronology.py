@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime, timedelta
 
@@ -55,7 +53,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
 
     def create_simple_invoice(self, journal_id, date):
         invoice = self.env['account.invoice'].create({
-            'partner_id': self.env.ref('base.res_partner_2').id,
+            'partner_id': self.env.ref('base.user_root').id,
             'account_id': self.account_account.id,
             'type': 'in_invoice',
             'journal_id': journal_id,
@@ -85,7 +83,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
-            invoice_2.action_invoice_open()
+            invoice_2.signal_workflow('invoice_open')
 
     def test_invoice_validate(self):
         journal = self.get_journal_check(True)
@@ -95,13 +93,13 @@ class TestAccountConstraintChronology(common.TransactionCase):
         invoice_1 = self.create_simple_invoice(journal.id, date_tomorrow)
         self.assertTrue((invoice_1.state == 'draft'),
                         "Initial invoice state is not Draft")
-        invoice_1.action_invoice_open()
+        invoice_1.signal_workflow('invoice_open')
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
         invoice_2 = self.create_simple_invoice(journal.id, date)
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
-            invoice_2.action_invoice_open()
+            invoice_2.signal_workflow('invoice_open')
 
     def test_invoice_without_date(self):
         journal = self.get_journal_check(True)
@@ -113,4 +111,4 @@ class TestAccountConstraintChronology(common.TransactionCase):
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
-            invoice_2.action_invoice_open()
+            invoice_2.signal_workflow('invoice_open')

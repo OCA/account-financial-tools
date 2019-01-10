@@ -1,2 +1,2 @@
-import account_invoice
-import account
+from . import account_invoice
+from . import account

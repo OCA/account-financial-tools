@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 {
     "name": "Account Invoice Constraint Chronology",
     "version": "9.0.1.0.0",
-    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
-    "maintainer": "ACSONE SA/NV",
-    "website": "http://www.acsone.eu",
+    "author": "Darbtech, Odoo Community Association (OCA)",
+    "maintainer": "Darbtech",
+    "website": "https://darbtech.net/",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account"],
