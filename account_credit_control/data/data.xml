@@ -3,7 +3,7 @@
     <!--Email template -->
     <record id="email_template_credit_control_base" model="mail.template">
         <field name="name">Credit Control Email</field>
-        <field name="email_from">${object.partner_id.company_id.email or ''}</field>
+        <field name="email_from">${user.company_id.email or ''}</field>
         <field name="subject">Credit Control:
             (${object.current_policy_level.name or 'n/a'})
         </field>
