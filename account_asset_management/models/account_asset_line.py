@@ -1,8 +1,6 @@
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import datetime
-
 from odoo import api, fields, models, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
@@ -103,10 +101,6 @@ class AccountAssetLine(models.Model):
     @api.multi
     def write(self, vals):
         for dl in self:
-            if vals.get('line_date'):
-                if isinstance(vals['line_date'], datetime.date):
-                    vals['line_date'] = fields.Date.to_string(
-                        vals['line_date'])
             line_date = vals.get('line_date') or dl.line_date
             asset_lines = dl.asset_id.depreciation_line_ids
             if list(vals.keys()) == ['move_id'] and not vals['move_id']:
@@ -145,8 +139,9 @@ class AccountAssetLine(models.Model):
                               "after already posted entries."))
                 else:
                     check = asset_lines.filtered(
-                        lambda l: (l.init_entry or l.move_check) and
-                        l.line_date > vals['line_date'] and l != dl)
+                        lambda l: l != dl and
+                        (l.init_entry or l.move_check) and
+                        l.line_date > fields.Date.to_date(vals['line_date']))
                     if check:
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
