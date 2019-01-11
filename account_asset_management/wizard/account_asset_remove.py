@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
-from datetime import datetime
 import logging
 
 from odoo import api, fields, models, _
@@ -236,14 +235,9 @@ class AccountAssetRemove(models.TransientModel):
                 [('asset_id', '=', asset.id), ('type', '=', 'create')])
             last_depr_date = create_dl.line_date
 
-        period_number_days = (
-            datetime.strptime(first_date, '%Y-%m-%d') -
-            datetime.strptime(last_depr_date, '%Y-%m-%d')).days
-        date_remove = datetime.strptime(date_remove, '%Y-%m-%d')
+        period_number_days = (first_date - last_depr_date).days
         new_line_date = date_remove + relativedelta(days=-1)
-        to_depreciate_days = (
-            new_line_date -
-            datetime.strptime(last_depr_date, '%Y-%m-%d')).days
+        to_depreciate_days = (new_line_date - last_depr_date).days
         to_depreciate_amount = round(
             float(to_depreciate_days) / float(period_number_days) *
             first_to_depreciate_dl.amount, digits)
