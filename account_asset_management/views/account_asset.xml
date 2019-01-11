@@ -205,8 +205,8 @@
         <field name="profile_id"/>
         <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
         <group expand="0" string="Group By...">
-          <filter string="Type" domain="" context="{'group_by': 'type'}"/>
-          <filter string="Profile" domain="" context="{'group_by': 'profile_id'}"/>
+          <filter string="Type" name="type" domain="" context="{'group_by': 'type'}"/>
+          <filter string="Profile" name="profile" domain="" context="{'group_by': 'profile_id'}"/>
         </group>
       </search>
     </field>
