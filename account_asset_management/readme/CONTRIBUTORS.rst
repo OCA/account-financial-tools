@@ -5,3 +5,4 @@
 - Stéphane Bidoul (Acsone)
 - Adrien Peiffer (Acsone)
 - Akim Juillerat <akim.juillerat@camptocamp.com>
+- Henrik Norlin (Apps2GROW)
