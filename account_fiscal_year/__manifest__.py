@@ -16,6 +16,7 @@
     'data': [
         'data/date_range_type.xml',
         'views/date_range_type.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': True,
