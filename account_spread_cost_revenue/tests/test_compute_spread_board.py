@@ -14,9 +14,8 @@ class TestComputeSpreadBoard(common.TransactionCase):
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_expenses = self.env.ref('account.data_account_type_expenses')
 
-        journal = self.env['account.journal'].search([
-            ('type', '=', 'general')],
-            limit=1)
+        journal = self.env['account.journal'].create({
+            'name': 'Test', 'type': 'general', 'code': 'test'})
 
         self.receivable_account = self.env['account.account'].create({
             'name': 'test_account_receivable',
