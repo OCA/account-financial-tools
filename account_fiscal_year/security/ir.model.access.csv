@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_date_range_account_manager,Full rights on date.range to Account Manager,date_range.model_date_range,account.group_account_manager,1,1,1,1
+access_date_range_type_account_manager,Full rights on date.range.type to Account Manager,date_range.model_date_range_type,account.group_account_manager,1,1,1,1
