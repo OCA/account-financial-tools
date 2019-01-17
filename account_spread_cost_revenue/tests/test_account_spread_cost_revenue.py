@@ -24,19 +24,25 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         super().setUp()
         self._load('account', 'test', 'account_minimal_test.xml')
 
-        def get_account(obj):
-            return self.env['account.account'].search([
-                ('user_type_id', '=', obj.id)
-            ], limit=1)
-
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_expenses = self.env.ref('account.data_account_type_expenses')
 
-        self.credit_account = get_account(type_receivable)
-        self.debit_account = get_account(type_expenses)
+        self.credit_account = self.env['account.account'].create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': type_receivable.id,
+            'reconcile': True
+        })
+
+        self.debit_account = self.env['account.account'].create({
+            'name': 'test account_expenses',
+            'code': '765',
+            'user_type_id': type_expenses.id,
+            'reconcile': True
+        })
 
     def test_01_account_spread_defaults(self):
-
+        this_year = datetime.date.today().year
         spread = self.env['account.spread'].create({
             'name': 'test',
             'invoice_type': 'out_invoice',
@@ -65,7 +71,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertEqual(spread.unposted_amount, 0.)
         self.assertEqual(spread.total_amount, 0.)
         self.assertEqual(spread.estimated_amount, 0.)
-        self.assertEqual(spread.spread_date, datetime.date(2018, 1, 1))
+        self.assertEqual(spread.spread_date, datetime.date(this_year, 1, 1))
         self.assertTrue(spread.journal_id)
         self.assertEqual(spread.journal_id.type, 'general')
 
