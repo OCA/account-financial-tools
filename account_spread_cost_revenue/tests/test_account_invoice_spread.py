@@ -1,4 +1,4 @@
-# Copyright 2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tools import convert_file
@@ -22,20 +22,37 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_payable = self.env.ref('account.data_account_type_payable')
+        type_revenue = self.env.ref('account.data_account_type_revenue')
 
-        def get_account(obj):
-            return self.env['account.account'].search([
-                ('user_type_id', '=', obj.id),
-                ('reconcile', '=', True),
-            ], limit=1)
+        self.invoice_account = self.env['account.account'].create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': type_receivable.id,
+            'reconcile': True
+        })
 
-        self.invoice_account = get_account(type_receivable)
-        self.invoice_line_account = get_account(type_payable)
+        self.account_payable = self.env['account.account'].create({
+            'name': 'test_account_payable',
+            'code': '321',
+            'user_type_id': type_payable.id,
+            'reconcile': True
+        })
 
-        self.spread_account = self.env['account.account'].search([
-            ('user_type_id', '=', type_payable.id),
-            ('id', '!=', self.invoice_line_account.id)
-        ], limit=1)
+        self.account_revenue = self.env['account.account'].create({
+            'name': 'test_account_revenue',
+            'code': '864',
+            'user_type_id': type_revenue.id,
+            'reconcile': True
+        })
+
+        self.invoice_line_account = self.account_payable
+
+        self.spread_account = self.env['account.account'].create({
+            'name': 'test spread account_payable',
+            'code': '765',
+            'user_type_id': type_payable.id,
+            'reconcile': True
+        })
 
         partner = self.env['res.partner'].create({
             'name': 'Partner Name',
@@ -135,16 +152,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         my_company = self.env.user.company_id
         Wizard = self.env['account.spread.invoice.line.link.wizard']
 
-        account_revenue = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
-        account_payable = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_payable').id)],
-            limit=1)
+        account_revenue = self.account_revenue
+        account_payable = self.account_payable
         exp_journal = self.ref('account_spread_cost_revenue.expenses_journal')
         sales_journal = self.ref('account_spread_cost_revenue.sales_journal')
         my_company.default_spread_revenue_account_id = account_revenue
@@ -215,11 +224,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         ).create({})
         self.assertEqual(wizard1.spread_action_type, 'link')
 
-        wizard1.spread_account_id = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
+        wizard1.spread_account_id = self.account_revenue
         wizard1.spread_journal_id = self.ref(
             'account_spread_cost_revenue.expenses_journal')
         wizard1.spread_id = self.spread
@@ -260,11 +265,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         my_company = self.env.user.company_id
         Wizard = self.env['account.spread.invoice.line.link.wizard']
 
-        spread_account = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
+        spread_account = self.account_revenue
         spread_journal_id = self.ref(
             'account_spread_cost_revenue.expenses_journal')
 
@@ -340,11 +341,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         my_company = self.env.user.company_id
         Wizard = self.env['account.spread.invoice.line.link.wizard']
 
-        spread_account = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_payable').id)],
-            limit=1)
+        spread_account = self.account_payable
         self.assertTrue(spread_account)
         spread_journal_id = self.ref(
             'account_spread_cost_revenue.expenses_journal')

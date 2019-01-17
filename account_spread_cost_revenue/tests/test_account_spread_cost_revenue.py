@@ -1,4 +1,4 @@
-# Copyright 2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import time
@@ -24,16 +24,40 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         super().setUp()
         self._load('account', 'test', 'account_minimal_test.xml')
 
-        def get_account(obj):
-            return self.env['account.account'].search([
-                ('user_type_id', '=', obj.id)
-            ], limit=1)
-
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_expenses = self.env.ref('account.data_account_type_expenses')
+        type_payable = self.env.ref('account.data_account_type_payable')
+        type_revenue = self.env.ref('account.data_account_type_revenue')
 
-        self.credit_account = get_account(type_receivable)
-        self.debit_account = get_account(type_expenses)
+        self.account_receivable = self.env['account.account'].create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': type_receivable.id,
+            'reconcile': True
+        })
+        self.credit_account = self.account_receivable
+
+        self.account_expenses = self.env['account.account'].create({
+            'name': 'test account_expenses',
+            'code': '765',
+            'user_type_id': type_expenses.id,
+            'reconcile': True
+        })
+        self.debit_account = self.account_expenses
+
+        self.account_payable = self.env['account.account'].create({
+            'name': 'test_account_payable',
+            'code': '321',
+            'user_type_id': type_payable.id,
+            'reconcile': True
+        })
+
+        self.account_revenue = self.env['account.account'].create({
+            'name': 'test_account_revenue',
+            'code': '864',
+            'user_type_id': type_revenue.id,
+            'reconcile': True
+        })
 
     def test_01_account_spread_defaults(self):
 
@@ -94,20 +118,11 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
     def test_05_config_settings(self):
         my_company = self.env.user.company_id
 
-        account_revenue = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
-        account_payable = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_payable').id)],
-            limit=1)
+        account_revenue = self.account_revenue
         exp_journal = self.ref('account_spread_cost_revenue.expenses_journal')
         sales_journal = self.ref('account_spread_cost_revenue.sales_journal')
         my_company.default_spread_revenue_account_id = account_revenue
-        my_company.default_spread_expense_account_id = account_payable
+        my_company.default_spread_expense_account_id = self.account_payable
         my_company.default_spread_revenue_journal_id = sales_journal
         my_company.default_spread_expense_journal_id = exp_journal
 
@@ -147,22 +162,16 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
 
         spread.invoice_type = 'in_invoice'
         spread.onchange_invoice_type()
-        self.assertEqual(spread.credit_account_id, account_payable)
+        self.assertEqual(spread.credit_account_id, self.account_payable)
         self.assertEqual(spread.journal_id.id, exp_journal)
         self.assertEqual(spread.spread_type, 'purchase')
 
     def test_06_invoice_line_compute_spread_check(self):
-        invoice_account = self.env['account.account'].search([
-            ('user_type_id', '=', self.env.ref(
-                'account.data_account_type_receivable').id)
-        ], limit=1).id
-        invoice_line_account = self.env['account.account'].search([
-            ('user_type_id', '=', self.env.ref(
-                'account.data_account_type_expenses').id)
-        ], limit=1).id
+        invoice_account = self.account_receivable
+        invoice_line_account = self.account_expenses
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_2').id,
-            'account_id': invoice_account,
+            'account_id': invoice_account.id,
             'type': 'in_invoice',
         })
         invoice_line = self.env['account.invoice.line'].create({
@@ -171,7 +180,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             'price_unit': 100.0,
             'invoice_id': invoice.id,
             'name': 'product that cost 100',
-            'account_id': invoice_line_account,
+            'account_id': invoice_line_account.id,
         })
         invoice_line2 = invoice_line.copy()
 
@@ -197,16 +206,8 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertEqual(invoice_line2.spread_check, 'unavailable')
 
     def test_07_create_spread_template(self):
-        account_revenue = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
-        account_payable = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_payable').id)],
-            limit=1)
+        account_revenue = self.account_revenue
+        account_payable = self.account_payable
         spread_template = self.env['account.spread.template'].create({
             'name': 'test',
             'spread_type': 'sale',
@@ -255,16 +256,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertTrue(spread_vals['debit_account_id'])
 
     def test_08_check_template_invoice_type(self):
-        account_revenue = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_revenue').id)],
-            limit=1)
-        account_payable = self.env['account.account'].search([(
-            'user_type_id',
-            '=',
-            self.env.ref('account.data_account_type_payable').id)],
-            limit=1)
+        account_revenue = self.account_revenue
         template_sale = self.env['account.spread.template'].create({
             'name': 'test',
             'spread_type': 'sale',
@@ -273,7 +265,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         template_purchase = self.env['account.spread.template'].create({
             'name': 'test',
             'spread_type': 'purchase',
-            'spread_account_id': account_payable.id,
+            'spread_account_id': self.account_payable.id,
         })
         spread = self.env['account.spread'].create({
             'name': 'test',
@@ -320,17 +312,11 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertEqual(spread.invoice_type, 'in_invoice')
 
     def test_09_wrong_invoice_type(self):
-        invoice_account = self.env['account.account'].search([
-            ('user_type_id', '=', self.env.ref(
-                'account.data_account_type_receivable').id)
-        ], limit=1).id
-        invoice_line_account = self.env['account.account'].search([
-            ('user_type_id', '=', self.env.ref(
-                'account.data_account_type_expenses').id)
-        ], limit=1).id
+        invoice_account = self.account_receivable
+        invoice_line_account = self.account_expenses
         invoice = self.env['account.invoice'].create({
             'partner_id': self.env.ref('base.res_partner_2').id,
-            'account_id': invoice_account,
+            'account_id': invoice_account.id,
             'type': 'in_invoice',
         })
         invoice_line = self.env['account.invoice.line'].create({
@@ -339,7 +325,7 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
             'price_unit': 100.0,
             'invoice_id': invoice.id,
             'name': 'product that cost 100',
-            'account_id': invoice_line_account,
+            'account_id': invoice_line_account.id,
         })
         spread = self.env['account.spread'].create({
             'name': 'test',
