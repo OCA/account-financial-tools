@@ -14,22 +14,30 @@ class TestComputeSpreadBoard(common.TransactionCase):
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_expenses = self.env.ref('account.data_account_type_expenses')
 
-        def get_account(obj):
-            return self.env['account.account'].search([
-                ('user_type_id', '=', obj.id)
-            ], limit=1)
-
         journal = self.env['account.journal'].search([
             ('type', '=', 'general')],
             limit=1)
 
-        self.receivable_account = get_account(type_receivable)
-        self.expense_account = get_account(type_expenses)
+        self.receivable_account = self.env['account.account'].create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': type_receivable.id,
+            'reconcile': True
+        })
 
-        self.spread_account = self.env['account.account'].search([
-            ('user_type_id', '=', type_expenses.id),
-            ('id', '!=', self.expense_account.id)
-        ], limit=1)
+        self.expense_account = self.env['account.account'].create({
+            'name': 'test account_expenses',
+            'code': '765',
+            'user_type_id': type_expenses.id,
+            'reconcile': True
+        })
+
+        self.spread_account = self.env['account.account'].create({
+            'name': 'test spread account_expenses',
+            'code': '321',
+            'user_type_id': type_expenses.id,
+            'reconcile': True
+        })
 
         self.spread = self.env['account.spread'].create({
             'name': 'test',
