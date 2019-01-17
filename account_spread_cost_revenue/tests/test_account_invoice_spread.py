@@ -25,24 +25,31 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         type_receivable = self.env.ref('account.data_account_type_receivable')
         type_payable = self.env.ref('account.data_account_type_payable')
 
-        def get_account(obj):
-            return self.env['account.account'].search([
-                ('user_type_id', '=', obj.id),
-                ('reconcile', '=', True),
-            ], limit=1)
+        self.invoice_account = self.env['account.account'].create({
+            'name': 'test_account_receivable',
+            'code': '123',
+            'user_type_id': type_receivable.id,
+            'reconcile': True
+        })
 
-        self.invoice_account = get_account(type_receivable)
-        self.invoice_line_account = get_account(type_payable)
+        self.invoice_line_account = self.env['account.account'].create({
+            'name': 'test_account_payable',
+            'code': '321',
+            'user_type_id': type_payable.id,
+            'reconcile': True
+        })
 
-        self.spread_account = self.env['account.account'].search([
-            ('user_type_id', '=', type_payable.id),
-            ('id', '!=', self.invoice_line_account.id)
-        ], limit=1)
+        self.spread_account = self.env['account.account'].create({
+            'name': 'test spread account_payable',
+            'code': '765',
+            'user_type_id': type_payable.id,
+            'reconcile': True
+        })
 
-        partner = self.env['res.partner'].create({
+        partner = self.env['res.partner'].create([{
             'name': 'Partner Name',
             'supplier': True,
-        })
+        }])
         self.invoice = self.env['account.invoice'].create({
             'partner_id': partner.id,
             'account_id': self.invoice_account.id,
