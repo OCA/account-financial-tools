@@ -46,10 +46,10 @@ class TestAccountInvoiceSpread(common.TransactionCase):
             'reconcile': True
         })
 
-        partner = self.env['res.partner'].create([{
+        partner = self.env['res.partner'].create({
             'name': 'Partner Name',
             'supplier': True,
-        }])
+        })
         self.invoice = self.env['account.invoice'].create({
             'partner_id': partner.id,
             'account_id': self.invoice_account.id,
@@ -725,9 +725,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                 self.assertFalse(spread_ml.matched_credit_ids)
                 self.assertFalse(spread_ml.full_reconcile_id)
 
-        other_journal = self.env['account.journal'].search([
-            ('id', '!=', self.invoice_2.journal_id.id),
-        ], limit=1)
+        other_journal = self.env['account.journal'].create({
+            'name': 'Other Journal', 'type': 'general', 'code': 'test2'})
         self.assertTrue(other_journal)
         with self.assertRaises(ValidationError):
             self.spread2.journal_id = other_journal
