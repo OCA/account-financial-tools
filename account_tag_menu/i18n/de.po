@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2018-10-11 10:58+0000\n"
+"PO-Revision-Date: 2019-01-21 16:41+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 3.3\n"
 
 #. module: account_tag_menu
 #: model:ir.model,name:account_tag_menu.model_account_account_tag
@@ -53,34 +53,34 @@ msgstr "Steuern"
 #: model:account.tax,description:account_tag_menu.demo_vatccb_19
 #: model:account.tax,name:account_tag_menu.demo_vatccb_19
 msgid "VAT Colected Cash-Basis TAX 19%"
-msgstr ""
+msgstr "Erhaltene USt. 19% EÜR"
 
 #. module: account_tag_menu
 #: model:account.tax,description:account_tag_menu.demo_vatccb_05
 #: model:account.tax,name:account_tag_menu.demo_vatccb_05
 msgid "VAT Colected Cash-Basis TAX 5%"
-msgstr ""
+msgstr "Erhaltene USt. 5% EÜR"
 
 #. module: account_tag_menu
 #: model:account.tax,description:account_tag_menu.demo_vatccb_09
 #: model:account.tax,name:account_tag_menu.demo_vatccb_09
 msgid "VAT Colected Cash-Basis TAX 9%"
-msgstr ""
+msgstr "Erhaltene USt. 9% EÜR"
 
 #. module: account_tag_menu
 #: model:account.tax,description:account_tag_menu.demo_vatc_19
 #: model:account.tax,name:account_tag_menu.demo_vatc_19
 msgid "VAT Colected TAX 19%"
-msgstr ""
+msgstr "Erhaltene USt. 19%"
 
 #. module: account_tag_menu
 #: model:account.tax,description:account_tag_menu.demo_vatc_05
 #: model:account.tax,name:account_tag_menu.demo_vatc_05
 msgid "VAT Colected TAX 5%"
-msgstr ""
+msgstr "Erhaltene USt. 5%"
 
 #. module: account_tag_menu
 #: model:account.tax,description:account_tag_menu.demo_vatc_09
 #: model:account.tax,name:account_tag_menu.demo_vatc_09
 msgid "VAT Colected TAX 9%"
-msgstr ""
+msgstr "Erhaltene USt. 9%"
