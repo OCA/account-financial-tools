@@ -18,9 +18,8 @@
         'views/res_partner_view.xml',
     ],
     'author': 'Tecnativa,'
-              'Odoo Community Association (OCA),'
-              'FactorLibre',
-    'website': 'https://www.tecnativa.com',
+              'Odoo Community Association (OCA)',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'license': 'AGPL-3',
     'installable': True,
 }
