@@ -123,7 +123,6 @@ class TestPayment(AccountingTestCase):
         """ Returns an open invoice """
         invoice = self.invoice_model.create({
             'partner_id': self.partner_agrolait.id,
-            'reference_type': 'none',
             'currency_id': currency_id,
             'name': type == 'out_invoice' and
             'invoice to client' or 'invoice to supplier',
