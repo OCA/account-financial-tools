@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2012-2016 Akretion (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
@@ -8,25 +7,26 @@
 
 {
     'name': 'Account Check Deposit',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'category': 'Accounting',
     'license': 'AGPL-3',
     'summary': 'Manage deposit of checks to the bank',
-    'author': "Akretion,"
-              "Tecnativa,"
-              "Odoo Community Association (OCA)",
-    'website': 'http://github.com/OCA/account-financial-tools',
+    'author': "Odoo Community Association (OCA),"
+              "Akretion,"
+              "Tecnativa",
+    'website': 'https://github.com/OCA/account-financial-tools/tree/12.0/'
+               'account_check_deposit',
     'depends': [
-        'account_invoicing',
+        'account',
     ],
     'development_status': 'Mature',
     'data': [
+        'security/ir.model.access.csv',
+        'security/check_deposit_security.xml',
         'data/sequence.xml',
         'views/account_deposit_view.xml',
         'views/account_move_line_view.xml',
         'views/res_config_settings_views.xml',
-        'security/ir.model.access.csv',
-        'security/check_deposit_security.xml',
         'report/report.xml',
         'report/report_checkdeposit.xml',
     ],
