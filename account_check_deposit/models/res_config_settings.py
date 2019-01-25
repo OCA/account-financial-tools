@@ -9,8 +9,10 @@ class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     check_deposit_offsetting_account = fields.Selection(
+        readonly=False,
         related='company_id.check_deposit_offsetting_account',
     )
     check_deposit_transfer_account_id = fields.Many2one(
         related='company_id.check_deposit_transfer_account_id',
+        readonly=False,
     )
