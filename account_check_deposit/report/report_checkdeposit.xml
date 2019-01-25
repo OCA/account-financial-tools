@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-    Copyright (C) 2014-2015 Akretion (www.akretion.com)
+    Copyright (C) 2014-2019 Akretion (www.akretion.com)
     @author: Alexis de Lattre <alexis.delattre@akretion.com>
-    The licence is in the file __openerp__.py
+    The licence is in the file __manifest__.py
 -->
 
-<openerp>
-<data>
+<odoo>
 
 <template id="report_checkdeposit">
 
-<t t-call="report.html_container">
+<t t-call="web.html_container">
 <t t-foreach="docs" t-as="o">
-<t t-call="report.internal_layout">
+<t t-call="web.internal_layout">
 
 <div class="page">
 
@@ -87,5 +86,4 @@
 
 </template>
 
-</data>
-</openerp>
+</odoo>
