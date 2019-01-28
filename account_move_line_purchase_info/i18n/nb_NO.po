@@ -31,7 +31,15 @@ msgid "Journal Item"
 msgstr "Journalgjenstand"
 
 #. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line_purchase_id
+#: model:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
+msgid "Purchase Order"
+msgstr ""
+
+#. module: account_move_line_purchase_info
+#: model:ir.model,name:account_move_line_purchase_info.model_purchase_order_line
 #: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line_purchase_line_id
+#: model:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
 msgid "Purchase Order Line"
 msgstr ""
 
