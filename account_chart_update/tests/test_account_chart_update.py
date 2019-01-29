@@ -46,6 +46,12 @@ class TestAccountChartUpdate(common.HttpCase):
         self._create_xml_id(record)
         return record
 
+    def _get_model_data(self, record):
+        return self.env['ir.model.data'].search([
+            ('model', '=', record._name),
+            ('res_id', '=', record.id),
+        ])
+
     def setUp(self):
         super(TestAccountChartUpdate, self).setUp()
         # Make sure user is in English
@@ -354,4 +360,125 @@ class TestAccountChartUpdate(common.HttpCase):
         wizard.action_update_records()
         self.assertEqual(wizard.rejected_new_account_number, 1)
         self.assertEqual(wizard.new_accounts, 0)
+        wizard.unlink()
+
+    def test_matching(self):
+        # Test XML-ID matching
+        self.tax_template.name = "Test 1 tax name changed"
+        self.tax_template.description = "Test tax 1 description changed"
+        self.account_template.code = "200000"
+        self.fp_template.name = "Test 1 fp name changed"
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
+        self.assertEqual(wizard.tax_ids.type, 'updated')
+        self.assertEqual(wizard.account_ids.account_id, self.account_template)
+        self.assertEqual(wizard.account_ids.type, 'updated')
+        self.assertTrue(wizard.fiscal_position_ids.type, 'updated')
+        self.assertEqual(wizard.fiscal_position_ids.fiscal_position_id,
+                         self.fp_template)
+        wizard.action_update_records()
+        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(wizard.updated_fps, 1)
+        self.assertEqual(self.tax.name, self.tax_template.name)
+        self.assertEqual(self.tax.description, self.tax_template.description)
+        self.assertEqual(self.account.code, self.account_template.code)
+        self.assertEqual(self.fp.name, self.fp_template.name)
+        wizard.unlink()
+
+        # Test match by another field, there is no match by XML-ID
+        self._get_model_data(self.tax).unlink()
+        self._get_model_data(self.account).unlink()
+        self._get_model_data(self.fp).unlink()
+        self.tax_template.description = "Test 2 tax description changed"
+        self.account_template.name = "Test 2 account name changed"
+        self.fp_template.note = "Test 2 fp note changed"
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
+        self.assertEqual(wizard.tax_ids.type, 'updated')
+        self.assertEqual(wizard.account_ids.account_id, self.account_template)
+        self.assertEqual(wizard.account_ids.type, 'updated')
+        self.assertTrue(wizard.fiscal_position_ids.type, 'updated')
+        self.assertEqual(wizard.fiscal_position_ids.fiscal_position_id,
+                         self.fp_template)
+        wizard.action_update_records()
+        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(wizard.updated_fps, 1)
+        self.assertEqual(self.tax.description, self.tax_template.description)
+        self.assertEqual(self.account.name, self.account_template.name)
+        self.assertEqual(self.fp.note, self.fp_template.note)
+        wizard.unlink()
+
+        # Test match by name, there is no match by XML-ID or by code
+        self.account_template.code = "300000"
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(wizard.account_ids.account_id, self.account_template)
+        self.assertEqual(wizard.account_ids.type, 'updated')
+        wizard.action_update_records()
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(self.account.code, self.account_template.code)
+        wizard.unlink()
+
+        # Test 1 recreate XML-ID
+        self.tax_template.description = "Test 4 tax description changed"
+        self.account_template.name = "Test 4 account name changed"
+        self.fp_template.note = "Test 4 fp note changed"
+        self.wizard_vals.update(recreate_xml_ids=True)
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
+        self.assertEqual(wizard.tax_ids.type, 'updated')
+        self.assertEqual(wizard.account_ids.account_id, self.account_template)
+        self.assertEqual(wizard.account_ids.type, 'updated')
+        self.assertTrue(wizard.fiscal_position_ids.type, 'updated')
+        self.assertEqual(wizard.fiscal_position_ids.fiscal_position_id,
+                         self.fp_template)
+        # There is no XML-ID
+        self.assertFalse(list(self.tax.get_xml_id().values())[0])
+        self.assertFalse(list(self.account.get_xml_id().values())[0])
+        self.assertFalse(list(self.fp.get_xml_id().values())[0])
+        # Update for recreating XML-ID
+        wizard.action_update_records()
+        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(wizard.updated_fps, 1)
+        self.assertEqual(self.tax.description, self.tax_template.description)
+        self.assertEqual(self.account.name, self.account_template.name)
+        self.assertEqual(self.fp.note, self.fp_template.note)
+        # There is XML-ID now
+        self.assertTrue(list(self.tax.get_xml_id().values())[0])
+        self.assertTrue(list(self.account.get_xml_id().values())[0])
+        self.assertTrue(list(self.fp.get_xml_id().values())[0])
+        wizard.unlink()
+
+        # Test 2 recreate XML-ID
+        self._get_model_data(self.tax).unlink()
+        self._get_model_data(self.account).unlink()
+        self._get_model_data(self.fp).unlink()
+        wizard = self.wizard_obj.create(self.wizard_vals)
+        wizard.action_find_records()
+        self.assertEqual(wizard.tax_ids.tax_id, self.tax_template)
+        self.assertEqual(wizard.tax_ids.type, 'updated')
+        self.assertEqual(wizard.account_ids.account_id, self.account_template)
+        self.assertEqual(wizard.account_ids.type, 'updated')
+        self.assertTrue(wizard.fiscal_position_ids.type, 'updated')
+        self.assertEqual(wizard.fiscal_position_ids.fiscal_position_id,
+                         self.fp_template)
+        # There is no XML-ID
+        self.assertFalse(list(self.tax.get_xml_id().values())[0])
+        self.assertFalse(list(self.account.get_xml_id().values())[0])
+        self.assertFalse(list(self.fp.get_xml_id().values())[0])
+        # Update for recreating XML-ID
+        wizard.action_update_records()
+        self.assertEqual(wizard.updated_taxes, 1)
+        self.assertEqual(wizard.updated_accounts, 1)
+        self.assertEqual(wizard.updated_fps, 1)
+        # There is XML-ID now
+        self.assertTrue(list(self.tax.get_xml_id().values())[0])
+        self.assertTrue(list(self.account.get_xml_id().values())[0])
+        self.assertTrue(list(self.fp.get_xml_id().values())[0])
         wizard.unlink()
