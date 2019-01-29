@@ -1,5 +1,7 @@
-The wizard, accesible from *Accounting > Settings > Update chart of accounts*,
-lets the user select what kind of objects must be checked/updated, and whether
+The wizard, accessible from
+*Accounting > Configuration > Settings > Update chart template*,
+lets the user select what kind of objects must be checked/updated, allows to
+set the order of fields matching to be checked/updated and whether
 old records must be checked for changes and updates.
 
 It will display all the objects to be created / updated / deactivated with some
