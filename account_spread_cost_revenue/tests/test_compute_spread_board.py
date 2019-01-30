@@ -1,4 +1,4 @@
-# Copyright 2017-2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2017-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import datetime
@@ -501,11 +501,10 @@ class TestComputeSpreadBoard(common.TransactionCase):
             'period_type': 'month',
             'spread_date': datetime.date(2017, 1, 7)
         })
-        with self.assertRaises(UserError):
-            self.spread.compute_spread_board()
+        self.spread.compute_spread_board()
 
         spread_lines = self.spread.line_ids
-        self.assertFalse(spread_lines)
+        self.assertTrue(spread_lines)
 
     def test_15_compute_spread_board_line_account_deprecated(self):
         self.spread.debit_account_id.deprecated = True
