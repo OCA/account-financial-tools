@@ -1,5 +1,7 @@
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2015-2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+import datetime
 
 from odoo import models, api, fields, _
 from odoo.exceptions import UserError
@@ -23,10 +25,13 @@ class AccountInvoice(models.Model):
                                  ('journal_id', '=', inv.journal_id.id)],
                                 limit=1)
                 if invoices:
-                    date_invoice_format = fields.Date.\
-                        from_string(inv.date_invoice)
-                    date_invoice_tz = fields\
-                        .Date.context_today(self, date_invoice_format)
+                    date_invoice_format = datetime.datetime(
+                        year=inv.date_invoice.year,
+                        month=inv.date_invoice.month,
+                        day=inv.date_invoice.day,
+                    )
+                    date_invoice_tz = fields.Date.context_today(
+                        self, date_invoice_format)
                     raise UserError(_("Chronology Error. "
                                       "Please confirm older draft "
                                       "invoices before %s and try again.")
@@ -40,10 +45,13 @@ class AccountInvoice(models.Model):
                                            limit=1)
 
                     if invoices:
-                        date_invoice_format = fields.Date.\
-                            from_string(inv.date_invoice)
-                        date_invoice_tz = fields\
-                            .Date.context_today(self, date_invoice_format)
+                        date_invoice_format = datetime.datetime(
+                            year=inv.date_invoice.year,
+                            month=inv.date_invoice.month,
+                            day=inv.date_invoice.day,
+                        )
+                        date_invoice_tz = fields.Date.context_today(
+                            self, date_invoice_format)
                         raise UserError(_("Chronology Error. "
                                           "There exist at least one invoice "
                                           "with a later date to %s.") %
