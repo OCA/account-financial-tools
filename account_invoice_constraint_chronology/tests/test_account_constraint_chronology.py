@@ -1,4 +1,4 @@
-# Copyright 2015-2017 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2015-2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime, timedelta
@@ -8,43 +8,44 @@ from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
-class TestAccountConstraintChronology(common.TransactionCase):
+class TestAccountConstraintChronology(common.SavepointCase):
 
-    def setUp(self):
-        super(TestAccountConstraintChronology, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestAccountConstraintChronology, cls).setUpClass()
 
         # Needed to create invoice
 
-        self.account_type1 = self.env['account.account.type'].\
+        cls.account_type1 = cls.env['account.account.type'].\
             create({'name': 'acc type test 1',
                     'type': 'receivable',
                     'include_initial_balance': True})
-        self.account_type2 = self.env['account.account.type']. \
+        cls.account_type2 = cls.env['account.account.type']. \
             create({'name': 'acc type test 2',
                     'type': 'other',
                     'include_initial_balance': True})
-        self.account_account = self.env['account.account'].\
+        cls.account_account = cls.env['account.account'].\
             create({'name': 'acc test',
                     'code': 'X2020',
-                    'user_type_id': self.account_type1.id,
+                    'user_type_id': cls.account_type1.id,
                     'reconcile': True})
-        self.account_account_line = self.env['account.account']. \
+        cls.account_account_line = cls.env['account.account']. \
             create({'name': 'acc inv line test',
                     'code': 'X2021',
-                    'user_type_id': self.account_type2.id,
+                    'user_type_id': cls.account_type2.id,
                     'reconcile': True})
-        self.sequence = self.env['ir.sequence'].create(
+        cls.sequence = cls.env['ir.sequence'].create(
             {'name': 'Journal Sale',
              'prefix': 'SALE', 'padding': 6,
-             'company_id': self.env.ref("base.main_company").id})
-        self.account_journal_sale = self.env['account.journal']\
+             'company_id': cls.env.ref("base.main_company").id})
+        cls.account_journal_sale = cls.env['account.journal']\
             .create({'name': 'Sale journal',
                      'code': 'SALE',
                      'type': 'sale',
-                     'sequence_id': self.sequence.id})
-        self.product = self.env['product.product'].create(
+                     'sequence_id': cls.sequence.id})
+        cls.product = cls.env['product.product'].create(
             {'name': 'product name'})
-        self.analytic_account = self.env['account.analytic.account'].\
+        cls.analytic_account = cls.env['account.analytic.account'].\
             create({'name': 'test account'})
 
     def get_journal_check(self, value):
