@@ -499,11 +499,10 @@ class TestComputeSpreadBoard(common.TransactionCase):
             'period_type': 'month',
             'spread_date': '2017-01-07'
         })
-        with self.assertRaises(UserError):
-            self.spread.compute_spread_board()
+        self.spread.compute_spread_board()
 
         spread_lines = self.spread.line_ids
-        self.assertFalse(spread_lines)
+        self.assertTrue(spread_lines)
 
     def test_15_compute_spread_board_line_account_deprecated(self):
         self.spread.debit_account_id.deprecated = True
