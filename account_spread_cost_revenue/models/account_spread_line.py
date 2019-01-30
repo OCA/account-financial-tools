@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2016-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -84,8 +84,8 @@ class AccountInvoiceSpreadLine(models.Model):
         line_ids = [(0, 0, {
             'name': spread.name.split('\n')[0][:64],
             'account_id': spread.debit_account_id.id,
-            'debit': amount,
-            'credit': 0.0,
+            'debit': amount if amount > 0.0 else 0.0,
+            'credit': -amount if amount < 0.0 else 0.0,
             'analytic_account_id': analytic.id,
             'analytic_tag_ids': analytic_tags,
             'currency_id': not_same_curr and current_currency.id or False,
@@ -93,8 +93,8 @@ class AccountInvoiceSpreadLine(models.Model):
         }), (0, 0, {
             'name': spread.name.split('\n')[0][:64],
             'account_id': spread.credit_account_id.id,
-            'credit': amount,
-            'debit': 0.0,
+            'credit': amount if amount > 0.0 else 0.0,
+            'debit': -amount if amount < 0.0 else 0.0,
             'analytic_account_id': analytic.id,
             'analytic_tag_ids': analytic_tags,
             'currency_id': not_same_curr and current_currency.id or False,
