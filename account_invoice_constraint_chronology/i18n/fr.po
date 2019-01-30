@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 13:09+0000\n"
+"POT-Creation-Date: 2019-01-30 16:31+0000\n"
 "PO-Revision-Date: 2018-01-15 13:09+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
@@ -20,25 +20,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_invoice_constraint_chronology
-#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal_check_chronology
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
 msgstr "Vérifier la chronologie"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:30
-#, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:51
+#, fuzzy, python-format
 msgid ""
-"Chronology Error. Please confirm older draft invoices before %s and try "
-"again."
+"Chronology Error. Please confirm older draft invoices before {date_invoice} "
+"and try again."
 msgstr ""
 "Erreur de chronologie. Veuillez confirmer les anciennes factures brouillon "
 "avant %set réessayer."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:47
-#, python-format
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
+#, fuzzy, python-format
 msgid ""
-"Chronology Error. There exist at least one invoice with a later date to %s."
+"Chronology Error. There exist at least one invoice with a later date to "
+"{date_invoice}."
 msgstr ""
 "Erreur de chronologie. Il existe au moins une facture avec une date "
 "ultérieure à %s."
