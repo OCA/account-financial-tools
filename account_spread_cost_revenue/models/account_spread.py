@@ -1,4 +1,4 @@
-# Copyright 2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -382,9 +382,6 @@ class AccountSpread(models.Model):
         In case checks pass, invoke "def _compute_spread_board()" method.
         """
         for spread in self:
-            if spread.total_amount < 0.0:
-                raise UserError(
-                    _("Cannot spread negative amounts of invoice lines"))
             if spread.total_amount:
                 spread._compute_spread_board()
 
@@ -466,16 +463,28 @@ class AccountSpread(models.Model):
         spread_mls = self.line_ids.mapped('move_id.line_ids')
         if created_moves:
             spread_mls |= created_moves.mapped('line_ids')
-        if self.invoice_type in ('in_invoice', 'out_refund'):
+
+        spread_sign = True if self.total_amount >= 0.0 else False
+        in_invoice_or_out_refund = ('in_invoice', 'out_refund')
+
+        if self.invoice_type in in_invoice_or_out_refund and spread_sign:
             spread_mls = spread_mls.filtered(lambda x: x.credit != 0.)
-        else:
+        elif self.invoice_type in in_invoice_or_out_refund:
             spread_mls = spread_mls.filtered(lambda x: x.debit != 0.)
+        elif spread_sign:
+            spread_mls = spread_mls.filtered(lambda x: x.debit != 0.)
+        else:
+            spread_mls = spread_mls.filtered(lambda x: x.credit != 0.)
 
         invoice_mls = self.invoice_id.move_id.mapped('line_ids')
-        if self.invoice_id.type in ('in_invoice', 'out_refund'):
+        if self.invoice_id.type in in_invoice_or_out_refund and spread_sign:
             invoice_mls = invoice_mls.filtered(lambda x: x.debit != 0.)
-        else:
+        elif self.invoice_id.type in in_invoice_or_out_refund:
             invoice_mls = invoice_mls.filtered(lambda x: x.credit != 0.)
+        elif spread_sign:
+            invoice_mls = invoice_mls.filtered(lambda x: x.credit != 0.)
+        else:
+            invoice_mls = invoice_mls.filtered(lambda x: x.debit != 0.)
 
         to_be_reconciled = self.env['account.move.line']
         if len(invoice_mls) > 1:
