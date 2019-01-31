@@ -20,6 +20,11 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Račun"
@@ -29,11 +34,6 @@ msgstr "Račun"
 #, python-format
 msgid "Missing VAT number:"
 msgstr "Manjkajoči ID za DDV:"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Partner"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -54,3 +54,6 @@ msgid ""
 msgstr ""
 "Nastavili ste fiskalni položaj '%s', ki zahteva, da kupec ima ID za DDV, a "
 "ta manjka."
+
+#~ msgid "Partner"
+#~ msgstr "Partner"
