@@ -20,6 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Τιμολόγιο"
@@ -28,11 +33,6 @@ msgstr "Τιμολόγιο"
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:19
 #, python-format
 msgid "Missing VAT number:"
-msgstr ""
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
 msgstr ""
 
 #. module: account_fiscal_position_vat_check

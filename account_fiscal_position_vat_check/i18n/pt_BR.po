@@ -21,6 +21,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Fatura"
@@ -30,11 +35,6 @@ msgstr "Fatura"
 #, python-format
 msgid "Missing VAT number:"
 msgstr "Número do Valor de Imposto Atribuído faltando:"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Parceiro"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -59,3 +59,6 @@ msgid ""
 msgstr ""
 "Você selecionou a posição fiscal '%s' que requer que o cliente possua um "
 "número de Valor de Imposto Atribuído, mas o número de VIA está faltando."
+
+#~ msgid "Partner"
+#~ msgstr "Parceiro"
