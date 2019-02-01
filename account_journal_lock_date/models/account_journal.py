@@ -4,7 +4,9 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
+from odoo.exceptions import ValidationError
 
 
 class AccountJournal(models.Model):
@@ -38,6 +40,28 @@ class AccountJournal(models.Model):
                     abs(self.journal_lock_date_period_offset)}
             }
 
+    @api.multi
+    @api.constrains('journal_lock_date_period_offset')
+    def _check_lock_date_existing_moves(self):
+        for journal in self:
+            date_str = journal.journal_lock_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
+            if journal.env['account.move'].search_count([
+                ('date', '<=', date_str), ('state', '=', 'draft')]):
+                move_names = [r['name'] for r in
+                    journal.env['account.move'].search_read([
+                        ('date', '<=', date_str), ('state', '=', 'draft')],
+                        ['name'])
+                ]
+                raise ValidationError(_(
+                    "Setting the lock date of journal {journal.name} to "
+                    "{journal.journal_lock_date} would lock the "
+                    "following unvalidated moves:"
+                    "\n\t{moves}").format(journal=journal, moves="\n\t".join(
+                        move_names
+                    )
+                ))
+
+
     @api.depends('journal_lock_date_period_offset', 'company_id.period_lock_date')
     def _compute_lock_date(self):
         for journal in self.filtered('company_id.period_lock_date'):
@@ -45,6 +69,8 @@ class AccountJournal(models.Model):
             offset = relativedelta(days=+journal.journal_lock_date_period_offset)
             journal.journal_lock_date = period_lock_date + offset
             journal.has_period_lock_date = True
+
+    @api.constrains()
 
     @api.model
     def _can_bypass_journal_lock_date(self):

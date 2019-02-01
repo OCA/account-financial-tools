@@ -38,8 +38,6 @@ By default only users with "Adviser" role are exempt from the journal lock date
 check. Developers can implement more permissive exemptions from the lock date
 check through a hook function on `account.journal`.
 
-The lock date updating wizard will help you to updated journal lock dates, too.
-
 **Table of contents**
 
 .. contents::
@@ -49,15 +47,16 @@ Usage
 =====
 
 To use this module, you need to:
+  1. Set a period lock on the company
+  2. Go to the Journal
+  3. Set the lock date offset in the corresponding field
+
+To trace the lock date of a journal, you need to:
   1. Go to the Journal
-  2. Set the lock date in the corresponding field
-
-Known issues / Roadmap
-======================
-
-* a wizard to set the lock date on several journals could be nice to have
-* the module does not check that all moves prior the lock date are posted, this could be
-  made as part of the wizard
+  2. Increase the offset
+  3. If the new lock date would cover draft moves, a detailed warning is
+     shown and the update aborted.
+  4. In this latter case, you need to handle the indicated moves first.
 
 Bug Tracker
 ===========
