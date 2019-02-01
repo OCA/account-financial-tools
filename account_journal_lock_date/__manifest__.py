@@ -10,7 +10,7 @@
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://acsone.eu/',
-    'depends': [
+    'depends': [ 'account',
         # 'account_permanent_lock_move',
     ],
     'data': [
