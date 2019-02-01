@@ -11,7 +11,11 @@
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
             <field name="type" position="after">
-                <field name="journal_lock_date"/>
+                <field name="has_period_lock_date" invisible="1" />
+                <field name="journal_lock_date" attrs="{'invisible': [('has_period_lock_date', '=', False)]}"/>
+            </field>
+            <field name="post_at_bank_rec" position="after">
+                <field name="journal_lock_date_period_offset"/>
             </field>
         </field>
     </record>
@@ -23,7 +27,8 @@
         <field name="inherit_id" ref="account.view_account_journal_tree"/>
         <field name="arch" type="xml">
             <field name="type" position="after">
-                <field name="journal_lock_date"/>
+                <field name="has_period_lock_date" invisible="1" />
+                <field name="journal_lock_date" attrs="{'invisible': [('has_period_lock_date', '=', False)]}"/>
             </field>
         </field>
     </record>
