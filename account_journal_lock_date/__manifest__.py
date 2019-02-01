@@ -11,7 +11,7 @@
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://acsone.eu/',
     'depends': [
-        'account_permanent_lock_move',
+        # 'account_permanent_lock_move',
     ],
     'data': [
         'views/account_journal.xml',
