@@ -50,10 +50,12 @@ class AccountJournal(models.Model):
             if journal.env['account.move'].search_count(
                 [('date', '<=', date_str), ('state', '=', 'draft')]
             ):
-                move_names = [r['name'] for r in
+                move_names = [
+                    r['date'].strftime(
+                        DEFAULT_SERVER_DATE_FORMAT) + ': ' + r['name'] for r in
                     journal.env['account.move'].search_read([
                         ('date', '<=', date_str), ('state', '=', 'draft')],
-                        ['name'])
+                        ['date', 'name'])
                 ]
                 raise ValidationError(_(
                     "Setting the lock date of journal {journal.name} to "

@@ -2,7 +2,7 @@
 # Copyright 2018 XOE Corp. SAS <https://xoe.solutions>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import date, timedelta
+from datetime import timedelta
 
 from odoo import fields, tools
 from odoo.modules import get_module_resource
@@ -33,8 +33,7 @@ class TestJournalLockDate(common.TransactionCase):
         self.journal.journal_lock_date_period_offset = False
         self.tomorrow = fields.Date.today() + timedelta(days=+1)
         self.yesterday = fields.Date.today() + timedelta(days=-1)
-        self.three_days_ago= fields.Date.today() + timedelta(days=-3)
-
+        self.three_days_ago = fields.Date.today() + timedelta(days=-3)
 
     def test_journal_lock_date_tracing_with_draft(self):
         # create a move and leave it in draft
