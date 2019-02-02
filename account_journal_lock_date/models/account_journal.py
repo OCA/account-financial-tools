@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
+# Copyright 2018 XOE Corp. SAS <https://xoe.solutions>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from dateutil.relativedelta import relativedelta
@@ -36,17 +36,20 @@ class AccountJournal(models.Model):
                     "message": "Offset must be positive: you can only set "
                                "stricter lock dates than the period lock date."
                 },
-                "value": {"journal_lock_date_period_offset":
-                    abs(self.journal_lock_date_period_offset)}
+                "value": {
+                    "journal_lock_date_period_offset":
+                        abs(self.journal_lock_date_period_offset)}
             }
 
     @api.multi
     @api.constrains('journal_lock_date_period_offset')
     def _check_lock_date_existing_moves(self):
         for journal in self:
-            date_str = journal.journal_lock_date.strftime(DEFAULT_SERVER_DATE_FORMAT)
-            if journal.env['account.move'].search_count([
-                ('date', '<=', date_str), ('state', '=', 'draft')]):
+            date_str = journal.journal_lock_date.strftime(
+                DEFAULT_SERVER_DATE_FORMAT)
+            if journal.env['account.move'].search_count(
+                [('date', '<=', date_str), ('state', '=', 'draft')]
+            ):
                 move_names = [r['name'] for r in
                     journal.env['account.move'].search_read([
                         ('date', '<=', date_str), ('state', '=', 'draft')],
@@ -61,16 +64,15 @@ class AccountJournal(models.Model):
                     )
                 ))
 
-
-    @api.depends('journal_lock_date_period_offset', 'company_id.period_lock_date')
+    @api.depends(
+        'journal_lock_date_period_offset', 'company_id.period_lock_date')
     def _compute_lock_date(self):
         for journal in self.filtered('company_id.period_lock_date'):
             period_lock_date = journal.company_id.period_lock_date
-            offset = relativedelta(days=+journal.journal_lock_date_period_offset)
+            offset = relativedelta(
+                days=+journal.journal_lock_date_period_offset)
             journal.journal_lock_date = period_lock_date + offset
             journal.has_period_lock_date = True
-
-    @api.constrains()
 
     @api.model
     def _can_bypass_journal_lock_date(self):

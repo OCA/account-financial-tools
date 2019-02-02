@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
+# Copyright 2018 XOE Corp. SAS <https://xoe.solutions>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -10,9 +10,7 @@
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://acsone.eu/',
-    'depends': [ 'account',
-        # 'account_permanent_lock_move',
-    ],
+    'depends': ['account'],
     'data': [
         'views/account_journal.xml',
     ],
