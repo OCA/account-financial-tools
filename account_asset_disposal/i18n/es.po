@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-25 12:17+0000\n"
-"PO-Revision-Date: 2017-11-25 12:17+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2019-02-04 10:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_category
@@ -150,7 +151,7 @@ msgstr "Cancelar baja"
 #. module: account_asset_disposal
 #: model:ir.model,name:account_asset_disposal.model_account_asset_disposal_wizard
 msgid "account.asset.disposal.wizard"
-msgstr ""
+msgstr "'account.asset.disposal.wizard'"
 
 #~ msgid "Journal Item"
 #~ msgstr "Apunte contable"
