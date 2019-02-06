@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-04-25 10:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/gl/)\n"
+"PO-Revision-Date: 2019-02-06 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"Language-Team: Galician (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_invoice_constraint_chronology
 #: field:account.journal,check_chronology:0
 msgid "Check Chronology"
-msgstr ""
+msgstr "Comprobar cronoloxía"
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:39
@@ -30,6 +31,8 @@ msgid ""
 "Chronology Error. Please confirm older draft invoices before %s and try "
 "again."
 msgstr ""
+"Erro cronolóxico. Confirme as facturas en borrador anteriores a %s e ténteo "
+"de novo."
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:58
@@ -38,6 +41,7 @@ msgid ""
 "Chronology Error. There exist at least one invoice with a date posterior to "
 "%s."
 msgstr ""
+"Erro cronolóxico. Existe polo menos unha factura con data posterior a %s."
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_journal.py:22
@@ -47,6 +51,9 @@ msgid ""
 "be activated on journals that can be selected on invoices (i.e. Sale, Sale "
 "Refund, Purchase, Purchase Refund journals)"
 msgstr ""
+"Erro de configuración no diario '%s': A opción 'Comprobar cronoloxía' só "
+"pode ser activada en diarios que poden ser seleccionados en facturas ( p.e. "
+"Venda, Abono vendas, Compra, Factura rectificativa de provedor)"
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
