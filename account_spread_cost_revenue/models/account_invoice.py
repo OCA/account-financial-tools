@@ -1,4 +1,4 @@
-# Copyright 2016-2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2016-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
@@ -43,3 +43,13 @@ class AccountInvoice(models.Model):
             moves.unlink()
             invoice_line.spread_id.line_ids.unlink()
         return res
+
+    @api.model
+    def _refund_cleanup_lines(self, lines):
+        result = super(AccountInvoice, self)._refund_cleanup_lines(lines)
+        for i, line in enumerate(lines):
+            for name, field in line._fields.items():
+                if name == 'spread_id':
+                    result[i][2][name] = False
+                    break
+        return result
