@@ -22,33 +22,34 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:34+0000\n"
-"PO-Revision-Date: 2017-04-25 10:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Galician (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/gl/)\n"
+"PO-Revision-Date: 2019-02-06 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
+"Language-Team: Galician (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizard/account_move_make_netting.py:56
 #, python-format
 msgid "AR/AP netting"
-msgstr ""
+msgstr "Compensación a cobrar/a pagar"
 
 #. module: account_netting
 #: code:addons/account_netting/wizard/account_move_make_netting.py:30
 #, python-format
 msgid "All entries must have a receivable or payable account"
-msgstr ""
+msgstr "Todos os apuntamentos deben ter unha conta para pagar ou a cobrar"
 
 #. module: account_netting
 #: code:addons/account_netting/wizard/account_move_make_netting.py:33
 #, python-format
 msgid "All entries mustn't been reconciled"
-msgstr ""
+msgstr "Ningún apuntamento debe estar conciliado"
 
 #. module: account_netting
 #: code:addons/account_netting/wizard/account_move_make_netting.py:39
@@ -56,16 +57,18 @@ msgstr ""
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
 msgstr ""
+"Todos os apuntamentos deben ter unha empresa e a empresa debe ser a mesma "
+"para todos."
 
 #. module: account_netting
 #: field:account.move.make.netting,balance:0
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: field:account.move.make.netting,balance_type:0
 msgid "Balance type"
-msgstr ""
+msgstr "Tipo de saldo"
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
@@ -76,12 +79,12 @@ msgstr "Cancelar"
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 msgid "Compensate"
-msgstr ""
+msgstr "Compensar"
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid "Compensate entries"
-msgstr ""
+msgstr "Compensar apuntamentos"
 
 #. module: account_netting
 #: field:account.move.make.netting,create_uid:0
@@ -96,7 +99,7 @@ msgstr "Creado en"
 #. module: account_netting
 #: field:account.move.make.netting,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome mostrado"
 
 #. module: account_netting
 #: field:account.move.make.netting,id:0
@@ -126,12 +129,12 @@ msgstr "Última actualización en"
 #. module: account_netting
 #: field:account.move.make.netting,move_lines:0
 msgid "Move lines"
-msgstr ""
+msgstr "Apuntamentos"
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
 msgid "Select the journal where storing the journal entries"
-msgstr ""
+msgstr "Seleccione o diario no que se gardarán os apuntamentos"
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
@@ -140,22 +143,25 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner:"
 msgstr ""
+"Esta operación xerará apuntamentos que serán a contrapartida das contas para "
+"cobrar/a pagar seleccionadas, e reconciliaraas entre elas, deixando este "
+"saldo na empresa:"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To pay"
-msgstr ""
+msgstr "A pagar"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To receive"
-msgstr ""
+msgstr "A cobrar"
 
 #. module: account_netting
 #: code:addons/account_netting/wizard/account_move_make_netting.py:24
 #, python-format
 msgid "You should compensate at least 2 journal entries."
-msgstr ""
+msgstr "Debe compensar polo menos 2 apuntamentos."
 
 #. module: account_netting
 #: view:account.move.make.netting:account_netting.view_account_move_make_netting_form
