@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-23 03:37+0000\n"
-"PO-Revision-Date: 2016-11-23 03:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2019-02-06 14:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
 "Language-Team: Galician (https://www.transifex.com/oca/teams/23907/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_renumber
 #: model:ir.model,name:account_renumber.model_wizard_renumber
@@ -41,22 +42,22 @@ msgstr "Creado en"
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Date ranges"
-msgstr ""
+msgstr "Rangos de datas"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome mostrado"
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_to
 msgid "Finish date"
-msgstr ""
+msgstr "Data de remate"
 
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_to
 msgid "Finish renumbering in this date, inclusive."
-msgstr ""
+msgstr "Rematar renumerando nesta data, incluída."
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_number_next
@@ -86,7 +87,7 @@ msgstr "Xornais"
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
 msgid "Journals to consider"
-msgstr ""
+msgstr "Diarios a considerar"
 
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_journal_ids
@@ -137,7 +138,7 @@ msgstr "Renumerar asentos contables"
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
 msgid "Renumber Journal Entries"
-msgstr ""
+msgstr "Renumerar asentos contables"
 
 #. module: account_renumber
 #: code:addons/account_renumber/wizard/wizard_renumber.py:101
@@ -148,12 +149,12 @@ msgstr "Asentos contables renumerados"
 #. module: account_renumber
 #: model:ir.model.fields,help:account_renumber.field_wizard_renumber_date_from
 msgid "Start renumbering in this date, inclusive."
-msgstr ""
+msgstr "Comezar renumerando nesta data, incluida."
 
 #. module: account_renumber
 #: model:ir.model.fields,field_description:account_renumber.field_wizard_renumber_date_from
 msgid "Starting date"
-msgstr ""
+msgstr "Data inicio"
 
 #. module: account_renumber
 #: model:ir.ui.view,arch_db:account_renumber.view_account_renumber_form
