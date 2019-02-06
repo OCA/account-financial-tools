@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-22 03:41+0000\n"
-"PO-Revision-Date: 2017-12-22 03:41+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-02-06 13:50+0000\n"
+"Last-Translator: Marta Vázquez Rodríguez <vazrodmar@gmail.com>\n"
 "Language-Team: Galician (https://www.transifex.com/oca/teams/23907/gl/)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -27,12 +28,12 @@ msgstr "Factura"
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:19
 #, python-format
 msgid "Missing VAT number:"
-msgstr ""
+msgstr "Falta o NIF/CIF:"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -43,6 +44,10 @@ msgid ""
 "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
 "of this Customer in Odoo and try to validate again."
 msgstr ""
+"Está a tratar de validar unha factura/factura rectificativa coa posición "
+"fiscal '%s' que require que o cliente teña un  NIF/CIF. Pero o cliente '%s' "
+"non ten un NIF/CIF nos seus datos. Engada por favor o  NIF/CIF deste cliente "
+"e tente validala outra vez."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:20
@@ -51,3 +56,5 @@ msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
 "VAT number, but the VAT number is missing."
 msgstr ""
+"Estableceu a posición fiscal '%s' que require que o cliente teña un NIF/CIF, "
+"pero o NIF/CIF non está establecido."
