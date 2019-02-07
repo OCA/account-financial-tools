@@ -121,3 +121,39 @@ class AccountMove(models.Model):
             if reconcile:
                 self.move_reverse_reconcile()
         return moves
+
+    @api.model
+    def _get_fields_no_effect(self):
+        """
+        Get a list of fields (str) who doesn't impact the
+        move/accounting directly.
+        Useful for example when we have to update some values even if the
+        move is locked.
+        :return: list of str
+        """
+        return [
+            'reversal_id',
+            'to_be_reversed',
+        ]
+
+    @api.multi
+    def write(self, vals):
+        """
+        Inherit to check if we can bypass the check on lock_date
+        :param vals: dict
+        :return: bool
+        """
+        fields_no_effect = self._get_fields_no_effect()
+        if all(k in fields_no_effect for k in vals):
+            self = self.with_context(account_move_only_no_effect_fields=True)
+        return super(AccountMove, self).write(vals)
+
+    @api.multi
+    def _check_lock_date(self):
+        """
+        Inherit to bypass the check on lock_date depending on the context
+        :return: bool
+        """
+        if self.env.context.get('account_move_only_no_effect_fields'):
+            return True
+        return super(AccountMove, self)._check_lock_date()
