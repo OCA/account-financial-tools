@@ -3,7 +3,9 @@
 # Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from datetime import timedelta
 from odoo.tests.common import TransactionCase
+from odoo import fields
 import random
 
 
@@ -114,3 +116,37 @@ class TestAccountReversal(TransactionCase):
 
         self.assertEqual(len(rev.line_ids), 200)
         self.assertEqual(rev.state, 'posted')
+
+    def test_ignore_lock_date_check(self):
+        """
+        Test the reverse when the original move is locked by a lock date
+        defined on the company.
+        :return:
+        """
+        lock_date = fields.Date.today()
+        # We can not specify lock dates if every moves are not locked
+        self.move_obj.search([
+            ('state', '!=', 'posted'),
+            ('date', '<=', lock_date),
+        ]).post()
+        # We need access rights to reverse
+        group_manager = self.env.ref("account.group_account_manager")
+        self.env.user.write({
+            'groups_id': [(4, group_manager.id, False)],
+        })
+        move = self._create_move()
+        move.post()
+        move.company_id.write({
+            'period_lock_date': lock_date,
+            'fiscalyear_lock_date': lock_date,
+        })
+        move_prefix = 'REV_TEST_MOVE:'
+        line_prefix = 'REV_TEST_LINE:'
+        # As the today date is locked, we have to specify another date
+        future = fields.Date.from_string(lock_date) + timedelta(days=10)
+        reverse_move = move.create_reversals(
+            move_prefix=move_prefix, line_prefix=line_prefix, reconcile=True,
+            date=fields.Date.to_string(future))
+        # Ensure the reverse move is created
+        self.assertTrue(reverse_move)
+        self.assertEquals(reverse_move, move.reversal_id)
