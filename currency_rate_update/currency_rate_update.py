@@ -448,8 +448,8 @@ class Admin_ch_getter(CurrencyGetterInterface):
     def get_updated_currency(self, currency_array, main_currency,
                              max_delta_days):
         """Implementation of abstract method of Curreny_getter_interface"""
-        url = ('http://www.afd.admin.ch/publicdb/newdb/'
-               'mwst_kurse/wechselkurse.php')
+        url = ('http://www.pwebapps.ezv.admin.ch/apps/rates/rate/'
+               'getxml?activeSearchType=today')
         # We do not want to update the main currency
         if main_currency in currency_array:
             currency_array.remove(main_currency)
@@ -460,7 +460,7 @@ class Admin_ch_getter(CurrencyGetterInterface):
         dom = etree.fromstring(rawfile)
         _logger.debug("Admin.ch sent a valid XML file")
         adminch_ns = {
-            'def': 'http://www.afd.admin.ch/publicdb/newdb/mwst_kurse'
+            'def': 'http://www.pwebapps.ezv.admin.ch/apps/rates'
         }
         rate_date = dom.xpath(
             '/def:wechselkurse/def:datum/text()',
