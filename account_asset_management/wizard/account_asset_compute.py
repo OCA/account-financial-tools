@@ -17,10 +17,20 @@ class AccountAssetCompute(models.TransientModel):
 
     @api.multi
     def asset_compute(self):
+        actions_now = False
         assets = self.env['account.asset'].search(
             [('state', '=', 'open'), ('type', '=', 'normal')])
         created_move_ids, error_log = assets._compute_entries(
             self.date_end, check_triggers=True)
+
+        if created_move_ids:
+            actions_now = self.env['account.asset.actions'].create({
+                                    'date_action': fields.Date.today(),
+                                    'date_end': self.date_end,
+                                    'asset_move_ids': [(6, 0, created_move_ids)],
+                                    })
+        if actions_now and error_log:
+            actions_now.note = _("Compute Assets errors") + ':\n' + error_log
 
         if error_log:
             module = __name__.split('addons.')[1].split('.')[0]
@@ -28,6 +38,7 @@ class AccountAssetCompute(models.TransientModel):
                 '%s.%s_view_form_result'
                 % (module, self._name))
             self.note = _("Compute Assets errors") + ':\n' + error_log
+
             return {
                 'name': _('Compute Assets result'),
                 'res_id': self.id,
@@ -63,3 +74,11 @@ class AccountAssetCompute(models.TransientModel):
             'domain': domain,
             'type': 'ir.actions.act_window',
         }
+
+    @api.multi
+    def shoot_and_forget(self):
+        action = self.env.ref('account_asset_managment.account_asset_actions')
+        if action:
+            action.with_context(date_end=self.date_end).run()
+        return {'return':True, 'type':'ir.actions.act_window_close' }
+

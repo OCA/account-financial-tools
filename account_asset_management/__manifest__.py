@@ -14,6 +14,7 @@
     'category': 'Accounting & Finance',
     'data': [
         'security/account_asset_security.xml',
+        'data/account_assets_actions.xml',
         'security/ir.model.access.csv',
         'wizard/account_asset_compute.xml',
         'wizard/account_asset_remove.xml',
@@ -25,6 +26,7 @@
         'views/account_invoice_line.xml',
         'views/account_move.xml',
         'views/account_move_line.xml',
+        'views/account_asset_actions.xml',
         'views/menuitem.xml',
     ],
 }

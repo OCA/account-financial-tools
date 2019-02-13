@@ -1,0 +1,343 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_move_template
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Frank Schellenberg <opensource@schellenberg.nl>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-01 03:44+0000\n"
+"PO-Revision-Date: 2018-02-01 03:44+0000\n"
+"Last-Translator: Frank Schellenberg <opensource@schellenberg.nl>, 2018\n"
+"Language-Team: Dutch (https://www.transifex.com/oca/teams/23907/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_account_id
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_account_id
+msgid "Account id"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_amount
+msgid "Amount"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_analytic_account_id
+msgid "Analytic account id"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:57
+#, python-format
+msgid "Code \"%s\" refers to non existing line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_company_id
+msgid "Company id"
+msgstr ""
+
+#. module: account_move_template
+#: selection:account.document.template.line,type:0
+#: selection:account.move.template.line,type:0
+msgid "Computed"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
+#: model:ir.ui.menu,name:account_move_template.menu_action_wizard_select_template
+msgid "Create Move from Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_create_uid
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_create_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_create_date
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_create_date
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: account_move_template
+#: selection:account.move.template.line,move_line_type:0
+#: selection:wizard.select.move.template.line,move_line_type:0
+msgid "Credit"
+msgstr ""
+
+#. module: account_move_template
+#: selection:account.move.template.line,move_line_type:0
+#: selection:wizard.select.move.template.line,move_line_type:0
+msgid "Debit"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_display_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_display_name
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_display_name
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_display_name
+msgid "Display Name"
+msgstr "Te tonen naam"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_id
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_id
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_form
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_search
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_tree
+msgid "Journal Entry Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_tree
+msgid "Journal Entry Template Line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_journal_id
+msgid "Journal id"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template___last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line___last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template___last_update
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line___last_update
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template___last_update
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line___last_update
+msgid "Last Modified on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_write_uid
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_write_date
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_write_date
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_write_date
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:47
+#, python-format
+msgid "Line %s can't refer to itself"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_ids
+msgid "Line ids"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
+msgid "Load"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
+msgid "Modify the lines before create them or edit them after creation."
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
+msgid "Move Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template_line_tree
+msgid "Move Template Line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.actions.act_window,name:account_move_template.action_move_template_form
+#: model:ir.ui.menu,name:account_move_template.menu_action_move_template_form
+msgid "Move Templates"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_move_line_type
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_move_line_type
+msgid "Move line type"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_name
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_name
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_name
+msgid "Name"
+msgstr "Naam"
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.wizard_select_template
+msgid "Next"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_partner_id
+msgid "Partner"
+msgstr "Relatie"
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
+msgid "Python Code"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_python_code
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_python_code
+msgid "Python code"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template
+msgid "Select Move Template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_sequence
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_sequence
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_state
+msgid "State"
+msgstr "Status"
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
+msgid "Template Lines"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_template_id
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_line_template_id
+#: model:ir.model.fields,field_description:account_move_template.field_wizard_select_move_template_template_id
+msgid "Template id"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_template_line_ids
+msgid "Template line ids"
+msgstr ""
+
+#. module: account_move_template
+#: selection:wizard.select.move.template,state:0
+msgid "Template selected"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_form
+msgid "Test template"
+msgstr ""
+
+#. module: account_move_template
+#: sql_constraint:account.move.template.line:0
+msgid "The sequence of the line must be unique per template !"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_document_template_line_type
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_type
+msgid "Type"
+msgstr "Type"
+
+#. module: account_move_template
+#: selection:account.document.template.line,type:0
+#: selection:account.move.template.line,type:0
+msgid "User input"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/models/account_document_template.py:64
+#, python-format
+msgid ""
+"You can not add a different number of lines in this wizard you should try to "
+"create the move normally and then edit the created move. Inconsistent "
+"between input lines and  filled lines for template %s"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.ui.view,arch_db:account_move_template.view_move_template_line_form
+msgid ""
+"You can refer to other lines using their\n"
+"                        sequence number (e.g. 'L(1)' for first line).\n"
+"                        Examples of code: 'L(1) * 0.2'; 'L(2) - L(1)'; "
+"'L(1)\n"
+"                            + L(2) + L(3)'; '1250'"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_document_template
+msgid "account.document.template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_document_template_line
+msgid "account.document.template.line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template
+msgid "account.move.template"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_account_move_template_line
+msgid "account.move.template.line"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model,name:account_move_template.model_wizard_select_move_template
+msgid "wizard.select.move.template"
+msgstr ""

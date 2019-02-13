@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="account_asset_actions_view_form">
+    <field name="name">account.asset.actions.form</field>
+    <field name="model">account.asset.actions</field>
+    <field name="arch" type="xml">
+        <form string="Asset actions">
+            <sheet>
+                <group colspan="4" col="4">
+                    <field name="date_action"/>
+                    <field name="date_end"/>
+                    <newline/>
+                    <field name="note"/>
+                </group>
+                <separator string="Asset Depreciation" colspan="4"/>
+                <group colspan="4" col="4">
+                    <field name="asset_move_ids" nolabel="1"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="account_asset_actions_view_tree">
+    <field name="name">account.asset.actions.tree</field>
+    <field name="model">account.asset.actions</field>
+    <field name="arch" type="xml">
+        <tree string="Asset actions">
+            <field name="date_action"/>
+            <field name="date_end"/>
+            <field name="note"/>
+            <field name="asset_move_ids" widget="many2many_tags"/>
+        </tree>
+    </field>
+  </record>
+  <record id="account_asset_server_compute_action" model="ir.actions.act_window">
+    <field name="name">Compute Assets on Server</field>
+    <field name="res_model">account.asset.actions</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="account_asset_actions_view_tree"/>
+  </record>
+</odoo>

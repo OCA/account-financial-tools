@@ -6,7 +6,7 @@
 Account Move Line Tax Editable
 ==============================
 
-Allows to edit taxes on account move lines
+Allows to edit taxes on account move lines, and mark exdited amount tax as manual.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot

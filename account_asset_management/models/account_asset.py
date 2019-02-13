@@ -2,7 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
-from datetime import datetime
+import datetime
+from datetime import datetime as dt
 from dateutil.relativedelta import relativedelta
 import logging
 from sys import exc_info
@@ -92,6 +93,9 @@ class AccountAsset(models.Model):
         comodel_name='account.asset',
         inverse_name='parent_id',
         string='Child Assets')
+    date_buy = fields.Date(
+        string='Asset Bay Date', readonly=True,
+        states={'draft': [('readonly', False)]})
     date_start = fields.Date(
         string='Asset Start Date', readonly=True,
         states={'draft': [('readonly', False)]},
@@ -195,8 +199,9 @@ class AccountAsset(models.Model):
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string='Analytic account',
-        domain=[('type', '!=', 'view'),
-                ('state', 'not in', ('close', 'cancelled'))])
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        domain=[('parent_id', '=', False)])
 
     @api.model
     def _default_company_id(self):
@@ -259,7 +264,7 @@ class AccountAsset(models.Model):
     @api.constrains('method', 'method_time')
     def _check_method(self):
         for asset in self:
-            if asset.method == 'degr-linear' and asset.method_time != 'year':
+            if asset.method == 'degr-linear' and asset.method_time not in ['year', 'month']:
                 raise UserError(
                     _("Degressive-Linear is only supported for Time Method = "
                       "Year."))
@@ -311,8 +316,10 @@ class AccountAsset(models.Model):
 
     @api.onchange('method_time')
     def _onchange_method_time(self):
-        if self.method_time != 'year':
+        if self.method_time not in ['year', 'month']:
             self.prorata = True
+        if self.method_time == 'month':
+            self.method_period = 'month'
 
     @api.onchange('type')
     def _onchange_type(self):
@@ -328,7 +335,7 @@ class AccountAsset(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('method_time') != 'year' and not vals.get('prorata'):
+        if vals.get('method_time') not in ['year', 'month'] and not vals.get('prorata'):
             vals['prorata'] = True
         if vals.get('type') == 'view':
             vals['date_start'] = False
@@ -343,7 +350,7 @@ class AccountAsset(models.Model):
     @api.multi
     def write(self, vals):
         if vals.get('method_time'):
-            if vals['method_time'] != 'year' and not vals.get('prorata'):
+            if vals['method_time'] not in ['year', 'month'] and not vals.get('prorata'):
                 vals['prorata'] = True
         res = super().write(vals)
         for asset in self:
@@ -644,11 +651,11 @@ class AccountAsset(models.Model):
                         duration = (fy_date_stop - fy_date_start).days + 1
                     else:
                         duration = (
-                            datetime(year, 12, 31) - fy_date_start).days + 1
+                            dt(year, 12, 31) - fy_date_start).days + 1
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
                     duration = (
-                        fy_date_stop - datetime(year, 1, 1)).days + 1
+                        fy_date_stop - dt(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
@@ -702,7 +709,7 @@ class AccountAsset(models.Model):
                 self.date_start)
         else:
             fy_date_start = fields.Datetime.from_string(fy.date_start)
-            depreciation_start_date = datetime(
+            depreciation_start_date = dt(
                 fy_date_start.year, fy_date_start.month, 1)
         return depreciation_start_date
 
@@ -710,6 +717,18 @@ class AccountAsset(models.Model):
         if self.method_time == 'year':
             depreciation_stop_date = depreciation_start_date + \
                 relativedelta(years=self.method_number, days=-1)
+        elif self.method_time == 'month':
+            (month, year) = (self.method_number % 12, self.method_number // 12)
+            depreciation_stop_date = depreciation_start_date + \
+                relativedelta(years=year, days=-1)
+            depreciation_stop_date = depreciation_stop_date + \
+                relativedelta(months=month, days=-1)
+        elif self.method_time == 'percentage':
+            percentage_month = (100/self.method_number)*12
+            (month, year) = (percentage_month % 12, percentage_month // 12)
+            depreciation_stop_date = depreciation_start_date + \
+                relativedelta(years=year, days=-1) +\
+                relativedelta(months=month, days=-1)
         elif self.method_time == 'number':
             if self.method_period == 'month':
                 depreciation_stop_date = depreciation_start_date + \
@@ -737,7 +756,7 @@ class AccountAsset(models.Model):
         'Prorata Temporis'
         """
         amount = entry.get('period_amount')
-        if self.prorata and self.method_time == 'year':
+        if self.prorata and self.method_time in ['year', 'month']:
             dates = [x for x in line_dates if x <= entry['date_stop']]
             full_periods = len(dates) - 1
             amount = entry['fy_amount'] - amount * full_periods
@@ -748,12 +767,17 @@ class AccountAsset(models.Model):
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
         """
-        if self.method_time != 'year':
+        if self.method_time not in ['year', 'month', 'percentage']:
             raise UserError(
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
+        koef = 1
+        if self.method_time == 'month':
+            koef = 12
+        year_amount_linear = self.depreciation_base / (self.method_number * koef)
+        if self.method_time == 'percentage':
+            year_amount_linear = self.depreciation_base * (self.method_number/100)
 
-        year_amount_linear = self.depreciation_base / self.method_number
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
@@ -878,7 +902,7 @@ class AccountAsset(models.Model):
             # was compensated in the first FY depreciation line.
             # The code has now been simplified with compensation
             # always in last FT depreciation line.
-            if self.method_time == 'year':
+            if self.method_time in ['year', 'month']:
                 if round(fy_amount_check - fy_amount, digits) != 0:
                     diff = fy_amount_check - fy_amount
                     amount = amount - diff
@@ -903,20 +927,20 @@ class AccountAsset(models.Model):
     def _compute_depreciation_table(self):
 
         table = []
-        if self.method_time in ['year', 'number'] and not self.method_number:
+        if self.method_time in ['year', 'month', 'percentage', 'number'] and not self.method_number:
             return table
 
         company = self.company_id
         init_flag = False
-        asset_date_start = datetime.strptime(self.date_start, '%Y-%m-%d')
+        asset_date_start = dt.strptime(self.date_start, '%Y-%m-%d')
         fy = company.find_daterange_fy(asset_date_start)
         fiscalyear_lock_date = company.fiscalyear_lock_date
         if fiscalyear_lock_date and fiscalyear_lock_date >= self.date_start:
             init_flag = True
         if fy:
             fy_id = fy.id
-            fy_date_start = datetime.strptime(fy.date_start, '%Y-%m-%d')
-            fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+            fy_date_start = dt.strptime(fy.date_start, '%Y-%m-%d')
+            fy_date_stop = dt.strptime(fy.date_end, '%Y-%m-%d')
         else:
             # The following logic is used when no fiscal year
             # is defined for the asset start date:
@@ -930,7 +954,7 @@ class AccountAsset(models.Model):
             if not first_fy:
                 raise UserError(
                     _("No Fiscal Year defined."))
-            first_fy_date_start = datetime.strptime(
+            first_fy_date_start = dt.strptime(
                 first_fy.date_start, '%Y-%m-%d')
             fy_date_start = first_fy_date_start
             if asset_date_start > fy_date_start:
@@ -956,7 +980,7 @@ class AccountAsset(models.Model):
         depreciation_start_date = self._get_depreciation_start_date(fy)
         depreciation_stop_date = self._get_depreciation_stop_date(
             depreciation_start_date)
-
+        unblock_move = True
         while fy_date_start <= depreciation_stop_date:
             table.append({
                 'fy_id': fy_id,
@@ -973,9 +997,12 @@ class AccountAsset(models.Model):
                     init_flag = True
                 else:
                     init_flag = False
-                fy_date_stop = datetime.strptime(fy.date_end, '%Y-%m-%d')
+                fy_date_stop = dt.strptime(fy.date_end, '%Y-%m-%d')
+                unblock_move = False
             else:
                 fy_date_stop = fy_date_stop + relativedelta(years=1)
+                if unblock_move:
+                    fiscalyear_lock_date = fy_date_stop.strftime('%Y-%m-%d')
                 if (
                     fiscalyear_lock_date and
                     fiscalyear_lock_date >= fy_date_stop.strftime('%Y-%m-%d')
@@ -994,9 +1021,9 @@ class AccountAsset(models.Model):
             table, depreciation_start_date, depreciation_stop_date)
         for i, entry in enumerate(table):
 
-            if self.method_time == 'year':
+            if self.method_time in ('year', 'month', 'percentage'):
                 year_amount = self._compute_year_amount(fy_residual_amount)
-                if self.method_period == 'year':
+                if self.method_period in 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
                     period_amount = year_amount / 4
@@ -1028,7 +1055,7 @@ class AccountAsset(models.Model):
                 'period_amount': period_amount,
                 'fy_amount': fy_amount,
             })
-            if self.method_time == 'year':
+            if self.method_time in ['year', 'month']:
                 fy_residual_amount -= fy_amount
                 if round(fy_residual_amount, digits) == 0:
                     break
@@ -1047,6 +1074,31 @@ class AccountAsset(models.Model):
     def _get_depreciation_entry_name(self, seq):
         """ use this method to customise the name of the accounting entry """
         return (self.code or str(self.id)) + '/' + str(seq)
+
+
+    @api.model
+    def _server_compute_entries(self):
+        actions = self.env['account.asset.actions']
+        actions_now = False
+        if self._context.get("date_end", False):
+            date_end = self._context['date_end']
+        else:
+            date_now = fields.Date.today()
+            date_end = fields.Datetime.from_string(date_now) - relativedelta(months=1)
+            date_end = datetime.date(date_end.year, date_end.month, calendar.monthrange(date_end.year, date_end.month)[-1])
+            date_end = fields.Date.to_string(date_end)
+        result, error_log = self._compute_entries(date_end, check_triggers=True)
+        _logger.info("Server side start: %s:%s:%s" % (date_end, result, error_log))
+        if result:
+            actions_now = actions.create({
+                                        'date_action': date_now,
+                                        'date_end': date_end,
+                                        'asset_move_ids': [(6, 0, result)],
+                                        })
+        if actions_now and error_log:
+            actions_now.note = _("Compute Assets errors") + ':\n' + error_log
+        return actions_now and (actions_now.asset_move_ids, actions_now.note) or False
+
 
     @api.multi
     def _compute_entries(self, date_end, check_triggers=False):
@@ -1070,6 +1122,7 @@ class AccountAsset(models.Model):
             ('line_date', '<=', date_end),
             ('move_check', '=', False)],
             order='line_date')
+        _logger.info("Compute enteries %s:%s" % (depreciations, date_end))
         for depreciation in depreciations:
             try:
                 with self.env.cr.savepoint():

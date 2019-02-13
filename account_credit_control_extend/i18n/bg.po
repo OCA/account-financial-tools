@@ -1,0 +1,100 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_credit_control_extend
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0-20181119\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-12 14:15+0000\n"
+"PO-Revision-Date: 2018-12-12 14:15+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_credit_control_extend
+#: model:ir.ui.view,arch_db:account_credit_control_extend.credit_control
+msgid "<strong>Warning!</strong>\n"
+"                You can not shop because you have exceeded your credit limit"
+msgstr "<strong>Внимание!</strong>\n"
+"                Не можете да пазарувате, защото Ви е изчерпан кредитния лимит или имате просрочени плащания! "
+
+#. module: account_credit_control_extend
+#: model:ir.model,name:account_credit_control_extend.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: account_credit_control_extend
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_account_invoice_credit_due
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_partner_credit_due
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_users_credit_due
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_sale_order_credit_due
+#: model:ir.ui.view,arch_db:account_credit_control_extend.invoice_followup_button_form_view
+#: model:ir.ui.view,arch_db:account_credit_control_extend.partner_credit_control_button_form_view
+msgid "Credit Due"
+msgstr "Кредитен дълг"
+
+#. module: account_credit_control_extend
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_partner_credit_left
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_users_credit_left
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_sale_order_credit_left
+#: model:ir.ui.view,arch_db:account_credit_control_extend.view_order_credit_control_form
+msgid "Credit Left"
+msgstr "Останал кредит"
+
+#. module: account_credit_control_extend
+#: model:ir.actions.act_window,name:account_credit_control_extend.act_account_credit_extend_relation_relation
+msgid "Credit Lines"
+msgstr "Редове от кредит контрола"
+
+#. module: account_credit_control_extend
+#: code:addons/account_credit_control_extend/models/sale.py:86
+#, python-format
+msgid "Credit control: (%s)"
+msgstr "Кредитен контрол: (%s)"
+
+#. module: account_credit_control_extend
+#: model:ir.model,name:account_credit_control_extend.model_credit_control_policy
+msgid "Define a reminder policy"
+msgstr "Определете политика за напомняне"
+
+#. module: account_credit_control_extend
+#: model:ir.model,name:account_credit_control_extend.model_account_invoice
+msgid "Invoice"
+msgstr "Фактура"
+
+#. module: account_credit_control_extend
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_sale_order_credit_overload
+msgid "Overload Credit limit"
+msgstr "Претоварване на Кредитен лимит"
+
+#. module: account_credit_control_extend
+#: model:ir.model,name:account_credit_control_extend.model_sale_order
+msgid "Quotation"
+msgstr "Заявка"
+
+#. module: account_credit_control_extend
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_sale_order_parent_id
+msgid "Related Company"
+msgstr "Свързана фирма"
+
+#. module: account_credit_control_extend
+#: model:ir.ui.view,arch_db:account_credit_control_extend.credit_control
+msgid "Shop - Credit Control"
+msgstr "Магазин - Кредитен контрол"
+
+#. module: account_credit_control_extend
+#: code:addons/account_credit_control_extend/models/sale.py:87
+#, python-format
+msgid "The client of this order (%s) has exceeded its credit limit (%s) or has unpaid obligations (%s)."
+msgstr "Клиентът от тази поръчка (%s) е надвишил кредитния си лимит (%s) или има неизплатени задължения (%s)."
+
+#. module: account_credit_control_extend
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_partner_total_opened_invoice
+#: model:ir.model.fields,field_description:account_credit_control_extend.field_res_users_total_opened_invoice
+msgid "Total Opened Invoices"
+msgstr "Общо отворени фактури"
+

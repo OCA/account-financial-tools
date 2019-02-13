@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <act_window
+            id="act_account_credit_extend_relation_relation"
+            name="Credit Lines"
+            groups="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user"
+            domain="[('partner_id', '=', defult_partner_id)]"
+            res_model="credit.control.line"
+            src_model="sale.order"/>
+
+    <record id="view_order_credit_control_form" model="ir.ui.view">
+        <field name="name">sale.order.credit_contol.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <field name="credit_overload"  invisible="1"/>
+                <field name="parent_id" invisible="1"/>
+                <button class="oe_stat_button" type="action"
+                        name="%(account_credit_control_extend.act_account_credit_extend_relation_relation)d"
+                        icon="fa-ban"
+                        attrs="{'invisible': [('partner_id', '=', False)]}"
+                        context="{'defult_partner_id': parent_id}"
+                        group="account_credit_control.group_account_credit_control_manager,account_credit_control.group_account_credit_control_user">
+                    <field string="Credit Left" name="credit_left" widget="statinfo" style="color:red;" attrs="{'invisible': [('credit_overload', '=', False)]}"/>
+                    <field string="Credit Left" name="credit_left" widget="statinfo" attrs="{'invisible': [('credit_overload', '=', True)]}"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

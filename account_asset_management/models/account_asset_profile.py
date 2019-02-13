@@ -76,7 +76,7 @@ class AccountAssetProfile(models.Model):
     method_period = fields.Selection(
         selection=lambda self: self._selection_method_period(),
         string='Period Length', required=True,
-        default='year',
+        default='month',
         help="Period length for the depreciation accounting entries")
     method_progress_factor = fields.Float(
         string='Degressive Factor', default=0.3)
@@ -136,6 +136,8 @@ class AccountAssetProfile(models.Model):
         """
         return [
             ('year', _('Number of Years')),
+            ('month', _('Month')),
+            ('percentage', _('Percentage law fixed')),
         ]
 
     @api.multi

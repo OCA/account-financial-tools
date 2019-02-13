@@ -7,7 +7,8 @@
         Allows to edit taxes on non-posted account move lines""",
     'version': '11.0.1.0.0',
     'license': 'AGPL-3',
-    'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
+    'author': 'dXFactory Ltd., '
+              'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://www.acsone.eu',
     'depends': [
         'account',
@@ -15,5 +16,6 @@
     'data': [
         'views/account_move.xml',
         'views/account_move_line.xml',
+        'views/account_invoice_views.xml',
     ],
 }

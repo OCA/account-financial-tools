@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="credit_control">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Shop - Credit Control</t>
+            <div class="alert alert-danger text-center">
+                <strong>Warning!</strong>
+                You can not shop because you have exceeded your credit limit
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -11,6 +11,7 @@
         </group>
         <footer>
           <button string="Compute" name="asset_compute" type="object" class="oe_highlight"/>
+          <button string="Start" name="shoot_and_forget" type="object" class="oe_link"/>
           <button string="Cancel" class="oe_link" special="cancel"/>
         </footer>
       </form>

@@ -50,6 +50,8 @@
                 <group>
                   <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                          attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                  <field name="date_buy"
+                         attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('type', '=', 'normal')]}"/>
                   <field name="date_start"
                          attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('type', '=', 'normal')]}"/>
                 </group>
@@ -70,17 +72,18 @@
                   <separator string="Depreciation Dates" colspan="2"/>
                   <field name="method_time"/>
                   <field name="method_number"
-                         attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
-                  <field name="method_period"/>
+                         attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'month', 'year'])]}"/>
+                  <field name="method_period"
+                         attrs="{'invisible': [('method_time', '=', 'month')]}"/>
                   <field name="method_end"
-                         attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number', 'year'])]}"/>
+                         attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number', 'month', 'year'])]}"/>
                 </group>
                 <group>
                   <separator string="Depreciation Method" colspan="2"/>
                   <field name="method"/>
                   <field name="method_progress_factor"
                          attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"/>
-                  <field name="prorata" attrs="{'readonly': [('method_time', '!=', 'year')]}"/>
+                  <field name="prorata" attrs="{'readonly': [('method_time', 'not in', ['month', 'year'])]}"/>
                 </group>
               </group>
             </page>
