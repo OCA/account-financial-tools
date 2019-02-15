@@ -291,7 +291,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def action_init(self):
         """Initial action that sets the initial state."""
-        self.state = 'init'
+        self.write({
+            'state': 'init',
+            'tax_ids': [(2, r.id, False) for r in self.tax_ids],
+            'account_ids': [(2, r.id, False) for r in self.account_ids],
+            'fiscal_position_ids': [(2, r.id, False) for r in
+                                    self.fiscal_position_ids],
+        })
         return self._reopen()
 
     @api.multi
