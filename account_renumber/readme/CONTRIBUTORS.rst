@@ -5,3 +5,4 @@
   * Pedro M. Baeza
   * Jairo Llopis
   * David Vidal
+  * Vicent Cubells
