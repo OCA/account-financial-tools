@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009 Pexego Sistemas Informáticos. All Rights Reserved
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
