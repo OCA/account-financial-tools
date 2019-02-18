@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2009 Pexego Sistemas Informáticos
 # Copyright 2013-2018 Pedro Manuel Baeza
 # Copyright 2013 Joaquin Gutierrez <http://www.gutierrezweb.es>
@@ -8,11 +7,11 @@
 
 {
     'name': "Account Renumber Wizard",
-    'version': "11.0.1.0.0",
+    'version': "12.0.1.0.0",
     'author': "Pexego,"
               "Tecnativa,"
               "Odoo Community Association (OCA)",
-    'website': "http://www.pexego.es",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': "Accounting & Finance",
     "license": "AGPL-3",
     "depends": [
