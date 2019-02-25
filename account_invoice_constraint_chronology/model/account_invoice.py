@@ -5,6 +5,7 @@ import datetime
 
 from odoo import models, api, fields, _
 from odoo.exceptions import UserError
+from odoo.tools.misc import format_date
 
 
 class AccountInvoice(models.Model):
@@ -46,8 +47,9 @@ class AccountInvoice(models.Model):
                     month=inv.date_invoice.month,
                     day=inv.date_invoice.day,
                 )
-                date_invoice_tz = fields.Date.context_today(
-                    self, date_invoice_format)
+                date_invoice_tz = format_date(
+                    self.env, fields.Date.context_today(
+                        self, date_invoice_format))
                 raise UserError(_(
                     "Chronology Error. Please confirm older draft invoices "
                     "before {date_invoice} and try again.").format(
@@ -61,8 +63,9 @@ class AccountInvoice(models.Model):
                         month=inv.date_invoice.month,
                         day=inv.date_invoice.day,
                     )
-                    date_invoice_tz = fields.Date.context_today(
-                        self, date_invoice_format)
+                    date_invoice_tz = format_date(
+                        self.env, fields.Date.context_today(
+                            self, date_invoice_format))
                     raise UserError(_(
                         "Chronology Error. There exist at least one invoice "
                         "with a later date to {date_invoice}.").format(
