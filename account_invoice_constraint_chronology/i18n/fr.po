@@ -32,7 +32,7 @@ msgid ""
 "and try again."
 msgstr ""
 "Erreur de chronologie. Veuillez confirmer les anciennes factures brouillon "
-"avant %set réessayer."
+"avant le {date_invoice} et réessayer."
 
 #. module: account_invoice_constraint_chronology
 #: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:66
@@ -42,7 +42,7 @@ msgid ""
 "{date_invoice}."
 msgstr ""
 "Erreur de chronologie. Il existe au moins une facture avec une date "
-"ultérieure à %s."
+"ultérieure au {date_invoice}."
 
 #. module: account_invoice_constraint_chronology
 #: model:ir.model,name:account_invoice_constraint_chronology.model_account_invoice
