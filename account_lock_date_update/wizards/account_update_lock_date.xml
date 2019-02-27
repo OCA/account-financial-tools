@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <form>
                 <group name="main">
-                    <field name="company_id" invisible="1"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <field name="period_lock_date"/>
                     <field name="fiscalyear_lock_date"/>
                 </group>
@@ -30,10 +30,12 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="account_update_lock_date_menu"
-        parent="account.account_account_menu"
-        action="account_update_lock_date_act_window"
-        groups="account.group_account_manager"
-        sequence="70"/>
+    <record model="ir.ui.menu" id="account_update_lock_date_menu">
+        <field name="name">Update Accounting Lock Dates</field>
+        <field name="parent_id" ref="account.account_account_menu"/>
+        <field name="action" ref="account_update_lock_date_act_window"/>
+        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
+        <field name="sequence" eval="70"/>
+    </record>
 
 </odoo>

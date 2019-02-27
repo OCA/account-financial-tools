@@ -7,6 +7,7 @@
             <form string="Lock permanently entries">
                 <label string="All journal entries prior to and included at the new lock date will be permanently locked."/>
                 <group>
+                    <field name="company_id" groups="base.group_multi_company"/>
                     <field name="current_lock_date"/>
                     <field name="lock_date" required="1"/>
                 </group>

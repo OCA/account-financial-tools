@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class AccountUpdateLockDate(models.TransientModel):
-
     _inherit = 'account.update.lock_date'
 
     tmp_permanent_lock_date = fields.Date(string="Permanent Lock Date")
@@ -21,15 +20,14 @@ class AccountUpdateLockDate(models.TransientModel):
     def execute(self):
         res = super(AccountUpdateLockDate, self).execute()
         if self.tmp_permanent_lock_date != self.company_id.permanent_lock_date:
-            wizard = self.env['permanent.lock.date.wizard'].create({
-                'company_id': self.company_id.id,
-                'lock_date': self.tmp_permanent_lock_date,
-            })
             return {
                 'type': 'ir.actions.act_window',
                 'res_model': 'permanent.lock.date.wizard',
                 'view_mode': 'form',
-                'res_id': wizard.id,
                 'target': 'new',
-            }
+                'context': {
+                    'default_company_id': self.company_id.id,
+                    'default_lock_date': self.tmp_permanent_lock_date,
+                    }
+                }
         return res
