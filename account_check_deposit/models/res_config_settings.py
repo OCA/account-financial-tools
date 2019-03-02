@@ -16,3 +16,6 @@ class ResConfigSettings(models.TransientModel):
         related='company_id.check_deposit_transfer_account_id',
         readonly=False,
     )
+    check_deposit_post_move = fields.Boolean(
+        related='company_id.check_deposit_post_move', readonly=False,
+    )
