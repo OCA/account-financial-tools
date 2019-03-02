@@ -5,7 +5,7 @@
 # @author: Mourad EL HADJ MIMOUNE <mourad.elhadj.mimoune@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class ResCompany(models.Model):
@@ -19,3 +19,5 @@ class ResCompany(models.Model):
         'account.account', string='Transfer Account for Check Deposits',
         ondelete='restrict', copy=False,
         domain=[('reconcile', '=', True), ('deprecated', '=', False)])
+    check_deposit_post_move = fields.Boolean(
+        string='Post Move for Check Deposits')
