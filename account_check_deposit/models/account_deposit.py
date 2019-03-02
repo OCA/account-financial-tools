@@ -263,6 +263,11 @@ class AccountCheckDeposit(models.Model):
             else:
                 self.currency_id = self.journal_id.company_id.currency_id
 
+    def get_report(self):
+        action = self.env['report'].get_action(
+            self, 'account_check_deposit.report_checkdeposit')
+        return action
+
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
