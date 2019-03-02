@@ -16,7 +16,6 @@ class AccountCheckDeposit(models.Model):
     _description = "Account Check Deposit"
     _order = 'deposit_date desc'
 
-    @api.multi
     @api.depends(
         'company_id', 'currency_id', 'check_payment_ids.debit',
         'check_payment_ids.amount_currency',
@@ -59,12 +58,12 @@ class AccountCheckDeposit(models.Model):
         required=True, states={'done': [('readonly', '=', True)]})
     journal_default_account_id = fields.Many2one(
         'account.account', related='journal_id.default_debit_account_id',
-        string='Default Debit Account of the Journal', readonly=True)
+        string='Default Debit Account of the Journal')
     currency_id = fields.Many2one(
         'res.currency', string='Currency', required=True,
         states={'done': [('readonly', '=', True)]})
     currency_none_same_company_id = fields.Many2one(
-        'res.currency', compute='_compute_check_deposit',
+        'res.currency', compute='_compute_check_deposit', store=True,
         string='Currency (False if same as company)')
     state = fields.Selection(
         [
@@ -84,20 +83,18 @@ class AccountCheckDeposit(models.Model):
     company_id = fields.Many2one(
         'res.company', string='Company', required=True,
         states={'done': [('readonly', '=', True)]},
-        default=lambda self: self.env['res.company']._company_default_get(
-            'account.check.deposit'))
+        default=lambda self: self.env['res.company']._company_default_get())
     total_amount = fields.Float(
         compute='_compute_check_deposit',
-        string="Total Amount", readonly=True,
+        string="Total Amount", readonly=True, store=True,
         digits=dp.get_precision('Account'))
     check_count = fields.Integer(
-        compute='_compute_check_deposit', readonly=True,
+        compute='_compute_check_deposit', readonly=True, store=True,
         string="Number of Checks")
     is_reconcile = fields.Boolean(
-        compute='_compute_check_deposit', readonly=True,
+        compute='_compute_check_deposit', readonly=True, store=True,
         string="Reconcile")
 
-    @api.multi
     @api.constrains('currency_id', 'check_payment_ids', 'company_id')
     def _check_deposit(self):
         for deposit in self:
@@ -123,7 +120,6 @@ class AccountCheckDeposit(models.Model):
                                 line.currency_id.name,
                                 deposit_currency.name))
 
-    @api.multi
     def unlink(self):
         for deposit in self:
             if deposit.state == 'done':
@@ -133,7 +129,6 @@ class AccountCheckDeposit(models.Model):
                     % deposit.name)
         return super(AccountCheckDeposit, self).unlink()
 
-    @api.multi
     def backtodraft(self):
         for deposit in self:
             if deposit.move_id:
@@ -150,6 +145,7 @@ class AccountCheckDeposit(models.Model):
     def create(self, vals):
         if vals.get('name', '/') == '/':
             vals['name'] = self.env['ir.sequence'].\
+                with_context(ir_sequence_date=vals.get('deposit_date')).\
                 next_by_code('account.check.deposit')
         return super(AccountCheckDeposit, self).create(vals)
 
@@ -164,8 +160,7 @@ class AccountCheckDeposit(models.Model):
         move_vals = {
             'journal_id': journal_id,
             'date': deposit.deposit_date,
-            'name': _('Check Deposit %s') % deposit.name,
-            'ref': deposit.name,
+            'ref': _('Check Deposit %s') % deposit.name,
         }
         return move_vals
 
@@ -199,7 +194,7 @@ class AccountCheckDeposit(models.Model):
         elif company.check_deposit_offsetting_account == 'transfer_account':
             if not company.check_deposit_transfer_account_id:
                 raise UserError(_(
-                    "Missing 'Account for Check Deposits' on the "
+                    "Missing 'Check Deposit Offsetting Account' on the "
                     "company '%s'.") % company.name)
             account_id = company.check_deposit_transfer_account_id.id
         return {
@@ -212,7 +207,6 @@ class AccountCheckDeposit(models.Model):
             'amount_currency': total_amount_currency,
         }
 
-    @api.multi
     def validate_deposit(self):
         am_obj = self.env['account.move']
         move_line_obj = self.env['account.move.line']
@@ -236,6 +230,8 @@ class AccountCheckDeposit(models.Model):
                 deposit, total_debit, total_amount_currency)
             counter_vals['move_id'] = move.id
             move_line_obj.create(counter_vals)
+            if deposit.company_id.check_deposit_post_move:
+                move.post()
 
             deposit.write({'state': 'done', 'move_id': move.id})
             for reconcile_lines in to_reconcile_lines:
@@ -261,3 +257,9 @@ class AccountCheckDeposit(models.Model):
                 self.currency_id = self.journal_id.currency_id
             else:
                 self.currency_id = self.journal_id.company_id.currency_id
+
+    def get_report(self):
+        report = self.env.ref(
+            'account_check_deposit.report_account_check_deposit')
+        action = report.report_action(self)
+        return action
