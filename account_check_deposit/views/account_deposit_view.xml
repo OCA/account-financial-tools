@@ -22,6 +22,7 @@
                             states="done"
                             string="Back to Draft"
                             type="object"/>
+                    <button name="get_report" string="Print" type="object"/>
                     <field name="state"
                            widget="statusbar"
                            statusbar_visible="draft,done"/>
