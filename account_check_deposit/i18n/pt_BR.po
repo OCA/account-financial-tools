@@ -286,6 +286,11 @@ msgid "Post Move for Check Deposits"
 msgstr ""
 
 #. module: account_check_deposit
+#: model:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Print"
+msgstr ""
+
+#. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit_is_reconcile
 msgid "Reconcile"
 msgstr "Reconciliar"
