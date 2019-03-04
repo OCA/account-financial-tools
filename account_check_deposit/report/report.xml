@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (C) 2014-2019 Akretion (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  The licence is in the file __manifest__.py
+-->
+
+<odoo>
+
+    <report id="report_account_check_deposit"
+            model="account.check.deposit"
+            string="Check Deposit"
+            report_type="qweb-pdf"
+            name="account_check_deposit.report_checkdeposit"
+            file="account_check_deposit.report_checkdeposit"
+            print_report_name="'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or '')"
+    />
+
+</odoo>
