@@ -49,7 +49,7 @@ Usage
 
 
 Go to Invoicing -> Configuration -> Date Ranges -> Fiscal Years to create a new
-Fiscal Year. 
+Fiscal Year.
 
 Bug Tracker
 ===========
