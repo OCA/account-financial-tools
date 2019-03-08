@@ -39,6 +39,11 @@
                         </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
@@ -54,6 +59,7 @@
                     <field name="policy_id"/>
                     <separator />
                     <field name="partner_id"/>
+                    <field name="partner_user_id"/>
                     <field name="account_id"/>
                     <field name="invoice_id"/>
                     <field name="level"/>
@@ -85,7 +91,7 @@
                             help="The line was deprecated by a manual change of policy on invoice."/>
                     <filter name="filter_manual" icon="fa-hand-paper-o"
                             string="Manual followup"
-                            domain="[('manually_followup', '=', True)]"
+                            domain="[('manual_followup', '=', True)]"
                             help="The partner had a manual followup."/>
                 </group>
                 <group expand="0" string="Group By" name="group_by">
@@ -113,6 +119,7 @@
                     <filter domain='[]'
                             context="{'group_by': 'manual_followup'}"
                             icon="terp-document-new" string="Manual followup"/>
+                    <filter string="Salesperson" context="{'group_by':'partner_user_id'}"/>
                 </group>
             </search>
         </field>
@@ -122,9 +129,12 @@
         <field name="name">credit.control.line.tree</field>
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
-            <tree editable="bottom" string="Control Credit Lines"
+            <tree string="Control Credit Lines" editable="bottom"
                   decoration-danger="state in ('error', 'email_error')"
+                  decoration-muted="state == 'ignored'"
                   decoration-success="state == 'sent'">
+                <button name="button_credit_control_line_form"
+                        type="object" icon="fa-external-link" class="oe_stat_button"/>
                 <field name="date"/>
                 <field name="date_due"/>
                 <field name="level"/>
@@ -142,6 +152,10 @@
                 <field name="policy_level_id"/>
                 <field name="policy_id"/>
                 <field name="mail_message_id"/>
+                <field name="activity_date_deadline"/>
+                <button name="button_schedule_activity" type="object"
+                        string="Schedule activity" icon="fa fa-clock-o"/>
+                <field name="activity_summary"/>
             </tree>
         </field>
     </record>

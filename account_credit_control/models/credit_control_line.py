@@ -18,13 +18,18 @@ class CreditControlLine(models.Model):
     """
 
     _name = "credit.control.line"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "A credit control line"
     _rec_name = "id"
     _order = "date DESC"
 
-    date = fields.Date(string='Controlling date',
-                       required=True,
-                       index=True)
+    date = fields.Date(
+        string='Controlling date',
+        required=True,
+        index=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     # maturity date of related move line we do not use
     # a related field in order to
     # allow manual changes
@@ -61,9 +66,13 @@ class CreditControlLine(models.Model):
     invoice_id = fields.Many2one('account.invoice',
                                  string='Invoice',
                                  readonly=True)
-    partner_id = fields.Many2one('res.partner',
-                                 string='Partner',
-                                 required=True)
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     amount_due = fields.Float(string='Due Amount Tax incl.',
                               required=True, readonly=True)
     balance_due = fields.Float(string='Due balance', required=True,
@@ -103,6 +112,19 @@ class CreditControlLine(models.Model):
     run_id = fields.Many2one(comodel_name='credit.control.run',
                              string='Source')
     manual_followup = fields.Boolean()
+    partner_user_id = fields.Many2one(
+        comodel_name='res.users',
+        string="Salesperson",
+        # Use compute instead of related because it raises access error if the
+        # user is in other company even using related_sudo
+        compute='_compute_partner_user_id',
+        store=True,
+    )
+
+    @api.depends('partner_id.user_id')
+    def _compute_partner_user_id(self):
+        for line in self:
+            line.partner_user_id = line.partner_id.user_id
 
     @api.model
     def _prepare_from_move_line(self, move_line, level, controlling_date,
@@ -194,7 +216,6 @@ class CreditControlLine(models.Model):
                     _('You are not allowed to delete a credit control '
                       'line that is not in draft state.')
                 )
-
         return super(CreditControlLine, self).unlink()
 
     @api.multi
@@ -211,3 +232,31 @@ class CreditControlLine(models.Model):
         line = super(CreditControlLine, self).create(values)
         line.manual_followup = line.partner_id.manual_followup
         return line
+
+    def button_schedule_activity(self):
+        ctx = self.env.context.copy()
+        ctx.update({
+            'default_res_id': self.ids[0],
+            'default_res_model': self._name,
+        })
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _("Schedule activity"),
+            'res_model': 'mail.activity',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_id': self.activity_ids and self.activity_ids.ids[0] or False,
+            'views': [[False, 'form']],
+            'context': ctx,
+            'target': 'new',
+        }
+
+    def button_credit_control_line_form(self):
+        self.ensure_one()
+        action = self.env.ref(
+            'account_credit_control.credit_control_line_action')
+        form = self.env.ref('account_credit_control.credit_control_line_form')
+        action = action.read()[0]
+        action['views'] = [(form.id, 'form')]
+        action['res_id'] = self.id
+        return action

@@ -22,16 +22,27 @@
                             class="oe_highlight"
                             type="object" icon="fa-cogs"
                             attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="open_credit_lines"
-                            string="Open Credit Control Lines"
-                            type="object"
+                    <button name="set_to_ready_lines" type="object"
+                            string="Set to ready all"
+                            confirm="Are you sure you want to set all Draft lines as Ready To Send?"
+                            attrs="{'invisible': ['|', ('hide_change_state_button', '=', True), ('state', '=', 'draft')]}"/>
+                    <button name="run_channel_action" type="object"
+                            string="Run channel action"
+                            confirm="Are you sure you want to run all ready lines channel action?"
                             attrs="{'invisible': [('state', '=', 'draft')]}"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,done"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="open_credit_lines"
+                                icon="fa-tasks" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <field string="Control Lines" name="credit_control_count" widget="statinfo"/>
+                        </button>
+                    </div>
                     <group>
                         <field name="date"/>
+                        <field name="hide_change_state_button" invisible="1"/>
                     </group>
                     <notebook>
                         <page string="Policies">
