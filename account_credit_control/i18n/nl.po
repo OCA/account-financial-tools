@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-31 12:31+0000\n"
+"POT-Creation-Date: 2018-11-26 12:28+0000\n"
 "PO-Revision-Date: 2018-12-04 12:09+0000\n"
 "Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
 "Language-Team: \n"
@@ -46,8 +46,8 @@ msgstr ""
 "dossier doorgestuurd naar onze incassobureau.\n"
 "\n"
 "            Eventueel kunnen we samen een betalingsregeling opstellen.\n"
-"            Een volledige lijst openstaande postenlijst is vind U hieronder."
-"\n"
+"            Een volledige lijst openstaande postenlijst is vind U "
+"hieronder.\n"
 "\n"
 "            Bijvoorbaat dank voor uw medewerking.\n"
 "\n"
@@ -70,6 +70,14 @@ msgstr ""
 "  <br/>\n"
 "  ${object.current_policy_level.custom_mail_text | safe}\n"
 "  "
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_count
+#, fuzzy
+msgid "# of Credit Control Lines"
+msgstr "Aanmaning regels"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
@@ -108,7 +116,7 @@ msgid "A credit control line"
 msgstr "Een Aanmaning regel"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:73
+#: code:addons/account_credit_control/models/credit_control_run.py:100
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr "Een Aanmaning regel recenter dan %s bestaat op %s"
@@ -119,7 +127,7 @@ msgid "A credit control policy level"
 msgstr "Aanmaning beleidsniveau"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:139
+#: code:addons/account_credit_control/models/credit_control_run.py:166
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -127,7 +135,7 @@ msgstr ""
 "Een Aanmaning is op de achtergrond al gestart, probeer het later nog eens."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:66
+#: code:addons/account_credit_control/models/credit_control_run.py:93
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr "Er is reeds eerder een aanmaningsrun uitgevoerd dan %s"
@@ -159,6 +167,16 @@ msgstr "Toestaan om handmatig het aanmaningsbeleid aant te passen"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr "Er is een fout opgetreden bij het versturen van de mail."
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to run all ready lines channel action?"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to set all Draft lines as Ready To Send?"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:292
@@ -218,6 +236,7 @@ msgstr "Bedrijven"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_company_id
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_company_id
 msgid "Company"
 msgstr "Bedrijf"
 
@@ -247,6 +266,12 @@ msgstr "Contact Adres"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 msgid "Control Credit Lines"
 msgstr "Aanmaningsregels"
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+#, fuzzy
+msgid "Control Lines"
+msgstr "Aanmaning regels"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_date
@@ -289,6 +314,7 @@ msgstr "Aangemaakt op"
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
 msgstr "Aanmaning"
@@ -298,8 +324,6 @@ msgstr "Aanmaning"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_line_ids
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
 msgid "Credit Control Lines"
@@ -491,8 +515,8 @@ msgid "Do Nothing"
 msgstr "Niets doen"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: selection:credit.control.run,state:0
 msgid "Done"
 msgstr "Verwerkt"
 
@@ -602,6 +626,11 @@ msgid "Group By"
 msgstr "Groepeer op"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_hide_change_state_button
+msgid "Hide Change State Button"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_id
@@ -624,8 +653,7 @@ msgstr ""
 "is in de tussentijd gewijzigd, moet dit handmatig worden afgehandeld"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ignored"
 msgstr "Genegeerd"
@@ -904,11 +932,6 @@ msgid "Only letter lines will be marked."
 msgstr "Allen briefregels worden gemarkeerd."
 
 #. module: account_credit_control
-#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-msgid "Open Credit Control Lines"
-msgstr "Open Aanmaningsregels"
-
-#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
 msgstr "Open bedrag"
@@ -966,8 +989,8 @@ msgstr ""
 "onderstaande facturen.<br>\n"
 "  <br>\n"
 "  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
-"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 10 dagen.<br>"
-"\n"
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 10 dagen."
+"<br>\n"
 "  <br>\n"
 "  Bijvoorbaat dank voor uw medewerking.<br>\n"
 "  <br>\n"
@@ -988,8 +1011,8 @@ msgstr ""
 "Volgens onze administratie hebben we geen betalingen ontvangen van "
 "onderstaande facturen.<br>\n"
 "  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
-"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 10 dagen.<br>"
-"\n"
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 10 dagen."
+"<br>\n"
 "  <br>\n"
 "  Bijvoorbaat dank voor uw medewerking.<br>\n"
 "  <br>\n"
@@ -1012,8 +1035,8 @@ msgstr ""
 "Volgens onze administratie hebben we geen betalingen ontvangen van "
 "onderstaande facturen.<br>\n"
 "  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
-"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 5 dagen.<br>"
-"\n"
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 5 dagen."
+"<br>\n"
 "  <br>\n"
 "  Bijvoorbaat dank voor uw medewerking.<br>\n"
 "  <br>\n"
@@ -1172,7 +1195,7 @@ msgid "Payment Note"
 msgstr "Betalingsnotitie"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:87
+#: code:addons/account_credit_control/models/credit_control_run.py:114
 #, python-format
 msgid "Please select a policy"
 msgstr "Selecteer aub een aanmaningsbeleid"
@@ -1195,13 +1218,14 @@ msgid "Policy"
 msgstr "Beleid"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:110
+#: code:addons/account_credit_control/models/credit_control_run.py:137
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
-msgstr "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
+msgstr ""
+"Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:114
+#: code:addons/account_credit_control/models/credit_control_run.py:141
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1250,8 +1274,7 @@ msgid "Print the selected lines"
 msgstr "Print geselecteerde regels"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ready To Send"
 msgstr "Beschikbaar voor verzenden"
@@ -1274,9 +1297,27 @@ msgid "Report Date"
 msgstr "Rapport Datum"
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Run channel action"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Run date"
 msgstr "Run datum"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_user_id
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Salesperson"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_line.py:244
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
+#, python-format
+msgid "Schedule activity"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
@@ -1323,6 +1364,12 @@ msgstr "Pas huidige aanmaningsniveau toe"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
 msgstr "Pas nieuwe beleid toe"
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+#, fuzzy
+msgid "Set to ready all"
+msgstr "Pas huidige aanmaningsniveau toe"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_run_id
@@ -1462,7 +1509,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr "Waarschuwing: U kan misschien deze wijziging niet terugzetten."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:194
+#: code:addons/account_credit_control/models/credit_control_line.py:216
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
@@ -1509,3 +1556,6 @@ msgstr "credit.control.policy.changer"
 #: model:ir.model,name:account_credit_control.model_res_config_settings
 msgid "res.config.settings"
 msgstr "res.config.settings"
+
+#~ msgid "Open Credit Control Lines"
+#~ msgstr "Open Aanmaningsregels"
