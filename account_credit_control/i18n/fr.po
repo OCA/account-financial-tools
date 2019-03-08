@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-06 02:40+0000\n"
+"POT-Creation-Date: 2018-11-26 12:28+0000\n"
 "PO-Revision-Date: 2018-04-06 02:40+0000\n"
 "Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
@@ -75,6 +75,14 @@ msgstr ""
 "  "
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_count
+#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_count
+#, fuzzy
+msgid "# of Credit Control Lines"
+msgstr "Lignes de relance"
+
+#. module: account_credit_control
 #: model:credit.control.policy.level,name:account_credit_control.3_time_3
 msgid "10 days last reminder"
 msgstr "10 jours depuis la dernière relance"
@@ -111,7 +119,7 @@ msgid "A credit control line"
 msgstr "Ligne de relance"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:73
+#: code:addons/account_credit_control/models/credit_control_run.py:100
 #, python-format
 msgid "A credit control line more recent than %s exists at %s"
 msgstr "Une ligne plus récente que %s existe au %s"
@@ -122,7 +130,7 @@ msgid "A credit control policy level"
 msgstr "Une politique de relance"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:139
+#: code:addons/account_credit_control/models/credit_control_run.py:166
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -131,7 +139,7 @@ msgstr ""
 "d'essayer à nouveau plus tard."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:66
+#: code:addons/account_credit_control/models/credit_control_run.py:93
 #, python-format
 msgid "A run has already been executed more recently than %s"
 msgstr "Un contrôle a déjà été exécuté plus récemment que le %s "
@@ -163,6 +171,16 @@ msgstr "Permet de changer manuellement le niveau de relance"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "An error has occured during the sending of the email."
 msgstr "Erreur lors de la génération des mails."
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to run all ready lines channel action?"
+msgstr ""
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Are you sure you want to set all Draft lines as Ready To Send?"
+msgstr ""
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:292
@@ -224,6 +242,7 @@ msgstr "Sociétés"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_company_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_company_id
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_company_id
 msgid "Company"
 msgstr "Société"
 
@@ -252,6 +271,12 @@ msgstr "Adresse de contact"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 msgid "Control Credit Lines"
+msgstr "Lignes de relance"
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+#, fuzzy
+msgid "Control Lines"
 msgstr "Lignes de relance"
 
 #. module: account_credit_control
@@ -295,6 +320,7 @@ msgstr "Créé le"
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_configuration_menu
 #: model:ir.ui.menu,name:account_credit_control.base_credit_control_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
+#: model:ir.ui.view,arch_db:account_credit_control.partner_view_buttons
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
 msgid "Credit Control"
 msgstr "Relances Clients"
@@ -304,8 +330,6 @@ msgstr "Relances Clients"
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_marker_line_ids
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_printer_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_partner_credit_control_line_ids
-#: model:ir.model.fields,field_description:account_credit_control.field_res_users_credit_control_line_ids
 #: model:ir.ui.menu,name:account_credit_control.credit_control_line_action_menu
 #: model:ir.ui.view,arch_db:account_credit_control.invoice_followup_form_view
 msgid "Credit Control Lines"
@@ -496,8 +520,8 @@ msgid "Do Nothing"
 msgstr "Ne rien faire"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0 selection:credit.control.run,state:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
+#: selection:credit.control.run,state:0
 msgid "Done"
 msgstr "Fait"
 
@@ -609,6 +633,11 @@ msgid "Group By"
 msgstr "Grouper par"
 
 #. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_hide_change_state_button
+msgid "Hide Change State Button"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_communication_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_emailer_id
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_id
@@ -631,8 +660,7 @@ msgstr ""
 "être traitée manuellement"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ignored"
 msgstr "Ignorée"
@@ -913,11 +941,6 @@ msgid "Only letter lines will be marked."
 msgstr "Seules les relances par courrier seront traitées."
 
 #. module: account_credit_control
-#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-msgid "Open Credit Control Lines"
-msgstr "Ouvrir les lignes de relance"
-
-#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
 msgid "Open amount"
 msgstr "Restant dû"
@@ -1184,7 +1207,7 @@ msgid "Payment Note"
 msgstr "Note de paiement"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:87
+#: code:addons/account_credit_control/models/credit_control_run.py:114
 #, python-format
 msgid "Please select a policy"
 msgstr "Utilisez l'action sur les factures clients"
@@ -1207,7 +1230,7 @@ msgid "Policy"
 msgstr "Politique"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:110
+#: code:addons/account_credit_control/models/credit_control_run.py:137
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
 msgstr ""
@@ -1215,7 +1238,7 @@ msgstr ""
 "<br/>"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:114
+#: code:addons/account_credit_control/models/credit_control_run.py:141
 #, python-format
 msgid "Policy \"<b>%s</b>\" has not generated any Credit Control Lines.<br/>"
 msgstr ""
@@ -1265,8 +1288,7 @@ msgid "Print the selected lines"
 msgstr "Imprimer la sélection"
 
 #. module: account_credit_control
-#: selection:credit.control.line,state:0
-#: selection:credit.control.marker,name:0
+#: selection:credit.control.line,state:0 selection:credit.control.marker,name:0
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Ready To Send"
 msgstr "Prêt à l'envoi"
@@ -1289,9 +1311,27 @@ msgid "Report Date"
 msgstr "Date du rapport"
 
 #. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+msgid "Run channel action"
+msgstr ""
+
+#. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Run date"
 msgstr "Date de relance"
+
+#. module: account_credit_control
+#: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_partner_user_id
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
+msgid "Salesperson"
+msgstr ""
+
+#. module: account_credit_control
+#: code:addons/account_credit_control/models/credit_control_line.py:244
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
+#, python-format
+msgid "Schedule activity"
+msgstr ""
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
@@ -1338,6 +1378,12 @@ msgstr "Définir le niveau de relance actuel"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
 msgid "Set new policy"
 msgstr "Définir une nouvelle politique de relance"
+
+#. module: account_credit_control
+#: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
+#, fuzzy
+msgid "Set to ready all"
+msgstr "Définir le niveau de relance actuel"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_run_id
@@ -1477,7 +1523,7 @@ msgid "Warning: you will maybe not be able to revert this operation."
 msgstr "Attention: Cette opération ne peut pas être annulée"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:194
+#: code:addons/account_credit_control/models/credit_control_line.py:216
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
@@ -1522,3 +1568,6 @@ msgstr "credit.control.policy.changer"
 #: model:ir.model,name:account_credit_control.model_res_config_settings
 msgid "res.config.settings"
 msgstr "res.config.settings"
+
+#~ msgid "Open Credit Control Lines"
+#~ msgstr "Ouvrir les lignes de relance"
