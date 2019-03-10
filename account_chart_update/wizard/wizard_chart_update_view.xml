@@ -42,6 +42,7 @@
                         </group>
                         <group string="Other options" attrs="{'invisible':[('state','!=','init')]}">
                             <field name="continue_on_errors" />
+                            <field name="recreate_xml_ids" />
                         </group>
                     </group>
                     <group>
@@ -84,6 +85,57 @@
                                    widget="many2many_checkboxes"
                                    context="{'account_chart_update': True}"
                             />
+                        </page>
+                    </notebook>
+                </page>
+                <page string="Matching"
+                      attrs="{'invisible': [('update_tax', '=', False), ('update_account', '=', False), ('update_fiscal_position', '=', False)]}"
+                >
+                    <h3>
+                        <p>Here you can set the matching order.</p>
+                    </h3>
+                    <notebook>
+                        <page string="Taxes"
+                              name="page_matching_taxes"
+                              attrs="{'invisible': [('update_tax', '=', False)]}"
+                        >
+                            <field name="tax_matching_ids">
+                                <tree create="false" edit="false" default_order="sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="matching_value"/>
+                                </tree>
+                                <form>
+                                    <field name="matching_value"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Accounts"
+                              name="page_matching_accounts"
+                              attrs="{'invisible': [('update_account', '=', False)]}"
+                        >
+                            <field name="account_matching_ids">
+                                <tree create="false" edit="false" default_order="sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="matching_value"/>
+                                </tree>
+                                <form>
+                                    <field name="matching_value"/>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Fiscal positions"
+                              name="page_matching_fps"
+                              attrs="{'invisible': [('update_fiscal_position', '=', False)]}"
+                        >
+                            <field name="fp_matching_ids">
+                                <tree create="false" edit="false" default_order="sequence">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="matching_value"/>
+                                </tree>
+                                <form>
+                                    <field name="matching_value"/>
+                                </form>
+                            </field>
                         </page>
                     </notebook>
                 </page>
