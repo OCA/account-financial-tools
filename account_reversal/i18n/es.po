@@ -152,7 +152,7 @@ msgid "Reversal Date"
 msgstr "Fecha de reversión"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_5226
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_5270
 msgid "Reversal Entry"
 msgstr "Asiento revertido"
 
