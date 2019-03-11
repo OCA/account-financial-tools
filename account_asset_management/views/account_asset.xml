@@ -228,6 +228,7 @@
         <field name="name"/>
         <field name="type" invisible="1"/>
         <field name="code"/>
+        <field name="state" invisible="1"/>
         <!--
         <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
         <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
@@ -235,7 +236,6 @@
         <field name="date_start"/>
         <field name="date_remove"/>
         <field name="profile_id"/>
-        <field name="state" attrs="{'invisible': [('type', '=', 'view')]}"/>
         <field name="company_id" groups="base.group_multi_company"/>
         -->
       </tree>
