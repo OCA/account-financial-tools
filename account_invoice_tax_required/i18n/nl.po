@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_invoice_tax_required
-#: code:addons/account_invoice_tax_required/models/account_invoice.py:24
+#: code:addons/account_invoice_tax_required/models/account_invoice.py:25
 #, python-format
 msgid ""
 "%s\n"
@@ -32,13 +32,13 @@ msgid "Invoice"
 msgstr "Factuur"
 
 #. module: account_invoice_tax_required
-#: code:addons/account_invoice_tax_required/models/account_invoice.py:17
+#: code:addons/account_invoice_tax_required/models/account_invoice.py:18
 #, python-format
 msgid "Invoice has a line with product %s with no taxes"
 msgstr ""
 
 #. module: account_invoice_tax_required
-#: code:addons/account_invoice_tax_required/models/account_invoice.py:24
+#: code:addons/account_invoice_tax_required/models/account_invoice.py:25
 #, python-format
 msgid "No Taxes Defined!"
 msgstr ""
