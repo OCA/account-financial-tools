@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2015 - Camptocamp SA - Author Vincent Renaville
 # Copyright 2016 - Tecnativa - Angel Moya <odoo@tecnativa.com>
+# Copyright 2019 - Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, api, _
@@ -26,7 +27,7 @@ class AccountInvoice(models.Model):
             )
 
     @api.multi
-    def invoice_validate(self):
+    def action_invoice_open(self):
         # Always test if it is required by context
         force_test = self.env.context.get('test_tax_required')
         skip_test = any((
@@ -40,4 +41,4 @@ class AccountInvoice(models.Model):
         ))
         if force_test or not skip_test:
             self._test_invoice_line_tax()
-        return super(AccountInvoice, self).invoice_validate()
+        return super(AccountInvoice, self).action_invoice_open()
