@@ -127,7 +127,7 @@ msgid "A credit control policy level"
 msgstr "Eine Mahnstufe"
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_run.py:166
+#: code:addons/account_credit_control/models/credit_control_run.py:165
 #, python-format
 msgid ""
 "A credit control run is already running in background, please try later."
@@ -1324,7 +1324,7 @@ msgid "Salesperson"
 msgstr ""
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:244
+#: code:addons/account_credit_control/models/credit_control_line.py:245
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_tree
 #, python-format
 msgid "Schedule activity"
@@ -1523,7 +1523,7 @@ msgstr ""
 "Warnung: Sie können möglicherweise diesen Vorgang nicht rückgängig machen."
 
 #. module: account_credit_control
-#: code:addons/account_credit_control/models/credit_control_line.py:216
+#: code:addons/account_credit_control/models/credit_control_line.py:217
 #, python-format
 msgid ""
 "You are not allowed to delete a credit control line that is not in draft "
