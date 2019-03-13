@@ -62,6 +62,9 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         string="Continue on errors", default=False,
         help="If set, the wizard will continue to the next step even if "
              "there are minor errors.")
+    recreate_xml_ids = fields.Boolean(
+        string="Recreate missing XML-IDs",
+    )
     tax_ids = fields.One2many(
         comodel_name='wizard.update.charts.accounts.tax', ondelete='cascade',
         inverse_name='update_chart_wizard_id', string='Taxes')
@@ -117,6 +120,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         domain=lambda self: self._domain_fp_field_ids(),
         default=lambda self: self._default_fp_field_ids(),
     )
+    tax_matching_ids = fields.One2many(
+        comodel_name="wizard.tax.matching",
+        inverse_name="update_chart_wizard_id",
+        string="Taxes matching",
+        default=lambda self: self._default_tax_matching_ids(),
+    )
+    account_matching_ids = fields.One2many(
+        comodel_name="wizard.account.matching",
+        inverse_name="update_chart_wizard_id",
+        string="Taxes matching",
+        default=lambda self: self._default_account_matching_ids(),
+    )
+    fp_matching_ids = fields.One2many(
+        comodel_name="wizard.fp.matching",
+        inverse_name="update_chart_wizard_id",
+        string="Taxes matching",
+        default=lambda self: self._default_fp_matching_ids(),
+    )
 
     def _domain_per_name(self, name):
         return [
@@ -147,6 +168,32 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         return [(4, x.id) for x in self.env['ir.model.fields'].search(
             self._domain_fp_field_ids()
         )]
+
+    def _get_matching_ids(self, model_name, ordered_opts):
+        vals = []
+        for seq, opt in enumerate(ordered_opts, 1):
+            vals.append((0, False, {'sequence': seq, 'matching_value': opt}))
+
+        all_options = self.env[model_name]._get_matching_selection()
+        all_options = map(lambda x: x[0], all_options)
+        all_options = list(set(all_options) - set(ordered_opts))
+
+        for seq, opt in enumerate(all_options, len(ordered_opts) + 1):
+            vals.append((0, False, {'sequence': seq, 'matching_value': opt}))
+
+        return vals
+
+    def _default_fp_matching_ids(self):
+        ordered_opts = ['xml_id', 'name']
+        return self._get_matching_ids('wizard.fp.matching', ordered_opts)
+
+    def _default_tax_matching_ids(self):
+        ordered_opts = ['xml_id', 'description', 'name']
+        return self._get_matching_ids('wizard.tax.matching', ordered_opts)
+
+    def _default_account_matching_ids(self):
+        ordered_opts = ['xml_id', 'code', 'name']
+        return self._get_matching_ids('wizard.account.matching', ordered_opts)
 
     @api.model
     def _get_lang_selection_options(self):
@@ -243,7 +290,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def action_init(self):
         """Initial action that sets the initial state."""
-        self.state = 'init'
+        self.write({
+            'state': 'init',
+            'tax_ids': [(2, r.id, False) for r in self.tax_ids],
+            'account_ids': [(2, r.id, False) for r in self.account_ids],
+            'fiscal_position_ids': [(2, r.id, False) for r in
+                                    self.fiscal_position_ids],
+        })
         return self._reopen()
 
     @api.multi
@@ -298,33 +351,41 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.state = 'done'
         return self._reopen()
 
+    def _get_real_xml_name(self, template):
+        [external_id] = template.get_external_id().values()
+        (name, module) = external_id.split('.')
+        return "%s.%d_%s" % (name, self.company_id.id, module)
+
     @api.multi
     @tools.ormcache("templates")
     def find_tax_by_templates(self, templates):
         """Find a tax that matches the template."""
         # search inactive taxes too, to avoid re-creating
         # taxes that have been deactivated before
-        Tax = self.env['account.tax'].with_context(active_test=False)
-        result = Tax
+        tax_model = self.env['account.tax'].with_context(active_test=False)
         for template in templates:
-            single = Tax
-            criteria = (
-                ("name", "=", template.name),
-                ("description", "=", template.name),
-                ("name", "=", template.description),
-                ("description", "=", template.description),
-            )
-            for domain in criteria:
-                if single:
-                    break
-                if domain[2]:
-                    single = Tax.search(
-                        [domain,
-                         ("company_id", "=", self.company_id.id),
-                         ("type_tax_use", "=", template.type_tax_use)],
-                        limit=1)
-            result |= single
-        return result[:1].id
+            for matching in self.tax_matching_ids.sorted('sequence'):
+                if matching.matching_value == 'xml_id':
+                    real = self.env.ref(self._get_real_xml_name(template),
+                                        raise_if_not_found=False)
+                    if not real:
+                        continue
+                    criteria = ('id', '=', real.id)
+                else:
+                    field_name = matching.matching_value
+                    if not template[field_name]:
+                        continue
+                    criteria = (field_name, '=', template[field_name])
+
+                result = tax_model.search([
+                    criteria,
+                    ("company_id", "=", self.company_id.id),
+                    ("type_tax_use", "=", template.type_tax_use),
+                ], limit=1)
+                if result:
+                    return result.id
+
+        return False
 
     @api.model
     @tools.ormcache("code")
@@ -336,19 +397,69 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @tools.ormcache("templates")
     def find_account_by_templates(self, templates):
         """Find an account that matches the template."""
-        return self.env['account.account'].search(
-            [('code', 'in',
-              list(map(self.padded_code, templates.mapped("code")))),
-             ('company_id', '=', self.company_id.id)],
-        ).id
+        account_model = self.env['account.account']
+        for matching in self.account_matching_ids.sorted('sequence'):
+            if matching.matching_value == 'xml_id':
+                real = self.env['account.account']
+                for template in templates:
+                    try:
+                        real |= self.env.ref(self._get_real_xml_name(template))
+                    except:
+                        pass
+
+                if not real:
+                    continue
+                criteria = ('id', 'in', real.ids)
+            elif matching.matching_value == 'code':
+                codes = templates.mapped("code")
+                if not codes:
+                    continue
+                criteria = ('code', 'in', list(map(self.padded_code, codes)))
+            else:
+                field_name = matching.matching_value
+                field_values = templates.mapped(field_name)
+                if not field_values:
+                    continue
+                criteria = (field_name, 'in', field_values)
+
+            result = account_model.search(
+                [criteria, ('company_id', '=', self.company_id.id)])
+            if result:
+                return result.id
+
+        return False
 
     @api.multi
     @tools.ormcache("templates")
     def find_fp_by_templates(self, templates):
         """Find a real fiscal position from a template."""
-        return self.env['account.fiscal.position'].search(
-            [('name', 'in', templates.mapped("name")),
-             ('company_id', '=', self.company_id.id)], limit=1).id
+        fp_model = self.env['account.fiscal.position']
+        for matching in self.fp_matching_ids.sorted('sequence'):
+            if matching.matching_value == 'xml_id':
+                real = self.env['account.fiscal.position']
+                for template in templates:
+                    try:
+                        real |= self.env.ref(self._get_real_xml_name(template))
+                    except:
+                        pass
+
+                if not real:
+                    continue
+                criteria = ('id', 'in', real.ids)
+            else:
+                field_name = matching.matching_value
+                field_values = templates.mapped(field_name)
+                if not field_values:
+                    continue
+                criteria = (field_name, 'in', field_values)
+
+            result = fp_model.search([
+                criteria, ('company_id', '=', self.company_id.id)
+            ], limit=1)
+            if result:
+                return result.id
+
+        return False
 
     @api.multi
     @tools.ormcache("templates", "current_fp_accounts")
@@ -420,7 +531,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             },
             "account.account.template": {
                 "chart_template_id",
-                "code",
             },
             "account.fiscal.position.template": {
                 "chart_template_id",
@@ -483,8 +593,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 if expected is not None:
                     if expected != [] and expected != real[key]:
                         result[key] = expected
-                elif template[key] != real[key]:
-                    result[key] = template[key]
+                else:
+                    template_value = template[key]
+                    if template._name == "account.account.template" \
+                            and key == 'code':
+                        template_value = self.padded_code(template['code'])
+                    if template_value != real[key]:
+                        result[key] = template_value
                 # Avoid to cache recordset references
                 if isinstance(real._fields[key], fields.Many2many):
                     result[key] = [(6, 0, result[key].ids)]
@@ -521,6 +636,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 result.append(_("Tax is disabled."))
         return "\n".join(result)
 
+    def missing_xml_id(self, real_obj):
+        return not self.env['ir.model.data'].search([
+            ('res_id', '=', real_obj.id),
+            ('model', '=', real_obj._name),
+            ('module', '!=', '__export__'),
+        ])
+
     @api.multi
     def _find_taxes(self):
         """Search for, and load, tax templates to create/update/delete."""
@@ -544,6 +666,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the tax for changes
                 tax = self.env['account.tax'].browse(tax_id)
                 notes = self.diff_notes(template, tax)
+
+                if self.recreate_xml_ids and self.missing_xml_id(tax):
+                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+
                 if notes:
                     # Tax to be updated
                     self.tax_ids.create({
@@ -586,6 +712,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the account for changes
                 account = self.env['account.account'].browse(account_id)
                 notes = self.diff_notes(template, account)
+
+                if self.recreate_xml_ids and self.missing_xml_id(account):
+                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+
                 if notes:
                     # Account to be updated
                     self.account_ids.create({
@@ -620,6 +750,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Check the fiscal position for changes
                 fp = self.env['account.fiscal.position'].browse(fp_id)
                 notes = self.diff_notes(template, fp)
+
+                if self.recreate_xml_ids and self.missing_xml_id(fp):
+                    notes += (notes and "\n" or "") + _("Missing XML-ID.")
+
                 if notes:
                     # Fiscal position template to be updated
                     wiz_fp.create({
@@ -629,6 +763,27 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         'update_fiscal_position_id': fp_id,
                         'notes': notes,
                     })
+
+    def recreate_xml_id(self, template, real_obj):
+        ir_model_data = self.env['ir.model.data']
+        template_xmlid = ir_model_data.search([
+            ('model', '=', template._name),
+            ('res_id', '=', template.id),
+        ])
+        new_xml_id = "%d_%s" % (self.company_id.id, template_xmlid.name)
+
+        real_xmlid = ir_model_data.search([
+            ('model', '=', real_obj._name),
+            ('res_id', '=', real_obj.id),
+        ], limit=1)
+        if real_xmlid:
+            real_xmlid.unlink()
+        template_xmlid.copy({
+            'model': real_obj._name,
+            'res_id': real_obj.id,
+            'name': new_xml_id,
+            'noupdate': True,
+        })
 
     @api.multi
     def _update_taxes(self):
@@ -651,7 +806,11 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if key in {'account_id', 'refund_account_id'}:
                         continue
                     tax[key] = value
-                _logger.info(_("Updated tax %s."), "'%s'" % template.name)
+                    _logger.info(_("Updated tax %s."), "'%s'" % template.name)
+                if self.recreate_xml_ids and self.missing_xml_id(tax):
+                    self.recreate_xml_id(template, tax)
+                    _logger.info(_("Updated tax %s. (Recreated XML-IDs)"),
+                                 "'%s'" % template.name)
 
     @api.multi
     def _update_accounts(self):
@@ -701,6 +860,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                 _("Updated account %s."),
                                 "'%s - %s'" % (account.code, account.name),
                             )
+                        if self.recreate_xml_ids \
+                                and self.missing_xml_id(account):
+                            self.recreate_xml_id(template, account)
+                            _logger.info(
+                                _("Updated account %s. (Recreated XML-ID)"),
+                                "'%s - %s'" % (account.code, account.name),
+                            )
+
                 except Exception:
                     self.rejected_updated_account_number += 1
                     if config['test_enable']:
@@ -772,13 +939,22 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     self.company_id, template, 'account.fiscal.position',
                     self._prepare_fp_vals(template),
                 )
+                _logger.info(
+                    _("Created fiscal position %s."),
+                    "'%s'" % template.name,
+                )
             else:
-                # Update the given fiscal position
                 for key, value in self.diff_fields(template, fp).items():
                     fp[key] = value
-            _logger.info(
-                _("Created or updated fiscal position %s."),
-                "'%s'" % template.name)
+                    _logger.info(_("Updated fiscal position %s."),
+                                 "'%s'" % template.name)
+
+                if self.recreate_xml_ids and self.missing_xml_id(fp):
+                    self.recreate_xml_id(template, fp)
+                    _logger.info(
+                        _("Updated fiscal position %s. (Recreated XML-ID)"),
+                        "'%s'" % template.name,
+                    )
 
 
 class WizardUpdateChartsAccountsTax(models.TransientModel):
@@ -850,3 +1026,66 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
         comodel_name='account.fiscal.position', required=False,
         string='Fiscal position to update', ondelete='set null')
     notes = fields.Text('Notes', readonly=True)
+
+
+class WizardMatching(models.TransientModel):
+    _name = 'wizard.matching'
+    _order = 'sequence'
+
+    update_chart_wizard_id = fields.Many2one(
+        comodel_name='wizard.update.charts.accounts',
+        string='Update chart wizard',
+        required=True,
+        ondelete='cascade',
+    )
+    sequence = fields.Integer(
+        required=True,
+        default=1,
+    )
+    matching_value = fields.Selection(
+        selection="_get_matching_selection",
+    )
+
+    def _get_matching_selection(self):
+        return [('xml_id', 'XML-ID')]
+
+    def _selection_from_files(self, model_name, field_opts):
+        result = []
+        for opt in field_opts:
+            model = self.env[model_name]
+            desc = model._fields[opt].get_description(self.env)["string"]
+            result.append((opt, "%s (%s)" % (desc, opt)))
+        return result
+
+
+class WizardTaxMatching(models.TransientModel):
+    _name = "wizard.tax.matching"
+    _inherit = "wizard.matching"
+
+    def _get_matching_selection(self):
+        vals = super(WizardTaxMatching, self)._get_matching_selection()
+        vals += self._selection_from_files('account.tax.template',
+                                           ['description', 'name'])
+        return vals
+
+
+class WizardAccountMatching(models.TransientModel):
+    _name = "wizard.account.matching"
+    _inherit = "wizard.matching"
+
+    def _get_matching_selection(self):
+        vals = super(WizardAccountMatching, self)._get_matching_selection()
+        vals += self._selection_from_files('account.account.template',
+                                           ['code', 'name'])
+        return vals
+
+
+class WizardFpMatching(models.TransientModel):
+    _name = 'wizard.fp.matching'
+    _inherit = "wizard.matching"
+
+    def _get_matching_selection(self):
+        vals = super(WizardFpMatching, self)._get_matching_selection()
+        vals += self._selection_from_files('account.fiscal.position.template',
+                                           ['name'])
+        return vals
