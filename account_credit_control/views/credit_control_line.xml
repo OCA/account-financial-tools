@@ -95,31 +95,31 @@
                             help="The partner had a manual followup."/>
                 </group>
                 <group expand="0" string="Group By" name="group_by">
-                    <filter domain='[]' context="{'group_by': 'date'}"
+                    <filter name="group_by_date" domain='[]' context="{'group_by': 'date'}"
                             icon="terp-go-month" string="Run date"/>
-                    <filter domain='[]' context="{'group_by': 'level'}"
+                    <filter name="group_by_level" domain='[]' context="{'group_by': 'level'}"
                             icon="terp-gtk-jump-to-rtl" string="Level"/>
-                    <filter domain='[]' context="{'group_by': 'partner_id'}"
+                    <filter name="group_by_partner" domain='[]' context="{'group_by': 'partner_id'}"
                             icon="terp-partner" string="Partner"/>
-                    <filter domain='[]' context="{'group_by': 'account_id'}"
+                    <filter name="group_by_account" domain='[]' context="{'group_by': 'account_id'}"
                             icon="terp-folder-green" string="Account"/>
-                    <filter domain='[]' context="{'group_by': 'invoice_id'}"
+                    <filter name="group_by_invoice" domain='[]' context="{'group_by': 'invoice_id'}"
                             icon="terp-document-new" string="Invoice"/>
-                    <filter domain='[]' context="{'group_by': 'policy_id'}"
+                    <filter name="group_by_policy" domain='[]' context="{'group_by': 'policy_id'}"
                             icon="terp-document-new" string="Credit policy"/>
-                    <filter domain='[]'
+                    <filter name="group_by_policy_level" domain='[]'
                             context="{'group_by': 'policy_level_id'}"
                             icon="terp-document-new"
                             string="Credit policy level"/>
-                    <filter domain='[]' context="{'group_by': 'channel'}"
+                    <filter name="group_by_channel" domain='[]' context="{'group_by': 'channel'}"
                             icon="terp-document-new" string="Channel"/>
-                    <filter domain='[]'
+                    <filter name="group_by_overridden" domain='[]'
                             context="{'group_by': 'manually_overridden'}"
                             icon="terp-document-new" string="Manual change"/>
-                    <filter domain='[]'
+                    <filter name="group_by_followup" domain='[]'
                             context="{'group_by': 'manual_followup'}"
                             icon="terp-document-new" string="Manual followup"/>
-                    <filter string="Salesperson" context="{'group_by':'partner_user_id'}"/>
+                    <filter name="group_by_partner_user" string="Salesperson" context="{'group_by':'partner_user_id'}"/>
                 </group>
             </search>
         </field>
@@ -133,7 +133,7 @@
                   decoration-danger="state in ('error', 'email_error')"
                   decoration-muted="state == 'ignored'"
                   decoration-success="state == 'sent'">
-                <button name="button_credit_control_line_form"
+                <button name="button_credit_control_line_form" string="Control Credit Line Form"
                         type="object" icon="fa-external-link" class="oe_stat_button"/>
                 <field name="date"/>
                 <field name="date_due"/>
@@ -170,7 +170,7 @@
         <field name="name">Credit Control Lines</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.line</field>
-        <field name="domain"></field>
+        <field name="domain"/>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_line_tree"/>

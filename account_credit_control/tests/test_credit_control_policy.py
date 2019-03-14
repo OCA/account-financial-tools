@@ -2,11 +2,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError, UserError
 from odoo.tests.common import TransactionCase
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestCreditControlPolicy(TransactionCase):
-    post_install = True
-    at_install = False
 
     def test_check_policy_against_account(self):
         """
@@ -16,12 +16,12 @@ class TestCreditControlPolicy(TransactionCase):
         policy = self.env.ref('account_credit_control.credit_control_3_time')
 
         account_type = self.env.ref('account.data_account_type_receivable')
-        account = self.env['account.account'].create({
+        account = self.env['account.account'].create([{
             'code': '400001',
             'name': 'Test',
             'user_type_id': account_type.id,
             'reconcile': True,
-        })
+        }])
 
         # The account is not included in the policy
         with self.assertRaises(UserError):

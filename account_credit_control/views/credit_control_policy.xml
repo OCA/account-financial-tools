@@ -81,7 +81,7 @@
         <field name="name">Credit Control Policies</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">credit.control.policy</field>
-        <field name="domain"></field>
+        <field name="domain"/>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_policy_tree"/>

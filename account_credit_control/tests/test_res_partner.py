@@ -2,11 +2,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
+from odoo.tests import tagged
 
 
+@tagged('post_install', '-at_install')
 class TestCreditControlPolicyLevel(TransactionCase):
-    post_install = True
-    at_install = False
 
     def test_check_credit_policy(self):
         """
@@ -19,9 +19,9 @@ class TestCreditControlPolicyLevel(TransactionCase):
         """
         policy = self.env.ref('account_credit_control.credit_control_3_time')
 
-        partner = self.env['res.partner'].create({
+        partner = self.env['res.partner'].create([{
             'name': 'Partner 1',
-        })
+        }])
         account = partner.property_account_receivable_id
 
         with self.assertRaises(ValidationError):

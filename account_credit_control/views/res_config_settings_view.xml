@@ -14,7 +14,7 @@
                     title="This allows credit control team to chase overdue payments with different means">
                     <div class="o_setting_left_pane"/>
                     <div class="o_setting_right_pane">
-                        <label string="Default Policy"/>
+                        <label string="Default Policy" for="credit_control_policy"/>
                         <div class="text-muted">
                             Default credit control policy to partners
                         </div>
@@ -24,10 +24,10 @@
                         </div>
                     </div>
                   </div>
-                  <div class="row col-md-6 o_setting_box" id="credit_control_tolerance">
+                  <div class="row col-md-6 o_setting_box" id="default_control_tolerance">
                       <div class="o_setting_left_pane"/>
                       <div class="o_setting_right_pane">
-                          <label string="Default Credit Tolerance"/>
+                          <label string="Default Credit Tolerance" for="default_control_tolerance"/>
                           <div class="text-muted">
                               Credit Tolerance Limit
                           </div>

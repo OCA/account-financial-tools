@@ -91,7 +91,7 @@ class CreditControlRun(models.Model):
         )
         if runs:
             raise UserError(_('A run has already been executed more '
-                              'recently than %s') % (runs.date))
+                              'recently than %s') % runs.date)
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
@@ -209,7 +209,7 @@ class CreditControlRun(models.Model):
             comms = comm_obj._generate_comm_from_credit_lines(email_lines)
             comms._generate_emails()
         if letter_lines:
-            wiz = self.env['credit.control.printer'].create({
+            wiz = self.env['credit.control.printer'].create([{
                 'line_ids': letter_lines.ids,
-            })
+            }])
             return wiz.print_lines

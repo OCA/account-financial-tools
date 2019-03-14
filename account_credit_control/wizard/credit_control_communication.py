@@ -66,15 +66,17 @@ class CreditCommunication(models.TransientModel):
             communication.total_invoiced = communication._get_total()
             communication.total_due = communication._get_total_due()
 
-    @api.model
+    @api.model_create_multi
     @api.returns('self', lambda value: value.id)
-    def create(self, vals):
-        if vals.get('partner_id'):
-            # the computed field does not work in TransientModel,
-            # just set a value on creation
-            partner_id = vals['partner_id']
-            vals['contact_address'] = self._get_contact_address(partner_id).id
-        return super(CreditCommunication, self).create(vals)
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('partner_id'):
+                # the computed field does not work in TransientModel,
+                # just set a value on creation
+                partner_id = vals['partner_id']
+                vals['contact_address'] = \
+                    self._get_contact_address(partner_id).id
+        return super(CreditCommunication, self).create(vals_list)
 
     @api.multi
     def get_email(self):
@@ -133,6 +135,7 @@ class CreditCommunication(models.TransientModel):
         cr.execute(sql, (tuple(lines.ids), ))
         res = cr.dictfetchall()
         company_currency = self.env.user.company_id.currency_id
+        datas = []
         for group in res:
             data = {}
             level_lines = self._get_credit_lines(lines.ids,
@@ -145,8 +148,8 @@ class CreditCommunication(models.TransientModel):
             data['partner_id'] = group['partner_id']
             data['current_policy_level'] = group['policy_level_id']
             data['currency_id'] = group['currency_id'] or company_currency.id
-            comm = self.create(data)
-            comms += comm
+            datas.append(data)
+        comms = self.create(datas)
         return comms
 
     @api.multi
@@ -179,7 +182,8 @@ class CreditCommunication(models.TransientModel):
 
             comm.credit_control_line_ids.write({'mail_message_id': email.id,
                                                 'state': state})
-            attachments = self.env['ir.attachment']
+            attachment_model = self.env['ir.attachment']
+            datas_attach = []
             for att in email_values.get('attachments', []):
                 attach_fname = att[0]
                 attach_datas = att[1]
@@ -191,7 +195,8 @@ class CreditCommunication(models.TransientModel):
                     'res_id': email.id,
                     'type': 'binary',
                 }
-                attachments |= attachments.create(data_attach)
+                datas_attach.append(data_attach)
+            attachments = attachment_model.create(datas_attach)
             email.write({'attachment_ids': [(6, 0, attachments.ids)]})
             emails += email
         return emails

@@ -108,7 +108,7 @@ class CreditControlPolicyChanger(models.TransientModel):
         controlling_date = fields.date.today()
         self._check_accounts_policies(self.move_line_ids, self.new_policy_id)
         self._mark_as_overridden(self.move_line_ids)
-        # As disscused with business expert
+        # As discussed with business expert
         # draft lines should be passed to ignored
         # if same level as the new one
         # As it is a manual action

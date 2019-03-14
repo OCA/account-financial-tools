@@ -9,7 +9,7 @@
                            colspan="4"/>
                 <newline/>
                 <label string="Warning: you will maybe not be able to revert this operation."
-                       colspan="4"></label>
+                       colspan="4"/>
                 <newline/>
                 <group name="markername">
                         <field name="name"/>

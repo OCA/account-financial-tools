@@ -40,8 +40,7 @@ class CreditControlLine(models.Model):
                            states={'draft': [('readonly', False)]})
     date_entry = fields.Date(string='Entry date',
                              related='move_line_id.date',
-                             store=True,
-                             readonly=True)
+                             store=True)
     date_sent = fields.Date(string='Sent date',
                             readonly=True,
                             states={'draft': [('readonly', False)]})
@@ -86,16 +85,13 @@ class CreditControlLine(models.Model):
                                    readonly=True)
     account_id = fields.Many2one('account.account',
                                  related='move_line_id.account_id',
-                                 store=True,
-                                 readonly=True)
+                                 store=True)
     currency_id = fields.Many2one('res.currency',
                                   related='move_line_id.currency_id',
-                                  store=True,
-                                  readonly=True)
+                                  store=True)
     company_id = fields.Many2one('res.company',
                                  related='move_line_id.company_id',
-                                 store=True,
-                                 readonly=True)
+                                 store=True)
     # we can allow a manual change of policy in draft state
     policy_level_id = fields.Many2one('credit.control.policy.level',
                                       string='Overdue Level',
@@ -104,11 +100,9 @@ class CreditControlLine(models.Model):
                                       states={'draft': [('readonly', False)]})
     policy_id = fields.Many2one('credit.control.policy',
                                 related='policy_level_id.policy_id',
-                                store=True,
-                                readonly=True)
+                                store=True)
     level = fields.Integer(related='policy_level_id.level',
-                           store=True,
-                           readonly=True)
+                           store=True)
     manually_overridden = fields.Boolean()
     run_id = fields.Many2one(comodel_name='credit.control.run',
                              string='Source')
@@ -194,7 +188,7 @@ class CreditControlLine(models.Model):
                                                 level,
                                                 controlling_date,
                                                 open_amount)
-            line = self.create(vals)
+            line = self.create([vals])
             new_lines |= line
 
             # when we have lines generated earlier in draft,
@@ -228,11 +222,12 @@ class CreditControlLine(models.Model):
             })
         return res
 
-    @api.model
-    def create(self, values):
-        line = super(CreditControlLine, self).create(values)
-        line.manual_followup = line.partner_id.manual_followup
-        return line
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super(CreditControlLine, self).create(vals_list)
+        for line in lines:
+            line.manual_followup = line.partner_id.manual_followup
+        return lines
 
     def button_schedule_activity(self):
         ctx = self.env.context.copy()
