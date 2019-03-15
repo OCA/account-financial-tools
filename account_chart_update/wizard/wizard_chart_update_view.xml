@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
@@ -18,7 +18,13 @@
             </header>
             <group attrs="{'invisible':[('state','!=','init')]}">
                 <h3>
-                    <p><center>This wizard will update your accounts, taxes and fiscal positions according to the selected chart template</center></p>
+                    <p>
+                        <center>
+                            This wizard will update your accounts, taxes and
+                            fiscal positions according to the selected chart
+                            template
+                        </center>
+                    </p>
                 </h3>
             </group>
             <group string="Chart of Accounts" attrs="{'invisible':[('state','!=','init')]}">
@@ -47,16 +53,29 @@
                     </group>
                     <group>
                         <h5>
-                            <p>If you leave these options set, the wizard will not just create new records, but also update records with changes (i.e. different tax amount)</p>
-                            <p>Note: Only the changed fields are updated.</p>
+                            <p>
+                                If you leave these options set, the wizard will
+                                not just create new records, but also update
+                                records with changes (i.e. different tax amount)
+                            </p>
+                            <p>
+                                Note: Only the changed fields are updated.
+                            </p>
                         </h5>
                     </group>
                 </page>
                 <page string="Field options"
-                      attrs="{'invisible': [('update_tax', '=', False), ('update_account', '=', False), ('update_fiscal_position', '=', False)]}"
+                      attrs="{'invisible': [
+                          ('update_tax', '=', False),
+                          ('update_account', '=', False),
+                          ('update_fiscal_position', '=', False),
+                      ]}"
                 >
                     <h3>
-                        <p>Here you can select the fields you want to check if they have been updated in the templates.</p>
+                        <p>
+                            Here you can select the fields you want to check if
+                            they have been updated in the templates.
+                        </p>
                     </h3>
                     <notebook>
                         <page string="Taxes"
@@ -89,7 +108,11 @@
                     </notebook>
                 </page>
                 <page string="Matching"
-                      attrs="{'invisible': [('update_tax', '=', False), ('update_account', '=', False), ('update_fiscal_position', '=', False)]}"
+                      attrs="{'invisible': [
+                          ('update_tax', '=', False),
+                          ('update_account', '=', False),
+                          ('update_fiscal_position', '=', False),
+                      ]}"
                 >
                     <h3>
                         <p>Here you can set the matching order.</p>
