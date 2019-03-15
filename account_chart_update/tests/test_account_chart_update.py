@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields
@@ -67,6 +66,9 @@ class TestAccountChartUpdate(common.HttpCase):
             'currency_id': self.env.ref('base.EUR').id,
             'code_digits': 6,
             'transfer_account_id': self.account_template.id,
+            'cash_account_code_prefix': '570',
+            'bank_account_code_prefix': '572',
+            'transfer_account_code_prefix': '100000',
         })
         self.account_template.chart_template_id = self.chart_template.id
         self.account_template_pl = self._create_account_tmpl(
@@ -106,18 +108,10 @@ class TestAccountChartUpdate(common.HttpCase):
             'name': 'Test account_chart_update company',
             'currency_id': self.chart_template.currency_id.id,
         })
-        # Load chart of template into company
-        wizard = self.env['wizard.multi.charts.accounts'].create({
-            'company_id': self.company.id,
-            'chart_template_id': self.chart_template.id,
-            'code_digits': self.chart_template.code_digits,
-            'transfer_account_id': self.account_template.id,
-            'currency_id': self.chart_template.currency_id.id,
-            'bank_account_code_prefix': '572',
-            'cash_account_code_prefix': '570',
-        })
-        wizard.onchange_chart_template_id()
-        wizard.execute()
+        company_user = self.env.user.copy({'company_id': self.company.id})
+        chart_by_company_user = self.chart_template.sudo(company_user)
+        chart_by_company_user.try_loading_for_current_company()
+
         self.tax = self.env['account.tax'].search([
             ('name', '=', self.tax_template.name),
             ('company_id', '=', self.company.id),
@@ -310,7 +304,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertFalse(new_tax.active)
         wizard.unlink()
         # Errors on account update
-        self.account_template.reconcile = True
+        self.account_template.currency_id = self.ref('base.USD')
         self.env['account.move'].create({
             'name': 'Test move',
             'journal_id': self.env['account.journal'].search([
@@ -323,6 +317,7 @@ class TestAccountChartUpdate(common.HttpCase):
                     'name': 'Test move line',
                     'debit': 10,
                     'credit': 0,
+                    'currency_id': self.ref('base.EUR'),
                 }),
                 (0, 0, {
                     'account_id': self.account.id,
@@ -340,13 +335,13 @@ class TestAccountChartUpdate(common.HttpCase):
         # Errors on account update - continuing after that
         wizard.continue_on_errors = True
         wizard.action_update_records()
-        self.assertFalse(self.account.reconcile)
+        self.assertFalse(self.account.currency_id)
         self.assertEqual(self.tax.description, self.tax_template.description)
         self.assertEqual(wizard.rejected_updated_account_number, 1)
         self.assertEqual(wizard.updated_accounts, 0)
         wizard.unlink()
         # Errors on account_creation
-        self.account_template.reconcile = False
+        self.account_template.currency_id = False
         new_account_tmpl_2 = self._create_account_tmpl(
             'Test account 3', '444444', self.account_type, self.chart_template,
         )
