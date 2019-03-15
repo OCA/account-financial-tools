@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_spread_contract
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-03 12:27+0000\n"
+"PO-Revision-Date: 2018-12-03 12:27+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_spread_contract_line_link_wizard
+msgid "Account Spread Contract Line Link Wizard"
+msgstr "Transitorische Spreiding Contract Regel Koppeling Wizard"
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_spread_template
+msgid "Account Spread Template"
+msgstr "Transitorische Spreiding Template"
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_analytic_account
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_id
+msgid "Analytic Account"
+msgstr "Kostenplaats"
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_contract_line_link_wizard
+msgid "Cancel"
+msgstr "Annuleer"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_company_id
+msgid "Company"
+msgstr "Bedrijf"
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_contract_line_link_wizard
+msgid "Confirm"
+msgstr "Bevestigen"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:75
+#, python-format
+msgid "Contract %s (%s) %s"
+msgstr "Contract %s (%s) %s"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_line_id
+msgid "Contract Line"
+msgstr "Contract Regel"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_template_contract_line_ids
+msgid "Contract Lines"
+msgstr "Contract Regels"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_contract_type
+msgid "Contract Type"
+msgstr "Contract Type"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_display_name
+msgid "Display Name"
+msgstr "Schermnaam"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard___last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_invoice_line.py:57
+#, python-format
+msgid "Link Contract Line with Spread Template"
+msgstr "Koppel Contract Regel met Spreiding Template"
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Linked"
+msgstr "Gekoppeld"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:97
+#, python-format
+msgid "Not implemented."
+msgstr "Niet geïmplementeerd."
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_analytic_invoice_line_spread_check
+msgid "Spread Check"
+msgstr "Spreiding Controle"
+
+#. module: account_spread_contract
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_analytic_invoice_line_spread_template_id
+#: model:ir.model.fields,field_description:account_spread_contract.field_account_spread_contract_line_link_wizard_spread_template_id
+msgid "Spread Template"
+msgstr "Spreiding Template"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_invoice_line.py:40
+#: code:addons/account_spread_contract/wizards/account_spread_contract_line_link_wizard.py:40
+#, python-format
+msgid "Spread Template Details"
+msgstr "Spreiding Template Details"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_spread_template.py:30
+#, python-format
+msgid "The contract type (Purchases) is not compatible with selected Template Spread Type"
+msgstr "Het type contract (Inkoop) is niet compatibel met geselecteerde Template Spreiding Type"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_spread_template.py:25
+#, python-format
+msgid "The contract type (Sales) is not compatible with selected Template Spread Type"
+msgstr "Het type contract (Verkoop) is niet compatibel met geselecteerde Template Spreiding Type"
+
+#. module: account_spread_contract
+#: code:addons/account_spread_contract/models/account_analytic_account.py:64
+#, python-format
+msgid "Unable to get the Invoice Line Account."
+msgstr "Niet gelukt om de fatuurregel grootboekrekening te verkrijgen."
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Unavailable"
+msgstr "Niet beschikbaar"
+
+#. module: account_spread_contract
+#: model:ir.ui.view,arch_db:account_spread_contract.view_account_spread_template
+msgid "Unlink Contract Line"
+msgstr "Ontkoppel Contract Regel"
+
+#. module: account_spread_contract
+#: selection:account.analytic.invoice.line,spread_check:0
+msgid "Unlinked"
+msgstr "Ongekoppeld"
+
+#. module: account_spread_contract
+#: model:ir.model,name:account_spread_contract.model_account_analytic_invoice_line
+msgid "account.analytic.invoice.line"
+msgstr "account.analytic.invoice.line"
+
