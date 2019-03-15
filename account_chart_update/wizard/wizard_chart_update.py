@@ -1,10 +1,10 @@
-# © 2010 Jordi Esteve, Zikzakmedia S.L. (http://www.zikzakmedia.com)
-# © 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
+# Copyright 2010 Jordi Esteve, Zikzakmedia S.L. (http://www.zikzakmedia.com)
+# Copyright 2010 Pexego Sistemas Informáticos S.L.(http://www.pexego.es)
 #        Borja López Soilán
-# © 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
-# © 2015 Antonio Espinosa <antonioea@tecnativa.com>
-# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
-# © 2016 Jacques-Etienne Baudoux <je@bcim.be>
+# Copyright 2013 Joaquin Gutierrez (http://www.gutierrezweb.es)
+# Copyright 2015 Antonio Espinosa <antonioea@tecnativa.com>
+# Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2016 Jacques-Etienne Baudoux <je@bcim.be>
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -20,6 +20,7 @@ EXCEPTION_TEXT = "Traceback (most recent call last)"
 
 class WizardUpdateChartsAccounts(models.TransientModel):
     _name = 'wizard.update.charts.accounts'
+    _description = 'Wizard Update Charts Accounts'
 
     state = fields.Selection(
         selection=[('init', 'Configuration'),
@@ -38,9 +39,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         compute="_compute_chart_template_ids",
         help="Includes all chart templates.")
     code_digits = fields.Integer(
-        string='# of digits', required=True,
-        help="No. of digits to use for account code. "
-             "Make sure it is the same number as existing accounts.")
+        related="chart_template_id.code_digits")
     lang = fields.Selection(
         lambda self: self._get_lang_selection_options(), 'Language', size=5,
         required=True,
@@ -129,13 +128,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     account_matching_ids = fields.One2many(
         comodel_name="wizard.account.matching",
         inverse_name="update_chart_wizard_id",
-        string="Taxes matching",
+        string="Accounts matching",
         default=lambda self: self._default_account_matching_ids(),
     )
     fp_matching_ids = fields.One2many(
         comodel_name="wizard.fp.matching",
         inverse_name="update_chart_wizard_id",
-        string="Taxes matching",
+        string="Fiscal positions matching",
         default=lambda self: self._default_fp_matching_ids(),
     )
 
@@ -204,9 +203,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     @api.depends("chart_template_id")
     def _compute_chart_template_ids(self):
-        self.chart_template_ids = (
-            self.env['wizard.multi.charts.accounts']
-            ._get_chart_parent_ids(self.chart_template_id))
+        all_parents = self.chart_template_id._get_chart_parent_ids()
+        self.chart_template_ids = all_parents
 
     @api.multi
     @api.depends('tax_ids')
@@ -255,20 +253,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.onchange("company_id")
     def _onchage_company_update_chart_template(self):
         self.chart_template_id = self.company_id.chart_template_id
-
-    @api.model
-    def _get_code_digits(self, company=None):
-        """Returns the number of digits for the accounts, fetched from
-        the company.
-        """
-        if company is None:
-            company = self.env.user.company_id
-        return company.accounts_code_digits or 6
-
-    @api.onchange('company_id')
-    def onchange_company_id(self):
-        """Update the code digits when the company changes"""
-        self.code_digits = self._get_code_digits(company=self.company_id)
 
     @api.multi
     def _reopen(self):
@@ -1030,6 +1014,7 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
 
 class WizardMatching(models.TransientModel):
     _name = 'wizard.matching'
+    _description = 'Wizard Matching'
     _order = 'sequence'
 
     update_chart_wizard_id = fields.Many2one(
