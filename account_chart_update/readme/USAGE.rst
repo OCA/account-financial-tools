@@ -1,4 +1,4 @@
-The wizard, accesible from *Accounting > Settings > Update chart of accounts*,
+The wizard, accesible from *Accounting > Settings > Update Chart Template*,
 lets the user select what kind of objects must be checked/updated, and whether
 old records must be checked for changes and updates.
 
