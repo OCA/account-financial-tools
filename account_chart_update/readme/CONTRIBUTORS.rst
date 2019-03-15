@@ -1,5 +1,9 @@
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Jairo Llopis <jairo.llopis@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pedro M. Baeza
+  * Jairo Llopis
+  * Ernesto Tejeda
+
 * Jacques-Etienne Baudoux <je@bcim.be>
 * Sylvain Van Hoof <sylvain@okia.be>
 * Nacho Muñoz <nacmuro@gmail.com>
