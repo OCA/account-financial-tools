@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_fiscal_year
+# 	* account_move_fiscal_year
 #
 msgid ""
 msgstr ""
@@ -18,17 +18,27 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 
 #. module: account_move_fiscal_year
-#: model:ir.model,name:account_move_fiscal_year.model_account_move
-msgid "Account Entry"
-msgstr "القيد"
+#: model:ir.model,name:account_move_fiscal_year.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: account_move_fiscal_year
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_date_range_fy_id
-#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line_date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move__date_range_fy_id
+#: model:ir.model.fields,field_description:account_move_fiscal_year.field_account_move_line__date_range_fy_id
 msgid "Fiscal year"
 msgstr "السنة المالية"
+
+#. module: account_move_fiscal_year
+#: model:ir.model,name:account_move_fiscal_year.model_account_move
+#, fuzzy
+#| msgid "Journal Item"
+msgid "Journal Entries"
+msgstr "عنصر اليومية"
 
 #. module: account_move_fiscal_year
 #: model:ir.model,name:account_move_fiscal_year.model_account_move_line
 msgid "Journal Item"
 msgstr "عنصر اليومية"
+
+#~ msgid "Account Entry"
+#~ msgstr "القيد"
