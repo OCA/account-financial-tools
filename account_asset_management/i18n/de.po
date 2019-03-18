@@ -25,7 +25,7 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1093
+#: code:addons/account_asset_management/models/account_asset.py:1094
 #, python-format
 msgid ""
 "\n"
@@ -596,7 +596,7 @@ msgid "Error ! You can not create recursive assets."
 msgstr "Fehler! Anlagen dürfen nicht rekursiv angelegt werden."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1096
+#: code:addons/account_asset_management/models/account_asset.py:1097
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
