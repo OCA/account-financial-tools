@@ -61,7 +61,7 @@ class AssetReportXlsx(AbstractReportXlsx):
                 },
                 'asset': {
                     'type': 'string',
-                    'value': self._render("asset.code or ''"),
+                    'value': self._render("asset.name"),
                 },
                 'width': 40,
             },
