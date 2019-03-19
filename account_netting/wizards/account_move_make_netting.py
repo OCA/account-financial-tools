@@ -7,6 +7,7 @@ from odoo import _, api, exceptions, fields, models
 
 class AccountMoveMakeNetting(models.TransientModel):
     _name = "account.move.make.netting"
+    _description = 'Wizard to generate account moves for netting'
 
     journal_id = fields.Many2one(
         comodel_name="account.journal",
@@ -28,7 +29,7 @@ class AccountMoveMakeNetting(models.TransientModel):
     )
 
     @api.model
-    def default_get(self, fields):
+    def default_get(self, fields_list):
         if len(self.env.context.get('active_ids', [])) < 2:
             raise exceptions.ValidationError(
                 _("You should compensate at least 2 journal entries."))
@@ -51,7 +52,7 @@ class AccountMoveMakeNetting(models.TransientModel):
             raise exceptions.ValidationError(
                 _("All entries should have a partner and the partner must "
                   "be the same for all."))
-        res = super(AccountMoveMakeNetting, self).default_get(fields)
+        res = super(AccountMoveMakeNetting, self).default_get(fields_list)
         res['move_line_ids'] = [(6, 0, move_lines.ids)]
         balance = (sum(move_lines.mapped('debit')) -
                    sum(move_lines.mapped('credit')))
@@ -59,7 +60,6 @@ class AccountMoveMakeNetting(models.TransientModel):
         res['balance_type'] = 'pay' if balance < 0 else 'receive'
         return res
 
-    @api.multi
     def button_compensate(self):
         self.ensure_one()
         # Create account move
@@ -103,8 +103,6 @@ class AccountMoveMakeNetting(models.TransientModel):
                 move_line_vals = {
                     field_map[i]: amount,
                     'partner_id': self.move_line_ids[0].partner_id.id,
-                    'date': move.date,
-                    'journal_id': move.journal_id.id,
                     'name': move.ref,
                     'account_id': account_group['account_id'],
                 }
