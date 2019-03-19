@@ -4,7 +4,7 @@
 
 {
     'name': 'Account netting',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': 'Compensate AR/AP accounts from the same partner',
     'category': 'Accounting & Finance',
     'author': 'Tecnativa, '
