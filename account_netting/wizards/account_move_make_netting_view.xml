@@ -15,12 +15,10 @@
         <field name="model">account.move.make.netting</field>
         <field name="arch" type="xml">
             <form string="Compensate entries">
-                <label string="This operation will generate account entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner:"/>
+                    <p>This operation will generate account entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner.</p>
                 <group>
                     <field name="balance"/>
                     <field name="balance_type"/>
-                </group>
-                <group string="Select the journal where storing the journal entries">
                     <field name="journal_id"/>
                 </group>
                 <footer>
