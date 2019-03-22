@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bank_account_constraint_exception
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e-20181106\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-22 09:48+0000\n"
+"PO-Revision-Date: 2019-03-22 11:49+0200\n"
+"Last-Translator: Miku Laitinen <miku@avoin.systems>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: account_multipartner_bank_account
+#: model:ir.model,name:account_multipartner_bank_account.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Pankkitilit"
+
+#. module: account_multipartner_bank_account
+#: sql_constraint:res.partner.bank:0
+msgid "Check 1=1 should never fail."
+msgstr ""
+
+#. module: account_multipartner_bank_account
+#: model:ir.model.fields,field_description:account_multipartner_bank_account.field_res_partner_bank_override_uniqueness
+msgid "Override Uniqueness"
+msgstr "Salli duplikaatti"
+
+#. module: account_multipartner_bank_account
+#: model:ir.model.fields,help:account_multipartner_bank_account.field_res_partner_bank_override_uniqueness
+msgid "Overrides bank account number uniqueness constraint"
+msgstr ""
+"Ohittaa pankkitilien uniikkiusrajoitteen ja sallii saman tilin kahdelle "
+"yritykselle"

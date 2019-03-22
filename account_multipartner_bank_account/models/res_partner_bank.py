@@ -1,17 +1,14 @@
-# -*- coding: utf-8 -*-
-# See LICENSE for licensing information
+# Copyright 2019 Avoin.Systems
+# License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import logging
 from odoo import models, fields, api
-
-_logger = logging.getLogger(__name__)
 
 
 class BankAccount(models.Model):
     _inherit = 'res.partner.bank'
     _sql_constraints = [('unique_number',
                          'CHECK(1=1)',
-                         'Please contact tech@avoin.systems is you see this')]
+                         'Check 1=1 should never fail.')]
 
     override_uniqueness = fields.Boolean(
         "Override Uniqueness",
@@ -37,6 +34,6 @@ class BankAccount(models.Model):
 
         if errors:
             raise models.ValidationError(
-                u'Account number must be unique. '
-                u'The following accounts have duplicates: {}'
+                'Account number must be unique. '
+                'The following accounts have duplicates: {}'
                 .format(", ".join(errors)))
