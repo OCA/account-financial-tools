@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-09 23:25+0000\n"
-"PO-Revision-Date: 2018-02-09 23:25+0000\n"
-"Last-Translator: Nicolas JEUDY <njeudy@panda-chi.io>, 2018\n"
+"PO-Revision-Date: 2019-03-25 11:15+0000\n"
+"Last-Translator: Valaeys Stéphane <svalaeys@fiefmanage.ch>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.5.1\n"
 
 #. module: account_reversal
 #: model:ir.model,name:account_reversal.model_account_move
@@ -72,13 +73,12 @@ msgstr ""
 
 #. module: account_reversal
 #: model:ir.model.fields,help:account_reversal.field_account_move_reverse_journal_id
-#, fuzzy
 msgid ""
 "Enter the journal of the reversal account entries. If empty, Odoo uses the "
 "same journal of the move to reverse."
 msgstr ""
-"Saisissez la date des écritures contre-passées. S'il est vide, Odoo propose "
-"le même journal que l'écriture à contre-passer."
+"Saisissez le journal des écritures contre-passées. Si le champ est vide, "
+"Odoo propose le même journal que l'écriture à contre-passer."
 
 #. module: account_reversal
 #: model:ir.model.fields,field_description:account_reversal.field_account_move_reverse_move_prefix
