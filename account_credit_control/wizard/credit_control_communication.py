@@ -55,6 +55,10 @@ class CreditCommunication(models.TransientModel):
     total_due = fields.Float(string='Total Due',
                              compute='_compute_total')
 
+    # comma separated invoice number
+    invoices_numbers = fields.Char(string="Invoices Names",
+                                   compute="_compute_invoices_numbers")
+
     @api.model
     def _get_total(self):
         amount_field = 'credit_control_line_ids.amount_due'
@@ -73,6 +77,16 @@ class CreditCommunication(models.TransientModel):
         for communication in self:
             communication.total_invoiced = communication._get_total()
             communication.total_due = communication._get_total_due()
+
+    @api.multi
+    @api.depends('credit_control_line_ids',
+                 'credit_control_line_ids.invoice_id',
+                 'credit_control_line_ids.invoice_id.number')
+    def _compute_invoices_numbers(self):
+        for communication in self:
+            invoices_numbers = communication.credit_control_line_ids.mapped(
+                "invoice_id.number")
+            communication.invoices_numbers = ", ".join(invoices_numbers)
 
     @api.model
     @api.returns('self', lambda value: value.id)
