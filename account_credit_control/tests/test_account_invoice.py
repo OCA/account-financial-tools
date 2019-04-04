@@ -17,7 +17,6 @@ class TestAccountInvoice(TransactionCase):
         Test the method action_cancel on invoice
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 
@@ -114,7 +113,6 @@ class TestAccountInvoice(TransactionCase):
         Test the method action_cancel on invoice
         We will create an old invoice, generate a control run
         and check if I can unlink this invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 
@@ -198,7 +196,6 @@ class TestAccountInvoice(TransactionCase):
         Test the wizard to change default credit policy on invoice
         We will create an invoice, change credit policy and check
         if it has change the policy on invoice
-        :return:
         """
         journal = self.env['account.invoice']._default_journal()
 

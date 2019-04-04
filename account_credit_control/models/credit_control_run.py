@@ -1,12 +1,9 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
-logger = logging.getLogger(__name__)
 
 
 class CreditControlRun(models.Model):
@@ -20,11 +17,14 @@ class CreditControlRun(models.Model):
     def _default_policies(self):
         return self.env['credit.control.policy'].search([])
 
-    date = fields.Date(string='Controlling Date', required=True,
-                       readonly=True,
-                       states={'draft': [('readonly', False)]})
+    date = fields.Date(
+        string='Controlling Date',
+        required=True,
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+    )
     policy_ids = fields.Many2many(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         relation="credit_run_policy_rel",
         column1='run_id', column2='policy_id',
         string='Policies',
@@ -32,18 +32,26 @@ class CreditControlRun(models.Model):
         states={'draft': [('readonly', False)]},
         default=lambda self: self._default_policies(),
     )
-    report = fields.Html(readonly=True, copy=False)
-    state = fields.Selection([('draft', 'Draft'),
-                              ('done', 'Done')],
-                             required=True,
-                             readonly=True,
-                             default='draft')
+    report = fields.Html(
+        readonly=True,
+        copy=False,
+    )
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('done', 'Done'),
+        ],
+        required=True,
+        readonly=True,
+        default='draft',
+    )
     line_ids = fields.One2many(
         comodel_name='credit.control.line',
         inverse_name='run_id',
-        string='Generated lines')
+        string='Generated lines',
+    )
     manual_ids = fields.Many2many(
-        'account.move.line',
+        comodel_name='account.move.line',
         rel="credit_runreject_rel",
         string='Lines to handle manually',
         help='If a credit control line has been generated'
@@ -187,17 +195,6 @@ class CreditControlRun(models.Model):
         draft_lines = self.line_ids.filtered(lambda x: x.state == 'draft')
         draft_lines.write({'state': 'to_be_sent'})
         self.hide_change_state_button = True
-        # if not draft_lines:
-        #     raise UserError(_('No lines in draft state'))
-        # action_name = ('account_credit_control'
-        #                '.open_credit_line_marker_wizard_menu_action')
-        # action = self.env.ref(action_name)
-        # action = action.read()[0]
-        # action['context'] = {
-        #     'active_model': 'credit.control.line',
-        #     'active_ids': draft_lines.ids,
-        # }
-        # return action
 
     def run_channel_action(self):
         self.ensure_one()

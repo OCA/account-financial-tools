@@ -7,6 +7,7 @@ from odoo import fields, models
 class Mail(models.Model):
     _inherit = 'mail.mail'
 
-    # use HTML fields instead of text
-    body_html = fields.Html('Rich-text Contents',
-                            help="Rich-text/HTML message")
+    body_html = fields.Html(
+        string='Rich-text Contents',
+        help="Rich-text/HTML message",
+    )

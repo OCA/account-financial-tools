@@ -2,50 +2,68 @@
 # Copyright 2017 Okia SPRL (https://okia.be)
 # Copyright 2018 Access Bookings Ltd (https://accessbookings.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
 from odoo import api, fields, models
 
-logger = logging.getLogger(__name__)
 
-
-class CreditCommunication(models.TransientModel):
+class CreditControlCommunication(models.TransientModel):
     """Shell class used to provide a base model to email template and reporting
     Il use this approche in version 7 a browse record
     will exist even if not saved
-
     """
     _name = "credit.control.communication"
     _description = "credit control communication"
     _rec_name = 'partner_id'
 
-    partner_id = fields.Many2one('res.partner', 'Partner', required=True)
-    current_policy_level = fields.Many2one('credit.control.policy.level',
-                                           'Level',
-                                           required=True)
-    currency_id = fields.Many2one('res.currency', 'Currency', required=True)
-    credit_control_line_ids = fields.Many2many('credit.control.line',
-                                               rel='comm_credit_rel',
-                                               string='Credit Lines')
-    contact_address = fields.Many2one('res.partner',
-                                      readonly=True)
-    report_date = fields.Date(default=fields.Date.context_today)
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        required=True,
+    )
+    current_policy_level = fields.Many2one(
+        comodel_name='credit.control.policy.level',
+        string='Level',
+        required=True,
+    )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        string='Currency',
+        required=True,
+    )
+    credit_control_line_ids = fields.Many2many(
+        comodel_name='credit.control.line',
+        rel='comm_credit_rel',
+        string='Credit Lines',
+    )
+    contact_address = fields.Many2one(
+        comodel_name='res.partner',
+        readonly=True,
+    )
+    report_date = fields.Date(
+        default=fields.Date.context_today,
+    )
 
     @api.model
     def _get_company(self):
         company_obj = self.env['res.company']
         return company_obj._company_default_get('credit.control.policy')
 
-    company_id = fields.Many2one('res.company',
-                                 string='Company',
-                                 default=lambda self: self._get_company(),
-                                 required=True)
-    user_id = fields.Many2one('res.users',
-                              default=lambda self: self.env.user,
-                              string='User')
-
-    total_invoiced = fields.Float(compute='_compute_total')
-
-    total_due = fields.Float(compute='_compute_total')
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+        default=lambda self: self._get_company(),
+        required=True,
+    )
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        default=lambda self: self.env.user,
+        string='User',
+    )
+    total_invoiced = fields.Float(
+        compute='_compute_total',
+    )
+    total_due = fields.Float(
+        compute='_compute_total',
+    )
 
     @api.model
     def _get_total(self):
@@ -74,7 +92,7 @@ class CreditCommunication(models.TransientModel):
             # just set a value on creation
             partner_id = vals['partner_id']
             vals['contact_address'] = self._get_contact_address(partner_id).id
-        return super(CreditCommunication, self).create(vals)
+        return super(CreditControlCommunication, self).create(vals)
 
     @api.multi
     def get_email(self):

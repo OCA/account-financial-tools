@@ -10,7 +10,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     credit_policy_id = fields.Many2one(
-        'credit.control.policy',
+        comodel_name='credit.control.policy',
         string='Credit Control Policy',
         help="The Credit Control Policy used for this "
              "invoice. If nothing is defined, it will "
@@ -23,7 +23,8 @@ class AccountInvoice(models.Model):
                "account_credit_control.group_account_credit_control_info",
     )
     credit_control_line_ids = fields.One2many(
-        'credit.control.line', 'invoice_id',
+        comodel_name='credit.control.line',
+        inverse_name='invoice_id',
         string='Credit Lines',
         readonly=True,
         copy=False,

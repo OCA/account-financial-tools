@@ -48,5 +48,4 @@
         <field name="help">Send an email for the selected lines.</field>
     </record>
 
-
 </odoo>

@@ -84,7 +84,6 @@ class TestCreditControlRun(TransactionCase):
     def test_check_run_date(self):
         """
         Create a control run older than the last control run
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
@@ -100,7 +99,6 @@ class TestCreditControlRun(TransactionCase):
     def test_generate_credit_lines(self):
         """
         Test the method generate_credit_lines
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
@@ -121,7 +119,6 @@ class TestCreditControlRun(TransactionCase):
     def test_multi_credit_control_run(self):
         """
         Generate several control run
-        :return:
         """
 
         six_months = datetime.today() - relativedelta.relativedelta(months=6)
@@ -156,7 +153,6 @@ class TestCreditControlRun(TransactionCase):
     def test_wiz_print_lines(self):
         """
         Test the wizard Credit Control Printer
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),
@@ -193,7 +189,6 @@ class TestCreditControlRun(TransactionCase):
     def test_wiz_credit_control_emailer(self):
         """
         Test the wizard credit control emailer
-        :return:
         """
         control_run = self.env['credit.control.run'].create({
             'date': fields.Date.today(),

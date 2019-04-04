@@ -7,7 +7,7 @@
             <form string="Set current credit level">
                 <separator string="Change the overdue level of current invoice"
                            colspan="4"/>
-                <label string="This wizard will let you set the overdue policy and level for selected invoices"/>
+                <span class="o_form_label">This wizard will let you set the overdue policy and level for selected invoices</span>
                 <newline/>
                 <group>
                     <group>

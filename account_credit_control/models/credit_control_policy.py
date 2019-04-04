@@ -11,15 +11,24 @@ class CreditControlPolicy(models.Model):
     _name = "credit.control.policy"
     _description = """Define a reminder policy"""
 
-    name = fields.Char(required=True)
-    level_ids = fields.One2many('credit.control.policy.level',
-                                'policy_id',
-                                string='Policy Levels')
-    do_nothing = fields.Boolean(help='For policies which should not '
-                                     'generate lines or are obsolete')
-    company_id = fields.Many2one('res.company', string='Company')
+    name = fields.Char(
+        required=True,
+    )
+    level_ids = fields.One2many(
+        comodel_name='credit.control.policy.level',
+        inverse_name='policy_id',
+        string='Policy Levels',
+    )
+    do_nothing = fields.Boolean(
+        help='For policies which should not '
+             'generate lines or are obsolete',
+    )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+    )
     account_ids = fields.Many2many(
-        'account.account',
+        comodel_name='account.account',
         string='Accounts',
         required=True,
         domain="[('internal_type', '=', 'receivable')]",
@@ -196,32 +205,55 @@ class CreditControlPolicyLevel(models.Model):
     _order = 'level'
     _description = """A credit control policy level"""
 
-    name = fields.Char(required=True, translate=True)
-    policy_id = fields.Many2one('credit.control.policy',
-                                string='Related Policy',
-                                required=True)
+    name = fields.Char(
+        required=True,
+        translate=True,
+    )
+    policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        string='Related Policy',
+        required=True,
+    )
     level = fields.Integer(required=True)
     computation_mode = fields.Selection(
-        [('net_days', 'Due Date'),
-         ('end_of_month', 'Due Date, End Of Month'),
-         ('previous_date', 'Previous Reminder')],
+        selection=[
+            ('net_days', 'Due Date'),
+            ('end_of_month', 'Due Date, End Of Month'),
+            ('previous_date', 'Previous Reminder'),
+        ],
         string='Compute Mode',
-        required=True
+        required=True,
     )
-    delay_days = fields.Integer(string='Delay (in days)', required=True)
-    email_template_id = fields.Many2one('mail.template',
-                                        string='Email Template',
-                                        required=True)
-    channel = fields.Selection([('letter', 'Letter'),
-                                ('email', 'Email')],
-                               required=True)
-    custom_text = fields.Text(string='Custom Message',
-                              required=True,
-                              translate=True)
-    custom_mail_text = fields.Html(string='Custom Mail Message',
-                                   required=True, translate=True)
+    delay_days = fields.Integer(
+        string='Delay (in days)',
+        required=True,
+    )
+    email_template_id = fields.Many2one(
+        comodel_name='mail.template',
+        string='Email Template',
+        required=True,
+    )
+    channel = fields.Selection(
+        selection=[
+            ('letter', 'Letter'),
+            ('email', 'Email'),
+        ],
+        required=True,
+    )
+    custom_text = fields.Text(
+        string='Custom Message',
+        required=True,
+        translate=True,
+    )
+    custom_mail_text = fields.Html(
+        string='Custom Mail Message',
+        required=True,
+        translate=True,
+    )
     custom_text_after_details = fields.Text(
-        string='Custom Message after details', translate=True)
+        string='Custom Message after details',
+        translate=True,
+    )
 
     _sql_constraint = [('unique level',
                         'UNIQUE (policy_id, level)',

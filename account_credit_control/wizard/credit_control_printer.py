@@ -20,12 +20,16 @@ class CreditControlPrinter(models.TransientModel):
             return False
         return context.get('active_ids', False)
 
-    mark_as_sent = fields.Boolean(string='Mark letter lines as sent',
-                                  default=True,
-                                  help="Only letter lines will be marked.")
-    line_ids = fields.Many2many('credit.control.line',
-                                string='Credit Control Lines',
-                                default=lambda self: self._default_line_ids())
+    mark_as_sent = fields.Boolean(
+        string='Mark letter lines as sent',
+        default=True,
+        help="Only letter lines will be marked.",
+    )
+    line_ids = fields.Many2many(
+        comodel_name='credit.control.line',
+        string='Credit Control Lines',
+        default=lambda self: self._default_line_ids(),
+    )
 
     @api.model
     def _credit_line_predicate(self, line):

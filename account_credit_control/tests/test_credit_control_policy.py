@@ -11,7 +11,6 @@ class TestCreditControlPolicy(TransactionCase):
     def test_check_policy_against_account(self):
         """
         Test the model check_policy_against_account with several case
-        :return:
         """
         policy = self.env.ref('account_credit_control.credit_control_3_time')
 
@@ -45,7 +44,6 @@ class TestCreditControlPolicy(TransactionCase):
     def test_check_level_mode(self):
         """
         Check the method _check_level_mode on policy level
-        :return:
         """
         level_1 = self.env.ref('account_credit_control.3_time_1')
 
@@ -55,7 +53,6 @@ class TestCreditControlPolicy(TransactionCase):
     def test_previous_level(self):
         """
         Check the method _previous_level on policy level
-        :return:
         """
         level_1 = self.env.ref('account_credit_control.3_time_1')
         level_2 = self.env.ref('account_credit_control.3_time_2')
@@ -68,7 +65,6 @@ class TestCreditControlPolicy(TransactionCase):
         Check the where clauses statement return by the method
         _get_sql_date_boundary_for_computation_mode
         according the computation mode
-        :return:
         """
         level_2 = self.env.ref('account_credit_control.3_time_2')
 

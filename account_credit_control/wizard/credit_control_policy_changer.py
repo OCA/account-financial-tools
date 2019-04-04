@@ -1,19 +1,15 @@
 # Copyright 2012-2017 Camptocamp SA
 # Copyright 2017 Okia SPRL (https://okia.be)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-
-logger = logging.getLogger(__name__)
 
 
 class CreditControlPolicyChanger(models.TransientModel):
     """ Wizard that is run from invoices and allows to set manually a policy
     Policy are actually apply to related move lines availabe
     in selection widget
-
     """
     _name = "credit.control.policy.changer"
 
@@ -43,19 +39,27 @@ class CreditControlPolicyChanger(models.TransientModel):
             selected_lines |= move_lines
         return selected_lines
 
-    new_policy_id = fields.Many2one('credit.control.policy',
-                                    string='New Policy to Apply',
-                                    required=True)
-    new_policy_level_id = fields.Many2one('credit.control.policy.level',
-                                          string='New level to apply',
-                                          required=True)
+    new_policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        string='New Policy to Apply',
+        required=True,
+    )
+    new_policy_level_id = fields.Many2one(
+        comodel_name='credit.control.policy.level',
+        string='New level to apply',
+        required=True,
+    )
     # Only used to provide dynamic filtering on form
-    do_nothing = fields.Boolean(string='No follow  policy')
-    move_line_ids = fields.Many2many('account.move.line',
-                                     rel='credit_changer_ml_rel',
-                                     string='Move line to change',
-                                     default=lambda self:
-                                         self._default_move_lines())
+    do_nothing = fields.Boolean(
+        string='No follow  policy',
+    )
+    move_line_ids = fields.Many2many(
+        comodel_name='account.move.line',
+        rel='credit_changer_ml_rel',
+        string='Move line to change',
+        default=lambda self:
+        self._default_move_lines(),
+    )
 
     @api.onchange('new_policy_level_id')
     def onchange_policy_id(self):

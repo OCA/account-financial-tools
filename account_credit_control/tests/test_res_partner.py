@@ -15,7 +15,6 @@ class TestCreditControlPolicyLevel(TransactionCase):
         (this policy doesn't contains the account of the partner).
         After that we add the previous account in the policy and
         retry to assign this policy and this account on the partner
-        :return:
         """
         policy = self.env.ref('account_credit_control.credit_control_3_time')
 

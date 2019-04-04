@@ -10,11 +10,14 @@ class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     credit_control_tolerance = fields.Float(
-        related="company_id.credit_control_tolerance")
-    credit_policy_id = fields.Many2one('credit.control.policy',
-                                       related="company_id.credit_policy_id",
-                                       string='Credit Control Policy',
-                                       help="The Credit Control Policy used "
-                                            "on partners by default. "
-                                            "This setting can be overridden"
-                                            " on partners or invoices.")
+        related="company_id.credit_control_tolerance",
+    )
+    credit_policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        related="company_id.credit_policy_id",
+        string='Credit Control Policy',
+        help="The Credit Control Policy used "
+             "on partners by default. "
+             "This setting can be overridden"
+             " on partners or invoices.",
+    )

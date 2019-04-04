@@ -8,12 +8,16 @@ class ResCompany(models.Model):
     """ Add credit control parameters """
     _inherit = 'res.company'
 
-    credit_control_tolerance = fields.Float(default=0.1)
+    credit_control_tolerance = fields.Float(
+        default=0.1,
+    )
     # This is not a property on the partner because we cannot search
     # on fields.property (subclass fields.function).
-    credit_policy_id = fields.Many2one('credit.control.policy',
-                                       string='Credit Control Policy',
-                                       help="The Credit Control Policy used "
-                                            "on partners by default. "
-                                            "This setting can be overridden"
-                                            " on partners or invoices.")
+    credit_policy_id = fields.Many2one(
+        comodel_name='credit.control.policy',
+        string='Credit Control Policy',
+        help="The Credit Control Policy used "
+             "on partners by default. "
+             "This setting can be overridden"
+             " on partners or invoices.",
+    )
