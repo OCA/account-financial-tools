@@ -192,9 +192,7 @@ class AccountAsset(models.Model):
         store=True, readonly=True)
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
-        string='Analytic account',
-        domain=[('type', '!=', 'view'),
-                ('state', 'not in', ('close', 'cancelled'))])
+        string='Analytic account')
 
     @api.model
     def _default_company_id(self):
