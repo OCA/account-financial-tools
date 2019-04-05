@@ -41,8 +41,16 @@ class AccountInvoiceSpreadLine(models.Model):
                 spread.message_post(body=post_msg)
 
             spread._reconcile_spread_moves(created_moves)
-            if created_moves and spread.move_line_auto_post:
-                created_moves.post()
+            self._post_spread_moves(spread, created_moves)
+
+    @api.model
+    def _post_spread_moves(self, spread, moves):
+        if not moves:
+            return
+        if spread.company_id.force_move_auto_post:
+            moves.post()
+        elif spread.move_line_auto_post:
+            moves.post()
 
     @api.multi
     def create_move(self):
@@ -151,3 +159,8 @@ class AccountInvoiceSpreadLine(models.Model):
             ('move_id', '=', False)
         ])
         lines.create_and_reconcile_moves()
+
+        unposted_moves = self.search([('move_id', '!=', False)]).mapped(
+            'move_id').filtered(lambda m: m.state != 'posted')
+        unposted_moves.filtered(
+            lambda m: m.company_id.force_move_auto_post).post()
