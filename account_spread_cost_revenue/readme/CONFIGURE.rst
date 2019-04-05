@@ -10,3 +10,8 @@ In the same *Account Spread* tab, you can also configure the Spread Balance Shee
 
 * the *Default Spread Account for Revenues*,
 * the *Default Spread Account for Expenses*.
+
+
+This module by default allows the spreading even before the receipt of the invoice or when the invoice is still draft,
+so that it is possible to work on the plan of the cost/revenue spreading. To disable this feature, on the form view of
+the company disable the *Allow Spread Planning* option.

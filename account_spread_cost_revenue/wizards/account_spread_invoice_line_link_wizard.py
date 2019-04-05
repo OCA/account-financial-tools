@@ -8,6 +8,24 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
     _name = 'account.spread.invoice.line.link.wizard'
     _description = 'Account Spread Invoice Line Link Wizard'
 
+    def _selection_spread_action_type(self):
+        base_selection = [
+            ('template', 'Create from spread template'),
+            ('new', 'Create new spread board')
+        ]
+        if not self.env.context.get('allow_spread_planning'):
+            return base_selection
+
+        link_selection = [
+            ('link', 'Link to existing spread board'),
+        ]
+        return link_selection + base_selection
+
+    def _selection_default_spread_action_type(self):
+        if not self.env.context.get('allow_spread_planning'):
+            return 'template'
+        return 'link'
+
     invoice_line_id = fields.Many2one(
         'account.invoice.line',
         string='Invoice Line',
@@ -36,11 +54,9 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         'res.company',
         string='Company',
         required=True)
-    spread_action_type = fields.Selection([
-        ('link', 'Link to existing spread board'),
-        ('template', 'Create from spread template'),
-        ('new', 'Create new spread board')],
-        default='link')
+    spread_action_type = fields.Selection(
+        selection=_selection_spread_action_type,
+        default=_selection_default_spread_action_type)
     template_id = fields.Many2one(
         'account.spread.template',
         string='Spread Template')
