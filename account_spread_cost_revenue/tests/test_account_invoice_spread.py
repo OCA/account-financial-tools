@@ -123,6 +123,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
 
         self.assertEqual(wizard1.invoice_line_id, self.invoice_line)
@@ -144,7 +145,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertEqual(wizard2.invoice_type, 'out_invoice')
         self.assertFalse(wizard2.spread_id)
         self.assertEqual(wizard2.company_id, my_company)
-        self.assertEqual(wizard2.spread_action_type, 'link')
+        self.assertEqual(wizard2.spread_action_type, 'template')
         self.assertFalse(wizard2.spread_account_id)
         self.assertFalse(wizard2.spread_journal_id)
 
@@ -169,6 +170,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
 
         self.assertEqual(wizard1.invoice_line_id, self.invoice_line)
@@ -200,7 +202,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertEqual(wizard2.invoice_type, 'out_invoice')
         self.assertFalse(wizard2.spread_id)
         self.assertEqual(wizard2.company_id, my_company)
-        self.assertEqual(wizard2.spread_action_type, 'link')
+        self.assertEqual(wizard2.spread_action_type, 'template')
         self.assertFalse(wizard2.spread_account_id)
         self.assertFalse(wizard2.spread_journal_id)
 
@@ -221,6 +223,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
         self.assertEqual(wizard1.spread_action_type, 'link')
 
@@ -715,10 +718,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                 self.assertFalse(spread_ml.matched_credit_ids)
                 self.assertFalse(spread_ml.full_reconcile_id)
 
-        other_journal = self.env['account.journal'].search([
-            ('id', '!=', self.invoice_2.journal_id.id),
-        ], limit=1)
-        self.assertTrue(other_journal)
+        other_journal = self.env['account.journal'].create({
+            'name': 'Other Journal', 'type': 'general', 'code': 'test2'})
         with self.assertRaises(ValidationError):
             self.spread2.journal_id = other_journal
 

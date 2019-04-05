@@ -117,6 +117,9 @@ class AccountSpread(models.Model):
     display_create_all_moves = fields.Boolean(
         compute='_compute_display_create_all_moves',
         string='Display Button All Moves')
+    display_recompute_buttons = fields.Boolean(
+        compute='_compute_display_recompute_buttons',
+        string='Display Buttons Recompute')
 
     @api.model
     def default_get(self, fields):
@@ -183,6 +186,14 @@ class AccountSpread(models.Model):
                 spread.display_create_all_moves = True
             else:
                 spread.display_create_all_moves = False
+
+    @api.multi
+    def _compute_display_recompute_buttons(self):
+        for spread in self:
+            spread.display_recompute_buttons = True
+            if not spread.company_id.allow_spread_planning:
+                if spread.invoice_id.state == 'draft':
+                    spread.display_recompute_buttons = False
 
     @api.multi
     def _get_spread_entry_name(self, seq):
@@ -258,7 +269,7 @@ class AccountSpread(models.Model):
                         'with selected invoice type'))
 
     @api.multi
-    def _compute_spread_period_duration(self):
+    def _get_spread_period_duration(self):
         """Converts the selected period_type to number of months."""
         self.ensure_one()
         if self.period_type == 'year':
@@ -277,7 +288,7 @@ class AccountSpread(models.Model):
             # if we already have some previous validated entries,
             # starting date is last entry + method period
             last_date = fields.Date.from_string(posted_line_ids[-1].date)
-            months = self._compute_spread_period_duration()
+            months = self._get_spread_period_duration()
             spread_date = last_date + relativedelta(months=months)
         else:
             spread_date = fields.Date.from_string(self.spread_date)
@@ -289,7 +300,7 @@ class AccountSpread(models.Model):
         is used by "def _compute_spread_board()" method.
         """
         self.ensure_one()
-        months = self._compute_spread_period_duration()
+        months = self._get_spread_period_duration()
         date = date + relativedelta(months=months)
         # get the last day of the month
         if month_day > 28:
@@ -512,7 +523,8 @@ class AccountSpread(models.Model):
                 if not line.move_id:
                     line.create_move()
 
-    @api.multi
+    @api.depends(
+        'debit_account_id.deprecated', 'credit_account_id.deprecated')
     def _compute_deprecated_accounts(self):
         for spread in self:
             debit_deprecated = bool(spread.debit_account_id.deprecated)
