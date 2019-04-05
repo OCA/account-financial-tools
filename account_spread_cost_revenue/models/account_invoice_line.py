@@ -49,10 +49,12 @@ class AccountInvoiceLine(models.Model):
 
         # In case no spread board is linked to the invoice line
         # open the wizard to link them
+        company = self.invoice_id.company_id
         ctx = dict(
             self.env.context,
             default_invoice_line_id=self.id,
-            default_company_id=self.invoice_id.company_id.id,
+            default_company_id=company.id,
+            allow_spread_planning=company.allow_spread_planning,
         )
         return {
             'name': _('Link Invoice Line with Spread Board'),
