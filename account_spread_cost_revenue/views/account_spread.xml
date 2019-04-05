@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="compute_spread_board" type="object" string="Recalculate unposted lines" class="oe_highlight" attrs="{'invisible': [('debit_account_id', '=', False)]}" />
-                    <button name="action_recalculate_spread" type="object" string="Recalculate entire spread" attrs="{'invisible': [('debit_account_id', '=', False)]}" groups="account.group_account_manager" />
+                    <button name="compute_spread_board" type="object" string="Recalculate unposted lines" class="oe_highlight" attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}" />
+                    <button name="action_recalculate_spread" type="object" string="Recalculate entire spread" attrs="{'invisible': ['|',('debit_account_id', '=', False),('display_recompute_buttons', '=', False)]}" groups="account.group_account_manager" />
                     <button name="action_undo_spread" type="object" string="Undo spread" attrs="{'invisible': [('line_ids', '=', [])]}" groups="account.group_account_manager" />
                     <button name="action_unlink_invoice_line" type="object" string="Unlink Invoice Line" attrs="{'invisible': [('invoice_line_id', '=', False)]}" groups="account.group_account_manager" />
                 </header>
@@ -28,6 +28,7 @@
                         <group name="spread_definitions">
                             <field name="template_id"/>
                             <field name="invoice_type" attrs="{'readonly':[('invoice_line_id','!=',False)]}"/>
+                            <field name="display_recompute_buttons" invisible="1"/>
                         </group>
                     </group>
                     <group name="accounts">
