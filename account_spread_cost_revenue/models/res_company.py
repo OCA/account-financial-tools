@@ -22,5 +22,8 @@ class ResCompany(models.Model):
     allow_spread_planning = fields.Boolean(
         default=True,
         help="Disable this option if you do not want to allow the "
-             "spreading before the invoice is validated.",
-    )
+             "spreading before the invoice is validated.")
+    force_move_auto_post = fields.Boolean(
+        'Auto-post spread lines',
+        help="Enable this option if you want to post automatically the "
+             "accounting moves of all the spreads.")

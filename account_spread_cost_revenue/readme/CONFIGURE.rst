@@ -11,7 +11,10 @@ In the same *Account Spread* tab, you can also configure the Spread Balance Shee
 * the *Default Spread Account for Revenues*,
 * the *Default Spread Account for Expenses*.
 
-
 This module by default allows the spreading even before the receipt of the invoice or when the invoice is still draft,
 so that it is possible to work on the plan of the cost/revenue spreading. To disable this feature, on the form view of
 the company disable the *Allow Spread Planning* option.
+
+On the form view of the company, the *Auto-post spread lines* option forces the account moves created
+during the cost/revenue spreading to be automatically posted. When this option is false, the user can
+enable/disable the automatic posting by the flag *Auto-post lines* present in the spread board.

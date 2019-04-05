@@ -120,6 +120,9 @@ class AccountSpread(models.Model):
     display_recompute_buttons = fields.Boolean(
         compute='_compute_display_recompute_buttons',
         string='Display Buttons Recompute')
+    display_move_line_auto_post = fields.Boolean(
+        compute='_compute_display_move_line_auto_post',
+        string='Display Button Auto-post lines')
 
     @api.model
     def default_get(self, fields):
@@ -194,6 +197,13 @@ class AccountSpread(models.Model):
             if not spread.company_id.allow_spread_planning:
                 if spread.invoice_id.state == 'draft':
                     spread.display_recompute_buttons = False
+
+    @api.multi
+    def _compute_display_move_line_auto_post(self):
+        for spread in self:
+            spread.display_move_line_auto_post = True
+            if spread.company_id.force_move_auto_post:
+                spread.display_move_line_auto_post = False
 
     @api.multi
     def _get_spread_entry_name(self, seq):
