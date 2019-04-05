@@ -1,4 +1,4 @@
-# Copyright 2018 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import datetime
@@ -123,6 +123,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
 
         self.assertEqual(wizard1.invoice_line_id, self.invoice_line)
@@ -144,7 +145,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertEqual(wizard2.invoice_type, 'out_invoice')
         self.assertFalse(wizard2.spread_id)
         self.assertEqual(wizard2.company_id, my_company)
-        self.assertEqual(wizard2.spread_action_type, 'link')
+        self.assertEqual(wizard2.spread_action_type, 'template')
         self.assertFalse(wizard2.spread_account_id)
         self.assertFalse(wizard2.spread_journal_id)
 
@@ -169,6 +170,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
 
         self.assertEqual(wizard1.invoice_line_id, self.invoice_line)
@@ -200,7 +202,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         self.assertEqual(wizard2.invoice_type, 'out_invoice')
         self.assertFalse(wizard2.spread_id)
         self.assertEqual(wizard2.company_id, my_company)
-        self.assertEqual(wizard2.spread_action_type, 'link')
+        self.assertEqual(wizard2.spread_action_type, 'template')
         self.assertFalse(wizard2.spread_account_id)
         self.assertFalse(wizard2.spread_journal_id)
 
@@ -221,6 +223,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         wizard1 = Wizard.with_context(
             default_invoice_line_id=self.invoice_line.id,
             default_company_id=my_company.id,
+            allow_spread_planning=True,
         ).create({})
         self.assertEqual(wizard1.spread_action_type, 'link')
 
@@ -717,7 +720,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         other_journal = self.env['account.journal'].create({
             'name': 'Other Journal', 'type': 'general', 'code': 'test2'})
-        self.assertTrue(other_journal)
         with self.assertRaises(ValidationError):
             self.spread2.journal_id = other_journal
 
