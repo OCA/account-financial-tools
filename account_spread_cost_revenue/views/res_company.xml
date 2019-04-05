@@ -18,8 +18,11 @@
                         </group>
                     </group>
                     <group name="spreading_options">
-                        <group>
+                        <group name="spreading_options_left">
                             <field name="allow_spread_planning"/>
+                        </group>
+                        <group name="spreading_options_right">
+                            <field name="force_move_auto_post"/>
                         </group>
                     </group>
                 </page>
