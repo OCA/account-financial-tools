@@ -18,3 +18,9 @@ class ResCompany(models.Model):
 
     default_spread_expense_journal_id = fields.Many2one(
         'account.journal', string='Expense Spread Journal')
+
+    allow_spread_planning = fields.Boolean(
+        default=True,
+        help="Disable this option if you do not want to allow the "
+             "spreading before the invoice is validated.",
+    )
