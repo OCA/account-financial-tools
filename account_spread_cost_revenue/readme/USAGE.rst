@@ -28,6 +28,7 @@ A cron job will automatically create the accounting moves for all the lines havi
 
 By default, the status of the created accounting moves is posted.
 To disable the automatic posting of the accounting moves, set the flag *Auto-post lines* to False.
+This flag is only available when the *Auto-post spread lines* option, present on the form view of the company, is disabled.
 
 Click on button *Recalculate entire spread* button in the spread board to force the recalculation of the spread lines:
 this will also reset all the journal entries previously created.
