@@ -29,6 +29,7 @@
                             <field name="template_id"/>
                             <field name="invoice_type" attrs="{'readonly':[('invoice_line_id','!=',False)]}"/>
                             <field name="display_recompute_buttons" invisible="1"/>
+                            <field name="display_move_line_auto_post" invisible="1"/>
                         </group>
                     </group>
                     <group name="accounts">
@@ -79,7 +80,7 @@
                             <field name="invoice_line_id" readonly="1" attrs="{'invisible':[('invoice_line_id','=',False)]}"/>
                             <field name="estimated_amount" attrs="{'readonly':[('invoice_line_id','!=',False)],'invisible':[('estimated_amount','=',0.0),('invoice_line_id','!=',False)]}"/>
                             <field name="total_amount" attrs="{'invisible':[('invoice_line_id','=',False)]}"/>
-                            <field name="move_line_auto_post" />
+                            <field name="move_line_auto_post" attrs="{'invisible':[('display_move_line_auto_post','=',False)]}"/>
                         </group>
                         <group>
                             <field name="period_number"/>
