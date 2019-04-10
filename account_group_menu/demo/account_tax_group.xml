@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Groups -->
+    <record id="demo_account_tax_group_1" model="account.tax.group">
+        <field name="name">VAT 5%</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="demo_account_tax_group_2" model="account.tax.group">
+        <field name="name">VAT 9%</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="demo_account_tax_group_3" model="account.tax.group">
+        <field name="name">VAT 19%</field>
+        <field name="sequence">2</field>
+    </record>
+    <record id="demo_account_tax_group_4" model="account.tax.group">
+        <field name="name">VAT Cash Basis</field>
+        <field name="sequence">4</field>
+    </record>
+    <!-- VAT -->
+    <record id="demo_vatc_05" model="account.tax">
+        <field name="sequence">11</field>
+        <field name="name">VAT Colected 5%</field>
+        <field name="description">VAT Colected 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_1"/>
+        <field name="account_id" ref="demo_account_105"/>
+        <field name="refund_account_id" ref="demo_account_105"/>
+    </record>
+    <record id="demo_vatc_09" model="account.tax">
+        <field name="sequence">12</field>
+        <field name="name">VAT Colected 9%</field>
+        <field name="description">VAT Colected 9%</field>
+        <field name="amount">9</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_2"/>
+        <field name="account_id" ref="demo_account_111"/>
+        <field name="refund_account_id" ref="demo_account_111"/>
+    </record>
+    <record id="demo_vatc_19" model="account.tax">
+        <field name="sequence">13</field>
+        <field name="name">VAT Colected 19%</field>
+        <field name="description">VAT Colected 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_3"/>
+        <field name="account_id" ref="demo_account_112"/>
+        <field name="refund_account_id" ref="demo_account_112"/>
+    </record>
+    <!-- Cash Basis VAT-->
+    <record id="demo_vatccb_05" model="account.tax">
+        <field name="sequence">21</field>
+        <field name="name">VAT Colected Cash-Basis 5%</field>
+        <field name="description">VAT Colected Cash-Basis 5%</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_exigibility">on_payment</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_4"/>
+        <field name="account_id" ref="demo_account_130"/>
+        <field name="refund_account_id" ref="demo_account_130"/>
+        <field name="cash_basis_account_id" ref="demo_account_110"/>
+    </record>
+    <record id="demo_vatccb_09" model="account.tax">
+        <field name="sequence">22</field>
+        <field name="name">VAT Colected Cash-Basis 9%</field>
+        <field name="description">VAT Colected Cash-Basis 9%</field>
+        <field name="amount">9</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_exigibility">on_payment</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_4"/>
+        <field name="account_id" ref="demo_account_130"/>
+        <field name="refund_account_id" ref="demo_account_130"/>
+        <field name="cash_basis_account_id" ref="demo_account_111"/>
+    </record>
+    <record id="demo_vatccb_19" model="account.tax">
+        <field name="sequence">23</field>
+        <field name="name">VAT Colected Cash-Basis 19%</field>
+        <field name="description">VAT Colected Cash-Basis 19%</field>
+        <field name="amount">19</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="tax_exigibility">on_payment</field>
+        <field name="tax_group_id" ref="demo_account_tax_group_4"/>
+        <field name="account_id" ref="demo_account_130"/>
+        <field name="refund_account_id" ref="demo_account_130"/>
+        <field name="cash_basis_account_id" ref="demo_account_112"/>
+    </record>
+</odoo>
