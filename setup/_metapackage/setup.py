@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo12-addon-account_fiscal_year',
         'odoo12-addon-account_move_fiscal_year',
         'odoo12-addon-account_renumber',
+        'odoo12-addon-account_tag_menu',
         'odoo12-addon-account_type_menu',
     ],
     classifiers=[
