@@ -35,7 +35,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1094
+#: code:addons/account_asset_management/models/account_asset.py:1092
 #, python-format
 msgid ""
 "\n"
@@ -487,7 +487,7 @@ msgid "Degressive-Linear"
 msgstr "Decreciente-Lineal"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:259
+#: code:addons/account_asset_management/models/account_asset.py:257
 #: code:addons/account_asset_management/models/account_asset_profile.py:149
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
@@ -595,13 +595,13 @@ msgid "Entries"
 msgstr "Asientos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:250
+#: code:addons/account_asset_management/models/account_asset.py:248
 #, python-format
 msgid "Error ! You can not create recursive assets."
 msgstr "Error. No puede crear activos recursivos."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1097
+#: code:addons/account_asset_management/models/account_asset.py:1095
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -627,7 +627,7 @@ msgid "General"
 msgstr "General"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:437
+#: code:addons/account_asset_management/models/account_asset.py:435
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr "Generar asientos de eliminación de activo"
@@ -663,7 +663,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:771
+#: code:addons/account_asset_management/models/account_asset.py:769
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Valor ilegal %s en asset.method."
@@ -714,7 +714,7 @@ msgid "Journal"
 msgstr "Diario"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:458
+#: code:addons/account_asset_management/models/account_asset.py:456
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
@@ -803,7 +803,7 @@ msgid "Next Period Depreciation"
 msgstr "Amortización del siguiente período"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:939
+#: code:addons/account_asset_management/models/account_asset.py:937
 #, fuzzy, python-format
 msgid "No Fiscal Year defined."
 msgstr "Ejercicio fiscal"
@@ -1053,7 +1053,7 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:744
+#: code:addons/account_asset_management/models/account_asset.py:742
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1075,13 +1075,13 @@ msgid "The Sale Value must be positive!"
 msgstr "El valor de venta debe ser positivo."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:269
+#: code:addons/account_asset_management/models/account_asset.py:267
 #, python-format
 msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:531
+#: code:addons/account_asset_management/models/account_asset.py:529
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1249,7 +1249,7 @@ msgstr ""
 "Debe eliminarlo desde  el activo."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:375
+#: code:addons/account_asset_management/models/account_asset.py:373
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr "Sólo puede eliminar activos en estado borrador."
@@ -1291,14 +1291,14 @@ msgstr ""
 "activo."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:291
+#: code:addons/account_asset_management/models/account_asset.py:289
 #, fuzzy, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 "No puede cambiar la categoría de un activo que tiene asientos contables."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:947
+#: code:addons/account_asset_management/models/account_asset.py:945
 #, python-format
 msgid ""
 "You cannot compute a depreciation table for an asset starting in an "
@@ -1317,7 +1317,7 @@ msgid ""
 msgstr "No puede eliminar una línea de amortización con un asiento enlazado."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:379
+#: code:addons/account_asset_management/models/account_asset.py:377
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
@@ -1370,7 +1370,7 @@ msgstr ""
 "generados."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1047
+#: code:addons/account_asset_management/models/account_asset.py:1045
 #, python-format
 msgid "You should set in account settings the 'Lock Date' first."
 msgstr ""
