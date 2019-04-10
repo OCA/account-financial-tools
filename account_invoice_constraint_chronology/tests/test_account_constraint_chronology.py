@@ -87,6 +87,18 @@ class TestAccountConstraintChronology(common.SavepointCase):
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
 
+    def test_invoice_draft_no_check(self):
+        journal = self.get_journal_check(False)
+        today = datetime.now()
+        yesterday = today - timedelta(days=1)
+        date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        self.create_simple_invoice(journal.id, date)
+        date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        invoice_2 = self.create_simple_invoice(journal.id, date)
+        self.assertTrue((invoice_2.state == 'draft'),
+                        "Initial invoice state is not Draft")
+        self.assertTrue(invoice_2.action_invoice_open())
+
     def test_invoice_validate(self):
         journal = self.get_journal_check(True)
         today = datetime.now()
@@ -114,3 +126,10 @@ class TestAccountConstraintChronology(common.SavepointCase):
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
+
+    def test_journal_change_type(self):
+        self.account_journal_sale.check_chronology = True
+        self.assertTrue(self.account_journal_sale.check_chronology)
+        self.account_journal_sale.type = 'bank'
+        self.account_journal_sale._onchange_type()
+        self.assertFalse(self.account_journal_sale.check_chronology)
