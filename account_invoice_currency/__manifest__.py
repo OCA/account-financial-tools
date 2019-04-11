@@ -7,13 +7,13 @@
 
 {
     'name': "Company currency in invoices",
-    'version': "11.0.1.0.0",
+    'version': "12.0.1.0.0",
     'author': "Zikzakmedia SL, "
               "Joaquín Gutierrez, "
               "Tecnativa, "
               "Softdil S.L, "
               "Odoo Community Association (OCA) ",
-    'website': "https://odoo-community.org/",
+    'website': "https://github.com/OCA/account-financial-tools",
     'category': "Accounting",
     'license': "AGPL-3",
     'depends': ["account"],

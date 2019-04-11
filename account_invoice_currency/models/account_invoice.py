@@ -12,7 +12,7 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     amount_tax_signed = fields.Monetary(
-        string='Tax', currency_field='company_currency_id',
+        string='Tax Signed', currency_field='company_currency_id',
         store=True, readonly=True, compute='_compute_amount',
         help="Invoice tax amount in the company currency, "
              "negative for credit notes.")
