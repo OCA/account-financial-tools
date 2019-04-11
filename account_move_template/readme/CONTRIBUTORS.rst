@@ -5,6 +5,7 @@ Authors
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 * Paolo Chiara <p.chiara@isa.it>
 * Franco Tampieri <franco.tampieri@agilebg.com>
+* Alexis de Lattre <alexis.delattre@akretion.com> (full re-write for v12)
 
 Contributors
 ------------
