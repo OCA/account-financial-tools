@@ -1,1 +1,1 @@
-from . import select_template
+from . import account_move_template_run
