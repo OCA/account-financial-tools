@@ -5,7 +5,22 @@
 import logging
 
 from odoo import api, fields, models, _
-from odoo.addons.queue_job.job import job, Job
+
+try:
+    # The queue_job module is not necessarily installed
+    from odoo.addons.queue_job.job import job, Job
+except ImportError:
+    import functools
+    Job = False
+
+    def job(func=None, default_channel='root', retry_pattern=None):
+        if func is None:
+            return functools.partial(
+                job,
+                default_channel=default_channel,
+                retry_pattern=retry_pattern
+            )
+        return func
 
 
 _logger = logging.getLogger(__name__)
