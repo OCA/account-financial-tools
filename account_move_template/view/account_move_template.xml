@@ -16,6 +16,7 @@
                 <field name="note"/>
                 <field name="tax_line_id" invisible="1"/>
                 <field name="tax_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="payment_term_id"/>
                 <field name="company_id" invisible="1"/>
                 <field name="company_currency_id" invisible="1"/>
             </tree>
@@ -28,24 +29,25 @@
         <field name="arch" type="xml">
             <form string="Journal Entry Template Line">
                 <sheet>
-                    <group>
-                        <group>
+                    <group name="main">
+                        <group name="account">
                             <field name="sequence"/>
                             <field name="name"/>
                             <field name="account_id" domain="[('company_id', '=', company_id)]"/>
                             <field name="partner_id"/>
+                            <field name="payment_term_id"/>
                             <field name="company_id" invisible="1"/>
                         </group>
-                        <group groups="analytic.group_analytic_accounting" string="Analytic">
+                        <group groups="analytic.group_analytic_accounting" string="Analytic" name="analytic">
                             <field name="analytic_account_id" domain="[('company_id','=',company_id)]"/>
                             <field name="analytic_tag_ids" widget="many2many_tags"/>
                         </group>
-                        <group>
+                        <group name="amount" string="Amount">
                             <field name="move_line_type"/>
                             <field name="type"/>
                             <field name="note"/>
                         </group>
-                        <group string="Taxes">
+                        <group string="Taxes" name="tax">
                             <field name="tax_line_id"/>
                             <field name="tax_ids" widget="many2many_tags"/>
                         </group>
