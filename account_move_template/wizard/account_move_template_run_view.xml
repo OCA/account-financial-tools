@@ -29,6 +29,7 @@
                             <field name="move_line_type" />
                             <field name="amount" />
                             <field name="note"/>
+                            <field name="payment_term_id"/>
                             <field name="company_id" invisible="1"/>
                             <field name="company_currency_id" invisible="1"/>
                         </tree>
