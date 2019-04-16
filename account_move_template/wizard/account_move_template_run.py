@@ -28,20 +28,21 @@ class AccountMoveTemplateRun(models.TransientModel):
         ('set_lines', 'Set Lines'),
         ], readonly=True, default='select_template')
 
-    def _prepare_wizard_line(self, line):
+    def _prepare_wizard_line(self, tmpl_line):
         vals = {
             'wizard_id': self.id,
-            'sequence': line.sequence,
-            'name': line.name,
+            'sequence': tmpl_line.sequence,
+            'name': tmpl_line.name,
             'amount': 0.0,
-            'account_id': line.account_id.id,
-            'partner_id': line.partner_id.id or False,
-            'move_line_type': line.move_line_type,
-            'tax_ids': [(6, 0, line.tax_ids.ids)],
-            'tax_line_id': line.tax_line_id.id,
-            'analytic_account_id': line.analytic_account_id.id,
-            'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids)],
-            'note': line.note,
+            'account_id': tmpl_line.account_id.id,
+            'partner_id': tmpl_line.partner_id.id or False,
+            'move_line_type': tmpl_line.move_line_type,
+            'tax_ids': [(6, 0, tmpl_line.tax_ids.ids)],
+            'tax_line_id': tmpl_line.tax_line_id.id,
+            'analytic_account_id': tmpl_line.analytic_account_id.id,
+            'analytic_tag_ids': [(6, 0, tmpl_line.analytic_tag_ids.ids)],
+            'note': tmpl_line.note,
+            'payment_term_id': tmpl_line.payment_term_id.id or False,
             }
         return vals
 
@@ -56,9 +57,9 @@ class AccountMoveTemplateRun(models.TransientModel):
                     self.template_id.name,
                     self.template_id.company_id.display_name,
                     self.company_id.display_name))
-        lines = self.template_id.line_ids
-        for line in lines.filtered(lambda l: l.type == 'input'):
-            vals = self._prepare_wizard_line(line)
+        tmpl_lines = self.template_id.line_ids
+        for tmpl_line in tmpl_lines.filtered(lambda l: l.type == 'input'):
+            vals = self._prepare_wizard_line(tmpl_line)
             amtlro.create(vals)
         self.write({
             'journal_id': self.template_id.journal_id.id,
@@ -117,6 +118,11 @@ class AccountMoveTemplateRun(models.TransientModel):
         return move_vals
 
     def _prepare_move_line(self, line, amount):
+        date_maturity = False
+        if line.payment_term_id:
+            pterm_list = line.payment_term_id.compute(
+                value=1, date_ref=self.date)[0]
+            date_maturity = max(l[0] for l in pterm_list)
         debit = line.move_line_type == 'dr'
         values = {
             'name': line.name,
@@ -126,6 +132,7 @@ class AccountMoveTemplateRun(models.TransientModel):
             'debit': debit and amount or 0.0,
             'partner_id': self.partner_id.id or line.partner_id.id,
             'tax_line_id': line.tax_line_id.id,
+            'date_maturity': date_maturity or self.date,
         }
         if line.analytic_tag_ids:
             values['analytic_tag_ids'] = [(6, 0, line.analytic_tag_ids.ids)]
@@ -158,6 +165,8 @@ class AccountMoveTemplateLineRun(models.TransientModel):
         ondelete='restrict', readonly=True)
     partner_id = fields.Many2one(
         'res.partner', readonly=True, string='Partner')
+    payment_term_id = fields.Many2one(
+        'account.payment.term', string='Payment Terms')
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')],
         required=True, readonly=True, string='Direction')

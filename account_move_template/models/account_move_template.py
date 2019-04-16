@@ -117,6 +117,9 @@ class AccountMoveTemplateLine(models.Model):
     python_code = fields.Text('Python Code')
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')], required=True, string='Direction')
+    payment_term_id = fields.Many2one(
+        'account.payment.term', string='Payment Terms',
+        help="Used to compute the due date of the journal item.")
 
     _sql_constraints = [(
         'sequence_template_uniq',
