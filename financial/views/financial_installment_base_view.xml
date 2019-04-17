@@ -98,7 +98,7 @@
                 <field name="partner_id" />
                 <field name="date_document" />
                 <group expand="0" string="Group By...">
-                    <filter icon="terp-sale" string="State" context="{'group_by': 'state'}" />
+                    <filter name="group_by_state" string="State" context="{'group_by': 'state'}" />
                     <filter name="group_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
                </group>
            </search>
