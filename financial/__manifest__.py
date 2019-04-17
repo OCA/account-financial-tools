@@ -68,11 +68,11 @@
         # 'report/financial_cashflow.xml',
         # 'report/financial_statement_report.xml',
         # 'report/report_financial.xml',
-        'reports/report_xlsx_financial_cashflow_data.xml',
-        'reports/report_xlsx_financial_moves_states_data.xml',
-
-        'reports/report_xlsx_financial_defaults_data.xml',
-        'reports/report_xlsx_financial_partner_statement_data.xml',
+        # 'reports/report_xlsx_financial_cashflow_data.xml',
+        # 'reports/report_xlsx_financial_moves_states_data.xml',
+        #
+        # 'reports/report_xlsx_financial_defaults_data.xml',
+        # 'reports/report_xlsx_financial_partner_statement_data.xml',
 
         # 'security/inherited_res_partner_bank_security.xml',
         'security/ir.model.access.csv',
