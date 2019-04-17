@@ -40,8 +40,6 @@ class ReportXlsxFinancialDefaultsWizard(models.TransientModel):
     @api.multi
     def generate_report(self):
         self.ensure_one()
-
-        return self.env['report'].get_action(
-            self,
-            report_name='report_xlsx_financial_defaults'
-        )
+        return self.env.ref(
+            'financial.report_xlsx_financial_defaults'
+        ).report_action(self)

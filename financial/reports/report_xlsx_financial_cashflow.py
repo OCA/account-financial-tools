@@ -2,6 +2,7 @@
 #
 # Copyright 2017 KMEE INFORMATICA LTDA
 #    Aristides Caldeira <aristides.caldeira@kmee.com.br>
+#    Luis Felipe Miléo <mileo@kmee.com.br>
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
@@ -12,12 +13,13 @@ from psycopg2.extensions import AsIs
 from dateutil.relativedelta import relativedelta
 from odoo import _
 from odoo import fields
-from odoo.report import report_sxw
-
-from .report_xlsx_financial_base import ReportXlsxFinancialBase
+from odoo import models
 
 
-class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
+class ReportXslxFinancialCashflow(models.AbstractModel):
+
+    _name = 'report.financial.cashflow'
+    _inherit = 'report.finacial.base'
 
     def define_title(self):
         if self.report_wizard.time_span == 'days':
@@ -617,17 +619,3 @@ class ReportXslxFinancialCashflow(ReportXlsxFinancialBase):
         # 1 / 2.54 = 1 cm converted in inches
         #
         self.sheet.set_margins(1 / 2.54, 1 / 2.54, 1 / 2.54, 1 / 2.54)
-
-
-ReportXslxFinancialCashflow(
-    #
-    # Name of the report in report_xlsx_financial_cashflow_data.xml,
-    # field name, *always* preceeded by "report."
-    #
-    'report.report_xlsx_financial_cashflow',
-    #
-    # The model used to filter report data, or where the data come from
-    #
-    'report.xlsx.financial.cashflow.wizard',
-    parser=report_sxw.rml_parse
-)

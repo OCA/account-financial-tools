@@ -2,20 +2,20 @@
 #
 # Copyright 2017 KMEE INFORMATICA LTDA
 #    Luiz Felipe do Divino <luiz.divino@kmee.com.br>
+#    Luis Felipe Miléo <mileo@kmee.com.br>
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
 
-
-from odoo import _
-from odoo import fields
-from odoo.report import report_sxw
+from odoo import models, fields, _
 from psycopg2.extensions import AsIs
 
-from .report_xlsx_financial_base import ReportXlsxFinancialBase
 
+class ReportXslxFinancialMovesStates(models.AbstractModel):
 
-class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
+    _name = 'report.financial.move_states'
+    _inherit = 'report.finacial.base'
+
     def define_title(self):
         if self.report_wizard.group_by == 'maturity':
             if self.report_wizard.type == '2receive':
@@ -524,17 +524,3 @@ class ReportXslxFinancialMovesStates(ReportXlsxFinancialBase):
         # 1 / 2.54 = 1 cm converted in inches
         #
         self.sheet.set_margins(1 / 2.54, 1 / 2.54, 1 / 2.54, 1 / 2.54)
-
-
-ReportXslxFinancialMovesStates(
-    #
-    # Name of the report in report_xlsx_financial_cashflow_data.xml,
-    # field name, *always* preceeded by "report."
-    #
-    'report.report_xlsx_financial_moves_states',
-    #
-    # The model used to filter report data, or where the data come from
-    #
-    'report.xlsx.financial.moves.states.wizard',
-    parser=report_sxw.rml_parse
-)

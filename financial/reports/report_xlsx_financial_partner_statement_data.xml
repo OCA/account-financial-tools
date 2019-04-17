@@ -6,15 +6,14 @@
 -->
 <odoo>
 
-    <record model="ir.actions.report.xml" id="report_xlsx_financial_partner_statement_action">
-        <field name="name">Financial Partner Statement</field>
-        <field name="type">ir.actions.report.xml</field>
-        <!-- model is where the data for the report will come from -->
-        <field name="model">report.xlsx.financial.partner.statement.wizard</field>
-        <!-- name must *never* be preceeded by "report.", it will be added automaticaly -->
-        <field name="report_name">report_xlsx_financial_partner_statement</field>
-        <field name="report_type">xlsx</field>
-        <field name="auto" eval="False"/>
-    </record>
+    <report
+        id="report_xlsx_financial_partner_statement_action"
+        model="report.xlsx.financial.partner.statement.wizard"
+        string="Partner Statement"
+        report_type="xlsx"
+        name="financial.partner_statement"
+        file="Partner Statement"
+        attachment_use="False"
+    />
 
 </odoo>

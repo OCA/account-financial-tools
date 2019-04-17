@@ -2,20 +2,21 @@
 #
 # Copyright 2017 KMEE INFORMATICA LTDA
 #    Luiz Felipe do Divino <luiz.divino@kmee.com.br>
+#    Luis Felipe Miléo <mileo@kmee.com.br>
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
 
 import html2text
-from odoo import _
-from odoo import fields
-from odoo.report import report_sxw
 from psycopg2.extensions import AsIs
+from odoo import models, fields, _
 
-from .report_xlsx_financial_base import ReportXlsxFinancialBase
 
+class ReportXslxFinancialDefault(models.AbstractModel):
 
-class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
+    _name = 'report.financial.default'
+    _inherit = 'report.finacial.base'
+
     def define_title(self):
         title = _('Financial Defaults')
         return title
@@ -547,17 +548,3 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
         # 1 / 2.54 = 1 cm converted in inches
         #
         self.sheet.set_margins(1 / 2.54, 1 / 2.54, 1 / 2.54, 1 / 2.54)
-
-
-ReportXslxFinancialDefault(
-    #
-    # Name of the report in report_xlsx_financial_cashflow_data.xml,
-    # field name, *always* preceeded by "report."
-    #
-    'report.report_xlsx_financial_defaults',
-    #
-    # The model used to filter report data, or where the data come from
-    #
-    'report.xlsx.financial.defaults.wizard',
-    parser=report_sxw.rml_parse
-)

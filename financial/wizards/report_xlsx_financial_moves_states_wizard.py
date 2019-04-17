@@ -68,7 +68,6 @@ class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
     def generate_report(self):
         self.ensure_one()
 
-        return self.env['report'].get_action(
-            self,
-            report_name='report_xlsx_financial_moves_states'
-        )
+        return self.env.ref(
+            'financial.report_xlsx_financial_moves_states_action'
+        ).report_action(self)

@@ -6,15 +6,14 @@
 -->
 <odoo>
 
-    <record model="ir.actions.report.xml" id="report_xlsx_financial_cashflow_action">
-        <field name="name">Cashflow</field>
-        <field name="type">ir.actions.report.xml</field>
-        <!-- model is where the data for the report will come from -->
-        <field name="model">report.xlsx.financial.cashflow.wizard</field>
-        <!-- name must *never* be preceeded by "report.", it will be added automaticaly -->
-        <field name="report_name">report_xlsx_financial_cashflow</field>
-        <field name="report_type">xlsx</field>
-        <field name="auto" eval="False"/>
-    </record>
+    <report
+            id="report_xlsx_financial_cashflow_action"
+            model="report.xlsx.financial.cashflow.wizard"
+            string="Cashflow"
+            report_type="xlsx"
+            name="financial.cashflow"
+            file="Cashflow"
+            attachment_use="False"
+    />
 
 </odoo>

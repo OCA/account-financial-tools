@@ -2,24 +2,24 @@
 #
 # Copyright 2017 KMEE INFORMATICA LTDA
 #    Daniel Sadamo <daniel.sadamo@kmee.com.br>
+#    Luis Felipe Miléo <mileo@kmee.com.br>
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-
-
-from odoo import _
-from odoo import exceptions, fields
-from odoo.report import report_sxw
 from psycopg2.extensions import AsIs
 
-from .report_xlsx_financial_base import ReportXlsxFinancialBase
+from odoo import exceptions, fields, models, _
 
 
-class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
+class ReportXslxFinancialPartnerStatement(models.AbstractModel):
+
+    _name = 'report.financial.partner_statement'
+    _inherit = 'report.finacial.base'
+
     def define_title(self):
         partner_name = self.report_wizard.partner_id.name
         if self.report_wizard.type == '2receive':
-            partner_type = 'Client'
+            partner_type = 'Customer'
         else:
             partner_type = 'Supplier'
         return _('%s Statement - %s' % (partner_type, partner_name))
@@ -102,7 +102,7 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         self.env.cr.execute(SQL_INICIAL_VALUE, filters)
         data = self.env.cr.fetchall()
         if not data:
-            raise exceptions.Warning(
+            raise exceptions.UserError(
                 _('Não encontrado movimentações.')
             )
         move_ids = []
@@ -493,17 +493,3 @@ class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
         # 1 / 2.54 = 1 cm converted in inches
         #
         self.sheet.set_margins(1 / 2.54, 1 / 2.54, 1 / 2.54, 1 / 2.54)
-
-
-ReportXslxFinancialPartnerStatement(
-    #
-    # Name of the report in report_xlsx_financial_cashflow_data.xml,
-    # field name, *always* preceeded by "report."
-    #
-    'report.report_xlsx_financial_partner_statement',
-    #
-    # The model used to filter report data, or where the data come from
-    #
-    'report.xlsx.financial.partner.statement.wizard',
-    parser=report_sxw.rml_parse
-)
