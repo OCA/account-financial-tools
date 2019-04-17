@@ -540,7 +540,7 @@ class FinancialMove(models.Model):
                 today = fields.Date.context_today(move)
                 due_date = move.date_business_maturity
 
-                if due_date > today:
+                if due_date and due_date > today:
                     move.debt_status = FINANCIAL_DEBT_STATUS_DUE
 
                 elif due_date == today:
