@@ -17,7 +17,7 @@ from .report_xlsx_financial_base import ReportXlsxFinancialBase
 
 class ReportXslxFinancialPartnerStatement(ReportXlsxFinancialBase):
     def define_title(self):
-        partner_name = self.report_wizard.partner_id.legal_name
+        partner_name = self.report_wizard.partner_id.name
         if self.report_wizard.type == '2receive':
             partner_type = 'Client'
         else:

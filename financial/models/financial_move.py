@@ -489,7 +489,7 @@ class FinancialMove(models.Model):
             move.amount_paid_bank_fees = amount_paid_bank_fees
             move.amount_paid_total = amount_paid_total
 
-    @api.depends('ref', 'ref_item', 'type')
+    @api.depends('type', 'document_type_id', 'document_number', 'partner_id')
     def _compute_display_name(self):
         for record in self:
             financial_type = FINANCIAL_TYPE_CODE.get(record.type) or ''
@@ -512,9 +512,10 @@ class FinancialMove(models.Model):
         # # TODO: refactory for global OCA use avoiding l10n_br_resource
         for record in self:
             if record.date_maturity:
-                record.date_business_maturity = self.env[
-                    'resource.calendar'].proximo_dia_util_bancario(
-                    fields.Date.from_string(record.date_maturity))
+                record.date_business_maturity = record.date_maturity
+                # record.date_business_maturity = self.env[
+                #     'resource.calendar'].proximo_dia_util_bancario(
+                #     fields.Date.from_string(record.date_maturity))
 
     @api.depends('date_business_maturity', 'amount_total', 'amount_document',
                  'amount_residual', 'amount_paid_document', 'date_cancel')

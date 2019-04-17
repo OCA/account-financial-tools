@@ -55,6 +55,7 @@ class ReportXlsxFinancialFinancialPartnerStatementWizard(
     type = fields.Selection(
         string='Statement type',
         selection=STATEMENT_TYPE,
+        required=True,  # FIXME this field can be blank if sql is improoved
     )
 
     @api.multi

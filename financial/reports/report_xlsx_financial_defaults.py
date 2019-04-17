@@ -352,9 +352,9 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                             partner_last_line:
                         partner = self.env['res.partner'].browse(
                             line[u'partner_id'])
-                        partner_cnpj_cpf = " - " + \
-                                           partner.cnpj_cpf if \
-                            partner.cnpj_cpf else ""
+                        partner_vat = " - " + \
+                                           partner.vat if \
+                            partner.vat else ""
                         partner_email = " - " + \
                                         partner.email if partner.email else ""
                         self.sheet.merge_range(
@@ -362,7 +362,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                             self.current_row + 1,
                             len(self.columns) - 1,
                             _('Parceiro: ' + partner.display_name +
-                              partner_cnpj_cpf + partner_email
+                              partner_vat + partner_email
                               ),
                             self.style.header.align_left
                         )
@@ -432,9 +432,9 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                             partner_last_line:
                         partner = self.env['res.partner'].browse(
                             line[u'partner_id'])
-                        partner_cnpj_cpf = " - " + \
-                                           partner.cnpj_cpf if \
-                            partner.cnpj_cpf else ""
+                        partner_vat = " - " + \
+                                           partner.vat if \
+                            partner.vat else ""
                         partner_email = " - " + \
                                         partner.email if partner.email else ""
                         self.sheet.merge_range(
@@ -442,7 +442,7 @@ class ReportXslxFinancialDefault(ReportXlsxFinancialBase):
                             self.current_row + 1,
                             len(self.columns) - 1,
                             _('Parceiro: ' + partner.display_name +
-                              partner_cnpj_cpf + partner_email
+                              partner_vat + partner_email
                               ),
                             self.style.header.align_left
                         )
