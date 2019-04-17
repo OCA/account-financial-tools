@@ -41,6 +41,7 @@
                             />
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed" />
                 </header>
+                <field name="type" invisible="1" />
                 <group>
                     <group name="document_header" colspan="4">
                         <group name="document_identification" string="Document">
