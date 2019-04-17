@@ -5,13 +5,12 @@
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-from __future__ import division, print_function, unicode_literals
 
 from odoo import api, fields, models
 
 
 class FinancialAccount(models.Model):
-    _name = b'financial.account'
+    _name = 'financial.account'
     _description = 'Financial Account'
     _parent_name = 'parent_id'
     # _parent_store = True

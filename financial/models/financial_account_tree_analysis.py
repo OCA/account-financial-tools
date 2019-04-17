@@ -2,8 +2,6 @@
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from __future__ import division, print_function, unicode_literals
-
 
 from odoo import api, fields, models, _
 from odoo.tools.sql import drop_view_if_exists
@@ -183,7 +181,7 @@ create index financial_account_tree_analysis_level
 
 
 class FinancialAccountTreeAnalysis(models.Model):
-    _name = b'financial.account.tree.analysis'
+    _name = 'financial.account.tree.analysis'
     _description = 'Financial Account Tree Analysis'
     _auto = False
 

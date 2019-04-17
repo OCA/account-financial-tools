@@ -5,11 +5,11 @@
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-from __future__ import division, print_function, unicode_literals
+
 
 from odoo.report import report_sxw
 from odoo import fields
-from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsx
+from odoo.addons.report_xlsx.report.report_xlsx import ReportXlsxAbstract
 
 from decimal import Decimal
 
@@ -41,7 +41,7 @@ def col_number_to_reference(col):
     return _col_number_to_reference(col)
 
 
-class ReportXlsxFinancialBase(ReportXlsx):
+class ReportXlsxFinancialBase(ReportXlsxAbstract):
 
     def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse,
                  header=True, store=False):

@@ -5,14 +5,13 @@
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
 from openerp import fields, models, api, _
 
 
 class ReportXlsxFinancialFinancialMovesStatesWizard(models.TransientModel):
-    _name = b'report.xlsx.financial.moves.states.wizard'
+    _name = 'report.xlsx.financial.moves.states.wizard'
     _description = 'Report Xlsx Financial Moves States Wizard'
 
     company_id = fields.Many2one(

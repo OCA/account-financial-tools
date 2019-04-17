@@ -5,7 +5,6 @@
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
 from openerp import fields, models, api
@@ -23,7 +22,7 @@ STATEMENT_TYPE = [
 
 class ReportXlsxFinancialFinancialPartnerStatementWizard(
         models.TransientModel):
-    _name = b'report.xlsx.financial.partner.statement.wizard'
+    _name = 'report.xlsx.financial.partner.statement.wizard'
     _description = 'Report Xlsx Financial Partner Statement Wizard'
 
     @api.onchange('type')

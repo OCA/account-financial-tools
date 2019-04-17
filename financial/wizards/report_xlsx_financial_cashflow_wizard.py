@@ -5,7 +5,6 @@
 # License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 #
 
-from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
 
@@ -13,7 +12,7 @@ from odoo import fields, models, api
 
 
 class ReportXlsxFinancialCashflowWizard(models.TransientModel):
-    _name = b'report.xlsx.financial.cashflow.wizard'
+    _name = 'report.xlsx.financial.cashflow.wizard'
     _description = 'Report Xlsx Financial Cashflow Wizard'
 
     company_id = fields.Many2one(

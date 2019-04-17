@@ -2,7 +2,6 @@
 # Copyright 2017 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from __future__ import division, print_function, unicode_literals
 
 from datetime import datetime
 
@@ -35,7 +34,7 @@ from ..constants import (
 
 
 class FinancialMove(models.Model):
-    _name = b'financial.move'
+    _name = 'financial.move'
     _description = 'Financial Move'
     _inherit = ['mail.thread']
     _order = 'date_business_maturity desc, ' \
@@ -897,7 +896,7 @@ class FinancialMove(models.Model):
 
 
 class FinancialMoveMotivoCancelamento(models.Model):
-    _name = b'financial.move.motivo.cancelamento'
+    _name = 'financial.move.motivo.cancelamento'
     _rec_name = 'motivo_cancelamento'
 
     motivo_cancelamento = fields.Char(
