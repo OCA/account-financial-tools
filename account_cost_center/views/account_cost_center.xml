@@ -69,7 +69,6 @@
 
     <!-- Cost Center menu-->
     <menuitem id="cost_center_menu"
-              name="Cost Centers"
               parent="account.menu_analytic_accounting"
               action="account_cost_center_action"
               groups="account.group_account_user"
