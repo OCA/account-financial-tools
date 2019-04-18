@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016-2018 Onestein (<http://www.onestein.eu>)
+# Copyright 2016-2019 Onestein (<http://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
@@ -9,7 +8,7 @@
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/account-financial-tools/',
     'category': 'Accounting',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'depends': [
         'account',
         'base_view_inheritance_extension'
