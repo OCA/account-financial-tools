@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_partner_required
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-financial-tools (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-01 13:25+0000\n"
+"PO-Revision-Date: 2018-06-29 06:01+0000\n"
+"Last-Translator: Osoul <baruni@osoul.ly>\n"
+"Language-Team: Arabic (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/ar/)\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1\n"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_account
+msgid "Account"
+msgstr "الحساب"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_account_type
+msgid "Account Type"
+msgstr "نوع الحساب"
+
+#. module: account_partner_required
+#: selection:account.account.type,partner_policy:0
+msgid "Always"
+msgstr "دائماً"
+
+#. module: account_partner_required
+#: model:ir.model,name:account_partner_required.model_account_move_line
+msgid "Journal Item"
+msgstr "عنصر اليومية"
+
+#. module: account_partner_required
+#: selection:account.account.type,partner_policy:0
+msgid "Never"
+msgstr "ممنوع"
+
+#. module: account_partner_required
+#: selection:account.account.type,partner_policy:0
+msgid "Optional"
+msgstr "إختياري"
+
+#. module: account_partner_required
+#: code:addons/account_partner_required/models/account.py:55
+#, python-format
+msgid ""
+"Partner policy is set to 'Always' with account '%s' but the partner is "
+"missing in the account move line with label '%s'."
+msgstr ""
+"سياسة خانة الشريك هي 'دائماً' للحساب '%s' ولكن خانة الشريك فارغة في عنصر "
+"اليومية باسم '%s'."
+
+#. module: account_partner_required
+#: code:addons/account_partner_required/models/account.py:61
+#, python-format
+msgid ""
+"Partner policy is set to 'Never' with account '%s' but the account move line "
+"with label '%s' has a partner '%s'."
+msgstr ""
+"سياسة خانة الشريك هي 'ممنوع' للحساب '%s' ولكن في عنصر اليومية باسم '%s' تم "
+"إدخال الشريك '%s'."
+
+#. module: account_partner_required
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type_partner_policy
+msgid "Policy for Partner Field"
+msgstr "سياسة خانة الشريك"
+
+#. module: account_partner_required
+#: model:ir.model.fields,help:account_partner_required.field_account_account_type_partner_policy
+msgid ""
+"Set the policy for the partner field : if you select 'Optional', the "
+"accountant is free to put a partner on an account move line with this type "
+"of account ; if you select 'Always', the accountant will get an error "
+"message if there is no partner ; if you select 'Never', the accountant will "
+"get an error message if a partner is present."
+msgstr ""
