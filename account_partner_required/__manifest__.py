@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "summary": "Adds an option 'partner policy' on account types",
     "author": "ACSONE SA/NV,Akretion,Odoo Community Association (OCA)",
-    "website": "http://acsone.eu/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
         "account_type_menu",
     ],
