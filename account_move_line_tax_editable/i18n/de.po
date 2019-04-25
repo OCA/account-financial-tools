@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_move_line_tax_editable
-#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line_is_tax_editable
+#: model:ir.model.fields,field_description:account_move_line_tax_editable.field_account_move_line__is_tax_editable
 msgid "Is tax data editable?"
 msgstr "Sind Steuerdaten änderbar?"
 
