@@ -15,9 +15,4 @@ class AccountMoveLine(models.Model):
     @api.depends('move_id.state')
     def _compute_is_tax_editable(self):
         for rec in self:
-            rec.is_tax_editable = rec._get_is_tax_editable()
-
-    @api.multi
-    def _get_is_tax_editable(self):
-        self.ensure_one()
-        return self.move_id.state == 'draft'
+            rec.is_tax_editable = (rec.move_id.state == 'draft')
