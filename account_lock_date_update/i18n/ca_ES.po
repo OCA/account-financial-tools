@@ -25,69 +25,69 @@ msgid "Account Update Lock_date"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Cancel"
 msgstr "Cancel·la"
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_company_id
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__company_id
 msgid "Company"
 msgstr "Companyia"
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_create_uid
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_create_date
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_display_name
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_id
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__id
 msgid "ID"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date___last_update
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_write_uid
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_write_date
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_fiscalyear_lock_date
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid "Lock Date"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_period_lock_date
+#: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid "Lock Date for Non-Advisers"
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date_fiscalyear_lock_date
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__fiscalyear_lock_date
 msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
 "this date. Use it for fiscal year locking for example."
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date_period_lock_date
+#: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date__period_lock_date
 msgid ""
 "Only users with the 'Adviser' role can edit accounts prior to and inclusive "
 "of this date. Use it for period locking inside an open fiscal year, for "
@@ -95,7 +95,7 @@ msgid ""
 msgstr ""
 
 #. module: account_lock_date_update
-#: model:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
+#: model_terms:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
 msgstr ""
 
