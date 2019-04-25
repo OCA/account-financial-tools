@@ -1,6 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
 
@@ -43,5 +44,9 @@ class TestAccountLockDateUpdate(TransactionCase):
             'groups_id': [(4, self.adviser_group.id)],
         })
         wizard.sudo(self.demo_user.id).execute()
-        self.assertEqual(self.company.period_lock_date, '2000-02-01')
-        self.assertEqual(self.company.fiscalyear_lock_date, '2000-01-01')
+        self.assertEqual(
+            fields.Date.to_string(self.company.period_lock_date),
+            '2000-02-01')
+        self.assertEqual(
+            fields.Date.to_string(self.company.fiscalyear_lock_date),
+            '2000-01-01')
