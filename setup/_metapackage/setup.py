@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-account_invoice_constraint_chronology',
         'odoo12-addon-account_lock_date_update',
         'odoo12-addon-account_move_fiscal_year',
+        'odoo12-addon-account_move_line_tax_editable',
         'odoo12-addon-account_partner_required',
         'odoo12-addon-account_renumber',
         'odoo12-addon-account_tag_menu',
