@@ -30,7 +30,7 @@ Allows to edit taxes on account move lines
 **Table of contents**
 
 .. contents::
-    :local:
+   :local:
 
 Bug Tracker
 ===========
