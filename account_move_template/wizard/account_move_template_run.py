@@ -63,6 +63,7 @@ class AccountMoveTemplateRun(models.TransientModel):
             amtlro.create(vals)
         self.write({
             'journal_id': self.template_id.journal_id.id,
+            'ref': self.template_id.ref,
             'state': 'set_lines',
             })
         if not self.line_ids:
@@ -152,7 +153,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     company_currency_id = fields.Many2one(
         related='wizard_id.company_id.currency_id', string='Company Currency')
     sequence = fields.Integer('Sequence', required=True)
-    name = fields.Char('Name')
+    name = fields.Char('Name', readonly=True)
     account_id = fields.Many2one(
         'account.account', required=True, readonly=True)
     analytic_account_id = fields.Many2one(
@@ -166,7 +167,7 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     partner_id = fields.Many2one(
         'res.partner', readonly=True, string='Partner')
     payment_term_id = fields.Many2one(
-        'account.payment.term', string='Payment Terms')
+        'account.payment.term', string='Payment Terms', readonly=True)
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')],
         required=True, readonly=True, string='Direction')
