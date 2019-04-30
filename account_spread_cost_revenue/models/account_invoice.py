@@ -36,6 +36,7 @@ class AccountInvoice(models.Model):
     def action_cancel(self):
         """Cancel the spread lines and their related moves when
         the invoice is canceled."""
+        self.move_id.mapped('line_ids').remove_move_reconcile()
         res = super().action_cancel()
         for invoice_line in self.mapped('invoice_line_ids'):
             moves = invoice_line.spread_id.line_ids.mapped('move_id')
