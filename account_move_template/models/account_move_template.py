@@ -89,7 +89,7 @@ class AccountMoveTemplateLine(models.Model):
 
     template_id = fields.Many2one(
         'account.move.template', string='Move Template', ondelete='cascade')
-    name = fields.Char(string='Label')
+    name = fields.Char(string='Label', required=True)
     sequence = fields.Integer('Sequence', required=True)
     account_id = fields.Many2one(
         'account.account', string='Account',
