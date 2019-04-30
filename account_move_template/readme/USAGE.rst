@@ -8,6 +8,6 @@ To create new templates:
 
 To use an existing template:
 
-#. Go to *Invoicing / Accounting / Accounting Entries / Create Journal Entry from Template*
+#. Go to *Invoicing / Accounting / Accounting Entries / Create Entry from Template*
 #. Select one of the available templates.
 #. Complete the entries according to the template and click on the button *Generate Journal Entry*.
