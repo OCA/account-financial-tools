@@ -8,7 +8,7 @@ from odoo import api, fields, models, _
 try:
     from odoo.addons.queue_job.job import job, Job
 except ImportError:
-    job = lambda **kwargs: False
+    job = lambda **kwargs: lambda x: x
     Job = False
 
 

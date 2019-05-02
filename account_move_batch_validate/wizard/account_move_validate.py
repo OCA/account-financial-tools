@@ -6,7 +6,7 @@ from odoo import api, fields, models
 try:
     from odoo.addons.queue_job.job import job
 except ImportError:
-    job = lambda **kwargs: False
+    job = lambda **kwargs: lambda x: x
 
 
 class AccountMoveValidate(models.TransientModel):
