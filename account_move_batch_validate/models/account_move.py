@@ -5,7 +5,11 @@
 import logging
 
 from odoo import api, fields, models, _
-from odoo.addons.queue_job.job import job, Job
+try:
+    from odoo.addons.queue_job.job import job, Job
+except ImportError:
+    job = lambda **kwargs: False
+    Job = False
 
 
 _logger = logging.getLogger(__name__)
