@@ -93,6 +93,10 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertTrue(spread.journal_id)
         self.assertEqual(spread.journal_id.type, 'general')
 
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
+
     def test_02_config_defaults(self):
         my_company = self.env.user.company_id
         self.assertFalse(my_company.default_spread_revenue_account_id)
@@ -205,6 +209,10 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         self.assertFalse(invoice_line2.spread_id)
         self.assertEqual(invoice_line2.spread_check, 'unavailable')
 
+        self.assertTrue(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
+
     def test_07_create_spread_template(self):
         account_revenue = self.account_revenue
         account_payable = self.account_payable
@@ -311,6 +319,10 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         spread.onchange_template()
         self.assertEqual(spread.invoice_type, 'in_invoice')
 
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
+
     def test_09_wrong_invoice_type(self):
         invoice_account = self.account_receivable
         invoice_line_account = self.account_expenses
@@ -335,3 +347,60 @@ class TestAccountSpreadCostRevenue(common.TransactionCase):
         })
         with self.assertRaises(ValidationError):
             invoice_line.spread_id = spread
+
+    def test_10_account_spread_unlink(self):
+        spread = self.env['account.spread'].create({
+            'name': 'test',
+            'invoice_type': 'out_invoice',
+            'debit_account_id': self.debit_account.id,
+            'credit_account_id': self.credit_account.id,
+        })
+        spread.unlink()
+
+    def test_11_compute_display_fields(self):
+        spread = self.env['account.spread'].create({
+            'name': 'test',
+            'invoice_type': 'out_invoice',
+            'debit_account_id': self.debit_account.id,
+            'credit_account_id': self.credit_account.id,
+        })
+        spread.company_id.allow_spread_planning = True
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
+
+    def test_12_compute_display_fields(self):
+        spread = self.env['account.spread'].create({
+            'name': 'test',
+            'invoice_type': 'out_invoice',
+            'debit_account_id': self.debit_account.id,
+            'credit_account_id': self.credit_account.id,
+        })
+        spread.company_id.allow_spread_planning = False
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
+
+    def test_13_compute_display_fields(self):
+        spread = self.env['account.spread'].create({
+            'name': 'test',
+            'invoice_type': 'out_invoice',
+            'debit_account_id': self.debit_account.id,
+            'credit_account_id': self.credit_account.id,
+        })
+        spread.company_id.force_move_auto_post = True
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertFalse(spread.display_move_line_auto_post)
+
+    def test_14_compute_display_fields(self):
+        spread = self.env['account.spread'].create({
+            'name': 'test',
+            'invoice_type': 'out_invoice',
+            'debit_account_id': self.debit_account.id,
+            'credit_account_id': self.credit_account.id,
+        })
+        spread.company_id.force_move_auto_post = False
+        self.assertFalse(spread.display_create_all_moves)
+        self.assertTrue(spread.display_recompute_buttons)
+        self.assertTrue(spread.display_move_line_auto_post)
