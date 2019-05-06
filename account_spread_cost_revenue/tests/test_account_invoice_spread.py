@@ -260,6 +260,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         self.assertTrue(self.spread.invoice_line_id)
         with self.assertRaises(UserError):
+            self.spread.unlink()
+        with self.assertRaises(UserError):
             self.spread.action_unlink_invoice_line()
         self.assertTrue(self.spread.invoice_line_id)
 
@@ -352,6 +354,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         template = self.env['account.spread.template'].create({
             'name': 'test',
             'spread_type': 'purchase',
+            'period_number': 5,
+            'period_type': 'month',
             'spread_account_id': spread_account.id,
             'spread_journal_id': spread_journal_id,
         })
@@ -574,6 +578,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
                 count_balance_sheet += 1
         self.assertEqual(count_balance_sheet, 1)
 
+        self.spread.company_id.force_move_auto_post = True
         self.spread.line_ids.create_and_reconcile_moves()
 
         spread_mls = self.spread.line_ids.mapped('move_id.line_ids')
@@ -723,6 +728,9 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         with self.assertRaises(ValidationError):
             self.spread2.journal_id = other_journal
 
+        with self.assertRaises(UserError):
+            self.spread2.unlink()
+
     def test_14_create_all_moves(self):
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
@@ -735,3 +743,6 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         spread_lines = self.spread.line_ids
         for line in spread_lines:
             self.assertTrue(line.move_id)
+
+        with self.assertRaises(ValidationError):
+            self.spread.unlink()
