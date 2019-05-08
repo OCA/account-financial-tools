@@ -56,7 +56,8 @@ class TestInvoiceReversal(SavepointCase):
         self.sale_journal.write({'update_posted': True,
                                  'cancel_method': 'reversal'})
         # Open invoice
-        res = self.invoice.action_invoice_open()
+        self.invoice.action_invoice_open()
+        move = self.invoice.move_id
         # Click Cancel will open reverse document wizard
         res = self.invoice.action_invoice_cancel()
         self.assertEqual(res['res_model'], 'reverse.account.document')
@@ -66,8 +67,7 @@ class TestInvoiceReversal(SavepointCase):
         f = Form(self.env[res['res_model']].with_context(ctx))
         cancel_wizard = f.save()
         cancel_wizard.action_cancel()
-        move = self.invoice.move_id
-        reversed_move = self.invoice.move_id.reverse_entry_id
+        reversed_move = move.reverse_entry_id
         move_reconcile = move.mapped('line_ids').mapped('full_reconcile_id')
         reversed_move_reconcile = \
             reversed_move.mapped('line_ids').mapped('full_reconcile_id')

@@ -10,19 +10,17 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def action_invoice_cancel(self):
-        """ If cancel method is to reverse, use document reversal wizard """
-        if self.mapped('journal_id')[0].is_cancel_reversal:
+        """ If cancel method is to reverse, use document reversal wizard
+        * Draft invoice, will always fall back
+        * Non draft, but not open (ie, paid), can't cancel
+        """
+        if all(self.mapped('journal_id.is_cancel_reversal')) and \
+                'draft' not in self.mapped('state'):
+            if not all(st == 'open' for st in self.mapped('state')):
+                raise UserError(
+                    _('Only invoice with status "Open" can be cancelled'))
             return self.reverse_document_wizard()
         return super().action_invoice_cancel()
-
-    @api.multi
-    def action_invoice_draft(self):
-        """ If cancel method is to reverse, do not allow set to draft """
-        if self.mapped('journal_id')[0].is_cancel_reversal and \
-                self.mapped('move_id'):
-            raise UserError(_('This document is already cancelled, '
-                              'set to draft is not allowed'))
-        return super().action_invoice_draft()
 
     @api.multi
     def action_document_reversal(self, date=None, journal_id=None):
@@ -37,8 +35,13 @@ class AccountInvoice(models.Model):
         # Set all moves to unreconciled
         move_lines.filtered(
             lambda x: x.account_id.reconcile).remove_move_reconcile()
+        # Important to remove relation with move.line before reverse
+        move_lines.write({'invoice_id': False})
         # Create reverse entries
         moves.reverse_moves(date, journal_id)
-        # Set state cancelled
-        self.write({'state': 'cancel'})
+        # Set state cancelled and unlink with account.move
+        self.write({'move_id': False,
+                    'move_name': False,
+                    'reference': False,
+                    'state': 'cancel'})
         return True
