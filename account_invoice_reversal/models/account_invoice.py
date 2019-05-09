@@ -11,14 +11,19 @@ class AccountInvoice(models.Model):
     @api.multi
     def action_invoice_cancel(self):
         """ If cancel method is to reverse, use document reversal wizard
-        * Draft invoice, will always fall back
-        * Non draft, but not open (ie, paid), can't cancel
+        * Draft invoice, fall back to standard invoice cancel
+        * Non draft, must be fully open (not even partial reconciled) to cancel
         """
-        if all(self.mapped('journal_id.is_cancel_reversal')) and \
-                'draft' not in self.mapped('state'):
-            if not all(st == 'open' for st in self.mapped('state')):
+        cancel_reversal = all(self.mapped('journal_id.is_cancel_reversal'))
+        states = self.mapped('state')
+        if cancel_reversal and 'draft' not in states:
+            if not all(st == 'open' for st in states) or \
+                    (self.mapped('move_id.line_ids.matched_debit_ids') |
+                     self.mapped('move_id.line_ids.matched_credit_ids')):
                 raise UserError(
-                    _('Only invoice with status "Open" can be cancelled'))
+                    _('Only fully unpaid invoice can be cancelled.\n'
+                      'To cancel this invoice, make sure all payment(s) '
+                      'are also cancelled.'))
             return self.reverse_document_wizard()
         return super().action_invoice_cancel()
 
