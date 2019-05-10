@@ -28,7 +28,8 @@ class AccountPayment(models.Model):
         move_lines = self.mapped('move_line_ids')
         moves = move_lines.mapped('move_id')
         # Set all moves to unreconciled
-        move_lines.remove_move_reconcile()
+        move_lines.filtered(lambda x:
+                            x.account_id.reconcile).remove_move_reconcile()
         # Important to remove relation with move.line before reverse
         move_lines.write({'payment_id': False})
         # Create reverse entries

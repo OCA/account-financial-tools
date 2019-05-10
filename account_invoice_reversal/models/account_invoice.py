@@ -38,7 +38,8 @@ class AccountInvoice(models.Model):
         move_lines = MoveLine.search([('invoice_id', 'in', self.ids)])
         moves = move_lines.mapped('move_id')
         # Set all moves to unreconciled
-        move_lines.remove_move_reconcile()
+        move_lines.filtered(lambda x:
+                            x.account_id.reconcile).remove_move_reconcile()
         # Important to remove relation with move.line before reverse
         move_lines.write({'invoice_id': False})
         # Create reverse entries
