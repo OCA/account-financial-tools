@@ -1,0 +1,20 @@
+<!-- Copyright 2019 Ecosoft
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_payment_from_invoices" model="ir.ui.view">
+        <field name="name">view.account.payment.from.invoices</field>
+        <field name="model">account.register.payments</field>
+        <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+        <field name="arch" type="xml">
+            <field name="multi" position="after">
+                <field name="netting" invisible="1"/>
+            </field>
+            <field name="journal_id" position="attributes">
+                <attribute name="attrs">{'invisible': [('amount', '=', 0), ('netting', '=', False)]}</attribute>
+            </field>
+            <field name="group_invoices" position="attributes">
+                <attribute name="attrs">{'invisible': [('netting', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
