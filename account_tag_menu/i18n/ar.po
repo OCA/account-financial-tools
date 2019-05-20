@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_tag_menu
+# 	* account_tag_menu
 #
 msgid ""
 msgstr ""
@@ -28,21 +28,21 @@ msgid "Account Tags"
 msgstr "وسوم الحسابات"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_account_ids
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__account_ids
 msgid "Accounts"
 msgstr "الحسابات"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_account_ids
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__account_ids
 msgid "Assigned accounts for custom reporting"
 msgstr ""
 
 #. module: account_tag_menu
-#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_tax_ids
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Assigned taxes for custom reporting"
 msgstr ""
 
 #. module: account_tag_menu
-#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_tax_ids
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Taxes"
 msgstr "الضرائب"
