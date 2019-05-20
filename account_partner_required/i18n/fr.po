@@ -65,12 +65,12 @@ msgid ""
 msgstr ""
 
 #. module: account_partner_required
-#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type_partner_policy
+#: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__partner_policy
 msgid "Policy for Partner Field"
 msgstr ""
 
 #. module: account_partner_required
-#: model:ir.model.fields,help:account_partner_required.field_account_account_type_partner_policy
+#: model:ir.model.fields,help:account_partner_required.field_account_account_type__partner_policy
 msgid ""
 "Set the policy for the partner field : if you select 'Optional', the "
 "accountant is free to put a partner on an account move line with this type "
