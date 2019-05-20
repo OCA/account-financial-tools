@@ -30,21 +30,21 @@ msgid "Account Tags"
 msgstr "Kontoschlagworte"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_account_ids
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__account_ids
 msgid "Accounts"
 msgstr "Konten"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_account_ids
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__account_ids
 msgid "Assigned accounts for custom reporting"
 msgstr "Zugeordnete Konten für individuelle Berichte"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag_tax_ids
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Assigned taxes for custom reporting"
 msgstr "Zugeordnete Steuern für individuelle Berichte"
 
 #. module: account_tag_menu
-#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag_tax_ids
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Taxes"
 msgstr "Steuern"
