@@ -1,7 +1,7 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 import time
-from odoo.tests.common import SavepointCase, Form
+from odoo.tests.common import SavepointCase
 from odoo.exceptions import UserError
 
 
@@ -119,14 +119,16 @@ class TestPaymentReversal(SavepointCase):
         # Cancel payment
         ctx = {'active_model': 'account.payment',
                'active_ids': [payment.id]}
-        f = Form(self.env[res['res_model']].with_context(ctx))
         self.assertEqual(res['res_model'], 'reverse.account.document')
-        cancel_wizard = f.save()
-        cancel_wizard.action_cancel()
+        wiz = self.env[res['res_model']].with_context(ctx).create({})
+        wiz.action_cancel()
         payment_moves = self.env['account.move.line'].search(
             [('payment_id', '=', payment.id)])
         self.assertFalse(payment_moves)
-        reversed_move = move.reverse_entry_id
+        reversed_move = move.mapped('line_ids').mapped(
+            'full_reconcile_id').mapped(
+            'reconciled_line_ids').filtered(
+            lambda l: l.id not in move.line_ids.ids).mapped('move_id')
         move_reconcile = move.mapped('line_ids').mapped('full_reconcile_id')
         reversed_move_reconcile = \
             reversed_move.mapped('line_ids').mapped('full_reconcile_id')
@@ -228,10 +230,9 @@ class TestPaymentReversal(SavepointCase):
         res = bank_stmt_line.button_cancel_reconciliation()
         ctx = {'active_model': 'account.bank.statement.line',
                'active_ids': [bank_stmt_line.id]}
-        f = Form(self.env[res['res_model']].with_context(ctx))
         self.assertEqual(res['res_model'], 'reverse.account.document')
-        cancel_wizard = f.save()
-        cancel_wizard.action_cancel()
+        wiz = self.env[res['res_model']].with_context(ctx).create({})
+        wiz.action_cancel()
         self.assertFalse(bank_stmt_line.journal_entry_ids)
         payment = self.env['account.payment'].search(
             [('id', '=', original_payment_id)],
@@ -239,7 +240,10 @@ class TestPaymentReversal(SavepointCase):
         self.assertFalse(payment)
         self.assertFalse(original_move_lines.mapped('statement_id'))
         move = original_move_lines[0].move_id
-        reversed_move = move.reverse_entry_id
+        reversed_move = move.mapped('line_ids').mapped(
+            'full_reconcile_id').mapped(
+            'reconciled_line_ids').filtered(
+            lambda l: l.id not in move.line_ids.ids).mapped('move_id')
         move_reconcile = move.mapped('line_ids').mapped('full_reconcile_id')
         reversed_move_reconcile = \
             reversed_move.mapped('line_ids').mapped('full_reconcile_id')
@@ -287,10 +291,9 @@ class TestPaymentReversal(SavepointCase):
         res = bank_stmt_line.button_cancel_reconciliation()
         ctx = {'active_model': 'account.bank.statement.line',
                'active_ids': [bank_stmt_line.id]}
-        f = Form(self.env[res['res_model']].with_context(ctx))
         self.assertEqual(res['res_model'], 'reverse.account.document')
-        cancel_wizard = f.save()
-        cancel_wizard.action_cancel()
+        wiz = self.env[res['res_model']].with_context(ctx).create({})
+        wiz.action_cancel()
         self.assertFalse(bank_stmt_line.journal_entry_ids)
         payment = self.env['account.payment'].search(
             [('id', '=', original_payment_id)],
@@ -298,7 +301,10 @@ class TestPaymentReversal(SavepointCase):
         self.assertFalse(payment)
         self.assertFalse(original_move_lines.mapped('statement_id'))
         move = original_move_lines[0].move_id
-        reversed_move = move.reverse_entry_id
+        reversed_move = move.mapped('line_ids').mapped(
+            'full_reconcile_id').mapped(
+            'reconciled_line_ids').filtered(
+            lambda l: l.id not in move.line_ids.ids).mapped('move_id')
         move_reconcile = move.mapped('line_ids').mapped('full_reconcile_id')
         reversed_move_reconcile = \
             reversed_move.mapped('line_ids').mapped('full_reconcile_id')

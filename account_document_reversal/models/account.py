@@ -11,11 +11,22 @@ class AccountJournal(models.Model):
          ('reversal', 'Reversal (create reversed journal entries)')],
         string='Cancel Method',
         default='normal',
-        required=True)
+        required=True,
+    )
     is_cancel_reversal = fields.Boolean(
         string='Use Cancel Reversal',
         compute='_compute_is_cancel_reversal',
-        help="True, when journal allow cancel entries with method is reversal")
+        help="True, when journal allow cancel entries with method is reversal",
+    )
+    use_different_journal = fields.Boolean(
+        string='Use different journal for reversal',
+        help="If checked, reversal wizard will show field Reversal Journal",
+    )
+    reversal_journal_id = fields.Many2one(
+        'account.journal',
+        string='Default Reversal Journal',
+        help="Journal in this field will show in reversal wizard as default",
+    )
 
     @api.multi
     def _compute_is_cancel_reversal(self):

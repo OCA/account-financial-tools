@@ -11,11 +11,12 @@
                             <field name="date"/>
                         </group>
                         <group>
-                            <field name="journal_id"/>
+                            <field name="use_different_journal" invisible="1"/>
+                            <field name="journal_id" attrs="{'invisible': [('use_different_journal', '=', False)]}"/>
                         </group>
                     </group>
                     <footer>
-                        <button string="Cancel" name="action_cancel" type="object" class="btn-primary"/>
+                        <button string="Confirm" name="action_cancel" type="object" class="btn-primary"/>
                         <button string="Discard" class="btn-secondary" special="cancel"/>
                     </footer>
                </form>

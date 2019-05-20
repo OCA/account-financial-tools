@@ -13,11 +13,31 @@ class ReverseAccountDocument(models.TransientModel):
     date = fields.Date(
         string='Reversal date',
         default=fields.Date.context_today,
-        required=True)
+        required=True,
+    )
+    use_different_journal = fields.Boolean(
+        string='Use different journal for reversal',
+        help="Checked, if the journal of underlineing document is checked."
+    )
     journal_id = fields.Many2one(
         'account.journal',
-        string='Use Specific Journal',
-        help='If empty, uses the journal of the journal entry to be reversed.')
+        string='Reversal Journal',
+        help='If empty, uses the journal of the journal entry to be reversed.',
+    )
+
+    @api.model
+    def default_get(self, default_fields):
+        model = self._context.get('active_model')
+        active_ids = self._context.get('active_ids')
+        documents = self.env[model].browse(active_ids)
+        res = super().default_get(default_fields)
+        if documents:
+            if 'journal_id' in documents[0]:
+                journal = documents[0].journal_id
+                if journal.use_different_journal:
+                    res['use_different_journal'] = True
+                    res['journal_id'] = journal.reversal_journal_id.id
+        return res
 
     @api.multi
     def action_cancel(self):

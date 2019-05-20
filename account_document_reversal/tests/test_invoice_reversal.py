@@ -1,6 +1,6 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo.tests.common import SavepointCase, Form
+from odoo.tests.common import SavepointCase
 
 
 class TestInvoiceReversal(SavepointCase):
@@ -64,10 +64,12 @@ class TestInvoiceReversal(SavepointCase):
         # Cancel invoice
         ctx = {'active_model': 'account.invoice',
                'active_ids': [self.invoice.id]}
-        f = Form(self.env[res['res_model']].with_context(ctx))
-        cancel_wizard = f.save()
-        cancel_wizard.action_cancel()
-        reversed_move = move.reverse_entry_id
+        wiz = self.env[res['res_model']].with_context(ctx).create({})
+        wiz.action_cancel()
+        reversed_move = move.mapped('line_ids').mapped(
+            'full_reconcile_id').mapped(
+            'reconciled_line_ids').filtered(
+            lambda l: l.id not in move.line_ids.ids).mapped('move_id')
         move_reconcile = move.mapped('line_ids').mapped('full_reconcile_id')
         reversed_move_reconcile = \
             reversed_move.mapped('line_ids').mapped('full_reconcile_id')
