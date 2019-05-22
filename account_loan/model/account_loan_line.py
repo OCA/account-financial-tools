@@ -161,7 +161,7 @@ class AccountLoanLine(models.Model):
             return self.loan_id.fixed_amount
         if self.loan_type == 'fixed-annuity':
             return self.currency_id.round(- numpy.pmt(
-                self.rate / 100,
+                self.loan_id.loan_rate() / 100,
                 self.loan_id.periods - self.sequence + 1,
                 self.pending_principal_amount,
                 -self.loan_id.residual_amount
@@ -174,13 +174,23 @@ class AccountLoanLine(models.Model):
                 'Amount cannot be recomputed if moves or invoices exists '
                 'already'
             ))
-        if not self.loan_id.round_on_end:
+        if (
+            self.sequence == self.loan_id.periods and
+            self.loan_id.round_on_end and
+            self.loan_type == 'fixed-annuity'
+        ):
             self.interests_amount = self.currency_id.round(
-                self.pending_principal_amount * self.rate / 100)
+                self.loan_id.fixed_amount - self.pending_principal_amount +
+                self.loan_id.residual_amount
+            )
+            self.payment_amount = self.currency_id.round(self.compute_amount())
+        elif not self.loan_id.round_on_end:
+            self.interests_amount = self.currency_id.round(
+                self.pending_principal_amount * self.loan_id.loan_rate() / 100)
             self.payment_amount = self.currency_id.round(self.compute_amount())
         else:
             self.interests_amount = (
-                self.pending_principal_amount * self.rate / 100)
+                self.pending_principal_amount * self.loan_id.loan_rate() / 100)
             self.payment_amount = self.compute_amount()
 
     @api.multi
