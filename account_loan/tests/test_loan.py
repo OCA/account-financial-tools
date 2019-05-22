@@ -94,9 +94,9 @@ class TestLoan(TransactionCase):
         loan.round_on_end = True
         loan.compute_lines()
         line_1 = loan.line_ids.filtered(lambda r: r.sequence == 1)
-        line_end = loan.line_ids.filtered(lambda r: r.sequence == 60)
-        self.assertNotAlmostEqual(
-            line_1.payment_amount, line_end.payment_amount, 2)
+        for line in loan.line_ids:
+            self.assertAlmostEqual(
+                line_1.payment_amount, line.payment_amount, 2)
         loan.loan_type = 'fixed-principal'
         loan.compute_lines()
         line_1 = loan.line_ids.filtered(lambda r: r.sequence == 1)
