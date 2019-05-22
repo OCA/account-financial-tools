@@ -10,7 +10,9 @@ class AccountInvoice(models.Model):
     cost_center_id = fields.Many2one(
         'account.cost.center',
         string='Cost Center',
-        help='Default Cost Center'
+        readonly=True,
+        states={'draft': [('readonly', False)]},
+        help='Default Cost Center',
     )
 
     @api.model
