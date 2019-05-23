@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo9-addon-account_balance_line',
         'odoo9-addon-account_chart_update',
         'odoo9-addon-account_check_deposit',
+        'odoo9-addon-account_cost_center',
         'odoo9-addon-account_credit_control',
         'odoo9-addon-account_fiscal_position_vat_check',
         'odoo9-addon-account_fiscal_year',
