@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo10-addon-account_balance_line',
         'odoo10-addon-account_chart_update',
         'odoo10-addon-account_check_deposit',
+        'odoo10-addon-account_cost_center',
         'odoo10-addon-account_credit_control',
         'odoo10-addon-account_credit_control_dunning_fees',
         'odoo10-addon-account_fiscal_month',
