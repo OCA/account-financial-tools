@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="invoice_form" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <field name="date_invoice" position="after">
+                <field name="cost_center_id"/>
+            </field>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="cost_center_id"/>
+            </xpath>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context" operation="python_dict" key="cost_center_id">cost_center_id</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="cost_center_id"/>
+            </field>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="cost_center_id"/>
+            </xpath>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute name="context" operation="python_dict" key="cost_center_id">cost_center_id</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
