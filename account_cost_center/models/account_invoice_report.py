@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 Onestein (<http://www.onestein.eu>)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2015-2018 Onestein (<http://www.onestein.eu>)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from openerp import fields, models
 
@@ -21,15 +21,12 @@ class AccountInvoiceReport(models.Model):
 
     def _select(self):
         return super(AccountInvoiceReport, self)._select() + \
-            ", sub.cost_center_id as cost_center_id, " + \
-            "sub.account_analytic_id as account_analytic_id"
+            ", sub.cost_center_id as cost_center_id"
 
     def _sub_select(self):
         return super(AccountInvoiceReport, self)._sub_select() + \
-            ", ail.cost_center_id as cost_center_id, " + \
-            "ail.account_analytic_id as account_analytic_id"
+            ", ail.cost_center_id as cost_center_id"
 
     def _group_by(self):
         return super(AccountInvoiceReport, self)._group_by() + \
-            ", ail.cost_center_id, " + \
-            "ail.account_analytic_id"
+            ", ail.cost_center_id"

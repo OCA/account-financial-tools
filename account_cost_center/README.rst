@@ -1,5 +1,5 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 ===========
@@ -15,12 +15,14 @@ Usage
 
 This module is relevant when you are creating sales invoices and using analytic accounting.
 
-Start using cost centers by defining the cost centers. Be aware that Analytic Accounting must be activated on the user for the following menu option.
+Start using cost centers by defining the cost centers. Be aware that Analytic Accounting
+must be activated on the user for the following menu option.
 Use the menu in the accounting module:
 
     **Configuration > Analytics accounting > Cost centers**
 
-Once defined you can add a cost center to an invoice line. A default cost center for the current invoice can be set in the other info tab.
+Once defined you can add a cost center to an invoice line. A default cost center for
+the current invoice can be set in the other info tab.
 
 This module adds the cost center concept to the reporting module.
 
@@ -31,7 +33,7 @@ Here you can select or unselect the cost center within your analysis.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/92/8.0
+   :target: https://runbot.odoo-community.org/runbot/92/9.0
 
 
 Bug Tracker
@@ -40,7 +42,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues
 <https://github.com/OCA/account-financial-tools/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
-help us smashing it by providing a detailed and welcomed.
+help us smash it by providing detailed and welcomed feedback.
 
 Credits
 =======
