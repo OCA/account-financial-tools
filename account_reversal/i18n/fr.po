@@ -151,7 +151,7 @@ msgid "Reversal Date"
 msgstr "Date des extournes"
 
 #. module: account_reversal
-#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3807
+#: model:ir.model.fields,field_description:account_reversal.field_account_move_reversal_id_3822
 msgid "Reversal Entry"
 msgstr "Pièce comptable d'extourne"
 
