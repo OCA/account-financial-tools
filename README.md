@@ -33,6 +33,7 @@ addon | version | summary
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 10.0.3.1.0 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
+[account_cost_center](account_cost_center/) | 10.0.1.0.0 | Cost center information for invoice lines
 [account_credit_control](account_credit_control/) | 10.0.1.4.4 | Account Credit Control
 [account_credit_control_dunning_fees](account_credit_control_dunning_fees/) | 10.0.1.0.0 | Credit control dunning fees
 [account_fiscal_month](account_fiscal_month/) | 10.0.1.0.0 | Provide a fiscal month date range type
