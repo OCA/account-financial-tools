@@ -101,7 +101,7 @@ class TestAssetManagement(SavepointCase):
             'account_id': cls.account_payable.id,
             'price_unit': 20000.00,
             'quantity': 1,
-            'product_id': cls.product_id})
+            'product_id': cls.product.id})
 
         cls.invoice_2 = cls.account_invoice.create({
             'partner_id': cls.partner.id,
