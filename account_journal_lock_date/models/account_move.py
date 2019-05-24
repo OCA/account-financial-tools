@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -10,6 +9,19 @@ from ..exceptions import JournalLockDateError
 class AccountMove(models.Model):
 
     _inherit = 'account.move'
+
+    @api.model
+    def create(self, values):
+        move = super().create(values)
+        move._check_lock_date()
+        return move
+
+    @api.multi
+    def write(self, values):
+        self._check_lock_date()
+        res = super().write(values)
+        self._check_lock_date()
+        return res
 
     @api.multi
     def _check_lock_date(self):
