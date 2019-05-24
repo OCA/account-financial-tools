@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -29,6 +28,9 @@ class TestJournalLockDate(common.TransactionCase):
         self.journal = self.browse_ref("account.bank_journal")
 
     def test_journal_lock_date(self):
+        self.env.user.write({
+            'groups_id': [(3, self.ref('base.group_system'))],
+        })
         self.env.user.write({
             'groups_id': [(3, self.ref('account.group_account_manager'))],
         })
@@ -73,10 +75,12 @@ class TestJournalLockDate(common.TransactionCase):
         with self.assertRaises(JournalLockDateError):
             move.write({'name': 'TEST'})
 
+        # allow cancel posted move
+        self.journal.update_posted = True
         with self.assertRaises(JournalLockDateError):
             move.button_cancel()
 
-        # create a move after ther lock date and post it
+        # create a move after the lock date and post it
         tomorrow = date.today() + timedelta(days=1)
         move3 = self.account_move_obj.create({
             'date': tomorrow,
