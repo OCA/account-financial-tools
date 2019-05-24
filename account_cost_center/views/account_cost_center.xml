@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
 
@@ -21,6 +21,7 @@
                                 <field name="code"/>
                             </group>
                             <group name="main_group2">
+                                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
                             </group>
                         </group>
                         <notebook name="notebook">
@@ -36,6 +37,7 @@
                 <tree string="Cost Centers">
                     <field name="code"/>
                     <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
                 </tree>
             </field>
         </record>
@@ -58,7 +60,7 @@
             <field name="search_view_id" ref="account_cost_center_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Click to add a new event.
+                    Click to add a new cost center.
                 </p>
                 <p>
                     Cost centers provide an extra analytic dimension
