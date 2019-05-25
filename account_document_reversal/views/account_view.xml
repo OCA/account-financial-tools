@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">account.journal.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account_cancel.view_account_journal_form_inherit"/>
+        <field name="arch" type="xml">
+            <field name="update_posted" position="after">
+                <field name="cancel_method" groups="base.group_no_one" widget="radio"
+                    attrs="{'invisible': [('update_posted', '=', False)]}"/>
+                <field name="use_different_journal" attrs="{'invisible': ['|', ('update_posted', '=', False), ('cancel_method', '!=', 'reversal')]}"/>
+                <field name="reversal_journal_id" widget="selection"
+                    attrs="{'invisible': ['|', '|', ('update_posted', '=', False), ('cancel_method', '!=', 'reversal'), ('use_different_journal', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_move_form_inherit_account_cancel" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account_cancel.view_move_form_inherit_account_cancel"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="is_cancel_reversal" invisible="1"/>
+            </field>
+            <button name="button_cancel" position="attributes">
+                <attribute name="attrs">{'invisible': ['|', ('state', '!=', 'posted'), ('is_cancel_reversal', '=', True)]}</attribute>
+                <attribute name="states"></attribute>
+            </button>
+        </field>
+    </record>
+
+</odoo>
