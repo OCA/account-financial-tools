@@ -35,8 +35,7 @@ class AccountLoanGenerateWizard(models.TransientModel):
         return result
 
     def run_loan(self):
-        created_ids = self.env['account.loan'].generate_loan_entries(
-            datetime.strptime(self.date, DF).date())
+        created_ids = self.env['account.loan'].generate_loan_entries(self.date)
         action = self.env.ref('account.action_move_line_form')
         result = action.read()[0]
         if len(created_ids) == 0:
