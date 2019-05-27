@@ -4,9 +4,7 @@
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import logging
 
@@ -142,36 +140,28 @@ class TestLoan(TransactionCase):
                 'loan_id': loan.id,
                 'amount': (amount - amount / periods) / 2,
                 'fees': 100,
-                'date': datetime.strptime(
-                    line.date, DF
-                ).date() + relativedelta(months=-1)
+                'date': line.date + relativedelta(months=-1)
             }).run()
         with self.assertRaises(UserError):
             self.env['account.loan.pay.amount'].create({
                 'loan_id': loan.id,
                 'amount': amount,
                 'fees': 100,
-                'date': datetime.strptime(
-                    line.date, DF
-                ).date()
+                'date': line.date,
             }).run()
         with self.assertRaises(UserError):
             self.env['account.loan.pay.amount'].create({
                 'loan_id': loan.id,
                 'amount': 0,
                 'fees': 100,
-                'date': datetime.strptime(
-                    line.date, DF
-                ).date()
+                'date': line.date,
             }).run()
         with self.assertRaises(UserError):
             self.env['account.loan.pay.amount'].create({
                 'loan_id': loan.id,
                 'amount': -100,
                 'fees': 100,
-                'date': datetime.strptime(
-                    line.date, DF
-                ).date()
+                'date': line.date,
             }).run()
 
     def test_fixed_annuity_loan(self):
@@ -258,9 +248,9 @@ class TestLoan(TransactionCase):
                 'loan_id': loan.id,
                 'amount': (amount - amount / periods) / 2,
                 'fees': 100,
-                'date': datetime.strptime(
-                    loan.line_ids.filtered(lambda r: r.sequence == 1).date, DF
-                ).date() + relativedelta(months=-1)
+                'date': loan.line_ids.filtered(
+                    lambda r: r.sequence == 1
+                ).date + relativedelta(months=-1)
             }).run()
         line.invoice_ids.action_invoice_open()
         self.assertTrue(line.has_moves)
@@ -345,9 +335,7 @@ class TestLoan(TransactionCase):
         self.assertEqual(loan.interests_amount, 0)
         self.assertEqual(loan.pending_principal_amount, amount)
         self.assertFalse(loan.line_ids.filtered(
-            lambda r: (
-                datetime.strptime(r.date, DF).date() <=
-                datetime.strptime(loan.start_date, DF).date())))
+            lambda r: r.date <= loan.start_date))
         for line in loan.line_ids:
             self.assertEqual(loan.state, 'posted')
             line.view_process_values()
@@ -396,11 +384,11 @@ class TestLoan(TransactionCase):
             'reconcile': True,
         })
 
-    def create_loan(self, type, amount, rate, periods):
+    def create_loan(self, type_loan, amount, rate, periods):
         loan = self.env['account.loan'].create({
             'journal_id': self.journal.id,
             'rate_type': 'napr',
-            'loan_type': type,
+            'loan_type': type_loan,
             'loan_amount': amount,
             'payment_on_first_period': True,
             'rate': rate,

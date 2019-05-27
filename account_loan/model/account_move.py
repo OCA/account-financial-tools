@@ -20,8 +20,8 @@ class AccountMove(models.Model):
     )
 
     @api.multi
-    def post(self):
-        res = super().post()
+    def post(self, invoice=False):
+        res = super().post(invoice=invoice)
         for record in self:
             if record.loan_line_id:
                 record.loan_id = record.loan_line_id.loan_id
