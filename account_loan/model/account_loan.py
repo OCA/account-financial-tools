@@ -353,7 +353,7 @@ class AccountLoan(models.Model):
     def post(self):
         self.ensure_one()
         if not self.start_date:
-            self.start_date = fields.Datetime.now()
+            self.start_date = fields.Date.today()
         self.compute_draft_lines()
         self.write({'state': 'posted'})
 
@@ -422,7 +422,7 @@ class AccountLoan(models.Model):
         self.line_ids.unlink()
         amount = self.loan_amount
         if self.start_date:
-            date = datetime.strptime(self.start_date, DF).date()
+            date = self.start_date
         else:
             date = datetime.today().date()
         delta = relativedelta(months=self.method_period)
@@ -470,8 +470,7 @@ class AccountLoan(models.Model):
             ('is_leasing', '=', False)
         ]):
             lines = record.line_ids.filtered(
-                lambda r: datetime.strptime(
-                    r.date, DF).date() <= date and not r.move_ids
+                lambda r: r.date <= date and not r.move_ids
             )
             res += lines.generate_move()
         return res
@@ -484,7 +483,6 @@ class AccountLoan(models.Model):
             ('is_leasing', '=', True)
         ]):
             res += record.line_ids.filtered(
-                lambda r: datetime.strptime(
-                    r.date, DF).date() <= date and not r.invoice_ids
+                lambda r: r.date <= date and not r.invoice_ids
             ).generate_invoice()
         return res
