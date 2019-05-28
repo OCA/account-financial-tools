@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -336,9 +335,8 @@ class AccountLoan(models.Model):
     @api.onchange('company_id')
     def _onchange_company(self):
         self._onchange_is_leasing()
-        self.interest_expenses_account_id = False
-        self.short_term_loan_account_id = False
-        self.long_term_loan_account_id = False
+        self.interest_expenses_account_id = self.short_term_loan_account_id = \
+            self.long_term_loan_account_id = False
 
     def get_default_name(self, vals):
         return self.env['ir.sequence'].next_by_code('account.loan') or '/'
@@ -394,12 +392,11 @@ class AccountLoan(models.Model):
             return
         final_sequence = min(lines.mapped('sequence'))
         for line in lines.sorted('sequence', reverse=True):
-            date = datetime.strptime(
-                line.date, DF).date() + relativedelta(months=12)
+            date = line.date + relativedelta(months=12)
             if self.state == 'draft' or line.sequence != final_sequence:
                 line.long_term_pending_principal_amount = sum(
                     self.line_ids.filtered(
-                        lambda r: datetime.strptime(r.date, DF).date() >= date
+                        lambda r: r.date >= date
                     ).mapped('principal_amount'))
             line.long_term_principal_amount = (
                 line.long_term_pending_principal_amount - amount)
