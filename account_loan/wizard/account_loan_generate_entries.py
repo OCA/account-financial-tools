@@ -1,10 +1,6 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
-
-from datetime import datetime
 
 
 class AccountLoanGenerateWizard(models.TransientModel):
@@ -23,7 +19,8 @@ class AccountLoanGenerateWizard(models.TransientModel):
 
     def run_leasing(self):
         created_ids = self.env['account.loan'].generate_leasing_entries(
-            datetime.strptime(self.date, DF).date())
+            self.date
+        )
         action = self.env.ref('account.action_invoice_tree2')
         result = action.read()[0]
         if len(created_ids) == 0:
