@@ -8,7 +8,7 @@
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/account-financial-tools/',
     'category': 'Accounting',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'depends': [
         'account',
         'base_view_inheritance_extension'
