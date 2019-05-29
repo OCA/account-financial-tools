@@ -54,8 +54,10 @@ class AccountMoveMakeNetting(models.TransientModel):
                   "be the same for all."))
         res = super(AccountMoveMakeNetting, self).default_get(fields_list)
         res['move_line_ids'] = [(6, 0, move_lines.ids)]
-        balance = (sum(move_lines.mapped('debit')) -
-                   sum(move_lines.mapped('credit')))
+        debit_move_lines_debit = move_lines.filtered('debit')
+        credit_move_lines_debit = move_lines.filtered('credit')
+        balance = (abs(sum(debit_move_lines_debit.mapped('amount_residual'))) -
+                   abs(sum(credit_move_lines_debit.mapped('amount_residual'))))
         res['balance'] = abs(balance)
         res['balance_type'] = 'pay' if balance < 0 else 'receive'
         return res
@@ -70,7 +72,7 @@ class AccountMoveMakeNetting(models.TransientModel):
         # Group amounts by account
         account_groups = self.move_line_ids.read_group(
             [('id', 'in', self.move_line_ids.ids)],
-            ['account_id', 'debit', 'credit'],
+            ['account_id', 'amount_residual'],
             ['account_id'],
         )
         debtors = []
@@ -78,7 +80,7 @@ class AccountMoveMakeNetting(models.TransientModel):
         total_debtors = 0
         total_creditors = 0
         for account_group in account_groups:
-            balance = account_group['debit'] - account_group['credit']
+            balance = account_group['amount_residual']
             group_vals = {
                 'account_id': account_group['account_id'][0],
                 'balance': abs(balance),
