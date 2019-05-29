@@ -90,6 +90,26 @@ class TestAssetManagement(SavepointCase):
             'journal_id': cls.journal.id,
             'invoice_line_ids': [(4, cls.invoice_line.id)]})
 
+        cls.invoice_line_2 = cls.account_invoice_line.create({
+            'name': 'test 2',
+            'account_id': cls.account_payable.id,
+            'price_unit': 10000.00,
+            'quantity': 1,
+            'product_id': cls.product.id})
+        cls.invoice_line_3 = cls.account_invoice_line.create({
+            'name': 'test 3',
+            'account_id': cls.account_payable.id,
+            'price_unit': 20000.00,
+            'quantity': 1,
+            'product_id': cls.product.id})
+
+        cls.invoice_2 = cls.account_invoice.create({
+            'partner_id': cls.partner.id,
+            'account_id': cls.account_recv.id,
+            'journal_id': cls.journal.id,
+            'invoice_line_ids': [(4, cls.invoice_line_2.id),
+                                 (4, cls.invoice_line_3.id)]})
+
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
         #
@@ -467,3 +487,31 @@ class TestAssetManagement(SavepointCase):
             # I check that the new asset has the correct purchase value
             self.assertAlmostEqual(
                 asset.purchase_value, -line.price_unit, places=2)
+
+    def test_11_assets_from_invoice(self):
+        all_assets = self.env['account.asset'].search([])
+        invoice = self.invoice_2
+        asset_profile = self.env.ref(
+            'account_asset_management.account_asset_profile_car_5Y')
+        asset_profile.asset_product_item = True
+        # Compute depreciation lines on invoice validation
+        asset_profile.open_asset = True
+
+        self.assertTrue(len(invoice.invoice_line_ids) == 2)
+        invoice.invoice_line_ids.write({
+            'quantity': 1,
+            'asset_profile_id': asset_profile.id,
+        })
+        invoice.action_invoice_open()
+        # Retrieve all assets after invoice validation
+        current_assets = self.env['account.asset'].search([])
+        # What are the new assets?
+        new_assets = current_assets - all_assets
+        self.assertEqual(len(new_assets), 2)
+
+        for asset in new_assets:
+            dlines = asset.depreciation_line_ids.filtered(
+                lambda l: l.type == 'depreciate')
+            dlines = dlines.sorted(key=lambda l: l.line_date)
+            self.assertAlmostEqual(dlines[0].depreciated_value, 0.0)
+            self.assertAlmostEqual(dlines[-1].remaining_value, 0.0)
