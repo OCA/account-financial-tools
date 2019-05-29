@@ -683,7 +683,7 @@ msgid "Journal Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:246
+#: code:addons/account_asset_management/models/account_asset_line.py:253
 #, python-format
 msgid "Journal Entry"
 msgstr ""
@@ -1159,7 +1159,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:116
+#: code:addons/account_asset_management/models/account_asset_line.py:123
 #: code:addons/account_asset_management/models/account_move.py:32
 #, python-format
 msgid ""
@@ -1182,7 +1182,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:124
+#: code:addons/account_asset_management/models/account_asset_line.py:131
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
@@ -1219,7 +1219,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:164
+#: code:addons/account_asset_management/models/account_asset_line.py:171
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
@@ -1233,14 +1233,14 @@ msgstr ""
 "Не може да избришете средство кое содржи објавени ставки за амортизација."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:160
+#: code:addons/account_asset_management/models/account_asset_line.py:167
 #, fuzzy, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr ""
 "Не може да избришете средство кое содржи објавени ставки за амортизација."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:132
+#: code:addons/account_asset_management/models/account_asset_line.py:139
 #, python-format
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
@@ -1248,14 +1248,14 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:144
+#: code:addons/account_asset_management/models/account_asset_line.py:151
 #, fuzzy, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
 "Не може да избришете средство кое содржи објавени ставки за амортизација."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:151
+#: code:addons/account_asset_management/models/account_asset_line.py:158
 #, python-format
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "

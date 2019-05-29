@@ -719,7 +719,7 @@ msgid "Journal Entries"
 msgstr "Pièces comptables"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:246
+#: code:addons/account_asset_management/models/account_asset_line.py:253
 #, python-format
 msgid "Journal Entry"
 msgstr "Pièce Comptable"
@@ -1231,7 +1231,7 @@ msgstr ""
 "Vous devez générer une telle pièce directement depuis l'immobilisation."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:116
+#: code:addons/account_asset_management/models/account_asset_line.py:123
 #: code:addons/account_asset_management/models/account_move.py:32
 #, python-format
 msgid ""
@@ -1260,7 +1260,7 @@ msgstr ""
 "d'amortissement pour les périodes antérieures ont été créées."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:124
+#: code:addons/account_asset_management/models/account_asset_line.py:131
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
@@ -1307,7 +1307,7 @@ msgstr ""
 "Veuillez corriger la date de départ pour '%s'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:164
+#: code:addons/account_asset_management/models/account_asset_line.py:171
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
@@ -1324,7 +1324,7 @@ msgstr ""
 "comptabilisées."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:160
+#: code:addons/account_asset_management/models/account_asset_line.py:167
 #, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr ""
@@ -1332,7 +1332,7 @@ msgstr ""
 "d'amortissement'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:132
+#: code:addons/account_asset_management/models/account_asset_line.py:139
 #, python-format
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
@@ -1343,7 +1343,7 @@ msgstr ""
 "antérieures."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:144
+#: code:addons/account_asset_management/models/account_asset_line.py:151
 #, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
@@ -1351,7 +1351,7 @@ msgstr ""
 "ultérieurement à la création de pièces comptables liées."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:151
+#: code:addons/account_asset_management/models/account_asset_line.py:158
 #, python-format
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
