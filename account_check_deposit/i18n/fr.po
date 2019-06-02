@@ -1,0 +1,371 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_check_deposit
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-28 10:25+0000\n"
+"PO-Revision-Date: 2018-01-25 11:46+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Bank Account Number to Credit:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Check Currency:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Number of checks:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Total:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "<b>Transfer Date:</b>"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_check_deposit
+msgid "Account Check Deposit"
+msgstr "Compte Remise de Chèque"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Amount"
+msgstr "Montant"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Back to Draft"
+msgstr "Remettre en brouillon"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__bank_journal_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+#: selection:res.company,check_deposit_offsetting_account:0
+msgid "Bank Account"
+msgstr "Compte bancaire"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Bank:"
+msgstr "Banque :"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Beneficiary:"
+msgstr "Bénéficiaire :"
+
+#. module: account_check_deposit
+#: model:ir.actions.report,name:account_check_deposit.report_account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_move_line__check_deposit_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Check Deposit"
+msgstr "Remise de chèque"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:163
+#: code:addons/account_check_deposit/models/account_deposit.py:201
+#, python-format
+msgid "Check Deposit %s"
+msgstr "Remise de chèque %s"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:171
+#, python-format
+msgid "Check Deposit - Ref. Check %s"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_offsetting_account
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_offsetting_account
+msgid "Check Deposit Offsetting Account"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Check Deposit n°"
+msgstr "Remise de chèque n°"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.res_config_settings_view_form
+#, fuzzy
+msgid "Check Deposits"
+msgstr "Remises de chèques"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_payment_ids
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Check Payments"
+msgstr "Paiements par Chèque"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Checks Deposit"
+msgstr "Remise de Chèques"
+
+#. module: account_check_deposit
+#: model:ir.actions.act_window,name:account_check_deposit.action_check_deposit_tree
+#: model:ir.ui.menu,name:account_check_deposit.menu_check_deposit_tree
+msgid "Checks Deposits"
+msgstr "Remises de chèques"
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_uid
+msgid "Created by"
+msgstr "Créer par"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_date
+msgid "Created on"
+msgstr "Créer le"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Currency"
+msgstr "Devise"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__currency_none_same_company_id
+msgid "Currency (False if same as company)"
+msgstr "Devise (False s'il s'agit de la même que la société)"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Date"
+msgstr "Date"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Debtor"
+msgstr "Débiteur"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_default_account_id
+msgid "Default Debit Account of the Journal"
+msgstr "Compte de débit par défaut du journal"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__deposit_date
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Deposit Date"
+msgstr "Date du Versement"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: account_check_deposit
+#: selection:account.check.deposit,state:0
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Done"
+msgstr "Terminé"
+
+#. module: account_check_deposit
+#: selection:account.check.deposit,state:0
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Group By"
+msgstr "Grouper par"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,help:account_check_deposit.field_account_check_deposit__journal_default_account_id
+msgid "It acts as a default account for debit amount"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__journal_id
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: account_check_deposit
+#: model:ir.model,name:account_check_deposit.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__line_ids
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "List of checks:"
+msgstr "Liste des chèques :"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:196
+#, python-format
+msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
+msgstr ""
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:190
+#, python-format
+msgid "Missing 'Default Debit Account' on bank journal '%s'"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
+msgid "Number of Checks"
+msgstr "Nombre de chèques :"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_post_move
+#, fuzzy
+msgid "Post Move for Check Deposits"
+msgstr "Remises de chèques"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Print"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__is_reconcile
+msgid "Reconcile"
+msgstr "Lettrer"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
+msgid "Reference"
+msgstr "Référence"
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__state
+msgid "Status"
+msgstr "État"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:106
+#: code:addons/account_check_deposit/models/account_deposit.py:116
+#, python-format
+msgid ""
+"The check with amount %s and reference '%s' is in currency %s but the "
+"deposit is in currency %s."
+msgstr ""
+"Le chèque d'un montant de %s portant la référence \"%s\" est émis dans la "
+"devise %s mais la remise est dans la devise %s."
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:127
+#, python-format
+msgid ""
+"The deposit '%s' is in valid state, so you must cancel it before deleting it."
+msgstr ""
+"La remise \"%s\" est validée, donc vous devez l'annuler avant de la "
+"supprimer."
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__total_amount
+msgid "Total Amount"
+msgstr "Montant total"
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Total Credit"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Total Debit"
+msgstr ""
+
+#. module: account_check_deposit
+#: selection:res.company,check_deposit_offsetting_account:0
+msgid "Transfer Account"
+msgstr ""
+
+#. module: account_check_deposit
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_transfer_account_id
+#: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_transfer_account_id
+msgid "Transfer Account for Check Deposits"
+msgstr ""
+
+#. module: account_check_deposit
+#: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: account_check_deposit
+#: code:addons/account_check_deposit/models/account_deposit.py:185
+#, python-format
+msgid ""
+"You must configure the 'Check Deposit Offsetting Account' on the Accounting "
+"Settings page"
+msgstr ""
+
+#~ msgid "Checks Deposit Search"
+#~ msgstr "Rechercher une Remise de Chèques"

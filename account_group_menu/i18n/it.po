@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_group_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-05-18 11:19+0000\n"
+"Last-Translator: Lorenzo Battistini <lorenzo.battistini@agilebg.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.6.1\n"
+
+#. module: account_group_menu
+#: model:ir.model,name:account_group_menu.model_account_group
+msgid "Account Group"
+msgstr "Gruppo di conti"
+
+#. module: account_group_menu
+#: model:ir.ui.menu,name:account_group_menu.account_group_menu
+msgid "Account Groups"
+msgstr "Gruppi di conti"
+
+#. module: account_group_menu
+#: model_terms:ir.ui.view,arch_db:account_group_menu.view_account_tax_group_form
+#: model_terms:ir.ui.view,arch_db:account_group_menu.view_account_tax_group_search
+msgid "Account Tax Group"
+msgstr "Gruppo di imposte"
+
+#. module: account_group_menu
+#: model:ir.actions.act_window,name:account_group_menu.action_account_tax_group_tree
+#: model:ir.ui.menu,name:account_group_menu.account_tax_group_menu
+#: model_terms:ir.ui.view,arch_db:account_group_menu.view_account_tax_group_search
+msgid "Account Tax Groups"
+msgstr "Gruppi di imposte"
+
+#. module: account_group_menu
+#: model:ir.model.fields,field_description:account_group_menu.field_account_group__account_ids
+msgid "Accounts"
+msgstr "Conti"
+
+#. module: account_group_menu
+#: model:ir.model.fields,help:account_group_menu.field_account_group__account_ids
+msgid "Assigned accounts."
+msgstr "Conti assegnati."
+
+#. module: account_group_menu
+#: model:ir.model.fields,help:account_group_menu.field_account_tax_group__tax_ids
+msgid "Assigned taxes."
+msgstr "Imposte assegnate."
+
+#. module: account_group_menu
+#: model:ir.model,name:account_group_menu.model_account_tax_group
+msgid "Tax Group"
+msgstr "Gruppo di imposte"
+
+#. module: account_group_menu
+#: model:ir.model.fields,field_description:account_group_menu.field_account_tax_group__tax_ids
+msgid "Taxes"
+msgstr "Imposte"
+
+#. module: account_group_menu
+#: model:account.tax.group,name:account_group_menu.demo_account_tax_group_3
+msgid "VAT 19%"
+msgstr "IVA 19%"
+
+#. module: account_group_menu
+#: model:account.tax.group,name:account_group_menu.demo_account_tax_group_1
+msgid "VAT 5%"
+msgstr "IVA 5%"
+
+#. module: account_group_menu
+#: model:account.tax.group,name:account_group_menu.demo_account_tax_group_2
+msgid "VAT 9%"
+msgstr "IVA 9%"
+
+#. module: account_group_menu
+#: model:account.tax.group,name:account_group_menu.demo_account_tax_group_4
+msgid "VAT Cash Basis"
+msgstr "IVA per cassa"

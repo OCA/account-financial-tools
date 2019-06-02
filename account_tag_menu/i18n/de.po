@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_tag_menu
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-30 02:39+0000\n"
+"PO-Revision-Date: 2019-04-24 20:16+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.5.1\n"
+
+#. module: account_tag_menu
+#: model:ir.model,name:account_tag_menu.model_account_account_tag
+msgid "Account Tag"
+msgstr "Kontoschlagwort"
+
+#. module: account_tag_menu
+#: model:ir.ui.menu,name:account_tag_menu.account_tag_menu
+msgid "Account Tags"
+msgstr "Kontoschlagworte"
+
+#. module: account_tag_menu
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__account_ids
+msgid "Accounts"
+msgstr "Konten"
+
+#. module: account_tag_menu
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__account_ids
+msgid "Assigned accounts for custom reporting"
+msgstr "Zugeordnete Konten für individuelle Berichte"
+
+#. module: account_tag_menu
+#: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__tax_ids
+msgid "Assigned taxes for custom reporting"
+msgstr "Zugeordnete Steuern für individuelle Berichte"
+
+#. module: account_tag_menu
+#: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__tax_ids
+msgid "Taxes"
+msgstr "Steuern"

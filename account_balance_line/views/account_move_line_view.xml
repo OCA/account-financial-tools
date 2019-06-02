@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="account_move_line_balance_custom">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="credit" position="after" >
+                <field name="balance" sum="Total Balance"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
