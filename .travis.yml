@@ -16,20 +16,17 @@ addons:
 
 env:
   global:
-  - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
-  - TRANSIFEX_USER='transbot@odoo-community.org'
-  - secure: "XzZzWhiVWXHI+tmcdYH0rPjietxvr1nUXuCRiqnDY3fM0lq6RmtwOlpDDwYEiX+9fHAE8mDttlJ7H4J/YZ+0ugwZxeM10yuT7FwkJY9kPvBe6T59P9aD9R6mSC/da4JGVd+Th5QXDBuBGRBVdY/qBT2lagHuSzBZdKwvMMsaBtA="
+  - VERSION="8.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
 
   matrix:
   - LINT_CHECK="1"
-  - TRANSIFEX="1"
-  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="account_asset_management,account_asset_management_xls,account_journal_always_check_date,account_constraints"
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="account_asset_management,account_asset_management_xls,account_journal_always_check_date,account_constraints" MAKEPOT="1"
   - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="account_asset_management,account_asset_management_xls,account_journal_always_check_date,account_constraints"
-  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_asset_management,account_asset_management_xls"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_asset_management,account_asset_management_xls" MAKEPOT="1"
   - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_asset_management,account_asset_management_xls"
-  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_journal_always_check_date"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_journal_always_check_date" MAKEPOT="1"
   - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_journal_always_check_date"
-  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_constraints"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="account_constraints" MAKEPOT="1"
   - TESTS="1" ODOO_REPO="odoo/odoo" INCLUDE="account_constraints"
 
 virtualenv:
