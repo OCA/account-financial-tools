@@ -115,8 +115,14 @@ class AccountMoveLine(models.Model):
 
     @api.multi
     def write(self, vals):
+        # Check if at least one asset is linked to a move
+        linked_asset = False
+        for move in self:
+            linked_asset = move.asset_id
+            if linked_asset:
+                break
         if (
-            self.mapped('asset_id') and
+            linked_asset and
             set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE) and
             not (
                 self.env.context.get('allow_asset_removal') and
