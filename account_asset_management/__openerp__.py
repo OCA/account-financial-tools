@@ -23,6 +23,7 @@
 {
     'name': 'Assets Management',
     'version': '8.0.2.6.0',
+    'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
     'author': "OpenERP & Noviat,Odoo Community Association (OCA)",
