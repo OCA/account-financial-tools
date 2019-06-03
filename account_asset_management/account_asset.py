@@ -271,6 +271,7 @@ class account_asset_asset(orm.Model):
                   a started month is counted as a full month
         - years: duration in calendar years, considering also leap years
         """
+        # pylint: disable=sql-injection
         cr.execute(
             "SELECT date_start, date_stop, "
             "date_stop-date_start+1 AS total_days "
@@ -1495,6 +1496,7 @@ class account_asset_depreciation_line(orm.Model):
                     _("You cannot delete a depreciation line with "
                       "an associated accounting entry."))
             previous_id = dl.previous_id and dl.previous_id.id or False
+            # pylint: disable=sql-injection
             cr.execute(
                 "SELECT id FROM account_asset_depreciation_line "
                 "WHERE previous_id = %s" % dl.id)
