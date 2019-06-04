@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_fiscal_position_vat_check
-# 
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2016
@@ -20,11 +20,12 @@ msgstr ""
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
 "PO-Revision-Date: 2016-11-09 00:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_position_vat_check
@@ -40,9 +41,12 @@ msgstr "Posição Fiscal"
 #. module: account_fiscal_position_vat_check
 #: help:account.fiscal.position,customer_must_have_vat:0
 msgid ""
-"If enabled, Odoo will check that the customer has a VAT number when the user"
-" validates a customer invoice/refund."
-msgstr "Se ativado, o Odoo vai assegurar que os clientes tenham NIF atribuídos no momento em que os utilizadores validam uma fatura ou nota de crédito a clientes."
+"If enabled, Odoo will check that the customer has a VAT number when the user "
+"validates a customer invoice/refund."
+msgstr ""
+"Se ativado, o Odoo vai assegurar que os clientes tenham NIF atribuídos no "
+"momento em que os utilizadores validam uma fatura ou nota de crédito a "
+"clientes."
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -65,11 +69,14 @@ msgstr "Parceiro"
 #: code:addons/account_fiscal_position_vat_check/account_invoice.py:37
 #, python-format
 msgid ""
-"You are trying to validate %s with the fiscal position '%s' that require the"
-" customer to have a VAT number. But the Customer '%s' doesn't have a VAT "
+"You are trying to validate %s with the fiscal position '%s' that require the "
+"customer to have a VAT number. But the Customer '%s' doesn't have a VAT "
 "number in OpenERP.Please add the VAT number of this Customer in Odoo  and "
 "try to validate again."
-msgstr "Está a tentar validar %s com a posição fiscal '%s' que obriga a que o cliente tenha NIF atribuído, o que não se verifica no caso do cliente '%s'. Por favor, adicione um NIF ao cliente e tente novamente."
+msgstr ""
+"Está a tentar validar %s com a posição fiscal '%s' que obriga a que o "
+"cliente tenha NIF atribuído, o que não se verifica no caso do cliente '%s'. "
+"Por favor, adicione um NIF ao cliente e tente novamente."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/partner.py:20
@@ -77,7 +84,9 @@ msgstr "Está a tentar validar %s com a posição fiscal '%s' que obriga a que o
 msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
 "VAT number, but the VAT number is missing."
-msgstr "Atribuiu a posição fiscal '%s', que obriga a que o cliente tenha um NIF atribuído, mas este está em falta."
+msgstr ""
+"Atribuiu a posição fiscal '%s', que obriga a que o cliente tenha um NIF "
+"atribuído, mas este está em falta."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/account_invoice.py:32
