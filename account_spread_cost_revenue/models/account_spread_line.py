@@ -61,12 +61,12 @@ class AccountInvoiceSpreadLine(models.Model):
 
     @api.multi
     def _create_moves(self):
+        if self.filtered(lambda l: l.move_id):
+            raise UserError(_('This spread line is already linked to a '
+                              'journal entry! Please post or delete it.'))
+
         created_moves = self.env['account.move']
         for line in self:
-            if line.move_id:
-                raise UserError(_('This spread line is already linked to a '
-                                  'journal entry! Please post or delete it.'))
-
             move_vals = line._prepare_move()
             move = self.env['account.move'].create(move_vals)
 
