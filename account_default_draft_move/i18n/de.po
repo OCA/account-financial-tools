@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_default_draft_move
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
@@ -23,11 +23,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-03 23:25+0000\n"
 "PO-Revision-Date: 2017-02-09 15:59+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_default_draft_move
@@ -65,7 +66,9 @@ msgstr "Journal"
 msgid ""
 "Use journal setting to post journal entries on invoice and bank statement "
 "validation"
-msgstr "Verwenden Sie die Journaleinstellungen, um Journalposten bei Rechnungs- und Kontoauszugsfreigaben zu buchen."
+msgstr ""
+"Verwenden Sie die Journaleinstellungen, um Journalposten bei Rechnungs- und "
+"Kontoauszugsfreigaben zu buchen."
 
 #. module: account_default_draft_move
 #: code:addons/account_default_draft_move/account.py:56
@@ -73,7 +76,9 @@ msgstr "Verwenden Sie die Journaleinstellungen, um Journalposten bei Rechnungs- 
 msgid ""
 "You cannot modify a posted entry of this journal.First you should set the "
 "journal to allow cancelling entries."
-msgstr "Sie dürfen einen gebuchten Posten dieses Journals nicht ändern. Zunächst müssen im Journal Stornierungen zulassen."
+msgstr ""
+"Sie dürfen einen gebuchten Posten dieses Journals nicht ändern. Zunächst "
+"müssen im Journal Stornierungen zulassen."
 
 #. module: account_default_draft_move
 #: view:account.invoice:account_default_draft_move.invoice_form_customer_group_invoice

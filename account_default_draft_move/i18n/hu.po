@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_default_draft_move
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,16 +10,22 @@ msgstr ""
 "POT-Creation-Date: 2015-10-03 22:27+0000\n"
 "PO-Revision-Date: 2015-09-29 09:07+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/hu/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_default_draft_move
 #: model:ir.model,name:account_default_draft_move.model_account_move
 msgid "Account Entry"
+msgstr ""
+
+#. module: account_default_draft_move
+#: field:account.move,update_posted:0
+msgid "Allow Cancelling Entries"
 msgstr ""
 
 #. module: account_default_draft_move
