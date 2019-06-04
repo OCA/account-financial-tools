@@ -402,9 +402,8 @@ class AccountSpread(models.Model):
         """Checks whether the spread lines should be calculated.
         In case checks pass, invoke "def _compute_spread_board()" method.
         """
-        for spread in self:
-            if spread.total_amount:
-                spread._compute_spread_board()
+        for spread in self.filtered(lambda s: s.total_amount):
+            spread._compute_spread_board()
 
     @api.multi
     def action_recalculate_spread(self):
@@ -434,38 +433,36 @@ class AccountSpread(models.Model):
 
     @api.multi
     def _action_unlink_invoice_line(self):
-        for spread in self:
-            spread_mls = spread.line_ids.mapped('move_id.line_ids')
-            spread_mls.remove_move_reconcile()
-            spread._message_post_unlink_invoice_line()
-            spread.write({'invoice_line_ids': [(5, 0, 0)]})
+        spread_mls = self.mapped('line_ids.move_id.line_ids')
+        spread_mls.remove_move_reconcile()
+        self._message_post_unlink_invoice_line()
+        self.write({'invoice_line_ids': [(5, 0, 0)]})
 
     def _message_post_unlink_invoice_line(self):
-        self.ensure_one()
-        inv_link = '<a href=# data-oe-model=account.invoice ' \
-                   'data-oe-id=%d>%s</a>' % (self.invoice_id.id, _("Invoice"))
-        msg_body = _("Unlinked invoice line '%s' (view %s).") % (
-            self.invoice_line_id.name, inv_link)
-        self.message_post(body=msg_body)
-        spread_link = '<a href=# data-oe-model=account.spread ' \
-                      'data-oe-id=%d>%s</a>' % (self.id, _("Spread Board"))
-        msg_body = _("Unlinked '%s' (invoice line %s).") % (
-            spread_link, self.invoice_line_id.name)
-        self.invoice_id.message_post(body=msg_body)
+        for spread in self:
+            invoice_id = spread.invoice_id.id
+            inv_link = '<a href=# data-oe-model=account.invoice ' \
+                       'data-oe-id=%d>%s</a>' % (invoice_id, _("Invoice"))
+            msg_body = _("Unlinked invoice line '%s' (view %s).") % (
+                spread.invoice_line_id.name, inv_link)
+            spread.message_post(body=msg_body)
+            spread_link = '<a href=# data-oe-model=account.spread ' \
+                          'data-oe-id=%d>%s</a>' % (spread.id, _("Spread"))
+            msg_body = _("Unlinked '%s' (invoice line %s).") % (
+                spread_link, spread.invoice_line_id.name)
+            spread.invoice_id.message_post(body=msg_body)
 
     @api.multi
     def unlink(self):
-        for spread in self:
-            if spread.invoice_line_id:
-                raise UserError(
-                    _('Cannot delete spread(s) that are linked '
-                      'to an invoice line.'))
-            posted_line_ids = self.line_ids.filtered(
-                lambda x: x.move_id.state == 'posted')
-            if posted_line_ids:
-                raise ValidationError(
-                    _('Cannot delete spread(s): there are '
-                      'posted Journal Entries.'))
+        if self.filtered(lambda s: s.invoice_line_id):
+            raise UserError(
+                _('Cannot delete spread(s) that are linked '
+                  'to an invoice line.'))
+        if self.mapped('line_ids.move_id').filtered(
+                lambda m: m.state == 'posted'):
+            raise ValidationError(
+                _('Cannot delete spread(s): there are '
+                  'posted Journal Entries.'))
         return super().unlink()
 
     @api.multi
@@ -528,10 +525,8 @@ class AccountSpread(models.Model):
 
     @api.multi
     def create_all_moves(self):
-        for spread in self:
-            for line in spread.line_ids:
-                if not line.move_id:
-                    line.create_move()
+        for line in self.mapped('line_ids').filtered(lambda l: not l.move_id):
+            line.create_move()
 
     @api.depends(
         'debit_account_id.deprecated', 'credit_account_id.deprecated')
