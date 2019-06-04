@@ -746,3 +746,25 @@ class TestAccountInvoiceSpread(common.TransactionCase):
 
         with self.assertRaises(ValidationError):
             self.spread.unlink()
+
+    def test_15_invoice_refund(self):
+
+        self.invoice_line.spread_id = self.spread
+
+        # Validate invoice
+        self.invoice.action_invoice_open()
+        self.assertTrue(self.invoice.invoice_line_ids.mapped('spread_id'))
+
+        # Create a refund for invoice.
+        self.env['account.invoice.refund'].with_context({
+            'active_model': 'account.invoice',
+            'active_ids': [self.invoice.id],
+            'active_id': self.invoice.id
+        }).create(dict(
+            description='Invoice Refund',
+            filter_refund='refund',
+        )).invoice_refund()
+
+        # Invoice lines do not contain the lint to the spread.
+        refund = self.invoice.refund_invoice_ids[0]
+        self.assertFalse(refund.invoice_line_ids.mapped('spread_id'))
