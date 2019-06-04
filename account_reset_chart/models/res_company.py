@@ -42,6 +42,7 @@ class Company(models.Model):
             except KeyError:
                 logger.info('Model %s not found', model)
                 return
+            # pylint: disable=sql-injection
             self._cr.execute(
                 """
                 DELETE FROM ir_property ip

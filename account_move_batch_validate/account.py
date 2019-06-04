@@ -93,7 +93,7 @@ class account_move(orm.Model):
                                                eta=eta)
             values['post_job_uuid'] = job_uuid
             self.write(cr, uid, [move_id], values)
-            cr.commit()
+            cr.commit()  # pylint:disable=invalid-commit
 
     def _cancel_jobs(self, cr, uid, context=None):
         """Find moves where the mark has been removed and cancel the jobs.
@@ -141,7 +141,7 @@ class account_move(orm.Model):
                 {'to_post': True},
                 context=context)
             # users like to see the flag sooner rather than later
-            cr.commit()
+            cr.commit()  # pylint:disable=invalid-commit
         self._delay_post_marked(cr, uid, eta=eta, context=context)
 
     def unmark_for_posting(self, cr, uid, move_ids, context=None):
