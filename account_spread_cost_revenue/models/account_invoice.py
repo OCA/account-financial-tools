@@ -11,10 +11,9 @@ class AccountInvoice(models.Model):
     def action_move_create(self):
         """Invoked when validating the invoices."""
         res = super().action_move_create()
-        for invoice in self:
-            spreads = invoice.invoice_line_ids.mapped('spread_id')
-            spreads.compute_spread_board()
-            spreads.reconcile_spread_moves()
+        spreads = self.mapped('invoice_line_ids.spread_id')
+        spreads.compute_spread_board()
+        spreads.reconcile_spread_moves()
         return res
 
     @api.multi
@@ -37,18 +36,18 @@ class AccountInvoice(models.Model):
         """Cancel the spread lines and their related moves when
         the invoice is canceled."""
         res = super().action_cancel()
-        for invoice_line in self.mapped('invoice_line_ids'):
-            moves = invoice_line.spread_id.line_ids.mapped('move_id')
-            moves.button_cancel()
-            moves.unlink()
-            invoice_line.spread_id.line_ids.unlink()
+        spread_lines = self.mapped('invoice_line_ids.spread_id.line_ids')
+        moves = spread_lines.mapped('move_id')
+        moves.button_cancel()
+        moves.unlink()
+        spread_lines.unlink()
         return res
 
     @api.model
     def _refund_cleanup_lines(self, lines):
-        result = super(AccountInvoice, self)._refund_cleanup_lines(lines)
+        result = super()._refund_cleanup_lines(lines)
         for i, line in enumerate(lines):
-            for name, field in line._fields.items():
+            for name in line._fields.keys():
                 if name == 'spread_id':
                     result[i][2][name] = False
                     break
