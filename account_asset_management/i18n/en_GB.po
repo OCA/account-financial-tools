@@ -354,13 +354,13 @@ msgid "Compute Assets"
 msgstr "Compute Assets"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:31
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:30
 #, fuzzy, python-format
 msgid "Compute Assets errors"
 msgstr "Compute Assets"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:33
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:32
 #, fuzzy, python-format
 msgid "Compute Assets result"
 msgstr "Compute Assets"
@@ -387,8 +387,8 @@ msgid "Create an asset by product item"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:45
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:59
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:44
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:58
 #, python-format
 msgid "Created Asset Moves"
 msgstr "Created Asset Moves"

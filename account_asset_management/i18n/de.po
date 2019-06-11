@@ -375,13 +375,13 @@ msgid "Compute Assets"
 msgstr "Berechne Anlagen"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:31
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:30
 #, python-format
 msgid "Compute Assets errors"
 msgstr "Ermittele Anlagenfehler"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:33
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:32
 #, python-format
 msgid "Compute Assets result"
 msgstr "Ergebnis der Anlagenberechnung"
@@ -407,8 +407,8 @@ msgid "Create an asset by product item"
 msgstr "Erzeuge eine Anlage je Einzelprodukt"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:45
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:59
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:44
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:58
 #, python-format
 msgid "Created Asset Moves"
 msgstr "Erzeugte Anlagenbuchungen"
