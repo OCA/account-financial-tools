@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-account_chart_update',
         'odoo12-addon-account_check_deposit',
         'odoo12-addon-account_document_reversal',
+        'odoo12-addon-account_fiscal_position_vat_check',
         'odoo12-addon-account_fiscal_year',
         'odoo12-addon-account_group_menu',
         'odoo12-addon-account_invoice_constraint_chronology',
