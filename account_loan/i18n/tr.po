@@ -668,7 +668,7 @@ msgid "Some invoices are not created"
 msgstr ""
 
 #. module: account_loan
-#: code:addons/account_loan/model/account_loan_line.py:324
+#: code:addons/account_loan/model/account_loan_line.py:334
 #, python-format
 msgid "Some invoices must be created first"
 msgstr ""
@@ -680,7 +680,7 @@ msgid "Some moves are not created"
 msgstr ""
 
 #. module: account_loan
-#: code:addons/account_loan/model/account_loan_line.py:306
+#: code:addons/account_loan/model/account_loan_line.py:316
 #, python-format
 msgid "Some moves must be created first"
 msgstr ""
