@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo11-addon-account_credit_control',
         'odoo11-addon-account_credit_control_dunning_fees',
         'odoo11-addon-account_document_reversal',
+        'odoo11-addon-account_fiscal_position_vat_check',
         'odoo11-addon-account_fiscal_year',
         'odoo11-addon-account_group_menu',
         'odoo11-addon-account_invoice_constraint_chronology',
