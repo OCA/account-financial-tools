@@ -277,7 +277,7 @@ class AccountLoan(models.Model):
         for record in self:
             if record.loan_type == 'fixed-annuity':
                 record.fixed_amount = - record.currency_id.round(numpy.pmt(
-                    record.rate_period / 100,
+                    record.loan_rate() / 100,
                     record.fixed_periods,
                     record.fixed_loan_amount,
                     -record.residual_amount
@@ -308,8 +308,12 @@ class AccountLoan(models.Model):
     @api.depends('rate', 'method_period', 'rate_type')
     def _compute_rate_period(self):
         for record in self:
-            record.rate_period = record.compute_rate(
-                record.rate, record.rate_type, record.method_period)
+            record.rate_period = record.loan_rate()
+
+    def loan_rate(self):
+        return self.compute_rate(
+            self.rate, self.rate_type, self.method_period
+        )
 
     @api.depends('journal_id', 'company_id')
     def _compute_currency(self):
