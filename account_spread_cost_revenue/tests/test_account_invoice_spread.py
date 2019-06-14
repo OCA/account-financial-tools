@@ -512,10 +512,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         invoice_mls = self.invoice.move_id.mapped('line_ids')
         self.assertTrue(invoice_mls)
 
-        count_balance_sheet = 0
-        for invoice_ml in invoice_mls:
-            if invoice_ml.account_id == balance_sheet:
-                count_balance_sheet += 1
+        count_balance_sheet = len(invoice_mls.filtered(
+            lambda x: x.account_id == balance_sheet))
         self.assertEqual(count_balance_sheet, 1)
 
         self.spread.line_ids.create_and_reconcile_moves()
@@ -572,10 +570,8 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         invoice_mls = self.invoice.move_id.mapped('line_ids')
         self.assertTrue(invoice_mls)
 
-        count_balance_sheet = 0
-        for invoice_ml in invoice_mls:
-            if invoice_ml.account_id == balance_sheet:
-                count_balance_sheet += 1
+        count_balance_sheet = len(invoice_mls.filtered(
+            lambda x: x.account_id == balance_sheet))
         self.assertEqual(count_balance_sheet, 1)
 
         self.spread.company_id.force_move_auto_post = True
