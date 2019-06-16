@@ -19,77 +19,73 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_cost_center
-#: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
-msgid ""
-"<p class=\"oe_view_nocontent_create\">\n"
-"                    Click to add a new event.\n"
-"                </p>\n"
-"                <p>\n"
-"                    Cost centers provide an extra analytic dimension\n"
-"                </p>\n"
-"            "
-msgstr ""
-
-#. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_cost_center
 msgid "Account Cost Center"
 msgstr ""
 
 #. module: account_cost_center
-#: view:account.invoice.report:account_cost_center.view_account_invoice_report_search
-#: field:account.invoice.report,account_analytic_id:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_report_account_analytic_id
+#: model:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Analytic Account"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,code:0
+#: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
+msgid "Click to add a new cost center."
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_code
 msgid "Code"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,company_id:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_company_id
 msgid "Company"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.invoice,cost_center_id:0
-#: field:account.invoice.line,cost_center_id:0
-#: view:account.invoice.report:account_cost_center.view_account_invoice_report_search
-#: field:account.invoice.report,cost_center_id:0
-#: field:account.move.line,cost_center_id:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_line_cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_invoice_report_cost_center_id
+#: model:ir.model.fields,field_description:account_cost_center.field_account_move_line_cost_center_id
+#: model:ir.ui.view,arch_db:account_cost_center.view_account_invoice_report_search
 msgid "Cost Center"
 msgstr ""
 
 #. module: account_cost_center
-#: view:account.cost.center:account_cost_center.account_cost_center_filter
-#: view:account.cost.center:account_cost_center.account_cost_center_tree
 #: model:ir.actions.act_window,name:account_cost_center.account_cost_center_action
 #: model:ir.ui.menu,name:account_cost_center.cost_center_menu
 msgid "Cost Centers"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,create_uid:0
+#: model:ir.actions.act_window,help:account_cost_center.account_cost_center_action
+msgid "Cost centers provide an extra analytic dimension"
+msgstr ""
+
+#. module: account_cost_center
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_create_uid
 msgid "Created by"
 msgstr "ایجاد شده توسط"
 
 #. module: account_cost_center
-#: field:account.cost.center,create_date:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_create_date
 msgid "Created on"
 msgstr "ایجاد شده در"
 
 #. module: account_cost_center
-#: help:account.invoice,cost_center_id:0
+#: model:ir.model.fields,help:account_cost_center.field_account_invoice_cost_center_id
 msgid "Default Cost Center"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,display_name:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_display_name
 msgid "Display Name"
 msgstr "نام نمایشی"
 
 #. module: account_cost_center
-#: field:account.cost.center,id:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_id
 msgid "ID"
 msgstr "شناسه"
 
@@ -110,36 +106,30 @@ msgstr ""
 
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
-msgid "Journal Items"
+msgid "Journal Item"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,__last_update:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center___last_update
 msgid "Last Modified on"
 msgstr "تاریخ آخرین به‌روزرسانی"
 
 #. module: account_cost_center
-#: field:account.cost.center,write_uid:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_write_uid
 msgid "Last Updated by"
 msgstr "آخرین به روز رسانی توسط"
 
 #. module: account_cost_center
-#: field:account.cost.center,write_date:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_write_date
 msgid "Last Updated on"
 msgstr "آخرین به روز رسانی در"
 
 #. module: account_cost_center
-#: view:account.cost.center:account_cost_center.account_cost_center_filter
+#: model:ir.ui.view,arch_db:account_cost_center.account_cost_center_filter
 msgid "Name/Code"
 msgstr ""
 
 #. module: account_cost_center
-#: field:account.cost.center,name:0
+#: model:ir.model.fields,field_description:account_cost_center.field_account_cost_center_name
 msgid "Title"
 msgstr "عنوان"
-
-#. module: account_cost_center
-#: view:account.invoice:account_cost_center.invoice_form_inherit
-#: view:account.invoice:account_cost_center.invoice_supplier_form_inherit
-msgid "cost_center_id"
-msgstr ""
