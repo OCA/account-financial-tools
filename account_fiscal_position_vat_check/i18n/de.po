@@ -20,6 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Rechnung"
@@ -29,11 +34,6 @@ msgstr "Rechnung"
 #, python-format
 msgid "Missing VAT number:"
 msgstr "Fehlende USt-Nummer:"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Partner"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -58,3 +58,6 @@ msgid ""
 msgstr ""
 "Sie haben die Fiskalposition '%s' so festgelegt, dass der Kunde eine USt-"
 "Nummer haben muss. Diese fehlt jedoch."
+
+#~ msgid "Partner"
+#~ msgstr "Partner"
