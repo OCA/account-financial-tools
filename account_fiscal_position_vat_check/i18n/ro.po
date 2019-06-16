@@ -20,6 +20,11 @@ msgstr ""
 "2:1));\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Factura"
@@ -29,11 +34,6 @@ msgstr "Factura"
 #, python-format
 msgid "Missing VAT number:"
 msgstr ""
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Partener"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -52,3 +52,6 @@ msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
 "VAT number, but the VAT number is missing."
 msgstr ""
+
+#~ msgid "Partner"
+#~ msgstr "Partener"
