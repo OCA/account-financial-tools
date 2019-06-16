@@ -30,7 +30,7 @@ msgid "Journal Item"
 msgstr "Item do Diário"
 
 #. module: account_move_line_purchase_info
-#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line_purchase_line_id
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_line_id
 msgid "Purchase Order Line"
 msgstr ""
 
