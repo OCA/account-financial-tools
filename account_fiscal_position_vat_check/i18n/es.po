@@ -20,6 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
 msgid "Invoice"
 msgstr "Factura"
@@ -29,11 +34,6 @@ msgstr "Factura"
 #, python-format
 msgid "Missing VAT number:"
 msgstr "NIF no presente"
-
-#. module: account_fiscal_position_vat_check
-#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
-msgid "Partner"
-msgstr "Empresa"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -58,3 +58,6 @@ msgid ""
 msgstr ""
 "Ha establecido la posición fiscal '%s' que requiere que el cliente tenga un "
 "NIF, pero el NIF no está establecido."
+
+#~ msgid "Partner"
+#~ msgstr "Empresa"
