@@ -142,14 +142,14 @@ class TestAccountPaymentIntransit(SavepointCase):
             'partner_id': self.partner_agrolait.id,
             'journal_id': self.journal_account.id,
             'bank_journal_id': self.bank_journal.id,
-            'receipt_date': time.strftime('%Y-%m-%d'),
+            'intransit_date': time.strftime('%Y-%m-%d'),
             'currency_id': curr_id or self.main_company.currency_id.id,
             'manual_total_amount': allocation or 8
         })
         for move_line in move_lines:
             self.payment_intransit_line_model.create({
                 'move_line_id': move_line.id,
-                'receipt_type': 'cash',
+                'payment_intransit_type': 'cash',
                 'allocation': allocation or 10,
                 'intransit_id': payment_intransit.id
             })
@@ -174,7 +174,7 @@ class TestAccountPaymentIntransit(SavepointCase):
         return register_payments.create_payments()
 
     def test_1_create_payment_intransit(self):
-        """ Create payment receipt from invoice. """
+        """ Create payment intransit from invoice. """
         inv_1 = self.create_invoice(
             amount=100, currency_id=self.currency_eur_id)
         inv_2 = self.create_invoice(

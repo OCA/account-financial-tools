@@ -72,8 +72,8 @@ class AccountPaymentIntransit(models.Model):
     @api.depends('manual_total_amount')
     def _compute_payment_intransit(self):
         res = super(AccountPaymentIntransit, self)._compute_payment_intransit()
-        for receipt in self:
-            receipt.total_amount = receipt.manual_total_amount
+        for payment in self:
+            payment.total_amount = payment.manual_total_amount
         return res
 
     @api.multi
@@ -103,5 +103,5 @@ class AccountPaymentIntransit(models.Model):
 
     @api.depends('total_amount')
     def _compute_payment_difference(self):
-        allocation = sum(self.receipt_line_ids.mapped('allocation'))
+        allocation = sum(self.intransit_line_ids.mapped('allocation'))
         self.payment_difference = allocation - self.total_amount
