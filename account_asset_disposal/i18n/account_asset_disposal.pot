@@ -1,0 +1,151 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_asset_disposal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_category
+msgid "Asset category"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:40
+#, python-format
+msgid "Asset depreciation"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:24
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
+#, python-format
+msgid "Asset disposal"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:171
+#, python-format
+msgid "Asset disposal cancelled."
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:136
+#, python-format
+msgid "Asset disposed."
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:55
+#, python-format
+msgid "Asset loss"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_asset
+msgid "Asset/Revenue Recognition"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
+msgid "Close"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:143
+#, python-format
+msgid "Disposal Move"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:146
+#, python-format
+msgid "Disposal Moves"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_date
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_disposal_date
+msgid "Disposal date"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_asset_disposal_move_id
+msgid "Disposal move"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
+msgid "Dispose"
+msgstr ""
+
+#. module: account_asset_disposal
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:91
+#, python-format
+msgid "Dispose Asset"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
+msgid "Dispose asset"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_id
+msgid "ID"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_category_account_loss_id
+#: model:ir.model.fields,field_description:account_asset_disposal.field_account_asset_disposal_wizard_loss_account_id
+msgid "Loss Account"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.ui.view,arch_db:account_asset_disposal.view_account_asset_asset_form
+msgid "Undo disposal"
+msgstr ""
+
+#. module: account_asset_disposal
+#: model:ir.model,name:account_asset_disposal.model_account_asset_disposal_wizard
+msgid "account.asset.disposal.wizard"
+msgstr ""
+
