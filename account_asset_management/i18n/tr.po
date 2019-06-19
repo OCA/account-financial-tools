@@ -1082,7 +1082,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:135
+#: code:addons/account_asset_management/models/account_move.py:139
 #, python-format
 msgid "This option should only be used for a single id at a time."
 msgstr ""
@@ -1152,7 +1152,7 @@ msgstr "Yıl"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:69
-#: code:addons/account_asset_management/models/account_move.py:130
+#: code:addons/account_asset_management/models/account_move.py:134
 #, python-format
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
@@ -1197,7 +1197,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:126
+#: code:addons/account_asset_management/models/account_move.py:130
 #, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
