@@ -116,15 +116,19 @@ class AccountMoveLine(models.Model):
     @api.multi
     def write(self, vals):
         if (
-            self.mapped('asset_id') and
             set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE) and
             not (
                 self.env.context.get('allow_asset_removal') and
                 list(vals.keys()) == ['asset_id'])
         ):
-            raise UserError(
-                _("You cannot change an accounting item "
-                  "linked to an asset depreciation line."))
+            # Check if at least one asset is linked to a move
+            linked_asset = False
+            for move in self:
+                linked_asset = move.asset_id
+                if linked_asset:
+                    raise UserError(
+                        _("You cannot change an accounting item "
+                          "linked to an asset depreciation line."))
         if vals.get('asset_id'):
             raise UserError(
                 _("You are not allowed to link "
