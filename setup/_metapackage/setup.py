@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo12-addon-account_move_fiscal_year',
         'odoo12-addon-account_move_line_purchase_info',
         'odoo12-addon-account_move_line_tax_editable',
+        'odoo12-addon-account_netting',
         'odoo12-addon-account_partner_required',
         'odoo12-addon-account_renumber',
         'odoo12-addon-account_tag_menu',
