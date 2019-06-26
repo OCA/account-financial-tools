@@ -166,6 +166,19 @@ class AccountLoanLine(models.Model):
                 self.pending_principal_amount,
                 -self.loan_id.residual_amount
             ))
+        if (
+            self.loan_type == 'fixed-annuity-begin' and
+            self.loan_id.round_on_end
+        ):
+            return self.loan_id.fixed_amount
+        if self.loan_type == 'fixed-annuity-begin':
+            return self.currency_id.round(- numpy.pmt(
+                self.loan_id.loan_rate() / 100,
+                self.loan_id.periods - self.sequence + 1,
+                self.pending_principal_amount,
+                -self.loan_id.residual_amount,
+                when='begin'
+            ))
 
     def check_amount(self):
         """Recompute amounts if the annuity has not been processed"""
@@ -177,7 +190,7 @@ class AccountLoanLine(models.Model):
         if (
             self.sequence == self.loan_id.periods and
             self.loan_id.round_on_end and
-            self.loan_type == 'fixed-annuity'
+            self.loan_type in ['fixed-annuity', 'fixed-annuity-begin']
         ):
             self.interests_amount = self.currency_id.round(
                 self.loan_id.fixed_amount - self.pending_principal_amount +
@@ -186,12 +199,23 @@ class AccountLoanLine(models.Model):
             self.payment_amount = self.currency_id.round(self.compute_amount())
         elif not self.loan_id.round_on_end:
             self.interests_amount = self.currency_id.round(
-                self.pending_principal_amount * self.loan_id.loan_rate() / 100)
+                self.compute_interest())
             self.payment_amount = self.currency_id.round(self.compute_amount())
         else:
-            self.interests_amount = (
-                self.pending_principal_amount * self.loan_id.loan_rate() / 100)
+            self.interests_amount = self.compute_interest()
             self.payment_amount = self.compute_amount()
+
+    def compute_interest(self):
+        if self.loan_type == 'fixed-annuity-begin':
+            return -numpy.ipmt(
+                self.loan_id.loan_rate() / 100,
+                2,
+                self.loan_id.periods - self.sequence + 1,
+                self.pending_principal_amount,
+                -self.loan_id.residual_amount,
+                when='begin'
+            )
+        return self.pending_principal_amount * self.loan_id.loan_rate() / 100
 
     @api.multi
     def check_move_amount(self):
