@@ -1,8 +1,8 @@
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Account Loan",
-    "version": "12.0.1.0.0",
+    "name": "Account Loan management",
+    "version": "12.0.1.1.0",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "http://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
