@@ -107,6 +107,7 @@ class AccountLoan(models.Model):
     loan_type = fields.Selection(
         [
             ('fixed-annuity', 'Fixed Annuity'),
+            ('fixed-annuity-begin', 'Fixed Annuity Begin'),
             ('fixed-principal', 'Fixed Principal'),
             ('interest', 'Only interest'),
         ],
@@ -281,6 +282,14 @@ class AccountLoan(models.Model):
                     record.fixed_periods,
                     record.fixed_loan_amount,
                     -record.residual_amount
+                ))
+            elif record.loan_type == 'fixed-annuity-begin':
+                record.fixed_amount = - record.currency_id.round(numpy.pmt(
+                    record.loan_rate() / 100,
+                    record.fixed_periods,
+                    record.fixed_loan_amount,
+                    -record.residual_amount,
+                    when='begin'
                 ))
             elif record.loan_type == 'fixed-principal':
                 record.fixed_amount = record.currency_id.round(
