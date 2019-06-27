@@ -127,8 +127,8 @@ msgid "Depreciation Base"
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:612
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:616
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:615
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:619
 #, python-format
 msgid "Depreciation Table error for asset %s !"
 msgstr ""
@@ -253,7 +253,7 @@ msgid "Salvage Value"
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:418
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:421
 #, python-format
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_acquisition_fields' "
@@ -261,22 +261,22 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:517
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:520
 #, python-format
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_active_fields' list !"
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:736
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:739
 #, python-format
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_removal_fields' list !"
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:527
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:746
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:530
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:749
 #, python-format
 msgid ""
 "The current version of the asset mangement reporting module supports only "
@@ -296,7 +296,7 @@ msgid "Totals"
 msgstr ""
 
 #. module: account_asset_management_xls
-#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:605
+#: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:608
 #, python-format
 msgid ""
 "You can not report on a Fiscal Year with unposted entries in prior years. "
