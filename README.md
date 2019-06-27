@@ -29,7 +29,7 @@ addon | version | summary
 [account_asset_management](account_asset_management/) | 10.0.3.1.0 | Assets Management
 [account_asset_management_import](account_asset_management_import/) | 10.0.1.0.0 | Fixed Assets import
 [account_asset_management_method_number_end](account_asset_management_method_number_end/) | 10.0.1.0.0 | Financial asset management - method Number & End
-[account_asset_management_xls](account_asset_management_xls/) | 10.0.1.0.0 | Assets Management Excel reporting
+[account_asset_management_xls](account_asset_management_xls/) | 10.0.1.0.1 | Assets Management Excel reporting
 [account_balance_line](account_balance_line/) | 10.0.1.0.0 | Display balance totals in move line view
 [account_chart_update](account_chart_update/) | 10.0.3.1.0 | Wizard to update a company's account chart from a template
 [account_check_deposit](account_check_deposit/) | 10.0.1.0.0 | Manage deposit of checks to the bank
