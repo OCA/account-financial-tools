@@ -24,32 +24,32 @@ msgid "Asset category"
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:41
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:40
 #, fuzzy, python-format
 msgid "Asset depreciation"
 msgstr "Abschreibungsposition"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:25
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:24
 #: model:ir.ui.view,arch_db:account_asset_disposal.account_asset_disposal_wizard_form
 #, fuzzy, python-format
 msgid "Asset disposal"
 msgstr "Entsorgung Rückgängig"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:172
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:171
 #, python-format
 msgid "Asset disposal cancelled."
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:137
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:136
 #, python-format
 msgid "Asset disposed."
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:56
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:55
 #, python-format
 msgid "Asset loss"
 msgstr ""
@@ -81,13 +81,13 @@ msgid "Display Name"
 msgstr "Entsorgungsdatum"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:144
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:143
 #, fuzzy, python-format
 msgid "Disposal Move"
 msgstr "Entsorgungsbuchung"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:147
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:146
 #, fuzzy, python-format
 msgid "Disposal Moves"
 msgstr "Entsorgungsbuchung"
@@ -110,7 +110,7 @@ msgid "Dispose"
 msgstr "Entsorgungsdatum"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:92
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:91
 #, fuzzy, python-format
 msgid "Dispose Asset"
 msgstr "Entsorgungsdatum"
