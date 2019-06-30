@@ -7,12 +7,12 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, models
-from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
 class AccountFiscalYear(models.Model):
+
     _inherit = 'account.fiscal.year'
 
     @api.model
