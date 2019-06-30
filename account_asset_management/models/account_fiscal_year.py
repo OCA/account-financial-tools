@@ -11,8 +11,8 @@ from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
-class AccountFiscalYear(models.Model):
 
+class AccountFiscalYear(models.Model):
     _inherit = 'account.fiscal.year'
 
     @api.model
