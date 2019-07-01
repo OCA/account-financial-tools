@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -29,8 +28,11 @@ class TestJournalLockDate(common.TransactionCase):
         self.journal = self.browse_ref("account.bank_journal")
 
     def test_journal_lock_date(self):
+        # remove the user from all groups
+        self.env.user.write({'groups_id': [(5, False, False)]})
+        # add the user to group account user
         self.env.user.write({
-            'groups_id': [(3, self.ref('account.group_account_manager'))],
+            'groups_id': [(4, self.ref('account.group_account_user'), False)],
         })
         self.assertFalse(self.env.user.has_group(
             'account.group_account_manager'))

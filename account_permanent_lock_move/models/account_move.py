@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 Camptocamp SA (Matthieu Dietrich)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, models
@@ -11,7 +10,8 @@ class AccountMove(models.Model):
     @api.multi
     def _check_lock_date(self):
         for move in self:
-            if move.date <= move.company_id.permanent_lock_date:
+            if move.company_id.permanent_lock_date \
+                    and move.date <= move.company_id.permanent_lock_date:
                 raise UserError(_(
                     "You cannot add/modify entries prior to and inclusive "
                     "of the permanent lock date."))
