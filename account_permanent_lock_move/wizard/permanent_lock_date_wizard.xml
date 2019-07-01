@@ -1,5 +1,5 @@
 <odoo>
-    <record id="permanent_lock_date_wizard_form" model="ir.ui.view">
+    <record id="permanent_lock_date_wizard_view_form" model="ir.ui.view">
         <field name="name">permanent.lock.date.wizard.form</field>
         <field name="model">permanent.lock.date.wizard</field>
         <field name="type">form</field>
