@@ -29,13 +29,13 @@ msgid "Check this box to mark the move for batch posting"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/models/account_move.py:30
+#: code:addons/account_move_batch_validate/models/account_move.py:39
 #, python-format
 msgid "Move has been posted successfully."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/models/account_move.py:32
+#: code:addons/account_move_batch_validate/models/account_move.py:41
 #, python-format
 msgid "Nothing to do because the record has been deleted."
 msgstr ""
@@ -51,7 +51,7 @@ msgid "Seconds to wait before starting the jobs"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: code:addons/account_move_batch_validate/models/account_move.py:81
+#: code:addons/account_move_batch_validate/models/account_move.py:90
 #, python-format
 msgid "Task set to Done because the user unmarked the move."
 msgstr ""
