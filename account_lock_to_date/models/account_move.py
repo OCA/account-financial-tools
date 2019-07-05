@@ -12,11 +12,11 @@ class AccountMove(models.Model):
         res = super()._check_lock_date()
         for move in self:
             lock_to_date = min(
-                move.company_id.period_lock_to_date or '0000-00-00',
-                move.company_id.fiscalyear_lock_to_date or '0000-00-00')
+                move.company_id.period_lock_to_date,
+                move.company_id.fiscalyear_lock_to_date) or False
             if self.user_has_groups('account.group_account_manager'):
-                lock_to_date = move.company_id.fiscalyear_lock_to_date
-            if lock_to_date and move.date >= (lock_to_date or '0000-00-00'):
+                lock_to_date = move.company_id.fiscalyear_lock_to_date or False
+            if lock_to_date and move.date >= lock_to_date:
                 if self.user_has_groups('account.group_account_manager'):
                     message = _("You cannot add/modify entries after and "
                                 "inclusive of the lock to date %s") % (
