@@ -28,15 +28,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2017-01-19 20:17+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2019-07-06 22:43+0000\n"
+"Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1082
@@ -45,6 +46,8 @@ msgid ""
 "\n"
 "Error while processing asset '%s': %s"
 msgstr ""
+"\n"
+"Erro enquanto processava o patrimônio '%s': %s"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -101,7 +104,7 @@ msgstr "Conta analítica"
 #. module: account_asset_management
 #: model:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
-msgstr ""
+msgstr "Você tem certeza ?"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
