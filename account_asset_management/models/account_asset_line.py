@@ -43,6 +43,10 @@ class AccountAssetLine(models.Model):
         string='Amount Already Depreciated',
         store=True)
     line_date = fields.Date(string='Date', required=True)
+    line_days = fields.Integer(
+        string='Days',
+        readonly=True,
+    )
     move_id = fields.Many2one(
         comodel_name='account.move',
         string='Depreciation Entry', readonly=True)
