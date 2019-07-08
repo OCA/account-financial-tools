@@ -515,3 +515,42 @@ class TestAssetManagement(SavepointCase):
             dlines = dlines.sorted(key=lambda l: l.line_date)
             self.assertAlmostEqual(dlines[0].depreciated_value, 0.0)
             self.assertAlmostEqual(dlines[-1].remaining_value, 0.0)
+
+    def test_12_prorata_days_calc(self):
+        """Prorata temporis depreciation with days calc option."""
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 3333,
+            'salvage_value': 0,
+            'date_start': time.strftime('%Y-07-07'),
+            'method_time': 'year',
+            'method_number': 5,
+            'method_period': 'month',
+            'prorata': True,
+            'days_calc': True,
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        day_rate = 0.0
+        if calendar.isleap(date.today().year) or \
+                calendar.isleap(date.today().year + 1):
+            day_rate = 1.8243  # 3333 / 1827 depreciation days
+        else:
+            day_rate = 1.8253  # 3333 / 1826 depreciation days
+        for i in range(1, 10):
+            self.assertAlmostEqual(
+                asset.depreciation_line_ids[i].amount,
+                asset.depreciation_line_ids[i].line_days * day_rate, places=2)
+
+        # Last depreciation remaining
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].amount, 10.95, places=2)
+        # if calendar.isleap(date.today().year) or \
+        #         calendar.isleap(date.today().year + 1):
+        #     self.assertAlmostEqual(
+        #         asset.depreciation_line_ids[-1].amount, 10.95, places=2)
+        # else:
+        #     self.assertAlmostEqual(
+        #         asset.depreciation_line_ids[-1].amount, 2.4, places=2)
