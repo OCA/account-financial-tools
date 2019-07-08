@@ -7,3 +7,5 @@
 - Akim Juillerat <akim.juillerat@camptocamp.com>
 - Henrik Norlin (Apps2GROW)
 - Maxence Groine <mgroine@fiefmanage.ch>
+- Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+- Saran Lim. <saranl@ecosoft.co.th>
