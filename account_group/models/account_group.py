@@ -9,7 +9,6 @@ from odoo.osv import expression
 class AccountGroup(models.Model):
     _name = 'account.group'
     _parent_store = True
-    _parent_order = 'name'
     _order = 'code_prefix'
 
     parent_id = fields.Many2one(

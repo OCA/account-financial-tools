@@ -4,7 +4,7 @@
 {
     "name": "Groups for accounts",
     "summary": "Use v11 account groups feature",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Tecnativa,"
