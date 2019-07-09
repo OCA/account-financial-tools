@@ -8,46 +8,46 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:56+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2019-07-09 01:43+0000\n"
+"Last-Translator: Eduardo Aparicio <eduardo.caparica@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Conta"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_account_type
 msgid "Account Type"
-msgstr ""
+msgstr "Tipo de Conta"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Always"
-msgstr ""
+msgstr "Sempre"
 
 #. module: account_partner_required
 #: model:ir.model,name:account_partner_required.model_account_move_line
-#, fuzzy
 msgid "Journal Item"
-msgstr "Itens do Diário"
+msgstr "Item do Diário"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #. module: account_partner_required
 #: selection:account.account.type,partner_policy:0
 msgid "Optional"
-msgstr ""
+msgstr "Opcional"
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/models/account.py:55
@@ -56,6 +56,8 @@ msgid ""
 "Partner policy is set to 'Always' with account '%s' but the partner is "
 "missing in the account move line with label '%s'."
 msgstr ""
+"Política do Parceiro está marcada como 'Sempre' com a conta '%s' mas falta "
+"Parceiro no lançamento contábil de rótulo '%s'."
 
 #. module: account_partner_required
 #: code:addons/account_partner_required/models/account.py:61
@@ -64,11 +66,13 @@ msgid ""
 "Partner policy is set to 'Never' with account '%s' but the account move line "
 "with label '%s' has a partner '%s'."
 msgstr ""
+"Política do Parceiro está marcada como 'Nunca' com a conta '%s' mas o "
+"lançamento contábil de rótulo '%s' contém um Parceiro '%s'."
 
 #. module: account_partner_required
 #: model:ir.model.fields,field_description:account_partner_required.field_account_account_type__partner_policy
 msgid "Policy for Partner Field"
-msgstr ""
+msgstr "Política para o campo Parceiro"
 
 #. module: account_partner_required
 #: model:ir.model.fields,help:account_partner_required.field_account_account_type__partner_policy
@@ -79,3 +83,8 @@ msgid ""
 "message if there is no partner ; if you select 'Never', the accountant will "
 "get an error message if a partner is present."
 msgstr ""
+"Marque a política do campo Parceiro: Se você selecionar 'Opcional', o "
+"contador fica livre para indicar um parceiro na movimentação deste tipo de "
+"conta; se você selecionar 'Sempre', o contador receberá uma mensagem de erro "
+"caso não tenha um Parceiro; se você selecionar 'Nunca', o contador receberá "
+"uma mensagem de erro se houver um Parceiro."
