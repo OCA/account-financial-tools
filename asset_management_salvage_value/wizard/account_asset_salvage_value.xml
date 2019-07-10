@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_asset_salvage_value" model="ir.ui.view">
+        <field name="name">account.asset.salvage.value.form</field>
+        <field name="model">account.asset.edit.salvage</field>
+        <field name="arch" type="xml">
+            <form string="Salvage Value">
+                <group>
+                    <group>
+                        <field name="salvage_value"/>
+                    </group>
+                    <group>
+                        <field name="asset_id" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Confirm" name="action_confirm" type="object" class="btn-primary"/>
+                    <button string="Discard" class="btn-secondary" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="action_view_asset_salvage_value" model="ir.actions.act_window">
+        <field name="name">Edit Salvage Value</field>
+        <field name="res_model">account.asset.edit.salvage</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_asset_salvage_value"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

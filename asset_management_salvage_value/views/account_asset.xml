@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_asset_view_form" model="ir.ui.view">
+        <field name="name">account.asset.form</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset_management.account_asset_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[1]/group//group[2]" position="replace">
+                <group>
+                    <label for="salvage_value"/>
+                    <div class="o_row">
+                        <field name="salvage_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                            attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
+                        <button name="button_edit_salvage"  type="object" icon="fa-pencil" aria-label="Edit" title="Edit Salvage Value"
+                            attrs="{'invisible': ['|', ('move_line_check', '=', False), ('state', '!=', 'draft')]}"/>
+
+                    </div>
+                    <field name="date_remove"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
