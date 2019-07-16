@@ -39,14 +39,8 @@ class CA_BOC_getter(Currency_getter_interface):
                              max_delta_days):
         """implementation of abstract method of Curreny_getter_interface"""
 
-        # as of Jan 2014 BOC is publishing noon rates for about 60 currencies
-        # currency codes in the XML file have the suffix "_NOON" or "_CLOSE" as
-        # of April 2015
-        url = ('http://www.bankofcanada.ca/stats/assets/'
-               'rates_rss/noon/en_%s.xml')
-        # closing rates are available as well (please note there are only 12
-        # currencies reported):
-        # http://www.bankofcanada.ca/stats/assets/rates_rss/closing/en_%s.xml
+        # as of Feb 2019 BOC is publishing daily average rates for 26 currencies
+        url = ('https://www.bankofcanada.ca/valet/fx_rss/FX%sCAD')
 
         # We do not want to update the main currency
         if main_currency in currency_array:

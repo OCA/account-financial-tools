@@ -30,10 +30,9 @@ The module is able to use the following sources:
 5. Banxico for USD & MXN (created by Agustín Cruz)
    Updated daily
 
-6. Bank of Canada - noon rates (by Daniel Dico - OERP Canada)
-   Using RSS feeds from: http://www.bankofcanada.ca/rss-feeds/
+6. Bank of Canada - Daily average rates (by Daniel Dico - OERP Canada)
+   Using RSS feeds from: https://www.bankofcanada.ca/rss-feeds/
    Updated daily (except weekends and holidays).
-   Noon and Closing rates available - this module is using the noon rates.
 
 7. National Bank of Romania (Banca Nationala a Romaniei)
 
