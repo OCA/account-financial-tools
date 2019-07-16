@@ -8,7 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <menuitem id="menu_account_coa_settings"
         sequence="50"
-        name="Chart of Accounts"
+        name="Templates"
         parent="account.menu_finance_configuration"/>
 
 </odoo>
