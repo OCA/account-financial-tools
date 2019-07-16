@@ -22,8 +22,8 @@ msgstr "Modèles de comptes"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_coa_settings
-msgid "Chart of Accounts"
-msgstr "Plan comptable"
+msgid "Templates"
+msgstr "Modèles"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_chart_template
