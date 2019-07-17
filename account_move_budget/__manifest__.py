@@ -4,7 +4,7 @@
 {
     "name": "Account Move Budget",
     "summary": "Create Accounting Budgets",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Eficent, "
