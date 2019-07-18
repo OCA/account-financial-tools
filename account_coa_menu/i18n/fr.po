@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * account_coa_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-10 13:18+0000\n"
+"PO-Revision-Date: 2019-07-10 13:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_coa_menu
+#: model:ir.ui.menu,name:account_coa_menu.menu_account_account_template
+msgid "Account Templates"
+msgstr "Modèles de comptes"
+
+#. module: account_coa_menu
+#: model:ir.ui.menu,name:account_coa_menu.menu_account_chart_template
+msgid "Chart of Accounts Templates"
+msgstr "Modèles de plans comptables"
+
+#. module: account_coa_menu
+#: model:ir.ui.menu,name:account_coa_menu.menu_account_fiscal_position_template
+msgid "Fiscal Position Templates"
+msgstr "Modèles de positions fiscales"
+
+#. module: account_coa_menu
+#: model:ir.ui.menu,name:account_coa_menu.menu_account_tax_template
+msgid "Tax Templates"
+msgstr "Modèles de taxes"
+
+#. module: account_coa_menu
+#: model:ir.ui.menu,name:account_coa_menu.menu_account_coa_settings
+msgid "Templates"
+msgstr "Modèles"
