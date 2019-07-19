@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="fiscalyear" model="date.range.type">
+        <field name="name">Fiscal Year</field>
+        <field name="allow_overlap" eval="False"/>
+    </record>
+</odoo>
