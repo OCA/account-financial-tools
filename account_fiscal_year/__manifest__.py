@@ -19,6 +19,7 @@
         "date_range",
     ],
     "data": [
+        "data/date_range_type.xml",
         "views/account_views.xml"
     ],
 }
