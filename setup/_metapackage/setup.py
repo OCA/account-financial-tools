@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo12-addon-account_renumber',
         'odoo12-addon-account_tag_menu',
         'odoo12-addon-account_type_menu',
+        'odoo12-addon-base_vat_optional_vies',
     ],
     classifiers=[
         'Programming Language :: Python',
