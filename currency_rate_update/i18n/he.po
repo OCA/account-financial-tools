@@ -116,8 +116,8 @@ msgid "Display Name"
 msgstr "השם המוצג"
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:75
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:96
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:69
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:90
 #, python-format
 msgid "Error !"
 msgstr ""
@@ -128,13 +128,13 @@ msgid "European Central Bank"
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:77
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:71
 #, python-format
 msgid "Exchange data for %s is not reported by Bank of Canada."
 msgstr ""
 
 #. module: currency_rate_update
-#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:98
+#: code:addons/currency_rate_update/services/update_service_CA_BOC.py:92
 #, python-format
 msgid "Exchange data format error for Bank of Canada - %s !"
 msgstr ""
