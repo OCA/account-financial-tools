@@ -29,6 +29,11 @@ msgid "Date ranges"
 msgstr ""
 
 #. module: account_fiscal_year
+#: model:date.range.type,name:account_fiscal_year.fiscalyear
+msgid "Fiscal Year"
+msgstr ""
+
+#. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
 msgid "Fiscal Years"
 msgstr ""
