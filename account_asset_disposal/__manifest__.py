@@ -7,7 +7,7 @@
 {
     "name": "Account asset disposal",
     "summary": "Makes asset close account move automatically",
-    "version": "10.0.2.0.0",
+    "version": "10.0.2.0.1",
     "category": "Accounting & Finance",
     "website": "http://github.com/OCA/account-financial-tools",
     "author": "Tecnativa, "
