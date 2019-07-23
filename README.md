@@ -25,7 +25,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_asset_depr_line_cancel](account_asset_depr_line_cancel/) | 10.0.1.0.0 | Assets Management - Cancel button
-[account_asset_disposal](account_asset_disposal/) | 10.0.2.0.0 | Makes asset close account move automatically
+[account_asset_disposal](account_asset_disposal/) | 10.0.2.0.1 | Makes asset close account move automatically
 [account_asset_management](account_asset_management/) | 10.0.3.1.0 | Assets Management
 [account_asset_management_import](account_asset_management_import/) | 10.0.1.0.0 | Fixed Assets import
 [account_asset_management_method_number_end](account_asset_management_method_number_end/) | 10.0.1.0.0 | Financial asset management - method Number & End
