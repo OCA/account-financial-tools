@@ -7,26 +7,25 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-21 00:20+0000\n"
-"PO-Revision-Date: 2018-09-21 00:20+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2019-07-23 18:43+0000\n"
+"Last-Translator: Josep M <jmyepes@mac.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
-#, fuzzy
-#| msgid "# of digits"
 msgid "# of Digits"
-msgstr "Nº de dígitos"
+msgstr "Nº de Dígitos"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Update Chart Template</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Actualizar plantilla gráfico</span>"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -63,25 +62,23 @@ msgstr "Cuentas"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
-#, fuzzy
-#| msgid "Account template"
 msgid "Accounts matching"
-msgstr "Plantilla de cuenta"
+msgstr "Cuentas coincidentes"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_id
 msgid "Chart Template"
-msgstr "Plan contable"
+msgstr "Plantilla Gráfico"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_ids
 msgid "Chart Templates"
-msgstr "Planes contables"
+msgstr "Plantillas gráficos"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr "Plan contable"
+msgstr "Gráfico de cuentas"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -91,7 +88,7 @@ msgstr "Cerrar"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__company_id
 msgid "Company"
-msgstr "Compañía"
+msgstr "Empresa"
 
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
@@ -101,7 +98,7 @@ msgstr "Configuración"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
 msgid "Continue on errors"
-msgstr "Continuar en errores"
+msgstr "Continuar con errores"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -112,7 +109,7 @@ msgstr "Crear/Actualizar"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:822
 #, python-format
 msgid "Created account %s."
-msgstr "Creada cuenta %s."
+msgstr "Se ha creado la cuenta %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_uid
