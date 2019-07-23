@@ -110,7 +110,7 @@ class TestCreditControlRun(TransactionCase):
 
         control_run.with_context(lang='en_US').generate_credit_lines()
 
-        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
         self.assertEqual(control_run.state, 'done')
 
         report_regex = \
@@ -136,7 +136,7 @@ class TestCreditControlRun(TransactionCase):
             'policy_ids': [(6, 0, [self.policy.id])]
         })
         first_control_run.with_context(lang='en_US').generate_credit_lines()
-        self.assertTrue(len(self.invoice.credit_control_line_ids), 1)
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 1)
 
         # Second run
         second_control_run = self.env['credit.control.run'].create({
@@ -144,7 +144,7 @@ class TestCreditControlRun(TransactionCase):
             'policy_ids': [(6, 0, [self.policy.id])]
         })
         second_control_run.with_context(lang='en_US').generate_credit_lines()
-        self.assertTrue(len(self.invoice.credit_control_line_ids), 2)
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 2)
 
         # Last run
         last_control_run = self.env['credit.control.run'].create({
@@ -152,4 +152,4 @@ class TestCreditControlRun(TransactionCase):
             'policy_ids': [(6, 0, [self.policy.id])]
         })
         last_control_run.with_context(lang='en_US').generate_credit_lines()
-        self.assertTrue(len(self.invoice.credit_control_line_ids), 2)
+        self.assertEqual(len(self.invoice.credit_control_line_ids), 3)
