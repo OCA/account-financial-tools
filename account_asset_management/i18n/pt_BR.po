@@ -28,10 +28,10 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2019-07-08 15:00+0000\n"
+"PO-Revision-Date: 2019-07-24 00:43+0000\n"
 "Last-Translator: Eduardo Aparicio <eduardo.caparica@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -393,10 +393,8 @@ msgstr "Resultados do Cálculo dos Ativos"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_res_config_settings
-#, fuzzy
-#| msgid "res.config.settings"
 msgid "Config Settings"
-msgstr "res.config.settings"
+msgstr "Configurações"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -609,10 +607,8 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscal_year
-#, fuzzy
-#| msgid "No Fiscal Year defined."
 msgid "Fiscal Year"
-msgstr "Ano Fiscal não definido."
+msgstr "Ano Fiscal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -857,10 +853,8 @@ msgstr "Ativo-Pai"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__parent_path
-#, fuzzy
-#| msgid "Parent Left"
 msgid "Parent Path"
-msgstr "Pai Esquerdo"
+msgstr "Caminho-Pai"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__partner_id
