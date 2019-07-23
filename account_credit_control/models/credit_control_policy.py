@@ -79,7 +79,7 @@ class CreditControlPolicy(models.Model):
         """
         self.ensure_one()
         # MARK possible place for a good optimisation
-        my_obj = self.env[model]
+        my_obj = self.env[model].with_context(active_test=False)
         default_domain = self._move_lines_domain(controlling_date)
 
         to_add = self.env['account.move.line']
