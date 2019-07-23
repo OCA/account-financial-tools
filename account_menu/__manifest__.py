@@ -17,6 +17,10 @@
         'account_tag_menu',
         'account_type_menu',
     ],
+    'data': [
+        'views/menu.xml',
+        'views/view_account_bank_statement.xml',
+    ],
     'demo': [
         'demo/res_groups.xml',
     ],
