@@ -89,7 +89,7 @@ class TestAccountInvoice(TransactionCase):
         })
         control_run.generate_credit_lines()
 
-        self.assertTrue(len(invoice.credit_control_line_ids), 1)
+        self.assertEqual(len(invoice.credit_control_line_ids), 1)
         control_line = invoice.credit_control_line_ids
 
         control_marker = self.env['credit.control.marker']
