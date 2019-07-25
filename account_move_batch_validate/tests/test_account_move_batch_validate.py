@@ -1,5 +1,5 @@
 # Copyright 2017 ACSONE SA/NV
-# Copyright 2018 Camptocamp SA
+# Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import SingleTransactionCase
@@ -10,7 +10,9 @@ class TestAccountMoveBatchValidate(SingleTransactionCase):
 
     @classmethod
     def setUpClass(self):
-        super(TestAccountMoveBatchValidate, self).setUpClass()
+        super().setUpClass()
+        self.env = self.env(context=dict(
+            self.env.context, tracking_disable=True))
         self.AccountObj = self.env['account.account']
         self.AccountJournalObj = self.env['account.journal']
         self.AccountMoveObj = self.env['account.move']
