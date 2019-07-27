@@ -23,7 +23,7 @@ msgid "Asset category"
 msgstr "Categoría de activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:41
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:37
 #, python-format
 msgid "Asset depreciation"
 msgstr "Amortización del activo"
@@ -36,19 +36,19 @@ msgid "Asset disposal"
 msgstr "Baja del activo"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:172
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:168
 #, python-format
 msgid "Asset disposal cancelled."
 msgstr "Baja del activo cancelada."
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:137
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:133
 #, python-format
 msgid "Asset disposed."
 msgstr "Activo dado de baja."
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:56
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:48
 #, python-format
 msgid "Asset loss"
 msgstr "Pérdida del activo"
@@ -79,13 +79,13 @@ msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:144
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:140
 #, python-format
 msgid "Disposal Move"
 msgstr "Asiento de baja"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:147
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:143
 #, python-format
 msgid "Disposal Moves"
 msgstr "Asientos de baja"
@@ -107,7 +107,7 @@ msgid "Dispose"
 msgstr "Dar de baja"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:92
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:88
 #, python-format
 msgid "Dispose Asset"
 msgstr "Dar de baja activo"

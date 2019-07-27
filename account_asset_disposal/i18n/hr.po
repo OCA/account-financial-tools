@@ -25,7 +25,7 @@ msgid "Asset category"
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:41
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:37
 #, fuzzy, python-format
 msgid "Asset depreciation"
 msgstr "Stavka amortizacije"
@@ -38,19 +38,19 @@ msgid "Asset disposal"
 msgstr "Vrati iz otpisa"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:172
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:168
 #, python-format
 msgid "Asset disposal cancelled."
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:137
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:133
 #, python-format
 msgid "Asset disposed."
 msgstr ""
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:56
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:48
 #, python-format
 msgid "Asset loss"
 msgstr ""
@@ -82,13 +82,13 @@ msgid "Display Name"
 msgstr "Datum otpisa"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:144
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:140
 #, fuzzy, python-format
 msgid "Disposal Move"
 msgstr "Temeljnica otpisa"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:147
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:143
 #, fuzzy, python-format
 msgid "Disposal Moves"
 msgstr "Temeljnica otpisa"
@@ -111,7 +111,7 @@ msgid "Dispose"
 msgstr "Datum otpisa"
 
 #. module: account_asset_disposal
-#: code:addons/account_asset_disposal/models/account_asset_asset.py:92
+#: code:addons/account_asset_disposal/models/account_asset_asset.py:88
 #, fuzzy, python-format
 msgid "Dispose Asset"
 msgstr "Datum otpisa"
