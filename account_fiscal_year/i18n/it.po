@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_year
+# 	* account_fiscal_year
 #
 msgid ""
 msgstr ""
@@ -30,6 +30,13 @@ msgstr "Intervalli data"
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_accounting
 msgid "Date ranges"
 msgstr "Intervalli data"
+
+#. module: account_fiscal_year
+#: model:date.range.type,name:account_fiscal_year.fiscalyear
+#, fuzzy
+#| msgid "Fiscal Years"
+msgid "Fiscal Year"
+msgstr "Anni fiscali"
 
 #. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
