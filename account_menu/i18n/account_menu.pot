@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+#	* account_menu
 #
 msgid ""
 msgstr ""
@@ -11,4 +12,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_statement_bank
+msgid "Bank Statements"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_bank_and_cash
+msgid "Bank and Cash"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.ui.menu,name:account_menu.menu_accounting_statement_cash
+msgid "Cash Registers"
+msgstr ""
 
