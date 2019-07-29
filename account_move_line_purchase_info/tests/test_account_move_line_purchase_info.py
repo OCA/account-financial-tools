@@ -199,3 +199,14 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 self.assertEqual(aml.purchase_line_id, po_line,
                                  'Purchase Order line has not been copied '
                                  'from the invoice to the account move line.')
+
+    def test_name_get(self):
+        purchase = self._create_purchase([(self.product, 1)])
+        po_line = purchase.order_line[0]
+        name_get = po_line.with_context({'po_line_info': True}).name_get()
+        self.assertEqual(name_get, [(po_line.id, "[%s] %s (%s)" % (
+            po_line.order_id.name, po_line.name,
+            po_line.order_id.state,
+        ))])
+        name_get_no_ctx = po_line.name_get()
+        self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
