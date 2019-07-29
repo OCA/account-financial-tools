@@ -14,3 +14,10 @@ class AccountMoveLine(models.Model):
         string='Purchase Order Line',
         ondelete='set null', index=True,
     )
+
+    purchase_id = fields.Many2one(
+        comodel_name='purchase.order',
+        related='purchase_line_id.order_id',
+        string='Purchase Order',
+        store=True, index=True,
+    )
