@@ -31,7 +31,17 @@ msgid "Journal Item"
 msgstr "Item do Diário"
 
 #. module: account_move_line_purchase_info
+#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
+#, fuzzy
+#| msgid "Purchase Order Line"
+msgid "Purchase Order"
+msgstr "Linha de Encomenda de Compra"
+
+#. module: account_move_line_purchase_info
+#: model:ir.model,name:account_move_line_purchase_info.model_purchase_order_line
 #: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_line_id
+#: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
 msgid "Purchase Order Line"
 msgstr "Linha de Encomenda de Compra"
 
