@@ -611,16 +611,15 @@ class AccountAsset(models.Model):
 
         return True
 
-    def _get_fy_duration(self, fy_id, option='days'):
-        """
-        Returns fiscal year duration.
+    def _get_fy_duration(self, fy, option='days'):
+        """Returns fiscal year duration.
+
         @param option:
         - days: duration in days
         - months: duration in months,
                   a started month is counted as a full month
         - years: duration in calendar years, considering also leap years
         """
-        fy = self.env['account.fiscal.year'].browse(fy_id)
         fy_date_start = fy.date_from
         fy_date_stop = fy.date_to
         days = (fy_date_stop - fy_date_start).days + 1
@@ -657,33 +656,23 @@ class AccountAsset(models.Model):
         calculate the impact of extended/shortened fiscal years
         """
         duration_factor = 1.0
-        fy_id = entry['fy_id']
+        fy = entry['fy']
         if self.prorata:
             if firstyear:
                 depreciation_date_start = self.date_start
                 fy_date_stop = entry['date_stop']
                 first_fy_asset_days = \
                     (fy_date_stop - depreciation_date_start).days + 1
-                if fy_id:
-                    first_fy_duration = self._get_fy_duration(
-                        fy_id, option='days')
-                    first_fy_year_factor = self._get_fy_duration(
-                        fy_id, option='years')
-                    duration_factor = \
-                        float(first_fy_asset_days) / first_fy_duration \
-                        * first_fy_year_factor
-                else:
-                    first_fy_duration = \
-                        calendar.isleap(entry['date_start'].year) \
-                        and 366 or 365
-                    duration_factor = \
-                        float(first_fy_asset_days) / first_fy_duration
-            elif fy_id:
-                duration_factor = self._get_fy_duration(
-                    fy_id, option='years')
-        elif fy_id:
-            fy_months = self._get_fy_duration(
-                fy_id, option='months')
+                first_fy_duration = self._get_fy_duration(fy, option='days')
+                first_fy_year_factor = self._get_fy_duration(
+                    fy, option='years')
+                duration_factor = \
+                    float(first_fy_asset_days) / first_fy_duration \
+                    * first_fy_year_factor
+            else:
+                duration_factor = self._get_fy_duration(fy, option='years')
+        else:
+            fy_months = self._get_fy_duration(fy, option='months')
             duration_factor = float(fy_months) / 12
         return duration_factor
 
@@ -938,93 +927,38 @@ class AccountAsset(models.Model):
                 entry['fy_amount'] = sum(
                     [l['amount'] for l in entry['lines']])
 
-    def _compute_depreciation_table(self):
+    def _get_fy_info(self, date):
+        """Return an homogeneus data structure for fiscal years."""
+        fy_info = self.company_id.compute_fiscalyear_dates(date)
+        if 'record' not in fy_info:
+            fy_info['record'] = DummyFy(
+                date_from=fy_info['date_from'],
+                date_to=fy_info['date_to'],
+            )
+        return fy_info
 
+    def _compute_depreciation_table(self):
         table = []
         if self.method_time in ['year', 'number'] and not self.method_number:
             return table
-
         company = self.company_id
-        init_flag = False
         asset_date_start = self.date_start
-        fy = self.env['account.fiscal.year'].search([
-            ('date_from', '<=', asset_date_start),
-            ('date_to', '>=', asset_date_start),
-            ('company_id', '=', company.id)])
-        fiscalyear_lock_date = company.fiscalyear_lock_date
-        if fiscalyear_lock_date and fiscalyear_lock_date >= self.date_start:
-            init_flag = True
-        if fy:
-            fy_id = fy.id
-            fy_date_start = fy.date_from
-            fy_date_stop = fy.date_to
-        else:
-            # The following logic is used when no fiscal year
-            # is defined for the asset start date:
-            # - We lookup the first fiscal year defined in the system
-            # - The 'undefined' fiscal years are assumed to be years
-            #   with a duration equal to a calendar year
-            first_fy = self.env['account.fiscal.year'].search(
-                [('company_id', '=', self.company_id.id)],
-                order='date_to ASC', limit=1)
-            if not first_fy:
-                raise UserError(
-                    _("No Fiscal Year defined."))
-            first_fy_date_start = first_fy.date_from
-            fy_date_start = first_fy_date_start
-            if asset_date_start > fy_date_start:
-                asset_ref = self.code and '%s (ref: %s)' \
-                    % (self.name, self.code) or self.name
-                raise UserError(
-                    _("You cannot compute a depreciation table for an asset "
-                      "starting in an undefined future fiscal year."
-                      "\nPlease correct the start date for asset '%s'.")
-                    % asset_ref)
-            while asset_date_start < fy_date_start:
-                fy_date_start = fy_date_start - relativedelta(years=1)
-            fy_date_stop = fy_date_start + relativedelta(years=1, days=-1)
-            fy_id = False
-            fy = DummyFy(
-                date_start=fy_date_start,
-                date_end=fy_date_stop,
-                id=False,
-                state='done',
-                dummy=True)
-            init_flag = True
-
-        depreciation_start_date = self._get_depreciation_start_date(fy)
+        fiscalyear_lock_date = (
+            company.fiscalyear_lock_date or fields.Date.to_date('1901-01-01'))
+        depreciation_start_date = self._get_depreciation_start_date(
+            self._get_fy_info(asset_date_start)['record'])
         depreciation_stop_date = self._get_depreciation_stop_date(
             depreciation_start_date)
-
+        fy_date_start = asset_date_start
         while fy_date_start <= depreciation_stop_date:
+            fy_info = self._get_fy_info(fy_date_start)
             table.append({
-                'fy_id': fy_id,
-                'date_start': fy_date_start,
-                'date_stop': fy_date_stop,
-                'init': init_flag})
-            fy_date_start = fy_date_stop + relativedelta(days=1)
-            fy = self.env['account.fiscal.year'].search([
-                ('date_from', '<=', fy_date_start),
-                ('date_to', '>=', fy_date_start),
-                ('company_id', '=', company.id)])
-            if fy:
-                if (
-                    fiscalyear_lock_date and
-                    fiscalyear_lock_date >= fy.date_to
-                ):
-                    init_flag = True
-                else:
-                    init_flag = False
-                fy_date_stop = fy.date_to
-            else:
-                fy_date_stop = fy_date_stop + relativedelta(years=1)
-                if (
-                    fiscalyear_lock_date and
-                    fiscalyear_lock_date >= fy_date_stop
-                ):
-                    init_flag = True
-                else:
-                    init_flag = False
+                'fy': fy_info['record'],
+                'date_start': fy_info['date_from'],
+                'date_stop': fy_info['date_to'],
+                'init': fiscalyear_lock_date >= fy_info['date_from'],
+            })
+            fy_date_start = fy_info['date_to'] + relativedelta(days=1)
         # Step 1:
         # Calculate depreciation amount per fiscal year.
         # This is calculation is skipped for method_time != 'year'.
