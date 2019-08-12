@@ -6,40 +6,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-08-12 11:44+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: account_tag_menu
 #: model:ir.model,name:account_tag_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Etiqueta de Conta"
 
 #. module: account_tag_menu
 #: model:ir.ui.menu,name:account_tag_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Etiquetas de Contas"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Contas"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__account_ids
 msgid "Assigned accounts for custom reporting"
-msgstr ""
+msgstr "Contas atribuídas para relatórios personalizados"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Assigned taxes for custom reporting"
-msgstr ""
+msgstr "Impostos atribuídos para relatórios personalizados"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Impostos"
