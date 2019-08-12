@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2019 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -807,6 +808,53 @@ class AccountAsset(models.Model):
 
         return line_dates
 
+    def _compute_depreciation_amount_per_fiscal_year(self, table, line_dates):
+        digits = self.env['decimal.precision'].precision_get('Account')
+        fy_residual_amount = self.depreciation_base
+        i_max = len(table) - 1
+        asset_sign = self.depreciation_base >= 0 and 1 or -1
+        for i, entry in enumerate(table):
+            if self.method_time == 'year':
+                year_amount = self._compute_year_amount(fy_residual_amount)
+                if self.method_period == 'year':
+                    period_amount = year_amount
+                elif self.method_period == 'quarter':
+                    period_amount = year_amount / 4
+                elif self.method_period == 'month':
+                    period_amount = year_amount / 12
+                if i == i_max:
+                    if self.method in ['linear-limit', 'degr-limit']:
+                        fy_amount = fy_residual_amount - self.salvage_value
+                    else:
+                        fy_amount = fy_residual_amount
+                else:
+                    firstyear = i == 0 and True or False
+                    fy_factor = self._get_fy_duration_factor(
+                        entry, firstyear)
+                    fy_amount = year_amount * fy_factor
+                if asset_sign * (fy_amount - fy_residual_amount) > 0:
+                    fy_amount = fy_residual_amount
+                period_amount = round(period_amount, digits)
+                fy_amount = round(fy_amount, digits)
+            else:
+                fy_amount = False
+                if self.method_time == 'number':
+                    number = self.method_number
+                else:
+                    number = len(line_dates)
+                period_amount = round(self.depreciation_base / number, digits)
+            entry.update({
+                'period_amount': period_amount,
+                'fy_amount': fy_amount,
+            })
+            if self.method_time == 'year':
+                fy_residual_amount -= fy_amount
+                if round(fy_residual_amount, digits) == 0:
+                    break
+        i_max = i
+        table = table[:i_max + 1]
+        return table
+
     def _compute_depreciation_table_lines(self, table, depreciation_start_date,
                                           depreciation_stop_date, line_dates):
 
@@ -980,55 +1028,11 @@ class AccountAsset(models.Model):
         # Step 1:
         # Calculate depreciation amount per fiscal year.
         # This is calculation is skipped for method_time != 'year'.
-        digits = self.env['decimal.precision'].precision_get('Account')
-        fy_residual_amount = self.depreciation_base
-        i_max = len(table) - 1
-        asset_sign = self.depreciation_base >= 0 and 1 or -1
         line_dates = self._compute_line_dates(
             table, depreciation_start_date, depreciation_stop_date)
-        for i, entry in enumerate(table):
-
-            if self.method_time == 'year':
-                year_amount = self._compute_year_amount(fy_residual_amount)
-                if self.method_period == 'year':
-                    period_amount = year_amount
-                elif self.method_period == 'quarter':
-                    period_amount = year_amount / 4
-                elif self.method_period == 'month':
-                    period_amount = year_amount / 12
-                if i == i_max:
-                    if self.method in ['linear-limit', 'degr-limit']:
-                        fy_amount = fy_residual_amount - self.salvage_value
-                    else:
-                        fy_amount = fy_residual_amount
-                else:
-                    firstyear = i == 0 and True or False
-                    fy_factor = self._get_fy_duration_factor(
-                        entry, firstyear)
-                    fy_amount = year_amount * fy_factor
-                if asset_sign * (fy_amount - fy_residual_amount) > 0:
-                    fy_amount = fy_residual_amount
-                period_amount = round(period_amount, digits)
-                fy_amount = round(fy_amount, digits)
-            else:
-                fy_amount = False
-                if self.method_time == 'number':
-                    number = self.method_number
-                elif self.method_time == 'end':
-                    number = len(line_dates)
-                period_amount = round(self.depreciation_base / number, digits)
-
-            entry.update({
-                'period_amount': period_amount,
-                'fy_amount': fy_amount,
-            })
-            if self.method_time == 'year':
-                fy_residual_amount -= fy_amount
-                if round(fy_residual_amount, digits) == 0:
-                    break
-        i_max = i
-        table = table[:i_max + 1]
-
+        table = self._compute_depreciation_amount_per_fiscal_year(
+            table, line_dates,
+        )
         # Step 2:
         # Spread depreciation amount per fiscal year
         # over the depreciation periods.
