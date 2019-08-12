@@ -27,7 +27,7 @@
             <group string="Depreciation Dates">
               <field name="method_time"/>
               <field name="method_number"
-                     attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
+                     attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
               <field name="method_period"/>
             </group>
             <group string="Depreciation Method">
