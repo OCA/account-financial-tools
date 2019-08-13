@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2019-Today GRAP (http://www.grap.coop/)
+  @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+-->
+
+<odoo>
+
+    <record id="account_journal_form" model="ir.ui.view">
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="can_receive_deposit" attrs="{'invisible': [('type', '!=', 'bank')]}"/>
+                <field name="can_be_deposited" attrs="{'invisible': [('type', 'not in', ['bank', 'cash'])]}"/>
+                <field name="deposit_debit_account_id" attrs="{
+                    'invisible': [('can_be_deposited', '=', False)],
+                    'required': [('can_be_deposited', '=', True)]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

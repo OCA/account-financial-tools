@@ -29,7 +29,7 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <label string="Check Deposit" for="name"/>
+                        <label string="Bank Deposit" for="name"/>
                         <h1>
                             <field name="name"/>
                         </h1>
@@ -40,7 +40,7 @@
                             <field name="journal_id"
                                    widget="selection"/>
                             <field name="journal_default_account_id"
-                                   invisible="1"/>
+                                invisible="1"/>
                             <field name="currency_id"
                                    groups="base.group_multi_currency"/>
                             <field name="bank_journal_id" widget="selection"/>
@@ -54,13 +54,13 @@
                             <field name="total_amount" widget="monetary"
                                    options="{'currency_field': 'currency_id'}"/>
                             <field name="move_id"/>
+                            <field name="is_reconcile"/>
                         </group>
                     </group>
-                    <group string="Check Payments" name="check_payments">
+                    <group string="Bank Payments" name="check_payments">
                         <field name="check_payment_ids" nolabel="1"
                                widget="many2many"
                                domain="[('reconciled', '=', False),
-                                        ('debit', '>', 0),
                                         ('check_deposit_id', '=', False),
                                         ('currency_id', '=', currency_none_same_company_id),
                                         ('account_id', '=', journal_default_account_id)]"
@@ -113,7 +113,7 @@
         <field name="model">account.check.deposit</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name" string="Checks Deposit"/>
+                <field name="name" string="Bank Deposit"/>
                 <filter name="draft" string="Draft"
                         domain="[('state', '=', 'draft')]"/>
                 <filter name="done" string="Done"
@@ -133,7 +133,7 @@
     </record>
 
     <record id="action_check_deposit_tree" model="ir.actions.act_window">
-        <field name="name">Checks Deposits</field>
+        <field name="name">Bank Deposits</field>
         <field name="res_model">account.check.deposit</field>
         <field name="view_mode">tree,form</field>
     </record>

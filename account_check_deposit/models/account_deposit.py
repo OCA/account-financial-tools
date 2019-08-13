@@ -18,6 +18,7 @@ class AccountCheckDeposit(models.Model):
 
     @api.depends(
         'company_id', 'currency_id', 'check_payment_ids.debit',
+        'check_payment_ids.credit',
         'check_payment_ids.amount_currency',
         'move_id.line_ids.reconciled')
     def _compute_check_deposit(self):
@@ -33,11 +34,9 @@ class AccountCheckDeposit(models.Model):
                 if currency_none_same_company_id:
                     total += line.amount_currency
                 else:
-                    total += line.debit
+                    total += line.debit - line.credit
             if deposit.move_id:
-                for line in deposit.move_id.line_ids:
-                    if line.debit > 0 and line.reconciled:
-                        reconcile = True
+                reconcile = all(deposit.mapped('move_id.line_ids.reconciled'))
             deposit.total_amount = total
             deposit.is_reconcile = reconcile
             deposit.currency_none_same_company_id =\
@@ -46,7 +45,7 @@ class AccountCheckDeposit(models.Model):
 
     name = fields.Char(string='Name', size=64, readonly=True, default='/')
     check_payment_ids = fields.One2many(
-        'account.move.line', 'check_deposit_id', string='Check Payments',
+        'account.move.line', 'check_deposit_id', string='Payments',
         states={'done': [('readonly', '=', True)]})
     deposit_date = fields.Date(
         string='Deposit Date', required=True,
@@ -54,10 +53,10 @@ class AccountCheckDeposit(models.Model):
         default=fields.Date.context_today)
     journal_id = fields.Many2one(
         'account.journal', string='Journal',
-        domain=[('type', '=', 'bank'), ('bank_account_id', '=', False)],
+        domain=[('can_be_deposited', '=', True)],
         required=True, states={'done': [('readonly', '=', True)]})
     journal_default_account_id = fields.Many2one(
-        'account.account', related='journal_id.default_debit_account_id',
+        'account.account', related='journal_id.deposit_debit_account_id',
         string='Default Debit Account of the Journal')
     currency_id = fields.Many2one(
         'res.currency', string='Currency', required=True,
@@ -74,8 +73,8 @@ class AccountCheckDeposit(models.Model):
         'account.move', string='Journal Entry', readonly=True)
     bank_journal_id = fields.Many2one(
         'account.journal', string='Bank Account', required=True,
-        domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
-        "('bank_account_id', '!=', False)]",
+        domain="[('company_id', '=', company_id),"
+               "('can_receive_deposit', '=', True)]",
         states={'done': [('readonly', '=', True)]})
     line_ids = fields.One2many(
         'account.move.line', related='move_id.line_ids',
@@ -90,7 +89,7 @@ class AccountCheckDeposit(models.Model):
         digits=dp.get_precision('Account'))
     check_count = fields.Integer(
         compute='_compute_check_deposit', readonly=True, store=True,
-        string="Number of Checks")
+        string="Number of Deposit Lines")
     is_reconcile = fields.Boolean(
         compute='_compute_check_deposit', readonly=True, store=True,
         string="Reconcile")
@@ -103,20 +102,20 @@ class AccountCheckDeposit(models.Model):
                 for line in deposit.check_payment_ids:
                     if line.currency_id:
                         raise ValidationError(
-                            _("The check with amount %s and reference '%s' "
+                            _("The line with amount %s and reference '%s' "
                                 "is in currency %s but the deposit is in "
                                 "currency %s.") % (
-                                line.debit, line.ref or '',
+                                line.debit or line.credit, line.ref or '',
                                 line.currency_id.name,
                                 deposit_currency.name))
             else:
                 for line in deposit.check_payment_ids:
                     if line.currency_id != deposit_currency:
                         raise ValidationError(
-                            _("The check with amount %s and reference '%s' "
+                            _("The line with amount %s and reference '%s' "
                                 "is in currency %s but the deposit is in "
                                 "currency %s.") % (
-                                line.debit, line.ref or '',
+                                line.debit or line.credit, line.ref or '',
                                 line.currency_id.name,
                                 deposit_currency.name))
 
@@ -160,17 +159,19 @@ class AccountCheckDeposit(models.Model):
         move_vals = {
             'journal_id': journal_id,
             'date': deposit.deposit_date,
-            'ref': _('Check Deposit %s') % deposit.name,
+            'ref': _('%(journal_name)s Deposit %(deposit_name)s') % {
+                'journal_name': deposit.journal_id.name,
+                'deposit_name': deposit.name,
+            },
         }
         return move_vals
 
     @api.model
     def _prepare_move_line_vals(self, line):
-        assert (line.debit > 0), 'Debit must have a value'
         return {
-            'name': _('Check Deposit - Ref. Check %s') % line.ref,
+            'name': _('Deposit - Ref. %s') % line.ref,
             'credit': line.debit,
-            'debit': 0.0,
+            'debit': line.credit,
             'account_id': line.account_id.id,
             'partner_id': line.partner_id.id,
             'currency_id': line.currency_id.id or False,
@@ -179,11 +180,11 @@ class AccountCheckDeposit(models.Model):
 
     @api.model
     def _prepare_counterpart_move_lines_vals(
-            self, deposit, total_debit, total_amount_currency):
+            self, deposit, total_amount, total_amount_currency):
         company = deposit.company_id
         if not company.check_deposit_offsetting_account:
             raise UserError(_(
-                "You must configure the 'Check Deposit Offsetting Account' "
+                "You must configure the 'Deposit Offsetting Account' "
                 "on the Accounting Settings page"))
         if company.check_deposit_offsetting_account == 'bank_account':
             if not deposit.bank_journal_id.default_debit_account_id:
@@ -194,13 +195,16 @@ class AccountCheckDeposit(models.Model):
         elif company.check_deposit_offsetting_account == 'transfer_account':
             if not company.check_deposit_transfer_account_id:
                 raise UserError(_(
-                    "Missing 'Check Deposit Offsetting Account' on the "
+                    "Missing 'Deposit Offsetting Account' on the "
                     "company '%s'.") % company.name)
             account_id = company.check_deposit_transfer_account_id.id
         return {
-            'name': _('Check Deposit %s') % deposit.name,
-            'debit': total_debit,
-            'credit': 0.0,
+            'name': _('%(journal_name)s Deposit %(deposit_name)s') % {
+                'journal_name': deposit.journal_id.name,
+                'deposit_name': deposit.name,
+            },
+            'debit': (total_amount > 0) and total_amount or 0.0,
+            'credit': (total_amount < 0) and - total_amount or 0.0,
             'account_id': account_id,
             'partner_id': False,
             'currency_id': deposit.currency_none_same_company_id.id or False,
@@ -213,11 +217,11 @@ class AccountCheckDeposit(models.Model):
         for deposit in self:
             move_vals = self._prepare_account_move_vals(deposit)
             move = am_obj.create(move_vals)
-            total_debit = 0.0
+            total_amount = 0.0
             total_amount_currency = 0.0
             to_reconcile_lines = []
             for line in deposit.check_payment_ids:
-                total_debit += line.debit
+                total_amount += line.debit - line.credit
                 total_amount_currency += line.amount_currency
                 line_vals = self._prepare_move_line_vals(line)
                 line_vals['move_id'] = move.id
@@ -227,7 +231,7 @@ class AccountCheckDeposit(models.Model):
 
             # Create counter-part
             counter_vals = self._prepare_counterpart_move_lines_vals(
-                deposit, total_debit, total_amount_currency)
+                deposit, total_amount, total_amount_currency)
             counter_vals['move_id'] = move.id
             move_line_obj.create(counter_vals)
             if deposit.company_id.check_deposit_post_move:
