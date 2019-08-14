@@ -139,7 +139,7 @@ class AccountAssetLine(models.Model):
                     check = asset_lines.filtered(
                         lambda l: l.type != 'create' and
                         (l.init_entry or l.move_check) and
-                        l.line_date < vals['line_date'])
+                        l.line_date < fields.Date.to_date(vals['line_date']))
                     if check:
                         raise UserError(
                             _("You cannot set the Asset Start Date "
