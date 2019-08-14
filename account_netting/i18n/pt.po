@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-08 23:22+0000\n"
-"PO-Revision-Date: 2017-12-08 23:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-08-14 18:44+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:69
@@ -52,7 +53,6 @@ msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
-#, fuzzy
 msgid "Balance Type"
 msgstr "Tipo de Saldo"
 
@@ -94,9 +94,8 @@ msgstr "ID"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
-#, fuzzy
 msgid "Journal"
-msgstr "Id do Diário"
+msgstr "Diário"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
@@ -115,9 +114,8 @@ msgstr "Última Actualização em"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
-#, fuzzy
 msgid "Move Line"
-msgstr "Ids. da linha de movimento"
+msgstr "Linha de Movimento"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:47
@@ -135,19 +133,14 @@ msgstr ""
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
-#, fuzzy
-#| msgid ""
-#| "This operation will generate account entries that are counterpart of the "
-#| "receivable/payable accounts selected, and reconcile each other, letting "
-#| "this balance in the partner:"
 msgid ""
 "This operation will generate account entries that are counterpart of the "
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
 "Esta operação gerará itens de diário que são contrapartida das contas a "
-"receber/a pagar selecionadas, e realizará a reconciliação, deixando este "
-"saldo no parceiro:"
+"receber/a pagar selecionadas e realizará a reconciliação, deixando este "
+"saldo no parceiro."
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
@@ -162,7 +155,7 @@ msgstr "A receber"
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
-msgstr ""
+msgstr "Assistente para gerar lançamentos de encontros de contas"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:35
