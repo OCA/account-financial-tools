@@ -4,7 +4,7 @@
 import datetime
 
 from odoo.tools import convert_file
-from odoo.modules.module import get_module_resource
+from odoo.modules.module import get_resource_path
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import common
 
@@ -15,7 +15,7 @@ class TestAccountInvoiceSpread(common.TransactionCase):
         convert_file(
             self.cr,
             'account_spread_cost_revenue',
-            get_module_resource(module, *args),
+            get_resource_path(module, *args),
             {}, 'init', False, 'test', self.registry._assertion_report)
 
     def setUp(self):
