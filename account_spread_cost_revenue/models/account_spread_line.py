@@ -166,3 +166,8 @@ class AccountInvoiceSpreadLine(models.Model):
             'move_id').filtered(lambda m: m.state != 'posted')
         unposted_moves.filtered(
             lambda m: m.company_id.force_move_auto_post).post()
+
+        spreads_to_archive = self.env['account.spread'].search([
+            ('all_posted', '=', True)
+        ]).filtered(lambda s: s.company_id.auto_archive)
+        spreads_to_archive.write({'active': False})

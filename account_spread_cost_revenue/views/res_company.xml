@@ -23,6 +23,7 @@
                         </group>
                         <group name="spreading_options_right">
                             <field name="force_move_auto_post"/>
+                            <field name="auto_archive"/>
                         </group>
                     </group>
                 </page>
