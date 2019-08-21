@@ -68,6 +68,9 @@ class AccountSpread(models.Model):
     total_amount = fields.Float(
         digits=dp.get_precision('Account'),
         compute='_compute_amounts')
+    all_posted = fields.Boolean(
+        compute='_compute_amounts',
+        store=True)
     line_ids = fields.One2many(
         'account.spread.line',
         'spread_id',
@@ -123,6 +126,7 @@ class AccountSpread(models.Model):
     display_move_line_auto_post = fields.Boolean(
         compute='_compute_display_move_line_auto_post',
         string='Display Button Auto-post lines')
+    active = fields.Boolean(default=True)
 
     @api.model
     def default_get(self, fields):
@@ -181,6 +185,7 @@ class AccountSpread(models.Model):
             spread.unposted_amount = total_amount - posted_amount
             spread.posted_amount = posted_amount
             spread.total_amount = total_amount
+            spread.all_posted = spread.unposted_amount == 0.0
 
     @api.multi
     def _compute_display_create_all_moves(self):
