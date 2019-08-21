@@ -27,3 +27,7 @@ class ResCompany(models.Model):
         'Auto-post spread lines',
         help="Enable this option if you want to post automatically the "
              "accounting moves of all the spreads.")
+    auto_archive = fields.Boolean(
+        'Auto-archive spread',
+        help="Enable this option if you want the cron job to automatically "
+             "archive the spreads when all lines are posted.")
