@@ -18,3 +18,6 @@ the company disable the *Allow Spread Planning* option.
 On the form view of the company, the *Auto-post spread lines* option forces the account moves created
 during the cost/revenue spreading to be automatically posted. When this option is false, the user can
 enable/disable the automatic posting by the flag *Auto-post lines* present in the spread board.
+
+On the form view of the company, enable the *Auto-archive spread* option if you want the
+cron job to automatically archive the spreads when all lines are posted.
