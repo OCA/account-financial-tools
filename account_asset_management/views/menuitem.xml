@@ -24,4 +24,7 @@
             action="account_asset_profile_action"
             parent="menu_finance_config_assets"/>
 
+  <menuitem id="account_asset_group_menu"
+            action="account_asset_group_action"
+            parent="menu_finance_config_assets"/>
 </odoo>
