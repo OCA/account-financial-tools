@@ -16,35 +16,9 @@
       <field name="company_id" ref="base.main_company"/>
     </record>
 
-    <!-- Type View Assets -->
-
-    <record id="account_asset_view_fa" model="account.asset">
-      <field name="type">view</field>
-      <field name="state">open</field>
-      <field name="name">Financial Assets</field>
-      <field name="purchase_value" eval="0.0"/>
-    </record>
-
-    <record id="account_asset_view_ict" model="account.asset">
-      <field name="type">view</field>
-      <field name="state">open</field>
-      <field name="name">ICT</field>
-      <field name="parent_id" ref="account_asset_view_fa"/>
-      <field name="purchase_value" eval="0.0"/>
-    </record>
-
-    <record id="account_asset_view_vehicle" model="account.asset">
-      <field name="type">view</field>
-      <field name="state">open</field>
-      <field name="name">Vehicles</field>
-      <field name="parent_id" ref="account_asset_view_fa"/>
-      <field name="purchase_value" eval="0.0"/>
-    </record>
-
     <!-- Asset profiles -->
 
     <record id="account_asset_profile_ict_3Y" model="account.asset.profile">
-      <field name="parent_id" ref="account_asset_view_ict"/>
       <field name="account_expense_depreciation_id" ref="account.a_expense"/>
       <field name="account_asset_id" ref="account.xfa"/>
       <field name="account_depreciation_id" ref="account.xfa"/>
@@ -56,7 +30,6 @@
     </record>
 
     <record id="account_asset_profile_car_5Y" model="account.asset.profile">
-      <field name="parent_id" ref="account_asset_view_vehicle"/>
       <field name="account_expense_depreciation_id" ref="account.a_expense"/>
       <field name="account_asset_id" ref="account.xfa"/>
       <field name="account_depreciation_id" ref="account.xfa"/>
@@ -70,7 +43,6 @@
     <!-- Assets -->
 
     <record id="account_asset_asset_ict0" model="account.asset">
-      <field name="parent_id" ref="account_asset_view_ict"/>
       <field name="state">draft</field>
       <field name="method_time">year</field>
       <field name="method_number" eval="3"/>
@@ -83,7 +55,6 @@
     </record>
 
     <record id="account_asset_asset_vehicle0" model="account.asset">
-      <field name="parent_id" ref="account_asset_view_vehicle"/>
       <field name="state">draft</field>
       <field name="method_time">year</field>
       <field name="method_number" eval="5"/>

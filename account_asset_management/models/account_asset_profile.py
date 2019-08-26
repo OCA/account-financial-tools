@@ -47,10 +47,9 @@ class AccountAssetProfile(models.Model):
         comodel_name='res.company',
         string='Company', required=True,
         default=lambda self: self._default_company_id())
-    parent_id = fields.Many2one(
-        comodel_name='account.asset',
-        string='Parent Asset',
-        domain=[('type', '=', 'view')])
+    group_id = fields.Many2one(
+        comodel_name='account.asset.group',
+        string='Asset Group')
     method = fields.Selection(
         selection=lambda self: self._selection_method(),
         string='Computation Method',
