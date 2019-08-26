@@ -131,8 +131,7 @@ class AccountInvoiceLine(models.Model):
     asset_id = fields.Many2one(
         comodel_name='account.asset',
         string='Asset',
-        domain=[('type', '=', 'normal'),
-                ('state', 'in', ['open', 'close'])],
+        domain=[('state', 'in', ['open', 'close'])],
         help="Complete this field when selling an asset "
              "in order to facilitate the creation of the "
              "asset removal accounting entries via the "
