@@ -49,9 +49,18 @@ _field_renames = [
 @openupgrade.migrate()
 def migrate(env, version):
     cr = env.cr
-    openupgrade.rename_models(cr, _model_renames1)
-    openupgrade.rename_tables(cr, _table_renames1)
-    openupgrade.rename_models(cr, _model_renames2)
-    openupgrade.rename_tables(cr, _table_renames2)
-    openupgrade.copy_columns(cr, _column_copies)
-    openupgrade.rename_fields(env, _field_renames)
+    cr.execute('''SELECT column_name
+                  FROM information_schema.columns
+                  WHERE table_name = 'account_asset'
+                    AND column_name = 'type';''')
+    if cr.fetchone():
+        # migrate from account_asset_management
+        pass
+    else:
+        # migrate from account_asset
+        openupgrade.rename_models(cr, _model_renames1)
+        openupgrade.rename_tables(cr, _table_renames1)
+        openupgrade.rename_models(cr, _model_renames2)
+        openupgrade.rename_tables(cr, _table_renames2)
+        openupgrade.copy_columns(cr, _column_copies)
+        openupgrade.rename_fields(env, _field_renames)
