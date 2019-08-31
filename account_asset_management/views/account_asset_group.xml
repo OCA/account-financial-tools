@@ -10,6 +10,7 @@
           <group>
             <group>
               <field name="name"/>
+              <field name="code"/>
               <field name="parent_id"/>
               <field name="company_id" widget="selection" groups="base.group_multi_company"/>
             </group>
@@ -22,8 +23,9 @@
       <field name="name">account.asset.group.tree</field>
       <field name="model">account.asset.group</field>
       <field name="arch" type="xml">
-        <tree string="Asset Group">
+        <tree string="Asset Group" editable="bottom">
           <field name="name"/>
+          <field name="code"/>
           <field name="parent_id"/>
           <field name="company_id" groups="base.group_multi_company"/>
         </tree>
@@ -36,6 +38,7 @@
       <field name="arch" type="xml">
         <search string="Search Asset Group">
           <field name="name" string="Asset Group"/>
+          <field name="code" />
           <field name="parent_id"/>
         </search>
       </field>
