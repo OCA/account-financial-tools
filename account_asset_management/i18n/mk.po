@@ -37,7 +37,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1014
+#: code:addons/account_asset_management/models/account_asset.py:971
 #, python-format
 msgid ""
 "\n"
@@ -116,6 +116,25 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
 msgid "Asset Account"
 msgstr "Сметка средства"
+
+#. module: account_asset_management
+#: model:ir.model,name:account_asset_management.model_account_asset_group
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
+#, fuzzy
+#| msgid "Asset Account"
+msgid "Asset Group"
+msgstr "Сметка средства"
+
+#. module: account_asset_management
+#: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
+#: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
+#, fuzzy
+msgid "Asset Groups"
+msgstr "Категории на средства"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -250,11 +269,6 @@ msgstr ""
 "категорија кога креирате фактури."
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__child_ids
-msgid "Child Assets"
-msgstr ""
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 msgid ""
 "Choose the method to use to compute the amount of depreciation lines.\n"
@@ -297,7 +311,13 @@ msgid "Close"
 msgstr "Затвори"
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
+msgid "Code"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__company_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__company_id
 msgid "Company"
@@ -393,6 +413,7 @@ msgstr "Креирани движења на средство"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__create_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__create_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_uid
@@ -403,6 +424,7 @@ msgstr "Креирано од"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__create_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__create_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__create_date
@@ -427,13 +449,13 @@ msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:118
+#: code:addons/account_asset_management/models/account_asset_profile.py:120
 #, python-format
 msgid "Degressive"
 msgstr "Дегресивна"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:120
+#: code:addons/account_asset_management/models/account_asset_profile.py:122
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr ""
@@ -445,14 +467,14 @@ msgid "Degressive Factor"
 msgstr "Фактор на дегресија"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:119
+#: code:addons/account_asset_management/models/account_asset_profile.py:121
 #, python-format
 msgid "Degressive-Linear"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:262
-#: code:addons/account_asset_management/models/account_asset_profile.py:148
+#: code:addons/account_asset_management/models/account_asset.py:237
+#: code:addons/account_asset_management/models/account_asset_profile.py:150
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr ""
@@ -525,6 +547,7 @@ msgstr "Име на амортизација"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__display_name
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
@@ -559,13 +582,7 @@ msgid "Entries"
 msgstr "Записи"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:253
-#, python-format
-msgid "Error ! You can not create recursive assets."
-msgstr ""
-
-#. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1017
+#: code:addons/account_asset_management/models/account_asset.py:974
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -595,7 +612,7 @@ msgid "General"
 msgstr "Општо"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:444
+#: code:addons/account_asset_management/models/account_asset.py:401
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr ""
@@ -623,6 +640,7 @@ msgstr "Историја"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__id
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__id
@@ -631,7 +649,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:760
+#: code:addons/account_asset_management/models/account_asset.py:717
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr ""
@@ -676,7 +694,7 @@ msgid "Journal"
 msgstr "Дневник"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:464
+#: code:addons/account_asset_management/models/account_asset.py:421
 #: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
@@ -704,6 +722,7 @@ msgstr "Ставки на дневник"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute____last_update
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
@@ -714,6 +733,7 @@ msgstr "Последна промена на"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_uid
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
@@ -724,6 +744,7 @@ msgstr "Последно ажурирање од"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_compute__write_date
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
@@ -732,13 +753,13 @@ msgid "Last Updated on"
 msgstr "Последно ажурирање на"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:116
+#: code:addons/account_asset_management/models/account_asset_profile.py:118
 #, python-format
 msgid "Linear"
 msgstr "Линеарно"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:117
+#: code:addons/account_asset_management/models/account_asset_profile.py:119
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr ""
@@ -750,12 +771,13 @@ msgid "Min-Value Account"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:126
+#: code:addons/account_asset_management/models/account_asset_profile.py:128
 #, python-format
 msgid "Month"
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__name
 msgid "Name"
 msgstr "Име"
@@ -764,11 +786,6 @@ msgstr "Име"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
 msgid "Next Period Depreciation"
 msgstr "Следен период за амортизација"
-
-#. module: account_asset_management
-#: selection:account.asset,type:0
-msgid "Normal"
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__note
@@ -786,7 +803,7 @@ msgid "Notes"
 msgstr "Белешки"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:140
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_number
 #, python-format
@@ -804,13 +821,14 @@ msgid "Other Information"
 msgstr ""
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__parent_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__parent_id
-msgid "Parent Asset"
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
+#, fuzzy
+#| msgid "Parent Asset"
+msgid "Parent Asset Group"
 msgstr "Средство Родител"
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__parent_path
+#: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
 #, fuzzy
 #| msgid "Parent Asset"
 msgid "Parent Path"
@@ -866,7 +884,7 @@ msgid "Purchase Value"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:127
+#: code:addons/account_asset_management/models/account_asset_profile.py:129
 #, python-format
 msgid "Quarter"
 msgstr ""
@@ -954,6 +972,12 @@ msgid "Salvage Value"
 msgstr ""
 
 #. module: account_asset_management
+#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
+#, fuzzy
+msgid "Search Asset Group"
+msgstr "Барај категорија на средство"
+
+#. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 #, fuzzy
 msgid "Search Asset Profile"
@@ -992,7 +1016,7 @@ msgid "Status"
 msgstr "Статус"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:733
+#: code:addons/account_asset_management/models/account_asset.py:690
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1013,13 +1037,13 @@ msgid "The Sale Value must be positive!"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:272
+#: code:addons/account_asset_management/models/account_asset.py:247
 #, python-format
 msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:536
+#: code:addons/account_asset_management/models/account_asset.py:493
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1100,16 +1124,9 @@ msgid "Trigger Date"
 msgstr ""
 
 #. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_account_asset__type
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__type
-#: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Type"
 msgstr "Тип"
-
-#. module: account_asset_management
-#: selection:account.asset,type:0
-msgid "View"
-msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
@@ -1136,7 +1153,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:128
+#: code:addons/account_asset_management/models/account_asset_profile.py:130
 #, python-format
 msgid "Year"
 msgstr "Година"
@@ -1160,7 +1177,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:382
+#: code:addons/account_asset_management/models/account_asset.py:340
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr ""
@@ -1195,7 +1212,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:295
+#: code:addons/account_asset_management/models/account_asset.py:270
 #, fuzzy, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
@@ -1209,7 +1226,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:386
+#: code:addons/account_asset_management/models/account_asset.py:344
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr ""
