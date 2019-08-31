@@ -80,9 +80,12 @@ class AccountAsset(models.Model):
         readonly=True,
         required=True,
         states={'draft': [('readonly', False)]})
-    group_id = fields.Many2one(
+    group_ids = fields.Many2many(
         comodel_name='account.asset.group',
-        string='Asset Group')
+        relation="account_asset_group_rel",
+        column1="asset_id",
+        column2="group_id",
+        string='Asset Groups')
     date_start = fields.Date(
         string='Asset Start Date',
         readonly=True,
@@ -276,6 +279,7 @@ class AccountAsset(models.Model):
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
+                'group_ids': profile.group_ids,
             })
 
     @api.onchange('method_time')
