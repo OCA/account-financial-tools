@@ -7,20 +7,23 @@ Account Document Reversal
    !! changes will be overwritten.                   !!
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
+    :target: https://odoo-community.org/page/development-status
+    :alt: Beta
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge2| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
+.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
     :target: https://github.com/OCA/account-financial-tools/tree/11.0/account_document_reversal
     :alt: OCA/account-financial-tools
-.. |badge3| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
+.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
     :target: https://translation.odoo-community.org/projects/account-financial-tools-11-0/account-financial-tools-11-0-account_document_reversal
     :alt: Translate me on Weblate
-.. |badge4| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
+.. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/92/11.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| 
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 By Odoo standard, when an account document is cancelled, its journal entry will be deleted completely.
 This module enhance the process, instead of deletion, it will create new reversed journal entry.
