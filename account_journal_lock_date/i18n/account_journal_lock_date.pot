@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -34,7 +34,7 @@ msgid "Moves cannot be entered nor modified in this journal prior to the lock da
 msgstr ""
 
 #. module: account_journal_lock_date
-#: code:addons/account_journal_lock_date/models/account_move.py:23
+#: code:addons/account_journal_lock_date/models/account_move.py:22
 #, python-format
 msgid "You cannot add/modify entries prior to and inclusive of the journal lock date %s"
 msgstr ""
