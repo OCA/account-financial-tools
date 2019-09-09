@@ -52,7 +52,7 @@ def set_followup_data(env):
             AND aa.internal_type = 'receivable'
             AND aml.reconciled IS NULL
             AND aml.date_maturity < %s
-        """, today)
+        """, (today,))
         data = env.cr.dictfetchall()
         for line in data:
             env['credit.control.line'].create({
