@@ -42,9 +42,9 @@ def migrate_followup_data(env):
 
 
 def set_followup_data(env):
-    today = fields.Date.context_today
     policy = env['credit.control.policy.level'].search([])[:-1]
     if policy:
+        today = fields.Date.context_today(policy)
         env.cr.execute("""
             SELECT aml.* FROM account_move_line aml, account_account aa
             WHERE aml.account_id = aa.id
