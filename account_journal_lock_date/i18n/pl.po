@@ -43,7 +43,7 @@ msgid ""
 msgstr ""
 
 #. module: account_journal_lock_date
-#: code:addons/account_journal_lock_date/models/account_move.py:23
+#: code:addons/account_journal_lock_date/models/account_move.py:22
 #, python-format
 msgid ""
 "You cannot add/modify entries prior to and inclusive of the journal lock "
