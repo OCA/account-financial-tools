@@ -4,7 +4,7 @@
 
 {
     'name': 'Assets Management',
-    'version': '12.0.1.1.2',
+    'version': '12.0.2.0.0',
     'license': 'AGPL-3',
     'depends': [
         'account',
@@ -20,6 +20,7 @@
         'wizard/account_asset_remove.xml',
         'views/account_account.xml',
         'views/account_asset.xml',
+        'views/account_asset_group.xml',
         'views/account_asset_profile.xml',
         'views/res_config_settings.xml',
         'views/account_invoice.xml',

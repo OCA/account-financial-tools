@@ -8,19 +8,17 @@
       <form string="Asset">
         <header>
           <button name="validate" string="Confirm Asset" type="object" class="oe_highlight"
-                  attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('type', '=', 'view')]}"/>
+                  attrs="{'invisible': [('state', '!=', 'draft')]}"/>
           <button name="set_to_draft" states="open,close"
                   string="Set to Draft" type="object" groups="account.group_account_manager"/>
           <button name="remove" string="Remove" type="object" groups="account.group_account_manager"
                   attrs="{'invisible':['|', ('method_time', '!=', 'year'), ('state', 'not in', ['open', 'close'])]}"
                   help="Asset removal."/>
-          <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"
-                 attrs="{'invisible': [('type', '=', 'view')]}"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,open,close,removed"/>
         </header>
         <sheet>
           <div class="oe_button_box">
-            <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"
-                    attrs="{'invisible': [('type', '=', 'view')]}"/>
+            <button name="open_entries" string="Journal Entries" type="object" class="oe_stat_button" icon="fa-bars"/>
           </div>
           <div class="oe_title">
             <label for="name" class="oe_edit_only"/>
@@ -30,28 +28,21 @@
           </div>
           <group colspan="4" col="4">
             <field name="code"/>
-            <field name="parent_id"
-                   attrs="{'required': [('type', '=', 'normal')]}"/>
-            <field name="type"/>
             <field name="company_id" widget="selection" groups="base.group_multi_company"/>
             <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
             <field name="move_line_check" invisible="1"/>
             <newline/>
-            <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
-            <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
-            <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
+            <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+            <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+            <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
           </group>
-          <notebook colspan="4" attrs="{'invisible': [('type', '=', 'view')]}">
+          <notebook colspan="4">
             <page string="General">
               <group colspan="4" col="4">
                 <group>
                   <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                          attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
-                  <field name="date_start"
-                         attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('type', '=', 'normal')]}"/>
+                  <field name="date_start" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 </group>
                 <group>
                   <field name="salvage_value" widget="monetary" options="{'currency_field': 'company_currency_id'}"
@@ -61,7 +52,8 @@
               </group>
               <separator string="Other Information" colspan="4"/>
               <group colspan="4" col="4">
-                <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}"/>
+                <field name="profile_id"/>
+                <field name="group_ids" widget="many2many_tags"/>
                 <field name="partner_id"/>
                 <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
               </group>
@@ -173,17 +165,16 @@
     <field name="name">account.asset.tree</field>
     <field name="model">account.asset</field>
     <field name="arch" type="xml">
-      <tree string="Assets" decoration-info="type == 'view'">
+      <tree string="Assets">
         <field name="name"/>
-        <field name="type" invisible="1"/>
         <field name="code"/>
-        <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
-        <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="depreciation_base"/>
+        <field name="value_depreciated"/>
+        <field name="value_residual"/>
         <field name="date_start"/>
         <field name="date_remove"/>
         <field name="profile_id"/>
-        <field name="state" attrs="{'invisible': [('type', '=', 'view')]}"/>
+        <field name="state"/>
         <field name="company_id" groups="base.group_multi_company"/>
       </tree>
     </field>
@@ -205,7 +196,6 @@
         <field name="profile_id"/>
         <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
         <group expand="0" string="Group By...">
-          <filter string="Type" name="type" domain="" context="{'group_by': 'type'}"/>
           <filter string="Profile" name="profile" domain="" context="{'group_by': 'profile_id'}"/>
         </group>
       </search>

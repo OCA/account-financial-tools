@@ -28,7 +28,6 @@ class AccountAsset(models.Model):
     _name = 'account.asset'
     _description = 'Asset'
     _order = 'date_start desc, code, name'
-    _parent_store = True
 
     account_move_line_ids = fields.One2many(
         comodel_name='account.move.line',
@@ -77,23 +76,20 @@ class AccountAsset(models.Model):
     profile_id = fields.Many2one(
         comodel_name='account.asset.profile',
         string='Asset Profile',
-        change_default=True, readonly=True,
+        change_default=True,
+        readonly=True,
+        required=True,
         states={'draft': [('readonly', False)]})
-    parent_id = fields.Many2one(
-        comodel_name='account.asset',
-        string='Parent Asset', readonly=True,
-        states={'draft': [('readonly', False)]},
-        domain=[('type', '=', 'view')],
-        ondelete='restrict',
-        index=True,
-    )
-    parent_path = fields.Char(index=True)
-    child_ids = fields.One2many(
-        comodel_name='account.asset',
-        inverse_name='parent_id',
-        string='Child Assets')
+    group_ids = fields.Many2many(
+        comodel_name='account.asset.group',
+        relation="account_asset_group_rel",
+        column1="asset_id",
+        column2="group_id",
+        string='Asset Groups')
     date_start = fields.Date(
-        string='Asset Start Date', readonly=True,
+        string='Asset Start Date',
+        readonly=True,
+        required=True,
         states={'draft': [('readonly', False)]},
         help="You should manually add depreciation lines "
              "with the depreciations of previous fiscal years "
@@ -177,12 +173,6 @@ class AccountAsset(models.Model):
         inverse_name='asset_id',
         string='Depreciation Lines', copy=False,
         readonly=True, states={'draft': [('readonly', False)]})
-    type = fields.Selection(
-        selection=[('view', 'View'),
-                   ('normal', 'Normal')],
-        string='Type',
-        required=True, readonly=True, default='normal',
-        states={'draft': [('readonly', False)]})
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company', required=True, readonly=True,
@@ -208,20 +198,18 @@ class AccountAsset(models.Model):
                     asset.move_line_check = True
                     break
 
-    @api.depends('purchase_value', 'salvage_value', 'type', 'method')
+    @api.depends('purchase_value', 'salvage_value', 'method')
     @api.multi
     def _compute_depreciation_base(self):
         for asset in self:
-            if asset.type == 'view':
-                asset.depreciation_base = 0.0
-            elif asset.method in ['linear-limit', 'degr-limit']:
+            if asset.method in ['linear-limit', 'degr-limit']:
                 asset.depreciation_base = asset.purchase_value
             else:
                 asset.depreciation_base = \
                     asset.purchase_value - asset.salvage_value
 
     @api.multi
-    @api.depends('type', 'depreciation_base',
+    @api.depends('depreciation_base',
                  'depreciation_line_ids.type',
                  'depreciation_line_ids.amount',
                  'depreciation_line_ids.previous_id',
@@ -229,29 +217,16 @@ class AccountAsset(models.Model):
                  'depreciation_line_ids.move_check',)
     def _compute_depreciation(self):
         for asset in self:
-            if asset.type == 'normal':
-                lines = asset.depreciation_line_ids.filtered(
-                    lambda l: l.type in ('depreciate', 'remove') and
-                    (l.init_entry or l.move_check))
-                value_depreciated = sum([l.amount for l in lines])
-                residual = asset.depreciation_base - value_depreciated
-                depreciated = value_depreciated
-            else:
-                residual = 0.0
-                depreciated = 0.0
+            lines = asset.depreciation_line_ids.filtered(
+                lambda l: l.type in ('depreciate', 'remove') and
+                (l.init_entry or l.move_check))
+            value_depreciated = sum([l.amount for l in lines])
+            residual = asset.depreciation_base - value_depreciated
+            depreciated = value_depreciated
             asset.update({
                 'value_residual': residual,
                 'value_depreciated': depreciated
             })
-
-    @api.multi
-    @api.constrains('parent_id')
-    def _check_recursion(self, parent=None):
-        res = super()._check_recursion(parent=parent)
-        if not res:
-            raise UserError(
-                _("Error ! You can not create recursive assets."))
-        return res
 
     @api.multi
     @api.constrains('method', 'method_time')
@@ -297,7 +272,6 @@ class AccountAsset(models.Model):
         profile = self.profile_id
         if profile:
             self.update({
-                'parent_id': profile.parent_id,
                 'method': profile.method,
                 'method_number': profile.method_number,
                 'method_time': profile.method_time,
@@ -305,6 +279,7 @@ class AccountAsset(models.Model):
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
+                'group_ids': profile.group_ids,
             })
 
     @api.onchange('method_time')
@@ -312,30 +287,15 @@ class AccountAsset(models.Model):
         if self.method_time != 'year':
             self.prorata = True
 
-    @api.onchange('type')
-    def _onchange_type(self):
-        if self.type == 'view':
-            self.update({
-                'date_start': False,
-                'profile_id': False,
-                'purchase_value': False,
-                'salvage_value': False,
-            })
-        if self.depreciation_line_ids:
-            self.depreciation_line_ids.unlink()
-
     @api.model
     def create(self, vals):
         if vals.get('method_time') != 'year' and not vals.get('prorata'):
             vals['prorata'] = True
-        if vals.get('type') == 'view':
-            vals['date_start'] = False
         asset = super().create(vals)
         if self.env.context.get('create_asset_from_move_line'):
             # Trigger compute of depreciation_base
             asset.salvage_value = 0.0
-        if asset.type == 'normal':
-            asset._create_first_asset_line()
+        asset._create_first_asset_line()
         return asset
 
     @api.multi
@@ -345,9 +305,7 @@ class AccountAsset(models.Model):
                 vals['prorata'] = True
         res = super().write(vals)
         for asset in self:
-            asset_type = vals.get('type') or asset.type
-            if asset_type == 'view' or \
-                    self.env.context.get('asset_validate_from_write'):
+            if self.env.context.get('asset_validate_from_write'):
                 continue
             asset._create_first_asset_line()
             if asset.profile_id.open_asset and \
@@ -387,7 +345,7 @@ class AccountAsset(models.Model):
                       "posted depreciation lines."))
         # update accounting entries linked to lines of type 'create'
         amls = self.with_context(
-            allow_asset_removal=True, from_parent_object=True
+            allow_asset_removal=True
         ).mapped('account_move_line_ids')
         amls.write({'asset_id': False})
         return super().unlink()
@@ -419,8 +377,7 @@ class AccountAsset(models.Model):
     @api.multi
     def validate(self):
         for asset in self:
-            if asset.type == 'normal' and asset.company_currency_id.is_zero(
-                    asset.value_residual):
+            if asset.company_currency_id.is_zero(asset.value_residual):
                 asset.state = 'close'
             else:
                 asset.state = 'open'

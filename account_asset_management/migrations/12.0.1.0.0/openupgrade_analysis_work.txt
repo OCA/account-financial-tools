@@ -1,0 +1,201 @@
+Done after the analysis:
+NEW model account.asset.group
+NEW field account.asset         group_id
+NEW field account.asset.profile group_id
+account.asset date_start required
+account.asset profile_id required
+# TODO: account.asset of type 'view' (archived): set date_start & profile_id
+
+---Fields in module 'account_asset_management'---
+account_asset / account.asset.asset      / category_id (many2one)        : DEL relation: account.asset.category, required
+# renamed to profile_id
+account_asset / account.asset.asset      / currency_id (many2one)        : DEL relation: res.currency, required, req_default: function
+# renamed to company_currency_id
+account_asset / account.asset.asset      / date (date)                   : DEL required, req_default: function
+# renamed to date_start
+account_asset / account.asset.asset      / depreciation_line_ids (one2many): relation is now 'account.asset.line' ('account.asset.depreciation.line') [nothing to do]
+account_asset / account.asset.asset      / invoice_id (many2one)         : DEL relation: account.invoice
+# DEL
+account_asset / account.asset.asset      / message_follower_ids (one2many): DEL relation: mail.followers
+# DEL
+account_asset / account.asset.asset      / message_ids (one2many)        : DEL relation: mail.message
+# DEL
+account_asset / account.asset.asset      / message_last_post (datetime)  : DEL
+# DEL
+account_asset / account.asset.asset      / method (selection)            : selection_keys is now 'function' ('['degressive', 'linear']')
+# TODO: LOG WARNING IF METHOD IS NOT linear OR degressive
+account_asset / account.asset.asset      / method_period (integer)       : selection_keys is now 'function' ('False')
+account_asset / account.asset.asset      / method_period (integer)       : type is now 'selection' ('integer')
+# renamed method_number to method_number_11 (11.0: Number of depreciations,      12.0: Number of years)
+# renamed method_period to method_period_11 (11.0: Number of months in a period, 12.0: Period Length: year/quarter/month)
+# TODO: LOG WARNING IF method_period_11 is other than (1, 3, 12)
+account_asset / account.asset.asset      / method_time (selection)       : selection_keys is now 'function' ('['end', 'number']')
+account_asset / account.asset.asset      / state (selection)             : selection_keys is now '['close', 'draft', 'open', 'removed']' ('['close', 'draft', 'open']')
+account_asset / account.asset.asset      / type (selection)              : DEL required
+# DEL
+account_asset / account.asset.asset      / value (float)                 : DEL required
+# renamed to purchase_value
+account_asset / account.asset.asset      / value_residual (float)        : is now stored
+account_asset / account.asset.asset      / website_message_ids (one2many): DEL relation: mail.message
+# DEL
+account_asset / account.asset.category   / account_depreciation_expense_id (many2one): DEL relation: account.account, required
+# renamed to account_expense_depreciation_id
+account_asset / account.asset.category   / group_entries (boolean)       : DEL
+# DEL
+account_asset / account.asset.category   / method (selection)            : selection_keys is now 'function' ('['degressive', 'linear']')
+# TODO: LOG WARNING IF METHOD IS NOT linear OR degressive
+account_asset / account.asset.category   / method_end (date)             : DEL
+# DEL
+account_asset / account.asset.category   / method_period (integer)       : selection_keys is now 'function' ('False')
+account_asset / account.asset.category   / method_period (integer)       : type is now 'selection' ('integer')
+# renamed method_number to method_number_11 (11.0: Number of depreciations,      12.0: Number of years)
+# renamed method_period to method_period_11 (11.0: Number of months in a period, 12.0: Period Length: year/quarter/month)
+# TODO: LOG WARNING IF method_period_11 is other than (1, 3, 12)
+account_asset / account.asset.category   / method_time (selection)       : selection_keys is now 'function' ('['end', 'number']')
+account_asset / account.asset.category   / type (selection)              : DEL required, selection_keys: ['purchase', 'sale'], req_default: function
+# DEL
+account_asset / account.asset.depreciation.line / asset_id (many2one)           : relation is now 'account.asset' ('account.asset.asset') [nothing to do]
+account_asset / account.asset.depreciation.line / depreciated_value (float)     : now a function
+account_asset / account.asset.depreciation.line / depreciation_date (date)      : DEL
+# renamed to line_date
+account_asset / account.asset.depreciation.line / move_posted_check (boolean)   : DEL
+# DEL
+account_asset / account.asset.depreciation.line / remaining_value (float)       : now a function
+account_asset / account.asset.depreciation.line / sequence (integer)            : DEL required
+# DEL
+account_asset / account.invoice.line     / asset_category_id (many2one)  : DEL relation: account.asset.category
+# renamed to asset_profile_id
+account_asset / account.invoice.line     / asset_end_date (date)         : DEL
+# DEL
+account_asset / account.invoice.line     / asset_mrr (float)             : DEL
+# DEL
+account_asset / account.invoice.line     / asset_start_date (date)       : DEL
+# DEL
+account_asset / account.move             / asset_depreciation_ids (one2many): DEL relation: account.asset.depreciation.line
+# DEL
+account_asset / product.template         / asset_category_id (many2one)  : DEL relation: account.asset.category
+# DEL
+account_asset / product.template         / deferred_revenue_category_id (many2one): DEL relation: account.asset.category
+# DEL
+account_asset_management / account.account          / asset_profile_id (many2one)   : NEW relation: account.asset.profile
+account_asset_management / account.asset            / account_analytic_id (many2one): NEW relation: account.analytic.account
+# get from profile_id.account_analytic_id
+account_asset_management / account.asset            / account_move_line_ids (one2many): NEW relation: account.move.line
+account_asset_management / account.asset            / child_ids (one2many)          : NEW relation: account.asset
+account_asset_management / account.asset            / company_currency_id (many2one): NEW relation: res.currency, isrelated: related, stored
+# renamed from currency_id
+account_asset_management / account.asset            / date_remove (date)            : NEW
+account_asset_management / account.asset            / date_start (date)             : NEW
+# renamed from date
+account_asset_management / account.asset            / depreciation_base (float)     : NEW isfunction: function, stored
+account_asset_management / account.asset            / profile_id (many2one)         : NEW relation: account.asset.profile
+# renamed from category_id
+account_asset_management / account.asset            / purchase_value (float)        : NEW required
+# renamed from value
+account_asset_management / account.asset            / value_depreciated (float)     : NEW isfunction: function, stored
+account_asset_management / account.asset.line       / init_entry (boolean)          : NEW
+account_asset_management / account.asset.line       / line_date (date)              : NEW required
+# renamed from depreciation_date
+account_asset_management / account.asset.line       / previous_id (many2one)        : NEW relation: account.asset.line
+account_asset_management / account.asset.line       / type (selection)              : NEW selection_keys: ['create', 'depreciate', 'remove'], hasdefault
+account_asset_management / account.asset.profile    / account_expense_depreciation_id (many2one): NEW relation: account.account, required
+# renamed from account_depreciation_expense_id
+account_asset_management / account.asset.profile    / account_min_value_id (many2one): NEW relation: account.account
+account_asset_management / account.asset.profile    / account_plus_value_id (many2one): NEW relation: account.account
+account_asset_management / account.asset.profile    / account_residual_value_id (many2one): NEW relation: account.account
+account_asset_management / account.asset.profile    / asset_product_item (boolean)  : NEW
+account_asset_management / account.asset.profile    / note (text)                   : NEW
+account_asset_management / account.asset.recompute.trigger / company_id (many2one)         : NEW relation: res.company, required
+account_asset_management / account.asset.recompute.trigger / date_completed (datetime)     : NEW
+account_asset_management / account.asset.recompute.trigger / date_trigger (datetime)       : NEW
+account_asset_management / account.asset.recompute.trigger / reason (char)                 : NEW required
+account_asset_management / account.asset.recompute.trigger / state (selection)             : NEW selection_keys: ['done', 'open'], hasdefault
+account_asset_management / account.invoice.line     / asset_id (many2one)           : NEW relation: account.asset
+account_asset_management / account.invoice.line     / asset_profile_id (many2one)   : NEW relation: account.asset.profile
+# renamed from asset_category_id
+account_asset_management / account.move.line        / asset_id (many2one)           : NEW relation: account.asset
+# get from account.asset.line (asset_id, move_id)
+account_asset_management / account.move.line        / asset_profile_id (many2one)   : NEW relation: account.asset.profile
+# get from account.asset.line (asset_id, move_id, profile_id)
+---XML records in module 'account_asset_management'---
+NEW ir.actions.act_window: account_asset_management.account_asset_action
+NEW ir.actions.act_window: account_asset_management.account_asset_compute_action
+NEW ir.actions.act_window: account_asset_management.account_asset_profile_action
+NEW ir.actions.act_window: account_asset_management.act_entries_open
+DEL ir.actions.act_window: account_asset.action_account_asset_asset_form
+DEL ir.actions.act_window: account_asset.action_account_asset_asset_list_normal_purchase
+DEL ir.actions.act_window: account_asset.action_asset_asset_report
+DEL ir.actions.act_window: account_asset.action_asset_depreciation_confirmation_wizard
+DEL ir.actions.act_window: account_asset.action_asset_modify
+DEL ir.cron: account_asset.account_asset_cron
+NEW ir.model.access: account_asset_management.access_account_asset_invoice
+NEW ir.model.access: account_asset_management.access_account_asset_line_invoice
+NEW ir.model.access: account_asset_management.access_account_asset_line_manager
+NEW ir.model.access: account_asset_management.access_account_asset_line_user
+NEW ir.model.access: account_asset_management.access_account_asset_manager
+NEW ir.model.access: account_asset_management.access_account_asset_profile_invoice
+NEW ir.model.access: account_asset_management.access_account_asset_profile_manager
+NEW ir.model.access: account_asset_management.access_account_asset_profile_user
+NEW ir.model.access: account_asset_management.access_account_asset_recompute_trigger_manager
+NEW ir.model.access: account_asset_management.access_account_asset_recompute_trigger_user
+NEW ir.model.access: account_asset_management.access_account_asset_user
+DEL ir.model.access: account_asset.access_account_asset_asset
+DEL ir.model.access: account_asset.access_account_asset_asset_invoicing_payment
+DEL ir.model.access: account_asset.access_account_asset_asset_manager
+DEL ir.model.access: account_asset.access_account_asset_category
+DEL ir.model.access: account_asset.access_account_asset_category_invoicing_payment
+DEL ir.model.access: account_asset.access_account_asset_category_manager
+DEL ir.model.access: account_asset.access_account_asset_depreciation_line
+DEL ir.model.access: account_asset.access_account_asset_depreciation_line_invoicing_payment
+DEL ir.model.access: account_asset.access_account_asset_depreciation_line_manager
+DEL ir.model.access: account_asset.access_asset_asset_report
+DEL ir.model.access: account_asset.access_asset_asset_report_manager
+NEW ir.rule: account_asset_management.account_asset_multi_company_rule (noupdate)
+NEW ir.rule: account_asset_management.account_asset_profile_multi_company_rule (noupdate)
+DEL ir.rule: account_asset.account_asset_asset_multi_company_rule (noupdate)
+DEL ir.rule: account_asset.account_asset_category_multi_company_rule (noupdate)
+NEW ir.ui.menu: account_asset_management.account_asset_compute_menu
+NEW ir.ui.menu: account_asset_management.account_asset_menu
+NEW ir.ui.menu: account_asset_management.account_asset_profile_menu
+NEW ir.ui.menu: account_asset_management.menu_finance_assets
+NEW ir.ui.menu: account_asset_management.menu_finance_config_assets
+DEL ir.ui.menu: account_asset.menu_action_account_asset_asset_form
+DEL ir.ui.menu: account_asset.menu_action_account_asset_asset_list_normal_purchase
+DEL ir.ui.menu: account_asset.menu_action_asset_asset_report
+DEL ir.ui.menu: account_asset.menu_asset_depreciation_confirmation_wizard
+DEL ir.ui.menu: account_asset.menu_finance_config_assets
+NEW ir.ui.view: account_asset_management.account_asset_compute_view_form
+NEW ir.ui.view: account_asset_management.account_asset_compute_view_form_result
+NEW ir.ui.view: account_asset_management.account_asset_profile_view_form
+NEW ir.ui.view: account_asset_management.account_asset_profile_view_search
+NEW ir.ui.view: account_asset_management.account_asset_profile_view_tree
+NEW ir.ui.view: account_asset_management.account_asset_remove_view_form
+NEW ir.ui.view: account_asset_management.account_asset_view_form
+NEW ir.ui.view: account_asset_management.account_asset_view_search
+NEW ir.ui.view: account_asset_management.account_asset_view_tree
+NEW ir.ui.view: account_asset_management.invoice_form
+NEW ir.ui.view: account_asset_management.invoice_supplier_form
+NEW ir.ui.view: account_asset_management.res_config_settings_view_form
+NEW ir.ui.view: account_asset_management.view_account_form
+NEW ir.ui.view: account_asset_management.view_account_move_line_filter
+NEW ir.ui.view: account_asset_management.view_invoice_line_form
+NEW ir.ui.view: account_asset_management.view_move_form
+NEW ir.ui.view: account_asset_management.view_move_line_form
+DEL ir.ui.view: account_asset.action_account_asset_report_graph
+DEL ir.ui.view: account_asset.action_account_asset_report_pivot
+DEL ir.ui.view: account_asset.asset_modify_form
+DEL ir.ui.view: account_asset.assets_backend
+DEL ir.ui.view: account_asset.qunit_suite
+DEL ir.ui.view: account_asset.res_config_settings_view_form
+DEL ir.ui.view: account_asset.view_account_asset_asset_category_kanban
+DEL ir.ui.view: account_asset.view_account_asset_asset_form
+DEL ir.ui.view: account_asset.view_account_asset_asset_kanban
+DEL ir.ui.view: account_asset.view_account_asset_asset_purchase_tree
+DEL ir.ui.view: account_asset.view_account_asset_category_form
+DEL ir.ui.view: account_asset.view_account_asset_category_search
+DEL ir.ui.view: account_asset.view_account_asset_category_tree
+DEL ir.ui.view: account_asset.view_account_asset_search
+DEL ir.ui.view: account_asset.view_asset_asset_report_search
+DEL ir.ui.view: account_asset.view_asset_depreciation_confirmation_wizard
+DEL ir.ui.view: account_asset.view_invoice_asset_category
+DEL ir.ui.view: account_asset.view_product_template_form_inherit

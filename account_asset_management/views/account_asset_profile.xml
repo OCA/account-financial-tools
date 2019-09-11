@@ -10,7 +10,7 @@
           <group>
             <group>
               <field name="name"/>
-              <field name="parent_id" required="1"/>
+              <field name="group_ids" widget="many2many_tags"/>
               <field name="asset_product_item"/>
               <field name="active"/>
               <field name="company_id" widget="selection" groups="base.group_multi_company"/>
