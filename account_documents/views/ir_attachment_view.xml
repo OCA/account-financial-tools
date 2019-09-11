@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Files -->
+    <record model="ir.ui.view" id="view_documents_file_kanban_account">
+        <field name="name">account.documents.kanban</field>
+        <field name="model">account.documents</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="ir_attachment_id"/>
+                <field name="mimetype"/>
+                <field name="type"/>
+                <field name="datas_fname"/>
+                <field name="name"/>
+                <!-- <field name="version"/> -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_vignette">
+                                <div class="oe_attachment">
+                                    <div class="row">
+                                        <div class="col-xs-4 o_kanban_primary_left" t-if="record.type.raw_value == 'binary'">
+                                            <a t-attf-href="/web/content/#{record.ir_attachment_id.raw_value}?download=1">
+                                                <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)"/>
+                                                <div t-if="!webimage" class="o_image" t-att-data-mimetype="record.mimetype.value"/>
+                                                <div t-if="webimage" class="o_attachment_image">
+                                                    <img t-attf-src="/web/image/#{record.ir_attachment_id.raw_value}?download=1"/>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <strong><field name="name"/></strong><br/>
+                                            <field name="datas_fname"/><br/>
+                                            <div class="mt8">
+                                                <field name="document_type_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">account.documents.form</field>
+        <field name="model">account.documents</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <form string="Attachments">
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="res_id" invisible="1"/>
+                            <field name="type"/>
+                            <field name="datas" filename="datas_fname" attrs="{'invisible':[('type','=','url')]}"/>
+                            <field name="datas_fname" invisible="1" attrs="{'invisible':[('type','=','url')]}" class="oe_inline oe_right"/>
+                            <field name="url" widget="url" attrs="{'invisible':[('type','=','binary')]}"/>
+                            <field name="mimetype" groups="base.group_no_one"/>
+                        </group>
+                        <group>
+                            <field name="document_type_id"/>
+                        </group>
+                    </group>
+                    <group name="description_group" string="Description" groups="base.group_no_one" colspan="4">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group string="History" groups="base.group_no_one" colspan="4">
+                        <label for="create_uid" string="Creation"/>
+                        <div name="creation_div">
+                            <field name="create_uid" readonly="1" class="oe_inline"/> on
+                            <field name="create_date" readonly="1" class="oe_inline"/>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

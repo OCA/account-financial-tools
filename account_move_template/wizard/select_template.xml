@@ -15,6 +15,13 @@
                             <field name="partner_id" attrs="{'invisible':[('state','=','template_selected')]}"/>
                         </group>
                     </group>
+                    <group name="filters">
+                        <group name="date_range">
+                            <field name="date_range_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
                     <separator
                             string="Modify the lines before create them or edit them after creation."
                             attrs="{'invisible':[('state','!=','template_selected')]}"/>

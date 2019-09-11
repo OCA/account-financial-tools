@@ -6,7 +6,8 @@ import datetime
 from odoo import api, fields, models, _
 import odoo.addons.decimal_precision as dp
 from odoo.exceptions import UserError
-
+import logging
+_logger = logging.getLogger(__name__)
 
 class AccountAssetLine(models.Model):
     _name = 'account.asset.line'
@@ -151,6 +152,7 @@ class AccountAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
+        _logger.info("Write vals= %s" % (vals))
         return super().write(vals)
 
     @api.multi

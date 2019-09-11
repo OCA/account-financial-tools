@@ -24,7 +24,7 @@ class SaleOrder(models.Model):
                 partner = record.partner_id.parent_id and record.partner_id.parent_id or record.partner_id
                 partner_id = partner.id
                 credit_due = sum([x.balance_due for x in self.env["credit.control.line"].search([('partner_id', '=', partner_id), ('date', '=', fields.Datetime.now())])])
-                _logger.info("Opended invoices %s:%s:%s" % (partner.total_opened_invoice, credit_due, due_left))
+                #_logger.info("Opended invoices %s:%s:%s" % (partner.total_opened_invoice, credit_due, due_left))
                 if credit_due > 0.0:
                     record.credit_left = -credit_due
                     record.credit_due = credit_due

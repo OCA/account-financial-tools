@@ -39,7 +39,7 @@ class AccountDocumentTemplate(models.Model):
         return lines
 
     @api.multi
-    def lines(self, line_number, date=None, computed_lines=None, partner_id=False):
+    def lines(self, line_number, date_from=None, date_to=None, computed_lines=None, partner_id=False):
         def replace_all(text, dic):
             for i, j in dic.items():
                 text = text.replace(i, j)
@@ -54,7 +54,10 @@ class AccountDocumentTemplate(models.Model):
             raise exceptions.Warning(
                 _('Line %s can\'t refer to itself') % str(line_number)
             )
-        fy = line.template_id.company_id.compute_fiscalyear_dates(date)
+        if date_from:
+            fy = {'date_from': date_from, 'date_to': date_to}
+        else:
+            fy = line.template_id.company_id.compute_fiscalyear_dates(date_to)
         domain = [('account_id', '=', line.account_id.id)]
         if line.analytic_account_id:
             domain += [('analytic_account_id', '=', line.analytic_account_id.id)]
@@ -70,7 +73,7 @@ class AccountDocumentTemplate(models.Model):
         account_credit_fy = sum([x.credit for x in move_fy])
 
         try:
-            recurse_lines = partial(self.lines, date=date, computed_lines=computed_lines, partner_id=partner_id)
+            recurse_lines = partial(self.lines, date_from=date_from, date_to=date_to, computed_lines=computed_lines, partner_id=partner_id)
             local_dict = {
                         'recurse_lines': recurse_lines,
                         'account_debit': account_debit,
@@ -96,7 +99,7 @@ class AccountDocumentTemplate(models.Model):
         return computed_lines[line_number]
 
     @api.multi
-    def compute_lines(self, input_lines, date, partner_id=False):
+    def compute_lines(self, input_lines, date_from, date_to, partner_id=False):
         if len(input_lines) != self._input_lines():
             raise exceptions.Warning(
                 _('You can not add a different number of lines in this wizard '
@@ -108,7 +111,7 @@ class AccountDocumentTemplate(models.Model):
         computed_lines.update(input_lines)
         for line_number in computed_lines:
             computed_lines[line_number] = self.lines(
-                line_number, date, computed_lines, partner_id=partner_id)
+                line_number, date_from, date_to, computed_lines, partner_id=partner_id)
         return computed_lines
 
 

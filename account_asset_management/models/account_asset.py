@@ -1007,7 +1007,8 @@ class AccountAsset(models.Model):
                     fiscalyear_lock_date and
                     fiscalyear_lock_date >= fy_date_stop.strftime('%Y-%m-%d')
                 ):
-                    init_flag = True
+                    #init_flag = True
+                    init_flag = False
                 else:
                     init_flag = False
         # Step 1:

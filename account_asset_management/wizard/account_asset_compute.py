@@ -77,7 +77,7 @@ class AccountAssetCompute(models.TransientModel):
 
     @api.multi
     def shoot_and_forget(self):
-        action = self.env.ref('account_asset_managment.account_asset_actions')
+        action = self.env.ref('account_asset_management.account_asset_actions')
         if action:
             action.with_context(date_end=self.date_end).run()
         return {'return':True, 'type':'ir.actions.act_window_close' }

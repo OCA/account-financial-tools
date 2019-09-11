@@ -15,7 +15,16 @@ class WizardSelectMoveTemplate(models.TransientModel):
         'wizard.select.move.template.line', 'template_id')
     state = fields.Selection(
         [('template_selected', 'Template selected')], 'State')
-    date_from = fields.Date('Date from fiscal year', default=fields.Date.today())
+    date_range_id = fields.Many2one(comodel_name='date.range', string='Date range')
+    date_from = fields.Date('Date from')
+    date_to = fields.Date('Date to', default=fields.Date.today())
+
+
+    @api.onchange('date_range_id')
+    def onchange_date_range_id(self):
+        """Handle date range change."""
+        self.date_from = self.date_range_id.date_start
+        self.date_to = self.date_range_id.date_end
 
     @api.multi
     def load_lines(self):
@@ -51,8 +60,12 @@ class WizardSelectMoveTemplate(models.TransientModel):
         input_lines = {}
         for template_line in self.line_ids:
             input_lines[template_line.sequence] = template_line.amount
-        date = fields.Datetime.from_string(self.date_from)
-        amounts = self.template_id.compute_lines(input_lines, date, partner_id=self.partner_id.id)
+        if not self.date_to:
+            self.date_to = fields.Date.today()
+        date_to = fields.Datetime.from_string(self.date_to)
+        if self.date_from:
+            date_from = fields.Datetime.from_string(self.date_from)
+        amounts = self.template_id.compute_lines(input_lines, date_from, date_to, partner_id=self.partner_id.id)
         name = self.template_id.name
         partner = self.partner_id.id
         moves = self.env['account.move']

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Files -->
+    <record model="ir.ui.view" id="view_documents_file_kanban_account">
+        <field name="name">account.documents.kanban</field>
+        <field name="model">account.documents</field>
+        <field name="inherit_id" ref="account_documents.view_documents_file_kanban_account"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="comment_template_id"/>
+            </field>
+            <field name="document_type_id" position="after">
+                <field name="comment_template_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">account.documents.form</field>
+        <field name="model">account.documents</field>
+        <field name="inherit_id" ref="account_documents.view_document_form"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='document_type_id']" position="after">
+                <field name="comment_template_id"/>
+            </xpath>
+            <xpath expr="//group[@name='description_group']" position="inside">
+                <field name="note" groups="base.group_no_one" nolabel="1"/>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="replace"/>
+        </field>
+    </record>
+</odoo>

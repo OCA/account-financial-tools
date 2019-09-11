@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_see_documents" type="object" icon="fa-files-o">
+                        <field string="Documents" name="documents_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+        <record id="vpicktree" model="ir.ui.view">
+            <field name="name">stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree" />
+            <field name="arch" type="xml">
+                <field name="backorder_id" position="after">
+                    <button name="action_see_documents" type="object" icon="fa-files-o" string="Documents"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

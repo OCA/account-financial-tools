@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_form_documents_number" model="ir.ui.view">
+            <field name="name">account.invoice.documents.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_see_documents" type="object" icon="fa-files-o">
+                            <field string="Documents" name="documents_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_supplier_documents_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.documents.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_see_documents" type="object" icon="fa-files-o">
+                            <field string="Documents" name="documents_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

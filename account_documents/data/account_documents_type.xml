@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="account.documents.type" id="out_invoice_graft">
+            <field name="print_name">Draft Invoice</field>
+            <field name="type">out_invoice</field>
+            <field name="state">draft</field>
+        </record>
+    </data>
+</odoo>

@@ -19,6 +19,7 @@
      'mail',
      'account_credit_control',
      'website_sale',
+     'account_documents',
  ],
  'website': 'https://github.com/OCA/account-financial-tools',
  'data': [
