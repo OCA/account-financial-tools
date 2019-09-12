@@ -1,0 +1,61 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_invoice_currency
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+# Quentin THEURET <odoo@kerpeo.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-13 13:32+0000\n"
+"PO-Revision-Date: 2018-04-13 13:32+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Amount Due"
+msgstr "Montant dû"
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_form
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_form
+msgid "Amounts in company currency"
+msgstr "Montants dans le devise de la société"
+
+#. module: account_invoice_currency
+#: model:ir.model,name:account_invoice_currency.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_invoice_currency
+#: model:ir.model.fields,help:account_invoice_currency.field_account_invoice_amount_tax_signed
+msgid "Invoice tax amount in the company currency, negative for credit notes."
+msgstr ""
+"Le montant des taxes dans la devise de la société, négatif pour les notes de "
+"crédit."
+
+#. module: account_invoice_currency
+#: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice_amount_tax_signed
+msgid "Tax"
+msgstr "Taxe"
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Total"
+msgstr "Total"
+
+#. module: account_invoice_currency
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+msgid "Total (Company Currency)"
+msgstr "Total (Devise de la société)"
