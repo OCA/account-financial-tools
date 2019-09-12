@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_account_find_balance_inconsistency_form" model="ir.ui.view">
+        <field name="model">account.find.balance.inconsistency</field>
+        <field name="inherit_id" ref="account.accounting_report_view" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <button name="check_report" position="attributes">
+                <attribute name="string">Find inconsistencies</attribute>
+            </button>
+            <field name="account_report_id" position="attributes">
+                <attribute name="domain" />
+            </field>
+            <field name="account_report_id" position="after">
+                <field name="account_report2_id" />
+            </field>
+            <field name="debit_credit" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="enable_filter" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_from" position="replace" />
+            <field name="date_to" position="replace" />
+            <notebook position="before">
+                <group name="find_dates">
+                    <field name="find_date_from" />
+                    <field name="find_date_to" />
+                </group>
+            </notebook>
+        </field>
+    </record>
+    <act_window
+        id="action_account_find_balance_inconsistency"
+        name="Find balance inconsistencies"
+        res_model="account.find.balance.inconsistency"
+        target="new"
+        view_id="view_account_find_balance_inconsistency_form"
+    />
+    <menuitem
+        id="menu_account_find_balance_inconsistency"
+        parent="account.menu_finance_reports"
+        action="action_account_find_balance_inconsistency"
+    />
+</odoo>
