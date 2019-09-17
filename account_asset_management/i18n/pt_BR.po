@@ -28,16 +28,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
-"PO-Revision-Date: 2019-07-24 00:43+0000\n"
-"Last-Translator: Eduardo Aparicio <eduardo.caparica@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2019-09-17 14:24+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:971
@@ -129,20 +129,16 @@ msgstr "Conta do Patrimônio"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
-#, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
-msgstr "Conta do Patrimônio"
+msgstr "Grupo de Ativos"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
-#, fuzzy
-#| msgid "Asset Profiles"
 msgid "Asset Groups"
-msgstr "Perfis do Ativo"
+msgstr "Grupos de Ativos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -341,7 +337,7 @@ msgstr "Fechar"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -859,10 +855,8 @@ msgstr "Outras Informações"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
-#, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
-msgstr "Ativo-Pai"
+msgstr "Grupo de Ativos Pai"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
@@ -1015,10 +1009,8 @@ msgstr "Valor Residual"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
-#| msgid "Search Asset Profile"
 msgid "Search Asset Group"
-msgstr "Procurar Perfil de Ativo"
+msgstr "Procurar Grupo de Ativo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
