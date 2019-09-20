@@ -31,6 +31,7 @@ It prevents the validation of invoices when:
 
 * there are draft invoices with a prior date
 * there are validated invoices with a later date
+* invoice have a date (which generates account move) prior of date_invoice
 
 **Table of contents**
 
@@ -62,6 +63,7 @@ Contributors
 * Gilles Gilles <meyomesse.gilles@gmail.com>
 * Francesco Apruzzese <f.apruzzese@apuliasoftware.it>
 * Thomas Binsfeld <thomas.binsfeld@acsone.eu>
+* Sergio Corato <https://github.com/sergiocorato>
 
 Maintainers
 ~~~~~~~~~~~

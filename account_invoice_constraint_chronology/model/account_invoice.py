@@ -39,6 +39,12 @@ class AccountInvoice(models.Model):
         for inv in self:
             if not inv.journal_id.check_chronology:
                 continue
+            if inv.type in ('in_invoice', 'in_refund'):
+                if inv.date_invoice and inv.date and \
+                        inv.date_invoice > inv.date:
+                    raise UserError(
+                        _("Supplier invoice date cannot be later than"
+                          " the date of registration!"))
             invoices = self.search(
                 self._prepare_previous_invoices_domain(inv), limit=1)
             if invoices:
