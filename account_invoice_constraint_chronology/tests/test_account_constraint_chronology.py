@@ -133,3 +133,16 @@ class TestAccountConstraintChronology(common.SavepointCase):
         self.account_journal_sale.type = 'bank'
         self.account_journal_sale._onchange_type()
         self.assertFalse(self.account_journal_sale.check_chronology)
+
+    def test_invoice_date(self):
+        journal = self.get_journal_check(True)
+        today = datetime.now()
+        yesterday = today - timedelta(days=1)
+        invoice = self.create_simple_invoice(journal.id, today.strftime(
+            DEFAULT_SERVER_DATE_FORMAT))
+        invoice.date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        with self.assertRaises(UserError):
+            invoice.action_invoice_open()
+        invoice.date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        invoice.action_invoice_open()
+        self.assertTrue(invoice.state == 'open', 'Invoice was not created')
