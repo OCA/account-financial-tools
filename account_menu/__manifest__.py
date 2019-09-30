@@ -3,26 +3,26 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Account - Missing Menus',
-    'version': '12.0.1.0.0',
-    'category': 'Accounting',
-    'license': 'AGPL-3',
-    'summary': "Adds missing menu entries for Account module",
-    'author': "GRAP, Odoo Community Association (OCA)",
-    'website': 'https://github.com/OCA/account-financial-tools',
-    'depends': [
-        'account',
-        'account_coa_menu',
-        'account_group_menu',
-        'account_tag_menu',
-        'account_type_menu',
+    "name": "Account - Missing Menus",
+    "version": "13.0.1.0.0",
+    "category": "Accounting",
+    "license": "AGPL-3",
+    "summary": "Adds missing menu entries for Account module",
+    "author": "GRAP, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "depends": ["account"],
+    "data": [
+        "views/menu.xml",
+        "views/view_account_account_template.xml",
+        "views/view_account_bank_statement.xml",
+        "views/view_account_chart_template.xml",
+        "views/view_account_fiscal_position_template.xml",
+        "views/view_account_group.xml",
+        "views/view_account_tag.xml",
+        "views/view_account_tax_group.xml",
+        "views/view_account_tax_template.xml",
+        "views/view_account_type.xml",
     ],
-    'data': [
-        'views/menu.xml',
-        'views/view_account_bank_statement.xml',
-    ],
-    'demo': [
-        'demo/res_groups.xml',
-    ],
-    'installable': True,
+    "demo": ["demo/res_groups.xml"],
+    "installable": True,
 }
