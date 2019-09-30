@@ -26,8 +26,8 @@ Feature: Ensure that manually changing an invoice level feature works as expecte
   @account_credit_control_run_month_sept
   Scenario: Create run
     Given there is "draft" credit lines
-    And I mark all draft email to state "to_be_sent"
-    Then the draft line should be in state "to_be_sent"
+    And I mark all draft email to state "to_do"
+    Then the draft line should be in state "to_do"
     Given I need a "credit.control.run" with oid: credit_control.manual_change
     And having:
       | name |      value |

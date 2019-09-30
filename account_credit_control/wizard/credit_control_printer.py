@@ -21,7 +21,7 @@ class CreditControlPrinter(models.TransientModel):
             return False
         return context.get('active_ids', False)
 
-    mark_as_sent = fields.Boolean(string='Mark letter lines as sent',
+    mark_as_done = fields.Boolean(string='Mark letter lines as done',
                                   default=True,
                                   help="Only letter lines will be marked.")
     line_ids = fields.Many2many('credit.control.line',
@@ -48,8 +48,8 @@ class CreditControlPrinter(models.TransientModel):
 
         comms = comm_obj._generate_comm_from_credit_lines(lines)
 
-        if self.mark_as_sent:
-            comms._mark_credit_line_as_sent()
+        if self.mark_as_done:
+            comms._mark_credit_line_as_done()
 
         report_name = 'account_credit_control.report_credit_control_summary'
         report_obj = self.env['report'].with_context(active_ids=comms.ids)

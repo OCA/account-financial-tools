@@ -15,8 +15,8 @@ Feature: Ensure that email credit line generation first pass is correct
   @account_credit_control_mark
   Scenario: mark lines
     Given there is "draft" credit lines
-    And I mark all draft email to state "to_be_sent"
-    Then the draft line should be in state "to_be_sent"
+    And I mark all draft email to state "to_do"
+    Then the draft line should be in state "to_do"
 
   @pay_invoice_si_19_part1
   Scenario: I pay a part of the first part of the invoice SI 19,

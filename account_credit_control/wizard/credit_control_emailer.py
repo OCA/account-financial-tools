@@ -27,7 +27,7 @@ class CreditControlEmailer(models.TransientModel):
     line_ids = fields.Many2many('credit.control.line',
                                 string='Credit Control Lines',
                                 default=_get_line_ids,
-                                domain=[('state', '=', 'to_be_sent'),
+                                domain=[('state', '=', 'to_do'),
                                         ('channel', '=', 'email')])
 
     @api.model
@@ -35,7 +35,7 @@ class CreditControlEmailer(models.TransientModel):
     def _filter_lines(self, lines):
         """ filter lines to use in the wizard """
         line_obj = self.env['credit.control.line']
-        domain = [('state', '=', 'to_be_sent'),
+        domain = [('state', '=', 'to_do'),
                   ('id', 'in', lines.ids),
                   ('channel', '=', 'email')]
         return line_obj.search(domain)

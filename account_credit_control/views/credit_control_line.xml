@@ -7,7 +7,7 @@
             <form string="Control Credit Lines">
                 <header>
                     <field name="state" widget="statusbar"
-                           statusbar_visible="draft,to_be_sent,sent"
+                           statusbar_visible="draft,to_do,done"
                            statusbar_colors='{"error":"red","email_error":"red"}'/>
                 </header>
                 <sheet>
@@ -23,7 +23,7 @@
                             <field name="date"/>
                             <field name="date_due"/>
                             <field name="channel"/>
-                            <field name="date_sent"/>
+                            <field name="date_reminded"/>
                             <field name="mail_message_id"/>
                         </group>
                     </group>
@@ -69,17 +69,17 @@
                     <filter name="filter_draft" icon="fa-envelope"
                             string="Draft" domain="[('state', '=', 'draft')]"
                             help="Draft lines have to be triaged."/>
-                    <filter name="filter_to_be_sent" icon="fa-share"
-                            string="Ready To Send"
-                            domain="[('state', '=', 'to_be_sent')]"
-                            help="These lines are ready to send by email or by letter using the Actions."/>
+                    <filter name="filter_to_do" icon="fa-share"
+                            string="To Do"
+                            domain="[('state', '=', 'to_do')]"
+                            help="These lines are to do using the Actions."/>
                     <filter name="filter_ignored" icon="fa-times"
                             string="Ignored"
                             domain="[('state', '=', 'ignored')]"
                             help="Lines which have been ignored from previous runs."/>
-                    <filter name="filter_sent" icon="fa-paper-plane"
-                            string="Sent" domain="[('state', '=', 'sent')]"
-                            help="Lines already sent."/>
+                    <filter name="filter_done" icon="fa-paper-plane"
+                            string="Done" domain="[('state', '=', 'done')]"
+                            help="Lines already done."/>
                     <filter name="filter_error" icon="fa-exclamation-triangle"
                             string="Error"
                             domain="[('state', 'in', ('error', 'email_error'))]"
@@ -130,7 +130,7 @@
         <field name="model">credit.control.line</field>
         <field name="arch" type="xml">
             <tree editable="bottom" string="Control Credit Lines"
-                  colors="green:state == 'sent';red:state in ('error', 'email_error');">
+                  colors="green:state == 'done';red:state in ('error', 'email_error');">
                 <field name="date"/>
                 <field name="date_due"/>
                 <field name="level"/>
@@ -170,7 +170,7 @@
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="credit_control_line_tree"/>
         <field name="context">{'search_default_filter_draft': 1,
-            'search_default_filter_to_be_sent': 1}
+            'search_default_filter_to_do': 1}
         </field>
         <field name="search_view_id" ref="credit_control_line_search"/>
     </record>

@@ -14,12 +14,22 @@ class CreditControlRun(models.Model):
     """ Credit Control run generate all credit control lines and reject """
 
     _name = "credit.control.run"
-    _rec_name = 'date'
     _description = "Credit control line generator"
 
     date = fields.Date(string='Controlling Date', required=True,
                        readonly=True,
                        states={'draft': [('readonly', False)]})
+
+    @api.multi
+    def name_get(self):
+        lang = self.env.context.get('lang', self.env.user.lang)
+        date_format = (
+            self.env['res.lang'].search([('code', '=', lang)]).date_format
+        )
+        result = []
+        for run in self:
+            result.append(run.id, "%s" % run.date.strftime(date_format))
+        return result
 
     @api.model
     def _get_policies(self):
@@ -65,19 +75,33 @@ class CreditControlRun(models.Model):
         using controlling_date
 
         """
-        runs = self.search([('date', '>', controlling_date)],
-                           order='date DESC', limit=1)
+        lang = self.env.context.get('lang', self.env.user.lang)
+        date_format = (
+            self.env['res.lang'].search([('code', '=', lang)]).date_format
+        )
+
+        runs = self.env['credit.control.run'].search(
+            [('date', '>', controlling_date)], order='date DESC', limit=1
+        )
         if runs:
-            raise UserError(_('A run has already been executed more '
-                              'recently than %s') % (runs.date))
+            raise UserError(
+                _('A run has already been executed more recently (%s)')
+                % (fields.Date.from_string(runs.date).strftime(date_format))
+            )
 
         line_obj = self.env['credit.control.line']
         lines = line_obj.search([('date', '>', controlling_date)],
                                 order='date DESC', limit=1)
         if lines:
-            raise UserError(_('A credit control line more '
-                              'recent than %s exists at %s') %
-                            (controlling_date, lines.date))
+            raise UserError(
+                _('A credit control line more recent than %s exists at %s')
+                % (
+                    fields.Date.from_string(controlling_date).strftime(
+                        date_format
+                    ),
+                    fields.Date.from_string(lines.date).strftime(date_format),
+                )
+            )
 
     @api.multi
     @api.returns('credit.control.line')

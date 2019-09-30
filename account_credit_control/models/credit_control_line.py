@@ -21,6 +21,7 @@ class CreditControlLine(models.Model):
     _name = "credit.control.line"
     _description = "A credit control line"
     _rec_name = "id"
+    _inherit = "mail.thread"
     _order = "date DESC"
 
     date = fields.Date(string='Controlling date',
@@ -39,20 +40,21 @@ class CreditControlLine(models.Model):
                              store=True,
                              readonly=True)
 
-    date_sent = fields.Date(string='Sent date',
-                            readonly=True,
-                            states={'draft': [('readonly', False)]})
+    date_reminded = fields.Date(string='Reminded date',
+                                readonly=True,
+                                states={'draft': [('readonly', False)]})
 
     state = fields.Selection([('draft', 'Draft'),
                               ('ignored', 'Ignored'),
-                              ('to_be_sent', 'Ready To Send'),
-                              ('sent', 'Done'),
+                              ('to_do', 'To Do'),
+                              ('done', 'Done'),
                               ('error', 'Error'),
                               ('email_error', 'Emailing Error')],
                              'State',
                              required=True,
                              readonly=True,
                              default='draft',
+                             track_visibility='on_change',
                              help="Draft lines need to be triaged.\n"
                                   "Ignored lines are lines for which we do "
                                   "not want to send something.\n"
@@ -118,6 +120,7 @@ class CreditControlLine(models.Model):
 
     level = fields.Integer('Level',
                            related='policy_level_id.level',
+                           group_operator='max',
                            store=True,
                            readonly=True)
 
