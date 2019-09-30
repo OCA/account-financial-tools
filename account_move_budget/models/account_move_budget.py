@@ -28,7 +28,7 @@ class AccountMoveBudget(models.Model):
     )
     date_from = fields.Date(
         required=True,
-        string='From',
+        string='From Date',
         track_visibility='onchange',
     )
     date_to = fields.Date(
