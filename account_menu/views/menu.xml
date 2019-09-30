@@ -6,9 +6,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
 
-        <menuitem id="menu_accounting_bank_and_cash"
-            name="Bank and Cash"
-            parent="account.menu_finance_entries"
-            sequence="15"/>
+    <menuitem id="menu_accounting_bank_and_cash"
+              name="Bank and Cash"
+              parent="account.menu_finance_entries"
+              sequence="15"/>
+
+    <menuitem id="menu_account_coa_settings"
+              sequence="50"
+              name="Templates"
+              parent="account.menu_finance_configuration"/>
 
 </odoo>
