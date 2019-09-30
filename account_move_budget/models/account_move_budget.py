@@ -33,7 +33,7 @@ class AccountMoveBudget(models.Model):
     )
     date_to = fields.Date(
         required=True,
-        string='To',
+        string='To Date',
         track_visibility='onchange',
     )
     state = fields.Selection(
