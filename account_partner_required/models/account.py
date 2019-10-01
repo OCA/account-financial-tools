@@ -32,7 +32,6 @@ class AccountAccountType(models.Model):
 class AccountAccount(models.Model):
     _inherit = 'account.account'
 
-    @api.multi
     def get_partner_policy(self):
         """ Extension point to obtain partner policy for an account """
         self.ensure_one()
@@ -42,7 +41,6 @@ class AccountAccount(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    @api.multi
     def _check_partner_required_msg(self):
         prec = self.env.user.company_id.currency_id.rounding
         for line in self:
@@ -65,7 +63,6 @@ class AccountMoveLine(models.Model):
                                 line.name,
                                 line.partner_id.name)
 
-    @api.multi
     @api.constrains('partner_id', 'account_id', 'debit', 'credit')
     def _check_partner_required(self):
         for line in self:

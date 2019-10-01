@@ -7,14 +7,14 @@
 
 {
     "name": "Account partner required",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds an option 'partner policy' on account types",
     "author": "ACSONE SA/NV,Akretion,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": [
-        "account_type_menu",
+        "account_menu",
     ],
     "data": [
         "views/account.xml",

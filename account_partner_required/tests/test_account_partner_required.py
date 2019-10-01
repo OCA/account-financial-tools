@@ -18,6 +18,11 @@ class TestAccountPartnerRequired(common.TransactionCase):
         self.account_type_obj = self.env['account.account.type']
         self.move_obj = self.env['account.move']
         self.move_line_obj = self.env['account.move.line']
+        self.general_journal = self.env['account.journal'].create({
+            'type': 'general',
+            'code': 'GENA',
+            'name': 'General journal',
+            })
         self.sale_journal = self.env['account.journal'].create({
             'type': 'sale',
             'code': 'SJXX',
@@ -32,6 +37,7 @@ class TestAccountPartnerRequired(common.TransactionCase):
         self.account_type_custom = self.account_type_obj.create({
             'name': 'acc type test',
             'type': 'other',
+            'internal_group': 'asset',
             'partner_policy': 'optional',
         })
         self.account2 = self.account_obj.create({
