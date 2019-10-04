@@ -46,7 +46,7 @@ addon | version | summary
 [account_journal_lock_date](account_journal_lock_date/) | 10.0.1.0.0 | Lock each journal independently
 [account_lock_date_update](account_lock_date_update/) | 10.0.1.0.0 | Allow an Account adviser to update locking date without having access to all technical settings
 [account_move_batch_validate](account_move_batch_validate/) | 10.0.1.0.0 | Account Move Batch Validate
-[account_move_fiscal_month](account_move_fiscal_month/) | 10.0.1.0.0 | Display the fiscal month on journal entries/item
+[account_move_fiscal_month](account_move_fiscal_month/) | 10.0.1.0.1 | Display the fiscal month on journal entries/item
 [account_move_fiscal_year](account_move_fiscal_year/) | 10.0.1.0.0 | Display the fiscal year on journal entries/item
 [account_move_line_payable_receivable_filter](account_move_line_payable_receivable_filter/) | 10.0.1.0.0 | Filter your Journal Items per payable and receivable account
 [account_move_line_purchase_info](account_move_line_purchase_info/) | 10.0.1.0.0 | Introduces the purchase order line to the journal items
