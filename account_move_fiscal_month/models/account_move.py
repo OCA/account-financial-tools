@@ -12,7 +12,14 @@ class AccountMove(models.Model):
 
     date_range_fm_id = fields.Many2one(
         comodel_name='date.range', string="Fiscal month",
+        domain=lambda self: self._get_date_range_fm_domain(),
         compute='_compute_date_range_fm', search='_search_date_range_fm')
+
+    @api.model
+    def _get_date_range_fm_domain(self):
+        fiscal_month_type = self.env.ref(
+            'account_fiscal_month.date_range_fiscal_month')
+        return "[('type_id', '=', %d)]" % fiscal_month_type.id
 
     @api.multi
     @api.depends('date', 'company_id')
@@ -20,7 +27,8 @@ class AccountMove(models.Model):
         for rec in self:
             date = rec.date
             company = rec.company_id
-            rec.date_range_fm_id = company.find_daterange_fm(date)
+            rec.date_range_fm_id =\
+                company and company.find_daterange_fm(date) or False
 
     @api.model
     def _search_date_range_fm(self, operator, value):
@@ -29,9 +37,14 @@ class AccountMove(models.Model):
         else:
             date_range_domain = [('name', operator, value)]
 
+        fiscal_month_type = self.env.ref(
+            'account_fiscal_month.date_range_fiscal_month')
+        date_range_domain.append(('type_id', '=', fiscal_month_type.id))
         date_ranges = self.env['date.range'].search(date_range_domain)
+
         if not date_ranges:
             return [('id', '=', False)]
+
         domain = []
         for date_range in date_ranges:
             domain = expression.OR([domain, [
