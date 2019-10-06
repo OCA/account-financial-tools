@@ -1192,3 +1192,85 @@ class AccountAsset(models.Model):
                 triggers.sudo().write(recompute_vals)
 
         return (result, error_log)
+
+    @api.model
+    def _xls_acquisition_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            "account",
+            "name",
+            "code",
+            "date_start",
+            "depreciation_base",
+            "salvage_value",
+        ]
+
+    @api.model
+    def _xls_active_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            "account",
+            "name",
+            "code",
+            "date_start",
+            "depreciation_base",
+            "salvage_value",
+            "period_start_value",
+            "period_depr",
+            "period_end_value",
+            "period_end_depr",
+            "method",
+            "method_number",
+            "prorata",
+            "state",
+        ]
+
+    @api.model
+    def _xls_removal_fields(self):
+        """
+        Update list in custom module to add/drop columns or change order
+        """
+        return [
+            "account",
+            "name",
+            "code",
+            "date_remove",
+            "depreciation_base",
+            "salvage_value",
+        ]
+
+    @api.model
+    def _xls_asset_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_acquisition_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_active_template(self):
+        """
+        Template updates
+
+        """
+        return {}
+
+    @api.model
+    def _xls_removal_template(self):
+        """
+        Template updates
+
+        """
+        return {}
