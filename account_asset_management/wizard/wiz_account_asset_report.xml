@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="wiz_account_asset_report_view_form" model="ir.ui.view">
+        <field name="name">Financial Assets report</field>
+        <field name="model">wiz.account.asset.report</field>
+        <field name="arch" type="xml">
+            <form string="Financial Assets report">
+                <group col="2" colspan="4">
+                    <field
+                        name="asset_group_id"
+                        options="{'no_create_edit': True, 'no_create': True}"
+                    />
+                    <field name="date_from" />
+                    <field name="date_to" />
+                    <field name="draft" />
+                    <field name="company_id" groups="base.group_multi_company" />
+                </group>
+                <footer>
+          <button
+                        name="xls_export"
+                        string="Generate Report"
+                        type="object"
+                        default_focus="1"
+                        class="oe_highlight"
+                    />
+          or
+          <button string="Cancel" class="oe_link" special="cancel" />
+        </footer>
+            </form>
+        </field>
+    </record>
+    <record id="wiz_account_asset_report_action" model="ir.actions.act_window">
+        <field name="name">Financial Assets report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wiz.account.asset.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="wiz_account_asset_report_view_form" />
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="account_asset_report_menu"
+        name="Financial Assets"
+        parent="account.menu_finance_reports"
+    />
+    <menuitem
+        id="wiz_account_asset_report_menu"
+        name="Financial Assets report"
+        parent="account_asset_report_menu"
+        action="wiz_account_asset_report_action"
+        sequence="200"
+    />
+</odoo>
