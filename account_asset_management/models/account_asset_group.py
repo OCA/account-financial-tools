@@ -23,6 +23,10 @@ class AccountAssetGroup(models.Model):
         comodel_name='account.asset.group',
         string='Parent Asset Group',
         ondelete='restrict')
+    child_ids = fields.One2many(
+        comodel_name='account.asset.group',
+        inverse_name='parent_id',
+        string='Child Asset Groups')
 
     @api.model
     def _default_company_id(self):
