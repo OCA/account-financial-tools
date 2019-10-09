@@ -3,12 +3,11 @@
 
 {
     'name': 'Account Fiscal Month',
-    'summary': """
-        Provide a fiscal month date range type""",
-    'version': '11.0.1.0.0',
+    'summary': """Provide a fiscal month date range type""",
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
-    'website': 'https://www.acsone.eu',
+    'website': 'https://github.com/OCA/account-financial-tools',
     'depends': [
         'account',
         'date_range',
