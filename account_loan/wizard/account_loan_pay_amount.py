@@ -1,3 +1,4 @@
+# Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
@@ -6,6 +7,7 @@ from odoo.exceptions import UserError
 
 class AccountLoan(models.TransientModel):
     _name = 'account.loan.pay.amount'
+    _description = 'Loan pay amount'
 
     loan_id = fields.Many2one(
         'account.loan',

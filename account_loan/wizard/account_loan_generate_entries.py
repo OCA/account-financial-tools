@@ -5,6 +5,7 @@ from odoo import api, fields, models
 
 class AccountLoanGenerateWizard(models.TransientModel):
     _name = "account.loan.generate.wizard"
+    _description = 'Loan generate wizard'
 
     date = fields.Date(
         'Account Date',

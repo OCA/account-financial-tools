@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class AccountLoanPost(models.TransientModel):
     _name = "account.loan.post"
+    _description = 'Loan post'
 
     @api.model
     def _default_journal_id(self):
