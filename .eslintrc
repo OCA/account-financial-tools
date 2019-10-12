@@ -285,5 +285,7 @@
     "yield-star-spacing": "off",
     "yoda": "warn"
   },
-  "parserOptions": {}
+  "parserOptions": {
+      "ecmaVersion": 2017
+  }
 }
