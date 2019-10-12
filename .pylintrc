@@ -67,7 +67,6 @@ enable=anomalous-backslash-in-string,
     xml-syntax-error,
     # messages that do not cause the lint step to fail
     consider-merging-classes-inherited,
-    copy-wo-api-one,
     create-user-wo-reset-password,
     dangerous-filter-wo-user,
     deprecated-module,
