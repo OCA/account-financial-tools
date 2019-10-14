@@ -3,9 +3,8 @@
 
 {
     'name': 'Account Move Fiscal Month',
-    'summary': """
-        Display the fiscal month on journal entries/item""",
-    'version': '11.0.1.0.0',
+    'summary': """Display the fiscal month on journal entries/item""",
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
