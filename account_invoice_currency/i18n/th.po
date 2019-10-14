@@ -19,14 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_invoice_currency
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Amount Due"
 msgstr ""
 
 #. module: account_invoice_currency
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_form
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_form
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_form
 msgid "Amounts in company currency"
 msgstr ""
 
@@ -36,23 +36,23 @@ msgid "Invoice"
 msgstr "ใบแจ้งหนี้"
 
 #. module: account_invoice_currency
-#: model:ir.model.fields,help:account_invoice_currency.field_account_invoice_amount_tax_signed
+#: model:ir.model.fields,help:account_invoice_currency.field_account_invoice__amount_tax_signed
 msgid "Invoice tax amount in the company currency, negative for credit notes."
 msgstr ""
 
 #. module: account_invoice_currency
-#: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice_amount_tax_signed
-msgid "Tax"
+#: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice__amount_tax_signed
+msgid "Tax Signed"
 msgstr ""
 
 #. module: account_invoice_currency
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Total"
 msgstr ""
 
 #. module: account_invoice_currency
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
-#: model:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
+#: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Total (Company Currency)"
 msgstr ""
