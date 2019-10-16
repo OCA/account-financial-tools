@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo11-addon-account_lock_to_date',
         'odoo11-addon-account_move_batch_validate',
         'odoo11-addon-account_move_budget',
+        'odoo11-addon-account_move_fiscal_month',
         'odoo11-addon-account_move_fiscal_year',
         'odoo11-addon-account_move_line_purchase_info',
         'odoo11-addon-account_move_line_tax_editable',
