@@ -1,0 +1,5 @@
+.o_web_client .o_spread_line {
+    &.o_is_linked {
+        color: theme-color('success');
+    }
+}

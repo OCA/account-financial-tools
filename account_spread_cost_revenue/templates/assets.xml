@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend" name="account spread" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/account_spread_cost_revenue/static/src/scss/account_spread.scss"/>
+            <script type="text/javascript" src="/account_spread_cost_revenue/static/src/js/account_spread.js"></script>
+        </xpath>
+    </template>
+
+</odoo>
