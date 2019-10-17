@@ -229,7 +229,8 @@ class AccountAssetLine(models.Model):
             aml_e_vals = line._setup_move_line_data(
                 depreciation_date, exp_acc, 'expense', move)
             self.env['account.move.line'].with_context(ctx).create(aml_e_vals)
-            move.post()
+            if asset.post_move:
+                move.post()
             line.with_context(allow_asset_line_update=True).write({
                 'move_id': move.id
             })

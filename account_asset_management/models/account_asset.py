@@ -185,6 +185,10 @@ class AccountAsset(models.Model):
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string='Analytic account')
+    post_move = fields.Boolean(
+        string='Post created moves',
+        default=True,
+        help="Do automatically post created moves or not.")
 
     @api.model
     def _default_company_id(self):
