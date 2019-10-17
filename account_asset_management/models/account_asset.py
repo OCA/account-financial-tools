@@ -680,6 +680,9 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
+    def _get_amount_linear(self):
+        return self.depreciation_base / self.method_number
+
     def _compute_year_amount(self, residual_amount):
         """
         Localization: override this method to change the degressive-linear
@@ -690,7 +693,7 @@ class AccountAsset(models.Model):
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
 
-        year_amount_linear = self.depreciation_base / self.method_number
+        year_amount_linear = self._get_amount_linear()
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
