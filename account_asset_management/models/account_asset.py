@@ -680,10 +680,17 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
-    def _get_amount_linear(self):
-        return self.depreciation_base / self.method_number
+    def _get_amount_linear(
+            self, depreciation_start_date, depreciation_stop_date):
+        """
+        Override this method if you want to compute differently the
+        yearly amount.
+        """
+        days = (depreciation_stop_date - depreciation_start_date).days + 1
+        return (self.depreciation_base / days) * 365
 
-    def _compute_year_amount(self, residual_amount):
+    def _compute_year_amount(self, residual_amount, depreciation_start_date,
+                             depreciation_stop_date):
         """
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
@@ -693,7 +700,8 @@ class AccountAsset(models.Model):
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
 
-        year_amount_linear = self._get_amount_linear()
+        year_amount_linear = self._get_amount_linear(
+            depreciation_start_date, depreciation_stop_date)
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
@@ -757,14 +765,18 @@ class AccountAsset(models.Model):
 
         return line_dates
 
-    def _compute_depreciation_amount_per_fiscal_year(self, table, line_dates):
+    def _compute_depreciation_amount_per_fiscal_year(
+            self, table, line_dates, depreciation_start_date,
+            depreciation_stop_date):
         digits = self.env['decimal.precision'].precision_get('Account')
         fy_residual_amount = self.depreciation_base
         i_max = len(table) - 1
         asset_sign = self.depreciation_base >= 0 and 1 or -1
         for i, entry in enumerate(table):
             if self.method_time == 'year':
-                year_amount = self._compute_year_amount(fy_residual_amount)
+                year_amount = self._compute_year_amount(
+                    fy_residual_amount, depreciation_start_date,
+                    depreciation_stop_date)
                 if self.method_period == 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
@@ -925,7 +937,7 @@ class AccountAsset(models.Model):
         line_dates = self._compute_line_dates(
             table, depreciation_start_date, depreciation_stop_date)
         table = self._compute_depreciation_amount_per_fiscal_year(
-            table, line_dates,
+            table, line_dates, depreciation_start_date, depreciation_stop_date
         )
         # Step 2:
         # Spread depreciation amount per fiscal year
