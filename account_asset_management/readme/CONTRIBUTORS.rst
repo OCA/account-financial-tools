@@ -6,3 +6,5 @@
 - Adrien Peiffer (Acsone)
 - Akim Juillerat <akim.juillerat@camptocamp.com>
 - Maxence Groine <mgroine@fiefmanage.ch>
+- Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+- Saran Lim. <saranl@ecosoft.co.th>

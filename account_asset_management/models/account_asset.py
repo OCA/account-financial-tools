@@ -167,6 +167,11 @@ class AccountAsset(models.Model):
              # "  * Ending Date: Choose the time between 2 depreciations "
              # "and the date the depreciations won't go beyond."
     )
+    days_calc = fields.Boolean(
+        string='Calculate by days',
+        default=False,
+        help="Use number of days to calculate depreciation amount",
+    )
     prorata = fields.Boolean(
         string='Prorata Temporis', readonly=True,
         states={'draft': [('readonly', False)]},
@@ -303,6 +308,7 @@ class AccountAsset(models.Model):
                 'method_number': profile.method_number,
                 'method_time': profile.method_time,
                 'method_period': profile.method_period,
+                'days_calc': profile.days_calc,
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
@@ -604,6 +610,7 @@ class AccountAsset(models.Model):
                             'asset_id': asset.id,
                             'name': name,
                             'line_date': line['date'].strftime('%Y-%m-%d'),
+                            'line_days': line['days'],
                             'init_entry': entry['init'],
                         }
                         depreciated_value += amount
@@ -812,15 +819,24 @@ class AccountAsset(models.Model):
         # last entry
         if not (self.method_time == 'number' and
                 len(line_dates) == self.method_number):
-            line_dates.append(line_date)
+            if self.days_calc:
+                line_dates.append(stop_date)
+            else:
+                line_dates.append(line_date)
 
         return line_dates
 
-    def _compute_depreciation_amount_per_fiscal_year(self, table, line_dates):
+    def _compute_depreciation_amount_per_fiscal_year(
+            self, table, line_dates, depreciation_start_date,
+            depreciation_stop_date):
         digits = self.env['decimal.precision'].precision_get('Account')
         fy_residual_amount = self.depreciation_base
         i_max = len(table) - 1
         asset_sign = self.depreciation_base >= 0 and 1 or -1
+        day_amount = 0.0
+        if self.days_calc:
+            days = (depreciation_stop_date - depreciation_start_date).days + 1
+            day_amount = round(self.depreciation_base / days, digits)
         for i, entry in enumerate(table):
             if self.method_time == 'year':
                 year_amount = self._compute_year_amount(fy_residual_amount)
@@ -854,6 +870,7 @@ class AccountAsset(models.Model):
             entry.update({
                 'period_amount': period_amount,
                 'fy_amount': fy_amount,
+                'day_amount': day_amount,
             })
             if self.method_time == 'year':
                 fy_residual_amount -= fy_amount
@@ -878,26 +895,36 @@ class AccountAsset(models.Model):
             fy_amount_check = 0.0
             fy_amount = entry['fy_amount']
             li_max = len(line_dates) - 1
+            prev_date = max(entry['date_start'], depreciation_start_date)
             for li, line_date in enumerate(line_dates):
-
+                line_days = (line_date - prev_date).days + 1
                 if round(remaining_value, digits) == 0.0:
                     break
 
                 if (line_date > min(entry['date_stop'],
                                     depreciation_stop_date) and not
                         (i == i_max and li == li_max)):
+                    prev_date = line_date
                     break
+                else:
+                    prev_date = line_date + relativedelta(days=1)
 
                 if self.method == 'degr-linear' \
                         and asset_sign * (fy_amount - fy_amount_check) < 0:
                     break
 
                 if i == 0 and li == 0:
-                    amount = self._get_first_period_amount(
-                        table, entry, depreciation_start_date, line_dates)
-                    amount = round(amount, digits)
+                    if entry.get('day_amount') > 0.0:
+                        amount = line_days * entry.get('day_amount')
+                    else:
+                        amount = self._get_first_period_amount(
+                            table, entry, depreciation_start_date, line_dates)
+                        amount = round(amount, digits)
                 else:
-                    amount = entry.get('period_amount')
+                    if entry.get('day_amount') > 0.0:
+                        amount = line_days * entry.get('day_amount')
+                    else:
+                        amount = entry.get('period_amount')
 
                 # last year, last entry
                 # Handle rounding deviations.
@@ -909,6 +936,7 @@ class AccountAsset(models.Model):
                 fy_amount_check += amount
                 line = {
                     'date': line_date,
+                    'days': line_days,
                     'amount': amount,
                     'depreciated_value': depreciated_value,
                     'remaining_value': remaining_value,
@@ -924,7 +952,7 @@ class AccountAsset(models.Model):
             # was compensated in the first FY depreciation line.
             # The code has now been simplified with compensation
             # always in last FT depreciation line.
-            if self.method_time == 'year':
+            if self.method_time == 'year' and not entry.get('day_amount'):
                 if round(fy_amount_check - fy_amount, digits) != 0:
                     diff = fy_amount_check - fy_amount
                     amount = amount - diff
@@ -1035,7 +1063,8 @@ class AccountAsset(models.Model):
         line_dates = self._compute_line_dates(
             table, depreciation_start_date, depreciation_stop_date)
         table = self._compute_depreciation_amount_per_fiscal_year(
-            table, line_dates,
+            table, line_dates, depreciation_start_date,
+            depreciation_stop_date
         )
         # Step 2:
         # Spread depreciation amount per fiscal year

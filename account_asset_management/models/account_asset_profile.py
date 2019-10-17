@@ -88,6 +88,10 @@ class AccountAssetProfile(models.Model):
              "number of depreciation lines.\n"
              "  * Number of Years: Specify the number of years "
              "for the depreciation.\n")
+    days_calc = fields.Boolean(
+        string='Calculate by days',
+        default=False,
+        help="Use number of days to calculate depreciation amount")
     prorata = fields.Boolean(
         string='Prorata Temporis',
         help="Indicates that the first depreciation entry for this asset "

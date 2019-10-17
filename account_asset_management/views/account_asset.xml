@@ -74,6 +74,7 @@
                   <field name="method_period"/>
                   <field name="method_end"
                          attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number', 'year'])]}"/>
+                  <field name="days_calc"/>
                 </group>
                 <group>
                   <separator string="Depreciation Method" colspan="2"/>
@@ -94,6 +95,7 @@
                 <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" create="false">
                   <field name="type"/>
                   <field name="line_date"/>
+                  <field name="line_days" sum="Total Days"/>
                   <field name="depreciated_value" readonly="1"/>
                   <field name="amount"/>
                   <field name="remaining_value" readonly="1"/>

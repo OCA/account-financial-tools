@@ -29,6 +29,7 @@
               <field name="method_number"
                      attrs="{'invisible': [('method_time', '=', 'end')], 'required': [('method_time', 'in', ['number', 'year'])]}"/>
               <field name="method_period"/>
+              <field name="days_calc"/>
             </group>
             <group string="Depreciation Method">
               <field name="method"/>
