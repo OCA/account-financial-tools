@@ -836,7 +836,7 @@ class AccountAsset(models.Model):
         day_amount = 0.0
         if self.days_calc:
             days = (depreciation_stop_date - depreciation_start_date).days + 1
-            day_amount = round(self.depreciation_base / days, digits)
+            day_amount = self.depreciation_base / days
         for i, entry in enumerate(table):
             if self.method_time == 'year':
                 year_amount = self._compute_year_amount(fy_residual_amount)
