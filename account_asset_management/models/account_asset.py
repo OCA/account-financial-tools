@@ -749,7 +749,8 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
-    def _compute_year_amount(self, residual_amount):
+    def _compute_year_amount(self, residual_amount, depreciation_start_date,
+                             depreciation_stop_date):
         """
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
@@ -758,8 +759,8 @@ class AccountAsset(models.Model):
             raise UserError(
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
-
-        year_amount_linear = self.depreciation_base / self.method_number
+        days = (depreciation_stop_date - depreciation_start_date).days + 1
+        year_amount_linear = (self.depreciation_base / days) * 365
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
@@ -839,7 +840,9 @@ class AccountAsset(models.Model):
             day_amount = self.depreciation_base / days
         for i, entry in enumerate(table):
             if self.method_time == 'year':
-                year_amount = self._compute_year_amount(fy_residual_amount)
+                year_amount = self._compute_year_amount(
+                    fy_residual_amount, depreciation_start_date,
+                    depreciation_stop_date)
                 if self.method_period == 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
