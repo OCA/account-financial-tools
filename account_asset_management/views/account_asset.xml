@@ -75,6 +75,8 @@
                   <field name="method_end"
                          attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number', 'year'])]}"/>
                   <field name="days_calc"/>
+                  <field name="use_leap_years"
+                         attrs="{'invisible': [('days_calc', '=', True)]}"/>
                 </group>
                 <group>
                   <separator string="Depreciation Method" colspan="2"/>
