@@ -749,6 +749,15 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
+    def _get_amount_linear(
+            self, depreciation_start_date, depreciation_stop_date):
+        """
+        Override this method if you want to compute differently the
+        yearly amount.
+        """
+        days = (depreciation_stop_date - depreciation_start_date).days + 1
+        return (self.depreciation_base / days) * 365
+
     def _compute_year_amount(self, residual_amount, depreciation_start_date,
                              depreciation_stop_date):
         """
@@ -759,8 +768,8 @@ class AccountAsset(models.Model):
             raise UserError(
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
-        days = (depreciation_stop_date - depreciation_start_date).days + 1
-        year_amount_linear = (self.depreciation_base / days) * 365
+        year_amount_linear = self._get_amount_linear(
+            depreciation_start_date, depreciation_stop_date)
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
