@@ -167,6 +167,18 @@ class AccountAsset(models.Model):
         default=False,
         help="Use number of days to calculate depreciation amount",
     )
+    use_leap_years = fields.Boolean(
+        string='Use leap years',
+        default=False,
+        help="If not set, the system will distribute evenly the amount to "
+             "amortize across the years, based on the number of years. "
+             "So the amount per year will be the "
+             "depreciation base / number of years.\n "
+             "If set, the system will consider if the current year "
+             "is a leap year. The amount to depreciate per year will be "
+             "calculated as depreciation base / (depreciation end date - "
+             "start date + 1) * days in the current year.",
+    )
     prorata = fields.Boolean(
         string='Prorata Temporis', readonly=True,
         states={'draft': [('readonly', False)]},
@@ -282,6 +294,7 @@ class AccountAsset(models.Model):
                 'method_time': profile.method_time,
                 'method_period': profile.method_period,
                 'days_calc': profile.days_calc,
+                'use_leap_years': profile.use_leap_years,
                 'method_progress_factor': profile.method_progress_factor,
                 'prorata': profile.prorata,
                 'account_analytic_id': profile.account_analytic_id,
@@ -560,14 +573,14 @@ class AccountAsset(models.Model):
                     if amount:
                         vals = {
                             'previous_id': depr_line.id,
-                            'amount': amount,
+                            'amount': round(amount, digits),
                             'asset_id': asset.id,
                             'name': name,
                             'line_date': line['date'],
                             'line_days': line['days'],
                             'init_entry': entry['init'],
                         }
-                        depreciated_value += amount
+                        depreciated_value += round(amount, digits)
                         depr_line = line_obj.create(vals)
                     else:
                         seq -= 1
@@ -687,7 +700,21 @@ class AccountAsset(models.Model):
             amount = entry['fy_amount'] - amount * full_periods
         return amount
 
-    def _compute_year_amount(self, residual_amount):
+    def _get_amount_linear(
+            self, depreciation_start_date, depreciation_stop_date, entry):
+        """
+        Override this method if you want to compute differently the
+        yearly amount.
+        """
+        if not self.use_leap_years:
+            return self.depreciation_base / self.method_number
+        year = entry['date_stop'].year
+        cy_days = calendar.isleap(year) and 366 or 365
+        days = (depreciation_stop_date - depreciation_start_date).days + 1
+        return (self.depreciation_base / days) * cy_days
+
+    def _compute_year_amount(self, residual_amount, depreciation_start_date,
+                             depreciation_stop_date, entry):
         """
         Localization: override this method to change the degressive-linear
         calculation logic according to local legislation.
@@ -696,8 +723,8 @@ class AccountAsset(models.Model):
             raise UserError(
                 _("The '_compute_year_amount' method is only intended for "
                   "Time Method 'Number of Years."))
-
-        year_amount_linear = self.depreciation_base / self.method_number
+        year_amount_linear = self._get_amount_linear(
+            depreciation_start_date, depreciation_stop_date, entry)
         if self.method == 'linear':
             return year_amount_linear
         if self.method == 'linear-limit':
@@ -778,7 +805,9 @@ class AccountAsset(models.Model):
 
         for i, entry in enumerate(table):
             if self.method_time == 'year':
-                year_amount = self._compute_year_amount(fy_residual_amount)
+                year_amount = self._compute_year_amount(
+                    fy_residual_amount, depreciation_start_date,
+                    depreciation_stop_date, entry)
                 if self.method_period == 'year':
                     period_amount = year_amount
                 elif self.method_period == 'quarter':
