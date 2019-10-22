@@ -332,6 +332,16 @@ class AccountAsset(models.Model):
         if self.method_time != 'year':
             self.prorata = True
 
+    @api.onchange('method_number')
+    def _onchange_method_number(self):
+        if self.method_number and self.method_end:
+            self.method_end = False
+
+    @api.onchange('method_end')
+    def _onchange_method_end(self):
+        if self.method_end and self.method_number:
+            self.method_number = 0
+
     @api.onchange('type')
     def _onchange_type(self):
         if self.type == 'view':
@@ -726,7 +736,7 @@ class AccountAsset(models.Model):
         return depreciation_start_date
 
     def _get_depreciation_stop_date(self, depreciation_start_date):
-        if self.method_time == 'year':
+        if self.method_time == 'year' and not self.method_end:
             depreciation_stop_date = depreciation_start_date + \
                 relativedelta(years=self.method_number, days=-1)
         elif self.method_time == 'number':
@@ -744,7 +754,7 @@ class AccountAsset(models.Model):
             elif self.method_period == 'year':
                 depreciation_stop_date = depreciation_start_date + \
                     relativedelta(years=self.method_number, days=-1)
-        elif self.method_time == 'end':
+        elif self.method_time == 'year' and self.method_end:
             depreciation_stop_date = fields.Datetime.from_string(
                 self.method_end)
         return depreciation_stop_date
@@ -768,7 +778,7 @@ class AccountAsset(models.Model):
         Override this method if you want to compute differently the
         yearly amount.
         """
-        if not self.use_leap_years:
+        if not self.use_leap_years and self.method_number:
             return self.depreciation_base / self.method_number
         year = entry['date_stop'].year
         cy_days = calendar.isleap(year) and 366 or 365
@@ -1006,7 +1016,8 @@ class AccountAsset(models.Model):
     def _compute_depreciation_table(self):
 
         table = []
-        if self.method_time in ['year', 'number'] and not self.method_number:
+        if self.method_time in ['year', 'number']  \
+                and not self.method_number and not self.method_end:
             return table
 
         company = self.company_id
