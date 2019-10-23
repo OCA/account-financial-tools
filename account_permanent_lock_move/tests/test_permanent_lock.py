@@ -79,10 +79,7 @@ class PermanentLock(common.TransactionCase):
         # Try to lock the day before
         raised_lock_error = False
         try:
-            yesterday = fields.Date.to_string(
-                fields.Date.from_string(
-                    fields.Date.today()) +
-                datetime.timedelta(days=-1))
+            yesterday = fields.Date.today() + datetime.timedelta(days=-1)
             self.wizard = self.wizard_obj.create({
                 'company_id': self.company_id,
                 'lock_date': yesterday
