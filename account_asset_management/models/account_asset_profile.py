@@ -153,7 +153,7 @@ class AccountAssetProfile(models.Model):
         'Number' and 'End' Time Methods.
         """
         return [
-            ('year', _('Number of Years')),
+            ('year', _('Number of Years or end date')),
         ]
 
     @api.multi
