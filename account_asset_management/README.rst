@@ -58,7 +58,7 @@ The module in NOT compatible with the standard account_asset module.
 Changelog
 =========
 
-12.0.1.1.0 (2019-07-08)
+12.0.2.1.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * [IMP] Add option to calculate depreciation table by days
