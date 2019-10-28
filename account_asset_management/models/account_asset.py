@@ -1035,8 +1035,10 @@ class AccountAsset(models.Model):
             except Exception:
                 e = exc_info()[0]
                 tb = ''.join(format_exception(*exc_info()))
-                asset_ref = depreciation.asset_id.code and '%s (ref: %s)' \
-                    % (asset.name, asset.code) or asset.name
+                asset_ref = depreciation.asset_id.name
+                if depreciation.asset_id.code:
+                    asset_ref = '[%s] %s' % (
+                        depreciation.asset_id.code, asset_ref)
                 error_log += _(
                     "\nError while processing asset '%s': %s"
                 ) % (asset_ref, str(e))
