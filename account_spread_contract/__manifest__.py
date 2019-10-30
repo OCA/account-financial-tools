@@ -4,7 +4,7 @@
 {
     "name": "Cost-Revenue Spread Contract",
     "summary": "Spread costs and revenues from contracts",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "development_status": "Beta",
     "author": "Onestein,Odoo Community Association (OCA)",
     "maintainers": ["astirpe"],

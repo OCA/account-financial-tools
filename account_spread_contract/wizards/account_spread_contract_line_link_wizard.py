@@ -28,7 +28,6 @@ class AccountSpreadContractLineLinkWizard(models.TransientModel):
         string='Company',
         required=True)
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
 
