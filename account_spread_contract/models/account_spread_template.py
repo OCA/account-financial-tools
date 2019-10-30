@@ -31,7 +31,6 @@ class AccountSpreadTemplate(models.Model):
                             'The contract type (Purchases) is not compatible '
                             'with selected Template Spread Type'))
 
-    @api.multi
     def action_unlink_contract_line(self):
         line_id = self.env.context.get('force_contract_line_id')
         line = self.env['account.analytic.invoice.line'].browse(line_id)
