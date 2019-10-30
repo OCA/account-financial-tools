@@ -15,17 +15,19 @@ class AccountInvoice(models.Model):
         res = super(AccountInvoice, self).action_move_create()
         for inv in self:
             if inv.journal_id.check_chronology:
-                invoices = \
-                    self.search([('state', 'not in',
-                                  ['open', 'paid', 'cancel', 'proforma',
-                                   'proforma2']),
-                                 ('date_invoice', '!=', False),
-                                 ('date_invoice', '<', inv.date_invoice),
-                                 ('journal_id', '=', inv.journal_id.id)],
-                                limit=1)
+                date_field = 'date' if inv.type in ['in_invoice', 'in_refund']\
+                    else 'date_invoice'
+                date_field_value = inv.date if inv.type in ['in_invoice', 'in_refund'] \
+                    else inv.date_invoice
+                invoices = self.search([
+                    ('state', 'not in', ['open', 'paid', 'cancel', 'proforma',
+                     'proforma2']),
+                    (date_field, '!=', False),
+                    (date_field, '<', date_field_value),
+                    ('journal_id', '=', inv.journal_id.id)
+                ], limit=1)
                 if invoices:
-                    date_invoice_format = fields.Date.\
-                        from_string(inv.date_invoice)
+                    date_invoice_format = fields.Date.from_string(date_field_value)
                     date_invoice_tz = fields\
                         .Date.context_today(self, date_invoice_format)
                     raise UserError(_("Chronology Error. "
@@ -33,16 +35,14 @@ class AccountInvoice(models.Model):
                                       "invoices before %s and try again.")
                                     % date_invoice_tz)
                 if inv not in previously_validated:
-                    invoices = self.search([('state', 'in', ['open', 'paid']),
-                                            ('date_invoice', '>',
-                                             inv.date_invoice),
-                                            ('journal_id', '=',
-                                             inv.journal_id.id)],
-                                           limit=1)
+                    invoices = self.search(
+                        [('state', 'in', ['open', 'paid']),
+                         (date_field, '>', date_field_value),
+                         ('journal_id', '=', inv.journal_id.id)],
+                        limit=1)
 
                     if invoices:
-                        date_invoice_format = fields.Date.\
-                            from_string(inv.date_invoice)
+                        date_invoice_format = fields.Date.from_string(date_field_value)
                         date_invoice_tz = fields\
                             .Date.context_today(self, date_invoice_format)
                         raise UserError(_("Chronology Error. "
