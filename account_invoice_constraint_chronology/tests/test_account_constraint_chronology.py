@@ -38,11 +38,20 @@ class TestAccountConstraintChronology(common.TransactionCase):
             {'name': 'Journal Sale',
              'prefix': 'SALE', 'padding': 6,
              'company_id': self.env.ref("base.main_company").id})
+        self.sequence_purchase = self.env['ir.sequence'].create(
+            {'name': 'Journal Purchase',
+             'prefix': 'PURCHASE', 'padding': 6,
+             'company_id': self.env.ref("base.main_company").id})
         self.account_journal_sale = self.env['account.journal']\
             .create({'name': 'Sale journal',
                      'code': 'SALE',
                      'type': 'sale',
                      'sequence_id': self.sequence.id})
+        self.account_journal_purchase = self.env['account.journal']\
+            .create({'name': 'Purchase journal',
+                     'code': 'PURCHASE',
+                     'type': 'purchase',
+                     'sequence_id': self.sequence_purchase.id})
         self.product = self.env['product.product'].create(
             {'name': 'product name'})
         self.analytic_account = self.env['account.analytic.account'].\
@@ -53,15 +62,23 @@ class TestAccountConstraintChronology(common.TransactionCase):
         journal.check_chronology = value
         return journal
 
-    def create_simple_invoice(self, journal_id, date):
-        invoice = self.env['account.invoice'].create({
+    def get_journal_purchase_check(self, value):
+        journal = self.account_journal_purchase.copy()
+        journal.check_chronology = value
+        return journal
+
+    def create_simple_invoice(self, journal_id, date_invoice, date, type_invoice):
+        vals = {
             'partner_id': self.env.ref('base.res_partner_2').id,
             'account_id': self.account_account.id,
-            'type': 'in_invoice',
+            'type': type_invoice,
             'journal_id': journal_id,
-            'date_invoice': date,
+            'date_invoice': date_invoice,
             'state': 'draft',
-        })
+        }
+        if date:
+            vals.update(date=date)
+        invoice = self.env['account.invoice'].create(vals)
 
         self.env['account.invoice.line'].create({
             'product_id': self.product.id,
@@ -76,41 +93,91 @@ class TestAccountConstraintChronology(common.TransactionCase):
 
     def test_invoice_draft(self):
         journal = self.get_journal_check(True)
+        journal_purchase = self.get_journal_purchase_check(True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
-        date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        self.create_simple_invoice(journal.id, date)
+        date_yesterday = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice_2 = self.create_simple_invoice(journal.id, date)
+        # test sale
+        self.create_simple_invoice(
+            journal.id, date_invoice=date_yesterday, date=date_yesterday,
+            type_invoice='out_invoice')
+        invoice_2 = self.create_simple_invoice(
+            journal.id, date_invoice=date, date=date, type_invoice='out_invoice')
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
+        # test purchase
+        invoice = self.create_simple_invoice(
+            journal_purchase.id, date_invoice=date_yesterday, date=False,
+            type_invoice='in_invoice')
+        invoice_3 = self.create_simple_invoice(
+            journal_purchase.id, date_invoice=date, date=False,
+            type_invoice='in_invoice')
+        self.assertTrue((invoice_3.state == 'draft'),
+                        "Initial invoice state is not Draft")
+        invoice_3.action_invoice_open()
+        self.assertTrue((invoice_3.state == 'open'), "Invoice state is not Open")
 
     def test_invoice_validate(self):
         journal = self.get_journal_check(True)
+        journal_purchase = self.get_journal_purchase_check(True)
         today = datetime.now()
         tomorrow = today + timedelta(days=1)
         date_tomorrow = tomorrow.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice_1 = self.create_simple_invoice(journal.id, date_tomorrow)
+        # test sale
+        invoice_1 = self.create_simple_invoice(
+            journal.id, date_invoice=date_tomorrow, date=date_tomorrow,
+            type_invoice='out_invoice')
         self.assertTrue((invoice_1.state == 'draft'),
                         "Initial invoice state is not Draft")
         invoice_1.action_invoice_open()
         date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        invoice_2 = self.create_simple_invoice(journal.id, date)
+        invoice_2 = self.create_simple_invoice(
+            journal.id, date_invoice=date, date=date, type_invoice='out_invoice')
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
+        # test purchase
+        invoice_3 = self.create_simple_invoice(
+            journal_purchase.id, date_invoice=date_tomorrow, date=date_tomorrow,
+            type_invoice='in_invoice')
+        self.assertTrue((invoice_3.state == 'draft'),
+                        "Initial invoice state is not Draft")
+        invoice_3.action_invoice_open()
+        date = today.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        invoice_4 = self.create_simple_invoice(
+            journal_purchase.id, date_invoice=date, date=date,
+            type_invoice='in_invoice')
+        self.assertTrue((invoice_4.state == 'draft'),
+                        "Initial invoice state is not Draft")
+        with self.assertRaises(UserError):
+            invoice_4.action_invoice_open()
 
     def test_invoice_without_date(self):
         journal = self.get_journal_check(True)
+        journal_purchase = self.get_journal_purchase_check(True)
         today = datetime.now()
         yesterday = today - timedelta(days=1)
-        date = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
-        self.create_simple_invoice(journal.id, date)
-        invoice_2 = self.create_simple_invoice(journal.id, False)
+        date_yesterday = yesterday.strftime(DEFAULT_SERVER_DATE_FORMAT)
+        # test sale
+        self.create_simple_invoice(
+            journal.id, date_invoice=date_yesterday, date=date_yesterday,
+            type_invoice='out_invoice')
+        invoice_2 = self.create_simple_invoice(journal.id, False, False, 'out_invoice')
         self.assertTrue((invoice_2.state == 'draft'),
                         "Initial invoice state is not Draft")
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
+        # test purchase
+        self.create_simple_invoice(
+            journal_purchase.id, date_invoice=date_yesterday, date=date_yesterday,
+            type_invoice='in_invoice')
+        invoice_3 = self.create_simple_invoice(
+            journal_purchase.id, False, False, 'in_invoice')
+        self.assertTrue((invoice_3.state == 'draft'),
+                        "Initial invoice state is not Draft")
+        with self.assertRaises(UserError):
+            invoice_3.action_invoice_open()
