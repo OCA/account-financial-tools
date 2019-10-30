@@ -109,7 +109,7 @@ class TestAccountConstraintChronology(common.TransactionCase):
         with self.assertRaises(UserError):
             invoice_2.action_invoice_open()
         # test purchase
-        invoice = self.create_simple_invoice(
+        self.create_simple_invoice(
             journal_purchase.id, date_invoice=date_yesterday, date=False,
             type_invoice='in_invoice')
         invoice_3 = self.create_simple_invoice(
