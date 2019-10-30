@@ -27,7 +27,6 @@ class AccountAnalyticInvoiceLine(models.Model):
             else:
                 line.spread_check = 'unlinked'
 
-    @api.multi
     def spread_details(self):
         """Button on the contract lines tree view of the contract
         form to show the spread template form view."""

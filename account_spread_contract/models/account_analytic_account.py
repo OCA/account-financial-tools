@@ -1,14 +1,13 @@
 # Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
 
-    @api.multi
     def _create_invoice(self, invoice=False):
         """
         :param invoice: If not False add lines to this invoice
@@ -74,10 +73,9 @@ class AccountAnalyticAccount(models.Model):
         invoice_line_name = self._insert_markers(line, date_format)
         spread_name = _('Contract %s (%s) %s') % (
             self.name,
-            self.recurring_next_date,
+            fields.Date.to_string(self.recurring_next_date),
             invoice_line_name
         )
-        analytic_tags = [(4, tag.id, None) for tag in self.tag_ids]
 
         new_spread_vals.update({
             'name': spread_name,
@@ -85,7 +83,6 @@ class AccountAnalyticAccount(models.Model):
             'period_type': self._get_spread_period_type(),
             'spread_date': self.recurring_next_date,
             'account_analytic_id': self.id,
-            'analytic_tag_ids': analytic_tags,
         })
         return new_spread_vals
 
