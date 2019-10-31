@@ -1,40 +1,72 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016 ACSONE SA/NV
+# Copyright 2016-19 ACSONE SA/NV
+# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-from odoo import tools
-from odoo.modules.module import get_resource_path
-
+import time
 from odoo.tests.common import TransactionCase
 from datetime import date
-
 from dateutil import relativedelta
 
 from odoo.addons.queue_job.job import Job
 
 DELAY2 = ('odoo.addons.account_asset_batch_compute.wizards.'
-          'asset_depreciation_confirmation_wizard.async_asset_compute')
+          'account_asset_compute.async_asset_compute')
 DELAY1 = ('odoo.addons.account_asset_batch_compute.models.'
-          'account_asset_asset.async_compute_entries')
+          'account_asset.async_compute_entries')
 
 
 class TestAccountAssetBatchCompute(TransactionCase):
 
-    def _load(self, module, *args):
-        tools.convert_file(self.cr, module,
-                           get_resource_path(module, *args),
-                           {}, 'init', False, 'test',
-                           self.registry._assertion_report)
-
     def setUp(self):
         super(TestAccountAssetBatchCompute, self).setUp()
-        self._load('account', 'test', 'account_minimal_test.xml')
-        self._load('account_asset_management', 'demo',
-                   'account_asset_demo.xml')
-        self.wiz_obj = self.env['asset.depreciation.confirmation.wizard']
-        self.asset01 = self.env.ref(
-            'account_asset_management.account_asset_ict0')
-        self.asset01.method_period = 'month'
+        self.wiz_obj = self.env['account.asset.compute']
+        self.asset_model = self.env['account.asset']
+        self.asset_profile_model = self.env['account.asset.profile']
+        self.account_account_type_model = self.env['account.account.type']
+        self.account_type_regular = self.account_account_type_model.create({
+            'name': 'Test Regular',
+            'type': 'other',
+        })
+        self.view_asset = self.asset_model.create({
+            'type': 'view',
+            'state': 'open',
+            'name': 'view',
+            'purchase_value': 0.0,
+        })
+        self.account = self.env['account.account'].create({
+            'name': 'Test account',
+            'code': 'TAC',
+            'user_type_id': self.account_type_regular.id,
+        })
+        self.journal = self.env['account.journal'].create({
+            'name': 'Test Journal',
+            'code': 'TJ',
+            'type': 'general',
+        })
+        self.profile = self.asset_profile_model.create({
+            'parent_id': self.view_asset.id,
+            'account_expense_depreciation_id': self.account.id,
+            'account_asset_id': self.account.id,
+            'account_depreciation_id': self.account.id,
+            'journal_id': self.journal.id,
+            'name': "Test",
+        })
+        self.fiscal_year = self.env['date.range'].create({
+            'type_id': self.ref('account_fiscal_year.fiscalyear'),
+            'name': 'FY',
+            'date_start': time.strftime('2019-01-01'),
+            'date_end': time.strftime('2019-12-31'),
+        })
+        self.asset01 = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.profile.id,
+            'purchase_value': 1000,
+            'salvage_value': 0,
+            'date_start': time.strftime('2003-01-01'),
+            'method_time': 'year',
+            'method_number': 1,
+            'method_period': 'month',
+            'prorata': False,
+        })
         today = date.today()
         first_day_of_month = date(today.year, today.month, 1)
         self.nextmonth =\
@@ -76,23 +108,28 @@ class TestAccountAssetBatchCompute(TransactionCase):
         depreciation_line = self.asset01.depreciation_line_ids\
             .filtered(lambda r: r.type == 'depreciate' and r.move_id)
         self.assertTrue(len(depreciation_line) == 0)
-        wiz.asset_compute()
+        wiz.with_context(test_queue_job_no_delay=True).asset_compute()
         depreciation_line = self.asset01.depreciation_line_ids \
             .filtered(lambda r: r.type == 'depreciate' and r.move_id)
         self.assertTrue(len(depreciation_line) == 0)
+        job_name = "Creating jobs to create moves for assets to %s" % (
+            self.nextmonth)
         jobs = self.env['queue.job'].search(
-            [], order='date_created desc', limit=1)
+            [('name', '=', job_name)], order='date_created desc', limit=1)
+        self.assertTrue(len(jobs) == 1)
+        job = Job.load(self.env, jobs.uuid)
+        # perform job
+        job.perform()
+        depreciation_line = self.asset01.depreciation_line_ids \
+            .filtered(lambda r: r.type == 'depreciate' and r.move_id)
+        self.assertTrue(len(depreciation_line) == 0)
+        job_name = "Creating move for asset with id %s to %s" % (
+            self.asset01.id, self.nextmonth)
+        jobs = self.env['queue.job'].search(
+            [('name', '=', job_name)], order='date_created desc', limit=1)
         self.assertTrue(len(jobs) == 1)
         job = Job.load(self.env, jobs.uuid)
         job.perform()
         depreciation_line = self.asset01.depreciation_line_ids \
             .filtered(lambda r: r.type == 'depreciate' and r.move_id)
-        self.assertTrue(len(depreciation_line) == 0)
-        jobs = self.env['queue.job'].search(
-            [], order='date_created desc', limit=1)
-        self.assertTrue(len(jobs) == 1)
-        job = Job.load(self.env, jobs.uuid)
-        job.perform()
-        depreciation_line = self.asset01.depreciation_line_ids \
-            .filtered(lambda r: r.type == 'depreciate' and r.move_id)
-        self.assertTrue(len(depreciation_line) == 1)
+        self.assertEquals(len(depreciation_line), 1)
