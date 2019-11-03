@@ -24,7 +24,9 @@ class AccountAssetCompute(models.TransientModel):
         self.ensure_one()
         if not self.batch_processing:
             return super(AccountAssetCompute, self).asset_compute()
-        if not self.env.context.get('job_uuid'):
+        if not self.env.context.get('job_uuid') and not self.env.context.get(
+            'test_queue_job_no_delay'
+        ):
             description = \
                 _("Creating jobs to create moves for assets to %s") % (
                     self.date_end,)
