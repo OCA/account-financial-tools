@@ -108,7 +108,7 @@ class TestAccountAssetBatchCompute(TransactionCase):
         depreciation_line = self.asset01.depreciation_line_ids\
             .filtered(lambda r: r.type == 'depreciate' and r.move_id)
         self.assertTrue(len(depreciation_line) == 0)
-        wiz.with_context(test_queue_job_no_delay=True).asset_compute()
+        wiz.with_context(test_queue_job_no_delay=False).asset_compute()
         depreciation_line = self.asset01.depreciation_line_ids \
             .filtered(lambda r: r.type == 'depreciate' and r.move_id)
         self.assertTrue(len(depreciation_line) == 0)
