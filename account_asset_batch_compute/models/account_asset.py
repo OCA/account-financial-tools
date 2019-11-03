@@ -19,7 +19,9 @@ class AccountAsset(models.Model):
     @api.multi
     @job(default_channel='root.account_asset_batch_compute')
     def _compute_entries(self, date_end, check_triggers=False):
-        if self.env.context.get('asset_batch_processing', False):
+        if self.env.context.get(
+            'asset_batch_processing', False
+        ) and not self.env.context.get('test_queue_job_no_delay', False):
             results = []
             log_error = ''
             for record in self:
