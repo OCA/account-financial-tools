@@ -42,10 +42,10 @@ launched, it renumbers all posted moves that match selected criteria
 
 It will recreate the sequence number for each account move
 using its journal sequence, which means that:
-    - Sequences per journal are supported.
-    - Sequences with prefixes and suffixes based on the move
-      date are also supported.
-            """,
+
+- Sequences per journal are supported.
+- Sequences with prefixes and suffixes based on the move
+  date are also supported.""",
     "license": "AGPL-3",
     "depends": [
         'account',
