@@ -48,6 +48,30 @@ _field_renames = [
 ]
 
 
+def handle_account_asset_disposal_migration(env):
+    """Take care of potentially installed `account_asset_disposal` module.
+
+    In this phase we rename stuff for adapting to the new data structure.
+    """
+    cr = env.cr
+    if not openupgrade.column_exists(cr, 'account_asset', 'disposal_move_id'):
+        return
+    openupgrade.copy_columns(cr, {'account_asset': [('state', None, None)]})
+    openupgrade.rename_columns(
+        cr, {'account_asset': [('disposal_move_id', None)]})
+    openupgrade.map_values(
+        cr, openupgrade.get_legacy_name('state'), 'state',
+        [('disposed', 'removed')], table='account_asset',
+    )
+    openupgrade.rename_fields(
+        env, [
+            ('account.asset', 'account_asset', 'disposal_date', 'date_remove'),
+            ('account.asset.profile', 'account_asset_profile',
+             'account_loss_id', 'account_residual_value_id'),
+        ],
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     cr = env.cr
@@ -63,3 +87,4 @@ def migrate(env, version):
             openupgrade.copy_columns(cr, _column_copies)
             openupgrade.rename_columns(cr, _column_renames)
             openupgrade.rename_fields(env, _field_renames)
+            handle_account_asset_disposal_migration(env)
