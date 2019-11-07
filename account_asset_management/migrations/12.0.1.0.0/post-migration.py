@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openupgradelib import openupgrade
 from psycopg2 import sql
+from odoo.tools import float_is_zero
 
 
 def adjust_asset_values(env):
@@ -63,6 +64,31 @@ def adjust_aml_values(env):
     )
 
 
+def handle_account_asset_disposal_migration(env):
+    """Take care of potentially installed `account_asset_disposal` module.
+
+    In this phase we set the last asset line to the type remove on the
+    corresponding assets.
+    """
+    column_name = openupgrade.get_legacy_name('disposal_move_id')
+    if not openupgrade.column_exists(env.cr, 'account_asset', column_name):
+        return
+    env.cr.execute(
+        sql.SQL(
+            "SELECT id FROM account_asset WHERE {col} IS NOT NULL"
+        ).format(col=sql.Identifier(column_name))
+    )
+    assets = env['account.asset'].with_context(
+        allow_asset_line_update=True,
+    ).browse(x[0] for x in env.cr.fetchall())
+    assets.mapped('depreciation_line_ids').filtered(
+        lambda x: float_is_zero(
+            x.remaining_value,
+            precision_rounding=x.asset_id.company_currency_id.rounding,
+        )
+    ).write({'type': 'remove'})
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     copied_column = openupgrade.get_legacy_name('method_time')
@@ -71,3 +97,4 @@ def migrate(env, version):
         return
     adjust_asset_values(env)
     adjust_aml_values(env)
+    handle_account_asset_disposal_migration(env)
