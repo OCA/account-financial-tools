@@ -13,12 +13,8 @@
     "summary": "Adds an option 'partner policy' on account types",
     "author": "ACSONE SA/NV,Akretion,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
-    "depends": [
-        "account_menu",
-    ],
-    "data": [
-        "views/account.xml",
-    ],
+    "depends": ["account_menu"],
+    "data": ["views/account.xml"],
     "installable": True,
     "application": False,
 }
