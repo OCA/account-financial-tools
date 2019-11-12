@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-11-12 15:34+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: none\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -14,33 +15,34 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
 "4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: account_tag_menu
 #: model:ir.model,name:account_tag_menu.model_account_account_tag
 msgid "Account Tag"
-msgstr ""
+msgstr "Oznaka konta"
 
 #. module: account_tag_menu
 #: model:ir.ui.menu,name:account_tag_menu.account_tag_menu
 msgid "Account Tags"
-msgstr ""
+msgstr "Oznake konta"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Konta"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__account_ids
 msgid "Assigned accounts for custom reporting"
-msgstr ""
+msgstr "Označena konta za prilagođene izvještaje"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,help:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Assigned taxes for custom reporting"
-msgstr ""
+msgstr "Označeni porezi za prilagođene izvještaje"
 
 #. module: account_tag_menu
 #: model:ir.model.fields,field_description:account_tag_menu.field_account_account_tag__tax_ids
 msgid "Taxes"
-msgstr ""
+msgstr "Porezi"
