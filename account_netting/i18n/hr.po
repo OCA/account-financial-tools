@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-03 03:46+0000\n"
-"PO-Revision-Date: 2017-12-03 03:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-11-12 15:34+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:69
@@ -29,13 +30,13 @@ msgstr ""
 #: code:addons/account_netting/wizards/account_move_make_netting.py:41
 #, python-format
 msgid "All entries must have a receivable or payable account"
-msgstr ""
+msgstr "Sve stavke moraju imati dugovna ili potražna konta"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:44
 #, python-format
 msgid "All entries mustn't been reconciled"
-msgstr ""
+msgstr "Sve stavke moraju biti otvorene"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:53
@@ -43,16 +44,18 @@ msgstr ""
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
 msgstr ""
+"Sve stavke moraju imati unešenog partnera, i partner mora biti isti na svim "
+"stavkama"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__balance_type
 msgid "Balance Type"
-msgstr ""
+msgstr "Vrsta salda"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
@@ -63,12 +66,12 @@ msgstr "Odustani"
 #: model:ir.actions.act_window,name:account_netting.act_account_move_make_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate"
-msgstr ""
+msgstr "Kompenziraj"
 
 #. module: account_netting
 #: model_terms:ir.ui.view,arch_db:account_netting.view_account_move_make_netting_form
 msgid "Compensate entries"
-msgstr ""
+msgstr "Kompenziraj stavke"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__create_uid
@@ -93,7 +96,7 @@ msgstr "ID"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Dnevnik"
 
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting____last_update
@@ -113,7 +116,7 @@ msgstr "Zadnje ažurirano dana"
 #. module: account_netting
 #: model:ir.model.fields,field_description:account_netting.field_account_move_make_netting__move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Stavka temeljnice"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:47
@@ -132,24 +135,26 @@ msgid ""
 "receivable/payable accounts selected, and reconcile each other, letting this "
 "balance in the partner."
 msgstr ""
+"Ova operacija će kreirati protustavke za odabrana dugovna/potražna konta i "
+"zatvoriti ih međusobno, ostavivši saldo na partneru."
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To pay"
-msgstr ""
+msgstr "Za plaćanje"
 
 #. module: account_netting
 #: selection:account.move.make.netting,balance_type:0
 msgid "To receive"
-msgstr ""
+msgstr "Za naplatu"
 
 #. module: account_netting
 #: model:ir.model,name:account_netting.model_account_move_make_netting
 msgid "Wizard to generate account moves for netting"
-msgstr ""
+msgstr "Čarobnjak za kreiranje temeljnice kompenzacije"
 
 #. module: account_netting
 #: code:addons/account_netting/wizards/account_move_make_netting.py:35
 #, python-format
 msgid "You should compensate at least 2 journal entries."
-msgstr ""
+msgstr "Trebali bi kompenzirati najmanje 2 stavke dnevnika."
