@@ -10,51 +10,51 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-23 01:41+0000\n"
-"PO-Revision-Date: 2018-02-23 01:41+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
+"PO-Revision-Date: 2019-11-12 15:34+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.8\n"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__code_digits
 msgid "# of Digits"
-msgstr ""
+msgstr "# Znamenaka"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Update Chart Template</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Ažuriraj predložak kontnog plana</span>"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "<span states=\"init,ready\"> or </span>"
-msgstr ""
+msgstr "<span states=\"init,ready\"> ili </span>"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_field_ids
-#, fuzzy
 msgid "Account fields"
-msgstr "Konta"
+msgstr "Polja konta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__account_id
 msgid "Account template"
-msgstr ""
+msgstr "Predložak konta"
 
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts_account
 msgid "Account that needs to be updated (new or updated in the template)."
-msgstr ""
+msgstr "Konto koji treba biti ažuriran (novi ili ažuriran u predlošku)."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts_account__update_account_id
 msgid "Account to update"
-msgstr ""
+msgstr "Konto za ažuriranje"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_ids
@@ -64,25 +64,23 @@ msgstr "Konta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
-#, fuzzy
-#| msgid "Accounts"
 msgid "Accounts matching"
-msgstr "Konta"
+msgstr "Odgovarajuća Konta"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_id
 msgid "Chart Template"
-msgstr ""
+msgstr "Predložak plana"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__chart_template_ids
 msgid "Chart Templates"
-msgstr ""
+msgstr "Predlošci planova"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "Kontni plan"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
@@ -97,23 +95,23 @@ msgstr "Organizacija"
 #. module: account_chart_update
 #: selection:wizard.update.charts.accounts,state:0
 msgid "Configuration"
-msgstr ""
+msgstr "Postavke"
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__continue_on_errors
 msgid "Continue on errors"
-msgstr ""
+msgstr "Nastavi u slučaju greške"
 
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 msgid "Create/Update"
-msgstr ""
+msgstr "Kreiraj/Ažuriraj"
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:822
 #, python-format
 msgid "Created account %s."
-msgstr ""
+msgstr "Kreoran konto %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_uid
@@ -131,7 +129,7 @@ msgstr "Kreirao"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:927
 #, python-format
 msgid "Created fiscal position %s."
-msgstr ""
+msgstr "Kreirana fiskalna pozicija %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__create_date
@@ -149,18 +147,18 @@ msgstr "Kreirano"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:785
 #, python-format
 msgid "Created tax %s."
-msgstr ""
+msgstr "Kreiran porez %s."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:780
 #, python-format
 msgid "Deactivated tax %s."
-msgstr ""
+msgstr "Porez %s deaktiviran."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__deleted_taxes
 msgid "Deactivated taxes"
-msgstr ""
+msgstr "Deaktivirani porezi"
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
@@ -174,7 +172,7 @@ msgstr ""
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:615
 #, python-format
 msgid "Differences in these fields: %s."
-msgstr ""
+msgstr "Poteškoće sa sljedećim poljima: %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_account_matching__display_name
@@ -192,18 +190,18 @@ msgstr "Prikaži ime"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:831
 #, python-format
 msgid "Exception creating account %s."
-msgstr ""
+msgstr "Iznimka pri kreiranju konta %s."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:861
 #, python-format
 msgid "Exception writing account %s."
-msgstr ""
+msgstr "Iznimka pri zapisivanju izmjena na konto %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_account
 msgid "Existing accounts are updated. Accounts are searched by code."
-msgstr ""
+msgstr "Postojeća konta se ažuriraju. Konta se traže prema šifri."
 
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts__update_fiscal_position
