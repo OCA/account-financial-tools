@@ -97,5 +97,19 @@
       <field name="profile_id" ref="account_asset_profile_car_5Y"/>
     </record>
 
+    <record id="account_asset_asset_mini_car" model="account.asset">
+      <field name="parent_id" ref="account_asset_view_vehicle"/>
+      <field name="state">draft</field>
+      <field name="method_time">year</field>
+      <field name="method_number" eval="6"/>
+      <field name="method_period">quarter</field>
+      <field name="date_start" eval="time.strftime('2008-01-01')"/>
+      <field name="name">Mini car</field>
+      <field name="method">linear</field>
+      <field name="purchase_value" eval="5000.0"/>
+      <field name="salvage_value" eval="0"/>
+      <field name="profile_id" ref="account_asset_profile_car_5Y"/>
+    </record>
+
   </data>
 </odoo>

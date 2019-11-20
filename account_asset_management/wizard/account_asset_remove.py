@@ -290,43 +290,42 @@ class AccountAssetRemove(models.TransientModel):
         }
         move_lines.append((0, 0, move_line_vals))
 
-        if residual_value:
-            if self.posting_regime == 'residual_value':
+        if self.posting_regime == 'residual_value':
+            move_line_vals = {
+                'name': asset.name,
+                'account_id': self.account_residual_value_id.id,
+                'analytic_account_id': asset.account_analytic_id.id,
+                'debit': residual_value,
+                'credit': 0.0,
+                'partner_id': partner_id,
+                'asset_id': asset.id
+            }
+            move_lines.append((0, 0, move_line_vals))
+        elif self.posting_regime == 'gain_loss_on_sale':
+            if self.sale_value:
+                sale_value = self.sale_value
                 move_line_vals = {
                     'name': asset.name,
-                    'account_id': self.account_residual_value_id.id,
+                    'account_id': self.account_sale_id.id,
                     'analytic_account_id': asset.account_analytic_id.id,
-                    'debit': residual_value,
+                    'debit': sale_value,
                     'credit': 0.0,
                     'partner_id': partner_id,
                     'asset_id': asset.id
                 }
                 move_lines.append((0, 0, move_line_vals))
-            elif self.posting_regime == 'gain_loss_on_sale':
-                if self.sale_value:
-                    sale_value = self.sale_value
-                    move_line_vals = {
-                        'name': asset.name,
-                        'account_id': self.account_sale_id.id,
-                        'analytic_account_id': asset.account_analytic_id.id,
-                        'debit': sale_value,
-                        'credit': 0.0,
-                        'partner_id': partner_id,
-                        'asset_id': asset.id
-                    }
-                    move_lines.append((0, 0, move_line_vals))
-                balance = self.sale_value - residual_value
-                account_id = (self.account_plus_value_id.id
-                              if balance > 0
-                              else self.account_min_value_id.id)
-                move_line_vals = {
-                    'name': asset.name,
-                    'account_id': account_id,
-                    'analytic_account_id': asset.account_analytic_id.id,
-                    'debit': balance < 0 and -balance or 0.0,
-                    'credit': balance > 0 and balance or 0.0,
-                    'partner_id': partner_id,
-                    'asset_id': asset.id
-                }
-                move_lines.append((0, 0, move_line_vals))
+            balance = self.sale_value - residual_value
+            account_id = (self.account_plus_value_id.id
+                          if balance > 0
+                          else self.account_min_value_id.id)
+            move_line_vals = {
+                'name': asset.name,
+                'account_id': account_id,
+                'analytic_account_id': asset.account_analytic_id.id,
+                'debit': balance < 0 and -balance or 0.0,
+                'credit': balance > 0 and balance or 0.0,
+                'partner_id': partner_id,
+                'asset_id': asset.id
+            }
+            move_lines.append((0, 0, move_line_vals))
         return move_lines

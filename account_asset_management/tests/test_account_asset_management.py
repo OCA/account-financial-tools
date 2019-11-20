@@ -473,3 +473,51 @@ class TestAssetManagement(common.TransactionCase):
             # I check that the new asset has the correct purchase value
             self.assertAlmostEqual(
                 asset.purchase_value, -line.price_unit, places=2)
+
+    def test_residual_value_zero_with_profit(self):
+        """
+        Test the case where the asset is fully amortized and during the close,
+        we define a sale value.
+        This test ensure that the sale value is correctly set into generated
+        account move lines.
+        :return:
+        """
+        asset = self.env.ref(
+            "account_asset_management.account_asset_asset_mini_car")
+        asset.compute_depreciation_board()
+        asset.validate()
+        wiz_ctx = {
+            'active_id': asset.id,
+            'active_ids': asset.ids,
+            'active_model': asset._name,
+        }
+        sale_value = 2000
+        account_type = self.env.ref("account.data_account_type_other_income")
+        account_sale = self.account_account.search([
+            ('user_type_id', '=', account_type.id),
+            ('company_id', '=', asset.company_id.id),
+        ], limit=1)
+        wiz = self.remove_model.with_context(**wiz_ctx).create({
+            'date_remove': time.strftime('%Y-01-31'),
+            'sale_value': 2000,
+            'posting_regime': 'gain_loss_on_sale',
+            'account_plus_value_id': self.ref('account.a_sale'),
+            'account_min_value_id': self.ref('account.a_expense'),
+            'account_sale_id': account_sale.id,
+        })
+        # Keep the default account used
+        account_plus_value = wiz.account_plus_value_id
+        wiz.remove()
+        asset.refresh()
+        # Now check move lines (ensure they contains the sale_value)
+        self.assertTrue(asset.account_move_line_ids.filtered(
+            lambda l: l.debit == sale_value and l.account_id == account_sale))
+        self.assertTrue(asset.account_move_line_ids.filtered(
+            lambda l: l.credit == sale_value and
+            l.account_id == account_plus_value))
+        # Ensure others move lines still here with corrects amount
+        self.assertTrue(asset.account_move_line_ids.filtered(
+            lambda l: l.credit == asset.purchase_value))
+        self.assertTrue(asset.account_move_line_ids.filtered(
+            lambda l: l.credit == asset.purchase_value))
+        return
