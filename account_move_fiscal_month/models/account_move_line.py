@@ -10,4 +10,4 @@ class AccountMoveLine(models.Model):
 
     date_range_fm_id = fields.Many2one(
         related='move_id.date_range_fm_id',
-        store=True, copy=False)
+    )
