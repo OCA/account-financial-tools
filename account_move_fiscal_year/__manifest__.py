@@ -5,7 +5,7 @@
     'name': 'Account Move Fiscal Year',
     'summary': """
         Display the fiscal year on journal entries/item""",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.1.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
