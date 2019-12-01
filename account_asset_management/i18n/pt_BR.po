@@ -30,8 +30,8 @@ msgstr ""
 "POT-Creation-Date: 2017-01-13 23:25+0000\n"
 "PO-Revision-Date: 2019-11-24 19:58+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1040
+#: code:addons/account_asset_management/models/account_asset.py:1042
 #, python-format
 msgid ""
 "\n"
@@ -619,7 +619,7 @@ msgid "Entries"
 msgstr "Lançamentos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1043
+#: code:addons/account_asset_management/models/account_asset.py:1045
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
