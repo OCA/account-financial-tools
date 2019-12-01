@@ -20,7 +20,7 @@ msgstr ""
 "2);\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1040
+#: code:addons/account_asset_management/models/account_asset.py:1042
 #, python-format
 msgid ""
 "\n"
@@ -564,7 +564,7 @@ msgid "Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1043
+#: code:addons/account_asset_management/models/account_asset.py:1045
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
