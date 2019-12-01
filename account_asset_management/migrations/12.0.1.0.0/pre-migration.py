@@ -88,3 +88,9 @@ def migrate(env, version):
             openupgrade.rename_columns(cr, _column_renames)
             openupgrade.rename_fields(env, _field_renames)
             handle_account_asset_disposal_migration(env)
+            if openupgrade.column_exists(cr, 'account_asset',
+                                         'analytic_account_id'):
+                # account_asset_analytic module in OCA/account_analytic
+                openupgrade.rename_fields(
+                    env, [('account.asset', 'account_asset',
+                           'analytic_account_id', 'account_analytic_id')])
