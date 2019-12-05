@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 
 
 class AccountUpdateLockDate(models.TransientModel):
-
     _name = 'account.update.lock_date'
     _description = 'Account Update Lock_date'
 
@@ -35,7 +34,6 @@ class AccountUpdateLockDate(models.TransientModel):
         })
         return res
 
-    @api.multi
     def _check_execute_allowed(self):
         self.ensure_one()
         has_adviser_group = self.env.user.has_group(
@@ -43,11 +41,15 @@ class AccountUpdateLockDate(models.TransientModel):
         if not (has_adviser_group or self.env.uid == SUPERUSER_ID):
             raise UserError(_("You are not allowed to execute this action."))
 
-    @api.multi
     def execute(self):
         self.ensure_one()
         self._check_execute_allowed()
-        self.company_id.sudo().write({
+        vals = {
             'period_lock_date': self.period_lock_date,
             'fiscalyear_lock_date': self.fiscalyear_lock_date,
-        })
+            }
+        if (
+                self.period_lock_date and self.fiscalyear_lock_date and
+                self.period_lock_date < self.fiscalyear_lock_date):
+            vals['period_lock_date'] = self.fiscalyear_lock_date
+        self.company_id.sudo().write(vals)

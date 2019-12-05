@@ -9,19 +9,9 @@
         <field name="model">account.update.lock_date</field>
         <field name="inherit_id" ref="account_lock_date_update.account_update_lock_date_form_view"/>
         <field name="arch" type="xml">
-
-            <sheet position="inside">
-                <group>
-                    <group>
-                        <field name="permanent_lock_date"/>
-                    </group>
-                    <group>
-                        <button string="Permanently Lock Entries" name="change_permanent_lock_date"
-                                type="object" class="btn-primary"/>
-                    </group>
-                </group>
-            </sheet>
-
+            <field name="fiscalyear_lock_date" position="after">
+                <field name="tmp_permanent_lock_date"/>
+            </field>
         </field>
     </record>
 

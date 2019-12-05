@@ -7,7 +7,7 @@
     'summary': """
         Allow an Account adviser to update permanent lock date without
         having access to all technical settings""",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
