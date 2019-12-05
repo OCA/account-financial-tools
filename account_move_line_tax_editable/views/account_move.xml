@@ -12,8 +12,9 @@
             <xpath expr="//field[@name='line_ids']/tree/field[@name='name']" position="after">
                 <field name="is_tax_editable" invisible="1"/>
                 <field name="tax_line_id" attrs="{'readonly': [('is_tax_editable', '=', False)]}"/>
-                <field name="tax_ids" attrs="{'readonly': [('is_tax_editable', '=', False)]}"
-                       widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='tax_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_tax_editable', '=', False)]}</attribute>
             </xpath>
         </field>
     </record>
