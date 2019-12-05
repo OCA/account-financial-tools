@@ -56,7 +56,7 @@ class PermanentLock(common.TransactionCase):
             })
             self.wizard.confirm_date()
         except UserError as ue:
-            if 'entries are still unposted' in ue.name:
+            if 'are still unposted' in ue.name:
                 raised_lock_error = True
 
         self.assertTrue(raised_lock_error,
@@ -90,7 +90,7 @@ class PermanentLock(common.TransactionCase):
             })
             self.wizard.confirm_date()
         except UserError as ue:
-            if 'permanent lock date in the past' in ue.name:
+            if 'permanent lock date before the current permanent' in ue.name:
                 raised_lock_error = True
 
         self.assertTrue(raised_lock_error,
