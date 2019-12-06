@@ -47,7 +47,6 @@ Unported addons
 addon | version | summary
 --- | --- | ---
 [account_asset_management](account_asset_management/) | 8.0.2.6.0 (unported) | Assets Management
-[account_asset_management_xls](account_asset_management_xls/) | 8.0.0.1.0 (unported) | Assets Management Excel reporting
 [account_cancel_invoice_check_payment_order](account_cancel_invoice_check_payment_order/) | 1.0 (unported) | Cancel invoice, check on payment order
 [account_cancel_invoice_check_voucher](account_cancel_invoice_check_voucher/) | 1.0 (unported) | Cancel invoice, check on bank statement
 [account_constraints](account_constraints/) | 8.0.1.1.0 (unported) | Account Constraints
