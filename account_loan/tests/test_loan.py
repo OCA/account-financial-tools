@@ -9,6 +9,7 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import logging
+from odoo.tests import tagged
 
 _logger = logging.getLogger(__name__)
 try:
@@ -16,8 +17,11 @@ try:
 except (ImportError, IOError) as err:
     _logger.error(err)
 
-
+@tagged('post_install', '-at_install')
 class TestLoan(TransactionCase):
+    """
+    Tests require 'post install',since a chart of account is required
+    """
     def setUp(self):
         super().setUp()
         self.company = self.browse_ref('base.main_company')
@@ -143,7 +147,7 @@ class TestLoan(TransactionCase):
                 'amount': (amount - amount / periods) / 2,
                 'fees': 100,
                 'date': datetime.strptime(
-                    line.date, DF
+                    line.date.strftime(DF), DF
                 ).date() + relativedelta(months=-1)
             }).run()
         with self.assertRaises(UserError):
@@ -152,7 +156,7 @@ class TestLoan(TransactionCase):
                 'amount': amount,
                 'fees': 100,
                 'date': datetime.strptime(
-                    line.date, DF
+                    line.date.strftime(DF), DF
                 ).date()
             }).run()
         with self.assertRaises(UserError):
@@ -161,7 +165,7 @@ class TestLoan(TransactionCase):
                 'amount': 0,
                 'fees': 100,
                 'date': datetime.strptime(
-                    line.date, DF
+                    line.date.strftime(DF), DF
                 ).date()
             }).run()
         with self.assertRaises(UserError):
@@ -170,7 +174,7 @@ class TestLoan(TransactionCase):
                 'amount': -100,
                 'fees': 100,
                 'date': datetime.strptime(
-                    line.date, DF
+                    line.date.strftime(DF), DF
                 ).date()
             }).run()
 
@@ -259,7 +263,7 @@ class TestLoan(TransactionCase):
                 'amount': (amount - amount / periods) / 2,
                 'fees': 100,
                 'date': datetime.strptime(
-                    loan.line_ids.filtered(lambda r: r.sequence == 1).date, DF
+                    loan.line_ids.filtered(lambda r: r.sequence == 1).date.strftime(DF), DF
                 ).date() + relativedelta(months=-1)
             }).run()
         line.invoice_ids.action_invoice_open()
@@ -346,8 +350,8 @@ class TestLoan(TransactionCase):
         self.assertEqual(loan.pending_principal_amount, amount)
         self.assertFalse(loan.line_ids.filtered(
             lambda r: (
-                datetime.strptime(r.date, DF).date() <=
-                datetime.strptime(loan.start_date, DF).date())))
+                datetime.strptime(r.date.strftime(DF), DF).date() <=
+                datetime.strptime(loan.start_date.strftime(DF), DF).date())))
         for line in loan.line_ids:
             self.assertEqual(loan.state, 'posted')
             line.view_process_values()

@@ -357,7 +357,7 @@ class AccountLoan(models.Model):
     def post(self):
         self.ensure_one()
         if not self.start_date:
-            self.start_date = fields.Datetime.now()
+            self.start_date = fields.Datetime.to_string(fields.Datetime.now())
         self.compute_draft_lines()
         self.write({'state': 'posted'})
 
@@ -398,12 +398,13 @@ class AccountLoan(models.Model):
             return
         final_sequence = min(lines.mapped('sequence'))
         for line in lines.sorted('sequence', reverse=True):
+            line_date_str = line.date.strftime(DF)
             date = datetime.strptime(
-                line.date, DF).date() + relativedelta(months=12)
+                line_date_str, DF).date() + relativedelta(months=12)
             if self.state == 'draft' or line.sequence != final_sequence:
                 line.long_term_pending_principal_amount = sum(
                     self.line_ids.filtered(
-                        lambda r: datetime.strptime(r.date, DF).date() >= date
+                        lambda r: datetime.strptime(r.date.strftime(DF), DF).date() >= date
                     ).mapped('principal_amount'))
             line.long_term_principal_amount = (
                 line.long_term_pending_principal_amount - amount)
@@ -426,7 +427,8 @@ class AccountLoan(models.Model):
         self.line_ids.unlink()
         amount = self.loan_amount
         if self.start_date:
-            date = datetime.strptime(self.start_date, DF).date()
+            start_date_str = self.start_date.strftime(DF)
+            date = datetime.strptime(start_date_str, DF).date()
         else:
             date = datetime.today().date()
         delta = relativedelta(months=self.method_period)
@@ -475,7 +477,7 @@ class AccountLoan(models.Model):
         ]):
             lines = record.line_ids.filtered(
                 lambda r: datetime.strptime(
-                    r.date, DF).date() <= date and not r.move_ids
+                    r.date.strftime(DF), DF).date() <= date and not r.move_ids
             )
             res += lines.generate_move()
         return res
@@ -489,6 +491,6 @@ class AccountLoan(models.Model):
         ]):
             res += record.line_ids.filtered(
                 lambda r: datetime.strptime(
-                    r.date, DF).date() <= date and not r.invoice_ids
+                    r.date.strftime(DF), DF).date() <= date and not r.invoice_ids
             ).generate_invoice()
         return res

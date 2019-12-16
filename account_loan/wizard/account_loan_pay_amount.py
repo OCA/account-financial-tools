@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class AccountLoan(models.TransientModel):
     _name = 'account.loan.pay.amount'
+    _description = "Account loan pay amount"
 
     loan_id = fields.Many2one(
         'account.loan',

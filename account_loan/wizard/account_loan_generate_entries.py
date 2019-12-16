@@ -9,6 +9,7 @@ from datetime import datetime
 
 class AccountLoanGenerateWizard(models.TransientModel):
     _name = "account.loan.generate.wizard"
+    _description = "Account loan generate wizard"
 
     date = fields.Date(
         'Account Date',
@@ -22,8 +23,9 @@ class AccountLoanGenerateWizard(models.TransientModel):
     ], required=True, default='loan')
 
     def run_leasing(self):
+        date_str = self.date.strftime(DF)
         created_ids = self.env['account.loan'].generate_leasing_entries(
-            datetime.strptime(self.date, DF).date())
+            datetime.strptime(date_str, DF).date())
         action = self.env.ref('account.action_invoice_tree2')
         result = action.read()[0]
         if len(created_ids) == 0:
@@ -35,8 +37,9 @@ class AccountLoanGenerateWizard(models.TransientModel):
         return result
 
     def run_loan(self):
+        date_str = self.date.strftime(DF)
         created_ids = self.env['account.loan'].generate_loan_entries(
-            datetime.strptime(self.date, DF).date())
+            datetime.strptime(date_str, DF).date())
         action = self.env.ref('account.action_move_line_form')
         result = action.read()[0]
         if len(created_ids) == 0:
