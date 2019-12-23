@@ -61,11 +61,13 @@
               </group>
               <separator string="Other Information" colspan="4"/>
               <group colspan="4" col="4">
-                <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}"/>
-                <field name="partner_id"/>
-                <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                  <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}"/>
+                  <field name="manual_lines" widget="boolean_toggle"/>
+                  <field name="editable_lines" widget="boolean_toggle"/>
+                  <field name="partner_id"/>
+                  <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
               </group>
-              <group colspan="4">
+              <group name='depreciation_auto' colspan="4" attrs="{'invisible':[('manual_lines', '=', True)]}" >
                 <group>
                   <separator string="Depreciation Dates" colspan="2"/>
                   <field name="method_time"/>
@@ -88,10 +90,10 @@
               <div>
                 <button type="object" name="compute_depreciation_board"
                         string=" Compute" icon="fa-gears"
-                        attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
+                        attrs="{'invisible': ['|', ('state', 'in', ['close', 'removed']), ('manual_lines', '=', True)]}"/>
               </div>
-              <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
-                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" create="false">
+              <field name="depreciation_line_ids" readonly="1" attrs="{'invisible':[('editable_lines', '=', True)]}" mode="tree" options="{'reload_on_button': true}">
+                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)">
                   <field name="type"/>
                   <field name="line_date"/>
                   <field name="depreciated_value" readonly="1"/>
@@ -108,7 +110,7 @@
                           string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"
                           attrs="{'invisible': [('move_check', '!=', True)]}"/>
                 </tree>
-                <form string="Asset Line">
+                <form string="Asset Line" edit="false">
                   <group>
                     <group>
                       <field name="parent_state" invisible="1"/>
@@ -127,6 +129,25 @@
                     </group>
                   </group>
                 </form>
+              </field>
+              <field name="depreciation_line_manual_ids" attrs="{'invisible':[('editable_lines', '=', False)]}" mode="tree" options="{'reload_on_button': true}">
+                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" editable="bottom">
+                  <field name="type"/>
+                  <field name="line_date"/>
+                  <field name="depreciated_value" readonly="1"/>
+                  <field name="amount"/>
+                  <field name="remaining_value" readonly="1"/>
+                  <field name="init_entry" string="Init"/>
+                  <field name="move_check"/>
+                  <field name="parent_state" invisible="1"/>
+                  <button name="create_move" icon="fa-cog" string="Create Move" type="object"
+                          attrs="{'invisible': ['|', '|', ('init_entry', '=', True), ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"/>
+                  <button name="open_move" icon="fa-folder-open-o" string="View Move" type="object"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                  <button name="unlink_move" icon="fa-times"
+                          string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                </tree>
               </field>
             </page>
             <page string="History">

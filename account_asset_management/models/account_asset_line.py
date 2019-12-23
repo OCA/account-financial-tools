@@ -19,6 +19,7 @@ class AccountAssetLine(models.Model):
         required=True, ondelete='cascade')
     previous_id = fields.Many2one(
         comodel_name='account.asset.line',
+        compute='_compute_previous_id',
         string='Previous Depreciation Line',
         readonly=True)
     parent_state = fields.Selection(
@@ -38,12 +39,12 @@ class AccountAssetLine(models.Model):
         compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
-        store=True)
+        store=False)
     depreciated_value = fields.Float(
         compute='_compute_values',
         digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
-        store=True)
+        store=False)
     line_date = fields.Date(string='Date', required=True)
     move_id = fields.Many2one(
         comodel_name='account.move',
@@ -63,7 +64,18 @@ class AccountAssetLine(models.Model):
         help="Set this flag for entries of previous fiscal years "
              "for which Odoo has not generated accounting entries.")
 
-    @api.depends('amount', 'previous_id', 'type')
+    @api.depends('line_date')
+    def _compute_previous_id(self):
+        for rec in self:
+            if rec.line_date:
+                prev_lines = rec.asset_id.depreciation_line_ids.filtered(
+                    lambda l: l.line_date < rec.line_date and
+                    l.type == 'depreciate').sorted(
+                    key=lambda l: l.line_date)
+                if prev_lines:
+                    rec.previous_id = prev_lines[-1]
+
+    @api.depends('amount', 'line_date', 'type')
     @api.multi
     def _compute_values(self):
         dlines = self
@@ -158,7 +170,9 @@ class AccountAssetLine(models.Model):
                         raise UserError(_(
                             "You cannot set the date on a depreciation line "
                             "prior to already posted entries."))
-        return super().write(vals)
+        res = super().write(vals)
+
+        return res
 
     @api.multi
     def unlink(self):
@@ -175,7 +189,7 @@ class AccountAssetLine(models.Model):
             next_line = dl.asset_id.depreciation_line_ids.filtered(
                 lambda l: l.previous_id == dl and l not in self)
             if next_line:
-                next_line.previous_id = previous
+                next_line[0].previous_id = previous
         return super(AccountAssetLine, self.with_context(
             no_compute_asset_line_ids=self.ids)).unlink()
 
