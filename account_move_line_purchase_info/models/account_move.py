@@ -7,17 +7,19 @@ from odoo import fields, models
 
 class AccountMoveLine(models.Model):
 
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     purchase_line_id = fields.Many2one(
-        comodel_name='purchase.order.line',
-        string='Purchase Order Line',
-        ondelete='set null', index=True,
+        comodel_name="purchase.order.line",
+        string="Purchase Order Line",
+        ondelete="set null",
+        index=True,
     )
 
     purchase_id = fields.Many2one(
-        comodel_name='purchase.order',
-        related='purchase_line_id.order_id',
-        string='Purchase Order',
-        store=True, index=True,
+        comodel_name="purchase.order",
+        related="purchase_line_id.order_id",
+        string="Purchase Order",
+        store=True,
+        index=True,
     )
