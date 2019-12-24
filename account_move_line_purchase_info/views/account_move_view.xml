@@ -40,11 +40,11 @@
                 <field name="purchase_line_id"
                        groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
             </field>
-            <filter name="partner" position="after">
-                <filter name="purchase_order" string="Purchase Order" domain="[]"
+            <filter name="group_by_partner" position="after">
+                <filter name="group_by_purchase_order" string="Purchase Order" domain="[]"
                         context="{'group_by':'purchase_id'}"
                         groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
-                <filter name="purchase_order_line" string="Purchase Order Line" domain="[]"
+                <filter name="group_by_purchase_order_line" string="Purchase Order Line" domain="[]"
                         context="{'group_by':'purchase_line_id','po_line_info':True}"
                         groups="account_move_line_purchase_info.group_account_move_purchase_info"/>
             </filter>
