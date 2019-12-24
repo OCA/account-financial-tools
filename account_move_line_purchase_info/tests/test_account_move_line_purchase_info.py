@@ -1,9 +1,9 @@
-# Copyright 2017 Eficent Business and IT Consulting Services S.L.
-#           (www.eficent.com)
+# Copyright 2019 ForgeFlow S.L.
+#   (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
@@ -11,12 +11,11 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         super(TestAccountMoveLinePurchaseInfo, self).setUp()
         self.purchase_model = self.env["purchase.order"]
         self.purchase_line_model = self.env["purchase.order.line"]
-        self.invoice_model = self.env["account.invoice"]
-        self.invoice_line_model = self.env["account.invoice.line"]
         self.product_model = self.env["product.product"]
         self.product_ctg_model = self.env["product.category"]
         self.acc_type_model = self.env["account.account.type"]
         self.account_model = self.env["account.account"]
+        self.am_model = self.env["account.move"]
         self.aml_model = self.env["account.move.line"]
         self.res_users_model = self.env["res.users"]
 
@@ -78,7 +77,9 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
         return user.id
 
     def _create_account_type(self, name, type):
-        acc_type = self.acc_type_model.create({"name": name, "type": type})
+        acc_type = self.acc_type_model.create(
+            {"name": name, "type": type, "internal_group": name}
+        )
         return acc_type
 
     def _create_account(self, acc_type, name, code, company):
@@ -89,6 +90,7 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
                 "code": code,
                 "user_type_id": acc_type.id,
                 "company_id": company.id,
+                "reconcile": True,
             }
         )
         return account
@@ -189,18 +191,15 @@ class TestAccountMoveLinePurchaseInfo(common.TransactionCase):
             expected_balance=expected_balance,
         )
 
-        invoice = self.invoice_model.create(
-            {
-                "partner_id": self.partner1.id,
-                "purchase_id": purchase.id,
-                "account_id": purchase.partner_id.property_account_payable_id.id,
-            }
-        )
-        invoice.purchase_order_change()
-        invoice.action_invoice_open()
+        f = Form(self.am_model.with_context(default_type="in_invoice"))
+        f.partner_id = purchase.partner_id
+        f.purchase_id = purchase
+        invoice = f.save()
+        invoice.post()
+        purchase.flush()
 
-        for aml in invoice.move_id.line_ids:
-            if aml.product_id == po_line.product_id and aml.invoice_id:
+        for aml in invoice.invoice_line_ids:
+            if aml.product_id == po_line.product_id and aml.move_id:
                 self.assertEqual(
                     aml.purchase_line_id,
                     po_line,
