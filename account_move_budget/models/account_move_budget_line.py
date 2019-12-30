@@ -1,4 +1,4 @@
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -67,6 +67,4 @@ class AccountMoveBudgetLine(models.Model):
     def _constraint_date(self):
         for rec in self:
             if rec.budget_id.date_from > rec.date or rec.budget_id.date_to < rec.date:
-                raise ValidationError(
-                    _("The date must be within the " "budget period.")
-                )
+                raise ValidationError(_("The date must be within the budget period."))
