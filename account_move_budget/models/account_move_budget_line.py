@@ -11,77 +11,62 @@ class AccountMoveBudgetLine(models.Model):
     _order = "date desc, id desc"
 
     budget_id = fields.Many2one(
-        comodel_name='account.move.budget',
+        comodel_name="account.move.budget",
         string="Budget",
         required=True,
-        ondelete='cascade',
+        ondelete="cascade",
         index=True,
     )
     name = fields.Char(string="Label")
-    debit = fields.Monetary(
-        default=0.0,
-        currency_field='company_currency_id',
-    )
-    credit = fields.Monetary(
-        default=0.0,
-        currency_field='company_currency_id'
-    )
+    debit = fields.Monetary(default=0.0, currency_field="company_currency_id")
+    credit = fields.Monetary(default=0.0, currency_field="company_currency_id")
     balance = fields.Monetary(
-        compute='_compute_store_balance',
+        compute="_compute_store_balance",
         store=True,
-        currency_field='company_currency_id',
+        currency_field="company_currency_id",
         help="Technical field holding the debit - "
-             "credit in order to open meaningful "
-             "graph views from reports",
+        "credit in order to open meaningful "
+        "graph views from reports",
     )
     company_currency_id = fields.Many2one(
-        'res.currency',
-        related='company_id.currency_id',
+        "res.currency",
+        related="company_id.currency_id",
         string="Company Currency",
         readonly=True,
-        help='Utility field to express amount currency',
+        help="Utility field to express amount currency",
         store=True,
     )
     account_id = fields.Many2one(
-        'account.account',
-        string='Account',
+        "account.account",
+        string="Account",
         required=True,
         index=True,
         ondelete="cascade",
-        domain=[('deprecated', '=', False)],
-        default=lambda self: self._context.get('account_id', False),
+        domain=[("deprecated", "=", False)],
+        default=lambda self: self._context.get("account_id", False),
     )
-    date = fields.Date(
-        string='Date',
-        index=True,
-        required=True,
-    )
+    date = fields.Date(string="Date", index=True, required=True)
     analytic_account_id = fields.Many2one(
-        'account.analytic.account',
-        string='Analytic Account',
+        "account.analytic.account", string="Analytic Account"
     )
     company_id = fields.Many2one(
-        'res.company',
-        related='account_id.company_id',
-        string='Company',
+        "res.company",
+        related="account_id.company_id",
+        string="Company",
         store=True,
         readonly=True,
     )
-    partner_id = fields.Many2one(
-        'res.partner',
-        string='Partner',
-        ondelete='restrict',
-    )
+    partner_id = fields.Many2one("res.partner", string="Partner", ondelete="restrict")
 
-    @api.depends('debit', 'credit')
+    @api.depends("debit", "credit")
     def _compute_store_balance(self):
         for line in self:
             line.balance = line.debit - line.credit
 
-    @api.constrains('date')
+    @api.constrains("date")
     def _constraint_date(self):
         for rec in self:
-            if rec.budget_id.date_from > rec.date or \
-                    rec.budget_id.date_to < rec.date:
-                raise ValidationError(_('The date must be within the '
-                                        'budget period.'))
+            if rec.budget_id.date_from > rec.date or rec.budget_id.date_to < rec.date:
+                raise ValidationError(
+                    _("The date must be within the " "budget period.")
+                )
