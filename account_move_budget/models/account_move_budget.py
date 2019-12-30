@@ -1,5 +1,5 @@
 # Copyright 2019 ACSONE SA/NV
-# Copyright 2019 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2019 ForgeFlow S.L. (http://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -9,10 +9,6 @@ class AccountMoveBudget(models.Model):
     _name = "account.move.budget"
     _description = "Account Move Budget"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-
-    @api.model
-    def _default_company(self):
-        return self.env["res.company"]._company_default_get("mis.budget")
 
     name = fields.Char(required=True, track_visibility="onchange")
     description = fields.Char(track_visibility="onchange")
@@ -31,10 +27,12 @@ class AccountMoveBudget(models.Model):
         comodel_name="account.move.budget.line", inverse_name="budget_id", copy=True
     )
     company_id = fields.Many2one(
-        comodel_name="res.company", string="Company", default=_default_company
+        comodel_name="res.company",
+        string="Company",
+        default=lambda self: self.env.company,
     )
 
-    @api.multi
+    @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
         if default is None:
@@ -60,17 +58,14 @@ class AccountMoveBudget(models.Model):
                 ):
                     rec.date_range_id = False
 
-    @api.multi
     def action_draft(self):
         for rec in self:
             rec.state = "draft"
 
-    @api.multi
     def action_cancel(self):
         for rec in self:
             rec.state = "cancelled"
 
-    @api.multi
     def action_confirm(self):
         for rec in self:
             rec.state = "confirmed"
