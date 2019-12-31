@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-account_menu',
+        'odoo13-addon-account_move_line_purchase_info',
     ],
     classifiers=[
         'Programming Language :: Python',
