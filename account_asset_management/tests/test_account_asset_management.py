@@ -415,7 +415,7 @@ class TestAssetManagement(SavepointCase):
                                    'account_asset_profile_car_5Y'),
             'purchase_value': 5000,
             'salvage_value': 0,
-            'date_start': time.strftime('%Y-01-01'),
+            'date_start': '2019-01-01',
             'method_time': 'year',
             'method_number': 5,
             'method_period': 'quarter',
@@ -428,7 +428,7 @@ class TestAssetManagement(SavepointCase):
             'early_removal': True,
         }
         wiz = self.remove_model.with_context(wiz_ctx).create({
-            'date_remove': time.strftime('%Y-01-31'),
+            'date_remove': '2019-01-31',
             'sale_value': 0.0,
             'posting_regime': 'gain_loss_on_sale',
             'account_plus_value_id': self.ref('account.a_sale'),
@@ -524,7 +524,7 @@ class TestAssetManagement(SavepointCase):
                                    'account_asset_profile_car_5Y'),
             'purchase_value': 3333,
             'salvage_value': 0,
-            'date_start': time.strftime('%Y-07-07'),
+            'date_start': '2019-07-07',
             'method_time': 'year',
             'method_number': 5,
             'method_period': 'month',
@@ -534,24 +534,14 @@ class TestAssetManagement(SavepointCase):
         })
         asset.compute_depreciation_board()
         asset.refresh()
-        if calendar.isleap(date.today().year) or \
-                calendar.isleap(date.today().year + 1):
-            day_rate = 3333 / 1827  # 3333 / 1827 depreciation days
-        else:
-            day_rate = 3333 / 1826  # 3333 / 1826 depreciation days
+        day_rate = 3333 / 1827  # 3333 / 1827 depreciation days
         for i in range(1, 10):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[i].amount,
                 asset.depreciation_line_ids[i].line_days * day_rate, places=2)
-
         # Last depreciation remaining
-        if calendar.isleap(date.today().year) or \
-                calendar.isleap(date.today().year + 1):
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 11.05, places=2)
-        else:
-            self.assertAlmostEqual(
-                asset.depreciation_line_ids[-1].amount, 11.05, places=2)
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].amount, 11.05, places=2)
 
     def test_13_use_leap_year(self):
         # When you use the depreciation with years method and using lap years,
