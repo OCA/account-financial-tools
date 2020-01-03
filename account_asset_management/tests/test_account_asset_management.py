@@ -534,7 +534,6 @@ class TestAssetManagement(SavepointCase):
         })
         asset.compute_depreciation_board()
         asset.refresh()
-        dt = asset.date_start
         day_rate = 3333 / 1827  # 3333 / 1827 depreciation days
         for i in range(1, 10):
             self.assertAlmostEqual(
