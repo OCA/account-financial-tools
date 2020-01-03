@@ -7,6 +7,7 @@ import calendar
 from datetime import date, datetime
 import time
 
+from openerp.fields import Date
 import openerp.tests.common as common
 
 
@@ -331,13 +332,24 @@ class TestAssetManagement(common.TransactionCase):
 
     def test_8_asset_removal(self):
         """Asset removal"""
+        year = 2019  # amounts are different for leap years
+        if not self.env['account.fiscalyear'].search(
+                [('company_id', '=', self.env.user.company_id.id),
+                 ('date_start', '=', '%s-01-01' % year)]):
+            self.env['account.fiscalyear'].create({
+                'name': year,
+                'code': year,
+                'date_start': '%s-01-01' % year,
+                'date_stop': '%s-12-31' % year,
+            }).create_period()
+
         asset_id = self.asset_model.create(self.cr, self.uid, {
             'name': 'test asset removal',
             'profile_id': self.ref('account_asset_management.'
                                    'account_asset_profile_car_5Y'),
             'purchase_value': 5000,
             'salvage_value': 0,
-            'date_start': time.strftime('%Y-01-01'),
+            'date_start': '%s-01-01' % year,
             'method_time': 'year',
             'method_number': 5,
             'method_period': 'quarter',
@@ -348,7 +360,7 @@ class TestAssetManagement(common.TransactionCase):
             self.cr, self.uid, [asset.id])
         asset.validate()
         wiz_id = self.remove_model.create(self.cr, self.uid, {
-            'date_remove': time.strftime('%Y-01-31'),
+            'date_remove': '%s-01-31' % year,
             'sale_value': 0.0,
             'posting_regime': 'gain_loss_on_sale',
             'account_plus_value_id': self.ref('account.a_sale'),
