@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009-2017 Noviat
+# Copyright 2009-2019 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -11,7 +11,7 @@ from traceback import format_exception
 
 from openerp import api, fields, models, _
 from openerp.addons.decimal_precision import decimal_precision as dp
-from openerp.exceptions import Warning as UserError
+from openerp.exceptions import except_orm, Warning as UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -137,10 +137,8 @@ class AccountAsset(models.Model):
         states={'draft': [('readonly', False)]}, default=5,
         help="The number of years needed to depreciate your asset")
     method_period = fields.Selection(
-        selection=[('month', 'Month'),
-                   ('quarter', 'Quarter'),
-                   ('year', 'Year')],
-        string='Period Length',
+        selection=lambda self: self.env['account.asset.profile'].
+        _selection_method_period(), string='Period Length',
         required=True, readonly=True,
         states={'draft': [('readonly', False)]}, default='year',
         help="Period length for the depreciation accounting entries")
@@ -1045,7 +1043,18 @@ class AccountAsset(models.Model):
             try:
                 with self._cr.savepoint():
                     result += depreciation.create_move()
-            except:
+            except (UserError, except_orm), e:
+                tb = ''.join(format_exception(*exc_info()))
+                asset_ref = depreciation.asset_id.code and '%s (ref: %s)' \
+                    % (asset.name, asset.code) or asset.name
+                error_log += _(
+                    "\nError while processing asset '%s': %s"
+                ) % (asset_ref, str(e))
+                error_msg = _(
+                    "Error while processing asset '%s': \n\n%s"
+                ) % (asset_ref, tb)
+                _logger.error("%s, %s", self._name, error_msg)
+            except Exception:
                 e = exc_info()[0]
                 tb = ''.join(format_exception(*exc_info()))
                 asset_ref = depreciation.asset_id.code and '%s (ref: %s)' \

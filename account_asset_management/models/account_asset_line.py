@@ -3,13 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import datetime
-import logging
 
 from openerp import api, fields, models, _
 from openerp.addons.decimal_precision import decimal_precision as dp
 from openerp.exceptions import Warning as UserError
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountAssetLine(models.Model):
@@ -173,7 +170,7 @@ class AccountAssetLine(models.Model):
                 lambda l: l.previous_id == dl and l not in self)
             if next:
                 next.previous_id = previous
-            ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
+        ctx = dict(self._context, no_compute_asset_line_ids=self.ids)
         return super(
             AccountAssetLine, self.with_context(ctx)).unlink()
 
@@ -282,6 +279,9 @@ class AccountAssetLine(models.Model):
             if line.parent_state == 'close':
                 line.asset_id.write({'state': 'open'})
             elif line.parent_state == 'removed' and line.type == 'remove':
-                line.asset_id.write({'state': 'close'})
+                line.asset_id.write({
+                    'state': 'close',
+                    'date_remove': False,
+                })
                 line.unlink()
         return True

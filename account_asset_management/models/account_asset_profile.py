@@ -2,12 +2,8 @@
 # Copyright 2009-2017 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import logging
-
 from openerp import api, fields, models, _
 from openerp.exceptions import Warning as UserError
-
-_logger = logging.getLogger(__name__)
 
 
 class AccountAssetProfile(models.Model):
@@ -15,7 +11,7 @@ class AccountAssetProfile(models.Model):
     _description = 'Asset profile'
     _order = 'name'
 
-    name = fields.Char('Name', size=64, required=True, index=1)
+    name = fields.Char(string='Name', size=64, required=True, index=1)
     note = fields.Text()
     account_analytic_id = fields.Many2one(
         comodel_name='account.analytic.account',
@@ -80,9 +76,7 @@ class AccountAssetProfile(models.Model):
         help="The number of years needed to depreciate your asset",
         default=5)
     method_period = fields.Selection(
-        selection=[('month', 'Month'),
-                   ('quarter', 'Quarter'),
-                   ('year', 'Year')],
+        selection=lambda self: self._selection_method_period(),
         string='Period Length', required=True,
         default='year',
         help="Period length for the depreciation accounting entries")
@@ -108,7 +102,6 @@ class AccountAssetProfile(models.Model):
     active = fields.Boolean(default=True)
 
     @api.model
-    @api.model
     def _default_company_id(self):
         return self.env[
             'res.company']._company_default_get('account.asset')
@@ -121,6 +114,14 @@ class AccountAssetProfile(models.Model):
             ('degressive', _('Degressive')),
             ('degr-linear', _('Degressive-Linear')),
             ('degr-limit', _('Degressive  up to Salvage Value')),
+        ]
+
+    @api.model
+    def _selection_method_period(self):
+        return [
+            ('month', _('Month')),
+            ('quarter', _('Quarter')),
+            ('year', _('Year')),
         ]
 
     @api.model

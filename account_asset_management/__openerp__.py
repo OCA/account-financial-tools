@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# Copyright 2009-2017 Noviat
+# Copyright 2009-2019 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     'name': 'Assets Management',
-    'version': '8.0.3.0.0',
+    'version': '8.0.3.0.2',
     'license': 'AGPL-3',
     'depends': ['account'],
     'conflicts': ['account_asset'],
