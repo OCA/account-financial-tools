@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
-from datetime import datetime
+from datetime import date
 from dateutil.relativedelta import relativedelta
 import logging
 from sys import exc_info
@@ -626,11 +626,11 @@ class AccountAsset(models.Model):
                         duration = (fy_date_stop - fy_date_start).days + 1
                     else:
                         duration = (
-                            datetime(year, 12, 31) - fy_date_start).days + 1
+                            date(year, 12, 31) - fy_date_start).days + 1
                     factor = float(duration) / cy_days
                 elif i == cnt - 1:  # last year
                     duration = (
-                        fy_date_stop - datetime(year, 1, 1)).days + 1
+                        fy_date_stop - date(year, 1, 1)).days + 1
                     factor += float(duration) / cy_days
                 else:
                     factor += 1.0
