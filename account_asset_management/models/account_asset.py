@@ -619,8 +619,8 @@ class AccountAsset(models.Model):
         elif option == 'years':
             year = fy_date_start.year
             cnt = fy_date_stop.year - fy_date_start.year + 1
+            cy_days = isleap(fy) and 366 or 365
             for i in range(cnt):
-                cy_days = calendar.isleap(year) and 366 or 365
                 if i == 0:  # first year
                     if fy_date_stop.year == year:
                         duration = (fy_date_stop - fy_date_start).days + 1
@@ -1059,3 +1059,18 @@ class AccountAsset(models.Model):
                 triggers.sudo().write(recompute_vals)
 
         return (result, error_log)
+
+
+def isleap(fy):
+    """
+    A fiscalyear is considered a leap year when the last day of february
+    within the fiscalyear falls in a leap year.
+    """
+    isleap = False
+    end_of_month = fy.date_from + relativedelta(day=31)
+    while end_of_month <= fy.date_to:
+        if end_of_month.month == 2 and end_of_month.day == 29:
+            isleap = True
+            break
+        end_of_month = end_of_month + relativedelta(months=1, day=31)
+    return isleap
