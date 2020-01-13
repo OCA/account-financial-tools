@@ -1,5 +1,5 @@
 # Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
-# Copyright 2009-2018 Noviat
+# Copyright 2009-2020 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -598,3 +598,37 @@ class TestAssetManagement(SavepointCase):
         # deviations if that is necessary.
         self.assertAlmostEqual(
             asset.depreciation_line_ids[12].amount, 166.63, places=2)
+
+    def test_15_deviating_fy(self):
+        """Fiscal Year not equal to Calendar Year."""
+        current_fy = self.env.ref('account_asset_management.'
+                                  'account_fiscal_year_current')
+        previous_fy = self.env.ref('account_asset_management.'
+                                   'account_fiscal_year_previous')
+        current_fy.unlink()
+        previous_fy.unlink()
+        self.company.account_opening_date = '2019-07-01'
+        self.company.fiscalyear_last_day = 30
+        self.company.fiscalyear_last_month = 6
+        asset = self.asset_model.create({
+            'name': 'test asset',
+            'profile_id': self.ref('account_asset_management.'
+                                   'account_asset_profile_car_5Y'),
+            'purchase_value': 5000,
+            'salvage_value': 0,
+            'date_start': '2019-01-28',
+            'method_time': 'year',
+            'method_number': 5,
+            'method_period': 'year',
+            'prorata': True,
+            'days_calc': False,
+            'use_leap_years': False,
+        })
+        asset.compute_depreciation_board()
+        asset.refresh()
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[1].amount, 421.92, places=2)
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[2].amount, 1000.00, places=2)
+        self.assertAlmostEqual(
+            asset.depreciation_line_ids[-1].amount, 578.08, places=2)
