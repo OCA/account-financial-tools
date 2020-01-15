@@ -60,6 +60,9 @@ class AccountMoveBudgetLine(models.Model):
         'account.analytic.account',
         string='Analytic Account',
     )
+    analytic_tag_ids = fields.Many2many(
+        'account.analytic.tag', string='Analytic Tags',
+    )
     company_id = fields.Many2one(
         'res.company',
         related='account_id.company_id',
