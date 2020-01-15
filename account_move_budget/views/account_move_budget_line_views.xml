@@ -22,6 +22,27 @@
         </field>
     </record>
 
+    <record id="view_account_move_budget_line_search" model="ir.ui.view">
+        <field name="name">Account Move Budget Line search</field>
+        <field name="model">account.move.budget.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter string="Account" name="groupby_account_id" context="{'group_by':'account_id'}"/>
+                    <filter string="Date" name="groupby_date" context="{'group_by':'date'}"/>
+                    <filter string="Partner" name="groupby_partner_id" context="{'group_by':'partner_id'}"/>
+                    <filter string="Analytic account" name="groupby_analytic_account_id" context="{'group_by':'analytic_account_id'}" groups="analytic.group_analytic_accounting"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="account_move_budget_line_act_window">
         <field name="name">Budget Items</field>
         <field name="res_model">account.move.budget.line</field>
