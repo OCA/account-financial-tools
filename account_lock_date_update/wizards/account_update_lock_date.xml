@@ -4,7 +4,7 @@
 
 <odoo>
 
-    <record model="ir.ui.view" id="account_update_lock_date_form_view">
+    <record id="account_update_lock_date_form_view" model="ir.ui.view">
         <field name="name">account.update.lock_date.form (in account_lock_date_update)</field>
         <field name="model">account.update.lock_date</field>
         <field name="arch" type="xml">
@@ -12,9 +12,13 @@
                 <header/>
                 <sheet>
                     <group>
-                        <field name="company_id" invisible="1"/>
-                        <field name="period_lock_date"/>
-                        <field name="fiscalyear_lock_date"/>
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="period_lock_date"/>
+                        </group>
+                        <group>
+                            <field name="fiscalyear_lock_date"/>
+                        </group>
                     </group>
                 </sheet>
                 <footer>
@@ -25,15 +29,14 @@
         </field>
     </record>
 
-
-    <record model="ir.actions.act_window" id="account_update_lock_date_act_window">
+    <record id="account_update_lock_date_act_window" model="ir.actions.act_window">
         <field name="name">Update accounting lock dates</field>
         <field name="res_model">account.update.lock_date</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
 
-    <record model="ir.ui.menu" id="account_update_lock_date_menu">
+    <record id="account_update_lock_date_menu" model="ir.ui.menu">
         <field name="name">Update accounting lock dates</field>
         <field name="parent_id" ref="account.menu_finance_entries_actions"/>
         <field name="action" ref="account_update_lock_date_act_window"/>
