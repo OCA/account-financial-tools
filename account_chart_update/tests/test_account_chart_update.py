@@ -38,6 +38,14 @@ class TestAccountChartUpdate(common.HttpCase):
                 "amount": 0,
                 "chart_template_id": chart_template.id,
                 "tax_group_id": self.env.ref("account.tax_group_taxes").id,
+                "refund_repartition_line_ids": [
+                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
+                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
+                ],
+                "invoice_repartition_line_ids": [
+                    (0, 0, {"repartition_type": "base", "factor_percent": 100.0}),
+                    (0, 0, {"repartition_type": "tax", "factor_percent": 100.0}),
+                ],
             }
         )
         self._create_xml_id(record)
@@ -60,7 +68,10 @@ class TestAccountChartUpdate(common.HttpCase):
         # Make sure user is in English
         self.env.user.lang = "en_US"
         self.account_type = self.env["account.account.type"].create(
-            {"name": "Test account_chart_update account type"}
+            {
+                "name": "Test account_chart_update account type",
+                "internal_group": "income",
+            }
         )
         self.account_template = self._create_account_tmpl(
             "Test", "100000", self.account_type, False
@@ -70,7 +81,6 @@ class TestAccountChartUpdate(common.HttpCase):
                 "name": "Test account_chart_update chart",
                 "currency_id": self.env.ref("base.EUR").id,
                 "code_digits": 6,
-                "transfer_account_id": self.account_template.id,
                 "cash_account_code_prefix": "570",
                 "bank_account_code_prefix": "572",
                 "transfer_account_code_prefix": "100000",
@@ -115,7 +125,7 @@ class TestAccountChartUpdate(common.HttpCase):
             }
         )
         company_user = self.env.user.copy({"company_id": self.company.id})
-        chart_by_company_user = self.chart_template.sudo(company_user)
+        chart_by_company_user = self.chart_template.with_user(company_user)
         chart_by_company_user.try_loading_for_current_company()
 
         self.tax = self.env["account.tax"].search(
@@ -153,7 +163,9 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(name[1], "{} ({})".format(field.field_description, field.name))
         name = field.name_get()[0]
         self.assertEqual(name[0], field.id)
-        self.assertEqual(name[1], "{} ({})".format(field.field_description, field.model))
+        self.assertEqual(
+            name[1], "{} ({})".format(field.field_description, field.model)
+        )
         # Test no changes
         self.assertEqual(wizard.state, "ready")
         self.assertFalse(wizard.tax_ids)
@@ -231,7 +243,10 @@ class TestAccountChartUpdate(common.HttpCase):
         # Update objects
         self.tax_template.description = "Test description"
         self.tax_template.tax_group_id = self.tax_group.id
-        self.tax_template.refund_account_id = new_account_tmpl.id
+        repartition = self.tax_template.refund_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "tax"
+        )
+        repartition.account_id = new_account_tmpl.id
         self.account_template.name = "Other name"
         self.account_template.tag_ids = [
             (6, 0, [self.account_tag_1.id, self.account_tag_2.id])
@@ -259,7 +274,10 @@ class TestAccountChartUpdate(common.HttpCase):
         self.assertEqual(wizard.updated_fps, 1)
         self.assertEqual(self.tax.description, self.tax_template.description)
         self.assertEqual(self.tax.tax_group_id, self.tax_group)
-        self.assertEqual(self.tax.refund_account_id, new_account)
+        repartition = self.tax.refund_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "tax"
+        )
+        self.assertEqual(repartition.account_id, new_account)
         self.assertEqual(self.account.name, self.account_template.name)
         self.assertIn(self.account_tag_1, self.account.tag_ids)
         self.assertIn(self.account_tag_2, self.account.tag_ids)
@@ -306,6 +324,7 @@ class TestAccountChartUpdate(common.HttpCase):
         self.env["account.move"].create(
             {
                 "name": "Test move",
+                "type": "entry",
                 "journal_id": self.env["account.journal"]
                 .search([("company_id", "=", self.company.id)], limit=1)
                 .id,
@@ -319,7 +338,8 @@ class TestAccountChartUpdate(common.HttpCase):
                             "name": "Test move line",
                             "debit": 10,
                             "credit": 0,
-                            "currency_id": self.ref("base.EUR"),
+                            "amount_currency": 8,
+                            "currency_id": self.ref("base.GBP"),
                         },
                     ),
                     (
@@ -330,6 +350,8 @@ class TestAccountChartUpdate(common.HttpCase):
                             "name": "Test move line2",
                             "debit": 0,
                             "credit": 10,
+                            "amount_currency": -8,
+                            "currency_id": self.ref("base.GBP"),
                         },
                     ),
                 ],
