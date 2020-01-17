@@ -106,7 +106,7 @@ msgid "Update accounting lock dates"
 msgstr ""
 
 #. module: account_lock_date_update
-#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:42
+#: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:0
 #, python-format
 msgid "You are not allowed to execute this action."
 msgstr ""
