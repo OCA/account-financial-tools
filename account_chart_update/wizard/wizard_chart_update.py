@@ -37,7 +37,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         comodel_name="res.company",
         string="Company",
         required=True,
-        ondelete="set null",
         default=lambda self: self.env.user.company_id.id,
     )
     chart_template_id = fields.Many2one(
@@ -233,18 +232,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         langs = self.env["res.lang"].search([])
         return [(lang.code, lang.name) for lang in langs]
 
-    @api.multi
     @api.depends("chart_template_id")
     def _compute_chart_template_ids(self):
         all_parents = self.chart_template_id._get_chart_parent_ids()
         self.chart_template_ids = all_parents
 
-    @api.multi
     @api.depends("tax_ids")
     def _compute_new_taxes_count(self):
         self.new_taxes = len(self.tax_ids.filtered(lambda x: x.type == "new"))
 
-    @api.multi
     @api.depends("account_ids")
     def _compute_new_accounts_count(self):
         self.new_accounts = (
@@ -252,17 +248,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             - self.rejected_new_account_number
         )
 
-    @api.multi
     @api.depends("fiscal_position_ids")
     def _compute_new_fps_count(self):
         self.new_fps = len(self.fiscal_position_ids.filtered(lambda x: x.type == "new"))
 
-    @api.multi
     @api.depends("tax_ids")
     def _compute_updated_taxes_count(self):
         self.updated_taxes = len(self.tax_ids.filtered(lambda x: x.type == "updated"))
 
-    @api.multi
     @api.depends("account_ids")
     def _compute_updated_accounts_count(self):
         self.updated_accounts = (
@@ -270,29 +263,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             - self.rejected_updated_account_number
         )
 
-    @api.multi
     @api.depends("fiscal_position_ids")
     def _compute_updated_fps_count(self):
         self.updated_fps = len(
             self.fiscal_position_ids.filtered(lambda x: x.type == "updated")
         )
 
-    @api.multi
     @api.depends("tax_ids")
     def _compute_deleted_taxes_count(self):
         self.deleted_taxes = len(self.tax_ids.filtered(lambda x: x.type == "deleted"))
 
-    @api.multi
     @api.onchange("company_id")
     def _onchage_company_update_chart_template(self):
         self.chart_template_id = self.company_id.chart_template_id
 
-    @api.multi
     def _reopen(self):
         return {
             "type": "ir.actions.act_window",
             "view_mode": "form",
-            "view_type": "form",
             "res_id": self.id,
             "res_model": self._name,
             "target": "new",
@@ -302,7 +290,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "context": {"default_model": self._name},
         }
 
-    @api.multi
     def action_init(self):
         """Initial action that sets the initial state."""
         self.write(
@@ -317,7 +304,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         )
         return self._reopen()
 
-    @api.multi
     def action_find_records(self):
         """Searchs for records to update/create and shows them."""
         self = self.with_context(lang=self.lang)
@@ -332,7 +318,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.state = "ready"
         return self._reopen()
 
-    @api.multi
     def action_update_records(self):
         """Action that creates/updates/deletes the selected elements."""
         self = self.with_context(lang=self.lang)
@@ -375,7 +360,13 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         (name, module) = external_id.split(".")
         return "%s.%d_%s" % (name, self.company_id.id, module)
 
-    @api.multi
+    @tools.ormcache("templates")
+    def find_taxes_by_templates(self, templates):
+        tax_ids = []
+        for tax in templates:
+            tax_ids.append(self.find_tax_by_templates(tax))
+        return self.env["account.tax"].browse(tax_ids)
+
     @tools.ormcache("templates")
     def find_tax_by_templates(self, templates):
         """Find a tax that matches the template."""
@@ -410,13 +401,60 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
         return False
 
+    @tools.ormcache("templates", "current_repartition")
+    def find_repartition_by_templates(
+        self, templates, current_repartition, inverse_name
+    ):
+        result = []
+        for tpl in templates:
+            tax_id = self.find_tax_by_templates(tpl[inverse_name])
+            factor_percent = tpl.factor_percent
+            repartition_type = tpl.repartition_type
+            account_id = self.find_account_by_templates(tpl.account_id)
+            rep_obj = self.env["account.tax.repartition.line"]
+            existing = rep_obj.search(
+                [
+                    (inverse_name, "=", tax_id),
+                    ("factor_percent", "=", factor_percent),
+                    ("repartition_type", "=", repartition_type),
+                    ("account_id", "=", account_id),
+                ]
+            )
+            if not existing:
+                # create a new mapping
+                result.append(
+                    (
+                        0,
+                        0,
+                        {
+                            inverse_name: tax_id,
+                            "factor_percent": factor_percent,
+                            "repartition_type": repartition_type,
+                            "account_id": account_id,
+                            "tag_ids": [(6, 0, tpl.tag_ids.ids)],
+                        },
+                    )
+                )
+            else:
+                current_repartition -= existing
+        # Mark to be removed the lines not found
+        if current_repartition:
+            result += [(2, x.id) for x in current_repartition]
+        return result
+
     @api.model
     @tools.ormcache("code")
     def padded_code(self, code):
         """Return a right-zero-padded code with the chosen digits."""
         return code.ljust(self.code_digits, "0")
 
-    @api.multi
+    @tools.ormcache("templates")
+    def find_accounts_by_templates(self, templates):
+        account_ids = []
+        for account in templates:
+            account_ids.append(self.find_tax_by_templates(account))
+        return self.env["account.account"].browse(account_ids)
+
     @tools.ormcache("templates")
     def find_account_by_templates(self, templates):
         """Find an account that matches the template."""
@@ -427,7 +465,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 for template in templates:
                     try:
                         real |= self.env.ref(self._get_real_xml_name(template))
-                    except:
+                    except BaseException:
                         pass
 
                 if not real:
@@ -453,7 +491,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
         return False
 
-    @api.multi
     @tools.ormcache("templates")
     def find_fp_by_templates(self, templates):
         """Find a real fiscal position from a template."""
@@ -464,7 +501,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 for template in templates:
                     try:
                         real |= self.env.ref(self._get_real_xml_name(template))
-                    except:
+                    except BaseException:
                         pass
 
                 if not real:
@@ -485,7 +522,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
         return False
 
-    @api.multi
     @tools.ormcache("templates", "current_fp_accounts")
     def find_fp_account_by_templates(self, templates, current_fp_accounts):
         result = []
@@ -520,7 +556,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             result += [(2, x.id) for x in current_fp_accounts]
         return result
 
-    @api.multi
     @tools.ormcache("templates", "current_fp_taxes")
     def find_fp_tax_by_templates(self, templates, current_fp_taxes):
         result = []
@@ -566,7 +601,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         specials_mapping = {
             "account.tax.template": {"chart_template_id", "children_tax_ids"},
-            "account.account.template": {"chart_template_id"},
+            "account.account.template": {"chart_template_id", "root_id", "nocreate"},
             "account.fiscal.position.template": {"chart_template_id"},
         }
         specials = {
@@ -590,57 +625,49 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """
         result = dict()
         ignore = self.fields_to_ignore(template._name)
-        to_include = []
-        if template._name == "account.tax.template":
-            to_include = self.tax_field_ids.mapped("name")
-        elif template._name == "account.account.template":
-            to_include = self.account_field_ids.mapped("name")
-        elif template._name == "account.fiscal.position.template":
-            to_include = self.fp_field_ids.mapped("name")
+        template_field_mapping = {
+            "account.tax.template": self.tax_field_ids,
+            "account.account.template": self.account_field_ids,
+            "account.fiscal.position.template": self.fp_field_ids,
+        }
+        to_include = template_field_mapping[template._name].mapped("name")
         for key, field in template._fields.items():
             if key in ignore or key not in to_include:
                 continue
-            expected = t = None
+            expected = None
             # Translate template records to reals for comparison
             relation = field.get_description(self.env).get("relation", "")
             if relation:
-                if ".tax.template" in relation:
-                    t = "tax"
-                elif ".account.template" in relation:
-                    t = "account"
-                if t:
-                    find = getattr(
-                        self,
-                        "find_%s%s_by_templates"
-                        % ("fp_" if ".fiscal.position" in relation else "", t),
+                if relation == "account.tax.template":
+                    expected = self.find_taxes_by_templates(template[key])
+                elif relation == "account.account.template":
+                    expected = self.find_accounts_by_templates(template[key])
+                elif relation == "account.fiscal.position.tax.template":
+                    expected = self.find_fp_tax_by_templates(template[key], real[key])
+                elif relation == "account.fiscal.position.account.template":
+                    expected = self.find_fp_account_by_templates(
+                        template[key], real[key]
                     )
-                    if ".fiscal.position" in relation:
-                        # Special case: if something is returned, then
-                        # there's any difference, so it will get non equal
-                        # when comparing, although we get the warning
-                        # "Comparing apples with oranges"
-                        expected = find(template[key], real[key])
-                    else:
-                        exp_id = find(template[key])
-                        expected = self.env[relation[:-9]].browse(exp_id)
+                elif relation == "account.tax.repartition.line.template":
+                    expected = self.find_repartition_by_templates(
+                        template[key], real[key], field.inverse_name
+                    )
             # Register detected differences
-            try:
-                if expected is not None:
-                    if expected != [] and expected != real[key]:
-                        result[key] = expected
-                else:
-                    template_value = template[key]
-                    if template._name == "account.account.template" and key == "code":
-                        template_value = self.padded_code(template["code"])
-                    if template_value != real[key]:
-                        result[key] = template_value
-                # Avoid to cache recordset references
+            if expected is not None:
+                if expected != [] and expected != real[key]:
+                    result[key] = expected
+            else:
+                template_value = template[key]
+                if template._name == "account.account.template" and key == "code":
+                    template_value = self.padded_code(template["code"])
+                if template_value != real[key]:
+                    result[key] = template_value
+            # Avoid to cache recordset references
+            if key in result:
                 if isinstance(real._fields[key], fields.Many2many):
                     result[key] = [(6, 0, result[key].ids)]
                 elif isinstance(real._fields[key], fields.Many2one):
                     result[key] = result[key].id
-            except KeyError:
-                pass
         return result
 
     @api.model
@@ -680,7 +707,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ]
         )
 
-    @api.multi
     def _find_taxes(self):
         """Search for, and load, tax templates to create/update/delete."""
         found_taxes_ids = []
@@ -740,7 +766,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 }
             )
 
-    @api.multi
     def _find_accounts(self):
         """Load account templates to create/update."""
         self.account_ids.unlink()
@@ -777,7 +802,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         }
                     )
 
-    @api.multi
     def _find_fiscal_positions(self):
         """Load fiscal position templates to create/update."""
         wiz_fp = self.env["wizard.update.charts.accounts.fiscal.position"]
@@ -841,7 +865,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             }
         )
 
-    @api.multi
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""
         for wiz_tax in self.tax_ids:
@@ -859,7 +882,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             else:
                 for key, value in self.diff_fields(template, tax).items():
                     # We defer update because account might not be created yet
-                    if key in {"account_id", "refund_account_id"}:
+                    if key in {
+                        "invoice_repartition_line_ids",
+                        "refund_repartition_line_ids",
+                    }:
                         continue
                     tax[key] = value
                     _logger.info(_("Updated tax %s."), "'%s'" % template.name)
@@ -869,7 +895,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         _("Updated tax %s. (Recreated XML-IDs)"), "'%s'" % template.name
                     )
 
-    @api.multi
     def _update_accounts(self):
         """Process accounts to create/update."""
         for wiz_account in self.account_ids:
@@ -936,7 +961,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if not self.continue_on_errors:
                         break
 
-    @api.multi
     def _update_taxes_pending_for_accounts(self):
         """Updates the taxes (created or updated on previous steps) to set
         the references to the accounts (the taxes where created/updated first,
@@ -948,10 +972,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             template = wiz_tax.tax_id
             tax = wiz_tax.update_tax_id
             done = False
+            vals = {}
             for key, value in self.diff_fields(template, tax).items():
-                if key in {"account_id", "refund_account_id"}:
-                    tax[key] = value
+                if key in {
+                    "invoice_repartition_line_ids",
+                    "refund_repartition_line_ids",
+                }:
+                    vals[key] = value
                     done = True
+            if vals:
+                tax.write(vals)
             if done:
                 _logger.info(_("Post-updated tax %s."), "'%s'" % tax.name)
 
@@ -987,7 +1017,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             "account_ids": [(0, 0, x) for x in account_mapping],
         }
 
-    @api.multi
     def _update_fiscal_positions(self):
         """Process fiscal position templates to create/update."""
         for wiz_fp in self.fiscal_position_ids:
@@ -1058,7 +1087,6 @@ class WizardUpdateChartsAccountsAccount(models.TransientModel):
         comodel_name="account.account.template",
         string="Account template",
         required=True,
-        ondelete="set null",
     )
     update_chart_wizard_id = fields.Many2one(
         comodel_name="wizard.update.charts.accounts",
@@ -1090,7 +1118,6 @@ class WizardUpdateChartsAccountsFiscalPosition(models.TransientModel):
         comodel_name="account.fiscal.position.template",
         string="Fiscal position template",
         required=True,
-        ondelete="set null",
     )
     update_chart_wizard_id = fields.Many2one(
         comodel_name="wizard.update.charts.accounts",
@@ -1141,6 +1168,7 @@ class WizardMatching(models.TransientModel):
 
 class WizardTaxMatching(models.TransientModel):
     _name = "wizard.tax.matching"
+    _description = "Wizard Tax Matching"
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
@@ -1153,6 +1181,7 @@ class WizardTaxMatching(models.TransientModel):
 
 class WizardAccountMatching(models.TransientModel):
     _name = "wizard.account.matching"
+    _description = "Wizard Account Matching"
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
@@ -1163,6 +1192,7 @@ class WizardAccountMatching(models.TransientModel):
 
 class WizardFpMatching(models.TransientModel):
     _name = "wizard.fp.matching"
+    _description = "Wizard Fiscal Position Matching"
     _inherit = "wizard.matching"
 
     def _get_matching_selection(self):
