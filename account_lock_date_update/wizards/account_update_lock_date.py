@@ -1,7 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -10,7 +10,7 @@ class AccountUpdateLockDate(models.TransientModel):
     _description = 'Account Update Lock_date'
 
     company_id = fields.Many2one(
-        comodel_name='res.company', string="Company", required=True)
+        comodel_name='res.company', required=True)
     period_lock_date = fields.Date(
         string="Lock Date for Non-Advisers",
         help="Only users with the 'Adviser' role can edit accounts prior to "
@@ -24,8 +24,8 @@ class AccountUpdateLockDate(models.TransientModel):
 
     @api.model
     def default_get(self, field_list):
-        res = super(AccountUpdateLockDate, self).default_get(field_list)
-        company = self.env.user.company_id
+        res = super().default_get(field_list)
+        company = self.env.company
         res.update({
             'company_id': company.id,
             'period_lock_date': company.period_lock_date,
@@ -33,15 +33,12 @@ class AccountUpdateLockDate(models.TransientModel):
         })
         return res
 
-    @api.multi
     def _check_execute_allowed(self):
         self.ensure_one()
-        has_adviser_group = self.env.user.has_group(
-            'account.group_account_manager')
-        if not (has_adviser_group or self.env.uid == SUPERUSER_ID):
+        has_adviser_group = self.env.user.has_group('account.group_account_manager')
+        if not (has_adviser_group or self.env.user._is_admin()):
             raise UserError(_("You are not allowed to execute this action."))
 
-    @api.multi
     def execute(self):
         self.ensure_one()
         self._check_execute_allowed()
