@@ -9,17 +9,11 @@
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools",
     "author": "Agile Business Group, Camptocamp SA, "
-              "Odoo Community Association (OCA)",
+    "Odoo Community Association (OCA)",
     "maintainers": ["eLBati"],
     "license": "LGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "account",
-        "date_range",
-    ],
-    "data": [
-        "data/date_range_type.xml",
-        "views/account_views.xml"
-    ],
+    "depends": ["account", "date_range"],
+    "data": ["data/date_range_type.xml", "views/account_views.xml"],
 }
