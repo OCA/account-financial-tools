@@ -5,6 +5,7 @@
     <field name="name">res.config.settings.view.form.inherit.account</field>
     <field name="inherit_id" ref="account.res_config_settings_view_form"/>
     <field name="model">res.config.settings</field>
+    <field name="priority" eval="100"/>
     <field name="arch" type="xml">
       <field name="module_account_asset" position="replace">
         <field name="module_account_asset_management" class="oe_inline"/>
