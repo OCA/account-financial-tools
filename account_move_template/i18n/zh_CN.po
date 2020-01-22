@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:33
+#: code:addons/account_move_template/models/account_move_template.py:35
 #, python-format
 msgid "%s (copy)"
 msgstr ""
@@ -173,7 +173,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:44
+#: code:addons/account_move_template/models/account_move_template.py:46
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s). "
@@ -182,7 +182,7 @@ msgid ""
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:50
+#: code:addons/account_move_template/models/account_move_template.py:52
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
@@ -322,7 +322,7 @@ msgid "Python Code"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:134
+#: code:addons/account_move_template/models/account_move_template.py:136
 #, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
@@ -415,7 +415,7 @@ msgid "Wizard to generate move from template"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:66
+#: code:addons/account_move_template/models/account_move_template.py:68
 #, python-format
 msgid ""
 "You added a line in the wizard. This is not allowed: you should either "
@@ -431,7 +431,7 @@ msgid ""
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:60
+#: code:addons/account_move_template/models/account_move_template.py:62
 #, python-format
 msgid ""
 "You deleted a line in the wizard. This is not allowed: you should either "
