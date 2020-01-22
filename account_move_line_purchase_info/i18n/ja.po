@@ -19,11 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_move_line_purchase_info
-#: model:ir.model,name:account_move_line_purchase_info.model_account_invoice
-msgid "Invoice"
-msgstr "請求書"
-
-#. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_account_move_line
 msgid "Journal Item"
 msgstr ""
@@ -36,7 +31,6 @@ msgstr ""
 
 #. module: account_move_line_purchase_info
 #: model:ir.model,name:account_move_line_purchase_info.model_purchase_order_line
-#: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_line_id
 #: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
 msgid "Purchase Order Line"
 msgstr ""
@@ -50,3 +44,6 @@ msgstr ""
 #: model:ir.model,name:account_move_line_purchase_info.model_stock_move
 msgid "Stock Move"
 msgstr ""
+
+#~ msgid "Invoice"
+#~ msgstr "請求書"
