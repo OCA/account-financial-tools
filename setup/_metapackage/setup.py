@@ -8,6 +8,8 @@ setuptools.setup(
     description="Meta package for oca-account-financial-tools Odoo addons",
     version=version,
     install_requires=[
+        'odoo13-addon-account_chart_update',
+        'odoo13-addon-account_lock_date_update',
         'odoo13-addon-account_menu',
         'odoo13-addon-account_move_line_purchase_info',
     ],
