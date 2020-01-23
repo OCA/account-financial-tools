@@ -14,16 +14,16 @@ Account Fiscal Year
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/12.0/account_fiscal_year
+    :target: https://github.com/OCA/account-financial-tools/tree/13.0/account_fiscal_year
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-12-0/account-financial-tools-12-0-account_fiscal_year
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-13-0/account-financial-tools-13-0-account_fiscal_year
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/12.0
+    :target: https://runbot.odoo-community.org/runbot/92/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module just adds the menu
 
@@ -82,8 +82,8 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-eLBati| 
+|maintainer-eLBati|
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/12.0/account_fiscal_year>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/13.0/account_fiscal_year>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
