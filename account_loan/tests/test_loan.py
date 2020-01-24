@@ -17,6 +17,7 @@ try:
 except (ImportError, IOError) as err:
     _logger.error(err)
 
+
 @tagged('post_install', '-at_install')
 class TestLoan(TransactionCase):
     """
@@ -263,7 +264,8 @@ class TestLoan(TransactionCase):
                 'amount': (amount - amount / periods) / 2,
                 'fees': 100,
                 'date': datetime.strptime(
-                    loan.line_ids.filtered(lambda r: r.sequence == 1).date.strftime(DF), DF
+                    loan.line_ids.filtered(
+                        lambda r: r.sequence == 1).date.strftime(DF), DF
                 ).date() + relativedelta(months=-1)
             }).run()
         line.invoice_ids.action_invoice_open()

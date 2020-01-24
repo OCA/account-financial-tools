@@ -404,7 +404,8 @@ class AccountLoan(models.Model):
             if self.state == 'draft' or line.sequence != final_sequence:
                 line.long_term_pending_principal_amount = sum(
                     self.line_ids.filtered(
-                        lambda r: datetime.strptime(r.date.strftime(DF), DF).date() >= date
+                        lambda r: datetime.strptime(
+                            r.date.strftime(DF), DF).date() >= date
                     ).mapped('principal_amount'))
             line.long_term_principal_amount = (
                 line.long_term_pending_principal_amount - amount)
@@ -491,6 +492,7 @@ class AccountLoan(models.Model):
         ]):
             res += record.line_ids.filtered(
                 lambda r: datetime.strptime(
-                    r.date.strftime(DF), DF).date() <= date and not r.invoice_ids
+                    r.date.strftime(DF), DF).date() <= date
+                and not r.invoice_ids
             ).generate_invoice()
         return res
