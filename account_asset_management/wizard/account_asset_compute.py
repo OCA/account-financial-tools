@@ -1,7 +1,7 @@
 # Copyright 2009-2018 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 
 
 class AccountAssetCompute(models.TransientModel):
@@ -17,7 +17,6 @@ class AccountAssetCompute(models.TransientModel):
     )
     note = fields.Text()
 
-    @api.multi
     def asset_compute(self):
         assets = self.env["account.asset"].search([("state", "=", "open")])
         created_move_ids, error_log = assets._compute_entries(
@@ -26,12 +25,13 @@ class AccountAssetCompute(models.TransientModel):
 
         if error_log:
             module = __name__.split("addons.")[1].split(".")[0]
-            result_view = self.env.ref("{}.{}_view_form_result".format(module, self._table))
+            result_view = self.env.ref(
+                "{}.{}_view_form_result".format(module, self._table)
+            )
             self.note = _("Compute Assets errors") + ":\n" + error_log
             return {
                 "name": _("Compute Assets result"),
                 "res_id": self.id,
-                "view_type": "form",
                 "view_mode": "form",
                 "res_model": "account.asset.compute",
                 "view_id": result_view.id,
@@ -42,7 +42,6 @@ class AccountAssetCompute(models.TransientModel):
 
         return {
             "name": _("Created Asset Moves"),
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,
@@ -50,13 +49,11 @@ class AccountAssetCompute(models.TransientModel):
             "type": "ir.actions.act_window",
         }
 
-    @api.multi
     def view_asset_moves(self):
         self.ensure_one()
         domain = [("id", "in", self.env.context.get("asset_move_ids", []))]
         return {
             "name": _("Created Asset Moves"),
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,
