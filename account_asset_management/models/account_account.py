@@ -14,7 +14,6 @@ class AccountAccount(models.Model):
         help="Default Asset Profile when creating invoice lines " "with this account.",
     )
 
-    @api.multi
     @api.constrains("asset_profile_id")
     def _check_asset_profile(self):
         for account in self:

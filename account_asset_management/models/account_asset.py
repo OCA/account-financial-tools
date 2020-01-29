@@ -15,8 +15,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
 
-import odoo.addons.decimal_precision as dp
-
 _logger = logging.getLogger(__name__)
 
 
@@ -43,7 +41,6 @@ class AccountAsset(models.Model):
     )
     name = fields.Char(
         string="Asset Name",
-        size=64,
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -65,7 +62,7 @@ class AccountAsset(models.Model):
     )
     salvage_value = fields.Float(
         string="Salvage Value",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         readonly=True,
         states={"draft": [("readonly", False)]},
         help="The estimated value that an asset will realize upon "
@@ -74,7 +71,7 @@ class AccountAsset(models.Model):
     )
     depreciation_base = fields.Float(
         compute="_compute_depreciation_base",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         string="Depreciation Base",
         store=True,
         help="This amount represent the depreciation base "
@@ -82,13 +79,13 @@ class AccountAsset(models.Model):
     )
     value_residual = fields.Float(
         compute="_compute_depreciation",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         string="Residual Value",
         store=True,
     )
     value_depreciated = fields.Float(
         compute="_compute_depreciation",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         string="Depreciated Value",
         store=True,
     )
@@ -261,18 +258,18 @@ class AccountAsset(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env["res.company"]._company_default_get("account.asset")
+        return self.env.company
 
-    @api.multi
     def _compute_move_line_check(self):
         for asset in self:
+            move_line_check = False
             for line in asset.depreciation_line_ids:
                 if line.move_id:
-                    asset.move_line_check = True
+                    move_line_check = True
                     break
+            asset.move_line_check = move_line_check
 
     @api.depends("purchase_value", "salvage_value", "method")
-    @api.multi
     def _compute_depreciation_base(self):
         for asset in self:
             if asset.method in ["linear-limit", "degr-limit"]:
@@ -280,7 +277,6 @@ class AccountAsset(models.Model):
             else:
                 asset.depreciation_base = asset.purchase_value - asset.salvage_value
 
-    @api.multi
     @api.depends(
         "depreciation_base",
         "depreciation_line_ids.type",
@@ -300,7 +296,6 @@ class AccountAsset(models.Model):
             depreciated = value_depreciated
             asset.update({"value_residual": residual, "value_depreciated": depreciated})
 
-    @api.multi
     @api.constrains("method", "method_time")
     def _check_method(self):
         for asset in self:
@@ -309,7 +304,6 @@ class AccountAsset(models.Model):
                     _("Degressive-Linear is only supported for Time Method = " "Year.")
                 )
 
-    @api.multi
     @api.constrains("date_start", "method_end", "method_time")
     def _check_dates(self):
         for asset in self:
@@ -386,7 +380,6 @@ class AccountAsset(models.Model):
         asset._create_first_asset_line()
         return asset
 
-    @api.multi
     def write(self, vals):
         if vals.get("method_time"):
             if vals["method_time"] != "year" and not vals.get("prorata"):
@@ -421,7 +414,6 @@ class AccountAsset(models.Model):
             if self.env.context.get("create_asset_from_move_line"):
                 asset_line.move_id = self.env.context["move_id"]
 
-    @api.multi
     def unlink(self):
         for asset in self:
             if asset.state != "draft":
@@ -453,7 +445,6 @@ class AccountAsset(models.Model):
         assets = self.search(domain + args, limit=limit)
         return assets.name_get()
 
-    @api.multi
     @api.depends("name", "code")
     def name_get(self):
         result = []
@@ -464,7 +455,6 @@ class AccountAsset(models.Model):
             result.append((asset.id, name))
         return result
 
-    @api.multi
     def validate(self):
         for asset in self:
             if asset.company_currency_id.is_zero(asset.value_residual):
@@ -473,7 +463,6 @@ class AccountAsset(models.Model):
                 asset.state = "open"
         return True
 
-    @api.multi
     def remove(self):
         self.ensure_one()
         ctx = dict(self.env.context, active_ids=self.ids, active_id=self.id)
@@ -489,7 +478,6 @@ class AccountAsset(models.Model):
 
         return {
             "name": _("Generate Asset Removal entries"),
-            "view_type": "form",
             "view_mode": "form",
             "res_model": "account.asset.remove",
             "target": "new",
@@ -497,11 +485,9 @@ class AccountAsset(models.Model):
             "context": ctx,
         }
 
-    @api.multi
     def set_to_draft(self):
         return self.write({"state": "draft"})
 
-    @api.multi
     def open_entries(self):
         self.ensure_one()
         amls = self.env["account.move.line"].search(
@@ -510,7 +496,6 @@ class AccountAsset(models.Model):
         am_ids = [l.move_id.id for l in amls]
         return {
             "name": _("Journal Entries"),
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,
@@ -519,11 +504,73 @@ class AccountAsset(models.Model):
             "domain": [("id", "in", am_ids)],
         }
 
-    @api.multi
-    def compute_depreciation_board(self):
+    def _group_lines(self, table):
+        """group lines prior to depreciation start period."""
+
         def group_lines(x, y):
             y.update({"amount": x["amount"] + y["amount"]})
             return y
+
+        depreciation_start_date = self.date_start
+        lines = table[0]["lines"]
+        lines1 = []
+        lines2 = []
+        flag = lines[0]["date"] < depreciation_start_date
+        for line in lines:
+            if flag:
+                lines1.append(line)
+                if line["date"] >= depreciation_start_date:
+                    flag = False
+            else:
+                lines2.append(line)
+        if lines1:
+            lines1 = [reduce(group_lines, lines1)]
+            lines1[0]["depreciated_value"] = 0.0
+        table[0]["lines"] = lines1 + lines2
+
+    def _compute_depreciation_line(
+        self,
+        depreciated_value_posted,
+        table_i_start,
+        line_i_start,
+        table,
+        last_line,
+        posted_lines,
+    ):
+        digits = self.env["decimal.precision"].precision_get("Account")
+
+        seq = len(posted_lines)
+        depr_line = last_line
+        last_date = table[-1]["lines"][-1]["date"]
+        depreciated_value = depreciated_value_posted
+        for entry in table[table_i_start:]:
+            for line in entry["lines"][line_i_start:]:
+                seq += 1
+                name = self._get_depreciation_entry_name(seq)
+                amount = line["amount"]
+                if line["date"] == last_date:
+                    # ensure that the last entry of the table always
+                    # depreciates the remaining value
+                    amount = self.depreciation_base - depreciated_value
+                    if self.method in ["linear-limit", "degr-limit"]:
+                        amount -= self.salvage_value
+                if amount:
+                    vals = {
+                        "previous_id": depr_line.id,
+                        "amount": round(amount, digits),
+                        "asset_id": self.id,
+                        "name": name,
+                        "line_date": line["date"],
+                        "line_days": line["days"],
+                        "init_entry": entry["init"],
+                    }
+                    depreciated_value += round(amount, digits)
+                    depr_line = self.env["account.asset.line"].create(vals)
+                else:
+                    seq -= 1
+            line_i_start = 0
+
+    def compute_depreciation_board(self):
 
         line_obj = self.env["account.asset.line"]
         digits = self.env["decimal.precision"].precision_get("Account")
@@ -557,23 +604,7 @@ class AccountAsset(models.Model):
             if not table:
                 continue
 
-            # group lines prior to depreciation start period
-            depreciation_start_date = asset.date_start
-            lines = table[0]["lines"]
-            lines1 = []
-            lines2 = []
-            flag = lines[0]["date"] < depreciation_start_date
-            for line in lines:
-                if flag:
-                    lines1.append(line)
-                    if line["date"] >= depreciation_start_date:
-                        flag = False
-                else:
-                    lines2.append(line)
-            if lines1:
-                lines1 = [reduce(group_lines, lines1)]
-                lines1[0]["depreciated_value"] = 0.0
-            table[0]["lines"] = lines1 + lines2
+            asset._group_lines(table)
 
             # check table with posted entries and
             # recompute in case of deviation
@@ -589,7 +620,7 @@ class AccountAsset(models.Model):
                         )
                     )
 
-                for table_i, entry in enumerate(table):
+                for _table_i, entry in enumerate(table):
                     residual_amount_table = entry["lines"][-1]["remaining_value"]
                     if (
                         entry["date_start"]
@@ -597,21 +628,22 @@ class AccountAsset(models.Model):
                         <= entry["date_stop"]
                     ):
                         break
+
                 if entry["date_stop"] == last_depreciation_date:
-                    table_i += 1
-                    line_i = 0
+                    _table_i += 1
+                    _line_i = 0
                 else:
-                    entry = table[table_i]
+                    entry = table[_table_i]
                     date_min = entry["date_start"]
-                    for line_i, line in enumerate(entry["lines"]):
+                    for _line_i, line in enumerate(entry["lines"]):
                         residual_amount_table = line["remaining_value"]
                         if date_min <= last_depreciation_date <= line["date"]:
                             break
                         date_min = line["date"]
                     if line["date"] == last_depreciation_date:
-                        line_i += 1
-                table_i_start = table_i
-                line_i_start = line_i
+                        _line_i += 1
+                table_i_start = _table_i
+                line_i_start = _line_i
 
                 # check if residual value corresponds with table
                 # and adjust table when needed
@@ -630,40 +662,14 @@ class AccountAsset(models.Model):
                 table_i_start = 0
                 line_i_start = 0
 
-            seq = len(posted_lines)
-            depr_line = last_line
-            last_date = table[-1]["lines"][-1]["date"]
-            depreciated_value = depreciated_value_posted
-            for entry in table[table_i_start:]:
-                for line in entry["lines"][line_i_start:]:
-                    seq += 1
-                    name = asset._get_depreciation_entry_name(seq)
-                    if line["date"] == last_date:
-                        # ensure that the last entry of the table always
-                        # depreciates the remaining value
-                        if asset.method in ["linear-limit", "degr-limit"]:
-                            depr_max = asset.depreciation_base - asset.salvage_value
-                        else:
-                            depr_max = asset.depreciation_base
-                        amount = depr_max - depreciated_value
-                    else:
-                        amount = line["amount"]
-                    if amount:
-                        vals = {
-                            "previous_id": depr_line.id,
-                            "amount": round(amount, digits),
-                            "asset_id": asset.id,
-                            "name": name,
-                            "line_date": line["date"],
-                            "line_days": line["days"],
-                            "init_entry": entry["init"],
-                        }
-                        depreciated_value += round(amount, digits)
-                        depr_line = line_obj.create(vals)
-                    else:
-                        seq -= 1
-                line_i_start = 0
-
+            asset._compute_depreciation_line(
+                depreciated_value_posted,
+                table_i_start,
+                line_i_start,
+                table,
+                last_line,
+                posted_lines,
+            )
         return True
 
     def _get_fy_duration(self, fy, option="days"):
@@ -1031,7 +1037,7 @@ class AccountAsset(models.Model):
                 entry["lines"] = lines
             line_dates = line_dates[li:]
 
-        for i, entry in enumerate(table):
+        for entry in table:
             if not entry["fy_amount"]:
                 entry["fy_amount"] = sum([l["amount"] for l in entry["lines"]])
 
@@ -1097,7 +1103,6 @@ class AccountAsset(models.Model):
         """ use this method to customise the name of the accounting entry """
         return (self.code or str(self.id)) + "/" + str(seq)
 
-    @api.multi
     def _compute_entries(self, date_end, check_triggers=False):
         # TODO : add ir_cron job calling this method to
         # generate periodical accounting entries
@@ -1106,11 +1111,11 @@ class AccountAsset(models.Model):
         if check_triggers:
             recompute_obj = self.env["account.asset.recompute.trigger"]
             recomputes = recompute_obj.sudo().search([("state", "=", "open")])
-        if check_triggers and recomputes:
-            trigger_companies = recomputes.mapped("company_id")
-            for asset in self:
-                if asset.company_id.id in trigger_companies.ids:
-                    asset.compute_depreciation_board()
+            if recomputes:
+                trigger_companies = recomputes.mapped("company_id")
+                for asset in self:
+                    if asset.company_id.id in trigger_companies.ids:
+                        asset.compute_depreciation_board()
 
         depreciations = self.env["account.asset.line"].search(
             [
