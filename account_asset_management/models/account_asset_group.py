@@ -28,4 +28,4 @@ class AccountAssetGroup(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env["res.company"]._company_default_get("account.asset")
+        return self.env.company
