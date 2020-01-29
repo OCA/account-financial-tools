@@ -5,12 +5,13 @@ from odoo import fields, models
 
 
 class Config(models.TransientModel):
-    _inherit = 'res.config.settings'
+    _inherit = "res.config.settings"
 
     module_account_asset_management = fields.Boolean(
-        string='Assets management (OCA)',
+        string="Assets management (OCA)",
         help="""This allows you to manage the assets owned by a company
                 or a person. It keeps track of the depreciation occurred
                 on those assets, and creates account move for those
                 depreciation lines.
-                This installs the module account_asset_management.""")
+                This installs the module account_asset_management.""",
+    )
