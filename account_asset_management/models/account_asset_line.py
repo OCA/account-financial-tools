@@ -4,8 +4,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-import odoo.addons.decimal_precision as dp
-
 
 class AccountAssetLine(models.Model):
     _name = "account.asset.line"
@@ -27,18 +25,16 @@ class AccountAssetLine(models.Model):
     depreciation_base = fields.Float(
         related="asset_id.depreciation_base", string="Depreciation Base", readonly=True
     )
-    amount = fields.Float(
-        string="Amount", digits=dp.get_precision("Account"), required=True
-    )
+    amount = fields.Float(string="Amount", digits="Account", required=True)
     remaining_value = fields.Float(
         compute="_compute_values",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         string="Next Period Depreciation",
         store=True,
     )
     depreciated_value = fields.Float(
         compute="_compute_values",
-        digits=dp.get_precision("Account"),
+        digits="Account",
         string="Amount Already Depreciated",
         store=True,
     )
@@ -66,7 +62,6 @@ class AccountAssetLine(models.Model):
     )
 
     @api.depends("amount", "previous_id", "type")
-    @api.multi
     def _compute_values(self):
         dlines = self
         if self.env.context.get("no_compute_asset_line_ids"):
@@ -96,7 +91,6 @@ class AccountAssetLine(models.Model):
                 dl.remaining_value = remaining_value
 
     @api.depends("move_id")
-    @api.multi
     def _compute_move_check(self):
         for line in self:
             line.move_check = bool(line.move_id)
@@ -108,7 +102,6 @@ class AccountAssetLine(models.Model):
                 self.depreciation_base - self.depreciated_value - self.amount
             )
 
-    @api.multi
     def write(self, vals):
         for dl in self:
             line_date = vals.get("line_date") or dl.line_date
@@ -163,9 +156,9 @@ class AccountAssetLine(models.Model):
                         )
                 else:
                     check = asset_lines.filtered(
-                        lambda l: l != dl
-                        and (l.init_entry or l.move_check)
-                        and l.line_date > fields.Date.to_date(vals["line_date"])
+                        lambda al: al != dl
+                        and (al.init_entry or al.move_check)
+                        and al.line_date > fields.Date.to_date(vals["line_date"])
                     )
                     if check:
                         raise UserError(
@@ -176,7 +169,6 @@ class AccountAssetLine(models.Model):
                         )
         return super().write(vals)
 
-    @api.multi
     def unlink(self):
         for dl in self:
             if dl.type == "create" and dl.amount:
@@ -203,9 +195,8 @@ class AccountAssetLine(models.Model):
     def _setup_move_data(self, depreciation_date):
         asset = self.asset_id
         move_data = {
-            "name": asset.name,
             "date": depreciation_date,
-            "ref": self.name,
+            "ref": "{} - {}".format(asset.name, self.name),
             "journal_id": asset.profile_id.journal_id.id,
         }
         return move_data
@@ -236,7 +227,6 @@ class AccountAssetLine(models.Model):
         }
         return move_line_data
 
-    @api.multi
     def create_move(self):
         created_move_ids = []
         asset_ids = set()
@@ -266,12 +256,10 @@ class AccountAssetLine(models.Model):
                 asset.state = "close"
         return created_move_ids
 
-    @api.multi
     def open_move(self):
         self.ensure_one()
         return {
             "name": _("Journal Entry"),
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,
@@ -280,13 +268,10 @@ class AccountAssetLine(models.Model):
             "domain": [("id", "=", self.move_id.id)],
         }
 
-    @api.multi
     def unlink_move(self):
         for line in self:
             move = line.move_id
-            if move.state == "posted":
-                move.button_cancel()
-            move.with_context(unlink_from_asset=True).unlink()
+            move.with_context(force_delete=True, unlink_from_asset=True).unlink()
             # trigger store function
             line.with_context(unlink_from_asset=True).write({"move_id": False})
             if line.parent_state == "close":
