@@ -8,7 +8,7 @@ from datetime import date, datetime
 
 from odoo import tools
 from odoo.modules.module import get_resource_path
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import Form, SavepointCase
 
 
 class TestAssetManagement(SavepointCase):
@@ -36,44 +36,16 @@ class TestAssetManagement(SavepointCase):
         cls.asset_model = cls.env["account.asset"]
         cls.dl_model = cls.env["account.asset.line"]
         cls.remove_model = cls.env["account.asset.remove"]
-        cls.account_invoice = cls.env["account.invoice"]
+        cls.account_invoice = cls.env["account.move"]
         cls.account_move_line = cls.env["account.move.line"]
         cls.account_account = cls.env["account.account"]
         cls.account_journal = cls.env["account.journal"]
-        cls.account_invoice_line = cls.env["account.invoice.line"]
+        cls.account_invoice_line = cls.env["account.move.line"]
 
         # INSTANCES
 
         # Instance: company
         cls.company = cls.env.ref("base.main_company")
-
-        # Instance: account type (receivable)
-        cls.type_recv = cls.env.ref("account.data_account_type_receivable")
-
-        # Instance: account type (payable)
-        cls.type_payable = cls.env.ref("account.data_account_type_payable")
-
-        # Instance: account (receivable)
-        cls.account_recv = cls.account_account.create(
-            {
-                "name": "test_account_receivable",
-                "code": "123",
-                "user_type_id": cls.type_recv.id,
-                "company_id": cls.company.id,
-                "reconcile": True,
-            }
-        )
-
-        # Instance: account (payable)
-        cls.account_payable = cls.account_account.create(
-            {
-                "name": "test_account_payable",
-                "code": "321",
-                "user_type_id": cls.type_payable.id,
-                "company_id": cls.company.id,
-                "reconcile": True,
-            }
-        )
 
         # Instance: partner
         cls.partner = cls.env.ref("base.res_partner_2")
@@ -84,57 +56,38 @@ class TestAssetManagement(SavepointCase):
         # Instance: product
         cls.product = cls.env.ref("product.product_product_4")
 
-        # Instance: invoice line
-        cls.invoice_line = cls.account_invoice_line.create(
-            {
-                "name": "test",
-                "account_id": cls.account_payable.id,
-                "price_unit": 2000.00,
-                "quantity": 1,
-                "product_id": cls.product.id,
-            }
+        move_form = Form(
+            cls.env["account.move"].with_context(
+                default_type="in_invoice", check_move_validity=False
+            )
         )
+        move_form.partner_id = cls.partner
+        move_form.journal_id = cls.journal
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.name = "test"
+            line_form.product_id = cls.product
+            line_form.price_unit = 2000.00
+            line_form.quantity = 1
+        cls.invoice = move_form.save()
 
-        # Instance: invoice
-        cls.invoice = cls.account_invoice.create(
-            {
-                "partner_id": cls.partner.id,
-                "account_id": cls.account_recv.id,
-                "journal_id": cls.journal.id,
-                "invoice_line_ids": [(4, cls.invoice_line.id)],
-            }
+        move_form = Form(
+            cls.env["account.move"].with_context(
+                default_type="in_invoice", check_move_validity=False
+            )
         )
-
-        cls.invoice_line_2 = cls.account_invoice_line.create(
-            {
-                "name": "test 2",
-                "account_id": cls.account_payable.id,
-                "price_unit": 10000.00,
-                "quantity": 1,
-                "product_id": cls.product.id,
-            }
-        )
-        cls.invoice_line_3 = cls.account_invoice_line.create(
-            {
-                "name": "test 3",
-                "account_id": cls.account_payable.id,
-                "price_unit": 20000.00,
-                "quantity": 1,
-                "product_id": cls.product.id,
-            }
-        )
-
-        cls.invoice_2 = cls.account_invoice.create(
-            {
-                "partner_id": cls.partner.id,
-                "account_id": cls.account_recv.id,
-                "journal_id": cls.journal.id,
-                "invoice_line_ids": [
-                    (4, cls.invoice_line_2.id),
-                    (4, cls.invoice_line_3.id),
-                ],
-            }
-        )
+        move_form.partner_id = cls.partner
+        move_form.journal_id = cls.journal
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.name = "test 2"
+            line_form.product_id = cls.product
+            line_form.price_unit = 10000.00
+            line_form.quantity = 1
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.name = "test 3"
+            line_form.product_id = cls.product
+            line_form.price_unit = 20000.00
+            line_form.quantity = 1
+        cls.invoice_2 = move_form.save()
 
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
@@ -494,7 +447,7 @@ class TestAssetManagement(SavepointCase):
         self.assertTrue(line.price_unit > 0.0)
         line.quantity = 2
         line.asset_profile_id = asset_profile
-        invoice.action_invoice_open()
+        invoice.post()
         # I get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
         # I get the new asset
@@ -503,7 +456,7 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(len(new_asset), 1)
         # I check that the new asset has the correct purchase value
         self.assertAlmostEqual(
-            new_asset.purchase_value, -line.price_unit * line.quantity, places=2
+            new_asset.purchase_value, line.price_unit * line.quantity, places=2
         )
 
     def test_10_asset_from_invoice_product_item(self):
@@ -518,20 +471,23 @@ class TestAssetManagement(SavepointCase):
         self.assertTrue(line.price_unit > 0.0)
         line.quantity = 2
         line.asset_profile_id = asset_profile
-        invoice.action_invoice_open()
+        self.assertEqual(len(invoice.invoice_line_ids), 2)
+        invoice.post()
         # I get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
         # I get the new asset
         new_asset = current_asset - all_asset
         # I check that a new asset is created
-        self.assertEqual(len(new_asset), line.quantity)
+        self.assertEqual(len(new_asset), 2)
         for asset in new_asset:
             # I check that the new asset has the correct purchase value
-            self.assertAlmostEqual(asset.purchase_value, -line.price_unit, places=2)
+            self.assertAlmostEqual(asset.purchase_value, line.price_unit, places=2)
 
     def test_11_assets_from_invoice(self):
         all_assets = self.env["account.asset"].search([])
-        invoice = self.invoice_2
+        ctx = dict(self.invoice_2._context)
+        del ctx["default_type"]
+        invoice = self.invoice_2.with_context(ctx)
         asset_profile = self.env.ref(
             "account_asset_management.account_asset_profile_car_5Y"
         )
@@ -543,7 +499,7 @@ class TestAssetManagement(SavepointCase):
         invoice.invoice_line_ids.write(
             {"quantity": 1, "asset_profile_id": asset_profile.id}
         )
-        invoice.action_invoice_open()
+        invoice.post()
         # Retrieve all assets after invoice validation
         current_assets = self.env["account.asset"].search([])
         # What are the new assets?
@@ -644,7 +600,7 @@ class TestAssetManagement(SavepointCase):
         )
         asset.compute_depreciation_board()
         asset.refresh()
-        for i in range(1, 11):
+        for _i in range(1, 11):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[1].amount, 166.67, places=2
             )

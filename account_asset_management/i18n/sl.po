@@ -30,7 +30,7 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1042
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
 "\n"
@@ -92,7 +92,6 @@ msgstr "Ste prepričani?"
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__asset_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line__asset_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -100,7 +99,7 @@ msgid "Asset"
 msgstr "Osnovno sredstvo"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:192
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
 msgstr "Dnevniški vnos odstranitve sredstva '%s'"
@@ -147,7 +146,6 @@ msgstr "Naziv osnovnega sredstva"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_account__asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__profile_id
-#: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line__asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 #, fuzzy
@@ -162,7 +160,7 @@ msgid "Asset Profiles"
 msgstr "Postavke sredstev"
 
 #. module: account_asset_management
-#: selection:account.asset.line,type:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
 msgid "Asset Removal"
 msgstr "Odstranitev sredstva"
 
@@ -224,11 +222,6 @@ msgstr "Sredstva v stanju 'zaključeno'"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Assets in Running State"
 msgstr "Sredstva v stanju 'v teku'"
-
-#. module: account_asset_management
-#: model:ir.model.fields,field_description:account_asset_management.field_res_config_settings__module_account_asset_management
-msgid "Assets management (OCA)"
-msgstr "Upravljanje sredstev (OCA)"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
@@ -319,7 +312,7 @@ msgstr ""
 "amortizacijo"
 
 #. module: account_asset_management
-#: selection:account.asset,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__close
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Close"
 msgstr "Zapri"
@@ -341,16 +334,6 @@ msgstr "Podjetje"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
 msgid "Company Currency"
 msgstr "Valuta družbe"
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_invoice_line__asset_id
-msgid ""
-"Complete this field when selling an asset in order to facilitate the "
-"creation of the asset removal accounting entries via the asset 'Removal' "
-"button"
-msgstr ""
-"Izpolnite to polje ob prodaji sredstva, da bi olajšali ustvarjanje "
-"knjigovodskih vnosov odstranitve sredstva preko gumba 'Odstranitev' sredstva"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
@@ -382,13 +365,13 @@ msgid "Compute Assets"
 msgstr "Obračunaj"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:30
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, fuzzy, python-format
 msgid "Compute Assets errors"
 msgstr "Obračunaj"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:32
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, fuzzy, python-format
 msgid "Compute Assets result"
 msgstr "Obračunaj"
@@ -398,11 +381,6 @@ msgstr "Obračunaj"
 #, fuzzy
 msgid "Compute Assets results"
 msgstr "Obračunaj"
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_res_config_settings
-msgid "Config Settings"
-msgstr ""
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -420,8 +398,7 @@ msgid "Create an asset by product item"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:44
-#: code:addons/account_asset_management/wizard/account_asset_compute.py:58
+#: code:addons/account_asset_management/wizard/account_asset_compute.py:0
 #, python-format
 msgid "Created Asset Moves"
 msgstr "Kreirane vknjižbe osnovnega sredstva"
@@ -472,13 +449,13 @@ msgstr ""
 "Privzeta kategorija sredstva pri ustvarjanju postavk računa za ta konto."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:136
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive"
 msgstr "Degresivno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr ""
@@ -490,14 +467,14 @@ msgid "Degressive Factor"
 msgstr "Degresivni faktor"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:137
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Degresivno-linearna"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:254
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
+#: code:addons/account_asset_management/models/account_asset.py:0
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "Degresivno-linearna metoda je podprta le če je časovna metoda = leto."
@@ -518,7 +495,7 @@ msgid "Depreciated Value"
 msgstr "Amortizacijska vrednost"
 
 #. module: account_asset_management
-#: selection:account.asset.line,type:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__depreciate
 msgid "Depreciation"
 msgstr "Amortizacija"
 
@@ -528,9 +505,9 @@ msgid "Depreciation Account"
 msgstr "Konto amortizacije"
 
 #. module: account_asset_management
-#: selection:account.asset.line,type:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
 #, fuzzy
 msgid "Depreciation Base"
 msgstr "Datum amortizacije"
@@ -579,12 +556,12 @@ msgid "Display Name"
 msgstr "Prikazni naziv"
 
 #. module: account_asset_management
-#: selection:account.asset.recompute.trigger,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__done
 msgid "Done"
 msgstr "Opravljeno"
 
 #. module: account_asset_management
-#: selection:account.asset,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__draft
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Draft"
 msgstr "Osnutek"
@@ -605,7 +582,7 @@ msgid "Entries"
 msgstr "Vnosi"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1045
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -626,7 +603,7 @@ msgid "Force accounting date"
 msgstr "Vsebuje knjigovodske vnose"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:112
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Gain/Loss on Sale"
 msgstr "Pridobitev/izguba pri prodaji"
@@ -637,7 +614,7 @@ msgid "General"
 msgstr "Splošno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:430
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr "Ustvari vnose odstranitve sredstva"
@@ -686,7 +663,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:761
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Neveljavna vrednost %s v asset.method."
@@ -720,22 +697,12 @@ msgid "Initial Balance Entry"
 msgstr "Vnos začetnega stanja"
 
 #. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_account_invoice
-msgid "Invoice"
-msgstr "Račun"
-
-#. module: account_asset_management
-#: model:ir.model,name:account_asset_management.model_account_invoice_line
-msgid "Invoice Line"
-msgstr "Postavka računa"
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__journal_id
 msgid "Journal"
 msgstr "Dnevnik"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:450
+#: code:addons/account_asset_management/models/account_asset.py:0
 #: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
@@ -743,7 +710,7 @@ msgid "Journal Entries"
 msgstr "Dnevniški vnosi"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:252
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Journal Entry"
 msgstr "Dnevniški vnos"
@@ -794,13 +761,13 @@ msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:134
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Linear"
 msgstr "Linearno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:135
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, fuzzy, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Ostanek vrednosti"
@@ -812,7 +779,7 @@ msgid "Min-Value Account"
 msgstr "Konto zmanjšane vrednosti"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Month"
 msgstr "Mesec"
@@ -850,14 +817,14 @@ msgid "Number of Years"
 msgstr "Število let"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, fuzzy, python-format
 #| msgid "Number of Years"
 msgid "Number of Years or end date"
 msgstr "Število let"
 
 #. module: account_asset_management
-#: selection:account.asset.recompute.trigger,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_recompute_trigger__state__open
 msgid "Open"
 msgstr "Odprto"
 
@@ -930,7 +897,7 @@ msgid "Purchase Value"
 msgstr "Nabavna vrednost"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Quarter"
 msgstr "Četrtletje"
@@ -985,13 +952,13 @@ msgid "Remove Asset"
 msgstr "Odstrani sredstvo"
 
 #. module: account_asset_management
-#: selection:account.asset,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__removed
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Removed"
 msgstr "Odstranjeno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:111
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_residual
 #, python-format
 msgid "Residual Value"
@@ -1009,7 +976,7 @@ msgid "Results :"
 msgstr ""
 
 #. module: account_asset_management
-#: selection:account.asset,state:0
+#: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset__state__open
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Running"
 msgstr "Se izvaja"
@@ -1072,7 +1039,7 @@ msgid "Status"
 msgstr "Status"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:734
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1080,26 +1047,26 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_account.py:23
+#: code:addons/account_asset_management/models/account_account.py:0
 #, fuzzy, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr "Konto sredstev določen v kategoriji sredstva mora biti enak kontu."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:62
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The Sale Value must be positive!"
 msgstr "Prodajna vrednost mora biti pozitivna!"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:264
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:522
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1125,26 +1092,10 @@ msgid "The number of years needed to depreciate your asset"
 msgstr "Število let, ki je potrebno, da se sredstvo amortizira"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:155
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "The removal date must be after the last depreciation date."
 msgstr "Datum odstranitve mora biti po zadnjem datumu amortizacije."
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_res_config_settings__module_account_asset_management
-#, fuzzy
-msgid ""
-"This allows you to manage the assets owned by a company\n"
-"                or a person. It keeps track of the depreciation occurred\n"
-"                on those assets, and creates account move for those\n"
-"                depreciation lines.\n"
-"                This installs the module account_asset_management."
-msgstr ""
-"Omogoča upravljanje sredstev v lasti družbe\n"
-"                    ali oseb. Beleži amortizacijo na teh sredstvih\n"
-"                    in ustvari knjigovodske premike za te\n"
-"                    amortizacijske postavke.\n"
-"                    Namesti modul account_asset_management."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
@@ -1166,12 +1117,6 @@ msgstr ""
 "\n"
 "Vrednost sredstva se izračuna kot:\n"
 "Nabavna vrednost - Rabljena vrednost."
-
-#. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:139
-#, python-format
-msgid "This option should only be used for a single id at a time."
-msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1251,14 +1196,13 @@ msgstr ""
 "Ob nastanku vnosov odstranitve preide status sredstva v 'odstranjeno'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
+#: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, python-format
 msgid "Year"
 msgstr "Leto"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:69
-#: code:addons/account_asset_management/models/account_move.py:134
+#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
 "You are not allowed to link an accounting entry to an asset.\n"
@@ -1268,8 +1212,8 @@ msgstr ""
 "Take vnose bi morali ustvarjate iz sredstva."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:121
-#: code:addons/account_asset_management/models/account_move.py:32
+#: code:addons/account_asset_management/models/account_asset_line.py:0
+#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
 "You are not allowed to remove an accounting entry linked to an asset.\n"
@@ -1279,13 +1223,13 @@ msgstr ""
 "Take vnose bi morali odstranjevati iz sredstva."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:369
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You can only delete assets in draft state."
 msgstr "Brišete lahko le sredstva v stanju 'osnutek'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/wizard/account_asset_remove.py:228
+#: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid ""
 "You can't make an early removal if all the depreciation lines for previous "
@@ -1295,7 +1239,7 @@ msgstr ""
 "amortizacijske postavke predhodnih obdobij ."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:129
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
 "You cannot change a depreciation line with an associated accounting entry."
@@ -1304,7 +1248,7 @@ msgstr ""
 "spreminjati."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:46
+#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
 "You cannot change an accounting entry linked to an asset depreciation line."
@@ -1313,7 +1257,7 @@ msgstr ""
 "spreminjati."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:130
+#: code:addons/account_asset_management/models/account_move.py:0
 #, python-format
 msgid ""
 "You cannot change an accounting item linked to an asset depreciation line."
@@ -1322,14 +1266,14 @@ msgstr ""
 "spreminjati."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:287
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, fuzzy, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 "Kategorije sredstva, ki vsebuje knjigovodske vnose, ne morete spreminjati."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:170
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
 "You cannot delete a depreciation line with an associated accounting entry."
@@ -1337,19 +1281,19 @@ msgstr ""
 "Amortizacijske postavke povezane s knjigovodskim vnosom ne morete brisati."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:373
+#: code:addons/account_asset_management/models/account_asset.py:0
 #, python-format
 msgid "You cannot delete an asset that contains posted depreciation lines."
 msgstr "Ni možno brisati osnovnega sredstva , ki ima vknjižene amortizacije."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:166
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, fuzzy, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
 msgstr "Postavke sredstva tipa 'vrednost sredstva' ne morete odstraniti."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:137
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
 "You cannot set the 'Initial Balance Entry' flag on a depreciation line with "
@@ -1359,7 +1303,7 @@ msgstr ""
 "začetnega stanja'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:149
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, fuzzy, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
@@ -1367,7 +1311,7 @@ msgstr ""
 "vnosi."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_line.py:157
+#: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid ""
 "You cannot set the date on a depreciation line prior to already posted "
@@ -1386,6 +1330,38 @@ msgstr ""
 "Ročno dodajte amortizacijske postavke z amortizacijami prejšnjih fiskalnih "
 "let, če je začetni datum amortizacije drugačen od datuma, na katerega se "
 "knjigovodski vnosi ustvarjajo."
+
+#~ msgid "Assets management (OCA)"
+#~ msgstr "Upravljanje sredstev (OCA)"
+
+#~ msgid ""
+#~ "Complete this field when selling an asset in order to facilitate the "
+#~ "creation of the asset removal accounting entries via the asset 'Removal' "
+#~ "button"
+#~ msgstr ""
+#~ "Izpolnite to polje ob prodaji sredstva, da bi olajšali ustvarjanje "
+#~ "knjigovodskih vnosov odstranitve sredstva preko gumba 'Odstranitev' "
+#~ "sredstva"
+
+#~ msgid "Invoice"
+#~ msgstr "Račun"
+
+#~ msgid "Invoice Line"
+#~ msgstr "Postavka računa"
+
+#, fuzzy
+#~ msgid ""
+#~ "This allows you to manage the assets owned by a company\n"
+#~ "                or a person. It keeps track of the depreciation occurred\n"
+#~ "                on those assets, and creates account move for those\n"
+#~ "                depreciation lines.\n"
+#~ "                This installs the module account_asset_management."
+#~ msgstr ""
+#~ "Omogoča upravljanje sredstev v lasti družbe\n"
+#~ "                    ali oseb. Beleži amortizacijo na teh sredstvih\n"
+#~ "                    in ustvari knjigovodske premike za te\n"
+#~ "                    amortizacijske postavke.\n"
+#~ "                    Namesti modul account_asset_management."
 
 #~ msgid "Child Assets"
 #~ msgstr "Podrejena sredstva"
