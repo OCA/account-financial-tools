@@ -82,7 +82,7 @@
             <page string="Depreciation Board">
               <div>
                 <button type="object" name="compute_depreciation_board"
-                        string=" Compute" icon="fa-gears"
+                        string="Compute" icon="fa-gears"
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
               </div>
               <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
@@ -209,15 +209,15 @@
   <record id="account_asset_action" model="ir.actions.act_window">
     <field name="name">Assets</field>
     <field name="res_model">account.asset</field>
-    <field name="view_type">form</field>
     <field name="view_id" ref="account_asset_view_tree"/>
     <field name="search_view_id" ref="account_asset_view_search"/>
   </record>
 
   <act_window id="act_entries_open"
-              name="Journal Items"
-              src_model="account.asset"
-              res_model="account.move.line"
-              domain="['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]"/>
+    name="Journal Items"
+    binding_model="account.asset"
+    binding_views="form"
+    res_model="account.move.line"
+    domain="['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]"/>
 
 </odoo>

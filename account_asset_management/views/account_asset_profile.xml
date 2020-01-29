@@ -75,7 +75,6 @@
     <record id="account_asset_profile_action" model="ir.actions.act_window">
       <field name="name">Asset Profiles</field>
       <field name="res_model">account.asset.profile</field>
-      <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
     </record>
 
