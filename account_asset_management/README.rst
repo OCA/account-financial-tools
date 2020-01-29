@@ -14,13 +14,13 @@ Assets Management
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/12.0/account_asset_management
+    :target: https://github.com/OCA/account-financial-tools/tree/13.0/account_asset_management
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-12-0/account-financial-tools-12-0-account_asset_management
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-13-0/account-financial-tools-13-0-account_asset_management
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/12.0
+    :target: https://runbot.odoo-community.org/runbot/92/13.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -44,12 +44,6 @@ the standard account_asset module from Odoo.
 .. contents::
    :local:
 
-Configuration
-=============
-
-It is recommended to configure your Purchase Journal with "Group Invoice Lines" to avoid the
-creation of separate assets per Supplier Invoice Line.
-
 Usage
 =====
 
@@ -57,6 +51,23 @@ The module in NOT compatible with the standard account_asset module.
 
 Changelog
 =========
+
+13.0.1.0.0 (2019-10-21)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Python code and views were adapted to be compatible with v13.
+* When assets are created through accounting journal items,
+  they are created when the journal items is posted.
+* When a Bill Invoice is created or modified, at the time it is saved,
+  for each line that has an Asset profile and Quantity 'N'
+  greater than 1, it will be replaced by 'N' lines identical to it but
+  with quantity 1. This was done to maintain the same behavior as in
+  the previous version, in which for each asset created there is a
+  Journal Item. In addition, this solution does not change the data
+  model which does not cause migration scripts.
+* The configuration option was removed so the only function of that is to
+  allow the module to be uninstalled by unchecking that configuration option.
+* Tests were adapted.
 
 12.0.2.1.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -75,7 +86,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_management%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_management%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -90,17 +101,21 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-- OpenERP SA
-- Luc De Meyer (Noviat)
-- Frédéric Clementi (camptocamp)
-- Florian Dacosta (Akretion)
-- Stéphane Bidoul (Acsone)
-- Adrien Peiffer (Acsone)
-- Akim Juillerat <akim.juillerat@camptocamp.com>
-- Henrik Norlin (Apps2GROW)
-- Maxence Groine <mgroine@fiefmanage.ch>
-- Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
-- Saran Lim. <saranl@ecosoft.co.th>
+* OpenERP SA
+* Luc De Meyer (Noviat)
+* Frédéric Clementi (camptocamp)
+* Florian Dacosta (Akretion)
+* Stéphane Bidoul (Acsone)
+* Adrien Peiffer (Acsone)
+* Akim Juillerat <akim.juillerat@camptocamp.com>
+* Henrik Norlin (Apps2GROW)
+* Maxence Groine <mgroine@fiefmanage.ch>
+* Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+* Saran Lim. <saranl@ecosoft.co.th>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Ernesto Tejeda
+  * Pedro M. Baeza
 
 Maintainers
 ~~~~~~~~~~~
@@ -115,6 +130,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/12.0/account_asset_management>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/13.0/account_asset_management>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

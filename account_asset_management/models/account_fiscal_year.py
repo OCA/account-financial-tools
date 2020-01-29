@@ -30,7 +30,6 @@ class AccountFiscalYear(models.Model):
             self.env["account.asset.recompute.trigger"].sudo().create(recompute_vals)
         return super().create(vals)
 
-    @api.multi
     def write(self, vals):
         if vals.get("date_from") or vals.get("date_to"):
             for fy in self:
