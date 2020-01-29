@@ -149,7 +149,7 @@ class AccountAssetProfile(models.Model):
 
     @api.model
     def _default_company_id(self):
-        return self.env["res.company"]._company_default_get("account.asset")
+        return self.env.company
 
     @api.model
     def _selection_method(self):
@@ -173,7 +173,6 @@ class AccountAssetProfile(models.Model):
         """
         return [("year", _("Number of Years or end date"))]
 
-    @api.multi
     @api.constrains("method")
     def _check_method(self):
         for profile in self:
@@ -199,7 +198,6 @@ class AccountAssetProfile(models.Model):
                 account.write({"asset_profile_id": profile.id})
         return profile
 
-    @api.multi
     def write(self, vals):
         if vals.get("method_time"):
             if vals["method_time"] != "year" and not vals.get("prorata"):

@@ -80,14 +80,20 @@ class AccountAssetRemove(models.TransientModel):
         asset_id = self.env.context.get("active_id")
         sale_value = 0.0
         account_sale_id = False
-        inv_lines = self.env["account.invoice.line"].search(
-            [("asset_id", "=", asset_id)]
+        inv_lines = self.env["account.move.line"].search(
+            [
+                ("asset_id", "=", asset_id),
+                ("move_id.type", "in", ("out_invoice", "out_refund")),
+            ]
         )
         for line in inv_lines:
-            inv = line.invoice_id
-            comp_curr = inv.company_id.currency_id
+            inv = line.move_id
+            comp_curr = inv.company_currency_id
             inv_curr = inv.currency_id
-            if line.invoice_id.state in ["open", "paid"]:
+            if (
+                line.move_id.invoice_payment_state == "paid"
+                or line.parent_state == "draft"
+            ):
                 account_sale_id = line.account_id.id
                 amount = line.price_subtotal
                 if inv_curr != comp_curr:
@@ -133,7 +139,6 @@ class AccountAssetRemove(models.TransientModel):
     def _residual_value_regime_countries(self):
         return ["FR"]
 
-    @api.multi
     def remove(self):
         self.ensure_one()
         asset_line_obj = self.env["account.asset.line"]
@@ -201,7 +206,6 @@ class AccountAssetRemove(models.TransientModel):
 
         return {
             "name": _("Asset '%s' Removal Journal Entry") % asset_ref,
-            "view_type": "form",
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,

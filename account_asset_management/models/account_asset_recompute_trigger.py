@@ -13,7 +13,7 @@ class AccountAssetRecomputeTrigger(models.Model):
     date_trigger = fields.Datetime(
         "Trigger Date",
         readonly=True,
-        help="Date of the event triggering the need to " "recompute the Asset Tables.",
+        help="Date of the event triggering the need to recompute the Asset Tables.",
     )
     date_completed = fields.Datetime("Completion Date", readonly=True)
     state = fields.Selection(
