@@ -14,20 +14,19 @@ FIELDS_AFFECTS_ASSET_MOVE = {"journal_id", "date"}
 # List of move line's fields that can't be modified if move is linked
 # with a depreciation line
 FIELDS_AFFECTS_ASSET_MOVE_LINE = {
-        "credit",
-        "debit",
-        "account_id",
-        "journal_id",
-        "date",
-        "asset_profile_id",
-        "asset_id",
+    "credit",
+    "debit",
+    "account_id",
+    "journal_id",
+    "date",
+    "asset_profile_id",
+    "asset_id",
 }
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    @api.multi
     def unlink(self):
         # for move in self:
         deprs = self.env["account.asset.line"].search(
@@ -45,7 +44,6 @@ class AccountMove(models.Model):
         deprs.write({"move_id": False})
         return super().unlink()
 
-    @api.multi
     def write(self, vals):
         if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE):
             deprs = self.env["account.asset.line"].search(
@@ -59,6 +57,45 @@ class AccountMove(models.Model):
                     )
                 )
         return super().write(vals)
+
+    def post(self):
+        for move in self:
+            for aml in move.line_ids.filtered("asset_profile_id"):
+                depreciation_base = aml.debit or -aml.credit
+                vals = {
+                    "name": aml.name,
+                    "code": move.name,
+                    "profile_id": aml.asset_profile_id.id,
+                    "purchase_value": depreciation_base,
+                    "partner_id": aml.partner_id.id,
+                    "date_start": move.date,
+                    "account_analytic_id": aml.analytic_account_id.id,
+                }
+                if self.env.context.get("company_id"):
+                    vals["company_id"] = self.env.context["company_id"]
+                asset = (
+                    self.env["account.asset"]
+                    .with_context(create_asset_from_move_line=True, move_id=move.id)
+                    .create(vals)
+                )
+                aml.with_context(allow_asset=True).asset_id = asset.id
+        super().post()
+
+    def button_draft(self):
+        invoices = self.filtered(lambda r: not r.is_sale_document())
+        if invoices:
+            invoices.line_ids.asset_id.unlink()
+        super().button_draft()
+
+    def _reverse_move_vals(self, default_values, cancel=True):
+        move_vals = super()._reverse_move_vals(default_values, cancel)
+        if move_vals["type"] not in ("out_invoice", "out_refund"):
+            for line_command in move_vals.get("line_ids", []):
+                line_vals = line_command[2]  # (0, 0, {...})
+                asset = self.env["account.asset"].browse(line_vals["asset_id"])
+                asset.unlink()
+                line_vals.update(asset_profile_id=False, asset_id=False)
+        return move_vals
 
 
 class AccountMoveLine(models.Model):
@@ -74,61 +111,26 @@ class AccountMoveLine(models.Model):
     @api.onchange("account_id")
     def _onchange_account_id(self):
         self.asset_profile_id = self.account_id.asset_profile_id
+        super()._onchange_account_id()
 
-    @api.model
-    def create(self, vals):
-        if vals.get("asset_id") and not self.env.context.get("allow_asset"):
-            raise UserError(
-                _(
-                    "You are not allowed to link "
-                    "an accounting entry to an asset."
-                    "\nYou should generate such entries from the asset."
-                )
-            )
-        if vals.get("asset_profile_id"):
-            # create asset
-            asset_obj = self.env["account.asset"]
-            move = self.env["account.move"].browse(vals["move_id"])
-            depreciation_base = vals["debit"] or -vals["credit"]
-            temp_vals = {
-                "name": vals["name"],
-                "profile_id": vals["asset_profile_id"],
-                "purchase_value": depreciation_base,
-                "partner_id": vals["partner_id"],
-                "date_start": move.date,
-            }
-            if self.env.context.get("company_id"):
-                temp_vals["company_id"] = self.env.context["company_id"]
-            temp_asset = asset_obj.new(temp_vals)
-            temp_asset._onchange_profile_id()
-            asset_vals = temp_asset._convert_to_write(temp_asset._cache)
-            self._get_asset_analytic_values(vals, asset_vals)
-            asset = asset_obj.with_context(
-                create_asset_from_move_line=True, move_id=vals["move_id"]
-            ).create(asset_vals)
-            vals["asset_id"] = asset.id
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            move = self.env["account.move"].browse(vals.get("move_id"))
+            if not move.is_sale_document():
+                if vals.get("asset_id") and not self.env.context.get("allow_asset"):
+                    raise UserError(
+                        _(
+                            "You are not allowed to link "
+                            "an accounting entry to an asset."
+                            "\nYou should generate such entries from the asset."
+                        )
+                    )
+        records = super().create(vals_list)
+        for record in records:
+            record._expand_asset_line()
+        return records
 
-    @api.multi
-    def _prepare_asset_create(self, vals):
-        self.ensure_one()
-        debit = "debit" in vals and vals.get("debit", 0.0) or self.debit
-        credit = "credit" in vals and vals.get("credit", 0.0) or self.credit
-        depreciation_base = debit - credit
-        partner_id = (
-            "partner" in vals and vals.get("partner", False) or self.partner_id.id
-        )
-        date_start = "date" in vals and vals.get("date", False) or self.date
-        return {
-            "name": vals.get("name") or self.name,
-            "profile_id": vals["asset_profile_id"],
-            "purchase_value": depreciation_base,
-            "partner_id": partner_id,
-            "date_start": date_start,
-            "company_id": vals.get("company_id") or self.company_id.id,
-        }
-
-    @api.multi
     def write(self, vals):
         if set(vals).intersection(FIELDS_AFFECTS_ASSET_MOVE_LINE) and not (
             self.env.context.get("allow_asset_removal")
@@ -136,8 +138,8 @@ class AccountMoveLine(models.Model):
         ):
             # Check if at least one asset is linked to a move
             linked_asset = False
-            for move in self:
-                linked_asset = move.asset_id
+            for move_line in self.filtered(lambda r: not r.move_id.is_sale_document()):
+                linked_asset = move_line.asset_id
                 if linked_asset:
                     raise UserError(
                         _(
@@ -145,7 +147,12 @@ class AccountMoveLine(models.Model):
                             "linked to an asset depreciation line."
                         )
                     )
-        if vals.get("asset_id"):
+
+        if (
+            self.filtered(lambda r: not r.move_id.is_sale_document())
+            and vals.get("asset_id")
+            and not self.env.context.get("allow_asset")
+        ):
             raise UserError(
                 _(
                     "You are not allowed to link "
@@ -153,36 +160,22 @@ class AccountMoveLine(models.Model):
                     "\nYou should generate such entries from the asset."
                 )
             )
-        if vals.get("asset_profile_id"):
-            if len(self) == 1:
-                raise AssertionError(
-                    _("This option should only be used for a single id at a " "time.")
-                )
-            asset_obj = self.env["account.asset"]
-            for aml in self:
-                if vals["asset_profile_id"] == aml.asset_profile_id.id:
-                    continue
-                # create asset
-                asset_vals = aml._prepare_asset_create(vals)
-                self._play_onchange_profile_id(asset_vals)
-                self._get_asset_analytic_values(vals, asset_vals)
-                asset = asset_obj.with_context(
-                    create_asset_from_move_line=True, move_id=aml.move_id.id
-                ).create(asset_vals)
-                vals["asset_id"] = asset.id
-        return super().write(vals)
+        super().write(vals)
+        if "quantity" in vals or "asset_profile_id" in vals:
+            for record in self:
+                record._expand_asset_line()
+        return True
 
-    @api.model
-    def _get_asset_analytic_values(self, vals, asset_vals):
-        asset_vals["account_analytic_id"] = vals.get("analytic_account_id", False)
-
-    @api.model
-    def _play_onchange_profile_id(self, vals):
-        asset_obj = self.env["account.asset"]
-        asset_temp = asset_obj.new(vals)
-        asset_temp._onchange_profile_id()
-        for field in asset_temp._fields:
-            if field not in vals and asset_temp[field]:
-                vals[field] = asset_temp._fields[field].convert_to_write(
-                    asset_temp[field], asset_temp
-                )
+    def _expand_asset_line(self):
+        self.ensure_one()
+        if self.asset_profile_id and self.quantity > 1.0:
+            profile = self.asset_profile_id
+            if profile.asset_product_item:
+                aml = self.with_context(check_move_validity=False)
+                qty = self.quantity
+                name = self.name
+                aml.write({"quantity": 1, "name": "{} {}".format(name, 1)})
+                aml._onchange_price_subtotal()
+                for i in range(1, int(qty)):
+                    aml.copy({"name": "{} {}".format(name, i + 1)})
+                aml.move_id._onchange_invoice_line_ids()
