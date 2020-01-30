@@ -286,6 +286,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
     @api.multi
     def action_find_records(self):
         """Searchs for records to update/create and shows them."""
+        self.clear_caches()
         self = self.with_context(lang=self.lang)
         # Search for, and load, the records to create/update.
         if self.update_tax:
