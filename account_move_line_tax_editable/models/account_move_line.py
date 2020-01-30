@@ -6,13 +6,14 @@ from odoo import api, fields, models
 
 class AccountMoveLine(models.Model):
 
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     is_tax_editable = fields.Boolean(
-        string="Is tax data editable?", compute='_compute_is_tax_editable')
+        string="Is tax data editable?", compute="_compute_is_tax_editable"
+    )
 
     @api.multi
-    @api.depends('move_id.state')
+    @api.depends("move_id.state")
     def _compute_is_tax_editable(self):
         for rec in self:
-            rec.is_tax_editable = (rec.move_id.state == 'draft')
+            rec.is_tax_editable = rec.move_id.state == "draft"
