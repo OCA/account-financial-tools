@@ -12,7 +12,6 @@ class AccountMoveLine(models.Model):
         string="Is tax data editable?", compute="_compute_is_tax_editable"
     )
 
-    @api.multi
     @api.depends("move_id.state")
     def _compute_is_tax_editable(self):
         for rec in self:
