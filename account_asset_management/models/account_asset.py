@@ -37,7 +37,7 @@ class AccountAsset(models.Model):
         compute='_compute_move_line_check',
         string='Has accounting entries')
     name = fields.Char(
-        string='Asset Name', size=64, required=True,
+        string='Asset Name', required=True,
         readonly=True, states={'draft': [('readonly', False)]})
     code = fields.Char(
         string='Reference', size=32, readonly=True,
