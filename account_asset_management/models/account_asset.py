@@ -146,7 +146,7 @@ class AccountAsset(models.Model):
         states={'draft': [('readonly', False)]})
     method_progress_factor = fields.Float(
         string='Degressive Factor', readonly=True,
-        states={'draft': [('readonly', False)]}, default=0.3)
+        states={'draft': [('readonly', False)]}, default=0.3, digits=(16, 4))
     method_time = fields.Selection(
         selection=lambda self: self.env[
             'account.asset.profile']._selection_method_time(),
