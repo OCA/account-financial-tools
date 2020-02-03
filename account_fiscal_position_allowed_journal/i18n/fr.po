@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_fiscal_position_allowed_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-03 12:31+0000\n"
+"PO-Revision-Date: 2020-02-03 12:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_fiscal_position_allowed_journal
+#: model:ir.model.fields,field_description:account_fiscal_position_allowed_journal.field_account_fiscal_position__allowed_journal_ids
+msgid "Allowed journals"
+msgstr "Journaux autorisés"
+
+#. module: account_fiscal_position_allowed_journal
+#: model:ir.model,name:account_fiscal_position_allowed_journal.model_account_fiscal_position
+msgid "Fiscal Position"
+msgstr "Position fiscale"
+
+#. module: account_fiscal_position_allowed_journal
+#: model:ir.model,name:account_fiscal_position_allowed_journal.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: account_fiscal_position_allowed_journal
+#: code:addons/account_fiscal_position_allowed_journal/models/account_move.py:0
+#, python-format
+msgid "The journal is not allowed on the fiscal position."
+msgstr "Le journal n'est pas autorisé sur la position fiscale."
