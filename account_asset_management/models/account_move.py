@@ -63,7 +63,7 @@ class AccountMoveLine(models.Model):
         self.asset_profile_id = self.account_id.asset_profile_id
 
     @api.model
-    def create(self, vals):
+    def _add_asset_to_aml_vals(self, vals):
         if vals.get('asset_id') and not self.env.context.get('allow_asset'):
             raise UserError(
                 _("You are not allowed to link "
@@ -91,7 +91,13 @@ class AccountMoveLine(models.Model):
                 create_asset_from_move_line=True,
                 move_id=vals['move_id']).create(asset_vals)
             vals['asset_id'] = asset.id
-        return super().create(vals)
+        return vals
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._add_asset_to_aml_vals(vals)
+        return super().create(vals_list)
 
     @api.multi
     def _prepare_asset_create(self, vals):
