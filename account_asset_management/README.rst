@@ -58,11 +58,6 @@ The module in NOT compatible with the standard account_asset module.
 Changelog
 =========
 
-12.0.2.1.1 (2019-10-30)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-* [FIX] Allow editing salvage value, created from vendor bills
-
 12.0.2.1.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
