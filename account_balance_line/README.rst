@@ -17,13 +17,13 @@ Balance on journal items
     :target: https://github.com/OCA/account-financial-tools/tree/12.0/account_balance_line
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-12-0/account-financial-tools-12-0-account_balance_line
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-13-0/account-financial-tools-13-0-account_balance_line
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/12.0
+    :target: https://runbot.odoo-community.org/runbot/92/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds a balance total for lines in move line view.
 
@@ -36,7 +36,7 @@ Usage
 =====
 
 #. If you're an accounting adviser, enable developer mode and go to
-   Accounting > Adviser > Journal items.
+   Accounting > Miscellaneous > Journal items.
 #. Or open an account or a partner, and click on Action > Journal items.
 #. You will see a column named "Balance" with the balance of the line.
 
@@ -80,6 +80,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/12.0/account_balance_line>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/13.0/account_balance_line>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
