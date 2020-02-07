@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-26 12:28+0000\n"
-"PO-Revision-Date: 2019-04-01 14:14+0000\n"
+"PO-Revision-Date: 2020-02-07 14:45+0000\n"
 "Last-Translator: Yung-Wa <yw.ng@onestein.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.3_time_3
@@ -137,7 +137,7 @@ msgstr ""
 #: code:addons/account_credit_control/models/credit_control_run.py:93
 #, python-format
 msgid "A run has already been executed more recently than %s"
-msgstr "Er is reeds eerder een aanmaningsrun uitgevoerd dan %s"
+msgstr "Er is reeds eerder een aanmaningsrun uitgevoerd dan op %s"
 
 #. module: account_credit_control
 #: model:ir.model,name:account_credit_control.model_account_account
@@ -170,7 +170,7 @@ msgstr "Er is een fout opgetreden bij het versturen van de mail."
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
 msgid "Are you sure you want to run all ready lines channel action?"
-msgstr ""
+msgstr "Weet u zeker dat u alle kanaalacties met gereed regels wilt uitvoeren?"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
@@ -213,12 +213,12 @@ msgstr "Verander het aanmaningsniveau van de huidige factuur"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_marker_form
 msgid "Change the state of the selected lines"
-msgstr "Verder status van geselecteerde regels"
+msgstr "Verander status van geselecteerde regels"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_marker_wizard
 msgid "Change the state of the selected lines."
-msgstr "Verder status van geselecteerde regels"
+msgstr "Verander status van geselecteerde regels."
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_channel
@@ -367,7 +367,7 @@ msgid ""
 "            (${object.current_policy_level.name or 'n/a'})\n"
 "        "
 msgstr ""
-"Aanamaning:\n"
+"Aanmaning:\n"
 "            (${object.current_policy_level.name or 'n/a'})\n"
 "        "
 
@@ -528,7 +528,7 @@ msgstr "Concept"
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "Draft lines have to be triaged."
-msgstr "Concept regels moeten zijn vervallen"
+msgstr "Concept regels moeten zijn vervallen."
 
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_line_state
@@ -612,12 +612,12 @@ msgstr "Opvolgingsverantwoordelijke"
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_policy_do_nothing
 msgid "For policies which should not generate lines or are obsolete"
-msgstr "Beleid waarvoor geen regels worden aangemaakt of ze zijn overbodig."
+msgstr "Beleid waarvoor geen regels worden aangemaakt of ze zijn overbodig"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_run_line_ids
 msgid "Generated lines"
-msgstr "Generereerde regels"
+msgstr "Genereerde regels"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
@@ -778,7 +778,7 @@ msgstr "Regels welke zijn genegeerd bij de vorige aanmaningsrun."
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_form
 #: model:ir.ui.view,arch_db:account_credit_control.credit_mangement_policy_level_form
 msgid "Mail and reporting"
-msgstr "Mail en raportering"
+msgstr "Mail en rapportering"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -882,12 +882,12 @@ msgstr "Naam"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer_new_policy_id
 msgid "New Policy to Apply"
-msgstr "Nieuw beleid voor van toepassing"
+msgstr "Nieuw beleid toepassen"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_policy_changer_new_policy_level_id
 msgid "New level to apply"
-msgstr "Nieuw niveau voor van toepassing"
+msgstr "Nieuw niveau toepassing"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_res_partner_payment_next_action
@@ -928,7 +928,7 @@ msgstr "Geen regels aangepast. Alle regels zijn verwerkt."
 #. module: account_credit_control
 #: model:ir.model.fields,help:account_credit_control.field_credit_control_printer_mark_as_sent
 msgid "Only letter lines will be marked."
-msgstr "Allen briefregels worden gemarkeerd."
+msgstr "Alleen briefregels worden gemarkeerd."
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.report_credit_control_summary_document
@@ -1054,14 +1054,16 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
-"Our records indicate that we have not yet received the payment of the "
-"invoices mentioned in the attached document despite our first reminder.<br>\n"
-"  If it has already been sent, please disregard this notice. If not, please "
-"proceed with payment within 5 days.<br>\n"
+"Volgens onze administratie hebben we geen betalingen ontvangen van "
+"onderstaande facturen ondanks onze eerste herinnering.<br>\n"
 "  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling binnen 5 dagen.<br>"
+"\n"
 "  <br>\n"
-"  Best regards"
+"  Bijvoorbaat dank voor uw medewerking.<br>\n"
+"  <br>\n"
+"  Met vriendelijke groet"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.2_time_2
@@ -1083,22 +1085,21 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
-"Our records indicate that we still have not received the payment of the "
-"invoices mentioned in the attached document despite our reminder.\n"
+"Volgens onze administratie hebben we geen betalingen ontvangen van "
+"onderstaande facturen ondanks onze eerste herinnering.<br>\n"
 "  <br>\n"
+"  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling.<br>\n"
+"  Als uw betaling niet is ontvangen binnen 5 dagen, wordt het verschuldigde "
+"bedrag overgedragen aan onze incassobureau.<br>\n"
 "  <br>\n"
-"  If payment have already been sent, please disregard this notice. If not, "
-"please proceed with payment.<br>\n"
-"  If your payment has not been received in the next 5 days, your file will "
-"be transfered to our debt<br>\n"
-"  collection agency.<br>\n"
+"  Wilt u een betalingsregeling met ons afsluiten, neem dan contact met ons "
+"op.<br>\n"
+"  Een lijst met openstaande posen vind u in de bijlage.<br>\n"
 "  <br>\n"
-"  Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"  A customer account statement is enclosed for you convenience.<br>\n"
+"  Bijvoorbaat dank voor uw medewerking.<br>\n"
 "  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
-"  <br>\n"
-"  Best regards"
+"  Met vriendelijke groet"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_mail_text:account_credit_control.3_time_3
@@ -1117,19 +1118,21 @@ msgid ""
 "  <br>\n"
 "  Best regards"
 msgstr ""
-"Our records indicate that we still have not received the payment of the "
-"invoices mentioned in the attached document despite our two reminders.<br>\n"
-"  If payment have already been sent, please disregard this notice. If not, "
-"please proceed with payment.<br>\n"
-"  If your payment has not been received in the next 5 days, your file will "
-"be transfered to our debt collection agency.<br>\n"
+"Volgens onze administratie hebben we geen betalingen ontvangen van "
+"onderstaande facturen ondanks onze twee herinneringen.<br>\n"
 "  <br>\n"
-"  Should you need us to arrange a payment plan for you, please advise.<br>\n"
-"  A customer account statement is enclosed for you convenience.<br>\n"
+"  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling.<br>\n"
+"  Als uw betaling niet is ontvangen binnen 5 dagen, wordt het verschuldigde "
+"bedrag overgedragen aan onze incassobureau.<br>\n"
 "  <br>\n"
-"  Thank you in advance for your anticipated cooperation in this matter.<br>\n"
+"  Wilt u een betalingsregeling met ons afsluiten, neem dan contact met ons "
+"op.<br>\n"
+"  Een lijst met openstaande posen vind u in de bijlage.<br>\n"
 "  <br>\n"
-"  Best regards"
+"  Bijvoorbaat dank voor uw medewerking.<br>\n"
+"  <br>\n"
+"  Met vriendelijke groet"
 
 #. module: account_credit_control
 #: model:credit.control.policy.level,custom_text:account_credit_control.2_time_2
@@ -1152,22 +1155,21 @@ msgid ""
 "            Best regards\n"
 "        "
 msgstr ""
-"Our records indicate that we still have not received the payment of the "
-"mentioned below invoice despite our reminder.\n"
+"Volgens onze administratie hebben we geen betalingen ontvangen van "
+"onderstaande facturen ondanks onze herinnering.\n"
 "\n"
-"            If payment have already been sent, please disregard this notice. "
-"If not, please proceed with payment.\n"
-"            If your payment has not been received in the next 5 days, your "
-"file will be transfered to our debt collection agency.\n"
+"  Het kan zijn dat deze brief en betaling elkaar kruisen, deze brief kunt u "
+"dan negeren. Zo niet, dan ontvangen we graag uw betaling.\n"
+"  Als uw betaling niet is ontvangen binnen 5 dagen, wordt het verschuldigde "
+"bedrag overgedragen aan onze incassobureau.\n"
 "\n"
-"            Should you need us to arrange a payment plan for you, please "
-"advise.\n"
-"            A customer account statement is enclosed for you convenience.\n"
+"  Wilt u een betalingsregeling met ons afsluiten, neem dan contact met ons "
+"op.\n"
+"  Een lijst met openstaande posen vind u in de bijlage.\n"
 "\n"
-"            Thank you in advance for your anticipated cooperation in this "
-"matter.\n"
-"\n"
-"            Best regards\n"
+"  Bijvoorbaat dank voor uw medewerking.\n"
+"  \n"
+"  Met vriendelijke groet\n"
 "        "
 
 #. module: account_credit_control
@@ -1220,8 +1222,7 @@ msgstr "Beleid"
 #: code:addons/account_credit_control/models/credit_control_run.py:137
 #, python-format
 msgid "Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
-msgstr ""
-"Policy \"<b>%s</b>\" has generated <b>%d Credit Control Lines.</b><br/>"
+msgstr "Beleid \"<b>%s</b>\" heeft <b>%d aanmaningsregels berekend.</b><br/>"
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_run.py:141
@@ -1322,7 +1323,7 @@ msgstr "Plan activiteit"
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard
 #: model:ir.actions.act_window,name:account_credit_control.open_credit_line_emailer_wizard_menu_action
 msgid "Send By Email"
-msgstr "Verzonden via de email"
+msgstr "Verzenden via de email"
 
 #. module: account_credit_control
 #: model:ir.actions.act_window,help:account_credit_control.open_credit_line_emailer_wizard
@@ -1332,7 +1333,7 @@ msgstr "Verzend een email voor geselecteerd regels."
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
 msgid "Send emails for the selected lines"
-msgstr "Verzend een email voor geselecteerd regels."
+msgstr "Verzend een email voor geselecteerd regels"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_line_emailer_form
@@ -1352,7 +1353,7 @@ msgstr "Verzonden e-mail"
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_date_sent
 msgid "Sent date"
-msgstr "Verzend datum"
+msgstr "Verzonden datum"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_policy_changer_form
@@ -1366,9 +1367,8 @@ msgstr "Pas nieuwe beleid toe"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_run_form
-#, fuzzy
 msgid "Set to ready all"
-msgstr "Pas huidige aanmaningsniveau toe"
+msgstr "Pas alles op gereed"
 
 #. module: account_credit_control
 #: model:ir.model.fields,field_description:account_credit_control.field_credit_control_line_run_id
@@ -1431,7 +1431,7 @@ msgstr "De optionele andere valuta als het een multi-valuta boeking is."
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "The partner had a manual followup."
-msgstr "De partner had een handmatige aanmaning"
+msgstr "De partner had een handmatige aanmaning."
 
 #. module: account_credit_control
 #: code:addons/account_credit_control/models/credit_control_policy.py:242
@@ -1443,7 +1443,7 @@ msgstr "Het laagste niveau mag niet van het type vorige aanmaning zijn"
 #: model:ir.ui.view,arch_db:account_credit_control.credit_control_line_search
 msgid "These lines are ready to send by email or by letter using the Actions."
 msgstr ""
-"De regels zijn klaar om te wornde verzonden via de mail of met de brief bij "
+"De regels zijn klaar om te worden verzonden via de mail of met de brief bij "
 "gebruik van Actions."
 
 #. module: account_credit_control
@@ -1479,7 +1479,7 @@ msgid ""
 "invoices"
 msgstr ""
 "Deze wizard maakt het mogelijk om de vervallen beleid en niveau van de "
-"geselecteerde facturen aan te passen."
+"geselecteerde facturen aan te passen"
 
 #. module: account_credit_control
 #: model:ir.ui.view,arch_db:account_credit_control.res_config_settings_view_form
@@ -1525,7 +1525,7 @@ msgid ""
 "Please choose one of the following policies:\n"
 " %s"
 msgstr ""
-"U kunt alleen een beleid instellen op relatie %s.\n"
+"U kunt alleen een beleid gebruiken ingesteld op de relatie %s.\n"
 "Selecteer een van de volgende opvolgingsbeleid:\n"
 " %s"
 
