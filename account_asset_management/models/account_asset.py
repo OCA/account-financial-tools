@@ -866,6 +866,16 @@ class AccountAsset(models.Model):
                 else:
                     number = len(line_dates)
                 period_amount = round(self.depreciation_base / number, digits)
+            if self.method[:4] == 'degr':
+                if i == 0:
+                    days = (
+                        entry['date_stop'] - depreciation_start_date).days + 1
+                elif i == i_max:
+                    days = (
+                        depreciation_stop_date - entry['date_start']).days + 1
+                else:
+                    days = (entry['date_stop'] - entry['date_start']).days + 1
+                day_amount = fy_amount / days
             entry.update({
                 'period_amount': period_amount,
                 'fy_amount': fy_amount,
