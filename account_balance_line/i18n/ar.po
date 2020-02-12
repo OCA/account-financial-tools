@@ -21,7 +21,8 @@ msgstr ""
 "X-Generator: Weblate 3.0.1\n"
 
 #. module: account_balance_line
-#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_custom
+#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree
+#: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_tree_grouped
 msgid "Total Balance"
 msgstr "الرصيد"
 
