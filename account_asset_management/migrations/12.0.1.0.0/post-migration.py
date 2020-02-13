@@ -51,6 +51,27 @@ def adjust_asset_values(env):
         )
 
 
+def add_asset_initial_entry(env):
+    """On OCA module, an initial depreciation line is created as summary of the
+    asset. We recreate that line here for the old assets.
+    """
+    env.cr.execute("SELECT asset_id FROM account_asset_line "
+                   "WHERE type='create' AND init_entry")
+    new_assets = [x[0] for x in env.cr.fetchall()]
+    args = ()
+    query = """
+        INSERT INTO account_asset_line
+        (asset_id, type, line_date, amount, name,
+            init_entry, create_date, create_uid)
+        SELECT id, 'create', date_start, purchase_value, id::CHAR || '/0',
+            True, create_date, create_uid
+        FROM account_asset"""
+    if new_assets:
+        query += " WHERE id not IN %s"
+        args = (tuple(new_assets), )
+    openupgrade.logged_query(env.cr, query, args)
+
+
 def adjust_aml_values(env):
     openupgrade.logged_query(
         env.cr, """
@@ -98,3 +119,4 @@ def migrate(env, version):
     adjust_asset_values(env)
     adjust_aml_values(env)
     handle_account_asset_disposal_migration(env)
+    add_asset_initial_entry(env)
