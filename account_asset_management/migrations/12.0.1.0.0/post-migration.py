@@ -1,5 +1,5 @@
 # Copyright 2019 Apps2GROW - Henrik Norlin
-# Copyright 2019 Tecnativa - Pedro M. Baeza
+# Copyright 2019-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openupgradelib import openupgrade
 from psycopg2 import sql
@@ -49,6 +49,24 @@ def adjust_asset_values(env):
                 table=table,
             ),
         )
+
+
+def set_asset_line_previous(env):
+    """Set pointer to the previous depreciation line on each asset line.
+    This must be executed before `add_asset_initial_entry` for being
+    populated correctly.
+    """
+    for asset in env['account.asset'].search([]):
+        if asset.depreciation_line_ids.filtered(lambda x: x.type == 'create'):
+            continue  # ignore new assets
+        ant_line = False
+        for line in asset.depreciation_line_ids:
+            if ant_line:
+                env.cr.execute(
+                    "UPDATE account_asset_line "
+                    "SET previous_id = %s WHERE id = %s",
+                    (ant_line.id, line.id))
+            ant_line = line
 
 
 def add_asset_initial_entry(env):
@@ -119,4 +137,5 @@ def migrate(env, version):
     adjust_asset_values(env)
     adjust_aml_values(env)
     handle_account_asset_disposal_migration(env)
+    set_asset_line_previous(env)
     add_asset_initial_entry(env)
