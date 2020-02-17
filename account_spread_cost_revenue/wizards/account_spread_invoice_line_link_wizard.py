@@ -10,14 +10,14 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
 
     def _selection_spread_action_type(self):
         base_selection = [
-            ('template', 'Create from spread template'),
-            ('new', 'Create new spread board')
+            ('template', _('Create from spread template')),
+            ('new', _('Create new spread board'))
         ]
         if not self.env.context.get('allow_spread_planning'):
             return base_selection
 
         link_selection = [
-            ('link', 'Link to existing spread board'),
+            ('link', _('Link to existing spread board')),
         ]
         return link_selection + base_selection
 
