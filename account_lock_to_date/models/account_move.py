@@ -1,15 +1,13 @@
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, models
+from odoo import _, models
 from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    @api.multi
-    def _check_lock_date(self):
-        res = super()._check_lock_date()
+    def _check_lock_to_dates(self):
         for move in self:
             lock_to_date = (
                 min(
@@ -34,4 +32,15 @@ class AccountMove(models.Model):
                         "with the 'Adviser' role"
                     ) % (lock_to_date)
                 raise UserError(message)
-        return res
+
+    def action_post(self):
+        self._check_lock_to_dates()
+        return super().action_post()
+
+    def button_cancel(self):
+        self._check_lock_to_dates()
+        return super().button_cancel()
+
+    def button_draft(self):
+        self._check_lock_to_dates()
+        return super().button_draft()
