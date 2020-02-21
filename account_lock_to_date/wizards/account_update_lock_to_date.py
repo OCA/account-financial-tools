@@ -41,14 +41,12 @@ class AccountUpdateLockToDate(models.TransientModel):
         )
         return res
 
-    @api.multi
     def _check_execute_allowed(self):
         self.ensure_one()
         has_adviser_group = self.env.user.has_group("account.group_account_manager")
         if not (has_adviser_group or self.env.uid == SUPERUSER_ID):
             raise UserError(_("You are not allowed to execute this action."))
 
-    @api.multi
     def execute(self):
         self.ensure_one()
         self._check_execute_allowed()
