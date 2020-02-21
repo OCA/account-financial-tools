@@ -7,7 +7,7 @@ from time import mktime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import SUPERUSER_ID, _, api, fields, models
+from odoo import SUPERUSER_ID, _, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
@@ -28,14 +28,12 @@ class ResCompany(models.Model):
         "this date. Use it for fiscal year locking for example.",
     )
 
-    @api.multi
     def write(self, vals):
         # fiscalyear_lock_date can't be set to a prior date
         if "fiscalyear_lock_to_date" in vals or "period_lock_to_date" in vals:
             self._check_lock_to_dates(vals)
         return super(ResCompany, self).write(vals)
 
-    @api.multi
     def _check_lock_to_dates(self, vals):
         """Check the lock to dates for the current companies.
 
@@ -118,7 +116,6 @@ class ResCompany(models.Model):
                     )
                 )
 
-    @api.multi
     def _validate_fiscalyear_lock(self, values):
         res = super()._validate_fiscalyear_lock(values)
         if values.get("fiscalyear_lock_to_date"):

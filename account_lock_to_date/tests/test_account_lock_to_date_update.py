@@ -14,9 +14,9 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company = self.env.ref("base.main_company")
         self.demo_user = self.env.ref("base.user_demo")
         self.adviser_group = self.env.ref("account.group_account_manager")
-        self.UpdateLockToDateUpdateObj = self.env["account.update.lock_to_date"].sudo(
-            self.demo_user
-        )
+        self.UpdateLockToDateUpdateObj = self.env[
+            "account.update.lock_to_date"
+        ].with_user(self.demo_user)
         self.AccountObj = self.env["account.account"]
         self.AccountJournalObj = self.env["account.journal"]
         self.AccountMoveObj = self.env["account.move"]
@@ -89,7 +89,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
         )
         self.demo_user.write({"groups_id": [(3, self.adviser_group.id)]})
         with self.assertRaises(UserError):
-            wizard.sudo(self.demo_user.id).execute()
+            wizard.with_user(self.demo_user.id).execute()
 
     def test_02_update_with_access(self):
         wizard = self.create_account_lock_date_update()
@@ -100,7 +100,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
             }
         )
         self.demo_user.write({"groups_id": [(4, self.adviser_group.id)]})
-        wizard.sudo(self.demo_user.id).execute()
+        wizard.with_user(self.demo_user.id).execute()
         self.assertEqual(
             self.company.period_lock_to_date,
             datetime.strptime("2900-01-01", DEFAULT_SERVER_DATE_FORMAT).date(),
@@ -117,7 +117,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         move = self.create_account_move("2900-01-01")
         with self.assertRaises(UserError):
-            move.sudo(self.demo_user.id).post()
+            move.with_user(self.demo_user.id).action_post()
 
     def test_04_create_move_inside_period(self):
         """We test that we can successfully create a journal entry
@@ -125,7 +125,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.period_lock_to_date = "2900-01-01"
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         move = self.create_account_move("2800-01-01")
-        move.sudo(self.demo_user.id).post()
+        move.with_user(self.demo_user.id).action_post()
         self.assertEqual(move.state, "posted")
 
     def test_05_lock_period_with_draft_moves(self):
