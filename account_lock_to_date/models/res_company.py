@@ -4,6 +4,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import calendar
 import time
+from time import mktime
 from odoo import api, fields, models, SUPERUSER_ID, _
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from odoo.exceptions import ValidationError
@@ -36,24 +37,17 @@ class ResCompany(models.Model):
 
         :param vals: The values passed to the write method.
         '''
-        period_lock_to_date = vals.get('period_lock_to_date') and\
-            time.strptime(vals['period_lock_to_date'],
-                          DEFAULT_SERVER_DATE_FORMAT)
-        fiscalyear_lock_to_date = vals.get('fiscalyear_lock_to_date') and\
-            time.strptime(vals['fiscalyear_lock_to_date'],
-                          DEFAULT_SERVER_DATE_FORMAT)
+        period_lock_to_date = vals.get('period_lock_to_date')
+        fiscalyear_lock_to_date = vals.get('fiscalyear_lock_to_date')
 
-        next_month = datetime.strptime(
-            fields.Date.today(),
-            DEFAULT_SERVER_DATE_FORMAT) + relativedelta(months=+1)
+        next_month = datetime.now() + relativedelta(months=+1)
         days_next_month = calendar.monthrange(next_month.year,
                                               next_month.month)
         next_month = next_month.replace(
             day=days_next_month[1]).timetuple()
+        next_month = datetime.fromtimestamp(mktime(next_month)).date()
         for company in self:
-            old_fiscalyear_lock_to_date = company.fiscalyear_lock_to_date and\
-                time.strptime(company.fiscalyear_lock_to_date,
-                              DEFAULT_SERVER_DATE_FORMAT)
+            old_fiscalyear_lock_to_date = company.fiscalyear_lock_to_date
 
             # The user attempts to remove the lock date for advisors
             if old_fiscalyear_lock_to_date and \
