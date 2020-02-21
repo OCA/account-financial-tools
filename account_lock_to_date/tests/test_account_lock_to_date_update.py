@@ -3,6 +3,8 @@
 
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
+from datetime import datetime
 
 
 class TestAccountLockToDateUpdate(TransactionCase):
@@ -88,8 +90,16 @@ class TestAccountLockToDateUpdate(TransactionCase):
             'groups_id': [(4, self.adviser_group.id)],
         })
         wizard.sudo(self.demo_user.id).execute()
-        self.assertEqual(self.company.period_lock_to_date, '2900-01-01')
-        self.assertEqual(self.company.fiscalyear_lock_to_date, '2900-02-01')
+        self.assertEqual(
+            self.company.period_lock_to_date,
+            datetime.strptime(
+                '2900-01-01',
+                DEFAULT_SERVER_DATE_FORMAT).date())
+        self.assertEqual(
+            self.company.fiscalyear_lock_to_date,
+            datetime.strptime(
+                '2900-02-01',
+                DEFAULT_SERVER_DATE_FORMAT).date())
 
     def test_03_create_move_outside_period(self):
         """We test that we cannot create journal entries after the
