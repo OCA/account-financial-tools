@@ -17,15 +17,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2016-11-25 14:58+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt/)\n"
+"PO-Revision-Date: 2020-02-22 18:13+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1042
@@ -34,6 +35,8 @@ msgid ""
 "\n"
 "Error while processing asset '%s': %s"
 msgstr ""
+"\n"
+"Erro a processar um ativo '%s': %s"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_account
@@ -60,11 +63,13 @@ msgstr "Adicione aqui uma nota interna..."
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
 msgstr ""
+"Todas as linhas de depreciação anteriores a esta data serão publicadas "
+"automaticamente"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
 msgid "Amount"
-msgstr "Valor"
+msgstr "Montante"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciated_value
@@ -113,19 +118,16 @@ msgstr "Conta de Ativo"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
-#, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
-msgstr "Conta de Ativo"
+msgstr "Grupo de Ativos"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
-#, fuzzy
 msgid "Asset Groups"
-msgstr "Linhas do Ativo"
+msgstr "Grupos de Ativos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -148,16 +150,14 @@ msgstr "Nome do Ativo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_invoice_line__asset_profile_id
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "Linha de Ativo"
+msgstr "Categoria do Ativo"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
-#, fuzzy
 msgid "Asset Profiles"
-msgstr "Linhas do Ativo"
+msgstr "Categorias do Ativo"
 
 #. module: account_asset_management
 #: selection:account.asset.line,type:0
@@ -182,17 +182,15 @@ msgstr "Data de Início do Ativo"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
-#, fuzzy
 msgid "Asset depreciation table line"
-msgstr "Linha de depreciação de ativos"
+msgstr "Quadro de linhas de depreciação de ativos"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
-#, fuzzy
 msgid "Asset profile"
-msgstr "Linha de Ativo"
+msgstr "Categoria do Ativo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -241,12 +239,16 @@ msgid ""
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
 msgstr ""
+"Por defeito durante a validação de uma fatura, um ativo é criado pela linha "
+"da fatura desde que um movimento contabilístico seja criado por ela. Come "
+"sta configuração, um movimento contabilístico será criado pelo item de "
+"produto, Assim, haverá um ativo por cada item de produto."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__days_calc
 msgid "Calculate by days"
-msgstr ""
+msgstr "Calculada por dias"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -257,12 +259,11 @@ msgstr "Cancelar"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__open_asset
-#, fuzzy
 msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
-"Marque esta opção se quiser confirmar automaticamente os ativos dessa "
+"Marque esta opção se quiser confirmar automaticamente os ativos desta "
 "categoria quando criados por faturas."
 
 #. module: account_asset_management
@@ -275,13 +276,13 @@ msgid ""
 "when the annual linear depreciation exceeds the annual degressive "
 "depreciation"
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de "
-"depreciação:\n"
+"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
+"\n"
 "* Constante: calculado como Valor Bruto / Nº Depreciações\n"
 "* Decrescente: calculado através de Valor Residual x Fator Decréscimo\n"
 "* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por ser "
 "descrescente, transitando para constante quando o valor da depreciação "
-"constante anual ultrapassa o da depreciação decrescente anual."
+"constante anual ultrapassa o da depreciação decrescente anual"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -311,10 +312,10 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de "
-"depreciação:\n"
-"* Constante: calculado como Valor Bruto / Nº Depreciações\n"
-"* Decrescente: calculado através de Valor Residual x Fator Decréscimo\n"
+"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
+"\n"
+"* Constante: calculado como Valor Bruto / Nº Depreciações. \n"
+"* Decrescente: Calculado através de Valor Residual x Fator Decréscimo\n"
 "* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por ser "
 "descrescente, transitando para constante quando o valor da depreciação "
 "constante anual ultrapassa o da depreciação decrescente anual."
@@ -328,7 +329,7 @@ msgstr "Fechar"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -352,7 +353,7 @@ msgid ""
 msgstr ""
 "Complete este campo quando vende um ativo, de forma a facilitar a criação "
 "dos movimentos contabilísticos de remoção do ativo através do botão "
-"'Remover' do ativo."
+"'Remover' do ativo"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__date_completed
@@ -385,26 +386,25 @@ msgstr "Calcula Ativos"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:30
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets errors"
-msgstr "Calcula Ativos"
+msgstr "Calcula erros em Ativos"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:32
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets result"
-msgstr "Calcula Ativos"
+msgstr "Calcula resultado em Ativos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "Compute Assets results"
-msgstr "Calcula Ativos"
+msgstr "Calcula resultados em Ativos"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configurações Config"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -419,7 +419,7 @@ msgstr "Criar movimento"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
 msgid "Create an asset by product item"
-msgstr ""
+msgstr "Criar um ativo por item de produto"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:44
@@ -465,11 +465,10 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
 msgid "Days"
-msgstr ""
+msgstr "Dias"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_account__asset_profile_id
-#, fuzzy
 msgid "Default Asset Profile when creating invoice lines with this account."
 msgstr ""
 "Categoria por Defeito do Ativo na criação de linhas de faturas com esta "
@@ -485,7 +484,7 @@ msgstr "Decrescente"
 #: code:addons/account_asset_management/models/account_asset_profile.py:138
 #, python-format
 msgid "Degressive  up to Salvage Value"
-msgstr ""
+msgstr "Decrescente  até ao Valor Residual"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_progress_factor
@@ -504,7 +503,7 @@ msgstr "Decrescente-Constante"
 #: code:addons/account_asset_management/models/account_asset_profile.py:166
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
-msgstr "O Decrescente-Constante só é suportado quando o Método Tempo é Anual"
+msgstr "O Decrescente-Constante só é suportado quando o Método Tempo é Anual."
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -535,9 +534,8 @@ msgstr "Conta de Depreciação"
 #: selection:account.asset.line,type:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
-#, fuzzy
 msgid "Depreciation Base"
-msgstr "Data de depreciação"
+msgstr "Base da depreciação"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -580,12 +578,12 @@ msgstr "Nome da Depreciação"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__display_name
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__display_name
 msgid "Display Name"
-msgstr "Nome"
+msgstr "Nome a Exibir"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
 msgid "Done"
-msgstr "Feito"
+msgstr "Terminado"
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
@@ -616,18 +614,19 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Erro ao processar um ativo '%s': \n"
+"\n"
+"%s"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscal_year
-#, fuzzy
 msgid "Fiscal Year"
 msgstr "Ano Fiscal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
-#, fuzzy
 msgid "Force accounting date"
-msgstr "Tem movimentos contabilísticos"
+msgstr "Forçar data contabilística"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:112
@@ -688,12 +687,18 @@ msgid ""
 "amount to depreciate per year will be calculated as depreciation base / "
 "(depreciation end date - start date + 1) * days in the current year."
 msgstr ""
+"Se não for definido, o sistema distribuirá equitativamente o montante a "
+"depreciar ao longo dos anos, baseado no número de anos. O valor por ano será "
+"a base de depreciação / número de anos.\n"
+"Se definido, o sistema considerará se o ano atual não é depreciado. O "
+"montante a depreciar por ano será calculado pela base de depreciação / (data "
+"de fim da depreciação - data inicial + 1) * dias no ano atual."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:761
 #, python-format
 msgid "Illegal value %s in asset.method."
-msgstr "Valor ilegal %s em asset.method"
+msgstr "Valor ilegal %s em asset.method."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
@@ -718,7 +723,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Init"
-msgstr "Init"
+msgstr "Inicial"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
@@ -746,13 +751,13 @@ msgstr "Diário"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
-msgstr "Movs. de Diário"
+msgstr "Movimentos de Diário"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:252
 #, python-format
 msgid "Journal Entry"
-msgstr "Mov. de Diário"
+msgstr "Movimento de Diário"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
@@ -775,7 +780,7 @@ msgstr "Item do Diário"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
 msgid "Last Modified on"
-msgstr "Modificado a última vez por"
+msgstr "Última Modificação Em"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
@@ -786,7 +791,7 @@ msgstr "Modificado a última vez por"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_uid
 msgid "Last Updated by"
-msgstr "Atualizado pela última vez por"
+msgstr "Última Actualização por"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_date
@@ -797,7 +802,7 @@ msgstr "Atualizado pela última vez por"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
 msgid "Last Updated on"
-msgstr "Atualizado pela última vez em"
+msgstr "Última Actualização em"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:134
@@ -807,9 +812,9 @@ msgstr "Constante"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:135
-#, fuzzy, python-format
+#, python-format
 msgid "Linear up to Salvage Value"
-msgstr "Valor Residual"
+msgstr "Valor Linear até ao Valor Residual"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
@@ -857,10 +862,9 @@ msgstr "Número de Anos"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:156
-#, fuzzy, python-format
-#| msgid "Number of Years"
+#, python-format
 msgid "Number of Years or end date"
-msgstr "Número de Anos"
+msgstr "Número de Anos ou data final"
 
 #. module: account_asset_management
 #: selection:account.asset.recompute.trigger,state:0
@@ -874,17 +878,13 @@ msgstr "Outras informações"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
-#, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
-msgstr "Ativo Ascendente"
+msgstr "Grupo de Ativo Ascendente"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
-#, fuzzy
-#| msgid "Parent Left"
 msgid "Parent Path"
-msgstr "Ascendente à Esquerda"
+msgstr "Caminho Ascendente"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__partner_id
@@ -922,7 +922,7 @@ msgstr "Linha de Depreciação Anterior"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Profile"
-msgstr ""
+msgstr "Categoria"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
@@ -969,7 +969,7 @@ msgstr ""
 "* Valor Residual: o valor não depreciado será registado na 'Conta de Valor "
 "Residual'\n"
 "* Ganhos/Perdas na Venda: O Ganho ou Perda será registado respetivamente na "
-"'Conta de Mais-Valia' ou 'Conta de Menos-Valia'"
+"'Conta de Mais-Valia' ou 'Conta de Menos-Valia' "
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_remove__date_remove
@@ -977,7 +977,7 @@ msgid ""
 "Removal date must be after the last posted entry in case of early removal"
 msgstr ""
 "A data de remoção deve ser posterior à do último registo no caso de remoção "
-"prematura."
+"prematura"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1012,7 +1012,7 @@ msgstr "Conta de Valor Residual"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
 msgid "Results :"
-msgstr ""
+msgstr "Resultados:"
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
@@ -1032,19 +1032,16 @@ msgstr "Valor Residual"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
 msgid "Search Asset Group"
-msgstr "Pesquisar categoria de ativos"
+msgstr "Pesquisar Grupo de Ativos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
-#, fuzzy
 msgid "Search Asset Profile"
-msgstr "Pesquisar categoria de ativos"
+msgstr "Pesquisar Categoria de ativos"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__init_entry
-#, fuzzy
 msgid ""
 "Set this flag for entries of previous fiscal years for which Odoo has not "
 "generated accounting entries."
@@ -1084,10 +1081,12 @@ msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years."
 msgstr ""
+"O método '_compute_year_amount' destina-se apenas para o Método Temporal "
+"'Número de Anos'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_account.py:23
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
 msgstr ""
@@ -1103,7 +1102,7 @@ msgstr "O Valor de Venda tem que ser positivo!"
 #: code:addons/account_asset_management/models/account_asset.py:264
 #, python-format
 msgid "The Start Date must precede the Ending Date."
-msgstr ""
+msgstr "A Data de Início deve ser anterior à Data Final."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:522
@@ -1129,7 +1128,7 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_number
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_number
 msgid "The number of years needed to depreciate your asset"
-msgstr "O número de anos necessários para a depreciação do seu imobilizado."
+msgstr "O número de anos necessários para a depreciação do seu imobilizado"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:155
@@ -1139,7 +1138,6 @@ msgstr "A data de remoção tem que ser posterior à data da última depreciaç�
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_res_config_settings__module_account_asset_management
-#, fuzzy
 msgid ""
 "This allows you to manage the assets owned by a company\n"
 "                or a person. It keeps track of the depreciation occurred\n"
@@ -1148,37 +1146,38 @@ msgid ""
 "                This installs the module account_asset_management."
 msgstr ""
 "Permite que possa gerir os ativos na posse de uma empresa\n"
-"ou pessoa. Mantém o registo das depreciações ocorridas\n"
-"nesses ativos e cria movimentos contabilísticos para essas\n"
-"depreciações.\n"
-"Instala o módulo account_asset_management."
+"                  ou pessoa. Mantém o registo das depreciações ocorridas\n"
+"                  nesses ativos e cria movimentos contabilísticos para "
+"essas\n"
+"                  linhas de depreciação.\n"
+"                  Instala o módulo account_asset_management."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
-#, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value."
-msgstr "Este montante representa o valor inicial do ativo."
+msgstr ""
+"Este montante representa a base de depreciação do ativo (Valor de Aquisição -"
+" Valor Residual)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
-#, fuzzy
 msgid ""
 "This amount represent the initial value of the asset.\n"
 "The Depreciation Base is calculated as follows:\n"
 "Purchase Value - Salvage Value."
 msgstr ""
-"\n"
-"O Valor do Ativo é calculado da seguinte forma: Valor de Compra - Valor "
-"Residual"
+"Este valor representa o valor inicial do ativo.\n"
+"A base de depreciação é calculada da seguinte forma: \n"
+"Valor de Compra - Valor Residual."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_move.py:145
 #, python-format
 msgid "This option should only be used for a single id at a time."
-msgstr ""
+msgstr "Esta opção só deverá ser usada para um id único de cada vez."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
@@ -1193,10 +1192,8 @@ msgstr "Crédito Total"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
-#, fuzzy
-#| msgid "Total Debit"
 msgid "Total Days"
-msgstr "Débito Total"
+msgstr "Total de Dias"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1217,21 +1214,18 @@ msgstr "Tipo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use leap years"
-msgstr ""
+msgstr "Usar anos sem depreciação"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
-#, fuzzy
-#| msgid "The number of years needed to depreciate your asset"
 msgid "Use number of days to calculate depreciation amount"
-msgstr "O número de anos necessários para a depreciação do seu imobilizado."
+msgstr "Use o número de dias para calcular o valor da depreciação"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "View Asset Moves"
-msgstr "Movimento de ativos criados"
+msgstr "Vista de Movimento de Ativos"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1331,7 +1325,7 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:287
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
 msgstr ""
 "Não pode modificar a categoria de um ativo com movimentos contabilísticos."
@@ -1353,9 +1347,9 @@ msgstr "Não pode apagar um ativo que contenha linha de depreciação registadas
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:166
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot remove an asset line of type 'Depreciation Base'."
-msgstr "Não pode remover uma linha de ativo do tipo 'Valor do Ativo'."
+msgstr "Não pode remover uma linha de ativo do tipo 'Base da Depreciação'."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:137
@@ -1369,11 +1363,10 @@ msgstr ""
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:149
-#, fuzzy, python-format
+#, python-format
 msgid "You cannot set the Asset Start Date after already posted entries."
 msgstr ""
-"Não pode atribuir, numa linha de depreciação, uma data anterior à de "
-"movimentos já registados."
+"Não pode definir a Data de Início do Ativo, com movimentos já publicados."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:157
