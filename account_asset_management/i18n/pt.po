@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2020-02-22 18:13+0000\n"
+"PO-Revision-Date: 2020-02-26 21:13+0000\n"
 "Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/pt/)\n"
@@ -298,7 +298,6 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
-#, fuzzy
 msgid ""
 "Choose the method to use to compute the depreciation lines.\n"
 "  * Linear: Calculated on basis of: Depreciation Base / Number of "
@@ -314,11 +313,16 @@ msgid ""
 msgstr ""
 "Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
 "\n"
-"* Constante: calculado como Valor Bruto / Nº Depreciações. \n"
-"* Decrescente: Calculado através de Valor Residual x Fator Decréscimo\n"
+"* Constante: calculado como Valor Base de Depreciação / Nº Depreciações. "
+"Valor Base de Depreciação = Valor de Compra - Valor Residual.\n"
+"* Constante-Limite: Constante incluindo Valor Residual. Valor Base de "
+"Depreciação = Valor de Compra.\n"
+"* Decrescente: Calculado através de Valor Residual x Fator Decréscimo.\n"
 "* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por ser "
 "descrescente, transitando para constante quando o valor da depreciação "
-"constante anual ultrapassa o da depreciação decrescente anual."
+"constante anual ultrapassa o da depreciação decrescente anual.\n"
+"* Decrescente-Limite: Decrescente incluindo Valor Residual. O Valor Base de "
+"Depreciação é igual ao valor do ativo."
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
