@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-02-28 00:14+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -20,6 +22,11 @@ msgid "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible'
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\""
+"{'invisible':[('is_credit_account_deprecated','!=',True)]}\">\n"
+"                                  Esta conta está depreciada! A "
+"reconciliação NÂO é possível.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -27,6 +34,11 @@ msgid "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible'
 "                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\""
+"{'invisible':[('is_credit_account_deprecated','!=',True)]}\">\n"
+"                                  Esta conta está depreciada! A "
+"reconciliação NÂO é possível.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -37,6 +49,16 @@ msgid "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_
 "                                  The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[("
+"'invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"                                 A conta de Balanço usada para margem.<br/>"
+"Esta conta é a contrapartida da conta na linha da fatura.\n"
+"                            </span>\n"
+"                            <span class=\"help-block\" colspan=\"2\" attrs=\""
+"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                  A conta de Gastos na linha da fatura de "
+"compra.<br/>Habitualmente a mesma conta que a da linha da fatura de compra.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -47,87 +69,97 @@ msgid "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_
 "                                  The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.\n"
 "                            </span>"
 msgstr ""
+"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[("
+"'invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"                                  A conta de Rendimentos usada para a "
+"margem.<br/>Habitualmente a mesma conta que a da linha da fatura.\n"
+"                            </span>\n"
+"                            <span class=\"help-block\" colspan=\"2\" attrs=\""
+"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                  A conta de Balanço usada para a margem.<br/"
+">Esta conta é a contrapartida da conta da linha da fatura de compra.\n"
+"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
 msgid "Account Spread"
-msgstr ""
+msgstr "Conta da Margem"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_invoice_line_link_wizard
 msgid "Account Spread Invoice Line Link Wizard"
-msgstr ""
+msgstr "Assistente de ligação da linha de fatura de conta margem"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_line
 msgid "Account Spread Lines"
-msgstr ""
+msgstr "Linhas da Conta Margem"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template
 msgid "Account Spread Template"
-msgstr ""
+msgstr "Modelo da Conta Margem"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Ação Necessária"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__active
 msgid "Active"
-msgstr ""
+msgstr "Ativo"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__all_posted
 msgid "All Posted"
-msgstr ""
+msgstr "Tudo Publicado"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__allow_spread_planning
 msgid "Allow Spread Planning"
-msgstr ""
+msgstr "Permitir Planear a Margem"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "Montante"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__account_analytic_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "Conta Analítica"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__analytic_tag_ids
 msgid "Analytic Tags"
-msgstr ""
+msgstr "Etiquetas Analíticas"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_search
 msgid "Archived"
-msgstr ""
+msgstr "Arquivado"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Contagem de Anexos"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__auto_archive
 msgid "Auto-archive spread"
-msgstr ""
+msgstr "Margem auto arquivada"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__move_line_auto_post
 msgid "Auto-post lines"
-msgstr ""
+msgstr "Linhas auto publicadas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__force_move_auto_post
 msgid "Auto-post spread lines"
-msgstr ""
+msgstr "Linhas de margem auto publicadas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__spread_account_id
@@ -161,7 +193,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empresas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__company_id
@@ -190,7 +222,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Create Move"
-msgstr ""
+msgstr "Criar movimento"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:13
@@ -234,7 +266,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Moeda"
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,spread_type:0
@@ -284,7 +316,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Delete Move"
-msgstr ""
+msgstr "Apagar Movimento"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:149
@@ -295,7 +327,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__name
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -363,17 +395,17 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Seguidores (Canais)"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguidores (Parceiros)"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__id
@@ -386,17 +418,17 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_unread
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Se selecionado novas mensagens necessitam da sua atenção."
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selecionado, novas mensagens necessitam da sua atenção."
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selecionado, algumas mensagens têm mensagem de erro."
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:450
@@ -404,13 +436,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_id
 #, python-format
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_invoice_line
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__invoice_line_id
 msgid "Invoice Line"
-msgstr ""
+msgstr "Linha de fatura"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_line_ids
@@ -446,20 +478,20 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "É um Seguidor"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__journal_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__spread_journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Diário"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:130
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__move_id
 #, python-format
 msgid "Journal Entry"
-msgstr ""
+msgstr "Movimento de Diário"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread____last_update
@@ -512,23 +544,23 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Anexo Principal"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Erro de Mensagem de Envio"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensagens"
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Month"
-msgstr ""
+msgstr "Mês"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__name
@@ -552,7 +584,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Número de Ações"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__period_number
@@ -563,22 +595,22 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_has_error_counter
 msgid "Number of error"
-msgstr ""
+msgstr "Número de erros"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Número de mensagens que requerem atenção"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Número de mensagens com erro de envio"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Número de mensagens não lidas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__period_type
@@ -601,7 +633,7 @@ msgstr ""
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Quarter"
-msgstr ""
+msgstr "Trimestre"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
@@ -776,12 +808,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__total_amount
 msgid "Total Amount"
-msgstr ""
+msgstr "Valor Total"
 
 #. module: account_spread_cost_revenue
 #: selection:account.invoice.line,spread_check:0
@@ -823,12 +855,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensagens Não lidas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Contador de Mensagens Não Lidas"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__unspread_amount
@@ -850,23 +882,23 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "View Move"
-msgstr ""
+msgstr "Vista Movimento"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensagens de Website"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "História de Comunicações do Website"
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Year"
-msgstr ""
+msgstr "Ano"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
