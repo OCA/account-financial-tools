@@ -9,27 +9,28 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt/)\n"
+"PO-Revision-Date: 2020-02-28 00:14+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_invoice_currency
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Amount Due"
-msgstr ""
+msgstr "Montante em Dívida"
 
 #. module: account_invoice_currency
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_form
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_form
 msgid "Amounts in company currency"
-msgstr ""
+msgstr "Montantes na divisa da empresa"
 
 #. module: account_invoice_currency
 #: model:ir.model,name:account_invoice_currency.model_account_invoice
@@ -40,20 +41,22 @@ msgstr "Fatura"
 #: model:ir.model.fields,help:account_invoice_currency.field_account_invoice__amount_tax_signed
 msgid "Invoice tax amount in the company currency, negative for credit notes."
 msgstr ""
+"Montante de imposto da fatura na divisa da empresa, negativo para notas de "
+"crédito."
 
 #. module: account_invoice_currency
 #: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice__amount_tax_signed
 msgid "Tax Signed"
-msgstr ""
+msgstr "Imposto Assinado"
 
 #. module: account_invoice_currency
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: account_invoice_currency
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_tree
 msgid "Total (Company Currency)"
-msgstr ""
+msgstr "Total (Divisa da Empresa)"
