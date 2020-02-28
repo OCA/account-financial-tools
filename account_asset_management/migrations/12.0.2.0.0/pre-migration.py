@@ -32,7 +32,7 @@ def move_view_assets(cr):
 
 @openupgrade.migrate()
 def migrate(env, version):
-    if openupgrade.column_exists(env.cr, 'account_asset', 'parent_id'):
+    if openupgrade.column_exists(env.cr, 'account_asset_profile', 'parent_id'):
         # if migrating directly from v11 `account_asset` module, there are no
         # view assets nor parents
         openupgrade.rename_columns(env.cr, _column_renames)
