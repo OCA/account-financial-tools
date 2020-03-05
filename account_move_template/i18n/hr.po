@@ -10,33 +10,33 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-23 01:41+0000\n"
-"PO-Revision-Date: 2018-02-23 01:41+0000\n"
-"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
+"PO-Revision-Date: 2020-03-05 14:13+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:35
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopija)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "1250"
-msgstr ""
+msgstr "1250"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
-#, fuzzy
 msgid "Account"
-msgstr "ID Konta"
+msgstr "Konto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
@@ -47,21 +47,19 @@ msgstr "Iznos"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Analytic"
-msgstr ""
+msgstr "Analitika"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_account_id
-#, fuzzy
 msgid "Analytic Account"
-msgstr "ID Analitičkog konta"
+msgstr "Analitički konto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
-#, fuzzy
 msgid "Analytic Tags"
-msgstr "ID Analitičkog konta"
+msgstr "Oznake analitike"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -73,22 +71,19 @@ msgstr "Odustani"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
-#, fuzzy
 msgid "Company"
-msgstr "ID Tvrtke"
+msgstr "Tvrtka"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
-#, fuzzy
 msgid "Company Currency"
-msgstr "ID Tvrtke"
+msgstr "Valuta tvrtke"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
-#, fuzzy
 msgid "Compute Formula"
-msgstr "Izračunato"
+msgstr "Formula za izračun"
 
 #. module: account_move_template
 #: selection:account.move.template.line,type:0
@@ -98,15 +93,13 @@ msgstr "Izračunato"
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
-#, fuzzy
 msgid "Create Entry from Template"
 msgstr "Kreiraj temeljnicu iz predloška"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#, fuzzy
 msgid "Create Journal Entry"
-msgstr "Kreirano"
+msgstr "Kreiraj stavku temeljnice"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -128,30 +121,30 @@ msgstr "Kreirano"
 #: selection:account.move.template.line,move_line_type:0
 #: selection:account.move.template.line.run,move_line_type:0
 msgid "Credit"
-msgstr ""
+msgstr "Potražuje"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:account.move.template.line.run,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "Duguje"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:90
 #, python-format
 msgid "Debit and credit of all lines are null."
-msgstr ""
+msgstr "Duguje i potražuje svih stavaka je nula."
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
 msgid "Direction"
-msgstr ""
+msgstr "Smjer"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
@@ -165,12 +158,12 @@ msgstr "Prikaži ime"
 #: code:addons/account_move_template/wizard/account_move_template_run.py:102
 #, python-format
 msgid "Entry from template %s"
-msgstr ""
+msgstr "Stavka iz predloška %s"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr ""
+msgstr "Stvori stavku dnevnika"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -201,9 +194,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
-#, fuzzy
 msgid "Journal"
-msgstr "ID Dnevnika"
+msgstr "Dnevnik"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -211,44 +203,43 @@ msgstr "ID Dnevnika"
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "Predložak temeljnice"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "Stavka predloška temeljnice"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr ""
+msgstr "Predlošci temeljnica"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
-#, fuzzy
 msgid "Journal Item Template"
-msgstr "Kreiraj temeljnicu iz predloška"
+msgstr "Predložak temeljnice"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 * 0.2"
-msgstr ""
+msgstr "L1 * 0.2"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L1 + L2 + L3"
-msgstr ""
+msgstr "L1 + L2 + L3"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "L2 - L1"
-msgstr ""
+msgstr "L2 - L1"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
+msgstr "Natpis"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
@@ -277,14 +268,13 @@ msgstr "Zadnje ažurirano dana"
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
-#, fuzzy
 msgid "Lines"
 msgstr "Stavke"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "Predložak temeljnice"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -301,19 +291,18 @@ msgstr "Sljedeći"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "Napomena"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "Izvorni porez"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
-#, fuzzy
 msgid "Override Partner"
-msgstr "Partner"
+msgstr "Nadjačaj Partnera"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
@@ -325,7 +314,7 @@ msgstr "Partner"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "Uvjeti plaćanja"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
@@ -342,13 +331,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "Referenca"
 
 #. module: account_move_template
 #: selection:account.move.template.run,state:0
-#, fuzzy
 msgid "Select Template"
-msgstr "Test predloška"
+msgstr "Odaberi predložak"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
@@ -358,9 +346,8 @@ msgstr "Sekvenca"
 
 #. module: account_move_template
 #: selection:account.move.template.run,state:0
-#, fuzzy
 msgid "Set Lines"
-msgstr "Stavke predloška"
+msgstr "Postavi stavke"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
@@ -372,13 +359,12 @@ msgstr "Stanje"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "Porezi"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
-#, fuzzy
 msgid "Template"
-msgstr "ID predloška"
+msgstr "Predložak"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:54
@@ -386,17 +372,17 @@ msgstr "ID predloška"
 msgid ""
 "The selected template (%s) is not in the same company (%s) as the current "
 "user (%s)."
-msgstr ""
+msgstr "Odabrani predložak (%s) nije u istoj tvrtci (%s) kao i korisnik (%s)."
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
 msgid "The sequence of the line must be unique per template!"
-msgstr ""
+msgstr "Sekvenca redka mora biti jedinstvena u predlošku!"
 
 #. module: account_move_template
 #: sql_constraint:account.move.template:0
 msgid "This name is already used by another template!"
-msgstr ""
+msgstr "Ovaj naziv se već koristi za drugi predložak!"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__type
@@ -406,29 +392,27 @@ msgstr "Tip"
 #. module: account_move_template
 #: model:ir.model.fields,help:account_move_template.field_account_move_template_line__payment_term_id
 msgid "Used to compute the due date of the journal item."
-msgstr ""
+msgstr "Koristi se za izračun datuma dospijeća stavke temeljnice."
 
 #. module: account_move_template
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr ""
+msgstr "Ručni unos"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Čarobnjak"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
-#, fuzzy
 msgid "Wizard Lines to generate move from template"
-msgstr "Kreiraj temeljnicu iz predloška"
+msgstr "Stavke za generiranje temeljnice iz predloška"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_run
-#, fuzzy
 msgid "Wizard to generate move from template"
-msgstr "Kreiraj temeljnicu iz predloška"
+msgstr "Čarobnjak za kreiranje temeljnice iz predloška"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:68
