@@ -26,12 +26,6 @@ class TestAccountAssetBatchCompute(TransactionCase):
             'name': 'Test Regular',
             'type': 'other',
         })
-        self.view_asset = self.asset_model.create({
-            'type': 'view',
-            'state': 'open',
-            'name': 'view',
-            'purchase_value': 0.0,
-        })
         self.account = self.env['account.account'].create({
             'name': 'Test account',
             'code': 'TAC',
@@ -43,18 +37,16 @@ class TestAccountAssetBatchCompute(TransactionCase):
             'type': 'general',
         })
         self.profile = self.asset_profile_model.create({
-            'parent_id': self.view_asset.id,
             'account_expense_depreciation_id': self.account.id,
             'account_asset_id': self.account.id,
             'account_depreciation_id': self.account.id,
             'journal_id': self.journal.id,
             'name': "Test",
         })
-        self.fiscal_year = self.env['date.range'].create({
-            'type_id': self.ref('account_fiscal_year.fiscalyear'),
+        self.fiscal_year = self.env['account.fiscal.year'].create({
             'name': 'FY',
-            'date_start': time.strftime('2019-01-01'),
-            'date_end': time.strftime('2019-12-31'),
+            'date_from': time.strftime('2019-01-01'),
+            'date_to': time.strftime('2019-12-31'),
         })
         self.asset01 = self.asset_model.create({
             'name': 'test asset',
