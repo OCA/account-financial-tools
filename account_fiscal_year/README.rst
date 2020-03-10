@@ -27,7 +27,7 @@ Account Fiscal Year
 
 This module just adds the menu
 
-Invoicing > Configuration > Accounting > Fiscal Years
+Invoicing > Configuration > Accounting > Date ranges > Fiscal Years
 
 This is totally refactored compared to 11 version, because odoo 12 introduced `account.fiscal.year` object.
 See https://github.com/OCA/account-financial-tools/pull/706
@@ -62,6 +62,7 @@ Contributors
 * Damien Crier <damien.crier@camptocamp.com>
 * Laurent Mignon <laurent.mignon@acsone.eu>
 * Lorenzo Battistini <https://github.com/eLBati>
+* Andrea Stirpe <a.stirpe@onestein.nl>
 
 Maintainers
 ~~~~~~~~~~~
