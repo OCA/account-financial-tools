@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-account_lock_date_update',
         'odoo13-addon-account_menu',
         'odoo13-addon-account_move_line_purchase_info',
+        'odoo13-addon-account_move_line_tax_editable',
     ],
     classifiers=[
         'Programming Language :: Python',
