@@ -172,6 +172,7 @@ class TestPayment(AccountingTestCase):
                         'payment_date': time.strftime('%Y-%m-%d'),
                         'journal_id': self.check_journal.id,
                         'payment_method_id': self.payment_method_manual_in.id,
+                        'group_invoices': True,
                         })
         register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
