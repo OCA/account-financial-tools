@@ -299,9 +299,36 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         self.state = 'ready'
         return self._reopen()
 
+    def _check_consistency(self):
+        """Method for assuring consistency in operations before performing
+        them. For now, implemented:
+
+        - If a parent tax is tried to be created, children taxes must be
+          also included to be created.
+
+        TODO:
+
+        - Check that needed accounts in taxes/FPs are created at the same time.
+        - Check that needed taxes in FPs are created at the same time.
+        """
+        taxes2create = self.tax_ids.filtered(lambda x: x.type == 'new')
+        parents2create = taxes2create.filtered(
+            lambda x: x.tax_id.children_tax_ids)
+        for parent in parents2create:
+            if bool(
+                parent.tax_id.children_tax_ids - taxes2create.mapped('tax_id')
+            ):  # some children taxes are not included to be added
+                raise exceptions.UserError(_(
+                    "You have at least one parent tax template (%s) whose "
+                    "children taxes are not going to be created. Aborting "
+                    "as this will provoke an infinite loop. Please check "
+                    "if children have been matched, but not the parent one."
+                ) % parent.tax_id.name)
+
     @api.multi
     def action_update_records(self):
         """Action that creates/updates/deletes the selected elements."""
+        self._check_consistency()
         self = self.with_context(lang=self.lang)
         self.rejected_new_account_number = 0
         self.rejected_updated_account_number = 0
