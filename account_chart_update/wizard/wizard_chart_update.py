@@ -868,18 +868,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     def _update_taxes(self):
         """Process taxes to create/update/deactivate."""
-        for wiz_tax in self.tax_ids:
+        # First create taxes in batch
+        taxes_to_create = self.tax_ids.filtered(lambda x: x.type == "new")
+        taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
+        for wiz_tax in taxes_to_create:
+            _logger.info(_("Created tax %s."), "'%s'" % wiz_tax.tax_id.name)
+        for wiz_tax in self.tax_ids.filtered(lambda x: x.type != "new"):
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
             if wiz_tax.type == "deleted":
                 tax.active = False
                 _logger.info(_("Deactivated tax %s."), "'%s'" % tax.name)
                 continue
-            # Create tax
-            if wiz_tax.type == "new":
-                template._generate_tax(self.company_id)
-                _logger.info(_("Created tax %s."), "'%s'" % template.name)
-            # Update tax
             else:
                 for key, value in self.diff_fields(template, tax).items():
                     # We defer update because account might not be created yet
