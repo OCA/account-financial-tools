@@ -446,6 +446,9 @@ class AccountAsset(models.Model):
         amls = self.env['account.move.line'].search(
             [('asset_id', '=', self.id)], order='date ASC')
         am_ids = [l.move_id.id for l in amls]
+        # needed for avoiding errors after grouping in assets
+        context = dict(self.env.context)
+        context.pop('group_by', None)
         return {
             'name': _("Journal Entries"),
             'view_type': 'form',
@@ -453,7 +456,7 @@ class AccountAsset(models.Model):
             'res_model': 'account.move',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'context': self.env.context,
+            'context': context,
             'domain': [('id', 'in', am_ids)],
         }
 
