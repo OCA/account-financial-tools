@@ -490,10 +490,6 @@ class AccountAsset(models.Model):
 
     def open_entries(self):
         self.ensure_one()
-        amls = self.env["account.move.line"].search(
-            [("asset_id", "=", self.id)], order="date ASC"
-        )
-        am_ids = [l.move_id.id for l in amls]
         # needed for avoiding errors after grouping in assets
         context = dict(self.env.context)
         context.pop("group_by", None)
@@ -504,7 +500,7 @@ class AccountAsset(models.Model):
             "view_id": False,
             "type": "ir.actions.act_window",
             "context": context,
-            "domain": [("id", "in", am_ids)],
+            "domain": [("id", "in", self.account_move_line_ids.mapped("move_id").ids)],
         }
 
     def _group_lines(self, table):
