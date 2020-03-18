@@ -19,8 +19,8 @@ msgstr ""
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
 "PO-Revision-Date: 2020-02-26 21:13+0000\n"
 "Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1042
+#: code:addons/account_asset_management/models/account_asset.py:1043
 #, python-format
 msgid ""
 "\n"
@@ -276,8 +276,8 @@ msgid ""
 "when the annual linear depreciation exceeds the annual degressive "
 "depreciation"
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
-"\n"
+"Escolha o método a utilizar para calcular o valor das linhas de "
+"depreciação:\n"
 "* Constante: calculado como Valor Bruto / Nº Depreciações\n"
 "* Decrescente: calculado através de Valor Residual x Fator Decréscimo\n"
 "* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por ser "
@@ -311,8 +311,8 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
-"\n"
+"Escolha o método a utilizar para calcular o valor das linhas de "
+"depreciação:\n"
 "* Constante: calculado como Valor Base de Depreciação / Nº Depreciações. "
 "Valor Base de Depreciação = Valor de Compra - Valor Residual.\n"
 "* Constante-Limite: Constante incluindo Valor Residual. Valor Base de "
@@ -611,7 +611,7 @@ msgid "Entries"
 msgstr "Movimentos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1045
+#: code:addons/account_asset_management/models/account_asset.py:1046
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -699,7 +699,7 @@ msgstr ""
 "de fim da depreciação - data inicial + 1) * dias no ano atual."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:761
+#: code:addons/account_asset_management/models/account_asset.py:762
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr "Valor ilegal %s em asset.method."
@@ -1079,7 +1079,7 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:734
+#: code:addons/account_asset_management/models/account_asset.py:735
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1109,7 +1109,7 @@ msgid "The Start Date must precede the Ending Date."
 msgstr "A Data de Início deve ser anterior à Data Final."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:522
+#: code:addons/account_asset_management/models/account_asset.py:523
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
@@ -1163,8 +1163,8 @@ msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value."
 msgstr ""
-"Este montante representa a base de depreciação do ativo (Valor de Aquisição -"
-" Valor Residual)."
+"Este montante representa a base de depreciação do ativo (Valor de Aquisição "
+"- Valor Residual)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value

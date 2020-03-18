@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1042
+#: code:addons/account_asset_management/models/account_asset.py:1043
 #, python-format
 msgid ""
 "\n"
@@ -573,7 +573,7 @@ msgid "Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1045
+#: code:addons/account_asset_management/models/account_asset.py:1046
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -652,7 +652,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:761
+#: code:addons/account_asset_management/models/account_asset.py:762
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr ""
@@ -1017,7 +1017,7 @@ msgid "Status"
 msgstr "สถานะ"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:734
+#: code:addons/account_asset_management/models/account_asset.py:735
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1044,7 +1044,7 @@ msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:522
+#: code:addons/account_asset_management/models/account_asset.py:523
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
