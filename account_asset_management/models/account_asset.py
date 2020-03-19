@@ -490,18 +490,17 @@ class AccountAsset(models.Model):
 
     def open_entries(self):
         self.ensure_one()
-        amls = self.env["account.move.line"].search(
-            [("asset_id", "=", self.id)], order="date ASC"
-        )
-        am_ids = [l.move_id.id for l in amls]
+        # needed for avoiding errors after grouping in assets
+        context = dict(self.env.context)
+        context.pop("group_by", None)
         return {
             "name": _("Journal Entries"),
             "view_mode": "tree,form",
             "res_model": "account.move",
             "view_id": False,
             "type": "ir.actions.act_window",
-            "context": self.env.context,
-            "domain": [("id", "in", am_ids)],
+            "context": context,
+            "domain": [("id", "in", self.account_move_line_ids.mapped("move_id").ids)],
         }
 
     def _group_lines(self, table):
