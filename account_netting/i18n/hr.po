@@ -16,30 +16,30 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.8\n"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:69
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "AR/AP netting"
 msgstr ""
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:41
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries must have a receivable or payable account"
 msgstr "Sve stavke moraju imati dugovna ili potražna konta"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:44
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries mustn't been reconciled"
 msgstr "Sve stavke moraju biti otvorene"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:53
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
@@ -119,7 +119,7 @@ msgid "Move Line"
 msgstr "Stavka temeljnice"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:47
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid ""
 "The 'Compensate' function is intended to balance operations on different "
@@ -139,12 +139,12 @@ msgstr ""
 "zatvoriti ih međusobno, ostavivši saldo na partneru."
 
 #. module: account_netting
-#: selection:account.move.make.netting,balance_type:0
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
 msgstr "Za plaćanje"
 
 #. module: account_netting
-#: selection:account.move.make.netting,balance_type:0
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
 msgstr "Za naplatu"
 
@@ -154,7 +154,7 @@ msgid "Wizard to generate account moves for netting"
 msgstr "Čarobnjak za kreiranje temeljnice kompenzacije"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:35
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Trebali bi kompenzirati najmanje 2 stavke dnevnika."
