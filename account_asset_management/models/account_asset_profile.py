@@ -128,6 +128,9 @@ class AccountAssetProfile(models.Model):
     )
     prorata = fields.Boolean(
         string="Prorata Temporis",
+        compute="_compute_prorrata",
+        readonly=False,
+        store=True,
         help="Indicates that the first depreciation entry for this asset "
         "has to be done from the depreciation start date instead of "
         "the first day of the fiscal year.",
@@ -173,18 +176,20 @@ class AccountAssetProfile(models.Model):
         """
         return [("year", _("Number of Years or end date"))]
 
-    @api.constrains("method")
+    @api.constrains("method", "method_time")
     def _check_method(self):
-        for profile in self:
-            if profile.method == "degr-linear" and profile.method_time != "year":
-                raise UserError(
-                    _("Degressive-Linear is only supported for Time Method = " "Year.")
-                )
+        if self.filtered(
+            lambda a: a.method == "degr-linear" and a.method_time != "year"
+        ):
+            raise UserError(
+                _("Degressive-Linear is only supported for Time Method = Year.")
+            )
 
-    @api.onchange("method_time")
-    def _onchange_method_time(self):
-        if self.method_time != "year":
-            self.prorata = True
+    @api.depends("method_time")
+    def _compute_prorrata(self):
+        for profile in self:
+            if profile.method_time != "year":
+                profile.prorata = True
 
     @api.model
     def create(self, vals):
