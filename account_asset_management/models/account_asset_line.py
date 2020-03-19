@@ -63,6 +63,7 @@ class AccountAssetLine(models.Model):
 
     @api.depends("amount", "previous_id", "type")
     def _compute_values(self):
+        processed_lines = self.browse()
         dlines = self
         if self.env.context.get("no_compute_asset_line_ids"):
             # skip compute for lines in unlink
@@ -93,6 +94,11 @@ class AccountAssetLine(models.Model):
                     remaining_value -= dl.amount
                 dl.depreciated_value = depreciated_value
                 dl.remaining_value = remaining_value
+                processed_lines |= dl
+        # Set unprocessed lines values
+        for line in self - processed_lines:
+            line.depreciated_value = 0.0
+            line.remaining_value = 0.0
 
     @api.depends("move_id")
     def _compute_move_check(self):
