@@ -20,25 +20,25 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:69
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "AR/AP netting"
 msgstr "Kred/Deb-Verrechnung"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:41
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries must have a receivable or payable account"
 msgstr "Alle Posten müssen ein Kreditoren- oder Debitorenkonto aufweisen"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:44
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "All entries mustn't been reconciled"
 msgstr "Kein Posten darf ausgeglichen sein"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:53
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid ""
 "All entries should have a partner and the partner must be the same for all."
@@ -117,7 +117,7 @@ msgid "Move Line"
 msgstr "Buchung"
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:47
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid ""
 "The 'Compensate' function is intended to balance operations on different "
@@ -147,12 +147,12 @@ msgstr ""
 "Partner ergibt sich folgender Saldo:"
 
 #. module: account_netting
-#: selection:account.move.make.netting,balance_type:0
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__pay
 msgid "To pay"
 msgstr "Zu zahlen"
 
 #. module: account_netting
-#: selection:account.move.make.netting,balance_type:0
+#: model:ir.model.fields.selection,name:account_netting.selection__account_move_make_netting__balance_type__receive
 msgid "To receive"
 msgstr "Zu erhalten"
 
@@ -162,7 +162,7 @@ msgid "Wizard to generate account moves for netting"
 msgstr ""
 
 #. module: account_netting
-#: code:addons/account_netting/wizards/account_move_make_netting.py:35
+#: code:addons/account_netting/wizards/account_move_make_netting.py:0
 #, python-format
 msgid "You should compensate at least 2 journal entries."
 msgstr "Sie müssen mindestens 2 Journalposten kompensieren."
