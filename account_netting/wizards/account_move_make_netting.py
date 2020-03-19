@@ -17,7 +17,7 @@ class AccountMoveMakeNetting(models.TransientModel):
     move_line_ids = fields.Many2many(comodel_name="account.move.line",)
     balance = fields.Float(readonly=True,)
     balance_type = fields.Selection(
-        selection=[("pay", "To pay"), ("receive", "To receive"),], readonly=True,
+        selection=[("pay", "To pay"), ("receive", "To receive")], readonly=True,
     )
 
     @api.model
@@ -54,7 +54,7 @@ class AccountMoveMakeNetting(models.TransientModel):
                     "be the same for all."
                 )
             )
-        res = super(AccountMoveMakeNetting, self).default_get(fields_list)
+        res = super().default_get(fields_list)
         res["move_line_ids"] = [(6, 0, move_lines.ids)]
         debit_move_lines_debit = move_lines.filtered("debit")
         credit_move_lines_debit = move_lines.filtered("credit")
@@ -69,7 +69,7 @@ class AccountMoveMakeNetting(models.TransientModel):
         self.ensure_one()
         # Create account move
         move = self.env["account.move"].create(
-            {"ref": _("AR/AP netting"), "journal_id": self.journal_id.id,}
+            {"ref": _("AR/AP netting"), "journal_id": self.journal_id.id}
         )
         # Group amounts by account
         account_groups = self.move_line_ids.read_group(

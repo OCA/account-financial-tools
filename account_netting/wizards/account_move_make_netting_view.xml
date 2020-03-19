@@ -3,11 +3,9 @@
     <act_window
         name="Compensate"
         res_model="account.move.make.netting"
-        src_model="account.move.line"
+        binding_model="account.move.line"
         view_mode="form"
         target="new"
-        key2="client_action_multi"
-        multi="True"
         id="act_account_move_make_netting"
     />
     <record id="view_account_move_make_netting_form" model="ir.ui.view">
