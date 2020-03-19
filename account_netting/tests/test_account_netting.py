@@ -9,16 +9,10 @@ class TestAccountNetting(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestAccountNetting, cls).setUpClass()
-        cls.partner = cls.env["res.partner"].create(
-            {"supplier": True, "customer": True, "name": "Supplier/Customer",}
-        )
-        cls.partner1 = cls.env["res.partner"].create(
-            {"supplier": True, "customer": True, "name": "Supplier/Customer 1",}
-        )
         res_users_account_manager = cls.env.ref("account.group_account_manager")
         partner_manager = cls.env.ref("base.group_partner_manager")
         cls.env.user.write(
-            {"groups_id": [(6, 0, [res_users_account_manager.id, partner_manager.id])],}
+            {"groups_id": [(6, 0, [res_users_account_manager.id, partner_manager.id])]}
         )
         # only adviser can create an account
         cls.account_receivable = cls.env["account.account"].create(
@@ -57,21 +51,34 @@ class TestAccountNetting(common.SavepointCase):
             ],
             limit=1,
         )
+        cls.partner = cls.env["res.partner"].create(
+            {
+                "name": "Supplier/Customer",
+                "property_account_receivable_id": cls.account_receivable.id,
+                "property_account_payable_id": cls.account_payable.id,
+            }
+        )
+        cls.partner1 = cls.env["res.partner"].create(
+            {
+                "name": "Supplier/Customer 1",
+                "property_account_receivable_id": cls.account_receivable.id,
+                "property_account_payable_id": cls.account_payable.id,
+            }
+        )
         cls.journal = cls.env["account.journal"].create(
-            {"name": "Test sale journal", "type": "sale", "code": "TEST",}
+            {"name": "Test sale journal", "type": "sale", "code": "TEST"}
         )
         cls.expenses_journal = cls.env["account.journal"].create(
-            {"name": "Test expense journal", "type": "purchase", "code": "EXP",}
+            {"name": "Test expense journal", "type": "purchase", "code": "EXP"}
         )
         cls.miscellaneous_journal = cls.env["account.journal"].create(
-            {"name": "Miscellaneus journal", "type": "general", "code": "OTHER",}
+            {"name": "Miscellaneus journal", "type": "general", "code": "OTHER"}
         )
-        cls.customer_invoice = cls.env["account.invoice"].create(
+        cls.customer_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.journal.id,
                 "type": "out_invoice",
                 "partner_id": cls.partner.id,
-                "account_id": cls.account_receivable.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -85,17 +92,16 @@ class TestAccountNetting(common.SavepointCase):
                 ],
             }
         )
-        cls.customer_invoice.action_invoice_open()
-        customer_move = cls.customer_invoice.move_id
+        cls.customer_invoice.action_post()
+        customer_move = cls.customer_invoice
         cls.move_line_1 = customer_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_receivable
         )
-        cls.supplier_invoice = cls.env["account.invoice"].create(
+        cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
                 "type": "in_invoice",
                 "partner_id": cls.partner.id,
-                "account_id": cls.account_payable.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -109,20 +115,19 @@ class TestAccountNetting(common.SavepointCase):
                 ],
             }
         )
-        cls.supplier_invoice.action_invoice_open()
-        supplier_move = cls.supplier_invoice.move_id
+        cls.supplier_invoice.action_post()
+        supplier_move = cls.supplier_invoice
         cls.move_line_2 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
         cls.move_line_3 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_expense
         )
-        cls.supplier_invoice = cls.env["account.invoice"].create(
+        cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
                 "type": "in_invoice",
                 "partner_id": cls.partner1.id,
-                "account_id": cls.account_payable.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -136,17 +141,16 @@ class TestAccountNetting(common.SavepointCase):
                 ],
             }
         )
-        cls.supplier_invoice.action_invoice_open()
-        supplier_move = cls.supplier_invoice.move_id
+        cls.supplier_invoice.action_post()
+        supplier_move = cls.supplier_invoice
         cls.move_line_4 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
-        cls.supplier_invoice = cls.env["account.invoice"].create(
+        cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
                 "type": "in_refund",
                 "partner_id": cls.partner1.id,
-                "account_id": cls.account_payable.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -160,17 +164,16 @@ class TestAccountNetting(common.SavepointCase):
                 ],
             }
         )
-        cls.supplier_invoice.action_invoice_open()
-        supplier_move = cls.supplier_invoice.move_id
+        cls.supplier_invoice.action_post()
+        supplier_move = cls.supplier_invoice
         cls.move_line_5 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
-        cls.supplier_invoice = cls.env["account.invoice"].create(
+        cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
                 "type": "in_refund",
                 "partner_id": cls.partner1.id,
-                "account_id": cls.account_payable.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -184,8 +187,8 @@ class TestAccountNetting(common.SavepointCase):
                 ],
             }
         )
-        cls.supplier_invoice.action_invoice_open()
-        supplier_move = cls.supplier_invoice.move_id
+        cls.supplier_invoice.action_post()
+        supplier_move = cls.supplier_invoice
         cls.move_line_6 = supplier_move.line_ids.filtered(
             lambda x: x.account_id == cls.account_payable
         )
