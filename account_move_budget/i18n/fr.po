@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_budget
+# 	* account_move_budget
 #
 msgid ""
 msgstr ""
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: account_move_budget
-#: code:addons/account_move_budget/models/account_move_budget.py:64
+#: code:addons/account_move_budget/models/account_move_budget.py:0
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (copie)"
@@ -52,6 +52,11 @@ msgstr "Action requise"
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_ids
 msgid "Activities"
 msgstr "Activités"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_state
@@ -94,7 +99,7 @@ msgid "Cancel"
 msgstr "Annuler"
 
 #. module: account_move_budget
-#: selection:account.move.budget,state:0
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__cancelled
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -115,7 +120,7 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 #. module: account_move_budget
-#: selection:account.move.budget,state:0
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__confirmed
 msgid "Confirmed"
 msgstr "Confirmé"
 
@@ -163,7 +168,7 @@ msgid "Display Name"
 msgstr "Nom d'affichage"
 
 #. module: account_move_budget
-#: selection:account.move.budget,state:0
+#: model:ir.model.fields.selection,name:account_move_budget.selection__account_move_budget__state__draft
 msgid "Draft"
 msgstr "Brouillon"
 
@@ -194,17 +199,24 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_move_budget
-#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_unread
-msgid "If checked new messages require your attention."
-msgstr "Si coché, de nouveaux messages requièrent votre attention."
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: account_move_budget
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_needaction
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Si coché, de nouveaux messages requièrent votre attention."
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_error
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si coché, des messages ont un problème de livraison."
 
@@ -284,7 +296,9 @@ msgstr "Nombre d'actions"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error_counter
-msgid "Number of error"
+#, fuzzy
+#| msgid "Number of error"
+msgid "Number of errors"
 msgstr "Nombre d'erreurs"
 
 #. module: account_move_budget
@@ -303,24 +317,21 @@ msgid "Number of unread messages"
 msgstr "Nombre de messages non lus"
 
 #. module: account_move_budget
-#: selection:account.move.budget,activity_state:0
-msgid "Overdue"
-msgstr "En retard"
-
-#. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__partner_id
 msgid "Partner"
 msgstr "Partenaire"
 
 #. module: account_move_budget
-#: selection:account.move.budget,activity_state:0
-msgid "Planned"
-msgstr "Planifiée"
-
-#. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__activity_user_id
 msgid "Responsible User"
 msgstr "Utilisateur responsable"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_sms_error
+#, fuzzy
+#| msgid "Message Delivery error"
+msgid "SMS Delivery error"
+msgstr "Message d'erreur de livraison"
 
 #. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.account_move_budget_form_view
@@ -334,7 +345,8 @@ msgstr "État"
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
@@ -346,13 +358,15 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__balance
-msgid "Technical field holding the debit - credit in order to open meaningful graph views from reports"
+msgid ""
+"Technical field holding the debit - credit in order to open meaningful graph "
+"views from reports"
 msgstr ""
 "Champ technique qui enregistre débit - crédit de sorte à avoir des "
 "représentations graphiques cohérentes à partir des rapports"
 
 #. module: account_move_budget
-#: code:addons/account_move_budget/models/account_move_budget_line.py:86
+#: code:addons/account_move_budget/models/account_move_budget_line.py:0
 #, python-format
 msgid "The date must be within the budget period."
 msgstr "La date doit faire partie de la période du budget."
@@ -363,9 +377,9 @@ msgid "To Date"
 msgstr "jusqu'au"
 
 #. module: account_move_budget
-#: selection:account.move.budget,activity_state:0
-msgid "Today"
-msgstr "Aujourd'hui"
+#: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_unread
@@ -391,3 +405,15 @@ msgstr "Messages du site web"
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__website_message_ids
 msgid "Website communication history"
 msgstr "Historique de la communication du site web"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Si coché, de nouveaux messages requièrent votre attention."
+
+#~ msgid "Overdue"
+#~ msgstr "En retard"
+
+#~ msgid "Planned"
+#~ msgstr "Planifiée"
+
+#~ msgid "Today"
+#~ msgstr "Aujourd'hui"
