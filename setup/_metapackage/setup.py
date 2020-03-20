@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo12-addon-account_invoice_constraint_chronology',
         'odoo12-addon-account_invoice_currency',
         'odoo12-addon-account_lock_date_update',
+        'odoo12-addon-account_lock_to_date',
         'odoo12-addon-account_menu',
         'odoo12-addon-account_move_budget',
         'odoo12-addon-account_move_fiscal_month',
