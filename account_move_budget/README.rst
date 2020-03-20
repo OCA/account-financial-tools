@@ -64,12 +64,12 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* ForgeFlow, S.L. (https://www.eficent.com)
+* ForgeFlow, S.L. (https://www.forgeflow.com)
   * Hector Villarreal <hector.villarreal@forgeflow.com>
   * Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
 
