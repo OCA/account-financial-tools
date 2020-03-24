@@ -17,6 +17,7 @@ class AccountInvoice(models.Model):
             ('state', 'not in', ['open',
                                  'paid',
                                  'cancel',
+                                 'in_payment',
                                  'proforma',
                                  'proforma2']),
             ('date_invoice', '!=', False),
@@ -27,7 +28,7 @@ class AccountInvoice(models.Model):
     @api.model
     def _prepare_later_invoices_domain(self, invoice):
         return [
-            ('state', 'in', ['open', 'paid']),
+            ('state', 'in', ['open', 'in_payment', 'paid']),
             ('date_invoice', '>', invoice.date_invoice),
             ('journal_id', '=', invoice.journal_id.id),
         ]
