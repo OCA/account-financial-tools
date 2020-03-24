@@ -775,6 +775,15 @@ msgstr "wizard.update.charts.accounts"
 msgid "Wizard completed"
 msgstr "Asistente completado"
 
+#. module: account_chart_update
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:0
+#, python-format
+msgid ""
+"You have at least one parent tax template (%s) whose children taxes are not "
+"going to be created. Aborting as this will provoke an infinite loop. Please "
+"check if children have been matched, but not the parent one."
+msgstr ""
+
 #~ msgid ""
 #~ "No. of digits to use for account code. Make sure it is the same number as "
 #~ "existing accounts."
