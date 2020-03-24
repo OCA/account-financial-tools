@@ -107,7 +107,7 @@ msgid "Create/Update"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:850
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:859
 #, python-format
 msgid "Created account %s."
 msgstr ""
@@ -125,7 +125,7 @@ msgid "Created by"
 msgstr "Sukūrė"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:955
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:964
 #, python-format
 msgid "Created fiscal position %s."
 msgstr ""
@@ -143,13 +143,13 @@ msgid "Created on"
 msgstr "Sukurta"
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:807
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:815
 #, python-format
 msgid "Created tax %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:813
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:821
 #, python-format
 msgid "Deactivated tax %s."
 msgstr ""
@@ -186,13 +186,13 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:859
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:868
 #, python-format
 msgid "Exception creating account %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:889
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:898
 #, python-format
 msgid "Exception writing account %s."
 msgstr ""
@@ -378,15 +378,15 @@ msgid "Messages and Errors"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:683
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:729
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:767
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:692
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:739
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:778
 #, python-format
 msgid "Missing XML-ID."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:674
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:682
 #, python-format
 msgid "Name or description not found."
 msgstr ""
@@ -419,13 +419,13 @@ msgid "Next"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:721
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:730
 #, python-format
 msgid "No account found with this code."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:759
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:769
 #, python-format
 msgid "No fiscal position found with this name."
 msgstr ""
@@ -462,7 +462,7 @@ msgid "Other options"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:912
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:921
 #, python-format
 msgid "Post-updated tax %s."
 msgstr ""
@@ -577,7 +577,7 @@ msgid ""
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:705
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:714
 #, python-format
 msgid "To deactivate: not in the template"
 msgstr ""
@@ -641,13 +641,13 @@ msgid "Update taxes"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:872
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:881
 #, python-format
 msgid "Updated account %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:879
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:888
 #, python-format
 msgid "Updated account %s. (Recreated XML-ID)"
 msgstr ""
@@ -658,13 +658,13 @@ msgid "Updated accounts"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:961
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:970
 #, python-format
 msgid "Updated fiscal position %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:967
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:977
 #, python-format
 msgid "Updated fiscal position %s. (Recreated XML-ID)"
 msgstr ""
@@ -675,13 +675,13 @@ msgid "Updated fiscal positions"
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:821
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:829
 #, python-format
 msgid "Updated tax %s."
 msgstr ""
 
 #. module: account_chart_update
-#: code:addons/account_chart_update/wizard/wizard_chart_update.py:824
+#: code:addons/account_chart_update/wizard/wizard_chart_update.py:833
 #, python-format
 msgid "Updated tax %s. (Recreated XML-IDs)"
 msgstr ""
