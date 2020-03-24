@@ -648,11 +648,19 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 result.append(_("Tax is disabled."))
         return "\n".join(result)
 
-    def missing_xml_id(self, real_obj):
-        return not self.env['ir.model.data'].search([
+    @tools.ormcache("self", "template", "real_obj")
+    def missing_xml_id(self, template, real_obj):
+        ir_model_data = self.env['ir.model.data']
+        template_xmlid = ir_model_data.search([
+            ('model', '=', template._name),
+            ('res_id', '=', template.id),
+        ])
+        new_xml_id = "%d_%s" % (self.company_id.id, template_xmlid.name)
+        return not ir_model_data.search([
             ('res_id', '=', real_obj.id),
             ('model', '=', real_obj._name),
-            ('module', '!=', '__export__'),
+            ('module', '=', template_xmlid.module),
+            ('name', '=', new_xml_id),
         ])
 
     @api.multi
@@ -679,7 +687,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 tax = self.env['account.tax'].browse(tax_id)
                 notes = self.diff_notes(template, tax)
 
-                if self.recreate_xml_ids and self.missing_xml_id(tax):
+                if (self.recreate_xml_ids and
+                        self.missing_xml_id(template, tax)):
                     notes += (notes and "\n" or "") + _("Missing XML-ID.")
 
                 if notes:
@@ -725,7 +734,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 account = self.env['account.account'].browse(account_id)
                 notes = self.diff_notes(template, account)
 
-                if self.recreate_xml_ids and self.missing_xml_id(account):
+                if (self.recreate_xml_ids and
+                        self.missing_xml_id(template, account)):
                     notes += (notes and "\n" or "") + _("Missing XML-ID.")
 
                 if notes:
@@ -763,7 +773,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 fp = self.env['account.fiscal.position'].browse(fp_id)
                 notes = self.diff_notes(template, fp)
 
-                if self.recreate_xml_ids and self.missing_xml_id(fp):
+                if (self.recreate_xml_ids and
+                        self.missing_xml_id(template, fp)):
                     notes += (notes and "\n" or "") + _("Missing XML-ID.")
 
                 if notes:
@@ -783,13 +794,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             ('res_id', '=', template.id),
         ])
         new_xml_id = "%d_%s" % (self.company_id.id, template_xmlid.name)
-
-        real_xmlid = ir_model_data.search([
+        ir_model_data.search([
             ('model', '=', real_obj._name),
             ('res_id', '=', real_obj.id),
-        ], limit=1)
-        if real_xmlid:
-            real_xmlid.unlink()
+        ]).unlink()
         template_xmlid.copy({
             'model': real_obj._name,
             'res_id': real_obj.id,
@@ -819,7 +827,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         continue
                     tax[key] = value
                     _logger.info(_("Updated tax %s."), "'%s'" % template.name)
-                if self.recreate_xml_ids and self.missing_xml_id(tax):
+                if (self.recreate_xml_ids and
+                        self.missing_xml_id(template, tax)):
                     self.recreate_xml_id(template, tax)
                     _logger.info(_("Updated tax %s. (Recreated XML-IDs)"),
                                  "'%s'" % template.name)
@@ -872,8 +881,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                                 _("Updated account %s."),
                                 "'%s - %s'" % (account.code, account.name),
                             )
-                        if self.recreate_xml_ids \
-                                and self.missing_xml_id(account):
+                        if (self.recreate_xml_ids
+                                and self.missing_xml_id(template, account)):
                             self.recreate_xml_id(template, account)
                             _logger.info(
                                 _("Updated account %s. (Recreated XML-ID)"),
@@ -961,7 +970,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     _logger.info(_("Updated fiscal position %s."),
                                  "'%s'" % template.name)
 
-                if self.recreate_xml_ids and self.missing_xml_id(fp):
+                if (self.recreate_xml_ids and
+                        self.missing_xml_id(template, fp)):
                     self.recreate_xml_id(template, fp)
                     _logger.info(
                         _("Updated fiscal position %s. (Recreated XML-ID)"),
