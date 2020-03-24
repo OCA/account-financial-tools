@@ -6,29 +6,24 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Account Check Deposit',
-    'version': '12.0.1.0.0',
-    'category': 'Accounting',
-    'license': 'AGPL-3',
-    'summary': 'Manage deposit of checks to the bank',
-    'author': "Odoo Community Association (OCA),"
-              "Akretion,"
-              "Tecnativa",
-    'website': 'https://github.com/OCA/account-financial-tools/tree/12.0/'
-               'account_check_deposit',
-    'depends': [
-        'account',
+    "name": "Account Check Deposit",
+    "version": "13.0.1.0.0",
+    "category": "Accounting",
+    "license": "AGPL-3",
+    "summary": "Manage deposit of checks to the bank",
+    "author": "Akretion, Tecnativa, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "depends": ["account"],
+    "development_status": "Mature",
+    "data": [
+        "security/ir.model.access.csv",
+        "security/check_deposit_security.xml",
+        "data/sequence.xml",
+        "views/account_deposit_view.xml",
+        "views/account_move_line_view.xml",
+        "views/res_config_settings_views.xml",
+        "report/report.xml",
+        "report/report_checkdeposit.xml",
     ],
-    'development_status': 'Mature',
-    'data': [
-        'security/ir.model.access.csv',
-        'security/check_deposit_security.xml',
-        'data/sequence.xml',
-        'views/account_deposit_view.xml',
-        'views/account_move_line_view.xml',
-        'views/res_config_settings_views.xml',
-        'report/report.xml',
-        'report/report_checkdeposit.xml',
-    ],
-    'installable': True,
+    "installable": True,
 }
