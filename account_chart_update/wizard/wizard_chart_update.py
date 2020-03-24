@@ -347,7 +347,6 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     % parent.tax_id.name
                 )
 
-    @api.multi
     def action_update_records(self):
         """Action that creates/updates/deletes the selected elements."""
         self._check_consistency()
