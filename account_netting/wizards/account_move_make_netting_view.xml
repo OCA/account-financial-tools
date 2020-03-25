@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <act_window
+        name="Compensate"
+        res_model="account.move.make.netting"
+        binding_model="account.move.line"
+        view_mode="form"
+        target="new"
+        id="act_account_move_make_netting"
+    />
+    <record id="view_account_move_make_netting_form" model="ir.ui.view">
+        <field name="name">Compensate entries</field>
+        <field name="model">account.move.make.netting</field>
+        <field name="arch" type="xml">
+            <form string="Compensate entries">
+                <p
+                >This operation will generate account entries that are counterpart of the receivable/payable accounts selected, and reconcile each other, letting this balance in the partner.</p>
+                <group>
+                    <field name="balance" />
+                    <field name="balance_type" />
+                    <field name="journal_id" />
+                </group>
+                <footer>
+                    <button
+                        name="button_compensate"
+                        string="Compensate"
+                        type="object"
+                        default_focus="1"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
