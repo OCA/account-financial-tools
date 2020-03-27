@@ -38,10 +38,9 @@ class ReverseAccountDocument(models.TransientModel):
                     res["journal_id"] = journal.reversal_journal_id.id
         return res
 
-    @api.multi
     def action_cancel(self):
         model = self._context.get("active_model")
         active_ids = self._context.get("active_ids")
         documents = self.env[model].browse(active_ids)
-        documents.action_document_reversal(self.date, self.journal_id)
+        documents.action_document_reversal(self.date, self.journal_id.id)
         return {"type": "ir.actions.act_window_close"}
