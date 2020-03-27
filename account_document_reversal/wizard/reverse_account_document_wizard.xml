@@ -37,7 +37,6 @@
         <record id="action_view_reverse_account_document" model="ir.actions.act_window">
             <field name="name">Document Cancel</field>
             <field name="res_model">reverse.account.document</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_reverse_account_document" />
             <field name="target">new</field>
