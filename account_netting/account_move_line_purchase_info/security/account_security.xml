@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_account_move_purchase_info" model="res.groups">
+        <field name="name">Purchase info in Journal Items</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="users" eval="[(4, ref('base.user_admin'))]" />
+    </record>
+</odoo>
