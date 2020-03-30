@@ -1,0 +1,9 @@
+<odoo noupdate="1">
+
+    <record id="payment_intransit_rule" model="ir.rule">
+        <field name="name">Payment Intransit multi-company</field>
+        <field name="model_id" ref="model_account_payment_intransit"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'child_of', [user.company_id.id])]</field>
+    </record>
+
+</odoo>
