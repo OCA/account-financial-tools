@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-04-02 10:44+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,28 +15,29 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_account_template
 msgid "Account Templates"
-msgstr ""
+msgstr "Predloge konta"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_chart_template
 msgid "Chart of Accounts Templates"
-msgstr ""
+msgstr "Predloge kontnega plana"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
-msgstr ""
+msgstr "Predloge fiskalne pozicije"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_tax_template
 msgid "Tax Templates"
-msgstr ""
+msgstr "Predloge davka"
 
 #. module: account_coa_menu
 #: model:ir.ui.menu,name:account_coa_menu.menu_account_coa_settings
 msgid "Templates"
-msgstr ""
+msgstr "Predloge"
