@@ -135,7 +135,7 @@ msgid "Debit"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/account_move_template_run.py:90
+#: code:addons/account_move_template/wizard/account_move_template_run.py:91
 #, python-format
 msgid "Debit and credit of all lines are null."
 msgstr ""

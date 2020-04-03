@@ -134,7 +134,7 @@ msgid "Debit"
 msgstr "Débito"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/account_move_template_run.py:90
+#: code:addons/account_move_template/wizard/account_move_template_run.py:91
 #, python-format
 msgid "Debit and credit of all lines are null."
 msgstr "Débito e Crédito de todas as linhas são nulos."
@@ -439,8 +439,8 @@ msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
 msgstr ""
-"Pode referenciar outras linhas usando a sua sequência numérica p.ex. "
-"<i>L1</i> para linha com sequência = 1. Exemplos:"
+"Pode referenciar outras linhas usando a sua sequência numérica p.ex. <i>L1</"
+"i> para linha com sequência = 1. Exemplos:"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:62
