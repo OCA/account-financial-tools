@@ -84,11 +84,11 @@ class AccountMoveTemplateRun(models.TransientModel):
         for wizard_line in self.line_ids:
             sequence2amount[wizard_line.sequence] = wizard_line.amount
         prec = self.company_id.currency_id.rounding
+        self.template_id.compute_lines(sequence2amount)
         if all([
                 float_is_zero(x, precision_rounding=prec)
                 for x in sequence2amount.values()]):
             raise UserError(_("Debit and credit of all lines are null."))
-        self.template_id.compute_lines(sequence2amount)
         move_vals = self._prepare_move()
         for line in self.template_id.line_ids:
             amount = sequence2amount[line.sequence]
