@@ -25,6 +25,16 @@ class CreditControlRun(models.Model):
     def _get_policies(self):
         return self.env['credit.control.policy'].search([])
 
+    def _get_default_company(self):
+        company_obj = self.env['res.company']
+        return company_obj.browse(company_obj._company_default_get(
+            'credit.control.run').id)
+
+    company_id = fields.Many2one(
+        'res.company', string='Company', required=True,
+        default=_get_default_company
+    )
+
     policy_ids = fields.Many2many(
         'credit.control.policy',
         rel="credit_run_policy_rel",

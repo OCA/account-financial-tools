@@ -15,6 +15,7 @@
  'website': 'https://www.camptocamp.com',
  'data': [
      "security/res_groups.xml",
+     "security/credit_control_policy_security.xml",
      # Reports
      "report/report.xml",
      "report/report_credit_control_summary.xml",
