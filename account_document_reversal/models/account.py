@@ -8,7 +8,7 @@ class AccountJournal(models.Model):
 
     cancel_method = fields.Selection(
         [
-            ("normal", "Normal (remove journal entries)"),
+            ("normal", "Normal (delete journal entries if exists)"),
             ("reversal", "Reversal (create reversed journal entries)"),
         ],
         string="Cancel Method",
@@ -30,6 +30,9 @@ class AccountJournal(models.Model):
         help="Journal in this field will show in reversal wizard as default",
     )
 
+    @api.multi
     def _compute_is_cancel_reversal(self):
         for rec in self:
-            rec.is_cancel_reversal = rec.cancel_method == "reversal"
+            rec.is_cancel_reversal = (
+                rec.update_posted and rec.cancel_method == "reversal"
+            )
