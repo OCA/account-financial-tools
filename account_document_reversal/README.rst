@@ -71,7 +71,6 @@ Authors
 ~~~~~~~
 
 * Ecosoft
-* Eficent
 
 Contributors
 ~~~~~~~~~~~~
