@@ -445,11 +445,8 @@ class TestAssetManagement(SavepointCase):
         self.assertTrue(len(invoice.invoice_line_ids) > 0)
         line = invoice.invoice_line_ids[0]
         self.assertTrue(line.price_unit > 0.0)
-        move_form = Form(invoice)
-        with move_form.invoice_line_ids.edit(0) as line_form:
-            line_form.quantity = 2
-            line_form.asset_profile_id = asset_profile
-        invoice = move_form.save()
+        line.quantity = 2
+        line.asset_profile_id = asset_profile
         invoice.post()
         # I get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
