@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-28 10:25+0000\n"
-"PO-Revision-Date: 2020-04-08 18:19+0000\n"
+"PO-Revision-Date: 2020-04-09 10:19+0000\n"
 "Last-Translator: Simon Mas <simon.mas@druidoo.io>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -285,9 +285,8 @@ msgstr "Nombre de chèques :"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_post_move
-#, fuzzy
 msgid "Post Move for Check Deposits"
-msgstr "Remises de chèques"
+msgstr "Poster Mouvement pour Remises de chèques"
 
 #. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.account_check_deposit_view_form
