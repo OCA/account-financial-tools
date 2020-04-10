@@ -9,15 +9,12 @@ from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 
 class TestPayment(AccountingTestCase):
     def setUp(self):
-        super(TestPayment, self).setUp()
-        self.register_payments_model = self.env["account.register.payments"]
+        super().setUp()
+        self.register_payments_model = self.env["account.payment.register"]
         self.payment_model = self.env["account.payment"]
         self.journal_model = self.env["account.journal"]
         self.account_model = self.env["account.account"]
-        self.invoice_model = self.env["account.invoice"]
-        self.invoice_line_model = self.env["account.invoice.line"]
-        self.acc_bank_stmt_model = self.env["account.bank.statement"]
-        self.acc_bank_stmt_line_model = self.env["account.bank.statement.line"]
+        self.move_model = self.env["account.move"]
         self.res_partner_bank_model = self.env["res.partner.bank"]
         self.check_deposit_model = self.env["account.check.deposit"]
 
@@ -131,29 +128,27 @@ class TestPayment(AccountingTestCase):
 
     def create_invoice(self, amount=100, inv_type="out_invoice", currency_id=None):
         """ Returns an open invoice """
-        invoice = self.invoice_model.create(
+        invoice = self.move_model.create(
             {
+                "type": inv_type,
                 "partner_id": self.partner_agrolait.id,
                 "currency_id": currency_id,
-                "name": inv_type == "out_invoice"
-                and "invoice to client"
-                or "invoice to supplier",
-                "account_id": self.account_receivable.id,
-                "type": inv_type,
-                "date_invoice": time.strftime("%Y-%m-%d"),
+                "invoice_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "quantity": 1,
+                            "price_unit": amount,
+                        },
+                    )
+                ],
             }
         )
-        self.invoice_line_model.create(
-            {
-                "product_id": self.product.id,
-                "quantity": 1,
-                "price_unit": amount,
-                "invoice_id": invoice.id,
-                "name": "something",
-                "account_id": self.account_revenue.id,
-            }
-        )
-        invoice.action_invoice_open()
+        invoice.post()
         return invoice
 
     def create_check_deposit(self, move_lines):
@@ -177,12 +172,13 @@ class TestPayment(AccountingTestCase):
         inv_1 = self.create_invoice(amount=100, currency_id=self.currency_eur_id)
         inv_2 = self.create_invoice(amount=200, currency_id=self.currency_eur_id)
 
-        ctx = {"active_model": "account.invoice", "active_ids": [inv_1.id, inv_2.id]}
+        ctx = {"active_model": "account.move", "active_ids": [inv_1.id, inv_2.id]}
         register_payments = self.register_payments_model.with_context(ctx).create(
             {
                 "payment_date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.check_journal.id,
                 "payment_method_id": self.payment_method_manual_in.id,
+                "group_payment": True,
             }
         )
         register_payments.create_payments()
@@ -190,8 +186,8 @@ class TestPayment(AccountingTestCase):
 
         self.assertAlmostEquals(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
-        self.assertEqual(inv_1.state, "paid")
-        self.assertEqual(inv_2.state, "paid")
+        self.assertEqual(inv_1.state, "posted")
+        self.assertEqual(inv_2.state, "posted")
 
         check_aml = payment.move_line_ids.filtered(
             lambda r: r.account_id == self.received_check_account_id
