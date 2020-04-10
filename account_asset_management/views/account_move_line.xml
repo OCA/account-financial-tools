@@ -9,6 +9,7 @@
       <field name="statement_id" position="after">
         <field name="asset_profile_id"/>
         <field name="asset_id"/>
+        <field name="asset_salvage_value"/>
       </field>
     </field>
   </record>

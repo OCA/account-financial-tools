@@ -39,6 +39,18 @@ class AccountAssetProfile(models.Model):
         comodel_name='account.account',
         domain=[('deprecated', '=', False)],
         string='Residual Value Account')
+    account_revaluation_reserve_id = fields.Many2one(
+        comodel_name='account.account',
+        domain=[('deprecated', '=', False)],
+        string='Revaluation reserve Account')
+    account_revenue_assessment_id = fields.Many2one(
+        comodel_name='account.account',
+        domain=[('deprecated', '=', False)],
+        string='Revenue from assessment Account')
+    account_expense_diminution_id = fields.Many2one(
+        comodel_name='account.account',
+        domain=[('deprecated', '=', False)],
+        string='Expense from diminution Account')
     journal_id = fields.Many2one(
         comodel_name='account.journal',
         domain=[('type', '=', 'general')],
@@ -51,6 +63,9 @@ class AccountAssetProfile(models.Model):
         comodel_name='account.asset',
         string='Parent Asset',
         domain=[('type', '=', 'view')])
+    category_id = fields.Many2one(
+        comodel_name='account.asset.category',
+        string='Asset Category')
     method = fields.Selection(
         selection=lambda self: self._selection_method(),
         string='Computation Method',
@@ -99,12 +114,22 @@ class AccountAssetProfile(models.Model):
              "of this profile when created by invoices.")
     asset_product_item = fields.Boolean(
         string='Create an asset by product item',
+        default=True,
         help="By default during the validation of an invoice, an asset "
              "is created by invoice line as long as an accounting entry is "
              "created by invoice line. "
              "With this setting, an accounting entry will be created by "
              "product item. So, there will be an asset by product item.")
+    get_posting_regime = fields.Char("Posting regime", compute="_compute_get_posting_regime")
     active = fields.Boolean(default=True)
+
+    @api.multi
+    def _compute_get_posting_regime(self):
+        country = self.env.user.partner_id.country_id.code
+        if country in self.env['account.asset.remove']._residual_value_regime_countries():
+            return 'residual_value'
+        else:
+            return 'gain_loss_on_sale'
 
     @api.model
     def _default_company_id(self):

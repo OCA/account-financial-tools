@@ -6,6 +6,12 @@
         <field name="model">account.account.tag</field>
         <field name="inherit_id" ref="account.account_tag_view_form"/>
         <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="parent_id"/>
+                <field name="color_picker"/>
+            </field>
             <xpath expr="//group" position="after">
                 <group>
                     <group id="aplicability">

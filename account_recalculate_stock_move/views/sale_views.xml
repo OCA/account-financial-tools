@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_get_account_moves"
+                        icon="fa-usd" class="oe_stat_button"
+                        string="Accounting Entries"
+                        type="object"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_pay']" position="inside">
+                <label for="account_move_inv_debit" string="Invoice: Debit/Credit"/>
+                <div>
+                    <field name="account_move_inv_debit" class="oe_inline" nolabel="1"/> /
+                    <field name="account_move_inv_credit" class="oe_inline" nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_order_form_inherit_sale_stock" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale_shipping']" position="inside">
+                <label for="account_move_pick_debit" string="Picking: Debit/Credit"/>
+                <div>
+                    <field name="account_move_pick_debit" class="oe_inline" nolabel="1"/> /
+                    <field name="account_move_pick_credit" class="oe_inline" nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

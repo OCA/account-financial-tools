@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="account_asset_category_search_view" model="ir.ui.view">
+            <field name="name">account.asset.category.search</field>
+            <field name="model">account.asset.category</field>
+            <field name="arch" type="xml">
+                <search string="Asset Categories">
+                    <field name="name" string="Asset Categories"/>
+                    <field name="parent_id"/>
+                    <field name="company_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="account_asset_category_form_view" model="ir.ui.view">
+            <field name="name">account.asset.category.form</field>
+            <field name="model">account.asset.category</field>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button"
+                                name="%(account_asset_action)d"
+                                icon="fa-th-list"
+                                type="action"
+                                context="{'search_default_category_id': active_id}">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_value"><field name="asset_count"/></span>
+                                    <span class="o_stat_text"> Assets</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="Category name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="e.g. Properties"/></h1>
+                        </div>
+                        <group name="first" col="2">
+                            <field name="parent_id" class="oe_inline"/>
+                            <field name="company_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="account_asset_category_list_view" model="ir.ui.view">
+            <field name="name">account.asset.category.list</field>
+            <field name="model">account.asset.category</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Asset Categories">
+                    <field name="display_name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="account_asset_category_action_form" model="ir.actions.act_window">
+            <field name="name">Asset Categories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.asset.category</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="account_asset_category_search_view"/>
+            <field name="view_id" ref="account_asset_category_list_view"/>
+        </record>
+    </data>
+</odoo>

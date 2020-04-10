@@ -11,9 +11,10 @@
     'license': 'AGPL-3',
     "depends": [
             'account',
+            'account_tax_fixes',
             ],
     'data': [
-            'views/account_view.xml'
-            ],
+            'views/account_view.xml',
+    ],
     'installable': True,
 }

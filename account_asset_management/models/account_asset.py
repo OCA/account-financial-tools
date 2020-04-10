@@ -27,6 +27,7 @@ class DummyFy(object):
 class AccountAsset(models.Model):
     _name = 'account.asset'
     _description = 'Asset'
+    _inherits = {'product.product': 'product_id', }
     _order = 'date_start desc, code, name'
     _parent_store = True
 
@@ -43,6 +44,11 @@ class AccountAsset(models.Model):
     code = fields.Char(
         string='Reference', size=32, readonly=True,
         states={'draft': [('readonly', False)]})
+    product_id = fields.Many2one('product.product', string='Base on Product', required=True, ondelete='cascade')
+    lot_id = fields.Many2one('stock.production.lot', 'Lot')
+    lot_name = fields.Char('Lot/Serial Number')
+    product_asset_ids = fields.Many2many("product.template", relation="asset_product_tmpl_rel", column1="asset_id", column2="product_tmpl_id", string="Linked to asset")
+    diff_purchase_value = fields.Float('Cost difference', compute="_compute_diff_purchase_value")
     purchase_value = fields.Float(
         string='Purchase Value', required=True, readonly=True,
         states={'draft': [('readonly', False)]},
@@ -77,6 +83,16 @@ class AccountAsset(models.Model):
     profile_id = fields.Many2one(
         comodel_name='account.asset.profile',
         string='Asset Profile',
+        change_default=True, readonly=True,
+        states={'draft': [('readonly', False)]})
+    tax_profile_id = fields.Many2one(
+        comodel_name='account.bg.asset.profile',
+        string='Tax Asset Profile',
+        change_default=True, readonly=True,
+        states={'draft': [('readonly', False)]})
+    category_id = fields.Many2one(
+        comodel_name='account.asset.category',
+        string='Asset Category',
         change_default=True, readonly=True,
         states={'draft': [('readonly', False)]})
     parent_id = fields.Many2one(
@@ -181,6 +197,15 @@ class AccountAsset(models.Model):
         inverse_name='asset_id',
         string='Depreciation Lines', copy=False,
         readonly=True, states={'draft': [('readonly', False)]})
+    depreciation_bg_line_ids = fields.One2many(
+        comodel_name='account.bg.asset.line',
+        inverse_name='asset_id',
+        string='BG Depreciation Lines', copy=False,
+        readonly=True, states={'draft': [('readonly', False)]})
+    depreciation_restatement_line_ids = fields.One2many(
+        comodel_name='account.asset.restatement.value',
+        inverse_name='asset_id',
+        string='Restatement Lines', copy=False)
     type = fields.Selection(
         selection=[('view', 'View'),
                    ('normal', 'Normal')],
@@ -207,6 +232,12 @@ class AccountAsset(models.Model):
     def _default_company_id(self):
         return self.env['res.company']._company_default_get('account.asset')
 
+    @api.depends('purchase_value', 'diff_purchase_value')
+    @api.multi
+    def _compute_diff_purchase_value(self):
+        for asset in self:
+            asset.diff_purchase_value = asset.purchase_value - asset.standard_price
+
     @api.multi
     def _compute_move_line_check(self):
         for asset in self:
@@ -226,6 +257,7 @@ class AccountAsset(models.Model):
             else:
                 asset.depreciation_base = \
                     asset.purchase_value - asset.salvage_value
+            asset.depreciation_base += self.env['account.asset.restatement.value'].get_restatement_value(['create'], asset.date_start, '<=', 'depreciation_base')
 
     @api.multi
     @api.depends('type', 'depreciation_base',
@@ -304,7 +336,7 @@ class AccountAsset(models.Model):
         profile = self.profile_id
         if profile:
             self.update({
-                'parent_id': profile.parent_id,
+                'category_id': profile.category_id,
                 'method': profile.method,
                 'method_number': profile.method_number,
                 'method_time': profile.method_time,
@@ -364,6 +396,8 @@ class AccountAsset(models.Model):
                 asset.compute_depreciation_board()
                 # extra context to avoid recursion
                 asset.with_context(asset_validate_from_write=True).validate()
+        if 'depreciation_restatement_line_ids' in vals:
+            self.recalculate()
         return res
 
     def _create_first_asset_line(self):
@@ -424,6 +458,45 @@ class AccountAsset(models.Model):
                 name = ' - '.join([asset.code, name])
             result.append((asset.id, name))
         return result
+
+    @api.multi
+    def recalculate(self):
+        # recalculate and save all restatement data
+        restatement_obj = self.env['account.asset.restatement.value']
+
+        if self.type == 'view':
+            self.depreciation_base = 0.0
+        elif self.method in ['linear-limit', 'degr-limit']:
+            self.depreciation_base = self.purchase_value
+        else:
+            self.depreciation_base = \
+                self.purchase_value - self.salvage_value
+        self.depreciation_base += restatement_obj.get_restatement_value(['create'], self.date_start, '<=', 'depreciation_base')
+        dlines = self.depreciation_line_ids
+        for dl in dlines.filtered(lambda l: l.type == 'create'):
+            dl.with_context(dict(self.env.context, allow_asset_line_update=True)).write({'amount': self.depreciation_base})
+        dlines = dlines.filtered(lambda l: l.type == 'depreciate')
+        dlines = dlines.sorted(key=lambda l: l.line_date)
+        depreciated_value = remaining_value = 0.0
+
+        for i, dl in enumerate(dlines):
+            if i == 0:
+                depreciation_base = dl.depreciation_base
+                depreciation_base += restatement_obj.get_restatement_value(['create'], dl.line_date, '<=',
+                                                      'depreciation_base')
+                depreciated_value = dl.previous_id \
+                    and (depreciation_base - dl.previous_id.remaining_value) \
+                    or 0.0
+                depreciated_value += restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
+                                                                            '<=', 'depreciated_value')
+                remaining_value = \
+                    depreciation_base - depreciated_value - dl.amount
+            else:
+                depreciated_value += dl.previous_id.amount + restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
+                                                                            '=', 'depreciated_value')
+                remaining_value -= dl.amount
+            dl.depreciated_value = depreciated_value
+            dl.remaining_value = remaining_value
 
     @api.multi
     def validate(self):
@@ -487,7 +560,10 @@ class AccountAsset(models.Model):
             y.update({'amount': x['amount'] + y['amount']})
             return y
 
-        line_obj = self.env['account.asset.line']
+        if self.env.context.get("bg_asset_line"):
+            line_obj = self.env['account.bg.asset.line']
+        else:
+            line_obj = self.env['account.asset.line']
         digits = self.env['decimal.precision'].precision_get('Account')
 
         for asset in self:

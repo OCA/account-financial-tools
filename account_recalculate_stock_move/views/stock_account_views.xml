@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_picking_form_inherit_re" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_moves"
+                            icon="fa-usd" class="oe_stat_button"
+                            string="Accounting Entries"
+                            type="object"/>
+                    <button name="rebuild_account_move"
+                                    icon="fa fa-book"
+                                    class="oe_stat_button"
+                                    string="Rebuild Acc. Entries"
+                                    type="object"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_form_inherit_re" model="ir.ui.view">
+            <field name="name">stock.move.form.inherit</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="has_account_move" invisible="1"/>
+                    <button name="rebuild_account_move"
+                                    icon="fa fa-book"
+                                    class="oe_stat_button"
+                                    string="Rebuild Acc. Entries"
+                                    type="object"
+                                    attrs="{'invisible': [('has_account_move', '=', True)]}"/>
+                </xpath>
+                <field name="date" position="after">
+                    <field name="accounting_date"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

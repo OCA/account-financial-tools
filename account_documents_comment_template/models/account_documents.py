@@ -24,4 +24,4 @@ class AccountDocuments(models.Model):
 class BaseCommentTemplate(models.Model):
     _inherit = "base.comment.template"
 
-    position = fields.Selection([('documents', 'Use in documents descriptions')])
+    position = fields.Selection(selection_add=[('documents', 'Use in documents descriptions')])

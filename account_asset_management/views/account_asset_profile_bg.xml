@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="account_bg_asset_profile_view_form" model="ir.ui.view">
+      <field name="name">account.bg.asset.profile.form</field>
+      <field name="model">account.bg.asset.profile</field>
+      <field name="arch" type="xml">
+        <form string="Asset profile">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+                <button name="toggle_active" type="object"
+                        class="oe_stat_button" icon="fa-archive">
+                    <field name="active" widget="boolean_button"
+                        options='{"terminology": "archive"}'/>
+                </button>
+            </div>
+            <group col="3">
+              <group>
+                <field name="name"/>
+                <field name="category_id" required="1"/>
+                <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+              </group>
+            </group>
+            <group>
+              <group string="Depreciation Method">
+                <field name="method"/>
+              </group>
+              <group string="Depreciation Dates">
+                <field name="method_percentage"
+                       attrs="{'invisible': [('method', '!=', 'percentage')]}"/>
+              </group>
+            </group>
+            <separator string="Notes"/>
+            <field name="note"/>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="account_account_bg_asset_profile_view_tree" model="ir.ui.view">
+      <field name="name">account.bg.asset.profile.tree</field>
+      <field name="model">account.bg.asset.profile</field>
+      <field name="arch" type="xml">
+        <tree string="Asset profile">
+          <field name="name"/>
+          <field name="method"/>
+          <field name="method_percentage"/>
+          <field name="company_id" groups="base.group_multi_company"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="account_account_bg_asset_profile_view_search" model="ir.ui.view">
+      <field name="name">account.bg.asset.profile.search</field>
+      <field name="model">account.bg.asset.profile</field>
+      <field name="arch" type="xml">
+        <search string="Search TAX Asset Profile">
+          <field name="name" string="Asset Profile"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="account_account_bg_asset_profile_action" model="ir.actions.act_window">
+      <field name="name">Tax Asset Profiles</field>
+      <field name="res_model">account.bg.asset.profile</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</odoo>

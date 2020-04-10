@@ -35,7 +35,7 @@ class IrActionsReport(models.Model):
 
 class AccountDocumentsType(models.Model):
     _name = "account.documents.type"
-    _description = "Global nomeclature for parce documents."
+    _description = "Global nomenclature for parce documents."
 
     active = fields.Boolean('Active', default=True,
             help="If the active field is set to False, it will allow you to hide the Type documents without removing it.")
@@ -48,12 +48,14 @@ class AccountDocumentsType(models.Model):
     display = fields.Boolean()
 
     def _get_domain(self, model, type, state):
-        model_id = self.env['ir.model'].search([('name', '=', model)])
+        model_id = self.env['ir.model'].search([('model', '=', model)])
         domain = [('model_id', '=', model_id.id), ('type', '=', type), ('state', '=', state)]
         return domain
 
     def get_document_type(self, model, type, state, field_name='print_name'):
-        type = self.search(self._get_domain(model, type, state))
+        domain = self._get_domain(model, type, state)
+        _logger.info("DOMAIN %s:%s" % (domain, model))
+        type = self.search(domain)
         return getattr(type, field_name)
 
         #return self.type == 'out_invoice' and self.state == 'draft' and _('Draft Invoice') or \

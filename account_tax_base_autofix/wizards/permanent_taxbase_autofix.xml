@@ -1,0 +1,33 @@
+<odoo>
+    <record id="permanent_taxbase_autofix_wizard_view_form" model="ir.ui.view">
+        <field name="name">permanent_taxbase_autofix_wizard.form</field>
+        <field name="model">permanent_taxbase_autofix_wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Check permanently entries for correct tax base">
+                <label string="All selected journal entries will be checked and fixed."/>
+                <group>
+                    <field name="check_taxbase"/>
+                    <field name="check_sign"/>
+                </group>
+                <footer>
+                    <button string="Check The Journal Entries" name="confirm_autofix" type="object" default_focus="1" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_taxbase_autofix" model="ir.actions.act_window">
+            <field name="name">Autofix tax base in Journal Entries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">permanent_taxbase_autofix_wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="permanent_taxbase_autofix_wizard_view_form"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">This wizard will autofix for tax base all journal entries selected.</field>
+            <field name="binding_model_id" ref="account.model_account_move" />
+        </record>
+</odoo>

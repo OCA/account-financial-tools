@@ -8,6 +8,7 @@
     <field name="arch" type="xml">
       <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
         <field name="asset_profile_id"/>
+        <field name="asset_salvage_value"/>
       </xpath>
     </field>
   </record>

@@ -32,11 +32,16 @@ class AccountAssetLine(models.Model):
         string='Depreciation Base',
         readonly=True,
     )
+    depreciation_restatement_base = fields.Float(
+        compute='_compute_depreciation_restatement_base',
+        string='Depreciation Restatement Base',
+        readonly=True,
+    )
     amount = fields.Float(
         string='Amount', digits=dp.get_precision('Account'),
         required=True)
     remaining_value = fields.Float(
-        compute='_compute_values',
+        compute='_compcomputeute_values',
         digits=dp.get_precision('Account'),
         string='Next Period Depreciation',
         store=True)
@@ -45,6 +50,11 @@ class AccountAssetLine(models.Model):
         digits=dp.get_precision('Account'),
         string='Amount Already Depreciated',
         store=True)
+    depreciation_restatement_value = fields.Float(
+        compute='_compute_depreciation_restatement_value',
+        string='Amount Restatement Depreciated',
+        readonly=True,
+    )
     line_date = fields.Date(string='Date', required=True)
     move_id = fields.Many2one(
         comodel_name='account.move',
@@ -67,6 +77,7 @@ class AccountAssetLine(models.Model):
     @api.depends('amount', 'previous_id', 'type')
     @api.multi
     def _compute_values(self):
+        restatement_obj = self.env['account.asset.restatement.value']
         dlines = self
         if self.env.context.get('no_compute_asset_line_ids'):
             # skip compute for lines in unlink
@@ -74,17 +85,23 @@ class AccountAssetLine(models.Model):
             dlines = self.filtered(lambda l: l.id not in exclude_ids)
         dlines = dlines.filtered(lambda l: l.type == 'depreciate')
         dlines = dlines.sorted(key=lambda l: l.line_date)
+        depreciated_value = remaining_value = 0.0
 
         for i, dl in enumerate(dlines):
             if i == 0:
                 depreciation_base = dl.depreciation_base
+                depreciation_base += restatement_obj.get_restatement_value(['create'], dl.line_date, '<=',
+                                                      'depreciation_base')
                 depreciated_value = dl.previous_id \
                     and (depreciation_base - dl.previous_id.remaining_value) \
                     or 0.0
+                depreciated_value += restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
+                                                                            '<=', 'depreciated_value')
                 remaining_value = \
                     depreciation_base - depreciated_value - dl.amount
             else:
-                depreciated_value += dl.previous_id.amount
+                depreciated_value += dl.previous_id.amount + restatement_obj.get_restatement_value(['restatement', 'diminution'], dl.line_date,
+                                                                            '=', 'depreciated_value')
                 remaining_value -= dl.amount
             dl.depreciated_value = depreciated_value
             dl.remaining_value = remaining_value
@@ -94,6 +111,20 @@ class AccountAssetLine(models.Model):
     def _compute_move_check(self):
         for line in self:
             line.move_check = bool(line.move_id)
+
+    @api.depends('line_date')
+    @api.multi
+    def _compute_depreciation_restatement_base(self):
+        restatement_obj = self.env['account.asset.restatement.value']
+        for asset_line in self:
+            asset_line.depreciation_restatement_base = restatement_obj.get_restatement_value(['restatement', 'diminution'], asset_line.line_date, '<=', 'depreciation_base')
+
+    @api.depends('line_date')
+    @api.multi
+    def _compute_depreciation_restatement_value(self):
+        restatement_obj = self.env['account.asset.restatement.value']
+        for asset_line in self:
+            asset_line.depreciation_restatement_value = restatement_obj.get_restatement_value(['restatement', 'diminution'], asset_line.line_date, '<=', 'depreciated_value')
 
     @api.onchange('amount')
     def _onchange_amount(self):
@@ -244,6 +275,10 @@ class AccountAssetLine(models.Model):
     @api.multi
     def open_move(self):
         self.ensure_one()
+        ids = [self.move_id.id]
+        if self.asset_id.depreciation_line_ids:
+            for line in self.asset_id.depreciation_restatement_line_ids.filtered(lambda l: l.type == 'create'):
+                ids.append(line.move_id.id)
         return {
             'name': _("Journal Entry"),
             'view_type': 'form',
@@ -252,7 +287,7 @@ class AccountAssetLine(models.Model):
             'view_id': False,
             'type': 'ir.actions.act_window',
             'context': self.env.context,
-            'domain': [('id', '=', self.move_id.id)],
+            'domain': [('id', 'in', ids)],
         }
 
     @api.multi

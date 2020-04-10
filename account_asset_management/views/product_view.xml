@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(account_asset_action)d" type="action"
+                        class="oe_stat_button"
+                        icon="fa fa-paperclip"
+                        context="{'default_product_id': active_id, 'search_default_product_id': active_id}">
+                        Assets
+                </button>
+            </xpath>
+            <field name="barcode" position="after">
+                <field name="account_asset_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -27,27 +27,43 @@
             <h1>
               <field name="name" class="oe_inline"/>
             </h1>
+            <label for="product_id" class="oe_edit_only"/>
+            <h2>
+              <field name="product_id" class="oe_inline"/>
+            </h2>
           </div>
-          <group colspan="4" col="4">
-            <field name="code"/>
-            <field name="parent_id"
-                   attrs="{'required': [('type', '=', 'normal')]}"/>
-            <field name="type"/>
-            <field name="company_id" widget="selection" groups="base.group_multi_company"/>
-            <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
-            <field name="move_line_check" invisible="1"/>
-            <newline/>
-            <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
-            <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
-            <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
-                   attrs="{'invisible': [('type', '=', 'view')]}"/>
+          <group>
+            <group>
+              <field name="code"/>
+              <field name="parent_id"/>
+            </group>
+            <group>
+              <field name="type"/>
+              <field name="company_id" widget="selection" groups="base.group_multi_company"/>
+              <field name="company_currency_id" groups="base.group_multi_currency" invisible="1"/>
+              <field name="move_line_check" invisible="1"/>
+            </group>
+            <group>
+              <field name="depreciation_base" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="value_depreciated" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <field name="value_residual" widget="monetary" options="{'currency_field': 'company_currency_id'}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+            </group>
+            <group>
+              <field name="lot_id" domain="[('product_id', '=', product_id)]" groups="stock.group_production_lot" context="{'default_product_id': product_id}"
+                     attrs="{'invisible': [('type', '=', 'view')]}"/>
+              <!-- <filed name="lot_name" groups="stock.group_production_lot"/> -->
+              <field name="product_asset_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'view')]}"/>
+            </group>
           </group>
           <notebook colspan="4" attrs="{'invisible': [('type', '=', 'view')]}">
             <page string="General">
               <group colspan="4" col="4">
                 <group>
+                  <field name="diff_purchase_value" invisible="1"/>
+                  <field name="standard_price" attrs="{'invisible': [('diff_purchase_value', '=', 0)]}" style="color: red;" readonly="1"/>
                   <field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"
                          attrs="{'readonly':['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"/>
                   <field name="date_buy"
@@ -63,9 +79,11 @@
               </group>
               <separator string="Other Information" colspan="4"/>
               <group colspan="4" col="4">
-                <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}"/>
+                <field name="profile_id" attrs="{'required': [('type', '=', 'normal')]}" context="{'default_company_id': company_id}" domain="[('company_id', '=', company_id)]"/>
+                <field name="category_id" attrs="{'required': [('type', '=', 'normal')]}" context="{'default_company_id': company_id}" domain="[('company_id', '=', company_id)]"/>
+                <field name="tax_profile_id" attrs="{'required': [('type', '=', 'normal')]}" context="{'default_company_id': company_id}" domain="[('company_id', '=', company_id)]"/>
                 <field name="partner_id"/>
-                <field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>
+                <field name="account_analytic_id" groups="analytic.group_analytic_accounting" context="{'default_company_id': company_id}" domain="[('company_id', '=', company_id)]"/>
               </group>
               <group colspan="4">
                 <group>
@@ -116,6 +134,7 @@
                     <group>
                       <field name="parent_state" invisible="1"/>
                       <field name="depreciation_base" invisible="1"/>
+                      <field name="depreciation_restatement_base" invisible="1"/>
                       <field name="type"/>
                       <field name="name"/>
                       <field name="amount" attrs="{'readonly': [('move_check', '=', True)]}"/>
@@ -126,7 +145,73 @@
                     <group>
                       <field name="line_date" attrs="{'readonly': [('move_check', '=', True)]}"/>
                       <field name="depreciated_value" readonly="1"/>
+                      <field name="depreciation_restatement_value" invisible="1"/>
                       <field name="remaining_value" readonly="1"/>
+                    </group>
+                  </group>
+                </form>
+              </field>
+            </page>
+            <page string="TAX Depreciation Board">
+              <field name="depreciation_bg_line_ids" mode="tree" options="{'reload_on_button': true}">
+                <tree string="Asset Lines" decoration-info="(init_entry == False)" create="false">
+                  <field name="type"/>
+                  <field name="line_date"/>
+                  <field name="depreciated_value" readonly="1"/>
+                  <field name="amount"/>
+                  <field name="remaining_value" readonly="1"/>
+                  <field name="init_entry" string="Init"/>
+                  <field name="parent_state" invisible="1"/>
+                </tree>
+                <form string="Asset Line">
+                  <group>
+                    <group>
+                      <field name="parent_state" invisible="1"/>
+                      <field name="depreciation_base" invisible="1"/>
+                      <field name="type"/>
+                      <field name="name"/>
+                      <field name="amount"/>
+                      <field name="init_entry" attrs="{'readonly': [('type', '=', 'create')]}"/>
+                    </group>
+                    <group>
+                      <field name="line_date"/>
+                      <field name="depreciated_value" readonly="1"/>
+                      <field name="remaining_value" readonly="1"/>
+                    </group>
+                  </group>
+                </form>
+              </field>
+            </page>
+            <page string="Restatement Board">
+              <field name="depreciation_restatement_line_ids" mode="tree" options="{'reload_on_button': true}">
+                <tree string="Asset Lines" decoration-info="(move_check == False)" create="false">
+                  <field name="type"/>
+                  <field name="line_date"/>
+                  <field name="depreciation_base" readonly="1"/>
+                  <field name="depreciated_value" readonly="1"/>
+                  <field name="move_check"/>
+                  <field name="parent_state" invisible="1"/>
+                  <button name="create_move" icon="fa-cog" string="Create Move" type="object"
+                          attrs="{'invisible': ['|', ('move_check', '!=', False), ('parent_state', '!=', 'open')]}"/>
+                  <button name="open_move" icon="fa-folder-open-o" string="View Move" type="object"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                  <button name="unlink_move" icon="fa-times"
+                          string="Delete Move" type="object" confirm="Are you sure ?" groups="account.group_account_manager"
+                          attrs="{'invisible': [('move_check', '!=', True)]}"/>
+                </tree>
+                <form string="Restatement Line">
+                  <group>
+                    <group>
+                      <field name="parent_state" invisible="1"/>
+                      <field name="depreciation_base" readonly="1"/>
+                      <field name="type"/>
+                      <field name="name"/>
+                      <field name="move_id"/>
+                      <field name="move_check"/>
+                    </group>
+                    <group>
+                      <field name="line_date" attrs="{'readonly': [('move_check', '=', True)]}"/>
+                      <field name="depreciated_value" readonly="1"/>
                     </group>
                   </group>
                 </form>
@@ -180,6 +265,7 @@
         <field name="name"/>
         <field name="type" invisible="1"/>
         <field name="code"/>
+        <field name="diff_purchase_value"/>
         <field name="depreciation_base" attrs="{'invisible': [('type', '=', 'view')]}"/>
         <field name="value_depreciated" attrs="{'invisible': [('type', '=', 'view')]}"/>
         <field name="value_residual" attrs="{'invisible': [('type', '=', 'view')]}"/>
@@ -201,15 +287,21 @@
         <filter string="Running" name="running" domain="[('state', '=', 'open')]" help="Assets in Running State"/>
         <filter string="Close" name="close" domain="[('state', '=', 'close')]" help="Assets in Close State"/>
         <filter string="Removed" name="removed" domain="[('state', '=', 'removed')]" help="Assets which have been removed"/>
+        <filter string="View" name="view" domain="[('type', '=', 'view')]" help="Class Assets"/>
+        <filter string="Normal" name="normal" domain="[('type', '=', 'normal')]" help="Normal Assets"/>
         <separator orientation="vertical"/>
         <field name="name" string="Asset"/>
         <field name="code"/>
         <field name="date_start"/>
         <field name="profile_id"/>
         <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+        <field name="product_id" filter_domain="[('product_id', '=', self)]"/>
+        <field name="categ_id" filter_domain="[('categ_id', 'child_of', raw_value)]"/>
         <group expand="0" string="Group By...">
           <filter string="Type" domain="" context="{'group_by': 'type'}"/>
           <filter string="Profile" domain="" context="{'group_by': 'profile_id'}"/>
+          <filter string="Category" domain="" context="{'group_by': 'category_id'}"/>
+          <filter string="Parent" domain="" context="{'group_by': 'parent_id'}"/>
         </group>
       </search>
     </field>
@@ -221,6 +313,7 @@
     <field name="view_type">form</field>
     <field name="view_id" ref="account_asset_view_tree"/>
     <field name="search_view_id" ref="account_asset_view_search"/>
+    <field name="context">{'search_default_normal': 1}</field>
   </record>
 
   <act_window id="act_entries_open"

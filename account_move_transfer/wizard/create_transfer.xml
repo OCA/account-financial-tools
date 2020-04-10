@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="wizard_create_move_transfer" model="ir.ui.view">
+            <field name="name">Create transfers</field>
+            <field name="model">wizard.create.move.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Move transfers" >
+                    <group>
+                        <group>
+                            <field name="account_move_id" readonly="1" string="Base on"/>
+                            <field name="partner_id"/>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="move_line_type" widget="radio" options="{'horizontal': true}"/>
+                            <field name="account_id"/>
+                        </group>
+                    </group>
+                    <separator string="Modify the lines before create them or edit them after creation."/>
+                    <field name="account_move_line_ids" nolabel="1"/>
+                    <footer>
+                        <button name="load_template" class="btn-primary" string="Next" type="object"/>
+                        <button special="cancel" string="Cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_move_line_transfer_form" model="ir.ui.view">
+            <field name="name">Select Move Transfers Line</field>
+            <field name="model">wizard.create.move.line.transfer</field>
+            <field name="arch" type="xml">
+                <form string="Move Transfers Line">
+                    <sheet>
+                        <field name="company_id" invisible="1"/>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Information">
+                                <group>
+                                    <group string="Amount">
+                                        <field name="account_id" domain="[('company_id', '=', company_id)]"/>
+                                        <field name="debit"/>
+                                        <field name="credit"/>
+                                        <field name="quantity"/>
+                                    </group>
+                                    <group string="Dates">
+                                        <field name="date"/>
+                                    </group>
+                                    <group groups="analytic.group_analytic_accounting" string="Analytic">
+                                        <field name="analytic_account_id"/>
+                                        <field name="analytic_tag_ids" widget="many2many_tags"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <!-- <field name="narration" colspan="4" nolabel="1" placeholder="Add an internal note..."/> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_create_move_line_transfer_tree" model="ir.ui.view">
+            <field name="name">Select Move Transfers Line</field>
+            <field name="model">wizard.create.move.line.transfer</field>
+            <field name="arch" type="xml">
+                <tree string="Move Transfers Line" editable="bottom">
+                    <field name="date"/>
+                    <field name="account_move_id" required="0" invisible="1" groups="account.group_account_user"/>
+                    <field name="journal_id" options='{"no_open":True}'/>
+                    <field name="name"/>
+                    <!-- <field name="partner_id"/> -->
+                    <field name="account_id" options='{"no_open":True}' domain="[('company_id', '=', company_id)]" groups="account.group_account_user"/>
+                    <field name="analytic_account_id" groups="account.group_account_user"/>
+                    <field name="debit" sum="Total Debit"/>
+                    <field name="credit" sum="Total Credit"/>
+                    <field name="currency_id" readonly="True" invisible="1" />
+                    <field name="company_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+</odoo>

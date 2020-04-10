@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account.locak_to_date</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="fiscalyear" position="replace">
+                <div class="col-xs-12 col-md-6 o_setting_box" id="fiscalyear_fyt">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label string="Last Report dead line for Fiscal Period"/>
+                        <div class="text-muted">
+                            Lock your fiscal period after report day in Tax Administration
+                        </div>
+                         <div class="content-group">
+                            <div class="row mt16">
+                                <label for="fiscalyear_lock_to_date" class="col-md-5 o_light_label"/>
+                                <field name="fiscalyear_lock_to_date"/>
+                                <label for="period_lock_to_date" class="col-md-5 o_light_label"/>
+                                <field name="period_lock_to_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 o_setting_box" id="fiscalyear_fp">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label string="Fiscal Period Closing"/>
+                        <div class="text-muted">
+                            Lock your fiscal period
+                        </div>
+                         <div class="content-group">
+                            <div class="row mt16">
+                                <label for="fiscalyear_lock_date" class="col-md-5 o_light_label"/>
+                                <field name="fiscalyear_lock_date"/>
+                                <label for="period_lock_date" class="col-md-5 o_light_label"/>
+                                <field name="period_lock_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 o_setting_box" id="fiscalyear_fy">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <label string="Fiscal Year"/>
+                        <div class="text-muted">
+                            Last day of your fiscal year, for automatic opening entries
+                        </div>
+                         <div class="content-group">
+                            <div class="row mt16">
+                                <label string="Last Day" class="col-md-3 o_light_label"/>
+                                <field name="fiscalyear_last_month" style="width: 100px; margin-right: 8px;"/>
+                                <field name="fiscalyear_last_day" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

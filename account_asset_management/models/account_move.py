@@ -5,6 +5,7 @@ import logging
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons import decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
@@ -51,12 +52,9 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    asset_profile_id = fields.Many2one(
-        comodel_name='account.asset.profile',
-        string='Asset Profile')
-    asset_id = fields.Many2one(
-        comodel_name='account.asset',
-        string='Asset', ondelete='restrict')
+    asset_profile_id = fields.Many2one(comodel_name='account.asset.profile', string='Asset Profile')
+    asset_id = fields.Many2one(comodel_name='account.asset', string='Asset', ondelete='restrict')
+    asset_salvage_value = fields.Float(string='Salvage Value', digits=dp.get_precision('Account'))
 
     @api.onchange('account_id')
     def _onchange_account_id(self):
@@ -78,8 +76,11 @@ class AccountMoveLine(models.Model):
                 'name': vals['name'],
                 'profile_id': vals['asset_profile_id'],
                 'purchase_value': depreciation_base,
+                'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
                 'partner_id': vals['partner_id'],
                 'date_start': move.date,
+                'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
+                'product_id': vals['product_id'],
             }
             if self.env.context.get('company_id'):
                 temp_vals['company_id'] = self.env.context['company_id']
@@ -110,6 +111,8 @@ class AccountMoveLine(models.Model):
             'purchase_value': depreciation_base,
             'partner_id': partner_id,
             'date_start': date_start,
+            'date_buy': self.invoice_id and self.invoice_id.date_invoice or date_start,
+            'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'] or self.asset_salvage_value,
             'company_id': vals.get('company_id') or self.company_id.id,
         }
 
@@ -125,7 +128,7 @@ class AccountMoveLine(models.Model):
             raise UserError(
                 _("You cannot change an accounting item "
                   "linked to an asset depreciation line."))
-        if vals.get('asset_id'):
+        if vals.get('asset_id') and not self.env.context.get('allow_asset'):
             raise UserError(
                 _("You are not allowed to link "
                   "an accounting entry to an asset."

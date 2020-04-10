@@ -13,10 +13,12 @@ class AccountInvoice(models.Model):
     documents_count = fields.Integer(compute="_get_count_documets")
 
     @api.multi
-    def _get_printed_report_name(self):
+    def _get_printed_report_name(self, incl=""):
         self.ensure_one()
         name = self.env['account.documents.type'].get_document_type('account.invoice', self.type, self.state)
-        if name:
+        if name and "%s" in name:
+            return name % incl
+        elif name and "%s" not in name:
             return name
         else:
             return _('an unknown name')

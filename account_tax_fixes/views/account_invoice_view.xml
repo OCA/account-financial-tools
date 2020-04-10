@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_invoice_tax_ext_tree" model="ir.ui.view">
+            <field name="name">account.invoice.tax.tree</field>
+            <field name="model">account.invoice.tax</field>
+            <field name="arch" type="xml">
+                <tree string="Manual Invoice Taxes">
+                    <field name="sequence"/>
+                    <field name="manual"/>
+                    <field name="name"/>
+                    <field name="account_id" groups="account.group_account_user"/>
+                    <field name="base"/>
+                    <field name="amount_total"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_invoice_tax_ext_form" model="ir.ui.view">
+            <field name="name">account.invoice.tax.form</field>
+            <field name="model">account.invoice.tax</field>
+            <field name="arch" type="xml">
+                <form string="Manual Invoice Taxes">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="account_id" groups="account.group_account_user"/>
+                        <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                        <field name="manual"/>
+                        <field name="amount_total"/>
+                        <field name="base"/>
+                        <field name="currency_id" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="action_invoice_tax_tree" model="ir.actions.act_window">
+            <field name="name">Invoices Taxes</field>
+            <field name="res_model">account.invoice.tax</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_invoice_tax_ext_tree"/>
+            <field name="domain">[('invoice_id','=', active_id)]</field>
+        </record>
+        <record id="action_invoice_tax_tree_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_invoice_tax_ext_form"/>
+            <field name="act_window_id" ref="action_invoice_tax_tree"/>
+        </record>
+        <record id="account.view_invoice_tax_tree" model="ir.ui.view">
+            <field name="name">account.invoice.tax.tree</field>
+            <field name="model">account.invoice.tax</field>
+            <field name="arch" type="xml">
+                <tree string="Manual Invoice Taxes">
+                    <field name="name"/>
+                    <field name="tax_id" invisible="1"/>
+                    <field name="sequence" invisible="1"/>
+                    <field name="manual" invisible="1"/>
+                    <field name="account_id" groups="account.group_account_user"/>
+                    <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                    <field name="analytic_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                    <field name="tag_ids" widget="many2many_tags" domain="[('company_id', '=', parent.company_id)]" options="{'color_field': 'color_picker'}" readonly="1"/>
+                    <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                    <field name="amount" invisible="1"/>
+                    <field name="base"/>
+                    <field name="amount_rounding" invisible="1"/>
+                    <field name="amount_total"/>
+                    <field name="currency_id" invisible="1" force_save="1"/>
+                    <button name="%(action_invoice_tax_tree_form)d"
+                        type="action"
+                        icon="fa fa-external-link"/>
+                </tree>
+            </field>
+        </record>
+        <record id="account.view_invoice_tax_form" model="ir.ui.view">
+            <field name="name">account.invoice.tax.form</field>
+            <field name="model">account.invoice.tax</field>
+            <field name="arch" type="xml">
+                <form string="Invoice Taxes">
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="tax_id" invisible="1"/>
+                        <field name="sequence" invisible="1"/>
+                        <field name="manual" invisible="1"/>
+                        <field name="account_id" groups="account.group_account_user"/>
+                        <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                        <field name="analytic_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                        <field name="tag_ids" widget="many2many_tags" domain="[('company_id', '=', parent.company_id)]" options="{'color_field': 'color_picker'}" readonly="1"/>
+                        <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                        <field name="manual" invisible="1"/>
+                        <field name="amount_total"/>
+                        <field name="base"/>
+                        <field name="amount_rounding" invisible="1"/>
+                        <field name="amount_total" invisible="1"/>
+                        <field name="currency_id" invisible="1" force_save="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="invoice_supplier_fixes_form" model="ir.ui.view">
+            <field name="name">account.invoice.fixes.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/group/group" position="replace"/>
+                <xpath expr="//page[@name='other_info']" position="inside">
+                    <field name="tax_line_ids">
+                        <tree editable="bottom" string="Taxes">
+                            <field name="name"/>
+                            <!--Need invisible fields for on_change to create all necessary info -->
+                            <field name="tax_id" invisible="1"/>
+                            <field name="sequence" invisible="1"/>
+                            <field name="manual" invisible="1"/>
+                            <field name="account_id" groups="account.group_account_user"/>
+                            <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                            <field name="analytic_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color_picker'}" readonly="1"/>
+                            <field name="base"/>
+                            <field name="amount" invisible="1"/>
+                            <field name="amount_rounding" invisible="1"/>
+                            <field name="amount_total"/>
+                            <field name="currency_id" invisible="1" force_save="1"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        <record id="invoice_fixes_form" model="ir.ui.view">
+            <field name="name">account.invoice.fixes.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tax_line_ids']" position="replace">
+                    <field name="tax_line_ids">
+                        <tree editable="bottom" string="Taxes" create="0">
+                            <field name="name"/>
+                            <!--Need invisible fields for on_change to create all necessary info -->
+                            <field name="tax_id" invisible="1"/>
+                            <field name="sequence" invisible="1"/>
+                            <field name="manual" invisible="1"/>
+                            <field name="account_id" groups="account.group_account_user"/>
+                            <field name="account_analytic_id" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                            <field name="analytic_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" domain="[('company_id', '=', parent.company_id)]" groups="analytic.group_analytic_accounting"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color_picker'}" readonly="1"/>
+                            <field name="base"/>
+                            <field name="amount" invisible="1"/>
+                            <field name="amount_rounding" invisible="1"/>
+                            <field name="amount_total"/>
+                            <field name="currency_id" invisible="1" force_save="1"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

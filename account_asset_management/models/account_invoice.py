@@ -2,8 +2,13 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import copy
+from statistics import mean
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.addons import decimal_precision as dp
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
@@ -81,6 +86,26 @@ class AccountInvoice(models.Model):
                 asset.depreciation_line_ids[0].with_context(
                     {'allow_asset_line_update': True}
                 ).name = asset_line_name
+            assets = self.env['account.asset'].search([('type', '=', 'normal')])
+            asset_ids = {}
+            for asset in assets:
+                if inv.refund_invoice_id.id in asset.account_move_line_ids.mapped('invoice_id').ids:
+                    asset_ids[asset] = asset.product_id
+            #_logger.info("ASSETS %s" % asset_ids)
+            for k,v in asset_ids.items():
+                move_line = inv.move_id.line_ids.filtered(lambda r: r.product_id == v).with_context(dict(self.env.context, allow_asset=True))
+                move_line.write({'asset_id': k.id})
+                all = sum([1 for x in assets.filtered(lambda r: r.product_id == v and r.type == 'normal')])/2
+                all = all or 1
+                value = mean([(x.debit - x.credit) / all for x in move_line])
+                #_logger.info("ASSETS %s:%s:%s" % (k, v, value))
+                k.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': k.id,
+                                                                           'name': k._get_depreciation_entry_name(0),
+                                                                           'type': 'create',
+                                                                           'move_id': inv.move_id.id,
+                                                                           'init_entry': True,
+                                                                           'line_date': inv.refund_invoice_id.date_invoice,
+                                                                           'depreciation_base': value})]})
         return res
 
     @api.multi
@@ -119,7 +144,14 @@ class AccountInvoice(models.Model):
                 invline = invoice_line_obj.browse(vals['invl_id'])
                 if invline.asset_profile_id:
                     vals['asset_profile_id'] = invline.asset_profile_id.id
+                    vals['asset_salvage_value'] = invline.asset_salvage_value
         return res
+
+    def _prepare_invoice_line_from_po_line(self, line):
+        data = super(AccountInvoice, self)._prepare_invoice_line_from_po_line(line)
+        if line.asset_profile_id:
+            data['asset_profile_id'] = line.asset_profile_id.id
+        return data
 
 
 class AccountInvoiceLine(models.Model):
@@ -137,6 +169,8 @@ class AccountInvoiceLine(models.Model):
              "in order to facilitate the creation of the "
              "asset removal accounting entries via the "
              "asset 'Removal' button")
+    asset_salvage_value = fields.Float(string='Salvage Value', digits=dp.get_precision('Account'))
+
 
     @api.onchange('account_id')
     def _onchange_account_id(self):

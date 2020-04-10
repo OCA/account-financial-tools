@@ -2,6 +2,11 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_asset_profile_invoice,account.asset.profile,model_account_asset_profile,account.group_account_invoice,1,0,0,0
 access_account_asset_profile_user,account.asset.profile,model_account_asset_profile,account.group_account_user,1,0,0,0
 access_account_asset_profile_manager,account.asset.profile,model_account_asset_profile,account.group_account_manager,1,1,1,1
+access_account_bg_asset_profile_invoice,account.bg.asset.profile,model_account_bg_asset_profile,account.group_account_invoice,1,0,0,0
+access_account_bg_asset_profile_user,account.bg.asset.profile,model_account_bg_asset_profile,account.group_account_user,1,0,0,0
+access_account_bg_asset_profile_manager,account.bg.asset.profile,model_account_bg_asset_profile,account.group_account_manager,1,1,1,1
+access_account_asset_category_user,account.asset.category,model_account_asset_category,account.group_account_user,1,0,0,0
+access_account_asset_category_manager,account.asset.category,model_account_asset_category,account.group_account_manager,1,1,1,1
 access_account_asset_invoice,account.asset,model_account_asset,account.group_account_invoice,1,1,1,1
 access_account_asset_user,account.asset,model_account_asset,account.group_account_user,1,1,1,1
 access_account_asset_manager,account.asset,model_account_asset,account.group_account_manager,1,1,1,1
@@ -10,6 +15,11 @@ access_account_asset_actions_manager,account.asset,model_account_asset_actions,a
 access_account_asset_line_invoice,account.asset.line,model_account_asset_line,account.group_account_invoice,1,1,1,1
 access_account_asset_line_user,account.asset.line,model_account_asset_line,account.group_account_user,1,1,1,1
 access_account_asset_line_manager,account.asset.line,model_account_asset_line,account.group_account_manager,1,1,1,1
+access_account_asset_restatement_value_invoice,account.asset.restatement.value,model_account_asset_restatement_value,account.group_account_invoice,1,1,1,1
+access_account_asset_restatement_value_user,account.asset.restatement.value,model_account_asset_restatement_value,account.group_account_user,1,1,1,1
+access_account_asset_restatement_value_manager,account.asset.restatement.value,model_account_asset_restatement_value,account.group_account_manager,1,1,1,1
+access_account_bg_asset_line_invoice,account.bg.asset.line,model_account_bg_asset_line,account.group_account_invoice,1,1,1,1
+access_account_bg_asset_line_user,account.bg.asset.line,model_account_bg_asset_line,account.group_account_user,1,1,1,1
+access_account_bg_asset_line_manager,account.bg.asset.line,model_account_bg_asset_line,account.group_account_manager,1,1,1,1
 access_account_asset_recompute_trigger_user,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_user,1,1,1,1
 access_account_asset_recompute_trigger_manager,account.asset.recompute.trigger,model_account_asset_recompute_trigger,account.group_account_manager,1,1,1,1
-

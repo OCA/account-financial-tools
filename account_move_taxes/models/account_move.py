@@ -1,8 +1,7 @@
 # coding: utf-8
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, api, fields, _
-from odoo.exceptions import UserError
+from odoo import api, fields, models, tools, _
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -16,17 +15,18 @@ class AccountMove(models.Model):
     def get_grouping_key(self, move_tax_val):
         """ Returns a string that will be used to group account.invoice.tax sharing the same properties"""
         self.ensure_one()
-        return str(move_tax_val['tax_line_id']) + '-' + str(move_tax_val['account_id']) + '-' + str(move_tax_val['analytic_account_id'])
+        return str(move_tax_val['move_line_id']) + '-' + str(move_tax_val['tax_line_id']) + '-' + str(move_tax_val['account_id']) + '-' + str(move_tax_val['analytic_account_id'])
 
     def get_grouping_key_contrapart(self, move_val):
         """ Returns a string that will be used to group account.invoice.tax sharing the same properties"""
         self.ensure_one()
-        return "99999" + '-' + str(move_val['account_id']) + '-' + str(move_val['analytic_account_id'])
+        return str(move_val['move_line_id']) + '-' + "99999" + str(move_val['account_id']) + '-' + str(move_val['analytic_account_id'])
 
     def _prepare_tax_line_vals(self, line, tax):
         account_id = self.env['account.account'].browse([tax['account_id'] or line.account_id.id])
         vals = {
             'move_id': self.id,
+            'move_line_id': line.id,
             'name': ("Automatic (%s) from %s (%s)" % (tax['name'], line.account_id.name, round(line.debit+line.credit, line.company_currency_id.decimal_places))),
             'tax_line_id': tax['id'],
             'quantity': 1.0,
@@ -48,6 +48,8 @@ class AccountMove(models.Model):
         if tax_included:
             tax_amount = -tax_amount
         vals = {
+            'move_id': self.id,
+            'move_line_id': contrapart.id,
             'contrapart': contrapart,
             'manual': True,
             'debit': debit != 0.0 and debit + tax_amount or 0.0,
@@ -83,16 +85,6 @@ class AccountMove(models.Model):
                 else:
                     tax_grouped[key]['amount'] += val['amount']
                     tax_grouped[key]['base'] += round_curr(val['base'])
-            #if not line.tax_included:
-            #    if line.credit != 0:
-            #        contrapart.append(self.line_ids.filtered(lambda r: r.debit != 0)[0])
-            #    elif line.debit != 0:
-            #        contrapart.append(self.line_ids.filtered(lambda r: r.credit != 0)[0])
-            #    else:
-            #        contrapart.append(line)
-            #else:
-            #    contrapart.append(line)
-            #break
 
         # Generate contrapart
         if contrapart and tax_grouped:
@@ -101,13 +93,26 @@ class AccountMove(models.Model):
             contrapart_amount = abs(sum(x.debit + x.credit for x in contrapart))
             debit = credit = 0.0
             for line in contrapart:
+                if tax_amount > 0.0 and line.debit > 0.0:
+                    continue
+                if tax_amount < 0.0 and line.credit > 0.0:
+                    continue
+                if line.debit == 0.0 and line.credit == 0.0:
+                    continue
                 val_contrapart = self._prepare_contrapart_line_vals(line, line.debit, line.credit, abs(line.debit+line.credit)/contrapart_amount*tax_amount, False)
                 key_contrapart = self.get_grouping_key_contrapart(val_contrapart)
                 tax_grouped[key_contrapart] = val_contrapart
                 debit += val_contrapart['debit']
                 credit += val_contrapart['credit']
             for line in contrapart:
+                if tax_amount > 0.0 and line.debit > 0.0:
+                    continue
+                if tax_amount < 0.0 and line.credit > 0.0:
+                    continue
+                if line.debit == 0.0 and line.credit == 0.0:
+                    continue
                 val_contrapart = self._prepare_contrapart_line_vals(line, debit, credit, abs(line.debit+line.credit)/contrapart_amount*tax_amount_included, True)
+                key_contrapart = self.get_grouping_key_contrapart(val_contrapart)
                 tax_grouped[key_contrapart] = val_contrapart
         return tax_grouped
 
@@ -130,9 +135,19 @@ class AccountMove(models.Model):
             # Create new movement for tax lines in cache
             with self.env.do_in_onchange():
                 for tax in tax_grouped.values():
+                    debit = tax['debit']
+                    credit = tax['credit']
+                    if debit < 0.0:
+                        tax['debit'] = 0.0
+                        tax['credit'] = -debit
+                    if credit < 0.0:
+                        tax['credit'] = 0.0
+                        tax['debit'] = -credit
                     if tax.get('contrapart'):
                         contrapart = tax['contrapart']
                         del tax['contrapart']
+                        del tax['move_line_id']
+                        del tax['move_id']
                         contrapart.update(tax)
                     else:
                         move.line_ids.new(tax)
