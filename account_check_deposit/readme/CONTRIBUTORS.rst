@@ -8,3 +8,7 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Pedro M. Baeza
+
+* `Ecosoft <http://ecosoft.co.th>`__:
+
+  * Pimolnat Suntian <pimolnats@ecosoft.co.th>
