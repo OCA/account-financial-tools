@@ -9,8 +9,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
-import odoo.addons.decimal_precision as dp
-
 
 class AccountCheckDeposit(models.Model):
     _name = "account.check.deposit"
@@ -112,14 +110,14 @@ class AccountCheckDeposit(models.Model):
         string="Company",
         required=True,
         states={"done": [("readonly", "=", True)]},
-        default=lambda self: self.env["res.company"]._company_default_get(),
+        default=lambda self: self.env.company,
     )
     total_amount = fields.Float(
         compute="_compute_check_deposit",
         string="Total Amount",
         readonly=True,
         store=True,
-        digits=dp.get_precision("Account"),
+        digits="Account",
     )
     check_count = fields.Integer(
         compute="_compute_check_deposit",
