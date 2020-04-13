@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo12-addon-account_lock_to_date',
         'odoo12-addon-account_menu',
         'odoo12-addon-account_move_budget',
+        'odoo12-addon-account_move_chatter',
         'odoo12-addon-account_move_fiscal_month',
         'odoo12-addon-account_move_fiscal_year',
         'odoo12-addon-account_move_line_purchase_info',
