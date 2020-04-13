@@ -56,7 +56,7 @@ class AssetReportXlsx(models.AbstractModel):
                 },
                 'asset_group': {
                     'type': 'string',
-                    'value': self._render("group.name"),
+                    'value': self._render("group.name or ''"),
                 },
                 'asset': {
                     'type': 'string',
@@ -389,27 +389,31 @@ class AssetReportXlsx(models.AbstractModel):
         ws.write_string(row_pos, 0, no_entries, self.format_left_bold)
 
     def _get_assets(self, wiz):
-        parent_group = wiz.asset_group_id
 
-        def _child_get(parent):
-            groups = [parent]
-            children = parent.child_ids
-            children = children.sorted(lambda r: r.code or r.name)
-            for child in children:
-                if child in groups:
-                    raise UserError(_(
-                        "Inconsistent reporting structure."
-                        "\nPlease correct Asset Group '%s' (id %s)"
-                    ) % (child.name, child.id))
-                groups.extend(_child_get(child))
-            return groups
-
-        groups = _child_get(parent_group)
         dom = [('date_start', '<=', wiz.date_to),
                '|',
                ('date_remove', '=', False),
-               ('date_remove', '>=', wiz.date_from),
-               ('group_ids', 'in', [x.id for x in groups])]
+               ('date_remove', '>=', wiz.date_from)]
+
+        parent_group = wiz.asset_group_id
+        if parent_group:
+
+            def _child_get(parent):
+                groups = [parent]
+                children = parent.child_ids
+                children = children.sorted(lambda r: r.code or r.name)
+                for child in children:
+                    if child in groups:
+                        raise UserError(_(
+                            "Inconsistent reporting structure."
+                            "\nPlease correct Asset Group '%s' (id %s)"
+                        ) % (child.name, child.id))
+                    groups.extend(_child_get(child))
+                return groups
+
+            groups = _child_get(parent_group)
+            dom.append(('group_ids', 'in', [x.id for x in groups]))
+
         if not wiz.draft:
             dom.append(('state', '!=', 'draft'))
         self._assets = self.env['account.asset'].search(dom)
@@ -432,7 +436,10 @@ class AssetReportXlsx(models.AbstractModel):
             and asset.date_remove <= wiz.date_to)
 
     def _group_assets(self, assets, group, grouped_assets):
-        group_assets = assets.filtered(lambda r: group in r.group_ids)
+        if group:
+            group_assets = assets.filtered(lambda r: group in r.group_ids)
+        else:
+            group_assets = assets
         group_assets = group_assets.sorted(
             lambda r: (r.date_start or '', r.code))
         grouped_assets[group] = {'assets': group_assets}
@@ -569,7 +576,7 @@ class AssetReportXlsx(models.AbstractModel):
         # traverse entries in reverse order to calc totals
         for i, entry in enumerate(reversed(entries)):
             group = entry.get('group')
-            if group:
+            if 'group' in entry:
                 parent = group.parent_id
                 for e in reversed(entries[:-i-1]):
                     g = e.get('group')
@@ -594,7 +601,7 @@ class AssetReportXlsx(models.AbstractModel):
             total_depr_formula = period_end_value_cell and (
                 depreciation_base_cell + '-' + period_end_value_cell)
 
-            if entry.get('group'):
+            if 'group' in entry:
                 row_pos = self._write_line(
                     ws, row_pos, ws_params, col_specs_section='asset_group',
                     render_space={

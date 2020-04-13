@@ -179,6 +179,7 @@
         <field name="date_remove"/>
         <field name="profile_id"/>
         <field name="state"/>
+        <field name="group_ids" widget="many2many_tags"/>
         <field name="company_id" groups="base.group_multi_company"/>
       </tree>
     </field>
@@ -198,6 +199,7 @@
         <field name="code"/>
         <field name="date_start"/>
         <field name="profile_id"/>
+        <field name="group_ids"/>
         <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
         <group expand="0" string="Group By...">
           <filter string="Profile" name="profile" domain="" context="{'group_by': 'profile_id'}"/>

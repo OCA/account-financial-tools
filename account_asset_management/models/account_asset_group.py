@@ -36,8 +36,13 @@ class AccountAssetGroup(models.Model):
     @api.multi
     def name_get(self):
         result = []
+        params = self.env.context.get('params')
+        list_view = params and params.get('view_type') == 'list'
         for rec in self:
-            name = rec.code + ' ' + rec.name
+            if list_view:
+                name = rec.code
+            else:
+                name = rec.code + ' ' + rec.name
             result.append((rec.id, name))
         return result
 

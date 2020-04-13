@@ -11,7 +11,7 @@
           <field name="date_from"/>
           <field name="date_to"/>
           <field name="draft"/>
-          <field name="company_id"/>
+          <field name="company_id" groups="base.group_multi_company"/>
         </group>
         <footer>
           <button name="xls_export" string="Generate Report" type="object"
@@ -33,9 +33,13 @@
     <field name="target">new</field>
   </record>
 
+  <menuitem id="account_asset_report_menu"
+          name="Financial Assets"
+          parent="account.menu_finance_reports"/>
+
   <menuitem id="wiz_account_asset_report_menu"
             name="Financial Assets report"
-            parent="account_asset_management.menu_finance_assets"
+            parent="account_asset_report_menu"
             action="wiz_account_asset_report_action"
             sequence="200"/>
 

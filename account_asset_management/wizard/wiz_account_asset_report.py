@@ -14,7 +14,6 @@ class WizAccountAssetReport(models.TransientModel):
     asset_group_id = fields.Many2one(
         comodel_name='account.asset.group',
         string='Asset Group',
-        required=True,
         default=lambda self: self._default_asset_group_id())
     date_from = fields.Date(
         string='Start Date',
@@ -56,12 +55,15 @@ class WizAccountAssetReport(models.TransientModel):
     @api.multi
     def xls_export(self):
         self.ensure_one()
-        report_name = '{}.asset_report_xls'.format(self._module)
-        prefix = unicodedata.normalize(
-            'NFKD', self.asset_group_id.name
-        ).encode('ascii', 'ignore').decode('ascii')
-        prefix = ''.join(x for x in prefix if x.isalnum())
-        report_file = '{}_asset_report'.format(prefix)
+        report_name = 'account_asset_management.asset_report_xls'
+        if self.asset_group_id:
+            prefix = unicodedata.normalize(
+                'NFKD', self.asset_group_id.name
+            ).encode('ascii', 'ignore').decode('ascii')
+            prefix = ''.join(x for x in prefix if x.isalnum())
+            report_file = '{}_asset_report'.format(prefix)
+        else:
+            report_file = 'asset_report'
         report = {
             'type': 'ir.actions.report',
             'report_type': 'xlsx',
