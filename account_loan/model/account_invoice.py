@@ -20,15 +20,6 @@ class AccountInvoice(models.Model):
     )
 
     @api.multi
-    def action_move_create(self):
-        if self.loan_line_id:
-            return super(AccountInvoice, self.with_context(
-                default_loan_line_id=self.loan_line_id.id,
-                default_loan_id=self.loan_id.id,
-            )).action_move_create()
-        return super().action_move_create()
-
-    @api.multi
     def finalize_invoice_move_lines(self, move_lines):
         vals = super().finalize_invoice_move_lines(move_lines)
         if self.loan_line_id:
