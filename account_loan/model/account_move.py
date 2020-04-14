@@ -23,8 +23,13 @@ class AccountMove(models.Model):
     def post(self, invoice=False):
         res = super().post(invoice=invoice)
         for record in self:
-            if record.loan_line_id:
-                record.loan_id = record.loan_line_id.loan_id
+            loan_line_id = record.loan_line_id or (
+                invoice and invoice.loan_line_id
+            )
+            if loan_line_id:
+                if not record.loan_line_id:
+                    record.loan_line_id = loan_line_id
+                record.loan_id = loan_line_id.loan_id
                 record.loan_line_id.check_move_amount()
                 record.loan_line_id.loan_id.compute_posted_lines()
                 if record.loan_line_id.sequence == record.loan_id.periods:
