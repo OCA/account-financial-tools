@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_trigger_all,access_account_move_trigger_all,model_account_move_trigger,account.group_account_invoice,1,0,0,0
+access_account_move_trigger,access_account_move_trigger,model_account_move_trigger,account.group_account_manager,1,1,1,1

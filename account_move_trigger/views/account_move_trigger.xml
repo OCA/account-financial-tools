@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_account_move_trigger_form" model="ir.ui.view">
+    <field name="name">view.account_move_trigger.form</field>
+    <field name="model">account.move.trigger</field>
+    <field name="arch" type="xml">
+      <form string="Account Move Trigger">
+        <sheet>
+          <group name="main">
+            <field name="name"/>
+            <field name="account_id"/>
+            <field name="move_type"/>
+            <field name="journal_id"/>
+            <field name="debit_account_id"/>
+            <field name="credit_account_id"/>
+            <field name="auto_reconcile"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_account_move_trigger_tree" model="ir.ui.view">
+    <field name="name">view.account_move_trigger.tree</field>
+    <field name="model">account.move.trigger</field>
+    <field name="arch" type="xml">
+      <tree string="Account Move Trigger">
+        <field name="name"/>
+        <field name="account_id"/>
+        <field name="move_type"/>
+        <field name="journal_id"/>
+        <field name="debit_account_id"/>
+        <field name="credit_account_id"/>
+        <field name="auto_reconcile"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_account_move_trigger_search" model="ir.ui.view">
+    <field name="name">view.account_move_trigger.search</field>
+    <field name="model">account.move.trigger</field>
+    <field name="arch" type="xml">
+      <search string="Account Move Trigger">
+        <field name="account_id"/>
+        <group string="Group By" name="groupby">
+          <filter name="account_id " string="account_id " context="{'group_by': 'account_id'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="account_move_trigger_action" model="ir.actions.act_window">
+    <field name="name">Account Move Trigger</field>
+    <field name="res_model">account.move.trigger</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">
+        Click to create a new Account Move Trigger.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="account_move_trigger_menu" parent="account.account_management_menu" action="account_move_trigger_action" sequence="20"/>
+
+</odoo>

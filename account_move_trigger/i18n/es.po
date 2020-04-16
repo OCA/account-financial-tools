@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_move_trigger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-09 11:09+0000\n"
+"PO-Revision-Date: 2018-10-09 11:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_trigger
+#: model:ir.model,name:account_move_trigger.model_account_account
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_move_trigger
+#: model:ir.model,name:account_move_trigger.model_account_move
+msgid "Account Entry"
+msgstr "Asiento"
+
+#. module: account_move_trigger
+#: model:ir.actions.act_window,name:account_move_trigger.account_move_trigger_action
+#: model:ir.model,name:account_move_trigger.model_account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_account_trigger_account_ids
+#: model:ir.ui.menu,name:account_move_trigger.account_move_trigger_menu
+#: model:ir.ui.view,arch_db:account_move_trigger.view_account_move_trigger_form
+#: model:ir.ui.view,arch_db:account_move_trigger.view_account_move_trigger_search
+#: model:ir.ui.view,arch_db:account_move_trigger.view_account_move_trigger_tree
+msgid "Account Move Trigger"
+msgstr "Asiento Automático"
+
+#. module: account_move_trigger
+#: model:ir.actions.act_window,help:account_move_trigger.account_move_trigger_action
+msgid "Click to create a new Account Move Trigger."
+msgstr "Click to create a new Account Move Trigger."
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: account_move_trigger
+#: selection:account.move.trigger,move_type:0
+msgid "Credit"
+msgstr "Haber"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_credit_account_id
+msgid "Credit Account"
+msgstr "Cuenta Haber"
+
+#. module: account_move_trigger
+#: selection:account.move.trigger,move_type:0
+msgid "Debit"
+msgstr "Debe"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_debit_account_id
+msgid "Debit Account"
+msgstr "Cuenta Haber"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_display_name
+msgid "Display Name"
+msgstr "Referencia"
+
+#. module: account_move_trigger
+#: model:ir.ui.view,arch_db:account_move_trigger.view_account_move_trigger_search
+msgid "Group By"
+msgstr "Group By"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger___last_update
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_name
+msgid "Name"
+msgstr "Referencia"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_account_id
+msgid "Trigger Account"
+msgstr "Cuenta"
+
+#. module: account_move_trigger
+#: model:ir.model.fields,field_description:account_move_trigger.field_account_move_trigger_move_type
+msgid "Trigger Move Type"
+msgstr "Tipo de movimiento"
+
+#. module: account_move_trigger
+#: model:ir.ui.view,arch_db:account_move_trigger.view_account_move_trigger_search
+msgid "account_id"
+msgstr "Cuenta"
