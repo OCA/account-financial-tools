@@ -69,6 +69,7 @@ Under Invoicing -> Configuration -> Accounting -> Spread Templates, create a new
 
 * *Spread Type*
 * *Spread Balance Sheet Account*
+* *Expense/Revenue Account* This option visible if invoice line account is balance sheet account, user need to specify this too.
 * *Journal*
 
 When creating a new Spread Costs/Revenues Board, select the right template.

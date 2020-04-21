@@ -17,7 +17,9 @@
                         <field name="spread_action_type" widget="radio"/>
                         <field name="spread_id" attrs="{'invisible': [('spread_action_type', '!=', 'link')],'required': [('spread_action_type', '=', 'link')]}" domain="[('invoice_type', '=', invoice_type)]" options="{'no_create': True}"/>
                         <field name="template_id" attrs="{'invisible': [('spread_action_type', '!=', 'template')],'required': [('spread_action_type', '=', 'template')]}" domain="[('spread_type', '=', spread_type)]" options="{'no_create': True}"/>
+                        <field name="use_invoice_line_account" attrs="{'invisible': [('spread_action_type', '!=', 'new')]}"/>
                         <field name="spread_account_id" attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"/>
+                        <field name="exp_rev_account_id" attrs="{'invisible': ['|', ('use_invoice_line_account', '=', False), ('spread_action_type', '!=', 'new')], 'required': [('use_invoice_line_account', '=', True)]}" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"/>
                         <field name="spread_journal_id" attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}" domain="[('company_id', '=', company_id)]" options="{'no_create': True}"/>
                     </group>
                 </group>
