@@ -44,6 +44,9 @@ class AccountSpread(models.Model):
         default='month',
         help="Period length for the entries",
         required=True)
+    use_invoice_line_account = fields.Boolean(
+        string="Use invoice line's account",
+    )
     credit_account_id = fields.Many2one(
         'account.account',
         string='Credit Account',
