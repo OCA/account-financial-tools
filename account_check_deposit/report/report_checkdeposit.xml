@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright (C) 2014-2019 Akretion (www.akretion.com)
+    @author: Alexis de Lattre <alexis.delattre@akretion.com>
+    The licence is in the file __manifest__.py
+-->
+<odoo>
+    <template id="report_checkdeposit">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h1>Check Deposit n°<span t-field="o.name" /></h1>
+                        <h3>Bank:</h3>
+                        <p>
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.name"
+                            />
+                            <br />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.street"
+                            />
+                            <br />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.zip"
+                            />
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.bank_id.city"
+                            />
+                        </p>
+                        <h3>Beneficiary:</h3>
+                        <div
+                            t-field="o.company_id.partner_id"
+                            t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "fax"], "no_marker": true}'
+                        />
+                        <p>
+                            <b>Bank Account Number to Credit:</b>
+                            <span
+                                t-field="o.bank_journal_id.bank_account_id.acc_number"
+                            />
+                        </p>
+                        <p>
+                            <b>Check Currency:</b>
+                            <span t-field="o.currency_id.name" />
+                        </p>
+                        <p>
+                            <b>Transfer Date:</b>
+                            <span t-field="o.deposit_date" />
+                        </p>
+                        <p>
+                            <b>Number of checks:</b>
+                            <span t-field="o.check_count" />
+                        </p>
+                        <h3>List of checks:</h3>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Reference</th>
+                                    <th>Debtor</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.check_payment_ids" t-as="move_line">
+                                    <tr>
+                                        <td>
+                                            <span t-field="move_line.date" />
+                                        </td>
+                                        <td>
+                                            <span t-field="move_line.ref" />
+                                        </td>
+                                        <td>
+                                            <span t-field="move_line.partner_id.name" />
+                                        </td>
+                                        <td>
+                                            <t
+                                                t-if="o.currency_id == o.company_id.currency_id"
+                                            >
+                                                <span
+                                                    t-field="move_line.debit"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                />
+                                            </t>
+                                            <t
+                                                t-if="o.currency_id != o.company_id.currency_id"
+                                            >
+                                                <span
+                                                    t-field="move_line.amount_currency"
+                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                                />
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td />
+                                    <td />
+                                    <td>
+                                        <b>Total:</b>
+                                    </td>
+                                    <td>
+                                        <b>
+                                            <span
+                                                t-field="o.total_amount"
+                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                            />
+                                        </b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

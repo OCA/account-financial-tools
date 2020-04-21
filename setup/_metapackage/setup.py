@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-account_asset_management',
         'odoo13-addon-account_balance_line',
         'odoo13-addon-account_chart_update',
+        'odoo13-addon-account_check_deposit',
         'odoo13-addon-account_fiscal_year',
         'odoo13-addon-account_lock_date_update',
         'odoo13-addon-account_menu',
