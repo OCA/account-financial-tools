@@ -23,10 +23,18 @@ class AccountSpreadTemplate(models.Model):
         'account.journal',
         string='Journal',
         required=True)
+    use_invoice_line_account = fields.Boolean(
+        string="Invoice account as spread account",
+        help="Use invoice line's account as Balance sheet / spread account.\n"
+        "In this case, user need to select expense/revenue account too.")
     spread_account_id = fields.Many2one(
         'account.account',
         string='Spread Balance Sheet Account',
-        required=True)
+        required=False)
+    exp_rev_account_id = fields.Many2one(
+        'account.account',
+        string='Expense/Revenue Account',
+        help="Optional account to overwrite the existing expense/revenue account")
     period_number = fields.Integer(
         string='Number of Repetitions',
         help="Define the number of spread lines")
@@ -66,22 +74,28 @@ class AccountSpreadTemplate(models.Model):
         if journal:
             self.spread_journal_id = journal
 
-    def _prepare_spread_from_template(self):
+    @api.onchange('use_invoice_line_account')
+    def _onchange_user_invoice_line_account(self):
+        self.exp_rev_account_id = False
+
+    def _prepare_spread_from_template(self, spread_account_id=False):
         self.ensure_one()
         company = self.company_id
         spread_vals = {
             'name': self.name,
             'template_id': self.id,
             'journal_id': self.spread_journal_id.id,
+            'use_invoice_line_account': self.use_invoice_line_account,
             'company_id': company.id,
         }
 
+        account_id = spread_account_id or self.spread_account_id.id
         if self.spread_type == 'sale':
             invoice_type = 'out_invoice'
-            spread_vals['debit_account_id'] = self.spread_account_id.id
+            spread_vals['debit_account_id'] = account_id
         else:
             invoice_type = 'in_invoice'
-            spread_vals['credit_account_id'] = self.spread_account_id.id
+            spread_vals['credit_account_id'] = account_id
 
         if self.period_number:
             spread_vals['period_number'] = self.period_number
