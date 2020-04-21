@@ -21,7 +21,10 @@
                             <field name="start_date"/>
                         </group>
                         <group>
-                            <field name="spread_account_id" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"/>
+                            <field name="use_invoice_line_account"/>
+                            <field name="spread_account_id" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"
+                              attrs="{'required': [('use_invoice_line_account', '!=', True)], 'invisible': [('use_invoice_line_account', '=', True)]}" />
+                            <field name="exp_rev_account_id" attrs="{'invisible': ['|', ('use_invoice_line_account', '=', False)], 'required': [('use_invoice_line_account', '=', True)]}" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" options="{'no_create': True}"/>
                             <field name="spread_journal_id" domain="[('company_id', '=', company_id)]" widget="selection"/>
                         </group>
                     </group>
