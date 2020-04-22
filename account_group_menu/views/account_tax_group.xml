@@ -33,7 +33,7 @@
             <field name="arch" type="xml">
                 <search string="Account Tax Groups">
                     <field name="name"
-                           filter_domain="['|', ('sequence', '=like', str(self) + '%'), ('name', 'ilike', self)]"
+                           filter_domain="['|', ('sequence', 'ilike', self), ('name', 'ilike', self)]"
                            string="Account Tax Group"/>
                 </search>
             </field>
