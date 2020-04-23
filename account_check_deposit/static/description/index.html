@@ -389,40 +389,43 @@ EUR and checks in USD, you must create 2 deposits: one in EUR and one in USD).</
 </div>
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#id1">Configuration</a></h1>
-<p>In the menu <em>Invoicing &gt; Configuration &gt; Accounting &gt; Journals</em>, create a new
-journal:</p>
+<p>In the menu <em>Invoicing &gt; Configuration &gt; Accounting &gt; Journals</em>, create a new journal:</p>
+<ol class="arabic simple">
+<li><strong>Name:</strong> Checks Received</li>
+<li><strong>Type:</strong> Bank</li>
+<li><strong>Short Code:</strong> CHK (or any code you want)</li>
+<li><strong>Default Debit and Credit Account:</strong> select an account to use for checks received</li>
+</ol>
+<img alt="https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_check_deposit/static/description/Configure_chk_received_journal.png" src="https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_check_deposit/static/description/Configure_chk_received_journal.png" />
+<ol class="arabic simple" start="5">
+<li>DO NOT define a bank account on this journal.</li>
+</ol>
+<img alt="https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_check_deposit/static/description/Configure_chk_received_journal_2.png" src="https://raw.githubusercontent.com/OCA/account-financial-tools/12.0/account_check_deposit/static/description/Configure_chk_received_journal_2.png" />
+<p>This bank journal will be available as a payment method in Odoo.</p>
+<p>The accounts you configured as <em>Default Debit Account</em> and <em>Defaut Credit Account</em> are the accounts via which the amounts of checks will transit between the reception of a check from a customer and the validation of the check deposit in Odoo.</p>
+<p>On the Settings page of the Accounting, you should configure the <em>Check Deposit Offsetting Account</em>:</p>
 <ul class="simple">
-<li>Name: Checks Received</li>
-<li>Type: Bank</li>
-<li>Short Code: CHK (or any code you want)</li>
-<li>Default Debit Account: select an account for checks received</li>
-<li>Default Credit Account: idem</li>
-</ul>
-<p>This bank journal will be available as a payment method in Odoo. The account
-you configured as <em>Default Debit Account</em> and <em>Defaut Credit Account</em> is the
-account via which the amounts of checks will transit between the reception of a
-check from a customer and the validation of the check deposit in Odoo.</p>
-<p>On the Settings page of the Accounting, you should configure the
-<em>Check Deposit Offsetting Account</em>:</p>
-<ul class="simple">
-<li>if you select <em>Bank Account</em>, the counter-part of the account move related to
-the check deposit will be the default debit account of the bank account
-selected on the check deposit.</li>
-<li>if you select <em>Transfer Account</em>, you will have to select a specific account
-that will be used as transfer account for check deposits.</li>
+<li>if you select <em>Bank Account</em>, the counter-part of the account move related to  the check deposit will be the default debit account of the bank account selected on the check deposit.</li>
+<li>if you select <em>Transfer Account</em>, you will have to select a specific account that will be used as transfer account for check deposits.</li>
 </ul>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#id2">Usage</a></h1>
-<p>When you receive a check that pays a customer invoice, you can go to that
-invoice and click on the button <em>Register Payment</em> and select the
-<em>Check Received</em> journal as <em>Payment Journal</em>.</p>
-<p>When you want to deposit checks to the bank, go to the menu
-<em>Invoicing &gt; Accounting &gt; Check Deposit</em>, create a new check deposit and set the
-journal <em>Checks Received</em> and select the bank account on which you want to
-credit the checks. Then click on <em>Add a line</em> to select the checks you want to
-deposit at the bank. Eventually, validate the deposit and print the report
-(you probably want to customize this report).</p>
+<p>When you receive a check that pays a customer invoice, you can go to that invoice to register the payment.</p>
+<ol class="arabic simple">
+<li>Register a payment</li>
+<li>Choose the <em>Checks Received</em> Payment Journal</li>
+</ol>
+<img alt="static/description/Usage_create_payment.png" src="static/description/Usage_create_payment.png" />
+<p>When you want to deposit checks to the bank, go to the menu <em>Invoicing &gt; Accounting &gt; Check Deposit</em>.</p>
+<ol class="arabic simple" start="3">
+<li>Create a new Check Deposit</li>
+<li>Select the <em>Checks Received</em> Journal</li>
+<li>Select the bank account in which you want to deposit the checks.</li>
+<li>Click on <em>Add a line</em> to select the checks you want to deposit at the bank.</li>
+</ol>
+<img alt="static/description/Usage_create_check_deposit.png" src="static/description/Usage_create_check_deposit.png" />
+<p>Eventually, validate the deposit and print the report (you probably want to customize this report).</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#id3">Bug Tracker</a></h1>
