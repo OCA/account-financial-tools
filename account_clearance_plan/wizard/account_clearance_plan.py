@@ -54,21 +54,31 @@ class AccountClearancePlan(models.TransientModel):
         for rec in self:
             rec.amount_allocated = sum(rec.clearance_plan_line_ids.mapped("amount"))
 
-    @api.model
-    def default_get(self, fields):
-        rec = super().default_get(fields)
-
-        if not self._context.get("active_model") == "account.move.line":
+    def _get_move_lines_from_context(self):
+        active_model = self._context.get("active_model")
+        if active_model == "account.invoice":
+            move_line_ids = []
+            for invoice in self.env["account.invoice"].browse(
+                self._context.get("active_ids")
+            ):
+                move_line_ids += invoice._get_open_move_lines_ids()
+        elif not self._context.get("active_model") == "account.move.line":
             raise UserError(
                 _(
                     "Programming error: wizard action executed with 'active_model' "
                     "different from 'account.move.line' in context."
                 )
             )
+        else:
+            move_line_ids = self._context.get("active_ids")
 
-        move_lines = self.env["account.move.line"].browse(
-            self._context.get("active_ids")
-        )
+        return self.env["account.move.line"].browse(move_line_ids)
+
+    @api.model
+    def default_get(self, fields):
+        rec = super().default_get(fields)
+
+        move_lines = self._get_move_lines_from_context()
         account_id = move_lines.mapped("account_id")
 
         # Check all move lines are from same partner

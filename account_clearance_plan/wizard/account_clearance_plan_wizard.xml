@@ -32,7 +32,7 @@
     </record>
 
     <!--Add to account.move.line action-->
-    <act_window id="act_clearance_plan_wizard"
+    <act_window id="act__move_line_clearance_plan_wizard"
                 name="Clearance Plan"
                 res_model="account.clearance.plan"
                 src_model="account.move.line"
@@ -42,15 +42,14 @@
                 target="new" />
 
     <!--Add to account.invoice action-->
-    <record model="ir.actions.server" id="action_clearance_plan_wizard">
-        <field name="name">Clearance Plan</field>
-        <field name="model_id" ref="model_account_invoice"/>
-        <field name="binding_model_id" ref="account.model_account_invoice"/>
-        <field name="binding_type">action</field>
-        <field name="state">code</field>
-        <field name="code">action = records.get_clearance_plan_wizard()</field>
-        <field name="groups_id" eval="[(6, 0, [ref('account.group_account_manager')])]"/>
-    </record>
+    <act_window id="act_invoice_clearance_plan_wizard"
+                name="Clearance Plan"
+                res_model="account.clearance.plan"
+                src_model="account.invoice"
+                view_mode="form"
+                groups="account.group_account_manager"
+                key2="client_action_multi"
+                target="new" />
 
 
 </odoo>
