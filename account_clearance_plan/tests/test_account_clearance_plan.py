@@ -84,9 +84,8 @@ class TestAccountClearancePlan(TransactionCase):
         self.register_payments.create_payments()
 
     def create_and_fill_wizard(self):
-        res = self.invoice.with_context(self.invoice_ctx).get_clearance_plan_wizard()
         clearance_plan_wizard = Form(
-            self.env[res["res_model"]].with_context(res["context"])
+            self.env["account.clearance.plan"].with_context(self.invoice_ctx)
         )
         i = 1
         while i <= 4:
