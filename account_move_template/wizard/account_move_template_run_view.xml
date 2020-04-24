@@ -36,7 +36,7 @@
                             <field
                                 name="analytic_tag_ids"
                                 widget="many2many_tags"
-                                groups="analytic.group_analytic_accounting"
+                                groups="analytic.group_analytic_tags"
                             />
                             <field
                                 name="tax_line_id"
@@ -84,7 +84,7 @@
     </record>
     <menuitem
         id="account_move_template_run_menu"
-        parent="account.menu_finance_entries_accounting_entries"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
         action="account_move_template_run_action"
         sequence="10"
     />
