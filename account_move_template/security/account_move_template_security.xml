@@ -5,6 +5,6 @@
         <field name="model_id" ref="model_account_move_template" />
         <field
             name="domain_force"
-        >['|', ('company_id', '=', False), ('company_id', 'child_of', [user.company_id.id])]</field>
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
 </odoo>

@@ -5,14 +5,14 @@
 
 {
     "name": "Account Move Template",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Accounting",
     "summary": "Templates for recurring Journal Entries",
     "author": "Agile Business Group, Aurium Technologies, Vauxoo, Eficent, "
     "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
-    "depends": ["account",],
+    "depends": ["account"],
     "data": [
         "security/account_move_template_security.xml",
         "security/ir.model.access.csv",
