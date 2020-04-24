@@ -15,3 +15,7 @@ Module Contributors
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Raf Ven <raf.ven@dynapps.be>  (port to v11)
 * Jordi Ballester <jordi.ballester@eficent.com> (EFICENT)
+* `Sygel <https://www.sygel.es>`_:
+
+  * Harald Panten <harald.panten@sygel.es>
+  * Valentin Vinagre <valentin.vinagre@sygel.es>
