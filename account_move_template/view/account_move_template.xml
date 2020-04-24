@@ -16,7 +16,7 @@
                 <field
                     name="analytic_tag_ids"
                     widget="many2many_tags"
-                    groups="analytic.group_analytic_accounting"
+                    groups="analytic.group_analytic_tags"
                 />
                 <field name="move_line_type" />
                 <field name="type" />
@@ -60,7 +60,11 @@
                                 name="analytic_account_id"
                                 domain="[('company_id','=',company_id)]"
                             />
-                            <field name="analytic_tag_ids" widget="many2many_tags" />
+                            <field
+                                name="analytic_tag_ids"
+                                widget="many2many_tags"
+                                groups="analytic.group_analytic_tags"
+                            />
                         </group>
                         <group name="amount" string="Amount">
                             <field name="move_line_type" />
@@ -68,7 +72,12 @@
                             <field name="note" />
                         </group>
                         <group string="Taxes" name="tax">
+                            <field name="is_refund" />
                             <field name="tax_line_id" />
+                            <field
+                                name="tax_repartition_line_id"
+                                attrs="{'invisible': [('tax_line_id','=',False)]}"
+                            />
                             <field name="tax_ids" widget="many2many_tags" />
                         </group>
                     </group>

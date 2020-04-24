@@ -20,7 +20,7 @@ class TestAccountMoveTemplate(TransactionCase):
     def _chart_of_accounts_create(self, company, chart):
         _logger.debug("Creating chart of account")
         self.env.user.write(
-            {"company_ids": [(4, company.id)], "company_id": company.id,}
+            {"company_ids": [(4, company.id)], "company_id": company.id}
         )
         self.with_context(company_id=company.id, force_company=company.id)
         wizard = self.env["wizard.multi.charts.accounts"].create(
@@ -42,16 +42,16 @@ class TestAccountMoveTemplate(TransactionCase):
         multi_company_group = self.env.ref("base.group_multi_company")
         account_user_group = self.env.ref("account.group_account_user")
         account_manager_group = self.env.ref("account.group_account_manager")
-        self.company = self.env["res.company"].create({"name": "Test company",})
+        self.company = self.env["res.company"].create({"name": "Test company"})
         self.company_2 = self.env["res.company"].create(
-            {"name": "Test company 2", "parent_id": self.company.id,}
+            {"name": "Test company 2", "parent_id": self.company.id}
         )
         self.env.user.company_ids += self.company
         self.env.user.company_ids += self.company_2
 
         self.user = (
             self.env["res.users"]
-            .sudo(self.env.user)
+            .with_user(self.env.user)
             .with_context(no_reset_password=True)
             .create(
                 {
@@ -81,7 +81,7 @@ class TestAccountMoveTemplate(TransactionCase):
         self.chart = self.env["account.chart.template"].search([], limit=1)
         self._chart_of_accounts_create(self.company, self.chart)
         account_template = self.env["account.account.template"].create(
-            {"name": "Test 1", "code": "Code_test", "user_type_id": self.user_type.id,}
+            {"name": "Test 1", "code": "Code_test", "user_type_id": self.user_type.id}
         )
         self.env["ir.model.data"].create(
             {
@@ -121,10 +121,10 @@ class TestAccountMoveTemplate(TransactionCase):
             }
         )
         self.partner = self.env["res.partner"].create(
-            {"name": "Test partner", "company_id": False,}
+            {"name": "Test partner", "company_id": False}
         )
         self.partner2 = self.env["res.partner"].create(
-            {"name": "Test partner 2", "company_id": False,}
+            {"name": "Test partner 2", "company_id": False}
         )
         self.account_type = self.env["account.account.type"].create(
             {"name": "Test Tax Account Type"}
@@ -152,7 +152,7 @@ class TestAccountMoveTemplate(TransactionCase):
         """
         template = (
             self.env["account.move.template"]
-            .sudo(self.user)
+            .with_user(self.user)
             .create(
                 {
                     "name": "Test Move Template",
@@ -196,7 +196,7 @@ class TestAccountMoveTemplate(TransactionCase):
 
         wiz = (
             self.env["wizard.select.move.template"]
-            .sudo(self.user)
+            .with_user(self.user)
             .create(
                 {
                     "company_id": self.company.id,

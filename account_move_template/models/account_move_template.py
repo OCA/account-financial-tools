@@ -33,8 +33,6 @@ class AccountMoveTemplate(models.Model):
         )
     ]
 
-    @api.multi
-    @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or {}, name=_("%s (copy)") % self.name)
@@ -139,7 +137,7 @@ class AccountMoveTemplateLine(models.Model):
     )
     note = fields.Char()
     type = fields.Selection(
-        [("computed", "Computed"), ("input", "User input"),],
+        [("computed", "Computed"), ("input", "User input")],
         string="Type",
         required=True,
         default="input",
@@ -153,6 +151,28 @@ class AccountMoveTemplateLine(models.Model):
         string="Payment Terms",
         help="Used to compute the due date of the journal item.",
     )
+    is_refund = fields.Boolean(default=False, string="Is a refund?",)
+    tax_repartition_line_id = fields.Many2one(
+        "account.tax.repartition.line",
+        string="Tax Repartition Line",
+        compute="_compute_tax_repartition_line_id",
+        store=True,
+        readonly=True,
+    )
+
+    @api.depends("is_refund", "account_id", "tax_line_id")
+    def _compute_tax_repartition_line_id(self):
+        for record in self.filtered(lambda x: x.account_id and x.tax_line_id):
+            tax_repartition = "refund_tax_id" if record.is_refund else "invoice_tax_id"
+            record.tax_repartition_line_id = self.env[
+                "account.tax.repartition.line"
+            ].search(
+                [
+                    ("account_id", "=", record.account_id.id),
+                    (tax_repartition, "=", record.tax_line_id.id),
+                ],
+                limit=1,
+            )
 
     _sql_constraints = [
         (
