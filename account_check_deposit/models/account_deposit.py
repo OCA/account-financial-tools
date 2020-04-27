@@ -84,7 +84,7 @@ class AccountCheckDeposit(models.Model):
         'res.company', string='Company', required=True,
         states={'done': [('readonly', '=', True)]},
         default=lambda self: self.env['res.company']._company_default_get())
-    total_amount = fields.Float(
+    total_amount = fields.Monetary(
         compute='_compute_check_deposit',
         string="Total Amount", readonly=True, store=True,
         digits=dp.get_precision('Account'))

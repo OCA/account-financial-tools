@@ -73,16 +73,10 @@
                                         </td>
                                         <td>
                                             <t t-if="o.currency_id == o.company_id.currency_id">
-                                                <span
-                                                    t-field="move_line.debit"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                                />
+                                                <span t-field="move_line.debit"/>
                                             </t>
                                             <t t-if="o.currency_id != o.company_id.currency_id">
-                                                <span
-                                                    t-field="move_line.amount_currency"
-                                                    t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                                />
+                                                <span t-field="move_line.amount_currency"/>
                                             </t>
                                         </td>
                                     </tr>
@@ -95,10 +89,7 @@
                                     </td>
                                     <td>
                                         <b>
-                                            <span
-                                                t-field="o.total_amount"
-                                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                            />
+                                            <span t-field="o.total_amount"/>
                                         </b>
                                     </td>
                                 </tr>
