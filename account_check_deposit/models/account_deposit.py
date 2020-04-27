@@ -112,7 +112,7 @@ class AccountCheckDeposit(models.Model):
         states={"done": [("readonly", "=", True)]},
         default=lambda self: self.env.company,
     )
-    total_amount = fields.Float(
+    total_amount = fields.Monetary(
         compute="_compute_check_deposit",
         string="Total Amount",
         readonly=True,
