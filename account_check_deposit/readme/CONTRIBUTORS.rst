@@ -8,3 +8,7 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Pedro M. Baeza
+
+* `Druidoo <https://www.druidoo.io>`_:
+
+  * Iván Todorovich
