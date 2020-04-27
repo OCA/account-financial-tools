@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2018-10-11 14:19+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"PO-Revision-Date: 2020-04-27 10:19+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1.1\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_account_id
@@ -115,7 +115,7 @@ msgstr "Abbrechen"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount_cancel_loan
 msgid "Cancel Loan"
-msgstr "Beleihung stornieren"
+msgstr "Darlehen stornieren"
 
 #. module: account_loan
 #: selection:account.loan,state:0
@@ -244,7 +244,7 @@ msgstr "Fixer Hauptbetrag"
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
 msgid "Generate Loan Entries"
-msgstr "Erzeuge Beleihungs-Posten"
+msgstr "Erzeuge Darlehensposten"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_generate_wizard_action
@@ -300,7 +300,7 @@ msgstr "Rechnungen"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan_post_invoice
 msgid "Invoices will be posted automatically"
-msgstr ""
+msgstr "Rechnungen werden automatisch genehmigt."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_is_leasing
@@ -385,7 +385,7 @@ msgstr "Position"
 #: model:ir.model.fields,field_description:account_loan.field_account_move_loan_id
 #: model:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Loan"
-msgstr "Leihgabe"
+msgstr "Darlehen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_loan_amount
@@ -403,17 +403,17 @@ msgstr "Leihposition"
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_loan_type
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_loan_type
 msgid "Loan Type"
-msgstr "Beleihungsart"
+msgstr "Darlehenstyp"
 
 #. module: account_loan
 #: model:ir.ui.view,arch_db:account_loan.account_loan_line_tree
 msgid "Loan items"
-msgstr "Leih-Positionen"
+msgstr "Darlehenspositionen"
 
 #. module: account_loan
 #: sql_constraint:account.loan:0
 msgid "Loan name must be unique"
-msgstr "Beleihungsname muss eindeutig sein"
+msgstr "Die Bezeichnung des Darlehens muss eindeutig sein."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_product_id
@@ -426,7 +426,7 @@ msgstr "Leihprodukt"
 #: model:ir.ui.menu,name:account_loan.account_loan_menu
 #: model:ir.ui.view,arch_db:account_loan.account_loan_tree
 msgid "Loans"
-msgstr "Beleihungen"
+msgstr "Darlehen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line_long_term_pending_principal_amount
@@ -491,7 +491,7 @@ msgstr "Nur Zinsen"
 #: code:addons/account_loan/wizard/account_loan_post.py:91
 #, python-format
 msgid "Only loans in draft state can be posted"
-msgstr "Nur Beleihungen im Entwurf können gebucht werden"
+msgstr "Nur Darlehen im Entwurf können gebucht werden"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_pay_amount_action
@@ -539,7 +539,7 @@ msgstr ""
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_method_period
 msgid "Period Length"
-msgstr "Periodenlänge"
+msgstr "Länge des Zeitraums"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_periods
@@ -553,14 +553,13 @@ msgstr "Buchen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_post_invoice
-#, fuzzy
 msgid "Post Invoice"
-msgstr "Hat Rechnungen"
+msgstr "Rechnungen genehmigen"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_post_action
 msgid "Post loan"
-msgstr "Beleihung buchen"
+msgstr "Darlehen buchen"
 
 #. module: account_loan
 #: selection:account.loan,state:0
@@ -651,7 +650,7 @@ msgstr "Reihenfolge"
 #. module: account_loan
 #: sql_constraint:account.loan.line:0
 msgid "Sequence must be unique in a loan"
-msgstr "Reihenfolge muss je Beleihung eindeutig sein"
+msgstr "Die Sequenz muss innerhalb eines Darlehens eindeutig sein."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_short_term_loan_account_id
@@ -767,7 +766,6 @@ msgstr "account.loan.generate.wizard"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_pay_amount
-#, fuzzy
 msgid "account.loan.pay.amount"
 msgstr "account.loan.pay.amount"
 
