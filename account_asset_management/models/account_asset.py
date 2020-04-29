@@ -410,6 +410,10 @@ class AccountAsset(models.Model):
                 asset.state = 'close'
             else:
                 asset.state = 'open'
+                if not asset.depreciation_line_ids.filtered(
+                    lambda l: l.type != 'create'
+                ):
+                    asset.compute_depreciation_board()
         return True
 
     @api.multi
