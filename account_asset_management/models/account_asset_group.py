@@ -38,11 +38,21 @@ class AccountAssetGroup(models.Model):
         result = []
         params = self.env.context.get('params')
         list_view = params and params.get('view_type') == 'list'
+        short_name_len = 16
         for rec in self:
-            if list_view:
-                name = rec.code
+            if rec.code:
+                full_name = rec.code + ' ' + rec.name
+                short_name = rec.code
             else:
-                name = rec.code + ' ' + rec.name
+                full_name = rec.name
+                if len(full_name) > short_name_len:
+                    short_name = full_name[:16] + '...'
+                else:
+                    short_name = full_name
+            if list_view:
+                name = short_name
+            else:
+                name = full_name
             result.append((rec.id, name))
         return result
 
