@@ -21,6 +21,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_check_deposit
+#: model:ir.actions.report,print_report_name:account_check_deposit.report_account_check_deposit
+msgid ""
+"'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or "
+"'')"
+msgstr ""
+
+#. module: account_check_deposit
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.report_checkdeposit
 msgid "<b>Bank Account Number to Credit:</b>"
 msgstr "<b>Cuenta de Banco para Acreditar:</b>"
@@ -62,8 +69,8 @@ msgstr "Regresar a Borrador"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__bank_journal_id
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__res_company__check_deposit_offsetting_account__bank_account
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
-#: selection:res.company,check_deposit_offsetting_account:0
 msgid "Bank Account"
 msgstr "Cta de Banco"
 
@@ -85,14 +92,13 @@ msgid "Check Deposit"
 msgstr "Depósito de Cheque"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:163
-#: code:addons/account_check_deposit/models/account_deposit.py:201
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid "Check Deposit %s"
 msgstr "Depósito de Cheque %s"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:171
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid "Check Deposit - Ref. Check %s"
 msgstr "Depósito de Cheque - Ref. Cheque %s"
@@ -194,13 +200,13 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: account_check_deposit
-#: selection:account.check.deposit,state:0
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__done
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Done"
 msgstr "Realizado"
 
 #. module: account_check_deposit
-#: selection:account.check.deposit,state:0
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__account_check_deposit__state__draft
 #: model_terms:ir.ui.view,arch_db:account_check_deposit.view_check_deposit_search
 msgid "Draft"
 msgstr "Borrador"
@@ -262,14 +268,14 @@ msgid "List of checks:"
 msgstr "Lista de Cheques:"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:196
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, fuzzy, python-format
 #| msgid "Missing 'Account for Check Deposits' on the company '%s'."
 msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
 msgstr "Sin configurar 'Cta. para Depósito de cheques' en la compañía '%s'."
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:190
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid "Missing 'Default Debit Account' on bank journal '%s'"
 msgstr ""
@@ -313,8 +319,7 @@ msgid "Status"
 msgstr "Estado"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:106
-#: code:addons/account_check_deposit/models/account_deposit.py:116
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid ""
 "The check with amount %s and reference '%s' is in currency %s but the "
@@ -322,7 +327,7 @@ msgid ""
 msgstr ""
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:127
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid ""
 "The deposit '%s' is in valid state, so you must cancel it before deleting it."
@@ -344,7 +349,7 @@ msgid "Total Debit"
 msgstr "Total Débito"
 
 #. module: account_check_deposit
-#: selection:res.company,check_deposit_offsetting_account:0
+#: model:ir.model.fields.selection,name:account_check_deposit.selection__res_company__check_deposit_offsetting_account__transfer_account
 msgid "Transfer Account"
 msgstr "Cuenta de Transferencia"
 
@@ -360,7 +365,7 @@ msgid "Validate"
 msgstr "Validar"
 
 #. module: account_check_deposit
-#: code:addons/account_check_deposit/models/account_deposit.py:185
+#: code:addons/account_check_deposit/models/account_deposit.py:0
 #, python-format
 msgid ""
 "You must configure the 'Check Deposit Offsetting Account' on the Accounting "
