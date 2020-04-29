@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1043
+#: code:addons/account_asset_management/models/account_asset.py:1047
 #, python-format
 msgid ""
 "\n"
@@ -564,7 +564,7 @@ msgid "Entries"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:1046
+#: code:addons/account_asset_management/models/account_asset.py:1050
 #, python-format
 msgid ""
 "Error while processing asset '%s': \n"
@@ -594,7 +594,7 @@ msgid "General"
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:430
+#: code:addons/account_asset_management/models/account_asset.py:434
 #, python-format
 msgid "Generate Asset Removal entries"
 msgstr ""
@@ -643,7 +643,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:762
+#: code:addons/account_asset_management/models/account_asset.py:766
 #, python-format
 msgid "Illegal value %s in asset.method."
 msgstr ""
@@ -688,7 +688,7 @@ msgid "Journal"
 msgstr "Dnevnik"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:450
+#: code:addons/account_asset_management/models/account_asset.py:454
 #: model:ir.model,name:account_asset_management.model_account_move
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
@@ -1008,7 +1008,7 @@ msgid "Status"
 msgstr "Status"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:735
+#: code:addons/account_asset_management/models/account_asset.py:739
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
@@ -1035,7 +1035,7 @@ msgid "The Start Date must precede the Ending Date."
 msgstr ""
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset.py:523
+#: code:addons/account_asset_management/models/account_asset.py:527
 #, python-format
 msgid ""
 "The duration of the asset conflicts with the posted depreciation table entry "
