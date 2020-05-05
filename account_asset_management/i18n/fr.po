@@ -1187,12 +1187,6 @@ msgstr ""
 "Valeur d'achat - Valeur de revente."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:145
-#, python-format
-msgid "This option should only be used for a single id at a time."
-msgstr "Cette option doit uniquement être utiliseée pour une id à la fois."
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_time
 msgid "Time Method"
@@ -1411,6 +1405,9 @@ msgstr ""
 "Vous devez ajouter manuellement les lignes d'amortissement correspondant aux "
 "exercices fiscaux précédents si la date de début de l'immobilisation diffère "
 "de la date à laquelle des pièces comptables doivent être générées."
+
+#~ msgid "This option should only be used for a single id at a time."
+#~ msgstr "Cette option doit uniquement être utiliseée pour une id à la fois."
 
 #~ msgid "Child Assets"
 #~ msgstr "Immobilisations enfants"

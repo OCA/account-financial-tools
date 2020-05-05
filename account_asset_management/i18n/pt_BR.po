@@ -1183,12 +1183,6 @@ msgstr ""
 "Valor de Compra - Valor Residual."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_move.py:145
-#, python-format
-msgid "This option should only be used for a single id at a time."
-msgstr "Esta opção deveria ser utilizada para um único id por vez."
-
-#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_time
 msgid "Time Method"
@@ -1400,6 +1394,9 @@ msgstr ""
 "Você deve adicionar manualmente linhas de depreciação com período fiscal "
 "anterior se a Data Inicial de Depreciação é diferente da data para a qual os "
 "lançamentos contábeis devem ser gerados."
+
+#~ msgid "This option should only be used for a single id at a time."
+#~ msgstr "Esta opção deveria ser utilizada para um único id por vez."
 
 #~ msgid "Child Assets"
 #~ msgstr "Ativos-filho"
