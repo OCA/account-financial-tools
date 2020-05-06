@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-22 23:21+0000\n"
-"PO-Revision-Date: 2020-04-27 10:19+0000\n"
+"PO-Revision-Date: 2020-05-06 13:19+0000\n"
 "Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -360,7 +360,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "Steuern"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
