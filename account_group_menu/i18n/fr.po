@@ -22,7 +22,6 @@ msgstr ""
 #. module: account_group_menu
 #: model:ir.model,name:account_group_menu.model_account_group
 #, fuzzy
-#| msgid "Account Groups"
 msgid "Account Group"
 msgstr "Groupes de comptes"
 
@@ -62,7 +61,6 @@ msgstr "Taxes assignées."
 #. module: account_group_menu
 #: model:ir.model,name:account_group_menu.model_account_tax_group
 #, fuzzy
-#| msgid "Account Tax Group"
 msgid "Tax Group"
 msgstr "Groupe des comptes de taxes"
 
