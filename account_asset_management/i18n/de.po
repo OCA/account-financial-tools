@@ -13,15 +13,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
-"PO-Revision-Date: 2016-10-04 09:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/de/)\n"
+"PO-Revision-Date: 2020-05-06 13:19+0000\n"
+"Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
+"Language-Team: German (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1047
@@ -748,7 +749,7 @@ msgstr "Journalbuchung"
 #: model:ir.model,name:account_asset_management.model_account_move_line
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
-msgstr "Journalposten"
+msgstr "Journalbuchung"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
