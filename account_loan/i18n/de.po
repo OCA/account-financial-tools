@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
-"PO-Revision-Date: 2020-04-27 10:19+0000\n"
+"PO-Revision-Date: 2020-05-06 13:19+0000\n"
 "Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -53,17 +53,17 @@ msgstr "Konten"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Aktion notwendig"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Aktivitäten"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Aktivitätsstatus"
 
 #. module: account_loan
 #: code:addons/account_loan/wizard/account_loan_pay_amount.py:82
@@ -112,10 +112,8 @@ msgstr "Annuität"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_attachment_count
-#, fuzzy
-#| msgid "Payment Amount"
 msgid "Attachment Count"
-msgstr "Zu zahlender Betrag"
+msgstr "Anhangsanzahl"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_pay_amount__fees
@@ -166,7 +164,7 @@ msgstr "Unternehmen oder Individuum, welches Geld zu einem Zinssatz verleiht."
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_form
 msgid "Compute items"
-msgstr "Berechne Elemente"
+msgstr "Einträge berechnen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__create_uid
@@ -268,28 +266,28 @@ msgstr "Fixer Hauptbetrag"
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Abonnenten"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Abonnenten (Kanäle)"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Abonnenten (Partner)"
 
 #. module: account_loan
 #: model:ir.ui.menu,name:account_loan.account_loan_generate_wizard_menu
 msgid "Generate Loan Entries"
-msgstr "Erzeuge Darlehensposten"
+msgstr "Darlehensposten erzeugen"
 
 #. module: account_loan
 #: model:ir.actions.act_window,name:account_loan.account_loan_generate_wizard_action
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_generate_wizard_form
 msgid "Generate moves"
-msgstr "Erzeuge Buchungen"
+msgstr "Buchungen erzeugen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan_line__has_invoices
@@ -313,17 +311,18 @@ msgstr "ID"
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_unread
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Wenn es gesetzt ist, erfordern neue Nachrichten Ihre Aufmerksamkeit."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Wenn es gesetzt ist, erfordern neue Nachrichten Ihre Aufmerksamkeit."
 
 #. module: account_loan
 #: model:ir.model.fields,help:account_loan.field_account_loan__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
+"Wenn es gesetzt ist, gibt es einige Nachrichten mit einem Übertragungsfehler."
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__interests_product_id
@@ -359,7 +358,7 @@ msgstr "Rechnungen werden automatisch genehmigt."
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Ist Abonnent"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__is_leasing
@@ -380,15 +379,13 @@ msgstr "Journal"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
-#, fuzzy
-#| msgid "Journal Type"
 msgid "Journal Entries"
-msgstr "Journalart"
+msgstr "Journal-Buchungen"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan__journal_type
 msgid "Journal Type"
-msgstr "Journalart"
+msgstr "Journal-Typ"
 
 #. module: account_loan
 #: model:ir.model.fields,field_description:account_loan.field_account_loan____last_update
@@ -473,10 +470,8 @@ msgstr "Darlehenstyp"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_generate_wizard
-#, fuzzy
-#| msgid "account.loan.generate.wizard"
 msgid "Loan generate wizard"
-msgstr "account.loan.generate.wizard"
+msgstr "Assistent für Darlehensgenerierung"
 
 #. module: account_loan
 #: model_terms:ir.ui.view,arch_db:account_loan.account_loan_line_tree
