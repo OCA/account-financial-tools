@@ -1168,8 +1168,12 @@ class AccountAsset(models.Model):
         Update list in custom module to add/drop columns or change order
         """
         return [
-            'account', 'name', 'code', 'date_start', 'depreciation_base',
-            'salvage_value',
+            "account",
+            "name",
+            "code",
+            "date_start",
+            "depreciation_base",
+            "salvage_value",
         ]
 
     @api.model
@@ -1178,11 +1182,20 @@ class AccountAsset(models.Model):
         Update list in custom module to add/drop columns or change order
         """
         return [
-            'account', 'name', 'code', 'date_start',
-            'depreciation_base', 'salvage_value',
-            'period_start_value', 'period_depr', 'period_end_value',
-            'period_end_depr',
-            'method', 'method_number', 'prorata', 'state',
+            "account",
+            "name",
+            "code",
+            "date_start",
+            "depreciation_base",
+            "salvage_value",
+            "period_start_value",
+            "period_depr",
+            "period_end_value",
+            "period_end_depr",
+            "method",
+            "method_number",
+            "prorata",
+            "state",
         ]
 
     @api.model
@@ -1191,8 +1204,12 @@ class AccountAsset(models.Model):
         Update list in custom module to add/drop columns or change order
         """
         return [
-            'account', 'name', 'code', 'date_remove', 'depreciation_base',
-            'salvage_value',
+            "account",
+            "name",
+            "code",
+            "date_remove",
+            "depreciation_base",
+            "salvage_value",
         ]
 
     @api.model
