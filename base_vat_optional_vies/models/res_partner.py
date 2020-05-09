@@ -31,7 +31,7 @@ class ResPartner(models.Model):
             return self.simple_vat_check(country_code, vat_number)
         return res
 
-    @api.constrains("vat")
+    @api.constrains("vat", "country_id")
     def check_vat(self):
         for partner in self:
             partner = partner.with_context(vat_partner=partner)
