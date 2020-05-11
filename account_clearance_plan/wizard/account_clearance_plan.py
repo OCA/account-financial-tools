@@ -114,6 +114,7 @@ class AccountClearancePlan(models.TransientModel):
                     "move_id": move.id,
                     "debit": abs(line.amount_residual) if line.credit > 0 else 0,
                     "credit": abs(line.amount_residual) if line.debit > 0 else 0,
+                    "invoice_id": False,
                 }
             )
             new_line.write({"name": (_("Clearance Plan: ") + new_line.name)})
