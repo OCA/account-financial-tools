@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-account_chart_update',
         'odoo12-addon-account_check_deposit',
         'odoo12-addon-account_coa_menu',
+        'odoo12-addon-account_cost_center',
         'odoo12-addon-account_document_reversal',
         'odoo12-addon-account_fiscal_month',
         'odoo12-addon-account_fiscal_position_vat_check',
