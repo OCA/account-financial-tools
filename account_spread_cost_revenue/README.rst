@@ -133,6 +133,7 @@ Under Invoicing -> Configuration -> Accounting -> Spread Templates, create a new
 
 * *Spread Type*
 * *Spread Balance Sheet Account*
+* *Expense/Revenue Account* This option visible if invoice line account is balance sheet account, user need to specify this too.
 * *Journal*
 
 When creating a new Spread Costs/Revenues Board, select the right template.
@@ -140,6 +141,13 @@ This way the above fields will be copied to the Spread Board.
 
 Changelog
 =========
+
+12.0.1.1.0
+~~~~~~~~~~
+
+* [ENH] Add optional Expense/Revenue Account in Chart Template, which can be used
+  in place of account from invoice line to set Expense/Revenue account in the spread
+
 
 12.0.1.0.0
 ~~~~~~~~~~
@@ -175,6 +183,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Andrea Stirpe <a.stirpe@onestein.nl>
+* Kitti U. <kittiu@ecosoft.co.th>
 
 Other credits
 ~~~~~~~~~~~~~
