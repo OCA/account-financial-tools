@@ -291,7 +291,7 @@ class AccountAsset(models.Model):
                 lambda l: l.type in ("depreciate", "remove")
                 and (l.init_entry or l.move_check)
             )
-            value_depreciated = sum([l.amount for l in lines])
+            value_depreciated = sum([line.amount for line in lines])
             residual = asset.depreciation_base - value_depreciated
             depreciated = value_depreciated
             asset.update({"value_residual": residual, "value_depreciated": depreciated})
@@ -651,7 +651,7 @@ class AccountAsset(models.Model):
                 # check if residual value corresponds with table
                 # and adjust table when needed
                 depreciated_value_posted = depreciated_value = sum(
-                    [l.amount for l in posted_lines]
+                    [posted_line.amount for posted_line in posted_lines]
                 )
                 residual_amount = asset.depreciation_base - depreciated_value
                 amount_diff = round(residual_amount_table - residual_amount, digits)
@@ -1042,7 +1042,7 @@ class AccountAsset(models.Model):
 
         for entry in table:
             if not entry["fy_amount"]:
-                entry["fy_amount"] = sum([l["amount"] for l in entry["lines"]])
+                entry["fy_amount"] = sum([line["amount"] for line in entry["lines"]])
 
     def _get_fy_info(self, date):
         """Return an homogeneus data structure for fiscal years."""
