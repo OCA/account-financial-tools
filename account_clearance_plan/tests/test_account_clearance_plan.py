@@ -101,7 +101,7 @@ class TestAccountClearancePlan(TransactionCase):
         clearance_plan = self.create_and_fill_wizard().save()
         self.assertEqual(clearance_plan.journal_id.id, self.general_journal.id)
         self.assertEqual(clearance_plan.amount_to_allocate, 800.0)
-        self.assertEqual(clearance_plan.amount_allocated, 800.0)
+        self.assertEqual(clearance_plan.amount_unallocated, 0.0)
 
     def test_wizard_negative_amount(self):
         clearance_plan_wizard = self.create_and_fill_wizard()

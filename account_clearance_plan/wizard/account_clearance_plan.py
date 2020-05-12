@@ -9,6 +9,12 @@ class AccountClearancePlanLine(models.TransientModel):
     _name = "account.clearance.plan.line"
     _description = "Clearance Plan Line"
 
+    name = fields.Char(
+        string="Label",
+        required=True,
+        default=lambda self:
+            self.env.user.company_id.clearance_plan_move_line_name,
+    )
     clearance_plan_id = fields.Many2one(
         comodel_name="account.clearance.plan", required=True
     )
@@ -42,17 +48,19 @@ class AccountClearancePlan(models.TransientModel):
         help="Internal note of the new journal entry that will be generated.",
     )
     amount_to_allocate = fields.Float(string="Total Amount to Allocate", readonly=True)
-    amount_allocated = fields.Float(
-        string="Amount Allocated", compute="_compute_amount_allocated"
+    amount_unallocated = fields.Float(
+        string="Amount Unallocated", compute="_compute_amount_unallocated"
     )
     clearance_plan_line_ids = fields.One2many(
         comodel_name="account.clearance.plan.line", inverse_name="clearance_plan_id"
     )
 
     @api.onchange("clearance_plan_line_ids")
-    def _compute_amount_allocated(self):
+    def _compute_amount_unallocated(self):
         for rec in self:
-            rec.amount_allocated = sum(rec.clearance_plan_line_ids.mapped("amount"))
+            rec.amount_unallocated = rec.amount_to_allocate - sum(
+                rec.clearance_plan_line_ids.mapped("amount")
+            )
 
     def _get_move_lines_from_context(self):
         active_model = self._context.get("active_model")
@@ -124,7 +132,6 @@ class AccountClearancePlan(models.TransientModel):
     def _create_clearance_move_lines(self, move):
         account_id = self.move_line_ids.mapped("account_id")
         partner_id = self.move_line_ids.mapped("partner_id")
-        move_line_name = self.env.user.company_id.clearance_plan_move_line_name
         negative_amount_residual = sum(move.line_ids.mapped("amount_residual")) < 0
         for line in self.clearance_plan_line_ids:
             self.env["account.move.line"].with_context(
@@ -135,7 +142,7 @@ class AccountClearancePlan(models.TransientModel):
                     "debit": line.amount if negative_amount_residual else 0,
                     "credit": line.amount if not negative_amount_residual else 0,
                     "date_maturity": line.date_maturity,
-                    "name": move_line_name,
+                    "name": line.name,
                     "account_id": account_id.id,
                     "partner_id": partner_id.id,
                 }
@@ -143,10 +150,8 @@ class AccountClearancePlan(models.TransientModel):
 
     def confirm_plan(self):
         self.ensure_one()
-        if self.amount_to_allocate != self.amount_allocated:
-            raise UserError(
-                _("Amount to allocate and amount allocated must be equals.")
-            )
+        if self.amount_unallocated != 0:
+            raise UserError(_("%s still to allocate.") % self.amount_unallocated)
 
         move = self.env["account.move"].create(
             {
