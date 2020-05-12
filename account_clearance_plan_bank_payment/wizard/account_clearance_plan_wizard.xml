@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="clearance_plan_form_wizard">
+        <field name="name">account.clearance.plan.form (in account_clearance_plan_bank_payment)</field>
+        <field name="model">account.clearance.plan</field>
+        <field name="inherit_id" ref="account_clearance_plan.clearance_plan_wizard"/>
+        <field name="arch" type="xml">
+            <field name="amount" position="after">
+                <field name="payment_mode_allowed_ids" widget="many2many_tags" invisible="1"/>
+                <field name="payment_mode_id" widget="selection"/>
+                <field name="mandate_allowed_ids" widget="many2many_tags" invisible="1"/>
+                <field name="mandate_required" invisible="1"/>
+                <field name="mandate_id" widget="selection" attrs="{'required': [('mandate_required', '=', True)], 'invisible': [('mandate_required', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

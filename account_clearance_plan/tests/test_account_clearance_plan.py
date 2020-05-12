@@ -7,9 +7,9 @@ from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
 
 
-class TestAccountClearancePlan(TransactionCase):
+class TestAccountClearancePlanBase(TransactionCase):
     def setUp(self):
-        super(TestAccountClearancePlan, self).setUp()
+        super(TestAccountClearancePlanBase, self).setUp()
         self.company = self.env.ref("base.main_company")
         self.partner = self.env["res.partner"].create({"name": "Test"})
         self.account_type_receivable = self.env["account.account.type"].create(
@@ -35,14 +35,17 @@ class TestAccountClearancePlan(TransactionCase):
             }
         )
         self.sale_journal = self.env["account.journal"].search(
-            [("type", "=", "sale"), ("company_id", "=", self.company.id)]
-        )[0]
+            [("type", "=", "sale"), ("company_id", "=", self.company.id)],
+            limit=1,
+        )
         self.cash_journal = self.env["account.journal"].search(
-            [("type", "=", "cash"), ("company_id", "=", self.company.id)]
-        )[0]
+            [("type", "=", "cash"), ("company_id", "=", self.company.id)],
+            limit=1,
+        )
         self.general_journal = self.env["account.journal"].search(
-            [("type", "=", "general"), ("company_id", "=", self.company.id)]
-        )[0]
+            [("type", "=", "general"), ("company_id", "=", self.company.id)],
+            limit=1,
+        )
         self.company.clearance_plan_journal_id = self.general_journal
         self.payment_method_manual_in = self.env.ref(
             "account.account_payment_method_manual_in"
@@ -83,6 +86,8 @@ class TestAccountClearancePlan(TransactionCase):
         )
         self.register_payments.create_payments()
 
+
+class TestAccountClearancePlan(TestAccountClearancePlanBase):
     def create_and_fill_wizard(self):
         clearance_plan_wizard = Form(
             self.env["account.clearance.plan"].with_context(self.invoice_ctx)
