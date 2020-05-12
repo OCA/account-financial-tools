@@ -37,6 +37,7 @@
                             <field name="display_recompute_buttons" invisible="1"/>
                             <field name="display_move_line_auto_post" invisible="1"/>
                             <field name="all_posted" invisible="1"/>
+                            <field name="use_invoice_line_account" invisible="1"/>
                         </group>
                     </group>
                     <group name="accounts">
@@ -46,14 +47,26 @@
                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"/>
                             <label for="debit_account_id" colspan="3" string="Expense account"
                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"/>
-                            <span class="help-block" colspan="2"
-                                  attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
-                                  The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.
-                            </span>
-                            <span class="help-block" colspan="2"
-                                  attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
-                                  The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.
-                            </span>
+                            <div attrs="{'invisible': [('use_invoice_line_account', '=', True)]}" colspan="2">
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
+                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.
+                                </span>
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
+                                      The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.
+                                </span>
+                            </div>
+                            <div attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}" colspan="2">
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
+                                      The Balance Sheet account.<br/>This is the account in the invoice line.
+                                </span>
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
+                                      The Expense account used for the spreading.<br/>This account is the counterpart of the account of the vendor bill line.
+                                </span>
+                            </div>
                             <field name="debit_account_id" required="1" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" attrs="{'readonly':[('invoice_line_id','!=',False)]}"/>
                             <span class="help-block text-danger" colspan="2"
                                   attrs="{'invisible':[('is_debit_account_deprecated','!=',True)]}">
@@ -66,14 +79,26 @@
                                    attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}"/>
                             <label for="credit_account_id" colspan="3" string="Balance sheet account / Spread account"
                                    attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}"/>
-                            <span class="help-block" colspan="2"
-                                  attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
-                                  The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.
-                            </span>
-                            <span class="help-block" colspan="2"
-                                  attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
-                                  The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.
-                            </span>
+                            <div attrs="{'invisible': [('use_invoice_line_account', '=', True)]}" colspan="2">
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
+                                      The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.
+                                </span>
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
+                                      The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.
+                                </span>
+                            </div>
+                            <div attrs="{'invisible': [('use_invoice_line_account', '!=', True)]}" colspan="2">
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}">
+                                      The Revenue account used for the spreading.<br/>This account is the counterpart of the account of the invoice line.
+                                </span>
+                                <span class="help-block" colspan="2"
+                                      attrs="{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}">
+                                      The Balance Sheet account.<br/>This is the account in the vendor bill line.
+                                </span>
+                            </div>
                             <field name="credit_account_id" required="1" domain="[('company_id', '=', company_id), ('deprecated', '=', False)]" attrs="{'readonly':[('invoice_line_id','!=',False)]}"/>
                             <span class="help-block text-danger" colspan="2"
                                   attrs="{'invisible':[('is_credit_account_deprecated','!=',True)]}">
