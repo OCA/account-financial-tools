@@ -11,12 +11,13 @@
                     <field name="move_ref"/>
                     <field name="move_narration"/>
                     <field name="amount_to_allocate"/>
-                    <field name="amount_allocated"/>
+                    <field name="amount_unallocated"/>
                 </group>
                 <notebook>
                     <page string="Clearance Plan Board">
                         <field name="clearance_plan_line_ids">
                             <tree editable="bottom">
+                                <field name="name"/>
                                 <field name="date_maturity"/>
                                 <field name="amount"/>
                             </tree>
