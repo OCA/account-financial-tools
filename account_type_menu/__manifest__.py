@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Account Types Menu",
+    "name": "Account Types Menu 2 - sds",
     "version": "13.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
