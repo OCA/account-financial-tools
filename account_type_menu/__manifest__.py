@@ -4,7 +4,7 @@
 
 {
     "name": "Account Types Menu",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds a menu entry for Account Types",
