@@ -64,7 +64,7 @@ class WizardCreateMoveTransfer(models.TransientModel):
         moves = self.env['account.move']
         for journal in self.journal_id:
             lines = []
-            move = self._create_move(name, journal.id, partner)
+            move = self._create_move(name, journal.id, partner, self.account_move_id.id)
             for line in self.account_move_line_ids:
                 lines.append((0, 0, self._prepare_line(line, partner, move)))
             move.write({'line_ids': lines})
@@ -79,11 +79,12 @@ class WizardCreateMoveTransfer(models.TransientModel):
         }
 
     @api.model
-    def _create_move(self, ref, journal_id, partner_id):
+    def _create_move(self, ref, journal_id, partner_id, account_move_id):
         return self.env['account.move'].create({
             'ref': ref,
             'journal_id': journal_id,
             'partner_id': partner_id,
+            'origin_move_id': account_move_id,
         })
 
     @api.model

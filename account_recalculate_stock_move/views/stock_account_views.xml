@@ -15,10 +15,46 @@
                                     icon="fa fa-book"
                                     class="oe_stat_button"
                                     string="Rebuild Acc. Entries"
+                                    states="done"
                                     type="object"/>
+                    <button name="rebuild_picking_move"
+                                    icon="fa fa-free-code-camp"
+                                    class="oe_stat_button"
+                                    string="Re-booking Picking Entries"
+                                    type="object"
+                                    states="done"
+                                    groups="base.group_no_one"/>
                 </xpath>
             </field>
         </record>
+
+        <record id="view_inventory_form_inherit" model="ir.ui.view">
+            <field name="name">stock.inventory.form.inherit</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_get_account_moves"
+                            icon="fa-usd" class="oe_stat_button"
+                            string="Accounting Entries"
+                            type="object"/>
+                    <button name="rebuild_account_move"
+                                    icon="fa fa-book"
+                                    class="oe_stat_button"
+                                    string="Rebuild Acc. Entries"
+                                    type="object"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <div attrs="{'invisible': [('state', '!=', 'done')]}">
+                        <label class="o_td_label" for="is_force_accounting_date">
+                        Force Date
+                        </label>
+                        <field name="is_force_accounting_date" widget="boolean_toggle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
         <record id="view_move_form_inherit_re" model="ir.ui.view">
             <field name="name">stock.move.form.inherit</field>
             <field name="model">stock.move</field>
@@ -27,15 +63,101 @@
                 <xpath expr="//div[@name='button_box']" position="inside">
                     <field name="has_account_move" invisible="1"/>
                     <button name="rebuild_account_move"
-                                    icon="fa fa-book"
-                                    class="oe_stat_button"
-                                    string="Rebuild Acc. Entries"
-                                    type="object"
-                                    attrs="{'invisible': [('has_account_move', '=', True)]}"/>
+                            icon="fa fa-book"
+                            class="oe_stat_button"
+                            string="Rebuild Acc. Entries"
+                            type="object"
+                            attrs="{'invisible': [('has_account_move', '=', True)]}"/>
                 </xpath>
                 <field name="date" position="after">
                     <field name="accounting_date"/>
                 </field>
+                <xpath expr="//group[@name='origin_grp']" position="inside">
+                    <field name="inventory_id"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="stock_move_tree" model="ir.ui.view">
+            <field name="name">Stock Moves</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.stock_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="has_account_move" invisible="1"/>
+                    <button name="rebuild_account_move"
+                            icon="fa fa-book"
+                            type="object"/>
+                </field>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">has_account_move == False</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_tree" model="ir.ui.view">
+            <field name="name">stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field eval="8" name="priority"/>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="has_account_move" invisible="1"/>
+                    <button name="rebuild_account_move"
+                            icon="fa fa-book"
+                            type="object"/>
+                </field>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">has_account_move == False</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_line_form" model="ir.ui.view">
+            <field name="name">stock.move.line.form</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <field name="reference" position="after">
+                    <field name="move_id"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_inventory_form" model="ir.ui.view">
+            <field name="name">stock.inventory.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_cancel" states="done" string="Cancel" type="object"/>
+                </xpath>
+                <xpath expr="//field[@name='move_ids']/tree/field[@name='state']" position="after">
+                    <field name="has_account_move" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='move_ids']/tree" position="attributes">
+                    <attribute name="decoration-danger">has_account_move == False</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_quant_tree" model="ir.ui.view">
+            <field name="name">stock.quant.tree</field>
+            <field name="model">stock.quant</field>
+            <field eval="10" name="priority"/>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <field name="reserved_quantity" position="before">
+                    <field name="move_line_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_stock_quant_form">
+            <field name="name">stock.quant.form</field>
+            <field name="model">stock.quant</field>
+            <field eval="10" name="priority"/>
+            <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <label for="move_line_ids"/>
+                    <field name="move_line_ids" nolabel="1" widget="one2many_list"/>
+                </xpath>
             </field>
         </record>
     </data>

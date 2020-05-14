@@ -7,4 +7,3 @@ from . import sale
 from . import purchase
 from . import stock_picking
 from . import stock_inventory
-from . import stock_quant

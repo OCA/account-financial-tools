@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="after">
+                <div groups="account_initial_balance.group_initial_balance_user">
+                    <label for="is_initial_balance">
+                    This is initial balance
+                    </label>
+                    <field name="is_initial_balance" widget="boolean_toggle"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

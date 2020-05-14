@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wizard_stock_inventory_cancel" model="ir.ui.view">
+        <field name="name">Wizard stock inventory cancel</field>
+        <field name="model">wizard.stock.inventory.cancel</field>
+        <field name="arch" type="xml">
+            <form string="Cancel inventory and remove it" >
+                <group>
+                    <group>
+                        <field name="date" string="Before Date"/>
+                        <field name="remove_after" string="Delete after cancel"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_cancel" class="btn-primary" string="Next" type="object"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <act_window name="Stock inventory cancel"
+        res_model="wizard.stock.inventory.cancel"
+        src_model="stock.inventory"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_stock_inventory_cancel"
+        view_id="wizard_stock_inventory_cancel"/>
+
+</odoo>

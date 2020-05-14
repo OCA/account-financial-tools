@@ -17,95 +17,110 @@ class AccountInvoice(models.Model):
     @api.multi
     def finalize_invoice_move_lines(self, move_lines):
         move_lines = super().finalize_invoice_move_lines(move_lines)
-        new_lines = []
-        for line_tuple in move_lines:
-            line = line_tuple[2]
-            dp = self.env['decimal.precision']
-            if line.get('asset_profile_id') and \
-                    line.get('quantity', 0.0) > 1.0:
-                profile = self.env['account.asset.profile'].browse(
-                    [line.get('asset_profile_id')])
-                if profile.asset_product_item:
-                    origin_line = copy.deepcopy(line)
-                    line_qty = line.get('quantity')
-                    line['quantity'] = round(line['quantity'] / line_qty,
-                                             dp.precision_get('Account'))
-                    line['debit'] = round(line['debit'] / line_qty,
-                                          dp.precision_get('Account'))
-                    line['credit'] = round(line['credit'] / line_qty,
-                                           dp.precision_get('Account'))
-                    for analytic_line_tuple in line['analytic_line_ids']:
-                        analytic_line = analytic_line_tuple[2]
-                        analytic_line['amount'] = round(
-                            analytic_line['amount'] / line_qty,
+        for inv in self:
+            new_lines = []
+            # check for refund to cancel new assets
+            assets = False
+            if inv.refund_invoice_id:
+                move = inv.refund_invoice_id.move_id
+                assets = move.line_ids.mapped('asset_id')
+            for line_tuple in move_lines:
+                line = line_tuple[2]
+                dp = self.env['decimal.precision']
+                if line.get('asset_profile_id') and \
+                        line.get('quantity', 0.0) > 1.0:
+                    profile = self.env['account.asset.profile'].browse(
+                        [line.get('asset_profile_id')])
+                    if profile.asset_product_item:
+                        origin_line = copy.deepcopy(line)
+                        line_qty = line.get('quantity')
+                        line['quantity'] = round(line['quantity'] / line_qty,
+                                                 dp.precision_get('Account'))
+                        line['debit'] = round(line['debit'] / line_qty,
+                                              dp.precision_get('Account'))
+                        line['credit'] = round(line['credit'] / line_qty,
+                                               dp.precision_get('Account'))
+                        if assets:
+                            asset = assets[0]
+                            line['save_asset_id'] = asset.id
+                            asset.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': asset.id,
+                                                                                           'name': asset._get_depreciation_entry_name(0),
+                                                                                           'type': 'create',
+                                                                                           'move_id': self.move_id.id,
+                                                                                           'init_entry': True,
+                                                                                           'line_date': self.refund_invoice_id.date_invoice,
+                                                                                           'depreciation_base': line['debit'] - line['credit']})]})
+                        for analytic_line_tuple in line['analytic_line_ids']:
+                            analytic_line = analytic_line_tuple[2]
+                            analytic_line['amount'] = round(
+                                analytic_line['amount'] / line_qty,
+                                dp.precision_get('Account'))
+                            analytic_line['unit_amount'] = round(
+                                analytic_line['unit_amount'] / line_qty, 2)
+                        line_to_create = line_qty
+                        while line_to_create > 1:
+                            line_to_create -= 1
+                            new_line = copy.deepcopy(line_tuple)
+                            if assets:
+                                inx = int(line_to_create)
+                                if inx in range(-len(assets), len(assets)):
+                                    asset = assets[inx]
+                                    new_line[2]['save_asset_id'] = asset.id
+                                    asset.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': asset.id,
+                                               'name': asset._get_depreciation_entry_name(0),
+                                               'type': 'create',
+                                               'move_id': self.move_id.id,
+                                               'init_entry': True,
+                                               'line_date': self.refund_invoice_id.date_invoice,
+                                               'depreciation_base': new_line[2]['debit'] - new_line[2]['credit']})]})
+                            _logger.info("ASSETS %s" % new_line[2])
+                            new_lines.append(new_line)
+                        # Compute rounding difference and apply it on the first
+                        # line
+                        line['quantity'] += round(
+                            origin_line['quantity'] - line['quantity'] * line_qty,
+                            2)
+                        line['debit'] += round(
+                            origin_line['debit'] - line['debit'] * line_qty,
                             dp.precision_get('Account'))
-                        analytic_line['unit_amount'] = round(
-                            analytic_line['unit_amount'] / line_qty, 2)
-                    line_to_create = line_qty
-                    while line_to_create > 1:
-                        line_to_create -= 1
-                        new_line = copy.deepcopy(line_tuple)
-                        new_lines.append(new_line)
-                    # Compute rounding difference and apply it on the first
-                    # line
-                    line['quantity'] += round(
-                        origin_line['quantity'] - line['quantity'] * line_qty,
-                        2)
-                    line['debit'] += round(
-                        origin_line['debit'] - line['debit'] * line_qty,
-                        dp.precision_get('Account'))
-                    line['credit'] += round(
-                        origin_line['credit'] - line['credit'] * line_qty,
-                        dp.precision_get('Account'))
-                    i = 0
-                    for analytic_line_tuple in line['analytic_line_ids']:
-                        analytic_line = analytic_line_tuple[2]
-                        origin_analytic_line = \
-                            origin_line['analytic_line_ids'][i][2]
-                        analytic_line['amount'] += round(
-                            origin_analytic_line['amount'] - analytic_line[
-                                'amount'] * line_qty,
+                        line['credit'] += round(
+                            origin_line['credit'] - line['credit'] * line_qty,
                             dp.precision_get('Account'))
-                        analytic_line['unit_amount'] += round(
-                            origin_analytic_line['unit_amount'] -
-                            analytic_line[
-                                'unit_amount'] * line_qty,
-                            dp.precision_get('Account'))
-                        i += 1
-        move_lines.extend(new_lines)
+                        i = 0
+                        for analytic_line_tuple in line['analytic_line_ids']:
+                            analytic_line = analytic_line_tuple[2]
+                            origin_analytic_line = \
+                                origin_line['analytic_line_ids'][i][2]
+                            analytic_line['amount'] += round(
+                                origin_analytic_line['amount'] - analytic_line[
+                                    'amount'] * line_qty,
+                                dp.precision_get('Account'))
+                            analytic_line['unit_amount'] += round(
+                                origin_analytic_line['unit_amount'] -
+                                analytic_line[
+                                    'unit_amount'] * line_qty,
+                                dp.precision_get('Account'))
+                            i += 1
+            move_lines.extend(new_lines)
         return move_lines
 
     @api.multi
     def action_move_create(self):
         res = super().action_move_create()
         for inv in self:
-            assets = inv.move_id.line_ids.mapped('asset_id')
-            for asset in assets:
-                asset.code = inv.move_name
-                asset_line_name = asset._get_depreciation_entry_name(0)
-                asset.depreciation_line_ids[0].with_context(
-                    {'allow_asset_line_update': True}
-                ).name = asset_line_name
-            assets = self.env['account.asset'].search([('type', '=', 'normal')])
-            asset_ids = {}
-            for asset in assets:
-                if inv.refund_invoice_id.id in asset.account_move_line_ids.mapped('invoice_id').ids:
-                    asset_ids[asset] = asset.product_id
-            #_logger.info("ASSETS %s" % asset_ids)
-            for k,v in asset_ids.items():
-                move_line = inv.move_id.line_ids.filtered(lambda r: r.product_id == v).with_context(dict(self.env.context, allow_asset=True))
-                move_line.write({'asset_id': k.id})
-                all = sum([1 for x in assets.filtered(lambda r: r.product_id == v and r.type == 'normal')])/2
-                all = all or 1
-                value = mean([(x.debit - x.credit) / all for x in move_line])
-                #_logger.info("ASSETS %s:%s:%s" % (k, v, value))
-                k.write({'depreciation_restatement_line_ids': [(0, False, {'asset_id': k.id,
-                                                                           'name': k._get_depreciation_entry_name(0),
-                                                                           'type': 'create',
-                                                                           'move_id': inv.move_id.id,
-                                                                           'init_entry': True,
-                                                                           'line_date': inv.refund_invoice_id.date_invoice,
-                                                                           'depreciation_base': value})]})
+            assets = False
+            # check for refund to cancel new assets
+            if inv.refund_invoice_id:
+                move = inv.refund_invoice_id.move_id
+                assets = move.line_ids.mapped('asset_id')
+            if not assets:
+                assets = inv.move_id.line_ids.mapped('asset_id')
+                for asset in assets:
+                    asset.code = inv.move_name
+                    asset_line_name = asset._get_depreciation_entry_name(0)
+                    asset.depreciation_line_ids[0].with_context(
+                        {'allow_asset_line_update': True}
+                    ).name = asset_line_name
         return res
 
     @api.multi
@@ -113,7 +128,10 @@ class AccountInvoice(models.Model):
         assets = self.env['account.asset']
         for inv in self:
             move = inv.move_id
-            assets |= move.line_ids.mapped('asset_id')
+            assets |= move.line_ids.filtered(lambda r: r.invoice_id.id == inv.id).mapped('asset_id')
+            depreciation_restatement_line = self.env['account.asset.restatement.value'].search([('move_id', '=', move.id)])
+            if depreciation_restatement_line:
+                depreciation_restatement_line.unlink()
         super().action_cancel()
         if assets:
             assets.unlink()

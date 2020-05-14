@@ -68,30 +68,37 @@ class AccountMoveLine(models.Model):
                   "an accounting entry to an asset."
                   "\nYou should generate such entries from the asset."))
         if vals.get('asset_profile_id'):
-            # create asset
-            asset_obj = self.env['account.asset']
-            move = self.env['account.move'].browse(vals['move_id'])
-            depreciation_base = vals['debit'] or -vals['credit']
-            temp_vals = {
-                'name': vals['name'],
-                'profile_id': vals['asset_profile_id'],
-                'purchase_value': depreciation_base,
-                'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
-                'partner_id': vals['partner_id'],
-                'date_start': move.date,
-                'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
-                'product_id': vals['product_id'],
-            }
-            if self.env.context.get('company_id'):
-                temp_vals['company_id'] = self.env.context['company_id']
-            temp_asset = asset_obj.new(temp_vals)
-            temp_asset._onchange_profile_id()
-            asset_vals = temp_asset._convert_to_write(temp_asset._cache)
-            self._get_asset_analytic_values(vals, asset_vals)
-            asset = asset_obj.with_context(
-                create_asset_from_move_line=True,
-                move_id=vals['move_id']).create(asset_vals)
-            vals['asset_id'] = asset.id
+            # check for additional values added now
+            correction = False
+            if vals.get('save_asset_id'):
+                correction = True
+                vals['asset_id'] = vals['save_asset_id']
+                del vals['save_asset_id']
+            if not correction:
+                # create asset
+                asset_obj = self.env['account.asset']
+                move = self.env['account.move'].browse(vals['move_id'])
+                depreciation_base = vals['debit'] or -vals['credit']
+                temp_vals = {
+                    'name': vals['name'],
+                    'profile_id': vals['asset_profile_id'],
+                    'purchase_value': depreciation_base,
+                    'salvage_value': vals.get('asset_salvage_value', False) and vals['asset_salvage_value'],
+                    'partner_id': vals['partner_id'],
+                    'date_start': move.date,
+                    'date_buy': self.invoice_id and self.invoice_id.date_invoice or move.date,
+                    'product_id': vals['product_id'],
+                }
+                if self.env.context.get('company_id'):
+                    temp_vals['company_id'] = self.env.context['company_id']
+                temp_asset = asset_obj.new(temp_vals)
+                temp_asset._onchange_profile_id()
+                asset_vals = temp_asset._convert_to_write(temp_asset._cache)
+                self._get_asset_analytic_values(vals, asset_vals)
+                asset = asset_obj.with_context(
+                    create_asset_from_move_line=True,
+                    move_id=vals['move_id']).create(asset_vals)
+                vals['asset_id'] = asset.id
         return super().create(vals)
 
     @api.multi
@@ -139,17 +146,27 @@ class AccountMoveLine(models.Model):
                     'This option should only be used for a single id at a '
                     'time.'))
             asset_obj = self.env['account.asset']
-            for aml in self:
-                if vals['asset_profile_id'] == aml.asset_profile_id.id:
-                    continue
-                # create asset
-                asset_vals = aml._prepare_asset_create(vals)
-                self._play_onchange_profile_id(asset_vals)
-                self._get_asset_analytic_values(vals, asset_vals)
-                asset = asset_obj.with_context(
-                    create_asset_from_move_line=True,
-                    move_id=aml.move_id.id).create(asset_vals)
-                vals['asset_id'] = asset.id
+            # check for additional values added now
+            correction = False
+            if vals.get('refund_invoice_id') or self.refund_invoice_id:
+                refund_invoice_id = vals.get('refund_invoice_id') or self.refund_invoice_id
+                assets = asset_obj.search([('type', '=', 'normal')])
+                for asset in assets:
+                    if refund_invoice_id in asset.account_move_line_ids.mapped('invoice_id').ids:
+                        correction = True
+                        break
+            if not correction:
+                for aml in self:
+                    if vals['asset_profile_id'] == aml.asset_profile_id.id:
+                        continue
+                    # create asset
+                    asset_vals = aml._prepare_asset_create(vals)
+                    self._play_onchange_profile_id(asset_vals)
+                    self._get_asset_analytic_values(vals, asset_vals)
+                    asset = asset_obj.with_context(
+                        create_asset_from_move_line=True,
+                        move_id=aml.move_id.id).create(asset_vals)
+                    vals['asset_id'] = asset.id
         return super().write(vals)
 
     @api.model

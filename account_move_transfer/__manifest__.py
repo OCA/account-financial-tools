@@ -3,7 +3,7 @@
 
 {
     'name': "Account Move Transfers",
-    'version': '11.0.1.0.0',
+    'version': '11.0.4.0.0',
     'category': 'Generic Modules/Accounting',
     'summary': "Transfer saldo to other account inside movement in Journal Entries",
     'author': "Rosen Vladimirov, "

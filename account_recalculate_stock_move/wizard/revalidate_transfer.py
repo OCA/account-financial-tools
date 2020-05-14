@@ -7,8 +7,8 @@ from odoo.addons import decimal_precision as dp
 import time
 
 
-class WizardRebookingMoveTransfer(models.TransientModel):
-    _name = "wizard.rebooking.move.transfer"
+class WizardRebookingPickingTransfer(models.TransientModel):
+    _name = "wizard.rebooking.picking.transfer"
 
     date_from = fields.Date(required=True, default=fields.Date.context_today)
     date_to = fields.Date()
@@ -16,26 +16,26 @@ class WizardRebookingMoveTransfer(models.TransientModel):
     company_id = fields.Many2one(comodel_name='res.company', string="Company")
 
     @api.multi
-    def rebooking_create_move(self):
+    def rebooking_pickings(self):
         context = dict(self._context or {})
-        moves = False
+        picking = False
         if context.get('active_ids'):
-            moves = self.env['stock.move'].browse(context["active_ids"])
-        if not moves:
+            picking = self.env['stock.picking'].browse(context["active_ids"])
+        if not picking:
             domain = [('date', '>=', self.date_from)]
             if self.date_to:
                 domain.append(('date', '<=', self.date_to))
             if self.company_id:
                 domain.append(('company_id', '=', self.company_id.id))
-            moves = self.env['stock.move'].search(domain)
+            picking = self.env['stock.picking'].search(domain)
         else:
             if self.date_to and self.company_id:
-                moves = moves.filtered(lambda r: r.date >= self.date_from and r.date <= self.date_to and r.company_id == self.company_id.id)
+                picking = picking.filtered(lambda r: r.date >= self.date_from and r.date <= self.date_to and r.company_id == self.company_id.id)
             elif self.date_to and not self.company_id:
-                moves = moves.filtered(lambda r: r.date >= self.date_from and r.date <= self.date_to)
+                picking = picking.filtered(lambda r: r.date >= self.date_from and r.date <= self.date_to)
             elif not self.date_to and self.company_id:
-                moves = moves.filtered(lambda r: r.date >= self.date_from and r.company_id == self.company_id.id)
+                picking = picking.filtered(lambda r: r.date >= self.date_from and r.company_id == self.company_id.id)
             else:
-                moves = moves.filtered(lambda r: r.date >= self.date_from)
-        moves.rebuild_moves(only_remove=self.only_remove)
+                picking = picking.filtered(lambda r: r.date >= self.date_from)
+        picking.rebuild_pickings(only_remove=self.only_remove)
         return {'type': 'ir.actions.act_window_close'}

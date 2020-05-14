@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_inventory_form" model="ir.ui.view">
+            <field name="name">stock.inventory.form.inherit</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='exhausted']" position="after">
+                    <div groups="account_initial_balance.group_initial_balance_user">
+                        <label for="is_initial_balance">
+                        This is initial balance
+                        </label>
+                        <field name="is_initial_balance" widget="boolean_toggle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="name">stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <div groups="account_initial_balance.group_initial_balance_user">
+                        <label for="is_initial_balance">
+                        This is initial balance
+                        </label>
+                        <field name="is_initial_balance" widget="boolean_toggle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='scheduled_date']" position="after">
+                    <div groups="account_initial_balance.group_initial_balance_user">
+                        <label class="o_td_label" for="is_initial_balance">
+                        This is initial balance
+                        </label>
+                        <field name="is_initial_balance" widget="boolean_toggle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

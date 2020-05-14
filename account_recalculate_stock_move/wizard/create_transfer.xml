@@ -7,7 +7,10 @@
                 <form string="Move transfers" >
                     <group>
                         <group>
-                            <field name="date"/>
+                            <field name="date_from" string="Start Date"/>
+                            <field name="date_to" string="End Date"/>
+                            <field name="only_remove"/>
+                            <field name="company_id"/>
                         </group>
                     </group>
                     <footer>
