@@ -71,6 +71,9 @@ Under Invoicing -> Configuration -> Accounting -> Spread Templates, create a new
 * *Spread Balance Sheet Account*
 * *Expense/Revenue Account* This option visible if invoice line account is balance sheet account, user need to specify this too.
 * *Journal*
+* *Auto assign template on invoice validate*
 
 When creating a new Spread Costs/Revenues Board, select the right template.
 This way the above fields will be copied to the Spread Board.
+
+If *Auto assign template on invoice validate* is checked, this template will be used to auto create spread, if the underlining invoice match the preset product/account/analytic criteria.
