@@ -5,3 +5,5 @@ access_account_spread_cost_revenue_line_full,Full access on account.spread.line,
 access_account_spread_cost_revenue_line_read,Read access on account.spread.line,model_account_spread_line,account.group_account_user,1,0,0,0
 access_account_spread_cost_revenue_template_full,Full access on account.spread.template,model_account_spread_template,account.group_account_manager,1,1,1,1
 access_account_spread_cost_revenue_template_read,Read access on account.spread.template,model_account_spread_template,account.group_account_user,1,0,0,0
+access_account_spread_cost_revenue_template_auto_full,Full access on account.spread.template.auto,model_account_spread_template_auto,account.group_account_manager,1,1,1,1
+access_account_spread_cost_revenue_template_auto_read,Read access on account.spread.template.auto,model_account_spread_template_auto,account.group_account_user,1,0,0,0
