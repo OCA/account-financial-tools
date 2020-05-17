@@ -7,6 +7,11 @@ from odoo import api, models
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    def action_invoice_open(self):
+        for invoice in self:
+            invoice.invoice_line_ids.create_auto_spread()
+        return super().action_invoice_open()
+
     @api.multi
     def action_move_create(self):
         """Invoked when validating the invoices."""

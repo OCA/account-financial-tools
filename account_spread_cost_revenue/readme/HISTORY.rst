@@ -1,3 +1,8 @@
+12.0.2.0.0
+~~~~~~~~~~
+
+* [ENH] In spread template, add option to auto create spread on invoice validation
+
 12.0.1.1.0
 ~~~~~~~~~~
 

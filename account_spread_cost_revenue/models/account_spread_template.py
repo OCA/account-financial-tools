@@ -1,7 +1,8 @@
 # Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 
 class AccountSpreadTemplate(models.Model):
@@ -45,6 +46,16 @@ class AccountSpreadTemplate(models.Model):
         ('year', 'Year')],
         help="Period length for the entries")
     start_date = fields.Date()
+    auto_spread = fields.Boolean(
+        string='Auto assign template on invoice validate',
+        help="If checked, provide option to auto create spread during "
+        "invoice validation, based on product/account/analytic in invoice line."
+    )
+    auto_spread_ids = fields.One2many(
+        comodel_name='account.spread.template.auto',
+        string='Auto Spread On',
+        inverse_name='template_id',
+    )
 
     @api.model
     def default_get(self, fields):
@@ -60,6 +71,14 @@ class AccountSpreadTemplate(models.Model):
         if 'spread_journal_id' not in res and default_journal:
             res['spread_journal_id'] = default_journal.id
         return res
+
+    @api.constrains('auto_spread', 'auto_spread_ids')
+    def _check_product_account(self):
+        for rec in self.filtered('auto_spread'):
+            for line in rec.auto_spread_ids:
+                if not line.product_id and not line.account_id:
+                    raise UserError(_('Please select product and/or account '
+                                      'on auto spread options'))
 
     @api.onchange('spread_type', 'company_id')
     def onchange_spread_type(self):
@@ -107,3 +126,58 @@ class AccountSpreadTemplate(models.Model):
 
         spread_vals['invoice_type'] = invoice_type
         return spread_vals
+
+    @api.constrains('auto_spread_ids', 'auto_spread')
+    def _check_auto_spread_ids_unique(self):
+        query = """
+        select product_id, account_id, analytic_account_id
+        from (
+            select product_id, account_id, analytic_account_id, count(*)
+            from account_spread_template_auto a
+            join account_spread_template b on a.template_id = b.id
+            where b.auto_spread = true and b.id in %s
+            group by product_id, account_id, analytic_account_id
+        ) x where x.count > 1 """
+        self._cr.execute(query, [self._ids])
+        results = []
+        for res in self._cr.fetchall():
+            product = self.env['product.product'].browse(res[0])
+            account = self.env['account.account'].browse(res[1])
+            analytic = self.env['account.analytic.account'].browse(res[2])
+            results.append('%s / %s / %s' % (product.name, account.name, analytic.name))
+        if results:
+            raise UserError(
+                _('Followings are duplicated combinations,\n\n%s' % '\n'.join(results)))
+
+
+class AccountSpreadTemplateAuto(models.Model):
+    _name = 'account.spread.template.auto'
+    _description = 'Auto create spread, based on product/account/analytic'
+
+    template_id = fields.Many2one(
+        comodel_name='account.spread.template',
+        string='Spread Template',
+        required=True,
+        ondelete='cascade',
+        index=True,
+    )
+    company_id = fields.Many2one(
+        related='template_id.company_id',
+        store=True,
+    )
+    name = fields.Char(
+        required=True,
+        default='/',
+    )
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        string='Product',
+    )
+    account_id = fields.Many2one(
+        comodel_name='account.account',
+        string='Account',
+    )
+    analytic_account_id = fields.Many2one(
+        comodel_name='account.analytic.account',
+        string='Analytic',
+    )
