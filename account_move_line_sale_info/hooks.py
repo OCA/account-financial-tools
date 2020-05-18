@@ -27,6 +27,7 @@ def post_init_hook(cr, registry):
         rel.invoice_line_id = ail.id
         INNER JOIN sale_order_line sol ON
         rel.order_line_id = sol.id
+        AND sol.product_id = aml2.product_id
         WHERE aml.id = aml2.id;
     """)
 
@@ -36,4 +37,28 @@ def post_init_hook(cr, registry):
         SET sale_id = sol.order_id
         FROM sale_order_line AS sol
         WHERE aml.sale_line_id = sol.id
+        RETURNING aml.move_id
+    """)
+
+    # NOW we can fill the lines without invoice_id (Odoo put it very
+    # complicated)
+
+    cr.execute("""
+        UPDATE account_move_line aml
+        SET sale_id = so.id
+        FROM sale_order_line so
+        LEFT JOIN account_move_line aml2
+        ON aml2.sale_id = so.id        
+        WHERE aml2.move_id = aml.move_id
+    """)
+
+    cr.execute("""
+        update account_move_line aml set sale_line_id = sol.id
+        FROM account_move_line aml2
+        INNER JOIN sale_order so ON
+        so.id = aml2.sale_id
+        INNER JOIN sale_order_line sol ON
+        so.id = sol.order_id
+        AND sol.product_id = aml2.product_id
+        WHERE aml.id = aml2.id;
     """)
