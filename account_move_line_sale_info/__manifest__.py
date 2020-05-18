@@ -9,7 +9,7 @@
               "Odoo Community Association (OCA)",
     "website": "http://www.github.com/OCA/account-financial-tools",
     "category": "Generic",
-    "depends": ["account", "sale"],
+    "depends": ["account_move_line_stock_info", "sale"],
     "license": "AGPL-3",
     "data": [
         "security/account_security.xml",
