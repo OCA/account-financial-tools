@@ -26,3 +26,14 @@ class AccountInvoice(models.Model):
         if line.get('sale_line_id', False):
             res['sale_line_id'] = line.get('sale_line_id')
         return res
+
+    @api.model
+    def _anglo_saxon_sale_move_lines(self, i_line):
+        """
+        We need to add the sale_line to those entries too
+        """
+        res = super()._anglo_saxon_sale_move_lines(i_line)
+        for aml in res:
+            if i_line.sale_line_ids and len(i_line.sale_line_ids) == 1:
+                aml['sale_line_id'] = i_line.sale_line_ids[0].id
+        return res
