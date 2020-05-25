@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, models, _
@@ -9,7 +10,7 @@ class AccountMove(models.Model):
 
     @api.multi
     def _check_lock_date(self):
-        res = super()._check_lock_date()
+        res = super(AccountMove, self)._check_lock_date()
         for move in self:
             lock_to_date = min(
                 move.company_id.period_lock_to_date,

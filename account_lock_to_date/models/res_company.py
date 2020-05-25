@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import datetime
@@ -45,7 +46,7 @@ class ResCompany(models.Model):
                                               next_month.month)
         next_month = next_month.replace(
             day=days_next_month[1]).timetuple()
-        next_month = datetime.fromtimestamp(mktime(next_month)).date()
+        next_month = fields.Date.to_string(datetime.fromtimestamp(mktime(next_month)).date())
         for company in self:
             old_fiscalyear_lock_to_date = company.fiscalyear_lock_to_date
 
@@ -100,7 +101,7 @@ class ResCompany(models.Model):
 
     @api.multi
     def _validate_fiscalyear_lock(self, values):
-        res = super()._validate_fiscalyear_lock(values)
+        res = super(ResCompany, self)._validate_fiscalyear_lock(values)
         if values.get('fiscalyear_lock_to_date'):
             nb_draft_entries = self.env['account.move'].search([
                 ('company_id', 'in', self.ids),
