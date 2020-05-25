@@ -19,18 +19,11 @@ class TestPermanentLockMoveUpdate(TransactionCase):
     def create_permanent_lock_move(self):
         return self.PermanentLockMove.create({
             'company_id': self.company.id,
+            'lock_date': '2000-01-01',
         })
 
     def test_01_update_without_access(self):
         wizard = self.create_permanent_lock_move()
-        wizard.write({
-            'lock_date': '2000-01-01',
-        })
-
-        self.demo_user.write({
-            'groups_id': [(3, self.adviser_group.id)],
-        })
-
         with self.assertRaises(AccessError):
             wizard.sudo(self.demo_user.id).confirm_date()
 
@@ -39,7 +32,6 @@ class TestPermanentLockMoveUpdate(TransactionCase):
         wizard.write({
             'lock_date': '2000-01-01',
         })
-
         self.demo_user.write({
             'groups_id': [(4, self.adviser_group.id)],
         })
