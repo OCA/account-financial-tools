@@ -85,9 +85,7 @@ class ResCompany(models.Model):
             # fallback to the one defined in the company
             if not period_lock_to_date:
                 if company.period_lock_date:
-                    period_lock_to_date = time.strptime(
-                        company.period_lock_to_date,
-                        DEFAULT_SERVER_DATE_FORMAT)
+                    period_lock_to_date = company.period_lock_date
                 else:
                     continue
 

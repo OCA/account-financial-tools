@@ -127,3 +127,37 @@ class TestAccountLockToDateUpdate(TransactionCase):
         with self.assertRaises(ValidationError):
             self.company.period_lock_to_date = '2900-01-01'
             self.company.fiscalyear_lock_to_date = '2900-02-01'
+
+    def test_06_update_fiscalyear_with_access(self):
+        self.company.period_lock_date = '2900-01-01'
+        wizard = self.create_account_lock_date_update()
+        wizard.write({
+            'fiscalyear_lock_to_date': '2900-02-01',
+        })
+        self.demo_user.write({
+            'groups_id': [(4, self.adviser_group.id)],
+        })
+        wizard.sudo(self.demo_user.id).execute()
+        self.assertFalse(self.company.period_lock_to_date)
+        self.assertEqual(
+            self.company.fiscalyear_lock_to_date,
+            fields.Date.to_string(datetime.strptime(
+                '2900-02-01',
+                DEFAULT_SERVER_DATE_FORMAT).date()))
+
+    def test_06_update_period(self):
+        self.company.period_lock_date = '2900-01-01'
+        wizard = self.create_account_lock_date_update()
+        wizard.write({
+            'period_lock_to_date': '2900-01-01',
+        })
+        self.demo_user.write({
+            'groups_id': [(4, self.adviser_group.id)],
+        })
+        wizard.sudo(self.demo_user.id).execute()
+        self.assertFalse(self.company.fiscalyear_lock_to_date)
+        self.assertEqual(
+            self.company.period_lock_to_date,
+            fields.Date.to_string(datetime.strptime(
+                '2900-01-01',
+                DEFAULT_SERVER_DATE_FORMAT).date()))
