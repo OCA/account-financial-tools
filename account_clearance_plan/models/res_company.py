@@ -18,3 +18,8 @@ class ResCompany(models.Model):
         "move lines created by clearance plans",
         default="Clearance Plan",
     )
+    clearance_plan_technical_account_id = fields.Many2one(
+        comodel_name="account.account",
+        string="Clearance Plan Technical Account",
+        help="Technical account for taxes in case of exigibility based on payment",
+    )

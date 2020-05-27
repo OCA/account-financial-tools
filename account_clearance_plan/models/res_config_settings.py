@@ -21,3 +21,10 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.clearance_plan_move_line_name",
         readonly=False,
     )
+    clearance_plan_technical_account_id = fields.Many2one(
+        comodel_name="account.account",
+        related="company_id.clearance_plan_technical_account_id",
+        string="Clearance Plan Technical Account",
+        help="Technical account for taxes in case of exigibility based on payment",
+        readonly=False,
+    )
