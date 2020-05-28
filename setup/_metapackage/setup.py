@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-account_balance_line',
         'odoo12-addon-account_chart_update',
         'odoo12-addon-account_check_deposit',
+        'odoo12-addon-account_clearance_plan',
         'odoo12-addon-account_coa_menu',
         'odoo12-addon-account_cost_center',
         'odoo12-addon-account_document_reversal',
