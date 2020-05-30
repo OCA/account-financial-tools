@@ -18,17 +18,17 @@ msgstr ""
 #. module: account_accountant_oca
 #: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
 msgid "<span class=\"o_form_label\">Fiscal years</span>"
-msgid "<span class=\"o_form_label\">Exercices comptables</span>"
+msgstr "<span class=\"o_form_label\">Exercices comptables</span>"
 
 #. module: account_accountant_oca
 #: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
 msgid "<span class=\"o_form_label\">General Settings</span>"
-msgid "<span class=\"o_form_label\">Paramétrages généraux</span>"
+msgstr "<span class=\"o_form_label\">Paramétrages généraux</span>"
 
 #. module: account_accountant_oca
 #: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
 msgid "<span class=\"o_form_label\">Lock Dates</span>"
-msgid "<span class=\"o_form_label\">Dates de verrouillage</span>"
+msgstr "<span class=\"o_form_label\">Dates de verrouillage</span>"
 
 #. module: account_accountant_oca
 #: model:ir.model,name:account_accountant_oca.model_res_config_settings
