@@ -22,6 +22,6 @@
         "demo/res_groups.xml",
     ],
     "images": [
-        "static/description/res_config_settings_account.png",
+        "static/description/res_config_settings_fiscal_year_settings.png ",
     ],
 }
