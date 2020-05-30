@@ -1,0 +1,111 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * account_accountant_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-30 11:53+0000\n"
+"PO-Revision-Date: 2020-05-30 11:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "<span class=\"o_form_label\">Fiscal years</span>"
+msgid "<span class=\"o_form_label\">Exercices comptables</span>"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "<span class=\"o_form_label\">General Settings</span>"
+msgid "<span class=\"o_form_label\">Paramétrages généraux</span>"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "<span class=\"o_form_label\">Lock Dates</span>"
+msgid "<span class=\"o_form_label\">Dates de verrouillage</span>"
+
+#. module: account_accountant_oca
+#: model:ir.model,name:account_accountant_oca.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Day and Month of the end of the fiscal year"
+msgstr "Jour et mois du de la fin de l'exercice comptable"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__incoterm_id
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Default incoterm"
+msgstr "Incoterm par défaut"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Extra Accountant Settings"
+msgstr "Paramétrage Comptables complémentaires"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__fiscalyear_last_day
+msgid "Fiscalyear Last Day"
+msgstr "Dernier jour de l'exercice fiscal"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__fiscalyear_last_month
+msgid "Fiscalyear Last Month"
+msgstr "Dernier mois de l'exercice fiscal"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,help:account_accountant_oca.field_res_config_settings__incoterm_id
+msgid "International Commercial Terms are a series of predefined commercial terms used in international transactions."
+msgstr "Les Incoterms sont une série de termes commerciaux prédéfinie utilisés dans les transactions internationales."
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Last Day"
+msgstr "Dernier Jour"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__fiscalyear_lock_date
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Lock Date"
+msgstr "Date de verrouillage"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__period_lock_date
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Lock Date for Non-Advisers"
+msgstr "Date de verrouillage pour les non-conseillers"
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,help:account_accountant_oca.field_res_config_settings__fiscalyear_lock_date
+msgid "No users, including Advisers, can edit accounts prior to and inclusive of this date. Use it for fiscal year locking for example."
+msgstr "Aucun utilisateur, y compris les conseillers, ne peuvent modifier les comptes comptables avant cette date inclusivement. Utilisez cela pour verrouiller l'exercice fiscal par exemple."
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,help:account_accountant_oca.field_res_config_settings__period_lock_date
+msgid "Only users with the 'Adviser' role can edit accounts prior to and inclusive of this date. Use it for period locking inside an open fiscal year, for example."
+msgstr "Seuls les utilisateurs avec le rôle 'Conseiller' peuvent modifier les comptes comptables avant cette date inclusivement. Utilisez cela pour verrouiller des périodes pendant l'exercice fiscal par exemple."
+
+#. module: account_accountant_oca
+#: model:ir.model.fields,field_description:account_accountant_oca.field_res_config_settings__overdue_msg
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Overdue Payments Message"
+msgstr "Message pour les règlements en retard"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Prevent accounting changes prior of Lock Dates"
+msgstr "Empêche des changements comptables précédent les dates de fermetures"
+
+#. module: account_accountant_oca
+#: model_terms:ir.ui.view,arch_db:account_accountant_oca.view_res_config_settings_form
+msgid "Last Month"
+msgstr "Dernier mois"
+

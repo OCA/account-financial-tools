@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2020 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_res_config_settings_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='accounting_reports']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Fiscal years</span>
+                        <div class="text-muted">
+                            Day and Month of the end of the fiscal year
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label string="Last Day" for="fiscalyear_last_day" class="col-lg-3 o_light_label"/>
+                                <field name="fiscalyear_last_day"/>
+                            </div>
+                            <div class="row">
+                                <label string="Last Month" for="fiscalyear_last_month" class="col-lg-3 o_light_label"/>
+                                <field name="fiscalyear_last_month"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Lock Dates</span>
+                        <div class="text-muted">
+                            Prevent accounting changes prior of Lock Dates
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label string="Lock Date for Non-Advisers" for="period_lock_date" class="col-lg-3 o_light_label"/>
+                                <field name="period_lock_date"/>
+                            </div>
+                            <div class="row">
+                                <label string="Lock Date" for="fiscalyear_lock_date" class="col-lg-3 o_light_label"/>
+                                <field name="fiscalyear_lock_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+           <xpath expr="//field[@name='module_account_invoice_extract']/../../.." position="after">
+                <h2>Extra Accountant Settings</h2>
+                <div class="row mt16 o_settings_container" id="account_accountant_settings">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">General Settings</span>
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label string="Overdue Payments Message" for="overdue_msg" class="col-lg-3 o_light_label"/>
+                                    <field name="overdue_msg"/>
+                                </div>
+                                <div class="row">
+                                    <label string="Default incoterm" for="overdue_msg" class="col-lg-3 o_light_label"/>
+                                    <field name="incoterm_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
