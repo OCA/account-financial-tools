@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-06-05 18:19+0000\n"
+"PO-Revision-Date: 2020-06-08 10:19+0000\n"
 "Last-Translator: Guillaume Vandamme (ACSONE) <guillaume.vandamme@acsone.eu>\n"
 "Language-Team: none\n"
 "Language: fr_FR\n"
@@ -67,7 +67,7 @@ msgstr "Ligne du plan d'apurement"
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:128
 #, python-format
 msgid "Clearance Plan: "
-msgstr "Plan d'apurement: "
+msgstr "Plan d'apurement "
 
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_res_company
@@ -100,13 +100,13 @@ msgstr "Créé le"
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_company__clearance_plan_journal_id
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_config_settings__clearance_plan_journal_id
 msgid "Default Clearance Plan Journal"
-msgstr "Plan d'apurement:journal par défaut"
+msgstr "Plan d'apurement - Journal par défaut"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_company__clearance_plan_move_line_name
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_config_settings__clearance_plan_move_line_name
 msgid "Default Clearance Plan Move Line Name"
-msgstr "Plan d'apurement:libellé par défaut"
+msgstr "Plan d'apurement - Libellé par défaut"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_move_line_name
@@ -193,13 +193,16 @@ msgstr ""
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:101
 #, python-format
 msgid "Please select items from an account of type 'receivable' or 'payable'."
-msgstr "Merci de sélectionner des lignes d'un compte 'recevable' ou 'payable'."
+msgstr ""
+"Merci de ne sélectionner que des lignes d'un compte 'recevable' ou 'payable'."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:97
 #, python-format
 msgid "Please select items from exactly one account."
-msgstr "Merci de sélectionner des lignes d'un seul compte comptable."
+msgstr ""
+"Merci de ne sélectionner que des lignes/factures liées à un seul compte "
+"comptable."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:94
@@ -222,7 +225,7 @@ msgstr "Référence de la nouvelle pièce comptable."
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_journal_id
 #: model:ir.model.fields,help:account_clearance_plan.field_res_config_settings__clearance_plan_journal_id
 msgid "The journal used by default on clearance plans."
-msgstr "Plan d'apurement:journal par défaut."
+msgstr "Plan d'apurement - Journal par défaut."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__amount_to_allocate
