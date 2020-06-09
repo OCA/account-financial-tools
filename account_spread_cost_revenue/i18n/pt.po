@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-06-09 17:19+0000\n"
+"PO-Revision-Date: 2020-06-09 23:19+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
@@ -717,7 +717,7 @@ msgstr "Mês"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:157
