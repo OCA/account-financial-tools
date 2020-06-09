@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2020-02-26 21:13+0000\n"
-"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
-"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/pt/)\n"
+"PO-Revision-Date: 2020-06-09 17:19+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "Conta ativos"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__active
 msgid "Active"
-msgstr "Activo"
+msgstr "Ativo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -151,13 +151,13 @@ msgstr "Nome do Ativo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 msgid "Asset Profile"
-msgstr "Categoria do Ativo"
+msgstr "Perfil do Ativo"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
 #: model:ir.ui.menu,name:account_asset_management.account_asset_profile_menu
 msgid "Asset Profiles"
-msgstr "Categorias do Ativo"
+msgstr "Perfis de Ativos"
 
 #. module: account_asset_management
 #: selection:account.asset.line,type:0
@@ -190,7 +190,7 @@ msgstr "Quadro de linhas de depreciação de ativos"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
 msgid "Asset profile"
-msgstr "Categoria do Ativo"
+msgstr "Perfil do ativo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -240,8 +240,8 @@ msgid ""
 "will be an asset by product item."
 msgstr ""
 "Por defeito durante a validação de uma fatura, um ativo é criado pela linha "
-"da fatura desde que um movimento contabilístico seja criado por ela. Come "
-"sta configuração, um movimento contabilístico será criado pelo item de "
+"da fatura desde que um movimento contabilístico seja criado por ela. Com "
+"esta configuração, um movimento contabilístico será criado pelo item de "
 "produto, Assim, haverá um ativo por cada item de produto."
 
 #. module: account_asset_management
@@ -263,8 +263,8 @@ msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
-"Marque esta opção se quiser confirmar automaticamente os ativos desta "
-"categoria quando criados por faturas."
+"Marque esta opção se quiser confirmar automaticamente os ativos deste perfil "
+"quando criados por faturas."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -784,7 +784,7 @@ msgstr "Item do Diário"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger____last_update
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove____last_update
 msgid "Last Modified on"
-msgstr "Última Modificação Em"
+msgstr "Última Modificação em"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_uid
@@ -795,7 +795,7 @@ msgstr "Última Modificação Em"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_uid
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_uid
 msgid "Last Updated by"
-msgstr "Última Actualização por"
+msgstr "Última Atualização por"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__write_date
@@ -806,7 +806,7 @@ msgstr "Última Actualização por"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_recompute_trigger__write_date
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__write_date
 msgid "Last Updated on"
-msgstr "Última Actualização em"
+msgstr "Última Atualização em"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:134
