@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-28 00:14+0000\n"
-"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"PO-Revision-Date: 2020-06-09 17:19+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -73,10 +73,8 @@ msgstr "Conta Analítica"
 
 #. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
-#, fuzzy
-#| msgid "Analytic Account"
 msgid "Analytic account"
-msgstr "Conta Analítica"
+msgstr "Conta analítica"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_attachment_count
