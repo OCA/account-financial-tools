@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-28 00:14+0000\n"
-"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"PO-Revision-Date: 2020-06-09 17:19+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -300,7 +300,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:467
@@ -330,12 +330,12 @@ msgstr "Empresas"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__company_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__company_id
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.server,name:account_spread_cost_revenue.ir_cron_spread_create_entries_ir_actions_server
@@ -372,7 +372,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Criado por"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:36
@@ -386,7 +386,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Criado em"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__credit_account_id
@@ -403,7 +403,7 @@ msgstr "Moeda"
 #: selection:account.spread.invoice.line.link.wizard,spread_type:0
 #: selection:account.spread.template,spread_type:0
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,invoice_type:0
@@ -415,17 +415,17 @@ msgstr ""
 #: selection:account.spread,invoice_type:0
 #: selection:account.spread.invoice.line.link.wizard,invoice_type:0
 msgid "Customer Invoice"
-msgstr ""
+msgstr "Fatura a Cliente"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__date
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__debit_account_id
 msgid "Debit Account"
-msgstr ""
+msgstr "Conta Débito"
 
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
