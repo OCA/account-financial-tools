@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-25 11:46+0000\n"
-"PO-Revision-Date: 2020-05-06 13:19+0000\n"
+"PO-Revision-Date: 2020-06-12 14:19+0000\n"
 "Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -143,9 +143,8 @@ msgstr "Unternehmen"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_res_config_settings
-#, fuzzy
 msgid "Config Settings"
-msgstr "account.config.settings"
+msgstr "Konfigurationseinstellungen"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__create_uid
@@ -230,7 +229,7 @@ msgstr "Journal"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__move_id
 msgid "Journal Entry"
-msgstr "Journalbuchung"
+msgstr "Journal-Buchung"
 
 #. module: account_check_deposit
 #: model:ir.model,name:account_check_deposit.model_account_move_line
@@ -278,7 +277,7 @@ msgstr "'Vorgabe-Soll-Konto' fehlt im Bank-Journal '%s'"
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__name
 msgid "Name"
-msgstr "Name"
+msgstr "Bezeichnung"
 
 #. module: account_check_deposit
 #: model:ir.model.fields,field_description:account_check_deposit.field_account_check_deposit__check_count
