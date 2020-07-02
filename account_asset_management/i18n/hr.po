@@ -31,16 +31,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-13 03:39+0000\n"
-"PO-Revision-Date: 2020-03-05 14:13+0000\n"
+"PO-Revision-Date: 2020-07-02 16:19+0000\n"
 "Last-Translator: Bole <bole@dajmi5.com>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/hr/)\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management
@@ -119,7 +119,7 @@ msgstr "Dugotrajna imovina"
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:192
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
-msgstr ""
+msgstr "Zapis dnevnika otpisa sredstva '%s'"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
@@ -181,21 +181,20 @@ msgstr "Otpis sredstva"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_remove
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
 msgid "Asset Removal Date"
-msgstr ""
+msgstr "Datum otpisa sredstva"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
 msgid "Asset Sale Account"
-msgstr ""
+msgstr "Konto prodaje sredstva"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
 msgid "Asset Start Date"
-msgstr ""
+msgstr "Početni datum sredstva"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
-#, fuzzy
 msgid "Asset depreciation table line"
 msgstr "Stavka amortizacije imovine"
 
@@ -203,19 +202,18 @@ msgstr "Stavka amortizacije imovine"
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
-#, fuzzy
 msgid "Asset profile"
 msgstr "Grupe o. sredstava"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset removal."
-msgstr ""
+msgstr "Otpis sredstva."
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
 msgid "Asset table recompute triggers"
-msgstr ""
+msgstr "Okidači izračuna tablice sredstva"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_action
@@ -229,22 +227,22 @@ msgstr "Dugotrajna imovina"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Assets in Close State"
-msgstr ""
+msgstr "Sredstva u statusu Zatvoreno"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Assets in Running State"
-msgstr ""
+msgstr "Sredstva sa statusom 'U tijeku'"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_res_config_settings__module_account_asset_management
 msgid "Assets management (OCA)"
-msgstr ""
+msgstr "Osnovna sredstva (OCA)"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Assets which have been removed"
-msgstr ""
+msgstr "Sredstva koja su uklonjena"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__asset_product_item
@@ -254,12 +252,16 @@ msgid ""
 "this setting, an accounting entry will be created by product item. So, there "
 "will be an asset by product item."
 msgstr ""
+"Zadano ponašanje prilikom potvrđivanja računa, sredstvo je kreirano iz "
+"stavke računa tako dugo dok je pronjižena stavka kreirana iz stavke računa. "
+"Sa ovom postavkom, stavka temeljnice će biti kreirana za stavku proizvoda, "
+"dakle postojati će i sredstvo za svaki proizvod."
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__days_calc
 msgid "Calculate by days"
-msgstr ""
+msgstr "Izračun po danima"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -274,6 +276,8 @@ msgid ""
 "Check this if you want to automatically confirm the assets of this profile "
 "when created by invoices."
 msgstr ""
+"Označite ako želite automatski potvrditi sredstvo ovog profila kad se kreira "
+"iz računa."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method
@@ -285,6 +289,12 @@ msgid ""
 "when the annual linear depreciation exceeds the annual degressive "
 "depreciation"
 msgstr ""
+"Izaberite metodu izračuna amortizacijskih postavki:\n"
+"  * Linearna: izračun na osnovi Bruto vrijednosti / Broja amortizacija\n"
+"  * Degresivna: izračun na osnovi Preostale vrijednosti * Degresivni faktor\n"
+"  * Degresivno-linearna (ako je vremenska metoda = godina): degresivno "
+"postane linearno, ako je godišnja linearna amortizacija veća od godišnje "
+"degresivne amortizacije"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
@@ -294,6 +304,8 @@ msgid ""
 "lines.\n"
 "  * Number of Years: Specify the number of years for the depreciation.\n"
 msgstr ""
+"Izaberite metodu za izračun datuma i broja amortizacija.\n"
+"..* Broj godina: navedite broj godina amortizacije\n"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
@@ -320,7 +332,7 @@ msgstr "Zatvori"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__code
 msgid "Code"
-msgstr ""
+msgstr "Šifra"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_id
@@ -333,7 +345,7 @@ msgstr "Organizacija"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta organizacije"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_invoice_line__asset_id
@@ -352,7 +364,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method
 msgid "Computation Method"
-msgstr "Computation Method"
+msgstr "Metoda izračuna"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
@@ -363,7 +375,7 @@ msgstr "Izračunaj"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
 msgid "Compute Asset"
-msgstr "Izračunaj imovinu"
+msgstr "Izračunaj amortizaciju"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_compute_action
@@ -374,41 +386,40 @@ msgstr "Izračunj imovinu"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:30
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets errors"
-msgstr "Izračunj imovinu"
+msgstr "Greške izračuna amortizacije"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:32
-#, fuzzy, python-format
+#, python-format
 msgid "Compute Assets result"
-msgstr "Izračunj imovinu"
+msgstr "Rezultat izračuna amortizacije"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form_result
-#, fuzzy
 msgid "Compute Assets results"
-msgstr "Izračunj imovinu"
+msgstr "Rezultati izračuna amortizacija"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Postavke"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Confirm Asset"
-msgstr ""
+msgstr "Potvrdi sredstvo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Create Move"
-msgstr ""
+msgstr "Kreiraj knjiženje"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__asset_product_item
 msgid "Create an asset by product item"
-msgstr ""
+msgstr "Kreiraj sredstvo iz stavke računa"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_compute.py:44
@@ -448,7 +459,7 @@ msgstr "Datum"
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_recompute_trigger__date_trigger
 msgid "Date of the event triggering the need to recompute the Asset Tables."
-msgstr ""
+msgstr "Datum događaja koji pokreće potrebu za preračunom imovine"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__line_days
