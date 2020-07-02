@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="groups_id" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+</odoo>

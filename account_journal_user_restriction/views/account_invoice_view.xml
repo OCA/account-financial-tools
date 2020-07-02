@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="invoice_supplier_form_assigned_users" model="ir.ui.view">
+        <field name="name">invoice_supplier_form_assigned_users</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_invoice_open']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_account_invoice_payment)d']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_account_invoice_refund)d']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_draft']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//div[@groups='account.group_account_invoice']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="invoice_form_assigned_users" model="ir.ui.view">
+        <field name="name">invoice_form_assigned_users</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_invoice_open']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_account_invoice_payment)d']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(account.action_account_invoice_refund)d']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_draft']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+            <xpath expr="//div[@groups='account.group_account_invoice']" position="attributes">
+                <attribute name="groups">account.group_account_invoice,account_journal_user_restriction.group_assigned_journals_user</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

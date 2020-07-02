@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_assigned_journals_user" model="res.groups">
+        <field name="name">User: Assigned Journals Only</field>
+        <field name="category_id" ref="base.module_category_accounting_and_finance"/>
+        <field name="comment">The user will have access to her assigned journals.</field>
+    </record>
+    <record id="account.group_account_invoice" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+
+<data noupdate="1">
+    <record id="journal_assigned_users" model="ir.rule">
+        <field name="name">Assigned journals</field>
+        <field ref="account.model_account_journal" name="model_id"/>
+        <field name="domain_force">['|',('assigned_user_ids','in',user.id),('assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+    <record id="invoice_assigned_users" model="ir.rule">
+        <field name="name">Assigned invoices</field>
+        <field ref="account.model_account_invoice" name="model_id"/>
+        <field name="domain_force">['|',('journal_id.assigned_user_ids','in',user.id),('journal_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+    <record id="statement_assigned_users" model="ir.rule">
+        <field name="name">Assigned bank statements</field>
+        <field ref="account.model_account_bank_statement" name="model_id"/>
+        <field name="domain_force">['|',('journal_id.assigned_user_ids','in',user.id),('journal_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+    <record id="move_assigned_users" model="ir.rule">
+        <field name="name">Assigned moves</field>
+        <field ref="account.model_account_move" name="model_id"/>
+        <field name="domain_force">['|',('journal_id.assigned_user_ids','in',user.id),('journal_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+    <record id="move_line_assigned_users" model="ir.rule">
+        <field name="name">Assigned move lines</field>
+        <field ref="account.model_account_move_line" name="model_id"/>
+        <field name="domain_force">['|',('journal_id.assigned_user_ids','in',user.id),('journal_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+    <record id="payment_assigned_users" model="ir.rule">
+        <field name="name">Assigned payments</field>
+        <field ref="account.model_account_payment" name="model_id"/>
+        <field name="domain_force">['|',('journal_id.assigned_user_ids','in',user.id),('journal_id.assigned_user_ids','=',False)]</field>
+        <field name="groups" eval="[(4, ref('group_assigned_journals_user'))]"/>
+    </record>
+
+    <record id="journal_see_all" model="ir.rule">
+        <field name="name">All journals</field>
+        <field ref="account.model_account_journal" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+    <record id="invoice_see_all" model="ir.rule">
+        <field name="name">All invoices</field>
+        <field ref="account.model_account_invoice" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+    <record id="statement_see_all" model="ir.rule">
+        <field name="name">All bank statements</field>
+        <field ref="account.model_account_bank_statement" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+    <record id="move_see_all" model="ir.rule">
+        <field name="name">All moves</field>
+        <field ref="account.model_account_move" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+    <record id="move_line_see_all" model="ir.rule">
+        <field name="name">All move lines</field>
+        <field ref="account.model_account_move_line" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+    <record id="payment_see_all" model="ir.rule">
+        <field name="name">All payments</field>
+        <field ref="account.model_account_payment" name="model_id"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('account.group_account_invoice'))]"/>
+    </record>
+
+</data>
+
+</odoo>
