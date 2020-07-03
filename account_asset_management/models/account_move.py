@@ -80,6 +80,16 @@ class AccountMove(models.Model):
                 )
                 aml.with_context(allow_asset=True).asset_id = asset.id
         super().post()
+        for move in self:
+            refs = [
+                "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
+                % tuple(name_get)
+                for name_get in move.line_ids.filtered(
+                    "asset_profile_id"
+                ).asset_id.name_get()
+            ]
+            message = _("This invoice created the asset/s: %s") % ", ".join(refs)
+            move.message_post(body=message)
 
     def button_draft(self):
         invoices = self.filtered(lambda r: not r.is_sale_document())
