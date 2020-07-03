@@ -1036,6 +1036,12 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: code:addons/account_asset_management/models/account_move.py:0
+#, python-format
+msgid "This invoice created the asset(s): %s"
+msgstr ""
+
+#. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__method_time
 msgid "Time Method"
