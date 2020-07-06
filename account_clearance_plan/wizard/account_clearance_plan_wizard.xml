@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clearance_plan_wizard" model="ir.ui.view">
+        <field name="name">Clearance Plan</field>
+        <field name="model">account.clearance.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="journal_id"/>
+                    <field name="move_ref"/>
+                    <field name="move_narration"/>
+                    <field name="amount_to_allocate"/>
+                    <field name="amount_unallocated"/>
+                </group>
+                <notebook>
+                    <page string="Clearance Plan Board">
+                        <field name="clearance_plan_line_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="date_maturity"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/> 
+                    <button string="Cancel" class="btn-default" special="cancel"/>   
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--Add to account.move.line action-->
+    <act_window id="act__move_line_clearance_plan_wizard"
+                name="Clearance Plan"
+                res_model="account.clearance.plan"
+                src_model="account.move.line"
+                view_mode="form"
+                groups="account.group_account_manager"
+                key2="client_action_multi"
+                target="new" />
+
+    <!--Add to account.invoice action-->
+    <act_window id="act_invoice_clearance_plan_wizard"
+                name="Clearance Plan"
+                res_model="account.clearance.plan"
+                src_model="account.invoice"
+                view_mode="form"
+                groups="account.group_account_manager"
+                key2="client_action_multi"
+                target="new" />
+
+
+</odoo>

@@ -21,6 +21,7 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__account_id
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Account"
 msgstr ""
 
@@ -58,6 +59,16 @@ msgstr ""
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__analytic_account_id
 msgid "Analytic Account"
+msgstr ""
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr ""
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
+msgid "Analytic account"
 msgstr ""
 
 #. module: account_move_budget
@@ -135,6 +146,7 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__date
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Date"
 msgstr ""
 
@@ -182,6 +194,11 @@ msgstr ""
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__date_from
 msgid "From Date"
+msgstr ""
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
+msgid "Group By"
 msgstr ""
 
 #. module: account_move_budget
@@ -306,6 +323,7 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__partner_id
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Partner"
 msgstr ""
 
@@ -343,7 +361,7 @@ msgid "Technical field holding the debit - credit in order to open meaningful gr
 msgstr ""
 
 #. module: account_move_budget
-#: code:addons/account_move_budget/models/account_move_budget_line.py:86
+#: code:addons/account_move_budget/models/account_move_budget_line.py:89
 #, python-format
 msgid "The date must be within the budget period."
 msgstr ""

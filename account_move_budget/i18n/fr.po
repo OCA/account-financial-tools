@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_move_budget
+# 	* account_move_budget
 #
 msgid ""
 msgstr ""
@@ -24,6 +24,7 @@ msgstr "%s (copie)"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__account_id
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Account"
 msgstr "Compte"
 
@@ -61,6 +62,20 @@ msgstr "État de l'activité"
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__analytic_account_id
 msgid "Analytic Account"
+msgstr "Compte analytique"
+
+#. module: account_move_budget
+#: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__analytic_tag_ids
+#, fuzzy
+#| msgid "Analytic Account"
+msgid "Analytic Tags"
+msgstr "Compte analytique"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
+#, fuzzy
+#| msgid "Analytic Account"
+msgid "Analytic account"
 msgstr "Compte analytique"
 
 #. module: account_move_budget
@@ -138,6 +153,7 @@ msgstr "Crédit"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__date
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Date"
 msgstr "Date"
 
@@ -186,6 +202,11 @@ msgstr "Abonnés (Partenaires)"
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__date_from
 msgid "From Date"
 msgstr "À partir du"
+
+#. module: account_move_budget
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
+msgid "Group By"
+msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__id
@@ -309,6 +330,7 @@ msgstr "En retard"
 
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget_line__partner_id
+#: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 msgid "Partner"
 msgstr "Partenaire"
 
@@ -334,7 +356,8 @@ msgstr "État"
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
@@ -346,13 +369,15 @@ msgstr ""
 
 #. module: account_move_budget
 #: model:ir.model.fields,help:account_move_budget.field_account_move_budget_line__balance
-msgid "Technical field holding the debit - credit in order to open meaningful graph views from reports"
+msgid ""
+"Technical field holding the debit - credit in order to open meaningful graph "
+"views from reports"
 msgstr ""
 "Champ technique qui enregistre débit - crédit de sorte à avoir des "
 "représentations graphiques cohérentes à partir des rapports"
 
 #. module: account_move_budget
-#: code:addons/account_move_budget/models/account_move_budget_line.py:86
+#: code:addons/account_move_budget/models/account_move_budget_line.py:89
 #, python-format
 msgid "The date must be within the budget period."
 msgstr "La date doit faire partie de la période du budget."

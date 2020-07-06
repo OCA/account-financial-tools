@@ -146,7 +146,7 @@ class AccountAsset(models.Model):
         states={'draft': [('readonly', False)]})
     method_progress_factor = fields.Float(
         string='Degressive Factor', readonly=True,
-        states={'draft': [('readonly', False)]}, default=0.3)
+        states={'draft': [('readonly', False)]}, default=0.3, digits=(16, 4))
     method_time = fields.Selection(
         selection=lambda self: self.env[
             'account.asset.profile']._selection_method_time(),
@@ -410,6 +410,10 @@ class AccountAsset(models.Model):
                 asset.state = 'close'
             else:
                 asset.state = 'open'
+                if not asset.depreciation_line_ids.filtered(
+                    lambda l: l.type != 'create'
+                ):
+                    asset.compute_depreciation_board()
         return True
 
     @api.multi
@@ -443,9 +447,9 @@ class AccountAsset(models.Model):
     @api.multi
     def open_entries(self):
         self.ensure_one()
-        amls = self.env['account.move.line'].search(
-            [('asset_id', '=', self.id)], order='date ASC')
-        am_ids = [l.move_id.id for l in amls]
+        # needed for avoiding errors after grouping in assets
+        context = dict(self.env.context)
+        context.pop('group_by', None)
         return {
             'name': _("Journal Entries"),
             'view_type': 'form',
@@ -453,8 +457,9 @@ class AccountAsset(models.Model):
             'res_model': 'account.move',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'context': self.env.context,
-            'domain': [('id', 'in', am_ids)],
+            'context': context,
+            'domain': [
+                ('id', 'in', self.account_move_line_ids.mapped('move_id').ids)]
         }
 
     @api.multi
