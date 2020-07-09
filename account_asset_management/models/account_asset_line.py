@@ -70,7 +70,11 @@ class AccountAssetLine(models.Model):
             dlines = self.filtered(lambda l: l.id not in exclude_ids)
         dlines = dlines.filtered(lambda l: l.type == "depreciate")
         dlines = dlines.sorted(key=lambda l: l.line_date)
-
+        # Give value 0 to the lines that are not going to be calculated
+        # to avoid cache miss error
+        all_excluded_lines = self - dlines
+        all_excluded_lines.depreciated_value = 0
+        all_excluded_lines.remaining_value = 0
         # Group depreciation lines per asset
         asset_ids = dlines.mapped("asset_id")
         grouped_dlines = []
