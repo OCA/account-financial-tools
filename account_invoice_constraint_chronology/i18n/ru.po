@@ -21,6 +21,7 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: account_invoice_constraint_chronology
+#: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_bank_statement_import_journal_creation__check_chronology
 #: model:ir.model.fields,field_description:account_invoice_constraint_chronology.field_account_journal__check_chronology
 msgid "Check Chronology"
 msgstr ""
