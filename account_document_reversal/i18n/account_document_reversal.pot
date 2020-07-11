@@ -29,6 +29,7 @@ msgid "Bank Statement Line"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__cancel_method
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__cancel_method
 msgid "Cancel Method"
 msgstr ""
@@ -54,6 +55,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__reversal_journal_id
 msgid "Default Reversal Journal"
 msgstr ""
@@ -82,6 +84,7 @@ msgid "ID"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__use_different_journal
 msgid "If checked, reversal wizard will show field Reversal Journal"
 msgstr ""
@@ -107,6 +110,7 @@ msgid "Journal Entries"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__reversal_journal_id
 msgid "Journal in this field will show in reversal wizard as default"
 msgstr ""
@@ -173,18 +177,21 @@ msgid "This action is not allowed for cancel with reversal.\n"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
 #: model:ir.model.fields,help:account_document_reversal.field_account_journal__is_cancel_reversal
 #: model:ir.model.fields,help:account_document_reversal.field_account_move__is_cancel_reversal
 msgid "True, when journal allow cancel entries with method is reversal"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__is_cancel_reversal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_move__is_cancel_reversal
 msgid "Use Cancel Reversal"
 msgstr ""
 
 #. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
 #: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__use_different_journal
 #: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__use_different_journal
 msgid "Use different journal for reversal"
