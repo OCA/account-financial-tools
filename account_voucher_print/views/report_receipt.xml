@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_receipt_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <t t-set="address">
+                <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                <div t-if="o.partner_id.vat" class="mt8"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.partner_id.vat"/></div>
+            </t>
+            <div class="page">
+                <h3>
+                    <span t-if="o.voucher_type == 'sale' and o.state == 'draft'">Draft Receipt</span>
+                    <span t-if="o.voucher_type == 'sale' and o.state == 'posted'">Receipt</span>
+                    <span t-if="o.voucher_type == 'purchase' and o.state == 'draft'">Draft Purchase Receipt</span>
+                    <span t-if="o.voucher_type == 'purchase' and o.state == 'posted'">Purchase Receipt</span>
+                    <span t-field="o.number"/>
+                </h3>
+
+                <div id="informations" class="row mt32 mb32">
+                    <div class="col-auto mw-100 mb-2" t-if="o.date" name="date">
+                        <strong>Bill Date:</strong>
+                        <p class="m-0" t-field="o.date"/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.pay_now == 'pay_later' and o.date_due and o.state in ('proforma', 'posted')" name="due_date">
+                        <strong>Due Date:</strong>
+                        <p class="m-0" t-field="o.date_due"/>
+                    </div>
+                    <div class="col-auto mw-100 mb-2" t-if="o.reference">
+                        <strong>Bill Reference:</strong>
+                        <p class="m-0" t-field="o.reference"/>
+                    </div>
+                </div>
+
+                <table class="table table-sm o_main_table" name="receipt_line_table">
+                    <thead>
+                        <tr>
+                            <t t-set="colspan" t-value="6"/>
+                            <th class="text-left"><span>Description</span></th>
+                            <th class="text-right"><span>Quantity</span></th>
+                            <th t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                            <th t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                            <th class="text-right"><span>Amount</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="receipt_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+
+                        <t t-foreach="o.line_ids" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                            <tr>
+                                <td name="account_voucher_line_name"><span t-field="line.name"/></td>
+                                <td class="text-right">
+                                        <span t-field="line.quantity"/>
+                                </td>
+                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <span t-field="line.price_unit"/>
+                                </td>
+                                <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                                </td>
+                                <td class="text-right o_price_total">
+                                    <span t-field="line.price_subtotal"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <div class="clearfix">
+                    <div id="total" class="row">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                            <table class="table table-sm" style="page-break-inside: avoid;">
+                                <tr t-if="o.tax_amount > 0" t-attf-class="border-black o_subtotal" style="">
+                                    <td><strong>Subtotal</strong></td>
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="current_subtotal"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                                <tr t-if="o.tax_amount > 0" style="">
+                                    <td>Tax Amount</td>
+                                    <td class="text-right">
+                                        <span
+                                            t-field="o.tax_amount"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                                <tr t-if="o.tax_correction" name="tax_correction" style="">
+                                    <td>Tax Correction</td>
+                                    <td class="text-right">
+                                        <span
+                                            t-field="o.tax_correction"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                                <tr class="border-black o_subtotal" style="">
+                                    <td>
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="o.amount"
+                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>	
+                <p id="total_in_words" class="mb16">
+                    <strong>Amount In Words:</strong>
+                    <span t-field="o.amount_in_words"/>
+                </p>
+
+                <p t-if="o.voucher_type == 'sale' and o.pay_now == 'pay_later' and o.number">
+                    Please use the following communication for your payment: <b><span t-field="o.number"/></b>
+                </p>
+                <p t-if="o.pay_now == 'pay_now' and o.name " name="name">
+                    Payment Memo:
+                    <span t-field="o.name"/>
+                </p>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.env.user.sudo().lang if o.voucher_type in ('sale', 'purchase') else o.partner_id.lang"/>
+                <t t-call="account_voucher_print.report_receipt_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>
