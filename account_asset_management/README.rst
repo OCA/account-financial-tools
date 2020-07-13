@@ -60,6 +60,7 @@ Contributors
 - Florian Dacosta (Akretion)
 - Stéphane Bidoul (Acsone)
 - Adrien Peiffer (Acsone)
+- Andrea Stirpe (Onestein)
 
 Maintainer
 ----------
