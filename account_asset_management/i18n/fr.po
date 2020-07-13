@@ -487,13 +487,13 @@ msgstr ""
 "facture sur ce compte."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:136
+#: code:addons/account_asset_management/models/account_asset_profile.py:143
 #, python-format
 msgid "Degressive"
 msgstr "Dégressif"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:145
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr "Dégressif  jusqu'à la valeur de revente"
@@ -505,14 +505,14 @@ msgid "Degressive Factor"
 msgstr "Taux dégréssif"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:137
+#: code:addons/account_asset_management/models/account_asset_profile.py:144
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Dégressif-Linéaire"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:254
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
+#: code:addons/account_asset_management/models/account_asset_profile.py:173
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr ""
@@ -812,13 +812,13 @@ msgid "Last Updated on"
 msgstr "Dernière mis à jour le"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:134
+#: code:addons/account_asset_management/models/account_asset_profile.py:141
 #, python-format
 msgid "Linear"
 msgstr "Linéaire"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:135
+#: code:addons/account_asset_management/models/account_asset_profile.py:142
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linéaire jusqu'à la valeur de revente"
@@ -830,7 +830,7 @@ msgid "Min-Value Account"
 msgstr "Compte de moins-value"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Month"
 msgstr "Mois"
@@ -868,7 +868,7 @@ msgid "Number of Years"
 msgstr "Nombre d'années"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
+#: code:addons/account_asset_management/models/account_asset_profile.py:163
 #, fuzzy, python-format
 #| msgid "Number of Years"
 msgid "Number of Years or end date"
@@ -946,7 +946,7 @@ msgid "Purchase Value"
 msgstr "Valeur d'achat"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:152
 #, python-format
 msgid "Quarter"
 msgstr "Trimestre"
@@ -1264,7 +1264,7 @@ msgstr ""
 "Quand l'immobilisation est sortie, son statut prend la valeur  'Sortie'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
+#: code:addons/account_asset_management/models/account_asset_profile.py:153
 #, python-format
 msgid "Year"
 msgstr "Année"

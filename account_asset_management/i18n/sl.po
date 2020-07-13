@@ -472,13 +472,13 @@ msgstr ""
 "Privzeta kategorija sredstva pri ustvarjanju postavk računa za ta konto."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:136
+#: code:addons/account_asset_management/models/account_asset_profile.py:143
 #, python-format
 msgid "Degressive"
 msgstr "Degresivno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:145
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr ""
@@ -490,14 +490,14 @@ msgid "Degressive Factor"
 msgstr "Degresivni faktor"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:137
+#: code:addons/account_asset_management/models/account_asset_profile.py:144
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Degresivno-linearna"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:254
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
+#: code:addons/account_asset_management/models/account_asset_profile.py:173
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "Degresivno-linearna metoda je podprta le če je časovna metoda = leto."
@@ -794,13 +794,13 @@ msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:134
+#: code:addons/account_asset_management/models/account_asset_profile.py:141
 #, python-format
 msgid "Linear"
 msgstr "Linearno"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:135
+#: code:addons/account_asset_management/models/account_asset_profile.py:142
 #, fuzzy, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Ostanek vrednosti"
@@ -812,7 +812,7 @@ msgid "Min-Value Account"
 msgstr "Konto zmanjšane vrednosti"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Month"
 msgstr "Mesec"
@@ -850,7 +850,7 @@ msgid "Number of Years"
 msgstr "Število let"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
+#: code:addons/account_asset_management/models/account_asset_profile.py:163
 #, fuzzy, python-format
 #| msgid "Number of Years"
 msgid "Number of Years or end date"
@@ -930,7 +930,7 @@ msgid "Purchase Value"
 msgstr "Nabavna vrednost"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:152
 #, python-format
 msgid "Quarter"
 msgstr "Četrtletje"
@@ -1245,7 +1245,7 @@ msgstr ""
 "Ob nastanku vnosov odstranitve preide status sredstva v 'odstranjeno'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
+#: code:addons/account_asset_management/models/account_asset_profile.py:153
 #, python-format
 msgid "Year"
 msgstr "Leto"
