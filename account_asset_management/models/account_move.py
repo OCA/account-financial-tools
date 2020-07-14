@@ -60,25 +60,42 @@ class AccountMove(models.Model):
 
     def post(self):
         super().post()
+        AccountAsset = self.env["account.asset"]
+        default_asset_values = None
+
         for move in self:
-            for aml in move.line_ids.filtered("asset_profile_id"):
+            for aml in move.line_ids:
+                if not aml.asset_profile_id:
+                    continue
                 depreciation_base = aml.debit or -aml.credit
-                vals = {
-                    "name": aml.name,
-                    "code": move.name,
-                    "profile_id": aml.asset_profile_id.id,
-                    "purchase_value": depreciation_base,
-                    "partner_id": aml.partner_id.id,
-                    "date_start": move.date,
-                    "account_analytic_id": aml.analytic_account_id.id,
-                }
+                if default_asset_values is None:
+                    default_asset_values = AccountAsset.default_get(
+                        AccountAsset._fields.keys()
+                    )
+                vals = default_asset_values.copy()
+                vals.update(
+                    {
+                        "name": aml.name,
+                        "code": move.name,
+                        "profile_id": aml.asset_profile_id.id,
+                        "purchase_value": depreciation_base,
+                        "partner_id": aml.partner_id.id,
+                        "date_start": move.date,
+                        "account_analytic_id": aml.analytic_account_id.id,
+                    }
+                )
                 if self.env.context.get("company_id"):
                     vals["company_id"] = self.env.context["company_id"]
-                asset = (
-                    self.env["account.asset"]
-                    .with_context(create_asset_from_move_line=True, move_id=move.id)
-                    .create(vals)
-                )
+
+                temp_asset = AccountAsset.new(vals)
+                temp_asset._onchange_profile_id()
+                vals.update(temp_asset._convert_to_write(temp_asset._cache))
+                asset = AccountAsset.with_context(
+                    # prevent to use invoice action context
+                    default_type=False,
+                    create_asset_from_move_line=True,
+                    move_id=move.id,
+                ).create(vals)
                 aml.with_context(allow_asset=True).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"

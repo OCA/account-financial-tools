@@ -510,6 +510,7 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(len(new_assets), 2)
 
         for asset in new_assets:
+            asset.compute_depreciation_board()
             dlines = asset.depreciation_line_ids.filtered(
                 lambda l: l.type == "depreciate"
             )
