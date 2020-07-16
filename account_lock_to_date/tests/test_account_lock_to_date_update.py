@@ -69,8 +69,8 @@ class TestAccountLockToDateUpdate(TransactionCase):
     def test_01_update_without_access(self):
         wizard = self.create_account_lock_date_update()
         wizard.write({
-            'period_lock_to_date': '2900-01-01',
-            'fiscalyear_lock_to_date': '2900-01-01',
+            'period_lock_to_date': '1900-01-01',
+            'fiscalyear_lock_to_date': '1900-01-01',
         })
         self.demo_user.write({
             'groups_id': [(3, self.adviser_group.id)],
@@ -81,30 +81,30 @@ class TestAccountLockToDateUpdate(TransactionCase):
     def test_02_update_with_access(self):
         wizard = self.create_account_lock_date_update()
         wizard.write({
-            'period_lock_to_date': '2900-01-01',
-            'fiscalyear_lock_to_date': '2900-02-01',
+            'period_lock_to_date': '1900-01-01',
+            'fiscalyear_lock_to_date': '1900-02-01',
         })
         self.demo_user.write({
             'groups_id': [(4, self.adviser_group.id)],
         })
         wizard.sudo(self.demo_user.id).execute()
-        self.assertEqual(self.company.period_lock_to_date, '2900-01-01')
-        self.assertEqual(self.company.fiscalyear_lock_to_date, '2900-02-01')
+        self.assertEqual(self.company.period_lock_to_date, '1900-01-01')
+        self.assertEqual(self.company.fiscalyear_lock_to_date, '1900-02-01')
 
     def test_03_create_move_outside_period(self):
         """We test that we cannot create journal entries after the
         locked date"""
-        self.company.period_lock_to_date = '2900-01-01'
-        self.company.fiscalyear_lock_to_date = '2900-02-01'
-        move = self.create_account_move('2900-01-01')
+        self.company.period_lock_to_date = '1900-01-01'
+        self.company.fiscalyear_lock_to_date = '1900-02-01'
+        move = self.create_account_move('1900-01-01')
         with self.assertRaises(UserError):
             move.sudo(self.demo_user.id).post()
 
     def test_04_create_move_inside_period(self):
         """We test that we can successfully create a journal entry
         within period that is not locked"""
-        self.company.period_lock_to_date = '2900-01-01'
-        self.company.fiscalyear_lock_to_date = '2900-02-01'
+        self.company.period_lock_to_date = '1900-01-01'
+        self.company.fiscalyear_lock_to_date = '1900-02-01'
         move = self.create_account_move('2800-01-01')
         move.sudo(self.demo_user.id).post()
         self.assertEqual(move.state, 'posted')
@@ -112,7 +112,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
     def test_05_lock_period_with_draft_moves(self):
         """We test that we cannot change the fiscal year lock to date
            if there are draft journal entries after that date."""
-        self.create_account_move('2900-02-01')
+        self.create_account_move('1900-02-01')
         with self.assertRaises(ValidationError):
-            self.company.period_lock_to_date = '2900-01-01'
-            self.company.fiscalyear_lock_to_date = '2900-02-01'
+            self.company.period_lock_to_date = '1900-01-01'
+            self.company.fiscalyear_lock_to_date = '1900-02-01'

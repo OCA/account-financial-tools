@@ -45,11 +45,11 @@ class ResCompany(models.Model):
 
         next_month = datetime.strptime(
             fields.Date.today(),
-            DEFAULT_SERVER_DATE_FORMAT) + relativedelta(months=+1)
+            DEFAULT_SERVER_DATE_FORMAT)
         days_next_month = calendar.monthrange(next_month.year,
                                               next_month.month)
-        next_month = next_month.replace(
-            day=days_next_month[1]).timetuple()
+        next_month = (next_month.replace(
+            day=days_next_month[1]) - relativedelta(months=1)).timetuple()
         for company in self:
             old_fiscalyear_lock_to_date = company.fiscalyear_lock_to_date and\
                 time.strptime(company.fiscalyear_lock_to_date,
@@ -80,7 +80,7 @@ class ResCompany(models.Model):
 
             # The user attempts to set a lock date for advisors after
             # the first day of next month
-            if fiscalyear_lock_to_date < next_month:
+            if fiscalyear_lock_to_date > next_month:
                 raise ValidationError(
                     _('You cannot lock a period that is not finished yet. '
                       'Please make sure that the lock date for advisors is '
