@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo13-addon-account_move_line_tax_editable',
         'odoo13-addon-account_netting',
         'odoo13-addon-account_tax_repartition_line_tax_group_account',
+        'odoo13-addon-base_vat_optional_vies',
     ],
     classifiers=[
         'Programming Language :: Python',
