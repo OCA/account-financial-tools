@@ -20,18 +20,24 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 
 #. module: account_move_batch_validate
-#: model:ir.model,name:account_move_batch_validate.model_account_move
-msgid "Account Entry"
-msgstr ""
-
-#. module: account_move_batch_validate
-#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_action
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move__action
 msgid "Action"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: model:ir.model.fields,help:account_move_batch_validate.field_account_move_to_post
+#: model:ir.model.fields,help:account_move_batch_validate.field_account_move__to_post
 msgid "Check this box to mark the move for batch posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: model:ir.model,name:account_move_batch_validate.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: code:addons/account_move_batch_validate/wizard/account_move_validate.py:36
+#, python-format
+msgid "Mark for posting"
 msgstr ""
 
 #. module: account_move_batch_validate
@@ -47,12 +53,12 @@ msgid "Nothing to do because the record has been deleted."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_to_post
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move__to_post
 msgid "Posting requested"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_eta
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move__eta
 msgid "Seconds to wait before starting the jobs"
 msgstr ""
 
@@ -63,12 +69,18 @@ msgid "Task set to Done because the user unmarked the move."
 msgstr ""
 
 #. module: account_move_batch_validate
-#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move_post_job_uuid
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_account_move__post_job_uuid
 msgid "UUID of the Job to approve this move"
 msgstr ""
 
 #. module: account_move_batch_validate
-#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move_asynchronous
+#: code:addons/account_move_batch_validate/wizard/account_move_validate.py:37
+#, python-format
+msgid "Unmark for posting"
+msgstr ""
+
+#. module: account_move_batch_validate
+#: model:ir.model.fields,field_description:account_move_batch_validate.field_validate_account_move__asynchronous
 msgid "Use asynchronous validation"
 msgstr ""
 
