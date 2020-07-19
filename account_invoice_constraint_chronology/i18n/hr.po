@@ -27,7 +27,7 @@ msgid "Check Chronology"
 msgstr "Provjeri kronologiju"
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:53
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:54
 #, python-format
 msgid ""
 "Chronology Error. Please confirm older draft invoices before {date_invoice} "
@@ -37,7 +37,7 @@ msgstr ""
 "pokušajte ponovo."
 
 #. module: account_invoice_constraint_chronology
-#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:69
+#: code:addons/account_invoice_constraint_chronology/model/account_invoice.py:70
 #, python-format
 msgid ""
 "Chronology Error. There exist at least one invoice with a later date to "
