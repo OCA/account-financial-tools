@@ -1,6 +1,7 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.fields import Date
 from odoo.tests.common import TransactionCase, Form
 from odoo.exceptions import ValidationError
 
@@ -131,3 +132,17 @@ class TestAccountClearancePlan(TransactionCase):
                 lambda l: l.credit == line.debit
             ):
                 self.assertEqual(reconciled_line.move_id.id, move.id)
+
+    def test_onchange_clearance_plan_recurrence(self):
+        clearance_plan_wizard = self.create_and_fill_wizard()
+        self.assertTrue(clearance_plan_wizard.clearance_plan_line_ids)
+        for i in range(len(clearance_plan_wizard.clearance_plan_line_ids)):
+            clearance_plan_wizard.clearance_plan_line_ids.remove(0)
+        self.assertFalse(clearance_plan_wizard.clearance_plan_line_ids)
+        clearance_plan_wizard.recurrence_type = "months"
+        clearance_plan_wizard.recurrent_clearance_amount = 100
+        clearance_plan_wizard.recurrence_number = 10
+        self.assertFalse(clearance_plan_wizard.clearance_plan_line_ids)
+        clearance_plan_wizard.clearance_plan_start_date = Date.today()
+        self.assertTrue(clearance_plan_wizard.clearance_plan_line_ids)
+        self.assertEqual(clearance_plan_wizard.amount_unallocated, 0)

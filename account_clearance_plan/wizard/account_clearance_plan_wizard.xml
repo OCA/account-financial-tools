@@ -15,6 +15,21 @@
                 </group>
                 <notebook>
                     <page string="Clearance Plan Board">
+                        <div>
+                            <span>Pay</span>
+                            <field name="recurrent_clearance_amount"
+                                   class="oe_inline"
+                                   style="font-weight: bold;margin: 0px 10px;text-align: right;"/>
+                            <span>over</span>
+                            <field name="recurrence_number" class="oe_inline"
+                                   style="font-weight: bold;margin: 0px 10px;text-align: right;"/>
+                            <field name="recurrence_type" class="oe_inline"
+                                   style="font-weight: bold;margin: 0px 10px;"/>
+                            <span>starting from</span>
+                            <field name="clearance_plan_start_date"
+                                   class="oe_inline"
+                                   style="font-weight: bold;margin: 0px 10px;"/>
+                        </div>
                         <field name="clearance_plan_line_ids">
                             <tree editable="bottom">
                                 <field name="name"/>
@@ -25,8 +40,8 @@
                     </page>
                 </notebook>
                 <footer>
-                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/> 
-                    <button string="Cancel" class="btn-default" special="cancel"/>   
+                    <button name="confirm_plan" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
                 </footer>
             </form>
         </field>
