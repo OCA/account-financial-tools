@@ -24,16 +24,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2019-08-02 08:44+0000\n"
-"Last-Translator: Josep M <jmyepes@mac.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/es/)\n"
+"PO-Revision-Date: 2020-07-22 11:19+0000\n"
+"Last-Translator: Harald Panten <harald.panten@sygel.es>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
@@ -124,20 +124,16 @@ msgstr "Cuenta de activo"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
-#, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
-msgstr "Cuenta de activo"
+msgstr "Grupo de activo"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
-#, fuzzy
-#| msgid "Asset Profiles"
 msgid "Asset Groups"
-msgstr "Categorías de activo"
+msgstr "Grupos de activo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -1015,10 +1011,8 @@ msgstr "Valor de salvaguarda"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
-#, fuzzy
-#| msgid "Search Asset Profile"
 msgid "Search Asset Group"
-msgstr "Buscar categoría de activo"
+msgstr "Buscar grupo de activo"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
