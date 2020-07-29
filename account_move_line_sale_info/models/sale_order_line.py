@@ -13,8 +13,7 @@ class SaleOrderLine(models.Model):
         orig_name = dict(super(SaleOrderLine, self).name_get())
         for line in self:
             name = orig_name[line.id]
-            if self.env.context.get('so_line_info', False):
-                name = "[%s] %s (%s)" % (line.order_id.name, name,
-                                         line.order_id.state)
+            if self.env.context.get("so_line_info", False):
+                name = "[{}] {} ({})".format(line.order_id.name, name, line.order_id.state)
             result.append((line.id, name))
         return result
