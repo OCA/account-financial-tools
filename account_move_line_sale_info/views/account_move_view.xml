@@ -41,28 +41,30 @@
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
                 <field
-                    name="sale_line_id"
-                    groups="account_move_line_sale_info.group_account_move_sale_info"
-                />
-                <field
                     name="sale_id"
                     groups="account_move_line_sale_info.group_account_move_sale_info"
                 />
+                <field
+                    name="sale_line_id"
+                    groups="account_move_line_sale_info.group_account_move_sale_info"
+                />
             </field>
-            <group expand="0" position="inside">
+            <filter name="group_by_partner" position="after">
                 <filter
+                    name="group_by_sale_order"
                     string="sale Order"
                     domain="[]"
                     context="{'group_by':'sale_id'}"
                     groups="account_move_line_sale_info.group_account_move_sale_info"
                 />
                 <filter
+                    name="group_by_sale_order_line"
                     string="sale Order Line"
                     domain="[]"
                     context="{'group_by':'sale_line_id','so_line_info':True}"
                     groups="account_move_line_sale_info.group_account_move_sale_info"
                 />
-            </group>
+            </filter>
         </field>
     </record>
     <record id="view_move_form" model="ir.ui.view">

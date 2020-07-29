@@ -1,8 +1,5 @@
 # Copyright 2019 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import ast
-
-from odoo import SUPERUSER_ID, api
 
 
 def post_init_hook(cr, registry):
@@ -23,12 +20,10 @@ def post_init_hook(cr, registry):
         """
         update account_move_line aml set sale_line_id = sol.id
         FROM account_move_line aml2
-        INNER JOIN account_invoice ai ON
-        ai.id = aml2.invoice_id
-        INNER JOIN account_invoice_line ail ON
-        ail.invoice_id = ai.id
+        INNER JOIN account_move am ON
+        am.id = aml2.move_id
         INNER JOIN sale_order_line_invoice_rel rel ON
-        rel.invoice_line_id = ail.id
+        rel.invoice_line_id = aml2.id
         INNER JOIN sale_order_line sol ON
         rel.order_line_id = sol.id
         AND sol.product_id = aml2.product_id

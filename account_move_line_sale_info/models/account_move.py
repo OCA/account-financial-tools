@@ -4,6 +4,49 @@
 from odoo import fields, models
 
 
+class AccountMove(models.Model):
+
+    _inherit = "account.move"
+
+    def _prepare_interim_account_line_vals(self, line, move, debit_interim_account):
+        res = super()._prepare_interim_account_line_vals(
+            line, move, debit_interim_account
+        )
+        if (
+            not res.get("move_id", False)
+            or not res.get("product_id", False)
+            or not res.get("quantity", False)
+        ):
+            return res
+        am = self.env["account.move"].browse(res["move_id"])
+        sale_line_id = am.invoice_line_ids.filtered(
+            lambda il: il.product_id.id == res["product_id"]
+            and il.quantity == res["quantity"]
+        ).mapped("sale_line_id")
+        if sale_line_id and len(sale_line_id) == 1:
+            res["sale_line_id"] = sale_line_id.id
+        return res
+
+    def _prepare_expense_account_line_vals(self, line, move, debit_interim_account):
+        res = super()._prepare_expense_account_line_vals(
+            line, move, debit_interim_account
+        )
+        if (
+            not res.get("move_id", False)
+            or not res.get("product_id", False)
+            or not res.get("quantity", False)
+        ):
+            return res
+        am = self.env["account.move"].browse(res["move_id"])
+        sale_line_id = am.invoice_line_ids.filtered(
+            lambda il: il.product_id.id == res["product_id"]
+            and il.quantity == res["quantity"]
+        ).mapped("sale_line_id")
+        if sale_line_id and len(sale_line_id) == 1:
+            res["sale_line_id"] = sale_line_id.id
+        return res
+
+
 class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
