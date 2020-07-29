@@ -169,9 +169,9 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         account move line and to the invoice line.
         """
         sale = self._create_sale([(self.product, 1)])
-        po_line = False
+        so_line = False
         for line in sale.order_line:
-            po_line = line
+            so_line = line
             break
         sale.button_confirm()
         picking = sale.picking_ids[0]
@@ -181,7 +181,7 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
 
         expected_balance = 1.0
         self._check_account_balance(self.account_inventory.id,
-                                    sale_line=po_line,
+                                    sale_line=so_line,
                                     expected_balance=expected_balance)
 
         invoice = self.invoice_model.create({
@@ -193,18 +193,18 @@ class TestAccountMoveLineSaleInfo(common.TransactionCase):
         invoice.action_invoice_open()
 
         for aml in invoice.move_id.line_ids:
-            if aml.product_id == po_line.product_id and aml.invoice_id:
-                self.assertEqual(aml.sale_line_id, po_line,
+            if aml.product_id == so_line.product_id and aml.invoice_id:
+                self.assertEqual(aml.sale_line_id, so_line,
                                  'sale Order line has not been copied '
                                  'from the invoice to the account move line.')
 
     def test_name_get(self):
         sale = self._create_sale([(self.product, 1)])
-        po_line = sale.order_line[0]
-        name_get = po_line.with_context({'po_line_info': True}).name_get()
-        self.assertEqual(name_get, [(po_line.id, "[%s] %s (%s)" % (
-            po_line.order_id.name, po_line.name,
-            po_line.order_id.state,
+        so_line = sale.order_line[0]
+        name_get = so_line.with_context({'so_line_info': True}).name_get()
+        self.assertEqual(name_get, [(so_line.id, "[%s] %s (%s)" % (
+            so_line.order_id.name, so_line.name,
+            so_line.order_id.state,
         ))])
-        name_get_no_ctx = po_line.name_get()
-        self.assertEqual(name_get_no_ctx, [(po_line.id, po_line.name)])
+        name_get_no_ctx = so_line.name_get()
+        self.assertEqual(name_get_no_ctx, [(so_line.id, so_line.name)])
