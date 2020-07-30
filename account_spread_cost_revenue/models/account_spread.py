@@ -170,15 +170,28 @@ class AccountSpread(models.Model):
             })
 
     @api.depends(
-        'estimated_amount', 'invoice_line_id.price_subtotal',
-        'line_ids.move_id.amount', 'line_ids.move_id.state')
+        "estimated_amount",
+        "currency_id",
+        "company_id",
+        "invoice_line_id.price_subtotal",
+        "invoice_line_id.currency_id",
+        "line_ids.amount",
+        "line_ids.move_id.state",
+    )
     def _compute_amounts(self):
         for spread in self:
             moves_amount = 0.0
             posted_amount = 0.0
             total_amount = spread.estimated_amount
             if spread.invoice_line_id:
-                total_amount = spread.invoice_line_id.price_subtotal
+                invoice = spread.invoice_line_id.invoice_id
+                total_amount = spread.invoice_line_id.currency_id._convert(
+                    spread.invoice_line_id.price_subtotal,
+                    spread.currency_id,
+                    spread.company_id,
+                    invoice._get_currency_rate_date() or fields.Date.today()
+                )
+
             for spread_line in spread.line_ids:
                 if spread_line.move_id:
                     moves_amount += spread_line.amount
