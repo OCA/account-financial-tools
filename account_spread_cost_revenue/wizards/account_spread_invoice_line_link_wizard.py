@@ -71,7 +71,8 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
     exp_rev_account_id = fields.Many2one(
         'account.account',
         string='Expense/revenue account',
-        help="Optional account to overwrite the existing expense/revenue account")
+        help="Optional account to overwrite the existing expense/revenue "
+             "account")
     spread_journal_id = fields.Many2one(
         'account.journal',
         string='Spread Journal',
@@ -152,6 +153,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
             analytic_account = self.invoice_line_id.account_analytic_id
             analytic_tags = self.invoice_line_id.analytic_tag_ids
             date_invoice = self.invoice_id.date_invoice or fields.Date.today()
+            use_il_account = self.use_invoice_line_account
 
             return {
                 'name': _('New Spread Board'),
@@ -165,7 +167,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     'default_name': self.invoice_line_id.name,
                     'default_invoice_type': self.invoice_type,
                     'default_invoice_line_id': self.invoice_line_id.id,
-                    'default_use_invoice_line_account': self.use_invoice_line_account,
+                    'default_use_invoice_line_account': use_il_account,
                     'default_debit_account_id': debit_account.id,
                     'default_credit_account_id': credit_account.id,
                     'default_journal_id': self.spread_journal_id.id,
