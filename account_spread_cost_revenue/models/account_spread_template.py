@@ -34,7 +34,8 @@ class AccountSpreadTemplate(models.Model):
     exp_rev_account_id = fields.Many2one(
         'account.account',
         string='Expense/Revenue Account',
-        help="Optional account to overwrite the existing expense/revenue account")
+        help="Optional account to overwrite the existing expense/revenue "
+             "account")
     period_number = fields.Integer(
         string='Number of Repetitions',
         help="Define the number of spread lines")
