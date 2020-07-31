@@ -160,19 +160,19 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:467
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:480
 #, python-format
 msgid "Cannot delete spread(s) that are linked to an invoice line."
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:472
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:485
 #, python-format
 msgid "Cannot delete spread(s): there are posted Journal Entries."
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:439
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:452
 #, python-format
 msgid "Cannot unlink invoice lines if the invoice is validated"
 msgstr ""
@@ -428,7 +428,7 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:453
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:466
 #: model:ir.model,name:account_spread_cost_revenue.model_account_invoice
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__invoice_id
 #, python-format
@@ -571,7 +571,7 @@ msgid "Name"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:157
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:159
 #, python-format
 msgid "New Spread Board"
 msgstr ""
@@ -674,7 +674,7 @@ msgid "Revenue account"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:458
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:471
 #, python-format
 msgid "Spread"
 msgstr ""
@@ -714,8 +714,8 @@ msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:40
-#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:134
-#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:213
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:135
+#: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:215
 #, python-format
 msgid "Spread Details"
 msgstr ""
@@ -760,7 +760,7 @@ msgid "Spread lines"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:378
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:391
 #, python-format
 msgid "Spread table '%s' created."
 msgstr ""
@@ -779,25 +779,25 @@ msgid "Supplier"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:264
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:277
 #, python-format
 msgid "The Invoice Type does not correspond to the Invoice"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:272
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:285
 #, python-format
 msgid "The Journal is not consistent with the account moves."
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:285
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:298
 #, python-format
 msgid "The Spread Template (Purchases) is not compatible with selected invoice type"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:280
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:293
 #, python-format
 msgid "The Spread Template (Sales) is not compatible with selected invoice type"
 msgstr ""
@@ -844,13 +844,13 @@ msgid "Unlinked"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:459
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:472
 #, python-format
 msgid "Unlinked '%s' (invoice line %s)."
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_spread.py:454
+#: code:addons/account_spread_cost_revenue/models/account_spread.py:467
 #, python-format
 msgid "Unlinked invoice line '%s' (view %s)."
 msgstr ""
