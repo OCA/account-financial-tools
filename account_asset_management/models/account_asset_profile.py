@@ -159,6 +159,7 @@ class AccountAssetProfile(models.Model):
             ("degressive", _("Degressive")),
             ("degr-linear", _("Degressive-Linear")),
             ("degr-limit", _("Degressive  up to Salvage Value")),
+            ("macrs", _("IRS Modified Accelerated Cost Recovery System"))
         ]
 
     @api.model
@@ -179,6 +180,10 @@ class AccountAssetProfile(models.Model):
             if profile.method == "degr-linear" and profile.method_time != "year":
                 raise UserError(
                     _("Degressive-Linear is only supported for Time Method = " "Year.")
+                )
+            if profile.method == "macrs" and profile.method_time != "year":
+                raise UserError(
+                    _("MACRS is only supported for Time Method = " "Year.")
                 )
 
     @api.onchange("method_time")

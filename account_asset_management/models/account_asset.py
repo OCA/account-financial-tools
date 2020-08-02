@@ -303,6 +303,10 @@ class AccountAsset(models.Model):
                 raise UserError(
                     _("Degressive-Linear is only supported for Time Method = " "Year.")
                 )
+            if asset.method == "macrs" and asset.method_time != "year":
+                raise UserError(
+                    _("MACRS is only supported for Time Method = " "Year.")
+                )
 
     @api.constrains("date_start", "method_end", "method_time")
     def _check_dates(self):
