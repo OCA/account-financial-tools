@@ -9,5 +9,19 @@
             <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
         </record>
 
+        <record id="account_spread_template_multi_company_rule" model="ir.rule">
+            <field name="name">Account Spread Template multi-company</field>
+            <field ref="model_account_spread_template" name="model_id"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+
+        <record id="account_spread_template_auto_multi_company_rule" model="ir.rule">
+            <field name="name">Account Spread Tempalte Auto multi-company</field>
+            <field ref="model_account_spread_template_auto" name="model_id"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+
     </data>
 </odoo>
