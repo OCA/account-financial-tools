@@ -15,8 +15,8 @@ msgstr ""
 "POT-Creation-Date: 2016-09-24 00:46+0000\n"
 "PO-Revision-Date: 2020-06-12 14:19+0000\n"
 "Last-Translator: Maria Sparenberg <maria.sparenberg@gmx.net>\n"
-"Language-Team: German (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-financial-"
+"tools-8-0/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -307,16 +307,16 @@ msgid ""
 "is equal to the asset value."
 msgstr ""
 "Wählen Sie das Verfahren zur Berechnung der Abschreibungspositionen.\n"
-"  * Linear: Berechnung durch Abschreibungsgrundlage / Abschreibungsanzahl. ("
-"Abschreibungsgrundlage = Anschaffungswert - Restwert)\n"
-"  * Linear-Limit: Lineare Berechnung bis zum Restwert. ("
-"Abschreibungsgrundlage = Anschaffungswert)\n"
+"  * Linear: Berechnung durch Abschreibungsgrundlage / Abschreibungsanzahl. "
+"(Abschreibungsgrundlage = Anschaffungswert - Restwert)\n"
+"  * Linear-Limit: Lineare Berechnung bis zum Restwert. "
+"(Abschreibungsgrundlage = Anschaffungswert)\n"
 "  * Degressiv: Berechnung durch Restbuchwert * Degressionsfaktor.\n"
 "  * Degressiv-Linear (nur auf Jahresbasis): Berechnung zunächst degressiv "
 "bis jährliche lineare Abschreibungsbeträge die jährlichen degressiven "
 "Abschreibungsbeträge übersteigen, dann lineare Berechnung.\n"
-"  * Degressiv-Limit: Degressive Berechnung bis zum Restwert. ("
-"Abschreibungsgrundlage = Anlagegutwert)"
+"  * Degressiv-Limit: Degressive Berechnung bis zum Restwert. "
+"(Abschreibungsgrundlage = Anlagegutwert)"
 
 #. module: account_asset_management
 #: selection:account.asset,state:0
@@ -472,13 +472,13 @@ msgstr ""
 "Rechnungspositionen mit diesem Konto verwendet wird."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:136
+#: code:addons/account_asset_management/models/account_asset_profile.py:143
 #, python-format
 msgid "Degressive"
 msgstr "Degressiv"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:145
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr "Degressiv bis Restwert"
@@ -490,14 +490,14 @@ msgid "Degressive Factor"
 msgstr "Degressiver Faktor"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:137
+#: code:addons/account_asset_management/models/account_asset_profile.py:144
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Degressiv-Linear"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:254
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
+#: code:addons/account_asset_management/models/account_asset_profile.py:173
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "Degressiv-Linear wird nur für das Zeit-Verfahren = Jahr unterstützt."
@@ -688,8 +688,8 @@ msgstr ""
 "Jahre abgeschrieben, abhängig von der Anzahl der Jahre. Damit gilt also: "
 "Jahresbetrag = Abschreibungsgrundlage / Anzahl der Jahre.\n"
 "Wenn der Haken gesetzt ist, wird das System Schaltjahre berücksichtigen. "
-"Damit gilt dann: Jahresbetrag = Abschreibungsgrundlage / ("
-"Abschreibungsenddatum - Startdatum + 1) * Anzahl der Tage des aktuellen "
+"Damit gilt dann: Jahresbetrag = Abschreibungsgrundlage / "
+"(Abschreibungsenddatum - Startdatum + 1) * Anzahl der Tage des aktuellen "
 "Jahres."
 
 #. module: account_asset_management
@@ -801,13 +801,13 @@ msgid "Last Updated on"
 msgstr "Zuletzt geändert am"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:134
+#: code:addons/account_asset_management/models/account_asset_profile.py:141
 #, python-format
 msgid "Linear"
 msgstr "Linear"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:135
+#: code:addons/account_asset_management/models/account_asset_profile.py:142
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linear bis Restwert"
@@ -819,7 +819,7 @@ msgid "Min-Value Account"
 msgstr "Verlust bei Verkauf"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Month"
 msgstr "Monat"
@@ -857,7 +857,7 @@ msgid "Number of Years"
 msgstr "Anzahl Jahre"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
+#: code:addons/account_asset_management/models/account_asset_profile.py:163
 #, python-format
 msgid "Number of Years or end date"
 msgstr "Anzahl der Jahre oder Enddatum"
@@ -932,7 +932,7 @@ msgid "Purchase Value"
 msgstr "Anschaffungswert"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:152
 #, python-format
 msgid "Quarter"
 msgstr "Quartal"
@@ -1146,8 +1146,8 @@ msgstr ""
 "Dies ermöglicht die Verwaltung von Anlagegütern im Besitz eines Unternehmens "
 "oder einer Person. \n"
 "Es dient der Nachverfolgbarkeit von  Abschreibungen zu diesen Anlagegütern "
-"fest und erstellt die nötigen Buchungszeilen dieser Abschreibungspositionen."
-"\n"
+"fest und erstellt die nötigen Buchungszeilen dieser "
+"Abschreibungspositionen.\n"
 "Das Modul account_asset_management wird hierbei installiert."
 
 #. module: account_asset_management
@@ -1157,8 +1157,8 @@ msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value."
 msgstr ""
-"Dieser Betrag stellt die Abschreibungsgrundlage dieses Anlageguts dar ("
-"Anschaffungswert - Restwert)."
+"Dieser Betrag stellt die Abschreibungsgrundlage dieses Anlageguts dar "
+"(Anschaffungswert - Restwert)."
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__purchase_value
@@ -1244,7 +1244,7 @@ msgstr ""
 "Werden Löschungen gebucht, so geht die Anlage in den Status 'Gelöscht' über."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
+#: code:addons/account_asset_management/models/account_asset_profile.py:153
 #, python-format
 msgid "Year"
 msgstr "Jahr"

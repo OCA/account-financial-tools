@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo12-addon-account_lock_date_update',
         'odoo12-addon-account_lock_to_date',
         'odoo12-addon-account_menu',
+        'odoo12-addon-account_move_batch_validate',
         'odoo12-addon-account_move_budget',
         'odoo12-addon-account_move_chatter',
         'odoo12-addon-account_move_fiscal_month',
@@ -40,6 +41,7 @@ setuptools.setup(
         'odoo12-addon-account_spread_cost_revenue',
         'odoo12-addon-account_tag_menu',
         'odoo12-addon-account_type_menu',
+        'odoo12-addon-account_voucher_print',
         'odoo12-addon-base_vat_optional_vies',
     ],
     classifiers=[

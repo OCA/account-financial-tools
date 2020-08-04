@@ -21,8 +21,8 @@ msgstr ""
 "POT-Creation-Date: 2016-05-21 00:52+0000\n"
 "PO-Revision-Date: 2020-05-19 17:19+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/pt_PT/)\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-"
+"account-financial-tools-8-0/language/pt_PT/)\n"
 "Language: pt_PT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -278,8 +278,8 @@ msgid ""
 "when the annual linear depreciation exceeds the annual degressive "
 "depreciation"
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
-"\n"
+"Escolha o método a utilizar para calcular o valor das linhas de "
+"depreciação:\n"
 "  * Linear: calculado como Valor Bruto / Nº Depreciações\n"
 "  * Decrescente: calculado através de Valor Residual * Fator Decréscimo"
 
@@ -310,8 +310,8 @@ msgid ""
 "   * Degressive-Limit: Degressive up to Salvage Value. The Depreciation Base "
 "is equal to the asset value."
 msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de depreciação:"
-"\n"
+"Escolha o método a utilizar para calcular o valor das linhas de "
+"depreciação:\n"
 "  * Linear: Calculado através de: Base da Depreciação / Nº de Depreciações.  "
 "Base da Depreciação = Valor de Compra - Valor Residual.\n"
 "  * Linear-Limite: Linear até ao Valor Residual. Base da Depreciação = Valor "
@@ -477,13 +477,13 @@ msgstr ""
 "Perfil por Defeito do Ativo na criação de linhas de faturas com esta conta."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:136
+#: code:addons/account_asset_management/models/account_asset_profile.py:143
 #, python-format
 msgid "Degressive"
 msgstr "Decrescente"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:138
+#: code:addons/account_asset_management/models/account_asset_profile.py:145
 #, python-format
 msgid "Degressive  up to Salvage Value"
 msgstr "Decrescente  até ao Valor Residual"
@@ -495,14 +495,14 @@ msgid "Degressive Factor"
 msgstr "Fator de Decréscimo"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:137
+#: code:addons/account_asset_management/models/account_asset_profile.py:144
 #, python-format
 msgid "Degressive-Linear"
 msgstr "Decrescente-Linear"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:254
-#: code:addons/account_asset_management/models/account_asset_profile.py:166
+#: code:addons/account_asset_management/models/account_asset_profile.py:173
 #, python-format
 msgid "Degressive-Linear is only supported for Time Method = Year."
 msgstr "O Decrescente-Linear só é suportado quando o Método Tempo é Anual."
@@ -807,13 +807,13 @@ msgid "Last Updated on"
 msgstr "Atualizado pela última vez em"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:134
+#: code:addons/account_asset_management/models/account_asset_profile.py:141
 #, python-format
 msgid "Linear"
 msgstr "Linear"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:135
+#: code:addons/account_asset_management/models/account_asset_profile.py:142
 #, python-format
 msgid "Linear up to Salvage Value"
 msgstr "Linear até ao Valor Residual"
@@ -825,7 +825,7 @@ msgid "Min-Value Account"
 msgstr "Conta de Menos-Valias"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:144
+#: code:addons/account_asset_management/models/account_asset_profile.py:151
 #, python-format
 msgid "Month"
 msgstr "Mês"
@@ -863,7 +863,7 @@ msgid "Number of Years"
 msgstr "Número de Anos"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:156
+#: code:addons/account_asset_management/models/account_asset_profile.py:163
 #, python-format
 msgid "Number of Years or end date"
 msgstr "Número de Anos ou data final"
@@ -938,7 +938,7 @@ msgid "Purchase Value"
 msgstr "Valor de Compra"
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:145
+#: code:addons/account_asset_management/models/account_asset_profile.py:152
 #, python-format
 msgid "Quarter"
 msgstr "Trimestre"
@@ -1091,7 +1091,8 @@ msgstr ""
 #, python-format
 msgid ""
 "The Asset Account defined in the Asset Profile must be equal to the account."
-msgstr "A Conta de Ativo definida no Perfil de Ativo tem que ser igual à conta."
+msgstr ""
+"A Conta de Ativo definida no Perfil de Ativo tem que ser igual à conta."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:62
@@ -1247,7 +1248,7 @@ msgstr ""
 "'Removido'."
 
 #. module: account_asset_management
-#: code:addons/account_asset_management/models/account_asset_profile.py:146
+#: code:addons/account_asset_management/models/account_asset_profile.py:153
 #, python-format
 msgid "Year"
 msgstr "Ano"
@@ -1321,7 +1322,8 @@ msgstr ""
 #: code:addons/account_asset_management/models/account_asset.py:287
 #, python-format
 msgid "You cannot change the profile of an asset with accounting entries."
-msgstr "Não pode modificar o perfil de um ativo com movimentos contabilísticos."
+msgstr ""
+"Não pode modificar o perfil de um ativo com movimentos contabilísticos."
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:170

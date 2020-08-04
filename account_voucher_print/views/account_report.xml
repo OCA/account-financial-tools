@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="account_receipts"
+        model="account.voucher"
+        string="Receipt"
+        report_type="qweb-pdf"
+        name="account_voucher_print.report_receipt"
+        file="account_voucher_print.report_receipt"
+        attachment="(object.state in ('posted')) and ('REC'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+    />
+</odoo>
