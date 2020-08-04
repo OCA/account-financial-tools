@@ -68,6 +68,11 @@ msgid "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__account_id
+msgid "Account"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
 msgid "Account Spread"
@@ -114,6 +119,11 @@ msgid "Amount"
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_account_id
+msgid "Analytic"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__account_analytic_id
 msgid "Analytic Account"
 msgstr ""
@@ -134,6 +144,21 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread_ids
+msgid "Auto Spread On"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread
+msgid "Auto assign template on invoice validate"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template_auto
+msgid "Auto create spread, based on product/account/analytic"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__auto_archive
 msgid "Auto-archive spread"
 msgstr ""
@@ -146,6 +171,11 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company__force_move_auto_post
 msgid "Auto-post spread lines"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
+msgid "Automatically use this spread template on invoice validation for invoice lines using below product and/or account and/or analytic,"
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -186,6 +216,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__company_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__company_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__company_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__company_id
 msgid "Company"
 msgstr ""
 
@@ -228,6 +259,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__create_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -242,6 +274,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__create_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__create_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__create_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__create_date
 msgid "Created on"
 msgstr ""
 
@@ -346,6 +379,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__display_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__display_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__display_name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -405,10 +439,20 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: code:addons/account_spread_cost_revenue/models/account_spread_template.py:150
+#, python-format
+msgid "Followings are duplicated combinations,\n"
+"\n"
+"%s\n"
+""
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__id
 msgid "ID"
 msgstr ""
 
@@ -420,6 +464,11 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread__message_needaction
 msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template__auto_spread
+msgid "If checked, provide option to auto create spread during invoice validation, based on product/account/analytic in invoice line."
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -500,6 +549,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard____last_update
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line____last_update
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template____last_update
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -508,6 +558,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__write_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__write_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__write_uid
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -516,11 +567,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__write_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line__write_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__write_date
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:60
+#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:61
 #, python-format
 msgid "Link Invoice Line with Spread Board"
 msgstr ""
@@ -567,6 +619,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__name
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__name
 msgid "Name"
 msgstr ""
 
@@ -633,8 +686,19 @@ msgid "Period length for the entries"
 msgstr ""
 
 #. module: account_spread_cost_revenue
+#: code:addons/account_spread_cost_revenue/models/account_spread_template.py:80
+#, python-format
+msgid "Please select product and/or account on auto spread options"
+msgstr ""
+
+#. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__posted_amount
 msgid "Posted Amount"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__product_id
+msgid "Product"
 msgstr ""
 
 #. module: account_spread_cost_revenue
@@ -713,7 +777,7 @@ msgid "Spread Costs/Revenues"
 msgstr ""
 
 #. module: account_spread_cost_revenue
-#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:40
+#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:41
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:135
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:215
 #, python-format
@@ -733,6 +797,7 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__template_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__template_id
+#: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__template_id
 msgid "Spread Template"
 msgstr ""
 
@@ -811,6 +876,12 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "This will delete the move. Are you sure ?"
+msgstr ""
+
+#. module: account_spread_cost_revenue
+#: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:99
+#, python-format
+msgid "Too many auto spread templates (%s) matched with the invoice line, %s"
 msgstr ""
 
 #. module: account_spread_cost_revenue
