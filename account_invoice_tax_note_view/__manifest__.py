@@ -1,4 +1,4 @@
-# Copyright 2018 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2020 Decodio applications LTD
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Account invoice tax note view',
