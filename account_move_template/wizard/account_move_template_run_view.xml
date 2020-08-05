@@ -84,7 +84,7 @@
     </record>
     <menuitem
         id="account_move_template_run_menu"
-        parent="account.menu_finance_entries_accounting_entries"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
         action="account_move_template_run_action"
         sequence="10"
     />

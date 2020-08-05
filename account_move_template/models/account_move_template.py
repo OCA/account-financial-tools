@@ -13,16 +13,20 @@ class AccountMoveTemplate(models.Model):
 
     name = fields.Char(required=True)
     company_id = fields.Many2one(
-        "res.company",
+        comodel_name="res.company",
         string="Company",
         required=True,
         ondelete="cascade",
-        default=lambda self: self.env["res.company"]._company_default_get(),
+        default=lambda self: self.env.company,
     )
-    journal_id = fields.Many2one("account.journal", string="Journal", required=True)
+    journal_id = fields.Many2one(
+        comodel_name="account.journal", string="Journal", required=True
+    )
     ref = fields.Char(string="Reference", copy=False)
     line_ids = fields.One2many(
-        "account.move.template.line", inverse_name="template_id", string="Lines"
+        comodel_name="account.move.template.line",
+        inverse_name="template_id",
+        string="Lines",
     )
 
     _sql_constraints = [
@@ -33,11 +37,10 @@ class AccountMoveTemplate(models.Model):
         )
     ]
 
-    @api.multi
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
-        default = dict(default or {}, name=_("%s (copy)") % self.name)
+        default = dict(default or {}, name=_("{} (copy)".format(self.name)))
         return super(AccountMoveTemplate, self).copy(default)
 
     def eval_computed_line(self, line, sequence2amount):
@@ -50,20 +53,21 @@ class AccountMoveTemplate(models.Model):
         except ValueError:
             raise UserError(
                 _(
-                    "Impossible to compute the formula of line with sequence %s "
-                    "(formula: %s). Check that the lines used in the formula "
-                    "really exists and have a lower sequence than the current "
-                    "line."
+                    "Impossible to compute the formula of line with sequence {} "
+                    "(formula: {}). Check that the lines used in the formula really "
+                    "exists and have a lower sequence than the current line.".format(
+                        line.sequence, line.python_code
+                    )
                 )
-                % (line.sequence, line.python_code)
             )
         except SyntaxError:
             raise UserError(
                 _(
-                    "Impossible to compute the formula of line with sequence %s "
-                    "(formula: %s): the syntax of the formula is wrong."
+                    "Impossible to compute the formula of line with sequence {} "
+                    "(formula: {}): the syntax of the formula is wrong.".format(
+                        line.sequence, line.python_code
+                    )
                 )
-                % (line.sequence, line.python_code)
             )
 
     def compute_lines(self, sequence2amount):
@@ -108,28 +112,30 @@ class AccountMoveTemplateLine(models.Model):
     _order = "sequence, id"
 
     template_id = fields.Many2one(
-        "account.move.template", string="Move Template", ondelete="cascade"
+        comodel_name="account.move.template", string="Move Template", ondelete="cascade"
     )
     name = fields.Char(string="Label", required=True)
-    sequence = fields.Integer("Sequence", required=True)
+    sequence = fields.Integer(string="Sequence", required=True)
     account_id = fields.Many2one(
-        "account.account",
+        comodel_name="account.account",
         string="Account",
         required=True,
         domain=[("deprecated", "=", False)],
     )
     partner_id = fields.Many2one(
-        "res.partner",
+        comodel_name="res.partner",
         string="Partner",
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
     analytic_account_id = fields.Many2one(
-        "account.analytic.account", string="Analytic Account"
+        comodel_name="account.analytic.account", string="Analytic Account"
     )
-    analytic_tag_ids = fields.Many2many("account.analytic.tag", string="Analytic Tags")
-    tax_ids = fields.Many2many("account.tax", string="Taxes")
+    analytic_tag_ids = fields.Many2many(
+        comodel_name="account.analytic.tag", string="Analytic Tags"
+    )
+    tax_ids = fields.Many2many(comodel_name="account.tax", string="Taxes")
     tax_line_id = fields.Many2one(
-        "account.tax", string="Originator Tax", ondelete="restrict"
+        comodel_name="account.tax", string="Originator Tax", ondelete="restrict"
     )
     company_id = fields.Many2one(related="template_id.company_id", store=True)
     company_currency_id = fields.Many2one(
@@ -139,17 +145,17 @@ class AccountMoveTemplateLine(models.Model):
     )
     note = fields.Char()
     type = fields.Selection(
-        [("computed", "Computed"), ("input", "User input")],
+        selection=[("computed", "Computed"), ("input", "User input")],
         string="Type",
         required=True,
         default="input",
     )
-    python_code = fields.Text("Python Code")
+    python_code = fields.Text(string="Python Code")
     move_line_type = fields.Selection(
-        [("cr", "Credit"), ("dr", "Debit")], required=True, string="Direction"
+        selection=[("cr", "Credit"), ("dr", "Debit")], required=True, string="Direction"
     )
     payment_term_id = fields.Many2one(
-        "account.payment.term",
+        comodel_name="account.payment.term",
         string="Payment Terms",
         help="Used to compute the due date of the journal item.",
     )
@@ -167,6 +173,8 @@ class AccountMoveTemplateLine(models.Model):
         for line in self:
             if line.type == "computed" and not line.python_code:
                 raise ValidationError(
-                    _("Python Code must be set for computed line with " "sequence %d.")
-                    % line.sequence
+                    _(
+                        "Python Code must be set for computed line with "
+                        "sequence {}.".format(line.sequence)
+                    )
                 )

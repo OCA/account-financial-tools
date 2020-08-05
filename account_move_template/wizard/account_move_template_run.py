@@ -10,26 +10,30 @@ class AccountMoveTemplateRun(models.TransientModel):
     _name = "account.move.template.run"
     _description = "Wizard to generate move from template"
 
-    template_id = fields.Many2one("account.move.template", required=True)
+    template_id = fields.Many2one(comodel_name="account.move.template", required=True)
     company_id = fields.Many2one(
-        "res.company",
+        comodel_name="res.company",
         required=True,
         readonly=True,
-        default=lambda self: self.env["res.company"]._company_default_get(),
+        default=lambda self: self.env.company,
     )
     partner_id = fields.Many2one(
-        "res.partner",
-        "Override Partner",
+        comodel_name="res.partner",
+        string="Override Partner",
         domain=["|", ("parent_id", "=", False), ("is_company", "=", True)],
     )
     date = fields.Date(required=True, default=fields.Date.context_today)
-    journal_id = fields.Many2one("account.journal", string="Journal", readonly=True)
+    journal_id = fields.Many2one(
+        comodel_name="account.journal", string="Journal", readonly=True
+    )
     ref = fields.Char(string="Reference")
     line_ids = fields.One2many(
-        "account.move.template.line.run", "wizard_id", string="Lines"
+        comodel_name="account.move.template.line.run",
+        inverse_name="wizard_id",
+        string="Lines",
     )
     state = fields.Selection(
-        [("select_template", "Select Template"), ("set_lines", "Set Lines")],
+        selection=[("select_template", "Select Template"), ("set_lines", "Set Lines")],
         readonly=True,
         default="select_template",
     )
@@ -59,13 +63,12 @@ class AccountMoveTemplateRun(models.TransientModel):
         if self.company_id != self.template_id.company_id:
             raise UserError(
                 _(
-                    "The selected template (%s) is not in the same company (%s) "
-                    "as the current user (%s)."
-                )
-                % (
-                    self.template_id.name,
-                    self.template_id.company_id.display_name,
-                    self.company_id.display_name,
+                    "The selected template ({}) is not in the same company ({}) "
+                    "as the current user ({}).".format(
+                        self.template_id.name,
+                        self.template_id.company_id.display_name,
+                        self.company_id.display_name,
+                    )
                 )
             )
         tmpl_lines = self.template_id.line_ids
@@ -113,7 +116,7 @@ class AccountMoveTemplateRun(models.TransientModel):
         result = action.read()[0]
         result.update(
             {
-                "name": _("Entry from template %s") % self.template_id.name,
+                "name": _("Entry from template {}".format(self.template_id.name)),
                 "res_id": move.id,
                 "views": False,
                 "view_id": False,
@@ -160,33 +163,46 @@ class AccountMoveTemplateLineRun(models.TransientModel):
     _name = "account.move.template.line.run"
     _description = "Wizard Lines to generate move from template"
 
-    wizard_id = fields.Many2one("account.move.template.run", ondelete="cascade")
+    wizard_id = fields.Many2one(
+        comodel_name="account.move.template.run", ondelete="cascade"
+    )
     company_id = fields.Many2one(related="wizard_id.company_id")
     company_currency_id = fields.Many2one(
         related="wizard_id.company_id.currency_id", string="Company Currency"
     )
-    sequence = fields.Integer("Sequence", required=True)
-    name = fields.Char("Name", readonly=True)
-    account_id = fields.Many2one("account.account", required=True, readonly=True)
-    analytic_account_id = fields.Many2one("account.analytic.account", readonly=True)
+    sequence = fields.Integer(string="Sequence", required=True)
+    name = fields.Char(string="Name", readonly=True)
+    account_id = fields.Many2one(
+        comodel_name="account.account", required=True, readonly=True
+    )
+    analytic_account_id = fields.Many2one(
+        comodel_name="account.analytic.account", readonly=True
+    )
     analytic_tag_ids = fields.Many2many(
-        "account.analytic.tag", string="Analytic Tags", readonly=True
+        comodel_name="account.analytic.tag", string="Analytic Tags", readonly=True
     )
-    tax_ids = fields.Many2many("account.tax", string="Taxes", readonly=True)
+    tax_ids = fields.Many2many(
+        comodel_name="account.tax", string="Taxes", readonly=True
+    )
     tax_line_id = fields.Many2one(
-        "account.tax", string="Originator Tax", ondelete="restrict", readonly=True
+        comodel_name="account.tax",
+        string="Originator Tax",
+        ondelete="restrict",
+        readonly=True,
     )
-    partner_id = fields.Many2one("res.partner", readonly=True, string="Partner")
+    partner_id = fields.Many2one(
+        comodel_name="res.partner", readonly=True, string="Partner"
+    )
     payment_term_id = fields.Many2one(
-        "account.payment.term", string="Payment Terms", readonly=True
+        comodel_name="account.payment.term", string="Payment Terms", readonly=True
     )
     move_line_type = fields.Selection(
-        [("cr", "Credit"), ("dr", "Debit")],
+        selection=[("cr", "Credit"), ("dr", "Debit")],
         required=True,
         readonly=True,
         string="Direction",
     )
     amount = fields.Monetary(
-        "Amount", required=True, currency_field="company_currency_id"
+        string="Amount", required=True, currency_field="company_currency_id"
     )
     note = fields.Char(readonly=True)
