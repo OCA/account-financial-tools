@@ -100,7 +100,7 @@
                                         name="salvage_value"
                                         widget="monetary"
                                         options="{'currency_field': 'company_currency_id'}"
-                                        attrs="{'readonly': ['|', ('move_line_check', '=', True), ('state', '!=', 'draft')]}"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}"
                                     />
                                     <field name="date_remove" />
                                 </group>
