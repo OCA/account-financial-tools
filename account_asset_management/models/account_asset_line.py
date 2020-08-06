@@ -123,7 +123,11 @@ class AccountAssetLine(models.Model):
                     )
             elif list(vals.keys()) == ["asset_id"]:
                 continue
-            elif dl.move_id and not self.env.context.get("allow_asset_line_update"):
+            elif (
+                dl.move_id
+                and not self.env.context.get("allow_asset_line_update")
+                and dl.type != "create"
+            ):
                 raise UserError(
                     _(
                         "You cannot change a depreciation line "
