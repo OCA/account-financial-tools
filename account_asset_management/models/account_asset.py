@@ -330,7 +330,7 @@ class AccountAsset(models.Model):
     @api.onchange("profile_id")
     def _onchange_profile_id(self):
         for line in self.depreciation_line_ids:
-            if line.move_id:
+            if line.type != "create" and line.move_id:
                 raise UserError(
                     _(
                         "You cannot change the profile of an asset "

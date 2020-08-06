@@ -79,6 +79,7 @@ class AccountMove(models.Model):
                     .with_context(create_asset_from_move_line=True, move_id=move.id)
                     .create(vals)
                 )
+                asset._onchange_profile_id()
                 aml.with_context(allow_asset=True).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
