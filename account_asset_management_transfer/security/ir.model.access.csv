@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_asset_transfer_user,account.asset.transfer,model_account_asset_transfer,account.group_account_user,1,1,1,1
+access_account_asset_transfer_manager,account.asset.transfer,model_account_asset_transfer,account.group_account_manager,1,1,1,1
+access_account_asset_transfer_target_user,account.asset.transfer.target,model_account_asset_transfer_target,account.group_account_user,1,1,1,1
+access_account_asset_transfer_target_manager,account.asset.transfer.target,model_account_asset_transfer_target,account.group_account_manager,1,1,1,1

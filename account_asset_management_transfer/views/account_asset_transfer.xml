@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_asset_tree_transfer" model="ir.ui.view">
+        <field name="name">account.asset.tree_transfer</field>
+        <field name="model">account.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Assets">
+                <field name="name" />
+                <field name="code" />
+                <field name="partner_id" />
+                <field name="profile_id" />
+                <field name="date_start" />
+                <field name="purchase_value" />
+                <field name="value_depreciated" />
+                <field name="state" readonly="1" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_account_asset_search_transfer" model="ir.ui.view">
+        <field name="name">account.asset.search_transfer</field>
+        <field name="model">account.asset</field>
+        <field name="arch" type="xml">
+            <search string="Assets">
+                <field name="name" string="Asset Name" />
+                <field name="code" string="Reference" />
+                <filter name="date_filter" string="Date Start" date="date_start" />
+                <group name="asset_transfer_group_by" string="Group By">
+                    <filter
+                        string="Partner"
+                        name="partner_id"
+                        context="{'group_by': 'partner_id'}"
+                    />
+                    <filter
+                        string="Profile"
+                        name="profile_id"
+                        context="{'group_by': 'profile_id'}"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_asset_transfer_view_search" model="ir.ui.view">
+        <field name="name">account.asset.transfer.search</field>
+        <field name="model">account.asset.transfer</field>
+        <field name="arch" type="xml">
+            <search string="Account Asset">
+                <filter
+                    string="Draft"
+                    name="draft"
+                    domain="[('state', '=', 'draft')]"
+                    help="Draft Assets Transfer"
+                />
+                <filter
+                    string="Transferred"
+                    name="done"
+                    domain="[('state', '=', 'done')]"
+                    help="Transferred Assets"
+                />
+                <filter
+                    string="Cancelled"
+                    name="cancel"
+                    domain="[('state', '=', 'cancel')]"
+                    help="Assets which have been cancel"
+                />
+                <separator orientation="vertical" />
+                <field name="name" string="Document" />
+                <field name="date_transfer" />
+                <field name="user_id" filter_domain="[('user_id', 'child_of', self)]" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Date Transfer"
+                        name="date_transfer"
+                        context="{'group_by': 'date_transfer'}"
+                    />
+                    <filter
+                        string="Journal"
+                        name="journal_id"
+                        context="{'group_by': 'journal_id'}"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Prepared By"
+                        name="user_id"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_asset_transfer_view_form" model="ir.ui.view">
+        <field name="name">account.asset.transfer.form</field>
+        <field name="model">account.asset.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <button
+                        name="transfer"
+                        string="Transfer"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="set_to_draft"
+                        string="Set to Draft"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'cancel')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button
+                            name="open_entries"
+                            string="Journal Entries"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                        />
+                        <button
+                            name="open_source_asset"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            attrs="{'invisible': [('source_asset_count', '=', 0)]}"
+                        >
+                            <field
+                                name="source_asset_count"
+                                widget="statinfo"
+                                string="Source Asset(s)"
+                            />
+                        </button>
+                        <button
+                            name="open_target_asset"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            attrs="{'invisible': [('target_asset_count', '=', 0)]}"
+                        >
+                            <field
+                                name="target_asset_count"
+                                widget="statinfo"
+                                string="Target Asset(s)"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" class="oe_inline" />
+                        </h1>
+                    </div>
+                    <group name="asset_transfer">
+                        <group>
+                            <field name="source_asset_value" />
+                            <field name="target_asset_value" />
+                        </group>
+                        <group name="information_asset_transfer">
+                            <field name="journal_id" />
+                            <field name="user_id" />
+                            <field name="date_transfer" />
+                            <field
+                                name="company_currency_id"
+                                groups="base.group_multi_currency"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Source Assets">
+                            <field
+                                name="source_asset_ids"
+                                options="{'no_create': True}"
+                                context="{'tree_view_ref': 'account_asset_management_transfer.view_account_asset_tree_transfer',
+                                          'search_view_ref': 'account_asset_management_transfer.view_account_asset_search_transfer'}"
+                                domain="[('state', 'in', ('open', 'close'))]"
+                            />
+                        </page>
+                        <page string="Target Assets">
+                            <field name="target_asset_ids">
+                                <tree editable="bottom">
+                                    <field name="asset_profile_id" />
+                                    <field name="asset_name" />
+                                    <field name="depreciation_base" sum="Total" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field
+                        name="message_follower_ids"
+                        widget="mail_followers"
+                        groups="base.group_user"
+                    />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="account_asset_transfer_view_tree" model="ir.ui.view">
+        <field name="name">account.asset.transfer.tree</field>
+        <field name="model">account.asset.transfer</field>
+        <field name="arch" type="xml">
+            <tree
+                string="Assets Transfer"
+                decoration-info="state=='draft'"
+                decoration-muted="state=='cancel'"
+            >
+                <field name="name" />
+                <field name="date_transfer" />
+                <field name="journal_id" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="account_asset_transfer_action" model="ir.actions.act_window">
+        <field name="name">Assets Transfer</field>
+        <field name="res_model">account.asset.transfer</field>
+        <field name="view_id" ref="account_asset_transfer_view_tree" />
+        <field name="search_view_id" ref="account_asset_transfer_view_search" />
+    </record>
+</odoo>
