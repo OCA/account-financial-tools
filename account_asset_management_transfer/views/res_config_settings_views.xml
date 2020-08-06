@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.asset.transfer</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='account_vendor_bills']" position="inside">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="asset_transfer_config_settings"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="asset_transfer_settings" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="asset_transfer_settings" />
+                        <div class="text-muted">
+                            Default journal in Asset Transfer
+                        </div>
+                        <div
+                            class="content-group"
+                            attrs="{'invisible': [('asset_transfer_settings', '=', False)]}"
+                        >
+                            <div class="mt16">
+                                <label
+                                    for="asset_transfer_journal_id"
+                                    class="col-lg-3 o_light_label"
+                                />
+                                <field
+                                    name="asset_transfer_journal_id"
+                                    attrs="{'required':[('asset_transfer_settings','!=', False)]}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
