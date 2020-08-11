@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2020-08-11 07:59+0000\n"
+"Last-Translator: Dong <dong@freshoo.cn>\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -18,12 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:35
 #, python-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (副本)"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -34,30 +35,30 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
-msgstr ""
+msgstr "会计科目"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Analytic"
-msgstr ""
+msgstr "辅助核算"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_account_id
 msgid "Analytic Account"
-msgstr ""
+msgstr "辅助核算项"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__analytic_tag_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__analytic_tag_ids
 msgid "Analytic Tags"
-msgstr ""
+msgstr "辅助核算标签"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
@@ -70,35 +71,34 @@ msgstr "取消"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
 msgid "Company"
-msgstr ""
+msgstr "核算组织"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "本位币"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Compute Formula"
-msgstr ""
+msgstr "计算公式"
 
 #. module: account_move_template
 #: selection:account.move.template.line,type:0
 msgid "Computed"
-msgstr ""
+msgstr "自动计算"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_run_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_run_menu
 msgid "Create Entry from Template"
-msgstr ""
+msgstr "从模式凭证引入"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
-#, fuzzy
 msgid "Create Journal Entry"
-msgstr "创建时间"
+msgstr "创建凭证"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_uid
@@ -106,7 +106,7 @@ msgstr "创建时间"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__create_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__create_uid
 msgid "Created by"
-msgstr "创建者"
+msgstr "创建人"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__create_date
@@ -120,30 +120,30 @@ msgstr "创建时间"
 #: selection:account.move.template.line,move_line_type:0
 #: selection:account.move.template.line.run,move_line_type:0
 msgid "Credit"
-msgstr ""
+msgstr "贷"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "记账日期"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:account.move.template.line.run,move_line_type:0
 msgid "Debit"
-msgstr ""
+msgstr "借"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:90
 #, python-format
 msgid "Debit and credit of all lines are null."
-msgstr ""
+msgstr "分录的借方和贷方金额为空。"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__move_line_type
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__move_line_type
 msgid "Direction"
-msgstr ""
+msgstr "方向"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__display_name
@@ -151,18 +151,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__display_name
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__display_name
 msgid "Display Name"
-msgstr "Display Name"
+msgstr "显示名称"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:102
 #, python-format
 msgid "Entry from template %s"
-msgstr ""
+msgstr "从模式凭证 %s 引入"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_form
 msgid "Generate Journal Entry"
-msgstr ""
+msgstr "生成凭证"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__id
@@ -194,7 +194,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr ""
+msgstr "单据类型"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -202,23 +202,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal Entry Template"
-msgstr ""
+msgstr "模式凭证"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Journal Entry Template Line"
-msgstr ""
+msgstr "模式凭证分录"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.account_move_template_action
 #: model:ir.ui.menu,name:account_move_template.account_move_template_menu
 msgid "Journal Entry Templates"
-msgstr ""
+msgstr "模式凭证"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
-msgstr ""
+msgstr "分录模板"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -238,7 +238,7 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__name
 msgid "Label"
-msgstr ""
+msgstr "摘要"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template____last_update
@@ -246,7 +246,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run____last_update
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run____last_update
 msgid "Last Modified on"
-msgstr "Last Modified on"
+msgstr "最近修改时间"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_uid
@@ -254,7 +254,7 @@ msgstr "Last Modified on"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_uid
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__write_uid
 msgid "Last Updated by"
-msgstr "最后更新者"
+msgstr "最近更新人"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__write_date
@@ -262,18 +262,18 @@ msgstr "最后更新者"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__write_date
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__write_date
 msgid "Last Updated on"
-msgstr "上次更新日期"
+msgstr "最近更新日期"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__line_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__line_ids
 msgid "Lines"
-msgstr ""
+msgstr "会计分录"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__template_id
 msgid "Move Template"
-msgstr ""
+msgstr "模式凭证"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__name
@@ -284,42 +284,41 @@ msgstr "名称"
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
 msgid "Next"
-msgstr ""
+msgstr "下一步"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "备注"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_line_id
 msgid "Originator Tax"
-msgstr ""
+msgstr "税项"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
-#, fuzzy
 msgid "Override Partner"
-msgstr "业务伙伴"
+msgstr "往来单位"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__partner_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__partner_id
 msgid "Partner"
-msgstr "业务伙伴"
+msgstr "往来单位"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__payment_term_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "收付款条件"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__python_code
 msgid "Python Code"
-msgstr ""
+msgstr "Python 代码"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:136
@@ -331,18 +330,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "单据编号"
 
 #. module: account_move_template
 #: selection:account.move.template.run,state:0
 msgid "Select Template"
-msgstr ""
+msgstr "选择模式凭证"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__sequence
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "行序"
 
 #. module: account_move_template
 #: selection:account.move.template.run,state:0
@@ -352,19 +351,19 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "税金"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
 msgid "Template"
-msgstr ""
+msgstr "模式凭证"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:54
@@ -397,12 +396,12 @@ msgstr ""
 #. module: account_move_template
 #: selection:account.move.template.line,type:0
 msgid "User input"
-msgstr ""
+msgstr "用户输入"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "向导"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line_run
@@ -428,7 +427,7 @@ msgstr ""
 msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
-msgstr ""
+msgstr "你可以使用分录的行序来引用其他分录，例如<i>L1</i>表示行序为1的分录。引用示例："
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:62
