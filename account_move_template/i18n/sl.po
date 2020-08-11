@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-01 03:44+0000\n"
-"PO-Revision-Date: 2018-02-01 03:44+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2020-08-11 13:59+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:35
@@ -33,9 +34,8 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
-#, fuzzy
 msgid "Account"
-msgstr "Znesek"
+msgstr "Konto"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__amount
@@ -71,13 +71,13 @@ msgstr "Preklic"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__company_currency_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__company_currency_id
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta družbe"
 
 #. module: account_move_template
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
@@ -126,7 +126,7 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
@@ -195,7 +195,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__journal_id
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_search
 msgid "Journal"
-msgstr ""
+msgstr "Dnevnik"
 
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template
@@ -291,7 +291,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__note
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__note
 msgid "Note"
-msgstr ""
+msgstr "Opomba"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_line_id
@@ -332,7 +332,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__ref
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__ref
 msgid "Reference"
-msgstr ""
+msgstr "Sklic"
 
 #. module: account_move_template
 #: selection:account.move.template.run,state:0
@@ -353,19 +353,19 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
 msgid "State"
-msgstr ""
+msgstr "Stanje"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_ids
 #: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_line_form
 msgid "Taxes"
-msgstr ""
+msgstr "Davki"
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__template_id
 msgid "Template"
-msgstr ""
+msgstr "Predloga"
 
 #. module: account_move_template
 #: code:addons/account_move_template/wizard/account_move_template_run.py:54
