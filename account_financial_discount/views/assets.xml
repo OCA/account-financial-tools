@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend" name="account financial discount assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/account_financial_discount/static/src/js/reconciliation_model.js"></script>
+        </xpath>
+    </template>
+</odoo>

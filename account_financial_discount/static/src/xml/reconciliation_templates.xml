@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="reconciliation.line.mv_line.details">
+        <t t-jquery="table.details" t-operation="append">
+            <t t-if="line.financial_discount_available">
+                <tr><td>Discount Date</td><td><t t-esc="line.date_discount_str"/></td></tr>
+                <tr><td>Discount Amount</td><td><t t-esc="line.amount_discount_str"/><t t-if="line.amount_discount_currency_str"> (<t t-esc="line.amount_discount_currency_str"/>)</t></td></tr>
+                <t t-if="line.amount_discount_tax">
+                    <tr><td>Discount Tax Amount</td><td><t t-esc="line.amount_discount_tax_str"/></td></tr>
+                </t>
+            </t>
+        </t>
+    </t>
+    <t t-extend="reconciliation.line.mv_line.amount">
+        <t t-jquery="span.line_amount:first" t-operation="prepend">
+            <t t-if="line.financial_discount_available">
+                <span><i class="fa fa-percent"></i></span>
+            </t>
+        </t>
+    </t>
+</templates>

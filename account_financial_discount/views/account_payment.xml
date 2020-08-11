@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_account_payment_form_multi_inherit" model="ir.ui.view">
+        <field name="name">account.payment.form.multi.inherit</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_form_multi" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id'][1]" position="after">
+                <field name="show_force_financial_discount" invisible="1" />
+                <field name="force_financial_discount" attrs="{'invisible': [('show_force_financial_discount', '=', False)]}" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_account_payment_form_inherit" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id'][1]" position="after">
+                <field name="show_force_financial_discount" invisible="1" />
+                <field name="force_financial_discount" attrs="{'invisible': [('show_force_financial_discount', '=', False)]}" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

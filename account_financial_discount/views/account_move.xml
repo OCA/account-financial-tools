@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_invoice_tree_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="has_discount_available" invisible="1" />
+            </field>
+            <xpath expr="//tree[1]" position="attributes">
+                <attribute name="decoration-success">has_discount_available and state == 'posted' and invoice_payment_state != 'paid'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <separator />
+                <filter name="has_discount_available"
+                        string="Has financial discount"
+                        domain="[('has_discount_available', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_payment_term_id']/parent::div" position="after">
+                <field name="display_force_financial_discount" invisible="1" />
+                <field name="force_financial_discount" attrs="{'invisible': [('display_force_financial_discount', '=', False)]}" />
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree" position="inside">
+                <field name="amount_discount" groups="base.group_no_one" force_save="1" optional="hide"/>
+                <field name="amount_discount_currency" groups="base.group_no_one" force_save="1" optional="hide"/>
+                <field name="date_discount" groups="base.group_no_one" force_save="1" optional="hide"/>
+                <field name="amount_discount_tax" groups="base.group_no_one" force_save="1" optional="hide"/>
+                <field name="discount_tax_line_id" groups="base.group_no_one" force_save="1" optional="hide"/>
+            </xpath>
+            <field name="ref" position="after">
+                <field name="payment_blocked" />
+            </field>
+        </field>
+    </record>
+</odoo>
