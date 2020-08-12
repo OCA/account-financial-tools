@@ -63,6 +63,8 @@ class AccountAssetLine(models.Model):
 
     @api.depends("amount", "previous_id", "type")
     def _compute_values(self):
+        self.depreciated_value = 0.0
+        self.remaining_value = 0.0
         dlines = self
         if self.env.context.get("no_compute_asset_line_ids"):
             # skip compute for lines in unlink
@@ -80,7 +82,6 @@ class AccountAssetLine(models.Model):
         grouped_dlines = []
         for asset in asset_ids:
             grouped_dlines.append(dlines.filtered(lambda l: l.asset_id.id == asset.id))
-
         for dlines in grouped_dlines:
             for i, dl in enumerate(dlines):
                 if i == 0:

@@ -121,12 +121,12 @@
                                         string="Depreciation Dates"
                                         colspan="2"
                                     />
-                                    <field name="method_time" />
+                                    <field name="method_time" required="1" />
                                     <field
                                         name="method_number"
                                         attrs="{'invisible': [('method_time', 'not in', ['number', 'year'])], 'required': [('method_time', 'in', ['number', 'year'])]}"
                                     />
-                                    <field name="method_period" />
+                                    <field name="method_period" required="1" />
                                     <field
                                         name="method_end"
                                         attrs="{'required': [('method_time', '=', 'end')], 'invisible': [('method_time', 'in', ['number'])]}"
@@ -142,7 +142,7 @@
                                         string="Depreciation Method"
                                         colspan="2"
                                     />
-                                    <field name="method" />
+                                    <field name="method" required="1" />
                                     <field
                                         name="method_progress_factor"
                                         attrs="{'invisible': [('method', 'in', ['linear', 'linear-limit'])], 'required': [('method', 'in', ['degressive', 'degr-linear', 'degr-limit'])]}"

@@ -17,6 +17,12 @@ from odoo.osv import expression
 
 _logger = logging.getLogger(__name__)
 
+READONLY_STATES = {
+    "open": [("readonly", True)],
+    "close": [("readonly", True)],
+    "removed": [("readonly", True)],
+}
+
 
 class DummyFy(object):
     def __init__(self, *args, **argv):
@@ -39,23 +45,12 @@ class AccountAsset(models.Model):
     move_line_check = fields.Boolean(
         compute="_compute_move_line_check", string="Has accounting entries"
     )
-    name = fields.Char(
-        string="Asset Name",
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-    )
-    code = fields.Char(
-        string="Reference",
-        size=32,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-    )
+    name = fields.Char(string="Asset Name", required=True, states=READONLY_STATES,)
+    code = fields.Char(string="Reference", size=32, states=READONLY_STATES,)
     purchase_value = fields.Float(
         string="Purchase Value",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        states=READONLY_STATES,
         help="This amount represent the initial value of the asset."
         "\nThe Depreciation Base is calculated as follows:"
         "\nPurchase Value - Salvage Value.",
@@ -63,8 +58,7 @@ class AccountAsset(models.Model):
     salvage_value = fields.Float(
         string="Salvage Value",
         digits="Account",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        states=READONLY_STATES,
         help="The estimated value that an asset will realize upon "
         "its sale at the end of its useful life.\n"
         "This value is used to determine the depreciation amounts.",
@@ -75,7 +69,7 @@ class AccountAsset(models.Model):
         string="Depreciation Base",
         store=True,
         help="This amount represent the depreciation base "
-        "of the asset (Purchase Value - Salvage Value.",
+        "of the asset (Purchase Value - Salvage Value).",
     )
     value_residual = fields.Float(
         compute="_compute_depreciation",
@@ -94,12 +88,14 @@ class AccountAsset(models.Model):
         comodel_name="account.asset.profile",
         string="Asset Profile",
         change_default=True,
-        readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
+        states=READONLY_STATES,
     )
     group_ids = fields.Many2many(
         comodel_name="account.asset.group",
+        compute="_compute_group_ids",
+        readonly=False,
+        store=True,
         relation="account_asset_group_rel",
         column1="asset_id",
         column2="group_id",
@@ -107,9 +103,8 @@ class AccountAsset(models.Model):
     )
     date_start = fields.Date(
         string="Asset Start Date",
-        readonly=True,
         required=True,
-        states={"draft": [("readonly", False)]},
+        states=READONLY_STATES,
         help="You should manually add depreciation lines "
         "with the depreciations of previous fiscal years "
         "if the Depreciation Start Date is different from the date "
@@ -138,33 +133,35 @@ class AccountAsset(models.Model):
     )
     active = fields.Boolean(default=True)
     partner_id = fields.Many2one(
-        comodel_name="res.partner",
-        string="Partner",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        comodel_name="res.partner", string="Partner", states=READONLY_STATES,
     )
     method = fields.Selection(
         selection=lambda self: self.env["account.asset.profile"]._selection_method(),
         string="Computation Method",
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default="linear",
-        help="Choose the method to use to compute "
-        "the amount of depreciation lines.\n"
+        compute="_compute_method",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
+        help="Choose the method to use to compute the depreciation lines.\n"
         "  * Linear: Calculated on basis of: "
-        "Gross Value / Number of Depreciations\n"
+        "Depreciation Base / Number of Depreciations. "
+        "Depreciation Base = Purchase Value - Salvage Value.\n"
+        "  * Linear-Limit: Linear up to Salvage Value. "
+        "Depreciation Base = Purchase Value.\n"
         "  * Degressive: Calculated on basis of: "
-        "Residual Value * Degressive Factor"
+        "Residual Value * Degressive Factor.\n"
         "  * Degressive-Linear (only for Time Method = Year): "
         "Degressive becomes linear when the annual linear "
-        "depreciation exceeds the annual degressive depreciation",
+        "depreciation exceeds the annual degressive depreciation.\n"
+        "   * Degressive-Limit: Degressive up to Salvage Value. "
+        "The Depreciation Base is equal to the asset value.",
     )
     method_number = fields.Integer(
         string="Number of Years",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=5,
+        compute="_compute_method_number",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
         help="The number of years needed to depreciate your asset",
     )
     method_period = fields.Selection(
@@ -172,47 +169,52 @@ class AccountAsset(models.Model):
             "account.asset.profile"
         ]._selection_method_period(),
         string="Period Length",
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default="year",
+        compute="_compute_method_period",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
         help="Period length for the depreciation accounting entries",
     )
     method_end = fields.Date(
-        string="Ending Date", readonly=True, states={"draft": [("readonly", False)]}
+        string="Ending Date",
+        compute="_compute_method_end",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
     )
     method_progress_factor = fields.Float(
         string="Degressive Factor",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default=0.3,
+        compute="_compute_method_progress_factor",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
     )
     method_time = fields.Selection(
         selection=lambda self: self.env[
             "account.asset.profile"
         ]._selection_method_time(),
         string="Time Method",
-        required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
-        default="year",
+        compute="_compute_method_time",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
         help="Choose the method to use to compute the dates and "
         "number of depreciation lines.\n"
         "  * Number of Years: Specify the number of years "
-        "for the depreciation.\n"
-        # "  * Number of Depreciations: Fix the number of "
-        # "depreciation lines and the time between 2 depreciations.\n"
-        # "  * Ending Date: Choose the time between 2 depreciations "
-        # "and the date the depreciations won't go beyond."
+        "for the depreciation.\n",
     )
     days_calc = fields.Boolean(
         string="Calculate by days",
-        default=False,
+        compute="_compute_days_calc",
+        readonly=False,
+        store=True,
         help="Use number of days to calculate depreciation amount",
     )
     use_leap_years = fields.Boolean(
         string="Use leap years",
-        default=False,
+        compute="_compute_use_leap_years",
+        readonly=False,
+        store=True,
         help="If not set, the system will distribute evenly the amount to "
         "amortize across the years, based on the number of years. "
         "So the amount per year will be the "
@@ -224,19 +226,20 @@ class AccountAsset(models.Model):
     )
     prorata = fields.Boolean(
         string="Prorata Temporis",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        compute="_compute_prorrata",
+        readonly=False,
+        store=True,
+        states=READONLY_STATES,
         help="Indicates that the first depreciation entry for this asset "
-        "have to be done from the depreciation start date instead "
-        "of the first day of the fiscal year.",
+        "has to be done from the depreciation start date instead of "
+        "the first day of the fiscal year.",
     )
     depreciation_line_ids = fields.One2many(
         comodel_name="account.asset.line",
         inverse_name="asset_id",
         string="Depreciation Lines",
         copy=False,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
+        states=READONLY_STATES,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -253,21 +256,23 @@ class AccountAsset(models.Model):
         readonly=True,
     )
     account_analytic_id = fields.Many2one(
-        comodel_name="account.analytic.account", string="Analytic account"
+        comodel_name="account.analytic.account",
+        string="Analytic account",
+        compute="_compute_account_analytic_id",
+        readonly=False,
+        store=True,
     )
 
     @api.model
     def _default_company_id(self):
         return self.env.company
 
+    @api.depends("depreciation_line_ids.move_id")
     def _compute_move_line_check(self):
         for asset in self:
-            move_line_check = False
-            for line in asset.depreciation_line_ids:
-                if line.move_id:
-                    move_line_check = True
-                    break
-            asset.move_line_check = move_line_check
+            asset.move_line_check = bool(
+                asset.depreciation_line_ids.filtered("move_id")
+            )
 
     @api.depends("purchase_value", "salvage_value", "method")
     def _compute_depreciation_base(self):
@@ -296,20 +301,93 @@ class AccountAsset(models.Model):
             depreciated = value_depreciated
             asset.update({"value_residual": residual, "value_depreciated": depreciated})
 
+    @api.depends("profile_id")
+    def _compute_group_ids(self):
+        for asset in self.filtered("profile_id"):
+            asset.group_ids = asset.profile_id.group_ids
+
+    @api.depends("profile_id")
+    def _compute_method(self):
+        for asset in self:
+            asset.method = asset.profile_id.method
+
+    @api.depends("profile_id", "method_end")
+    def _compute_method_number(self):
+        for asset in self:
+            if asset.method_end:
+                asset.method_number = 0
+            else:
+                asset.method_number = asset.profile_id.method_number
+
+    @api.depends("profile_id")
+    def _compute_method_period(self):
+        for asset in self:
+            asset.method_period = asset.profile_id.method_period
+
+    @api.depends("method_number")
+    def _compute_method_end(self):
+        for asset in self:
+            if asset.method_number:
+                asset.method_end = False
+
+    @api.depends("profile_id")
+    def _compute_method_progress_factor(self):
+        for asset in self:
+            asset.method_progress_factor = asset.profile_id.method_progress_factor
+
+    @api.depends("profile_id")
+    def _compute_method_time(self):
+        for asset in self:
+            asset.method_time = asset.profile_id.method_time
+
+    @api.depends("profile_id")
+    def _compute_days_calc(self):
+        for asset in self:
+            asset.days_calc = asset.profile_id.days_calc
+
+    @api.depends("profile_id")
+    def _compute_use_leap_years(self):
+        for asset in self:
+            asset.use_leap_years = asset.profile_id.use_leap_years
+
+    @api.depends("profile_id", "method_time")
+    def _compute_prorrata(self):
+        for asset in self:
+            if asset.method_time != "year":
+                asset.prorata = True
+            else:
+                asset.prorata = asset.profile_id.prorata
+
+    @api.depends("profile_id")
+    def _compute_account_analytic_id(self):
+        for asset in self:
+            asset.account_analytic_id = asset.profile_id.account_analytic_id
+
     @api.constrains("method", "method_time")
     def _check_method(self):
-        for asset in self:
-            if asset.method == "degr-linear" and asset.method_time != "year":
-                raise UserError(
-                    _("Degressive-Linear is only supported for Time Method = " "Year.")
-                )
+        if self.filtered(
+            lambda a: a.method == "degr-linear" and a.method_time != "year"
+        ):
+            raise UserError(
+                _("Degressive-Linear is only supported for Time Method = Year.")
+            )
 
     @api.constrains("date_start", "method_end", "method_time")
     def _check_dates(self):
-        for asset in self:
-            if asset.method_time == "end":
-                if asset.method_end <= asset.date_start:
-                    raise UserError(_("The Start Date must precede the Ending Date."))
+        if self.filtered(
+            lambda a: a.method_time == "end" and a.method_end <= a.date_start
+        ):
+            raise UserError(_("The Start Date must precede the Ending Date."))
+
+    @api.constrains("profile_id")
+    def _check_profile_change(self):
+        if self.depreciation_line_ids.filtered("move_id"):
+            raise UserError(
+                _(
+                    "You cannot change the profile of an asset "
+                    "with accounting entries."
+                )
+            )
 
     @api.onchange("purchase_value", "salvage_value", "date_start", "method")
     def _onchange_purchase_salvage_value(self):
@@ -327,52 +405,8 @@ class AccountAsset(models.Model):
                 {"amount": self.depreciation_base, "line_date": self.date_start}
             )
 
-    @api.onchange("profile_id")
-    def _onchange_profile_id(self):
-        for line in self.depreciation_line_ids:
-            if line.move_id:
-                raise UserError(
-                    _(
-                        "You cannot change the profile of an asset "
-                        "with accounting entries."
-                    )
-                )
-        profile = self.profile_id
-        if profile:
-            self.update(
-                {
-                    "method": profile.method,
-                    "method_number": profile.method_number,
-                    "method_time": profile.method_time,
-                    "method_period": profile.method_period,
-                    "days_calc": profile.days_calc,
-                    "use_leap_years": profile.use_leap_years,
-                    "method_progress_factor": profile.method_progress_factor,
-                    "prorata": profile.prorata,
-                    "account_analytic_id": profile.account_analytic_id,
-                    "group_ids": profile.group_ids,
-                }
-            )
-
-    @api.onchange("method_time")
-    def _onchange_method_time(self):
-        if self.method_time != "year":
-            self.prorata = True
-
-    @api.onchange("method_number")
-    def _onchange_method_number(self):
-        if self.method_number and self.method_end:
-            self.method_end = False
-
-    @api.onchange("method_end")
-    def _onchange_method_end(self):
-        if self.method_end and self.method_number:
-            self.method_number = 0
-
     @api.model
     def create(self, vals):
-        if vals.get("method_time") != "year" and not vals.get("prorata"):
-            vals["prorata"] = True
         asset = super().create(vals)
         if self.env.context.get("create_asset_from_move_line"):
             # Trigger compute of depreciation_base
@@ -381,9 +415,6 @@ class AccountAsset(models.Model):
         return asset
 
     def write(self, vals):
-        if vals.get("method_time"):
-            if vals["method_time"] != "year" and not vals.get("prorata"):
-                vals["prorata"] = True
         res = super().write(vals)
         for asset in self:
             if self.env.context.get("asset_validate_from_write"):
@@ -818,7 +849,7 @@ class AccountAsset(models.Model):
             raise UserError(
                 _(
                     "The '_compute_year_amount' method is only intended for "
-                    "Time Method 'Number of Years."
+                    "Time Method 'Number of Years'."
                 )
             )
         year_amount_linear = self._get_amount_linear(
