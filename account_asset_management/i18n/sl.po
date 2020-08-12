@@ -268,23 +268,6 @@ msgstr ""
 "bila kreirana z računi."
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
-msgid ""
-"Choose the method to use to compute the amount of depreciation lines.\n"
-"  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  "
-"* Degressive-Linear (only for Time Method = Year): Degressive becomes linear "
-"when the annual linear depreciation exceeds the annual degressive "
-"depreciation"
-msgstr ""
-"Izberite metodo izračuna amortizacijskih postavk:\n"
-"  * Linearna: izračun na osnovi Bruto vrednost / Število amortizacij\n"
-"  * Degresivna: izračun na osnovi Preostala vrednost * Degresivni faktor\n"
-"  * Degresivno-linearna (le če je časovna metoda = leto): degresivno postane "
-"linearno, ko letna linearna amortizacija preseže letno degresivno "
-"amortizacijo"
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
 msgid ""
@@ -296,6 +279,7 @@ msgstr ""
 "  * število let: določite število let za amortizacijo.\n"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
 #, fuzzy
 msgid ""
@@ -676,18 +660,10 @@ msgid "Illegal value %s in asset.method."
 msgstr "Neveljavna vrednost %s v asset.method."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
-"from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
-"Določa, da se prvi amortizacijski vnos za to sredstvo opravlja od začetnega "
-"datuma amortizacije namesto od prvega dne fiskalnega leta."
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
-msgid ""
-"Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 "Določa, da se prvi amortizacijski vnos za to sredstvo opravlja od začetnega "
@@ -1050,7 +1026,7 @@ msgstr "Status"
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
-"of Years."
+"of Years'."
 msgstr ""
 
 #. module: account_asset_management
@@ -1110,7 +1086,7 @@ msgstr "Datum odstranitve mora biti po zadnjem datumu amortizacije."
 #, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
-"Salvage Value."
+"Salvage Value)."
 msgstr "Znesek, ki predstavlja začetno vrednost sredstva."
 
 #. module: account_asset_management
@@ -1343,6 +1319,30 @@ msgstr ""
 "Ročno dodajte amortizacijske postavke z amortizacijami prejšnjih fiskalnih "
 "let, če je začetni datum amortizacije drugačen od datuma, na katerega se "
 "knjigovodski vnosi ustvarjajo."
+
+#~ msgid ""
+#~ "Choose the method to use to compute the amount of depreciation lines.\n"
+#~ "  * Linear: Calculated on basis of: Gross Value / Number of "
+#~ "Depreciations\n"
+#~ "  * Degressive: Calculated on basis of: Residual Value * Degressive "
+#~ "Factor  * Degressive-Linear (only for Time Method = Year): Degressive "
+#~ "becomes linear when the annual linear depreciation exceeds the annual "
+#~ "degressive depreciation"
+#~ msgstr ""
+#~ "Izberite metodo izračuna amortizacijskih postavk:\n"
+#~ "  * Linearna: izračun na osnovi Bruto vrednost / Število amortizacij\n"
+#~ "  * Degresivna: izračun na osnovi Preostala vrednost * Degresivni faktor\n"
+#~ "  * Degresivno-linearna (le če je časovna metoda = leto): degresivno "
+#~ "postane linearno, ko letna linearna amortizacija preseže letno degresivno "
+#~ "amortizacijo"
+
+#~ msgid ""
+#~ "Indicates that the first depreciation entry for this asset have to be "
+#~ "done from the depreciation start date instead of the first day of the "
+#~ "fiscal year."
+#~ msgstr ""
+#~ "Določa, da se prvi amortizacijski vnos za to sredstvo opravlja od "
+#~ "začetnega datuma amortizacije namesto od prvega dne fiskalnega leta."
 
 #~ msgid "Assets management (OCA)"
 #~ msgstr "Upravljanje sredstev (OCA)"

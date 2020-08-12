@@ -269,17 +269,6 @@ msgstr ""
 "kategorije kada su kreirani od fakture."
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
-msgid ""
-"Choose the method to use to compute the amount of depreciation lines.\n"
-"  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  "
-"* Degressive-Linear (only for Time Method = Year): Degressive becomes linear "
-"when the annual linear depreciation exceeds the annual degressive "
-"depreciation"
-msgstr ""
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
 msgid ""
@@ -289,6 +278,7 @@ msgid ""
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
 msgid ""
 "Choose the method to use to compute the depreciation lines.\n"
@@ -658,16 +648,10 @@ msgid "Illegal value %s in asset.method."
 msgstr ""
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
-"from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
-msgid ""
-"Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 
@@ -1017,7 +1001,7 @@ msgstr "Status"
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
-"of Years."
+"of Years'."
 msgstr ""
 
 #. module: account_asset_management
@@ -1072,7 +1056,7 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
-"Salvage Value."
+"Salvage Value)."
 msgstr ""
 
 #. module: account_asset_management

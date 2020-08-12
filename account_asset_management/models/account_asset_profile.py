@@ -178,9 +178,7 @@ class AccountAssetProfile(models.Model):
 
     @api.constrains("method", "method_time")
     def _check_method(self):
-        if self.filtered(
-            lambda a: a.method == "degr-linear" and a.method_time != "year"
-        ):
+        if any(a.method == "degr-linear" and a.method_time != "year" for a in self):
             raise UserError(
                 _("Degressive-Linear is only supported for Time Method = Year.")
             )
