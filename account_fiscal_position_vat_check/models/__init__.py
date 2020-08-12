@@ -1,2 +1,2 @@
-from . import account_invoice
-from . import partner
+from . import account_move
+from . import res_partner
