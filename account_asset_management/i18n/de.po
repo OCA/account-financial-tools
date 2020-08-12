@@ -262,22 +262,6 @@ msgstr ""
 "der Rechnung bestätigt werden soll."
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
-msgid ""
-"Choose the method to use to compute the amount of depreciation lines.\n"
-"  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  "
-"* Degressive-Linear (only for Time Method = Year): Degressive becomes linear "
-"when the annual linear depreciation exceeds the annual degressive "
-"depreciation"
-msgstr ""
-"Wählen Sie das Verfahren zur Berechnung der Abschreibungsbeträge.\n"
-"* Linear: Berechnet als Bruttobetrag / Abschreibungsanzahl\n"
-"* Degessiv: Berechnet als Restbuchwert * Degressionsfaktor\n"
-"* Degressiv-Linear (nur auf Jahresbasis): Zunächst degressiv bis lineare "
-"Abschreibungsbeträge die degressiven übersteigen, dann linear"
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
 msgid ""
@@ -291,6 +275,7 @@ msgstr ""
 "abgeschrieben wird.\n"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
 #, fuzzy
 msgid ""
@@ -672,18 +657,10 @@ msgid "Illegal value %s in asset.method."
 msgstr "Unzulässiger Wert %s in asset.method."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
-"from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
-"Zeigt an, dass die erste Abschreibungsbuchung dieser Anlage zum "
-"Abschreibungsbeginn und nicht zum Geschäftsjahresbeginn erfolgen soll."
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
-msgid ""
-"Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 "Zeigt an, dass die erste Abschreibungsbuchung dieser Anlage zum "
@@ -1046,7 +1023,7 @@ msgstr "Status"
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
-"of Years."
+"of Years'."
 msgstr ""
 
 #. module: account_asset_management
@@ -1109,7 +1086,7 @@ msgstr "Die Löschung muss nach dem letzten Abschreibungsdatum liegen."
 #, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
-"Salvage Value."
+"Salvage Value)."
 msgstr "Dieser Betrag stellt den Anfangswert der Anlage dar."
 
 #. module: account_asset_management
@@ -1344,6 +1321,29 @@ msgstr ""
 "Sie müssen manuell Abschreibungspositionen aus vorigen Geschäftsjahren "
 "hinzufügen, wenn der Abschreibungsbeginn von dem der zu erzeugenden "
 "Finanzbuchungen abweicht."
+
+#~ msgid ""
+#~ "Choose the method to use to compute the amount of depreciation lines.\n"
+#~ "  * Linear: Calculated on basis of: Gross Value / Number of "
+#~ "Depreciations\n"
+#~ "  * Degressive: Calculated on basis of: Residual Value * Degressive "
+#~ "Factor  * Degressive-Linear (only for Time Method = Year): Degressive "
+#~ "becomes linear when the annual linear depreciation exceeds the annual "
+#~ "degressive depreciation"
+#~ msgstr ""
+#~ "Wählen Sie das Verfahren zur Berechnung der Abschreibungsbeträge.\n"
+#~ "* Linear: Berechnet als Bruttobetrag / Abschreibungsanzahl\n"
+#~ "* Degessiv: Berechnet als Restbuchwert * Degressionsfaktor\n"
+#~ "* Degressiv-Linear (nur auf Jahresbasis): Zunächst degressiv bis lineare "
+#~ "Abschreibungsbeträge die degressiven übersteigen, dann linear"
+
+#~ msgid ""
+#~ "Indicates that the first depreciation entry for this asset have to be "
+#~ "done from the depreciation start date instead of the first day of the "
+#~ "fiscal year."
+#~ msgstr ""
+#~ "Zeigt an, dass die erste Abschreibungsbuchung dieser Anlage zum "
+#~ "Abschreibungsbeginn und nicht zum Geschäftsjahresbeginn erfolgen soll."
 
 #~ msgid "Assets management (OCA)"
 #~ msgstr "Anlagenverwaltung (OCA)"
