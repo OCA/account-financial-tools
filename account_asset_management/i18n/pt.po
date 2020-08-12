@@ -266,24 +266,6 @@ msgstr ""
 "categoria quando criados por faturas."
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
-msgid ""
-"Choose the method to use to compute the amount of depreciation lines.\n"
-"  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  "
-"* Degressive-Linear (only for Time Method = Year): Degressive becomes linear "
-"when the annual linear depreciation exceeds the annual degressive "
-"depreciation"
-msgstr ""
-"Escolha o método a utilizar para calcular o valor das linhas de "
-"depreciação:\n"
-"* Constante: calculado como Valor Bruto / Nº Depreciações\n"
-"* Decrescente: calculado através de Valor Residual x Fator Decréscimo\n"
-"* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por ser "
-"descrescente, transitando para constante quando o valor da depreciação "
-"constante anual ultrapassa o da depreciação decrescente anual."
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
 msgid ""
@@ -296,6 +278,7 @@ msgstr ""
 "* Nº de anos: Especifique o nº de anos para a depreciação.\n"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
 #, fuzzy
 msgid ""
@@ -679,19 +662,10 @@ msgid "Illegal value %s in asset.method."
 msgstr "Valor ilegal %s em asset.method"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
-"from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
-"Indica que o primeiro mov. de depreciação para este ativo tem que ser "
-"efetuado na data de início da depreciação e não no primeiro dia do ano "
-"fiscal."
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
-msgid ""
-"Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 "Indica que o primeiro mov. de depreciação para este ativo tem que ser "
@@ -1055,7 +1029,7 @@ msgstr "Estado"
 #, python-format
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
-"of Years."
+"of Years'."
 msgstr ""
 
 #. module: account_asset_management
@@ -1116,7 +1090,7 @@ msgstr "A data de remoção tem que ser posterior à data da última depreciaç�
 #, fuzzy
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
-"Salvage Value."
+"Salvage Value)."
 msgstr "Este montante representa o valor inicial do ativo."
 
 #. module: account_asset_management
@@ -1351,6 +1325,32 @@ msgstr ""
 "Deve adicionar manualmente linhas de depreciação com as depreciações de anos "
 "fiscais anteriores se a Data de Início de Depreciação é diferente da data "
 "para a qual é necessário gerar movs. contabilísticos."
+
+#~ msgid ""
+#~ "Choose the method to use to compute the amount of depreciation lines.\n"
+#~ "  * Linear: Calculated on basis of: Gross Value / Number of "
+#~ "Depreciations\n"
+#~ "  * Degressive: Calculated on basis of: Residual Value * Degressive "
+#~ "Factor  * Degressive-Linear (only for Time Method = Year): Degressive "
+#~ "becomes linear when the annual linear depreciation exceeds the annual "
+#~ "degressive depreciation"
+#~ msgstr ""
+#~ "Escolha o método a utilizar para calcular o valor das linhas de "
+#~ "depreciação:\n"
+#~ "* Constante: calculado como Valor Bruto / Nº Depreciações\n"
+#~ "* Decrescente: calculado através de Valor Residual x Fator Decréscimo\n"
+#~ "* Decrescente-Constante (apenas quando Método Tempo = Ano): começa por "
+#~ "ser descrescente, transitando para constante quando o valor da "
+#~ "depreciação constante anual ultrapassa o da depreciação decrescente anual."
+
+#~ msgid ""
+#~ "Indicates that the first depreciation entry for this asset have to be "
+#~ "done from the depreciation start date instead of the first day of the "
+#~ "fiscal year."
+#~ msgstr ""
+#~ "Indica que o primeiro mov. de depreciação para este ativo tem que ser "
+#~ "efetuado na data de início da depreciação e não no primeiro dia do ano "
+#~ "fiscal."
 
 #~ msgid "Assets management (OCA)"
 #~ msgstr "Gestão de Ativos (OCA)"
