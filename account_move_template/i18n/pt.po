@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:35
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (copy)"
@@ -85,7 +85,7 @@ msgid "Compute Formula"
 msgstr "Calcular Fórmula"
 
 #. module: account_move_template
-#: selection:account.move.template.line,type:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__computed
 msgid "Computed"
 msgstr "Calculado"
 
@@ -117,8 +117,8 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: account_move_template
-#: selection:account.move.template.line,move_line_type:0
-#: selection:account.move.template.line.run,move_line_type:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__cr
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__cr
 msgid "Credit"
 msgstr "Crédito"
 
@@ -128,13 +128,13 @@ msgid "Date"
 msgstr "Data"
 
 #. module: account_move_template
-#: selection:account.move.template.line,move_line_type:0
-#: selection:account.move.template.line.run,move_line_type:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__move_line_type__dr
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line_run__move_line_type__dr
 msgid "Debit"
 msgstr "Débito"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/account_move_template_run.py:90
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Debit and credit of all lines are null."
 msgstr "Débito e Crédito de todas as linhas são nulos."
@@ -154,7 +154,7 @@ msgid "Display Name"
 msgstr "Nome a Exibir"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/account_move_template_run.py:102
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid "Entry from template %s"
 msgstr "Movimento a partir do modelo %s"
@@ -173,7 +173,7 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:46
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s). "
@@ -185,7 +185,7 @@ msgstr ""
 "mais baixa que a linha atual."
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:52
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
 "Impossible to compute the formula of line with sequence %s (formula: %s): "
@@ -193,6 +193,12 @@ msgid ""
 msgstr ""
 "Impossível calculara a f´rmula da linha com a sequência%s (formula: %s): a "
 "sintaxe da fórmula está errada."
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
+msgid "Is a refund?"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template__journal_id
@@ -326,7 +332,7 @@ msgid "Python Code"
 msgstr "Código Python"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:136
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "Python Code must be set for computed line with sequence %d."
 msgstr ""
@@ -339,7 +345,7 @@ msgid "Reference"
 msgstr "Referência"
 
 #. module: account_move_template
-#: selection:account.move.template.run,state:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__select_template
 msgid "Select Template"
 msgstr "Selecionar Modelo"
 
@@ -350,7 +356,7 @@ msgid "Sequence"
 msgstr "Sequência"
 
 #. module: account_move_template
-#: selection:account.move.template.run,state:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_run__state__set_lines
 msgid "Set Lines"
 msgstr "Definir Linhas"
 
@@ -358,6 +364,12 @@ msgstr "Definir Linhas"
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__state
 msgid "State"
 msgstr "Estado"
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_repartition_line_id
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__tax_repartition_line_id
+msgid "Tax Repartition Line"
+msgstr ""
 
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__tax_ids
@@ -372,7 +384,7 @@ msgid "Template"
 msgstr "Modelos"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/account_move_template_run.py:54
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
 #, python-format
 msgid ""
 "The selected template (%s) is not in the same company (%s) as the current "
@@ -382,12 +394,12 @@ msgstr ""
 "(%s)."
 
 #. module: account_move_template
-#: sql_constraint:account.move.template.line:0
+#: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_line_sequence_template_uniq
 msgid "The sequence of the line must be unique per template!"
 msgstr "A sequência da linha deve ser única para este modelo!"
 
 #. module: account_move_template
-#: sql_constraint:account.move.template:0
+#: model:ir.model.constraint,message:account_move_template.constraint_account_move_template_name_company_unique
 msgid "This name is already used by another template!"
 msgstr "Este nome já está a ser usado noutro modelo!"
 
@@ -402,7 +414,7 @@ msgid "Used to compute the due date of the journal item."
 msgstr "Usado para calcular a data de vencimento o item de diário."
 
 #. module: account_move_template
-#: selection:account.move.template.line,type:0
+#: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
 msgstr "Entrada do utilizador"
 
@@ -422,7 +434,7 @@ msgid "Wizard to generate move from template"
 msgstr "Assistente para gerar movimentos a partir do modelo"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:68
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
 "You added a line in the wizard. This is not allowed: you should either "
@@ -439,11 +451,11 @@ msgid ""
 "You can refer to other lines using their sequence number e.g. <i>L1</i> for "
 "line with sequence = 1. Examples:"
 msgstr ""
-"Pode referenciar outras linhas usando a sua sequência numérica p.ex. "
-"<i>L1</i> para linha com sequência = 1. Exemplos:"
+"Pode referenciar outras linhas usando a sua sequência numérica p.ex. <i>L1</"
+"i> para linha com sequência = 1. Exemplos:"
 
 #. module: account_move_template
-#: code:addons/account_move_template/models/account_move_template.py:62
+#: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid ""
 "You deleted a line in the wizard. This is not allowed: you should either "

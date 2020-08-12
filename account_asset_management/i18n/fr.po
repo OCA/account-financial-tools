@@ -274,26 +274,6 @@ msgstr ""
 "immobilisations de cette catégorie lorsqu'elles sont créées par des factures."
 
 #. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
-msgid ""
-"Choose the method to use to compute the amount of depreciation lines.\n"
-"  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
-"  * Degressive: Calculated on basis of: Residual Value * Degressive Factor  "
-"* Degressive-Linear (only for Time Method = Year): Degressive becomes linear "
-"when the annual linear depreciation exceeds the annual degressive "
-"depreciation"
-msgstr ""
-"Choisissez la méthode de calcul utilisée pour calculer le montant des lignes "
-"d'amortissement.\n"
-"  * Linéaire : Calculer sur la base : Valeur brute / Nombre "
-"d'amortissements\n"
-"  * Dégressif : Calculer sur la base de : Valeur résiduelle * Facteur "
-"dégressif  \n"
-"  * Linéaire-dégressif (Seulement pour la méthode de temps annuelle) : "
-"Dégressif devient linéaire quand l'amortissement linéaire annuel dépasse "
-"l'amortissement dégressif annuel"
-
-#. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__method_time
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method_time
 msgid ""
@@ -306,6 +286,7 @@ msgstr ""
 "  * Nombre d'années : Spécifier le nombre d'année pour l'amortissement.\n"
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__method
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__method
 msgid ""
 "Choose the method to use to compute the depreciation lines.\n"
@@ -692,19 +673,10 @@ msgid "Illegal value %s in asset.method."
 msgstr "Valeur illégale %s dans asset.method."
 
 #. module: account_asset_management
+#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset has to be done "
-"from the depreciation start date instead of the first day of the fiscal year."
-msgstr ""
-"Indique que la première valeur de cette immobilisation doit être calculée "
-"depuis la date de début de l'immobilisation et non le premier jour de "
-"l'exercice fiscal."
-
-#. module: account_asset_management
-#: model:ir.model.fields,help:account_asset_management.field_account_asset__prorata
-msgid ""
-"Indicates that the first depreciation entry for this asset have to be done "
 "from the depreciation start date instead of the first day of the fiscal year."
 msgstr ""
 "Indique que la première valeur de cette immobilisation doit être calculée "
@@ -1062,10 +1034,13 @@ msgstr "Statut"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "The '_compute_year_amount' method is only intended for Time Method "
+#| "'Number of Years."
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
-"of Years."
+"of Years'."
 msgstr ""
 "La méthode '_compute_year_amount' n'est prise en charge que pour la méthode "
 "de temps 'Nombre d'années'."
@@ -1127,9 +1102,13 @@ msgstr "La date de sortie doit succéder à la dernière date d'amortissement."
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
+#, fuzzy
+#| msgid ""
+#| "This amount represent the depreciation base of the asset (Purchase Value "
+#| "- Salvage Value."
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
-"Salvage Value."
+"Salvage Value)."
 msgstr ""
 "Ce montant représente la base d'amortissement de l'immobilisation (valeur "
 "d'achat - valeur de revente)."
@@ -1369,6 +1348,34 @@ msgstr ""
 "Vous devez ajouter manuellement les lignes d'amortissement correspondant aux "
 "exercices fiscaux précédents si la date de début de l'immobilisation diffère "
 "de la date à laquelle des pièces comptables doivent être générées."
+
+#~ msgid ""
+#~ "Choose the method to use to compute the amount of depreciation lines.\n"
+#~ "  * Linear: Calculated on basis of: Gross Value / Number of "
+#~ "Depreciations\n"
+#~ "  * Degressive: Calculated on basis of: Residual Value * Degressive "
+#~ "Factor  * Degressive-Linear (only for Time Method = Year): Degressive "
+#~ "becomes linear when the annual linear depreciation exceeds the annual "
+#~ "degressive depreciation"
+#~ msgstr ""
+#~ "Choisissez la méthode de calcul utilisée pour calculer le montant des "
+#~ "lignes d'amortissement.\n"
+#~ "  * Linéaire : Calculer sur la base : Valeur brute / Nombre "
+#~ "d'amortissements\n"
+#~ "  * Dégressif : Calculer sur la base de : Valeur résiduelle * Facteur "
+#~ "dégressif  \n"
+#~ "  * Linéaire-dégressif (Seulement pour la méthode de temps annuelle) : "
+#~ "Dégressif devient linéaire quand l'amortissement linéaire annuel dépasse "
+#~ "l'amortissement dégressif annuel"
+
+#~ msgid ""
+#~ "Indicates that the first depreciation entry for this asset have to be "
+#~ "done from the depreciation start date instead of the first day of the "
+#~ "fiscal year."
+#~ msgstr ""
+#~ "Indique que la première valeur de cette immobilisation doit être calculée "
+#~ "depuis la date de début de l'immobilisation et non le premier jour de "
+#~ "l'exercice fiscal."
 
 #~ msgid "Assets management (OCA)"
 #~ msgstr "Gestion des immobilisations (OCA)"
