@@ -303,7 +303,7 @@ class AccountAsset(models.Model):
 
     @api.depends("profile_id")
     def _compute_group_ids(self):
-        for asset in self:
+        for asset in self.filtered("profile_id"):
             asset.group_ids = asset.profile_id.group_ids
 
     @api.depends("profile_id")
