@@ -1037,9 +1037,6 @@ msgstr "Situação"
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "The '_compute_year_amount' method is only intended for Time Method "
-#| "'Number of Years."
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
@@ -1103,9 +1100,6 @@ msgstr "A data de remoção deve ser posterior à última data de depreciação.
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
 #, fuzzy
-#| msgid ""
-#| "This amount represent the depreciation base of the asset (Purchase Value "
-#| "- Salvage Value."
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
