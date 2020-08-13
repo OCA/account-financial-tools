@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:33+0000\n"
-"PO-Revision-Date: 2020-08-13 03:59+0000\n"
+"PO-Revision-Date: 2020-08-13 18:59+0000\n"
 "Last-Translator: Dong <dong@freshoo.cn>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/zh_CN/)\n"
@@ -491,7 +491,7 @@ msgstr "折旧科目"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__create
 msgid "Depreciation Base"
-msgstr "资产原价"
+msgstr "应提折旧总额"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -616,7 +616,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "History"
-msgstr "历史"
+msgstr "凭证信息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__id
@@ -862,7 +862,7 @@ msgstr "年限百分比"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
 msgid "Purchase Value"
-msgstr "购进原值"
+msgstr "资产原值"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
