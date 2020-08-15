@@ -113,7 +113,6 @@ msgstr "Conta de Ativo"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 #, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
 msgstr "Conta de Ativo"
 
@@ -805,7 +804,6 @@ msgstr "Número de Anos"
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, fuzzy, python-format
-#| msgid "Number of Years"
 msgid "Number of Years or end date"
 msgstr "Número de Anos"
 
@@ -822,14 +820,12 @@ msgstr "Outras informações"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
 msgstr "Ativo Ascendente"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
 #, fuzzy
-#| msgid "Parent Left"
 msgid "Parent Path"
 msgstr "Ascendente à Esquerda"
 
@@ -1125,7 +1121,6 @@ msgstr "Crédito Total"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, fuzzy
-#| msgid "Total Debit"
 msgid "Total Days"
 msgstr "Débito Total"
 
@@ -1154,7 +1149,6 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
 #, fuzzy
-#| msgid "The number of years needed to depreciate your asset"
 msgid "Use number of days to calculate depreciation amount"
 msgstr "O número de anos necessários para a depreciação do seu imobilizado."
 
