@@ -122,7 +122,6 @@ msgstr "Compte d'immobilisation"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 #, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
 msgstr "Compte d'immobilisation"
 
@@ -132,7 +131,6 @@ msgstr "Compte d'immobilisation"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
 #, fuzzy
-#| msgid "Asset Profiles"
 msgid "Asset Groups"
 msgstr "Catégories d'immobilisation"
 
@@ -816,7 +814,6 @@ msgstr "Nombre d'années"
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:0
 #, fuzzy, python-format
-#| msgid "Number of Years"
 msgid "Number of Years or end date"
 msgstr "Nombre d'années"
 
@@ -833,7 +830,6 @@ msgstr "Autres informations"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
 msgstr "Immobilisation parente"
 
@@ -989,7 +985,6 @@ msgstr "Valeur de revente"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #, fuzzy
-#| msgid "Search Asset Profile"
 msgid "Search Asset Group"
 msgstr "Rechercher une catégorie d'immobilisation"
 
@@ -1035,9 +1030,6 @@ msgstr "Statut"
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "The '_compute_year_amount' method is only intended for Time Method "
-#| "'Number of Years."
 msgid ""
 "The '_compute_year_amount' method is only intended for Time Method 'Number "
 "of Years'."
@@ -1103,9 +1095,6 @@ msgstr "La date de sortie doit succéder à la dernière date d'amortissement."
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_line__depreciation_base
 #, fuzzy
-#| msgid ""
-#| "This amount represent the depreciation base of the asset (Purchase Value "
-#| "- Salvage Value."
 msgid ""
 "This amount represent the depreciation base of the asset (Purchase Value - "
 "Salvage Value)."
@@ -1144,7 +1133,6 @@ msgstr "Total crédit"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, fuzzy
-#| msgid "Total Debit"
 msgid "Total Days"
 msgstr "Total débit"
 
@@ -1173,7 +1161,6 @@ msgstr ""
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_profile__days_calc
 #, fuzzy
-#| msgid "The number of years needed to depreciate your asset"
 msgid "Use number of days to calculate depreciation amount"
 msgstr ""
 "Le nombre d'années nécessaires pour l'amortissement de l'immobilisation"
