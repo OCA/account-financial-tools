@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:33+0000\n"
-"PO-Revision-Date: 2020-08-15 14:59+0000\n"
+"PO-Revision-Date: 2020-08-15 20:59+0000\n"
 "Last-Translator: Dong <dong@freshoo.cn>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/oca/"
 "OCA-account-financial-tools-8-0/language/zh_CN/)\n"
@@ -50,7 +50,7 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Account Asset"
-msgstr "资产会计"
+msgstr "固定资产"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -66,22 +66,22 @@ msgstr "在这里添加一个内部提示 ..."
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
 msgid "All depreciation lines prior to this date will be automatically posted"
-msgstr ""
+msgstr "此日期之前的折旧将自动计提并过帐"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciated_value
 msgid "Amount Already Depreciated"
-msgstr "已折旧金额"
+msgstr "已计提折旧金额"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
-msgstr "分析信息"
+msgstr "辅助核算信息"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
@@ -92,7 +92,7 @@ msgstr "辅助核算项"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
-msgstr ""
+msgstr "确认操作？"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
@@ -101,28 +101,26 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Asset"
-msgstr "资产"
+msgstr "资产卡片"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/wizard/account_asset_remove.py:0
 #, python-format
 msgid "Asset '%s' Removal Journal Entry"
-msgstr ""
+msgstr "资产 '%s' 清理凭证"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
 msgid "Asset Account"
-msgstr "资产科目"
+msgstr "固定资产科目"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
-#, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
-msgstr "资产科目"
+msgstr "资产分组"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
@@ -135,24 +133,24 @@ msgstr "资产分组"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Line"
-msgstr ""
+msgstr "折旧明细"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset Lines"
-msgstr ""
+msgstr "折旧明细"
 
 #. module: account_asset_management
 #: model:ir.actions.server,name:account_asset_management.ir_cron_assets_generator_ir_actions_server
 #: model:ir.cron,cron_name:account_asset_management.ir_cron_assets_generator
 #: model:ir.cron,name:account_asset_management.ir_cron_assets_generator
 msgid "Asset Management: Generate assets"
-msgstr ""
+msgstr "固定资产管理：计提折旧"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
 msgid "Asset Name"
-msgstr "资产名称"
+msgstr "资产卡片名称"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_account__asset_profile_id
@@ -173,18 +171,18 @@ msgstr "资产类别"
 #. module: account_asset_management
 #: model:ir.model.fields.selection,name:account_asset_management.selection__account_asset_line__type__remove
 msgid "Asset Removal"
-msgstr ""
+msgstr "资产清理"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_remove
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__date_remove
 msgid "Asset Removal Date"
-msgstr ""
+msgstr "资产清理日期"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__account_sale_id
 msgid "Asset Sale Account"
-msgstr ""
+msgstr "资产销售科目"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
@@ -208,7 +206,7 @@ msgstr "资产类别"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Asset removal."
-msgstr ""
+msgstr "资产清理。"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_recompute_trigger
