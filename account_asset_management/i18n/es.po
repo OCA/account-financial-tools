@@ -126,7 +126,6 @@ msgstr "Cuenta de activo"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 #, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
 msgstr "Cuenta de activo"
 
@@ -136,7 +135,6 @@ msgstr "Cuenta de activo"
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
 #, fuzzy
-#| msgid "Asset Profiles"
 msgid "Asset Groups"
 msgstr "Categorías de activo"
 
@@ -885,7 +883,6 @@ msgstr "Otra información"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
 msgstr "Activo padre"
 
@@ -1041,7 +1038,6 @@ msgstr "Valor de salvaguarda"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #, fuzzy
-#| msgid "Search Asset Profile"
 msgid "Search Asset Group"
 msgstr "Buscar categoría de activo"
 

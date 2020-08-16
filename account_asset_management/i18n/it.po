@@ -109,7 +109,6 @@ msgstr "Conto Immo bilizzazione"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
 #, fuzzy
-#| msgid "Asset Account"
 msgid "Asset Group"
 msgstr "Conto Immo bilizzazione"
 
@@ -836,14 +835,12 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
 msgstr "Immobilizzazione Padre"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Path"
 msgstr "Immobilizzazione Padre"
 
@@ -1123,7 +1120,6 @@ msgstr ""
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, fuzzy
-#| msgid "Total Debit"
 msgid "Total Days"
 msgstr "Totale debito"
 
