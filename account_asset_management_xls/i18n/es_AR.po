@@ -8,50 +8,51 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-23 23:20+0000\n"
-"PO-Revision-Date: 2016-12-27 08:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/es_AR/)\n"
+"PO-Revision-Date: 2020-08-17 00:59+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:40
 #, python-format
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:365
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:382
 #, python-format
 msgid "Active Assets"
-msgstr ""
+msgstr "Assets Activos"
 
 #. module: account_asset_management_xls
 #: model:ir.model,name:account_asset_management_xls.model_account_asset
 msgid "Asset"
-msgstr ""
+msgstr "Asset"
 
 #. module: account_asset_management_xls
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_parent_asset_id
 msgid "Asset Filter"
-msgstr ""
+msgstr "Filtro de Asset"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:101
 #, python-format
 msgid "Asset Removal Date"
-msgstr ""
+msgstr "Fecha de Eliminación del Asset"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:86
 #, python-format
 msgid "Asset Start Date"
-msgstr ""
+msgstr "Fecha de Inicio del Asset"
 
 #. module: account_asset_management_xls
 #: model:ir.ui.view,arch_db:account_asset_management_xls.wiz_account_asset_report_view_form
@@ -62,7 +63,7 @@ msgstr "Cancelar"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:253
 #, python-format
 msgid "Comput. Method"
-msgstr ""
+msgstr "Método de Computación"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/wiz_account_asset_report.py:46
@@ -71,6 +72,8 @@ msgid ""
 "Configuration Error\n"
 "No parent asset defined for asset '%s'!"
 msgstr ""
+"Error de Configuración\n"
+"¡No se ha definido ningún asset principal para el asset '%s'!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/wiz_account_asset_report.py:34
@@ -79,6 +82,8 @@ msgid ""
 "Configuration Error.\n"
 "No top level asset of type 'view' defined!"
 msgstr ""
+"Error de Configuración.\n"
+"¡No se ha definido ningún aasset de nivel superior del tipo 'view'!"
 
 #. module: account_asset_management_xls
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_create_uid
@@ -94,14 +99,14 @@ msgstr "Creado en"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:115
 #, python-format
 msgid "Depreciation Base"
-msgstr ""
+msgstr "Base de Depreciación"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:615
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:619
 #, python-format
 msgid "Depreciation Table error for asset %s !"
-msgstr ""
+msgstr "¡Error de Tabla de Depreciación para el asset %s!"
 
 #. module: account_asset_management_xls
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_display_name
@@ -112,19 +117,19 @@ msgstr "Mostrar Nombre"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:184
 #, python-format
 msgid "FY Depreciation"
-msgstr ""
+msgstr "Depreciación del Año Fiscal"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:207
 #, python-format
 msgid "FY End Value"
-msgstr ""
+msgstr "Valor Final del Año Fiscal"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:161
 #, python-format
 msgid "FY Start Value"
-msgstr ""
+msgstr "Valor Inicial del Año Fiscal"
 
 #. module: account_asset_management_xls
 #: model:ir.actions.act_window,name:account_asset_management_xls.wiz_account_asset_report_action
@@ -132,19 +137,19 @@ msgstr ""
 #: model:ir.ui.menu,name:account_asset_management_xls.wiz_account_asset_report_menu
 #: model:ir.ui.view,arch_db:account_asset_management_xls.wiz_account_asset_report_view_form
 msgid "Financial Assets report"
-msgstr ""
+msgstr "Informa de Assets Financieros"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:355
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_date_range_id
 #, python-format
 msgid "Fiscal Year"
-msgstr ""
+msgstr "Año Fiscal"
 
 #. module: account_asset_management_xls
 #: model:ir.ui.view,arch_db:account_asset_management_xls.wiz_account_asset_report_view_form
 msgid "Generate Report"
-msgstr ""
+msgstr "Generar Informe"
 
 #. module: account_asset_management_xls
 #: model:ir.model.fields,field_description:account_asset_management_xls.field_wiz_account_asset_report_id
@@ -170,57 +175,57 @@ msgstr "Última actualización el"
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:56
 #, python-format
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:360
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:380
 #, python-format
 msgid "New Acquisitions"
-msgstr ""
+msgstr "Nuevas Adquisiciones"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:385
 #, python-format
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/wizard/wiz_account_asset_report.py:54
 #, python-format
 msgid "No records found for your selection!"
-msgstr ""
+msgstr "¡No se encontraron registros para su selección!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:266
 #, python-format
 msgid "Number of Years"
-msgstr ""
+msgstr "Número de Años"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:279
 #, python-format
 msgid "Prorata Temporis"
-msgstr ""
+msgstr "Prorata Temporis"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:71
 #, python-format
 msgid "Reference"
-msgstr ""
+msgstr "Referencia"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:370
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:384
 #, python-format
 msgid "Removed Assets"
-msgstr ""
+msgstr "Assets Removidos"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:138
 #, python-format
 msgid "Salvage Value"
-msgstr ""
+msgstr "Valor del Rescate"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:421
@@ -229,6 +234,8 @@ msgid ""
 "The 'account' field is a mandatory entry of the '_xls_acquisition_fields' "
 "list !"
 msgstr ""
+"¡El campo 'cuenta' es una entrada obligatoria de la lista "
+"'_xls_acquisition_fields'!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:520
@@ -236,6 +243,8 @@ msgstr ""
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_active_fields' list !"
 msgstr ""
+"¡El campo 'cuenta' es una entrada obligatoria de la lista "
+"'_xls_active_fields'!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:739
@@ -243,6 +252,8 @@ msgstr ""
 msgid ""
 "The 'account' field is a mandatory entry of the '_xls_removal_fields' list !"
 msgstr ""
+"¡El campo 'cuenta' es una entrada obligatoria de la lista "
+"'_xls_removal_fields'!"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:530
@@ -252,18 +263,20 @@ msgid ""
 "The current version of the asset mangement reporting module supports only "
 "fiscal year based reports."
 msgstr ""
+"La versión actual del módulo de informes de gestión de assets solo admite "
+"informes basados en el año fiscal."
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:230
 #, python-format
 msgid "Tot. Depreciation"
-msgstr ""
+msgstr "Tot. Depreciación"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:49
 #, python-format
 msgid "Totals"
-msgstr ""
+msgstr "Totales"
 
 #. module: account_asset_management_xls
 #: code:addons/account_asset_management_xls/report/account_asset_report_xls.py:608
@@ -272,6 +285,9 @@ msgid ""
 "You can not report on a Fiscal Year with unposted entries in prior years. "
 "Please post depreciation table entry dd. '%s'  of asset '%s' !"
 msgstr ""
+"No puede informar sobre un año fiscal con entradas no contabilizadas en años "
+"anteriores. Publique la entrada dd. de la tabla de depreciación. '%s' del "
+"asset '%s'!"
 
 #. module: account_asset_management_xls
 #: model:ir.ui.view,arch_db:account_asset_management_xls.wiz_account_asset_report_view_form
