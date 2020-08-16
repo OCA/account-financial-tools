@@ -699,7 +699,6 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
 #, fuzzy
-#| msgid "Accounts matching"
 msgid "Wizard Account Matching"
 msgstr "Odgovarajuća Konta"
 

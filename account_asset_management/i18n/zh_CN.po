@@ -25,8 +25,8 @@ msgstr ""
 "POT-Creation-Date: 2017-02-26 22:33+0000\n"
 "PO-Revision-Date: 2020-08-15 20:59+0000\n"
 "Last-Translator: Dong <dong@freshoo.cn>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/oca/"
-"OCA-account-financial-tools-8-0/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-"
+"financial-tools-8-0/language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -801,14 +801,12 @@ msgstr "其他信息"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_id
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Asset Group"
 msgstr "上级资产"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_group__parent_path
 #, fuzzy
-#| msgid "Parent Asset"
 msgid "Parent Path"
 msgstr "上级资产"
 
