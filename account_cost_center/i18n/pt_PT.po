@@ -110,7 +110,6 @@ msgstr ""
 #. module: account_cost_center
 #: model:ir.model,name:account_cost_center.model_account_move_line
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal Item"
 msgstr "Item do Diário"
 
