@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-03-30 02:39+0000\n"
 "PO-Revision-Date: 2020-06-16 15:19+0000\n"
 "Last-Translator: Maurício Liell <mauricio@liell.com.br>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,7 +376,6 @@ msgstr "Diário"
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
 #, fuzzy
-#| msgid "Journal"
 msgid "Journal Entries"
 msgstr "Diário"
 
