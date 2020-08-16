@@ -297,7 +297,6 @@ msgstr "Nombre d'actions"
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_error_counter
 #, fuzzy
-#| msgid "Number of error"
 msgid "Number of errors"
 msgstr "Nombre d'erreurs"
 
@@ -329,7 +328,6 @@ msgstr "Utilisateur responsable"
 #. module: account_move_budget
 #: model:ir.model.fields,field_description:account_move_budget.field_account_move_budget__message_has_sms_error
 #, fuzzy
-#| msgid "Message Delivery error"
 msgid "SMS Delivery error"
 msgstr "Message d'erreur de livraison"
 
