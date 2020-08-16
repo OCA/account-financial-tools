@@ -373,7 +373,6 @@ msgstr "Diario"
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_move
 #, fuzzy
-#| msgid "Journal"
 msgid "Journal Entries"
 msgstr "Diario"
 
