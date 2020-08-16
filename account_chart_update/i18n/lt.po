@@ -65,7 +65,6 @@ msgstr "Sąskaitos"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 #, fuzzy
-#| msgid "Accounts"
 msgid "Accounts matching"
 msgstr "Sąskaitos"
 

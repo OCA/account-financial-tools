@@ -65,7 +65,6 @@ msgstr "Konten"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 #, fuzzy
-#| msgid "Account template"
 msgid "Accounts matching"
 msgstr "Kontenvorlage"
 
@@ -165,9 +164,6 @@ msgstr "Deaktivierte Steuern"
 #. module: account_chart_update
 #: model:ir.model.fields,help:account_chart_update.field_wizard_update_charts_accounts_tax__type_tax_use
 #, fuzzy
-#| msgid ""
-#| "Determines where the tax is selectable. Note : 'None' means a tax can't "
-#| "be used by itself, however it can still be used in a group."
 msgid ""
 "Determines where the tax is selectable. Note : 'None' means a tax can't be "
 "used by itself, however it can still be used in a group. 'adjustment' is "
@@ -269,7 +265,6 @@ msgstr "Steuerzuordnungen"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__fp_matching_ids
 #, fuzzy
-#| msgid "Fiscal positions"
 msgid "Fiscal positions matching"
 msgstr "Steuerzuordnungen"
 
@@ -290,9 +285,6 @@ msgstr "Optionale Einstellungen"
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 #, fuzzy
-#| msgid ""
-#| "Here you can select the fields you want to check if they have been "
-#| "updated in the templates."
 msgid ""
 "Here you can select the fields you want to check if\n"
 "                            they have been updated in the templates."
@@ -329,9 +321,6 @@ msgstr ""
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 #, fuzzy
-#| msgid ""
-#| "If you leave these options set, the wizard will not just create new "
-#| "records, but also update records with changes (i.e. different tax amount)"
 msgid ""
 "If you leave these options set, the wizard will\n"
 "                                not just create new records, but also "
@@ -609,9 +598,6 @@ msgstr ""
 #. module: account_chart_update
 #: model_terms:ir.ui.view,arch_db:account_chart_update.view_update_multi_chart
 #, fuzzy
-#| msgid ""
-#| "This wizard will update your accounts, taxes and fiscal positions "
-#| "according to the selected chart template"
 msgid ""
 "This wizard will update your accounts, taxes and\n"
 "                            fiscal positions according to the selected "
@@ -751,7 +737,6 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_update_charts_accounts
 #, fuzzy
-#| msgid "wizard.update.charts.accounts"
 msgid "Wizard Update Charts Accounts"
 msgstr "wizard.update.charts.accounts"
 
