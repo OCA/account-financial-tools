@@ -264,7 +264,6 @@ msgstr "Lista de Cheques:"
 #. module: account_check_deposit
 #: code:addons/account_check_deposit/models/account_deposit.py:196
 #, fuzzy, python-format
-#| msgid "Missing 'Account for Check Deposits' on the company '%s'."
 msgid "Missing 'Check Deposit Offsetting Account' on the company '%s'."
 msgstr "Sin configurar 'Cta. para Depósito de cheques' en la compañía '%s'."
 
@@ -288,7 +287,6 @@ msgstr "Nro. de Cheques"
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_company__check_deposit_post_move
 #: model:ir.model.fields,field_description:account_check_deposit.field_res_config_settings__check_deposit_post_move
 #, fuzzy
-#| msgid "Transfer Account for Check Deposits"
 msgid "Post Move for Check Deposits"
 msgstr "Cta. de Transferencia para Depósitos"
 
