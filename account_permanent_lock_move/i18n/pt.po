@@ -151,6 +151,5 @@ msgstr ""
 #. module: account_permanent_lock_move
 #: model:ir.model,name:account_permanent_lock_move.model_res_config_settings
 #, fuzzy
-#| msgid "account.config.settings"
 msgid "res.config.settings"
 msgstr "account.config.settings"
