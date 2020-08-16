@@ -63,7 +63,6 @@ msgstr "Comptes"
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__account_matching_ids
 #, fuzzy
-#| msgid "Accounts"
 msgid "Accounts matching"
 msgstr "Comptes"
 
@@ -699,7 +698,6 @@ msgstr ""
 #. module: account_chart_update
 #: model:ir.model,name:account_chart_update.model_wizard_account_matching
 #, fuzzy
-#| msgid "Accounts"
 msgid "Wizard Account Matching"
 msgstr "Comptes"
 
