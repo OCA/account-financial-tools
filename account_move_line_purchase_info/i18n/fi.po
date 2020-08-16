@@ -33,7 +33,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_line_purchase_info.field_account_move_line__purchase_id
 #: model_terms:ir.ui.view,arch_db:account_move_line_purchase_info.view_account_move_line_filter
 #, fuzzy
-#| msgid "Purchase Order Line"
 msgid "Purchase Order"
 msgstr "Ostotilausrivi"
 
