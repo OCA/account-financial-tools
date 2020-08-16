@@ -107,7 +107,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__account_id
 #, fuzzy
-#| msgid "Amount"
 msgid "Account"
 msgstr "Bedrag"
 
@@ -160,7 +159,6 @@ msgstr "Bedrag"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_account_id
 #, fuzzy
-#| msgid "Analytic Tags"
 msgid "Analytic"
 msgstr "Labels kostenplaats"
 
@@ -187,7 +185,6 @@ msgstr "Aantal bijlagen"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread_ids
 #, fuzzy
-#| msgid "Account Spread"
 msgid "Auto Spread On"
 msgstr "Grootboekrekening Spreiding"
 
@@ -292,14 +289,12 @@ msgstr "Maak mutatie"
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:13
 #, fuzzy, python-format
-#| msgid "Spread Template"
 msgid "Create from spread template"
 msgstr "Spreiding Template"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:14
 #, fuzzy, python-format
-#| msgid "New Spread Board"
 msgid "Create new spread board"
 msgstr "Nieuw Spreiding Tabel"
 
@@ -472,14 +467,12 @@ msgstr "Kosten grootboekrekening"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__exp_rev_account_id
 #, fuzzy
-#| msgid "Revenue account"
 msgid "Expense/Revenue Account"
 msgstr "Omzet grootboekrekening"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__exp_rev_account_id
 #, fuzzy
-#| msgid "Expense account"
 msgid "Expense/revenue account"
 msgstr "Kosten grootboekrekening"
 
@@ -571,7 +564,6 @@ msgstr "Factuur Type"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__use_invoice_line_account
 #, fuzzy
-#| msgid "Balance sheet account / Spread account"
 msgid "Invoice account as spread account"
 msgstr "Balance grootboekrekening / Grootboekrekening Spreiding"
 
@@ -644,7 +636,6 @@ msgstr "Koppel Factuur Regel met Spreiding Tabel"
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:20
 #, fuzzy, python-format
-#| msgid "Link Invoice Line with Spread Board"
 msgid "Link to existing spread board"
 msgstr "Koppel Factuur Regel met Spreiding Tabel"
 
@@ -1025,7 +1016,6 @@ msgstr "Niet gespeid Bedrag"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__use_invoice_line_account
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__use_invoice_line_account
 #, fuzzy
-#| msgid "Revenue account"
 msgid "Use invoice line's account"
 msgstr "Omzet grootboekrekening"
 

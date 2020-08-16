@@ -49,19 +49,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 #, fuzzy
-#| msgid ""
-#| "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-#| "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-#| "                                  The Balance Sheet account used for the "
-#| "spreading.<br/>This account is the counterpart of the account in the "
-#| "invoice line.\n"
-#| "                            </span>\n"
-#| "                            <span class=\"help-block\" colspan=\"2\" "
-#| "attrs=\"{'invisible':[('invoice_type','not in',"
-#| "('in_invoice','out_refund'))]}\">\n"
-#| "                                  The Expense account in the vendor bill "
-#| "line.<br/>Usually the same account of the vendor bill line.\n"
-#| "                            </span>"
 msgid ""
 "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
 "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
@@ -92,19 +79,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 #, fuzzy
-#| msgid ""
-#| "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-#| "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-#| "                                  The Revenue account in the invoice line."
-#| "<br/>Usually the same account of the invoice line.\n"
-#| "                            </span>\n"
-#| "                            <span class=\"help-block\" colspan=\"2\" "
-#| "attrs=\"{'invisible':[('invoice_type','not in',"
-#| "('in_invoice','out_refund'))]}\">\n"
-#| "                                  The Balance Sheet account used for the "
-#| "spreading.<br/>This account is the counterpart of the account in the "
-#| "vendor bill line.\n"
-#| "                            </span>"
 msgid ""
 "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
 "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
@@ -134,19 +108,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 #, fuzzy
-#| msgid ""
-#| "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-#| "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-#| "                                  The Revenue account in the invoice line."
-#| "<br/>Usually the same account of the invoice line.\n"
-#| "                            </span>\n"
-#| "                            <span class=\"help-block\" colspan=\"2\" "
-#| "attrs=\"{'invisible':[('invoice_type','not in',"
-#| "('in_invoice','out_refund'))]}\">\n"
-#| "                                  The Balance Sheet account used for the "
-#| "spreading.<br/>This account is the counterpart of the account in the "
-#| "vendor bill line.\n"
-#| "                            </span>"
 msgid ""
 "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
 "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
@@ -176,19 +137,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model_terms:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 #, fuzzy
-#| msgid ""
-#| "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-#| "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-#| "                                  The Balance Sheet account used for the "
-#| "spreading.<br/>This account is the counterpart of the account in the "
-#| "invoice line.\n"
-#| "                            </span>\n"
-#| "                            <span class=\"help-block\" colspan=\"2\" "
-#| "attrs=\"{'invisible':[('invoice_type','not in',"
-#| "('in_invoice','out_refund'))]}\">\n"
-#| "                                  The Expense account in the vendor bill "
-#| "line.<br/>Usually the same account of the vendor bill line.\n"
-#| "                            </span>"
 msgid ""
 "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
 "[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
@@ -219,7 +167,6 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__account_id
 #, fuzzy
-#| msgid "Amount"
 msgid "Account"
 msgstr "Montant"
 
@@ -272,7 +219,6 @@ msgstr "Montant"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_auto__analytic_account_id
 #, fuzzy
-#| msgid "Analytic Tags"
 msgid "Analytic"
 msgstr "Étiquettes analytiques"
 
@@ -299,7 +245,6 @@ msgstr "Nombre de pièces jointes"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__auto_spread_ids
 #, fuzzy
-#| msgid "Account Spread"
 msgid "Auto Spread On"
 msgstr "Régularisation"
 
@@ -589,14 +534,12 @@ msgstr "Compte de dépense"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__exp_rev_account_id
 #, fuzzy
-#| msgid "Revenue account"
 msgid "Expense/Revenue Account"
 msgstr "Compte de revenus"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__exp_rev_account_id
 #, fuzzy
-#| msgid "Expense account"
 msgid "Expense/revenue account"
 msgstr "Compte de dépense"
 
@@ -688,7 +631,6 @@ msgstr "Type de facture"
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template__use_invoice_line_account
 #, fuzzy
-#| msgid "Balance sheet account / Spread account"
 msgid "Invoice account as spread account"
 msgstr "Compte de bilan / Compte de régularisation"
 
@@ -1142,7 +1084,6 @@ msgstr "Montant non régularisé"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread__use_invoice_line_account
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard__use_invoice_line_account
 #, fuzzy
-#| msgid "Revenue account"
 msgid "Use invoice line's account"
 msgstr "Compte de revenus"
 
