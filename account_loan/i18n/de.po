@@ -244,7 +244,6 @@ msgstr "Fixe Annuität"
 #. module: account_loan
 #: selection:account.loan,loan_type:0
 #, fuzzy
-#| msgid "Fixed Annuity"
 msgid "Fixed Annuity Begin"
 msgstr "Fixe Annuität"
 
@@ -486,14 +485,12 @@ msgstr "Die Bezeichnung des Darlehens muss eindeutig sein."
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_pay_amount
 #, fuzzy
-#| msgid "Total payed amount"
 msgid "Loan pay amount"
 msgstr "Gezahlter Betrag"
 
 #. module: account_loan
 #: model:ir.model,name:account_loan.model_account_loan_post
 #, fuzzy
-#| msgid "Loan product"
 msgid "Loan post"
 msgstr "Leihprodukt"
 
