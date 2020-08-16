@@ -34,7 +34,6 @@ msgstr "Intervalli data"
 #. module: account_fiscal_year
 #: model:date.range.type,name:account_fiscal_year.fiscalyear
 #, fuzzy
-#| msgid "Fiscal Years"
 msgid "Fiscal Year"
 msgstr "Anni fiscali"
 
