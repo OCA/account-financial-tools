@@ -23,10 +23,10 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-26 22:33+0000\n"
-"PO-Revision-Date: 2020-08-15 20:59+0000\n"
+"PO-Revision-Date: 2020-08-17 16:59+0000\n"
 "Last-Translator: Dong <dong@freshoo.cn>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/oca/OCA-account-"
-"financial-tools-8-0/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/zh_CN/)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -150,7 +150,7 @@ msgstr "固定资产管理：计提折旧"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__name
 msgid "Asset Name"
-msgstr "资产卡片名称"
+msgstr "资产名称"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_account__asset_profile_id
@@ -673,25 +673,25 @@ msgstr "单据类型"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "会计凭证"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:0
 #, python-format
 msgid "Journal Entry"
-msgstr ""
+msgstr "会计凭证"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_move_line
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Item"
-msgstr ""
+msgstr "会计凭证"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.act_entries_open
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Journal Items"
-msgstr "日记帐项目"
+msgstr "会计凭证"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset____last_update
@@ -873,7 +873,7 @@ msgstr "理由"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__code
 msgid "Reference"
-msgstr "卡片编号"
+msgstr "卡片编码"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__posting_regime
