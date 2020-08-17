@@ -9,25 +9,26 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"PO-Revision-Date: 2020-08-17 16:59+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
+"23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_account_move
 msgid "Account Entry"
-msgstr ""
+msgstr "Entrada de Cuenta"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Approve"
-msgstr ""
+msgstr "Aprobar"
 
 #. module: account_move_locking
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
@@ -47,12 +48,12 @@ msgstr "Creado en"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_end
 msgid "Date end"
-msgstr ""
+msgstr "Fecha de finalización"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_date_start
 msgid "Date start"
-msgstr ""
+msgstr "Fecha de inicio"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:24
@@ -61,6 +62,8 @@ msgid ""
 "Date start need to be                                           before Date "
 "end"
 msgstr ""
+"La fecha de inicio debe ser                                           "
+"anterior a la Fecha de finalización"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_display_name
@@ -75,7 +78,7 @@ msgstr "ID"
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move_journal_ids
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_lock_account_move___last_update
@@ -95,19 +98,19 @@ msgstr "Última actualización el"
 #. module: account_move_locking
 #: model:ir.model,name:account_move_locking.model_lock_account_move
 msgid "Lock Account Move"
-msgstr ""
+msgstr "Bloquear Movimiento de Cuenta"
 
 #. module: account_move_locking
 #: model:ir.actions.act_window,name:account_move_locking.action_lock_account_move
 #: model:ir.ui.menu,name:account_move_locking.menu_lock_account_moves
 #: model:ir.ui.view,arch_db:account_move_locking.lock_account_move_view
 msgid "Lock Journal Entries"
-msgstr ""
+msgstr "Bloquear Entradas de Diario"
 
 #. module: account_move_locking
 #: model:ir.model.fields,field_description:account_move_locking.field_account_move_locked
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/models/account.py:17
@@ -115,13 +118,13 @@ msgstr ""
 #: code:addons/account_move_locking/models/account.py:33
 #, python-format
 msgid "Move Locked! %s"
-msgstr ""
+msgstr "¡Movimiento Bloqueado! %s"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:50
 #, python-format
 msgid "No move to locked found"
-msgstr ""
+msgstr "No se ha encontrado ningún movimiento a bloqueado"
 
 #. module: account_move_locking
 #: code:addons/account_move_locking/wizard/account_lock_account_move.py:40
@@ -131,3 +134,6 @@ msgid ""
 "selected, please post it before                                           "
 "locking them"
 msgstr ""
+"Movimiento no contabilizado en el período/"
+"diario                                           seleccionado, por favor "
+"publicar antes                                           de bloquearlos"
