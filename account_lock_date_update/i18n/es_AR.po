@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-28 23:24+0000\n"
-"PO-Revision-Date: 2017-11-28 23:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/"
-"teams/23907/es_AR/)\n"
+"PO-Revision-Date: 2020-08-17 16:59+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: Spanish (Argentina) (https://www.transifex.com/oca/teams/"
+"23907/es_AR/)\n"
 "Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_lock_date_update
 #: model:ir.model,name:account_lock_date_update.model_account_update_lock_date
 msgid "Account Update Lock_date"
-msgstr ""
+msgstr "Fecha de Bloqueo de Actualización de Cuenta"
 
 #. module: account_lock_date_update
 #: model:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
@@ -32,7 +33,7 @@ msgstr "Cancelar"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_company_id
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_create_uid
@@ -72,12 +73,12 @@ msgstr "Última actualización el"
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_fiscalyear_lock_date
 msgid "Lock Date"
-msgstr ""
+msgstr "Fecha de Bloqueo"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,field_description:account_lock_date_update.field_account_update_lock_date_period_lock_date
 msgid "Lock Date for Non-Advisers"
-msgstr ""
+msgstr "Fecha de Bloqueo para No Asesores"
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date_fiscalyear_lock_date
@@ -85,6 +86,8 @@ msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
 "this date. Use it for fiscal year locking for example."
 msgstr ""
+"Ningún usuario, incluidos los Asesores, puede editar cuentas antes de esta "
+"fecha, inclusive. Úselo para el bloqueo del año fiscal, por ejemplo."
 
 #. module: account_lock_date_update
 #: model:ir.model.fields,help:account_lock_date_update.field_account_update_lock_date_period_lock_date
@@ -93,20 +96,23 @@ msgid ""
 "of this date. Use it for period locking inside an open fiscal year, for "
 "example."
 msgstr ""
+"Solo los usuarios con el rol de 'Asesor' pueden editar cuentas antes de esta "
+"fecha inclusive. Úselo para el bloqueo del período dentro de un año fiscal "
+"abierto, por ejemplo."
 
 #. module: account_lock_date_update
 #: model:ir.ui.view,arch_db:account_lock_date_update.account_update_lock_date_form_view
 msgid "Update"
-msgstr ""
+msgstr "Actualizar"
 
 #. module: account_lock_date_update
 #: model:ir.actions.act_window,name:account_lock_date_update.account_update_lock_date_act_window
 #: model:ir.ui.menu,name:account_lock_date_update.account_update_lock_date_menu
 msgid "Update accounting lock dates"
-msgstr ""
+msgstr "Actualizar fechas de bloqueo contable"
 
 #. module: account_lock_date_update
 #: code:addons/account_lock_date_update/wizards/account_update_lock_date.py:44
 #, python-format
 msgid "You are not allowed to execute this action."
-msgstr ""
+msgstr "No está permitido a ejecutar esta acción."
