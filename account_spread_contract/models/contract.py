@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class Contract(models.Model):
-    _inherit = 'contract.contract'
+    _inherit = "contract.contract"
 
     def _recurring_create_invoice(self, date_ref=False):
         invoices = super()._recurring_create_invoice(date_ref)

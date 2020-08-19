@@ -5,26 +5,16 @@ from odoo import _, fields, models
 
 
 class AccountSpreadContractLineLinkWizard(models.TransientModel):
-    _name = 'account.spread.contract.line.link.wizard'
-    _description = 'Account Spread Contract Line Link Wizard'
+    _name = "account.spread.contract.line.link.wizard"
+    _description = "Account Spread Contract Line Link Wizard"
 
-    contract_line_id = fields.Many2one(
-        'contract.line',
-        readonly=True,
-        required=True)
-    contract_id = fields.Many2one(
-        related='contract_line_id.contract_id',
-        readonly=True)
+    contract_line_id = fields.Many2one("contract.line", readonly=True, required=True)
+    contract_id = fields.Many2one(related="contract_line_id.contract_id", readonly=True)
     contract_type = fields.Selection(
-        related='contract_line_id.contract_id.contract_type',
-        readonly=True)
-    spread_template_id = fields.Many2one(
-        'account.spread.template',
-        required=True)
-    company_id = fields.Many2one(
-        'res.company',
-        string='Company',
-        required=True)
+        related="contract_line_id.contract_id.contract_type", readonly=True
+    )
+    spread_template_id = fields.Many2one("account.spread.template", required=True)
+    company_id = fields.Many2one("res.company", string="Company", required=True)
 
     def confirm(self):
         self.ensure_one()
@@ -34,12 +24,12 @@ class AccountSpreadContractLineLinkWizard(models.TransientModel):
 
         if self.spread_template_id:
             return {
-                'name': _('Spread Template Details'),
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'account.spread.template',
-                'type': 'ir.actions.act_window',
-                'target': 'current',
-                'readonly': False,
-                'res_id': self.spread_template_id.id,
+                "name": _("Spread Template Details"),
+                "view_type": "form",
+                "view_mode": "form",
+                "res_model": "account.spread.template",
+                "type": "ir.actions.act_window",
+                "target": "current",
+                "readonly": False,
+                "res_id": self.spread_template_id.id,
             }
