@@ -9,7 +9,7 @@ class Contract(models.Model):
 
     def _recurring_create_invoice(self, date_ref=False):
         invoices = super()._recurring_create_invoice(date_ref)
-        for invoice_line in invoices.mapped("invoice_line_ids"):
+        for invoice_line in invoices.mapped("line_ids"):
             spread_template = invoice_line.contract_line_id.spread_template_id
             if spread_template:
                 account = invoice_line.account_id
@@ -21,7 +21,7 @@ class Contract(models.Model):
                 spread_vals = spread_template._prepare_spread_from_template(
                     spread_account_id=spread_account_id
                 )
-                date_invoice = invoice_line.invoice_id.date_invoice
+                date_invoice = invoice_line.move_id.invoice_date
                 date_invoice = date_invoice or spread_template.start_date
                 date_invoice = date_invoice or fields.Date.today()
                 spread_vals["spread_date"] = date_invoice
@@ -36,7 +36,7 @@ class Contract(models.Model):
                 else:
                     spread_vals["debit_account_id"] = account.id
 
-                analytic_account = invoice_line.account_analytic_id
+                analytic_account = invoice_line.analytic_account_id
                 spread_vals["account_analytic_id"] = analytic_account.id
 
                 spread = self.env["account.spread"].create(spread_vals)

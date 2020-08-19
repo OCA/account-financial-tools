@@ -9,9 +9,9 @@ class AccountSpreadContractLineLinkWizard(models.TransientModel):
     _description = "Account Spread Contract Line Link Wizard"
 
     contract_line_id = fields.Many2one("contract.line", readonly=True, required=True)
-    contract_id = fields.Many2one(related="contract_line_id.contract_id", readonly=True)
+    contract_id = fields.Many2one(related="contract_line_id.contract_id",)
     contract_type = fields.Selection(
-        related="contract_line_id.contract_id.contract_type", readonly=True
+        related="contract_line_id.contract_id.contract_type",
     )
     spread_template_id = fields.Many2one("account.spread.template", required=True)
     company_id = fields.Many2one("res.company", string="Company", required=True)

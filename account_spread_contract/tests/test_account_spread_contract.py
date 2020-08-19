@@ -95,7 +95,7 @@ class TestAccountSpreadContract(TestContractBase):
         Wizard = self.env["account.spread.contract.line.link.wizard"]
         wizard = Wizard.with_context(
             default_contract_line_id=contract_line.id, default_company_id=my_company.id,
-        ).create({"spread_template_id": self.sale_template.id,})
+        ).create({"spread_template_id": self.sale_template.id})
 
         self.assertEqual(wizard.contract_line_id, contract_line)
         self.assertEqual(wizard.contract_id, self.contract)
