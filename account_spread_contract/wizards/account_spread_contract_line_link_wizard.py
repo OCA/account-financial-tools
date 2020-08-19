@@ -1,7 +1,7 @@
 # Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 
 
 class AccountSpreadContractLineLinkWizard(models.TransientModel):
@@ -9,19 +9,17 @@ class AccountSpreadContractLineLinkWizard(models.TransientModel):
     _description = 'Account Spread Contract Line Link Wizard'
 
     contract_line_id = fields.Many2one(
-        'account.analytic.invoice.line',
-        string='Contract Line',
+        'contract.line',
         readonly=True,
         required=True)
     contract_id = fields.Many2one(
-        related='contract_line_id.analytic_account_id',
+        related='contract_line_id.contract_id',
         readonly=True)
     contract_type = fields.Selection(
-        related='contract_line_id.analytic_account_id.contract_type',
+        related='contract_line_id.contract_id.contract_type',
         readonly=True)
     spread_template_id = fields.Many2one(
         'account.spread.template',
-        string='Spread Template',
         required=True)
     company_id = fields.Many2one(
         'res.company',

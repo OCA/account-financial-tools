@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tools import convert_file
-from odoo.modules.module import get_module_resource
+from odoo.modules.module import get_resource_path
 from odoo.addons.contract.tests.test_contract import TestContractBase
 
 
@@ -12,21 +12,21 @@ class TestAccountSpreadContract(TestContractBase):
         convert_file(
             self.cr,
             'account_spread_contract',
-            get_module_resource(module, *args),
+            get_resource_path(module, *args),
             {}, 'init', False, 'test', self.registry._assertion_report)
 
     def setUp(self):
         super().setUp()
         self._load('account', 'test', 'account_minimal_test.xml')
 
-        self.contract.recurring_next_date = '2016-02-29'
+        self.contract.recurring_next_date = '2020-02-29'
         self.contract.recurring_invoicing_type = 'pre-paid'
         self.contract.recurring_rule_type = 'monthly'
 
         self.receivable_account = self.env['account.account'].search([(
             'user_type_id',
             '=',
-            self.env.ref('account.data_account_type_receivable').id)],
+            self.env.ref('account.data_account_type_other_income').id)],
             limit=1)
         self.sales_journal_journal_id = self.ref(
             'account_spread_contract.sales_journal')
@@ -41,16 +41,15 @@ class TestAccountSpreadContract(TestContractBase):
     def test_01_create_recurring_invoice_with_spread(self):
         self.assertTrue(self.receivable_account)
 
-        self.assertEqual(len(self.contract.recurring_invoice_line_ids), 1)
-        contract_line = self.contract.recurring_invoice_line_ids
+        self.assertEqual(len(self.contract.contract_line_ids), 1)
+        contract_line = self.contract.contract_line_ids
         self.assertEqual(contract_line.spread_check, 'unlinked')
 
         contract_line.spread_template_id = self.sale_template
         self.assertEqual(contract_line.spread_check, 'linked')
 
         self.contract.recurring_create_invoice()
-        invoice_monthly = self.env['account.invoice'].search(
-            [('contract_id', '=', self.contract.id)])
+        invoice_monthly = self.contract._get_related_invoices()
         self.assertEqual(len(invoice_monthly), 1)
 
         self.assertEqual(len(invoice_monthly.invoice_line_ids), 1)
@@ -61,7 +60,7 @@ class TestAccountSpreadContract(TestContractBase):
 
     def test_02_open_wizard(self):
 
-        contract_line = self.contract.recurring_invoice_line_ids
+        contract_line = self.contract.contract_line_ids
 
         res_action = contract_line.spread_details()
         self.assertTrue(isinstance(res_action, dict))
@@ -77,7 +76,7 @@ class TestAccountSpreadContract(TestContractBase):
 
     def test_03_wizard_create(self):
         my_company = self.env.user.company_id
-        contract_line = self.contract.recurring_invoice_line_ids
+        contract_line = self.contract.contract_line_ids
         self.assertFalse(contract_line.spread_template_id)
 
         Wizard = self.env['account.spread.contract.line.link.wizard']

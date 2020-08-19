@@ -9,7 +9,7 @@ class AccountSpreadTemplate(models.Model):
     _inherit = 'account.spread.template'
 
     contract_line_ids = fields.One2many(
-        'account.analytic.invoice.line',
+        'contract.line',
         'spread_template_id',
         string='Contract Lines',
     )
@@ -18,7 +18,7 @@ class AccountSpreadTemplate(models.Model):
     def _check_spread_template_contract_type(self):
         for template in self:
             for line in template.contract_line_ids:
-                contract = line.analytic_account_id.contract_template_id
+                contract = line.contract_id.contract_template_id
                 contract_type = contract.contract_type
                 if contract_type == 'sale' or not contract_type:
                     if template.spread_type != 'sale':
@@ -33,5 +33,5 @@ class AccountSpreadTemplate(models.Model):
 
     def action_unlink_contract_line(self):
         line_id = self.env.context.get('force_contract_line_id')
-        line = self.env['account.analytic.invoice.line'].browse(line_id)
+        line = self.env['contract.line'].browse(line_id)
         line.spread_template_id = False
