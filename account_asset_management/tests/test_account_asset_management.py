@@ -415,7 +415,7 @@ class TestAssetManagement(SavepointCase):
                                    'account_asset_profile_car_5Y'),
             'purchase_value': 5000,
             'salvage_value': 0,
-            'date_start': time.strftime('%Y-01-01'),
+            'date_start': '2019-01-01',
             'method_time': 'year',
             'method_number': 5,
             'method_period': 'quarter',
@@ -428,7 +428,7 @@ class TestAssetManagement(SavepointCase):
             'early_removal': True,
         }
         wiz = self.remove_model.with_context(wiz_ctx).create({
-            'date_remove': time.strftime('%Y-01-31'),
+            'date_remove': '2019-01-31',
             'sale_value': 0.0,
             'posting_regime': 'gain_loss_on_sale',
             'account_plus_value_id': self.ref('account.a_sale'),
