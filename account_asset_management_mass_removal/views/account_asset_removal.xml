@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_asset_removal_view_search" model="ir.ui.view">
+        <field name="name">account.asset.removal.search</field>
+        <field name="model">account.asset.removal</field>
+        <field name="arch" type="xml">
+            <search string="Account Asset">
+                <filter
+                    string="Draft"
+                    name="draft"
+                    domain="[('state', '=', 'draft')]"
+                    help="Draft Assets Removal"
+                />
+                <filter
+                    string="Removed"
+                    name="done"
+                    domain="[('state', '=', 'done')]"
+                    help="Removed Assets"
+                />
+                <filter
+                    string="Cancelled"
+                    name="cancel"
+                    domain="[('state', '=', 'cancel')]"
+                    help="Assets which have been cancel"
+                />
+                <separator orientation="vertical" />
+                <field name="name" string="Document" />
+                <field name="date_removal" />
+                <field name="user_id" filter_domain="[('user_id', 'child_of', self)]" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Date Removed"
+                        name="date_removal"
+                        context="{'group_by': 'date_removal'}"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Prepared By"
+                        name="user_id"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_asset_removal_view_form" model="ir.ui.view">
+        <field name="name">account.asset.removal.form</field>
+        <field name="model">account.asset.removal</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <button
+                        name="remove"
+                        string="Remove Assets"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        confirm="Are you sure ?"
+                    />
+                    <button
+                        name="cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="set_to_draft"
+                        string="Set to Draft"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'cancel')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button
+                            name="open_entries"
+                            string="Journal Entries"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                        />
+                        <button
+                            name="open_asset_removed"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                            attrs="{'invisible': [('source_asset_count', '=', 0)]}"
+                        >
+                            <field
+                                name="source_asset_count"
+                                widget="statinfo"
+                                string="Asset(s)"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" class="oe_inline" />
+                        </h1>
+                    </div>
+                    <group name="asset_removal">
+                        <group>
+                            <field name="user_id" />
+                        </group>
+                        <group name="information_asset_removal">
+                            <field name="date_removal" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Assets" name="asset_removal_lines">
+                            <field name="removal_asset_ids">
+                                <tree editable="bottom">
+                                    <field name="asset_id" />
+                                    <field name="date_remove" />
+                                    <field
+                                        name="account_sale_id"
+                                        attrs="{'invisible': [('sale_value', '=', 0.0)], 'required': [('sale_value', '>', 0.0)]}"
+                                    />
+                                    <field name="sale_value" />
+                                    <field name="posting_regime" />
+                                    <field
+                                        name="account_plus_value_id"
+                                        attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                                    />
+                                    <field
+                                        name="account_min_value_id"
+                                        attrs="{'invisible': [('posting_regime', '=', 'residual_value')], 'required': [('posting_regime', '!=', 'residual_value')]}"
+                                    />
+                                    <field
+                                        name="account_residual_value_id"
+                                        attrs="{'invisible': [('posting_regime', '!=', 'residual_value')], 'required': [('posting_regime', '=', 'residual_value')]}"
+                                    />
+                                    <field name="note" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field
+                        name="message_follower_ids"
+                        widget="mail_followers"
+                        groups="base.group_user"
+                    />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="account_asset_removal_view_tree" model="ir.ui.view">
+        <field name="name">account.asset.removal.tree</field>
+        <field name="model">account.asset.removal</field>
+        <field name="arch" type="xml">
+            <tree
+                string="Assets Removal"
+                decoration-info="state=='draft'"
+                decoration-muted="state=='cancel'"
+            >
+                <field name="name" />
+                <field name="date_removal" />
+                <field name="user_id" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="account_asset_removal_action" model="ir.actions.act_window">
+        <field name="name">Assets Removal</field>
+        <field name="res_model">account.asset.removal</field>
+        <field name="view_id" ref="account_asset_removal_view_tree" />
+        <field name="search_view_id" ref="account_asset_removal_view_search" />
+    </record>
+</odoo>

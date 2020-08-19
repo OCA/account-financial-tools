@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="account_asset_removal_menu"
+        action="account_asset_removal_action"
+        parent="account_asset_management.menu_finance_assets"
+        sequence="20"
+    />
+</odoo>

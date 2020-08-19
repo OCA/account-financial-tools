@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_asset_removal_user,account.asset.removal,model_account_asset_removal,account.group_account_user,1,1,1,0
+access_account_asset_removal_manager,account.asset.removal,model_account_asset_removal,account.group_account_manager,1,1,1,1
+access_account_asset_removal_line_user,account.asset.removal.line,model_account_asset_removal_line,account.group_account_user,1,1,1,0
+access_account_asset_removal_line_manager,account.asset.removal.line,model_account_asset_removal_line,account.group_account_manager,1,1,1,1

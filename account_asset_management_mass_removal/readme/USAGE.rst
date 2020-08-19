@@ -1,0 +1,4 @@
+- Go to *Invoicing > Assets > Assets Removal*
+- Create new asset removal.
+- Select asset (state 'open' and 'close' only) and update value in line same as remove wizard
+- Click Button Remove Assets.
