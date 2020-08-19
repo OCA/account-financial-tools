@@ -155,7 +155,11 @@ class AccountAssetRemove(models.TransientModel):
             residual_value = asset.value_residual
 
         dlines = asset_line_obj.search(
-            [("asset_id", "=", asset.id), ("type", "=", "depreciate")],
+            [
+                ("asset_id", "=", asset.id),
+                ("type", "=", "depreciate"),
+                ("move_check", "!=", False),
+            ],
             order="line_date desc",
         )
         if dlines:
@@ -256,9 +260,9 @@ class AccountAssetRemove(models.TransientModel):
             )
             last_depr_date = create_dl.line_date
 
-        period_number_days = (first_date - last_depr_date).days
+        period_number_days = (first_date - last_depr_date).days + 1
         new_line_date = date_remove + relativedelta(days=-1)
-        to_depreciate_days = (new_line_date - last_depr_date).days
+        to_depreciate_days = (new_line_date - last_depr_date).days + 1
         to_depreciate_amount = round(
             float(to_depreciate_days)
             / float(period_number_days)
@@ -267,7 +271,11 @@ class AccountAssetRemove(models.TransientModel):
         )
         residual_value = asset.value_residual - to_depreciate_amount
         if to_depreciate_amount:
-            update_vals = {"amount": to_depreciate_amount, "line_date": new_line_date}
+            update_vals = {
+                "amount": to_depreciate_amount,
+                "line_date": new_line_date,
+                "line_days": to_depreciate_days,
+            }
             first_to_depreciate_dl.write(update_vals)
             dlines[0].create_move()
             dlines -= dlines[0]
