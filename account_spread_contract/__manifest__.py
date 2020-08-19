@@ -16,7 +16,7 @@
         "contract",
     ],
     "data": [
-        "views/account_analytic_account.xml",
+        "views/contract_contract.xml",
         "views/account_spread_template.xml",
         "wizards/account_spread_contract_line_link_wizard.xml",
     ],

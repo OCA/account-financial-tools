@@ -5,7 +5,7 @@ from odoo import _, api, fields, models
 
 
 class AccountAnalyticInvoiceLine(models.Model):
-    _inherit = 'account.analytic.invoice.line'
+    _inherit = 'contract.line'
 
     spread_template_id = fields.Many2one(
         'account.spread.template',
@@ -22,7 +22,7 @@ class AccountAnalyticInvoiceLine(models.Model):
         for line in self:
             if line.spread_template_id:
                 line.spread_check = 'linked'
-            elif not line.analytic_account_id.create_invoice_visibility:
+            elif not line.contract_id.create_invoice_visibility:
                 line.spread_check = 'unavailable'
             else:
                 line.spread_check = 'unlinked'
@@ -37,7 +37,6 @@ class AccountAnalyticInvoiceLine(models.Model):
         if self.spread_template_id:
             return {
                 'name': _('Spread Template Details'),
-                'view_type': 'form',
                 'view_mode': 'form',
                 'res_model': 'account.spread.template',
                 'type': 'ir.actions.act_window',
@@ -50,11 +49,10 @@ class AccountAnalyticInvoiceLine(models.Model):
         ctx = dict(
             self.env.context,
             default_contract_line_id=self.id,
-            default_company_id=self.analytic_account_id.company_id.id,
+            default_company_id=self.contract_id.company_id.id,
         )
         return {
             'name': _('Link Contract Line with Spread Template'),
-            'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'account.spread.contract.line.link.wizard',
             'type': 'ir.actions.act_window',
