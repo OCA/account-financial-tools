@@ -524,8 +524,8 @@ class TestAssetManagement(AccountTestInvoicingCommon):
         wiz.remove()
         asset.refresh()
         self.assertEqual(len(asset.depreciation_line_ids), 3)
-        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 81.46, places=2)
-        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 4918.54, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 83.33, places=2)
+        self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 4916.67, places=2)
 
     def test_09_asset_from_invoice(self):
         all_asset = self.env["account.asset"].search([])
