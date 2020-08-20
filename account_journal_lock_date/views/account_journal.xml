@@ -10,8 +10,9 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
-            <field name="type" position="after">
-                <field name="journal_lock_date"/>
+            <field name="account_control_ids" position="after">
+                <field name="fiscalyear_lock_date"/>
+                <field name="period_lock_date"/>
             </field>
         </field>
     </record>
@@ -23,7 +24,8 @@
         <field name="inherit_id" ref="account.view_account_journal_tree"/>
         <field name="arch" type="xml">
             <field name="type" position="after">
-                <field name="journal_lock_date"/>
+                <field name="fiscalyear_lock_date"/>
+                <field name="period_lock_date"/>
             </field>
         </field>
     </record>

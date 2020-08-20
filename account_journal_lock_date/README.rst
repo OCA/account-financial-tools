@@ -27,26 +27,43 @@ Account Journal Lock Date
 
 Lock each accounting journal independently.
 
-In addition to the lock dates provided by standard Odoo and
-account_permanent_lock_move, provide a per journal lock date.
+In addition to the lock dates provided by standard Odoo, this module
+provides a 'Lock Date' and a 'Lock Date for Non-Advisers' per journal.
 
-Note: this module depends on account_permanent_lock_move because it
-implements stricter checks than standard Odoo, such as verifying that
-one cannot create draft moves before the lock date.
-
-Note: the journal lock date is ignored for users that are part of
-the Adviser group. This rule can be adapted by overriding method
-`_can_bypass_journal_lock_date` of `account.journal`.
+This module also adds a wizard that allows you to update the 'Lock Date'
+and the 'Lock Date for Non-Advisers' for several Journals at the same time.
 
 **Table of contents**
 
 .. contents::
    :local:
 
+Configuration
+=============
+
+To configure this module, you need to:
+
+#. Go to *Invoicing > Configuration > Journals*
+#. Open a Journal and set the 'Lock Date' and the 'Lock Date for Non-Advisers'
+   in the' Advanced Settings' tab of the form view or select several
+   Journals in the list view and click on the action menu
+   'Update journals lock dates' to update those dates for the selected
+   journals at the same time.
+
+Usage
+=====
+
+If the logged-in user has the access group 'Adviser', he/she will
+not be able to create a journal entry if the 'Lock Date' of the
+journal is greater than or equal to the journal entry.
+
+If the logged-in user has not the access group 'Adviser', he/she will
+not be able to create a journal entry if the 'Lock Date for Non-Advisers'
+of the journal is greater than or equal to the journal entry.
+
 Known issues / Roadmap
 ======================
 
-* a wizard to set the lock date on several journals could be nice to have
 * the module does not check that all moves prior the lock date are posted, this could be
   made as part of the wizard
 
@@ -81,6 +98,7 @@ Contributors
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Pedro M. Baeza
+  * Ernesto Tejeda
 
 Maintainers
 ~~~~~~~~~~~
