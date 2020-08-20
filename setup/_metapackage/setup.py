@@ -38,6 +38,7 @@ setuptools.setup(
         'odoo11-addon-account_permanent_lock_move',
         'odoo11-addon-account_renumber',
         'odoo11-addon-account_reversal',
+        'odoo11-addon-account_spread_cost_revenue',
         'odoo11-addon-account_tag_menu',
         'odoo11-addon-account_type_menu',
     ],
