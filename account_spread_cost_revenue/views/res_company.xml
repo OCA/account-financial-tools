@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook">
+                <page name="account_spread_cost_revenue" string="Account Spread" groups="account.group_account_manager">
+                    <group>
+                        <group string="Default Spread Accounts" name="default_spread_accounts">
+                            <field name="default_spread_revenue_account_id" />
+                            <field name="default_spread_expense_account_id" />
+                        </group>
+                        <group string="Default Spread Journals" name="default_spread_journals">
+                            <field name="default_spread_revenue_journal_id" />
+                            <field name="default_spread_expense_journal_id" />
+                        </group>
+                    </group>
+                    <group name="spreading_options">
+                        <group name="spreading_options_left">
+                            <field name="allow_spread_planning"/>
+                        </group>
+                        <group name="spreading_options_right">
+                            <field name="force_move_auto_post"/>
+                            <field name="auto_archive"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

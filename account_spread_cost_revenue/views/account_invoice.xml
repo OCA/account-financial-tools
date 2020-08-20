@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_supplier_invoice_spread" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="spread_check" widget="spread_line_widget" groups="account.group_account_user,account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_customer_invoice_spread" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="spread_check" widget="spread_line_widget" groups="account.group_account_user,account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
