@@ -1,22 +1,23 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountJournal(models.Model):
 
     _inherit = 'account.journal'
 
-    journal_lock_date = fields.Date(
-        string="Lock date",
-        help="Moves cannot be entered nor modified in this "
-             "journal prior to the lock date, unless the user "
-             "has the Adviser role."
+    fiscalyear_lock_date = fields.Date(
+        string="Lock Date",
+        help="No users, including Advisers, can edit accounts prior "
+             "to and inclusive of this date for this journal. Use it "
+             "for fiscal year locking for this journal, for example."
     )
-
-    @api.model
-    def _can_bypass_journal_lock_date(self):
-        """ This method is meant to be overridden to provide
-        finer control on who can bypass the lock date """
-        return self.env.user.has_group('account.group_account_manager')
+    period_lock_date = fields.Date(
+        string="Lock Date for Non-Advisers",
+        help="Only users with the 'Adviser' role can edit accounts "
+             "prior to and inclusive of this date for this journal. "
+             "Use it for period locking inside an open fiscal year "
+             "for this journal, for example."
+    )

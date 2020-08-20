@@ -3,7 +3,7 @@
 
 from datetime import date, timedelta
 
-from odoo import fields, tools
+from odoo import tools
 from odoo.modules import get_module_resource
 from odoo.tests import common
 
@@ -39,7 +39,7 @@ class TestJournalLockDate(common.TransactionCase):
 
         # create a move and post it
         move = self.account_move_obj.create({
-            'date': fields.Date.today(),
+            'date': date.today(),
             'journal_id': self.journal.id,
             'line_ids': [(0, 0, {
                 'account_id': self.account.id,
@@ -52,14 +52,12 @@ class TestJournalLockDate(common.TransactionCase):
             })]
         })
         move.post()
-
-        # lock journal
-        self.journal.journal_lock_date = fields.Date.today()
-
+        # lock journal, set 'Lock Date for Non-Advisers'
+        self.journal.period_lock_date = (date.today() + timedelta(days=2))
         # Test that the move cannot be created, written, or cancelled
         with self.assertRaises(JournalLockDateError):
             self.account_move_obj.create({
-                'date': fields.Date.today(),
+                'date': date.today(),
                 'journal_id': self.journal.id,
                 'line_ids': [(0, 0, {
                     'account_id': self.account.id,
@@ -80,10 +78,9 @@ class TestJournalLockDate(common.TransactionCase):
         with self.assertRaises(JournalLockDateError):
             move.button_cancel()
 
-        # create a move after the lock date and post it
-        tomorrow = date.today() + timedelta(days=1)
+        # create a move after the 'Lock Date for Non-Advisers' and post it
         move3 = self.account_move_obj.create({
-            'date': tomorrow,
+            'date': self.journal.period_lock_date + timedelta(days=3),
             'journal_id': self.journal.id,
             'line_ids': [(0, 0, {
                 'account_id': self.account.id,
@@ -104,13 +101,9 @@ class TestJournalLockDate(common.TransactionCase):
         })
         self.assertTrue(self.env.user.has_group(
             'account.group_account_manager'))
-
-        # lock journal
-        self.journal.journal_lock_date = fields.Date.today()
-
-        # advisers can create moves before or on the lock date
-        self.account_move_obj.create({
-            'date': fields.Date.today(),
+        # create a move and post it
+        move = self.account_move_obj.create({
+            'date': date.today(),
             'journal_id': self.journal.id,
             'line_ids': [(0, 0, {
                 'account_id': self.account.id,
@@ -122,3 +115,46 @@ class TestJournalLockDate(common.TransactionCase):
                 'name': 'Debit line',
             })]
         })
+        move.post()
+        # lock journal. Set 'Lock Date'
+        self.journal.fiscalyear_lock_date = date.today() + timedelta(days=2)
+        # lock journal. Set 'Lock Date for Non-Advisers'
+        self.journal.period_lock_date = date.today() + timedelta(days=4)
+        # Advisers cannot create, write, or cancel moves before 'Lock Date'
+        with self.assertRaises(JournalLockDateError):
+            self.account_move_obj.create({
+                'date': date.today(),
+                'journal_id': self.journal.id,
+                'line_ids': [(0, 0, {
+                    'account_id': self.account.id,
+                    'credit': 1000.0,
+                    'name': 'Credit line',
+                }), (0, 0, {
+                    'account_id': self.account2.id,
+                    'debit': 1000.0,
+                    'name': 'Debit line',
+                })]
+            })
+        with self.assertRaises(JournalLockDateError):
+            move.write({'name': 'TEST'})
+        # allow cancel posted move
+        self.journal.update_posted = True
+        with self.assertRaises(JournalLockDateError):
+            move.button_cancel()
+        # Advisers can create movements on a date after the 'Lock Date'
+        # even if that date is before and inclusive of
+        # the 'Lock Date for Non-Advisers' (self.journal.period_lock_date)
+        move3 = self.account_move_obj.create({
+            'date': self.journal.period_lock_date,
+            'journal_id': self.journal.id,
+            'line_ids': [(0, 0, {
+                'account_id': self.account.id,
+                'credit': 1000.0,
+                'name': 'Credit line',
+            }), (0, 0, {
+                'account_id': self.account2.id,
+                'debit': 1000.0,
+                'name': 'Debit line',
+            })]
+        })
+        move3.post()
