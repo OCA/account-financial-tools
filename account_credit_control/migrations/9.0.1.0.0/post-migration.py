@@ -42,7 +42,7 @@ def migrate_followup_data(env):
 
 
 def set_followup_data(env):
-    today = fields.Date.context_today
+    today = fields.Date.context_today(env.user)
     policy = env['credit.control.policy.level'].search([])[:-1]
     if policy:
         env.cr.execute("""
@@ -52,7 +52,7 @@ def set_followup_data(env):
             AND aa.internal_type = 'receivable'
             AND aml.reconciled IS NULL
             AND aml.date_maturity < %s
-        """, today)
+        """, (today,))
         data = env.cr.dictfetchall()
         for line in data:
             env['credit.control.line'].create({
