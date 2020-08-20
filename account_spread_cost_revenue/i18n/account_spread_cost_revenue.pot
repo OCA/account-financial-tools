@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_spread_cost_revenue
+#	* account_spread_cost_revenue
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-25 13:04+0000\n"
-"PO-Revision-Date: 2019-04-25 13:04+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,109 +15,58 @@ msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
-msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_credit_account_deprecated','!=',True)]}\">\n"
-"                                  This account in deprecated! The "
-"reconciliation will be NOT possible.\n"
+msgid "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':[('is_credit_account_deprecated','!=',True)]}\">\n"
+"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_credit_account_deprecated','!=',True)]}\">\n"
-"                                  Deze grootboekrekening is verouderd! "
-"Aflettering is NIET mogelijk.\n"
-"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
-msgid ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_debit_account_deprecated','!=',True)]}\">\n"
-"                                  This account in deprecated! The "
-"reconciliation will be NOT possible.\n"
+msgid "<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':[('is_debit_account_deprecated','!=',True)]}\">\n"
+"                                  This account in deprecated! The reconciliation will be NOT possible.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block text-danger\" colspan=\"2\" attrs=\"{'invisible':"
-"[('is_debit_account_deprecated','!=',True)]}\">\n"
-"                                 Deze grootboekrekening is verouderd! "
-"Aflettering is NIET mogelijk.\n"
-"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
-msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-"[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-"                                  The Balance Sheet account used for the "
-"spreading.<br/>This account is the counterpart of the account in the invoice "
-"line.\n"
+msgid "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"                                  The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the invoice line.\n"
 "                            </span>\n"
-"                            <span class=\"help-block\" colspan=\"2\" attrs="
-"\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
-"                                  The Expense account in the vendor bill "
-"line.<br/>Usually the same account of the vendor bill line.\n"
+"                            <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                  The Expense account in the vendor bill line.<br/>Usually the same account of the vendor bill line.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-"[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-"                                  De balans grootboekrekening welke gebruikt "
-"wordt voor transitorische spreiding.<br/>Dit is de tegenrekening van de "
-"grootboekrekening gekoppeld aan de factuurregel\n"
-"                            </span>\n"
-"                            <span class=\"help-block\" colspan=\"2\" attrs="
-"\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
-"                                  De kosten grootboekrekening van de "
-"inkoopfactuurregel.<br/>Meestal dezelfde grootboekrekning als de "
-"inkoopfactuurregel.\n"
-"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
-msgid ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-"[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-"                                  The Revenue account in the invoice line."
-"<br/>Usually the same account of the invoice line.\n"
+msgid "<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
+"                                  The Revenue account in the invoice line.<br/>Usually the same account of the invoice line.\n"
 "                            </span>\n"
-"                            <span class=\"help-block\" colspan=\"2\" attrs="
-"\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
-"                                  The Balance Sheet account used for the "
-"spreading.<br/>This account is the counterpart of the account in the vendor "
-"bill line.\n"
+"                            <span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
+"                                  The Balance Sheet account used for the spreading.<br/>This account is the counterpart of the account in the vendor bill line.\n"
 "                            </span>"
 msgstr ""
-"<span class=\"help-block\" colspan=\"2\" attrs=\"{'invisible':"
-"[('invoice_type','not in',('out_invoice','in_refund'))]}\">\n"
-"                                  De omzet grootboekrekening van de "
-"factuurregel.<br/>Meestal dezelfde grootboekrekning als de factuurregel.\n"
-"                            </span>\n"
-"                            <span class=\"help-block\" colspan=\"2\" attrs="
-"\"{'invisible':[('invoice_type','not in',('in_invoice','out_refund'))]}\">\n"
-"                                  De balans grootboekrekening welke gebruikt "
-"wordt voor transitorische spreiding.<br/>Dit is de tegenrekening van de "
-"grootboekrekening gekoppeld aan de inkoopfactuurregel\n"
-"                            </span>"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
 msgid "Account Spread"
-msgstr "Grootboekrekening Spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_invoice_line_link_wizard
 msgid "Account Spread Invoice Line Link Wizard"
-msgstr "Transitorisch Factuur Regel Koppel Wizard"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_line
 msgid "Account Spread Lines"
-msgstr "Grootboekrekening Spreiding Regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_spread_template
 msgid "Account Spread Template"
-msgstr "Transitorische Spreiding Template"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_active
@@ -135,22 +81,22 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_allow_spread_planning
 msgid "Allow Spread Planning"
-msgstr "Allow Spread Planning"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_amount
 msgid "Amount"
-msgstr "Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_account_analytic_id
 msgid "Analytic Account"
-msgstr "Kostenplaats"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_analytic_tag_ids
 msgid "Analytic Tags"
-msgstr "Labels kostenplaats"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_search
@@ -165,88 +111,87 @@ msgstr ""
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_move_line_auto_post
 msgid "Auto-post lines"
-msgstr "Automatisch boeken regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_force_move_auto_post
 msgid "Auto-post spread lines"
-msgstr "Auto-post spread lines"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_spread_account_id
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Balance sheet account / Spread account"
-msgstr "Balance grootboekrekening / Grootboekrekening Spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:464
 #, python-format
 msgid "Cannot delete spread(s) that are linked to an invoice line."
-msgstr "Cannot delete spread(s) that are linked to an invoice line."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:469
 #, python-format
 msgid "Cannot delete spread(s): there are posted Journal Entries."
-msgstr "Cannot delete spread(s): there are posted Journal Entries."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:436
 #, python-format
 msgid "Cannot unlink invoice lines if the invoice is validated"
 msgstr ""
-"Ontkoppelen van factuurregels is niet mogelijk als de factuur bevestigd is"
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_res_company
 msgid "Companies"
-msgstr "Bedrijven"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_company_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_company_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_company_id
 msgid "Company"
-msgstr "Bedrijf"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_invoice_line_link_wizard
 msgid "Confirm"
-msgstr "Bevestigen"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.server,name:account_spread_cost_revenue.ir_cron_spread_create_entries_ir_actions_server
 #: model:ir.cron,cron_name:account_spread_cost_revenue.ir_cron_spread_create_entries
 #: model:ir.cron,name:account_spread_cost_revenue.ir_cron_spread_create_entries
 msgid "Cost/revenue Spread: Create Entries"
-msgstr "Kosten/omzet spreiding: Aanmaken regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Create All Moves"
-msgstr "Create All Moves"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Create Move"
-msgstr "Maak mutatie"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:13
-#, fuzzy, python-format
+#, python-format
 msgid "Create from spread template"
-msgstr "Spreiding Template"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:14
-#, fuzzy, python-format
+#, python-format
 msgid "Create new spread board"
-msgstr "Nieuw Spreiding Tabel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_create_uid
@@ -254,13 +199,13 @@ msgstr "Nieuw Spreiding Tabel"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_create_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_create_uid
 msgid "Created by"
-msgstr "Aangemaakt door"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:36
 #, python-format
 msgid "Created move(s) "
-msgstr "Aangemaakte regel(s) "
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_create_date
@@ -268,107 +213,103 @@ msgstr "Aangemaakte regel(s) "
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_create_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_create_date
 msgid "Created on"
-msgstr "Aangemaakt op"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_credit_account_id
 msgid "Credit Account"
-msgstr "Credit Grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_currency_id
 msgid "Currency"
-msgstr "Valuta"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,spread_type:0
 #: selection:account.spread.invoice.line.link.wizard,spread_type:0
 #: selection:account.spread.template,spread_type:0
 msgid "Customer"
-msgstr "Klant"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,invoice_type:0
 #: selection:account.spread.invoice.line.link.wizard,invoice_type:0
 msgid "Customer Credit Note"
-msgstr "Klant Credit Nota"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,invoice_type:0
 #: selection:account.spread.invoice.line.link.wizard,invoice_type:0
 msgid "Customer Invoice"
-msgstr "Klant Factuur"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_date
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_debit_account_id
 msgid "Debit Account"
-msgstr "Debet Grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
 msgid "Default Spread Accounts"
-msgstr "Standaard Spreiding Grootboekrekeningen"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_company_form
 msgid "Default Spread Journals"
-msgstr "Standaard Spreiding Dagboeken"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_period_number
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template_period_number
 msgid "Define the number of spread lines"
-msgstr "Definieer het aantal spreiding regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Delete Move"
-msgstr "Verwijder Boeking"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:149
 #, python-format
 msgid "Deleted move %s"
-msgstr "Verwijder boeking %s"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_name
 msgid "Description"
-msgstr "Omschrijving"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Details"
-msgstr "Details"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company_allow_spread_planning
-msgid ""
-"Disable this option if you do not want to allow the spreading before the "
-"invoice is validated."
+msgid "Disable this option if you do not want to allow the spreading before the invoice is validated."
 msgstr ""
-"Disable this option if you do not want to allow the spreading before the "
-"invoice is validated."
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_display_create_all_moves
 msgid "Display Button All Moves"
-msgstr "Display Button All Moves"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_display_move_line_auto_post
 msgid "Display Button Auto-post lines"
-msgstr "Display Button Auto-post lines"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_display_recompute_buttons
 msgid "Display Buttons Recompute"
-msgstr "Display Buttons Recompute"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_display_name
@@ -376,46 +317,37 @@ msgstr "Display Buttons Recompute"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_display_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_display_name
 msgid "Display Name"
-msgstr "Schermnaam"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company_auto_archive
-#, fuzzy
-msgid ""
-"Enable this option if you want the cron job to automatically archive the "
-"spreads when all lines are posted."
+msgid "Enable this option if you want the cron job to automatically archive the spreads when all lines are posted."
 msgstr ""
-"Enable this option if you want to post automatically the accounting moves of "
-"all the spreads."
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_res_company_force_move_auto_post
-msgid ""
-"Enable this option if you want to post automatically the accounting moves of "
-"all the spreads."
+msgid "Enable this option if you want to post automatically the accounting moves of all the spreads."
 msgstr ""
-"Enable this option if you want to post automatically the accounting moves of "
-"all the spreads."
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_estimated_amount
 msgid "Estimated Amount"
-msgstr "Geschat Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_default_spread_expense_account_id
 msgid "Expense Spread Account"
-msgstr "Kosten spreiding Grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_default_spread_expense_journal_id
 msgid "Expense Spread Journal"
-msgstr "Kosten spreiding Dagboek"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Expense account"
-msgstr "Kosten grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_id
@@ -423,7 +355,7 @@ msgstr "Kosten grootboekrekening"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_id_5592
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:450
@@ -431,57 +363,57 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_id
 #, python-format
 msgid "Invoice"
-msgstr "Factuur"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model,name:account_spread_cost_revenue.model_account_invoice_line
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_invoice_line_id
 msgid "Invoice Line"
-msgstr "Factuurregel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_ids
 msgid "Invoice Lines"
-msgstr "Factuurregels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_invoice_id
 msgid "Invoice Reference"
-msgstr "Factuurreferentie"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_invoice_type
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_type
 msgid "Invoice Type"
-msgstr "Factuur Type"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_id
 msgid "Invoice line"
-msgstr "Factuur regel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_is_credit_account_deprecated
 msgid "Is Credit Account Deprecated"
-msgstr "Is Credit Grootboekrekening Verouderd"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_is_debit_account_deprecated
 msgid "Is Debit Account Deprecated"
-msgstr "Is Debet Grootboekrekening Verouderd"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_journal_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_spread_journal_id
 msgid "Journal"
-msgstr "Dagboek"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:130
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_move_id
 #, python-format
 msgid "Journal Entry"
-msgstr "Boeking"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread___last_update
@@ -489,7 +421,7 @@ msgstr "Boeking"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line___last_update
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template___last_update
 msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_write_uid
@@ -497,7 +429,7 @@ msgstr "Laatst gewijzigd op"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_write_uid
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_write_uid
 msgid "Last Updated by"
-msgstr "Laatst bijgewerkt door"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_write_date
@@ -505,154 +437,154 @@ msgstr "Laatst bijgewerkt door"
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_write_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_write_date
 msgid "Last Updated on"
-msgstr "Laatst bijgewerkt op"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:60
 #, python-format
 msgid "Link Invoice Line with Spread Board"
-msgstr "Koppel Factuur Regel met Spreiding Tabel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:20
-#, fuzzy, python-format
+#, python-format
 msgid "Link to existing spread board"
-msgstr "Koppel Factuur Regel met Spreiding Tabel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.invoice.line,spread_check:0
 msgid "Linked"
-msgstr "Gekoppeld"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #. openerp-web
 #: code:addons/account_spread_cost_revenue/static/src/js/account_spread.js:33
 #, python-format
 msgid "Linked to spread"
-msgstr "Gekoppeld met spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Month"
-msgstr "Maand"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_name
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_name
 msgid "Name"
-msgstr "Naam"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:141
 #, python-format
 msgid "New Spread Board"
-msgstr "Nieuw Spreiding Tabel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #. openerp-web
 #: code:addons/account_spread_cost_revenue/static/src/js/account_spread.js:35
 #, python-format
 msgid "Not linked to spread"
-msgstr "Niet gekoppeld met spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_period_number
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_period_number
 msgid "Number of Repetitions"
-msgstr "Aantal Herhalingen"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_period_type
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_period_type
 msgid "Period Type"
-msgstr "Periode Type"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_period_type
 #: model:ir.model.fields,help:account_spread_cost_revenue.field_account_spread_template_period_type
 msgid "Period length for the entries"
-msgstr "Periode lengte voor boekingen"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_posted_amount
 msgid "Posted Amount"
-msgstr "Geboekte Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Quarter"
-msgstr "Kwartaal"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Recalculate entire spread"
-msgstr "Herbereken volledige spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Recalculate unposted lines"
-msgstr "Herbereken ongeboekte regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Reconciled entries"
-msgstr "Afgeletterde boekingen"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_default_spread_revenue_account_id
 msgid "Revenue Spread Account"
-msgstr "Omzet Spreiding Grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_res_company_default_spread_revenue_journal_id
 msgid "Revenue Spread Journal"
-msgstr "Omzet Spreiding Dagboek"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Revenue account"
-msgstr "Omzet grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:455
-#, fuzzy, python-format
+#, python-format
 msgid "Spread"
-msgstr "Spreiding Type"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_spread_action_type
 msgid "Spread Action Type"
-msgstr "Spreiding Actie Type"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_spread_account_id
 msgid "Spread Balance Sheet Account"
-msgstr "Spreiding Balans Grootboekrekening"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_invoice_line_spread_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_spread_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_spread_id
 msgid "Spread Board"
-msgstr "Spreiding Tabel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Spread Board Name"
-msgstr "Spreiding Tabel Naam"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_invoice_line_spread_check
 msgid "Spread Check"
-msgstr "Spreiding Controle"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_spread_form
 #: model:ir.ui.menu,name:account_spread_cost_revenue.menu_action_account_spread_form
 msgid "Spread Costs/Revenues"
-msgstr "Spreiding Kosten/Omzet"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_invoice_line.py:40
@@ -660,192 +592,183 @@ msgstr "Spreiding Kosten/Omzet"
 #: code:addons/account_spread_cost_revenue/wizards/account_spread_invoice_line_link_wizard.py:190
 #, python-format
 msgid "Spread Details"
-msgstr "Spreiding Details"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_spread_journal_id
 msgid "Spread Journal"
-msgstr "Spreiding Dagboek"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_line_ids
 msgid "Spread Lines"
-msgstr "Boekingsregels Spreiding"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_template_id
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_id
 msgid "Spread Template"
-msgstr "Spreiding Template"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
 msgid "Spread Template Name"
-msgstr "Spreiding Template Naam"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.actions.act_window,name:account_spread_cost_revenue.action_account_spread_template_form
 #: model:ir.ui.menu,name:account_spread_cost_revenue.menu_action_account_spread_template_form
 msgid "Spread Templates"
-msgstr "Spreiding Templates"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_invoice_line_link_wizard_spread_type
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_spread_type
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_spread_type
 msgid "Spread Type"
-msgstr "Spreiding Type"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Spread lines"
-msgstr "Spreiding Regels"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:375
 #, python-format
 msgid "Spread table '%s' created."
-msgstr "Spreiding tabel '%s' aangemaakt."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_spread_date
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_template_start_date
 msgid "Start Date"
-msgstr "Startdatum"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,spread_type:0
 #: selection:account.spread.invoice.line.link.wizard,spread_type:0
 #: selection:account.spread.template,spread_type:0
 msgid "Supplier"
-msgstr "Leverancier"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:261
 #, python-format
 msgid "The Invoice Type does not correspond to the Invoice"
-msgstr "De Factuur Type komt niet overeen met de Factuur"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:269
 #, python-format
 msgid "The Journal is not consistent with the account moves."
-msgstr "De dagboek komt niet overeen met de boekingsregels."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:282
 #, python-format
-msgid ""
-"The Spread Template (Purchases) is not compatible with selected invoice type"
+msgid "The Spread Template (Purchases) is not compatible with selected invoice type"
 msgstr ""
-"De Spreiding Template (Inkoop) is not compatibel met geselecteerde factuur "
-"type"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:277
 #, python-format
-msgid ""
-"The Spread Template (Sales) is not compatible with selected invoice type"
+msgid "The Spread Template (Sales) is not compatible with selected invoice type"
 msgstr ""
-"De Spreiding Template (Verkoop) is not compatibel met geselecteerde factuur "
-"type"
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread_line.py:65
 #, python-format
-msgid ""
-"This spread line is already linked to a journal entry! Please post or delete "
-"it."
+msgid "This spread line is already linked to a journal entry! Please post or delete it."
 msgstr ""
-"Deze spreidingsregel is al gekoppeld aan een boekingsregel! Graag boeken of "
-"verwijderen."
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "This will delete the move. Are you sure ?"
-msgstr "Hiermee wordt de boekingsregel verwijderd. Weet u het zeker?"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Total"
-msgstr "Totaal"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_total_amount
 msgid "Total Amount"
-msgstr "Totaal Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.invoice.line,spread_check:0
 msgid "Unavailable"
-msgstr "Niet beschikbaar"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Undo spread"
-msgstr "Spreiding ongedaan maken"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "Unlink Invoice Line"
-msgstr "Ontkoppel Facuur Regel"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.invoice.line,spread_check:0
 msgid "Unlinked"
-msgstr "Ontkoppeld"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:456
 #, python-format
 msgid "Unlinked '%s' (invoice line %s)."
-msgstr "Unlinked '%s' (invoice line %s)."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: code:addons/account_spread_cost_revenue/models/account_spread.py:451
 #, python-format
 msgid "Unlinked invoice line '%s' (view %s)."
-msgstr "Unlinked invoice line '%s' (view %s)."
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_unposted_amount
 msgid "Unposted Amount"
-msgstr "Ongeboekte Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.model.fields,field_description:account_spread_cost_revenue.field_account_spread_unspread_amount
 msgid "Unspread Amount"
-msgstr "Niet gespeid Bedrag"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,invoice_type:0
 #: selection:account.spread.invoice.line.link.wizard,invoice_type:0
 msgid "Vendor Bill"
-msgstr "Leverancier Facuur"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,invoice_type:0
 #: selection:account.spread.invoice.line.link.wizard,invoice_type:0
 msgid "Vendor Credit Note"
-msgstr "Leverancier Creditnota"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "View Move"
-msgstr "Zie Boeking"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: selection:account.spread,period_type:0
 #: selection:account.spread.template,period_type:0
 msgid "Year"
-msgstr "Jaar"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread
 msgid "e.g. One year offices cleaning contract"
-msgstr "bijv Één jaar kantoor schoonmaak contract"
+msgstr ""
 
 #. module: account_spread_cost_revenue
 #: model:ir.ui.view,arch_db:account_spread_cost_revenue.view_account_spread_template
 msgid "e.g. Template cleaning contract"
-msgstr "e.g. Template schoonmaak contract"
+msgstr ""
+
