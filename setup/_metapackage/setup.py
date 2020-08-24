@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo12-addon-account_group_menu',
         'odoo12-addon-account_invoice_constraint_chronology',
         'odoo12-addon-account_invoice_currency',
+        'odoo12-addon-account_journal_lock_date',
         'odoo12-addon-account_loan',
         'odoo12-addon-account_lock_date_update',
         'odoo12-addon-account_lock_to_date',
