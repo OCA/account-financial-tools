@@ -8,10 +8,10 @@
         <field name="arch" type="xml">
             <field name="amount" position="after">
                 <field name="payment_mode_allowed_ids" widget="many2many_tags" invisible="1"/>
-                <field name="payment_mode_id" widget="selection"/>
+                <field name="payment_mode_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"/>
                 <field name="mandate_allowed_ids" widget="many2many_tags" invisible="1"/>
                 <field name="mandate_required" invisible="1"/>
-                <field name="mandate_id" widget="selection" attrs="{'required': [('mandate_required', '=', True)], 'invisible': [('mandate_required', '=', False)]}"/>
+                <field name="mandate_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}" attrs="{'required': [('mandate_required', '=', True)], 'invisible': [('mandate_required', '=', False)]}"/>
             </field>
         </field>
     </record>
