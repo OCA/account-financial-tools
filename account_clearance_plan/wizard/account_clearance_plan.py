@@ -62,6 +62,19 @@ class AccountClearancePlan(models.TransientModel):
     recurrence_number = fields.Integer()
     clearance_plan_start_date = fields.Date(string="", required=False)
 
+    @api.multi
+    def _prepare_clearance_plan_recurrence_line(self, amount, date):
+        model_line = self.env["account.clearance.plan.line"]
+        default_values = model_line.default_get(list(model_line.fields_get()))
+        default_values.update(
+            {
+                "amount": amount,
+                "clearance_plan_id": self.id,
+                "date_maturity": date,
+            }
+        )
+        return default_values
+
     @api.onchange(
         "recurrent_clearance_amount",
         "recurrence_type",
@@ -86,24 +99,24 @@ class AccountClearancePlan(models.TransientModel):
                 amount_to_allocate >= self.recurrent_clearance_amount
                 and recurrence < self.recurrence_number
             ):
-                self.clearance_plan_line_ids |= line_model.new(
-                    {
-                        "clearance_plan_id": self.id,
-                        "amount": self.recurrent_clearance_amount,
-                        "date_maturity": date,
-                    }
+                line = line_model.new(
+                    self._prepare_clearance_plan_recurrence_line(
+                        self.recurrent_clearance_amount, date
+                    )
                 )
+                self.clearance_plan_line_ids |= line
                 date += delta
                 recurrence += 1
                 amount_to_allocate -= self.recurrent_clearance_amount
             if amount_to_allocate > 0:
-                self.clearance_plan_line_ids |= line_model.new(
-                    {
-                        "clearance_plan_id": self.id,
-                        "amount": amount_to_allocate,
-                        "date_maturity": date,
-                    }
-                )
+                if len(self.clearance_plan_line_ids) < self.recurrence_number:
+                    self.clearance_plan_line_ids |= line_model.new(
+                        self._prepare_clearance_plan_recurrence_line(
+                            amount_to_allocate, date
+                        )
+                    )
+                else:
+                    line.amount += amount_to_allocate
 
     @api.onchange("clearance_plan_line_ids")
     def _compute_amount_unallocated(self):
