@@ -6,40 +6,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-08-26 00:59+0000\n"
+"Last-Translator: Nelson Ramírez Sánchez <info@konos.cl>\n"
 "Language-Team: none\n"
 "Language: es_CL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:154
 #, python-format
 msgid "%s still to allocate."
-msgstr ""
+msgstr "%s aún por asignar."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "Monto"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__amount_unallocated
 msgid "Amount Unallocated"
-msgstr ""
+msgstr "Monto sin asignar"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:28
 #, python-format
 msgid "Amounts should all be positive."
-msgstr ""
+msgstr "Montos deben ser todos positivos."
 
 #. module: account_clearance_plan
 #: model_terms:ir.ui.view,arch_db:account_clearance_plan.clearance_plan_wizard
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_clearance_plan
 #: model:ir.actions.act_window,name:account_clearance_plan.act__move_line_clearance_plan_wizard
@@ -48,29 +50,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__clearance_plan_id
 #: model_terms:ir.ui.view,arch_db:account_clearance_plan.res_config_settings_form_view
 msgid "Clearance Plan"
-msgstr ""
+msgstr "Plan de Liquidación"
 
 #. module: account_clearance_plan
 #: model_terms:ir.ui.view,arch_db:account_clearance_plan.clearance_plan_wizard
 msgid "Clearance Plan Board"
-msgstr ""
+msgstr "Tablero del Plan de Liquidación"
 
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_account_clearance_plan_line
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__clearance_plan_line_ids
 msgid "Clearance Plan Line"
-msgstr ""
+msgstr "Línea del plan de liquidación"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:128
 #, python-format
 msgid "Clearance Plan: "
-msgstr ""
+msgstr "Plan de Liquidación: "
 
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empresas"
 
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_res_config_settings
@@ -80,48 +82,50 @@ msgstr ""
 #. module: account_clearance_plan
 #: model_terms:ir.ui.view,arch_db:account_clearance_plan.clearance_plan_wizard
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__create_uid
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__create_date
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_company__clearance_plan_journal_id
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_config_settings__clearance_plan_journal_id
 msgid "Default Clearance Plan Journal"
-msgstr ""
+msgstr "Diario del plan de liquidación predeterminado"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_company__clearance_plan_move_line_name
 #: model:ir.model.fields,field_description:account_clearance_plan.field_res_config_settings__clearance_plan_move_line_name
 msgid "Default Clearance Plan Move Line Name"
-msgstr ""
+msgstr "Nombre de línea de movimiento del plan de liquidación predeterminado"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_move_line_name
 #: model:ir.model.fields,help:account_clearance_plan.field_res_config_settings__clearance_plan_move_line_name
 msgid "Default name that will be given to new open move lines created by clearance plans"
 msgstr ""
+"Nombre predeterminado que se le dará a las nuevas líneas de movimiento "
+"abiertas creadas por los planes de limpieza"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__display_name
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre Mostrado"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__date_maturity
 msgid "Due Date"
-msgstr ""
+msgstr "Fecha de vencimiento"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__id
@@ -132,97 +136,99 @@ msgstr ""
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_account_clearance_plan__move_narration
 msgid "Internal note of the new journal entry that will be generated."
-msgstr ""
+msgstr "Nota interna del nuevo asiento de diario que se generará."
 
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Factura"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__move_narration
 msgid "Journal Entry Internal Note"
-msgstr ""
+msgstr "Nota interna del asiento de diario"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__move_ref
 msgid "Journal Entry Reference"
-msgstr ""
+msgstr "Referencia de asientos de diario"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_account_clearance_plan__journal_id
 msgid "Journal of the new entry."
-msgstr ""
+msgstr "Diario de la nueva entrada."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__name
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan____last_update
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__write_uid
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__write_date
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Apunte Contable"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:101
 #, python-format
 msgid "Please select items from an account of type 'receivable' or 'payable'."
-msgstr ""
+msgstr "Seleccione elementos de una cuenta de tipo 'por cobrar' o 'por pagar'."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:97
 #, python-format
 msgid "Please select items from exactly one account."
-msgstr ""
+msgstr "Seleccione elementos de exactamente una cuenta."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:94
 #, python-format
 msgid "Please select items from exactly one partner."
-msgstr ""
+msgstr "Seleccione artículos de exactamente un contacto."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:75
 #, python-format
 msgid "Programming error: wizard action executed with 'active_model' different from 'account.move.line' in context."
 msgstr ""
+"Error de programación: la acción del asistente se ejecutó con 'active_model' "
+"diferente de 'account.move.line' en contexto."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_account_clearance_plan__move_ref
 msgid "Reference of the new journal entry that will be generated."
-msgstr ""
+msgstr "Referencia de la nueva entrada de diario que se generará."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_journal_id
 #: model:ir.model.fields,help:account_clearance_plan.field_res_config_settings__clearance_plan_journal_id
 msgid "The journal used by default on clearance plans."
-msgstr ""
+msgstr "El diario utilizado por defecto en los planes de liquidación."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__amount_to_allocate
 msgid "Total Amount to Allocate"
-msgstr ""
+msgstr "Monto total para asignar"
