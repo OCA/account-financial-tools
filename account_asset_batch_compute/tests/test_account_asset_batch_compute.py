@@ -8,11 +8,6 @@ from dateutil import relativedelta
 
 from odoo.addons.queue_job.job import Job
 
-DELAY2 = ('odoo.addons.account_asset_batch_compute.wizards.'
-          'account_asset_compute.async_asset_compute')
-DELAY1 = ('odoo.addons.account_asset_batch_compute.models.'
-          'account_asset.async_compute_entries')
-
 
 class TestAccountAssetBatchCompute(TransactionCase):
 
@@ -61,8 +56,6 @@ class TestAccountAssetBatchCompute(TransactionCase):
         })
         today = date.today()
         first_day_of_month = date(today.year, today.month, 1)
-        self.nextmonth =\
-            first_day_of_month + relativedelta.relativedelta(months=1)
         self.nextmonth = first_day_of_month + relativedelta.relativedelta(
             months=1)
         self.asset01.date_start = first_day_of_month
