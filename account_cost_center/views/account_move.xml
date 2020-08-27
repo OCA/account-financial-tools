@@ -5,11 +5,27 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//notebook//field[@name='line_ids']/tree/field[@name='analytic_account_id']"
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='account_id']"
                 position="after"
             >
                 <field name="cost_center_id" />
             </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='account_id']"
+                position="after"
+            >
+                <field name="cost_center_id" />
+            </xpath>
+            <field name="ref" position="after">
+                <field name="cost_center_id" />
+            </field>
+            <field name="invoice_line_ids" position="attributes">
+                <attribute
+                    name="context"
+                    operation="python_dict"
+                    key="default_cost_center_id"
+                >cost_center_id</attribute>
+            </field>
         </field>
     </record>
 </odoo>

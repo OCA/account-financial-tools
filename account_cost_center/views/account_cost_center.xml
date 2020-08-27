@@ -58,7 +58,6 @@
         <field name="name">Cost Centers</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">account.cost.center</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="account_cost_center_view_search" />
         <field name="help" type="html">
