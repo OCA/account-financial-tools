@@ -5,10 +5,8 @@ from odoo import fields, models
 
 
 class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     cost_center_id = fields.Many2one(
-        'account.cost.center',
-        index=True,
-        string='Cost Center'
+        "account.cost.center", index=True, string="Cost Center"
     )
