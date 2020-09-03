@@ -447,9 +447,24 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     (inverse_name, "=", tax_id),
                     ("factor_percent", "=", factor_percent),
                     ("repartition_type", "=", repartition_type),
-                    ("account_id", "=", account_id),
                 ]
             )
+            # before try create new record, try compare without account_id
+            if existing:
+                if existing.account_id.id != account_id:
+                    # update record
+                    result.append(
+                        (
+                            1,
+                            existing.id,
+                            {
+                                "factor_percent": factor_percent,
+                                "repartition_type": repartition_type,
+                                "account_id": account_id,
+                                "tag_ids": [(6, 0, tpl.tag_ids.ids)],
+                            },
+                        )
+                    )
             if not existing:
                 # create a new mapping
                 result.append(
@@ -684,6 +699,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     )
             # Register detected differences
             if expected is not None:
+                # FIXME: on fields m2m are Comparing apples and oranges
                 if expected != [] and expected != real[key]:
                     result[key] = expected
             else:
