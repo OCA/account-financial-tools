@@ -37,7 +37,7 @@
                         <field
                             name="spread_account_id"
                             attrs="{'invisible': [('spread_action_type', '!=', 'new')],'required': [('spread_action_type', '=', 'new')]}"
-                            domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
+                            domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
                             options="{'no_create': True}"
                         />
                         <field

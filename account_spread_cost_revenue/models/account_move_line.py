@@ -1,12 +1,12 @@
-# Copyright 2016-2019 Onestein (<https://www.onestein.eu>)
+# Copyright 2016-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
-class AccountInvoiceLine(models.Model):
-    _inherit = "account.invoice.line"
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
 
     spread_id = fields.Many2one("account.spread", string="Spread Board", copy=False)
     spread_check = fields.Selection(
@@ -18,17 +18,16 @@ class AccountInvoiceLine(models.Model):
         compute="_compute_spread_check",
     )
 
-    @api.depends("spread_id", "invoice_id.state")
+    @api.depends("spread_id", "move_id.state")
     def _compute_spread_check(self):
         for line in self:
             if line.spread_id:
                 line.spread_check = "linked"
-            elif line.invoice_id.state == "draft":
+            elif line.move_id.state == "draft":
                 line.spread_check = "unlinked"
             else:
                 line.spread_check = "unavailable"
 
-    @api.multi
     def spread_details(self):
         """Button on the invoice lines tree view of the invoice
         form to show the spread form view."""
@@ -39,7 +38,6 @@ class AccountInvoiceLine(models.Model):
         if self.spread_id:
             return {
                 "name": _("Spread Details"),
-                "view_type": "form",
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",
@@ -50,22 +48,66 @@ class AccountInvoiceLine(models.Model):
 
         # In case no spread board is linked to the invoice line
         # open the wizard to link them
-        company = self.invoice_id.company_id
         ctx = dict(
             self.env.context,
             default_invoice_line_id=self.id,
-            default_company_id=company.id,
-            allow_spread_planning=company.allow_spread_planning,
+            default_company_id=self.move_id.company_id.id,
+            allow_spread_planning=self.move_id.company_id.allow_spread_planning,
         )
         return {
             "name": _("Link Invoice Line with Spread Board"),
-            "view_type": "form",
             "view_mode": "form",
             "res_model": "account.spread.invoice.line.link.wizard",
             "type": "ir.actions.act_window",
             "target": "new",
             "context": ctx,
         }
+
+    @api.constrains("spread_id", "account_id")
+    def _check_spread_account_balance_sheet(self):
+        for line in self:
+            if not line.spread_id:
+                pass
+            elif line.move_id.type in ("out_invoice", "in_refund"):
+                if line.account_id != line.spread_id.debit_account_id:
+                    raise ValidationError(
+                        _(
+                            "The account of the invoice line does not correspond "
+                            "to the Balance Sheet (debit account) of the spread"
+                        )
+                    )
+            elif line.move_id.type in ("in_invoice", "out_refund"):
+                if line.account_id != line.spread_id.credit_account_id:
+                    raise ValidationError(
+                        _(
+                            "The account of the invoice line does not correspond "
+                            "to the Balance Sheet (credit account) of the spread"
+                        )
+                    )
+
+    def write(self, vals):
+        if vals.get("spread_id"):
+            spread = self.env["account.spread"].browse(vals.get("spread_id"))
+            if spread.invoice_type in ["out_invoice", "in_refund"]:
+                vals["account_id"] = spread.debit_account_id.id
+            else:
+                vals["account_id"] = spread.credit_account_id.id
+        return super().write(vals)
+
+    def _check_spread_reconcile_validity(self):
+        # Improve error messages of standard Odoo
+        reconciled_lines = self.filtered(lambda l: l.reconciled)
+        msg_line = _("Move line: %s (%s), account code: %s\n")
+        if reconciled_lines:
+            msg = _("Cannot reconcile entries that are already reconciled:\n")
+            for line in reconciled_lines:
+                msg += msg_line % (line.id, line.name, line.account_id.code)
+            raise ValidationError(msg)
+        if len(self.mapped("account_id").ids) > 1:
+            msg = _("Some entries are not from the same account:\n")
+            for line in self:
+                msg += msg_line % (line.id, line.name, line.account_id.code)
+            raise ValidationError(msg)
 
     def create_auto_spread(self):
         """ Create auto spread table for each invoice line, when needed """
@@ -88,7 +130,7 @@ class AccountInvoiceLine(models.Model):
                 continue
             spread_type = (
                 "sale"
-                if line.invoice_type in ["out_invoice", "out_refund"]
+                if line.move_id.type in ["out_invoice", "out_refund"]
                 else "purchase"
             )
             spread_auto = self.env["account.spread.template.auto"].search(
