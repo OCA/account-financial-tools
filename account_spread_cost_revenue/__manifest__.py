@@ -11,9 +11,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-financial-tools/",
     "category": "Accounting & Finance",
-    "depends": [
-        "account",
-    ],
+    "depends": ["account",],
     "data": [
         "security/ir.model.access.csv",
         "security/account_spread_security.xml",
