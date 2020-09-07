@@ -1,4 +1,4 @@
-# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -27,13 +27,9 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         return "link"
 
     invoice_line_id = fields.Many2one(
-        "account.invoice.line",
-        string="Invoice Line",
-        readonly=True,
-        required=True,
-        ondelete="cascade",
+        "account.move.line", readonly=True, required=True, ondelete="cascade"
     )
-    invoice_id = fields.Many2one(related="invoice_line_id.invoice_id", readonly=True)
+    invoice_id = fields.Many2one(related="invoice_line_id.move_id", readonly=True)
     invoice_type = fields.Selection(
         [
             ("out_invoice", "Customer Invoice"),
@@ -49,69 +45,89 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         compute="_compute_invoice_type",
         store=True,
     )
-    spread_id = fields.Many2one("account.spread", string="Spread Board")
-    company_id = fields.Many2one("res.company", string="Company", required=True)
+    spread_invoice_type_domain_ids = fields.One2many(
+        "account.spread", compute="_compute_spread_invoice_type_domain",
+    )
+    spread_id = fields.Many2one(
+        "account.spread",
+        string="Spread Board",
+        domain="[('id', 'in', spread_invoice_type_domain_ids)]",
+    )
+    company_id = fields.Many2one("res.company", required=True)
     spread_action_type = fields.Selection(
         selection=_selection_spread_action_type,
         default=_selection_default_spread_action_type,
     )
     template_id = fields.Many2one("account.spread.template", string="Spread Template")
     use_invoice_line_account = fields.Boolean(
-        string="Use invoice line's account",
         help="Use invoice line's account as Balance sheet / spread account.\n"
         "In this case, user need to select expense/revenue account too.",
     )
     spread_account_id = fields.Many2one(
-        "account.account", string="Balance sheet account / Spread account", store=True
+        "account.account",
+        string="Balance sheet account / Spread account",
+        compute="_compute_spread_account",
+        readonly=False,
+        store=True,
     )
     exp_rev_account_id = fields.Many2one(
         "account.account",
         string="Expense/revenue account",
-        help="Optional account to overwrite the existing expense/revenue " "account",
+        help="Optional account to overwrite the existing expense/revenue account",
     )
     spread_journal_id = fields.Many2one(
-        "account.journal", string="Spread Journal", store=True
+        "account.journal",
+        string="Spread Journal",
+        compute="_compute_spread_journal",
+        readonly=False,
+        store=True,
     )
 
     @api.depends("invoice_line_id")
     def _compute_invoice_type(self):
         for wizard in self:
-            invoice = wizard.invoice_line_id.invoice_id
+            invoice = wizard.invoice_line_id.move_id
             wizard.invoice_type = invoice.type
-            if invoice.type in ["out_invoice", "out_refund"]:
+            if invoice.is_sale_document(include_receipts=True):
                 wizard.spread_type = "sale"
             else:
                 wizard.spread_type = "purchase"
 
-    @api.onchange("company_id", "invoice_type")
-    def _onchange_spread_journal_account(self):
+    @api.depends("invoice_type", "company_id")
+    def _compute_spread_journal(self):
         for wizard in self:
-            company = wizard.company_id
-            acc_revenue = company.default_spread_revenue_account_id
-            acc_expense = company.default_spread_expense_account_id
-            journal_revenue = company.default_spread_revenue_journal_id
-            journal_expense = company.default_spread_expense_journal_id
+            journal_revenue = wizard.company_id.default_spread_revenue_journal_id
+            journal_expense = wizard.company_id.default_spread_expense_journal_id
             if wizard.invoice_type in ("out_invoice", "in_refund"):
-                wizard.spread_account_id = acc_revenue
                 wizard.spread_journal_id = journal_revenue
             else:
-                wizard.spread_account_id = acc_expense
                 wizard.spread_journal_id = journal_expense
 
-    @api.multi
+    @api.depends("invoice_type", "company_id")
+    def _compute_spread_account(self):
+        for wizard in self:
+            acc_revenue = wizard.company_id.default_spread_revenue_account_id
+            acc_expense = wizard.company_id.default_spread_expense_account_id
+            if wizard.invoice_type in ("out_invoice", "in_refund"):
+                wizard.spread_account_id = acc_revenue
+            else:
+                wizard.spread_account_id = acc_expense
+
     def _inverse_spread_journal_account(self):
         """Keep this for making the fields editable"""
         pass
 
-    @api.onchange("invoice_type")
-    def onchange_invoice_type(self):
-        domain = [
-            ("invoice_id", "=", False),
-            ("invoice_type", "=", self.invoice_type),
-            ("company_id", "=", self.company_id.id),
-        ]
-        res = {"domain": {"spread_id": domain}}
-        return res
+    @api.depends("company_id", "invoice_type")
+    def _compute_spread_invoice_type_domain(self):
+        for wizard in self:
+            spreads = self.env["account.spread"].search(
+                [
+                    ("invoice_id", "=", False),
+                    ("invoice_type", "=", wizard.invoice_type),
+                    ("company_id", "=", wizard.company_id.id),
+                ]
+            )
+            wizard.spread_invoice_type_domain_ids = spreads
 
     @api.onchange("use_invoice_line_account")
     def _onchange_user_invoice_line_account(self):
@@ -120,7 +136,6 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
         )
         self.exp_rev_account_id = False
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
 
@@ -130,7 +145,6 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
 
             return {
                 "name": _("Spread Details"),
-                "view_type": "form",
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",
@@ -149,10 +163,9 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     self.exp_rev_account_id or self.invoice_line_id.account_id
                 )
 
-            analytic_account = self.invoice_line_id.account_analytic_id
+            analytic_account = self.invoice_line_id.analytic_account_id
             analytic_tags = self.invoice_line_id.analytic_tag_ids
-            date_invoice = self.invoice_id.date_invoice or fields.Date.today()
-            use_il_account = self.use_invoice_line_account
+            date_invoice = self.invoice_id.invoice_date or fields.Date.today()
 
             return {
                 "name": _("New Spread Board"),
@@ -166,7 +179,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                     "default_name": self.invoice_line_id.name,
                     "default_invoice_type": self.invoice_type,
                     "default_invoice_line_id": self.invoice_line_id.id,
-                    "default_use_invoice_line_account": use_il_account,
+                    "default_use_invoice_line_account": self.use_invoice_line_account,
                     "default_debit_account_id": debit_account.id,
                     "default_credit_account_id": credit_account.id,
                     "default_journal_id": self.spread_journal_id.id,
@@ -186,7 +199,7 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 spread_vals = self.template_id._prepare_spread_from_template(
                     spread_account_id=spread_account_id
                 )
-                date_invoice = self.invoice_id.date_invoice
+                date_invoice = self.invoice_id.invoice_date
                 date_invoice = date_invoice or self.template_id.start_date
                 date_invoice = date_invoice or fields.Date.today()
                 spread_vals["spread_date"] = date_invoice
@@ -201,8 +214,10 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 else:
                     spread_vals["debit_account_id"] = account.id
 
-                analytic_account = self.invoice_line_id.account_analytic_id
+                analytic_account = self.invoice_line_id.analytic_account_id
                 spread_vals["account_analytic_id"] = analytic_account.id
+
+                spread_vals["currency_id"] = self.invoice_id.currency_id.id
 
                 spread = self.env["account.spread"].create(spread_vals)
 
@@ -212,7 +227,6 @@ class AccountSpreadInvoiceLineLinkWizard(models.TransientModel):
                 self.invoice_line_id.spread_id = spread
             return {
                 "name": _("Spread Details"),
-                "view_type": "form",
                 "view_mode": "form",
                 "res_model": "account.spread",
                 "type": "ir.actions.act_window",

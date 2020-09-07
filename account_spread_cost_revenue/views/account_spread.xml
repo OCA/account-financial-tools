@@ -35,7 +35,7 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box">
+                    <div name="button_box" class="oe_button_box">
                         <button
                             name="open_reconcile_view"
                             class="oe_stat_button"
@@ -44,20 +44,13 @@
                             string="Reconciled entries"
                         >
                         </button>
-                        <button
-                            name="toggle_active"
-                            type="object"
-                            attrs="{'invisible': [('all_posted','=',False)]}"
-                            class="oe_stat_button"
-                            icon="fa-archive"
-                        >
-                            <field
-                                name="active"
-                                widget="boolean_button"
-                                options='{"terminology": "archive"}'
-                            />
-                        </button>
                     </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                     <div class="oe_title">
                         <label for="name" string="Spread Board Name" />
                         <h1>
@@ -77,6 +70,7 @@
                             <field name="display_recompute_buttons" invisible="1" />
                             <field name="display_move_line_auto_post" invisible="1" />
                             <field name="all_posted" invisible="1" />
+                            <field name="active" invisible="1" />
                             <field name="use_invoice_line_account" invisible="1" />
                         </group>
                     </group>
@@ -140,7 +134,7 @@
                             <field
                                 name="debit_account_id"
                                 required="1"
-                                domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
+                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
                                 attrs="{'readonly':[('invoice_line_id','!=',False)]}"
                             />
                             <span
@@ -210,7 +204,7 @@
                             <field
                                 name="credit_account_id"
                                 required="1"
-                                domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
+                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
                                 attrs="{'readonly':[('invoice_line_id','!=',False)]}"
                             />
                             <span
@@ -391,6 +385,7 @@
         <field name="model">account.spread</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name" string="Spread" />
                 <filter
                     string="Archived"
                     name="inactive"
@@ -402,13 +397,12 @@
     <record id="action_account_spread_form" model="ir.actions.act_window">
         <field name="name">Spread Costs/Revenues</field>
         <field name="res_model">account.spread</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_account_spread_tree" />
     </record>
     <menuitem
         id="menu_action_account_spread_form"
-        parent="account.menu_finance_entries_accounting_entries"
+        parent="account.menu_finance_entries_accounting_miscellaneous"
         action="action_account_spread_form"
         groups="account.group_account_user,account.group_account_manager"
     />

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_invoice_spread" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                position="before"
+            >
+                <field
+                    name="spread_check"
+                    widget="spread_line_widget"
+                    groups="account.group_account_user,account.group_account_manager"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="action_account_moves_all_spread" model="ir.actions.act_window">
+        <field
+            name="context"
+        >{'journal_type':'general', 'search_default_group_by_move': 0, 'search_default_posted':1, 'name_groupby':1}</field>
+        <field name="name">Journal Items</field>
+        <field name="res_model">account.move.line</field>
+        <field
+            name="domain"
+        >[('display_type', 'not in', ('line_section', 'line_note'))]</field>
+        <field name="view_id" ref="account.view_move_line_tree_grouped" />
+        <field name="view_mode">tree,pivot,graph,form,kanban</field>
+    </record>
+</odoo>
