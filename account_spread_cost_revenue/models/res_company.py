@@ -1,4 +1,4 @@
-# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
@@ -33,7 +33,7 @@ class ResCompany(models.Model):
         help="Enable this option if you want to post automatically the "
         "accounting moves of all the spreads.",
     )
-    auto_archive = fields.Boolean(
+    auto_archive_spread = fields.Boolean(
         "Auto-archive spread",
         help="Enable this option if you want the cron job to automatically "
         "archive the spreads when all lines are posted.",
