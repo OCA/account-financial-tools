@@ -1,4 +1,4 @@
-# Copyright 2018-2019 Onestein (<https://www.onestein.eu>)
+# Copyright 2018-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -14,13 +14,15 @@ class AccountSpreadTemplate(models.Model):
         [("sale", "Customer"), ("purchase", "Supplier")], default="sale", required=True
     )
     company_id = fields.Many2one(
-        "res.company",
-        default=lambda self: self.env.user.company_id,
-        string="Company",
-        required=True,
+        "res.company", default=lambda self: self.env.company, required=True
     )
     spread_journal_id = fields.Many2one(
-        "account.journal", string="Journal", required=True
+        "account.journal",
+        string="Journal",
+        compute="_compute_spread_journal",
+        readonly=False,
+        store=True,
+        required=True,
     )
     use_invoice_line_account = fields.Boolean(
         string="Invoice account as spread account",
@@ -28,12 +30,17 @@ class AccountSpreadTemplate(models.Model):
         "In this case, user need to select expense/revenue account too.",
     )
     spread_account_id = fields.Many2one(
-        "account.account", string="Spread Balance Sheet Account", required=False
+        "account.account",
+        string="Spread Balance Sheet Account",
+        compute="_compute_spread_account",
+        readonly=False,
+        store=True,
+        required=False,
     )
     exp_rev_account_id = fields.Many2one(
         "account.account",
         string="Expense/Revenue Account",
-        help="Optional account to overwrite the existing expense/revenue " "account",
+        help="Optional account to overwrite the existing expense/revenue account",
     )
     period_number = fields.Integer(
         string="Number of Repetitions", help="Define the number of spread lines"
@@ -57,15 +64,14 @@ class AccountSpreadTemplate(models.Model):
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        if "company_id" not in fields:
-            company_id = self.env.user.company_id.id
-        else:
-            company_id = res["company_id"]
-        default_journal = self.env["account.journal"].search(
-            [("type", "=", "general"), ("company_id", "=", company_id)], limit=1
-        )
-        if "spread_journal_id" not in res and default_journal:
-            res["spread_journal_id"] = default_journal.id
+        if not res.get("company_id"):
+            res["company_id"] = self.env.company.id
+        if "spread_journal_id" not in res:
+            default_journal = self.env["account.spread"].default_journal(
+                res["company_id"]
+            )
+            if default_journal:
+                res["spread_journal_id"] = default_journal.id
         return res
 
     @api.constrains("auto_spread", "auto_spread_ids")
@@ -80,19 +86,27 @@ class AccountSpreadTemplate(models.Model):
                         )
                     )
 
-    @api.onchange("spread_type", "company_id")
-    def onchange_spread_type(self):
-        company = self.company_id
-        if self.spread_type == "sale":
-            account = company.default_spread_revenue_account_id
-            journal = company.default_spread_revenue_journal_id
-        else:
-            account = company.default_spread_expense_account_id
-            journal = company.default_spread_expense_journal_id
-        if account:
-            self.spread_account_id = account
-        if journal:
-            self.spread_journal_id = journal
+    @api.depends("spread_type", "company_id")
+    def _compute_spread_journal(self):
+        for spread in self:
+            company = spread.company_id
+            if spread.spread_type == "sale":
+                journal = company.default_spread_revenue_journal_id
+            else:
+                journal = company.default_spread_expense_journal_id
+            if journal:
+                spread.spread_journal_id = journal
+
+    @api.depends("spread_type", "company_id")
+    def _compute_spread_account(self):
+        for spread in self:
+            company = spread.company_id
+            if spread.spread_type == "sale":
+                account = company.default_spread_revenue_account_id
+            else:
+                account = company.default_spread_expense_account_id
+            if account:
+                spread.spread_account_id = account
 
     @api.onchange("use_invoice_line_account")
     def _onchange_user_invoice_line_account(self):
@@ -144,7 +158,9 @@ class AccountSpreadTemplate(models.Model):
             product = self.env["product.product"].browse(res[0])
             account = self.env["account.account"].browse(res[1])
             analytic = self.env["account.analytic.account"].browse(res[2])
-            results.append("{} / {} / {}".format(product.name, account.name, analytic.name))
+            results.append(
+                "{} / {} / {}".format(product.name, account.name, analytic.name)
+            )
         if results:
             raise UserError(
                 _("Followings are duplicated combinations,\n\n%s" % "\n".join(results))
