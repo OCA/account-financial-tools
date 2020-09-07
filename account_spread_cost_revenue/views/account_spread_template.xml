@@ -31,7 +31,7 @@
                             <field name="use_invoice_line_account" />
                             <field
                                 name="spread_account_id"
-                                domain="[('company_id', '=', company_id), ('deprecated', '=', False)]"
+                                domain="[('company_id', '=', company_id), ('deprecated', '=', False), ('internal_type','!=','liquidity'), ('internal_group', '!=', 'off_balance')]"
                                 options="{'no_create': True}"
                                 attrs="{'required': [('use_invoice_line_account', '!=', True)], 'invisible': [('use_invoice_line_account', '=', True)]}"
                             />
@@ -88,7 +88,6 @@
     <record id="action_account_spread_template_form" model="ir.actions.act_window">
         <field name="name">Spread Templates</field>
         <field name="res_model">account.spread.template</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_account_spread_template_tree" />
     </record>
