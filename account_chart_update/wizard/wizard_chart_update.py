@@ -722,10 +722,10 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             result.append(
                 _("Differences in these fields: %s.") % ", ".join(different_fields)
             )
-        # Special for taxes
-        if template._name == "account.tax.template":
-            if not real.active:
-                result.append(_("Tax is disabled."))
+            # Special for taxes
+            if template._name == "account.tax.template":
+                if not real.active:
+                    result.append(_("Tax is disabled."))
         return "\n".join(result)
 
     @tools.ormcache("self", "template", "real_obj")
