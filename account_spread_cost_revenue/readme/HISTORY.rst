@@ -1,3 +1,8 @@
+13.0.1.0.0
+~~~~~~~~~~
+
+* [MIG] Port account_spread_cost_revenue to V13.
+
 12.0.2.0.0
 ~~~~~~~~~~
 
