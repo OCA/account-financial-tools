@@ -11,7 +11,7 @@ odoo.define("account_spread_cost_revenue.widget", function(require) {
         events: _.extend({}, AbstractField.prototype.events, {
             click: "_onClick",
         }),
-        description: "",
+        noLabel: true,
 
         /**
          * @override
