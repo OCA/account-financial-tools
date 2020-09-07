@@ -32,7 +32,7 @@
                         </group>
                         <group name="spreading_options_right">
                             <field name="force_move_auto_post" />
-                            <field name="auto_archive" />
+                            <field name="auto_archive_spread" />
                         </group>
                     </group>
                 </page>

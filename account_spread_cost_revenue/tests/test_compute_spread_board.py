@@ -1,4 +1,4 @@
-# Copyright 2017-2019 Onestein (<https://www.onestein.eu>)
+# Copyright 2017-2020 Onestein (<https://www.onestein.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import datetime
@@ -113,7 +113,6 @@ class TestComputeSpreadBoard(common.TransactionCase):
             line.create_move()
             self.assertTrue(line.move_id)
 
-        self.spread.journal_id.update_posted = True
         self.spread.action_recalculate_spread()
         spread_lines = self.spread.line_ids
         for line in spread_lines:
@@ -313,7 +312,6 @@ class TestComputeSpreadBoard(common.TransactionCase):
             self.assertTrue(isinstance(attrs, dict))
 
         # post and then unlink all created moves
-        self.spread.journal_id.write({"update_posted": True})
         for line in self.spread.line_ids:
             line.move_id.post()
         self.spread.line_ids.unlink_move()
@@ -354,9 +352,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
             with self.assertRaises(UserError):
                 line.create_move()
 
-        self.spread.write(
-            {"move_line_auto_post": True,}
-        )
+        self.spread.write({"move_line_auto_post": True})
         self.spread.action_recalculate_spread()
 
         for line in self.spread.line_ids:
@@ -379,9 +375,9 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.spread.compute_spread_board()
         spread_lines = self.spread.line_ids
         self.assertEqual(len(spread_lines), 3)
-        self.assertEqual(115.32, spread_lines[0].amount)
-        self.assertEqual(115.32, spread_lines[1].amount)
-        self.assertEqual(115.32, spread_lines[2].amount)
+        self.assertAlmostEquals(115.32, spread_lines[0].amount)
+        self.assertAlmostEquals(115.32, spread_lines[1].amount)
+        self.assertAlmostEquals(115.32, spread_lines[2].amount)
         self.assertEqual(datetime.date(2017, 1, 31), spread_lines[0].date)
         self.assertEqual(datetime.date(2017, 2, 28), spread_lines[1].date)
         self.assertEqual(datetime.date(2017, 3, 31), spread_lines[2].date)
@@ -427,7 +423,6 @@ class TestComputeSpreadBoard(common.TransactionCase):
             action = line.open_move()
             self.assertTrue(action)
 
-        self.spread.journal_id.update_posted = True
         self.spread.line_ids.unlink_move()
         for line in self.spread.line_ids:
             self.assertFalse(line.move_id)
@@ -471,7 +466,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
     def test_12_supplier_invoice_auto_post(self):
         # spread date set
         self.spread.write(
-            {"period_number": 8, "period_type": "month", "move_line_auto_post": True,}
+            {"period_number": 8, "period_type": "month", "move_line_auto_post": True}
         )
 
         self.spread.compute_spread_board()
@@ -496,9 +491,7 @@ class TestComputeSpreadBoard(common.TransactionCase):
         self.assertEqual(self.spread.unposted_amount, 0.0)
 
     def test_13_create_move_in_invoice_auto_post(self):
-        self.spread2.write(
-            {"period_number": 4, "move_line_auto_post": True,}
-        )
+        self.spread2.write({"period_number": 4, "move_line_auto_post": True})
         self.spread_account.reconcile = True
         self.assertTrue(self.spread_account.reconcile)
 
