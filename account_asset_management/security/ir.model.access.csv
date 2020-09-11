@@ -13,3 +13,4 @@ access_account_asset_recompute_trigger_manager,account.asset.recompute.trigger,m
 access_account_asset_group_invoice,account.asset.group,model_account_asset_group,account.group_account_invoice,1,0,0,0
 access_account_asset_group_user,account.asset.group,model_account_asset_group,account.group_account_user,1,0,0,0
 access_account_asset_group_manager,account.asset.group,model_account_asset_group,account.group_account_manager,1,1,1,1
+access_account_asset_report,account.asset.report,model_account_asset_report,account.group_account_user,1,0,0,0
