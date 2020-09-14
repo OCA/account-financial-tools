@@ -8,7 +8,7 @@
             <td class="text-right"><span t-esc="o.get_discount_for_invoices(inv)" t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"/></td>
         </xpath>
         <xpath expr="//span[@t-esc='o._get_invoice_payment_amount(inv)']" position="attributes">
-            <attribute name="t-esc">o._get_invoice_payment_amount(inv) - o.get_discount_for_invoices(inv)</attribute>
+            <attribute name="t-esc">o._get_invoice_payment_amount(inv) + o.get_discount_for_invoices(inv)</attribute>
         </xpath>
         <xpath expr="//tbody" position="after">
             <t t-set="invoices" t-value="o.reconciled_invoice_ids" />
@@ -23,7 +23,7 @@
                     <td class="text-right"><span t-esc="o.get_discount_for_invoices(invoices)" t-options="{'widget': 'monetary', 'display_currency': curr}"/></td>
                     <td class="text-right"><span t-esc="sum(invoices.mapped('amount_total'))" t-options="{'widget': 'monetary', 'display_currency': curr}"/></td>
 
-                    <td class="text-right"><span t-esc="total_paid - o.get_discount_for_invoices(invoices)" t-options="{'widget': 'monetary', 'display_currency': curr}" /></td>                    
+                    <td class="text-right"><span t-esc="total_paid + o.get_discount_for_invoices(invoices)" t-options="{'widget': 'monetary', 'display_currency': curr}" /></td>
                     <td class="text-right"><span t-esc="sum(invoices.mapped('amount_residual'))" t-options="{'widget': 'monetary', 'display_currency': curr}"/></td>
                 </tr>
             </tfooter>
