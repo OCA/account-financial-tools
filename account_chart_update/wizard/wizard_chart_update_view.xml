@@ -48,6 +48,14 @@
                         <group>
                             <group string="Update records?">
                                 <field name="update_tax" />
+                                <field
+                                    name="update_tax_repartition_line_account"
+                                    attrs="{'invisible':[('update_tax', '=', False)]}"
+                                />
+                                <field
+                                    name="update_tax_repartition_line_tags"
+                                    attrs="{'invisible':[('update_tax', '=', False)]}"
+                                />
                                 <field name="update_account" />
                                 <field name="update_fiscal_position" />
                             </group>
