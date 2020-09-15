@@ -6,6 +6,7 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # Copyright 2016 Jacques-Etienne Baudoux <je@bcim.be>
 # Copyright 2018 Tecnativa - Pedro M. Baeza
+# Copyright 2020 Noviat - Luc De Meyer
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -65,6 +66,16 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         string="Update taxes",
         default=True,
         help="Existing taxes are updated. Taxes are searched by name.",
+    )
+    update_tax_repartition_line_account = fields.Boolean(
+        string="Update Tax Accounts",
+        default=True,
+        help="Update account_id field on existing Tax repartition lines",
+    )
+    update_tax_repartition_line_tags = fields.Boolean(
+        string="Update Tax Tags",
+        default=True,
+        help="Update tag_ids field on existing Tax repartition lines",
     )
     update_account = fields.Boolean(
         string="Update accounts",
@@ -354,7 +365,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             _logger.addHandler(handler)
             # Create or update the records.
             if self.update_tax:
-                self._update_taxes()
+                todo_dict = self._update_taxes()
             perform_rest = True
             if self.update_account:
                 self._update_accounts()
@@ -367,7 +378,7 @@ class WizardUpdateChartsAccounts(models.TransientModel):
             # queried before account creation)
             self.find_account_by_templates.clear_cache(self)
             if self.update_tax and perform_rest:
-                self._update_taxes_pending_for_accounts()
+                self._update_taxes_pending_for_accounts(todo_dict)
             if self.update_fiscal_position and perform_rest:
                 self._update_fiscal_positions()
             # Store new chart in the company
@@ -429,23 +440,50 @@ class WizardUpdateChartsAccounts(models.TransientModel):
 
     @tools.ormcache("templates", "current_repartition")
     def find_repartition_by_templates(
-        self, templates, current_repartition, inverse_name
+        self, templates, current_repartition, tax, inverse_name
     ):
+        upd_acc = self.update_tax_repartition_line_account
+        upd_tags = self.update_tax_repartition_line_tags
         result = []
-        for tpl in templates:
-            tax_id = self.find_tax_by_templates(tpl[inverse_name])
+        existing_ids = []
+        for i, tpl in enumerate(templates):
             factor_percent = tpl.factor_percent
             repartition_type = tpl.repartition_type
             account_id = self.find_account_by_templates(tpl.account_id)
-            rep_obj = self.env["account.tax.repartition.line"]
-            existing = rep_obj.search(
-                [
-                    (inverse_name, "=", tax_id),
-                    ("factor_percent", "=", factor_percent),
-                    ("repartition_type", "=", repartition_type),
-                    ("account_id", "=", account_id),
-                ]
+            tags = self.env["account.account.tag"]
+            tags += tpl.plus_report_line_ids.mapped("tag_ids").filtered(
+                lambda x: not x.tax_negate
             )
+            tags += tpl.minus_report_line_ids.mapped("tag_ids").filtered(
+                lambda x: x.tax_negate
+            )
+            tags += tpl.tag_ids
+            existing = self.env["account.tax.repartition.line"]
+            existing_candidates = current_repartition.filtered(
+                lambda r: r.factor_percent == factor_percent
+                and r.repartition_type == repartition_type
+            )
+            if len(existing_candidates) == 1:
+                existing = existing_candidates
+            elif len(existing_candidates) > 1:
+                # We may have this situation in case of e.g. 50%/50% on tax.
+                # In this case we assume that the repartition line order
+                # is the same between templates and actual tax objects
+                existing_candidate = current_repartition[i]
+                if existing_candidate in existing_candidates:
+                    existing = existing_candidate
+
+            if existing:
+                existing_ids.append(existing.id)
+                upd_vals = {}
+                if upd_acc and existing.account_id.id != account_id:
+                    upd_vals["account_id"] = account_id
+                if upd_tags:
+                    if existing.tag_ids != tags:
+                        upd_vals["tag_ids"] = [(6, 0, tags.ids)]
+                if upd_vals:
+                    # update record
+                    result.append((1, existing.id, upd_vals))
             if not existing:
                 # create a new mapping
                 result.append(
@@ -453,19 +491,18 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                         0,
                         0,
                         {
-                            inverse_name: tax_id,
+                            inverse_name: tax.id,
                             "factor_percent": factor_percent,
                             "repartition_type": repartition_type,
                             "account_id": account_id,
-                            "tag_ids": [(6, 0, tpl.tag_ids.ids)],
+                            "tag_ids": [(6, 0, tags.ids)],
                         },
                     )
                 )
-            else:
-                current_repartition -= existing
+
         # Mark to be removed the lines not found
-        if current_repartition:
-            result += [(2, x.id) for x in current_repartition]
+        remove_ids = [x for x in current_repartition.ids if x not in existing_ids]
+        result += [(2, x) for x in remove_ids]
         return result
 
     @api.model
@@ -676,11 +713,15 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     )
                 elif relation == "account.tax.repartition.line.template":
                     expected = self.find_repartition_by_templates(
-                        template[key], real[key], field.inverse_name
+                        template[key], real[key], real, field.inverse_name
                     )
             # Register detected differences
             if expected is not None:
-                if expected != [] and expected != real[key]:
+                if expected != [] and (
+                    key
+                    in ["invoice_repartition_line_ids", "refund_repartition_line_ids"]
+                    or expected != real[key]
+                ):
                     result[key] = expected
             else:
                 template_value = template[key]
@@ -899,9 +940,14 @@ class WizardUpdateChartsAccounts(models.TransientModel):
         """Process taxes to create/update/deactivate."""
         # First create taxes in batch
         taxes_to_create = self.tax_ids.filtered(lambda x: x.type == "new")
-        taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
+        todo_dict = taxes_to_create.mapped("tax_id")._generate_tax(self.company_id)
         for wiz_tax in taxes_to_create:
-            _logger.info(_("Created tax %s."), "'%s'" % wiz_tax.tax_id.name)
+            new_tax = self.env["account.tax"].browse(
+                todo_dict["tax_template_to_tax"][wiz_tax.tax_id.id]
+            )
+            _logger.info(
+                _("Created tax %s."), "'{}' (ID:{})".format(new_tax.name, new_tax.id)
+            )
         for wiz_tax in self.tax_ids.filtered(lambda x: x.type != "new"):
             template, tax = wiz_tax.tax_id, wiz_tax.update_tax_id
             # Deactivate tax
@@ -910,20 +956,26 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 _logger.info(_("Deactivated tax %s."), "'%s'" % tax.name)
                 continue
             else:
+                updated = False
                 for key, value in self.diff_fields(template, tax).items():
                     # We defer update because account might not be created yet
-                    if key in {
+                    if key in [
+                        "cash_basis_transition_account_id",
+                        "cash_basis_base_account_id",
                         "invoice_repartition_line_ids",
                         "refund_repartition_line_ids",
-                    }:
+                    ]:
                         continue
                     tax[key] = value
+                    updated = True
+                if updated:
                     _logger.info(_("Updated tax %s."), "'%s'" % template.name)
                 if self.recreate_xml_ids and self.missing_xml_id(template, tax):
                     self.recreate_xml_id(template, tax)
                     _logger.info(
                         _("Updated tax %s. (Recreated XML-IDs)"), "'%s'" % template.name
                     )
+        return todo_dict
 
     def _update_accounts(self):
         """Process accounts to create/update."""
@@ -993,29 +1045,69 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                     if not self.continue_on_errors:
                         break
 
-    def _update_taxes_pending_for_accounts(self):
+    def _update_taxes_pending_for_accounts(self, todo_dict):
         """Updates the taxes (created or updated on previous steps) to set
         the references to the accounts (the taxes where created/updated first,
         when the referenced accounts are still not available).
         """
-        for wiz_tax in self.tax_ids:
-            if wiz_tax.type == "deleted" or not wiz_tax.update_tax_id:
-                continue
+        done = self.env["account.tax"]
+        for k, v in todo_dict["account_dict"]["account.tax"].items():
+            vals = {}
+            for fld in [
+                "cash_basis_transition_account_id",
+                "cash_basis_base_account_id",
+            ]:
+                if v[fld]:
+                    acc_id = self.find_account_by_templates(
+                        self.env["account.account.template"].browse(v[fld])
+                    )
+                    if acc_id:
+                        vals[fld] = acc_id
+                    else:
+                        raise exceptions.UserError(
+                            _("No real account found for template account with ID %s")
+                            % v[fld]
+                        )
+            if vals:
+                tax = self.env["account.tax"].browse(k)
+                tax.write(vals)
+                done |= tax
+
+        for k, v in todo_dict["account_dict"]["account.tax.repartition.line"].items():
+            if v["account_id"]:
+                rep_line = self.env["account.tax.repartition.line"].browse(k)
+                acc_id = self.find_account_by_templates(
+                    self.env["account.account.template"].browse(v["account_id"])
+                )
+                if acc_id:
+                    rep_line.write({"account_id": acc_id})
+                    done |= rep_line.invoice_tax_id or rep_line.refund_tax_id
+                else:
+                    raise exceptions.UserError(
+                        _("No real account found for template account with ID %s")
+                        % v["account_id"]
+                    )
+
+        for wiz_tax in self.tax_ids.filtered(lambda r: r.type == "updated"):
             template = wiz_tax.tax_id
             tax = wiz_tax.update_tax_id
-            done = False
             vals = {}
             for key, value in self.diff_fields(template, tax).items():
                 if key in {
+                    "cash_basis_transition_account_id",
+                    "cash_basis_base_account_id",
                     "invoice_repartition_line_ids",
                     "refund_repartition_line_ids",
                 }:
                     vals[key] = value
-                    done = True
             if vals:
                 tax.write(vals)
-            if done:
-                _logger.info(_("Post-updated tax %s."), "'%s'" % tax.name)
+                done |= tax
+
+        if done:
+            _logger.info(
+                _("Post-updated account fields for taxes with IDs %s."), "%s" % done.ids
+            )
 
     def _prepare_fp_vals(self, fp_template):
         # Tax mappings
