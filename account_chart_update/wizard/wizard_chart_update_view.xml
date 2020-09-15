@@ -92,6 +92,16 @@
                                 name="page_fields_taxes"
                                 attrs="{'invisible': [('update_tax', '=', False)]}"
                             >
+                                <group>
+                                    <field
+                                        name="update_tax_repartition_line_account"
+                                        attrs="{'invisible':[('update_tax', '=', False)]}"
+                                    />
+                                    <field
+                                        name="update_tax_repartition_line_tags"
+                                        attrs="{'invisible':[('update_tax', '=', False)]}"
+                                    />
+                                </group>
                                 <field
                                     name="tax_field_ids"
                                     widget="many2many_checkboxes"
