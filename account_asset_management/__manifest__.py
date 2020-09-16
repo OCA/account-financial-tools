@@ -16,6 +16,7 @@
     'data': [
         'security/account_asset_security.xml',
         'security/ir.model.access.csv',
+        'report/account_asset_report_views.xml',
         'wizard/account_asset_compute.xml',
         'wizard/account_asset_remove.xml',
         'views/account_account.xml',
