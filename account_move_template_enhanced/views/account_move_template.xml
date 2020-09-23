@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_move_template_line_tree" model="ir.ui.view">
+        <field name="name">account.move.template.line.tree</field>
+        <field name="model">account.move.template.line</field>
+        <field
+            name="inherit_id"
+            ref="account_move_template.account_move_template_line_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="account_id" position="after">
+                <field
+                    name="opt_account_id"
+                    domain="[('company_id', '=', company_id)]"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="account_move_template_line_form" model="ir.ui.view">
+        <field name="name">account.move.template.line.form</field>
+        <field name="model">account.move.template.line</field>
+        <field
+            name="inherit_id"
+            ref="account_move_template.account_move_template_line_form"
+        />
+        <field name="arch" type="xml">
+            <field name="account_id" position="after">
+                <field
+                    name="opt_account_id"
+                    domain="[('company_id', '=', company_id)]"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

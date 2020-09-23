@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_move_template_run_form" model="ir.ui.view">
+        <field name="name">account.move.template.run.form</field>
+        <field name="model">account.move.template.run</field>
+        <field
+            name="inherit_id"
+            ref="account_move_template.account_move_template_run_form"
+        />
+        <field name="arch" type="xml">
+            <field name="template_id" position="after">
+                <field
+                    name="overwrite"
+                    widget="ace"
+                    options="{'mode': 'python'}"
+                    attrs="{'invisible': [('state', '=', 'set_lines')]}"
+                    placeholder="Add an internal note here..."
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
