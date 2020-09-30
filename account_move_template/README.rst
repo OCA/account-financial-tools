@@ -23,7 +23,7 @@ Account Move Template
     :target: https://runbot.odoo-community.org/runbot/92/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 The user can configure journal entries templates, useful for recurring entries.
 The amount of each template line can be computed (through python code)
@@ -76,7 +76,7 @@ Authors
 * Agile Business Group
 * Aurium Technologies
 * Vauxoo
-* Eficent
+* ForgeFlow
 * Akretion
 
 Contributors
@@ -98,7 +98,7 @@ Module Contributors
 * Alex Comba <alex.comba@agilebg.com> (Port to V8)
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
 * Raf Ven <raf.ven@dynapps.be>  (port to v11)
-* Jordi Ballester <jordi.ballester@eficent.com> (EFICENT)
+* Jordi Ballester <jordi.ballester@forgeflow.com> (ForgeFlow)
 * `Sygel <https://www.sygel.es>`_:
 
   * Harald Panten <harald.panten@sygel.es>
