@@ -8,7 +8,7 @@
     "version": "13.0.1.0.0",
     "category": "Accounting",
     "summary": "Templates for recurring Journal Entries",
-    "author": "Agile Business Group, Aurium Technologies, Vauxoo, Eficent, "
+    "author": "Agile Business Group, Aurium Technologies, Vauxoo, ForgeFlow, "
     "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "license": "AGPL-3",
