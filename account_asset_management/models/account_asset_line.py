@@ -231,6 +231,7 @@ class AccountAssetLine(models.Model):
             "journal_id": asset.profile_id.journal_id.id,
             "partner_id": asset.partner_id.id,
             "analytic_account_id": analytic_id,
+            "analytic_tag_ids": [(6, 0, asset.analytic_tag_ids.ids)],
             "date": depreciation_date,
             "asset_id": asset.id,
         }

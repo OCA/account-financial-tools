@@ -262,6 +262,9 @@ class AccountAsset(models.Model):
         readonly=False,
         store=True,
     )
+    analytic_tag_ids = fields.Many2many(
+        comodel_name="account.analytic.tag", string="Analytic Tags",
+    )
 
     @api.model
     def _default_company_id(self):

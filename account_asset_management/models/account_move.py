@@ -63,6 +63,7 @@ class AccountMove(models.Model):
         for move in self:
             for aml in move.line_ids.filtered("asset_profile_id"):
                 depreciation_base = aml.debit or -aml.credit
+                analytic_account = aml.analytic_account_id
                 vals = {
                     "name": aml.name,
                     "code": move.name,
@@ -70,7 +71,7 @@ class AccountMove(models.Model):
                     "purchase_value": depreciation_base,
                     "partner_id": aml.partner_id.id,
                     "date_start": move.date,
-                    "account_analytic_id": aml.analytic_account_id.id,
+                    "analytic_tag_ids": [(6, 0, aml.analytic_tag_ids.ids)],
                 }
                 if self.env.context.get("company_id"):
                     vals["company_id"] = self.env.context["company_id"]
@@ -79,6 +80,10 @@ class AccountMove(models.Model):
                     .with_context(create_asset_from_move_line=True, move_id=move.id)
                     .create(vals)
                 )
+
+                if analytic_account and not asset.account_analytic_id:
+                    asset.account_analytic_id = analytic_account
+
                 aml.with_context(allow_asset=True).asset_id = asset.id
             refs = [
                 "<a href=# data-oe-model=account.asset data-oe-id=%s>%s</a>"
@@ -115,7 +120,7 @@ class AccountMoveLine(models.Model):
         comodel_name="account.asset.profile", string="Asset Profile"
     )
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", ondelete="restrict"
+        comodel_name="account.asset", string="Asset", ondelete="restrict", copy=False,
     )
 
     @api.onchange("account_id")
