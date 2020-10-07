@@ -2,14 +2,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import date
-from odoo import api, models, _
+
+from odoo import _, api, models
 
 from ..exceptions import JournalLockDateError
 
 
 class AccountMove(models.Model):
 
-    _inherit = 'account.move'
+    _inherit = "account.move"
 
     @api.model
     def create(self, values):
@@ -29,7 +30,7 @@ class AccountMove(models.Model):
         if self.env.context.get("bypass_journal_lock_date"):
             return res
         for move in self:
-            if self.user_has_groups('account.group_account_manager'):
+            if self.user_has_groups("account.group_account_manager"):
                 lock_date = move.journal_id.fiscalyear_lock_date or date.min
             else:
                 lock_date = max(
@@ -37,7 +38,7 @@ class AccountMove(models.Model):
                     move.journal_id.fiscalyear_lock_date or date.min,
                 )
             if move.date <= lock_date:
-                if self.user_has_groups('account.group_account_manager'):
+                if self.user_has_groups("account.group_account_manager"):
                     message = _(
                         "You cannot add/modify entries for the journal '%s' "
                         "prior to and inclusive of the lock date %s"
