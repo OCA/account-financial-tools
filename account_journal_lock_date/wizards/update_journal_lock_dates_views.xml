@@ -30,12 +30,10 @@
     <act_window
         id="update_journal_lock_dates_wizard_action"
         name="Update journals lock dates"
-        src_model="account.journal"
+        binding_model="account.journal"
         res_model="update.journal.lock.dates.wizard"
-        view_type="form"
         view_mode="form"
-        key2="client_action_multi"
+        binding_views="form"
         target="new"
-        multi="True"
     />
 </odoo>
