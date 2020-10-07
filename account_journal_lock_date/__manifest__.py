@@ -2,20 +2,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account Journal Lock Date',
-    'summary': """
+    "name": "Account Journal Lock Date",
+    "summary": """
         Lock each journal independently""",
-    'version': '12.0.2.0.0',
-    'license': 'AGPL-3',
-    'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/account-financial-tools',
-    'depends': [
-        'account',
+    "version": "12.0.2.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/account-financial-tools",
+    "depends": ["account",],
+    "data": [
+        "views/account_journal.xml",
+        "wizards/update_journal_lock_dates_views.xml",
     ],
-    'data': [
-        'views/account_journal.xml',
-        'wizards/update_journal_lock_dates_views.xml',
-    ],
-    'demo': [
-    ],
+    "demo": [],
 }
