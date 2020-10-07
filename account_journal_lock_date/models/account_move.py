@@ -3,7 +3,8 @@
 
 from datetime import date
 
-from odoo import _, api, models
+from odoo import _, models
+from odoo.tools.misc import format_date
 
 from ..exceptions import JournalLockDateError
 
@@ -12,21 +13,13 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
-    @api.model
-    def create(self, values):
-        move = super().create(values)
-        move._check_lock_date()
-        return move
-
-    @api.multi
     def write(self, values):
-        self._check_lock_date()
         res = super().write(values)
-        self._check_lock_date()
+        self._check_fiscalyear_lock_date()
         return res
 
-    def _check_lock_date(self):
-        res = super()._check_lock_date()
+    def _check_fiscalyear_lock_date(self):
+        res = super()._check_fiscalyear_lock_date()
         if self.env.context.get("bypass_journal_lock_date"):
             return res
         for move in self:
@@ -38,6 +31,7 @@ class AccountMove(models.Model):
                     move.journal_id.fiscalyear_lock_date or date.min,
                 )
             if move.date <= lock_date:
+                lock_date = format_date(self.env, lock_date)
                 if self.user_has_groups("account.group_account_manager"):
                     message = _(
                         "You cannot add/modify entries for the journal '%s' "
