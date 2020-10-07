@@ -31,11 +31,9 @@ class TestJournalLockDate(common.TransactionCase):
         self.journal = self.browse_ref("account.bank_journal")
 
     def test_journal_lock_date(self):
+        self.env.user.write({"groups_id": [(3, self.ref("base.group_system"))]})
         self.env.user.write(
-            {"groups_id": [(3, self.ref("base.group_system"))],}
-        )
-        self.env.user.write(
-            {"groups_id": [(3, self.ref("account.group_account_manager"))],}
+            {"groups_id": [(3, self.ref("account.group_account_manager"))]}
         )
         self.assertFalse(self.env.user.has_group("account.group_account_manager"))
 
@@ -138,7 +136,7 @@ class TestJournalLockDate(common.TransactionCase):
     def test_journal_lock_date_adviser(self):
         """ The journal lock date is ignored for Advisers """
         self.env.user.write(
-            {"groups_id": [(4, self.ref("account.group_account_manager"))],}
+            {"groups_id": [(4, self.ref("account.group_account_manager"))]}
         )
         self.assertTrue(self.env.user.has_group("account.group_account_manager"))
         # create a move and post it
