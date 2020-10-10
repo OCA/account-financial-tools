@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 13:25+0000\n"
-"PO-Revision-Date: 2015-06-03 15:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/nl/)\n"
+"PO-Revision-Date: 2021-04-18 10:46+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Relatie"
 
 #. module: account_fiscal_position_vat_check
 #: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
@@ -32,7 +33,7 @@ msgstr "Factuur"
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:19
 #, python-format
 msgid "Missing VAT number:"
-msgstr ""
+msgstr "Ontbrekend BTW nummer:"
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
@@ -43,6 +44,10 @@ msgid ""
 "Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
 "of this Customer in Odoo and try to validate again."
 msgstr ""
+"U probeert een verkoop factuur/credit factuur te valideren met de volgende "
+"fiscale positie '%s' waarvoor het is verplicht dat er een BTW nummer is "
+"ingevuld. Maar voor de klant '%s' is geen BTW nummer bekend. Voeg het BTW "
+"nummer van deze klant toe en valideer opnieuw."
 
 #. module: account_fiscal_position_vat_check
 #: code:addons/account_fiscal_position_vat_check/models/partner.py:20
@@ -51,6 +56,8 @@ msgid ""
 "You have set the fiscal position '%s' that require the customer to have a "
 "VAT number, but the VAT number is missing."
 msgstr ""
+"U heeft de volgende fiscale positie ingesteld '%s' waarvoor het vereist is "
+"dat er een BTW nummer is ingevuld, maar het BTW nummer ontbreekt."
 
 #~ msgid "Partner"
 #~ msgstr "Relatie"
