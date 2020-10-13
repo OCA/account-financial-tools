@@ -441,6 +441,9 @@ class TestAssetManagement(SavepointCase):
                                81.46, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
                                4918.54, places=2)
+        # Onchange
+        asset._onchange_posting_regime()
+        self.assertIn(asset.posting_regime,('residual_value','gain_loss_on_sale'))
 
     def test_09_asset_from_invoice(self):
         all_asset = self.env['account.asset'].search([])
@@ -572,6 +575,7 @@ class TestAssetManagement(SavepointCase):
             places=2)
 
     def test_14_not_use_leap_year(self):
+
         # When you run a depreciation with method = 'year' and no not use
         # lap years you divide 1000 / 5 years = 2000, then divided by 12 months
         # to get 166.67 per month, equal for all periods.
