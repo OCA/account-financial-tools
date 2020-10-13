@@ -56,6 +56,11 @@ class AccountAssetRemove(models.TransientModel):
              "the 'Plus-Value Account' or 'Min-Value Account' ")
     note = fields.Text('Notes')
 
+    @api.onchange('posting_regime')
+    def _onchange_posting_regime(self):
+        if self.posting_regime == 'residual_value':
+            self.sale_value = 0
+
     @api.constrains('sale_value')
     def _check_sale_value(self):
         if self.sale_value < 0:
