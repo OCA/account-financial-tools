@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-
     <record id="account_asset_profile_view_form" model="ir.ui.view">
       <field name="name">account.asset.profile.form</field>
       <field name="model">account.asset.profile</field>
@@ -52,7 +50,7 @@
       <field name="name">account.asset.profile.tree</field>
       <field name="model">account.asset.profile</field>
       <field name="arch" type="xml">
-        <tree string="Asset profile">
+        <tree>
           <field name="name"/>
           <field name="journal_id"/>
           <field name="method"/>
@@ -78,6 +76,4 @@
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
     </record>
-
-  </data>
 </odoo>

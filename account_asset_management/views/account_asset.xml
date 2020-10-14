@@ -86,7 +86,7 @@
                         attrs="{'invisible': [('state', 'in', ['close', 'removed'])]}"/>
               </div>
               <field name="depreciation_line_ids" mode="tree" options="{'reload_on_button': true}">
-                <tree string="Asset Lines" decoration-info="(move_check == False) and (init_entry == False)" create="false">
+                <tree decoration-info="(move_check == False) and (init_entry == False)" create="false">
                   <field name="type"/>
                   <field name="line_date"/>
                   <field name="line_days" sum="Total Days"/>
@@ -127,7 +127,7 @@
             </page>
             <page string="History">
               <field name="account_move_line_ids" readonly="1">
-                <tree string="Journal Items">
+                <tree>
                   <field name="move_id"/>
                   <field name="journal_id"/>
                   <field name="date"/>
@@ -169,7 +169,7 @@
     <field name="name">account.asset.tree</field>
     <field name="model">account.asset</field>
     <field name="arch" type="xml">
-      <tree string="Assets">
+      <tree>
         <field name="name"/>
         <field name="code"/>
         <field name="depreciation_base"/>
