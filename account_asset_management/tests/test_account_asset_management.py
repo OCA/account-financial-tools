@@ -434,6 +434,9 @@ class TestAssetManagement(SavepointCase):
             'account_plus_value_id': self.ref('account.a_sale'),
             'account_min_value_id': self.ref('account.a_expense'),
         })
+        # Onchange
+        wiz._onchange_posting_regime()
+        self.assertIn(wiz.posting_regime,('residual_value','gain_loss_on_sale'))
         wiz.remove()
         asset.refresh()
         self.assertEqual(len(asset.depreciation_line_ids), 3)
@@ -441,9 +444,7 @@ class TestAssetManagement(SavepointCase):
                                81.46, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount,
                                4918.54, places=2)
-        # Onchange
-        asset._onchange_posting_regime()
-        self.assertIn(asset.posting_regime,('residual_value','gain_loss_on_sale'))
+        
 
     def test_09_asset_from_invoice(self):
         all_asset = self.env['account.asset'].search([])
