@@ -695,13 +695,13 @@ msgstr "Cuentas actualizadas"
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:970
 #, fuzzy, python-format
 msgid "Updated fiscal position %s."
-msgstr "Posiciones fiscales actualizadas"
+msgstr "Posiciones fiscales actualizadas %s."
 
 #. module: account_chart_update
 #: code:addons/account_chart_update/wizard/wizard_chart_update.py:977
 #, fuzzy, python-format
 msgid "Updated fiscal position %s. (Recreated XML-ID)"
-msgstr "Posiciones fiscales actualizadas"
+msgstr "Posiciones fiscales actualizadas %s."
 
 #. module: account_chart_update
 #: model:ir.model.fields,field_description:account_chart_update.field_wizard_update_charts_accounts__updated_fps
