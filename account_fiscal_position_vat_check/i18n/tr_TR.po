@@ -1,0 +1,54 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_fiscal_position_vat_check
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-22 03:41+0000\n"
+"PO-Revision-Date: 2017-12-22 03:41+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Turkish (Turkey) (https://www.transifex.com/oca/teams/23907/"
+"tr_TR/)\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/partner.py:19
+#, python-format
+msgid "Missing VAT number:"
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
+#, python-format
+msgid ""
+"You are trying to validate a customer invoice/refund with the fiscal "
+"position '%s' that require the customer to have a VAT number. But the "
+"Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
+"of this Customer in Odoo and try to validate again."
+msgstr ""
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/partner.py:20
+#, python-format
+msgid ""
+"You have set the fiscal position '%s' that require the customer to have a "
+"VAT number, but the VAT number is missing."
+msgstr ""

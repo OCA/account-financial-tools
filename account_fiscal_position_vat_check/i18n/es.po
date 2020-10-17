@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_fiscal_position_vat_check
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# José Antonio Cuello <jcuello@artextrading.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-01 18:55+0000\n"
+"PO-Revision-Date: 2019-07-22 20:43+0000\n"
+"Last-Translator: Josep M <jmyepes@mac.com>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.7.1\n"
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: account_fiscal_position_vat_check
+#: model:ir.model,name:account_fiscal_position_vat_check.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/partner.py:19
+#, python-format
+msgid "Missing VAT number:"
+msgstr "Falta el NIF:"
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/account_invoice.py:21
+#, python-format
+msgid ""
+"You are trying to validate a customer invoice/refund with the fiscal "
+"position '%s' that require the customer to have a VAT number. But the "
+"Customer '%s' doesn't have a VAT number in Odoo. Please add the VAT number "
+"of this Customer in Odoo and try to validate again."
+msgstr ""
+"Está tratando de validar una factura/factura rectificativa con la posición "
+"fiscal '%s' que requiere que el cliente tenga un NIF. Pero el cliente '%s' "
+"no tiene un NIF en sus datos. Añada por favor el NIF de este cliente e "
+"intente validarla otra vez."
+
+#. module: account_fiscal_position_vat_check
+#: code:addons/account_fiscal_position_vat_check/models/partner.py:20
+#, python-format
+msgid ""
+"You have set the fiscal position '%s' that require the customer to have a "
+"VAT number, but the VAT number is missing."
+msgstr ""
+"Ha establecido la posición fiscal '%s' que requiere que el cliente tenga un "
+"NIF, pero el NIF no está establecido."
+
+#~ msgid "Partner"
+#~ msgstr "Empresa"
