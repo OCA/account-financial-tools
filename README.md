@@ -15,7 +15,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
 
 [//]: # (end addons)
 
