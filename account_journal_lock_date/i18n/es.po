@@ -70,12 +70,14 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__fiscalyear_lock_date
 msgid "Lock Date"
 msgstr "Fecha de bloqueo"
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,field_description:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_account_journal__period_lock_date
 #: model:ir.model.fields,field_description:account_journal_lock_date.field_update_journal_lock_dates_wizard__period_lock_date
 msgid "Lock Date for Non-Advisers"
@@ -87,6 +89,7 @@ msgid "Mass Update Journal Lock Dates Wizard"
 msgstr "Asistente para la actualización masiva de fechas de bloqueo"
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__fiscalyear_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__fiscalyear_lock_date
 msgid ""
 "No users, including Advisers, can edit accounts prior to and inclusive of "
@@ -98,6 +101,7 @@ msgstr ""
 "fiscal para este Diario."
 
 #. module: account_journal_lock_date
+#: model:ir.model.fields,help:account_journal_lock_date.field_account_bank_statement_import_journal_creation__period_lock_date
 #: model:ir.model.fields,help:account_journal_lock_date.field_account_journal__period_lock_date
 msgid ""
 "Only users with the 'Adviser' role can edit accounts prior to and inclusive "
@@ -115,7 +119,9 @@ msgstr "Actualizar"
 
 #. module: account_journal_lock_date
 #: model:ir.actions.act_window,name:account_journal_lock_date.update_journal_lock_dates_wizard_action
-msgid "Update journal lock dates"
+#, fuzzy
+#| msgid "Update journal lock dates"
+msgid "Update journals lock dates"
 msgstr "Actualizar fechas de bloqueo"
 
 #. module: account_journal_lock_date
@@ -125,7 +131,7 @@ msgid "You are not allowed to execute this action."
 msgstr "No está autorizado a realizar esta acción."
 
 #. module: account_journal_lock_date
-#: code:addons/account_journal_lock_date/models/account_move.py:39
+#: code:addons/account_journal_lock_date/models/account_move.py:41
 #, python-format
 msgid ""
 "You cannot add/modify entries for the journal '%s' prior to and inclusive of "
@@ -135,7 +141,7 @@ msgstr ""
 "hasta la fecha de bloqueo %s"
 
 #. module: account_journal_lock_date
-#: code:addons/account_journal_lock_date/models/account_move.py:44
+#: code:addons/account_journal_lock_date/models/account_move.py:46
 #, python-format
 msgid ""
 "You cannot add/modify entries for the journal '%s' prior to and inclusive of "
