@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2020 CorporateHub (https://corporatehub.eu)
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">account.move.line.filter</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <field name="tax_ids" position="after">
+                <field name="taxes_applied"/>
+            </field>
+            <filter name="groupby_date" position="after">
+                <filter string="Taxes Applied" name="groupby_taxes_applied" context="{'group_by':'taxes_applied'}"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>
