@@ -8,7 +8,7 @@
     />
     <menuitem
         id="menu_actions_account_fiscal_year"
-        action="account.actions_account_fiscal_year"
+        action="actions_account_fiscal_year"
         parent="menu_date_range_accounting"
     />
     <menuitem
