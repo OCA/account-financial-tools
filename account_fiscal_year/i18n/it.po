@@ -4,17 +4,41 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2018-12-24 16:58+0000\n"
-"Last-Translator: Sergio Zanchetta <primes2h@gmail.com>\n"
-"Language-Team: none\n"
-"Language: it\n"
+"POT-Creation-Date: 2020-11-06 09:43+0000\n"
+"PO-Revision-Date: 2020-11-06 09:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"Plural-Forms: \n"
+
+#. module: account_fiscal_year
+#: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
+msgid "Click here to create a new fiscal year."
+msgstr "Clicca qui per creare un nuovo anno fiscale."
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_res_company
+msgid "Companies"
+msgstr "Aziende"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_type_action_accounting
@@ -32,12 +56,34 @@ msgid "Date ranges"
 msgstr "Intervalli data"
 
 #. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "End Date"
+msgstr "Data fine"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "Ending Date, included in the fiscal year."
+msgstr "Data di chiusura, inclusa nell'anno fiscale."
+
+#. module: account_fiscal_year
 #: model:date.range.type,name:account_fiscal_year.fiscalyear
-#, fuzzy
+#: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
 msgid "Fiscal Year"
 msgstr "Anni fiscali"
 
 #. module: account_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_fiscal_year.account_fiscal_year_form_view
+msgid "Fiscal Year 2020"
+msgstr "Anno fiscale 2020"
+
+#. module: account_fiscal_year
+#: model:ir.actions.act_window,name:account_fiscal_year.actions_account_fiscal_year
 #: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
 msgid "Fiscal Years"
 msgstr "Anni fiscali"
@@ -46,3 +92,56 @@ msgstr "Anni fiscali"
 #: model:ir.ui.menu,name:account_fiscal_year.menu_date_range_generator_action
 msgid "Generate Date Ranges"
 msgstr "Generazione intervalli data"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
+msgid "ID"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date"
+msgstr "Data inizio"
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date, included in the fiscal year."
+msgstr "Data inizio, inclusa nell'anno fiscale."
+
+#. module: account_fiscal_year
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid "The ending date must not be prior to the starting date."
+msgstr "La data di fine non deve essere antecedente a quella di inizio."
+
+#. module: account_fiscal_year
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid ""
+"This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
+"Please correct the start and/or end dates of your fiscal years."
+msgstr ""
+"Questo anno fiscale '{fy}' si sovrappone a '{overlapping_fy}'.\n"
+"Correggere le relative date di inizio e/o di fine."
