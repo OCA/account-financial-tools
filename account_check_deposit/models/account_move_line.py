@@ -13,5 +13,7 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     check_deposit_id = fields.Many2one(
-        comodel_name="account.check.deposit", string="Check Deposit", copy=False,
+        comodel_name="account.check.deposit",
+        string="Check Deposit",
+        copy=False,
     )
