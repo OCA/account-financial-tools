@@ -27,7 +27,7 @@ class AccountCheckDeposit(models.Model):
             total = 0.0
             count = 0
             reconcile = False
-            currency_none_same_company_id = False
+            currency_none_same_company_id = deposit.company_id.currency_id
             if deposit.company_id.currency_id != deposit.currency_id:
                 currency_none_same_company_id = deposit.currency_id.id
             for line in deposit.check_payment_ids:
@@ -67,7 +67,7 @@ class AccountCheckDeposit(models.Model):
     )
     journal_default_account_id = fields.Many2one(
         comodel_name="account.account",
-        related="journal_id.default_debit_account_id",
+        related="journal_id.payment_debit_account_id",
         string="Default Debit Account of the Journal",
     )
     currency_id = fields.Many2one(
@@ -133,23 +133,7 @@ class AccountCheckDeposit(models.Model):
     def _check_deposit(self):
         for deposit in self:
             deposit_currency = deposit.currency_id
-            if deposit_currency == deposit.company_id.currency_id:
-                for line in deposit.check_payment_ids:
-                    if line.currency_id:
-                        raise ValidationError(
-                            _(
-                                "The check with amount %s and reference '%s' "
-                                "is in currency %s but the deposit is in "
-                                "currency %s."
-                            )
-                            % (
-                                line.debit,
-                                line.ref or "",
-                                line.currency_id.name,
-                                deposit_currency.name,
-                            )
-                        )
-            else:
+            if deposit_currency != deposit.company_id.currency_id:
                 for line in deposit.check_payment_ids:
                     if line.currency_id != deposit_currency:
                         raise ValidationError(
@@ -176,7 +160,7 @@ class AccountCheckDeposit(models.Model):
                     )
                     % deposit.name
                 )
-        return super(AccountCheckDeposit, self).unlink()
+        return super().unlink()
 
     def backtodraft(self):
         for deposit in self:
@@ -198,7 +182,7 @@ class AccountCheckDeposit(models.Model):
                 .with_context(ir_sequence_date=vals.get("deposit_date"))
                 .next_by_code("account.check.deposit")
             )
-        return super(AccountCheckDeposit, self).create(vals)
+        return super().create(vals)
 
     @api.model
     def _prepare_account_move_vals(self, deposit):
@@ -239,12 +223,12 @@ class AccountCheckDeposit(models.Model):
                 )
             )
         if company.check_deposit_offsetting_account == "bank_account":
-            if not deposit.bank_journal_id.default_debit_account_id:
+            if not deposit.bank_journal_id.payment_debit_account_id:
                 raise UserError(
                     _("Missing 'Default Debit Account' on bank journal '%s'")
                     % deposit.bank_journal_id.name
                 )
-            account_id = deposit.bank_journal_id.default_debit_account_id.id
+            account_id = deposit.bank_journal_id.payment_debit_account_id.id
         elif company.check_deposit_offsetting_account == "transfer_account":
             if not company.check_deposit_transfer_account_id:
                 raise UserError(
@@ -291,7 +275,7 @@ class AccountCheckDeposit(models.Model):
             counter_vals["move_id"] = move.id
             move_line_obj.create(counter_vals)
             if deposit.company_id.check_deposit_post_move:
-                move.post()
+                move.action_post()
 
             deposit.write({"state": "done", "move_id": move.id})
             for reconcile_lines in to_reconcile_lines:

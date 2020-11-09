@@ -5,13 +5,16 @@
   The licence is in the file __manifest__.py
 -->
 <odoo>
-    <report
-        id="report_account_check_deposit"
-        model="account.check.deposit"
-        string="Check Deposit"
-        report_type="qweb-pdf"
-        name="account_check_deposit.report_checkdeposit"
-        file="account_check_deposit.report_checkdeposit"
-        print_report_name="'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or '')"
-    />
+    <record id="report_account_check_deposit" model="ir.actions.report">
+        <field name="name">Check Deposit</field>
+        <field name="model">account.check.deposit</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_check_deposit.report_checkdeposit</field>
+        <field name="report_file">account_check_deposit.report_checkdeposit</field>
+        <field name="binding_model_id" ref="model_account_check_deposit" />
+        <field name="binding_type">report</field>
+        <field
+            name="print_report_name"
+        >'check_deposit-%s%s' % (object.name, object.state == 'draft' and '-draft' or '')</field>
+    </record>
 </odoo>

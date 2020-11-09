@@ -4,10 +4,11 @@
 
 import time
 
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from odoo.exceptions import UserError
+from odoo.tests.common import TransactionCase
 
 
-class TestPayment(AccountingTestCase):
+class TestPayment(TransactionCase):
     def setUp(self):
         super().setUp()
         self.register_payments_model = self.env["account.payment.register"]
@@ -75,18 +76,6 @@ class TestPayment(AccountingTestCase):
                     "user_type_id": self.ref("account.data_account_type_liquidity"),
                 }
             )
-        self.main_company.check_deposit_account_id = self.account_model.search(
-            [("code", "=", "511201")], limit=1
-        )
-        if not self.main_company.check_deposit_account_id:
-            self.main_company.check_deposit_account_id = self.account_model.create(
-                {
-                    "code": "511201",
-                    "name": "Check deposited in bank - (test)",
-                    "reconcile": True,
-                    "user_type_id": self.ref("account.data_account_type_liquidity"),
-                }
-            )
         self.bank_account_id = self.account_model.search(
             [("code", "=", "512001")], limit=1
         )
@@ -105,15 +94,15 @@ class TestPayment(AccountingTestCase):
             self.check_journal = self.journal_model.create(
                 {"name": "received check", "type": "bank", "code": "CHK"}
             )
-        self.check_journal.default_debit_account_id = self.received_check_account_id
-        self.check_journal.default_credit_account_id = self.received_check_account_id
+        self.check_journal.payment_debit_account_id = self.received_check_account_id
+        self.check_journal.payment_credit_account_id = self.received_check_account_id
         self.bank_journal = self.journal_model.search([("code", "=", "BNK1")], limit=1)
         if not self.bank_journal:
             self.bank_journal = self.journal_model.create(
                 {"name": "Bank", "type": "bank", "code": "BNK1"}
             )
-        self.bank_journal.default_debit_account_id = self.bank_account_id
-        self.bank_journal.default_credit_account_id = self.bank_account_id
+        self.bank_journal.payment_debit_account_id = self.bank_account_id
+        self.bank_journal.payment_credit_account_id = self.bank_account_id
         self.partner_bank_id = self.res_partner_bank_model.search(
             [("partner_id", "=", self.main_company.partner_id.id)], limit=1
         )
@@ -130,7 +119,7 @@ class TestPayment(AccountingTestCase):
         """ Returns an open invoice """
         invoice = self.move_model.create(
             {
-                "type": inv_type,
+                "move_type": inv_type,
                 "partner_id": self.partner_agrolait.id,
                 "currency_id": currency_id,
                 "invoice_date": time.strftime("%Y-%m-%d"),
@@ -148,7 +137,7 @@ class TestPayment(AccountingTestCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         return invoice
 
     def create_check_deposit(self, move_lines):
@@ -163,6 +152,9 @@ class TestPayment(AccountingTestCase):
         )
         for move_line in move_lines:
             move_line.check_deposit_id = check_deposit
+        with self.assertRaises(UserError):
+            check_deposit.validate_deposit()
+        self.main_company.check_deposit_post_move = True
         check_deposit.validate_deposit()
         return check_deposit
 
@@ -181,15 +173,14 @@ class TestPayment(AccountingTestCase):
                 "group_payment": True,
             }
         )
-        register_payments.create_payments()
+        register_payments.action_create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
 
-        self.assertAlmostEquals(payment.amount, 300)
+        self.assertAlmostEqual(payment.amount, 300)
         self.assertEqual(payment.state, "posted")
         self.assertEqual(inv_1.state, "posted")
         self.assertEqual(inv_2.state, "posted")
-
-        check_aml = payment.move_line_ids.filtered(
+        check_aml = payment.move_id.line_ids.filtered(
             lambda r: r.account_id == self.received_check_account_id
         )
 
@@ -200,5 +191,5 @@ class TestPayment(AccountingTestCase):
 
         self.assertEqual(check_deposit.total_amount, 300)
         self.assertEqual(liquidity_aml.debit, 300)
-        self.assertEqual(check_deposit.move_id.state, "draft")
+        self.assertEqual(check_deposit.move_id.state, "posted")
         self.assertEqual(check_deposit.state, "done")
