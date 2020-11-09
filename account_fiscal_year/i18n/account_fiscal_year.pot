@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_fiscal_year
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_fiscal_year
+#: model_terms:ir.actions.act_window,help:account_fiscal_year.actions_account_fiscal_year
+msgid "Click here to create a new fiscal year."
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__display_name
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "End Date"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_to
+msgid "Ending Date, included in the fiscal year."
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
+msgid "Fiscal Year"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model_terms:ir.ui.view,arch_db:account_fiscal_year.account_fiscal_year_form_view
+msgid "Fiscal Year 2020"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.actions.act_window,name:account_fiscal_year.actions_account_fiscal_year
+#: model:ir.ui.menu,name:account_fiscal_year.menu_actions_account_fiscal_year
+msgid "Fiscal Years"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__id
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company__id
+msgid "ID"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year____last_update
+#: model:ir.model.fields,field_description:account_fiscal_year.field_res_company____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__name
+msgid "Name"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,field_description:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date"
+msgstr ""
+
+#. module: account_fiscal_year
+#: model:ir.model.fields,help:account_fiscal_year.field_account_fiscal_year__date_from
+msgid "Start Date, included in the fiscal year."
+msgstr ""
+
+#. module: account_fiscal_year
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid "The ending date must not be prior to the starting date."
+msgstr ""
+
+#. module: account_fiscal_year
+#: code:addons/account_fiscal_year/models/account_fiscal_year.py:0
+#, python-format
+msgid ""
+"This fiscal year '{fy}' overlaps with '{overlapping_fy}'.\n"
+"Please correct the start and/or end dates of your fiscal years."
+msgstr ""
