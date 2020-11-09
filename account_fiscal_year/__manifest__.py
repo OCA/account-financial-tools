@@ -16,12 +16,9 @@
     "license": "AGPL-3",
     "depends": [
         "account",
-        "date_range",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "data/date_range_type.xml",
         "views/account_fiscal_year_views.xml",
-        "views/account_views.xml",
     ],
 }
