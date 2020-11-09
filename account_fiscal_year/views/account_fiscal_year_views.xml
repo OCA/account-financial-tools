@@ -54,4 +54,10 @@
             </p>
         </field>
     </record>
+
+    <menuitem
+        id="menu_actions_account_fiscal_year"
+        parent="account.account_account_menu"
+        action="actions_account_fiscal_year"
+    />
 </odoo>

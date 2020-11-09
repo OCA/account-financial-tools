@@ -5,7 +5,7 @@
 {
     "name": "Account Fiscal Year",
     "summary": "Create Account Fiscal Year",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "development_status": "Beta",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-financial-tools"
@@ -16,12 +16,9 @@
     "license": "AGPL-3",
     "depends": [
         "account",
-        "date_range",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "data/date_range_type.xml",
         "views/account_fiscal_year_views.xml",
-        "views/account_views.xml",
     ],
 }
