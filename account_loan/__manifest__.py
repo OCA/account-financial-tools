@@ -23,7 +23,7 @@
     'installable': True,
     'external_dependencies': {
         'python': [
-            'numpy',
+            'numpy_financial',
         ],
     },
 }

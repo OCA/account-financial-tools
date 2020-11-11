@@ -7,7 +7,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 try:
-    import numpy
+    import numpy_financial as npf
 except (ImportError, IOError) as err:
     _logger.error(err)
 
@@ -160,7 +160,7 @@ class AccountLoanLine(models.Model):
         if self.loan_type == 'fixed-annuity' and self.loan_id.round_on_end:
             return self.loan_id.fixed_amount
         if self.loan_type == 'fixed-annuity':
-            return self.currency_id.round(- numpy.pmt(
+            return self.currency_id.round(- npf.pmt(
                 self.loan_id.loan_rate() / 100,
                 self.loan_id.periods - self.sequence + 1,
                 self.pending_principal_amount,

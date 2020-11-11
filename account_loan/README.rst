@@ -24,7 +24,7 @@ Installation
 
 To install this module, you need to:
 
-#. Install numpy : ``pip install numpy``
+#. Install numpy-financial : ``pip install numpy-financial``
 #. Follow the standard process
 
 Usage
