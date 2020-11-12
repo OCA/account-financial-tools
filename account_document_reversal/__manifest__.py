@@ -4,7 +4,7 @@
 {
     'name': 'Account Document Reversal',
     'summary': 'Create reversed journal entries when cancel document',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.1.0',
     'author': 'Ecosoft,'
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-financial-tools',
