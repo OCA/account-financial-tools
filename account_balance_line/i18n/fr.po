@@ -21,4 +21,4 @@ msgstr ""
 #. module: account_balance_line
 #: model_terms:ir.ui.view,arch_db:account_balance_line.account_move_line_balance_custom
 msgid "Total Balance"
-msgstr "Total de la balance"
+msgstr "Solde"

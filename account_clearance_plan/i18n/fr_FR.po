@@ -1,20 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_clearance_plan
+# 	* account_clearance_plan
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-06-08 10:19+0000\n"
-"Last-Translator: Guillaume Vandamme (ACSONE) <guillaume.vandamme@acsone.eu>\n"
+"PO-Revision-Date: 2020-11-11 19:55+0100\n"
+"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
 "Language-Team: none\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Poedit 2.4.2\n"
+"POT-Creation-Date: \n"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:154
@@ -77,7 +78,7 @@ msgstr "Sociétés"
 #. module: account_clearance_plan
 #: model:ir.model,name:account_clearance_plan.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Paramètres de configuration"
 
 #. module: account_clearance_plan
 #: model_terms:ir.ui.view,arch_db:account_clearance_plan.clearance_plan_wizard
@@ -112,13 +113,13 @@ msgstr "Plan d'apurement - Libellé par défaut"
 #: model:ir.model.fields,help:account_clearance_plan.field_res_company__clearance_plan_move_line_name
 #: model:ir.model.fields,help:account_clearance_plan.field_res_config_settings__clearance_plan_move_line_name
 msgid "Default name that will be given to new open move lines created by clearance plans"
-msgstr ""
+msgstr "Nom par défaut qui sera donné aux nouvelles lignes de mouvement ouvertes créées par les plans d’apurement"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__display_name
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__date_maturity
@@ -129,7 +130,7 @@ msgstr "Date d'échéance"
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__id
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_account_clearance_plan__move_narration
@@ -144,7 +145,7 @@ msgstr "Facture"
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__journal_id
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__move_narration
@@ -182,27 +183,24 @@ msgstr "Dernière modification par"
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__write_date
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Dernière mise à jour le"
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,field_description:account_clearance_plan.field_account_clearance_plan__move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Ligne d'écriture"
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:101
 #, python-format
 msgid "Please select items from an account of type 'receivable' or 'payable'."
-msgstr ""
-"Merci de ne sélectionner que des lignes d'un compte 'recevable' ou 'payable'."
+msgstr "Merci de ne sélectionner que des lignes d'un compte 'recevable' ou 'payable'."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:97
 #, python-format
 msgid "Please select items from exactly one account."
-msgstr ""
-"Merci de ne sélectionner que des lignes/factures liées à un seul compte "
-"comptable."
+msgstr "Merci de ne sélectionner que des lignes/factures liées à un seul compte comptable."
 
 #. module: account_clearance_plan
 #: code:addons/account_clearance_plan/wizard/account_clearance_plan.py:94
@@ -215,6 +213,8 @@ msgstr "Merci de ne sélectionner que des lignes d'un seul partenaire."
 #, python-format
 msgid "Programming error: wizard action executed with 'active_model' different from 'account.move.line' in context."
 msgstr ""
+"Erreur de programmation : action assistant exécutée avec 'active_model' différent de 'account.move.line' dans le "
+"contexte."
 
 #. module: account_clearance_plan
 #: model:ir.model.fields,help:account_clearance_plan.field_account_clearance_plan__move_ref

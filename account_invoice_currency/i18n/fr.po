@@ -46,7 +46,7 @@ msgstr ""
 #. module: account_invoice_currency
 #: model:ir.model.fields,field_description:account_invoice_currency.field_account_invoice__amount_tax_signed
 msgid "Tax Signed"
-msgstr ""
+msgstr "Taxe signée"
 
 #. module: account_invoice_currency
 #: model_terms:ir.ui.view,arch_db:account_invoice_currency.invoice_supplier_tree

@@ -1,0 +1,215 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_document_reversal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
+"Language: fr_FR\n"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_document_reversal
+msgid "Abstract Module for Document Reversal"
+msgstr "Module abstrait pour les documents d’extourne"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_reverse_account_document
+msgid "Account Document Reversal"
+msgstr "Extourne du document comptable"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Ligne de relevé bancaire"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__cancel_method
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__cancel_method
+msgid "Cancel Method"
+msgstr "Méthode d’annulation"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__use_different_journal
+msgid "Checked, if the journal of underlineing document is checked."
+msgstr "Vérifié, si le journal du document sous-jacent est vérifié."
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__reversal_journal_id
+msgid "Default Reversal Journal"
+msgstr "Journal d’extourne par défaut"
+
+#. module: account_document_reversal
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Discard"
+msgstr "Rejeter"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal__display_name
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_document_reversal
+#: model:ir.actions.act_window,name:account_document_reversal.action_view_reverse_account_document
+#: model_terms:ir.ui.view,arch_db:account_document_reversal.view_reverse_account_document
+msgid "Document Cancel"
+msgstr "Annulation du document"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal__id
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__use_different_journal
+msgid "If checked, reversal wizard will show field Reversal Journal"
+msgstr "Si coché, l’Assistant d’extourne affichera le journal d’extourne"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_reverse_account_document__journal_id
+msgid "If empty, uses the journal of the journal entry to be reversed."
+msgstr "Si vide, utilise le journal de la pièce à renverser."
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__reversal_journal_id
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__reversal_journal_id
+msgid "Journal in this field will show in reversal wizard as default"
+msgstr "Journal dans ce champ s’affichera par défaut dans l’Assistant d’extourne"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_document_reversal____last_update
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_document_reversal
+#: selection:account.journal,cancel_method:0
+msgid "Normal (delete journal entries if exists)"
+msgstr "Normal (supprimer les entrées de journal s’il existe)"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_invoice.py:24
+#, python-format
+msgid ""
+"Only fully unpaid invoice can be cancelled.\n"
+"To cancel this invoice, make sure all payment(s) are also cancelled."
+msgstr ""
+"Seule une facture entièrement impayée peut être annulée.\n"
+"Pour annuler cette facture, assurez-vous que tous les paiements sont également annulés."
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_bank_statement.py:20
+#, python-format
+msgid "Only new bank statement can be cancelled"
+msgstr "Seul un nouveau relevé bancaire peut être annulé"
+
+#. module: account_document_reversal
+#: model:ir.model,name:account_document_reversal.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: account_document_reversal
+#: selection:account.journal,cancel_method:0
+msgid "Reversal (create reversed journal entries)"
+msgstr "Extourne (créer des entrées de journal inversées)"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__journal_id
+msgid "Reversal Journal"
+msgstr "Journal d’extourne"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__date
+msgid "Reversal date"
+msgstr "Date de renversement"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_move.py:22
+#, python-format
+msgid ""
+"This action is not allowed for cancel with reversal.\n"
+"Please use Reverse Entry."
+msgstr ""
+"Cette action n’est pas autorisée à annuler avec inversion.\n"
+"Veuillez utiliser l’entrée inversée."
+
+#. module: account_document_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_journal__is_cancel_reversal
+#: model:ir.model.fields,help:account_document_reversal.field_account_move__is_cancel_reversal
+msgid "True, when journal allow cancel entries with method is reversal"
+msgstr "Vrai, lorsque le journal autorise les entrées d’annulation avec la méthode d’extourne"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__is_cancel_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_move__is_cancel_reversal
+msgid "Use Cancel Reversal"
+msgstr "Utiliser l’Extourne pour annulation"
+
+#. module: account_document_reversal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_bank_statement_import_journal_creation__use_different_journal
+#: model:ir.model.fields,field_description:account_document_reversal.field_account_journal__use_different_journal
+#: model:ir.model.fields,field_description:account_document_reversal.field_reverse_account_document__use_different_journal
+msgid "Use different journal for reversal"
+msgstr "Utiliser un journal différent pour extourner"
+
+#. module: account_document_reversal
+#: code:addons/account_document_reversal/models/account_invoice.py:36
+#: code:addons/account_document_reversal/models/account_payment.py:27
+#, python-format
+msgid "You are trying to cancel the cancelled document"
+msgstr "Vous essayez d’annuler le document annulé"

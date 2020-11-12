@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_voucher_print
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: Pascal GOUHIER <p.gouhier@khetys.fr>\n"
+"Language: fr_FR\n"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<span>Amount</span>"
+msgstr "<span>Montant</span>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<span>Description</span>"
+msgstr "<span>Description</span>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<span>Quantity</span>"
+msgstr "<span>Quantité</span>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<span>Taxes</span>"
+msgstr "<span>Taxes</span>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<span>Unit Price</span>"
+msgstr "<span>Prix Unitaire</span>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Amount In Words:</strong>"
+msgstr "<strong>Montant en Lettres :</strong>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Bill Date:</strong>"
+msgstr "<strong>Date de facture :</strong>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Bill Reference:</strong>"
+msgstr "<strong>Référence de la facture:</strong>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Due Date:</strong>"
+msgstr "<strong>Date d'échéance :</strong>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Subtotal</strong>"
+msgstr "<strong>Sous-total</strong>"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: account_voucher_print
+#: model:ir.model,name:account_voucher_print.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Pièce comptable"
+
+#. module: account_voucher_print
+#: model:ir.model.fields,field_description:account_voucher_print.field_account_voucher__amount_in_words
+msgid "Amount In Words"
+msgstr "Montant en Lettres"
+
+#. module: account_voucher_print
+#: code:addons/account_voucher_print/models/account_voucher.py:24
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+#, python-format
+msgid "Draft Purchase Receipt"
+msgstr "Reçu d’achat brouillon"
+
+#. module: account_voucher_print
+#: code:addons/account_voucher_print/models/account_voucher.py:18
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+#, python-format
+msgid "Draft Receipt"
+msgstr "Reçu en Brouillon"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Payment Memo:"
+msgstr "Note de paiement :"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Please use the following communication for your payment:"
+msgstr "Merci d'utiliser la référence suivante pour votre paiement:"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Purchase Receipt"
+msgstr "Reçu d’achat"
+
+#. module: account_voucher_print
+#: code:addons/account_voucher_print/models/account_voucher.py:27
+#, python-format
+msgid "Purchase Receipt - %s"
+msgstr "Reçu d’achat - %s"
+
+#. module: account_voucher_print
+#: model:ir.actions.report,name:account_voucher_print.account_receipts
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Receipt"
+msgstr "Reçu"
+
+#. module: account_voucher_print
+#: code:addons/account_voucher_print/models/account_voucher.py:21
+#, python-format
+msgid "Receipt - %s"
+msgstr "Reçu - %s"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Tax Amount"
+msgstr "Montant de la taxe"
+
+#. module: account_voucher_print
+#: model_terms:ir.ui.view,arch_db:account_voucher_print.report_receipt_document
+msgid "Tax Correction"
+msgstr "Correction de taxe"
