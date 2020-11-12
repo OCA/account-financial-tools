@@ -18,6 +18,6 @@
     'license': 'AGPL-3',
     'installable': True,
     'application': False,
-    'development_status': 'beta',
+    'development_status': 'Beta',
     'maintainers': ['kittiu'],
 }
