@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    Copyright 2015 Akretion - Alexis de Lattre
-    Copyright 2018 Tecnativa - Pedro M. Baeza
+    Copyright 2015-2020 Akretion France - Alexis de Lattre
+    Copyright 2018-2020 Tecnativa - Pedro M. Baeza
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
@@ -10,7 +10,11 @@
         <field name="inherit_id" ref="account.view_move_line_form" />
         <field name="arch" type="xml">
             <field name="statement_id" position="after">
-                <field name="check_deposit_id" />
+                <field
+                    name="check_deposit_id"
+                    readonly="True"
+                    attrs="{'invisible': [('check_deposit_id', '=', False)]}"
+                />
             </field>
         </field>
     </record>
