@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    Copyright (C) 2014-2019 Akretion (http://www.akretion.com/)
+    Copyright (C) 2014-2020 Akretion France (http://www.akretion.com/)
     @author Alexis de Lattre <alexis.delattre@akretion.com>
     The licence is in the file __manifest__.py
 -->
@@ -9,7 +9,7 @@
         <field name="name">Check Deposit multi-company</field>
         <field name="model_id" ref="model_account_check_deposit" />
         <field name="domain_force">
-            ['|', ('company_id', '=', False), ('company_id', 'child_of', [user.company_id.id])]
+            ['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]
         </field>
     </record>
 </odoo>

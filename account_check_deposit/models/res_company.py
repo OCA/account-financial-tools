@@ -1,4 +1,4 @@
-# © 2012-2016 Akretion (http://www.akretion.com/)
+# Copyright 2012-2020 Akretion France (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
