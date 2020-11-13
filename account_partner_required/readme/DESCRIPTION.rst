@@ -1,4 +1,4 @@
-This module adds an option *Partner policy* on account types.
+This module adds an option *Partner policy* on account types and accounts.
 
 You have the choice between 3 policies:
 
