@@ -1,4 +1,4 @@
-# Copyright 2012-2016 Akretion (http://www.akretion.com/)
+# Copyright 2012-2020 Akretion (http://www.akretion.com/)
 # @author: Benoît GUILLOT <benoit.guillot@akretion.com>
 # @author: Chafique DELLI <chafique.delli@akretion.com>
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
@@ -14,6 +14,7 @@ class AccountCheckDeposit(models.Model):
     _name = "account.check.deposit"
     _description = "Account Check Deposit"
     _order = "deposit_date desc"
+    _check_company_auto = True
 
     @api.depends(
         "company_id",
@@ -23,26 +24,36 @@ class AccountCheckDeposit(models.Model):
         "move_id.line_ids.reconciled",
     )
     def _compute_check_deposit(self):
+        rg_res = self.env["account.move.line"].read_group(
+            [("check_deposit_id", "in", self.ids)],
+            ["check_deposit_id", "debit", "amount_currency"],
+            ["check_deposit_id"],
+        )
+        mapped_data = {
+            x["check_deposit_id"][0]: {
+                "debit": x["debit"],
+                "amount_currency": x["amount_currency"],
+                "count": x["check_deposit_id_count"],
+            }
+            for x in rg_res
+        }
+
         for deposit in self:
-            total = 0.0
-            count = 0
             reconcile = False
-            currency_none_same_company_id = False
-            if deposit.company_id.currency_id != deposit.currency_id:
-                currency_none_same_company_id = deposit.currency_id.id
-            for line in deposit.check_payment_ids:
-                count += 1
-                if currency_none_same_company_id:
-                    total += line.amount_currency
-                else:
-                    total += line.debit
+            company_cur = deposit.company_id.currency_id
+            if company_cur != deposit.currency_id:
+                total = mapped_data.get(deposit.id, {"amount_currency": 0.0})[
+                    "amount_currency"
+                ]
+            else:
+                total = mapped_data.get(deposit.id, {"debit": 0.0})["debit"]
+            count = mapped_data.get(deposit.id, {"count": 0})["count"]
             if deposit.move_id:
                 for line in deposit.move_id.line_ids:
-                    if line.debit > 0 and line.reconciled:
+                    if not company_cur.is_zero(line.debit) and line.reconciled:
                         reconcile = True
             deposit.total_amount = total
             deposit.is_reconcile = reconcile
-            deposit.currency_none_same_company_id = currency_none_same_company_id
             deposit.check_count = count
 
     name = fields.Char(string="Name", size=64, readonly=True, default="/")
@@ -63,24 +74,19 @@ class AccountCheckDeposit(models.Model):
         string="Journal",
         domain=[("type", "=", "bank"), ("bank_account_id", "=", False)],
         required=True,
+        check_company=True,
         states={"done": [("readonly", "=", True)]},
     )
     journal_default_account_id = fields.Many2one(
         comodel_name="account.account",
-        related="journal_id.default_debit_account_id",
-        string="Default Debit Account of the Journal",
+        related="journal_id.payment_debit_account_id",
+        string="Outstanding Receipts Account",
     )
     currency_id = fields.Many2one(
         comodel_name="res.currency",
         string="Currency",
         required=True,
         states={"done": [("readonly", "=", True)]},
-    )
-    currency_none_same_company_id = fields.Many2one(
-        comodel_name="res.currency",
-        compute="_compute_check_deposit",
-        store=True,
-        string="Currency (False if same as company)",
     )
     state = fields.Selection(
         selection=[("draft", "Draft"), ("done", "Done")],
@@ -89,7 +95,10 @@ class AccountCheckDeposit(models.Model):
         readonly=True,
     )
     move_id = fields.Many2one(
-        comodel_name="account.move", string="Journal Entry", readonly=True
+        comodel_name="account.move",
+        string="Journal Entry",
+        readonly=True,
+        check_company=True,
     )
     bank_journal_id = fields.Many2one(
         comodel_name="account.journal",
@@ -97,13 +106,13 @@ class AccountCheckDeposit(models.Model):
         required=True,
         domain="[('company_id', '=', company_id), ('type', '=', 'bank'), "
         "('bank_account_id', '!=', False)]",
+        check_company=True,
         states={"done": [("readonly", "=", True)]},
     )
     line_ids = fields.One2many(
         comodel_name="account.move.line",
         related="move_id.line_ids",
         string="Lines",
-        readonly=True,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -112,59 +121,40 @@ class AccountCheckDeposit(models.Model):
         states={"done": [("readonly", "=", True)]},
         default=lambda self: self.env.company,
     )
-    total_amount = fields.Float(
+    total_amount = fields.Monetary(
         compute="_compute_check_deposit",
         string="Total Amount",
-        readonly=True,
         store=True,
-        digits="Account",
+        currency_field="currency_id",
     )
     check_count = fields.Integer(
         compute="_compute_check_deposit",
-        readonly=True,
         store=True,
         string="Number of Checks",
     )
     is_reconcile = fields.Boolean(
-        compute="_compute_check_deposit", readonly=True, store=True, string="Reconcile"
+        compute="_compute_check_deposit", store=True, string="Reconcile"
     )
 
     @api.constrains("currency_id", "check_payment_ids", "company_id")
     def _check_deposit(self):
         for deposit in self:
             deposit_currency = deposit.currency_id
-            if deposit_currency == deposit.company_id.currency_id:
-                for line in deposit.check_payment_ids:
-                    if line.currency_id:
-                        raise ValidationError(
-                            _(
-                                "The check with amount %s and reference '%s' "
-                                "is in currency %s but the deposit is in "
-                                "currency %s."
-                            )
-                            % (
-                                line.debit,
-                                line.ref or "",
-                                line.currency_id.name,
-                                deposit_currency.name,
-                            )
+            for line in deposit.check_payment_ids:
+                if line.currency_id != deposit_currency:
+                    raise ValidationError(
+                        _(
+                            "The check with amount %s and reference '%s' "
+                            "is in currency %s but the deposit is in "
+                            "currency %s."
                         )
-            else:
-                for line in deposit.check_payment_ids:
-                    if line.currency_id != deposit_currency:
-                        raise ValidationError(
-                            _(
-                                "The check with amount %s and reference '%s' "
-                                "is in currency %s but the deposit is in "
-                                "currency %s."
-                            )
-                            % (
-                                line.debit,
-                                line.ref or "",
-                                line.currency_id.name,
-                                deposit_currency.name,
-                            )
+                        % (
+                            line.debit,
+                            line.ref or "",
+                            line.currency_id.name,
+                            deposit_currency.name,
                         )
+                    )
 
     def unlink(self):
         for deposit in self:
@@ -176,40 +166,42 @@ class AccountCheckDeposit(models.Model):
                     )
                     % deposit.name
                 )
-        return super(AccountCheckDeposit, self).unlink()
+        return super().unlink()
 
     def backtodraft(self):
         for deposit in self:
             if deposit.move_id:
+                move = deposit.move_id
                 # It will raise here if journal_id.update_posted = False
-                deposit.move_id.button_cancel()
+                if move.state == "posted":
+                    move.button_draft()
                 for line in deposit.check_payment_ids:
                     if line.reconciled:
                         line.remove_move_reconcile()
-                deposit.move_id.unlink()
+                move.unlink()
             deposit.write({"state": "draft"})
         return True
 
     @api.model
     def create(self, vals):
+        if "company_id" in vals:
+            self = self.with_company(vals["company_id"])
         if vals.get("name", "/") == "/":
-            vals["name"] = (
-                self.env["ir.sequence"]
-                .with_context(ir_sequence_date=vals.get("deposit_date"))
-                .next_by_code("account.check.deposit")
+            vals["name"] = self.env["ir.sequence"].next_by_code(
+                "account.check.deposit", vals.get("deposit_date")
             )
-        return super(AccountCheckDeposit, self).create(vals)
+        return super().create(vals)
 
-    @api.model
-    def _prepare_account_move_vals(self, deposit):
-        if deposit.company_id.check_deposit_offsetting_account == "bank_account":
-            journal_id = deposit.bank_journal_id.id
+    def _prepare_account_move_vals(self):
+        self.ensure_one()
+        if self.company_id.check_deposit_offsetting_account == "bank_account":
+            journal_id = self.bank_journal_id.id
         else:
-            journal_id = deposit.journal_id.id
+            journal_id = self.journal_id.id
         move_vals = {
             "journal_id": journal_id,
-            "date": deposit.deposit_date,
-            "ref": _("Check Deposit %s") % deposit.name,
+            "date": self.deposit_date,
+            "ref": _("Check Deposit %s") % self.name,
         }
         return move_vals
 
@@ -226,11 +218,9 @@ class AccountCheckDeposit(models.Model):
             "amount_currency": line.amount_currency * -1,
         }
 
-    @api.model
-    def _prepare_counterpart_move_lines_vals(
-        self, deposit, total_debit, total_amount_currency
-    ):
-        company = deposit.company_id
+    def _prepare_counterpart_move_lines_vals(self, total_debit, total_amount_currency):
+        self.ensure_one()
+        company = self.company_id
         if not company.check_deposit_offsetting_account:
             raise UserError(
                 _(
@@ -239,12 +229,12 @@ class AccountCheckDeposit(models.Model):
                 )
             )
         if company.check_deposit_offsetting_account == "bank_account":
-            if not deposit.bank_journal_id.default_debit_account_id:
+            if not self.bank_journal_id.default_account_id:
                 raise UserError(
                     _("Missing 'Default Debit Account' on bank journal '%s'")
-                    % deposit.bank_journal_id.name
+                    % self.bank_journal_id.name
                 )
-            account_id = deposit.bank_journal_id.default_debit_account_id.id
+            account_id = self.bank_journal_id.default_account_id.id
         elif company.check_deposit_offsetting_account == "transfer_account":
             if not company.check_deposit_transfer_account_id:
                 raise UserError(
@@ -256,12 +246,12 @@ class AccountCheckDeposit(models.Model):
                 )
             account_id = company.check_deposit_transfer_account_id.id
         return {
-            "name": _("Check Deposit %s") % deposit.name,
+            "name": _("Check Deposit %s") % self.name,
             "debit": total_debit,
             "credit": 0.0,
             "account_id": account_id,
             "partner_id": False,
-            "currency_id": deposit.currency_none_same_company_id.id or False,
+            "currency_id": self.currency_id.id or False,
             "amount_currency": total_amount_currency,
         }
 
@@ -269,7 +259,7 @@ class AccountCheckDeposit(models.Model):
         am_obj = self.env["account.move"]
         move_line_obj = self.env["account.move.line"]
         for deposit in self:
-            move_vals = self._prepare_account_move_vals(deposit)
+            move_vals = deposit._prepare_account_move_vals()
             move = am_obj.create(move_vals)
             total_debit = 0.0
             total_amount_currency = 0.0
@@ -285,13 +275,13 @@ class AccountCheckDeposit(models.Model):
                 to_reconcile_lines.append(line + move_line)
 
             # Create counter-part
-            counter_vals = self._prepare_counterpart_move_lines_vals(
-                deposit, total_debit, total_amount_currency
+            counter_vals = deposit._prepare_counterpart_move_lines_vals(
+                total_debit, total_amount_currency
             )
             counter_vals["move_id"] = move.id
             move_line_obj.create(counter_vals)
             if deposit.company_id.check_deposit_post_move:
-                move.post()
+                move.action_post()
 
             deposit.write({"state": "done", "move_id": move.id})
             for reconcile_lines in to_reconcile_lines:
