@@ -11,11 +11,4 @@ class AccountAccountTag(models.Model):
         comodel_name="account.account",
         relation="account_account_account_tag",
         string="Accounts",
-        help="Assigned accounts for custom reporting",
-    )
-    tax_ids = fields.Many2many(
-        comodel_name="account.tax",
-        relation="account_tax_account_tag",
-        string="Taxes",
-        help="Assigned taxes for custom reporting",
     )

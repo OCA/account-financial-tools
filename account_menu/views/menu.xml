@@ -13,8 +13,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     />
     <menuitem
         id="menu_account_coa_settings"
-        sequence="50"
+        sequence="200"
         name="Templates"
         parent="account.menu_finance_configuration"
+        groups="base.group_no_one"
     />
 </odoo>

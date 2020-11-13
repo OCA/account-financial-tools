@@ -20,9 +20,16 @@
             </xpath>
         </field>
     </record>
+
+    <record id="account_group_action" model="ir.actions.act_window">
+        <field name="name">Account Groups</field>
+        <field name="res_model">account.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <menuitem
         id="account_group_menu"
-        action="account.action_account_group_tree"
+        action="account_group_action"
         sequence="50"
         parent="account.account_account_menu"
     />

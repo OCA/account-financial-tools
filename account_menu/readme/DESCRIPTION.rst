@@ -1,7 +1,12 @@
-This module adds all missing menu entries for **Account** module.
+This module adds all missing menu entries for the **Account** module.
 
-* Chart of Account Templates
 * Account Types
 * Account Tags
-* Account Group
+* Account Groups
+* Account Tax Groups
 * Bank Statements
+* Cash Registers
+* Chart of Account Templates
+* Account Templates
+* Tax Templates
+* Fiscal Position Templates

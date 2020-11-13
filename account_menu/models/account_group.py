@@ -11,5 +11,4 @@ class AccountGroup(models.Model):
         comodel_name="account.account",
         inverse_name="group_id",
         string="Accounts",
-        help="Assigned accounts.",
     )
