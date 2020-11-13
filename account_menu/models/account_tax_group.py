@@ -11,5 +11,4 @@ class AccountTaxGroup(models.Model):
         comodel_name="account.tax",
         inverse_name="tax_group_id",
         string="Taxes",
-        help="Assigned taxes.",
     )
