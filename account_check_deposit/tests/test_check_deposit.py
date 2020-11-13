@@ -167,8 +167,8 @@ class TestPayment(AccountingTestCase):
         return check_deposit
 
     def test_full_payment_process(self):
-        """ Create a payment for on invoice by check,
-         post it and create check deposit"""
+        """Create a payment for on invoice by check,
+        post it and create check deposit"""
         inv_1 = self.create_invoice(amount=100, currency_id=self.currency_eur_id)
         inv_2 = self.create_invoice(amount=200, currency_id=self.currency_eur_id)
 
