@@ -4,11 +4,11 @@
 
 {
     "name": "Account - Missing Menus",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Accounting",
     "license": "AGPL-3",
     "summary": "Adds missing menu entries for Account module",
-    "author": "GRAP, Odoo Community Association (OCA)",
+    "author": "GRAP, Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
     "data": [

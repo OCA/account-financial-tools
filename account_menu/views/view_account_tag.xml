@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
                 <group>
-                    <group id="aplicability">
+                    <group id="applicability">
                         <field name="applicability" widget="selection" />
                     </group>
                 </group>
@@ -24,25 +24,21 @@
                             attrs="{'invisible':[('applicability','!=', 'accounts')]}"
                             options="{'no_create_edit': True}"
                         />
-                        <label
-                            for="tax_ids"
-                            attrs="{'invisible':[('applicability','!=', 'taxes')]}"
-                        />
-                        <field
-                            name="tax_ids"
-                            widget="many2many_tags"
-                            nolabel="1"
-                            attrs="{'invisible':[('applicability','!=', 'taxes')]}"
-                            options="{'no_create_edit': True}"
-                        />
                     </group>
                 </group>
             </xpath>
         </field>
     </record>
+
+    <record id="account_account_tag_action" model="ir.actions.act_window">
+        <field name="name">Account Tags</field>
+        <field name="res_model">account.account.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <menuitem
         id="account_tag_menu"
-        action="account.account_tag_action"
+        action="account_account_tag_action"
         sequence="40"
         parent="account.account_account_menu"
     />
