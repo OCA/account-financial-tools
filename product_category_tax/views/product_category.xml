@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_category_form_view" model="ir.ui.view">
+        <field name="name">product.category.form.view.taxes</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="account.view_category_property_form" />
+        <field name="arch" type="xml">
+            <group name="account_property">
+                <group name="taxes" string="Taxes">
+                    <button
+                        name="update_product_taxes"
+                        class="oe_link"
+                        type="object"
+                        string="-> Apply to Products"
+                        confirm="This will apply to all products in the category"
+                    />
+                    <field name="taxes_id" widget="many2many_tags" />
+                    <field
+                        name="supplier_taxes_id"
+                        widget="many2many_tags"
+                        context="{'default_type_tax_use':'purchase'}"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
