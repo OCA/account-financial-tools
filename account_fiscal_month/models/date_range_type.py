@@ -1,7 +1,7 @@
 # Copyright 2017 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
@@ -10,7 +10,6 @@ class DateRangeType(models.Model):
 
     fiscal_month = fields.Boolean(string="Is fiscal month?", readonly=True)
 
-    @api.multi
     def unlink(self):
         date_range_type_fm = self.env.ref(
             "account_fiscal_month.date_range_fiscal_month"
