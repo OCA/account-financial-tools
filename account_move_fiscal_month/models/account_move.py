@@ -16,7 +16,6 @@ class AccountMove(models.Model):
         search="_search_date_range_fm",
     )
 
-    @api.multi
     @api.depends("date", "company_id")
     def _compute_date_range_fm(self):
         for rec in self:
