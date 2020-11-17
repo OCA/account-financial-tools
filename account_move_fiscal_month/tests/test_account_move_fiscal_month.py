@@ -132,7 +132,7 @@ class TestAccountMoveFiscalMonth(TransactionCase):
         move_march_2017 = self.create_account_move(march_2017_1st)
         move_jan_2018 = self.create_account_move(january_2018_1st)
 
-        moves = self.AccountMoveObj.search([("date_range_fm_id", "ilike", "January"),])
+        moves = self.AccountMoveObj.search([("date_range_fm_id", "ilike", "January")])
 
         self.assertTrue(
             all(
@@ -146,7 +146,7 @@ class TestAccountMoveFiscalMonth(TransactionCase):
             msg="There should be only moves in January",
         )
 
-        moves = self.AccountMoveObj.search([("date_range_fm_id", "ilike", "2017"),])
+        moves = self.AccountMoveObj.search([("date_range_fm_id", "ilike", "2017")])
 
         self.assertTrue(
             all(
@@ -160,7 +160,7 @@ class TestAccountMoveFiscalMonth(TransactionCase):
         )
 
         moves = self.AccountMoveObj.search(
-            [("date_range_fm_id", "=", self.date_range_january_2017.id),]
+            [("date_range_fm_id", "=", self.date_range_january_2017.id)]
         )
 
         self.assertTrue(
