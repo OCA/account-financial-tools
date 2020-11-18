@@ -9,5 +9,5 @@
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
-    "data": ["views/product_category.xml"],
+    "data": ["views/product_category.xml", "views/product_template.xml"],
 }
