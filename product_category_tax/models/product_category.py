@@ -32,5 +32,7 @@ class ProductCategory(models.Model):
     )
 
     def update_product_taxes(self):
-        for template in self.product_template_ids:
+        for template in self.product_template_ids.filtered(
+            lambda p: p.taxes_updeatable_from_category
+        ):
             template.set_tax_from_category()
