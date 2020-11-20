@@ -17,7 +17,7 @@ class AccountMoveTemplate(models.Model):
         string="Company",
         required=True,
         ondelete="cascade",
-        default=lambda self: self.env["res.company"]._company_default_get(),
+        default=lambda self: self.env.company,
     )
     journal_id = fields.Many2one("account.journal", string="Journal", required=True)
     ref = fields.Char(string="Reference", copy=False)
@@ -158,6 +158,12 @@ class AccountMoveTemplateLine(models.Model):
         compute="_compute_tax_repartition_line_id",
         store=True,
         readonly=True,
+    )
+    opt_account_id = fields.Many2one(
+        "account.account",
+        string="Account Opt.",
+        domain=[("deprecated", "=", False)],
+        help="When amount is negative, use this account in stead",
     )
 
     @api.depends("is_refund", "account_id", "tax_line_id")
