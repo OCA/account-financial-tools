@@ -7,6 +7,10 @@
             <tree>
                 <field name="sequence" />
                 <field name="account_id" domain="[('company_id', '=', company_id)]" />
+                <field
+                    name="opt_account_id"
+                    domain="[('company_id', '=', company_id)]"
+                />
                 <field name="partner_id" />
                 <field name="name" />
                 <field
@@ -45,6 +49,10 @@
                             <field name="name" />
                             <field
                                 name="account_id"
+                                domain="[('company_id', '=', company_id)]"
+                            />
+                            <field
+                                name="opt_account_id"
                                 domain="[('company_id', '=', company_id)]"
                             />
                             <field name="partner_id" />
