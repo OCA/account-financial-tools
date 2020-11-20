@@ -20,6 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_fiscal_position_vat_check](account_fiscal_position_vat_check/) | 14.0.1.0.0 | Check VAT on invoice validation
+[account_menu](account_menu/) | 14.0.1.0.0 | Adds missing menu entries for Account module
 
 [//]: # (end addons)
 
