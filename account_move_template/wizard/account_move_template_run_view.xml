@@ -12,6 +12,13 @@
                         domain="[('company_id', '=', company_id)]"
                         attrs="{'readonly': [('state', '=', 'set_lines')]}"
                     />
+                    <field
+                        name="overwrite"
+                        widget="ace"
+                        options="{'mode': 'python'}"
+                        attrs="{'invisible': [('state', '=', 'set_lines')]}"
+                        placeholder="Add an internal note here..."
+                    />
                     <field name="company_id" groups="base.group_multi_company" />
                     <field name="date" states="set_lines" />
                     <field name="journal_id" states="set_lines" />

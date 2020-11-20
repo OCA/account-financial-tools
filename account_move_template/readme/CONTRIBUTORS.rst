@@ -19,3 +19,7 @@ Module Contributors
 
   * Harald Panten <harald.panten@sygel.es>
   * Valentin Vinagre <valentin.vinagre@sygel.es>
+
+* `Ecosoft <http://ecosoft.co.th>`_:
+
+  * Kitti U. <kittiu@ecosoft.co.th> (Add context overwrite)
