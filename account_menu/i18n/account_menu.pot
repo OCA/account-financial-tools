@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,6 +19,7 @@ msgid "Account Group"
 msgstr ""
 
 #. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_group_action
 #: model:ir.ui.menu,name:account_menu.account_group_menu
 msgid "Account Groups"
 msgstr ""
@@ -29,6 +30,7 @@ msgid "Account Tag"
 msgstr ""
 
 #. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_account_tag_action
 #: model:ir.ui.menu,name:account_menu.account_tag_menu
 msgid "Account Tags"
 msgstr ""
@@ -40,13 +42,14 @@ msgid "Account Tax Group"
 msgstr ""
 
 #. module: account_menu
-#: model:ir.actions.act_window,name:account_menu.action_account_tax_group_tree
+#: model:ir.actions.act_window,name:account_menu.action_account_tax_group
 #: model:ir.ui.menu,name:account_menu.account_tax_group_menu
 #: model_terms:ir.ui.view,arch_db:account_menu.view_account_tax_group_search
 msgid "Account Tax Groups"
 msgstr ""
 
 #. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_account_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_account_template
 msgid "Account Templates"
 msgstr ""
@@ -60,26 +63,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_menu.field_account_account_tag__account_ids
 #: model:ir.model.fields,field_description:account_menu.field_account_group__account_ids
 msgid "Accounts"
-msgstr ""
-
-#. module: account_menu
-#: model:ir.model.fields,help:account_menu.field_account_account_tag__account_ids
-msgid "Assigned accounts for custom reporting"
-msgstr ""
-
-#. module: account_menu
-#: model:ir.model.fields,help:account_menu.field_account_group__account_ids
-msgid "Assigned accounts."
-msgstr ""
-
-#. module: account_menu
-#: model:ir.model.fields,help:account_menu.field_account_account_tag__tax_ids
-msgid "Assigned taxes for custom reporting"
-msgstr ""
-
-#. module: account_menu
-#: model:ir.model.fields,help:account_menu.field_account_tax_group__tax_ids
-msgid "Assigned taxes."
 msgstr ""
 
 #. module: account_menu
@@ -103,8 +86,30 @@ msgid "Chart of Accounts Templates"
 msgstr ""
 
 #. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__display_name
+#: model:ir.model.fields,field_description:account_menu.field_account_group__display_name
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.actions.act_window,name:account_menu.account_fiscal_position_template_action
 #: model:ir.ui.menu,name:account_menu.menu_account_fiscal_position_template
 msgid "Fiscal Position Templates"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__id
+#: model:ir.model.fields,field_description:account_menu.field_account_group__id
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group__id
+msgid "ID"
+msgstr ""
+
+#. module: account_menu
+#: model:ir.model.fields,field_description:account_menu.field_account_account_tag____last_update
+#: model:ir.model.fields,field_description:account_menu.field_account_group____last_update
+#: model:ir.model.fields,field_description:account_menu.field_account_tax_group____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: account_menu
@@ -118,7 +123,6 @@ msgid "Tax Templates"
 msgstr ""
 
 #. module: account_menu
-#: model:ir.model.fields,field_description:account_menu.field_account_account_tag__tax_ids
 #: model:ir.model.fields,field_description:account_menu.field_account_tax_group__tax_ids
 msgid "Taxes"
 msgstr ""
