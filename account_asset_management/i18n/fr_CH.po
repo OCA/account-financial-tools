@@ -1114,7 +1114,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "État"
 

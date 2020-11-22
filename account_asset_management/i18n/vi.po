@@ -168,7 +168,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Tài khoản phân tích"
 
@@ -217,7 +216,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset"
 msgid "Asset Name"
 msgstr "Tài sản"
 
@@ -356,7 +354,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Tài sản"
 
@@ -723,7 +720,6 @@ msgstr "Lịch sử"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Lịch sử"
 
@@ -911,7 +907,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Các ghi chú"
 

@@ -92,14 +92,12 @@ msgstr "Buraya iç not ekleyin..."
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 #, fuzzy
-#| msgid "Account"
 msgid "Amount"
 msgstr "Hesap"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 #, fuzzy
-#| msgid "Amount of Depreciation Lines"
 msgid "Amount Already Depreciated"
 msgstr "Amortisman Satırları Tutarı"
 
@@ -155,7 +153,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Account"
 msgid "Asset Account"
 msgstr "Hesap"
 
@@ -204,7 +201,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "Demirbaş Kategorisi"
 
@@ -343,7 +339,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Demirbaşlar"
 
@@ -412,7 +407,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Amortisman Yöntemi"
 
@@ -504,7 +498,6 @@ msgstr "Azalan"
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 #, fuzzy
-#| msgid "Degressive"
 msgid "Degressive Factor"
 msgstr "Azalan"
 
@@ -542,7 +535,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "Amortisman Tarihi"
 
@@ -566,14 +558,12 @@ msgstr "Amortisman Tarihleri"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "Amortisman Tarihi"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "Amortisman kalemleri sayısı"
 
@@ -586,7 +576,6 @@ msgstr "Amortisman Yöntemi"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "Amortisman Tarihi"
 
@@ -722,7 +711,6 @@ msgstr "Geçmiş"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Geçmiş"
 
@@ -790,7 +778,6 @@ msgstr "Fatura kalemi"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Günlük Maddeleri"
 
@@ -901,7 +888,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Date of depreciation"
 msgid "Next Period Depreciation"
 msgstr "Amortisman Tarihi"
 
@@ -914,7 +900,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Notlar"
 
@@ -932,7 +917,6 @@ msgstr "Notlar"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "Amortisman kalemleri sayısı"
 
@@ -1013,7 +997,6 @@ msgstr "İşlenmiş"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "İşlenmiş"
 
@@ -1162,14 +1145,12 @@ msgstr "Durum"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Modify Asset"
 msgid "State of Asset"
 msgstr "Demirbaşı Değiştir"
 
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Durum"
 

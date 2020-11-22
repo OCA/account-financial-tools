@@ -594,7 +594,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,account_move_line_ids:0
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Entries"
 msgstr "Journaloppføringer"
 
@@ -749,7 +748,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Journal"
 msgstr "Journaloppføringer"
 
@@ -1118,7 +1116,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Stat"
 

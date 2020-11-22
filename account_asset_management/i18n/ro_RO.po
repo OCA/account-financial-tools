@@ -74,7 +74,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 #, fuzzy
-#| msgid "Account"
 msgid "Amount"
 msgstr "cont"
 
@@ -135,7 +134,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Account"
 msgid "Asset Account"
 msgstr "cont"
 
@@ -752,7 +750,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Articole Jurnal"
 

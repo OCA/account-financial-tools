@@ -398,7 +398,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Metode Depresiasi"
 
@@ -526,7 +525,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Account"
 msgstr "Metode Depresiasi"
 
@@ -550,14 +548,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Entry"
 msgstr "Metode Depresiasi"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Lines"
 msgstr "Metode Depresiasi"
 
@@ -570,7 +566,6 @@ msgstr "Metode Depresiasi"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Name"
 msgstr "Metode Depresiasi"
 
@@ -772,7 +767,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Journal Items"
 
@@ -1141,7 +1135,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Bagian"
 

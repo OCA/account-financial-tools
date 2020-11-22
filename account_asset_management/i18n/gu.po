@@ -877,7 +877,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "નોંધ"
 

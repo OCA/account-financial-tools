@@ -136,7 +136,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "วิเคราะห์บัญชี"
 
@@ -185,7 +184,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset"
 msgid "Asset Name"
 msgstr "สินทรัพย์"
 
@@ -324,7 +322,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "สินทรัพย์"
 
@@ -691,7 +688,6 @@ msgstr "ประวัติ"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "ประวัติ"
 
@@ -879,7 +875,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "บันทึกย่อ"
 
@@ -976,7 +971,6 @@ msgstr "ลงบัญชีแล้ว"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "ลงบัญชีแล้ว"
 

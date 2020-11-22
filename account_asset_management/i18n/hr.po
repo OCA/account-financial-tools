@@ -103,7 +103,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 #, fuzzy
-#| msgid "Amount of Depreciation Lines"
 msgid "Amount Already Depreciated"
 msgstr "Iznos stavaka amortizacije"
 
@@ -159,7 +158,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Analitički konto"
 
@@ -208,7 +206,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "Kategorija DI"
 
@@ -347,7 +344,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Dugotrajna imovina"
 
@@ -416,7 +412,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Metoda amortizacije"
 
@@ -544,7 +539,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "Datum amortizacije"
 
@@ -568,14 +562,12 @@ msgstr "Datumi amortizacije"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "Datum amortizacije"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "# stavaka amortizacije"
 
@@ -588,7 +580,6 @@ msgstr "Metoda amortizacije"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "Datum amortizacije"
 
@@ -724,7 +715,6 @@ msgstr "Povijest"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Povijest"
 
@@ -792,7 +782,6 @@ msgstr "Stavka računa"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Stavke dnevnika"
 
@@ -903,7 +892,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Date of depreciation"
 msgid "Next Period Depreciation"
 msgstr "Datum amortizacije"
 
@@ -916,7 +904,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Bilješke"
 
@@ -934,7 +921,6 @@ msgstr "Bilješke"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "# stavaka amortizacije"
 
@@ -1015,7 +1001,6 @@ msgstr "Proknjiženo"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "Proknjiženo"
 
@@ -1164,14 +1149,12 @@ msgstr "Status"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Modify Asset"
 msgid "State of Asset"
 msgstr "Uredi imovinu"
 
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Status"
 

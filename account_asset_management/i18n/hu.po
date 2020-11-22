@@ -143,7 +143,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Gyűjtőkód"
 
@@ -192,7 +191,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "Eszköz kategória"
 
@@ -331,7 +329,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Eszközök"
 
@@ -490,7 +487,6 @@ msgstr "Degresszív"
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 #, fuzzy
-#| msgid "Degressive"
 msgid "Degressive Factor"
 msgstr "Degresszív"
 
@@ -528,7 +524,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "Értékcsökkenés dátuma"
 
@@ -552,14 +547,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "Értékcsökkenés dátuma"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "# értékcsökkenési sorok száma"
 
@@ -572,7 +565,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "Értékcsökkenés dátuma"
 
@@ -708,7 +700,6 @@ msgstr "Előzmény"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Előzmény"
 
@@ -776,7 +767,6 @@ msgstr "Számlasor"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Könyvelési tételsorok"
 
@@ -887,7 +877,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Next Period Depreciation"
 msgstr "# értékcsökkenési sorok száma"
 
@@ -900,7 +889,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Megjegyzések"
 
@@ -918,7 +906,6 @@ msgstr "Megjegyzések"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "# értékcsökkenési sorok száma"
 
@@ -999,7 +986,6 @@ msgstr "Könyvelt"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "Könyvelt"
 
@@ -1153,7 +1139,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Állapot"
 

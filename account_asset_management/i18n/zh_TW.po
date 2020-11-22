@@ -88,7 +88,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 #, fuzzy
-#| msgid "Amount of Depreciation Lines"
 msgid "Amount Already Depreciated"
 msgstr "折舊明細的金額"
 
@@ -144,7 +143,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "分析科目"
 
@@ -193,7 +191,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "資產類別"
 
@@ -332,7 +329,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "資產"
 
@@ -401,7 +397,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "折舊方法"
 
@@ -493,7 +488,6 @@ msgstr "遞減"
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 #, fuzzy
-#| msgid "Degressive"
 msgid "Degressive Factor"
 msgstr "遞減"
 
@@ -531,7 +525,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "折舊日期"
 
@@ -555,14 +548,12 @@ msgstr "折舊日期"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "折舊日期"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "# 折舊明細"
 
@@ -575,7 +566,6 @@ msgstr "折舊方法"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "折舊日期"
 
@@ -711,7 +701,6 @@ msgstr "歷史記錄"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "歷史記錄"
 
@@ -779,7 +768,6 @@ msgstr "發票明細"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "帳簿項目"
 
@@ -890,7 +878,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Date of depreciation"
 msgid "Next Period Depreciation"
 msgstr "折舊日期"
 
@@ -903,7 +890,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "備註"
 
@@ -921,7 +907,6 @@ msgstr "備註"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "# 折舊明細"
 
@@ -1002,7 +987,6 @@ msgstr "過帳"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "過帳"
 
@@ -1151,7 +1135,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Modify Asset"
 msgid "State of Asset"
 msgstr "修改資產"
 

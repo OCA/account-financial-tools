@@ -87,7 +87,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 #, fuzzy
-#| msgid "Amount of Depreciation Lines"
 msgid "Amount Already Depreciated"
 msgstr "Aantal afschrijvingslijnen"
 
@@ -143,7 +142,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Analytische rekening"
 
@@ -192,7 +190,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "Invetseringscategorie"
 
@@ -331,7 +328,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Afschrijvingen"
 
@@ -400,7 +396,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Afschrijvingsmethode"
 
@@ -492,7 +487,6 @@ msgstr "Degressief"
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 #, fuzzy
-#| msgid "Degressive"
 msgid "Degressive Factor"
 msgstr "Degressief"
 
@@ -530,7 +524,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "Afschrijvingsdatum"
 
@@ -554,14 +547,12 @@ msgstr "Afschrijvingsdatums"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "Afschrijvingsdatum"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "# afschrijvingslijnen"
 
@@ -574,7 +565,6 @@ msgstr "Afschrijvingsmethode"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "Afschrijvingsdatum"
 
@@ -710,7 +700,6 @@ msgstr "Historiek"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Historiek"
 
@@ -778,7 +767,6 @@ msgstr "Factuurlijn"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Items"
 msgid "Journal"
 msgstr "Boekingslijnen"
 
@@ -889,7 +877,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Date of depreciation"
 msgid "Next Period Depreciation"
 msgstr "Datum van afschrijving"
 
@@ -902,7 +889,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Opmerkingen"
 
@@ -920,7 +906,6 @@ msgstr "Opmerkingen"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "# afschrijvingslijnen"
 
@@ -1001,7 +986,6 @@ msgstr "Geboekt"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "Geboekt"
 
@@ -1150,7 +1134,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Modify Asset"
 msgid "State of Asset"
 msgstr "Afschrijving wijzigen"
 

@@ -91,14 +91,12 @@ msgstr "Adicione aqui uma nota interna..."
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,amount:0
 #, fuzzy
-#| msgid "Account"
 msgid "Amount"
 msgstr "Conta"
 
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,depreciated_value:0
 #, fuzzy
-#| msgid "Amount of Depreciation Lines"
 msgid "Amount Already Depreciated"
 msgstr "Quantidade de linhas de depreciação"
 
@@ -156,7 +154,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Asset Sale Account"
 msgid "Asset Account"
 msgstr "Conta de Venda de Ativos"
 
@@ -205,7 +202,6 @@ msgstr "Linhas do Ativo"
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Value"
 msgid "Asset Name"
 msgstr "Valor do Ativo"
 
@@ -344,7 +340,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Ativos"
 
@@ -416,7 +411,6 @@ msgstr "Data de Término"
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Método de Depreciação"
 
@@ -511,7 +505,6 @@ msgstr "Decrescente"
 #: field:account.asset.asset,method_progress_factor:0
 #: field:account.asset.category,method_progress_factor:0
 #, fuzzy
-#| msgid "Degressive"
 msgid "Degressive Factor"
 msgstr "Decrescente"
 
@@ -549,7 +542,6 @@ msgstr "Depreciação"
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Account"
 msgstr "Data de depreciação"
 
@@ -573,14 +565,12 @@ msgstr "Datas de depreciação"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Entry"
 msgstr "Data de depreciação"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Depreciation Lines"
 msgstr "Nº de Linhas de Depreciação"
 
@@ -593,7 +583,6 @@ msgstr "Método de Depreciação"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Date"
 msgid "Depreciation Name"
 msgstr "Data de depreciação"
 
@@ -632,7 +621,6 @@ msgstr "Rascunhos de Ativos"
 #. module: account_asset_management
 #: field:account.asset.asset,method_end:0
 #, fuzzy
-#| msgid "Trigger Date"
 msgid "Ending Date"
 msgstr "Data de acionamento"
 
@@ -644,7 +632,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,account_move_line_ids:0
 #, fuzzy
-#| msgid "Journal Entries"
 msgid "Entries"
 msgstr "Movs. de Diário"
 
@@ -733,7 +720,6 @@ msgstr "Histórico"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Histórico"
 
@@ -801,7 +787,6 @@ msgstr "Linha de fatura"
 #. module: account_asset_management
 #: field:account.asset.category,journal_id:0
 #, fuzzy
-#| msgid "Journal Item"
 msgid "Journal"
 msgstr "Item do Diário"
 
@@ -912,7 +897,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Date of depreciation"
 msgid "Next Period Depreciation"
 msgstr "Data de depreciação"
 
@@ -925,7 +909,6 @@ msgstr "Normal"
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Notas"
 
@@ -943,7 +926,6 @@ msgstr "Notas"
 #. module: account_asset_management
 #: field:asset.modify,method_number:0
 #, fuzzy
-#| msgid "# of Depreciation Lines"
 msgid "Number of Depreciations/Years"
 msgstr "Nº de Linhas de Depreciação"
 
@@ -991,7 +973,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:asset.depreciation.confirmation.wizard,period_id:0
 #, fuzzy
-#| msgid "Force Period"
 msgid "Period"
 msgstr "Forçar Período"
 
@@ -1026,7 +1007,6 @@ msgstr "Publicado"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "Publicado"
 
@@ -1055,7 +1035,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
 #, fuzzy
-#| msgid "Sale Value"
 msgid "Purchase Value"
 msgstr "Valor de Venda"
 
@@ -1152,7 +1131,6 @@ msgstr "Valor de Venda"
 #. module: account_asset_management
 #: field:account.asset.asset,salvage_value:0
 #, fuzzy
-#| msgid "Sale Value"
 msgid "Salvage Value"
 msgstr "Valor de Venda"
 
@@ -1188,14 +1166,12 @@ msgstr "Estado"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Draft Assets"
 msgid "State of Asset"
 msgstr "Rascunhos de Ativos"
 
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Estado"
 

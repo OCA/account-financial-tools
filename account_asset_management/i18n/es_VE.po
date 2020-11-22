@@ -140,7 +140,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Cuenta analítica"
 
@@ -189,7 +188,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Value"
 msgid "Asset Name"
 msgstr "valor de activos"
 
@@ -328,7 +326,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Activos"
 
@@ -523,7 +520,6 @@ msgstr "Amortización"
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation"
 msgid "Depreciation Account"
 msgstr "Amortización"
 
@@ -547,14 +543,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation"
 msgid "Depreciation Entry"
 msgstr "Amortización"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "Depreciation"
 msgid "Depreciation Lines"
 msgstr "Amortización"
 
@@ -567,7 +561,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation"
 msgid "Depreciation Name"
 msgstr "Amortización"
 
@@ -703,7 +696,6 @@ msgstr "Historia"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Historia"
 
@@ -880,7 +872,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,remaining_value:0
 #, fuzzy
-#| msgid "Depreciation"
 msgid "Next Period Depreciation"
 msgstr "Amortización"
 
@@ -893,7 +884,6 @@ msgstr "Normal"
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Notas"
 
@@ -1017,7 +1007,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,purchase_value:0
 #, fuzzy
-#| msgid "Asset Value"
 msgid "Purchase Value"
 msgstr "valor de activos"
 
@@ -1139,14 +1128,12 @@ msgstr "Provincia"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Draft Assets"
 msgid "State of Asset"
 msgstr "Activos en estado borrador"
 
 #. module: account_asset_management
 #: field:account.asset.asset,state:0 field:asset.asset.report,state:0
 #, fuzzy
-#| msgid "State"
 msgid "Status"
 msgstr "Provincia"
 

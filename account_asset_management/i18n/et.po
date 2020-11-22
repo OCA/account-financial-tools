@@ -157,7 +157,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_asset_id:0
 #, fuzzy
-#| msgid "Analytic account"
 msgid "Asset Account"
 msgstr "Analüütiline konto"
 
@@ -206,7 +205,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,name:0
 #, fuzzy
-#| msgid "Asset Category"
 msgid "Asset Name"
 msgstr "Vara kategooria"
 
@@ -345,7 +343,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,child_ids:0
 #, fuzzy
-#| msgid "Assets"
 msgid "Child Assets"
 msgstr "Varad"
 
@@ -414,7 +411,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.asset,method:0 field:account.asset.category,method:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Computation Method"
 msgstr "Amortisatsioonimeetod"
 
@@ -542,7 +538,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.category,account_depreciation_id:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Account"
 msgstr "Amortisatsioonimeetod"
 
@@ -566,14 +561,12 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,move_id:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Entry"
 msgstr "Amortisatsioonimeetod"
 
 #. module: account_asset_management
 #: field:account.asset.asset,depreciation_line_ids:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Lines"
 msgstr "Amortisatsioonimeetod"
 
@@ -586,7 +579,6 @@ msgstr "Amortisatsioonimeetod"
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,name:0
 #, fuzzy
-#| msgid "Depreciation Method"
 msgid "Depreciation Name"
 msgstr "Amortisatsioonimeetod"
 
@@ -722,7 +714,6 @@ msgstr "Ajalugu"
 #. module: account_asset_management
 #: field:account.asset.history,name:0
 #, fuzzy
-#| msgid "History"
 msgid "History name"
 msgstr "Ajalugu"
 
@@ -910,7 +901,6 @@ msgstr ""
 #: field:account.asset.asset,note:0 field:account.asset.category,note:0
 #: field:account.asset.history,note:0
 #, fuzzy
-#| msgid "Notes"
 msgid "Note"
 msgstr "Märkmed"
 
@@ -1007,7 +997,6 @@ msgstr "Postitatud"
 #. module: account_asset_management
 #: field:asset.asset.report,posted_value:0
 #, fuzzy
-#| msgid "Posted"
 msgid "Posted Amount"
 msgstr "Postitatud"
 
@@ -1156,7 +1145,6 @@ msgstr ""
 #. module: account_asset_management
 #: field:account.asset.depreciation.line,parent_state:0
 #, fuzzy
-#| msgid "Modify Asset"
 msgid "State of Asset"
 msgstr "Muuda"
 
