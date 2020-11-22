@@ -73,7 +73,6 @@ msgstr ""
 #. module: account_move_budget
 #: model_terms:ir.ui.view,arch_db:account_move_budget.view_account_move_budget_line_search
 #, fuzzy
-#| msgid "Account"
 msgid "Analytic account"
 msgstr "Konto"
 
