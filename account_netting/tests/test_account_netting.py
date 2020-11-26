@@ -2,6 +2,8 @@
 # Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+from datetime import datetime
+
 import odoo.tests.common as common
 
 
@@ -14,6 +16,7 @@ class TestAccountNetting(common.SavepointCase):
         cls.env.user.write(
             {"groups_id": [(6, 0, [res_users_account_manager.id, partner_manager.id])]}
         )
+        company = cls.env.ref("base.main_company")
         # only adviser can create an account
         cls.account_receivable = cls.env["account.account"].create(
             {
@@ -21,6 +24,7 @@ class TestAccountNetting(common.SavepointCase):
                 "name": "customer account",
                 "user_type_id": cls.env.ref("account.data_account_type_receivable").id,
                 "reconcile": True,
+                "company_id": company.id,
             }
         )
         cls.account_payable = cls.env["account.account"].create(
@@ -29,6 +33,7 @@ class TestAccountNetting(common.SavepointCase):
                 "name": "supplier account",
                 "user_type_id": cls.env.ref("account.data_account_type_payable").id,
                 "reconcile": True,
+                "company_id": company.id,
             }
         )
         cls.account_revenue = cls.env["account.account"].search(
@@ -37,7 +42,8 @@ class TestAccountNetting(common.SavepointCase):
                     "user_type_id",
                     "=",
                     cls.env.ref("account.data_account_type_revenue").id,
-                )
+                ),
+                ("company_id", "=", company.id),
             ],
             limit=1,
         )
@@ -47,7 +53,8 @@ class TestAccountNetting(common.SavepointCase):
                     "user_type_id",
                     "=",
                     cls.env.ref("account.data_account_type_expenses").id,
-                )
+                ),
+                ("company_id", "=", company.id),
             ],
             limit=1,
         )
@@ -66,19 +73,35 @@ class TestAccountNetting(common.SavepointCase):
             }
         )
         cls.journal = cls.env["account.journal"].create(
-            {"name": "Test sale journal", "type": "sale", "code": "TEST"}
+            {
+                "name": "Test sale journal",
+                "type": "sale",
+                "code": "TEST",
+                "company_id": company.id,
+            }
         )
         cls.expenses_journal = cls.env["account.journal"].create(
-            {"name": "Test expense journal", "type": "purchase", "code": "EXP"}
+            {
+                "name": "Test expense journal",
+                "type": "purchase",
+                "code": "EXP",
+                "company_id": company.id,
+            }
         )
         cls.miscellaneous_journal = cls.env["account.journal"].create(
-            {"name": "Miscellaneus journal", "type": "general", "code": "OTHER"}
+            {
+                "name": "Miscellaneus journal",
+                "type": "general",
+                "code": "OTHER",
+                "company_id": company.id,
+            }
         )
         cls.customer_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.journal.id,
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "partner_id": cls.partner.id,
+                "company_id": company.id,
                 "invoice_line_ids": [
                     (
                         0,
@@ -100,8 +123,10 @@ class TestAccountNetting(common.SavepointCase):
         cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "partner_id": cls.partner.id,
+                "company_id": company.id,
+                "invoice_date": datetime.now(),
                 "invoice_line_ids": [
                     (
                         0,
@@ -126,8 +151,10 @@ class TestAccountNetting(common.SavepointCase):
         cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "partner_id": cls.partner1.id,
+                "company_id": company.id,
+                "invoice_date": datetime.now(),
                 "invoice_line_ids": [
                     (
                         0,
@@ -149,8 +176,10 @@ class TestAccountNetting(common.SavepointCase):
         cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
-                "type": "in_refund",
+                "move_type": "in_refund",
                 "partner_id": cls.partner1.id,
+                "company_id": company.id,
+                "invoice_date": datetime.now(),
                 "invoice_line_ids": [
                     (
                         0,
@@ -172,8 +201,10 @@ class TestAccountNetting(common.SavepointCase):
         cls.supplier_invoice = cls.env["account.move"].create(
             {
                 "journal_id": cls.expenses_journal.id,
-                "type": "in_refund",
+                "move_type": "in_refund",
                 "partner_id": cls.partner1.id,
+                "company_id": company.id,
+                "invoice_date": datetime.now(),
                 "invoice_line_ids": [
                     (
                         0,
