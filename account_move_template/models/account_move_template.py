@@ -3,7 +3,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import float_round
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -36,7 +35,7 @@ class AccountMoveTemplate(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or {}, name=_("%s (copy)") % self.name)
-        return super(AccountMoveTemplate, self).copy(default)
+        return super().copy(default)
 
     def eval_computed_line(self, line, sequence2amount):
         safe_eval_dict = {}
@@ -65,7 +64,7 @@ class AccountMoveTemplate(models.Model):
             )
 
     def compute_lines(self, sequence2amount):
-        prec = self.company_id.currency_id.rounding
+        company_cur = self.company_id.currency_id
         input_sequence2amount = sequence2amount.copy()
         for line in self.line_ids.filtered(lambda x: x.type == "input"):
             if line.sequence not in sequence2amount:
@@ -87,8 +86,8 @@ class AccountMoveTemplate(models.Model):
             )
         for line in self.line_ids.filtered(lambda x: x.type == "computed"):
             self.eval_computed_line(line, sequence2amount)
-            sequence2amount[line.sequence] = float_round(
-                sequence2amount[line.sequence], precision_rounding=prec
+            sequence2amount[line.sequence] = company_cur.round(
+                sequence2amount[line.sequence]
             )
         return sequence2amount
 
@@ -151,7 +150,10 @@ class AccountMoveTemplateLine(models.Model):
         string="Payment Terms",
         help="Used to compute the due date of the journal item.",
     )
-    is_refund = fields.Boolean(default=False, string="Is a refund?",)
+    is_refund = fields.Boolean(
+        default=False,
+        string="Is a refund?",
+    )
     tax_repartition_line_id = fields.Many2one(
         "account.tax.repartition.line",
         string="Tax Repartition Line",
@@ -163,7 +165,7 @@ class AccountMoveTemplateLine(models.Model):
         "account.account",
         string="Account Opt.",
         domain=[("deprecated", "=", False)],
-        help="When amount is negative, use this account in stead",
+        help="When amount is negative, use this account instead",
     )
 
     @api.depends("is_refund", "account_id", "tax_line_id")
