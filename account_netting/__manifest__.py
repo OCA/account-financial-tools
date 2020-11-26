@@ -4,13 +4,16 @@
 
 {
     "name": "Account netting",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "summary": "Compensate AR/AP accounts from the same partner",
     "category": "Accounting & Finance",
-    "author": "Tecnativa, " "Odoo Community Association (OCA)",
+    "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "website": "https://github.com/OCA/account-financial-tools/",
+    "website": "https://github.com/OCA/account-financial-tools",
     "depends": ["account"],
-    "data": ["wizards/account_move_make_netting_view.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "wizards/account_move_make_netting_view.xml",
+    ],
     "installable": True,
 }
