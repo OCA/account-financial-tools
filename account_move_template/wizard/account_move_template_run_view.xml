@@ -16,9 +16,22 @@
                         name="overwrite"
                         widget="ace"
                         options="{'mode': 'python'}"
-                        attrs="{'invisible': [('state', '=', 'set_lines')]}"
-                        placeholder="Add an internal note here..."
+                        invisible="1"
                     />
+                    <!-- Initial invisibility status of the overwrite field:
+                         attrs="{'invisible': [('state', '=', 'set_lines')]}"
+
+                         The overwrite option is useful when generating
+the move via code, but I think it's not a good idea to display it to
+the user. We can't expect users to write a python dict to enter data
+via the web interface for their daily usage of Odoo. Of course, most
+users will just leave the field empty and use the module as normal, but
+it complexifies the interface for everybody, and many users will wonder
+what they should enter in this "Overwrite" field and wait for help. So
+let's make that field invisible, and you can un-hide it for specific
+project where you have an accountant that is good at writing python
+dicts and finding IDs of partners!
+                    -->
                     <field name="company_id" groups="base.group_multi_company" />
                     <field name="date" states="set_lines" />
                     <field name="journal_id" states="set_lines" />
@@ -91,7 +104,7 @@
     </record>
     <menuitem
         id="account_move_template_run_menu"
-        parent="account.menu_finance_entries_accounting_miscellaneous"
+        parent="account.menu_finance_entries_actions"
         action="account_move_template_run_action"
         sequence="10"
     />

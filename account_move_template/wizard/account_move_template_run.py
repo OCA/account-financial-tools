@@ -4,7 +4,6 @@ from ast import literal_eval
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import float_is_zero
 
 
 class AccountMoveTemplateRun(models.TransientModel):
@@ -111,10 +110,10 @@ Valid dictionary to overwrite template lines:
         return ["partner_id", "amount", "name", "date_maturity"]
 
     def _get_overwrite_vals(self):
-        """ valid_dict = {
-                'L1': {'partner_id': 1, 'amount': 10},
-                'L2': {'partner_id': 2, 'amount': 20},
-            }
+        """valid_dict = {
+            'L1': {'partner_id': 1, 'amount': 10},
+            'L2': {'partner_id': 2, 'amount': 20},
+        }
         """
         self.ensure_one()
         valid_keys = self._get_valid_keys()
@@ -171,19 +170,14 @@ Valid dictionary to overwrite template lines:
         sequence2amount = {}
         for wizard_line in self.line_ids:
             sequence2amount[wizard_line.sequence] = wizard_line.amount
-        prec = self.company_id.currency_id.rounding
+        company_cur = self.company_id.currency_id
         self.template_id.compute_lines(sequence2amount)
-        if all(
-            [
-                float_is_zero(x, precision_rounding=prec)
-                for x in sequence2amount.values()
-            ]
-        ):
+        if all([company_cur.is_zero(x) for x in sequence2amount.values()]):
             raise UserError(_("Debit and credit of all lines are null."))
         move_vals = self._prepare_move()
         for line in self.template_id.line_ids:
             amount = sequence2amount[line.sequence]
-            if not float_is_zero(amount, precision_rounding=prec):
+            if not company_cur.is_zero(amount):
                 move_vals["line_ids"].append(
                     (0, 0, self._prepare_move_line(line, amount))
                 )
@@ -216,7 +210,7 @@ Valid dictionary to overwrite template lines:
         date_maturity = False
         if line.payment_term_id:
             pterm_list = line.payment_term_id.compute(value=1, date_ref=self.date)
-            date_maturity = max(l[0] for l in pterm_list)
+            date_maturity = max(line[0] for line in pterm_list)
         debit = line.move_line_type == "dr"
         values = {
             "name": line.name,
@@ -295,7 +289,9 @@ class AccountMoveTemplateLineRun(models.TransientModel):
         "Amount", required=True, currency_field="company_currency_id"
     )
     note = fields.Char(readonly=True)
-    is_refund = fields.Boolean(default=False, string="Is a refund?", readonly=True,)
+    is_refund = fields.Boolean(string="Is a refund?", readonly=True)
     tax_repartition_line_id = fields.Many2one(
-        "account.tax.repartition.line", string="Tax Repartition Line", readonly=True,
+        "account.tax.repartition.line",
+        string="Tax Repartition Line",
+        readonly=True,
     )
