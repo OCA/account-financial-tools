@@ -375,6 +375,28 @@ or kept as user input.</p>
 the amount of every input lines.</p>
 <p>The journal entry form allows lo load, through a wizard,
 the template to use and the amounts to fill.</p>
+<p><strong>Notable features:</strong></p>
+<p>This module enhance the capability of module account_move_template with following features,</p>
+<ol class="arabic">
+<li><p class="first">Optional account for negative amount.</p>
+<blockquote>
+<p>When the Journal entry is created, and credit/debit is negative value, change debit/credit
+side and use the opt_account_id</p>
+</blockquote>
+</li>
+<li><p class="first">Allow overwrite move line values with overwrite dict.</p>
+<blockquote>
+<p>Normally, the journal items created by the template will require user input on wizard.
+This feature allow passing the overwrite values with a dictionary.
+This is particularly useful when the wizard is called by code.</p>
+<p>Sample of dictionary to overwrite move lines:</p>
+<pre class="literal-block">
+{'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},
+ 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }
+</pre>
+</blockquote>
+</li>
+</ol>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -406,6 +428,7 @@ defined formula, based on other lines, or by requiring user input.</li>
 <ol class="arabic simple">
 <li>Go to <em>Invoicing / Accounting / Miscellaneous / Create Entry from Template</em></li>
 <li>Select one of the available templates.</li>
+<li>As option, you can overwrite output lines with dict, i.e., {“L1”: {“partner”: 1}}</li>
 <li>Complete the entries according to the template and click on the button <em>Generate Journal Entry</em>.</li>
 </ol>
 </div>
@@ -452,6 +475,10 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li><a class="reference external" href="https://www.sygel.es">Sygel</a>:<ul>
 <li>Harald Panten &lt;<a class="reference external" href="mailto:harald.panten&#64;sygel.es">harald.panten&#64;sygel.es</a>&gt;</li>
 <li>Valentin Vinagre &lt;<a class="reference external" href="mailto:valentin.vinagre&#64;sygel.es">valentin.vinagre&#64;sygel.es</a>&gt;</li>
+</ul>
+</li>
+<li><a class="reference external" href="http://ecosoft.co.th">Ecosoft</a>:<ul>
+<li>Kitti U. &lt;<a class="reference external" href="mailto:kittiu&#64;ecosoft.co.th">kittiu&#64;ecosoft.co.th</a>&gt; (Add context overwrite)</li>
 </ul>
 </li>
 </ul>
