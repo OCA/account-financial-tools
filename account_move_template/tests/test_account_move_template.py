@@ -148,8 +148,7 @@ class TestAccountMoveTemplate(TransactionCase):
         )
 
     def test_create_template(self):
-        """Test that I can create a template
-        """
+        """Test that I can create a template"""
         template = (
             self.env["account.move.template"]
             .with_user(self.user)
