@@ -20,6 +20,16 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_account_move_template_run__overwrite
+msgid ""
+"\n"
+"Valid dictionary to overwrite template lines:\n"
+"{'L1': {'partner_id': 1, 'amount': 100, 'name': 'some label'},\n"
+" 'L2': {'partner_id': 2, 'amount': 200, 'name': 'some label 2'}, }\n"
+"        "
+msgstr ""
+
+#. module: account_move_template
 #: code:addons/account_move_template/models/account_move_template.py:0
 #, python-format
 msgid "%s (copy)"
@@ -34,6 +44,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__account_id
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__account_id
 msgid "Account"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__opt_account_id
+msgid "Account Opt."
+msgstr ""
+
+#. module: account_move_template
+#: model_terms:ir.ui.view,arch_db:account_move_template.account_move_template_run_form
+msgid "Add an internal note here..."
 msgstr ""
 
 #. module: account_move_template
@@ -190,6 +210,14 @@ msgid ""
 msgstr ""
 
 #. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid ""
+"Invalid dictionary: {}\n"
+"{}"
+msgstr ""
+
+#. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line__is_refund
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_line_run__is_refund
 msgid "Is a refund?"
@@ -224,6 +252,12 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model,name:account_move_template.model_account_move_template_line
 msgid "Journal Item Template"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Keys must be line sequence, i..e, L1, L2, ..."
 msgstr ""
 
 #. module: account_move_template
@@ -307,6 +341,17 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__partner_id
 msgid "Override Partner"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,field_description:account_move_template.field_account_move_template_run__overwrite
+msgid "Overwrite"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Overwrite value must be a valid python dict"
 msgstr ""
 
 #. module: account_move_template
@@ -408,6 +453,17 @@ msgstr ""
 #. module: account_move_template
 #: model:ir.model.fields.selection,name:account_move_template.selection__account_move_template_line__type__input
 msgid "User input"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/account_move_template_run.py:0
+#, python-format
+msgid "Valid fields to overwrite are %s"
+msgstr ""
+
+#. module: account_move_template
+#: model:ir.model.fields,help:account_move_template.field_account_move_template_line__opt_account_id
+msgid "When amount is negative, use this account in stead"
 msgstr ""
 
 #. module: account_move_template
