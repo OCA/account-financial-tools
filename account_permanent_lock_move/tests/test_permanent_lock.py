@@ -47,19 +47,12 @@ class PermanentLock(common.TransactionCase):
         })
 
         # Call lock wizard on entry
-        raised_lock_error = False
-        try:
+        with self.assertRaises(UserError):
             self.wizard = self.wizard_obj.create({
                 'company_id': self.company_id,
                 'lock_date': fields.Date.today()
             })
             self.wizard.confirm_date()
-        except UserError as ue:
-            if 'entries are still unposted' in ue.name:
-                raised_lock_error = True
-
-        self.assertTrue(raised_lock_error,
-                        "Permanent lock done even with unposted entry.")
 
         # Post entry and lock
         self.move.post()
@@ -77,26 +70,16 @@ class PermanentLock(common.TransactionCase):
         self.wizard.confirm_date()
 
         # Try to lock the day before
-        raised_lock_error = False
-        try:
+        with self.assertRaises(UserError):
             yesterday = fields.Date.today() + datetime.timedelta(days=-1)
             self.wizard = self.wizard_obj.create({
                 'company_id': self.company_id,
                 'lock_date': yesterday
             })
             self.wizard.confirm_date()
-        except UserError as ue:
-            if 'permanent lock date in the past' in ue.name:
-                raised_lock_error = True
-
-        self.assertTrue(raised_lock_error,
-                        "Permanent lock set the day before.")
 
         # Test that the move cannot be created, written, or cancelled
-        raised_create_error = False
-        raised_write_error = False
-        raised_cancel_error = False
-        try:
+        with self.assertRaises(UserError):
             self.move2 = self.account_move_obj.create({
                 'date': fields.Date.today(),
                 'journal_id': self.journal_id,
@@ -110,27 +93,9 @@ class PermanentLock(common.TransactionCase):
                     'name': 'Debit line',
                 })]
             })
-        except UserError as ue:
-            if 'permanent lock date' in ue.name:
-                raised_create_error = True
 
-        self.assertTrue(raised_create_error,
-                        "Journal Entry could be created after locking!")
-
-        try:
+        with self.assertRaises(UserError):
             self.move.write({'name': 'TEST'})
-        except UserError as ue:
-            if 'permanent lock date' in ue.name:
-                raised_write_error = True
 
-        self.assertTrue(raised_write_error,
-                        "Journal Entry could be modified after locking!")
-
-        try:
+        with self.assertRaises(UserError):
             self.move.button_cancel()
-        except UserError as ue:
-            if 'permanent lock date' in ue.name:
-                raised_cancel_error = True
-
-        self.assertTrue(raised_cancel_error,
-                        "Journal Entry could be cancelled after locking!")
