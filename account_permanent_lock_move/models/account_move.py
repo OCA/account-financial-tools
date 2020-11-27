@@ -37,5 +37,4 @@ class AccountMove(models.Model):
         # as it is not done by default
         self._check_lock_date()
         result = super(AccountMove, self).write(vals)
-        self._check_lock_date()
         return result
