@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2019 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# 2020 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import logging
