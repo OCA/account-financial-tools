@@ -91,7 +91,7 @@ class ResCompany(models.Model):
                     _(
                         "You cannot lock a period that is not finished yet. "
                         "Please make sure that the lock date for advisors is "
-                        "not set after the last day of the previous month."
+                        "set at or after the last day of the next month."
                     )
                 )
 
