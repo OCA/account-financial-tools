@@ -1,8 +1,8 @@
 # Copyright 2019 ForgeFlow S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import SUPERUSER_ID, _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 
 class AccountUpdateLockToDate(models.TransientModel):
@@ -45,7 +45,7 @@ class AccountUpdateLockToDate(models.TransientModel):
         self.ensure_one()
         has_adviser_group = self.env.user.has_group("account.group_account_manager")
         if not (has_adviser_group or self.env.uid == SUPERUSER_ID):
-            raise UserError(_("You are not allowed to execute this action."))
+            raise ValidationError(_("You are not allowed to execute this action."))
 
     def execute(self):
         self.ensure_one()
