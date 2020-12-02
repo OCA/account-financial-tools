@@ -1,9 +1,9 @@
 # Copyright 2019 ForgeFlow S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
 
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 
@@ -88,7 +88,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
             }
         )
         self.demo_user.write({"groups_id": [(3, self.adviser_group.id)]})
-        with self.assertRaises(UserError):
+        with self.assertRaises(ValidationError):
             wizard.with_user(self.demo_user.id).execute()
 
     def test_02_update_with_access(self):
@@ -116,7 +116,7 @@ class TestAccountLockToDateUpdate(TransactionCase):
         self.company.period_lock_to_date = "2900-01-01"
         self.company.fiscalyear_lock_to_date = "2900-02-01"
         move = self.create_account_move("2900-01-01")
-        with self.assertRaises(UserError):
+        with self.assertRaises(ValidationError):
             move.with_user(self.demo_user.id).action_post()
 
     def test_04_create_move_inside_period(self):
