@@ -121,7 +121,7 @@ class AccountMoveLine(models.Model):
 
         # post all the writeoff moves at once
         if writeoff_moves:
-            writeoff_moves.post()
+            writeoff_moves.action_post()
 
         # Return the writeoff move.line which is to be reconciled
         return line_to_reconcile

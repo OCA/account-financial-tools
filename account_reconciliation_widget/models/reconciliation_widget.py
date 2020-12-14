@@ -1,5 +1,7 @@
 import copy
 
+from psycopg2 import sql
+
 from odoo import _, api, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
@@ -86,8 +88,7 @@ class AccountReconciliation(models.AbstractModel):
 
         # Blue lines = payment on bank account not assigned to a statement yet
         aml_accounts = [
-            st_line.journal_id.default_credit_account_id.id,
-            st_line.journal_id.default_debit_account_id.id,
+            st_line.journal_id.default_account_id.id,
         ]
 
         if partner_id is None:
@@ -106,7 +107,8 @@ class AccountReconciliation(models.AbstractModel):
         from_clause, where_clause, where_clause_params = (
             self.env["account.move.line"]._where_calc(domain).get_sql()
         )
-        query_str = """
+        query_str = sql.SQL(
+            """
             SELECT "account_move_line".id FROM {from_clause}
             {where_str}
             ORDER BY ("account_move_line".debit -
@@ -115,10 +117,11 @@ class AccountReconciliation(models.AbstractModel):
                 "account_move_line".id ASC
             {limit_str}
         """.format(
-            from_clause=from_clause,
-            where_str=where_clause and (" WHERE %s" % where_clause) or "",
-            amount=st_line.amount,
-            limit_str=limit and " LIMIT %s" or "",
+                from_clause=from_clause,
+                where_str=where_clause and (" WHERE %s" % where_clause) or "",
+                amount=st_line.amount,
+                limit_str=limit and " LIMIT %s" or "",
+            )
         )
         params = where_clause_params + (limit and [limit] or [])
         self.env["account.move"].flush()
@@ -290,7 +293,6 @@ class AccountReconciliation(models.AbstractModel):
         """
         if not bank_statement_line_ids:
             return {}
-        suspense_moves_mode = self._context.get("suspense_moves_mode")
         bank_statements = (
             self.env["account.bank.statement.line"]
             .browse(bank_statement_line_ids)
@@ -301,17 +303,13 @@ class AccountReconciliation(models.AbstractModel):
              SELECT line.id
              FROM account_bank_statement_line line
              LEFT JOIN res_partner p on p.id = line.partner_id
-             WHERE line.account_id IS NULL
+             INNER JOIN account_bank_statement st ON line.statement_id = st.id
+                AND st.state = 'posted'
+             WHERE line.is_reconciled = FALSE
              AND line.amount != 0.0
              AND line.id IN %(ids)s
-             {cond}
              GROUP BY line.id
-        """.format(
-            cond=not suspense_moves_mode
-            and """AND NOT EXISTS (SELECT 1 from account_move_line aml
-            WHERE aml.statement_line_id = line.id)"""
-            or "",
-        )
+        """
         self.env.cr.execute(query, {"ids": tuple(bank_statement_line_ids)})
 
         domain = [["id", "in", [line.get("id") for line in self.env.cr.dictfetchall()]]]
@@ -327,6 +325,9 @@ class AccountReconciliation(models.AbstractModel):
 
         results.update(
             {
+                "statement_id": len(bank_statements_left) == 1
+                and bank_statements_left.id
+                or False,
                 "statement_name": len(bank_statements_left) == 1
                 and bank_statements_left.name
                 or False,
@@ -403,7 +404,6 @@ class AccountReconciliation(models.AbstractModel):
         )
         if aml_ids:
             aml = MoveLine.browse(aml_ids)
-            aml._check_reconcile_validity()
             account = aml[0].account_id
             currency = account.currency_id or account.company_id.currency_id
             return {
@@ -489,8 +489,7 @@ class AccountReconciliation(models.AbstractModel):
                 WHERE l.account_id = a.id
                 {inner_where}
                 AND l.amount_residual != 0
-                AND (move.state = 'posted' OR (move.state = 'draft'
-                     AND journal.post_at = 'bank_rec'))
+                AND move.state = 'posted'
             )
         """.format(
             inner_where=is_partner and "AND l.partner_id = p.id" or " "
@@ -504,8 +503,7 @@ class AccountReconciliation(models.AbstractModel):
                 WHERE l.account_id = a.id
                 {inner_where}
                 AND l.amount_residual > 0
-                AND (move.state = 'posted'
-                     OR (move.state = 'draft' AND journal.post_at = 'bank_rec'))
+                AND move.state = 'posted'
             )
             AND EXISTS (
                 SELECT NULL
@@ -515,13 +513,13 @@ class AccountReconciliation(models.AbstractModel):
                 WHERE l.account_id = a.id
                 {inner_where}
                 AND l.amount_residual < 0
-                AND (move.state = 'posted'
-                     OR (move.state = 'draft' AND journal.post_at = 'bank_rec'))
+                AND move.state = 'posted'
             )
         """.format(
             inner_where=is_partner and "AND l.partner_id = p.id" or " "
         )
-        query = """
+        query = sql.SQL(
+            """
             SELECT {select} account_id, account_name, account_code, max_date
             FROM (
                     SELECT {inner_select}
@@ -549,35 +547,36 @@ class AccountReconciliation(models.AbstractModel):
                 ) as s
             {outer_where}
         """.format(
-            select=is_partner
-            and "partner_id, partner_name, to_char(last_time_entries_checked, "
-            "'YYYY-MM-DD') AS last_time_entries_checked,"
-            or " ",
-            inner_select=is_partner
-            and "p.id AS partner_id, p.name AS partner_name, "
-            "p.last_time_entries_checked AS last_time_entries_checked,"
-            or " ",
-            inner_from=is_partner
-            and "RIGHT JOIN res_partner p ON (l.partner_id = p.id)"
-            or " ",
-            where1=is_partner
-            and " "
-            or "AND ((at.type <> 'payable' AND at.type <> 'receivable') "
-            "OR l.partner_id IS NULL)",
-            where2=account_type and "AND at.type = %(account_type)s" or "",
-            where3=res_ids and "AND " + res_alias + ".id in %(res_ids)s" or "",
-            company_id=self.env.company.id,
-            where4=aml_ids and "AND l.id IN %(aml_ids)s" or " ",
-            where5=all_entries and all_entries_query or only_dual_entries_query,
-            group_by1=is_partner and "l.partner_id, p.id," or " ",
-            group_by2=is_partner and ", p.last_time_entries_checked" or " ",
-            order_by=is_partner
-            and "ORDER BY p.last_time_entries_checked"
-            or "ORDER BY a.code",
-            outer_where=is_partner
-            and "WHERE (last_time_entries_checked IS NULL "
-            "OR max_date > last_time_entries_checked)"
-            or " ",
+                select=is_partner
+                and "partner_id, partner_name, to_char(last_time_entries_checked, "
+                "'YYYY-MM-DD') AS last_time_entries_checked,"
+                or " ",
+                inner_select=is_partner
+                and "p.id AS partner_id, p.name AS partner_name, "
+                "p.last_time_entries_checked AS last_time_entries_checked,"
+                or " ",
+                inner_from=is_partner
+                and "RIGHT JOIN res_partner p ON (l.partner_id = p.id)"
+                or " ",
+                where1=is_partner
+                and " "
+                or "AND ((at.type <> 'payable' AND at.type <> 'receivable') "
+                "OR l.partner_id IS NULL)",
+                where2=account_type and "AND at.type = %(account_type)s" or "",
+                where3=res_ids and "AND " + res_alias + ".id in %(res_ids)s" or "",
+                company_id=self.env.company.id,
+                where4=aml_ids and "AND l.id IN %(aml_ids)s" or " ",
+                where5=all_entries and all_entries_query or only_dual_entries_query,
+                group_by1=is_partner and "l.partner_id, p.id," or " ",
+                group_by2=is_partner and ", p.last_time_entries_checked" or " ",
+                order_by=is_partner
+                and "ORDER BY p.last_time_entries_checked"
+                or "ORDER BY a.code",
+                outer_where=is_partner
+                and "WHERE (last_time_entries_checked IS NULL "
+                "OR max_date > last_time_entries_checked)"
+                or " ",
+            )
         )
         self.env["account.move.line"].flush()
         self.env["account.account"].flush()
@@ -822,17 +821,6 @@ class AccountReconciliation(models.AbstractModel):
         # line
         domain = expression.AND([domain, [("company_id", "=", st_line.company_id.id)]])
 
-        # take only moves in valid state. Draft is accepted only when "Post At"
-        # is set to "Bank Reconciliation" in the associated journal
-        domain_post_at = [
-            "|",
-            "&",
-            ("move_id.state", "=", "draft"),
-            ("journal_id.post_at", "=", "bank_rec"),
-            ("move_id.state", "not in", ["draft", "cancel"]),
-        ]
-        domain = expression.AND([domain, domain_post_at])
-
         if st_line.company_id.account_bank_reconciliation_start:
             domain = expression.AND(
                 [
@@ -858,11 +846,7 @@ class AccountReconciliation(models.AbstractModel):
             "&",
             ("reconciled", "=", False),
             ("account_id", "=", account_id),
-            "|",
             ("move_id.state", "=", "posted"),
-            "&",
-            ("move_id.state", "=", "draft"),
-            ("move_id.journal_id.post_at", "=", "bank_rec"),
         ]
         domain = expression.AND([domain, [("balance", "!=", 0.0)]])
         if partner_id:
@@ -1046,7 +1030,8 @@ class AccountReconciliation(models.AbstractModel):
         data = {
             "id": st_line.id,
             "ref": st_line.ref,
-            "note": st_line.note or "",
+            # FIXME: where to fill?
+            # 'note': st_line.note or "",
             "name": st_line.name,
             "date": format_date(self.env, st_line.date),
             "amount": amount,
@@ -1056,11 +1041,11 @@ class AccountReconciliation(models.AbstractModel):
             "journal_id": st_line.journal_id.id,
             "statement_id": st_line.statement_id.id,
             "account_id": [
-                st_line.journal_id.default_debit_account_id.id,
-                st_line.journal_id.default_debit_account_id.display_name,
+                st_line.journal_id.default_account_id.id,
+                st_line.journal_id.default_account_id.display_name,
             ],
-            "account_code": st_line.journal_id.default_debit_account_id.code,
-            "account_name": st_line.journal_id.default_debit_account_id.name,
+            "account_code": st_line.journal_id.default_account_id.code,
+            "account_name": st_line.journal_id.default_account_id.name,
             "partner_name": st_line.partner_id.name,
             "communication_partner_name": st_line.partner_name,
             # Amount in the statement currency
@@ -1091,20 +1076,19 @@ class AccountReconciliation(models.AbstractModel):
         where_str = where_clause and (" WHERE %s" % where_clause) or ""
 
         # Get pairs
-        query = """
+        query = sql.SQL(
+            """
             SELECT a.id, b.id
             FROM account_move_line a, account_move_line b,
                  account_move move_a, account_move move_b,
                  account_journal journal_a, account_journal journal_b
             WHERE a.id != b.id
             AND move_a.id = a.move_id
-            AND (move_a.state = 'posted'
-                 OR (move_a.state = 'draft' AND journal_a.post_at = 'bank_rec'))
+            AND move_a.state = 'posted'
             AND move_a.journal_id = journal_a.id
             AND move_b.id = b.move_id
             AND move_b.journal_id = journal_b.id
-            AND (move_b.state = 'posted'
-                 OR (move_b.state = 'draft' AND journal_b.post_at = 'bank_rec'))
+            AND move_b.state = 'posted'
             AND a.amount_residual = -b.amount_residual
             AND a.balance != 0.0
             AND b.balance != 0.0
@@ -1118,7 +1102,8 @@ class AccountReconciliation(models.AbstractModel):
             ORDER BY a.date desc
             LIMIT 1
             """.format(
-            from_clause + where_str
+                from_clause + where_str
+            )
         )
         move_line_id = self.env.context.get("move_line_id") or None
         params = (

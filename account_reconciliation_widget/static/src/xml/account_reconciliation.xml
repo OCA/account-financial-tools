@@ -66,7 +66,7 @@
                             rel="do_action"
                             data-action_name="Unpaid Customer Invoices"
                             data-model="account.move"
-                            data-domain="[('type', 'in', ('out_invoice', 'out_refund'))]"
+                            data-domain="[('move_type', 'in', ('out_invoice', 'out_refund'))]"
                             data-context="{'search_default_unpaid': 1}"
                         >unpaid invoices</a> and follow-up customers</li>
                 <li>Pay your <a
@@ -74,7 +74,7 @@
                             rel="do_action"
                             data-action_name="Unpaid Vendor Bills"
                             data-model="account.move"
-                            data-domain="[('type', 'in', ('in_invoice', 'in_refund'))]"
+                            data-domain="[('move_type', 'in', ('in_invoice', 'in_refund'))]"
                             data-context="{'search_default_unpaid': 1}"
                         >vendor bills</a></li>
                 <li>Check all <a

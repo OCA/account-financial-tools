@@ -50,7 +50,7 @@ odoo.define("account.ReconciliationModel", function (require) {
      *          label: string
      *          amount: number - real amount
      *          amount_str: string - formated amount
-     *          [already_paid]: boolean
+     *          [is_liquidity_line]: boolean
      *          [partner_id]: integer
      *          [partner_name]: string
      *          [account_code]: string
@@ -307,11 +307,11 @@ odoo.define("account.ReconciliationModel", function (require) {
         closeStatement: function () {
             var self = this;
             return this._rpc({
-                model: "account.bank.statement.line",
-                method: "button_confirm_bank",
-                args: [self.bank_statement_line_id.id],
+                model: "account.bank.statement",
+                method: "button_validate",
+                args: [self.statement.statement_id],
             }).then(function () {
-                return self.bank_statement_line_id.id;
+                return self.statement.statement_id;
             });
         },
         /**
@@ -951,13 +951,13 @@ odoo.define("account.ReconciliationModel", function (require) {
                             partner_id: line.st_line.partner_id,
                             counterpart_aml_dicts: _.map(
                                 _.filter(props, function (prop) {
-                                    return !isNaN(prop.id) && !prop.already_paid;
+                                    return !isNaN(prop.id) && !prop.is_liquidity_line;
                                 }),
                                 self._formatToProcessReconciliation.bind(self, line)
                             ),
                             payment_aml_ids: _.pluck(
                                 _.filter(props, function (prop) {
-                                    return !isNaN(prop.id) && prop.already_paid;
+                                    return !isNaN(prop.id) && prop.is_liquidity_line;
                                 }),
                                 "id"
                             ),
@@ -1124,7 +1124,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                     }
                     return;
                 }
-                if (!prop.already_paid && parseInt(prop.id)) {
+                if (!prop.is_liquidity_line && parseInt(prop.id)) {
                     prop.is_move_line = true;
                 }
                 reconciliation_proposition.push(prop);
@@ -1135,6 +1135,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                     prop.__tax_to_recompute &&
                     prop.base_amount
                 ) {
+                    // (OZM) REVISAR
                     reconciliation_proposition = _.filter(
                         reconciliation_proposition,
                         function (p) {
@@ -1170,10 +1171,10 @@ odoo.define("account.ReconciliationModel", function (require) {
                                         tax_ids: tax.tax_ids,
                                         tax_repartition_line_id:
                                             tax.tax_repartition_line_id,
-                                        tag_ids: tax.tag_ids,
+                                        tax_tag_ids: tax.tag_ids,
                                         amount: tax.amount,
-                                        label: prop.label
-                                            ? prop.label + " " + tax.name
+                                        name: prop.name
+                                            ? prop.name + " " + tax.name
                                             : tax.name,
                                         date: prop.date,
                                         account_id: tax.account_id
@@ -1205,7 +1206,9 @@ odoo.define("account.ReconciliationModel", function (require) {
                                     reconciliation_proposition.push(tax_prop);
                                 });
 
-                                prop.tag_ids = result.base_tags;
+                                prop.tax_tag_ids = self._formatMany2ManyTagsTax(
+                                    result.base_tags || []
+                                );
                             })
                     );
                 } else {

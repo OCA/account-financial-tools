@@ -1,4 +1,4 @@
-odoo.define("account.reconciliation_tests.data", function () {
+odoo.define("account_reconciliation_widget.reconciliation_tests.data", function () {
     "use strict";
 
     /*
@@ -2043,19 +2043,19 @@ odoo.define("account.reconciliation_tests.data", function () {
     return Datas;
 });
 
-odoo.define("account.reconciliation_tests", function (require) {
+odoo.define("account_reconciliation_widget.reconciliation_tests", function (require) {
     "use strict";
 
     var ReconciliationClientAction = require("account.ReconciliationClientAction");
     var ReconciliationRenderer = require("account.ReconciliationRenderer");
-    var demoData = require("account.reconciliation_tests.data");
+    var demoData = require("account_reconciliation_widget.reconciliation_tests.data");
 
     var testUtils = require("web.test_utils");
     var testUtilsDom = require("web.test_utils_dom");
     var testUtilsMock = require("web.test_utils_mock");
 
     QUnit.module(
-        "account",
+        "account_reconciliation_widget",
         {
             beforeEach: function () {
                 this.params = demoData.getParams();

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="assets_backend"
+        name="account_reconciliation_widget assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/account_reconciliation_widget/static/src/scss/account_reconciliation.scss"
+            />
+
+            <script
+                type="text/javascript"
+                src="/account_reconciliation_widget/static/src/js/reconciliation/reconciliation_action.js"
+            />
+            <script
+                type="text/javascript"
+                src="/account_reconciliation_widget/static/src/js/reconciliation/reconciliation_model.js"
+            />
+            <script
+                type="text/javascript"
+                src="/account_reconciliation_widget/static/src/js/reconciliation/reconciliation_renderer.js"
+            />
+
+        </xpath>
+    </template>
+
+    <template id="qunit_suite" name="account tests" inherit_id="web.qunit_suite_tests">
+        <xpath expr="." position="inside">
+
+            <script
+                type="text/javascript"
+                src="/account_reconciliation_widget/static/tests/account_reconciliation_tests.js"
+            />
+
+        </xpath>
+    </template>
+</odoo>

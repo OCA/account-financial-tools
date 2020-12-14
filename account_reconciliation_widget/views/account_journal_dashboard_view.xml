@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+            <field name="name">account.journal.inherit.dashboard.kanban</field>
+            <field name="model">account.journal</field>
+            <field
+                name="inherit_id"
+                ref="account.account_journal_dashboard_kanban_view"
+            />
+            <field name="arch" type="xml">
+                <xpath
+                    expr="//kanban/templates//div[@id='dashboard_bank_cash_left']/t[1]"
+                    position="before"
+                >
+                    <t t-if="dashboard.number_to_reconcile > 0">
+                        <button
+                            type="object"
+                            name="action_open_reconcile"
+                            class="btn btn-primary"
+                        > Reconcile <t
+                                t-esc="dashboard.number_to_reconcile"
+                            /> Items</button>
+                    </t>
+                </xpath>
+                <xpath
+                    expr="//kanban/templates//div[@id='dashboard_bank_cash_right']"
+                    position="inside"
+                >
+                    <t t-if="dashboard.number_to_check > 0">
+                        <div class="row">
+                            <div class="col overflow-hidden text-left">
+                                <a type="object" name="action_open_reconcile_to_check">
+                                    <t t-esc="dashboard.number_to_check" /> to check</a>
+                            </div>
+                            <div class="col-auto text-right">
+                                <span>
+                                    <t t-esc="dashboard.to_check_balance" />
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
