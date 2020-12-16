@@ -5,7 +5,6 @@ odoo.define("account.ReconciliationModel", function (require) {
     var field_utils = require("web.field_utils");
     var utils = require("web.utils");
     var session = require("web.session");
-    var WarningDialog = require("web.CrashManager").WarningDialog;
     var core = require("web.core");
     var _t = core._t;
 
@@ -140,7 +139,6 @@ odoo.define("account.ReconciliationModel", function (require) {
          * @returns {Promise}
          */
         addProposition: function (handle, mv_line_id) {
-            var self = this;
             var line = this.getLine(handle);
             var prop = _.clone(_.find(line["mv_lines_" + line.mode], {id: mv_line_id}));
             this._addProposition(line, prop);
@@ -807,6 +805,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                 // Check if we have another line with to_check and if yes don't change value of this proposition
                 prop.to_check = line.reconciliation_proposition.some(function (
                     rec_prop,
+                    // eslint-disable-next-line no-unused-vars
                     index
                 ) {
                     return rec_prop.id !== prop.id && rec_prop.to_check;
@@ -928,7 +927,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                 var props = _.filter(line.reconciliation_proposition, function (prop) {
                     return !prop.invalid;
                 });
-                var computeLinePromise;
+                var computeLinePromise = null;
                 if (props.length === 0) {
                     // Usability: if user has not chosen any lines and click validate, it has the same behavior
                     // as creating a write-off of the same amount.
@@ -1574,7 +1573,7 @@ odoo.define("account.ReconciliationModel", function (require) {
             var formatOptions = {
                 currency_id: line.st_line.currency_id,
             };
-            var amount;
+            var amount = 0;
             switch (values.amount_type) {
                 case "percentage":
                     amount = (line.balance.amount * values.amount) / 100;
@@ -1583,7 +1582,6 @@ odoo.define("account.ReconciliationModel", function (require) {
                     var matching = line.st_line.name.match(
                         new RegExp(values.amount_from_label_regex)
                     );
-                    amount = 0;
                     if (matching && matching.length == 2) {
                         matching = matching[1].replace(
                             new RegExp("\\D" + values.decimal_separator, "g"),
@@ -1717,7 +1715,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                 function (prop) {
                     return _.isNumber(prop.id) ? prop.id : null;
                 }
-            ).filter((id) => id != null);
+            ).filter((id) => id !== null);
             var filter = line["filter_" + mode] || "";
             return this._rpc({
                 model: "account.reconciliation.widget",
@@ -1786,8 +1784,8 @@ odoo.define("account.ReconciliationModel", function (require) {
          * @param {Object[]} data.moves list of processed account.move
          * @returns {Deferred}
          */
+        // eslint-disable-next-line no-unused-vars
         _validatePostProcess: function (data) {
-            var self = this;
             return Promise.resolve();
         },
     });
@@ -2291,7 +2289,7 @@ odoo.define("account.ReconciliationModel", function (require) {
                 function (prop) {
                     return _.isNumber(prop.id) ? prop.id : null;
                 }
-            ).filter((id) => id != null);
+            ).filter((id) => id !== null);
             var filter = line.filter_match || "";
             var args = [
                 line.account_id.id,

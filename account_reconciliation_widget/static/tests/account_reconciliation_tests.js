@@ -1,4 +1,9 @@
-odoo.define("account_reconciliation_widget.reconciliation_tests.data", function () {
+/* global QUnit*/
+
+odoo.define("account_reconciliation_widget.reconciliation_tests.data", function (
+    // eslint-disable-next-line no-unused-vars
+    require
+) {
     "use strict";
 
     /*
@@ -10,6 +15,15 @@ odoo.define("account_reconciliation_widget.reconciliation_tests.data", function 
      */
 
     var Datas = {};
+
+    var options = {
+        context: {
+            statement_line_ids: [4],
+        },
+        params: {
+            limitMoveLines: 5,
+        },
+    };
 
     var db = {
         "res.company": {
@@ -2016,15 +2030,6 @@ odoo.define("account_reconciliation_widget.reconciliation_tests.data", function 
         },
     };
 
-    var options = {
-        context: {
-            statement_line_ids: [4],
-        },
-        params: {
-            limitMoveLines: 5,
-        },
-    };
-
     Datas.params = {
         data: db,
         data_preprocess: data_preprocess,
@@ -2413,7 +2418,9 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                             "Should call process_bank_statement_line with args"
                         );
                         var def = testUtils.makeTestPromise();
-                        def.abort = function () {};
+                        def.abort = function () {
+                            // Do nothing.
+                        };
                         event.data.callback(def);
                     }
                 });
@@ -2469,7 +2476,6 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                                     to_check: false,
                                     counterpart_aml_dicts: [],
                                     payment_aml_ids: [],
-                                    to_check: false,
                                     new_aml_dicts: [
                                         {
                                             account_id: 287,
@@ -2485,7 +2491,9 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                         "Should call process_bank_statement_line with ids"
                     );
                     var def = testUtils.makeTestPromise();
-                    def.abort = function () {};
+                    def.abort = function () {
+                        // Do nothing.
+                    };
                     event.data.callback(def);
                 });
 
@@ -2575,7 +2583,9 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                         "Should call process_bank_statement_line with ids"
                     );
                     var def = testUtils.makeTestPromise();
-                    def.abort = function () {};
+                    def.abort = function () {
+                        // Do nothing.
+                    };
                     event.data.callback(def);
                 });
 
@@ -2759,8 +2769,6 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                 await clientAction.appendTo($("#qunit-fixture"));
                 await testUtils.nextTick();
 
-                var widget = clientAction.widgets[0];
-
                 assert.strictEqual(
                     clientAction
                         .$(
@@ -2771,7 +2779,6 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                     "$ 1,175.00$ 32.58$ 2,000.00",
                     "should display the different amounts with the currency"
                 );
-                // Await testUtils.dom.click(widget.$('.accounting_view thead .mv_line td:first'));
 
                 assert.strictEqual(
                     clientAction
@@ -4818,7 +4825,9 @@ odoo.define("account_reconciliation_widget.reconciliation_tests", function (requ
                         "Should call process_bank_statement_line with to_check set to true"
                     );
                     var def = testUtils.makeTestPromise();
-                    def.abort = function () {};
+                    def.abort = function () {
+                        // Do nothing.
+                    };
                     event.data.callback(def);
                 });
 

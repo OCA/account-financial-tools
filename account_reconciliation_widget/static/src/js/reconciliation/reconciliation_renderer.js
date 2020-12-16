@@ -35,7 +35,6 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * @override
          */
         start: function () {
-            var self = this;
             var defs = [this._super.apply(this, arguments)];
             this.time = Date.now();
             this.$progress = $("");
@@ -98,7 +97,6 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * @param {[object]} [state.notifications]
          */
         update: function (state) {
-            var self = this;
             this._updateProgressBar(state);
 
             if (state.valuenow === state.valuemax && !this.$(".done_message").length) {
@@ -147,6 +145,7 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * close and then open form view of bank statement
          * @param {MouseEvent} event
          */
+        // eslint-disable-next-line no-unused-vars
         _onCloseBankStatement: function (e) {
             this.trigger_up("close_statement");
         },
@@ -215,6 +214,7 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * @private
          * @param {MouseEvent} event
          */
+        // eslint-disable-next-line no-unused-vars
         _onLoadMore: function (e) {
             this.trigger_up("load_more");
         },
@@ -428,7 +428,6 @@ odoo.define("account.ReconciliationRenderer", function (require) {
 
             // Search propositions that could be a partial credit/debit.
             var props = [];
-            var balance = state.balance.amount_currency;
             _.each(state.reconciliation_proposition, function (prop) {
                 if (prop.display) {
                     props.push(prop);
@@ -460,8 +459,6 @@ odoo.define("account.ReconciliationRenderer", function (require) {
             var matching_modes = self.model.modes.filter((x) => x.startsWith("match"));
             for (let i = 0; i < matching_modes.length; i++) {
                 var stateMvLines = state["mv_lines_" + matching_modes[i]] || [];
-                var recs_count =
-                    stateMvLines.length > 0 ? stateMvLines[0].recs_count : 0;
                 var remaining = state["remaining_" + matching_modes[i]];
                 var $mv_lines = this.$(
                     'div[id*="notebook_page_' +
@@ -517,7 +514,7 @@ odoo.define("account.ReconciliationRenderer", function (require) {
 
             // Create form
             if (state.createForm) {
-                var createPromise;
+                var createPromise = null;
                 if (!this.fields.account_id) {
                     createPromise = this._renderCreate(state);
                 }
@@ -822,6 +819,11 @@ odoo.define("account.ReconciliationRenderer", function (require) {
                             group_acc: self.group_acc,
                         })
                     );
+
+                    function addRequiredStyle(widget) {
+                        widget.$el.addClass("o_required_modifier");
+                    }
+
                     self.fields.account_id
                         .appendTo($create.find(".create_account_id .o_td_field"))
                         .then(addRequiredStyle.bind(self, self.fields.account_id));
@@ -851,10 +853,6 @@ odoo.define("account.ReconciliationRenderer", function (require) {
                         $create.find(".create_to_check .o_td_field")
                     );
                     self.$(".create").append($create);
-
-                    function addRequiredStyle(widget) {
-                        widget.$el.addClass("o_required_modifier");
-                    }
                 });
         },
 
@@ -1060,7 +1058,9 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * @param {MouseEvent} event
          */
         _onQuickCreateProposition: function (event) {
-            document.activeElement && document.activeElement.blur();
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
             this.trigger_up("quick_create_proposition", {
                 data: $(event.target).data("reconcile-model-id"),
             });
@@ -1069,7 +1069,9 @@ odoo.define("account.ReconciliationRenderer", function (require) {
          * @private
          */
         _onCreateProposition: function () {
-            document.activeElement && document.activeElement.blur();
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
             var invalid = [];
             _.each(this.fields, function (field) {
                 if (!field.isValid()) {

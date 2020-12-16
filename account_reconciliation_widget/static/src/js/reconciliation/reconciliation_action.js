@@ -51,6 +51,7 @@ odoo.define("account.ReconciliationClientAction", function (require) {
 
         _onNavigationMove: function (ev) {
             var non_reconciled_keys = _.keys(
+                // eslint-disable-next-line no-unused-vars
                 _.pick(this.model.lines, function (value, key, object) {
                     return !value.reconciled;
                 })
@@ -397,7 +398,6 @@ odoo.define("account.ReconciliationClientAction", function (require) {
         _onActionPartialAmount: function (event) {
             var self = this;
             var handle = event.target.handle;
-            var line = this.model.getLine(handle);
             var amount = this.model.getPartialReconcileAmount(handle, event.data);
             self._getWidget(handle).updatePartialAmount(event.data.data, amount);
         },
@@ -408,6 +408,7 @@ odoo.define("account.ReconciliationClientAction", function (require) {
          * @private
          * @param {OdooEvent} event
          */
+        // eslint-disable-next-line no-unused-vars
         _onCloseStatement: function (event) {
             var self = this;
             return this.model.closeStatement().then(function (result) {
@@ -427,6 +428,7 @@ odoo.define("account.ReconciliationClientAction", function (require) {
          *
          * @param {OdooEvent} event
          */
+        // eslint-disable-next-line no-unused-vars
         _onLoadMore: function (event) {
             return this._loadMore(this.model.defaultDisplayQty);
         },
