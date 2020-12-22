@@ -280,6 +280,7 @@ class AccountAssetLine(models.Model):
     def unlink_move(self):
         for line in self:
             move = line.move_id
+            move.button_draft()
             move.with_context(force_delete=True, unlink_from_asset=True).unlink()
             # trigger store function
             line.with_context(unlink_from_asset=True).write({"move_id": False})
