@@ -92,7 +92,7 @@ class AccountMove(models.Model):
                 move.message_post(body=message)
 
     def button_draft(self):
-        invoices = self.filtered(lambda r: not r.is_sale_document())
+        invoices = self.filtered(lambda r: r.is_purchase_document())
         if invoices:
             invoices.line_ids.asset_id.unlink()
         super().button_draft()
