@@ -120,7 +120,7 @@ class AccountMoveLine(models.Model):
         comodel_name="account.asset.profile", string="Asset Profile"
     )
     asset_id = fields.Many2one(
-        comodel_name="account.asset", string="Asset", ondelete="restrict", copy=False,
+        comodel_name="account.asset", string="Asset", ondelete="restrict"
     )
 
     @api.onchange("account_id")
