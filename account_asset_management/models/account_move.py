@@ -102,7 +102,7 @@ class AccountMove(models.Model):
         if move_vals["type"] not in ("out_invoice", "out_refund"):
             for line_command in move_vals.get("line_ids", []):
                 line_vals = line_command[2]  # (0, 0, {...})
-                asset = self.env["account.asset"].browse(line_vals["asset_id"])
+                asset = self.env["account.asset"].browse(line_vals.get("asset_id"))
                 asset.unlink()
                 line_vals.update(asset_profile_id=False, asset_id=False)
         return move_vals
