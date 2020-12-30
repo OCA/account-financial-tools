@@ -17,13 +17,13 @@ Tax Cash Basis Group Base Lines
     :target: https://github.com/OCA/account-financial-tools/tree/13.0/account_cash_basis_group_base_line
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-13.0/account-financial-tools-13.0-account_cash_basis_group_base_line
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-13-0/account-financial-tools-13-0-account_cash_basis_group_base_line
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/92/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module compact the creation of Journal Lines for Cash Basis base lines.
 
