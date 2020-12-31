@@ -874,8 +874,8 @@ class WizardUpdateChartsAccounts(models.TransientModel):
                 # Update the account
                 try:
                     with self.env.cr.savepoint():
-                        for key, value in (iter(self.diff_fields(
-                                template, account).items())):
+                        for key, value in (iter(sorted(self.diff_fields(
+                                template, account).items()))):
                             account[key] = value
                             _logger.info(
                                 _("Updated account %s."),
