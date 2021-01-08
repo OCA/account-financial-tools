@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">view.account.journal.form.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_account_id'][4]" position="attributes">
+                <attribute name="attrs">{'required': False}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
