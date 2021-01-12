@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-financial-tools Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-account_balance_line',
         'odoo14-addon-account_fiscal_position_vat_check',
         'odoo14-addon-account_menu',
     ],
