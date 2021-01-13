@@ -16,15 +16,16 @@ msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-10 23:23+0000\n"
-"PO-Revision-Date: 2017-04-25 10:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-financial-"
-"tools-8-0/language/ca/)\n"
+"PO-Revision-Date: 2021-01-13 22:44+0000\n"
+"Last-Translator: Eugeni Chafer <eugeni@chafer.cat>\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/"
+"OCA-account-financial-tools-8-0/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset.py:1047
@@ -47,7 +48,7 @@ msgstr "Compte"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_search
 msgid "Account Asset"
-msgstr ""
+msgstr "Compte d'actius"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__active
@@ -58,7 +59,7 @@ msgstr "Actiu"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Add an internal note here..."
-msgstr ""
+msgstr "Afegeix una nota interna d'aquí…"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset_compute__date_end
@@ -73,17 +74,17 @@ msgstr "Import"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciated_value
 msgid "Amount Already Depreciated"
-msgstr ""
+msgstr "Amortització acumulada"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__depreciation_value
 msgid "Amount of Depreciation Lines"
-msgstr ""
+msgstr "Informació analítica"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 msgid "Analytic Information"
-msgstr ""
+msgstr "Informació analítica"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__account_analytic_id
@@ -94,7 +95,7 @@ msgstr "Compte analític"
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Are you sure ?"
-msgstr ""
+msgstr "Estàs segur?"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset
@@ -117,25 +118,23 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_asset_id
 msgid "Asset Account"
-msgstr "Compta d'actiu"
+msgstr "Compte d'actius"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_group
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_tree
-#, fuzzy
 msgid "Asset Group"
-msgstr "Compta d'actiu"
+msgstr "Compte d'actius"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_group_action
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__group_ids
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__group_ids
 #: model:ir.ui.menu,name:account_asset_management.account_asset_group_menu
-#, fuzzy
 msgid "Asset Groups"
-msgstr "Categories d'actiu"
+msgstr "Categories d'actius"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -159,9 +158,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_move_line__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_search
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
-#, fuzzy
 msgid "Asset Profile"
-msgstr "Categories d'actiu"
+msgstr "Perfil d'amortització"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_profile_action
@@ -189,21 +187,20 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__date_start
 msgid "Asset Start Date"
-msgstr ""
+msgstr "Data de compra"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_line
 msgid "Asset depreciation table line"
-msgstr ""
+msgstr "Línia de la taula d'amortitzacions"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_asset_profile
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_report__asset_profile_id
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_profile_view_tree
-#, fuzzy
 msgid "Asset profile"
-msgstr "Categories d'actiu"
+msgstr "Perfil d'amortització"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -378,12 +375,12 @@ msgstr "Mètode de càlcul"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 msgid "Compute"
-msgstr ""
+msgstr "Calcular"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_compute_view_form
 msgid "Compute Asset"
-msgstr ""
+msgstr "Calcular amortitzacions"
 
 #. module: account_asset_management
 #: model:ir.actions.act_window,name:account_asset_management.account_asset_compute_action
@@ -529,12 +526,12 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_expense_depreciation_id
 msgid "Depr. Expense Account"
-msgstr "Compte despeses amortització"
+msgstr "Compte despesa amortització"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_depreciated
 msgid "Depreciated Value"
-msgstr ""
+msgstr "Import amortitzat"
 
 #. module: account_asset_management
 #: selection:account.asset.line,type:0
@@ -550,9 +547,8 @@ msgstr "Compte d'amortització"
 #: selection:account.asset.line,type:0
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__depreciation_base
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__depreciation_base
-#, fuzzy
 msgid "Depreciation Base"
-msgstr "Taula d'amortització"
+msgstr "Import amortitzable"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
@@ -646,9 +642,8 @@ msgstr ""
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_fiscal_year
-#, fuzzy
 msgid "Fiscal Year"
-msgstr "Exercici Fiscal "
+msgstr "Exercici Fiscal"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_remove__force_date
@@ -762,7 +757,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__init_entry
 msgid "Initial Balance Entry"
-msgstr ""
+msgstr "Import ja amortitzat"
 
 #. module: account_asset_management
 #: model:ir.model,name:account_asset_management.model_account_invoice
@@ -785,7 +780,7 @@ msgstr "Diari"
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_view_form
 #, python-format
 msgid "Journal Entries"
-msgstr ""
+msgstr "Assentaments"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_line.py:252
@@ -847,9 +842,9 @@ msgstr "Lineal"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:142
-#, fuzzy, python-format
+#, python-format
 msgid "Linear up to Salvage Value"
-msgstr "Valor de salvaguarda"
+msgstr "Import pendent amortitzar"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_min_value_id
@@ -872,7 +867,7 @@ msgstr "Nom"
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_line__remaining_value
 msgid "Next Period Depreciation"
-msgstr ""
+msgstr "Valor immobilitzat"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
@@ -981,7 +976,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__prorata
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__prorata
 msgid "Prorata Temporis"
-msgstr ""
+msgstr "Calcula des de data d'alta"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.view_account_asset_report_search
@@ -991,7 +986,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__purchase_value
 msgid "Purchase Value"
-msgstr ""
+msgstr "Valor de compra"
 
 #. module: account_asset_management
 #: code:addons/account_asset_management/models/account_asset_profile.py:152
@@ -1052,7 +1047,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__value_residual
 #, python-format
 msgid "Residual Value"
-msgstr "Valor residual"
+msgstr "Import pendent amortitzar"
 
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__account_residual_value_id
@@ -1080,7 +1075,7 @@ msgstr ""
 #. module: account_asset_management
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__salvage_value
 msgid "Salvage Value"
-msgstr "Valor de salvaguarda"
+msgstr "Import pendent amortitzar"
 
 #. module: account_asset_management
 #: model_terms:ir.ui.view,arch_db:account_asset_management.account_asset_group_view_search
@@ -1246,7 +1241,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset__use_leap_years
 #: model:ir.model.fields,field_description:account_asset_management.field_account_asset_profile__use_leap_years
 msgid "Use leap years"
-msgstr ""
+msgstr "Anys de traspàs"
 
 #. module: account_asset_management
 #: model:ir.model.fields,help:account_asset_management.field_account_asset__days_calc
