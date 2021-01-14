@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.account.asset.management</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']"
+                position="before"
+            >
+                <field
+                    name="asset_profile_id"
+                    attrs="{'invisible': [('parent.move_type', 'not in', ('in_invoice', 'in_refund'))]}"
+                />
+                <field
+                    name="asset_id"
+                    attrs="{'invisible': [('parent.move_type', 'not in', ('out_invoice', 'out_refund'))]}"
+                    groups="account.group_account_manager"
+                />
+            </xpath>
+            <xpath
+                expr="//notebook//field[@name='line_ids']/tree/field[@name='date_maturity']"
+                position="after"
+            >
+                <field name="asset_profile_id" />
+                <field name="asset_id" groups="account.group_account_manager" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
