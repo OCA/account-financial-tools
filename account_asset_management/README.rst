@@ -14,13 +14,13 @@ Assets Management
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--financial--tools-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-financial-tools/tree/13.0/account_asset_management
+    :target: https://github.com/OCA/account-financial-tools/tree/14.0/account_asset_management
     :alt: OCA/account-financial-tools
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-financial-tools-13-0/account-financial-tools-13-0-account_asset_management
+    :target: https://translation.odoo-community.org/projects/account-financial-tools-14-0/account-financial-tools-14-0-account_asset_management
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/92/13.0
+    :target: https://runbot.odoo-community.org/runbot/92/14.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -60,6 +60,11 @@ The module in NOT compatible with the standard account_asset module.
 Changelog
 =========
 
+14.0.1.0.0 (2021-01-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+ * [BREAKING] Removed all functionality associated with `account.fiscal.year`
+
 13.0.1.0.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -94,7 +99,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-financial-tools/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_management%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-financial-tools/issues/new?body=module:%20account_asset_management%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -124,6 +129,7 @@ Contributors
 
   * Ernesto Tejeda
   * Pedro M. Baeza
+  * João Marques
 
 Maintainers
 ~~~~~~~~~~~
@@ -138,6 +144,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/13.0/account_asset_management>`_ project on GitHub.
+This module is part of the `OCA/account-financial-tools <https://github.com/OCA/account-financial-tools/tree/14.0/account_asset_management>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
