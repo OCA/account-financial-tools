@@ -374,12 +374,13 @@
         <field name="view_id" ref="account_asset_view_tree" />
         <field name="search_view_id" ref="account_asset_view_search" />
     </record>
-    <act_window
-        id="act_entries_open"
-        name="Journal Items"
-        binding_model="account.asset"
-        binding_views="form"
-        res_model="account.move.line"
-        domain="['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]"
-    />
+    <record id="act_entries_open" model="ir.actions.act_window">
+        <field name="name">Journal Items</field>
+        <field name="binding_model_id" ref="model_account_asset" />
+        <field name="binding_view_types">form</field>
+        <field name="res_model">account.move.line</field>
+        <field
+            name="domain"
+        >['|',('asset_id','in',context.get('active_ids')),('asset_id','=','active_id')]</field>
+    </record>
 </odoo>

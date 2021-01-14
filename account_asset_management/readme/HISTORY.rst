@@ -1,3 +1,8 @@
+14.0.1.0.0 (2021-01-08)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+ * [BREAKING] Removed all functionality associated with `account.fiscal.year`
+
 13.0.1.0.0 (2019-10-21)
 ~~~~~~~~~~~~~~~~~~~~~~~
 

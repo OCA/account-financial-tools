@@ -1,82 +1,49 @@
 # Copyright (c) 2014 ACSONE SA/NV (acsone.eu).
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
 import time
 from datetime import date, datetime
 
-from odoo import tools
-from odoo.modules.module import get_resource_path
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestAssetManagement(SavepointCase):
-    @classmethod
-    def _load(cls, module, *args):
-        tools.convert_file(
-            cls.cr,
-            module,
-            get_resource_path(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            cls.registry._assertion_report,
-        )
-
+class TestAssetManagement(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
-        cls._load("account", "test", "account_minimal_test.xml")
-        cls._load("account_asset_management", "tests", "account_asset_test_data.xml")
-
         # ENVIRONEMENTS
         cls.asset_model = cls.env["account.asset"]
+        cls.asset_profile_model = cls.env["account.asset.profile"]
         cls.dl_model = cls.env["account.asset.line"]
         cls.remove_model = cls.env["account.asset.remove"]
-        cls.account_invoice = cls.env["account.move"]
-        cls.account_move_line = cls.env["account.move.line"]
-        cls.account_account = cls.env["account.account"]
-        cls.account_journal = cls.env["account.journal"]
-        cls.account_invoice_line = cls.env["account.move.line"]
-
         # INSTANCES
-
-        # Instance: company
-        cls.company = cls.env.ref("base.main_company")
-
-        # Instance: partner
-        cls.partner = cls.env.ref("base.res_partner_2")
-
-        # Instance: journal
-        cls.journal = cls.account_journal.search([("type", "=", "purchase")])[0]
-
-        # Instance: product
-        cls.product = cls.env.ref("product.product_product_4")
-
+        cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test", "standard_price": 500.0}
+        )
         move_form = Form(
             cls.env["account.move"].with_context(
-                default_type="in_invoice", check_move_validity=False
+                default_move_type="in_invoice", check_move_validity=False
             )
         )
         move_form.partner_id = cls.partner
-        move_form.journal_id = cls.journal
         with move_form.invoice_line_ids.new() as line_form:
             line_form.name = "test"
             line_form.product_id = cls.product
             line_form.price_unit = 2000.00
             line_form.quantity = 1
         cls.invoice = move_form.save()
-
         move_form = Form(
             cls.env["account.move"].with_context(
-                default_type="in_invoice", check_move_validity=False
+                default_move_type="in_invoice", check_move_validity=False
             )
         )
         move_form.partner_id = cls.partner
-        move_form.journal_id = cls.journal
         with move_form.invoice_line_ids.new() as line_form:
             line_form.name = "test 2"
             line_form.product_id = cls.product
@@ -88,30 +55,85 @@ class TestAssetManagement(SavepointCase):
             line_form.price_unit = 20000.00
             line_form.quantity = 1
         cls.invoice_2 = move_form.save()
+        # Asset Profile 1
+        cls.ict3Y = cls.asset_profile_model.create(
+            {
+                "account_expense_depreciation_id": cls.company_data[
+                    "default_account_expense"
+                ].id,
+                "account_asset_id": cls.company_data["default_account_assets"].id,
+                "account_depreciation_id": cls.company_data[
+                    "default_account_assets"
+                ].id,
+                "journal_id": cls.company_data["default_journal_purchase"].id,
+                "name": "Hardware - 3 Years",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+            }
+        )
+        # Asset Profile 2
+        cls.car5y = cls.asset_profile_model.create(
+            {
+                "account_expense_depreciation_id": cls.company_data[
+                    "default_account_expense"
+                ].id,
+                "account_asset_id": cls.company_data["default_account_assets"].id,
+                "account_depreciation_id": cls.company_data[
+                    "default_account_assets"
+                ].id,
+                "journal_id": cls.company_data["default_journal_purchase"].id,
+                "name": "Cars - 5 Years",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+            }
+        )
 
     def test_01_nonprorata_basic(self):
         """Basic tests of depreciation board computations and postings."""
-        #
-        # first load demo assets and do some sanity checks
-        #
-        ict0 = self.browse_ref("account_asset_management." "account_asset_asset_ict0")
+        # First create demo assets and do some sanity checks
+        # Asset Model 1
+        ict0 = self.asset_model.create(
+            {
+                "state": "draft",
+                "method_time": "year",
+                "method_number": 3,
+                "method_period": "year",
+                "name": "Laptop",
+                "code": "PI00101",
+                "purchase_value": 1500.0,
+                "profile_id": self.ict3Y.id,
+                "date_start": time.strftime("%Y-01-01"),
+            }
+        )
+        # Sanity checks
         self.assertEqual(ict0.state, "draft")
         self.assertEqual(ict0.purchase_value, 1500)
         self.assertEqual(ict0.salvage_value, 0)
         self.assertEqual(ict0.depreciation_base, 1500)
         self.assertEqual(len(ict0.depreciation_line_ids), 1)
-        vehicle0 = self.browse_ref(
-            "account_asset_management." "account_asset_asset_vehicle0"
+        # Asset Model 2
+        vehicle0 = self.asset_model.create(
+            {
+                "state": "draft",
+                "method_time": "year",
+                "method_number": 5,
+                "method_period": "year",
+                "name": "CEO's Car",
+                "purchase_value": 12000.0,
+                "salvage_value": 2000.0,
+                "profile_id": self.car5y.id,
+                "date_start": time.strftime("%Y-01-01"),
+            }
         )
+        # Sanity checks
         self.assertEqual(vehicle0.state, "draft")
         self.assertEqual(vehicle0.purchase_value, 12000)
         self.assertEqual(vehicle0.salvage_value, 2000)
         self.assertEqual(vehicle0.depreciation_base, 10000)
         self.assertEqual(len(vehicle0.depreciation_line_ids), 1)
-
-        #
-        # I compute the depreciation boards
-        #
+        # Compute the depreciation boards
         ict0.compute_depreciation_board()
         ict0.refresh()
         self.assertEqual(len(ict0.depreciation_line_ids), 4)
@@ -120,10 +142,7 @@ class TestAssetManagement(SavepointCase):
         vehicle0.refresh()
         self.assertEqual(len(vehicle0.depreciation_line_ids), 6)
         self.assertEqual(vehicle0.depreciation_line_ids[1].amount, 2000)
-
-        #
-        # I post the first depreciation line
-        #
+        # Post the first depreciation line
         ict0.validate()
         ict0.depreciation_line_ids[1].create_move()
         ict0.refresh()
@@ -142,9 +161,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
                 "date_start": time.strftime("%Y-07-07"),
@@ -180,13 +197,11 @@ class TestAssetManagement(SavepointCase):
 
     def test_03_proprata_init_prev_year(self):
         """Prorata temporis depreciation with init value in prev year."""
-        # I create an asset in current year
+        # Create an asset in current year
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
                 "date_start": "%d-07-07" % (datetime.now().year - 1,),
@@ -196,7 +211,7 @@ class TestAssetManagement(SavepointCase):
                 "prorata": True,
             }
         )
-        # I create a initial depreciation line in previous year
+        # Create a initial depreciation line in previous year
         self.dl_model.create(
             {
                 "asset_id": asset.id,
@@ -209,9 +224,9 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
         asset.refresh()
-        # I check the depreciated value is the initial value
+        # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 325.08, places=2)
-        # I check computed values in the depreciation board
+        # check computed values in the depreciation board
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 55.55, places=2)
         if calendar.isleap(date.today().year - 1):
             # for leap years the first year depreciation amount of 325.08
@@ -239,9 +254,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
                 "date_start": time.strftime("%Y-07-07"),
@@ -263,9 +276,9 @@ class TestAssetManagement(SavepointCase):
         self.assertEqual(len(asset.depreciation_line_ids), 2)
         asset.compute_depreciation_board()
         asset.refresh()
-        # I check the depreciated value is the initial value
+        # check the depreciated value is the initial value
         self.assertAlmostEqual(asset.value_depreciated, 279.44, places=2)
-        # I check computed values in the depreciation board
+        # check computed values in the depreciation board
         if calendar.isleap(date.today().year):
             self.assertAlmostEqual(
                 asset.depreciation_line_ids[2].amount, 44.75, places=2
@@ -286,14 +299,11 @@ class TestAssetManagement(SavepointCase):
 
     def test_05_degressive_linear(self):
         """Degressive-Linear with annual and quarterly depreciation."""
-
         # annual depreciation
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 1000,
                 "salvage_value": 0,
                 "date_start": time.strftime("%Y-07-07"),
@@ -307,21 +317,17 @@ class TestAssetManagement(SavepointCase):
         )
         asset.compute_depreciation_board()
         asset.refresh()
-
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 5)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 400.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[2].amount, 240.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[3].amount, 200.00, places=2)
         self.assertAlmostEqual(asset.depreciation_line_ids[4].amount, 160.00, places=2)
-
         # quarterly depreciation
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 1000,
                 "salvage_value": 0,
                 "date_start": time.strftime("%Y-07-07"),
@@ -335,7 +341,6 @@ class TestAssetManagement(SavepointCase):
         )
         asset.compute_depreciation_board()
         asset.refresh()
-
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 15)
         # lines prior to asset start period are grouped in the first entry
@@ -349,9 +354,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 1000,
                 "salvage_value": 100,
                 "date_start": time.strftime("%Y-07-07"),
@@ -365,7 +368,6 @@ class TestAssetManagement(SavepointCase):
         )
         asset.compute_depreciation_board()
         asset.refresh()
-
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 400.00, places=2)
@@ -379,9 +381,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 1000,
                 "salvage_value": 100,
                 "date_start": time.strftime("%Y-07-07"),
@@ -394,7 +394,6 @@ class TestAssetManagement(SavepointCase):
         )
         asset.compute_depreciation_board()
         asset.refresh()
-
         # check values in the depreciation board
         self.assertEqual(len(asset.depreciation_line_ids), 6)
         self.assertAlmostEqual(asset.depreciation_line_ids[1].amount, 200.00, places=2)
@@ -405,9 +404,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset removal",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 5000,
                 "salvage_value": 0,
                 "date_start": "2019-01-01",
@@ -425,8 +422,10 @@ class TestAssetManagement(SavepointCase):
                 "date_remove": "2019-01-31",
                 "sale_value": 0.0,
                 "posting_regime": "gain_loss_on_sale",
-                "account_plus_value_id": self.ref("account.a_sale"),
-                "account_min_value_id": self.ref("account.a_expense"),
+                "account_plus_value_id": self.company_data[
+                    "default_account_revenue"
+                ].id,
+                "account_min_value_id": self.company_data["default_account_expense"].id,
             }
         )
         wiz.remove()
@@ -438,9 +437,7 @@ class TestAssetManagement(SavepointCase):
     def test_09_asset_from_invoice(self):
         all_asset = self.env["account.asset"].search([])
         invoice = self.invoice
-        asset_profile = self.env.ref(
-            "account_asset_management.account_asset_profile_car_5Y"
-        )
+        asset_profile = self.car5y
         asset_profile.asset_product_item = False
         self.assertTrue(len(invoice.invoice_line_ids) > 0)
         line = invoice.invoice_line_ids[0]
@@ -450,14 +447,14 @@ class TestAssetManagement(SavepointCase):
             line_form.quantity = 2
             line_form.asset_profile_id = asset_profile
         invoice = move_form.save()
-        invoice.post()
-        # I get all asset after invoice validation
+        invoice.action_post()
+        # get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
-        # I get the new asset
+        # get the new asset
         new_asset = current_asset - all_asset
-        # I check that a new asset is created
+        # check that a new asset is created
         self.assertEqual(len(new_asset), 1)
-        # I check that the new asset has the correct purchase value
+        # check that the new asset has the correct purchase value
         self.assertAlmostEqual(
             new_asset.purchase_value, line.price_unit * line.quantity, places=2
         )
@@ -465,9 +462,7 @@ class TestAssetManagement(SavepointCase):
     def test_10_asset_from_invoice_product_item(self):
         all_asset = self.env["account.asset"].search([])
         invoice = self.invoice
-        asset_profile = self.env.ref(
-            "account_asset_management.account_asset_profile_car_5Y"
-        )
+        asset_profile = self.car5y
         asset_profile.asset_product_item = True
         self.assertTrue(len(invoice.invoice_line_ids) > 0)
         line = invoice.invoice_line_ids[0]
@@ -475,40 +470,36 @@ class TestAssetManagement(SavepointCase):
         line.quantity = 2
         line.asset_profile_id = asset_profile
         self.assertEqual(len(invoice.invoice_line_ids), 2)
-        invoice.post()
-        # I get all asset after invoice validation
+        invoice.action_post()
+        # get all asset after invoice validation
         current_asset = self.env["account.asset"].search([])
-        # I get the new asset
+        # get the new asset
         new_asset = current_asset - all_asset
-        # I check that a new asset is created
+        # check that a new asset is created
         self.assertEqual(len(new_asset), 2)
         for asset in new_asset:
-            # I check that the new asset has the correct purchase value
+            # check that the new asset has the correct purchase value
             self.assertAlmostEqual(asset.purchase_value, line.price_unit, places=2)
 
     def test_11_assets_from_invoice(self):
         all_assets = self.env["account.asset"].search([])
         ctx = dict(self.invoice_2._context)
-        del ctx["default_type"]
+        del ctx["default_move_type"]
         invoice = self.invoice_2.with_context(ctx)
-        asset_profile = self.env.ref(
-            "account_asset_management.account_asset_profile_car_5Y"
-        )
+        asset_profile = self.car5y
         asset_profile.asset_product_item = True
         # Compute depreciation lines on invoice validation
         asset_profile.open_asset = True
-
         self.assertTrue(len(invoice.invoice_line_ids) == 2)
         invoice.invoice_line_ids.write(
             {"quantity": 1, "asset_profile_id": asset_profile.id}
         )
-        invoice.post()
+        invoice.action_post()
         # Retrieve all assets after invoice validation
         current_assets = self.env["account.asset"].search([])
         # What are the new assets?
         new_assets = current_assets - all_assets
         self.assertEqual(len(new_assets), 2)
-
         for asset in new_assets:
             dlines = asset.depreciation_line_ids.filtered(
                 lambda l: l.type == "depreciate"
@@ -522,9 +513,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 3333,
                 "salvage_value": 0,
                 "date_start": "2019-07-07",
@@ -556,9 +545,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 10000,
                 "salvage_value": 0,
                 "date_start": time.strftime("2019-01-01"),
@@ -587,9 +574,7 @@ class TestAssetManagement(SavepointCase):
         asset = self.asset_model.create(
             {
                 "name": "test asset",
-                "profile_id": self.ref(
-                    "account_asset_management." "account_asset_profile_car_5Y"
-                ),
+                "profile_id": self.car5y.id,
                 "purchase_value": 10000,
                 "salvage_value": 0,
                 "date_start": time.strftime("2019-01-01"),
