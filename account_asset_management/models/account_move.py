@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -58,11 +59,11 @@ class AccountMove(models.Model):
                 )
         return super().write(vals)
 
-    def post(self):
-        super().post()
+    def action_post(self):
+        super().action_post()
         for move in self:
             for aml in move.line_ids.filtered("asset_profile_id"):
-                depreciation_base = aml.debit or -aml.credit
+                depreciation_base = aml.price_subtotal
                 vals = {
                     "name": aml.name,
                     "code": move.name,

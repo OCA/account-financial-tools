@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
@@ -83,7 +84,7 @@ class AccountAssetRemove(models.TransientModel):
         inv_lines = self.env["account.move.line"].search(
             [
                 ("asset_id", "=", asset_id),
-                ("move_id.type", "in", ("out_invoice", "out_refund")),
+                ("move_id.move_type", "in", ("out_invoice", "out_refund")),
             ]
         )
         for line in inv_lines:
