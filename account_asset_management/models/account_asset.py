@@ -45,8 +45,16 @@ class AccountAsset(models.Model):
     move_line_check = fields.Boolean(
         compute="_compute_move_line_check", string="Has accounting entries"
     )
-    name = fields.Char(string="Asset Name", required=True, states=READONLY_STATES,)
-    code = fields.Char(string="Reference", size=32, states=READONLY_STATES,)
+    name = fields.Char(
+        string="Asset Name",
+        required=True,
+        states=READONLY_STATES,
+    )
+    code = fields.Char(
+        string="Reference",
+        size=32,
+        states=READONLY_STATES,
+    )
     purchase_value = fields.Float(
         string="Purchase Value",
         required=True,
@@ -133,7 +141,9 @@ class AccountAsset(models.Model):
     )
     active = fields.Boolean(default=True)
     partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Partner", states=READONLY_STATES,
+        comodel_name="res.partner",
+        string="Partner",
+        states=READONLY_STATES,
     )
     method = fields.Selection(
         selection=lambda self: self.env["account.asset.profile"]._selection_method(),

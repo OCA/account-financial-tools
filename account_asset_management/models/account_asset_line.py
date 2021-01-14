@@ -1,4 +1,5 @@
 # Copyright 2009-2018 Noviat
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -255,7 +256,7 @@ class AccountAssetLine(models.Model):
                 depreciation_date, exp_acc, "expense", move
             )
             self.env["account.move.line"].with_context(ctx).create(aml_e_vals)
-            move.post()
+            move.action_post()
             line.with_context(allow_asset_line_update=True).write({"move_id": move.id})
             created_move_ids.append(move.id)
             asset_ids.add(asset.id)
